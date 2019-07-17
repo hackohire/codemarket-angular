@@ -1,0 +1,51 @@
+{
+	"providers": {
+		"awscloudformation": {
+			"AuthRoleName": "platform-fe-dev-20190629010435-authRole",
+			"UnauthRoleArn": "arn:aws:iam::744573631627:role/platform-fe-dev-20190629010435-unauthRole",
+			"AuthRoleArn": "arn:aws:iam::744573631627:role/platform-fe-dev-20190629010435-authRole",
+			"Region": "us-east-1",
+			"DeploymentBucketName": "platform-fe-dev-20190629010435-deployment",
+			"UnauthRoleName": "platform-fe-dev-20190629010435-unauthRole",
+			"StackName": "platform-fe-dev-20190629010435",
+			"StackId": "arn:aws:cloudformation:us-east-1:744573631627:stack/platform-fe-dev-20190629010435/c43a1860-99db-11e9-8521-0efd3b0202da"
+		}
+	},
+	"auth": {
+		"platformfec5a48545": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/platform-fe-dev-20190629010435-deployment/amplify-cfn-templates/auth/platformfec5a48545-cloudformation-template.yml",
+				"logicalId": "authplatformfec5a48545"
+			},
+			"lastPushTimeStamp": "2019-06-29T07:13:19.538Z",
+			"output": {
+				"AppClientSecret": "edd0fikba78qde6vbj7liodf0fbp7rkn9tgjg4but4e5ddn3mhs",
+				"UserPoolId": "us-east-1_B4xlOmGS0",
+				"AppClientIDWeb": "6b96cs2pmq0khunn6mth7r48td",
+				"AppClientID": "1ibhli420vuj837ril5182ovug",
+				"IdentityPoolId": "us-east-1:b08baf8a-8de9-45bc-a2d8-d537e23d2426",
+				"IdentityPoolName": "platformfec5a48545_identitypool_c5a48545__dev",
+				"UserPoolName": "platformfec5a48545_userpool_c5a48545"
+			},
+			"lastPushDirHash": "n/8zXUZp432r2G26jxyyEaP5Ya4="
+		}
+	},
+	"storage": {
+		"platformfile": {
+			"service": "S3",
+			"providerPlugin": "awscloudformation",
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/platform-fe-dev-20190629010435-deployment/amplify-cfn-templates/storage/s3-cloudformation-template.json",
+				"logicalId": "storageplatformfile"
+			},
+			"lastPushTimeStamp": "2019-06-29T07:13:19.547Z",
+			"output": {
+				"BucketName": "platformfile-dev",
+				"Region": "us-east-1"
+			},
+			"lastPushDirHash": "YRSJX6660F+/j4Cl9yc7wXs9ja0="
+		}
+	}
+}

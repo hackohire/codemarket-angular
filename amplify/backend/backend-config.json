@@ -1,0 +1,14 @@
+{
+	"auth": {
+		"platformfec5a48545": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation"
+		}
+	},
+	"storage": {
+		"platformfile": {
+			"service": "S3",
+			"providerPlugin": "awscloudformation"
+		}
+	}
+}

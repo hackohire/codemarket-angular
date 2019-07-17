@@ -1,0 +1,19 @@
+{
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "platform-fe-dev-20190629010435-authRole",
+            "UnauthRoleArn": "arn:aws:iam::744573631627:role/platform-fe-dev-20190629010435-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::744573631627:role/platform-fe-dev-20190629010435-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "platform-fe-dev-20190629010435-deployment",
+            "UnauthRoleName": "platform-fe-dev-20190629010435-unauthRole",
+            "StackName": "platform-fe-dev-20190629010435",
+            "StackId": "arn:aws:cloudformation:us-east-1:744573631627:stack/platform-fe-dev-20190629010435/c43a1860-99db-11e9-8521-0efd3b0202da"
+        },
+        "categories": {
+            "auth": {
+                "platformfec5a48545": {}
+            }
+        }
+    }
+}

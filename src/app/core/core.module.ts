@@ -7,7 +7,24 @@ import { ApolloLink } from 'apollo-link';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from '../shared/auth.service';
-import { MaterialModule } from './material.module';
+import { StoreModule } from '@ngrx/store';
+import { appReducesrs } from './store/reducers/app.reducers';
+import { EffectsModule } from '@ngrx/effects';
+import { UserEffects } from './store/effects/user.effects';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { EPlatformActions } from './store/actions/app.actions';
+
+export function clearState(reducer) {
+  return (state, action) => {
+
+    if (action.type === EPlatformActions.ResetPlatFormState) {
+      state = undefined;
+    }
+
+    return reducer(state, action);
+  };
+}
 
 @NgModule({
   declarations: [
@@ -17,7 +34,10 @@ import { MaterialModule } from './material.module';
     ApolloModule,
     HttpClientModule,
     HttpLinkModule,
-    MaterialModule
+    StoreModule.forRoot(appReducesrs(), { metaReducers: [clearState] }),
+    EffectsModule.forRoot([UserEffects]),
+    StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
+    StoreDevtoolsModule.instrument(),
   ],
   providers: [
     AuthService

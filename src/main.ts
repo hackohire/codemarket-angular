@@ -13,38 +13,9 @@ if (environment.production) {
   enableProdMode();
 }
 
-// Amplify.configure(awsconfig);
-
-const oauth = {
-  // Domain name
-  domain : 'platform.auth.us-east-1.amazoncognito.comm',
-
-  // Authorized scopes
-  scope : ['email', 'profile', 'openid'],
-
-  // Callback URL
-  redirectSignIn : 'http://localhost:4800', // or 'exp://127.0.0.1:19000/--/', 'myapp://main/'
-
-  // Sign out URL
-  redirectSignOut : 'http://localhost:4800', // or 'exp://127.0.0.1:19000/--/', 'myapp://main/'
-
-  // 'code' for Authorization code grant,
-  // 'token' for Implicit grant
-  // Note that REFRESH token will only be generated when the responseType is code
-  responseType: 'token',
-
-  // optional, for Cognito hosted ui specified options
-  options: {
-      // Indicates if the data collection is enabled to support Cognito advanced security features. By default, this flag is set to true.
-      AdvancedSecurityDataCollectionFlag : true
-  },
-
-  // urlOpener: urlOpener
-};
-
 Amplify.configure({
   ...awsconfig,
-  oauth: oauth,
+  oauth: environment.oauth,
   Analytics: {
     disabled: true
   }

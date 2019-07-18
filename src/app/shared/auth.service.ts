@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Hub } from '@aws-amplify/core';
+import Amplify, { Hub } from '@aws-amplify/core';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { switchMap, map, catchError } from 'rxjs/operators';
@@ -9,11 +9,23 @@ import { CognitoUserSession } from 'amazon-cognito-identity-js';
 import { Auth } from 'aws-amplify';
 import { variable } from '@angular/compiler/src/output/output_ast';
 import { environment } from 'src/environments/environment';
+import { Store } from '@ngrx/store';
+import { AppState } from '../core/store/state/app.state';
+import { SetLoggedInUser, Authorise } from '../core/store/actions/user.actions';
+import { selectLoggedInUser } from '../core/store/selectors/user.selector';
+import { Observable } from 'rxjs';
+import { User } from './models/user.model';
 
 @Injectable()
 export class AuthService {
 
-  constructor(private apollo: Apollo) {
+  loggedInUser$: Observable<User>;
+  constructor(
+    private apollo: Apollo,
+    private store: Store<AppState>
+    ) {
+
+    this.loggedInUser$ = this.store.select(selectLoggedInUser);
 
     /** Hub listening for auth state changes */
     Hub.listen('auth', (data) => {
@@ -24,20 +36,15 @@ export class AuthService {
       };
       console.log('Hub', data);
       if (channel === 'auth') {
-        Auth.currentAuthenticatedUser()
-          .then(data => {
-            console.log(data);
-
-          })
-          .catch(err => console.log(err));
 
         Auth.currentSession().then((session: CognitoUserSession) => {
-          console.log(session.getIdToken().getJwtToken())
+          console.log(session.getIdToken().getJwtToken());
           const idToken = session.getIdToken().getJwtToken();
 
-          if(idToken) {
+          if (idToken) {
             this.setIdTokenToLocalStorage(idToken);
 
+            this.store.dispatch(new Authorise());
             // this.authorizeWithPlatform();
           }
 
@@ -46,24 +53,28 @@ export class AuthService {
       }
     });
     Auth.currentSession().then((session: CognitoUserSession) => {
-      console.log(session.getIdToken().getJwtToken())
+      console.log(session.getIdToken().getJwtToken());
       const idToken = session.getIdToken().getJwtToken();
-      this.setIdTokenToLocalStorage(idToken);
 
-      this.authorizeWithPlatform();
+      if (idToken) {
+        this.setIdTokenToLocalStorage(idToken);
+
+        this.store.dispatch(new Authorise());
+        // this.authorizeWithPlatform();
+      }
+
     });
   }
 
-  authorizeWithPlatform() {
+  authorizeWithPlatform(): Observable<User> {
     return this.apollo.use('platform').mutate(
       {
         mutation: gql`
           mutation authorize($applicationId: String) {
             authorize(applicationId: $applicationId) {
               _id
-              applications {
-                _id
-              }
+              name
+              email
               roles
             }
 
@@ -78,10 +89,30 @@ export class AuthService {
         return d.data.authorize;
       }),
       catchError(e => of(e)),
-    ).subscribe(d => console.log(d));
+    );
   }
 
-  setIdTokenToLocalStorage(idToken: string) {
+  setIdTokenToLocalStorage(idToken: string): void {
     localStorage.setItem('idToken', idToken);
+  }
+
+  login(): void {
+    // const config = Amplify.Auth._config;
+    // const oauth = Amplify.Auth._config.oauth;
+    // const url = `${environment.COGNITO_AUTH_DOMAIN}/login?response_type=${oauth.responseType}&client_id=${config.aws_user_pools_web_client_id}&redirect_uri=${oauth.redirectSignIn}`;
+    // console.log(Amplify.Auth._config);
+    // window.location.assign(url);
+    Auth.federatedSignIn();
+  }
+
+  logout(): void {
+    Auth.signOut().then(d => {
+      console.log('user has been signed out');
+      localStorage.clear();
+    });
+  }
+
+  getLoggedInUser(): Observable<User> {
+    return this.loggedInUser$;
   }
 }

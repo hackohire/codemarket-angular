@@ -5,7 +5,18 @@ import { AppComponent } from './app.component';
 const routes: Routes = [
   {
     path: '',
-    component: AppComponent
+    redirectTo: '/(side:dashboard)',
+    pathMatch: 'full'
+  },
+  {
+    path: 'dashboard',
+    loadChildren: () => import('./dashboard/dashboard.module').then(module => module.DashboardModule),
+    outlet: 'side'
+  },
+  {
+    path: 'sell',
+    loadChildren: () => import('./selling/selling.module').then(module => module.SellingModule),
+    outlet: 'side'
   },
 ];
 

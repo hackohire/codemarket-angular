@@ -12,14 +12,14 @@ export interface Product {
     name: string;
     description: string;
     shortDescription: string;
-    featuredImage: string;
+    featuredImage?: string;
     createdBy: User;
-    priceAndFiles: PriceAndFiles[];
+    priceAndFiles?: PriceAndFiles[];
     totalPrice: number;
-    categories: [];
-    demo_url: string;
-    documentation_url: string;
-    video_url: string;
+    categories?: [];
+    demo_url?: string;
+    documentation_url?: string;
+    video_url?: string;
     status: ProductStatus;
 }
 

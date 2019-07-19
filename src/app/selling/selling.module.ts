@@ -12,6 +12,7 @@ import { RouterModule } from '@angular/router';
     SharedModule,
     RouterModule,
     SellingRoutingModule
-  ]
+  ],
+  providers: []
 })
 export class SellingModule { }

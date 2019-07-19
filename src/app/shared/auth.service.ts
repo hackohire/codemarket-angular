@@ -2,12 +2,10 @@ import { Injectable } from '@angular/core';
 import Amplify, { Hub } from '@aws-amplify/core';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
-import { switchMap, map, catchError } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 import { of } from 'rxjs/internal/observable/of';
-import { ICredentials } from '@aws-amplify/core';
 import { CognitoUserSession } from 'amazon-cognito-identity-js';
 import { Auth } from 'aws-amplify';
-import { variable } from '@angular/compiler/src/output/output_ast';
 import { environment } from 'src/environments/environment';
 import { Store } from '@ngrx/store';
 import { AppState } from '../core/store/state/app.state';
@@ -20,12 +18,14 @@ import { User } from './models/user.model';
 export class AuthService {
 
   loggedInUser$: Observable<User>;
+  loggedInUser: User;
   constructor(
     private apollo: Apollo,
     private store: Store<AppState>
     ) {
 
     this.loggedInUser$ = this.store.select(selectLoggedInUser);
+    this.loggedInUser$.subscribe((u) => this.loggedInUser = u);
 
     /** Hub listening for auth state changes */
     Hub.listen('auth', (data) => {

@@ -4,7 +4,12 @@ import { AppComponent } from './app.component';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'id_token',
+    redirectTo: '/(side:dashboard)',
+    pathMatch: 'full'
+  },
+  {
+    path: 'access_token',
     redirectTo: '/(side:dashboard)',
     pathMatch: 'full'
   },
@@ -21,7 +26,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {useHash: true})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

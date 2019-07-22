@@ -23,6 +23,9 @@ export class ProductEffects {
         map(action => action.product),
         switchMap((product) => this.sellingProductService.addProduct(product)),
         tap(u => console.log(u)),
-        switchMap((product) => of(new ProductAdded(product)))
+        map((product: Product) => {
+            console.log(product);
+            return new ProductAdded(product);
+        })
     );
 }

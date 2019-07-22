@@ -14,7 +14,7 @@ export class SellingProductsService {
     private apollo: Apollo,
   ) { }
 
-  addProduct(product: Product): Observable<Product> {
+  addProduct(product: Product): Observable<any> {
     return this.apollo.mutate(
       {
         mutation: gql`
@@ -23,6 +23,13 @@ export class SellingProductsService {
               _id
               name
               createdBy
+              categories
+              description
+              shortDescription
+              demo_url
+              video_url
+              documentation_url
+              totalPrice
             }
           }
         `,
@@ -31,11 +38,7 @@ export class SellingProductsService {
         }
       }
     ).pipe(
-      switchMap((p: any) => {
-        console.log(p);
-        return [p.data.addProduct];
-      }),
-      catchError(e => of(e))
+      map((p) => p.data.addProduct),
     );
   }
 }

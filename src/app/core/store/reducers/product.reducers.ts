@@ -18,11 +18,11 @@ export function productReducers(
                 selectedProduct: action.product
             };
 
-        // case EUserActions.SetLoggedInUser:
-        //     return {
-        //         ...state,
-        //         loggedInUser: action.payload
-        //     };
+        case EProductActions.ProductList:
+            return {
+                ...state,
+                products: action.products
+            };
 
         default:
             return state;

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductsListComponent } from './products-list.component';
 import { Routes, RouterModule } from '@angular/router';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 const productsListRoutes: Routes = [
   {
@@ -15,6 +16,7 @@ const productsListRoutes: Routes = [
   declarations: [ProductsListComponent],
   imports: [
     CommonModule,
+    SharedModule,
     RouterModule.forChild(productsListRoutes)
   ]
 })

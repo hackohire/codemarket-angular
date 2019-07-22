@@ -1,0 +1,57 @@
+  th.mat-sort-header-sorted {
+    color: black;
+  }
+
+
+
+
+
+
+  table {
+    width: 100%;
+  }
+  
+  tr.example-detail-row {
+    height: 0;
+  }
+  
+  tr.example-product-row:not(.example-expanded-row):hover {
+    background: #777;
+  }
+  
+  tr.example-product-row:not(.example-expanded-row):active {
+    background: #efefef;
+  }
+  
+  .example-product-row td {
+    border-bottom-width: 0;
+  }
+  
+  .example-product-detail {
+    overflow: hidden;
+    display: flex;
+  }
+  
+  .example-product-diagram {
+    min-width: 80px;
+    border: 2px solid black;
+    padding: 8px;
+    font-weight: lighter;
+    margin: 8px 0;
+    height: 104px;
+  }
+  
+  .example-product-symbol {
+    font-weight: bold;
+    font-size: 40px;
+    line-height: normal;
+  }
+  
+  .example-product-description {
+    padding: 16px;
+  }
+  
+  .example-product-description-attribution {
+    opacity: 0.5;
+  }
+  

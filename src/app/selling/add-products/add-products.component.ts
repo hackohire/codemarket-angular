@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ProductStatus, Product } from 'src/app/shared/models/product.model';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { Store } from '@ngrx/store';
@@ -18,6 +18,7 @@ export class AddProductsComponent implements OnInit {
 
   productForm: FormGroup;
   modules: any;
+  urlRegex = '^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$';
 
   constructor(
     public auth: AuthService,
@@ -32,9 +33,9 @@ export class AddProductsComponent implements OnInit {
         createdBy: new FormControl(p && p.createdBy ? p.createdBy : ''),
         totalPrice: new FormControl(p && p.totalPrice ? p.totalPrice : 0),
         categories: new FormControl(p && p.categories ? p.categories : []),
-        demo_url: new FormControl(p && p.demo_url ? p.demo_url : ''),
-        documentation_url: new FormControl(p && p.documentation_url ? p.documentation_url : ''),
-        video_url: new FormControl(p && p.video_url ? p.video_url : ''),
+        demo_url: new FormControl(p && p.demo_url ? p.demo_url : '', [Validators.pattern(this.urlRegex)]),
+        documentation_url: new FormControl(p && p.documentation_url ? p.documentation_url : '', [Validators.pattern(this.urlRegex)]),
+        video_url: new FormControl(p && p.video_url ? p.video_url : '', [Validators.pattern(this.urlRegex)]),
         status: new FormControl(p && p.status ? p.status : ProductStatus.Created)
       });
     });

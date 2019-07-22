@@ -19,19 +19,22 @@
     </mat-form-field>
 
     <mat-form-field class="field-full-width">
-        <input matInput formControlName="totalPrice" placeholder="Total Price">
+        <input matInput type="number" formControlName="totalPrice" placeholder="Total Price">
     </mat-form-field>
 
     <mat-form-field class="field-full-width">
             <input matInput formControlName="demo_url" placeholder="Demo Url">
+            <mat-error *ngIf="productForm?.get('demo_url')?.invalid">{{'Please enter a valid URL'}}</mat-error>
     </mat-form-field>
 
     <mat-form-field class="field-full-width">
             <input matInput formControlName="documentation_url" placeholder="Documentation Url">
+            <mat-error *ngIf="productForm?.get('documentation_url')?.invalid">{{'Please enter a valid URL'}}</mat-error>
     </mat-form-field>
 
     <mat-form-field class="field-full-width">
             <input matInput formControlName="video_url" placeholder="Video Url">
+            <mat-error *ngIf="productForm?.get('video_url')?.invalid">{{'Please enter a valid URL'}}</mat-error>
     </mat-form-field>
 
     <button mat-raised-button color="primary">Add Product</button>

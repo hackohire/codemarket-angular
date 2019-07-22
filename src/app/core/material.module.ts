@@ -12,6 +12,7 @@ import {
   MatDatepickerModule,
   MatSidenavModule,
   MatTabsModule,
+  MatSortModule,
 } from '@angular/material';
 import {MatTableModule} from '@angular/material/table';
 
@@ -31,7 +32,9 @@ import {MatTableModule} from '@angular/material/table';
     MatDatepickerModule,
     MatTableModule,
     MatSidenavModule,
-    MatTabsModule
+    MatTabsModule,
+    MatSortModule,
+
   ],
   exports: [
     MatFormFieldModule,
@@ -46,7 +49,8 @@ import {MatTableModule} from '@angular/material/table';
     MatDatepickerModule,
     MatTableModule,
     MatSidenavModule,
-    MatTabsModule
+    MatTabsModule,
+    MatSortModule
   ]
 })
 export class MaterialModule {}

@@ -8,11 +8,11 @@ import { CognitoUserSession } from 'amazon-cognito-identity-js';
 import { Auth } from 'aws-amplify';
 import { environment } from 'src/environments/environment';
 import { Store } from '@ngrx/store';
-import { AppState } from '../core/store/state/app.state';
-import { SetLoggedInUser, Authorise } from '../core/store/actions/user.actions';
-import { selectLoggedInUser } from '../core/store/selectors/user.selector';
+import { AppState } from '../store/state/app.state';
+import { SetLoggedInUser, Authorise } from '../store/actions/user.actions';
+import { selectLoggedInUser } from '../store/selectors/user.selector';
 import { Observable } from 'rxjs';
-import { User } from './models/user.model';
+import { User } from '../../shared/models/user.model';
 
 @Injectable()
 export class AuthService {

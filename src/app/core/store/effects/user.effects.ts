@@ -8,7 +8,7 @@ import { of } from 'rxjs';
 import { User } from 'src/app/shared/models/user.model';
 import { selectUserList } from '../selectors/user.selector';
 import { UserService } from 'src/app/user/user.service';
-import { AuthService } from 'src/app/shared/auth.service';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Injectable()
 export class UserEffects {

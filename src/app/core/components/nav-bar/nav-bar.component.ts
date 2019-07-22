@@ -8,7 +8,7 @@ import { User } from 'src/app/shared/models/user.model';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../store/state/app.state';
 import { selectLoggedInUser } from '../../store/selectors/user.selector';
-import { AuthService } from 'src/app/shared/auth.service';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-nav-bar',

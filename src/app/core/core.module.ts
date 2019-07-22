@@ -6,7 +6,7 @@ import { environment } from 'src/environments/environment';
 import { ApolloLink } from 'apollo-link';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { HttpClientModule } from '@angular/common/http';
-import { AuthService } from '../shared/auth.service';
+import { AuthService } from './services/auth.service';
 import { StoreModule } from '@ngrx/store';
 import { appReducesrs } from './store/reducers/app.reducers';
 import { EffectsModule } from '@ngrx/effects';

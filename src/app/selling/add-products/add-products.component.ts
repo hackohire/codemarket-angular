@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ProductStatus, Product } from 'src/app/shared/models/product.model';
-import { AuthService } from 'src/app/shared/auth.service';
+import { AuthService } from 'src/app/core/services/auth.service';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/core/store/state/app.state';
 import { AddPrdouct } from 'src/app/core/store/actions/product.actions';

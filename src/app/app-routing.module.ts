@@ -4,14 +4,13 @@ import { AppComponent } from './app.component';
 
 const routes: Routes = [
   {
-    path: 'id_token',
+    path: '',
     redirectTo: '/(side:dashboard)',
     pathMatch: 'full'
   },
   {
-    path: 'access_token',
+    path: 'id_token',
     redirectTo: '/(side:dashboard)',
-    pathMatch: 'full'
   },
   {
     path: 'dashboard',

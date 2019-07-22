@@ -15,7 +15,7 @@ export const environment = {
     redirectSignIn: 'https://codemarket-fe.surge.sh', // or 'exp://127.0.0.1:19000/--/', 'myapp://main/'
 
     // Sign out URL
-    redirectSignOut: 'https://codemarketpfe.surge.sh', // or 'exp://127.0.0.1:19000/--/', 'myapp://main/'
+    redirectSignOut: 'https://codemarket-fe.surge.sh', // or 'exp://127.0.0.1:19000/--/', 'myapp://main/'
 
     // 'code' for Authorization code grant,
     // 'token' for Implicit grant

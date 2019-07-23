@@ -22,6 +22,7 @@ export class SellingProductsService {
     video_url
     documentation_url
     totalPrice
+    status
   `;
 
   constructor(
@@ -48,6 +49,25 @@ export class SellingProductsService {
     );
   }
 
+  updateProduct(product: Product): Observable<Product> {
+    return this.apollo.mutate(
+      {
+        mutation: gql`
+          mutation updateProduct($product: ProductInput) {
+            updateProduct(product: $product) {
+              ${this.productFields}
+            }
+          }
+        `,
+        variables: {
+          product: product
+        }
+      }
+    ).pipe(
+      map((p) => p.data.updateProduct),
+    );
+  }
+
   getProductsByUserId(): Observable<Product[]> {
     return this.apollo.query(
       {
@@ -65,6 +85,27 @@ export class SellingProductsService {
     ).pipe(
       map((p: any) => {
         return p.data.getProductsByUserId;
+      }),
+    );
+  }
+
+  getProductById(productId: string): Observable<Product> {
+    return this.apollo.query(
+      {
+        query: gql`
+          query getProductById($productId: String) {
+            getProductById(productId: $productId) {
+              ${this.productFields}
+            }
+          }
+        `,
+        variables: {
+          productId: productId
+        }
+      }
+    ).pipe(
+      map((p: any) => {
+        return p.data.getProductById;
       }),
     );
   }

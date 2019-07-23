@@ -11,7 +11,7 @@ export interface PriceAndFiles {
 export interface Product {
     name: string;
     description: string;
-    shortDescription: string;
+    shortDescription?: string;
     featuredImage?: string;
     createdBy: User;
     priceAndFiles?: PriceAndFiles[];
@@ -21,6 +21,7 @@ export interface Product {
     documentation_url?: string;
     video_url?: string;
     status: ProductStatus;
+    _id?: string
 }
 
 export enum ProductStatus {

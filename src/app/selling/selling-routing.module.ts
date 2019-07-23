@@ -22,6 +22,11 @@ const productRoutes: Routes = [
         path: 'add-product',
         loadChildren: () => import('./add-products/add-products.module').then(module => module.AddProductsModule),
         // outlet: 'selling'
+      },
+      {
+        path: 'edit-product/:productId',
+        loadChildren: () => import('./add-products/add-products.module').then(module => module.AddProductsModule),
+        // outlet: 'selling'
       }
     ]
   },

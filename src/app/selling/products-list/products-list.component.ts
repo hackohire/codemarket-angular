@@ -1,13 +1,14 @@
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { Store } from '@ngrx/store';
-import { GetProductsByUserId } from 'src/app/core/store/actions/product.actions';
+import { GetProductsByUserId, SetSelectedProduct } from 'src/app/core/store/actions/product.actions';
 import { AppState } from 'src/app/core/store/state/app.state';
 import { MatTableDataSource, MatSort } from '@angular/material';
 import { Product } from 'src/app/shared/models/product.model';
 import { selectProductsList } from 'src/app/core/store/selectors/product.selectors';
 import { Subscription } from 'rxjs';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-products-list',
@@ -25,7 +26,7 @@ export class ProductsListComponent implements OnInit, OnDestroy {
 
   modules: any;
 
-  displayedColumns: string[] = ['number', 'name', 'price'];
+  displayedColumns: string[] = ['number', 'name', 'price', 'status', 'action'];
   dataSource = new MatTableDataSource();
   expandedProduct: Product | null;
 
@@ -38,7 +39,8 @@ export class ProductsListComponent implements OnInit, OnDestroy {
 
   constructor(
     private auth: AuthService,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private router: Router
   ) {
 
     this.userSubsription = this.auth.loggedInUser$.subscribe((u) => {
@@ -63,9 +65,14 @@ export class ProductsListComponent implements OnInit, OnDestroy {
     this.dataSource.sort = this.sort;
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.userSubsription.unsubscribe();
     this.productsListSubscription.unsubscribe();
+  }
+
+  editProduct(product): void {
+    this.store.dispatch(new SetSelectedProduct(product));
+    // this.router.navigate(['/add-product'], );
   }
 
 }

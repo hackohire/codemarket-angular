@@ -6,13 +6,14 @@ export function productReducers(
     action: ProductActions
 ): ProductState {
     switch (action.type) {
-        case EProductActions.AddPrdouct:
+
+        case EProductActions.ProductAdded:
             return {
                 ...state,
                 selectedProduct: action.product
             };
 
-        case EProductActions.ProductAdded:
+        case EProductActions.ProductUpdated:
             return {
                 ...state,
                 selectedProduct: action.product
@@ -22,6 +23,12 @@ export function productReducers(
             return {
                 ...state,
                 products: action.products
+            };
+
+        case EProductActions.SetSelectedProduct:
+            return {
+                ...state,
+                selectedProduct: action.product
             };
 
         default:

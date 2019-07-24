@@ -5,25 +5,14 @@ import gql from 'graphql-tag';
 import { map, switchMap, catchError } from 'rxjs/operators';
 import { of, Observable } from 'rxjs';
 import { AuthService } from '../core/services/auth.service';
+import { productConstants } from '../shared/constants/product_constants';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SellingProductsService {
 
-  productFields = `
-    _id
-    name
-    createdBy
-    categories
-    description
-    shortDescription
-    demo_url
-    video_url
-    documentation_url
-    totalPrice
-    status
-  `;
+  productFields = productConstants.productQueryFields;
 
   constructor(
     private apollo: Apollo,

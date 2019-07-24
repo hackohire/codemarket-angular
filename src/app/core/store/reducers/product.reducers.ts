@@ -31,6 +31,12 @@ export function productReducers(
                 selectedProduct: action.product
             };
 
+        case EProductActions.SetAllProductsList:
+            return {
+                ...state,
+                allProducts: action.products
+            };
+
         default:
             return state;
     }

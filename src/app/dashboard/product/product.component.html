@@ -1,0 +1,50 @@
+<!-- start .single-product -->
+<div class="product product--card">
+    <div class="product__thumbnail">
+        <img src="http://www.codemarket.io/wp-content/uploads/2019/07/developer.png" alt="Product Image">
+        <div class="prod_btn">
+            <a href="single-product.html" class="transparent btn--sm btn--round">More Info</a>
+            <a *ngIf="product?.demo_url" href="single-product.html" class="transparent btn--sm btn--round">Live Demo</a>
+        </div>
+        <!-- end /.prod_btn -->
+    </div>
+    <!-- end /.product__thumbnail -->
+
+    <div class="product-desc">
+        <a class="product_title">
+            <h4>{{product?.name}}</h4>
+        </a>
+        <ul class="titlebtm">
+            <li>
+                <img class="auth-img"
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRw3JJeL2VfQtqF4CMFDkXaG8OpgcArNd9AnorGROT53rbFlHcA"
+                    alt="author image">
+                <p>
+                    <a href="#">{{product?.createdBy?.name}}</a>
+                </p>
+            </li>
+            <li class="product_cat">
+                <a href="#">
+                    <span class="lnr lnr-book"></span>Plugin</a>
+            </li>
+        </ul>
+
+        <p>{{product?.shortDescription}}</p>
+    </div>
+    <!-- end /.product-desc -->
+
+    <div class="product-purchase">
+        <div class="price_love">
+            <span>{{product?.totalPrice | currency}}</span>
+            <p>
+                <span class="lnr lnr-heart"></span> 90</p>
+        </div>
+        <div class="sell">
+            <p>
+                <span class="lnr lnr-cart"></span>
+                <span>16</span>
+            </p>
+        </div>
+    </div>
+    <!-- end /.product-purchase -->
+</div>

@@ -24,7 +24,11 @@ import { Router } from '@angular/router';
 })
 export class ProductsListComponent implements OnInit, OnDestroy {
 
-  modules: any;
+  modules = {
+    formula: true,
+    // imageResize: {},
+    syntax: true,
+  };
 
   displayedColumns: string[] = ['number', 'name', 'price', 'status', 'action'];
   dataSource = new MatTableDataSource();
@@ -57,11 +61,6 @@ export class ProductsListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.modules = {
-      formula: true,
-      // imageResize: {},
-      syntax: true,
-    };
     this.dataSource.sort = this.sort;
   }
 

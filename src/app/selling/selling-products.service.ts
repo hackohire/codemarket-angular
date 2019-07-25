@@ -77,25 +77,4 @@ export class SellingProductsService {
       }),
     );
   }
-
-  getProductById(productId: string): Observable<Product> {
-    return this.apollo.query(
-      {
-        query: gql`
-          query getProductById($productId: String) {
-            getProductById(productId: $productId) {
-              ${this.productFields}
-            }
-          }
-        `,
-        variables: {
-          productId: productId
-        }
-      }
-    ).pipe(
-      map((p: any) => {
-        return p.data.getProductById;
-      }),
-    );
-  }
 }

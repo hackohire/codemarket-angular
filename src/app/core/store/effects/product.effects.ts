@@ -62,7 +62,7 @@ export class ProductEffects {
     getProductById$ = this.actions$.pipe(
         ofType<GetProductById>(EProductActions.GetProductById),
         map(action => action.productId),
-        switchMap((productId) => this.sellingProductService.getProductById(productId)),
+        switchMap((productId) => this.productService.getProductById(productId)),
         tap(u => console.log(u)),
         map((product) => {
             console.log(product);

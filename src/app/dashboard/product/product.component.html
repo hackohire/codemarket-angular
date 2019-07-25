@@ -3,8 +3,8 @@
     <div class="product__thumbnail">
         <img src="http://www.codemarket.io/wp-content/uploads/2019/07/developer.png" alt="Product Image">
         <div class="prod_btn">
-            <a href="single-product.html" class="transparent btn--sm btn--round">More Info</a>
-            <a *ngIf="product?.demo_url" href="single-product.html" class="transparent btn--sm btn--round">Live Demo</a>
+            <a (click)="selectThisProduct(product)" [routerLink]="['/', {outlets: {'side': ['dashboard', 'product-details', product._id]}}]" class="transparent btn--sm btn--round">More Info</a>
+            <a *ngIf="product?.demo_url" href="product?.demo_url" target="_blank" class="transparent btn--sm btn--round">Live Demo</a>
         </div>
         <!-- end /.prod_btn -->
     </div>
@@ -41,13 +41,13 @@
             <p>
                 <!-- <span class="lnr lnr-heart"></span> -->
                 <i class="far fa-heart"></i>
-            90</p>
+            -</p>
         </div>
         <div class="sell">
             <p>
                 <!-- <span class="lnr lnr-cart"></span> -->
                 <i class="fas fa-cart-plus"></i>
-                <span> 16</span>
+                <span> -</span>
             </p>
         </div>
     </div>

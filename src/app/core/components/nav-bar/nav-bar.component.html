@@ -17,10 +17,10 @@
       </button>
       <h2>codemarket</h2>
       <div fxFlex></div>
-          <a mat-button *ngIf="loggedInUser; else logIn" (click)="authService?.logout()">Logout</a>
+          <a mat-button style="color: white;" *ngIf="loggedInUser; else logIn" (click)="authService?.logout()">Logout</a>
             
           <ng-template #logIn>
-            <a mat-button (click)="login()" >Login/Register</a>
+            <a mat-button style="color: white;" (click)="login()" >Login/Register</a>
           </ng-template>
           
       

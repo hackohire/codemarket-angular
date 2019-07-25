@@ -14,5 +14,7 @@ export const productConstants = {
         documentation_url
         totalPrice
         status
+        createdAt
+        updatedAt
     `,
 };

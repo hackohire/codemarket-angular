@@ -13,6 +13,10 @@ const routes: Routes = [
     redirectTo: '/(side:dashboard)',
   },
   {
+    path: 'access_token',
+    redirectTo: '/(side:dashboard)',
+  },
+  {
     path: 'dashboard',
     loadChildren: () => import('./dashboard/dashboard.module').then(module => module.DashboardModule),
     outlet: 'side'

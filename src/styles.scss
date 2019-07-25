@@ -2100,7 +2100,7 @@ h6 {
   transition: 0.3s ease;
   height: 100%;
   opacity: 0;
-  z-index: 2;
+  z-index: 0 !important;
   -webkit-border-radius: 4px 4px 0 0;
           border-radius: 4px 4px 0 0;
   width: 100%;
@@ -2645,6 +2645,10 @@ h6 {
 
 .social--color--filled span.fa-facebook, .single_blog_content .share_tags .share .social_share span.fa-facebook {
   background: #395799;
+}
+
+.social--color--filled span.fa-github, .single_blog_content .share_tags .share .social_share span.fa-github {
+  background: #24292e;
 }
 
 .social--color--filled span.fa-twitter, .single_blog_content .share_tags .share .social_share span.fa-twitter {

@@ -21,7 +21,7 @@ export class AddProductsComponent implements OnInit, OnDestroy {
     'EDIT_PRODUCT': 'edit-product'
   };
   productForm: FormGroup;
-  modules: {
+  modules = {
     formula: true,
     // imageResize: {},
     syntax: true,

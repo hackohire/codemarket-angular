@@ -7,7 +7,11 @@ import { ProductComponent } from './product/product.component';
 const dashboardRoutes: Routes = [
   {
     path: '',
-    component: DashboardComponent
+    component: DashboardComponent,
+  },
+  {
+    path: 'product-details/:productId',
+    loadChildren: () => import('./product-details/product-details.module').then(module => module.ProductDetailsModule),
   }
 ];
 

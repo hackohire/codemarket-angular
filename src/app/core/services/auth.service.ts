@@ -4,7 +4,7 @@ import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { map, catchError } from 'rxjs/operators';
 import { of } from 'rxjs/internal/observable/of';
-import { CognitoUserSession } from 'amazon-cognito-identity-js';
+import { CognitoUserSession, CognitoUser } from 'amazon-cognito-identity-js';
 import { Auth } from 'aws-amplify';
 import { environment } from 'src/environments/environment';
 import { Store } from '@ngrx/store';
@@ -14,7 +14,9 @@ import { selectLoggedInUser } from '../store/selectors/user.selector';
 import { Observable } from 'rxjs';
 import { User } from '../../shared/models/user.model';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class AuthService {
 
   loggedInUser$: Observable<User>;
@@ -35,35 +37,39 @@ export class AuthService {
         user: payload.data
       };
       console.log('Hub', data);
-      if (channel === 'auth') {
+      if (channel === 'auth' && data.payload.event === 'signIn') {
 
-        Auth.currentSession().then((session: CognitoUserSession) => {
-          console.log(session.getIdToken().getJwtToken());
-          const idToken = session.getIdToken().getJwtToken();
-
+        Auth.currentAuthenticatedUser()
+        .then((user: CognitoUser) => {
+          console.log(user.getSignInUserSession().getIdToken().getJwtToken());
+  
+          const idToken = user.getSignInUserSession().getIdToken().getJwtToken();
           if (idToken) {
             this.setIdTokenToLocalStorage(idToken);
-
-            this.store.dispatch(new Authorise());
+            if (!this.loggedInUser) {
+              this.store.dispatch(new Authorise());
+            }
             // this.authorizeWithPlatform();
           }
-
-        });
-        // this.amplifyService.authState().next(state);
+        })
+        .catch(err => console.log(err));
       }
     });
-    Auth.currentSession().then((session: CognitoUserSession) => {
-      console.log(session.getIdToken().getJwtToken());
-      const idToken = session.getIdToken().getJwtToken();
 
-      if (idToken) {
-        this.setIdTokenToLocalStorage(idToken);
+    Auth.currentAuthenticatedUser()
+      .then((user: CognitoUser) => {
+        console.log(user.getSignInUserSession().getIdToken().getJwtToken());
 
-        this.store.dispatch(new Authorise());
-        // this.authorizeWithPlatform();
-      }
-
-    });
+        const idToken = user.getSignInUserSession().getIdToken().getJwtToken();
+        if (idToken) {
+          this.setIdTokenToLocalStorage(idToken);
+          if (!this.loggedInUser) {
+            this.store.dispatch(new Authorise());
+          }
+          // this.authorizeWithPlatform();
+        }
+      })
+      .catch(err => console.log(err));
   }
 
   authorizeWithPlatform(): Observable<User> {

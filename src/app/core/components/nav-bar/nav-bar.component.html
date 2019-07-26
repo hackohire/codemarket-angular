@@ -1,11 +1,11 @@
 <mat-sidenav-container class="sidenav-container">
 
   <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
+    [mode]="(isHandset$ | async) ? 'over' : 'main'" [opened]="(isHandset$ | async) === false">
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item [routerLink]="[{outlets: {'side': ['dashboard']}}]">Dashboard</a>
-      <a mat-list-item [routerLink]="[{outlets: {'side': ['sell']}}]">Sell</a>
+      <a mat-list-item [routerLink]="[{outlets: {'main': ['dashboard']}}]">Dashboard</a>
+      <a mat-list-item [routerLink]="[{outlets: {'main': ['sell']}}]">Sell</a>
     </mat-nav-list>
   </mat-sidenav>
 
@@ -17,19 +17,25 @@
       </button>
       <h2>codemarket</h2>
       <div fxFlex></div>
-          <a mat-button style="color: white;" *ngIf="loggedInUser; else logIn" (click)="authService?.logout()">Logout</a>
-            
-          <ng-template #logIn>
-            <a mat-button style="color: white;" (click)="login()" >Login/Register</a>
-          </ng-template>
-          
-      
-      
+      <a mat-button style="color: white;" [routerLink]="[{outlets: {'main': ['help']}}]">
+        <mat-icon>help_outline
+        </mat-icon> Help
+      </a>
+      <a mat-button style="color: white;" *ngIf="loggedInUser; else logIn" (click)="authService?.logout()">
+        Logout</a>
+
+      <ng-template #logIn>
+        <a mat-button style="color: white;" (click)="login()"><mat-icon>face
+          </mat-icon> Login/Register</a>
+      </ng-template>
+
+
+
     </mat-toolbar>
 
     <!-- {{loggedInUser | json}} -->
     <!-- Add Content Here -->
-    <router-outlet name="side"></router-outlet>
+    <router-outlet name="main"></router-outlet>
 
   </mat-sidenav-content>
 </mat-sidenav-container>

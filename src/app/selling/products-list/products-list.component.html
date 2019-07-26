@@ -22,7 +22,7 @@
     <ng-container matColumnDef="action">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
         <td mat-cell *matCellDef="let product" (click)="$event.stopPropagation()">
-            <button mat-mini-fab color="primary" (click)="editProduct(product)" [routerLink]="['/', {outlets: {'side': ['sell', 'edit-product', product._id]}}]">
+            <button mat-mini-fab color="primary" (click)="editProduct(product)" [routerLink]="['/', {outlets: {'main': ['sell', 'edit-product', product._id]}}]">
                 <mat-icon>edit</mat-icon>
             </button> </td>
     </ng-container>

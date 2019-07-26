@@ -19,12 +19,17 @@ const routes: Routes = [
   {
     path: 'dashboard',
     loadChildren: () => import('./dashboard/dashboard.module').then(module => module.DashboardModule),
-    outlet: 'side'
+    outlet: 'main'
   },
   {
     path: 'sell',
     loadChildren: () => import('./selling/selling.module').then(module => module.SellingModule),
-    outlet: 'side'
+    outlet: 'main'
+  },
+  {
+    path: 'help',
+    loadChildren: () => import('./help/help.module').then(module => module.HelpModule),
+    outlet: 'main'
   },
 ];
 

@@ -3,7 +3,7 @@
     <div class="product__thumbnail">
         <img src="http://www.codemarket.io/wp-content/uploads/2019/07/developer.png" alt="Product Image">
         <div class="prod_btn">
-            <a (click)="selectThisProduct(product)" [routerLink]="['/', {outlets: {'side': ['dashboard', 'product-details', product._id]}}]" class="transparent btn--sm btn--round">More Info</a>
+            <a (click)="selectThisProduct(product)" [routerLink]="['/', {outlets: {'main': ['dashboard', 'product-details', product._id]}}]" class="transparent btn--sm btn--round">More Info</a>
             <a *ngIf="product?.demo_url" href="product?.demo_url" target="_blank" class="transparent btn--sm btn--round">Live Demo</a>
         </div>
         <!-- end /.prod_btn -->

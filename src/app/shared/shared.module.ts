@@ -4,9 +4,10 @@ import { MaterialModule } from '../core/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { QuillModule } from 'ngx-quill';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { BreadcumbComponent } from './components/breadcumb/breadcumb.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [BreadcumbComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -21,6 +22,7 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
   })
   ],
   exports: [
+    BreadcumbComponent,
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,

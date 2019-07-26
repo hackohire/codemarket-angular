@@ -8,6 +8,7 @@ import { ActivatedRoute } from '@angular/router';
 import { tap } from 'rxjs/internal/operators/tap';
 import { switchMap } from 'rxjs/internal/operators/switchMap';
 import { GetProductById } from 'src/app/core/store/actions/product.actions';
+import { BreadCumb } from 'src/app/shared/models/bredcumb.model';
 
 @Component({
   selector: 'app-product-details',
@@ -23,13 +24,26 @@ export class ProductDetailsComponent implements OnInit {
     syntax: true,
   };
 
+  breadcumb: BreadCumb;
+
 
   productDetails$: Observable<Product>;
   subscription$: Subscription;
   constructor(
     private store: Store<AppState>,
     private activatedRoute: ActivatedRoute
-  ) { }
+  ) {
+    this.breadcumb = {
+      path: [
+        {
+          name: 'Dashboard'
+        },
+        {
+          name: 'Product Details'
+        }
+      ]
+    };
+  }
 
   ngOnInit() {
     this.productDetails$ = this.store.select(selectSelectedProduct);

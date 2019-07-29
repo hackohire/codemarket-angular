@@ -83,7 +83,6 @@ export class AuthService {
               email
               roles
             }
-
           }`,
           variables: {
             applicationId: environment.applicationId

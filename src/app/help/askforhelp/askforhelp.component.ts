@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { BreadCumb } from 'src/app/shared/models/bredcumb.model';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ProductStatus } from 'src/app/shared/models/product.model';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/core/store/state/app.state';
+import { AddQuery } from 'src/app/core/store/actions/help.actions';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-askforhelp',
@@ -14,11 +18,17 @@ export class AskforhelpComponent implements OnInit {
   askForHelpForm: FormGroup;
   modules = {
     formula: true,
-    // imageResize: {},
     syntax: true,
   };
 
-  constructor() {
+  get createdBy() {
+    return this.askForHelpForm.get('createdBy');
+  }
+
+  constructor(
+    private store: Store<AppState>,
+    private authService: AuthService
+  ) {
     this.breadcumb = {
       title: 'Ask For Help By Filling out the given form',
       path: [
@@ -41,12 +51,17 @@ export class AskforhelpComponent implements OnInit {
     this.askForHelpForm = new FormGroup({
       question: new FormControl(''),
       description: new FormControl(''),
-      price: new FormControl('')
+      price: new FormControl(''),
+      createdBy: new FormControl()
     });
   }
 
   submit() {
-    console.log(this.askForHelpForm.value)
+    console.log(this.askForHelpForm.value);
+    if (this.authService.loggedInUser && !this.createdBy.value) {
+      this.createdBy.setValue(this.authService.loggedInUser._id);
+    }
+    this.store.dispatch(new AddQuery(this.askForHelpForm.value));
   }
 
 }

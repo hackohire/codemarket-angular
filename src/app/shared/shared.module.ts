@@ -5,7 +5,18 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { QuillModule } from 'ngx-quill';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { BreadcumbComponent } from './components/breadcumb/breadcumb.component';
+import { HighlightModule } from 'ngx-highlightjs';
+import typescript from 'highlight.js/lib/languages/typescript';
+import javascript from 'highlight.js/lib/languages/javascript';
+import scss from 'highlight.js/lib/languages/scss';
 
+export function hljsLanguages() {
+  return [
+    {name: 'typescript', func: typescript},
+    {name: 'javascript', func: javascript},
+    {name: 'scss', func: scss}
+  ];
+}
 @NgModule({
   declarations: [BreadcumbComponent],
   imports: [
@@ -19,14 +30,16 @@ import { BreadcumbComponent } from './components/breadcumb/breadcumb.component';
       customClass: 'modal-content',
       confirmButtonClass: 'btn btn-primary',
       cancelButtonClass: 'btn'
-  })
+    }),
+    HighlightModule.forRoot({languages: hljsLanguages})
   ],
   exports: [
     BreadcumbComponent,
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
-    QuillModule
+    QuillModule,
+    HighlightModule
   ]
 })
 export class SharedModule { }

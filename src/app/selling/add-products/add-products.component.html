@@ -4,10 +4,7 @@
         <input matInput formControlName="name" placeholder="Name">
     </mat-form-field>
 
-    <quill-editor
-    #editor
-    formControlName="description"
-    [modules]="modules">
+    <quill-editor #editor formControlName="description" [modules]="modules">
     </quill-editor>
 
     <!-- <mat-form-field class="field-full-width">
@@ -23,20 +20,23 @@
     </mat-form-field>
 
     <mat-form-field class="field-full-width">
-            <input matInput formControlName="demo_url" placeholder="Demo Url">
-            <mat-error *ngIf="productForm?.get('demo_url')?.invalid">{{'Please enter a valid URL'}}</mat-error>
+        <input matInput formControlName="demo_url" placeholder="Demo Url">
+        <mat-error *ngIf="productForm?.get('demo_url')?.invalid">{{'Please enter a valid URL'}}</mat-error>
     </mat-form-field>
 
     <mat-form-field class="field-full-width">
-            <input matInput formControlName="documentation_url" placeholder="Documentation Url">
-            <mat-error *ngIf="productForm?.get('documentation_url')?.invalid">{{'Please enter a valid URL'}}</mat-error>
+        <input matInput formControlName="documentation_url" placeholder="Documentation Url">
+        <mat-error *ngIf="productForm?.get('documentation_url')?.invalid">{{'Please enter a valid URL'}}</mat-error>
     </mat-form-field>
 
     <mat-form-field class="field-full-width">
-            <input matInput formControlName="video_url" placeholder="Video Url">
-            <mat-error *ngIf="productForm?.get('video_url')?.invalid">{{'Please enter a valid URL'}}</mat-error>
+        <input matInput formControlName="video_url" placeholder="Video Url">
+        <mat-error *ngIf="productForm?.get('video_url')?.invalid">{{'Please enter a valid URL'}}</mat-error>
     </mat-form-field>
+
 
     <button mat-raised-button color="primary">Submit Product</button>
 
 </form>
+
+<!-- <pre *ngIf="productForm?.get('description')?.value"><code [highlight]="productForm?.get('description')?.value" (highlighted)="onHighlight($event)"></code></pre> -->

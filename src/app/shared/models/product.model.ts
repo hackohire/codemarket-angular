@@ -1,4 +1,5 @@
 import { User } from './user.model';
+import { HighlightResult } from 'ngx-highlightjs';
 
 export interface PriceAndFiles {
     fileName: string;
@@ -21,7 +22,8 @@ export interface Product {
     documentation_url?: string;
     video_url?: string;
     status: ProductStatus;
-    _id?: string
+    _id?: string;
+    snippets?: [HighlightResult];
 }
 
 export enum ProductStatus {

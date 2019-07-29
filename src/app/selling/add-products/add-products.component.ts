@@ -1,14 +1,15 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ProductStatus, Product } from 'src/app/shared/models/product.model';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/core/store/state/app.state';
 import { AddPrdouct, UpdatePrdouct, GetProductById, SetSelectedProduct } from 'src/app/core/store/actions/product.actions';
-import { merge, of, Subscription } from 'rxjs';
+import { of, Subscription } from 'rxjs';
 import { selectSelectedProduct } from 'src/app/core/store/selectors/product.selectors';
-import { tap, map, switchMap } from 'rxjs/operators';
-import { ActivatedRouteSnapshot, ActivatedRoute } from '@angular/router';
+import { tap, switchMap } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
+import { HighlightResult, HighlightJS } from 'ngx-highlightjs';
 
 @Component({
   selector: 'app-add-products',
@@ -31,16 +32,27 @@ export class AddProductsComponent implements OnInit, OnDestroy {
   get createdByFormControlValue() {
     return this.productForm.get('createdBy').value;
   }
-  get idFromControlValue() {
-    return this.productForm.get('_id').value;
+  get idFromControl() {
+    return this.productForm.get('_id');
+  }
+
+  get descriptionFormControl() {
+    return this.productForm.get('description');
+  }
+
+  get snippetsFormControl() {
+    return this.productForm.get('snippets');
   }
 
   subscription$: Subscription;
 
+  response: HighlightResult;
+
   constructor(
     public auth: AuthService,
     private store: Store<AppState>,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private _hljs: HighlightJS
   ) {
 
     /** If it is "add-product" route intialize empty product form, but we are setting store property of "SelectedProduct" as null
@@ -62,7 +74,7 @@ export class AddProductsComponent implements OnInit, OnDestroy {
           if (!p) {
             return this.activatedRoute.params;
           }
-          return of({productId: ''});
+          return of({ productId: '' });
         }),
         tap((params) => {
           /** When user refresh the tab, there won't be any selected product, so we need to make the call to
@@ -97,22 +109,51 @@ export class AddProductsComponent implements OnInit, OnDestroy {
       documentation_url: new FormControl(p && p.documentation_url ? p.documentation_url : '', [Validators.pattern(this.urlRegex)]),
       video_url: new FormControl(p && p.video_url ? p.video_url : '', [Validators.pattern(this.urlRegex)]),
       status: new FormControl(p && p.status ? p.status : ProductStatus.Created),
-      _id: new FormControl(p && p._id ? p._id : '')
+      _id: new FormControl(p && p._id ? p._id : ''),
+      snippets: new FormControl(p && p.snippets.length ? p.snippets : null)
     });
   }
 
   submit() {
 
+
+    const codeSnippets = [].slice.call(document.getElementsByTagName('pre'), 0);
+    if (codeSnippets.length) {
+      const snips = [];
+      for (const s of codeSnippets) {
+        const snip = this._hljs.highlightAuto(s.innerText, ['javascript', 'typescript', 'scss']);
+        snips.push(snip);
+      }
+      this.productForm.value.snips = snips;
+    }
+
     if (!this.createdByFormControlValue) {
       this.productForm.get('createdBy').setValue(this.auth.loggedInUser._id);
     }
 
-    if (this.idFromControlValue) {
+    if (this.idFromControl.value) {
       this.store.dispatch(new UpdatePrdouct(this.productForm.value));
     } else {
       this.productForm.removeControl('_id');
       this.store.dispatch(new AddPrdouct(this.productForm.value));
     }
+  }
+
+
+  
+  onHighlight(e) {
+    if(e) {
+      
+      // console.log(this._hljs.highlightAuto(e, ['javascript, typescript']));
+    }
+    this.response = {
+      language: e.language,
+      r: e.r,
+      second_best: '{...}',
+      top: '{...}',
+      value: '{...}'
+    };
+    console.log(this.response);
   }
 
 }

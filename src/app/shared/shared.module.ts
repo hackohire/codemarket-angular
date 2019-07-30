@@ -9,6 +9,7 @@ import { HighlightModule } from 'ngx-highlightjs';
 import typescript from 'highlight.js/lib/languages/typescript';
 import javascript from 'highlight.js/lib/languages/javascript';
 import scss from 'highlight.js/lib/languages/scss';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 export function hljsLanguages() {
   return [
@@ -31,7 +32,8 @@ export function hljsLanguages() {
       confirmButtonClass: 'btn btn-primary',
       cancelButtonClass: 'btn'
     }),
-    HighlightModule.forRoot({languages: hljsLanguages})
+    HighlightModule.forRoot({languages: hljsLanguages}),
+    FlexLayoutModule
   ],
   exports: [
     BreadcumbComponent,
@@ -39,7 +41,8 @@ export function hljsLanguages() {
     ReactiveFormsModule,
     MaterialModule,
     QuillModule,
-    HighlightModule
+    HighlightModule,
+    FlexLayoutModule
   ]
 })
 export class SharedModule { }

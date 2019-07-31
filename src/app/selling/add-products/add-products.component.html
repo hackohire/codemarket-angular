@@ -61,21 +61,21 @@
     </mat-dialog-content> -->
 
     <!-- This is the content of the dialog, containing a list of the files to upload -->
-    <!-- <mat-dialog-content fxFlex> -->
-        <mat-list fxFlex>
-            <mat-list-item formArrayName="priceAndFiles" *ngFor="let item of priceAndFilesArrayFormControl?.controls; let i = index;">
-                <ng-container [formGroupName]="i">
-                        <h4 mat-line>{{priceAndFilesArrayFormControl?.at(i)?.get('fileName')?.value}}</h4>
-                        <mat-progress-bar mode="determinate" [value]="priceAndFilesArrayFormControl?.at(i)?.get('progress')?.value | async">
-                        </mat-progress-bar>
-                        <mat-form-field>
-                            <input matInput type="number" formControlName="price" placeholder="Price">
-                        </mat-form-field>
-                        <mat-icon> close</mat-icon>
-                </ng-container>
-            </mat-list-item>
-        </mat-list>
-    <!-- </mat-dialog-content> -->
+    <mat-list fxFlex>
+        <mat-list-item formArrayName="priceAndFiles"
+            *ngFor="let item of priceAndFilesArrayFormControl?.controls; let i = index;">
+            <ng-container [formGroupName]="i">
+                <h4 mat-line>{{priceAndFilesArrayFormControl?.at(i)?.get('fileName')?.value}}</h4>
+                <mat-progress-bar mode="determinate"
+                    [value]="priceAndFilesArrayFormControl?.at(i)?.get('progress')?.value | async">
+                </mat-progress-bar>
+                <mat-form-field>
+                    <input matInput type="number" formControlName="price" placeholder="Price">
+                </mat-form-field>
+                <mat-icon (click)="remove(i)">close</mat-icon>
+            </ng-container>
+        </mat-list-item>
+    </mat-list>
 
 
 

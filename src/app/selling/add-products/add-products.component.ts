@@ -124,7 +124,7 @@ export class AddProductsComponent implements OnInit, OnDestroy {
     return new FormGroup({
       fileName: new FormControl(f.name),
       file: new FormControl(f.key ? f.key : ''),
-      price: new FormControl(f.price ? f.price : ''),
+      price: new FormControl(f.price ? f.price : 0),
       progress: new FormControl(f.progress ? f.progress : 0)
     });
   }
@@ -143,6 +143,7 @@ export class AddProductsComponent implements OnInit, OnDestroy {
       console.log(snips);
     }
 
+    /* Set LoggedInUserId as created By if it is not already set **/
     if (!this.createdByFormControlValue) {
       this.productForm.get('createdBy').setValue(this.auth.loggedInUser._id);
     }
@@ -201,25 +202,30 @@ export class AddProductsComponent implements OnInit, OnDestroy {
 
             // calculate the progress percentage
             const percentDone = Math.round(100 * p.loaded / p.total);
-            this.priceAndFilesArrayFormControl.at(i).get('progress').value.next(percentDone);
+            priceAndFiles.at(i).get('progress').value.next(percentDone);
             f['progress'].next(percentDone);
 
             if (p.loaded === p.total) {
-              this.priceAndFilesArrayFormControl.at(i).get('progress').value.complete();
+              priceAndFiles.at(i).get('progress').value.complete();
               f['progress'].complete();
             }
           },
         }).then((uploaded: any) => {
           console.log('uploaded', uploaded);
-          this.priceAndFilesArrayFormControl.at(i).get('file').setValue(uploaded.key)
-          // priceAndFiles.push(this.priceAndFilesFormControl({name: f.name, key: uploaded.key}));
-          // this.files.clear();
+          priceAndFiles.at(i).get('file').setValue(uploaded.key);
+          priceAndFiles.at(i).get('progress').disable();
+
         });
       }
     });
     this.file.nativeElement.value = null;
 
     console.log(this.files);
+  }
+
+  remove(index: number) {
+    this.files.splice(index, 1);
+    this.priceAndFilesArrayFormControl.removeAt(index);
   }
 
 }

@@ -15,6 +15,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EPlatformActions } from './store/actions/app.actions';
 import { ProductEffects } from './store/effects/product.effects';
 import { HelpEffects } from './store/effects/help.effects';
+import { CartEffects } from './store/effects/cart.effects';
 
 export function clearState(reducer) {
   return (state, action) => {
@@ -36,7 +37,7 @@ export function clearState(reducer) {
     HttpClientModule,
     HttpLinkModule,
     StoreModule.forRoot(appReducesrs(), { metaReducers: [clearState] }),
-    EffectsModule.forRoot([UserEffects, ProductEffects, HelpEffects]),
+    EffectsModule.forRoot([UserEffects, ProductEffects, HelpEffects, CartEffects]),
     StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
     StoreDevtoolsModule.instrument(),
   ],

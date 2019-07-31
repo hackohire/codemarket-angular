@@ -1,21 +1,19 @@
-import { Component, OnInit, AfterViewChecked, AfterContentChecked, ChangeDetectionStrategy, ChangeDetectorRef, OnChanges } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { map, share } from 'rxjs/operators';
-import Amplify from 'aws-amplify';
-import { environment } from 'src/environments/environment';
 import { User } from 'src/app/shared/models/user.model';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../store/state/app.state';
-import { selectLoggedInUser } from '../../store/selectors/user.selector';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { selectCartListLength } from '../../store/selectors/cart.selectors';
 
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
   styleUrls: ['./nav-bar.component.scss'],
 })
-export class NavBarComponent implements OnInit {
+export class NavBarComponent implements OnInit, OnDestroy {
 
   loggedInUser: User;
 
@@ -23,7 +21,11 @@ export class NavBarComponent implements OnInit {
     .pipe(
       map(result => result.matches),
       share()
-    );
+  );
+
+  cartListLength: Observable<number>;
+
+  loggedInUserSubscription: Subscription;
 
   constructor(
     private breakpointObserver: BreakpointObserver,
@@ -34,7 +36,7 @@ export class NavBarComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.authService.loggedInUser$.subscribe(u => {
+    this.loggedInUserSubscription = this.authService.loggedInUser$.subscribe(u => {
       if (u) {
         // this.ref.detach();
         this.loggedInUser = {...u};
@@ -42,6 +44,12 @@ export class NavBarComponent implements OnInit {
       }
 
     });
+
+    this.cartListLength = this.store.select(selectCartListLength);
+  }
+
+  ngOnDestroy() {
+    this.loggedInUserSubscription.unsubscribe();
   }
 
   login() {

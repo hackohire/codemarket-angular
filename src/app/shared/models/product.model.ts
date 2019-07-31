@@ -24,6 +24,7 @@ export interface Product {
     status: ProductStatus;
     _id?: string;
     snippets?: [HighlightResult];
+    addedToCart?: boolean;
 }
 
 export enum ProductStatus {

@@ -6,9 +6,9 @@ import { AppState } from 'src/app/core/store/state/app.state';
 import { selectSelectedProduct } from 'src/app/core/store/selectors/product.selectors';
 import { ActivatedRoute } from '@angular/router';
 import { tap } from 'rxjs/internal/operators/tap';
-import { switchMap } from 'rxjs/internal/operators/switchMap';
 import { GetProductById } from 'src/app/core/store/actions/product.actions';
 import { BreadCumb } from 'src/app/shared/models/bredcumb.model';
+import { AddToCart } from 'src/app/core/store/actions/cart.actions';
 
 @Component({
   selector: 'app-product-details',
@@ -65,6 +65,10 @@ export class ProductDetailsComponent implements OnInit {
 
   getDate(d: string) {
     return new Date(+d);
+  }
+
+  addToCart(product: Product) {
+    this.store.dispatch(new AddToCart(product._id));
   }
 
 }

@@ -3,6 +3,7 @@ import { Product } from 'src/app/shared/models/product.model';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/core/store/state/app.state';
 import { SetSelectedProduct } from 'src/app/core/store/actions/product.actions';
+import { AddToCart } from 'src/app/core/store/actions/cart.actions';
 
 @Component({
   selector: 'app-product',
@@ -22,6 +23,10 @@ export class ProductComponent implements OnInit {
 
   selectThisProduct(product: Product) {
     this.store.dispatch(new SetSelectedProduct(product));
+  }
+
+  addToCart(product: Product) {
+    this.store.dispatch(new AddToCart(product._id));
   }
 
 }

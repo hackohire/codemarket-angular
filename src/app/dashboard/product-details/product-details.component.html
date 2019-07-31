@@ -1408,8 +1408,10 @@
 
                             <div class="purchase-button">
                                 <a href="#" class="btn btn--lg btn--round">Purchase Now</a>
-                                <a href="#" class="btn btn--lg btn--round cart-btn">
+                                <a *ngIf="!product?.addedToCart" class="btn btn--lg btn--round cart-btn" (click)="addToCart(product)">
                                     <span class="lnr lnr-cart"></span> Add To Cart</a>
+                                <a *ngIf="product?.addedToCart" class="btn btn--lg btn--round cart-btn">
+                                        <mat-icon style="vertical-align: middle">done</mat-icon> Added To Cart</a>
                             </div>
                             <!-- end /.purchase-button -->
                         </div>

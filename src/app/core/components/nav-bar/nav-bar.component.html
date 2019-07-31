@@ -17,6 +17,10 @@
       </button>
       <h2>codemarket</h2>
       <div fxFlex></div>
+      <a mat-button style="color: white;">
+        <mat-icon>shopping_cart
+        </mat-icon> Cart({{cartListLength | async}})
+      </a>
       <a mat-button style="color: white;" [routerLink]="[{outlets: {'main': ['help']}}]">
         <mat-icon>help_outline
         </mat-icon> Help

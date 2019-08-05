@@ -23,8 +23,8 @@ export class ProductComponent implements OnInit {
   ngOnInit() {
   }
 
-  selectThisProduct(product: Product) {
-    this.store.dispatch(new SetSelectedProduct(product));
+  redirectToProductDetails(product: Product): void {
+    this.productService.redirectToProductDetails(product);
   }
 
   addToCart(product: Product) {

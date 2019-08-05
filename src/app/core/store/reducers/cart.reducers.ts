@@ -12,6 +12,13 @@ export function cartReducers(
                 ...state,
                 cartProductsList: action.products
             };
+
+        case ECartActions.UpdateCartTotalSuccess:
+            return {
+                ...state,
+                cartTotal: action.cartTotal,
+                cartSubTotal: action.cartSubTotal
+            };
         default:
             return state;
     }

@@ -7,9 +7,12 @@ import { Observable } from 'rxjs/internal/Observable';
 import { map } from 'rxjs/internal/operators/map';
 import { Store } from '@ngrx/store';
 import { AppState } from '../store/state/app.state';
-import { selectCartProductList } from '../store/selectors/cart.selectors';
+import { selectCartProductList, selectCartTotal } from '../store/selectors/cart.selectors';
 import { switchMap } from 'rxjs/internal/operators/switchMap';
 import { of } from 'rxjs/internal/observable/of';
+import { selectAllProductsList } from '../store/selectors/product.selectors';
+import { Router } from '@angular/router';
+import { SetSelectedProduct } from '../store/actions/product.actions';
 
 @Injectable({
   providedIn: 'root'
@@ -18,12 +21,17 @@ export class ProductService {
 
   productFields = productConstants.productQueryFields;
   cartProductList: Observable<string[]>;
+  allProductsList: Observable<Product[]>;
+  cartTotal: Observable<{total: number, subTotal: number}>;
 
   constructor(
     private apollo: Apollo,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private router: Router
   ) {
     this.cartProductList = this.store.select(selectCartProductList);
+    this.allProductsList = this.store.select(selectAllProductsList);
+    this.cartTotal = this.store.select(selectCartTotal);
   }
 
   getAllProducts(): Observable<Product[]> {
@@ -75,5 +83,18 @@ export class ProductService {
         return of(doesProductExistInCart);
       })
     );
+  }
+
+  getSingleProductForCartByProductId(productId): Observable<Product> {
+    return this.allProductsList.pipe(
+      switchMap((products: Product[]) => {
+        return of(products.find(p => p._id === productId));
+      })
+    );
+  }
+
+  redirectToProductDetails(product: Product): void {
+    this.store.dispatch(new SetSelectedProduct(product));
+    this.router.navigate(['/', {outlets: {main: ['dashboard', 'product-details', product._id]}}]);
   }
 }

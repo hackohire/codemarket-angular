@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import { Effect, Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { AppState } from '../state/app.state';
-import { switchMap, map, withLatestFrom, tap} from 'rxjs/operators/';
+import { map, withLatestFrom, tap, pairwise, combineAll, switchMap} from 'rxjs/operators/';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { HelpService } from 'src/app/help/help.service';
-import { ECartActions, AddToCart, GetCartProductsList, UpdateCartProductList } from '../actions/cart.actions';
+import { ECartActions, AddToCart, GetCartProductsList, UpdateCartProductList, RemoveProductFromCart, UpdateCartTotal, UpdateCartTotalSuccess } from '../actions/cart.actions';
 import { selectAllProductsList } from '../selectors/product.selectors';
 import { Product } from 'src/app/shared/models/product.model';
 import { UpdatePrdouct } from '../actions/product.actions';
@@ -29,7 +29,38 @@ export class CartEffects {
             return of(products);
         }),
         tap(t => console.log(t)),
-        switchMap((productIds: string[]) => of(new UpdateCartProductList(productIds)))
+        switchMap((productIds: string[]) => [new UpdateCartProductList(productIds), new UpdateCartTotal()])
+    );
+
+    @Effect()
+    updateCartTotal$ = this.actions$.pipe(
+        ofType<UpdateCartTotal>(ECartActions.UpdateCartTotal),
+        switchMap(() => this._store.select(selectCartProductList)),
+        withLatestFrom(this._store.select(selectAllProductsList)),
+        switchMap(([ids, allProducts]) => {
+            let total = 0;
+            ids.forEach((id) => {
+                total += allProducts.find(i => i._id === id).totalPrice;
+            });
+            return of(total);
+        }),
+        map((total: number) => {
+            return new UpdateCartTotalSuccess(total, total);
+        })
+    )
+
+    @Effect()
+    removeProductFromCart$ = this.actions$.pipe(
+        ofType<RemoveProductFromCart>(ECartActions.RemoveProductFromCart),
+        map(action => action.productId),
+        withLatestFrom(this._store.select(selectCartProductList)),
+        switchMap(([id, products]) => {
+            const i = products.length ? products.findIndex(prod => prod === id) : -1;
+            products.splice(i, 1);
+            return of(products);
+        }),
+        tap(t => console.log(t)),
+        switchMap((productIds: string[]) => of(new UpdateCartProductList(productIds), new UpdateCartTotal()))
     );
 
 

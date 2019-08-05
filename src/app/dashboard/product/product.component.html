@@ -3,7 +3,7 @@
     <div class="product__thumbnail">
         <img src="http://www.codemarket.io/wp-content/uploads/2019/07/developer.png" alt="Product Image">
         <div class="prod_btn">
-            <a (click)="selectThisProduct(product)" [routerLink]="['/', {outlets: {'main': ['dashboard', 'product-details', product._id]}}]" class="transparent btn--sm btn--round">More Info</a>
+            <a (click)="redirectToProductDetails(product)" class="transparent btn--sm btn--round">More Info</a>
             
             <!-- Check if the product is in cart -->
             <a *ngIf="!(productService?.checkIfProductIsInCart(product?._id) | async); else productIsInCart" (click)="addToCart(product)" class="transparent btn--sm btn--round">Add To Cart</a>

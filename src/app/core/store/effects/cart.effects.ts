@@ -10,6 +10,7 @@ import { selectAllProductsList } from '../selectors/product.selectors';
 import { Product } from 'src/app/shared/models/product.model';
 import { UpdatePrdouct } from '../actions/product.actions';
 import { of } from 'rxjs';
+import { selectCartProductList } from '../selectors/cart.selectors';
 
 @Injectable()
 export class CartEffects {
@@ -18,26 +19,29 @@ export class CartEffects {
     addProductToCart$ = this.actions$.pipe(
         ofType<AddToCart>(ECartActions.AddToCart),
         map(action => action.productId),
-        withLatestFrom(this._store.select(selectAllProductsList)),
+        withLatestFrom(this._store.select(selectCartProductList)),
         switchMap(([id, products]) => {
-            const i = products.findIndex(prod => prod._id === id);
-            products[i].addedToCart = true;
-            return of(products[i]);
+            const i = products.length ? products.findIndex(prod => prod === id) : -1;
+            // products[i].addedToCart = true;
+            if (i < 0) {
+                products.push(id);
+            }
+            return of(products);
         }),
         tap(t => console.log(t)),
-        switchMap((product: Product) => of(new GetCartProductsList()))
+        switchMap((productIds: string[]) => of(new UpdateCartProductList(productIds)))
     );
 
 
-    @Effect()
-    getCartProductsList$ = this.actions$.pipe(
-        ofType<GetCartProductsList>(ECartActions.GetCartProductsList),
-        switchMap(() => this._store.select(selectAllProductsList)),
-        map((productsList) => {
-            return productsList.filter(p => p.addedToCart);
-        }),
-        map((productsList) => new UpdateCartProductList(productsList))
-    );
+    // @Effect()
+    // getCartProductsList$ = this.actions$.pipe(
+    //     ofType<GetCartProductsList>(ECartActions.GetCartProductsList),
+    //     switchMap(() => this._store.select(selectAllProductsList)),
+    //     map((productsList) => {
+    //         return productsList.filter(p => p.addedToCart);
+    //     }),
+    //     map((productsList) => new UpdateCartProductList(productsList))
+    // );
 
 
     constructor(

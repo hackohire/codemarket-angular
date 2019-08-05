@@ -25,7 +25,7 @@ export class AddedToCartSuccessfully implements Action {
 
 export class UpdateCartProductList implements Action {
     public readonly type = ECartActions.UpdateCartProductList;
-    constructor(public products: Product[]) {}
+    constructor(public products: string[]) {}
 }
 
 export class GetCartProductsList implements Action {

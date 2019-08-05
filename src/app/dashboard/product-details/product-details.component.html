@@ -1408,10 +1408,16 @@
 
                             <div class="purchase-button">
                                 <a href="#" class="btn btn--lg btn--round">Purchase Now</a>
-                                <a *ngIf="!product?.addedToCart" class="btn btn--lg btn--round cart-btn" (click)="addToCart(product)">
+                                
+                                <!-- Check if the product is in cart -->
+                                <a *ngIf="!(productService?.checkIfProductIsInCart(product?._id) | async); else productIsInCart" class="btn btn--lg btn--round cart-btn" (click)="addToCart(product)">
                                     <span class="lnr lnr-cart"></span> Add To Cart</a>
-                                <a *ngIf="product?.addedToCart" class="btn btn--lg btn--round cart-btn">
+                                
+                                <!-- Show product addedd to cart if product is already in the cart -->
+                                <ng-template #productIsInCart>
+                                    <a class="btn btn--lg btn--round cart-btn">
                                         <mat-icon style="vertical-align: middle">done</mat-icon> Added To Cart</a>
+                                </ng-template>
                             </div>
                             <!-- end /.purchase-button -->
                         </div>

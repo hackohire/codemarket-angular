@@ -9,6 +9,7 @@ import { tap } from 'rxjs/internal/operators/tap';
 import { GetProductById } from 'src/app/core/store/actions/product.actions';
 import { BreadCumb } from 'src/app/shared/models/bredcumb.model';
 import { AddToCart } from 'src/app/core/store/actions/cart.actions';
+import { ProductService } from 'src/app/core/services/product.service';
 
 @Component({
   selector: 'app-product-details',
@@ -31,7 +32,8 @@ export class ProductDetailsComponent implements OnInit {
   subscription$: Subscription;
   constructor(
     private store: Store<AppState>,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    public productService: ProductService
   ) {
     this.breadcumb = {
       path: [

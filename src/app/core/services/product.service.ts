@@ -5,6 +5,11 @@ import { productConstants } from 'src/app/shared/constants/product_constants';
 import { Product } from 'src/app/shared/models/product.model';
 import { Observable } from 'rxjs/internal/Observable';
 import { map } from 'rxjs/internal/operators/map';
+import { Store } from '@ngrx/store';
+import { AppState } from '../store/state/app.state';
+import { selectCartProductList } from '../store/selectors/cart.selectors';
+import { switchMap } from 'rxjs/internal/operators/switchMap';
+import { of } from 'rxjs/internal/observable/of';
 
 @Injectable({
   providedIn: 'root'
@@ -12,10 +17,14 @@ import { map } from 'rxjs/internal/operators/map';
 export class ProductService {
 
   productFields = productConstants.productQueryFields;
+  cartProductList: Observable<string[]>;
 
   constructor(
-    private apollo: Apollo
-  ) { }
+    private apollo: Apollo,
+    private store: Store<AppState>
+  ) {
+    this.cartProductList = this.store.select(selectCartProductList);
+  }
 
   getAllProducts(): Observable<Product[]> {
     return this.apollo.query(
@@ -53,6 +62,18 @@ export class ProductService {
       map((p: any) => {
         return p.data.getProductById;
       }),
+    );
+  }
+
+  checkIfProductIsInCart(productId: string): Observable<boolean> {
+    return this.cartProductList.pipe(
+      switchMap((productIds: string[]) => {
+        const doesProductExistInCart = false;
+        if (productIds && productIds.length && productIds.filter(id  => id === productId).length) {
+          return of(true);
+        }
+        return of(doesProductExistInCart);
+      })
     );
   }
 }

@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/core/store/state/app.state';
 import { SetSelectedProduct } from 'src/app/core/store/actions/product.actions';
 import { AddToCart } from 'src/app/core/store/actions/cart.actions';
+import { ProductService } from 'src/app/core/services/product.service';
 
 @Component({
   selector: 'app-product',
@@ -13,7 +14,8 @@ import { AddToCart } from 'src/app/core/store/actions/cart.actions';
 export class ProductComponent implements OnInit {
   @Input() product: Product;
   constructor(
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    public productService: ProductService
   ) {
     console.log(this.product);
   }

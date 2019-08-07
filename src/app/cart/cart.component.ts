@@ -22,7 +22,7 @@ export class CartComponent implements OnInit {
     public productService: ProductService
   ) {
 
-    this.cartProductsList = this.productService.cartProductList;
+    this.cartProductsList = this.productService.cartProductListIds;
     this.breadcumb = {
       title: 'Amazing Products in Your Cart',
       path: [

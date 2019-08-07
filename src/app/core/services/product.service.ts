@@ -13,6 +13,8 @@ import { of } from 'rxjs/internal/observable/of';
 import { selectAllProductsList } from '../store/selectors/product.selectors';
 import { Router } from '@angular/router';
 import { SetSelectedProduct } from '../store/actions/product.actions';
+import * as _ from 'lodash';
+import { withLatestFrom } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +22,7 @@ import { SetSelectedProduct } from '../store/actions/product.actions';
 export class ProductService {
 
   productFields = productConstants.productQueryFields;
-  cartProductList: Observable<string[]>;
+  cartProductListIds: Observable<string[]>;
   allProductsList: Observable<Product[]>;
   cartTotal: Observable<{total: number, subTotal: number}>;
 
@@ -29,7 +31,7 @@ export class ProductService {
     private store: Store<AppState>,
     private router: Router
   ) {
-    this.cartProductList = this.store.select(selectCartProductList);
+    this.cartProductListIds = this.store.select(selectCartProductList);
     this.allProductsList = this.store.select(selectAllProductsList);
     this.cartTotal = this.store.select(selectCartTotal);
   }
@@ -74,7 +76,7 @@ export class ProductService {
   }
 
   checkIfProductIsInCart(productId: string): Observable<boolean> {
-    return this.cartProductList.pipe(
+    return this.cartProductListIds.pipe(
       switchMap((productIds: string[]) => {
         const doesProductExistInCart = false;
         if (productIds && productIds.length && productIds.filter(id  => id === productId).length) {
@@ -96,5 +98,23 @@ export class ProductService {
   redirectToProductDetails(product: Product): void {
     this.store.dispatch(new SetSelectedProduct(product));
     this.router.navigate(['/', {outlets: {main: ['dashboard', 'product-details', product._id]}}]);
+  }
+
+  getProductsInCart(): Observable<Product[]> {
+    return this.store.select(selectCartProductList).pipe(
+      withLatestFrom(this.store.select(selectAllProductsList)),
+      map(([ids, products]) => {
+
+        const mappedIdsArray = ids.map((id, i) => {
+          const obj: any = {};
+          obj._id = id;
+
+          return obj;
+        });
+
+        const productInCart = _.intersectionBy(products, mappedIdsArray, '_id')
+        return productInCart && productInCart.length ? productInCart : [];
+      })
+    );
   }
 }

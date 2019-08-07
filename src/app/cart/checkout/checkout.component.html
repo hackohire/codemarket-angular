@@ -1,0 +1,106 @@
+<div class="preload checkout-page">
+
+    <!--================================
+        START BREADCRUMB AREA
+    =================================-->
+    <app-breadcumb [title]="breadcumb?.title" [path]="breadcumb?.path"></app-breadcumb>
+    <!--================================
+        END BREADCRUMB AREA
+    =================================-->
+
+    <!--================================
+            START DASHBOARD AREA
+    =================================-->
+    <section class="dashboard-area" *ngIf="(cartProductsList | async) as cartList">
+        <div class="dashboard_contents">
+            <div class="container">
+                <form action="#" class="setting_form">
+                    <div class="row">
+
+                        <div class="col-lg-6">
+                            <div class="information_module order_summary">
+                                <div class="toggle_title">
+                                    <h4>Order Summary</h4>
+                                </div>
+
+                                <ul>
+                                    <li class="item" *ngFor="let product of cartList">
+                                        <!-- {{product | json}} -->
+                                        <div>
+                                            <a (click)="redirectToProductDetails(product)">{{product?.name}}</a>
+                                            <span>{{product?.totalPrice | currency}}</span>
+                                        </div>
+                                    </li>
+                                    <!-- <li>
+                                        <p>Estimated Taxes & Fees:</p>
+                                        <span>$2</span>
+                                    </li> -->
+                                    <li class="total_ammount" *ngIf="(productService?.cartTotal | async) as cartTotal">
+                                        <p>Total</p>
+                                        <span>{{cartTotal?.total | currency}}</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- end /.information_module-->
+
+                            <div class="information_module payment_options">
+                                <div class="toggle_title">
+                                    <h4>Select Payment Method</h4>
+                                </div>
+
+                                <ul>
+                                    <!-- <li>
+                                        <div class="custom-radio">
+                                            <input type="radio" id="opt1" class="" name="filter_opt">
+                                            <label for="opt1">
+                                                <span class="circle"></span>Credit Card</label>
+                                        </div>
+                                        <img src="images/cards.png" alt="Visa Cards">
+                                    </li> -->
+
+                                    <li>
+                                        <div class="custom-radio">
+                                            <input type="radio" id="opt2" class="" name="filter_opt">
+                                            <label for="opt2">
+                                                <span class="circle"></span>Paypal</label>
+                                        </div>
+                                        <div #paypal></div>
+                                        <!-- <img src="images/paypal.png" alt="Visa Cards"> -->
+                                    </li>
+
+                                    <!-- <li>
+                                        <div class="custom-radio">
+                                            <input type="radio" id="opt3" class="" name="filter_opt">
+                                            <label for="opt3">
+                                                <span class="circle"></span>Martplace Credit</label>
+                                        </div>
+                                        <p>Balance
+                                            <span class="bold">$180</span>
+                                        </p>
+                                    </li> -->
+                                </ul>
+
+                                <div class="payment_info modules__content">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <button type="submit" class="btn btn--round btn--default">Confirm Order</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end /.information_module-->
+                        </div>
+                        <!-- end /.col-md-6 -->
+                    </div>
+                    <!-- end /.row -->
+                </form>
+                <!-- end /form -->
+            </div>
+            <!-- end /.container -->
+        </div>
+        <!-- end /.dashboard_menu_area -->
+    </section>
+    <!--================================
+            END DASHBOARD AREA
+    =================================-->
+</div>

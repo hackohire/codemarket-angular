@@ -53,7 +53,7 @@
                                             <span>total</span>{{cartTotal?.total | currency}}</p>
                                     </div>
 
-                                    <a href="checkout.html" class="btn btn--round btn--md checkout_link">Proceed To Checkout</a>
+                                    <a [routerLink]="['checkout']" class="btn btn--round btn--md checkout_link">Proceed To Checkout</a>
                                 </div>
                             </div>
                             <!-- end .col-md-12 -->

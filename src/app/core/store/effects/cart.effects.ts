@@ -54,9 +54,11 @@ export class CartEffects {
         ofType<RemoveProductFromCart>(ECartActions.RemoveProductFromCart),
         map(action => action.productId),
         withLatestFrom(this._store.select(selectCartProductList)),
-        switchMap(([id, products]) => {
+        switchMap(([id, [...products]]) => {
             const i = products.length ? products.findIndex(prod => prod === id) : -1;
-            products.splice(i, 1);
+            if (i > -1) {
+                products.splice(i, 1);
+            }
             return of(products);
         }),
         tap(t => console.log(t)),

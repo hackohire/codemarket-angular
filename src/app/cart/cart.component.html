@@ -35,7 +35,7 @@
 
                         <div class="row">
                             <div class="col-md-12" *ngFor="let id of cartList">
-                                <app-single-cart-product (removeProduct)="removeProductFromCart(productId)" [product]="productService?.getSingleProductForCartByProductId(id)"></app-single-cart-product>
+                                <app-single-cart-product (removeProduct)="removeProductFromCart($event)" [product]="productService?.getSingleProductForCartByProductId(id)"></app-single-cart-product>
                             </div>
                         </div>
                         <!-- end /.row -->

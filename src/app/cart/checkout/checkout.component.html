@@ -59,11 +59,11 @@
                                     </li> -->
 
                                     <li>
-                                        <div class="custom-radio">
+                                        <!-- <div class="custom-radio">
                                             <input type="radio" id="opt2" class="" name="filter_opt">
                                             <label for="opt2">
                                                 <span class="circle"></span>Paypal</label>
-                                        </div>
+                                        </div> -->
                                         <div #paypal></div>
                                         <!-- <img src="images/paypal.png" alt="Visa Cards"> -->
                                     </li>
@@ -80,13 +80,13 @@
                                     </li> -->
                                 </ul>
 
-                                <div class="payment_info modules__content">
+                                <!-- <div class="payment_info modules__content">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <button type="submit" class="btn btn--round btn--default">Confirm Order</button>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                             <!-- end /.information_module-->
                         </div>
@@ -104,3 +104,15 @@
             END DASHBOARD AREA
     =================================-->
 </div>
+
+
+<swal #successfulPayment title="Purchased Successfully" type="success">
+    <div *swalPartial class="alert alert-info">
+      <h4>List of Purchased Products:</h4>
+      <ul>
+          <li *ngFor="let p of successfulPurchasedProducts">
+            <strong>{{p?.description}}</strong> - <strong>{{p?.amount.value}}</strong>
+          </li>
+      </ul>
+    </div>
+</swal>

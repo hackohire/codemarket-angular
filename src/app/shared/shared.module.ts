@@ -42,7 +42,8 @@ export function hljsLanguages() {
     MaterialModule,
     QuillModule,
     HighlightModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    SweetAlert2Module
   ]
 })
 export class SharedModule { }

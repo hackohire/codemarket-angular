@@ -9,6 +9,7 @@ import { AppState } from 'src/app/core/store/state/app.state';
 import { selectCartProductList } from 'src/app/core/store/selectors/cart.selectors';
 import { withLatestFrom, map, subscribeOn } from 'rxjs/operators';
 import { selectAllProductsList } from 'src/app/core/store/selectors/product.selectors';
+import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 declare var paypal;
 
 @Component({
@@ -21,6 +22,8 @@ export class CheckoutComponent implements OnInit, AfterViewInit {
   breadcumb: BreadCumb;
   cartProductsList: Observable<Product[]>;
   @ViewChild('paypal', { static: false }) paypalElement: ElementRef;
+  @ViewChild('successfulPayment', {static: false}) successfulPayment: SwalComponent;
+  successfulPurchasedProducts = [];
 
   products: any;
 
@@ -63,7 +66,7 @@ export class CheckoutComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    if (this.paypalElement && this.paypalElement.nativeElement &&this.products.length) {
+    if (this.paypalElement && this.paypalElement.nativeElement && this.products.length) {
       paypal.Buttons({
         createOrder: (data, actions) => {
           return actions.order.create({
@@ -74,6 +77,9 @@ export class CheckoutComponent implements OnInit, AfterViewInit {
           const order = await actions.order.capture();
           this.paidFor = true;
           console.log(order);
+          this.successfulPurchasedProducts = order.purchase_units;
+          this.successfulPayment.type = 'success';
+          this.successfulPayment.show();
         },
         onError: err => {
           console.log(err);

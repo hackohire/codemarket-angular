@@ -72,10 +72,10 @@
       </a>
 
       <!-- Help -->
-      <a mat-button style="color: white;" *ngIf="loggedInUser;" [routerLink]="[{outlets: {'main': ['help']}}]">
+      <!-- <a mat-button style="color: white;" *ngIf="loggedInUser;" [routerLink]="[{outlets: {'main': ['help']}}]">
         <mat-icon>help_outline
         </mat-icon> Help
-      </a>
+      </a> -->
 
       <!-- Logout -->
       <a mat-button style="color: white;" *ngIf="loggedInUser; else logIn" (click)="authService?.logout()">

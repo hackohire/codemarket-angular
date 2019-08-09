@@ -55,4 +55,8 @@ export class AddInterviewComponent implements OnInit {
       snippets: new FormControl(null),
     });
   }
+
+  submit() {
+    
+  }
 }

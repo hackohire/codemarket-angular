@@ -56,4 +56,6 @@ export class AddRequirementsComponent implements OnInit {
     });
   }
 
+  submit() {}
+
 }

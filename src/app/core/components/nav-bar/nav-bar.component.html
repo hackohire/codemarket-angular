@@ -3,8 +3,13 @@
   <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'main'" [opened]="(isHandset$ | async) === false">
     <mat-toolbar>Menu</mat-toolbar>
+
+    <!-- Sidebar Navigation List Item -->
     <mat-nav-list>
+      <!-- Dashboard -->
       <a mat-list-item [routerLink]="[{outlets: {'main': ['dashboard']}}]">Dashboard</a>
+
+      <!-- Selling -->
       <a mat-list-item [routerLink]="[{outlets: {'main': ['sell']}}]">Sell</a>
     </mat-nav-list>
   </mat-sidenav>
@@ -12,25 +17,76 @@
   <mat-sidenav-content>
 
     <mat-toolbar color="primary">
+
+      <!-- Toggle Sidebar Button -->
       <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <h2>codemarket</h2>
+
+      <!-- Logo or Application Name -->
+      <h2 [routerLink]="['/']">Codemarket</h2>
+
+      <!-- End Items -->
       <div fxFlex></div>
+
+      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+        <mat-icon>library_add</mat-icon>
+        <mat-icon>keyboard_arrow_down</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+
+        <!-- Add Product -->
+        <button mat-menu-item [routerLink]="[{outlets: {'main': ['product']}}]">
+          <!-- <mat-icon>dialpad</mat-icon> -->
+          <i style="font-size: 1.7rem !important;" class="vertical-align-middle fal fa-lightbulb-dollar fa-fw"></i>
+          <span class="vertical-align-middle">  Product</span>
+        </button>
+
+        <!-- Add Help Request -->
+        <button mat-menu-item [routerLink]="[{outlets: {'main': ['help']}}]">
+          <!-- <mat-icon>Help Request</mat-icon> -->
+          <i style="font-size: 1.7rem !important;" class="vertical-align-middle fal fa-question-circle fa-fw"></i>
+          <span>  Help Request</span>
+        </button>
+
+
+        <!-- Add Interview Assignment -->
+        <button mat-menu-item [routerLink]="[{outlets: {'main': ['interview']}}]">
+          <!-- <mat-icon>dialpad</mat-icon> -->
+          <i style="font-size: 1.7rem !important;" class="vertical-align-middle fal fa-user-tie fa-fw"></i>
+          <span>  Interview</span>
+        </button>
+
+        <!-- Add Requirements -->
+        <button mat-menu-item [routerLink]="[{outlets: {'main': ['requirement']}}]">
+          <!-- <mat-icon>notifications_off</mat-icon> -->
+          <i style="font-size: 1.7rem !important;" class="vertical-align-middle fal fa-file-alt fa-fw"></i>
+          <span> Requirements</span>
+        </button>
+      </mat-menu>
+
+      <!-- Shopping Cart -->
       <a mat-button style="color: white;" [routerLink]="[{outlets: {'main': ['cart']}}]">
         <mat-icon>shopping_cart
         </mat-icon> Cart({{cartListLength | async}})
       </a>
-      <a mat-button style="color: white;" [routerLink]="[{outlets: {'main': ['help']}}]">
+
+      <!-- Help -->
+      <a mat-button style="color: white;" *ngIf="loggedInUser;" [routerLink]="[{outlets: {'main': ['help']}}]">
         <mat-icon>help_outline
         </mat-icon> Help
       </a>
+
+      <!-- Logout -->
       <a mat-button style="color: white;" *ngIf="loggedInUser; else logIn" (click)="authService?.logout()">
         Logout</a>
 
+      <!-- Login -->
       <ng-template #logIn>
-        <a mat-button style="color: white;" (click)="login()"><mat-icon>face
-          </mat-icon> Login/Register</a>
+        <a mat-button style="color: white;" (click)="login()">
+          <mat-icon>face
+          </mat-icon> Login/Register
+        </a>
       </ng-template>
 
 

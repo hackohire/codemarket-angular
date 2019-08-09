@@ -27,8 +27,6 @@ export class CheckoutComponent implements OnInit, AfterViewInit {
 
   products: any;
 
-  paidFor = false;
-
   constructor(
     private store: Store<AppState>,
     public productService: ProductService
@@ -53,7 +51,8 @@ export class CheckoutComponent implements OnInit, AfterViewInit {
       title: 'Please Make the Payment to Purchase These Amazing Products',
       path: [
         {
-          name: 'Dashboard'
+          name: 'Dashboard',
+          pathString: '/'
         },
         {
           name: 'Cart'
@@ -75,7 +74,6 @@ export class CheckoutComponent implements OnInit, AfterViewInit {
         },
         onApprove: async (data, actions) => {
           const order = await actions.order.capture();
-          this.paidFor = true;
           console.log(order);
           this.successfulPurchasedProducts = order.purchase_units;
           this.successfulPayment.type = 'success';

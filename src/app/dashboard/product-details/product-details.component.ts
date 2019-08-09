@@ -38,7 +38,8 @@ export class ProductDetailsComponent implements OnInit {
     this.breadcumb = {
       path: [
         {
-          name: 'Dashboard'
+          name: 'Dashboard',
+          pathString: '/'
         },
         {
           name: 'Product Details'

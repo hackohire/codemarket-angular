@@ -19,6 +19,19 @@ export class HelpService {
           addQuery(helpQuery: $helpQuery) {
             _id
             question
+            categories
+            description
+            shortDescription
+            demo_url
+            video_url
+            documentation_url
+            price
+            status
+            createdAt
+            updatedAt
+            snippets {
+              language
+            }
           }
         }
       `,

@@ -5,12 +5,12 @@ interface Files {
     file: string;
     fileName: string;
 }
-export interface HelpQuery {
-    question: string;
+export interface Requirement {
+    name: string;
     description: string;
     price: number;
     _id?: string;
-    status: HelpQueryStatus;
+    status: RequirementStatus;
     createdBy: User;
     createdAt: string;
     updatedAt: string;
@@ -23,7 +23,7 @@ export interface HelpQuery {
     files: [Files];
 }
 
-export enum HelpQueryStatus {
+export enum RequirementStatus {
     Created = 'Created',
     Submitted = 'Submitted',
     Approved = 'Approved',

@@ -9,7 +9,7 @@
                 <div class="breadcrumb">
                     <ul>
                         <li *ngFor="let p of path; let i = index" [ngClass]="{'active': (path?.length - 1) === i}">
-                            <a href="#">{{p?.name}}</a>
+                            <a [routerLink]="[p?.pathString ? p.pathString : '/']">{{p?.name}}</a>
                         </li>
                     </ul>
                 </div>

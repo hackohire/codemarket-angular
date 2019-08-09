@@ -27,7 +27,8 @@ export class CartComponent implements OnInit {
       title: 'Amazing Products in Your Cart',
       path: [
         {
-          name: 'Dashboard'
+          name: 'Dashboard',
+          pathString: '/'
         },
         {
           name: 'Cart'

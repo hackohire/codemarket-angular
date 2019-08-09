@@ -14,6 +14,7 @@ import {
   MatTabsModule,
   MatSortModule,
   MatProgressBarModule,
+  MatMenuModule,
 } from '@angular/material';
 import {MatTableModule} from '@angular/material/table';
 
@@ -35,7 +36,8 @@ import {MatTableModule} from '@angular/material/table';
     MatSidenavModule,
     MatTabsModule,
     MatSortModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatMenuModule
 
   ],
   exports: [
@@ -53,7 +55,8 @@ import {MatTableModule} from '@angular/material/table';
     MatSidenavModule,
     MatTabsModule,
     MatSortModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatMenuModule
   ]
 })
 export class MaterialModule {}

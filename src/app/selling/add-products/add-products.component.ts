@@ -11,6 +11,7 @@ import { tap, switchMap } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { HighlightResult, HighlightJS } from 'ngx-highlightjs';
 import { Storage } from 'aws-amplify';
+import { BreadCumb } from 'src/app/shared/models/bredcumb.model';
 
 @Component({
   selector: 'app-add-products',
@@ -49,6 +50,8 @@ export class AddProductsComponent implements OnInit, OnDestroy {
     return this.productForm.get('priceAndFiles') as FormArray;
   }
 
+  breadcumb: BreadCumb;
+
   subscription$: Subscription;
 
   @ViewChild('file', { static: false }) file;
@@ -60,6 +63,19 @@ export class AddProductsComponent implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute,
     private _hljs: HighlightJS
   ) {
+
+    this.breadcumb = {
+      title: 'Add the Coding Problems you face in your day to day life with their solution, And start earning passive income',
+      path: [
+        {
+          name: 'Dashboard',
+          pathString: '/'
+        },
+        {
+          name: 'Add Product'
+        }
+      ]
+    };
 
     /** If it is "add-product" route intialize empty product form, but we are setting store property of "SelectedProduct" as null
      * and if it is "edit-product route" we need to subscribe to get "SelectedProduct" and user refresh the tab,

@@ -4,9 +4,9 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <div [formGroup]="askForHelpForm" class="askforhelp-form-area" (ngSubmit)="submit()">
+            <div [formGroup]="requirementForm" class="requirement-form-area" (ngSubmit)="submit()">
                 <mat-form-field class="field-full-width">
-                    <input type="text" matInput formControlName="question" placeholder="Question">
+                    <input type="text" matInput formControlName="name" placeholder="Name">
                 </mat-form-field>
 
                 <quill-editor #editor formControlName="description" [modules]="modules">
@@ -24,21 +24,21 @@
 
                 <mat-form-field class="field-full-width">
                     <input matInput formControlName="demo_url" placeholder="Demo Url">
-                    <mat-error *ngIf="askForHelpForm?.get('demo_url')?.invalid">{{'Please enter a valid URL'}}
+                    <mat-error *ngIf="requirementForm?.get('demo_url')?.invalid">{{'Please enter a valid URL'}}
                     </mat-error>
                 </mat-form-field>
 
-                <mat-form-field class="field-full-width">
+                <!-- <mat-form-field class="field-full-width">
                     <input matInput formControlName="documentation_url" placeholder="Documentation Url">
-                    <mat-error *ngIf="askForHelpForm?.get('documentation_url')?.invalid">{{'Please enter a valid URL'}}
+                    <mat-error *ngIf="requirementForm?.get('documentation_url')?.invalid">{{'Please enter a valid URL'}}
                     </mat-error>
                 </mat-form-field>
 
                 <mat-form-field class="field-full-width">
                     <input matInput formControlName="video_url" placeholder="Video Url">
-                    <mat-error *ngIf="askForHelpForm?.get('video_url')?.invalid">{{'Please enter a valid URL'}}
+                    <mat-error *ngIf="requirementForm?.get('video_url')?.invalid">{{'Please enter a valid URL'}}
                     </mat-error>
-                </mat-form-field>
+                </mat-form-field> -->
 
                 <button mat-raised-button (click)="submit()" color="primary">Submit Query</button>
             </div>

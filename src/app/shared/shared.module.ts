@@ -10,6 +10,7 @@ import typescript from 'highlight.js/lib/languages/typescript';
 import javascript from 'highlight.js/lib/languages/javascript';
 import scss from 'highlight.js/lib/languages/scss';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { RouterModule } from '@angular/router';
 
 export function hljsLanguages() {
   return [
@@ -33,7 +34,8 @@ export function hljsLanguages() {
       cancelButtonClass: 'btn'
     }),
     HighlightModule.forRoot({languages: hljsLanguages}),
-    FlexLayoutModule
+    FlexLayoutModule,
+    RouterModule
   ],
   exports: [
     BreadcumbComponent,

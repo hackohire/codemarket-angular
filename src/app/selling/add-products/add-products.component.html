@@ -1,30 +1,35 @@
-<form *ngIf="auth.loggedInUser" [formGroup]="productForm" class="product-form" (ngSubmit)="submit()">
+<app-breadcumb [title]="breadcumb?.title" [path]="breadcumb?.path"></app-breadcumb>
 
-    <mat-form-field class="field-full-width">
-        <input matInput formControlName="name" placeholder="Name">
-    </mat-form-field>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <form *ngIf="auth.loggedInUser" [formGroup]="productForm" class="product-form" (ngSubmit)="submit()">
 
-    <quill-editor #editor formControlName="description" [modules]="modules">
-    </quill-editor>
+                <mat-form-field class="field-full-width">
+                    <input matInput formControlName="name" placeholder="Name">
+                </mat-form-field>
 
-    <!-- <mat-form-field class="field-full-width">
+                <quill-editor #editor formControlName="description" [modules]="modules">
+                </quill-editor>
+
+                <!-- <mat-form-field class="field-full-width">
         <input matInput formControlName="description" placeholder="Description">
     </mat-form-field> -->
 
-    <mat-form-field class="field-full-width">
-        <input matInput formControlName="shortDescription" placeholder="Short Description">
-    </mat-form-field>
+                <mat-form-field class="field-full-width">
+                    <input matInput formControlName="shortDescription" placeholder="Short Description">
+                </mat-form-field>
 
-    <mat-form-field class="field-full-width">
-        <input matInput type="number" formControlName="totalPrice" placeholder="Total Price">
-    </mat-form-field>
+                <mat-form-field class="field-full-width">
+                    <input matInput type="number" formControlName="totalPrice" placeholder="Total Price">
+                </mat-form-field>
 
-    <mat-form-field class="field-full-width">
-        <input matInput formControlName="demo_url" placeholder="Demo Url">
-        <mat-error *ngIf="productForm?.get('demo_url')?.invalid">{{'Please enter a valid URL'}}</mat-error>
-    </mat-form-field>
+                <mat-form-field class="field-full-width">
+                    <input matInput formControlName="demo_url" placeholder="Demo Url">
+                    <mat-error *ngIf="productForm?.get('demo_url')?.invalid">{{'Please enter a valid URL'}}</mat-error>
+                </mat-form-field>
 
-    <mat-form-field class="field-full-width">
+                <!-- <mat-form-field class="field-full-width">
         <input matInput formControlName="documentation_url" placeholder="Documentation Url">
         <mat-error *ngIf="productForm?.get('documentation_url')?.invalid">{{'Please enter a valid URL'}}</mat-error>
     </mat-form-field>
@@ -32,24 +37,24 @@
     <mat-form-field class="field-full-width">
         <input matInput formControlName="video_url" placeholder="Video Url">
         <mat-error *ngIf="productForm?.get('video_url')?.invalid">{{'Please enter a valid URL'}}</mat-error>
-    </mat-form-field>
+    </mat-form-field> -->
 
 
 
 
 
-    <input type="file" #file style="display: none" (change)="onFilesAdded()" multiple />
+                <input type="file" #file style="display: none" (change)="onFilesAdded()" multiple />
 
-    <h1 mat-dialog-title>Upload Files</h1>
-    <div>
-        <button type="button" mat-raised-button color="primary" class="add-files-btn" (click)="addFiles()">
-            Add Files
-        </button>
-    </div>
+                <h1 mat-dialog-title>Upload Files</h1>
+                <div>
+                    <button type="button" mat-raised-button color="primary" class="add-files-btn" (click)="addFiles()">
+                        Add Files
+                    </button>
+                </div>
 
 
-    <!-- This is the content of the dialog, containing a list of the files to upload -->
-    <!-- <mat-dialog-content fxFlex>
+                <!-- This is the content of the dialog, containing a list of the files to upload -->
+                <!-- <mat-dialog-content fxFlex>
         <mat-list>
             <mat-list-item *ngFor="let file of files">
                 <h4 mat-line>{{file.name}}</h4>
@@ -60,29 +65,33 @@
         </mat-list>
     </mat-dialog-content> -->
 
-    <!-- This is the content of the dialog, containing a list of the files to upload -->
-    <mat-list fxFlex>
-        <mat-list-item formArrayName="priceAndFiles"
-            *ngFor="let item of priceAndFilesArrayFormControl?.controls; let i = index;">
-            <ng-container [formGroupName]="i">
-                <h4 mat-line>{{priceAndFilesArrayFormControl?.at(i)?.get('fileName')?.value}}</h4>
-                <mat-progress-bar mode="determinate"
-                    [value]="priceAndFilesArrayFormControl?.at(i)?.get('progress')?.value | async">
-                </mat-progress-bar>
-                <mat-form-field>
+                <!-- This is the content of the dialog, containing a list of the files to upload -->
+                <mat-list fxFlex>
+                    <mat-list-item formArrayName="priceAndFiles"
+                        *ngFor="let item of priceAndFilesArrayFormControl?.controls; let i = index;">
+                        <ng-container [formGroupName]="i">
+                            <h4 mat-line>{{priceAndFilesArrayFormControl?.at(i)?.get('fileName')?.value}}</h4>
+                            <mat-progress-bar mode="determinate"
+                                [value]="priceAndFilesArrayFormControl?.at(i)?.get('progress')?.value | async">
+                            </mat-progress-bar>
+                            <!-- <mat-form-field>
                     <input matInput type="number" formControlName="price" placeholder="Price">
-                </mat-form-field>
-                <mat-icon (click)="remove(i)">close</mat-icon>
-            </ng-container>
-        </mat-list-item>
-    </mat-list>
+                </mat-form-field> -->
+                            <mat-icon (click)="remove(i)">close</mat-icon>
+                        </ng-container>
+                    </mat-list-item>
+                </mat-list>
 
 
 
 
-    <button mat-raised-button color="primary">Submit Product</button>
+                <button mat-raised-button color="primary">Submit Product</button>
 
-</form>
+            </form>
+
+        </div>
+    </div>
+</div>
 
 <!-- <pre>{{productForm?.value | json}}</pre> -->
 <!-- <pre>{{priceAndFilesArrayFormControl?.length}}</pre> -->

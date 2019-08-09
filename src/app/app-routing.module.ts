@@ -27,8 +27,23 @@ const routes: Routes = [
     outlet: 'main'
   },
   {
+    path: 'product',
+    loadChildren: () => import('./selling/add-products/add-products.module').then(module => module.AddProductsModule),
+    outlet: 'main'
+  },
+  {
     path: 'help',
     loadChildren: () => import('./help/help.module').then(module => module.HelpModule),
+    outlet: 'main'
+  },
+  {
+    path: 'interview',
+    loadChildren: () => import('./interview/interview.module').then(module => module.InterviewModule),
+    outlet: 'main'
+  },
+  {
+    path: 'requirement',
+    loadChildren: () => import('./requirements/requirements.module').then(module => module.RequirementsModule),
     outlet: 'main'
   },
   {

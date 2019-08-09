@@ -5,16 +5,16 @@ import { AppComponent } from './app.component';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/(side:dashboard)',
+    redirectTo: '/(main:dashboard)',
     pathMatch: 'full'
   },
   {
     path: 'id_token',
-    redirectTo: '/(side:dashboard)',
+    redirectTo: '/(main:dashboard)',
   },
   {
     path: 'access_token',
-    redirectTo: '/(side:dashboard)',
+    redirectTo: '/(main:dashboard)',
   },
   {
     path: 'dashboard',
@@ -39,7 +39,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {useHash: true})],
+  imports: [RouterModule.forRoot(routes, {})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

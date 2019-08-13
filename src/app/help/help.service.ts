@@ -13,6 +13,30 @@ export class HelpService {
   constructor(private apollo: Apollo) { }
 
   addQuery(helpQuery: HelpQuery): Observable<HelpQuery> {
+    const codeFragment = gql`
+      fragment Code on CodeBlock {
+        type
+        data {
+          code
+          language
+        }
+      }
+    `;
+
+    const imageFragment = gql`
+    fragment Image on ImageBlock {
+      type
+      data {
+        caption
+        file {
+          url
+        }
+        stretched
+        withBackground
+        withBorder
+      }
+    }
+  `;
     return this.apollo.mutate({
       mutation: gql`
         mutation addQuery($helpQuery: HelpQueryInput) {
@@ -20,7 +44,10 @@ export class HelpService {
             _id
             question
             categories
-            description
+            description {
+                ...Code
+                ...Image
+            }
             shortDescription
             demo_url
             video_url
@@ -34,6 +61,8 @@ export class HelpService {
             }
           }
         }
+        ${codeFragment}
+        ${imageFragment}
       `,
       variables: {
         helpQuery: helpQuery

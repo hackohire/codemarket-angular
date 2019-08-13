@@ -42,9 +42,10 @@ export class ProductService {
         query: gql`
           query getAllProducts {
             getAllProducts {
-              ${this.productFields}
+              ...Product
             }
           }
+          ${this.productFields}
         `
       }
     ).pipe(
@@ -60,9 +61,10 @@ export class ProductService {
         query: gql`
           query getProductById($productId: String) {
             getProductById(productId: $productId) {
-              ${this.productFields}
+              ...Product
             }
           }
+          ${this.productFields}
         `,
         variables: {
           productId: productId

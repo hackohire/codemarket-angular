@@ -1,5 +1,6 @@
 import { User } from './user.model';
 import { HighlightResult } from 'ngx-highlightjs';
+import { BlockToolData } from '@editorjs/editorjs';
 
 interface Files {
     file: string;
@@ -7,7 +8,10 @@ interface Files {
 }
 export interface HelpQuery {
     question: string;
-    description: string;
+    description: [{
+        type: string;
+        data: BlockToolData
+    }];
     price: number;
     _id?: string;
     status: HelpQueryStatus;

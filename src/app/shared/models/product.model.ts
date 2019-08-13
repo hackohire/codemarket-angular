@@ -1,5 +1,6 @@
 import { User } from './user.model';
 import { HighlightResult } from 'ngx-highlightjs';
+import { BlockToolData } from '@editorjs/editorjs';
 
 export interface PriceAndFiles {
     fileName: string;
@@ -11,7 +12,10 @@ export interface PriceAndFiles {
 
 export interface Product {
     name: string;
-    description: string;
+    description: [{
+        type: string;
+        data: BlockToolData
+    }];
     shortDescription?: string;
     featuredImage?: string;
     createdBy: User;

@@ -25,9 +25,10 @@ export class SellingProductsService {
         mutation: gql`
           mutation addProduct($product: ProductInput) {
             addProduct(product: $product) {
-              ${this.productFields}
+              ...Product
             }
           }
+          ${this.productFields}
         `,
         variables: {
           product: product
@@ -44,9 +45,10 @@ export class SellingProductsService {
         mutation: gql`
           mutation updateProduct($product: ProductInput) {
             updateProduct(product: $product) {
-              ${this.productFields}
+              ..Product
             }
           }
+          ${this.productFields}
         `,
         variables: {
           product: product
@@ -63,9 +65,10 @@ export class SellingProductsService {
         query: gql`
           query getProductsByUserId($userId: String) {
             getProductsByUserId(userId: $userId) {
-              ${this.productFields}
+              ...Product
             }
           }
+          ${this.productFields}
         `,
         variables: {
           userId: this.auth.loggedInUser._id

@@ -164,7 +164,7 @@ export class AddProductsComponent implements OnInit, OnDestroy {
       this.productForm.get('createdBy').setValue(this.auth.loggedInUser._id);
     }
 
-    if (this.idFromControl.value) {
+    if ( this.idFromControl && this.idFromControl.value) {
       this.store.dispatch(new UpdatePrdouct(this.productForm.value));
     } else {
       this.productForm.removeControl('_id');
@@ -242,6 +242,11 @@ export class AddProductsComponent implements OnInit, OnDestroy {
   remove(index: number) {
     this.files.splice(index, 1);
     this.priceAndFilesArrayFormControl.removeAt(index);
+  }
+
+  updateFormData(event) {
+    console.log(event);
+    this.productForm.get('description').setValue(event, {emitEvent: false, onlySelf: true});
   }
 
 }

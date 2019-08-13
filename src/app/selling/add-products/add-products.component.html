@@ -9,8 +9,11 @@
                     <input matInput formControlName="name" placeholder="Name">
                 </mat-form-field>
 
-                <quill-editor #editor formControlName="description" [modules]="modules">
-                </quill-editor>
+
+                <app-editor (output)="updateFormData($event)" [id]="'product-editor'"></app-editor>
+
+                <!-- <quill-editor #editor formControlName="description" [modules]="modules">
+                </quill-editor> -->
 
                 <!-- <mat-form-field class="field-full-width">
         <input matInput formControlName="description" placeholder="Description">

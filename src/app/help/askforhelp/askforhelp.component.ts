@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { BreadCumb } from 'src/app/shared/models/bredcumb.model';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ProductStatus } from 'src/app/shared/models/product.model';
@@ -6,7 +6,8 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/core/store/state/app.state';
 import { AddQuery } from 'src/app/core/store/actions/help.actions';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { HighlightJS } from 'ngx-highlightjs';
+import EditorJS from '@editorjs/editorjs';
+
 
 @Component({
   selector: 'app-askforhelp',
@@ -22,6 +23,7 @@ export class AskforhelpComponent implements OnInit {
     syntax: true,
   };
 
+
   get createdBy() {
     return this.askForHelpForm.get('createdBy');
   }
@@ -33,8 +35,8 @@ export class AskforhelpComponent implements OnInit {
   constructor(
     private store: Store<AppState>,
     private authService: AuthService,
-    private _hljs: HighlightJS
   ) {
+
     this.breadcumb = {
       title: 'Ask For Help By Filling out the given form',
       path: [
@@ -52,6 +54,7 @@ export class AskforhelpComponent implements OnInit {
 
   ngOnInit() {
   }
+
 
   askForHelpFormInitialization(): void {
     this.askForHelpForm = new FormGroup({
@@ -74,16 +77,16 @@ export class AskforhelpComponent implements OnInit {
     console.log(this.askForHelpForm.value);
 
     /* Identify the programming language based on code snippets  **/
-    const codeSnippets = [].slice.call(document.getElementsByTagName('pre'), 0);
-    if (codeSnippets.length) {
-      const snips = [];
-      for (const s of codeSnippets) {
-        const snip = this._hljs.highlightAuto(s.innerText, ['javascript', 'typescript', 'scss']);
-        snips.push(snip);
-      }
-      this.askForHelpForm.value.snips = snips;
-      console.log(snips);
-    }
+    // const codeSnippets = [].slice.call(document.getElementsByTagName('pre'), 0);
+    // if (codeSnippets.length) {
+    //   const snips = [];
+    //   for (const s of codeSnippets) {
+    //     const snip = this._hljs.highlightAuto(s.innerText, ['javascript', 'typescript', 'scss']);
+    //     snips.push(snip);
+    //   }
+    //   this.askForHelpForm.value.snips = snips;
+    //   console.log(snips);
+    // }
 
 
 
@@ -91,11 +94,16 @@ export class AskforhelpComponent implements OnInit {
       this.createdBy.setValue(this.authService.loggedInUser._id);
     }
 
-    if (!this.idFromControl.value) {
+    if (this.idFromControl && !this.idFromControl.value) {
       this.askForHelpForm.removeControl('_id');
     }
 
     this.store.dispatch(new AddQuery(this.askForHelpForm.value));
+  }
+
+  updateFormData(event) {
+    console.log(event);
+    this.askForHelpForm.get('description').setValue(event, {emitEvent: false, onlySelf: true});
   }
 
 }

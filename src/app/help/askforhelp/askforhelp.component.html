@@ -3,14 +3,17 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-12">
-            <div [formGroup]="askForHelpForm" class="askforhelp-form-area" (ngSubmit)="submit()">
+        <div class="col-md-12" class="askforhelp-form-area">
+            <div [formGroup]="askForHelpForm"  (ngSubmit)="submit()">
+
                 <mat-form-field class="field-full-width">
                     <input type="text" matInput formControlName="question" placeholder="Question">
                 </mat-form-field>
 
-                <quill-editor #editor formControlName="description" [modules]="modules">
-                </quill-editor>
+                <app-editor (output)="updateFormData($event)" [id]="'help-editor'"></app-editor>
+
+                <!-- <quill-editor #editor formControlName="description" [modules]="modules">
+                </quill-editor> -->
 
 
 

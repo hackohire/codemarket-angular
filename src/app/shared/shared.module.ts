@@ -11,6 +11,7 @@ import javascript from 'highlight.js/lib/languages/javascript';
 import scss from 'highlight.js/lib/languages/scss';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { RouterModule } from '@angular/router';
+import { EditorComponent } from './components/editor/editor.component';
 
 export function hljsLanguages() {
   return [
@@ -20,7 +21,7 @@ export function hljsLanguages() {
   ];
 }
 @NgModule({
-  declarations: [BreadcumbComponent],
+  declarations: [BreadcumbComponent, EditorComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -39,6 +40,7 @@ export function hljsLanguages() {
   ],
   exports: [
     BreadcumbComponent,
+    EditorComponent,
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,

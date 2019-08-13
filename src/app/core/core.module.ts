@@ -4,7 +4,7 @@ import { ApolloModule, Apollo } from 'apollo-angular';
 import { HttpLinkModule, HttpLink } from 'apollo-angular-link-http';
 import { environment } from 'src/environments/environment';
 import { ApolloLink } from 'apollo-link';
-import { InMemoryCache } from 'apollo-cache-inmemory';
+import { InMemoryCache, IntrospectionFragmentMatcher } from 'apollo-cache-inmemory';
 import { HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import { appReducesrs } from './store/reducers/app.reducers';
@@ -71,8 +71,30 @@ export class CoreModule {
     apollo.create({
       link: authLink.concat(httpCodemarket),
       cache: new InMemoryCache({
-        addTypename: false
+        addTypename: true,
+
+        /*
+          Whenever Schema gets changed for Product, Help, Interview and Requirements => "description" field
+          Resolver also has to be changed accordingly
+        */
+        fragmentMatcher: new IntrospectionFragmentMatcher({
+          introspectionQueryResultData: {
+            __schema: {
+              types: [
+                {
+                  kind: 'UNION',
+                  name: 'descriptionBlocks',
+                  possibleTypes: [
+                    { name: 'CodeBlock' },
+                    { name: 'ImageBlock' },
+                  ],
+                },
+              ],
+            },
+          },
+        })
       }),
+
     });
     /** Codemarket Apollo Client ends here */
 

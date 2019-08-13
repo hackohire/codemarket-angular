@@ -3,6 +3,7 @@ export const environment = {
   COGNITO_AUTH_DOMAIN: 'https://platform.auth.us-east-1.amazoncognito.com',
   platform_graphql_url: 'https://qs3c3z6r40.execute-api.ap-south-1.amazonaws.com/prod/graphql',
   graphql_url: 'https://qnzhh56xx7.execute-api.ap-south-1.amazonaws.com/prod/graphql',
+  codemarketFilesBucket: 'https://codemarket-files.s3.amazonaws.com/public/',
   applicationId: '5d2ef428bbfa6576b357d5d4',
   oauth: {
     // Domain name

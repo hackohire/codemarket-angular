@@ -4,6 +4,7 @@ import gql from 'graphql-tag';
 import { HelpQuery } from '../shared/models/help-query.model';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { description } from '../shared/constants/fragments_constatnts';
 
 @Injectable({
   providedIn: 'root'
@@ -13,30 +14,6 @@ export class HelpService {
   constructor(private apollo: Apollo) { }
 
   addQuery(helpQuery: HelpQuery): Observable<HelpQuery> {
-    const codeFragment = gql`
-      fragment Code on CodeBlock {
-        type
-        data {
-          code
-          language
-        }
-      }
-    `;
-
-    const imageFragment = gql`
-    fragment Image on ImageBlock {
-      type
-      data {
-        caption
-        file {
-          url
-        }
-        stretched
-        withBackground
-        withBorder
-      }
-    }
-  `;
     return this.apollo.mutate({
       mutation: gql`
         mutation addQuery($helpQuery: HelpQueryInput) {
@@ -45,8 +22,7 @@ export class HelpService {
             question
             categories
             description {
-                ...Code
-                ...Image
+                ...Description
             }
             shortDescription
             demo_url
@@ -61,8 +37,7 @@ export class HelpService {
             }
           }
         }
-        ${codeFragment}
-        ${imageFragment}
+        ${description}
       `,
       variables: {
         helpQuery: helpQuery

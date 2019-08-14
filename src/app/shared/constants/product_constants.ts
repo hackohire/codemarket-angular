@@ -1,30 +1,6 @@
 
 import gql from 'graphql-tag';
-
-const codeFragment = gql`
-fragment Code on CodeBlock {
-  type
-  data {
-    code
-    language
-  }
-}
-`;
-
-const imageFragment = gql`
-    fragment Image on ImageBlock {
-    type
-    data {
-        caption
-        file {
-            url
-        }
-        stretched
-        withBackground
-        withBorder
-    }
-}
-`;
+import { description } from './fragments_constatnts';
 
 
 export const productConstants = {
@@ -38,8 +14,7 @@ export const productConstants = {
         }
         categories
         description {
-            ...Code
-            ...Image
+            ...Description
         }
         shortDescription
         demo_url
@@ -53,7 +28,6 @@ export const productConstants = {
             language
         }
     }
-    ${codeFragment}
-    ${imageFragment}
+    ${description}
     `,
 };

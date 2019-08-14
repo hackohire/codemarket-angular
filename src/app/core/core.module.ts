@@ -16,6 +16,8 @@ import { EPlatformActions } from './store/actions/app.actions';
 import { ProductEffects } from './store/effects/product.effects';
 import { HelpEffects } from './store/effects/help.effects';
 import { CartEffects } from './store/effects/cart.effects';
+import { InterviewEffects } from './store/effects/interview.effects';
+import { RequirementEffects } from './store/effects/requirement.effects';
 
 export function clearState(reducer) {
   return (state, action) => {
@@ -37,7 +39,7 @@ export function clearState(reducer) {
     HttpClientModule,
     HttpLinkModule,
     StoreModule.forRoot(appReducesrs(), { metaReducers: [clearState] }),
-    EffectsModule.forRoot([UserEffects, ProductEffects, HelpEffects, CartEffects]),
+    EffectsModule.forRoot([UserEffects, ProductEffects, HelpEffects, CartEffects, InterviewEffects, RequirementEffects]),
     StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
     StoreDevtoolsModule.instrument(),
   ],
@@ -85,6 +87,8 @@ export class CoreModule {
                   kind: 'UNION',
                   name: 'descriptionBlocks',
                   possibleTypes: [
+                    { name: 'HeaderhBlock' },
+                    { name: 'ParagraphBlock' },
                     { name: 'CodeBlock' },
                     { name: 'ImageBlock' },
                   ],

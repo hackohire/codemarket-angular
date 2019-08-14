@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { Requirement } from 'src/app/shared/models/Requirement.model';
+import { Requirement } from 'src/app/shared/models/requirement.model';
 
 export enum ERequirementActions {
     AddRequirement = '[Requirement] Add Requirement',

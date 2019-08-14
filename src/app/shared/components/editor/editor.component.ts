@@ -15,6 +15,7 @@ export class EditorComponent implements OnInit, OnDestroy {
 
   editor: EditorJS;
   @Input() id: string;
+  @Input() data: [];
   @Output() output: EventEmitter<any> = new EventEmitter();
 
 
@@ -69,6 +70,9 @@ export class EditorComponent implements OnInit, OnDestroy {
         code: CodeWithLanguageSelection,
       },
       holder: this.id,
+      data: {
+        blocks: this.data ? this.data : []
+      },
       placeholder: 'Let`s write a help request!',
       onChange: (() => {
         this.editor.save().then((outputData) => {

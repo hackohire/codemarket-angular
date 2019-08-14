@@ -123,8 +123,10 @@
                         <div class="tab-content">
                             <div class="tab-pane fade show product-tab active" id="product-details">
                                 <div class="tab-content-wrapper">
-                                    <quill-view *ngIf="product?.description; else noDescription;" [modules]="modules"
-                                        [content]="product.description" format="text" theme="snow"></quill-view>
+                                    <!-- <quill-view *ngIf="product?.description; else noDescription;" [modules]="modules"
+                                        [content]="product.description" format="text" theme="snow"></quill-view> -->
+
+                                        <app-editor [data]="product?.description" [id]="'product-editor'"></app-editor>
                                     <ng-template #noDescription>
                                         <span>No Description</span>
                                     </ng-template>

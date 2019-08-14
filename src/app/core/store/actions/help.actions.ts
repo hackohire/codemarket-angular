@@ -1,5 +1,4 @@
 import { Action } from '@ngrx/store';
-import { User } from 'src/app/shared/models/user.model';
 import { HelpQuery } from 'src/app/shared/models/help-query.model';
 
 export enum EHelpActions {

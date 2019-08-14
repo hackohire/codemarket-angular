@@ -131,7 +131,7 @@ export class AddProductsComponent implements OnInit, OnDestroy {
       video_url: new FormControl(p && p.video_url ? p.video_url : '', [Validators.pattern(this.urlRegex)]),
       status: new FormControl(p && p.status ? p.status : ProductStatus.Created),
       _id: new FormControl(p && p._id ? p._id : ''),
-      snippets: new FormControl(p && p.snippets.length ? p.snippets : null),
+      snippets: new FormControl(p && p.snippets && p.snippets.length ? p.snippets : null),
       priceAndFiles: new FormArray([])
     });
   }

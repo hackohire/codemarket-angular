@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { BreadCumb } from 'src/app/shared/models/bredcumb.model';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { ProductStatus } from 'src/app/shared/models/product.model';
 import { InterviewStatus } from 'src/app/shared/models/interview.model';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { AddInterview } from 'src/app/core/store/actions/interview.actions';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/core/store/state/app.state';
 
 @Component({
   selector: 'app-add-interview',
@@ -19,7 +22,18 @@ export class AddInterviewComponent implements OnInit {
     syntax: true,
   };
 
-  constructor() {
+  get createdBy() {
+    return this.interviewForm.get('createdBy');
+  }
+
+  get idFromControl() {
+    return this.interviewForm.get('_id');
+  }
+
+  constructor(
+    private authService: AuthService,
+    private store: Store<AppState>
+  ) {
     this.breadcumb = {
       title: 'Add Interview Details',
       path: [
@@ -48,15 +62,26 @@ export class AddInterviewComponent implements OnInit {
       shortDescription: new FormControl(),
       categories: new FormControl(null),
       demo_url: new FormControl('', [Validators.pattern(this.urlRegex)]),
-      documentation_url: new FormControl('', [Validators.pattern(this.urlRegex)]),
-      video_url: new FormControl('', [Validators.pattern(this.urlRegex)]),
       status: new FormControl(InterviewStatus.Created),
       _id: new FormControl(''),
-      snippets: new FormControl(null),
     });
   }
 
   submit() {
-    
+
+    if (this.authService.loggedInUser && !this.createdBy.value) {
+      this.createdBy.setValue(this.authService.loggedInUser._id);
+    }
+
+    if (this.idFromControl && !this.idFromControl.value) {
+      this.interviewForm.removeControl('_id');
+    }
+
+    this.store.dispatch(new AddInterview(this.interviewForm.value));
+  }
+
+  updateFormData(event) {
+    console.log(event);
+    this.interviewForm.get('description').setValue(event, {emitEvent: false, onlySelf: true});
   }
 }

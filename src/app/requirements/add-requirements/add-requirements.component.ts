@@ -3,6 +3,11 @@ import { BreadCumb } from 'src/app/shared/models/bredcumb.model';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ProductStatus } from 'src/app/shared/models/product.model';
 import { RequirementStatus } from 'src/app/shared/models/requirement.model';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { Store } from '@ngrx/store';
+import { AddInterview } from 'src/app/core/store/actions/interview.actions';
+import { AppState } from 'src/app/core/store/state/app.state';
+import { AddRequirement } from 'src/app/core/store/actions/requirement.actions';
 
 @Component({
   selector: 'app-add-requirements',
@@ -19,7 +24,18 @@ export class AddRequirementsComponent implements OnInit {
     syntax: true,
   };
 
-  constructor() {
+  get createdBy() {
+    return this.requirementForm.get('createdBy');
+  }
+
+  get idFromControl() {
+    return this.requirementForm.get('_id');
+  }
+
+  constructor(
+    private authService: AuthService,
+    private store: Store<AppState>
+  ) {
     this.breadcumb = {
       title: 'Add Requirement Details',
       path: [
@@ -48,14 +64,27 @@ export class AddRequirementsComponent implements OnInit {
       shortDescription: new FormControl(),
       categories: new FormControl(null),
       demo_url: new FormControl('', [Validators.pattern(this.urlRegex)]),
-      documentation_url: new FormControl('', [Validators.pattern(this.urlRegex)]),
-      video_url: new FormControl('', [Validators.pattern(this.urlRegex)]),
       status: new FormControl(RequirementStatus.Created),
       _id: new FormControl(''),
-      snippets: new FormControl(null),
     });
   }
 
-  submit() {}
+  submit() {
+
+    if (this.authService.loggedInUser && !this.createdBy.value) {
+      this.createdBy.setValue(this.authService.loggedInUser._id);
+    }
+
+    if (this.idFromControl && !this.idFromControl.value) {
+      this.requirementForm.removeControl('_id');
+    }
+
+    this.store.dispatch(new AddRequirement(this.requirementForm.value));
+  }
+
+  updateFormData(event) {
+    console.log(event);
+    this.requirementForm.get('description').setValue(event, {emitEvent: false, onlySelf: true});
+  }
 
 }

@@ -1,5 +1,6 @@
 import { User } from './user.model';
 import { HighlightResult } from 'ngx-highlightjs';
+import { BlockToolData } from '@editorjs/editorjs';
 
 interface Files {
     file: string;
@@ -7,7 +8,10 @@ interface Files {
 }
 export interface Interview {
     name: string;
-    description: string;
+    description: [{
+        type: string;
+        data: BlockToolData
+    }];
     price: number;
     _id?: string;
     status: InterviewStatus;
@@ -16,11 +20,11 @@ export interface Interview {
     updatedAt: string;
     categories?: [];
     demo_url?: string;
-    documentation_url?: string;
-    video_url?: string;
-    snippets?: [HighlightResult];
+    // documentation_url?: string;
+    // video_url?: string;
+    // snippets?: [HighlightResult];
     shortDescription?: string;
-    files: [Files];
+    // files: [Files];
 }
 
 export enum InterviewStatus {

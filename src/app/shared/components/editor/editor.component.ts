@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input, OnDestroy, ViewEncapsulation } from '@angular/core';
 import EditorJS from '@editorjs/editorjs';
 import Header from '@editorjs/header';
 import ImageTool from '@editorjs/image';
@@ -9,12 +9,14 @@ import { CodeWithLanguageSelection } from 'src/app/insert-code-snippet';
 @Component({
   selector: 'app-editor',
   templateUrl: './editor.component.html',
-  styleUrls: ['./editor.component.scss']
+  styleUrls: ['./editor.component.scss'],
+  // encapsulation: ViewEncapsulation.None
 })
 export class EditorComponent implements OnInit, OnDestroy {
 
   editor: EditorJS;
   @Input() id: string;
+  @Input() readOnly: boolean = false;
   @Input() data: [];
   @Output() output: EventEmitter<any> = new EventEmitter();
 
@@ -67,7 +69,12 @@ export class EditorComponent implements OnInit, OnDestroy {
             }
           }
         },
-        code: CodeWithLanguageSelection,
+        code: {
+          class: CodeWithLanguageSelection,
+          config: {
+            readOnly: this.readOnly
+          }
+        },
       },
       holder: this.id,
       data: {
@@ -85,12 +92,18 @@ export class EditorComponent implements OnInit, OnDestroy {
       })
 
     });
+
   }
 
   ngOnDestroy() {
     if (this.editor) {
       this.editor.destroy();
     }
+  }
+
+  handleEnterKeyPress(e: Event) {
+    // e.preventDefault();
+    // e.stopPropagation()
   }
 
 }

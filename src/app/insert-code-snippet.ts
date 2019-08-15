@@ -25,6 +25,7 @@
 export class CodeWithLanguageSelection {
     api: any;
     placeholder: string;
+    config: {readOnly: boolean};
     CSS: { baseClass: any; input: any; wrapper: string; textarea: string; language?: string };
     nodes: { holder: any; textarea: any; select: any };
     _data: { code: string, language?: string};
@@ -74,6 +75,8 @@ export class CodeWithLanguageSelection {
 
         this.api = api;
 
+        this.config = config;
+
         this.placeholder = config.placeholder || CodeWithLanguageSelection.DEFAULT_PLACEHOLDER;
 
         this.CSS = {
@@ -109,29 +112,8 @@ export class CodeWithLanguageSelection {
         const pre = document.createElement('pre');
         const textarea = document.createElement('textarea');
 
-        const language = document.createElement('select');
-        // const textarea = document.createElement('textarea');
-
-        // const selectwrapper = document.createElement('div');
-
-
-
         textarea.textContent = this.data.code;
         textarea.contentEditable = 'true';
-
-        // textarea.placeholder = this.placeholder;
-
-
-
-        language.dataset.placeholder = CodeWithLanguageSelection.DEFAULT_LANGUAGE_PLACEHOLDER;
-
-        language.options.add(new Option('Select a Language', '', true));
-
-        for (const index of CodeWithLanguageSelection.DEFAULT_FORMAT_CONFIG) {
-            if (index) {
-                language.options[language.options.length] = new Option(index, index);
-            }
-        }
 
 
         wrapper.classList.add(this.CSS.baseClass, this.CSS.wrapper);
@@ -150,21 +132,44 @@ export class CodeWithLanguageSelection {
         textarea.style.resize = 'vertical';
 
 
-        language.classList.add(this.CSS.language);
+        if (this.config && this.config.readOnly) {
+            const selectedLanguage = document.createElement('span');
+            selectedLanguage.innerText = this.data && this.data.language ? this.data.language : '';
+            wrapper.appendChild(selectedLanguage);
+        } else {
+            const language = document.createElement('select');
 
-        wrapper.appendChild(language);
+            language.dataset.placeholder = CodeWithLanguageSelection.DEFAULT_LANGUAGE_PLACEHOLDER;
+
+            language.options.add(new Option('Select a Language', '', true));
+
+            for (const index of CodeWithLanguageSelection.DEFAULT_FORMAT_CONFIG) {
+                if (index) {
+                    language.options[language.options.length] = new Option(index, index);
+                }
+            }
+
+            language.value = this.data.language;
+
+            language.classList.add(this.CSS.language);
+
+            wrapper.appendChild(language);
+
+            this.nodes.select = language;
+
+            // this.api.listeners.on(language, 'change', (event) => {
+                // console.log(event);
+                // pre.className = `language-${event.target.value}`;
+                // textarea.className = `language-${event.target.value}`;
+                // Prism.highlightAll();
+                // selectedLanguage.innerText = event.target.value;
+            // });
+        }
+
         wrapper.appendChild(pre).appendChild(textarea);
         // wrapper.appendChild(textarea);
 
         this.nodes.textarea = textarea;
-        this.nodes.select = language;
-
-        // this.api.listeners.on(language, 'change', (event) => {
-        //     console.log(event);
-        //     pre.className = `language-${event.target.value}`;
-        //     textarea.className = `language-${event.target.value}`;
-        //     Prism.highlightAll();
-        // });
 
         // this.api.listeners.on(textarea, 'blur', () => {
         //     Prism.highlightAll();
@@ -204,7 +209,8 @@ export class CodeWithLanguageSelection {
         return {
             // code: codeWrapper.querySelector('PRE').textContent,
             code: codeWrapper.querySelector('pre textarea').value,
-            language: codeWrapper.querySelector('select').value
+            language: codeWrapper.querySelector('select') && codeWrapper.querySelector('select').value ?
+                 codeWrapper.querySelector('select').value : ''
         };
     }
 

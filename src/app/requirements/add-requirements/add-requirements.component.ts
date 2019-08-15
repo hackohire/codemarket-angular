@@ -79,7 +79,7 @@ export class AddRequirementsComponent implements OnInit {
       this.requirementForm.removeControl('_id');
     }
 
-    this.store.dispatch(new AddRequirement(this.requirementForm.value));
+    this.store.dispatch(AddRequirement({requirement: this.requirementForm.value}));
   }
 
   updateFormData(event) {

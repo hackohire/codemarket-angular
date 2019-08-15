@@ -1,6 +1,4 @@
-import { Action } from '@ngrx/store';
-import { User } from 'src/app/shared/models/user.model';
-import { HelpQuery } from 'src/app/shared/models/help-query.model';
+import { createAction, props } from '@ngrx/store';
 import { Product } from 'src/app/shared/models/product.model';
 
 export enum ECartActions {
@@ -15,44 +13,35 @@ export enum ECartActions {
     GetCartProductsList = '[Cart] Get Cart Products List'
 }
 
+export const AddToCart = createAction(
+    ECartActions.AddToCart,
+    props<{productId: string}>()
+);
 
-export class AddToCart implements Action {
-    public readonly type = ECartActions.AddToCart;
-    constructor(public productId: string) {}
-}
+export const AddedToCartSuccessfully = createAction(
+    ECartActions.AddedToCartSuccessfully,
+    props<{product: Product}>()
+);
 
-export class AddedToCartSuccessfully implements Action {
-    public readonly type = ECartActions.AddedToCartSuccessfully;
-    constructor(public product: Product) {}
-}
+export const UpdateCartProductList = createAction(
+    ECartActions.UpdateCartProductList,
+    props<{products: string[]}>()
+);
 
-export class UpdateCartProductList implements Action {
-    public readonly type = ECartActions.UpdateCartProductList;
-    constructor(public products: string[]) {}
-}
+export const GetCartProductsList = createAction(
+    ECartActions.GetCartProductsList
+);
 
-export class GetCartProductsList implements Action {
-    public readonly type = ECartActions.GetCartProductsList;
-    constructor() {}
-}
+export const RemoveProductFromCart = createAction(
+    ECartActions.RemoveProductFromCart,
+    props<{productId: string}>()
+);
 
-export class RemoveProductFromCart implements Action {
-    public readonly type = ECartActions.RemoveProductFromCart;
-    constructor(public productId: string) {}
-}
+export const UpdateCartTotal = createAction(
+    ECartActions.UpdateCartTotal
+);
 
-export class UpdateCartTotal implements Action {
-    public readonly type = ECartActions.UpdateCartTotal;
-    constructor() {}
-}
-
-export class UpdateCartTotalSuccess implements Action {
-    public readonly type = ECartActions.UpdateCartTotalSuccess;
-    constructor(public cartTotal: number, public cartSubTotal: number) {}
-}
-
-
-
-export type CartActions = AddToCart | AddedToCartSuccessfully | RemoveProductFromCart |
-            UpdateCartProductList | UpdateCartTotal | UpdateCartTotalSuccess | GetCartProductsList;
-
+export const UpdateCartTotalSuccess = createAction(
+    ECartActions.UpdateCartTotalSuccess,
+    props<{cartTotal: number, cartSubTotal: number}>()
+);

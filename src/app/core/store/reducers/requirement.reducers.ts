@@ -1,20 +1,18 @@
 import { initialRequirementState, RequirementState } from '../state/requirement.state';
-import { EHelpActions } from '../actions/help.actions';
-import { RequirementActions, ERequirementActions } from '../actions/requirement.actions';
+import { RequirementAddedSuccessfully } from '../actions/requirement.actions';
+import { createReducer, on, Action } from '@ngrx/store';
 
 
-export function requirementReducers(
-    state = initialRequirementState,
-    action: RequirementActions
-): RequirementState {
-    switch (action.type) {
-        case ERequirementActions.RequirementAddedSuccessfully:
-            return {
-                ...state,
-                selectedRequirement: action.requirement
-            };
-        default:
-            return state;
-    }
+export const requirementReducers = createReducer(
+    initialRequirementState,
+    on(RequirementAddedSuccessfully, (state, { requirement }) => ({
+        ...state,
+        selectedRequirement: requirement
+    })
+    )
+);
+
+export function reducer(state: RequirementState | undefined, action: Action) {
+    return requirementReducers(state, action);
 }
 

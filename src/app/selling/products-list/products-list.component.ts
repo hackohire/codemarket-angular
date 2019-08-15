@@ -49,7 +49,7 @@ export class ProductsListComponent implements OnInit, OnDestroy {
 
     this.userSubsription = this.auth.loggedInUser$.subscribe((u) => {
       if (u) {
-        this.store.dispatch(new GetProductsByUserId());
+        this.store.dispatch(GetProductsByUserId());
       }
     });
 
@@ -70,7 +70,7 @@ export class ProductsListComponent implements OnInit, OnDestroy {
   }
 
   editProduct(product): void {
-    this.store.dispatch(new SetSelectedProduct(product));
+    this.store.dispatch(SetSelectedProduct({product}));
     // this.router.navigate(['/add-product'], );
   }
 

@@ -1,4 +1,4 @@
-import { Action } from '@ngrx/store';
+import { createAction, props } from '@ngrx/store';
 import { Interview } from 'src/app/shared/models/interview.model';
 
 export enum EInterviewActions {
@@ -6,16 +6,13 @@ export enum EInterviewActions {
     InterviewAddedSuccessfully = '[Interview] Interview Added Successfully',
 }
 
+export const AddInterview = createAction(
+    EInterviewActions.AddInterview,
+    props<{interview: Interview}>()
+);
 
-export class AddInterview implements Action {
-    public readonly type = EInterviewActions.AddInterview;
-    constructor(public interview: Interview) {}
-}
-
-export class InterviewAddedSuccessfully implements Action {
-    public readonly type = EInterviewActions.InterviewAddedSuccessfully;
-    constructor(public interview: Interview) {}
-}
-
-export type InterviewActions = AddInterview | InterviewAddedSuccessfully;
+export const InterviewAddedSuccessfully = createAction(
+    EInterviewActions.InterviewAddedSuccessfully,
+    props<{interview: Interview}>()
+);
 

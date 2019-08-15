@@ -23,7 +23,7 @@ export class ProductEffects {
 
     @Effect({dispatch: false})
     addProduct$ = this.actions$.pipe(
-        ofType<AddPrdouct>(EProductActions.AddPrdouct),
+        ofType(AddPrdouct),
         map(action => action.product),
         switchMap((product) => this.sellingProductService.addProduct(product)),
         tap(u => console.log(u)),
@@ -36,49 +36,49 @@ export class ProductEffects {
 
     @Effect()
     updateProduct$ = this.actions$.pipe(
-        ofType<UpdatePrdouct>(EProductActions.UpdatePrdouct),
+        ofType(UpdatePrdouct),
         map(action => action.product),
         switchMap((product) => this.sellingProductService.updateProduct(product)),
         tap(u => console.log(u)),
         map((product: Product) => {
             console.log(product);
             this.sweetAlertService.success('Product Updated Successfully', '', 'success');
-            return new ProductUpdated(product);
+            return ProductUpdated({product});
         })
     );
 
     @Effect()
     getProductsByUserId$ = this.actions$.pipe(
-        ofType<GetProductsByUserId>(EProductActions.GetProductsByUserId),
+        ofType(GetProductsByUserId),
         switchMap(() => this.sellingProductService.getProductsByUserId()),
         tap(u => console.log(u)),
-        map((products: Product[]) => {
-            console.log(products);
-            return new ProductList(products);
+        map((product: Product[]) => {
+            console.log(product);
+            return ProductList({product});
         })
     );
 
     @Effect()
     getProductById$ = this.actions$.pipe(
-        ofType<GetProductById>(EProductActions.GetProductById),
+        ofType(GetProductById),
         map(action => action.productId),
         switchMap((productId) => this.productService.getProductById(productId)),
         tap(u => console.log(u)),
         map((product) => {
             console.log(product);
-            return new SetSelectedProduct(product);
+            return SetSelectedProduct({product});
         })
     );
 
 
     @Effect()
     getAllProductsList$ = this.actions$.pipe(
-        ofType<GetAllProducts>(EProductActions.GetAllProducts),
+        ofType(GetAllProducts),
         switchMap(() => this.productService.getAllProducts()),
         tap(u => console.log(u)),
-        map((products) => {
-            console.log(products);
-            return new SetAllProductsList(products);
+        map((product) => {
+            console.log(product);
+            return SetAllProductsList({product});
         })
     );
 }

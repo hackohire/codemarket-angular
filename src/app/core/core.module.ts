@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, InjectionToken } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ApolloModule, Apollo } from 'apollo-angular';
 import { HttpLinkModule, HttpLink } from 'apollo-angular-link-http';
@@ -6,7 +6,7 @@ import { environment } from 'src/environments/environment';
 import { ApolloLink } from 'apollo-link';
 import { InMemoryCache, IntrospectionFragmentMatcher } from 'apollo-cache-inmemory';
 import { HttpClientModule } from '@angular/common/http';
-import { StoreModule } from '@ngrx/store';
+import { StoreModule, ActionReducerMap } from '@ngrx/store';
 import { appReducesrs } from './store/reducers/app.reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { UserEffects } from './store/effects/user.effects';
@@ -18,6 +18,9 @@ import { HelpEffects } from './store/effects/help.effects';
 import { CartEffects } from './store/effects/cart.effects';
 import { InterviewEffects } from './store/effects/interview.effects';
 import { RequirementEffects } from './store/effects/requirement.effects';
+import { AppState } from './store/state/app.state';
+
+export const REDUCER_TOKEN = new InjectionToken<ActionReducerMap<AppState>>('root reducer');
 
 export function clearState(reducer) {
   return (state, action) => {
@@ -38,12 +41,16 @@ export function clearState(reducer) {
     ApolloModule,
     HttpClientModule,
     HttpLinkModule,
-    StoreModule.forRoot(appReducesrs(), { metaReducers: [clearState] }),
+    StoreModule.forRoot(REDUCER_TOKEN, { metaReducers: [clearState] }),
     EffectsModule.forRoot([UserEffects, ProductEffects, HelpEffects, CartEffects, InterviewEffects, RequirementEffects]),
     StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
     StoreDevtoolsModule.instrument(),
   ],
   providers: [
+    {
+      provide: REDUCER_TOKEN,
+      useValue: appReducesrs()
+    },
   ]
 })
 export class CoreModule {

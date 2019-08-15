@@ -1,30 +1,24 @@
 import { initialUserState, UserState } from '../state/user.state';
-import { UserActions, EUserActions } from '../actions/user.actions';
+import { GetUsersSuccess, GetUserSuccess, SetLoggedInUser } from '../actions/user.actions';
+import { createReducer, on, State, Action } from '@ngrx/store';
 
-export function userReducers(
-    state = initialUserState,
-    action: UserActions
-): UserState {
-    switch (action.type) {
-        case EUserActions.GetUsersSuccess:
-            return {
-                ...state,
-                users: action.payload
-            };
 
-        case EUserActions.GetUserSuccess:
-            return {
-                ...state,
-                selectedUser: action.payload
-            };
+export const userReducers = createReducer(
+    initialUserState,
+    on(GetUsersSuccess, (state, {payload}) => ({
+        ...state,
+        users: payload
+    })),
+    on(GetUserSuccess, (state, {payload}) => ({
+        ...state,
+        selectedUser: payload
+    })),
+    on(SetLoggedInUser, (state, {payload}) => ({
+        ...state,
+        loggedInUser: payload
+    })),
+);
 
-        case EUserActions.SetLoggedInUser:
-            return {
-                ...state,
-                loggedInUser: action.payload
-            };
-
-        default:
-            return state;
-    }
-};
+export function reducer(state: UserState | undefined, action: Action) {
+    return userReducers(state, action);
+}

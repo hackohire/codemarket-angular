@@ -28,7 +28,7 @@ export class ProductComponent implements OnInit {
   }
 
   addToCart(product: Product) {
-    this.store.dispatch(new AddToCart(product._id));
+    this.store.dispatch(AddToCart({productId: product._id}));
   }
 
 }

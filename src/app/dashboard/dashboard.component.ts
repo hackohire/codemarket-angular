@@ -20,7 +20,7 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.store.dispatch(new GetAllProducts());
+    this.store.dispatch(GetAllProducts());
     this.productsList$ = this.store.select(selectAllProductsList);
   }
 

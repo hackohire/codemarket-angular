@@ -47,7 +47,7 @@ export class AuthService {
           if (idToken) {
             this.setIdTokenToLocalStorage(idToken);
             if (!this.loggedInUser) {
-              this.store.dispatch(new Authorise());
+              this.store.dispatch(Authorise());
             }
             // this.authorizeWithPlatform();
           }
@@ -64,7 +64,7 @@ export class AuthService {
         if (idToken) {
           this.setIdTokenToLocalStorage(idToken);
           if (!this.loggedInUser) {
-            this.store.dispatch(new Authorise());
+            this.store.dispatch(Authorise());
           }
           // this.authorizeWithPlatform();
         }

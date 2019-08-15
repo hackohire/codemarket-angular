@@ -1,4 +1,4 @@
-import { Action } from '@ngrx/store';
+import { createAction, props } from '@ngrx/store';
 import { Requirement } from 'src/app/shared/models/requirement.model';
 
 export enum ERequirementActions {
@@ -6,16 +6,14 @@ export enum ERequirementActions {
     RequirementAddedSuccessfully = '[Requirement] Requirement Added Successfully',
 }
 
+export const AddRequirement = createAction(
+    ERequirementActions.AddRequirement,
+    props<{requirement: Requirement}>()
+);
 
-export class AddRequirement implements Action {
-    public readonly type = ERequirementActions.AddRequirement;
-    constructor(public requirement: Requirement) {}
-}
+export const RequirementAddedSuccessfully = createAction(
+    ERequirementActions.RequirementAddedSuccessfully,
+    props<{requirement: Requirement}>()
+);
 
-export class RequirementAddedSuccessfully implements Action {
-    public readonly type = ERequirementActions.RequirementAddedSuccessfully;
-    constructor(public requirement: Requirement) {}
-}
-
-export type RequirementActions = AddRequirement | RequirementAddedSuccessfully;
 

@@ -1,43 +1,28 @@
-import { ProductActions, EProductActions } from '../actions/product.actions';
+import { ProductAdded, ProductUpdated, ProductList, SetSelectedProduct, SetAllProductsList } from '../actions/product.actions';
 import { initialProductState, ProductState } from '../state/product.state';
+import { createReducer, on, Action } from '@ngrx/store';
 
-export function productReducers(
-    state = initialProductState,
-    action: ProductActions
-): ProductState {
-    switch (action.type) {
 
-        case EProductActions.ProductAdded:
-            return {
-                ...state,
-                selectedProduct: action.product
-            };
-
-        case EProductActions.ProductUpdated:
-            return {
-                ...state,
-                selectedProduct: action.product
-            };
-
-        case EProductActions.ProductList:
-            return {
-                ...state,
-                products: action.products
-            };
-
-        case EProductActions.SetSelectedProduct:
-            return {
-                ...state,
-                selectedProduct: action.product
-            };
-
-        case EProductActions.SetAllProductsList:
-            return {
-                ...state,
-                allProducts: action.products
-            };
-
-        default:
-            return state;
-    }
-};
+export const productReducers = createReducer(
+    initialProductState,
+    on(ProductAdded, (state, {product}) => ({
+        ...state,
+        selectedProduct: product
+    })),
+    on(ProductUpdated, (state, {product}) => ({
+        ...state,
+        selectedProduct: product
+    })),
+    on(ProductList, (state, {product}) => ({
+        ...state,
+        products: product
+    })),
+    on(SetSelectedProduct, (state, {product}) => ({
+        ...state,
+        selectedProduct: product
+    })),
+    on(SetAllProductsList, (state, {product}) => ({
+        ...state,
+        allProducts: product
+    })),
+);

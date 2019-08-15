@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Effect, Actions, ofType } from '@ngrx/effects';
 import { switchMap, map} from 'rxjs/operators/';
 import { SweetalertService } from 'src/app/shared/services/sweetalert.service';
-import { ERequirementActions, AddRequirement, RequirementAddedSuccessfully } from '../actions/requirement.actions';
+import { AddRequirement, RequirementAddedSuccessfully } from '../actions/requirement.actions';
 import { RequirementService } from 'src/app/requirements/requirement.service';
 import { Requirement } from 'src/app/shared/models/requirement.model';
 
@@ -11,12 +11,12 @@ export class RequirementEffects {
 
     @Effect()
     addRequirement$ = this.actions$.pipe(
-        ofType<AddRequirement>(ERequirementActions.AddRequirement),
+        ofType(AddRequirement),
         map(action => action.requirement),
         switchMap((requirement) => this.requirementService.addRequirement(requirement)),
         map((requirement: Requirement) => {
             this.sweetAlertService.success('Requirement Added Successfully', '', 'success');
-            return new RequirementAddedSuccessfully(requirement);
+            return RequirementAddedSuccessfully({requirement});
         }),
     );
 

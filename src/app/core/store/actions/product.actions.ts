@@ -1,4 +1,4 @@
-import { Action } from '@ngrx/store';
+import { Action, createAction, props } from '@ngrx/store';
 import { Product } from 'src/app/shared/models/product.model';
 
 export enum EProductActions {
@@ -17,57 +17,53 @@ export enum EProductActions {
     SetSelectedProduct = '[Product] Select Product'
 }
 
+export const AddPrdouct = createAction(
+    EProductActions.AddPrdouct,
+    props<{product: Product}>()
+);
 
-export class AddPrdouct implements Action {
-    public readonly type = EProductActions.AddPrdouct;
-    constructor(public product: Product) {}
-}
+export const ProductAdded = createAction(
+    EProductActions.ProductAdded,
+    props<{product: Product}>()
+);
 
-export class ProductAdded implements Action {
-    public readonly type = EProductActions.ProductAdded;
-    constructor(public product: Product) {}
-}
+export const UpdatePrdouct = createAction(
+    EProductActions.UpdatePrdouct,
+    props<{product: Product}>()
+);
 
-export class UpdatePrdouct implements Action {
-    public readonly type = EProductActions.UpdatePrdouct;
-    constructor(public product: Product) {}
-}
+export const ProductUpdated = createAction(
+    EProductActions.ProductUpdated,
+    props<{product: Product}>()
+);
 
-export class ProductUpdated implements Action {
-    public readonly type = EProductActions.ProductUpdated;
-    constructor(public product: Product) {}
-}
 
-export class GetProductsByUserId implements Action {
-    public readonly type = EProductActions.GetProductsByUserId;
-    constructor() {}
-}
 
-export class GetProductById implements Action {
-    public readonly type = EProductActions.GetProductById;
-    constructor(public productId: string) {}
-}
+export const GetProductsByUserId = createAction(
+    EProductActions.GetProductsByUserId
+);
 
-export class ProductList implements Action {
-    public readonly type = EProductActions.ProductList;
-    constructor(public products: Product[]) {}
-}
+export const GetProductById = createAction(
+    EProductActions.GetProductById,
+    props<{productId: string}>()
+);
 
-export class SetSelectedProduct implements Action {
-    public readonly type = EProductActions.SetSelectedProduct;
-    constructor(public product: Product) {}
-}
+export const ProductList = createAction(
+    EProductActions.ProductList,
+    props<{product: Product[]}>()
+);
 
-export class GetAllProducts implements Action {
-    public readonly type = EProductActions.GetAllProducts;
-    constructor() {}
-}
+export const SetSelectedProduct = createAction(
+    EProductActions.SetSelectedProduct,
+    props<{product: Product}>()
+);
 
-export class SetAllProductsList implements Action {
-    public readonly type = EProductActions.SetAllProductsList;
-    constructor(public products: Product[]) {}
-}
+export const GetAllProducts = createAction(
+    EProductActions.GetAllProducts
+);
 
-export type ProductActions = AddPrdouct | ProductAdded | UpdatePrdouct | ProductUpdated
-            | GetProductsByUserId | GetProductById | ProductList | SetSelectedProduct | GetAllProducts | SetAllProductsList;
+export const SetAllProductsList = createAction(
+    EProductActions.SetAllProductsList,
+    props<{product: Product[]}>()
+);
 

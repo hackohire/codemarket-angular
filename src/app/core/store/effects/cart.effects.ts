@@ -2,13 +2,9 @@ import { Injectable } from '@angular/core';
 import { Effect, Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { AppState } from '../state/app.state';
-import { map, withLatestFrom, tap, pairwise, combineAll, switchMap} from 'rxjs/operators/';
-import { AuthService } from 'src/app/core/services/auth.service';
-import { HelpService } from 'src/app/help/help.service';
-import { ECartActions, AddToCart, GetCartProductsList, UpdateCartProductList, RemoveProductFromCart, UpdateCartTotal, UpdateCartTotalSuccess } from '../actions/cart.actions';
+import { map, withLatestFrom, tap, switchMap} from 'rxjs/operators/';
+import { AddToCart, UpdateCartProductList, RemoveProductFromCart, UpdateCartTotal, UpdateCartTotalSuccess } from '../actions/cart.actions';
 import { selectAllProductsList } from '../selectors/product.selectors';
-import { Product } from 'src/app/shared/models/product.model';
-import { UpdatePrdouct } from '../actions/product.actions';
 import { of } from 'rxjs';
 import { selectCartProductList } from '../selectors/cart.selectors';
 
@@ -17,7 +13,7 @@ export class CartEffects {
 
     @Effect()
     addProductToCart$ = this.actions$.pipe(
-        ofType<AddToCart>(ECartActions.AddToCart),
+        ofType(AddToCart),
         map(action => action.productId),
         withLatestFrom(this._store.select(selectCartProductList)),
         switchMap(([id, products]) => {
@@ -29,12 +25,12 @@ export class CartEffects {
             return of(products);
         }),
         tap(t => console.log(t)),
-        switchMap((productIds: string[]) => [new UpdateCartProductList(productIds), new UpdateCartTotal()])
+        switchMap((productIds: string[]) => [UpdateCartProductList({products: productIds}), UpdateCartTotal()])
     );
 
     @Effect()
     updateCartTotal$ = this.actions$.pipe(
-        ofType<UpdateCartTotal>(ECartActions.UpdateCartTotal),
+        ofType(UpdateCartTotal),
         switchMap(() => this._store.select(selectCartProductList)),
         withLatestFrom(this._store.select(selectAllProductsList)),
         switchMap(([ids, allProducts]) => {
@@ -45,13 +41,13 @@ export class CartEffects {
             return of(total);
         }),
         map((total: number) => {
-            return new UpdateCartTotalSuccess(total, total);
+            return UpdateCartTotalSuccess({cartTotal: total, cartSubTotal: total});
         })
     )
 
     @Effect()
     removeProductFromCart$ = this.actions$.pipe(
-        ofType<RemoveProductFromCart>(ECartActions.RemoveProductFromCart),
+        ofType(RemoveProductFromCart),
         map(action => action.productId),
         withLatestFrom(this._store.select(selectCartProductList)),
         switchMap(([id, [...products]]) => {
@@ -62,7 +58,7 @@ export class CartEffects {
             return of(products);
         }),
         tap(t => console.log(t)),
-        switchMap((productIds: string[]) => of(new UpdateCartProductList(productIds), new UpdateCartTotal()))
+        switchMap((productIds: string[]) => of(UpdateCartProductList({products: productIds}), UpdateCartTotal()))
     );
 
 
@@ -80,8 +76,6 @@ export class CartEffects {
     constructor(
         private actions$: Actions,
         private _store: Store<AppState>,
-        private helpService: HelpService,
-        private authServie: AuthService
     ) {
 
     }

@@ -98,7 +98,7 @@ export class ProductService {
   }
 
   redirectToProductDetails(product: Product): void {
-    this.store.dispatch(new SetSelectedProduct(product));
+    this.store.dispatch(SetSelectedProduct({product}));
     this.router.navigate(['/', {outlets: {main: ['dashboard', 'product-details', product._id]}}]);
   }
 

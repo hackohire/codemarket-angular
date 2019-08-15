@@ -1,4 +1,4 @@
-import { Action } from '@ngrx/store';
+import { Action, createAction, props } from '@ngrx/store';
 import { HelpQuery } from 'src/app/shared/models/help-query.model';
 
 export enum EHelpActions {
@@ -6,16 +6,13 @@ export enum EHelpActions {
     QueryAddedSuccessfully = '[Help] Query Added Successfully',
 }
 
+export const AddQuery = createAction(
+    EHelpActions.AddQuery,
+    props<{query: HelpQuery}>()
+);
 
-export class AddQuery implements Action {
-    public readonly type = EHelpActions.AddQuery;
-    constructor(public query: HelpQuery) {}
-}
-
-export class QueryAddedSuccessfully implements Action {
-    public readonly type = EHelpActions.QueryAddedSuccessfully;
-    constructor(public query: HelpQuery) {}
-}
-
-export type HelpActions = AddQuery | QueryAddedSuccessfully;
+export const QueryAddedSuccessfully = createAction(
+    EHelpActions.QueryAddedSuccessfully,
+    props<{query: HelpQuery}>()
+);
 

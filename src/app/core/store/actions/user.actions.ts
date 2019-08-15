@@ -1,4 +1,4 @@
-import { Action } from '@ngrx/store';
+import { Action, createAction, props } from '@ngrx/store';
 import { User } from 'src/app/shared/models/user.model';
 
 export enum EUserActions {
@@ -13,45 +13,40 @@ export enum EUserActions {
     Authorise = '[User] Authorise User'
 }
 
+export const GetUser = createAction(
+    EUserActions.GetUser,
+    props<{payload: string}>()
+);
 
-export class GetUser implements Action {
-    public readonly type = EUserActions.GetUser;
-    constructor(public payload: string) {}
-}
+export const GetUserSuccess = createAction(
+    EUserActions.GetUserSuccess,
+    props<{payload: User}>()
+);
 
-export class GetUserSuccess implements Action {
-    public readonly type = EUserActions.GetUserSuccess;
-    constructor(public payload: User) {}
-}
+export const GetUsers = createAction(
+    EUserActions.GetUsers
+);
 
-export class GetUsers implements Action {
-    public readonly type = EUserActions.GetUsers;
-}
+export const GetUsersSuccess = createAction(
+    EUserActions.GetUsersSuccess,
+    props<{payload: User[]}>()
+);
 
-export class GetUsersSuccess implements Action {
-    public readonly type = EUserActions.GetUsersSuccess;
-    constructor(public payload: User[]) {}
-}
+export const CreateUser = createAction(
+    EUserActions.CreateUser,
+    props<{payload: User}>()
+);
 
-export class CreateUser implements Action {
-    public readonly type = EUserActions.CreateUser;
-    constructor(public payload: User) {}
-}
+export const SetLoggedInUser = createAction(
+    EUserActions.SetLoggedInUser,
+    props<{payload: User}>()
+);
 
-export class SetLoggedInUser implements Action {
-    public readonly type = EUserActions.SetLoggedInUser;
-    constructor(public payload: User) {}
-}
+export const UpdateUser = createAction(
+    EUserActions.UpdateUser,
+    props<{payload: User}>()
+);
 
-export class UpdateUser implements Action {
-    public readonly type = EUserActions.UpdateUser;
-    constructor(public payload: User) {}
-}
-
-export class Authorise implements Action {
-    public readonly type = EUserActions.Authorise;
-    constructor() {}
-}
-
-export type UserActions = GetUser | GetUserSuccess | GetUsers | GetUsersSuccess | CreateUser| SetLoggedInUser | UpdateUser;
-
+export const Authorise = createAction(
+    EUserActions.Authorise
+);

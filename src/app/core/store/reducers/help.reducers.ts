@@ -1,19 +1,15 @@
-import { EUserActions } from '../actions/user.actions';
 import { initialHelpState, HelpState } from '../state/help.state';
-import { EHelpActions, HelpActions } from '../actions/help.actions';
+import { QueryAddedSuccessfully } from '../actions/help.actions';
+import { createReducer, on, Action } from '@ngrx/store';
 
-export function helpReducers(
-    state = initialHelpState,
-    action: HelpActions
-): HelpState {
-    switch (action.type) {
-        case EHelpActions.QueryAddedSuccessfully:
-            return {
-                ...state,
-                selectedQuery: action.query
-            };
-        default:
-            return state;
-    }
+export const helpReducers = createReducer(
+    initialHelpState,
+    on(QueryAddedSuccessfully, (state, {query}) => ({
+        ...state,
+        selectedQuery: query
+    }))
+);
+
+export function reducer(state: HelpState | undefined, action: Action) {
+    return helpReducers(state, action);
 }
-

@@ -98,7 +98,7 @@ export class AskforhelpComponent implements OnInit {
       this.askForHelpForm.removeControl('_id');
     }
 
-    this.store.dispatch(new AddQuery(this.askForHelpForm.value));
+    this.store.dispatch(AddQuery({query: this.askForHelpForm.value}));
   }
 
   updateFormData(event) {

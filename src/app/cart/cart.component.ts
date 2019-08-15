@@ -41,7 +41,7 @@ export class CartComponent implements OnInit {
   }
 
   removeProductFromCart(productId): void {
-    this.store.dispatch(new RemoveProductFromCart(productId));
+    this.store.dispatch(RemoveProductFromCart({productId}));
   }
 
 }

@@ -1,13 +1,9 @@
-import { Action } from '@ngrx/store';
+import { Action, createAction, props } from '@ngrx/store';
 
 export enum EPlatformActions {
     ResetPlatFormState = '[Platform] Reset State',
 }
 
-
-export class ResetPlatFormState implements Action {
-    public readonly type = EPlatformActions.ResetPlatFormState;
-}
-
-
-export type ApplicationActions = ResetPlatFormState;
+export const ResetPlatFormState = createAction(
+    EPlatformActions.ResetPlatFormState
+);

@@ -77,7 +77,7 @@ export class AddInterviewComponent implements OnInit {
       this.interviewForm.removeControl('_id');
     }
 
-    this.store.dispatch(new AddInterview(this.interviewForm.value));
+    this.store.dispatch(AddInterview({interview: this.interviewForm.value}));
   }
 
   updateFormData(event) {

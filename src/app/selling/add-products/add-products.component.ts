@@ -85,7 +85,7 @@ export class AddProductsComponent implements OnInit, OnDestroy {
      */
 
     if (this.activatedRoute.snapshot.parent.routeConfig.path === 'add-product') {
-      this.store.dispatch(new SetSelectedProduct(null));
+      this.store.dispatch(SetSelectedProduct({product: null}));
       this.productFormInitialization(null);
     } else {
       this.subscription$ = this.store.select(selectSelectedProduct).pipe(
@@ -103,7 +103,7 @@ export class AddProductsComponent implements OnInit, OnDestroy {
            * get the product by fetching id from the params
            */
           if (params.productId) {
-            this.store.dispatch(new GetProductById(params.productId));
+            this.store.dispatch(GetProductById({productId: params.productId}));
           }
         })
       ).subscribe();
@@ -165,10 +165,10 @@ export class AddProductsComponent implements OnInit, OnDestroy {
     }
 
     if ( this.idFromControl && this.idFromControl.value) {
-      this.store.dispatch(new UpdatePrdouct(this.productForm.value));
+      this.store.dispatch(UpdatePrdouct(this.productForm.value));
     } else {
       this.productForm.removeControl('_id');
-      this.store.dispatch(new AddPrdouct(this.productForm.value));
+      this.store.dispatch(AddPrdouct({product: this.productForm.value}));
     }
   }
 

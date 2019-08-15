@@ -1,25 +1,20 @@
 import { initialCartState, CartState } from '../state/cart.state';
-import { CartActions, ECartActions } from '../actions/cart.actions';
+import { ECartActions, UpdateCartProductList, UpdateCartTotalSuccess } from '../actions/cart.actions';
+import { createReducer, on, Action } from '@ngrx/store';
 
-export function cartReducers(
-    state = initialCartState,
-    action: CartActions
-): CartState {
-    switch (action.type) {
-        case ECartActions.UpdateCartProductList:
-            return {
-                ...state,
-                cartProductsList: action.products
-            };
+export const cartReducers = createReducer(
+    initialCartState,
+    on(UpdateCartProductList, (state, {products}) => ({
+        ...state,
+        cartProductsList: products
+    })),
+    on(UpdateCartTotalSuccess, (state, {cartTotal, cartSubTotal}) => ({
+        ...state,
+        cartTotal: cartTotal,
+        cartSubTotal: cartSubTotal
+    })),
+);
 
-        case ECartActions.UpdateCartTotalSuccess:
-            return {
-                ...state,
-                cartTotal: action.cartTotal,
-                cartSubTotal: action.cartSubTotal
-            };
-        default:
-            return state;
-    }
+export function reducer(state: CartState | undefined, action: Action) {
+    return cartReducers(state, action);
 }
-

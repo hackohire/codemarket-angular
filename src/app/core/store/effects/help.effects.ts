@@ -15,14 +15,13 @@ export class HelpEffects {
 
     @Effect()
     addQuery$ = this.actions$.pipe(
-        ofType<AddQuery>(EHelpActions.AddQuery),
+        ofType(AddQuery),
         map(action => action.query),
         switchMap((query) => this.helpService.addQuery(query)),
         map((query: HelpQuery) => {
             this.sweetAlertService.success('Help Request Added Successfully', '', 'success');
-            return new QueryAddedSuccessfully(query);
+            return QueryAddedSuccessfully({query});
         }),
-        
     );
 
 

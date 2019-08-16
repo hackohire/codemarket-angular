@@ -36,14 +36,14 @@
       <mat-menu #menu="matMenu">
 
         <!-- Add Product -->
-        <button mat-menu-item [routerLink]="[{outlets: {'main': ['product']}}]">
+        <button mat-menu-item [routerLink]="[{outlets: {'main': ['sell', 'add-product']}}]">
           <!-- <mat-icon>dialpad</mat-icon> -->
           <i style="font-size: 1.7rem !important;" class="vertical-align-middle fal fa-lightbulb-dollar fa-fw"></i>
           <span class="vertical-align-middle">  Product</span>
         </button>
 
         <!-- Add Help Request -->
-        <button mat-menu-item [routerLink]="[{outlets: {'main': ['help']}}]">
+        <button mat-menu-item [routerLink]="[{outlets: {'main': ['help', 'add-help-request']}}]">
           <!-- <mat-icon>Help Request</mat-icon> -->
           <i style="font-size: 1.7rem !important;" class="vertical-align-middle fal fa-question-circle fa-fw"></i>
           <span>  Help Request</span>
@@ -51,14 +51,14 @@
 
 
         <!-- Add Interview Assignment -->
-        <button mat-menu-item [routerLink]="[{outlets: {'main': ['interview']}}]">
+        <button mat-menu-item [routerLink]="[{outlets: {'main': ['interview', 'add-interview']}}]">
           <!-- <mat-icon>dialpad</mat-icon> -->
           <i style="font-size: 1.7rem !important;" class="vertical-align-middle fal fa-user-tie fa-fw"></i>
           <span>  Interview</span>
         </button>
 
         <!-- Add Requirements -->
-        <button mat-menu-item [routerLink]="[{outlets: {'main': ['requirement']}}]">
+        <button mat-menu-item [routerLink]="[{outlets: {'main': ['requirement', 'add-requirement']}}]">
           <!-- <mat-icon>notifications_off</mat-icon> -->
           <i style="font-size: 1.7rem !important;" class="vertical-align-middle fal fa-file-alt fa-fw"></i>
           <span> Requirements</span>

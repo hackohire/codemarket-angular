@@ -3,22 +3,42 @@ import { CommonModule } from '@angular/common';
 import { AddRequirementsComponent } from './add-requirements/add-requirements.component';
 import { Routes, RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
+import { RequirementsComponent } from './requirements.component';
+
+
+
 
 
 const requirementRoutes: Routes = [
   {
     path: '',
-    redirectTo: 'add-requirement'
+    component: RequirementsComponent,
+    children: [
+      {
+        path: '',
+        redirectTo: 'requirements-list',
+        pathMatch: 'full',
+      },
+      {
+        path: 'requirements-list',
+        loadChildren: () => import('./requirement-list/requirement-list.module').then(module => module.RequirementListModule)
+      },
+      {
+        path: 'add-requirement',
+        loadChildren: () => import('./add-requirements/add-requirement.module').then(module => module.AddRequirementModule),
+      },
+      // {
+      //   path: 'edit-product/:productId',
+      //   loadChildren: () => import('./add-products/add-products.module').then(module => module.AddProductsModule),
+      //   // outlet: 'selling'
+      // }
+    ]
   },
-  {
-    path: 'add-requirement',
-    component: AddRequirementsComponent
-  }
 ];
 
 
 @NgModule({
-  declarations: [AddRequirementsComponent],
+  declarations: [RequirementsComponent],
   imports: [
     CommonModule,
     SharedModule,

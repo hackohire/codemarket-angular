@@ -26,16 +26,13 @@ const routes: Routes = [
     loadChildren: () => import('./selling/selling.module').then(module => module.SellingModule),
     outlet: 'main'
   },
-  {
-    path: 'product',
-    loadChildren: () => import('./selling/add-products/add-products.module').then(module => module.AddProductsModule),
-    outlet: 'main'
-  },
+
   {
     path: 'help',
     loadChildren: () => import('./help/help.module').then(module => module.HelpModule),
     outlet: 'main'
   },
+
   {
     path: 'interview',
     loadChildren: () => import('./interview/interview.module').then(module => module.InterviewModule),

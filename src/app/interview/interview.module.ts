@@ -3,21 +3,38 @@ import { CommonModule } from '@angular/common';
 import { AddInterviewComponent } from './add-interview/add-interview.component';
 import { Routes, RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
+import { InterviewComponent } from './interview.component';
 
 const interviewRoutes: Routes = [
   {
     path: '',
-    redirectTo: 'add-interview'
+    component: InterviewComponent,
+    children: [
+      {
+        path: '',
+        redirectTo: 'interview-list',
+        pathMatch: 'full',
+      },
+      {
+        path: 'interview-list',
+        loadChildren: () => import('./interview-list/interview-list.module').then(module => module.InterviewListModule)
+      },
+      {
+        path: 'add-interview',
+        loadChildren: () => import('./add-interview/add-interview.module').then(module => module.AddInterviewModule),
+      },
+      // {
+      //   path: 'edit-product/:productId',
+      //   loadChildren: () => import('./add-products/add-products.module').then(module => module.AddProductsModule),
+      //   // outlet: 'selling'
+      // }
+    ]
   },
-  {
-    path: 'add-interview',
-    component: AddInterviewComponent
-  }
 ];
 
 
 @NgModule({
-  declarations: [AddInterviewComponent],
+  declarations: [InterviewComponent],
   imports: [
     CommonModule,
     SharedModule,

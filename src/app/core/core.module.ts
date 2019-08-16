@@ -20,6 +20,8 @@ import { InterviewEffects } from './store/effects/interview.effects';
 import { RequirementEffects } from './store/effects/requirement.effects';
 import { AppState } from './store/state/app.state';
 
+
+// Injected Token for actionreducermap or combinereducers for build error
 export const REDUCER_TOKEN = new InjectionToken<ActionReducerMap<AppState>>('root reducer');
 
 export function clearState(reducer) {

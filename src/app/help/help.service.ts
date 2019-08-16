@@ -5,39 +5,108 @@ import { HelpQuery } from '../shared/models/help-query.model';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { description } from '../shared/constants/fragments_constatnts';
+import { AuthService } from '../core/services/auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HelpService {
 
-  constructor(private apollo: Apollo) { }
+  helpRequestQueryFields = gql`
+  fragment HelpQuery on HelpQuery {
+    _id
+    question
+    categories
+    description {
+      ...Description
+    }
+    shortDescription
+    demo_url
+    price
+    status
+    createdAt
+    updatedAt
+  }
+  ${description}
+  `;
+
+  constructor(
+    private apollo: Apollo,
+    private auth: AuthService
+    ) { }
+
+  getHelpRequestsByUserId(): Observable<HelpQuery[]> {
+    return this.apollo.query(
+      {
+        query: gql`
+          query getHelpRequestsByUserId($userId: String) {
+            getHelpRequestsByUserId(userId: $userId) {
+              ...HelpQuery
+            }
+          }
+          ${this.helpRequestQueryFields}
+        `,
+        variables: {
+          userId: this.auth.loggedInUser._id
+        }
+      }
+    ).pipe(
+      map((p: any) => {
+        return p.data.getHelpRequestsByUserId;
+      }),
+    );
+  }
+
+  getAllHelpRequests(): Observable<HelpQuery[]> {
+    return this.apollo.query(
+      {
+        query: gql`
+          query getAllHelpRequests {
+            getAllHelpRequests {
+              ...HelpQuery
+            }
+          }
+          ${this.helpRequestQueryFields}
+        `
+      }
+    ).pipe(
+      map((p: any) => {
+        return p.data.getAllHelpRequests;
+      }),
+    );
+  }
+
+  getHelpRequestById(helpRequestId: string): Observable<HelpQuery> {
+    return this.apollo.query(
+      {
+        query: gql`
+          query getHelpRequestById($helpRequestId: String) {
+            getHelpRequestById(helpRequestId: $helpRequestId) {
+              ...HelpQuery
+            }
+          }
+          ${this.helpRequestQueryFields}
+        `,
+        variables: {
+          helpRequestId: helpRequestId
+        }
+      }
+    ).pipe(
+      map((p: any) => {
+        return p.data.getHelpRequestById;
+      }),
+    );
+  }
 
   addQuery(helpQuery: HelpQuery): Observable<HelpQuery> {
     return this.apollo.mutate({
       mutation: gql`
         mutation addQuery($helpQuery: HelpQueryInput) {
           addQuery(helpQuery: $helpQuery) {
-            _id
-            question
-            categories
-            description {
-                ...Description
-            }
-            shortDescription
-            demo_url
-            video_url
-            documentation_url
-            price
-            status
-            createdAt
-            updatedAt
-            snippets {
-              language
-            }
+            ...HelpQuery
           }
         }
-        ${description}
+        ${this.helpRequestQueryFields}
       `,
       variables: {
         helpQuery: helpQuery

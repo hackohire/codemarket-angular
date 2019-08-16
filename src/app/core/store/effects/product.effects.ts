@@ -6,7 +6,6 @@ import { EProductActions, AddPrdouct, ProductAdded, GetProductsByUserId, Product
 import { map, switchMap, tap } from 'rxjs/operators';
 import { SellingProductsService } from 'src/app/selling/selling-products.service';
 import { Product } from 'src/app/shared/models/product.model';
-import { of } from 'rxjs/internal/observable/of';
 import { SweetalertService } from 'src/app/shared/services/sweetalert.service';
 import { ProductService } from '../../services/product.service';
 
@@ -14,7 +13,6 @@ import { ProductService } from '../../services/product.service';
 export class ProductEffects {
 
     constructor(
-        private store: Store<AppState>,
         private actions$: Actions,
         private sellingProductService: SellingProductsService,
         private productService: ProductService,

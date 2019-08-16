@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Effect, Actions, ofType } from '@ngrx/effects';
-import { switchMap, map} from 'rxjs/operators/';
+import { switchMap, map, tap} from 'rxjs/operators/';
 import { SweetalertService } from 'src/app/shared/services/sweetalert.service';
-import { AddInterview, InterviewAddedSuccessfully } from '../actions/interview.actions';
+import { AddInterview, InterviewAddedSuccessfully, GetInterviewsByUserId, InterviewList, GetInterviewById, SetSelectedInterview, GetAllInterviews, SetAllInterviewsList } from '../actions/interview.actions';
 import { InterviewService } from 'src/app/interview/interview.service';
 import { Interview } from 'src/app/shared/models/interview.model';
 
@@ -18,6 +18,41 @@ export class InterviewEffects {
             this.sweetAlertService.success('Interview Added Successfully', '', 'success');
             return InterviewAddedSuccessfully({interview});
         }),
+    );
+
+    @Effect()
+    getInterviewsByUserId$ = this.actions$.pipe(
+        ofType(GetInterviewsByUserId),
+        switchMap(() => this.interviewService.getInterviewsByUserId()),
+        tap(u => console.log(u)),
+        map((interview: Interview[]) => {
+            console.log(interview);
+            return InterviewList({interview});
+        })
+    );
+
+    @Effect()
+    getInterviewById$ = this.actions$.pipe(
+        ofType(GetInterviewById),
+        map(action => action.interviewId),
+        switchMap((interviewId) => this.interviewService.getInterviewById(interviewId)),
+        tap(u => console.log(u)),
+        map((interview: Interview) => {
+            console.log(interview);
+            return SetSelectedInterview({interview});
+        })
+    );
+
+
+    @Effect()
+    getAllInterviewsList$ = this.actions$.pipe(
+        ofType(GetAllInterviews),
+        switchMap(() => this.interviewService.getAllInterviews()),
+        tap(u => console.log(u)),
+        map((interview: Interview[]) => {
+            console.log(interview);
+            return SetAllInterviewsList({interview});
+        })
     );
 
     constructor(

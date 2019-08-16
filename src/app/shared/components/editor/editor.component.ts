@@ -80,7 +80,7 @@ export class EditorComponent implements OnInit, OnDestroy {
       data: {
         blocks: this.data ? this.data : []
       },
-      placeholder: 'Let`s write a help request!',
+      placeholder: 'Let`s write!',
       onChange: (() => {
         this.editor.save().then((outputData) => {
           console.log('Article data: ', outputData);

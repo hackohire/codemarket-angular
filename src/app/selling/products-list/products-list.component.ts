@@ -43,8 +43,7 @@ export class ProductsListComponent implements OnInit, OnDestroy {
 
   constructor(
     private auth: AuthService,
-    private store: Store<AppState>,
-    private router: Router
+    private store: Store<AppState>
   ) {
 
     this.userSubsription = this.auth.loggedInUser$.subscribe((u) => {

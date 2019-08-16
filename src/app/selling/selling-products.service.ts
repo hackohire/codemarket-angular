@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Product } from '../shared/models/product.model';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
-import { map, switchMap, catchError } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { of, Observable } from 'rxjs';
 import { AuthService } from '../core/services/auth.service';
 import { productConstants } from '../shared/constants/product_constants';

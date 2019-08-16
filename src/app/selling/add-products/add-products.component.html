@@ -10,7 +10,7 @@
                 </mat-form-field>
 
 
-                <app-editor (output)="updateFormData($event)" [id]="'product-editor'"></app-editor>
+                <app-editor [data]="productForm?.get('description')?.value" (output)="updateFormData($event)" [id]="'product-editor'"></app-editor>
 
                 <!-- <quill-editor #editor formControlName="description" [modules]="modules">
                 </quill-editor> -->

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Effect, Actions, ofType } from '@ngrx/effects';
-import { switchMap, map} from 'rxjs/operators/';
+import { switchMap, map, tap} from 'rxjs/operators/';
 import { SweetalertService } from 'src/app/shared/services/sweetalert.service';
-import { AddRequirement, RequirementAddedSuccessfully } from '../actions/requirement.actions';
+import { AddRequirement, RequirementAddedSuccessfully, GetRequirementsByUserId, RequirementList, GetRequirementById, SetSelectedRequirement, GetAllRequirements, SetAllRequirementsList } from '../actions/requirement.actions';
 import { RequirementService } from 'src/app/requirements/requirement.service';
 import { Requirement } from 'src/app/shared/models/requirement.model';
 
@@ -18,6 +18,42 @@ export class RequirementEffects {
             this.sweetAlertService.success('Requirement Added Successfully', '', 'success');
             return RequirementAddedSuccessfully({requirement});
         }),
+    );
+
+
+    @Effect()
+    getRequirementsByUserId$ = this.actions$.pipe(
+        ofType(GetRequirementsByUserId),
+        switchMap(() => this.requirementService.getRequirementsByUserId()),
+        tap(u => console.log(u)),
+        map((requirement: Requirement[]) => {
+            console.log(requirement);
+            return RequirementList({requirement});
+        })
+    );
+
+    @Effect()
+    getRequirementById$ = this.actions$.pipe(
+        ofType(GetRequirementById),
+        map(action => action.requirementId),
+        switchMap((requirementId) => this.requirementService.getRequirementById(requirementId)),
+        tap(u => console.log(u)),
+        map((requirement: Requirement) => {
+            console.log(requirement);
+            return SetSelectedRequirement({requirement});
+        })
+    );
+
+
+    @Effect()
+    getAllRequirementsList$ = this.actions$.pipe(
+        ofType(GetAllRequirements),
+        switchMap(() => this.requirementService.getAllRequirements()),
+        tap(u => console.log(u)),
+        map((requirement: Requirement[]) => {
+            console.log(requirement);
+            return SetAllRequirementsList({requirement});
+        })
     );
 
     constructor(

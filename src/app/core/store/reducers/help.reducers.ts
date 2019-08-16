@@ -1,5 +1,5 @@
 import { initialHelpState, HelpState } from '../state/help.state';
-import { QueryAddedSuccessfully } from '../actions/help.actions';
+import { QueryAddedSuccessfully, HelpRequestList, SetSelectedHelpRequest, SetAllHelpRequestsList } from '../actions/help.actions';
 import { createReducer, on, Action } from '@ngrx/store';
 
 export const helpReducers = createReducer(
@@ -7,7 +7,20 @@ export const helpReducers = createReducer(
     on(QueryAddedSuccessfully, (state, {query}) => ({
         ...state,
         selectedQuery: query
-    }))
+    })),
+
+    on(HelpRequestList, (state, {helpRequest}) => ({
+        ...state,
+        queries: helpRequest
+    })),
+    on(SetSelectedHelpRequest, (state, {helpRequest}) => ({
+        ...state,
+        selectedQuery: helpRequest
+    })),
+    on(SetAllHelpRequestsList, (state, {helpRequest}) => ({
+        ...state,
+        allHelpRequests: helpRequest
+    })),
 );
 
 export function reducer(state: HelpState | undefined, action: Action) {

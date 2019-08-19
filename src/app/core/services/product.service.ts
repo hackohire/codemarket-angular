@@ -77,6 +77,25 @@ export class ProductService {
     );
   }
 
+  deleteProduct(productId: string): Observable<boolean> {
+    return this.apollo.mutate(
+      {
+        mutation: gql`
+          mutation deleteProduct($productId: String) {
+            deleteProduct(productId: $productId)
+          }
+        `,
+        variables: {
+          productId: productId
+        }
+      }
+    ).pipe(
+      map((p: any) => {
+        return p.data.deleteProduct;
+      }),
+    );
+  }
+
   checkIfProductIsInCart(productId: string): Observable<boolean> {
     return this.cartProductListIds.pipe(
       switchMap((productIds: string[]) => {

@@ -7,6 +7,7 @@ export enum EProductActions {
 
     UpdatePrdouct = '[Product] Update Product',
     ProductUpdated = '[Product] Product Updated',
+    DeleteProduct = '[Product] Delete Products',
 
     GetAllProducts = '[Product] Get All Products', // List of All Products in the platform
     GetProductsByUserId = '[Product] Get Products By User Id',
@@ -65,5 +66,10 @@ export const GetAllProducts = createAction(
 export const SetAllProductsList = createAction(
     EProductActions.SetAllProductsList,
     props<{product: Product[]}>()
+);
+
+export const DeleteProduct = createAction(
+    EProductActions.DeleteProduct,
+    props<{productId: string}>()
 );
 

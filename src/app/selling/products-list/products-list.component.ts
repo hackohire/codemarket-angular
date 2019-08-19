@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { Store } from '@ngrx/store';
-import { GetProductsByUserId, SetSelectedProduct } from 'src/app/core/store/actions/product.actions';
+import { GetProductsByUserId, SetSelectedProduct, DeleteProduct } from 'src/app/core/store/actions/product.actions';
 import { AppState } from 'src/app/core/store/state/app.state';
 import { MatTableDataSource, MatSort } from '@angular/material';
 import { Product } from 'src/app/shared/models/product.model';
@@ -9,6 +9,7 @@ import { selectProductsList } from 'src/app/core/store/selectors/product.selecto
 import { Subscription } from 'rxjs';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { Router } from '@angular/router';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-products-list',
@@ -52,11 +53,13 @@ export class ProductsListComponent implements OnInit, OnDestroy {
       }
     });
 
-    this.productsListSubscription = this.store.select(selectProductsList).subscribe((products: Product[]) => {
-      if (products) {
-        this.dataSource.data = products;
-      }
-    });
+    this.productsListSubscription = this.store.select(selectProductsList).pipe(
+      map((products) => {
+        if (products) {
+          this.dataSource.data = products;
+        }
+      })
+    ).subscribe();
   }
 
   ngOnInit() {
@@ -71,6 +74,10 @@ export class ProductsListComponent implements OnInit, OnDestroy {
   editProduct(product): void {
     this.store.dispatch(SetSelectedProduct({product}));
     // this.router.navigate(['/add-product'], );
+  }
+
+  deleteProduct(productId: string) {
+    this.store.dispatch(DeleteProduct({productId}));
   }
 
 }

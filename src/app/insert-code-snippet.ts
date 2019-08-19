@@ -52,7 +52,7 @@ export class CodeWithLanguageSelection {
     }
 
     static get DEFAULT_FORMAT_CONFIG() {
-        return ['puthon', 'Matlab', 'R', 'javascript', 'C', 'HTML'];
+        return ['python', 'Matlab', 'R', 'javascript', 'C', 'HTML'];
     }
 
 

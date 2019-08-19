@@ -1,13 +1,13 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { BreadCumb } from 'src/app/shared/models/bredcumb.model';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormArray, FormBuilder } from '@angular/forms';
 import { ProductStatus } from 'src/app/shared/models/product.model';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/core/store/state/app.state';
 import { AddQuery } from 'src/app/core/store/actions/help.actions';
 import { AuthService } from 'src/app/core/services/auth.service';
-import EditorJS from '@editorjs/editorjs';
-
+import { MatChipInputEvent } from '@angular/material/chips';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
 
 @Component({
   selector: 'app-askforhelp',
@@ -15,6 +15,7 @@ import EditorJS from '@editorjs/editorjs';
   styleUrls: ['./askforhelp.component.scss']
 })
 export class AskforhelpComponent implements OnInit {
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   urlRegex = '^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$';
   breadcumb: BreadCumb;
   askForHelpForm: FormGroup;
@@ -32,9 +33,14 @@ export class AskforhelpComponent implements OnInit {
     return this.askForHelpForm.get('_id');
   }
 
+  get tagsFormControl() {
+    return this.askForHelpForm.get('tags') as FormArray;
+  }
+
   constructor(
     private store: Store<AppState>,
     private authService: AuthService,
+    private fb: FormBuilder
   ) {
 
     this.breadcumb = {
@@ -69,6 +75,7 @@ export class AskforhelpComponent implements OnInit {
       video_url: new FormControl('', [Validators.pattern(this.urlRegex)]),
       status: new FormControl(ProductStatus.Created),
       _id: new FormControl(''),
+      tags: this.fb.array([]),
       snippets: new FormControl(null),
     });
   }
@@ -104,6 +111,32 @@ export class AskforhelpComponent implements OnInit {
   updateFormData(event) {
     console.log(event);
     this.askForHelpForm.get('description').setValue(event, {emitEvent: false, onlySelf: true});
+  }
+
+  add(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+
+    if ((value || '').trim()) {
+      const arrayFormControl: FormArray = this.tagsFormControl;
+      const a = new FormControl({name: value.trim()});
+      arrayFormControl.controls.push(a);
+      arrayFormControl.value.push({name: value.trim()});
+      this.askForHelpForm.updateValueAndValidity({emitEvent: true});
+    }
+
+    // Reset the input value
+    if (input) {
+      input.value = '';
+    }
+  }
+
+
+  // Remove a Tag
+  public remove(index: number): void {
+    const arrayFormControl: FormArray = this.tagsFormControl;
+    arrayFormControl.value.splice(index, 1);
+    this.askForHelpForm.updateValueAndValidity();
   }
 
 }

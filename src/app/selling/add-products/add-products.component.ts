@@ -1,17 +1,19 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
-import { ProductStatus, Product } from 'src/app/shared/models/product.model';
+import { FormGroup, FormControl, Validators, FormArray, FormBuilder } from '@angular/forms';
+import { ProductStatus, Product, Tag } from 'src/app/shared/models/product.model';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/core/store/state/app.state';
 import { AddPrdouct, UpdatePrdouct, GetProductById, SetSelectedProduct } from 'src/app/core/store/actions/product.actions';
-import { of, Subscription, Observable, Subject } from 'rxjs';
+import { of, Subscription, Subject } from 'rxjs';
 import { selectSelectedProduct } from 'src/app/core/store/selectors/product.selectors';
 import { tap, switchMap } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
-import { HighlightResult, HighlightJS } from 'ngx-highlightjs';
+import { HighlightJS } from 'ngx-highlightjs';
 import { Storage } from 'aws-amplify';
 import { BreadCumb } from 'src/app/shared/models/bredcumb.model';
+import { MatChipInputEvent } from '@angular/material/chips';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
 
 @Component({
   selector: 'app-add-products',
@@ -19,10 +21,8 @@ import { BreadCumb } from 'src/app/shared/models/bredcumb.model';
   styleUrls: ['./add-products.component.scss']
 })
 export class AddProductsComponent implements OnInit, OnDestroy {
-  productRoute = {
-    'ADD_PRODUCT': 'add-product',
-    'EDIT_PRODUCT': 'edit-product'
-  };
+
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   productForm: FormGroup;
   modules = {
     formula: true,
@@ -42,17 +42,23 @@ export class AddProductsComponent implements OnInit, OnDestroy {
     return this.productForm.get('description');
   }
 
-  get snippetsFormControl() {
-    return this.productForm.get('snippets');
-  }
+  // get snippetsFormControl() {
+  //   return this.productForm.get('snippets');
+  // }
 
   get priceAndFilesArrayFormControl() {
     return this.productForm.get('priceAndFiles') as FormArray;
   }
 
+  get tagsFormControl() {
+    return this.productForm.get('tags') as FormArray;
+  }
+
   breadcumb: BreadCumb;
 
   subscription$: Subscription;
+
+  tags: Tag[];
 
   @ViewChild('file', { static: false }) file;
   public files: File[];
@@ -61,7 +67,8 @@ export class AddProductsComponent implements OnInit, OnDestroy {
     public auth: AuthService,
     private store: Store<AppState>,
     private activatedRoute: ActivatedRoute,
-    private _hljs: HighlightJS
+    private _hljs: HighlightJS,
+    private fb: FormBuilder
   ) {
 
     this.breadcumb = {
@@ -85,7 +92,7 @@ export class AddProductsComponent implements OnInit, OnDestroy {
      */
 
     if (this.activatedRoute.snapshot.parent.routeConfig.path === 'add-product') {
-      this.store.dispatch(SetSelectedProduct({product: null}));
+      this.store.dispatch(SetSelectedProduct({ product: null }));
       this.productFormInitialization(null);
     } else {
       this.subscription$ = this.store.select(selectSelectedProduct).pipe(
@@ -103,7 +110,7 @@ export class AddProductsComponent implements OnInit, OnDestroy {
            * get the product by fetching id from the params
            */
           if (params.productId) {
-            this.store.dispatch(GetProductById({productId: params.productId}));
+            this.store.dispatch(GetProductById({ productId: params.productId }));
           }
         })
       ).subscribe();
@@ -131,7 +138,8 @@ export class AddProductsComponent implements OnInit, OnDestroy {
       video_url: new FormControl(p && p.video_url ? p.video_url : '', [Validators.pattern(this.urlRegex)]),
       status: new FormControl(p && p.status ? p.status : ProductStatus.Created),
       _id: new FormControl(p && p._id ? p._id : ''),
-      snippets: new FormControl(p && p.snippets && p.snippets.length ? p.snippets : null),
+      tags: this.fb.array(p && p.tags && p.tags.length ? p.tags : []),
+      // snippets: new FormControl(p && p.snippets && p.snippets.length ? p.snippets : null),
       priceAndFiles: new FormArray([])
     });
   }
@@ -148,27 +156,40 @@ export class AddProductsComponent implements OnInit, OnDestroy {
   submit() {
 
     /* Identify the programming language based on code snippets  **/
-    const codeSnippets = [].slice.call(document.getElementsByTagName('pre'), 0);
-    if (codeSnippets.length) {
-      const snips = [];
-      for (const s of codeSnippets) {
-        const snip = this._hljs.highlightAuto(s.innerText, ['javascript', 'typescript', 'scss']);
-        snips.push(snip);
-      }
-      this.productForm.value.snips = snips;
-      console.log(snips);
-    }
+    // const codeSnippets = [].slice.call(document.getElementsByTagName('pre'), 0);
+    // if (codeSnippets.length) {
+    //   const snips = [];
+    //   for (const s of codeSnippets) {
+    //     const snip = this._hljs.highlightAuto(s.innerText, ['javascript', 'typescript', 'scss']);
+    //     snips.push(snip);
+    //   }
+    //   this.productForm.value.snips = snips;
+    //   console.log(snips);
+    // }
 
     /* Set LoggedInUserId as created By if it is not already set **/
     if (!this.createdByFormControlValue) {
+      if (this.tagsFormControl.value && this.tagsFormControl.value.length) {
+        this.tagsFormControl.value.forEach((t) => delete t['__typename']);
+      }
+
+      if (this.descriptionFormControl.value && this.descriptionFormControl.value.length) {
+        this.descriptionFormControl.value.forEach((t) => {
+          delete t['__typename'];
+          if (t.data['__typename']) {
+            delete t.data['__typename'];
+          }
+          return t;
+        });
+      }
       this.productForm.get('createdBy').setValue(this.auth.loggedInUser._id);
     }
 
-    if ( this.idFromControl && this.idFromControl.value) {
-      this.store.dispatch(UpdatePrdouct(this.productForm.value));
+    if (this.idFromControl && this.idFromControl.value) {
+      this.store.dispatch(UpdatePrdouct({product: this.productForm.value}));
     } else {
       this.productForm.removeControl('_id');
-      this.store.dispatch(AddPrdouct({product: this.productForm.value}));
+      this.store.dispatch(AddPrdouct({ product: this.productForm.value }));
     }
   }
 
@@ -239,14 +260,40 @@ export class AddProductsComponent implements OnInit, OnDestroy {
     console.log(this.files);
   }
 
-  remove(index: number) {
+  removeFile(index: number) {
     this.files.splice(index, 1);
     this.priceAndFilesArrayFormControl.removeAt(index);
   }
 
   updateFormData(event) {
     console.log(event);
-    this.productForm.get('description').setValue(event, {emitEvent: false, onlySelf: true});
+    this.productForm.get('description').setValue(event, { emitEvent: false, onlySelf: true });
+  }
+
+  add(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+
+    if ((value || '').trim()) {
+      const arrayFormControl: FormArray = this.tagsFormControl;
+      const a = new FormControl({name: value.trim()});
+      arrayFormControl.controls.push(a);
+      arrayFormControl.value.push({name: value.trim()});
+      this.productForm.updateValueAndValidity({emitEvent: true});
+    }
+
+    // Reset the input value
+    if (input) {
+      input.value = '';
+    }
+  }
+
+
+  // Remove a Tag
+  public remove(index: number): void {
+    const arrayFormControl: FormArray = this.tagsFormControl;
+    arrayFormControl.value.splice(index, 1);
+    this.productForm.updateValueAndValidity();
   }
 
 }

@@ -26,6 +26,9 @@ export class HelpService {
     status
     createdAt
     updatedAt
+    tags {
+      name
+    }
   }
   ${description}
   `;

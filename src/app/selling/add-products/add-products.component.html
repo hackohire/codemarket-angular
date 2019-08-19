@@ -10,7 +10,8 @@
                 </mat-form-field>
 
 
-                <app-editor [data]="productForm?.get('description')?.value" (output)="updateFormData($event)" [id]="'product-editor'"></app-editor>
+                <app-editor [data]="productForm?.get('description')?.value" (output)="updateFormData($event)"
+                    [id]="'product-editor'"></app-editor>
 
                 <!-- <quill-editor #editor formControlName="description" [modules]="modules">
                 </quill-editor> -->
@@ -44,6 +45,22 @@
 
 
 
+                <mat-form-field class="field-full-width">
+                    <mat-chip-list #tagsList>
+                        <mat-chip *ngFor="let tag of tagsFormControl?.value; let i = index;"
+                            [selectable]="selectable" [removable]="true" (removed)="remove(i)">
+                            {{tag?.name}}
+                            <mat-icon matChipRemove>cancel</mat-icon>
+                        </mat-chip>
+                        <input placeholder="Add Technologies" [matChipInputFor]="tagsList"
+                            [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+                            (matChipInputTokenEnd)="add($event)">
+                        <mat-icon matSuffix>web</mat-icon>
+                    </mat-chip-list>
+                </mat-form-field>
+
+
+
 
 
                 <input type="file" #file style="display: none" (change)="onFilesAdded()" multiple />
@@ -57,18 +74,6 @@
 
 
                 <!-- This is the content of the dialog, containing a list of the files to upload -->
-                <!-- <mat-dialog-content fxFlex>
-        <mat-list>
-            <mat-list-item *ngFor="let file of files">
-                <h4 mat-line>{{file.name}}</h4>
-                <mat-progress-bar *ngIf="file?.progress" mode="determinate" [value]="file?.progress | async">
-                </mat-progress-bar>
-                <mat-icon>close</mat-icon>
-            </mat-list-item>
-        </mat-list>
-    </mat-dialog-content> -->
-
-                <!-- This is the content of the dialog, containing a list of the files to upload -->
                 <mat-list fxFlex>
                     <mat-list-item formArrayName="priceAndFiles"
                         *ngFor="let item of priceAndFilesArrayFormControl?.controls; let i = index;">
@@ -80,7 +85,7 @@
                             <!-- <mat-form-field>
                     <input matInput type="number" formControlName="price" placeholder="Price">
                 </mat-form-field> -->
-                            <mat-icon (click)="remove(i)">close</mat-icon>
+                            <mat-icon (click)="removeFile(i)">close</mat-icon>
                         </ng-container>
                     </mat-list-item>
                 </mat-list>
@@ -95,7 +100,7 @@
         </div>
     </div>
 </div>
-
+{{ tagsFormControl?.value | json}}
 <!-- <pre>{{productForm?.value | json}}</pre> -->
 <!-- <pre>{{priceAndFilesArrayFormControl?.length}}</pre> -->
 

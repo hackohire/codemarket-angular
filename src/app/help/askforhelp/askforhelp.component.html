@@ -43,6 +43,20 @@
                     </mat-error>
                 </mat-form-field>
 
+                <mat-form-field class="field-full-width">
+                    <mat-chip-list #tagsList>
+                        <mat-chip *ngFor="let tag of tagsFormControl?.value; let i = index;"
+                            [selectable]="selectable" [removable]="true" (removed)="remove(i)">
+                            {{tag?.name}}
+                            <mat-icon matChipRemove>cancel</mat-icon>
+                        </mat-chip>
+                        <input placeholder="Add Programming Language Tags" [matChipInputFor]="tagsList"
+                            [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+                            (matChipInputTokenEnd)="add($event)">
+                        <mat-icon matSuffix>web</mat-icon>
+                    </mat-chip-list>
+                </mat-form-field>
+
                 <button mat-raised-button (click)="submit()" color="primary">Submit Query</button>
             </div>
 

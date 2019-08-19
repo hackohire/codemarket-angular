@@ -26,6 +26,9 @@ export class RequirementService {
     status
     createdAt
     updatedAt
+    tags {
+      name
+    }
   }
   ${description}
   `;

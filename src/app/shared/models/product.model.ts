@@ -8,6 +8,11 @@ export interface PriceAndFiles {
     price: number;
 }
 
+export interface Tag {
+    name: string;
+    _id?: string;
+}
+
 
 
 export interface Product {
@@ -27,8 +32,9 @@ export interface Product {
     video_url?: string;
     status: ProductStatus;
     _id?: string;
-    snippets?: [HighlightResult];
-    addedToCart?: boolean;
+    // snippets?: [HighlightResult];
+    tags: Tag[];
+    // addedToCart?: boolean;
 }
 
 export enum ProductStatus {

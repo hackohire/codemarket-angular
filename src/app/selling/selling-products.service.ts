@@ -45,7 +45,7 @@ export class SellingProductsService {
         mutation: gql`
           mutation updateProduct($product: ProductInput) {
             updateProduct(product: $product) {
-              ..Product
+              ...Product
             }
           }
           ${this.productFields}

@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { BreadCumb } from 'src/app/shared/models/bredcumb.model';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormArray, FormBuilder } from '@angular/forms';
 import { InterviewStatus } from 'src/app/shared/models/interview.model';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { AddInterview } from 'src/app/core/store/actions/interview.actions';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/core/store/state/app.state';
+import { MatChipInputEvent } from '@angular/material/chips';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
 
 @Component({
   selector: 'app-add-interview',
@@ -13,7 +15,7 @@ import { AppState } from 'src/app/core/store/state/app.state';
   styleUrls: ['./add-interview.component.scss']
 })
 export class AddInterviewComponent implements OnInit {
-
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   urlRegex = '^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$';
   breadcumb: BreadCumb;
   interviewForm: FormGroup;
@@ -30,9 +32,14 @@ export class AddInterviewComponent implements OnInit {
     return this.interviewForm.get('_id');
   }
 
+  get tagsFormControl() {
+    return this.interviewForm.get('tags') as FormArray;
+  }
+
   constructor(
     private authService: AuthService,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private fb: FormBuilder
   ) {
     this.breadcumb = {
       title: 'Add Interview Details',
@@ -64,6 +71,7 @@ export class AddInterviewComponent implements OnInit {
       demo_url: new FormControl('', [Validators.pattern(this.urlRegex)]),
       status: new FormControl(InterviewStatus.Created),
       _id: new FormControl(''),
+      tags: this.fb.array([]),
     });
   }
 
@@ -83,5 +91,31 @@ export class AddInterviewComponent implements OnInit {
   updateFormData(event) {
     console.log(event);
     this.interviewForm.get('description').setValue(event, {emitEvent: false, onlySelf: true});
+  }
+
+  add(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+
+    if ((value || '').trim()) {
+      const arrayFormControl: FormArray = this.tagsFormControl;
+      const a = new FormControl({name: value.trim()});
+      arrayFormControl.controls.push(a);
+      arrayFormControl.value.push({name: value.trim()});
+      this.interviewForm.updateValueAndValidity({emitEvent: true});
+    }
+
+    // Reset the input value
+    if (input) {
+      input.value = '';
+    }
+  }
+
+
+  // Remove a Tag
+  public remove(index: number): void {
+    const arrayFormControl: FormArray = this.tagsFormControl;
+    arrayFormControl.value.splice(index, 1);
+    this.interviewForm.updateValueAndValidity();
   }
 }

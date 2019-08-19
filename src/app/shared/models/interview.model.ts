@@ -1,6 +1,6 @@
 import { User } from './user.model';
-import { HighlightResult } from 'ngx-highlightjs';
 import { BlockToolData } from '@editorjs/editorjs';
+import { Tag } from './product.model';
 
 interface Files {
     file: string;
@@ -24,6 +24,7 @@ export interface Interview {
     // video_url?: string;
     // snippets?: [HighlightResult];
     shortDescription?: string;
+    tags: Tag[];
     // files: [Files];
 }
 

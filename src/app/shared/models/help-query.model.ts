@@ -1,6 +1,7 @@
 import { User } from './user.model';
 import { HighlightResult } from 'ngx-highlightjs';
 import { BlockToolData } from '@editorjs/editorjs';
+import { Tag } from './product.model';
 
 interface Files {
     file: string;
@@ -25,6 +26,7 @@ export interface HelpQuery {
     snippets?: [HighlightResult];
     shortDescription?: string;
     files: [Files];
+    tags: Tag[];
 }
 
 export enum HelpQueryStatus {

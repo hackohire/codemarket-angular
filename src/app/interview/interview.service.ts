@@ -26,6 +26,9 @@ export class InterviewService {
     status
     createdAt
     updatedAt
+    tags {
+      name
+    }
   }
   ${description}
   `;

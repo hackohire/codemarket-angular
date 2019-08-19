@@ -24,8 +24,8 @@ export const productConstants = {
         status
         createdAt
         updatedAt
-        snippets {
-            language
+        tags {
+            name
         }
     }
     ${description}

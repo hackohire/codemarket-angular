@@ -1,5 +1,6 @@
 import { User } from './user.model';
 import { BlockToolData } from '@editorjs/editorjs';
+import { Tag } from './product.model';
 
 interface Files {
     file: string;
@@ -23,6 +24,7 @@ export interface Requirement {
     // video_url?: string;
     // snippets?: [HighlightResult];
     shortDescription?: string;
+    tags: Tag[];
     // files: [Files];
 }
 

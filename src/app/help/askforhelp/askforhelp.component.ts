@@ -24,6 +24,10 @@ export class AskforhelpComponent implements OnInit {
     syntax: true,
   };
 
+  visible = true;
+  selectable = true;
+  removable = true;
+  addOnBlur = true;
 
   get createdBy() {
     return this.askForHelpForm.get('createdBy');

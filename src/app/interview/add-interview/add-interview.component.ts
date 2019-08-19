@@ -36,6 +36,11 @@ export class AddInterviewComponent implements OnInit {
     return this.interviewForm.get('tags') as FormArray;
   }
 
+  visible = true;
+  selectable = true;
+  removable = true;
+  addOnBlur = true;
+  
   constructor(
     private authService: AuthService,
     private store: Store<AppState>,

@@ -63,6 +63,11 @@ export class AddProductsComponent implements OnInit, OnDestroy {
   @ViewChild('file', { static: false }) file;
   public files: File[];
 
+  visible = true;
+  selectable = true;
+  removable = true;
+  addOnBlur = true;
+
   constructor(
     public auth: AuthService,
     private store: Store<AppState>,

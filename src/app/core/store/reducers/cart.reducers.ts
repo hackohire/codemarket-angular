@@ -1,5 +1,5 @@
 import { initialCartState, CartState } from '../state/cart.state';
-import { ECartActions, UpdateCartProductList, UpdateCartTotalSuccess } from '../actions/cart.actions';
+import { UpdateCartProductList, UpdateCartTotalSuccess } from '../actions/cart.actions';
 import { createReducer, on, Action } from '@ngrx/store';
 
 export const cartReducers = createReducer(

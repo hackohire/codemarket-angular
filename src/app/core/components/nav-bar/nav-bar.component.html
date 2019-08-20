@@ -24,7 +24,7 @@
 
   <mat-sidenav-content>
 
-    <mat-toolbar color="primary">
+    <mat-toolbar>
 
       <!-- Toggle Sidebar Button -->
       <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
@@ -32,7 +32,8 @@
       </button>
 
       <!-- Logo or Application Name -->
-      <h2 [routerLink]="['/']">Codemarket</h2>
+      <img (click)="redirect()" src="http://www.codemarket.io/wp-content/uploads/2019/07/282x61.png">
+      <!-- <h2 [routerLink]="['/']">Codemarket</h2> -->
 
       <!-- End Items -->
       <div fxFlex></div>
@@ -74,24 +75,24 @@
       </mat-menu>
 
       <!-- Shopping Cart -->
-      <a mat-button style="color: white;" [routerLink]="[{outlets: {'main': ['cart']}}]">
+      <a mat-button  [routerLink]="[{outlets: {'main': ['cart']}}]">
         <mat-icon>shopping_cart
         </mat-icon> Cart({{cartListLength | async}})
       </a>
 
       <!-- Help -->
-      <!-- <a mat-button style="color: white;" *ngIf="loggedInUser;" [routerLink]="[{outlets: {'main': ['help']}}]">
+      <!-- <a mat-button  *ngIf="loggedInUser;" [routerLink]="[{outlets: {'main': ['help']}}]">
         <mat-icon>help_outline
         </mat-icon> Help
       </a> -->
 
       <!-- Logout -->
-      <a mat-button style="color: white;" *ngIf="loggedInUser; else logIn" (click)="authService?.logout()">
+      <a mat-button  *ngIf="loggedInUser; else logIn" (click)="authService?.logout()">
         Logout</a>
 
       <!-- Login -->
       <ng-template #logIn>
-        <a mat-button style="color: white;" (click)="login()">
+        <a mat-button  (click)="login()">
           <mat-icon>face
           </mat-icon> Login/Register
         </a>

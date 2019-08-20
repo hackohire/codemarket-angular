@@ -25,6 +25,10 @@ export class HelpService {
     price
     status
     createdAt
+    createdBy {
+      name
+      _id
+    }
     updatedAt
     tags {
       name

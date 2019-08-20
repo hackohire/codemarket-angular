@@ -1,14 +1,51 @@
 @import '../../assets/css/_general.scss';
 @import '../../assets/css/_theme.scss';
 
+// Base Divider class
+.divider {
+	display: flex;
+	// margin: 50px 0 50px 0;
+	
+	&:before,
+	&:after {
+	  content: "";
+	  flex: 1;
+	}
+  }
+  
+  // Base line
+  .line {
+	align-items: center;
+	margin: 2.5em -1em;
+	
+	&:before,
+	&:after {
+	  height: 1px;
+	  margin: 0 1em;
+	}
+  }
+  
+  
+	.one-line {
+	  &:before,
+	  &:after {
+		background: rgba(0,0,0,.12);
+	  }
+	}
+
+.header-image {
+	height: -webkit-fill-available;
+	width: inherit;
+}
+
 .hero-area{
 	position: relative;
   }
   .hero-area{
 	.bg_image_holder{
-  
+
 	}
-	height: 723px;
+	height: 550px;
 	position: relative;
 	width: 100%;
 	&::before{
@@ -16,7 +53,7 @@
 	  height: 100%;
 	  width: 100%;
 	  content: '';
-	  background: linear-gradient(to left, #0030de, #0030de);
+	//   background: linear-gradient(to left, #0030de, #0030de);
 	  top: 0;
 	  left: 0;
 	  opacity: 0.8;

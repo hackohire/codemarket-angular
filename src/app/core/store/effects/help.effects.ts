@@ -51,7 +51,7 @@ export class HelpEffects {
         switchMap(() => this.helpService.getAllHelpRequests()),
         tap(u => console.log(u)),
         map((helpRequest: HelpQuery[]) => {
-            console.log(helpRequest);
+            // console.log(helpRequest);
             return SetAllHelpRequestsList({helpRequest});
         })
     );

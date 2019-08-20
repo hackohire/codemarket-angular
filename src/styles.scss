@@ -17,6 +17,10 @@ mat-icon, a {
   vertical-align: middle !important;
 }
 
+.mat-drawer-container {
+  background-color: white;
+}
+
 /*
 Template Name: MartPlace - Multipurpose Online Marketplace HTML Template with Dashboard
 Template URI: https://themeforest.net/user/aazztech/portfolio
@@ -417,11 +421,11 @@ a {
   -o-transition: opacity .3s linear;
   transition: opacity .3s linear;
   -webkit-transition: opacity .3s linear;
-  opacity: 0;
+  // opacity: 0;
 }
 
 .bg_image_holder img {
-  display: none;
+  // display: none;
 }
 
 .or {
@@ -3295,11 +3299,11 @@ h6 {
   -o-transition: opacity .3s linear;
   transition: opacity .3s linear;
   -webkit-transition: opacity .3s linear;
-  opacity: 0;
+  // opacity: 0;
 }
 
 .bg_image_holder img {
-  display: none;
+  // display: none;
 }
 
 .or {
@@ -4486,11 +4490,11 @@ h6 {
   -o-transition: opacity .3s linear;
   transition: opacity .3s linear;
   -webkit-transition: opacity .3s linear;
-  opacity: 0;
+  // opacity: 0;
 }
 
 .bg_image_holder img {
-  display: none;
+  // display: none;
 }
 
 .or {
@@ -6015,11 +6019,11 @@ div#ui-datepicker-div tbody tr td a:hover {
   -o-transition: opacity .3s linear;
   transition: opacity .3s linear;
   -webkit-transition: opacity .3s linear;
-  opacity: 0;
+  // opacity: 0;
 }
 
 .bg_image_holder img {
-  display: none;
+  // display: none;
 }
 
 .or {
@@ -7470,10 +7474,10 @@ ul.nav-tabs.nav--tabs2 li a::before {
   height: 100%;
   width: 100%;
   content: '';
-  background: -webkit-gradient(linear, right top, left top, from(#0030de), to(#0030de));
-  background: -webkit-linear-gradient(right, #0030de, #0030de);
-  background: -o-linear-gradient(right, #0030de, #0030de);
-  background: linear-gradient(to left, #0030de, #0030de);
+  // background: -webkit-gradient(linear, right top, left top, from(#0030de), to(#0030de));
+  // background: -webkit-linear-gradient(right, #0030de, #0030de);
+  // background: -o-linear-gradient(right, #0030de, #0030de);
+  // background: linear-gradient(to left, #0030de, #0030de);
   top: 0;
   left: 0;
   opacity: 0.8;

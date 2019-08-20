@@ -19,7 +19,7 @@ export const helpReducers = createReducer(
     })),
     on(SetAllHelpRequestsList, (state, {helpRequest}) => ({
         ...state,
-        allHelpRequests: helpRequest
+        allQueries: helpRequest
     })),
 );
 

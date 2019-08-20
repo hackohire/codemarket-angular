@@ -32,19 +32,19 @@
                     <a href="#">{{product?.createdBy?.name}}</a>
                 </p>
             </li>
-            <li class="product_cat">
-                <a href="#">
-                    <i class="far fa-clone"></i>
+            <!-- <li class="product_cat"> -->
+                <!-- <a href="#"> -->
+                    <!-- <i class="far fa-clone"></i> -->
                     <!-- <span class="lnr lnr-book"></span> -->
-                    Plugin</a>
-            </li>
+                    <!-- Plugin</a> -->
+            <!-- </li> -->
         </ul>
 
         <p>{{product?.shortDescription}}</p>
     </div>
     <!-- end /.product-desc -->
 
-    <div class="product-purchase">
+    <div class="product-purchase" style="display: none;">
         <div class="price_love">
             <span>{{product?.totalPrice | currency}}</span>
             <p>

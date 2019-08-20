@@ -7,6 +7,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../../store/state/app.state';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { selectCartListLength } from '../../store/selectors/cart.selectors';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav-bar',
@@ -31,7 +32,8 @@ export class NavBarComponent implements OnInit, OnDestroy {
     private breakpointObserver: BreakpointObserver,
     private store: Store<AppState>,
     public authService: AuthService,
-    private ref: ChangeDetectorRef
+    private ref: ChangeDetectorRef,
+    private router: Router
     ) {
   }
 
@@ -58,5 +60,9 @@ export class NavBarComponent implements OnInit, OnDestroy {
 
   logout() {
     this.authService.logout();
+  }
+
+  redirect() {
+    this.router.navigate(['/']);
   }
 }

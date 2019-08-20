@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from '../core/store/state/app.state';
 import { GetAllProducts } from '../core/store/actions/product.actions';
@@ -9,6 +9,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { HelpQuery } from '../shared/models/help-query.model';
 import { GetAllHelpRequests } from '../core/store/actions/help.actions';
 import { selectAllHelpRequestsList } from '../core/store/selectors/help.selectors';
+import { MatSort } from '@angular/material';
 
 @Component({
   selector: 'app-dashboard',
@@ -20,8 +21,9 @@ export class DashboardComponent implements OnInit {
   productsList$: Observable<Product[]>;
   helpRequestList$: Observable<HelpQuery[]>;
 
-  displayedColumns: string[] = ['number', 'name', 'price', 'thumbnail', 'createdBy', 'createdAt'];
+  displayedColumns: string[] = ['number', 'question', 'price', 'createdBy', 'createdAt'];
   dataSource = new MatTableDataSource();
+  @ViewChild(MatSort, {static: false}) sort: MatSort;
 
   constructor(
     private store: Store<AppState>
@@ -31,7 +33,10 @@ export class DashboardComponent implements OnInit {
     this.store.dispatch(GetAllProducts());
     this.store.dispatch(GetAllHelpRequests());
     this.productsList$ = this.store.select(selectAllProductsList);
-    this.helpRequestList$ = this.store.select(selectAllHelpRequestsList);
+    this.store.select(selectAllHelpRequestsList).subscribe( queries => {
+      this.dataSource.data = queries;
+      this.dataSource.sort = this.sort;
+    });
   }
 
 }

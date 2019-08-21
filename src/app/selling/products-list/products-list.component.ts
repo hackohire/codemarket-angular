@@ -47,11 +47,13 @@ export class ProductsListComponent implements OnInit, OnDestroy {
     private store: Store<AppState>
   ) {
 
-    this.userSubsription = this.auth.loggedInUser$.subscribe((u) => {
-      if (u) {
-        this.store.dispatch(GetProductsByUserId());
-      }
-    });
+    this.userSubsription = this.auth.loggedInUser$.pipe(
+      map((u) => {
+        if (u) {
+          this.store.dispatch(GetProductsByUserId());
+        }
+      })
+    ).subscribe();
 
     this.productsListSubscription = this.store.select(selectProductsList).pipe(
       map((products) => {
@@ -67,8 +69,13 @@ export class ProductsListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.userSubsription.unsubscribe();
-    this.productsListSubscription.unsubscribe();
+    if (this.productsListSubscription) {
+      this.productsListSubscription.unsubscribe();
+    }
+
+    if (this.userSubsription) {
+      this.productsListSubscription.unsubscribe();
+    }
   }
 
   editProduct(product): void {

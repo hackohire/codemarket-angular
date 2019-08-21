@@ -23,11 +23,11 @@ const interviewRoutes: Routes = [
         path: 'add-interview',
         loadChildren: () => import('./add-interview/add-interview.module').then(module => module.AddInterviewModule),
       },
-      // {
-      //   path: 'edit-product/:productId',
-      //   loadChildren: () => import('./add-products/add-products.module').then(module => module.AddProductsModule),
-      //   // outlet: 'selling'
-      // }
+      {
+        path: 'edit-interview/:interviewId',
+        loadChildren: () => import('./add-interview/add-interview.module').then(module => module.AddInterviewModule),
+        // outlet: 'selling'
+      }
     ]
   },
 ];

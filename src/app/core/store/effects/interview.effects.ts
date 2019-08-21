@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Effect, Actions, ofType } from '@ngrx/effects';
-import { switchMap, map, tap} from 'rxjs/operators/';
+import { switchMap, map, tap, withLatestFrom} from 'rxjs/operators/';
 import { SweetalertService } from 'src/app/shared/services/sweetalert.service';
-import { AddInterview, InterviewAddedSuccessfully, GetInterviewsByUserId, InterviewList, GetInterviewById, SetSelectedInterview, GetAllInterviews, SetAllInterviewsList } from '../actions/interview.actions';
+import { AddInterview, InterviewAddedSuccessfully, GetInterviewsByUserId, InterviewList, GetInterviewById, SetSelectedInterview, GetAllInterviews, SetAllInterviewsList, UpdateInterview, InterviewUpdated, DeleteInterview } from '../actions/interview.actions';
 import { InterviewService } from 'src/app/interview/interview.service';
 import { Interview } from 'src/app/shared/models/interview.model';
+import { selectInterviewsList } from '../selectors/interview.selectors';
+import { Store } from '@ngrx/store';
+import { AppState } from '../state/app.state';
 
 @Injectable()
 export class InterviewEffects {
@@ -55,8 +58,47 @@ export class InterviewEffects {
         })
     );
 
+    @Effect()
+    updateInterview$ = this.actions$.pipe(
+        ofType(UpdateInterview),
+        map(action => action.interview),
+        switchMap((interview) => this.interviewService.updateInterview(interview)),
+        tap(u => console.log(u)),
+        map((interview: Interview) => {
+            console.log(interview);
+            this.sweetAlertService.success('Interview Updated Successfully', '', 'success');
+            return InterviewUpdated({interview});
+        })
+    );
+
+
+    @Effect()
+    deleteInterview$ = this.actions$.pipe(
+        ofType(DeleteInterview),
+        map(action => action.interviewId),
+        switchMap((interviewId: string) => {
+            return this.interviewService.deleteInterview(interviewId).pipe(
+                withLatestFrom(this.store.select(selectInterviewsList)),
+                map(([isDeleted, interviews]) => {
+                    if (isDeleted && interviews && interviews.length) {
+                        let deletedInterviewIndex = -1;
+                        deletedInterviewIndex = interviews.findIndex((p) => p._id === interviewId);
+                        if (deletedInterviewIndex > -1) {
+                            interviews.splice(deletedInterviewIndex, 1);
+                        }
+                    }
+                    return [...interviews];
+                })
+            );
+        }),
+        map((interview: Interview[]) => {
+            return InterviewList({interview});
+        }),
+    );
+
     constructor(
         private actions$: Actions,
+        private store: Store<AppState>,
         private interviewService: InterviewService,
         private sweetAlertService: SweetalertService
     ) {

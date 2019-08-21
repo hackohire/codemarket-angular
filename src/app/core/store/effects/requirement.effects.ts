@@ -1,10 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Effect, Actions, ofType } from '@ngrx/effects';
-import { switchMap, map, tap} from 'rxjs/operators/';
+import { switchMap, map, tap, withLatestFrom} from 'rxjs/operators/';
 import { SweetalertService } from 'src/app/shared/services/sweetalert.service';
-import { AddRequirement, RequirementAddedSuccessfully, GetRequirementsByUserId, RequirementList, GetRequirementById, SetSelectedRequirement, GetAllRequirements, SetAllRequirementsList } from '../actions/requirement.actions';
+import { AddRequirement, RequirementAddedSuccessfully, GetRequirementsByUserId, RequirementList, GetRequirementById, SetSelectedRequirement, GetAllRequirements, SetAllRequirementsList, RequirementUpdated, DeleteRequirement, UpdateRequirement } from '../actions/requirement.actions';
 import { RequirementService } from 'src/app/requirements/requirement.service';
 import { Requirement } from 'src/app/shared/models/requirement.model';
+import { Store } from '@ngrx/store';
+import { AppState } from '../state/app.state';
+import { selectInterviewsList } from '../selectors/interview.selectors';
+import { selectRequirementsList } from '../selectors/requirement.selectors';
 
 @Injectable()
 export class RequirementEffects {
@@ -56,8 +60,48 @@ export class RequirementEffects {
         })
     );
 
+    @Effect()
+    updateRequirement$ = this.actions$.pipe(
+        ofType(UpdateRequirement),
+        map(action => action.requirement),
+        switchMap((requirement) => this.requirementService.updateRequirement(requirement)),
+        tap(u => console.log(u)),
+        map((requirement: Requirement) => {
+            console.log(requirement);
+            this.sweetAlertService.success('Requirement Updated Successfully', '', 'success');
+            return RequirementUpdated({requirement});
+        })
+    );
+
+
+    @Effect()
+    deleteRequirement$ = this.actions$.pipe(
+        ofType(DeleteRequirement),
+        map(action => action.requirementId),
+        switchMap((requirementId: string) => {
+            return this.requirementService.deleteRequirement(requirementId).pipe(
+                withLatestFrom(this.store.select(selectRequirementsList)),
+                map(([isDeleted, requirements]) => {
+                    if (isDeleted && requirements && requirements.length) {
+                        let deletedRequirementIndex = -1;
+                        deletedRequirementIndex = requirements.findIndex((p) => p._id === requirementId);
+                        if (deletedRequirementIndex > -1) {
+                            requirements.splice(deletedRequirementIndex, 1);
+                        }
+                    }
+                    return [...requirements];
+                })
+            );
+        }),
+        map((requirement: Requirement[]) => {
+            return RequirementList({requirement});
+        }),
+    );
+
+
     constructor(
         private actions$: Actions,
+        private store: Store<AppState>,
         private requirementService: RequirementService,
         private sweetAlertService: SweetalertService
     ) {

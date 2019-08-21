@@ -52,7 +52,8 @@ export class InterviewService {
         `,
         variables: {
           userId: this.auth.loggedInUser._id
-        }
+        },
+        fetchPolicy:  'no-cache'
       }
     ).pipe(
       map((p: any) => {
@@ -72,7 +73,8 @@ export class InterviewService {
             }
           }
           ${this.interviewQueryFields}
-        `
+        `,
+        fetchPolicy: 'no-cache'
       }
     ).pipe(
       map((p: any) => {
@@ -86,7 +88,7 @@ export class InterviewService {
       {
         query: gql`
           query getInterviewById($InterviewId: String) {
-            getInterviewById(InterviewId: $InterviewId) {
+            getInterviewById(interviewId: $InterviewId) {
               ...Interview
             }
           }
@@ -119,6 +121,45 @@ export class InterviewService {
       }
     }).pipe(
       map(q => q.data.addInterview)
+    );
+  }
+
+  updateInterview(interview: Interview): Observable<Interview> {
+    return this.apollo.mutate(
+      {
+        mutation: gql`
+          mutation updateInterview($interview: InterviewInput) {
+            updateInterview(interview: $interview) {
+              ...Interview
+            }
+          }
+          ${this.interviewQueryFields}
+        `,
+        variables: {
+          interview: interview
+        }
+      }
+    ).pipe(
+      map((p) => p.data.updateInterview),
+    );
+  }
+
+  deleteInterview(interviewId: string): Observable<boolean> {
+    return this.apollo.mutate(
+      {
+        mutation: gql`
+          mutation deleteInterview($interviewId: String) {
+            deleteInterview(interviewId: $interviewId)
+          }
+        `,
+        variables: {
+          interviewId: interviewId
+        }
+      }
+    ).pipe(
+      map((p: any) => {
+        return p.data.deleteInterview;
+      }),
     );
   }
 }

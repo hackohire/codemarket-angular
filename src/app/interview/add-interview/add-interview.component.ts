@@ -1,13 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { BreadCumb } from 'src/app/shared/models/bredcumb.model';
 import { FormGroup, FormControl, Validators, FormArray, FormBuilder } from '@angular/forms';
-import { InterviewStatus } from 'src/app/shared/models/interview.model';
+import { InterviewStatus, Interview } from 'src/app/shared/models/interview.model';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { AddInterview } from 'src/app/core/store/actions/interview.actions';
+import { AddInterview, UpdateInterview, SetSelectedInterview, GetInterviewById } from 'src/app/core/store/actions/interview.actions';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/core/store/state/app.state';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { Subscription, of } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { selectSelectedInterview } from 'src/app/core/store/selectors/interview.selectors';
+import { switchMap, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-add-interview',
@@ -32,6 +36,10 @@ export class AddInterviewComponent implements OnInit {
     return this.interviewForm.get('_id');
   }
 
+  get descriptionFormControl() {
+    return this.interviewForm.get('description');
+  }
+
   get tagsFormControl() {
     return this.interviewForm.get('tags') as FormArray;
   }
@@ -40,11 +48,14 @@ export class AddInterviewComponent implements OnInit {
   selectable = true;
   removable = true;
   addOnBlur = true;
+
+  subscription$: Subscription;
   
   constructor(
     private authService: AuthService,
     private store: Store<AppState>,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private activatedRoute: ActivatedRoute
   ) {
     this.breadcumb = {
       title: 'Add Interview Details',
@@ -59,24 +70,59 @@ export class AddInterviewComponent implements OnInit {
       ]
     };
 
-    this.interviewFormInitialization();
+    /** If it is "add-interview" route intialize empty interview form, but we are setting store property of "Selectedinterview" as null
+     * and if it is "edit-interview route" we need to subscribe to get "Selectedinterview" and user refresh the tab,
+     * there won't be any selected interview,
+     * so we need to make the call to
+     * get the interview by fetching id from the params
+     */
+
+    if (this.activatedRoute.snapshot.parent.routeConfig.path === 'add-interview') {
+      this.store.dispatch(SetSelectedInterview({ interview: null }));
+      this.interviewFormInitialization(null);
+    } else {
+      this.subscription$ = this.store.select(selectSelectedInterview).pipe(
+        tap((h: Interview) => {
+          this.interviewFormInitialization(h);
+        }),
+        switchMap((h: Interview) => {
+          if (!h) {
+            return this.activatedRoute.params;
+          }
+          return of({ interviewId: '' });
+        }),
+        tap((params) => {
+          /** When user refresh the tab, there won't be any selected interview, so we need to make the call to
+           * get the interview by fetching id from the params
+           */
+          if (params.interviewId) {
+            this.store.dispatch(GetInterviewById({ interviewId: params.interviewId }));
+          }
+        })
+      ).subscribe();
+    }
+
+    // this.interviewFormInitialization();
   }
 
   ngOnInit() {
   }
 
-  interviewFormInitialization() {
+  interviewFormInitialization(i: Interview) {
     this.interviewForm = new FormGroup({
-      name: new FormControl(''),
-      description: new FormControl(''),
-      price: new FormControl(''),
-      createdBy: new FormControl(),
-      shortDescription: new FormControl(),
-      categories: new FormControl(null),
-      demo_url: new FormControl('', [Validators.pattern(this.urlRegex)]),
+      name: new FormControl(i && i.name ? i.name : ''),
+      description: new FormControl(i && i.description ? i.description : ''),
+      price: new FormControl(i && i.price ? i.price : ''),
+      createdBy: new FormControl(i && i.createdBy && i.createdBy._id ? i.createdBy._id : ''),
+      shortDescription: new FormControl(i && i.shortDescription ? i.shortDescription : ''),
+      categories: new FormControl(i && i.categories ? i.categories : []),
+      demo_url: new FormControl(i && i.demo_url ? i.demo_url : '', [Validators.pattern(this.urlRegex)]),
+      // documentation_url: new FormControl('', [Validators.pattern(this.urlRegex)]),
+      // video_url: new FormControl('', [Validators.pattern(this.urlRegex)]),
       status: new FormControl(InterviewStatus.Created),
-      _id: new FormControl(''),
-      tags: this.fb.array([]),
+      _id: new FormControl(i && i._id ? i._id : ''),
+      tags: this.fb.array(i && i.tags && i.tags.length ? i.tags : []),
+      // snippets: new FormControl(null),
     });
   }
 
@@ -88,14 +134,15 @@ export class AddInterviewComponent implements OnInit {
 
     if (this.idFromControl && !this.idFromControl.value) {
       this.interviewForm.removeControl('_id');
+      this.store.dispatch(AddInterview({interview: this.interviewForm.value}));
+    } else {
+      this.store.dispatch(UpdateInterview({interview: this.interviewForm.value}));
     }
-
-    this.store.dispatch(AddInterview({interview: this.interviewForm.value}));
   }
 
   updateFormData(event) {
     console.log(event);
-    this.interviewForm.get('description').setValue(event, {emitEvent: false, onlySelf: true});
+    this.interviewForm.get('description').setValue(event);
   }
 
   add(event: MatChipInputEvent): void {

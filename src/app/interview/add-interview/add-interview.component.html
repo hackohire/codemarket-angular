@@ -9,7 +9,7 @@
                     <input type="text" matInput formControlName="name" placeholder="Name">
                 </mat-form-field>
 
-                <app-editor (output)="updateFormData($event)" [id]="'interview-editor'"></app-editor>
+                <app-editor (output)="updateFormData($event)" [data]="interviewForm?.get('description')?.value" [id]="'interview-editor'"></app-editor>
 
 
 

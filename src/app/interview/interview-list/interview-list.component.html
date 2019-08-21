@@ -1,2 +1,65 @@
-<p>interview-list works!</p>
-{{ interViewList$ | async | json }}
+<table mat-table [dataSource]="dataSource" matSort multiTemplateDataRows class="mat-elevation-z8">
+    <!-- Position Column -->
+    <ng-container matColumnDef="number">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
+        <td mat-cell *matCellDef="let interview; let i = dataIndex;">{{i + 1}} </td>
+        <!-- <mat-cell *matCellDef="let interview; let i = dataIndex;">{{i + 1}}</mat-cell> -->
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+        <td mat-cell *matCellDef="let interview"> {{interview.name}} </td>
+    </ng-container>
+
+    <!-- Price Column -->
+    <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Price </th>
+        <td mat-cell *matCellDef="let interview"> {{interview.price}} </td>
+    </ng-container>
+
+    <!-- Action Column -->
+    <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+        <td mat-cell *matCellDef="let interview" (click)="$event.stopPropagation()">
+            <button mat-mini-fab color="primary" (click)="editInterview(interview)"
+                [routerLink]="['/', {outlets: {'main': ['interview', 'edit-interview', interview._id]}}]">
+                <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-mini-fab color="warn" (click)="deleteInterview(interview._id)">
+                <mat-icon>delete</mat-icon>
+            </button>
+        </td>
+    </ng-container>
+
+
+    <!-- Status Column -->
+    <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+        <td mat-cell *matCellDef="let interview"> {{interview.status}} </td>
+    </ng-container>
+
+    <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+    <ng-container matColumnDef="expandedDetail">
+        <td mat-cell *matCellDef="let interview; let i = index;" [attr.colspan]="displayedColumns?.length">
+            <div class="example-interview-detail" [@detailExpand]="interview == expandedInterview ? 'expanded' : 'collapsed'">
+                <div class="example-interview-description">
+                    <app-editor *ngIf="interview.description; else noDescription;" [readOnly]="true" [data]="interview?.description" [id]="interview?._id"></app-editor>
+                    <!-- <quill-view *ngIf="interview.description; else noDescription;" [modules]="modules"
+                            [content]="interview.description" format="text" theme="snow"></quill-view> -->
+                    <ng-template #noDescription>
+                        <span>No Description</span>
+                    </ng-template>
+                    <!-- {{interview.description}} -->
+                </div>
+            </div>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let interview; columns: displayedColumns; let i = dataIndex;" class="example-interview-row"
+        [class.example-expanded-row]="expandedInterview === interview"
+        (click)="expandedInterview = expandedInterview === interview ? null : interview">
+    </tr>
+    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']; let i = dataIndex;" class="example-detail-row"></tr>
+</table>

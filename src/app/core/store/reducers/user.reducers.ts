@@ -1,6 +1,6 @@
 import { initialUserState, UserState } from '../state/user.state';
 import { GetUsersSuccess, GetUserSuccess, SetLoggedInUser } from '../actions/user.actions';
-import { createReducer, on, State, Action } from '@ngrx/store';
+import { createReducer, on, Action } from '@ngrx/store';
 
 
 export const userReducers = createReducer(

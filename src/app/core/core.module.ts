@@ -62,6 +62,19 @@ export class CoreModule {
     const httpPlatform = httpLink.create({ uri: environment.platform_graphql_url });
 
     let token = '';
+
+    // cleanTypeName to omit __typename field
+    const cleanTypeName = new ApolloLink((operation, forward) => {
+      if (operation.variables) {
+        const omitTypename = (key, value) => (key === '__typename' ? undefined : value);
+        operation.variables = JSON.parse(JSON.stringify(operation.variables), omitTypename);
+      }
+      return forward(operation).map((data) => {
+        return data;
+      });
+    });
+
+
     const authLink = new ApolloLink((operation, forward) => {
 
 
@@ -80,7 +93,7 @@ export class CoreModule {
 
     /** Codemarket Apollo Client */
     apollo.create({
-      link: authLink.concat(httpCodemarket),
+      link: authLink.concat(cleanTypeName).concat(httpCodemarket),
       cache: new InMemoryCache({
         addTypename: true,
 

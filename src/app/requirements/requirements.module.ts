@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AddRequirementsComponent } from './add-requirements/add-requirements.component';
 import { Routes, RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { RequirementsComponent } from './requirements.component';
@@ -27,11 +26,11 @@ const requirementRoutes: Routes = [
         path: 'add-requirement',
         loadChildren: () => import('./add-requirements/add-requirement.module').then(module => module.AddRequirementModule),
       },
-      // {
-      //   path: 'edit-product/:productId',
-      //   loadChildren: () => import('./add-products/add-products.module').then(module => module.AddProductsModule),
-      //   // outlet: 'selling'
-      // }
+      {
+        path: 'edit-requirement/:requirementId',
+        loadChildren: () => import('./add-requirements/add-requirement.module').then(module => module.AddRequirementModule),
+        // outlet: 'selling'
+      }
     ]
   },
 ];

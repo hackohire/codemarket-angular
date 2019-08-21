@@ -9,7 +9,7 @@
                     <input type="text" matInput formControlName="name" placeholder="Name">
                 </mat-form-field>
 
-                <app-editor (output)="updateFormData($event)" [id]="'requirement-editor'"></app-editor>
+                <app-editor (output)="updateFormData($event)" [data]="requirementForm?.get('description')?.value" [id]="'requirement-editor'"></app-editor>
 
                 <!-- <quill-editor #editor formControlName="description" [modules]="modules">
                 </quill-editor> -->

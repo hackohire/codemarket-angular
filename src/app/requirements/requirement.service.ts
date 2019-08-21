@@ -53,7 +53,8 @@ export class RequirementService {
         `,
         variables: {
           userId: this.auth.loggedInUser._id
-        }
+        },
+        fetchPolicy: 'no-cache'
       }
     ).pipe(
       map((p: any) => {
@@ -74,7 +75,8 @@ export class RequirementService {
             }
           }
           ${this.requirementQueryFields}
-        `
+        `,
+        fetchPolicy: 'no-cache'
       }
     ).pipe(
       map((p: any) => {
@@ -120,6 +122,45 @@ export class RequirementService {
       }
     }).pipe(
       map(q => q.data.addRequirement)
+    );
+  }
+
+  updateRequirement(requirement: Requirement): Observable<Requirement> {
+    return this.apollo.mutate(
+      {
+        mutation: gql`
+          mutation updateRequirement($requirement: RequirementInput) {
+            updateRequirement(requirement: $requirement) {
+              ...Requirement
+            }
+          }
+          ${this.requirementQueryFields}
+        `,
+        variables: {
+          requirement: requirement
+        }
+      }
+    ).pipe(
+      map((p) => p.data.updateRequirement),
+    );
+  }
+
+  deleteRequirement(requirementId: string): Observable<boolean> {
+    return this.apollo.mutate(
+      {
+        mutation: gql`
+          mutation deleteRequirement($requirementId: String) {
+            deleteRequirement(requirementId: $requirementId)
+          }
+        `,
+        variables: {
+          requirementId: requirementId
+        }
+      }
+    ).pipe(
+      map((p: any) => {
+        return p.data.deleteRequirement;
+      }),
     );
   }
 }

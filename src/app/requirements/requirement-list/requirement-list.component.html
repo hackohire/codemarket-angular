@@ -1,2 +1,65 @@
-<p>requirement-list works!</p>
-{{ requirementList$ | async | json }}
+<table mat-table [dataSource]="dataSource" matSort multiTemplateDataRows class="mat-elevation-z8">
+    <!-- Position Column -->
+    <ng-container matColumnDef="number">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
+        <td mat-cell *matCellDef="let requirement; let i = dataIndex;">{{i + 1}} </td>
+        <!-- <mat-cell *matCellDef="let requirement; let i = dataIndex;">{{i + 1}}</mat-cell> -->
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+        <td mat-cell *matCellDef="let requirement"> {{requirement.name}} </td>
+    </ng-container>
+
+    <!-- Price Column -->
+    <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Price </th>
+        <td mat-cell *matCellDef="let requirement"> {{requirement.price}} </td>
+    </ng-container>
+
+    <!-- Action Column -->
+    <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+        <td mat-cell *matCellDef="let requirement" (click)="$event.stopPropagation()">
+            <button mat-mini-fab color="primary" (click)="editRequirement(requirement)"
+                [routerLink]="['/', {outlets: {'main': ['requirement', 'edit-requirement', requirement._id]}}]">
+                <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-mini-fab color="warn" (click)="deleteRequirement(requirement._id)">
+                <mat-icon>delete</mat-icon>
+            </button>
+        </td>
+    </ng-container>
+
+
+    <!-- Status Column -->
+    <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+        <td mat-cell *matCellDef="let requirement"> {{requirement.status}} </td>
+    </ng-container>
+
+    <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+    <ng-container matColumnDef="expandedDetail">
+        <td mat-cell *matCellDef="let requirement; let i = index;" [attr.colspan]="displayedColumns?.length">
+            <div class="example-requirement-detail" [@detailExpand]="requirement == expandedRequirement ? 'expanded' : 'collapsed'">
+                <div class="example-requirement-description">
+                    <app-editor [readOnly]="true" [data]="requirement?.description" [id]="requirement?._id"></app-editor>
+                    <!-- <quill-view *ngIf="requirement.description; else noDescription;" [modules]="modules"
+                            [content]="requirement.description" format="text" theme="snow"></quill-view> -->
+                    <ng-template #noDescription>
+                        <span>No Description</span>
+                    </ng-template>
+                    <!-- {{requirement.description}} -->
+                </div>
+            </div>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let requirement; columns: displayedColumns; let i = dataIndex;" class="example-requirement-row"
+        [class.example-expanded-row]="expandedRequirement === requirement"
+        (click)="expandedRequirement = expandedRequirement === requirement ? null : requirement">
+    </tr>
+    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']; let i = dataIndex;" class="example-detail-row"></tr>
+</table>

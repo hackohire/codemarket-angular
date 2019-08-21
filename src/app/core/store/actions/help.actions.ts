@@ -5,6 +5,11 @@ export enum EHelpRequestActions {
     AddQuery = '[Help] Add Query',
     QueryAddedSuccessfully = '[Help] Query Added Successfully',
 
+
+    UpdateHelpRequest = '[HelpRequest] Update HelpRequest',
+    HelpRequestUpdated = '[HelpRequest] HelpRequest Updated',
+    DeleteHelpRequest = '[HelpRequest] Delete HelpRequest',
+
     GetAllHelpRequests = '[HelpRequest] Get All HelpRequests', // List of All HelpRequests in the platform
     GetHelpRequestsByUserId = '[HelpRequest] Get HelpRequests By User Id',
     GetHelpRequestById = '[HelpRequest] Get HelpRequest By Id',
@@ -52,5 +57,20 @@ export const GetAllHelpRequests = createAction(
 export const SetAllHelpRequestsList = createAction(
     EHelpRequestActions.SetAllHelpRequestsList,
     props<{helpRequest: HelpQuery[]}>()
+);
+
+export const UpdateHelpRequest = createAction(
+    EHelpRequestActions.UpdateHelpRequest,
+    props<{helpRequest: HelpQuery}>()
+);
+
+export const HelpRequestUpdated = createAction(
+    EHelpRequestActions.HelpRequestUpdated,
+    props<{helpRequest: HelpQuery}>()
+);
+
+export const DeleteHelpRequest = createAction(
+    EHelpRequestActions.DeleteHelpRequest,
+    props<{helpRequestId: string}>()
 );
 

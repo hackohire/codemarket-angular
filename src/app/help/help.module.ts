@@ -25,11 +25,11 @@ const helpRoutes: Routes = [
         path: 'add-help-request',
         loadChildren: () => import('./askforhelp/askforhelp.module').then(module => module.AskforhelpModule),
       },
-      // {
-      //   path: 'edit-product/:productId',
-      //   loadChildren: () => import('./add-products/add-products.module').then(module => module.AddProductsModule),
-      //   // outlet: 'selling'
-      // }
+      {
+        path: 'edit-helpRequest/:helpRequestId',
+        loadChildren: () => import('./askforhelp/askforhelp.module').then(module => module.AskforhelpModule),
+        // outlet: 'selling'
+      }
     ]
   },
 ];

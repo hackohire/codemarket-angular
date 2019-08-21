@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Effect, Actions, ofType } from '@ngrx/effects';
-import { switchMap, map, tap} from 'rxjs/operators/';
+import { switchMap, map, tap, withLatestFrom} from 'rxjs/operators/';
 import { HelpService } from 'src/app/help/help.service';
-import { AddQuery, QueryAddedSuccessfully, GetHelpRequestsByUserId, HelpRequestList, GetHelpRequestById, SetSelectedHelpRequest, GetAllHelpRequests, SetAllHelpRequestsList } from '../actions/help.actions';
+import { AddQuery, QueryAddedSuccessfully, GetHelpRequestsByUserId, HelpRequestList, GetHelpRequestById, SetSelectedHelpRequest, GetAllHelpRequests, SetAllHelpRequestsList, DeleteHelpRequest, HelpRequestUpdated, UpdateHelpRequest } from '../actions/help.actions';
 import { HelpQuery } from 'src/app/shared/models/help-query.model';
 import { SweetalertService } from 'src/app/shared/services/sweetalert.service';
+import { Store } from '@ngrx/store';
+import { AppState } from '../state/app.state';
+import { selectQueries } from '../selectors/help.selectors';
 
 @Injectable()
 export class HelpEffects {
@@ -56,10 +59,49 @@ export class HelpEffects {
         })
     );
 
+    @Effect()
+    updateHelpRequest$ = this.actions$.pipe(
+        ofType(UpdateHelpRequest),
+        map(action => action.helpRequest),
+        switchMap((helpRequest) => this.helpService.updateHelpRequest(helpRequest)),
+        tap(u => console.log(u)),
+        map((helpRequest: HelpQuery) => {
+            console.log(helpRequest);
+            this.sweetAlertService.success('HelpRequest Updated Successfully', '', 'success');
+            return HelpRequestUpdated({helpRequest});
+        })
+    );
+
+
+    @Effect()
+    deleteHelpRequest$ = this.actions$.pipe(
+        ofType(DeleteHelpRequest),
+        map(action => action.helpRequestId),
+        switchMap((helpRequestId: string) => {
+            return this.helpService.deleteHelpRequest(helpRequestId).pipe(
+                withLatestFrom(this.store.select(selectQueries)),
+                map(([isDeleted, helpRequests]) => {
+                    if (isDeleted && helpRequests && helpRequests.length) {
+                        let deletedHelpRequestIndex = -1;
+                        deletedHelpRequestIndex = helpRequests.findIndex((p) => p._id === helpRequestId);
+                        if (deletedHelpRequestIndex > -1) {
+                            helpRequests.splice(deletedHelpRequestIndex, 1);
+                        }
+                    }
+                    return [...helpRequests];
+                })
+            );
+        }),
+        map((helpRequest: HelpQuery[]) => {
+            return HelpRequestList({helpRequest});
+        }),
+    );
+
 
 
     constructor(
         private actions$: Actions,
+        private store: Store<AppState>,
         private helpService: HelpService,
         private sweetAlertService: SweetalertService
     ) {

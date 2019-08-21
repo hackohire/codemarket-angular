@@ -5,6 +5,9 @@ export enum EInterviewActions {
     AddInterview = '[Interview] Add Interview',
     InterviewAddedSuccessfully = '[Interview] Interview Added Successfully',
 
+    UpdateInterview = '[Interview] Update Interview',
+    InterviewUpdated = '[Interview] Interview Updated',
+    DeleteInterview = '[Interview] Delete Interview',
 
     GetAllInterviews = '[Interview] Get All Interviews', // List of All Interviews in the platform
     GetInterviewsByUserId = '[Interview] Get Interviews By User Id',
@@ -54,5 +57,20 @@ export const GetAllInterviews = createAction(
 export const SetAllInterviewsList = createAction(
     EInterviewActions.SetAllInterviewsList,
     props<{interview: Interview[]}>()
+);
+
+export const UpdateInterview = createAction(
+    EInterviewActions.UpdateInterview,
+    props<{interview: Interview}>()
+);
+
+export const InterviewUpdated = createAction(
+    EInterviewActions.InterviewUpdated,
+    props<{interview: Interview}>()
+);
+
+export const DeleteInterview = createAction(
+    EInterviewActions.DeleteInterview,
+    props<{interviewId: string}>()
 );
 

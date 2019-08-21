@@ -10,7 +10,7 @@
                     <input type="text" matInput formControlName="question" placeholder="Question">
                 </mat-form-field>
 
-                <app-editor (output)="updateFormData($event)" [id]="'help-editor'"></app-editor>
+                <app-editor (output)="updateFormData($event)" [data]="askForHelpForm?.get('description')?.value" [id]="'help-editor'"></app-editor>
 
                 <!-- <quill-editor #editor formControlName="description" [modules]="modules">
                 </quill-editor> -->
@@ -31,7 +31,7 @@
                     </mat-error>
                 </mat-form-field>
 
-                <mat-form-field class="field-full-width">
+                <!-- <mat-form-field class="field-full-width">
                     <input matInput formControlName="documentation_url" placeholder="Documentation Url">
                     <mat-error *ngIf="askForHelpForm?.get('documentation_url')?.invalid">{{'Please enter a valid URL'}}
                     </mat-error>
@@ -41,7 +41,7 @@
                     <input matInput formControlName="video_url" placeholder="Video Url">
                     <mat-error *ngIf="askForHelpForm?.get('video_url')?.invalid">{{'Please enter a valid URL'}}
                     </mat-error>
-                </mat-form-field>
+                </mat-form-field> -->
 
                 <mat-form-field class="field-full-width">
                     <mat-chip-list #tagsList>

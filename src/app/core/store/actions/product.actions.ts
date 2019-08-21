@@ -7,7 +7,7 @@ export enum EProductActions {
 
     UpdatePrdouct = '[Product] Update Product',
     ProductUpdated = '[Product] Product Updated',
-    DeleteProduct = '[Product] Delete Products',
+    DeleteProduct = '[Product] Delete Product',
 
     GetAllProducts = '[Product] Get All Products', // List of All Products in the platform
     GetProductsByUserId = '[Product] Get Products By User Id',

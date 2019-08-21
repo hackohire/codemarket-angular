@@ -104,10 +104,5 @@ export class ProductEffects {
         map((product: Product[]) => {
             return ProductList({product});
         }),
-        // tap(u => console.log(u)),
-        // map((product) => {
-        //     console.log(product);
-        //     return SetAllProductsList({product});
-        // })
     );
 }

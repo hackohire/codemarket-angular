@@ -55,7 +55,8 @@ export class HelpService {
         `,
         variables: {
           userId: this.auth.loggedInUser._id
-        }
+        },
+        fetchPolicy: 'no-cache'
       }
     ).pipe(
       map((p: any) => {
@@ -74,7 +75,8 @@ export class HelpService {
             }
           }
           ${this.helpRequestQueryFields}
-        `
+        `,
+        fetchPolicy: 'no-cache'
       }
     ).pipe(
       map((p: any) => {
@@ -122,4 +124,44 @@ export class HelpService {
       map(q => q.data.addQuery)
     );
   }
+
+  updateHelpRequest(helpRequest: HelpQuery): Observable<HelpQuery> {
+    return this.apollo.mutate(
+      {
+        mutation: gql`
+          mutation updateHelpRequest($helpRequest: HelpQueryInput) {
+            updateHelpRequest(helpRequest: $helpRequest) {
+              ...HelpQuery
+            }
+          }
+          ${this.helpRequestQueryFields}
+        `,
+        variables: {
+          helpRequest: helpRequest
+        }
+      }
+    ).pipe(
+      map((p) => p.data.updateHelpRequest),
+    );
+  }
+
+  deleteHelpRequest(helpRequestId: string): Observable<boolean> {
+    return this.apollo.mutate(
+      {
+        mutation: gql`
+          mutation deleteHelpRequest($helpRequestId: String) {
+            deleteHelpRequest(helpRequestId: $helpRequestId)
+          }
+        `,
+        variables: {
+          helpRequestId: helpRequestId
+        }
+      }
+    ).pipe(
+      map((p: any) => {
+        return p.data.deleteHelpRequest;
+      }),
+    );
+  }
+
 }

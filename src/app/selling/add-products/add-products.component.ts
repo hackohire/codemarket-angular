@@ -135,7 +135,7 @@ export class AddProductsComponent implements OnInit, OnDestroy {
       name: new FormControl(p && p.name ? p.name : ''),
       description: new FormControl(p && p.description ? p.description : ''),
       shortDescription: new FormControl(p && p.shortDescription ? p.shortDescription : ''),
-      createdBy: new FormControl(p && p.createdBy ? p.createdBy : ''),
+      createdBy: new FormControl(p && p.createdBy && p.createdBy._id ? p.createdBy._id : ''),
       totalPrice: new FormControl(p && p.totalPrice ? p.totalPrice : 0),
       categories: new FormControl(p && p.categories ? p.categories : []),
       demo_url: new FormControl(p && p.demo_url ? p.demo_url : '', [Validators.pattern(this.urlRegex)]),
@@ -174,19 +174,6 @@ export class AddProductsComponent implements OnInit, OnDestroy {
 
     /* Set LoggedInUserId as created By if it is not already set **/
     if (!this.createdByFormControlValue) {
-      if (this.tagsFormControl.value && this.tagsFormControl.value.length) {
-        this.tagsFormControl.value.forEach((t) => delete t['__typename']);
-      }
-
-      if (this.descriptionFormControl.value && this.descriptionFormControl.value.length) {
-        this.descriptionFormControl.value.forEach((t) => {
-          delete t['__typename'];
-          if (t.data['__typename']) {
-            delete t.data['__typename'];
-          }
-          return t;
-        });
-      }
       this.productForm.get('createdBy').setValue(this.auth.loggedInUser._id);
     }
 
@@ -272,7 +259,7 @@ export class AddProductsComponent implements OnInit, OnDestroy {
 
   updateFormData(event) {
     console.log(event);
-    this.productForm.get('description').setValue(event, { emitEvent: false, onlySelf: true });
+    this.productForm.get('description').setValue(event);
   }
 
   add(event: MatChipInputEvent): void {

@@ -8,7 +8,6 @@ import { Product } from 'src/app/shared/models/product.model';
 import { selectProductsList } from 'src/app/core/store/selectors/product.selectors';
 import { Subscription } from 'rxjs';
 import { trigger, state, style, transition, animate } from '@angular/animations';
-import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 
 @Component({
@@ -35,7 +34,6 @@ export class ProductsListComponent implements OnInit, OnDestroy {
   dataSource = new MatTableDataSource();
   expandedProduct: Product | null;
 
-  productsList: Product[];
 
   userSubsription: Subscription;
   productsListSubscription: Subscription;

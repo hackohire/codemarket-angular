@@ -46,7 +46,8 @@ export class ProductService {
             }
           }
           ${this.productFields}
-        `
+        `,
+        fetchPolicy: 'no-cache'
       }
     ).pipe(
       map((p: any) => {

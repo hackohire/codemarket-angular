@@ -72,8 +72,9 @@ export class SellingProductsService {
         `,
         variables: {
           userId: this.auth.loggedInUser._id
-        }
-      }
+        },
+        fetchPolicy: 'no-cache'
+      },
     ).pipe(
       map((p: any) => {
         return p.data.getProductsByUserId;

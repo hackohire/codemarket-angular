@@ -44,7 +44,7 @@
         <td mat-cell *matCellDef="let interview; let i = index;" [attr.colspan]="displayedColumns?.length">
             <div class="example-interview-detail" [@detailExpand]="interview == expandedInterview ? 'expanded' : 'collapsed'">
                 <div class="example-interview-description">
-                    <app-editor *ngIf="interview.description; else noDescription;" [readOnly]="true" [data]="interview?.description" [id]="interview?._id"></app-editor>
+                    <app-editor *ngIf="interview.description && interview == expandedInterview; else noDescription;" [readOnly]="true" [data]="interview?.description" [id]="interview?._id"></app-editor>
                     <!-- <quill-view *ngIf="interview.description; else noDescription;" [modules]="modules"
                             [content]="interview.description" format="text" theme="snow"></quill-view> -->
                     <ng-template #noDescription>

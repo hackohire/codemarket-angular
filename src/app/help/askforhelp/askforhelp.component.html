@@ -9,8 +9,14 @@
                 <mat-form-field class="field-full-width">
                     <input type="text" matInput formControlName="question" placeholder="Question">
                 </mat-form-field>
+                
+                <app-editor *ngIf="askForHelpForm?.get('description')?.value; else add" (output)="updateFormData($event)" [data]="askForHelpForm?.get('description')?.value" [id]="'edit-help-editor'"></app-editor>
+                    
 
-                <app-editor (output)="updateFormData($event)" [data]="askForHelpForm?.get('description')?.value" [id]="'help-editor'"></app-editor>
+                <ng-template #add>
+                    <app-editor (output)="updateFormData($event)"  [id]="'help-editor'"></app-editor>
+                </ng-template>
+                 
 
                 <!-- <quill-editor #editor formControlName="description" [modules]="modules">
                 </quill-editor> -->

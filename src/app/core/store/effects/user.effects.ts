@@ -48,7 +48,7 @@ export class UserEffects {
         ofType(EUserActions.Authorise),
         switchMap(() => this.authServie.authorizeWithPlatform()),
         tap((t) => console.log(t)),
-        switchMap((user: User) => of(SetLoggedInUser({payload: user})))
+        map((user: User) => SetLoggedInUser({payload: user}))
     );
 
     constructor(

@@ -28,6 +28,12 @@ const routes: Routes = [
   },
 
   {
+    path: 'user',
+    loadChildren: () => import('./user/user.module').then(module => module.UserModule),
+    outlet: 'main'
+  },
+
+  {
     path: 'help',
     loadChildren: () => import('./help/help.module').then(module => module.HelpModule),
     outlet: 'main'

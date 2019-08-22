@@ -4,7 +4,7 @@ export interface User {
     name: string;
     email_verified?: boolean;
     sub?: string;
-    __typename?: string;
+    // __typename?: string;
     location?: string;
     stackoverflow_url?: string;
     linkedin_url?: string;

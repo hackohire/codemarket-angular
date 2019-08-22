@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
-import Amplify, { Hub } from '@aws-amplify/core';
+import { Hub } from '@aws-amplify/core';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { map, catchError } from 'rxjs/operators';
 import { of } from 'rxjs/internal/observable/of';
-import { CognitoUserSession, CognitoUser } from 'amazon-cognito-identity-js';
+import { CognitoUser } from 'amazon-cognito-identity-js';
 import { Auth } from 'aws-amplify';
 import { environment } from 'src/environments/environment';
 import { Store } from '@ngrx/store';
 import { AppState } from '../store/state/app.state';
-import { SetLoggedInUser, Authorise } from '../store/actions/user.actions';
+import { Authorise } from '../store/actions/user.actions';
 import { selectLoggedInUser } from '../store/selectors/user.selector';
 import { Observable } from 'rxjs';
 import { User } from '../../shared/models/user.model';
@@ -73,7 +73,7 @@ export class AuthService {
   }
 
   authorizeWithPlatform(): Observable<User> {
-    return this.apollo.use('platform').mutate(
+    return this.apollo.mutate(
       {
         mutation: gql`
           mutation authorize($applicationId: String) {

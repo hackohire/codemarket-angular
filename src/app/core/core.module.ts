@@ -109,7 +109,7 @@ export class CoreModule {
                   kind: 'UNION',
                   name: 'descriptionBlocks',
                   possibleTypes: [
-                    { name: 'HeaderhBlock' },
+                    { name: 'HeaderBlock' },
                     { name: 'ParagraphBlock' },
                     { name: 'CodeBlock' },
                     { name: 'ImageBlock' },

@@ -44,7 +44,7 @@
         <td mat-cell *matCellDef="let helpRequest; let i = index;" [attr.colspan]="displayedColumns?.length">
             <div class="example-helpRequest-detail" [@detailExpand]="helpRequest == expandedHelpRequest ? 'expanded' : 'collapsed'">
                 <div class="example-helpRequest-description">
-                    <app-editor [readOnly]="true" [data]="helpRequest?.description" [id]="helpRequest?._id"></app-editor>
+                    <app-editor *ngIf="helpRequest == expandedHelpRequest" [readOnly]="true" [data]="helpRequest?.description" [id]="helpRequest?._id"></app-editor>
                     <!-- <quill-view *ngIf="helpRequest.description; else noDescription;" [modules]="modules"
                             [content]="helpRequest.description" format="text" theme="snow"></quill-view> -->
                     <ng-template #noDescription>

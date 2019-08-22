@@ -9,8 +9,15 @@
                     <input type="text" matInput formControlName="name" placeholder="Name">
                 </mat-form-field>
 
-                <app-editor (output)="updateFormData($event)" [data]="requirementForm?.get('description')?.value" [id]="'requirement-editor'"></app-editor>
+                
+                <app-editor *ngIf="requirementForm?.get('description')?.value; else add" (output)="updateFormData($event)" [data]="requirementForm?.get('description')?.value" [id]="'edit-requirement-editor'"></app-editor>
+                    
 
+                <ng-template #add>
+                    <app-editor (output)="updateFormData($event)"  [id]="'requirement-editor'"></app-editor>
+                </ng-template>
+                
+                
                 <!-- <quill-editor #editor formControlName="description" [modules]="modules">
                 </quill-editor> -->
 

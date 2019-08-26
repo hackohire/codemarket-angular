@@ -9,10 +9,11 @@ import { Auth } from 'aws-amplify';
 import { environment } from 'src/environments/environment';
 import { Store } from '@ngrx/store';
 import { AppState } from '../store/state/app.state';
-import { Authorise } from '../store/actions/user.actions';
+import { Authorise, SetLoggedInUser } from '../store/actions/user.actions';
 import { selectLoggedInUser } from '../store/selectors/user.selector';
 import { Observable } from 'rxjs';
 import { User } from '../../shared/models/user.model';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +24,8 @@ export class AuthService {
   loggedInUser: User;
   constructor(
     private apollo: Apollo,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private router: Router
     ) {
 
     this.loggedInUser$ = this.store.select(selectLoggedInUser);
@@ -52,7 +54,15 @@ export class AuthService {
             // this.authorizeWithPlatform();
           }
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+          console.log(err);
+          localStorage.clear();
+          this.store.dispatch(SetLoggedInUser({payload: null}));
+        });
+      } else if (channel === 'auth' && data.payload.event === 'oAuthSignOut') {
+        localStorage.clear();
+        this.store.dispatch(SetLoggedInUser({payload: null}));
+        this.router.navigate(['/']);
       }
     });
 
@@ -69,7 +79,12 @@ export class AuthService {
           // this.authorizeWithPlatform();
         }
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err);
+        this.router.navigate(['/']);
+        this.store.dispatch(SetLoggedInUser({payload: null}));
+        localStorage.clear();
+      });
   }
 
   authorizeWithPlatform(): Observable<User> {

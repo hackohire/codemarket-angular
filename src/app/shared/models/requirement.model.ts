@@ -6,6 +6,14 @@ interface Files {
     file: string;
     fileName: string;
 }
+
+interface Support {
+    time: number;
+    description: {
+        type: string;
+        data: BlockToolData
+    };
+}
 export interface Requirement {
     name: string;
     description: [{
@@ -25,6 +33,7 @@ export interface Requirement {
     // snippets?: [HighlightResult];
     shortDescription?: string;
     tags: Tag[];
+    support?: Support;
     // files: [Files];
 }
 

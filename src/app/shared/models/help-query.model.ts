@@ -7,6 +7,15 @@ interface Files {
     file: string;
     fileName: string;
 }
+
+interface Support {
+    time: number;
+    description: {
+        type: string;
+        data: BlockToolData
+    };
+}
+
 export interface HelpQuery {
     question: string;
     description: [{
@@ -25,8 +34,9 @@ export interface HelpQuery {
     video_url?: string;
     snippets?: [HighlightResult];
     shortDescription?: string;
-    files: [Files];
-    tags: Tag[];
+    files?: [Files];
+    tags?: Tag[];
+    support?: Support;
 }
 
 export enum HelpQueryStatus {

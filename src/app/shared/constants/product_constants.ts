@@ -27,6 +27,12 @@ export const productConstants = {
         tags {
             name
         }
+        support {
+            time
+            description {
+                ...Description
+            }
+        }
     }
     ${description}
     `,

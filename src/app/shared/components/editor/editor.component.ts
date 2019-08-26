@@ -78,7 +78,7 @@ export class EditorComponent implements OnInit, OnDestroy {
       },
       holder: this.id,
       data: {
-        blocks: this.data ? this.data : []
+        blocks: this.data && this.data.length ? this.data : null
       },
       placeholder: 'Let`s write!',
       onChange: (() => {

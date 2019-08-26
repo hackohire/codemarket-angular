@@ -13,6 +13,14 @@ export interface Tag {
     _id?: string;
 }
 
+interface Support {
+    time: number;
+    description: {
+        type: string;
+        data: BlockToolData
+    };
+}
+
 
 
 export interface Product {
@@ -34,6 +42,7 @@ export interface Product {
     _id?: string;
     // snippets?: [HighlightResult];
     tags: Tag[];
+    support: Support;
     // addedToCart?: boolean;
 }
 

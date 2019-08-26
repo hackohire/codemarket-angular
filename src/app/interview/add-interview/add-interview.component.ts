@@ -40,6 +40,10 @@ export class AddInterviewComponent implements OnInit {
     return this.interviewForm.get('description');
   }
 
+  get supportDescriptionFormControl() {
+    return this.interviewForm.get('support').get('description');
+  }
+
   get tagsFormControl() {
     return this.interviewForm.get('tags') as FormArray;
   }
@@ -122,6 +126,10 @@ export class AddInterviewComponent implements OnInit {
       status: new FormControl(InterviewStatus.Created),
       _id: new FormControl(i && i._id ? i._id : ''),
       tags: this.fb.array(i && i.tags && i.tags.length ? i.tags : []),
+      support: new FormGroup({
+        time: new FormControl(i && i.support && i.support.time ? i.support.time : ''),
+        description: new FormControl(i && i.support && i.support.description ? i.support.description : '')
+      })
       // snippets: new FormControl(null),
     });
   }
@@ -145,7 +153,7 @@ export class AddInterviewComponent implements OnInit {
     this.interviewForm.get('description').setValue(event);
   }
 
-  add(event: MatChipInputEvent): void {
+  addTech(event: MatChipInputEvent): void {
     const input = event.input;
     const value = event.value;
 

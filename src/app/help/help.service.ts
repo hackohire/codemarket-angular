@@ -33,6 +33,12 @@ export class HelpService {
     tags {
       name
     }
+    support {
+      time
+      description {
+        ...Description
+      }
+    }
   }
   ${description}
   `;

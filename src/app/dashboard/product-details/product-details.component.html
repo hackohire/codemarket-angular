@@ -23,7 +23,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
-                    <div class="item-preview item-preview2">
+                    <!-- <div class="item-preview item-preview2">
                         <div class="prev-slide">
                             <img src="http://www.codemarket.io/wp-content/uploads/2019/07/developer.png"
                                 alt="Keep calm this isn't the end of the world, the preview is just missing.">
@@ -38,7 +38,7 @@
                                         <span class="far fa-heart"></span>Add To Favorites</a>
                                 </div>
                             </div>
-                            <!-- end /.item__action -->
+
 
                             <div class="item_social_share">
                                 <p>
@@ -47,7 +47,7 @@
                                 </p>
 
                                 <div class="social social--color--filled">
-                                    <!-- <ul>
+                                    <ul>
                                         <li>
                                             <a href="#">
                                                 <span class="fa fa-facebook"></span>
@@ -78,17 +78,17 @@
                                                 <span class="fa fa-dribbble"></span>
                                             </a>
                                         </li>
-                                    </ul> -->
+                                    </ul>
                                 </div>
-                                <!-- end /.social-->
+
 
                             </div>
-                            <!-- end /.item__preview-thumb-->
+
                         </div>
-                        <!-- end /.item__preview-thumb-->
 
 
-                    </div>
+
+                    </div> -->
                     <!-- end /.item-preview-->
 
                     <div class="item-info">
@@ -96,7 +96,7 @@
                             <ul class="nav nav-tabs">
                                 <li>
                                     <a href="#product-details" class="active" aria-controls="product-details" role="tab"
-                                        data-toggle="tab">Item Details</a>
+                                        data-toggle="tab">Bugfix Details</a>
                                 </li>
                                 <!-- <li>
                                     <a href="#product-comment" aria-controls="product-comment" role="tab"
@@ -126,7 +126,13 @@
                                     <!-- <quill-view *ngIf="product?.description; else noDescription;" [modules]="modules"
                                         [content]="product.description" format="text" theme="snow"></quill-view> -->
 
-                                        <app-editor [readOnly]="true" [data]="product?.description" [id]="'product-editor'"></app-editor>
+                                    <app-editor [readOnly]="true" [data]="product?.description" [id]="'product-editor'"></app-editor>
+
+                                    <br/>
+                                    <br/>
+                                    <h2>Support Details:</h2>
+
+                                    <app-editor *ngIf="product?.support?.description" [readOnly]="true" [data]="product?.support?.description" [id]="'product-support-editor'"></app-editor>
                                     <ng-template #noDescription>
                                         <span>No Description</span>
                                     </ng-template>
@@ -1378,7 +1384,7 @@
                             <div class="price">
                                 <h1>
                                     <sup>$</sup>
-                                    <span>{{product?.totalPrice | currency}}</span>
+                                    <span>{{product?.totalPrice}}</span>
                                 </h1>
                             </div>
                             <!-- <ul class="pricing-options">
@@ -1409,7 +1415,7 @@
                             <!-- end /.pricing-options -->
 
                             <div class="purchase-button">
-                                <a href="#" class="btn btn--lg btn--round">Purchase Now</a>
+                                <!-- <a href="#" class="btn btn--lg btn--round">Purchase Now</a> -->
                                 
                                 <!-- Check if the product is in cart -->
                                 <a *ngIf="!(productService?.checkIfProductIsInCart(product?._id) | async); else productIsInCart" class="btn btn--lg btn--round cart-btn" (click)="addToCart(product)">
@@ -1425,7 +1431,7 @@
                         </div>
                         <!-- end /.sidebar--card -->
 
-                        <div class="sidebar-card card--metadata">
+                        <!-- <div class="sidebar-card card--metadata">
                             <ul class="data">
                                 <li>
                                     <p>
@@ -1445,7 +1451,7 @@
                             </ul>
 
 
-                            <!-- <div class="rating product--rating">
+                            <div class="rating product--rating">
                                 <ul>
                                     <li>
                                         <span class="fa fa-star"></span>
@@ -1464,10 +1470,10 @@
                                     </li>
                                 </ul>
                                 <span class="rating__count">( 26 Ratings )</span>
-                            </div> -->
-                            <!-- end /.rating -->
-                        </div>
-                        <!-- end /.sidebar-card -->
+                            </div>
+
+                        </div> -->
+
 
                         <div class="sidebar-card card--product-infos">
                             <div class="card-title">
@@ -1483,13 +1489,13 @@
                                     <p class="data-label">Updated</p>
                                     <p class="info">{{getDate(product?.updatedAt) | date: 'dd/MM/yyyy'}}</p>
                                 </li>
-                                <li>
+                                <!-- <li>
                                     <p class="data-label">Version</p>
                                     <p class="info">{{product?.version}}{{'-'}}</p>
-                                </li>
+                                </li> -->
                                 <li>
                                     <p class="data-label">Category</p>
-                                    <p class="info">Corporate & Business</p>
+                                    <p class="info" *ngFor="let t of tags">{{t?.name}}</p>
                                 </li>
                                 <!-- <li>
                                     <p class="data-label">Layout</p>
@@ -1499,10 +1505,10 @@
                                     <p class="data-label">Retina Ready</p>
                                     <p class="info">No</p>
                                 </li> -->
-                                <li>
+                                <!-- <li>
                                     <p class="data-label">Files Included</p>
                                     <p class="info">Html, CSS, JavaScript</p>
-                                </li>
+                                </li> -->
                                 <!-- <li>
                                     <p class="data-label">Browser</p>
                                     <p class="info">IE10, IE11, Firefox, Safari, Opera, Chrome5</p>

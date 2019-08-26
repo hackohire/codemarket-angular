@@ -42,6 +42,10 @@ export class AddProductsComponent implements OnInit, OnDestroy {
     return this.productForm.get('description');
   }
 
+  get supportDescriptionFormControl() {
+    return this.productForm.get('support').get('description');
+  }
+
   // get snippetsFormControl() {
   //   return this.productForm.get('snippets');
   // }
@@ -72,7 +76,7 @@ export class AddProductsComponent implements OnInit, OnDestroy {
     public auth: AuthService,
     private store: Store<AppState>,
     private activatedRoute: ActivatedRoute,
-    private _hljs: HighlightJS,
+    // private _hljs: HighlightJS,
     private fb: FormBuilder
   ) {
 
@@ -145,7 +149,11 @@ export class AddProductsComponent implements OnInit, OnDestroy {
       _id: new FormControl(p && p._id ? p._id : ''),
       tags: this.fb.array(p && p.tags && p.tags.length ? p.tags : []),
       // snippets: new FormControl(p && p.snippets && p.snippets.length ? p.snippets : null),
-      priceAndFiles: new FormArray([])
+      // priceAndFiles: new FormArray([]),
+      support: new FormGroup({
+        time: new FormControl(p && p.support && p.support.time ? p.support.time : ''),
+        description: new FormControl(p && p.support && p.support.description ? p.support.description : '')
+      })
     });
   }
 
@@ -259,10 +267,14 @@ export class AddProductsComponent implements OnInit, OnDestroy {
 
   updateFormData(event) {
     console.log(event);
-    this.productForm.get('description').setValue(event);
+    this.descriptionFormControl.setValue(event);
   }
 
-  add(event: MatChipInputEvent): void {
+  updateSupportDescription(event) {
+    this.supportDescriptionFormControl.setValue(event);
+  }
+
+  addTech(event: MatChipInputEvent): void {
     const input = event.input;
     const value = event.value;
 

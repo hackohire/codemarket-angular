@@ -40,6 +40,10 @@ export class AddRequirementsComponent implements OnInit {
     return this.requirementForm.get('description');
   }
 
+  get supportDescriptionFormControl() {
+    return this.requirementForm.get('support').get('description');
+  }
+
   get tagsFormControl() {
     return this.requirementForm.get('tags') as FormArray;
   }
@@ -122,6 +126,10 @@ export class AddRequirementsComponent implements OnInit {
       status: new FormControl(RequirementStatus.Created),
       _id: new FormControl(r && r._id ? r._id : ''),
       tags: this.fb.array(r && r.tags && r.tags.length ? r.tags : []),
+      support: new FormGroup({
+        time: new FormControl(r && r.support && r.support.time ? r.support.time : ''),
+        description: new FormControl(r && r.support && r.support.description ? r.support.description : '')
+      })
       // snippets: new FormControl(null),
     });
   }
@@ -145,7 +153,7 @@ export class AddRequirementsComponent implements OnInit {
     this.requirementForm.get('description').setValue(event);
   }
 
-  add(event: MatChipInputEvent): void {
+  addTech(event: MatChipInputEvent): void {
     const input = event.input;
     const value = event.value;
 

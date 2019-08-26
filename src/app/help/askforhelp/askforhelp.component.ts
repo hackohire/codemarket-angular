@@ -51,6 +51,10 @@ export class AskforhelpComponent implements OnInit {
     return this.askForHelpForm.get('tags') as FormArray;
   }
 
+  get supportDescriptionFormControl() {
+    return this.askForHelpForm.get('support').get('description');
+  }
+
   constructor(
     private store: Store<AppState>,
     private authService: AuthService,
@@ -123,6 +127,10 @@ export class AskforhelpComponent implements OnInit {
       status: new FormControl(HelpQueryStatus.Created),
       _id: new FormControl(h && h._id ? h._id : ''),
       tags: this.fb.array(h && h.tags && h.tags.length ? h.tags : []),
+      support: new FormGroup({
+        time: new FormControl(h && h.support && h.support.time ? h.support.time : ''),
+        description: new FormControl(h && h.support && h.support.description ? h.support.description : '')
+      })
       // snippets: new FormControl(null),
     });
   }
@@ -160,7 +168,11 @@ export class AskforhelpComponent implements OnInit {
     this.askForHelpForm.get('description').setValue(event);
   }
 
-  add(event: MatChipInputEvent): void {
+  updateSupportDescription(event) {
+    this.supportDescriptionFormControl.setValue(event);
+  }
+
+  addTech(event: MatChipInputEvent): void {
     const input = event.input;
     const value = event.value;
 

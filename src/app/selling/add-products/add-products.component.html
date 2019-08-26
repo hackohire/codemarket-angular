@@ -18,6 +18,7 @@
                 </ng-template>
 
 
+                <br/>
 
                 <!-- <quill-editor #editor formControlName="description" [modules]="modules">
                 </quill-editor> -->
@@ -60,27 +61,26 @@
                         </mat-chip>
                         <input placeholder="Add Technologies" [matChipInputFor]="tagsList"
                             [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
-                            (matChipInputTokenEnd)="add($event)">
+                            (matChipInputTokenEnd)="addTech($event)">
                         <mat-icon matSuffix>web</mat-icon>
                     </mat-chip-list>
                 </mat-form-field>
 
 
-
-
-
-                <input type="file" #file style="display: none" (change)="onFilesAdded()" multiple />
+                <!-- <input type="file" #file style="display: none" (change)="onFilesAdded()" multiple />
 
                 <h1 mat-dialog-title>Upload Files</h1>
                 <div>
                     <button type="button" mat-raised-button color="primary" class="add-files-btn" (click)="addFiles()">
                         Add Files
                     </button>
-                </div>
+                </div> -->
+
+                <br/>
 
 
                 <!-- This is the content of the dialog, containing a list of the files to upload -->
-                <mat-list fxFlex>
+                <!-- <mat-list fxFlex>
                     <mat-list-item formArrayName="priceAndFiles"
                         *ngFor="let item of priceAndFilesArrayFormControl?.controls; let i = index;">
                         <ng-container [formGroupName]="i">
@@ -88,13 +88,33 @@
                             <mat-progress-bar mode="determinate"
                                 [value]="priceAndFilesArrayFormControl?.at(i)?.get('progress')?.value | async">
                             </mat-progress-bar>
-                            <!-- <mat-form-field>
+                            <mat-form-field>
                     <input matInput type="number" formControlName="price" placeholder="Price">
-                </mat-form-field> -->
+                </mat-form-field>
                             <mat-icon (click)="removeFile(i)">close</mat-icon>
                         </ng-container>
                     </mat-list-item>
-                </mat-list>
+                </mat-list> -->
+
+
+                <div formGroupName="support">
+                    <mat-form-field class="field-full-width">
+                        <input matInput type="number" formControlName="time" placeholder="Support Time(In Minutes)">
+                    </mat-form-field>
+                    
+                    <ng-container *ngIf="supportDescriptionFormControl?.value; else addSupport">
+                        <app-editor [data]="supportDescriptionFormControl?.value" (output)="updateSupportDescription($event)"
+                        [id]="'edit-product-support-editor'"></app-editor>
+                    </ng-container>
+
+                    <ng-template #addSupport>
+                        <app-editor (output)="updateSupportDescription($event)"  [id]="'add-product-support-editor'"></app-editor>
+                    </ng-template>
+                    
+                </div>
+
+
+                <br/>
 
 
 
@@ -106,7 +126,7 @@
         </div>
     </div>
 </div>
-{{ tagsFormControl?.value | json}}
+<!-- {{ tagsFormControl?.value | json}} -->
 <!-- <pre>{{productForm?.value | json}}</pre> -->
 <!-- <pre>{{priceAndFilesArrayFormControl?.length}}</pre> -->
 

@@ -29,6 +29,12 @@ export class RequirementService {
     tags {
       name
     }
+    support {
+      time
+      description {
+        ...Description
+      }
+    }
   }
   ${description}
   `;

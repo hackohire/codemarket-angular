@@ -29,6 +29,12 @@ export class InterviewService {
     tags {
       name
     }
+    support {
+      time
+      description {
+        ...Description
+      }
+    }
   }
   ${description}
   `;

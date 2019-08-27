@@ -9,6 +9,7 @@ import { GetInterviewsByUserId, DeleteInterview } from 'src/app/core/store/actio
 import { selectInterviewsList } from 'src/app/core/store/selectors/interview.selectors';
 import { MatTableDataSource, MatSort } from '@angular/material';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-interview-list',
@@ -38,7 +39,8 @@ export class InterviewListComponent implements OnInit, OnDestroy {
 
   constructor(
     private authService: AuthService,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -81,6 +83,10 @@ export class InterviewListComponent implements OnInit, OnDestroy {
 
   deleteInterview(interviewId: string) {
     this.store.dispatch(DeleteInterview({interviewId}));
+  }
+
+  redirectToInterviewDetails(details) {
+    this.router.navigate(['/', {outlets: {main: ['dashboard', 'interview-details', details._id]}}]);
   }
 
 }

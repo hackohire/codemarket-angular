@@ -9,6 +9,7 @@ import { selectRequirementsList } from 'src/app/core/store/selectors/requirement
 import { MatTableDataSource, MatSort } from '@angular/material';
 import { Requirement } from 'src/app/shared/models/requirement.model';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-requirement-list',
@@ -38,7 +39,8 @@ export class RequirementListComponent implements OnInit, OnDestroy {
 
   constructor(
     private authService: AuthService,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -80,6 +82,10 @@ export class RequirementListComponent implements OnInit, OnDestroy {
 
   deleteRequirement(requirementId: string) {
     this.store.dispatch(DeleteRequirement({requirementId}));
+  }
+
+  redirectToRequirementDetails(details) {
+    this.router.navigate(['/', {outlets: {main: ['dashboard', 'requirement-details', details._id]}}]);
   }
 
 

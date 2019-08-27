@@ -1,0 +1,237 @@
+<!-- <p>product-details works!</p> -->
+
+<!-- {{productDetails$ | async | json }} -->
+<ng-container *ngIf="(details$ | async) as details">
+    <!--================================
+        START BREADCRUMB AREA
+    =================================-->
+
+    <app-breadcumb [title]="details?.name" [path]="breadcumb?.path"></app-breadcumb>
+
+    <!--================================
+            END BREADCRUMB AREA
+    =================================-->
+
+
+
+
+
+    <!--============================================
+        START SINGLE PRODUCT DESCRIPTION AREA
+    ==============================================-->
+    <section class="single-product-desc">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <!-- <div class="item-preview item-preview2">
+                        <div class="prev-slide">
+                            <img src="http://www.codemarket.io/wp-content/uploads/2019/07/developer.png"
+                                alt="Keep calm this isn't the end of the world, the preview is just missing.">
+                        </div>
+
+                        <div class="item__preview-thumb">
+                            <div class="item-action">
+                                <div class="action-btns">
+                                    <a href="#" class="btn btn--round btn--lg">
+                                        <span class="fas fa-laptop-code"></span>Live Preview</a>
+                                    <a href="#" class="btn btn--round btn--lg btn--icon">
+                                        <span class="far fa-heart"></span>Add To Favorites</a>
+                                </div>
+                            </div>
+
+
+                            <div class="item_social_share">
+                                <p>
+                                    <i class="far fa-share-square fa-lg"></i>&nbsp;
+                                     <span> Share this item</span>
+                                </p>
+
+                                <div class="social social--color--filled">
+                                    <ul>
+                                        <li>
+                                            <a href="#">
+                                                <span class="fa fa-facebook"></span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="fa fa-twitter"></span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="fa fa-google-plus"></span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="fa fa-pinterest"></span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="fa fa-linkedin"></span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="fa fa-dribbble"></span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+
+
+                    </div> -->
+                    <!-- end /.item-preview-->
+
+                    <div class="item-info">
+                        <div>
+                            <div class="tab-pane fade show product-tab active" id="product-details">
+                                <div class="tab-content-wrapper">
+                                    <!-- <quill-view *ngIf="product?.description; else noDescription;" [modules]="modules"
+                                        [content]="product.description" format="text" theme="snow"></quill-view> -->
+
+                                    <app-editor [readOnly]="true" [data]="details?.description" [id]="'details-editor'">
+                                    </app-editor>
+
+                                    <br />
+                                    <br />
+                                    <h2>Support Details:</h2>
+
+                                    <app-editor *ngIf="details?.support?.description" [readOnly]="true"
+                                        [data]="details?.support?.description" [id]="'details-support-editor'">
+                                    </app-editor>
+                                    <ng-template #noDescription>
+                                        <span>No Description</span>
+                                    </ng-template>
+                                    <!-- <h2>Features With Image:</h2>
+                                    <img src="images/apspr.jpg" alt="This is product description thumbnail"> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end /.item-info -->
+                </div>
+                <!-- end /.col-md-8 -->
+
+                <div class="col-lg-4">
+                    <aside class="sidebar sidebar--single-product">
+                        <div class="sidebar-card card-pricing card--pricing2">
+                            <div class="price">
+                                <h1>
+                                    <span>{{details?.price}}</span>
+                                    <sup>$</sup>
+                                </h1>
+                            </div>
+
+                        </div>
+
+
+                        <div class="sidebar-card card--product-infos">
+                            <div class="card-title">
+                                <h4>Information</h4>
+                            </div>
+
+                            <ul class="infos">
+                                <li *ngIf="details?.createdAt">
+                                    <p class="data-label">Released</p>
+                                    <p class="info">{{getDate(details?.createdAt) | date: 'dd/MM/yyyy'}}</p>
+                                </li>
+                                <li *ngIf="details?.updatedAt">
+                                    <p class="data-label">Updated</p>
+                                    <p class="info">{{getDate(details?.updatedAt) | date: 'dd/MM/yyyy'}}</p>
+                                </li>
+                                <!-- <li>
+                                    <p class="data-label">Version</p>
+                                    <p class="info">{{details?.version}}{{'-'}}</p>
+                                </li> -->
+                                <li>
+                                    <p class="data-label">Category</p>
+                                    <p class="info" *ngFor="let t of tags">{{t?.name}}</p>
+                                </li>
+                                <li>
+                                    <p class="data-label">Support</p>
+                                    <p class="info">{{details?.support?.time}} {{ 'Minutes'}}</p>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- end /.aside -->
+
+                        <div class="author-card sidebar-card " *ngIf="details?.createdBy?.name">
+                            <div class="card-title">
+                                <h4>Author Information</h4>
+                            </div>
+
+                            <div class="author-infos">
+                                <div class="author_avatar">
+                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRw3JJeL2VfQtqF4CMFDkXaG8OpgcArNd9AnorGROT53rbFlHcA"
+                                        alt="Presenting the broken author avatar :D">
+                                </div>
+
+                                <div class="author">
+                                    <h4>{{details?.createdBy?.name}}</h4>
+                                    <!-- <p>Signed Up: 08 April 2016</p> -->
+                                </div>
+                                <!-- end /.author -->
+
+                                <div class="social social--color--filled">
+                                    <ul>
+                                        <li>
+                                            <a href="#">
+                                                <span class="fab fa-facebook fa-lg"></span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="fab fa-github fa-lg"></span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="fab fa-linkedin fa-lg"></span>
+                                            </a>
+                                        <li>
+                                            <a href="#">
+                                                <i class="fab fa-stack-overflow"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!-- end /.social -->
+
+                                <!-- <div class="author-btn">
+                                    <a href="#" class="btn btn--sm btn--round">View Profile</a>
+                                    <a href="#" class="btn btn--sm btn--round">Message</a>
+                                </div> -->
+                                <!-- end /.author-btn -->
+                            </div>
+                            <!-- end /.author-infos -->
+
+
+                        </div>
+                        <!-- end /.author-card -->
+                    </aside>
+                    <!-- end /.aside -->
+                </div>
+                <!-- end /.col-md-4 -->
+            </div>
+            <!-- end /.row -->
+        </div>
+        <!-- end /.container -->
+    </section>
+    <!--===========================================
+            END SINGLE PRODUCT DESCRIPTION AREA
+        ===============================================-->
+
+
+
+
+
+</ng-container>

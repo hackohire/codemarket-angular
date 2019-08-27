@@ -21,7 +21,7 @@ export class DashboardComponent implements OnInit {
   productsList$: Observable<Product[]>;
   helpRequestList$: Observable<HelpQuery[]>;
 
-  displayedColumns: string[] = ['number', 'question', 'price', 'createdBy', 'createdAt'];
+  displayedColumns: string[] = ['number', 'name', 'price', 'createdBy', 'createdAt'];
   dataSource = new MatTableDataSource();
   @ViewChild(MatSort, {static: false}) sort: MatSort;
 

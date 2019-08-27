@@ -28,6 +28,8 @@ export class AskforhelpComponent implements OnInit {
     syntax: true,
   };
 
+  edit: boolean;
+
   visible = true;
   selectable = true;
   removable = true;
@@ -88,6 +90,7 @@ export class AskforhelpComponent implements OnInit {
       this.subscription$ = this.store.select(selectSelectedQuery).pipe(
         tap((h: HelpQuery) => {
           this.askForHelpFormInitialization(h);
+          this.edit = true;
         }),
         switchMap((h: HelpQuery) => {
           if (!h) {
@@ -115,7 +118,7 @@ export class AskforhelpComponent implements OnInit {
 
   askForHelpFormInitialization(h: HelpQuery): void {
     this.askForHelpForm = new FormGroup({
-      question: new FormControl(h && h.question ? h.question :''),
+      name: new FormControl(h && h.name ? h.name :''),
       description: new FormControl(h && h.description ? h.description : ''),
       price: new FormControl(h && h.price ? h.price : ''),
       createdBy: new FormControl(h && h.createdBy && h.createdBy._id ? h.createdBy._id : ''),

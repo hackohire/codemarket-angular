@@ -17,7 +17,7 @@ interface Support {
 }
 
 export interface HelpQuery {
-    question: string;
+    name: string;
     description: [{
         type: string;
         data: BlockToolData

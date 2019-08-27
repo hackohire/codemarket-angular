@@ -7,10 +7,10 @@
             <div [formGroup]="askForHelpForm"  (ngSubmit)="submit()">
 
                 <mat-form-field class="field-full-width">
-                    <input type="text" matInput formControlName="question" placeholder="Question">
+                    <input type="text" matInput formControlName="name" placeholder="name">
                 </mat-form-field>
                 
-                <app-editor *ngIf="askForHelpForm?.get('description')?.value; else add" (output)="updateFormData($event)" [data]="askForHelpForm?.get('description')?.value" [id]="'edit-help-editor'"></app-editor>
+                <app-editor *ngIf="descriptionFormControl?.value && edit; else add" (output)="updateFormData($event)" [data]="askForHelpForm?.get('description')?.value" [id]="'edit-help-editor'"></app-editor>
                     
 
                 <ng-template #add>
@@ -69,7 +69,7 @@
                         <input matInput type="number" formControlName="time" placeholder="Support Time(In Minutes)">
                     </mat-form-field>
                     
-                    <ng-container *ngIf="supportDescriptionFormControl?.value; else addSupport">
+                    <ng-container *ngIf="supportDescriptionFormControl?.value && edit; else addSupport">
                         <app-editor [data]="supportDescriptionFormControl?.value" (output)="updateSupportDescription($event)"
                         [id]="'edit-help-request-support-editor'"></app-editor>
                     </ng-container>

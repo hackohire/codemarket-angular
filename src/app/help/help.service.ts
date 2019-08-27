@@ -15,7 +15,7 @@ export class HelpService {
   helpRequestQueryFields = gql`
   fragment HelpQuery on HelpQuery {
     _id
-    question
+    name
     categories
     description {
       ...Description

@@ -11,6 +11,7 @@ import { GetHelpRequestsByUserId, DeleteHelpRequest, SetSelectedHelpRequest } fr
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-help-request-list',
@@ -26,7 +27,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 })
 export class HelpRequestListComponent implements OnInit, OnDestroy {
 
-  displayedColumns: string[] = ['number', 'question', 'price', 'status', 'action'];
+  displayedColumns: string[] = ['number', 'name', 'price', 'status', 'action'];
   dataSource = new MatTableDataSource();
   expandedHelpRequest: HelpQuery | null;
 
@@ -40,7 +41,8 @@ export class HelpRequestListComponent implements OnInit, OnDestroy {
 
   constructor(
     private authService: AuthService,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -82,6 +84,10 @@ export class HelpRequestListComponent implements OnInit, OnDestroy {
 
   deleteHelpRequest(helpRequestId: string) {
     this.store.dispatch(DeleteHelpRequest({helpRequestId}));
+  }
+
+  redirectToHelpRequestDetails(details) {
+    this.router.navigate(['/', {outlets: {main: ['dashboard', 'help-request-details', details._id]}}]);
   }
 
 }

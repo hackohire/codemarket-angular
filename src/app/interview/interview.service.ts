@@ -35,6 +35,10 @@ export class InterviewService {
         ...Description
       }
     }
+    createdBy {
+      _id
+      name
+    }
   }
   ${description}
   `;

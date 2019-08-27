@@ -28,6 +28,8 @@ export class AddRequirementsComponent implements OnInit {
     syntax: true,
   };
 
+  edit: boolean;
+
   get createdBy() {
     return this.requirementForm.get('createdBy');
   }
@@ -81,13 +83,14 @@ export class AddRequirementsComponent implements OnInit {
      * get the requirement by fetching id from the params
      */
 
-    if (this.activatedRoute.snapshot.parent.routeConfig.path === 'add-interview') {
+    if (this.activatedRoute.snapshot.parent.routeConfig.path === 'add-requirement') {
       this.store.dispatch(SetSelectedRequirement({ requirement: null }));
       this.requirementFormInitialization(null);
     } else {
       this.subscription$ = this.store.select(selectSelectedRequirement).pipe(
         tap((h: Requirement) => {
           this.requirementFormInitialization(h);
+          this.edit = true;
         }),
         switchMap((h: Requirement) => {
           if (!h) {
@@ -151,6 +154,10 @@ export class AddRequirementsComponent implements OnInit {
   updateFormData(event) {
     console.log(event);
     this.requirementForm.get('description').setValue(event);
+  }
+
+  updateSupportDescription(event) {
+    this.supportDescriptionFormControl.setValue(event);
   }
 
   addTech(event: MatChipInputEvent): void {

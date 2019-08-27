@@ -28,6 +28,8 @@ export class AddInterviewComponent implements OnInit {
     syntax: true,
   };
 
+  edit: boolean;
+
   get createdBy() {
     return this.interviewForm.get('createdBy');
   }
@@ -88,6 +90,7 @@ export class AddInterviewComponent implements OnInit {
       this.subscription$ = this.store.select(selectSelectedInterview).pipe(
         tap((h: Interview) => {
           this.interviewFormInitialization(h);
+          this.edit = true;
         }),
         switchMap((h: Interview) => {
           if (!h) {
@@ -151,6 +154,10 @@ export class AddInterviewComponent implements OnInit {
   updateFormData(event) {
     console.log(event);
     this.interviewForm.get('description').setValue(event);
+  }
+
+  updateSupportDescription(event) {
+    this.supportDescriptionFormControl.setValue(event);
   }
 
   addTech(event: MatChipInputEvent): void {

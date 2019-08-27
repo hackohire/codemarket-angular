@@ -29,6 +29,7 @@ export class AddProductsComponent implements OnInit, OnDestroy {
     // imageResize: {},
     syntax: true,
   };
+  edit: boolean;
   urlRegex = '^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$';
 
   get createdByFormControlValue() {
@@ -107,6 +108,7 @@ export class AddProductsComponent implements OnInit, OnDestroy {
       this.subscription$ = this.store.select(selectSelectedProduct).pipe(
         tap((p: Product) => {
           this.productFormInitialization(p);
+          this.edit = true;
         }),
         switchMap((p: Product) => {
           if (!p) {

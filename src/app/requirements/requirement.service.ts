@@ -35,6 +35,10 @@ export class RequirementService {
         ...Description
       }
     }
+    createdBy {
+      _id
+      name
+    }
   }
   ${description}
   `;
@@ -96,7 +100,7 @@ export class RequirementService {
       {
         query: gql`
           query getRequirementById($RequirementId: String) {
-            getRequirementById(RequirementId: $RequirementId) {
+            getRequirementById(requirementId: $RequirementId) {
               ...Requirement
             }
           }

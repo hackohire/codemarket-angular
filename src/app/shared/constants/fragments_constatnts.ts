@@ -44,15 +44,64 @@ export const imageFragment = gql`
 }
 `;
 
+export const listFragment = gql`
+fragment List on ListBlock {
+  type
+  data {
+    style
+    items
+  }
+}
+`;
+
+export const quoteFragment = gql`
+  fragment Quote on QuoteBlock {
+    type
+    data {
+      text
+      caption
+      alignment
+    }
+  }
+`;
+
+export const tableFragment = gql`
+  fragment Table on TableBlock {
+    type
+    data {
+      content
+    }
+  }
+`;
+
+export const warningFragment = gql`
+  fragment Warning on WarningBlock {
+    type
+    data {
+      title
+      message
+    }
+  }
+`;
+
+
 export const description = gql`
     fragment Description on descriptionBlocks {
         ...Code
         ...Image
         ...Paragraph
         ...Header
+        ...List
+        ...Quote
+        ...Table
+        ...Warning
     }
     ${codeFragment}
     ${imageFragment}
     ${paragraphFragment}
     ${headerFragment}
+    ${listFragment}
+    ${quoteFragment}
+    ${tableFragment}
+    ${warningFragment}
 `;

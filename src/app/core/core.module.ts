@@ -113,6 +113,10 @@ export class CoreModule {
                     { name: 'ParagraphBlock' },
                     { name: 'CodeBlock' },
                     { name: 'ImageBlock' },
+                    { name: 'ListBlock' },
+                    { name: 'QuoteBlock' },
+                    { name: 'TableBlock' },
+                    { name: 'WarningBlock' }
                   ],
                 },
               ],

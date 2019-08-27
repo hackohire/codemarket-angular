@@ -2,6 +2,11 @@ import { Component, OnInit, EventEmitter, Output, Input, OnDestroy, ViewEncapsul
 import EditorJS from '@editorjs/editorjs';
 import Header from '@editorjs/header';
 import ImageTool from '@editorjs/image';
+import List from '@editorjs/list';
+import Marker from '@editorjs/marker';
+import Quote from '@editorjs/quote';
+import Table from '@editorjs/table';
+import Warning from '@editorjs/warning';
 import { Storage } from 'aws-amplify';
 import { environment } from 'src/environments/environment';
 import { CodeWithLanguageSelection } from 'src/app/insert-code-snippet';
@@ -32,6 +37,37 @@ export class EditorComponent implements OnInit, OnDestroy {
     this.editor = new EditorJS({
       tools: {
         header: Header,
+        warning: {
+          class: Warning,
+          inlineToolbar: true,
+          shortcut: 'CMD+SHIFT+W',
+          config: {
+            titlePlaceholder: 'Title',
+            messagePlaceholder: 'Message',
+          },
+        },
+        table: {
+          class: Table,
+          inlineToolbar: true,
+          config: {
+            rows: 2,
+            cols: 3,
+          },
+        },
+        Marker: {
+          class: Marker,
+          shortcut: 'CMD+SHIFT+M',
+          inlineToolbar: true,
+        },
+        quote: {
+          class: Quote,
+          inlineToolbar: true,
+          shortcut: 'CMD+SHIFT+O',
+        },
+        list: {
+          class: List,
+          inlineToolbar: true,
+        },
         image: {
           class: ImageTool,
           config: {
@@ -84,7 +120,7 @@ export class EditorComponent implements OnInit, OnDestroy {
       onChange: (() => {
         this.editor.save().then((outputData) => {
           console.log('Article data: ', outputData);
-          this.output.emit(outputData.blocks);
+          this.output.emit([...outputData.blocks]);
           // this.askForHelpForm.get('description').setValue(outputData.blocks, { emitEvent: false });
         }).catch((error) => {
           console.log('Saving failed: ', error);

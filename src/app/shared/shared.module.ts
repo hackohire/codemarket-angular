@@ -12,6 +12,7 @@ import scss from 'highlight.js/lib/languages/scss';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { RouterModule } from '@angular/router';
 import { EditorComponent } from './components/editor/editor.component';
+import { CommentComponent } from './components/comment/comment.component';
 
 export function hljsLanguages() {
   return [
@@ -21,7 +22,7 @@ export function hljsLanguages() {
   ];
 }
 @NgModule({
-  declarations: [BreadcumbComponent, EditorComponent],
+  declarations: [BreadcumbComponent, EditorComponent, CommentComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -41,6 +42,7 @@ export function hljsLanguages() {
   exports: [
     BreadcumbComponent,
     EditorComponent,
+    CommentComponent,
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,

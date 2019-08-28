@@ -1,0 +1,42 @@
+<div class="media" *ngIf="replyCommentForm?.value">
+        <div class="media-left">
+            <a href="#">
+                <img style="height:70px; width: 70px;" class="media-object" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRw3JJeL2VfQtqF4CMFDkXaG8OpgcArNd9AnorGROT53rbFlHcA" alt="Commentator Avatar">
+            </a>
+        </div>
+        <div class="media-body">
+            <div>
+                <div class="media-heading">
+                    <a>
+                        <h4>{{comment?.createdBy?.name }}</h4>
+                    </a>
+                    <span>{{fromNow(comment?.createdAt)}}</span>
+                </div>
+                <!-- <span class="comment-tag buyer">Purchased</span> -->
+                <a *ngIf="!comment?.parentId" (click)="allowReply()" class="reply-link">Reply</a>
+            </div>
+            <app-editor [data]="replyCommentForm?.get('text')?.value" [id]="comment?._id"></app-editor>
+            <!-- <p>{{comment?.text}}</p> -->
+        </div>
+</div>
+
+<div class="single-thread depth-2" *ngFor="let r of comment?.children">
+    <app-comment [comment]="r" [referenceId]="comment?.referenceId"></app-comment>
+</div>
+
+<!-- comment reply -->
+<div class="media depth-2 reply-comment" *ngIf="reply" [formGroup]="replyCommentForm">
+    <div class="media-left">
+        <a href="#">
+            <img class="media-object" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRw3JJeL2VfQtqF4CMFDkXaG8OpgcArNd9AnorGROT53rbFlHcA" alt="Commentator Avatar">
+        </a>
+    </div>
+    <div class="media-body">
+        <div class="comment-reply-form">
+            <app-editor [data]="replyTextEditorData" (output)="updateFormData($event)" [id]="replyEditorId"></app-editor>
+            <!-- <textarea class="bla" name="reply-comment" placeholder="Write your comment..."></textarea> -->
+            <button type="button" class="btn btn--md btn--round" (click)="addReply()">Reply</button>
+        </div>
+    </div>
+</div>
+<!-- comment reply -->

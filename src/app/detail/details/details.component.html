@@ -116,7 +116,40 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="tab-pane fade show product-tab">
+                                <div class="thread">
+                                    <ul class="media-list thread-list" style="list-style: none;">
+                                        <h4 class="tab-content-wrapper">Comments:</h4>
+                                        <li class="single-thread" *ngFor="let c of commentsList">
+    
+                                            <app-comment [comment]="c" [referenceId]="product?._id"></app-comment>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+    
+                            <div class="comment-form-area">
+                                <h4>Leave a comment</h4>
+                                <!-- comment reply -->
+                                <div class="media comment-form">
+                                    <div class="media-left">
+                                        <a href="#">
+                                            <img style="height:70px; width: 70px;" class="media-object" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRw3JJeL2VfQtqF4CMFDkXaG8OpgcArNd9AnorGROT53rbFlHcA" alt="Commentator Avatar">
+                                        </a>
+                                    </div>
+                                    <div class="media-body">
+                                        <div [formGroup]="commentForm" class="comment-reply-form">
+                                            <app-editor [id]="'comment-editor'" (output)="updateFormData($event)"></app-editor>
+                                            <!-- <textarea formControlName="text" name="reply-comment" placeholder="Write your comment..."></textarea> -->
+                                            <button type="button" class="btn btn--sm btn--round" (click)="addComment()">Post Comment</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- comment reply -->
+                            </div>
                     </div>
+
                     <!-- end /.item-info -->
                 </div>
                 <!-- end /.col-md-8 -->
@@ -126,8 +159,8 @@
                         <div class="sidebar-card card-pricing card--pricing2">
                             <div class="price">
                                 <h1>
-                                    <span>{{details?.price}}</span>
-                                    <sup>$</sup>
+                                    <span>{{details?.price | currency}}</span>
+                                    <!-- <sup>$</sup> -->
                                 </h1>
                             </div>
 

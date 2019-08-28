@@ -10,6 +10,11 @@ import { GetProductById } from 'src/app/core/store/actions/product.actions';
 import { BreadCumb } from 'src/app/shared/models/bredcumb.model';
 import { AddToCart } from 'src/app/core/store/actions/cart.actions';
 import { ProductService } from 'src/app/core/services/product.service';
+import { FormGroup, FormControl } from '@angular/forms';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { map, switchMap } from 'rxjs/operators';
+import * as moment from 'moment';
+import { CommentService } from 'src/app/shared/services/comment.service';
 
 @Component({
   selector: 'app-product-details',
@@ -25,15 +30,20 @@ export class ProductDetailsComponent implements OnInit {
     syntax: true,
   };
 
+  commentsList: any[];
+
   breadcumb: BreadCumb;
 
+  commentForm: FormGroup;
 
   productDetails$: Observable<Product>;
   subscription$: Subscription;
   constructor(
     private store: Store<AppState>,
     private activatedRoute: ActivatedRoute,
-    public productService: ProductService
+    public productService: ProductService,
+    private authService: AuthService,
+    private commentService: CommentService
   ) {
     this.breadcumb = {
       path: [
@@ -46,6 +56,7 @@ export class ProductDetailsComponent implements OnInit {
         }
       ]
     };
+
   }
 
   ngOnInit() {
@@ -55,14 +66,26 @@ export class ProductDetailsComponent implements OnInit {
       tap((p: Product) => {
         if (p) {
           this.productDetails$ = of(p);
+          this.commentForm = new FormGroup({
+            text: new FormControl(''),
+            createdBy: new FormControl(this.authService.loggedInUser._id),
+            referenceId: new FormControl(p._id),
+            type: new FormControl('product'),
+          });
+
+          this.commentService.getCommentsByReferenceId(p._id).pipe(
+            tap((d) => {
+              this.commentsList = d;
+            })
+          ).subscribe();
         } else {
           const params = this.activatedRoute.snapshot.params;
           if (params['productId']) {
-          this.store.dispatch(GetProductById({productId: params.productId}));
+            this.store.dispatch(GetProductById({ productId: params.productId }));
           }
         }
 
-      })
+      }),
     ).subscribe();
   }
 
@@ -71,7 +94,32 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   addToCart(product: Product) {
-    this.store.dispatch(AddToCart({productId: product._id}));
+    this.store.dispatch(AddToCart({ productId: product._id }));
+  }
+
+  addComment() {
+    console.log(this.commentForm.value);
+    this.commentService.addComment(this.commentForm.value).pipe(
+      switchMap((d) => {
+        return this.commentService.getCommentsByReferenceId(d.referenceId);
+      }),
+      tap((d) => {
+        console.log(d);
+        if (d && d.length) {
+          this.commentsList = d;
+          this.commentForm.reset();
+        }
+      })
+    ).subscribe();
+  }
+
+  updateFormData(event) {
+    this.commentForm.get('text').setValue(event);
+  }
+
+  fromNow(date) {
+    const d = new Date(+date);
+    return moment(d).fromNow();
   }
 
 }

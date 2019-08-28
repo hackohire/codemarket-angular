@@ -129,14 +129,14 @@ export class CoreModule {
     /** Codemarket Apollo Client ends here */
 
     /** Platform Apollo Client */
-    apollo.createNamed(
-      'platform',
-      {
-      link: authLink.concat(httpPlatform),
-      cache: new InMemoryCache({
-        addTypename: false
-      }),
-    });
+    // apollo.createNamed(
+    //   'platform',
+    //   {
+    //   link: authLink.concat(httpPlatform),
+    //   cache: new InMemoryCache({
+    //     addTypename: false
+    //   }),
+    // });
     /** Platform Apollo Client ends here */
   }
 }

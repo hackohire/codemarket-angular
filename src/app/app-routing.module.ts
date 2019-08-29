@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
+import { AuthGuard } from './shared/guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -24,30 +25,35 @@ const routes: Routes = [
   {
     path: 'sell',
     loadChildren: () => import('./selling/selling.module').then(module => module.SellingModule),
-    outlet: 'main'
+    outlet: 'main',
+    canLoad: [AuthGuard]
   },
 
   {
     path: 'user',
     loadChildren: () => import('./user/user.module').then(module => module.UserModule),
-    outlet: 'main'
+    outlet: 'main',
+    canLoad: [AuthGuard]
   },
 
   {
     path: 'help',
     loadChildren: () => import('./help/help.module').then(module => module.HelpModule),
-    outlet: 'main'
+    outlet: 'main',
+    canLoad: [AuthGuard]
   },
 
   {
     path: 'interview',
     loadChildren: () => import('./interview/interview.module').then(module => module.InterviewModule),
-    outlet: 'main'
+    outlet: 'main',
+    canLoad: [AuthGuard]
   },
   {
     path: 'requirement',
     loadChildren: () => import('./requirements/requirements.module').then(module => module.RequirementsModule),
-    outlet: 'main'
+    outlet: 'main',
+    canLoad: [AuthGuard]
   },
   {
     path: 'cart',

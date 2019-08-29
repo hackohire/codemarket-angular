@@ -40,7 +40,7 @@
       <!-- End Items -->
       <div fxFlex></div>
 
-      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+      <button mat-icon-button [matMenuTriggerFor]="menu">
         <mat-icon>library_add</mat-icon>
         <mat-icon>keyboard_arrow_down</mat-icon>
       </button>
@@ -82,11 +82,11 @@
         </mat-icon> Cart({{cartListLength | async}})
       </a>
 
-      <!-- Help -->
-      <!-- <a mat-button  *ngIf="loggedInUser;" [routerLink]="[{outlets: {'main': ['help']}}]">
-        <mat-icon>help_outline
-        </mat-icon> Help
-      </a> -->
+      <!-- My Profile -->
+      <a mat-button  *ngIf="loggedInUser;" [routerLink]="['/', {outlets: {'main': ['dashboard', 'my-profile']}}]">
+        <mat-icon>face</mat-icon> My Profile
+      </a>
+
 
       <!-- Logout -->
       <a mat-button  *ngIf="loggedInUser; else logIn" (click)="authService?.logout()">

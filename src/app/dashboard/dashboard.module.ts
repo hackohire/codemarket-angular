@@ -11,6 +11,10 @@ const dashboardRoutes: Routes = [
     component: DashboardComponent,
   },
   {
+    path: 'my-profile',
+    loadChildren: () => import('./my-profile/my-profile.module').then(module => module.MyProfileModule),
+  },
+  {
     path: 'product-details/:productId',
     loadChildren: () => import('./product-details/product-details.module').then(module => module.ProductDetailsModule),
   },

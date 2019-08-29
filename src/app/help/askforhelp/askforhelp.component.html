@@ -3,41 +3,41 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-12" class="askforhelp-form-area">
-            <div [formGroup]="askForHelpForm"  (ngSubmit)="submit()">
+        <div [formGroup]="askForHelpForm" (ngSubmit)="submit()" class="col-md-12 askforhelp-form-area">
 
-                <mat-form-field class="field-full-width">
-                    <input type="text" matInput formControlName="name" placeholder="name">
-                </mat-form-field>
-                
-                <app-editor *ngIf="descriptionFormControl?.value && edit; else add" (output)="updateFormData($event)" [data]="askForHelpForm?.get('description')?.value" [id]="'edit-help-editor'"></app-editor>
-                    
+            <mat-form-field class="field-full-width">
+                <input type="text" matInput formControlName="name" placeholder="name">
+            </mat-form-field>
 
-                <ng-template #add>
-                    <app-editor (output)="updateFormData($event)"  [id]="'help-editor'"></app-editor>
-                </ng-template>
-                 
+            <app-editor *ngIf="descriptionFormControl?.value && edit; else add" (output)="updateFormData($event)"
+                [data]="askForHelpForm?.get('description')?.value" [id]="'edit-help-editor'"></app-editor>
 
-                <!-- <quill-editor #editor formControlName="description" [modules]="modules">
+
+            <ng-template #add>
+                <app-editor (output)="updateFormData($event)" [id]="'help-editor'"></app-editor>
+            </ng-template>
+
+
+            <!-- <quill-editor #editor formControlName="description" [modules]="modules">
                 </quill-editor> -->
 
 
 
-                <mat-form-field class="field-full-width">
-                    <input matInput formControlName="shortDescription" placeholder="Short Description">
-                </mat-form-field>
+            <mat-form-field class="field-full-width">
+                <input matInput formControlName="shortDescription" placeholder="Short Description">
+            </mat-form-field>
 
-                <mat-form-field class="field-full-width">
-                    <input type="number" matInput formControlName="price" placeholder="price">
-                </mat-form-field>
+            <mat-form-field class="field-full-width">
+                <input type="number" matInput formControlName="price" placeholder="price">
+            </mat-form-field>
 
-                <mat-form-field class="field-full-width">
-                    <input matInput formControlName="demo_url" placeholder="Demo Url">
-                    <mat-error *ngIf="askForHelpForm?.get('demo_url')?.invalid">{{'Please enter a valid URL'}}
-                    </mat-error>
-                </mat-form-field>
+            <mat-form-field class="field-full-width">
+                <input matInput formControlName="demo_url" placeholder="Demo Url">
+                <mat-error *ngIf="askForHelpForm?.get('demo_url')?.invalid">{{'Please enter a valid URL'}}
+                </mat-error>
+            </mat-form-field>
 
-                <!-- <mat-form-field class="field-full-width">
+            <!-- <mat-form-field class="field-full-width">
                     <input matInput formControlName="documentation_url" placeholder="Documentation Url">
                     <mat-error *ngIf="askForHelpForm?.get('documentation_url')?.invalid">{{'Please enter a valid URL'}}
                     </mat-error>
@@ -49,42 +49,43 @@
                     </mat-error>
                 </mat-form-field> -->
 
+            <mat-form-field class="field-full-width">
+                <mat-chip-list #tagsList>
+                    <mat-chip *ngFor="let tag of tagsFormControl?.value; let i = index;" [selectable]="selectable"
+                        [removable]="true" (removed)="remove(i)">
+                        {{tag?.name}}
+                        <mat-icon matChipRemove>cancel</mat-icon>
+                    </mat-chip>
+                    <input placeholder="Add Programming Language Tags" [matChipInputFor]="tagsList"
+                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+                        (matChipInputTokenEnd)="addTech($event)">
+                    <mat-icon matSuffix>web</mat-icon>
+                </mat-chip-list>
+            </mat-form-field>
+
+
+            <div formGroupName="support">
                 <mat-form-field class="field-full-width">
-                    <mat-chip-list #tagsList>
-                        <mat-chip *ngFor="let tag of tagsFormControl?.value; let i = index;"
-                            [selectable]="selectable" [removable]="true" (removed)="remove(i)">
-                            {{tag?.name}}
-                            <mat-icon matChipRemove>cancel</mat-icon>
-                        </mat-chip>
-                        <input placeholder="Add Programming Language Tags" [matChipInputFor]="tagsList"
-                            [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
-                            (matChipInputTokenEnd)="addTech($event)">
-                        <mat-icon matSuffix>web</mat-icon>
-                    </mat-chip-list>
+                    <input matInput type="number" formControlName="time" placeholder="Support Time(In Minutes)">
                 </mat-form-field>
 
+                <ng-container *ngIf="supportDescriptionFormControl?.value && edit; else addSupport">
+                    <app-editor [data]="supportDescriptionFormControl?.value"
+                        (output)="updateSupportDescription($event)" [id]="'edit-help-request-support-editor'">
+                    </app-editor>
+                </ng-container>
 
-                <div formGroupName="support">
-                    <mat-form-field class="field-full-width">
-                        <input matInput type="number" formControlName="time" placeholder="Support Time(In Minutes)">
-                    </mat-form-field>
-                    
-                    <ng-container *ngIf="supportDescriptionFormControl?.value && edit; else addSupport">
-                        <app-editor [data]="supportDescriptionFormControl?.value" (output)="updateSupportDescription($event)"
-                        [id]="'edit-help-request-support-editor'"></app-editor>
-                    </ng-container>
+                <ng-template #addSupport>
+                    <app-editor (output)="updateSupportDescription($event)" [id]="'add-help-request-support-editor'">
+                    </app-editor>
+                </ng-template>
 
-                    <ng-template #addSupport>
-                        <app-editor (output)="updateSupportDescription($event)"  [id]="'add-help-request-support-editor'"></app-editor>
-                    </ng-template>
-                    
-                </div>
-
-                <br/>
-
-                <button mat-raised-button (click)="submit()" color="primary">Submit Query</button>
             </div>
 
+            <br />
+
+            <button mat-raised-button (click)="submit()" color="primary">Submit Query</button>
         </div>
+
     </div>
 </div>

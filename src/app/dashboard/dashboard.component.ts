@@ -10,6 +10,7 @@ import { HelpQuery } from '../shared/models/help-query.model';
 import { GetAllHelpRequests } from '../core/store/actions/help.actions';
 import { selectAllHelpRequestsList } from '../core/store/selectors/help.selectors';
 import { MatSort } from '@angular/material';
+import { UserService } from '../user/user.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -20,23 +21,23 @@ export class DashboardComponent implements OnInit {
 
   productsList$: Observable<Product[]>;
   helpRequestList$: Observable<HelpQuery[]>;
+  usersListAndTheirBugFixes$: Observable<[]>;
 
-  displayedColumns: string[] = ['number', 'name', 'price', 'createdBy', 'createdAt'];
+  displayedColumnsForHelpRequest: string[] = ['number', 'name', 'price', 'createdBy', 'createdAt'];
   dataSource = new MatTableDataSource();
   @ViewChild(MatSort, {static: false}) sort: MatSort;
 
   constructor(
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private userService: UserService
   ) { }
 
   ngOnInit() {
     this.store.dispatch(GetAllProducts());
     this.store.dispatch(GetAllHelpRequests());
     this.productsList$ = this.store.select(selectAllProductsList);
-    this.store.select(selectAllHelpRequestsList).subscribe( queries => {
-      this.dataSource.data = queries;
-      this.dataSource.sort = this.sort;
-    });
+    this.helpRequestList$ = this.store.select(selectAllHelpRequestsList);
+    this.usersListAndTheirBugFixes$ = this.userService.getUserListWithBugFixesCount();
   }
 
 }

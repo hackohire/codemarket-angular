@@ -55,4 +55,24 @@ export class UserService {
       })
     );
   }
+
+  getUserListWithBugFixesCount(): Observable<[]> {
+    return this.apollo.query(
+      {
+        query: gql`
+        query getUsersAndBugFixesCount {
+          getUsersAndBugFixesCount {
+            _id
+            name
+            productCount
+          }
+        }
+      `
+      }
+    ).pipe(
+      map((d: any) => {
+        return d.data.getUsersAndBugFixesCount;
+      })
+    );
+  }
 }

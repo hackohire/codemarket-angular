@@ -13,6 +13,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { RouterModule } from '@angular/router';
 import { EditorComponent } from './components/editor/editor.component';
 import { CommentComponent } from './components/comment/comment.component';
+import { DatatableComponent } from './components/datatable/datatable.component';
 
 export function hljsLanguages() {
   return [
@@ -22,7 +23,7 @@ export function hljsLanguages() {
   ];
 }
 @NgModule({
-  declarations: [BreadcumbComponent, EditorComponent, CommentComponent],
+  declarations: [BreadcumbComponent, EditorComponent, CommentComponent, DatatableComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -43,6 +44,7 @@ export function hljsLanguages() {
     BreadcumbComponent,
     EditorComponent,
     CommentComponent,
+    DatatableComponent,
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,

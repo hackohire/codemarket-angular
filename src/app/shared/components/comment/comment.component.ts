@@ -30,10 +30,16 @@ export class CommentComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.comment);
+    this.initializeReplyForm();
+
+  }
+
+
+  initializeReplyForm() {
     this.replyCommentForm = new FormGroup({
       text: new FormControl(this.comment.text),
       createdBy: new FormControl(this.authService.loggedInUser._id),
-      referenceId: new FormControl(this.comment._id),
+      referenceId: new FormControl(this.comment.referenceId),
       parentId: new FormControl(this.comment._id),
       type: new FormControl(this.comment.type)
     });
@@ -46,6 +52,7 @@ export class CommentComponent implements OnInit {
   }
 
   allowReply() {
+    this.initializeReplyForm();
     this.replyEditorId = new Date().toDateString();
     this.reply = true;
   }
@@ -66,6 +73,7 @@ export class CommentComponent implements OnInit {
           this.comment.children.push(child);
           this.replyCommentForm.reset();
           this.replyTextEditorData = null;
+          this.reply = false;
         }
       })
     ).subscribe();

@@ -2,16 +2,18 @@ import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { HelpQuery } from 'src/app/shared/models/help-query.model';
 import { Observable, Subscription } from 'rxjs';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { map, tap } from 'rxjs/operators';
-import { User } from 'src/app/shared/models/user.model';
+import { map } from 'rxjs/operators';
 import { AppState } from 'src/app/core/store/state/app.state';
 import { Store } from '@ngrx/store';
-import { selectQueries } from 'src/app/core/store/selectors/help.selectors';
-import { GetHelpRequestsByUserId, DeleteHelpRequest, SetSelectedHelpRequest } from 'src/app/core/store/actions/help.actions';
+import { selectQueries, selectAllHelpRequestsList } from 'src/app/core/store/selectors/help.selectors';
+import { GetHelpRequestsByUserId, DeleteHelpRequest, SetSelectedHelpRequest, GetAllHelpRequests } from 'src/app/core/store/actions/help.actions';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material';
 import { trigger, state, style, transition, animate } from '@angular/animations';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, PRIMARY_OUTLET, UrlSegment } from '@angular/router';
+import { runInThisContext } from 'vm';
+import { HelpService } from '../help.service';
+import { BreadCumb } from 'src/app/shared/models/bredcumb.model';
 
 @Component({
   selector: 'app-help-request-list',
@@ -27,9 +29,10 @@ import { Router } from '@angular/router';
 })
 export class HelpRequestListComponent implements OnInit, OnDestroy {
 
-  displayedColumns: string[] = ['number', 'name', 'price', 'status', 'action'];
+  displayedColumns: string[];
   dataSource = new MatTableDataSource();
   expandedHelpRequest: HelpQuery | null;
+  all: boolean;
 
 
   userSubsription: Subscription;
@@ -37,32 +40,66 @@ export class HelpRequestListComponent implements OnInit, OnDestroy {
 
   helpQueryList$: Observable<HelpQuery[]>;
 
+  breadcumb: BreadCumb;
+
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   constructor(
     private authService: AuthService,
     private store: Store<AppState>,
-    private router: Router
-  ) { }
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private helpService: HelpService
+  ) {
+    this.breadcumb = {
+      title: 'List of Help Requests',
+      path: [
+        {
+          name: 'Dashboard',
+          pathString: '/'
+        },
+        {
+          name: 'help-requests'
+        }
+      ]
+    };
+  }
 
   ngOnInit() {
 
-    this.userSubsription = this.authService.loggedInUser$.pipe(
-      map((u) => {
-        if (u) {
-          this.store.dispatch(GetHelpRequestsByUserId());
-        }
-      })
-    ).subscribe();
+    const path = this.activatedRoute.parent.routeConfig.path;
 
-    this.helpRequestsListSubscription = this.store.select(selectQueries).pipe(
-      map((helpRequests) => {
-        if (helpRequests) {
-          this.dataSource.data = helpRequests;
-        }
-      })
-    ).subscribe();
+    if (path === 'help-requests-all') {
 
+      this.store.dispatch(GetAllHelpRequests());
+
+      this.helpRequestsListSubscription = this.store.select(selectAllHelpRequestsList).pipe(
+        map((helpRequests) => {
+          if (helpRequests) {
+            this.dataSource.data = helpRequests;
+            this.displayedColumns = ['number', 'name', 'price', 'createdBy', 'category', 'createdAt'];
+            this.all = true;
+          }
+        })
+      ).subscribe();
+
+    } else {
+      this.displayedColumns = ['number', 'name', 'price', 'status', 'action'];
+      this.userSubsription = this.authService.loggedInUser$.pipe(
+        map((u) => {
+          if (u) {
+            this.store.dispatch(GetHelpRequestsByUserId());
+          }
+        })
+      ).subscribe();
+      this.helpRequestsListSubscription = this.store.select(selectQueries).pipe(
+        map((helpRequests) => {
+          if (helpRequests) {
+            this.dataSource.data = helpRequests;
+          }
+        })
+      ).subscribe();
+    }
 
     this.dataSource.sort = this.sort;
   }
@@ -88,6 +125,11 @@ export class HelpRequestListComponent implements OnInit, OnDestroy {
 
   redirectToHelpRequestDetails(details) {
     this.router.navigate(['/', {outlets: {main: ['dashboard', 'help-request-details', details._id]}}]);
+  }
+
+  redirectTo(event) {
+    console.log(event);
+    this.helpService.redirectToProductDetails(event);
   }
 
 }

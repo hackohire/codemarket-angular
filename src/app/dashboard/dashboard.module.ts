@@ -11,6 +11,14 @@ const dashboardRoutes: Routes = [
     component: DashboardComponent,
   },
   {
+    path: 'bugfixes-all',
+    loadChildren: () => import('../selling/products-list/products-list.module').then(module => module.ProductsListModule),
+  },
+  {
+    path: 'help-requests-all',
+    loadChildren: () => import('../help/help-request-list/help-request-list.module').then(module => module.HelpRequestListModule),
+  },
+  {
     path: 'my-profile',
     loadChildren: () => import('./my-profile/my-profile.module').then(module => module.MyProfileModule),
   },

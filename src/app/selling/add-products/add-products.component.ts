@@ -5,15 +5,16 @@ import { AuthService } from 'src/app/core/services/auth.service';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/core/store/state/app.state';
 import { AddPrdouct, UpdatePrdouct, GetProductById, SetSelectedProduct } from 'src/app/core/store/actions/product.actions';
-import { of, Subscription, Subject } from 'rxjs';
+import { of, Subscription, Subject, Observable } from 'rxjs';
 import { selectSelectedProduct } from 'src/app/core/store/selectors/product.selectors';
-import { tap, switchMap } from 'rxjs/operators';
+import { tap, switchMap, startWith, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
-import { HighlightJS } from 'ngx-highlightjs';
 import { Storage } from 'aws-amplify';
 import { BreadCumb } from 'src/app/shared/models/bredcumb.model';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { ProductService } from 'src/app/core/services/product.service';
+import { FormService } from 'src/app/shared/services/form.service';
 
 @Component({
   selector: 'app-add-products',
@@ -22,14 +23,20 @@ import { COMMA, ENTER } from '@angular/cdk/keycodes';
 })
 export class AddProductsComponent implements OnInit, OnDestroy {
 
+  
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+  searchText = new FormControl();
+
   productForm: FormGroup;
+
   modules = {
     formula: true,
     // imageResize: {},
     syntax: true,
   };
+
   edit: boolean;
+
   urlRegex = '^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$';
 
   get createdByFormControlValue() {
@@ -73,12 +80,16 @@ export class AddProductsComponent implements OnInit, OnDestroy {
   removable = true;
   addOnBlur = true;
 
+  tagSuggestions: Observable<Tag[]>;
+
   constructor(
     public auth: AuthService,
     private store: Store<AppState>,
     private activatedRoute: ActivatedRoute,
     // private _hljs: HighlightJS,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private productService: ProductService,
+    private formService: FormService
   ) {
 
     this.breadcumb = {
@@ -93,6 +104,7 @@ export class AddProductsComponent implements OnInit, OnDestroy {
         }
       ]
     };
+
 
     /** If it is "add-product" route intialize empty product form, but we are setting store property of "SelectedProduct" as null
      * and if it is "edit-product route" we need to subscribe to get "SelectedProduct" and user refresh the tab,
@@ -128,7 +140,10 @@ export class AddProductsComponent implements OnInit, OnDestroy {
     }
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+  }
+  
+
 
   ngOnDestroy() {
     if (this.subscription$) {
@@ -136,7 +151,7 @@ export class AddProductsComponent implements OnInit, OnDestroy {
     }
   }
 
-  productFormInitialization(p: Product): void {
+  productFormInitialization(p: Product) {
     this.productForm = new FormGroup({
       name: new FormControl(p && p.name ? p.name : ''),
       description: new FormControl(p && p.description ? p.description : ''),
@@ -157,6 +172,9 @@ export class AddProductsComponent implements OnInit, OnDestroy {
         description: new FormControl(p && p.support && p.support.description ? p.support.description : '')
       })
     });
+
+    this.tagSuggestions = this.formService.valueChange(this.searchText);
+
   }
 
   priceAndFilesFormControl(f) {
@@ -277,29 +295,19 @@ export class AddProductsComponent implements OnInit, OnDestroy {
   }
 
   addTech(event: MatChipInputEvent): void {
-    const input = event.input;
-    const value = event.value;
+    this.formService.addCategory(this.tagsFormControl, event);
+  }
 
-    if ((value || '').trim()) {
-      const arrayFormControl: FormArray = this.tagsFormControl;
-      const a = new FormControl({name: value.trim()});
-      arrayFormControl.controls.push(a);
-      arrayFormControl.value.push({name: value.trim()});
-      this.productForm.updateValueAndValidity({emitEvent: true});
-    }
+  selected(event) {
 
-    // Reset the input value
-    if (input) {
-      input.value = '';
-    }
+    this.formService.selectedCategory(this.tagsFormControl, event);
+    this.searchText.setValue(null);
   }
 
 
   // Remove a Tag
   public remove(index: number): void {
-    const arrayFormControl: FormArray = this.tagsFormControl;
-    arrayFormControl.value.splice(index, 1);
-    this.productForm.updateValueAndValidity();
+    this.formService.removeCategory(this.tagsFormControl, index)
   }
 
 }

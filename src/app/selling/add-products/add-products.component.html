@@ -9,16 +9,17 @@
                     <input matInput formControlName="name" placeholder="Name">
                 </mat-form-field>
 
-                <app-editor *ngIf="descriptionFormControl?.value && edit; else add" [data]="descriptionFormControl?.value" (output)="updateFormData($event)"
-                [id]="'edit-product-editor'"></app-editor>
-                    
+                <app-editor *ngIf="descriptionFormControl?.value && edit; else add"
+                    [data]="descriptionFormControl?.value" (output)="updateFormData($event)"
+                    [id]="'edit-product-editor'"></app-editor>
+
 
                 <ng-template #add>
-                    <app-editor (output)="updateFormData($event)"  [id]="'product-editor'"></app-editor>
+                    <app-editor (output)="updateFormData($event)" [id]="'product-editor'"></app-editor>
                 </ng-template>
 
 
-                <br/>
+                <br />
 
                 <!-- <quill-editor #editor formControlName="description" [modules]="modules">
                 </quill-editor> -->
@@ -54,16 +55,21 @@
 
                 <mat-form-field class="field-full-width">
                     <mat-chip-list #tagsList>
-                        <mat-chip *ngFor="let tag of tagsFormControl?.value; let i = index;"
-                            [selectable]="selectable" [removable]="true" (removed)="remove(i)">
+                        <mat-chip *ngFor="let tag of tagsFormControl?.value; let i = index;" [selectable]="selectable"
+                            [removable]="true" (removed)="remove(i)">
                             {{tag?.name}}
                             <mat-icon matChipRemove>cancel</mat-icon>
                         </mat-chip>
-                        <input placeholder="Add Technologies" [matChipInputFor]="tagsList"
-                            [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
-                            (matChipInputTokenEnd)="addTech($event)">
+                        <input [formControl]="searchText" placeholder="Add Technologies" [matChipInputFor]="tagsList"
+                            [matAutocomplete]="auto" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                            [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="addTech($event)">
                         <mat-icon matSuffix>web</mat-icon>
                     </mat-chip-list>
+                    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                        <mat-option *ngFor="let tag of tagSuggestions | async" [value]="tag">
+                            {{tag?.name}}
+                        </mat-option>
+                    </mat-autocomplete>
                 </mat-form-field>
 
 
@@ -76,7 +82,7 @@
                     </button>
                 </div> -->
 
-                <br/>
+                <br />
 
 
                 <!-- This is the content of the dialog, containing a list of the files to upload -->
@@ -101,20 +107,22 @@
                     <mat-form-field class="field-full-width">
                         <input matInput type="number" formControlName="time" placeholder="Support Time(In Minutes)">
                     </mat-form-field>
-                    
+
                     <ng-container *ngIf="supportDescriptionFormControl?.value && edit; else addSupport">
-                        <app-editor [data]="supportDescriptionFormControl?.value" (output)="updateSupportDescription($event)"
-                        [id]="'edit-product-support-editor'"></app-editor>
+                        <app-editor [data]="supportDescriptionFormControl?.value"
+                            (output)="updateSupportDescription($event)" [id]="'edit-product-support-editor'">
+                        </app-editor>
                     </ng-container>
 
                     <ng-template #addSupport>
-                        <app-editor (output)="updateSupportDescription($event)"  [id]="'add-product-support-editor'"></app-editor>
+                        <app-editor (output)="updateSupportDescription($event)" [id]="'add-product-support-editor'">
+                        </app-editor>
                     </ng-template>
-                    
+
                 </div>
 
 
-                <br/>
+                <br />
 
 
 

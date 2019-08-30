@@ -8,10 +8,12 @@ import { AuthService } from 'src/app/core/services/auth.service';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription, of } from 'rxjs';
+import { Subscription, of, Observable } from 'rxjs';
 import { HelpQuery, HelpQueryStatus } from 'src/app/shared/models/help-query.model';
 import { tap, switchMap } from 'rxjs/operators';
 import { selectSelectedQuery } from 'src/app/core/store/selectors/help.selectors';
+import { FormService } from 'src/app/shared/services/form.service';
+import { Tag } from 'src/app/shared/models/product.model';
 
 @Component({
   selector: 'app-askforhelp',
@@ -37,6 +39,9 @@ export class AskforhelpComponent implements OnInit {
 
   subscription$: Subscription;
 
+  searchText = new FormControl();
+  tagSuggestions: Observable<Tag[]>;
+
   get createdBy() {
     return this.askForHelpForm.get('createdBy');
   }
@@ -61,7 +66,8 @@ export class AskforhelpComponent implements OnInit {
     private store: Store<AppState>,
     private authService: AuthService,
     private fb: FormBuilder,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private formService: FormService
   ) {
 
     this.breadcumb = {
@@ -132,10 +138,12 @@ export class AskforhelpComponent implements OnInit {
       tags: this.fb.array(h && h.tags && h.tags.length ? h.tags : []),
       support: new FormGroup({
         time: new FormControl(h && h.support && h.support.time ? h.support.time : ''),
-        description: new FormControl(h && h.support && h.support.description ? h.support.description : '')
+        description: new FormControl(h && h.support && h.support.description ? h.support.description : [])
       })
       // snippets: new FormControl(null),
     });
+
+    this.tagSuggestions = this.formService.valueChange(this.searchText);
   }
 
   submit() {
@@ -176,29 +184,19 @@ export class AskforhelpComponent implements OnInit {
   }
 
   addTech(event: MatChipInputEvent): void {
-    const input = event.input;
-    const value = event.value;
+    this.formService.addCategory(this.tagsFormControl, event);
+  }
 
-    if ((value || '').trim()) {
-      const arrayFormControl: FormArray = this.tagsFormControl;
-      const a = new FormControl({name: value.trim()});
-      arrayFormControl.controls.push(a);
-      arrayFormControl.value.push({name: value.trim()});
-      this.askForHelpForm.updateValueAndValidity({emitEvent: true});
-    }
+  selected(event) {
 
-    // Reset the input value
-    if (input) {
-      input.value = '';
-    }
+    this.formService.selectedCategory(this.tagsFormControl, event);
+    this.searchText.setValue(null);
   }
 
 
   // Remove a Tag
   public remove(index: number): void {
-    const arrayFormControl: FormArray = this.tagsFormControl;
-    arrayFormControl.value.splice(index, 1);
-    this.askForHelpForm.updateValueAndValidity();
+    this.formService.removeCategory(this.tagsFormControl, index)
   }
 
 }

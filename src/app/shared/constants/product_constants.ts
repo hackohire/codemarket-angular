@@ -9,7 +9,6 @@ export const productConstants = {
         _id
         name
         createdBy {
-            _id
             name
         }
         categories
@@ -26,6 +25,7 @@ export const productConstants = {
         updatedAt
         tags {
             name
+            _id
         }
         support {
             time

@@ -8,10 +8,13 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/core/store/state/app.state';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { Subscription, of } from 'rxjs';
+import { Subscription, of, Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { selectSelectedInterview } from 'src/app/core/store/selectors/interview.selectors';
 import { switchMap, tap } from 'rxjs/operators';
+import { FormService } from 'src/app/shared/services/form.service';
+import { Tag } from 'src/app/shared/models/product.model';
+
 
 @Component({
   selector: 'app-add-interview',
@@ -56,12 +59,16 @@ export class AddInterviewComponent implements OnInit {
   addOnBlur = true;
 
   subscription$: Subscription;
+
+  searchText = new FormControl();
+  tagSuggestions: Observable<Tag[]>;
   
   constructor(
     private authService: AuthService,
     private store: Store<AppState>,
     private fb: FormBuilder,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private formService: FormService
   ) {
     this.breadcumb = {
       title: 'Add Interview Details',
@@ -131,10 +138,12 @@ export class AddInterviewComponent implements OnInit {
       tags: this.fb.array(i && i.tags && i.tags.length ? i.tags : []),
       support: new FormGroup({
         time: new FormControl(i && i.support && i.support.time ? i.support.time : ''),
-        description: new FormControl(i && i.support && i.support.description ? i.support.description : '')
+        description: new FormControl(i && i.support && i.support.description ? i.support.description : [])
       })
       // snippets: new FormControl(null),
     });
+
+    this.tagSuggestions = this.formService.valueChange(this.searchText);
   }
 
   submit() {
@@ -161,28 +170,18 @@ export class AddInterviewComponent implements OnInit {
   }
 
   addTech(event: MatChipInputEvent): void {
-    const input = event.input;
-    const value = event.value;
+    this.formService.addCategory(this.tagsFormControl, event);
+  }
 
-    if ((value || '').trim()) {
-      const arrayFormControl: FormArray = this.tagsFormControl;
-      const a = new FormControl({name: value.trim()});
-      arrayFormControl.controls.push(a);
-      arrayFormControl.value.push({name: value.trim()});
-      this.interviewForm.updateValueAndValidity({emitEvent: true});
-    }
+  selected(event) {
 
-    // Reset the input value
-    if (input) {
-      input.value = '';
-    }
+    this.formService.selectedCategory(this.tagsFormControl, event);
+    this.searchText.setValue(null);
   }
 
 
   // Remove a Tag
   public remove(index: number): void {
-    const arrayFormControl: FormArray = this.tagsFormControl;
-    arrayFormControl.value.splice(index, 1);
-    this.interviewForm.updateValueAndValidity();
+    this.formService.removeCategory(this.tagsFormControl, index)
   }
 }

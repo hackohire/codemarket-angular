@@ -51,16 +51,21 @@
 
             <mat-form-field class="field-full-width">
                 <mat-chip-list #tagsList>
-                    <mat-chip *ngFor="let tag of tagsFormControl?.value; let i = index;" [selectable]="selectable"
-                        [removable]="true" (removed)="remove(i)">
+                    <mat-chip *ngFor="let tag of tagsFormControl?.value; let i = index;"
+                        [selectable]="selectable" [removable]="true" (removed)="remove(i)">
                         {{tag?.name}}
                         <mat-icon matChipRemove>cancel</mat-icon>
                     </mat-chip>
-                    <input placeholder="Add Programming Language Tags" [matChipInputFor]="tagsList"
+                    <input [formControl]="searchText" [matAutocomplete]="auto" placeholder="Add Programming Language Tags" [matChipInputFor]="tagsList"
                         [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
                         (matChipInputTokenEnd)="addTech($event)">
                     <mat-icon matSuffix>web</mat-icon>
                 </mat-chip-list>
+                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                    <mat-option *ngFor="let tag of tagSuggestions | async" [value]="tag">
+                        {{tag?.name}}
+                    </mat-option>
+                </mat-autocomplete>
             </mat-form-field>
 
 

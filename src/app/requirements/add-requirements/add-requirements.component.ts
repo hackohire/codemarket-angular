@@ -10,8 +10,10 @@ import { MatChipInputEvent } from '@angular/material/chips';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap, tap } from 'rxjs/operators';
-import { of, Subscription } from 'rxjs';
+import { of, Subscription, Observable } from 'rxjs';
 import { selectSelectedRequirement } from 'src/app/core/store/selectors/requirement.selectors';
+import { FormService } from 'src/app/shared/services/form.service';
+import { Tag } from 'src/app/shared/models/product.model';
 
 @Component({
   selector: 'app-add-requirements',
@@ -29,6 +31,16 @@ export class AddRequirementsComponent implements OnInit {
   };
 
   edit: boolean;
+
+  visible = true;
+  selectable = true;
+  removable = true;
+  addOnBlur = true;
+
+  subscription$: Subscription;
+
+  searchText = new FormControl();
+  tagSuggestions: Observable<Tag[]>;
 
   get createdBy() {
     return this.requirementForm.get('createdBy');
@@ -50,18 +62,12 @@ export class AddRequirementsComponent implements OnInit {
     return this.requirementForm.get('tags') as FormArray;
   }
 
-  visible = true;
-  selectable = true;
-  removable = true;
-  addOnBlur = true;
-
-  subscription$: Subscription;
-
   constructor(
     private authService: AuthService,
     private store: Store<AppState>,
     private fb: FormBuilder,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private formService: FormService
   ) {
     this.breadcumb = {
       title: 'Add Requirement Details',
@@ -131,10 +137,12 @@ export class AddRequirementsComponent implements OnInit {
       tags: this.fb.array(r && r.tags && r.tags.length ? r.tags : []),
       support: new FormGroup({
         time: new FormControl(r && r.support && r.support.time ? r.support.time : ''),
-        description: new FormControl(r && r.support && r.support.description ? r.support.description : '')
+        description: new FormControl(r && r.support && r.support.description ? r.support.description : [])
       })
       // snippets: new FormControl(null),
     });
+
+    this.tagSuggestions = this.formService.valueChange(this.searchText);
   }
 
   submit() {
@@ -161,29 +169,19 @@ export class AddRequirementsComponent implements OnInit {
   }
 
   addTech(event: MatChipInputEvent): void {
-    const input = event.input;
-    const value = event.value;
+    this.formService.addCategory(this.tagsFormControl, event);
+  }
 
-    if ((value || '').trim()) {
-      const arrayFormControl: FormArray = this.tagsFormControl;
-      const a = new FormControl({ name: value.trim() });
-      arrayFormControl.controls.push(a);
-      arrayFormControl.value.push({ name: value.trim() });
-      this.requirementForm.updateValueAndValidity({ emitEvent: true });
-    }
+  selected(event) {
 
-    // Reset the input value
-    if (input) {
-      input.value = '';
-    }
+    this.formService.selectedCategory(this.tagsFormControl, event);
+    this.searchText.setValue(null);
   }
 
 
   // Remove a Tag
   public remove(index: number): void {
-    const arrayFormControl: FormArray = this.tagsFormControl;
-    arrayFormControl.value.splice(index, 1);
-    this.requirementForm.updateValueAndValidity();
+    this.formService.removeCategory(this.tagsFormControl, index)
   }
 
 }

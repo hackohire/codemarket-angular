@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { productConstants } from 'src/app/shared/constants/product_constants';
-import { Product } from 'src/app/shared/models/product.model';
+import { Product, Tag } from 'src/app/shared/models/product.model';
 import { Observable } from 'rxjs/internal/Observable';
 import { map } from 'rxjs/internal/operators/map';
 import { Store } from '@ngrx/store';
@@ -24,7 +24,7 @@ export class ProductService {
   productFields = productConstants.productQueryFields;
   cartProductListIds: Observable<string[]>;
   allProductsList: Observable<Product[]>;
-  cartTotal: Observable<{total: number, subTotal: number}>;
+  cartTotal: Observable<{ total: number, subTotal: number }>;
 
   constructor(
     private apollo: Apollo,
@@ -101,7 +101,7 @@ export class ProductService {
     return this.cartProductListIds.pipe(
       switchMap((productIds: string[]) => {
         const doesProductExistInCart = false;
-        if (productIds && productIds.length && productIds.filter(id  => id === productId).length) {
+        if (productIds && productIds.length && productIds.filter(id => id === productId).length) {
           return of(true);
         }
         return of(doesProductExistInCart);
@@ -118,8 +118,8 @@ export class ProductService {
   }
 
   redirectToProductDetails(product: Product): void {
-    this.store.dispatch(SetSelectedProduct({product}));
-    this.router.navigate(['/', {outlets: {main: ['dashboard', 'product-details', product._id]}}]);
+    this.store.dispatch(SetSelectedProduct({ product }));
+    this.router.navigate(['/', { outlets: { main: ['dashboard', 'product-details', product._id] } }]);
   }
 
   getProductsInCart(): Observable<Product[]> {

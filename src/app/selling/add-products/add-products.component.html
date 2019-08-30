@@ -33,7 +33,7 @@
                 </mat-form-field>
 
                 <mat-form-field class="field-full-width">
-                    <input matInput type="number" formControlName="totalPrice" placeholder="Total Price">
+                    <input matInput type="number" formControlName="price" placeholder="Total Price">
                 </mat-form-field>
 
                 <mat-form-field class="field-full-width">
@@ -127,7 +127,7 @@
 
 
 
-                <button mat-raised-button color="primary">Submit Product</button>
+                <button [disabled]="productForm?.invalid" mat-raised-button color="primary">Submit Product</button>
 
             </form>
 

@@ -89,7 +89,7 @@
 
 
 
-                <button mat-raised-button (click)="submit()" color="primary">Submit Query</button>
+                <button [disabled]="requirementForm?.invalid" mat-raised-button (click)="submit()" color="primary">Submit Requirements</button>
             </div>
 
         </div>

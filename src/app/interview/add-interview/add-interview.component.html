@@ -85,7 +85,7 @@
 
                 <br/>
 
-                <button mat-raised-button (click)="submit()" color="primary">Submit Query</button>
+                <button [disabled]="interviewForm?.invalid" mat-raised-button (click)="submit()" color="primary">Submit Interview</button>
             </div>
 
         </div>

@@ -19,7 +19,7 @@ export const productConstants = {
         demo_url
         video_url
         documentation_url
-        totalPrice
+        price
         status
         createdAt
         updatedAt

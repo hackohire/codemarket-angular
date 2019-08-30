@@ -36,7 +36,7 @@ export class CartEffects {
         switchMap(([ids, allProducts]) => {
             let total = 0;
             ids.forEach((id) => {
-                total += allProducts.find(i => i._id === id).totalPrice;
+                total += allProducts.find(i => i._id === id).price;
             });
             return of(total);
         }),

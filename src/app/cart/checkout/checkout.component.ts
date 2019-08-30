@@ -40,7 +40,7 @@ export class CheckoutComponent implements OnInit, AfterViewInit {
         p.description = prod.name;
         p.amount = {
           currency_code: 'INR',
-          value: prod.totalPrice
+          value: prod.price
         };
 
         return p;

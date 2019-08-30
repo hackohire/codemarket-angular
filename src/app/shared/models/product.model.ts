@@ -33,7 +33,7 @@ export interface Product {
     featuredImage?: string;
     createdBy: User;
     priceAndFiles?: PriceAndFiles[];
-    totalPrice: number;
+    price: number;
     categories?: [];
     demo_url?: string;
     documentation_url?: string;

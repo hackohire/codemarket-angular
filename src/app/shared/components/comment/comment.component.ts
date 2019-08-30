@@ -1,9 +1,8 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { tap } from 'rxjs/operators';
 import * as moment from 'moment';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { EventEmitter } from 'events';
 import { BlockToolData } from '@editorjs/editorjs';
 import { CommentService } from '../../services/comment.service';
 import { Comment } from '../../models/comment.model';
@@ -17,7 +16,7 @@ export class CommentComponent implements OnInit {
 
   @Input() comment: Comment;
   @Input() referenceId: string;
-  @Output() updateRoot: EventEmitter = new EventEmitter();
+  @Output() updateRoot = new EventEmitter();
   replyCommentForm: FormGroup;
   reply: boolean;
   replyEditorId: string;

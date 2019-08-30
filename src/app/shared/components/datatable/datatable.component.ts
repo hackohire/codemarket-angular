@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { MatTableDataSource, MatSort } from '@angular/material';
 
 @Component({
@@ -11,8 +11,9 @@ export class DatatableComponent implements OnInit {
   @Input() displayedColumns: string[];
   @Input() data: any[];
   dataSource = new MatTableDataSource();
-  @ViewChild(MatSort, {static: false}) sort: MatSort;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
 
+  @Output() redirect = new EventEmitter();
 
   constructor() { }
 

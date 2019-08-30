@@ -6,6 +6,10 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { description } from '../shared/constants/fragments_constatnts';
 import { AuthService } from '../core/services/auth.service';
+import { SetSelectedHelpRequest } from '../core/store/actions/help.actions';
+import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { AppState } from '../core/store/state/app.state';
 
 @Injectable({
   providedIn: 'root'
@@ -45,7 +49,9 @@ export class HelpService {
 
   constructor(
     private apollo: Apollo,
-    private auth: AuthService
+    private auth: AuthService,
+    private router: Router,
+    private store: Store<AppState>
     ) { }
 
   getHelpRequestsByUserId(): Observable<HelpQuery[]> {
@@ -168,6 +174,11 @@ export class HelpService {
         return p.data.deleteHelpRequest;
       }),
     );
+  }
+
+  redirectToProductDetails(helpRequest: HelpQuery): void {
+    this.store.dispatch(SetSelectedHelpRequest({ helpRequest }));
+    this.router.navigate(['/', { outlets: { main: ['dashboard', 'help-request-details', helpRequest._id] } }]);
   }
 
 }

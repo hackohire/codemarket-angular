@@ -124,9 +124,9 @@ export class AskforhelpComponent implements OnInit {
 
   askForHelpFormInitialization(h: HelpQuery): void {
     this.askForHelpForm = new FormGroup({
-      name: new FormControl(h && h.name ? h.name :''),
+      name: new FormControl(h && h.name ? h.name : '', Validators.required),
       description: new FormControl(h && h.description ? h.description : ''),
-      price: new FormControl(h && h.price ? h.price : ''),
+      price: new FormControl(h && h.price ? h.price : '', Validators.required),
       createdBy: new FormControl(h && h.createdBy && h.createdBy._id ? h.createdBy._id : ''),
       shortDescription: new FormControl(h && h.shortDescription ? h.shortDescription : ''),
       categories: new FormControl(h && h.categories ? h.categories : []),

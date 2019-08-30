@@ -124,9 +124,9 @@ export class AddInterviewComponent implements OnInit {
 
   interviewFormInitialization(i: Interview) {
     this.interviewForm = new FormGroup({
-      name: new FormControl(i && i.name ? i.name : ''),
+      name: new FormControl(i && i.name ? i.name : '', Validators.required),
       description: new FormControl(i && i.description ? i.description : ''),
-      price: new FormControl(i && i.price ? i.price : ''),
+      price: new FormControl(i && i.price ? i.price : '', Validators.required),
       createdBy: new FormControl(i && i.createdBy && i.createdBy._id ? i.createdBy._id : ''),
       shortDescription: new FormControl(i && i.shortDescription ? i.shortDescription : ''),
       categories: new FormControl(i && i.categories ? i.categories : []),

@@ -123,9 +123,9 @@ export class AddRequirementsComponent implements OnInit {
 
   requirementFormInitialization(r: Requirement) {
     this.requirementForm = new FormGroup({
-      name: new FormControl(r && r.name ? r.name : ''),
+      name: new FormControl(r && r.name ? r.name : '', Validators.required),
       description: new FormControl(r && r.description ? r.description : ''),
-      price: new FormControl(r && r.price ? r.price : ''),
+      price: new FormControl(r && r.price ? r.price : '', Validators.required),
       createdBy: new FormControl(r && r.createdBy && r.createdBy._id ? r.createdBy._id : ''),
       shortDescription: new FormControl(r && r.shortDescription ? r.shortDescription : ''),
       categories: new FormControl(r && r.categories ? r.categories : []),

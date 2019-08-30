@@ -7,13 +7,12 @@ import { AppState } from 'src/app/core/store/state/app.state';
 import { AddPrdouct, UpdatePrdouct, GetProductById, SetSelectedProduct } from 'src/app/core/store/actions/product.actions';
 import { of, Subscription, Subject, Observable } from 'rxjs';
 import { selectSelectedProduct } from 'src/app/core/store/selectors/product.selectors';
-import { tap, switchMap, startWith, debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { tap, switchMap } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { Storage } from 'aws-amplify';
 import { BreadCumb } from 'src/app/shared/models/bredcumb.model';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { ProductService } from 'src/app/core/services/product.service';
 import { FormService } from 'src/app/shared/services/form.service';
 
 @Component({
@@ -23,7 +22,6 @@ import { FormService } from 'src/app/shared/services/form.service';
 })
 export class AddProductsComponent implements OnInit, OnDestroy {
 
-  
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   searchText = new FormControl();
 
@@ -86,9 +84,7 @@ export class AddProductsComponent implements OnInit, OnDestroy {
     public auth: AuthService,
     private store: Store<AppState>,
     private activatedRoute: ActivatedRoute,
-    // private _hljs: HighlightJS,
     private fb: FormBuilder,
-    private productService: ProductService,
     private formService: FormService
   ) {
 
@@ -153,11 +149,11 @@ export class AddProductsComponent implements OnInit, OnDestroy {
 
   productFormInitialization(p: Product) {
     this.productForm = new FormGroup({
-      name: new FormControl(p && p.name ? p.name : ''),
-      description: new FormControl(p && p.description ? p.description : ''),
+      name: new FormControl(p && p.name ? p.name : '', Validators.required),
+      description: new FormControl(p && p.description ? p.description : []),
       shortDescription: new FormControl(p && p.shortDescription ? p.shortDescription : ''),
       createdBy: new FormControl(p && p.createdBy && p.createdBy._id ? p.createdBy._id : ''),
-      totalPrice: new FormControl(p && p.totalPrice ? p.totalPrice : 0),
+      price: new FormControl(p && p.price ? p.price : 0, Validators.required),
       categories: new FormControl(p && p.categories ? p.categories : []),
       demo_url: new FormControl(p && p.demo_url ? p.demo_url : '', [Validators.pattern(this.urlRegex)]),
       documentation_url: new FormControl(p && p.documentation_url ? p.documentation_url : '', [Validators.pattern(this.urlRegex)]),

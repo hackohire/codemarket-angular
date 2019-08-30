@@ -96,6 +96,17 @@ export class AuthService {
               _id
               name
               email
+              linkedin_url
+              github_url
+              stackoverflow_url
+              location
+              currentJobDetails {
+                jobProfile
+                companyName
+                companyLocation
+              }
+              programming_languages
+              avatar
               roles
             }
           }`,

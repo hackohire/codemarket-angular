@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ENTER, COMMA, SPACE } from '@angular/cdk/keycodes';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
@@ -9,6 +9,8 @@ import { UpdateUser } from 'src/app/core/store/actions/user.actions';
 import { MatChipInputEvent } from '@angular/material';
 import { AppState } from 'src/app/core/store/state/app.state';
 import { User } from 'src/app/shared/models/user.model';
+import { Storage } from 'aws-amplify';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-edit-user-profile',
@@ -18,6 +20,7 @@ import { User } from 'src/app/shared/models/user.model';
 export class EditUserProfileComponent implements OnInit {
 
   readonly separatorKeysCodes: number[] = [ENTER, COMMA, SPACE];
+  @ViewChild('profilePic', { static: false }) profilePic;
   userProfileForm: FormGroup;
   loggedInUser: User;
   user$: Observable<User>;
@@ -42,8 +45,8 @@ export class EditUserProfileComponent implements OnInit {
       if (u) {
         // this.userProfileForm.setValue(u);
         this.userProfileForm = new FormGroup({
-          name: new FormControl({value: this.loggedInUser ? this.loggedInUser.name : '', disabled: true}),
-          email: new FormControl({value: this.loggedInUser ? this.loggedInUser.email : '', disabled: true}),
+          name: new FormControl({ value: this.loggedInUser ? this.loggedInUser.name : '', disabled: true }),
+          email: new FormControl({ value: this.loggedInUser ? this.loggedInUser.email : '', disabled: true }),
           linkedin_url: new FormControl(this.loggedInUser ? this.loggedInUser.linkedin_url : ''),
           github_url: new FormControl(this.loggedInUser ? this.loggedInUser.github_url : ''),
           stackoverflow_url: new FormControl(this.loggedInUser ? this.loggedInUser.stackoverflow_url : ''),
@@ -74,7 +77,7 @@ export class EditUserProfileComponent implements OnInit {
 
   updateUser(): void {
     console.log(this.userProfileForm.value);
-    this.store.dispatch(UpdateUser({payload: this.userProfileForm.value}));
+    this.store.dispatch(UpdateUser({ payload: this.userProfileForm.value }));
   }
 
   addProgrammingLanguage(event: MatChipInputEvent) {
@@ -98,10 +101,43 @@ export class EditUserProfileComponent implements OnInit {
     controller.markAsDirty();
   }
 
-  avatarUploaded(event) {
-    console.log(event);
-    this.avatar.setValue(event.key);
-    // this.currentAvatarUrl = this.s3BucketUrl + event.key;
+  addProfilePic() {
+    this.profilePic.nativeElement.click();
+  }
+
+  onFilesAdded() {
+    // const files: { [key: string]: File } = this.file.nativeElement.files;
+    const pic: File = this.profilePic.nativeElement.files[0];
+    console.log(pic);
+
+    const fileNameSplitArray = pic.name.split('.');
+    const fileExt = fileNameSplitArray.pop();
+    const fileName = fileNameSplitArray[0] + '-' + new Date().toISOString() + '.' + fileExt;
+
+    Storage.vault.put(fileName, pic, {
+
+      bucket: 'codemarket-files',
+      path: 'avatar',
+      level: 'public',
+
+      contentType: pic.type,
+
+    }).then((uploaded: any) => {
+      console.log(uploaded);
+      console.log('uploaded', uploaded);
+      this.avatar.setValue(uploaded.key);
+    });
+
+
+    this.profilePic.nativeElement.value = null;
+
+    // console.log(this.files);
+  }
+
+  sanitizeImage() {
+    if (this.avatar.value) {
+      return environment.codemarketFilesBucket + this.avatar.value;
+    }
   }
 
 

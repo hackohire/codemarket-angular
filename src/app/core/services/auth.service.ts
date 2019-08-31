@@ -60,7 +60,7 @@ export class AuthService {
           this.store.dispatch(SetLoggedInUser({payload: null}));
         });
       } else if (channel === 'auth' && data.payload.event === 'oAuthSignOut') {
-        // localStorage.clear();
+        localStorage.clear();
         this.store.dispatch(SetLoggedInUser({payload: null}));
         // this.router.navigate(['/']);
       }
@@ -83,7 +83,7 @@ export class AuthService {
         console.log(err);
         // this.router.navigate(['/']);
         this.store.dispatch(SetLoggedInUser({payload: null}));
-        // localStorage.clear();
+        localStorage.clear();
       });
   }
 

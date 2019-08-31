@@ -2668,12 +2668,16 @@ h6 {
 }
 
 .social--color--filled ul li a, .single_blog_content .share_tags .share .social_share ul li a {
-  color: #fff;
+  // color: #fff;
 }
 
 .social--color--filled span, .single_blog_content .share_tags .share .social_share span {
   -webkit-border-radius: 50%;
           border-radius: 50%;
+}
+
+.social--color--filled span.fa-facebook {
+  background: #395799;
 }
 
 .social--color--filled span.fa-facebook, .single_blog_content .share_tags .share .social_share span.fa-facebook {

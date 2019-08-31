@@ -30,11 +30,6 @@
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss",
-              "./node_modules/quill/dist/quill.core.css",
-              "./node_modules/quill/dist/quill.bubble.css",
-              "./node_modules/quill/dist/quill.snow.css",
-              "./node_modules/quill-emoji/dist/quill-emoji.css",
-              "./node_modules/quill-mention/dist/quill.mention.min.css",
 
               "src/assets/css/_general.scss",
               "src/assets/css/_theme.scss",
@@ -43,7 +38,6 @@
               "src/assets/css/_btn.scss"
             ],
             "scripts": [
-              "./node_modules/quill/dist/quill.min.js",
               "./node_modules/jquery/dist/jquery.min.js",
               "./node_modules/bootstrap/dist/js/bootstrap.min.js"
             ]

@@ -60,9 +60,9 @@ export class AuthService {
           this.store.dispatch(SetLoggedInUser({payload: null}));
         });
       } else if (channel === 'auth' && data.payload.event === 'oAuthSignOut') {
-        localStorage.clear();
+        // localStorage.clear();
         this.store.dispatch(SetLoggedInUser({payload: null}));
-        this.router.navigate(['/']);
+        // this.router.navigate(['/']);
       }
     });
 
@@ -81,9 +81,9 @@ export class AuthService {
       })
       .catch(err => {
         console.log(err);
-        this.router.navigate(['/']);
+        // this.router.navigate(['/']);
         this.store.dispatch(SetLoggedInUser({payload: null}));
-        localStorage.clear();
+        // localStorage.clear();
       });
   }
 
@@ -108,6 +108,7 @@ export class AuthService {
               programming_languages
               avatar
               roles
+              createdAt
             }
           }`,
           variables: {

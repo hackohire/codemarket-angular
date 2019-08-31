@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BreadCumb } from 'src/app/shared/models/bredcumb.model';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-my-profile',
@@ -10,8 +12,11 @@ export class MyProfileComponent implements OnInit {
 
   breadcumb: BreadCumb;
   navLinks = [];
+  bucketUrl = environment.codemarketFilesBucket;
 
-  constructor() {
+  constructor(
+    public authService: AuthService
+  ) {
     this.breadcumb = {
       title: 'My Profile',
       path: [

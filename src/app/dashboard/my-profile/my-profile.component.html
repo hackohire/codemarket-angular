@@ -2,7 +2,7 @@
 
 
 
-<section class="author-profile-area">
+<section class="author-profile-area" *ngIf="authService.loggedInUser$ | async as user">
     <div class="container">
         <div class="row">
             <div class="col-lg-4 col-md-12">
@@ -10,40 +10,40 @@
                     <div class="author-card sidebar-card">
                         <div class="author-infos">
                             <div class="author_avatar">
-                                <img src="images/author-avatar.jpg" alt="Presenting the broken author avatar :D">
+                                <img [src]="bucketUrl + user?.avatar" alt="Presenting the broken author avatar :D">
                             </div>
 
                             <div class="author">
-                                <h4>AazzTech</h4>
-                                <p>Signed Up: 08 April 2016</p>
+                                <h4>{{user?.name}}</h4>
+                                <p>On platform since {{user?.createdAt | date}}</p>
                             </div>
                             <!-- end /.author -->
 
 
                             <div class="social social--color--filled">
                                 <ul>
-                                    <li>
-                                        <a href="#">
-                                            <span class="fa fa-facebook"></span>
+                                    <li style="margin: 5px; color: initial" >
+                                        <a [href]="user?.linkedin_url">
+                                            <i style="font-size: 1.7rem !important;" class="fab fa-linkedin"></i>
                                         </a>
                                     </li>
-                                    <li>
-                                        <a href="#">
-                                            <span class="fa fa-twitter"></span>
+                                    <li style="margin: 5px" >
+                                        <a [href]="user?.github_url">
+                                            <i style="font-size: 1.7rem !important;" class="fab fa-stack-overflow"></i>
                                         </a>
                                     </li>
-                                    <li>
-                                        <a href="#">
-                                            <span class="fa fa-dribbble"></span>
-                                        </a>
+                                    <li style="margin: 5px" >
+                                            <a [href]="user?.stackoverflow_url">
+                                            <i style="font-size: 1.7rem !important;" class="fab fa-github"></i>
+                                            </a>
                                     </li>
                                 </ul>
                             </div>
                             <!-- end /.social -->
 
-                            <div class="author-btn">
+                            <!-- <div class="author-btn">
                                 <a href="#" class="btn btn--md btn--round">Follow</a>
-                            </div>
+                            </div> -->
                             <!-- end /.author-btn -->
                         </div>
                         <!-- end /.author-infos -->

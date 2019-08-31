@@ -28,6 +28,7 @@ export class UserService {
       programming_languages
       avatar
       roles
+      createdAt
     }
   }`;
 

@@ -9,6 +9,7 @@ const dashboardRoutes: Routes = [
   {
     path: '',
     component: DashboardComponent,
+    pathMatch: 'full'
   },
   {
     path: 'bugfixes-all',

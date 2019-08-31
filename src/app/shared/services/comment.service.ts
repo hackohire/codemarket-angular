@@ -102,4 +102,50 @@ export class CommentService {
       }),
     );
   }
+
+  deleteComment(commentId): Observable<any> {
+    return this.apollo.query(
+      {
+        query: gql`
+          query deleteComment($commentId: String) {
+            deleteComment(commentId: $commentId)
+          }
+        `,
+        fetchPolicy: 'no-cache',
+        variables: {
+          commentId: commentId
+        }
+      }
+    ).pipe(
+      map((p: any) => {
+        return p.data.deleteComment;
+      }),
+    );
+  }
+
+  updateComment(commentId, text): Observable<any> {
+    return this.apollo.mutate(
+      {
+        mutation: gql`
+          mutation updateComment($commentId: String, $text: [InputdescriptionBlock]) {
+            updateComment(commentId: $commentId, text: $text) {
+              text {
+                ...Description
+              }
+            }
+          }
+          ${description}
+        `,
+        fetchPolicy: 'no-cache',
+        variables: {
+          commentId: commentId,
+          text: text
+        }
+      }
+    ).pipe(
+      map((p: any) => {
+        return p.data.updateComment;
+      }),
+    );
+  }
 }

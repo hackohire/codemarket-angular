@@ -108,7 +108,6 @@ export class DetailsComponent implements OnInit {
   initializeCommentForm(p) {
     this.commentForm = new FormGroup({
       text: new FormControl(''),
-      createdBy: new FormControl(this.authService.loggedInUser._id),
       referenceId: new FormControl(p._id),
       type: new FormControl(this.type),
     });
@@ -127,18 +126,21 @@ export class DetailsComponent implements OnInit {
 
   addComment() {
     console.log(this.commentForm.value);
-    this.commentService.addComment(this.commentForm.value).pipe(
-      switchMap((d) => {
-        return this.commentService.getCommentsByReferenceId(d.referenceId);
-      }),
-      tap((d) => {
-        console.log(d);
-        if (d && d.length) {
-          this.commentsList = d;
-          this.commentForm.reset();
-        }
-      })
-    ).subscribe();
+    if (this.authService.loggedInUser) {
+      this.commentForm.addControl('createdBy', new FormControl(this.authService.loggedInUser._id));
+      this.commentService.addComment(this.commentForm.value).pipe(
+        switchMap((d) => {
+          return this.commentService.getCommentsByReferenceId(d.referenceId);
+        }),
+        tap((d) => {
+          console.log(d);
+          if (d && d.length) {
+            this.commentsList = d;
+            this.commentForm.reset();
+          }
+        })
+      ).subscribe();
+    }
   }
 
   updateFormData(event) {

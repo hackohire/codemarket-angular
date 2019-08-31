@@ -19,11 +19,12 @@ export class CommentComponent implements OnInit {
   @Output() updateRoot = new EventEmitter();
   replyCommentForm: FormGroup;
   reply: boolean;
+  edit: boolean;
   replyEditorId: string;
   replyTextEditorData: BlockToolData;
 
   constructor(
-    private authService: AuthService,
+    public authService: AuthService,
     private commentService: CommentService
   ) { }
 
@@ -37,7 +38,7 @@ export class CommentComponent implements OnInit {
   initializeReplyForm() {
     this.replyCommentForm = new FormGroup({
       text: new FormControl(this.comment.text),
-      createdBy: new FormControl(this.authService.loggedInUser._id),
+      // createdBy: new FormControl(this.authService.loggedInUser._id),
       referenceId: new FormControl(this.comment.referenceId),
       parentId: new FormControl(this.comment._id),
       type: new FormControl(this.comment.type)
@@ -63,16 +64,38 @@ export class CommentComponent implements OnInit {
 
   addReply() {
     // console.log(this.commentForm.value);
-    this.commentService.addComment(this.replyCommentForm.value).pipe(
-      // switchMap((d) => {
-      //   return this.productService.getCommentsByReferenceId(d.referenceId);
-      // }),
-      tap((child) => {
-        if (child && this.comment.children) {
-          this.comment.children.push(child);
-          this.replyCommentForm.reset();
-          this.replyTextEditorData = null;
-          this.reply = false;
+    if (this.authService.loggedInUser) {
+      this.replyCommentForm.addControl('createdBy', new FormControl(this.authService.loggedInUser._id));
+      this.commentService.addComment(this.replyCommentForm.value).pipe(
+        // switchMap((d) => {
+        //   return this.productService.getCommentsByReferenceId(d.referenceId);
+        // }),
+        tap((child) => {
+          if (child && this.comment.children) {
+            this.comment.children.push(child);
+            this.replyCommentForm.reset();
+            this.replyTextEditorData = null;
+            this.reply = false;
+          }
+        })
+      ).subscribe();
+    }
+  }
+
+  deleteComment() {
+    this.commentService.deleteComment(this.comment._id).pipe(
+      tap((d) => {
+        console.log(d);
+      })
+    ).subscribe();
+  }
+
+  updateComment() {
+    this.commentService.updateComment(this.comment._id, this.replyCommentForm.get('text').value).pipe(
+      tap((d) => {
+        console.log(d);
+        if (d) {
+          this.edit = false;
         }
       })
     ).subscribe();

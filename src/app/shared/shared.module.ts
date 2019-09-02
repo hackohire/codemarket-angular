@@ -14,6 +14,7 @@ import { RouterModule } from '@angular/router';
 import { EditorComponent } from './components/editor/editor.component';
 import { CommentComponent } from './components/comment/comment.component';
 import { DatatableComponent } from './components/datatable/datatable.component';
+import { SafePipe } from './pipes/safe.pipe';
 
 export function hljsLanguages() {
   return [
@@ -23,7 +24,7 @@ export function hljsLanguages() {
   ];
 }
 @NgModule({
-  declarations: [BreadcumbComponent, EditorComponent, CommentComponent, DatatableComponent],
+  declarations: [BreadcumbComponent, EditorComponent, CommentComponent, DatatableComponent, SafePipe],
   imports: [
     CommonModule,
     FormsModule,
@@ -51,7 +52,8 @@ export function hljsLanguages() {
     QuillModule,
     HighlightModule,
     FlexLayoutModule,
-    SweetAlert2Module
+    SweetAlert2Module,
+    SafePipe
   ]
 })
 export class SharedModule { }

@@ -28,6 +28,7 @@ export class RequirementService {
     updatedAt
     tags {
       name
+      _id
     }
     support {
       time
@@ -38,6 +39,7 @@ export class RequirementService {
     createdBy {
       _id
       name
+      avatar
     }
   }
   ${description}

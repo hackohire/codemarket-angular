@@ -32,10 +32,12 @@ export class HelpService {
     createdBy {
       name
       _id
+      avatar
     }
     updatedAt
     tags {
       name
+      _id
     }
     support {
       time

@@ -10,6 +10,7 @@ export const productConstants = {
         name
         createdBy {
             name
+            avatar
         }
         categories
         description {

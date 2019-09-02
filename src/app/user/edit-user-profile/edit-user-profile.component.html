@@ -3,7 +3,8 @@
 <form [formGroup]="userProfileForm" class="profile-form" *ngIf="(user$ | async) as user" (ngSubmit)="updateUser()">
     <div class="profile-picture">
         <div class="user-info">
-            <div class="profile-pic"><img [src]="sanitizeImage()" />
+            <div class="profile-pic">
+                <img [src]="avatar?.value ? ((codemarketBucketURL + avatar.value) | safe: 'resourceUrl') : anonymousAvatar" />
                 <div class="layer">
                     <div class="loader"></div>
                 </div>

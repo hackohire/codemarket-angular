@@ -21,7 +21,7 @@ export class EditorComponent implements OnInit, OnDestroy {
 
   editor: EditorJS;
   @Input() id: string;
-  @Input() readOnly: boolean = false;
+  @Input() readOnly = false;
   @Input() data: [];
   @Output() output: EventEmitter<any> = new EventEmitter();
 
@@ -31,7 +31,7 @@ export class EditorComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    console.log(this.id)
+    // console.log(this.id)
     // Text Editor With Plugin and Configuration
 
     this.editor = new EditorJS({
@@ -119,7 +119,7 @@ export class EditorComponent implements OnInit, OnDestroy {
       placeholder: 'Let`s write!',
       onChange: (() => {
         this.editor.save().then((outputData) => {
-          console.log('Article data: ', outputData);
+          // console.log('Article data: ', outputData);
           this.output.emit([...outputData.blocks]);
           // this.askForHelpForm.get('description').setValue(outputData.blocks, { emitEvent: false });
         }).catch((error) => {

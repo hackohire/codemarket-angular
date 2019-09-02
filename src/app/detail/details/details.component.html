@@ -135,7 +135,9 @@
                                 <div class="media comment-form">
                                     <div class="media-left">
                                         <a href="#">
-                                            <img style="height:70px; width: 70px;" class="media-object" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRw3JJeL2VfQtqF4CMFDkXaG8OpgcArNd9AnorGROT53rbFlHcA" alt="Commentator Avatar">
+                                            <img class="author_avatar_comment"
+                                            [src]="details?.createdBy?.avatar ? ((codemarketBucketURL + details.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                                            alt="Commentator Avatar">
                                         </a>
                                     </div>
                                     <div class="media-body">
@@ -204,7 +206,8 @@
 
                             <div class="author-infos">
                                 <div class="author_avatar">
-                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRw3JJeL2VfQtqF4CMFDkXaG8OpgcArNd9AnorGROT53rbFlHcA"
+                                    <img 
+                                        [src]="details?.createdBy?.avatar ? ((codemarketBucketURL + details.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar"
                                         alt="Presenting the broken author avatar :D">
                                 </div>
 

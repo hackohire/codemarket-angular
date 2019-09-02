@@ -1,8 +1,8 @@
 <div class="media" *ngIf="replyCommentForm?.value">
     <div class="media-left">
         <a href="#">
-            <img style="height:70px; width: 70px;" class="media-object"
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRw3JJeL2VfQtqF4CMFDkXaG8OpgcArNd9AnorGROT53rbFlHcA"
+            <img class="author_avatar_comment"
+                [src]="comment?.createdBy?.avatar ? ((codemarketBucketURL + comment.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar"
                 alt="Commentator Avatar">
         </a>
     </div>
@@ -21,15 +21,15 @@
             (click)="deleteComment()" color="warn">
                 <mat-icon>delete</mat-icon>
             </button>
-            <!-- <button mat-mini-fab style="float: right" *ngIf="comment?.createdBy?._id === authService?.loggedInUser?._id" (click)="edit=true" color="primary">
+            <button mat-mini-fab style="float: right" *ngIf="comment?.createdBy?._id === authService?.loggedInUser?._id" (click)="edit=true" color="primary">
                 <mat-icon>edit</mat-icon>
-            </button> -->
+            </button>
             <button mat-mini-fab style="float: right" *ngIf="!comment?.parentId" (click)="allowReply()" color="primary">
                 <mat-icon>reply</mat-icon>
             </button>
 
         </div>
-        <app-editor [data]="replyCommentForm?.get('text')?.value" [id]="comment?._id"></app-editor>
+        <app-editor (output)="updateFormData($event)" [data]="replyCommentForm?.get('text')?.value" [id]="comment?._id"></app-editor>
         <br/>
         <button *ngIf="edit" type="button" class="btn btn--md btn--round" (click)="updateComment()">Update</button>
         <!-- <p>{{comment?.text}}</p> -->
@@ -46,7 +46,7 @@
     <div class="media-left">
         <a href="#">
             <img class="media-object"
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRw3JJeL2VfQtqF4CMFDkXaG8OpgcArNd9AnorGROT53rbFlHcA"
+                [src]="comment?.createdBy?.avatar ? ((codemarketBucketURL + comment.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar"
                 alt="Commentator Avatar">
         </a>
     </div>

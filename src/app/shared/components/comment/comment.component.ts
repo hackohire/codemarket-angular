@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
 import { BlockToolData } from '@editorjs/editorjs';
 import { CommentService } from '../../services/comment.service';
 import { Comment } from '../../models/comment.model';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-comment',
@@ -23,13 +24,16 @@ export class CommentComponent implements OnInit {
   replyEditorId: string;
   replyTextEditorData: BlockToolData;
 
+  anonymousAvatar = require('src/assets/images/anonymous-avatar.jpg');
+  codemarketBucketURL = environment.codemarketFilesBucket;
+
   constructor(
     public authService: AuthService,
     private commentService: CommentService
   ) { }
 
   ngOnInit() {
-    console.log(this.comment);
+    // console.log(this.comment);
     this.initializeReplyForm();
 
   }
@@ -73,7 +77,6 @@ export class CommentComponent implements OnInit {
         tap((child) => {
           if (child && this.comment.children) {
             this.comment.children.push(child);
-            this.replyCommentForm.reset();
             this.replyTextEditorData = null;
             this.reply = false;
           }

@@ -18,6 +18,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import * as moment from 'moment';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { CommentService } from 'src/app/shared/services/comment.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-details',
@@ -30,6 +31,9 @@ export class DetailsComponent implements OnInit {
   subscription$: Subscription;
   type: string; // product | help-request | interview | requirement
   commentsList: any[];
+
+  anonymousAvatar = require('src/assets/images/anonymous-avatar.jpg');
+  codemarketBucketURL = environment.codemarketFilesBucket;
 
   breadcumb: BreadCumb;
 
@@ -136,7 +140,6 @@ export class DetailsComponent implements OnInit {
           console.log(d);
           if (d && d.length) {
             this.commentsList = d;
-            this.commentForm.reset();
           }
         })
       ).subscribe();

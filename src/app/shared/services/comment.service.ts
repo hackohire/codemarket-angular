@@ -1,16 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
-import { productConstants } from 'src/app/shared/constants/product_constants';
-import { Product } from 'src/app/shared/models/product.model';
 import { Observable } from 'rxjs/internal/Observable';
 import { map } from 'rxjs/internal/operators/map';
-import { Store } from '@ngrx/store';
-import { switchMap } from 'rxjs/internal/operators/switchMap';
-import { of } from 'rxjs/internal/observable/of';
-import { Router } from '@angular/router';
 import * as _ from 'lodash';
-import { withLatestFrom } from 'rxjs/operators';
 import { description } from 'src/app/shared/constants/fragments_constatnts';
 
 @Injectable({
@@ -31,6 +24,7 @@ export class CommentService {
       createdBy {
         _id
         name
+        avatar
       }
       children {
         _id
@@ -41,6 +35,7 @@ export class CommentService {
         createdBy {
           _id
           name
+          avatar
         }
         parentId
         referenceId
@@ -129,9 +124,9 @@ export class CommentService {
         mutation: gql`
           mutation updateComment($commentId: String, $text: [InputdescriptionBlock]) {
             updateComment(commentId: $commentId, text: $text) {
-              text {
-                ...Description
-              }
+                text {
+                  ...Description
+                }
             }
           }
           ${description}

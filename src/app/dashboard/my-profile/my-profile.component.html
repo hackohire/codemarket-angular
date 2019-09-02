@@ -10,7 +10,9 @@
                     <div class="author-card sidebar-card">
                         <div class="author-infos">
                             <div class="author_avatar">
-                                <img [src]="bucketUrl + user?.avatar" alt="Presenting the broken author avatar :D">
+                                <img 
+                                [src]="user?.avatar ? ((codemarketBucketURL + user.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                                alt="Presenting the broken author avatar :D">
                             </div>
 
                             <div class="author">

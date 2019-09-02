@@ -1611,6 +1611,15 @@ h6 {
   overflow: hidden;
 }
 
+.author_avatar_comment {
+  width: 80px;
+  height: 80px;
+  display: inline-block;
+  -webkit-border-radius: 50%;
+          border-radius: 50%;
+  overflow: hidden;
+}
+
 .author-card .author-infos .author {
   padding-top: 15px;
 }
@@ -9157,8 +9166,8 @@ span.counter {
 
 .thread .thread-list .single-thread .media-left a {
   display: inline-block;
-  height: 70px;
-  width: 70px;
+  // height: 70px;
+  // width: 70px;
 }
 
 .thread .thread-list .single-thread .media-left a img {

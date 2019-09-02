@@ -16,6 +16,7 @@ import { map, switchMap } from 'rxjs/operators';
 import * as moment from 'moment';
 import { CommentService } from 'src/app/shared/services/comment.service';
 import { Comment } from 'src/app/shared/models/comment.model';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-product-details',
@@ -30,6 +31,9 @@ export class ProductDetailsComponent implements OnInit {
     // imageResize: {},
     syntax: true,
   };
+
+  anonymousAvatar = require('src/assets/images/anonymous-avatar.jpg');
+  codemarketBucketURL = environment.codemarketFilesBucket;
 
   commentsList: any[];
 
@@ -109,7 +113,7 @@ export class ProductDetailsComponent implements OnInit {
           console.log(d);
           if (d && d.length) {
             this.commentsList = d;
-            this.commentForm.reset();
+            // this.commentForm.patchValue({text: null}, {emitEvent: true});
           }
         })
       ).subscribe();

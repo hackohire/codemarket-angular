@@ -28,6 +28,7 @@ export class InterviewService {
     updatedAt
     tags {
       name
+      _id
     }
     support {
       time
@@ -38,6 +39,7 @@ export class InterviewService {
     createdBy {
       _id
       name
+      avatar
     }
   }
   ${description}

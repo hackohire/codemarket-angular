@@ -23,6 +23,10 @@ const myProfileRoutes: Routes = [
         loadChildren: () => import('../../help/help-request-list/help-request-list.module').then(module => module.HelpRequestListModule)
       },
       {
+        path: 'purchased-items-list',
+        loadChildren: () => import('../../purchase/purchase.module').then(module => module.PurchaseModule)
+      },
+      {
         path: 'add-product',
         loadChildren: () => import('../../selling/add-products/add-products.module').then(module => module.AddProductsModule)
       },

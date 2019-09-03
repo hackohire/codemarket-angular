@@ -41,6 +41,10 @@ export class MyProfileComponent implements OnInit {
       {
         path: 'help-request-list',
         label: 'Request Help'
+      },
+      {
+        path: 'purchased-items-list',
+        label: 'Buy'
       }
     ];
   }

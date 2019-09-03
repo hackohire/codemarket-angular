@@ -18,6 +18,7 @@ export class AuthGuard implements CanLoad {
       return true;
     }).catch(() => {
       this.router.navigate(['/']);
+      localStorage.clear();
       return false;
     });
 

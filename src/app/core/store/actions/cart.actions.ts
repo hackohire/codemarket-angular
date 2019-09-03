@@ -10,8 +10,12 @@ export enum ECartActions {
     UpdateCartTotal = '[Cart] Update Cart Total',
     UpdateCartTotalSuccess = '[Cart] Update Cart Total Success',
 
-    GetCartProductsList = '[Cart] Get Cart Products List'
+    GetCartProductsList = '[Cart] Get Cart Products List',
+
+    GetPurchasedItemsByUser = '[Purchase] Get Purchased Item By User',
+    SetPurchasedItemsByUser = '[Purchase] Set Purchased Item By User',
 }
+
 
 export const AddToCart = createAction(
     ECartActions.AddToCart,
@@ -44,4 +48,13 @@ export const UpdateCartTotal = createAction(
 export const UpdateCartTotalSuccess = createAction(
     ECartActions.UpdateCartTotalSuccess,
     props<{cartTotal: number, cartSubTotal: number}>()
+);
+
+export const GetPurchasedItemsByUser = createAction(
+    ECartActions.GetPurchasedItemsByUser
+);
+
+export const SetPurchasedItemsByUser = createAction(
+    ECartActions.UpdateCartTotalSuccess,
+    props<{purchasedItems: any[]}>()
 );

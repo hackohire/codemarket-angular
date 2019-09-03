@@ -1,5 +1,5 @@
 import { initialCartState, CartState } from '../state/cart.state';
-import { UpdateCartProductList, UpdateCartTotalSuccess } from '../actions/cart.actions';
+import { UpdateCartProductList, UpdateCartTotalSuccess, GetPurchasedItemsByUser, SetPurchasedItemsByUser } from '../actions/cart.actions';
 import { createReducer, on, Action } from '@ngrx/store';
 
 export const cartReducers = createReducer(
@@ -12,6 +12,10 @@ export const cartReducers = createReducer(
         ...state,
         cartTotal: cartTotal,
         cartSubTotal: cartSubTotal
+    })),
+    on(SetPurchasedItemsByUser, (state, {purchasedItems}) => ({
+        ...state,
+        purchasedItems: purchasedItems
     })),
 );
 

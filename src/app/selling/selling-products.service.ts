@@ -14,6 +14,22 @@ export class SellingProductsService {
 
   productFields = productConstants.productQueryFields;
 
+  purchaseItemsField = `
+    reference_id {
+      name
+      _id
+      tags {
+        name
+        _id
+      }
+      createdBy {
+        name
+        _id
+        avatar
+      }
+    }
+  `;
+
   constructor(
     private apollo: Apollo,
     private auth: AuthService
@@ -78,6 +94,47 @@ export class SellingProductsService {
     ).pipe(
       map((p: any) => {
         return p.data.getProductsByUserId;
+      }),
+    );
+  }
+
+  addTransaction(transaction) {
+    return this.apollo.mutate(
+      {
+        mutation: gql`
+          mutation addTransaction($transaction: TransactionInput) {
+            addTransaction(transaction: $transaction) {
+              ${this.purchaseItemsField}
+            }
+          }
+        `,
+        variables: {
+          transaction: transaction
+        }
+      }
+    ).pipe(
+      map((p) => p.data.addTransaction),
+    );
+  }
+
+  getPurchasedUnitsByUserId(): Observable<any[]> {
+    return this.apollo.query(
+      {
+        query: gql`
+          query getPurchasedUnitsByUserId($userId: String) {
+            getPurchasedUnitsByUserId(userId: $userId) {
+              ${this.purchaseItemsField}
+            }
+          }
+        `,
+        variables: {
+          userId: this.auth.loggedInUser._id
+        },
+        fetchPolicy: 'no-cache'
+      },
+    ).pipe(
+      map((p: any) => {
+        return p.data.getPurchasedUnitsByUserId;
       }),
     );
   }

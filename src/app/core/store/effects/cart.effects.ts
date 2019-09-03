@@ -3,10 +3,11 @@ import { Effect, Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { AppState } from '../state/app.state';
 import { map, withLatestFrom, tap, switchMap} from 'rxjs/operators/';
-import { AddToCart, UpdateCartProductList, RemoveProductFromCart, UpdateCartTotal, UpdateCartTotalSuccess } from '../actions/cart.actions';
+import { AddToCart, UpdateCartProductList, RemoveProductFromCart, UpdateCartTotal, UpdateCartTotalSuccess, GetPurchasedItemsByUser, SetPurchasedItemsByUser } from '../actions/cart.actions';
 import { selectAllProductsList } from '../selectors/product.selectors';
 import { of } from 'rxjs';
 import { selectCartProductList } from '../selectors/cart.selectors';
+import { SellingProductsService } from 'src/app/selling/selling-products.service';
 
 @Injectable()
 export class CartEffects {
@@ -72,10 +73,21 @@ export class CartEffects {
     //     map((productsList) => new UpdateCartProductList(productsList))
     // );
 
+    @Effect()
+    getPurchasedItemsByUser$ = this.actions$.pipe(
+        ofType(GetPurchasedItemsByUser),
+        switchMap(() => this.sellingService.getPurchasedUnitsByUserId()),
+        tap(u => console.log(u)),
+        map((purchasedItems: any[]) => {
+            console.log(purchasedItems);
+            return SetPurchasedItemsByUser({purchasedItems});
+        })
+    );
 
     constructor(
         private actions$: Actions,
         private _store: Store<AppState>,
+        private sellingService: SellingProductsService
     ) {
 
     }

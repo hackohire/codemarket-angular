@@ -21,4 +21,9 @@ export const selectCartTotal = createSelector(
     }
 );
 
+export const selectPurchasedItemsList = createSelector(
+    selectCart,
+    (state: CartState) => state.purchasedItems
+);
+
 

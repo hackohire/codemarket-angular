@@ -77,7 +77,7 @@
       </mat-menu>
 
       <!-- All Bugfixes -->
-      <a mat-button [routerLink]="['/', {outlets: {'main': ['dashboard', 'bugfixes-all']}}]">
+      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', {outlets: {'main': ['dashboard', 'bugfixes-all']}}]">
         <i style="font-size: 1.7rem !important;" class="vertical-align-middle fal fa-lightbulb-dollar fa-fw"></i>
         Bugfixes
       </a>

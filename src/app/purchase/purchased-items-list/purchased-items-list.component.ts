@@ -46,4 +46,8 @@ export class PurchasedItemsListComponent implements OnInit {
     this.store.dispatch(GetPurchasedItemsByUser());
   }
 
+  redirectTo(event) {
+
+  }
+
 }

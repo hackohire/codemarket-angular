@@ -42,7 +42,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
       if (u) {
         // this.ref.detach();
         this.loggedInUser = {...u};
-        // this.ref.detectChanges();
+        this.ref.detectChanges();
       }
 
     });

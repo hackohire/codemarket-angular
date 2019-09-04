@@ -166,6 +166,7 @@ export class AuthService {
         return true;
       }).catch((r) => {
         console.log(r);
+        localStorage.clear();
         this.store.dispatch(SetLoggedInUser({payload: null}));
         return false;
       });

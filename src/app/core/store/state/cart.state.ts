@@ -1,5 +1,7 @@
+import { Product } from 'src/app/shared/models/product.model';
+
 export interface CartState {
-    cartProductsList: string[];
+    cartProductsList: Product[];
     cartSubTotal: number;
     cartTotal: number;
 

@@ -22,16 +22,16 @@ import { withLatestFrom } from 'rxjs/operators';
 export class ProductService {
 
   productFields = productConstants.productQueryFields;
-  cartProductListIds: Observable<string[]>;
+  cartProductList: Observable<any[]>;
   allProductsList: Observable<Product[]>;
-  cartTotal: Observable<{ total: number, subTotal: number }>;
+  cartTotal: Observable<number>;
 
   constructor(
     private apollo: Apollo,
     private store: Store<AppState>,
     private router: Router
   ) {
-    this.cartProductListIds = this.store.select(selectCartProductList);
+    this.cartProductList = this.store.select(selectCartProductList);
     this.allProductsList = this.store.select(selectAllProductsList);
     this.cartTotal = this.store.select(selectCartTotal);
   }
@@ -98,10 +98,10 @@ export class ProductService {
   }
 
   checkIfProductIsInCart(productId: string): Observable<boolean> {
-    return this.cartProductListIds.pipe(
-      switchMap((productIds: string[]) => {
+    return this.cartProductList.pipe(
+      switchMap((productList: Product[]) => {
         const doesProductExistInCart = false;
-        if (productIds && productIds.length && productIds.filter(id => id === productId).length) {
+        if (productList && productList.length && productList.filter(p => p._id === productId).length) {
           return of(true);
         }
         return of(doesProductExistInCart);
@@ -134,7 +134,7 @@ export class ProductService {
           return obj;
         });
 
-        const productInCart = _.intersectionBy(products, mappedIdsArray, '_id')
+        const productInCart = _.intersectionBy(products, mappedIdsArray, '_id');
         return productInCart && productInCart.length ? productInCart : [];
       })
     );

@@ -30,6 +30,19 @@ export class SellingProductsService {
     }
   `;
 
+  cartFields = `
+    referenceId {
+      name
+      _id
+      shortDescription
+      price
+      tags {
+        name
+        _id
+      }
+    }
+  `
+
   constructor(
     private apollo: Apollo,
     private auth: AuthService
@@ -136,6 +149,69 @@ export class SellingProductsService {
       map((p: any) => {
         return p.data.getPurchasedUnitsByUserId;
       }),
+    );
+  }
+
+  addToCart(id: string) {
+    return this.apollo.mutate(
+      {
+        mutation: gql`
+          mutation addToCart( $userId: String, $referenceId: String) {
+            addToCart(userId: $userId, referenceId: $referenceId) {
+              ${this.cartFields}
+            }
+          }
+        `,
+        variables: {
+          referenceId: id,
+          userId: this.auth.loggedInUser._id
+        }
+      }
+    ).pipe(
+      map((p) => p.data.addToCart),
+    );
+  }
+  
+
+  getCartItemsList(): Observable<any[]> {
+    return this.apollo.query(
+      {
+        query: gql`
+          query getCartItemsList($userId: String) {
+            getCartItemsList(userId: $userId) {
+              ${this.cartFields}
+            }
+          }
+        `,
+        variables: {
+          userId: this.auth.loggedInUser._id
+        },
+        fetchPolicy: 'no-cache'
+      },
+    ).pipe(
+      map((p: any) => {
+        return p.data.getCartItemsList;
+      }),
+    );
+  }
+
+  removeItemFromCart(id: string) {
+    return this.apollo.mutate(
+      {
+        mutation: gql`
+          mutation removeItemFromCart( $userId: String, $referenceId: String) {
+            removeItemFromCart(userId: $userId, referenceId: $referenceId) {
+              ${this.cartFields}
+            }
+          }
+        `,
+        variables: {
+          referenceId: id,
+          userId: this.auth.loggedInUser._id
+        }
+      }
+    ).pipe(
+      map((p) => p.data.removeItemFromCart),
     );
   }
 }

@@ -4,14 +4,13 @@ import { createReducer, on, Action } from '@ngrx/store';
 
 export const cartReducers = createReducer(
     initialCartState,
-    on(UpdateCartProductList, (state, {products}) => ({
+    on(UpdateCartProductList, (state, {cartItems}) => ({
         ...state,
-        cartProductsList: products
+        cartProductsList: cartItems
     })),
-    on(UpdateCartTotalSuccess, (state, {cartTotal, cartSubTotal}) => ({
+    on(UpdateCartTotalSuccess, (state, {cartTotal}) => ({
         ...state,
         cartTotal: cartTotal,
-        cartSubTotal: cartSubTotal
     })),
     on(SetPurchasedItemsByUser, (state, {purchasedItems}) => ({
         ...state,

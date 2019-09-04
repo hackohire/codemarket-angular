@@ -29,7 +29,7 @@ export const AddedToCartSuccessfully = createAction(
 
 export const UpdateCartProductList = createAction(
     ECartActions.UpdateCartProductList,
-    props<{products: string[]}>()
+    props<{cartItems: any[]}>()
 );
 
 export const GetCartProductsList = createAction(
@@ -42,12 +42,13 @@ export const RemoveProductFromCart = createAction(
 );
 
 export const UpdateCartTotal = createAction(
-    ECartActions.UpdateCartTotal
+    ECartActions.UpdateCartTotal,
+    props<{cartItems?: any[]}>()
 );
 
 export const UpdateCartTotalSuccess = createAction(
     ECartActions.UpdateCartTotalSuccess,
-    props<{cartTotal: number, cartSubTotal: number}>()
+    props<{cartTotal: number}>()
 );
 
 export const GetPurchasedItemsByUser = createAction(
@@ -55,6 +56,6 @@ export const GetPurchasedItemsByUser = createAction(
 );
 
 export const SetPurchasedItemsByUser = createAction(
-    ECartActions.UpdateCartTotalSuccess,
+    ECartActions.SetPurchasedItemsByUser,
     props<{purchasedItems: any[]}>()
 );

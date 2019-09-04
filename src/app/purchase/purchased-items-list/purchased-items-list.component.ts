@@ -40,7 +40,9 @@ export class PurchasedItemsListComponent implements OnInit {
 
     this.store.select(selectPurchasedItemsList).pipe(
       tap((l: any[]) => {
-        this.purchasedItems = l.map((r) => r.reference_id);
+        if (l) {
+          this.purchasedItems = l.map((r) => r.reference_id);
+        }
       })
     ).subscribe();
     this.store.dispatch(GetPurchasedItemsByUser());

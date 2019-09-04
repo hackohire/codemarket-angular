@@ -12,7 +12,7 @@ import { ProductService } from 'src/app/core/services/product.service';
 export class SingleCartProductComponent implements OnInit {
 
   @Output() removeProduct: EventEmitter<string> = new EventEmitter();
-  @Input() product: Observable<Product>;
+  @Input() product: Product;
 
   constructor(
     private router: Router,

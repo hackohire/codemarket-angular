@@ -16,9 +16,7 @@ export const selectCartListLength = createSelector(
 
 export const selectCartTotal = createSelector(
     selectCart,
-    (state: CartState) => {
-       return { total: state.cartTotal, subTotal: state.cartSubTotal };
-    }
+    (state: CartState) =>  state.cartTotal
 );
 
 export const selectPurchasedItemsList = createSelector(

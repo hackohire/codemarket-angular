@@ -34,8 +34,8 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-md-12" *ngFor="let id of cartList">
-                                <app-single-cart-product (removeProduct)="removeProductFromCart($event)" [product]="productService?.getSingleProductForCartByProductId(id)"></app-single-cart-product>
+                            <div class="col-md-12" *ngFor="let item of cartList">
+                                <app-single-cart-product (removeProduct)="removeProductFromCart($event)" [product]="item"></app-single-cart-product>
                             </div>
                         </div>
                         <!-- end /.row -->
@@ -43,14 +43,13 @@
                         <div class="row" *ngIf="cartList?.length">
                             <div class="col-md-6 offset-md-6" *ngIf="(productService?.cartTotal | async) as cartTotal">
                                 <div class="cart_calculation">
-                                    <div class="cart--subtotal">
-
+                                    <!-- <div class="cart--subtotal">
                                         <p>
                                             <span>Cart Subtotal</span>{{cartTotal?.subTotal | currency}}</p>
-                                    </div>
+                                    </div> -->
                                     <div class="cart--total">
                                         <p>
-                                            <span>total</span>{{cartTotal?.total | currency}}</p>
+                                            <span>total</span>{{cartTotal | currency}}</p>
                                     </div>
 
                                     <a [routerLink]="['checkout']" class="btn btn--round btn--md checkout_link">Proceed To Checkout</a>

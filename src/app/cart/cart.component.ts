@@ -6,6 +6,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../core/store/state/app.state';
 import { ProductService } from '../core/services/product.service';
 import { RemoveProductFromCart } from '../core/store/actions/cart.actions';
+import { selectCartTotal } from '../core/store/selectors/cart.selectors';
 
 @Component({
   selector: 'app-cart',
@@ -15,14 +16,13 @@ import { RemoveProductFromCart } from '../core/store/actions/cart.actions';
 export class CartComponent implements OnInit {
 
   breadcumb: BreadCumb;
-  cartProductsList: Observable<string[]>;
+  cartProductsList: Observable<Product[]>;
 
   constructor(
     public store: Store<AppState>,
     public productService: ProductService
   ) {
-
-    this.cartProductsList = this.productService.cartProductListIds;
+    this.cartProductsList = this.productService.cartProductList;
     this.breadcumb = {
       title: 'Amazing Products in Your Cart',
       path: [
@@ -37,8 +37,7 @@ export class CartComponent implements OnInit {
     };
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   removeProductFromCart(productId): void {
     this.store.dispatch(RemoveProductFromCart({productId}));

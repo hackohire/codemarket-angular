@@ -11,7 +11,7 @@
     <!--================================
             START DASHBOARD AREA
     =================================-->
-    <section class="dashboard-area" *ngIf="(cartProductsList | async) as cartList">
+    <section class="dashboard-area">
         <div class="dashboard_contents">
             <div class="container">
                 <form action="#" class="setting_form">
@@ -24,7 +24,7 @@
                                 </div>
 
                                 <ul>
-                                    <li class="item" *ngFor="let product of cartList">
+                                    <li class="item" *ngFor="let product of cartProductsList">
                                         <!-- {{product | json}} -->
                                         <div>
                                             <a (click)="redirectToProductDetails(product)">{{product?.name}}</a>
@@ -37,7 +37,7 @@
                                     </li> -->
                                     <li class="total_ammount" *ngIf="(productService?.cartTotal | async) as cartTotal">
                                         <p>Total</p>
-                                        <span>{{cartTotal?.total | currency}}</span>
+                                        <span>{{cartTotal | currency}}</span>
                                     </li>
                                 </ul>
                             </div>

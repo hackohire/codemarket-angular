@@ -4,7 +4,7 @@ import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { map, catchError } from 'rxjs/operators';
 import { of } from 'rxjs/internal/observable/of';
-import { CognitoUser } from 'amazon-cognito-identity-js';
+import { CognitoUser, CognitoUserSession } from 'amazon-cognito-identity-js';
 import { Auth } from 'aws-amplify';
 import { environment } from 'src/environments/environment';
 import { Store } from '@ngrx/store';
@@ -32,7 +32,7 @@ export class AuthService {
     this.loggedInUser$.subscribe((u) => this.loggedInUser = u);
 
     /** Hub listening for auth state changes */
-    Hub.listen('auth', (data) => {
+    Hub.listen('auth', async (data) => {
       const { channel, payload } = data;
       const state = {
         state: payload.event,
@@ -40,51 +40,54 @@ export class AuthService {
       };
       console.log('Hub', data);
       if (channel === 'auth' && data.payload.event === 'signIn') {
+        this.checkIfUserIsLoggedIn();
 
-        Auth.currentAuthenticatedUser()
-        .then((user: CognitoUser) => {
-          console.log(user.getSignInUserSession().getIdToken().getJwtToken());
-  
-          const idToken = user.getSignInUserSession().getIdToken().getJwtToken();
-          if (idToken) {
-            this.setIdTokenToLocalStorage(idToken);
-            if (!this.loggedInUser) {
-              this.store.dispatch(Authorise());
-            }
-            // this.authorizeWithPlatform();
-          }
-        })
-        .catch(err => {
-          console.log(err);
-          localStorage.clear();
-          this.store.dispatch(SetLoggedInUser({payload: null}));
-        });
+        // Auth.currentAuthenticatedUser()
+        // .then((user: CognitoUser) => {
+        //   console.log(user.getSignInUserSession().getRefreshToken().getToken());
+
+        //   const idToken = user.getSignInUserSession().getIdToken().getJwtToken();
+        //   if (idToken) {
+        //     this.setIdTokenToLocalStorage(idToken);
+        //     if (!this.loggedInUser) {
+        //       this.store.dispatch(Authorise());
+        //     }
+        //     // this.authorizeWithPlatform();
+        //   }
+        // })
+        // .catch(err => {
+        //   console.log(err);
+        //   // localStorage.clear();
+        //   this.store.dispatch(SetLoggedInUser({payload: null}));
+        // });
       } else if (channel === 'auth' && data.payload.event === 'oAuthSignOut') {
-        localStorage.clear();
+        // localStorage.clear();
         this.store.dispatch(SetLoggedInUser({payload: null}));
         // this.router.navigate(['/']);
       }
     });
 
-    Auth.currentAuthenticatedUser()
-      .then((user: CognitoUser) => {
-        console.log(user.getSignInUserSession().getIdToken().getJwtToken());
+    // this.checkIfUserIsLoggedIn();
 
-        const idToken = user.getSignInUserSession().getIdToken().getJwtToken();
-        if (idToken) {
-          this.setIdTokenToLocalStorage(idToken);
-          if (!this.loggedInUser) {
-            this.store.dispatch(Authorise());
-          }
-          // this.authorizeWithPlatform();
-        }
-      })
-      .catch(err => {
-        console.log(err);
-        // this.router.navigate(['/']);
-        this.store.dispatch(SetLoggedInUser({payload: null}));
-        localStorage.clear();
-      });
+    // Auth.currentAuthenticatedUser()
+    //   .then((user: CognitoUser) => {
+    //     console.log(user.getSignInUserSession().getIdToken().getJwtToken());
+
+    //     const idToken = user.getSignInUserSession().getIdToken().getJwtToken();
+    //     if (idToken) {
+    //       this.setIdTokenToLocalStorage(idToken);
+    //       if (!this.loggedInUser) {
+    //         this.store.dispatch(Authorise());
+    //       }
+    //       // this.authorizeWithPlatform();
+    //     }
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //     // this.router.navigate(['/']);
+    //     this.store.dispatch(SetLoggedInUser({payload: null}));
+    //     // localStorage.clear();
+    //   });
   }
 
   authorizeWithPlatform(): Observable<User> {
@@ -146,5 +149,26 @@ export class AuthService {
 
   getLoggedInUser(): Observable<User> {
     return this.loggedInUser$;
+  }
+
+  checkIfUserIsLoggedIn(): Promise<boolean> {
+    return Auth.currentAuthenticatedUser().then((u: CognitoUser) => {
+      console.log(u);
+      if (!this.loggedInUser) {
+        this.setIdTokenToLocalStorage(u.getSignInUserSession().getIdToken().getJwtToken());
+        this.store.dispatch(Authorise());
+      }
+      return true;
+    }).catch(() => {
+      return Auth.currentSession().then((session: CognitoUserSession) => {
+        this.setIdTokenToLocalStorage(session.getIdToken().getJwtToken());
+        this.store.dispatch(Authorise());
+        return true;
+      }).catch((r) => {
+        console.log(r);
+        this.store.dispatch(SetLoggedInUser({payload: null}));
+        return false;
+      });
+    });
   }
 }

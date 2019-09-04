@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, CanLoad, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { CanLoad, Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { Auth } from 'aws-amplify';
 
 @Injectable({
   providedIn: 'root'
@@ -14,15 +12,7 @@ export class AuthGuard implements CanLoad {
   ) {}
 
   canLoad() {
-    return Auth.currentAuthenticatedUser().then(() => {
-      return true;
-    }).catch(() => {
-      this.router.navigate(['/']);
-      localStorage.clear();
-      return false;
-    });
-
-
+    return this.authService.checkIfUserIsLoggedIn();
   }
 
 }

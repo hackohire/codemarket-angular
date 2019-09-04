@@ -118,7 +118,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
           console.log(d);
           this.successfulPurchasedProducts = transaction.purchase_units;
           this.successfulPayment.type = 'success';
-          this.store.dispatch(GetCartProductsList);
+          this.store.dispatch(GetCartProductsList());
           this.successfulPayment.show();
         }
       })

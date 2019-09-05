@@ -45,7 +45,7 @@
 <div class="media depth-2 reply-comment" *ngIf="reply" [formGroup]="replyCommentForm">
     <div class="media-left">
         <a href="#">
-            <img class="media-object"
+            <img class="author_avatar_comment"
                 [src]="comment?.createdBy?.avatar ? ((codemarketBucketURL + comment.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar"
                 alt="Commentator Avatar">
         </a>

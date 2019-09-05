@@ -89,6 +89,8 @@ export class CommentComponent implements OnInit {
     this.commentService.deleteComment(this.comment._id).pipe(
       tap((d) => {
         console.log(d);
+        this.comment = null;
+        this.replyCommentForm = null;
       })
     ).subscribe();
   }

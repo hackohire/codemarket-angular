@@ -14,6 +14,8 @@ import { RouterModule } from '@angular/router';
 import { EditorComponent } from './components/editor/editor.component';
 import { CommentComponent } from './components/comment/comment.component';
 import { DatatableComponent } from './components/datatable/datatable.component';
+import { ShareButtonsModule } from '@ngx-share/buttons';
+import { ShareModule } from '@ngx-share/core';
 import { SafePipe } from './pipes/safe.pipe';
 
 export function hljsLanguages() {
@@ -39,7 +41,9 @@ export function hljsLanguages() {
     }),
     HighlightModule.forRoot({languages: hljsLanguages}),
     FlexLayoutModule,
-    RouterModule
+    RouterModule,
+    ShareButtonsModule,
+    ShareModule
   ],
   exports: [
     BreadcumbComponent,
@@ -53,6 +57,8 @@ export function hljsLanguages() {
     HighlightModule,
     FlexLayoutModule,
     SweetAlert2Module,
+    ShareButtonsModule,
+    ShareModule,
     SafePipe
   ]
 })

@@ -17,6 +17,8 @@ import { DatatableComponent } from './components/datatable/datatable.component';
 import { ShareButtonsModule } from '@ngx-share/buttons';
 import { ShareModule } from '@ngx-share/core';
 import { SafePipe } from './pipes/safe.pipe';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import '../../icons';
 
 export function hljsLanguages() {
   return [
@@ -43,6 +45,7 @@ export function hljsLanguages() {
     FlexLayoutModule,
     RouterModule,
     ShareButtonsModule,
+    FontAwesomeModule,
     ShareModule
   ],
   exports: [
@@ -59,6 +62,7 @@ export function hljsLanguages() {
     SweetAlert2Module,
     ShareButtonsModule,
     ShareModule,
+    FontAwesomeModule,
     SafePipe
   ]
 })

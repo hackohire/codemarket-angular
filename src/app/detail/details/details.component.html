@@ -118,38 +118,40 @@
                         </div>
 
                         <div class="tab-pane fade show product-tab">
-                                <div class="thread">
-                                    <ul class="media-list thread-list" style="list-style: none;">
-                                        <h4 class="tab-content-wrapper">Comments:</h4>
-                                        <li class="single-thread" *ngFor="let c of commentsList">
-    
-                                            <app-comment [comment]="c" [referenceId]="product?._id"></app-comment>
-                                        </li>
-                                    </ul>
-                                </div>
+                            <div class="thread">
+                                <ul class="media-list thread-list" style="list-style: none;">
+                                    <h4 class="tab-content-wrapper">Comments:</h4>
+                                    <li class="single-thread" *ngFor="let c of commentsList">
+
+                                        <app-comment [comment]="c" [referenceId]="product?._id"></app-comment>
+                                    </li>
+                                </ul>
                             </div>
-    
-                            <div class="comment-form-area">
-                                <h4>Leave a comment</h4>
-                                <!-- comment reply -->
-                                <div class="media comment-form">
-                                    <div class="media-left">
-                                        <a href="#">
-                                            <img class="author_avatar_comment"
+                        </div>
+
+                        <div class="comment-form-area">
+                            <h4>Leave a comment</h4>
+                            <!-- comment reply -->
+                            <div class="media comment-form">
+                                <div class="media-left">
+                                    <a href="#">
+                                        <img class="author_avatar_comment"
                                             [src]="details?.createdBy?.avatar ? ((codemarketBucketURL + details.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar"
                                             alt="Commentator Avatar">
-                                        </a>
-                                    </div>
-                                    <div class="media-body">
-                                        <div [formGroup]="commentForm" class="comment-reply-form">
-                                            <app-editor [id]="'comment-editor'" (output)="updateFormData($event)"></app-editor>
-                                            <!-- <textarea formControlName="text" name="reply-comment" placeholder="Write your comment..."></textarea> -->
-                                            <button type="button" class="btn btn--sm btn--round" (click)="addComment()">Post Comment</button>
-                                        </div>
+                                    </a>
+                                </div>
+                                <div class="media-body">
+                                    <div [formGroup]="commentForm" class="comment-reply-form">
+                                        <app-editor [id]="'comment-editor'" (output)="updateFormData($event)">
+                                        </app-editor>
+                                        <!-- <textarea formControlName="text" name="reply-comment" placeholder="Write your comment..."></textarea> -->
+                                        <button type="button" class="btn btn--sm btn--round" (click)="addComment()">Post
+                                            Comment</button>
                                     </div>
                                 </div>
-                                <!-- comment reply -->
                             </div>
+                            <!-- comment reply -->
+                        </div>
                     </div>
 
                     <!-- end /.item-info -->
@@ -199,6 +201,41 @@
                         </div>
                         <!-- end /.aside -->
 
+                        <div class="author-card sidebar-card ">
+                            <div class="card-title">
+                                <h4>Share:</h4>
+                                <br />
+                                <div class="social social--color--filled">
+                                    <ul>
+                                        <li>
+                                            <button mat-fab shareButton="facebook"
+                                                [style.backgroundColor]="share?.prop?.facebook.color">
+                                                <fa-icon [icon]="share?.prop?.facebook.icon" size="lg"></fa-icon>
+                                            </button>
+                                        </li>
+                                        <li>
+                                            <button mat-fab shareButton="twitter"
+                                                [style.backgroundColor]="share?.prop?.twitter.color">
+                                                <fa-icon [icon]="share?.prop?.twitter.icon" size="lg"></fa-icon>
+                                            </button>
+                                        </li>
+                                        <li>
+                                            <button mat-fab shareButton="linkedin"
+                                                [style.backgroundColor]="share?.prop?.linkedin.color">
+                                                <fa-icon [icon]="share?.prop?.linkedin.icon" size="lg"></fa-icon>
+                                            </button>
+                                        <li>
+                                            <button mat-fab shareButton="whatsapp"
+                                                [style.backgroundColor]="share?.prop?.whatsapp.color">
+                                                <fa-icon [icon]="share?.prop?.whatsapp.icon" size="lg"></fa-icon>
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+
                         <div class="author-card sidebar-card " *ngIf="details?.createdBy?.name">
                             <div class="card-title">
                                 <h4>Author Information</h4>
@@ -206,8 +243,7 @@
 
                             <div class="author-infos">
                                 <div class="author_avatar">
-                                    <img 
-                                        [src]="details?.createdBy?.avatar ? ((codemarketBucketURL + details.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                                    <img [src]="details?.createdBy?.avatar ? ((codemarketBucketURL + details.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar"
                                         alt="Presenting the broken author avatar :D">
                                 </div>
 

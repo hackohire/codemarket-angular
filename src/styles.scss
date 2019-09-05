@@ -15,6 +15,10 @@ mat-icon, a {
   cursor: pointer;
 }
 
+.mat-fab {
+  box-shadow: none !important;
+}
+
 .vertical-align-middle {
   vertical-align: middle !important;
 }

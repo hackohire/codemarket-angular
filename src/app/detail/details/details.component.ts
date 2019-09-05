@@ -19,11 +19,13 @@ import * as moment from 'moment';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { CommentService } from 'src/app/shared/services/comment.service';
 import { environment } from 'src/environments/environment';
+import { ShareService } from '@ngx-share/core';
 
 @Component({
   selector: 'app-details',
   templateUrl: './details.component.html',
-  styleUrls: ['./details.component.scss']
+  styleUrls: ['./details.component.scss'],
+  providers: [ShareService]
 })
 export class DetailsComponent implements OnInit {
 
@@ -43,7 +45,8 @@ export class DetailsComponent implements OnInit {
     private store: Store<AppState>,
     private activatedRoute: ActivatedRoute,
     private commentService: CommentService,
-    private authService: AuthService
+    private authService: AuthService,
+    public share: ShareService
   ) {
     this.breadcumb = {
       path: [

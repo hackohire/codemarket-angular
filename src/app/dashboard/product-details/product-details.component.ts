@@ -12,16 +12,17 @@ import { AddToCart } from 'src/app/core/store/actions/cart.actions';
 import { ProductService } from 'src/app/core/services/product.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { map, switchMap } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 import * as moment from 'moment';
 import { CommentService } from 'src/app/shared/services/comment.service';
-import { Comment } from 'src/app/shared/models/comment.model';
 import { environment } from 'src/environments/environment';
+import { ShareService } from '@ngx-share/core';
 
 @Component({
   selector: 'app-product-details',
   templateUrl: './product-details.component.html',
-  styleUrls: ['./product-details.component.scss']
+  styleUrls: ['./product-details.component.scss'],
+  providers: [ShareService]
 })
 export class ProductDetailsComponent implements OnInit {
 
@@ -48,7 +49,8 @@ export class ProductDetailsComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     public productService: ProductService,
     private authService: AuthService,
-    private commentService: CommentService
+    private commentService: CommentService,
+    public share: ShareService
   ) {
     this.breadcumb = {
       path: [

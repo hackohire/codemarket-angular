@@ -7,7 +7,7 @@
     =================================-->
 
     <app-breadcumb [title]="product?.name" [path]="breadcumb?.path"></app-breadcumb>
-    
+
     <!--================================
             END BREADCRUMB AREA
     =================================-->
@@ -98,13 +98,16 @@
                                     <!-- <quill-view *ngIf="product?.description; else noDescription;" [modules]="modules"
                                         [content]="product.description" format="text" theme="snow"></quill-view> -->
 
-                                    <app-editor [readOnly]="true" [data]="product?.description" [id]="'product-editor'"></app-editor>
+                                    <app-editor [readOnly]="true" [data]="product?.description" [id]="'product-editor'">
+                                    </app-editor>
 
-                                    <br/>
-                                    <br/>
+                                    <br />
+                                    <br />
                                     <h2>Support Details:</h2>
 
-                                    <app-editor *ngIf="product?.support?.description" [readOnly]="true" [data]="product?.support?.description" [id]="'product-support-editor'"></app-editor>
+                                    <app-editor *ngIf="product?.support?.description" [readOnly]="true"
+                                        [data]="product?.support?.description" [id]="'product-support-editor'">
+                                    </app-editor>
                                     <ng-template #noDescription>
                                         <span>No Description</span>
                                     </ng-template>
@@ -113,44 +116,45 @@
                                 </div>
                             </div>
                             <!-- end /.tab-content -->
-                        <!-- end /.item-navigation -->
+                            <!-- end /.item-navigation -->
 
-                        <br/>
-                        <!-- <h2>Support Details:</h2> -->
+                            <br />
+                            <!-- <h2>Support Details:</h2> -->
 
-                        <div class="tab-pane fade show product-tab">
-                            <div class="thread">
-                                <ul class="media-list thread-list" style="list-style: none;">
-                                    <h4 class="tab-content-wrapper">Comments:</h4>
-                                    <li class="single-thread" *ngFor="let c of commentsList">
+                            <div class="tab-pane fade show product-tab">
+                                <div class="thread">
+                                    <ul class="media-list thread-list" style="list-style: none;">
+                                        <h4 class="tab-content-wrapper">Comments:</h4>
+                                        <li class="single-thread" *ngFor="let c of commentsList">
 
-                                        <app-comment [comment]="c" [referenceId]="product?._id"></app-comment>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="comment-form-area">
-                            <h4>Leave a comment</h4>
-                            <!-- comment reply -->
-                            <div class="media comment-form">
-                                <div class="media-left">
-                                    <a href="#">
-                                        <img class="author_avatar_comment" 
-                                            alt="Commentator Avatar"
-                                            [src]="product?.createdBy?.avatar ? ((codemarketBucketURL + product.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar">
-                                    </a>
+                                            <app-comment [comment]="c" [referenceId]="product?._id"></app-comment>
+                                        </li>
+                                    </ul>
                                 </div>
-                                <div class="media-body">
-                                    <div [formGroup]="commentForm" class="comment-reply-form">
-                                        <app-editor [id]="'comment-editor'" (output)="updateFormData($event)"></app-editor>
-                                        <!-- <textarea formControlName="text" name="reply-comment" placeholder="Write your comment..."></textarea> -->
-                                        <button type="button" class="btn btn--sm btn--round" (click)="addComment()">Post Comment</button>
+                            </div>
+
+                            <div class="comment-form-area">
+                                <h4>Leave a comment</h4>
+                                <!-- comment reply -->
+                                <div class="media comment-form">
+                                    <div class="media-left">
+                                        <a href="#">
+                                            <img class="author_avatar_comment" alt="Commentator Avatar"
+                                                [src]="product?.createdBy?.avatar ? ((codemarketBucketURL + product.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar">
+                                        </a>
+                                    </div>
+                                    <div class="media-body">
+                                        <div [formGroup]="commentForm" class="comment-reply-form">
+                                            <app-editor [id]="'comment-editor'" (output)="updateFormData($event)">
+                                            </app-editor>
+                                            <!-- <textarea formControlName="text" name="reply-comment" placeholder="Write your comment..."></textarea> -->
+                                            <button type="button" class="btn btn--sm btn--round"
+                                                (click)="addComment()">Post Comment</button>
+                                        </div>
                                     </div>
                                 </div>
+                                <!-- comment reply -->
                             </div>
-                            <!-- comment reply -->
-                        </div>
 
 
                             <!-- end /.product-faq -->
@@ -166,22 +170,24 @@
                         <div class="sidebar-card card-pricing card--pricing2">
                             <div class="price">
                                 <h1>
-                                    <span>{{product?.price}}</span>
-                                    <sup>$</sup>
+                                    <span>{{product?.price | currency}}</span>
+                                    <!-- <sup>$</sup> -->
                                 </h1>
                             </div>
 
                             <div class="purchase-button">
                                 <!-- <a href="#" class="btn btn--lg btn--round">Purchase Now</a> -->
-                                
+
                                 <!-- Check if the product is in cart -->
-                                <a *ngIf="!(productService?.checkIfProductIsInCart(product?._id) | async); else productIsInCart" class="btn btn--lg btn--round cart-btn" (click)="addToCart(product)">
+                                <a *ngIf="!(productService?.checkIfProductIsInCart(product?._id) | async); else productIsInCart"
+                                    class="btn btn--lg btn--round cart-btn" (click)="addToCart(product)">
                                     <span class="lnr lnr-cart"></span> Add To Cart</a>
-                                
+
                                 <!-- Show product addedd to cart if product is already in the cart -->
                                 <ng-template #productIsInCart>
                                     <a class="btn btn--lg btn--round cart-btn">
-                                        <mat-icon style="vertical-align: middle">done</mat-icon> Added To Cart</a>
+                                        <mat-icon style="vertical-align: middle">done</mat-icon> Added To Cart
+                                    </a>
                                 </ng-template>
                             </div>
                             <!-- end /.purchase-button -->
@@ -216,9 +222,45 @@
                                     <p class="info">{{product?.support?.time}} {{ 'Minutes'}}</p>
                                 </li>
 
+
                             </ul>
                         </div>
                         <!-- end /.aside -->
+
+                        <div class="author-card sidebar-card ">
+                            <div class="card-title">
+                                <h4>Share:</h4>
+                                <br/>
+                                <div class="social social--color--filled">
+                                        <ul>
+                                            <li>
+                                                <button mat-fab shareButton="facebook"
+                                                    [style.backgroundColor]="share?.prop?.facebook.color">
+                                                    <fa-icon [icon]="share?.prop?.facebook.icon" size="lg"></fa-icon>
+                                                </button>
+                                            </li>
+                                            <li>
+                                                <button mat-fab shareButton="twitter"
+                                                    [style.backgroundColor]="share?.prop?.twitter.color">
+                                                    <fa-icon [icon]="share?.prop?.twitter.icon" size="lg"></fa-icon>
+                                                </button>
+                                            </li>
+                                            <li>
+                                                <button mat-fab shareButton="linkedin"
+                                                    [style.backgroundColor]="share?.prop?.linkedin.color">
+                                                    <fa-icon [icon]="share?.prop?.linkedin.icon" size="lg"></fa-icon>
+                                                </button>
+                                            <li>
+                                                <button mat-fab shareButton="whatsapp"
+                                                    [style.backgroundColor]="share?.prop?.whatsapp.color">
+                                                    <fa-icon [icon]="share?.prop?.whatsapp.icon" size="lg"></fa-icon>
+                                                </button>
+                                            </li>
+                                        </ul>
+                                </div>
+                            </div>
+
+                        </div>
 
                         <div class="author-card sidebar-card " *ngIf="product?.createdBy?.name">
                             <div class="card-title">
@@ -227,7 +269,8 @@
 
                             <div class="author-infos">
                                 <div class="author_avatar">
-                                    <img [src]="product?.createdBy?.avatar ? ((codemarketBucketURL + product.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar" alt="Presenting the broken author avatar :D">
+                                    <img [src]="product?.createdBy?.avatar ? ((codemarketBucketURL + product.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                                        alt="Presenting the broken author avatar :D">
                                 </div>
 
                                 <div class="author">
@@ -284,26 +327,6 @@
     <!--===========================================
             END SINGLE PRODUCT DESCRIPTION AREA
         ===============================================-->
-
-
-        <button mat-fab shareButton="facebook">
-                <fa-icon size="lg"></fa-icon>
-              </button>
-              <!-- <button mat-fab shareButton="twitter" [style.backgroundColor]="share.prop.twitter.color">
-                <fa-icon [icon]="share.prop.twitter.icon" size="lg"></fa-icon>
-              </button>
-              <button mat-fab shareButton="linkedin" [style.backgroundColor]="share.prop.linkedin.color">
-                <fa-icon [icon]="share.prop.linkedin.icon" size="lg"></fa-icon>
-              </button>
-              <button mat-fab shareButton="whatsapp" [style.backgroundColor]="share.prop.whatsapp.color">
-                <fa-icon [icon]="share.prop.whatsapp.icon" size="lg"></fa-icon>
-              </button>
-              <button mat-fab shareButton="telegram" [style.backgroundColor]="share.prop.telegram.color">
-                <fa-icon [icon]="share.prop.telegram.icon" size="lg"></fa-icon>
-              </button>
-              <button mat-fab shareButton="pinterest" [style.backgroundColor]="share.prop.pinterest.color">
-                <fa-icon [icon]="share.prop.pinterest.icon" size="lg"></fa-icon>
-              </button> -->
 
 
 </ng-container>

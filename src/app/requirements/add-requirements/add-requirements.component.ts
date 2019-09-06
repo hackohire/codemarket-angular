@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { BreadCumb } from 'src/app/shared/models/bredcumb.model';
 import { FormGroup, FormControl, Validators, FormArray, FormBuilder } from '@angular/forms';
 import { RequirementStatus, Requirement } from 'src/app/shared/models/requirement.model';
@@ -9,11 +9,12 @@ import { AddRequirement, SetSelectedRequirement, GetRequirementById, UpdateRequi
 import { MatChipInputEvent } from '@angular/material/chips';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { ActivatedRoute } from '@angular/router';
-import { switchMap, tap } from 'rxjs/operators';
+import { switchMap, tap, startWith, map } from 'rxjs/operators';
 import { of, Subscription, Observable } from 'rxjs';
 import { selectSelectedRequirement } from 'src/app/core/store/selectors/requirement.selectors';
 import { FormService } from 'src/app/shared/services/form.service';
 import { Tag } from 'src/app/shared/models/product.model';
+import { MatAutocomplete } from '@angular/material';
 
 @Component({
   selector: 'app-add-requirements',
@@ -39,9 +40,6 @@ export class AddRequirementsComponent implements OnInit {
 
   subscription$: Subscription;
 
-  searchText = new FormControl();
-  tagSuggestions: Observable<Tag[]>;
-
   get createdBy() {
     return this.requirementForm.get('createdBy');
   }
@@ -61,6 +59,13 @@ export class AddRequirementsComponent implements OnInit {
   get tagsFormControl() {
     return this.requirementForm.get('tags') as FormArray;
   }
+
+  searchText = new FormControl();
+  tagSuggestions: Tag[];
+  allTags: Tag[];
+
+  @ViewChild('searchInput', {static: false}) searchInput: ElementRef<HTMLInputElement>;
+  @ViewChild('auto', {static: false}) matAutocomplete: MatAutocomplete;
 
   constructor(
     private authService: AuthService,
@@ -142,7 +147,21 @@ export class AddRequirementsComponent implements OnInit {
       // snippets: new FormControl(null),
     });
 
-    this.tagSuggestions = this.formService.valueChange(this.searchText);
+    this.formService.searchCategories('').subscribe((tags) => {
+      this.tagSuggestions = tags;
+      this.allTags = tags;
+    })
+
+    this.searchText.valueChanges.pipe(
+      startWith(''),
+      map((text) => text ? this._filter(text) : this.allTags && this.allTags.length ? this.allTags.slice() : []))
+      .subscribe((tags) => this.tagSuggestions = tags);
+
+  }
+
+  private _filter(value): Tag[] {
+    const filterValue = value && value.name ? value.name.toLowerCase() : value.toLowerCase();
+    return this.allTags.filter(tag => tag.name.toLowerCase().indexOf(filterValue) === 0);
   }
 
   submit() {
@@ -169,12 +188,15 @@ export class AddRequirementsComponent implements OnInit {
   }
 
   addTech(event: MatChipInputEvent): void {
-    this.formService.addCategory(this.tagsFormControl, event);
+    if (!this.matAutocomplete.isOpen) {
+      this.formService.addCategory(this.tagsFormControl, event);
+      this.searchText.setValue(null);
+    }
   }
 
   selected(event) {
-
     this.formService.selectedCategory(this.tagsFormControl, event);
+    this.searchInput.nativeElement.value = null;
     this.searchText.setValue(null);
   }
 

@@ -6,7 +6,6 @@ import { Tag } from '../models/product.model';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { map } from 'rxjs/internal/operators/map';
-import { startWith, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -23,8 +22,8 @@ export class FormService {
     const value = event.value;
 
     if ((value || '').trim()) {
-      const a = new FormControl({name: value.trim()});
-      categoriesFormControl.controls.push(a);
+      // const a = new FormControl({name: value.trim()});
+      // categoriesFormControl.controls.push(a);
       categoriesFormControl.value.push({name: value.trim()});
       // this.productForm.updateValueAndValidity({emitEvent: true});
     }
@@ -38,21 +37,13 @@ export class FormService {
   selectedCategory(categoriesFormControl: FormArray, event) {
     const value = event.option.value;
 
-    const a = new FormControl({name: value.name, _id: value._id});
-    categoriesFormControl.controls.push(a);
+    // const a = new FormControl({name: value.name, _id: value._id});
+    // categoriesFormControl.controls.push(a);
     categoriesFormControl.value.push({name: value.name, _id: value._id});
   }
 
   valueChange(searchText: FormControl) {
-    return searchText.valueChanges.pipe(
-      startWith(''),
-      debounceTime(400),
-      distinctUntilChanged(),
-      switchMap((value) => {
-        console.log(value);
-        return this.searchCategories(value);
-      })
-    );
+    return this.searchCategories('');
   }
 
 

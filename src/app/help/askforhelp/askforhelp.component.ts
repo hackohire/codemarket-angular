@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { BreadCumb } from 'src/app/shared/models/bredcumb.model';
 import { FormGroup, FormControl, Validators, FormArray, FormBuilder } from '@angular/forms';
 import { Store } from '@ngrx/store';
@@ -10,10 +10,11 @@ import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription, of, Observable } from 'rxjs';
 import { HelpQuery, HelpQueryStatus } from 'src/app/shared/models/help-query.model';
-import { tap, switchMap } from 'rxjs/operators';
+import { tap, switchMap, startWith, map } from 'rxjs/operators';
 import { selectSelectedQuery } from 'src/app/core/store/selectors/help.selectors';
 import { FormService } from 'src/app/shared/services/form.service';
 import { Tag } from 'src/app/shared/models/product.model';
+import { MatAutocomplete } from '@angular/material';
 
 @Component({
   selector: 'app-askforhelp',
@@ -40,7 +41,11 @@ export class AskforhelpComponent implements OnInit {
   subscription$: Subscription;
 
   searchText = new FormControl();
-  tagSuggestions: Observable<Tag[]>;
+  tagSuggestions: Tag[];
+  allTags: Tag[];
+
+  @ViewChild('searchInput', {static: false}) searchInput: ElementRef<HTMLInputElement>;
+  @ViewChild('auto', {static: false}) matAutocomplete: MatAutocomplete;
 
   get createdBy() {
     return this.askForHelpForm.get('createdBy');
@@ -143,9 +148,23 @@ export class AskforhelpComponent implements OnInit {
       // snippets: new FormControl(null),
     });
 
-    this.tagSuggestions = this.formService.valueChange(this.searchText);
+    this.formService.searchCategories('').subscribe((tags) => {
+      this.tagSuggestions = tags;
+      this.allTags = tags;
+    })
+
+    this.searchText.valueChanges.pipe(
+      startWith(''),
+      map((text) => text ? this._filter(text) : this.allTags && this.allTags.length ? this.allTags.slice() : []))
+      .subscribe((tags) => this.tagSuggestions = tags);
+
   }
 
+  private _filter(value): Tag[] {
+    const filterValue = value && value.name ? value.name.toLowerCase() : value.toLowerCase();
+    return this.allTags.filter(tag => tag.name.toLowerCase().indexOf(filterValue) === 0);
+  }
+  
   submit() {
     // console.log(this.askForHelpForm.value);
 
@@ -184,12 +203,15 @@ export class AskforhelpComponent implements OnInit {
   }
 
   addTech(event: MatChipInputEvent): void {
-    this.formService.addCategory(this.tagsFormControl, event);
+    if (!this.matAutocomplete.isOpen) {
+      this.formService.addCategory(this.tagsFormControl, event);
+      this.searchText.setValue(null);
+    }
   }
 
   selected(event) {
-
     this.formService.selectedCategory(this.tagsFormControl, event);
+    this.searchInput.nativeElement.value = null;
     this.searchText.setValue(null);
   }
 

@@ -54,13 +54,13 @@
                             {{tag?.name}}
                             <mat-icon matChipRemove>cancel</mat-icon>
                         </mat-chip>
-                        <input [formControl]="searchText" [matAutocomplete]="auto" placeholder="Add Programming Language Tags" [matChipInputFor]="tagsList"
+                        <input #searchInput [formControl]="searchText" [matAutocomplete]="auto" placeholder="Add Programming Language Tags" [matChipInputFor]="tagsList"
                             [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
                             (matChipInputTokenEnd)="addTech($event)">
                         <mat-icon matSuffix>web</mat-icon>
                     </mat-chip-list>
                     <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-                        <mat-option *ngFor="let tag of tagSuggestions | async" [value]="tag">
+                        <mat-option *ngFor="let tag of tagSuggestions" [value]="tag">
                             {{tag?.name}}
                         </mat-option>
                     </mat-autocomplete>

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray, FormBuilder } from '@angular/forms';
 import { ProductStatus, Product, Tag } from 'src/app/shared/models/product.model';
 import { AuthService } from 'src/app/core/services/auth.service';
@@ -7,13 +7,14 @@ import { AppState } from 'src/app/core/store/state/app.state';
 import { AddPrdouct, UpdatePrdouct, GetProductById, SetSelectedProduct } from 'src/app/core/store/actions/product.actions';
 import { of, Subscription, Subject, Observable } from 'rxjs';
 import { selectSelectedProduct } from 'src/app/core/store/selectors/product.selectors';
-import { tap, switchMap } from 'rxjs/operators';
+import { tap, switchMap, startWith, map } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { Storage } from 'aws-amplify';
 import { BreadCumb } from 'src/app/shared/models/bredcumb.model';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { FormService } from 'src/app/shared/services/form.service';
+import { MatAutocomplete } from '@angular/material';
 
 @Component({
   selector: 'app-add-products',
@@ -22,7 +23,7 @@ import { FormService } from 'src/app/shared/services/form.service';
 })
 export class AddProductsComponent implements OnInit, OnDestroy {
 
-  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+  readonly separatorKeysCodes: number[] = [COMMA, ENTER];
   searchText = new FormControl();
 
   productForm: FormGroup;
@@ -78,7 +79,11 @@ export class AddProductsComponent implements OnInit, OnDestroy {
   removable = true;
   addOnBlur = true;
 
-  tagSuggestions: Observable<Tag[]>;
+  tagSuggestions: Tag[];
+  allTags: Tag[];
+
+  @ViewChild('searchInput', {static: false}) searchInput: ElementRef<HTMLInputElement>;
+  @ViewChild('auto', {static: false}) matAutocomplete: MatAutocomplete;
 
   constructor(
     public auth: AuthService,
@@ -169,8 +174,21 @@ export class AddProductsComponent implements OnInit, OnDestroy {
       })
     });
 
-    this.tagSuggestions = this.formService.valueChange(this.searchText);
+    this.formService.searchCategories('').subscribe((tags) => {
+      this.tagSuggestions = tags;
+      this.allTags = tags;
+    })
 
+    this.searchText.valueChanges.pipe(
+      startWith(''),
+      map((text) => text ? this._filter(text) : this.allTags && this.allTags.length ? this.allTags.slice() : []))
+      .subscribe((tags) => this.tagSuggestions = tags);
+
+  }
+
+  private _filter(value): Tag[] {
+    const filterValue = value && value.name ? value.name.toLowerCase() : value.toLowerCase();
+    return this.allTags.filter(tag => tag.name.toLowerCase().indexOf(filterValue) === 0);
   }
 
   priceAndFilesFormControl(f) {
@@ -291,12 +309,16 @@ export class AddProductsComponent implements OnInit, OnDestroy {
   }
 
   addTech(event: MatChipInputEvent): void {
-    this.formService.addCategory(this.tagsFormControl, event);
+    if (!this.matAutocomplete.isOpen) {
+      this.formService.addCategory(this.tagsFormControl, event);
+      this.searchText.setValue(null);
+    }
   }
 
   selected(event) {
 
     this.formService.selectedCategory(this.tagsFormControl, event);
+    this.searchInput.nativeElement.value = null;
     this.searchText.setValue(null);
   }
 

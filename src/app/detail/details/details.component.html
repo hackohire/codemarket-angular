@@ -248,7 +248,10 @@
                                 </div>
 
                                 <div class="author">
-                                    <h4>{{details?.createdBy?.name}}</h4>
+                                    <a
+                                        [routerLink]="['/', {outlets: {'main': ['dashboard', 'profile', details?.createdBy?._id ]}}]">
+                                        <h4>{{details?.createdBy?.name}}</h4>
+                                    </a>
                                     <!-- <p>Signed Up: 08 April 2016</p> -->
                                 </div>
                                 <!-- end /.author -->

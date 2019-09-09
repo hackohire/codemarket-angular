@@ -56,7 +56,7 @@ export class HelpService {
     private store: Store<AppState>
     ) { }
 
-  getHelpRequestsByUserId(): Observable<HelpQuery[]> {
+  getHelpRequestsByUserId(userId: string): Observable<HelpQuery[]> {
     return this.apollo.query(
       {
         query: gql`
@@ -68,7 +68,7 @@ export class HelpService {
           ${this.helpRequestQueryFields}
         `,
         variables: {
-          userId: this.auth.loggedInUser._id
+          userId: userId
         },
         fetchPolicy: 'no-cache'
       }

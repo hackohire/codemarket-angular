@@ -88,7 +88,7 @@ export class SellingProductsService {
     );
   }
 
-  getProductsByUserId(): Observable<Product[]> {
+  getProductsByUserId(userId: string): Observable<Product[]> {
     return this.apollo.query(
       {
         query: gql`
@@ -100,7 +100,7 @@ export class SellingProductsService {
           ${this.productFields}
         `,
         variables: {
-          userId: this.auth.loggedInUser._id
+          userId: userId
         },
         fetchPolicy: 'no-cache'
       },

@@ -32,7 +32,8 @@ export const QueryAddedSuccessfully = createAction(
 
 
 export const GetHelpRequestsByUserId = createAction(
-    EHelpRequestActions.GetHelpRequestsByUserId
+    EHelpRequestActions.GetHelpRequestsByUserId,
+    props<{userId: string}>()
 );
 
 export const GetHelpRequestById = createAction(

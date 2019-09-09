@@ -27,7 +27,8 @@ export class HelpEffects {
     @Effect()
     getHelpRequestsByUserId$ = this.actions$.pipe(
         ofType(GetHelpRequestsByUserId),
-        switchMap(() => this.helpService.getHelpRequestsByUserId()),
+        map((value) => value.userId),
+        switchMap((userId: string) => this.helpService.getHelpRequestsByUserId(userId)),
         tap(u => console.log(u)),
         map((helpRequest: HelpQuery[]) => {
             console.log(helpRequest);

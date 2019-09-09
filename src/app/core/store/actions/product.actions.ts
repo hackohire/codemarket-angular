@@ -41,7 +41,8 @@ export const ProductUpdated = createAction(
 
 
 export const GetProductsByUserId = createAction(
-    EProductActions.GetProductsByUserId
+    EProductActions.GetProductsByUserId,
+    props<{userId: string}>()
 );
 
 export const GetProductById = createAction(

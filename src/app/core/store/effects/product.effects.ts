@@ -50,7 +50,8 @@ export class ProductEffects {
     @Effect()
     getProductsByUserId$ = this.actions$.pipe(
         ofType(GetProductsByUserId),
-        switchMap(() => this.sellingProductService.getProductsByUserId()),
+        map((value) => value.userId),
+        switchMap((userId: string) => this.sellingProductService.getProductsByUserId(userId)),
         tap(u => console.log(u)),
         map((product: Product[]) => {
             console.log(product);

@@ -29,7 +29,7 @@ export class MyProfileComponent implements OnInit {
   ) {
 
     this.breadcumb = {
-      title: 'My Profile',
+      title: 'Profile',
       path: [
         {
           name: 'Dashboard',

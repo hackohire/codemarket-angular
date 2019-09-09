@@ -3,14 +3,14 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <form *ngIf="auth.loggedInUser" [formGroup]="productForm" class="product-form" (ngSubmit)="submit()">
+            <form [formGroup]="productForm" class="product-form" (ngSubmit)="submit()">
 
                 <mat-form-field class="field-full-width">
                     <input matInput formControlName="name" placeholder="Name">
                 </mat-form-field>
 
                 <app-editor *ngIf="descriptionFormControl?.value && edit; else add"
-                    [data]="descriptionFormControl?.value" (output)="updateFormData($event)"
+                    [data]="productForm?.get('description')?.value" (output)="updateFormData($event)"
                     [id]="'edit-product-editor'"></app-editor>
 
 

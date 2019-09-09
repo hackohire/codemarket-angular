@@ -111,6 +111,7 @@ export class CodeWithLanguageSelection {
         const wrapper = document.createElement('div');
         const pre = document.createElement('pre');
         const textarea = document.createElement('textarea');
+        const code = document.createElement('code');
 
         textarea.textContent = this.data.code;
         textarea.contentEditable = 'true';
@@ -131,11 +132,17 @@ export class CodeWithLanguageSelection {
         textarea.style.overflow = 'auto';
         textarea.style.resize = 'vertical';
 
-
+        // In Readonly mode show code as codesnippets
         if (this.config && this.config.readOnly) {
             const selectedLanguage = document.createElement('span');
             selectedLanguage.innerText = this.data && this.data.language ? this.data.language : '';
+
+            code.innerText = this.data.code;
+            code.contentEditable = 'false';
+
             wrapper.appendChild(selectedLanguage);
+            wrapper.appendChild(pre).appendChild(code);
+
         } else {
             const language = document.createElement('select');
 
@@ -157,6 +164,10 @@ export class CodeWithLanguageSelection {
 
             this.nodes.select = language;
 
+            wrapper.appendChild(pre).appendChild(textarea);
+    
+            this.nodes.textarea = textarea;
+
             // this.api.listeners.on(language, 'change', (event) => {
                 // console.log(event);
                 // pre.className = `language-${event.target.value}`;
@@ -166,10 +177,7 @@ export class CodeWithLanguageSelection {
             // });
         }
 
-        wrapper.appendChild(pre).appendChild(textarea);
-        // wrapper.appendChild(textarea);
 
-        this.nodes.textarea = textarea;
 
         // this.api.listeners.on(textarea, 'blur', () => {
         //     Prism.highlightAll();

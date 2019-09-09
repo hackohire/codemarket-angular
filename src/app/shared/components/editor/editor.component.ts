@@ -10,6 +10,7 @@ import Warning from '@editorjs/warning';
 import { Storage } from 'aws-amplify';
 import { environment } from 'src/environments/environment';
 import { CodeWithLanguageSelection } from 'src/app/insert-code-snippet';
+import { HighlightJS } from 'ngx-highlightjs';
 
 @Component({
   selector: 'app-editor',
@@ -26,12 +27,13 @@ export class EditorComponent implements OnInit, OnDestroy {
   @Output() output: EventEmitter<any> = new EventEmitter();
 
 
-  constructor() {
+  constructor(
+    private _hljs: HighlightJS
+  ) {
   }
 
   ngOnInit() {
 
-    // console.log(this.id)
     // Text Editor With Plugin and Configuration
 
     this.editor = new EditorJS({
@@ -117,6 +119,13 @@ export class EditorComponent implements OnInit, OnDestroy {
         blocks: this.data && this.data.length ? this.data : null
       },
       placeholder: 'Let`s write!',
+      onReady: (() => {
+
+        // Get all the code elements from DOM and highlight them as code snippets using highlight.js
+        document.querySelectorAll('pre code').forEach((block: HTMLElement) => {
+          this._hljs.highlightBlock(block);
+        });
+      }),
       onChange: (() => {
         this.editor.save().then((outputData) => {
           // console.log('Article data: ', outputData);

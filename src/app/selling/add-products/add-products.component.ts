@@ -155,7 +155,7 @@ export class AddProductsComponent implements OnInit, OnDestroy {
   productFormInitialization(p: Product) {
     this.productForm = new FormGroup({
       name: new FormControl(p && p.name ? p.name : '', Validators.required),
-      description: new FormControl(p && p.description ? p.description : []),
+      description: new FormControl(p && p.description ? p.description : ''),
       shortDescription: new FormControl(p && p.shortDescription ? p.shortDescription : ''),
       createdBy: new FormControl(p && p.createdBy && p.createdBy._id ? p.createdBy._id : ''),
       price: new FormControl(p && p.price ? p.price : 0, Validators.required),

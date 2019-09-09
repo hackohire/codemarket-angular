@@ -19,8 +19,16 @@ const dashboardRoutes: Routes = [
     path: 'help-requests-all',
     loadChildren: () => import('../help/help-request-list/help-request-list.module').then(module => module.HelpRequestListModule),
   },
+
+  // Profile of LoggedIn User
   {
     path: 'my-profile',
+    loadChildren: () => import('./my-profile/my-profile.module').then(module => module.MyProfileModule),
+  },
+
+  // Profile of Other User
+  {
+    path: 'profile/:authorId',
     loadChildren: () => import('./my-profile/my-profile.module').then(module => module.MyProfileModule),
   },
   {

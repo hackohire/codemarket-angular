@@ -9,26 +9,30 @@ import { map } from 'rxjs/operators';
 })
 export class UserService {
 
+  userFields = `
+    _id
+    name
+    email
+    linkedin_url
+    github_url
+    stackoverflow_url
+    location
+    currentJobDetails {
+      jobProfile
+      companyName
+      companyLocation
+    }
+    programming_languages
+    avatar
+    roles
+    createdAt
+  `
+
   updateUserQuery = gql`
   mutation user($user: UserInput!) {
     updateUser(user: $user)
     {
-      _id
-      name
-      email
-      linkedin_url
-      github_url
-      stackoverflow_url
-      location
-      currentJobDetails {
-        jobProfile
-        companyName
-        companyLocation
-      }
-      programming_languages
-      avatar
-      roles
-      createdAt
+      ${this.userFields}
     }
   }`;
 
@@ -73,6 +77,27 @@ export class UserService {
     ).pipe(
       map((d: any) => {
         return d.data.getUsersAndBugFixesCount;
+      })
+    );
+  }
+
+  getUserById(userId: string): Observable<User> {
+    return this.apollo.query(
+      {
+        query: gql`
+        query getUserById($userId: String) {
+          getUserById(userId: $userId) {
+            ${this.userFields}
+          }
+        }
+      `,
+      variables: {
+        userId: userId
+      }
+      }
+    ).pipe(
+      map((d: any) => {
+        return d.data.getUserById;
       })
     );
   }

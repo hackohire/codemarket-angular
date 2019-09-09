@@ -9,7 +9,7 @@ import { selectProductsList, selectAllProductsList } from 'src/app/core/store/se
 import { Subscription } from 'rxjs';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { map } from 'rxjs/operators';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from 'src/app/core/services/product.service';
 import { BreadCumb } from 'src/app/shared/models/bredcumb.model';
 
@@ -47,14 +47,21 @@ export class ProductsListComponent implements OnInit, OnDestroy {
 
   breadcumb: BreadCumb;
 
+  authorId: string; // Id of the user whose profile is being visited by loggedInUser
+
   constructor(
     private auth: AuthService,
     private store: Store<AppState>,
     private activatedRoute: ActivatedRoute,
-    private productService: ProductService
+    private productService: ProductService,
+    private router: Router
   ) {
 
     const path = this.activatedRoute.parent.routeConfig.path;
+
+    // Checking if authorId is there to see if user is trying to visit somebody else's profile or his own profile(loggedin User's own Profile)
+    this.authorId = this.activatedRoute.parent.snapshot.parent.params['authorId'];
+
 
     if (path === 'bugfixes-all') {
       this.store.dispatch(GetAllProducts());
@@ -70,16 +77,16 @@ export class ProductsListComponent implements OnInit, OnDestroy {
       ).subscribe();
 
     } else {
-      this.displayedColumns = ['number', 'name', 'price', 'status', 'action'];
 
-      this.userSubsription = this.auth.loggedInUser$.pipe(
-        map((u) => {
-          if (u) {
-            this.store.dispatch(GetProductsByUserId());
-          }
-        })
-      ).subscribe();
-  
+      // If authorId is there, User is visiting somebody else's profile so we don't show action buttons
+      if (this.authorId) {
+        this.displayedColumns = ['number', 'name', 'price'];
+      } else {
+        this.displayedColumns = ['number', 'name', 'price', 'action'];
+      }
+
+      this.store.dispatch(GetProductsByUserId({userId: (this.authorId ? this.authorId : this.auth.loggedInUser._id) }));
+
       this.productsListSubscription = this.store.select(selectProductsList).pipe(
         map((products) => {
           if (products) {
@@ -113,7 +120,7 @@ export class ProductsListComponent implements OnInit, OnDestroy {
     }
 
     if (this.userSubsription) {
-      this.productsListSubscription.unsubscribe();
+      this.userSubsription.unsubscribe();
     }
   }
 

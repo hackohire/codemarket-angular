@@ -21,8 +21,8 @@ import { BreadCumb } from 'src/app/shared/models/bredcumb.model';
   styleUrls: ['./help-request-list.component.scss'],
   animations: [
     trigger('detailExpand', [
-      state('collapsed', style({height: '0px', minHeight: '0'})),
-      state('expanded', style({height: '*'})),
+      state('collapsed', style({ height: '0px', minHeight: '0' })),
+      state('expanded', style({ height: '*' })),
       transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
     ]),
   ],
@@ -42,7 +42,9 @@ export class HelpRequestListComponent implements OnInit, OnDestroy {
 
   breadcumb: BreadCumb;
 
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
+
+  authorId: string; // Id of the user whose profile is being visited by loggedInUser
 
   constructor(
     private authService: AuthService,
@@ -69,6 +71,9 @@ export class HelpRequestListComponent implements OnInit, OnDestroy {
 
     const path = this.activatedRoute.parent.routeConfig.path;
 
+    // Checking if authorId is there to see if user is trying to visit somebody else's profile or his own profile(loggedin User's own Profile)
+    this.authorId = this.activatedRoute.parent.snapshot.parent.params['authorId'];
+
     if (path === 'help-requests-all') {
 
       this.store.dispatch(GetAllHelpRequests());
@@ -84,14 +89,16 @@ export class HelpRequestListComponent implements OnInit, OnDestroy {
       ).subscribe();
 
     } else {
-      this.displayedColumns = ['number', 'name', 'price', 'status', 'action'];
-      this.userSubsription = this.authService.loggedInUser$.pipe(
-        map((u) => {
-          if (u) {
-            this.store.dispatch(GetHelpRequestsByUserId());
-          }
-        })
-      ).subscribe();
+
+      // If authorId is there, User is visiting somebody else's profile so we don't show action buttons
+      if (this.authorId) {
+        this.displayedColumns = ['number', 'name', 'price'];
+      } else {
+        this.displayedColumns = ['number', 'name', 'price', 'action'];
+      }
+
+      this.store.dispatch(GetHelpRequestsByUserId({userId: (this.authorId ? this.authorId : this.authService.loggedInUser._id) }));
+
       this.helpRequestsListSubscription = this.store.select(selectQueries).pipe(
         map((helpRequests) => {
           if (helpRequests) {
@@ -110,21 +117,21 @@ export class HelpRequestListComponent implements OnInit, OnDestroy {
     }
 
     if (this.userSubsription) {
-      this.helpRequestsListSubscription.unsubscribe();
+      this.userSubsription.unsubscribe();
     }
   }
 
   editHelpRequest(helpRequest): void {
-    this.store.dispatch(SetSelectedHelpRequest({helpRequest}));
+    this.store.dispatch(SetSelectedHelpRequest({ helpRequest }));
     // this.router.navigate(['/add-helpRequest'], );
   }
 
   deleteHelpRequest(helpRequestId: string) {
-    this.store.dispatch(DeleteHelpRequest({helpRequestId}));
+    this.store.dispatch(DeleteHelpRequest({ helpRequestId }));
   }
 
   redirectToHelpRequestDetails(details) {
-    this.router.navigate(['/', {outlets: {main: ['dashboard', 'help-request-details', details._id]}}]);
+    this.router.navigate(['/', { outlets: { main: ['dashboard', 'help-request-details', details._id] } }]);
   }
 
   redirectTo(event) {

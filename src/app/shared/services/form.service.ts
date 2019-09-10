@@ -24,7 +24,8 @@ export class FormService {
     if ((value || '').trim()) {
       // const a = new FormControl({name: value.trim()});
       // categoriesFormControl.controls.push(a);
-      categoriesFormControl.value.push({name: value.trim()});
+      categoriesFormControl.push(new FormControl({name: value.trim()}));
+      // categoriesFormControl.value.push({name: value.trim()});
       // this.productForm.updateValueAndValidity({emitEvent: true});
     }
 
@@ -39,7 +40,7 @@ export class FormService {
 
     // const a = new FormControl({name: value.name, _id: value._id});
     // categoriesFormControl.controls.push(a);
-    categoriesFormControl.value.push({name: value.name, _id: value._id});
+    categoriesFormControl.push(new FormControl({name: value.name, _id: value._id}));
   }
 
   valueChange(searchText: FormControl) {
@@ -49,7 +50,7 @@ export class FormService {
 
   // Remove a Tag
   public removeCategory(categoriesFormControl: FormArray, index: number): void {
-    categoriesFormControl.value.splice(index, 1);
+    categoriesFormControl.removeAt(index);
     // this.productForm.updateValueAndValidity();
   }
 

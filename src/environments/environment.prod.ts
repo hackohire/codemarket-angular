@@ -13,10 +13,10 @@ export const environment = {
     scope: ['email', 'profile', 'openid'],
 
     // Callback URL
-    redirectSignIn: 'https://codemarket.io', // or 'exp://127.0.0.1:19000/--/', 'myapp://main/'
+    redirectSignIn: 'https://codemarket-fe.herokuapp.com', // or 'exp://127.0.0.1:19000/--/', 'myapp://main/'
 
     // Sign out URL
-    redirectSignOut: 'https://codemarket.io', // or 'exp://127.0.0.1:19000/--/', 'myapp://main/'
+    redirectSignOut: 'https://codemarket-fe.herokuapp.com', // or 'exp://127.0.0.1:19000/--/', 'myapp://main/'
 
     // 'code' for Authorization code grant,
     // 'token' for Implicit grant

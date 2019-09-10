@@ -11,11 +11,11 @@ export class SellingProductsComponent implements OnInit {
     this.navLinks = [
       {
         path: 'products-list',
-        label: 'Products'
+        label: 'Bugfixes'
       },
       {
         path: 'add-product',
-        label: 'Add Product'
+        label: 'Add Bugfix'
       }
     ];
   }

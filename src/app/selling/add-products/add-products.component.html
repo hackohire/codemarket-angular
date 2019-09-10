@@ -3,7 +3,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <form [formGroup]="productForm" class="product-form" (ngSubmit)="submit()">
+            <form [formGroup]="productForm" class="product-form">
 
                 <mat-form-field class="field-full-width">
                     <input matInput formControlName="name" placeholder="Name">
@@ -138,9 +138,12 @@
                 <br />
 
 
+                <div fxLayout="row" fxLayoutGap="10px">
+                    <button *ngIf="statusFormControl?.value !== 'Published'" type="button" (click)="submit('Drafted')" [disabled]="productForm?.invalid" mat-raised-button color="primary">Save</button>
+                    <button type="button" (click)="submit('Published')" [disabled]="productForm?.invalid" mat-raised-button color="primary">{{ statusFormControl?.value === 'Published' ? 'Publish Changes' : 'Publish' }}</button>
+                    <button *ngIf="statusFormControl?.value === 'Published'" type="button" (click)="submit('Unpublished')" [disabled]="productForm?.invalid" mat-raised-button color="primary">{{ 'Unpublish' }}</button>
 
-
-                <button [disabled]="productForm?.invalid" mat-raised-button color="primary">Submit Product</button>
+                </div>
 
             </form>
 

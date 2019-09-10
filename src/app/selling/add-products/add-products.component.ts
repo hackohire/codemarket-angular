@@ -65,6 +65,10 @@ export class AddProductsComponent implements OnInit, OnDestroy {
     return this.productForm.get('tags') as FormArray;
   }
 
+  get statusFormControl() {
+    return this.productForm.get('status');
+  }
+
   breadcumb: BreadCumb;
 
   subscription$: Subscription;
@@ -163,7 +167,7 @@ export class AddProductsComponent implements OnInit, OnDestroy {
       // demo_url: new FormControl(p && p.demo_url ? p.demo_url : '', [Validators.pattern(this.urlRegex)]),
       // documentation_url: new FormControl(p && p.documentation_url ? p.documentation_url : '', [Validators.pattern(this.urlRegex)]),
       // video_url: new FormControl(p && p.video_url ? p.video_url : '', [Validators.pattern(this.urlRegex)]),
-      status: new FormControl(p && p.status ? p.status : ProductStatus.Created),
+      status: new FormControl(p && p.status ? p.status : ProductStatus.Drafted),
       _id: new FormControl(p && p._id ? p._id : ''),
       tags: this.fb.array(p && p.tags && p.tags.length ? p.tags : []),
       // snippets: new FormControl(p && p.snippets && p.snippets.length ? p.snippets : null),
@@ -200,7 +204,9 @@ export class AddProductsComponent implements OnInit, OnDestroy {
     });
   }
 
-  submit() {
+  submit(status = ProductStatus.Drafted) {
+
+    this.statusFormControl.setValue(status);
 
     if (!this.supportDescriptionFormControl.value) {
       this.supportDescriptionFormControl.setValue([]);

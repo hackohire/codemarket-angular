@@ -88,19 +88,20 @@ export class SellingProductsService {
     );
   }
 
-  getProductsByUserId(userId: string): Observable<Product[]> {
+  getProductsByUserId(userId: string, status: string): Observable<Product[]> {
     return this.apollo.query(
       {
         query: gql`
-          query getProductsByUserId($userId: String) {
-            getProductsByUserId(userId: $userId) {
+          query getProductsByUserId($userId: String, $status: String) {
+            getProductsByUserId(userId: $userId, status: $status) {
               ...Product
             }
           }
           ${this.productFields}
         `,
         variables: {
-          userId: userId
+          userId: userId,
+          status: status
         },
         fetchPolicy: 'no-cache'
       },

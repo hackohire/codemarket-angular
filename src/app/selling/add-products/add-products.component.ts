@@ -204,7 +204,7 @@ export class AddProductsComponent implements OnInit, OnDestroy {
     });
   }
 
-  submit(status = ProductStatus.Drafted) {
+  submit(status) {
 
     this.statusFormControl.setValue(status);
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input, OnDestroy, OnChanges, SimpleChanges } from '@angular/core';
 import EditorJS from '@editorjs/editorjs';
 import Header from '@editorjs/header';
 import ImageTool from '@editorjs/image';
@@ -18,7 +18,7 @@ import { HighlightJS } from 'ngx-highlightjs';
   styleUrls: ['./editor.component.scss'],
   // encapsulation: ViewEncapsulation.None
 })
-export class EditorComponent implements OnInit, OnDestroy {
+export class EditorComponent implements OnInit, OnDestroy, OnChanges {
 
   editor: EditorJS;
   @Input() id: string;
@@ -34,7 +34,37 @@ export class EditorComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
+    this.initiateEditor();
+
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (this.editor && changes.readOnly && !changes.readOnly.currentValue) {
+      console.log(this.data);
+      this.editor.destroy();
+      this.readOnly = false;
+      this.initiateEditor();
+    } else if (this.editor && changes.readOnly && changes.readOnly.currentValue) {
+      this.editor.destroy();
+      this.initiateEditor();
+    }
+  }
+
+  ngOnDestroy() {
+    if (this.editor) {
+      // this.editor.destroy();
+    }
+  }
+
+  handleEnterKeyPress(e: Event) {
+    // e.preventDefault();
+    // e.stopPropagation()
+  }
+
+  initiateEditor(blocks = null) {
     // Text Editor With Plugin and Configuration
+
+    console.log(this.id);
 
     this.editor = new EditorJS({
       tools: {
@@ -116,7 +146,7 @@ export class EditorComponent implements OnInit, OnDestroy {
       },
       holder: this.id,
       data: {
-        blocks: this.data && this.data.length ? this.data : null
+        blocks: this.data && this.data.length ? this.data : blocks
       },
       placeholder: 'Let`s write!',
       onReady: (() => {
@@ -128,27 +158,18 @@ export class EditorComponent implements OnInit, OnDestroy {
       }),
       onChange: (() => {
         this.editor.save().then((outputData) => {
-          // console.log('Article data: ', outputData);
+          console.log(outputData);
           this.output.emit([...outputData.blocks]);
           // this.askForHelpForm.get('description').setValue(outputData.blocks, { emitEvent: false });
         }).catch((error) => {
           console.log('Saving failed: ', error);
         });
+        // }
       })
 
     });
-
   }
 
-  ngOnDestroy() {
-    if (this.editor) {
-      this.editor.destroy();
-    }
-  }
-
-  handleEnterKeyPress(e: Event) {
-    // e.preventDefault();
-    // e.stopPropagation()
-  }
+  
 
 }

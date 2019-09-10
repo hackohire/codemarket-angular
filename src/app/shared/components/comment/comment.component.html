@@ -30,7 +30,7 @@
             </button>
 
         </div>
-        <app-editor (output)="updateFormData($event)" [data]="replyCommentForm?.get('text')?.value" [id]="comment?._id"></app-editor>
+        <app-editor [readOnly]="edit ? false : true" (output)="updateFormData($event)" [data]="edit ? replyCommentForm?.get('text')?.value : replyCommentForm?.get('text')?.value" [id]="comment?._id"></app-editor>
         <br/>
         <button *ngIf="edit" type="button" class="btn btn--md btn--round" (click)="updateComment()">Update</button>
         <!-- <p>{{comment?.text}}</p> -->

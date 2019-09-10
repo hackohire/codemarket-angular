@@ -17,18 +17,15 @@
  * CodeTool for Editor.js
  *
  * @author sumitvekariya7@gmail.com
- * @copyright CodeX 2018
- * @license The MIT License (MIT)
- * @version 2.0.0
  */
 
 export class CodeWithLanguageSelection {
     api: any;
     placeholder: string;
-    config: {readOnly: boolean};
+    config: { readOnly: boolean };
     CSS: { baseClass: any; input: any; wrapper: string; textarea: string; language?: string };
     nodes: { holder: any; textarea: any; select: any };
-    _data: { code: string, language?: string};
+    _data: { code: string, language?: string };
 
     /**
      * Allow to press Enter inside the CodeTool textarea
@@ -52,7 +49,7 @@ export class CodeWithLanguageSelection {
     }
 
     static get DEFAULT_FORMAT_CONFIG() {
-        return ['python', 'Matlab', 'R', 'javascript', 'C', 'HTML'];
+        return ['python', 'Matlab', 'R', 'javascript', 'C', 'HTML', 'typescript'];
     }
 
 
@@ -70,8 +67,8 @@ export class CodeWithLanguageSelection {
      * @param {Object} api - Editor.js API
      */
     constructor(
-        { data, config, api}
-        ) {
+        { data, config, api }
+    ) {
 
         this.api = api;
 
@@ -97,7 +94,7 @@ export class CodeWithLanguageSelection {
             language: data.language || '',
         };
 
-        this.nodes.holder = this.drawView();
+        // this.nodes.holder = this.drawView();
 
     }
 
@@ -107,14 +104,17 @@ export class CodeWithLanguageSelection {
      * @return {HTMLElement}
      * @private
      */
-    drawView() {
+    render() {
         const wrapper = document.createElement('div');
         const pre = document.createElement('pre');
-        const textarea = document.createElement('textarea');
+        const textarea = this._make('textarea', [], {
+            contentEditable: 'true',
+            value: this.data.code || ''
+          });
         const code = document.createElement('code');
 
-        textarea.textContent = this.data.code;
-        textarea.contentEditable = 'true';
+        // textarea.value = this.data.code;
+        // textarea.contentEditable = 'true';
 
 
         wrapper.classList.add(this.CSS.baseClass, this.CSS.wrapper);
@@ -164,34 +164,17 @@ export class CodeWithLanguageSelection {
 
             this.nodes.select = language;
 
-            wrapper.appendChild(pre).appendChild(textarea);
-    
+
+            wrapper.appendChild(textarea);
+
             this.nodes.textarea = textarea;
 
-            // this.api.listeners.on(language, 'change', (event) => {
+
+            this.api.listeners.on(textarea, 'keyup', (event) => {
                 // console.log(event);
-                // pre.className = `language-${event.target.value}`;
-                // textarea.className = `language-${event.target.value}`;
-                // Prism.highlightAll();
-                // selectedLanguage.innerText = event.target.value;
-            // });
+                textarea.innerHTML = event.target.value;
+            });
         }
-
-
-
-        // this.api.listeners.on(textarea, 'blur', () => {
-        //     Prism.highlightAll();
-        // });
-
-        this.api.listeners.on(textarea, 'paste', (event) => {
-            // Prism.highlightAll();
-            // this.data.code = event;
-            // if (event && event.type === 'paste') {
-            //     console.log(event.clipboardData.getData('text/plain'));
-            //     textarea.textContent = event.clipboardData.getData('text/plain')
-            // }
-            // console.log(event)
-        });
 
 
         return wrapper;
@@ -202,9 +185,9 @@ export class CodeWithLanguageSelection {
      * @returns {HTMLDivElement} this.nodes.holder - Code's wrapper
      * @public
      */
-    render() {
-        return this.nodes.holder;
-    }
+    // render() {
+    //     return this.nodes.holder;
+    // }
 
     /**
      * Extract Tool's data from the view
@@ -213,13 +196,13 @@ export class CodeWithLanguageSelection {
      * @public
      */
     save(codeWrapper) {
-        // console.log(codeWrapper.querySelector('PRE').textContent);
-        return {
+        return Object.assign(this.data, {
             // code: codeWrapper.querySelector('PRE').textContent,
-            code: codeWrapper.querySelector('pre textarea').value,
+            code: codeWrapper.querySelector('textarea') && codeWrapper.querySelector('textarea').value ?
+                codeWrapper.querySelector('textarea').value : '',
             language: codeWrapper.querySelector('select') && codeWrapper.querySelector('select').value ?
-                 codeWrapper.querySelector('select').value : ''
-        };
+                codeWrapper.querySelector('select').value : ''
+        });
     }
 
     /**
@@ -246,10 +229,11 @@ export class CodeWithLanguageSelection {
      * @param {CodeData} data
      */
     set data(data) {
-        this._data = data;
+
+        this._data = Object.assign({}, this.data, data);
 
         if (this.nodes.textarea) {
-            this.nodes.textarea.textContent = data.code;
+            this.nodes.textarea.value = data.code;
             this.nodes.select.value = data.language;
         }
     }
@@ -289,5 +273,21 @@ export class CodeWithLanguageSelection {
         return {
             tags: ['PRE'],
         };
+    }
+
+    _make(tagName, classNames = null, attributes = {}) {
+        let el = document.createElement(tagName);
+
+        if (Array.isArray(classNames)) {
+            el.classList.add(...classNames);
+        } else if (classNames) {
+            el.classList.add(classNames);
+        }
+
+        for (let attrName in attributes) {
+            el[attrName] = attributes[attrName];
+        }
+
+        return el;
     }
 }

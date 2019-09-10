@@ -53,5 +53,7 @@ export enum ProductStatus {
     Approved = 'Approved',
     Rejected = 'Rejected',
     Archieved = 'Archieved',
-    Deleted = 'Deleted'
+    Deleted = 'Deleted',
+    Published = 'Published',
+    Unpublished = 'Unpublished'
 }

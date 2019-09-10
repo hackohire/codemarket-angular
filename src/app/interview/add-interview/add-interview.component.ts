@@ -131,7 +131,7 @@ export class AddInterviewComponent implements OnInit {
     this.interviewForm = new FormGroup({
       name: new FormControl(i && i.name ? i.name : '', Validators.required),
       description: new FormControl(i && i.description ? i.description : ''),
-      price: new FormControl(i && i.price ? i.price : '', Validators.required),
+      price: new FormControl(i && i.price ? i.price : 0, Validators.required),
       createdBy: new FormControl(i && i.createdBy && i.createdBy._id ? i.createdBy._id : ''),
       shortDescription: new FormControl(i && i.shortDescription ? i.shortDescription : ''),
       categories: new FormControl(i && i.categories ? i.categories : []),
@@ -142,8 +142,8 @@ export class AddInterviewComponent implements OnInit {
       _id: new FormControl(i && i._id ? i._id : ''),
       tags: this.fb.array(i && i.tags && i.tags.length ? i.tags : []),
       support: new FormGroup({
-        time: new FormControl(i && i.support && i.support.time ? i.support.time : ''),
-        description: new FormControl(i && i.support && i.support.description ? i.support.description : [])
+        time: new FormControl(i && i.support && i.support.time ? i.support.time : 0),
+        description: new FormControl(i && i.support && i.support.description ? i.support.description : '')
       })
       // snippets: new FormControl(null),
     });
@@ -166,6 +166,14 @@ export class AddInterviewComponent implements OnInit {
   }
 
   submit() {
+
+    if (!this.supportDescriptionFormControl.value) {
+      this.supportDescriptionFormControl.setValue([]);
+    }
+
+    if (!this.descriptionFormControl.value) {
+      this.descriptionFormControl.setValue([]);
+    }
 
     if (this.authService.loggedInUser && !this.createdBy.value) {
       this.createdBy.setValue(this.authService.loggedInUser._id);

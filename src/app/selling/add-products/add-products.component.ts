@@ -169,7 +169,7 @@ export class AddProductsComponent implements OnInit, OnDestroy {
       // snippets: new FormControl(p && p.snippets && p.snippets.length ? p.snippets : null),
       // priceAndFiles: new FormArray([]),
       support: new FormGroup({
-        time: new FormControl(p && p.support && p.support.time ? p.support.time : ''),
+        time: new FormControl(p && p.support && p.support.time ? p.support.time : 0),
         description: new FormControl(p && p.support && p.support.description ? p.support.description : '')
       })
     });
@@ -201,6 +201,14 @@ export class AddProductsComponent implements OnInit, OnDestroy {
   }
 
   submit() {
+
+    if (!this.supportDescriptionFormControl.value) {
+      this.supportDescriptionFormControl.setValue([]);
+    }
+
+    if (!this.descriptionFormControl.value) {
+      this.descriptionFormControl.setValue([]);
+    }
 
     /* Identify the programming language based on code snippets  **/
     // const codeSnippets = [].slice.call(document.getElementsByTagName('pre'), 0);

@@ -130,8 +130,8 @@ export class AskforhelpComponent implements OnInit {
   askForHelpFormInitialization(h: HelpQuery): void {
     this.askForHelpForm = new FormGroup({
       name: new FormControl(h && h.name ? h.name : '', Validators.required),
-      description: new FormControl(h && h.description ? h.description : ''),
-      price: new FormControl(h && h.price ? h.price : '', Validators.required),
+      description: new FormControl(h && h.description ? h.description : 0),
+      price: new FormControl(h && h.price ? h.price : 0, Validators.required),
       createdBy: new FormControl(h && h.createdBy && h.createdBy._id ? h.createdBy._id : ''),
       shortDescription: new FormControl(h && h.shortDescription ? h.shortDescription : ''),
       categories: new FormControl(h && h.categories ? h.categories : []),
@@ -142,8 +142,8 @@ export class AskforhelpComponent implements OnInit {
       _id: new FormControl(h && h._id ? h._id : ''),
       tags: this.fb.array(h && h.tags && h.tags.length ? h.tags : []),
       support: new FormGroup({
-        time: new FormControl(h && h.support && h.support.time ? h.support.time : ''),
-        description: new FormControl(h && h.support && h.support.description ? h.support.description : [])
+        time: new FormControl(h && h.support && h.support.time ? h.support.time : 0),
+        description: new FormControl(h && h.support && h.support.description ? h.support.description : '')
       })
       // snippets: new FormControl(null),
     });
@@ -179,6 +179,14 @@ export class AskforhelpComponent implements OnInit {
     //   this.askForHelpForm.value.snips = snips;
     //   console.log(snips);
     // }
+
+    if (!this.supportDescriptionFormControl.value) {
+      this.supportDescriptionFormControl.setValue([]);
+    }
+
+    if (!this.descriptionFormControl.value) {
+      this.descriptionFormControl.setValue([]);
+    }
 
     if (this.authService.loggedInUser && !this.createdBy.value) {
       this.createdBy.setValue(this.authService.loggedInUser._id);

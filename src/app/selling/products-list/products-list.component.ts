@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { GetProductsByUserId, SetSelectedProduct, DeleteProduct, GetAllProducts } from 'src/app/core/store/actions/product.actions';
 import { AppState } from 'src/app/core/store/state/app.state';
 import { MatTableDataSource, MatSort } from '@angular/material';
-import { Product } from 'src/app/shared/models/product.model';
+import { Product, ProductStatus } from 'src/app/shared/models/product.model';
 import { selectProductsList, selectAllProductsList } from 'src/app/core/store/selectors/product.selectors';
 import { Subscription } from 'rxjs';
 import { trigger, state, style, transition, animate } from '@angular/animations';
@@ -78,14 +78,21 @@ export class ProductsListComponent implements OnInit, OnDestroy {
 
     } else {
 
+      let status = '';
+
       // If authorId is there, User is visiting somebody else's profile so we don't show action buttons
       if (this.authorId) {
         this.displayedColumns = ['number', 'name', 'price'];
+        status = ProductStatus.Published;
       } else {
-        this.displayedColumns = ['number', 'name', 'price', 'action'];
+        this.displayedColumns = ['number', 'name', 'price', 'status', 'action'];
       }
 
-      this.store.dispatch(GetProductsByUserId({userId: (this.authorId ? this.authorId : this.auth.loggedInUser._id) }));
+      this.store.dispatch(GetProductsByUserId(
+        {
+          userId: (this.authorId ? this.authorId : this.auth.loggedInUser._id),
+          status: status 
+        }));
 
       this.productsListSubscription = this.store.select(selectProductsList).pipe(
         map((products) => {

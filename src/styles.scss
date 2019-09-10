@@ -23,6 +23,16 @@ mat-icon, a {
   vertical-align: middle !important;
 }
 
+.float-right {
+  float: right;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
 .mat-drawer-container {
   background-color: white;
 }

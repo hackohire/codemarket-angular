@@ -9,8 +9,10 @@
                 <input type="text" matInput formControlName="name" placeholder="name">
             </mat-form-field>
 
-            <h6>Description:</h6>
-            <br/>
+            <h6>Description:
+                <mat-icon matSuffix class="vertical-align-middle float-right">bug_report</mat-icon>
+            </h6>
+            <br />
 
             <app-editor *ngIf="descriptionFormControl?.value && edit; else add" (output)="updateFormData($event)"
                 [data]="askForHelpForm?.get('description')?.value" [id]="'edit-help-editor'"></app-editor>
@@ -26,19 +28,19 @@
 
 
 
-            <mat-form-field class="field-full-width">
+            <!-- <mat-form-field class="field-full-width">
                 <input matInput formControlName="shortDescription" placeholder="Short Description">
-            </mat-form-field>
+            </mat-form-field> -->
 
             <mat-form-field class="field-full-width">
                 <input type="number" matInput formControlName="price" placeholder="price">
             </mat-form-field>
 
-            <mat-form-field class="field-full-width">
+            <!-- <mat-form-field class="field-full-width">
                 <input matInput formControlName="demo_url" placeholder="Demo Url">
                 <mat-error *ngIf="askForHelpForm?.get('demo_url')?.invalid">{{'Please enter a valid URL'}}
                 </mat-error>
-            </mat-form-field>
+            </mat-form-field> -->
 
             <!-- <mat-form-field class="field-full-width">
                     <input matInput formControlName="documentation_url" placeholder="Documentation Url">
@@ -54,15 +56,16 @@
 
             <mat-form-field class="field-full-width">
                 <mat-chip-list #tagsList>
-                    <mat-chip *ngFor="let tag of tagsFormControl?.value; let i = index;"
-                        [selectable]="selectable" [removable]="true" (removed)="remove(i)">
+                    <mat-chip *ngFor="let tag of tagsFormControl?.value; let i = index;" [selectable]="selectable"
+                        [removable]="true" (removed)="remove(i)">
                         {{tag?.name}}
                         <mat-icon matChipRemove>cancel</mat-icon>
                     </mat-chip>
-                    <input #searchInput [formControl]="searchText" [matAutocomplete]="auto" placeholder="Add Programming Language Tags" [matChipInputFor]="tagsList"
+                    <input #searchInput [formControl]="searchText" [matAutocomplete]="auto"
+                        placeholder="Add Programming Language Tags" [matChipInputFor]="tagsList"
                         [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
                         (matChipInputTokenEnd)="addTech($event)">
-                    <mat-icon matSuffix>web</mat-icon>
+                    <mat-icon matSuffix>code</mat-icon>
                 </mat-chip-list>
                 <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
                     <mat-option *ngFor="let tag of tagSuggestions" [value]="tag">
@@ -75,10 +78,14 @@
             <div formGroupName="support">
                 <mat-form-field class="field-full-width">
                     <input matInput type="number" formControlName="time" placeholder="Support Time(In Minutes)">
+                    <mat-icon matSuffix>av_timer</mat-icon>
                 </mat-form-field>
 
-                <h6>Support Details:</h6>
-                <br/>
+                <h6>Support Details:
+                    <mat-icon matSuffix class="vertical-align-middle float-right">record_voice_over</mat-icon>
+                    <mat-icon matSuffix class="vertical-align-middle float-right">email</mat-icon>
+                </h6>
+                <br />
 
                 <ng-container *ngIf="supportDescriptionFormControl?.value && edit; else addSupport">
                     <app-editor [data]="supportDescriptionFormControl?.value"
@@ -95,7 +102,8 @@
 
             <br />
 
-            <button [disabled]="askForHelpForm?.invalid" mat-raised-button (click)="submit()" color="primary">Submit Query</button>
+            <button [disabled]="askForHelpForm?.invalid" mat-raised-button (click)="submit()" color="primary">Submit
+                Query</button>
         </div>
 
     </div>

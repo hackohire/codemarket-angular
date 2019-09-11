@@ -20,6 +20,12 @@ import { AuthService } from 'src/app/core/services/auth.service';
 import { CommentService } from 'src/app/shared/services/comment.service';
 import { environment } from 'src/environments/environment';
 import { ShareService } from '@ngx-share/core';
+import { Testing } from 'src/app/shared/models/Testing.model';
+import { GetTestingById } from 'src/app/core/store/actions/testing.actions';
+import { selectSelectedTesting } from 'src/app/core/store/selectors/testing.selectors';
+import { Howtodoc } from 'src/app/shared/models/Howtodoc.model';
+import { selectSelectedHowtodoc } from 'src/app/core/store/selectors/howtodoc.selectors';
+import { GetHowtodocById } from 'src/app/core/store/actions/howtodoc.actions';
 
 @Component({
   selector: 'app-details',
@@ -29,9 +35,9 @@ import { ShareService } from '@ngx-share/core';
 })
 export class DetailsComponent implements OnInit {
 
-  details$: Observable<HelpQuery | Requirement | Interview>;
+  details$: Observable<HelpQuery | Requirement | Interview | Testing | Howtodoc>;
   subscription$: Subscription;
-  type: string; // product | help-request | interview | requirement
+  type: string; // product | help-request | interview | requirement | Testing | Howtodoc
   commentsList: any[];
 
   anonymousAvatar = require('src/assets/images/anonymous-avatar.jpg');
@@ -103,6 +109,32 @@ export class DetailsComponent implements OnInit {
           } else {
             this.store.dispatch(GetRequirementById({ requirementId: params.requirementId }));
             this.details$ = this.store.select(selectSelectedRequirement);
+          }
+        })
+      ).subscribe();
+    } else if (params['testingId']) {
+      this.subscription$ = this.store.select(selectSelectedTesting).pipe(
+        tap((p: Testing) => {
+          if (p) {
+            this.details$ = of(p);
+            this.type = 'testing';
+            this.initializeCommentForm(p);
+          } else {
+            this.store.dispatch(GetTestingById({ testingId: params.testingId }));
+            this.details$ = this.store.select(selectSelectedTesting);
+          }
+        })
+      ).subscribe();
+    } else if (params['howtodocId']) {
+      this.subscription$ = this.store.select(selectSelectedHowtodoc).pipe(
+        tap((p: Howtodoc) => {
+          if (p) {
+            this.details$ = of(p);
+            this.type = 'howtodoc';
+            this.initializeCommentForm(p);
+          } else {
+            this.store.dispatch(GetHowtodocById({ howtodocId: params.howtodocId }));
+            this.details$ = this.store.select(selectSelectedHowtodoc);
           }
         })
       ).subscribe();

@@ -5,6 +5,8 @@ import { HelpState } from './help.state';
 import { CartState } from './cart.state';
 import { RequirementState } from './requirement.state';
 import { InterviewState } from './interview.state';
+import { TestingState } from './testing.state';
+import { HowtodocState } from './howtodoc.state';
 
 export interface AppState {
     router?: RouterReducerState;
@@ -14,6 +16,8 @@ export interface AppState {
     cart: CartState;
     requirement: RequirementState;
     interview: InterviewState;
+    testing: TestingState;
+    howtodoc: HowtodocState
 }
 
 export const initialAppState: AppState = {
@@ -23,6 +27,8 @@ export const initialAppState: AppState = {
     cart: null,
     requirement: null,
     interview: null,
+    testing: null,
+    howtodoc: null
 };
 
 export function getInitialAppState(): AppState {

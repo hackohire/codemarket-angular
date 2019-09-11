@@ -19,6 +19,7 @@ export class HelpEffects {
         switchMap((query) => this.helpService.addQuery(query)),
         map((query: HelpQuery) => {
             this.sweetAlertService.success('Help Request Added Successfully', '', 'success');
+            this.helpService.redirectToHelpRequestDetails(query);
             return QueryAddedSuccessfully({query});
         }),
     );
@@ -68,6 +69,7 @@ export class HelpEffects {
         tap(u => console.log(u)),
         map((helpRequest: HelpQuery) => {
             console.log(helpRequest);
+            this.helpService.redirectToHelpRequestDetails(helpRequest);
             this.sweetAlertService.success('HelpRequest Updated Successfully', '', 'success');
             return HelpRequestUpdated({helpRequest});
         })

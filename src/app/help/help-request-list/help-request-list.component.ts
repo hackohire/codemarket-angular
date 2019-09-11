@@ -136,7 +136,7 @@ export class HelpRequestListComponent implements OnInit, OnDestroy {
 
   redirectTo(event) {
     console.log(event);
-    this.helpService.redirectToProductDetails(event);
+    this.helpService.redirectToHelpRequestDetails(event);
   }
 
 }

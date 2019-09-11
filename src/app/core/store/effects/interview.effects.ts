@@ -18,6 +18,8 @@ export class InterviewEffects {
         map(action => action.interview),
         switchMap((interview) => this.interviewService.addInterview(interview)),
         map((interview: Interview) => {
+
+            this.interviewService.redirectToInterviewDetails(interview);
             this.sweetAlertService.success('Interview Added Successfully', '', 'success');
             return InterviewAddedSuccessfully({interview});
         }),
@@ -66,6 +68,7 @@ export class InterviewEffects {
         tap(u => console.log(u)),
         map((interview: Interview) => {
             console.log(interview);
+            this.interviewService.redirectToInterviewDetails(interview);
             this.sweetAlertService.success('Interview Updated Successfully', '', 'success');
             return InterviewUpdated({interview});
         })

@@ -38,6 +38,8 @@ export class ProductEffects {
                 this.sweetAlertService.success('Bugfix has been Published Successfully', '', 'success');
             }
 
+            this.productService.redirectToProductDetails(product);
+
             // return new ProductAdded(product);
         })
     );
@@ -59,8 +61,10 @@ updateProduct$ = this.actions$.pipe(
             this.sweetAlertService.success('Bugfix changes has been Unpublished Successfully', '', 'success');
         }
 
+        this.productService.redirectToProductDetails(product);
+
         return ProductUpdated({ product });
-    })
+    }),
 );
 
 @Effect()

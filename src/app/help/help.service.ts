@@ -178,7 +178,7 @@ export class HelpService {
     );
   }
 
-  redirectToProductDetails(helpRequest: HelpQuery): void {
+  redirectToHelpRequestDetails(helpRequest: HelpQuery): void {
     this.store.dispatch(SetSelectedHelpRequest({ helpRequest }));
     this.router.navigate(['/', { outlets: { main: ['dashboard', 'help-request-details', helpRequest._id] } }]);
   }

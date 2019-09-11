@@ -19,6 +19,8 @@ export class RequirementEffects {
         map(action => action.requirement),
         switchMap((requirement) => this.requirementService.addRequirement(requirement)),
         map((requirement: Requirement) => {
+
+            this.requirementService.redirectToRequirementDetails(requirement);
             this.sweetAlertService.success('Requirement Added Successfully', '', 'success');
             return RequirementAddedSuccessfully({requirement});
         }),
@@ -68,6 +70,7 @@ export class RequirementEffects {
         tap(u => console.log(u)),
         map((requirement: Requirement) => {
             console.log(requirement);
+            this.requirementService.redirectToRequirementDetails(requirement);
             this.sweetAlertService.success('Requirement Updated Successfully', '', 'success');
             return RequirementUpdated({requirement});
         })

@@ -6,6 +6,10 @@ import { description } from '../shared/constants/fragments_constatnts';
 import { map } from 'rxjs/operators';
 import { Apollo } from 'apollo-angular';
 import { AuthService } from '../core/services/auth.service';
+import { SetSelectedInterview } from '../core/store/actions/interview.actions';
+import { Store } from '@ngrx/store';
+import { AppState } from '../core/store/state/app.state';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -47,7 +51,9 @@ export class InterviewService {
 
   constructor(
     private apollo: Apollo,
-    private auth: AuthService
+    private auth: AuthService,
+    private store: Store<AppState>,
+    private router: Router
   ) { }
 
 
@@ -173,5 +179,10 @@ export class InterviewService {
         return p.data.deleteInterview;
       }),
     );
+  }
+
+  redirectToInterviewDetails(interview: Interview): void {
+    this.store.dispatch(SetSelectedInterview({ interview }));
+    this.router.navigate(['/', { outlets: { main: ['dashboard', 'interview-details', interview._id] } }]);
   }
 }

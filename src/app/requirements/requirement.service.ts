@@ -6,6 +6,10 @@ import gql from 'graphql-tag';
 import { description } from '../shared/constants/fragments_constatnts';
 import { map } from 'rxjs/operators';
 import { AuthService } from '../core/services/auth.service';
+import { SetSelectedRequirement } from '../core/store/actions/requirement.actions';
+import { Store } from '@ngrx/store';
+import { Router } from '@angular/router';
+import { AppState } from '../core/store/state/app.state';
 
 @Injectable({
   providedIn: 'root'
@@ -48,7 +52,9 @@ export class RequirementService {
 
   constructor(
     private apollo: Apollo,
-    private auth: AuthService
+    private auth: AuthService,
+    private store: Store<AppState>,
+    private router: Router
   ) { }
 
 
@@ -174,5 +180,10 @@ export class RequirementService {
         return p.data.deleteRequirement;
       }),
     );
+  }
+
+  redirectToRequirementDetails(requirement: Requirement): void {
+    this.store.dispatch(SetSelectedRequirement({ requirement }));
+    this.router.navigate(['/', { outlets: { main: ['dashboard', 'interview-details', requirement._id] } }]);
   }
 }

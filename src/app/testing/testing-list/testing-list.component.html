@@ -1,0 +1,62 @@
+<table mat-table [dataSource]="dataSource" matSort multiTemplateDataRows class="mat-elevation-z8">
+        <!-- Position Column -->
+        <ng-container matColumnDef="number">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
+            <td mat-cell *matCellDef="let testing; let i = dataIndex;">{{i + 1}} </td>
+            <!-- <mat-cell *matCellDef="let testing; let i = dataIndex;">{{i + 1}}</mat-cell> -->
+        </ng-container>
+    
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+            <td mat-cell (click)="redirectToTestingDetails(testing)" *matCellDef="let testing"> {{testing.name}} </td>
+        </ng-container>
+    
+        <!-- Price Column -->
+        <ng-container matColumnDef="price">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Price </th>
+            <td mat-cell *matCellDef="let testing"> {{testing.price}} </td>
+        </ng-container>
+    
+        <!-- Action Column -->
+        <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+            <td mat-cell *matCellDef="let testing" (click)="$event.stopPropagation()">
+                <button mat-mini-fab color="primary" (click)="editTesting(testing)"
+                    [routerLink]="['/', {outlets: {'main': ['testing', 'edit-testing', testing._id]}}]">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-mini-fab color="warn" (click)="deleteTesting(testing._id)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+    
+    
+        <!-- Status Column -->
+        <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+            <td mat-cell *matCellDef="let testing"> {{testing.status}} </td>
+        </ng-container>
+    
+        <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+        <ng-container matColumnDef="expandedDetail">
+            <td mat-cell *matCellDef="let testing; let i = index;" [attr.colspan]="displayedColumns?.length">
+                <div class="example-testing-detail" [@detailExpand]="testing == expandedTesting ? 'expanded' : 'collapsed'">
+                    <div class="example-testing-description">
+                        <app-editor *ngIf="testing.description && testing == expandedTesting" [readOnly]="true" [data]="testing?.description" [id]="testing?._id"></app-editor>
+                        <!-- <quill-view *ngIf="testing.description; else noDescription;" [modules]="modules"
+                                [content]="testing.description" format="text" theme="snow"></quill-view> -->
+                        <!-- {{testing.description}} -->
+                    </div>
+                </div>
+            </td>
+        </ng-container>
+    
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let testing; columns: displayedColumns; let i = dataIndex;" class="example-testing-row"
+            [class.example-expanded-row]="expandedTesting === testing">
+            <!-- (click)="expandedTesting = expandedTesting === testing ? null : testing" -->
+        </tr>
+        <tr mat-row *matRowDef="let row; columns: ['expandedDetail']; let i = dataIndex;" class="example-detail-row"></tr>
+    </table>

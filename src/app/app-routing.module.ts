@@ -55,6 +55,21 @@ const routes: Routes = [
     outlet: 'main',
     canLoad: [AuthGuard]
   },
+
+  {
+    path: 'testing',
+    loadChildren: () => import('./testing/testing.module').then(module => module.TestingModule),
+    outlet: 'main',
+    canLoad: [AuthGuard]
+  },
+
+  {
+    path: 'howtodoc',
+    loadChildren: () => import('./howtodoc/howtodoc.module').then(module => module.HowtodocModule),
+    outlet: 'main',
+    canLoad: [AuthGuard]
+  },
+
   {
     path: 'cart',
     loadChildren: () => import('./cart/cart.module').then(module => module.CartModule),

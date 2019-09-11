@@ -7,6 +7,8 @@ import { helpReducers } from './help.reducers';
 import { cartReducers } from './cart.reducers';
 import { interviewReducers } from './interview.reducers';
 import { requirementReducers } from './requirement.reducers';
+import { testingReducers } from './testing.reducers';
+import { howtodocReducers } from './howtodoc.reducers';
 
 export function appReducesrs(): ActionReducerMap<AppState, any> {
     return {
@@ -16,7 +18,9 @@ export function appReducesrs(): ActionReducerMap<AppState, any> {
         queries: helpReducers,
         cart: cartReducers,
         interview: interviewReducers,
-        requirement: requirementReducers
+        requirement: requirementReducers,
+        testing: testingReducers,
+        howtodoc: howtodocReducers
     };
 }
 

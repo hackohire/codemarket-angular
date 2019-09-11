@@ -167,6 +167,67 @@
 
                 <div class="col-lg-4">
                     <aside class="sidebar sidebar--single-product">
+
+
+                        <div class="author-card sidebar-card " *ngIf="product?.createdBy?.name">
+                            <div class="card-title">
+                                <h4>Author Information</h4>
+                            </div>
+
+                            <div class="author-infos">
+                                <div class="author_avatar">
+                                    <img [src]="product?.createdBy?.avatar ? ((codemarketBucketURL + product.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                                        alt="Presenting the broken author avatar :D">
+                                </div>
+
+                                <div class="author">
+                                    <a
+                                        [routerLink]="['/', {outlets: {'main': ['dashboard', 'profile', product?.createdBy?._id ]}}]">
+                                        <h4>{{product?.createdBy?.name}}</h4>
+                                    </a>
+
+                                    <!-- <p>Signed Up: 08 April 2016</p> -->
+                                </div>
+                                <!-- end /.author -->
+
+                                <!-- <div class="social social--color--filled">
+                                            <ul>
+                                                <li>
+                                                    <a href="#">
+                                                        <span class="fab fa-facebook fa-lg"></span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <span class="fab fa-github fa-lg"></span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <span class="fab fa-linkedin fa-lg"></span>
+                                                    </a>
+                                                <li>
+                                                    <a href="#">
+                                                        <i class="fab fa-stack-overflow"></i>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div> -->
+                                <!-- end /.social -->
+
+                                <!-- <div class="author-btn">
+                                            <a href="#" class="btn btn--sm btn--round">View Profile</a>
+                                            <a href="#" class="btn btn--sm btn--round">Message</a>
+                                        </div> -->
+                                <!-- end /.author-btn -->
+                            </div>
+                            <!-- end /.author-infos -->
+
+
+                        </div>
+                        <!-- end /.author-card -->
+
+
                         <div class="sidebar-card card-pricing card--pricing2">
                             <div class="price">
                                 <h1>
@@ -230,94 +291,39 @@
                         <div class="author-card sidebar-card ">
                             <div class="card-title">
                                 <h4>Share:</h4>
-                                <br/>
+                                <br />
                                 <div class="social social--color--filled">
-                                        <ul>
-                                            <li>
-                                                <button mat-fab shareButton="facebook"
-                                                    [style.backgroundColor]="share?.prop?.facebook.color">
-                                                    <fa-icon [icon]="share?.prop?.facebook.icon" size="lg"></fa-icon>
-                                                </button>
-                                            </li>
-                                            <li>
-                                                <button mat-fab shareButton="twitter"
-                                                    [style.backgroundColor]="share?.prop?.twitter.color">
-                                                    <fa-icon [icon]="share?.prop?.twitter.icon" size="lg"></fa-icon>
-                                                </button>
-                                            </li>
-                                            <li>
-                                                <button mat-fab shareButton="linkedin"
-                                                    [style.backgroundColor]="share?.prop?.linkedin.color">
-                                                    <fa-icon [icon]="share?.prop?.linkedin.icon" size="lg"></fa-icon>
-                                                </button>
-                                            <li>
-                                                <button mat-fab shareButton="whatsapp"
-                                                    [style.backgroundColor]="share?.prop?.whatsapp.color">
-                                                    <fa-icon [icon]="share?.prop?.whatsapp.icon" size="lg"></fa-icon>
-                                                </button>
-                                            </li>
-                                        </ul>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="author-card sidebar-card " *ngIf="product?.createdBy?.name">
-                            <div class="card-title">
-                                <h4>Author Information</h4>
-                            </div>
-
-                            <div class="author-infos">
-                                <div class="author_avatar">
-                                    <img [src]="product?.createdBy?.avatar ? ((codemarketBucketURL + product.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar"
-                                        alt="Presenting the broken author avatar :D">
-                                </div>
-
-                                <div class="author">
-                                    <a [routerLink]="['/', {outlets: {'main': ['dashboard', 'profile', product?.createdBy?._id ]}}]">
-                                        <h4>{{product?.createdBy?.name}}</h4>
-                                    </a>
-                                    
-                                    <!-- <p>Signed Up: 08 April 2016</p> -->
-                                </div>
-                                <!-- end /.author -->
-
-                                <!-- <div class="social social--color--filled">
                                     <ul>
                                         <li>
-                                            <a href="#">
-                                                <span class="fab fa-facebook fa-lg"></span>
-                                            </a>
+                                            <button mat-fab shareButton="facebook"
+                                                [style.backgroundColor]="share?.prop?.facebook.color">
+                                                <fa-icon [icon]="share?.prop?.facebook.icon" size="lg"></fa-icon>
+                                            </button>
                                         </li>
                                         <li>
-                                            <a href="#">
-                                                <span class="fab fa-github fa-lg"></span>
-                                            </a>
+                                            <button mat-fab shareButton="twitter"
+                                                [style.backgroundColor]="share?.prop?.twitter.color">
+                                                <fa-icon [icon]="share?.prop?.twitter.icon" size="lg"></fa-icon>
+                                            </button>
                                         </li>
                                         <li>
-                                            <a href="#">
-                                                <span class="fab fa-linkedin fa-lg"></span>
-                                            </a>
+                                            <button mat-fab shareButton="linkedin"
+                                                [style.backgroundColor]="share?.prop?.linkedin.color">
+                                                <fa-icon [icon]="share?.prop?.linkedin.icon" size="lg"></fa-icon>
+                                            </button>
                                         <li>
-                                            <a href="#">
-                                                <i class="fab fa-stack-overflow"></i>
-                                            </a>
+                                            <button mat-fab shareButton="whatsapp"
+                                                [style.backgroundColor]="share?.prop?.whatsapp.color">
+                                                <fa-icon [icon]="share?.prop?.whatsapp.icon" size="lg"></fa-icon>
+                                            </button>
                                         </li>
                                     </ul>
-                                </div> -->
-                                <!-- end /.social -->
-
-                                <!-- <div class="author-btn">
-                                    <a href="#" class="btn btn--sm btn--round">View Profile</a>
-                                    <a href="#" class="btn btn--sm btn--round">Message</a>
-                                </div> -->
-                                <!-- end /.author-btn -->
+                                </div>
                             </div>
-                            <!-- end /.author-infos -->
-
 
                         </div>
-                        <!-- end /.author-card -->
+
+
                     </aside>
                     <!-- end /.aside -->
                 </div>

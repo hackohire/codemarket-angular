@@ -184,6 +184,6 @@ export class RequirementService {
 
   redirectToRequirementDetails(requirement: Requirement): void {
     this.store.dispatch(SetSelectedRequirement({ requirement }));
-    this.router.navigate(['/', { outlets: { main: ['dashboard', 'interview-details', requirement._id] } }]);
+    this.router.navigate(['/', { outlets: { main: ['dashboard', 'requirement-details', requirement._id] } }]);
   }
 }

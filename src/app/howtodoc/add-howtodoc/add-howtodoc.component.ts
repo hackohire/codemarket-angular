@@ -76,14 +76,14 @@ export class AddHowtodocComponent implements OnInit {
     private formService: FormService
   ) {
     this.breadcumb = {
-      title: 'Add How To Doc Details',
+      title: 'Add How-To-Guide Details',
       path: [
         {
           name: 'Dashboard',
           pathString: '/'
         },
         {
-          name: 'Add Howtodoc'
+          name: 'Add How-To-Guide'
         }
       ]
     };

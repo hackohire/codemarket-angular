@@ -12,11 +12,11 @@ export class TestingComponent implements OnInit {
     this.navLinks = [
       {
         path: 'testing-list',
-        label: 'Testing List'
+        label: 'Testing Report List'
       },
       {
         path: 'add-testing',
-        label: 'Add Testing'
+        label: 'Add Testing Report'
       }
     ];
   }

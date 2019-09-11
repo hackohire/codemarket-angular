@@ -12,11 +12,11 @@ export class HowtodocComponent implements OnInit {
     this.navLinks = [
       {
         path: 'howtodoc-list',
-        label: 'How to doc List'
+        label: 'How-to-Guide List'
       },
       {
         path: 'add-howtodoc',
-        label: 'Add How to doc'
+        label: 'Add How-to-Guide'
       }
     ];
   }

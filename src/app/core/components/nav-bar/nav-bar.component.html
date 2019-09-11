@@ -22,8 +22,8 @@
 
       <a mat-list-item [routerLink]="[{outlets: {'main': ['requirement']}}]">My Requirements</a>
 
-      <a mat-list-item [routerLink]="[{outlets: {'main': ['testing']}}]">My Testings</a>
-      <a mat-list-item [routerLink]="[{outlets: {'main': ['howtodoc']}}]">My How To Docs</a>
+      <a mat-list-item [routerLink]="[{outlets: {'main': ['testing']}}]">My Testing Reports</a>
+      <a mat-list-item [routerLink]="[{outlets: {'main': ['howtodoc']}}]">My How-To-Guides</a>
     </mat-nav-list>
   </mat-sidenav>
 
@@ -82,7 +82,7 @@
         <button mat-menu-item [routerLink]="[{outlets: {'main': ['testing', 'add-testing']}}]">
           <!-- <mat-icon>notifications_off</mat-icon> -->
           <i style="font-size: 1.7rem !important;" class="vertical-align-middle fal fa-tasks fa-fw"></i>
-          <span> Testing</span>
+          <span> Testing Report</span>
         </button>
 
 
@@ -90,7 +90,7 @@
         <button mat-menu-item [routerLink]="[{outlets: {'main': ['howtodoc', 'add-howtodoc']}}]">
           <!-- <mat-icon>notifications_off</mat-icon> -->
           <i style="font-size: 1.7rem !important;" class="vertical-align-middle fal fa-file-exclamation fa-fw"></i>
-          <span> How To Doc</span>
+          <span> How-To-Guide</span>
         </button>
       </mat-menu>
 

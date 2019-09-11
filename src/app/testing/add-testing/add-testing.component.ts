@@ -83,7 +83,7 @@ export class AddTestingComponent implements OnInit {
           pathString: '/'
         },
         {
-          name: 'Add Testing'
+          name: 'Add Testing Report'
         }
       ]
     };

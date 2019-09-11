@@ -1,4 +1,4 @@
-import { Howtodoc } from 'src/app/shared/models/Howtodoc.model';
+import { Howtodoc } from 'src/app/shared/models/howtodoc.model';
 
 export interface HowtodocState {
     howtodocs: Howtodoc[];

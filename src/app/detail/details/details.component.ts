@@ -20,10 +20,10 @@ import { AuthService } from 'src/app/core/services/auth.service';
 import { CommentService } from 'src/app/shared/services/comment.service';
 import { environment } from 'src/environments/environment';
 import { ShareService } from '@ngx-share/core';
-import { Testing } from 'src/app/shared/models/Testing.model';
+import { Testing } from 'src/app/shared/models/testing.model';
 import { GetTestingById } from 'src/app/core/store/actions/testing.actions';
 import { selectSelectedTesting } from 'src/app/core/store/selectors/testing.selectors';
-import { Howtodoc } from 'src/app/shared/models/Howtodoc.model';
+import { Howtodoc } from 'src/app/shared/models/howtodoc.model';
 import { selectSelectedHowtodoc } from 'src/app/core/store/selectors/howtodoc.selectors';
 import { GetHowtodocById } from 'src/app/core/store/actions/howtodoc.actions';
 

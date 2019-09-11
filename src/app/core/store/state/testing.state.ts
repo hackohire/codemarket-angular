@@ -1,4 +1,4 @@
-import { Testing } from 'src/app/shared/models/Testing.model';
+import { Testing } from 'src/app/shared/models/testing.model';
 
 export interface TestingState {
     testings: Testing[];

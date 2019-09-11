@@ -21,6 +21,9 @@
 
 
       <a mat-list-item [routerLink]="[{outlets: {'main': ['requirement']}}]">My Requirements</a>
+
+      <a mat-list-item [routerLink]="[{outlets: {'main': ['testing']}}]">My Testings</a>
+      <a mat-list-item [routerLink]="[{outlets: {'main': ['howtodoc']}}]">My How To Docs</a>
     </mat-nav-list>
   </mat-sidenav>
 
@@ -74,18 +77,35 @@
           <i style="font-size: 1.7rem !important;" class="vertical-align-middle fal fa-file-alt fa-fw"></i>
           <span> Requirements</span>
         </button>
+
+        <!-- Add Testings -->
+        <button mat-menu-item [routerLink]="[{outlets: {'main': ['testing', 'add-testing']}}]">
+          <!-- <mat-icon>notifications_off</mat-icon> -->
+          <i style="font-size: 1.7rem !important;" class="vertical-align-middle fal fa-tasks fa-fw"></i>
+          <span> Testing</span>
+        </button>
+
+
+        <!-- Add How To Docs -->
+        <button mat-menu-item [routerLink]="[{outlets: {'main': ['howtodoc', 'add-howtodoc']}}]">
+          <!-- <mat-icon>notifications_off</mat-icon> -->
+          <i style="font-size: 1.7rem !important;" class="vertical-align-middle fal fa-file-exclamation fa-fw"></i>
+          <span> How To Doc</span>
+        </button>
       </mat-menu>
 
       <!-- All Bugfixes -->
-      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', {outlets: {'main': ['dashboard', 'bugfixes-all']}}]">
+      <a mat-button routerLinkActive="mat-primary"
+        [routerLink]="['/', {outlets: {'main': ['dashboard', 'bugfixes-all']}}]">
         <i style="font-size: 1.7rem !important;" class="vertical-align-middle fal fa-lightbulb-dollar fa-fw"></i>
         Bugfixes
       </a>
 
       <!-- All Help Requests -->
-      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', {outlets: {'main': ['dashboard', 'help-requests-all']}}]">
+      <a mat-button routerLinkActive="mat-primary"
+        [routerLink]="['/', {outlets: {'main': ['dashboard', 'help-requests-all']}}]">
         <i style="font-size: 1.7rem !important;" class="vertical-align-middle fal fa-question-circle fa-fw"></i>
-         Help Requests
+        Help Requests
       </a>
 
       <!-- Shopping Cart -->
@@ -95,7 +115,8 @@
       </a>
 
       <!-- My Profile -->
-      <a mat-button routerLinkActive="mat-primary" *ngIf="loggedInUser;" [routerLink]="['/', {outlets: {'main': ['dashboard', 'my-profile']}}]">
+      <a mat-button routerLinkActive="mat-primary" *ngIf="loggedInUser;"
+        [routerLink]="['/', {outlets: {'main': ['dashboard', 'my-profile']}}]">
         <mat-icon>face</mat-icon> My Profile
       </a>
 

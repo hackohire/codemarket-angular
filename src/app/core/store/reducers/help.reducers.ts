@@ -4,9 +4,9 @@ import { createReducer, on, Action } from '@ngrx/store';
 
 export const helpReducers = createReducer(
     initialHelpState,
-    on(QueryAddedSuccessfully, (state, {query}) => ({
+    on(QueryAddedSuccessfully, (state, {helpRequest}) => ({
         ...state,
-        selectedQuery: query
+        selectedQuery: helpRequest
     })),
 
     on(HelpRequestList, (state, {helpRequest}) => ({

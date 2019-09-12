@@ -32,7 +32,8 @@ export const InterviewAddedSuccessfully = createAction(
 
 
 export const GetInterviewsByUserId = createAction(
-    EInterviewActions.GetInterviewsByUserId
+    EInterviewActions.GetInterviewsByUserId,
+    props<{userId: string, status: string}>()
 );
 
 export const GetInterviewById = createAction(

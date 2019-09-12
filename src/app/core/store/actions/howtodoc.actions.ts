@@ -32,7 +32,8 @@ export const HowtodocAddedSuccessfully = createAction(
 
 
 export const GetHowtodocsByUserId = createAction(
-    EHowtodocActions.GetHowtodocsByUserId
+    EHowtodocActions.GetHowtodocsByUserId,
+    props<{userId: string, status: string}>()
 );
 
 export const GetHowtodocById = createAction(

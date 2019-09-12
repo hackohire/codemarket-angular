@@ -55,19 +55,20 @@ export class HowtodocService {
   ) { }
 
 
-  getHowtodocsByUserId(): Observable<Howtodoc[]> {
+  getHowtodocsByUserId(userId: string, status: string): Observable<Howtodoc[]> {
     return this.apollo.query(
       {
         query: gql`
-          query getHowtodocsByUserId($userId: String) {
-            getHowtodocsByUserId(userId: $userId) {
+          query getHowtodocsByUserId($userId: String, $status: String) {
+            getHowtodocsByUserId(userId: $userId, status: $status) {
               ...Howtodoc
             }
           }
           ${this.howtodocQueryFields}
         `,
         variables: {
-          userId: this.auth.loggedInUser._id
+          userId: userId,
+status: status
         },
         fetchPolicy:  'no-cache'
       }

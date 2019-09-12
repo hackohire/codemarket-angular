@@ -22,18 +22,18 @@ export enum EHelpRequestActions {
 
 export const AddQuery = createAction(
     EHelpRequestActions.AddQuery,
-    props<{query: HelpQuery}>()
+    props<{helpRequest: HelpQuery}>()
 );
 
 export const QueryAddedSuccessfully = createAction(
     EHelpRequestActions.QueryAddedSuccessfully,
-    props<{query: HelpQuery}>()
+    props<{helpRequest: HelpQuery}>()
 );
 
 
 export const GetHelpRequestsByUserId = createAction(
     EHelpRequestActions.GetHelpRequestsByUserId,
-    props<{userId: string}>()
+    props<{userId: string, status: string}>()
 );
 
 export const GetHelpRequestById = createAction(

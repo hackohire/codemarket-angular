@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output, Input, OnDestroy, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input, OnDestroy, OnChanges, SimpleChanges, ViewChild, ElementRef } from '@angular/core';
 import EditorJS from '@editorjs/editorjs';
 import Header from '@editorjs/header';
 import ImageTool from '@editorjs/image';
@@ -25,6 +25,7 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges {
   @Input() readOnly = false;
   @Input() data: [];
   @Output() output: EventEmitter<any> = new EventEmitter();
+  @ViewChild('editorRef', { static: false }) editorRef: ElementRef;
 
 
   constructor(
@@ -102,7 +103,11 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges {
         },
         image: {
           class: ImageTool,
+          toolbox: {
+            title: 'Media'
+          },
           config: {
+            buttonContent: 'Select A Media File(Image / GIF / Video)',
             uploader: {
               /**
                * Upload file to the server and return an uploaded image data
@@ -152,24 +157,37 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges {
       onReady: (() => {
 
         // Get all the code elements from DOM and highlight them as code snippets using highlight.js
-        document.querySelectorAll('pre code').forEach((block: HTMLElement) => {
-          this._hljs.highlightBlock(block);
-        });
+        if (this.editorRef.nativeElement) {
+          this.editorRef.nativeElement.querySelectorAll('pre code').forEach((block: HTMLElement) => {
+            this._hljs.highlightBlock(block);
+          });
+        }
+
+        this.addControlsIfVideoElement();
       }),
       onChange: (() => {
         this.editor.save().then((outputData) => {
           console.log(outputData);
           this.output.emit([...outputData.blocks]);
-          // this.askForHelpForm.get('description').setValue(outputData.blocks, { emitEvent: false });
         }).catch((error) => {
           console.log('Saving failed: ', error);
         });
-        // }
+
+        this.addControlsIfVideoElement();
       })
 
     });
   }
 
-  
+  // When User will upload / load a video, this method will set an attribute "controls" to show video controls
+  addControlsIfVideoElement() {
+    if (this.editorRef.nativeElement) {
+      this.editorRef.nativeElement.querySelectorAll('video').forEach((v: HTMLVideoElement) => {
+        if (!v.hasAttribute('controls')) {
+          v.setAttribute('controls', '');
+        }
+      });
+    }
+  }
 
 }

@@ -5,10 +5,11 @@ import { AppState } from '../state/app.state';
 import { AddPrdouct, GetProductsByUserId, ProductList, UpdatePrdouct, ProductUpdated, GetProductById, SetSelectedProduct, GetAllProducts, SetAllProductsList, DeleteProduct } from '../actions/product.actions';
 import { map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 import { SellingProductsService } from 'src/app/selling/selling-products.service';
-import { Product, ProductStatus } from 'src/app/shared/models/product.model';
+import { Product } from 'src/app/shared/models/product.model';
 import { SweetalertService } from 'src/app/shared/services/sweetalert.service';
 import { ProductService } from '../../services/product.service';
 import { selectProductsList } from '../selectors/product.selectors';
+import { PostStatus } from 'src/app/shared/models/poststatus.enum';
 
 @Injectable()
 export class ProductEffects {
@@ -30,11 +31,11 @@ export class ProductEffects {
         tap((product: Product) => {
             console.log(product);
 
-            if (product && product.status === ProductStatus.Drafted) {
+            if (product && product.status === PostStatus.Drafted) {
                 this.sweetAlertService.success('Bugfix has been Drafted Successfully', '', 'success');
             }
 
-            if (product && product.status === ProductStatus.Published) {
+            if (product && product.status === PostStatus.Published) {
                 this.sweetAlertService.success('Bugfix has been Published Successfully', '', 'success');
             }
 
@@ -53,11 +54,11 @@ updateProduct$ = this.actions$.pipe(
     map((product: Product) => {
         console.log(product);
 
-        if (product && product.status === ProductStatus.Published) {
+        if (product && product.status === PostStatus.Published) {
             this.sweetAlertService.success('Bugfix changes has been Published Successfully', '', 'success');
         }
 
-        if (product && product.status === ProductStatus.Unpublished) {
+        if (product && product.status === PostStatus.Unpublished) {
             this.sweetAlertService.success('Bugfix changes has been Unpublished Successfully', '', 'success');
         }
 

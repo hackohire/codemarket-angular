@@ -8,6 +8,7 @@ import { SweetalertService } from 'src/app/shared/services/sweetalert.service';
 import { Store } from '@ngrx/store';
 import { AppState } from '../state/app.state';
 import { selectQueries } from '../selectors/help.selectors';
+import { PostStatus } from 'src/app/shared/models/poststatus.enum';
 
 @Injectable()
 export class HelpEffects {
@@ -15,12 +16,20 @@ export class HelpEffects {
     @Effect()
     addQuery$ = this.actions$.pipe(
         ofType(AddQuery),
-        map(action => action.query),
-        switchMap((query) => this.helpService.addQuery(query)),
-        map((query: HelpQuery) => {
-            this.sweetAlertService.success('Help Request Added Successfully', '', 'success');
-            this.helpService.redirectToHelpRequestDetails(query);
-            return QueryAddedSuccessfully({query});
+        map(action => action.helpRequest),
+        switchMap((helpRequest) => this.helpService.addQuery(helpRequest)),
+        map((helpRequest: HelpQuery) => {
+
+            if (helpRequest && helpRequest.status === PostStatus.Drafted) {
+                this.sweetAlertService.success('Help Request has been Drafted Successfully', '', 'success');
+            }
+
+            if (helpRequest && helpRequest.status === PostStatus.Published) {
+                this.sweetAlertService.success('Help Request has been Published Successfully', '', 'success');
+            }
+
+            this.helpService.redirectToHelpRequestDetails(helpRequest);
+            return QueryAddedSuccessfully({helpRequest});
         }),
     );
 
@@ -28,8 +37,7 @@ export class HelpEffects {
     @Effect()
     getHelpRequestsByUserId$ = this.actions$.pipe(
         ofType(GetHelpRequestsByUserId),
-        map((value) => value.userId),
-        switchMap((userId: string) => this.helpService.getHelpRequestsByUserId(userId)),
+        switchMap((value) => this.helpService.getHelpRequestsByUserId(value.userId, value.status)),
         tap(u => console.log(u)),
         map((helpRequest: HelpQuery[]) => {
             console.log(helpRequest);
@@ -69,8 +77,18 @@ export class HelpEffects {
         tap(u => console.log(u)),
         map((helpRequest: HelpQuery) => {
             console.log(helpRequest);
+
+            
+            if (helpRequest && helpRequest.status === PostStatus.Published) {
+                this.sweetAlertService.success('Help Request changes has been Published Successfully', '', 'success');
+            }
+    
+            if (helpRequest && helpRequest.status === PostStatus.Unpublished) {
+                this.sweetAlertService.success('Help Request changes has been Unpublished Successfully', '', 'success');
+            }
+
+
             this.helpService.redirectToHelpRequestDetails(helpRequest);
-            this.sweetAlertService.success('HelpRequest Updated Successfully', '', 'success');
             return HelpRequestUpdated({helpRequest});
         })
     );

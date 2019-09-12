@@ -8,6 +8,7 @@ import { Howtodoc } from 'src/app/shared/models/howtodoc.model';
 import { selectHowtodocsList } from '../selectors/howtodoc.selectors';
 import { Store } from '@ngrx/store';
 import { AppState } from '../state/app.state';
+import { PostStatus } from 'src/app/shared/models/poststatus.enum';
 
 @Injectable()
 export class HowtodocEffects {
@@ -19,8 +20,15 @@ export class HowtodocEffects {
         switchMap((howtodoc) => this.howtodocService.addHowtodoc(howtodoc)),
         map((howtodoc: Howtodoc) => {
 
+            if (howtodoc && howtodoc.status === PostStatus.Drafted) {
+                this.sweetAlertService.success('How-To-Guide has been Drafted Successfully', '', 'success');
+            }
+
+            if (howtodoc && howtodoc.status === PostStatus.Published) {
+                this.sweetAlertService.success('How-To-Guide has been Published Successfully', '', 'success');
+            }
+
             this.howtodocService.redirectToHowtodocDetails(howtodoc);
-            this.sweetAlertService.success('Howtodoc Added Successfully', '', 'success');
             return HowtodocAddedSuccessfully({howtodoc});
         }),
     );
@@ -28,7 +36,7 @@ export class HowtodocEffects {
     @Effect()
     getHowtodocsByUserId$ = this.actions$.pipe(
         ofType(GetHowtodocsByUserId),
-        switchMap(() => this.howtodocService.getHowtodocsByUserId()),
+        switchMap((value) => this.howtodocService.getHowtodocsByUserId(value.userId, value.status)),
         tap(u => console.log(u)),
         map((howtodoc: Howtodoc[]) => {
             console.log(howtodoc);
@@ -67,9 +75,16 @@ export class HowtodocEffects {
         switchMap((howtodoc) => this.howtodocService.updateHowtodoc(howtodoc)),
         tap(u => console.log(u)),
         map((howtodoc: Howtodoc) => {
-            console.log(howtodoc);
+  
+            if (howtodoc && howtodoc.status === PostStatus.Published) {
+                this.sweetAlertService.success('How-To-Guide changes has been Published Successfully', '', 'success');
+            }
+    
+            if (howtodoc && howtodoc.status === PostStatus.Unpublished) {
+                this.sweetAlertService.success('How-To-Guide changes has been Unpublished Successfully', '', 'success');
+            }
+            
             this.howtodocService.redirectToHowtodocDetails(howtodoc);
-            this.sweetAlertService.success('Howtodoc Updated Successfully', '', 'success');
             return HowtodocUpdated({howtodoc});
         })
     );

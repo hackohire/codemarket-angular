@@ -8,6 +8,7 @@ import { Testing } from 'src/app/shared/models/testing.model';
 import { selectTestingsList } from '../selectors/testing.selectors';
 import { Store } from '@ngrx/store';
 import { AppState } from '../state/app.state';
+import { PostStatus } from 'src/app/shared/models/poststatus.enum';
 
 @Injectable()
 export class TestingEffects {
@@ -19,8 +20,16 @@ export class TestingEffects {
         switchMap((testing) => this.testingService.addTesting(testing)),
         map((testing: Testing) => {
 
+            if (testing && testing.status === PostStatus.Drafted) {
+                this.sweetAlertService.success('Testing Report has been Drafted Successfully', '', 'success');
+            }
+
+            if (testing && testing.status === PostStatus.Published) {
+                this.sweetAlertService.success('Testing Report has been Published Successfully', '', 'success');
+            }
+
             this.testingService.redirectToTestingDetails(testing);
-            this.sweetAlertService.success('Testing Added Successfully', '', 'success');
+
             return TestingAddedSuccessfully({testing});
         }),
     );
@@ -28,7 +37,7 @@ export class TestingEffects {
     @Effect()
     getTestingsByUserId$ = this.actions$.pipe(
         ofType(GetTestingsByUserId),
-        switchMap(() => this.testingService.getTestingsByUserId()),
+        switchMap((value) => this.testingService.getTestingsByUserId(value.userId, value.status)),
         tap(u => console.log(u)),
         map((testing: Testing[]) => {
             console.log(testing);
@@ -68,8 +77,17 @@ export class TestingEffects {
         tap(u => console.log(u)),
         map((testing: Testing) => {
             console.log(testing);
+
+
+            if (testing && testing.status === PostStatus.Published) {
+                this.sweetAlertService.success('Testing Report changes has been Published Successfully', '', 'success');
+            }
+    
+            if (testing && testing.status === PostStatus.Unpublished) {
+                this.sweetAlertService.success('Testing Report changes has been Unpublished Successfully', '', 'success');
+            }
+
             this.testingService.redirectToTestingDetails(testing);
-            this.sweetAlertService.success('Testing Updated Successfully', '', 'success');
             return TestingUpdated({testing});
         })
     );

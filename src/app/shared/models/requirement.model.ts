@@ -1,6 +1,7 @@
 import { User } from './user.model';
 import { BlockToolData } from '@editorjs/editorjs';
 import { Tag } from './product.model';
+import { PostStatus } from './poststatus.enum';
 
 interface Files {
     file: string;
@@ -22,7 +23,7 @@ export interface Requirement {
     }];
     price: number;
     _id?: string;
-    status: RequirementStatus;
+    status: PostStatus;
     createdBy: User;
     createdAt: string;
     updatedAt: string;
@@ -37,14 +38,3 @@ export interface Requirement {
     // files: [Files];
 }
 
-export enum RequirementStatus {
-    Created = 'Created',
-    Submitted = 'Submitted',
-    Approved = 'Approved',
-    Rejected = 'Rejected',
-    Archieved = 'Archieved',
-    Deleted = 'Deleted',
-    Published = 'Published',
-    Unpublished = 'Unpublished',
-    Resolved = 'Resolved'
-}

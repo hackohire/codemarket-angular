@@ -1,6 +1,7 @@
 import { User } from './user.model';
 import { BlockToolData } from '@editorjs/editorjs';
 import { Tag } from './product.model';
+import { PostStatus } from './poststatus.enum';
 
 interface Support {
     time: number;
@@ -17,24 +18,11 @@ export interface Howtodoc {
     }];
     price: number;
     _id?: string;
-    status: HowtodocStatus;
+    status: PostStatus;
     createdBy: User;
     createdAt: string;
     updatedAt: string;
     categories?: [];
     tags: Tag[];
     support: Support;
-}
-
-export enum HowtodocStatus {
-    Created = 'Created',
-    Submitted = 'Submitted',
-    Drafted = 'Drafted',
-    Approved = 'Approved',
-    Rejected = 'Rejected',
-    Archieved = 'Archieved',
-    Deleted = 'Deleted',
-    Published = 'Published',
-    Unpublished = 'Unpublished',
-    Resolved = 'Resolved'
 }

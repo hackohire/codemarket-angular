@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { BreadCumb } from 'src/app/shared/models/bredcumb.model';
 import { FormGroup, FormControl, Validators, FormArray, FormBuilder } from '@angular/forms';
-import { RequirementStatus, Requirement } from 'src/app/shared/models/requirement.model';
+import { Requirement } from 'src/app/shared/models/requirement.model';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/core/store/state/app.state';
@@ -15,6 +15,7 @@ import { selectSelectedRequirement } from 'src/app/core/store/selectors/requirem
 import { FormService } from 'src/app/shared/services/form.service';
 import { Tag } from 'src/app/shared/models/product.model';
 import { MatAutocomplete } from '@angular/material';
+import { PostStatus } from 'src/app/shared/models/poststatus.enum';
 
 @Component({
   selector: 'app-add-requirements',
@@ -58,6 +59,10 @@ export class AddRequirementsComponent implements OnInit {
 
   get tagsFormControl() {
     return this.requirementForm.get('tags') as FormArray;
+  }
+
+  get statusFormControl() {
+    return this.requirementForm.get('status');
   }
 
   searchText = new FormControl();
@@ -137,7 +142,7 @@ export class AddRequirementsComponent implements OnInit {
       // demo_url: new FormControl(r && r.demo_url ? r.demo_url : '', [Validators.pattern(this.urlRegex)]),
       // documentation_url: new FormControl('', [Validators.pattern(this.urlRegex)]),
       // video_url: new FormControl('', [Validators.pattern(this.urlRegex)]),
-      status: new FormControl(RequirementStatus.Created),
+      status: new FormControl(r && r.status ? r.status : PostStatus.Drafted),
       _id: new FormControl(r && r._id ? r._id : ''),
       tags: this.fb.array(r && r.tags && r.tags.length ? r.tags : []),
       support: new FormGroup({
@@ -164,7 +169,9 @@ export class AddRequirementsComponent implements OnInit {
     return this.allTags.filter(tag => tag.name.toLowerCase().indexOf(filterValue) === 0);
   }
 
-  submit() {
+  submit(status) {
+
+    this.statusFormControl.setValue(status);
 
     if (!this.supportDescriptionFormControl.value) {
       this.supportDescriptionFormControl.setValue([]);

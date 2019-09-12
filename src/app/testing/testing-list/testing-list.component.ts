@@ -48,7 +48,7 @@ export class TestingListComponent implements OnInit, OnDestroy {
     this.userSubsription = this.authService.loggedInUser$.pipe(
       map((u) => {
         if (u) {
-          this.store.dispatch(GetTestingsByUserId());
+          this.store.dispatch(GetTestingsByUserId({ userId: u._id, status: ''}));
         }
       })
     ).subscribe();

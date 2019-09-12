@@ -48,7 +48,7 @@ export class InterviewListComponent implements OnInit, OnDestroy {
     this.userSubsription = this.authService.loggedInUser$.pipe(
       map((u) => {
         if (u) {
-          this.store.dispatch(GetInterviewsByUserId());
+          this.store.dispatch(GetInterviewsByUserId({ userId: u._id, status: ''}));
         }
       })
     ).subscribe();

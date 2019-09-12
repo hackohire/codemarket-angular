@@ -2,6 +2,7 @@ import { User } from './user.model';
 import { HighlightResult } from 'ngx-highlightjs';
 import { BlockToolData } from '@editorjs/editorjs';
 import { Tag } from './product.model';
+import { PostStatus } from './poststatus.enum';
 
 interface Files {
     file: string;
@@ -24,7 +25,7 @@ export interface HelpQuery {
     }];
     price: number;
     _id?: string;
-    status: HelpQueryStatus;
+    status: PostStatus;
     createdBy: User;
     createdAt: string;
     updatedAt: string;
@@ -37,16 +38,4 @@ export interface HelpQuery {
     files?: [Files];
     tags?: Tag[];
     support?: Support;
-}
-
-export enum HelpQueryStatus {
-    Created = 'Created',
-    Submitted = 'Submitted',
-    Approved = 'Approved',
-    Rejected = 'Rejected',
-    Archieved = 'Archieved',
-    Deleted = 'Deleted',
-    Published = 'Published',
-    Unpublished = 'Unpublished',
-    Resolved = 'Resolved'
 }

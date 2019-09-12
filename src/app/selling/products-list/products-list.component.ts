@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { GetProductsByUserId, SetSelectedProduct, DeleteProduct, GetAllProducts } from 'src/app/core/store/actions/product.actions';
 import { AppState } from 'src/app/core/store/state/app.state';
 import { MatTableDataSource, MatSort } from '@angular/material';
-import { Product, ProductStatus } from 'src/app/shared/models/product.model';
+import { Product } from 'src/app/shared/models/product.model';
 import { selectProductsList, selectAllProductsList } from 'src/app/core/store/selectors/product.selectors';
 import { Subscription } from 'rxjs';
 import { trigger, state, style, transition, animate } from '@angular/animations';
@@ -12,6 +12,7 @@ import { map } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from 'src/app/core/services/product.service';
 import { BreadCumb } from 'src/app/shared/models/bredcumb.model';
+import { PostStatus } from 'src/app/shared/models/poststatus.enum';
 
 @Component({
   selector: 'app-products-list',
@@ -83,7 +84,7 @@ export class ProductsListComponent implements OnInit, OnDestroy {
       // If authorId is there, User is visiting somebody else's profile so we don't show action buttons
       if (this.authorId) {
         this.displayedColumns = ['number', 'name', 'price'];
-        status = ProductStatus.Published;
+        status = PostStatus.Published;
       } else {
         this.displayedColumns = ['number', 'name', 'price', 'status', 'action'];
       }

@@ -8,13 +8,14 @@ import { AuthService } from 'src/app/core/services/auth.service';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription, of, Observable } from 'rxjs';
-import { HelpQuery, HelpQueryStatus } from 'src/app/shared/models/help-query.model';
+import { Subscription, of } from 'rxjs';
+import { HelpQuery } from 'src/app/shared/models/help-query.model';
 import { tap, switchMap, startWith, map } from 'rxjs/operators';
 import { selectSelectedQuery } from 'src/app/core/store/selectors/help.selectors';
 import { FormService } from 'src/app/shared/services/form.service';
 import { Tag } from 'src/app/shared/models/product.model';
 import { MatAutocomplete } from '@angular/material';
+import { PostStatus } from 'src/app/shared/models/poststatus.enum';
 
 @Component({
   selector: 'app-askforhelp',
@@ -65,6 +66,10 @@ export class AskforhelpComponent implements OnInit {
 
   get supportDescriptionFormControl() {
     return this.askForHelpForm.get('support').get('description');
+  }
+
+  get statusFormControl() {
+    return this.askForHelpForm.get('status');
   }
 
   constructor(
@@ -138,7 +143,7 @@ export class AskforhelpComponent implements OnInit {
       // demo_url: new FormControl(h && h.demo_url ? h.demo_url : '', [Validators.pattern(this.urlRegex)]),
       // documentation_url: new FormControl('', [Validators.pattern(this.urlRegex)]),
       // video_url: new FormControl('', [Validators.pattern(this.urlRegex)]),
-      status: new FormControl(HelpQueryStatus.Created),
+      status: new FormControl(h && h.status ? h.status : PostStatus.Drafted),
       _id: new FormControl(h && h._id ? h._id : ''),
       tags: this.fb.array(h && h.tags && h.tags.length ? h.tags : []),
       support: new FormGroup({
@@ -164,8 +169,8 @@ export class AskforhelpComponent implements OnInit {
     const filterValue = value && value.name ? value.name.toLowerCase() : value.toLowerCase();
     return this.allTags.filter(tag => tag.name.toLowerCase().indexOf(filterValue) === 0);
   }
-  
-  submit() {
+
+  submit(status) {
     // console.log(this.askForHelpForm.value);
 
     /* Identify the programming language based on code snippets  **/
@@ -179,6 +184,7 @@ export class AskforhelpComponent implements OnInit {
     //   this.askForHelpForm.value.snips = snips;
     //   console.log(snips);
     // }
+    this.statusFormControl.setValue(status);
 
     if (!this.supportDescriptionFormControl.value) {
       this.supportDescriptionFormControl.setValue([]);
@@ -194,7 +200,7 @@ export class AskforhelpComponent implements OnInit {
 
     if (this.idFromControl && !this.idFromControl.value) {
       this.askForHelpForm.removeControl('_id');
-      this.store.dispatch(AddQuery({query: this.askForHelpForm.value}));
+      this.store.dispatch(AddQuery({helpRequest: this.askForHelpForm.value}));
     } else {
       this.store.dispatch(UpdateHelpRequest({helpRequest: this.askForHelpForm.value}));
     }

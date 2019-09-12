@@ -3,7 +3,7 @@
 
 <div class="container">
     <div class="row">
-        <div [formGroup]="askForHelpForm" (ngSubmit)="submit()" class="col-md-12 askforhelp-form-area">
+        <div [formGroup]="askForHelpForm" class="col-md-12 askforhelp-form-area">
 
             <mat-form-field class="field-full-width">
                 <input type="text" matInput formControlName="name" placeholder="name">
@@ -102,8 +102,12 @@
 
             <br />
 
-            <button [disabled]="askForHelpForm?.invalid" mat-raised-button (click)="submit()" color="primary">Submit
-                Query</button>
+            <div fxLayout="row" fxLayoutGap="10px">
+                <button *ngIf="statusFormControl?.value !== 'Published'" type="button" (click)="submit('Drafted')" [disabled]="askForHelpForm?.invalid" mat-raised-button color="primary">Save</button>
+                <button type="button" (click)="submit('Published')" [disabled]="askForHelpForm?.invalid" mat-raised-button color="primary">{{ statusFormControl?.value === 'Published' ? 'Publish Changes' : 'Publish' }}</button>
+                <button *ngIf="statusFormControl?.value === 'Published'" type="button" (click)="submit('Unpublished')" [disabled]="askForHelpForm?.invalid" mat-raised-button color="primary">{{ 'Unpublish' }}</button>
+            </div>
+
         </div>
 
     </div>

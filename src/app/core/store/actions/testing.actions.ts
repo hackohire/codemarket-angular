@@ -32,7 +32,8 @@ export const TestingAddedSuccessfully = createAction(
 
 
 export const GetTestingsByUserId = createAction(
-    ETestingActions.GetTestingsByUserId
+    ETestingActions.GetTestingsByUserId,
+    props<{userId: string, status: string}>()
 );
 
 export const GetTestingById = createAction(

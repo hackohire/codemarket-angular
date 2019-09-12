@@ -55,19 +55,20 @@ export class TestingService {
   ) { }
 
 
-  getTestingsByUserId(): Observable<Testing[]> {
+  getTestingsByUserId(userId: string, status: string): Observable<Testing[]> {
     return this.apollo.query(
       {
         query: gql`
-          query getTestingsByUserId($userId: String) {
-            getTestingsByUserId(userId: $userId) {
+          query getTestingsByUserId($userId: String, $status: String) {
+            getTestingsByUserId(userId: $userId, status: $status) {
               ...Testing
             }
           }
           ${this.testingQueryFields}
         `,
         variables: {
-          userId: this.auth.loggedInUser._id
+          userId: userId,
+status: status
         },
         fetchPolicy:  'no-cache'
       }

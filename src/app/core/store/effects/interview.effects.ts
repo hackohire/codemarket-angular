@@ -8,6 +8,7 @@ import { Interview } from 'src/app/shared/models/interview.model';
 import { selectInterviewsList } from '../selectors/interview.selectors';
 import { Store } from '@ngrx/store';
 import { AppState } from '../state/app.state';
+import { PostStatus } from 'src/app/shared/models/poststatus.enum';
 
 @Injectable()
 export class InterviewEffects {
@@ -19,8 +20,15 @@ export class InterviewEffects {
         switchMap((interview) => this.interviewService.addInterview(interview)),
         map((interview: Interview) => {
 
+            if (interview && interview.status === PostStatus.Drafted) {
+                this.sweetAlertService.success('Interview has been Drafted Successfully', '', 'success');
+            }
+
+            if (interview && interview.status === PostStatus.Published) {
+                this.sweetAlertService.success('Interview has been Published Successfully', '', 'success');
+            }
+
             this.interviewService.redirectToInterviewDetails(interview);
-            this.sweetAlertService.success('Interview Added Successfully', '', 'success');
             return InterviewAddedSuccessfully({interview});
         }),
     );
@@ -28,7 +36,7 @@ export class InterviewEffects {
     @Effect()
     getInterviewsByUserId$ = this.actions$.pipe(
         ofType(GetInterviewsByUserId),
-        switchMap(() => this.interviewService.getInterviewsByUserId()),
+        switchMap((value) => this.interviewService.getInterviewsByUserId(value.userId, value.status)),
         tap(u => console.log(u)),
         map((interview: Interview[]) => {
             console.log(interview);
@@ -68,8 +76,16 @@ export class InterviewEffects {
         tap(u => console.log(u)),
         map((interview: Interview) => {
             console.log(interview);
+
+            if (interview && interview.status === PostStatus.Published) {
+                this.sweetAlertService.success('Interview changes has been Published Successfully', '', 'success');
+            }
+    
+            if (interview && interview.status === PostStatus.Unpublished) {
+                this.sweetAlertService.success('Interview changes has been Unpublished Successfully', '', 'success');
+            }
+
             this.interviewService.redirectToInterviewDetails(interview);
-            this.sweetAlertService.success('Interview Updated Successfully', '', 'success');
             return InterviewUpdated({interview});
         })
     );

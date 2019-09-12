@@ -58,19 +58,20 @@ export class RequirementService {
   ) { }
 
 
-  getRequirementsByUserId(): Observable<Requirement[]> {
+  getRequirementsByUserId(userId: string, status: string): Observable<Requirement[]> {
     return this.apollo.query(
       {
         query: gql`
-          query getRequirementsByUserId($userId: String) {
-            getRequirementsByUserId(userId: $userId) {
+          query getRequirementsByUserId($userId: String, $status: String) {
+            getRequirementsByUserId(userId: $userId, status: $status) {
               ...Requirement
             }
           }
           ${this.requirementQueryFields}
         `,
         variables: {
-          userId: this.auth.loggedInUser._id
+          userId: userId,
+          status: status
         },
         fetchPolicy: 'no-cache'
       }

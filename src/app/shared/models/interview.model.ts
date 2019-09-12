@@ -1,6 +1,7 @@
 import { User } from './user.model';
 import { BlockToolData } from '@editorjs/editorjs';
 import { Tag } from './product.model';
+import { PostStatus } from './poststatus.enum';
 
 interface Files {
     file: string;
@@ -22,7 +23,7 @@ export interface Interview {
     }];
     price: number;
     _id?: string;
-    status: InterviewStatus;
+    status: PostStatus;
     createdBy: User;
     createdAt: string;
     updatedAt: string;
@@ -35,16 +36,4 @@ export interface Interview {
     tags: Tag[];
     support: Support;
     // files: [Files];
-}
-
-export enum InterviewStatus {
-    Created = 'Created',
-    Submitted = 'Submitted',
-    Approved = 'Approved',
-    Rejected = 'Rejected',
-    Archieved = 'Archieved',
-    Deleted = 'Deleted',
-    Published = 'Published',
-    Unpublished = 'Unpublished',
-    Resolved = 'Resolved'
 }

@@ -48,7 +48,7 @@ export class HowtodocListComponent implements OnInit, OnDestroy {
     this.userSubsription = this.authService.loggedInUser$.pipe(
       map((u) => {
         if (u) {
-          this.store.dispatch(GetHowtodocsByUserId());
+          this.store.dispatch(GetHowtodocsByUserId({ userId: u._id, status: ''}));
         }
       })
     ).subscribe();

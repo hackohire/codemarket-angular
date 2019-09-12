@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray, FormBuilder } from '@angular/forms';
-import { ProductStatus, Product, Tag } from 'src/app/shared/models/product.model';
+import { Product, Tag } from 'src/app/shared/models/product.model';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/core/store/state/app.state';
@@ -15,6 +15,7 @@ import { MatChipInputEvent } from '@angular/material/chips';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { FormService } from 'src/app/shared/services/form.service';
 import { MatAutocomplete } from '@angular/material';
+import { PostStatus } from 'src/app/shared/models/poststatus.enum';
 
 @Component({
   selector: 'app-add-products',
@@ -167,7 +168,7 @@ export class AddProductsComponent implements OnInit, OnDestroy {
       // demo_url: new FormControl(p && p.demo_url ? p.demo_url : '', [Validators.pattern(this.urlRegex)]),
       // documentation_url: new FormControl(p && p.documentation_url ? p.documentation_url : '', [Validators.pattern(this.urlRegex)]),
       // video_url: new FormControl(p && p.video_url ? p.video_url : '', [Validators.pattern(this.urlRegex)]),
-      status: new FormControl(p && p.status ? p.status : ProductStatus.Drafted),
+      status: new FormControl(p && p.status ? p.status : PostStatus.Drafted),
       _id: new FormControl(p && p._id ? p._id : ''),
       tags: this.fb.array(p && p.tags && p.tags.length ? p.tags : []),
       // snippets: new FormControl(p && p.snippets && p.snippets.length ? p.snippets : null),

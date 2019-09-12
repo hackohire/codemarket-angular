@@ -1,6 +1,7 @@
 import { User } from './user.model';
 import { HighlightResult } from 'ngx-highlightjs';
 import { BlockToolData } from '@editorjs/editorjs';
+import { PostStatus } from './poststatus.enum';
 
 export interface PriceAndFiles {
     fileName: string;
@@ -38,22 +39,10 @@ export interface Product {
     demo_url?: string;
     documentation_url?: string;
     video_url?: string;
-    status: ProductStatus;
+    status: PostStatus;
     _id?: string;
     // snippets?: [HighlightResult];
     tags: Tag[];
     support: Support;
     // addedToCart?: boolean;
-}
-
-export enum ProductStatus {
-    Created = 'Created',
-    Drafted = 'Drafted',
-    Submitted = 'Submitted',
-    Approved = 'Approved',
-    Rejected = 'Rejected',
-    Archieved = 'Archieved',
-    Deleted = 'Deleted',
-    Published = 'Published',
-    Unpublished = 'Unpublished'
 }

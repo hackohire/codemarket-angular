@@ -57,19 +57,20 @@ export class InterviewService {
   ) { }
 
 
-  getInterviewsByUserId(): Observable<Interview[]> {
+  getInterviewsByUserId(userId: string, status: string): Observable<Interview[]> {
     return this.apollo.query(
       {
         query: gql`
-          query getInterviewsByUserId($userId: String) {
-            getInterviewsByUserId(userId: $userId) {
+          query getInterviewsByUserId($userId: String, $status: String) {
+            getInterviewsByUserId(userId: $userId, status: $status) {
               ...Interview
             }
           }
           ${this.interviewQueryFields}
         `,
         variables: {
-          userId: this.auth.loggedInUser._id
+          userId: userId,
+status: status
         },
         fetchPolicy:  'no-cache'
       }

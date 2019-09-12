@@ -48,7 +48,7 @@ export class RequirementListComponent implements OnInit, OnDestroy {
     this.userSubsription = this.authService.loggedInUser$.pipe(
       map((u) => {
         if (u) {
-          this.store.dispatch(GetRequirementsByUserId());
+          this.store.dispatch(GetRequirementsByUserId({ userId: u._id, status: ''}));
         }
       })
     ).subscribe();

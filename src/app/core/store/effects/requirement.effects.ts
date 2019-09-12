@@ -9,6 +9,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../state/app.state';
 import { selectInterviewsList } from '../selectors/interview.selectors';
 import { selectRequirementsList } from '../selectors/requirement.selectors';
+import { PostStatus } from 'src/app/shared/models/poststatus.enum';
 
 @Injectable()
 export class RequirementEffects {
@@ -20,8 +21,15 @@ export class RequirementEffects {
         switchMap((requirement) => this.requirementService.addRequirement(requirement)),
         map((requirement: Requirement) => {
 
+            if (requirement && requirement.status === PostStatus.Drafted) {
+                this.sweetAlertService.success('Requirement has been Drafted Successfully', '', 'success');
+            }
+
+            if (requirement && requirement.status === PostStatus.Published) {
+                this.sweetAlertService.success('Requirement has been Published Successfully', '', 'success');
+            }
+
             this.requirementService.redirectToRequirementDetails(requirement);
-            this.sweetAlertService.success('Requirement Added Successfully', '', 'success');
             return RequirementAddedSuccessfully({requirement});
         }),
     );
@@ -30,7 +38,7 @@ export class RequirementEffects {
     @Effect()
     getRequirementsByUserId$ = this.actions$.pipe(
         ofType(GetRequirementsByUserId),
-        switchMap(() => this.requirementService.getRequirementsByUserId()),
+        switchMap((value) => this.requirementService.getRequirementsByUserId(value.userId, value.status)),
         tap(u => console.log(u)),
         map((requirement: Requirement[]) => {
             console.log(requirement);
@@ -70,8 +78,17 @@ export class RequirementEffects {
         tap(u => console.log(u)),
         map((requirement: Requirement) => {
             console.log(requirement);
+
+            if (requirement && requirement.status === PostStatus.Published) {
+                this.sweetAlertService.success('Requirement changes has been Published Successfully', '', 'success');
+            }
+    
+            if (requirement && requirement.status === PostStatus.Unpublished) {
+                this.sweetAlertService.success('Requirement changes has been Unpublished Successfully', '', 'success');
+            }
+
+
             this.requirementService.redirectToRequirementDetails(requirement);
-            this.sweetAlertService.success('Requirement Updated Successfully', '', 'success');
             return RequirementUpdated({requirement});
         })
     );

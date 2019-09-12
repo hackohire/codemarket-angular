@@ -14,6 +14,7 @@ import { Router, ActivatedRoute, PRIMARY_OUTLET, UrlSegment } from '@angular/rou
 import { runInThisContext } from 'vm';
 import { HelpService } from '../help.service';
 import { BreadCumb } from 'src/app/shared/models/bredcumb.model';
+import { PostStatus } from 'src/app/shared/models/poststatus.enum';
 
 @Component({
   selector: 'app-help-request-list',
@@ -90,14 +91,17 @@ export class HelpRequestListComponent implements OnInit, OnDestroy {
 
     } else {
 
+      let status = '';
+
       // If authorId is there, User is visiting somebody else's profile so we don't show action buttons
       if (this.authorId) {
         this.displayedColumns = ['number', 'name', 'price'];
+        status = PostStatus.Published;
       } else {
-        this.displayedColumns = ['number', 'name', 'price', 'action'];
+        this.displayedColumns = ['number', 'name', 'price', 'status', 'action'];
       }
 
-      this.store.dispatch(GetHelpRequestsByUserId({userId: (this.authorId ? this.authorId : this.authService.loggedInUser._id) }));
+      this.store.dispatch(GetHelpRequestsByUserId({userId: (this.authorId ? this.authorId : this.authService.loggedInUser._id), status: status }));
 
       this.helpRequestsListSubscription = this.store.select(selectQueries).pipe(
         map((helpRequests) => {

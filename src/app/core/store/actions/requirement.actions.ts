@@ -31,7 +31,8 @@ export const RequirementAddedSuccessfully = createAction(
 
 
 export const GetRequirementsByUserId = createAction(
-    ERequirementActions.GetRequirementsByUserId
+    ERequirementActions.GetRequirementsByUserId,
+    props<{userId: string, status: string}>()
 );
 
 export const GetRequirementById = createAction(

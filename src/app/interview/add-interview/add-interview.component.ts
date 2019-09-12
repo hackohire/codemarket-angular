@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { BreadCumb } from 'src/app/shared/models/bredcumb.model';
 import { FormGroup, FormControl, Validators, FormArray, FormBuilder } from '@angular/forms';
-import { InterviewStatus, Interview } from 'src/app/shared/models/interview.model';
+import { Interview } from 'src/app/shared/models/interview.model';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { AddInterview, UpdateInterview, SetSelectedInterview, GetInterviewById } from 'src/app/core/store/actions/interview.actions';
 import { Store } from '@ngrx/store';
@@ -15,6 +15,7 @@ import { switchMap, tap, startWith, map } from 'rxjs/operators';
 import { FormService } from 'src/app/shared/services/form.service';
 import { Tag } from 'src/app/shared/models/product.model';
 import { MatAutocomplete } from '@angular/material';
+import { PostStatus } from 'src/app/shared/models/poststatus.enum';
 
 
 @Component({
@@ -52,6 +53,10 @@ export class AddInterviewComponent implements OnInit {
 
   get tagsFormControl() {
     return this.interviewForm.get('tags') as FormArray;
+  }
+
+  get statusFormControl() {
+    return this.interviewForm.get('status');
   }
 
   visible = true;
@@ -138,7 +143,7 @@ export class AddInterviewComponent implements OnInit {
       // demo_url: new FormControl(i && i.demo_url ? i.demo_url : '', [Validators.pattern(this.urlRegex)]),
       // documentation_url: new FormControl('', [Validators.pattern(this.urlRegex)]),
       // video_url: new FormControl('', [Validators.pattern(this.urlRegex)]),
-      status: new FormControl(InterviewStatus.Created),
+      status: new FormControl(i && i.status ? i.status : PostStatus.Drafted),
       _id: new FormControl(i && i._id ? i._id : ''),
       tags: this.fb.array(i && i.tags && i.tags.length ? i.tags : []),
       support: new FormGroup({
@@ -165,7 +170,9 @@ export class AddInterviewComponent implements OnInit {
     return this.allTags.filter(tag => tag.name.toLowerCase().indexOf(filterValue) === 0);
   }
 
-  submit() {
+  submit(status) {
+
+    this.statusFormControl.setValue(status);
 
     if (!this.supportDescriptionFormControl.value) {
       this.supportDescriptionFormControl.setValue([]);

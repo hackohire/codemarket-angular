@@ -54,7 +54,11 @@ const dashboardRoutes: Routes = [
   {
     path: 'howtodoc-details/:howtodocId',
     loadChildren: () => import('../detail/detail.module').then(module => module.DetailModule),
-  }
+  },
+  {
+    path: 'design-details/:designId',
+    loadChildren: () => import('../detail/detail.module').then(module => module.DetailModule),
+  },
 ];
 
 

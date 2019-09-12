@@ -26,6 +26,9 @@ import { selectSelectedTesting } from 'src/app/core/store/selectors/testing.sele
 import { Howtodoc } from 'src/app/shared/models/howtodoc.model';
 import { selectSelectedHowtodoc } from 'src/app/core/store/selectors/howtodoc.selectors';
 import { GetHowtodocById } from 'src/app/core/store/actions/howtodoc.actions';
+import { selectSelectedDesign } from 'src/app/core/store/selectors/design.selectors';
+import { Design } from 'src/app/shared/models/design.model';
+import { GetDesignById } from 'src/app/core/store/actions/design.actions';
 
 @Component({
   selector: 'app-details',
@@ -135,6 +138,19 @@ export class DetailsComponent implements OnInit {
           } else {
             this.store.dispatch(GetHowtodocById({ howtodocId: params.howtodocId }));
             this.details$ = this.store.select(selectSelectedHowtodoc);
+          }
+        })
+      ).subscribe();
+    } else if (params['designId']) {
+      this.subscription$ = this.store.select(selectSelectedDesign).pipe(
+        tap((p: Design) => {
+          if (p) {
+            this.details$ = of(p);
+            this.type = 'design';
+            this.initializeCommentForm(p);
+          } else {
+            this.store.dispatch(GetDesignById({ designId: params.designId }));
+            this.details$ = this.store.select(selectSelectedDesign);
           }
         })
       ).subscribe();

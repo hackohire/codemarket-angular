@@ -1,0 +1,112 @@
+<app-breadcumb [title]="breadcumb?.title" [path]="breadcumb?.path"></app-breadcumb>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div [formGroup]="designForm" class="design-form-area">
+                <mat-form-field class="field-full-width">
+                    <input type="text" matInput formControlName="name" placeholder="Name">
+                </mat-form-field>
+
+                <h6>Description:</h6>
+                <br />
+
+                <app-editor *ngIf="descriptionFormControl?.value && edit; else add" (output)="updateFormData($event)"
+                    [data]="descriptionFormControl?.value" [id]="'edit-design-editor'"></app-editor>
+
+
+                <ng-template #add>
+                    <app-editor *ngIf="!edit" (output)="updateFormData($event)" [id]="'design-editor'"></app-editor>
+                </ng-template>
+
+
+
+
+
+                <!-- <mat-form-field class="field-full-width">
+                    <input matInput formControlName="shortDescription" placeholder="Short Description">
+                </mat-form-field> -->
+
+                <mat-form-field class="field-full-width">
+                    <input type="number" matInput formControlName="price" placeholder="price">
+                    <mat-icon matSuffix>monetization_on</mat-icon>
+                </mat-form-field>
+
+                <!-- <mat-form-field class="field-full-width">
+                    <input matInput formControlName="demo_url" placeholder="Demo Url">
+                    <mat-error *ngIf="designForm?.get('demo_url')?.invalid">{{'Please enter a valid URL'}}
+                    </mat-error>
+                </mat-form-field> -->
+
+                <!-- <mat-form-field class="field-full-width">
+                    <input matInput formControlName="documentation_url" placeholder="Documentation Url">
+                    <mat-error *ngIf="designForm?.get('documentation_url')?.invalid">{{'Please enter a valid URL'}}
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="field-full-width">
+                    <input matInput formControlName="video_url" placeholder="Video Url">
+                    <mat-error *ngIf="designForm?.get('video_url')?.invalid">{{'Please enter a valid URL'}}
+                    </mat-error>
+                </mat-form-field> -->
+
+                <mat-form-field class="field-full-width">
+                    <mat-chip-list #tagsList>
+                        <mat-chip *ngFor="let tag of tagsFormControl?.value; let i = index;" [selectable]="selectable"
+                            [removable]="true" (removed)="remove(i)">
+                            {{tag?.name}}
+                            <mat-icon matChipRemove>cancel</mat-icon>
+                        </mat-chip>
+                        <input #searchInput [formControl]="searchText" [matAutocomplete]="auto"
+                            placeholder="Add Programming Language Tags" [matChipInputFor]="tagsList"
+                            [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+                            (matChipInputTokenEnd)="addTech($event)">
+                        <mat-icon matSuffix>code</mat-icon>
+                    </mat-chip-list>
+                    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                        <mat-option *ngFor="let tag of tagSuggestions" [value]="tag">
+                            {{tag?.name}}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+
+
+                <div formGroupName="support">
+                    <mat-form-field class="field-full-width">
+                        <input matInput type="number" formControlName="time" placeholder="Support Time(In Minutes)">
+                        <mat-icon matSuffix>av_timer</mat-icon>
+                    </mat-form-field>
+
+                    <h6>Support Details:
+                        <mat-icon matSuffix class="vertical-align-middle float-right">record_voice_over</mat-icon>
+                        <mat-icon matSuffix class="vertical-align-middle float-right">email</mat-icon>
+                    </h6>
+                    <br />
+
+                    <ng-container *ngIf="supportDescriptionFormControl?.value && edit; else addSupport">
+                        <app-editor [data]="supportDescriptionFormControl?.value"
+                            (output)="updateSupportDescription($event)" [id]="'edit-design-support-editor'">
+                        </app-editor>
+                    </ng-container>
+
+                    <ng-template #addSupport>
+                        <app-editor (output)="updateSupportDescription($event)" [id]="'add-design-support-editor'">
+                        </app-editor>
+                    </ng-template>
+
+                </div>
+
+                <br />
+
+                <div fxLayout="row" fxLayoutGap="10px">
+                    <button *ngIf="statusFormControl?.value !== 'Published'" type="button" (click)="submit('Drafted')" [disabled]="designForm?.invalid" mat-raised-button color="primary">Save</button>
+                    <button type="button" (click)="submit('Published')" [disabled]="designForm?.invalid" mat-raised-button color="primary">{{ statusFormControl?.value === 'Published' ? 'Publish Changes' : 'Publish' }}</button>
+                    <button *ngIf="statusFormControl?.value === 'Published'" type="button" (click)="submit('Unpublished')" [disabled]="designForm?.invalid" mat-raised-button color="primary">{{ 'Unpublish' }}</button>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

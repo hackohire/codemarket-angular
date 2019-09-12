@@ -21,6 +21,7 @@ import { RequirementEffects } from './store/effects/requirement.effects';
 import { AppState } from './store/state/app.state';
 import { TestingEffects } from './store/effects/testing.effects';
 import { HowtodocEffects } from './store/effects/howtodoc.effects';
+import { DesignEffects } from './store/effects/design.effects';
 
 
 // Injected Token for actionreducermap or combinereducers for build error
@@ -55,7 +56,8 @@ export function clearState(reducer) {
         InterviewEffects,
         RequirementEffects,
         TestingEffects,
-        HowtodocEffects
+        HowtodocEffects,
+        DesignEffects
       ]),
     StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
     StoreDevtoolsModule.instrument(),

@@ -120,13 +120,21 @@
                                 </button>
 
 
-                                <!-- Add How To Docs -->
+                                <!-- Add How To Guides -->
                                 <button mat-menu-item
                                     [routerLink]="[{outlets: {'main': ['howtodoc', 'add-howtodoc']}}]">
                                     <!-- <mat-icon>notifications_off</mat-icon> -->
                                     <i style="font-size: 1.7rem !important;"
                                         class="vertical-align-middle fal fa-file-exclamation fa-fw"></i>
                                     <span> How-To-Guide</span>
+                                </button>
+
+                                <!-- Add Designs -->
+                                <button mat-menu-item [routerLink]="[{outlets: {'main': ['design', 'add-design']}}]">
+                                    <!-- <mat-icon>notifications_off</mat-icon> -->
+                                    <i style="font-size: 1.7rem !important;"
+                                        class="vertical-align-middle fal fa-marker fa-fw"></i>
+                                    <span> Design</span>
                                 </button>
                             </mat-menu>
                             <div>

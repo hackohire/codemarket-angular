@@ -1,0 +1,57 @@
+th.mat-sort-header-sorted {
+    color: black;
+  }
+
+
+
+
+
+
+  table {
+    width: 100%;
+  }
+  
+  tr.example-detail-row {
+    height: 0;
+  }
+  
+  tr.example-design-row:not(.example-expanded-row):hover {
+    background: #777;
+  }
+  
+  tr.example-design-row:not(.example-expanded-row):active {
+    background: #efefef;
+  }
+  
+  .example-design-row td {
+    border-bottom-width: 0;
+  }
+  
+  .example-design-detail {
+    overflow: hidden;
+    display: flex;
+  }
+  
+  .example-design-diagram {
+    min-width: 80px;
+    border: 2px solid black;
+    padding: 8px;
+    font-weight: lighter;
+    margin: 8px 0;
+    height: 104px;
+  }
+  
+  .example-design-symbol {
+    font-weight: bold;
+    font-size: 40px;
+    line-height: normal;
+  }
+  
+  .example-design-description {
+    padding: 16px;
+  }
+  
+  .example-design-description-attribution {
+    opacity: 0.5;
+  }
+  

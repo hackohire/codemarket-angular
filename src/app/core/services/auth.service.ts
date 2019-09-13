@@ -152,7 +152,7 @@ export class AuthService {
     return this.loggedInUser$;
   }
 
-  checkIfUserIsLoggedIn(): Promise<boolean> {
+  checkIfUserIsLoggedIn(redirect?: boolean): Promise<boolean> {
     return Auth.currentAuthenticatedUser().then((u: CognitoUser) => {
       console.log(u);
       if (!this.loggedInUser) {
@@ -169,6 +169,10 @@ export class AuthService {
         console.log(r);
         localStorage.clear();
         this.store.dispatch(SetLoggedInUser({payload: null}));
+
+        if (redirect) {
+          this.login();
+        }
         return false;
       });
     });

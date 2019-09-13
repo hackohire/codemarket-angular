@@ -4,6 +4,7 @@ import { User } from '../shared/models/user.model';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { map } from 'rxjs/operators';
+import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
@@ -38,7 +39,8 @@ export class UserService {
   }`;
 
   constructor(
-    private apollo: Apollo
+    private apollo: Apollo,
+    private router: Router
   ) { }
 
   createUser(user): Observable<any> {
@@ -101,5 +103,9 @@ export class UserService {
         return d.data.getUserById;
       })
     );
+  }
+
+  redirectToUserProfile(user: User) {
+    this.router.navigate(['/', { outlets: { main: ['dashboard', 'profile', user._id] } }]);
   }
 }

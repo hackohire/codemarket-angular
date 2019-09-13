@@ -33,6 +33,8 @@ export class ProductDetailsComponent implements OnInit {
     syntax: true,
   };
 
+  likeCount: number;
+
   anonymousAvatar = require('src/assets/images/anonymous-avatar.jpg');
   codemarketBucketURL = environment.codemarketFilesBucket;
 
@@ -48,7 +50,7 @@ export class ProductDetailsComponent implements OnInit {
     private store: Store<AppState>,
     private activatedRoute: ActivatedRoute,
     public productService: ProductService,
-    private authService: AuthService,
+    public authService: AuthService,
     private commentService: CommentService,
     public share: ShareService
   ) {
@@ -67,6 +69,8 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    const params = this.activatedRoute.snapshot.params;
     this.productDetails$ = this.store.select(selectSelectedProduct);
 
     this.subscription$ = this.store.select(selectSelectedProduct).pipe(
@@ -85,8 +89,9 @@ export class ProductDetailsComponent implements OnInit {
             })
           ).subscribe();
         } else {
-          const params = this.activatedRoute.snapshot.params;
+
           if (params['productId']) {
+            // console.log(this.authService.loggedInUser._id);
             this.store.dispatch(GetProductById({ productId: params.productId }));
           }
         }

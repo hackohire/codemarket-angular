@@ -42,6 +42,23 @@
                                         </li>
                                     </ul>
                                 </div>
+
+
+
+                                <ul class="infos">
+                                    <li>
+                                        <span class="data-label">Likes: </span>
+                                        <span class="info" *ngIf="authService?.loggedInUser; else likeCount">
+                                            <app-like-dislike [data]="user" [type]="'user'" [likeCount]="null">
+                                            </app-like-dislike>
+                                        </span>
+                                        <ng-template #likeCount>
+                                            <div class="info">
+                                                {{user?.likeCount}}
+                                            </div>
+                                        </ng-template>
+                                    </li>
+                                </ul>
                                 <!-- end /.social -->
 
                                 <!-- <div class="author-btn">
@@ -49,6 +66,7 @@
                                     </div> -->
                                 <!-- end /.author-btn -->
                             </div>
+
                             <!-- end /.author-infos -->
 
 

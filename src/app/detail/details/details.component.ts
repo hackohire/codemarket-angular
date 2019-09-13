@@ -42,7 +42,7 @@ export class DetailsComponent implements OnInit {
   subscription$: Subscription;
   type: string; // product | help-request | interview | requirement | Testing | Howtodoc
   commentsList: any[];
-
+  likeCount: number;
   anonymousAvatar = require('src/assets/images/anonymous-avatar.jpg');
   codemarketBucketURL = environment.codemarketFilesBucket;
 
@@ -54,7 +54,7 @@ export class DetailsComponent implements OnInit {
     private store: Store<AppState>,
     private activatedRoute: ActivatedRoute,
     private commentService: CommentService,
-    private authService: AuthService,
+    public authService: AuthService,
     public share: ShareService
   ) {
     this.breadcumb = {
@@ -77,7 +77,7 @@ export class DetailsComponent implements OnInit {
         tap((p: HelpQuery) => {
           if (p) {
             this.details$ = of(p);
-            this.type = 'help-request'
+            this.type = 'help-request';
             this.initializeCommentForm(p);
           } else {
             const params = this.activatedRoute.snapshot.params;

@@ -237,6 +237,18 @@
                             </div>
 
                             <ul class="infos">
+                                <li>
+                                    <p class="data-label">Likes</p>
+                                    <p class="info" *ngIf="authService?.loggedInUser; else likeCount">
+                                        <app-like-dislike [data]="details" [type]="type" [likeCount]="null">
+                                        </app-like-dislike>
+                                    </p>
+                                    <ng-template #likeCount>
+                                        <p class="info">
+                                            {{details?.likeCount}}
+                                        </p>
+                                    </ng-template>
+                                </li>
                                 <li *ngIf="details?.createdAt">
                                     <p class="data-label">Released</p>
                                     <p class="info">{{getDate(details?.createdAt) | date: 'dd/MM/yyyy'}}</p>

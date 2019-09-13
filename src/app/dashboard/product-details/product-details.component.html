@@ -241,9 +241,12 @@
 
                                 <!-- Check if the product is in cart -->
                                 <a *ngIf="!(productService?.checkIfProductIsInCart(product?._id) | async); else productIsInCart"
-                                    class="btn btn--lg btn--round cart-btn" style="padding: 12px;" (click)="addToCart(product)">
+                                    class="btn btn--lg btn--round cart-btn" style="padding: 12px;"
+                                    (click)="addToCart(product)">
                                     <!-- <span class="lnr lnr-cart"></span> -->
-                                    <h5>Book 1-1 with me</h5><h5>3 emails & 15 mins call</h5></a>
+                                    <h5>Book 1-1 with me</h5>
+                                    <h5>3 emails & 15 mins call</h5>
+                                </a>
 
                                 <!-- Show product addedd to cart if product is already in the cart -->
                                 <ng-template #productIsInCart>
@@ -262,6 +265,22 @@
                             </div>
 
                             <ul class="infos">
+                                <li>
+                                    <p class="data-label">Likes</p>
+                                    <p class="info" *ngIf="authService?.loggedInUser; else likeCount">
+                                        <app-like-dislike [data]="product" [type]="'product'" [likeCount]="null">
+                                        </app-like-dislike>
+                                    </p>
+                                    <ng-template #likeCount>
+                                        <p class="info">
+                                            {{product?.likeCount}}
+                                        </p>
+                                    </ng-template>
+                                </li>
+                                <li>
+                                    <p class="data-label">Released</p>
+                                    <p class="info">{{getDate(product?.createdAt) | date: 'dd/MM/yyyy'}}</p>
+                                </li>
                                 <li *ngIf="product?.createdAt">
                                     <p class="data-label">Released</p>
                                     <p class="info">{{getDate(product?.createdAt) | date: 'dd/MM/yyyy'}}</p>

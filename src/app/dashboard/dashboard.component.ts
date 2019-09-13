@@ -11,6 +11,7 @@ import { GetAllHelpRequests } from '../core/store/actions/help.actions';
 import { selectAllHelpRequestsList } from '../core/store/selectors/help.selectors';
 import { MatSort } from '@angular/material';
 import { UserService } from '../user/user.service';
+import { HelpService } from '../help/help.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -29,7 +30,8 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private store: Store<AppState>,
-    private userService: UserService
+    private userService: UserService,
+    private helpService: HelpService,
   ) { }
 
   ngOnInit() {
@@ -38,6 +40,16 @@ export class DashboardComponent implements OnInit {
     this.productsList$ = this.store.select(selectAllProductsList);
     this.helpRequestList$ = this.store.select(selectAllHelpRequestsList);
     this.usersListAndTheirBugFixes$ = this.userService.getUserListWithBugFixesCount();
+  }
+
+  redirectToHelpRequest(event) {
+    console.log(event);
+    this.helpService.redirectToHelpRequestDetails(event);
+  }
+
+  redirectToUserProfile(event) {
+    console.log(event);
+    this.userService.redirectToUserProfile(event);
   }
 
 }

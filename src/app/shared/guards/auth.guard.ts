@@ -12,7 +12,7 @@ export class AuthGuard implements CanLoad {
   ) {}
 
   canLoad() {
-    return this.authService.checkIfUserIsLoggedIn();
+    return this.authService.checkIfUserIsLoggedIn(true);
   }
 
 }

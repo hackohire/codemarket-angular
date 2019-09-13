@@ -35,6 +35,7 @@ export const productConstants = {
                 ...Description
             }
         }
+        likeCount
     }
     ${description}
     `,

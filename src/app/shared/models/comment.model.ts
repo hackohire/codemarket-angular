@@ -1,5 +1,5 @@
 import { BlockTool } from '@editorjs/editorjs';
-import { User } from 'aws-sdk/clients/mq';
+import { User } from './user.model';
 
 export interface Comment {
     _id?: string;

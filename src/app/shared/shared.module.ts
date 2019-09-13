@@ -19,6 +19,7 @@ import { ShareModule } from '@ngx-share/core';
 import { SafePipe } from './pipes/safe.pipe';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import '../../icons';
+import { LikeDislikeComponent } from './components/like-dislike/like-dislike.component';
 
 export function hljsLanguages() {
   return [
@@ -28,7 +29,7 @@ export function hljsLanguages() {
   ];
 }
 @NgModule({
-  declarations: [BreadcumbComponent, EditorComponent, CommentComponent, DatatableComponent, SafePipe],
+  declarations: [BreadcumbComponent, EditorComponent, CommentComponent, DatatableComponent, SafePipe, LikeDislikeComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -53,6 +54,7 @@ export function hljsLanguages() {
     EditorComponent,
     CommentComponent,
     DatatableComponent,
+    LikeDislikeComponent,
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,

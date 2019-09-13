@@ -118,7 +118,7 @@ export class ProductService {
   }
 
   redirectToProductDetails(product: Product): void {
-    this.store.dispatch(SetSelectedProduct({ product }));
+    // this.store.dispatch(SetSelectedProduct({ product }));
     this.router.navigate(['/', { outlets: { main: ['dashboard', 'product-details', product._id] } }]);
   }
 
@@ -137,6 +137,53 @@ export class ProductService {
         const productInCart = _.intersectionBy(products, mappedIdsArray, '_id');
         return productInCart && productInCart.length ? productInCart : [];
       })
+    );
+  }
+
+  like(like, liked) {
+    return this.apollo.mutate(
+      {
+        mutation: gql`
+          mutation like($like: LikeInput, $liked: Boolean) {
+            like(like: $like, liked: $liked) {
+              liked
+              likeCount
+            }
+          }
+        `,
+        variables: {
+          like: like,
+          liked: liked
+        }
+      }
+    ).pipe(
+      map((p: any) => {
+        return p.data.like;
+      }),
+    );
+  }
+
+  checkIfUserLikedAndLikeCount(userId, referenceId, type) {
+    return this.apollo.query(
+      {
+        query: gql`
+          query checkIfUserLikedAndLikeCount($userId: String, $referenceId: String, $type: String) {
+            checkIfUserLikedAndLikeCount(userId: $userId, referenceId: $referenceId, type: $type) {
+              liked
+              likeCount
+            }
+          }
+        `,
+        variables: {
+          userId,
+          referenceId,
+          type
+        }
+      }
+    ).pipe(
+      map((p: any) => {
+        return p.data.checkIfUserLikedAndLikeCount;
+      }),
     );
   }
 }

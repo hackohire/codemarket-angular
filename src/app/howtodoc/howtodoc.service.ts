@@ -38,6 +38,7 @@ export class HowtodocService {
         ...Description
       }
     }
+    likeCount
     createdBy {
       _id
       name

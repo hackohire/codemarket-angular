@@ -40,6 +40,7 @@ export class InterviewService {
         ...Description
       }
     }
+    likeCount
     createdBy {
       _id
       name

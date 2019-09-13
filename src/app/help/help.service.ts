@@ -45,6 +45,7 @@ export class HelpService {
         ...Description
       }
     }
+    likeCount
   }
   ${description}
   `;

@@ -38,6 +38,7 @@ export class DesignService {
         ...Description
       }
     }
+    likeCount
     createdBy {
       _id
       name

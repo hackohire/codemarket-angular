@@ -38,6 +38,7 @@ export class TestingService {
         ...Description
       }
     }
+    likeCount
     createdBy {
       _id
       name

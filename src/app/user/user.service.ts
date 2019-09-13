@@ -26,6 +26,7 @@ export class UserService {
     avatar
     roles
     createdAt
+    likeCount
   `
 
   updateUserQuery = gql`

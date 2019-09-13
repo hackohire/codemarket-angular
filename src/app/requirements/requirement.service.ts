@@ -40,6 +40,7 @@ export class RequirementService {
         ...Description
       }
     }
+    likeCount
     createdBy {
       _id
       name

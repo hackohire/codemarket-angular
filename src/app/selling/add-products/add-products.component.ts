@@ -162,7 +162,8 @@ export class AddProductsComponent implements OnInit, OnDestroy {
       name: new FormControl(p && p.name ? p.name : '', Validators.required),
       description: new FormControl(p && p.description ? p.description : ''),
       // shortDescription: new FormControl(p && p.shortDescription ? p.shortDescription : ''),
-      createdBy: new FormControl(p && p.createdBy && p.createdBy._id ? p.createdBy._id : ''),
+      createdBy: new FormControl(p && p.createdBy && p.createdBy._id ? p.createdBy._id :
+        (this.auth.loggedInUser ? this.auth.loggedInUser._id : '')),
       price: new FormControl(p && p.price ? p.price : 0, Validators.required),
       categories: new FormControl(p && p.categories ? p.categories : []),
       // demo_url: new FormControl(p && p.demo_url ? p.demo_url : '', [Validators.pattern(this.urlRegex)]),

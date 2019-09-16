@@ -21,7 +21,7 @@ export const environment = {
     // 'code' for Authorization code grant,
     // 'token' for Implicit grant
     // Note that REFRESH token will only be generated when the responseType is code
-    responseType: 'token',
+    responseType: 'code',
 
     // optional, for Cognito hosted ui specified options
     options: {

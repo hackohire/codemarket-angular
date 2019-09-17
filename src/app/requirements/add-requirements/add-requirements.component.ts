@@ -16,6 +16,7 @@ import { FormService } from 'src/app/shared/services/form.service';
 import { Tag } from 'src/app/shared/models/product.model';
 import { MatAutocomplete } from '@angular/material';
 import { PostStatus } from 'src/app/shared/models/poststatus.enum';
+import { PostType } from 'src/app/shared/models/post-types.enum';
 
 @Component({
   selector: 'app-add-requirements',
@@ -145,7 +146,8 @@ export class AddRequirementsComponent implements OnInit {
       status: new FormControl(r && r.status ? r.status : PostStatus.Drafted),
       _id: new FormControl(r && r._id ? r._id : ''),
       tags: this.fb.array(r && r.tags && r.tags.length ? r.tags : []),
-      support: new FormGroup({
+      type: new FormControl(PostType.Requirement),
+support: new FormGroup({
         time: new FormControl(r && r.support && r.support.time ? r.support.time : 0),
         description: new FormControl(r && r.support && r.support.description ? r.support.description : '')
       })

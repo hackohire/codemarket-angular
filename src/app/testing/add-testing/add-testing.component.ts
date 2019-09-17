@@ -16,6 +16,7 @@ import { FormService } from 'src/app/shared/services/form.service';
 import { Tag } from 'src/app/shared/models/product.model';
 import { MatAutocomplete } from '@angular/material';
 import { PostStatus } from 'src/app/shared/models/poststatus.enum';
+import { PostType } from 'src/app/shared/models/post-types.enum';
 
 
 @Component({
@@ -70,9 +71,9 @@ export class AddTestingComponent implements OnInit {
   tagSuggestions: Tag[];
   allTags: Tag[];
 
-  @ViewChild('searchInput', {static: false}) searchInput: ElementRef<HTMLInputElement>;
-  @ViewChild('auto', {static: false}) matAutocomplete: MatAutocomplete;
-  
+  @ViewChild('searchInput', { static: false }) searchInput: ElementRef<HTMLInputElement>;
+  @ViewChild('auto', { static: false }) matAutocomplete: MatAutocomplete;
+
   constructor(
     private authService: AuthService,
     private store: Store<AppState>,
@@ -146,6 +147,7 @@ export class AddTestingComponent implements OnInit {
       status: new FormControl(i && i.status ? i.status : PostStatus.Drafted),
       _id: new FormControl(i && i._id ? i._id : ''),
       tags: this.fb.array(i && i.tags && i.tags.length ? i.tags : []),
+      type: new FormControl(PostType.Testing),
       support: new FormGroup({
         time: new FormControl(i && i.support && i.support.time ? i.support.time : 0),
         description: new FormControl(i && i.support && i.support.description ? i.support.description : '')
@@ -188,9 +190,9 @@ export class AddTestingComponent implements OnInit {
 
     if (this.idFromControl && !this.idFromControl.value) {
       this.testingForm.removeControl('_id');
-      this.store.dispatch(AddTesting({testing: this.testingForm.value}));
+      this.store.dispatch(AddTesting({ testing: this.testingForm.value }));
     } else {
-      this.store.dispatch(UpdateTesting({testing: this.testingForm.value}));
+      this.store.dispatch(UpdateTesting({ testing: this.testingForm.value }));
     }
   }
 

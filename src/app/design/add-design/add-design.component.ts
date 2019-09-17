@@ -16,6 +16,7 @@ import { FormService } from 'src/app/shared/services/form.service';
 import { Tag } from 'src/app/shared/models/product.model';
 import { MatAutocomplete } from '@angular/material';
 import { PostStatus } from 'src/app/shared/models/poststatus.enum';
+import { PostType } from 'src/app/shared/models/post-types.enum';
 
 
 @Component({
@@ -146,7 +147,8 @@ export class AddDesignComponent implements OnInit {
       status: new FormControl(i && i.status ? i.status : PostStatus.Drafted),
       _id: new FormControl(i && i._id ? i._id : ''),
       tags: this.fb.array(i && i.tags && i.tags.length ? i.tags : []),
-      support: new FormGroup({
+      type: new FormControl(PostType.Design),
+support: new FormGroup({
         time: new FormControl(i && i.support && i.support.time ? i.support.time : 0),
         description: new FormControl(i && i.support && i.support.description ? i.support.description : '')
       })

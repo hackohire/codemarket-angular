@@ -16,6 +16,7 @@ import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { FormService } from 'src/app/shared/services/form.service';
 import { MatAutocomplete } from '@angular/material';
 import { PostStatus } from 'src/app/shared/models/poststatus.enum';
+import { PostType } from 'src/app/shared/models/post-types.enum';
 
 @Component({
   selector: 'app-add-products',
@@ -174,6 +175,7 @@ export class AddProductsComponent implements OnInit, OnDestroy {
       tags: this.fb.array(p && p.tags && p.tags.length ? p.tags : []),
       // snippets: new FormControl(p && p.snippets && p.snippets.length ? p.snippets : null),
       // priceAndFiles: new FormArray([]),
+      type: new FormControl(PostType.Product),
       support: new FormGroup({
         time: new FormControl(p && p.support && p.support.time ? p.support.time : 0),
         description: new FormControl(p && p.support && p.support.description ? p.support.description : '')

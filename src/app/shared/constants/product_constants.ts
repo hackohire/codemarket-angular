@@ -13,6 +13,7 @@ export const productConstants = {
             avatar
             _id
         }
+        type
         categories
         description {
             ...Description

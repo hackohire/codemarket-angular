@@ -16,6 +16,7 @@ export interface Testing {
         type: string;
         data: BlockToolData
     }];
+    type?: string;
     price: number;
     _id?: string;
     status: PostStatus;

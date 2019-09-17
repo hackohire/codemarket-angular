@@ -16,6 +16,7 @@ import { FormService } from 'src/app/shared/services/form.service';
 import { Tag } from 'src/app/shared/models/product.model';
 import { MatAutocomplete } from '@angular/material';
 import { PostStatus } from 'src/app/shared/models/poststatus.enum';
+import { PostType } from 'src/app/shared/models/post-types.enum';
 
 @Component({
   selector: 'app-askforhelp',
@@ -146,7 +147,8 @@ export class AskforhelpComponent implements OnInit {
       status: new FormControl(h && h.status ? h.status : PostStatus.Drafted),
       _id: new FormControl(h && h._id ? h._id : ''),
       tags: this.fb.array(h && h.tags && h.tags.length ? h.tags : []),
-      support: new FormGroup({
+      type: new FormControl(PostType.HelpRequest),
+support: new FormGroup({
         time: new FormControl(h && h.support && h.support.time ? h.support.time : 0),
         description: new FormControl(h && h.support && h.support.description ? h.support.description : '')
       })

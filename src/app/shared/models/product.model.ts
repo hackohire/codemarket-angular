@@ -30,6 +30,7 @@ export interface Product {
         type: string;
         data: BlockToolData
     }];
+    type?: string;
     shortDescription?: string;
     featuredImage?: string;
     createdBy: User;

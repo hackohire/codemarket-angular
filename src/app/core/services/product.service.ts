@@ -186,4 +186,24 @@ export class ProductService {
       }),
     );
   }
+
+  getAllPosts(): Observable<Product[]> {
+    return this.apollo.query(
+      {
+        query: gql`
+          query getAllPosts {
+            getAllPosts {
+              ...Product
+            }
+          }
+          ${this.productFields}
+        `,
+        fetchPolicy: 'no-cache'
+      }
+    ).pipe(
+      map((p: any) => {
+        return p.data.getAllPosts;
+      }),
+    );
+  }
 }

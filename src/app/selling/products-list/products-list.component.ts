@@ -65,13 +65,11 @@ export class ProductsListComponent implements OnInit, OnDestroy {
 
 
     if (path === 'bugfixes-all') {
-      this.store.dispatch(GetAllProducts());
-
-      this.productsListSubscription = this.store.select(selectAllProductsList).pipe(
-        map((products) => {
-          if (products) {
-            this.dataSource.data = products;
-            this.displayedColumns = ['number', 'name', 'price', 'createdBy', 'category', 'createdAt'];
+      this.productsListSubscription = this.productService.getAllPosts().pipe(
+        map((posts) => {
+          if (posts) {
+            this.dataSource.data = posts;
+            this.displayedColumns = ['number', 'name', 'price', 'createdBy', 'type', 'category', 'createdAt'];
             this.all = true;
           }
         })

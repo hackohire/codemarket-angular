@@ -346,20 +346,23 @@
 
                         <div class="author-card sidebar-card ">
                             <div class="card-title">
-                                <h4>Purchased By:</h4>
+                                <h4>Purchased By: {{ product?.purchasedBy?.length }}</h4>
                                 <br />
 
                                 <ng-container class="row" *ngFor="let pu of product?.purchasedBy">
-                                    <div class="author_avatar_comment">
-                                        <img [src]="pu?.purchasedBy?.avatar ? ((codemarketBucketURL + pu.purchasedBy.avatar) | safe: 'resourceUrl') : anonymousAvatar"
-                                            alt="Presenting the broken author avatar :D">
+                                    <div class="col-md-12" style="margin-bottom: 10px;">
+                                        <div class="author_avatar_comment" style="vertical-align: middle;">
+                                            <img [src]="pu?.purchasedBy?.avatar ? ((codemarketBucketURL + pu.purchasedBy.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                                                alt="Presenting the broken author avatar :D">
+                                        </div>
+                                        <div class="autor__info">
+                                            <p class="name">
+                                                {{pu?.name}}
+                                            </p>
+                                            <p class="ammount">{{fromNow(pu?.createdAt)}}</p>
+                                        </div>
                                     </div>
-                                    <div class="autor__info">
-                                        <p class="name">
-                                            {{pu?.name}}
-                                        </p>
-                                        <p class="ammount">{{pu?.createdAt}}</p>
-                                    </div>
+
                                 </ng-container>
                             </div>
                         </div>

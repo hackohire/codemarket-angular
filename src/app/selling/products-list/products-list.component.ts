@@ -68,7 +68,10 @@ export class ProductsListComponent implements OnInit, OnDestroy {
       this.productsListSubscription = this.productService.getAllPosts().pipe(
         map((posts) => {
           if (posts) {
+            /** Set the data for the datatable  */
             this.dataSource.data = posts;
+
+            /** Set the columns visible in the table */
             this.displayedColumns = ['number', 'name', 'price', 'createdBy', 'type', 'category', 'createdAt'];
             this.all = true;
           }

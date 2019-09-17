@@ -63,6 +63,12 @@ export class ProductService {
           query getProductById($productId: String) {
             getProductById(productId: $productId) {
               ...Product
+              purchasedBy {
+                name
+                _id
+                createdAt
+                avatar
+              }
             }
           }
           ${this.productFields}

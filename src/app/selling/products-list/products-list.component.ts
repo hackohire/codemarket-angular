@@ -154,16 +154,20 @@ export class ProductsListComponent implements OnInit, OnDestroy {
   }
 
   getListOfUsersWhoPurchased(product: Product) {
+    /** If the row is not expanded we expand it otherwise collapse it */
     this.expandedProduct = this.expandedProduct === product ? null : product;
+
+    /** If the row is in expanded mode */
     if (this.expandedProduct === product) {
+      /** we call product service to make the query to backend to fetch the list of user who purchased */
       this.productService.getListOfUsersWhoPurchased(product._id).subscribe((d) => {
         console.log(d);
         this.purchasedBy = d;
       });
     } else {
+      /** Otherwise we set it null */
       this.purchasedBy = null;
     }
-    // return product === this.expandedProduct ? 'expanded' : 'collapsed';
   }
 
   fromNow(date) {

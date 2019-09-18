@@ -219,4 +219,31 @@ export class ProductService {
       }),
     );
   }
+
+
+  /** Get the List of Users who Purchased the Bugfix  */
+  getListOfUsersWhoPurchased(productId: string) {
+    return this.apollo.query(
+      {
+        query: gql`
+          query getListOfUsersWhoPurchased($productId: String) {
+            getListOfUsersWhoPurchased(productId: $productId) {
+              name
+              _id
+              avatar
+              createdAt
+            }
+          }
+        `,
+        variables: {
+          productId: productId
+        },
+        fetchPolicy: 'no-cache'
+      }
+    ).pipe(
+      map((p: any) => {
+        return p.data.getListOfUsersWhoPurchased;
+      }),
+    );
+  }
 }

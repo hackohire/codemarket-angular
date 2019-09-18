@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { Store } from '@ngrx/store';
-import { GetProductsByUserId, SetSelectedProduct, DeleteProduct, GetAllProducts } from 'src/app/core/store/actions/product.actions';
+import { GetProductsByUserId, SetSelectedProduct, DeleteProduct } from 'src/app/core/store/actions/product.actions';
 import { AppState } from 'src/app/core/store/state/app.state';
 import { MatTableDataSource, MatSort } from '@angular/material';
 import { Product } from 'src/app/shared/models/product.model';
-import { selectProductsList, selectAllProductsList } from 'src/app/core/store/selectors/product.selectors';
+import { selectProductsList } from 'src/app/core/store/selectors/product.selectors';
 import { Subscription } from 'rxjs';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { map } from 'rxjs/operators';
@@ -13,6 +13,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from 'src/app/core/services/product.service';
 import { BreadCumb } from 'src/app/shared/models/bredcumb.model';
 import { PostStatus } from 'src/app/shared/models/poststatus.enum';
+import * as moment from 'moment';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-products-list',
@@ -34,12 +36,16 @@ export class ProductsListComponent implements OnInit, OnDestroy {
     syntax: true,
   };
 
+  anonymousAvatar = require('src/assets/images/anonymous-avatar.jpg');
+  codemarketBucketURL = environment.codemarketFilesBucket;
+
   all: boolean;
 
   displayedColumns: string[];
   dataSource = new MatTableDataSource();
   expandedProduct: Product | null;
 
+  purchasedBy;
 
   userSubsription: Subscription;
   productsListSubscription: Subscription;
@@ -145,6 +151,24 @@ export class ProductsListComponent implements OnInit, OnDestroy {
   redirectTo(event) {
     console.log(event);
     this.productService.redirectToPostDetails(event);
+  }
+
+  getListOfUsersWhoPurchased(product: Product) {
+    this.expandedProduct = this.expandedProduct === product ? null : product;
+    if (this.expandedProduct === product) {
+      this.productService.getListOfUsersWhoPurchased(product._id).subscribe((d) => {
+        console.log(d);
+        this.purchasedBy = d;
+      });
+    } else {
+      this.purchasedBy = null;
+    }
+    // return product === this.expandedProduct ? 'expanded' : 'collapsed';
+  }
+
+  fromNow(date) {
+    const d = new Date(+date);
+    return moment(d).fromNow();
   }
 
 }

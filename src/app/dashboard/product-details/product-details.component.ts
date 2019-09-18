@@ -17,7 +17,6 @@ import * as moment from 'moment';
 import { CommentService } from 'src/app/shared/services/comment.service';
 import { environment } from 'src/environments/environment';
 import { ShareService } from '@ngx-share/core';
-import { timingSafeEqual } from 'crypto';
 
 @Component({
   selector: 'app-product-details',

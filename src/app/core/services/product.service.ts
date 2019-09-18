@@ -122,10 +122,17 @@ export class ProductService {
       })
     );
   }
+  
 
   redirectToProductDetails(product: Product): void {
-    // this.store.dispatch(SetSelectedProduct({ product }));
+    this.store.dispatch(SetSelectedProduct({ product }));
     this.router.navigate(['/', { outlets: { main: ['dashboard', 'product-details', product._id] } }]);
+  }
+
+
+  /** Redirect to post details, post canbe of any type */
+  redirectToPostDetails(post: Product) {
+    this.router.navigate(['/', { outlets: { main: ['dashboard', `${post.type}-details`, post._id] } }]);
   }
 
   getProductsInCart(): Observable<Product[]> {

@@ -278,10 +278,6 @@
                                         </p>
                                     </ng-template>
                                 </li>
-                                <li>
-                                    <p class="data-label">Released</p>
-                                    <p class="info">{{getDate(product?.createdAt) | date: 'dd/MM/yyyy'}}</p>
-                                </li>
                                 <li *ngIf="product?.createdAt">
                                     <p class="data-label">Released</p>
                                     <p class="info">{{getDate(product?.createdAt) | date: 'dd/MM/yyyy'}}</p>

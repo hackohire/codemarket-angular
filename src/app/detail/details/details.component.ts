@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable, of, Subscription } from 'rxjs';
 import { HelpQuery } from 'src/app/shared/models/help-query.model';
 import { Requirement } from 'src/app/shared/models/requirement.model';
@@ -6,13 +6,13 @@ import { Interview } from 'src/app/shared/models/interview.model';
 import { AppState } from 'src/app/core/store/state/app.state';
 import { Store } from '@ngrx/store';
 import { tap, switchMap } from 'rxjs/operators';
-import { GetHelpRequestById } from 'src/app/core/store/actions/help.actions';
+import { GetHelpRequestById, SetSelectedHelpRequest } from 'src/app/core/store/actions/help.actions';
 import { ActivatedRoute } from '@angular/router';
 import { selectSelectedQuery } from 'src/app/core/store/selectors/help.selectors';
-import { GetInterviewById } from 'src/app/core/store/actions/interview.actions';
+import { GetInterviewById, SetSelectedInterview } from 'src/app/core/store/actions/interview.actions';
 import { selectSelectedInterview } from 'src/app/core/store/selectors/interview.selectors';
 import { selectSelectedRequirement } from 'src/app/core/store/selectors/requirement.selectors';
-import { GetRequirementById } from 'src/app/core/store/actions/requirement.actions';
+import { GetRequirementById, SetSelectedRequirement } from 'src/app/core/store/actions/requirement.actions';
 import { BreadCumb } from 'src/app/shared/models/bredcumb.model';
 import { FormGroup, FormControl } from '@angular/forms';
 import * as moment from 'moment';
@@ -21,14 +21,14 @@ import { CommentService } from 'src/app/shared/services/comment.service';
 import { environment } from 'src/environments/environment';
 import { ShareService } from '@ngx-share/core';
 import { Testing } from 'src/app/shared/models/testing.model';
-import { GetTestingById } from 'src/app/core/store/actions/testing.actions';
+import { GetTestingById, SetSelectedTesting } from 'src/app/core/store/actions/testing.actions';
 import { selectSelectedTesting } from 'src/app/core/store/selectors/testing.selectors';
 import { Howtodoc } from 'src/app/shared/models/howtodoc.model';
 import { selectSelectedHowtodoc } from 'src/app/core/store/selectors/howtodoc.selectors';
-import { GetHowtodocById } from 'src/app/core/store/actions/howtodoc.actions';
+import { GetHowtodocById, SetSelectedHowtodoc } from 'src/app/core/store/actions/howtodoc.actions';
 import { selectSelectedDesign } from 'src/app/core/store/selectors/design.selectors';
 import { Design } from 'src/app/shared/models/design.model';
-import { GetDesignById } from 'src/app/core/store/actions/design.actions';
+import { GetDesignById, SetSelectedDesign } from 'src/app/core/store/actions/design.actions';
 
 @Component({
   selector: 'app-details',
@@ -36,7 +36,7 @@ import { GetDesignById } from 'src/app/core/store/actions/design.actions';
   styleUrls: ['./details.component.scss'],
   providers: [ShareService]
 })
-export class DetailsComponent implements OnInit {
+export class DetailsComponent implements OnInit, OnDestroy {
 
   details$: Observable<HelpQuery | Requirement | Interview | Testing | Howtodoc>;
   subscription$: Subscription;
@@ -156,8 +156,18 @@ export class DetailsComponent implements OnInit {
       ).subscribe();
     }
 
+  }
 
-
+  ngOnDestroy(): void {
+    if (this.subscription$) {
+      this.subscription$.unsubscribe();
+      this.store.dispatch(SetSelectedRequirement({requirement: null}));
+      this.store.dispatch(SetSelectedHelpRequest({helpRequest: null}));
+      this.store.dispatch(SetSelectedInterview({interview: null}));
+      this.store.dispatch(SetSelectedTesting({testing: null}));
+      this.store.dispatch(SetSelectedDesign({design: null}));
+      this.store.dispatch(SetSelectedHowtodoc({howtodoc: null}));
+    }
   }
 
   initializeCommentForm(p) {

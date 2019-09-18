@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable, Subscription, of } from 'rxjs';
 import { Product } from 'src/app/shared/models/product.model';
 import { Store } from '@ngrx/store';
@@ -6,7 +6,7 @@ import { AppState } from 'src/app/core/store/state/app.state';
 import { selectSelectedProduct } from 'src/app/core/store/selectors/product.selectors';
 import { ActivatedRoute } from '@angular/router';
 import { tap } from 'rxjs/internal/operators/tap';
-import { GetProductById } from 'src/app/core/store/actions/product.actions';
+import { GetProductById, SetSelectedProduct } from 'src/app/core/store/actions/product.actions';
 import { BreadCumb } from 'src/app/shared/models/bredcumb.model';
 import { AddToCart } from 'src/app/core/store/actions/cart.actions';
 import { ProductService } from 'src/app/core/services/product.service';
@@ -17,6 +17,7 @@ import * as moment from 'moment';
 import { CommentService } from 'src/app/shared/services/comment.service';
 import { environment } from 'src/environments/environment';
 import { ShareService } from '@ngx-share/core';
+import { timingSafeEqual } from 'crypto';
 
 @Component({
   selector: 'app-product-details',
@@ -24,7 +25,7 @@ import { ShareService } from '@ngx-share/core';
   styleUrls: ['./product-details.component.scss'],
   providers: [ShareService]
 })
-export class ProductDetailsComponent implements OnInit {
+export class ProductDetailsComponent implements OnInit, OnDestroy {
 
   // modules for quill view component
   modules = {
@@ -68,6 +69,13 @@ export class ProductDetailsComponent implements OnInit {
 
   }
 
+  ngOnDestroy() {
+    if (this.subscription$) {
+      this.subscription$.unsubscribe();
+      this.store.dispatch(SetSelectedProduct({product: null}));
+    }
+  }
+
   ngOnInit() {
 
     const params = this.activatedRoute.snapshot.params;
@@ -95,7 +103,6 @@ export class ProductDetailsComponent implements OnInit {
             this.store.dispatch(GetProductById({ productId: params.productId }));
           }
         }
-
       }),
     ).subscribe();
   }

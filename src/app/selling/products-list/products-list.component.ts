@@ -144,7 +144,7 @@ export class ProductsListComponent implements OnInit, OnDestroy {
 
   redirectTo(event) {
     console.log(event);
-    this.productService.redirectToProductDetails(event);
+    this.productService.redirectToPostDetails(event);
   }
 
 }

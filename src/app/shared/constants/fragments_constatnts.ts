@@ -84,6 +84,20 @@ export const warningFragment = gql`
   }
 `;
 
+export const embedFragment = gql`
+    fragment Embed on EmbedBlock {
+    type
+    data {
+        caption
+        width
+        height
+        service
+        source
+        embed
+    }
+}
+`;
+
 
 export const description = gql`
     fragment Description on descriptionBlocks {
@@ -95,6 +109,7 @@ export const description = gql`
         ...Quote
         ...Table
         ...Warning
+        ...Embed
     }
     ${codeFragment}
     ${imageFragment}
@@ -104,4 +119,5 @@ export const description = gql`
     ${quoteFragment}
     ${tableFragment}
     ${warningFragment}
+    ${embedFragment}
 `;

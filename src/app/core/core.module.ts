@@ -130,7 +130,8 @@ export class CoreModule {
                     { name: 'ListBlock' },
                     { name: 'QuoteBlock' },
                     { name: 'TableBlock' },
-                    { name: 'WarningBlock' }
+                    { name: 'WarningBlock' },
+                    { name: 'EmbedBlock' }
                   ],
                 },
               ],

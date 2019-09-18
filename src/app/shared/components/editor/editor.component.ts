@@ -6,6 +6,7 @@ import List from '@editorjs/list';
 import Marker from '@editorjs/marker';
 import Quote from '@editorjs/quote';
 import Table from '@editorjs/table';
+import Embed from '@editorjs/embed';
 import Warning from '@editorjs/warning';
 import { Storage } from 'aws-amplify';
 import { environment } from 'src/environments/environment';
@@ -70,6 +71,11 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges {
     this.editor = new EditorJS({
       tools: {
         header: Header,
+        /** Config Editor.js For Embedding Youtube Videos and Codepen and etc */
+        embed: {
+          class: Embed,
+          inlineToolbar: true
+        },
         warning: {
           class: Warning,
           inlineToolbar: true,

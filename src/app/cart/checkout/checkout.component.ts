@@ -23,11 +23,12 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   breadcumb: BreadCumb;
   cartProductsList: Product[];
   @ViewChild('paypal', { static: false }) paypalElement: ElementRef;
-  @ViewChild('successfulPayment', {static: false}) successfulPayment: SwalComponent;
+  @ViewChild('successfulPayment', { static: false }) successfulPayment: SwalComponent;
   successfulPurchasedProducts = [];
   subscription: Subscription;
 
   products: any[];
+  items: any[];
 
   constructor(
     private store: Store<AppState>,
@@ -41,38 +42,46 @@ export class CheckoutComponent implements OnInit, OnDestroy {
       tap((pList: Product[]) => {
         this.cartProductsList = [...pList];
 
-        this.products = pList.map((prod) => {
+
+        this.items = pList.map((prod) => {
           const p: any = {};
-          p.description = prod.name;
+          p.name = prod.name;
           p.reference_id = prod._id;
-          p.amount = {
+          p.unit_amount = {
             currency_code: 'INR',
             value: prod.price
           };
+          p.quantity = 1;
           return p;
         });
+
+        let c = 0;
+        this.items.forEach((p) => c += p.unit_amount.value);
+
+        this.products = [{
+          description: 'ABC',
+          reference_id: 'DEF',
+          amount: {
+            currency_code: 'INR',
+            value: c.toFixed(2),
+            breakdown: {
+              currency_code: 'INR',
+              value: c.toFixed(2),
+              item_total: {
+                value: c.toFixed(2),
+                currency_code: 'INR'
+              },
+            },
+
+          },
+          value: c.toFixed(2).toString(),
+          items: this.items
+        }];
 
         this.createPaypalButton();
       })
     ).subscribe();
 
-    // this.subscription = this.productService.cartProductList.subscribe((pList: Product[]) => {
-
-    //   this.cartProductsList = [...pList];
-
-    //   this.products = pList.map((prod) => {
-    //     const p: any = {};
-    //     p.description = prod.name;
-    //     p.reference_id = prod._id;
-    //     p.amount = {
-    //       currency_code: 'INR',
-    //       value: prod.price
-    //     };
-
-    //     return p;
-    //   });
-    //   this.createPaypalButton();
-    // });
 
     this.breadcumb = {
       title: 'Please Make the Payment to Purchase These Amazing Products',
@@ -107,9 +116,21 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     transaction.purchase_id = transaction.id;
     transaction.purchasedBy = loggedInUserId;
 
-    transaction.purchase_units = transaction.purchase_units.map((u) => {
-      u.purchasedBy = loggedInUserId;
-      return u;
+    transaction.purchase_units = this.items.map((u, i) => {
+      const a: any = {};
+      a.description = u.description;
+      a.amount = {
+        currency_code : u.unit_amount.currency_code,
+        value: u.unit_amount.value.toString()
+      };
+      a.purchasedBy = loggedInUserId;
+      a.description = u.name;
+      a.payee = transaction.purchase_units[0].payee;
+      a.reference_id = u.reference_id;
+      a.payments = transaction.purchase_units[0].payments;
+      a.shipping = transaction.purchase_units[0].shipping;
+      a.soft_descriptor = transaction.purchase_units[0].soft_descriptor;
+      return a;
     });
 
     this.sellingService.addTransaction(transaction).pipe(

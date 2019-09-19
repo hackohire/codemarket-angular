@@ -11,6 +11,43 @@
 html, body { height: 100%; }
 body { margin: 0; }
 
+.image-zoom {
+/**adjust scale to desired size, 
+add browser prefixes**/
+-ms-transform: scale(1.5);    
+-moz-transform: scale(1.5);  
+-webkit-transform: scale(1.5);  
+-o-transform: scale(1.5);  
+transform: scale(1.5);    
+position: absolute;;      
+z-index:100; 
+}
+
+/** CSS for the Parent Elemets of the img in editor */
+
+.lightbox {
+	display: block;
+	position: fixed;
+	z-index: 999;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	top: 0;
+	left: 0;
+	background: rgba(0,0,0,0.8);
+}
+
+/** CSS for all img in Ediotr */
+
+.lightbox-img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: auto;
+  margin-bottom: auto;
+  padding-top: 100px;
+}
+
 mat-icon, a {
   cursor: pointer;
 }
@@ -9118,9 +9155,9 @@ span.counter {
   margin-bottom: 62px;
 }
 
-#product-details img {
-  margin-bottom: 65px;
-}
+// #product-details img {
+//   margin-bottom: 65px;
+// }
 
 #product-details h2 {
   font-size: 24px;

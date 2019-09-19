@@ -56,6 +56,7 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges {
     if (this.editor) {
       // this.editor.destroy();
     }
+    this.editorRef.nativeElement
   }
 
   handleEnterKeyPress(e: Event) {
@@ -170,6 +171,7 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges {
         }
 
         this.addControlsIfVideoElement();
+        this.zoomInZoomOutForImages();
       }),
       onChange: (() => {
         this.editor.save().then((outputData) => {
@@ -185,13 +187,27 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges {
     });
   }
 
-  // When User will upload / load a video, this method will set an attribute "controls" to show video controls
+  /** When User will upload / load a video, this method will set an attribute "controls" to show video controls */
   addControlsIfVideoElement() {
     if (this.editorRef.nativeElement) {
       this.editorRef.nativeElement.querySelectorAll('video').forEach((v: HTMLVideoElement) => {
         if (!v.hasAttribute('controls')) {
           v.setAttribute('controls', '');
         }
+      });
+    }
+  }
+
+  /** On click on every image of the editor zoom in */
+  zoomInZoomOutForImages() {
+    if (this.editorRef) {
+      this.editorRef.nativeElement.querySelectorAll('img').forEach((v: HTMLImageElement) => {
+        v.style.cursor = 'zoom-in';
+        v.onclick = (a) => {
+          console.log(a);
+          v.parentElement.classList.toggle('lightbox');
+          v.classList.toggle('lightbox-img');
+        };
       });
     }
   }

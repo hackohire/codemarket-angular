@@ -15,17 +15,6 @@ body { margin: 0; }
   overflow: auto;
 }
 
-.image-zoom {
-/**adjust scale to desired size, 
-add browser prefixes**/
--ms-transform: scale(1.5);    
--moz-transform: scale(1.5);  
--webkit-transform: scale(1.5);  
--o-transform: scale(1.5);  
-transform: scale(1.5);    
-position: absolute;;      
-z-index:100; 
-}
 
 /** CSS for the Parent Elemets of the img in editor */
 
@@ -50,6 +39,11 @@ z-index:100;
   margin-top: auto;
   margin-bottom: auto;
   padding-top: 100px;
+  -ms-transform: scale(1.2);    
+  -moz-transform: scale(1.2);  
+  -webkit-transform: scale(1.2);  
+  -o-transform: scale(1.2);  
+  transform: scale(1.2); 
 }
 
 mat-icon, a {

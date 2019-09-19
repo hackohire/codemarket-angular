@@ -200,12 +200,21 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges {
 
   /** On click on every image of the editor zoom in */
   zoomInZoomOutForImages() {
+    /** Checking if editor referene is there */
     if (this.editorRef) {
+      /** FInding and running the loop over all the img elements in editor reference */
+
       this.editorRef.nativeElement.querySelectorAll('img').forEach((v: HTMLImageElement) => {
+        /** Setting zoom icon in normal mode */
         v.style.cursor = 'zoom-in';
+
+        /** Listening to onclick method */
         v.onclick = (a) => {
-          console.log(a);
+
+          /** Adding/Removing lightbox class in parent div element */
           v.parentElement.classList.toggle('lightbox');
+
+          /** Adding/Removing lightbox-img class in img element */
           v.classList.toggle('lightbox-img');
         };
       });

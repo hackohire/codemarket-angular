@@ -11,6 +11,10 @@
 html, body { height: 100%; }
 body { margin: 0; }
 
+.media-body {
+  overflow: auto;
+}
+
 .image-zoom {
 /**adjust scale to desired size, 
 add browser prefixes**/

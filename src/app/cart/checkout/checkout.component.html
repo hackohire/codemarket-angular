@@ -49,44 +49,18 @@
                                 </div>
 
                                 <ul>
-                                    <!-- <li>
-                                        <div class="custom-radio">
-                                            <input type="radio" id="opt1" class="" name="filter_opt">
-                                            <label for="opt1">
-                                                <span class="circle"></span>Credit Card</label>
-                                        </div>
-                                        <img src="images/cards.png" alt="Visa Cards">
-                                    </li> -->
-
                                     <li>
-                                        <!-- <div class="custom-radio">
-                                            <input type="radio" id="opt2" class="" name="filter_opt">
-                                            <label for="opt2">
-                                                <span class="circle"></span>Paypal</label>
-                                        </div> -->
                                         <div #paypal></div>
-                                        <!-- <img src="images/paypal.png" alt="Visa Cards"> -->
                                     </li>
-
-                                    <!-- <li>
-                                        <div class="custom-radio">
-                                            <input type="radio" id="opt3" class="" name="filter_opt">
-                                            <label for="opt3">
-                                                <span class="circle"></span>Martplace Credit</label>
-                                        </div>
-                                        <p>Balance
-                                            <span class="bold">$180</span>
-                                        </p>
-                                    </li> -->
                                 </ul>
 
-                                <!-- <div class="payment_info modules__content">
+                                <div *ngIf="!cartTotal && cartProductsList?.length" class="payment_info modules__content">
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <button type="submit" class="btn btn--round btn--default">Confirm Order</button>
+                                            <button type="button" (click)="addTransaction()" class="btn btn--round btn--default">Confirm Order(Free)</button>
                                         </div>
                                     </div>
-                                </div> -->
+                                </div>
                             </div>
                             <!-- end /.information_module-->
                         </div>

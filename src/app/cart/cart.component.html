@@ -41,15 +41,15 @@
                         <!-- end /.row -->
 
                         <div class="row" *ngIf="cartList?.length">
-                            <div class="col-md-6 offset-md-6" *ngIf="(productService?.cartTotal | async) as cartTotal">
+                            <div class="col-md-6 offset-md-6">
                                 <div class="cart_calculation">
                                     <!-- <div class="cart--subtotal">
                                         <p>
                                             <span>Cart Subtotal</span>{{cartTotal?.subTotal | currency}}</p>
                                     </div> -->
-                                    <div class="cart--total">
+                                    <div class="cart--total" *ngIf="(productService?.cartTotal | async) as cartTotal">
                                         <p>
-                                            <span>total</span>{{cartTotal | currency}}</p>
+                                            <span>Total</span>{{cartTotal | currency}}</p>
                                     </div>
 
                                     <a [routerLink]="['checkout']" class="btn btn--round btn--md checkout_link">Proceed To Checkout</a>

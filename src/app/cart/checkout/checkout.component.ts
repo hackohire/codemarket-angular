@@ -1,16 +1,17 @@
 import { Component, OnInit, ElementRef, ViewChild, OnDestroy } from '@angular/core';
 import { BreadCumb } from 'src/app/shared/models/bredcumb.model';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subscription, forkJoin } from 'rxjs';
 import { ProductService } from 'src/app/core/services/product.service';
 import { Product } from 'src/app/shared/models/product.model';
 import * as _ from 'lodash';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/core/store/state/app.state';
-import { tap, map, delay } from 'rxjs/operators';
+import { tap, map, delay, switchMap, mergeMap } from 'rxjs/operators';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { SellingProductsService } from 'src/app/selling/selling-products.service';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { GetCartProductsList } from 'src/app/core/store/actions/cart.actions';
+import { get } from 'lodash';
 declare var paypal;
 
 @Component({
@@ -25,7 +26,8 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   @ViewChild('paypal', { static: false }) paypalElement: ElementRef;
   @ViewChild('successfulPayment', { static: false }) successfulPayment: SwalComponent;
   successfulPurchasedProducts = [];
-  subscription: Subscription;
+  subscription$: Subscription;
+  cartTotal: number;
 
   products: any[];
   items: any[];
@@ -36,52 +38,16 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     public sellingService: SellingProductsService,
     public authService: AuthService
   ) {
-    // this.cartProductsList = this.productService.cartProductList;
 
-    this.subscription = this.productService.cartProductList.pipe(
-      tap((pList: Product[]) => {
-        this.cartProductsList = [...pList];
+    const a = forkJoin({
+      cartTotal: this.productService.cartTotal,
+      cartList: this.productService.cartProductList
+    });
 
-
-        this.items = pList.map((prod) => {
-          const p: any = {};
-          p.name = prod.name;
-          p.reference_id = prod._id;
-          p.unit_amount = {
-            currency_code: 'INR',
-            value: prod.price
-          };
-          p.quantity = 1;
-          return p;
-        });
-
-        let c = 0;
-        this.items.forEach((p) => c += p.unit_amount.value);
-
-        this.products = [{
-          description: 'ABC',
-          reference_id: 'DEF',
-          amount: {
-            currency_code: 'INR',
-            value: c.toFixed(2),
-            breakdown: {
-              currency_code: 'INR',
-              value: c.toFixed(2),
-              item_total: {
-                value: c.toFixed(2),
-                currency_code: 'INR'
-              },
-            },
-
-          },
-          value: c.toFixed(2).toString(),
-          items: this.items
-        }];
-
-        this.createPaypalButton();
-      })
-    ).subscribe();
-
+    a.subscribe({
+      next: (c: any) => console.log(c),
+      error: (d) => console.log(d)
+    });
 
     this.breadcumb = {
       title: 'Please Make the Payment to Purchase These Amazing Products',
@@ -101,17 +67,71 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+
+    this.subscription$ = this.productService.cartTotal.pipe(
+      mergeMap(source => this.productService.cartProductList.pipe(
+        map(inner => [source, inner])
+      )
+      )
+    ).subscribe(([cartTotal, pList]) => {
+      // console.log(e , r);
+      this.cartTotal = cartTotal as number;
+
+      this.cartProductsList = [...pList];
+
+      if (cartTotal != null && (pList as any[]).length) {
+        /** Items inside purchase units of paypal */
+        this.items = (pList as any[]).map((prod) => {
+          const p: any = {};
+          p.name = prod.name;
+          p.reference_id = prod._id;
+          p.unit_amount = {
+            currency_code: 'INR',
+            value: prod.price
+          };
+          p.quantity = 1;
+          return p;
+        });
+
+
+        /** purchase_units for paypal, Right now paypal supports only 1 prchase unit at a time */
+        this.products = [{
+          description: 'ABC',
+          reference_id: 'DEF',
+          amount: {
+            currency_code: 'INR',
+            value: this.cartTotal.toFixed(2),
+            breakdown: {
+              currency_code: 'INR',
+              value: this.cartTotal.toFixed(2),
+              item_total: {
+                value: this.cartTotal.toFixed(2),
+                currency_code: 'INR'
+              },
+            },
+
+          },
+          value: this.cartTotal.toFixed(2).toString(),
+          items: this.items
+        }];
+      }
+      if (cartTotal > 0) {
+        this.createPaypalButton();
+      }
+    });
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    if (this.subscription$) {
+      this.subscription$.unsubscribe();
+    }
   }
 
   redirectToProductDetails(product: Product): void {
     this.productService.redirectToProductDetails(product);
   }
 
-  addTransaction(transaction) {
+  addTransaction(transaction: any = {}) {
     const loggedInUserId = this.authService.loggedInUser ? this.authService.loggedInUser._id : '';
     transaction.purchase_id = transaction.id;
     transaction.purchasedBy = loggedInUserId;
@@ -120,16 +140,18 @@ export class CheckoutComponent implements OnInit, OnDestroy {
       const a: any = {};
       a.description = u.description;
       a.amount = {
-        currency_code : u.unit_amount.currency_code,
+        currency_code: u.unit_amount.currency_code,
         value: u.unit_amount.value.toString()
       };
       a.purchasedBy = loggedInUserId;
       a.description = u.name;
-      a.payee = transaction.purchase_units[0].payee;
       a.reference_id = u.reference_id;
-      a.payments = transaction.purchase_units[0].payments;
-      a.shipping = transaction.purchase_units[0].shipping;
-      a.soft_descriptor = transaction.purchase_units[0].soft_descriptor;
+      if (transaction && transaction.purchase_units) {
+        a.payee = transaction.purchase_units[0].payee;
+        a.payments = transaction.purchase_units[0].payments;
+        a.shipping = transaction.purchase_units[0].shipping;
+        a.soft_descriptor = transaction.purchase_units[0].soft_descriptor;
+      }
       return a;
     });
 

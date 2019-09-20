@@ -77,7 +77,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
       // console.log(e , r);
       this.cartTotal = cartTotal as number;
 
-      this.cartProductsList = [...pList];
+      this.cartProductsList = [...pList as any[]];
 
       if (cartTotal != null && (pList as any[]).length) {
         /** Items inside purchase units of paypal */

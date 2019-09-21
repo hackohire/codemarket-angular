@@ -155,6 +155,7 @@ export class AuthService {
   checkIfUserIsLoggedIn(redirect?: boolean): Promise<boolean> {
     return Auth.currentAuthenticatedUser().then((u: CognitoUser) => {
       console.log(u);
+      console.log(u.getSignInUserSession().getIdToken().getJwtToken());
       if (!this.loggedInUser) {
         this.setIdTokenToLocalStorage(u.getSignInUserSession().getIdToken().getJwtToken());
         this.store.dispatch(Authorise());

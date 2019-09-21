@@ -25,6 +25,7 @@
       <a mat-list-item [routerLink]="[{outlets: {'main': ['testing']}}]">My Testing Reports</a>
       <a mat-list-item [routerLink]="[{outlets: {'main': ['howtodoc']}}]">My How-To-Guides</a>
       <a mat-list-item [routerLink]="[{outlets: {'main': ['design']}}]">My Designs</a>
+      <a mat-list-item [routerLink]="[{outlets: {'main': ['goal']}}]">My Goals</a>
     </mat-nav-list>
   </mat-sidenav>
 
@@ -99,6 +100,13 @@
           <!-- <mat-icon>notifications_off</mat-icon> -->
           <i style="font-size: 1.7rem !important;" class="vertical-align-middle fal fa-marker fa-fw"></i>
           <span> Design</span>
+        </button>
+
+        <!-- Add Goals -->
+        <button mat-menu-item [routerLink]="[{outlets: {'main': ['goal', 'add-goal']}}]">
+          <!-- <mat-icon>notifications_off</mat-icon> -->
+          <i style="font-size: 1.7rem !important;" class="vertical-align-middle fal fa-marker fa-fw"></i>
+          <span> Goals</span>
         </button>
       </mat-menu>
 

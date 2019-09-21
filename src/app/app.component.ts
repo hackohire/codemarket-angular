@@ -19,9 +19,12 @@ export class AppComponent {
     private store: Store<AppState>
   ) {
 
-    const source = timer(0, 3000000);
+    const source = timer(0, 300000);
 
-    const subscribe = source.subscribe(val => this.authService.checkIfUserIsLoggedIn());
+    const subscribe = source.subscribe(val => {
+      this.authService.checkIfUserIsLoggedIn();
+      console.log('===========================================================', val);
+    });
 
     this.authService.loggedInUser$.pipe(
       tap((u) => {

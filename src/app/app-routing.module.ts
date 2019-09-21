@@ -78,6 +78,13 @@ const routes: Routes = [
   },
 
   {
+    path: 'goal',
+    loadChildren: () => import('./goal/goal.module').then(module => module.GoalModule),
+    outlet: 'main',
+    canLoad: [AuthGuard]
+  },
+
+  {
     path: 'cart',
     loadChildren: () => import('./cart/cart.module').then(module => module.CartModule),
     outlet: 'main'

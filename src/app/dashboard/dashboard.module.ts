@@ -59,6 +59,10 @@ const dashboardRoutes: Routes = [
     path: 'design-details/:designId',
     loadChildren: () => import('../detail/detail.module').then(module => module.DetailModule),
   },
+  {
+    path: 'goal-details/:goalId',
+    loadChildren: () => import('../detail/detail.module').then(module => module.DetailModule),
+  },
 ];
 
 

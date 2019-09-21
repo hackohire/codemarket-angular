@@ -5,5 +5,6 @@ export enum PostType {
     HelpRequest = 'help-request',
     Design = 'design',
     Testing = 'testing',
-    Howtodoc = 'howtodoc'
+    Howtodoc = 'howtodoc',
+    Goal = 'goal'
 }

@@ -29,6 +29,10 @@ import { GetHowtodocById, SetSelectedHowtodoc } from 'src/app/core/store/actions
 import { selectSelectedDesign } from 'src/app/core/store/selectors/design.selectors';
 import { Design } from 'src/app/shared/models/design.model';
 import { GetDesignById, SetSelectedDesign } from 'src/app/core/store/actions/design.actions';
+import { selectSelectedGoal } from 'src/app/core/store/selectors/goal.selectors';
+import { Goal } from 'src/app/shared/models/goal.model';
+import { PostType } from 'src/app/shared/models/post-types.enum';
+import { GetGoalById } from 'src/app/core/store/actions/goal.actions';
 
 @Component({
   selector: 'app-details',
@@ -77,7 +81,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
         tap((p: HelpQuery) => {
           if (p) {
             this.details$ = of(p);
-            this.type = 'help-request';
+            this.type = PostType.HelpRequest;
             this.initializeCommentForm(p);
           } else {
             const params = this.activatedRoute.snapshot.params;
@@ -93,7 +97,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
         tap((p: Interview) => {
           if (p) {
             this.details$ = of(p);
-            this.type = 'interview';
+            this.type = PostType.Interview;
             this.initializeCommentForm(p);
           } else {
             this.store.dispatch(GetInterviewById({ interviewId: params.interviewId }));
@@ -107,7 +111,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
         tap((p: Requirement) => {
           if (p) {
             this.details$ = of(p);
-            this.type = 'requirement';
+            this.type = PostType.Requirement;
             this.initializeCommentForm(p);
           } else {
             this.store.dispatch(GetRequirementById({ requirementId: params.requirementId }));
@@ -120,7 +124,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
         tap((p: Testing) => {
           if (p) {
             this.details$ = of(p);
-            this.type = 'testing';
+            this.type = PostType.Testing;
             this.initializeCommentForm(p);
           } else {
             this.store.dispatch(GetTestingById({ testingId: params.testingId }));
@@ -133,7 +137,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
         tap((p: Howtodoc) => {
           if (p) {
             this.details$ = of(p);
-            this.type = 'howtodoc';
+            this.type = PostType.Howtodoc;
             this.initializeCommentForm(p);
           } else {
             this.store.dispatch(GetHowtodocById({ howtodocId: params.howtodocId }));
@@ -146,11 +150,24 @@ export class DetailsComponent implements OnInit, OnDestroy {
         tap((p: Design) => {
           if (p) {
             this.details$ = of(p);
-            this.type = 'design';
+            this.type = PostType.Design;
             this.initializeCommentForm(p);
           } else {
             this.store.dispatch(GetDesignById({ designId: params.designId }));
             this.details$ = this.store.select(selectSelectedDesign);
+          }
+        })
+      ).subscribe();
+    } else if (params['goalId']) {
+      this.subscription$ = this.store.select(selectSelectedGoal).pipe(
+        tap((p: Goal) => {
+          if (p) {
+            this.details$ = of(p);
+            this.type = PostType.Goal;
+            this.initializeCommentForm(p);
+          } else {
+            this.store.dispatch(GetGoalById({ goalId: params.goalId }));
+            this.details$ = this.store.select(selectSelectedGoal);
           }
         })
       ).subscribe();

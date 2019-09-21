@@ -154,6 +154,14 @@
                                         class="vertical-align-middle fal fa-marker fa-fw"></i>
                                     <span> Design</span>
                                 </button>
+                                
+                                <!-- Add Goals -->
+                                <button mat-menu-item [routerLink]="[{outlets: {'main': ['goal', 'add-goal']}}]">
+                                    <!-- <mat-icon>notifications_off</mat-icon> -->
+                                    <i style="font-size: 1.7rem !important;"
+                                        class="vertical-align-middle fal fa-bullseye-arrow fa-fw"></i>
+                                    <span> Goals</span>
+                                </button>
                             </mat-menu>
                             <div>
                                 <router-outlet></router-outlet>

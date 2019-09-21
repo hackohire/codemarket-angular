@@ -17,6 +17,7 @@ import * as moment from 'moment';
 import { CommentService } from 'src/app/shared/services/comment.service';
 import { environment } from 'src/environments/environment';
 import { ShareService } from '@ngx-share/core';
+import { Meta } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-product-details',
@@ -52,7 +53,8 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     public productService: ProductService,
     public authService: AuthService,
     private commentService: CommentService,
-    public share: ShareService
+    public share: ShareService,
+    private meta: Meta
   ) {
     this.breadcumb = {
       path: [
@@ -83,6 +85,8 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     this.subscription$ = this.store.select(selectSelectedProduct).pipe(
       tap((p: Product) => {
         if (p) {
+          this.meta.addTag({property: 'og:title', content: p.name});
+          this.meta.addTag({property: 'title', content: p.name});
           this.productDetails$ = of(p);
           this.commentForm = new FormGroup({
             text: new FormControl(''),

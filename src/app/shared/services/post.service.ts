@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
 import { Post } from '../models/post.model';
 import { description } from '../constants/fragments_constatnts';
 import { SetSelectedPost } from 'src/app/core/store/actions/post.actions';
+import { productConstants } from '../constants/product_constants';
 
 @Injectable({
   providedIn: 'root'
@@ -195,7 +196,7 @@ export class PostService {
               ...Product
             }
           }
-          ${this.postFileds}
+          ${productConstants.productQueryFields}
         `,
         fetchPolicy: 'no-cache'
       }

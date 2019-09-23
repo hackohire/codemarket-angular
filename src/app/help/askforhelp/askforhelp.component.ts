@@ -1,9 +1,8 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { BreadCumb } from 'src/app/shared/models/bredcumb.model';
 import { FormGroup, FormControl, Validators, FormArray, FormBuilder } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/core/store/state/app.state';
-import { AddQuery, SetSelectedHelpRequest, GetHelpRequestById, UpdateHelpRequest } from 'src/app/core/store/actions/help.actions';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
@@ -11,12 +10,13 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription, of } from 'rxjs';
 import { HelpQuery } from 'src/app/shared/models/help-query.model';
 import { tap, switchMap, startWith, map } from 'rxjs/operators';
-import { selectSelectedQuery } from 'src/app/core/store/selectors/help.selectors';
 import { FormService } from 'src/app/shared/services/form.service';
 import { Tag } from 'src/app/shared/models/product.model';
 import { MatAutocomplete } from '@angular/material';
 import { PostStatus } from 'src/app/shared/models/poststatus.enum';
 import { PostType } from 'src/app/shared/models/post-types.enum';
+import { SetSelectedPost, GetPostById, AddPost, UpdatePost } from 'src/app/core/store/actions/post.actions';
+import { selectSelectedPost } from 'src/app/core/store/selectors/post.selectors';
 
 @Component({
   selector: 'app-askforhelp',
@@ -101,10 +101,10 @@ export class AskforhelpComponent implements OnInit {
      */
 
     if (this.activatedRoute.snapshot.parent.routeConfig.path === 'add-help-request') {
-      this.store.dispatch(SetSelectedHelpRequest({ helpRequest: null }));
+      this.store.dispatch(SetSelectedPost({ post: null }));
       this.askForHelpFormInitialization(null);
     } else {
-      this.subscription$ = this.store.select(selectSelectedQuery).pipe(
+      this.subscription$ = this.store.select(selectSelectedPost).pipe(
         tap((h: HelpQuery) => {
           this.askForHelpFormInitialization(h);
           this.edit = true;
@@ -120,7 +120,7 @@ export class AskforhelpComponent implements OnInit {
            * get the helpRequest by fetching id from the params
            */
           if (params.helpRequestId) {
-            this.store.dispatch(GetHelpRequestById({ helpRequestId: params.helpRequestId }));
+            this.store.dispatch(GetPostById({ postId: params.helpRequestId }));
           }
         })
       ).subscribe();
@@ -202,9 +202,9 @@ support: new FormGroup({
 
     if (this.idFromControl && !this.idFromControl.value) {
       this.askForHelpForm.removeControl('_id');
-      this.store.dispatch(AddQuery({helpRequest: this.askForHelpForm.value}));
+      this.store.dispatch(AddPost({post: this.askForHelpForm.value}));
     } else {
-      this.store.dispatch(UpdateHelpRequest({helpRequest: this.askForHelpForm.value}));
+      this.store.dispatch(UpdatePost({post: this.askForHelpForm.value}));
     }
 
   }

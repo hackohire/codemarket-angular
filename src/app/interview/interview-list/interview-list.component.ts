@@ -5,11 +5,12 @@ import { Observable, Subscription } from 'rxjs';
 import { Interview } from 'src/app/shared/models/interview.model';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { map } from 'rxjs/operators';
-import { GetInterviewsByUserId, DeleteInterview } from 'src/app/core/store/actions/interview.actions';
-import { selectInterviewsList } from 'src/app/core/store/selectors/interview.selectors';
 import { MatTableDataSource, MatSort } from '@angular/material';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { Router } from '@angular/router';
+import { GetPostsByUserIdAndType, DeletePost } from 'src/app/core/store/actions/post.actions';
+import { PostType } from 'src/app/shared/models/post-types.enum';
+import { selectPostsByUserIdAndType } from 'src/app/core/store/selectors/post.selectors';
 
 @Component({
   selector: 'app-interview-list',
@@ -48,12 +49,12 @@ export class InterviewListComponent implements OnInit, OnDestroy {
     this.userSubsription = this.authService.loggedInUser$.pipe(
       map((u) => {
         if (u) {
-          this.store.dispatch(GetInterviewsByUserId({ userId: u._id, status: ''}));
+          this.store.dispatch(GetPostsByUserIdAndType({ userId: u._id, status: '', postType: PostType.Interview}));
         }
       })
     ).subscribe();
 
-    this.interviewsListSubscription = this.store.select(selectInterviewsList).pipe(
+    this.interviewsListSubscription = this.store.select(selectPostsByUserIdAndType).pipe(
       map((interviews) => {
         if (interviews) {
           this.dataSource.data = interviews;
@@ -75,14 +76,8 @@ export class InterviewListComponent implements OnInit, OnDestroy {
     }
   }
 
-
-  editInterview(interview): void {
-    // this.store.dispatch(SetSelectedInterview({interview}));
-    // this.router.navigate(['/add-interview'], );
-  }
-
-  deleteInterview(interviewId: string) {
-    this.store.dispatch(DeleteInterview({interviewId}));
+  deleteInterview(postId: string) {
+    this.store.dispatch(DeletePost({postId}));
   }
 
   redirectToInterviewDetails(details) {

@@ -5,11 +5,12 @@ import { Observable, Subscription } from 'rxjs';
 import { Design } from 'src/app/shared/models/design.model';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { map } from 'rxjs/operators';
-import { GetDesignsByUserId, DeleteDesign } from 'src/app/core/store/actions/design.actions';
-import { selectDesignsList } from 'src/app/core/store/selectors/design.selectors';
 import { MatTableDataSource, MatSort } from '@angular/material';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { Router } from '@angular/router';
+import { GetPostsByUserIdAndType, DeletePost } from 'src/app/core/store/actions/post.actions';
+import { PostType } from 'src/app/shared/models/post-types.enum';
+import { selectPostsByUserIdAndType } from 'src/app/core/store/selectors/post.selectors';
 
 @Component({
   selector: 'app-design-list',
@@ -48,12 +49,12 @@ export class DesignListComponent implements OnInit, OnDestroy {
     this.userSubsription = this.authService.loggedInUser$.pipe(
       map((u) => {
         if (u) {
-          this.store.dispatch(GetDesignsByUserId({ userId: u._id, status: ''}));
+          this.store.dispatch(GetPostsByUserIdAndType({ userId: u._id, status: '', postType: PostType.Design}));
         }
       })
     ).subscribe();
 
-    this.designsListSubscription = this.store.select(selectDesignsList).pipe(
+    this.designsListSubscription = this.store.select(selectPostsByUserIdAndType).pipe(
       map((designs) => {
         if (designs) {
           this.dataSource.data = designs;
@@ -81,8 +82,8 @@ export class DesignListComponent implements OnInit, OnDestroy {
     // this.router.navigate(['/add-design'], );
   }
 
-  deleteDesign(designId: string) {
-    this.store.dispatch(DeleteDesign({designId}));
+  deleteDesign(postId: string) {
+    this.store.dispatch(DeletePost({postId}));
   }
 
   redirectToDesignDetails(details) {

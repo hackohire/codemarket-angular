@@ -3,20 +3,20 @@ import { BreadCumb } from 'src/app/shared/models/bredcumb.model';
 import { FormGroup, FormControl, Validators, FormArray, FormBuilder } from '@angular/forms';
 import { Interview } from 'src/app/shared/models/interview.model';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { AddInterview, UpdateInterview, SetSelectedInterview, GetInterviewById } from 'src/app/core/store/actions/interview.actions';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/core/store/state/app.state';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { Subscription, of, Observable } from 'rxjs';
+import { Subscription, of } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { selectSelectedInterview } from 'src/app/core/store/selectors/interview.selectors';
 import { switchMap, tap, startWith, map } from 'rxjs/operators';
 import { FormService } from 'src/app/shared/services/form.service';
 import { Tag } from 'src/app/shared/models/product.model';
 import { MatAutocomplete } from '@angular/material';
 import { PostStatus } from 'src/app/shared/models/poststatus.enum';
 import { PostType } from 'src/app/shared/models/post-types.enum';
+import { AddPost, UpdatePost, SetSelectedPost, GetPostById } from 'src/app/core/store/actions/post.actions';
+import { selectSelectedPost } from 'src/app/core/store/selectors/post.selectors';
 
 
 @Component({
@@ -102,10 +102,10 @@ export class AddInterviewComponent implements OnInit {
      */
 
     if (this.activatedRoute.snapshot.parent.routeConfig.path === 'add-interview') {
-      this.store.dispatch(SetSelectedInterview({ interview: null }));
+      this.store.dispatch(SetSelectedPost({ post: null }));
       this.interviewFormInitialization(null);
     } else {
-      this.subscription$ = this.store.select(selectSelectedInterview).pipe(
+      this.subscription$ = this.store.select(selectSelectedPost).pipe(
         tap((h: Interview) => {
           this.interviewFormInitialization(h);
           this.edit = true;
@@ -121,7 +121,7 @@ export class AddInterviewComponent implements OnInit {
            * get the interview by fetching id from the params
            */
           if (params.interviewId) {
-            this.store.dispatch(GetInterviewById({ interviewId: params.interviewId }));
+            this.store.dispatch(GetPostById({ postId: params.interviewId }));
           }
         })
       ).subscribe();
@@ -158,7 +158,7 @@ support: new FormGroup({
     this.formService.searchCategories('').subscribe((tags) => {
       this.tagSuggestions = tags;
       this.allTags = tags;
-    })
+    });
 
     this.searchText.valueChanges.pipe(
       startWith(''),
@@ -190,9 +190,9 @@ support: new FormGroup({
 
     if (this.idFromControl && !this.idFromControl.value) {
       this.interviewForm.removeControl('_id');
-      this.store.dispatch(AddInterview({interview: this.interviewForm.value}));
+      this.store.dispatch(AddPost({post: this.interviewForm.value}));
     } else {
-      this.store.dispatch(UpdateInterview({interview: this.interviewForm.value}));
+      this.store.dispatch(UpdatePost({post: this.interviewForm.value}));
     }
   }
 

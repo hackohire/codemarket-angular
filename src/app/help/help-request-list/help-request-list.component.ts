@@ -5,16 +5,16 @@ import { AuthService } from 'src/app/core/services/auth.service';
 import { map } from 'rxjs/operators';
 import { AppState } from 'src/app/core/store/state/app.state';
 import { Store } from '@ngrx/store';
-import { selectQueries, selectAllHelpRequestsList } from 'src/app/core/store/selectors/help.selectors';
-import { GetHelpRequestsByUserId, DeleteHelpRequest, SetSelectedHelpRequest, GetAllHelpRequests } from 'src/app/core/store/actions/help.actions';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material';
 import { trigger, state, style, transition, animate } from '@angular/animations';
-import { Router, ActivatedRoute, PRIMARY_OUTLET, UrlSegment } from '@angular/router';
-import { runInThisContext } from 'vm';
-import { HelpService } from '../help.service';
+import { Router, ActivatedRoute } from '@angular/router';
 import { BreadCumb } from 'src/app/shared/models/bredcumb.model';
 import { PostStatus } from 'src/app/shared/models/poststatus.enum';
+import { GetPostsByType, GetPostsByUserIdAndType, DeletePost } from 'src/app/core/store/actions/post.actions';
+import { PostType } from 'src/app/shared/models/post-types.enum';
+import { selectPostsByType, selectPostsByUserIdAndType } from 'src/app/core/store/selectors/post.selectors';
+import { PostService } from 'src/app/shared/services/post.service';
 
 @Component({
   selector: 'app-help-request-list',
@@ -52,7 +52,7 @@ export class HelpRequestListComponent implements OnInit, OnDestroy {
     private store: Store<AppState>,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private helpService: HelpService
+    private postService: PostService
   ) {
     this.breadcumb = {
       title: 'List of Help Requests',
@@ -77,9 +77,9 @@ export class HelpRequestListComponent implements OnInit, OnDestroy {
 
     if (path === 'help-requests-all') {
 
-      this.store.dispatch(GetAllHelpRequests());
+      this.store.dispatch(GetPostsByType({postType: PostType.HelpRequest}));
 
-      this.helpRequestsListSubscription = this.store.select(selectAllHelpRequestsList).pipe(
+      this.helpRequestsListSubscription = this.store.select(selectPostsByType).pipe(
         map((helpRequests) => {
           if (helpRequests) {
             this.dataSource.data = helpRequests;
@@ -101,9 +101,9 @@ export class HelpRequestListComponent implements OnInit, OnDestroy {
         this.displayedColumns = ['number', 'name', 'price', 'status', 'action'];
       }
 
-      this.store.dispatch(GetHelpRequestsByUserId({userId: (this.authorId ? this.authorId : this.authService.loggedInUser._id), status: status }));
+      this.store.dispatch(GetPostsByUserIdAndType({userId: (this.authorId ? this.authorId : this.authService.loggedInUser._id), status: status, postType: PostType.HelpRequest}));
 
-      this.helpRequestsListSubscription = this.store.select(selectQueries).pipe(
+      this.helpRequestsListSubscription = this.store.select(selectPostsByUserIdAndType).pipe(
         map((helpRequests) => {
           if (helpRequests) {
             this.dataSource.data = helpRequests;
@@ -125,13 +125,8 @@ export class HelpRequestListComponent implements OnInit, OnDestroy {
     }
   }
 
-  editHelpRequest(helpRequest): void {
-    this.store.dispatch(SetSelectedHelpRequest({ helpRequest }));
-    // this.router.navigate(['/add-helpRequest'], );
-  }
-
-  deleteHelpRequest(helpRequestId: string) {
-    this.store.dispatch(DeleteHelpRequest({ helpRequestId }));
+  deleteHelpRequest(postId: string) {
+    this.store.dispatch(DeletePost({ postId }));
   }
 
   redirectToHelpRequestDetails(details) {
@@ -140,7 +135,7 @@ export class HelpRequestListComponent implements OnInit, OnDestroy {
 
   redirectTo(event) {
     console.log(event);
-    this.helpService.redirectToHelpRequestDetails(event);
+    this.postService.redirectToPostDetails(event);
   }
 
 }

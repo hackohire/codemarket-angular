@@ -5,11 +5,12 @@ import { Observable, Subscription } from 'rxjs';
 import { Howtodoc } from 'src/app/shared/models/howtodoc.model';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { map } from 'rxjs/operators';
-import { GetHowtodocsByUserId, DeleteHowtodoc } from 'src/app/core/store/actions/howtodoc.actions';
-import { selectHowtodocsList } from 'src/app/core/store/selectors/howtodoc.selectors';
 import { MatTableDataSource, MatSort } from '@angular/material';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { Router } from '@angular/router';
+import { GetPostsByUserIdAndType, DeletePost } from 'src/app/core/store/actions/post.actions';
+import { PostType } from 'src/app/shared/models/post-types.enum';
+import { selectPostsByUserIdAndType } from 'src/app/core/store/selectors/post.selectors';
 
 @Component({
   selector: 'app-howtodoc-list',
@@ -48,12 +49,12 @@ export class HowtodocListComponent implements OnInit, OnDestroy {
     this.userSubsription = this.authService.loggedInUser$.pipe(
       map((u) => {
         if (u) {
-          this.store.dispatch(GetHowtodocsByUserId({ userId: u._id, status: ''}));
+          this.store.dispatch(GetPostsByUserIdAndType({ userId: u._id, status: '', postType: PostType.Howtodoc}));
         }
       })
     ).subscribe();
 
-    this.howtodocsListSubscription = this.store.select(selectHowtodocsList).pipe(
+    this.howtodocsListSubscription = this.store.select(selectPostsByUserIdAndType).pipe(
       map((howtodocs) => {
         if (howtodocs) {
           this.dataSource.data = howtodocs;
@@ -81,8 +82,8 @@ export class HowtodocListComponent implements OnInit, OnDestroy {
     // this.router.navigate(['/add-howtodoc'], );
   }
 
-  deleteHowtodoc(howtodocId: string) {
-    this.store.dispatch(DeleteHowtodoc({howtodocId}));
+  deleteHowtodoc(postId: string) {
+    this.store.dispatch(DeletePost({postId}));
   }
 
   redirectToHowtodocDetails(details) {

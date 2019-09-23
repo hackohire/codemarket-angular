@@ -6,13 +6,7 @@ import { Interview } from 'src/app/shared/models/interview.model';
 import { AppState } from 'src/app/core/store/state/app.state';
 import { Store } from '@ngrx/store';
 import { tap, switchMap } from 'rxjs/operators';
-import { GetHelpRequestById, SetSelectedHelpRequest } from 'src/app/core/store/actions/help.actions';
 import { ActivatedRoute } from '@angular/router';
-import { selectSelectedQuery } from 'src/app/core/store/selectors/help.selectors';
-import { GetInterviewById, SetSelectedInterview } from 'src/app/core/store/actions/interview.actions';
-import { selectSelectedInterview } from 'src/app/core/store/selectors/interview.selectors';
-import { selectSelectedRequirement } from 'src/app/core/store/selectors/requirement.selectors';
-import { GetRequirementById, SetSelectedRequirement } from 'src/app/core/store/actions/requirement.actions';
 import { BreadCumb } from 'src/app/shared/models/bredcumb.model';
 import { FormGroup, FormControl } from '@angular/forms';
 import * as moment from 'moment';
@@ -21,18 +15,12 @@ import { CommentService } from 'src/app/shared/services/comment.service';
 import { environment } from 'src/environments/environment';
 import { ShareService } from '@ngx-share/core';
 import { Testing } from 'src/app/shared/models/testing.model';
-import { GetTestingById, SetSelectedTesting } from 'src/app/core/store/actions/testing.actions';
-import { selectSelectedTesting } from 'src/app/core/store/selectors/testing.selectors';
 import { Howtodoc } from 'src/app/shared/models/howtodoc.model';
-import { selectSelectedHowtodoc } from 'src/app/core/store/selectors/howtodoc.selectors';
-import { GetHowtodocById, SetSelectedHowtodoc } from 'src/app/core/store/actions/howtodoc.actions';
-import { selectSelectedDesign } from 'src/app/core/store/selectors/design.selectors';
 import { Design } from 'src/app/shared/models/design.model';
-import { GetDesignById, SetSelectedDesign } from 'src/app/core/store/actions/design.actions';
-import { selectSelectedGoal } from 'src/app/core/store/selectors/goal.selectors';
 import { Goal } from 'src/app/shared/models/goal.model';
 import { PostType } from 'src/app/shared/models/post-types.enum';
-import { GetGoalById } from 'src/app/core/store/actions/goal.actions';
+import { selectSelectedPost } from 'src/app/core/store/selectors/post.selectors';
+import { GetPostById, SetSelectedPost } from 'src/app/core/store/actions/post.actions';
 
 @Component({
   selector: 'app-details',
@@ -77,7 +65,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
     if (params['helpRequestId']) {
 
-      this.subscription$ = this.store.select(selectSelectedQuery).pipe(
+      this.subscription$ = this.store.select(selectSelectedPost).pipe(
         tap((p: HelpQuery) => {
           if (p) {
             this.details$ = of(p);
@@ -85,89 +73,89 @@ export class DetailsComponent implements OnInit, OnDestroy {
             this.initializeCommentForm(p);
           } else {
             const params = this.activatedRoute.snapshot.params;
-            this.store.dispatch(GetHelpRequestById({ helpRequestId: params.helpRequestId }));
-            this.details$ = this.store.select(selectSelectedQuery);
+            this.store.dispatch(GetPostById({ postId: params.helpRequestId }));
+            this.details$ = this.store.select(selectSelectedPost);
           }
 
         })
       ).subscribe();
 
     } else if (params['interviewId']) {
-      this.subscription$ = this.store.select(selectSelectedInterview).pipe(
+      this.subscription$ = this.store.select(selectSelectedPost).pipe(
         tap((p: Interview) => {
           if (p) {
             this.details$ = of(p);
             this.type = PostType.Interview;
             this.initializeCommentForm(p);
           } else {
-            this.store.dispatch(GetInterviewById({ interviewId: params.interviewId }));
-            this.details$ = this.store.select(selectSelectedInterview);
+            this.store.dispatch(GetPostById({ postId: params.interviewId }));
+            this.details$ = this.store.select(selectSelectedPost);
           }
         })
       ).subscribe();
 
     } else if (params['requirementId']) {
-      this.subscription$ = this.store.select(selectSelectedRequirement).pipe(
+      this.subscription$ = this.store.select(selectSelectedPost).pipe(
         tap((p: Requirement) => {
           if (p) {
             this.details$ = of(p);
             this.type = PostType.Requirement;
             this.initializeCommentForm(p);
           } else {
-            this.store.dispatch(GetRequirementById({ requirementId: params.requirementId }));
-            this.details$ = this.store.select(selectSelectedRequirement);
+            this.store.dispatch(GetPostById({ postId: params.interviewId }));
+            this.details$ = this.store.select(selectSelectedPost);
           }
         })
       ).subscribe();
     } else if (params['testingId']) {
-      this.subscription$ = this.store.select(selectSelectedTesting).pipe(
+      this.subscription$ = this.store.select(selectSelectedPost).pipe(
         tap((p: Testing) => {
           if (p) {
             this.details$ = of(p);
             this.type = PostType.Testing;
             this.initializeCommentForm(p);
           } else {
-            this.store.dispatch(GetTestingById({ testingId: params.testingId }));
-            this.details$ = this.store.select(selectSelectedTesting);
+            this.store.dispatch(GetPostById({ postId: params.testingId }));
+            this.details$ = this.store.select(selectSelectedPost);
           }
         })
       ).subscribe();
     } else if (params['howtodocId']) {
-      this.subscription$ = this.store.select(selectSelectedHowtodoc).pipe(
+      this.subscription$ = this.store.select(selectSelectedPost).pipe(
         tap((p: Howtodoc) => {
           if (p) {
             this.details$ = of(p);
             this.type = PostType.Howtodoc;
             this.initializeCommentForm(p);
           } else {
-            this.store.dispatch(GetHowtodocById({ howtodocId: params.howtodocId }));
-            this.details$ = this.store.select(selectSelectedHowtodoc);
+            this.store.dispatch(GetPostById({ postId: params.howtodocId }));
+            this.details$ = this.store.select(selectSelectedPost);
           }
         })
       ).subscribe();
     } else if (params['designId']) {
-      this.subscription$ = this.store.select(selectSelectedDesign).pipe(
+      this.subscription$ = this.store.select(selectSelectedPost).pipe(
         tap((p: Design) => {
           if (p) {
             this.details$ = of(p);
             this.type = PostType.Design;
             this.initializeCommentForm(p);
           } else {
-            this.store.dispatch(GetDesignById({ designId: params.designId }));
-            this.details$ = this.store.select(selectSelectedDesign);
+            this.store.dispatch(GetPostById({ postId: params.designId }));
+            this.details$ = this.store.select(selectSelectedPost);
           }
         })
       ).subscribe();
     } else if (params['goalId']) {
-      this.subscription$ = this.store.select(selectSelectedGoal).pipe(
+      this.subscription$ = this.store.select(selectSelectedPost).pipe(
         tap((p: Goal) => {
           if (p) {
             this.details$ = of(p);
             this.type = PostType.Goal;
             this.initializeCommentForm(p);
           } else {
-            this.store.dispatch(GetGoalById({ goalId: params.goalId }));
-            this.details$ = this.store.select(selectSelectedGoal);
+            this.store.dispatch(GetPostById({ postId: params.goalId }));
+            this.details$ = this.store.select(selectSelectedPost);
           }
         })
       ).subscribe();
@@ -178,12 +166,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     if (this.subscription$) {
       this.subscription$.unsubscribe();
-      this.store.dispatch(SetSelectedRequirement({requirement: null}));
-      this.store.dispatch(SetSelectedHelpRequest({helpRequest: null}));
-      this.store.dispatch(SetSelectedInterview({interview: null}));
-      this.store.dispatch(SetSelectedTesting({testing: null}));
-      this.store.dispatch(SetSelectedDesign({design: null}));
-      this.store.dispatch(SetSelectedHowtodoc({howtodoc: null}));
+      this.store.dispatch(SetSelectedPost({post: null}));
     }
   }
 

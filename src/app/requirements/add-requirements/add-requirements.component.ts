@@ -5,18 +5,18 @@ import { Requirement } from 'src/app/shared/models/requirement.model';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/core/store/state/app.state';
-import { AddRequirement, SetSelectedRequirement, GetRequirementById, UpdateRequirement } from 'src/app/core/store/actions/requirement.actions';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap, tap, startWith, map } from 'rxjs/operators';
-import { of, Subscription, Observable } from 'rxjs';
-import { selectSelectedRequirement } from 'src/app/core/store/selectors/requirement.selectors';
+import { of, Subscription } from 'rxjs';
 import { FormService } from 'src/app/shared/services/form.service';
 import { Tag } from 'src/app/shared/models/product.model';
 import { MatAutocomplete } from '@angular/material';
 import { PostStatus } from 'src/app/shared/models/poststatus.enum';
 import { PostType } from 'src/app/shared/models/post-types.enum';
+import { SetSelectedPost, GetPostById, AddPost, UpdatePost } from 'src/app/core/store/actions/post.actions';
+import { selectSelectedPost } from 'src/app/core/store/selectors/post.selectors';
 
 @Component({
   selector: 'app-add-requirements',
@@ -101,10 +101,10 @@ export class AddRequirementsComponent implements OnInit {
      */
 
     if (this.activatedRoute.snapshot.parent.routeConfig.path === 'add-requirement') {
-      this.store.dispatch(SetSelectedRequirement({ requirement: null }));
+      this.store.dispatch(SetSelectedPost({ post: null }));
       this.requirementFormInitialization(null);
     } else {
-      this.subscription$ = this.store.select(selectSelectedRequirement).pipe(
+      this.subscription$ = this.store.select(selectSelectedPost).pipe(
         tap((h: Requirement) => {
           this.requirementFormInitialization(h);
           this.edit = true;
@@ -120,7 +120,7 @@ export class AddRequirementsComponent implements OnInit {
            * get the requirement by fetching id from the params
            */
           if (params.requirementId) {
-            this.store.dispatch(GetRequirementById({ requirementId: params.requirementId }));
+            this.store.dispatch(GetPostById({ postId: params.requirementId }));
           }
         })
       ).subscribe();
@@ -138,16 +138,12 @@ export class AddRequirementsComponent implements OnInit {
       description: new FormControl(r && r.description ? r.description : ''),
       price: new FormControl(r && r.price ? r.price : 0, Validators.required),
       createdBy: new FormControl(r && r.createdBy && r.createdBy._id ? r.createdBy._id : ''),
-      // shortDescription: new FormControl(r && r.shortDescription ? r.shortDescription : ''),
       categories: new FormControl(r && r.categories ? r.categories : []),
-      // demo_url: new FormControl(r && r.demo_url ? r.demo_url : '', [Validators.pattern(this.urlRegex)]),
-      // documentation_url: new FormControl('', [Validators.pattern(this.urlRegex)]),
-      // video_url: new FormControl('', [Validators.pattern(this.urlRegex)]),
       status: new FormControl(r && r.status ? r.status : PostStatus.Drafted),
       _id: new FormControl(r && r._id ? r._id : ''),
       tags: this.fb.array(r && r.tags && r.tags.length ? r.tags : []),
       type: new FormControl(PostType.Requirement),
-support: new FormGroup({
+      support: new FormGroup({
         time: new FormControl(r && r.support && r.support.time ? r.support.time : 0),
         description: new FormControl(r && r.support && r.support.description ? r.support.description : '')
       })
@@ -189,9 +185,9 @@ support: new FormGroup({
 
     if (this.idFromControl && !this.idFromControl.value) {
       this.requirementForm.removeControl('_id');
-      this.store.dispatch(AddRequirement({ requirement: this.requirementForm.value }));
+      this.store.dispatch(AddPost({ post: this.requirementForm.value }));
     } else {
-      this.store.dispatch(UpdateRequirement({requirement: this.requirementForm.value}));
+      this.store.dispatch(UpdatePost({post: this.requirementForm.value}));
     }
   }
 

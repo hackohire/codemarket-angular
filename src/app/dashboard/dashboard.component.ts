@@ -7,11 +7,10 @@ import { Product } from '../shared/models/product.model';
 import { selectAllProductsList } from '../core/store/selectors/product.selectors';
 import { MatTableDataSource } from '@angular/material/table';
 import { HelpQuery } from '../shared/models/help-query.model';
-import { GetAllHelpRequests } from '../core/store/actions/help.actions';
-import { selectAllHelpRequestsList } from '../core/store/selectors/help.selectors';
 import { MatSort } from '@angular/material';
 import { UserService } from '../user/user.service';
-import { HelpService } from '../help/help.service';
+import { PostType } from '../shared/models/post-types.enum';
+import { PostService } from '../shared/services/post.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -31,20 +30,19 @@ export class DashboardComponent implements OnInit {
   constructor(
     private store: Store<AppState>,
     private userService: UserService,
-    private helpService: HelpService,
+    private postService: PostService
   ) { }
 
   ngOnInit() {
     this.store.dispatch(GetAllProducts());
-    this.store.dispatch(GetAllHelpRequests());
     this.productsList$ = this.store.select(selectAllProductsList);
-    this.helpRequestList$ = this.store.select(selectAllHelpRequestsList);
+    this.helpRequestList$ = this.postService.getPostsByType(PostType.HelpRequest);
     this.usersListAndTheirBugFixes$ = this.userService.getUserListWithBugFixesCount();
   }
 
   redirectToHelpRequest(event) {
     console.log(event);
-    this.helpService.redirectToHelpRequestDetails(event);
+    this.postService.redirectToPostDetails(event);
   }
 
   redirectToUserProfile(event) {

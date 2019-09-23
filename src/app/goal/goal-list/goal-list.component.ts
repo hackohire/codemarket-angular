@@ -5,11 +5,12 @@ import { Observable, Subscription } from 'rxjs';
 import { Goal } from 'src/app/shared/models/goal.model';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { map } from 'rxjs/operators';
-import { GetGoalsByUserId, DeleteGoal } from 'src/app/core/store/actions/goal.actions';
-import { selectGoalsList } from 'src/app/core/store/selectors/goal.selectors';
 import { MatTableDataSource, MatSort } from '@angular/material';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { Router } from '@angular/router';
+import { GetPostsByUserIdAndType, DeletePost } from 'src/app/core/store/actions/post.actions';
+import { PostType } from 'src/app/shared/models/post-types.enum';
+import { selectPostsByUserIdAndType } from 'src/app/core/store/selectors/post.selectors';
 
 @Component({
   selector: 'app-goal-list',
@@ -48,12 +49,12 @@ export class GoalListComponent implements OnInit, OnDestroy {
     this.userSubsription = this.authService.loggedInUser$.pipe(
       map((u) => {
         if (u) {
-          this.store.dispatch(GetGoalsByUserId({ userId: u._id, status: ''}));
+          this.store.dispatch(GetPostsByUserIdAndType({ userId: u._id, status: '', postType: PostType.Goal}));
         }
       })
     ).subscribe();
 
-    this.goalsListSubscription = this.store.select(selectGoalsList).pipe(
+    this.goalsListSubscription = this.store.select(selectPostsByUserIdAndType).pipe(
       map((goals) => {
         if (goals) {
           this.dataSource.data = goals;
@@ -81,8 +82,8 @@ export class GoalListComponent implements OnInit, OnDestroy {
     // this.router.navigate(['/add-goal'], );
   }
 
-  deleteGoal(goalId: string) {
-    this.store.dispatch(DeleteGoal({goalId}));
+  deleteGoal(postId: string) {
+    this.store.dispatch(DeletePost({postId}));
   }
 
   redirectToGoalDetails(details) {

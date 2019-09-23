@@ -15,6 +15,7 @@ import { BreadCumb } from 'src/app/shared/models/bredcumb.model';
 import { PostStatus } from 'src/app/shared/models/poststatus.enum';
 import * as moment from 'moment';
 import { environment } from 'src/environments/environment';
+import { PostService } from 'src/app/shared/services/post.service';
 
 @Component({
   selector: 'app-products-list',
@@ -61,6 +62,7 @@ export class ProductsListComponent implements OnInit, OnDestroy {
     private store: Store<AppState>,
     private activatedRoute: ActivatedRoute,
     private productService: ProductService,
+    private postService: PostService,
     private router: Router
   ) {
 
@@ -71,7 +73,7 @@ export class ProductsListComponent implements OnInit, OnDestroy {
 
 
     if (path === 'bugfixes-all') {
-      this.productsListSubscription = this.productService.getAllPosts().pipe(
+      this.productsListSubscription = this.postService.getAllPosts().pipe(
         map((posts) => {
           if (posts) {
             /** Set the data for the datatable  */

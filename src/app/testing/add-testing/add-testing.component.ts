@@ -3,20 +3,20 @@ import { BreadCumb } from 'src/app/shared/models/bredcumb.model';
 import { FormGroup, FormControl, Validators, FormArray, FormBuilder } from '@angular/forms';
 import { Testing } from 'src/app/shared/models/testing.model';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { AddTesting, UpdateTesting, SetSelectedTesting, GetTestingById } from 'src/app/core/store/actions/testing.actions';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/core/store/state/app.state';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { Subscription, of, Observable } from 'rxjs';
+import { Subscription, of } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { selectSelectedTesting } from 'src/app/core/store/selectors/testing.selectors';
 import { switchMap, tap, startWith, map } from 'rxjs/operators';
 import { FormService } from 'src/app/shared/services/form.service';
 import { Tag } from 'src/app/shared/models/product.model';
 import { MatAutocomplete } from '@angular/material';
 import { PostStatus } from 'src/app/shared/models/poststatus.enum';
 import { PostType } from 'src/app/shared/models/post-types.enum';
+import { SetSelectedPost, GetPostById, AddPost, UpdatePost } from 'src/app/core/store/actions/post.actions';
+import { selectSelectedPost } from 'src/app/core/store/selectors/post.selectors';
 
 
 @Component({
@@ -102,10 +102,10 @@ export class AddTestingComponent implements OnInit {
      */
 
     if (this.activatedRoute.snapshot.parent.routeConfig.path === 'add-testing') {
-      this.store.dispatch(SetSelectedTesting({ testing: null }));
+      this.store.dispatch(SetSelectedPost({ post: null }));
       this.testingFormInitialization(null);
     } else {
-      this.subscription$ = this.store.select(selectSelectedTesting).pipe(
+      this.subscription$ = this.store.select(selectSelectedPost).pipe(
         tap((h: Testing) => {
           this.testingFormInitialization(h);
           this.edit = true;
@@ -121,7 +121,7 @@ export class AddTestingComponent implements OnInit {
            * get the testing by fetching id from the params
            */
           if (params.testingId) {
-            this.store.dispatch(GetTestingById({ testingId: params.testingId }));
+            this.store.dispatch(GetPostById({ postId: params.testingId }));
           }
         })
       ).subscribe();
@@ -139,11 +139,7 @@ export class AddTestingComponent implements OnInit {
       description: new FormControl(i && i.description ? i.description : ''),
       price: new FormControl(i && i.price ? i.price : 0, Validators.required),
       createdBy: new FormControl(i && i.createdBy && i.createdBy._id ? i.createdBy._id : ''),
-      // shortDescription: new FormControl(i && i.shortDescription ? i.shortDescription : ''),
       categories: new FormControl(i && i.categories ? i.categories : []),
-      // demo_url: new FormControl(i && i.demo_url ? i.demo_url : '', [Validators.pattern(this.urlRegex)]),
-      // documentation_url: new FormControl('', [Validators.pattern(this.urlRegex)]),
-      // video_url: new FormControl('', [Validators.pattern(this.urlRegex)]),
       status: new FormControl(i && i.status ? i.status : PostStatus.Drafted),
       _id: new FormControl(i && i._id ? i._id : ''),
       tags: this.fb.array(i && i.tags && i.tags.length ? i.tags : []),
@@ -190,9 +186,9 @@ export class AddTestingComponent implements OnInit {
 
     if (this.idFromControl && !this.idFromControl.value) {
       this.testingForm.removeControl('_id');
-      this.store.dispatch(AddTesting({ testing: this.testingForm.value }));
+      this.store.dispatch(AddPost({ post: this.testingForm.value }));
     } else {
-      this.store.dispatch(UpdateTesting({ testing: this.testingForm.value }));
+      this.store.dispatch(UpdatePost({ post: this.testingForm.value }));
     }
   }
 

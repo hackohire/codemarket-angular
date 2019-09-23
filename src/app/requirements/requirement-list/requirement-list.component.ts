@@ -3,13 +3,14 @@ import { AppState } from 'src/app/core/store/state/app.state';
 import { Store } from '@ngrx/store';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { map } from 'rxjs/operators';
-import { GetRequirementsByUserId, DeleteRequirement } from 'src/app/core/store/actions/requirement.actions';
 import { Observable, Subscription } from 'rxjs';
-import { selectRequirementsList } from 'src/app/core/store/selectors/requirement.selectors';
 import { MatTableDataSource, MatSort } from '@angular/material';
 import { Requirement } from 'src/app/shared/models/requirement.model';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { Router } from '@angular/router';
+import { GetPostsByUserIdAndType, DeletePost } from 'src/app/core/store/actions/post.actions';
+import { PostType } from 'src/app/shared/models/post-types.enum';
+import { selectPostsByUserIdAndType } from 'src/app/core/store/selectors/post.selectors';
 
 @Component({
   selector: 'app-requirement-list',
@@ -48,12 +49,12 @@ export class RequirementListComponent implements OnInit, OnDestroy {
     this.userSubsription = this.authService.loggedInUser$.pipe(
       map((u) => {
         if (u) {
-          this.store.dispatch(GetRequirementsByUserId({ userId: u._id, status: ''}));
+          this.store.dispatch(GetPostsByUserIdAndType({ userId: u._id, status: '', postType: PostType.Requirement}));
         }
       })
     ).subscribe();
 
-    this.requirementsListSubscription = this.store.select(selectRequirementsList).pipe(
+    this.requirementsListSubscription = this.store.select(selectPostsByUserIdAndType).pipe(
       map((requirements) => {
         if (requirements) {
           this.dataSource.data = requirements;
@@ -75,13 +76,8 @@ export class RequirementListComponent implements OnInit, OnDestroy {
     }
   }
 
-  editRequirement(requirement): void {
-    // this.store.dispatch(SetSelectedRequirement({requirement}));
-    // this.router.navigate(['/add-requirement'], );
-  }
-
-  deleteRequirement(requirementId: string) {
-    this.store.dispatch(DeleteRequirement({requirementId}));
+  deleteRequirement(postId: string) {
+    this.store.dispatch(DeletePost({postId}));
   }
 
   redirectToRequirementDetails(details) {

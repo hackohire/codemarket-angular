@@ -11,6 +11,7 @@ import { testingReducers } from './testing.reducers';
 import { howtodocReducers } from './howtodoc.reducers';
 import { designReducers } from './design.reducers';
 import { goalReducers } from './goal.reducers';
+import { postReducers } from './post.reducers';
 
 export function appReducesrs(): ActionReducerMap<AppState, any> {
     return {
@@ -24,7 +25,8 @@ export function appReducesrs(): ActionReducerMap<AppState, any> {
         testing: testingReducers,
         howtodoc: howtodocReducers,
         design: designReducers,
-        goal: goalReducers
+        goal: goalReducers,
+        post: postReducers
     };
 }
 

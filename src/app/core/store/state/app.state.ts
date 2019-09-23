@@ -9,6 +9,7 @@ import { TestingState } from './testing.state';
 import { HowtodocState } from './howtodoc.state';
 import { DesignState } from './design.state';
 import { GoalState } from './goal.state';
+import { PostState } from './post.state';
 
 export interface AppState {
     router?: RouterReducerState;
@@ -19,9 +20,10 @@ export interface AppState {
     requirement: RequirementState;
     interview: InterviewState;
     testing: TestingState;
-    howtodoc: HowtodocState,
-    design: DesignState,
-    goal: GoalState
+    howtodoc: HowtodocState;
+    design: DesignState;
+    goal: GoalState;
+    post: PostState;
 }
 
 export const initialAppState: AppState = {
@@ -34,7 +36,8 @@ export const initialAppState: AppState = {
     testing: null,
     howtodoc: null,
     design: null,
-    goal: null
+    goal: null,
+    post: null
 };
 
 export function getInitialAppState(): AppState {

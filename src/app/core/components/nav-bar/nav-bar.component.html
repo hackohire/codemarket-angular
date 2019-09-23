@@ -14,7 +14,7 @@
       <!-- Selling -->
       <a mat-list-item [routerLink]="[{outlets: {'main': ['sell']}}]">My Bugfixes</a>
 
-      <a mat-list-item [routerLink]="[{outlets: {'main': ['help']}}]">My Help Requests</a>
+      <a mat-list-item [routerLink]="[{outlets: {'main': ['help-request']}}]">My Help Requests</a>
 
 
       <a mat-list-item [routerLink]="[{outlets: {'main': ['interview']}}]">My Interviews</a>
@@ -25,7 +25,7 @@
       <a mat-list-item [routerLink]="[{outlets: {'main': ['testing']}}]">My Testing Reports</a>
       <a mat-list-item [routerLink]="[{outlets: {'main': ['howtodoc']}}]">My How-To-Guides</a>
       <a mat-list-item [routerLink]="[{outlets: {'main': ['design']}}]">My Designs</a>
-      <a mat-list-item [routerLink]="[{outlets: {'main': ['goal']}}]">My Goals</a>
+      <a mat-list-item [routerLink]="[{outlets: {'main': ['goal', 'post-list']}}]" [queryParams]="{type: 'goal'}">My Goals</a>
     </mat-nav-list>
   </mat-sidenav>
 
@@ -59,7 +59,7 @@
         </button>
 
         <!-- Add Help Request -->
-        <button mat-menu-item [routerLink]="[{outlets: {'main': ['help', 'add-help-request']}}]">
+        <button mat-menu-item [routerLink]="[{outlets: {'main': ['help-request', 'add-help-request']}}]">
           <!-- <mat-icon>Help Request</mat-icon> -->
           <i style="font-size: 1.7rem !important;" class="vertical-align-middle fal fa-question-circle fa-fw"></i>
           <span> Help Request</span>

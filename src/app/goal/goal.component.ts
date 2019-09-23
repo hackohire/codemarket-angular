@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PostType } from '../shared/models/post-types.enum';
 
 @Component({
   selector: 'app-goal',
@@ -10,9 +11,15 @@ export class GoalComponent implements OnInit {
   navLinks = [];
   constructor() {
     this.navLinks = [
+      // {
+      //   path: 'goal-list',
+      //   label: 'Goal List',
+      //   queryParams: {type: PostType.Goal}
+      // },
       {
-        path: 'goal-list',
-        label: 'Goal List'
+        path: 'post-list',
+        label: 'Goal List',
+        queryParams: {type: PostType.Goal}
       },
       {
         path: 'add-goal',

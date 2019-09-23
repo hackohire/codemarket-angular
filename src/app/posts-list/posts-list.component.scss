@@ -15,24 +15,24 @@ th.mat-sort-header-sorted {
     height: 0;
   }
   
-  tr.example-goal-row:not(.example-expanded-row):hover {
+  tr.example-post-row:not(.example-expanded-row):hover {
     background: #777;
   }
   
-  tr.example-goal-row:not(.example-expanded-row):active {
+  tr.example-post-row:not(.example-expanded-row):active {
     background: #efefef;
   }
   
-  .example-goal-row td {
+  .example-post-row td {
     border-bottom-width: 0;
   }
   
-  .example-goal-detail {
+  .example-post-detail {
     overflow: hidden;
     display: flex;
   }
   
-  .example-goal-diagram {
+  .example-post-diagram {
     min-width: 80px;
     border: 2px solid black;
     padding: 8px;
@@ -41,17 +41,17 @@ th.mat-sort-header-sorted {
     height: 104px;
   }
   
-  .example-goal-symbol {
+  .example-post-symbol {
     font-weight: bold;
     font-size: 40px;
     line-height: normal;
   }
   
-  .example-goal-description {
+  .example-post-description {
     padding: 16px;
   }
   
-  .example-goal-description-attribution {
+  .example-post-description-attribution {
     opacity: 0.5;
   }
   

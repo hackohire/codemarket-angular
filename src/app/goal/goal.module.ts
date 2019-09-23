@@ -11,12 +11,16 @@ const goalRoutes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'goal-list',
+        redirectTo: 'post-list',
         pathMatch: 'full',
       },
+      // {
+      //   path: 'goal-list',
+      //   loadChildren: () => import('./goal-list/goal-list.module').then(module => module.GoalListModule)
+      // },
       {
-        path: 'goal-list',
-        loadChildren: () => import('./goal-list/goal-list.module').then(module => module.GoalListModule)
+        path: 'post-list',
+        loadChildren: () => import('../posts-list/posts-list.module').then(module => module.PostsListModule)
       },
       {
         path: 'add-goal',

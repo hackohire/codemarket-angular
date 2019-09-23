@@ -7,22 +7,16 @@ import { ApolloLink } from 'apollo-link';
 import { InMemoryCache, IntrospectionFragmentMatcher } from 'apollo-cache-inmemory';
 import { HttpClientModule } from '@angular/common/http';
 import { StoreModule, ActionReducerMap } from '@ngrx/store';
-import { appReducesrs } from './store/reducers/app.reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { UserEffects } from './store/effects/user.effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EPlatformActions } from './store/actions/app.actions';
 import { ProductEffects } from './store/effects/product.effects';
-import { HelpEffects } from './store/effects/help.effects';
 import { CartEffects } from './store/effects/cart.effects';
-import { InterviewEffects } from './store/effects/interview.effects';
-import { RequirementEffects } from './store/effects/requirement.effects';
 import { AppState } from './store/state/app.state';
-import { TestingEffects } from './store/effects/testing.effects';
-import { HowtodocEffects } from './store/effects/howtodoc.effects';
-import { DesignEffects } from './store/effects/design.effects';
-import { GoalEffects } from './store/effects/goal.effects';
+import { PostEffects } from './store/effects/post.effects';
+import { appReducesrs } from './store/reducers/app.reducers';
 
 
 // Injected Token for actionreducermap or combinereducers for build error
@@ -52,14 +46,8 @@ export function clearState(reducer) {
       [
         UserEffects,
         ProductEffects,
-        HelpEffects,
         CartEffects,
-        InterviewEffects,
-        RequirementEffects,
-        TestingEffects,
-        HowtodocEffects,
-        DesignEffects,
-        GoalEffects
+        PostEffects
       ]),
     StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
     StoreDevtoolsModule.instrument(),

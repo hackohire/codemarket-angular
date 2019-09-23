@@ -11,12 +11,12 @@ const designRoutes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'design-list',
+        redirectTo: 'post-list',
         pathMatch: 'full',
       },
       {
-        path: 'design-list',
-        loadChildren: () => import('./design-list/design-list.module').then(module => module.DesignListModule)
+        path: 'post-list',
+        loadChildren: () => import('../posts-list/posts-list.module').then(module => module.PostsListModule)
       },
       {
         path: 'add-design',

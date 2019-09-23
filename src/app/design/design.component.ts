@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PostType } from '../shared/models/post-types.enum';
 
 @Component({
   selector: 'app-design',
@@ -10,9 +11,14 @@ export class DesignComponent implements OnInit {
   navLinks = [];
   constructor() {
     this.navLinks = [
+      // {
+      //   path: 'design-list',
+      //   label: 'Design  List'
+      // },
       {
-        path: 'design-list',
-        label: 'Design  List'
+        path: 'post-list',
+        label: 'Design  List',
+        queryParams: {type: PostType.Design}
       },
       {
         path: 'add-design',

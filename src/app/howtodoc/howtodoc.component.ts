@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PostType } from '../shared/models/post-types.enum';
 
 @Component({
   selector: 'app-howtodoc',
@@ -10,9 +11,14 @@ export class HowtodocComponent implements OnInit {
   navLinks = [];
   constructor() {
     this.navLinks = [
+      // {
+      //   path: 'howtodoc-list',
+      //   label: 'How-to-Guide List'
+      // },
       {
         path: 'howtodoc-list',
-        label: 'How-to-Guide List'
+        label: 'How-to-Guide List',
+        queryParams: {type: PostType.Design}
       },
       {
         path: 'add-howtodoc',

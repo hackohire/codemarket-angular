@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PostType } from '../shared/models/post-types.enum';
 
 @Component({
   selector: 'app-requirements',
@@ -10,9 +11,14 @@ export class RequirementsComponent implements OnInit {
   navLinks = [];
   constructor() {
     this.navLinks = [
+      // {
+      //   path: 'requirements-list',
+      //   label: 'Requirements List'
+      // },
       {
-        path: 'requirements-list',
-        label: 'Requirements List'
+        path: 'post-list',
+        label: 'Requirements List',
+        queryParams: {type: PostType.Requirement}
       },
       {
         path: 'add-requirement',

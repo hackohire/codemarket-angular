@@ -15,12 +15,12 @@ const requirementRoutes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'requirements-list',
+        redirectTo: 'post-list',
         pathMatch: 'full',
       },
       {
-        path: 'requirements-list',
-        loadChildren: () => import('./requirement-list/requirement-list.module').then(module => module.RequirementListModule)
+        path: 'post-list',
+        loadChildren: () => import('../posts-list/posts-list.module').then(module => module.PostsListModule)
       },
       {
         path: 'add-requirement',

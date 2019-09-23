@@ -11,12 +11,12 @@ const howtodocRoutes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'howtodoc-list',
+        redirectTo: 'post-list',
         pathMatch: 'full',
       },
       {
-        path: 'howtodoc-list',
-        loadChildren: () => import('./howtodoc-list/howtodoc-list.module').then(module => module.HowtodocListModule)
+        path: 'post-list',
+        loadChildren: () => import('../posts-list/posts-list.module').then(module => module.PostsListModule)
       },
       {
         path: 'add-howtodoc',

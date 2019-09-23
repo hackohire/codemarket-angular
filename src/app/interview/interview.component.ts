@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PostType } from '../shared/models/post-types.enum';
 
 @Component({
   selector: 'app-interview',
@@ -10,9 +11,14 @@ export class InterviewComponent implements OnInit {
   navLinks = [];
   constructor() {
     this.navLinks = [
+      // {
+      //   path: 'interview-list',
+      //   label: 'Interview List'
+      // },
       {
-        path: 'interview-list',
-        label: 'Interview List'
+        path: 'post-list',
+        label: 'Interview List',
+        queryParams: {type: PostType.Interview}
       },
       {
         path: 'add-interview',

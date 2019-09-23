@@ -11,12 +11,12 @@ const testingRoutes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'testing-list',
+        redirectTo: 'post-list',
         pathMatch: 'full',
       },
       {
-        path: 'testing-list',
-        loadChildren: () => import('./testing-list/testing-list.module').then(module => module.TestingListModule)
+        path: 'post-list',
+        loadChildren: () => import('../posts-list/posts-list.module').then(module => module.PostsListModule)
       },
       {
         path: 'add-testing',

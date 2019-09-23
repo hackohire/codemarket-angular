@@ -12,12 +12,12 @@ const interviewRoutes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'interview-list',
+        redirectTo: 'post-list',
         pathMatch: 'full',
       },
       {
-        path: 'interview-list',
-        loadChildren: () => import('./interview-list/interview-list.module').then(module => module.InterviewListModule)
+        path: 'post-list',
+        loadChildren: () => import('../posts-list/posts-list.module').then(module => module.PostsListModule)
       },
       {
         path: 'add-interview',

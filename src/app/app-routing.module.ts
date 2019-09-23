@@ -37,7 +37,7 @@ const routes: Routes = [
   },
 
   {
-    path: 'help',
+    path: 'help-request',
     loadChildren: () => import('./help/help.module').then(module => module.HelpModule),
     outlet: 'main',
     canLoad: [AuthGuard]

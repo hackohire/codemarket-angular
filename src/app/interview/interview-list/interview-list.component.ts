@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 import { GetPostsByUserIdAndType, DeletePost } from 'src/app/core/store/actions/post.actions';
 import { PostType } from 'src/app/shared/models/post-types.enum';
 import { selectPostsByUserIdAndType } from 'src/app/core/store/selectors/post.selectors';
+import { PostService } from 'src/app/shared/services/post.service';
 
 @Component({
   selector: 'app-interview-list',
@@ -41,7 +42,7 @@ export class InterviewListComponent implements OnInit, OnDestroy {
   constructor(
     private authService: AuthService,
     private store: Store<AppState>,
-    private router: Router
+    private postService: PostService
   ) { }
 
   ngOnInit() {
@@ -78,10 +79,6 @@ export class InterviewListComponent implements OnInit, OnDestroy {
 
   deleteInterview(postId: string) {
     this.store.dispatch(DeletePost({postId}));
-  }
-
-  redirectToInterviewDetails(details) {
-    this.router.navigate(['/', {outlets: {main: ['dashboard', 'interview-details', details._id]}}]);
   }
 
 }

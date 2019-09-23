@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 import { GetPostsByUserIdAndType, DeletePost } from 'src/app/core/store/actions/post.actions';
 import { PostType } from 'src/app/shared/models/post-types.enum';
 import { selectPostsByUserIdAndType } from 'src/app/core/store/selectors/post.selectors';
+import { PostService } from 'src/app/shared/services/post.service';
 
 @Component({
   selector: 'app-design-list',
@@ -41,7 +42,7 @@ export class DesignListComponent implements OnInit, OnDestroy {
   constructor(
     private authService: AuthService,
     private store: Store<AppState>,
-    private router: Router
+    public postService: PostService
   ) { }
 
   ngOnInit() {
@@ -84,10 +85,6 @@ export class DesignListComponent implements OnInit, OnDestroy {
 
   deleteDesign(postId: string) {
     this.store.dispatch(DeletePost({postId}));
-  }
-
-  redirectToDesignDetails(details) {
-    this.router.navigate(['/', {outlets: {main: ['dashboard', 'design-details', details._id]}}]);
   }
 
 }

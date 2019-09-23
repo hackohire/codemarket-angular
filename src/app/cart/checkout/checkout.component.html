@@ -27,7 +27,7 @@
                                     <li class="item" *ngFor="let product of cartProductsList">
                                         <!-- {{product | json}} -->
                                         <div>
-                                            <a (click)="redirectToProductDetails(product)">{{product?.name}}</a>
+                                            <a (click)="postService.redirectToPostDetails(product)">{{product?.name}}</a>
                                             <span>{{product?.price | currency}}</span>
                                         </div>
                                     </li>

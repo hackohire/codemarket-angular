@@ -9,7 +9,7 @@
     <!-- Name Column -->
     <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
-        <td mat-cell (click)="redirectToGoalDetails(goal)" *matCellDef="let goal"> {{goal.name}} </td>
+        <td mat-cell (click)="postService.redirectToPostDetails(goal)" *matCellDef="let goal"> {{goal.name}} </td>
     </ng-container>
 
     <!-- Price Column -->

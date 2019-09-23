@@ -62,8 +62,7 @@ export class ProductsListComponent implements OnInit, OnDestroy {
     private store: Store<AppState>,
     private activatedRoute: ActivatedRoute,
     private productService: ProductService,
-    private postService: PostService,
-    private router: Router
+    public postService: PostService,
   ) {
 
     const path = this.activatedRoute.parent.routeConfig.path;
@@ -148,11 +147,6 @@ export class ProductsListComponent implements OnInit, OnDestroy {
 
   deleteProduct(productId: string) {
     this.store.dispatch(DeleteProduct({productId}));
-  }
-
-  redirectTo(event) {
-    console.log(event);
-    this.productService.redirectToPostDetails(event);
   }
 
   getListOfUsersWhoPurchased(product: Product) {

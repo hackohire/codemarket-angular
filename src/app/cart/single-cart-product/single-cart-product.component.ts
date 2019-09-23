@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { Product } from 'src/app/shared/models/product.model';
 import { Router } from '@angular/router';
 import { ProductService } from 'src/app/core/services/product.service';
+import { PostService } from 'src/app/shared/services/post.service';
 
 @Component({
   selector: 'app-single-cart-product',
@@ -15,8 +16,7 @@ export class SingleCartProductComponent implements OnInit {
   @Input() product: Product;
 
   constructor(
-    private router: Router,
-    private productService: ProductService
+    public postService: PostService
   ) {
   }
 
@@ -26,9 +26,4 @@ export class SingleCartProductComponent implements OnInit {
   removeProductFromCart(productId: string): void {
     this.removeProduct.emit(productId);
   }
-
-  redirectToProductDetails(product: Product): void {
-    this.productService.redirectToProductDetails(product);
-  }
-
 }

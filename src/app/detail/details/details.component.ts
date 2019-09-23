@@ -21,6 +21,7 @@ import { Goal } from 'src/app/shared/models/goal.model';
 import { PostType } from 'src/app/shared/models/post-types.enum';
 import { selectSelectedPost } from 'src/app/core/store/selectors/post.selectors';
 import { GetPostById, SetSelectedPost } from 'src/app/core/store/actions/post.actions';
+import { Post } from 'src/app/shared/models/post.model';
 
 @Component({
   selector: 'app-details',
@@ -61,105 +62,124 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
+    this.type = this.activatedRoute.snapshot.queryParams['type'];
+
+    console.log(this.activatedRoute.snapshot.queryParams);
+
     const params = this.activatedRoute.snapshot.params;
 
-    if (params['helpRequestId']) {
+    this.subscription$ = this.store.select(selectSelectedPost).pipe(
+      tap((p: Post) => {
+        if (p) {
+          this.details$ = of(p);
+          // this.type = ;
+          this.initializeCommentForm(p);
+        } else {
+          const postId = this.activatedRoute.snapshot.queryParams['postId'];
+          this.store.dispatch(GetPostById({ postId }));
+          this.details$ = this.store.select(selectSelectedPost);
+        }
 
-      this.subscription$ = this.store.select(selectSelectedPost).pipe(
-        tap((p: HelpQuery) => {
-          if (p) {
-            this.details$ = of(p);
-            this.type = PostType.HelpRequest;
-            this.initializeCommentForm(p);
-          } else {
-            const params = this.activatedRoute.snapshot.params;
-            this.store.dispatch(GetPostById({ postId: params.helpRequestId }));
-            this.details$ = this.store.select(selectSelectedPost);
-          }
+      })
+    ).subscribe();
 
-        })
-      ).subscribe();
+    // if (params['helpRequestId']) {
 
-    } else if (params['interviewId']) {
-      this.subscription$ = this.store.select(selectSelectedPost).pipe(
-        tap((p: Interview) => {
-          if (p) {
-            this.details$ = of(p);
-            this.type = PostType.Interview;
-            this.initializeCommentForm(p);
-          } else {
-            this.store.dispatch(GetPostById({ postId: params.interviewId }));
-            this.details$ = this.store.select(selectSelectedPost);
-          }
-        })
-      ).subscribe();
+    //   this.subscription$ = this.store.select(selectSelectedPost).pipe(
+    //     tap((p: HelpQuery) => {
+    //       if (p) {
+    //         this.details$ = of(p);
+    //         this.type = PostType.HelpRequest;
+    //         this.initializeCommentForm(p);
+    //       } else {
+    //         const params = this.activatedRoute.snapshot.params;
+    //         this.store.dispatch(GetPostById({ postId: params.helpRequestId }));
+    //         this.details$ = this.store.select(selectSelectedPost);
+    //       }
 
-    } else if (params['requirementId']) {
-      this.subscription$ = this.store.select(selectSelectedPost).pipe(
-        tap((p: Requirement) => {
-          if (p) {
-            this.details$ = of(p);
-            this.type = PostType.Requirement;
-            this.initializeCommentForm(p);
-          } else {
-            this.store.dispatch(GetPostById({ postId: params.requirementId }));
-            this.details$ = this.store.select(selectSelectedPost);
-          }
-        })
-      ).subscribe();
-    } else if (params['testingId']) {
-      this.subscription$ = this.store.select(selectSelectedPost).pipe(
-        tap((p: Testing) => {
-          if (p) {
-            this.details$ = of(p);
-            this.type = PostType.Testing;
-            this.initializeCommentForm(p);
-          } else {
-            this.store.dispatch(GetPostById({ postId: params.testingId }));
-            this.details$ = this.store.select(selectSelectedPost);
-          }
-        })
-      ).subscribe();
-    } else if (params['howtodocId']) {
-      this.subscription$ = this.store.select(selectSelectedPost).pipe(
-        tap((p: Howtodoc) => {
-          if (p) {
-            this.details$ = of(p);
-            this.type = PostType.Howtodoc;
-            this.initializeCommentForm(p);
-          } else {
-            this.store.dispatch(GetPostById({ postId: params.howtodocId }));
-            this.details$ = this.store.select(selectSelectedPost);
-          }
-        })
-      ).subscribe();
-    } else if (params['designId']) {
-      this.subscription$ = this.store.select(selectSelectedPost).pipe(
-        tap((p: Design) => {
-          if (p) {
-            this.details$ = of(p);
-            this.type = PostType.Design;
-            this.initializeCommentForm(p);
-          } else {
-            this.store.dispatch(GetPostById({ postId: params.designId }));
-            this.details$ = this.store.select(selectSelectedPost);
-          }
-        })
-      ).subscribe();
-    } else if (params['goalId']) {
-      this.subscription$ = this.store.select(selectSelectedPost).pipe(
-        tap((p: Goal) => {
-          if (p) {
-            this.details$ = of(p);
-            this.type = PostType.Goal;
-            this.initializeCommentForm(p);
-          } else {
-            this.store.dispatch(GetPostById({ postId: params.goalId }));
-            this.details$ = this.store.select(selectSelectedPost);
-          }
-        })
-      ).subscribe();
-    }
+    //     })
+    //   ).subscribe();
+
+    // } else if (params['interviewId']) {
+    //   this.subscription$ = this.store.select(selectSelectedPost).pipe(
+    //     tap((p: Interview) => {
+    //       if (p) {
+    //         this.details$ = of(p);
+    //         this.type = PostType.Interview;
+    //         this.initializeCommentForm(p);
+    //       } else {
+    //         this.store.dispatch(GetPostById({ postId: params.interviewId }));
+    //         this.details$ = this.store.select(selectSelectedPost);
+    //       }
+    //     })
+    //   ).subscribe();
+
+    // } else if (params['requirementId']) {
+    //   this.subscription$ = this.store.select(selectSelectedPost).pipe(
+    //     tap((p: Requirement) => {
+    //       if (p) {
+    //         this.details$ = of(p);
+    //         this.type = PostType.Requirement;
+    //         this.initializeCommentForm(p);
+    //       } else {
+    //         this.store.dispatch(GetPostById({ postId: params.requirementId }));
+    //         this.details$ = this.store.select(selectSelectedPost);
+    //       }
+    //     })
+    //   ).subscribe();
+    // } else if (params['testingId']) {
+    //   this.subscription$ = this.store.select(selectSelectedPost).pipe(
+    //     tap((p: Testing) => {
+    //       if (p) {
+    //         this.details$ = of(p);
+    //         this.type = PostType.Testing;
+    //         this.initializeCommentForm(p);
+    //       } else {
+    //         this.store.dispatch(GetPostById({ postId: params.testingId }));
+    //         this.details$ = this.store.select(selectSelectedPost);
+    //       }
+    //     })
+    //   ).subscribe();
+    // } else if (params['howtodocId']) {
+    //   this.subscription$ = this.store.select(selectSelectedPost).pipe(
+    //     tap((p: Howtodoc) => {
+    //       if (p) {
+    //         this.details$ = of(p);
+    //         this.type = PostType.Howtodoc;
+    //         this.initializeCommentForm(p);
+    //       } else {
+    //         this.store.dispatch(GetPostById({ postId: params.howtodocId }));
+    //         this.details$ = this.store.select(selectSelectedPost);
+    //       }
+    //     })
+    //   ).subscribe();
+    // } else if (params['designId']) {
+    //   this.subscription$ = this.store.select(selectSelectedPost).pipe(
+    //     tap((p: Design) => {
+    //       if (p) {
+    //         this.details$ = of(p);
+    //         this.type = PostType.Design;
+    //         this.initializeCommentForm(p);
+    //       } else {
+    //         this.store.dispatch(GetPostById({ postId: params.designId }));
+    //         this.details$ = this.store.select(selectSelectedPost);
+    //       }
+    //     })
+    //   ).subscribe();
+    // } else if (params['goalId']) {
+    //   this.subscription$ = this.store.select(selectSelectedPost).pipe(
+    //     tap((p: Goal) => {
+    //       if (p) {
+    //         this.details$ = of(p);
+    //         this.type = PostType.Goal;
+    //         this.initializeCommentForm(p);
+    //       } else {
+    //         this.store.dispatch(GetPostById({ postId: params.goalId }));
+    //         this.details$ = this.store.select(selectSelectedPost);
+    //       }
+    //     })
+    //   ).subscribe();
+    // }
 
   }
 

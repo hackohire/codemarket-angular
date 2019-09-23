@@ -52,7 +52,7 @@ export class HelpRequestListComponent implements OnInit, OnDestroy {
     private store: Store<AppState>,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private postService: PostService
+    public postService: PostService
   ) {
     this.breadcumb = {
       title: 'List of Help Requests',
@@ -127,15 +127,6 @@ export class HelpRequestListComponent implements OnInit, OnDestroy {
 
   deleteHelpRequest(postId: string) {
     this.store.dispatch(DeletePost({ postId }));
-  }
-
-  redirectToHelpRequestDetails(details) {
-    this.router.navigate(['/', { outlets: { main: ['dashboard', 'help-request-details', details._id] } }]);
-  }
-
-  redirectTo(event) {
-    console.log(event);
-    this.postService.redirectToPostDetails(event);
   }
 
 }

@@ -10,6 +10,7 @@ import { SweetalertService } from 'src/app/shared/services/sweetalert.service';
 import { ProductService } from '../../services/product.service';
 import { selectProductsList } from '../selectors/product.selectors';
 import { PostStatus } from 'src/app/shared/models/poststatus.enum';
+import { PostService } from 'src/app/shared/services/post.service';
 
 @Injectable()
 export class ProductEffects {
@@ -18,6 +19,7 @@ export class ProductEffects {
         private actions$: Actions,
         private sellingProductService: SellingProductsService,
         private productService: ProductService,
+        private postService: PostService,
         private sweetAlertService: SweetalertService,
         private store: Store<AppState>
     ) { }
@@ -39,7 +41,7 @@ export class ProductEffects {
                 this.sweetAlertService.success('Bugfix has been Published Successfully', '', 'success');
             }
 
-            this.productService.redirectToProductDetails(product);
+            this.postService.redirectToPostDetails(product);
 
             // return new ProductAdded(product);
         })
@@ -62,7 +64,7 @@ updateProduct$ = this.actions$.pipe(
             this.sweetAlertService.success('Bugfix changes has been Unpublished Successfully', '', 'success');
         }
 
-        this.productService.redirectToProductDetails(product);
+        this.postService.redirectToPostDetails(product);
 
         return ProductUpdated({ product });
     }),

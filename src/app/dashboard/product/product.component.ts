@@ -6,6 +6,7 @@ import { SetSelectedProduct } from 'src/app/core/store/actions/product.actions';
 import { AddToCart } from 'src/app/core/store/actions/cart.actions';
 import { ProductService } from 'src/app/core/services/product.service';
 import { environment } from 'src/environments/environment';
+import { PostService } from 'src/app/shared/services/post.service';
 
 @Component({
   selector: 'app-product',
@@ -18,16 +19,12 @@ export class ProductComponent implements OnInit {
   codemarketBucketURL = environment.codemarketFilesBucket;
   constructor(
     private store: Store<AppState>,
-    public productService: ProductService
+    public postService: PostService
   ) {
     console.log(this.product);
   }
 
   ngOnInit() {
-  }
-
-  redirectToProductDetails(product: Product): void {
-    this.productService.redirectToProductDetails(product);
   }
 
   addToCart(product: Product) {

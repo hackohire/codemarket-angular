@@ -6,6 +6,7 @@ import { selectPurchasedItemsList } from 'src/app/core/store/selectors/cart.sele
 import { Observable } from 'rxjs';
 import { GetPurchasedItemsByUser } from 'src/app/core/store/actions/cart.actions';
 import { tap } from 'rxjs/operators';
+import { PostService } from 'src/app/shared/services/post.service';
 
 @Component({
   selector: 'app-purchased-items-list',
@@ -17,7 +18,8 @@ export class PurchasedItemsListComponent implements OnInit {
   breadcumb: BreadCumb;
   purchasedItems: any[];
   constructor(
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    public postService: PostService
   ) { }
 
   ngOnInit() {
@@ -46,10 +48,6 @@ export class PurchasedItemsListComponent implements OnInit {
       })
     ).subscribe();
     this.store.dispatch(GetPurchasedItemsByUser());
-  }
-
-  redirectTo(event) {
-
   }
 
 }

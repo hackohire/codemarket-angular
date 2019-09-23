@@ -30,7 +30,7 @@ export class DashboardComponent implements OnInit {
   constructor(
     private store: Store<AppState>,
     private userService: UserService,
-    private postService: PostService
+    public postService: PostService
   ) { }
 
   ngOnInit() {
@@ -38,11 +38,6 @@ export class DashboardComponent implements OnInit {
     this.productsList$ = this.store.select(selectAllProductsList);
     this.helpRequestList$ = this.postService.getPostsByType(PostType.HelpRequest);
     this.usersListAndTheirBugFixes$ = this.userService.getUserListWithBugFixesCount();
-  }
-
-  redirectToHelpRequest(event) {
-    console.log(event);
-    this.postService.redirectToPostDetails(event);
   }
 
   redirectToUserProfile(event) {

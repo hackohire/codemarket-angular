@@ -1,5 +1,5 @@
 <app-breadcumb [title]="breadcumb?.title" [path]="breadcumb?.path"></app-breadcumb>
 
-<app-datatable (redirect)="redirectTo($event)" [data]="purchasedItems"
+<app-datatable (redirect)="postService.redirectToPostDetails($event)" [data]="purchasedItems"
     [displayedColumns]="['number', 'name', 'category']">
 </app-datatable>

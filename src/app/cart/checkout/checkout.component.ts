@@ -12,6 +12,7 @@ import { SellingProductsService } from 'src/app/selling/selling-products.service
 import { AuthService } from 'src/app/core/services/auth.service';
 import { GetCartProductsList } from 'src/app/core/store/actions/cart.actions';
 import { get } from 'lodash';
+import { PostService } from 'src/app/shared/services/post.service';
 declare var paypal;
 
 @Component({
@@ -35,6 +36,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   constructor(
     private store: Store<AppState>,
     public productService: ProductService,
+    public postService: PostService,
     public sellingService: SellingProductsService,
     public authService: AuthService
   ) {
@@ -125,10 +127,6 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     if (this.subscription$) {
       this.subscription$.unsubscribe();
     }
-  }
-
-  redirectToProductDetails(product: Product): void {
-    this.productService.redirectToProductDetails(product);
   }
 
   addTransaction(transaction: any = {}) {

@@ -82,7 +82,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    const params = this.activatedRoute.snapshot.params;
+    const params = this.activatedRoute.snapshot.queryParams;
     this.productDetails$ = this.store.select(selectSelectedProduct);
 
     this.subscription$ = this.store.select(selectSelectedProduct).pipe(
@@ -117,11 +117,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
             })
           ).subscribe();
         } else {
-
-          if (params['productId']) {
-            // console.log(this.authService.loggedInUser._id);
-            this.store.dispatch(GetProductById({ productId: params.productId }));
-          }
+            this.store.dispatch(GetProductById({ productId: params.postId }));
         }
       }),
     ).subscribe();

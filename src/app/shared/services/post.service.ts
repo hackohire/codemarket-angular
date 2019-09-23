@@ -207,8 +207,9 @@ export class PostService {
     );
   }
 
-  redirectToPostDetails(post: Post): void {
+  redirectToPostDetails(post): void {
     this.store.dispatch(SetSelectedPost({ post }));
-    this.router.navigate(['/', { outlets: { main: ['dashboard', `${post.type}-details`, post._id] } }]);
+    this.router.navigate(['/', { outlets: { main: ['dashboard', `${post.type}-details`, post._id]}}],
+      { queryParams: {type: post.type, postId: post._id}} );
   }
 }

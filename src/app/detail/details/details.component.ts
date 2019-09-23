@@ -102,7 +102,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
             this.type = PostType.Requirement;
             this.initializeCommentForm(p);
           } else {
-            this.store.dispatch(GetPostById({ postId: params.interviewId }));
+            this.store.dispatch(GetPostById({ postId: params.requirementId }));
             this.details$ = this.store.select(selectSelectedPost);
           }
         })

@@ -1,17 +1,16 @@
 import { Component, OnInit, ElementRef, ViewChild, OnDestroy } from '@angular/core';
 import { BreadCumb } from 'src/app/shared/models/bredcumb.model';
-import { Observable, Subscription, forkJoin } from 'rxjs';
+import { Subscription, forkJoin } from 'rxjs';
 import { ProductService } from 'src/app/core/services/product.service';
 import { Product } from 'src/app/shared/models/product.model';
 import * as _ from 'lodash';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/core/store/state/app.state';
-import { tap, map, delay, switchMap, mergeMap } from 'rxjs/operators';
+import { tap, map, mergeMap } from 'rxjs/operators';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { SellingProductsService } from 'src/app/selling/selling-products.service';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { GetCartProductsList } from 'src/app/core/store/actions/cart.actions';
-import { get } from 'lodash';
 import { PostService } from 'src/app/shared/services/post.service';
 declare var paypal;
 

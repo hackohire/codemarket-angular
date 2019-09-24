@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AppComponent } from './app.component';
 import { AuthGuard } from './shared/guards/auth.guard';
 
 const routes: Routes = [
@@ -80,6 +79,13 @@ const routes: Routes = [
   {
     path: 'goal',
     loadChildren: () => import('./goal/goal.module').then(module => module.GoalModule),
+    outlet: 'main',
+    canLoad: [AuthGuard]
+  },
+
+  {
+    path: 'membership',
+    loadChildren: () => import('./membership/membership.module').then(module => module.MembershipModule),
     outlet: 'main',
     canLoad: [AuthGuard]
   },

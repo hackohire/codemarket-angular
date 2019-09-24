@@ -9,6 +9,10 @@ export const environment = {
   graphql_url: 'http://localhost:3200/graphql',
   applicationId: '5d2ef428bbfa6576b357d5d4',
   codemarketFilesBucket: 'https://codemarket-files.s3.amazonaws.com/public/',
+  paypalSandbox: 'https://api.sandbox.paypal.com',
+  paypalLive: 'https://api.paypal.com',
+  paypalClientId: 'AVR1oK5MHxZUx0Ikqva1nyHFIL6S1c1N_bAfStE2gcqyOabNrk6_zditFtnEUYwTGhEbLkOEvgyKlvXY',
+  paypalSecret: 'EL11MdtgJ_qCyuhtzINcHmans8w3LvyrgouI_V-4LUqe_LmYOzsLTjKKCHKN9Wy_WLZAZXKP3Px969Mf',
   oauth: {
     // Domain name
     domain: 'platform.auth.us-east-1.amazoncognito.com',

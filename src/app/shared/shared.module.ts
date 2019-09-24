@@ -20,6 +20,7 @@ import { SafePipe } from './pipes/safe.pipe';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import '../../icons';
 import { LikeDislikeComponent } from './components/like-dislike/like-dislike.component';
+import { PaypalSubscriptionDirective } from './directives/paypal-button.directive';
 
 export function hljsLanguages() {
   return [
@@ -29,7 +30,7 @@ export function hljsLanguages() {
   ];
 }
 @NgModule({
-  declarations: [BreadcumbComponent, EditorComponent, CommentComponent, DatatableComponent, SafePipe, LikeDislikeComponent],
+  declarations: [BreadcumbComponent, EditorComponent, CommentComponent, DatatableComponent, SafePipe, LikeDislikeComponent, PaypalSubscriptionDirective],
   imports: [
     CommonModule,
     FormsModule,
@@ -65,7 +66,8 @@ export function hljsLanguages() {
     ShareButtonsModule,
     ShareModule,
     FontAwesomeModule,
-    SafePipe
+    SafePipe,
+    PaypalSubscriptionDirective
   ]
 })
 export class SharedModule { }

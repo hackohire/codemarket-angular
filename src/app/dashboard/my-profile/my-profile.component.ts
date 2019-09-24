@@ -66,12 +66,18 @@ export class MyProfileComponent implements OnInit {
       },
     ];
 
-    // If user is visiting somebody else's profile don't show add button
+    // If user is visiting somebody else's profile don't show what other user has bought
     if (!this.authorId) {
-      this.navLinks.push({
-        path: 'purchased-items-list',
-        label: 'Buy'
-      });
+      this.navLinks.push(
+        {
+          path: 'purchased-items-list',
+          label: 'Buy'
+        },
+        {
+          path: 'membership-list',
+          label: 'Membership'
+        }
+      );
     }
   }
 

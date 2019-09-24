@@ -27,6 +27,10 @@ const myProfileRoutes: Routes = [
         loadChildren: () => import('../../purchase/purchase.module').then(module => module.PurchaseModule)
       },
       {
+        path: 'membership-list',
+        loadChildren: () => import('../../membership/membership-list/membership-list.module').then(module => module.MembershipListModule)
+      },
+      {
         path: 'add-product',
         loadChildren: () => import('../../selling/add-products/add-products.module').then(module => module.AddProductsModule)
       },

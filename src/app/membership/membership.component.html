@@ -1,0 +1,42 @@
+<!--================================
+        START BREADCRUMB AREA
+=================================-->
+<app-breadcumb [title]="breadcumb?.title" [path]="breadcumb?.path"></app-breadcumb>
+<!--================================
+        END BREADCRUMB AREA
+=================================-->
+
+<section class="job_area section--padding">
+    <div class="container">
+        <div class="row">
+            <!-- start col-md-12 -->
+            <div class="col-md-12">
+                <div class="section-title">
+                    <h1>Open
+                        <span class="highlighted">Memborship Plans</span>
+                    </h1>
+                    <p>* All memberships are a 6-month commitment</p>
+                </div>
+            </div>
+            <!-- end /.col-md-12 -->
+        </div>
+        <!-- end /.row-->
+
+        <div class="row">
+            <div class="col-lg-6 col-md-6" *ngFor="let p of listOfPlans">
+                <div class="card_style2">
+                    <h4 class="card_style2__title">{{p?.name}}</h4>
+                    <div class="card_style2__location_type">
+                        <p>
+                            <span class="lnr lnr-map-marker"></span>New York City</p>
+                        <span class="type pcolorbg">{{p?.billing_cycles[0]?.pricing_scheme?.fixed_price?.value | currency}} {{' / month'}}</span>
+                    </div>
+
+                    <div [id]="p.id"></div>
+                    <div *paypalSubscription="p.id"></div>
+                </div>
+                <!-- end /.single_job -->
+            </div>
+        </div>
+    </div>
+</section>

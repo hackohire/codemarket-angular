@@ -17,15 +17,21 @@
       <a mat-list-item [routerLink]="[{outlets: {'main': ['help-request']}}]">My Help Requests</a>
 
 
-      <a mat-list-item [routerLink]="[{outlets: {'main': ['interview', 'post-list']}}]" [queryParams]="{type: 'interview'}">My Interviews</a>
+      <a mat-list-item [routerLink]="[{outlets: {'main': ['interview', 'post-list']}}]"
+        [queryParams]="{type: 'interview'}">My Interviews</a>
 
 
-      <a mat-list-item [routerLink]="[{outlets: {'main': ['requirement', 'post-list']}}]" [queryParams]="{type: 'requirement'}">My Requirements</a>
+      <a mat-list-item [routerLink]="[{outlets: {'main': ['requirement', 'post-list']}}]"
+        [queryParams]="{type: 'requirement'}">My Requirements</a>
 
-      <a mat-list-item [routerLink]="[{outlets: {'main': ['testing', 'post-list']}}]" [queryParams]="{type: 'testing'}">My Testing Reports</a>
-      <a mat-list-item [routerLink]="[{outlets: {'main': ['howtodoc', 'post-list']}}]" [queryParams]="{type: 'howtodoc'}">My How-To-Guides</a>
-      <a mat-list-item [routerLink]="[{outlets: {'main': ['design', 'post-list']}}]" [queryParams]="{type: 'design'}">My Designs</a>
-      <a mat-list-item [routerLink]="[{outlets: {'main': ['goal', 'post-list']}}]" [queryParams]="{type: 'goal'}">My Goals</a>
+      <a mat-list-item [routerLink]="[{outlets: {'main': ['testing', 'post-list']}}]"
+        [queryParams]="{type: 'testing'}">My Testing Reports</a>
+      <a mat-list-item [routerLink]="[{outlets: {'main': ['howtodoc', 'post-list']}}]"
+        [queryParams]="{type: 'howtodoc'}">My How-To-Guides</a>
+      <a mat-list-item [routerLink]="[{outlets: {'main': ['design', 'post-list']}}]" [queryParams]="{type: 'design'}">My
+        Designs</a>
+      <a mat-list-item [routerLink]="[{outlets: {'main': ['goal', 'post-list']}}]" [queryParams]="{type: 'goal'}">My
+        Goals</a>
     </mat-nav-list>
   </mat-sidenav>
 
@@ -134,6 +140,12 @@
       <a mat-button routerLinkActive="mat-primary" *ngIf="loggedInUser;"
         [routerLink]="['/', {outlets: {'main': ['dashboard', 'my-profile']}}]">
         <mat-icon>face</mat-icon> My Profile
+      </a>
+
+      <!-- Memborship -->
+      <a mat-button routerLinkActive="mat-primary" *ngIf="loggedInUser;"
+        [routerLink]="['/', {outlets: {'main': ['membership']}}]">
+        <mat-icon>card_membership</mat-icon> Membership
       </a>
 
 

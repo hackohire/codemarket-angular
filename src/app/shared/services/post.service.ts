@@ -6,7 +6,6 @@ import { Apollo } from 'apollo-angular';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { AppState } from 'src/app/core/store/state/app.state';
-import { AuthService } from 'src/app/core/services/auth.service';
 import { Post } from '../models/post.model';
 import { description } from '../constants/fragments_constatnts';
 import { SetSelectedPost } from 'src/app/core/store/actions/post.actions';
@@ -52,7 +51,6 @@ export class PostService {
 
   constructor(
     private apollo: Apollo,
-    private auth: AuthService,
     private store: Store<AppState>,
     private router: Router
   ) { }

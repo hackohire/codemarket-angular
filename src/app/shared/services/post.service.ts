@@ -142,7 +142,7 @@ export class PostService {
         post: post
       }
     }).pipe(
-      map(q => q.data.addPost)
+      map((q: any) => q.data.addPost)
     );
   }
 
@@ -162,7 +162,7 @@ export class PostService {
         }
       }
     ).pipe(
-      map((p) => p.data.updatePost),
+      map((p: any) => p.data.updatePost),
     );
   }
 

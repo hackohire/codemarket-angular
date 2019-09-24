@@ -64,7 +64,7 @@ export class SellingProductsService {
         }
       }
     ).pipe(
-      map((p) => p.data.addProduct),
+      map((p: any) => p.data.addProduct),
     );
   }
 
@@ -84,7 +84,7 @@ export class SellingProductsService {
         }
       }
     ).pipe(
-      map((p) => p.data.updateProduct),
+      map((p: any) => p.data.updateProduct),
     );
   }
 
@@ -127,7 +127,7 @@ export class SellingProductsService {
         }
       }
     ).pipe(
-      map((p) => p.data.addTransaction),
+      map((p: any) => p.data.addTransaction),
     );
   }
 
@@ -169,7 +169,7 @@ export class SellingProductsService {
         }
       }
     ).pipe(
-      map((p) => p.data.addToCart),
+      map((p: any) => p.data.addToCart),
     );
   }
   
@@ -212,7 +212,7 @@ export class SellingProductsService {
         }
       }
     ).pipe(
-      map((p) => p.data.removeItemFromCart),
+      map((p: any) => p.data.removeItemFromCart),
     );
   }
 }

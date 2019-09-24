@@ -17,12 +17,15 @@ export class PaypalSubscriptionDirective implements OnInit {
     ngOnInit() {
         console.log(this.planId);
         paypal.Buttons({
+
+            /** @see https://developer.paypal.com/docs/checkout/integration-features/customize-button/# */
             style: {
                 layout:  'horizontal',
                 color:   'blue',
                 shape:   'pill',
                 label:   'paypal'
             },
+            
             createSubscription: (data, actions) => {
                 console.log(data, actions);
                 return actions.subscription.create({

@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Input, TemplateRef, ViewContainerRef, OnInit } from '@angular/core';
+import { Directive, ElementRef, Input, TemplateRef, ViewContainerRef, OnInit, AfterViewChecked, AfterViewInit } from '@angular/core';
 import { MembershipService } from 'src/app/membership/membership.service';
 import { AuthService } from 'src/app/core/services/auth.service';
 declare var paypal;
@@ -6,7 +6,7 @@ declare var paypal;
 @Directive({
     selector: '[paypalSubscription]'
 })
-export class PaypalSubscriptionDirective implements OnInit {
+export class PaypalSubscriptionDirective implements OnInit, AfterViewChecked, AfterViewInit {
     @Input('paypalSubscription') planId: string;
 
     constructor(
@@ -15,6 +15,15 @@ export class PaypalSubscriptionDirective implements OnInit {
     ) { }
 
     ngOnInit() {
+
+
+    }
+
+    ngAfterViewChecked() {
+
+    }
+
+    ngAfterViewInit(): void {
         console.log(this.planId);
         paypal.Buttons({
 
@@ -50,6 +59,5 @@ export class PaypalSubscriptionDirective implements OnInit {
                 // alert('You have successfully created subscription ' + data.subscriptionID);
             }
         }).render(`#${this.planId}`);
-
     }
 }

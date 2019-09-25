@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Input, TemplateRef, ViewContainerRef, OnInit, AfterViewChecked, AfterViewInit } from '@angular/core';
+import { Directive, ElementRef, Input, AfterViewInit } from '@angular/core';
 import { MembershipService } from 'src/app/membership/membership.service';
 import { AuthService } from 'src/app/core/services/auth.service';
 declare var paypal;
@@ -6,22 +6,14 @@ declare var paypal;
 @Directive({
     selector: '[paypalSubscription]'
 })
-export class PaypalSubscriptionDirective implements OnInit, AfterViewChecked, AfterViewInit {
+export class PaypalSubscriptionDirective implements AfterViewInit {
     @Input('paypalSubscription') planId: string;
 
     constructor(
         private membershipService: MembershipService,
-        private authService: AuthService
+        private authService: AuthService,
+        private el: ElementRef
     ) { }
-
-    ngOnInit() {
-
-
-    }
-
-    ngAfterViewChecked() {
-
-    }
 
     ngAfterViewInit(): void {
         console.log(this.planId);
@@ -34,7 +26,6 @@ export class PaypalSubscriptionDirective implements OnInit, AfterViewChecked, Af
                 shape:   'pill',
                 label:   'paypal'
             },
-            
             createSubscription: (data, actions) => {
                 console.log(data, actions);
                 return actions.subscription.create({
@@ -54,10 +45,9 @@ export class PaypalSubscriptionDirective implements OnInit, AfterViewChecked, Af
                     console.log(details);
                     details['purchasedBy'] = this.authService.loggedInUser._id;
                     this.membershipService.saveSubscriptionIntoDatabase(details);
-                    // alert('Transaction completed by ' + details.payer.name.given_name);
                 });
-                // alert('You have successfully created subscription ' + data.subscriptionID);
+                /** alert('You have successfully created subscription ' + data.subscriptionID); */
             }
-        }).render(`#${this.planId}`);
+        }).render(this.el.nativeElement);
     }
 }

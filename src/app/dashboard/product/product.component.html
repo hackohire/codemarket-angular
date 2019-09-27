@@ -29,7 +29,7 @@
                 [src]="product?.createdBy?.avatar ? ((codemarketBucketURL + product.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar"
                     alt="author image">
                 <p>
-                    <a href="#">{{product?.createdBy?.name}}</a>
+                    <a [routerLink]="['/', {outlets: {'main': ['dashboard', 'profile', product?.createdBy?._id ]}}]">{{product?.createdBy?.name}}</a>
                 </p>
             </li>
             <!-- <li class="product_cat"> -->

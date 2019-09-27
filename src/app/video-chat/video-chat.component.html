@@ -1,0 +1,25 @@
+    <!-- <video #localVideo class="localVideo" playsinline autoplay muted></video>
+    <div #remoteVideo class="remoteVideos"></div> -->
+    <!-- <h3>Local</h3> -->
+    <!-- <video #localVideo id="localVideo" playsinline autoplay muted></video> -->
+
+    <!-- <h3>Remote</h3> -->
+    <video style="width:500px;" #remoteVideo id="remoteVideo" playsinline controls autoplay></video>
+
+    <div class="box">
+        <!-- <button mat-button #startButton (click)="start()" id="startButton">Start</button> -->
+        <button *ngIf="!data?.isSomeoneCalling" mat-button #callButton (click)="call()" id="callButton">Call</button>
+        <!-- <button mat-button #hangUpButton (click)="hangUp()" id="hangUpButton">Hang Up</button> -->
+
+        <button *ngIf="data?.isSomeoneCalling" mat-button color="primary" #answerButton id="answerButton">Answer</button>
+        <button mat-button color="primary" #rejectButton (click)="hangUp()" id="rejectButton">Reject</button>
+    </div>
+
+    <!-- <div class="box">
+        <span>SDP Semantics:</span>
+        <select id="sdpSemantics">
+            <option selected value="">Default</option>
+            <option value="unified-plan">Unified Plan</option>
+            <option value="plan-b">Plan B</option>
+        </select>
+    </div> -->

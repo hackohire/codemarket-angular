@@ -20,6 +20,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import '../../icons';
 import { LikeDislikeComponent } from './components/like-dislike/like-dislike.component';
 import { PaypalSubscriptionDirective } from './directives/paypal-button.directive';
+import { VideoChatComponent } from '../video-chat/video-chat.component';
 
 export function hljsLanguages() {
   return [
@@ -29,7 +30,7 @@ export function hljsLanguages() {
   ];
 }
 @NgModule({
-  declarations: [BreadcumbComponent, EditorComponent, CommentComponent, DatatableComponent, SafePipe, LikeDislikeComponent, PaypalSubscriptionDirective],
+  declarations: [BreadcumbComponent, EditorComponent, CommentComponent, DatatableComponent, SafePipe, LikeDislikeComponent, PaypalSubscriptionDirective, VideoChatComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -54,6 +55,7 @@ export function hljsLanguages() {
     CommentComponent,
     DatatableComponent,
     LikeDislikeComponent,
+    VideoChatComponent,
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
@@ -65,6 +67,9 @@ export function hljsLanguages() {
     FontAwesomeModule,
     SafePipe,
     PaypalSubscriptionDirective
+  ],
+  entryComponents: [
+    VideoChatComponent
   ]
 })
 export class SharedModule { }

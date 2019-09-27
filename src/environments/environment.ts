@@ -13,6 +13,7 @@ export const environment = {
   paypalLive: 'https://api.paypal.com',
   paypalClientId: 'AVR1oK5MHxZUx0Ikqva1nyHFIL6S1c1N_bAfStE2gcqyOabNrk6_zditFtnEUYwTGhEbLkOEvgyKlvXY',
   paypalSecret: 'EL11MdtgJ_qCyuhtzINcHmans8w3LvyrgouI_V-4LUqe_LmYOzsLTjKKCHKN9Wy_WLZAZXKP3Px969Mf',
+  webSocketURL: 'ws://localhost:3001',
   oauth: {
     // Domain name
     domain: 'platform.auth.us-east-1.amazoncognito.com',

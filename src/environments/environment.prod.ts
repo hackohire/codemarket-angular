@@ -8,6 +8,7 @@ export const environment = {
   paypalLive: 'https://api.paypal.com',
   paypalClientId: 'AVR1oK5MHxZUx0Ikqva1nyHFIL6S1c1N_bAfStE2gcqyOabNrk6_zditFtnEUYwTGhEbLkOEvgyKlvXY',
   paypalSecret: 'EL11MdtgJ_qCyuhtzINcHmans8w3LvyrgouI_V-4LUqe_LmYOzsLTjKKCHKN9Wy_WLZAZXKP3Px969Mf',
+  webSocketURL: 'wss://i8zthpq9j3.execute-api.ap-south-1.amazonaws.com/prod',
   applicationId: '5d2ef428bbfa6576b357d5d4',
   oauth: {
     // Domain name

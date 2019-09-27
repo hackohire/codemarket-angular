@@ -6,6 +6,8 @@ import { ActivatedRoute } from '@angular/router';
 import { UserService } from 'src/app/user/user.service';
 import { User } from 'src/app/shared/models/user.model';
 import { Observable } from 'rxjs';
+import { VideoChatComponent } from 'src/app/video-chat/video-chat.component';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-my-profile',
@@ -25,7 +27,8 @@ export class MyProfileComponent implements OnInit {
   constructor(
     public authService: AuthService,
     private activatedRoute: ActivatedRoute,
-    private userService: UserService
+    private userService: UserService,
+    private dialog: MatDialog
   ) {
 
     this.breadcumb = {
@@ -79,6 +82,19 @@ export class MyProfileComponent implements OnInit {
         }
       );
     }
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(VideoChatComponent, {
+      width: '550px',
+      data: {authorId: this.authorId},
+      disableClose: true
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      // this.animal = result;
+    });
   }
 
 }

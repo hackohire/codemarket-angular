@@ -16,7 +16,10 @@
                                 </div>
 
                                 <div class="author">
-                                    <h4>{{user?.name}}</h4>
+                                    <h4>{{user?.name}}</h4> 
+                                    <button *ngIf="authorId && authService?.loggedInUser?._id" (click)="openDialog()" mat-mini-fab color="primary">
+                                        <mat-icon>video_call</mat-icon>
+                                    </button>
                                     <p>On platform since {{user?.createdAt | date}}</p>
                                 </div>
                                 <!-- end /.author -->

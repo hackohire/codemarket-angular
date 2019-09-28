@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavBarComponent } from './core/components/nav-bar/nav-bar.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import 'zone.js/dist/zone-patch-rxjs';
+import { GlobalErrorHandler } from './shared/services/chun_error_handling';
 
 
 @NgModule({
@@ -24,7 +25,7 @@ import 'zone.js/dist/zone-patch-rxjs';
     BrowserAnimationsModule,
     LayoutModule
   ],
-  providers: [],
+  providers: [{provide: ErrorHandler, useClass: GlobalErrorHandler}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

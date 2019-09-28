@@ -46,4 +46,4 @@ testem.log
 Thumbs.db
 
 /dist
-/deploy.sh
+# /deploy.sh

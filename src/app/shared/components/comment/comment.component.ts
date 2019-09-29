@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { tap } from 'rxjs/operators';
-import * as moment from 'moment';
+import moment from 'moment';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { BlockToolData } from '@editorjs/editorjs';
 import { CommentService } from '../../services/comment.service';

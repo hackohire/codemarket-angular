@@ -13,11 +13,15 @@ import { ProductService } from 'src/app/core/services/product.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { switchMap } from 'rxjs/operators';
-import * as moment from 'moment';
+import moment from 'moment';
 import { CommentService } from 'src/app/shared/services/comment.service';
 import { environment } from 'src/environments/environment';
 import { ShareService } from '@ngx-share/core';
 import { Meta, Title } from '@angular/platform-browser';
+import { UserService } from 'src/app/user/user.service';
+import { MatDialog } from '@angular/material';
+import { VideoChatComponent } from 'src/app/video-chat/video-chat.component';
+import Peer from 'peerjs';
 
 @Component({
   selector: 'app-product-details',
@@ -47,6 +51,9 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
 
   productDetails$: Observable<Product>;
   subscription$: Subscription;
+
+  peer: Peer;
+
   constructor(
     private store: Store<AppState>,
     private activatedRoute: ActivatedRoute,
@@ -54,8 +61,10 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     public authService: AuthService,
     private commentService: CommentService,
     public share: ShareService,
+    private userService: UserService,
     private meta: Meta,
-    private title: Title
+    private title: Title,
+    private dialog: MatDialog
   ) {
     this.breadcumb = {
       path: [
@@ -74,7 +83,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     if (this.subscription$) {
       this.subscription$.unsubscribe();
-      this.store.dispatch(SetSelectedProduct({product: null}));
+      this.store.dispatch(SetSelectedProduct({ product: null }));
     }
 
     this.title.setTitle('Codemarket');
@@ -90,16 +99,16 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
         if (p) {
 
           /** adding meta tags */
-          this.meta.addTag({property: 'og:title', content: p.name});
-          this.meta.addTag({property: 'twitter:title', content: p.name});
-          this.meta.addTag({property: 'og:url', content: window.location.href});
-          this.meta.addTag({property: 'al:web:url', content: window.location.href});
-          this.meta.addTag({property: 'og:type', content: 'article'});
+          this.meta.addTag({ property: 'og:title', content: p.name });
+          this.meta.addTag({ property: 'twitter:title', content: p.name });
+          this.meta.addTag({ property: 'og:url', content: window.location.href });
+          this.meta.addTag({ property: 'al:web:url', content: window.location.href });
+          this.meta.addTag({ property: 'og:type', content: 'article' });
 
-          this.meta.addTag({name: 'title', content: p.name});
-          this.meta.addTag({name: 'og:url', content: window.location.href});
-          this.meta.addTag({name: 'al:web:url', content: window.location.href});
-          this.meta.addTag({name: 'og:type', content: 'article'});
+          this.meta.addTag({ name: 'title', content: p.name });
+          this.meta.addTag({ name: 'og:url', content: window.location.href });
+          this.meta.addTag({ name: 'al:web:url', content: window.location.href });
+          this.meta.addTag({ name: 'og:type', content: 'article' });
 
           /** Setting the page title */
           this.title.setTitle(p.name);
@@ -116,8 +125,11 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
               this.commentsList = d;
             })
           ).subscribe();
+
+          this.susbcribePeer();
+
         } else {
-            this.store.dispatch(GetProductById({ productId: params.postId }));
+          this.store.dispatch(GetProductById({ productId: params.postId }));
         }
       }),
     ).subscribe();
@@ -157,6 +169,28 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
   fromNow(date) {
     const d = new Date(+date);
     return moment(d).fromNow();
+  }
+
+  susbcribePeer() {
+    /** Peer Subscription for Video Call */
+    this.userService.peer.subscribe((p) => {
+      if (p) {
+        console.log(p);
+        this.peer = p;
+      }
+    });
+  }
+
+  openDialog(authorId?: string): void {
+    const dialogRef = this.dialog.open(VideoChatComponent, {
+      width: '550px',
+      data: { authorId, peer: this.peer },
+      disableClose: true
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 
 }

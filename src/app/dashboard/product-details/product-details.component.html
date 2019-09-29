@@ -185,6 +185,9 @@
                                         [routerLink]="['/', {outlets: {'main': ['dashboard', 'profile', product?.createdBy?._id ]}}]">
                                         <h4>{{product?.createdBy?.name}}</h4>
                                     </a>
+                                    <button *ngIf="product?.createdBy?._id && authService?.loggedInUser?._id && authService?.loggedInUser?._id !== product?.createdBy?._id" (click)="openDialog(product?.createdBy?._id)" mat-mini-fab color="primary">
+                                        <mat-icon>video_call</mat-icon>
+                                    </button>
 
                                     <!-- <p>Signed Up: 08 April 2016</p> -->
                                 </div>

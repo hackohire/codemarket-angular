@@ -9,7 +9,7 @@ import { tap, switchMap } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { BreadCumb } from 'src/app/shared/models/bredcumb.model';
 import { FormGroup, FormControl } from '@angular/forms';
-import * as moment from 'moment';
+import moment from 'moment';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { CommentService } from 'src/app/shared/services/comment.service';
 import { environment } from 'src/environments/environment';
@@ -19,6 +19,10 @@ import { Howtodoc } from 'src/app/shared/models/howtodoc.model';
 import { selectSelectedPost } from 'src/app/core/store/selectors/post.selectors';
 import { GetPostById, SetSelectedPost } from 'src/app/core/store/actions/post.actions';
 import { Post } from 'src/app/shared/models/post.model';
+import { UserService } from 'src/app/user/user.service';
+import { MatDialog } from '@angular/material';
+import { VideoChatComponent } from 'src/app/video-chat/video-chat.component';
+import Peer from 'peerjs';
 
 @Component({
   selector: 'app-details',
@@ -40,11 +44,15 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
   commentForm: FormGroup;
 
+  peer: Peer;
+
   constructor(
     private store: Store<AppState>,
     private activatedRoute: ActivatedRoute,
     private commentService: CommentService,
     public authService: AuthService,
+    private userService: UserService,
+    private dialog: MatDialog,
     public share: ShareService
   ) {
     this.breadcumb = {
@@ -71,6 +79,8 @@ export class DetailsComponent implements OnInit, OnDestroy {
           this.details$ = of(p);
           // this.type = ;
           this.initializeCommentForm(p);
+
+          this.susbcribePeer();
         } else {
           const postId = this.activatedRoute.snapshot.queryParams['postId'];
           this.store.dispatch(GetPostById({ postId }));
@@ -231,6 +241,28 @@ export class DetailsComponent implements OnInit, OnDestroy {
   fromNow(date) {
     const d = new Date(+date);
     return moment(d).fromNow();
+  }
+
+  susbcribePeer() {
+    /** Peer Subscription for Video Call */
+    this.userService.peer.subscribe((p) => {
+      if (p) {
+        console.log(p);
+        this.peer = p;
+      }
+    });
+  }
+
+  openDialog(authorId?: string): void {
+    const dialogRef = this.dialog.open(VideoChatComponent, {
+      width: '550px',
+      data: { authorId, peer: this.peer },
+      disableClose: true
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 
 }

@@ -8,6 +8,7 @@ import { User } from 'src/app/shared/models/user.model';
 import { Observable } from 'rxjs';
 import { VideoChatComponent } from 'src/app/video-chat/video-chat.component';
 import { MatDialog } from '@angular/material';
+import Peer from 'peerjs';
 
 @Component({
   selector: 'app-my-profile',
@@ -23,6 +24,8 @@ export class MyProfileComponent implements OnInit {
   authorId: string;
 
   userData$: Observable<User>;
+
+  peer: Peer;
 
   constructor(
     public authService: AuthService,
@@ -55,6 +58,13 @@ export class MyProfileComponent implements OnInit {
       this.userData$ = this.authService.loggedInUser$;
     }
     this.createTabs();
+
+    this.userService.peer.subscribe((p) => {
+      if (p) {
+        console.log(p);
+        this.peer = p;
+      }
+    });
   }
 
   createTabs() {
@@ -87,7 +97,7 @@ export class MyProfileComponent implements OnInit {
   openDialog(): void {
     const dialogRef = this.dialog.open(VideoChatComponent, {
       width: '550px',
-      data: {authorId: this.authorId},
+      data: {authorId: this.authorId, peer: this.peer},
       disableClose: true
     });
 

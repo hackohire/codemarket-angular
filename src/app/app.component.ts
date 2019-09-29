@@ -7,7 +7,8 @@ import { GetCartProductsList } from './core/store/actions/cart.actions';
 import { tap } from 'rxjs/operators';
 import { MatDialog } from '@angular/material';
 import { VideoChatComponent } from './video-chat/video-chat.component';
-import { WebsocketService } from './shared/services/websocket.service';
+import { UserService } from './user/user.service';
+import Peer from 'peerjs';
 
 @Component({
   selector: 'app-root',
@@ -20,10 +21,10 @@ export class AppComponent {
     private authService: AuthService,
     private store: Store<AppState>,
     public dialog: MatDialog,
-    private webSocketService: WebsocketService
+    private userService: UserService
   ) {
 
-    const source = timer(0, 600000);
+    const source = timer(0, 1200000);
 
     const subscribe = source.subscribe(val => {
       this.authService.checkIfUserIsLoggedIn();
@@ -33,13 +34,28 @@ export class AppComponent {
     this.authService.loggedInUser$.pipe(
       tap((u) => {
         if (u) {
-          this.webSocketService.subject.subscribe(async (d: any) => {
-            console.log(d);
-            if (d && d.userWhoIsCalling && !this.dialog.openDialogs.length) {
-              this.openDialog(d.channel);
+
+          const peer = new Peer(u._id);
+
+          peer.on('open', (id) => {
+            console.log('My peer ID is: ' + id);
+            this.userService.peer.next(peer);
+          });
+
+          peer.on('call', (call) => {
+            console.log(call);
+            if (true) {
+              this.openDialog(call, peer);
             }
           });
 
+
+          // this.webSocketService.subject.subscribe(async (d: any) => {
+          //   console.log(d);
+          //   if (d && d.userWhoIsCalling && !this.dialog.openDialogs.length) {
+          //     // this.openDialog(d.channel);
+          //   }
+          // });
           this.store.dispatch(GetCartProductsList());
         }
       })
@@ -47,10 +63,10 @@ export class AppComponent {
 
   }
 
-  openDialog(channel): void {
+  openDialog(call, peer): void {
     const dialogRef = this.dialog.open(VideoChatComponent, {
       width: '550px',
-      data: {isSomeoneCalling: true, channel},
+      data: {isSomeoneCalling: true, call, peer},
       disableClose: true
     });
 

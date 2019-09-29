@@ -1,15 +1,17 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
 import { User } from '../shared/models/user.model';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import Peer from 'peerjs';
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
+  peer = new Subject<Peer>();
   userFields = `
     _id
     name

@@ -23,13 +23,13 @@
         <!-- end /.row-->
 
         <div class="row">
-            <div class="col-lg-6 col-md-6" *ngFor="let p of listOfPlans">
+            <div class="col-lg-4 col-md-4" *ngFor="let p of listOfPlans">
                 <div class="card_style2">
                     <h4 class="card_style2__title">{{p?.name}}</h4>
                     <div class="card_style2__location_type">
                         <p>
                           <!-- <span class="lnr lnr-map-marker"></span>New York City</p>-->
-                        <span class="type pcolorbg">{{p?.billing_cycles[0]?.pricing_scheme?.fixed_price?.value | currency}} {{' / month'}}</span>
+                        <span class="type pcolorbg">{{p?.billing_cycles[0]?.pricing_scheme?.fixed_price?.value}}</span>
                     </div>
 
                     <!-- Using paypalSubscription directive here, and passing the plan Id along with to render the button -->

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of, Subject } from 'rxjs';
+import { Observable, of, Subject, BehaviorSubject } from 'rxjs';
 import { User } from '../shared/models/user.model';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
@@ -11,7 +11,7 @@ import Peer from 'peerjs';
 })
 export class UserService {
 
-  peer = new Subject<Peer>();
+  peer = new BehaviorSubject<Peer>(null);
   userFields = `
     _id
     name

@@ -46,6 +46,14 @@ export class MyProfileComponent implements OnInit {
         }
       ]
     };
+
+    /** Peer Subscription for Video Call */
+    this.userService.peer.subscribe((p) => {
+      if (p) {
+        console.log(p);
+        this.peer = p;
+      }
+    });
   }
 
   ngOnInit() {
@@ -97,7 +105,7 @@ export class MyProfileComponent implements OnInit {
   openDialog(): void {
     const dialogRef = this.dialog.open(VideoChatComponent, {
       width: '550px',
-      data: {authorId: this.authorId, peer: this.peer},
+      data: { authorId: this.authorId, peer: this.peer },
       disableClose: true
     });
 

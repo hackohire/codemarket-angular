@@ -63,6 +63,14 @@ export class DetailsComponent implements OnInit, OnDestroy {
         }
       ]
     };
+
+    /** Peer Subscription for Video Call */
+    this.userService.peer.subscribe((p) => {
+      if (p) {
+        console.log(p);
+        this.peer = p;
+      }
+    });
   }
 
   ngOnInit() {
@@ -80,7 +88,6 @@ export class DetailsComponent implements OnInit, OnDestroy {
           // this.type = ;
           this.initializeCommentForm(p);
 
-          this.susbcribePeer();
         } else {
           const postId = this.activatedRoute.snapshot.queryParams['postId'];
           this.store.dispatch(GetPostById({ postId }));
@@ -193,7 +200,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     if (this.subscription$) {
       this.subscription$.unsubscribe();
-      this.store.dispatch(SetSelectedPost({post: null}));
+      this.store.dispatch(SetSelectedPost({ post: null }));
     }
   }
 
@@ -241,16 +248,6 @@ export class DetailsComponent implements OnInit, OnDestroy {
   fromNow(date) {
     const d = new Date(+date);
     return moment(d).fromNow();
-  }
-
-  susbcribePeer() {
-    /** Peer Subscription for Video Call */
-    this.userService.peer.subscribe((p) => {
-      if (p) {
-        console.log(p);
-        this.peer = p;
-      }
-    });
   }
 
   openDialog(authorId?: string): void {

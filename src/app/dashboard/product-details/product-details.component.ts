@@ -78,6 +78,13 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
       ]
     };
 
+    /** Peer Subscription for Video Call */
+    this.userService.peer.subscribe((p) => {
+      if (p) {
+        console.log(p);
+        this.peer = p;
+      }
+    });
   }
 
   ngOnDestroy() {
@@ -126,8 +133,6 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
             })
           ).subscribe();
 
-          this.susbcribePeer();
-
         } else {
           this.store.dispatch(GetProductById({ productId: params.postId }));
         }
@@ -169,16 +174,6 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
   fromNow(date) {
     const d = new Date(+date);
     return moment(d).fromNow();
-  }
-
-  susbcribePeer() {
-    /** Peer Subscription for Video Call */
-    this.userService.peer.subscribe((p) => {
-      if (p) {
-        console.log(p);
-        this.peer = p;
-      }
-    });
   }
 
   openDialog(authorId?: string): void {

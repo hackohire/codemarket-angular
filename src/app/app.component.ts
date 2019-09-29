@@ -39,14 +39,16 @@ export class AppComponent {
 
           peer.on('open', (id) => {
             console.log('My peer ID is: ' + id);
-            this.userService.peer.next(peer);
+            if (id) {
+              this.userService.peer.next(peer);
+            }
           });
 
           peer.on('call', (call) => {
             console.log(call);
-            if (true) {
-              this.openDialog(call, peer);
-            }
+            // if (true) {
+            this.openDialog(call, peer);
+            // }
           });
 
 

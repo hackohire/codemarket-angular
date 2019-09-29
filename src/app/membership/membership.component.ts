@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { MembershipService } from './membership.service';
 import { BreadCumb } from '../shared/models/bredcumb.model';
 import { plans } from '../shared/constants/plan_details';
+import { AuthService } from '../core/services/auth.service';
 declare var paypal;
 
 @Component({
@@ -16,7 +17,8 @@ export class MembershipComponent implements OnInit {
   @ViewChild('subscribeButton', { static: false }) subscribeButton: ElementRef;
 
   constructor(
-    public memborshipService: MembershipService
+    public memborshipService: MembershipService,
+    public authService: AuthService
   ) {
     this.breadcumb = {
       title: 'Please Subscribe to the membership to attend the events',

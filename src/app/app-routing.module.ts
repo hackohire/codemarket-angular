@@ -87,7 +87,7 @@ const routes: Routes = [
     path: 'membership',
     loadChildren: () => import('./membership/membership.module').then(module => module.MembershipModule),
     outlet: 'main',
-    canLoad: [AuthGuard]
+    // canLoad: [AuthGuard]
   },
 
   {

@@ -1,22 +1,18 @@
-import { Component, OnInit, ViewChild, ElementRef, Inject } from '@angular/core';
-import { fromEvent } from 'rxjs/internal/observable/fromEvent';
+import { Component, ViewChild, ElementRef, Inject } from '@angular/core';
 import { MatButton, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { BreadCumb } from '../shared/models/bredcumb.model';
 import { environment } from 'src/environments/environment';
 import { AuthService } from '../core/services/auth.service';
-import { WebsocketService } from '../shared/services/websocket.service';
 
 @Component({
   selector: 'app-video-chat',
   templateUrl: './video-chat.component.html',
-  styleUrls: ['./video-chat.component.scss'],
-  // providers: [MatDialogRef]
+  styleUrls: ['./video-chat.component.scss']
 })
 
-export class VideoChatComponent implements OnInit {
-  @ViewChild('localVideo', { static: false }) localVideo: ElementRef<HTMLVideoElement>;
+export class VideoChatComponent {
+  // @ViewChild('localVideo', { static: false }) localVideo: ElementRef<HTMLVideoElement>;
   @ViewChild('remoteVideo', { static: false }) remoteVideo: ElementRef<HTMLVideoElement>;
-  @ViewChild('startButton', { static: false }) startButton: MatButton;
   @ViewChild('callButton', { static: false }) callButton: MatButton;
   @ViewChild('answerButton', { static: false }) answerButton: MatButton;
   @ViewChild('rejectButton', { static: false }) rejectButton: MatButton;
@@ -28,8 +24,7 @@ export class VideoChatComponent implements OnInit {
 
   constraints;
   stream: MediaStream;
-  pc: RTCPeerConnection;
-  candidate: RTCIceCandidate;
+  ongoingCallObj: any;
 
   offerOptions = {
     offerToReceiveAudio: true,
@@ -38,12 +33,26 @@ export class VideoChatComponent implements OnInit {
 
   constructor(
     public authService: AuthService,
-    private webSocketService: WebsocketService,
     public dialogRef: MatDialogRef<VideoChatComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
 
     console.log(this.data);
+
+    if (this.data.call) {
+      // this.remoteVideo.nativeElement.srcObject = this.data.call.stream;
+    }
+
+    if (this.data.authorId) {
+    }
+
+    if (this.data.peer) {
+      this.data.peer.on('disconnected', () => {
+        this.removeAllMediaStreams();
+      });
+      // this.remoteVideo.nativeElement.srcObject = this.data.mediaStream;
+    }
+
     this.breadcumb = {
       title: 'Profile',
       path: [
@@ -57,173 +66,83 @@ export class VideoChatComponent implements OnInit {
       ]
     };
 
-    this.webSocketService.subject.subscribe(async (d: any) => {
-      // console.log(d);
-    });
 
     this.constraints = { audio: true, video: true };
-    // const configuration = { iceServers: [{ urls: 'stuns:stun.example.org' }] };
-
-    this.webSocketService.subject.subscribe(async (d: any) => {
-      try {
-        if (d.channel) {
-          if (!this.pc) {
-            this.pc = new RTCPeerConnection();
-            this.onicecandidate();
-            // this.onnegotiationneeded();
-            this.ontrack();
-          }
-          // if we get an offer, we need to reply with an answer
-          if (d.channel.type === 'offer') {
-
-            this.answerButton.disabled = false;
-            fromEvent(this.answerButton._elementRef.nativeElement, 'click').subscribe(async () => {
-              await this.pc.setRemoteDescription(d.channel);
-              this.stream = await navigator.mediaDevices.getUserMedia(this.constraints);
-
-              this.stream.getTracks().forEach((track) => this.pc.addTrack(track, this.stream));
-
-              await this.pc.setLocalDescription(await this.pc.createAnswer());
-              await this.pc.addIceCandidate(this.candidate);
-
-              this.webSocketService.update({
-                sender: this.authService.loggedInUser._id,
-                // receiver: this.authorId,
-                channel: this.pc.localDescription
-              });
-            });
-          } else if (d.channel.type === 'answer') {
-
-            await this.pc.setRemoteDescription(d.channel);
-
-          } else {
-            console.log('Unsupported SDP type.');
-          }
-        } else if (d.candidate) {
-          if (!this.pc) {
-            this.pc = new RTCPeerConnection();
-          }
-          this.candidate = d.candidate;
-          // await this.pc.addIceCandidate(d.candidate);
-
-        } else if (d.message === 'hangUp' && d.sender !== this.authService.loggedInUser._id) {
-          this.hangUp();
-        }
-      } catch (err) {
-        console.error(err);
-      }
-    });
   }
 
   async call() {
 
-    this.webSocketService.subject.next({ action: 'calling', userId: this.data.authorId, sender: this.authService.loggedInUser._id });
+    this.stream = await navigator.mediaDevices.getUserMedia(this.constraints);
+    this.remoteVideo.nativeElement.srcObject = this.stream;
+    this.ongoingCallObj = this.data.peer.call(this.data.authorId, this.stream);
 
-    this.pc = new RTCPeerConnection();
-    this.onicecandidate();
-    // this.onnegotiationneeded();
-    this.ontrack();
+    this.ongoingCallObj.on('stream', (stream) => {
+      // this.stream = stream;
+      this.remoteVideo.nativeElement.srcObject = stream;
+      console.log(stream);
+    });
 
+    this.ongoingCallObj.on('close', () => {
+      this.hangUp();
+    });
+  }
+
+  async answer() {
 
     this.stream = await navigator.mediaDevices.getUserMedia(this.constraints);
-    this.stream.getTracks().forEach((track) => this.pc.addTrack(track, this.stream));
-    // this.localVideo.nativeElement.srcObject = this.stream;
-    this.remoteVideo.nativeElement.srcObject = this.stream;
 
-    this.onnegotiationneeded();
+    this.data.call.answer(this.stream);
+
+    this.data.call.on('stream', (stream) => {
+      // Display the stream of the other user in the peer-camera video element !
+      // this.stream = stream;
+      this.remoteVideo.nativeElement.srcObject = stream;
+    });
+
+    // Handle when the call finishes
+    this.data.call.on('close', () => {
+      alert('The videocall has finished');
+      this.hangUp();
+      // this.hangUp();
+    });
+
+
   }
 
   async hangUp() {
     console.log('Ending call');
-    if (this.pc) {
-      this.pc.close();
-      this.pc = null;
+    // if (this.pc) {
+    //   this.pc.close();
+    //   this.pc = null;
+    // }
 
-      if (this.stream) {
-        this.stream.getTracks().forEach((track) => track.stop());
-      }
+    if (this.data.call) {
+      this.data.call.close();
+    }
 
-      this.rejectButton.disabled = true;
-      this.webSocketService.update({
-        sender: this.authService.loggedInUser._id,
-        // receiver: this.authorId,
-        message: 'hangUp'
+    if (this.ongoingCallObj) {
+      this.ongoingCallObj.close();
+    }
+
+    this.removeAllMediaStreams();
+  }
+
+
+  removeAllMediaStreams() {
+    if (this.stream) {
+      this.stream.getTracks().forEach((track) => {
+        track.stop();
+        console.log(track);
       });
-
-      this.dialogRef.close();
     }
-    // this.callButton.nativeElement.disabled = false;
-  }
 
-  // call start() to initiate
-  async start() {
-    try {
+    this.stream = null;
 
-      // get local stream, show it in self-view and add it to be sent
-      this.pc = new RTCPeerConnection();
-      this.onicecandidate();
-      // this.onnegotiationneeded();
-      this.ontrack();
-
-      const stream = await navigator.mediaDevices.getUserMedia(this.constraints);
-      stream.getTracks().forEach((track) => this.pc.addTrack(track, stream));
-      // this.localVideo.nativeElement.srcObject = stream;
-      this.remoteVideo.nativeElement.srcObject = stream;
-
-    } catch (err) {
-      console.error(err);
+    if (this.remoteVideo && this.remoteVideo.nativeElement.srcObject) {
+      this.remoteVideo.nativeElement.srcObject = null;
     }
-  }
 
-  onicecandidate() {
-    // send any ice candidates to the other peer
-    this.pc.onicecandidate = ({ candidate }) => {
-      if (candidate) {
-        this.webSocketService.update({
-          sender: this.authService.loggedInUser._id,
-          // receiver: this.authorId,
-          candidate
-        });
-      }
-    };
-  }
-
-  async onnegotiationneeded() {
-    // let the "negotiationneeded" event trigger offer generation
-    // this.pc.onnegotiationneeded = async (e) => {
-    try {
-
-      // console.log(e);
-      /* Your async/await-using code goes here */
-      await this.pc.setLocalDescription(await this.pc.createOffer());
-
-      // send the offer to the other peer
-      this.webSocketService.update({
-        sender: this.authService.loggedInUser._id,
-        // receiver: this.authorId,
-        channel: this.pc.localDescription
-      });
-
-    } catch (err) {
-      console.error(err);
-    }
-    // };
-  }
-
-  ontrack() {
-    // once remote track media arrives, show it in remote video element
-    this.pc.ontrack = (event) => {
-      // don't set srcObject again if it is already set.
-      if (this.remoteVideo.nativeElement.srcObject) {
-
-      } else {
-        this.remoteVideo.nativeElement.srcObject = event.streams[0];
-      }
-    };
-  }
-
-  ngOnInit() {
-
+    this.dialogRef.close();
   }
 
 

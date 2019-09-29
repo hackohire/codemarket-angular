@@ -1,9 +1,3 @@
-    <!-- <video #localVideo class="localVideo" playsinline autoplay muted></video>
-    <div #remoteVideo class="remoteVideos"></div> -->
-    <!-- <h3>Local</h3> -->
-    <!-- <video #localVideo id="localVideo" playsinline autoplay muted></video> -->
-
-    <!-- <h3>Remote</h3> -->
     <video style="width:500px;" #remoteVideo id="remoteVideo" playsinline controls autoplay></video>
 
     <div class="box">
@@ -11,7 +5,7 @@
         <button *ngIf="!data?.isSomeoneCalling" mat-button #callButton (click)="call()" id="callButton">Call</button>
         <!-- <button mat-button #hangUpButton (click)="hangUp()" id="hangUpButton">Hang Up</button> -->
 
-        <button *ngIf="data?.isSomeoneCalling" mat-button color="primary" #answerButton id="answerButton">Answer</button>
+        <button *ngIf="data?.call" mat-button color="primary" (click)="answer()" #answerButton id="answerButton">Answer</button>
         <button mat-button color="primary" #rejectButton (click)="hangUp()" id="rejectButton">Reject</button>
     </div>
 

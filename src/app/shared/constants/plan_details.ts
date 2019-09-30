@@ -5,13 +5,20 @@ export const plans = [
         name: 'Developer Plan',
         status: 'ACTIVE',
         description: 'Career plan',
+        benefits: [
+            'Smarter, unlimited search',
+            'Unlimited apps',
+            'Group calls with screen sharing',
+            'Guest accounts and shared channels'
+        ],
         billing_cycles: [
             {
                 pricing_scheme: {
                     version: 1,
                     fixed_price: {
                         currency_code: 'USD',
-                        value: '$39.99/development/month'
+                        value: '39.99',
+                        postfix: 'development/month'
                     },
                     create_time: '2019-09-29T18:42:36Z',
                     update_time: '2019-09-29T18:42:36Z'
@@ -65,13 +72,20 @@ export const plans = [
         name: 'Team Plan',
         status: 'ACTIVE',
         description: 'Team plan',
+        benefits: [
+            'Smarter, unlimited search',
+            'Unlimited apps',
+            'Group calls with screen sharing',
+            'Guest accounts and shared channels'
+        ],
         billing_cycles: [
             {
                 pricing_scheme: {
                     version: 1,
                     fixed_price: {
                         currency_code: 'USD',
-                        value: '$ 35.99/user/month'
+                        value: '35.99',
+                        postfix: 'user/month'
                     },
                     create_time: '2019-09-29T18:47:02Z',
                     update_time: '2019-09-29T18:47:02Z'
@@ -125,13 +139,20 @@ export const plans = [
         name: 'Corporate Plan',
         status: 'ACTIVE',
         description: 'Company plan',
+        benefits: [
+            'Smarter, unlimited search',
+            'Unlimited apps',
+            'Group calls with screen sharing',
+            'Guest accounts and shared channels'
+        ],
         billing_cycles: [
             {
                 pricing_scheme: {
                     version: 1,
                     fixed_price: {
                         currency_code: 'USD',
-                        value: '$29.99/user/month'
+                        value: '29.99',
+                        postfix: 'user/month',
                     },
                     create_time: '2019-09-29T18:50:48Z',
                     update_time: '2019-09-29T18:50:48Z'

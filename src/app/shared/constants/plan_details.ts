@@ -5,6 +5,7 @@ export const plans = [
         name: 'Developer Plan',
         status: 'ACTIVE',
         description: 'Career plan',
+        shortDescription: 'For small and medium-sized businesses',
         benefits: [
             'Smarter, unlimited search',
             'Unlimited apps',
@@ -72,6 +73,7 @@ export const plans = [
         name: 'Team Plan',
         status: 'ACTIVE',
         description: 'Team plan',
+        shortDescription: 'For small and medium-sized businesses',
         benefits: [
             'Smarter, unlimited search',
             'Unlimited apps',
@@ -139,6 +141,7 @@ export const plans = [
         name: 'Corporate Plan',
         status: 'ACTIVE',
         description: 'Company plan',
+        shortDescription: 'For small and medium-sized businesses',
         benefits: [
             'Smarter, unlimited search',
             'Unlimited apps',

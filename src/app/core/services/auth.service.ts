@@ -160,6 +160,17 @@ export class AuthService {
         this.setIdTokenToLocalStorage(u.getSignInUserSession().getIdToken().getJwtToken());
         this.store.dispatch(Authorise());
       }
+
+      /** Check if redirect URL is set */
+      const redirectTo = sessionStorage.getItem('redirectURL');
+      if (redirectTo) {
+
+        /** If redirect URL is set, send the user to the redirect url */
+        this.router.navigateByUrl(redirectTo);
+        
+        /** remove redirect url from session sotrage after redirection */
+        sessionStorage.removeItem('redirectURL');
+      }
       return true;
     }).catch(() => {
       return Auth.currentSession().then((session: CognitoUserSession) => {
@@ -171,7 +182,16 @@ export class AuthService {
         localStorage.clear();
         this.store.dispatch(SetLoggedInUser({payload: null}));
 
+        /** Checking if Auth Guard wants to redirect user to login */
         if (redirect) {
+
+          /** If auth guard asks for redirect, then take the url tree for navigation after login, from getCurrentNavigation()
+           * Otherwise take current URL
+           */
+          const redirectURLTree = this.router.getCurrentNavigation() ?
+                                  this.router.getCurrentNavigation().extractedUrl.toString() : this.router.url;
+          console.log(redirectURLTree);
+          sessionStorage.setItem('redirectURL', redirectURLTree);
           this.login();
         }
         return false;

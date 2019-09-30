@@ -2,10 +2,11 @@
 
     <div class="box">
         <!-- <button mat-button #startButton (click)="start()" id="startButton">Start</button> -->
-        <button *ngIf="!data?.isSomeoneCalling" mat-button #callButton (click)="call()" id="callButton">Call</button>
+        <button *ngIf="!ongoingCallObj && !data?.isSomeoneCalling" mat-button #callButton (click)="call()" id="callButton">Call</button>
         <!-- <button mat-button #hangUpButton (click)="hangUp()" id="hangUpButton">Hang Up</button> -->
 
-        <button *ngIf="data?.call" mat-button color="primary" (click)="answer()" #answerButton id="answerButton">Answer</button>
+        <button *ngIf="data?.isSomeoneCalling && !stream" mat-button color="primary" (click)="answer()" #answerButton id="answerButton">Answer</button>
+        <button mat-button color="primary" (click)="screenShare()">Screen Share</button>
         <button mat-button color="primary" #rejectButton (click)="hangUp()" id="rejectButton">Reject</button>
     </div>
 

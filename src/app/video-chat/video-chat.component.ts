@@ -73,7 +73,7 @@ export class VideoChatComponent {
   async call() {
 
     this.stream = await navigator.mediaDevices.getUserMedia(this.constraints);
-    this.remoteVideo.nativeElement.srcObject = this.stream;
+    // this.remoteVideo.nativeElement.srcObject = this.stream;
     this.ongoingCallObj = this.data.peer.call(this.data.authorId, this.stream);
 
     this.ongoingCallObj.on('stream', (stream) => {
@@ -143,6 +143,37 @@ export class VideoChatComponent {
     }
 
     this.dialogRef.close();
+  }
+
+  async screenShare() {
+    const videoTrack = this.stream.getVideoTracks()[0];
+
+    // @ts-ignore
+    navigator.mediaDevices.getDisplayMedia({video: true}).then((screenStream: MediaStream) => {
+
+      const screen = screenStream.getVideoTracks()[0];
+      // this.remoteVideo.nativeElement.srcObject = a;
+
+      if (this.data.call) {
+        console.log(this.data.call.peerConnection.getSenders());
+        const sender = this.data.call.peerConnection.getSenders().find((s) => {
+          return s.track.kind === videoTrack.kind;
+        });
+        sender.replaceTrack(screen);
+      } else {
+        console.log(this.data.peer.connections[this.data.authorId][0].peerConnection.getSenders());
+        const sender = this.data.peer.connections[this.data.authorId][0].peerConnection.getSenders().find((s) => {
+          return s.track.kind === videoTrack.kind;
+        });
+        sender.replaceTrack(screen);
+      }
+    });
+    // this.stream = a;
+    // this.data.call.answer(this.stream);
+    // console.log(a);
+    // adapter.browserShim.shimGetDisplayMedia(this.constraints).then((d) => {
+    //   console.log(d);
+    // });
   }
 
 

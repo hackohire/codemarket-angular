@@ -1,22 +1,24 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { BreadCumb } from 'src/app/shared/models/bredcumb.model';
-import { FormGroup, FormControl, Validators, FormArray, FormBuilder } from '@angular/forms';
-import { Goal } from 'src/app/shared/models/goal.model';
-import { AuthService } from 'src/app/core/services/auth.service';
-import { Store } from '@ngrx/store';
-import { AppState } from 'src/app/core/store/state/app.state';
-import { MatChipInputEvent } from '@angular/material/chips';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { Subscription, of } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
-import { switchMap, tap, startWith, map } from 'rxjs/operators';
-import { FormService } from 'src/app/shared/services/form.service';
-import { Tag } from 'src/app/shared/models/product.model';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatAutocomplete } from '@angular/material';
-import { PostStatus } from 'src/app/shared/models/poststatus.enum';
-import { PostType } from 'src/app/shared/models/post-types.enum';
-import { SetSelectedPost, GetPostById, AddPost, UpdatePost } from 'src/app/core/store/actions/post.actions';
-import { selectSelectedPost } from 'src/app/core/store/selectors/post.selectors';
+import { MatChipInputEvent } from '@angular/material/chips';
+import { ActivatedRoute } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { of, Subscription } from 'rxjs';
+import { map, startWith, switchMap, tap } from 'rxjs/operators';
+import { AuthService } from '../../core/services/auth.service';
+import { AddPost, GetPostById, SetSelectedPost, UpdatePost } from '../../core/store/actions/post.actions';
+import { selectSelectedPost } from '../../core/store/selectors/post.selectors';
+import { AppState } from '../../core/store/state/app.state';
+import { BreadCumb } from '../../shared/models/bredcumb.model';
+import { Goal } from '../../shared/models/goal.model';
+import { PostType } from '../../shared/models/post-types.enum';
+import { PostStatus } from '../../shared/models/poststatus.enum';
+import { Tag } from '../../shared/models/product.model';
+import { FormService } from '../../shared/services/form.service';
+;
+
 
 
 @Component({

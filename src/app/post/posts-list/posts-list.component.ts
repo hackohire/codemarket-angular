@@ -11,7 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 import { GetPostsByUserIdAndType, GetPostsByType, DeletePost } from 'src/app/core/store/actions/post.actions';
 import { selectPostsByUserIdAndType, selectPostsByType } from 'src/app/core/store/selectors/post.selectors';
 import { PostService } from 'src/app/shared/services/post.service';
-import { BreadCumb } from '../shared/models/bredcumb.model';
+import { BreadCumb } from '../../shared/models/bredcumb.model';
 import * as _ from 'lodash';
 
 @Component({

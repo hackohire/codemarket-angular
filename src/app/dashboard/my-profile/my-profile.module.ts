@@ -19,8 +19,8 @@ const myProfileRoutes: Routes = [
         loadChildren: () => import('../../selling/products-list/products-list.module').then(module => module.ProductsListModule)
       },
       {
-        path: 'help-request-list',
-        loadChildren: () => import('../../help/help-request-list/help-request-list.module').then(module => module.HelpRequestListModule)
+        path: 'post-list',
+        loadChildren: () => import('../../posts-list/posts-list.module').then(module => module.PostsListModule)
       },
       {
         path: 'purchased-items-list',

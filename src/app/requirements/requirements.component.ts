@@ -18,7 +18,7 @@ export class RequirementsComponent implements OnInit {
       {
         path: 'post-list',
         label: 'Requirements List',
-        queryParams: {type: PostType.Requirement}
+        queryParams: {type: PostType.Requirement, all: false}
       },
       {
         path: 'add-requirement',

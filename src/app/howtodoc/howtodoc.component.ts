@@ -18,7 +18,7 @@ export class HowtodocComponent implements OnInit {
       {
         path: 'howtodoc-list',
         label: 'How-to-Guide List',
-        queryParams: {type: PostType.Design}
+        queryParams: {type: PostType.Design, all: false}
       },
       {
         path: 'add-howtodoc',

@@ -34,10 +34,10 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.store.dispatch(GetAllProducts());
-    this.productsList$ = this.store.select(selectAllProductsList);
-    this.helpRequestList$ = this.postService.getPostsByType(PostType.HelpRequest);
-    this.usersListAndTheirBugFixes$ = this.userService.getUserListWithBugFixesCount();
+    // this.store.dispatch(GetAllProducts());
+    // this.productsList$ = this.store.select(selectAllProductsList);
+    // this.helpRequestList$ = this.postService.getPostsByType(PostType.HelpRequest);
+    // this.usersListAndTheirBugFixes$ = this.userService.getUserListWithBugFixesCount();
   }
 
   redirectToUserProfile(event) {

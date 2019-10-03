@@ -19,10 +19,10 @@ export const environment = {
     scope: ['email', 'profile', 'openid'],
 
     // Callback URL
-    redirectSignIn: 'https://codemarket.localtunnel.me', // or 'exp://127.0.0.1:19000/--/', 'myapp://main/'
+    redirectSignIn: 'http://localhost:4800', // or 'exp://127.0.0.1:19000/--/', 'myapp://main/'
 
     // Sign out URL
-    redirectSignOut: 'https://codemarket.localtunnel.me', // or 'exp://127.0.0.1:19000/--/', 'myapp://main/'
+    redirectSignOut: 'http://localhost:4800', // or 'exp://127.0.0.1:19000/--/', 'myapp://main/'
 
     // 'code' for Authorization code grant,
     // 'token' for Implicit grant

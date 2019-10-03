@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 import { VideoChatComponent } from 'src/app/video-chat/video-chat.component';
 import { MatDialog } from '@angular/material';
 import Peer from 'peerjs';
+import { PostType } from '../../shared/models/post-types.enum';
 
 @Component({
   selector: 'app-my-profile',
@@ -82,8 +83,9 @@ export class MyProfileComponent implements OnInit {
         label: 'Sell'
       },
       {
-        path: 'help-request-list',
-        label: 'Request Help'
+        path: 'post-list',
+        label: 'Request Help',
+        queryParams: {type: PostType.HelpRequest, all: false}
       },
     ];
 

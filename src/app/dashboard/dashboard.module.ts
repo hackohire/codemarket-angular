@@ -11,14 +11,19 @@ const dashboardRoutes: Routes = [
     component: DashboardComponent,
     pathMatch: 'full'
   },
+
+  {
+    path: 'post-list',
+    loadChildren: () => import('../post/posts-list/posts-list.module').then(module => module.PostsListModule)
+  },
   {
     path: 'bugfixes-all',
     loadChildren: () => import('../selling/products-list/products-list.module').then(module => module.ProductsListModule),
   },
-  {
-    path: 'help-requests-all',
-    loadChildren: () => import('../help/help-request-list/help-request-list.module').then(module => module.HelpRequestListModule),
-  },
+  // {
+  //   path: 'help-requests-all',
+  //   loadChildren: () => import('../help/help-request-list/help-request-list.module').then(module => module.HelpRequestListModule),
+  // },
 
   // Profile of LoggedIn User
   {
@@ -61,6 +66,10 @@ const dashboardRoutes: Routes = [
   },
   {
     path: 'goal-details/:goalId',
+    loadChildren: () => import('../detail/detail.module').then(module => module.DetailModule),
+  },
+  {
+    path: 'event-details/:eventId',
     loadChildren: () => import('../detail/detail.module').then(module => module.DetailModule),
   },
 ];

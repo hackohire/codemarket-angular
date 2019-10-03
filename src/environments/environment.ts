@@ -5,14 +5,11 @@
 export const environment = {
   production: false,
   COGNITO_AUTH_DOMAIN: 'https://platform.auth.us-east-1.amazoncognito.com',
-  platform_graphql_url: 'http://localhost:3000/graphql',
+  serverless_url: 'http://localhost:3200/',
   graphql_url: 'http://localhost:3200/graphql',
   applicationId: '5d2ef428bbfa6576b357d5d4',
   codemarketFilesBucket: 'https://codemarket-files.s3.amazonaws.com/public/',
-  paypalSandbox: 'https://api.sandbox.paypal.com',
-  paypalLive: 'https://api.paypal.com',
-  paypalClientId: 'AVR1oK5MHxZUx0Ikqva1nyHFIL6S1c1N_bAfStE2gcqyOabNrk6_zditFtnEUYwTGhEbLkOEvgyKlvXY',
-  paypalSecret: 'EL11MdtgJ_qCyuhtzINcHmans8w3LvyrgouI_V-4LUqe_LmYOzsLTjKKCHKN9Wy_WLZAZXKP3Px969Mf',
+  stripe_public_key: 'pk_test_99dtsv5HyEDxitbf4MJIsdxg00yNRqHgxU',
   webSocketURL: 'ws://localhost:3001',
   oauth: {
     // Domain name
@@ -22,10 +19,10 @@ export const environment = {
     scope: ['email', 'profile', 'openid'],
 
     // Callback URL
-    redirectSignIn: 'http://localhost:4800', // or 'exp://127.0.0.1:19000/--/', 'myapp://main/'
+    redirectSignIn: 'https://codemarket.localtunnel.me', // or 'exp://127.0.0.1:19000/--/', 'myapp://main/'
 
     // Sign out URL
-    redirectSignOut: 'http://localhost:4800', // or 'exp://127.0.0.1:19000/--/', 'myapp://main/'
+    redirectSignOut: 'https://codemarket.localtunnel.me', // or 'exp://127.0.0.1:19000/--/', 'myapp://main/'
 
     // 'code' for Authorization code grant,
     // 'token' for Implicit grant

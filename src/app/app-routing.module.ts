@@ -84,6 +84,13 @@ const routes: Routes = [
   },
 
   {
+    path: 'event',
+    loadChildren: () => import('./event/event.module').then(module => module.EventModule),
+    outlet: 'main',
+    canLoad: [AuthGuard]
+  },
+
+  {
     path: 'membership',
     loadChildren: () => import('./membership/membership.module').then(module => module.MembershipModule),
     outlet: 'main',

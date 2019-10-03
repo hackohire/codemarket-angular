@@ -1,6 +1,6 @@
 export const plans = [
     {
-        id: 'P-61W32221LN4700839LWIPWHA',
+        id: 'plan_FutwAg74pxt8rs',
         product_id: 'PROD-55E73002WF4721926',
         name: 'Developer Plan',
         status: 'ACTIVE',
@@ -32,42 +32,9 @@ export const plans = [
                 total_cycles: 6
             }
         ],
-        payment_preferences: {
-            auto_bill_outstanding: true,
-            setup_fee: {
-                currency_code: 'USD',
-                value: '0.0'
-            },
-            setup_fee_failure_action: 'CONTINUE',
-            payment_failure_threshold: 3
-        },
-        taxes: {
-            percentage: '10.0',
-            inclusive: false
-        },
-        quantity_supported: false,
-        create_time: '2019-09-29T18:42:36Z',
-        update_time: '2019-09-29T18:42:36Z',
-        links: [
-            {
-                href: 'https://api.sandbox.paypal.com/v1/billing/plans/P-61W32221LN4700839LWIPWHA',
-                rel: 'self',
-                method: 'GET'
-            },
-            {
-                href: 'https://api.sandbox.paypal.com/v1/billing/plans/P-61W32221LN4700839LWIPWHA',
-                rel: 'edit',
-                method: 'PATCH'
-            },
-            {
-                href: 'https://api.sandbox.paypal.com/v1/billing/plans/P-61W32221LN4700839LWIPWHA/deactivate',
-                rel: 'self',
-                method: 'POST'
-            }
-        ]
     },
     {
-        id: 'P-1M429262C2944183LLWIPYJQ',
+        id: 'plan_FvCWnZ7AJc8zVs',
         product_id: 'PROD-55E73002WF4721926',
         name: 'Team Plan',
         status: 'ACTIVE',
@@ -99,42 +66,9 @@ export const plans = [
                 total_cycles: 6
             }
         ],
-        payment_preferences: {
-            auto_bill_outstanding: true,
-            setup_fee: {
-                currency_code: 'USD',
-                value: '0.0'
-            },
-            setup_fee_failure_action: 'CONTINUE',
-            payment_failure_threshold: 3
-        },
-        taxes: {
-            percentage: '10.0',
-            inclusive: false
-        },
-        quantity_supported: false,
-        create_time: '2019-09-29T18:47:02Z',
-        update_time: '2019-09-29T18:47:02Z',
-        links: [
-            {
-                href: 'https://api.sandbox.paypal.com/v1/billing/plans/P-1M429262C2944183LLWIPYJQ',
-                rel: 'self',
-                method: 'GET'
-            },
-            {
-                href: 'https://api.sandbox.paypal.com/v1/billing/plans/P-1M429262C2944183LLWIPYJQ',
-                rel: 'edit',
-                method: 'PATCH'
-            },
-            {
-                href: 'https://api.sandbox.paypal.com/v1/billing/plans/P-1M429262C2944183LLWIPYJQ/deactivate',
-                rel: 'self',
-                method: 'POST'
-            }
-        ]
     },
     {
-        id: 'P-4SJ220119W888622VLWIP2CA',
+        id: 'plan_FvCXuKSpsLGdTA',
         product_id: 'PROD-55E73002WF4721926',
         name: 'Corporate Plan',
         status: 'ACTIVE',
@@ -166,38 +100,5 @@ export const plans = [
                 total_cycles: 6
             }
         ],
-        payment_preferences: {
-            auto_bill_outstanding: true,
-            setup_fee: {
-                currency_code: 'USD',
-                value: '0.0'
-            },
-            setup_fee_failure_action: 'CONTINUE',
-            payment_failure_threshold: 3
-        },
-        taxes: {
-            percentage: '10.0',
-            inclusive: false
-        },
-        quantity_supported: false,
-        create_time: '2019-09-29T18:50:48Z',
-        update_time: '2019-09-29T18:50:48Z',
-        links: [
-            {
-                href: 'https://api.sandbox.paypal.com/v1/billing/plans/P-4SJ220119W888622VLWIP2CA',
-                rel: 'self',
-                method: 'GET'
-            },
-            {
-                href: 'https://api.sandbox.paypal.com/v1/billing/plans/P-4SJ220119W888622VLWIP2CA',
-                rel: 'edit',
-                method: 'PATCH'
-            },
-            {
-                href: 'https://api.sandbox.paypal.com/v1/billing/plans/P-4SJ220119W888622VLWIP2CA/deactivate',
-                rel: 'self',
-                method: 'POST'
-            }
-        ]
     }
 ];

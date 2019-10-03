@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PostsListComponent } from './posts-list.component';
-import { SharedModule } from '../shared/shared.module';
+import { SharedModule } from '../../shared/shared.module';
 import { Routes, RouterModule } from '@angular/router';
 
 const postListRoutes: Routes = [

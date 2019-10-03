@@ -1,36 +1,34 @@
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatAutocomplete } from '@angular/material';
-import { MatChipInputEvent } from '@angular/material/chips';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { BreadCumb } from 'src/app/shared/models/bredcumb.model';
+import { FormGroup, FormControl, Validators, FormArray, FormBuilder } from '@angular/forms';
+import { Event } from 'src/app/shared/models/event.model';
+import { AuthService } from 'src/app/core/services/auth.service';
 import { Store } from '@ngrx/store';
-import { of, Subscription } from 'rxjs';
-import { map, startWith, switchMap, tap } from 'rxjs/operators';
-import { AuthService } from '../../core/services/auth.service';
-import { AddPost, GetPostById, SetSelectedPost, UpdatePost } from '../../core/store/actions/post.actions';
-import { selectSelectedPost } from '../../core/store/selectors/post.selectors';
-import { AppState } from '../../core/store/state/app.state';
-import { BreadCumb } from '../../shared/models/bredcumb.model';
-import { Goal } from '../../shared/models/goal.model';
-import { PostType } from '../../shared/models/post-types.enum';
-import { PostStatus } from '../../shared/models/poststatus.enum';
-import { Tag } from '../../shared/models/product.model';
-import { FormService } from '../../shared/services/form.service';
-;
-
+import { AppState } from 'src/app/core/store/state/app.state';
+import { MatChipInputEvent } from '@angular/material/chips';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { Subscription, of } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { switchMap, tap, startWith, map } from 'rxjs/operators';
+import { FormService } from 'src/app/shared/services/form.service';
+import { Tag } from 'src/app/shared/models/product.model';
+import { MatAutocomplete } from '@angular/material';
+import { PostStatus } from 'src/app/shared/models/poststatus.enum';
+import { PostType } from 'src/app/shared/models/post-types.enum';
+import { SetSelectedPost, GetPostById, AddPost, UpdatePost } from 'src/app/core/store/actions/post.actions';
+import { selectSelectedPost } from 'src/app/core/store/selectors/post.selectors';
 
 
 @Component({
-  selector: 'app-add-goal',
-  templateUrl: './add-goal.component.html',
-  styleUrls: ['./add-goal.component.scss']
+  selector: 'app-add-event',
+  templateUrl: './add-event.component.html',
+  styleUrls: ['./add-event.component.scss']
 })
-export class AddGoalComponent implements OnInit {
+export class AddEventComponent implements OnInit {
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   urlRegex = '^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$';
   breadcumb: BreadCumb;
-  goalForm: FormGroup;
+  eventForm: FormGroup;
   modules = {
     formula: true,
     syntax: true,
@@ -39,27 +37,27 @@ export class AddGoalComponent implements OnInit {
   edit: boolean;
 
   get createdBy() {
-    return this.goalForm.get('createdBy');
+    return this.eventForm.get('createdBy');
   }
 
   get idFromControl() {
-    return this.goalForm.get('_id');
+    return this.eventForm.get('_id');
   }
 
   get descriptionFormControl() {
-    return this.goalForm.get('description');
+    return this.eventForm.get('description');
   }
 
   get supportDescriptionFormControl() {
-    return this.goalForm.get('support').get('description');
+    return this.eventForm.get('support').get('description');
   }
 
   get tagsFormControl() {
-    return this.goalForm.get('tags') as FormArray;
+    return this.eventForm.get('tags') as FormArray;
   }
 
   get statusFormControl() {
-    return this.goalForm.get('status');
+    return this.eventForm.get('status');
   }
 
   visible = true;
@@ -84,59 +82,59 @@ export class AddGoalComponent implements OnInit {
     private formService: FormService
   ) {
     this.breadcumb = {
-      title: 'Add Goal Details',
+      title: 'Add Event Details',
       path: [
         {
           name: 'Dashboard',
           pathString: '/'
         },
         {
-          name: 'Add Goal'
+          name: 'Add Event'
         }
       ]
     };
 
-    /** If it is "add-goal" route intialize empty goal form, but we are setting store property of "Selectedgoal" as null
-     * and if it is "edit-goal route" we need to subscribe to get "Selectedgoal" and user refresh the tab,
-     * there won't be any selected goal,
+    /** If it is "add-event" route intialize empty event form, but we are setting store property of "Selectedevent" as null
+     * and if it is "edit-event route" we need to subscribe to get "Selectedevent" and user refresh the tab,
+     * there won't be any selected event,
      * so we need to make the call to
-     * get the goal by fetching id from the params
+     * get the event by fetching id from the params
      */
 
-    if (this.activatedRoute.snapshot.parent.routeConfig.path === 'add-goal') {
+    if (this.activatedRoute.snapshot.parent.routeConfig.path === 'add-event') {
       this.store.dispatch(SetSelectedPost({ post: null }));
-      this.goalFormInitialization(null);
+      this.eventFormInitialization(null);
     } else {
       this.subscription$ = this.store.select(selectSelectedPost).pipe(
-        tap((h: Goal) => {
-          this.goalFormInitialization(h);
+        tap((h: Event) => {
+          this.eventFormInitialization(h);
           this.edit = true;
         }),
-        switchMap((h: Goal) => {
+        switchMap((h: Event) => {
           if (!h) {
             return this.activatedRoute.params;
           }
-          return of({ goalId: '' });
+          return of({ eventId: '' });
         }),
         tap((params) => {
-          /** When user refresh the tab, there won't be any selected goal, so we need to make the call to
-           * get the goal by fetching id from the params
+          /** When user refresh the tab, there won't be any selected event, so we need to make the call to
+           * get the event by fetching id from the params
            */
-          if (params.goalId) {
-            this.store.dispatch(GetPostById({ postId: params.goalId }));
+          if (params.eventId) {
+            this.store.dispatch(GetPostById({ postId: params.eventId }));
           }
         })
       ).subscribe();
     }
 
-    // this.goalFormInitialization();
+    // this.eventFormInitialization();
   }
 
   ngOnInit() {
   }
 
-  goalFormInitialization(i: Goal) {
-    this.goalForm = new FormGroup({
+  eventFormInitialization(i: Event) {
+    this.eventForm = new FormGroup({
       name: new FormControl(i && i.name ? i.name : '', Validators.required),
       description: new FormControl(i && i.description ? i.description : ''),
       price: new FormControl(i && i.price ? i.price : 0, Validators.required),
@@ -145,7 +143,7 @@ export class AddGoalComponent implements OnInit {
       status: new FormControl(i && i.status ? i.status : PostStatus.Drafted),
       _id: new FormControl(i && i._id ? i._id : ''),
       tags: this.fb.array(i && i.tags && i.tags.length ? i.tags : []),
-      type: new FormControl(PostType.Goal),
+      type: new FormControl(PostType.Event),
       support: new FormGroup({
         time: new FormControl(i && i.support && i.support.time ? i.support.time : 0),
         description: new FormControl(i && i.support && i.support.description ? i.support.description : '')
@@ -187,16 +185,16 @@ export class AddGoalComponent implements OnInit {
     }
 
     if (this.idFromControl && !this.idFromControl.value) {
-      this.goalForm.removeControl('_id');
-      this.store.dispatch(AddPost({post: this.goalForm.value}));
+      this.eventForm.removeControl('_id');
+      this.store.dispatch(AddPost({post: this.eventForm.value}));
     } else {
-      this.store.dispatch(UpdatePost({post: this.goalForm.value}));
+      this.store.dispatch(UpdatePost({post: this.eventForm.value}));
     }
   }
 
   updateFormData(event) {
     console.log(event);
-    this.goalForm.get('description').setValue(event);
+    this.eventForm.get('description').setValue(event);
   }
 
   updateSupportDescription(event) {

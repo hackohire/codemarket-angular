@@ -1,186 +1,190 @@
 <div *ngIf="userData$ | async as user">
-    <app-breadcumb [title]="user?.name" [path]="breadcumb?.path"></app-breadcumb>
+	<app-breadcumb [title]="user?.name" [path]="breadcumb?.path"></app-breadcumb>
 
 
 
-    <section class="author-profile-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 col-md-12">
-                    <aside class="sidebar sidebar_author">
-                        <div class="author-card sidebar-card">
-                            <div class="author-infos">
-                                <div class="author_avatar">
-                                    <img [src]="user?.avatar ? ((codemarketBucketURL + user.avatar) | safe: 'resourceUrl') : anonymousAvatar"
-                                        alt="Presenting the broken author avatar :D">
-                                </div>
+	<section class="author-profile-area">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-4 col-md-12">
+					<aside class="sidebar sidebar_author">
+						<div class="author-card sidebar-card">
+							<div class="author-infos">
+								<div class="author_avatar">
+									<img
+										[src]="user?.avatar ? ((codemarketBucketURL + user.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+										alt="Presenting the broken author avatar :D">
+								</div>
 
-                                <div class="author">
-                                    <h4>{{user?.name}}</h4> 
-                                    <button *ngIf="authorId && authService?.loggedInUser?._id && authService?.loggedInUser?._id !== authorId" (click)="openDialog()" mat-mini-fab color="primary">
-                                        <mat-icon>video_call</mat-icon>
-                                    </button>
-                                    <p>On platform since {{user?.createdAt | date}}</p>
-                                </div>
-                                <!-- end /.author -->
-
-
-                                <div class="social social--color--filled">
-                                    <ul>
-                                        <li style="margin: 5px; color: initial">
-                                            <a [href]="user?.linkedin_url">
-                                                <i style="font-size: 1.7rem !important;" class="fab fa-linkedin"></i>
-                                            </a>
-                                        </li>
-                                        <li style="margin: 5px">
-                                            <a [href]="user?.github_url">
-                                                <i style="font-size: 1.7rem !important;"
-                                                    class="fab fa-stack-overflow"></i>
-                                            </a>
-                                        </li>
-                                        <li style="margin: 5px">
-                                            <a [href]="user?.stackoverflow_url">
-                                                <i style="font-size: 1.7rem !important;" class="fab fa-github"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
+								<div class="author">
+									<h4>{{user?.name}}</h4>
+									<button
+										*ngIf="authorId && authService?.loggedInUser?._id && authService?.loggedInUser?._id !== authorId"
+										(click)="openDialog()" mat-mini-fab color="primary">
+										<mat-icon>video_call</mat-icon>
+									</button>
+									<p>On platform since {{user?.createdAt | date}}</p>
+								</div>
+								<!-- end /.author -->
 
 
-
-                                <ul class="infos">
-                                    <li>
-                                        <span class="data-label">Likes: </span>
-                                        <span class="info" *ngIf="authService?.loggedInUser; else likeCount">
-                                            <app-like-dislike [data]="user" [type]="'user'" [likeCount]="null">
-                                            </app-like-dislike>
-                                        </span>
-                                        <ng-template #likeCount>
-                                            <div class="info">
-                                                {{user?.likeCount}}
-                                            </div>
-                                        </ng-template>
-                                    </li>
-                                </ul>
-                                <!-- end /.social -->
-
-                                <!-- <div class="author-btn">
-                                        <a href="#" class="btn btn--md btn--round">Follow</a>
-                                    </div> -->
-                                <!-- end /.author-btn -->
-                            </div>
-
-                            <!-- end /.author-infos -->
+								<div class="social social--color--filled">
+									<ul>
+										<li style="margin: 5px; color: initial">
+											<a [href]="user?.linkedin_url">
+												<i style="font-size: 1.7rem !important;" class="fab fa-linkedin"></i>
+											</a>
+										</li>
+										<li style="margin: 5px">
+											<a [href]="user?.github_url">
+												<i style="font-size: 1.7rem !important;" class="fab fa-stack-overflow"></i>
+											</a>
+										</li>
+										<li style="margin: 5px">
+											<a [href]="user?.stackoverflow_url">
+												<i style="font-size: 1.7rem !important;" class="fab fa-github"></i>
+											</a>
+										</li>
+									</ul>
+								</div>
 
 
-                        </div>
-                        <!-- end /.author-card -->
 
-                    </aside>
-                </div>
-                <!-- end /.sidebar -->
+								<ul class="infos">
+									<li>
+										<span class="data-label">Likes: </span>
+										<span class="info" *ngIf="authService?.loggedInUser; else likeCount">
+											<app-like-dislike [data]="user" [type]="'user'" [likeCount]="null">
+											</app-like-dislike>
+										</span>
+										<ng-template #likeCount>
+											<div class="info">
+												{{user?.likeCount}}
+											</div>
+										</ng-template>
+									</li>
+								</ul>
+								<!-- end /.social -->
 
-                <div class="col-lg-8 col-md-12">
+								<!-- <div class="author-btn">
+																				<a href="#" class="btn btn--md btn--round">Follow</a>
+																		</div> -->
+								<!-- end /.author-btn -->
+							</div>
 
-                    <div class="row">
-                        <div class="col-md-12">
-
-                            <nav mat-tab-nav-bar>
-                                <a mat-tab-link *ngFor="let link of navLinks" [routerLink]=" [link.path]"
-                                    routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">
-                                    {{link.label}}
-                                </a>
-
-                                <button *ngIf="!authorId" mat-icon-button mat-tab-link [matMenuTriggerFor]="menu">
-                                    <mat-icon>library_add</mat-icon>
-                                    <mat-icon>keyboard_arrow_down</mat-icon>
-                                </button>
-                            </nav>
-
-                            <mat-menu #menu="matMenu">
-
-                                <!-- Add Product -->
-                                <button mat-menu-item [routerLink]="['add-product']">
-                                    <!-- <mat-icon>dialpad</mat-icon> -->
-                                    <i style="font-size: 1.7rem !important;"
-                                        class="vertical-align-middle fal fa-lightbulb-dollar fa-fw"></i>
-                                    <span class="vertical-align-middle"> Bugfix</span>
-                                </button>
-
-                                <!-- Add Help Request -->
-                                <button mat-menu-item [routerLink]="['add-help-request']">
-                                    <!-- <mat-icon>Help Request</mat-icon> -->
-                                    <i style="font-size: 1.7rem !important;"
-                                        class="vertical-align-middle fal fa-question-circle fa-fw"></i>
-                                    <span> Help Request</span>
-                                </button>
+							<!-- end /.author-infos -->
 
 
-                                <!-- Add Interview Assignment -->
-                                <button mat-menu-item [routerLink]="['add-interview']">
-                                    <!-- <mat-icon>dialpad</mat-icon> -->
-                                    <i style="font-size: 1.7rem !important;"
-                                        class="vertical-align-middle fal fa-user-tie fa-fw"></i>
-                                    <span> Interview</span>
-                                </button>
+						</div>
+						<!-- end /.author-card -->
 
-                                <!-- Add Requirements -->
-                                <button mat-menu-item [routerLink]="['add-requirement']">
-                                    <!-- <mat-icon>notifications_off</mat-icon> -->
-                                    <i style="font-size: 1.7rem !important;"
-                                        class="vertical-align-middle fal fa-file-alt fa-fw"></i>
-                                    <span> Requirements</span>
-                                </button>
+					</aside>
+				</div>
+				<!-- end /.sidebar -->
 
-                                <!-- Add Testings -->
-                                <button mat-menu-item [routerLink]="[{outlets: {'main': ['testing', 'add-testing']}}]">
-                                    <!-- <mat-icon>notifications_off</mat-icon> -->
-                                    <i style="font-size: 1.7rem !important;"
-                                        class="vertical-align-middle fal fa-tasks fa-fw"></i>
-                                    <span> Testing Report</span>
-                                </button>
+				<div class="col-lg-8 col-md-12">
 
+					<div class="row">
+						<div class="col-md-12">
 
-                                <!-- Add How To Guides -->
-                                <button mat-menu-item
-                                    [routerLink]="[{outlets: {'main': ['howtodoc', 'add-howtodoc']}}]">
-                                    <!-- <mat-icon>notifications_off</mat-icon> -->
-                                    <i style="font-size: 1.7rem !important;"
-                                        class="vertical-align-middle fal fa-file-exclamation fa-fw"></i>
-                                    <span> How-To-Guide</span>
-                                </button>
+							<nav mat-tab-nav-bar>
+								<a mat-tab-link *ngFor="let link of navLinks" [routerLink]="[link.path]" [queryParams]="link?.queryParams ? link.queryParams : null" routerLinkActive
+									#rla="routerLinkActive" [active]="rla.isActive">
+									{{link.label}}
+								</a>
 
-                                <!-- Add Designs -->
-                                <button mat-menu-item [routerLink]="[{outlets: {'main': ['design', 'add-design']}}]">
-                                    <!-- <mat-icon>notifications_off</mat-icon> -->
-                                    <i style="font-size: 1.7rem !important;"
-                                        class="vertical-align-middle fal fa-marker fa-fw"></i>
-                                    <span> Design</span>
-                                </button>
-                                
-                                <!-- Add Goals -->
-                                <button mat-menu-item [routerLink]="[{outlets: {'main': ['goal', 'add-goal']}}]">
-                                    <!-- <mat-icon>notifications_off</mat-icon> -->
-                                    <i style="font-size: 1.7rem !important;"
-                                        class="vertical-align-middle fal fa-bullseye-arrow fa-fw"></i>
-                                    <span> Goals</span>
-                                </button>
-                            </mat-menu>
-                            <div>
-                                <router-outlet></router-outlet>
-                            </div>
-                        </div>
-                        <!-- end /.col-md-12 -->
+								<button *ngIf="!authorId" mat-icon-button mat-tab-link [matMenuTriggerFor]="menu">
+									<mat-icon>library_add</mat-icon>
+									<mat-icon>keyboard_arrow_down</mat-icon>
+								</button>
+							</nav>
+
+							<mat-menu #menu="matMenu">
+
+								<!-- Add Product -->
+								<button mat-menu-item [routerLink]="['add-product']">
+									<!-- <mat-icon>dialpad</mat-icon> -->
+									<i style="font-size: 1.7rem !important;"
+										class="vertical-align-middle fal fa-lightbulb-dollar fa-fw"></i>
+									<span class="vertical-align-middle"> Bugfix</span>
+								</button>
+
+								<!-- Add Help Request -->
+								<button mat-menu-item [routerLink]="['add-help-request']">
+									<!-- <mat-icon>Help Request</mat-icon> -->
+									<i style="font-size: 1.7rem !important;"
+										class="vertical-align-middle fal fa-question-circle fa-fw"></i>
+									<span> Help Request</span>
+								</button>
 
 
-                    </div>
-                    <!-- end /.row -->
-                </div>
-                <!-- end /.col-md-8 -->
+								<!-- Add Interview Assignment -->
+								<button mat-menu-item [routerLink]="['add-interview']">
+									<!-- <mat-icon>dialpad</mat-icon> -->
+									<i style="font-size: 1.7rem !important;" class="vertical-align-middle fal fa-user-tie fa-fw"></i>
+									<span> Interview</span>
+								</button>
 
-            </div>
-            <!-- end /.row -->
-        </div>
-        <!-- end /.container -->
-    </section>
+								<!-- Add Requirements -->
+								<button mat-menu-item [routerLink]="['add-requirement']">
+									<!-- <mat-icon>notifications_off</mat-icon> -->
+									<i style="font-size: 1.7rem !important;" class="vertical-align-middle fal fa-file-alt fa-fw"></i>
+									<span> Requirements</span>
+								</button>
+
+								<!-- Add Testings -->
+								<button mat-menu-item [routerLink]="[{outlets: {'main': ['testing', 'add-testing']}}]">
+									<!-- <mat-icon>notifications_off</mat-icon> -->
+									<i style="font-size: 1.7rem !important;" class="vertical-align-middle fal fa-tasks fa-fw"></i>
+									<span> Testing Report</span>
+								</button>
+
+
+								<!-- Add How To Guides -->
+								<button mat-menu-item [routerLink]="[{outlets: {'main': ['howtodoc', 'add-howtodoc']}}]">
+									<!-- <mat-icon>notifications_off</mat-icon> -->
+									<i style="font-size: 1.7rem !important;"
+										class="vertical-align-middle fal fa-file-exclamation fa-fw"></i>
+									<span> How-To-Guide</span>
+								</button>
+
+								<!-- Add Designs -->
+								<button mat-menu-item [routerLink]="[{outlets: {'main': ['design', 'add-design']}}]">
+									<!-- <mat-icon>notifications_off</mat-icon> -->
+									<i style="font-size: 1.7rem !important;" class="vertical-align-middle fal fa-marker fa-fw"></i>
+									<span> Design</span>
+								</button>
+
+								<!-- Add Goals -->
+								<button mat-menu-item [routerLink]="[{outlets: {'main': ['goal', 'add-goal']}}]">
+									<!-- <mat-icon>notifications_off</mat-icon> -->
+									<i style="font-size: 1.7rem !important;"
+										class="vertical-align-middle fal fa-bullseye-arrow fa-fw"></i>
+									<span> Goals</span>
+								</button>
+
+								<!-- Add Events -->
+								<button mat-menu-item [routerLink]="[{outlets: {'main': ['event', 'add-event']}}]">
+									<!-- <mat-icon>notifications_off</mat-icon> -->
+									<i style="font-size: 1.7rem !important;" class="vertical-align-middle fal fa-calendar-plus fa-fw"></i>
+									<span> Events</span>
+								</button>
+							</mat-menu>
+							<div>
+								<router-outlet></router-outlet>
+							</div>
+						</div>
+						<!-- end /.col-md-12 -->
+
+
+					</div>
+					<!-- end /.row -->
+				</div>
+				<!-- end /.col-md-8 -->
+
+			</div>
+			<!-- end /.row -->
+		</div>
+		<!-- end /.container -->
+	</section>
 </div>

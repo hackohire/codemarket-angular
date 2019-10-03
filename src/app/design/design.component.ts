@@ -18,7 +18,7 @@ export class DesignComponent implements OnInit {
       {
         path: 'post-list',
         label: 'Design  List',
-        queryParams: {type: PostType.Design}
+        queryParams: {type: PostType.Design, all: false}
       },
       {
         path: 'add-design',

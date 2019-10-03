@@ -18,7 +18,7 @@ export class InterviewComponent implements OnInit {
       {
         path: 'post-list',
         label: 'Interview List',
-        queryParams: {type: PostType.Interview}
+        queryParams: {type: PostType.Interview, all: false}
       },
       {
         path: 'add-interview',

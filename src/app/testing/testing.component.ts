@@ -18,7 +18,7 @@ export class TestingComponent implements OnInit {
       {
         path: 'post-list',
         label: 'Testing Report List',
-        queryParams: {type: PostType.Testing}
+        queryParams: {type: PostType.Testing, all: false}
       },
       {
         path: 'add-testing',

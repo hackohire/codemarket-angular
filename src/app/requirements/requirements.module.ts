@@ -20,7 +20,7 @@ const requirementRoutes: Routes = [
       },
       {
         path: 'post-list',
-        loadChildren: () => import('../posts-list/posts-list.module').then(module => module.PostsListModule)
+        loadChildren: () => import('../post/posts-list/posts-list.module').then(module => module.PostsListModule)
       },
       {
         path: 'add-requirement',

@@ -12,7 +12,9 @@ import { SellingProductsService } from 'src/app/selling/selling-products.service
 import { AuthService } from 'src/app/core/services/auth.service';
 import { GetCartProductsList } from 'src/app/core/store/actions/cart.actions';
 import { PostService } from 'src/app/shared/services/post.service';
-declare var paypal;
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
+declare var Stripe;
 
 @Component({
   selector: 'app-checkout',
@@ -32,12 +34,19 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   products: any[];
   items: any[];
 
+  stripe;
+  // Replace with your own public key: https://dashboard.stripe.com/test/apikeys
+  PUBLIC_KEY = environment.stripe_public_key;
+  // Replace with the domain you want your users to be redirected back to after payment
+  DOMAIN = window.location.href;
+
   constructor(
     private store: Store<AppState>,
     public productService: ProductService,
     public postService: PostService,
     public sellingService: SellingProductsService,
-    public authService: AuthService
+    public authService: AuthService,
+    public http: HttpClient
   ) {
 
     const a = forkJoin({
@@ -69,6 +78,8 @@ export class CheckoutComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
+    this.stripe = Stripe(this.PUBLIC_KEY);
+
     this.subscription$ = this.productService.cartTotal.pipe(
       mergeMap(source => this.productService.cartProductList.pipe(
         map(inner => [source, inner])
@@ -85,39 +96,17 @@ export class CheckoutComponent implements OnInit, OnDestroy {
         this.items = (pList as any[]).map((prod) => {
           const p: any = {};
           p.name = prod.name;
-          p.reference_id = prod._id;
-          p.unit_amount = {
-            currency_code: 'INR',
-            value: prod.price
-          };
+          // p.description = prod.description;
+          // p.id = prod._id
+          p.amount = prod.price * 100;
+          p.currency = 'usd';
           p.quantity = 1;
+          // p.reference_id = prod._id;
+          // p.purchasedBy = this.authService.loggedInUser._id
           return p;
         });
 
 
-        /** purchase_units for paypal, Right now paypal supports only 1 prchase unit at a time */
-        this.products = [{
-          description: 'ABC',
-          reference_id: 'DEF',
-          amount: {
-            currency_code: 'INR',
-            value: this.cartTotal.toFixed(2),
-            breakdown: {
-              currency_code: 'INR',
-              value: this.cartTotal.toFixed(2),
-              item_total: {
-                value: this.cartTotal.toFixed(2),
-                currency_code: 'INR'
-              },
-            },
-
-          },
-          value: this.cartTotal.toFixed(2).toString(),
-          items: this.items
-        }];
-      }
-      if (cartTotal > 0) {
-        this.createPaypalButton();
       }
     });
   }
@@ -129,29 +118,6 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   }
 
   addTransaction(transaction: any = {}) {
-    const loggedInUserId = this.authService.loggedInUser ? this.authService.loggedInUser._id : '';
-    transaction.purchase_id = transaction.id;
-    transaction.purchasedBy = loggedInUserId;
-
-    transaction.purchase_units = this.items.map((u, i) => {
-      const a: any = {};
-      a.description = u.description;
-      a.amount = {
-        currency_code: u.unit_amount.currency_code,
-        value: u.unit_amount.value.toString()
-      };
-      a.purchasedBy = loggedInUserId;
-      a.description = u.name;
-      a.reference_id = u.reference_id;
-      if (transaction && transaction.purchase_units) {
-        a.payee = transaction.purchase_units[0].payee;
-        a.payments = transaction.purchase_units[0].payments;
-        a.shipping = transaction.purchase_units[0].shipping;
-        a.soft_descriptor = transaction.purchase_units[0].soft_descriptor;
-      }
-      return a;
-    });
-
     this.sellingService.addTransaction(transaction).pipe(
       tap((d) => {
         if (d && d.length) {
@@ -165,27 +131,31 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     ).subscribe();
   }
 
-  createPaypalButton() {
-    setTimeout(() => {
-      if (this.paypalElement && this.paypalElement.nativeElement && this.products.length) {
-        paypal.Buttons({
-          createOrder: (data, actions) => {
-            return actions.order.create({
-              purchase_units: this.products
-            });
-          },
-          onApprove: async (data, actions) => {
-            const order = await actions.order.capture();
-            console.log(data);
-            console.log(order);
-            this.addTransaction(order);
-          },
-          onError: err => {
-            console.log(err);
-          }
-        }).render(this.paypalElement.nativeElement);
-      }
-    }, 0);
+  redirectToCheckout() {
+    let idSring = '';
+    this.cartProductsList.forEach((p, i) => idSring = idSring + p._id + (i < this.cartProductsList.length - 1) ? ',' : '')
+    const session = {
+      payment_method_types: ['card'],
+      line_items: this.items,
+      success_url: this.DOMAIN + "?session_id={CHECKOUT_SESSION_ID}",
+      cancel_url: this.DOMAIN,
+      client_reference_id: this.authService.loggedInUser._id,
+      customer_email: this.authService.loggedInUser.email,
+      payment_intent_data: { metadata: { purchasedItems: idSring } },
+    };
+    this.http.post(environment.serverless_url + 'createCheckoutSession', session).toPromise().then((d: any) => {
+      console.log(d);
+      this.stripe.redirectToCheckout({
+        // Make the id field from the Checkout Session creation API response
+        // available to this file, so you can provide it as parameter here
+        // instead of the {{CHECKOUT_SESSION_ID}} placeholder.
+        sessionId: d.session.id
+      }).then(function (result) {
+        console.log(result);
+        // If `redirectToCheckout` fails due to a browser or network
+        // error, display the localized error message to your customer
+        // using `result.error.message`.
+      });
+    })
   }
-
 }

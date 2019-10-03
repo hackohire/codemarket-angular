@@ -7,6 +7,8 @@ import { environment } from '../../environments/environment';
 import { ActivatedRoute } from '@angular/router';
 import { first } from 'rxjs/internal/operators/first';
 import { HttpClient } from '@angular/common/http';
+import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
+import { GetCartProductsList } from '../core/store/actions/cart.actions';
 // declare var Stripe;
 // declare var paypal;
 declare var Stripe;
@@ -26,7 +28,9 @@ export class MembershipComponent implements OnInit {
   breadcumb: BreadCumb;
   listOfPlans = plans;
   stripe;
-
+  @ViewChild('successfulPayment', { static: false }) successfulPayment: SwalComponent;
+  successfulPurchasedSubscription = [];
+  
   constructor(
     public memborshipService: MembershipService,
     public authService: AuthService,
@@ -53,8 +57,13 @@ export class MembershipComponent implements OnInit {
     
     this.activatedRoute.queryParams.pipe(first()).toPromise().then((params) => {
       if (params.session_id) {
-        this.http.post(environment.serverless_url + 'checkoutSessionCompleted', {session_id: params.session_id}).toPromise().then((d) => {
-          console.log(d);  
+        this.http.post(environment.serverless_url + 'getCheckoutSession', {session_id: params.session_id, type: 'subscription'}).toPromise().then((d: any) => {
+          console.log(d);
+          if (d) {
+            this.successfulPurchasedSubscription = d.session.data.object.display_items;
+            this.successfulPayment.type = 'success';
+            this.successfulPayment.show();
+          }
         })
       }
     });

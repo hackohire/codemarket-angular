@@ -19,7 +19,7 @@ export class GoalComponent implements OnInit {
       {
         path: 'post-list',
         label: 'Goal List',
-        queryParams: {type: PostType.Goal}
+        queryParams: {type: PostType.Goal, all: false}
       },
       {
         path: 'add-goal',

@@ -63,7 +63,7 @@ export class CoreModule {
   constructor(apollo: Apollo, httpLink: HttpLink) {
     // Apollo Server Configuration
     const httpCodemarket = httpLink.create({ uri: environment.graphql_url });
-    const httpPlatform = httpLink.create({ uri: environment.platform_graphql_url });
+    // const httpPlatform = httpLink.create({ uri: environment.platform_graphql_url });
 
     let token = '';
 

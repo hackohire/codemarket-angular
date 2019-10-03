@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HelpRequestListComponent } from './help-request-list.component';
+import { AddEventComponent } from './add-event.component';
 
-describe('HelpRequestListComponent', () => {
-  let component: HelpRequestListComponent;
-  let fixture: ComponentFixture<HelpRequestListComponent>;
+describe('AddEventComponent', () => {
+  let component: AddEventComponent;
+  let fixture: ComponentFixture<AddEventComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HelpRequestListComponent ]
+      declarations: [ AddEventComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HelpRequestListComponent);
+    fixture = TestBed.createComponent(AddEventComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

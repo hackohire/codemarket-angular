@@ -6,5 +6,6 @@ export enum PostType {
     Design = 'design',
     Testing = 'testing',
     Howtodoc = 'howtodoc',
-    Goal = 'goal'
+    Goal = 'goal',
+    Event = 'event'
 }

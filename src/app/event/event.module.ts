@@ -2,12 +2,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
-import { GoalComponent } from './goal.component';
+import { EventComponent } from './event.component';
 
-const goalRoutes: Routes = [
+const eventRoutes: Routes = [
   {
     path: '',
-    component: GoalComponent,
+    component: EventComponent,
     children: [
       {
         path: '',
@@ -15,20 +15,20 @@ const goalRoutes: Routes = [
         pathMatch: 'full',
       },
       // {
-      //   path: 'goal-list',
-      //   loadChildren: () => import('./goal-list/goal-list.module').then(module => module.GoalListModule)
+      //   path: 'event-list',
+      //   loadChildren: () => import('./event-list/event-list.module').then(module => module.EventListModule)
       // },
       {
         path: 'post-list',
         loadChildren: () => import('../post/posts-list/posts-list.module').then(module => module.PostsListModule)
       },
       {
-        path: 'add-goal',
-        loadChildren: () => import('./add-goal/add-goal.module').then(module => module.AddGoalModule),
+        path: 'add-event',
+        loadChildren: () => import('./add-event/add-event.module').then(module => module.AddEventModule),
       },
       {
-        path: 'edit-goal/:goalId',
-        loadChildren: () => import('./add-goal/add-goal.module').then(module => module.AddGoalModule),
+        path: 'edit-event/:eventId',
+        loadChildren: () => import('./add-event/add-event.module').then(module => module.AddEventModule),
         // outlet: 'selling'
       }
     ]
@@ -37,11 +37,11 @@ const goalRoutes: Routes = [
 
 
 @NgModule({
-  declarations: [GoalComponent],
+  declarations: [EventComponent],
   imports: [
     CommonModule,
     SharedModule,
-    RouterModule.forChild(goalRoutes)
+    RouterModule.forChild(eventRoutes)
   ]
 })
-export class GoalModule { }
+export class EventModule { }

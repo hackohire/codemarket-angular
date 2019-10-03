@@ -44,7 +44,7 @@ export class PaypalSubscriptionDirective implements AfterViewInit {
                     // Show a success message to your buyer
                     console.log(details);
                     details['purchasedBy'] = this.authService.loggedInUser._id;
-                    this.membershipService.saveSubscriptionIntoDatabase(details);
+                    // this.membershipService.saveSubscriptionIntoDatabase(details);
                 });
                 /** alert('You have successfully created subscription ' + data.subscriptionID); */
             },

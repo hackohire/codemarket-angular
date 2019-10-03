@@ -31,6 +31,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   successfulPurchasedProducts = [];
   subscription$: Subscription;
   cartTotal: number;
+  sessionId: string;
 
   products: any[];
   items: any[];
@@ -115,15 +116,17 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     /** Check for the session_id, if the session_id is there, fetch the session and show success sweetalert for product purchase */
     this.activatedRoute.queryParams.pipe(first()).toPromise().then((params) => {
       if (params.session_id) {
-        this.http.post(environment.serverless_url + 'getCheckoutSession', {session_id: params.session_id, type: 'payment'}).toPromise().then((d: any) => {
-          console.log(d);
-          if (d) {
-            this.successfulPurchasedProducts = d.session.data.object.display_items;
-            this.successfulPayment.type = 'success';
-            this.store.dispatch(GetCartProductsList());
-            this.successfulPayment.show();
-          }
-        })
+        this.sessionId = params.session_id;
+        this.addTrnsaction();
+        // this.http.post(environment.serverless_url + 'getCheckoutSession', { session_id: params.session_id, type: 'payment' }).toPromise().then((d: any) => {
+        //   console.log(d);
+        //   if (d) {
+        //     this.successfulPurchasedProducts = d.session.data.object.display_items;
+        //     this.successfulPayment.type = 'success';
+        //     this.store.dispatch(GetCartProductsList());
+        //     this.successfulPayment.show();
+        //   }
+        // })
       }
     });
   }
@@ -134,18 +137,41 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     }
   }
 
-  addTransaction(transaction: any = {}) {
-    this.sellingService.addTransaction(transaction).pipe(
-      tap((d) => {
-        if (d && d.length) {
-          console.log(d);
-          this.successfulPurchasedProducts = transaction.purchase_units;
-          this.successfulPayment.type = 'success';
-          this.store.dispatch(GetCartProductsList());
-          this.successfulPayment.show();
-        }
-      })
-    ).subscribe();
+  setTransactionObjectInLocalStorage(transaction: any = {}) {
+    transaction.sessionId = this.sessionId;
+    transaction.purchasedBy  = this.authService.loggedInUser._id;
+    transaction.purchase_units = this.cartProductsList.map((u, i) => {
+      const a: any = {};
+      a.name = u.name;
+      a.purchasedBy = this.authService.loggedInUser._id;
+      a.sessionId = this.sessionId;
+      a.reference_id = u._id;
+      a.amount = u.price
+      return a;
+    });
+
+    localStorage.setItem('transaction', JSON.stringify(transaction))
+  }
+
+  addTrnsaction() {
+    const transaction = JSON.parse(localStorage.getItem('transaction'))
+
+    if (transaction) {
+      transaction.sessionId = this.sessionId;
+      transaction.purchase_units.forEach((u) => u.sessionId = this.sessionId);
+      this.sellingService.addTransaction(transaction).pipe(
+        tap((d) => {
+          if (d && d.length) {
+            localStorage.removeItem('transaction');
+            console.log(d);
+            this.successfulPurchasedProducts = transaction.purchase_units;
+            this.successfulPayment.type = 'success';
+            // this.store.dispatch(GetCartProductsList());
+            this.successfulPayment.show();
+          }
+        })
+      ).subscribe();
+    }
   }
 
   redirectToCheckout() {
@@ -162,6 +188,9 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     };
     this.http.post(environment.serverless_url + 'createCheckoutSession', session).toPromise().then((d: any) => {
       console.log(d);
+      if (d) {
+        this.setTransactionObjectInLocalStorage();
+      }
       this.stripe.redirectToCheckout({
         // Make the id field from the Checkout Session creation API response
         // available to this file, so you can provide it as parameter here
@@ -175,5 +204,5 @@ export class CheckoutComponent implements OnInit, OnDestroy {
       });
     })
   }
-  
+
 }

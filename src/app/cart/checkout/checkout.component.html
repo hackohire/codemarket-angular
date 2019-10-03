@@ -86,7 +86,7 @@
       <h4>List of Purchased Products:</h4>
       <ul>
           <li *ngFor="let p of successfulPurchasedProducts">
-            <strong>{{p?.description}}</strong> - <strong>{{p?.amount.value}}</strong>
+            <strong>{{p?.name}}</strong> - <strong>{{(p?.amount) | currency}}</strong>
           </li>
       </ul>
     </div>

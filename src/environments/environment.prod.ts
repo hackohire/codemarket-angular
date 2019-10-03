@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
   COGNITO_AUTH_DOMAIN: 'https://platform.auth.us-east-1.amazoncognito.com',
-  serverless_url: 'https://qs3c3z6r40.execute-api.ap-south-1.amazonaws.com/prod/',
+  serverless_url: 'https://qnzhh56xx7.execute-api.ap-south-1.amazonaws.com/prod/',
   graphql_url: 'https://qnzhh56xx7.execute-api.ap-south-1.amazonaws.com/prod/graphql',
   codemarketFilesBucket: 'https://codemarket-files.s3.amazonaws.com/public/',
   stripe_public_key: 'pk_test_99dtsv5HyEDxitbf4MJIsdxg00yNRqHgxU',

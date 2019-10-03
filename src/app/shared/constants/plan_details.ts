@@ -7,10 +7,9 @@ export const plans = [
         description: 'Career plan',
         shortDescription: 'For small and medium-sized businesses',
         benefits: [
-            'Smarter, unlimited search',
-            'Unlimited apps',
-            'Group calls with screen sharing',
-            'Guest accounts and shared channels'
+            '1 Developer',
+            'Unlimited events',
+            'Unlimited Friend Invitations'
         ],
         billing_cycles: [
             {
@@ -75,10 +74,9 @@ export const plans = [
         description: 'Team plan',
         shortDescription: 'For small and medium-sized businesses',
         benefits: [
-            'Smarter, unlimited search',
-            'Unlimited apps',
-            'Group calls with screen sharing',
-            'Guest accounts and shared channels'
+            '20 Developers',
+            'Unlimited events',
+            'Unlimited Friend Invitations'
         ],
         billing_cycles: [
             {
@@ -143,10 +141,9 @@ export const plans = [
         description: 'Company plan',
         shortDescription: 'For small and medium-sized businesses',
         benefits: [
-            'Smarter, unlimited search',
-            'Unlimited apps',
-            'Group calls with screen sharing',
-            'Guest accounts and shared channels'
+            '>20 Developers',
+            'Unlimited events',
+            'Unlimited Friend Invitations'
         ],
         billing_cycles: [
             {

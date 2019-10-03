@@ -21,7 +21,7 @@ export class MembershipComponent implements OnInit {
     public authService: AuthService
   ) {
     this.breadcumb = {
-      title: 'Subscription based On-demand leadership training for sofwtare engineers and software teams',
+      title: 'Subscription based On-demand & Continuous team collaboration & leadership training for software engineers and software teams',
       path: [
         {
           name: 'Dashboard',

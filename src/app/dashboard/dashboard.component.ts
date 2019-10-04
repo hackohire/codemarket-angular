@@ -11,6 +11,7 @@ import { MatSort } from '@angular/material';
 import { UserService } from '../user/user.service';
 import { PostType } from '../shared/models/post-types.enum';
 import { PostService } from '../shared/services/post.service';
+import { AuthService } from '../core/services/auth.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -30,7 +31,8 @@ export class DashboardComponent implements OnInit {
   constructor(
     private store: Store<AppState>,
     private userService: UserService,
-    public postService: PostService
+    public postService: PostService,
+    public authService: AuthService
   ) { }
 
   ngOnInit() {

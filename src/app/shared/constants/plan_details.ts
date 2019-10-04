@@ -17,7 +17,7 @@ export const plans = [
                     version: 1,
                     fixed_price: {
                         currency_code: 'USD',
-                        value: '39.99',
+                        value: 39.99,
                         postfix: 'development/month'
                     },
                     create_time: '2019-09-29T18:42:36Z',
@@ -51,7 +51,7 @@ export const plans = [
                     version: 1,
                     fixed_price: {
                         currency_code: 'USD',
-                        value: '35.99',
+                        value: 35.99,
                         postfix: 'user/month'
                     },
                     create_time: '2019-09-29T18:47:02Z',
@@ -85,7 +85,7 @@ export const plans = [
                     version: 1,
                     fixed_price: {
                         currency_code: 'USD',
-                        value: '29.99',
+                        value: 29.99,
                         postfix: 'user/month',
                     },
                     create_time: '2019-09-29T18:50:48Z',

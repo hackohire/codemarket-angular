@@ -132,14 +132,19 @@
       <a mat-button routerLinkActive="mat-primary"
         [routerLink]="['/', {outlets: {'main': ['dashboard', 'bugfixes-all']}}]">
         <i style="font-size: 1.7rem !important;" class="vertical-align-middle fal fa-lightbulb-dollar fa-fw"></i>
-        Bugfixes
+        Code
       </a>
 
       <!-- All Help Requests -->
       <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', {outlets: {'main': ['dashboard', 'post-list']}}]"
         [queryParams]="{type: 'help-request', all: true}">
         <i style="font-size: 1.7rem !important;" class="vertical-align-middle fal fa-question-circle fa-fw"></i>
-        Help Requests
+        Team & Leadership
+      </a>
+
+      <!-- Memborship -->
+      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', {outlets: {'main': ['membership']}}]">
+        <mat-icon>card_membership</mat-icon> Membership
       </a>
 
       <!-- All Events -->
@@ -149,28 +154,6 @@
         Events
       </a>
 
-      <!-- Shopping Cart -->
-      <a mat-button routerLinkActive="mat-primary" [routerLink]="[{outlets: {'main': ['cart']}}]">
-        <mat-icon>shopping_cart
-        </mat-icon> Cart({{cartListLength | async}})
-      </a>
-
-      <!-- My Profile -->
-      <a mat-button routerLinkActive="mat-primary" *ngIf="loggedInUser;"
-        [routerLink]="['/', {outlets: {'main': ['dashboard', 'my-profile']}}]">
-        <mat-icon>face</mat-icon> My Profile
-      </a>
-
-      <!-- Memborship -->
-      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', {outlets: {'main': ['membership']}}]">
-        <mat-icon>card_membership</mat-icon> Membership
-      </a>
-
-
-      <!-- Logout -->
-      <a mat-button *ngIf="loggedInUser; else logIn" (click)="authService?.logout()">
-        Logout</a>
-
       <!-- Login -->
       <ng-template #logIn>
         <a mat-button (click)="login()">
@@ -179,6 +162,30 @@
         </a>
       </ng-template>
 
+      <!-- My Profile -->
+      <button mat-button [matMenuTriggerFor]="userMenu" *ngIf="loggedInUser; else logIn">
+        <a mat-button routerLinkActive="mat-primary" *ngIf="loggedInUser;"
+          [routerLink]="['/', {outlets: {'main': ['dashboard', 'my-profile']}}]">
+          <mat-icon>face</mat-icon> My Profile
+          <mat-icon>keyboard_arrow_down</mat-icon>
+        </a>
+      </button>
+      <mat-menu #userMenu="matMenu" panelClass="menu-width">
+        <div class="menu-width">
+        <!-- Shopping Cart -->
+        <a mat-button routerLinkActive="mat-primary" [routerLink]="[{outlets: {'main': ['cart']}}]">
+            <mat-icon>shopping_cart
+            </mat-icon> Cart({{cartListLength | async}})
+          </a>
+
+          <!-- Logout -->
+          <a mat-button (click)="authService?.logout()">
+            <mat-icon>power_settings_new
+            </mat-icon>
+            Logout
+          </a>
+        </div>
+      </mat-menu>
 
 
     </mat-toolbar>
@@ -251,7 +258,7 @@
                 <i class="fas fa-envelope mr-3"></i> sumi@codemarket.io</p>
               <p>
                 <i class="fas fa-phone mr-3"></i> + 01 805 300 7217</p>
-              
+
             </div>
             <!-- Grid column -->
 

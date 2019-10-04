@@ -39,11 +39,11 @@ body { margin: 0; }
   margin-top: auto;
   margin-bottom: auto;
   padding-top: 100px;
-  -ms-transform: scale(1.2);    
-  -moz-transform: scale(1.2);  
-  -webkit-transform: scale(1.2);  
-  -o-transform: scale(1.2);  
-  transform: scale(1.2); 
+  -ms-transform: scale(1.2);
+  -moz-transform: scale(1.2);
+  -webkit-transform: scale(1.2);
+  -o-transform: scale(1.2);
+  transform: scale(1.2);
 }
 
 mat-icon, a {
@@ -62,10 +62,10 @@ mat-icon, a {
   float: right;
 }
 
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
-  -webkit-appearance: none; 
-  margin: 0; 
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 .mat-drawer-container {
@@ -217,27 +217,27 @@ img {
   max-width: 100%;
 }
 
-input[type=date],
-input[type=datetime-local],
-input[type=email],
-input[type=number],
-input[type=password],
-input[type=search-md],
-input[type=search],
-input[type=tel],
-input[type=text],
-input[type=time],
-input[type=url],
-textarea,
-select {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  -webkit-box-shadow: none;
-          box-shadow: none;
-  outline: none;
-  width: 100%;
-  // padding: 0 20px;
-}
+// input[type=date],
+// input[type=datetime-local],
+// input[type=email],
+// input[type=number],
+// input[type=password],
+// input[type=search-md],
+// input[type=search],
+// input[type=tel],
+// input[type=text],
+// input[type=time],
+// input[type=url],
+// textarea,
+// select {
+//   -webkit-box-sizing: border-box;
+//           box-sizing: border-box;
+//   -webkit-box-shadow: none;
+//           box-shadow: none;
+//   outline: none;
+//   width: 100%;
+//   // padding: 0 20px;
+// }
 
 select.text_field {
   height: 50px;
@@ -248,15 +248,15 @@ select.text_field {
   -moz-appearance: none;
 }
 
-input {
-  line-height: 45px;
-  height: 45px;
-  border: 1px solid #ececec;
-  -webkit-border-radius: 2px;
-          border-radius: 2px;
-  color: #747b86;
-  font-size: 16px;
-}
+// input {
+//   line-height: 45px;
+//   height: 45px;
+//   border: 1px solid #ececec;
+//   -webkit-border-radius: 2px;
+//           border-radius: 2px;
+//   color: #747b86;
+//   font-size: 16px;
+// }
 
 label, .form-group p.label {
   font-weight: 500;

@@ -113,6 +113,7 @@ export class AuthService {
               roles
               likeCount
               createdAt
+              stripeId
             }
           }`,
           variables: {
@@ -167,7 +168,7 @@ export class AuthService {
 
         /** If redirect URL is set, send the user to the redirect url */
         this.router.navigateByUrl(redirectTo);
-        
+
         /** remove redirect url from session sotrage after redirection */
         sessionStorage.removeItem('redirectURL');
       }

@@ -13,6 +13,7 @@ export interface User {
     programming_languages?: string[];
     avatar?: string;
     roles?: Roles[];
+    stripeId?: string;
 }
 
 

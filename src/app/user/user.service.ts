@@ -30,7 +30,8 @@ export class UserService {
     roles
     createdAt
     likeCount
-  `
+    stripeId
+  `;
 
   updateUserQuery = gql`
   mutation user($user: UserInput!) {

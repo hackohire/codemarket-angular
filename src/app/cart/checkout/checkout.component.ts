@@ -161,7 +161,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
       transaction.purchase_units.forEach((u) => u.sessionId = this.sessionId);
       this.sellingService.addTransaction(transaction).pipe(
         tap((d) => {
-          if (d && d.length) {
+          if (d) {
             localStorage.removeItem('transaction');
             console.log(d);
             this.successfulPurchasedProducts = transaction.purchase_units;

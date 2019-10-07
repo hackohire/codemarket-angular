@@ -118,7 +118,22 @@ export class SellingProductsService {
         mutation: gql`
           mutation addTransaction($transaction: TransactionInput) {
             addTransaction(transaction: $transaction) {
-              ${this.purchaseItemsField}
+              purchasedUnits {
+                ${this.purchaseItemsField}
+              }
+              subscription {
+                name
+                purchasedBy {
+                  _id
+                  name
+                  email
+                }
+                subscriptionUsers {
+                  name
+                  email
+                }
+                _id
+              }
             }
           }
         `,
@@ -172,7 +187,7 @@ export class SellingProductsService {
       map((p: any) => p.data.addToCart),
     );
   }
-  
+
 
   getCartItemsList(): Observable<any[]> {
     return this.apollo.query(

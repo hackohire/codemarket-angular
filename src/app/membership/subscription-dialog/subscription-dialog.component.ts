@@ -9,6 +9,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../../core/store/state/app.state';
 import { SetLoggedInUser } from '../../core/store/actions/user.actions';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
+import { Router } from '@angular/router';
 declare var Stripe;
 const PUBLIC_KEY = environment.stripe_public_key;
 const stripe = Stripe(PUBLIC_KEY);
@@ -69,7 +70,8 @@ export class SubscriptionDialogComponent implements OnInit, AfterViewInit {
     private authService: AuthService,
     private http: HttpClient,
     private membershipService: MembershipService,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private router: Router
   ) { }
 
 
@@ -125,6 +127,7 @@ export class SubscriptionDialogComponent implements OnInit, AfterViewInit {
   }
 
   onConfirm(e) {
+    this.router.navigate(['/', { outlets: { main: ['membership', `${this.data.plan.id}`, 'success']}}]);
     this.dialogRef.close();
   }
 

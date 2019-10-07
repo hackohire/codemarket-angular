@@ -78,6 +78,12 @@
 
   <hr class="dash" />
 
+  <div fxLayout="row" fxLayoutAlign="end end">
+    <h3>Total = {{ promoCodes?.FIRSTMONTHFREE.title === appliedPromoCode ? ((0 | currency) + '(First Month)') : (data?.plan?.fixed_price?.value * quantity) | currency}}</h3>
+  </div>
+
+  <hr class="dash" />
+
   <form action="/charge" method="post" (submit)="handleForm()">
     <div #cardForm class="input"></div>
 

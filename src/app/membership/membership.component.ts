@@ -140,7 +140,7 @@ export class MembershipComponent implements OnInit {
   openDialog(plan): void {
     const dialogRef = this.dialog.open(SubscriptionDialogComponent, {
       width: '430px',
-      height: '500px',
+      height: '550px',
       maxHeight: '700px',
       panelClass: 'no-padding',
       data: {plan},

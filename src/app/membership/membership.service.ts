@@ -5,6 +5,7 @@ import { retry, map } from 'rxjs/operators';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { SweetalertService } from '../shared/services/sweetalert.service';
+import { AuthService } from '../core/services/auth.service';
 declare var paypal;
 
 @Injectable({
@@ -17,7 +18,8 @@ export class MembershipService {
   constructor(
     private httpClient: HttpClient,
     private apollo: Apollo,
-    private sweetAlertService: SweetalertService
+    private sweetAlertService: SweetalertService,
+    private authService: AuthService,
   ) { }
 
 
@@ -207,4 +209,63 @@ export class MembershipService {
   //     this.sweetAlertService.success('You have successfully subscribed', '', 'success');
   //   });
   // }
+
+  createStripeUser() {
+    return this.httpClient.post(environment.serverless_url + 'createStripeUser',
+    {
+      loggedInUserId: this.authService.loggedInUser._id,
+      email: this.authService.loggedInUser.email,
+      name: this.authService.loggedInUser.name
+    })
+    .toPromise().then((d: any) => {
+      console.log(d);
+      if (d) {
+        return d;
+      }
+    });
+  }
+
+  async attachCardAndCreateSubscription(source, stripeId: string, trial_period_days: number, metadata, items) {
+    const d = await this.httpClient.post(environment.serverless_url + 'attachCardAndCreateSubscription', {
+      loggedInUserId: this.authService.loggedInUser._id,
+      items,
+      stripeId,
+      trial_period_days,
+      metadata,
+      source,
+      name: this.authService.loggedInUser.name
+    }).toPromise();
+    console.log(d);
+    if (d) {
+      return d;
+    }
+  }
+
+  getMembershipSubscriptionsByUserId() {
+    return this.apollo.query(
+      {
+        query: gql`
+          query getMembershipSubscriptionsByUserId($userId: String) {
+            getMembershipSubscriptionsByUserId(userId: $userId) {
+              plan {
+                nickname
+                amount
+              }
+              quantity
+              id
+              _id
+            }
+          }
+        `,
+        variables: {
+          userId: this.authService.loggedInUser._id,
+        },
+        fetchPolicy: 'no-cache'
+      },
+    ).pipe(
+      map((p: any) => {
+        return p.data.getMembershipSubscriptionsByUserId;
+      }),
+    );
+  }
 }

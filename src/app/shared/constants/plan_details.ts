@@ -12,6 +12,14 @@ export const plans = {
         'Unlimited events',
         'Unlimited Friend Invitations'
       ],
+      success: {
+        message: 'Thanks For Choosing Us',
+        successBenefits: [
+          '1 Developer',
+          'Unlimited events',
+          'Unlimited Friend Invitations'
+        ],
+      },
       fixed_price: {
         currency_code: 'USD',
         value: 39.99,
@@ -30,6 +38,14 @@ export const plans = {
         'Unlimited events',
         'Unlimited Friend Invitations'
       ],
+      success: {
+        message: 'Thanks For Choosing Us',
+        successBenefits: [
+          '20 Developers',
+          'Unlimited events',
+          'Unlimited Friend Invitations'
+        ],
+      },
       fixed_price: {
         currency_code: 'USD',
         value: 35.99,
@@ -48,6 +64,14 @@ export const plans = {
         'Unlimited events',
         'Unlimited Friend Invitations'
       ],
+      success: {
+        message: 'Thanks For Choosing Us',
+        successBenefits: [
+          '>20 Developers',
+          'Unlimited events',
+          'Unlimited Friend Invitations'
+        ],
+      },
       fixed_price: {
         currency_code: 'USD',
         value: 29.99,
@@ -70,6 +94,14 @@ export const plans = {
           'Unlimited events',
           'Unlimited Friend Invitations'
         ],
+        success: {
+          message: 'Thanks For Choosing Us',
+          successBenefits: [
+            '1 Developer',
+            'Unlimited events',
+            'Unlimited Friend Invitations'
+          ],
+        },
         fixed_price: {
           currency_code: 'USD',
           value: 39.99,
@@ -88,6 +120,14 @@ export const plans = {
           'Unlimited events',
           'Unlimited Friend Invitations'
         ],
+        success: {
+          message: 'Thanks For Choosing Us',
+          successBenefits: [
+            '20 Developers',
+            'Unlimited events',
+            'Unlimited Friend Invitations'
+          ],
+        },
         fixed_price: {
           currency_code: 'USD',
           value: 35.99,
@@ -106,6 +146,14 @@ export const plans = {
           'Unlimited events',
           'Unlimited Friend Invitations'
         ],
+        success: {
+          message: 'Thanks For Choosing Us',
+          successBenefits: [
+            '>20 Developers',
+            'Unlimited events',
+            'Unlimited Friend Invitations'
+          ],
+        },
         fixed_price: {
           currency_code: 'USD',
           value: 29.99,

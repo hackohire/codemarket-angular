@@ -46,6 +46,17 @@ body { margin: 0; }
   transform: scale(1.2);
 }
 
+.no-padding {
+  mat-dialog-container {
+    padding: 0;
+    overflow: hidden;
+  }
+}
+
+.mat-form-field-wrapper{
+  padding: 0;
+}
+
 mat-icon, a {
   cursor: pointer;
 }

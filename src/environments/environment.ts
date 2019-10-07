@@ -1,3 +1,5 @@
+import { plans } from '../app/shared/constants/plan_details';
+
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
@@ -9,8 +11,9 @@ export const environment = {
   graphql_url: 'http://localhost:3200/graphql',
   applicationId: '5d2ef428bbfa6576b357d5d4',
   codemarketFilesBucket: 'https://codemarket-files.s3.amazonaws.com/public/',
-  stripe_public_key: 'pk_test_99dtsv5HyEDxitbf4MJIsdxg00yNRqHgxU',
+  stripe_public_key: 'pk_test_ighmL2U9UqAx0O4b8dKkSvdq',
   webSocketURL: 'ws://localhost:3001',
+  planDetails: plans.dev,
   oauth: {
     // Domain name
     domain: 'platform.auth.us-east-1.amazoncognito.com',

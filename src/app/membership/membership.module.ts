@@ -4,16 +4,21 @@ import { MembershipComponent } from './membership.component';
 import { Routes, RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { SubscriptionDialogComponent } from './subscription-dialog/subscription-dialog.component';
+import { SubscriptionSuccessComponent } from './subscription-success/subscription-success.component';
 
 const membershipRoutes: Routes = [
   {
+    path: ':planId/success',
+    component: SubscriptionSuccessComponent
+  },
+  {
     path: '',
     component: MembershipComponent
-  }
+  },
 ];
 
 @NgModule({
-  declarations: [MembershipComponent, SubscriptionDialogComponent],
+  declarations: [MembershipComponent, SubscriptionDialogComponent, SubscriptionSuccessComponent],
   imports: [
     CommonModule,
     SharedModule,

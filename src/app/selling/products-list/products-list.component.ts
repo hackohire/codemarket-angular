@@ -113,7 +113,7 @@ export class ProductsListComponent implements OnInit, OnDestroy {
     }
 
     this.breadcumb = {
-      title: 'List of Bugfixes',
+      title: 'Code Q&A',
       path: [
         {
           name: 'Dashboard',

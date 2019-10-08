@@ -126,6 +126,13 @@
           <i style="font-size: 1.7rem !important;" class="vertical-align-middle fal fa-calendar-plus fa-fw"></i>
           <span> Events</span>
         </button>
+
+        <!-- Add Team Skills -->
+        <button mat-menu-item [routerLink]="[{outlets: {'main': ['team-skill', 'add-teamskill']}}]">
+          <!-- <mat-icon>notifications_off</mat-icon> -->
+          <i style="font-size: 1.7rem !important;" class="vertical-align-middle fal fa-users-crown fa-fw"></i>
+          <span> Team Skills</span>
+        </button>
       </mat-menu>
 
       <!-- All Bugfixes -->
@@ -137,9 +144,9 @@
 
       <!-- All Help Requests -->
       <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', {outlets: {'main': ['dashboard', 'post-list']}}]"
-        [queryParams]="{type: 'help-request', all: true}">
+        [queryParams]="{type: 'team-skill', all: true}">
         <i style="font-size: 1.7rem !important;" class="vertical-align-middle fal fa-question-circle fa-fw"></i>
-        Team & Leadership
+        Team Q&A
       </a>
 
       <!-- membership -->
@@ -172,8 +179,8 @@
       </button>
       <mat-menu #userMenu="matMenu" panelClass="menu-width">
         <div class="menu-width">
-        <!-- Shopping Cart -->
-        <a mat-button routerLinkActive="mat-primary" [routerLink]="[{outlets: {'main': ['cart']}}]">
+          <!-- Shopping Cart -->
+          <a mat-button routerLinkActive="mat-primary" [routerLink]="[{outlets: {'main': ['cart']}}]">
             <mat-icon>shopping_cart
             </mat-icon> Cart({{cartListLength | async}})
           </a>

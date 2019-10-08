@@ -11,8 +11,7 @@
 						<div class="author-card sidebar-card">
 							<div class="author-infos">
 								<div class="author_avatar">
-									<img
-										[src]="user?.avatar ? ((codemarketBucketURL + user.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+									<img [src]="user?.avatar ? ((codemarketBucketURL + user.avatar) | safe: 'resourceUrl') : anonymousAvatar"
 										alt="Presenting the broken author avatar :D">
 								</div>
 
@@ -37,7 +36,8 @@
 										</li>
 										<li style="margin: 5px">
 											<a [href]="user?.github_url">
-												<i style="font-size: 1.7rem !important;" class="fab fa-stack-overflow"></i>
+												<i style="font-size: 1.7rem !important;"
+													class="fab fa-stack-overflow"></i>
 											</a>
 										</li>
 										<li style="margin: 5px">
@@ -88,7 +88,8 @@
 						<div class="col-md-12">
 
 							<nav mat-tab-nav-bar>
-								<a mat-tab-link *ngFor="let link of navLinks" [routerLink]="[link.path]" [queryParams]="link?.queryParams ? link.queryParams : null" routerLinkActive
+								<a mat-tab-link *ngFor="let link of navLinks" [routerLink]="[link.path]"
+									[queryParams]="link?.queryParams ? link.queryParams : null" routerLinkActive
 									#rla="routerLinkActive" [active]="rla.isActive">
 									{{link.label}}
 								</a>
@@ -121,28 +122,32 @@
 								<!-- Add Interview Assignment -->
 								<button mat-menu-item [routerLink]="['add-interview']">
 									<!-- <mat-icon>dialpad</mat-icon> -->
-									<i style="font-size: 1.7rem !important;" class="vertical-align-middle fal fa-user-tie fa-fw"></i>
+									<i style="font-size: 1.7rem !important;"
+										class="vertical-align-middle fal fa-user-tie fa-fw"></i>
 									<span> Interview</span>
 								</button>
 
 								<!-- Add Requirements -->
 								<button mat-menu-item [routerLink]="['add-requirement']">
-									<!-- <mat-icon>notifications_off</mat-icon> -->
-									<i style="font-size: 1.7rem !important;" class="vertical-align-middle fal fa-file-alt fa-fw"></i>
+									
+									<i style="font-size: 1.7rem !important;"
+										class="vertical-align-middle fal fa-file-alt fa-fw"></i>
 									<span> Requirements</span>
 								</button>
 
 								<!-- Add Testings -->
 								<button mat-menu-item [routerLink]="[{outlets: {'main': ['testing', 'add-testing']}}]">
-									<!-- <mat-icon>notifications_off</mat-icon> -->
-									<i style="font-size: 1.7rem !important;" class="vertical-align-middle fal fa-tasks fa-fw"></i>
+									
+									<i style="font-size: 1.7rem !important;"
+										class="vertical-align-middle fal fa-tasks fa-fw"></i>
 									<span> Testing Report</span>
 								</button>
 
 
 								<!-- Add How To Guides -->
-								<button mat-menu-item [routerLink]="[{outlets: {'main': ['howtodoc', 'add-howtodoc']}}]">
-									<!-- <mat-icon>notifications_off</mat-icon> -->
+								<button mat-menu-item
+									[routerLink]="[{outlets: {'main': ['howtodoc', 'add-howtodoc']}}]">
+									
 									<i style="font-size: 1.7rem !important;"
 										class="vertical-align-middle fal fa-file-exclamation fa-fw"></i>
 									<span> How-To-Guide</span>
@@ -150,14 +155,15 @@
 
 								<!-- Add Designs -->
 								<button mat-menu-item [routerLink]="[{outlets: {'main': ['design', 'add-design']}}]">
-									<!-- <mat-icon>notifications_off</mat-icon> -->
-									<i style="font-size: 1.7rem !important;" class="vertical-align-middle fal fa-marker fa-fw"></i>
+									
+									<i style="font-size: 1.7rem !important;"
+										class="vertical-align-middle fal fa-marker fa-fw"></i>
 									<span> Design</span>
 								</button>
 
 								<!-- Add Goals -->
 								<button mat-menu-item [routerLink]="[{outlets: {'main': ['goal', 'add-goal']}}]">
-									<!-- <mat-icon>notifications_off</mat-icon> -->
+									
 									<i style="font-size: 1.7rem !important;"
 										class="vertical-align-middle fal fa-bullseye-arrow fa-fw"></i>
 									<span> Goals</span>
@@ -165,9 +171,18 @@
 
 								<!-- Add Events -->
 								<button mat-menu-item [routerLink]="[{outlets: {'main': ['event', 'add-event']}}]">
-									<!-- <mat-icon>notifications_off</mat-icon> -->
-									<i style="font-size: 1.7rem !important;" class="vertical-align-middle fal fa-calendar-plus fa-fw"></i>
+									
+									<i style="font-size: 1.7rem !important;"
+										class="vertical-align-middle fal fa-calendar-plus fa-fw"></i>
 									<span> Events</span>
+								</button>
+
+								<!-- Add Team Skills -->
+								<button mat-menu-item
+									[routerLink]="[{outlets: {'main': ['team-skill', 'add-teamskill']}}]">
+									<i style="font-size: 1.7rem !important;"
+										class="vertical-align-middle fal fa-users-crown fa-fw"></i>
+									<span> Team Skills</span>
 								</button>
 							</mat-menu>
 							<div>

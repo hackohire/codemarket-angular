@@ -72,6 +72,10 @@ const dashboardRoutes: Routes = [
     path: 'event-details/:eventId',
     loadChildren: () => import('../detail/detail.module').then(module => module.DetailModule),
   },
+  {
+    path: 'team-skill-details/:teamSkillId',
+    loadChildren: () => import('../detail/detail.module').then(module => module.DetailModule),
+  },
 ];
 
 

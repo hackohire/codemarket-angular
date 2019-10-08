@@ -6,12 +6,12 @@ export const environment = {
   serverless_url: 'https://qnzhh56xx7.execute-api.ap-south-1.amazonaws.com/prod/',
   graphql_url: 'https://qnzhh56xx7.execute-api.ap-south-1.amazonaws.com/prod/graphql',
   codemarketFilesBucket: 'https://codemarket-files.s3.amazonaws.com/public/',
-  // stripe_public_key: 'pk_live_EYCoYtpLszr802sOl89WeuW1',
-  stripe_public_key: 'pk_test_ighmL2U9UqAx0O4b8dKkSvdq',
+  stripe_public_key: 'pk_live_EYCoYtpLszr802sOl89WeuW1',
+  // stripe_public_key: 'pk_test_ighmL2U9UqAx0O4b8dKkSvdq',
   webSocketURL: 'wss://i8zthpq9j3.execute-api.ap-south-1.amazonaws.com/prod',
   applicationId: '5d2ef428bbfa6576b357d5d4',
   // planDetails: plans.prod,
-  planDetails: plans.dev,
+  planDetails: plans.prod,
   oauth: {
     // Domain name
     domain: 'platform.auth.us-east-1.amazoncognito.com',

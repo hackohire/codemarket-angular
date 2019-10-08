@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { BreadCumb } from 'src/app/shared/models/bredcumb.model';
-import { AuthService } from 'src/app/core/services/auth.service';
-import { environment } from 'src/environments/environment';
+import { BreadCumb } from '../../shared/models/bredcumb.model';
+import { AuthService } from '../../core/services/auth.service';
+import { environment } from '../../../environments/environment';
 import { ActivatedRoute } from '@angular/router';
-import { UserService } from 'src/app/user/user.service';
-import { User } from 'src/app/shared/models/user.model';
+import { UserService } from '../../user/user.service';
+import { User } from '../../shared/models/user.model';
 import { Observable } from 'rxjs';
-import { VideoChatComponent } from 'src/app/video-chat/video-chat.component';
+import { VideoChatComponent } from '../../video-chat/video-chat.component';
 import { MatDialog } from '@angular/material';
 import Peer from 'peerjs';
 import { PostType } from '../../shared/models/post-types.enum';

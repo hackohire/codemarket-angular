@@ -4,7 +4,7 @@ import { AppState } from '../../core/store/state/app.state';
 import { Subscription } from 'rxjs';
 import { Post } from '../../shared/models/post.model';
 import { AuthService } from '../../core/services/auth.service';
-import { map } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 import { MatTableDataSource, MatSort } from '@angular/material';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { ActivatedRoute } from '@angular/router';
@@ -13,6 +13,7 @@ import { selectPostsByUserIdAndType, selectPostsByType } from '../../core/store/
 import { PostService } from '../../shared/services/post.service';
 import { BreadCumb } from '../../shared/models/bredcumb.model';
 import * as _ from 'lodash';
+import { selectLoggedInUser } from '../../core/store/selectors/user.selector';
 
 @Component({
   selector: 'app-posts-list',
@@ -75,7 +76,7 @@ export class PostsListComponent implements OnInit, OnDestroy {
           }
         })
       ).subscribe();
-      this.store.dispatch(GetPostsByType({postType: type}));
+      this.store.dispatch(GetPostsByType({ postType: type }));
     } else {
 
       /** Checking if authorId is there to see if user is trying to visit somebody else's
@@ -88,7 +89,12 @@ export class PostsListComponent implements OnInit, OnDestroy {
         this.store.dispatch(GetPostsByUserIdAndType({ userId: this.authorId, status: '', postType: type }));
         this.displayedColumns = ['number', 'name', 'price'];
       } else {
-        this.store.dispatch(GetPostsByUserIdAndType({ userId: this.authService.loggedInUser._id, status: '', postType: type }));
+        this.store.select(selectLoggedInUser).subscribe((u) => {
+          if (u) {
+            this.store.dispatch(GetPostsByUserIdAndType({ userId: this.authService.loggedInUser._id, status: '', postType: type }));
+          }
+        });
+
         this.displayedColumns = ['number', 'name', 'price', 'status', 'action'];
       }
 

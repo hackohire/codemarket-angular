@@ -12,11 +12,11 @@ const helpRoutes: Routes = [
     path: '',
     component: HelpComponent,
     children: [
-      // {
-      //   path: '',
-      //   redirectTo: 'help-request-list',
-      //   pathMatch: 'full',
-      // },
+      {
+        path: '',
+        redirectTo: 'post-list',
+        pathMatch: 'full',
+      },
       // {
       //   path: 'help-request-list',
       //   loadChildren: () => import('./help-request-list/help-request-list.module').then(module => module.HelpRequestListModule)

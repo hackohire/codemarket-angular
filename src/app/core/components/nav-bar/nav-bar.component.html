@@ -14,7 +14,7 @@
       <!-- Selling -->
       <a mat-list-item [routerLink]="[{outlets: {'main': ['sell']}}]">My Bugfixes</a>
 
-      <a mat-list-item [routerLink]="[{outlets: {'main': ['help-request']}}]">My Help Requests</a>
+      <a mat-list-item [routerLink]="[{outlets: {'main': ['help-request']}}]" [queryParams]="{type: 'help-request', all: false}">My Help Requests</a>
 
 
       <a mat-list-item [routerLink]="[{outlets: {'main': ['interview', 'post-list']}}]"

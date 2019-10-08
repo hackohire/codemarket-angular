@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PostType } from '../shared/models/post-types.enum';
 
 @Component({
   selector: 'app-help',
@@ -10,9 +11,14 @@ export class HelpComponent implements OnInit {
   constructor() {
     this.navLinks = [
       {
-        path: 'help-request-list',
-        label: 'Help Request List'
+        path: 'post-list',
+        label: 'Help Request List',
+        queryParams: {type: PostType.HelpRequest, all: false}
       },
+      // {
+      //   path: 'help-request-list',
+      //   label: 'Help Request List'
+      // },
       {
         path: 'add-help-request',
         label: 'Add Help Request'

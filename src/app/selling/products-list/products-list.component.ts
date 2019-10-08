@@ -16,6 +16,7 @@ import { PostStatus } from 'src/app/shared/models/poststatus.enum';
 import moment from 'moment';
 import { environment } from 'src/environments/environment';
 import { PostService } from 'src/app/shared/services/post.service';
+import { selectLoggedInUser } from '../../core/store/selectors/user.selector';
 
 @Component({
   selector: 'app-products-list',
@@ -23,8 +24,8 @@ import { PostService } from 'src/app/shared/services/post.service';
   styleUrls: ['./products-list.component.scss'],
   animations: [
     trigger('detailExpand', [
-      state('collapsed', style({height: '0px', minHeight: '0'})),
-      state('expanded', style({height: '*'})),
+      state('collapsed', style({ height: '0px', minHeight: '0' })),
+      state('expanded', style({ height: '*' })),
       transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
     ]),
   ],
@@ -51,7 +52,7 @@ export class ProductsListComponent implements OnInit, OnDestroy {
   userSubsription: Subscription;
   productsListSubscription: Subscription;
 
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   breadcumb: BreadCumb;
 
@@ -93,15 +94,23 @@ export class ProductsListComponent implements OnInit, OnDestroy {
       if (this.authorId) {
         this.displayedColumns = ['number', 'name', 'price'];
         status = PostStatus.Published;
+        this.store.dispatch(GetProductsByUserId(
+          {
+            userId: this.authorId,
+            status: status
+          }));
       } else {
         this.displayedColumns = ['number', 'name', 'price', 'status', 'action'];
+        this.store.select(selectLoggedInUser).subscribe((u) => {
+          if (u) {
+            this.store.dispatch(GetProductsByUserId(
+              {
+                userId: this.auth.loggedInUser._id,
+                status: status
+              }));
+          }
+        });
       }
-
-      this.store.dispatch(GetProductsByUserId(
-        {
-          userId: (this.authorId ? this.authorId : this.auth.loggedInUser._id),
-          status: status 
-        }));
 
       this.productsListSubscription = this.store.select(selectProductsList).pipe(
         map((products) => {
@@ -141,12 +150,12 @@ export class ProductsListComponent implements OnInit, OnDestroy {
   }
 
   editProduct(product): void {
-    this.store.dispatch(SetSelectedProduct({product}));
+    this.store.dispatch(SetSelectedProduct({ product }));
     // this.router.navigate(['/add-product'], );
   }
 
   deleteProduct(productId: string) {
-    this.store.dispatch(DeleteProduct({productId}));
+    this.store.dispatch(DeleteProduct({ productId }));
   }
 
   getListOfUsersWhoPurchased(product: Product) {

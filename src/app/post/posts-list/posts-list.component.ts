@@ -1,16 +1,16 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { AppState } from 'src/app/core/store/state/app.state';
+import { AppState } from '../../core/store/state/app.state';
 import { Subscription } from 'rxjs';
-import { Post } from 'src/app/shared/models/post.model';
-import { AuthService } from 'src/app/core/services/auth.service';
+import { Post } from '../../shared/models/post.model';
+import { AuthService } from '../../core/services/auth.service';
 import { map } from 'rxjs/operators';
 import { MatTableDataSource, MatSort } from '@angular/material';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { ActivatedRoute } from '@angular/router';
-import { GetPostsByUserIdAndType, GetPostsByType, DeletePost } from 'src/app/core/store/actions/post.actions';
-import { selectPostsByUserIdAndType, selectPostsByType } from 'src/app/core/store/selectors/post.selectors';
-import { PostService } from 'src/app/shared/services/post.service';
+import { GetPostsByUserIdAndType, GetPostsByType, DeletePost } from '../../core/store/actions/post.actions';
+import { selectPostsByUserIdAndType, selectPostsByType } from '../../core/store/selectors/post.selectors';
+import { PostService } from '../../shared/services/post.service';
 import { BreadCumb } from '../../shared/models/bredcumb.model';
 import * as _ from 'lodash';
 
@@ -67,7 +67,7 @@ export class PostsListComponent implements OnInit, OnDestroy {
     };
 
     if (this.all) {
-      this.displayedColumns = ['number', 'name', 'price', 'user', 'category', 'date'];
+      this.displayedColumns = ['number', 'name', 'price', 'createdBy', 'category', 'createdAt'];
       this.postsListSubscription = this.store.select(selectPostsByType).pipe(
         map((posts) => {
           if (posts) {

@@ -91,6 +91,13 @@ const routes: Routes = [
   },
 
   {
+    path: 'team-skill',
+    loadChildren: () => import('./team-skill/teamskill.module').then(module => module.TeamskillModule),
+    outlet: 'main',
+    canLoad: [AuthGuard]
+  },
+
+  {
     path: 'membership',
     loadChildren: () => import('./membership/membership.module').then(module => module.MembershipModule),
     outlet: 'main',

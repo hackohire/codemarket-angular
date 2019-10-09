@@ -1,6 +1,6 @@
 <nav mat-tab-nav-bar>
     <a mat-tab-link
-       *ngFor="let link of navLinks"
+       *ngFor="let link of currentRoutes"
        [routerLink]="[link.path]"
        [queryParams]="link?.queryParams ? link.queryParams : null"
        routerLinkActive #rla="routerLinkActive"

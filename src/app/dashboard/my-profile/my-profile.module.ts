@@ -46,6 +46,30 @@ const myProfileRoutes: Routes = [
         path: 'add-requirement',
         loadChildren: () => import('../../requirements/add-requirements/add-requirement.module').then(module => module.AddRequirementModule)
       },
+      {
+        path: 'add-testing',
+        loadChildren: () => import('../../testing/add-testing/add-testing.module').then(module => module.AddTestingModule)
+      },
+      {
+        path: 'add-howtodoc',
+        loadChildren: () => import('../../howtodoc/add-howtodoc/add-howtodoc.module').then(module => module.AddHowtodocModule)
+      },
+      {
+        path: 'add-design',
+        loadChildren: () => import('../../design/add-design/add-design.module').then(module => module.AddDesignModule)
+      },
+      {
+        path: 'add-goal',
+        loadChildren: () => import('../../goal/add-goal/add-goal.module').then(module => module.AddGoalModule)
+      },
+      {
+        path: 'add-event',
+        loadChildren: () => import('../../event/add-event/add-event.module').then(module => module.AddEventModule)
+      },
+      {
+        path: 'add-teamskill',
+        loadChildren: () => import('../../team-skill/add-teamskill/add-teamskill.module').then(module => module.AddTeamskillModule)
+      },
 
     ]
   }

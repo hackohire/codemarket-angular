@@ -42,43 +42,50 @@ const routes: Routes = [
     canLoad: [AuthGuard]
   },
 
-  {
-    path: 'interview',
-    loadChildren: () => import('./interview/interview.module').then(module => module.InterviewModule),
-    outlet: 'main',
-    canLoad: [AuthGuard]
-  },
-  {
-    path: 'requirement',
-    loadChildren: () => import('./requirements/requirements.module').then(module => module.RequirementsModule),
-    outlet: 'main',
-    canLoad: [AuthGuard]
-  },
+  // {
+  //   path: 'interview',
+  //   loadChildren: () => import('./interview/interview.module').then(module => module.InterviewModule),
+  //   outlet: 'main',
+  //   canLoad: [AuthGuard]
+  // },
+  // {
+  //   path: 'requirement',
+  //   loadChildren: () => import('./requirements/requirements.module').then(module => module.RequirementsModule),
+  //   outlet: 'main',
+  //   canLoad: [AuthGuard]
+  // },
+
+  // {
+  //   path: 'testing',
+  //   loadChildren: () => import('./testing/testing.module').then(module => module.TestingModule),
+  //   outlet: 'main',
+  //   canLoad: [AuthGuard]
+  // },
+
+  // {
+  //   path: 'howtodoc',
+  //   loadChildren: () => import('./howtodoc/howtodoc.module').then(module => module.HowtodocModule),
+  //   outlet: 'main',
+  //   canLoad: [AuthGuard]
+  // },
+
+  // {
+  //   path: 'design',
+  //   loadChildren: () => import('./design/design.module').then(module => module.DesignModule),
+  //   outlet: 'main',
+  //   canLoad: [AuthGuard]
+  // },
+
+  // {
+  //   path: 'goal',
+  //   loadChildren: () => import('./goal/goal.module').then(module => module.GoalModule),
+  //   outlet: 'main',
+  //   canLoad: [AuthGuard]
+  // },
 
   {
-    path: 'testing',
-    loadChildren: () => import('./testing/testing.module').then(module => module.TestingModule),
-    outlet: 'main',
-    canLoad: [AuthGuard]
-  },
-
-  {
-    path: 'howtodoc',
-    loadChildren: () => import('./howtodoc/howtodoc.module').then(module => module.HowtodocModule),
-    outlet: 'main',
-    canLoad: [AuthGuard]
-  },
-
-  {
-    path: 'design',
-    loadChildren: () => import('./design/design.module').then(module => module.DesignModule),
-    outlet: 'main',
-    canLoad: [AuthGuard]
-  },
-
-  {
-    path: 'goal',
-    loadChildren: () => import('./goal/goal.module').then(module => module.GoalModule),
+    path: 'post',
+    loadChildren: () => import('./post/post.module').then(module => module.PostModule),
     outlet: 'main',
     canLoad: [AuthGuard]
   },
@@ -90,12 +97,12 @@ const routes: Routes = [
     canLoad: [AuthGuard]
   },
 
-  {
-    path: 'team-skill',
-    loadChildren: () => import('./team-skill/teamskill.module').then(module => module.TeamskillModule),
-    outlet: 'main',
-    canLoad: [AuthGuard]
-  },
+  // {
+  //   path: 'team-skill',
+  //   loadChildren: () => import('./team-skill/teamskill.module').then(module => module.TeamskillModule),
+  //   outlet: 'main',
+  //   canLoad: [AuthGuard]
+  // },
 
   {
     path: 'membership',

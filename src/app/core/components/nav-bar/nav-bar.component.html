@@ -131,7 +131,8 @@
         </button>
 
         <!-- Add Team Skills -->
-        <button mat-menu-item [routerLink]="['/', {outlets: {'main': ['team-skill', 'add-teamskill']}}]">
+        <button mat-menu-item [routerLink]="['/', {outlets: {'main': ['post', 'add-teamskill']}}]"
+        [queryParams]="{type: 'team-skill'}">
           <i style="font-size: 1.7rem !important;" class="vertical-align-middle fal fa-users-crown fa-fw"></i>
           <span> Team Skills</span>
         </button>

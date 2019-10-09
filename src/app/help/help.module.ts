@@ -32,7 +32,6 @@ const helpRoutes: Routes = [
       {
         path: 'edit-helpRequest/:helpRequestId',
         loadChildren: () => import('./askforhelp/askforhelp.module').then(module => module.AskforhelpModule),
-        // outlet: 'selling'
       }
     ]
   },

@@ -20,36 +20,31 @@
                     <app-editor *ngIf="!edit" (output)="updateFormData($event)" [id]="'event-editor'"></app-editor>
                 </ng-template>
 
+                <mat-form-field class="field-full-width">
+                    <input (click)="dt2.open()" formControlName="dateRange" matInput [owlDateTime]="dt2"
+                        [selectMode]="'range'" placeholder="Event Date & Time">
+                    <mat-icon matSuffix [owlDateTimeTrigger]="dt2">date_range</mat-icon>
+                    <!-- <span><i class="fa fa-calendar"></i></span> -->
+                    <owl-date-time #dt2 [pickerType]="'both'"></owl-date-time>
+                </mat-form-field>
 
-
-
+                <label class="example-margin">Event Type</label>
+                <mat-radio-group formControlName="'eventType'" [(ngModel)]="eventType" [color]="'primary'"
+                    (change)="eventTypeChange($event)" aria-label="Select an option" #user="matRadioGroup"
+                    fxLayout="row" fxLayoutGap="8px">
+                    <mat-radio-button fxFlex="20" [value]="'free'">Free</mat-radio-button>
+                    <mat-radio-button fxFlex="20" [value]="'membership required'">Membership Required</mat-radio-button>
+                </mat-radio-group>
 
                 <!-- <mat-form-field class="field-full-width">
-                    <input matInput formControlName="shortDescription" placeholder="Short Description">
-                </mat-form-field> -->
-
-                <mat-form-field class="field-full-width">
                     <input type="number" matInput formControlName="price" placeholder="price">
                     <mat-icon matSuffix>monetization_on</mat-icon>
-                </mat-form-field>
-
-                <!-- <mat-form-field class="field-full-width">
-                    <input matInput formControlName="demo_url" placeholder="Demo Url">
-                    <mat-error *ngIf="eventForm?.get('demo_url')?.invalid">{{'Please enter a valid URL'}}
-                    </mat-error>
                 </mat-form-field> -->
-
-                <!-- <mat-form-field class="field-full-width">
-                    <input matInput formControlName="documentation_url" placeholder="Documentation Url">
-                    <mat-error *ngIf="eventForm?.get('documentation_url')?.invalid">{{'Please enter a valid URL'}}
-                    </mat-error>
-                </mat-form-field>
 
                 <mat-form-field class="field-full-width">
-                    <input matInput formControlName="video_url" placeholder="Video Url">
-                    <mat-error *ngIf="eventForm?.get('video_url')?.invalid">{{'Please enter a valid URL'}}
-                    </mat-error>
-                </mat-form-field> -->
+                    <textarea type="text" matInput formControlName="address" placeholder="Address"></textarea>
+                    <mat-icon matSuffix>location</mat-icon>
+                </mat-form-field>
 
                 <mat-form-field class="field-full-width">
                     <mat-chip-list #tagsList>
@@ -100,9 +95,14 @@
                 <br />
 
                 <div fxLayout="row" fxLayoutGap="10px">
-                    <button *ngIf="statusFormControl?.value !== 'Published'" type="button" (click)="submit('Drafted')" [disabled]="eventForm?.invalid" mat-raised-button color="primary">Save</button>
-                    <button type="button" (click)="submit('Published')" [disabled]="eventForm?.invalid" mat-raised-button color="primary">{{ statusFormControl?.value === 'Published' ? 'Publish Changes' : 'Publish' }}</button>
-                    <button *ngIf="statusFormControl?.value === 'Published'" type="button" (click)="submit('Unpublished')" [disabled]="eventForm?.invalid" mat-raised-button color="primary">{{ 'Unpublish' }}</button>
+                    <button *ngIf="statusFormControl?.value !== 'Published'" type="button" (click)="submit('Drafted')"
+                        [disabled]="eventForm?.invalid" mat-raised-button color="primary">Save</button>
+                    <button type="button" (click)="submit('Published')" [disabled]="eventForm?.invalid"
+                        mat-raised-button
+                        color="primary">{{ statusFormControl?.value === 'Published' ? 'Publish Changes' : 'Publish' }}</button>
+                    <button *ngIf="statusFormControl?.value === 'Published'" type="button"
+                        (click)="submit('Unpublished')" [disabled]="eventForm?.invalid" mat-raised-button
+                        color="primary">{{ 'Unpublish' }}</button>
                 </div>
 
             </div>

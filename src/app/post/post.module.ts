@@ -75,8 +75,16 @@ const postRoutes: Routes = [
         loadChildren: () => import('../team-skill/add-teamskill/add-teamskill.module').then(module => module.AddTeamskillModule),
       },
       {
-        path: 'edit-teamskill/:teamskillId',
+        path: 'edit-team-skill/:teamskillId',
         loadChildren: () => import('../team-skill/add-teamskill/add-teamskill.module').then(module => module.AddTeamskillModule),
+      },
+      {
+        path: 'edit-help-request/:helpRequestId',
+        loadChildren: () => import('../help/askforhelp/askforhelp.module').then(module => module.AskforhelpModule),
+      },
+      {
+        path: 'edit-event/:eventId',
+        loadChildren: () => import('../event/add-event/add-event.module').then(module => module.AddEventModule),
       }
     ],
     runGuardsAndResolvers: 'always',

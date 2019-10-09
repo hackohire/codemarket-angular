@@ -6,7 +6,7 @@
         START BREADCRUMB AREA
     =================================-->
 
-    <app-breadcumb [title]="details?.name" [path]="breadcumb?.path"></app-breadcumb>
+    <app-breadcumb [title]="details?.name" [path]="breadcumb?.path" [eventDate]="details?.dateRange"></app-breadcumb>
 
     <!--================================
             END BREADCRUMB AREA
@@ -23,73 +23,6 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
-                    <!-- <div class="item-preview item-preview2">
-                        <div class="prev-slide">
-                            <img src="http://www.codemarket.io/wp-content/uploads/2019/07/developer.png"
-                                alt="Keep calm this isn't the end of the world, the preview is just missing.">
-                        </div>
-
-                        <div class="item__preview-thumb">
-                            <div class="item-action">
-                                <div class="action-btns">
-                                    <a href="#" class="btn btn--round btn--lg">
-                                        <span class="fas fa-laptop-code"></span>Live Preview</a>
-                                    <a href="#" class="btn btn--round btn--lg btn--icon">
-                                        <span class="far fa-heart"></span>Add To Favorites</a>
-                                </div>
-                            </div>
-
-
-                            <div class="item_social_share">
-                                <p>
-                                    <i class="far fa-share-square fa-lg"></i>&nbsp;
-                                     <span> Share this item</span>
-                                </p>
-
-                                <div class="social social--color--filled">
-                                    <ul>
-                                        <li>
-                                            <a href="#">
-                                                <span class="fa fa-facebook"></span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <span class="fa fa-twitter"></span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <span class="fa fa-google-plus"></span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <span class="fa fa-pinterest"></span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <span class="fa fa-linkedin"></span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <span class="fa fa-dribbble"></span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-
-
-                            </div>
-
-                        </div>
-
-
-
-                    </div> -->
-                    <!-- end /.item-preview-->
 
                     <div class="item-info">
                         <div>
@@ -123,7 +56,7 @@
                                     <h4 class="tab-content-wrapper">Comments:</h4>
                                     <li class="single-thread" *ngFor="let c of commentsList">
 
-                                        <app-comment [comment]="c" [referenceId]="product?._id"></app-comment>
+                                        <app-comment [comment]="c" [referenceId]="details?._id"></app-comment>
                                     </li>
                                 </ul>
                             </div>
@@ -178,7 +111,9 @@
                                         [routerLink]="['/', {outlets: {'main': ['dashboard', 'profile', details?.createdBy?._id ]}}]">
                                         <h4>{{details?.createdBy?.name}}</h4>
                                     </a>
-                                    <button *ngIf="details?.createdBy?._id && authService?.loggedInUser?._id && authService?.loggedInUser?._id !== details?.createdBy?._id" (click)="openDialog(details?.createdBy?._id)" mat-mini-fab color="primary">
+                                    <button
+                                        *ngIf="details?.createdBy?._id && authService?.loggedInUser?._id && authService?.loggedInUser?._id !== details?.createdBy?._id"
+                                        (click)="openDialog(details?.createdBy?._id)" mat-mini-fab color="primary">
                                         <mat-icon>video_call</mat-icon>
                                     </button>
                                     <!-- <p>Signed Up: 08 April 2016</p> -->
@@ -231,7 +166,26 @@
                                 </h1>
                             </div>
 
+                            <div *ngIf="false" class="purchase-button">
+                                <!-- <a href="#" class="btn btn--lg btn--round">Purchase Now</a> -->
+
+                                <!-- Check if the product is in cart -->
+                                <a *ngIf="true; else productIsInCart" (click)="rsvpEvent(details?._id)"
+                                    class="btn btn--lg btn--round cart-btn" style="padding: 12px;">
+                                    <!-- <span class="lnr lnr-cart"></span> -->
+                                    <h5>RSVP</h5>
+                                </a>
+
+                                <!-- Show product addedd to cart if product is already in the cart -->
+                                <ng-template #productIsInCart>
+                                    <a class="btn btn--lg btn--round cart-btn">
+                                        <mat-icon style="vertical-align: middle">done</mat-icon> Added To Cart
+                                    </a>
+                                </ng-template>
+                            </div>
+
                         </div>
+
 
 
                         <div class="sidebar-card card--product-infos">
@@ -253,12 +207,21 @@
                                     </ng-template>
                                 </li>
                                 <li *ngIf="details?.createdAt">
-                                    <p class="data-label">Released</p>
+                                    <p class="data-label">Created</p>
                                     <p class="info">{{getDate(details?.createdAt) | date: 'dd/MM/yyyy'}}</p>
                                 </li>
                                 <li *ngIf="details?.updatedAt">
                                     <p class="data-label">Updated</p>
                                     <p class="info">{{getDate(details?.updatedAt) | date: 'dd/MM/yyyy'}}</p>
+                                </li>
+                                <li *ngIf="details?.dateRange && details?.dateRange?.length">
+                                    <p class="data-label">Event Dates</p>
+                                    <p class="info">{{details?.dateRange[0] | date: 'dd/MM/yyyy hh:ss'}} -
+                                        {{details?.dateRange[1] | date: 'dd/MM/yyyy hh:ss'}}</p>
+                                </li>
+                                <li *ngIf="details?.address">
+                                    <p class="data-label">Address</p>
+                                    <p class="info">{{details?.address}}</p>
                                 </li>
                                 <!-- <li>
                                     <p class="data-label">Version</p>
@@ -266,7 +229,7 @@
                                 </li> -->
                                 <li>
                                     <p class="data-label">Category</p>
-                                    <p class="info" *ngFor="let t of tags">{{t?.name}}</p>
+                                    <p class="info" *ngFor="let t of details?.tags">{{t?.name + ','}}</p>
                                 </li>
                                 <li>
                                     <p class="data-label">Support</p>

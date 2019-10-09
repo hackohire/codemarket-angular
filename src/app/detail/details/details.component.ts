@@ -23,6 +23,7 @@ import { UserService } from 'src/app/user/user.service';
 import { MatDialog } from '@angular/material';
 import { VideoChatComponent } from 'src/app/video-chat/video-chat.component';
 import Peer from 'peerjs';
+import { PostService } from '../../shared/services/post.service';
 
 @Component({
   selector: 'app-details',
@@ -53,7 +54,8 @@ export class DetailsComponent implements OnInit, OnDestroy {
     public authService: AuthService,
     private userService: UserService,
     private dialog: MatDialog,
-    public share: ShareService
+    public share: ShareService,
+    private postService: PostService
   ) {
     this.breadcumb = {
       path: [
@@ -97,104 +99,20 @@ export class DetailsComponent implements OnInit, OnDestroy {
       })
     ).subscribe();
 
-    // if (params['helpRequestId']) {
+  }
 
-    //   this.subscription$ = this.store.select(selectSelectedPost).pipe(
-    //     tap((p: HelpQuery) => {
-    //       if (p) {
-    //         this.details$ = of(p);
-    //         this.type = PostType.HelpRequest;
-    //         this.initializeCommentForm(p);
-    //       } else {
-    //         const params = this.activatedRoute.snapshot.params;
-    //         this.store.dispatch(GetPostById({ postId: params.helpRequestId }));
-    //         this.details$ = this.store.select(selectSelectedPost);
-    //       }
-
-    //     })
-    //   ).subscribe();
-
-    // } else if (params['interviewId']) {
-    //   this.subscription$ = this.store.select(selectSelectedPost).pipe(
-    //     tap((p: Interview) => {
-    //       if (p) {
-    //         this.details$ = of(p);
-    //         this.type = PostType.Interview;
-    //         this.initializeCommentForm(p);
-    //       } else {
-    //         this.store.dispatch(GetPostById({ postId: params.interviewId }));
-    //         this.details$ = this.store.select(selectSelectedPost);
-    //       }
-    //     })
-    //   ).subscribe();
-
-    // } else if (params['requirementId']) {
-    //   this.subscription$ = this.store.select(selectSelectedPost).pipe(
-    //     tap((p: Requirement) => {
-    //       if (p) {
-    //         this.details$ = of(p);
-    //         this.type = PostType.Requirement;
-    //         this.initializeCommentForm(p);
-    //       } else {
-    //         this.store.dispatch(GetPostById({ postId: params.requirementId }));
-    //         this.details$ = this.store.select(selectSelectedPost);
-    //       }
-    //     })
-    //   ).subscribe();
-    // } else if (params['testingId']) {
-    //   this.subscription$ = this.store.select(selectSelectedPost).pipe(
-    //     tap((p: Testing) => {
-    //       if (p) {
-    //         this.details$ = of(p);
-    //         this.type = PostType.Testing;
-    //         this.initializeCommentForm(p);
-    //       } else {
-    //         this.store.dispatch(GetPostById({ postId: params.testingId }));
-    //         this.details$ = this.store.select(selectSelectedPost);
-    //       }
-    //     })
-    //   ).subscribe();
-    // } else if (params['howtodocId']) {
-    //   this.subscription$ = this.store.select(selectSelectedPost).pipe(
-    //     tap((p: Howtodoc) => {
-    //       if (p) {
-    //         this.details$ = of(p);
-    //         this.type = PostType.Howtodoc;
-    //         this.initializeCommentForm(p);
-    //       } else {
-    //         this.store.dispatch(GetPostById({ postId: params.howtodocId }));
-    //         this.details$ = this.store.select(selectSelectedPost);
-    //       }
-    //     })
-    //   ).subscribe();
-    // } else if (params['designId']) {
-    //   this.subscription$ = this.store.select(selectSelectedPost).pipe(
-    //     tap((p: Design) => {
-    //       if (p) {
-    //         this.details$ = of(p);
-    //         this.type = PostType.Design;
-    //         this.initializeCommentForm(p);
-    //       } else {
-    //         this.store.dispatch(GetPostById({ postId: params.designId }));
-    //         this.details$ = this.store.select(selectSelectedPost);
-    //       }
-    //     })
-    //   ).subscribe();
-    // } else if (params['goalId']) {
-    //   this.subscription$ = this.store.select(selectSelectedPost).pipe(
-    //     tap((p: Goal) => {
-    //       if (p) {
-    //         this.details$ = of(p);
-    //         this.type = PostType.Goal;
-    //         this.initializeCommentForm(p);
-    //       } else {
-    //         this.store.dispatch(GetPostById({ postId: params.goalId }));
-    //         this.details$ = this.store.select(selectSelectedPost);
-    //       }
-    //     })
-    //   ).subscribe();
-    // }
-
+  async rsvpEvent(eventId) {
+    if (!this.authService.loggedInUser) {
+      /** calling this method to set current url as redirectURL after user is logged In */
+      await this.authService.checkIfUserIsLoggedIn(true);
+    } else {
+      this.postService.rsvpEvent(this.authService.loggedInUser._id, eventId).pipe(
+        tap(d => console.log(d))
+      ).subscribe({
+        next: (d) => console.log(d),
+        error: (e) => console.log(e)
+      })
+    }
   }
 
   ngOnDestroy(): void {

@@ -21,6 +21,7 @@ import '../../icons';
 import { LikeDislikeComponent } from './components/like-dislike/like-dislike.component';
 import { PaypalSubscriptionDirective } from './directives/paypal-button.directive';
 import { VideoChatComponent } from '../video-chat/video-chat.component';
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 
 export function hljsLanguages() {
   return [
@@ -47,7 +48,9 @@ export function hljsLanguages() {
     RouterModule,
     ShareButtonsModule,
     FontAwesomeModule,
-    ShareModule
+    ShareModule,
+    OwlDateTimeModule,
+    OwlNativeDateTimeModule
   ],
   exports: [
     BreadcumbComponent,
@@ -65,6 +68,8 @@ export function hljsLanguages() {
     ShareButtonsModule,
     ShareModule,
     FontAwesomeModule,
+    OwlDateTimeModule,
+    OwlNativeDateTimeModule,
     SafePipe,
     PaypalSubscriptionDirective
   ],

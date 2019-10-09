@@ -33,6 +33,7 @@ export class AddEventComponent implements OnInit {
     formula: true,
     syntax: true,
   };
+  eventType: string;
 
   edit: boolean;
 
@@ -147,7 +148,10 @@ export class AddEventComponent implements OnInit {
       support: new FormGroup({
         time: new FormControl(i && i.support && i.support.time ? i.support.time : 0),
         description: new FormControl(i && i.support && i.support.description ? i.support.description : '')
-      })
+      }),
+      dateRange: new FormControl(i && i.dateRange ? i.dateRange : '', Validators.required),
+      eventType: new FormControl(i && i.eventType ? i.eventType : 'free', Validators.required),
+      address: new FormControl(i && i.address ? i.address : '', Validators.required),
       // snippets: new FormControl(null),
     });
 
@@ -218,5 +222,9 @@ export class AddEventComponent implements OnInit {
   // Remove a Tag
   public remove(index: number): void {
     this.formService.removeCategory(this.tagsFormControl, index)
+  }
+
+  eventTypeChange(e) {
+
   }
 }

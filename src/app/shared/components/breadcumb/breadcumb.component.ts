@@ -9,6 +9,7 @@ export class BreadcumbComponent implements OnInit {
 
   @Input() title: string;
   @Input() path: [];
+  @Input() eventDate: [];
   constructor() { }
 
   ngOnInit() {

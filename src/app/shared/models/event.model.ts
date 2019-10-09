@@ -26,4 +26,7 @@ export interface Event {
     categories?: [];
     tags: Tag[];
     support: Support;
+    dateRange?: string[];
+    eventType?: string;
+    address?: string;
 }

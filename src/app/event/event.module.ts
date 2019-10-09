@@ -29,7 +29,6 @@ const eventRoutes: Routes = [
       {
         path: 'edit-event/:eventId',
         loadChildren: () => import('./add-event/add-event.module').then(module => module.AddEventModule),
-        // outlet: 'selling'
       }
     ]
   },

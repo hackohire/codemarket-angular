@@ -14,6 +14,18 @@
                     </ul>
                 </div>
                 <h1 class="page-title">{{title}}</h1>
+                <div style="color: white; padding-top: 8px;">
+                    <h6 *ngIf="eventDate && eventDate?.length">
+                        <label style="width: 5%; color: white;">From:</label>
+                        <mat-icon style="vertical-align: middle;">date_range</mat-icon>
+                        {{eventDate[0] | date: 'EEEE, MMMM d, y, h:mm a' }}
+                    </h6>
+                    <h6 *ngIf="eventDate && eventDate?.length">
+                        <label style="width: 5%; color: white;">To:</label>
+                        <mat-icon style="vertical-align: middle;">date_range</mat-icon>
+                        {{ eventDate[1] | date: 'EEEE, MMMM d, y, h:mm a'}}
+                    </h6>
+                </div>
             </div>
             <!-- end /.col-md-12 -->
         </div>

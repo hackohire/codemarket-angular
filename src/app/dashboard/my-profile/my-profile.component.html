@@ -121,7 +121,6 @@
 
 								<!-- Add Interview Assignment -->
 								<button mat-menu-item [routerLink]="['add-interview']">
-									<!-- <mat-icon>dialpad</mat-icon> -->
 									<i style="font-size: 1.7rem !important;"
 										class="vertical-align-middle fal fa-user-tie fa-fw"></i>
 									<span> Interview</span>
@@ -129,14 +128,13 @@
 
 								<!-- Add Requirements -->
 								<button mat-menu-item [routerLink]="['add-requirement']">
-									
 									<i style="font-size: 1.7rem !important;"
 										class="vertical-align-middle fal fa-file-alt fa-fw"></i>
 									<span> Requirements</span>
 								</button>
 
 								<!-- Add Testings -->
-								<button mat-menu-item [routerLink]="[{outlets: {'main': ['testing', 'add-testing']}}]">
+								<button mat-menu-item [routerLink]="['add-testing']">
 									
 									<i style="font-size: 1.7rem !important;"
 										class="vertical-align-middle fal fa-tasks fa-fw"></i>
@@ -146,23 +144,21 @@
 
 								<!-- Add How To Guides -->
 								<button mat-menu-item
-									[routerLink]="[{outlets: {'main': ['howtodoc', 'add-howtodoc']}}]">
-									
+									[routerLink]="['add-howtodoc']">
 									<i style="font-size: 1.7rem !important;"
 										class="vertical-align-middle fal fa-file-exclamation fa-fw"></i>
 									<span> How-To-Guide</span>
 								</button>
 
 								<!-- Add Designs -->
-								<button mat-menu-item [routerLink]="[{outlets: {'main': ['design', 'add-design']}}]">
-									
+								<button mat-menu-item [routerLink]="['add-design']">
 									<i style="font-size: 1.7rem !important;"
 										class="vertical-align-middle fal fa-marker fa-fw"></i>
 									<span> Design</span>
 								</button>
 
 								<!-- Add Goals -->
-								<button mat-menu-item [routerLink]="[{outlets: {'main': ['goal', 'add-goal']}}]">
+								<button mat-menu-item [routerLink]="['add-goal']">
 									
 									<i style="font-size: 1.7rem !important;"
 										class="vertical-align-middle fal fa-bullseye-arrow fa-fw"></i>
@@ -170,7 +166,7 @@
 								</button>
 
 								<!-- Add Events -->
-								<button mat-menu-item [routerLink]="[{outlets: {'main': ['event', 'add-event']}}]">
+								<button mat-menu-item [routerLink]="['add-event']">
 									
 									<i style="font-size: 1.7rem !important;"
 										class="vertical-align-middle fal fa-calendar-plus fa-fw"></i>
@@ -179,7 +175,7 @@
 
 								<!-- Add Team Skills -->
 								<button mat-menu-item
-									[routerLink]="[{outlets: {'main': ['team-skill', 'add-teamskill']}}]">
+									[routerLink]="['add-teamskill']">
 									<i style="font-size: 1.7rem !important;"
 										class="vertical-align-middle fal fa-users-crown fa-fw"></i>
 									<span> Team Skills</span>

@@ -99,6 +99,10 @@ export class MyProfileComponent implements OnInit {
         {
           path: 'membership-list',
           label: 'Membership'
+        },
+        {
+          path: 'my-rsvp',
+          label: 'My RSVP'
         }
       );
     }

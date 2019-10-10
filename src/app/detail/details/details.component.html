@@ -166,7 +166,7 @@
                                 </h1>
                             </div>
 
-                            <div *ngIf="false" class="purchase-button">
+                            <div class="purchase-button" *ngIf="details?.type === 'event'">
                                 <!-- <a href="#" class="btn btn--lg btn--round">Purchase Now</a> -->
 
                                 <!-- Check if the product is in cart -->
@@ -274,6 +274,32 @@
 
                         </div>
 
+                        <div class="author-card sidebar-card " *ngIf="details?.type === 'event'">
+                            <div class="card-title">
+                                <h4>Attendees: {{ details?.usersAttending?.length }}</h4>
+                                <br />
+
+                                <ng-container class="row" *ngFor="let attendee of details?.usersAttending">
+                                    <div class="col-md-12" style="margin-bottom: 10px;">
+                                        <div class="author_avatar_comment" style="vertical-align: middle;">
+                                            <img [src]="attendee?.avatar ? ((codemarketBucketURL + attendee.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                                                alt="Presenting the broken author avatar :D">
+                                        </div>
+                                        <div class="autor__info">
+                                            <a
+                                                [routerLink]="['/', {outlets: {'main': ['dashboard', 'profile', attendee?._id ]}}]">
+                                                <p class="name">
+                                                    {{attendee?.name}}
+                                                </p>
+                                            </a>
+                                            <!-- <p class="ammount">{{fromNow(pu?.createdAt)}}</p> -->
+                                        </div>
+                                    </div>
+
+                                </ng-container>
+                            </div>
+                        </div>
+
                     </aside>
                     <!-- end /.aside -->
                 </div>
@@ -287,8 +313,13 @@
             END SINGLE PRODUCT DESCRIPTION AREA
         ===============================================-->
 
-
-
-
-
 </ng-container>
+
+<swal #successfulRSVP title="RSVP Successful!" type="success" [showConfirmButton]="false">
+    <div *swalPartial class="alert alert-info">
+        <p>You have been successfully added in the list of Attendees</p>`
+        <p>You can visit the list of events you have RSVP for: By Clicking 
+        <p></p>
+        <a class="btn btn--sm btn--round" [routerLink]="['/', {outlets: {'main': ['dashboard', 'my-profile', 'my-rsvp']}}]">My RSVP Events</a>
+    </div>
+</swal>

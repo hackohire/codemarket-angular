@@ -1,15 +1,17 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/internal/observable';
 import gql from 'graphql-tag';
-import { map } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 import { Apollo } from 'apollo-angular';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
-import { AppState } from 'src/app/core/store/state/app.state';
+import { AppState } from '../../core/store/state/app.state';
 import { Post } from '../models/post.model';
 import { description } from '../constants/fragments_constatnts';
-import { SetSelectedPost } from 'src/app/core/store/actions/post.actions';
+import { SetSelectedPost } from '../../core/store/actions/post.actions';
 import { productConstants } from '../constants/product_constants';
+import { AuthService } from '../../core/services/auth.service';
+import { of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -45,6 +47,14 @@ export class PostService {
       name
       avatar
     }
+    dateRange
+    address
+    eventType
+    usersAttending {
+      name
+      _id
+      avatar
+    }
   }
   ${description}
   `;
@@ -52,7 +62,8 @@ export class PostService {
   constructor(
     private apollo: Apollo,
     private store: Store<AppState>,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) { }
 
 
@@ -209,5 +220,60 @@ export class PostService {
     this.store.dispatch(SetSelectedPost({ post }));
     this.router.navigate(['/', { outlets: { main: ['dashboard', `${post.type}-details`, post._id]}}],
       { queryParams: {type: post.type, postId: post._id}} );
+  }
+
+  rsvpEvent(eventId: string): Observable<any> {
+    return this.apollo.mutate(
+      {
+        mutation: gql`
+          mutation rsvpEvent($userId: String, $eventId: String) {
+            rsvpEvent(userId: $userId, eventId: $eventId) {
+              validSubscription
+              usersAttending {
+                name
+                _id
+                avatar
+              }
+            }
+          }
+        `,
+        variables: {
+          userId: this.authService.loggedInUser._id,
+          eventId,
+        }
+      }
+    ).pipe(
+      map((p: any) => p.data.rsvpEvent),
+      catchError(e => of(e))
+    );
+  }
+
+  myRSVP(userId: string) {
+    return this.apollo.query(
+      {
+        query: gql`
+          query myRSVP($userId: String) {
+            myRSVP(userId: $userId){
+              name
+              createdBy {
+                name
+                _id
+                avatar
+              }
+              dateRange
+              type
+            }
+          }
+        `,
+        variables: {
+          userId
+        },
+        fetchPolicy: 'no-cache'
+      }
+    ).pipe(
+      map((p: any) => {
+        return p.data.myRSVP;
+      }),
+    );
   }
 }

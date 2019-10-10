@@ -1,0 +1,5 @@
+<app-breadcumb [title]="breadcumb?.title" [path]="breadcumb?.path"></app-breadcumb>
+
+<app-datatable (redirect)="postService.redirectToPostDetails($event)" [data]="myRSVPEvents"
+    [displayedColumns]="['number', 'name', 'from', 'to', 'host']">
+</app-datatable>

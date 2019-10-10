@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Observable, of, Subscription } from 'rxjs';
 import { HelpQuery } from 'src/app/shared/models/help-query.model';
 import { Requirement } from 'src/app/shared/models/requirement.model';
@@ -6,7 +6,7 @@ import { Interview } from 'src/app/shared/models/interview.model';
 import { AppState } from 'src/app/core/store/state/app.state';
 import { Store } from '@ngrx/store';
 import { tap, switchMap } from 'rxjs/operators';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BreadCumb } from 'src/app/shared/models/bredcumb.model';
 import { FormGroup, FormControl } from '@angular/forms';
 import moment from 'moment';
@@ -24,6 +24,9 @@ import { MatDialog } from '@angular/material';
 import { VideoChatComponent } from 'src/app/video-chat/video-chat.component';
 import Peer from 'peerjs';
 import { PostService } from '../../shared/services/post.service';
+import { SweetalertService } from '../../shared/services/sweetalert.service';
+import Swal from 'sweetalert2';
+import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 
 @Component({
   selector: 'app-details',
@@ -33,6 +36,7 @@ import { PostService } from '../../shared/services/post.service';
 })
 export class DetailsComponent implements OnInit, OnDestroy {
 
+  @ViewChild('successfulRSVP', { static: false }) successfulRSVP: SwalComponent;
   details$: Observable<HelpQuery | Requirement | Interview | Testing | Howtodoc>;
   subscription$: Subscription;
   type: string; // product | help-request | interview | requirement | Testing | Howtodoc
@@ -55,7 +59,9 @@ export class DetailsComponent implements OnInit, OnDestroy {
     private userService: UserService,
     private dialog: MatDialog,
     public share: ShareService,
-    private postService: PostService
+    private postService: PostService,
+    private router: Router,
+    private sweetAlertService: SweetalertService
   ) {
     this.breadcumb = {
       path: [
@@ -106,10 +112,21 @@ export class DetailsComponent implements OnInit, OnDestroy {
       /** calling this method to set current url as redirectURL after user is logged In */
       await this.authService.checkIfUserIsLoggedIn(true);
     } else {
-      this.postService.rsvpEvent(this.authService.loggedInUser._id, eventId).pipe(
+      this.postService.rsvpEvent(eventId).pipe(
         tap(d => console.log(d))
       ).subscribe({
-        next: (d) => console.log(d),
+        next: (d) => {
+          console.log(d)
+          if (d && !d.validSubscription) {
+            this.router.navigate(['/', {outlets: {'main': ['membership']}}])
+          } 
+          if (d && d.usersAttending && d.usersAttending.length) {
+            const isLoggedInUserAttending = d.usersAttending.find((u) => u._id === this.authService.loggedInUser._id);
+            if (isLoggedInUserAttending) {
+              this.successfulRSVP.show();
+            }
+          }
+        },
         error: (e) => console.log(e)
       })
     }
@@ -133,7 +150,9 @@ export class DetailsComponent implements OnInit, OnDestroy {
       tap((d) => {
         this.commentsList = d;
       })
-    ).subscribe();
+    ).subscribe({
+      error: (e) => console.log(e)
+    });
   }
 
   getDate(d: string) {

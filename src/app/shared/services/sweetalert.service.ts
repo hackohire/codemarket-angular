@@ -9,6 +9,6 @@ export class SweetalertService {
   constructor() { }
 
   public success(title: string, message?: string, type?: SweetAlertType) {
-    Swal.fire(title, '', type);
+    Swal.fire(title, message, type);
   }
 }

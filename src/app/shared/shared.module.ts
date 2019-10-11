@@ -22,6 +22,7 @@ import { LikeDislikeComponent } from './components/like-dislike/like-dislike.com
 import { PaypalSubscriptionDirective } from './directives/paypal-button.directive';
 import { VideoChatComponent } from '../video-chat/video-chat.component';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+import { AddPostMenuComponent } from './components/add-post-menu/add-post-menu.component';
 
 export function hljsLanguages() {
   return [
@@ -31,7 +32,7 @@ export function hljsLanguages() {
   ];
 }
 @NgModule({
-  declarations: [BreadcumbComponent, EditorComponent, CommentComponent, DatatableComponent, SafePipe, LikeDislikeComponent, PaypalSubscriptionDirective, VideoChatComponent],
+  declarations: [BreadcumbComponent, EditorComponent, CommentComponent, DatatableComponent, SafePipe, LikeDislikeComponent, PaypalSubscriptionDirective, VideoChatComponent, AddPostMenuComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -59,6 +60,7 @@ export function hljsLanguages() {
     DatatableComponent,
     LikeDislikeComponent,
     VideoChatComponent,
+    AddPostMenuComponent,
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,

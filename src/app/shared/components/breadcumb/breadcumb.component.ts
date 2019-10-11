@@ -10,6 +10,8 @@ export class BreadcumbComponent implements OnInit {
   @Input() title: string;
   @Input() path: [];
   @Input() eventDate: [];
+  @Input('color') color: string = 'white';
+  @Input('showMenu') showMenu: boolean = true;
   constructor() { }
 
   ngOnInit() {

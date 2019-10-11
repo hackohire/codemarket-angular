@@ -248,6 +248,31 @@ export class PostService {
     );
   }
 
+  cancelRSVP(eventId: string): Observable<any> {
+    return this.apollo.mutate(
+      {
+        mutation: gql`
+          mutation cancelRSVP($userId: String, $eventId: String) {
+            cancelRSVP(userId: $userId, eventId: $eventId) {
+              usersAttending {
+                name
+                _id
+                avatar
+              }
+            }
+          }
+        `,
+        variables: {
+          userId: this.authService.loggedInUser._id,
+          eventId,
+        }
+      }
+    ).pipe(
+      map((p: any) => p.data.cancelRSVP),
+      catchError(e => of(e))
+    );
+  }
+
   myRSVP(userId: string) {
     return this.apollo.query(
       {
@@ -255,6 +280,7 @@ export class PostService {
           query myRSVP($userId: String) {
             myRSVP(userId: $userId){
               name
+              _id
               createdBy {
                 name
                 _id

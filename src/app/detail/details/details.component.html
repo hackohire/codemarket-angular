@@ -6,12 +6,9 @@
         START BREADCRUMB AREA
     =================================-->
 
-    <app-breadcumb
-        (editPost)="postService?.editPost(details)"
+    <app-breadcumb (editPost)="postService?.editPost(details)"
         [showEditPostDetails]="details?.createdBy?._id === authService?.loggedInUser?._id ? true : false"
-        [title]="details?.name"
-        [path]="breadcumb?.path"
-        [eventDate]="details?.dateRange">
+        [title]="details?.name" [path]="breadcumb?.path" [eventDate]="details?.dateRange">
     </app-breadcumb>
 
     <!--================================
@@ -152,7 +149,8 @@
                                 <!-- end /.social -->
 
                                 <div class="author-btn">
-                                    <a (editPost)="postService?.editPost(details)" [routerLink]="['/', {outlets: {'main': ['dashboard', 'profile', details?.createdBy?._id ]}}]"
+                                    <a (editPost)="postService?.editPost(details)"
+                                        [routerLink]="['/', {outlets: {'main': ['dashboard', 'profile', details?.createdBy?._id ]}}]"
                                         class="btn btn--sm btn--round">View Profile</a>
                                     <!-- <a href="#" class="btn btn--sm btn--round">Message</a> -->
                                 </div>
@@ -176,16 +174,17 @@
                                 <!-- <a href="#" class="btn btn--lg btn--round">Purchase Now</a> -->
 
                                 <!-- Check if the product is in cart -->
-                                <a *ngIf="true; else productIsInCart" (click)="rsvpEvent(details?._id)"
+                                <a *ngIf="isUserAttending; else eventRSVP" (click)="cancelRSVP(details?._id)"
                                     class="btn btn--lg btn--round cart-btn" style="padding: 12px;">
-                                    <!-- <span class="lnr lnr-cart"></span> -->
-                                    <h5>RSVP</h5>
+                                    <h5>Cancel RSVP</h5>
                                 </a>
 
+
                                 <!-- Show product addedd to cart if product is already in the cart -->
-                                <ng-template #productIsInCart>
-                                    <a class="btn btn--lg btn--round cart-btn">
-                                        <mat-icon style="vertical-align: middle">done</mat-icon> Added To Cart
+                                <ng-template #eventRSVP>
+                                    <a (click)="rsvpEvent(details?._id)"
+                                        class="btn btn--lg btn--round cart-btn" style="padding: 12px;">
+                                        <h5>RSVP</h5>
                                     </a>
                                 </ng-template>
                             </div>
@@ -324,8 +323,9 @@
 <swal #successfulRSVP title="RSVP Successful!" type="success" [showConfirmButton]="false">
     <div *swalPartial class="alert alert-info">
         <p>You have been successfully added in the list of Attendees</p>`
-        <p>You can visit the list of events you have RSVP for: By Clicking 
-        <p></p>
-        <a class="btn btn--sm btn--round" [routerLink]="['/', {outlets: {'main': ['dashboard', 'my-profile', 'my-rsvp']}}]">My RSVP Events</a>
+        <p>You can visit the list of events you have RSVP for: By Clicking
+            <p></p>
+            <a class="btn btn--sm btn--round"
+                [routerLink]="['/', {outlets: {'main': ['dashboard', 'my-profile', 'my-rsvp']}}]">My RSVP Events</a>
     </div>
 </swal>

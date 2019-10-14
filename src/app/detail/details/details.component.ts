@@ -38,6 +38,8 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
   @ViewChild('successfulRSVP', { static: false }) successfulRSVP: SwalComponent;
   details$: Observable<HelpQuery | Requirement | Interview | Testing | Howtodoc>;
+  postDetails: Post;
+  isUserAttending: boolean; /** Only for the event */
   subscription$: Subscription;
   type: string; // product | help-request | interview | requirement | Testing | Howtodoc
   commentsList: any[];
@@ -92,10 +94,21 @@ export class DetailsComponent implements OnInit, OnDestroy {
     this.subscription$ = this.store.select(selectSelectedPost).pipe(
       tap((p: Post) => {
         if (p) {
+          this.postDetails = p;
           this.details$ = of(p);
           // this.type = ;
           this.initializeCommentForm(p);
 
+          this.authService.loggedInUser$.subscribe((user) => {
+            if (this.postDetails
+              && this.postDetails.usersAttending
+              && this.postDetails.usersAttending.length
+              && this.postDetails.usersAttending.find((u) => u._id === user._id)) {
+                this.isUserAttending = true;
+            } else {
+              this.isUserAttending = false;
+            }
+          })
         } else {
           const postId = this.activatedRoute.snapshot.queryParams['postId'];
           this.store.dispatch(GetPostById({ postId }));
@@ -121,6 +134,9 @@ export class DetailsComponent implements OnInit, OnDestroy {
             this.router.navigate(['/', {outlets: {'main': ['membership']}}])
           } 
           if (d && d.usersAttending && d.usersAttending.length) {
+            this.isUserAttending = true;
+            this.postDetails.usersAttending = d.usersAttending;
+            this.store.dispatch(SetSelectedPost({post: this.postDetails}))
             const isLoggedInUserAttending = d.usersAttending.find((u) => u._id === this.authService.loggedInUser._id);
             if (isLoggedInUserAttending) {
               this.successfulRSVP.show();
@@ -130,6 +146,21 @@ export class DetailsComponent implements OnInit, OnDestroy {
         error: (e) => console.log(e)
       })
     }
+  }
+
+  cancelRSVP(eventId: string) {
+    this.postService.cancelRSVP(eventId).subscribe((e) => {
+      console.log(e);
+      if (e && e.usersAttending && e.usersAttending) {
+        const isCustomerGoing = e.usersAttending.find(u => u._id === this.authService.loggedInUser._id);
+        if (!isCustomerGoing) {
+          this.isUserAttending = false;
+          this.postDetails.usersAttending = e.usersAttending;
+          this.store.dispatch(SetSelectedPost({post: this.postDetails}));
+          this.sweetAlertService.success('Successful Cancel RSVP Request', '', 'success')
+        }
+      }
+    })
   }
 
   ngOnDestroy(): void {

@@ -12,6 +12,7 @@ import { SetSelectedPost } from '../../core/store/actions/post.actions';
 import { productConstants } from '../constants/product_constants';
 import { AuthService } from '../../core/services/auth.service';
 import { of } from 'rxjs';
+import { PostType } from '../models/post-types.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -220,6 +221,15 @@ export class PostService {
     this.store.dispatch(SetSelectedPost({ post }));
     this.router.navigate(['/', { outlets: { main: ['dashboard', `${post.type}-details`, post._id]}}],
       { queryParams: {type: post.type, postId: post._id}} );
+  }
+
+  editPost(post): void {
+
+    if (post.type === PostType.Product) {
+      this.router.navigate(['/', {outlets: {'main': ['sell', 'edit-product', post._id]}}])
+    } else {
+      this.router.navigate(['/', {outlets: {'main': ['post', 'edit-' + post.type, post._id]}}])
+    }
   }
 
   rsvpEvent(eventId: string): Observable<any> {

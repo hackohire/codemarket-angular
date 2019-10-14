@@ -28,4 +28,5 @@ export interface Post {
     shortDescription?: string;
     tags: Tag[];
     support: Support;
+    usersAttending: [User] /** Only for events */
 }

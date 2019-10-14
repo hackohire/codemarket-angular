@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-breadcumb',
@@ -12,6 +12,10 @@ export class BreadcumbComponent implements OnInit {
   @Input() eventDate: [];
   @Input('color') color: string = 'white';
   @Input('showMenu') showMenu: boolean = true;
+  @Input('showEditPostDetails') showEditPostDetails: boolean;
+
+  @Output() editPost = new EventEmitter();
+
   constructor() { }
 
   ngOnInit() {

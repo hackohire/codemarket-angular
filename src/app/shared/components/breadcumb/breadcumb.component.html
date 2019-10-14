@@ -12,7 +12,14 @@
                             <a [routerLink]="[p?.pathString ? p.pathString : '/']">{{p?.name}}</a>
                         </li>
                     </ul>
-                    
+
+                    <a *ngIf="showEditPostDetails"
+                        class="btn btn--sm btn--round menu"
+                        style="color: #0674ec !important; margin-left: auto; background: white;"
+                        (click)="editPost.emit()">Edit <mat-icon
+                            style="vertical-align: middle;">edit</mat-icon>
+                    </a>
+
                     <!-- Add Post Menu Integrated -->
                     <!-- <app-add-post-menu *ngIf="showMenu" [ngStyle]="{'color': color}" style="padding-left: 10px;"></app-add-post-menu> -->
                 </div>

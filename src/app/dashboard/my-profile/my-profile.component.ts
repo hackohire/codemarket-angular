@@ -77,17 +77,7 @@ export class MyProfileComponent implements OnInit {
   }
 
   createTabs() {
-    this.navLinks = [
-      {
-        path: 'products-list',
-        label: 'Sell'
-      },
-      {
-        path: 'post-list',
-        label: 'Request Help',
-        queryParams: {type: PostType.HelpRequest, all: false}
-      },
-    ];
+    // this.navLinks = [ ];
 
     // If user is visiting somebody else's profile don't show what other user has bought
     if (!this.authorId) {
@@ -105,6 +95,18 @@ export class MyProfileComponent implements OnInit {
           label: 'My RSVP'
         }
       );
+    } else {
+      this.navLinks.push(
+        {
+          path: 'products-list',
+          label: 'Sell'
+        },
+        {
+          path: 'post-list',
+          label: 'Request Help',
+          queryParams: {type: PostType.HelpRequest, all: false}
+        },
+      )
     }
   }
 

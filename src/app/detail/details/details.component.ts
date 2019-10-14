@@ -59,7 +59,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
     private userService: UserService,
     private dialog: MatDialog,
     public share: ShareService,
-    private postService: PostService,
+    public postService: PostService,
     private router: Router,
     private sweetAlertService: SweetalertService
   ) {

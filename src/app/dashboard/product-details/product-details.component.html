@@ -6,7 +6,12 @@
         START BREADCRUMB AREA
     =================================-->
 
-    <app-breadcumb [title]="product?.name" [path]="breadcumb?.path"></app-breadcumb>
+    <app-breadcumb
+        (editPost)="postService?.editPost(product)"
+        [showEditPostDetails]="product?.createdBy?._id === authService?.loggedInUser?._id ? true : false"
+        [title]="product?.name"
+        [path]="breadcumb?.path">
+    </app-breadcumb>
 
     <!--================================
             END BREADCRUMB AREA

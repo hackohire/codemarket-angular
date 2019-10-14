@@ -22,6 +22,7 @@ import { UserService } from 'src/app/user/user.service';
 import { MatDialog } from '@angular/material';
 import { VideoChatComponent } from 'src/app/video-chat/video-chat.component';
 import Peer from 'peerjs';
+import { PostService } from '../../shared/services/post.service';
 
 @Component({
   selector: 'app-product-details',
@@ -58,6 +59,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     private store: Store<AppState>,
     private activatedRoute: ActivatedRoute,
     public productService: ProductService,
+    public postService: PostService,
     public authService: AuthService,
     private commentService: CommentService,
     public share: ShareService,

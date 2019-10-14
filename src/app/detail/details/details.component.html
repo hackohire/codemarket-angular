@@ -6,7 +6,13 @@
         START BREADCRUMB AREA
     =================================-->
 
-    <app-breadcumb [title]="details?.name" [path]="breadcumb?.path" [eventDate]="details?.dateRange"></app-breadcumb>
+    <app-breadcumb
+        (editPost)="postService?.editPost(details)"
+        [showEditPostDetails]="details?.createdBy?._id === authService?.loggedInUser?._id ? true : false"
+        [title]="details?.name"
+        [path]="breadcumb?.path"
+        [eventDate]="details?.dateRange">
+    </app-breadcumb>
 
     <!--================================
             END BREADCRUMB AREA
@@ -146,7 +152,7 @@
                                 <!-- end /.social -->
 
                                 <div class="author-btn">
-                                    <a [routerLink]="['/', {outlets: {'main': ['dashboard', 'profile', details?.createdBy?._id ]}}]"
+                                    <a (editPost)="postService?.editPost(details)" [routerLink]="['/', {outlets: {'main': ['dashboard', 'profile', details?.createdBy?._id ]}}]"
                                         class="btn btn--sm btn--round">View Profile</a>
                                     <!-- <a href="#" class="btn btn--sm btn--round">Message</a> -->
                                 </div>

@@ -80,7 +80,7 @@ export class ProductsListComponent implements OnInit, OnDestroy {
             this.dataSource.data = posts;
 
             /** Set the columns visible in the table */
-            this.displayedColumns = ['number', 'name', 'price', 'createdBy', 'type', 'category', 'createdAt'];
+            this.displayedColumns = ['number', 'name', 'price', 'createdBy', 'type', 'category', 'createdAt', 'action'];
             this.all = true;
           }
         })

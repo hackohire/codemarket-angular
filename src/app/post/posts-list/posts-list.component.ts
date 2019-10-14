@@ -68,7 +68,7 @@ export class PostsListComponent implements OnInit, OnDestroy {
     };
 
     if (this.all) {
-      this.displayedColumns = ['number', 'name', 'price', 'createdBy', 'category', 'createdAt'];
+      this.displayedColumns = ['number', 'name', 'price', 'createdBy', 'category', 'createdAt', 'action'];
       this.postsListSubscription = this.store.select(selectPostsByType).pipe(
         map((posts) => {
           if (posts) {

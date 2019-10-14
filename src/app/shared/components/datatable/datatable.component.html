@@ -33,7 +33,7 @@
                 </td>
             </ng-container>
 
-            <ng-container *ngSwitchCase="'productCount'">
+            <ng-container *ngSwitchCase="'elementCount'">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'BugFixes'}} </th>
                 <td mat-cell *matCellDef="let element; let i = index;">{{element[col]}}</td>
             </ng-container>
@@ -45,6 +45,19 @@
                 </td>
             </ng-container>
 
+            <ng-container *ngSwitchCase="'action'">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{col}} </th>
+                <td mat-cell *matCellDef="let element; let i = index;" (click)="$event.stopPropagation()">
+                        <button  *ngIf="element?.createdBy?._id === authService?.loggedInUser._id" mat-mini-fab color="primary" (click)="postService?.editPost(element)"
+                            [routerLink]="['/', {outlets: {'main': ['sell', 'edit-element', element._id]}}]">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                        <button  *ngIf="element?.createdBy?._id === authService?.loggedInUser._id" mat-mini-fab color="warn" (click)="deletePost(element, i)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                </td>
+            </ng-container>
+
             <ng-container *ngSwitchDefault>
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> {{col}} </th>
                 <td mat-cell *matCellDef="let element; let i = index;">{{element[col]}}</td>
@@ -53,7 +66,7 @@
     </div>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let helpRequest; columns: displayedColumns; let i = index;" class="example-product-row">
+    <tr mat-row *matRowDef="let helpRequest; columns: displayedColumns; let i = index;" class="example-element-row">
     </tr>
     <div style="height: 100vh"></div>
 </table>

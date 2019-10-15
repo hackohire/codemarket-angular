@@ -172,20 +172,29 @@
 
                             <div class="purchase-button" *ngIf="details?.type === 'event'">
                                 <!-- <a href="#" class="btn btn--lg btn--round">Purchase Now</a> -->
-
-                                <!-- Check if the product is in cart -->
-                                <a *ngIf="isUserAttending; else eventRSVP" (click)="cancelRSVP(details?._id)"
+                                
+                                <h3 style="text-align: center;" *ngIf="isUserAttending; else eventRSVP" (click)="cancelRSVP(details?._id)">
+                                        You are going 
+                                     <button color="warn" mat-mini-fab aria-label="Example icon-button with a heart icon">
+                                        <mat-icon>close</mat-icon>
+                                    </button></h3>
+                                <!-- <a 
                                     class="btn btn--lg btn--round cart-btn" style="padding: 12px;">
                                     <h5>Cancel RSVP</h5>
-                                </a>
+                                </a> -->
 
 
-                                <!-- Show product addedd to cart if product is already in the cart -->
+                                
                                 <ng-template #eventRSVP>
-                                    <a (click)="rsvpEvent(details?._id)"
+                                    <h3 style="text-align: center;" (click)="rsvpEvent(details?._id)">Are you going? <button color="primary" mat-mini-fab aria-label="Example icon-button with a heart icon">
+                                            <mat-icon>done</mat-icon>
+                                        </button></h3>
+
+                                    <!-- <mat-icon>yes</mat-icon> -->
+                                    <!-- <a (click)="rsvpEvent(details?._id)"
                                         class="btn btn--lg btn--round cart-btn" style="padding: 12px;">
-                                        <h5>RSVP</h5>
-                                    </a>
+                                        <h5></h5>
+                                    </a> -->
                                 </ng-template>
                             </div>
 

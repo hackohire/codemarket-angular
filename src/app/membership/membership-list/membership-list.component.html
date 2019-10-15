@@ -1,5 +1,100 @@
 <app-breadcumb [title]="breadcumb?.title" [path]="breadcumb?.path"></app-breadcumb>
 
-<app-datatable [data]="listOfSubscriptions"
-    [displayedColumns]="['number', 'name', 'users', 'price', 'amount']">
-</app-datatable>
+<table mat-table [dataSource]="dataSource" multiTemplateDataRows matSort class="mat-elevation-z8">
+    <!-- Position Column -->
+    <ng-container matColumnDef="expand">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> </th>
+        <td mat-cell *matCellDef="let membership; let i = dataIndex;"
+            (click)="expandedMembership = expandedMembership === membership ? null : membership">
+            <mat-icon style="vertical-align: middle;" *ngIf="expandedMembership == null">expand_more</mat-icon>
+            <mat-icon style="vertical-align: middle;" *ngIf="membership == expandedMembership">expand_less</mat-icon>
+        </td>
+        <!-- <mat-cell *matCellDef="let membership; let i = dataIndex;">{{i + 1}}</mat-cell> -->
+    </ng-container>
+    <ng-container matColumnDef="number">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
+        <td mat-cell *matCellDef="let membership; let i = dataIndex;">{{i + 1}} </td>
+        <!-- <mat-cell *matCellDef="let membership; let i = dataIndex;">{{i + 1}}</mat-cell> -->
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+        <td mat-cell *matCellDef="let membership"> <a>{{membership.plan.nickname}}</a> </td>
+    </ng-container>
+
+    <ng-container matColumnDef="users">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Users </th>
+        <td mat-cell *matCellDef="let membership"> <a>{{membership.quantity}}</a> </td>
+    </ng-container>
+
+    <!-- Price Column -->
+    <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Price </th>
+        <td mat-cell *matCellDef="let membership"> {{(membership.plan.amount / 100) | currency}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="amount">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Amount </th>
+        <td mat-cell *matCellDef="let membership"> {{(membership.plan.amount / 100 * membership.quantity) | currency}}
+        </td>
+    </ng-container>
+
+    <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+    <ng-container matColumnDef="expandedDetail">
+        <td mat-cell *matCellDef="let membership; let i = dataIndex;" [attr.colspan]="displayedColumns?.length">
+            <div class="example-membership-detail"
+                [@detailExpand]="membership === expandedMembership ? 'expanded' : 'collapsed'">
+                <div class="example-membership-description">
+                    <div class="author-card sidebar-card ">
+                        <div class="card-title">
+                            <h4>Users Invited: {{ membership?.subscriptionUsers?.length }}</h4>
+                            <br />
+                            <table mat-table [dataSource]="membership?.subscriptionUsers" class="mat-elevation-z8">
+                                <ng-container [matColumnDef]="'Name'">
+                                    <th mat-header-cell *matHeaderCellDef> Name </th>
+                                    <td mat-cell *matCellDef="let element"> {{element['name']}} </td>
+                                </ng-container>
+
+                                <ng-container [matColumnDef]="'Email'">
+                                    <th mat-header-cell *matHeaderCellDef> Email </th>
+                                    <td mat-cell *matCellDef="let element"> {{element['email']}} </td>
+                                </ng-container>
+
+                                <ng-container [matColumnDef]="'Invitation Accepted'">
+                                    <th mat-header-cell *matHeaderCellDef> Invitation Accepted </th>
+                                    <td mat-cell *matCellDef="let element"> {{element['invitationAccepted']}} </td>
+                                </ng-container>
+
+                                <tr mat-header-row *matHeaderRowDef="['Name', 'Email', 'Invitation Accepted']"></tr>
+                                <tr mat-row *matRowDef="let row; columns: ['Name', 'Email', 'Invitation Accepted'];"></tr>
+                            </table>
+                        </div>
+                    </div>
+                    <ng-template #noDescription>
+                        <span>No Description</span>
+                    </ng-template>
+                </div>
+            </div>
+        </td>
+    </ng-container>
+
+
+    <!-- Action Column -->
+    <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+        <td mat-cell *matCellDef="let membership; let i = dataIndex;" (click)="$event.stopPropagation()">
+            <button mat-mini-fab color="primary" (click)="openInviteMembersDialog(membership, i)">
+                <mat-icon>person_add</mat-icon>
+            </button>
+        </td>
+    </ng-container>
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let membership; columns: displayedColumns; let i = dataIndex;"
+        class="example-membership-row" [class.example-expanded-row]="expandedMembership === membership">
+    </tr>
+    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']; let i = dataIndex;" class="example-detail-row"></tr>
+    <!-- <tr mat-row *matRowDef="let row; columns: displayedColumns; let i = dataIndex;" class="example-detail-row"></tr> -->
+</table>

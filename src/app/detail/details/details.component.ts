@@ -99,6 +99,9 @@ export class DetailsComponent implements OnInit, OnDestroy {
           // this.type = ;
           this.initializeCommentForm(p);
 
+          /** Subscribe to loggedinuser, once loggedInUse is got, Check if the loggedInUder is
+           * in the list of attendess or not 
+           **/
           this.authService.loggedInUser$.subscribe((user) => {
             if (this.postDetails
               && this.postDetails.usersAttending
@@ -125,14 +128,18 @@ export class DetailsComponent implements OnInit, OnDestroy {
       /** calling this method to set current url as redirectURL after user is logged In */
       await this.authService.checkIfUserIsLoggedIn(true);
     } else {
+      /** Make the API call to set the user in the list of attendees */
       this.postService.rsvpEvent(eventId).pipe(
         tap(d => console.log(d))
       ).subscribe({
         next: (d) => {
           console.log(d)
+          /** If user doesn't have subscription, rediret to membership page */
           if (d && !d.validSubscription) {
             this.router.navigate(['/', {outlets: {'main': ['membership']}}])
-          } 
+          }
+
+          /** Check i user is in the list of attendees */
           if (d && d.usersAttending && d.usersAttending.length) {
             this.isUserAttending = true;
             this.postDetails.usersAttending = d.usersAttending;

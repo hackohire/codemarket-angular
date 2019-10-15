@@ -250,6 +250,12 @@ export class MembershipService {
               plan {
                 nickname
                 amount
+                id
+              }
+              subscriptionUsers {
+                name
+                email
+                invitationAccepted
               }
               quantity
               id
@@ -265,6 +271,67 @@ export class MembershipService {
     ).pipe(
       map((p: any) => {
         return p.data.getMembershipSubscriptionsByUserId;
+      }),
+    );
+  }
+
+  inviteMembersToSubscription(subscriptionId, users) {
+    return this.apollo.mutate(
+      {
+        mutation: gql`
+          mutation inviteMembersToSubscription($subscriptionId: String, $users: [SubscriptionUsersInput]) {
+            inviteMembersToSubscription(subscriptionId: $subscriptionId, users: $users) {
+              plan {
+                nickname
+                amount
+                id
+              }
+              subscriptionUsers {
+                name
+                email
+                invitationAccepted
+              }
+              quantity
+              id
+              _id
+            }
+          }
+        `,
+        variables: {
+          subscriptionId,
+          users,
+        },
+      },
+    ).pipe(
+      map((p: any) => {
+        return p.data.inviteMembersToSubscription;
+      }),
+    );
+  }
+
+  acceptInvitation(subscriptionId, email) {
+    return this.apollo.mutate(
+      {
+        mutation: gql`
+          mutation acceptInvitation($subscriptionId: String, $email: String) {
+            acceptInvitation(subscriptionId: $subscriptionId, email: $email) {
+              subscriptionUsers {
+                name
+                email
+                invitationAccepted
+              }
+              _id
+            }
+          }
+        `,
+        variables: {
+          subscriptionId,
+          email,
+        },
+      },
+    ).pipe(
+      map((p: any) => {
+        return p.data.acceptInvitation;
       }),
     );
   }

@@ -46,7 +46,7 @@
 
   <mat-sidenav-content>
 
-    <mat-toolbar>
+    <mat-toolbar [ngStyle.lt-md]="{'padding-bottom': '20px'}">
 
       <!-- Toggle Sidebar Button -->
       <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
@@ -54,7 +54,9 @@
       </button>
 
       <!-- Logo or Application Name -->
-      <img (click)="redirect()" src="../../../../assets/images/logo.png">
+      <img sizes="(max-width: 282px) 100vw, 282px"
+      srcset="../../../../assets/imageslogo_qugbvk_c_scalew_200.png 200w, ../../../../assets/images/logo_qugbvk_c_scalew_282.png 282w" src="../../../../assets/images/logo_qugbvk_c_scalew_282.png" alt="">
+      <!-- <img (click)="redirect()" src="../../../../assets/images/logo.png"> -->
       <!-- <h2 [routerLink]="['/']">Codemarket</h2> -->
 
       <!-- End Items -->
@@ -66,26 +68,27 @@
       <a mat-button routerLinkActive="mat-primary"
         [routerLink]="['/', {outlets: {'main': ['dashboard', 'bugfixes-all']}}]">
         <i style="font-size: 1.7rem !important;" class="vertical-align-middle fal fa-lightbulb-dollar fa-fw"></i>
-        Code Q&A
+        <span [fxHide.xs]="true">Code Q&A</span>
       </a>
 
       <!-- All Help Requests -->
       <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', {outlets: {'main': ['dashboard', 'post-list']}}]"
         [queryParams]="{type: 'team-skill', all: true}">
         <i style="font-size: 1.7rem !important;" class="vertical-align-middle fal fa-question-circle fa-fw"></i>
-        Team Q&A
+        <span [fxHide.xs]="true">Team Q&A</span>
       </a>
 
       <!-- membership -->
       <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', {outlets: {'main': ['membership']}}]">
-        <mat-icon>card_membership</mat-icon> Membership
+        <mat-icon>card_membership</mat-icon>
+        <span [fxHide.xs]="true">Membership</span>
       </a>
 
       <!-- All Events -->
       <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', {outlets: {'main': ['dashboard', 'post-list']}}]"
         [queryParams]="{type: 'event', all: true}">
         <i style="font-size: 1.7rem !important;" class="vertical-align-middle fal fa-calendar-alt fa-fw"></i>
-        Events
+        <span [fxHide.xs]="true">Events</span>
       </a>
 
       <!-- Login -->

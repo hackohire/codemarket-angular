@@ -16,6 +16,10 @@
   color: black;
   top: 0;
   z-index: 10;
+  flex-wrap: wrap !important;
+  // padding-bottom: 20px;
+  height: fit-content;
+  place-content: space-around;
 }
 
 .menu-width {

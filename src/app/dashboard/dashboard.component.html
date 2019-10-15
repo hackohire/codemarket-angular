@@ -65,3 +65,12 @@
 
 </div>
 </section>
+
+<swal #successInvitationAccept title="Congratulations!" type="success" [showConfirmButton]="false">
+        <div *swalPartial class="alert alert-info">
+            <h4>You have accepted Invitation Successfully</h4>
+            <p></p>
+            <a class="btn btn--sm btn--round"
+            [routerLink]="['/', {outlets: {'main': ['dashboard', 'post-list']}}]" [queryParams]="{type: 'event', all: true}">Events</a>
+        </div>
+</swal>

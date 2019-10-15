@@ -12,6 +12,9 @@ import { UserService } from '../user/user.service';
 import { PostType } from '../shared/models/post-types.enum';
 import { PostService } from '../shared/services/post.service';
 import { AuthService } from '../core/services/auth.service';
+import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
+import { ActivatedRoute } from '@angular/router';
+import { MembershipService } from '../membership/membership.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -20,6 +23,7 @@ import { AuthService } from '../core/services/auth.service';
 })
 export class DashboardComponent implements OnInit {
 
+  @ViewChild('successInvitationAccept', { static: false }) successInvitationAccept: SwalComponent;
   productsList$: Observable<Product[]>;
   helpRequestList$: Observable<HelpQuery[]>;
   usersListAndTheirBugFixes$: Observable<[]>;
@@ -32,10 +36,25 @@ export class DashboardComponent implements OnInit {
     private store: Store<AppState>,
     private userService: UserService,
     public postService: PostService,
-    public authService: AuthService
+    public authService: AuthService,
+    private membershipService: MembershipService,
+    private activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit() {
+    console.log(this.activatedRoute.snapshot.queryParams);
+
+    const params = this.activatedRoute.snapshot.queryParams;
+
+    if (params && params.subscriptionId && params.email) {
+      this.membershipService.acceptInvitation(params.subscriptionId, params.email).subscribe({
+        next: (sub) => {
+          if(sub && sub.subscriptionUsers && sub.subscriptionUsers.length) {
+            this.successInvitationAccept.show();
+          }
+        }
+      })
+    }
     // this.store.dispatch(GetAllProducts());
     // this.productsList$ = this.store.select(selectAllProductsList);
     // this.helpRequestList$ = this.postService.getPostsByType(PostType.HelpRequest);

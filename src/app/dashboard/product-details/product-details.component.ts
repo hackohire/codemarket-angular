@@ -3,10 +3,8 @@ import { Observable, Subscription, of } from 'rxjs';
 import { Product } from 'src/app/shared/models/product.model';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/core/store/state/app.state';
-import { selectSelectedProduct } from 'src/app/core/store/selectors/product.selectors';
 import { ActivatedRoute } from '@angular/router';
 import { tap } from 'rxjs/internal/operators/tap';
-import { GetProductById, SetSelectedProduct } from 'src/app/core/store/actions/product.actions';
 import { BreadCumb } from 'src/app/shared/models/bredcumb.model';
 import { AddToCart } from 'src/app/core/store/actions/cart.actions';
 import { ProductService } from 'src/app/core/services/product.service';
@@ -23,6 +21,8 @@ import { MatDialog } from '@angular/material';
 import { VideoChatComponent } from 'src/app/video-chat/video-chat.component';
 import Peer from 'peerjs';
 import { PostService } from '../../shared/services/post.service';
+import { GetPostById, SetSelectedPost } from '../../core/store/actions/post.actions';
+import { selectSelectedPost } from '../../core/store/selectors/post.selectors';
 
 @Component({
   selector: 'app-product-details',
@@ -92,7 +92,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     if (this.subscription$) {
       this.subscription$.unsubscribe();
-      this.store.dispatch(SetSelectedProduct({ product: null }));
+      this.store.dispatch(SetSelectedPost({ post: null }));
     }
 
     this.title.setTitle('Codemarket');
@@ -101,9 +101,9 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
   ngOnInit() {
 
     const params = this.activatedRoute.snapshot.queryParams;
-    this.productDetails$ = this.store.select(selectSelectedProduct);
+    this.productDetails$ = this.store.select(selectSelectedPost);
 
-    this.subscription$ = this.store.select(selectSelectedProduct).pipe(
+    this.subscription$ = this.store.select(selectSelectedPost).pipe(
       tap((p: Product) => {
         if (p) {
 
@@ -136,7 +136,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
           ).subscribe();
 
         } else {
-          this.store.dispatch(GetProductById({ productId: params.postId }));
+          this.store.dispatch(GetPostById({ postId: params.postId }));
         }
       }),
     ).subscribe();

@@ -2,7 +2,6 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Product } from 'src/app/shared/models/product.model';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/core/store/state/app.state';
-import { SetSelectedProduct } from 'src/app/core/store/actions/product.actions';
 import { AddToCart } from 'src/app/core/store/actions/cart.actions';
 import { ProductService } from 'src/app/core/services/product.service';
 import { environment } from 'src/environments/environment';

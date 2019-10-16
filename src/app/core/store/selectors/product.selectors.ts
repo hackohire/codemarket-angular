@@ -14,7 +14,7 @@ export const selectAllProductsList = createSelector(
     (state: ProductState) => state.allProducts
 );
 
-export const selectSelectedProduct = createSelector(
-    selectProducts,
-    (state: ProductState) => state.selectedProduct
-);
+// export const selectSelectedProduct = createSelector(
+//     selectProducts,
+//     (state: ProductState) => state.selectedProduct
+// );

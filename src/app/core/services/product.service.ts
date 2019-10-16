@@ -12,7 +12,6 @@ import { switchMap } from 'rxjs/internal/operators/switchMap';
 import { of } from 'rxjs/internal/observable/of';
 import { selectAllProductsList } from '../store/selectors/product.selectors';
 import { Router } from '@angular/router';
-import { SetSelectedProduct } from '../store/actions/product.actions';
 import * as _ from 'lodash';
 import { withLatestFrom } from 'rxjs/operators';
 
@@ -56,52 +55,52 @@ export class ProductService {
     );
   }
 
-  getProductById(productId: string): Observable<Product> {
-    return this.apollo.query(
-      {
-        query: gql`
-          query getProductById($productId: String) {
-            getProductById(productId: $productId) {
-              ...Product
-              purchasedBy {
-                name
-                _id
-                createdAt
-                avatar
-              }
-            }
-          }
-          ${this.productFields}
-        `,
-        variables: {
-          productId: productId
-        }
-      }
-    ).pipe(
-      map((p: any) => {
-        return p.data.getProductById;
-      }),
-    );
-  }
+  // getProductById(productId: string): Observable<Product> {
+  //   return this.apollo.query(
+  //     {
+  //       query: gql`
+  //         query getProductById($productId: String) {
+  //           getProductById(productId: $productId) {
+  //             ...Product
+  //             purchasedBy {
+  //               name
+  //               _id
+  //               createdAt
+  //               avatar
+  //             }
+  //           }
+  //         }
+  //         ${this.productFields}
+  //       `,
+  //       variables: {
+  //         productId: productId
+  //       }
+  //     }
+  //   ).pipe(
+  //     map((p: any) => {
+  //       return p.data.getProductById;
+  //     }),
+  //   );
+  // }
 
-  deleteProduct(productId: string): Observable<boolean> {
-    return this.apollo.mutate(
-      {
-        mutation: gql`
-          mutation deleteProduct($productId: String) {
-            deleteProduct(productId: $productId)
-          }
-        `,
-        variables: {
-          productId: productId
-        }
-      }
-    ).pipe(
-      map((p: any) => {
-        return p.data.deleteProduct;
-      }),
-    );
-  }
+  // deleteProduct(productId: string): Observable<boolean> {
+  //   return this.apollo.mutate(
+  //     {
+  //       mutation: gql`
+  //         mutation deleteProduct($productId: String) {
+  //           deleteProduct(productId: $productId)
+  //         }
+  //       `,
+  //       variables: {
+  //         productId: productId
+  //       }
+  //     }
+  //   ).pipe(
+  //     map((p: any) => {
+  //       return p.data.deleteProduct;
+  //     }),
+  //   );
+  // }
 
   checkIfProductIsInCart(productId: string): Observable<boolean> {
     return this.cartProductList.pipe(

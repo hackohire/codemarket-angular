@@ -1,22 +1,22 @@
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray, FormBuilder } from '@angular/forms';
-import { Product, Tag } from 'src/app/shared/models/product.model';
-import { AuthService } from 'src/app/core/services/auth.service';
+import { Product, Tag } from '../../shared/models/product.model';
+import { AuthService } from '../../core/services/auth.service';
 import { Store } from '@ngrx/store';
-import { AppState } from 'src/app/core/store/state/app.state';
-import { AddPrdouct, UpdatePrdouct, GetProductById, SetSelectedProduct } from 'src/app/core/store/actions/product.actions';
-import { of, Subscription, Subject, Observable } from 'rxjs';
-import { selectSelectedProduct } from 'src/app/core/store/selectors/product.selectors';
+import { AppState } from '../../core/store/state/app.state';
+import { of, Subscription, Subject } from 'rxjs';
 import { tap, switchMap, startWith, map } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { Storage } from 'aws-amplify';
-import { BreadCumb } from 'src/app/shared/models/bredcumb.model';
+import { BreadCumb } from '../../shared/models/bredcumb.model';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { FormService } from 'src/app/shared/services/form.service';
+import { FormService } from '../../shared/services/form.service';
 import { MatAutocomplete } from '@angular/material';
-import { PostStatus } from 'src/app/shared/models/poststatus.enum';
-import { PostType } from 'src/app/shared/models/post-types.enum';
+import { PostStatus } from '../../shared/models/poststatus.enum';
+import { PostType } from '../../shared/models/post-types.enum';
+import { AddPost, UpdatePost, GetPostById, SetSelectedPost } from '../../core/store/actions/post.actions';
+import { selectSelectedPost } from '../../core/store/selectors/post.selectors';
 
 @Component({
   selector: 'app-add-products',
@@ -121,10 +121,10 @@ export class AddProductsComponent implements OnInit, OnDestroy {
      */
 
     if (this.activatedRoute.snapshot.parent.routeConfig.path === 'add-product') {
-      this.store.dispatch(SetSelectedProduct({ product: null }));
+      this.store.dispatch(SetSelectedPost({ post: null }));
       this.productFormInitialization(null);
     } else {
-      this.subscription$ = this.store.select(selectSelectedProduct).pipe(
+      this.subscription$ = this.store.select(selectSelectedPost).pipe(
         tap((p: Product) => {
           this.productFormInitialization(p);
           this.edit = true;
@@ -140,7 +140,7 @@ export class AddProductsComponent implements OnInit, OnDestroy {
            * get the product by fetching id from the params
            */
           if (params.productId) {
-            this.store.dispatch(GetProductById({ productId: params.productId }));
+            this.store.dispatch(GetPostById({ postId: params.productId }));
           }
         })
       ).subscribe();
@@ -162,19 +162,13 @@ export class AddProductsComponent implements OnInit, OnDestroy {
     this.productForm = new FormGroup({
       name: new FormControl(p && p.name ? p.name : '', Validators.required),
       description: new FormControl(p && p.description ? p.description : ''),
-      // shortDescription: new FormControl(p && p.shortDescription ? p.shortDescription : ''),
       createdBy: new FormControl(p && p.createdBy && p.createdBy._id ? p.createdBy._id :
         (this.auth.loggedInUser ? this.auth.loggedInUser._id : '')),
       price: new FormControl(p && p.price ? p.price : 0, Validators.required),
       categories: new FormControl(p && p.categories ? p.categories : []),
-      // demo_url: new FormControl(p && p.demo_url ? p.demo_url : '', [Validators.pattern(this.urlRegex)]),
-      // documentation_url: new FormControl(p && p.documentation_url ? p.documentation_url : '', [Validators.pattern(this.urlRegex)]),
-      // video_url: new FormControl(p && p.video_url ? p.video_url : '', [Validators.pattern(this.urlRegex)]),
       status: new FormControl(p && p.status ? p.status : PostStatus.Drafted),
       _id: new FormControl(p && p._id ? p._id : ''),
       tags: this.fb.array(p && p.tags && p.tags.length ? p.tags : []),
-      // snippets: new FormControl(p && p.snippets && p.snippets.length ? p.snippets : null),
-      // priceAndFiles: new FormArray([]),
       type: new FormControl(PostType.Product),
       support: new FormGroup({
         time: new FormControl(p && p.support && p.support.time ? p.support.time : 0),
@@ -238,10 +232,10 @@ export class AddProductsComponent implements OnInit, OnDestroy {
     }
 
     if (this.idFromControl && this.idFromControl.value) {
-      this.store.dispatch(UpdatePrdouct({product: this.productForm.value}));
+      this.store.dispatch(UpdatePost({post: this.productForm.value}));
     } else {
       this.productForm.removeControl('_id');
-      this.store.dispatch(AddPrdouct({ product: this.productForm.value }));
+      this.store.dispatch(AddPost({ post: this.productForm.value }));
     }
   }
 

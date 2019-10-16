@@ -48,69 +48,69 @@ export class SellingProductsService {
     private auth: AuthService
   ) { }
 
-  addProduct(product: Product): Observable<Product> {
-    return this.apollo.mutate(
-      {
-        mutation: gql`
-          mutation addProduct($product: ProductInput) {
-            addProduct(product: $product) {
-              ...Product
-            }
-          }
-          ${this.productFields}
-        `,
-        variables: {
-          product: product
-        }
-      }
-    ).pipe(
-      map((p: any) => p.data.addProduct),
-    );
-  }
+  // addProduct(product: Product): Observable<Product> {
+  //   return this.apollo.mutate(
+  //     {
+  //       mutation: gql`
+  //         mutation addProduct($product: ProductInput) {
+  //           addProduct(product: $product) {
+  //             ...Product
+  //           }
+  //         }
+  //         ${this.productFields}
+  //       `,
+  //       variables: {
+  //         product: product
+  //       }
+  //     }
+  //   ).pipe(
+  //     map((p: any) => p.data.addProduct),
+  //   );
+  // }
 
-  updateProduct(product: Product): Observable<Product> {
-    return this.apollo.mutate(
-      {
-        mutation: gql`
-          mutation updateProduct($product: ProductInput) {
-            updateProduct(product: $product) {
-              ...Product
-            }
-          }
-          ${this.productFields}
-        `,
-        variables: {
-          product: product
-        }
-      }
-    ).pipe(
-      map((p: any) => p.data.updateProduct),
-    );
-  }
+  // updateProduct(product: Product): Observable<Product> {
+  //   return this.apollo.mutate(
+  //     {
+  //       mutation: gql`
+  //         mutation updateProduct($product: ProductInput) {
+  //           updateProduct(product: $product) {
+  //             ...Product
+  //           }
+  //         }
+  //         ${this.productFields}
+  //       `,
+  //       variables: {
+  //         product: product
+  //       }
+  //     }
+  //   ).pipe(
+  //     map((p: any) => p.data.updateProduct),
+  //   );
+  // }
 
-  getProductsByUserId(userId: string, status: string): Observable<Product[]> {
-    return this.apollo.query(
-      {
-        query: gql`
-          query getProductsByUserId($userId: String, $status: String) {
-            getProductsByUserId(userId: $userId, status: $status) {
-              ...Product
-            }
-          }
-          ${this.productFields}
-        `,
-        variables: {
-          userId: userId,
-          status: status
-        },
-        fetchPolicy: 'no-cache'
-      },
-    ).pipe(
-      map((p: any) => {
-        return p.data.getProductsByUserId;
-      }),
-    );
-  }
+  // getProductsByUserId(userId: string, status: string): Observable<Product[]> {
+  //   return this.apollo.query(
+  //     {
+  //       query: gql`
+  //         query getProductsByUserId($userId: String, $status: String) {
+  //           getProductsByUserId(userId: $userId, status: $status) {
+  //             ...Product
+  //           }
+  //         }
+  //         ${this.productFields}
+  //       `,
+  //       variables: {
+  //         userId: userId,
+  //         status: status
+  //       },
+  //       fetchPolicy: 'no-cache'
+  //     },
+  //   ).pipe(
+  //     map((p: any) => {
+  //       return p.data.getProductsByUserId;
+  //     }),
+  //   );
+  // }
 
   addTransaction(transaction) {
     return this.apollo.mutate(

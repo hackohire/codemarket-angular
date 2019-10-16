@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { Store } from '@ngrx/store';
-import { GetProductsByUserId, SetSelectedProduct, DeleteProduct } from 'src/app/core/store/actions/product.actions';
 import { AppState } from 'src/app/core/store/state/app.state';
 import { MatTableDataSource, MatSort } from '@angular/material';
 import { Product } from 'src/app/shared/models/product.model';
@@ -17,6 +16,9 @@ import moment from 'moment';
 import { environment } from 'src/environments/environment';
 import { PostService } from 'src/app/shared/services/post.service';
 import { selectLoggedInUser } from '../../core/store/selectors/user.selector';
+import { GetPostsByUserIdAndType, DeletePost, SetSelectedPost } from '../../core/store/actions/post.actions';
+import { PostType } from '../../shared/models/post-types.enum';
+import { selectPostsByUserIdAndType } from '../../core/store/selectors/post.selectors';
 
 @Component({
   selector: 'app-products-list',
@@ -94,25 +96,27 @@ export class ProductsListComponent implements OnInit, OnDestroy {
       if (this.authorId) {
         this.displayedColumns = ['number', 'name', 'price'];
         status = PostStatus.Published;
-        this.store.dispatch(GetProductsByUserId(
+        this.store.dispatch(GetPostsByUserIdAndType(
           {
             userId: this.authorId,
-            status: status
+            status: status,
+            postType: PostType.Product
           }));
       } else {
         this.displayedColumns = ['number', 'name', 'price', 'status', 'action'];
         this.store.select(selectLoggedInUser).subscribe((u) => {
           if (u) {
-            this.store.dispatch(GetProductsByUserId(
+            this.store.dispatch(GetPostsByUserIdAndType(
               {
                 userId: this.auth.loggedInUser._id,
-                status: status
+                status: status,
+                postType: PostType.Product
               }));
           }
         });
       }
 
-      this.productsListSubscription = this.store.select(selectProductsList).pipe(
+      this.productsListSubscription = this.store.select(selectPostsByUserIdAndType).pipe(
         map((products) => {
           if (products) {
             this.dataSource.data = products;
@@ -149,13 +153,13 @@ export class ProductsListComponent implements OnInit, OnDestroy {
     }
   }
 
-  editProduct(product): void {
-    this.store.dispatch(SetSelectedProduct({ product }));
+  editProduct(post): void {
+    this.store.dispatch(SetSelectedPost({ post }));
     // this.router.navigate(['/add-product'], );
   }
 
-  deleteProduct(productId: string) {
-    this.store.dispatch(DeleteProduct({ productId }));
+  deleteProduct(postId: string) {
+    this.store.dispatch(DeletePost({ postId }));
   }
 
   getListOfUsersWhoPurchased(product: Product) {

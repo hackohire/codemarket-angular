@@ -48,11 +48,11 @@
             <ng-container *ngSwitchCase="'action'">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> {{col}} </th>
                 <td mat-cell *matCellDef="let element; let i = index;" (click)="$event.stopPropagation()">
-                        <button  *ngIf="element?.createdBy?._id === authService?.loggedInUser._id" mat-mini-fab color="primary" (click)="postService?.editPost(element)"
+                        <button  *ngIf="element?.createdBy?._id === authService?.loggedInUser?._id" mat-mini-fab color="primary" (click)="postService?.editPost(element)"
                             [routerLink]="['/', {outlets: {'main': ['sell', 'edit-element', element._id]}}]">
                             <mat-icon>edit</mat-icon>
                         </button>
-                        <button  *ngIf="element?.createdBy?._id === authService?.loggedInUser._id" mat-mini-fab color="warn" (click)="deletePost(element, i)">
+                        <button  *ngIf="element?.createdBy?._id === authService?.loggedInUser?._id" mat-mini-fab color="warn" (click)="deletePost(element, i)">
                             <mat-icon>delete</mat-icon>
                         </button>
                 </td>
@@ -70,3 +70,5 @@
     </tr>
     <div style="height: 100vh"></div>
 </table>
+
+<mat-paginator *ngIf="pagination" [length]="length" [pageSizeOptions]="[10]" showFirstLastButtons></mat-paginator>

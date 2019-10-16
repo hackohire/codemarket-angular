@@ -197,17 +197,23 @@ export class PostService {
     );
   }
 
-  getAllPosts(): Observable<Post[]> {
+  getAllPosts(pageOptions): Observable<Post[]> {
     return this.apollo.query(
       {
         query: gql`
-          query getAllPosts {
-            getAllPosts {
-              ...Product
+          query getAllPosts($pageOptions: PageOptionsInput) {
+            getAllPosts(pageOptions: $pageOptions) {
+              posts {
+                ...Product
+              }
+              total
             }
           }
           ${productConstants.productQueryFields}
         `,
+        variables: {
+          pageOptions
+        },
         fetchPolicy: 'no-cache'
       }
     ).pipe(

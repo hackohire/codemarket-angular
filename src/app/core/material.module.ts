@@ -16,7 +16,8 @@ import {
   MatProgressBarModule,
   MatMenuModule,
   MatAutocompleteModule,
-  MatRadioModule
+  MatRadioModule,
+  MatPaginatorModule
 } from '@angular/material';
 import {MatTableModule} from '@angular/material/table';
 
@@ -41,7 +42,8 @@ import {MatTableModule} from '@angular/material/table';
     MatProgressBarModule,
     MatMenuModule,
     MatAutocompleteModule,
-    MatRadioModule
+    MatRadioModule,
+    MatPaginatorModule
   ],
   exports: [
     MatFormFieldModule,
@@ -61,7 +63,8 @@ import {MatTableModule} from '@angular/material/table';
     MatProgressBarModule,
     MatMenuModule,
     MatAutocompleteModule,
-    MatRadioModule
+    MatRadioModule,
+    MatPaginatorModule
   ]
 })
 export class MaterialModule {}

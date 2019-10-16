@@ -70,7 +70,10 @@
             <tr mat-row *matRowDef="let row; columns: ['expandedDetail']; let i = dataIndex;" class="example-detail-row"></tr>
           </table>
           
-          <app-datatable *ngIf="all" (redirect)="postService.redirectToPostDetails($event)" [data]="dataSource.data"
+          <app-datatable
+            *ngIf="all"
+            (redirect)="postService.redirectToPostDetails($event)"
+            [dataSource]="dataSource"
             [displayedColumns]="displayedColumns">
           </app-datatable>
     </div>

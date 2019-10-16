@@ -94,7 +94,13 @@
             </table>
 
 
-            <app-datatable *ngIf="all" (redirect)="postService.redirectToPostDetails($event)" [data]="dataSource.data"
+            <app-datatable
+                *ngIf="all"
+                (redirect)="postService.redirectToPostDetails($event)"
+                (getAllPosts)="getAllPosts($event)"
+                [length]="length"
+                [pagination]="true"
+                [dataSource]="dataSource"
                 [displayedColumns]="displayedColumns">
             </app-datatable>
         </div>

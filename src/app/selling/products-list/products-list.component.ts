@@ -19,6 +19,7 @@ import { selectLoggedInUser } from '../../core/store/selectors/user.selector';
 import { GetPostsByUserIdAndType, DeletePost, SetSelectedPost } from '../../core/store/actions/post.actions';
 import { PostType } from '../../shared/models/post-types.enum';
 import { selectPostsByUserIdAndType } from '../../core/store/selectors/post.selectors';
+import { DatatableComponent } from '../../shared/components/datatable/datatable.component';
 
 @Component({
   selector: 'app-products-list',
@@ -34,12 +35,7 @@ import { selectPostsByUserIdAndType } from '../../core/store/selectors/post.sele
 })
 export class ProductsListComponent implements OnInit, OnDestroy {
 
-  modules = {
-    formula: true,
-    // imageResize: {},
-    syntax: true,
-  };
-
+  length: number;
   anonymousAvatar = require('src/assets/images/anonymous-avatar.jpg');
   codemarketBucketURL = environment.codemarketFilesBucket;
 
@@ -75,18 +71,19 @@ export class ProductsListComponent implements OnInit, OnDestroy {
 
 
     if (path === 'bugfixes-all') {
-      this.productsListSubscription = this.postService.getAllPosts().pipe(
-        map((posts) => {
-          if (posts) {
-            /** Set the data for the datatable  */
-            this.dataSource.data = posts;
+      /** Set the columns visible in the table */
+      this.displayedColumns = ['number', 'name', 'price', 'createdBy', 'type', 'category', 'createdAt', 'action'];
+      this.all = true;
+      // this.productsListSubscription = this.postService.getAllPosts({ pageNumber: 1, limit: 10 }).pipe(
+      //   map((posts) => {
+      //     if (posts) {
+      //       /** Set the data for the datatable  */
+      //       this.dataSource.data = posts;
 
-            /** Set the columns visible in the table */
-            this.displayedColumns = ['number', 'name', 'price', 'createdBy', 'type', 'category', 'createdAt', 'action'];
-            this.all = true;
-          }
-        })
-      ).subscribe();
+
+      //     }
+      //   })
+      // ).subscribe();
 
     } else {
 
@@ -182,6 +179,24 @@ export class ProductsListComponent implements OnInit, OnDestroy {
   fromNow(date) {
     const d = new Date(+date);
     return moment(d).fromNow();
+  }
+
+  getAllPosts(event) {
+    console.log(event)
+    this.productsListSubscription = this.postService.getAllPosts(event).pipe(
+      map((result: any) => {
+        if (result && result.posts) {
+          /** Set the data for the datatable  */
+          this.length = result.total;
+          this.dataSource.data = result.posts;
+          // this.dataSource.paginator.length = result.total;
+
+          /** Set the columns visible in the table */
+          // this.displayedColumns = ['number', 'name', 'price', 'createdBy', 'type', 'category', 'createdAt', 'action'];
+          // this.all = true;
+        }
+      })
+    ).subscribe();
   }
 
 }

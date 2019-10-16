@@ -4,6 +4,8 @@ import { MembershipService } from '../membership.service';
 import { InviteMembersDialogComponent } from '../invite-members-dialog/invite-members-dialog.component';
 import { MatDialog, MatSort, MatTableDataSource } from '@angular/material';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { AuthService } from '../../core/services/auth.service';
+import Swal, { SweetAlertType } from 'sweetalert2';
 
 @Component({
   selector: 'app-membership-list',
@@ -29,6 +31,7 @@ export class MembershipListComponent implements OnInit {
 
   constructor(
     private membershipService: MembershipService,
+    public authService: AuthService,
     private dialog: MatDialog
   ) { }
 
@@ -87,6 +90,19 @@ export class MembershipListComponent implements OnInit {
       }
       // this.animal = result;
     });
+  }
+
+  cancelSubscription(membership, i) {
+    this.membershipService.cancelSubscription(membership.id).subscribe({
+      next: (membership) => {
+        console.log(membership);
+        if (membership && membership.status === 'canceled') {
+          this.dataSource.data = this.dataSource.data.splice(i, 1);
+          this.dataSource._updateChangeSubscription();
+          Swal.fire('Membership Subscription Canceled Successfully!', '', 'info')
+        }
+      }
+    })
   }
 
 }

@@ -252,6 +252,12 @@ export class MembershipService {
                 amount
                 id
               }
+              metadata {
+                userId {
+                  name
+                  _id
+                }
+              }
               subscriptionUsers {
                 name
                 email
@@ -260,6 +266,7 @@ export class MembershipService {
               quantity
               id
               _id
+              status
             }
           }
         `,
@@ -332,6 +339,39 @@ export class MembershipService {
     ).pipe(
       map((p: any) => {
         return p.data.acceptInvitation;
+      }),
+    );
+  }
+
+  cancelSubscription(subscriptionId: string) {
+    return this.apollo.mutate(
+      {
+        mutation: gql`
+          mutation cancelSubscription($subscriptionId: String) {
+            cancelSubscription(subscriptionId: $subscriptionId) {
+              plan {
+                nickname
+                amount
+                id
+              }
+              subscriptionUsers {
+                name
+                email
+                invitationAccepted
+              }
+              quantity
+              id
+              _id
+            }
+          }
+        `,
+        variables: {
+          subscriptionId,
+        },
+      },
+    ).pipe(
+      map((p: any) => {
+        return p.data.cancelSubscription;
       }),
     );
   }

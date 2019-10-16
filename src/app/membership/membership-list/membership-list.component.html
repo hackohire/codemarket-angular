@@ -84,8 +84,11 @@
     <ng-container matColumnDef="action">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
         <td mat-cell *matCellDef="let membership; let i = dataIndex;" (click)="$event.stopPropagation()">
-            <button mat-mini-fab color="primary" (click)="openInviteMembersDialog(membership, i)">
+            <button *ngIf="membership?.metadata?.userId?._id === authService?.loggedInUser._id" mat-mini-fab color="primary" (click)="openInviteMembersDialog(membership, i)">
                 <mat-icon>person_add</mat-icon>
+            </button>
+            <button *ngIf="membership?.metadata?.userId?._id === authService?.loggedInUser._id" mat-mini-fab color="warn" (click)="cancelSubscription(membership, i)">
+                    <mat-icon>close</mat-icon>
             </button>
         </td>
     </ng-container>

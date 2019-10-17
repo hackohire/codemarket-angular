@@ -51,28 +51,30 @@ export class DatatableComponent implements OnInit, OnChanges, AfterViewInit {
   ngAfterViewInit() {
     // this.dataSource.paginator.length = 50;
     // If the user changes the sort order, reset back to the first page.
-    this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
+    if (this.pagination) {
+      this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
 
-    merge(this.sort.sortChange, this.paginator.page)
-      .pipe(
-        startWith({}),
-        catchError((e) => {
-          return of(e)
-        })
-      )
-      .subscribe(data => {
-        if (this.pagination) {
-          this.getAllPosts.emit({
-            pageNumber: this.paginator.pageIndex + 1,
-            limit: 10,
-            sort: {
-              field: this.sort.active,
-              order: this.sort.direction
-            }
-          });
-        }
-        console.log(data)
-      });
+      merge(this.sort.sortChange, this.paginator.page)
+        .pipe(
+          startWith({}),
+          catchError((e) => {
+            return of(e)
+          })
+        )
+        .subscribe(data => {
+          if (this.pagination) {
+            this.getAllPosts.emit({
+              pageNumber: this.paginator.pageIndex + 1,
+              limit: 10,
+              sort: {
+                field: this.sort.active,
+                order: this.sort.direction
+              }
+            });
+          }
+          console.log(data)
+        });
+    }
   }
 
   deletePost(post, i: number) {

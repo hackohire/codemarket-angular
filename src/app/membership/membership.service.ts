@@ -293,6 +293,12 @@ export class MembershipService {
                 amount
                 id
               }
+              metadata {
+                userId {
+                  name
+                  _id
+                }
+              }
               subscriptionUsers {
                 name
                 email

@@ -34,7 +34,7 @@ export class InviteMembersDialogComponent implements OnInit {
   }
 
   addUser() {
-    if (this.userList.value.length <= this.data.subscription.subscriptionUsers.length) {
+    if (this.userList.value.length < this.data.subscription.quantity) {
       this.userList.push(
         this.fb.group(
           {

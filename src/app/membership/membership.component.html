@@ -24,18 +24,23 @@
 
         <div class="row">
             <div class="col-lg-4 col-md-6" *ngFor="let p of listOfPlans">
+                <div *ngIf="authService?.loggedInUser?.subscription && authService?.loggedInUser?.subscription[0]?.plan?.id === p.id ? 'Active' : ''"
+                    class="shape">
+                    <div class="shape-text">
+                        Active
+                    </div>
+                </div>
                 <div class="card_style2" style="line-height: 17px !important;">
+
                     <h4 style="font-weight: 600;" class="card_style2__title">{{p?.name}}</h4>
                     <div class="card_style2__location_type">
                         <p style="line-height: 13px;">
-                            <!-- <span class="lnr lnr-map-marker"></span>New York City</p>-->
                             <span class="plan-description">{{p?.shortDescription}}</span>
                         </p>
                         <p>
                             <h5 style="font-weight: 500; margin-bottom: 8px;" class="card_style2__title">
                                 {{p?.fixed_price?.value | currency}}</h5>
-                            <span
-                                class="plan-description">{{p?.fixed_price?.postfix}}</span>
+                            <span class="plan-description">{{p?.fixed_price?.postfix}}</span>
 
 
                             <h6 style="font-weight: 400; margin-bottom: 8px; margin: 20px 0 15px 0"
@@ -67,7 +72,7 @@
         <h4>Subscription Purchased Successfully</h4>
         <ul>
             <li *ngFor="let p of successfulPurchasedSubscription?.subscriptionUsers">
-              <strong>{{p?.name}}</strong>
+                <strong>{{p?.name}}</strong>
                 <!-- <strong>{{p?.custom?.name}}</strong> - <strong>{{(p?.amount / 100) | currency}}</strong> -->
             </li>
         </ul>

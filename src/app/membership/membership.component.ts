@@ -12,6 +12,7 @@ import { MatDialog } from '@angular/material';
 import { SubscriptionDialogComponent } from './subscription-dialog/subscription-dialog.component';
 import { SellingProductsService } from '../selling/selling-products.service';
 import { tap } from 'rxjs/operators';
+import Swal from 'sweetalert2';
 // declare var Stripe;
 // declare var paypal;
 declare var Stripe;
@@ -81,7 +82,11 @@ export class MembershipComponent implements OnInit {
 
   async redirectToCheckout(plan) {
     if (this.authService.loggedInUser) {
-      this.openDialog(plan);
+      if (this.authService.loggedInUser.subscription && this.authService.loggedInUser.subscription.length) {
+        Swal.fire('Already Subscribed', 'You have already active subscription, Please contact us on sumi@dreamjobb.com to upgrade or change', 'info');
+      } else {
+        this.openDialog(plan);
+      }
         // /** Creating Session Object */
         // /** See @see https://stripe.com/docs/api/checkout/sessions/retrieve for the reference of the fields */
         // const session = {

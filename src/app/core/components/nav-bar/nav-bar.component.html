@@ -68,14 +68,14 @@
       <a mat-button routerLinkActive="mat-primary"
         [routerLink]="['/', {outlets: {'main': ['dashboard', 'bugfixes-all']}}]">
         <i style="font-size: 1.7rem !important;" class="vertical-align-middle fal fa-lightbulb-dollar fa-fw"></i>
-        <span [fxHide.xs]="true">Code Q&A</span>
+        <span [fxHide.xs]="true">Code Experts</span>
       </a>
 
       <!-- All Help Requests -->
       <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', {outlets: {'main': ['dashboard', 'post-list']}}]"
         [queryParams]="{type: 'team-skill', all: true}">
         <i style="font-size: 1.7rem !important;" class="vertical-align-middle fal fa-question-circle fa-fw"></i>
-        <span [fxHide.xs]="true">Team Q&A</span>
+        <span [fxHide.xs]="true">TeamIQ</span>
       </a>
 
       <!-- membership -->
@@ -88,7 +88,7 @@
       <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', {outlets: {'main': ['dashboard', 'post-list']}}]"
         [queryParams]="{type: 'event', all: true}">
         <i style="font-size: 1.7rem !important;" class="vertical-align-middle fal fa-calendar-alt fa-fw"></i>
-        <span [fxHide.xs]="true">Events</span>
+        <span [fxHide.xs]="true">Hackohire</span>
       </a>
 
       <!-- Login -->

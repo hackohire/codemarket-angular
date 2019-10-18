@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BreadCumb } from '../../shared/models/bredcumb.model';
 import { AuthService } from '../../core/services/auth.service';
 import { environment } from '../../../environments/environment';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../user/user.service';
 import { User } from '../../shared/models/user.model';
 import { Observable } from 'rxjs';
@@ -32,7 +32,8 @@ export class MyProfileComponent implements OnInit {
     public authService: AuthService,
     private activatedRoute: ActivatedRoute,
     private userService: UserService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private router: Router
   ) {
 
     this.breadcumb = {
@@ -95,6 +96,7 @@ export class MyProfileComponent implements OnInit {
           label: 'My RSVP'
         }
       );
+      this.router.navigate(['purchased-items-list'], {relativeTo: this.activatedRoute})
     } else {
       this.navLinks.push(
         {
@@ -106,7 +108,8 @@ export class MyProfileComponent implements OnInit {
           label: 'Request Help',
           queryParams: {type: PostType.HelpRequest, all: false}
         },
-      )
+      );
+      this.router.navigate(['products-list'], {relativeTo: this.activatedRoute})
     }
   }
 

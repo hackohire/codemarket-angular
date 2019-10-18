@@ -9,11 +9,11 @@ const myProfileRoutes: Routes = [
     path: '',
     component: MyProfileComponent,
     children: [
-      {
-        path: '',
-        redirectTo: 'products-list',
-        pathMatch: 'full',
-      },
+      // {
+      //   path: '',
+      //   redirectTo: 'products-list',
+      //   pathMatch: 'full',
+      // },
       {
         path: 'products-list',
         loadChildren: () => import('../../selling/products-list/products-list.module').then(module => module.ProductsListModule)

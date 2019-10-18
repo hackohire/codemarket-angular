@@ -14,6 +14,23 @@ export interface User {
     avatar?: string;
     roles?: Roles[];
     stripeId?: string;
+    subscription?: Subscription[];
+}
+
+interface Subscription {
+    plan?: {
+        nickname: string;
+        amount: number;
+        id: string;
+    };
+    metadata?: {
+        userId: User;
+    };
+    subscriptionUsers: [User];
+    quantity: number;
+    id: string;
+    _id: string;
+    status: string;
 }
 
 

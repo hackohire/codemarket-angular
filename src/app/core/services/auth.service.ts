@@ -108,6 +108,17 @@ export class AuthService {
                 companyName
                 companyLocation
               }
+              subscription {
+                plan {
+                  nickname
+                  amount
+                  id
+                }
+                quantity
+                id
+                _id
+                status
+              }
               programming_languages
               avatar
               roles

@@ -31,6 +31,17 @@ export class UserService {
     createdAt
     likeCount
     stripeId
+    subscription {
+      plan {
+        nickname
+        amount
+        id
+      }
+      quantity
+      id
+      _id
+      status
+    }
   `;
 
   updateUserQuery = gql`

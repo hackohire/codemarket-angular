@@ -75,7 +75,35 @@
       <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', {outlets: {'main': ['dashboard', 'post-list']}}]"
         [queryParams]="{type: 'team-skill', all: true}">
         <i style="font-size: 1.7rem !important;" class="vertical-align-middle fal fa-question-circle fa-fw"></i>
-        <span [fxHide.xs]="true">TeamIQ</span>
+        <span [fxHide.xs]="true">Team IQ</span>
+      </a>
+
+       <!-- All Events -->
+       <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', {outlets: {'main': ['dashboard', 'post-list']}}]"
+       [queryParams]="{type: 'event', all: true}">
+       <i style="font-size: 1.7rem !important;" class="vertical-align-middle fal fa-calendar-alt fa-fw"></i>
+       <span [fxHide.xs]="true">Dream Job</span>
+     </a>
+
+      <!-- All Events -->
+      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', {outlets: {'main': ['dashboard', 'post-list']}}]"
+        [queryParams]="{type: 'event', all: true}">
+        <i style="font-size: 1.7rem !important;" class="vertical-align-middle fal fa-calendar-alt fa-fw"></i>
+        <span [fxHide.xs]="true">Hackohire</span>
+      </a>
+
+       <!-- All Events -->
+       <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', {outlets: {'main': ['dashboard', 'post-list']}}]"
+       [queryParams]="{type: 'event', all: true}">
+       <i style="font-size: 1.7rem !important;" class="vertical-align-middle fal fa-calendar-alt fa-fw"></i>
+       <span [fxHide.xs]="true">Wellness</span>
+     </a>
+
+      <!-- All Events -->
+      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', {outlets: {'main': ['dashboard', 'post-list']}}]"
+        [queryParams]="{type: 'event', all: true}">
+        <i style="font-size: 1.7rem !important;" class="vertical-align-middle fal fa-calendar-alt fa-fw"></i>
+        <span [fxHide.xs]="true">Social Impact</span>
       </a>
 
       <!-- membership -->
@@ -84,12 +112,7 @@
         <span [fxHide.xs]="true"> Membership</span>
       </a>
 
-      <!-- All Events -->
-      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', {outlets: {'main': ['dashboard', 'post-list']}}]"
-        [queryParams]="{type: 'event', all: true}">
-        <i style="font-size: 1.7rem !important;" class="vertical-align-middle fal fa-calendar-alt fa-fw"></i>
-        <span [fxHide.xs]="true">Hackohire</span>
-      </a>
+     
 
       <!-- Login -->
       <ng-template #logIn>

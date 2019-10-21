@@ -131,6 +131,7 @@
           <mat-icon>keyboard_arrow_down</mat-icon>
         </a>
       </button>
+
       <mat-menu #userMenu="matMenu" panelClass="menu-width">
         <div class="menu-width">
           <!-- Shopping Cart -->
@@ -148,6 +149,11 @@
         </div>
       </mat-menu>
 
+      <!-- All Events -->
+      <a mat-button routerLinkActive="mat-primary" (click)="openSearchDialog()">
+        <i style="font-size: 1.7rem !important;" class="vertical-align-middle fal fa-search fa-fw"></i>
+        <span [fxHide.xs]="true"> Search</span>
+      </a>
 
     </mat-toolbar>
 

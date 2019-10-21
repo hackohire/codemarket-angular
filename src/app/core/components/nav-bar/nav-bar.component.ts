@@ -8,6 +8,8 @@ import { AppState } from '../../store/state/app.state';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { selectCartListLength } from '../../store/selectors/cart.selectors';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material';
+import { SearchComponent } from '../search/search.component';
 
 @Component({
   selector: 'app-nav-bar',
@@ -33,7 +35,8 @@ export class NavBarComponent implements OnInit, OnDestroy {
     private store: Store<AppState>,
     public authService: AuthService,
     private ref: ChangeDetectorRef,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog
     ) {
   }
 
@@ -64,5 +67,22 @@ export class NavBarComponent implements OnInit, OnDestroy {
 
   redirect() {
     this.router.navigate(['/']);
+  }
+
+  openSearchDialog(): void {
+    const dialogRef = this.dialog.open(SearchComponent, {
+      // width: '430px',
+      // height: '550px',
+      // maxHeight: '700px',
+      panelClass: 'no-padding',
+      // data: {plan},
+      
+      disableClose: true
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      // this.animal = result;
+    });
   }
 }

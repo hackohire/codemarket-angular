@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { appConstants } from '../../constants/app_constants';
 
 @Component({
   selector: 'app-add-post-menu',
@@ -7,6 +8,8 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class AddPostMenuComponent implements OnInit {
   constructor() { }
+
+  icons = appConstants.icons
 
   ngOnInit() {
   }

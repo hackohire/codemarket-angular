@@ -17,6 +17,7 @@ import { CartEffects } from './store/effects/cart.effects';
 import { AppState } from './store/state/app.state';
 import { PostEffects } from './store/effects/post.effects';
 import { appReducesrs } from './store/reducers/app.reducers';
+import { SearchComponent } from './components/search/search.component';
 
 
 // Injected Token for actionreducermap or combinereducers for build error
@@ -35,7 +36,7 @@ export function clearState(reducer) {
 
 @NgModule({
   declarations: [
-  ],
+  SearchComponent],
   imports: [
     CommonModule,
     ApolloModule,
@@ -57,6 +58,9 @@ export function clearState(reducer) {
       provide: REDUCER_TOKEN,
       useValue: appReducesrs()
     },
+  ],
+  entryComponents: [
+    SearchComponent
   ]
 })
 export class CoreModule {

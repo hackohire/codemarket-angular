@@ -1,0 +1,20 @@
+<div class="modal-overlay">
+
+    <div class="algolia-hits">
+
+        <div class="algolia-form-wrap">
+            <input placeholder="explore..." class="algolia-input" type="text" #searchInput>
+            <!-- {{listItems$ | async | json}} -->
+            <span (click)="dialogRef.close()" class="algolia-close btn btn-sm btn-red">close</span>
+        </div>
+
+        <a class="algolia-hit" [href]="" *ngFor="let item of listItems$ | async">
+            <h4 style="font-weight: 700;" (click)="postService.redirectToPostDetails(item, false)">
+                <i style="color: white; font-size: 1.7rem !important;" [class]="'vertical-align-middle fal fa-' + icons[item?.type] + ' fa-fw'"></i>
+                <span class="hit-title" [innerHtml]="item?.name">{{' ' + item?.name}}</span>
+                <!-- <span class="hit-type" [ngClass]="'hit-' + hit.type"> in {{ hit.type }}</span> -->
+            </h4>
+            <p class="hit-description">Type: {{item?.type}}</p>
+        </a>
+    </div>
+</div>

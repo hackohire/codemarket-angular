@@ -84,7 +84,7 @@ export class PostService {
           status: status,
           postType: postType
         },
-        fetchPolicy:  'no-cache'
+        fetchPolicy: 'no-cache'
       }
     ).pipe(
       map((p: any) => {
@@ -223,18 +223,25 @@ export class PostService {
     );
   }
 
-  redirectToPostDetails(post): void {
-    this.store.dispatch(SetSelectedPost({ post }));
-    this.router.navigate(['/', { outlets: { main: ['dashboard', `${post.type}-details`, post._id]}}],
-      { queryParams: {type: post.type, postId: post._id}} );
+  redirectToPostDetails(post, setSelectedPost?: boolean): void {
+    if (setSelectedPost) {
+      this.store.dispatch(SetSelectedPost({ post }));
+    } else {
+      // this.store.dispatch(SetSelectedPost({ post: null }));
+    }
+    this.router.routeReuseStrategy.shouldReuseRoute = () => {
+      return false;
+    };
+    this.router.navigate(['/', { outlets: { main: ['dashboard', `${post.type}-details`, post._id] } }],
+      { queryParams: { type: post.type, postId: post._id } });
   }
 
   editPost(post): void {
 
     if (post.type === PostType.Product) {
-      this.router.navigate(['/', {outlets: {'main': ['sell', 'edit-product', post._id]}}])
+      this.router.navigate(['/', { outlets: { 'main': ['sell', 'edit-product', post._id] } }])
     } else {
-      this.router.navigate(['/', {outlets: {'main': ['post', 'edit-' + post.type, post._id]}}])
+      this.router.navigate(['/', { outlets: { 'main': ['post', 'edit-' + post.type, post._id] } }])
     }
   }
 
@@ -315,6 +322,35 @@ export class PostService {
     ).pipe(
       map((p: any) => {
         return p.data.myRSVP;
+      }),
+    );
+  }
+
+  searchPosts(searchString: string): Observable<Post[]> {
+    return this.apollo.query(
+      {
+        query: gql`
+          query fullSearch($searchString: String) {
+            fullSearch(searchString: $searchString){
+              name
+              _id
+              createdBy {
+                name
+                _id
+                avatar
+              }
+              type
+            }
+          }
+        `,
+        variables: {
+          searchString
+        },
+        fetchPolicy: 'no-cache'
+      }
+    ).pipe(
+      map((p: any) => {
+        return p.data.fullSearch;
       }),
     );
   }

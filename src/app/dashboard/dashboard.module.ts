@@ -39,6 +39,7 @@ const dashboardRoutes: Routes = [
   {
     path: 'product-details/:productId',
     loadChildren: () => import('./product-details/product-details.module').then(module => module.ProductDetailsModule),
+    runGuardsAndResolvers: 'always'
   },
   {
     path: 'help-request-details/:helpRequestId',

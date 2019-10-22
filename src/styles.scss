@@ -208,7 +208,7 @@ NB: this file contains the list of components/scss partial along with the style.
   52. RESPONSIVE CSS
 ***************************/
 /* import fonts */
-@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700");
+// @import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700");
 /* import style css */
 /*****************************
 	-- THEME
@@ -2921,8 +2921,10 @@ h6 {
 	--- BREADCRUMB
 *****************************/
 .breadcrumb-area {
-  padding-top: 52px !important;
-  padding-bottom: 50px;
+  // padding-top: 52px !important;
+  // padding-bottom: 50px;
+  padding-top: 27px !important;
+  padding-bottom: 25px;
 }
 
 .breadcrumb-area .breadcrumb ul li a {
@@ -9007,7 +9009,8 @@ span.counter {
 ****************************************/
 .single-product-desc {
   background: #eff1f5;
-  padding: 70px 0;
+  // padding: 70px 0;
+  padding: 30px 0;
 }
 
 .single-product-desc2 .item-navigation {

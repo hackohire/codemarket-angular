@@ -9,6 +9,7 @@ import { PostType } from '../../models/post-types.enum';
 import { ProductService } from '../../../core/services/product.service';
 import { merge, of } from 'rxjs';
 import { startWith, switchMap, map, catchError, mapTo } from 'rxjs/operators';
+import { SweetalertService } from '../../services/sweetalert.service';
 
 @Component({
   selector: 'app-datatable',
@@ -32,7 +33,8 @@ export class DatatableComponent implements OnInit, OnChanges, AfterViewInit {
   constructor(
     public authService: AuthService,
     public postService: PostService,
-    private productService: ProductService
+    private productService: ProductService,
+    private sweetAlertService: SweetalertService
   ) { }
 
   ngOnInit() {
@@ -79,13 +81,15 @@ export class DatatableComponent implements OnInit, OnChanges, AfterViewInit {
 
   deletePost(post, i: number) {
 
-    this.dataSource._renderChangesSubscription = this.postService.deletePost(post._id).subscribe((d) => {
-      if (d) {
-        this.dataSource.data = this.dataSource.data.filter((d: any) => d._id !== post._id);
-        this.length = this.length - 1;
-        this.dataSource._updateChangeSubscription();
-      }
-    });
+    this.sweetAlertService.confirmDelete(() => {
+      this.dataSource._renderChangesSubscription = this.postService.deletePost(post._id).subscribe((d) => {
+        if (d) {
+          this.dataSource.data = this.dataSource.data.filter((d: any) => d._id !== post._id);
+          this.length = this.length - 1;
+          this.dataSource._updateChangeSubscription();
+        }
+      });
+    })
   }
 
 }

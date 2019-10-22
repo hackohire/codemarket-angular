@@ -11,4 +11,20 @@ export class SweetalertService {
   public success(title: string, message?: string, type?: SweetAlertType) {
     Swal.fire(title, message, type);
   }
+
+  public confirmDelete(callback) {
+    Swal.fire({
+      title: "Are you sure?",
+      // text: "But you will still be able to retrieve this file.",
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#DD6B55",
+      confirmButtonText: "Yes, Delete Permanetly!",
+      cancelButtonText: "No, cancel please!",
+    }).then((y) => {
+      if (y.value) {
+        callback()
+      }
+    })
+  }
 }

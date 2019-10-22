@@ -14,6 +14,7 @@ import { PostService } from '../../shared/services/post.service';
 import { BreadCumb } from '../../shared/models/bredcumb.model';
 import * as _ from 'lodash';
 import { selectLoggedInUser } from '../../core/store/selectors/user.selector';
+import { SweetalertService } from '../../shared/services/sweetalert.service';
 
 @Component({
   selector: 'app-posts-list',
@@ -46,7 +47,8 @@ export class PostsListComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private store: Store<AppState>,
     public postService: PostService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private sweetAlertService: SweetalertService
   ) { }
 
   ngOnInit() {
@@ -87,7 +89,7 @@ export class PostsListComponent implements OnInit, OnDestroy {
 
       if (this.authorId) {
         this.store.dispatch(GetPostsByUserIdAndType({ userId: this.authorId, status: '', postType: type }));
-        this.displayedColumns = ['number', 'name', 'price'];
+        this.displayedColumns = ['number', 'name', 'createdAt', 'price'];
       } else {
         this.store.select(selectLoggedInUser).subscribe((u) => {
           if (u) {
@@ -95,7 +97,7 @@ export class PostsListComponent implements OnInit, OnDestroy {
           }
         });
 
-        this.displayedColumns = ['number', 'name', 'price', 'status', 'action'];
+        this.displayedColumns = ['number', 'name', 'price', 'status', 'createdAt', 'action'];
       }
 
       this.postsListSubscription = this.store.select(selectPostsByUserIdAndType).pipe(
@@ -127,7 +129,9 @@ export class PostsListComponent implements OnInit, OnDestroy {
   }
 
   deletePost(postId: string) {
-    this.store.dispatch(DeletePost({ postId }));
+    this.sweetAlertService.confirmDelete(() => {
+      this.store.dispatch(DeletePost({ postId }));
+    })
   }
 
 }

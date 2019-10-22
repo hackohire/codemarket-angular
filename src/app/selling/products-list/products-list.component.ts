@@ -20,6 +20,7 @@ import { GetPostsByUserIdAndType, DeletePost, SetSelectedPost } from '../../core
 import { PostType } from '../../shared/models/post-types.enum';
 import { selectPostsByUserIdAndType } from '../../core/store/selectors/post.selectors';
 import { DatatableComponent } from '../../shared/components/datatable/datatable.component';
+import { SweetalertService } from '../../shared/services/sweetalert.service';
 
 @Component({
   selector: 'app-products-list',
@@ -62,6 +63,7 @@ export class ProductsListComponent implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute,
     private productService: ProductService,
     public postService: PostService,
+    public sweetAlertService: SweetalertService
   ) {
 
     const path = this.activatedRoute.parent.routeConfig.path;
@@ -156,7 +158,9 @@ export class ProductsListComponent implements OnInit, OnDestroy {
   }
 
   deleteProduct(postId: string) {
-    this.store.dispatch(DeletePost({ postId }));
+    this.sweetAlertService.confirmDelete((e) => {
+      this.store.dispatch(DeletePost({ postId }));
+    })
   }
 
   getListOfUsersWhoPurchased(product: Product) {

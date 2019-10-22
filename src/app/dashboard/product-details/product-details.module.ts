@@ -7,7 +7,8 @@ import { Routes, RouterModule } from '@angular/router';
 const productDetailRoutes: Routes = [
   {
     path: '',
-    component: ProductDetailsComponent
+    component: ProductDetailsComponent,
+    data: { noReuse: true }
   }
 ];
 

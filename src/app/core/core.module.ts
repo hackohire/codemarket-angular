@@ -18,6 +18,8 @@ import { AppState } from './store/state/app.state';
 import { PostEffects } from './store/effects/post.effects';
 import { appReducesrs } from './store/reducers/app.reducers';
 import { SearchComponent } from './components/search/search.component';
+import { RouteReuseStrategy } from '@angular/router';
+import { CustomRouteReuseStategy } from '../shared/services/custom_router_reuse';
 
 
 // Injected Token for actionreducermap or combinereducers for build error
@@ -58,6 +60,7 @@ export function clearState(reducer) {
       provide: REDUCER_TOKEN,
       useValue: appReducesrs()
     },
+    { provide: RouteReuseStrategy, useClass: CustomRouteReuseStategy },
   ],
   entryComponents: [
     SearchComponent

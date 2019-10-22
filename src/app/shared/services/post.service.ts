@@ -229,9 +229,7 @@ export class PostService {
     } else {
       // this.store.dispatch(SetSelectedPost({ post: null }));
     }
-    this.router.routeReuseStrategy.shouldReuseRoute = () => {
-      return false;
-    };
+
     this.router.navigate(['/', { outlets: { main: ['dashboard', `${post.type}-details`, post._id] } }],
       { queryParams: { type: post.type, postId: post._id } });
   }

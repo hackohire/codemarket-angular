@@ -7,7 +7,8 @@ import { SharedModule } from '../shared/shared.module';
 const routes: Routes = [
   {
     path: '',
-    component: DetailsComponent
+    component: DetailsComponent,
+    data: { noReuse: true }
   }
 ]
 

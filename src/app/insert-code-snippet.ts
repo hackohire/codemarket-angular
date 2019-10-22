@@ -120,7 +120,7 @@ export class CodeWithLanguageSelection {
         wrapper.classList.add(this.CSS.baseClass, this.CSS.wrapper);
 
         textarea.style.minHeight = '200px';
-        textarea.style.fontFamily = 'Menlo, Monaco, Consolas, Courier New, monospace';
+        // textarea.style.fontFamily = 'Menlo, Monaco, Consolas, Courier New, monospace';
         // textarea.style.color = '#41314e';
         textarea.style.lineHeight = '1.6em';
         textarea.style.fontSize = '12px';

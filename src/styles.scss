@@ -2,6 +2,8 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
 @import '../node_modules/highlight.js/styles/rainbow.css';
 @import "~ng-pick-datetime/assets/style/picker.min.css";
+
+@import url("assets/fonts/charter/webfonts/stylesheet.css");
 // @import url('./assets/css/_theme.scss');
 // @import url("./assets/css/_general.scss");
 // @import url("./assets/css/_product.scss");
@@ -18,6 +20,20 @@ body { margin: 0; }
 
 .ce-code {
   display: grid !important;
+}
+
+.cdx-block {
+  font-family: 'charterregular', sans-serif !important;
+  font-size: 19px;
+}
+
+.page-title {
+  font-family: 'charterbold', sans-serif !important;
+}
+
+.ce-header {
+  font-family: 'charterbold', sans-serif !important;
+  // font-size: 21px;
 }
 
 
@@ -192,7 +208,7 @@ NB: this file contains the list of components/scss partial along with the style.
   52. RESPONSIVE CSS
 ***************************/
 /* import fonts */
-@import url("https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700");
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700");
 /* import style css */
 /*****************************
 	-- THEME
@@ -202,7 +218,7 @@ NB: this file contains the list of components/scss partial along with the style.
 	-- RESET
 *****************************/
 body {
-  font-family: 'Quicksand', sans-serif;
+  font-family: 'Roboto', sans-serif;
   position: relative;
   font-weight: 400;
   font-size: 15px;
@@ -349,7 +365,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Quicksand', sans-serif;
+  font-family: 'Roboto', sans-serif;
   margin: 0;
   font-weight: 400;
   padding: 0;
@@ -583,7 +599,7 @@ a {
 }
 
 .tooltip .tooltip-inner {
-  font-family: "Quicksand", sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 14px;
   text-align: left;
   display: block;
@@ -3474,7 +3490,7 @@ h6 {
 }
 
 .tooltip .tooltip-inner {
-  font-family: "Quicksand", sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 14px;
   text-align: left;
   display: block;
@@ -4665,7 +4681,7 @@ h6 {
 }
 
 .tooltip .tooltip-inner {
-  font-family: "Quicksand", sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 14px;
   text-align: left;
   display: block;
@@ -6194,7 +6210,7 @@ div#ui-datepicker-div tbody tr td a:hover {
 }
 
 .tooltip .tooltip-inner {
-  font-family: "Quicksand", sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 14px;
   text-align: left;
   display: block;

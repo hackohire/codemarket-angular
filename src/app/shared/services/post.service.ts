@@ -224,11 +224,12 @@ export class PostService {
   }
 
   redirectToPostDetails(post, setSelectedPost?: boolean): void {
-    if (setSelectedPost) {
-      this.store.dispatch(SetSelectedPost({ post }));
-    } else {
-      // this.store.dispatch(SetSelectedPost({ post: null }));
-    }
+    this.store.dispatch(SetSelectedPost({ post }));
+    // if (setSelectedPost) {
+    //   this.store.dispatch(SetSelectedPost({ post }));
+    // } else {
+    //   // this.store.dispatch(SetSelectedPost({ post: null }));
+    // }
 
     this.router.navigate(['/', { outlets: { main: ['dashboard', `${post.type}-details`, post._id] } }],
       { queryParams: { type: post.type, postId: post._id } });

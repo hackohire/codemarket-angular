@@ -19,7 +19,8 @@
   <!-- Add Help Request -->
   <button mat-menu-item [routerLink]="['/', {outlets: {'main': ['help-request', 'add-help-request']}}]">
     <!-- <mat-icon>Help Request</mat-icon> -->
-    <i style="font-size: 1.7rem !important;" [class]="'vertical-align-middle fal fa-' + icons['help-request'] + ' fa-fw'"></i>
+    <i style="font-size: 1.7rem !important;"
+      [class]="'vertical-align-middle fal fa-' + icons['help-request'] + ' fa-fw'"></i>
     <span> Help Request</span>
   </button>
 
@@ -34,7 +35,8 @@
   <!-- Add Requirements -->
   <button mat-menu-item [routerLink]="['/', {outlets: {'main': ['post', 'add-requirement']}}]"
     [queryParams]="{type: 'requirement'}">
-    <i style="font-size: 1.7rem !important;" [class]="'vertical-align-middle fal fa-' + icons.requirement + ' fa-fw'"></i>
+    <i style="font-size: 1.7rem !important;"
+      [class]="'vertical-align-middle fal fa-' + icons.requirement + ' fa-fw'"></i>
     <span> Requirements</span>
   </button>
 
@@ -75,7 +77,15 @@
   <!-- Add Team Skills -->
   <button mat-menu-item [routerLink]="['/', {outlets: {'main': ['post', 'add-teamskill']}}]"
     [queryParams]="{type: 'team-skill'}">
-    <i style="font-size: 1.7rem !important;" [class]="'vertical-align-middle fal fa-' + icons['team-skill'] + ' fa-fw'"></i>
+    <i style="font-size: 1.7rem !important;"
+      [class]="'vertical-align-middle fal fa-' + icons['team-skill'] + ' fa-fw'"></i>
     <span> Team Skills</span>
   </button>
+
+  <!-- Add Team Skills -->
+  <!-- <button mat-menu-item [routerLink]="['/', {outlets: {'main': ['company', 'add-company']}}]">
+    <i style="font-size: 1.7rem !important;"
+      [class]="'vertical-align-middle fal fa-' + icons['team-skill'] + ' fa-fw'"></i>
+    <span> Company</span>
+  </button> -->
 </mat-menu>

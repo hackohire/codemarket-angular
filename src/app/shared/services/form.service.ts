@@ -22,11 +22,7 @@ export class FormService {
     const value = event.value;
 
     if ((value || '').trim()) {
-      // const a = new FormControl({name: value.trim()});
-      // categoriesFormControl.controls.push(a);
       categoriesFormControl.push(new FormControl({name: value.trim()}));
-      // categoriesFormControl.value.push({name: value.trim()});
-      // this.productForm.updateValueAndValidity({emitEvent: true});
     }
 
     // Reset the input value
@@ -37,15 +33,12 @@ export class FormService {
 
   selectedCategory(categoriesFormControl: FormArray, event) {
     const value = event.option.value;
-
-    // const a = new FormControl({name: value.name, _id: value._id});
-    // categoriesFormControl.controls.push(a);
     categoriesFormControl.push(new FormControl({name: value.name, _id: value._id}));
   }
 
-  valueChange(searchText: FormControl) {
-    return this.searchCategories('');
-  }
+  // valueChange(searchText: FormControl) {
+  //   return this.searchCategories('');
+  // }
 
 
   // Remove a Tag
@@ -54,12 +47,35 @@ export class FormService {
     // this.productForm.updateValueAndValidity();
   }
 
-  searchCategories(keyWord: string): Observable<Tag[]> {
+  findFromCollection(keyWord: string, searchCollection: string): Observable<Tag[]> {
     return this.apollo.query(
       {
         query: gql`
-          query searchCategories($keyWord: String) {
-            searchCategories(keyWord: $keyWord) {
+          query findFromCollection($keyWord: String, $searchCollection: String) {
+            findFromCollection(keyWord: $keyWord, searchCollection: $searchCollection) {
+              _id
+              name
+            }
+          }
+        `,
+        variables: {
+          keyWord: keyWord,
+          searchCollection
+        }
+      }
+    ).pipe(
+      map((p: any) => {
+        return p.data.findFromCollection;
+      }),
+    );
+  }
+
+  searchCities(keyWord: string) {
+    return this.apollo.query(
+      {
+        query: gql`
+          query searchCities($keyWord: String) {
+            searchCities(keyWord: $keyWord) {
               _id
               name
             }
@@ -71,7 +87,7 @@ export class FormService {
       }
     ).pipe(
       map((p: any) => {
-        return p.data.searchCategories;
+        return p.data.searchCities;
       }),
     );
   }

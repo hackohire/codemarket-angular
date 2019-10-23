@@ -91,6 +91,13 @@ const routes: Routes = [
   },
 
   {
+    path: 'company',
+    loadChildren: () => import('./companies/companies.module').then(module => module.CompaniesModule),
+    outlet: 'main',
+    canLoad: [AuthGuard]
+  },
+
+  {
     path: 'event',
     loadChildren: () => import('./event/event.module').then(module => module.EventModule),
     outlet: 'main',

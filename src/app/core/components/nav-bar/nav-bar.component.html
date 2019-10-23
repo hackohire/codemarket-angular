@@ -41,6 +41,18 @@
       <a mat-list-item [routerLink]="['/', {outlets: {'main': ['post', 'post-list']}}]"
         [queryParams]="{type: 'team-skill', all: false}">My
         Team Skills</a>
+
+      <a mat-list-item [routerLink]="['/', {outlets: {'main': ['company', 'company-list']}}]"
+        [queryParams]="{type: 'local-business', all: false}">My
+        Local Businesses</a>
+
+      <a mat-list-item [routerLink]="['/', {outlets: {'main': ['company', 'company-list']}}]"
+        [queryParams]="{type: 'non-profit', all: false}">My
+        Non Profits</a>
+
+      <a mat-list-item [routerLink]="['/', {outlets: {'main': ['company', 'company-list']}}]"
+        [queryParams]="{type: 'startup', all: false}">My
+        Startups</a>
     </mat-nav-list>
   </mat-sidenav>
 

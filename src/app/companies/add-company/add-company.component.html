@@ -1,0 +1,61 @@
+<app-breadcumb [title]="breadcumb?.title" [path]="breadcumb?.path"></app-breadcumb>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div [formGroup]="companyForm" class="company-form-area">
+                <mat-form-field class="field-full-width">
+                    <input type="text" matInput formControlName="title" placeholder="Title">
+                </mat-form-field>
+
+                <mat-form-field class="field-full-width">
+                    <input type="text" matInput formControlName="name" placeholder="Name">
+                </mat-form-field>
+
+
+                <mat-form-field class="field-full-width">
+                    <mat-chip-list #citiesList>
+                        <mat-chip *ngFor="let city of citiesFormControl?.value; let i = index;" [selectable]="selectable"
+                            [removable]="true" (removed)="remove(i)">
+                            {{city?.name}}
+                            <mat-icon matChipRemove>cancel</mat-icon>
+                        </mat-chip>
+                        <input #searchInput [formControl]="searchText" [matAutocomplete]="auto"
+                            placeholder="Add Cities" [matChipInputFor]="citiesList"
+                            [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+                            (matChipInputTokenEnd)="addTech($event)">
+                        <mat-icon matSuffix>location_city</mat-icon>
+                    </mat-chip-list>
+                    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                        <mat-option *ngFor="let city of citySuggestions" [value]="city">
+                            {{city?.name}}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+
+                <br />
+
+                
+                <h6>How can you help:</h6>
+                <br />
+
+                <app-editor *ngIf="howCanYouHelpFormControl?.value && edit; else add" (output)="updateFormData($event)"
+                    [data]="howCanYouHelpFormControl?.value" [id]="'edit-company-editor'"></app-editor>
+
+
+                <ng-template #add>
+                    <app-editor *ngIf="!edit" (output)="updateFormData($event)" [id]="'company-editor'"></app-editor>
+                </ng-template>
+
+                <br/>
+
+                <div fxLayout="row" fxLayoutGap="10px">
+                    <button type="button" (click)="submit('Published')" [disabled]="companyForm?.invalid" mat-raised-button color="primary">{{ idFromControl?.value ? 'Update' : 'Save' }}</button>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

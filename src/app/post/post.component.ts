@@ -16,12 +16,6 @@ export class PostComponent implements OnInit {
     private router: Router
   ) {
 
-    /** Reload the route on every route click for any post type */
-    this.router.routeReuseStrategy.shouldReuseRoute = function () {
-      return false;
-    }
-
-
     this.navLinks = [
 
       /** Interview */

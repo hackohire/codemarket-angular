@@ -155,7 +155,7 @@ support: new FormGroup({
       // snippets: new FormControl(null),
     });
 
-    this.formService.searchCategories('').subscribe((tags) => {
+    this.formService.findFromCollection('', 'tags').subscribe((tags) => {
       this.tagSuggestions = tags;
       this.allTags = tags;
     });
@@ -207,13 +207,28 @@ support: new FormGroup({
 
   addTech(event: MatChipInputEvent): void {
     if (!this.matAutocomplete.isOpen) {
-      this.formService.addCategory(this.tagsFormControl, event);
+      const availableTag = this.tagSuggestions.find((t) => t.name.toLowerCase() == event.value.trim().toLowerCase());
+      const formAvailableInTafsFormControl = this.tagsFormControl.value.find((t) => t.name.toLowerCase() == event.value.trim().toLowerCase());
+      if(formAvailableInTafsFormControl && event && event.input && event.input.value) {
+        event.input.value = ''
+      } else if (availableTag) {
+        this.tagsFormControl.push(new FormControl({name: availableTag.name, _id: availableTag._id}));
+      } else {
+        this.formService.addCategory(this.tagsFormControl, event);
+      }
+      // this.tagSuggestions = this.tagSuggestions.filter((t) => t.name.toLowerCase() !== event.value.trim().toLowerCase())
       this.searchText.setValue(null);
     }
   }
 
   selected(event) {
-    this.formService.selectedCategory(this.tagsFormControl, event);
+    // this.tagSuggestions = this.tagSuggestions.filter((t) => t._id !== event.option.value._id)
+    const formAvailableInTafsFormControl = this.tagsFormControl.value.find((t) => t.name.toLowerCase() == event.option.value.name.trim().toLowerCase());
+    if(formAvailableInTafsFormControl) {
+      event.input.value = ''
+    } else {
+      this.formService.selectedCategory(this.tagsFormControl, event);
+    }
     this.searchInput.nativeElement.value = null;
     this.searchText.setValue(null);
   }

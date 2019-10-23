@@ -176,7 +176,7 @@ export class AddProductsComponent implements OnInit, OnDestroy {
       })
     });
 
-    this.formService.searchCategories('').subscribe((tags) => {
+    this.formService.findFromCollection('', 'tags').subscribe((tags) => {
       this.tagSuggestions = tags;
       this.allTags = tags;
     })

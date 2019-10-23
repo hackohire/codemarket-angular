@@ -8,6 +8,7 @@ const postRoutes: Routes = [
   {
     path: '',
     component: PostComponent,
+    data: { noReuse: true },
     children: [
       // {
       //   path: '',

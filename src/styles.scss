@@ -4,11 +4,7 @@
 @import "~ng-pick-datetime/assets/style/picker.min.css";
 
 @import url("assets/fonts/charter/webfonts/stylesheet.css");
-// @import url('./assets/css/_theme.scss');
-// @import url("./assets/css/_general.scss");
-// @import url("./assets/css/_product.scss");
-// @import url("./assets/css/_responsive.scss");
-
+@import "~@ng-select/ng-select/themes/material.theme.css";
 @import '~@ngx-share/button/themes/default/default-theme';
 
 html, body { height: 100%; }
@@ -16,6 +12,10 @@ body { margin: 0; }
 
 .media-body {
   overflow: auto;
+}
+
+.ng5-slider-pointer, .ng5-slider-selection{
+  background-color: #0674ec !important;
 }
 
 .ce-code {

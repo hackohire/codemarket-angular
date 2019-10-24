@@ -80,12 +80,16 @@ export class CompaniesListComponent implements OnInit {
         switchMap((u) => {
           if(u) {
             return this.companyService.getCompaniesByUserIdAndType(u._id, type);
+          } else {
+            return []
           }
         })
       )
       .subscribe((companies) => {
-        this.dataSource.data = companies;
-        this.dataSource.sort = this.sort;
+        if (companies && companies.length) {
+          this.dataSource.data = companies;
+          this.dataSource.sort = this.sort;
+        }
       });
     }
   }

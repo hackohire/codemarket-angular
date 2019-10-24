@@ -148,8 +148,8 @@ export class AddDreamjobComponent implements OnInit {
       createdBy: new FormControl(i && i.createdBy && i.createdBy._id ? i.createdBy._id : ''),
     });
 
-    this.salaryRangeFrom = i.salaryRangeFrom;
-    this.salaryRangeTo = i.salaryRangeTo
+    this.salaryRangeFrom = this.dreamjobForm.get('salaryRangeFrom').value;
+    this.salaryRangeTo = this.dreamjobForm.get('salaryRangeTo').value;
 
     this.formService.findFromCollection('', 'cities').subscribe((cities) => {
       // const filteredCitys = _.differenceBy(cities, i.cities, '_id');

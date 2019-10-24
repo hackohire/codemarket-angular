@@ -224,7 +224,7 @@ export class PostService {
   }
 
   redirectToPostDetails(post, setSelectedPost?: boolean): void {
-    this.store.dispatch(SetSelectedPost({ post }));
+    this.store.dispatch(SetSelectedPost({post: null }));
     // if (setSelectedPost) {
     //   this.store.dispatch(SetSelectedPost({ post }));
     // } else {

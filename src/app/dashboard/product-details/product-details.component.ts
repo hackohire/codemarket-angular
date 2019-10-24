@@ -40,6 +40,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
   };
 
   likeCount: number;
+  productDetails: Product;
 
   anonymousAvatar = require('src/assets/images/anonymous-avatar.jpg');
   codemarketBucketURL = environment.codemarketFilesBucket;
@@ -122,6 +123,8 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
           /** Setting the page title */
           this.title.setTitle(p.name);
 
+          this.productDetails = p;
+
           this.productDetails$ = of(p);
           this.commentForm = new FormGroup({
             text: new FormControl(''),
@@ -135,6 +138,10 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
             })
           ).subscribe();
 
+        }  else if(this.productDetails && this.productDetails._id === this.activatedRoute.snapshot.queryParams['postId']) {
+          /** Comes inside this block, only when we are already in a post details page, and by using searh,
+           * we try to open any other post detials page
+           */
         } else {
           this.store.dispatch(GetPostById({ postId: params.postId }));
         }

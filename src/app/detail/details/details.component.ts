@@ -112,6 +112,10 @@ export class DetailsComponent implements OnInit, OnDestroy {
               this.isUserAttending = false;
             }
           })
+        } else if(this.postDetails && this.postDetails._id === this.activatedRoute.snapshot.queryParams['postId']) {
+          /** Comes inside this block, only when we are already in a post details page, and by using searh,
+           * we try to open any other post detials page
+           */
         } else {
           const postId = this.activatedRoute.snapshot.queryParams['postId'];
           this.store.dispatch(GetPostById({ postId }));

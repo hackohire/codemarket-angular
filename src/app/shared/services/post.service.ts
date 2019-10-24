@@ -48,6 +48,7 @@ export class PostService {
       name
       avatar
     }
+
     dateRange
     address
     eventType
@@ -56,6 +57,18 @@ export class PostService {
       _id
       avatar
     }
+
+    company {
+      name
+      _id
+    }
+    salaryRangeFrom
+    salaryRangeTo
+    cities {
+      name
+      _id
+    }
+
   }
   ${description}
   `;

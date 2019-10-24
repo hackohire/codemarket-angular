@@ -115,6 +115,20 @@ export class PostComponent implements OnInit {
         queryParams: { type: PostType.Teamskill },
         type: PostType.Teamskill
       },
+
+      /** Dream job */
+      {
+        path: 'dream-job-list',
+        label: 'Dreamjob List',
+        queryParams: { type: PostType.Dreamjob, all: false },
+        type: PostType.Dreamjob
+      },
+      {
+        path: 'add-teamskill',
+        label: 'Add Teamskill',
+        queryParams: { type: PostType.Dreamjob },
+        type: PostType.Dreamjob
+      },
     ];
 
     /** Filtering Routes Based On Post Type */

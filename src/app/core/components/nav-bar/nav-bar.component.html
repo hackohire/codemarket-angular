@@ -53,6 +53,10 @@
       <a mat-list-item [routerLink]="['/', {outlets: {'main': ['company', 'company-list']}}]"
         [queryParams]="{type: 'startup', all: false}">My
         Startups</a>
+
+      <a mat-list-item [routerLink]="['/', {outlets: {'main': ['company', 'company-list']}}]"
+        [queryParams]="{type: 'dream-job', all: false}">My
+        Dreamjobs</a>
     </mat-nav-list>
   </mat-sidenav>
 
@@ -92,8 +96,8 @@
       </a>
 
       <!-- All Events -->
-      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', {outlets: {'main': ['dashboard', 'post-list']}}]"
-        [queryParams]="{type: 'event', all: true}">
+      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', {outlets: {'main': ['dashboard', 'dream-job-list']}}]"
+        [queryParams]="{type: 'dream-job', all: true}">
         <i style="font-size: 1.7rem !important;" class="vertical-align-middle fal fa-briefcase fa-fw"></i>
         <span [fxHide.xs]="true"> Dream Job</span>
       </a>
@@ -120,14 +124,16 @@
       </a>
 
       <!-- Local Businesses -->
-      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', {outlets: {'main': ['dashboard', 'company-list']}}]"
+      <a mat-button routerLinkActive="mat-primary"
+        [routerLink]="['/', {outlets: {'main': ['dashboard', 'company-list']}}]"
         [queryParams]="{type: 'local-business', all: true}">
         <i style="font-size: 1.7rem !important;" class="vertical-align-middle fal fa-briefcase fa-fw"></i>
         <span [fxHide.xs]="true"> Local Business</span>
       </a>
 
       <!-- Startups -->
-      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', {outlets: {'main': ['dashboard', 'company-list']}}]"
+      <a mat-button routerLinkActive="mat-primary"
+        [routerLink]="['/', {outlets: {'main': ['dashboard', 'company-list']}}]"
         [queryParams]="{type: 'startup', all: true}">
         <i style="font-size: 1.7rem !important;" class="vertical-align-middle fal fa-lightbulb-on fa-fw"></i>
         <span [fxHide.xs]="true"> Startups</span>
@@ -135,7 +141,8 @@
 
 
       <!-- Non Profits -->
-      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', {outlets: {'main': ['dashboard', 'company-list']}}]"
+      <a mat-button routerLinkActive="mat-primary"
+        [routerLink]="['/', {outlets: {'main': ['dashboard', 'company-list']}}]"
         [queryParams]="{type: 'non-profit', all: true}">
         <i style="font-size: 1.7rem !important;" class="vertical-align-middle fal fa-hand-holding-heart fa-fw"></i>
         <span [fxHide.xs]="true"> Non Profits</span>

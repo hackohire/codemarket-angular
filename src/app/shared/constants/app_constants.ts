@@ -13,5 +13,6 @@ export const appConstants = {
         [PostType.Design]: 'marker',
         [PostType.Event]: 'calendar-plus',
         [PostType.Goal]: 'bullseye-arrow',
+        [PostType.Dreamjob]: 'briefcase'
     }
 }

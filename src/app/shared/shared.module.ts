@@ -24,6 +24,8 @@ import { VideoChatComponent } from '../video-chat/video-chat.component';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { AddPostMenuComponent } from './components/add-post-menu/add-post-menu.component';
 import { CompaniesListComponent } from '../companies/companies-list/companies-list.component';
+import { Ng5SliderModule } from 'ng5-slider';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 export function hljsLanguages() {
   return [
@@ -52,7 +54,9 @@ export function hljsLanguages() {
     FontAwesomeModule,
     ShareModule,
     OwlDateTimeModule,
-    OwlNativeDateTimeModule
+    OwlNativeDateTimeModule,
+    Ng5SliderModule,
+    NgSelectModule
   ],
   exports: [
     BreadcumbComponent,
@@ -74,6 +78,8 @@ export function hljsLanguages() {
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
     SafePipe,
+    Ng5SliderModule,
+    NgSelectModule,
     PaypalSubscriptionDirective
   ],
   entryComponents: [

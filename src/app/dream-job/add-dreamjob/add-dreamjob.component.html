@@ -1,0 +1,62 @@
+<app-breadcumb [title]="breadcumb?.title" [path]="breadcumb?.path"></app-breadcumb>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div [formGroup]="dreamjobForm" class="dreamjob-form-area">
+                <mat-form-field class="field-full-width">
+                    <input type="text" matInput formControlName="name" placeholder="Title">
+                </mat-form-field>
+
+                <ng-select placeholder="Select Company" formControlName="company">
+                    <ng-option *ngFor="let cName of allCompanies" [value]="cName._id">
+                        {{ cName?.name }}
+                    </ng-option>
+                </ng-select>
+
+                <mat-form-field class="field-full-width">
+                    <mat-chip-list #citiesList>
+                        <mat-chip *ngFor="let city of citiesFormControl?.value; let i = index;"
+                            [selectable]="selectable" [removable]="true" (removed)="remove(i)">
+                            {{city?.name}}
+                            <mat-icon matChipRemove>cancel</mat-icon>
+                        </mat-chip>
+                        <input #searchInput [formControl]="searchText" [matAutocomplete]="auto"
+                            placeholder="Choose Cities" [matChipInputFor]="citiesList"
+                            [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+                            (matChipInputTokenEnd)="addTech($event)">
+                        <mat-icon matSuffix>location_city</mat-icon>
+                    </mat-chip-list>
+                    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                        <mat-option *ngFor="let city of citySuggestions" [value]="city">
+                            {{city?.name}}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+
+                <h6>Expected Salary Range:</h6>
+                <br />
+
+                <ng5-slider [(value)]="dreamjobForm.controls['salaryRangeFrom'].value"
+                    [(highValue)]="dreamjobForm.controls['salaryRangeTo'].value" [options]="options"></ng5-slider>
+
+                <br />
+                <br />
+
+                <div fxLayout="row" fxLayoutGap="10px">
+                    <button *ngIf="statusFormControl?.value !== 'Published'" type="button" (click)="submit('Drafted')"
+                        [disabled]="dreamjobForm?.invalid" mat-raised-button color="primary">Save</button>
+                    <button type="button" (click)="submit('Published')" [disabled]="dreamjobForm?.invalid"
+                        mat-raised-button
+                        color="primary">{{ statusFormControl?.value === 'Published' ? 'Publish Changes' : 'Publish' }}</button>
+                    <button *ngIf="statusFormControl?.value === 'Published'" type="button"
+                        (click)="submit('Unpublished')" [disabled]="dreamjobForm?.invalid" mat-raised-button
+                        color="primary">{{ 'Unpublish' }}</button>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -24,6 +24,10 @@ const postRoutes: Routes = [
         loadChildren: () => import('../post/posts-list/posts-list.module').then(module => module.PostsListModule)
       },
       {
+        path: 'dream-job-list',
+        loadChildren: () => import('../dream-job/dreamjob-list/dreamjob-list.module').then(module => module.DreamjobListModule)
+      },
+      {
         path: 'add-goal',
         loadChildren: () => import('../goal/add-goal/add-goal.module').then(module => module.AddGoalModule),
       },
@@ -86,6 +90,14 @@ const postRoutes: Routes = [
       {
         path: 'edit-event/:eventId',
         loadChildren: () => import('../event/add-event/add-event.module').then(module => module.AddEventModule),
+      },
+      {
+        path: 'add-dreamjob',
+        loadChildren: () => import('../dream-job/add-dreamjob/add-dreamjob.module').then(module => module.AddDreamjobModule),
+      },
+      {
+        path: 'edit-dream-job/:dreamJobId',
+        loadChildren: () => import('../dream-job/add-dreamjob/add-dreamjob.module').then(module => module.AddDreamjobModule),
       }
     ],
     runGuardsAndResolvers: 'always',

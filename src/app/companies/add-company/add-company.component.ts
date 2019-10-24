@@ -170,7 +170,7 @@ export class AddCompanyComponent implements OnInit {
         Swal.fire(`${d.name} has been Created Successfully`, '', 'success').then(() => {
           this.router.navigate(['/', { outlets: { 'main': ['company', 'company-list'] } }],
             {
-              queryParams: { type: d.type }
+              queryParams: { type: d.type, all: false }
             }
           );
         })
@@ -189,7 +189,7 @@ export class AddCompanyComponent implements OnInit {
           Swal.fire(`${d.name} has been Updated Successfully`, '', 'success').then(() => {
             this.router.navigate(['/', { outlets: { 'main': ['company', 'company-list'] } }],
               {
-                queryParams: { type: d.type }
+                queryParams: { type: d.type, all: false }
               }
             );
           })

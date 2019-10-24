@@ -4,6 +4,7 @@ import { DashboardComponent } from './dashboard.component';
 import { Routes, RouterModule } from '@angular/router';
 import { ProductComponent } from './product/product.component';
 import { SharedModule } from '../shared/shared.module';
+import { CompaniesListComponent } from '../companies/companies-list/companies-list.component';
 
 const dashboardRoutes: Routes = [
   {
@@ -15,6 +16,11 @@ const dashboardRoutes: Routes = [
   {
     path: 'post-list',
     loadChildren: () => import('../post/posts-list/posts-list.module').then(module => module.PostsListModule)
+  },
+  {
+    path: 'company-list',
+    component: CompaniesListComponent,
+    data: { noReuse: true }
   },
   {
     path: 'bugfixes-all',
@@ -86,6 +92,7 @@ const dashboardRoutes: Routes = [
   imports: [
     CommonModule,
     SharedModule,
+    // CompaniesModule,
     RouterModule.forChild(dashboardRoutes)
   ]
 })

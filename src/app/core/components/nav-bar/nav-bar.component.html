@@ -119,6 +119,28 @@
         <span [fxHide.xs]="true"> Social Impact</span>
       </a>
 
+      <!-- Local Businesses -->
+      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', {outlets: {'main': ['dashboard', 'company-list']}}]"
+        [queryParams]="{type: 'local-business', all: true}">
+        <i style="font-size: 1.7rem !important;" class="vertical-align-middle fal fa-briefcase fa-fw"></i>
+        <span [fxHide.xs]="true"> Local Business</span>
+      </a>
+
+      <!-- Startups -->
+      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', {outlets: {'main': ['dashboard', 'company-list']}}]"
+        [queryParams]="{type: 'startup', all: true}">
+        <i style="font-size: 1.7rem !important;" class="vertical-align-middle fal fa-lightbulb-on fa-fw"></i>
+        <span [fxHide.xs]="true"> Startups</span>
+      </a>
+
+
+      <!-- Non Profits -->
+      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', {outlets: {'main': ['dashboard', 'company-list']}}]"
+        [queryParams]="{type: 'non-profit', all: true}">
+        <i style="font-size: 1.7rem !important;" class="vertical-align-middle fal fa-hand-holding-heart fa-fw"></i>
+        <span [fxHide.xs]="true"> Non Profits</span>
+      </a>
+
       <!-- membership -->
       <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', {outlets: {'main': ['membership']}}]">
         <mat-icon>card_membership</mat-icon>

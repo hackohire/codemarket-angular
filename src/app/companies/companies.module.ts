@@ -29,7 +29,7 @@ const companyRoutes: Routes = [
 ]
 
 @NgModule({
-  declarations: [CompaniesComponent, AddCompanyComponent, CompaniesListComponent],
+  declarations: [CompaniesComponent, AddCompanyComponent],
   imports: [
     CommonModule,
     SharedModule,

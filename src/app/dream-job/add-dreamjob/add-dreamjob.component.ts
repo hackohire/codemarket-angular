@@ -148,6 +148,9 @@ export class AddDreamjobComponent implements OnInit {
       createdBy: new FormControl(i && i.createdBy && i.createdBy._id ? i.createdBy._id : ''),
     });
 
+    this.salaryRangeFrom = i.salaryRangeFrom;
+    this.salaryRangeTo = i.salaryRangeTo
+
     this.formService.findFromCollection('', 'cities').subscribe((cities) => {
       // const filteredCitys = _.differenceBy(cities, i.cities, '_id');
       this.citySuggestions = cities;
@@ -173,6 +176,9 @@ export class AddDreamjobComponent implements OnInit {
   submit(status) {
 
     this.statusFormControl.setValue(status);
+
+    this.dreamjobForm.get('salaryRangeFrom').setValue(this.salaryRangeFrom);
+    this.dreamjobForm.get('salaryRangeTo').setValue(this.salaryRangeTo);
 
     if (this.authService.loggedInUser && !this.createdBy.value) {
       this.createdBy.setValue(this.authService.loggedInUser._id);

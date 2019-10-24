@@ -52,6 +52,10 @@ export class AddDreamjobComponent implements OnInit {
     return this.dreamjobForm.get('_id');
   }
 
+  get descriptionFormControl() {
+    return this.dreamjobForm.get('description');
+  }
+
   get citiesFormControl() {
     return this.dreamjobForm.get('cities') as FormArray;
   }
@@ -138,6 +142,7 @@ export class AddDreamjobComponent implements OnInit {
   dreamjobFormInitialization(i: Post) {
     this.dreamjobForm = new FormGroup({
       name: new FormControl(i && i.name ? i.name : '', Validators.required),
+      description: new FormControl(i && i.description ? i.description : ''),
       company: new FormControl(i && i.company ? i.company._id : '', Validators.required),
       status: new FormControl(i && i.status ? i.status : PostStatus.Drafted),
       _id: new FormControl(i && i._id ? i._id : ''),
@@ -180,6 +185,10 @@ export class AddDreamjobComponent implements OnInit {
     this.dreamjobForm.get('salaryRangeFrom').setValue(this.salaryRangeFrom);
     this.dreamjobForm.get('salaryRangeTo').setValue(this.salaryRangeTo);
 
+    if (!this.descriptionFormControl.value) {
+      this.descriptionFormControl.setValue([]);
+    }
+
     if (this.authService.loggedInUser && !this.createdBy.value) {
       this.createdBy.setValue(this.authService.loggedInUser._id);
     }
@@ -190,6 +199,11 @@ export class AddDreamjobComponent implements OnInit {
     } else {
       this.store.dispatch(UpdatePost({post: this.dreamjobForm.value}));
     }
+  }
+
+  updateFormData(event) {
+    console.log(event);
+    this.dreamjobForm.get('description').setValue(event);
   }
 
   addTech(event: MatChipInputEvent): void {
@@ -210,7 +224,7 @@ export class AddDreamjobComponent implements OnInit {
   selected(event) {
     const formAvailableInTafsFormControl = this.citiesFormControl.value.find((t) => t.name.toLowerCase() == event.option.value.name.trim().toLowerCase());
     if(formAvailableInTafsFormControl) {
-      event.input.value = ''
+      event.option.value = ''
     } else {
       this.formService.selectedCategory(this.citiesFormControl, event);
     }

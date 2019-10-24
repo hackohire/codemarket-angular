@@ -87,6 +87,10 @@ const dashboardRoutes: Routes = [
     path: 'team-skill-details/:teamSkillId',
     loadChildren: () => import('../detail/detail.module').then(module => module.DetailModule),
   },
+  {
+    path: 'dream-job-details/:dreamjobId',
+    loadChildren: () => import('../detail/detail.module').then(module => module.DetailModule),
+  },
 ];
 
 

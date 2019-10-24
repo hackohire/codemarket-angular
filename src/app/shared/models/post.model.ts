@@ -3,6 +3,7 @@ import { BlockToolData } from '@editorjs/editorjs';
 import { Tag } from './product.model';
 import { PostStatus } from './poststatus.enum';
 import { City } from './city.model';
+import { Company } from './company.model';
 
 interface Support {
     time: number;
@@ -32,7 +33,7 @@ export interface Post {
     usersAttending: [User] /** Only for events */
 
     cities?: City[];
-    company?: string;
+    company?: Company & string;
     salaryRangeFrom?: Number;
     salaryRangeTo?: Number;
 }

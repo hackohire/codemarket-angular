@@ -96,7 +96,7 @@ const postRoutes: Routes = [
         loadChildren: () => import('../dream-job/add-dreamjob/add-dreamjob.module').then(module => module.AddDreamjobModule),
       },
       {
-        path: 'edit-dream-job/:dreamJobId',
+        path: 'edit-dream-job/:dreamjobId',
         loadChildren: () => import('../dream-job/add-dreamjob/add-dreamjob.module').then(module => module.AddDreamjobModule),
       }
     ],

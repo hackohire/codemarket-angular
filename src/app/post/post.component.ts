@@ -119,13 +119,13 @@ export class PostComponent implements OnInit {
       /** Dream job */
       {
         path: 'dream-job-list',
-        label: 'Dreamjob List',
+        label: 'Dream Job List',
         queryParams: { type: PostType.Dreamjob, all: false },
         type: PostType.Dreamjob
       },
       {
-        path: 'add-teamskill',
-        label: 'Add Teamskill',
+        path: 'add-dreamjob',
+        label: 'Add Dream Job',
         queryParams: { type: PostType.Dreamjob },
         type: PostType.Dreamjob
       },

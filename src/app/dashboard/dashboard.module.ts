@@ -91,6 +91,10 @@ const dashboardRoutes: Routes = [
     path: 'dream-job-details/:dreamjobId',
     loadChildren: () => import('../detail/detail.module').then(module => module.DetailModule),
   },
+  {
+    path: 'company-details/:companyId',
+    loadChildren: () => import('../detail/detail.module').then(module => module.DetailModule),
+  },
 ];
 
 

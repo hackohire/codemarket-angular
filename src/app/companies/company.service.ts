@@ -5,6 +5,7 @@ import { Company } from '../shared/models/company.model';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Apollo } from 'apollo-angular';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -38,7 +39,8 @@ export class CompanyService {
 
 
   constructor(
-    private apollo: Apollo
+    private apollo: Apollo,
+    private router: Router
   ) { }
 
   addCompany(company: Company): Observable<Company> {
@@ -186,5 +188,38 @@ export class CompanyService {
         return p.data.deleteCompany;
       }),
     );
+  }
+
+  getListOfUsersInACompany(companyId: string) {
+    return this.apollo.query(
+      {
+        query: gql`
+          query getListOfUsersInACompany($companyId: String) {
+            getListOfUsersInACompany(companyId: $companyId) {
+                name
+                avatar
+                _id
+            }
+          }
+        `,
+        variables: {
+          companyId: companyId
+        }
+      }
+    ).pipe(
+      map((p: any) => {
+        return p.data.getListOfUsersInACompany;
+      }),
+    );
+  }
+
+  redirectToCompanyDetails(companyId: string) {
+    this.router.navigate(['/', { outlets: { main: ['dashboard', `company-details`, companyId] } }],
+    { queryParams: { type: 'company', postId: companyId} });
+  }
+
+  editCompany(company: Company) {
+    this.router.navigate(['/', { outlets: { 'main': ['company', 'edit-company', company._id] } }],
+    {queryParams: {type: company.type}})
   }
 }

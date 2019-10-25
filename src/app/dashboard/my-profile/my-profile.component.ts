@@ -88,6 +88,10 @@ export class MyProfileComponent implements OnInit {
           label: 'Buy'
         },
         {
+          path: 'products-list',
+          label: 'Sell'
+        },
+        {
           path: 'membership-list',
           label: 'Membership'
         },

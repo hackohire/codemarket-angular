@@ -168,11 +168,7 @@ export class AddCompanyComponent implements OnInit {
         })
       ).subscribe((d: any) => {
         Swal.fire(`${d.name} has been Created Successfully`, '', 'success').then(() => {
-          this.router.navigate(['/', { outlets: { 'main': ['company', 'company-list'] } }],
-            {
-              queryParams: { type: d.type, all: false }
-            }
-          );
+          this.companyService.redirectToCompanyDetails(d._id);
         })
         this.companyFormInitialization(d);
       });
@@ -187,11 +183,7 @@ export class AddCompanyComponent implements OnInit {
       .subscribe((d: any) => {
         if (d) {
           Swal.fire(`${d.name} has been Updated Successfully`, '', 'success').then(() => {
-            this.router.navigate(['/', { outlets: { 'main': ['company', 'company-list'] } }],
-              {
-                queryParams: { type: d.type, all: false }
-              }
-            );
+            this.companyService.redirectToCompanyDetails(d._id);
           })
           this.companyFormInitialization(d);
         }

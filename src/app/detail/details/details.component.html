@@ -1,6 +1,6 @@
-<!-- <p>product-details works!</p> -->
-
-<!-- {{productDetails$ | async | json }} -->
+<!--============================================
+        START SINGLE POST DETAILS AREA
+==============================================-->
 <ng-container *ngIf="(details$ | async) as details">
     <!--================================
         START BREADCRUMB AREA
@@ -20,7 +20,7 @@
 
 
     <!--============================================
-        START SINGLE PRODUCT DESCRIPTION AREA
+        START SINGLE POST DESCRIPTION AREA
     ==============================================-->
     <section class="single-product-desc">
         <div class="container">
@@ -31,10 +31,9 @@
                         <div>
                             <div class="tab-pane fade show product-tab active" id="product-details">
                                 <div class="tab-content-wrapper">
-                                    <!-- <quill-view *ngIf="product?.description; else noDescription;" [modules]="modules"
-                                        [content]="product.description" format="text" theme="snow"></quill-view> -->
 
-                                    <app-editor [readOnly]="true" [data]="details?.description" [id]="'details-editor'">
+                                    <app-editor *ngIf="details?.description" [readOnly]="true"
+                                        [data]="details?.description" [id]="'details-editor'">
                                     </app-editor>
 
                                     <br />
@@ -47,47 +46,11 @@
                                     <ng-template #noDescription>
                                         <span>No Description</span>
                                     </ng-template>
-                                    <!-- <h2>Features With Image:</h2>
-                                    <img src="images/apspr.jpg" alt="This is product description thumbnail"> -->
                                 </div>
                             </div>
                         </div>
 
-                        <div class="tab-pane fade show product-tab">
-                            <div class="thread">
-                                <ul class="media-list thread-list" style="list-style: none;">
-                                    <h4 class="tab-content-wrapper">Comments:</h4>
-                                    <li class="single-thread" *ngFor="let c of commentsList">
-
-                                        <app-comment [comment]="c" [referenceId]="details?._id"></app-comment>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="comment-form-area">
-                            <h4>Leave a comment</h4>
-                            <!-- comment reply -->
-                            <div class="media comment-form">
-                                <div class="media-left">
-                                    <a href="#">
-                                        <img class="author_avatar_comment"
-                                            [src]="authService?.loggedInUser?.avatar ? ((codemarketBucketURL + authService?.loggedInUser?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
-                                            alt="Commentator Avatar">
-                                    </a>
-                                </div>
-                                <div class="media-body">
-                                    <div [formGroup]="commentForm" class="comment-reply-form">
-                                        <app-editor [id]="'comment-editor'" (output)="updateFormData($event)">
-                                        </app-editor>
-                                        <!-- <textarea formControlName="text" name="reply-comment" placeholder="Write your comment..."></textarea> -->
-                                        <button type="button" class="btn btn--sm btn--round" (click)="addComment()">Post
-                                            Comment</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- comment reply -->
-                        </div>
+                        <ng-container *ngTemplateOutlet="addCommentTemplate; context: details"></ng-container>
                     </div>
 
                     <!-- end /.item-info -->
@@ -172,10 +135,12 @@
 
                             <div class="purchase-button" *ngIf="details?.type === 'event'">
                                 <!-- <a href="#" class="btn btn--lg btn--round">Purchase Now</a> -->
-                                
-                                <h3 style="text-align: center;" *ngIf="isUserAttending; else eventRSVP" (click)="cancelRSVP(details?._id)">
-                                        You are going 
-                                     <button color="warn" mat-mini-fab aria-label="Example icon-button with a heart icon">
+
+                                <h3 style="text-align: center;" *ngIf="isUserAttending; else eventRSVP"
+                                    (click)="cancelRSVP(details?._id)">
+                                    You are going
+                                    <button color="warn" mat-mini-fab
+                                        aria-label="Example icon-button with a heart icon">
                                         <mat-icon>close</mat-icon>
                                     </button></h3>
                                 <!-- <a 
@@ -184,9 +149,11 @@
                                 </a> -->
 
 
-                                
+
                                 <ng-template #eventRSVP>
-                                    <h3 style="text-align: center;" (click)="rsvpEvent(details?._id)">Are you going? <button color="primary" mat-mini-fab aria-label="Example icon-button with a heart icon">
+                                    <h3 style="text-align: center;" (click)="rsvpEvent(details?._id)">Are you going?
+                                        <button color="primary" mat-mini-fab
+                                            aria-label="Example icon-button with a heart icon">
                                             <mat-icon>done</mat-icon>
                                         </button></h3>
 
@@ -328,6 +295,231 @@
         ===============================================-->
 
 </ng-container>
+
+
+<!--============================================
+        START COMPANY DETAILS
+    ==============================================-->
+
+<ng-container *ngIf="(companyDetails$ | async) as details">
+    <!--================================
+        START BREADCRUMB AREA
+    =================================-->
+
+    <app-breadcumb (editPost)="edit(details)"
+        [showEditPostDetails]="details?.createdBy?._id === authService?.loggedInUser?._id ? true : false"
+        [title]="details?.name" [path]="breadcumb?.path">
+    </app-breadcumb>
+
+    <!--================================
+            END BREADCRUMB AREA
+    =================================-->
+
+
+
+    <!--============================================
+        START COMPANY DETAILS AREA
+    ==============================================-->
+    <section class="single-product-desc">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+
+                    <div class="item-info">
+                        <div>
+                            <div class="tab-pane fade show product-tab active" id="product-details">
+                                <div class="tab-content-wrapper">
+
+                                    <app-editor *ngIf="details?.howCanYouHelp" [readOnly]="true"
+                                        [data]="details?.howCanYouHelp" [id]="'company-details-editor'">
+                                    </app-editor>
+
+                                    <br />
+                                    <br />
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <ng-container *ngTemplateOutlet="addCommentTemplate; context: details"></ng-container>
+
+                    </div>
+
+                    <!-- end /.item-info -->
+                </div>
+                <!-- end /.col-md-8 -->
+
+                <div class="col-lg-4">
+                    <aside class="sidebar sidebar--single-product">
+
+
+                        <div class="author-card sidebar-card " *ngIf="details?.createdBy?.name">
+                            <div class="card-title">
+                                <h4>Author Information</h4>
+                            </div>
+
+                            <div class="author-infos">
+                                <div class="author_avatar">
+                                    <img [src]="details?.createdBy?.avatar ? ((codemarketBucketURL + details.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                                        alt="Presenting the broken author avatar :D">
+                                </div>
+
+                                <div class="author">
+                                    <a
+                                        [routerLink]="['/', {outlets: {'main': ['dashboard', 'profile', details?.createdBy?._id ]}}]">
+                                        <h4>{{details?.createdBy?.name}}</h4>
+                                    </a>
+                                    <button
+                                        *ngIf="details?.createdBy?._id && authService?.loggedInUser?._id && authService?.loggedInUser?._id !== details?.createdBy?._id"
+                                        (click)="openDialog(details?.createdBy?._id)" mat-mini-fab color="primary">
+                                        <mat-icon>video_call</mat-icon>
+                                    </button>
+                                    <!-- <p>Signed Up: 08 April 2016</p> -->
+                                </div>
+                                <!-- end /.author -->
+
+                                <div class="social social--color--filled">
+                                    <ul>
+                                        <li>
+                                            <a href="#">
+                                                <span class="fab fa-facebook fa-lg"></span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="fab fa-github fa-lg"></span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="fab fa-linkedin fa-lg"></span>
+                                            </a>
+                                        <li>
+                                            <a href="#">
+                                                <i class="fab fa-stack-overflow"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!-- end /.social -->
+
+                                <div class="author-btn">
+                                    <a (editPost)="postService?.editPost(details)"
+                                        [routerLink]="['/', {outlets: {'main': ['dashboard', 'profile', details?.createdBy?._id ]}}]"
+                                        class="btn btn--sm btn--round">View Profile</a>
+                                    <!-- <a href="#" class="btn btn--sm btn--round">Message</a> -->
+                                </div>
+                            </div>
+                            <!-- end /.author-infos -->
+
+
+                        </div>
+                        <!-- end /.author-card -->
+
+
+
+                        <div class="sidebar-card card--product-infos">
+                            <div class="card-title">
+                                <h4>Information</h4>
+                            </div>
+
+                            <ul class="infos">
+                                <li *ngIf="details?.createdAt">
+                                    <p class="data-label">Created</p>
+                                    <p class="info">{{getDate(details?.createdAt) | date: 'dd/MM/yyyy'}}</p>
+                                </li>
+                                <li *ngIf="details?.updatedAt">
+                                    <p class="data-label">Updated</p>
+                                    <p class="info">{{getDate(details?.updatedAt) | date: 'dd/MM/yyyy'}}</p>
+                                </li>
+                                <li>
+                                    <p class="data-label">Cities</p>
+                                    <p class="info" *ngFor="let t of details?.cities">{{t?.name + ','}}</p>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- end /.aside -->
+
+                        <div class="author-card sidebar-card " *ngIf="type === 'company'">
+                            <div class="card-title">
+                                <h4>Interested Professionals: {{ details?.usersInterestedInCompany?.length }}</h4>
+                                <br />
+
+                                <ng-container class="row" *ngFor="let userInterested of usersInterestedInCompany">
+                                    <div class="col-md-12" style="margin-bottom: 10px;">
+                                        <div class="author_avatar_comment" style="vertical-align: middle;">
+                                            <img [src]="userInterested?.avatar ? ((codemarketBucketURL + userInterested.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                                                alt="Presenting the broken author avatar :D">
+                                        </div>
+                                        <div class="autor__info">
+                                            <a
+                                                [routerLink]="['/', {outlets: {'main': ['dashboard', 'profile', userInterested?._id ]}}]">
+                                                <p class="name">
+                                                    {{userInterested?.name}}
+                                                </p>
+                                            </a>
+                                            <!-- <p class="ammount">{{fromNow(pu?.createdAt)}}</p> -->
+                                        </div>
+                                    </div>
+
+                                </ng-container>
+                            </div>
+                        </div>
+
+                    </aside>
+                    <!-- end /.aside -->
+                </div>
+                <!-- end /.col-md-4 -->
+            </div>
+            <!-- end /.row -->
+        </div>
+        <!-- end /.container -->
+    </section>
+    <!--===========================================
+            END SINGLE PRODUCT DESCRIPTION AREA
+        ===============================================-->
+
+</ng-container>
+
+<ng-template #addCommentTemplate let-cDetails="details">
+    {{cDetails | json}}
+    <div class="tab-pane fade show product-tab">
+        <div class="thread">
+            <ul class="media-list thread-list" style="list-style: none;">
+                <h4 class="tab-content-wrapper">Comments:</h4>
+                <li class="single-thread" *ngFor="let c of commentsList">
+    
+                    <app-comment [comment]="c" [referenceId]="cDetails?._id"></app-comment>
+                </li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="comment-form-area">
+        <h4>Leave a comment</h4>
+        <!-- comment reply -->
+        <div class="media comment-form">
+            <div class="media-left">
+                <a href="#">
+                    <img class="author_avatar_comment"
+                        [src]="authService?.loggedInUser?.avatar ? ((codemarketBucketURL + authService?.loggedInUser?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                        alt="Commentator Avatar">
+                </a>
+            </div>
+            <div class="media-body">
+                <div [formGroup]="commentForm" class="comment-reply-form">
+                    <app-editor [id]="'comment-editor'" (output)="updateFormData($event)">
+                    </app-editor>
+    
+                    <button type="button" class="btn btn--sm btn--round" (click)="addComment()">Post
+                        Comment</button>
+                </div>
+            </div>
+        </div>
+        <!-- comment reply -->
+    </div>
+</ng-template>
+
 
 <swal #successfulRSVP title="RSVP Successful!" type="success" [showConfirmButton]="false">
     <div *swalPartial class="alert alert-info">

@@ -27,6 +27,9 @@ import { PostService } from '../../shared/services/post.service';
 import { SweetalertService } from '../../shared/services/sweetalert.service';
 import Swal from 'sweetalert2';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
+import { CompanyService } from '../../companies/company.service';
+import { Company } from '../../shared/models/company.model';
+import { User } from '../../shared/models/user.model';
 
 @Component({
   selector: 'app-details',
@@ -37,8 +40,15 @@ import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 export class DetailsComponent implements OnInit, OnDestroy {
 
   @ViewChild('successfulRSVP', { static: false }) successfulRSVP: SwalComponent;
-  details$: Observable<HelpQuery | Requirement | Interview | Testing | Howtodoc>;
-  postDetails: Post;
+  details$: Observable<Post>;
+
+  /** Company Details Related Varibale */
+  companyDetails$: Observable<Company>;
+  usersInterestedInCompany: User[];
+
+  /** */
+
+  postDetails: Post | Company | any;
   isUserAttending: boolean; /** Only for the event */
   subscription$: Subscription;
   type: string; // product | help-request | interview | requirement | Testing | Howtodoc
@@ -63,7 +73,8 @@ export class DetailsComponent implements OnInit, OnDestroy {
     public share: ShareService,
     public postService: PostService,
     private router: Router,
-    private sweetAlertService: SweetalertService
+    private sweetAlertService: SweetalertService,
+    private companyService: CompanyService
   ) {
     this.breadcumb = {
       path: [
@@ -91,40 +102,55 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
     const params = this.activatedRoute.snapshot.params;
 
-    this.subscription$ = this.store.select(selectSelectedPost).pipe(
-      tap((p: Post) => {
-        if (p) {
-          this.postDetails = p;
-          this.details$ = of(p);
-          // this.type = ;
-          this.initializeCommentForm(p);
-
-          /** Subscribe to loggedinuser, once loggedInUse is got, Check if the loggedInUder is
-           * in the list of attendess or not 
-           **/
-          this.authService.loggedInUser$.subscribe((user) => {
-            if (this.postDetails
-              && this.postDetails.usersAttending
-              && this.postDetails.usersAttending.length
-              && this.postDetails.usersAttending.find((u) => u._id === user._id)) {
-                this.isUserAttending = true;
-            } else {
-              this.isUserAttending = false;
+    if (this.type === 'company') {
+      this.subscription$ = this.companyService.getCompanyById(params['companyId']).subscribe({
+        next: (c: Company) => {
+          this.companyDetails$ = of(c);
+          this.postDetails = c;
+          this.initializeCommentForm(c);
+          this.companyService.getListOfUsersInACompany(params['companyId']).subscribe((u) => {
+            console.log(u);
+            if(u) {
+              this.usersInterestedInCompany = u;
             }
           })
-        } else if(this.postDetails && this.postDetails._id === this.activatedRoute.snapshot.queryParams['postId']) {
-          /** Comes inside this block, only when we are already in a post details page, and by using searh,
-           * we try to open any other post detials page
-           */
-        } else {
-          const postId = this.activatedRoute.snapshot.queryParams['postId'];
-          this.store.dispatch(GetPostById({ postId }));
-          this.details$ = this.store.select(selectSelectedPost);
         }
-
       })
-    ).subscribe();
-
+    } else {
+      this.subscription$ = this.store.select(selectSelectedPost).pipe(
+        tap((p: Post) => {
+          if (p) {
+            this.postDetails = p;
+            this.details$ = of(p);
+            // this.type = ;
+            this.initializeCommentForm(p);
+  
+            /** Subscribe to loggedinuser, once loggedInUse is got, Check if the loggedInUder is
+             * in the list of attendess or not 
+             **/
+            this.authService.loggedInUser$.subscribe((user) => {
+              if (this.postDetails
+                && this.postDetails.usersAttending
+                && this.postDetails.usersAttending.length
+                && this.postDetails.usersAttending.find((u: User) => u._id === user._id)) {
+                  this.isUserAttending = true;
+              } else {
+                this.isUserAttending = false;
+              }
+            })
+          } else if(this.postDetails && this.postDetails._id === this.activatedRoute.snapshot.queryParams['postId']) {
+            /** Comes inside this block, only when we are already in a post details page, and by using searh,
+             * we try to open any other post detials page
+             */
+          } else {
+            const postId = this.activatedRoute.snapshot.queryParams['postId'];
+            this.store.dispatch(GetPostById({ postId }));
+            this.details$ = this.store.select(selectSelectedPost);
+          }
+  
+        })
+      ).subscribe();
+    }
   }
 
   async rsvpEvent(eventId) {
@@ -239,6 +265,14 @@ export class DetailsComponent implements OnInit, OnDestroy {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
     });
+  }
+
+  edit(details) {
+    if (this.type === 'company') {
+      this.companyService.editCompany(details);
+    } else {
+      this.postService.editPost(details);
+    }
   }
 
 }

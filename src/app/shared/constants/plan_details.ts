@@ -6,7 +6,7 @@ export const plans = {
       name: 'Developer Plan',
       status: 'ACTIVE',
       description: 'Career plan',
-      shortDescription: 'For small and medium-sized businesses',
+      shortDescription: 'For Individual Developers',
       benefits: [
         '1 Developer',
         'Unlimited events',
@@ -32,7 +32,7 @@ export const plans = {
       name: 'Team Plan',
       status: 'ACTIVE',
       description: 'Team plan',
-      shortDescription: 'For small and medium-sized businesses',
+      shortDescription: 'For Small Teams',
       benefits: [
         '20 Developers',
         'Unlimited events',
@@ -58,7 +58,7 @@ export const plans = {
       name: 'Corporate Plan',
       status: 'ACTIVE',
       description: 'Company plan',
-      shortDescription: 'For small and medium-sized businesses',
+      shortDescription: 'For Large Teams',
       benefits: [
         '>20 Developers',
         'Unlimited events',
@@ -88,7 +88,7 @@ export const plans = {
         name: 'Developer Plan',
         status: 'ACTIVE',
         description: 'Career plan',
-        shortDescription: 'For small and medium-sized businesses',
+        shortDescription: 'For Individual Developers',
         benefits: [
           '1 Developer',
           'Unlimited events',
@@ -114,7 +114,7 @@ export const plans = {
         name: 'Team Plan',
         status: 'ACTIVE',
         description: 'Team plan',
-        shortDescription: 'For small and medium-sized businesses',
+        shortDescription: 'For Small Teams',
         benefits: [
           '20 Developers',
           'Unlimited events',
@@ -140,7 +140,7 @@ export const plans = {
         name: 'Corporate Plan',
         status: 'ACTIVE',
         description: 'Company plan',
-        shortDescription: 'For small and medium-sized businesses',
+        shortDescription: 'For Large Teams',
         benefits: [
           '>20 Developers',
           'Unlimited events',

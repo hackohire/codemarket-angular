@@ -127,7 +127,7 @@ const routes: Routes = [
   },
 
   {
-    path: 'hackohire',
+    path: 'hackathon',
     component: HackohireComponent,
     outlet: 'main',
   },

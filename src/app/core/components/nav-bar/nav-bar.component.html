@@ -89,7 +89,8 @@
       </a>
 
       <!-- All Help Requests -->
-      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', {outlets: {'main': ['team-iq']}}]">
+      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', {outlets: {'main': ['dashboard', 'post-list']}}]"
+      [queryParams]="{type: 'event', all: true}">
         <i style="font-size: 1.7rem !important;" class="vertical-align-middle fal fa-question-circle fa-fw"></i>
         <span [fxHide.xs]="true">Team IQ</span>
       </a>
@@ -102,7 +103,7 @@
       </a>
 
       <!-- All Events -->
-      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', {outlets: {'main': ['hackohire']}}]">
+      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', {outlets: {'main': ['hackathon']}}]">
         <i style="font-size: 1.7rem !important;" class="vertical-align-middle fal fa-laptop-code fa-fw"></i>
         <span [fxHide.xs]="true"> Hackohire</span>
       </a>

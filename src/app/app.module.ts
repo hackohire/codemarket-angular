@@ -14,6 +14,10 @@ import { HackohireComponent } from './read-more/hackohire/hackohire.component';
 import { WellnessComponent } from './read-more/wellness/wellness.component';
 import { SocialImpactComponent } from './read-more/social-impact/social-impact.component';
 import { TeamIqComponent } from './read-more/team-iq/team-iq.component';
+import { DreamJobComponent } from './read-more/dream-job/dream-job.component';
+import { StartupsComponent } from './read-more/startups/startups.component';
+import { LocalBusinessComponent } from './read-more/local-business/local-business.component';
+import { CodingExpertsComponent } from './read-more/coding-experts/coding-experts.component';
 
 
 @NgModule({
@@ -23,7 +27,12 @@ import { TeamIqComponent } from './read-more/team-iq/team-iq.component';
     HackohireComponent,
     WellnessComponent,
     SocialImpactComponent,
-    TeamIqComponent
+    TeamIqComponent,
+    DreamJobComponent,
+    TeamIqComponent,
+    StartupsComponent,
+    LocalBusinessComponent,
+    CodingExpertsComponent
   ],
   imports: [
     BrowserModule,

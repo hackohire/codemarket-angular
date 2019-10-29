@@ -1,130 +1,131 @@
 <!-- Header Section Starts HERE -->
 
 <!-- <section class="hero-area bgimage"> -->
-    <div class="container">
-        <div class="row" style="margin-top: 50px;">
-
-                <div class="col-md-6" style="text-align: center; margin-bottom: 30px;">
-                    <img style="width: 80%" src="./../assets/images/fly720x550.png">
-                </div>
-
-                <div class="col-md-6" style="align-self: center;">
-                    <h6 style="font-weight: 500; margin: 5px; font-size: 2em; font-weight: 700;">FOR SOFWARE DEVELOPERS</h6>
-                    <h6 style="font-weight: 500; margin: 5px; font-size: 4em; font-weight: 700;">TOOLS FOR CAREER GROWTH MANGEMENT</h6>
-                    <button mat-flat-button color="primary" (click)="authService.login()">JOIN</button>
-                </div>
-            </div>
-    <!-- <table><tr>
-    <td  height="550px"><img class="header-image" src="../../assets/images/fly720x550.png"
-        alt="background-image"></td><td style="font-size: 67px; margin: 20px 40px 20px 40px; max-width: 550px; font-weight: 700;">FLY IN YOUR TECH CAREER</td>
-    </tr></table> -->
-</div>
-<!-- </section> -->
-
-<mat-divider style="margin: 50px;"></mat-divider>
-<!-- Header Section Ends HERE -->
-
-<section>
-
-<!-- start container -->
-<div class="container">
-
-    <!-- start row -->
-    <div class="row">
-        <!-- start col-md-12 -->
-        <div class="col-md-12">
-
+        <div class="container">
+                <div class="row" style="margin-top: 50px;">
+        
+                        <div class="col-md-6" style="text-align: center; margin-bottom: 30px;">
+                            <img style="width: 80%" src="./../assets/images/fly720x550.png">
+                        </div>
+        
+                        <div class="col-md-6" style="align-self: center;">
+                            <h6 style="font-weight: 500; margin: 5px; font-size: 2em; font-weight: 700;">FOR SOFWARE DEVELOPERS</h6>
+                            <h6 style="font-weight: 500; margin: 5px; font-size: 4em; font-weight: 700;">TOOLS FOR CAREER GROWTH MANGEMENT</h6>
+                            <button mat-flat-button color="primary" (click)="authService.login()">JOIN</button>
+                        </div>
+                    </div>
+            <!-- <table><tr>
+            <td  height="550px"><img class="header-image" src="../../assets/images/fly720x550.png"
+                alt="background-image"></td><td style="font-size: 67px; margin: 20px 40px 20px 40px; max-width: 550px; font-weight: 700;">FLY IN YOUR TECH CAREER</td>
+            </tr></table> -->
+        </div>
+        <!-- </section> -->
+        
+        <mat-divider style="margin: 50px;"></mat-divider>
+        <!-- Header Section Ends HERE -->
+        
+        <section>
+        
+        <!-- start container -->
+        <div class="container">
+        
+            <!-- start row -->
             <div class="row">
-                <h3 style="font-size: 37px; margin: 20px 40px 20px 40px; max-width: 100%; font-weight: 700; text-align: center;">
-                    UPGRADE TECH SKILLS + TEAM SKILLS
-                </h3>
-                <p style="margin: 0 40px 40px 40px;">On-demand tech-skills upgrade through micro-consulting and on-demand team collaboration and leadersip training.</p>
+                <!-- start col-md-12 -->
+                <div class="col-md-12">
+        
+                    <div class="row">
+                        <h3 style="font-size: 37px; margin: 20px 40px 20px 40px; max-width: 100%; font-weight: 700; text-align: center;">
+                            UPGRADE TECH SKILLS + TEAM SKILLS
+                        </h3>
+                        <p style="margin: 0 40px 40px 40px;">On-demand tech-skills upgrade through micro-consulting and on-demand team collaboration and leadersip training.</p>
+                    </div>
+        
+                    <div class="row" style="margin: 20px; height: 25%;">
+                        <div class="col-md-6">
+                            <img style="height: 50%" src="../../assets/images/techskills.jpg">
+                            <h6 style="font-weight: 500; margin: 10px;">1-1 Connect with Coding Experts</h6>
+                            <p style="margin: 5px;">Technology is in continous change. Quick way to learn is by talking to experts. Upgrade your coding skills by talking to our expert micro-consultants.</p>
+                            <h6 style="font-weight: 50; margin: 10px;"><a [routerLink]="['/', {outlets: {'main': ['code-expert']}}]">Read More</a></h6>
+                            <button mat-flat-button color="primary" onclick="window.location.href = 'https://platform.auth.us-east-1.amazoncognito.com/login?redirect_uri=https%3A%2F%2Fwww.codemarket.io&response_type=code&client_id=6b96cs2pmq0khunn6mth7r48td&identity_provider=COGNITO&scopes=email%2Cprofile%2Copenid&state=OIYjzpfz5tdnJ69W59GXFvo1BNpq647p&code_challenge=OapcaIkzdbuN9OZk0s7ILWqO1Kv8Wa4qIPiIbBgnuPE&code_challenge_method=S256';">JOIN</button>
+                        </div>
+        
+                        <div class="col-md-6">
+                            <img style="height: 50%" src="../../assets/images/collaborate.jpg">
+                            <h6 style="font-weight: 500; margin: 5px;">Team IQ for Frictionless Teams</h6>
+                            <p style="margin: 5px;">Team skills are important to shine as a software developer.Join our weekly team IQ building events to build smooth running, friction-less team  by learning collaboration and leadership skills.  </p>
+                            <h6 style="font-weight: 50; margin: 10px;"><a [routerLink]="['/', {outlets: {'main': ['team-iq']}}]">Read More</a></h6>
+                            <button mat-flat-button color="primary" onclick="window.location.href = 'https://platform.auth.us-east-1.amazoncognito.com/login?redirect_uri=https%3A%2F%2Fwww.codemarket.io&response_type=code&client_id=6b96cs2pmq0khunn6mth7r48td&identity_provider=COGNITO&scopes=email%2Cprofile%2Copenid&state=OIYjzpfz5tdnJ69W59GXFvo1BNpq647p&code_challenge=OapcaIkzdbuN9OZk0s7ILWqO1Kv8Wa4qIPiIbBgnuPE&code_challenge_method=S256';">JOIN</button>
+                        </div>
+                    </div>
+                    <div class="row" style="margin: 20px; height: 25%;">
+                        <div class="col-md-6">
+                            <img style="height: 50%" src="../../assets/images/climbing.jpg">
+                            <h6 style="font-weight: 500; margin: 10px;">Work with Coaches to Land your Dream Job</h6>
+                            <p style="margin: 5px;">You have a dream job, the best way to get that dream job is to work with those that are already in those jobs as your coach.</p>
+                            <h6 style="font-weight: 50; margin: 10px;"><a [routerLink]="['/', {outlets: {'main': ['dreamjob']}}]">Read More</a></h6>
+                            <button mat-flat-button color="primary" onclick="window.location.href = 'https://platform.auth.us-east-1.amazoncognito.com/login?redirect_uri=https%3A%2F%2Fwww.codemarket.io&response_type=code&client_id=6b96cs2pmq0khunn6mth7r48td&identity_provider=COGNITO&scopes=email%2Cprofile%2Copenid&state=OIYjzpfz5tdnJ69W59GXFvo1BNpq647p&code_challenge=OapcaIkzdbuN9OZk0s7ILWqO1Kv8Wa4qIPiIbBgnuPE&code_challenge_method=S256';">JOIN</button>
+                        </div>
+        
+                        <div class="col-md-6">
+                            <img style="height: 50%" src="../../assets/images/hack.jpg">
+                            <h6 style="font-weight: 500; margin: 5px;">Attend Hackathons, Win Prizes, Get Jobs</h6>
+                            <p style="margin: 5px;">Interviews need not be boaring and lonely. Attend hackathons, where you can not only earn prices but also land jobs that push you forward in your career. </p>
+                            <h6 style="font-weight: 50; margin: 10px;"><a [routerLink]="['/', {outlets: {'main': ['hackathon']}}]">Read More</a></h6>
+                            <button mat-flat-button color="primary" onclick="window.location.href = 'https://platform.auth.us-east-1.amazoncognito.com/login?redirect_uri=https%3A%2F%2Fwww.codemarket.io&response_type=code&client_id=6b96cs2pmq0khunn6mth7r48td&identity_provider=COGNITO&scopes=email%2Cprofile%2Copenid&state=OIYjzpfz5tdnJ69W59GXFvo1BNpq647p&code_challenge=OapcaIkzdbuN9OZk0s7ILWqO1Kv8Wa4qIPiIbBgnuPE&code_challenge_method=S256';">JOIN</button>
+                        </div>
+                    </div>
+                    <div class="row" style="margin: 20px; height: 25%;">
+                        <div class="col-md-6">
+                            <img style="height: 50%" src="../../assets/images/wellness.jpg">
+                            <h6 style="font-weight: 500; margin: 10px;">Wellness for Sofwtare Developers</h6>
+                            <p style="margin: 5px;">Sortware engineering is a Sport. Being in good shape both physically, mentally and emotional will give you the edge you need to leapfrog in your career.</p>
+                            <h6 style="font-weight: 50; margin: 10px;"><a [routerLink]="['/', {outlets: {'main': ['wellness']}}]">Read More</a></h6>
+                            <button mat-flat-button color="primary" onclick="window.location.href = 'https://platform.auth.us-east-1.amazoncognito.com/login?redirect_uri=https%3A%2F%2Fwww.codemarket.io&response_type=code&client_id=6b96cs2pmq0khunn6mth7r48td&identity_provider=COGNITO&scopes=email%2Cprofile%2Copenid&state=OIYjzpfz5tdnJ69W59GXFvo1BNpq647p&code_challenge=OapcaIkzdbuN9OZk0s7ILWqO1Kv8Wa4qIPiIbBgnuPE&code_challenge_method=S256';">JOIN</button>
+                        </div>
+        
+                        <div class="col-md-6">
+                            <img style="height: 50%" src="../../assets/images/social.jpg">
+                            <h6 style="font-weight: 500; margin: 5px;">Social Impact With Code</h6>
+                            <p style="margin: 5px;">You can change the world to be a better place with your coding skills. Connect with non-profits that are solving problems that you are passionate about and make a difference.</p>
+                            <h6 style="font-weight: 50; margin: 10px;"><a [routerLink]="['/', {outlets: {'main': ['social-impact']}}]">Read More</a></h6>
+                            <button mat-flat-button color="primary" onclick="window.location.href = 'https://platform.auth.us-east-1.amazoncognito.com/login?redirect_uri=https%3A%2F%2Fwww.codemarket.io&response_type=code&client_id=6b96cs2pmq0khunn6mth7r48td&identity_provider=COGNITO&scopes=email%2Cprofile%2Copenid&state=OIYjzpfz5tdnJ69W59GXFvo1BNpq647p&code_challenge=OapcaIkzdbuN9OZk0s7ILWqO1Kv8Wa4qIPiIbBgnuPE&code_challenge_method=S256';">JOIN</button>
+                        </div>
+                    </div>
+                    <div class="row" style="margin: 20px; height: 25%;">
+                        <div class="col-md-6">
+                            <img style="height: 50%" src="../../assets/images/startup.jpg">
+                            <h6 style="font-weight: 500; margin: 10px;">Startups</h6>
+                            <p style="margin: 5px;">Get connected with Startups that are pushing the world forward with innovative ideas.</p>
+                            <h6 style="font-weight: 50; margin: 10px;"><a [routerLink]="['/', {outlets: {'main': ['startups']}}]">Read More</a></h6>
+                            <button mat-flat-button color="primary" onclick="window.location.href = 'https://platform.auth.us-east-1.amazoncognito.com/login?redirect_uri=https%3A%2F%2Fwww.codemarket.io&response_type=code&client_id=6b96cs2pmq0khunn6mth7r48td&identity_provider=COGNITO&scopes=email%2Cprofile%2Copenid&state=OIYjzpfz5tdnJ69W59GXFvo1BNpq647p&code_challenge=OapcaIkzdbuN9OZk0s7ILWqO1Kv8Wa4qIPiIbBgnuPE&code_challenge_method=S256';">JOIN</button>
+                        </div>
+        
+                        <div class="col-md-6">
+                            <img style="height: 50%" src="../../assets/images/local-biz.jpg">
+                            <h6 style="font-weight: 500; margin: 5px;">Local Business</h6>
+                            <p style="margin: 5px;">Local business are the primary drivers of our economy. Connect with the local business that you love and help them with your coding skills. </p>
+                            <h6 style="font-weight: 50; margin: 10px;"><a [routerLink]="['/', {outlets: {'main': ['local-business']}}]">Read More</a></h6>
+                            <button mat-flat-button color="primary" onclick="window.location.href = 'https://platform.auth.us-east-1.amazoncognito.com/login?redirect_uri=https%3A%2F%2Fwww.codemarket.io&response_type=code&client_id=6b96cs2pmq0khunn6mth7r48td&identity_provider=COGNITO&scopes=email%2Cprofile%2Copenid&state=OIYjzpfz5tdnJ69W59GXFvo1BNpq647p&code_challenge=OapcaIkzdbuN9OZk0s7ILWqO1Kv8Wa4qIPiIbBgnuPE&code_challenge_method=S256';">JOIN</button>
+                        </div>
+                    </div>
+                    <!-- <div class="row" style="margin-left: 40px;">
+                        <button mat-stroked-button color="primary">Sell</button>
+                    </div> -->
+                </div>
+        
+                <!-- end /.col-md-12 -->
             </div>
-
-            <div class="row" style="margin: 20px; height: 25%;">
-                <div class="col-md-6">
-                    <img style="height: 50%" src="../../assets/images/techskills.jpg">
-                    <h6 style="font-weight: 500; margin: 10px;">1-1 Connect with Coding Experts</h6>
-                    <p style="margin: 5px;">Technology is in continous change. Quick way to learn is by talking to experts. Upgrade your coding skills by talking to our expert micro-consultants.</p>
-                    <h6 style="font-weight: 50; margin: 10px;"><a href="">Read More</a></h6>
-                    <button mat-flat-button color="primary" onclick="window.location.href = 'https://platform.auth.us-east-1.amazoncognito.com/login?redirect_uri=https%3A%2F%2Fwww.codemarket.io&response_type=code&client_id=6b96cs2pmq0khunn6mth7r48td&identity_provider=COGNITO&scopes=email%2Cprofile%2Copenid&state=OIYjzpfz5tdnJ69W59GXFvo1BNpq647p&code_challenge=OapcaIkzdbuN9OZk0s7ILWqO1Kv8Wa4qIPiIbBgnuPE&code_challenge_method=S256';">JOIN</button>
-                </div>
-
-                <div class="col-md-6">
-                    <img style="height: 50%" src="../../assets/images/collaborate.jpg">
-                    <h6 style="font-weight: 500; margin: 5px;">Team IQ for Frictionless Teams</h6>
-                    <p style="margin: 5px;">Team skills are important to shine as a software developer.Join our weekly team IQ building events to build smooth running, friction-less team  by learning collaboration and leadership skills.  </p>
-                    <h6 style="font-weight: 50; margin: 10px;"><a href="">Read More</a></h6>
-                    <button mat-flat-button color="primary" onclick="window.location.href = 'https://platform.auth.us-east-1.amazoncognito.com/login?redirect_uri=https%3A%2F%2Fwww.codemarket.io&response_type=code&client_id=6b96cs2pmq0khunn6mth7r48td&identity_provider=COGNITO&scopes=email%2Cprofile%2Copenid&state=OIYjzpfz5tdnJ69W59GXFvo1BNpq647p&code_challenge=OapcaIkzdbuN9OZk0s7ILWqO1Kv8Wa4qIPiIbBgnuPE&code_challenge_method=S256';">JOIN</button>
-                </div>
-            </div>
-            <div class="row" style="margin: 20px; height: 25%;">
-                <div class="col-md-6">
-                    <img style="height: 50%" src="../../assets/images/climbing.jpg">
-                    <h6 style="font-weight: 500; margin: 10px;">Work with Coaches to Land your Dream Job</h6>
-                    <p style="margin: 5px;">You have a dream job, the best way to get that dream job is to work with those that are already in those jobs as your coach.</p>
-                    <h6 style="font-weight: 50; margin: 10px;"><a href="">Read More</a></h6>
-                    <button mat-flat-button color="primary" onclick="window.location.href = 'https://platform.auth.us-east-1.amazoncognito.com/login?redirect_uri=https%3A%2F%2Fwww.codemarket.io&response_type=code&client_id=6b96cs2pmq0khunn6mth7r48td&identity_provider=COGNITO&scopes=email%2Cprofile%2Copenid&state=OIYjzpfz5tdnJ69W59GXFvo1BNpq647p&code_challenge=OapcaIkzdbuN9OZk0s7ILWqO1Kv8Wa4qIPiIbBgnuPE&code_challenge_method=S256';">JOIN</button>
-                </div>
-
-                <div class="col-md-6">
-                    <img style="height: 50%" src="../../assets/images/hack.jpg">
-                    <h6 style="font-weight: 500; margin: 5px;">Attend Hackathons, Win Prizes, Get Jobs</h6>
-                    <p style="margin: 5px;">Interviews need not be boaring and lonely. Attend hackathons, where you can not only earn prices but also land jobs that push you forward in your career. </p>
-                    <h6 style="font-weight: 50; margin: 10px;"><a href="">Read More</a></h6>
-                    <button mat-flat-button color="primary" onclick="window.location.href = 'https://platform.auth.us-east-1.amazoncognito.com/login?redirect_uri=https%3A%2F%2Fwww.codemarket.io&response_type=code&client_id=6b96cs2pmq0khunn6mth7r48td&identity_provider=COGNITO&scopes=email%2Cprofile%2Copenid&state=OIYjzpfz5tdnJ69W59GXFvo1BNpq647p&code_challenge=OapcaIkzdbuN9OZk0s7ILWqO1Kv8Wa4qIPiIbBgnuPE&code_challenge_method=S256';">JOIN</button>
-                </div>
-            </div>
-            <div class="row" style="margin: 20px; height: 25%;">
-                <div class="col-md-6">
-                    <img style="height: 50%" src="../../assets/images/wellness.jpg">
-                    <h6 style="font-weight: 500; margin: 10px;">Wellness for Sofwtare Developers</h6>
-                    <p style="margin: 5px;">Sortware engineering is a Sport. Being in good shape both physically, mentally and emotional will give you the edge you need to leapfrog in your career.</p>
-                    <h6 style="font-weight: 50; margin: 10px;"><a href="">Read More</a></h6>
-                    <button mat-flat-button color="primary" onclick="window.location.href = 'https://platform.auth.us-east-1.amazoncognito.com/login?redirect_uri=https%3A%2F%2Fwww.codemarket.io&response_type=code&client_id=6b96cs2pmq0khunn6mth7r48td&identity_provider=COGNITO&scopes=email%2Cprofile%2Copenid&state=OIYjzpfz5tdnJ69W59GXFvo1BNpq647p&code_challenge=OapcaIkzdbuN9OZk0s7ILWqO1Kv8Wa4qIPiIbBgnuPE&code_challenge_method=S256';">JOIN</button>
-                </div>
-
-                <div class="col-md-6">
-                    <img style="height: 50%" src="../../assets/images/social.jpg">
-                    <h6 style="font-weight: 500; margin: 5px;">Social Impact With Code</h6>
-                    <p style="margin: 5px;">You can change the world to be a better place with your coding skills. Connect with non-profits that are solving problems that you are passionate about and make a difference.</p>
-                    <h6 style="font-weight: 50; margin: 10px;"><a href="">Read More</a></h6>
-                    <button mat-flat-button color="primary" onclick="window.location.href = 'https://platform.auth.us-east-1.amazoncognito.com/login?redirect_uri=https%3A%2F%2Fwww.codemarket.io&response_type=code&client_id=6b96cs2pmq0khunn6mth7r48td&identity_provider=COGNITO&scopes=email%2Cprofile%2Copenid&state=OIYjzpfz5tdnJ69W59GXFvo1BNpq647p&code_challenge=OapcaIkzdbuN9OZk0s7ILWqO1Kv8Wa4qIPiIbBgnuPE&code_challenge_method=S256';">JOIN</button>
-                </div>
-            </div>
-            <div class="row" style="margin: 20px; height: 25%;">
-                <div class="col-md-6">
-                    <img style="height: 50%" src="../../assets/images/startup.jpg">
-                    <h6 style="font-weight: 500; margin: 10px;">Startups</h6>
-                    <p style="margin: 5px;">Get connected with Startups that are pushing the world forward with innovative ideas.</p>
-                    <h6 style="font-weight: 50; margin: 10px;"><a href="">Read More</a></h6>
-                    <button mat-flat-button color="primary" onclick="window.location.href = 'https://platform.auth.us-east-1.amazoncognito.com/login?redirect_uri=https%3A%2F%2Fwww.codemarket.io&response_type=code&client_id=6b96cs2pmq0khunn6mth7r48td&identity_provider=COGNITO&scopes=email%2Cprofile%2Copenid&state=OIYjzpfz5tdnJ69W59GXFvo1BNpq647p&code_challenge=OapcaIkzdbuN9OZk0s7ILWqO1Kv8Wa4qIPiIbBgnuPE&code_challenge_method=S256';">JOIN</button>
-                </div>
-
-                <div class="col-md-6">
-                    <img style="height: 50%" src="../../assets/images/local-biz.jpg">
-                    <h6 style="font-weight: 500; margin: 5px;">Local Business</h6>
-                    <p style="margin: 5px;">Local business are the primary drivers of our economy. Connect with the lcoal business that you love and help them with your coding skills. </p>
-                    <h6 style="font-weight: 50; margin: 10px;"><a href="">Read More</a></h6>
-                    <button mat-flat-button color="primary" onclick="window.location.href = 'https://platform.auth.us-east-1.amazoncognito.com/login?redirect_uri=https%3A%2F%2Fwww.codemarket.io&response_type=code&client_id=6b96cs2pmq0khunn6mth7r48td&identity_provider=COGNITO&scopes=email%2Cprofile%2Copenid&state=OIYjzpfz5tdnJ69W59GXFvo1BNpq647p&code_challenge=OapcaIkzdbuN9OZk0s7ILWqO1Kv8Wa4qIPiIbBgnuPE&code_challenge_method=S256';">JOIN</button>
-                </div>
-            </div>
-            <!-- <div class="row" style="margin-left: 40px;">
-                <button mat-stroked-button color="primary">Sell</button>
-            </div> -->
+        
         </div>
-
-        <!-- end /.col-md-12 -->
-    </div>
-
-</div>
-</section>
-
-<swal #successInvitationAccept title="Congratulations!" type="success" [showConfirmButton]="false">
-        <div *swalPartial class="alert alert-info">
-            <h4>You have accepted Invitation Successfully</h4>
-            <p></p>
-            <a class="btn btn--sm btn--round"
-            [routerLink]="['/', {outlets: {'main': ['dashboard', 'post-list']}}]" [queryParams]="{type: 'event', all: true}">Events</a>
-        </div>
-</swal>
+        </section>
+        
+        <swal #successInvitationAccept title="Congratulations!" type="success" [showConfirmButton]="false">
+                <div *swalPartial class="alert alert-info">
+                    <h4>You have accepted Invitation Successfully</h4>
+                    <p></p>
+                    <a class="btn btn--sm btn--round"
+                    [routerLink]="['/', {outlets: {'main': ['dashboard', 'post-list']}}]" [queryParams]="{type: 'event', all: true}">Events</a>
+                </div>
+        </swal>
+        

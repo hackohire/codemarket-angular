@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './shared/guards/auth.guard';
+import { HackohireComponent } from './hackohire/hackohire.component';
+import { SocialImpactComponent } from './social-impact/social-impact.component';
+import { WellnessComponent } from './wellness/wellness.component';
 
 const routes: Routes = [
   {
@@ -115,7 +118,24 @@ const routes: Routes = [
     path: 'membership',
     loadChildren: () => import('./membership/membership.module').then(module => module.MembershipModule),
     outlet: 'main',
-    // canLoad: [AuthGuard]
+  },
+
+  {
+    path: 'hackohire',
+    component: HackohireComponent,
+    outlet: 'main',
+  },
+
+  {
+    path: 'wellness',
+    component: WellnessComponent,
+    outlet: 'main',
+  },
+
+  {
+    path: 'social-impact',
+    component: SocialImpactComponent,
+    outlet: 'main',
   },
 
   {

@@ -10,12 +10,18 @@ import { NavBarComponent } from './core/components/nav-bar/nav-bar.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import 'zone.js/dist/zone-patch-rxjs';
 import { GlobalErrorHandler } from './shared/services/chun_error_handling';
+import { HackohireComponent } from './hackohire/hackohire.component';
+import { WellnessComponent } from './wellness/wellness.component';
+import { SocialImpactComponent } from './social-impact/social-impact.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavBarComponent
+    NavBarComponent,
+    HackohireComponent,
+    WellnessComponent,
+    SocialImpactComponent
   ],
   imports: [
     BrowserModule,

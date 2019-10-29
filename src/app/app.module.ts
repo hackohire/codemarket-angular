@@ -18,6 +18,8 @@ import { DreamJobComponent } from './read-more/dream-job/dream-job.component';
 import { StartupsComponent } from './read-more/startups/startups.component';
 import { LocalBusinessComponent } from './read-more/local-business/local-business.component';
 import { CodingExpertsComponent } from './read-more/coding-experts/coding-experts.component';
+import { GovernmentComponent } from './read-more/government/government.component';
+import { DiversityComponent } from './read-more/diversity/diversity.component';
 
 
 @NgModule({
@@ -32,7 +34,9 @@ import { CodingExpertsComponent } from './read-more/coding-experts/coding-expert
     TeamIqComponent,
     StartupsComponent,
     LocalBusinessComponent,
-    CodingExpertsComponent
+    CodingExpertsComponent,
+    GovernmentComponent,
+    DiversityComponent
   ],
   imports: [
     BrowserModule,

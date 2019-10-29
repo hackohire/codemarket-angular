@@ -9,6 +9,8 @@ import { StartupsComponent } from './read-more/startups/startups.component';
 import { DreamJobComponent } from './read-more/dream-job/dream-job.component';
 import { CodingExpertsComponent } from './read-more/coding-experts/coding-experts.component';
 import { LocalBusinessComponent } from './read-more/local-business/local-business.component';
+import { GovernmentComponent } from './read-more/government/government.component';
+import { DiversityComponent } from './read-more/diversity/diversity.component';
 
 const routes: Routes = [
   {
@@ -171,6 +173,18 @@ const routes: Routes = [
   {
     path: 'local-business',
     component: LocalBusinessComponent,
+    outlet: 'main',
+  },
+
+  {
+    path: 'government',
+    component: GovernmentComponent,
+    outlet: 'main',
+  },
+
+  {
+    path: 'diversity',
+    component: DiversityComponent,
     outlet: 'main',
   },
 

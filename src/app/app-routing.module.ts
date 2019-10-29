@@ -1,6 +1,14 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './shared/guards/auth.guard';
+import { HackohireComponent } from './read-more/hackohire/hackohire.component';
+import { SocialImpactComponent } from './read-more/social-impact/social-impact.component';
+import { WellnessComponent } from './read-more/wellness/wellness.component';
+import { TeamIqComponent } from './read-more/team-iq/team-iq.component';
+import { StartupsComponent } from './read-more/startups/startups.component';
+import { DreamJobComponent } from './read-more/dream-job/dream-job.component';
+import { CodingExpertsComponent } from './read-more/coding-experts/coding-experts.component';
+import { LocalBusinessComponent } from './read-more/local-business/local-business.component';
 
 const routes: Routes = [
   {
@@ -116,7 +124,54 @@ const routes: Routes = [
     path: 'membership',
     loadChildren: () => import('./membership/membership.module').then(module => module.MembershipModule),
     outlet: 'main',
-    // canLoad: [AuthGuard]
+  },
+
+  {
+    path: 'hackohire',
+    component: HackohireComponent,
+    outlet: 'main',
+  },
+
+  {
+    path: 'wellness',
+    component: WellnessComponent,
+    outlet: 'main',
+  },
+
+  {
+    path: 'social-impact',
+    component: SocialImpactComponent,
+    outlet: 'main',
+  },
+
+  {
+    path: 'team-iq',
+    component: TeamIqComponent,
+    outlet: 'main',
+  },
+
+  {
+    path: 'dreamjob',
+    component: DreamJobComponent,
+    outlet: 'main',
+  },
+
+  {
+    path: 'code-expert',
+    component: CodingExpertsComponent,
+    outlet: 'main',
+  },
+
+  {
+    path: 'startups',
+    component: StartupsComponent,
+    outlet: 'main',
+  },
+
+  {
+    path: 'local-business',
+    component: LocalBusinessComponent,
+    outlet: 'main',
   },
 
   {

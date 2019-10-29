@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BreadCumb } from '../shared/models/bredcumb.model';
+import { BreadCumb } from '../../shared/models/bredcumb.model';
 
 @Component({
   selector: 'app-social-impact',

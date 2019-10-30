@@ -141,7 +141,7 @@
 
                 <div class="row" style="margin: 20px; height: 25%;">
                     <div class="col-md-6">
-                        <img style="height: 50%" src="../../assets/images/startup.jpg">
+                        <img style="height: 50%" src="../../assets/images/government.jpg">
                         <h6 style="font-weight: 500; margin: 10px;">Government</h6>
                         <p style="margin: 5px;">Get connected with Startups that are pushing the world forward with
                             innovative ideas.</p>
@@ -152,10 +152,31 @@
                     </div>
 
                     <div class="col-md-6">
-                        <img style="height: 50%" src="../../assets/images/local-biz.jpg">
+                        <img style="height: 50%" src="../../assets/images/diversity.jpg">
                         <h6 style="font-weight: 500; margin: 5px;">Diversity</h6>
                         <p style="margin: 5px;">Local business are the primary drivers of our economy. Connect with the
                             local business that you love and help them with your coding skills. </p>
+                        <h6 style="font-weight: 50; margin: 10px;"><a
+                                [routerLink]="['/', {outlets: {'main': ['diversity']}}]">Read More</a></h6>
+                        <button mat-flat-button color="primary"
+                            onclick="window.location.href = 'https://platform.auth.us-east-1.amazoncognito.com/login?redirect_uri=https%3A%2F%2Fwww.codemarket.io&response_type=code&client_id=6b96cs2pmq0khunn6mth7r48td&identity_provider=COGNITO&scopes=email%2Cprofile%2Copenid&state=OIYjzpfz5tdnJ69W59GXFvo1BNpq647p&code_challenge=OapcaIkzdbuN9OZk0s7ILWqO1Kv8Wa4qIPiIbBgnuPE&code_challenge_method=S256';">JOIN</button>
+                    </div>
+                </div>
+                <div class="row" style="margin: 20px; height: 25%;">
+                    <div class="col-md-6">
+                        <img style="height: 50%" src="../../assets/images/schools.jpg">
+                        <h6 style="font-weight: 500; margin: 10px;">Schools</h6>
+                        <p style="margin: 5px;">We all agree that our education system needs innovation. Connect with schools to bring the latest innovation to the kids.</p>
+                        <h6 style="font-weight: 50; margin: 10px;"><a
+                                [routerLink]="['/', {outlets: {'main': ['government']}}]">Read More</a></h6>
+                        <button mat-flat-button color="primary"
+                            onclick="window.location.href = 'https://platform.auth.us-east-1.amazoncognito.com/login?redirect_uri=https%3A%2F%2Fwww.codemarket.io&response_type=code&client_id=6b96cs2pmq0khunn6mth7r48td&identity_provider=COGNITO&scopes=email%2Cprofile%2Copenid&state=OIYjzpfz5tdnJ69W59GXFvo1BNpq647p&code_challenge=OapcaIkzdbuN9OZk0s7ILWqO1Kv8Wa4qIPiIbBgnuPE&code_challenge_method=S256';">JOIN</button>
+                    </div>
+
+                    <div class="col-md-6">
+                        <img style="height: 50%" src="../../assets/images/money.jpg">
+                        <h6 style="font-weight: 500; margin: 5px;">Money IQ</h6>
+                        <p style="margin: 5px;">Finances add stress. Brining innovation to finances. </p>
                         <h6 style="font-weight: 50; margin: 10px;"><a
                                 [routerLink]="['/', {outlets: {'main': ['diversity']}}]">Read More</a></h6>
                         <button mat-flat-button color="primary"

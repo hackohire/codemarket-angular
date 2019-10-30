@@ -8,6 +8,7 @@ import { selectAllProductsList } from '../selectors/product.selectors';
 import { of } from 'rxjs';
 import { selectCartProductList } from '../selectors/cart.selectors';
 import { SellingProductsService } from 'src/app/selling/selling-products.service';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class CartEffects {
@@ -36,7 +37,8 @@ export class CartEffects {
             return this.sellingService.addToCart(id);
         }),
         map(cartItems => cartItems && cartItems.length ? cartItems.map(i => i.referenceId) : []),
-        switchMap((cartItems) => [UpdateCartProductList({cartItems}), UpdateCartTotal({cartItems})])
+        switchMap((cartItems) => [UpdateCartProductList({cartItems}), UpdateCartTotal({cartItems})]),
+        tap(() => this.router.navigate(['/', { outlets: { 'main': ['cart'] } }]))
     );
 
     @Effect()
@@ -91,7 +93,8 @@ export class CartEffects {
     constructor(
         private actions$: Actions,
         private _store: Store<AppState>,
-        private sellingService: SellingProductsService
+        private sellingService: SellingProductsService,
+        private router: Router
     ) {
 
     }

@@ -20,6 +20,7 @@ import { LocalBusinessComponent } from './read-more/local-business/local-busines
 import { CodingExpertsComponent } from './read-more/coding-experts/coding-experts.component';
 import { GovernmentComponent } from './read-more/government/government.component';
 import { DiversityComponent } from './read-more/diversity/diversity.component';
+import { AboutUsComponent } from './about-us/about-us.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { DiversityComponent } from './read-more/diversity/diversity.component';
     LocalBusinessComponent,
     CodingExpertsComponent,
     GovernmentComponent,
-    DiversityComponent
+    DiversityComponent,
+    AboutUsComponent
   ],
   imports: [
     BrowserModule,

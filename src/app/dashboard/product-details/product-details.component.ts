@@ -153,8 +153,12 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     return new Date(+d);
   }
 
-  addToCart(product: Product) {
-    this.store.dispatch(AddToCart({ productId: product._id }));
+  async addToCart(product: Product) {
+    if (await !this.authService.loggedInUser) {
+      await this.authService.checkIfUserIsLoggedIn(true);
+    } else {
+      this.store.dispatch(AddToCart({ productId: product._id }));
+    }
   }
 
   addComment() {

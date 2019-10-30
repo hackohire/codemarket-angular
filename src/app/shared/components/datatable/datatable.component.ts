@@ -67,7 +67,7 @@ export class DatatableComponent implements OnInit, OnChanges, AfterViewInit {
           if (this.pagination) {
             this.getAllPosts.emit({
               pageNumber: this.paginator.pageIndex + 1,
-              limit: 10,
+              limit: 25,
               sort: {
                 field: this.sort.active,
                 order: this.sort.direction

@@ -83,27 +83,27 @@
 
       <!-- Search -->
       <a mat-button routerLinkActive="mat-primary" (click)="openSearchDialog()">
-        <i style="font-size: 1.5rem !important;" class="vertical-align-middle fal fa-search fa-fw"></i>
+        <i style="font-size: 1.5rem !important;" class="vertical-align-middle fad fa-search fa-fw"></i>
         <div class="line-height-initial" [fxHide.xs]="true"> Search</div>
       </a>
 
       <!-- All Bugfixes -->
       <a mat-button routerLinkActive="mat-primary"
         [routerLink]="['/', {outlets: {'main': ['dashboard', 'bugfixes-all']}}]">
-        <i style="font-size: 1.7rem !important;" class="vertical-align-middle fal fa-lightbulb-dollar fa-fw"></i>
+        <i style="font-size: 1.7rem !important;" class="vertical-align-middle fad fa-lightbulb-dollar fa-fw"></i>
         <div class="line-height-initial" [fxHide.xs]="true">Code Experts</div>
       </a>
 
       <!-- Team IQ -->
       <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', {outlets: {'main': ['dashboard', 'post-list']}}]"
         [queryParams]="{type: 'event', all: true}">
-        <i style="font-size: 1.7rem !important;" class="vertical-align-middle fal fa-question-circle fa-fw"></i>
+        <i style="font-size: 1.7rem !important;" class="vertical-align-middle fad fa-question-circle fa-fw"></i>
         <div class="line-height-initial" [fxHide.xs]="true">Team IQ</div>
       </a>
 
       <!-- All Events -->
       <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', {outlets: {'main': ['social-impact']}}]">
-        <i style="font-size: 1.7rem !important;" class="vertical-align-middle fal fa-users-crown fa-fw"></i>
+        <i style="font-size: 1.7rem !important;" class="vertical-align-middle fad fa-users-crown fa-fw"></i>
         <div class="line-height-initial" [fxHide.xs]="true"> Social Impact</div>
       </a>
 
@@ -111,13 +111,13 @@
       <a mat-button routerLinkActive="mat-primary"
         [routerLink]="['/', {outlets: {'main': ['dashboard', 'company-list']}}]"
         [queryParams]="{type: 'startup', all: true}">
-        <i style="font-size: 1.7rem !important;" class="vertical-align-middle fal fa-lightbulb-on fa-fw"></i>
+        <i style="font-size: 1.7rem !important;" class="vertical-align-middle fad fa-lightbulb-on fa-fw"></i>
         <div class="line-height-initial" [fxHide.xs]="true"> Startups</div>
       </a>
 
       <!-- Hackathon -->
       <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', {outlets: {'main': ['hackathon']}}]">
-        <i style="font-size: 1.7rem !important;" class="vertical-align-middle fal fa-laptop-code fa-fw"></i>
+        <i style="font-size: 1.7rem !important;" class="vertical-align-middle fad fa-laptop-code fa-fw"></i>
         <div class="line-height-initial" [fxHide.xs]="true"> Hackathon</div>
       </a>
 
@@ -125,13 +125,13 @@
       <!-- <a mat-button routerLinkActive="mat-primary"
         [routerLink]="['/', {outlets: {'main': ['dashboard', 'dream-job-list']}}]"
         [queryParams]="{type: 'dream-job', all: true}">
-        <i style="font-size: 1.7rem !important;" class="vertical-align-middle fal fa-briefcase fa-fw"></i>
+        <i style="font-size: 1.7rem !important;" class="vertical-align-middle fad fa-briefcase fa-fw"></i>
         <div [fxHide.xs]="true"> Dream Job</div>
       </a> -->
 
       <!-- Wellness -->
       <!-- <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', {outlets: {'main': ['wellness']}}]">
-        <i style="font-size: 1.7rem !important;" class="vertical-align-middle fal fa-heartbeat fa-fw"></i>
+        <i style="font-size: 1.7rem !important;" class="vertical-align-middle fad fa-heartbeat fa-fw"></i>
         <div [fxHide.xs]="true"> Wellness</div>
       </a> -->
 
@@ -139,7 +139,7 @@
       <!-- <a mat-button routerLinkActive="mat-primary"
         [routerLink]="['/', {outlets: {'main': ['dashboard', 'company-list']}}]"
         [queryParams]="{type: 'local-business', all: true}">
-        <i style="font-size: 1.7rem !important;" class="vertical-align-middle fal fa-briefcase fa-fw"></i>
+        <i style="font-size: 1.7rem !important;" class="vertical-align-middle fad fa-briefcase fa-fw"></i>
         <div [fxHide.xs]="true"> Local Business</div>
       </a> -->
 
@@ -148,14 +148,14 @@
       <!-- <a mat-button routerLinkActive="mat-primary"
         [routerLink]="['/', {outlets: {'main': ['dashboard', 'company-list']}}]"
         [queryParams]="{type: 'non-profit', all: true}">
-        <i style="font-size: 1.7rem !important;" class="vertical-align-middle fal fa-hand-holding-heart fa-fw"></i>
+        <i style="font-size: 1.7rem !important;" class="vertical-align-middle fad fa-hand-holding-heart fa-fw"></i>
         <div [fxHide.xs]="true"> Non Profits</div>
       </a> -->
 
       <!-- Login -->
       <ng-template #logIn>
         <a mat-button (click)="login()">
-          <i style="font-size: 1.7rem !important;" class="vertical-align-middle fal fa-user-circle fa-fw"></i>
+          <i style="font-size: 1.7rem !important;" class="vertical-align-middle fad fa-user-circle fa-fw"></i>
           <div class="line-height-initial" [fxHide.xs]="true"> Login/Register</div>
         </a>
       </ng-template>
@@ -164,7 +164,7 @@
       <button style="padding: 7px 0 0 0;" mat-button [matMenuTriggerFor]="userMenu" *ngIf="loggedInUser; else logIn">
         <a mat-button routerLinkActive="mat-primary" *ngIf="loggedInUser;"
           [routerLink]="['/', {outlets: {'main': ['dashboard', 'my-profile']}}]">
-          <i style="font-size: 1.7rem !important;" class="vertical-align-middle fal fa-user-circle fa-fw"></i>
+          <i style="font-size: 1.7rem !important;" class="vertical-align-middle fad fa-user-circle fa-fw"></i>
           <div class="line-height-initial" [fxHide.xs]="true"> My Profile <mat-icon
               style="vertical-align: middle; height: 28px;">keyboard_arrow_down</mat-icon>
           </div>
@@ -190,7 +190,7 @@
 
       <!-- membership -->
       <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', {outlets: {'main': ['membership']}}]">
-        <i style="font-size: 1.7rem !important;" class="vertical-align-middle fal fa-id-card-alt fa-fw"></i>
+        <i style="font-size: 1.7rem !important;" class="vertical-align-middle fad fa-id-card-alt fa-fw"></i>
         <div class="line-height-initial" [fxHide.xs]="true"> Membership</div>
       </a>
 

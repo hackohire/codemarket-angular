@@ -6,7 +6,7 @@
 
             <ng-container *ngSwitchCase="'number'">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
-                <td mat-cell *matCellDef="let element; let i = index;">{{ (i+1) + (paginator?.pageIndex * paginator?.pageSize) }} </td>
+                <td mat-cell *matCellDef="let element; let i = index;">{{(i+1) + (paginator?.pageIndex * paginator?.pageSize)}} </td>
             </ng-container>
 
             <ng-container *ngSwitchCase="'createdBy'">

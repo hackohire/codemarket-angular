@@ -157,6 +157,8 @@ export class AuthService {
     Auth.signOut().then(d => {
       console.log('user has been signed out');
       localStorage.clear();
+      this.store.dispatch(SetLoggedInUser({payload: null}));
+      this.router.navigate(['/'])
     });
   }
 

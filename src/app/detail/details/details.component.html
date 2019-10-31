@@ -125,7 +125,7 @@
                         <!-- end /.author-card -->
 
 
-                        <div class="sidebar-card card-pricing card--pricing2">
+                        <div class="sidebar-card card-pricing card--pricing2" *ngIf="details?.type !== 'dream-job'">
                             <div class="price">
                                 <h1>
                                     <span>{{details?.price | currency}}</span>
@@ -203,6 +203,10 @@
                                 <li *ngIf="details?.address">
                                     <p class="data-label">Address</p>
                                     <p class="info">{{details?.address}}</p>
+                                </li>
+                                <li>
+                                    <p class="data-label">Cities</p>
+                                    <p class="info" *ngFor="let t of details?.cities">{{t?.name + ','}}</p>
                                 </li>
                                 <!-- <li>
                                     <p class="data-label">Version</p>
@@ -488,13 +492,13 @@
             <ul class="media-list thread-list" style="list-style: none;">
                 <h4 class="tab-content-wrapper">Comments:</h4>
                 <li class="single-thread" *ngFor="let c of commentsList">
-    
+
                     <app-comment [comment]="c" [referenceId]="cDetails?._id"></app-comment>
                 </li>
             </ul>
         </div>
     </div>
-    
+
     <div class="comment-form-area">
         <h4>Leave a comment</h4>
         <!-- comment reply -->
@@ -510,7 +514,7 @@
                 <div [formGroup]="commentForm" class="comment-reply-form">
                     <app-editor [id]="'comment-editor'" (output)="updateFormData($event)">
                     </app-editor>
-    
+
                     <button type="button" class="btn btn--sm btn--round" (click)="addComment()">Post
                         Comment</button>
                 </div>

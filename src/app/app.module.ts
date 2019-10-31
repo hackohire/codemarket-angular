@@ -21,6 +21,7 @@ import { CodingExpertsComponent } from './read-more/coding-experts/coding-expert
 import { GovernmentComponent } from './read-more/government/government.component';
 import { DiversityComponent } from './read-more/diversity/diversity.component';
 import { AboutUsComponent } from './about-us/about-us.component';
+import { AmplifyAngularModule } from 'aws-amplify-angular';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import { AboutUsComponent } from './about-us/about-us.component';
     CoreModule,
     SharedModule,
     BrowserAnimationsModule,
-    LayoutModule
+    LayoutModule,
+    AmplifyAngularModule
   ],
   providers: [{provide: ErrorHandler, useClass: GlobalErrorHandler}],
   bootstrap: [AppComponent]

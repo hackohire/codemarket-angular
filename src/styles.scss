@@ -6,9 +6,22 @@
 @import url("assets/fonts/charter/webfonts/stylesheet.css");
 @import "~@ng-select/ng-select/themes/material.theme.css";
 @import '~@ngx-share/button/themes/default/default-theme';
+// @import '~aws-amplify-angular/Theme.css';
 
 html, body { height: 100%; }
 body { margin: 0; }
+
+span {
+  color: inherit !important;
+}
+
+.amplify-form-button {
+  background-color: #0674ec !important;
+}
+
+.amplify-authenticator {
+  background-color: #f5f5f5 !important;
+}
 
 .media-body {
   overflow: auto;

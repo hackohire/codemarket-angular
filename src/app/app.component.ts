@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { AuthService } from './core/services/auth.service';
-import { timer } from 'rxjs';
+import { timer, Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from './core/store/state/app.state';
 import { GetCartProductsList } from './core/store/actions/cart.actions';
@@ -15,8 +15,9 @@ import Peer from 'peerjs';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnDestroy {
   title = 'codemarket';
+  private subscription = new Subscription();
   constructor(
     private authService: AuthService,
     private store: Store<AppState>,
@@ -24,57 +25,60 @@ export class AppComponent {
     private userService: UserService
   ) {
 
-    const source = timer(0, 1200000);
+    const source = timer(1200000);
 
-    const subscribe = source.subscribe(val => {
-      this.authService.checkIfUserIsLoggedIn();
-      console.log('===========================================================', val);
-    });
-
-    this.authService.loggedInUser$.pipe(
-      tap((u) => {
-        if (u) {
-
-          const peer = new Peer(u._id);
-
-          peer.on('open', (id) => {
-            console.log('My peer ID is: ' + id);
-            if (id) {
-              this.userService.peer.next(peer);
-            }
-          });
-
-          peer.on('call', (call) => {
-            console.log(call);
-            // if (true) {
-            this.openDialog(call, peer);
-            // }
-          });
-
-
-          // this.webSocketService.subject.subscribe(async (d: any) => {
-          //   console.log(d);
-          //   if (d && d.userWhoIsCalling && !this.dialog.openDialogs.length) {
-          //     // this.openDialog(d.channel);
-          //   }
-          // });
-          this.store.dispatch(GetCartProductsList());
-        }
+    this.subscription.add(
+      source.subscribe(val => {
+        this.authService.checkIfUserIsLoggedIn();
+        console.log('===========================================================', val);
       })
-    ).subscribe();
+    );
+
+    this.subscription.add(
+      this.authService.loggedInUser$.pipe(
+        tap((u) => {
+          if (u) {
+  
+            const peer = new Peer(u._id);
+  
+            peer.on('open', (id) => {
+              console.log('My peer ID is: ' + id);
+              if (id) {
+                this.userService.peer.next(peer);
+              }
+            });
+  
+            peer.on('call', (call) => {
+              console.log(call);
+              // if (true) {
+              this.openDialog(call, peer);
+              // }
+            });
+  
+  
+            // this.webSocketService.subject.subscribe(async (d: any) => {
+            //   console.log(d);
+            //   if (d && d.userWhoIsCalling && !this.dialog.openDialogs.length) {
+            //     // this.openDialog(d.channel);
+            //   }
+            // });
+            this.store.dispatch(GetCartProductsList());
+          }
+        })
+      ).subscribe()
+    )
 
   }
 
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
   openDialog(call, peer): void {
-    const dialogRef = this.dialog.open(VideoChatComponent, {
+    this.dialog.open(VideoChatComponent, {
       width: '550px',
       data: {isSomeoneCalling: true, call, peer},
       disableClose: true
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      // this.animal = result;
     });
   }
 }

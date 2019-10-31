@@ -11,7 +11,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../store/state/app.state';
 import { Authorise, SetLoggedInUser } from '../store/actions/user.actions';
 import { selectLoggedInUser } from '../store/selectors/user.selector';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { User } from '../../shared/models/user.model';
 import { Router } from '@angular/router';
 
@@ -22,6 +22,7 @@ export class AuthService {
 
   loggedInUser$: Observable<User>;
   loggedInUser: User;
+  openAuthenticationPopover = new BehaviorSubject<boolean>(false)
   constructor(
     private apollo: Apollo,
     private store: Store<AppState>,
@@ -206,7 +207,8 @@ export class AuthService {
                                   this.router.getCurrentNavigation().extractedUrl.toString() : this.router.url;
           console.log(redirectURLTree);
           sessionStorage.setItem('redirectURL', redirectURLTree);
-          this.login();
+          this.openAuthenticationPopover.next(true);
+          // this.login();
         }
         return false;
       });

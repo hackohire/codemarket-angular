@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable, Subscription } from 'rxjs';
 import { map, share } from 'rxjs/operators';
@@ -55,13 +55,12 @@ export class NavBarComponent implements OnInit, OnDestroy {
 
   cartListLength: Observable<number>;
 
-  loggedInUserSubscription: Subscription;
+  private subscription: Subscription = new Subscription();
 
   constructor(
     private breakpointObserver: BreakpointObserver,
     private store: Store<AppState>,
     public authService: AuthService,
-    private ref: ChangeDetectorRef,
     private router: Router,
     private dialog: MatDialog
     ) {
@@ -70,6 +69,13 @@ export class NavBarComponent implements OnInit, OnDestroy {
   /** Load the Login/ Register popover on the page automatically if user is not loggedin */
   async ngAfterViewInit() {
 
+    this.subscription.add(
+      this.authService.openAuthenticationPopover.subscribe(open => {
+        if (open) {
+          this.lr._elementRef.nativeElement.click();
+        }
+      })
+    );
 
     if (await this.authService.checkIfUserIsLoggedIn()) {
 
@@ -81,23 +87,25 @@ export class NavBarComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.loggedInUserSubscription = this.authService.loggedInUser$.subscribe(u => {
-      if (u) {
-        // this.ref.detach();
-        this.loggedInUser = {...u};
-        this.ref.detectChanges();
-      } else {
-        this.loggedInUser = u;
-      }
-
-    });
+    this.subscription.add(
+      this.authService.loggedInUser$.subscribe(u => {
+        if (u) {
+          // this.ref.detach();
+          this.loggedInUser = {...u};
+          // this.ref.detectChanges();
+        } else {
+          this.loggedInUser = u;
+        }
+  
+      })
+    );
 
     this.cartListLength = this.store.select(selectCartListLength);
 
   }
 
   ngOnDestroy() {
-    this.loggedInUserSubscription.unsubscribe();
+    this.subscription.unsubscribe();
   }
 
   login() {
@@ -121,18 +129,8 @@ export class NavBarComponent implements OnInit, OnDestroy {
 
   openSearchDialog(): void {
     const dialogRef = this.dialog.open(SearchComponent, {
-      // width: '430px',
-      // height: '550px',
-      // maxHeight: '700px',
       panelClass: 'no-padding',
-      // data: {plan},
-      
       disableClose: false
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      // this.animal = result;
     });
   }
 }

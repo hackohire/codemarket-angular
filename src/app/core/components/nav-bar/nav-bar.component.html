@@ -122,12 +122,12 @@
       </a>
 
       <!-- Dreamjob -->
-      <!-- <a mat-button routerLinkActive="mat-primary"
+      <a mat-button routerLinkActive="mat-primary"
         [routerLink]="['/', {outlets: {'main': ['dashboard', 'dream-job-list']}}]"
         [queryParams]="{type: 'dream-job', all: true}">
         <i style="font-size: 1.7rem !important;" class="vertical-align-middle fad fa-briefcase fa-fw"></i>
-        <div [fxHide.xs]="true"> Dream Job</div>
-      </a> -->
+        <div class="line-height-initial" [fxHide.xs]="true"> Dream Job</div>
+      </a>
 
       <!-- Wellness -->
       <!-- <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', {outlets: {'main': ['wellness']}}]">
@@ -154,11 +154,17 @@
 
       <!-- Login -->
       <ng-template #logIn>
-        <a mat-button (click)="login()">
+        <a #lr mat-button (click)="login()" [mdePopoverTriggerFor]="authentication" [mdePopoverTargetAt]="lr" mdePopoverTriggerOn="click">
           <i style="font-size: 1.7rem !important;" class="vertical-align-middle fad fa-user-circle fa-fw"></i>
           <div class="line-height-initial" [fxHide.xs]="true"> Login/Register</div>
         </a>
       </ng-template>
+
+      <mde-popover #authentication="mdePopover" [mdePopoverOverlapTrigger]="false" [mdePopoverCloseOnClick]="false"
+        [mdePopoverArrowOffsetX]="58"
+        mdePopoverArrowColor="#FFFFFF">
+        <amplify-authenticator [signUpConfig]="signUpConfig" [usernameAttributes]="'email'"></amplify-authenticator>
+      </mde-popover>
 
       <!-- My Profile -->
       <button style="padding: 7px 0 0 0;" mat-button [matMenuTriggerFor]="userMenu" *ngIf="loggedInUser; else logIn">

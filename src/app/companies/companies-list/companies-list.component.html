@@ -1,4 +1,38 @@
-<app-breadcumb [title]="breadcumb?.title" [path]="breadcumb?.path"></app-breadcumb>
+<!--================================
+        START BREADCRUMB AREA
+=================================-->
+
+<section class="breadcrumb-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="breadcrumb" style="align-items: center;">
+                        <ul>
+                            <li *ngFor="let p of breadcumb?.path; let i = index" [ngClass]="{'active': (path?.length - 1) === i}">
+                                <a [routerLink]="[p?.pathString ? p.pathString : '/']">{{p?.name}}</a>
+                            </li>
+                        </ul>
+    
+                        <a
+                            class="btn btn--sm btn--round menu"
+                            style="color: #0674ec !important; margin-left: auto; background: white;"
+                            [routerLink]="['/', {outlets: {'main': ['company', 'add-company']}}]"
+                            [queryParams]="{type: type}">Add <mat-icon
+                                style="vertical-align: middle;">add</mat-icon>
+                        </a>
+                    </div>
+                    <h1 class="page-title">{{breadcumb?.title}}</h1>
+                </div>
+                <!-- end /.col-md-12 -->
+            </div>
+            <!-- end /.row -->
+        </div>
+        <!-- end /.container -->
+    </section>
+    
+    <!--================================
+                    END BREADCRUMB AREA
+    =================================-->
 
 <div class="container">
     <div class="row">

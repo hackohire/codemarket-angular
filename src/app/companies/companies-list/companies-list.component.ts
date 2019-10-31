@@ -34,6 +34,7 @@ export class CompaniesListComponent implements OnInit {
   all: boolean;
   authorId: string;
   breadcumb: BreadCumb;
+  type: string;
 
 
   userSubsription: Subscription;
@@ -53,24 +54,24 @@ export class CompaniesListComponent implements OnInit {
 
     this.all = JSON.parse(this.activatedRoute.snapshot.queryParams.all);
 
-    const type: string = this.activatedRoute.snapshot.queryParams.type;
+    this.type = this.activatedRoute.snapshot.queryParams.type;
 
     this.breadcumb = {
-      title: 'List of ' + _.startCase(type),
+      title: 'List of ' + _.startCase(this.type),
       path: [
         {
           name: 'Dashboard',
           pathString: '/',
         },
         {
-          name: type
+          name: this.type
         }
       ]
     };
 
     if (this.all) {
       this.displayedColumns = ['number', 'name', 'cities', 'createdAt', 'action'];
-      this.companiesListSubscription = this.companyService.getCompaniesByType(type).subscribe((companies) => {
+      this.companiesListSubscription = this.companyService.getCompaniesByType(this.type).subscribe((companies) => {
         this.dataSource.data = companies;
       })
       this.dataSource.sort = this.sort;
@@ -79,7 +80,7 @@ export class CompaniesListComponent implements OnInit {
       this.companiesListSubscription = this.store.select(selectLoggedInUser).pipe(
         switchMap((u) => {
           if(u) {
-            return this.companyService.getCompaniesByUserIdAndType(u._id, type);
+            return this.companyService.getCompaniesByUserIdAndType(u._id, this.type);
           } else {
             return []
           }

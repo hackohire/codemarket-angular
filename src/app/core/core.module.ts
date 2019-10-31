@@ -20,6 +20,7 @@ import { appReducesrs } from './store/reducers/app.reducers';
 import { SearchComponent } from './components/search/search.component';
 import { RouteReuseStrategy } from '@angular/router';
 import { CustomRouteReuseStategy } from '../shared/services/custom_router_reuse';
+import { AmplifyAngularModule, AmplifyService } from 'aws-amplify-angular';
 
 
 // Injected Token for actionreducermap or combinereducers for build error
@@ -38,7 +39,8 @@ export function clearState(reducer) {
 
 @NgModule({
   declarations: [
-  SearchComponent],
+    SearchComponent
+  ],
   imports: [
     CommonModule,
     ApolloModule,
@@ -56,6 +58,7 @@ export function clearState(reducer) {
     StoreDevtoolsModule.instrument(),
   ],
   providers: [
+    AmplifyService,
     {
       provide: REDUCER_TOKEN,
       useValue: appReducesrs()

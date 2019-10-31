@@ -26,6 +26,8 @@ import { AddPostMenuComponent } from './components/add-post-menu/add-post-menu.c
 import { CompaniesListComponent } from '../companies/companies-list/companies-list.component';
 import { Ng5SliderModule } from 'ng5-slider';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { MdePopoverModule } from '@material-extended/mde';
+
 
 export function hljsLanguages() {
   return [
@@ -56,7 +58,8 @@ export function hljsLanguages() {
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
     Ng5SliderModule,
-    NgSelectModule
+    NgSelectModule,
+    MdePopoverModule
   ],
   exports: [
     BreadcumbComponent,
@@ -80,7 +83,8 @@ export function hljsLanguages() {
     SafePipe,
     Ng5SliderModule,
     NgSelectModule,
-    PaypalSubscriptionDirective
+    PaypalSubscriptionDirective,
+    MdePopoverModule
   ],
   entryComponents: [
     VideoChatComponent

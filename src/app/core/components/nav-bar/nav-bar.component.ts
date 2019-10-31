@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, OnDestroy, ViewChild, ElementRef, AfterViewInit, AfterContentChecked } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, OnDestroy, ViewChild } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable, Subscription } from 'rxjs';
 import { map, share } from 'rxjs/operators';
@@ -10,7 +10,6 @@ import { selectCartListLength } from '../../store/selectors/cart.selectors';
 import { Router } from '@angular/router';
 import { MatDialog, MatAnchor } from '@angular/material';
 import { SearchComponent } from '../search/search.component';
-import { AuthDialogComponent } from '../auth-dialog/auth-dialog.component';
 
 @Component({
   selector: 'app-nav-bar',

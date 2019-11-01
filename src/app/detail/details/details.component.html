@@ -204,7 +204,7 @@
                                     <p class="data-label">Address</p>
                                     <p class="info">{{details?.address}}</p>
                                 </li>
-                                <li>
+                                <li *ngIf="details?.cities && details?.cities?.length">
                                     <p class="data-label">Cities</p>
                                     <p class="info"><span *ngFor="let c of details?.cities; let ei = index;">{{c?.name + (ei === details?.cities?.length - 1 ? '' : ', ' )}}</span></p>
                                 </li>
@@ -216,7 +216,7 @@
                                     <p class="data-label">Category</p>
                                     <p class="info" *ngFor="let t of details?.tags">{{t?.name + ','}}</p>
                                 </li>
-                                <li>
+                                <li *ngIf="details?.support">
                                     <p class="data-label">Support</p>
                                     <p class="info">{{details?.support?.time}} {{ 'Minutes'}}</p>
                                 </li>

@@ -24,7 +24,8 @@
                     <!-- <app-add-post-menu *ngIf="showMenu" [ngStyle]="{'color': color}" style="padding-left: 10px;"></app-add-post-menu> -->
                 </div>
                 <h1 class="page-title">{{title}}</h1>
-                <div style="color: white; padding-top: 8px;">
+
+                <div style="color: white; padding-top: 8px">
                     <h6 *ngIf="eventDate && eventDate?.length">
                         <label style="width: 5%; color: white;">From:</label>
                         <mat-icon style="vertical-align: middle;">date_range</mat-icon>
@@ -34,6 +35,33 @@
                         <label style="width: 5%; color: white;">To:</label>
                         <mat-icon style="vertical-align: middle;">date_range</mat-icon>
                         {{ eventDate[1] | date: 'EEEE, MMMM d, y, h:mm a'}}
+                    </h6>
+
+                    <h6 fxLayout="row" fxLayoutGap="7px" *ngIf="postDetails?.company" style="margin: 0 0 8px 0;">
+                        <strong fxFlex="17" style="color: white;">Position :</strong>
+                        <!-- <mat-icon style="vertical-align: middle;"></mat-icon> -->
+                        {{ postDetails?.jobProfile ? postDetails?.jobProfile : '' }}
+                    </h6>
+
+                    <h6 fxLayout="row" fxLayoutGap="7px" *ngIf="postDetails?.company" style="margin: 0 0 8px 0;">
+                        <strong fxFlex="17" style="color: white;">Company :</strong>
+                        <!-- <mat-icon style="vertical-align: middle;"></mat-icon> -->
+                        {{ postDetails?.company?.name }}
+                    </h6>
+
+                    <h6 fxLayout="row" *ngIf="postDetails?.cities" style="margin: 0 0 8px 0;">
+                        <strong fxFlex="17" style="color: white;">Cities :</strong>
+                        <!-- <mat-icon style="vertical-align: middle;"></mat-icon> -->
+                        <span *ngFor="let c of postDetails?.cities; let ei = index;">{{c?.name + (ei === postDetails?.cities?.length - 1 ? '' : ', ' )}}</span>
+                    </h6>
+
+                    <h6 fxLayout="row" fxLayoutGap="7px" *ngIf="postDetails?.salaryRangeFrom" style="margin: 0 0 8px 0;">
+                        <strong fxFlex="17" style="color: white;">Expected Salary :</strong>
+                        <!-- <mat-icon style="vertical-align: middle;"></mat-icon> -->
+                        <!-- <div fxFlex style="color: white;"> -->
+                            {{(postDetails?.salaryRangeFrom | currency: 'USD' : 'symbol' : '1.0-0') + 'k'}} -
+                            {{ (postDetails?.salaryRangeTo | currency: 'USD' : 'symbol' : '1.0-0') + 'k'}}
+                        <!-- </div> -->
                     </h6>
                 </div>
             </div>

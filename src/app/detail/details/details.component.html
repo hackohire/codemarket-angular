@@ -8,7 +8,7 @@
 
     <app-breadcumb (editPost)="postService?.editPost(details)"
         [showEditPostDetails]="details?.createdBy?._id === authService?.loggedInUser?._id ? true : false"
-        [title]="details?.name" [path]="breadcumb?.path" [eventDate]="details?.dateRange">
+        [title]="details?.name" [path]="breadcumb?.path" [eventDate]="details?.dateRange" [postDetails]="details">
     </app-breadcumb>
 
     <!--================================
@@ -206,7 +206,7 @@
                                 </li>
                                 <li>
                                     <p class="data-label">Cities</p>
-                                    <p class="info" *ngFor="let t of details?.cities">{{t?.name + ','}}</p>
+                                    <p class="info"><span *ngFor="let c of details?.cities; let ei = index;">{{c?.name + (ei === details?.cities?.length - 1 ? '' : ', ' )}}</span></p>
                                 </li>
                                 <!-- <li>
                                     <p class="data-label">Version</p>

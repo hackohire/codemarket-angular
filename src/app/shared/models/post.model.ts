@@ -36,4 +36,5 @@ export interface Post {
     company?: Company & string;
     salaryRangeFrom?: number;
     salaryRangeTo?: number;
+    jobProfile?: string;
 }

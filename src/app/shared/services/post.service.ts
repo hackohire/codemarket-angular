@@ -68,6 +68,7 @@ export class PostService {
       name
       _id
     }
+    jobProfile
 
   }
   ${description}

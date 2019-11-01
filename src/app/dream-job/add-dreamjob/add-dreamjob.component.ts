@@ -143,6 +143,7 @@ export class AddDreamjobComponent implements OnInit {
     this.dreamjobForm = new FormGroup({
       name: new FormControl(i && i.name ? i.name : '', Validators.required),
       description: new FormControl(i && i.description ? i.description : ''),
+      jobProfile: new FormControl(i && i.jobProfile ? i.jobProfile : ''),
       company: new FormControl(i && i.company ? i.company._id : '', Validators.required),
       status: new FormControl(i && i.status ? i.status : PostStatus.Drafted),
       _id: new FormControl(i && i._id ? i._id : ''),

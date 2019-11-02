@@ -5,7 +5,7 @@ import { InviteMembersDialogComponent } from '../invite-members-dialog/invite-me
 import { MatDialog, MatSort, MatTableDataSource } from '@angular/material';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { AuthService } from '../../core/services/auth.service';
-import Swal, { SweetAlertType } from 'sweetalert2';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-membership-list',

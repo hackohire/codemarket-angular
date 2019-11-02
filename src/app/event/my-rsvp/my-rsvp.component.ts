@@ -6,7 +6,7 @@ import { AuthService } from '../../core/services/auth.service';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../core/store/state/app.state';
 import { selectLoggedInUser } from '../../core/store/selectors/user.selector';
-import { map, tap, switchMap } from 'rxjs/operators';
+import { tap, switchMap } from 'rxjs/operators';
 import { MatSort, MatTableDataSource } from '@angular/material';
 
 @Component({

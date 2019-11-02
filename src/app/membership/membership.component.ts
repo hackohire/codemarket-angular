@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MembershipService } from './membership.service';
 import { BreadCumb } from '../shared/models/bredcumb.model';
 import { AuthService } from '../core/services/auth.service';
@@ -7,7 +7,6 @@ import { ActivatedRoute } from '@angular/router';
 import { first } from 'rxjs/internal/operators/first';
 import { HttpClient } from '@angular/common/http';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
-import { GetCartProductsList } from '../core/store/actions/cart.actions';
 import { MatDialog } from '@angular/material';
 import { SubscriptionDialogComponent } from './subscription-dialog/subscription-dialog.component';
 import { SellingProductsService } from '../selling/selling-products.service';

@@ -7,7 +7,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/core/store/state/app.state';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { Subscription, of, Observable } from 'rxjs';
+import { Subscription, of } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap, tap, startWith, map } from 'rxjs/operators';
 import { FormService } from 'src/app/shared/services/form.service';

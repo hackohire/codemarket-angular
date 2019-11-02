@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { MembershipService } from '../membership.service';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
-import Swal, { SweetAlertType } from 'sweetalert2';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-invite-members-dialog',

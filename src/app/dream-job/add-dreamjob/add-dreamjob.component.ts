@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Subscription, of } from 'rxjs';
 import { City } from '../../shared/models/city.model';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';

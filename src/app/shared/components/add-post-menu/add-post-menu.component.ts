@@ -9,7 +9,7 @@ import { appConstants } from '../../constants/app_constants';
 export class AddPostMenuComponent implements OnInit {
   constructor() { }
 
-  icons = appConstants.icons
+  icons = appConstants.icons;
 
   ngOnInit() {
   }

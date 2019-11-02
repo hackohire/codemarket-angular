@@ -170,7 +170,7 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges {
           });
 
           if (this.readOnly) {
-            let elements = document.querySelectorAll('[contenteditable=true]');
+            const elements = document.querySelectorAll('[contenteditable=true]');
             elements.forEach(element => {
               element.setAttribute('contenteditable' , 'false');
             });

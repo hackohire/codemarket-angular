@@ -11,7 +11,7 @@ import { GetPostsByUserIdAndType, GetPostsByType, DeletePost } from '../../core/
 import { selectPostsByUserIdAndType, selectPostsByType } from '../../core/store/selectors/post.selectors';
 import { PostService } from '../../shared/services/post.service';
 import { BreadCumb } from '../../shared/models/bredcumb.model';
-import * as _ from 'lodash';
+import { startCase } from 'lodash';
 import { selectLoggedInUser } from '../../core/store/selectors/user.selector';
 import { SweetalertService } from '../../shared/services/sweetalert.service';
 
@@ -50,7 +50,7 @@ export class DreamjobListComponent implements OnInit {
 
     const type: string = this.activatedRoute.snapshot.queryParams.type;
     this.breadcumb = {
-      title: 'List of ' + _.startCase(type),
+      title: 'List of ' + startCase(type),
       path: [
         {
           name: 'Dashboard',
@@ -78,7 +78,7 @@ export class DreamjobListComponent implements OnInit {
           }
         });
 
-      this.postsListSubscription = this.store.select(selectPostsByUserIdAndType).pipe(
+        this.postsListSubscription = this.store.select(selectPostsByUserIdAndType).pipe(
         map((posts) => {
           if (posts) {
             this.dataSource.data = posts;
@@ -109,7 +109,7 @@ export class DreamjobListComponent implements OnInit {
   deletePost(postId: string) {
     this.sweetAlertService.confirmDelete(() => {
       this.store.dispatch(DeletePost({ postId }));
-    })
+    });
   }
 
 

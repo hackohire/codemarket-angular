@@ -10,11 +10,11 @@ export const cartReducers = createReducer(
     })),
     on(UpdateCartTotalSuccess, (state, {cartTotal}) => ({
         ...state,
-        cartTotal: cartTotal,
+        cartTotal,
     })),
     on(SetPurchasedItemsByUser, (state, {purchasedItems}) => ({
         ...state,
-        purchasedItems: purchasedItems
+        purchasedItems
     })),
 );
 

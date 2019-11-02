@@ -22,7 +22,7 @@ export class AuthService {
 
   loggedInUser$: Observable<User>;
   loggedInUser: User;
-  openAuthenticationPopover = new BehaviorSubject<boolean>(false)
+  openAuthenticationPopover = new BehaviorSubject<boolean>(false);
   constructor(
     private apollo: Apollo,
     private store: Store<AppState>,
@@ -159,7 +159,7 @@ export class AuthService {
       console.log('user has been signed out');
       localStorage.clear();
       this.store.dispatch(SetLoggedInUser({payload: null}));
-      this.router.navigate(['/'])
+      this.router.navigate(['/']);
     });
   }
 

@@ -69,7 +69,7 @@ export class ProductsListComponent implements OnInit, OnDestroy {
     const path = this.activatedRoute.parent.routeConfig.path;
 
     // Checking if authorId is there to see if user is trying to visit somebody else's profile or his own profile(loggedin User's own Profile)
-    this.authorId = this.activatedRoute.parent.snapshot.parent.params['authorId'];
+    this.authorId = this.activatedRoute.parent.snapshot.parent.params.authorId;
 
 
     if (path === 'bugfixes-all') {
@@ -98,7 +98,7 @@ export class ProductsListComponent implements OnInit, OnDestroy {
         this.store.dispatch(GetPostsByUserIdAndType(
           {
             userId: this.authorId,
-            status: status,
+            status,
             postType: PostType.Product
           }));
       } else {
@@ -108,7 +108,7 @@ export class ProductsListComponent implements OnInit, OnDestroy {
             this.store.dispatch(GetPostsByUserIdAndType(
               {
                 userId: this.auth.loggedInUser._id,
-                status: status,
+                status,
                 postType: PostType.Product
               }));
           }
@@ -160,7 +160,7 @@ export class ProductsListComponent implements OnInit, OnDestroy {
   deleteProduct(postId: string) {
     this.sweetAlertService.confirmDelete((e) => {
       this.store.dispatch(DeletePost({ postId }));
-    })
+    });
   }
 
   getListOfUsersWhoPurchased(product: Product) {
@@ -186,7 +186,7 @@ export class ProductsListComponent implements OnInit, OnDestroy {
   }
 
   getAllPosts(event) {
-    console.log(event)
+    console.log(event);
     this.productsListSubscription = this.postService.getAllPosts(event).pipe(
       map((result: any) => {
         if (result && result.posts) {

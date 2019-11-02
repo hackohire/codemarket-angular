@@ -21,7 +21,7 @@ export class CompanyService {
     cities {
       name
       _id
-    }  
+    }
     howCanYouHelp {
       ...Description
     }
@@ -54,7 +54,7 @@ export class CompanyService {
         ${this.companyFileds}
       `,
       variables: {
-        company: company
+        company
       }
     }).pipe(
       map((q: any) => q.data.addCompany)
@@ -73,7 +73,7 @@ export class CompanyService {
           ${this.companyFileds}
         `,
         variables: {
-          company: company
+          company
         }
       }
     ).pipe(
@@ -113,8 +113,8 @@ export class CompanyService {
           ${this.companyFileds}
         `,
         variables: {
-          userId: userId,
-          companyType: companyType
+          userId,
+          companyType
         },
         fetchPolicy: 'no-cache'
       }
@@ -161,7 +161,7 @@ export class CompanyService {
           ${this.companyFileds}
         `,
         variables: {
-          CompanyId: CompanyId
+          CompanyId
         }
       }
     ).pipe(
@@ -180,7 +180,7 @@ export class CompanyService {
           }
         `,
         variables: {
-          companyId: companyId
+          companyId
         }
       }
     ).pipe(
@@ -203,7 +203,7 @@ export class CompanyService {
           }
         `,
         variables: {
-          companyId: companyId
+          companyId
         }
       }
     ).pipe(
@@ -219,7 +219,7 @@ export class CompanyService {
   }
 
   editCompany(company: Company) {
-    this.router.navigate(['/', { outlets: { 'main': ['company', 'edit-company', company._id] } }],
-    {queryParams: {type: company.type}})
+    this.router.navigate(['/', { outlets: { main: ['company', 'edit-company', company._id] } }],
+    {queryParams: {type: company.type}});
   }
 }

@@ -1,18 +1,3 @@
-// import 'clipboard';
-
-// import 'prismjs';
-// import 'prismjs/plugins/toolbar/prism-toolbar';
-// import 'prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard';
-// import 'prismjs/components/prism-css';
-// import 'prismjs/components/prism-javascript';
-// import 'prismjs/components/prism-java';
-// import 'prismjs/components/prism-markup';
-// import 'prismjs/components/prism-typescript';
-// import 'prismjs/components/prism-sass';
-// import 'prismjs/components/prism-scss';
-
-// declare var Prism: any;
-
 /**
  * CodeTool for Editor.js
  *
@@ -276,7 +261,7 @@ export class CodeWithLanguageSelection {
     }
 
     _make(tagName, classNames = null, attributes = {}) {
-        let el = document.createElement(tagName);
+        const el = document.createElement(tagName);
 
         if (Array.isArray(classNames)) {
             el.classList.add(...classNames);
@@ -284,7 +269,7 @@ export class CodeWithLanguageSelection {
             el.classList.add(classNames);
         }
 
-        for (let attrName in attributes) {
+        for (const attrName in attributes) {
             el[attrName] = attributes[attrName];
         }
 

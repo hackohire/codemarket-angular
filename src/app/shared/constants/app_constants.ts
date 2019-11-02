@@ -15,4 +15,4 @@ export const appConstants = {
         [PostType.Goal]: 'bullseye-arrow',
         [PostType.Dreamjob]: 'briefcase'
     }
-}
+};

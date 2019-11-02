@@ -28,7 +28,7 @@ export class DatatableComponent implements OnInit, OnChanges, AfterViewInit {
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
 
   @Output() redirect = new EventEmitter();
-  @Output() getAllPosts = new EventEmitter()
+  @Output() getAllPosts = new EventEmitter();
 
   constructor(
     public authService: AuthService,
@@ -46,7 +46,7 @@ export class DatatableComponent implements OnInit, OnChanges, AfterViewInit {
   ngOnChanges(changes: SimpleChanges) {
     console.log(changes);
     if (changes && changes.length && changes.length.currentValue) {
-      console.log(this.length)
+      console.log(this.length);
     }
   }
 
@@ -60,7 +60,7 @@ export class DatatableComponent implements OnInit, OnChanges, AfterViewInit {
         .pipe(
           startWith({}),
           catchError((e) => {
-            return of(e)
+            return of(e);
           })
         )
         .subscribe(data => {
@@ -74,7 +74,7 @@ export class DatatableComponent implements OnInit, OnChanges, AfterViewInit {
               }
             });
           }
-          console.log(data)
+          console.log(data);
         });
     }
   }
@@ -89,7 +89,7 @@ export class DatatableComponent implements OnInit, OnChanges, AfterViewInit {
           this.dataSource._updateChangeSubscription();
         }
       });
-    })
+    });
   }
 
 }

@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatSort } from '@angular/material';
-import { Company, CompanyTypes } from '../../shared/models/company.model';
+import { Company } from '../../shared/models/company.model';
 import { BreadCumb } from '../../shared/models/bredcumb.model';
 import { ActivatedRoute } from '@angular/router';
 import { SweetalertService } from '../../shared/services/sweetalert.service';
-import _ from 'lodash';
+import { startCase } from 'lodash';
 import { CompanyService } from '../company.service';
 import { Subscription } from 'rxjs';
 import { trigger, state, style, transition, animate } from '@angular/animations';
@@ -57,7 +57,7 @@ export class CompaniesListComponent implements OnInit {
     this.type = this.activatedRoute.snapshot.queryParams.type;
 
     this.breadcumb = {
-      title: 'List of ' + _.startCase(this.type),
+      title: 'List of ' + startCase(this.type),
       path: [
         {
           name: 'Dashboard',
@@ -73,16 +73,16 @@ export class CompaniesListComponent implements OnInit {
       this.displayedColumns = ['number', 'name', 'cities', 'createdAt', 'action'];
       this.companiesListSubscription = this.companyService.getCompaniesByType(this.type).subscribe((companies) => {
         this.dataSource.data = companies;
-      })
+      });
       this.dataSource.sort = this.sort;
-    } else{
+    } else {
       this.displayedColumns = ['number', 'name', 'cities', 'createdAt', 'action'];
       this.companiesListSubscription = this.store.select(selectLoggedInUser).pipe(
         switchMap((u) => {
-          if(u) {
+          if (u) {
             return this.companyService.getCompaniesByUserIdAndType(u._id, this.type);
           } else {
-            return []
+            return [];
           }
         })
       )
@@ -120,8 +120,8 @@ export class CompaniesListComponent implements OnInit {
           // this.length = this.length - 1;
           this.dataSource._updateChangeSubscription();
         }
-      })
-    })
+      });
+    });
   }
 
 }

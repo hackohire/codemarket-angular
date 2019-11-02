@@ -9,7 +9,7 @@ const myRSVPRoutes: Routes = [
     path: '',
     component: MyRsvpComponent
   }
-]
+];
 @NgModule({
   declarations: [MyRsvpComponent],
   imports: [

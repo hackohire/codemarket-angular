@@ -6,7 +6,6 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../core/store/state/app.state';
 import { ProductService } from '../core/services/product.service';
 import { RemoveProductFromCart } from '../core/store/actions/cart.actions';
-import { selectCartTotal } from '../core/store/selectors/cart.selectors';
 
 @Component({
   selector: 'app-cart',

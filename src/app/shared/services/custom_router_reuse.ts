@@ -1,4 +1,4 @@
-import { RouteReuseStrategy, ActivatedRouteSnapshot, DetachedRouteHandle } from "@angular/router";
+import { RouteReuseStrategy, ActivatedRouteSnapshot, DetachedRouteHandle } from '@angular/router';
 
 export class CustomRouteReuseStategy implements RouteReuseStrategy {
 
@@ -21,7 +21,7 @@ export class CustomRouteReuseStategy implements RouteReuseStrategy {
   }
 
   retrieve(route: ActivatedRouteSnapshot): {} {
-    if (!route.routeConfig) return null;
+    if (!route.routeConfig) { return null; }
     return this.handlers[route.routeConfig.path];
   }
 

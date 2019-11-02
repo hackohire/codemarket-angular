@@ -59,7 +59,7 @@ export class MyProfileComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.authorId = this.activatedRoute.snapshot.params['authorId'];
+    this.authorId = this.activatedRoute.snapshot.params.authorId;
 
     // If user is visitng somebody else's profile
     if (this.authorId) {
@@ -100,7 +100,7 @@ export class MyProfileComponent implements OnInit {
           label: 'My RSVP'
         }
       );
-      this.router.navigate(['purchased-items-list'], {relativeTo: this.activatedRoute})
+      this.router.navigate(['purchased-items-list'], {relativeTo: this.activatedRoute});
     } else {
       this.navLinks.push(
         {
@@ -113,7 +113,7 @@ export class MyProfileComponent implements OnInit {
           queryParams: {type: PostType.HelpRequest, all: false}
         },
       );
-      this.router.navigate(['products-list'], {relativeTo: this.activatedRoute})
+      this.router.navigate(['products-list'], {relativeTo: this.activatedRoute});
     }
   }
 

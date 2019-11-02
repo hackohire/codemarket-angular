@@ -62,7 +62,7 @@ export class CommentComponent implements OnInit {
   }
 
   updateFormData(event) {
-    console.log('Update Event Fired From editor', event)
+    console.log('Update Event Fired From editor', event);
     this.replyCommentForm.get('text').setValue(event);
   }
 

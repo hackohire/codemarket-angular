@@ -68,7 +68,7 @@ export class UserService {
       {
         mutation: this.updateUserQuery,
         variables: {
-          'user': u,
+          user: u,
         }
       }
     ).pipe(
@@ -109,7 +109,7 @@ export class UserService {
         }
       `,
       variables: {
-        userId: userId
+        userId
       }
       }
     ).pipe(

@@ -32,7 +32,7 @@ export class LikeDislikeComponent implements OnInit {
 
   likeToggle(referenceId: string, liked: boolean) {
     const likeObj = {
-      referenceId: referenceId,
+      referenceId,
       type: this.type,
       userId: this.authService.loggedInUser._id
     };

@@ -49,11 +49,11 @@ export class DashboardComponent implements OnInit {
     if (params && params.subscriptionId && params.email) {
       this.membershipService.acceptInvitation(params.subscriptionId, params.email).subscribe({
         next: (sub) => {
-          if(sub && sub.subscriptionUsers && sub.subscriptionUsers.length) {
+          if (sub && sub.subscriptionUsers && sub.subscriptionUsers.length) {
             this.successInvitationAccept.show();
           }
         }
-      })
+      });
     }
     // this.store.dispatch(GetAllProducts());
     // this.productsList$ = this.store.select(selectAllProductsList);

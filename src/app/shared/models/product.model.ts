@@ -45,5 +45,6 @@ export interface Product {
     // snippets?: [HighlightResult];
     tags: Tag[];
     support: Support;
+    purchasedBy?: User [];
     // addedToCart?: boolean;
 }

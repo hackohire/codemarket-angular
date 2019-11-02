@@ -18,7 +18,7 @@ export class InviteMembersDialogComponent implements OnInit {
   }
   subscriptionResponse: any;
   @ViewChild('successfulInvitation', { static: false }) successfulInvitation: SwalComponent;
-  
+
   constructor(
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<InviteMembersDialogComponent>,
@@ -44,7 +44,7 @@ export class InviteMembersDialogComponent implements OnInit {
         )
       );
     } else {
-      Swal.fire('Warning!', `You can only add up to ${this.data.subscription.quantity} users`, 'info')
+      Swal.fire('Warning!', `You can only add up to ${this.data.subscription.quantity} users`, 'info');
     }
   }
 
@@ -61,11 +61,11 @@ export class InviteMembersDialogComponent implements OnInit {
           this.successfulInvitation.confirm.subscribe(() => {
             this.dialogRef.close(d);
           });
-          this.successfulInvitation.show()
+          this.successfulInvitation.show();
         }
       }
-    })
+    });
   }
-  
+
 
 }

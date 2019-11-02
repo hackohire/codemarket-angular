@@ -59,7 +59,7 @@ export class FormService {
           }
         `,
         variables: {
-          keyWord: keyWord,
+          keyWord,
           searchCollection
         }
       }
@@ -82,7 +82,7 @@ export class FormService {
           }
         `,
         variables: {
-          keyWord: keyWord
+          keyWord
         }
       }
     ).pipe(

@@ -1,8 +1,5 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
-import { Observable } from 'rxjs';
 import { Product } from 'src/app/shared/models/product.model';
-import { Router } from '@angular/router';
-import { ProductService } from 'src/app/core/services/product.service';
 import { PostService } from 'src/app/shared/services/post.service';
 
 @Component({

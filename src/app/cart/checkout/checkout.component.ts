@@ -3,14 +3,12 @@ import { BreadCumb } from 'src/app/shared/models/bredcumb.model';
 import { Subscription, forkJoin } from 'rxjs';
 import { ProductService } from 'src/app/core/services/product.service';
 import { Product } from 'src/app/shared/models/product.model';
-import * as _ from 'lodash';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/core/store/state/app.state';
 import { tap, map, mergeMap, first } from 'rxjs/operators';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { SellingProductsService } from 'src/app/selling/selling-products.service';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { GetCartProductsList } from 'src/app/core/store/actions/cart.actions';
 import { PostService } from 'src/app/shared/services/post.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
@@ -146,15 +144,15 @@ export class CheckoutComponent implements OnInit, OnDestroy {
       a.purchasedBy = this.authService.loggedInUser._id;
       a.sessionId = this.sessionId;
       a.reference_id = u._id;
-      a.amount = u.price
+      a.amount = u.price;
       return a;
     });
 
-    localStorage.setItem('transaction', JSON.stringify(transaction))
+    localStorage.setItem('transaction', JSON.stringify(transaction));
   }
 
   addTrnsaction() {
-    const transaction = JSON.parse(localStorage.getItem('transaction'))
+    const transaction = JSON.parse(localStorage.getItem('transaction'));
 
     if (transaction) {
       transaction.sessionId = this.sessionId;
@@ -176,11 +174,11 @@ export class CheckoutComponent implements OnInit, OnDestroy {
 
   redirectToCheckout() {
     let idSring = '';
-    this.cartProductsList.forEach((p, i) => idSring = idSring + p._id + (i < this.cartProductsList.length - 1) ? ',' : '')
+    this.cartProductsList.forEach((p, i) => idSring = idSring + p._id + (i < this.cartProductsList.length - 1) ? ',' : '');
     const session = {
       payment_method_types: ['card'],
       line_items: this.items,
-      success_url: this.DOMAIN + "?session_id={CHECKOUT_SESSION_ID}",
+      success_url: this.DOMAIN + '?session_id={CHECKOUT_SESSION_ID}',
       cancel_url: this.DOMAIN,
       client_reference_id: this.authService.loggedInUser._id,
       customer_email: this.authService.loggedInUser.email,
@@ -196,13 +194,13 @@ export class CheckoutComponent implements OnInit, OnDestroy {
         // available to this file, so you can provide it as parameter here
         // instead of the {{CHECKOUT_SESSION_ID}} placeholder.
         sessionId: d.session.id
-      }).then(function (result) {
+      }).then(function(result) {
         console.log(result);
         // If `redirectToCheckout` fails due to a browser or network
         // error, display the localized error message to your customer
         // using `result.error.message`.
       });
-    })
+    });
   }
 
 }

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { productConstants } from 'src/app/shared/constants/product_constants';
-import { Product, Tag } from 'src/app/shared/models/product.model';
+import { Product } from 'src/app/shared/models/product.model';
 import { Observable } from 'rxjs/internal/Observable';
 import { map } from 'rxjs/internal/operators/map';
 import { Store } from '@ngrx/store';
@@ -12,7 +12,7 @@ import { switchMap } from 'rxjs/internal/operators/switchMap';
 import { of } from 'rxjs/internal/observable/of';
 import { selectAllProductsList } from '../store/selectors/product.selectors';
 import { Router } from '@angular/router';
-import * as _ from 'lodash';
+import { intersectionBy } from 'lodash';
 import { withLatestFrom } from 'rxjs/operators';
 
 @Injectable({
@@ -134,7 +134,7 @@ export class ProductService {
           return obj;
         });
 
-        const productInCart = _.intersectionBy(products, mappedIdsArray, '_id');
+        const productInCart = intersectionBy(products, mappedIdsArray, '_id');
         return productInCart && productInCart.length ? productInCart : [];
       })
     );
@@ -152,8 +152,8 @@ export class ProductService {
           }
         `,
         variables: {
-          like: like,
-          liked: liked
+          like,
+          liked
         }
       }
     ).pipe(
@@ -202,7 +202,7 @@ export class ProductService {
           }
         `,
         variables: {
-          productId: productId
+          productId
         },
         fetchPolicy: 'no-cache'
       }

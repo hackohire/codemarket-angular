@@ -17,7 +17,7 @@ import { PostType } from '../../shared/models/post-types.enum';
 import { PostStatus } from '../../shared/models/poststatus.enum';
 import { Tag } from '../../shared/models/product.model';
 import { FormService } from '../../shared/services/form.service';
-;
+
 
 
 
@@ -75,7 +75,7 @@ export class AddGoalComponent implements OnInit {
 
   @ViewChild('searchInput', {static: false}) searchInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto', {static: false}) matAutocomplete: MatAutocomplete;
-  
+
   constructor(
     private authService: AuthService,
     private store: Store<AppState>,
@@ -157,7 +157,7 @@ export class AddGoalComponent implements OnInit {
       // const filteredTags = _.differenceBy(tags, i.tags, '_id');
       this.tagSuggestions = tags;
       this.allTags = tags;
-    })
+    });
 
     this.searchText.valueChanges.pipe(
       startWith(''),
@@ -208,8 +208,8 @@ export class AddGoalComponent implements OnInit {
     if (!this.matAutocomplete.isOpen) {
       const availableTag = this.tagSuggestions.find((t) => t.name.toLowerCase() == event.value.trim().toLowerCase());
       const formAvailableInTafsFormControl = this.tagsFormControl.value.find((t) => t.name.toLowerCase() == event.value.trim().toLowerCase());
-      if(formAvailableInTafsFormControl && event && event.input && event.input.value) {
-        event.input.value = ''
+      if (formAvailableInTafsFormControl && event && event.input && event.input.value) {
+        event.input.value = '';
       } else if (availableTag) {
         this.tagsFormControl.push(new FormControl({name: availableTag.name, _id: availableTag._id}));
       } else {
@@ -223,8 +223,8 @@ export class AddGoalComponent implements OnInit {
   selected(event) {
     // this.tagSuggestions = this.tagSuggestions.filter((t) => t._id !== event.option.value._id)
     const formAvailableInTafsFormControl = this.tagsFormControl.value.find((t) => t.name.toLowerCase() == event.option.value.name.trim().toLowerCase());
-    if(formAvailableInTafsFormControl) {
-      event.input.value = ''
+    if (formAvailableInTafsFormControl) {
+      event.input.value = '';
     } else {
       this.formService.selectedCategory(this.tagsFormControl, event);
     }
@@ -235,6 +235,6 @@ export class AddGoalComponent implements OnInit {
 
   // Remove a Tag
   public remove(index: number): void {
-    this.formService.removeCategory(this.tagsFormControl, index)
+    this.formService.removeCategory(this.tagsFormControl, index);
   }
 }

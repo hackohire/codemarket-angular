@@ -99,10 +99,10 @@ export class MembershipListComponent implements OnInit {
         if (membership && membership.status === 'canceled') {
           this.dataSource.data = this.dataSource.data.splice(i, 1);
           this.dataSource._updateChangeSubscription();
-          Swal.fire('Membership Subscription Canceled Successfully!', '', 'info')
+          Swal.fire('Membership Subscription Canceled Successfully!', '', 'info');
         }
       }
-    })
+    });
   }
 
 }

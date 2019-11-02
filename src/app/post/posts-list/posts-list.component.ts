@@ -12,7 +12,7 @@ import { GetPostsByUserIdAndType, GetPostsByType, DeletePost } from '../../core/
 import { selectPostsByUserIdAndType, selectPostsByType } from '../../core/store/selectors/post.selectors';
 import { PostService } from '../../shared/services/post.service';
 import { BreadCumb } from '../../shared/models/bredcumb.model';
-import * as _ from 'lodash';
+import { startCase } from 'lodash';
 import { selectLoggedInUser } from '../../core/store/selectors/user.selector';
 import { SweetalertService } from '../../shared/services/sweetalert.service';
 
@@ -57,7 +57,7 @@ export class PostsListComponent implements OnInit, OnDestroy {
 
     const type: string = this.activatedRoute.snapshot.queryParams.type;
     this.breadcumb = {
-      title: 'List of ' + _.startCase(type),
+      title: 'List of ' + startCase(type),
       path: [
         {
           name: 'Dashboard',
@@ -85,7 +85,7 @@ export class PostsListComponent implements OnInit, OnDestroy {
        * profile or his own profile(loggedin User's own Profile)
       **/
 
-      this.authorId = this.activatedRoute.parent.snapshot.parent.params['authorId'];
+      this.authorId = this.activatedRoute.parent.snapshot.parent.params.authorId;
 
       if (this.authorId) {
         this.store.dispatch(GetPostsByUserIdAndType({ userId: this.authorId, status: '', postType: type }));
@@ -131,7 +131,7 @@ export class PostsListComponent implements OnInit, OnDestroy {
   deletePost(postId: string) {
     this.sweetAlertService.confirmDelete(() => {
       this.store.dispatch(DeletePost({ postId }));
-    })
+    });
   }
 
 }

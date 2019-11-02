@@ -4,10 +4,9 @@ import { Product, Tag } from '../../shared/models/product.model';
 import { AuthService } from '../../core/services/auth.service';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../core/store/state/app.state';
-import { of, Subscription, Subject } from 'rxjs';
+import { of, Subscription } from 'rxjs';
 import { tap, switchMap, startWith, map } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
-import { Storage } from 'aws-amplify';
 import { BreadCumb } from '../../shared/models/bredcumb.model';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
@@ -149,7 +148,7 @@ export class AddProductsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
   }
-  
+
 
 
   ngOnDestroy() {
@@ -179,7 +178,7 @@ export class AddProductsComponent implements OnInit, OnDestroy {
     this.formService.findFromCollection('', 'tags').subscribe((tags) => {
       this.tagSuggestions = tags;
       this.allTags = tags;
-    })
+    });
 
     this.searchText.valueChanges.pipe(
       startWith(''),
@@ -239,78 +238,6 @@ export class AddProductsComponent implements OnInit, OnDestroy {
     }
   }
 
-
-  addFiles() {
-    this.file.nativeElement.click();
-  }
-
-
-  onFilesAdded() {
-    // const files: { [key: string]: File } = this.file.nativeElement.files;
-    const files: File[] = Array.from(this.file.nativeElement.files);
-    if (this.files && this.files.length && files.length) {
-      this.files = this.files.concat(files);
-    } else {
-      this.files = files;
-    }
-    const priceAndFiles = this.priceAndFilesArrayFormControl;
-
-
-    this.files.forEach((f, i) => {
-      console.log(f);
-
-      if (!f['progress']) {
-
-        priceAndFiles.push(this.priceAndFilesFormControl({ name: f.name }));
-
-        // create a new progress-subject for every file
-        f['progress'] = new Subject<number>();
-        priceAndFiles.at(i).get('progress').setValue(new Subject<number>());
-
-        const fileNameSplitArray = f.name.split('.');
-        const fileExt = fileNameSplitArray.pop();
-        const fileName = fileNameSplitArray[0] + '-' + new Date().toISOString() + '.' + fileExt;
-
-        Storage.vault.put(fileName, f, {
-
-          bucket: 'codemarket-files',
-
-          level: 'public',
-
-          contentType: f.type,
-
-          progressCallback: (p) => {
-
-            console.log(`Uploaded: ${p.loaded}/${p.total}`);
-
-            // calculate the progress percentage
-            const percentDone = Math.round(100 * p.loaded / p.total);
-            priceAndFiles.at(i).get('progress').value.next(percentDone);
-            f['progress'].next(percentDone);
-
-            if (p.loaded === p.total) {
-              priceAndFiles.at(i).get('progress').value.complete();
-              f['progress'].complete();
-            }
-          },
-        }).then((uploaded: any) => {
-          console.log('uploaded', uploaded);
-          priceAndFiles.at(i).get('file').setValue(uploaded.key);
-          priceAndFiles.at(i).get('progress').disable();
-
-        });
-      }
-    });
-    this.file.nativeElement.value = null;
-
-    console.log(this.files);
-  }
-
-  removeFile(index: number) {
-    this.files.splice(index, 1);
-    this.priceAndFilesArrayFormControl.removeAt(index);
-  }
-
   updateFormData(event) {
     console.log(event);
     this.descriptionFormControl.setValue(event);
@@ -337,7 +264,7 @@ export class AddProductsComponent implements OnInit, OnDestroy {
 
   // Remove a Tag
   public remove(index: number): void {
-    this.formService.removeCategory(this.tagsFormControl, index)
+    this.formService.removeCategory(this.tagsFormControl, index);
   }
 
 }

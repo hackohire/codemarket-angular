@@ -38,7 +38,7 @@ export class CartEffects {
         }),
         map(cartItems => cartItems && cartItems.length ? cartItems.map(i => i.referenceId) : []),
         switchMap((cartItems) => [UpdateCartProductList({cartItems}), UpdateCartTotal({cartItems})]),
-        tap(() => this.router.navigate(['/', { outlets: { 'main': ['cart'] } }]))
+        tap(() => this.router.navigate(['/', { outlets: { main: ['cart'] } }]))
     );
 
     @Effect()

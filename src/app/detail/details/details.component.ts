@@ -96,26 +96,26 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    this.type = this.activatedRoute.snapshot.queryParams['type'];
+    this.type = this.activatedRoute.snapshot.queryParams.type;
 
     console.log(this.activatedRoute.snapshot.queryParams);
 
     const params = this.activatedRoute.snapshot.params;
 
     if (this.type === 'company') {
-      this.subscription$ = this.companyService.getCompanyById(params['companyId']).subscribe({
+      this.subscription$ = this.companyService.getCompanyById(params.companyId).subscribe({
         next: (c: Company) => {
           this.companyDetails$ = of(c);
           this.postDetails = c;
           this.initializeCommentForm(c);
-          this.companyService.getListOfUsersInACompany(params['companyId']).subscribe((u) => {
+          this.companyService.getListOfUsersInACompany(params.companyId).subscribe((u) => {
             console.log(u);
-            if(u) {
+            if (u) {
               this.usersInterestedInCompany = u;
             }
-          })
+          });
         }
-      })
+      });
     } else {
       this.subscription$ = this.store.select(selectSelectedPost).pipe(
         tap((p: Post) => {
@@ -124,9 +124,9 @@ export class DetailsComponent implements OnInit, OnDestroy {
             this.details$ = of(p);
             // this.type = ;
             this.initializeCommentForm(p);
-  
+
             /** Subscribe to loggedinuser, once loggedInUse is got, Check if the loggedInUder is
-             * in the list of attendess or not 
+             * in the list of attendess or not
              **/
             this.authService.loggedInUser$.subscribe((user) => {
               if (this.postDetails
@@ -137,17 +137,17 @@ export class DetailsComponent implements OnInit, OnDestroy {
               } else {
                 this.isUserAttending = false;
               }
-            })
-          } else if(this.postDetails && this.postDetails._id === this.activatedRoute.snapshot.queryParams['postId']) {
+            });
+          } else if (this.postDetails && this.postDetails._id === this.activatedRoute.snapshot.queryParams.postId) {
             /** Comes inside this block, only when we are already in a post details page, and by using searh,
              * we try to open any other post detials page
              */
           } else {
-            const postId = this.activatedRoute.snapshot.queryParams['postId'];
+            const postId = this.activatedRoute.snapshot.queryParams.postId;
             this.store.dispatch(GetPostById({ postId }));
             this.details$ = this.store.select(selectSelectedPost);
           }
-  
+
         })
       ).subscribe();
     }
@@ -163,17 +163,17 @@ export class DetailsComponent implements OnInit, OnDestroy {
         tap(d => console.log(d))
       ).subscribe({
         next: (d) => {
-          console.log(d)
+          console.log(d);
           /** If user doesn't have subscription, rediret to membership page */
           if (d && !d.validSubscription) {
-            this.router.navigate(['/', {outlets: {'main': ['membership']}}])
+            this.router.navigate(['/', {outlets: {main: ['membership']}}]);
           }
 
           /** Check i user is in the list of attendees */
           if (d && d.usersAttending && d.usersAttending.length) {
             this.isUserAttending = true;
             this.postDetails.usersAttending = d.usersAttending;
-            this.store.dispatch(SetSelectedPost({post: this.postDetails}))
+            this.store.dispatch(SetSelectedPost({post: this.postDetails}));
             const isLoggedInUserAttending = d.usersAttending.find((u) => u._id === this.authService.loggedInUser._id);
             if (isLoggedInUserAttending) {
               this.successfulRSVP.show();
@@ -181,7 +181,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
           }
         },
         error: (e) => console.log(e)
-      })
+      });
     }
   }
 
@@ -194,10 +194,10 @@ export class DetailsComponent implements OnInit, OnDestroy {
           this.isUserAttending = false;
           this.postDetails.usersAttending = e.usersAttending;
           this.store.dispatch(SetSelectedPost({post: this.postDetails}));
-          this.sweetAlertService.success('Successful Cancel RSVP Request', '', 'success')
+          this.sweetAlertService.success('Successful Cancel RSVP Request', '', 'success');
         }
       }
-    })
+    });
   }
 
   ngOnDestroy(): void {

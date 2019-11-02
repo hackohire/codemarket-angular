@@ -8,10 +8,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormService } from '../../shared/services/form.service';
 import { startWith, map, catchError } from 'rxjs/operators';
 import { Subscription, of } from 'rxjs';
-import { Tag } from '../../shared/models/product.model'
+import { Tag } from '../../shared/models/product.model';
 import { CompanyService } from '../company.service';
 import { CompanyTypes } from '../../shared/models/company.model';
-import _ from 'lodash';
+import { startCase } from 'lodash';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -76,10 +76,10 @@ export class AddCompanyComponent implements OnInit {
     private router: Router
   ) {
     const queryParams: any = this.activatedRoute.snapshot.queryParams;
-    const params: any = this.activatedRoute.snapshot.params
+    const params: any = this.activatedRoute.snapshot.params;
 
     this.breadcumb = {
-      title: 'Add ' + _.startCase(queryParams.type),
+      title: 'Add ' + startCase(queryParams.type),
       path: [
         {
           name: 'Dashboard',
@@ -132,7 +132,7 @@ export class AddCompanyComponent implements OnInit {
     this.formService.findFromCollection('', 'cities').subscribe((cities) => {
       this.citySuggestions = cities;
       this.allCities = cities;
-    })
+    });
 
     this.searchText.valueChanges.pipe(
       startWith(''),
@@ -160,16 +160,16 @@ export class AddCompanyComponent implements OnInit {
 
     if (this.idFromControl && !this.idFromControl.value) {
       this.companyForm.removeControl('_id');
-      
+
       this.companyService.addCompany(this.companyForm.value).pipe(
         catchError((e) => {
           Swal.fire('Name already exists!', '', 'error');
-          return of(false)
+          return of(false);
         })
       ).subscribe((d: any) => {
         Swal.fire(`${d.name} has been Created Successfully`, '', 'success').then(() => {
           this.companyService.redirectToCompanyDetails(d._id);
-        })
+        });
         this.companyFormInitialization(d);
       });
 
@@ -177,14 +177,14 @@ export class AddCompanyComponent implements OnInit {
       this.companyService.updateCompany(this.companyForm.value).pipe(
         catchError((e) => {
           Swal.fire('Name already exists!', '', 'error');
-          return of(false)
+          return of(false);
         })
       )
       .subscribe((d: any) => {
         if (d) {
           Swal.fire(`${d.name} has been Updated Successfully`, '', 'success').then(() => {
             this.companyService.redirectToCompanyDetails(d._id);
-          })
+          });
           this.companyFormInitialization(d);
         }
       });
@@ -202,7 +202,7 @@ export class AddCompanyComponent implements OnInit {
       const availableTag = this.citySuggestions.find((t) => t.name.toLowerCase() == event.value.trim().toLowerCase());
       const formAvailableInTafsFormControl = this.citiesFormControl.value.find((t) => t.name.toLowerCase() == event.value.trim().toLowerCase());
       if (formAvailableInTafsFormControl) {
-        event.input.value = ''
+        event.input.value = '';
       } else if (availableTag) {
         this.citiesFormControl.push(new FormControl({ name: availableTag.name, _id: availableTag._id }));
       } else {
@@ -217,7 +217,7 @@ export class AddCompanyComponent implements OnInit {
     // this.tagSuggestions = this.tagSuggestions.filter((t) => t._id !== event.option.value._id)
     const formAvailableInTafsFormControl = this.citiesFormControl.value.find((t) => t.name.toLowerCase() == event.option.value.name.trim().toLowerCase());
     if (formAvailableInTafsFormControl) {
-      event.input.value = ''
+      event.input.value = '';
     } else {
       this.formService.selectedCategory(this.citiesFormControl, event);
     }
@@ -228,7 +228,7 @@ export class AddCompanyComponent implements OnInit {
 
   // Remove a Tag
   public remove(index: number): void {
-    this.formService.removeCategory(this.citiesFormControl, index)
+    this.formService.removeCategory(this.citiesFormControl, index);
   }
 }
 

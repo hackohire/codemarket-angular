@@ -50,7 +50,7 @@ export class MyRsvpComponent implements OnInit {
     this.store.select(selectLoggedInUser).pipe(
       switchMap((u) => {
         if (u) {
-          return this.postService.myRSVP(u._id)
+          return this.postService.myRSVP(u._id);
         }
       }),
       tap((u) => {
@@ -73,7 +73,7 @@ export class MyRsvpComponent implements OnInit {
           this.dataSource.data = this.dataSource.data.filter((e: Event) => e._id !== eventId);
         }
       }
-    })
+    });
   }
 
 }

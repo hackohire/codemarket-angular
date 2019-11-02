@@ -82,7 +82,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
     } else {
       setTimeout(() => {
         this.lr._elementRef.nativeElement.click();
-      }, 2000)
+      }, 2000);
     }
   }
 
@@ -96,7 +96,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
         } else {
           this.loggedInUser = u;
         }
-  
+
       })
     );
 
@@ -112,7 +112,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
       // const dialogRef = this.dialog.open(AuthDialogComponent, {
       //   // panelClass: 'no-padding',
       // });
-  
+
       // dialogRef.afterClosed().subscribe(result => {
       //   console.log('The dialog was closed');
       // });

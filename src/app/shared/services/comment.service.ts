@@ -3,7 +3,6 @@ import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { Observable } from 'rxjs/internal/Observable';
 import { map } from 'rxjs/internal/operators/map';
-import * as _ from 'lodash';
 import { description } from 'src/app/shared/constants/fragments_constatnts';
 
 @Injectable({
@@ -44,7 +43,7 @@ export class CommentService {
     ${description}
   `;
 
-  
+
 
   constructor(
     private apollo: Apollo,
@@ -64,7 +63,7 @@ export class CommentService {
           ${this.commentSchema}
         `,
         variables: {
-          comment: comment
+          comment
         }
       }
     ).pipe(
@@ -88,7 +87,7 @@ export class CommentService {
         `,
         fetchPolicy: 'no-cache',
         variables: {
-          referenceId: referenceId
+          referenceId
         }
       }
     ).pipe(
@@ -108,7 +107,7 @@ export class CommentService {
         `,
         fetchPolicy: 'no-cache',
         variables: {
-          commentId: commentId
+          commentId
         }
       }
     ).pipe(
@@ -133,8 +132,8 @@ export class CommentService {
         `,
         fetchPolicy: 'no-cache',
         variables: {
-          commentId: commentId,
-          text: text
+          commentId,
+          text
         }
       }
     ).pipe(

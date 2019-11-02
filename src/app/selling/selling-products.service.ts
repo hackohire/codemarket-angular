@@ -41,7 +41,7 @@ export class SellingProductsService {
         _id
       }
     }
-  `
+  `;
 
   constructor(
     private apollo: Apollo,
@@ -121,24 +121,11 @@ export class SellingProductsService {
               purchasedUnits {
                 ${this.purchaseItemsField}
               }
-              subscription {
-                name
-                purchasedBy {
-                  _id
-                  name
-                  email
-                }
-                subscriptionUsers {
-                  name
-                  email
-                }
-                _id
-              }
             }
           }
         `,
         variables: {
-          transaction: transaction
+          transaction
         }
       }
     ).pipe(

@@ -1,11 +1,11 @@
-import { RouterReducerState } from '@ngrx/router-store';
+// import { RouterReducerState } from '@ngrx/router-store';
 import { UserState } from './user.state';
 import { ProductState } from './product.state';
 import { CartState } from './cart.state';
 import { PostState } from './post.state';
 
 export interface AppState {
-    router?: RouterReducerState;
+    // router?: RouterReducerState;
     users: UserState;
     products: ProductState;
     cart: CartState;

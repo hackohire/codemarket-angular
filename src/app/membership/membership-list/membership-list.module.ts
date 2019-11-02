@@ -10,7 +10,7 @@ const membrshipListRoutes: Routes = [
     path: '',
     component: MembershipListComponent
   }
-]
+];
 
 @NgModule({
   declarations: [MembershipListComponent, InviteMembersDialogComponent],

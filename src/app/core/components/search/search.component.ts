@@ -30,14 +30,14 @@ export class SearchComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit() {
     this.routerSubscription$ = this.router.events.subscribe(e => {
       if (e) {
-        this.dialogRef.close()
+        this.dialogRef.close();
       }
-    }) 
+    });
   }
 
   ngOnDestroy() {
     if (this.routerSubscription$) {
-      this.routerSubscription$.unsubscribe()
+      this.routerSubscription$.unsubscribe();
     }
   }
 

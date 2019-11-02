@@ -38,24 +38,24 @@ export class AppComponent implements OnDestroy {
       this.authService.loggedInUser$.pipe(
         tap((u) => {
           if (u) {
-  
+
             const peer = new Peer(u._id);
-  
+
             peer.on('open', (id) => {
               console.log('My peer ID is: ' + id);
               if (id) {
                 this.userService.peer.next(peer);
               }
             });
-  
+
             peer.on('call', (call) => {
               console.log(call);
               // if (true) {
               this.openDialog(call, peer);
               // }
             });
-  
-  
+
+
             // this.webSocketService.subject.subscribe(async (d: any) => {
             //   console.log(d);
             //   if (d && d.userWhoIsCalling && !this.dialog.openDialogs.length) {
@@ -66,7 +66,7 @@ export class AppComponent implements OnDestroy {
           }
         })
       ).subscribe()
-    )
+    );
 
   }
 

@@ -158,7 +158,7 @@ support: new FormGroup({
     this.formService.findFromCollection('', 'tags').subscribe((tags) => {
       this.tagSuggestions = tags;
       this.allTags = tags;
-    })
+    });
 
     this.searchText.valueChanges.pipe(
       startWith(''),
@@ -222,8 +222,8 @@ support: new FormGroup({
     if (!this.matAutocomplete.isOpen) {
       const availableTag = this.tagSuggestions.find((t) => t.name.toLowerCase() == event.value.trim().toLowerCase());
       const formAvailableInTafsFormControl = this.tagsFormControl.value.find((t) => t.name.toLowerCase() == event.value.trim().toLowerCase());
-      if(formAvailableInTafsFormControl && event && event.input && event.input.value) {
-        event.input.value = ''
+      if (formAvailableInTafsFormControl && event && event.input && event.input.value) {
+        event.input.value = '';
       } else if (availableTag) {
         this.tagsFormControl.push(new FormControl({name: availableTag.name, _id: availableTag._id}));
       } else {
@@ -237,8 +237,8 @@ support: new FormGroup({
   selected(event) {
     // this.tagSuggestions = this.tagSuggestions.filter((t) => t._id !== event.option.value._id)
     const formAvailableInTafsFormControl = this.tagsFormControl.value.find((t) => t.name.toLowerCase() == event.option.value.name.trim().toLowerCase());
-    if(formAvailableInTafsFormControl) {
-      event.input.value = ''
+    if (formAvailableInTafsFormControl) {
+      event.input.value = '';
     } else {
       this.formService.selectedCategory(this.tagsFormControl, event);
     }
@@ -249,7 +249,7 @@ support: new FormGroup({
 
   // Remove a Tag
   public remove(index: number): void {
-    this.formService.removeCategory(this.tagsFormControl, index)
+    this.formService.removeCategory(this.tagsFormControl, index);
   }
 
 }

@@ -40,7 +40,7 @@ export class AddDreamjobComponent implements OnInit {
     }
   };
 
-  allCompanies = []
+  allCompanies = [];
 
   edit: boolean;
 
@@ -79,7 +79,7 @@ export class AddDreamjobComponent implements OnInit {
 
   @ViewChild('searchInput', {static: false}) searchInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto', {static: false}) matAutocomplete: MatAutocomplete;
-  
+
   constructor(
     private authService: AuthService,
     private store: Store<AppState>,
@@ -161,11 +161,11 @@ export class AddDreamjobComponent implements OnInit {
       // const filteredCitys = _.differenceBy(cities, i.cities, '_id');
       this.citySuggestions = cities;
       this.allCities = cities;
-    })
+    });
 
     this.companyService.getAllCompanies().subscribe((companies) => {
       this.allCompanies = companies;
-    })
+    });
 
     this.searchText.valueChanges.pipe(
       startWith(''),
@@ -211,8 +211,8 @@ export class AddDreamjobComponent implements OnInit {
     if (!this.matAutocomplete.isOpen) {
       const availableCity = this.citySuggestions.find((t) => t.name.toLowerCase() == event.value.trim().toLowerCase());
       const formAvailableInTafsFormControl = this.citiesFormControl.value.find((t) => t.name.toLowerCase() == event.value.trim().toLowerCase());
-      if(formAvailableInTafsFormControl && event && event.input && event.input.value) {
-        event.input.value = ''
+      if (formAvailableInTafsFormControl && event && event.input && event.input.value) {
+        event.input.value = '';
       } else if (availableCity) {
         this.citiesFormControl.push(new FormControl({name: availableCity.name, _id: availableCity._id}));
       } else {
@@ -224,8 +224,8 @@ export class AddDreamjobComponent implements OnInit {
 
   selected(event) {
     const formAvailableInTafsFormControl = this.citiesFormControl.value.find((t) => t.name.toLowerCase() == event.option.value.name.trim().toLowerCase());
-    if(formAvailableInTafsFormControl) {
-      event.option.value = ''
+    if (formAvailableInTafsFormControl) {
+      event.option.value = '';
     } else {
       this.formService.selectedCategory(this.citiesFormControl, event);
     }
@@ -236,7 +236,7 @@ export class AddDreamjobComponent implements OnInit {
 
   // Remove a City
   public remove(index: number): void {
-    this.formService.removeCategory(this.citiesFormControl, index)
+    this.formService.removeCategory(this.citiesFormControl, index);
   }
 
 }

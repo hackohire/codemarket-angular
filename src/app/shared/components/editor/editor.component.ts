@@ -56,7 +56,7 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges {
     if (this.editor) {
       // this.editor.destroy();
     }
-    this.editorRef.nativeElement
+    this.editorRef.nativeElement;
   }
 
   handleEnterKeyPress(e: Event) {
@@ -168,6 +168,13 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges {
           this.editorRef.nativeElement.querySelectorAll('pre code').forEach((block: HTMLElement) => {
             this._hljs.highlightBlock(block);
           });
+
+          if (this.readOnly) {
+            let elements = document.querySelectorAll('[contenteditable=true]');
+            elements.forEach(element => {
+              element.setAttribute('contenteditable' , 'false');
+            });
+          }
         }
 
         this.addControlsIfVideoElement();

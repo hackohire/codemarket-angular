@@ -41,6 +41,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
 
   likeCount: number;
   productDetails: Product;
+  purchasedByLoggedInUser: boolean;
 
   anonymousAvatar = require('src/assets/images/anonymous-avatar.jpg');
   codemarketBucketURL = environment.codemarketFilesBucket;
@@ -52,7 +53,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
   commentForm: FormGroup;
 
   productDetails$: Observable<Product>;
-  subscription$: Subscription;
+  subscription$: Subscription = new Subscription();
 
   peer: Peer;
 
@@ -82,12 +83,12 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     };
 
     /** Peer Subscription for Video Call */
-    this.userService.peer.subscribe((p) => {
+    this.subscription$.add(this.userService.peer.subscribe((p) => {
       if (p) {
         console.log(p);
         this.peer = p;
       }
-    });
+    }));
   }
 
   ngOnDestroy() {
@@ -104,7 +105,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     const params = this.activatedRoute.snapshot.queryParams;
     this.productDetails$ = this.store.select(selectSelectedPost);
 
-    this.subscription$ = this.store.select(selectSelectedPost).pipe(
+    this.subscription$.add(this.store.select(selectSelectedPost).pipe(
       tap((p: Product) => {
         if (p) {
 
@@ -126,19 +127,30 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
           this.productDetails = p;
 
           this.productDetails$ = of(p);
+
+          this.subscription$.add(
+            this.authService.loggedInUser$.subscribe(u => {
+              if (u && p && p.purchasedBy && p.purchasedBy.length) {
+                this.purchasedByLoggedInUser = p.purchasedBy.filter(p => p._id === u._id).length ? true : false;
+              }
+            })
+          );
+
           this.commentForm = new FormGroup({
             text: new FormControl(''),
             referenceId: new FormControl(p._id),
             type: new FormControl('product'),
           });
 
-          this.commentService.getCommentsByReferenceId(p._id).pipe(
-            tap((d) => {
-              this.commentsList = d;
-            })
-          ).subscribe();
+          this.subscription$.add(
+            this.commentService.getCommentsByReferenceId(p._id).pipe(
+              tap((d) => {
+                this.commentsList = d;
+              })
+            ).subscribe()
+          );
 
-        }  else if(this.productDetails && this.productDetails._id === this.activatedRoute.snapshot.queryParams['postId']) {
+        } else if (this.productDetails && this.productDetails._id === this.activatedRoute.snapshot.queryParams.postId) {
           /** Comes inside this block, only when we are already in a post details page, and by using searh,
            * we try to open any other post detials page
            */
@@ -146,7 +158,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
           this.store.dispatch(GetPostById({ postId: params.postId }));
         }
       }),
-    ).subscribe();
+    ).subscribe());
   }
 
   getDate(d: string) {
@@ -165,18 +177,20 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     console.log(this.commentForm.value);
     if (this.authService.loggedInUser) {
       this.commentForm.addControl('createdBy', new FormControl(this.authService.loggedInUser._id));
-      this.commentService.addComment(this.commentForm.value).pipe(
-        switchMap((d) => {
-          return this.commentService.getCommentsByReferenceId(d.referenceId);
-        }),
-        tap((d) => {
-          console.log(d);
-          if (d && d.length) {
-            this.commentsList = d;
-            // this.commentForm.patchValue({text: null}, {emitEvent: true});
-          }
-        })
-      ).subscribe();
+      this.subscription$.add(
+        this.commentService.addComment(this.commentForm.value).pipe(
+          switchMap((d) => {
+            return this.commentService.getCommentsByReferenceId(d.referenceId);
+          }),
+          tap((d) => {
+            console.log(d);
+            if (d && d.length) {
+              this.commentsList = d;
+              // this.commentForm.patchValue({text: null}, {emitEvent: true});
+            }
+          })
+        ).subscribe()
+      );
     }
   }
 
@@ -190,14 +204,10 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
   }
 
   openDialog(authorId?: string): void {
-    const dialogRef = this.dialog.open(VideoChatComponent, {
+    this.dialog.open(VideoChatComponent, {
       width: '550px',
       data: { authorId, peer: this.peer },
       disableClose: true
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
     });
   }
 

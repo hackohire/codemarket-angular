@@ -9,8 +9,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { StoreModule, ActionReducerMap } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { UserEffects } from './store/effects/user.effects';
-import { StoreRouterConnectingModule } from '@ngrx/router-store';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+// import { StoreRouterConnectingModule } from '@ngrx/router-store';
+// import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EPlatformActions } from './store/actions/app.actions';
 import { ProductEffects } from './store/effects/product.effects';
 import { CartEffects } from './store/effects/cart.effects';
@@ -54,8 +54,8 @@ export function clearState(reducer) {
         CartEffects,
         PostEffects
       ]),
-    StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
-    StoreDevtoolsModule.instrument(),
+    // StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
+    // StoreDevtoolsModule.instrument(),
   ],
   providers: [
     AmplifyService,

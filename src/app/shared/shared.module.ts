@@ -17,7 +17,6 @@ import { ShareButtonsModule } from '@ngx-share/buttons';
 import { ShareModule } from '@ngx-share/core';
 import { SafePipe } from './pipes/safe.pipe';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import '../../icons';
 import { LikeDislikeComponent } from './components/like-dislike/like-dislike.component';
 import { PaypalSubscriptionDirective } from './directives/paypal-button.directive';
 import { VideoChatComponent } from '../video-chat/video-chat.component';

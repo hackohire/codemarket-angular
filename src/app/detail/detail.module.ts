@@ -10,7 +10,7 @@ const routes: Routes = [
     component: DetailsComponent,
     data: { noReuse: true }
   }
-]
+];
 
 
 @NgModule({

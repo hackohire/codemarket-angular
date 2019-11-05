@@ -18,16 +18,31 @@
 
             <!-- <span class="comment-tag buyer">Purchased</span> -->
 
-            <button mat-mini-fab style="float: right" *ngIf="comment?.createdBy?._id === authService?.loggedInUser?._id"
+
+            <a style="float: right;" *ngIf="comment?.createdBy?._id === authService?.loggedInUser?._id" mat-button (click)="deleteComment()">
+                <i style="font-size: 1.5rem !important;" class="fad fa-comment-minus fa-lg"></i>
+            </a>
+
+            <!-- <button mat-mini-fab style="float: right" *ngIf="comment?.createdBy?._id === authService?.loggedInUser?._id"
             (click)="deleteComment()" color="warn">
                 <mat-icon>delete</mat-icon>
-            </button>
-            <button mat-mini-fab style="float: right" *ngIf="comment?.createdBy?._id === authService?.loggedInUser?._id" (click)="edit=true" color="primary">
+            </button> -->
+
+            <a style="float: right;" *ngIf="comment?.createdBy?._id === authService?.loggedInUser?._id" mat-button (click)="edit=true">
+                    <i style="font-size: 1.5rem !important;" class="fad fa-comment-edit fa-lg"></i>
+            </a>
+
+            <!-- <button mat-mini-fab style="float: right" *ngIf="comment?.createdBy?._id === authService?.loggedInUser?._id" (click)="edit=true" color="primary">
                 <mat-icon>edit</mat-icon>
-            </button>
-            <button mat-mini-fab style="float: right" *ngIf="!comment?.parentId" (click)="allowReply()" color="primary">
+            </button> -->
+
+            
+            <a style="float: right;" *ngIf="!comment?.parentId && showReplyButton" mat-button (click)="allowReply()">
+                    <i style="font-size: 1.5rem !important;" class="fad fa-comments fa-lg"></i>
+            </a>
+            <!-- <button mat-mini-fab style="float: right" *ngIf="!comment?.parentId" (click)="allowReply()" color="primary">
                 <mat-icon>reply</mat-icon>
-            </button>
+            </button> -->
 
         </div>
         <app-editor [readOnly]="edit ? false : true" (output)="updateFormData($event)" [data]="edit ? replyCommentForm?.get('text')?.value : replyCommentForm?.get('text')?.value" [id]="comment?._id"></app-editor>

@@ -17,6 +17,7 @@ export class CommentComponent implements OnInit {
 
   @Input() comment: Comment;
   @Input() referenceId: string;
+  @Input() showReplyButton = false;
   @Output() updateRoot = new EventEmitter();
   replyCommentForm: FormGroup;
   reply: boolean;

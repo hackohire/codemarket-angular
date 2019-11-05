@@ -3,13 +3,12 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "node server",
+    "start": "ng serve",
     "build": "node --max_old_space_size=8192 node_modules/@angular/cli/bin/ng build --prod",
     "build:stats": "node --max_old_space_size=8192 node_modules/@angular/cli/bin/ng build --prod --stats-json",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "postinstall": "ng build --prod",
     "analyze": "webpack-bundle-analyzer dist/codemarket/stats-es2015.json"
   },
   "private": true,
@@ -99,9 +98,5 @@
     "tslint": "~5.15.0",
     "typescript": "~3.5.3",
     "webpack-bundle-analyzer": "^3.6.0"
-  },
-  "engines": {
-    "node": ">=8.0.0 <11.0.0",
-    "npm": "6.9.0"
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output, Input, OnDestroy, OnChanges, SimpleChanges, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input, OnDestroy, OnChanges, AfterViewInit, SimpleChanges, ViewChild, ElementRef } from '@angular/core';
 import EditorJS from '@editorjs/editorjs';
 import Header from '@editorjs/header';
 import ImageTool from '@editorjs/image';
@@ -12,6 +12,8 @@ import { Storage } from 'aws-amplify';
 import { environment } from 'src/environments/environment';
 import { CodeWithLanguageSelection } from 'src/app/insert-code-snippet';
 import { HighlightJS } from 'ngx-highlightjs';
+import { appConstants } from '../../constants/app_constants';
+const path = require('path');
 
 @Component({
   selector: 'app-editor',
@@ -19,7 +21,7 @@ import { HighlightJS } from 'ngx-highlightjs';
   styleUrls: ['./editor.component.scss'],
   // encapsulation: ViewEncapsulation.None
 })
-export class EditorComponent implements OnInit, OnDestroy, OnChanges {
+export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit {
 
   editor: EditorJS;
   @Input() id: string;
@@ -27,6 +29,7 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges {
   @Input() data: [];
   @Output() output: EventEmitter<any> = new EventEmitter();
   @ViewChild('editorRef', { static: false }) editorRef: ElementRef;
+  @ViewChild('code', { static: false }) code: ElementRef;
 
 
   constructor(
@@ -36,27 +39,40 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges {
 
   ngOnInit() {
 
-    this.initiateEditor();
+    if (!this.readOnly) {
+      this.initiateEditor();
+    }
+  }
 
+  ngAfterViewInit(): void {
+    //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
+    //Add 'implements AfterViewInit' to the class.
+
+    if (this.code) {
+      this._hljs.highlightBlock(this.code.nativeElement);
+    }
+    this.zoomInZoomOutForImages();
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (this.editor && changes.readOnly && !changes.readOnly.currentValue) {
-      console.log(this.data);
+    if (this.editor && this.editor.blocks && changes.readOnly && !changes.readOnly.currentValue) {
+      console.log(this.editor);
       this.editor.destroy();
       this.readOnly = false;
       this.initiateEditor();
     } else if (this.editor && changes.readOnly && changes.readOnly.currentValue) {
       this.editor.destroy();
+      // this.initiateEditor();
+    } else if ((!this.editor || !this.editor.clear ) && changes.readOnly && !changes.readOnly.currentValue) {
+      this.readOnly = false;
       this.initiateEditor();
     }
   }
 
   ngOnDestroy() {
-    if (this.editor) {
-      // this.editor.destroy();
+    if (this.editor && this.editor.clear) {
+      this.editor.destroy();
     }
-    this.editorRef.nativeElement;
   }
 
   handleEnterKeyPress(e: Event) {
@@ -77,15 +93,15 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges {
           class: Embed,
           inlineToolbar: true
         },
-        warning: {
-          class: Warning,
-          inlineToolbar: true,
-          shortcut: 'CMD+SHIFT+W',
-          config: {
-            titlePlaceholder: 'Title',
-            messagePlaceholder: 'Message',
-          },
-        },
+        // warning: {
+        //   class: Warning,
+        //   inlineToolbar: true,
+        //   shortcut: 'CMD+SHIFT+W',
+        //   config: {
+        //     titlePlaceholder: 'Title',
+        //     messagePlaceholder: 'Message',
+        //   },
+        // },
         table: {
           class: Table,
           inlineToolbar: true,
@@ -99,11 +115,11 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges {
           shortcut: 'CMD+SHIFT+M',
           inlineToolbar: true,
         },
-        quote: {
-          class: Quote,
-          inlineToolbar: true,
-          shortcut: 'CMD+SHIFT+O',
-        },
+        // quote: {
+        //   class: Quote,
+        //   inlineToolbar: true,
+        //   shortcut: 'CMD+SHIFT+O',
+        // },
         list: {
           class: List,
           inlineToolbar: true,
@@ -172,7 +188,7 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges {
           if (this.readOnly) {
             const elements = document.querySelectorAll('[contenteditable=true]');
             elements.forEach(element => {
-              element.setAttribute('contenteditable' , 'false');
+              element.setAttribute('contenteditable', 'false');
             });
           }
         }
@@ -226,6 +242,19 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges {
         };
       });
     }
+  }
+
+  /** Check if media is image */
+  isImage(filePath: string) {
+    const extensions = new Set(appConstants.imageExtenstions);
+
+    return extensions.has(path.extname(filePath).slice(1).toLowerCase());
+  }
+
+  /** Zoom in & Out on image click */
+  zoomInOut(e) {
+    e.path[1].classList.toggle('lightbox');
+    e.path[0].classList.toggle('lightbox-img')
   }
 
 }

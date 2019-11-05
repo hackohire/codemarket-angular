@@ -30,15 +30,21 @@
                     <div class="item-info">
                         <div>
                             <div class="tab-pane fade show product-tab active" id="product-details">
-                                <div class="tab-content-wrapper">
+                                <div>
 
-                                    <app-editor *ngIf="details?.description" [readOnly]="true"
-                                        [data]="details?.description" [id]="'details-editor'">
+                                    <app-editor
+                                    *ngIf="details?.description"
+                                    [commentsList]="commentsList"
+                                    [blockLevelComments]="true"
+                                    [readOnly]="true"
+                                    [data]="details?.description"
+                                    [id]="'details-editor'"
+                                    [post]="details">
                                     </app-editor>
 
                                     <br />
                                     <br />
-                                    <h2>Support Details:</h2>
+                                    <h4 class="tab-content-wrapper">Support Details:</h4>
 
                                     <app-editor *ngIf="details?.support?.description" [readOnly]="true"
                                         [data]="details?.support?.description" [id]="'details-support-editor'">
@@ -206,7 +212,9 @@
                                 </li>
                                 <li *ngIf="details?.cities && details?.cities?.length">
                                     <p class="data-label">Cities</p>
-                                    <p class="info"><span *ngFor="let c of details?.cities; let ei = index;">{{c?.name + (ei === details?.cities?.length - 1 ? '' : ', ' )}}</span></p>
+                                    <p class="info"><span
+                                            *ngFor="let c of details?.cities; let ei = index;">{{c?.name + (ei === details?.cities?.length - 1 ? '' : ', ' )}}</span>
+                                    </p>
                                 </li>
                                 <!-- <li>
                                     <p class="data-label">Version</p>
@@ -235,7 +243,7 @@
                                                 [style.backgroundColor]="share?.prop?.facebook.color">
                                                 <!-- <fa-icon [icon]="share?.prop?.facebook.icon" size="lg"></fa-icon> -->
 
-                                               <i class="fab fa-facebook-f"></i>
+                                                <i class="fab fa-facebook-f"></i>
                                             </button>
                                         </li>
                                         <li>
@@ -340,10 +348,16 @@
                     <div class="item-info">
                         <div>
                             <div class="tab-pane fade show product-tab active" id="product-details">
-                                <div class="tab-content-wrapper">
+                                <div>
 
-                                    <app-editor *ngIf="details?.howCanYouHelp" [readOnly]="true"
-                                        [data]="details?.howCanYouHelp" [id]="'company-details-editor'">
+                                    <app-editor
+                                    *ngIf="details?.howCanYouHelp"
+                                    [commentsList]="commentsList"
+                                    [blockLevelComments]="true"
+                                    [readOnly]="true"
+                                    [data]="details?.howCanYouHelp"
+                                    [post]="details"
+                                    [id]="'company-details-editor'">
                                     </app-editor>
 
                                     <br />
@@ -499,10 +513,11 @@
         <div class="thread">
             <ul class="media-list thread-list" style="list-style: none;">
                 <h4 class="tab-content-wrapper">Comments:</h4>
-                <li class="single-thread" *ngFor="let c of commentsList">
-
-                    <app-comment [comment]="c" [referenceId]="cDetails?._id"></app-comment>
-                </li>
+                <div *ngFor="let c of commentsList">
+                    <li *ngIf="!c?.blockSpecificComment" class="single-thread">
+                        <app-comment [comment]="c" [referenceId]="cDetails?._id"></app-comment>
+                    </li>
+                </div>
             </ul>
         </div>
     </div>
@@ -523,7 +538,7 @@
                     <app-editor [id]="'comment-editor'" (output)="updateFormData($event)">
                     </app-editor>
 
-                    <button type="button" class="btn btn--sm btn--round" (click)="addComment()">Post
+                    <button style="float: right;" type="button" class="btn btn--sm btn--round" (click)="addComment()">Post
                         Comment</button>
                 </div>
             </div>

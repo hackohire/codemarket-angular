@@ -12,4 +12,7 @@ export interface Comment {
     referenceId: string;
     createdBy: User | string;
     status: string;
+
+    blockSpecificComment: boolean;
+    blockId: string;
 }

@@ -30,16 +30,21 @@
                     <div class="item-info">
                         <div>
                             <div class="tab-pane fade show product-tab active" id="product-details">
-                                <div class="tab-content-wrapper">
-                                    <!-- <quill-view *ngIf="product?.description; else noDescription;" [modules]="modules"
-                                        [content]="product.description" format="text" theme="snow"></quill-view> -->
+                                <div>
 
-                                    <app-editor [readOnly]="true" [data]="product?.description" [id]="'product-editor'">
+                                    <app-editor
+                                    *ngIf="product?.description"
+                                    [commentsList]="commentsList"
+                                    [blockLevelComments]="true"
+                                    [readOnly]="true"
+                                    [data]="product?.description"
+                                    [post]="product" 
+                                    [readOnly]="true" [id]="'product-editor'">
                                     </app-editor>
 
                                     <br />
                                     <br />
-                                    <h2>Support Details:</h2>
+                                    <h4 class="tab-content-wrapper">Support Details:</h4>
 
                                     <app-editor *ngIf="product?.support?.description" [readOnly]="true"
                                         [data]="product?.support?.description" [id]="'product-support-editor'">
@@ -47,8 +52,6 @@
                                     <ng-template #noDescription>
                                         <span>No Description</span>
                                     </ng-template>
-                                    <!-- <h2>Features With Image:</h2>
-                                    <img src="images/apspr.jpg" alt="This is product description thumbnail"> -->
                                 </div>
                             </div>
                             <!-- end /.tab-content -->
@@ -61,10 +64,11 @@
                                 <div class="thread">
                                     <ul class="media-list thread-list" style="list-style: none;">
                                         <h4 class="tab-content-wrapper">Comments:</h4>
-                                        <li class="single-thread" *ngFor="let c of commentsList">
-
-                                            <app-comment [comment]="c" [referenceId]="product?._id"></app-comment>
-                                        </li>
+                                        <div *ngFor="let c of commentsList">
+                                                <li *ngIf="!c?.blockSpecificComment" class="single-thread">
+                                                    <app-comment [comment]="c" [referenceId]="product?._id"></app-comment>
+                                                </li>
+                                        </div>
                                     </ul>
                                 </div>
                             </div>

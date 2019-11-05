@@ -1,79 +1,104 @@
-<div *ngIf="!readOnly" #editorRef style="background: #eff1f570; padding:40px; padding-top: 30px;" [id]="id"></div>
+<div *ngIf="!readOnly" #editorRef style="background: #eff1f570; padding:10px; border: dotted #ececec;" [id]="id"></div>
 
-<div *ngIf="readOnly" style="background: #eff1f570; padding:40px; padding-top: 30px;">
+<div *ngIf="readOnly" style="background: #eff1f570; padding:10px; border: dotted #ececec;">
     <div class="ce-block">
         <div class="ce-block__content">
             <ng-container [ngSwitch]="b?.type" *ngFor="let b of data">
-                <!-- Paragraph -->
-                <div class="ce-paragraph cdx-block" *ngSwitchCase="'paragraph'" [innerHTML]="b?.data?.text">
-                </div>
+                <div fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="start center">
+                    <div fxFlex="92">
+                        <!-- Paragraph -->
+                        <div *ngSwitchCase="'paragraph'">
+                            <div class="ce-paragraph cdx-block" [innerHTML]="b?.data?.text">
+                            </div>
+                        </div>
 
-                <!-- List -->
-                <div *ngSwitchCase="'list'">
-                    <ul [ngClass]="['cdx-block', 'cdx-list', 'cdx-list--' + b?.data?.style]">
-                        <li class="cdx-list__item" *ngFor="let i of b?.data?.items" [innerHTML]="i">
+                        <!-- List -->
+                        <div *ngSwitchCase="'list'">
+                            <ul [ngClass]="['cdx-block', 'cdx-list', 'cdx-list--' + b?.data?.style]">
+                                <li class="cdx-list__item" *ngFor="let i of b?.data?.items" [innerHTML]="i"></li>
+                            </ul>
+                        </div>
 
-                        </li>
-                    </ul>
-                </div>
+                        <!-- Header -->
+                        <div style="height: fit-content;" *ngSwitchCase="'header'" innerHTML="{{'<h' + b?.data?.level + ' class=ce-header' + '>' + b?.data?.text + '</h' + b?.data?.level + '>'}}">
+                            <!-- <div>
+                            </div> -->
+                        </div>
 
-                <!-- Header -->
-                <div *ngSwitchCase="'header'">
-                    <div
-                        innerHTML="{{'<h' + b?.data?.level + ' class=ce-header' + '>' + b?.data?.text + '</h' + b?.data?.level + '>'}}">
-                    </div>
-                </div>
+                        <!-- Image / Video -->
+                        <div *ngSwitchCase="'image'">
+                            <div class="cdx-block image-tool image-tool--filled">
+                                <div class="image-tool__image">
+                                    <ng-container *ngIf="isImage(b?.data?.file?.url); else elseTemplate">
+                                        <img (click)="zoomInOut($event)" class="image-tool__image-picture"
+                                            [src]="b?.data?.file?.url | safe: 'url'">
+                                        <div style="text-align: center; margin-top: 5px;"
+                                            [innerHTML]="b?.data?.caption"></div>
+                                    </ng-container>
+                                    <ng-template #elseTemplate>
+                                        <video class="image-tool__image-picture" autoplay loop controls
+                                            [src]="b?.data?.file?.url | safe: 'url'"></video>
+                                        <div style="text-align: center; margin-top: 5px;"
+                                            [innerHTML]="b?.data?.caption"></div>
+                                    </ng-template>
+                                </div>
+                            </div>
+                        </div>
 
-                <!-- Image / Video -->
-                <div *ngSwitchCase="'image'">
-                    <div class="cdx-block image-tool image-tool--filled">
-                        <div class="image-tool__image">
-                            <ng-container *ngIf="isImage(b?.data?.file?.url); else elseTemplate">
-                                <img (click)="zoomInOut($event)" class="image-tool__image-picture" [src]="b?.data?.file?.url | safe: 'url'">
+                        <!-- Embed -->
+                        <div *ngSwitchCase="'embed'">
+                            <div class="cdx-block embed-tool">
+                                <iframe class="embed-tool__content" style="width:100%;" height="320" frameborder="0"
+                                    allowfullscreen [src]="b?.data?.embed | safe : 'resourceUrl'"></iframe>
                                 <div style="text-align: center; margin-top: 5px;" [innerHTML]="b?.data?.caption"></div>
-                            </ng-container>
-                            <ng-template #elseTemplate>
-                                <video class="image-tool__image-picture" autoplay loop controls
-                                    [src]="b?.data?.file?.url | safe: 'url'"></video>
-                            </ng-template>
+                            </div>
+                        </div>
+
+                        <!-- Code -->
+                        <div *ngSwitchCase="'code'">
+                            <div class="cdx-block ce-code"><span
+                                    style="text-align: right; margin-bottom: 5px;">{{b?.data?.language}}</span>
+                                <pre><code #code [innerText]="b?.data?.code"></code></pre>
+                            </div>
+                        </div>
+
+                        <!-- Table -->
+                        <div *ngSwitchCase="'table'">
+                            <div class="tc-editor cdx-block">
+                                <div class="tc-table__wrap">
+                                    <table class="tc-table">
+                                        <tbody>
+                                            <tr *ngFor="let r of b?.data?.content; let ri = index;">
+                                                <td class="tc-table__cell" *ngFor="let c of r; let ci = index;">
+                                                    <div class="tc-table__area">
+                                                        <div class="tc-table__inp" contenteditable="false"
+                                                            [innerHTML]="b?.data?.content[ri][ci]"></div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- Embed -->
-                <div *ngSwitchCase="'embed'">
-                    <div class="cdx-block embed-tool">
-                        <iframe class="embed-tool__content" style="width:100%;" height="320" frameborder="0"
-                            allowfullscreen [src]="b?.data?.embed | safe : 'resourceUrl'"></iframe>
+                    <!-- Icon to view / collapse comments section -->
+                    <div fxFlex="8">
+                        <ng-container *ngIf="blockLevelComments">
+                            <a style="text-align: right;" *ngIf="!b['show']" mat-button (click)="b['show'] = true">
+                                <i style="font-size: 1.5rem !important;" class="fad fa-comments-alt fa-lg"></i>
+                            </a>
+                            <a style="text-align: right;" *ngIf="b['show']" mat-button (click)="b['show'] = false">
+                                <i style="font-size: 1.5rem !important;" class="fad fa-chevron-circle-up fa-lg"></i>
+                            </a>
+                        </ng-container>
                     </div>
                 </div>
 
-                <!-- Code -->
-                <div *ngSwitchCase="'code'">
-                    <div class="cdx-block ce-code"><span
-                            style="text-align: right; margin-bottom: 5px;">{{b?.data?.language}}</span>
-                        <pre><code #code [innerText]="b?.data?.code"></code></pre>
-                    </div>
-                </div>
-
-                <!-- Table -->
-                <div *ngSwitchCase="'table'">
-                    <div class="tc-editor cdx-block">
-                        <div class="tc-table__wrap">
-                            <table class="tc-table">
-                                <tbody>
-                                    <tr *ngFor="let r of b?.data?.content; let ri = index;">
-                                        <td class="tc-table__cell" *ngFor="let c of r; let ci = index;">
-                                            <div class="tc-table__area">
-                                                <div class="tc-table__inp" contenteditable="false"
-                                                    [innerHTML]="b?.data?.content[ri][ci]"></div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                <!-- Common Add Comment Template -->
+                <div *ngIf="blockLevelComments && b['show']">
+                    <ng-container *ngTemplateOutlet="addCommentTemplate; context: {blockId: b?._id}"></ng-container>
                 </div>
             </ng-container>
         </div>
@@ -81,3 +106,46 @@
 
     <!-- <pre>{{data | json}}</pre> -->
 </div>
+
+<ng-template #addCommentTemplate let-cDetails="details" let-blockId="blockId">
+    <!-- {{blockId}} -->
+    <!-- {{cDetails | json}} -->
+    <div class="tab-pane fade show product-tab">
+        <div class="thread">
+            <ul class="media-list thread-list" style="list-style: none; padding-bottom: 0;">
+                <!-- <h4 class="tab-content-wrapper">Comments:</h4> -->
+                <div *ngFor="let c of commentsList">
+                    <!-- {{c?.blockId}} - {{blockId}} -->
+                    <li *ngIf="c?.blockSpecificComment && c?.blockId === blockId" class="single-thread">
+                        <app-comment [comment]="c" [referenceId]="cDetails?._id"></app-comment>
+                    </li>
+                </div>
+            </ul>
+        </div>
+    </div>
+
+    <div class="comment-form-area" style="padding-left: 0; padding-right: 0;">
+        <!-- <h4>Leave a comment</h4> -->
+        <!-- comment reply -->
+        <div class="media comment-form">
+            <div class="media-left">
+                <a href="#">
+                    <img class="author_avatar_comment"
+                        [src]="authService?.loggedInUser?.avatar ? ((codemarketBucketURL + authService?.loggedInUser?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                        alt="Commentator Avatar">
+                </a>
+            </div>
+            <div class="media-body">
+                <div [formGroup]="commentForm" class="comment-reply-form">
+                    <app-editor [id]="blockId" [placeholder]="'Add Comment'" (output)="updateFormData($event)">
+                    </app-editor>
+
+                    <button type="button" style="float: right;" class="btn btn--sm btn--round"
+                        (click)="addComment(blockId)">Post
+                        Comment</button>
+                </div>
+            </div>
+        </div>
+        <!-- comment reply -->
+    </div>
+</ng-template>

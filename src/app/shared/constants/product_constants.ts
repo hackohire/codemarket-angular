@@ -18,10 +18,6 @@ export const productConstants = {
         description {
             ...Description
         }
-        shortDescription
-        demo_url
-        video_url
-        documentation_url
         price
         status
         createdAt

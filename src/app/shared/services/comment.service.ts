@@ -39,6 +39,8 @@ export class CommentService {
         parentId
         referenceId
       }
+      blockId
+      blockSpecificComment
     }
     ${description}
   `;

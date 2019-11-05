@@ -13,6 +13,13 @@ import { environment } from 'src/environments/environment';
 import { CodeWithLanguageSelection } from 'src/app/insert-code-snippet';
 import { HighlightJS } from 'ngx-highlightjs';
 import { appConstants } from '../../constants/app_constants';
+import { FormGroup, FormControl } from '@angular/forms';
+import { tap, switchMap } from 'rxjs/operators';
+import { AuthService } from '../../../core/services/auth.service';
+import { CommentService } from '../../services/comment.service';
+import { Post } from '../../models/post.model';
+import { of } from 'rxjs/internal/observable/of';
+import { Comment } from '../../models/comment.model';
 const path = require('path');
 
 @Component({
@@ -24,16 +31,29 @@ const path = require('path');
 export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit {
 
   editor: EditorJS;
+  @Input() post: Post; /** post for view mode */
   @Input() id: string;
-  @Input() readOnly = false;
+  @Input() readOnly = false; /** read only mode */
   @Input() data: [];
-  @Output() output: EventEmitter<any> = new EventEmitter();
+  @Input() placeholder: string;
+  @Output() output: EventEmitter<any> = new EventEmitter(); /** Emitting data with user interactions */
   @ViewChild('editorRef', { static: false }) editorRef: ElementRef;
   @ViewChild('code', { static: false }) code: ElementRef;
 
+  /** Variables related to block level comments */
+  @Input() blockLevelComments = false;
+  @Input() commentsList: Comment[]
+
+  anonymousAvatar = require('src/assets/images/anonymous-avatar.jpg');
+  codemarketBucketURL = environment.codemarketFilesBucket;
+
+  commentForm: FormGroup;
+
 
   constructor(
-    private _hljs: HighlightJS
+    private _hljs: HighlightJS,
+    public authService: AuthService,
+    public commentService: CommentService
   ) {
   }
 
@@ -41,6 +61,10 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
 
     if (!this.readOnly) {
       this.initiateEditor();
+    }
+
+    if (this.post) {
+      this.initializeCommentForm(this.post);
     }
   }
 
@@ -73,6 +97,38 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
     if (this.editor && this.editor.clear) {
       this.editor.destroy();
     }
+  }
+
+  initializeCommentForm(p) {
+    this.commentForm = new FormGroup({
+      text: new FormControl(''),
+      referenceId: new FormControl(p._id),
+      type: new FormControl(p.type),
+      blockSpecificComment: new FormControl(true),
+      blockId: new FormControl('')
+    });
+  }
+
+  addComment(blockId: string) {
+    console.log(this.commentForm.value);
+    if (this.authService.loggedInUser) {
+      this.commentForm.addControl('createdBy', new FormControl(this.authService.loggedInUser._id));
+      this.commentForm.get('blockId').setValue(blockId),
+
+      this.commentService.addComment(this.commentForm.value).pipe(
+        tap((d) => {
+          console.log(d);
+          if (d) {
+            this.commentsList.push(d);
+            // this.commentsList = d;
+          }
+        })
+      ).subscribe();
+    }
+  }
+
+  updateFormData(event) {
+    this.commentForm.get('text').setValue(event);
   }
 
   handleEnterKeyPress(e: Event) {
@@ -176,7 +232,7 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
       data: {
         blocks: this.data && this.data.length ? this.data : blocks
       },
-      placeholder: 'Let`s write!',
+      placeholder: this.placeholder ? this.placeholder : 'Let`s write!',
       onReady: (() => {
 
         // Get all the code elements from DOM and highlight them as code snippets using highlight.js

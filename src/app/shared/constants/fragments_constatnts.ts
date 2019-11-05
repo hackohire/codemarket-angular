@@ -3,6 +3,7 @@ import gql from 'graphql-tag';
 export const headerFragment = gql`
 fragment Header on HeaderBlock {
     type
+    _id
     data {
       text
       level
@@ -13,6 +14,7 @@ fragment Header on HeaderBlock {
 export const paragraphFragment = gql`
 fragment Paragraph on ParagraphBlock {
     type
+    _id
     data {
       text
     }
@@ -22,6 +24,7 @@ fragment Paragraph on ParagraphBlock {
 export const codeFragment = gql`
 fragment Code on CodeBlock {
   type
+  _id
   data {
     code
     language
@@ -32,6 +35,7 @@ fragment Code on CodeBlock {
 export const imageFragment = gql`
     fragment Image on ImageBlock {
     type
+    _id
     data {
         caption
         file {
@@ -47,6 +51,7 @@ export const imageFragment = gql`
 export const listFragment = gql`
 fragment List on ListBlock {
   type
+  _id
   data {
     style
     items
@@ -57,6 +62,7 @@ fragment List on ListBlock {
 export const quoteFragment = gql`
   fragment Quote on QuoteBlock {
     type
+    _id
     data {
       text
       caption
@@ -68,6 +74,7 @@ export const quoteFragment = gql`
 export const tableFragment = gql`
   fragment Table on TableBlock {
     type
+    _id
     data {
       content
     }
@@ -77,6 +84,7 @@ export const tableFragment = gql`
 export const warningFragment = gql`
   fragment Warning on WarningBlock {
     type
+    _id
     data {
       title
       message
@@ -87,6 +95,7 @@ export const warningFragment = gql`
 export const embedFragment = gql`
     fragment Embed on EmbedBlock {
     type
+    _id
     data {
         caption
         width

@@ -58,11 +58,15 @@
                 <ng-container matColumnDef="action">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
                     <td mat-cell *matCellDef="let post" (click)="$event.stopPropagation()">
-                        <button mat-mini-fab color="primary" (click)="editPost(post)"
+                        <button
+                        *ngIf="post?.createdBy?._id === authService?.loggedInUser?._id"
+                        mat-mini-fab color="primary" (click)="editPost(post)"
                             [routerLink]="['/', {outlets: {'main': ['post', 'edit-' + post.type, post._id]}}]">
                             <mat-icon>edit</mat-icon>
                         </button>
-                        <button mat-mini-fab color="warn" (click)="deletePost(post._id)">
+                        <button
+                        *ngIf="post?.createdBy?._id === authService?.loggedInUser?._id"
+                        mat-mini-fab color="warn" (click)="deletePost(post._id)">
                             <mat-icon>delete</mat-icon>
                         </button>
                     </td>

@@ -49,7 +49,7 @@
                         {{ postDetails?.company?.name }}
                     </h6>
 
-                    <h6 fxLayout="row" *ngIf="postDetails?.cities" style="margin: 0 0 8px 0;">
+                    <h6 fxLayout="row" *ngIf="postDetails?.cities && postDetails?.cities?.length" style="margin: 0 0 8px 0;">
                         <strong fxFlex="17" style="color: white;">Cities :</strong>
                         <!-- <mat-icon style="vertical-align: middle;"></mat-icon> -->
                         <span *ngFor="let c of postDetails?.cities; let ei = index;">{{c?.name + (ei === postDetails?.cities?.length - 1 ? '' : ', ' )}}</span>

@@ -2,6 +2,7 @@ import { User } from './user.model';
 import { BlockToolData } from '@editorjs/editorjs';
 import { Tag } from './product.model';
 import { PostStatus } from './poststatus.enum';
+import { Company } from './company.model';
 
 interface Files {
     file: string;
@@ -30,11 +31,9 @@ export interface Interview {
     updatedAt: string;
     categories?: [];
     demo_url?: string;
-    // documentation_url?: string;
-    // video_url?: string;
-    // snippets?: [HighlightResult];
     shortDescription?: string;
-    tags: Tag[];
-    support: Support;
-    // files: [Files];
+    tags?: Tag[];
+    support?: Support;
+    jobProfile?: string;
+    company?: Company
 }

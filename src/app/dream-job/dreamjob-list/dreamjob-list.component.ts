@@ -36,7 +36,7 @@ export class DreamjobListComponent implements OnInit {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   constructor(
-    private authService: AuthService,
+    public authService: AuthService,
     private store: Store<AppState>,
     public postService: PostService,
     private activatedRoute: ActivatedRoute,

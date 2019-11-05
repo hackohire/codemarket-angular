@@ -17,6 +17,7 @@ import { PostStatus } from 'src/app/shared/models/poststatus.enum';
 import { PostType } from 'src/app/shared/models/post-types.enum';
 import { AddPost, UpdatePost, SetSelectedPost, GetPostById } from 'src/app/core/store/actions/post.actions';
 import { selectSelectedPost } from 'src/app/core/store/selectors/post.selectors';
+import { CompanyService } from '../../companies/company.service';
 
 
 @Component({
@@ -26,7 +27,6 @@ import { selectSelectedPost } from 'src/app/core/store/selectors/post.selectors'
 })
 export class AddInterviewComponent implements OnInit {
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
-  urlRegex = '^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$';
   breadcumb: BreadCumb;
   interviewForm: FormGroup;
   modules = {
@@ -71,6 +71,8 @@ export class AddInterviewComponent implements OnInit {
   tagSuggestions: Tag[];
   allTags: Tag[];
 
+  allCompanies = [];
+
   @ViewChild('searchInput', {static: false}) searchInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto', {static: false}) matAutocomplete: MatAutocomplete;
 
@@ -79,7 +81,8 @@ export class AddInterviewComponent implements OnInit {
     private store: Store<AppState>,
     private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
-    private formService: FormService
+    private formService: FormService,
+    private companyService: CompanyService
   ) {
     this.breadcumb = {
       title: 'Add Interview Details',
@@ -138,23 +141,25 @@ export class AddInterviewComponent implements OnInit {
       name: new FormControl(i && i.name ? i.name : '', Validators.required),
       description: new FormControl(i && i.description ? i.description : ''),
       price: new FormControl(i && i.price ? i.price : 0, Validators.required),
+      jobProfile: new FormControl(i && i.jobProfile ? i.jobProfile : ''),
+      company: new FormControl(i && i.company ? i.company._id : ''),
       createdBy: new FormControl(i && i.createdBy && i.createdBy._id ? i.createdBy._id : ''),
-      // shortDescription: new FormControl(i && i.shortDescription ? i.shortDescription : ''),
       categories: new FormControl(i && i.categories ? i.categories : []),
-      // demo_url: new FormControl(i && i.demo_url ? i.demo_url : '', [Validators.pattern(this.urlRegex)]),
-      // documentation_url: new FormControl('', [Validators.pattern(this.urlRegex)]),
-      // video_url: new FormControl('', [Validators.pattern(this.urlRegex)]),
       status: new FormControl(i && i.status ? i.status : PostStatus.Drafted),
       _id: new FormControl(i && i._id ? i._id : ''),
       tags: this.fb.array(i && i.tags && i.tags.length ? i.tags : []),
       type: new FormControl(PostType.Interview),
-support: new FormGroup({
+      support: new FormGroup({
         time: new FormControl(i && i.support && i.support.time ? i.support.time : 0),
         description: new FormControl(i && i.support && i.support.description ? i.support.description : '')
       })
       // snippets: new FormControl(null),
     });
 
+    this.companyService.getAllCompanies().subscribe((companies) => {
+      this.allCompanies = companies;
+    });
+    
     this.formService.findFromCollection('', 'tags').subscribe((tags) => {
       this.tagSuggestions = tags;
       this.allTags = tags;

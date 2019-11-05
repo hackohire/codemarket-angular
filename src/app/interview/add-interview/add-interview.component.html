@@ -9,6 +9,16 @@
                     <input type="text" matInput formControlName="name" placeholder="Name">
                 </mat-form-field>
 
+                <ng-select placeholder="Select Company" formControlName="company">
+                    <ng-option *ngFor="let cName of allCompanies" [value]="cName._id">
+                        {{ cName?.name }}
+                    </ng-option>
+                </ng-select>
+
+                <mat-form-field class="field-full-width">
+                    <input type="text" matInput formControlName="jobProfile" placeholder="Position">
+                </mat-form-field>
+
                 <h6>Description:</h6>
                 <br />
 
@@ -100,9 +110,14 @@
                 <br />
 
                 <div fxLayout="row" fxLayoutGap="10px">
-                    <button *ngIf="statusFormControl?.value !== 'Published'" type="button" (click)="submit('Drafted')" [disabled]="interviewForm?.invalid" mat-raised-button color="primary">Save</button>
-                    <button type="button" (click)="submit('Published')" [disabled]="interviewForm?.invalid" mat-raised-button color="primary">{{ statusFormControl?.value === 'Published' ? 'Publish Changes' : 'Publish' }}</button>
-                    <button *ngIf="statusFormControl?.value === 'Published'" type="button" (click)="submit('Unpublished')" [disabled]="interviewForm?.invalid" mat-raised-button color="primary">{{ 'Unpublish' }}</button>
+                    <button *ngIf="statusFormControl?.value !== 'Published'" type="button" (click)="submit('Drafted')"
+                        [disabled]="interviewForm?.invalid" mat-raised-button color="primary">Save</button>
+                    <button type="button" (click)="submit('Published')" [disabled]="interviewForm?.invalid"
+                        mat-raised-button
+                        color="primary">{{ statusFormControl?.value === 'Published' ? 'Publish Changes' : 'Publish' }}</button>
+                    <button *ngIf="statusFormControl?.value === 'Published'" type="button"
+                        (click)="submit('Unpublished')" [disabled]="interviewForm?.invalid" mat-raised-button
+                        color="primary">{{ 'Unpublish' }}</button>
                 </div>
 
             </div>

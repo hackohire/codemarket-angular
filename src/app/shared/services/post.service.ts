@@ -54,6 +54,7 @@ export class PostService {
       createdAt
       avatar
     }
+    slug
 
     dateRange
     address
@@ -251,8 +252,12 @@ export class PostService {
     //   // this.store.dispatch(SetSelectedPost({ post: null }));
     // }
 
-    this.router.navigate(['/', { outlets: { main: ['dashboard', `${post.type}-details`, post._id] } }],
-      { queryParams: { type: post.type, postId: post._id } });
+    this.router.navigate(['/', { outlets: { main: [
+      'dashboard',
+      post.type === 'product' ? 'product' : 'post',
+      post.slug ? post.slug : ''] } }
+    ],
+      { queryParams: { type: post.type } });
   }
 
   editPost(post): void {

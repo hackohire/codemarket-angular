@@ -141,7 +141,6 @@ export class AddTeamskillComponent implements OnInit {
       description: new FormControl(i && i.description ? i.description : ''),
       price: new FormControl(i && i.price ? i.price : 0, Validators.required),
       createdBy: new FormControl(i && i.createdBy && i.createdBy._id ? i.createdBy._id : ''),
-      categories: new FormControl(i && i.categories ? i.categories : []),
       status: new FormControl(i && i.status ? i.status : PostStatus.Drafted),
       _id: new FormControl(i && i._id ? i._id : ''),
       tags: this.fb.array(i && i.tags && i.tags.length ? i.tags : []),

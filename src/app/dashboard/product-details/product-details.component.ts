@@ -23,6 +23,7 @@ import Peer from 'peerjs';
 import { PostService } from '../../shared/services/post.service';
 import { GetPostById, SetSelectedPost } from '../../core/store/actions/post.actions';
 import { selectSelectedPost } from '../../core/store/selectors/post.selectors';
+import { Post } from '../../shared/models/post.model';
 
 @Component({
   selector: 'app-product-details',
@@ -52,7 +53,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
 
   commentForm: FormGroup;
 
-  productDetails$: Observable<Product>;
+  productDetails$: Observable<Post>;
   subscription$: Subscription = new Subscription();
 
   peer: Peer;
@@ -102,7 +103,10 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    const params = this.activatedRoute.snapshot.queryParams;
+    const params = this.activatedRoute.snapshot.params;
+
+    const postId = params.slug.split('-').pop();
+
     this.productDetails$ = this.store.select(selectSelectedPost);
 
     this.subscription$.add(this.store.select(selectSelectedPost).pipe(
@@ -150,12 +154,12 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
             ).subscribe()
           );
 
-        } else if (this.productDetails && this.productDetails._id === this.activatedRoute.snapshot.queryParams.postId) {
+        } else if (this.productDetails && this.productDetails._id === postId) {
           /** Comes inside this block, only when we are already in a post details page, and by using searh,
            * we try to open any other post detials page
            */
         } else {
-          this.store.dispatch(GetPostById({ postId: params.postId }));
+          this.store.dispatch(GetPostById({ postId }));
         }
       }),
     ).subscribe());

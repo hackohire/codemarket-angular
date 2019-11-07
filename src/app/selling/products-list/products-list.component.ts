@@ -4,11 +4,10 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/core/store/state/app.state';
 import { MatTableDataSource, MatSort } from '@angular/material';
 import { Product } from 'src/app/shared/models/product.model';
-import { selectProductsList } from 'src/app/core/store/selectors/product.selectors';
 import { Subscription } from 'rxjs';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { map } from 'rxjs/operators';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { ProductService } from 'src/app/core/services/product.service';
 import { BreadCumb } from 'src/app/shared/models/bredcumb.model';
 import { PostStatus } from 'src/app/shared/models/poststatus.enum';
@@ -19,7 +18,6 @@ import { selectLoggedInUser } from '../../core/store/selectors/user.selector';
 import { GetPostsByUserIdAndType, DeletePost, SetSelectedPost } from '../../core/store/actions/post.actions';
 import { PostType } from '../../shared/models/post-types.enum';
 import { selectPostsByUserIdAndType } from '../../core/store/selectors/post.selectors';
-import { DatatableComponent } from '../../shared/components/datatable/datatable.component';
 import { SweetalertService } from '../../shared/services/sweetalert.service';
 
 @Component({
@@ -193,6 +191,16 @@ export class ProductsListComponent implements OnInit, OnDestroy {
           /** Set the data for the datatable  */
           this.length = result.total;
           this.dataSource.data = result.posts;
+
+          // result.posts.forEach((p, i) => {
+          //   const newP = {
+          //     _id: p._id,
+          //     name: p.name.trim()
+          //   }
+          //   setTimeout(() => {
+          //     this.postService.updatePost(newP).subscribe(d => console.log(d.slug));
+          //   }, i * 500)
+          // })
           // this.dataSource.paginator.length = result.total;
 
           /** Set the columns visible in the table */

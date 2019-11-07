@@ -44,7 +44,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
   postDetails: Post | Company | any;
   isUserAttending: boolean; /** Only for the event */
-  subscription$: Subscription;
+  subscription$: Subscription = new Subscription();
   type: string; // product | help-request | interview | requirement | Testing | Howtodoc
   commentsList: any[];
   likeCount: number;
@@ -96,22 +96,29 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
     const params = this.activatedRoute.snapshot.params;
 
+    const postId = params.slug.split('-').pop();
+
     if (this.type === 'company') {
-      this.subscription$ = this.companyService.getCompanyById(params.companyId).subscribe({
-        next: (c: Company) => {
-          this.companyDetails$ = of(c);
-          this.postDetails = c;
-          this.initializeCommentForm(c);
-          this.companyService.getListOfUsersInACompany(params.companyId).subscribe((u) => {
-            console.log(u);
-            if (u) {
-              this.usersInterestedInCompany = u;
-            }
-          });
-        }
-      });
+      this.subscription$.add(
+        this.companyService.getCompanyById(params.companyId).subscribe({
+          next: (c: Company) => {
+            this.companyDetails$ = of(c);
+            this.postDetails = c;
+            this.initializeCommentForm(c);
+
+            this.subscription$.add(
+              this.companyService.getListOfUsersInACompany(params.companyId).subscribe((u) => {
+                console.log(u);
+                if (u) {
+                  this.usersInterestedInCompany = u;
+                }
+              })
+            );
+          }
+        })
+      )
     } else {
-      this.subscription$ = this.store.select(selectSelectedPost).pipe(
+      this.subscription$.add(this.store.select(selectSelectedPost).pipe(
         tap((p: Post) => {
           if (p) {
             this.postDetails = p;
@@ -122,28 +129,31 @@ export class DetailsComponent implements OnInit, OnDestroy {
             /** Subscribe to loggedinuser, once loggedInUse is got, Check if the loggedInUder is
              * in the list of attendess or not
              **/
-            this.authService.loggedInUser$.subscribe((user) => {
-              if (this.postDetails
-                && this.postDetails.usersAttending
-                && this.postDetails.usersAttending.length
-                && this.postDetails.usersAttending.find((u: User) => u._id === user._id)) {
+
+            this.subscription$.add(
+              this.authService.loggedInUser$.subscribe((user) => {
+                if (this.postDetails
+                  && this.postDetails.usersAttending
+                  && this.postDetails.usersAttending.length
+                  && this.postDetails.usersAttending.find((u: User) => u._id === user._id)) {
                   this.isUserAttending = true;
-              } else {
-                this.isUserAttending = false;
-              }
-            });
-          } else if (this.postDetails && this.postDetails._id === this.activatedRoute.snapshot.queryParams.postId) {
+                } else {
+                  this.isUserAttending = false;
+                }
+              })
+            )
+          } else if (this.postDetails && this.postDetails._id === postId) {
             /** Comes inside this block, only when we are already in a post details page, and by using searh,
              * we try to open any other post detials page
              */
           } else {
-            const postId = this.activatedRoute.snapshot.queryParams.postId;
             this.store.dispatch(GetPostById({ postId }));
             this.details$ = this.store.select(selectSelectedPost);
           }
 
         })
-      ).subscribe();
+      ).subscribe()
+      );
     }
   }
 
@@ -153,45 +163,49 @@ export class DetailsComponent implements OnInit, OnDestroy {
       await this.authService.checkIfUserIsLoggedIn(true);
     } else {
       /** Make the API call to set the user in the list of attendees */
-      this.postService.rsvpEvent(eventId).pipe(
-        tap(d => console.log(d))
-      ).subscribe({
-        next: (d) => {
-          console.log(d);
-          /** If user doesn't have subscription, rediret to membership page */
-          if (d && !d.validSubscription) {
-            this.router.navigate(['/', {outlets: {main: ['membership']}}]);
-          }
-
-          /** Check i user is in the list of attendees */
-          if (d && d.usersAttending && d.usersAttending.length) {
-            this.isUserAttending = true;
-            this.postDetails.usersAttending = d.usersAttending;
-            this.store.dispatch(SetSelectedPost({post: this.postDetails}));
-            const isLoggedInUserAttending = d.usersAttending.find((u) => u._id === this.authService.loggedInUser._id);
-            if (isLoggedInUserAttending) {
-              this.successfulRSVP.show();
+      this.subscription$.add(
+        this.postService.rsvpEvent(eventId).pipe(
+          tap(d => console.log(d))
+        ).subscribe({
+          next: (d) => {
+            console.log(d);
+            /** If user doesn't have subscription, rediret to membership page */
+            if (d && !d.validSubscription) {
+              this.router.navigate(['/', { outlets: { main: ['membership'] } }]);
             }
-          }
-        },
-        error: (e) => console.log(e)
-      });
+
+            /** Check i user is in the list of attendees */
+            if (d && d.usersAttending && d.usersAttending.length) {
+              this.isUserAttending = true;
+              this.postDetails.usersAttending = d.usersAttending;
+              this.store.dispatch(SetSelectedPost({ post: this.postDetails }));
+              const isLoggedInUserAttending = d.usersAttending.find((u) => u._id === this.authService.loggedInUser._id);
+              if (isLoggedInUserAttending) {
+                this.successfulRSVP.show();
+              }
+            }
+          },
+          error: (e) => console.log(e)
+        })
+      );
     }
   }
 
   cancelRSVP(eventId: string) {
-    this.postService.cancelRSVP(eventId).subscribe((e) => {
-      console.log(e);
-      if (e && e.usersAttending && e.usersAttending) {
-        const isCustomerGoing = e.usersAttending.find(u => u._id === this.authService.loggedInUser._id);
-        if (!isCustomerGoing) {
-          this.isUserAttending = false;
-          this.postDetails.usersAttending = e.usersAttending;
-          this.store.dispatch(SetSelectedPost({post: this.postDetails}));
-          this.sweetAlertService.success('Successful Cancel RSVP Request', '', 'success');
+    this.subscription$.add(
+      this.postService.cancelRSVP(eventId).subscribe((e) => {
+        console.log(e);
+        if (e && e.usersAttending && e.usersAttending) {
+          const isCustomerGoing = e.usersAttending.find(u => u._id === this.authService.loggedInUser._id);
+          if (!isCustomerGoing) {
+            this.isUserAttending = false;
+            this.postDetails.usersAttending = e.usersAttending;
+            this.store.dispatch(SetSelectedPost({ post: this.postDetails }));
+            this.sweetAlertService.success('Successful Cancel RSVP Request', '', 'success');
+          }
         }
-      }
-    });
+      })
+    );
   }
 
   ngOnDestroy(): void {
@@ -208,13 +222,15 @@ export class DetailsComponent implements OnInit, OnDestroy {
       type: new FormControl(this.type),
     });
 
-    this.commentService.getCommentsByReferenceId(p._id).pipe(
-      tap((d) => {
-        this.commentsList = d;
+    this.subscription$.add(
+      this.commentService.getCommentsByReferenceId(p._id).pipe(
+        tap((d) => {
+          this.commentsList = d;
+        })
+      ).subscribe({
+        error: (e) => console.log(e)
       })
-    ).subscribe({
-      error: (e) => console.log(e)
-    });
+    );
   }
 
   getDate(d: string) {
@@ -226,17 +242,20 @@ export class DetailsComponent implements OnInit, OnDestroy {
     console.log(this.commentForm.value);
     if (this.authService.loggedInUser) {
       this.commentForm.addControl('createdBy', new FormControl(this.authService.loggedInUser._id));
-      this.commentService.addComment(this.commentForm.value).pipe(
-        switchMap((d) => {
-          return this.commentService.getCommentsByReferenceId(d.referenceId);
-        }),
-        tap((d) => {
-          console.log(d);
-          if (d && d.length) {
-            this.commentsList = d;
-          }
-        })
-      ).subscribe();
+
+      this.subscription$.add(
+        this.commentService.addComment(this.commentForm.value).pipe(
+          switchMap((d) => {
+            return this.commentService.getCommentsByReferenceId(d.referenceId);
+          }),
+          tap((d) => {
+            console.log(d);
+            if (d && d.length) {
+              this.commentsList = d;
+            }
+          })
+        ).subscribe()
+      );
     }
   }
 
@@ -250,14 +269,10 @@ export class DetailsComponent implements OnInit, OnDestroy {
   }
 
   openDialog(authorId?: string): void {
-    const dialogRef = this.dialog.open(VideoChatComponent, {
+    this.dialog.open(VideoChatComponent, {
       width: '550px',
       data: { authorId, peer: this.peer },
       disableClose: true
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
     });
   }
 

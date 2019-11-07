@@ -1,6 +1,6 @@
-<div *ngIf="!readOnly" #editorRef style="background: #eff1f570; padding:10px; border: dotted #ececec;" [id]="id"></div>
+<div *ngIf="!readOnly" #editorRef style="background: #eff1f570; padding:15px; border: dotted #ececec;" [id]="id"></div>
 
-<div *ngIf="readOnly" style="background: #eff1f570; padding:10px; border: dotted #ececec;">
+<div *ngIf="readOnly" #editorRef  style="background: #eff1f570; padding:15px; border: dotted #ececec;">
     <div class="ce-block">
         <div class="ce-block__content">
             <ng-container [ngSwitch]="b?.type" *ngFor="let b of data">
@@ -58,7 +58,7 @@
                         <div *ngSwitchCase="'code'">
                             <div class="cdx-block ce-code"><span
                                     style="text-align: right; margin-bottom: 5px;">{{b?.data?.language}}</span>
-                                <pre><code #code [innerText]="b?.data?.code"></code></pre>
+                                <pre><code [innerText]="b?.data?.code"></code></pre>
                             </div>
                         </div>
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output, Input, OnDestroy, OnChanges, AfterViewInit, SimpleChanges, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input, OnDestroy, OnChanges, AfterViewInit, SimpleChanges, ViewChild, ElementRef, ViewChildren } from '@angular/core';
 import EditorJS from '@editorjs/editorjs';
 import Header from '@editorjs/header';
 import ImageTool from '@editorjs/image';
@@ -38,7 +38,6 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
   @Input() placeholder: string;
   @Output() output: EventEmitter<any> = new EventEmitter(); /** Emitting data with user interactions */
   @ViewChild('editorRef', { static: false }) editorRef: ElementRef;
-  @ViewChild('code', { static: false }) code: ElementRef;
 
   /** Variables related to block level comments */
   @Input() blockLevelComments = false;
@@ -69,11 +68,15 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
   }
 
   ngAfterViewInit(): void {
-    //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
-    //Add 'implements AfterViewInit' to the class.
+    /** Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
+     * Add 'implements AfterViewInit' to the class.
+    */
 
-    if (this.code) {
-      this._hljs.highlightBlock(this.code.nativeElement);
+    /** Get all the code elements from DOM and highlight them as code snippets using highlight.js */
+    if (this.editorRef && this.editorRef.nativeElement) {
+      this.editorRef.nativeElement.querySelectorAll('pre code').forEach((block: HTMLElement) => {
+        this._hljs.highlightBlock(block);
+      });
     }
     this.zoomInZoomOutForImages();
   }
@@ -87,7 +90,7 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
     } else if (this.editor && changes.readOnly && changes.readOnly.currentValue) {
       this.editor.destroy();
       // this.initiateEditor();
-    } else if ((!this.editor || !this.editor.clear ) && changes.readOnly && !changes.readOnly.currentValue) {
+    } else if ((!this.editor || !this.editor.clear) && changes.readOnly && !changes.readOnly.currentValue) {
       this.readOnly = false;
       this.initiateEditor();
     }
@@ -115,25 +118,20 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
       this.commentForm.addControl('createdBy', new FormControl(this.authService.loggedInUser._id));
       this.commentForm.get('blockId').setValue(blockId),
 
-      this.commentService.addComment(this.commentForm.value).pipe(
-        tap((d) => {
-          console.log(d);
-          if (d) {
-            this.commentsList.push(d);
-            // this.commentsList = d;
-          }
-        })
-      ).subscribe();
+        this.commentService.addComment(this.commentForm.value).pipe(
+          tap((d) => {
+            console.log(d);
+            if (d) {
+              this.commentsList.push(d);
+              // this.commentsList = d;
+            }
+          })
+        ).subscribe();
     }
   }
 
   updateFormData(event) {
     this.commentForm.get('text').setValue(event);
-  }
-
-  handleEnterKeyPress(e: Event) {
-    // e.preventDefault();
-    // e.stopPropagation()
   }
 
   initiateEditor(blocks = null) {

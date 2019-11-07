@@ -47,48 +47,12 @@ const dashboardRoutes: Routes = [
     loadChildren: () => import('./my-profile/my-profile.module').then(module => module.MyProfileModule),
   },
   {
-    path: 'product-details/:productId',
+    path: 'product/:slug',
     loadChildren: () => import('./product-details/product-details.module').then(module => module.ProductDetailsModule),
     runGuardsAndResolvers: 'always'
   },
   {
-    path: 'help-request-details/:helpRequestId',
-    loadChildren: () => import('../detail/detail.module').then(module => module.DetailModule),
-  },
-  {
-    path: 'interview-details/:interviewId',
-    loadChildren: () => import('../detail/detail.module').then(module => module.DetailModule),
-  },
-  {
-    path: 'requirement-details/:requirementId',
-    loadChildren: () => import('../detail/detail.module').then(module => module.DetailModule),
-  },
-  {
-    path: 'testing-details/:testingId',
-    loadChildren: () => import('../detail/detail.module').then(module => module.DetailModule),
-  },
-  {
-    path: 'howtodoc-details/:howtodocId',
-    loadChildren: () => import('../detail/detail.module').then(module => module.DetailModule),
-  },
-  {
-    path: 'design-details/:designId',
-    loadChildren: () => import('../detail/detail.module').then(module => module.DetailModule),
-  },
-  {
-    path: 'goal-details/:goalId',
-    loadChildren: () => import('../detail/detail.module').then(module => module.DetailModule),
-  },
-  {
-    path: 'event-details/:eventId',
-    loadChildren: () => import('../detail/detail.module').then(module => module.DetailModule),
-  },
-  {
-    path: 'team-skill-details/:teamSkillId',
-    loadChildren: () => import('../detail/detail.module').then(module => module.DetailModule),
-  },
-  {
-    path: 'dream-job-details/:dreamjobId',
+    path: 'post/:slug',
     loadChildren: () => import('../detail/detail.module').then(module => module.DetailModule),
   },
   {

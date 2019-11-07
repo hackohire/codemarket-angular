@@ -18,6 +18,7 @@ import { PostType } from 'src/app/shared/models/post-types.enum';
 import { AddPost, UpdatePost, SetSelectedPost, GetPostById } from 'src/app/core/store/actions/post.actions';
 import { selectSelectedPost } from 'src/app/core/store/selectors/post.selectors';
 import { CompanyService } from '../../companies/company.service';
+import { Post } from '../../shared/models/post.model';
 
 
 @Component({
@@ -109,11 +110,11 @@ export class AddInterviewComponent implements OnInit {
       this.interviewFormInitialization(null);
     } else {
       this.subscription$ = this.store.select(selectSelectedPost).pipe(
-        tap((h: Interview) => {
+        tap((h: Post) => {
           this.interviewFormInitialization(h);
           this.edit = true;
         }),
-        switchMap((h: Interview) => {
+        switchMap((h: Post) => {
           if (!h) {
             return this.activatedRoute.params;
           }
@@ -136,7 +137,7 @@ export class AddInterviewComponent implements OnInit {
   ngOnInit() {
   }
 
-  interviewFormInitialization(i: Interview) {
+  interviewFormInitialization(i: Post) {
     this.interviewForm = new FormGroup({
       name: new FormControl(i && i.name ? i.name : '', Validators.required),
       description: new FormControl(i && i.description ? i.description : ''),
@@ -144,7 +145,7 @@ export class AddInterviewComponent implements OnInit {
       jobProfile: new FormControl(i && i.jobProfile ? i.jobProfile : ''),
       company: new FormControl(i && i.company ? i.company._id : ''),
       createdBy: new FormControl(i && i.createdBy && i.createdBy._id ? i.createdBy._id : ''),
-      categories: new FormControl(i && i.categories ? i.categories : []),
+      // categories: new FormControl(i && i.categories ? i.categories : []),
       status: new FormControl(i && i.status ? i.status : PostStatus.Drafted),
       _id: new FormControl(i && i._id ? i._id : ''),
       tags: this.fb.array(i && i.tags && i.tags.length ? i.tags : []),

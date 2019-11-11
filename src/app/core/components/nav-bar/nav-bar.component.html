@@ -43,6 +43,9 @@
         Team Skills</a>
 
       <a mat-list-item [routerLink]="['/', {outlets: {'main': ['company', 'company-list']}}]"
+        [queryParams]="{all: false}">My Companies</a>
+
+      <!-- <a mat-list-item [routerLink]="['/', {outlets: {'main': ['company', 'company-list']}}]"
         [queryParams]="{type: 'local-business', all: false}">My
         Local Businesses</a>
 
@@ -52,7 +55,7 @@
 
       <a mat-list-item [routerLink]="['/', {outlets: {'main': ['company', 'company-list']}}]"
         [queryParams]="{type: 'startup', all: false}">My
-        Startups</a>
+        Startups</a> -->
 
       <a mat-list-item [routerLink]="['/', {outlets: {'main': ['post', 'dream-job-list']}}]"
         [queryParams]="{type: 'dream-job', all: false}">My
@@ -110,9 +113,9 @@
       <!-- Startups -->
       <a mat-button routerLinkActive="mat-primary"
         [routerLink]="['/', {outlets: {'main': ['dashboard', 'company-list']}}]"
-        [queryParams]="{type: 'startup', all: true}">
+        [queryParams]="{all: true}">
         <i style="font-size: 1.7rem !important;" class="vertical-align-middle fad fa-lightbulb-on fa-fw"></i>
-        <div class="line-height-initial" [fxHide.xs]="true"> Startups</div>
+        <div class="line-height-initial" [fxHide.xs]="true"> Companies</div>
       </a>
 
       <!-- Hackathon -->

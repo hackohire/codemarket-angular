@@ -143,7 +143,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
           this.commentForm = new FormGroup({
             text: new FormControl(''),
             referenceId: new FormControl(p._id),
-            type: new FormControl('product'),
+            type: new FormControl('post'),
           });
 
           this.subscription$.add(

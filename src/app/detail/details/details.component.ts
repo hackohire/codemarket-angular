@@ -96,7 +96,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
     const params = this.activatedRoute.snapshot.params;
 
-    const postId = params.slug.split('-').pop();
+    const postId = params && params.slug ? params.slug.split('-').pop() : '';
 
     if (this.type === 'company') {
       this.subscription$.add(
@@ -104,7 +104,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
           next: (c: Company) => {
             this.companyDetails$ = of(c);
             this.postDetails = c;
-            this.initializeCommentForm(c);
+            this.initializeCommentForm(c, 'company');
 
             this.subscription$.add(
               this.companyService.getListOfUsersInACompany(params.companyId).subscribe((u) => {
@@ -124,7 +124,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
             this.postDetails = p;
             this.details$ = of(p);
             // this.type = ;
-            this.initializeCommentForm(p);
+            this.initializeCommentForm(p, 'post');
 
             /** Subscribe to loggedinuser, once loggedInUse is got, Check if the loggedInUder is
              * in the list of attendess or not
@@ -215,11 +215,11 @@ export class DetailsComponent implements OnInit, OnDestroy {
     }
   }
 
-  initializeCommentForm(p) {
+  initializeCommentForm(p, commentType?: string) {
     this.commentForm = new FormGroup({
       text: new FormControl(''),
       referenceId: new FormControl(p._id),
-      type: new FormControl(this.type),
+      type: new FormControl(commentType ? commentType : this.type),
     });
 
     this.subscription$.add(

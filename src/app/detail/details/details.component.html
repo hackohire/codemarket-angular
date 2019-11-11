@@ -32,14 +32,9 @@
                             <div class="tab-pane fade show product-tab active" id="product-details">
                                 <div>
 
-                                    <app-editor
-                                    *ngIf="details?.description"
-                                    [commentsList]="commentsList"
-                                    [blockLevelComments]="true"
-                                    [readOnly]="true"
-                                    [data]="details?.description"
-                                    [id]="'details-editor'"
-                                    [post]="details">
+                                    <app-editor *ngIf="details?.description" [commentsList]="commentsList"
+                                        [blockLevelComments]="true" [readOnly]="true" [data]="details?.description"
+                                        [id]="'details-editor'" [post]="details" [commentType]="'post'">
                                     </app-editor>
 
                                     <br />
@@ -47,7 +42,7 @@
                                     <h4 class="tab-content-wrapper">Support Details:</h4>
 
                                     <app-editor *ngIf="details?.support?.description" [readOnly]="true"
-                                        [data]="details?.support?.description" [id]="'details-support-editor'">
+                                        [data]="details?.support?.description" [id]="'details-support-editor'" [commentType]="'post'">
                                     </app-editor>
                                     <ng-template #noDescription>
                                         <span>No Description</span>
@@ -350,16 +345,23 @@
                             <div class="tab-pane fade show product-tab active" id="product-details">
                                 <div>
 
-                                    <app-editor
-                                    *ngIf="details?.howCanYouHelp"
-                                    [commentsList]="commentsList"
-                                    [blockLevelComments]="true"
-                                    [readOnly]="true"
-                                    [data]="details?.howCanYouHelp"
-                                    [post]="details"
-                                    [id]="'company-details-editor'">
+                                    <h4 class="tab-content-wrapper">How Can You Help:</h4>
+                                    <app-editor *ngIf="details?.howCanYouHelp" [commentsList]="commentsList"
+                                        [blockLevelComments]="true" [readOnly]="true" [data]="details?.howCanYouHelp"
+                                        [post]="details" [id]="'company-details-editor'" [commentType]="'company'">
                                     </app-editor>
 
+                                    <h4 class="tab-content-wrapper">Ideas:</h4>
+                                    <app-editor *ngIf="details?.ideas" [commentsList]="commentsList"
+                                        [blockLevelComments]="true" [readOnly]="true" [data]="details?.ideas"
+                                        [post]="details" [id]="'ideas-editor'" [commentType]="'company'">
+                                    </app-editor>
+
+                                    <h4 class="tab-content-wrapper">Questions:</h4>
+                                    <app-editor *ngIf="details?.questions" [commentsList]="commentsList"
+                                        [blockLevelComments]="true" [readOnly]="true" [data]="details?.questions"
+                                        [post]="details" [id]="'questions-editor'" [commentType]="'company'">
+                                    </app-editor>
                                     <br />
                                     <br />
 
@@ -538,7 +540,8 @@
                     <app-editor [id]="'comment-editor'" (output)="updateFormData($event)">
                     </app-editor>
 
-                    <button style="float: right;" type="button" class="btn btn--sm btn--round" (click)="addComment()">Post
+                    <button style="float: right;" type="button" class="btn btn--sm btn--round"
+                        (click)="addComment()">Post
                         Comment</button>
                 </div>
             </div>

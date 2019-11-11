@@ -137,6 +137,21 @@ input[type="number"]::-webkit-outer-spin-button {
   background-color: white;
 }
 
+tr.mat-header-row {
+  background-color: #f9f9f9;
+  color: #616161;
+  font-size: 12px;
+  border-bottom-color: rgba(0, 0, 0, 0.12);
+}
+
+th.mat-header-cell {
+  font-size: initial !important;
+}
+
+.mat-sort-header-button {
+  text-transform: capitalize !important;
+}
+
 .mat-column-name {
   word-wrap: break-word !important;
   white-space: unset !important;

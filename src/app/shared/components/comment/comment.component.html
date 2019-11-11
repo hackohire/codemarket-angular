@@ -20,7 +20,7 @@
 
 
             <a style="float: right;" *ngIf="comment?.createdBy?._id === authService?.loggedInUser?._id" mat-button (click)="deleteComment()">
-                <i style="font-size: 1.5rem !important;" class="fad fa-comment-minus fa-lg"></i>
+                <i style="font-size: 2rem !important;" class="fad fa-comment-minus fa-lg"></i>
             </a>
 
             <!-- <button mat-mini-fab style="float: right" *ngIf="comment?.createdBy?._id === authService?.loggedInUser?._id"
@@ -29,7 +29,7 @@
             </button> -->
 
             <a style="float: right;" *ngIf="comment?.createdBy?._id === authService?.loggedInUser?._id" mat-button (click)="edit=true">
-                    <i style="font-size: 1.5rem !important;" class="fad fa-comment-edit fa-lg"></i>
+                    <i style="font-size: 2rem !important;" class="fad fa-comment-edit fa-lg"></i>
             </a>
 
             <!-- <button mat-mini-fab style="float: right" *ngIf="comment?.createdBy?._id === authService?.loggedInUser?._id" (click)="edit=true" color="primary">

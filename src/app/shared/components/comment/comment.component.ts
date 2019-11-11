@@ -7,6 +7,7 @@ import { BlockToolData } from '@editorjs/editorjs';
 import { CommentService } from '../../services/comment.service';
 import { Comment } from '../../models/comment.model';
 import { environment } from 'src/environments/environment';
+import { SweetalertService } from '../../services/sweetalert.service';
 
 @Component({
   selector: 'app-comment',
@@ -19,6 +20,7 @@ export class CommentComponent implements OnInit {
   @Input() referenceId: string;
   @Input() showReplyButton = false;
   @Output() updateRoot = new EventEmitter();
+  @Output() commentDeleted  = new EventEmitter();
   replyCommentForm: FormGroup;
   reply: boolean;
   edit: boolean;
@@ -30,7 +32,8 @@ export class CommentComponent implements OnInit {
 
   constructor(
     public authService: AuthService,
-    private commentService: CommentService
+    private commentService: CommentService,
+    private sweetAlertService: SweetalertService
   ) { }
 
   ngOnInit() {
@@ -88,13 +91,16 @@ export class CommentComponent implements OnInit {
   }
 
   deleteComment() {
+    this.sweetAlertService.confirmDelete(() => {
     this.commentService.deleteComment(this.comment._id).pipe(
       tap((d) => {
         console.log(d);
+        this.commentDeleted.emit(this.comment._id);
         this.comment = null;
         this.replyCommentForm = null;
       })
-    ).subscribe();
+    ).subscribe()
+    });
   }
 
   updateComment() {

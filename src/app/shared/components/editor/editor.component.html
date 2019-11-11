@@ -86,11 +86,13 @@
                     <!-- Icon to view / collapse comments section -->
                     <div fxFlex="8">
                         <ng-container *ngIf="blockLevelComments">
-                            <a style="text-align: right;" *ngIf="!b['show']" mat-button (click)="b['show'] = true">
+                            <a style="text-align: right; padding: 0 8px; text-decoration: none;" *ngIf="!b['show']" mat-button (click)="b['show'] = true">
                                 <i style="font-size: 1.5rem !important;" class="fad fa-comments-alt fa-lg"></i>
+                                <span>{{' ('}} {{ commentsList && commentsList?.length ? numberOfComments(b?._id) : 0}} {{')'}}</span>
                             </a>
-                            <a style="text-align: right;" *ngIf="b['show']" mat-button (click)="b['show'] = false">
+                            <a style="padding: 0 8px; text-decoration: none;" *ngIf="b['show']" mat-button (click)="b['show'] = false">
                                 <i style="font-size: 1.5rem !important;" class="fad fa-chevron-circle-up fa-lg"></i>
+                                <span>{{' ('}} {{ commentsList && commentsList?.length ? numberOfComments(b?._id) : 0}} {{')'}}</span>
                             </a>
                         </ng-container>
                     </div>
@@ -117,7 +119,7 @@
                 <div *ngFor="let c of commentsList">
                     <!-- {{c?.blockId}} - {{blockId}} -->
                     <li *ngIf="c?.blockSpecificComment && c?.blockId === blockId" class="single-thread">
-                        <app-comment [comment]="c" [referenceId]="cDetails?._id"></app-comment>
+                        <app-comment [comment]="c" [referenceId]="cDetails?._id" (commentDeleted)="deleteComment($event)"></app-comment>
                     </li>
                 </div>
             </ul>

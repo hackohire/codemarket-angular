@@ -14,11 +14,10 @@ import { CodeWithLanguageSelection } from 'src/app/insert-code-snippet';
 import { HighlightJS } from 'ngx-highlightjs';
 import { appConstants } from '../../constants/app_constants';
 import { FormGroup, FormControl } from '@angular/forms';
-import { tap, switchMap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { AuthService } from '../../../core/services/auth.service';
 import { CommentService } from '../../services/comment.service';
 import { Post } from '../../models/post.model';
-import { of } from 'rxjs/internal/observable/of';
 import { Comment } from '../../models/comment.model';
 const path = require('path');
 
@@ -36,6 +35,7 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
   @Input() readOnly = false; /** read only mode */
   @Input() data: [];
   @Input() placeholder: string;
+  @Input() commentType: string;
   @Output() output: EventEmitter<any> = new EventEmitter(); /** Emitting data with user interactions */
   @ViewChild('editorRef', { static: false }) editorRef: ElementRef;
 
@@ -106,7 +106,7 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
     this.commentForm = new FormGroup({
       text: new FormControl(''),
       referenceId: new FormControl(p._id),
-      type: new FormControl(p.type),
+      type: new FormControl(this.commentType ? this.commentType : p.type),
       blockSpecificComment: new FormControl(true),
       blockId: new FormControl('')
     });
@@ -309,6 +309,16 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
   zoomInOut(e) {
     e.path[1].classList.toggle('lightbox');
     e.path[0].classList.toggle('lightbox-img')
+  }
+
+  /** Return Number of comments for that block */
+  numberOfComments(blockId) {
+    return this.commentsList.filter(c => c.blockId === blockId).length;
+  }
+
+  /** Listen to the output event from the comment component and delete the comment */
+  deleteComment(id: string) {
+    this.commentsList = this.commentsList.filter(c => c._id !== id);
   }
 
 }

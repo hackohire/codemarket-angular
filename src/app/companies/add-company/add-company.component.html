@@ -13,6 +13,12 @@
                     <input type="text" matInput formControlName="name" placeholder="Name">
                 </mat-form-field>
 
+                <ng-select placeholder="Select Company Type" formControlName="type">
+                    <ng-option *ngFor="let cName of companyTypes" [value]="cName">
+                        {{ cName }}
+                    </ng-option>
+                </ng-select>
+
 
                 <mat-form-field class="field-full-width">
                     <mat-chip-list #citiesList>
@@ -45,8 +51,34 @@
 
 
                 <ng-template #add>
-                    <app-editor *ngIf="!edit" (output)="updateFormData($event)" [id]="'company-editor'"></app-editor>
+                    <app-editor *ngIf="!edit" (output)="howCanYouHelpFormControl.setValue($event)" [id]="'company-editor'"></app-editor>
                 </ng-template>
+
+                <br />
+                <h6>Ideas:</h6>
+                <br />
+
+                <app-editor *ngIf="ideasFormControl?.value && edit; else addIdeas" (output)="updateFormData($event)"
+                    [data]="ideasFormControl?.value" [id]="'edit-ideas-editor'" [placeholder]="'Add Ideas!'"></app-editor>
+
+
+                <ng-template #addIdeas>
+                    <app-editor *ngIf="!edit" (output)="ideasFormControl.setValue($event)" [id]="'ideas-editor'" [placeholder]="'Add Ideas!'"></app-editor>
+                </ng-template>
+
+                <br />
+                <h6>Questions:</h6>
+                <br />
+
+                <app-editor *ngIf="questionsFormControl?.value && edit; else addQuestions" (output)="updateFormData($event)"
+                    [data]="ideasFormControl?.value" [id]="'edit-questions-editor'" [placeholder]="'Add Questions!'"></app-editor>
+
+
+                <ng-template #addQuestions>
+                    <app-editor *ngIf="!edit" (output)="questionsFormControl.setValue($event)" [id]="'questions-editor'" [placeholder]="'Add Questions!'"></app-editor>
+                </ng-template>
+
+
 
                 <br/>
 

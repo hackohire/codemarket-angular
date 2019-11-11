@@ -57,20 +57,20 @@ export class CompaniesListComponent implements OnInit {
     this.type = this.activatedRoute.snapshot.queryParams.type;
 
     this.breadcumb = {
-      title: 'List of ' + startCase(this.type),
+      title: 'List of ' + (this.type ? startCase(this.type): 'Companies'),
       path: [
         {
           name: 'Dashboard',
           pathString: '/',
         },
         {
-          name: this.type
+          name: this.type ? this.type : 'companies'
         }
       ]
     };
 
     if (this.all) {
-      this.displayedColumns = ['number', 'name', 'cities', 'createdAt', 'action'];
+      this.displayedColumns = ['number', 'name', 'type', 'cities', 'createdAt', 'action'];
       this.companiesListSubscription = this.companyService.getCompaniesByType(this.type).subscribe((companies) => {
         this.dataSource.data = companies;
       });

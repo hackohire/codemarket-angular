@@ -12,6 +12,14 @@ export interface Company {
         type: string;
         data: BlockToolData
     }];
+    ideas: [{
+        type: string;
+        data: BlockToolData
+    }];
+    description: [{
+        type: string;
+        data: BlockToolData
+    }];
     _id?: string;
     status: PostStatus;
     createdBy: User;
@@ -23,5 +31,8 @@ export interface Company {
 export enum CompanyTypes {
     NonProfit = 'non-profit',
     Startup = 'startup',
-    LocalBusiness = 'local-business'
+    LocalBusiness = 'local-business',
+    smb = 'smb',
+    School = 'school',
+    Government = 'government'
 }

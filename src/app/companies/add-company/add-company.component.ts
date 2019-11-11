@@ -30,6 +30,8 @@ export class AddCompanyComponent implements OnInit {
     syntax: true,
   };
 
+  companyTypes = Object.values(CompanyTypes);
+
   edit: boolean;
 
   get createdBy() {
@@ -42,6 +44,14 @@ export class AddCompanyComponent implements OnInit {
 
   get howCanYouHelpFormControl() {
     return this.companyForm.get('howCanYouHelp');
+  }
+
+  get ideasFormControl() {
+    return this.companyForm.get('ideas');
+  }
+
+  get questionsFormControl() {
+    return this.companyForm.get('questions');
   }
 
 
@@ -79,7 +89,7 @@ export class AddCompanyComponent implements OnInit {
     const params: any = this.activatedRoute.snapshot.params;
 
     this.breadcumb = {
-      title: 'Add ' + startCase(queryParams.type),
+      title: 'Add Company',
       path: [
         {
           name: 'Dashboard',
@@ -121,9 +131,11 @@ export class AddCompanyComponent implements OnInit {
     this.companyForm = new FormGroup({
       title: new FormControl(i && i.title ? i.title : '', Validators.required),
       name: new FormControl(i && i.name ? i.name : '', Validators.required),
-      type: new FormControl(i && i.type ? i.type : CompanyTypes.LocalBusiness),
+      type: new FormControl(i && i.type ? i.type : ''),
       cities: this.fb.array(i && i.cities && i.cities.length ? i.cities : []),
       howCanYouHelp: new FormControl(i && i.howCanYouHelp ? i.howCanYouHelp : ''),
+      ideas: new FormControl(i && i.ideas ? i.ideas : ''),
+      questions: new FormControl(i && i.questions ? i.questions : ''),
       createdBy: new FormControl(i && i.createdBy && i.createdBy._id ? i.createdBy._id : ''),
       status: new FormControl(i && i.status ? i.status : 'Created'),
       _id: new FormControl(i && i._id ? i._id : ''),
@@ -190,13 +202,7 @@ export class AddCompanyComponent implements OnInit {
       });
     }
   }
-
-  updateFormData(event) {
-    console.log(event);
-    this.howCanYouHelpFormControl.setValue(event);
-  }
-
-
+  
   addTech(event: MatChipInputEvent): void {
     if (!this.matAutocomplete.isOpen) {
       const availableTag = this.citySuggestions.find((t) => t.name.toLowerCase() == event.value.trim().toLowerCase());

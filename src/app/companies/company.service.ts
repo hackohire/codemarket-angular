@@ -25,6 +25,12 @@ export class CompanyService {
     howCanYouHelp {
       ...Description
     }
+    ideas {
+      ...Description
+    }
+    questions {
+      ...Description
+    }
     status
     createdAt
     updatedAt
@@ -78,26 +84,6 @@ export class CompanyService {
       }
     ).pipe(
       map((p: any) => p.data.updateCompany),
-    );
-  }
-
-  getAllCompanies(): Observable<Company[]> {
-    return this.apollo.query(
-      {
-        query: gql`
-          query getAllCompanies {
-            getAllCompanies {
-              ...Company
-            }
-          }
-          ${this.companyFileds}
-        `,
-        fetchPolicy: 'no-cache'
-      }
-    ).pipe(
-      map((p: any) => {
-        return p.data.getAllCompanies;
-      }),
     );
   }
 

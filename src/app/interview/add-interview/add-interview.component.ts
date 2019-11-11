@@ -157,7 +157,7 @@ export class AddInterviewComponent implements OnInit {
       // snippets: new FormControl(null),
     });
 
-    this.companyService.getAllCompanies().subscribe((companies) => {
+    this.companyService.getCompaniesByType('').subscribe((companies) => {
       this.allCompanies = companies;
     });
     

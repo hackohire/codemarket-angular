@@ -163,7 +163,7 @@ export class AddDreamjobComponent implements OnInit {
       this.allCities = cities;
     });
 
-    this.companyService.getAllCompanies().subscribe((companies) => {
+    this.companyService.getCompaniesByType('').subscribe((companies) => {
       this.allCompanies = companies;
     });
 

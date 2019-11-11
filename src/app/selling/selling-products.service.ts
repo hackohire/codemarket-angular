@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Product } from '../shared/models/product.model';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { map } from 'rxjs/operators';
-import { of, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { AuthService } from '../core/services/auth.service';
 import { productConstants } from '../shared/constants/product_constants';
 
@@ -18,6 +17,7 @@ export class SellingProductsService {
     reference_id {
       name
       _id
+      type
       tags {
         name
         _id
@@ -27,6 +27,7 @@ export class SellingProductsService {
         _id
         avatar
       }
+      slug
     }
   `;
 
@@ -40,6 +41,8 @@ export class SellingProductsService {
         name
         _id
       }
+      slug
+      type
     }
   `;
 

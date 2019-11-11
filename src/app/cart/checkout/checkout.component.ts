@@ -115,7 +115,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     this.activatedRoute.queryParams.pipe(first()).toPromise().then((params) => {
       if (params.session_id) {
         this.sessionId = params.session_id;
-        this.addTrnsaction();
+        this.addTransaction();
         // this.http.post(environment.serverless_url + 'getCheckoutSession', { session_id: params.session_id, type: 'payment' }).toPromise().then((d: any) => {
         //   console.log(d);
         //   if (d) {
@@ -151,7 +151,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     localStorage.setItem('transaction', JSON.stringify(transaction));
   }
 
-  addTrnsaction() {
+  addTransaction() {
     const transaction = JSON.parse(localStorage.getItem('transaction'));
 
     if (transaction) {

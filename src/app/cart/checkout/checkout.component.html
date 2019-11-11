@@ -57,7 +57,7 @@
                                 <div class="payment_info modules__content">
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <button *ngIf="!cartTotal && cartProductsList?.length" type="button" (click)="addTransaction()" class="btn btn--round btn--default">Confirm Order(Free)</button>
+                                            <button *ngIf="!cartTotal && cartProductsList?.length" type="button" (click)="setTransactionObjectInLocalStorage(); addTransaction();" class="btn btn--round btn--default">Confirm Order(Free)</button>
                                             <button *ngIf="cartTotal > 0" type="button" (click)="redirectToCheckout()" class="btn btn--round btn--default">Confirm Order</button>
                                         </div>
                                     </div>

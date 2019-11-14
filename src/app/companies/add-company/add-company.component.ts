@@ -10,9 +10,10 @@ import { startWith, map, catchError } from 'rxjs/operators';
 import { Subscription, of } from 'rxjs';
 import { Tag } from '../../shared/models/product.model';
 import { CompanyService } from '../company.service';
-import { CompanyTypes } from '../../shared/models/company.model';
+import { CompanyTypes, Company } from '../../shared/models/company.model';
 import { startCase } from 'lodash';
 import Swal from 'sweetalert2';
+import { LocationService } from '../../shared/services/location.service';
 
 @Component({
   selector: 'app-add-company',
@@ -59,6 +60,10 @@ export class AddCompanyComponent implements OnInit {
     return this.companyForm.get('cities') as FormArray;
   }
 
+  get locationFormGroup() {
+    return this.companyForm.get('location');
+  }
+
   // get statusFormControl() {
   //   return this.companyForm.get('status');
   // }
@@ -74,6 +79,10 @@ export class AddCompanyComponent implements OnInit {
   citySuggestions: Tag[];
   allCities: Tag[];
 
+  /** Location Variables */
+  zoom: number = 15;
+  @ViewChild('searchLocation', { static: true }) public searchLocation: ElementRef;
+
   @ViewChild('searchInput', { static: false }) searchInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto', { static: false }) matAutocomplete: MatAutocomplete;
 
@@ -83,7 +92,7 @@ export class AddCompanyComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private formService: FormService,
     private companyService: CompanyService,
-    private router: Router
+    public locationService: LocationService
   ) {
     const queryParams: any = this.activatedRoute.snapshot.queryParams;
     const params: any = this.activatedRoute.snapshot.params;
@@ -127,19 +136,26 @@ export class AddCompanyComponent implements OnInit {
   ngOnInit() {
   }
 
-  companyFormInitialization(i) {
-    this.companyForm = new FormGroup({
+  async companyFormInitialization(i: Company) {
+    this.companyForm = await new FormGroup({
       title: new FormControl(i && i.title ? i.title : '', Validators.required),
       name: new FormControl(i && i.name ? i.name : '', Validators.required),
       type: new FormControl(i && i.type ? i.type : ''),
       cities: this.fb.array(i && i.cities && i.cities.length ? i.cities : []),
       howCanYouHelp: new FormControl(i && i.howCanYouHelp ? i.howCanYouHelp : ''),
-      ideas: new FormControl(i && i.ideas ? i.ideas : ''),
-      questions: new FormControl(i && i.questions ? i.questions : ''),
+      // ideas: new FormControl(i && i.ideas ? i.ideas : ''),
+      // questions: new FormControl(i && i.questions ? i.questions : ''),
       createdBy: new FormControl(i && i.createdBy && i.createdBy._id ? i.createdBy._id : ''),
       status: new FormControl(i && i.status ? i.status : 'Created'),
       _id: new FormControl(i && i._id ? i._id : ''),
+      location: new FormGroup({
+        latitude: new FormControl(i && i.location ? i.location.latitude : 0),
+        longitude: new FormControl(i && i.location ? i.location.longitude : 0),
+        address: new FormControl(i && i.location ? i.location.address : ''),
+      }),
     });
+
+    await this.locationService.setLocaionSearhAutoComplete(this.searchLocation, this.locationFormGroup);
 
     this.formService.findFromCollection('', 'cities').subscribe((cities) => {
       this.citySuggestions = cities;

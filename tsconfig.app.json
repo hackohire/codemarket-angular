@@ -2,7 +2,7 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./out-tsc/app",
-    "types": ["node"],
+    "types": ["node", "googlemaps"],
     "paths": {
       "moment": [
         "../node_modules/moment/min/moment.min.js"

@@ -4,6 +4,13 @@ import { City } from './city.model';
 import { PostStatus } from './poststatus.enum';
 
 
+interface Location {
+    longitude: number;
+    latitude: number;
+    address: string;
+    additionalLocationDetails: string;
+}
+
 export interface Company {
     title: string;
     name: string;
@@ -26,6 +33,7 @@ export interface Company {
     createdAt: string;
     updatedAt: string;
     cities: City[];
+    location?: Location
 }
 
 export enum CompanyTypes {

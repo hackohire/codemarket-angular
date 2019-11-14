@@ -13,6 +13,7 @@
   },
   "private": true,
   "dependencies": {
+    "@agm/core": "^1.0.0",
     "@angular/animations": "^8.2.8",
     "@angular/cdk": "^8.2.1",
     "@angular/common": "^8.2.8",
@@ -79,6 +80,7 @@
     "@editorjs/quote": "^2.3.0",
     "@editorjs/table": "^1.2.0",
     "@editorjs/warning": "^1.1.1",
+    "@types/googlemaps": "^3.38.0",
     "@types/jasmine": "~3.3.8",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",

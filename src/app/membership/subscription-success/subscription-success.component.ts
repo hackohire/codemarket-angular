@@ -38,7 +38,8 @@ export class SubscriptionSuccessComponent implements OnInit {
   ngOnInit() {
 
     this.planId = this.activatedRoute.snapshot.params.planId;
-    this.selectedPlan = this.planDetails.find(p => p.id === this.planId);
+    const planType = this.activatedRoute.snapshot.queryParams.planType;
+    this.selectedPlan = this.planDetails[planType].find(p => p.id === this.planId);
 
   }
 

@@ -71,7 +71,7 @@
     </div>
     <!-- end /.row-->
     <div class="row">
-        <div class="col-lg-4 col-md-6" *ngFor="let p of plans['planType']">
+        <div class="col-lg-4 col-md-6" *ngFor="let p of plans[planType]">
             <div *ngIf="authService?.loggedInUser?.subscription && authService?.loggedInUser?.subscription[0]?.plan?.id === p.id ? 'Active' : ''"
                 class="shape">
                 <div class="shape-text">

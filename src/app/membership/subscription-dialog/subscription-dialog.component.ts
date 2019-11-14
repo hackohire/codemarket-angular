@@ -127,7 +127,7 @@ export class SubscriptionDialogComponent implements OnInit, AfterViewInit {
   }
 
   onConfirm(e) {
-    this.router.navigate(['/', { outlets: { main: ['membership', `${this.data.plan.id}`, 'success']}}]);
+    this.router.navigate(['/', { outlets: { main: ['membership', `${this.data.plan.id}`, 'success']}}], {queryParams: {planType: this.data.planType}});
     this.dialogRef.close();
   }
 

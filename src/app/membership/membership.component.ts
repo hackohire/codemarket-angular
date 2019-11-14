@@ -42,7 +42,6 @@ export class MembershipComponent implements OnInit {
     public membershipService: MembershipService,
     public authService: AuthService,
     public activatedRoute: ActivatedRoute,
-    private http: HttpClient,
     private sellingService: SellingProductsService,
     private dialog: MatDialog
   ) {
@@ -82,12 +81,12 @@ export class MembershipComponent implements OnInit {
     });
   }
 
-  async redirectToCheckout(plan) {
+  async redirectToCheckout(plan, planType) {
     if (this.authService.loggedInUser) {
       if (this.authService.loggedInUser.subscription && this.authService.loggedInUser.subscription.length) {
         Swal.fire('Already Subscribed', 'You have already active subscription, Please contact us on sumi@dreamjobb.com to upgrade or change', 'info');
       } else {
-        this.openDialog(plan);
+        this.openDialog(plan, planType);
       }
         // /** Creating Session Object */
         // /** See @see https://stripe.com/docs/api/checkout/sessions/retrieve for the reference of the fields */
@@ -144,13 +143,13 @@ export class MembershipComponent implements OnInit {
     }
   }
 
-  openDialog(plan): void {
+  openDialog(plan, planType): void {
     const dialogRef = this.dialog.open(SubscriptionDialogComponent, {
       width: '430px',
       height: '550px',
       maxHeight: '700px',
       panelClass: 'no-padding',
-      data: {plan},
+      data: {plan, planType},
       disableClose: true
     });
 

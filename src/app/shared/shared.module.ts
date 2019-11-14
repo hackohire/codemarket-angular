@@ -27,6 +27,7 @@ import { Ng5SliderModule } from 'ng5-slider';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { MdePopoverModule } from '@material-extended/mde';
 import { AgmCoreModule } from '@agm/core';
+import { environment } from '../../environments/environment';
 
 
 export function hljsLanguages() {
@@ -61,7 +62,7 @@ export function hljsLanguages() {
     NgSelectModule,
     MdePopoverModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyAOpIXHUPA5bMssoAW3NDUGHveOf0N_tsY',
+      apiKey: environment.googleAPIKey,
       libraries: ['places']
     })
   ],

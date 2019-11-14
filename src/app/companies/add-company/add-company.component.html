@@ -19,6 +19,33 @@
                     </ng-option>
                 </ng-select>
 
+                <!-- Location Details -->
+                <!-- <pre>{{locationFormGroup?.value | json}}</pre> -->
+                <br/>
+                <h6>Enter Company Location:</h6>
+                <!-- <br /> -->
+                <mat-form-field class="field-full-width">
+                    <input type="text" matInput placeholder="Search Location" #searchLocation>
+                    <mat-icon matSuffix (click)="locationService?.setCurrentLocation(locationFormGroup)">my_location</mat-icon>
+                </mat-form-field>
+
+
+                <div *ngIf="locationFormGroup.get('latitude').value || locationFormGroup.get('longitude').value">
+                    <agm-map [latitude]="locationFormGroup.get('latitude').value" [longitude]="locationFormGroup.get('longitude').value" [zoom]="zoom">
+                        <agm-marker [latitude]="locationFormGroup.get('latitude').value" [longitude]="locationFormGroup.get('longitude').value" [markerDraggable]="true"
+                            (dragEnd)="locationService?.markerDragEnd($event, locationFormGroup)"></agm-marker>
+                    </agm-map>
+                </div>
+<!-- 
+                <h5>Address: {{address}}</h5>
+                <div>Latitude: {{latitude}}</div>
+                <div>Longitude: {{longitude}}</div> -->
+
+                <mat-form-field class="field-full-width" [formGroupName]="'location'">
+                    <textarea type="text" matInput formControlName="address" placeholder="Address"></textarea>
+                    <!-- <mat-icon matSuffix>location</mat-icon> -->
+                </mat-form-field>
+
 
                 <mat-form-field class="field-full-width">
                     <mat-chip-list #citiesList>
@@ -46,7 +73,7 @@
                 <h6>How can you help:</h6>
                 <br />
 
-                <app-editor *ngIf="howCanYouHelpFormControl?.value && edit; else add" (output)="updateFormData($event)"
+                <app-editor *ngIf="howCanYouHelpFormControl?.value && edit; else add" (output)="howCanYouHelpFormControl.setValue($event)"
                     [data]="howCanYouHelpFormControl?.value" [id]="'edit-company-editor'"></app-editor>
 
 
@@ -55,10 +82,10 @@
                 </ng-template>
 
                 <br />
-                <h6>Ideas:</h6>
+                <!-- <h6>Ideas:</h6>
                 <br />
 
-                <app-editor *ngIf="ideasFormControl?.value && edit; else addIdeas" (output)="updateFormData($event)"
+                <app-editor *ngIf="ideasFormControl?.value && edit; else addIdeas" (output)="ideasFormControl.setValue($event)"
                     [data]="ideasFormControl?.value" [id]="'edit-ideas-editor'" [placeholder]="'Add Ideas!'"></app-editor>
 
 
@@ -66,12 +93,12 @@
                     <app-editor *ngIf="!edit" (output)="ideasFormControl.setValue($event)" [id]="'ideas-editor'" [placeholder]="'Add Ideas!'"></app-editor>
                 </ng-template>
 
-                <br />
-                <h6>Questions:</h6>
+                <br /> -->
+                <!-- <h6>Questions:</h6>
                 <br />
 
-                <app-editor *ngIf="questionsFormControl?.value && edit; else addQuestions" (output)="updateFormData($event)"
-                    [data]="ideasFormControl?.value" [id]="'edit-questions-editor'" [placeholder]="'Add Questions!'"></app-editor>
+                <app-editor *ngIf="questionsFormControl?.value && edit; else addQuestions" (output)="questionsFormControl.setValue($event)"
+                    [data]="ideasFormControl?.value" [id]="'edit-questions-editor'" [placeholder]="'Add Questions!'"></app-editor> -->
 
 
                 <ng-template #addQuestions>

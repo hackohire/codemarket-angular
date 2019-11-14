@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, NgZone, ChangeDetectorRef, AfterViewInit } from '@angular/core';
 import { BreadCumb } from 'src/app/shared/models/bredcumb.model';
 import { FormGroup, FormControl, Validators, FormArray, FormBuilder } from '@angular/forms';
 import { Event } from 'src/app/shared/models/event.model';
@@ -17,6 +17,8 @@ import { PostStatus } from 'src/app/shared/models/poststatus.enum';
 import { PostType } from 'src/app/shared/models/post-types.enum';
 import { SetSelectedPost, GetPostById, AddPost, UpdatePost } from 'src/app/core/store/actions/post.actions';
 import { selectSelectedPost } from 'src/app/core/store/selectors/post.selectors';
+import { MapsAPILoader } from '@agm/core';
+import { LocationService } from '../../shared/services/location.service';
 
 
 @Component({
@@ -61,6 +63,10 @@ export class AddEventComponent implements OnInit {
     return this.eventForm.get('status');
   }
 
+  get locationFormGroup() {
+    return this.eventForm.get('location');
+  }
+
   visible = true;
   selectable = true;
   removable = true;
@@ -72,15 +78,20 @@ export class AddEventComponent implements OnInit {
   tagSuggestions: Tag[];
   allTags: Tag[];
 
-  @ViewChild('searchInput', {static: false}) searchInput: ElementRef<HTMLInputElement>;
-  @ViewChild('auto', {static: false}) matAutocomplete: MatAutocomplete;
+  /** Location Variables */
+  zoom: number = 15;
+  @ViewChild('searchLocation', { static: true }) public searchLocation: ElementRef;
+
+  @ViewChild('searchInput', { static: false }) searchInput: ElementRef<HTMLInputElement>;
+  @ViewChild('auto', { static: false }) matAutocomplete: MatAutocomplete;
 
   constructor(
     private authService: AuthService,
     private store: Store<AppState>,
     private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
-    private formService: FormService
+    private formService: FormService,
+    public locationService: LocationService,
   ) {
     this.breadcumb = {
       title: 'Add Event Details',
@@ -105,6 +116,7 @@ export class AddEventComponent implements OnInit {
     if (this.activatedRoute.snapshot.parent.routeConfig.path === 'add-event') {
       this.store.dispatch(SetSelectedPost({ post: null }));
       this.eventFormInitialization(null);
+      
     } else {
       this.subscription$ = this.store.select(selectSelectedPost).pipe(
         tap((h: Event) => {
@@ -132,10 +144,11 @@ export class AddEventComponent implements OnInit {
   }
 
   ngOnInit() {
+    // this.locationService.setLocaionSearhAutoComplete(this.searchLocation, this.locationFormGroup);
   }
 
-  eventFormInitialization(i: Event) {
-    this.eventForm = new FormGroup({
+  async eventFormInitialization(i: Event) {
+    this.eventForm = await new FormGroup({
       name: new FormControl(i && i.name ? i.name : '', Validators.required),
       description: new FormControl(i && i.description ? i.description : ''),
       price: new FormControl(i && i.price ? i.price : 0, Validators.required),
@@ -151,9 +164,17 @@ export class AddEventComponent implements OnInit {
       }),
       dateRange: new FormControl(i && i.dateRange ? i.dateRange : '', Validators.required),
       eventType: new FormControl(i && i.eventType ? i.eventType : 'free', Validators.required),
-      address: new FormControl(i && i.address ? i.address : '', Validators.required),
+      location: new FormGroup({
+        latitude: new FormControl(i && i.location ? i.location.latitude : 0),
+        longitude: new FormControl(i && i.location ? i.location.longitude : 0),
+        address: new FormControl(i && i.location ? i.location.address : ''),
+      }),
+      // address: new FormControl(i && i.address ? i.address : '', Validators.required),
       // snippets: new FormControl(null),
     });
+
+    this.locationService.setLocaionSearhAutoComplete(this.searchLocation, this.locationFormGroup);
+
 
     this.formService.findFromCollection('', 'tags').subscribe((tags) => {
       this.tagSuggestions = tags;
@@ -190,9 +211,9 @@ export class AddEventComponent implements OnInit {
 
     if (this.idFromControl && !this.idFromControl.value) {
       this.eventForm.removeControl('_id');
-      this.store.dispatch(AddPost({post: this.eventForm.value}));
+      this.store.dispatch(AddPost({ post: this.eventForm.value }));
     } else {
-      this.store.dispatch(UpdatePost({post: this.eventForm.value}));
+      this.store.dispatch(UpdatePost({ post: this.eventForm.value }));
     }
   }
 
@@ -212,7 +233,7 @@ export class AddEventComponent implements OnInit {
       if (formAvailableInTafsFormControl && event && event.input && event.input.value) {
         event.input.value = '';
       } else if (availableTag) {
-        this.tagsFormControl.push(new FormControl({name: availableTag.name, _id: availableTag._id}));
+        this.tagsFormControl.push(new FormControl({ name: availableTag.name, _id: availableTag._id }));
       } else {
         this.formService.addCategory(this.tagsFormControl, event);
       }

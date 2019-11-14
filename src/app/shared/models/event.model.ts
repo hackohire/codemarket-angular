@@ -10,6 +10,13 @@ interface Support {
         data: BlockToolData
     };
 }
+interface Location {
+    longitude: number;
+    latitude: number;
+    address: string;
+    additionalLocationDetails: string;
+}
+
 export interface Event {
     name: string;
     description: [{
@@ -29,4 +36,5 @@ export interface Event {
     dateRange?: string[];
     eventType?: string;
     address?: string;
+    location?: Location
 }

@@ -42,7 +42,8 @@
                                     <h4 class="tab-content-wrapper">Support Details:</h4>
 
                                     <app-editor *ngIf="details?.support?.description" [readOnly]="true"
-                                        [data]="details?.support?.description" [id]="'details-support-editor'" [commentType]="'post'">
+                                        [data]="details?.support?.description" [id]="'details-support-editor'"
+                                        [commentType]="'post'">
                                     </app-editor>
                                     <ng-template #noDescription>
                                         <span>No Description</span>
@@ -50,7 +51,7 @@
                                 </div>
                             </div>
                         </div>
-
+                        <ng-container *ngTemplateOutlet="locationTemplate; context: {location: details?.location}"></ng-container>
                         <ng-container *ngTemplateOutlet="addCommentTemplate; context: details"></ng-container>
                     </div>
 
@@ -351,23 +352,27 @@
                                         [post]="details" [id]="'company-details-editor'" [commentType]="'company'">
                                     </app-editor>
 
-                                    <h4 class="tab-content-wrapper">Ideas:</h4>
+                                    <!-- <h4 class="tab-content-wrapper">Ideas:</h4>
                                     <app-editor *ngIf="details?.ideas" [commentsList]="commentsList"
                                         [blockLevelComments]="true" [readOnly]="true" [data]="details?.ideas"
                                         [post]="details" [id]="'ideas-editor'" [commentType]="'company'">
-                                    </app-editor>
+                                    </app-editor> -->
 
-                                    <h4 class="tab-content-wrapper">Questions:</h4>
+
+
+                                    <!-- <h4 class="tab-content-wrapper">Questions:</h4>
                                     <app-editor *ngIf="details?.questions" [commentsList]="commentsList"
                                         [blockLevelComments]="true" [readOnly]="true" [data]="details?.questions"
                                         [post]="details" [id]="'questions-editor'" [commentType]="'company'">
-                                    </app-editor>
+                                    </app-editor> -->
                                     <br />
                                     <br />
 
                                 </div>
                             </div>
                         </div>
+                        
+                        <ng-container *ngTemplateOutlet="locationTemplate; context: {location: details?.location}"></ng-container>
 
                         <ng-container *ngTemplateOutlet="addCommentTemplate; context: details"></ng-container>
 
@@ -508,6 +513,18 @@
         ===============================================-->
 
 </ng-container>
+
+<ng-template #locationTemplate let-location="location">
+    <div *ngIf="location?.latitude || location?.longitude">
+        <h4  class="tab-content-wrapper">Location:</h4>
+        <agm-map [latitude]="location?.latitude"
+            [longitude]="location?.longitude" [zoom]="15">
+            <agm-marker [latitude]="location?.latitude"
+                [longitude]="location?.longitude"></agm-marker>
+        </agm-map>
+    </div>
+
+</ng-template>
 
 <ng-template #addCommentTemplate let-cDetails="details">
     {{cDetails | json}}

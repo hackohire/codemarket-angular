@@ -26,6 +26,7 @@ import { CompaniesListComponent } from '../companies/companies-list/companies-li
 import { Ng5SliderModule } from 'ng5-slider';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { MdePopoverModule } from '@material-extended/mde';
+import { AgmCoreModule } from '@agm/core';
 
 
 export function hljsLanguages() {
@@ -58,7 +59,11 @@ export function hljsLanguages() {
     OwlNativeDateTimeModule,
     Ng5SliderModule,
     NgSelectModule,
-    MdePopoverModule
+    MdePopoverModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyAOpIXHUPA5bMssoAW3NDUGHveOf0N_tsY',
+      libraries: ['places']
+    })
   ],
   exports: [
     BreadcumbComponent,
@@ -83,7 +88,8 @@ export function hljsLanguages() {
     Ng5SliderModule,
     NgSelectModule,
     PaypalSubscriptionDirective,
-    MdePopoverModule
+    MdePopoverModule,
+    AgmCoreModule
   ],
   entryComponents: [
     VideoChatComponent

@@ -5,21 +5,51 @@
     <div class="row">
         <div class="col-md-12">
             <div [formGroup]="eventForm" class="event-form-area">
+
+                <!-- Name Form Control -->
                 <mat-form-field class="field-full-width">
                     <input type="text" matInput formControlName="name" placeholder="Name">
                 </mat-form-field>
 
+                <!-- Description Form Control -->
                 <h6>Description:</h6>
                 <br />
 
                 <app-editor *ngIf="descriptionFormControl?.value && edit; else add" (output)="updateFormData($event)"
                     [data]="descriptionFormControl?.value" [id]="'edit-event-editor'"></app-editor>
 
-
                 <ng-template #add>
                     <app-editor *ngIf="!edit" (output)="updateFormData($event)" [id]="'event-editor'"></app-editor>
                 </ng-template>
+                <br />
 
+                <!-- Location Details -->
+                <!-- <pre>{{locationFormGroup?.value | json}}</pre> -->
+                <h6>Enter Event Location</h6>
+                <br />
+                <mat-form-field class="field-full-width">
+                    <input type="text" matInput placeholder="Search Location" #searchLocation>
+                    <mat-icon matSuffix (click)="locationService?.setCurrentLocation(locationFormGroup)">my_location</mat-icon>
+                </mat-form-field>
+
+
+                <div *ngIf="locationFormGroup.get('latitude').value || locationFormGroup.get('longitude').value">
+                    <agm-map [latitude]="locationFormGroup.get('latitude').value" [longitude]="locationFormGroup.get('longitude').value" [zoom]="zoom">
+                        <agm-marker [latitude]="locationFormGroup.get('latitude').value" [longitude]="locationFormGroup.get('longitude').value" [markerDraggable]="true"
+                            (dragEnd)="locationService?.markerDragEnd($event, locationFormGroup)"></agm-marker>
+                    </agm-map>
+                </div>
+<!-- 
+                <h5>Address: {{address}}</h5>
+                <div>Latitude: {{latitude}}</div>
+                <div>Longitude: {{longitude}}</div> -->
+
+                <mat-form-field class="field-full-width" [formGroupName]="'location'">
+                    <textarea type="text" matInput formControlName="address" placeholder="Address"></textarea>
+                    <!-- <mat-icon matSuffix>location</mat-icon> -->
+                </mat-form-field>
+
+                <!-- Event Date Range -->
                 <mat-form-field class="field-full-width">
                     <input (click)="dt2.open()" formControlName="dateRange" matInput [owlDateTime]="dt2"
                         [selectMode]="'range'" placeholder="Event Date & Time">
@@ -27,8 +57,10 @@
                     <owl-date-time #dt2 [pickerType]="'both'"></owl-date-time>
                 </mat-form-field>
 
+
+
                 <label class="example-margin">Event Type</label>
-                <mat-radio-group formControlName="'eventType'" [(ngModel)]="eventType" [color]="'primary'"
+                <mat-radio-group formControlName="eventType" [color]="'primary'"
                     (change)="eventTypeChange($event)" aria-label="Select an option" #user="matRadioGroup"
                     fxLayout="row" fxLayoutGap="8px">
                     <mat-radio-button fxFlex="20" [value]="'free'">Free</mat-radio-button>
@@ -40,10 +72,6 @@
                     <mat-icon matSuffix>monetization_on</mat-icon>
                 </mat-form-field>
 
-                <mat-form-field class="field-full-width">
-                    <textarea type="text" matInput formControlName="address" placeholder="Address"></textarea>
-                    <mat-icon matSuffix>location</mat-icon>
-                </mat-form-field>
 
                 <mat-form-field class="field-full-width">
                     <mat-chip-list #tagsList>

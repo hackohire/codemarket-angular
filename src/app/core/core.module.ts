@@ -20,7 +20,7 @@ import { appReducesrs } from './store/reducers/app.reducers';
 import { SearchComponent } from './components/search/search.component';
 import { RouteReuseStrategy } from '@angular/router';
 import { CustomRouteReuseStategy } from '../shared/services/custom_router_reuse';
-import { AmplifyAngularModule, AmplifyService } from 'aws-amplify-angular';
+import { AmplifyService } from 'aws-amplify-angular';
 
 
 // Injected Token for actionreducermap or combinereducers for build error

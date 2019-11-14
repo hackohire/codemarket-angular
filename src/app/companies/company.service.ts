@@ -39,6 +39,11 @@ export class CompanyService {
       name
       avatar
     }
+    location {
+      longitude
+      latitude
+      address
+    }
   }
   ${description}
   `;

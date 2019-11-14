@@ -64,6 +64,11 @@ export class PostService {
       _id
       avatar
     }
+    location {
+      longitude
+      latitude
+      address
+    }
 
     company {
       name
@@ -364,6 +369,7 @@ export class PostService {
                 avatar
               }
               type
+              slug
             }
           }
         `,

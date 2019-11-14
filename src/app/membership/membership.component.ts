@@ -12,6 +12,7 @@ import { SubscriptionDialogComponent } from './subscription-dialog/subscription-
 import { SellingProductsService } from '../selling/selling-products.service';
 import { tap } from 'rxjs/operators';
 import Swal from 'sweetalert2';
+import { FormControl } from '@angular/forms';
 // declare var Stripe;
 // declare var paypal;
 declare var Stripe;
@@ -34,6 +35,8 @@ export class MembershipComponent implements OnInit {
   @ViewChild('successfulPayment', { static: false }) successfulPayment: SwalComponent;
   successfulPurchasedSubscription: any;
   sessionId: string;
+  tabs = ['First', 'Second', 'Third'];
+  selected = new FormControl(0);
 
   constructor(
     public membershipService: MembershipService,

@@ -6,66 +6,113 @@
         END BREADCRUMB AREA
 =================================-->
 
-<section class="job_area section--padding">
+<section class="job_area" style="padding-top: 50px;">
     <div class="container">
-        <div class="row">
-            <!-- start col-md-12 -->
-            <div class="col-md-12">
-                <div class="section-title">
-                    <h1>
-                        <span class="highlighted">Membership Plans</span>
-                    </h1>
-                    <!--   <p>* All memberships are a 6-month commitment</p>-->
+        <!-- <div class="row"> -->
+            <mat-tab-group [selectedIndex]="selected.value" (selectedIndexChange)="selected.setValue($event)">
+                <mat-tab [label]="'TeamIQ'">
+                    Contents for Team IQ tab
+                    <ng-container *ngTemplateOutlet="plansTemplate; context: {plans: listOfPlans['TeamIQ']}">
+                    </ng-container>
+                </mat-tab>
+
+                <mat-tab [label]="'SMB'">
+                    Contents for SMB tab
+                    <ng-container *ngTemplateOutlet="plansTemplate; context: {plans: listOfPlans['SMB']}">
+                        </ng-container>
+                </mat-tab>
+
+                <mat-tab [label]="'Startup'">
+                    Contents for Startup tab
+                    <ng-container *ngTemplateOutlet="plansTemplate; context: {plans: listOfPlans['Startup']}">
+                    </ng-container>
+                </mat-tab>
+
+                <mat-tab [label]="'Non-profits'">
+                    Contents for Non-profits tab
+                    <ng-container *ngTemplateOutlet="plansTemplate; context: {plans: listOfPlans['Non-profits']}">
+                    </ng-container>
+                </mat-tab>
+
+                <mat-tab [label]="'Governments'">
+                    Contents for Governments tab
+                    <ng-container *ngTemplateOutlet="plansTemplate; context: {plans: listOfPlans['Governments']}">
+                    </ng-container>
+                </mat-tab>
+
+                <mat-tab [label]="'Schools'">
+                    Contents for Schools tab
+                    <ng-container *ngTemplateOutlet="plansTemplate; context: {plans: listOfPlans['Schools']}">
+                    </ng-container>
+                </mat-tab>
+
+                <mat-tab [label]="'Corporations'">
+                    Contents for Corporations tab
+                    <ng-container *ngTemplateOutlet="plansTemplate; context: {plans: listOfPlans['Corporations']}">
+                        </ng-container>
+                </mat-tab>
+            </mat-tab-group>
+        <!-- </div> -->
+    </div>
+</section>
+
+<ng-template #plansTemplate let-plans="plans">
+    <div class="row">
+        <!-- start col-md-12 -->
+        <div class="col-md-12">
+            <div class="section-title" style="padding-bottom: 20px;">
+                <h1>
+                    <span class="highlighted">Membership Plans</span>
+                </h1>
+                <!--   <p>* All memberships are a 6-month commitment</p>-->
+            </div>
+        </div>
+        <!-- end /.col-md-12 -->
+    </div>
+    <!-- end /.row-->
+    <div class="row">
+        <div class="col-lg-4 col-md-6" *ngFor="let p of plans">
+            <div *ngIf="authService?.loggedInUser?.subscription && authService?.loggedInUser?.subscription[0]?.plan?.id === p.id ? 'Active' : ''"
+                class="shape">
+                <div class="shape-text">
+                    Active
                 </div>
             </div>
-            <!-- end /.col-md-12 -->
-        </div>
-        <!-- end /.row-->
+            <div class="card_style2" style="line-height: 17px !important;">
 
-        <div class="row">
-            <div class="col-lg-4 col-md-6" *ngFor="let p of listOfPlans">
-                <div *ngIf="authService?.loggedInUser?.subscription && authService?.loggedInUser?.subscription[0]?.plan?.id === p.id ? 'Active' : ''"
-                    class="shape">
-                    <div class="shape-text">
-                        Active
-                    </div>
-                </div>
-                <div class="card_style2" style="line-height: 17px !important;">
+                <h4 style="font-weight: 600;" class="card_style2__title">{{p?.name}}</h4>
+                <div class="card_style2__location_type">
+                    <p style="line-height: 13px;">
+                        <span class="plan-description">{{p?.shortDescription}}</span>
+                    </p>
+                    <p>
+                        <h5 style="font-weight: 500; margin-bottom: 8px;" class="card_style2__title">
+                            {{p?.fixed_price?.value | currency}}</h5>
+                        <span class="plan-description">{{p?.fixed_price?.postfix}}</span>
 
-                    <h4 style="font-weight: 600;" class="card_style2__title">{{p?.name}}</h4>
-                    <div class="card_style2__location_type">
-                        <p style="line-height: 13px;">
-                            <span class="plan-description">{{p?.shortDescription}}</span>
+
+                        <h6 style="font-weight: 400; margin-bottom: 8px; margin: 20px 0 15px 0"
+                            class="card_style2__title">
+                            {{'Benefits:'}}
+                        </h6>
+
+                        <p *ngFor="let d of p?.benefits">
+                            <i class="fad fa-check-circle" style="vertical-align: middle;"></i>
+                            <span class="plan-description" style="color: black; vertical-align: middle;">
+                                {{d}}
+                            </span>
                         </p>
-                        <p>
-                            <h5 style="font-weight: 500; margin-bottom: 8px;" class="card_style2__title">
-                                {{p?.fixed_price?.value | currency}}</h5>
-                            <span class="plan-description">{{p?.fixed_price?.postfix}}</span>
-
-
-                            <h6 style="font-weight: 400; margin-bottom: 8px; margin: 20px 0 15px 0"
-                                class="card_style2__title">
-                                {{'Benefits:'}}
-                            </h6>
-
-                            <p *ngFor="let d of p?.benefits">
-                                <i class="fad fa-check-circle" style="vertical-align: middle;"></i>
-                                <span class="plan-description" style="color: black; vertical-align: middle;">
-                                    {{d}}
-                                </span>
-                            </p>
-                    </div>
-
-                    <button type="button" (click)="redirectToCheckout(p)"
-                        class="btn btn--round btn--default">Subscribe</button>
-                    <!-- <button mat-raised-button (click)="redirectToCheckout(p?.id)">Subscribe</button> -->
-                    <!-- Using paypalSubscription directive here, and passing the plan Id along with to render the button -->
-                    <!-- <div [paypalSubscription]="p.id" [id]="p.id"></div> -->
                 </div>
+
+                <button type="button" (click)="redirectToCheckout(p)"
+                    class="btn btn--round btn--default">Subscribe</button>
+                <!-- <button mat-raised-button (click)="redirectToCheckout(p?.id)">Subscribe</button> -->
+                <!-- Using paypalSubscription directive here, and passing the plan Id along with to render the button -->
+                <!-- <div [paypalSubscription]="p.id" [id]="p.id"></div> -->
             </div>
         </div>
     </div>
-</section>
+</ng-template>
 
 <swal #successfulPayment title="Congratulations!" type="success">
     <div *swalPartial class="alert alert-info">

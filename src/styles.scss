@@ -23,6 +23,11 @@ span {
 agm-map {
   height: 300px;
 }
+
+.mat-tab-body-content {
+  overflow: hidden !important;
+}
+
 .amplify-form-button {
   background-color: #0674ec !important;
 }

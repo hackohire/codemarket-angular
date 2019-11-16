@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Observable, of, Subscription } from 'rxjs';
 import { AppState } from 'src/app/core/store/state/app.state';
 import { Store } from '@ngrx/store';
-import { tap, switchMap } from 'rxjs/operators';
+import { tap, switchMap, map } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BreadCumb } from 'src/app/shared/models/bredcumb.model';
 import { FormGroup, FormControl } from '@angular/forms';
@@ -46,7 +46,6 @@ export class DetailsComponent implements OnInit, OnDestroy {
   isUserAttending: boolean; /** Only for the event */
   subscription$: Subscription = new Subscription();
   type: string; // product | help-request | interview | requirement | Testing | Howtodoc
-  commentsList: any[];
   likeCount: number;
   anonymousAvatar = require('src/assets/images/anonymous-avatar.jpg');
   codemarketBucketURL = environment.codemarketFilesBucket;
@@ -54,8 +53,15 @@ export class DetailsComponent implements OnInit, OnDestroy {
   breadcumb: BreadCumb;
 
   commentForm: FormGroup;
+  commentsList: any[];
 
   peer: Peer;
+
+  /** Q&A Related Variables */
+  questionOrAnswerForm: FormGroup;
+  questionsList: any[];
+  answerData: [];
+  questionData: [];
 
   constructor(
     private store: Store<AppState>,
@@ -105,6 +111,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
             this.companyDetails$ = of(c);
             this.postDetails = c;
             this.initializeCommentForm(c, 'company');
+            this.initializeQuestionAndAnswerForm(c, 'company');
 
             this.subscription$.add(
               this.companyService.getListOfUsersInACompany(params.companyId).subscribe((u) => {
@@ -125,6 +132,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
             this.details$ = of(p);
             // this.type = ;
             this.initializeCommentForm(p, 'post');
+            this.initializeQuestionAndAnswerForm(p, 'post');
 
             /** Subscribe to loggedinuser, once loggedInUse is got, Check if the loggedInUder is
              * in the list of attendess or not
@@ -282,6 +290,98 @@ export class DetailsComponent implements OnInit, OnDestroy {
     } else {
       this.postService.editPost(details);
     }
+  }
+
+
+  /** Initializing Question & Answer Form */
+  initializeQuestionAndAnswerForm(p, questionType?: string) {
+    this.questionOrAnswerForm = new FormGroup({
+      text: new FormControl(''),
+      referenceId: new FormControl(p._id),
+      type: new FormControl(questionType ? questionType : this.type),
+      isQuestion: new FormControl(),
+      isAnswer: new FormControl()
+    });
+
+    this.subscription$.add(
+      this.commentService.getQuestionAndAnswersByReferenceId(p._id).pipe(
+        tap((d) => {
+          this.questionsList = d;
+        })
+      ).subscribe({
+        error: (e) => console.log(e)
+      })
+    );
+  }
+
+  /** Add Question Or Answer */
+  addQuestionOrAnswer(isQuestion, question = null) {
+    console.log(this.questionOrAnswerForm.value);
+    if (this.authService.loggedInUser) {
+      this.questionOrAnswerForm.addControl('createdBy', new FormControl(this.authService.loggedInUser._id));
+      this.questionOrAnswerForm.get('isQuestion').setValue(isQuestion);
+      this.questionOrAnswerForm.get('isAnswer').setValue(!isQuestion);
+
+      /** Add questionId form control if adding answer, otherwise remove it */
+      if (!isQuestion) {
+        this.questionOrAnswerForm.addControl('questionId', new FormControl(question._id));
+      } else {
+        this.questionOrAnswerForm.removeControl('questionId');
+      }
+
+      this.subscription$.add(
+        this.commentService.addQuestionOrAnswer(this.questionOrAnswerForm.value).pipe(
+          map((d) => {
+            console.log(d);
+            if (d) {
+              if (d.isQuestion) {
+                this.questionsList.push(d);
+              } else if(d.isAnswer) {
+                question.answers.push(d)
+              }
+            }
+
+          }),
+        ).subscribe()
+      );
+    }
+  }
+
+  /** Update Question And Answer
+   * @param qa - object if question / answer
+   * @param isAnswe - to check if the object is qustion / answer
+   */
+  updateQuestionOrAnswer(qa, isAnswer) {
+      this.commentService.updateQuestionOrAnswer(qa._id, isAnswer ? this.answerData : this.questionData).pipe(
+        tap((d) => {
+          console.log(d);
+          if (d) {
+            qa['edit'] = false;
+            qa.text = d.text
+          }
+        })
+      ).subscribe();
+  }
+
+
+  /** Delete Question Or Answer */
+  deleteQuestionOrAnswer(answerOrQuestion) {
+    this.sweetAlertService.confirmDelete(() => {
+      this.commentService.deleteQuestionOrAnswer(answerOrQuestion._id).pipe(
+        tap((d) => {
+          console.log(d);
+          if (d) {
+            if (answerOrQuestion && answerOrQuestion.isAnswer) {
+              console.log(answerOrQuestion.answers);
+              answerOrQuestion.answers = [...answerOrQuestion.answers.filter(temp => answerOrQuestion._id !== temp._id )];
+              console.log(answerOrQuestion.answers);
+            } else {
+              this.questionsList = this.questionsList.filter(temp => answerOrQuestion._id !== temp._id)
+            }
+          }
+        })
+      ).subscribe()
+      });
   }
 
 }

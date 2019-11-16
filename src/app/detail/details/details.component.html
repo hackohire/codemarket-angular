@@ -51,7 +51,8 @@
                                 </div>
                             </div>
                         </div>
-                        <ng-container *ngTemplateOutlet="locationTemplate; context: {location: details?.location}"></ng-container>
+                        <ng-container *ngTemplateOutlet="locationTemplate; context: {location: details?.location}">
+                        </ng-container>
                         <ng-container *ngTemplateOutlet="addCommentTemplate; context: details"></ng-container>
                     </div>
 
@@ -371,12 +372,15 @@
                                 </div>
                             </div>
                         </div>
-                        
-                        <ng-container *ngTemplateOutlet="locationTemplate; context: {location: details?.location}"></ng-container>
 
-                        <ng-container *ngTemplateOutlet="addCommentTemplate; context: details"></ng-container>
+                        <ng-container *ngTemplateOutlet="locationTemplate; context: {location: details?.location}">
+                        </ng-container>
 
                     </div>
+
+                    <ng-container *ngTemplateOutlet="addCommentTemplate; context: details"></ng-container>
+                    <ng-container *ngTemplateOutlet="questionAnswersTemplate; context: details"></ng-container>
+
 
                     <!-- end /.item-info -->
                 </div>
@@ -516,54 +520,231 @@
 
 <ng-template #locationTemplate let-location="location">
     <div *ngIf="location?.latitude || location?.longitude">
-        <h4  class="tab-content-wrapper">Location:</h4>
-        <agm-map [latitude]="location?.latitude"
-            [longitude]="location?.longitude" [zoom]="15">
-            <agm-marker [latitude]="location?.latitude"
-                [longitude]="location?.longitude"></agm-marker>
+        <h4 class="tab-content-wrapper">Location:</h4>
+        <agm-map [latitude]="location?.latitude" [longitude]="location?.longitude" [zoom]="15">
+            <agm-marker [latitude]="location?.latitude" [longitude]="location?.longitude"></agm-marker>
         </agm-map>
     </div>
 
 </ng-template>
 
 <ng-template #addCommentTemplate let-cDetails="details">
-    {{cDetails | json}}
-    <div class="tab-pane fade show product-tab">
-        <div class="thread">
-            <ul class="media-list thread-list" style="list-style: none;">
-                <h4 class="tab-content-wrapper">Comments:</h4>
-                <div *ngFor="let c of commentsList">
-                    <li *ngIf="!c?.blockSpecificComment" class="single-thread">
-                        <app-comment [comment]="c" [referenceId]="cDetails?._id"></app-comment>
-                    </li>
+
+    <!-- <section class="single-product-desc">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+
+                    <div class="item-info">
+
+                        <div class="tab-pane fade show product-tab active" id="product-details">
+
+
+                            <h4 class="tab-content-wrapper">How Can You Help:</h4>
+                        </div>
+
+                    </div>
                 </div>
-            </ul>
+            </div>
+        </div>
+    </section> -->
+    <div style="background: white; margin-top: 30px;">
+        <div class="tab-pane fade show product-tab">
+            <div class="thread">
+                <ul class="media-list thread-list" style="list-style: none;">
+                    <h4 class="tab-content-wrapper">Comments:</h4>
+                    <div *ngFor="let c of commentsList">
+                        <li *ngIf="!c?.blockSpecificComment" class="single-thread">
+                            <app-comment [comment]="c" [referenceId]="cDetails?._id"></app-comment>
+                        </li>
+                    </div>
+                </ul>
+            </div>
+        </div>
+
+        <div class="comment-form-area">
+            <h4>Leave a comment</h4>
+            <!-- comment reply -->
+            <div class="media comment-form">
+                <div class="media-left">
+                    <a href="#">
+                        <img class="author_avatar_comment"
+                            [src]="authService?.loggedInUser?.avatar ? ((codemarketBucketURL + authService?.loggedInUser?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                            alt="Commentator Avatar">
+                    </a>
+                </div>
+                <div class="media-body">
+                    <div [formGroup]="commentForm" class="comment-reply-form">
+                        <app-editor [id]="'comment-editor'" (output)="updateFormData($event)">
+                        </app-editor>
+
+                        <button style="float: right;" type="button" class="btn btn--sm btn--round"
+                            (click)="addComment()">Post
+                            Comment</button>
+                    </div>
+                </div>
+            </div>
+            <!-- comment reply -->
         </div>
     </div>
+</ng-template>
 
-    <div class="comment-form-area">
-        <h4>Leave a comment</h4>
-        <!-- comment reply -->
-        <div class="media comment-form">
-            <div class="media-left">
-                <a href="#">
-                    <img class="author_avatar_comment"
-                        [src]="authService?.loggedInUser?.avatar ? ((codemarketBucketURL + authService?.loggedInUser?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
-                        alt="Commentator Avatar">
-                </a>
-            </div>
-            <div class="media-body">
-                <div [formGroup]="commentForm" class="comment-reply-form">
-                    <app-editor [id]="'comment-editor'" (output)="updateFormData($event)">
-                    </app-editor>
+<!-- Implementation of Q&A Start Here -->
+<ng-template #questionAnswersTemplate let-qa="details">
+    <div class="tab-pane product-tab" id="product-faq" style="background: white; margin-top: 30px;">
+        <div class="tab-content-wrapper">
+            <h4 style="padding-bottom: 15px;">Q & A</h4>
 
-                    <button style="float: right;" type="button" class="btn btn--sm btn--round"
-                        (click)="addComment()">Post
-                        Comment</button>
+            <mat-accordion>
+                <mat-expansion-panel *ngFor="let q of questionsList">
+                    <mat-expansion-panel-header>
+                        <div style="padding: 0; width: 100%;" fxLayout="row" [fxLayoutAlign]="'center center'">
+                            <app-editor fxFlex="92" (output)="questionData = $event;" [readOnly]="q['edit'] ? false : true" [data]="q?.text" [id]="q['edit']+ q?._id">
+                            </app-editor>
+                            <div fxFlex="8">
+                                <div fxLayout="column" [fxLayoutAlign]="'center center'" style="padding-right: 5px;">
+                                    <a fxFlex="50" style="padding: 0 8px; text-decoration: none;"
+                                        *ngIf="q?.createdBy?._id === authService?.loggedInUser?._id" mat-button
+                                        (click)="q['edit'] = true">
+                                        <i style="font-size: 1.2rem !important;" class="fad fa-edit fa-lg"></i>
+                                        <!-- <span>{{' ('}}
+                                            {{ q?.answers ? q?.answers?.length : 0 }}
+                                            {{')'}}</span> -->
+                                    </a>
+                                    <a fxFlex="50" style="padding: 0 8px; text-decoration: none;"
+                                        *ngIf="!q?.show" mat-button (click)="deleteQuestionOrAnswer(q)">
+                                        <i style="font-size: 1.2rem !important;" class="fad fa-minus-octagon fa-lg"></i>
+                                    </a>
+                                    <!-- <a fxFlex="33" style="padding: 0 8px; text-decoration: none;"
+                                        *ngIf="!q?.show" mat-button (click)="q['show'] = true">
+                                        <i style="font-size: 1.2rem !important;" class="fad fa-check-circle fa-lg"></i>
+                                    </a>
+                                    <a fxFlex="33" style="padding: 0 8px; text-decoration: none;" *ngIf="q?.show" mat-button
+                                        (click)="q['show'] = false">
+                                        <i style="font-size: 1.2rem !important;" class="fad fa-chevron-circle-up fa-lg"></i>
+                                    </a> -->
+                                </div>
+                            </div>
+                        </div>
+                    </mat-expansion-panel-header>
+                    <br/>
+                    <button *ngIf="q?.edit" type="button" style="float: right;" class="btn btn--sm btn--round"
+                    (click)="updateQuestionOrAnswer(q, false)">Update
+                    Question</button>
+                    <br/>
+                    <div class="panel-body">
+
+                        <div class="thread">
+                            <ul class="media-list thread-list" style="list-style: none;">
+                                <!-- List of Answers -->
+                                <div *ngFor="let a of q?.answers">
+                                    <li class="single-thread">
+                                        <div class="media">
+                                            <div class="media-left">
+
+                                                <a
+                                                    [routerLink]="['/', {outlets: {'main': ['dashboard', 'profile', a?.createdBy?._id ]}}]">
+                                                    <img class="author_avatar_comment"
+                                                        [src]="a?.createdBy?.avatar ? ((codemarketBucketURL + a.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                                                        alt="Commentator Avatar">
+                                                </a>
+                                            </div>
+                                            <div class="media-body">
+                                                <div>
+                                                    <div class="media-heading">
+                                                        <a
+                                                            [routerLink]="['/', {outlets: {'main': ['dashboard', 'profile', a?.createdBy?._id ]}}]">
+                                                            <h4>{{a?.createdBy?.name }}</h4>
+                                                        </a>
+                                                        <span>{{fromNow(a?.createdAt)}}</span>
+                                                    </div>
+
+                                                    <!-- Answe actions button -->
+                                                    <a style="float: right;"
+                                                        *ngIf="a?.createdBy?._id === authService?.loggedInUser?._id"
+                                                        mat-button (click)="deleteQuestionOrAnswer(a, q)">
+                                                        <i style="font-size: 2rem !important;"
+                                                            class="fad fa-comment-minus fa-lg"></i>
+                                                    </a>
+
+                                                    <a style="float: right;"
+                                                        *ngIf="a?.createdBy?._id === authService?.loggedInUser?._id"
+                                                        mat-button (click)="a['edit']=true">
+                                                        <i style="font-size: 2rem !important;"
+                                                            class="fad fa-comment-edit fa-lg"></i>
+                                                    </a>
+
+                                                </div>
+
+                                                <!-- View / Update Answer Content -->
+                                                <app-editor [readOnly]="a['edit'] ? false : true"
+                                                    (output)="answerData = $event" [data]="a?.text" [id]="a?._id">
+                                                </app-editor>
+                                                <br />
+                                                <button *ngIf="a['edit']" type="button" style="float: right;"
+                                                    class="btn btn--sm btn--round"
+                                                    (click)="updateQuestionOrAnswer(a, true)">Update
+                                                    Answer</button>
+                                            </div>
+
+                                        </div>
+                                    </li>
+                                </div>
+                            </ul>
+                        </div>
+
+                        <!-- Add Answer Section -->
+                        <div class="comment-form-area">
+                            <div class="media comment-form">
+                                <div class="media-left">
+                                    <a href="#">
+                                        <img class="author_avatar_comment"
+                                            [src]="authService?.loggedInUser?.avatar ? ((codemarketBucketURL + authService?.loggedInUser?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                                            alt="Commentator Avatar">
+                                    </a>
+                                </div>
+                                <div class="media-body">
+                                    <div class="comment-reply-form">
+                                        <app-editor [id]="'answer' + q?._id" [placeholder]="'Answer'"
+                                            (output)="questionOrAnswerForm.get('text').setValue($event)">
+                                        </app-editor>
+
+                                        <button style="float: right;" type="button" class="btn btn--sm btn--round"
+                                            (click)="addQuestionOrAnswer(false, q)">Answer</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </mat-expansion-panel>
+            </mat-accordion>
+
+
+        </div>
+
+        <!-- Add Question Section -->
+        <div class="comment-form-area">
+            <div class="media comment-form">
+                <div class="media-left">
+                    <a href="#">
+                        <img class="author_avatar_comment"
+                            [src]="authService?.loggedInUser?.avatar ? ((codemarketBucketURL + authService?.loggedInUser?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                            alt="Commentator Avatar">
+                    </a>
+                </div>
+                <div class="media-body">
+                    <div [formGroup]="questionOrAnswerForm" class="comment-reply-form">
+                        <app-editor [id]="'question-editor'" [placeholder]="'Ask a Question'"
+                            (output)="questionOrAnswerForm.get('text').setValue($event)">
+                        </app-editor>
+
+                        <button style="float: right;" type="button" class="btn btn--sm btn--round"
+                            (click)="addQuestionOrAnswer(true)">Ask a Question</button>
+                    </div>
                 </div>
             </div>
         </div>
-        <!-- comment reply -->
     </div>
 </ng-template>
 

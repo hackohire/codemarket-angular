@@ -12,13 +12,17 @@
                             <a [routerLink]="[p?.pathString ? p.pathString : '/']">{{p?.name}}</a>
                         </li>
                     </ul>
-
-                    <a *ngIf="showEditPostDetails"
-                        class="btn btn--sm btn--round menu"
-                        style="color: #0674ec !important; margin-left: auto; background: white;"
-                        (click)="editPost.emit()">Edit <mat-icon
-                            style="vertical-align: middle;">edit</mat-icon>
-                    </a>
+                    <div style="margin-left: auto;">
+                        <a *ngIf="showEditPostDetails" class="btn btn--sm btn--round menu"
+                            style="color: #0674ec !important; background: white; margin-right: 5px;"
+                            (click)="editPost.emit()">Edit <mat-icon style="vertical-align: middle;">edit</mat-icon>
+                        </a>
+                        <a *ngIf="postDetails?.type === 'event'" class="btn btn--sm btn--round menu"
+                            style="color: #0674ec !important; background: white;"
+                            [routerLink]="['/', {outlets: {'main': ['event', 'add-event']}}]">Add <mat-icon
+                                style="vertical-align: middle;">add</mat-icon>
+                        </a>
+                    </div>
 
                     <!-- Add Post Menu Integrated -->
                     <!-- <app-add-post-menu *ngIf="showMenu" [ngStyle]="{'color': color}" style="padding-left: 10px;"></app-add-post-menu> -->
@@ -49,18 +53,21 @@
                         {{ postDetails?.company?.name }}
                     </h6>
 
-                    <h6 fxLayout="row" *ngIf="postDetails?.cities && postDetails?.cities?.length" style="margin: 0 0 8px 0;">
+                    <h6 fxLayout="row" *ngIf="postDetails?.cities && postDetails?.cities?.length"
+                        style="margin: 0 0 8px 0;">
                         <strong fxFlex="17" style="color: white;">Cities :</strong>
                         <!-- <mat-icon style="vertical-align: middle;"></mat-icon> -->
-                        <span *ngFor="let c of postDetails?.cities; let ei = index;">{{c?.name + (ei === postDetails?.cities?.length - 1 ? '' : ', ' )}}</span>
+                        <span
+                            *ngFor="let c of postDetails?.cities; let ei = index;">{{c?.name + (ei === postDetails?.cities?.length - 1 ? '' : ', ' )}}</span>
                     </h6>
 
-                    <h6 fxLayout="row" fxLayoutGap="7px" *ngIf="postDetails?.salaryRangeFrom" style="margin: 0 0 8px 0;">
+                    <h6 fxLayout="row" fxLayoutGap="7px" *ngIf="postDetails?.salaryRangeFrom"
+                        style="margin: 0 0 8px 0;">
                         <strong fxFlex="17" style="color: white;">Expected Salary :</strong>
                         <!-- <mat-icon style="vertical-align: middle;"></mat-icon> -->
                         <!-- <div fxFlex style="color: white;"> -->
-                            {{(postDetails?.salaryRangeFrom | currency: 'USD' : 'symbol' : '1.0-0') + 'k'}} -
-                            {{ (postDetails?.salaryRangeTo | currency: 'USD' : 'symbol' : '1.0-0') + 'k'}}
+                        {{(postDetails?.salaryRangeFrom | currency: 'USD' : 'symbol' : '1.0-0') + 'k'}} -
+                        {{ (postDetails?.salaryRangeTo | currency: 'USD' : 'symbol' : '1.0-0') + 'k'}}
                         <!-- </div> -->
                     </h6>
                 </div>

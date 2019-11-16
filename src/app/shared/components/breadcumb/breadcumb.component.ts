@@ -11,7 +11,7 @@ export class BreadcumbComponent implements OnInit {
   @Input() title: string;
   @Input() path: [];
   @Input() eventDate: [];
-  @Input() postDetails: Post;
+  @Input() postDetails;
   @Input('color') color = 'white';
   @Input('showMenu') showMenu = true;
   @Input('showEditPostDetails') showEditPostDetails: boolean;

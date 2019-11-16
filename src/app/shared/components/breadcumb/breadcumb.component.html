@@ -41,6 +41,12 @@
                         {{ eventDate[1] | date: 'EEEE, MMMM d, y, h:mm a'}}
                     </h6>
 
+                    <h6 *ngIf="eventDate && eventDate?.length">
+                            <label style="width: 5%; color: white;">Location:</label>
+                            <mat-icon style="vertical-align: middle;">location</mat-icon>
+                            {{ postDetails?.location?.address }}
+                    </h6>
+
                     <h6 fxLayout="row" fxLayoutGap="7px" *ngIf="postDetails?.company" style="margin: 0 0 8px 0;">
                         <strong fxFlex="17" style="color: white;">Position :</strong>
                         <!-- <mat-icon style="vertical-align: middle;"></mat-icon> -->

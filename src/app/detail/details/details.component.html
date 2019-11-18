@@ -325,6 +325,8 @@
 
     <app-breadcumb (editPost)="edit(details)"
         [showEditPostDetails]="details?.createdBy?._id === authService?.loggedInUser?._id ? true : false"
+        [companyDetails]="details"
+    
         [title]="details?.name" [path]="breadcumb?.path">
     </app-breadcumb>
 

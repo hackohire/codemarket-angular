@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Post } from '../../models/post.model';
+import { Company } from '../../models/company.model';
 
 @Component({
   selector: 'app-breadcumb',
@@ -12,6 +13,7 @@ export class BreadcumbComponent implements OnInit {
   @Input() path: [];
   @Input() eventDate: [];
   @Input() postDetails;
+  @Input() companyDetails: Company;
   @Input('color') color = 'white';
   @Input('showMenu') showMenu = true;
   @Input('showEditPostDetails') showEditPostDetails: boolean;

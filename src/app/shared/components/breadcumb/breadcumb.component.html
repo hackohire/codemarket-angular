@@ -19,7 +19,13 @@
                         </a>
                         <a *ngIf="postDetails?.type === 'event'" class="btn btn--sm btn--round menu"
                             style="color: #0674ec !important; background: white;"
-                            [routerLink]="['/', {outlets: {'main': ['event', 'add-event']}}]">Add <mat-icon
+                            [routerLink]="['/', {outlets: {'main': ['event', 'add-event']}}]">Add Event <mat-icon
+                                style="vertical-align: middle;">add</mat-icon>
+                        </a>
+                        <a *ngIf="companyDetails" class="btn btn--sm btn--round menu"
+                            style="color: #0674ec !important; background: white;"
+                            [state]="{companyDetails: companyDetails}"
+                            [routerLink]="['/', {outlets: {'main': ['event', 'add-event']}}]">Add Event <mat-icon
                                 style="vertical-align: middle;">add</mat-icon>
                         </a>
                     </div>
@@ -30,52 +36,53 @@
                 <h1 class="page-title">{{title}}</h1>
 
                 <div style="color: white; padding-top: 8px">
-                    <h6 *ngIf="eventDate && eventDate?.length">
-                        <label style="width: 5%; color: white;">From:</label>
-                        <mat-icon style="vertical-align: middle;">date_range</mat-icon>
-                        {{eventDate[0] | date: 'EEEE, MMMM d, y, h:mm a' }}
-                    </h6>
-                    <h6 *ngIf="eventDate && eventDate?.length">
-                        <label style="width: 5%; color: white;">To:</label>
-                        <mat-icon style="vertical-align: middle;">date_range</mat-icon>
-                        {{ eventDate[1] | date: 'EEEE, MMMM d, y, h:mm a'}}
-                    </h6>
 
-                    <h6 *ngIf="eventDate && eventDate?.length">
-                            <label style="width: 5%; color: white;">Location:</label>
-                            <mat-icon style="vertical-align: middle;">location</mat-icon>
-                            {{ postDetails?.location?.address }}
-                    </h6>
+                    <ul class="infos">
+                        <li *ngIf="eventDate && eventDate?.length">
+                            <p class="data-label">From</p>
+                            <p class="info">
+                                <mat-icon style="vertical-align: middle;">date_range</mat-icon>
+                                {{eventDate[0] | date: 'EEEE, MMMM d, y, h:mm a' }}
+                            </p>
+                        </li>
+                        <li *ngIf="eventDate && eventDate?.length">
+                            <p class="data-label">To</p>
+                            <p class="info">
+                                <mat-icon style="vertical-align: middle;">date_range</mat-icon>
+                                {{ eventDate[1] | date: 'EEEE, MMMM d, y, h:mm a'}}
+                            </p>
+                        </li>
 
-                    <h6 fxLayout="row" fxLayoutGap="7px" *ngIf="postDetails?.company" style="margin: 0 0 8px 0;">
-                        <strong fxFlex="17" style="color: white;">Position :</strong>
-                        <!-- <mat-icon style="vertical-align: middle;"></mat-icon> -->
-                        {{ postDetails?.jobProfile ? postDetails?.jobProfile : '' }}
-                    </h6>
+                        <li *ngIf="postDetails?.location">
+                            <p class="data-label">Location</p>
+                            <p class="info" style="text-transform: capitalize;">{{ postDetails?.location?.address }}</p>
+                        </li>
 
-                    <h6 fxLayout="row" fxLayoutGap="7px" *ngIf="postDetails?.company" style="margin: 0 0 8px 0;">
-                        <strong fxFlex="17" style="color: white;">Company :</strong>
-                        <!-- <mat-icon style="vertical-align: middle;"></mat-icon> -->
-                        {{ postDetails?.company?.name }}
-                    </h6>
+                        <li *ngIf="postDetails?.jobProfile">
+                            <p class="data-label">Position</p>
+                            <p class="info" style="text-transform: capitalize;">
+                                {{ postDetails?.jobProfile ? postDetails?.jobProfile : '' }}</p>
+                        </li>
 
-                    <h6 fxLayout="row" *ngIf="postDetails?.cities && postDetails?.cities?.length"
-                        style="margin: 0 0 8px 0;">
-                        <strong fxFlex="17" style="color: white;">Cities :</strong>
-                        <!-- <mat-icon style="vertical-align: middle;"></mat-icon> -->
-                        <span
-                            *ngFor="let c of postDetails?.cities; let ei = index;">{{c?.name + (ei === postDetails?.cities?.length - 1 ? '' : ', ' )}}</span>
-                    </h6>
+                        <li *ngIf="postDetails?.company">
+                            <p class="data-label">Company</p>
+                            <p class="info" style="text-transform: capitalize;">{{ postDetails?.company?.name }}</p>
+                        </li>
 
-                    <h6 fxLayout="row" fxLayoutGap="7px" *ngIf="postDetails?.salaryRangeFrom"
-                        style="margin: 0 0 8px 0;">
-                        <strong fxFlex="17" style="color: white;">Expected Salary :</strong>
-                        <!-- <mat-icon style="vertical-align: middle;"></mat-icon> -->
-                        <!-- <div fxFlex style="color: white;"> -->
-                        {{(postDetails?.salaryRangeFrom | currency: 'USD' : 'symbol' : '1.0-0') + 'k'}} -
-                        {{ (postDetails?.salaryRangeTo | currency: 'USD' : 'symbol' : '1.0-0') + 'k'}}
-                        <!-- </div> -->
-                    </h6>
+                        <li *ngIf="postDetails?.cities && postDetails?.cities?.length">
+                            <p class="data-label">Cities</p>
+                            <p class="info"><span
+                                    *ngFor="let c of postDetails?.cities; let ei = index;">{{c?.name + (ei === postDetails?.cities?.length - 1 ? '' : ', ' )}}</span>
+                            </p>
+                        </li>
+
+                        <li *ngIf="postDetails?.salaryRangeFrom">
+                            <p class="data-label">Expected Salary</p>
+                            <p class="info">
+                                {{(postDetails?.salaryRangeFrom | currency: 'USD' : 'symbol' : '1.0-0') + 'k'}} -
+                                {{ (postDetails?.salaryRangeTo | currency: 'USD' : 'symbol' : '1.0-0') + 'k'}}</p>
+                        </li>
+                    </ul>
                 </div>
             </div>
             <!-- end /.col-md-12 -->

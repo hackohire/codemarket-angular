@@ -1,14 +1,14 @@
-import { Component, OnInit, ViewChild, ElementRef, NgZone, ChangeDetectorRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { BreadCumb } from 'src/app/shared/models/bredcumb.model';
 import { FormGroup, FormControl, Validators, FormArray, FormBuilder } from '@angular/forms';
-import { Event } from 'src/app/shared/models/event.model';
+import { Event, EventTypes } from 'src/app/shared/models/event.model';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/core/store/state/app.state';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Subscription, of } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap, tap, startWith, map } from 'rxjs/operators';
 import { FormService } from 'src/app/shared/services/form.service';
 import { Tag } from 'src/app/shared/models/product.model';
@@ -17,8 +17,9 @@ import { PostStatus } from 'src/app/shared/models/poststatus.enum';
 import { PostType } from 'src/app/shared/models/post-types.enum';
 import { SetSelectedPost, GetPostById, AddPost, UpdatePost } from 'src/app/core/store/actions/post.actions';
 import { selectSelectedPost } from 'src/app/core/store/selectors/post.selectors';
-import { MapsAPILoader } from '@agm/core';
 import { LocationService } from '../../shared/services/location.service';
+import { Company } from '../../shared/models/company.model';
+import { CompanyService } from '../../companies/company.service';
 
 
 @Component({
@@ -78,6 +79,10 @@ export class AddEventComponent implements OnInit {
   tagSuggestions: Tag[];
   allTags: Tag[];
 
+  allCompanies: Company[];
+
+  eventTypes = Object.values(EventTypes);
+
   /** Location Variables */
   zoom: number = 15;
   @ViewChild('searchLocation', { static: true }) public searchLocation: ElementRef;
@@ -92,6 +97,8 @@ export class AddEventComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private formService: FormService,
     public locationService: LocationService,
+    private companyService: CompanyService,
+    private router: Router
   ) {
     this.breadcumb = {
       title: 'Add Event Details',
@@ -119,11 +126,11 @@ export class AddEventComponent implements OnInit {
       
     } else {
       this.subscription$ = this.store.select(selectSelectedPost).pipe(
-        tap((h: Event) => {
+        tap((h) => {
           this.eventFormInitialization(h);
           this.edit = true;
         }),
-        switchMap((h: Event) => {
+        switchMap((h) => {
           if (!h) {
             return this.activatedRoute.params;
           }
@@ -144,10 +151,11 @@ export class AddEventComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(window.history.state);
     // this.locationService.setLocaionSearhAutoComplete(this.searchLocation, this.locationFormGroup);
   }
 
-  async eventFormInitialization(i: Event) {
+  async eventFormInitialization(i) {
     this.eventForm = await new FormGroup({
       name: new FormControl(i && i.name ? i.name : '', Validators.required),
       description: new FormControl(i && i.description ? i.description : ''),
@@ -162,19 +170,24 @@ export class AddEventComponent implements OnInit {
         time: new FormControl(i && i.support && i.support.time ? i.support.time : 0),
         description: new FormControl(i && i.support && i.support.description ? i.support.description : '')
       }),
+      membershipRequired: new FormControl(i && i.membershipRequired ? true : false),
       dateRange: new FormControl(i && i.dateRange ? i.dateRange : '', Validators.required),
-      eventType: new FormControl(i && i.eventType ? i.eventType : 'free', Validators.required),
       location: new FormGroup({
         latitude: new FormControl(i && i.location ? i.location.latitude : 0),
         longitude: new FormControl(i && i.location ? i.location.longitude : 0),
         address: new FormControl(i && i.location ? i.location.address : ''),
       }),
+      company: new FormControl(i && i.company ? i.company._id : ''),
+      eventType: new FormControl(i && i.eventType ? i.eventType : '', Validators.required)
       // address: new FormControl(i && i.address ? i.address : '', Validators.required),
       // snippets: new FormControl(null),
     });
 
     this.locationService.setLocaionSearhAutoComplete(this.searchLocation, this.locationFormGroup);
 
+    this.companyService.getCompaniesByType('').subscribe((companies) => {
+      this.allCompanies = companies;
+    });
 
     this.formService.findFromCollection('', 'tags').subscribe((tags) => {
       this.tagSuggestions = tags;
@@ -185,6 +198,21 @@ export class AddEventComponent implements OnInit {
       startWith(''),
       map((text) => text ? this._filter(text) : this.allTags && this.allTags.length ? this.allTags.slice() : []))
       .subscribe((tags) => this.tagSuggestions = tags);
+
+      console.log(window.history.state);
+
+      const routerStateData = window.history.state
+      if (routerStateData && routerStateData.companyDetails) {
+        if (routerStateData.companyDetails.location) {
+          this.locationFormGroup.get('longitude').setValue(routerStateData.companyDetails.location.longitude);
+          this.locationFormGroup.get('latitude').setValue(routerStateData.companyDetails.location.latitude);
+          this.locationFormGroup.get('address').setValue(routerStateData.companyDetails.location.address);
+        }
+
+        if (routerStateData.companyDetails._id) {
+          this.eventForm.get('company').setValue(routerStateData.companyDetails._id)
+        }
+      }
 
   }
 
@@ -258,9 +286,5 @@ export class AddEventComponent implements OnInit {
   // Remove a Tag
   public remove(index: number): void {
     this.formService.removeCategory(this.tagsFormControl, index);
-  }
-
-  eventTypeChange(e) {
-
   }
 }

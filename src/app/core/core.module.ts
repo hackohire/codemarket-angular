@@ -80,7 +80,15 @@ export class CoreModule {
     // cleanTypeName to omit __typename field
     const cleanTypeName = new ApolloLink((operation, forward) => {
       if (operation.variables) {
-        const omitTypename = (key, value) => (key === '__typename' ? undefined : value);
+        const omitTypename = (key, value) => {
+          /** Omit __typename field otherwise GraphQL will gi erro
+           * Omit _id field if it is empty
+           */
+          if (key === '__typename' || (key === '_id' && !value)) {
+            return undefined
+          } 
+          return value;
+        }
         operation.variables = JSON.parse(JSON.stringify(operation.variables), omitTypename);
       }
       return forward(operation).map((data) => {

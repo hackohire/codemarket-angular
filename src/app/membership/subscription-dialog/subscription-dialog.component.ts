@@ -10,6 +10,7 @@ import { AppState } from '../../core/store/state/app.state';
 import { SetLoggedInUser } from '../../core/store/actions/user.actions';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { Router } from '@angular/router';
+import { appConstants } from '../../shared/constants/app_constants';
 declare var Stripe;
 const PUBLIC_KEY = environment.stripe_public_key;
 const stripe = Stripe(PUBLIC_KEY);
@@ -42,13 +43,7 @@ export class SubscriptionDialogComponent implements OnInit, AfterViewInit {
   promoCodeControl = new FormControl('');
   trial_period_days: number;
 
-  promoCodes = {
-    FIRSTMONTHFREE: {
-      title: 'FIRSTMONTHFREE',
-      message: 'First Month Free!',
-      applied: false
-    }
-  };
+  promoCodes = appConstants.promoCodes;
   appliedPromoCode: string;
 
   userSelection = true;
@@ -62,6 +57,8 @@ export class SubscriptionDialogComponent implements OnInit, AfterViewInit {
   DOMAIN = window.location.href;
   quantity = 1;
   stripeId: string;
+
+  activatedCoupon: any;
 
   constructor(
     public dialogRef: MatDialogRef<SubscriptionDialogComponent>,
@@ -117,7 +114,8 @@ export class SubscriptionDialogComponent implements OnInit, AfterViewInit {
         this.stripeId,
         this.trial_period_days,
         metadata,
-        [{ plan: this.data.plan.id, quantity: this.quantity }]
+        [{ plan: this.data.plan.id, quantity: this.quantity }],
+        this.promoCodeControl.value
       );
 
       if (successfulSubscription) {
@@ -153,11 +151,20 @@ export class SubscriptionDialogComponent implements OnInit, AfterViewInit {
     }
   }
 
-  applyPromo() {
+  async applyPromo() {
     if (this.promoCodeControl.value === this.promoCodes.FIRSTMONTHFREE.title) {
       this.appliedPromoCode = this.promoCodeControl.value;
       this.promoCodes.FIRSTMONTHFREE.applied = true;
       this.trial_period_days = 30;
+    } else {
+      const coupon = await this.membershipService.getCouponByName(this.promoCodeControl.value);
+      console.log(coupon);
+      if (coupon) {
+        this.activatedCoupon = coupon.coupon;
+        this.appliedPromoCode = this.promoCodeControl.value;
+        // this.promoCodes[coupon.coupon.id].applied = true;
+        this.trial_period_days = 0;
+      }
     }
   }
 
@@ -166,6 +173,8 @@ export class SubscriptionDialogComponent implements OnInit, AfterViewInit {
     this.appliedPromoCode = '';
     if (this.promoCodeControl.value === this.promoCodes.FIRSTMONTHFREE.title) {
       this.trial_period_days = 0;
+    } else {
+      this.activatedCoupon = null;
     }
   }
 

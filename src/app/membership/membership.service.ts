@@ -225,7 +225,19 @@ export class MembershipService {
     });
   }
 
-  async attachCardAndCreateSubscription(source, stripeId: string, trial_period_days: number, metadata, items) {
+  /** Apply Coupon Code */
+  getCouponByName(couponCode: string) {
+    return this.httpClient.post(environment.serverless_url + 'getCouponByName',
+    { couponCode })
+    .toPromise().then((d: any) => {
+      console.log(d);
+      if (d) {
+        return d;
+      }
+    });
+  }
+
+  async attachCardAndCreateSubscription(source, stripeId: string, trial_period_days: number, metadata, items, coupon: string) {
     const d = await this.httpClient.post(environment.serverless_url + 'attachCardAndCreateSubscription', {
       loggedInUserId: this.authService.loggedInUser._id,
       items,
@@ -233,7 +245,8 @@ export class MembershipService {
       trial_period_days,
       metadata,
       source,
-      name: this.authService.loggedInUser.name
+      name: this.authService.loggedInUser.name,
+      coupon
     }).toPromise();
     console.log(d);
     if (d) {

@@ -35,8 +35,8 @@
 
     <mat-form-field fxFlex="35" appearance="outline">
       <mat-label>No. of Users</mat-label>
-      <input pattern="^[0-9]{1,2}$" style="font-size: x-large;" type="number" maxlength="2" [(ngModel)]="quantity"
-        matInput placeholder="Users">
+      <input #noOfUsers pattern="^[0-9]{1,2}$" style="font-size: x-large;" type="number" maxlength="2" [(ngModel)]="quantity"
+        matInput placeholder="Users" [disabled]="activatedCoupon">
       <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
     </mat-form-field>
 
@@ -71,6 +71,12 @@
         <i class="fad fa-check"></i>
         First Month Free!
       </mat-hint>
+
+      <!--SUCESS FOR Coupon Code other than FIRST MONTH FREE -->
+      <mat-hint *ngIf="activatedCoupon" style="color: green !important;">
+        <i class="fad fa-check"></i>
+        Coupon Code Applied!
+      </mat-hint>
     </div>
 
     <button mat-flat-button color="primary" (click)="applyPromo()">Apply Promo</button>
@@ -79,7 +85,10 @@
   <hr class="dash" />
 
   <div fxLayout="row" fxLayoutAlign="end end">
-    <h3>Total = {{ promoCodes?.FIRSTMONTHFREE.title === appliedPromoCode ? ((0 | currency) + '(First Month)') : (data?.plan?.fixed_price?.value * quantity) | currency}}</h3>
+    <h3>Total =
+      {{ promoCodes?.FIRSTMONTHFREE.title === appliedPromoCode ? ((0 | currency) + '(First Month)') : 
+      ((data?.plan?.fixed_price?.value - (data?.plan?.fixed_price?.value * (activatedCoupon ? (activatedCoupon?.percent_off / 100) : 0))) * quantity) | currency}}
+    </h3>
   </div>
 
   <hr class="dash" />
@@ -91,14 +100,15 @@
 </mat-dialog-content>
 
 <mat-dialog-actions style="margin-left: 35px;">
-  <button [disabled]="promoCodeControl?.invalid" mat-flat-button color="primary" (click)="handleForm()">Submit Payment</button>
+  <button [disabled]="promoCodeControl?.invalid" mat-flat-button color="primary" (click)="handleForm()">Submit
+    Payment</button>
   <button mat-flat-button color="warn" (click)="dialogRef.close()">Cancel</button>
 </mat-dialog-actions>
 
 <swal #successfulPayment title="Congratulations!" type="success" (confirm)="onConfirm($event)">
-    <div *swalPartial class="alert alert-info">
-        <h4>Subscription Purchased Successfully</h4>
-    </div>
+  <div *swalPartial class="alert alert-info">
+    <h4>Subscription Purchased Successfully</h4>
+  </div>
 </swal>
 
 <!-- <mat-dialog-content>

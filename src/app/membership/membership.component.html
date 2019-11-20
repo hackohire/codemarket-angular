@@ -11,37 +11,37 @@
         <!-- <div class="row"> -->
             <mat-tab-group [selectedIndex]="selected.value" (selectedIndexChange)="selected.setValue($event)">
                 <mat-tab [label]="'TeamIQ'">
-                    Contents for Team IQ tab
+                    Removing friction among your team members to innovate
                     <ng-container *ngTemplateOutlet="plansTemplate; context: {plans: listOfPlans, planType: 'TeamIQ'}">
                     </ng-container>
                 </mat-tab>
 
                 <mat-tab [label]="'SMB'">
-                    Contents for SMB tab
+                Connect with innovators that love your business 
                     <ng-container *ngTemplateOutlet="plansTemplate; context: {plans: listOfPlans, planType: 'SMB'}">
                         </ng-container>
                 </mat-tab>
 
                 <mat-tab [label]="'Startup'">
-                    Contents for Startup tab
+                    Super charge your lean and agile teams by connecting with innovators around the world
                     <ng-container *ngTemplateOutlet="plansTemplate; context: {plans: listOfPlans, planType: 'Startup'}">
                     </ng-container>
                 </mat-tab>
 
                 <mat-tab [label]="'Non-profits'">
-                    Contents for Non-profits tab
+                    Connect with innovators that are passionate about your cause
                     <ng-container *ngTemplateOutlet="plansTemplate; context: {plans: listOfPlans, planType: 'Non-profits'}">
                     </ng-container>
                 </mat-tab>
 
                 <mat-tab [label]="'Governments'">
-                    Contents for Governments tab
+                    Engage with innovators in your community to run a better government
                     <ng-container *ngTemplateOutlet="plansTemplate; context: {plans: listOfPlans, planType: 'Governments'}">
                     </ng-container>
                 </mat-tab>
 
                 <mat-tab [label]="'Schools'">
-                    Contents for Schools tab
+                    Future of society lies in the hands of kids. Enagge and connect with innovators.
                     <ng-container *ngTemplateOutlet="plansTemplate; context: {plans: listOfPlans, planType: 'Schools'}">
                     </ng-container>
                 </mat-tab>

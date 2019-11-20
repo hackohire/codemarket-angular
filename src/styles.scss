@@ -24,6 +24,14 @@ agm-map {
   height: 300px;
 }
 
+mat-expansion-panel-header {
+  height: auto !important;
+}
+
+textarea {
+  min-height: 50px !important;
+}
+
 .mat-tab-body-content {
   overflow: hidden !important;
 }

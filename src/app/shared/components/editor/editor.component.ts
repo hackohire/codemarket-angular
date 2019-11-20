@@ -1,5 +1,5 @@
 import { Component, OnInit, EventEmitter, Output, Input, OnDestroy, OnChanges, AfterViewInit, SimpleChanges, ViewChild, ElementRef, ViewChildren } from '@angular/core';
-import EditorJS from '@editorjs/editorjs';
+// import EditorJS from '@editorjs/editorjs';
 import Header from '@editorjs/header';
 import ImageTool from '@editorjs/image';
 import List from '@editorjs/list';
@@ -20,6 +20,7 @@ import { CommentService } from '../../services/comment.service';
 import { Post } from '../../models/post.model';
 import { Comment } from '../../models/comment.model';
 const path = require('path');
+declare const EditorJS;
 
 @Component({
   selector: 'app-editor',
@@ -29,7 +30,7 @@ const path = require('path');
 })
 export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit {
 
-  editor: EditorJS;
+  editor: any;
   @Input() post: Post; /** post for view mode */
   @Input() id: string;
   @Input() readOnly = false; /** read only mode */
@@ -251,6 +252,9 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
         this.zoomInZoomOutForImages();
       }),
       onChange: (() => {
+        console.log(this.editor.blocks.getBlockByIndex(0))
+        console.log(this.editor.blocks);
+        console.log(this.editor.saver)
         this.editor.save().then((outputData) => {
           console.log(outputData);
           this.output.emit([...outputData.blocks]);

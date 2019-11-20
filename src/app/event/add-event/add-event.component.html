@@ -29,49 +29,77 @@
                 <br />
                 <mat-form-field class="field-full-width">
                     <input type="text" matInput placeholder="Search Location" #searchLocation>
-                    <mat-icon matSuffix (click)="locationService?.setCurrentLocation(locationFormGroup)">my_location</mat-icon>
+                    <mat-icon matSuffix (click)="locationService?.setCurrentLocation(locationFormGroup)">my_location
+                    </mat-icon>
                 </mat-form-field>
 
 
                 <div *ngIf="locationFormGroup.get('latitude').value || locationFormGroup.get('longitude').value">
-                    <agm-map [latitude]="locationFormGroup.get('latitude').value" [longitude]="locationFormGroup.get('longitude').value" [zoom]="zoom">
-                        <agm-marker [latitude]="locationFormGroup.get('latitude').value" [longitude]="locationFormGroup.get('longitude').value" [markerDraggable]="true"
+                    <agm-map [latitude]="locationFormGroup.get('latitude').value"
+                        [longitude]="locationFormGroup.get('longitude').value" [zoom]="zoom">
+                        <agm-marker [latitude]="locationFormGroup.get('latitude').value"
+                            [longitude]="locationFormGroup.get('longitude').value" [markerDraggable]="true"
                             (dragEnd)="locationService?.markerDragEnd($event, locationFormGroup)"></agm-marker>
                     </agm-map>
                 </div>
-<!-- 
+                <!-- 
                 <h5>Address: {{address}}</h5>
                 <div>Latitude: {{latitude}}</div>
                 <div>Longitude: {{longitude}}</div> -->
 
-                <mat-form-field class="field-full-width" [formGroupName]="'location'">
-                    <textarea type="text" matInput formControlName="address" placeholder="Address"></textarea>
-                    <!-- <mat-icon matSuffix>location</mat-icon> -->
-                </mat-form-field>
+                <div class="row">
+                    <div class="col-md-6">
+                        <mat-form-field class="field-full-width" [formGroupName]="'location'">
+                            <textarea type="text" matInput formControlName="address" placeholder="Address"></textarea>
+                            <!-- <mat-icon matSuffix>location</mat-icon> -->
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-6" style="align-self: flex-end;">
+                        <!-- Event Date Range -->
+                        <mat-form-field class="field-full-width">
+                            <input (click)="dt2.open()" formControlName="dateRange" matInput [owlDateTime]="dt2"
+                                [selectMode]="'range'" placeholder="Event Date & Time">
+                            <mat-icon matSuffix [owlDateTimeTrigger]="dt2">date_range</mat-icon>
+                            <owl-date-time #dt2 [pickerType]="'both'"></owl-date-time>
+                        </mat-form-field>
+                    </div>
+                </div>
 
-                <!-- Event Date Range -->
-                <mat-form-field class="field-full-width">
-                    <input (click)="dt2.open()" formControlName="dateRange" matInput [owlDateTime]="dt2"
-                        [selectMode]="'range'" placeholder="Event Date & Time">
-                    <mat-icon matSuffix [owlDateTimeTrigger]="dt2">date_range</mat-icon>
-                    <owl-date-time #dt2 [pickerType]="'both'"></owl-date-time>
-                </mat-form-field>
+                <div class="row">
+                    <div class="col-md-6">
+                        <!-- Select Company -->
+                        <ng-select placeholder="Select Company" formControlName="company">
+                            <ng-option *ngFor="let cName of allCompanies" [value]="cName._id">
+                                {{ cName?.name }}
+                            </ng-option>
+                        </ng-select>
+                    </div>
+                    <div class="col-md-6">
+                        <!-- Select Company Type -->
+                        <ng-select placeholder="Select Event Type" formControlName="eventType">
+                            <ng-option *ngFor="let cName of eventTypes" [value]="cName">
+                                {{ cName }}
+                            </ng-option>
+                        </ng-select>
+                    </div>
+                </div>
 
-
-
-                <label class="example-margin">Event Type</label>
-                <mat-radio-group formControlName="eventType" [color]="'primary'"
-                    (change)="eventTypeChange($event)" aria-label="Select an option" #user="matRadioGroup"
-                    fxLayout="row" fxLayoutGap="8px">
-                    <mat-radio-button fxFlex="20" [value]="'free'">Free</mat-radio-button>
-                    <mat-radio-button fxFlex="20" [value]="'membership required'">Membership Required</mat-radio-button>
-                </mat-radio-group>
-
-                <mat-form-field class="field-full-width">
-                    <input type="number" matInput formControlName="price" placeholder="price">
-                    <mat-icon matSuffix>monetization_on</mat-icon>
-                </mat-form-field>
-
+                <div class="row">
+                    <div class="col-md-6">
+                        <label class="example-margin">Membership Required</label>
+                        <mat-radio-group formControlName="membershipRequired" [color]="'primary'"
+                            aria-label="Select an option" #user="matRadioGroup" fxLayout="row" fxLayoutGap="8px">
+                            <mat-radio-button fxFlex="20" [value]="true">Yes</mat-radio-button>
+                            <mat-radio-button fxFlex="20" [value]="false">No</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                    <div class="col-md-6">
+                        <mat-form-field class="field-full-width">
+                            <input type="number" matInput formControlName="price" placeholder="price">
+                            <mat-icon matSuffix>monetization_on</mat-icon>
+                        </mat-form-field>
+                    </div>
+                </div>
 
                 <mat-form-field class="field-full-width">
                     <mat-chip-list #tagsList>
@@ -94,7 +122,7 @@
                 </mat-form-field>
 
 
-                <div formGroupName="support">
+                <!-- <div formGroupName="support">
                     <mat-form-field class="field-full-width">
                         <input matInput type="number" formControlName="time" placeholder="Support Time(In Minutes)">
                         <mat-icon matSuffix>av_timer</mat-icon>
@@ -117,7 +145,7 @@
                         </app-editor>
                     </ng-template>
 
-                </div>
+                </div> -->
 
                 <br />
 

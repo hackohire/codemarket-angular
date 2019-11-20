@@ -16,6 +16,19 @@ export const appConstants = {
         [PostType.Dreamjob]: 'briefcase'
     },
 
+    promoCodes: {
+        FIRSTMONTHFREE: {
+          title: 'FIRSTMONTHFREE',
+          message: 'First Month Free!',
+          applied: false
+        },
+        CODE50: {
+            title: 'CODE50',
+            message: 'Promocode Applied',
+            applied: false
+        }
+    },
+
     imageExtenstions: [
         "ase",
         "art",

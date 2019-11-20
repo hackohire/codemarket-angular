@@ -45,6 +45,59 @@ export class CommentService {
     ${description}
   `;
 
+  questionAndAnswerSchema = gql`
+    fragment QuestionAndAnswer on QuestionAndAnswer {
+      text {
+        ...Description
+      }
+      _id
+      type
+      referenceId
+      createdAt
+      isQuestion
+      isAnswer
+      createdBy {
+        _id
+        name
+        avatar
+      }
+      answers {
+        text {
+          ...Description
+        }
+        _id
+        type
+        referenceId
+        questionId {
+          _id
+        }
+        createdAt
+        isAnswer
+        createdBy {
+          _id
+          name
+          avatar
+        }
+      }
+      questionId {
+        text {
+          ...Description
+        }
+        _id
+        type
+        referenceId
+        createdAt
+        isQuestion
+        createdBy {
+          _id
+          name
+          avatar
+        }
+      }
+    }
+    ${description}
+  `
+
 
 
   constructor(
@@ -141,6 +194,100 @@ export class CommentService {
     ).pipe(
       map((p: any) => {
         return p.data.updateComment;
+      }),
+    );
+  }
+
+  /** Methods for Q&A */
+
+  addQuestionOrAnswer(questionOrAnswer): Observable<any> {
+    return this.apollo.mutate(
+      {
+        mutation: gql`
+          mutation addQuestionOrAnswer($questionOrAnswer: QuestionAndAnswerInput) {
+            addQuestionOrAnswer(questionOrAnswer: $questionOrAnswer) {
+              ...QuestionAndAnswer
+            }
+          }
+          ${this.questionAndAnswerSchema}
+        `,
+        variables: {
+          questionOrAnswer
+        }
+      }
+    ).pipe(
+      map((p: any) => {
+        return p.data.addQuestionOrAnswer;
+      }),
+    );
+  }
+
+  
+  getQuestionAndAnswersByReferenceId(referenceId): Observable<any> {
+    return this.apollo.query(
+      {
+        query: gql`
+          query getQuestionAndAnswersByReferenceId($referenceId: String) {
+            getQuestionAndAnswersByReferenceId(referenceId: $referenceId) {
+              ...QuestionAndAnswer
+            }
+          }
+          ${this.questionAndAnswerSchema}
+        `,
+        fetchPolicy: 'no-cache',
+        variables: {
+          referenceId
+        }
+      }
+    ).pipe(
+      map((p: any) => {
+        return p.data.getQuestionAndAnswersByReferenceId;
+      }),
+    );
+  }
+
+  deleteQuestionOrAnswer(questionOrAnswerId): Observable<any> {
+    return this.apollo.query(
+      {
+        query: gql`
+          query deleteQuestionOrAnswer($questionOrAnswerId: String) {
+            deleteQuestionOrAnswer(questionOrAnswerId: $questionOrAnswerId)
+          }
+        `,
+        fetchPolicy: 'no-cache',
+        variables: {
+          questionOrAnswerId
+        }
+      }
+    ).pipe(
+      map((p: any) => {
+        return p.data.deleteQuestionOrAnswer;
+      }),
+    );
+  }
+
+  updateQuestionOrAnswer(questionOrAnswerId, text): Observable<any> {
+    return this.apollo.mutate(
+      {
+        mutation: gql`
+          mutation updateQuestionOrAnswer($questionOrAnswerId: String, $text: [InputdescriptionBlock]) {
+            updateQuestionOrAnswer(questionOrAnswerId: $questionOrAnswerId, text: $text) {
+                text {
+                  ...Description
+                }
+            }
+          }
+          ${description}
+        `,
+        fetchPolicy: 'no-cache',
+        variables: {
+          questionOrAnswerId,
+          text
+        }
+      }
+    ).pipe(
+      map((p: any) => {
+        return p.data.updateQuestionOrAnswer;
       }),
     );
   }

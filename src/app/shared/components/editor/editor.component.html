@@ -3,7 +3,7 @@
 <div *ngIf="readOnly" #editorRef  style="background: #eff1f570; padding:15px; border: dotted #ececec;">
     <div class="ce-block">
         <div class="ce-block__content">
-            <ng-container [ngSwitch]="b?.type" *ngFor="let b of data">
+            <ng-container [ngSwitch]="b?.type" *ngFor="let b of data; let i = index">
                 <div fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="start center">
                     <div fxFlex="92">
                         <!-- Paragraph -->

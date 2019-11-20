@@ -1,6 +1,15 @@
 @import '../../assets/css/_general.scss';
 @import '../../assets/css/_theme.scss';
 
+.blocks h6 {
+	font-size: 24px;
+}
+
+.block-row p {
+	font-size: 18px;
+	line-height: 2rem;
+}
+
 // Base Divider class
 .divider {
 	display: flex;

@@ -4,12 +4,14 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "node --max_old_space_size=8192 node_modules/@angular/cli/bin/ng build --prod",
+    "build": "node --max_old_space_size=8192 node_modules/@angular/cli/bin/ng build --prod && yarn run compress",
+    "build:deploy": "yarn run build && deploy-plus.sh",
     "build:stats": "node --max_old_space_size=8192 node_modules/@angular/cli/bin/ng build --prod --stats-json",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "analyze": "webpack-bundle-analyzer dist/codemarket/stats-es2015.json"
+    "analyze": "webpack-bundle-analyzer dist/codemarket/stats-es2015.json",
+    "compress": "npx gzipper --verbose ./dist/codemarket/"
   },
   "private": true,
   "dependencies": {
@@ -86,6 +88,7 @@
     "@types/node": "~8.9.4",
     "bootstrap": "^4.3.1",
     "codelyzer": "^5.0.0",
+    "gzipper": "^3.4.1",
     "jasmine-core": "~3.4.0",
     "jasmine-spec-reporter": "~4.2.1",
     "jquery": "^3.4.1",

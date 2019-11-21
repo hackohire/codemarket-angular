@@ -132,7 +132,7 @@ export const plans = {
             'Unlimited Q & A',
             'Video Conference',
             '1 meetup/month',
-            '2 Dedicated Innovation Manager 1 hour/month'
+            '2 Dedicated Innovation Manager 2 hours/month'
         ],
         success: {
           message: 'Thanks For Choosing Us',
@@ -140,7 +140,7 @@ export const plans = {
             'Unlimited Q & A',
             'Video Conference',
             '1 meetup/month',
-            '2 Dedicated Innovation Manager 1 hour/month'
+            '2 Dedicated Innovation Managers 2 hours/month'
           ],
         },
         fixed_price: {
@@ -160,7 +160,7 @@ export const plans = {
             'Unlimited Q & A',
             'Video Conference',
             '1 meetup/month',
-            '3 Dedicated Innovation Manager 1 hour/month'
+            '3 Dedicated Innovation Managers 3 hours/month'
         ],
         success: {
           message: 'Thanks For Choosing Us',
@@ -168,7 +168,7 @@ export const plans = {
             'Unlimited Q & A',
             'Video Conference',
             '1 meetup/month',
-            '3 Dedicated Innovation Manager 1 hour/month'
+            '3 Dedicated Innovation Managers 3 hours/month'
           ],
         },
         fixed_price: {

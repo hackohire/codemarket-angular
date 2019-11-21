@@ -1,6 +1,6 @@
 export const plans = {
   dev: {
-    'TeamIQ': [
+    'software_developer': [
       {
         id: 'plan_Fwdgg5Slhr6pfu',
         product_id: 'prod_FwdeAeZ0zF98Nj',
@@ -92,7 +92,7 @@ export const plans = {
         },
       }
     ],
-    'SMB': [
+    'business': [
       {
         id: 'plan_Fwdgg5Slhr6pfu',
         product_id: 'prod_FwdeAeZ0zF98Nj',
@@ -178,410 +178,10 @@ export const plans = {
         },
       }
     ],
-    'Startup': [
-      {
-        id: 'plan_Fwdgg5Slhr6pfu',
-        product_id: 'prod_FwdeAeZ0zF98Nj',
-        name: 'Developer Plan',
-        status: 'ACTIVE',
-        description: 'Career plan',
-        shortDescription: 'For Individual Developers',
-        benefits: [
-          '1 Developer',
-          'Unlimited events',
-          'Unlimited Friend Invitations'
-        ],
-        success: {
-          message: 'Thanks For Choosing Us',
-          successBenefits: [
-            '1 Developer',
-            'Unlimited events',
-            'Unlimited Friend Invitations'
-          ],
-        },
-        fixed_price: {
-          currency_code: 'USD',
-          value: 39.99,
-          postfix: 'development/month'
-        },
-      },
-      {
-        id: 'plan_Fwdg0NHGurBVom',
-        product_id: 'prod_FwdeAeZ0zF98Nj',
-        name: 'Team Plan',
-        status: 'ACTIVE',
-        description: 'Team plan',
-        shortDescription: 'For Small Teams',
-        benefits: [
-          '20 Developers',
-          'Unlimited events',
-          'Unlimited Friend Invitations'
-        ],
-        success: {
-          message: 'Thanks For Choosing Us',
-          successBenefits: [
-            '20 Developers',
-            'Unlimited events',
-            'Unlimited Friend Invitations'
-          ],
-        },
-        fixed_price: {
-          currency_code: 'USD',
-          value: 35.99,
-          postfix: 'user/month'
-        },
-      },
-      {
-        id: 'plan_Fwdh4eEG64sSkc',
-        product_id: 'prod_FwdeAeZ0zF98Nj',
-        name: 'Corporate Plan',
-        status: 'ACTIVE',
-        description: 'Company plan',
-        shortDescription: 'For Large Teams',
-        benefits: [
-          '>20 Developers',
-          'Unlimited events',
-          'Unlimited Friend Invitations'
-        ],
-        success: {
-          message: 'Thanks For Choosing Us',
-          successBenefits: [
-            '>20 Developers',
-            'Unlimited events',
-            'Unlimited Friend Invitations'
-          ],
-        },
-        fixed_price: {
-          currency_code: 'USD',
-          value: 29.99,
-          postfix: 'user/month',
-        },
-      }
-    ],
-    'Non-profits': [
-      {
-        id: 'plan_Fwdgg5Slhr6pfu',
-        product_id: 'prod_FwdeAeZ0zF98Nj',
-        name: 'Developer Plan',
-        status: 'ACTIVE',
-        description: 'Career plan',
-        shortDescription: 'For Individual Developers',
-        benefits: [
-          '1 Developer',
-          'Unlimited events',
-          'Unlimited Friend Invitations'
-        ],
-        success: {
-          message: 'Thanks For Choosing Us',
-          successBenefits: [
-            '1 Developer',
-            'Unlimited events',
-            'Unlimited Friend Invitations'
-          ],
-        },
-        fixed_price: {
-          currency_code: 'USD',
-          value: 39.99,
-          postfix: 'development/month'
-        },
-      },
-      {
-        id: 'plan_Fwdg0NHGurBVom',
-        product_id: 'prod_FwdeAeZ0zF98Nj',
-        name: 'Team Plan',
-        status: 'ACTIVE',
-        description: 'Team plan',
-        shortDescription: 'For Small Teams',
-        benefits: [
-          '20 Developers',
-          'Unlimited events',
-          'Unlimited Friend Invitations'
-        ],
-        success: {
-          message: 'Thanks For Choosing Us',
-          successBenefits: [
-            '20 Developers',
-            'Unlimited events',
-            'Unlimited Friend Invitations'
-          ],
-        },
-        fixed_price: {
-          currency_code: 'USD',
-          value: 35.99,
-          postfix: 'user/month'
-        },
-      },
-      {
-        id: 'plan_Fwdh4eEG64sSkc',
-        product_id: 'prod_FwdeAeZ0zF98Nj',
-        name: 'Corporate Plan',
-        status: 'ACTIVE',
-        description: 'Company plan',
-        shortDescription: 'For Large Teams',
-        benefits: [
-          '>20 Developers',
-          'Unlimited events',
-          'Unlimited Friend Invitations'
-        ],
-        success: {
-          message: 'Thanks For Choosing Us',
-          successBenefits: [
-            '>20 Developers',
-            'Unlimited events',
-            'Unlimited Friend Invitations'
-          ],
-        },
-        fixed_price: {
-          currency_code: 'USD',
-          value: 29.99,
-          postfix: 'user/month',
-        },
-      }
-    ],
-    'Governments': [
-      {
-        id: 'plan_Fwdgg5Slhr6pfu',
-        product_id: 'prod_FwdeAeZ0zF98Nj',
-        name: 'Developer Plan',
-        status: 'ACTIVE',
-        description: 'Career plan',
-        shortDescription: 'For Individual Developers',
-        benefits: [
-          '1 Developer',
-          'Unlimited events',
-          'Unlimited Friend Invitations'
-        ],
-        success: {
-          message: 'Thanks For Choosing Us',
-          successBenefits: [
-            '1 Developer',
-            'Unlimited events',
-            'Unlimited Friend Invitations'
-          ],
-        },
-        fixed_price: {
-          currency_code: 'USD',
-          value: 39.99,
-          postfix: 'development/month'
-        },
-      },
-      {
-        id: 'plan_Fwdg0NHGurBVom',
-        product_id: 'prod_FwdeAeZ0zF98Nj',
-        name: 'Team Plan',
-        status: 'ACTIVE',
-        description: 'Team plan',
-        shortDescription: 'For Small Teams',
-        benefits: [
-          '20 Developers',
-          'Unlimited events',
-          'Unlimited Friend Invitations'
-        ],
-        success: {
-          message: 'Thanks For Choosing Us',
-          successBenefits: [
-            '20 Developers',
-            'Unlimited events',
-            'Unlimited Friend Invitations'
-          ],
-        },
-        fixed_price: {
-          currency_code: 'USD',
-          value: 35.99,
-          postfix: 'user/month'
-        },
-      },
-      {
-        id: 'plan_Fwdh4eEG64sSkc',
-        product_id: 'prod_FwdeAeZ0zF98Nj',
-        name: 'Corporate Plan',
-        status: 'ACTIVE',
-        description: 'Company plan',
-        shortDescription: 'For Large Teams',
-        benefits: [
-          '>20 Developers',
-          'Unlimited events',
-          'Unlimited Friend Invitations'
-        ],
-        success: {
-          message: 'Thanks For Choosing Us',
-          successBenefits: [
-            '>20 Developers',
-            'Unlimited events',
-            'Unlimited Friend Invitations'
-          ],
-        },
-        fixed_price: {
-          currency_code: 'USD',
-          value: 29.99,
-          postfix: 'user/month',
-        },
-      }
-    ],
-    'Schools': [
-      {
-        id: 'plan_Fwdgg5Slhr6pfu',
-        product_id: 'prod_FwdeAeZ0zF98Nj',
-        name: 'Developer Plan',
-        status: 'ACTIVE',
-        description: 'Career plan',
-        shortDescription: 'For Individual Developers',
-        benefits: [
-          '1 Developer',
-          'Unlimited events',
-          'Unlimited Friend Invitations'
-        ],
-        success: {
-          message: 'Thanks For Choosing Us',
-          successBenefits: [
-            '1 Developer',
-            'Unlimited events',
-            'Unlimited Friend Invitations'
-          ],
-        },
-        fixed_price: {
-          currency_code: 'USD',
-          value: 39.99,
-          postfix: 'development/month'
-        },
-      },
-      {
-        id: 'plan_Fwdg0NHGurBVom',
-        product_id: 'prod_FwdeAeZ0zF98Nj',
-        name: 'Team Plan',
-        status: 'ACTIVE',
-        description: 'Team plan',
-        shortDescription: 'For Small Teams',
-        benefits: [
-          '20 Developers',
-          'Unlimited events',
-          'Unlimited Friend Invitations'
-        ],
-        success: {
-          message: 'Thanks For Choosing Us',
-          successBenefits: [
-            '20 Developers',
-            'Unlimited events',
-            'Unlimited Friend Invitations'
-          ],
-        },
-        fixed_price: {
-          currency_code: 'USD',
-          value: 35.99,
-          postfix: 'user/month'
-        },
-      },
-      {
-        id: 'plan_Fwdh4eEG64sSkc',
-        product_id: 'prod_FwdeAeZ0zF98Nj',
-        name: 'Corporate Plan',
-        status: 'ACTIVE',
-        description: 'Company plan',
-        shortDescription: 'For Large Teams',
-        benefits: [
-          '>20 Developers',
-          'Unlimited events',
-          'Unlimited Friend Invitations'
-        ],
-        success: {
-          message: 'Thanks For Choosing Us',
-          successBenefits: [
-            '>20 Developers',
-            'Unlimited events',
-            'Unlimited Friend Invitations'
-          ],
-        },
-        fixed_price: {
-          currency_code: 'USD',
-          value: 29.99,
-          postfix: 'user/month',
-        },
-      }
-    ],
-    'Corporations': [
-      {
-        id: 'plan_Fwdgg5Slhr6pfu',
-        product_id: 'prod_FwdeAeZ0zF98Nj',
-        name: 'Developer Plan',
-        status: 'ACTIVE',
-        description: 'Career plan',
-        shortDescription: 'For Individual Developers',
-        benefits: [
-          '1 Developer',
-          'Unlimited events',
-          'Unlimited Friend Invitations'
-        ],
-        success: {
-          message: 'Thanks For Choosing Us',
-          successBenefits: [
-            '1 Developer',
-            'Unlimited events',
-            'Unlimited Friend Invitations'
-          ],
-        },
-        fixed_price: {
-          currency_code: 'USD',
-          value: 39.99,
-          postfix: 'development/month'
-        },
-      },
-      {
-        id: 'plan_Fwdg0NHGurBVom',
-        product_id: 'prod_FwdeAeZ0zF98Nj',
-        name: 'Team Plan',
-        status: 'ACTIVE',
-        description: 'Team plan',
-        shortDescription: 'For Small Teams',
-        benefits: [
-          '20 Developers',
-          'Unlimited events',
-          'Unlimited Friend Invitations'
-        ],
-        success: {
-          message: 'Thanks For Choosing Us',
-          successBenefits: [
-            '20 Developers',
-            'Unlimited events',
-            'Unlimited Friend Invitations'
-          ],
-        },
-        fixed_price: {
-          currency_code: 'USD',
-          value: 35.99,
-          postfix: 'user/month'
-        },
-      },
-      {
-        id: 'plan_Fwdh4eEG64sSkc',
-        product_id: 'prod_FwdeAeZ0zF98Nj',
-        name: 'Corporate Plan',
-        status: 'ACTIVE',
-        description: 'Company plan',
-        shortDescription: 'For Large Teams',
-        benefits: [
-          '>20 Developers',
-          'Unlimited events',
-          'Unlimited Friend Invitations'
-        ],
-        success: {
-          message: 'Thanks For Choosing Us',
-          successBenefits: [
-            '>20 Developers',
-            'Unlimited events',
-            'Unlimited Friend Invitations'
-          ],
-        },
-        fixed_price: {
-          currency_code: 'USD',
-          value: 29.99,
-          postfix: 'user/month',
-        },
-      }
-    ]
   },
 
   prod: {
-    'TeamIQ': [
+    'software_developer': [
       {
         id: 'plan_FwdacVeynF34SN',
         product_id: 'prod_FwdXfYwXfe3Bq7',
@@ -591,20 +191,24 @@ export const plans = {
         shortDescription: 'For Individual Developers',
         benefits: [
           '1 Developer',
-          'Unlimited events',
-          'Unlimited Friend Invitations'
+          'Team IQ',
+          'Mock Interviews',
+          'Business Skills Mentor',
+          'Leadership Skills Mentoring'
         ],
         success: {
           message: 'Thanks For Choosing Us',
           successBenefits: [
             '1 Developer',
-            'Unlimited events',
-            'Unlimited Friend Invitations'
+            'Team IQ',
+            'Mock Interviews',
+            'Business Skills Mentor',
+            'Leadership Skills Mentoring'
           ],
         },
         fixed_price: {
           currency_code: 'USD',
-          value: 39.99,
+          value: 99.99,
           postfix: 'development/month'
         },
       },
@@ -616,21 +220,25 @@ export const plans = {
         description: 'Team plan',
         shortDescription: 'For Small Teams',
         benefits: [
-          '20 Developers',
-          'Unlimited events',
-          'Unlimited Friend Invitations'
+          '200 Developer',
+          'Team IQ',
+          'Mock Interviews',
+          'Business Skills Mentor',
+          'Leadership Skills Mentoring'
         ],
         success: {
           message: 'Thanks For Choosing Us',
           successBenefits: [
-            '20 Developers',
-            'Unlimited events',
-            'Unlimited Friend Invitations'
+          '<= 200 Developer',
+          'Team IQ',
+          'Mock Interviews',
+          'Business Skills Mentor',
+          'Leadership Skills Mentoring'
           ],
         },
         fixed_price: {
           currency_code: 'USD',
-          value: 35.99,
+          value: 74.99,
           postfix: 'user/month'
         },
       },
@@ -642,504 +250,115 @@ export const plans = {
         description: 'Company plan',
         shortDescription: 'For Large Teams',
         benefits: [
-          '>20 Developers',
-          'Unlimited events',
-          'Unlimited Friend Invitations'
+          '> 200 Developer',
+          'Team IQ',
+          'Mock Interviews',
+          'Business Skills Mentor',
+          'Leadership Skills Mentoring'
         ],
         success: {
           message: 'Thanks For Choosing Us',
           successBenefits: [
-            '>20 Developers',
-            'Unlimited events',
-            'Unlimited Friend Invitations'
+            '1 Developer',
+          'Team IQ',
+          'Mock Interviews',
+          'Business Skills Mentor',
+          'Leadership Skills Mentoring'
           ],
         },
         fixed_price: {
           currency_code: 'USD',
-          value: 29.99,
+          value: 59.99,
           postfix: 'user/month',
         },
       }
     ],
-    'SMB': [
+    'business': [
       {
         id: 'plan_FwdacVeynF34SN',
         product_id: 'prod_FwdXfYwXfe3Bq7',
-        name: 'Developer Plan',
+        name: 'Small Business',
         status: 'ACTIVE',
         description: 'Career plan',
         shortDescription: 'For Individual Developers',
         benefits: [
-          '1 Developer',
-          'Unlimited events',
-          'Unlimited Friend Invitations'
+            'Unlimited Q & A',
+            'Video Conference',
+            '1 meetup/month',
+            '1 Dedicated Innovation Manager 1 hour/month'
         ],
         success: {
           message: 'Thanks For Choosing Us',
           successBenefits: [
-            '1 Developer',
-            'Unlimited events',
-            'Unlimited Friend Invitations'
+            'Unlimited Q & A',
+            'Video Conference',
+            '1 meetup/month',
+            '1 Dedicated Innovation Manager 1 hour/month'
           ],
         },
         fixed_price: {
           currency_code: 'USD',
-          value: 39.99,
+          value: 99.99,
           postfix: 'development/month'
         },
       },
       {
         id: 'plan_FwddGi4ELg3Sor',
         product_id: 'prod_FwdXfYwXfe3Bq7',
-        name: 'Team Plan',
+        name: 'Medium Size Business',
         status: 'ACTIVE',
         description: 'Team plan',
         shortDescription: 'For Small Teams',
         benefits: [
-          '20 Developers',
-          'Unlimited events',
-          'Unlimited Friend Invitations'
+            'Unlimited Q & A',
+            'Video Conference',
+            '1 meetup/month',
+            '2 Dedicated Innovation Manager 2 hours/month'
         ],
         success: {
           message: 'Thanks For Choosing Us',
           successBenefits: [
-            '20 Developers',
-            'Unlimited events',
-            'Unlimited Friend Invitations'
+            'Unlimited Q & A',
+            'Video Conference',
+            '1 meetup/month',
+            '2 Dedicated Innovation Managers 2 hours/month'
           ],
         },
         fixed_price: {
           currency_code: 'USD',
-          value: 35.99,
+          value: 199.99,
           postfix: 'user/month'
         },
       },
       {
         id: 'plan_FwdeRYAxwjkbLJ',
         product_id: 'prod_FwdXfYwXfe3Bq7',
-        name: 'Corporate Plan',
+        name: 'Large Size Business',
         status: 'ACTIVE',
         description: 'Company plan',
         shortDescription: 'For Large Teams',
         benefits: [
-          '>20 Developers',
-          'Unlimited events',
-          'Unlimited Friend Invitations'
+            'Unlimited Q & A',
+            'Video Conference',
+            '1 meetup/month',
+            '3 Dedicated Innovation Managers 3 hours/month'
         ],
         success: {
           message: 'Thanks For Choosing Us',
           successBenefits: [
-            '>20 Developers',
-            'Unlimited events',
-            'Unlimited Friend Invitations'
+            'Unlimited Q & A',
+            'Video Conference',
+            '1 meetup/month',
+            '3 Dedicated Innovation Managers 3 hours/month'
           ],
         },
         fixed_price: {
           currency_code: 'USD',
-          value: 29.99,
+          value: 299.99,
           postfix: 'user/month',
         },
       }
     ],
-    'Startup': [
-      {
-        id: 'plan_FwdacVeynF34SN',
-        product_id: 'prod_FwdXfYwXfe3Bq7',
-        name: 'Developer Plan',
-        status: 'ACTIVE',
-        description: 'Career plan',
-        shortDescription: 'For Individual Developers',
-        benefits: [
-          '1 Developer',
-          'Unlimited events',
-          'Unlimited Friend Invitations'
-        ],
-        success: {
-          message: 'Thanks For Choosing Us',
-          successBenefits: [
-            '1 Developer',
-            'Unlimited events',
-            'Unlimited Friend Invitations'
-          ],
-        },
-        fixed_price: {
-          currency_code: 'USD',
-          value: 39.99,
-          postfix: 'development/month'
-        },
-      },
-      {
-        id: 'plan_FwddGi4ELg3Sor',
-        product_id: 'prod_FwdXfYwXfe3Bq7',
-        name: 'Team Plan',
-        status: 'ACTIVE',
-        description: 'Team plan',
-        shortDescription: 'For Small Teams',
-        benefits: [
-          '20 Developers',
-          'Unlimited events',
-          'Unlimited Friend Invitations'
-        ],
-        success: {
-          message: 'Thanks For Choosing Us',
-          successBenefits: [
-            '20 Developers',
-            'Unlimited events',
-            'Unlimited Friend Invitations'
-          ],
-        },
-        fixed_price: {
-          currency_code: 'USD',
-          value: 35.99,
-          postfix: 'user/month'
-        },
-      },
-      {
-        id: 'plan_FwdeRYAxwjkbLJ',
-        product_id: 'prod_FwdXfYwXfe3Bq7',
-        name: 'Corporate Plan',
-        status: 'ACTIVE',
-        description: 'Company plan',
-        shortDescription: 'For Large Teams',
-        benefits: [
-          '>20 Developers',
-          'Unlimited events',
-          'Unlimited Friend Invitations'
-        ],
-        success: {
-          message: 'Thanks For Choosing Us',
-          successBenefits: [
-            '>20 Developers',
-            'Unlimited events',
-            'Unlimited Friend Invitations'
-          ],
-        },
-        fixed_price: {
-          currency_code: 'USD',
-          value: 29.99,
-          postfix: 'user/month',
-        },
-      }
-    ],
-    'Non-profits': [
-      {
-        id: 'plan_FwdacVeynF34SN',
-        product_id: 'prod_FwdXfYwXfe3Bq7',
-        name: 'Developer Plan',
-        status: 'ACTIVE',
-        description: 'Career plan',
-        shortDescription: 'For Individual Developers',
-        benefits: [
-          '1 Developer',
-          'Unlimited events',
-          'Unlimited Friend Invitations'
-        ],
-        success: {
-          message: 'Thanks For Choosing Us',
-          successBenefits: [
-            '1 Developer',
-            'Unlimited events',
-            'Unlimited Friend Invitations'
-          ],
-        },
-        fixed_price: {
-          currency_code: 'USD',
-          value: 39.99,
-          postfix: 'development/month'
-        },
-      },
-      {
-        id: 'plan_FwddGi4ELg3Sor',
-        product_id: 'prod_FwdXfYwXfe3Bq7',
-        name: 'Team Plan',
-        status: 'ACTIVE',
-        description: 'Team plan',
-        shortDescription: 'For Small Teams',
-        benefits: [
-          '20 Developers',
-          'Unlimited events',
-          'Unlimited Friend Invitations'
-        ],
-        success: {
-          message: 'Thanks For Choosing Us',
-          successBenefits: [
-            '20 Developers',
-            'Unlimited events',
-            'Unlimited Friend Invitations'
-          ],
-        },
-        fixed_price: {
-          currency_code: 'USD',
-          value: 35.99,
-          postfix: 'user/month'
-        },
-      },
-      {
-        id: 'plan_FwdeRYAxwjkbLJ',
-        product_id: 'prod_FwdXfYwXfe3Bq7',
-        name: 'Corporate Plan',
-        status: 'ACTIVE',
-        description: 'Company plan',
-        shortDescription: 'For Large Teams',
-        benefits: [
-          '>20 Developers',
-          'Unlimited events',
-          'Unlimited Friend Invitations'
-        ],
-        success: {
-          message: 'Thanks For Choosing Us',
-          successBenefits: [
-            '>20 Developers',
-            'Unlimited events',
-            'Unlimited Friend Invitations'
-          ],
-        },
-        fixed_price: {
-          currency_code: 'USD',
-          value: 29.99,
-          postfix: 'user/month',
-        },
-      }
-    ],
-    'Governments': [
-      {
-        id: 'plan_FwdacVeynF34SN',
-        product_id: 'prod_FwdXfYwXfe3Bq7',
-        name: 'Developer Plan',
-        status: 'ACTIVE',
-        description: 'Career plan',
-        shortDescription: 'For Individual Developers',
-        benefits: [
-          '1 Developer',
-          'Unlimited events',
-          'Unlimited Friend Invitations'
-        ],
-        success: {
-          message: 'Thanks For Choosing Us',
-          successBenefits: [
-            '1 Developer',
-            'Unlimited events',
-            'Unlimited Friend Invitations'
-          ],
-        },
-        fixed_price: {
-          currency_code: 'USD',
-          value: 39.99,
-          postfix: 'development/month'
-        },
-      },
-      {
-        id: 'plan_FwddGi4ELg3Sor',
-        product_id: 'prod_FwdXfYwXfe3Bq7',
-        name: 'Team Plan',
-        status: 'ACTIVE',
-        description: 'Team plan',
-        shortDescription: 'For Small Teams',
-        benefits: [
-          '20 Developers',
-          'Unlimited events',
-          'Unlimited Friend Invitations'
-        ],
-        success: {
-          message: 'Thanks For Choosing Us',
-          successBenefits: [
-            '20 Developers',
-            'Unlimited events',
-            'Unlimited Friend Invitations'
-          ],
-        },
-        fixed_price: {
-          currency_code: 'USD',
-          value: 35.99,
-          postfix: 'user/month'
-        },
-      },
-      {
-        id: 'plan_FwdeRYAxwjkbLJ',
-        product_id: 'prod_FwdXfYwXfe3Bq7',
-        name: 'Corporate Plan',
-        status: 'ACTIVE',
-        description: 'Company plan',
-        shortDescription: 'For Large Teams',
-        benefits: [
-          '>20 Developers',
-          'Unlimited events',
-          'Unlimited Friend Invitations'
-        ],
-        success: {
-          message: 'Thanks For Choosing Us',
-          successBenefits: [
-            '>20 Developers',
-            'Unlimited events',
-            'Unlimited Friend Invitations'
-          ],
-        },
-        fixed_price: {
-          currency_code: 'USD',
-          value: 29.99,
-          postfix: 'user/month',
-        },
-      }
-    ],
-    'Schools': [
-      {
-        id: 'plan_FwdacVeynF34SN',
-        product_id: 'prod_FwdXfYwXfe3Bq7',
-        name: 'Developer Plan',
-        status: 'ACTIVE',
-        description: 'Career plan',
-        shortDescription: 'For Individual Developers',
-        benefits: [
-          '1 Developer',
-          'Unlimited events',
-          'Unlimited Friend Invitations'
-        ],
-        success: {
-          message: 'Thanks For Choosing Us',
-          successBenefits: [
-            '1 Developer',
-            'Unlimited events',
-            'Unlimited Friend Invitations'
-          ],
-        },
-        fixed_price: {
-          currency_code: 'USD',
-          value: 39.99,
-          postfix: 'development/month'
-        },
-      },
-      {
-        id: 'plan_FwddGi4ELg3Sor',
-        product_id: 'prod_FwdXfYwXfe3Bq7',
-        name: 'Team Plan',
-        status: 'ACTIVE',
-        description: 'Team plan',
-        shortDescription: 'For Small Teams',
-        benefits: [
-          '20 Developers',
-          'Unlimited events',
-          'Unlimited Friend Invitations'
-        ],
-        success: {
-          message: 'Thanks For Choosing Us',
-          successBenefits: [
-            '20 Developers',
-            'Unlimited events',
-            'Unlimited Friend Invitations'
-          ],
-        },
-        fixed_price: {
-          currency_code: 'USD',
-          value: 35.99,
-          postfix: 'user/month'
-        },
-      },
-      {
-        id: 'plan_FwdeRYAxwjkbLJ',
-        product_id: 'prod_FwdXfYwXfe3Bq7',
-        name: 'Corporate Plan',
-        status: 'ACTIVE',
-        description: 'Company plan',
-        shortDescription: 'For Large Teams',
-        benefits: [
-          '>20 Developers',
-          'Unlimited events',
-          'Unlimited Friend Invitations'
-        ],
-        success: {
-          message: 'Thanks For Choosing Us',
-          successBenefits: [
-            '>20 Developers',
-            'Unlimited events',
-            'Unlimited Friend Invitations'
-          ],
-        },
-        fixed_price: {
-          currency_code: 'USD',
-          value: 29.99,
-          postfix: 'user/month',
-        },
-      }
-    ],
-    'Corporations': [
-      {
-        id: 'plan_FwdacVeynF34SN',
-        product_id: 'prod_FwdXfYwXfe3Bq7',
-        name: 'Developer Plan',
-        status: 'ACTIVE',
-        description: 'Career plan',
-        shortDescription: 'For Individual Developers',
-        benefits: [
-          '1 Developer',
-          'Unlimited events',
-          'Unlimited Friend Invitations'
-        ],
-        success: {
-          message: 'Thanks For Choosing Us',
-          successBenefits: [
-            '1 Developer',
-            'Unlimited events',
-            'Unlimited Friend Invitations'
-          ],
-        },
-        fixed_price: {
-          currency_code: 'USD',
-          value: 39.99,
-          postfix: 'development/month'
-        },
-      },
-      {
-        id: 'plan_FwddGi4ELg3Sor',
-        product_id: 'prod_FwdXfYwXfe3Bq7',
-        name: 'Team Plan',
-        status: 'ACTIVE',
-        description: 'Team plan',
-        shortDescription: 'For Small Teams',
-        benefits: [
-          '20 Developers',
-          'Unlimited events',
-          'Unlimited Friend Invitations'
-        ],
-        success: {
-          message: 'Thanks For Choosing Us',
-          successBenefits: [
-            '20 Developers',
-            'Unlimited events',
-            'Unlimited Friend Invitations'
-          ],
-        },
-        fixed_price: {
-          currency_code: 'USD',
-          value: 35.99,
-          postfix: 'user/month'
-        },
-      },
-      {
-        id: 'plan_FwdeRYAxwjkbLJ',
-        product_id: 'prod_FwdXfYwXfe3Bq7',
-        name: 'Corporate Plan',
-        status: 'ACTIVE',
-        description: 'Company plan',
-        shortDescription: 'For Large Teams',
-        benefits: [
-          '>20 Developers',
-          'Unlimited events',
-          'Unlimited Friend Invitations'
-        ],
-        success: {
-          message: 'Thanks For Choosing Us',
-          successBenefits: [
-            '>20 Developers',
-            'Unlimited events',
-            'Unlimited Friend Invitations'
-          ],
-        },
-        fixed_price: {
-          currency_code: 'USD',
-          value: 29.99,
-          postfix: 'user/month',
-        },
-      }
-    ]
+
   }
 };

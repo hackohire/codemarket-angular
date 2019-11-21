@@ -12,13 +12,13 @@
             <mat-tab-group [selectedIndex]="selected.value" (selectedIndexChange)="selected.setValue($event)">
                 <mat-tab [label]="'Software Developer'">
                     Upgrade  tech skills, business skills and leadership skills
-                    <ng-container *ngTemplateOutlet="plansTemplate; context: {plans: listOfPlans, planType: 'TeamIQ'}">
+                    <ng-container *ngTemplateOutlet="plansTemplate; context: {plans: listOfPlans, planType: 'software_developer'}">
                     </ng-container>
                 </mat-tab>
 
                 <mat-tab [label]="'Business'">
                 Connect and engage with innovators to learn how innovation can help your business
-                    <ng-container *ngTemplateOutlet="plansTemplate; context: {plans: listOfPlans, planType: 'SMB'}">
+                    <ng-container *ngTemplateOutlet="plansTemplate; context: {plans: listOfPlans, planType: 'business'}">
                         </ng-container>
                 </mat-tab>
 

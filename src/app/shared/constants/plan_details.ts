@@ -84,7 +84,7 @@ export const plans = {
       {
         id: 'plan_Fwdgg5Slhr6pfu',
         product_id: 'prod_FwdeAeZ0zF98Nj',
-        name: 'Developer Plan',
+        name: 'Small Business',
         status: 'ACTIVE',
         description: 'Career plan',
         shortDescription: 'For Individual Developers',
@@ -110,7 +110,7 @@ export const plans = {
       {
         id: 'plan_Fwdg0NHGurBVom',
         product_id: 'prod_FwdeAeZ0zF98Nj',
-        name: 'Team Plan',
+        name: 'Medium Business',
         status: 'ACTIVE',
         description: 'Team plan',
         shortDescription: 'For Small Teams',
@@ -136,7 +136,7 @@ export const plans = {
       {
         id: 'plan_Fwdh4eEG64sSkc',
         product_id: 'prod_FwdeAeZ0zF98Nj',
-        name: 'Corporate Plan',
+        name: 'Large Business',
         status: 'ACTIVE',
         description: 'Company plan',
         shortDescription: 'For Large Teams',

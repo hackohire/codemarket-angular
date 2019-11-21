@@ -46,7 +46,7 @@ export class MembershipComponent implements OnInit {
     private dialog: MatDialog
   ) {
     this.breadcumb = {
-      title: 'Subscription plans for bringing innovation to your business',
+      title: 'Membership Plans',
       path: [
         {
           name: 'Dashboard',

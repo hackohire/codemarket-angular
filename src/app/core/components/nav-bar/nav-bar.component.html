@@ -94,20 +94,20 @@
       <a mat-button routerLinkActive="mat-primary"
         [routerLink]="['/', {outlets: {'main': ['dashboard', 'bugfixes-all']}}]">
         <i style="font-size: 1.7rem !important;" class="vertical-align-middle fad fa-lightbulb-dollar fa-fw"></i>
-        <div class="line-height-initial" [fxHide.xs]="true">Code Experts</div>
+        <div class="line-height-initial" [fxHide.xs]="true">Software Developers</div>
       </a>
 
       <!-- Team IQ -->
       <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', {outlets: {'main': ['dashboard', 'post-list']}}]"
         [queryParams]="{type: 'event', all: true}">
         <i style="font-size: 1.7rem !important;" class="vertical-align-middle fad fa-question-circle fa-fw"></i>
-        <div class="line-height-initial" [fxHide.xs]="true">Team IQ</div>
+        <div class="line-height-initial" [fxHide.xs]="true">Businesses</div>
       </a>
 
       <!-- All Events -->
       <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', {outlets: {'main': ['social-impact']}}]">
         <i style="font-size: 1.7rem !important;" class="vertical-align-middle fad fa-users-crown fa-fw"></i>
-        <div class="line-height-initial" [fxHide.xs]="true"> Social Impact</div>
+        <div class="line-height-initial" [fxHide.xs]="true"> Non-Profits</div>
       </a>
 
       <!-- Companoies -->
@@ -115,22 +115,22 @@
         [routerLink]="['/', {outlets: {'main': ['dashboard', 'company-list']}}]"
         [queryParams]="{all: true}">
         <i style="font-size: 1.7rem !important;" class="vertical-align-middle fad fa-lightbulb-on fa-fw"></i>
-        <div class="line-height-initial" [fxHide.xs]="true"> Companies</div>
+        <div class="line-height-initial" [fxHide.xs]="true"> Governments</div>
       </a>
 
       <!-- Hackathon -->
       <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', {outlets: {'main': ['hackathon']}}]">
         <i style="font-size: 1.7rem !important;" class="vertical-align-middle fad fa-laptop-code fa-fw"></i>
-        <div class="line-height-initial" [fxHide.xs]="true"> Hackathon</div>
+        <div class="line-height-initial" [fxHide.xs]="true"> Schools</div>
       </a>
 
-      <!-- Dreamjob -->
+      <!-- Dreamjob 
       <a mat-button routerLinkActive="mat-primary"
         [routerLink]="['/', {outlets: {'main': ['dashboard', 'dream-job-list']}}]"
         [queryParams]="{type: 'dream-job', all: true}">
         <i style="font-size: 1.7rem !important;" class="vertical-align-middle fad fa-briefcase fa-fw"></i>
         <div class="line-height-initial" [fxHide.xs]="true"> Dream Job</div>
-      </a>
+      </a>-->
 
       <!-- Wellness -->
       <!-- <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', {outlets: {'main': ['wellness']}}]">
@@ -155,48 +155,7 @@
         <div [fxHide.xs]="true"> Non Profits</div>
       </a> -->
 
-      <!-- Login -->
-      <ng-template #logIn>
-        <a #lr mat-button (click)="login()" [mdePopoverTriggerFor]="authentication" [mdePopoverTargetAt]="lr" mdePopoverTriggerOn="click">
-          <i style="font-size: 1.7rem !important;" class="vertical-align-middle fad fa-user-circle fa-fw"></i>
-          <div class="line-height-initial" [fxHide.xs]="true"> Login/Register</div>
-        </a>
-      </ng-template>
-
-      <mde-popover #authentication="mdePopover" [mdePopoverOverlapTrigger]="false" [mdePopoverCloseOnClick]="false"
-        [mdePopoverArrowOffsetX]="58"
-        mdePopoverArrowColor="#FFFFFF">
-        <amplify-authenticator [signUpConfig]="signUpConfig" [usernameAttributes]="'email'"></amplify-authenticator>
-      </mde-popover>
-
-      <!-- My Profile -->
-      <button style="padding: 7px 0 0 0;" mat-button [matMenuTriggerFor]="userMenu" *ngIf="loggedInUser; else logIn">
-        <a mat-button routerLinkActive="mat-primary" *ngIf="loggedInUser;"
-          [routerLink]="['/', {outlets: {'main': ['dashboard', 'my-profile']}}]">
-          <i style="font-size: 1.7rem !important;" class="vertical-align-middle fad fa-user-circle fa-fw"></i>
-          <div class="line-height-initial" [fxHide.xs]="true"> My Profile <mat-icon
-              style="vertical-align: middle; height: 28px;">keyboard_arrow_down</mat-icon>
-          </div>
-        </a>
-      </button>
-
-      <mat-menu #userMenu="matMenu" panelClass="menu-width">
-        <div class="menu-width">
-          <!-- Shopping Cart -->
-          <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', {outlets: {'main': ['cart']}}]">
-            <mat-icon>shopping_cart
-            </mat-icon> Cart({{cartListLength | async}})
-          </a>
-
-          <!-- Logout -->
-          <a mat-button (click)="authService?.logout()">
-            <mat-icon>power_settings_new
-            </mat-icon>
-            Logout
-          </a>
-        </div>
-      </mat-menu>
-
+      
       <!-- membership -->
       <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', {outlets: {'main': ['membership']}}]">
         <i style="font-size: 1.7rem !important;" class="vertical-align-middle fad fa-id-card-alt fa-fw"></i>
@@ -208,6 +167,47 @@
         <i style="font-size: 1.5rem !important;" class="vertical-align-middle fad fa-info fa-fw"></i>
         <div class="line-height-initial" [fxHide.xs]="true"> About Us</div>
       </a>
+<!-- Login -->
+<ng-template #logIn>
+    <a #lr mat-button (click)="login()" [mdePopoverTriggerFor]="authentication" [mdePopoverTargetAt]="lr" mdePopoverTriggerOn="click">
+      <i style="font-size: 1.7rem !important;" class="vertical-align-middle fad fa-user-circle fa-fw"></i>
+      <div class="line-height-initial" [fxHide.xs]="true"> Login/Register</div>
+    </a>
+  </ng-template>
+
+  <mde-popover #authentication="mdePopover" [mdePopoverOverlapTrigger]="false" [mdePopoverCloseOnClick]="false"
+    [mdePopoverArrowOffsetX]="58"
+    mdePopoverArrowColor="#FFFFFF">
+    <amplify-authenticator [signUpConfig]="signUpConfig" [usernameAttributes]="'email'"></amplify-authenticator>
+  </mde-popover>
+
+  <!-- My Profile -->
+  <button style="padding: 7px 0 0 0;" mat-button [matMenuTriggerFor]="userMenu" *ngIf="loggedInUser; else logIn">
+    <a mat-button routerLinkActive="mat-primary" *ngIf="loggedInUser;"
+      [routerLink]="['/', {outlets: {'main': ['dashboard', 'my-profile']}}]">
+      <i style="font-size: 1.7rem !important;" class="vertical-align-middle fad fa-user-circle fa-fw"></i>
+      <div class="line-height-initial" [fxHide.xs]="true"> My Profile <mat-icon
+          style="vertical-align: middle; height: 28px;">keyboard_arrow_down</mat-icon>
+      </div>
+    </a>
+  </button>
+
+  <mat-menu #userMenu="matMenu" panelClass="menu-width">
+    <div class="menu-width">
+      <!-- Shopping Cart -->
+      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', {outlets: {'main': ['cart']}}]">
+        <mat-icon>shopping_cart
+        </mat-icon> Cart({{cartListLength | async}})
+      </a>
+
+      <!-- Logout -->
+      <a mat-button (click)="authService?.logout()">
+        <mat-icon>power_settings_new
+        </mat-icon>
+        Logout
+      </a>
+    </div>
+  </mat-menu>
 
     </mat-toolbar>
 

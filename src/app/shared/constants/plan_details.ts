@@ -2,7 +2,7 @@ export const plans = {
   dev: {
     'software_developer': [
       {
-        id: 'plan_Fwdgg5Slhr6pfu',
+        id: 'plan_GEOxM2fHMFLRYj',
         product_id: 'prod_FwdeAeZ0zF98Nj',
         name: 'Developer Plan',
         status: 'ACTIVE',
@@ -32,7 +32,7 @@ export const plans = {
         },
       },
       {
-        id: 'plan_Fwdg0NHGurBVom',
+        id: 'plan_GEOzNfYW7nlzP0',
         product_id: 'prod_FwdeAeZ0zF98Nj',
         name: 'Team Plan',
         status: 'ACTIVE',
@@ -62,7 +62,7 @@ export const plans = {
         },
       },
       {
-        id: 'plan_Fwdh4eEG64sSkc',
+        id: 'plan_GEOyjrDjrolxtM',
         product_id: 'prod_FwdeAeZ0zF98Nj',
         name: 'Corporate Plan',
         status: 'ACTIVE',
@@ -94,11 +94,11 @@ export const plans = {
     ],
     'business': [
       {
-        id: 'plan_Fwdgg5Slhr6pfu',
-        product_id: 'prod_FwdeAeZ0zF98Nj',
+        id: 'plan_GEP8RvhJzs9nVR',
+        product_id: 'prod_GEP8nA3tXkvO5m',
         name: 'Small Business',
         status: 'ACTIVE',
-        description: 'Career plan',
+        description: 'Small Business',
         shortDescription: 'For Individual Developers',
         benefits: [
             'Unlimited Q & A',
@@ -122,11 +122,11 @@ export const plans = {
         },
       },
       {
-        id: 'plan_Fwdg0NHGurBVom',
-        product_id: 'prod_FwdeAeZ0zF98Nj',
+        id: 'plan_GEP9j4dcbjTOCw',
+        product_id: 'prod_GEP8nA3tXkvO5m',
         name: 'Medium Size Business',
         status: 'ACTIVE',
-        description: 'Team plan',
+        description: 'Medium Size Business',
         shortDescription: 'For Small Teams',
         benefits: [
             'Unlimited Q & A',
@@ -150,11 +150,11 @@ export const plans = {
         },
       },
       {
-        id: 'plan_Fwdh4eEG64sSkc',
-        product_id: 'prod_FwdeAeZ0zF98Nj',
+        id: 'plan_GEPAcSDOipQBjo',
+        product_id: 'prod_GEP8nA3tXkvO5m',
         name: 'Large Size Business',
         status: 'ACTIVE',
-        description: 'Company plan',
+        description: 'Large Size Business',
         shortDescription: 'For Large Teams',
         benefits: [
             'Unlimited Q & A',
@@ -183,8 +183,8 @@ export const plans = {
   prod: {
     'software_developer': [
       {
-        id: 'plan_FwdacVeynF34SN',
-        product_id: 'prod_FwdXfYwXfe3Bq7',
+        id: 'plan_GEP1xYks2bVvE5',
+        product_id: 'prod_GEP1IoHYJzlADr',
         name: 'Developer Plan',
         status: 'ACTIVE',
         description: 'Career plan',
@@ -213,8 +213,8 @@ export const plans = {
         },
       },
       {
-        id: 'plan_FwddGi4ELg3Sor',
-        product_id: 'prod_FwdXfYwXfe3Bq7',
+        id: 'plan_GEP1DdNwI9Zrtb',
+        product_id: 'prod_GEP1IoHYJzlADr',
         name: 'Team Plan',
         status: 'ACTIVE',
         description: 'Team plan',
@@ -243,8 +243,8 @@ export const plans = {
         },
       },
       {
-        id: 'plan_FwdeRYAxwjkbLJ',
-        product_id: 'prod_FwdXfYwXfe3Bq7',
+        id: 'plan_GEP1fZWeCmOSac',
+        product_id: 'prod_GEP1IoHYJzlADr',
         name: 'Corporate Plan',
         status: 'ACTIVE',
         description: 'Company plan',
@@ -275,11 +275,11 @@ export const plans = {
     ],
     'business': [
       {
-        id: 'plan_FwdacVeynF34SN',
-        product_id: 'prod_FwdXfYwXfe3Bq7',
+        id: 'plan_GEPCqSJ3DuEyoF',
+        product_id: 'prod_GEPCE9oMF9cq3Z',
         name: 'Small Business',
         status: 'ACTIVE',
-        description: 'Career plan',
+        description: 'Small Business',
         shortDescription: 'For Individual Developers',
         benefits: [
             'Unlimited Q & A',
@@ -303,11 +303,11 @@ export const plans = {
         },
       },
       {
-        id: 'plan_FwddGi4ELg3Sor',
-        product_id: 'prod_FwdXfYwXfe3Bq7',
+        id: 'plan_GEPCtnP80YjXF0',
+        product_id: 'prod_GEPCE9oMF9cq3Z',
         name: 'Medium Size Business',
         status: 'ACTIVE',
-        description: 'Team plan',
+        description: 'Medium Size Business',
         shortDescription: 'For Small Teams',
         benefits: [
             'Unlimited Q & A',
@@ -331,11 +331,11 @@ export const plans = {
         },
       },
       {
-        id: 'plan_FwdeRYAxwjkbLJ',
-        product_id: 'prod_FwdXfYwXfe3Bq7',
+        id: 'plan_GEPCz5LuXgpFVg',
+        product_id: 'prod_GEPCE9oMF9cq3Z',
         name: 'Large Size Business',
         status: 'ACTIVE',
-        description: 'Company plan',
+        description: 'Large Size Business',
         shortDescription: 'For Large Teams',
         benefits: [
             'Unlimited Q & A',

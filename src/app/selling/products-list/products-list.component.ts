@@ -6,7 +6,7 @@ import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
 import { Product } from 'src/app/shared/models/product.model';
 import { Subscription, merge, of } from 'rxjs';
 import { trigger, state, style, transition, animate } from '@angular/animations';
-import { map, startWith, catchError } from 'rxjs/operators';
+import { map, startWith, catchError, switchMap, switchMapTo, mapTo } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from 'src/app/core/services/product.service';
 import { BreadCumb } from 'src/app/shared/models/bredcumb.model';
@@ -58,7 +58,7 @@ export class ProductsListComponent implements OnInit, OnDestroy, AfterViewInit {
   postTypes = Object.values(PostType);
 
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
-  pageOptions = {pageNumber: 1, limit: 50, sort: {order: ""}};
+  selectedPostType = '';
 
   constructor(
     public auth: AuthService,
@@ -85,10 +85,6 @@ export class ProductsListComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnInit() {
-
-  }
-
-  ngAfterViewInit() {
     this.dataSource.sort = this.sort;
 
     const path = this.activatedRoute.parent.routeConfig.path;
@@ -101,27 +97,6 @@ export class ProductsListComponent implements OnInit, OnDestroy, AfterViewInit {
       /** Set the columns visible in the table */
       this.displayedColumns = ['number', 'name', 'price', 'createdBy', 'type', 'category', 'createdAt', 'action'];
       this.all = true;
-
-      // merge(this.paginator.page)
-      // .pipe(
-      //   startWith({}),
-      //   catchError((e) => {
-      //     return of(e);
-      //   })
-      // )
-      // .subscribe(data => {
-      //   const paginationObj = {
-      //     pageNumber: this.paginator.pageIndex + 1,
-      //     limit: 5,
-      //     sort: {
-      //       field: this.sort && this.sort.active ? this.sort.active : 'createdAt',
-      //       order: this.sort && this.sort.direction ? this.sort.direction : ''
-      //     }
-      //   }
-      //   this.getAllPosts(paginationObj, '');
-      //   console.log(data);
-      // });
-      this.getAllPosts(this.pageOptions, '');
 
       // this.getAllPosts('');
       // this.productsListSubscription = this.postService.getAllPosts({ pageNumber: 1, limit: 10 }).pipe(
@@ -173,6 +148,28 @@ export class ProductsListComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
+  ngAfterViewInit() {
+    merge(this.paginator.page)
+    .pipe(
+      startWith({}),
+      catchError((e) => {
+        return of(e);
+      })
+    )
+    .subscribe(data => {
+      // const paginationObj = {
+      //   pageNumber: this.paginator.pageIndex + 1,
+      //   limit: 5,
+      //   sort: {
+      //     field: this.sort && this.sort.active ? this.sort.active : 'createdAt',
+      //     order: this.sort && this.sort.direction ? this.sort.direction : ''
+      //   }
+      // }
+      this.getAllPosts('');
+      console.log(data);
+    });
+  }
+
   ngOnDestroy(): void {
     if (this.productsListSubscription) {
       this.productsListSubscription.unsubscribe();
@@ -216,32 +213,21 @@ export class ProductsListComponent implements OnInit, OnDestroy, AfterViewInit {
     return moment(d).fromNow();
   }
 
-  getAllPosts(paginationObj, type) {
+  getAllPosts(type) {
     console.log(type);
-    this.productsListSubscription = this.postService.getAllPosts(paginationObj, type).pipe(
+    if (type) {
+      this.paginator.pageIndex = 0;
+    }
+    const paginationObj = {pageNumber: this.paginator.pageIndex + 1, limit: 10, sort: {order: ""}};
+    this.postService.getAllPosts(paginationObj, this.selectedPostType ?this.selectedPostType : type ).pipe(
       map((result: any) => {
         if (result && result.posts) {
           /** Set the data for the datatable  */
           this.length = result.total;
           this.dataSource.data = result.posts;
-
-          // result.posts.forEach((p, i) => {
-          //   const newP = {
-          //     _id: p._id,
-          //     name: p.name.trim()
-          //   }
-          //   setTimeout(() => {
-          //     this.postService.updatePost(newP).subscribe(d => console.log(d.slug));
-          //   }, i * 500)
-          // })
-          // this.dataSource.paginator.length = result.total;
-
-          /** Set the columns visible in the table */
-          // this.displayedColumns = ['number', 'name', 'price', 'createdBy', 'type', 'category', 'createdAt', 'action'];
-          // this.all = true;
         }
       })
-    ).subscribe();
+    ).subscribe()
   }
 
 }

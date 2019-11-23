@@ -259,14 +259,14 @@
                         <div class="collapse show collapsible-content" id="collapse2">
                             <ul class="card-content" style="list-style: none;">
                                 <li>
-                                    <div class="custom-radio" (click)="getAllPosts('')">
-                                        <input type="radio" [id]="'all'" class="" name="filter_opt">
+                                    <div class="custom-radio" (click)="selectedPostType = ''; getAllPosts('')">
+                                        <input type="radio" checked [id]="'all'" class="" name="filter_opt">
                                         <label [for]="'all'">
                                             <span class="circle"></span>All</label>
                                     </div>
                                 </li>
                                 <li *ngFor="let p of postTypes">
-                                    <div class="custom-radio" (click)="getAllPosts(pageOptions, p)">
+                                    <div class="custom-radio" (click)="selectedPostType = p; getAllPosts(p)">
                                         <input type="radio" [id]="p" class="" name="filter_opt">
                                         <label [for]="p" style="text-transform: capitalize;">
                                             <span class="circle"></span>{{p}}</label>
@@ -282,11 +282,11 @@
             <!-- end /.col-md-3 -->
 
             <div class="col-lg-9">
+                    <mat-paginator style="margin-bottom: 43px; border-radius: 6px;" [length]="length" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]">
+                        </mat-paginator>
 
                 <!-- <div class="width-wrapper"> -->
                 <div class="item-grid pen-grid item-grid-large">
-                    <!-- <mat-paginator [length]="length" [pageSize]="8" [pageSizeOptions]="[5, 10, 25, 100]">
-                    </mat-paginator> -->
                     <article class="single-post single-item" *ngFor="let p of dataSource?.data">
                         <header class="header">
                             <a [routerLink]="['/', {outlets: {'main': ['dashboard', 'profile', p?.createdBy?._id ]}}]"

@@ -40,6 +40,12 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
   @Output() output: EventEmitter<any> = new EventEmitter(); /** Emitting data with user interactions */
   @ViewChild('editorRef', { static: false }) editorRef: ElementRef;
 
+  @Input() editorStyle = {
+    background: '#eff1f570',
+    padding: '15px',
+    border: 'dotted #ececec'
+  };
+
   /** Variables related to block level comments */
   @Input() blockLevelComments = false;
   @Input() commentsList: Comment[]
@@ -49,6 +55,7 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
 
   commentForm: FormGroup;
 
+  extensions = new Set(appConstants.imageExtenstions);
 
   constructor(
     private _hljs: HighlightJS,
@@ -252,9 +259,6 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
         this.zoomInZoomOutForImages();
       }),
       onChange: (() => {
-        console.log(this.editor.blocks.getBlockByIndex(0))
-        console.log(this.editor.blocks);
-        console.log(this.editor.saver)
         this.editor.save().then((outputData) => {
           console.log(outputData);
           this.output.emit([...outputData.blocks]);
@@ -304,9 +308,7 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
 
   /** Check if media is image */
   isImage(filePath: string) {
-    const extensions = new Set(appConstants.imageExtenstions);
-
-    return extensions.has(path.extname(filePath).slice(1).toLowerCase());
+    return filePath && this.extensions.has(path.extname(filePath).slice(1).toLowerCase());
   }
 
   /** Zoom in & Out on image click */

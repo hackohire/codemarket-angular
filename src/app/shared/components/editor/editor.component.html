@@ -1,6 +1,6 @@
-<div *ngIf="!readOnly" #editorRef style="background: #eff1f570; padding:15px; border: dotted #ececec;" [id]="id"></div>
+<div *ngIf="!readOnly" #editorRef [ngStyle]="editorStyle" [id]="id"></div>
 
-<div *ngIf="readOnly" #editorRef  style="background: #eff1f570; padding:15px; border: dotted #ececec;">
+<div *ngIf="readOnly" #editorRef  [ngStyle]="editorStyle">
     <div class="ce-block">
         <div class="ce-block__content">
             <ng-container [ngSwitch]="b?.type" *ngFor="let b of data; let i = index">
@@ -27,7 +27,7 @@
 
                         <!-- Image / Video -->
                         <div *ngSwitchCase="'image'">
-                            <div class="cdx-block image-tool image-tool--filled">
+                            <div class="cdx-block image-tool image-tool--filled" *ngIf="b?.data?.file?.url">
                                 <div class="image-tool__image">
                                     <ng-container *ngIf="isImage(b?.data?.file?.url); else elseTemplate">
                                         <img (click)="zoomInOut($event)" class="image-tool__image-picture"
@@ -35,6 +35,7 @@
                                         <div style="text-align: center; margin-top: 5px;"
                                             [innerHTML]="b?.data?.caption"></div>
                                     </ng-container>
+                            
                                     <ng-template #elseTemplate>
                                         <video class="image-tool__image-picture" autoplay loop controls
                                             [src]="b?.data?.file?.url | safe: 'url'"></video>

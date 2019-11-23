@@ -433,7 +433,7 @@ $transition: 0.3s ease;
       border-radius: 50%;
       position: relative;
       &:before{
-        content: '\f00c';
+        // content: '\f00c';
         font-family: 'FontAwesome',sans-serif;
         position: absolute;
         height: 20px;
@@ -535,7 +535,7 @@ $transition: 0.3s ease;
         height:100%;
         width: 100%;
         top: 0;
-        content: '\f00c';
+        // content: '\f00c';
         font-size: 12px;
         visibility: hidden;
         text-align: center;

@@ -77,6 +77,10 @@ textarea {
   // font-size: 21px;
 }
 
+.ce-block__content {
+  max-width: 100%;
+}
+
 .inside-container-area {
   background: #fff;
   padding: 32px 30px 32px;
@@ -1094,7 +1098,7 @@ a {
 .form-group .custom-checkbox2 p.label span.circle:before,
 .custom-radio .form-group p.label span.circle:before,
 .form-group .custom-radio p.label span.circle:before {
-  content: "\f00c";
+  content: "";
   font-family: "FontAwesome", sans-serif;
   position: absolute;
   height: 20px;
@@ -1118,7 +1122,7 @@ a {
 }
 
 .custom-radio input[type="radio"] {
-  display: none;
+  display: none !important;
 }
 
 .custom-radio input[type="radio"]:checked + label span:before,
@@ -1241,7 +1245,7 @@ a {
   height: 100%;
   width: 100%;
   top: 0;
-  content: "\f00c";
+  content: "";
   font-size: 12px;
   visibility: hidden;
   text-align: center;
@@ -4507,7 +4511,7 @@ h6 {
 .form-group .custom-checkbox2 p.label span.circle:before,
 .custom-radio .form-group p.label span.circle:before,
 .form-group .custom-radio p.label span.circle:before {
-  content: "\f00c";
+  content: "";
   font-family: "FontAwesome", sans-serif;
   position: absolute;
   height: 20px;
@@ -4654,7 +4658,7 @@ h6 {
   height: 100%;
   width: 100%;
   top: 0;
-  content: "\f00c";
+  content: "";
   font-size: 12px;
   visibility: hidden;
   text-align: center;
@@ -6058,7 +6062,7 @@ h6 {
 .form-group .custom-checkbox2 p.label span.circle:before,
 .custom-radio .form-group p.label span.circle:before,
 .form-group .custom-radio p.label span.circle:before {
-  content: "\f00c";
+  content: "";
   font-family: "FontAwesome", sans-serif;
   position: absolute;
   height: 20px;
@@ -6205,7 +6209,7 @@ h6 {
   height: 100%;
   width: 100%;
   top: 0;
-  content: "\f00c";
+  content: "";
   font-size: 12px;
   visibility: hidden;
   text-align: center;
@@ -7730,7 +7734,7 @@ div#ui-datepicker-div tbody tr td a:hover {
 .form-group .custom-checkbox2 p.label span.circle:before,
 .custom-radio .form-group p.label span.circle:before,
 .form-group .custom-radio p.label span.circle:before {
-  content: "\f00c";
+  content: "";
   font-family: "FontAwesome", sans-serif;
   position: absolute;
   height: 20px;
@@ -7877,7 +7881,7 @@ div#ui-datepicker-div tbody tr td a:hover {
   height: 100%;
   width: 100%;
   top: 0;
-  content: "\f00c";
+  content: "";
   font-size: 12px;
   visibility: hidden;
   text-align: center;
@@ -10942,7 +10946,7 @@ span.counter {
   span.circle:before {
   background: #77de51;
   border: 0;
-  content: "\f00c";
+  content: "";
   font-family: FontAwesome, sans-serif;
 }
 
@@ -15778,7 +15782,7 @@ span.counter {
 }
 
 .event_module .list_item li:before {
-  content: "\f00c";
+  content: "";
   font-family: FontAwesome, sans-serif;
   color: #0674ec;
   margin-right: 18px;

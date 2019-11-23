@@ -1,4 +1,5 @@
 #!/bin/bash
+aws s3 rm s3://codemarket-frontend --recursive
 
 for old in dist/codemarket/*.gz; do mv $old ${old%%.gz*}; done
 aws s3 sync dist/codemarket/ s3://codemarket-frontend --metadata-directive REPLACE --cache-control max-age=31536000,public --acl public-read --exclude "index.html" --exclude "*.css" --exclude "*.js" || { echo 'ERROR: s3 sync failed' ; exit 1; }

@@ -1,12 +1,12 @@
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy, AfterViewInit } from '@angular/core';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/core/store/state/app.state';
-import { MatTableDataSource, MatSort } from '@angular/material';
+import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
 import { Product } from 'src/app/shared/models/product.model';
-import { Subscription } from 'rxjs';
+import { Subscription, merge, of } from 'rxjs';
 import { trigger, state, style, transition, animate } from '@angular/animations';
-import { map } from 'rxjs/operators';
+import { map, startWith, catchError } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from 'src/app/core/services/product.service';
 import { BreadCumb } from 'src/app/shared/models/bredcumb.model';
@@ -32,7 +32,7 @@ import { SweetalertService } from '../../shared/services/sweetalert.service';
     ]),
   ],
 })
-export class ProductsListComponent implements OnInit, OnDestroy {
+export class ProductsListComponent implements OnInit, OnDestroy, AfterViewInit {
 
   length: number;
   anonymousAvatar = require('src/assets/images/anonymous-avatar.jpg');
@@ -55,14 +55,41 @@ export class ProductsListComponent implements OnInit, OnDestroy {
 
   authorId: string; // Id of the user whose profile is being visited by loggedInUser
 
+  postTypes = Object.values(PostType);
+
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
+  pageOptions = {pageNumber: 1, limit: 50, sort: {order: ""}};
+
   constructor(
-    private auth: AuthService,
+    public auth: AuthService,
     private store: Store<AppState>,
     private activatedRoute: ActivatedRoute,
     private productService: ProductService,
     public postService: PostService,
     public sweetAlertService: SweetalertService
   ) {
+
+
+    this.breadcumb = {
+      title: 'Code Q&A',
+      path: [
+        {
+          name: 'Dashboard',
+          pathString: '/'
+        },
+        {
+          name: 'bugfixes'
+        }
+      ]
+    };
+  }
+
+  ngOnInit() {
+
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.sort = this.sort;
 
     const path = this.activatedRoute.parent.routeConfig.path;
 
@@ -74,6 +101,29 @@ export class ProductsListComponent implements OnInit, OnDestroy {
       /** Set the columns visible in the table */
       this.displayedColumns = ['number', 'name', 'price', 'createdBy', 'type', 'category', 'createdAt', 'action'];
       this.all = true;
+
+      // merge(this.paginator.page)
+      // .pipe(
+      //   startWith({}),
+      //   catchError((e) => {
+      //     return of(e);
+      //   })
+      // )
+      // .subscribe(data => {
+      //   const paginationObj = {
+      //     pageNumber: this.paginator.pageIndex + 1,
+      //     limit: 5,
+      //     sort: {
+      //       field: this.sort && this.sort.active ? this.sort.active : 'createdAt',
+      //       order: this.sort && this.sort.direction ? this.sort.direction : ''
+      //     }
+      //   }
+      //   this.getAllPosts(paginationObj, '');
+      //   console.log(data);
+      // });
+      this.getAllPosts(this.pageOptions, '');
+
+      // this.getAllPosts('');
       // this.productsListSubscription = this.postService.getAllPosts({ pageNumber: 1, limit: 10 }).pipe(
       //   map((posts) => {
       //     if (posts) {
@@ -121,23 +171,6 @@ export class ProductsListComponent implements OnInit, OnDestroy {
         })
       ).subscribe();
     }
-
-    this.breadcumb = {
-      title: 'Code Q&A',
-      path: [
-        {
-          name: 'Dashboard',
-          pathString: '/'
-        },
-        {
-          name: 'bugfixes'
-        }
-      ]
-    };
-  }
-
-  ngOnInit() {
-    this.dataSource.sort = this.sort;
   }
 
   ngOnDestroy(): void {
@@ -183,9 +216,9 @@ export class ProductsListComponent implements OnInit, OnDestroy {
     return moment(d).fromNow();
   }
 
-  getAllPosts(event) {
-    console.log(event);
-    this.productsListSubscription = this.postService.getAllPosts(event).pipe(
+  getAllPosts(paginationObj, type) {
+    console.log(type);
+    this.productsListSubscription = this.postService.getAllPosts(paginationObj, type).pipe(
       map((result: any) => {
         if (result && result.posts) {
           /** Set the data for the datatable  */

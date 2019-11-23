@@ -92,17 +92,285 @@
                 <tr mat-row *matRowDef="let row; columns: ['expandedDetail']; let i = dataIndex;"
                     class="example-detail-row"></tr>
             </table>
-
-
-            <app-datatable
-                *ngIf="all"
-                (redirect)="postService.redirectToPostDetails($event)"
-                (getAllPosts)="getAllPosts($event)"
-                [length]="length"
-                [pagination]="true"
-                [dataSource]="dataSource"
+            <!-- 
+            <app-datatable *ngIf="all" (redirect)="postService.redirectToPostDetails($event)"
+                (getAllPosts)="getAllPosts($event)" [length]="length" [pagination]="true" [dataSource]="dataSource"
                 [displayedColumns]="displayedColumns">
-            </app-datatable>
+            </app-datatable> -->
+
         </div>
     </div>
 </div>
+
+<div *ngIf="false" class="preload home3">
+    <!--================================
+    START FILTER AREA
+=================================-->
+
+    <div class="filter-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="filter-bar">
+                        <div class="filter__option filter--dropdown">
+                            <a href="#" id="drop1" class="dropdown-trigger dropdown-toggle" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">Categories
+                                <span class="lnr lnr-chevron-down"></span>
+                            </a>
+                            <ul class="custom_dropdown custom_drop2 dropdown-menu" aria-labelledby="drop1">
+                                <li>
+                                    <a href="#">Wordpress
+                                        <span>35</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">Landing Page
+                                        <span>45</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">Psd Template
+                                        <span>13</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">Plugins
+                                        <span>08</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">HTML Template
+                                        <span>34</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">Components
+                                        <span>78</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- end /.filter__option -->
+
+                        <div class="filter__option filter--dropdown">
+                            <a href="#" id="drop2" class="dropdown-trigger dropdown-toggle" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">Filter By
+                                <span class="lnr lnr-chevron-down"></span>
+                            </a>
+                            <ul class="custom_dropdown dropdown-menu" aria-labelledby="drop2">
+                                <li>
+                                    <a href="#">Trending items</a>
+                                </li>
+                                <li>
+                                    <a href="#">Popular items</a>
+                                </li>
+                                <li>
+                                    <a href="#">New items </a>
+                                </li>
+                                <li>
+                                    <a href="#">Best seller </a>
+                                </li>
+                                <li>
+                                    <a href="#">Best rating </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- end /.filter__option -->
+
+                        <!-- <div class="filter__option filter--dropdown filter--range">
+                            <a href="#" id="drop3" class="dropdown-trigger dropdown-toggle"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Price Range
+                                <span class="lnr lnr-chevron-down"></span>
+                            </a>
+                            <div class="custom_dropdown dropdown-menu" aria-labelledby="drop3">
+                                <div class="range-slider price-range"></div>
+
+                                <div class="price-ranges">
+                                    <span class="from rounded">$30</span>
+                                    <span class="to rounded">$300</span>
+                                </div>
+                            </div>
+                        </div> -->
+                        <!-- end /.filter__option -->
+
+                        <!-- <div class="filter__option filter--select">
+                            <div class="select-wrap">
+                                <select name="price">
+                                    <option value="low">Price : Low to High</option>
+                                    <option value="high">Price : High to low</option>
+                                </select>
+                                <span class="lnr lnr-chevron-down"></span>
+                            </div>
+                        </div> -->
+                        <!-- end /.filter__option -->
+
+                        <div class="filter__option filter--select">
+                            <div class="select-wrap">
+                                <select name="price">
+                                    <option value="12">12 Items per page</option>
+                                    <option value="15">15 Items per page</option>
+                                    <option value="25">25 Items per page</option>
+                                </select>
+                                <span class="lnr lnr-chevron-down"></span>
+                            </div>
+                        </div>
+                        <!-- end /.filter__option -->
+
+                        <!-- <div class="filter__option filter--layout">
+                            <a href="all-products.html">
+                                <div class="svg-icon">
+                                    <img class="svg" src="images/svg/grid.svg"
+                                        alt="it's just a layout control folks!">
+                                </div>
+                            </a>
+                            <a href="all-products-list.html">
+                                <div class="svg-icon">
+                                    <img class="svg" src="images/svg/list.svg"
+                                        alt="it's just a layout control folks!">
+                                </div>
+                            </a>
+                        </div> -->
+                        <!-- end /.filter__option -->
+                    </div>
+                    <!-- end /.filter-bar -->
+                </div>
+                <!-- end /.col-md-12 -->
+            </div>
+            <!-- end filter-bar -->
+        </div>
+    </div>
+</div>
+
+<section class="single-product-desc" *ngIf="all">
+    <div class="container">
+        <div class="row">
+
+            <!-- start .col-md-3 -->
+            <div class="col-lg-3">
+                <!-- start aside -->
+                <aside class="sidebar product--sidebar">
+                    <div class="sidebar-card card--filter">
+                        <a class="card-title" href="#collapse2" role="button" data-toggle="collapse"
+                            aria-expanded="false" aria-controls="collapse2">
+                            <h4>Filter Posts
+                                <span class="lnr lnr-chevron-down"></span>
+                            </h4>
+                        </a>
+                        <div class="collapse show collapsible-content" id="collapse2">
+                            <ul class="card-content" style="list-style: none;">
+                                <li>
+                                    <div class="custom-radio" (click)="getAllPosts('')">
+                                        <input type="radio" [id]="'all'" class="" name="filter_opt">
+                                        <label [for]="'all'">
+                                            <span class="circle"></span>All</label>
+                                    </div>
+                                </li>
+                                <li *ngFor="let p of postTypes">
+                                    <div class="custom-radio" (click)="getAllPosts(pageOptions, p)">
+                                        <input type="radio" [id]="p" class="" name="filter_opt">
+                                        <label [for]="p" style="text-transform: capitalize;">
+                                            <span class="circle"></span>{{p}}</label>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- end /.sidebar-card -->
+                </aside>
+                <!-- end aside -->
+            </div>
+            <!-- end /.col-md-3 -->
+
+            <div class="col-lg-9">
+
+                <!-- <div class="width-wrapper"> -->
+                <div class="item-grid pen-grid item-grid-large">
+                    <!-- <mat-paginator [length]="length" [pageSize]="8" [pageSizeOptions]="[5, 10, 25, 100]">
+                    </mat-paginator> -->
+                    <article class="single-post single-item" *ngFor="let p of dataSource?.data">
+                        <header class="header">
+                            <a [routerLink]="['/', {outlets: {'main': ['dashboard', 'profile', p?.createdBy?._id ]}}]"
+                                class="authorAvatar">
+                                <img [src]="p?.createdBy?.avatar ? ((codemarketBucketURL + p.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                                    alt="Profile image for Danielle" class="user-avatar" width="40" height="40"></a>
+                            <div class="titleAndAuthor">
+                                <address class="author" style="margin-bottom: 0;"><a
+                                        [routerLink]="['/', {outlets: {'main': ['dashboard', 'profile', p?.createdBy?._id ]}}]"
+                                        class="authorName">{{p?.createdBy?.name}}</a></address>
+                                <p>{{p?.createdBy?.currentJobDetails?.jobProfile ? p?.createdBy?.currentJobDetails?.jobProfile : '-'}}
+                                </p>
+                            </div>
+                            <div
+                                class="action-menu ItemActions_menu-114wt ItemActions_menuSmall-12vVp ActionMenu_menu-2K9wU">
+                                {{fromNow(p?.createdAt)}}
+                            </div>
+                        </header>
+                        <div class="single-title-and-excerpt">
+
+                            <!-- Post Title -->
+                            <h2 class="post-title">
+                                <a style="display: inline-block;"
+                                    (click)="postService?.redirectToPostDetails(p)">{{p?.name}}</a>
+
+                                <!-- Post Actions -->
+                                <span style="float: right;" *ngIf="p?.createdBy?._id === auth?.loggedInUser?._id">
+                                    <button mat-icon-button [matMenuTriggerFor]="optionsMenu"
+                                        aria-label="Example icon-button with a menu">
+                                        <mat-icon>more_horiz</mat-icon>
+                                    </button>
+                                    <mat-menu #optionsMenu="matMenu">
+                                        <button mat-menu-item (click)="postService?.editPost(p)">
+                                            <mat-icon>edit</mat-icon>
+                                            <span>Edit</span>
+                                        </button>
+                                        <button mat-menu-item>
+                                            <mat-icon>delete</mat-icon>
+                                            <span>Delete</span>
+                                        </button>
+                                    </mat-menu>
+                                </span>
+                            </h2>
+
+                            <!-- Post Content -->
+                            <div class="item-content">
+                                <app-editor [readOnly]="true" [editorStyle]="{border: 'none', padding: '10px 0'}"
+                                    [data]="p?.description" [id]="p?._id"></app-editor>
+                            </div>
+
+                            <!-- Post Tags -->
+                            <div>
+                                <span *ngFor="let t of p?.tags"
+                                    style="background: rgba(6, 116, 236, 0.1); display: inline-block;
+                                padding: 0 15px; line-height: 32px;
+                                color: #0674ec; margin-right: 10px;font-size: 15px;font-weight: 200;-webkit-border-radius: 100px;border-radius: 100px;">{{t?.name}}</span>
+                            </div>
+                            <!-- <div class="item-content item-content-long">
+                    <p>When was the last time you wrote vanilla CSS? As a front end developer, it's hard to imagine a
+                        world
+                        without CSS preprocessors and all of the functionality they provide. They give us features like
+                        variables and functions and organizational benefits like partial includes and selector nesting.
+                    </p>
+                    <p>As the most popular CSS preprocessor out there, <a href="http://sass-lang.com/">Sass</a> just
+                        makes CSS
+                        <em>better</em>... but most developers barely even scratch the surface of what it can do.</p>
+                    <p>One of the most widely used features of Sass, and...</p>
+                </div> -->
+                        </div>
+                        <footer class="stats">
+                            <a class="single-stat invisible-button loves loves heart-button loved-0">
+                                <mat-icon style="color: crimson;" class="vertical-align-middle">favorite</mat-icon>
+                                <span class="count"> {{p?.likeCount ? p?.likeCount : 0}}</span>
+                            </a>
+                            <a class="single-stat comments"
+                                href="https://codepen.io/hidanielle/post/level-up-your-sass-with-the-ampersand">
+                                <mat-icon style="color: #0674ec;" class="vertical-align-middle">comment</mat-icon>
+                                <span class="count"> {{p?.comments?.length}}</span>
+                            </a>
+                        </footer>
+                    </article>
+                </div>
+            </div>
+            <!-- </div> -->
+        </div>
+    </div>
+</section>

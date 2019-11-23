@@ -12,6 +12,9 @@ export const productConstants = {
             name
             avatar
             _id
+            currentJobDetails {
+                jobProfile
+            }
         }
         type
         categories
@@ -34,6 +37,23 @@ export const productConstants = {
         }
         likeCount
         slug
+        comments {
+            text {
+              ...Description
+            }
+            _id
+            type
+            referenceId
+            parentId
+            createdAt
+            createdBy {
+              _id
+              name
+              avatar
+            }
+            blockId
+            blockSpecificComment
+        }
     }
     ${description}
     `,

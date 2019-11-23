@@ -47,6 +47,9 @@ export class PostService {
       _id
       name
       avatar
+      currentJobDetails {
+        jobProfile
+      }
     }
     purchasedBy {
       name
@@ -55,6 +58,23 @@ export class PostService {
       avatar
     }
     slug
+    comments {
+      text {
+        ...Description
+      }
+      _id
+      type
+      referenceId
+      parentId
+      createdAt
+      createdBy {
+        _id
+        name
+        avatar
+      }
+      blockId
+      blockSpecificComment
+    }
 
     dateRange
     address
@@ -223,12 +243,12 @@ export class PostService {
     );
   }
 
-  getAllPosts(pageOptions): Observable<Post[]> {
+  getAllPosts(pageOptions, type): Observable<Post[]> {
     return this.apollo.query(
       {
         query: gql`
-          query getAllPosts($pageOptions: PageOptionsInput) {
-            getAllPosts(pageOptions: $pageOptions) {
+          query getAllPosts($pageOptions: PageOptionsInput, $type: String) {
+            getAllPosts(pageOptions: $pageOptions, type: $type) {
               posts {
                 ...Product
               }
@@ -238,7 +258,8 @@ export class PostService {
           ${productConstants.productQueryFields}
         `,
         variables: {
-          pageOptions
+          pageOptions,
+          type: type ? type : ''
         },
         fetchPolicy: 'no-cache'
       }

@@ -97,11 +97,19 @@
         <div class="line-height-initial" [fxHide.xs]="true">Software Developers</div>
       </a>
 
-      <!-- Team IQ -->
+      <!-- Team IQ 
       <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', {outlets: {'main': ['dashboard', 'post-list']}}]"
         [queryParams]="{type: 'event', all: true}">
         <i style="font-size: 1.7rem !important;" class="vertical-align-middle fad fa-question-circle fa-fw"></i>
         <div class="line-height-initial" [fxHide.xs]="true">Businesses</div>
+      </a>-->
+
+      <!-- Companoies -->
+      <a mat-button routerLinkActive="mat-primary"
+        [routerLink]="['/', {outlets: {'main': ['dashboard', 'company-list']}}]"
+        [queryParams]="{all: true}">
+        <i style="font-size: 1.7rem !important;" class="vertical-align-middle fad fa-lightbulb-on fa-fw"></i>
+        <div class="line-height-initial" [fxHide.xs]="true"> Business </div>
       </a>
 
       <!-- All Events -->
@@ -118,11 +126,19 @@
         <div class="line-height-initial" [fxHide.xs]="true"> Governments</div>
       </a>
 
-      <!-- Hackathon -->
+       <!-- Schools -->
+       <a mat-button routerLinkActive="mat-primary"
+       [routerLink]="['/', {outlets: {'main': ['dashboard', 'company-list']}}]"
+       [queryParams]="{all: true}">
+       <i style="font-size: 1.7rem !important;" class="vertical-align-middle fad fa-lightbulb-on fa-fw"></i>
+       <div class="line-height-initial" [fxHide.xs]="true"> Governments</div>
+     </a>
+
+      <!-- Hackathon 
       <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', {outlets: {'main': ['hackathon']}}]">
         <i style="font-size: 1.7rem !important;" class="vertical-align-middle fad fa-laptop-code fa-fw"></i>
         <div class="line-height-initial" [fxHide.xs]="true"> Schools</div>
-      </a>
+      </a>-->
 
       <!-- Dreamjob 
       <a mat-button routerLinkActive="mat-primary"

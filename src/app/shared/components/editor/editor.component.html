@@ -5,7 +5,7 @@
         <div class="ce-block__content">
             <ng-container [ngSwitch]="b?.type" *ngFor="let b of data; let i = index">
                 <div fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="start center">
-                    <div fxFlex="92">
+                    <div fxFlex="90">
                         <!-- Paragraph -->
                         <div *ngSwitchCase="'paragraph'">
                             <div class="ce-paragraph cdx-block" [innerHTML]="b?.data?.text">
@@ -85,7 +85,7 @@
                     </div>
 
                     <!-- Icon to view / collapse comments section -->
-                    <div fxFlex="8">
+                    <div fxFlex="10">
                         <ng-container *ngIf="blockLevelComments">
                             <a style="text-align: right; padding: 0 8px; text-decoration: none;" *ngIf="!b['show']" mat-button (click)="b['show'] = true">
                                 <i style="font-size: 1.5rem !important;" class="fad fa-comments-alt fa-lg"></i>

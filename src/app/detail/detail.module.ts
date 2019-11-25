@@ -8,7 +8,7 @@ const routes: Routes = [
   {
     path: '',
     component: DetailsComponent,
-    data: { noReuse: true }
+    // data: { noReuse: true }
   }
 ];
 

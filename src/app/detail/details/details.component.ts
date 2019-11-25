@@ -39,6 +39,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
   /** Company Details Related Varibale */
   companyDetails$: Observable<Company>;
   usersInterestedInCompany: User[];
+  companyView: string;
 
   /** */
 
@@ -123,7 +124,17 @@ export class DetailsComponent implements OnInit, OnDestroy {
             );
           }
         })
-      )
+      );
+
+      this.subscription$.add(
+        this.activatedRoute.queryParams.subscribe((q) => {
+          if (q && q.view) {
+            this.companyView = q.view;
+          } else {
+            this.router.navigate(['./'], {queryParams: {view: 'description'}, queryParamsHandling: 'merge', relativeTo: this.activatedRoute})
+          }
+        })
+      );
     } else {
       this.subscription$.add(this.store.select(selectSelectedPost).pipe(
         tap((p: Post) => {

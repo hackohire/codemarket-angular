@@ -49,11 +49,12 @@ const dashboardRoutes: Routes = [
   {
     path: 'product/:slug',
     loadChildren: () => import('./product-details/product-details.module').then(module => module.ProductDetailsModule),
-    runGuardsAndResolvers: 'always'
+    data: { noReuse: true }
   },
   {
     path: 'post/:slug',
     loadChildren: () => import('../detail/detail.module').then(module => module.DetailModule),
+    data: { noReuse: true }
   },
   {
     path: 'company-details/:companyId',

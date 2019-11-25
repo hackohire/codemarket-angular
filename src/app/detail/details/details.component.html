@@ -325,9 +325,7 @@
 
     <app-breadcumb (editPost)="edit(details)"
         [showEditPostDetails]="details?.createdBy?._id === authService?.loggedInUser?._id ? true : false"
-        [companyDetails]="details"
-    
-        [title]="details?.name" [path]="breadcumb?.path">
+        [companyDetails]="details" [title]="details?.name" [path]="breadcumb?.path">
     </app-breadcumb>
 
     <!--================================
@@ -340,22 +338,100 @@
         START COMPANY DETAILS AREA
     ==============================================-->
     <section class="single-product-desc">
-        <div class="container">
+        <!-- <div class="container" style="margin-top: 0; margin-bottom: 30px;">
+
             <div class="row">
-                <div class="col-lg-8">
+                <div class="col-lg-3">
+                </div>
+                <div class="col-lg-9">
+                    <div style="height: 312px; width: 820px">
+                        <img
+                            [src]="'data:image/jpeg;base64,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'" />
+                    </div>
+                </div>
+            </div>
+        </div> -->
 
-                    <div class="item-info">
-                        <div>
-                            <div class="tab-pane fade show product-tab active" id="product-details">
-                                <div>
+        <div class="container">
 
-                                    <h4 class="tab-content-wrapper">How Can You Help:</h4>
-                                    <app-editor *ngIf="details?.howCanYouHelp" [commentsList]="commentsList"
-                                        [blockLevelComments]="true" [readOnly]="true" [data]="details?.howCanYouHelp"
-                                        [post]="details" [id]="'company-details-editor'" [commentType]="'company'">
-                                    </app-editor>
+            <div class="row">
+                <div class="col-lg-3">
+                    <!-- start aside -->
+                    <aside class="sidebar product--sidebar">
+                        <div class="sidebar-card card--category" style="background: transparent;">
 
-                                    <!-- <h4 class="tab-content-wrapper">Ideas:</h4>
+                            <div class="collapse show collapsible-content" id="collapse1">
+                                <ul class="card-content" style="list-style: none;">
+                                    <li>
+                                        <a [routerLink]="['./']" [routerLinkActive]="'active-item'"
+                                            [queryParams]="{view: 'description'}" [queryParamsHandling]="'merge'">
+                                            <span class="lnr lnr-chevron-right"></span>Home
+                                            <!-- <span class="item-count">35</span> -->
+                                        </a>
+                                        <a [routerLink]="['./']" [routerLinkActive]="'active-item'"
+                                            [queryParams]="{view: 'comments'}" [queryParamsHandling]="'merge'">
+                                            <span class="lnr lnr-chevron-right"></span>Comments
+                                            <!-- <span class="item-count">35</span> -->
+                                        </a>
+                                        <a [routerLink]="['./']" [routerLinkActive]="'active-item'"
+                                            [queryParams]="{view: 'q&a'}" [queryParamsHandling]="'merge'">
+                                            <span class="lnr lnr-chevron-right"></span>Q & A
+                                            <!-- <span class="item-count">35</span> -->
+                                        </a>
+
+                                        <a [routerLink]="['./']" [routerLinkActive]="'active-item'"
+                                            [queryParams]="{view: 'creator'}" [queryParamsHandling]="'merge'">
+                                            <span class="lnr lnr-chevron-right"></span>Creator
+                                            <!-- <span class="item-count">35</span> -->
+                                        </a>
+
+                                        <a [routerLink]="['./']" [routerLinkActive]="'active-item'"
+                                            [queryParams]="{view: 'interested-people'}" [queryParamsHandling]="'merge'">
+                                            <span class="lnr lnr-chevron-right"></span>Interested Professionals
+                                            <!-- <span class="item-count">35</span> -->
+                                        </a>
+
+                                        <a [routerLink]="['./']" [routerLinkActive]="'active-item'"
+                                            [queryParams]="{view: 'info'}" [queryParamsHandling]="'merge'">
+                                            <span class="lnr lnr-chevron-right"></span>Info
+                                            <!-- <span class="item-count">35</span> -->
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- <div class="sidebar-card card--category"> -->
+                        <a [routerLink]="['/', {outlets: {'main': ['company', 'add-company']}}]"
+                            class="btn btn--sm btn--round menu" style="margin: 0 30px;">Add Company
+                            <!-- <mat-icon style="vertical-align: middle;">library_add</mat-icon> -->
+                            <mat-icon style="vertical-align: middle;">add</mat-icon>
+                        </a>
+                        <a class="btn btn--sm btn--round menu"
+                            style="color: #0674ec !important; background: white; margin: 10px 30px;"
+                            [state]="{companyDetails: details}"
+                            [routerLink]="['/', {outlets: {'main': ['event', 'add-event']}}]">Add Event <mat-icon
+                                style="vertical-align: middle;">add</mat-icon>
+                        </a>
+                        <!-- </div> -->
+                    </aside>
+                </div>
+                <div class="col-lg-9">
+                    <!-- <div style="height: 312px; width: 820px">
+                            <img [src]="avatar?.value ? ((codemarketBucketURL + avatar.value) | safe: 'resourceUrl') : anonymousAvatar" />
+                    </div> -->
+
+                    <div class="item-info" *ngIf="companyView === 'description'">
+                        <div class="tab-pane fade show product-tab active" id="product-details">
+
+
+                            <h4 class="tab-content-wrapper">Description:</h4>
+                            <app-editor *ngIf="details?.description" [commentsList]="commentsList"
+                                [blockLevelComments]="true" [readOnly]="true" [data]="details?.description"
+                                [post]="details" [id]="'company-details-editor'" [commentType]="'company'">
+                            </app-editor>
+
+                            <!-- <h4 class="tab-content-wrapper">Ideas:</h4>
                                     <app-editor *ngIf="details?.ideas" [commentsList]="commentsList"
                                         [blockLevelComments]="true" [readOnly]="true" [data]="details?.ideas"
                                         [post]="details" [id]="'ideas-editor'" [commentType]="'company'">
@@ -363,16 +439,14 @@
 
 
 
-                                    <!-- <h4 class="tab-content-wrapper">Questions:</h4>
+                            <!-- <h4 class="tab-content-wrapper">Questions:</h4>
                                     <app-editor *ngIf="details?.questions" [commentsList]="commentsList"
                                         [blockLevelComments]="true" [readOnly]="true" [data]="details?.questions"
                                         [post]="details" [id]="'questions-editor'" [commentType]="'company'">
                                     </app-editor> -->
-                                    <br />
-                                    <br />
+                            <br />
+                            <br />
 
-                                </div>
-                            </div>
                         </div>
 
                         <ng-container *ngTemplateOutlet="locationTemplate; context: {location: details?.location}">
@@ -380,83 +454,80 @@
 
                     </div>
 
-                    <ng-container *ngTemplateOutlet="addCommentTemplate; context: details"></ng-container>
-                    <ng-container *ngTemplateOutlet="questionAnswersTemplate; context: details"></ng-container>
+                    <div *ngIf="companyView === 'comments'">
+                        <ng-container *ngTemplateOutlet="addCommentTemplate; context: details">
+                        </ng-container>
+                    </div>
 
+                    <div *ngIf="companyView === 'q&a'">
+                        <ng-container *ngTemplateOutlet="questionAnswersTemplate; context: details">
+                        </ng-container>
+                    </div>
 
-                    <!-- end /.item-info -->
-                </div>
-                <!-- end /.col-md-8 -->
-
-                <div class="col-lg-4">
-                    <aside class="sidebar sidebar--single-product">
-
-
-                        <div class="author-card sidebar-card " *ngIf="details?.createdBy?.name">
-                            <div class="card-title">
-                                <h4>Author Information</h4>
-                            </div>
-
-                            <div class="author-infos">
-                                <div class="author_avatar">
-                                    <img [src]="details?.createdBy?.avatar ? ((codemarketBucketURL + details.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar"
-                                        alt="Presenting the broken author avatar :D">
-                                </div>
-
-                                <div class="author">
-                                    <a
-                                        [routerLink]="['/', {outlets: {'main': ['dashboard', 'profile', details?.createdBy?._id ]}}]">
-                                        <h4>{{details?.createdBy?.name}}</h4>
-                                    </a>
-                                    <button
-                                        *ngIf="details?.createdBy?._id && authService?.loggedInUser?._id && authService?.loggedInUser?._id !== details?.createdBy?._id"
-                                        (click)="openDialog(details?.createdBy?._id)" mat-mini-fab color="primary">
-                                        <mat-icon>video_call</mat-icon>
-                                    </button>
-                                    <!-- <p>Signed Up: 08 April 2016</p> -->
-                                </div>
-                                <!-- end /.author -->
-
-                                <div class="social social--color--filled">
-                                    <ul>
-                                        <li>
-                                            <a href="#">
-                                                <span class="fab fa-facebook fa-lg"></span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <span class="fab fa-github fa-lg"></span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <span class="fab fa-linkedin fa-lg"></span>
-                                            </a>
-                                        <li>
-                                            <a href="#">
-                                                <i class="fab fa-stack-overflow"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <!-- end /.social -->
-
-                                <div class="author-btn">
-                                    <a (editPost)="postService?.editPost(details)"
-                                        [routerLink]="['/', {outlets: {'main': ['dashboard', 'profile', details?.createdBy?._id ]}}]"
-                                        class="btn btn--sm btn--round">View Profile</a>
-                                    <!-- <a href="#" class="btn btn--sm btn--round">Message</a> -->
-                                </div>
-                            </div>
-                            <!-- end /.author-infos -->
-
-
+                    <div *ngIf="details?.createdBy?.name && companyView === 'creator'" class="author-card sidebar-card">
+                        <div class="card-title">
+                            <h4>Author Information</h4>
                         </div>
-                        <!-- end /.author-card -->
+
+                        <div class="author-infos">
+                            <div class="author_avatar">
+                                <img [src]="details?.createdBy?.avatar ? ((codemarketBucketURL + details.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                                    alt="Presenting the broken author avatar :D">
+                            </div>
+
+                            <div class="author">
+                                <a
+                                    [routerLink]="['/', {outlets: {'main': ['dashboard', 'profile', details?.createdBy?._id ]}}]">
+                                    <h4>{{details?.createdBy?.name}}</h4>
+                                </a>
+                                <button
+                                    *ngIf="details?.createdBy?._id && authService?.loggedInUser?._id && authService?.loggedInUser?._id !== details?.createdBy?._id"
+                                    (click)="openDialog(details?.createdBy?._id)" mat-mini-fab color="primary">
+                                    <mat-icon>video_call</mat-icon>
+                                </button>
+                                <!-- <p>Signed Up: 08 April 2016</p> -->
+                            </div>
+                            <!-- end /.author -->
+
+                            <div class="social social--color--filled">
+                                <ul>
+                                    <li>
+                                        <a href="#">
+                                            <span class="fab fa-facebook fa-lg"></span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <span class="fab fa-github fa-lg"></span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <span class="fab fa-linkedin fa-lg"></span>
+                                        </a>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fab fa-stack-overflow"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- end /.social -->
+
+                            <div class="author-btn">
+                                <a (editPost)="postService?.editPost(details)"
+                                    [routerLink]="['/', {outlets: {'main': ['dashboard', 'profile', details?.createdBy?._id ]}}]"
+                                    class="btn btn--sm btn--round">View Profile</a>
+                                <!-- <a href="#" class="btn btn--sm btn--round">Message</a> -->
+                            </div>
+                        </div>
+                        <!-- end /.author-infos -->
 
 
+                    </div>
+                    <!-- end /.author-card -->
 
+                    <aside *ngIf="companyView === 'info'" class="sidebar sidebar--single-product">
                         <div class="sidebar-card card--product-infos">
                             <div class="card-title">
                                 <h4>Information</h4>
@@ -465,53 +536,58 @@
                             <ul class="infos">
                                 <li *ngIf="details?.createdAt">
                                     <p class="data-label">Created</p>
-                                    <p class="info">{{getDate(details?.createdAt) | date: 'dd/MM/yyyy'}}</p>
+                                    <p class="info">{{getDate(details?.createdAt) | date: 'dd/MM/yyyy'}}
+                                    </p>
                                 </li>
                                 <li *ngIf="details?.updatedAt">
                                     <p class="data-label">Updated</p>
-                                    <p class="info">{{getDate(details?.updatedAt) | date: 'dd/MM/yyyy'}}</p>
+                                    <p class="info">{{getDate(details?.updatedAt) | date: 'dd/MM/yyyy'}}
+                                    </p>
                                 </li>
                                 <li>
                                     <p class="data-label">Cities</p>
-                                    <p class="info" *ngFor="let t of details?.cities">{{t?.name + ','}}</p>
+                                    <p class="info" *ngFor="let t of details?.cities">{{t?.name + ','}}
+                                    </p>
                                 </li>
                             </ul>
                         </div>
-                        <!-- end /.aside -->
-
-                        <div class="author-card sidebar-card " *ngIf="type === 'company'">
-                            <div class="card-title">
-                                <h4>Interested Professionals: {{ details?.usersInterestedInCompany?.length }}</h4>
-                                <br />
-
-                                <ng-container class="row" *ngFor="let userInterested of usersInterestedInCompany">
-                                    <div class="col-md-12" style="margin-bottom: 10px;">
-                                        <div class="author_avatar_comment" style="vertical-align: middle;">
-                                            <img [src]="userInterested?.avatar ? ((codemarketBucketURL + userInterested.avatar) | safe: 'resourceUrl') : anonymousAvatar"
-                                                alt="Presenting the broken author avatar :D">
-                                        </div>
-                                        <div class="autor__info">
-                                            <a
-                                                [routerLink]="['/', {outlets: {'main': ['dashboard', 'profile', userInterested?._id ]}}]">
-                                                <p class="name">
-                                                    {{userInterested?.name}}
-                                                </p>
-                                            </a>
-                                            <!-- <p class="ammount">{{fromNow(pu?.createdAt)}}</p> -->
-                                        </div>
-                                    </div>
-
-                                </ng-container>
-                            </div>
-                        </div>
-
                     </aside>
                     <!-- end /.aside -->
+                    <div *ngIf="type === 'company' && companyView === 'interested-people'"
+                        class="author-card sidebar-card">
+                        <div class="card-title">
+                            <h4>Interested Professionals:
+                                {{ details?.usersInterestedInCompany?.length }}</h4>
+                            <br />
+
+                            <ng-container class="row" *ngFor="let userInterested of usersInterestedInCompany">
+                                <div class="col-md-12" style="margin-bottom: 10px;">
+                                    <div class="author_avatar_comment" style="vertical-align: middle;">
+                                        <img [src]="userInterested?.avatar ? ((codemarketBucketURL + userInterested.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                                            alt="Presenting the broken author avatar :D">
+                                    </div>
+                                    <div class="autor__info">
+                                        <a
+                                            [routerLink]="['/', {outlets: {'main': ['dashboard', 'profile', userInterested?._id ]}}]">
+                                            <p class="name">
+                                                {{userInterested?.name}}
+                                            </p>
+                                        </a>
+                                        <!-- <p class="ammount">{{fromNow(pu?.createdAt)}}</p> -->
+                                    </div>
+                                </div>
+
+                            </ng-container>
+                        </div>
+                    </div>
+
+                    <!-- end /.item-info -->
                 </div>
-                <!-- end /.col-md-4 -->
+                <!-- end /.col-md-8 -->
+
             </div>
-            <!-- end /.row -->
         </div>
+        <!-- end /.row -->
         <!-- end /.container -->
     </section>
     <!--===========================================
@@ -550,7 +626,7 @@
             </div>
         </div>
     </section> -->
-    <div style="background: white; margin-top: 30px;">
+    <div style="background: white;">
         <div class="tab-pane fade show product-tab">
             <div class="thread">
                 <ul class="media-list thread-list" style="list-style: none;">
@@ -593,7 +669,7 @@
 
 <!-- Implementation of Q&A Start Here -->
 <ng-template #questionAnswersTemplate let-qa="details">
-    <div class="tab-pane product-tab" id="product-faq" style="background: white; margin-top: 30px;">
+    <div class="tab-pane product-tab" id="product-faq" style="background: white;">
         <div class="tab-content-wrapper">
             <h4 style="padding-bottom: 15px;">Q & A</h4>
 
@@ -601,7 +677,8 @@
                 <mat-expansion-panel *ngFor="let q of questionsList">
                     <mat-expansion-panel-header>
                         <div style="padding: 0; width: 100%;" fxLayout="row" [fxLayoutAlign]="'center center'">
-                            <app-editor fxFlex="92" (output)="questionData = $event;" [readOnly]="q['edit'] ? false : true" [data]="q?.text" [id]="q['edit']+ q?._id">
+                            <app-editor fxFlex="92" (output)="questionData = $event;"
+                                [readOnly]="q['edit'] ? false : true" [data]="q?.text" [id]="q['edit']+ q?._id">
                             </app-editor>
                             <div fxFlex="8">
                                 <div fxLayout="column" [fxLayoutAlign]="'center center'" style="padding-right: 5px;">
@@ -613,8 +690,8 @@
                                             {{ q?.answers ? q?.answers?.length : 0 }}
                                             {{')'}}</span> -->
                                     </a>
-                                    <a fxFlex="50" style="padding: 0 8px; text-decoration: none;"
-                                        *ngIf="!q?.show" mat-button (click)="deleteQuestionOrAnswer(q)">
+                                    <a fxFlex="50" style="padding: 0 8px; text-decoration: none;" *ngIf="!q?.show"
+                                        mat-button (click)="deleteQuestionOrAnswer(q)">
                                         <i style="font-size: 1.2rem !important;" class="fad fa-minus-octagon fa-lg"></i>
                                     </a>
                                     <!-- <a fxFlex="33" style="padding: 0 8px; text-decoration: none;"
@@ -629,11 +706,11 @@
                             </div>
                         </div>
                     </mat-expansion-panel-header>
-                    <br/>
+                    <br />
                     <button *ngIf="q?.edit" type="button" style="float: right;" class="btn btn--sm btn--round"
-                    (click)="updateQuestionOrAnswer(q, false)">Update
-                    Question</button>
-                    <br/>
+                        (click)="updateQuestionOrAnswer(q, false)">Update
+                        Question</button>
+                    <br />
                     <div class="panel-body">
 
                         <div class="thread">

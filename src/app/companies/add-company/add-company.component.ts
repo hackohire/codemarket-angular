@@ -43,8 +43,8 @@ export class AddCompanyComponent implements OnInit {
     return this.companyForm.get('_id');
   }
 
-  get howCanYouHelpFormControl() {
-    return this.companyForm.get('howCanYouHelp');
+  get descriptionFormControl() {
+    return this.companyForm.get('description');
   }
 
   get ideasFormControl() {
@@ -138,11 +138,10 @@ export class AddCompanyComponent implements OnInit {
 
   async companyFormInitialization(i: Company) {
     this.companyForm = await new FormGroup({
-      title: new FormControl(i && i.title ? i.title : '', Validators.required),
       name: new FormControl(i && i.name ? i.name : '', Validators.required),
       type: new FormControl(i && i.type ? i.type : ''),
       cities: this.fb.array(i && i.cities && i.cities.length ? i.cities : []),
-      howCanYouHelp: new FormControl(i && i.howCanYouHelp ? i.howCanYouHelp : ''),
+      description: new FormControl(i && i.description ? i.description : ''),
       // ideas: new FormControl(i && i.ideas ? i.ideas : ''),
       // questions: new FormControl(i && i.questions ? i.questions : ''),
       createdBy: new FormControl(i && i.createdBy && i.createdBy._id ? i.createdBy._id : ''),
@@ -178,8 +177,8 @@ export class AddCompanyComponent implements OnInit {
 
     // this.statusFormControl.setValue(status);
 
-    if (!this.howCanYouHelpFormControl.value) {
-      this.howCanYouHelpFormControl.setValue([]);
+    if (!this.descriptionFormControl.value) {
+      this.descriptionFormControl.setValue([]);
     }
 
     if (this.authService.loggedInUser && !this.createdBy.value) {

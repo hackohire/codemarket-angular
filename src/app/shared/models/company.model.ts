@@ -12,18 +12,13 @@ interface Location {
 }
 
 export interface Company {
-    title: string;
     name: string;
     type: CompanyTypes;
-    howCanYouHelp: [{
+    description: [{
         type: string;
         data: BlockToolData
     }];
     ideas: [{
-        type: string;
-        data: BlockToolData
-    }];
-    description: [{
         type: string;
         data: BlockToolData
     }];

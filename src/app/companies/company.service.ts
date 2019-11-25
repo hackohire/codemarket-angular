@@ -16,13 +16,12 @@ export class CompanyService {
   fragment Company on Company {
     _id
     name
-    title
     type
     cities {
       name
       _id
     }
-    howCanYouHelp {
+    description {
       ...Description
     }
     ideas {

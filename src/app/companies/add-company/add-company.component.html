@@ -5,9 +5,6 @@
     <div class="row">
         <div class="col-md-12">
             <div [formGroup]="companyForm" class="company-form-area">
-                <mat-form-field class="field-full-width">
-                    <input type="text" matInput formControlName="title" placeholder="Title">
-                </mat-form-field>
 
                 <mat-form-field class="field-full-width">
                     <input type="text" matInput formControlName="name" placeholder="Name">
@@ -70,15 +67,15 @@
                 <br />
 
                 
-                <h6>How can you help:</h6>
+                <h6>Description</h6>
                 <br />
 
-                <app-editor *ngIf="howCanYouHelpFormControl?.value && edit; else add" (output)="howCanYouHelpFormControl.setValue($event)"
-                    [data]="howCanYouHelpFormControl?.value" [id]="'edit-company-editor'"></app-editor>
+                <app-editor *ngIf="descriptionFormControl?.value && edit; else add" (output)="descriptionFormControl.setValue($event)"
+                    [data]="descriptionFormControl?.value" [id]="'edit-company-editor'"></app-editor>
 
 
                 <ng-template #add>
-                    <app-editor *ngIf="!edit" (output)="howCanYouHelpFormControl.setValue($event)" [id]="'company-editor'"></app-editor>
+                    <app-editor *ngIf="!edit" (output)="descriptionFormControl.setValue($event)" [id]="'company-editor'"></app-editor>
                 </ng-template>
 
                 <br />

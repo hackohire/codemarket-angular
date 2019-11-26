@@ -12,23 +12,24 @@ interface Location {
 }
 
 export interface Company {
-    name: string;
-    type: CompanyTypes;
-    description: [{
+    name?: string;
+    type?: CompanyTypes;
+    description?: [{
         type: string;
         data: BlockToolData
     }];
-    ideas: [{
+    ideas?: [{
         type: string;
         data: BlockToolData
     }];
     _id?: string;
-    status: PostStatus;
-    createdBy: User;
-    createdAt: string;
-    updatedAt: string;
-    cities: City[];
-    location?: Location
+    status?: PostStatus;
+    createdBy?: User;
+    createdAt?: string;
+    updatedAt?: string;
+    cities?: City[];
+    location?: Location;
+    cover: string;
 }
 
 export enum CompanyTypes {

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ViewChildren } from '@angular/core';
 import { Observable, of, Subscription } from 'rxjs';
 import { AppState } from 'src/app/core/store/state/app.state';
 import { Store } from '@ngrx/store';
@@ -12,7 +12,7 @@ import { CommentService } from 'src/app/shared/services/comment.service';
 import { environment } from 'src/environments/environment';
 import { ShareService } from '@ngx-share/core';
 import { selectSelectedPost } from 'src/app/core/store/selectors/post.selectors';
-import { GetPostById, SetSelectedPost } from 'src/app/core/store/actions/post.actions';
+import { GetPostById, SetSelectedPost, UpdatePost } from 'src/app/core/store/actions/post.actions';
 import { Post } from 'src/app/shared/models/post.model';
 import { UserService } from 'src/app/user/user.service';
 import { MatDialog } from '@angular/material';
@@ -24,6 +24,7 @@ import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { CompanyService } from '../../companies/company.service';
 import { Company } from '../../shared/models/company.model';
 import { User } from '../../shared/models/user.model';
+import { Storage } from 'aws-amplify';
 
 @Component({
   selector: 'app-details',
@@ -40,8 +41,11 @@ export class DetailsComponent implements OnInit, OnDestroy {
   companyDetails$: Observable<Company>;
   usersInterestedInCompany: User[];
   companyView: string;
+  @ViewChild('coverPic', { static: false }) coverPic;
+  selectedCoverPic: string = '';
+  uploadedCoverUrl: string = '';
 
-  /** */
+
 
   postDetails: Post | Company | any;
   isUserAttending: boolean; /** Only for the event */
@@ -131,7 +135,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
           if (q && q.view) {
             this.companyView = q.view;
           } else {
-            this.router.navigate(['./'], {queryParams: {view: 'description'}, queryParamsHandling: 'merge', relativeTo: this.activatedRoute})
+            this.router.navigate(['./'], { queryParams: { view: 'description' }, queryParamsHandling: 'merge', relativeTo: this.activatedRoute })
           }
         })
       );
@@ -347,7 +351,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
             if (d) {
               if (d.isQuestion) {
                 this.questionsList.push(d);
-              } else if(d.isAnswer) {
+              } else if (d.isAnswer) {
                 question.answers.push(d)
               }
             }
@@ -360,18 +364,18 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
   /** Update Question And Answer
    * @param qa - object if question / answer
-   * @param isAnswe - to check if the object is qustion / answer
+   * @param isAnswer - to check if the object is qustion / answer
    */
   updateQuestionOrAnswer(qa, isAnswer) {
-      this.commentService.updateQuestionOrAnswer(qa._id, isAnswer ? this.answerData : this.questionData).pipe(
-        tap((d) => {
-          console.log(d);
-          if (d) {
-            qa['edit'] = false;
-            qa.text = d.text
-          }
-        })
-      ).subscribe();
+    this.commentService.updateQuestionOrAnswer(qa._id, isAnswer ? this.answerData : this.questionData).pipe(
+      tap((d) => {
+        console.log(d);
+        if (d) {
+          qa['edit'] = false;
+          qa.text = d.text
+        }
+      })
+    ).subscribe();
   }
 
 
@@ -384,7 +388,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
           if (d) {
             if (answerOrQuestion && answerOrQuestion.isAnswer) {
               console.log(answerOrQuestion.answers);
-              answerOrQuestion.answers = [...answerOrQuestion.answers.filter(temp => answerOrQuestion._id !== temp._id )];
+              answerOrQuestion.answers = [...answerOrQuestion.answers.filter(temp => answerOrQuestion._id !== temp._id)];
               console.log(answerOrQuestion.answers);
             } else {
               this.questionsList = this.questionsList.filter(temp => answerOrQuestion._id !== temp._id)
@@ -392,7 +396,80 @@ export class DetailsComponent implements OnInit, OnDestroy {
           }
         })
       ).subscribe()
-      });
+    });
+  }
+
+  /** On Picture Added */
+  onFilesAdded() {
+    // const files: { [key: string]: File } = this.file.nativeElement.files;
+    const pic: File = this.coverPic.nativeElement.files[0];
+    this.selectedCoverPic = URL.createObjectURL(pic);
+    console.log(pic);
+
+    const fileNameSplitArray = pic.name.split('.');
+    const fileExt = fileNameSplitArray.pop();
+    const fileName = fileNameSplitArray[0] + '-' + new Date().toISOString() + '.' + fileExt;
+
+    Storage.vault.put(fileName, pic, {
+
+      bucket: 'codemarket-files',
+      path: 'cover',
+      level: 'public',
+
+      contentType: pic.type,
+
+    }).then((uploaded: any) => {
+      console.log(uploaded);
+      console.log('uploaded', uploaded);
+      this.uploadedCoverUrl = uploaded.key;
+    });
+
+
+    // this.coverPic.nativeElement.value = null;
+
+    // console.log(this.files);
+  }
+
+  resize(e) {
+    console.log(e);
+
+    if (e.target) {
+      // e.target.style.left = e.clientX - e.target.offsetWidth / 2 + 'px';
+      // e.target.style.top = e.clientY - e.target.offsetHeight / 2 + 'px';
+      const top = e.offsetY;
+      const left = e.offsetX;
+
+      var y1 = 300;
+      var y2 = e.target.naturalHeight;
+      var x1 = 820
+      var x2 = e.target.naturalWidth;;
+      if (top >= 0) {
+        e.target.style.top = '0px';
+      }
+      if (top <= (y1 - y2)) {
+        e.target.style.top = (y1 - y2).toString() + 'px';
+      }
+      if (left >= 0) {
+        e.target.style.left = '0px';
+      };
+      if (left <= (x1 - x2)) {
+        e.target.style.left = (x1 - x2).toString() + 'px';
+      }
+    }
+  }
+
+  updateCover() {
+    const companyDetails = {
+      _id: this.postDetails._id,
+      name: this.postDetails.name,
+      cover: this.uploadedCoverUrl
+    }
+    this.companyService.updateCompany(companyDetails).subscribe(c => {
+      this.postDetails = c;
+      this.companyDetails$ = of(c);
+      this.updateCover = null;
+      this.uploadedCoverUrl = null;
+    })
   }
 
 }

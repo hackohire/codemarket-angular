@@ -17,6 +17,7 @@ export class CompanyService {
     _id
     name
     type
+    cover
     cities {
       name
       _id

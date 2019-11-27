@@ -13,99 +13,14 @@ import { productConstants } from '../constants/product_constants';
 import { AuthService } from '../../core/services/auth.service';
 import { of } from 'rxjs';
 import { PostType } from '../models/post-types.enum';
+import { appConstants } from '../constants/app_constants';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PostService {
 
-  postFileds = gql`
-  fragment Post on Post {
-    _id
-    name
-    type
-    categories
-    description {
-      ...Description
-    }
-    price
-    status
-    createdAt
-    updatedAt
-    tags {
-      name
-      _id
-    }
-    support {
-      time
-      description {
-        ...Description
-      }
-    }
-    likeCount
-    createdBy {
-      _id
-      name
-      avatar
-      currentJobDetails {
-        jobProfile
-      }
-    }
-    purchasedBy {
-      name
-      _id
-      createdAt
-      avatar
-    }
-    slug
-    comments {
-      text {
-        ...Description
-      }
-      _id
-      type
-      referenceId
-      parentId
-      createdAt
-      createdBy {
-        _id
-        name
-        avatar
-      }
-      blockId
-      blockSpecificComment
-    }
-
-    dateRange
-    address
-    eventType
-    usersAttending {
-      name
-      _id
-      avatar
-    }
-    location {
-      longitude
-      latitude
-      address
-    }
-
-    company {
-      name
-      _id
-    }
-    salaryRangeFrom
-    salaryRangeTo
-    cities {
-      name
-      _id
-    }
-    jobProfile
-
-  }
-  ${description}
-  `;
-
+  postFields = appConstants.postQuery;
   constructor(
     private apollo: Apollo,
     private store: Store<AppState>,
@@ -123,7 +38,7 @@ export class PostService {
               ...Post
             }
           }
-          ${this.postFileds}
+          ${this.postFields}
         `,
         variables: {
           userId,
@@ -149,7 +64,7 @@ export class PostService {
               ...Post
             }
           }
-          ${this.postFileds}
+          ${this.postFields}
         `,
         variables: {
           postTye
@@ -172,7 +87,7 @@ export class PostService {
               ...Post
             }
           }
-          ${this.postFileds}
+          ${this.postFields}
         `,
         variables: {
           PostId
@@ -194,7 +109,7 @@ export class PostService {
             ...Post
           }
         }
-        ${this.postFileds}
+        ${this.postFields}
       `,
       variables: {
         post
@@ -213,7 +128,7 @@ export class PostService {
               ...Post
             }
           }
-          ${this.postFileds}
+          ${this.postFields}
         `,
         variables: {
           post

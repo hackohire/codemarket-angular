@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild, ViewChildren } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ViewChildren, ElementRef } from '@angular/core';
 import { Observable, of, Subscription } from 'rxjs';
 import { AppState } from 'src/app/core/store/state/app.state';
 import { Store } from '@ngrx/store';
@@ -42,6 +42,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
   usersInterestedInCompany: User[];
   companyView: string;
   @ViewChild('coverPic', { static: false }) coverPic;
+  @ViewChild('cover', { static: false }) cover: ElementRef;
   selectedCoverPic: string = '';
   uploadedCoverUrl: string = '';
 
@@ -431,31 +432,31 @@ export class DetailsComponent implements OnInit, OnDestroy {
   }
 
   resize(e) {
-    console.log(e);
+    // console.log(e);
 
-    if (e.target) {
-      // e.target.style.left = e.clientX - e.target.offsetWidth / 2 + 'px';
-      // e.target.style.top = e.clientY - e.target.offsetHeight / 2 + 'px';
-      const top = e.offsetY;
-      const left = e.offsetX;
+    // if (e.target) {
+    //   // e.target.style.left = e.clientX - e.target.offsetWidth / 2 + 'px';
+    //   // e.target.style.top = e.clientY - e.target.offsetHeight / 2 + 'px';
+    //   const top = e.offsetY - e.pageX;
+    //   const left = e.offsetX - e.pageY;
 
-      var y1 = 300;
-      var y2 = e.target.naturalHeight;
-      var x1 = 820
-      var x2 = e.target.naturalWidth;;
-      if (top >= 0) {
-        e.target.style.top = '0px';
-      }
-      if (top <= (y1 - y2)) {
-        e.target.style.top = (y1 - y2).toString() + 'px';
-      }
-      if (left >= 0) {
-        e.target.style.left = '0px';
-      };
-      if (left <= (x1 - x2)) {
-        e.target.style.left = (x1 - x2).toString() + 'px';
-      }
-    }
+    //   var y1 = 300;
+    //   var y2 = e.target.naturalHeight;
+    //   var x1 = 820
+    //   var x2 = e.target.naturalWidth;
+    //   if (top >= 0) {
+    //     e.target.style.top = '0px';
+    //   }
+    //   if (top <= (y1 - y2)) {
+    //     e.target.style.top = (y1 - y2).toString() + 'px';
+    //   }
+    //   if (left >= 0) {
+    //     e.target.style.left = '0px';
+    //   };
+    //   if (left <= (x1 - x2)) {
+    //     e.target.style.left = (x1 - x2).toString() + 'px';
+    //   }
+    // }
   }
 
   updateCover() {

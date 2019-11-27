@@ -6,6 +6,7 @@ import gql from 'graphql-tag';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import Peer from 'peerjs';
+import { appConstants } from '../shared/constants/app_constants';
 @Injectable({
   providedIn: 'root'
 })
@@ -41,6 +42,18 @@ export class UserService {
       id
       _id
       status
+    }
+    businessAreaInterests {
+      name
+      _id
+    }
+    leadershipAreaInterests {
+      name
+      _id
+    }
+    socialImpactInterests {
+      name
+      _id
     }
   `;
 
@@ -108,13 +121,49 @@ export class UserService {
           }
         }
       `,
-      variables: {
-        userId
-      }
+        variables: {
+          userId
+        }
       }
     ).pipe(
       map((d: any) => {
         return d.data.getUserById;
+      })
+    );
+  }
+
+  getMyProfileInfo(userId: string): Observable<any> {
+    return this.apollo.query(
+      {
+        query: gql`
+        query getMyProfileInfo($userId: String) {
+          getMyProfileInfo(userId: $userId) {
+            dreamJob {
+              ...Post
+            }
+            businessAreaInterests {
+              name
+              _id
+            }
+            leadershipAreaInterests {
+              name
+              _id
+            }
+            socialImpactInterests {
+              name
+              _id
+            }
+          }
+        }
+        ${appConstants.postQuery}
+      `,
+        variables: {
+          userId
+        }
+      }
+    ).pipe(
+      map((d: any) => {
+        return d.data.getMyProfileInfo;
       })
     );
   }

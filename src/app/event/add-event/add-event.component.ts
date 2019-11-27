@@ -1,14 +1,14 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { BreadCumb } from 'src/app/shared/models/bredcumb.model';
 import { FormGroup, FormControl, Validators, FormArray, FormBuilder } from '@angular/forms';
-import { Event, EventTypes } from 'src/app/shared/models/event.model';
+import { EventTypes } from 'src/app/shared/models/event.model';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/core/store/state/app.state';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Subscription, of } from 'rxjs';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { switchMap, tap, startWith, map } from 'rxjs/operators';
 import { FormService } from 'src/app/shared/services/form.service';
 import { Tag } from 'src/app/shared/models/product.model';
@@ -97,8 +97,7 @@ export class AddEventComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private formService: FormService,
     public locationService: LocationService,
-    private companyService: CompanyService,
-    private router: Router
+    private companyService: CompanyService
   ) {
     this.breadcumb = {
       title: 'Add Event Details',

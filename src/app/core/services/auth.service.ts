@@ -126,6 +126,18 @@ export class AuthService {
               likeCount
               createdAt
               stripeId
+              businessAreaInterests {
+                name
+                _id
+              }
+              leadershipAreaInterests {
+                name
+                _id
+              }
+              socialImpactInterests {
+                name
+                _id
+              }
             }
           }`,
           variables: {

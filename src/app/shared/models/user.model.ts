@@ -1,7 +1,9 @@
+import { Tag } from './product.model';
+
 export interface User {
     _id?: string;
-    email: string;
-    name: string;
+    email?: string;
+    name?: string;
     email_verified?: boolean;
     sub?: string;
     // __typename?: string;
@@ -15,6 +17,9 @@ export interface User {
     roles?: Roles[];
     stripeId?: string;
     subscription?: Subscription[];
+    businessAreaInterests?: Tag[];
+    leadershipAreaInterests?: Tag[];
+    socialImpactInterests?: Tag[];
 }
 
 interface Subscription {

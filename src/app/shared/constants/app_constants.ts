@@ -1,4 +1,6 @@
 import { PostType } from '../models/post-types.enum';
+import gql from 'graphql-tag';
+import { description } from './fragments_constatnts';
 
 export const appConstants = {
 
@@ -150,5 +152,92 @@ export const appConstants = {
         "ras",
         "sun",
         "tga"
-    ]
+    ],
+
+    postQuery: gql`
+    fragment Post on Post {
+      _id
+      name
+      type
+      categories
+      description {
+        ...Description
+      }
+      price
+      status
+      createdAt
+      updatedAt
+      tags {
+        name
+        _id
+      }
+      support {
+        time
+        description {
+          ...Description
+        }
+      }
+      likeCount
+      createdBy {
+        _id
+        name
+        avatar
+        currentJobDetails {
+          jobProfile
+        }
+      }
+      purchasedBy {
+        name
+        _id
+        createdAt
+        avatar
+      }
+      slug
+      comments {
+        text {
+          ...Description
+        }
+        _id
+        type
+        referenceId
+        parentId
+        createdAt
+        createdBy {
+          _id
+          name
+          avatar
+        }
+        blockId
+        blockSpecificComment
+      }
+  
+      dateRange
+      address
+      eventType
+      usersAttending {
+        name
+        _id
+        avatar
+      }
+      location {
+        longitude
+        latitude
+        address
+      }
+  
+      company {
+        name
+        _id
+      }
+      salaryRangeFrom
+      salaryRangeTo
+      cities {
+        name
+        _id
+      }
+      jobProfile
+  
+    }
+    ${description}
+    `
 };

@@ -24,7 +24,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
 
   breadcumb: BreadCumb;
   cartProductsList: Product[];
-  @ViewChild('paypal', { static: false }) paypalElement: ElementRef;
+  // @ViewChild('paypal', { static: false }) paypalElement: ElementRef;
   @ViewChild('successfulPayment', { static: false }) successfulPayment: SwalComponent;
   successfulPurchasedProducts = [];
   subscription$: Subscription;

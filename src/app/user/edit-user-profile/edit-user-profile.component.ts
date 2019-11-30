@@ -9,7 +9,7 @@ import { UpdateUser } from 'src/app/core/store/actions/user.actions';
 import { MatChipInputEvent } from '@angular/material';
 import { AppState } from 'src/app/core/store/state/app.state';
 import { User } from 'src/app/shared/models/user.model';
-import { Storage } from 'aws-amplify';
+import  Storage  from '@aws-amplify/storage';
 import { environment } from 'src/environments/environment';
 
 @Component({

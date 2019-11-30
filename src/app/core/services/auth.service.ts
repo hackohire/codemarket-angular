@@ -5,7 +5,7 @@ import gql from 'graphql-tag';
 import { map, catchError } from 'rxjs/operators';
 import { of } from 'rxjs/internal/observable/of';
 import { CognitoUser, CognitoUserSession } from 'amazon-cognito-identity-js';
-import { Auth } from 'aws-amplify';
+import Auth from '@aws-amplify/auth';
 import { environment } from 'src/environments/environment';
 import { Store } from '@ngrx/store';
 import { AppState } from '../store/state/app.state';

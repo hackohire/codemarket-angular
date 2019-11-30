@@ -24,7 +24,7 @@ import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { CompanyService } from '../../companies/company.service';
 import { Company } from '../../shared/models/company.model';
 import { User } from '../../shared/models/user.model';
-import { Storage } from 'aws-amplify';
+import  Storage  from '@aws-amplify/storage';
 
 @Component({
   selector: 'app-details',
@@ -404,7 +404,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
   onFilesAdded() {
     // const files: { [key: string]: File } = this.file.nativeElement.files;
     const pic: File = this.coverPic.nativeElement.files[0];
-    this.selectedCoverPic = URL.createObjectURL(pic);
+    this.selectedCoverPic = window.URL.createObjectURL(pic);
     console.log(pic);
 
     const fileNameSplitArray = pic.name.split('.');

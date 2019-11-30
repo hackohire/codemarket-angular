@@ -1,8 +1,9 @@
-import { Component, ViewChild, ElementRef, Inject } from '@angular/core';
+import { Component, ViewChild, ElementRef, Inject, PLATFORM_ID } from '@angular/core';
 import { MatButton, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { BreadCumb } from '../shared/models/bredcumb.model';
 import { environment } from 'src/environments/environment';
 import { AuthService } from '../core/services/auth.service';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-video-chat',
@@ -34,7 +35,8 @@ export class VideoChatComponent {
   constructor(
     public authService: AuthService,
     public dialogRef: MatDialogRef<VideoChatComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    @Inject(PLATFORM_ID) private platformId: Object,
   ) {
 
     console.log(this.data);
@@ -72,40 +74,45 @@ export class VideoChatComponent {
 
   async call() {
 
-    this.stream = await navigator.mediaDevices.getUserMedia(this.constraints);
-    // this.remoteVideo.nativeElement.srcObject = this.stream;
-    this.ongoingCallObj = this.data.peer.call(this.data.authorId, this.stream);
+    if (isPlatformBrowser(this.platformId)) {
+      this.stream = await navigator.mediaDevices.getUserMedia(this.constraints);
+      // this.remoteVideo.nativeElement.srcObject = this.stream;
+      this.ongoingCallObj = this.data.peer.call(this.data.authorId, this.stream);
 
-    this.ongoingCallObj.on('stream', (stream) => {
-      // this.stream = stream;
-      this.remoteVideo.nativeElement.srcObject = stream;
-      console.log(stream);
-    });
+      this.ongoingCallObj.on('stream', (stream) => {
+        // this.stream = stream;
+        this.remoteVideo.nativeElement.srcObject = stream;
+        console.log(stream);
+      });
 
-    this.ongoingCallObj.on('close', () => {
-      this.hangUp();
-    });
+      this.ongoingCallObj.on('close', () => {
+        this.hangUp();
+      });
+    }
   }
 
   async answer() {
 
-    this.stream = await navigator.mediaDevices.getUserMedia(this.constraints);
+    if (isPlatformBrowser(this.platformId)) {
 
-    this.data.call.answer(this.stream);
+      this.stream = await navigator.mediaDevices.getUserMedia(this.constraints);
 
-    this.data.call.on('stream', (stream) => {
-      // Display the stream of the other user in the peer-camera video element !
-      // this.stream = stream;
-      this.remoteVideo.nativeElement.srcObject = stream;
-    });
+      this.data.call.answer(this.stream);
 
-    // Handle when the call finishes
-    this.data.call.on('close', () => {
-      alert('The videocall has finished');
-      this.hangUp();
-      // this.hangUp();
-    });
+      this.data.call.on('stream', (stream) => {
+        // Display the stream of the other user in the peer-camera video element !
+        // this.stream = stream;
+        this.remoteVideo.nativeElement.srcObject = stream;
+      });
 
+      // Handle when the call finishes
+      this.data.call.on('close', () => {
+        alert('The videocall has finished');
+        this.hangUp();
+        // this.hangUp();
+      });
+
+    }
 
   }
 
@@ -146,28 +153,31 @@ export class VideoChatComponent {
   }
 
   async screenShare() {
-    const videoTrack = this.stream.getVideoTracks()[0];
 
-    // @ts-ignore
-    navigator.mediaDevices.getDisplayMedia({video: true}).then((screenStream: MediaStream) => {
+    if (isPlatformBrowser(this.platformId)) {
+      const videoTrack = this.stream.getVideoTracks()[0];
 
-      const screen = screenStream.getVideoTracks()[0];
-      // this.remoteVideo.nativeElement.srcObject = a;
+      // @ts-ignore
+      navigator.mediaDevices.getDisplayMedia({ video: true }).then((screenStream: MediaStream) => {
 
-      if (this.data.call) {
-        console.log(this.data.call.peerConnection.getSenders());
-        const sender = this.data.call.peerConnection.getSenders().find((s) => {
-          return s.track.kind === videoTrack.kind;
-        });
-        sender.replaceTrack(screen);
-      } else {
-        console.log(this.data.peer.connections[this.data.authorId][0].peerConnection.getSenders());
-        const sender = this.data.peer.connections[this.data.authorId][0].peerConnection.getSenders().find((s) => {
-          return s.track.kind === videoTrack.kind;
-        });
-        sender.replaceTrack(screen);
-      }
-    });
+        const screen = screenStream.getVideoTracks()[0];
+        // this.remoteVideo.nativeElement.srcObject = a;
+
+        if (this.data.call) {
+          console.log(this.data.call.peerConnection.getSenders());
+          const sender = this.data.call.peerConnection.getSenders().find((s) => {
+            return s.track.kind === videoTrack.kind;
+          });
+          sender.replaceTrack(screen);
+        } else {
+          console.log(this.data.peer.connections[this.data.authorId][0].peerConnection.getSenders());
+          const sender = this.data.peer.connections[this.data.authorId][0].peerConnection.getSenders().find((s) => {
+            return s.track.kind === videoTrack.kind;
+          });
+          sender.replaceTrack(screen);
+        }
+      });
+    }
     // this.stream = a;
     // this.data.call.answer(this.stream);
     // console.log(a);

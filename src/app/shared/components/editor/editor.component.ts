@@ -8,7 +8,7 @@ import Marker from '@editorjs/marker';
 import Table from '@editorjs/table';
 import Embed from '@editorjs/embed';
 // import Warning from '@editorjs/warning';
-import { Storage } from 'aws-amplify';
+import  Storage  from '@aws-amplify/storage';
 import { environment } from 'src/environments/environment';
 import { CodeWithLanguageSelection } from 'src/app/insert-code-snippet';
 import { HighlightJS } from 'ngx-highlightjs';

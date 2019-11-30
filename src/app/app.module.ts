@@ -41,6 +41,7 @@ import { AmplifyModule } from './core/amplify/amplify.module';
     AboutUsComponent
   ],
   imports: [
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     CoreModule,
     SharedModule,

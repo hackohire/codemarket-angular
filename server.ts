@@ -30,7 +30,8 @@ const domino = require('domino');
 import fs from 'fs';
 const template = fs.readFileSync(join(DIST_FOLDER, 'index.html')).toString();
 import { Blob } from "blob-polyfill";
-import 'localstorage-polyfill'
+import 'localstorage-polyfill';
+const fetch = require('node-fetch');
 
 // var Blob = require('blob');
 // const template = fs.readFileSync(path.join(__dirname, join(DIST_FOLDER, 'index.html'))).toString();
@@ -45,7 +46,17 @@ global['Blob'] = Blob;
 global['Event'] = null;
 global['KeyboardEvent'] = null;
 global['localStorage'] = localStorage;
+global['fetch'] = fetch;
 
+global["getComputedStyle"] = () => {
+  return {
+    getPropertyValue() {
+      return "";
+    }
+  };
+};
+
+global['window']['LOG_LEVEL'] = 'DEBUG';
 // * NOTE :: leave this as require() since this file is built Dynamically from webpack
 const {AppServerModuleNgFactory, LAZY_MODULE_MAP, ngExpressEngine, provideModuleMap} = require('./dist/server/main');
 

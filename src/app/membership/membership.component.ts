@@ -43,7 +43,7 @@ export class MembershipComponent implements OnInit {
     public membershipService: MembershipService,
     public authService: AuthService,
     public activatedRoute: ActivatedRoute,
-    private sellingService: SellingProductsService
+    private sellingService: SellingProductsService,
     @Inject(PLATFORM_ID) private _platformId: Object,
     private dialog: MatDialog
   ) {

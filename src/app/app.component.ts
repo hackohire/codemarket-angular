@@ -25,14 +25,14 @@ export class AppComponent implements OnDestroy {
     private userService: UserService
   ) {
 
-    const source = timer(1200000);
+    // const source = timer(1200000);
 
-    this.subscription.add(
-      source.subscribe(val => {
-        this.authService.checkIfUserIsLoggedIn();
-        console.log('===========================================================', val);
-      })
-    );
+    // this.subscription.add(
+    //   source.subscribe(val => {
+    //     this.authService.checkIfUserIsLoggedIn();
+    //     console.log('===========================================================', val);
+    //   })
+    // );
 
     this.subscription.add(
       this.authService.loggedInUser$.pipe(

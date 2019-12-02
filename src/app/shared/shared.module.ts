@@ -22,6 +22,7 @@ import { PaypalSubscriptionDirective } from './directives/paypal-button.directiv
 import { VideoChatComponent } from '../video-chat/video-chat.component';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { AddPostMenuComponent } from './components/add-post-menu/add-post-menu.component';
+import { SoftwareDevMenuComponent } from './components/software-dev-menu/software-dev-menu.component';
 import { CompaniesListComponent } from '../companies/companies-list/companies-list.component';
 import { Ng5SliderModule } from 'ng5-slider';
 import { NgSelectModule } from '@ng-select/ng-select';
@@ -38,7 +39,7 @@ export function hljsLanguages() {
   ];
 }
 @NgModule({
-  declarations: [BreadcumbComponent, EditorComponent, CommentComponent, DatatableComponent, SafePipe, LikeDislikeComponent, PaypalSubscriptionDirective, VideoChatComponent, AddPostMenuComponent, CompaniesListComponent],
+  declarations: [BreadcumbComponent, EditorComponent, CommentComponent, DatatableComponent, SafePipe, LikeDislikeComponent, PaypalSubscriptionDirective, VideoChatComponent, AddPostMenuComponent, SoftwareDevMenuComponent, CompaniesListComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -74,6 +75,7 @@ export function hljsLanguages() {
     LikeDislikeComponent,
     VideoChatComponent,
     AddPostMenuComponent,
+    SoftwareDevMenuComponent,
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,

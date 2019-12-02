@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { Hub } from '@aws-amplify/core';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
@@ -14,6 +14,7 @@ import { selectLoggedInUser } from '../store/selectors/user.selector';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { User } from '../../shared/models/user.model';
 import { Router } from '@angular/router';
+import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +27,8 @@ export class AuthService {
   constructor(
     private apollo: Apollo,
     private store: Store<AppState>,
-    private router: Router
+    private router: Router,
+    @Inject(PLATFORM_ID) private _platformId: Object
     ) {
 
     this.loggedInUser$ = this.store.select(selectLoggedInUser);
@@ -154,7 +156,9 @@ export class AuthService {
   }
 
   setIdTokenToLocalStorage(idToken: string): void {
-    localStorage.setItem('idToken', idToken);
+    if (isPlatformBrowser(this._platformId)) {
+      localStorage.setItem('idToken', idToken);
+    }
   }
 
   login(): void {
@@ -169,7 +173,9 @@ export class AuthService {
   logout(): void {
     Auth.signOut().then(d => {
       console.log('user has been signed out');
-      localStorage.clear();
+      if (isPlatformBrowser(this._platformId)) {
+        localStorage.clear();
+      }
       this.store.dispatch(SetLoggedInUser({payload: null}));
       this.router.navigate(['/']);
     });
@@ -206,7 +212,9 @@ export class AuthService {
         return true;
       }).catch((r) => {
         console.log(r);
-        localStorage.clear();
+        if (isPlatformBrowser(this._platformId)) {
+          localStorage.clear();
+        }
         this.store.dispatch(SetLoggedInUser({payload: null}));
 
         /** Checking if Auth Guard wants to redirect user to login */

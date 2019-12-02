@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild, ElementRef, AfterViewInit, PLATFORM_ID } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormGroup, FormBuilder, FormArray, Validators, FormControl } from '@angular/forms';
 import { environment } from '../../../environments/environment';
@@ -11,6 +11,7 @@ import { SetLoggedInUser } from '../../core/store/actions/user.actions';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { Router } from '@angular/router';
 import { appConstants } from '../../shared/constants/app_constants';
+import { isPlatformBrowser } from '@angular/common';
 declare var Stripe;
 const PUBLIC_KEY = environment.stripe_public_key;
 const stripe = Stripe(PUBLIC_KEY);
@@ -68,7 +69,8 @@ export class SubscriptionDialogComponent implements OnInit, AfterViewInit {
     private http: HttpClient,
     private membershipService: MembershipService,
     private store: Store<AppState>,
-    private router: Router
+    private router: Router,
+    @Inject(PLATFORM_ID) private _platformId: Object
   ) { }
 
 
@@ -188,7 +190,9 @@ export class SubscriptionDialogComponent implements OnInit, AfterViewInit {
       name: this.data.plan.name,
       purchasedBy: this.authService.loggedInUser._id
     };
-    localStorage.setItem('subscription', JSON.stringify(transaction));
+    if (isPlatformBrowser(this._platformId)) {
+      localStorage.setItem('subscription', JSON.stringify(transaction));
+    }
   }
 
   async redirectToCheckout() {

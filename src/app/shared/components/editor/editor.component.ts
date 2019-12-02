@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output, Input, OnDestroy, OnChanges, AfterViewInit, SimpleChanges, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input, OnDestroy, OnChanges, AfterViewInit, SimpleChanges, ViewChild, ElementRef, Inject, PLATFORM_ID } from '@angular/core';
 // import EditorJS from '@editorjs/editorjs';
 import Header from '@editorjs/header';
 import ImageTool from '@editorjs/image';
@@ -19,6 +19,7 @@ import { AuthService } from '../../../core/services/auth.service';
 import { CommentService } from '../../services/comment.service';
 import { Post } from '../../models/post.model';
 import { Comment } from '../../models/comment.model';
+import { isPlatformBrowser } from '@angular/common';
 const path = require('path');
 declare const EditorJS;
 
@@ -60,7 +61,8 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
   constructor(
     private _hljs: HighlightJS,
     public authService: AuthService,
-    public commentService: CommentService
+    public commentService: CommentService,
+    @Inject(PLATFORM_ID) private _platformId: Object
   ) {
   }
 
@@ -81,7 +83,7 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
     */
 
     /** Get all the code elements from DOM and highlight them as code snippets using highlight.js */
-    if (this.editorRef && this.editorRef.nativeElement) {
+    if (this.editorRef && this.editorRef.nativeElement && isPlatformBrowser(this._platformId)) {
       this.editorRef.nativeElement.querySelectorAll('pre code').forEach((block: HTMLElement) => {
         this._hljs.highlightBlock(block);
       });
@@ -230,7 +232,8 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
         code: {
           class: CodeWithLanguageSelection,
           config: {
-            readOnly: this.readOnly
+            readOnly: this.readOnly,
+            isPlatformBrowser: isPlatformBrowser(this._platformId)
           }
         },
       },
@@ -247,7 +250,7 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
             this._hljs.highlightBlock(block);
           });
 
-          if (this.readOnly) {
+          if (this.readOnly && isPlatformBrowser(this._platformId)) {
             const elements = document.querySelectorAll('[contenteditable=true]');
             elements.forEach(element => {
               element.setAttribute('contenteditable', 'false');

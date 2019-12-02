@@ -77,13 +77,13 @@ export class NavBarComponent implements OnInit, OnDestroy {
       })
     );
 
-    if (await this.authService.checkIfUserIsLoggedIn()) {
+    // if (await this.authService.checkIfUserIsLoggedIn()) {
 
-    } else {
-      setTimeout(() => {
-        this.lr._elementRef.nativeElement.click();
-      }, 2000);
-    }
+    // } else {
+    //   setTimeout(() => {
+    //     this.lr._elementRef.nativeElement.click();
+    //   }, 2000);
+    // }
   }
 
   ngOnInit() {

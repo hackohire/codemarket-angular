@@ -1,5 +1,5 @@
-import { NgModule, InjectionToken } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgModule, InjectionToken, Inject, PLATFORM_ID } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { ApolloModule, Apollo } from 'apollo-angular';
 import { HttpLinkModule, HttpLink } from 'apollo-angular-link-http';
 import { environment } from 'src/environments/environment';
@@ -70,7 +70,7 @@ export function clearState(reducer) {
   ]
 })
 export class CoreModule {
-  constructor(apollo: Apollo, httpLink: HttpLink) {
+  constructor(apollo: Apollo, httpLink: HttpLink,     @Inject(PLATFORM_ID) private _platformId: Object) {
     // Apollo Server Configuration
     const httpCodemarket = httpLink.create({ uri: environment.graphql_url });
     // const httpPlatform = httpLink.create({ uri: environment.platform_graphql_url });
@@ -101,7 +101,7 @@ export class CoreModule {
 
 
       // Get the authentication token from local storage if it exists
-      token = localStorage.getItem('idToken');
+      token = isPlatformBrowser(this._platformId) ? localStorage.getItem('idToken') : '';
 
       // Use the setContext method to set the HTTP headers.
       operation.setContext({

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Inject, PLATFORM_ID } from '@angular/core';
 import { BreadCumb } from 'src/app/shared/models/bredcumb.model';
 import { FormGroup, FormControl, Validators, FormArray, FormBuilder } from '@angular/forms';
 import { EventTypes } from 'src/app/shared/models/event.model';
@@ -20,6 +20,7 @@ import { selectSelectedPost } from 'src/app/core/store/selectors/post.selectors'
 import { LocationService } from '../../shared/services/location.service';
 import { Company } from '../../shared/models/company.model';
 import { CompanyService } from '../../companies/company.service';
+import { isPlatformBrowser } from '@angular/common';
 
 
 @Component({
@@ -97,7 +98,8 @@ export class AddEventComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private formService: FormService,
     public locationService: LocationService,
-    private companyService: CompanyService
+    private companyService: CompanyService,
+    @Inject(PLATFORM_ID) private _platformId: Object
   ) {
     this.breadcumb = {
       title: 'Add Event Details',
@@ -150,7 +152,6 @@ export class AddEventComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(window.history.state);
     // this.locationService.setLocaionSearhAutoComplete(this.searchLocation, this.locationFormGroup);
   }
 
@@ -198,18 +199,19 @@ export class AddEventComponent implements OnInit {
       map((text) => text ? this._filter(text) : this.allTags && this.allTags.length ? this.allTags.slice() : []))
       .subscribe((tags) => this.tagSuggestions = tags);
 
-      console.log(window.history.state);
 
-      const routerStateData = window.history.state
-      if (routerStateData && routerStateData.companyDetails) {
-        if (routerStateData.companyDetails.location) {
-          this.locationFormGroup.get('longitude').setValue(routerStateData.companyDetails.location.longitude);
-          this.locationFormGroup.get('latitude').setValue(routerStateData.companyDetails.location.latitude);
-          this.locationFormGroup.get('address').setValue(routerStateData.companyDetails.location.address);
-        }
-
-        if (routerStateData.companyDetails._id) {
-          this.eventForm.get('company').setValue(routerStateData.companyDetails._id)
+      if (isPlatformBrowser(this._platformId)) {
+        const routerStateData = window.history.state
+        if (routerStateData && routerStateData.companyDetails) {
+          if (routerStateData.companyDetails.location) {
+            this.locationFormGroup.get('longitude').setValue(routerStateData.companyDetails.location.longitude);
+            this.locationFormGroup.get('latitude').setValue(routerStateData.companyDetails.location.latitude);
+            this.locationFormGroup.get('address').setValue(routerStateData.companyDetails.location.address);
+          }
+  
+          if (routerStateData.companyDetails._id) {
+            this.eventForm.get('company').setValue(routerStateData.companyDetails._id)
+          }
         }
       }
 

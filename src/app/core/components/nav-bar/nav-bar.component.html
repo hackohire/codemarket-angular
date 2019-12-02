@@ -96,7 +96,7 @@
   <a mat-button routerLinkActive="mat-primary" *ngIf="loggedInUser;"
     [routerLink]="['/', {outlets: {'main': ['dashboard', 'my-profile']}}]">
     <i style="font-size: 1.7rem !important;" class="vertical-align-middle fad fa-user-circle fa-fw"></i>
-    <div class="line-height-initial" [fxHide.xs]="true"> My Profile <mat-icon
+    <div style="color: #ffffff;" class="line-height-initial" [fxHide.xs]="true"> My Profile <mat-icon
         style="vertical-align: middle; height: 28px;">keyboard_arrow_down</mat-icon>
     </div>
   </a>
@@ -138,17 +138,17 @@
       <!-- End Items -->
       <div fxFlex></div>
 
-      <app-add-post-menu style="color: black;"></app-add-post-menu>
-      <!--<app-software-dev-menu style="color: black;"></app-software-dev-menu>-->
+      <!-- <app-add-post-menu style="color: black;"></app-add-post-menu> -->
+      <app-software-dev-menu style="color: black;"></app-software-dev-menu>
 
       
 
       <!-- All Bugfixes -->
-      <a mat-button routerLinkActive="mat-primary"
+      <!-- <a mat-button routerLinkActive="mat-primary"
         [routerLink]="['/', {outlets: {'main': ['dashboard', 'bugfixes-all']}}]">
         <i style="font-size: 1.7rem !important;" class="vertical-align-middle fad fa-lightbulb-dollar fa-fw"></i>
         <div class="line-height-initial" [fxHide.xs]="true">Software Developer</div>
-      </a>
+      </a> -->
 
       <!-- Team IQ 
       <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', {outlets: {'main': ['dashboard', 'post-list']}}]"

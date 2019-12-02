@@ -1,18 +1,13 @@
 
 
-<!--<a class="btn btn--sm btn--round menu" [matMenuTriggerFor]="menu">Software-->
-    <a mat-button routerLinkActive="mat-primary">
- 
+<!-- <a class="btn btn--sm btn--round menu" [matMenuTriggerFor]="menu">Software -->
+   <a mat-button routerLinkActive="mat-primary"  [matMenuTriggerFor]="menu">
   <mat-icon style="vertical-align: middle;">keyboard_arrow_down</mat-icon>
-  <i style="font-size: 1.7rem !important;" class="vertical-align-middle fad fa-lightbulb-dollar fa-fw"></i>
+  <!-- <i style="font-size: 1.7rem !important;" class="vertical-align-middle fad fa-lightbulb-dollar fa-fw"></i> -->
         <div class="line-height-initial" [fxHide.xs]="true">Software Developer</div>
 </a>
 
-<!--<a mat-button routerLinkActive="mat-primary"
-        [routerLink]="['/', {outlets: {'main': ['dashboard', 'bugfixes-all']}}]">
-        <i style="font-size: 1.7rem !important;" class="vertical-align-middle fad fa-lightbulb-dollar fa-fw"></i>
-        <div class="line-height-initial" [fxHide.xs]="true">Software Developer</div>
-      </a>-->
+
 
 <mat-menu #menu="matMenu">
 

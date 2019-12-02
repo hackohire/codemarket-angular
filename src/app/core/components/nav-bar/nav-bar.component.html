@@ -64,24 +64,24 @@
   </mat-sidenav>
 
   <mat-sidenav-content>
-    <mat-toolbar style="padding-bottom: '10px'; background-color: blueviolet">
+    <mat-toolbar style="padding-bottom: '10px'; background-color: rgb(8, 8, 8); width: '500px'">
     <!-- Search -->
     <a mat-button routerLinkActive="mat-primary" (click)="openSearchDialog()">
-      <i style="font-size: 1.5rem !important;" class="vertical-align-middle fad fa-search fa-fw"></i>
-      <div class="line-height-initial" [fxHide.xs]="true"> Search</div>
+     <!-- <i style="font-size: 1.5rem !important; color: #ffffff;" class="vertical-align-middle fad fa-search fa-fw"></i>-->
+      <div style="color: #ffffff;" class="line-height-initial" [fxHide.xs]="true"> Search</div>
     </a>
 
     <!-- membership -->
     <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', {outlets: {'main': ['membership']}}]">
-      <i style="font-size: 1.7rem !important;" class="vertical-align-middle fad fa-id-card-alt fa-fw"></i>
-      <div class="line-height-initial" [fxHide.xs]="true"> Membership</div>
+     <!-- <i style="font-size: 1.7rem !important; color: #ffffff;" class="vertical-align-middle fad fa-id-card-alt fa-fw"></i>-->
+      <div style="color: #ffffff;" class="line-height-initial" [fxHide.xs]="true"> Membership</div>
     </a>
 
     <!-- Login -->
 <ng-template #logIn>
   <a #lr mat-button (click)="login()" [mdePopoverTriggerFor]="authentication" [mdePopoverTargetAt]="lr" mdePopoverTriggerOn="click">
-    <i style="font-size: 1.7rem !important;" class="vertical-align-middle fad fa-user-circle fa-fw"></i>
-    <div class="line-height-initial" [fxHide.xs]="true"> Login/Register</div>
+   <!-- <i style="font-size: 1.7rem !important; color: #ffffff;" class="vertical-align-middle fad fa-user-circle fa-fw"></i>-->
+    <div style="color: #ffffff;" class="line-height-initial" [fxHide.xs]="true"> Login/Register</div>
   </a>
 </ng-template>
 
@@ -139,7 +139,7 @@
       <div fxFlex></div>
 
       <app-add-post-menu style="color: black;"></app-add-post-menu>
-      <app-software-dev-menu style="color: black;"></app-software-dev-menu>
+      <!--<app-software-dev-menu style="color: black;"></app-software-dev-menu>-->
 
       
 

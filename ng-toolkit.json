@@ -1,0 +1,13 @@
+{
+  "serverless": {
+    "provider": "aws",
+    "project": "codemarket",
+    "skipInstall": false,
+    "directory": ".",
+    "clientProject": "codemarket",
+    "serverless": {
+      "aws": {},
+      "gcloud": {}
+    }
+  }
+}

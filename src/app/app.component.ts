@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { AuthService } from './core/services/auth.service';
 import { timer, Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
@@ -9,16 +9,18 @@ import { MatDialog } from '@angular/material';
 import { VideoChatComponent } from './video-chat/video-chat.component';
 import { UserService } from './user/user.service';
 import Peer from 'peerjs';
+import { environment } from '../environments/environment';
+import { isPlatformBrowser, DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnDestroy {
+export class AppComponent implements OnInit {
   title = 'codemarket';
   private subscription = new Subscription();
-  constructor(
+  constructor(@Inject(PLATFORM_ID) private platformId: any, @Inject(DOCUMENT) private document: any,
     private authService: AuthService,
     private store: Store<AppState>,
     public dialog: MatDialog,
@@ -70,6 +72,16 @@ export class AppComponent implements OnDestroy {
 
   }
 
+  public ngOnInit(): void {
+    if (!isPlatformBrowser(this.platformId)) {
+      const bases = this.document.getElementsByTagName('base');
+
+      if (bases.length > 0) {
+        bases[0].setAttribute('href', environment.baseHref);
+      }
+    }
+  }
+
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
@@ -77,7 +89,7 @@ export class AppComponent implements OnDestroy {
   openDialog(call, peer): void {
     this.dialog.open(VideoChatComponent, {
       width: '550px',
-      data: {isSomeoneCalling: true, call, peer},
+      data: { isSomeoneCalling: true, call, peer },
       disableClose: true
     });
   }

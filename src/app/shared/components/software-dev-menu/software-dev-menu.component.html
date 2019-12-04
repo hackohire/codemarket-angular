@@ -2,7 +2,7 @@
 
 <!-- <a class="btn btn--sm btn--round menu" [matMenuTriggerFor]="menu">Software -->
    <a mat-button routerLinkActive="mat-primary"  [matMenuTriggerFor]="menu">
-  <i style="font-size: 1.7rem !important;" class="vertical-align-middle fad fal fa-laptop-code fa-fw"></i>
+  <i style="font-size: 0.8rem !important;" class="vertical-align-middle fad fal fa-laptop-code fa-fw"></i>
   <!-- <i style="font-size: 1.7rem !important;" class="vertical-align-middle fad fa-lightbulb-dollar fa-fw"></i> -->
         <div class="line-height-initial" [fxHide.xs]="true">Software Developer</div>
 </a>
@@ -14,31 +14,31 @@
   <!-- Add Product -->
   <button mat-menu-item [routerLink]="['/', {outlets: {'main': ['dashboard', 'bugfixes-all']}}]">
     <!-- <mat-icon>dialpad</mat-icon> -->
-    <i style="font-size: 1.7rem !important;" [class]="'vertical-align-middle fal fa-' + icons.product + ' fa-fw'"></i>
+    <i style="font-size: 0.8rem !important;" [class]="'vertical-align-middle fad fal fa-phone-laptop' + ' fa-fw'"></i>
     <span class="vertical-align-middle"> Tech Skills</span>
   </button>
   
   <!-- Add Help Request -->
   <button mat-menu-item [routerLink]="['/', {outlets: {'main': ['dashboard', 'bugfixes-all']}}]">
     <!-- <mat-icon>Help Request</mat-icon> -->
-    <i style="font-size: 1.7rem !important;"
-      [class]="'vertical-align-middle fal fa-' + icons['help-request'] + ' fa-fw'"></i>
-    <span> Business Skills</span>
+    <i style="font-size: 0.8rem !important;"
+      [class]="'vertical-align-middle fal fa-fad fal fa-bullseye' + ' fa-fw'"></i>
+     <span> Business Skills</span>
   </button>
 
 
   <!-- Add Interview Assignment -->
   <button mat-menu-item [routerLink]="['/', {outlets: {'main': ['dashboard', 'bugfixes-all']}}]"
     [queryParams]="{type: 'interview'}">
-    <i style="font-size: 1.7rem !important;" [class]="'vertical-align-middle fal fa-' + icons.interview + ' fa-fw'"></i>
+    <i style="font-size: 0.8rem !important;" [class]="'vertical-align-middle fal fa-podium-star' + ' fa-fw'"></i>
     <span> Leadership Skills</span>
   </button>
 
   <!-- Add Requirements -->
   <button mat-menu-item [routerLink]="['/', {outlets: {'main': ['dashboard', 'bugfixes-all']}}]"
     [queryParams]="{type: 'requirement'}">
-    <i style="font-size: 1.7rem !important;"
-      [class]="'vertical-align-middle fal fa-' + icons.requirement + ' fa-fw'"></i>
+    <i style="font-size: 0.8rem !important;"
+      [class]="'vertical-align-middle fal fa-rocket' + ' fa-fw'"></i>
     <span> Entrepreneurial Skills</span>
   </button>
 

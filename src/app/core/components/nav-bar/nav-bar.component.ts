@@ -72,7 +72,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
     this.subscription.add(
       this.authService.openAuthenticationPopover.subscribe(open => {
         if (open) {
-      //    this.lr._elementRef.nativeElement.click();
+         this.lr._elementRef.nativeElement.click();
         }
       })
     );

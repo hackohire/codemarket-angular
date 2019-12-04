@@ -5,6 +5,7 @@ import { SharedModule } from '../shared/shared.module';
 import { RouterModule, Routes } from '@angular/router';
 import { AddCompanyComponent } from './add-company/add-company.component';
 import { CompaniesListComponent } from './companies-list/companies-list.component';
+import { AuthGuard } from '../shared/guards/auth.guard';
 
 const companyRoutes: Routes = [
   {
@@ -18,7 +19,8 @@ const companyRoutes: Routes = [
       },
       {
         path: 'add-company',
-        component: AddCompanyComponent
+        component: AddCompanyComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: 'edit-company/:companyId',

@@ -9,7 +9,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavBarComponent } from './core/components/nav-bar/nav-bar.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import 'zone.js/dist/zone-patch-rxjs';
-import { GlobalErrorHandler } from './shared/services/chun_error_handling';
 import { HackohireComponent } from './read-more/hackohire/hackohire.component';
 import { WellnessComponent } from './read-more/wellness/wellness.component';
 import { SocialImpactComponent } from './read-more/social-impact/social-impact.component';
@@ -49,7 +48,6 @@ import { AmplifyModule } from './core/amplify/amplify.module';
     LayoutModule,
     AmplifyModule
   ],
-  providers: [{ provide: ErrorHandler, useClass: GlobalErrorHandler }],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

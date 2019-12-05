@@ -17,10 +17,10 @@ const dashboardRoutes: Routes = [
     path: 'post-list',
     loadChildren: () => import('../post/posts-list/posts-list.module').then(module => module.PostsListModule)
   },
-  {
-    path: 'dream-job-list',
-    loadChildren: () => import('../dream-job/dreamjob-list/dreamjob-list.module').then(module => module.DreamjobListModule)
-  },
+  // {
+  //   path: 'dream-job-list',
+  //   loadChildren: () => import('../dream-job/dreamjob-list/dreamjob-list.module').then(module => module.DreamjobListModule)
+  // },
   {
     path: 'company-list',
     component: CompaniesListComponent,

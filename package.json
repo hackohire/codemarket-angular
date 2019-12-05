@@ -4,6 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "build:only": "node --max_old_space_size=8192 node_modules/@angular/cli/bin/node --max_old_space_size=8192 node_modules/@angular/cli/bin/ng build --prod",
     "build": "node --max_old_space_size=8192 node_modules/@angular/cli/bin/node --max_old_space_size=8192 node_modules/@angular/cli/bin/ng build --prod && yarn run compress",
     "build:deploy": "yarn run build && deploy-plus.sh",
     "build:stats": "node --max_old_space_size=8192 node_modules/@angular/cli/bin/node --max_old_space_size=8192 node_modules/@angular/cli/bin/ng build --prod --stats-json",
@@ -125,8 +126,10 @@
     "opencollective": "^1.0.3",
     "path": "^0.12.7",
     "protractor": "~5.4.0",
+    "purgecss": "^1.4.1",
     "serverless": "1.40.0",
     "serverless-apigw-binary": "^0.4.4",
+    "serverless-jetpack": "^0.7.0",
     "ts-loader": "4.2.0",
     "ts-node": "~7.0.0",
     "tslint": "~5.15.0",

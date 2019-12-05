@@ -2,6 +2,7 @@
 service: codemarket
 
 plugins:
+  - serverless-jetpack
   - serverless-apigw-binary
 
 provider:

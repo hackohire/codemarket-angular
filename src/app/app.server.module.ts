@@ -5,6 +5,8 @@ import { AppModule } from './app.module';
 import { AppComponent } from './app.component';
 import { ModuleMapLoaderModule } from '@nguniversal/module-map-ngfactory-loader';
 import {FlexLayoutServerModule} from '@angular/flex-layout/server';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+// import { UniversalRelativeInterceptor } from './core/universal-interceptor';
 
 @NgModule({
   imports: [
@@ -14,5 +16,10 @@ import {FlexLayoutServerModule} from '@angular/flex-layout/server';
     FlexLayoutServerModule
   ],
   bootstrap: [AppComponent],
+  // providers: [{
+  //   provide: HTTP_INTERCEPTORS,
+  //   useClass: UniversalRelativeInterceptor,
+  //   multi: true
+  // }],
 })
 export class AppServerModule {}

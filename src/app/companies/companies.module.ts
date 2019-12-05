@@ -20,7 +20,7 @@ const companyRoutes: Routes = [
       {
         path: 'add-company',
         component: AddCompanyComponent,
-        canActivate: [AuthGuard]
+        canActivateChild: [AuthGuard]
       },
       {
         path: 'edit-company/:companyId',

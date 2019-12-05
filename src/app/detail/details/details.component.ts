@@ -151,27 +151,27 @@ export class DetailsComponent implements OnInit, OnDestroy {
             /** adding meta tags */
 
             this.meta.updateTag({ name: 'twitter:card', content: 'summary' });
-            this.meta.updateTag({ name: 'twitter:title', content: p.name });
-            this.meta.updateTag({ name: 'og:image', content: 'https://www.codemarket.io/assets/images/logo_qugbvk_c_scalew_282.png' });
+            this.meta.updateTag({ name: 'twitter:title', content: p.name});
+            this.meta.updateTag({ property: 'og:image', content: 'https://www.codemarket.io/assets/images/logo_qugbvk_c_scalew_282.png' });
             this.meta.updateTag({ name: 'twitter:image:src', content: 'https://www.codemarket.io/assets/images/logo_qugbvk_c_scalew_282.png' });
-
+  
             this.meta.updateTag({ property: 'og:title', content: p.name });
             this.meta.updateTag({ property: 'og:url', content: window.location.href });
             this.meta.updateTag({ property: 'al:web:url', content: window.location.href });
             this.meta.updateTag({ property: 'og:type', content: 'article' });
-
+  
             this.meta.updateTag({ name: 'title', content: p.name });
             this.meta.updateTag({ name: 'og:url', content: window.location.href });
             this.meta.updateTag({ name: 'al:web:url', content: window.location.href });
             this.meta.updateTag({ name: 'og:type', content: 'article' });
-
+  
             const description: any = p.description && p.description.length ? p.description.find(d => d.type === 'header' || d.type === 'paragraph') : null;
-
+  
             if (description && description.data.text) {
-              this.meta.updateTag({ name: 'description', content: description.data.text });
-              this.meta.updateTag({ property: 'og:description', content: description.data.text });
-              this.meta.updateTag({ property: 'twitter:description', content: description.data.text });
-              this.meta.updateTag({ property: 'twitter:text:description', content: description.data.text });
+              this.meta.updateTag({ name: 'description', content:  description.data.text});
+              this.meta.updateTag({ property: 'og:description', content: description.data.text});
+              this.meta.updateTag({ name: 'twitter:description', content: description.data.text});
+              this.meta.updateTag({ name: 'twitter:text:description', content: description.data.text});
             }
 
             /** Setting the page title */

@@ -3,7 +3,7 @@
   <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'main'" [opened]="(isHandset$ | async) === false">
     <mat-toolbar>Menu</mat-toolbar>
-   
+
     <!-- Sidebar Navigation List Item -->
     <mat-nav-list>
       <!-- Dashboard -->
@@ -64,65 +64,65 @@
   </mat-sidenav>
 
   <mat-sidenav-content>
-    <mat-toolbar style="padding-bottom: '10px'; background-color: rgb(8, 8, 8); width: '500px'">
-    <!-- Search -->
-    <a mat-button routerLinkActive="mat-primary" (click)="openSearchDialog()">
-     <!-- <i style="font-size: 1.5rem !important; color: #ffffff;" class="vertical-align-middle fad fa-search fa-fw"></i>-->
-      <div style="color: #ffffff;" class="line-height-initial" [fxHide.xs]="true"> Search</div>
-    </a>
+    <mat-toolbar style="padding: 10px 0; background-color: rgb(8, 8, 8);">
+      <!-- Search -->
+      <a mat-button routerLinkActive="mat-primary" (click)="openSearchDialog()">
+        <i style="font-size: 1.5rem !important; color: #ffffff;" class="vertical-align-middle fad fa-search fa-fw"></i>
+        <span style="color: #ffffff;" class="line-height-initial" [fxHide.xs]="true"> Search</span>
+      </a>
 
-    <!-- membership -->
-    <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', {outlets: {'main': ['membership']}}]">
-     <!-- <i style="font-size: 1.7rem !important; color: #ffffff;" class="vertical-align-middle fad fa-id-card-alt fa-fw"></i>-->
-      <div style="color: #ffffff;" class="line-height-initial" [fxHide.xs]="true"> Membership</div>
-    </a>
+      <!-- membership -->
+      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', {outlets: {'main': ['membership']}}]">
+        <i style="font-size: 1.7rem !important; color: #ffffff;" class="vertical-align-middle fad fa-id-card-alt fa-fw"></i>
+        <span style="color: #ffffff;" class="line-height-initial" [fxHide.xs]="true"> Membership</span>
+      </a>
 
-    <!-- Login -->
-<ng-template #logIn>
-  <a #lr mat-button (click)="login()" [mdePopoverTriggerFor]="authentication" [mdePopoverTargetAt]="lr" mdePopoverTriggerOn="click">
-   <!-- <i style="font-size: 1.7rem !important; color: #ffffff;" class="vertical-align-middle fad fa-user-circle fa-fw"></i>-->
-    <div style="color: #ffffff;" class="line-height-initial" [fxHide.xs]="true"> Login/Register</div>
-  </a>
-</ng-template>
+      <!-- Login -->
+      <ng-template #logIn>
+        <a #lr mat-button (click)="login()" [mdePopoverTriggerFor]="authentication" [mdePopoverTargetAt]="lr"
+          mdePopoverTriggerOn="click">
+          <i style="font-size: 1.7rem !important; color: #ffffff;" class="vertical-align-middle fad fa-user-circle fa-fw"></i>
+          <span style="color: #ffffff;" class="line-height-initial" [fxHide.xs]="true"> Login/Register</span>
+        </a>
+      </ng-template>
 
-<mde-popover #authentication="mdePopover" [mdePopoverOverlapTrigger]="false" [mdePopoverCloseOnClick]="false"
-  [mdePopoverArrowOffsetX]="58"
-  mdePopoverArrowColor="#FFFFFF">
-  <amplify-authenticator [signUpConfig]="signUpConfig" [usernameAttributes]="'email'"></amplify-authenticator>
-</mde-popover>
+      <mde-popover #authentication="mdePopover" [mdePopoverOverlapTrigger]="false" [mdePopoverCloseOnClick]="false"
+        [mdePopoverArrowOffsetX]="58" mdePopoverArrowColor="#FFFFFF">
+        <amplify-authenticator [signUpConfig]="signUpConfig" [usernameAttributes]="'email'"></amplify-authenticator>
+      </mde-popover>
 
-<!-- My Profile -->
-<button style="padding: 7px 0 0 0;" mat-button [matMenuTriggerFor]="userMenu" *ngIf="loggedInUser; else logIn">
-  <a mat-button routerLinkActive="mat-primary" *ngIf="loggedInUser;"
-    [routerLink]="['/', {outlets: {'main': ['dashboard', 'my-profile']}}]">
-    <i style="font-size: 1.7rem !important;" class="vertical-align-middle fad fa-user-circle fa-fw"></i>
-    <div style="color: #ffffff;" class="line-height-initial" [fxHide.xs]="true"> My Profile <mat-icon
-        style="vertical-align: middle; height: 28px;">keyboard_arrow_down</mat-icon>
-    </div>
-  </a>
-</button>
+      <!-- My Profile -->
+      <button mat-button [matMenuTriggerFor]="userMenu" *ngIf="loggedInUser; else logIn">
+        <a style="padding: 0;" mat-button routerLinkActive="mat-primary" *ngIf="loggedInUser;"
+          [routerLink]="['/', {outlets: {'main': ['dashboard', 'my-profile']}}]">
+          <i style="font-size: 1.7rem !important; color: #ffffff;" class="vertical-align-middle fad fa-user-circle fa-fw"></i>
+          <span style="color: #ffffff;" class="line-height-initial" [fxHide.xs]="true"> My Profile <mat-icon
+              style="vertical-align: middle; height: 28px;">keyboard_arrow_down</mat-icon>
+          </span>
+        </a>
+      </button>
 
-<mat-menu #userMenu="matMenu" panelClass="menu-width">
-  <div class="menu-width">
-    <!-- Shopping Cart -->
-    <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', {outlets: {'main': ['cart']}}]">
-      <mat-icon>shopping_cart
-      </mat-icon> Cart({{cartListLength | async}})
-    </a>
+      <mat-menu #userMenu="matMenu" panelClass="menu-width">
+        <div class="menu-width">
+          <!-- Shopping Cart -->
+          <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', {outlets: {'main': ['cart']}}]">
+            <mat-icon>shopping_cart
+            </mat-icon> Cart({{cartListLength | async}})
+          </a>
 
-    <!-- Logout -->
-    <a mat-button (click)="authService?.logout()">
-      <mat-icon>power_settings_new
-      </mat-icon>
-      Logout
-    </a>
-  </div>
-</mat-menu>
-    
+          <!-- Logout -->
+          <a mat-button (click)="authService?.logout()">
+            <mat-icon>power_settings_new
+            </mat-icon>
+            Logout
+          </a>
+        </div>
+      </mat-menu>
+
     </mat-toolbar>
-    
+
     <mat-toolbar [ngStyle]="{'padding-bottom': '10px'}">
-     
+
       <!-- Toggle Sidebar Button -->
       <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
@@ -141,7 +141,7 @@
       <!-- <app-add-post-menu style="color: black;"></app-add-post-menu> -->
       <app-software-dev-menu style="color: black;"></app-software-dev-menu>
 
-      
+
 
       <!-- All Bugfixes -->
       <!-- <a mat-button routerLinkActive="mat-primary"
@@ -159,40 +159,36 @@
 
       <!-- Companies -->
       <a mat-button routerLinkActive="mat-primary"
-        [routerLink]="['/', {outlets: {'main': ['dashboard', 'company-list']}}]"
-        [queryParams]="{all: true}">
-        <i style="font-size: 0.8rem !important;" class="vertical-align-middle fad fal fa-chart-line fa-fw"></i>
-        
+        [routerLink]="['/', {outlets: {'main': ['dashboard', 'company-list']}}]" [queryParams]="{all: true}">
+        <i style="font-size: 1.5rem !important;" class="vertical-align-middle fad fal fa-chart-line fa-fw"></i>
+
         <div class="line-height-initial" [fxHide.xs]="true"> Business </div>
       </a>
-        <!-- Startup -->
-        <a mat-button routerLinkActive="mat-primary"
-        [routerLink]="['/', {outlets: {'main': ['dashboard', 'company-list']}}]"
-        [queryParams]="{all: true}">
-        <i style="font-size: 0.8rem !important;" class="vertical-align-middle fad fal fa-lightbulb-dollar fa-fw"></i>
+      <!-- Startup -->
+      <a mat-button routerLinkActive="mat-primary"
+        [routerLink]="['/', {outlets: {'main': ['dashboard', 'company-list']}}]" [queryParams]="{all: true}">
+        <i style="font-size: 1.5rem !important;" class="vertical-align-middle fad fal fa-lightbulb-dollar fa-fw"></i>
         <div class="line-height-initial" [fxHide.xs]="true"> Startup </div>
-        </a>
+      </a>
       <!-- All Events -->
       <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', {outlets: {'main': ['social-impact']}}]">
-        <i style="font-size: 0.8rem !important;" class="vertical-align-middle fad fal fa-hand-holding-heart fa-fw"></i>
+        <i style="font-size: 1.5rem !important;" class="vertical-align-middle fad fal fa-hand-holding-heart fa-fw"></i>
         <div class="line-height-initial" [fxHide.xs]="true"> Non-Profit</div>
       </a>
 
       <!-- Companoies -->
       <a mat-button routerLinkActive="mat-primary"
-        [routerLink]="['/', {outlets: {'main': ['dashboard', 'company-list']}}]"
-        [queryParams]="{all: true}">
-        <i style="font-size: 0.8rem !important;" class="vertical-align-middle fad fal fa-user-crown fa-fw"></i>
+        [routerLink]="['/', {outlets: {'main': ['dashboard', 'company-list']}}]" [queryParams]="{all: true}">
+        <i style="font-size: 1.5rem !important;" class="vertical-align-middle fad fal fa-user-crown fa-fw"></i>
         <div class="line-height-initial" [fxHide.xs]="true"> Government</div>
       </a>
 
-       <!-- Schools -->
-       <a mat-button routerLinkActive="mat-primary"
-       [routerLink]="['/', {outlets: {'main': ['dashboard', 'company-list']}}]"
-       [queryParams]="{all: true}">
-       <i style="font-size: 0.8rem !important;" class="vertical-align-middle fad fal fa-graduation-cap fa-fw"></i>
-       <div class="line-height-initial" [fxHide.xs]="true"> School</div>
-     </a>
+      <!-- Schools -->
+      <a mat-button routerLinkActive="mat-primary"
+        [routerLink]="['/', {outlets: {'main': ['dashboard', 'company-list']}}]" [queryParams]="{all: true}">
+        <i style="font-size: 1.5rem !important;" class="vertical-align-middle fad fal fa-graduation-cap fa-fw"></i>
+        <div class="line-height-initial" [fxHide.xs]="true"> School</div>
+      </a>
 
       <!-- Hackathon 
       <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', {outlets: {'main': ['hackathon']}}]">
@@ -231,8 +227,8 @@
         <div [fxHide.xs]="true"> Non Profits</div>
       </a> -->
 
-      
-      
+
+
       <!-- About Us
       <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', {outlets: {'main': ['about']}}]">
         <i style="font-size: 1.5rem !important;" class="vertical-align-middle fad fa-info fa-fw"></i>
@@ -350,7 +346,7 @@
                       <i class="fab fa-twitter"></i>
                     </a>
                   </li>
-                 <!-- <li class="list-inline-item">
+                  <!-- <li class="list-inline-item">
                     <a class="btn-floating btn-sm rgba-white-slight mx-1">
                       <i class="fab fa-google-plus-g"></i>
                     </a>

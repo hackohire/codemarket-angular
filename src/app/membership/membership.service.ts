@@ -6,14 +6,14 @@ import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { SweetalertService } from '../shared/services/sweetalert.service';
 import { AuthService } from '../core/services/auth.service';
-declare var paypal;
+// declare var paypal;
 
 @Injectable({
   providedIn: 'root'
 })
 export class MembershipService {
 
-  paypalConfig;
+  // paypalConfig;
 
   constructor(
     private httpClient: HttpClient,

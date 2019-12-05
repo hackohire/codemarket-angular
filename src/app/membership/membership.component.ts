@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject, PLATFORM_ID } from '@angular/core';
 import { MembershipService } from './membership.service';
 import { BreadCumb } from '../shared/models/bredcumb.model';
 import { AuthService } from '../core/services/auth.service';
@@ -13,6 +13,7 @@ import { SellingProductsService } from '../selling/selling-products.service';
 import { tap } from 'rxjs/operators';
 import Swal from 'sweetalert2';
 import { FormControl } from '@angular/forms';
+import { isPlatformBrowser } from '@angular/common';
 // declare var Stripe;
 // declare var paypal;
 declare var Stripe;
@@ -43,6 +44,7 @@ export class MembershipComponent implements OnInit {
     public authService: AuthService,
     public activatedRoute: ActivatedRoute,
     private sellingService: SellingProductsService,
+    @Inject(PLATFORM_ID) private _platformId: Object,
     private dialog: MatDialog
   ) {
     this.breadcumb = {
@@ -124,6 +126,7 @@ export class MembershipComponent implements OnInit {
   }
 
   addTrnsaction() {
+    if (isPlatformBrowser(this._platformId)) {
     const transaction = JSON.parse(localStorage.getItem('subscription'));
 
     if (transaction) {
@@ -140,6 +143,7 @@ export class MembershipComponent implements OnInit {
           }
         })
       ).subscribe();
+    }
     }
   }
 

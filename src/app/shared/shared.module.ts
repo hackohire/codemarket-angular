@@ -18,7 +18,6 @@ import { ShareModule } from '@ngx-share/core';
 import { SafePipe } from './pipes/safe.pipe';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { LikeDislikeComponent } from './components/like-dislike/like-dislike.component';
-import { PaypalSubscriptionDirective } from './directives/paypal-button.directive';
 import { VideoChatComponent } from '../video-chat/video-chat.component';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { AddPostMenuComponent } from './components/add-post-menu/add-post-menu.component';
@@ -39,7 +38,7 @@ export function hljsLanguages() {
   ];
 }
 @NgModule({
-  declarations: [BreadcumbComponent, EditorComponent, CommentComponent, DatatableComponent, SafePipe, LikeDislikeComponent, PaypalSubscriptionDirective, VideoChatComponent, AddPostMenuComponent, SoftwareDevMenuComponent, CompaniesListComponent],
+  declarations: [BreadcumbComponent, EditorComponent, CommentComponent, DatatableComponent, SafePipe, LikeDislikeComponent, VideoChatComponent, AddPostMenuComponent, SoftwareDevMenuComponent, CompaniesListComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -90,7 +89,6 @@ export function hljsLanguages() {
     SafePipe,
     Ng5SliderModule,
     NgSelectModule,
-    PaypalSubscriptionDirective,
     MdePopoverModule,
     AgmCoreModule
   ],

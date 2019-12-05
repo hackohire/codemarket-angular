@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, OnDestroy, PLATFORM_ID, Inject } from '@angular/core';
 import { BreadCumb } from 'src/app/shared/models/bredcumb.model';
 import { Subscription, forkJoin } from 'rxjs';
 import { ProductService } from 'src/app/core/services/product.service';
@@ -13,6 +13,7 @@ import { PostService } from 'src/app/shared/services/post.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { ActivatedRoute } from '@angular/router';
+import { isPlatformBrowser } from '@angular/common';
 declare var Stripe;
 
 @Component({
@@ -24,7 +25,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
 
   breadcumb: BreadCumb;
   cartProductsList: Product[];
-  @ViewChild('paypal', { static: false }) paypalElement: ElementRef;
+  // @ViewChild('paypal', { static: false }) paypalElement: ElementRef;
   @ViewChild('successfulPayment', { static: false }) successfulPayment: SwalComponent;
   successfulPurchasedProducts = [];
   subscription$: Subscription;
@@ -47,7 +48,8 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     public sellingService: SellingProductsService,
     public authService: AuthService,
     public http: HttpClient,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    @Inject(PLATFORM_ID) private _platformId: Object
   ) {
 
     const a = forkJoin({
@@ -137,7 +139,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
 
   setTransactionObjectInLocalStorage(transaction: any = {}) {
     transaction.sessionId = this.sessionId;
-    transaction.purchasedBy  = this.authService.loggedInUser._id;
+    transaction.purchasedBy = this.authService.loggedInUser._id;
     transaction.purchase_units = this.cartProductsList.map((u, i) => {
       const a: any = {};
       a.name = u.name;
@@ -148,27 +150,31 @@ export class CheckoutComponent implements OnInit, OnDestroy {
       return a;
     });
 
-    localStorage.setItem('transaction', JSON.stringify(transaction));
+    if (isPlatformBrowser(this._platformId)) {
+      localStorage.setItem('transaction', JSON.stringify(transaction));
+    }
   }
 
   addTransaction() {
-    const transaction = JSON.parse(localStorage.getItem('transaction'));
+    if (isPlatformBrowser(this._platformId)) {
+      const transaction = JSON.parse(localStorage.getItem('transaction'));
 
-    if (transaction) {
-      transaction.sessionId = this.sessionId;
-      transaction.purchase_units.forEach((u) => u.sessionId = this.sessionId);
-      this.sellingService.addTransaction(transaction).pipe(
-        tap((d) => {
-          if (d) {
-            localStorage.removeItem('transaction');
-            console.log(d);
-            this.successfulPurchasedProducts = transaction.purchase_units;
-            this.successfulPayment.type = 'success';
-            // this.store.dispatch(GetCartProductsList());
-            this.successfulPayment.show();
-          }
-        })
-      ).subscribe();
+      if (transaction) {
+        transaction.sessionId = this.sessionId;
+        transaction.purchase_units.forEach((u) => u.sessionId = this.sessionId);
+        this.sellingService.addTransaction(transaction).pipe(
+          tap((d) => {
+            if (d) {
+              localStorage.removeItem('transaction');
+              console.log(d);
+              this.successfulPurchasedProducts = transaction.purchase_units;
+              this.successfulPayment.type = 'success';
+              // this.store.dispatch(GetCartProductsList());
+              this.successfulPayment.show();
+            }
+          })
+        ).subscribe();
+      }
     }
   }
 
@@ -194,7 +200,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
         // available to this file, so you can provide it as parameter here
         // instead of the {{CHECKOUT_SESSION_ID}} placeholder.
         sessionId: d.session.id
-      }).then(function(result) {
+      }).then(function (result) {
         console.log(result);
         // If `redirectToCheckout` fails due to a browser or network
         // error, display the localized error message to your customer

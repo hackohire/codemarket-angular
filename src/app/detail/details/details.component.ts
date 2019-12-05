@@ -24,7 +24,8 @@ import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { CompanyService } from '../../companies/company.service';
 import { Company } from '../../shared/models/company.model';
 import { User } from '../../shared/models/user.model';
-import { Storage } from 'aws-amplify';
+import Storage from '@aws-amplify/storage';
+import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-details',
@@ -80,7 +81,9 @@ export class DetailsComponent implements OnInit, OnDestroy {
     public postService: PostService,
     private router: Router,
     private sweetAlertService: SweetalertService,
-    private companyService: CompanyService
+    private companyService: CompanyService,
+    private meta: Meta,
+    private title: Title
   ) {
     this.breadcumb = {
       path: [
@@ -144,6 +147,36 @@ export class DetailsComponent implements OnInit, OnDestroy {
       this.subscription$.add(this.store.select(selectSelectedPost).pipe(
         tap((p: Post) => {
           if (p) {
+
+            /** adding meta tags */
+
+            this.meta.updateTag({ name: 'twitter:card', content: 'summary' });
+            this.meta.updateTag({ name: 'twitter:title', content: p.name });
+            this.meta.updateTag({ name: 'og:image', content: 'https://www.codemarket.io/assets/images/logo_qugbvk_c_scalew_282.png' });
+            this.meta.updateTag({ name: 'twitter:image:src', content: 'https://www.codemarket.io/assets/images/logo_qugbvk_c_scalew_282.png' });
+
+            this.meta.updateTag({ property: 'og:title', content: p.name });
+            this.meta.updateTag({ property: 'og:url', content: window.location.href });
+            this.meta.updateTag({ property: 'al:web:url', content: window.location.href });
+            this.meta.updateTag({ property: 'og:type', content: 'article' });
+
+            this.meta.updateTag({ name: 'title', content: p.name });
+            this.meta.updateTag({ name: 'og:url', content: window.location.href });
+            this.meta.updateTag({ name: 'al:web:url', content: window.location.href });
+            this.meta.updateTag({ name: 'og:type', content: 'article' });
+
+            const description: any = p.description && p.description.length ? p.description.find(d => d.type === 'header' || d.type === 'paragraph') : null;
+
+            if (description && description.data.text) {
+              this.meta.updateTag({ name: 'description', content: description.data.text });
+              this.meta.updateTag({ property: 'og:description', content: description.data.text });
+              this.meta.updateTag({ property: 'twitter:description', content: description.data.text });
+              this.meta.updateTag({ property: 'twitter:text:description', content: description.data.text });
+            }
+
+            /** Setting the page title */
+            this.title.setTitle(p.name);
+
             this.postDetails = p;
             this.details$ = of(p);
             // this.type = ;
@@ -404,7 +437,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
   onFilesAdded() {
     // const files: { [key: string]: File } = this.file.nativeElement.files;
     const pic: File = this.coverPic.nativeElement.files[0];
-    this.selectedCoverPic = URL.createObjectURL(pic);
+    this.selectedCoverPic = window.URL.createObjectURL(pic);
     console.log(pic);
 
     const fileNameSplitArray = pic.name.split('.');

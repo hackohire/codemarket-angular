@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, ErrorHandler } from '@angular/core';
+import { NgModule, ErrorHandler, Inject, PLATFORM_ID } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -21,8 +21,7 @@ import { CodingExpertsComponent } from './read-more/coding-experts/coding-expert
 import { GovernmentComponent } from './read-more/government/government.component';
 import { DiversityComponent } from './read-more/diversity/diversity.component';
 import { AboutUsComponent } from './about-us/about-us.component';
-import { AmplifyAngularModule } from 'aws-amplify-angular';
-
+import { AmplifyModule } from './core/amplify/amplify.module';
 
 @NgModule({
   declarations: [
@@ -42,15 +41,15 @@ import { AmplifyAngularModule } from 'aws-amplify-angular';
     AboutUsComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     CoreModule,
     SharedModule,
     BrowserAnimationsModule,
     LayoutModule,
-    AmplifyAngularModule
+    AmplifyModule
   ],
-  providers: [{provide: ErrorHandler, useClass: GlobalErrorHandler}],
+  providers: [{ provide: ErrorHandler, useClass: GlobalErrorHandler }],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

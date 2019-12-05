@@ -11,7 +11,7 @@ export class CodeWithLanguageSelection {
     CSS: { baseClass: any; input: any; wrapper: string; textarea: string; language?: string };
     nodes: { holder: any; textarea: any; select: any };
     _data: { code: string, language?: string };
-
+    isPlatformBrowser: boolean;
     /**
      * Allow to press Enter inside the CodeTool textarea
      * @returns {boolean}
@@ -61,6 +61,8 @@ export class CodeWithLanguageSelection {
 
         this.placeholder = config.placeholder || CodeWithLanguageSelection.DEFAULT_PLACEHOLDER;
 
+        this.isPlatformBrowser = config.isPlatformBrowser;
+
         this.CSS = {
             baseClass: this.api.styles.block,
             input: this.api.styles.input,
@@ -90,79 +92,81 @@ export class CodeWithLanguageSelection {
      * @private
      */
     render() {
-        const wrapper = document.createElement('div');
-        const pre = document.createElement('pre');
-        const textarea = this._make('textarea', [], {
-            contentEditable: 'true',
-            value: this.data.code || ''
-          });
-        const code = document.createElement('code');
-
-        // textarea.value = this.data.code;
-        // textarea.contentEditable = 'true';
-
-
-        wrapper.classList.add(this.CSS.baseClass, this.CSS.wrapper);
-
-        textarea.style.minHeight = '200px';
-        // textarea.style.fontFamily = 'Menlo, Monaco, Consolas, Courier New, monospace';
-        // textarea.style.color = '#41314e';
-        textarea.style.lineHeight = '1.6em';
-        textarea.style.fontSize = '12px';
-        // textarea.style.background = '#272822';
-        // textarea.style.border = '1px solid #f1f1f4';
-        textarea.style.boxShadow = 'none';
-        textarea.style.whiteSpace = 'pre';
-        textarea.style.wordWrap = 'normal';
-        textarea.style.overflow = 'auto';
-        textarea.style.resize = 'vertical';
-
-        // In Readonly mode show code as codesnippets
-        if (this.config && this.config.readOnly) {
-            const selectedLanguage = document.createElement('span');
-            selectedLanguage.innerText = this.data && this.data.language ? this.data.language : '';
-
-            code.innerText = this.data.code;
-            code.contentEditable = 'false';
-
-            wrapper.appendChild(selectedLanguage);
-            wrapper.appendChild(pre).appendChild(code);
-
-        } else {
-            const language = document.createElement('select');
-
-            language.dataset.placeholder = CodeWithLanguageSelection.DEFAULT_LANGUAGE_PLACEHOLDER;
-
-            language.options.add(new Option('Select a Language', '', true));
-
-            for (const index of CodeWithLanguageSelection.DEFAULT_FORMAT_CONFIG) {
-                if (index) {
-                    language.options[language.options.length] = new Option(index, index);
+        if (this.isPlatformBrowser) {
+            const wrapper = document.createElement('div');
+            const pre = document.createElement('pre');
+            const textarea = this._make('textarea', [], {
+                contentEditable: 'true',
+                value: this.data.code || ''
+              });
+            const code = document.createElement('code');
+    
+            // textarea.value = this.data.code;
+            // textarea.contentEditable = 'true';
+    
+    
+            wrapper.classList.add(this.CSS.baseClass, this.CSS.wrapper);
+    
+            textarea.style.minHeight = '200px';
+            // textarea.style.fontFamily = 'Menlo, Monaco, Consolas, Courier New, monospace';
+            // textarea.style.color = '#41314e';
+            textarea.style.lineHeight = '1.6em';
+            textarea.style.fontSize = '12px';
+            // textarea.style.background = '#272822';
+            // textarea.style.border = '1px solid #f1f1f4';
+            textarea.style.boxShadow = 'none';
+            textarea.style.whiteSpace = 'pre';
+            textarea.style.wordWrap = 'normal';
+            textarea.style.overflow = 'auto';
+            textarea.style.resize = 'vertical';
+    
+            // In Readonly mode show code as codesnippets
+            if (this.config && this.config.readOnly) {
+                const selectedLanguage = document.createElement('span');
+                selectedLanguage.innerText = this.data && this.data.language ? this.data.language : '';
+    
+                code.innerText = this.data.code;
+                code.contentEditable = 'false';
+    
+                wrapper.appendChild(selectedLanguage);
+                wrapper.appendChild(pre).appendChild(code);
+    
+            } else {
+                const language = document.createElement('select');
+    
+                language.dataset.placeholder = CodeWithLanguageSelection.DEFAULT_LANGUAGE_PLACEHOLDER;
+    
+                language.options.add(new Option('Select a Language', '', true));
+    
+                for (const index of CodeWithLanguageSelection.DEFAULT_FORMAT_CONFIG) {
+                    if (index) {
+                        language.options[language.options.length] = new Option(index, index);
+                    }
                 }
+    
+                language.value = this.data.language;
+    
+                language.classList.add(this.CSS.language);
+    
+                wrapper.appendChild(language);
+    
+                this.nodes.select = language;
+    
+    
+                wrapper.appendChild(textarea);
+    
+                this.nodes.textarea = textarea;
+    
+    
+                this.api.listeners.on(textarea, 'keyup', (event) => {
+                    // console.log(event);
+                    textarea.innerHTML = event.target.value;
+                });
             }
-
-            language.value = this.data.language;
-
-            language.classList.add(this.CSS.language);
-
-            wrapper.appendChild(language);
-
-            this.nodes.select = language;
-
-
-            wrapper.appendChild(textarea);
-
-            this.nodes.textarea = textarea;
-
-
-            this.api.listeners.on(textarea, 'keyup', (event) => {
-                // console.log(event);
-                textarea.innerHTML = event.target.value;
-            });
+    
+    
+            return wrapper;
         }
-
-
-        return wrapper;
     }
 
     /**
@@ -181,13 +185,15 @@ export class CodeWithLanguageSelection {
      * @public
      */
     save(codeWrapper) {
-        return Object.assign(this.data, {
-            // code: codeWrapper.querySelector('PRE').textContent,
-            code: codeWrapper.querySelector('textarea') && codeWrapper.querySelector('textarea').value ?
-                codeWrapper.querySelector('textarea').value : '',
-            language: codeWrapper.querySelector('select') && codeWrapper.querySelector('select').value ?
-                codeWrapper.querySelector('select').value : ''
-        });
+        if (this.isPlatformBrowser) {
+            return Object.assign(this.data, {
+                // code: codeWrapper.querySelector('PRE').textContent,
+                code: codeWrapper.querySelector('textarea') && codeWrapper.querySelector('textarea').value ?
+                    codeWrapper.querySelector('textarea').value : '',
+                language: codeWrapper.querySelector('select') && codeWrapper.querySelector('select').value ?
+                    codeWrapper.querySelector('select').value : ''
+            });
+        }
     }
 
     /**
@@ -261,18 +267,20 @@ export class CodeWithLanguageSelection {
     }
 
     _make(tagName, classNames = null, attributes = {}) {
-        const el = document.createElement(tagName);
+        if (this.isPlatformBrowser) {
+            const el = document.createElement(tagName);
 
-        if (Array.isArray(classNames)) {
-            el.classList.add(...classNames);
-        } else if (classNames) {
-            el.classList.add(classNames);
+            if (Array.isArray(classNames)) {
+                el.classList.add(...classNames);
+            } else if (classNames) {
+                el.classList.add(classNames);
+            }
+    
+            for (const attrName in attributes) {
+                el[attrName] = attributes[attrName];
+            }
+    
+            return el;
         }
-
-        for (const attrName in attributes) {
-            el[attrName] = attributes[attrName];
-        }
-
-        return el;
     }
 }

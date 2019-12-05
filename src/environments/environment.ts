@@ -38,7 +38,8 @@ export const environment = {
       // Indicates if the data collection is enabled to support Cognito advanced security features. By default, this flag is set to true.
       AdvancedSecurityDataCollectionFlag: true
     },
-  }
+  },
+	baseHref: '/'
 };
 
 /*

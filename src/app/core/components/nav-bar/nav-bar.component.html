@@ -92,7 +92,7 @@
       </mde-popover>
 
       <!-- My Profile -->
-      <button mat-button [matMenuTriggerFor]="userMenu" *ngIf="loggedInUser; else logIn">
+      <button mat-button [matMenuTriggerFor]="userMenu" *ngIf="authService.loggedInUser; else logIn">
         <a style="padding: 0;" mat-button routerLinkActive="mat-primary" *ngIf="loggedInUser;"
           [routerLink]="['/', {outlets: {'main': ['dashboard', 'my-profile']}}]">
           <i style="font-size: 1.7rem !important; color: #ffffff;" class="vertical-align-middle fad fa-user-circle fa-fw"></i>

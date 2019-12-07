@@ -36,6 +36,8 @@ export class AppComponent implements OnInit {
     //   })
     // );
 
+    this.authService.checkIfUserIsLoggedIn();
+
     this.subscription.add(
       this.authService.loggedInUser$.pipe(
         tap((u) => {

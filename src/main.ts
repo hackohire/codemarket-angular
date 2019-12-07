@@ -15,7 +15,7 @@ import Amplify from '@aws-amplify/core';
 if (environment.production) {
   enableProdMode();
 }
-Amplify.Logger.LOG_LEVEL = 'DEBUG'
+// Amplify.Logger.LOG_LEVEL = 'DEBUG'
 Amplify.configure({
   Auth: {
     ...awsconfig,

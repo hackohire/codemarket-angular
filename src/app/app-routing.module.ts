@@ -206,6 +206,7 @@ const routes: Routes = [
     // resolve: { seo: PostDataResolver },
     // data: { noReuse: true, setPostMeta: true },
     outlet: 'main',
+    pathMatch: 'full'
   },
   {
     path: 'post/:slug',
@@ -213,6 +214,7 @@ const routes: Routes = [
     // resolve: { seo: PostDataResolver },
     // data: { noReuse: true, setPostMeta: true },
     outlet: 'main',
+    pathMatch: 'full'
   },
 ];
 

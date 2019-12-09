@@ -28,7 +28,7 @@ export class MembershipComponent implements OnInit {
   // Replace with your own public key: https://dashboard.stripe.com/test/apikeys
   PUBLIC_KEY = environment.stripe_public_key;
   // Replace with the domain you want your users to be redirected back to after payment
-  DOMAIN = window.location.href;
+  DOMAIN = '';
 
   breadcumb: BreadCumb;
   listOfPlans = environment.planDetails;
@@ -47,6 +47,9 @@ export class MembershipComponent implements OnInit {
     @Inject(PLATFORM_ID) private _platformId: Object,
     private dialog: MatDialog
   ) {
+    if (isPlatformBrowser(this._platformId)) {
+      this.DOMAIN = window.location.href;
+    }
     this.breadcumb = {
       title: 'Membership Plans',
       path: [

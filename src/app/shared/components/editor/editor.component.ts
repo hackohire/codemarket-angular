@@ -83,7 +83,7 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
     */
 
     /** Get all the code elements from DOM and highlight them as code snippets using highlight.js */
-    if (this.editorRef && this.editorRef.nativeElement && isPlatformBrowser(this._platformId)) {
+    if (this.editorRef && isPlatformBrowser(this._platformId) && this.editorRef.nativeElement) {
       this.editorRef.nativeElement.querySelectorAll('pre code').forEach((block: HTMLElement) => {
         this._hljs.highlightBlock(block);
       });
@@ -245,7 +245,7 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
       onReady: (() => {
 
         // Get all the code elements from DOM and highlight them as code snippets using highlight.js
-        if (this.editorRef.nativeElement) {
+        if ( isPlatformBrowser(this._platformId) && this.editorRef.nativeElement) {
           this.editorRef.nativeElement.querySelectorAll('pre code').forEach((block: HTMLElement) => {
             this._hljs.highlightBlock(block);
           });
@@ -277,7 +277,7 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
 
   /** When User will upload / load a video, this method will set an attribute "controls" to show video controls */
   addControlsIfVideoElement() {
-    if (this.editorRef.nativeElement) {
+    if (isPlatformBrowser(this._platformId) && this.editorRef.nativeElement) {
       this.editorRef.nativeElement.querySelectorAll('video').forEach((v: HTMLVideoElement) => {
         if (!v.hasAttribute('controls')) {
           v.setAttribute('controls', '');
@@ -289,7 +289,7 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
   /** On click on every image of the editor zoom in */
   zoomInZoomOutForImages() {
     /** Checking if editor referene is there */
-    if (this.editorRef) {
+    if (this.editorRef && isPlatformBrowser(this._platformId)) {
       /** FInding and running the loop over all the img elements in editor reference */
 
       this.editorRef.nativeElement.querySelectorAll('img').forEach((v: HTMLImageElement) => {

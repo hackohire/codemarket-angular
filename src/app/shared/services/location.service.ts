@@ -78,10 +78,10 @@ export class LocationService {
           locationFormGroup.get('address').setValue(results[0].formatted_address);
           // this.address = results[0].formatted_address;
         } else {
-          window.alert('No results found');
+          // window.alert('No results found');
         }
       } else {
-        window.alert('Geocoder failed due to: ' + status);
+        // window.alert('Geocoder failed due to: ' + status);
       }
 
     });

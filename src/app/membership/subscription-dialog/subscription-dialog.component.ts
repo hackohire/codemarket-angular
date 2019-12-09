@@ -55,7 +55,7 @@ export class SubscriptionDialogComponent implements OnInit, AfterViewInit {
   // Replace with your own public key: https://dashboard.stripe.com/test/apikeys
   PUBLIC_KEY = environment.stripe_public_key;
   // Replace with the domain you want your users to be redirected back to after payment
-  DOMAIN = window.location.href;
+  DOMAIN = '';
   quantity = 1;
   stripeId: string;
 
@@ -71,7 +71,11 @@ export class SubscriptionDialogComponent implements OnInit, AfterViewInit {
     private store: Store<AppState>,
     private router: Router,
     @Inject(PLATFORM_ID) private _platformId: Object
-  ) { }
+  ) {
+    if(isPlatformBrowser(this._platformId)) {
+      this.DOMAIN = window.location.href;
+    }
+  }
 
 
   ngAfterViewInit() {

@@ -318,8 +318,8 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
 
   /** Zoom in & Out on image click */
   zoomInOut(e) {
-    e.path[1].classList.toggle('lightbox');
-    e.path[0].classList.toggle('lightbox-img')
+    // e.path[1].classList.toggle('lightbox');
+    // e.path[0].classList.toggle('lightbox-img')
   }
 
   /** Return Number of comments for that block */

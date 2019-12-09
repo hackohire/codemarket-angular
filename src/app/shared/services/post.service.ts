@@ -1,19 +1,21 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/observable';
 import gql from 'graphql-tag';
-import { map, catchError } from 'rxjs/operators';
+import { map, catchError, tap } from 'rxjs/operators';
 import { Apollo } from 'apollo-angular';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { AppState } from '../../core/store/state/app.state';
 import { Post } from '../models/post.model';
-import { description } from '../constants/fragments_constatnts';
 import { SetSelectedPost } from '../../core/store/actions/post.actions';
 import { productConstants } from '../constants/product_constants';
 import { AuthService } from '../../core/services/auth.service';
-import { of } from 'rxjs';
+import { of } from 'rxjs/observable/of';
 import { PostType } from '../models/post-types.enum';
 import { appConstants } from '../constants/app_constants';
+import { makeStateKey, TransferState } from '@angular/platform-browser';
+import { environment } from '../../../environments/environment';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +27,9 @@ export class PostService {
     private apollo: Apollo,
     private store: Store<AppState>,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private readonly transferState: TransferState,
+    private httpClient: HttpClient,
   ) { }
 
 
@@ -79,6 +83,12 @@ export class PostService {
   }
 
   getPostById(PostId: string): Observable<Post> {
+    /** Checks is transferState has passed the data & retrieves */
+    const key = makeStateKey(PostId);
+    if (this.transferState.hasKey(key)) {
+      const post = this.transferState.get(key, null);
+      return of(post);
+    }
     return this.apollo.query(
       {
         query: gql`
@@ -95,11 +105,12 @@ export class PostService {
       }
     ).pipe(
       map((p: any) => {
+        /** Sets the data to transferState */
+        this.transferState.set(key, p.data.getPostById);
         return p.data.getPostById;
       }),
     );
   }
-
 
   addPost(post: Post): Observable<Post> {
     return this.apollo.mutate({
@@ -187,14 +198,8 @@ export class PostService {
 
   redirectToPostDetails(post, setSelectedPost?: boolean): void {
     this.store.dispatch(SetSelectedPost({ post: null }));
-    // if (setSelectedPost) {
-    //   this.store.dispatch(SetSelectedPost({ post }));
-    // } else {
-    //   // this.store.dispatch(SetSelectedPost({ post: null }));
-    // }
 
     this.router.navigate(['/', { outlets: { main: [
-      'dashboard',
       post.type === 'product' ? 'product' : 'post',
       post.slug ? post.slug : ''] } }
     ],

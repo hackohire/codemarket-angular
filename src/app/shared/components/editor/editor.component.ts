@@ -32,6 +32,7 @@ declare const EditorJS;
 export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit {
 
   editor: any;
+  isPlatformBrowser = false;
   @Input() post: Post; /** post for view mode */
   @Input() id: string;
   @Input() readOnly = false; /** read only mode */
@@ -62,8 +63,9 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
     private _hljs: HighlightJS,
     public authService: AuthService,
     public commentService: CommentService,
-    @Inject(PLATFORM_ID) private _platformId: Object
+    @Inject(PLATFORM_ID) public _platformId: Object
   ) {
+    this.isPlatformBrowser = isPlatformBrowser(this._platformId);
   }
 
   ngOnInit() {
@@ -148,131 +150,132 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
     // Text Editor With Plugin and Configuration
 
     console.log(this.id);
-
-    this.editor = new EditorJS({
-      tools: {
-        header: Header,
-        /** Config Editor.js For Embedding Youtube Videos and Codepen and etc */
-        embed: {
-          class: Embed,
-          inlineToolbar: true
-        },
-        // warning: {
-        //   class: Warning,
-        //   inlineToolbar: true,
-        //   shortcut: 'CMD+SHIFT+W',
-        //   config: {
-        //     titlePlaceholder: 'Title',
-        //     messagePlaceholder: 'Message',
-        //   },
-        // },
-        table: {
-          class: Table,
-          inlineToolbar: true,
-          config: {
-            rows: 2,
-            cols: 3,
+    if (isPlatformBrowser(this._platformId)) {
+      this.editor = new EditorJS({
+        tools: {
+          header: Header,
+          /** Config Editor.js For Embedding Youtube Videos and Codepen and etc */
+          embed: {
+            class: Embed,
+            inlineToolbar: true
+          },
+          // warning: {
+          //   class: Warning,
+          //   inlineToolbar: true,
+          //   shortcut: 'CMD+SHIFT+W',
+          //   config: {
+          //     titlePlaceholder: 'Title',
+          //     messagePlaceholder: 'Message',
+          //   },
+          // },
+          table: {
+            class: Table,
+            inlineToolbar: true,
+            config: {
+              rows: 2,
+              cols: 3,
+            },
+          },
+          Marker: {
+            class: Marker,
+            shortcut: 'CMD+SHIFT+M',
+            inlineToolbar: true,
+          },
+          // quote: {
+          //   class: Quote,
+          //   inlineToolbar: true,
+          //   shortcut: 'CMD+SHIFT+O',
+          // },
+          list: {
+            class: List,
+            inlineToolbar: true,
+          },
+          image: {
+            class: ImageTool,
+            toolbox: {
+              title: 'Media'
+            },
+            config: {
+              buttonContent: 'Select A Media File(Image / GIF / Video)',
+              uploader: {
+                /**
+                 * Upload file to the server and return an uploaded image data
+                 * @param {File} file - file selected from the device or pasted by drag-n-drop
+                 * @return {Promise.<{success, file: {url}}>}
+                 */
+                uploadByFile(file) {
+                  // your own uploading logic here
+  
+                  const fileNameSplitArray = file.name.split('.');
+                  const fileExt = fileNameSplitArray.pop();
+                  const fileName = fileNameSplitArray[0] + '-' + new Date().toISOString() + '.' + fileExt;
+  
+                  return Storage.vault.put(fileName, file, {
+  
+                    bucket: 'codemarket-files',
+  
+                    level: 'public',
+  
+                    contentType: file.type,
+                  }).then((uploaded: any) => {
+                    console.log('uploaded', uploaded);
+                    return {
+                      success: 1,
+                      file: {
+                        url: environment.codemarketFilesBucket + uploaded.key,
+                        // any other image data you want to store, such as width, height, color, extension, etc
+                      }
+                    };
+                  });
+                },
+              }
+            }
+          },
+          code: {
+            class: CodeWithLanguageSelection,
+            config: {
+              readOnly: this.readOnly,
+              isPlatformBrowser: isPlatformBrowser(this._platformId)
+            }
           },
         },
-        Marker: {
-          class: Marker,
-          shortcut: 'CMD+SHIFT+M',
-          inlineToolbar: true,
+        holder: this.id,
+        data: {
+          blocks: this.data && this.data.length ? this.data : blocks
         },
-        // quote: {
-        //   class: Quote,
-        //   inlineToolbar: true,
-        //   shortcut: 'CMD+SHIFT+O',
-        // },
-        list: {
-          class: List,
-          inlineToolbar: true,
-        },
-        image: {
-          class: ImageTool,
-          toolbox: {
-            title: 'Media'
-          },
-          config: {
-            buttonContent: 'Select A Media File(Image / GIF / Video)',
-            uploader: {
-              /**
-               * Upload file to the server and return an uploaded image data
-               * @param {File} file - file selected from the device or pasted by drag-n-drop
-               * @return {Promise.<{success, file: {url}}>}
-               */
-              uploadByFile(file) {
-                // your own uploading logic here
-
-                const fileNameSplitArray = file.name.split('.');
-                const fileExt = fileNameSplitArray.pop();
-                const fileName = fileNameSplitArray[0] + '-' + new Date().toISOString() + '.' + fileExt;
-
-                return Storage.vault.put(fileName, file, {
-
-                  bucket: 'codemarket-files',
-
-                  level: 'public',
-
-                  contentType: file.type,
-                }).then((uploaded: any) => {
-                  console.log('uploaded', uploaded);
-                  return {
-                    success: 1,
-                    file: {
-                      url: environment.codemarketFilesBucket + uploaded.key,
-                      // any other image data you want to store, such as width, height, color, extension, etc
-                    }
-                  };
-                });
-              },
+        placeholder: this.placeholder ? this.placeholder : 'Let`s write!',
+        onReady: (() => {
+  
+          // Get all the code elements from DOM and highlight them as code snippets using highlight.js
+          if ( isPlatformBrowser(this._platformId) && this.editorRef.nativeElement) {
+            this.editorRef.nativeElement.querySelectorAll('pre code').forEach((block: HTMLElement) => {
+              this._hljs.highlightBlock(block);
+            });
+  
+            if (this.readOnly && isPlatformBrowser(this._platformId)) {
+              const elements = document.querySelectorAll('[contenteditable=true]');
+              elements.forEach(element => {
+                element.setAttribute('contenteditable', 'false');
+              });
             }
           }
-        },
-        code: {
-          class: CodeWithLanguageSelection,
-          config: {
-            readOnly: this.readOnly,
-            isPlatformBrowser: isPlatformBrowser(this._platformId)
-          }
-        },
-      },
-      holder: this.id,
-      data: {
-        blocks: this.data && this.data.length ? this.data : blocks
-      },
-      placeholder: this.placeholder ? this.placeholder : 'Let`s write!',
-      onReady: (() => {
-
-        // Get all the code elements from DOM and highlight them as code snippets using highlight.js
-        if ( isPlatformBrowser(this._platformId) && this.editorRef.nativeElement) {
-          this.editorRef.nativeElement.querySelectorAll('pre code').forEach((block: HTMLElement) => {
-            this._hljs.highlightBlock(block);
+  
+          this.addControlsIfVideoElement();
+          this.zoomInZoomOutForImages();
+        }),
+        onChange: (() => {
+          this.editor.save().then((outputData) => {
+            console.log(outputData);
+            this.output.emit([...outputData.blocks]);
+          }).catch((error) => {
+            console.log('Saving failed: ', error);
           });
-
-          if (this.readOnly && isPlatformBrowser(this._platformId)) {
-            const elements = document.querySelectorAll('[contenteditable=true]');
-            elements.forEach(element => {
-              element.setAttribute('contenteditable', 'false');
-            });
-          }
-        }
-
-        this.addControlsIfVideoElement();
-        this.zoomInZoomOutForImages();
-      }),
-      onChange: (() => {
-        this.editor.save().then((outputData) => {
-          console.log(outputData);
-          this.output.emit([...outputData.blocks]);
-        }).catch((error) => {
-          console.log('Saving failed: ', error);
-        });
-
-        this.addControlsIfVideoElement();
-      })
-
-    });
+  
+          this.addControlsIfVideoElement();
+        })
+  
+      });  
+    }
   }
 
   /** When User will upload / load a video, this method will set an attribute "controls" to show video controls */

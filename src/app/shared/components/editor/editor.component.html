@@ -1,4 +1,4 @@
-<div *ngIf="!readOnly" #editorRef [ngStyle]="editorStyle" [id]="id"></div>
+<div *ngIf="!readOnly && isPlatformBrowser" #editorRef [ngStyle]="editorStyle" [id]="id"></div>
 
 <div *ngIf="readOnly" #editorRef  [ngStyle]="editorStyle">
     <div class="ce-block">

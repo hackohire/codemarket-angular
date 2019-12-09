@@ -5,6 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ProductComponent } from './product/product.component';
 import { SharedModule } from '../shared/shared.module';
 import { CompaniesListComponent } from '../companies/companies-list/companies-list.component';
+import { PostDataResolver } from '../core/resolver';
 
 const dashboardRoutes: Routes = [
   {
@@ -49,12 +50,14 @@ const dashboardRoutes: Routes = [
   {
     path: 'product/:slug',
     loadChildren: () => import('./product-details/product-details.module').then(module => module.ProductDetailsModule),
-    data: { noReuse: true }
+    resolve: { seo: PostDataResolver },
+    data: { noReuse: true, setPostMeta: true },
   },
   {
     path: 'post/:slug',
     loadChildren: () => import('../detail/detail.module').then(module => module.DetailModule),
-    data: { noReuse: true }
+    resolve: { seo: PostDataResolver },
+    data: { noReuse: true, setPostMeta: true },
   },
   {
     path: 'company-details/:companyId',

@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { AuthService } from './core/services/auth.service';
-import { timer, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from './core/store/state/app.state';
 import { GetCartProductsList } from './core/store/actions/cart.actions';
@@ -11,21 +11,28 @@ import { UserService } from './user/user.service';
 import Peer from 'peerjs';
 import { environment } from '../environments/environment';
 import { isPlatformBrowser, DOCUMENT } from '@angular/common';
+import { RouteHelperService } from './core/services/route-helper.service';
+import { SeoService } from './core/services/seo.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
   title = 'codemarket';
   private subscription = new Subscription();
   constructor(@Inject(PLATFORM_ID) private platformId: any, @Inject(DOCUMENT) private document: any,
     private authService: AuthService,
     private store: Store<AppState>,
     public dialog: MatDialog,
-    private userService: UserService
+    private userService: UserService,
+    private routeHelper: RouteHelperService,
+    private seoService: SeoService
   ) {
+
+    this.seoService.setTwitterSiteCreator('codemarket');
+    this.seoService.setTwitterCard('summary_large_image');
 
     // const source = timer(1200000);
 
@@ -54,18 +61,8 @@ export class AppComponent implements OnInit {
 
             peer.on('call', (call) => {
               console.log(call);
-              // if (true) {
               this.openDialog(call, peer);
-              // }
             });
-
-
-            // this.webSocketService.subject.subscribe(async (d: any) => {
-            //   console.log(d);
-            //   if (d && d.userWhoIsCalling && !this.dialog.openDialogs.length) {
-            //     // this.openDialog(d.channel);
-            //   }
-            // });
             this.store.dispatch(GetCartProductsList());
           }
         })

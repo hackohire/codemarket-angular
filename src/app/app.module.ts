@@ -1,5 +1,5 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, ErrorHandler, Inject, PLATFORM_ID } from '@angular/core';
+import { BrowserModule, BrowserTransferStateModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -21,6 +21,7 @@ import { GovernmentComponent } from './read-more/government/government.component
 import { DiversityComponent } from './read-more/diversity/diversity.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { AmplifyModule } from './core/amplify/amplify.module';
+import { PostDataResolver } from './core/resolver';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { AmplifyModule } from './core/amplify/amplify.module';
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
+    BrowserTransferStateModule,
     AppRoutingModule,
     CoreModule,
     SharedModule,
@@ -48,6 +50,7 @@ import { AmplifyModule } from './core/amplify/amplify.module';
     LayoutModule,
     AmplifyModule
   ],
+  providers: [PostDataResolver],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

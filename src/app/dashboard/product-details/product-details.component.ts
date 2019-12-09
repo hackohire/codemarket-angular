@@ -21,7 +21,7 @@ import { MatDialog } from '@angular/material';
 import { VideoChatComponent } from 'src/app/video-chat/video-chat.component';
 import Peer from 'peerjs';
 import { PostService } from '../../shared/services/post.service';
-import { GetPostById, SetSelectedPost } from '../../core/store/actions/post.actions';
+import { SetSelectedPost } from '../../core/store/actions/post.actions';
 import { selectSelectedPost } from '../../core/store/selectors/post.selectors';
 import { Post } from '../../shared/models/post.model';
 
@@ -44,7 +44,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
   productDetails: Product;
   purchasedByLoggedInUser: boolean;
 
-  anonymousAvatar = require('src/assets/images/anonymous-avatar.jpg');
+  anonymousAvatar = '../../../assets/images/anonymous-avatar.jpg';
   codemarketBucketURL = environment.codemarketFilesBucket;
 
   commentsList: any[];
@@ -97,8 +97,6 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
       this.subscription$.unsubscribe();
       this.store.dispatch(SetSelectedPost({ post: null }));
     }
-
-    this.title.setTitle('Codemarket');
   }
 
   ngOnInit() {
@@ -107,41 +105,11 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
 
     const postId = params.slug.split('-').pop();
 
-    this.productDetails$ = this.store.select(selectSelectedPost);
+    // this.productDetails$ = this.store.select(selectSelectedPost);
 
     this.subscription$.add(this.store.select(selectSelectedPost).pipe(
       tap((p: Product) => {
         if (p) {
-
-          /** adding meta tags */
-
-          this.meta.updateTag({ name: 'twitter:card', content: 'summary' });
-          this.meta.updateTag({ name: 'twitter:title', content: p.name});
-          this.meta.updateTag({ property: 'og:image', content: 'https://www.codemarket.io/assets/images/logo_qugbvk_c_scalew_282.png' });
-          this.meta.updateTag({ name: 'twitter:image:src', content: 'https://www.codemarket.io/assets/images/logo_qugbvk_c_scalew_282.png' });
-
-          this.meta.updateTag({ property: 'og:title', content: p.name });
-          this.meta.updateTag({ property: 'og:url', content: window.location.href });
-          this.meta.updateTag({ property: 'al:web:url', content: window.location.href });
-          this.meta.updateTag({ property: 'og:type', content: 'article' });
-
-          this.meta.updateTag({ name: 'title', content: p.name });
-          this.meta.updateTag({ name: 'og:url', content: window.location.href });
-          this.meta.updateTag({ name: 'al:web:url', content: window.location.href });
-          this.meta.updateTag({ name: 'og:type', content: 'article' });
-
-          const description: any = p.description && p.description.length ? p.description.find(d => d.type === 'header' || d.type === 'paragraph') : null;
-
-          if (description && description.data.text) {
-            this.meta.updateTag({ name: 'description', content:  description.data.text});
-            this.meta.updateTag({ property: 'og:description', content: description.data.text});
-            this.meta.updateTag({ name: 'twitter:description', content: description.data.text});
-            this.meta.updateTag({ name: 'twitter:text:description', content: description.data.text});
-          }
-
-          /** Setting the page title */
-          this.title.setTitle(p.name);
-
           this.productDetails = p;
 
           this.productDetails$ = of(p);
@@ -173,7 +141,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
            * we try to open any other post detials page
            */
         } else {
-          this.store.dispatch(GetPostById({ postId }));
+          // this.store.dispatch(GetPostById({ postId }));
         }
       }),
     ).subscribe());

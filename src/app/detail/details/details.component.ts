@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild, ViewChildren, ElementRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { Observable, of, Subscription } from 'rxjs';
 import { AppState } from 'src/app/core/store/state/app.state';
 import { Store } from '@ngrx/store';
@@ -12,7 +12,7 @@ import { CommentService } from 'src/app/shared/services/comment.service';
 import { environment } from 'src/environments/environment';
 import { ShareService } from '@ngx-share/core';
 import { selectSelectedPost } from 'src/app/core/store/selectors/post.selectors';
-import { GetPostById, SetSelectedPost, UpdatePost } from 'src/app/core/store/actions/post.actions';
+import { SetSelectedPost } from 'src/app/core/store/actions/post.actions';
 import { Post } from 'src/app/shared/models/post.model';
 import { UserService } from 'src/app/user/user.service';
 import { MatDialog } from '@angular/material';
@@ -54,7 +54,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
   subscription$: Subscription = new Subscription();
   type: string; // product | help-request | interview | requirement | Testing | Howtodoc
   likeCount: number;
-  anonymousAvatar = require('src/assets/images/anonymous-avatar.jpg');
+  anonymousAvatar = '../../../assets/images/anonymous-avatar.jpg';
   codemarketBucketURL = environment.codemarketFilesBucket;
 
   breadcumb: BreadCumb;
@@ -147,39 +147,8 @@ export class DetailsComponent implements OnInit, OnDestroy {
       this.subscription$.add(this.store.select(selectSelectedPost).pipe(
         tap((p: Post) => {
           if (p) {
-
-            /** adding meta tags */
-
-            this.meta.updateTag({ name: 'twitter:card', content: 'summary' });
-            this.meta.updateTag({ name: 'twitter:title', content: p.name});
-            this.meta.updateTag({ property: 'og:image', content: 'https://www.codemarket.io/assets/images/logo_qugbvk_c_scalew_282.png' });
-            this.meta.updateTag({ name: 'twitter:image:src', content: 'https://www.codemarket.io/assets/images/logo_qugbvk_c_scalew_282.png' });
-  
-            this.meta.updateTag({ property: 'og:title', content: p.name });
-            this.meta.updateTag({ property: 'og:url', content: window.location.href });
-            this.meta.updateTag({ property: 'al:web:url', content: window.location.href });
-            this.meta.updateTag({ property: 'og:type', content: 'article' });
-  
-            this.meta.updateTag({ name: 'title', content: p.name });
-            this.meta.updateTag({ name: 'og:url', content: window.location.href });
-            this.meta.updateTag({ name: 'al:web:url', content: window.location.href });
-            this.meta.updateTag({ name: 'og:type', content: 'article' });
-  
-            const description: any = p.description && p.description.length ? p.description.find(d => d.type === 'header' || d.type === 'paragraph') : null;
-  
-            if (description && description.data.text) {
-              this.meta.updateTag({ name: 'description', content:  description.data.text});
-              this.meta.updateTag({ property: 'og:description', content: description.data.text});
-              this.meta.updateTag({ name: 'twitter:description', content: description.data.text});
-              this.meta.updateTag({ name: 'twitter:text:description', content: description.data.text});
-            }
-
-            /** Setting the page title */
-            this.title.setTitle(p.name);
-
             this.postDetails = p;
             this.details$ = of(p);
-            // this.type = ;
             this.initializeCommentForm(p, 'post');
             this.initializeQuestionAndAnswerForm(p, 'post');
 
@@ -204,7 +173,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
              * we try to open any other post detials page
              */
           } else {
-            this.store.dispatch(GetPostById({ postId }));
+            // this.store.dispatch(GetPostById({ postId }));
             this.details$ = this.store.select(selectSelectedPost);
           }
 
@@ -313,6 +282,8 @@ export class DetailsComponent implements OnInit, OnDestroy {
           })
         ).subscribe()
       );
+    } else {
+      this.authService.checkIfUserIsLoggedIn();
     }
   }
 

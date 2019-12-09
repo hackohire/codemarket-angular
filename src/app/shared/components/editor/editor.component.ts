@@ -51,8 +51,7 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
   /** Variables related to block level comments */
   @Input() blockLevelComments = false;
   @Input() commentsList: Comment[]
-
-  anonymousAvatar = require('src/assets/images/anonymous-avatar.jpg');
+  anonymousAvatar = '../../../../assets/images/anonymous-avatar.jpg';
   codemarketBucketURL = environment.codemarketFilesBucket;
 
   commentForm: FormGroup;

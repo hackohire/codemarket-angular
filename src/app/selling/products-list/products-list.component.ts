@@ -35,7 +35,7 @@ import { SweetalertService } from '../../shared/services/sweetalert.service';
 export class ProductsListComponent implements OnInit, OnDestroy, AfterViewInit {
 
   length: number;
-  anonymousAvatar = require('src/assets/images/anonymous-avatar.jpg');
+  anonymousAvatar = '../../../assets/images/anonymous-avatar.jpg';
   codemarketBucketURL = environment.codemarketFilesBucket;
 
   all: boolean;

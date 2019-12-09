@@ -20,7 +20,7 @@ export class VideoChatComponent {
 
   breadcumb: BreadCumb;
   navLinks = [];
-  anonymousAvatar = require('src/assets/images/anonymous-avatar.jpg');
+  anonymousAvatar = '../../assets/images/anonymous-avatar.jpg';
   codemarketBucketURL = environment.codemarketFilesBucket;
 
   constraints;

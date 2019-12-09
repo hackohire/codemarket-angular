@@ -29,8 +29,7 @@ export class EditUserProfileComponent implements OnInit {
   // image: Base64;
   // s3BucketUrl = environment.s3BucketURL;
   currentAvatarUrl: string;
-
-  anonymousAvatar = require('src/assets/images/anonymous-avatar.jpg');
+  anonymousAvatar = '../../../assets/images/ anonymous-avatar.jpg';
   codemarketBucketURL = environment.codemarketFilesBucket;
 
   get avatar() { return this.userProfileForm.get('avatar'); }

@@ -27,7 +27,7 @@ export class MyProfileComponent implements OnInit {
 
   breadcumb: BreadCumb;
   navLinks = [];
-  anonymousAvatar = require('src/assets/images/anonymous-avatar.jpg');
+  anonymousAvatar = '../../../assets/images/anonymous-avatar.jpg';
   codemarketBucketURL = environment.codemarketFilesBucket;
   authorId: string;
 

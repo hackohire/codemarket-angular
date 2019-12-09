@@ -68,11 +68,5 @@ app.get('*.*', express.static(join(DIST_FOLDER), {
 }));
 
 app.get('/*', (req, res) => {
-  res.render('index', {req, res}, (err, html) => {
-    if (html) {
-      res.send(html);
-    } else {
-      res.send(err);
-    }
-  });
+  res.render('index', { req });
 });

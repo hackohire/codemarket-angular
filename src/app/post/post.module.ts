@@ -3,12 +3,14 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { PostComponent } from './post.component';
+import { AuthGuard } from '../shared/guards/auth.guard';
 
 const postRoutes: Routes = [
   {
     path: '',
     component: PostComponent,
     data: { noReuse: true },
+    canLoad: [AuthGuard],
     children: [
       // {
       //   path: '',

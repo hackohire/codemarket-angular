@@ -99,7 +99,7 @@ const routes: Routes = [
     path: 'post',
     loadChildren: () => import('./post/post.module').then(module => module.PostModule),
     outlet: 'main',
-    canLoad: [AuthGuard]
+    // canLoad: [AuthGuard]
   },
 
   {

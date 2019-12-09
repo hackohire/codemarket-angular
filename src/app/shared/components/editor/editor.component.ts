@@ -138,6 +138,8 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
             }
           })
         ).subscribe();
+    } else {
+      this.authService.checkIfUserIsLoggedIn(true);
     }
   }
 

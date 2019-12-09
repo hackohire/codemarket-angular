@@ -87,6 +87,8 @@ export class CommentComponent implements OnInit {
           }
         })
       ).subscribe();
+    } else {
+      this.authService.checkIfUserIsLoggedIn(true);
     }
   }
 

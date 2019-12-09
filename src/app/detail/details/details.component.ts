@@ -283,7 +283,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
         ).subscribe()
       );
     } else {
-      this.authService.checkIfUserIsLoggedIn();
+      this.authService.checkIfUserIsLoggedIn(true);
     }
   }
 

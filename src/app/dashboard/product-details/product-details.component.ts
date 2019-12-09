@@ -177,6 +177,8 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
           })
         ).subscribe()
       );
+    } else {
+      this.authService.checkIfUserIsLoggedIn(true);
     }
   }
 

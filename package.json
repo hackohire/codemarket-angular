@@ -25,8 +25,8 @@
     "build:prod:deploy": "npm run build:prod && npm run deploy",
     "build:serverless:deploy": "npm run build:serverless && npm run deploy",
     "deploy": "serverless deploy",
-    "build:server:prod": "ng run codemarket:server && webpack --config webpack.server.config.js --progress --colors",
-    "build:server:serverless": "ng run codemarket:server:serverless && webpack --config webpack.server.config.js --progress --colors"
+    "build:server:prod": "ng run codemarket:server:production && webpack --config webpack.server.config.js --progress --colors",
+    "build:server:serverless": "ng run codemarket:server:production && webpack --config webpack.server.config.js --progress --colors"
   },
   "private": true,
   "dependencies": {
@@ -66,8 +66,6 @@
     "apollo-angular-link-http": "^1.8.0",
     "apollo-cache-inmemory": "^1.6.3",
     "apollo-client": "^2.6.4",
-    "apollo-link-context": "^1.0.19",
-    "apollo-link-error": "^1.1.12",
     "aws-amplify-angular": "^3.1.4",
     "aws-serverless-express": "^3.3.0",
     "compression": "^1.7.4",
@@ -83,6 +81,7 @@
     "moment": "^2.24.0",
     "ng5-slider": "^1.2.4",
     "ngx-highlightjs": "^3.0.2",
+    "ngx-seo": "^3.1.0",
     "peerjs": "^1.1.0",
     "rxjs": "^6.5.2",
     "sweetalert2": "^8.14.0",

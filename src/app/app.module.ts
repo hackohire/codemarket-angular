@@ -21,6 +21,7 @@ import { GovernmentComponent } from './read-more/government/government.component
 import { DiversityComponent } from './read-more/diversity/diversity.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { AmplifyModule } from './core/amplify/amplify.module';
+import { PostDataResolver } from './core/resolver';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,7 @@ import { AmplifyModule } from './core/amplify/amplify.module';
     LayoutModule,
     AmplifyModule
   ],
-  providers: [],
+  providers: [PostDataResolver],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

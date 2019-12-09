@@ -12,7 +12,7 @@ import { LocalBusinessComponent } from './read-more/local-business/local-busines
 import { GovernmentComponent } from './read-more/government/government.component';
 import { DiversityComponent } from './read-more/diversity/diversity.component';
 import { AboutUsComponent } from './about-us/about-us.component';
-import { PostDataResolver } from './core/resolver';
+// import { PostDataResolver } from './core/resolver';
 
 const routes: Routes = [
   {
@@ -94,21 +94,6 @@ const routes: Routes = [
   //   outlet: 'main',
   //   canLoad: [AuthGuard]
   // },
-  {
-    path: 'product/:slug',
-    loadChildren: () => import('./dashboard/product-details/product-details.module').then(module => module.ProductDetailsModule),
-    resolve: { seo: PostDataResolver },
-    data: { noReuse: true, setPostMeta: true },
-    outlet: 'main',
-  },
-  {
-    path: 'post/:slug',
-    loadChildren: () => import('./detail/detail.module').then(module => module.DetailModule),
-    resolve: { seo: PostDataResolver },
-    data: { noReuse: true, setPostMeta: true },
-    outlet: 'main',
-  },
-
   {
     path: 'post',
     loadChildren: () => import('./post/post.module').then(module => module.PostModule),
@@ -214,6 +199,20 @@ const routes: Routes = [
     path: 'cart',
     loadChildren: () => import('./cart/cart.module').then(module => module.CartModule),
     outlet: 'main'
+  },
+  {
+    path: 'product/:slug',
+    loadChildren: () => import('./dashboard/product-details/product-details.module').then(module => module.ProductDetailsModule),
+    // resolve: { seo: PostDataResolver },
+    // data: { noReuse: true, setPostMeta: true },
+    outlet: 'main',
+  },
+  {
+    path: 'post/:slug',
+    loadChildren: () => import('./detail/detail.module').then(module => module.DetailModule),
+    // resolve: { seo: PostDataResolver },
+    // data: { noReuse: true, setPostMeta: true },
+    outlet: 'main',
   },
 ];
 

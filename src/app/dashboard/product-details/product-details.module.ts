@@ -3,12 +3,14 @@ import { CommonModule } from '@angular/common';
 import { ProductDetailsComponent } from './product-details.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { Routes, RouterModule } from '@angular/router';
+import { PostDataResolver } from '../../core/resolver';
 
 const productDetailRoutes: Routes = [
   {
     path: '',
     component: ProductDetailsComponent,
-    data: { noReuse: true }
+    resolve: { seo: PostDataResolver },
+    data: { noReuse: true, setPostMeta: true },
   }
 ];
 
@@ -19,6 +21,7 @@ const productDetailRoutes: Routes = [
     CommonModule,
     SharedModule,
     RouterModule.forChild(productDetailRoutes)
-  ]
+  ],
+  providers: [PostDataResolver]
 })
 export class ProductDetailsModule { }

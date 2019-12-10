@@ -72,7 +72,7 @@ export class SeoService {
       });
       this.setJsonLDData(jsonLd);
       const seoSocialShareData: SeoSocialShareData = {
-        title: 'Innovation made Accessible & Affordable for Everyone',
+        title: 'Codemarket',
         description: 'Building Tech Skills, Business Skills & Leadership Skills for  Career Growth',
         image: 'https://www.codemarket.io/assets/images/cm.gif',
         url: isPlatformBrowser(this.platformId) ? window.location.href : '',

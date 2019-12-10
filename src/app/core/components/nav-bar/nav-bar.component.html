@@ -67,13 +67,13 @@
     <mat-toolbar style="padding: 10px 0; background-color: rgb(8, 8, 8);">
       <!-- Search -->
       <a mat-button routerLinkActive="mat-primary" (click)="openSearchDialog()">
-        <i style="font-size: 1.5rem !important; color: #ffffff;" class="vertical-align-middle fad fa-search fa-fw"></i>
+        <i style="font-size: 1.0rem !important; color: #ffffff;" class="vertical-align-middle fad fa-search fa-fw"></i>
         <span style="color: #ffffff;" class="line-height-initial" [fxHide.xs]="true"> Search</span>
       </a>
 
       <!-- membership -->
       <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', {outlets: {'main': ['membership']}}]">
-        <i style="font-size: 1.7rem !important; color: #ffffff;" class="vertical-align-middle fad fa-id-card-alt fa-fw"></i>
+        <i style="font-size: 1.0rem !important; color: #ffffff;" class="vertical-align-middle fad fa-id-card-alt fa-fw"></i>
         <span style="color: #ffffff;" class="line-height-initial" [fxHide.xs]="true"> Membership</span>
       </a>
 
@@ -81,7 +81,7 @@
       <ng-template #logIn>
         <a #lr mat-button (click)="login()" [mdePopoverTriggerFor]="authentication" [mdePopoverTargetAt]="lr"
           mdePopoverTriggerOn="click">
-          <i style="font-size: 1.7rem !important; color: #ffffff;" class="vertical-align-middle fad fa-user-circle fa-fw"></i>
+          <i style="font-size: 1.0rem !important; color: #ffffff;" class="vertical-align-middle fad fa-user-circle fa-fw"></i>
           <span style="color: #ffffff;" class="line-height-initial" [fxHide.xs]="true"> Login/Register</span>
         </a>
       </ng-template>
@@ -160,33 +160,33 @@
       <!-- Companies -->
       <a mat-button routerLinkActive="mat-primary"
         [routerLink]="['/', {outlets: {'main': ['dashboard', 'company-list']}}]" [queryParams]="{all: true}">
-        <i style="font-size: 1.5rem !important;" class="vertical-align-middle fal fa-chart-line fa-fw"></i>
+        <i style="font-size: 1.0rem !important;" class="vertical-align-middle fal fa-chart-line fa-fw"></i>
 
         <div class="line-height-initial" [fxHide.xs]="true"> Business </div>
       </a>
       <!-- Startup -->
       <a mat-button routerLinkActive="mat-primary"
         [routerLink]="['/', {outlets: {'main': ['dashboard', 'company-list']}}]" [queryParams]="{all: true}">
-        <i style="font-size: 1.5rem !important;" class="vertical-align-middle fal fa-lightbulb-dollar fa-fw"></i>
+        <i style="font-size: 1.0rem !important;" class="vertical-align-middle fal fa-lightbulb-dollar fa-fw"></i>
         <div class="line-height-initial" [fxHide.xs]="true"> Startup </div>
       </a>
       <!-- All Events -->
       <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', {outlets: {'main': ['social-impact']}}]">
-        <i style="font-size: 1.5rem !important;" class="vertical-align-middle fal fa-hand-holding-heart fa-fw"></i>
+        <i style="font-size: 1.0rem !important;" class="vertical-align-middle fal fa-hand-holding-heart fa-fw"></i>
         <div class="line-height-initial" [fxHide.xs]="true"> Non-Profit</div>
       </a>
 
       <!-- Companoies -->
       <a mat-button routerLinkActive="mat-primary"
         [routerLink]="['/', {outlets: {'main': ['dashboard', 'company-list']}}]" [queryParams]="{all: true}">
-        <i style="font-size: 1.5rem !important;" class="vertical-align-middle fal fa-user-crown fa-fw"></i>
+        <i style="font-size: 1.0rem !important;" class="vertical-align-middle fal fa-user-crown fa-fw"></i>
         <div class="line-height-initial" [fxHide.xs]="true"> Government</div>
       </a>
 
       <!-- Schools -->
       <a mat-button routerLinkActive="mat-primary"
         [routerLink]="['/', {outlets: {'main': ['dashboard', 'company-list']}}]" [queryParams]="{all: true}">
-        <i style="font-size: 1.5rem !important;" class="vertical-align-middle fal fa-graduation-cap fa-fw"></i>
+        <i style="font-size: 1.0rem !important;" class="vertical-align-middle fal fa-graduation-cap fa-fw"></i>
         <div class="line-height-initial" [fxHide.xs]="true"> School</div>
       </a>
 

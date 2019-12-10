@@ -9,9 +9,10 @@
     <div class="row" style="padding-top: 150px;">
         <div class="col-md-6">
             <h1
-                style="font-size: 50px; max-width: 100%; font-weight: 400; text-align: left;">
-                Innovation made <br />Accessible & Affordable for <br />Everyone
+                style="font-size: 60px; max-width: 100%; font-weight: 400; text-align: left;">
+                Innovation made <br />Accessible & Affordable for Everyone
             </h1>
+            <button mat-flat-button color="primary" (click)="authService.login()">JOIN</button>
         </div>
         <div style="text-align: center; align-self: center; " class="col-md-6">
             <img src="./../assets/images/cm.gif">
@@ -20,8 +21,8 @@
     <div class="row" style="margin-top: 170px;">
 
         <div class="col-md-5" style="align-self: start;">
-            <h6 style="font-weight: 600; margin: 5px; font-size: 1.4em;">for Software Developers</h6>
-            <h6 style="font-weight: 200; margin: 5px; font-size: 2.4em;">Building Tech Skills, Business Skills &
+            <h6 style="font-weight: 600; margin: 5px; font-size: 2.4em;">for Software Developers</h6>
+            <h6 style="font-weight: 200; margin: 5px; font-size: 2.4em;">Build Tech Skills, Business Skills &
                 Entrepreneurial skills
                 Leadership Skills for Career Growth</h6>
             <button mat-flat-button color="primary" (click)="authService.login()">JOIN</button>
@@ -32,9 +33,9 @@
         </div>
 
         <div class="col-md-5" style="align-self: start;">
-            <h6 style="font-weight: 600; margin: 5px; font-size: 1.4em;">for Businesses</h6>
-            <h6 style="font-weight: 200; margin: 5px; font-size: 2.4em;">Crowdsourcing innovation by
-                engaging with Software Engineers for a Monthly Subscription</h6>
+            <h6 style="font-weight: 600; margin: 5px; font-size: 2.4em;">for Businesses</h6>
+            <h6 style="font-weight: 200; margin: 5px; font-size: 2.4em;">
+                Connect & Engage with Software Engineers for a Monthly Subscription</h6>
             <button mat-flat-button color="primary" (click)="authService.login()">JOIN</button>
         </div>
     </div>
@@ -51,8 +52,8 @@
 <div class="container">
     <div class="row" style="margin-top: 50px; margin-bottom: 20px;">
         <h3
-            style="font-size: 37px; margin: 20px 40px 20px 13px; max-width: 100%; font-weight: 400; text-align: center;">
-            Innovation made accessible & affordable to everyone
+            style="font-size: 45px; margin: 20px 40px 20px 13px; max-width: 100%; font-weight: 400; text-align: center;">
+            Connecting innovators to business problems in our community
         </h3>
     </div>
 
@@ -150,28 +151,24 @@
 
                 <div class="row">
                     <h3
-                        style="font-size: 37px; margin: 20px 40px 20px 40px; max-width: 100%; font-weight: 400; text-align: center;">
-                        Connecting Software Developers to Business Problems
+                        style="font-size: 40px; margin: 20px 40px 20px 40px; max-width: 100%; font-weight: 400; text-align: center;">
+                       Innovation for SMB's, Non-Profits, Startups & Corporations
                     </h3>
 
                     <p style="margin: 0 40px 40px 40px;"></p>
 
-                    <p style="margin: 0 40px 40px 40px; font-size: 20px; line-height: 2rem;">Tech, Business &
-                        Leadership
-                        skills for software developer's career growth while making innovation accessible and
-                        affordable
-                        to businesses that need it the most.</p>
+                    <p style="margin: 0 40px 40px 40px; font-size: 30px; line-height: 2rem;">
+                            Removing the digital divide in our communities  </p>
 
                 </div>
 
                 <div class="row block-row" style="margin: 20px; height: 25%;">
                     <div class="col-md-6">
                         <img style="height: 50%" src="../../assets/images/techskills.jpg">
-                        <h6 style="font-weight: 500; margin: 5px;">Sharpen coding skills</h6>
-                        <p style="margin: 5px;">Quick way to learn is by talking to
-                            experts and getting clarifications. Upgrade your coding skills by talking to experts who
-                            are
-                            are willing to talk to you about your questions.</p>
+                        <h6 style="font-weight: 500; margin: 5px;">Coding skills</h6>
+                        <p style="margin: 5px;">Quick way to learn new technology is by talking to
+                            experts and getting clarifications. Upgrade your coding skills by talking to experts and getting your questions
+                        answered</p>
                         <p style="font-weight: 50; margin: 5px;"><a
                                 [routerLink]="['/', {outlets: {'main': ['code-expert']}}]">Read More</a></p>
                         <button mat-flat-button color="primary"
@@ -180,7 +177,7 @@
 
                     <div class="col-md-6">
                         <img style="height: 50%" src="../../assets/images/collaborate.jpg">
-                        <h6 style="font-weight: 500; margin: 5px;">Build frictionless teams for innovation.</h6>
+                        <h6 style="font-weight: 500; margin: 5px;">Team IQ</h6>
                         <p style="margin: 5px;">Software development is a team sport. Learning team skills will help
                             you
                             shine within your team leading to successful project completion. </p>
@@ -219,10 +216,9 @@
                 </div>
                 <div class="row block-row" style="margin: 20px; height: 25%;">
                     <div class="col-md-6">
-                        <img style="height: 50%" src="../../assets/images/wellness.jpg">
-                        <h6 style="font-weight: 500; margin: 5px;">Wellness for Software Developers</h6>
-                        <p style="margin: 5px;">Wellness tools for body, mind and spirit to keep you sharp at your
-                            career.</p>
+                        <img style="height: 50%" src="../../assets/images/leadership.jpg">
+                        <h6 style="font-weight: 500; margin: 5px;">Leadership Skills</h6>
+                        <p style="margin: 5px;">Sharpen communications skills, presentation skills that are essential to growing as a technical leader.</p>
                         <p style="font-weight: 50; margin: 5px;"><a
                                 [routerLink]="['/', {outlets: {'main': ['wellness']}}]">Read More</a></p>
                         <button mat-flat-button color="primary"
@@ -309,7 +305,7 @@
 
                     <div class="col-md-6">
                         <img style="height: 50%" src="../../assets/images/money.jpg">
-                        <h6 style="font-weight: 500; margin: 5px;">Money IQ</h6>
+                        <h6 style="font-weight: 500; margin: 5px;">Business Skills</h6>
                         <p style="margin: 5px;">Lack of Financial finess adds stress to us and to our soceity. Lets
                             use
                             innovation to become experts at financial management. </p>

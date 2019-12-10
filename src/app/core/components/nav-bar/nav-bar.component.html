@@ -120,7 +120,11 @@
       </mat-menu>
 
     </mat-toolbar>
-
+<!-- membership -->
+<a mat-button routerLinkActive="mat-primary" [routerLink]="['/', {outlets: {'main': ['membership']}}]">
+  <i style="font-size: 1.0rem !important; color: #ffffff;" class="vertical-align-middle fad fa-id-card-alt fa-fw"></i>
+  <span style="color: #ffffff;" class="line-height-initial" [fxHide.xs]="true"> ACCELERATOR</span>
+</a>
     <mat-toolbar [ngStyle]="{'padding-bottom': '10px'}">
 
       <!-- Toggle Sidebar Button -->
@@ -141,7 +145,40 @@
       <!-- <app-add-post-menu style="color: black;"></app-add-post-menu> -->
       <app-software-dev-menu style="color: black;"></app-software-dev-menu>
 
+      <a mat-button routerLinkActive="mat-primary"
+        [routerLink]="['/', {outlets: {'main': ['dashboard', 'company-list']}}]" [queryParams]="{all: true}">
+        <i style="font-size: 1.0rem !important;" class="vertical-align-middle fal fa-brain fa-fw"></i>
+        
+        <div class="line-height-initial" [fxHide.xs]="true"> ML/AI </div>
+      </a>
 
+      <a mat-button routerLinkActive="mat-primary"
+        [routerLink]="['/', {outlets: {'main': ['dashboard', 'company-list']}}]" [queryParams]="{all: true}">
+        <i style="font-size: 1.0rem !important;" class="vertical-align-middle fal fa-megaphone fa-fw"></i>
+        <div class="line-height-initial" [fxHide.xs]="true"> Marketing </div>
+      </a>
+
+        
+        <a mat-button routerLinkActive="mat-primary"
+          [routerLink]="['/', {outlets: {'main': ['dashboard', 'company-list']}}]" [queryParams]="{all: true}">
+          <i style="font-size: 1.0rem !important;" class="vertical-align-middle fa-chart-line fa-fw"></i>
+          
+          <div class="line-height-initial" [fxHide.xs]="true"> Sales </div>
+        </a>
+       
+        <a mat-button routerLinkActive="mat-primary"
+          [routerLink]="['/', {outlets: {'main': ['dashboard', 'company-list']}}]" [queryParams]="{all: true}">
+          <i style="font-size: 1.0rem !important;" class="vertical-align-middle fal fa-palette fa-fw"></i>
+          
+          <div class="line-height-initial" [fxHide.xs]="true"> Designer </div>
+        </a>
+
+        <a mat-button routerLinkActive="mat-primary"
+          [routerLink]="['/', {outlets: {'main': ['dashboard', 'company-list']}}]" [queryParams]="{all: true}">
+          <i style="font-size: 1.0rem !important;" class="vertical-align-middle fal fa-sack-dollar fa-fw"></i>
+
+          <div class="line-height-initial" [fxHide.xs]="true"> Capital </div>
+        </a>
 
       <!-- All Bugfixes -->
       <!-- <a mat-button routerLinkActive="mat-primary"
@@ -160,8 +197,8 @@
       <!-- Companies -->
       <a mat-button routerLinkActive="mat-primary"
         [routerLink]="['/', {outlets: {'main': ['dashboard', 'company-list']}}]" [queryParams]="{all: true}">
-        <i style="font-size: 1.0rem !important;" class="vertical-align-middle fal fa-chart-line fa-fw"></i>
-
+        <i style="font-size: 1.0rem !important;" class="vertical-align-middle fal fa-building fa-fw"></i>
+        
         <div class="line-height-initial" [fxHide.xs]="true"> Business </div>
       </a>
       <!-- Startup -->

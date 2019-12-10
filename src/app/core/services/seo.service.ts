@@ -99,7 +99,7 @@ export class SeoService {
           name: p.createdBy.name,
         }, undefined),
         headline: p.name,
-        description: description && description.data.text ? description : p.name,
+        description: description && description.data.text ? description.data.text : p.name,
         image: image && image.data.file.url ? image.data.file.url : 'https://www.codemarket.io/assets/images/logo_qugbvk_c_scalew_282.png',
         // dateCreated: p.createdAt,
         // datePublished: p.createdAt,
@@ -108,7 +108,7 @@ export class SeoService {
       this.setJsonLDData(jsonLd);
       const seoData = {
         title: p.name,
-        description: description && description.data.text ? description : p.name,
+        description: description && description.data.text ? description.data.text : p.name,
         image: image && image.data.file.url ? image.data.file.url : 'https://www.codemarket.io/assets/images/logo_qugbvk_c_scalew_282.png',
         url: isPlatformBrowser(this.platformId) ? window.location.href : '',
         type: 'article',

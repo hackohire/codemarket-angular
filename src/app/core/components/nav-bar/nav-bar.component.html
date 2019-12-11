@@ -103,7 +103,7 @@
       <button mat-button [matMenuTriggerFor]="userMenu" *ngIf="authService.loggedInUser; else logIn">
         <a style="padding: 0;" mat-button routerLinkActive="mat-primary" *ngIf="loggedInUser;"
           [routerLink]="['/', {outlets: {'main': ['dashboard', 'my-profile']}}]">
-          <i style="font-size: 1.7rem !important; color: #ffff00;" class="vertical-align-middle fal fa-user-circle fa-fw"></i>
+          <i style="font-size: 1.0rem !important; color: #ffff00;" class="vertical-align-middle fal fa-user-circle fa-fw"></i>
           <span style="color: #ffffff;" class="line-height-initial" [fxHide.xs]="true"> My Profile <mat-icon
               style="vertical-align: middle; height: 28px;">keyboard_arrow_down</mat-icon>
           </span>

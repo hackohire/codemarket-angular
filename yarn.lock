@@ -897,6 +897,13 @@
     js-levenshtein "^1.1.3"
     semver "^5.5.0"
 
+"@babel/runtime@^7.3.1":
+  version "7.7.6"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.7.6.tgz#d18c511121aff1b4f2cd1d452f1bac9601dd830f"
+  integrity sha512-BWAJxpNVa0QlE5gZdWjSxXtemZyZ9RmrmVozxt3NUXeZhVIJ5ANyqmMc0JDrivBZyxUuQvFxlvH4OWWOogGfUw==
+  dependencies:
+    regenerator-runtime "^0.13.2"
+
 "@babel/template@^7.4.0", "@babel/template@^7.4.4", "@babel/template@^7.7.4":
   version "7.7.4"
   resolved "https://registry.yarnpkg.com/@babel/template/-/template-7.7.4.tgz#428a7d9eecffe27deac0a98e23bf8e3675d2a77b"
@@ -956,6 +963,13 @@
   version "2.3.3"
   resolved "https://registry.yarnpkg.com/@editorjs/image/-/image-2.3.3.tgz#5bd0e46ab038853948c5e5df9b049cce53f2d998"
   integrity sha512-IYPCGFVRYyR37m9OeoX4I5SPlMPzHtEgjHzOTeZoU749CI2a7FYVBcMT2j5xoyfDtNSjWT9LAlvPJULv3CFxgg==
+
+"@editorjs/link@^2.1.3":
+  version "2.1.3"
+  resolved "https://registry.yarnpkg.com/@editorjs/link/-/link-2.1.3.tgz#fd14f0a519aab75e234bba5f6e729ba5f0b94422"
+  integrity sha512-nLRnuco61scMPyvczhOVjCd2axk6PWPClpBYEtrtOxP4Cp6tHNRuwvVfSwSGewHBb4A4SJL/NMCShRdfbOm6DQ==
+  dependencies:
+    "@babel/runtime" "^7.3.1"
 
 "@editorjs/list@^1.4.0":
   version "1.4.0"
@@ -1913,10 +1927,10 @@ autoprefixer@9.6.1:
     postcss "^7.0.17"
     postcss-value-parser "^4.0.0"
 
-aws-amplify-angular@^3.1.4:
-  version "3.1.4"
-  resolved "https://registry.yarnpkg.com/aws-amplify-angular/-/aws-amplify-angular-3.1.4.tgz#53d4be15da88cdc50623566b8bb0663b416a02c7"
-  integrity sha512-zT0FV6qUSKr26qfzGTtyjMwC2m06c2iCTHhdH1wYIPVNxJsjAmsb9oOEG9fKZUp+kEsSSPWAouyruODo1HHstw==
+aws-amplify-angular@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/aws-amplify-angular/-/aws-amplify-angular-4.1.1.tgz#e71e9a723d08f439336f4a1137050291986e97a9"
+  integrity sha512-ZgbQls3vXxhiemgt1EVb9oMNMHGtAKaIAFyPnlZWiKD/RRDr4BaqAfae3+PU7LRE4GcGysgPx/IN8mRGWf9Fzw==
   dependencies:
     "@aws-amplify/ui" "^1.1.3"
     rxjs-compat "^6.2.1"
@@ -7975,7 +7989,7 @@ regenerate@^1.2.1, regenerate@^1.4.0:
   resolved "https://registry.yarnpkg.com/regenerate/-/regenerate-1.4.0.tgz#4a856ec4b56e4077c557589cae85e7a4c8869a11"
   integrity sha512-1G6jJVDWrt0rK99kBjvEtziZNCICAuvIPkSiUFIQxVP06RCVpq3dmDo2oi6ABpYaDYaTRr67BEhL8r1wgEZZKg==
 
-regenerator-runtime@0.13.3:
+regenerator-runtime@0.13.3, regenerator-runtime@^0.13.2:
   version "0.13.3"
   resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.13.3.tgz#7cf6a77d8f5c6f60eb73c5fc1955b2ceb01e6bf5"
   integrity sha512-naKIZz2GQ8JWh///G7L3X6LaQUAMp2lvb1rvwwsURe/VXwD6VMfr+/1NuNw3ag8v2kY1aQ/go5SNn79O9JU7yw==

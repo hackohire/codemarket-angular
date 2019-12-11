@@ -107,6 +107,25 @@ export const embedFragment = gql`
 }
 `;
 
+export const linkToolFragment = gql`
+  fragment LinkTool on LinkToolBlock {
+    type
+    _id
+    data {
+      link
+      meta {
+        title
+        description
+        domain
+        url
+        image {
+          url
+        }
+      }
+    }
+  }
+`;
+
 
 export const description = gql`
     fragment Description on descriptionBlocks {
@@ -119,6 +138,7 @@ export const description = gql`
         ...Table
         ...Warning
         ...Embed
+        ...LinkTool
     }
     ${codeFragment}
     ${imageFragment}
@@ -129,4 +149,5 @@ export const description = gql`
     ${tableFragment}
     ${warningFragment}
     ${embedFragment}
+    ${linkToolFragment}
 `;

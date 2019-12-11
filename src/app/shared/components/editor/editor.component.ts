@@ -7,6 +7,7 @@ import Marker from '@editorjs/marker';
 // import Quote from '@editorjs/quote';
 import Table from '@editorjs/table';
 import Embed from '@editorjs/embed';
+import LinkTool from '@editorjs/link';
 // import Warning from '@editorjs/warning';
 import  Storage  from '@aws-amplify/storage';
 import { environment } from 'src/environments/environment';
@@ -159,6 +160,12 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
           embed: {
             class: Embed,
             inlineToolbar: true
+          },
+          linkTool: {
+            class: LinkTool,
+            config: {
+              endpoint: environment.serverless_url + 'fetchLinkMeta', // Your backend endpoint for url data fetching
+            }
           },
           // warning: {
           //   class: Warning,

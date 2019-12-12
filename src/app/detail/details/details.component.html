@@ -30,7 +30,7 @@
                     <div class="item-info">
                         <div>
                             <div class="tab-pane fade show product-tab active" id="product-details">
-                                <div>
+                                <article>
 
                                     <app-editor *ngIf="details?.description" [commentsList]="commentsList"
                                         [blockLevelComments]="true" [readOnly]="true" [data]="details?.description"
@@ -48,7 +48,7 @@
                                     <ng-template #noDescription>
                                         <span>No Description</span>
                                     </ng-template>
-                                </div>
+                                </article>
                             </div>
                         </div>
                         <ng-container *ngTemplateOutlet="locationTemplate; context: {location: details?.location}">

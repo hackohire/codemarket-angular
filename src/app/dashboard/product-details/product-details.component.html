@@ -30,29 +30,23 @@
                     <div class="item-info">
                         <div>
                             <div class="tab-pane fade show product-tab active" id="product-details">
-                                <div>
-
-                                    <app-editor
-                                    *ngIf="product?.description"
-                                    [commentsList]="commentsList"
-                                    [blockLevelComments]="true"
-                                    [readOnly]="true"
-                                    [data]="product?.description"
-                                    [post]="product" 
-                                    [readOnly]="true" [id]="'product-editor'" [commentType]="'post'">
+                                <article>
+                                    <app-editor *ngIf="product?.description" [commentsList]="commentsList"
+                                        [blockLevelComments]="true" [readOnly]="true" [data]="product?.description"
+                                        [post]="product" [readOnly]="true" [id]="'product-editor'"
+                                        [commentType]="'post'">
                                     </app-editor>
+                                </article>
+                                <br />
+                                <br />
+                                <h4 class="tab-content-wrapper">Support Details:</h4>
 
-                                    <br />
-                                    <br />
-                                    <h4 class="tab-content-wrapper">Support Details:</h4>
-
-                                    <app-editor *ngIf="product?.support?.description" [readOnly]="true"
-                                        [data]="product?.support?.description" [id]="'product-support-editor'">
-                                    </app-editor>
-                                    <ng-template #noDescription>
-                                        <span>No Description</span>
-                                    </ng-template>
-                                </div>
+                                <app-editor *ngIf="product?.support?.description" [readOnly]="true"
+                                    [data]="product?.support?.description" [id]="'product-support-editor'">
+                                </app-editor>
+                                <ng-template #noDescription>
+                                    <span>No Description</span>
+                                </ng-template>
                             </div>
                             <!-- end /.tab-content -->
                             <!-- end /.item-navigation -->
@@ -65,9 +59,9 @@
                                     <ul class="media-list thread-list" style="list-style: none;">
                                         <h4 class="tab-content-wrapper">Comments:</h4>
                                         <div *ngFor="let c of commentsList">
-                                                <li *ngIf="!c?.blockSpecificComment" class="single-thread">
-                                                    <app-comment [comment]="c" [referenceId]="product?._id"></app-comment>
-                                                </li>
+                                            <li *ngIf="!c?.blockSpecificComment" class="single-thread">
+                                                <app-comment [comment]="c" [referenceId]="product?._id"></app-comment>
+                                            </li>
                                         </div>
                                     </ul>
                                 </div>
@@ -126,8 +120,8 @@
                                         <h4>{{product?.createdBy?.name}}</h4>
                                     </a>
 
-                                    <button #lr
-                                    [mdePopoverTriggerFor]="schedule" [mdePopoverTargetAt]="lr" mdePopoverTriggerOn="click"
+                                    <button #lr [mdePopoverTriggerFor]="schedule" [mdePopoverTargetAt]="lr"
+                                        mdePopoverTriggerOn="click"
                                         *ngIf="purchasedByLoggedInUser && product?.createdBy?._id && authService?.loggedInUser?._id"
                                         mat-mini-fab color="primary">
                                         <mat-icon>event</mat-icon>
@@ -255,7 +249,7 @@
                                                 [style.backgroundColor]="share?.prop?.facebook.color">
                                                 <!-- <fa-icon [icon]="share?.prop?.facebook.icon" size="lg"></fa-icon> -->
 
-<i class="fab fa-facebook-f"></i>
+                                                <i class="fab fa-facebook-f"></i>
                                             </button>
                                         </li>
                                         <li>
@@ -263,7 +257,7 @@
                                                 [style.backgroundColor]="share?.prop?.twitter.color">
                                                 <!-- <fa-icon [icon]="share?.prop?.twitter.icon" size="lg"></fa-icon> -->
 
-<i class="fab fa-twitter"></i>
+                                                <i class="fab fa-twitter"></i>
                                             </button>
                                         </li>
                                         <li>
@@ -271,14 +265,14 @@
                                                 [style.backgroundColor]="share?.prop?.linkedin.color">
                                                 <!-- <fa-icon [icon]="share?.prop?.linkedin.icon" size="lg"></fa-icon> -->
 
-<i class="fab fa-linkedin"></i>
+                                                <i class="fab fa-linkedin"></i>
                                             </button>
                                         <li>
                                             <button mat-fab shareButton="whatsapp"
                                                 [style.backgroundColor]="share?.prop?.whatsapp.color">
                                                 <!-- <fa-icon [icon]="share?.prop?.whatsapp.icon" size="lg"></fa-icon> -->
 
-<i class="fab fa-whatsapp"></i>
+                                                <i class="fab fa-whatsapp"></i>
                                             </button>
                                         </li>
                                     </ul>

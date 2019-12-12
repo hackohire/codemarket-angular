@@ -7,57 +7,57 @@
     <!-- Sidebar Navigation List Item -->
     <mat-nav-list>
       <!-- Dashboard -->
-      <a mat-list-item [routerLink]="['/', {outlets: {'main': ['dashboard']}}]">Dashboard</a>
+      <a mat-list-item [routerLink]="['/', 'dashboard']">Dashboard</a>
 
-      <a mat-list-item [routerLink]="['/', {outlets: {'main': ['user', 'edit-profile']}}]">Edit Profile</a>
+      <a mat-list-item [routerLink]="['/', 'user', 'edit-profile']">Edit Profile</a>
 
       <!-- Selling -->
-      <a mat-list-item [routerLink]="['/', {outlets: {'main': ['sell']}}]">My Bugfixes</a>
+      <a mat-list-item [routerLink]="['/', 'sell']">My Bugfixes</a>
 
-      <a mat-list-item [routerLink]="['/', {outlets: {'main': ['help-request']}}]"
+      <a mat-list-item [routerLink]="['/', 'help-request']"
         [queryParams]="{type: 'help-request', all: false}">My Help Requests</a>
 
 
-      <a mat-list-item [routerLink]="['/', {outlets: {'main': ['post', 'post-list']}}]"
+      <a mat-list-item [routerLink]="['/', 'post', 'post-list']"
         [queryParams]="{type: 'interview', all: false}">My Interviews</a>
 
 
-      <a mat-list-item [routerLink]="['/', {outlets: {'main': ['post', 'post-list']}}]"
+      <a mat-list-item [routerLink]="['/', 'post', 'post-list']"
         [queryParams]="{type: 'requirement', all: false}">My Requirements</a>
 
-      <a mat-list-item [routerLink]="['/', {outlets: {'main': ['post', 'post-list']}}]"
+      <a mat-list-item [routerLink]="['/', 'post', 'post-list']"
         [queryParams]="{type: 'testing', all: false}">My Testing Reports</a>
-      <a mat-list-item [routerLink]="['/', {outlets: {'main': ['post', 'post-list']}}]"
+      <a mat-list-item [routerLink]="['/', 'post', 'post-list']"
         [queryParams]="{type: 'howtodoc', all: false}">My How-To-Guides</a>
-      <a mat-list-item [routerLink]="['/', {outlets: {'main': ['post', 'post-list']}}]"
+      <a mat-list-item [routerLink]="['/', 'post', 'post-list']"
         [queryParams]="{type: 'design', all: false}">My
         Designs</a>
-      <a mat-list-item [routerLink]="['/', {outlets: {'main': ['post', 'post-list']}}]"
+      <a mat-list-item [routerLink]="['/', 'post', 'post-list']"
         [queryParams]="{type: 'goal', all: false}">My
         Goals</a>
-      <a mat-list-item [routerLink]="['/', {outlets: {'main': ['event', 'post-list']}}]"
+      <a mat-list-item [routerLink]="['/', 'event', 'post-list']"
         [queryParams]="{type: 'event', all: false}">My
         Events</a>
-      <a mat-list-item [routerLink]="['/', {outlets: {'main': ['post', 'post-list']}}]"
+      <a mat-list-item [routerLink]="['/', 'post', 'post-list']"
         [queryParams]="{type: 'team-skill', all: false}">My
         Team Skills</a>
 
-      <a mat-list-item [routerLink]="['/', {outlets: {'main': ['company', 'company-list']}}]"
+      <a mat-list-item [routerLink]="['/', 'company', 'company-list']"
         [queryParams]="{all: false}">My Companies</a>
 
-      <!-- <a mat-list-item [routerLink]="['/', {outlets: {'main': ['company', 'company-list']}}]"
+      <!-- <a mat-list-item [routerLink]="['/', 'company', 'company-list']"
         [queryParams]="{type: 'local-business', all: false}">My
         Local Businesses</a>
 
-      <a mat-list-item [routerLink]="['/', {outlets: {'main': ['company', 'company-list']}}]"
+      <a mat-list-item [routerLink]="['/', 'company', 'company-list']"
         [queryParams]="{type: 'non-profit', all: false}">My
         Non Profits</a>
 
-      <a mat-list-item [routerLink]="['/', {outlets: {'main': ['company', 'company-list']}}]"
+      <a mat-list-item [routerLink]="['/', 'company', 'company-list']"
         [queryParams]="{type: 'startup', all: false}">My
         Startups</a> -->
 
-      <a mat-list-item [routerLink]="['/', {outlets: {'main': ['post', 'dream-job-list']}}]"
+      <a mat-list-item [routerLink]="['/', 'post', 'dream-job-list']"
         [queryParams]="{type: 'dream-job', all: false}">My
         Dreamjobs</a>
     </mat-nav-list>
@@ -68,7 +68,7 @@
 
       
       <!-- accelerator -->
-      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', {outlets: {'main': ['membership']}}]">
+      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'membership']">
         <i style="font-size: 1.0rem !important; color: #00ffff;" class="vertical-align-middle fal fa-rocket fa-fw"></i>
         <span style="color: #00ffff;" class="line-height-initial" [fxHide.xs]="true"> ACCELERATOR</span>
         <i class="fal fa-rocket"></i>
@@ -81,7 +81,7 @@
       </a>
 
       <!-- membership -->
-      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', {outlets: {'main': ['membership']}}]">
+      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'membership']">
         <i style="font-size: 1.0rem !important; color: #ffff00;" class="vertical-align-middle fal fa-id-card-alt fa-fw"></i>
         <span style="color: #ffffff;" class="line-height-initial" [fxHide.xs]="true"> Membership</span>
       </a>
@@ -102,7 +102,7 @@
       <!-- My Profile -->
       <button mat-button [matMenuTriggerFor]="userMenu" *ngIf="authService.loggedInUser; else logIn">
         <a style="padding: 0;" mat-button routerLinkActive="mat-primary" *ngIf="loggedInUser;"
-          [routerLink]="['/', {outlets: {'main': ['dashboard', 'my-profile']}}]">
+          [routerLink]="['/', 'dashboard', 'my-profile']">
           <i style="font-size: 1.0rem !important; color: #ffff00;" class="vertical-align-middle fal fa-user-circle fa-fw"></i>
           <span style="color: #ffffff;" class="line-height-initial" [fxHide.xs]="true"> My Profile <mat-icon
               style="vertical-align: middle; height: 28px;">keyboard_arrow_down</mat-icon>
@@ -113,7 +113,7 @@
       <mat-menu #userMenu="matMenu" panelClass="menu-width">
         <div class="menu-width">
           <!-- Shopping Cart -->
-          <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', {outlets: {'main': ['cart']}}]">
+          <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'cart']">
             <mat-icon>shopping_cart
             </mat-icon> Cart({{cartListLength | async}})
           </a>
@@ -150,35 +150,35 @@
       <app-software-dev-menu style="color: black;"></app-software-dev-menu>
 
       <a mat-button routerLinkActive="mat-primary"
-        [routerLink]="['/', {outlets: {'main': ['dashboard', 'company-list']}}]" [queryParams]="{all: true}">
+        [routerLink]="['/', 'dashboard', 'company-list']" [queryParams]="{all: true}">
         <i style="font-size: 1.0rem !important;" class="vertical-align-middle fal fa-brain fa-fw"></i>
         
         <div class="line-height-initial" [fxHide.xs]="true"> ML/AI </div>
       </a>
 
       <a mat-button routerLinkActive="mat-primary"
-        [routerLink]="['/', {outlets: {'main': ['dashboard', 'company-list']}}]" [queryParams]="{all: true}">
+        [routerLink]="['/', 'dashboard', 'company-list']" [queryParams]="{all: true}">
         <i style="font-size: 1.0rem !important;" class="vertical-align-middle fal fa-megaphone fa-fw"></i>
         <div class="line-height-initial" [fxHide.xs]="true"> Marketing </div>
       </a>
 
         
         <a mat-button routerLinkActive="mat-primary"
-          [routerLink]="['/', {outlets: {'main': ['dashboard', 'company-list']}}]" [queryParams]="{all: true}">
+          [routerLink]="['/', 'dashboard', 'company-list']" [queryParams]="{all: true}">
           <i style="font-size: 1.0rem !important;" class="vertical-align-middle fal fa-funnel-dollar fa-fw"></i>
           
           <div class="line-height-initial" [fxHide.xs]="true"> Sales </div>
         </a>
        
         <a mat-button routerLinkActive="mat-primary"
-          [routerLink]="['/', {outlets: {'main': ['dashboard', 'company-list']}}]" [queryParams]="{all: true}">
+          [routerLink]="['/', 'dashboard', 'company-list']" [queryParams]="{all: true}">
           <i style="font-size: 1.0rem !important;" class="vertical-align-middle fal fa-palette fa-fw"></i>
           
           <div class="line-height-initial" [fxHide.xs]="true"> Designer </div>
         </a>
 
         <a mat-button routerLinkActive="mat-primary"
-          [routerLink]="['/', {outlets: {'main': ['dashboard', 'company-list']}}]" [queryParams]="{all: true}">
+          [routerLink]="['/', 'dashboard', 'company-list']" [queryParams]="{all: true}">
           <i style="font-size: 1.0rem !important;" class="vertical-align-middle fal fa-sack-dollar fa-fw"></i>
 
           <div class="line-height-initial" [fxHide.xs]="true"> Capital </div>
@@ -186,13 +186,13 @@
 
       <!-- All Bugfixes -->
       <!-- <a mat-button routerLinkActive="mat-primary"
-        [routerLink]="['/', {outlets: {'main': ['dashboard', 'bugfixes-all']}}]">
+        [routerLink]="['/', 'dashboard', 'bugfixes-all']">
         <i style="font-size: 1.7rem !important;" class="vertical-align-middle fad fa-lightbulb-dollar fa-fw"></i>
         <div class="line-height-initial" [fxHide.xs]="true">Software Developer</div>
       </a> -->
 
       <!-- Team IQ 
-      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', {outlets: {'main': ['dashboard', 'post-list']}}]"
+      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'dashboard', 'post-list']"
         [queryParams]="{type: 'event', all: true}">
         <i style="font-size: 1.7rem !important;" class="vertical-align-middle fad fa-question-circle fa-fw"></i>
         <div class="line-height-initial" [fxHide.xs]="true">Businesses</div>
@@ -200,60 +200,60 @@
 
       <!-- Companies -->
       <a mat-button routerLinkActive="mat-primary"
-        [routerLink]="['/', {outlets: {'main': ['dashboard', 'company-list']}}]" [queryParams]="{all: true}">
+        [routerLink]="['/', 'dashboard', 'company-list']" [queryParams]="{all: true}">
         <i style="font-size: 1.0rem !important;" class="vertical-align-middle fal fa-building fa-fw"></i>
         
         <div class="line-height-initial" [fxHide.xs]="true"> Business </div>
       </a>
       <!-- Startup -->
       <a mat-button routerLinkActive="mat-primary"
-        [routerLink]="['/', {outlets: {'main': ['dashboard', 'company-list']}}]" [queryParams]="{all: true}">
+        [routerLink]="['/', 'dashboard', 'company-list']" [queryParams]="{all: true}">
         <i style="font-size: 1.0rem !important;" class="vertical-align-middle fal fa-lightbulb-dollar fa-fw"></i>
         <div class="line-height-initial" [fxHide.xs]="true"> Startup </div>
       </a>
       <!-- All Events -->
-      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', {outlets: {'main': ['social-impact']}}]">
+      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'social-impact']">
         <i style="font-size: 1.0rem !important;" class="vertical-align-middle fal fa-hand-holding-heart fa-fw"></i>
         <div class="line-height-initial" [fxHide.xs]="true"> Non-Profit</div>
       </a>
 
       <!-- Companoies -->
       <a mat-button routerLinkActive="mat-primary"
-        [routerLink]="['/', {outlets: {'main': ['dashboard', 'company-list']}}]" [queryParams]="{all: true}">
+        [routerLink]="['/', 'dashboard', 'company-list']" [queryParams]="{all: true}">
         <i style="font-size: 1.0rem !important;" class="vertical-align-middle fal fa-user-crown fa-fw"></i>
         <div class="line-height-initial" [fxHide.xs]="true"> Government</div>
       </a>
 
       <!-- Schools -->
       <a mat-button routerLinkActive="mat-primary"
-        [routerLink]="['/', {outlets: {'main': ['dashboard', 'company-list']}}]" [queryParams]="{all: true}">
+        [routerLink]="['/', 'dashboard', 'company-list']" [queryParams]="{all: true}">
         <i style="font-size: 1.0rem !important;" class="vertical-align-middle fal fa-graduation-cap fa-fw"></i>
         <div class="line-height-initial" [fxHide.xs]="true"> School</div>
       </a>
 
       <!-- Hackathon 
-      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', {outlets: {'main': ['hackathon']}}]">
+      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'hackathon']">
         <i style="font-size: 1.7rem !important;" class="vertical-align-middle fad fa-laptop-code fa-fw"></i>
         <div class="line-height-initial" [fxHide.xs]="true"> Schools</div>
       </a>-->
 
       <!-- Dreamjob 
       <a mat-button routerLinkActive="mat-primary"
-        [routerLink]="['/', {outlets: {'main': ['dashboard', 'dream-job-list']}}]"
+        [routerLink]="['/', 'dashboard', 'dream-job-list']"
         [queryParams]="{type: 'dream-job', all: true}">
         <i style="font-size: 1.7rem !important;" class="vertical-align-middle fad fa-briefcase fa-fw"></i>
         <div class="line-height-initial" [fxHide.xs]="true"> Dream Job</div>
       </a>-->
 
       <!-- Wellness -->
-      <!-- <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', {outlets: {'main': ['wellness']}}]">
+      <!-- <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'wellness']">
         <i style="font-size: 1.7rem !important;" class="vertical-align-middle fad fa-heartbeat fa-fw"></i>
         <div [fxHide.xs]="true"> Wellness</div>
       </a> -->
 
       <!-- Local Businesses -->
       <!-- <a mat-button routerLinkActive="mat-primary"
-        [routerLink]="['/', {outlets: {'main': ['dashboard', 'company-list']}}]"
+        [routerLink]="['/', 'dashboard', 'company-list']"
         [queryParams]="{type: 'local-business', all: true}">
         <i style="font-size: 1.7rem !important;" class="vertical-align-middle fad fa-briefcase fa-fw"></i>
         <div [fxHide.xs]="true"> Local Business</div>
@@ -262,7 +262,7 @@
 
       <!-- Non Profits -->
       <!-- <a mat-button routerLinkActive="mat-primary"
-        [routerLink]="['/', {outlets: {'main': ['dashboard', 'company-list']}}]"
+        [routerLink]="['/', 'dashboard', 'company-list']"
         [queryParams]="{type: 'non-profit', all: true}">
         <i style="font-size: 1.7rem !important;" class="vertical-align-middle fad fa-hand-holding-heart fa-fw"></i>
         <div [fxHide.xs]="true"> Non Profits</div>
@@ -271,7 +271,7 @@
 
 
       <!-- About Us
-      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', {outlets: {'main': ['about']}}]">
+      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'about']">
         <i style="font-size: 1.5rem !important;" class="vertical-align-middle fad fa-info fa-fw"></i>
         <div class="line-height-initial" [fxHide.xs]="true"> About Us</div>
       </a> -->
@@ -279,7 +279,7 @@
 
     <!-- {{loggedInUser | json}} -->
     <!-- Add Content Here -->
-    <router-outlet name="main"></router-outlet>
+    <router-outlet></router-outlet>
 
     <footer class="footer-area footer--light" style="margin-top: 4rem;">
       <div class="mini-footer">

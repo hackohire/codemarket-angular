@@ -205,12 +205,12 @@ export class CompanyService {
   }
 
   redirectToCompanyDetails(companyId: string) {
-    this.router.navigate(['/', { outlets: { main: ['dashboard', `company-details`, companyId] } }],
+    this.router.navigate(['/', 'dashboard', `company-details`, companyId],
     { queryParams: { type: 'company', postId: companyId} });
   }
 
   editCompany(company: Company) {
-    this.router.navigate(['/', { outlets: { main: ['company', 'edit-company', company._id] } }],
+    this.router.navigate(['/', 'company', 'edit-company', company._id],
     {queryParams: {type: company.type}});
   }
 }

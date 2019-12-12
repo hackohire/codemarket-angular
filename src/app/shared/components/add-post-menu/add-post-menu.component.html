@@ -10,14 +10,14 @@
 <mat-menu #menu="matMenu">
 
   <!-- Add Product -->
-  <button mat-menu-item [routerLink]="['/', {outlets: {'main': ['sell', 'add-product']}}]">
+  <button mat-menu-item [routerLink]="['/', 'sell', 'add-product']">
     <!-- <mat-icon>dialpad</mat-icon> -->
     <i style="font-size: 1.7rem !important;" [class]="'vertical-align-middle fal fa-' + icons.product + ' fa-fw'"></i>
     <span class="vertical-align-middle"> Bugfix</span>
   </button>
 
   <!-- Add Help Request -->
-  <button mat-menu-item [routerLink]="['/', {outlets: {'main': ['help-request', 'add-help-request']}}]">
+  <button mat-menu-item [routerLink]="['/', 'help-request', 'add-help-request']">
     <!-- <mat-icon>Help Request</mat-icon> -->
     <i style="font-size: 1.7rem !important;"
       [class]="'vertical-align-middle fal fa-' + icons['help-request'] + ' fa-fw'"></i>
@@ -26,14 +26,14 @@
 
 
   <!-- Add Interview Assignment -->
-  <button mat-menu-item [routerLink]="['/', {outlets: {'main': ['post', 'add-interview']}}]"
+  <button mat-menu-item [routerLink]="['/', 'post', 'add-interview']"
     [queryParams]="{type: 'interview'}">
     <i style="font-size: 1.7rem !important;" [class]="'vertical-align-middle fal fa-' + icons.interview + ' fa-fw'"></i>
     <span> Interview</span>
   </button>
 
   <!-- Add Requirements -->
-  <button mat-menu-item [routerLink]="['/', {outlets: {'main': ['post', 'add-requirement']}}]"
+  <button mat-menu-item [routerLink]="['/', 'post', 'add-requirement']"
     [queryParams]="{type: 'requirement'}">
     <i style="font-size: 1.7rem !important;"
       [class]="'vertical-align-middle fal fa-' + icons.requirement + ' fa-fw'"></i>
@@ -41,7 +41,7 @@
   </button>
 
   <!-- Add Testings -->
-  <button mat-menu-item [routerLink]="['/', {outlets: {'main': ['post', 'add-testing']}}]"
+  <button mat-menu-item [routerLink]="['/', 'post', 'add-testing']"
     [queryParams]="{type: 'testing'}">
     <i style="font-size: 1.7rem !important;" [class]="'vertical-align-middle fal fa-' + icons.testing + ' fa-fw'"></i>
     <span> Testing Report</span>
@@ -49,33 +49,33 @@
 
 
   <!-- Add How To Docs -->
-  <button mat-menu-item [routerLink]="['/', {outlets: {'main': ['post', 'add-howtodoc']}}]"
+  <button mat-menu-item [routerLink]="['/', 'post', 'add-howtodoc']"
     [queryParams]="{type: 'howtodoc'}">
     <i style="font-size: 1.7rem !important;" [class]="'vertical-align-middle fal fa-' + icons.howtodoc + ' fa-fw'"></i>
     <span> How-To-Guide</span>
   </button>
 
   <!-- Add Designs -->
-  <button mat-menu-item [routerLink]="['/', {outlets: {'main': ['post', 'add-design']}}]"
+  <button mat-menu-item [routerLink]="['/', 'post', 'add-design']"
     [queryParams]="{type: 'design'}">
     <i style="font-size: 1.7rem !important;" [class]="'vertical-align-middle fal fa-' + icons.design + ' fa-fw'"></i>
     <span> Design</span>
   </button>
 
   <!-- Add Goals -->
-  <button mat-menu-item [routerLink]="['/', {outlets: {'main': ['post', 'add-goal']}}]" [queryParams]="{type: 'goal'}">
+  <button mat-menu-item [routerLink]="['/', 'post', 'add-goal']" [queryParams]="{type: 'goal'}">
     <i style="font-size: 1.7rem !important;" [class]="'vertical-align-middle fal fa-' + icons.goal + ' fa-fw'"></i>
     <span> Goals</span>
   </button>
 
   <!-- Add Events -->
-  <button mat-menu-item [routerLink]="['/', {outlets: {'main': ['event', 'add-event']}}]">
+  <button mat-menu-item [routerLink]="['/', 'event', 'add-event']">
     <i style="font-size: 1.7rem !important;" [class]="'vertical-align-middle fal fa-' + icons.event + ' fa-fw'"></i>
     <span> Events</span>
   </button>
 
   <!-- Add Team Skills -->
-  <button mat-menu-item [routerLink]="['/', {outlets: {'main': ['post', 'add-teamskill']}}]"
+  <button mat-menu-item [routerLink]="['/', 'post', 'add-teamskill']"
     [queryParams]="{type: 'team-skill'}">
     <i style="font-size: 1.7rem !important;"
       [class]="'vertical-align-middle fal fa-' + icons['team-skill'] + ' fa-fw'"></i>
@@ -83,7 +83,7 @@
   </button>
 
   <!-- Add Dream Job -->
-  <button mat-menu-item [routerLink]="['/', {outlets: {'main': ['post', 'add-dreamjob']}}]">
+  <button mat-menu-item [routerLink]="['/', 'post', 'add-dreamjob']">
     <i style="font-size: 1.7rem !important;"
       [class]="'vertical-align-middle fal fa-' + icons['dream-job'] + ' fa-fw'"></i>
     <span> Dreamjob</span>

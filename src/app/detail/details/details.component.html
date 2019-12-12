@@ -77,7 +77,7 @@
 
                                 <div class="author">
                                     <a
-                                        [routerLink]="['/', {outlets: {'main': ['dashboard', 'profile', details?.createdBy?._id ]}}]">
+                                        [routerLink]="['/', 'dashboard', 'profile', details?.createdBy?._id ]">
                                         <h4>{{details?.createdBy?.name}}</h4>
                                     </a>
                                     <button
@@ -116,7 +116,7 @@
 
                                 <div class="author-btn">
                                     <a (editPost)="postService?.editPost(details)"
-                                        [routerLink]="['/', {outlets: {'main': ['dashboard', 'profile', details?.createdBy?._id ]}}]"
+                                        [routerLink]="['/', 'dashboard', 'profile', details?.createdBy?._id ]"
                                         class="btn btn--sm btn--round">View Profile</a>
                                     <!-- <a href="#" class="btn btn--sm btn--round">Message</a> -->
                                 </div>
@@ -285,7 +285,7 @@
                                         </div>
                                         <div class="autor__info">
                                             <a
-                                                [routerLink]="['/', {outlets: {'main': ['dashboard', 'profile', attendee?._id ]}}]">
+                                                [routerLink]="['/', 'dashboard', 'profile', attendee?._id ]">
                                                 <p class="name">
                                                     {{attendee?.name}}
                                                 </p>
@@ -433,7 +433,7 @@
                         </div>
 
                         <!-- <div class="sidebar-card card--category"> -->
-                        <a [routerLink]="['/', {outlets: {'main': ['company', 'add-company']}}]"
+                        <a [routerLink]="['/', 'company', 'add-company']"
                             class="btn btn--sm btn--round menu" style="margin: 0 30px;">Add Company
                             <!-- <mat-icon style="vertical-align: middle;">library_add</mat-icon> -->
                             <mat-icon style="vertical-align: middle;">add</mat-icon>
@@ -447,7 +447,7 @@
                         <a class="btn btn--sm btn--round menu"
                             style="color: #0674ec !important; background: white; margin: 10px 30px;"
                             [state]="{companyDetails: details}"
-                            [routerLink]="['/', {outlets: {'main': ['event', 'add-event']}}]">Add Event <mat-icon
+                            [routerLink]="['/', 'event', 'add-event']">Add Event <mat-icon
                                 style="vertical-align: middle;">add</mat-icon>
                         </a>
 
@@ -512,7 +512,7 @@
 
                             <div class="author">
                                 <a
-                                    [routerLink]="['/', {outlets: {'main': ['dashboard', 'profile', details?.createdBy?._id ]}}]">
+                                    [routerLink]="['/', 'dashboard', 'profile', details?.createdBy?._id ]">
                                     <h4>{{details?.createdBy?.name}}</h4>
                                 </a>
                                 <button
@@ -551,7 +551,7 @@
 
                             <div class="author-btn">
                                 <a (editPost)="postService?.editPost(details)"
-                                    [routerLink]="['/', {outlets: {'main': ['dashboard', 'profile', details?.createdBy?._id ]}}]"
+                                    [routerLink]="['/', 'dashboard', 'profile', details?.createdBy?._id ]"
                                     class="btn btn--sm btn--round">View Profile</a>
                                 <!-- <a href="#" class="btn btn--sm btn--round">Message</a> -->
                             </div>
@@ -611,7 +611,7 @@
                                     </div>
                                     <div class="autor__info">
                                         <a
-                                            [routerLink]="['/', {outlets: {'main': ['dashboard', 'profile', userInterested?._id ]}}]">
+                                            [routerLink]="['/', 'dashboard', 'profile', userInterested?._id ]">
                                             <p class="name">
                                                 {{userInterested?.name}}
                                             </p>
@@ -765,7 +765,7 @@
                                             <div class="media-left">
 
                                                 <a
-                                                    [routerLink]="['/', {outlets: {'main': ['dashboard', 'profile', a?.createdBy?._id ]}}]">
+                                                    [routerLink]="['/', 'dashboard', 'profile', a?.createdBy?._id ]">
                                                     <img class="author_avatar_comment"
                                                         [src]="a?.createdBy?.avatar ? ((codemarketBucketURL + a.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar"
                                                         alt="Commentator Avatar">
@@ -775,7 +775,7 @@
                                                 <div>
                                                     <div class="media-heading">
                                                         <a
-                                                            [routerLink]="['/', {outlets: {'main': ['dashboard', 'profile', a?.createdBy?._id ]}}]">
+                                                            [routerLink]="['/', 'dashboard', 'profile', a?.createdBy?._id ]">
                                                             <h4>{{a?.createdBy?.name }}</h4>
                                                         </a>
                                                         <span>{{fromNow(a?.createdAt)}}</span>
@@ -877,6 +877,6 @@
         <p>You can visit the list of events you have RSVP for: By Clicking
             <p></p>
             <a class="btn btn--sm btn--round"
-                [routerLink]="['/', {outlets: {'main': ['dashboard', 'my-profile', 'my-rsvp']}}]">My RSVP Events</a>
+                [routerLink]="['/', 'dashboard', 'my-profile', 'my-rsvp']">My RSVP Events</a>
     </div>
 </swal>

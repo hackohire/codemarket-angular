@@ -20,13 +20,13 @@
                         </a>
                         <a *ngIf="postDetails?.type === 'event'" class="btn btn--sm btn--round menu"
                             style="color: #0674ec !important; background: white;"
-                            [routerLink]="['/', {outlets: {'main': ['event', 'add-event']}}]">Add Event <mat-icon
+                            [routerLink]="['/', 'event', 'add-event']">Add Event <mat-icon
                                 style="vertical-align: middle;">add</mat-icon>
                         </a>
                         <a *ngIf="companyDetails" class="btn btn--sm btn--round menu"
                             style="color: #0674ec !important; background: white;"
                             [state]="{companyDetails: companyDetails}"
-                            [routerLink]="['/', {outlets: {'main': ['event', 'add-event']}}]">Add Event <mat-icon
+                            [routerLink]="['/', 'event', 'add-event']">Add Event <mat-icon
                                 style="vertical-align: middle;">add</mat-icon>
                         </a>
                     </div>

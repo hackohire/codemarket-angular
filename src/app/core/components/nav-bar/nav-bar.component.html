@@ -59,7 +59,7 @@
 
       <a mat-list-item [routerLink]="['/', {outlets: {'main': ['post', 'dream-job-list']}}]"
         [queryParams]="{type: 'dream-job', all: false}">My
-        Dreamjobs</a>
+        Dream Jobs</a>
     </mat-nav-list>
   </mat-sidenav>
 
@@ -67,13 +67,7 @@
     <mat-toolbar style="padding: 10px 0; background-color: rgb(8, 8, 8);">
 
       
-      <!-- accelerator -->
-      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', {outlets: {'main': ['membership']}}]">
-        <i style="font-size: 1.0rem !important; color: #00ffff;" class="vertical-align-middle fal fa-rocket fa-fw"></i>
-        <span style="color: #00ffff;" class="line-height-initial" [fxHide.xs]="true"> ACCELERATOR</span>
-        <i class="fal fa-rocket"></i>
-      </a>
-
+      
       <!-- Search -->
       <a mat-button routerLinkActive="mat-primary" (click)="openSearchDialog()">
         <i style="font-size: 1.0rem !important; color: #ffff00;" class="vertical-align-middle fal fa-search fa-fw"></i>
@@ -109,7 +103,15 @@
           </span>
         </a>
       </button>
+      <div style="float: right">
+        <!-- accelerator -->
+      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', {outlets: {'main': ['membership']}}]">
+        <i style="font-size: 1.0rem !important; color: #00ffff;" class="vertical-align-middle fal fa-rocket fa-fw"></i>
+        <span style="color: #ffff00;" class="line-height-initial" [fxHide.xs]="true"> ACCELERATOR</span>
+        <i class="fal fa-rocket"></i>
+      </a>
 
+      </div>
       <mat-menu #userMenu="matMenu" panelClass="menu-width">
         <div class="menu-width">
           <!-- Shopping Cart -->

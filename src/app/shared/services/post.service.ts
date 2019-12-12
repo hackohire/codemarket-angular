@@ -199,9 +199,9 @@ export class PostService {
   redirectToPostDetails(post, setSelectedPost?: boolean): void {
     this.store.dispatch(SetSelectedPost({ post: null }));
 
-    this.router.navigate(['/', { outlets: { main: [
+    this.router.navigate(['/',
       post.type === 'product' ? 'product' : 'post',
-      post.slug ? post.slug : ''] } }
+      post.slug ? post.slug : ''
     ],
       { queryParams: { type: post.type } });
   }
@@ -209,9 +209,9 @@ export class PostService {
   editPost(post): void {
 
     if (post.type === PostType.Product) {
-      this.router.navigate(['/', { outlets: { main: ['sell', 'edit-product', post._id] } }]);
+      this.router.navigate(['/', 'sell', 'edit-product', post._id]);
     } else {
-      this.router.navigate(['/', { outlets: { main: ['post', 'edit-' + post.type, post._id] } }]);
+      this.router.navigate(['/', 'post', 'edit-' + post.type, post._id]);
     }
   }
 

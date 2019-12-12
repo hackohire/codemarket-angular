@@ -139,7 +139,8 @@ export class CoreModule {
                     { name: 'QuoteBlock' },
                     { name: 'TableBlock' },
                     { name: 'WarningBlock' },
-                    { name: 'EmbedBlock' }
+                    { name: 'EmbedBlock' },
+                    { name: 'LinkToolBlock' }
                   ],
                 },
               ],

@@ -28,7 +28,7 @@
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
                     <td mat-cell *matCellDef="let product" (click)="$event.stopPropagation()">
                         <button mat-mini-fab color="primary" (click)="editProduct(product)"
-                            [routerLink]="['/', {outlets: {'main': ['sell', 'edit-product', product._id]}}]">
+                            [routerLink]="['/', 'sell', 'edit-product', product._id]">
                             <mat-icon>edit</mat-icon>
                         </button>
                         <button mat-mini-fab color="warn" (click)="deleteProduct(product._id)">
@@ -288,13 +288,13 @@
                 <div class="item-grid pen-grid item-grid-large">
                     <article class="single-post single-item" *ngFor="let p of dataSource?.data">
                         <header class="header">
-                            <a [routerLink]="['/', {outlets: {'main': ['dashboard', 'profile', p?.createdBy?._id ]}}]"
+                            <a [routerLink]="['/', 'dashboard', 'profile', p?.createdBy?._id ]"
                                 class="authorAvatar">
                                 <img [src]="p?.createdBy?.avatar ? ((codemarketBucketURL + p.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar"
                                     alt="Profile image for Danielle" class="user-avatar" width="40" height="40"></a>
                             <div class="titleAndAuthor">
                                 <address class="author" style="margin-bottom: 0;"><a
-                                        [routerLink]="['/', {outlets: {'main': ['dashboard', 'profile', p?.createdBy?._id ]}}]"
+                                        [routerLink]="['/', 'dashboard', 'profile', p?.createdBy?._id ]"
                                         class="authorName">{{p?.createdBy?.name}}</a></address>
                                 <p>{{p?.createdBy?.currentJobDetails?.jobProfile ? p?.createdBy?.currentJobDetails?.jobProfile : '-'}}
                                 </p>

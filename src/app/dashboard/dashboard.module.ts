@@ -50,14 +50,14 @@ const dashboardRoutes: Routes = [
     path: 'product/:slug',
     loadChildren: () => import('./product-details/product-details.module').then(module => module.ProductDetailsModule),
     data: { noReuse: true, setPostMeta: true },
-    outlet: 'main',
+    // outlet: 'main',
     pathMatch: 'full'
   },
   {
     path: 'post/:slug',
     loadChildren: () => import('../detail/detail.module').then(module => module.DetailModule),
     data: { noReuse: true, setPostMeta: true },
-    outlet: 'main',
+    // outlet: 'main',
     pathMatch: 'full'
   },
   {

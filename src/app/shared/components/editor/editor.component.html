@@ -1,6 +1,6 @@
 <div *ngIf="!readOnly && isPlatformBrowser" #editorRef [ngStyle]="editorStyle" [id]="id"></div>
 
-<div *ngIf="readOnly" #editorRef  [ngStyle]="editorStyle">
+<div *ngIf="readOnly" #editorRef [ngStyle]="editorStyle">
     <div class="ce-block">
         <div class="ce-block__content">
             <ng-container [ngSwitch]="b?.type" *ngFor="let b of data; let i = index">
@@ -20,7 +20,8 @@
                         </div>
 
                         <!-- Header -->
-                        <div style="height: fit-content;" *ngSwitchCase="'header'" innerHTML="{{'<h' + b?.data?.level + ' class=ce-header' + '>' + b?.data?.text + '</h' + b?.data?.level + '>'}}">
+                        <div style="height: fit-content;" *ngSwitchCase="'header'"
+                            innerHTML="{{'<h' + b?.data?.level + ' class=ce-header' + '>' + b?.data?.text + '</h' + b?.data?.level + '>'}}">
                             <!-- <div>
                             </div> -->
                         </div>
@@ -35,7 +36,7 @@
                                         <div style="text-align: center; margin-top: 5px;"
                                             [innerHTML]="b?.data?.caption"></div>
                                     </ng-container>
-                            
+
                                     <ng-template #elseTemplate>
                                         <video class="image-tool__image-picture" autoplay loop controls
                                             [src]="b?.data?.file?.url | safe: 'url'"></video>
@@ -54,6 +55,19 @@
                                 <div style="text-align: center; margin-top: 5px;" [innerHTML]="b?.data?.caption"></div>
                             </div>
                         </div>
+
+                        <div *ngSwitchCase="'linkTool'" class="link-tool">
+                            <a class="link-tool__content link-tool__content--rendered" target="_blank"
+                                rel="nofollow noindex noreferrer"
+                                [href]="b?.data?.link">
+                                <div *ngIf="b?.data?.meta?.image?.url" class="link-tool__image"
+                                    [ngStyle]="{'background-image': 'url(' + b?.data?.meta?.image?.url + ')', 'display': block}">
+                                </div>
+                                <div class="link-tool__title">{{b?.data?.meta?.title}}</div>
+                                <p class="link-tool__description">
+                                    {{b?.data?.meta?.title}}
+                                </p><span class="link-tool__anchor">{{b?.data?.meta?.domain}}</span>
+                            </a></div>
 
                         <!-- Code -->
                         <div *ngSwitchCase="'code'">
@@ -87,13 +101,17 @@
                     <!-- Icon to view / collapse comments section -->
                     <div fxFlex="10">
                         <ng-container *ngIf="blockLevelComments">
-                            <a style="text-align: right; padding: 0 8px; text-decoration: none;" *ngIf="!b['show']" mat-button (click)="b['show'] = true">
+                            <a style="text-align: right; padding: 0 8px; text-decoration: none;" *ngIf="!b['show']"
+                                mat-button (click)="b['show'] = true">
                                 <i style="font-size: 1.5rem !important;" class="fad fa-comments-alt fa-lg"></i>
-                                <span>{{' ('}} {{ commentsList && commentsList?.length ? numberOfComments(b?._id) : 0}} {{')'}}</span>
+                                <span>{{' ('}} {{ commentsList && commentsList?.length ? numberOfComments(b?._id) : 0}}
+                                    {{')'}}</span>
                             </a>
-                            <a style="padding: 0 8px; text-decoration: none;" *ngIf="b['show']" mat-button (click)="b['show'] = false">
+                            <a style="padding: 0 8px; text-decoration: none;" *ngIf="b['show']" mat-button
+                                (click)="b['show'] = false">
                                 <i style="font-size: 1.5rem !important;" class="fad fa-chevron-circle-up fa-lg"></i>
-                                <span>{{' ('}} {{ commentsList && commentsList?.length ? numberOfComments(b?._id) : 0}} {{')'}}</span>
+                                <span>{{' ('}} {{ commentsList && commentsList?.length ? numberOfComments(b?._id) : 0}}
+                                    {{')'}}</span>
                             </a>
                         </ng-container>
                     </div>
@@ -120,7 +138,8 @@
                 <div *ngFor="let c of commentsList">
                     <!-- {{c?.blockId}} - {{blockId}} -->
                     <li *ngIf="c?.blockSpecificComment && c?.blockId === blockId" class="single-thread">
-                        <app-comment [comment]="c" [referenceId]="cDetails?._id" (commentDeleted)="deleteComment($event)"></app-comment>
+                        <app-comment [comment]="c" [referenceId]="cDetails?._id"
+                            (commentDeleted)="deleteComment($event)"></app-comment>
                     </li>
                 </div>
             </ul>

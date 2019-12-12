@@ -18,40 +18,40 @@ import { PostDataResolver } from './core/resolver';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/(main:dashboard)',
+    redirectTo: '/dashboard',
     pathMatch: 'full'
   },
   {
     path: 'id_token',
-    redirectTo: '/(main:dashboard)',
+    redirectTo: '/dashboard',
   },
   {
     path: 'access_token',
-    redirectTo: '/(main:dashboard)',
+    redirectTo: '/dashboard',
   },
   {
     path: 'dashboard',
     loadChildren: () => import('./dashboard/dashboard.module').then(module => module.DashboardModule),
-    outlet: 'main'
+    // outlet: 'main'
   },
   {
     path: 'sell',
     loadChildren: () => import('./selling/selling.module').then(module => module.SellingModule),
-    outlet: 'main',
+    // outlet: 'main',
     canLoad: [AuthGuard]
   },
 
   {
     path: 'user',
     loadChildren: () => import('./user/user.module').then(module => module.UserModule),
-    outlet: 'main',
+    // outlet: 'main',
     canLoad: [AuthGuard]
   },
 
   {
     path: 'help-request',
     loadChildren: () => import('./help/help.module').then(module => module.HelpModule),
-    outlet: 'main',
+    // outlet: 'main',
     canLoad: [AuthGuard]
   },
 
@@ -98,21 +98,21 @@ const routes: Routes = [
   {
     path: 'post',
     loadChildren: () => import('./post/post.module').then(module => module.PostModule),
-    outlet: 'main',
+    // outlet: 'main',
     // canLoad: [AuthGuard]
   },
 
   {
     path: 'company',
     loadChildren: () => import('./companies/companies.module').then(module => module.CompaniesModule),
-    outlet: 'main',
+    // outlet: 'main',
     canLoad: [AuthGuard]
   },
 
   {
     path: 'event',
     loadChildren: () => import('./event/event.module').then(module => module.EventModule),
-    outlet: 'main',
+    // outlet: 'main',
     canLoad: [AuthGuard]
   },
 
@@ -127,86 +127,86 @@ const routes: Routes = [
   {
     path: 'membership',
     loadChildren: () => import('./membership/membership.module').then(module => module.MembershipModule),
-    outlet: 'main',
+    // outlet: 'main',
   },
 
   {
     path: 'hackathon',
     component: HackohireComponent,
-    outlet: 'main',
+    // outlet: 'main',
   },
 
   {
     path: 'wellness',
     component: WellnessComponent,
-    outlet: 'main',
+    // outlet: 'main',
   },
 
   {
     path: 'social-impact',
     component: SocialImpactComponent,
-    outlet: 'main',
+    // outlet: 'main',
   },
 
   {
     path: 'team-iq',
     component: TeamIqComponent,
-    outlet: 'main',
+    // outlet: 'main',
   },
 
   {
     path: 'dreamjob',
     component: DreamJobComponent,
-    outlet: 'main',
+    // outlet: 'main',
   },
 
   {
     path: 'code-expert',
     component: CodingExpertsComponent,
-    outlet: 'main',
+    // outlet: 'main',
   },
 
   {
     path: 'startups',
     component: StartupsComponent,
-    outlet: 'main',
+    // outlet: 'main',
   },
 
   {
     path: 'local-business',
     component: LocalBusinessComponent,
-    outlet: 'main',
+    // outlet: 'main',
   },
 
   {
     path: 'government',
     component: GovernmentComponent,
-    outlet: 'main',
+    // outlet: 'main',
   },
 
   {
     path: 'diversity',
     component: DiversityComponent,
-    outlet: 'main',
+    // outlet: 'main',
   },
 
   {
     path: 'about',
     component: AboutUsComponent,
-    outlet: 'main'
+    // outlet: 'main'
   },
 
   {
     path: 'cart',
     loadChildren: () => import('./cart/cart.module').then(module => module.CartModule),
-    outlet: 'main'
+    // outlet: 'main'
   },
   {
     path: 'product/:slug',
     loadChildren: () => import('./dashboard/product-details/product-details.module').then(module => module.ProductDetailsModule),
     resolve: { seo: PostDataResolver },
     data: { noReuse: true, setPostMeta: true },
-    outlet: 'main',
+    // outlet: 'main',
     pathMatch: 'full'
   },
   {
@@ -214,7 +214,7 @@ const routes: Routes = [
     loadChildren: () => import('./detail/detail.module').then(module => module.DetailModule),
     resolve: { seo: PostDataResolver },
     data: { noReuse: true, setPostMeta: true },
-    outlet: 'main',
+    // outlet: 'main',
     pathMatch: 'full'
   },
 ];

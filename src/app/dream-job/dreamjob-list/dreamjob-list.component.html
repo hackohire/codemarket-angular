@@ -61,7 +61,7 @@
                         <button
                         *ngIf="post?.createdBy?._id === authService?.loggedInUser?._id"
                         mat-mini-fab color="primary" (click)="editPost(post)"
-                            [routerLink]="['/', {outlets: {'main': ['post', 'edit-' + post.type, post._id]}}]">
+                            [routerLink]="['/', 'post', 'edit-' + post.type, post._id]">
                             <mat-icon>edit</mat-icon>
                         </button>
                         <button

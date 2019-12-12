@@ -1,7 +1,7 @@
 <div class="media" *ngIf="replyCommentForm?.value">
     <div class="media-left">
 
-        <a [routerLink]="['/', {outlets: {'main': ['dashboard', 'profile', comment?.createdBy?._id ]}}]">
+        <a [routerLink]="['/', 'dashboard', 'profile', comment?.createdBy?._id ]">
             <img class="author_avatar_comment"
                 [src]="comment?.createdBy?.avatar ? ((codemarketBucketURL + comment.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar"
                 alt="Commentator Avatar">
@@ -10,7 +10,7 @@
     <div class="media-body">
         <div>
             <div class="media-heading">
-                <a [routerLink]="['/', {outlets: {'main': ['dashboard', 'profile', comment?.createdBy?._id ]}}]">
+                <a [routerLink]="['/', 'dashboard', 'profile', comment?.createdBy?._id ]">
                     <h4>{{comment?.createdBy?.name }}</h4>
                 </a>
                 <span>{{fromNow(comment?.createdAt)}}</span>

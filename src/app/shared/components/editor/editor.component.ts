@@ -6,7 +6,8 @@ import List from '@editorjs/list';
 import Marker from '@editorjs/marker';
 // import Quote from '@editorjs/quote';
 import Table from '@editorjs/table';
-import Embed from '@editorjs/embed';
+// import Embed from '@editorjs/embed';
+import Embed from '../../../editor-js/plugins/embed';
 import LinkTool from '@editorjs/link';
 // import Warning from '@editorjs/warning';
 import  Storage  from '@aws-amplify/storage';
@@ -339,6 +340,12 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
   /** Listen to the output event from the comment component and delete the comment */
   deleteComment(id: string) {
     this.commentsList = this.commentsList.filter(c => c._id !== id);
+  }
+
+  gistFrame(url: string) {
+    const template = "<html><body><style type=\"text/css\">.gist .gist-data { height: 400px; }</style><script src=\"gistSrc\"></script></body></html>";
+    const replaced = template.replace('gistSrc', url + '.js');
+    return replaced;
   }
 
 }

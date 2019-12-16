@@ -13,7 +13,11 @@
                         </li>
                     </ul>
                     <div style="margin-left: auto;">
-                            <app-add-post-menu style="color: #0674ec !important; margin-left: auto;"></app-add-post-menu>
+                        <a *ngIf="showImportButton" class="btn btn--sm btn--round menu"
+                            style="color: #0674ec !important; background: white;" [mdePopoverTriggerFor]="importArticle"
+                            [mdePopoverTargetAt]="lr" mdePopoverTriggerOn="click">Import
+                        </a>
+                        <app-add-post-menu style="color: #0674ec !important; margin-left: auto;"></app-add-post-menu>
                         <a *ngIf="showEditPostDetails" class="btn btn--sm btn--round menu"
                             style="color: #0674ec !important; background: white; margin-right: 5px;"
                             (click)="editPost.emit()">Edit <mat-icon style="vertical-align: middle;">edit</mat-icon>
@@ -25,12 +29,10 @@
                         </a>
                         <a *ngIf="companyDetails" class="btn btn--sm btn--round menu"
                             style="color: #0674ec !important; background: white;"
-                            [state]="{companyDetails: companyDetails}"
-                            [routerLink]="['/', 'event', 'add-event']">Add Event <mat-icon
-                                style="vertical-align: middle;">add</mat-icon>
+                            [state]="{companyDetails: companyDetails}" [routerLink]="['/', 'event', 'add-event']">Add
+                            Event <mat-icon style="vertical-align: middle;">add</mat-icon>
                         </a>
                     </div>
-
                     <!-- Add Post Menu Integrated -->
                     <!-- <app-add-post-menu *ngIf="showMenu" [ngStyle]="{'color': color}" style="padding-left: 10px;"></app-add-post-menu> -->
                 </div>
@@ -92,6 +94,19 @@
     </div>
     <!-- end /.container -->
 </section>
+<mde-popover #importArticle="mdePopover" [mdePopoverOverlapTrigger]="false" [mdePopoverCloseOnClick]="false"
+    [mdePopoverArrowOffsetX]="50" mdePopoverArrowColor="#FFFFFF">
+    <div style="background: #f8f9fb; padding: 10px;">
+        <p>Import Article By URL</p>
+        <mat-form-field class="field-full-width">
+            <input [formControl]="articleLink" type="text" matInput placeholder="Article Link">
+        </mat-form-field>
+        <mat-icon (click)="import()">send</mat-icon>
+    </div>
+    <!-- <a class="btn btn--sm btn--round menu" (click)="import()"
+        style="color: #0674ec !important; background: white; float: right;">Ok
+    </a> -->
+</mde-popover>
 
 <!--================================
                 END BREADCRUMB AREA

@@ -1,4 +1,4 @@
-<app-breadcumb [title]="breadcumb?.title" [path]="breadcumb?.path"></app-breadcumb>
+<app-breadcumb [title]="breadcumb?.title" [path]="breadcumb?.path" [showImportButton]="true"></app-breadcumb>
 
 <div class="container">
     <div class="row">
@@ -16,11 +16,11 @@
 
                 <app-editor *ngIf="descriptionFormControl?.value && edit; else add"
                     [data]="productForm?.get('description')?.value" (output)="updateFormData($event)"
-                    [id]="'edit-product-editor'"></app-editor>
+                    [id]="'edit-product-editor'" [importArticleSubscription]="true"></app-editor>
 
 
                 <ng-template #add>
-                    <app-editor (output)="updateFormData($event)" [id]="'product-editor'"></app-editor>
+                    <app-editor (output)="updateFormData($event)" [id]="'product-editor'" [importArticleSubscription]="true"></app-editor>
                 </ng-template>
 
 

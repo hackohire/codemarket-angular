@@ -50,16 +50,22 @@
                         <!-- Embed -->
                         <div *ngSwitchCase="'embed'">
                             <div class="cdx-block embed-tool">
-                                <iframe class="embed-tool__content" style="width:100%;" height="320" frameborder="0"
+                                <iframe *ngIf="b?.data?.service !== 'github'; else gistTemplate"
+                                    class="embed-tool__content" style="width:100%;" height="320" frameborder="0"
                                     allowfullscreen [src]="b?.data?.embed | safe : 'resourceUrl'"></iframe>
+                                <!-- When there is Gist -->
+                                <ng-template #gistTemplate>
+                                    <iframe class="embed-tool__content" style="width:100%;" height="465" frameborder="0"
+                                        allowfullscreen [srcdoc]="gistFrame(b?.data?.embed) | safe: 'html'">
+                                    </iframe>
+                                </ng-template>
                                 <div style="text-align: center; margin-top: 5px;" [innerHTML]="b?.data?.caption"></div>
                             </div>
                         </div>
 
                         <div *ngSwitchCase="'linkTool'" class="link-tool">
                             <a class="link-tool__content link-tool__content--rendered" target="_blank"
-                                rel="nofollow noindex noreferrer"
-                                [href]="b?.data?.link">
+                                rel="nofollow noindex noreferrer" [href]="b?.data?.link">
                                 <div *ngIf="b?.data?.meta?.image?.url" class="link-tool__image"
                                     [ngStyle]="{'background-image': 'url(' + b?.data?.meta?.image?.url + ')', 'display': block}">
                                 </div>

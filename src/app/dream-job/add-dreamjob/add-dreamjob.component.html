@@ -1,4 +1,4 @@
-<app-breadcumb [title]="breadcumb?.title" [path]="breadcumb?.path"></app-breadcumb>
+<app-breadcumb [title]="breadcumb?.title" [path]="breadcumb?.path" [showImportButton]="true"></app-breadcumb>
 
 
 <div class="container">
@@ -17,12 +17,12 @@
                 <br />
 
                 <app-editor *ngIf="descriptionFormControl?.value && edit; else add" (output)="updateFormData($event)"
-                    [data]="descriptionFormControl?.value" [id]="'edit-dreamjob-editor'"></app-editor>
+                    [data]="descriptionFormControl?.value" [id]="'edit-dreamjob-editor'" [importArticleSubscription]="true"></app-editor>
 
                 <br />
 
                 <ng-template #add>
-                    <app-editor *ngIf="!edit" (output)="updateFormData($event)" [id]="'dreamjob-editor'"></app-editor>
+                    <app-editor *ngIf="!edit" (output)="updateFormData($event)" [id]="'dreamjob-editor'" [importArticleSubscription]="true"></app-editor>
                 </ng-template>
 
                 <ng-select placeholder="Select Company" formControlName="company">

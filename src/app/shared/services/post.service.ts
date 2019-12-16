@@ -16,6 +16,7 @@ import { appConstants } from '../constants/app_constants';
 import { makeStateKey, TransferState } from '@angular/platform-browser';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,7 @@ import { HttpClient } from '@angular/common/http';
 export class PostService {
 
   postFields = appConstants.postQuery;
+  contentFromAnotherArticle = new BehaviorSubject(null);
   constructor(
     private apollo: Apollo,
     private store: Store<AppState>,

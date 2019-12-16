@@ -1,4 +1,4 @@
-<app-breadcumb [title]="breadcumb?.title" [path]="breadcumb?.path"></app-breadcumb>
+<app-breadcumb [title]="breadcumb?.title" [path]="breadcumb?.path" [showImportButton]="true"></app-breadcumb>
 
 
 <div class="container">
@@ -13,11 +13,11 @@
                 <br />
 
                 <app-editor *ngIf="descriptionFormControl?.value && edit; else add" (output)="updateFormData($event)"
-                    [data]="descriptionFormControl?.value" [id]="'edit-teamskill-editor'"></app-editor>
+                    [data]="descriptionFormControl?.value" [id]="'edit-teamskill-editor'" [importArticleSubscription]="true"></app-editor>
 
 
                 <ng-template #add>
-                    <app-editor *ngIf="!edit" (output)="updateFormData($event)" [id]="'teamskill-editor'"></app-editor>
+                    <app-editor *ngIf="!edit" (output)="updateFormData($event)" [id]="'teamskill-editor'" [importArticleSubscription]="true"></app-editor>
                 </ng-template>
 
 

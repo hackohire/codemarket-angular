@@ -6,10 +6,11 @@ import List from '@editorjs/list';
 import Marker from '@editorjs/marker';
 // import Quote from '@editorjs/quote';
 import Table from '@editorjs/table';
-import Embed from '@editorjs/embed';
+// import Embed from '@editorjs/embed';
+import Embed from '../../../editor-js/plugins/embed';
 import LinkTool from '@editorjs/link';
 // import Warning from '@editorjs/warning';
-import  Storage  from '@aws-amplify/storage';
+import Storage from '@aws-amplify/storage';
 import { environment } from 'src/environments/environment';
 import { CodeWithLanguageSelection } from 'src/app/insert-code-snippet';
 import { HighlightJS } from 'ngx-highlightjs';
@@ -22,8 +23,9 @@ import { Post } from '../../models/post.model';
 import { Comment } from '../../models/comment.model';
 import { isPlatformBrowser } from '@angular/common';
 const path = require('path');
-declare const EditorJS;
-
+import editorJS from '../../../editor-js/dist/editor';
+import EditorJS from '@editorjs/editorjs';
+import { PostService } from '../../services/post.service';
 @Component({
   selector: 'app-editor',
   templateUrl: './editor.component.html',
@@ -32,7 +34,7 @@ declare const EditorJS;
 })
 export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit {
 
-  editor: any;
+  editor: EditorJS;
   isPlatformBrowser = false;
   @Input() post: Post; /** post for view mode */
   @Input() id: string;
@@ -41,6 +43,7 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
   @Input() placeholder: string;
   @Input() commentType: string;
   @Output() output: EventEmitter<any> = new EventEmitter(); /** Emitting data with user interactions */
+  @Input() importArticleSubscription = false;
   @ViewChild('editorRef', { static: false }) editorRef: ElementRef;
 
   @Input() editorStyle = {
@@ -63,7 +66,8 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
     private _hljs: HighlightJS,
     public authService: AuthService,
     public commentService: CommentService,
-    @Inject(PLATFORM_ID) public _platformId: Object
+    @Inject(PLATFORM_ID) public _platformId: Object,
+    private postService: PostService
   ) {
     this.isPlatformBrowser = isPlatformBrowser(this._platformId);
   }
@@ -153,7 +157,16 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
 
     console.log(this.id);
     if (isPlatformBrowser(this._platformId)) {
-      this.editor = new EditorJS({
+      // this.goalFormInitialization();
+      if (this.importArticleSubscription) {
+        this.postService.contentFromAnotherArticle.subscribe(p => {
+          if (p) {
+            this.editor.blocks.renderFromHTML(p);
+          }
+        });
+      }
+
+      this.editor = new editorJS({
         tools: {
           header: Header,
           /** Config Editor.js For Embedding Youtube Videos and Codepen and etc */
@@ -213,17 +226,17 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
                  */
                 uploadByFile(file) {
                   // your own uploading logic here
-  
+
                   const fileNameSplitArray = file.name.split('.');
                   const fileExt = fileNameSplitArray.pop();
                   const fileName = fileNameSplitArray[0] + '-' + new Date().toISOString() + '.' + fileExt;
-  
+
                   return Storage.vault.put(fileName, file, {
-  
+
                     bucket: 'codemarket-files',
-  
+
                     level: 'public',
-  
+
                     contentType: file.type,
                   }).then((uploaded: any) => {
                     console.log('uploaded', uploaded);
@@ -253,13 +266,13 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
         },
         placeholder: this.placeholder ? this.placeholder : 'Let`s write!',
         onReady: (() => {
-  
+
           // Get all the code elements from DOM and highlight them as code snippets using highlight.js
-          if ( isPlatformBrowser(this._platformId) && this.editorRef.nativeElement) {
+          if (isPlatformBrowser(this._platformId) && this.editorRef.nativeElement) {
             this.editorRef.nativeElement.querySelectorAll('pre code').forEach((block: HTMLElement) => {
               this._hljs.highlightBlock(block);
             });
-  
+
             if (this.readOnly && isPlatformBrowser(this._platformId)) {
               const elements = document.querySelectorAll('[contenteditable=true]');
               elements.forEach(element => {
@@ -267,7 +280,7 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
               });
             }
           }
-  
+
           this.addControlsIfVideoElement();
           this.zoomInZoomOutForImages();
         }),
@@ -278,11 +291,11 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
           }).catch((error) => {
             console.log('Saving failed: ', error);
           });
-  
+
           this.addControlsIfVideoElement();
         })
-  
-      });  
+
+      });
     }
   }
 
@@ -339,6 +352,12 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
   /** Listen to the output event from the comment component and delete the comment */
   deleteComment(id: string) {
     this.commentsList = this.commentsList.filter(c => c._id !== id);
+  }
+
+  gistFrame(url: string) {
+    const template = "<html><body><style type=\"text/css\">.gist .gist-data { height: 400px; }</style><script src=\"gistSrc\"></script></body></html>";
+    const replaced = template.replace('gistSrc', url + '.js');
+    return replaced;
   }
 
 }

@@ -9,7 +9,7 @@
 // @import '~aws-amplify-angular/Theme.css';
 
 html,
-body {
+body, iframe {
   height: 100%;
 }
 body {
@@ -18,6 +18,10 @@ body {
 
 span {
   color: inherit;
+}
+
+.image-tool__image-picture {
+  margin: auto !important;
 }
 
 .line-height-initial {

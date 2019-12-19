@@ -249,6 +249,20 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
                     };
                   });
                 },
+                uploadByUrl(url) {
+                  // console.log(url);
+                  // console.log(decodeURI(url));
+                  url = decodeURI(url);
+                  url = url.replace(/"/gi, '')
+                  const a = url.slice(url.split('/', 3).join('/').length + 1, url.length)
+                  return Promise.resolve({
+                    success: 1,
+                    file: {
+                      url: a,
+                      // any other image data you want to store, such as width, height, color, extension, etc
+                    }
+                  });
+                }
               }
             }
           },
@@ -355,7 +369,7 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
   }
 
   gistFrame(url: string) {
-    const template = "<html><body><style type=\"text/css\">.gist .gist-data { height: 400px; }</style><script src=\"gistSrc\"></script></body></html>";
+    const template = `<html><body><style type="text/css">.gist .gist-data { height: auto; }</style><script src="gistSrc"></script></body></html>`;
     const replaced = template.replace('gistSrc', url + '.js');
     return replaced;
   }

@@ -35,10 +35,10 @@ export class BreadcumbComponent implements OnInit {
   import() {
     console.log(this.articleLink.value);
     fetch(`${environment.serverless_url}fetchArticleByLink?url=${this.articleLink.value}`)
-      .then(res => res.text())
+      .then(res => res.json())
       .then(h => {
-        console.log(h);
-        this.postService.contentFromAnotherArticle.next(h);
+        console.log(h.contentHtml);
+        this.postService.contentFromAnotherArticle.next(h.contentHtml);
       })
   }
 

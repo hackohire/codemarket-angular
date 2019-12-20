@@ -8,6 +8,7 @@ import Marker from '@editorjs/marker';
 import Table from '@editorjs/table';
 // import Embed from '@editorjs/embed';
 import Embed from '../../../editor-js/plugins/embed';
+import Paragraph from '../../../editor-js/plugins/paragraph/bundle';
 import LinkTool from '@editorjs/link';
 // import Warning from '@editorjs/warning';
 import Storage from '@aws-amplify/storage';
@@ -174,6 +175,9 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
             class: Embed,
             inlineToolbar: true
           },
+          paragraph: {
+            class: Paragraph
+          },
           linkTool: {
             class: LinkTool,
             config: {
@@ -252,13 +256,13 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
                 uploadByUrl(url) {
                   // console.log(url);
                   // console.log(decodeURI(url));
-                  url = decodeURI(url);
-                  url = url.replace(/"/gi, '')
-                  const a = url.slice(url.split('/', 3).join('/').length + 1, url.length)
+                  // url = decodeURI(url);
+                  // url = url.replace(/"/gi, '')
+                  // const a = url.slice(url.split('/', 3).join('/').length + 1, url.length)
                   return Promise.resolve({
                     success: 1,
                     file: {
-                      url: a,
+                      url
                       // any other image data you want to store, such as width, height, color, extension, etc
                     }
                   });

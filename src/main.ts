@@ -21,11 +21,11 @@ Amplify.configure({
     ...awsconfig,
     "oauth": environment.oauth,
     authenticationFlowType: 'USER_SRP_AUTH',
-    identityPoolId: "us-east-1:b08baf8a-8de9-45bc-a2d8-d537e23d2426",
-    region: "us-east-1",
-    identityPoolRegion: "us-east-1",
-    userPoolId: "us-east-1_B4xlOmGS0",
-    userPoolWebClientId: "6b96cs2pmq0khunn6mth7r48td",
+    identityPoolId: awsconfig.aws_cognito_identity_pool_id,
+    region: awsconfig.aws_cognito_region,
+    identityPoolRegion: awsconfig.aws_cognito_region,
+    userPoolId: awsconfig.aws_user_pools_id,
+    userPoolWebClientId: awsconfig.aws_user_pools_web_client_id,
   }
 });
 Storage.configure(awsconfig);

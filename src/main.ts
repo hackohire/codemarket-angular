@@ -26,9 +26,6 @@ Amplify.configure({
     identityPoolRegion: "us-east-1",
     userPoolId: "us-east-1_B4xlOmGS0",
     userPoolWebClientId: "6b96cs2pmq0khunn6mth7r48td",
-    accessKeyId: 'AKIA22XAL7SFSEYOAO4L',
-    secretAccessKey: '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',
-    // storage: new StorageHelper().getStorage()
   }
 });
 Storage.configure(awsconfig);

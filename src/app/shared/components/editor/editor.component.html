@@ -55,7 +55,7 @@
                                     allowfullscreen [src]="b?.data?.embed | safe : 'resourceUrl'"></iframe>
                                 <!-- When there is Gist -->
                                 <ng-template #gistTemplate>
-                                    <iframe scrolling="yes" width="100" frameborder="0" allowfullscreen [srcdoc]="gistFrame(b?.data?.embed) | safe: 'html'">
+                                    <iframe scrolling="yes" width="100%" frameborder="0" allowfullscreen [srcdoc]="gistFrame(b?.data?.embed) | safe: 'html'">
                                     </iframe>
                                 </ng-template>
                                 <div style="text-align: center; margin-top: 5px;" [innerHTML]="b?.data?.caption"></div>

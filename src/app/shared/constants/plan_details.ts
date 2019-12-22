@@ -4,7 +4,7 @@ export const plans = {
       {
         id: 'plan_GEOxM2fHMFLRYj',
         product_id: 'prod_FwdeAeZ0zF98Nj',
-        name: 'Developer Plan',
+        name: 'Idea Stage',
         status: 'ACTIVE',
         description: 'Career plan',
         shortDescription: 'For Individual Developers',
@@ -34,7 +34,7 @@ export const plans = {
       {
         id: 'plan_GEOzNfYW7nlzP0',
         product_id: 'prod_FwdeAeZ0zF98Nj',
-        name: 'Team Plan',
+        name: 'Product Market Fit Stage',
         status: 'ACTIVE',
         description: 'Team plan',
         shortDescription: 'For Small Teams',
@@ -64,7 +64,7 @@ export const plans = {
       {
         id: 'plan_GEOyjrDjrolxtM',
         product_id: 'prod_FwdeAeZ0zF98Nj',
-        name: 'Corporate Plan',
+        name: 'Scaling Stage',
         status: 'ACTIVE',
         description: 'Company plan',
         shortDescription: 'For Large Teams',

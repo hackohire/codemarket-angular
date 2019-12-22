@@ -12,6 +12,7 @@ import { AuthService } from '../core/services/auth.service';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { ActivatedRoute } from '@angular/router';
 import { MembershipService } from '../membership/membership.service';
+import { AcceleratorService } from '../accelerator/accelerator.service';
 
 @Component({
   selector: 'app-dashboard',

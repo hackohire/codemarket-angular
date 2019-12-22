@@ -1,0 +1,149 @@
+<!-- <h2 mat-dialog-title>
+  {{data?.plan?.name}}
+</h2> -->
+<section class="breadcrumb-area breadcumb-padding">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1 class="page-title">{{data.plan.name}}</h1>
+        <div class="breadcrumb">
+          <ul>
+            <li [ngClass]="'active'">
+              <a>{{'Billed Monthly'}}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- end /.col-md-12 -->
+    </div>
+    <!-- end /.row -->
+  </div>
+  <!-- end /.container -->
+</section>
+
+<mat-dialog-content style="margin: 10px; padding-top: 10px;">
+
+  <div fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="center baseline">
+
+    <span fxFlex="20">
+      <h3>{{data?.plan?.fixed_price?.value | currency}}</h3>
+    </span>
+
+    <span fxFlex="5">
+      <i class="far fa-times"></i>
+    </span>
+
+    <mat-form-field fxFlex="35" appearance="outline">
+      <mat-label>No. of Users</mat-label>
+      <input #noOfUsers pattern="^[0-9]{1,2}$" style="font-size: x-large;" type="number" maxlength="2" [(ngModel)]="quantity"
+        matInput placeholder="Users" [disabled]="activatedCoupon">
+      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+    </mat-form-field>
+
+    <span fxFlex="10" style="text-align: right">
+      <i class="far fa-equals"></i>
+    </span>
+
+    <span fxFlex="30" style="text-align: right">
+      <h3>{{(data?.plan?.fixed_price?.value * quantity) | currency}}</h3>
+    </span>
+
+  </div>
+
+  <hr class="dash" />
+
+  <div fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="start baseline">
+
+    <div fxLayout="column" fxFlex="60">
+
+      <mat-form-field style="padding: 0" appearance="outline">
+        <mat-label>Promo Code</mat-label>
+        <input style="font-size: large;" type="text" [formControl]="promoCodeControl" matInput placeholder="Promo Code">
+        <button mat-button *ngIf="promoCodeControl?.value" matSuffix mat-icon-button aria-label="Clear"
+          (click)="removePromoCode()">
+          <mat-icon>close</mat-icon>
+        </button>
+        <mat-icon *ngIf="!promoCodeControl?.value" matSuffix>redeem</mat-icon>
+      </mat-form-field>
+
+      <mat-hint *ngIf="promoCodes?.FIRSTMONTHFREE.title === appliedPromoCode
+          && promoCodes?.FIRSTMONTHFREE.applied" style="color: green !important;">
+        <i class="fad fa-check"></i>
+        First Month Free!
+      </mat-hint>
+
+      <!--SUCESS FOR Coupon Code other than FIRST MONTH FREE -->
+      <mat-hint *ngIf="activatedCoupon" style="color: green !important;">
+        <i class="fad fa-check"></i>
+        Coupon Code Applied!
+      </mat-hint>
+    </div>
+
+    <button mat-flat-button color="primary" (click)="applyPromo()">Apply Promo</button>
+  </div>
+
+  <hr class="dash" />
+
+  <div fxLayout="row" fxLayoutAlign="end end">
+    <h3>Total =
+      {{ promoCodes?.FIRSTMONTHFREE.title === appliedPromoCode ? ((0 | currency) + '(First Month)') : 
+      ((data?.plan?.fixed_price?.value - (data?.plan?.fixed_price?.value * (activatedCoupon ? (activatedCoupon?.percent_off / 100) : 0))) * quantity) | currency}}
+    </h3>
+  </div>
+
+  <hr class="dash" />
+
+  <form action="/charge" method="post" (submit)="handleForm()">
+    <div #cardForm class="input"></div>
+
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions style="margin-left: 35px;">
+  <button [disabled]="promoCodeControl?.invalid" mat-flat-button color="primary" (click)="handleForm()">Submit
+    Payment</button>
+  <button mat-flat-button color="warn" (click)="dialogRef.close()">Cancel</button>
+</mat-dialog-actions>
+
+<swal #successfulPayment title="Congratulations!" type="success" (confirm)="onConfirm($event)">
+  <div *swalPartial class="alert alert-info">
+    <h4>Subscription Purchased Successfully</h4>
+  </div>
+</swal>
+
+<!-- <mat-dialog-content>
+        <mat-radio-group [(ngModel)]="userSelection" (change)="userSelectionChange($event)"
+          aria-label="Select an option" #user="matRadioGroup" fxLayout="row" fxLayoutGap="8px">
+          <mat-radio-button fxFlex [value]="true">Single User</mat-radio-button>
+          <mat-radio-button fxFlex [value]="false">Multiple Users</mat-radio-button>
+        </mat-radio-group>
+
+        <div [formGroup]="usersListForm" *ngIf="user?.value === false && userList?.controls">
+          <div formArrayName="list" *ngFor="let u of userList?.controls; let i=index">
+
+            <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px" [formGroupName]="i">
+              <span fxFlex="5">{{i + 1}}</span>
+              <mat-form-field fxFlex="30">
+                <input matInput type="text" placeholder="Name" formControlName="name">
+              </mat-form-field>
+              <mat-form-field fxFlex="60">
+                <input matInput type="email" placeholder="Email" formControlName="email">
+              </mat-form-field>
+              <mat-icon (click)="addUser()">add_circle</mat-icon>
+              <mat-icon *ngIf="i !== 0" (click)="removeUser(i)">remove_circle</mat-icon>
+            </div>
+          </div>
+        </div>
+        <div>
+          Total: <b>{{(data?.plan?.fixed_price?.value * quantity) | currency}}</b>
+        </div>
+        </mat-dialog-content>
+        <mat-dialog-actions>
+          <button *ngIf="!user?.value" mat-flat-button color="primary" [disabled]="usersListForm?.invalid"
+            (click)="redirectToCheckout()">
+            Proceed
+          </button>
+          <button *ngIf="user?.value" mat-flat-button color="primary" (click)="redirectToCheckout()">
+            Proceed
+          </button>
+        </mat-dialog-actions> -->

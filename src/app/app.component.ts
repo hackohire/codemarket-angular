@@ -21,7 +21,7 @@ import { appConstants } from './shared/constants/app_constants';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, OnDestroy {
-  title = 'codemarket';
+  title = appConstants.SEO.title
   private subscription = new Subscription();
   constructor(@Inject(PLATFORM_ID) private platformId: any, @Inject(DOCUMENT) private document: any,
     private authService: AuthService,

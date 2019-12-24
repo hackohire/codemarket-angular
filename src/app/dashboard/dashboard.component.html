@@ -7,43 +7,55 @@
         Innovation made <br/>Accessible & Affordable for <br/>Everyone
     </h1> -->
     <div class="row" style="padding-top: 150px;">
-        <div class="col-md-9">
-            <h1
+        <div class="col-md-7">
+            <h6
                 style="font-size: 60px; max-width: 100%; font-weight: 400; text-align: left;">
-                Innovation & Growth <br />Made Accessible & Affordable <br /> For Everyone
-            </h1>
+                We Recommend the Most Effective Drugs  <br />by Testing Your Cancer Cells
+            </h6>
             <button mat-flat-button color="primary" (click)="authService.login()">JOIN</button>
         </div>
-        <div style="text-align: center; align-self: center; " class="col-md-3">
-            <img src="./../assets/images/cm.gif">
+        <div style="text-align: center; align-self: center; " class="col-md-5">
+            <img src="./../assets/images/report.png">
         </div>
     </div>
     <div class="row" style="margin-top: 170px;">
+            <h3
+            style="font-size: 45px; margin: 20px 40px 20px 13px; max-width: 100%; font-weight: 400; text-align: center;">
+        Benefits of Our Cancer Test Report:
+        </h3>
         <div class="col-md-6" style="align-self: start;">
-            <h6 style="font-weight: 600; margin: 5px; font-size: 2.4em;">for Professionals</h6>
-            <img style="height: 10%; width: 10%;" [src]="'../../assets/images/professional.png'"
-            alt="Product Image">
-            <h6 style="font-weight: 200; margin: 5px; font-size: 2.4em;">Boost your Career by Engaging with Businesses in your Community. Develop Leadership Skills, Business Skills and Unlock Your Full Potential. </h6>
-            <p style="font-weight: 50; margin: 5px;">
-                <a routerLinkActive="mat-primary" [routerLink]="['/', 'accelerate']">Read More</a></p>
+            <h6 style="font-weight: 800; margin: 5px; font-size: 2.0em;">1. Reduces the Guesswork in Selecting Your Cancer Treatment.<br/></h6>
+           <div class="">
+                    <img style="height: 235px; width: fit-content;" [src]="'../../assets/images/tests.png'"
+                        alt="Product Image">
+                    <!-- end /.prod_btn -->
+                </div>
+                <h6 style="font-weight: 200; margin: 5px; font-size: 2.4em;">
+                    If the Cancer is not treated right the first time it can become more aggressive.</h6>
+                <h6 style="font-weight: 200; margin: 5px; font-size: 2.4em;"></h6>
+            
             <button mat-flat-button color="primary" (click)="authService.login()">JOIN</button>
         </div>
 
-        
         <!-- <div class="col-md-2" style="text-align: center; margin-bottom: 30px; padding: 0;">
             <img style="width: 100%" src="./../assets/images/fly720x550.png">
         </div> -->
 
         <div class="col-md-6" style="align-self: start;">
-            <h6 style="font-weight: 600; margin: 5px; font-size: 2.4em;">for Businesses</h6>
-            <img style="height: 20%; width: 20%;" [src]="'../../assets/images/shop.png'" alt="Product Image">
-            <h6 style="font-weight: 200; margin: 5px; font-size: 2.4em;">
-                Sales Automation Platform Powered by Business Process Automation.Invest in Business Innovation for Sustainable Results.</h6>
-                <p style="font-weight: 50; margin: 5px;"><a
-                    [routerLink]="['/', 'dreamjob']">Read More</a></p>
-                <button mat-flat-button color="primary" (click)="authService.login()">JOIN</button>
+                <h6 style="font-weight: 600; margin: 5px; font-size: 2.0em;">2.Helps select the most effective and least toxic drug regimen for your cancer.<br/></h6>
+            <h6 style="font-weight: 600; margin: 5px; font-size: 2.0em;"></h6>
+             <div class="">
+                    <img style="height: 235px; width: fit-content;" [src]="'../../assets/images/report-final.png'"
+                        alt="Product Image">
+                    <!-- end /.prod_btn -->
+                </div>
+                <h6 style="font-weight: 200; margin: 5px; font-size: 2.4em;">
+                        These Recommended Drugs Increase Your Survival Rates by XYZ</h6>
+            <button mat-flat-button color="primary" (click)="authService.login()">JOIN</button>
         </div>
     </div>
+
+    
     <!-- <table><tr>
             <td  height="550px"><img class="header-image" src="../../assets/images/fly720x550.png"
                 alt="background-image"></td><td style="font-size: 67px; margin: 20px 40px 20px 40px; max-width: 550px; font-weight: 700;">FLY IN YOUR TECH CAREER</td>
@@ -51,211 +63,32 @@
 </div>
 <!-- </section> -->
 
-<mat-divider style="margin: 50px;"></mat-divider>
-<!-- Header Section Ends HERE -->
 
-<div class="container">
-    <div class="row" style="margin-top: 50px; margin-bottom: 20px;">
-        <h3
-            style="font-size: 45px; margin: 20px 40px 20px 13px; max-width: 100%; font-weight: 400; text-align: center;">
-        Connecting Local Businesses to Local Professionals.
-        </h3>
-    </div>
-
-    <div class="row">
-        <div class="col-lg-4 col-md-6">
-            <!-- start .single-product -->
-            <div class="product product--card">
-                <h6 style="font-weight: 600; margin: 5px; font-size: 2.4em;">Q&A</h6>
-                <div class="">
-                    <img style="height: 70%; width: 70%;" [src]="'../../assets/images/q&a3.png'"
-                        alt="Product Image">
-                    <!-- end /.prod_btn -->
-                </div>
-                <!-- end /.product__thumbnail -->
-
-                <div class="product-desc" style="height: 80px;">
-                    <a class="product_title">
-                        <h4>Connect with Local Innovators on Common Areas of Interest</h4>
-                    </a>
-                    <!-- <p>Nunc placerat mi id nisi interdum mollis. Praesent pharetra, justo ut scelerisque the mattis,
-                        leo quam aliquet congue.</p> -->
-                </div>
-                <p style="font-weight: 50; margin: 5px;"><a
-                    [routerLink]="['/', 'dreamjob']">Read More</a></p>
-                <button mat-flat-button color="primary" (click)="authService.login()">JOIN</button>
-                <!-- end /.product-desc -->
-            </div>
-            <!-- end /.single-product -->
-        </div>
-        <!-- end /.col-md-4 -->
-
-        <div class="col-lg-4 col-md-6">
-            <!-- start .single-product -->
-            <div class="product product--card">
-                <h6 style="font-weight: 600; margin: 5px; font-size: 2.4em;">Video Conference</h6>
-                <div class="">
-                    <img style="height: 60%; width: 60%;" [src]="'../../assets/images/vc1.png'"
-                        alt="Product Image">
-                    <!-- end /.prod_btn -->
-                </div>
-                <!-- end /.product__thumbnail -->
-
-                <div class="product-desc" style="height: 80px;">
-                    <a class="product_title">
-                        <h4>Video Conference with Local Innovators to Collaborate</h4>
-                    </a>
-                    <!-- <p>Nunc placerat mi id nisi interdum mollis. Praesent pharetra, justo ut scelerisque the mattis,
-                        leo quam aliquet congue.</p> -->
-                </div>
-                <p style="font-weight: 50; margin: 5px;"><a
-                    [routerLink]="['/', 'dreamjob']">Read More</a></p>
-                <button mat-flat-button color="primary" (click)="authService.login()">JOIN</button>
-                <!-- end /.product-desc -->
-            </div>
-            <!-- end /.single-product -->
-        </div>
-        <div class="col-lg-4 col-md-6">
-            <!-- start .single-product -->
-            <div class="product product--card">
-                <h6 style="font-weight: 600; margin: 5px; font-size: 2.4em;">Meetups</h6>
-                <div class="">
-                    <img style="height: 70%; width: 70%;" [src]="'../../assets/images/meetup3.png'"
-                        alt="Product Image">
-                    <!-- end /.prod_btn -->
-                </div>
-                <!-- end /.product__thumbnail -->
-
-                <div class="product-desc" style="height: 80px;">
-                    <a class="product_title">
-                        <h4>In Person Meetings to Form Deeper Bonds with Community Members</h4>
-                    </a>
-
-                    <!-- <p>Nunc placerat mi id nisi interdum mollis. Praesent pharetra, justo ut scelerisque the mattis,
-                        leo quam aliquet congue.</p> -->
-                </div>
-                <p style="font-weight: 50; margin: 5px;"><a
-                    [routerLink]="['/', 'dreamjob']">Read More</a></p>
-                <button mat-flat-button color="primary" (click)="authService.login()">JOIN</button>
-                <!-- end /.product-desc -->
-            </div>
-            <!-- end /.single-product -->
-        </div>
-    </div>
-</div>
-
-<mat-divider style="margin: 50px;"></mat-divider>
-
-<div class="container">
-        <div class="row" style="margin-top: 50px; margin-bottom: 20px;">
-            <h3
-                style="font-size: 45px; margin: 20px 40px 20px 13px; max-width: 100%; font-weight: 400; text-align: center;">
-                Local Businesses : Sales Automation, Marketing Automation, Business Process Automation.
-            </h3>
-        </div>
-    
-        <div class="row">
-            <div class="col-lg-4 col-md-6">
-                <!-- start .single-product -->
-                <div class="product product--card">
-                    <h6 style="font-weight: 600; margin: 5px; font-size: 2.0em;">Sales Automation</h6>
-                    <div class="">
-                        <img style="height: 70%; width: 70%;" [src]="'../../assets/images/sales_growth.png'"
-                            alt="Product Image">
-                        <!-- end /.prod_btn -->
-                    </div>
-                    <!-- end /.product__thumbnail -->
-    
-                    <div class="product-desc" style="height: 80px;">
-                        <a class="product_title">
-                            <h4>Business Development, Referral Program, Partnerships, Strategic Relationships</h4>
-                        </a>
-                        <!-- <p>Nunc placerat mi id nisi interdum mollis. Praesent pharetra, justo ut scelerisque the mattis,
-                            leo quam aliquet congue.</p> -->
-                    </div>
-                    <p style="font-weight: 50; margin: 5px;"><a
-                        [routerLink]="['/', 'dreamjob']">Read More</a></p>
-                    <button mat-flat-button color="primary" (click)="authService.login()">JOIN</button>
-                    <!-- end /.product-desc -->
-                </div>
-                <!-- end /.single-product -->
-            </div>
-            <!-- end /.col-md-4 -->
-    
-            <div class="col-lg-4 col-md-6">
-                <!-- start .single-product -->
-                <div class="product product--card">
-                    <h6 style="font-weight: 600; margin: 5px; font-size: 2.0em;">CRM</h6>
-                    <div class="">
-                        <img style="height: 60%; width: 60%;" [src]="'../../assets/images/crm3.png'"
-                            alt="Product Image">
-                        <!-- end /.prod_btn -->
-                    </div>
-                    <!-- end /.product__thumbnail -->
-    
-                    <div class="product-desc" style="height: 80px;">
-                        <a class="product_title">
-                            <h4>Website, Email Marketing, Social Media Marketing</h4>
-                        </a>
-                        <!-- <p>Nunc placerat mi id nisi interdum mollis. Praesent pharetra, justo ut scelerisque the mattis,
-                            leo quam aliquet congue.</p> -->
-                    </div>
-                    <p style="font-weight: 50; margin: 5px;"><a
-                        [routerLink]="['/', 'dreamjob']">Read More</a></p>
-                    <button mat-flat-button color="primary" (click)="authService.login()">JOIN</button>
-                    <!-- end /.product-desc -->
-                </div>
-                <!-- end /.single-product -->
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <!-- start .single-product -->
-                <div class="product product--card">
-                    <h6 style="font-weight: 600; margin: 5px; font-size: 2.0em;">Business Automation</h6>
-                    <div class="">
-                        <img style="height: 60%; width: 60%;" [src]="'../../assets/images/ba.png'"
-                            alt="Product Image">
-                        <!-- end /.prod_btn -->
-                    </div>
-                    <!-- end /.product__thumbnail -->
-    
-                    <div class="product-desc" style="height: 80px;">
-                        <a class="product_title">
-                            <h4>Information Flow Architecture Powering Business Automation</h4>
-                        </a>
-    
-                        <!-- <p>Nunc placerat mi id nisi interdum mollis. Praesent pharetra, justo ut scelerisque the mattis,
-                            leo quam aliquet congue.</p> -->
-                    </div>
-                    <p style="font-weight: 50; margin: 5px;"><a
-                        [routerLink]="['/', 'dreamjob']">Read More</a></p>
-                    <button mat-flat-button color="primary" (click)="authService.login()">JOIN</button>
-                    <!-- end /.product-desc -->
-                </div>
-                <!-- end /.single-product -->
-            </div>
-        </div>
-    </div>
-    
 <!--<section>-->
 
     <!-- start container -->
     <div class="container">
-        <!-- <div class="row" style="margin-top: 50px; margin-bottom: 20px;"> -->
-            
+        
+       
+        
+        <mat-divider style="margin: 10px;"></mat-divider>
+        <!-- Header Section Ends HERE -->
+        
         <div class="container">
             <div class="row" style="margin-top: 10px; margin-bottom: 20px;">
                 <h3
                     style="font-size: 45px; margin: 20px 40px 20px 13px; max-width: 100%; font-weight: 400; text-align: center;">
-               Local Professionals : Unlock Your Full Professional Potential. </h3>
+                How Does It Work?</h3>
             </div>
         
             <div class="row">
                 <div class="col-lg-4 col-md-6">
                     <!-- start .single-product -->
                     <div class="product product--card">
-                        <h6 style="font-weight: 600; margin: 5px; font-size: 2.0em;">Business Skills</h6>
+                        <h6 style="font-weight: 600; margin: 5px; font-size: 2.4em;">STEP 1</h6>
+                        <h4 style="font-weight: 600; margin: 5px; font-size: 1.4em;">Order Specimen Transportation Kit</h4>
                         <div class="">
-                            <img style="width: 80%; height: 80%;" [src]="'../../assets/images/business_skills2.png'"
+                            <img style="height: 235px; width: fit-content;" [src]="'../../assets/images/business_skills.png'"
                                 alt="Product Image">
                             <!-- end /.prod_btn -->
                         </div>
@@ -263,14 +96,12 @@
         
                         <div class="product-desc" style="height: 80px;">
                             <a class="product_title">
-                                <h4>Gain businesses experience in industries of your interest.</h4>
+                                <h4>Order Specimen Transportation Kit</h4>
                             </a>
         
                             <!-- <p>Nunc placerat mi id nisi interdum mollis. Praesent pharetra, justo ut scelerisque the mattis,
                                 leo quam aliquet congue.</p> -->
                         </div>
-                        <p style="font-weight: 50; margin: 5px;"><a
-                            [routerLink]="['/', 'dreamjob']">Read More</a></p>
                         <button mat-flat-button color="primary" (click)="authService.login()">JOIN</button>
                         <!-- end /.product-desc -->
                     </div>
@@ -281,10 +112,10 @@
                 <div class="col-lg-4 col-md-6">
                     <!-- start .single-product -->
                     <div class="product product--card">
-                    <h6 style="font-weight: 600; margin: 5px; font-size: 2.0em;">Leadership Skills</h6>
-        
+                    <h6 style="font-weight: 600; margin: 5px; font-size: 2.4em;">STEP 2</h6>
+                    <h4 style="font-weight: 600; margin: 5px; font-size: 1.4em;">Return Your Specimen Kit With Your Cancer Cells</h4>
                         <div class="">
-                            <img style="width: 80%; height: 80%;" [src]="'../../assets/images/leadership_skills.png'"
+                            <img style="height: 235px; width: fit-content;" [src]="'../../assets/images/cancer_specimen.png'"
                                 alt="Product Image">
                             <!-- end /.prod_btn -->
                         </div>
@@ -292,15 +123,12 @@
         
                         <div class="product-desc" style="height: 80px;">
                             <a class="product_title">
-                                <h4>Develop Real Life Leadership Skills in Your Profession</h4>
+                                <h4>Return Your Specimen Kit With Your Cancer Cells</h4>
                             </a>
         
                             <!-- <p>Nunc placerat mi id nisi interdum mollis. Praesent pharetra, justo ut scelerisque the mattis,
                                 leo quam aliquet congue.</p> -->
-                                
                         </div>
-                        <p style="font-weight: 50; margin: 5px;"><a
-                            [routerLink]="['/', 'dreamjob']">Read More</a></p>
                         <button mat-flat-button color="primary" (click)="authService.login()">JOIN</button>
                         <!-- end /.product-desc -->
                     </div>
@@ -311,9 +139,11 @@
                 <div class="col-lg-4 col-md-6">
                     <!-- start .single-product -->
                     <div class="product product--card">
-                        <h6 style="font-weight: 600; margin: 5px; font-size: 2.0em;">Startup Skills</h6>
+                        <h6 style="font-weight: 600; margin: 5px; font-size: 2.4em;">STEP 3: </h6>
+                        <h4 style="font-weight: 600; margin: 5px; font-size: 1.4em;">Drug Activity & Synergy Reported within 7-10 days.</h4>
+                   
                         <div class="">
-                            <img style="width: 80%; height: 80%;" [src]="'../../assets/images/startup_skills.png'"
+                            <img style="height: 235px; width: fit-content;" [src]="'../../assets/images/startup_skills.png'"
                                 alt="Product Image">
                             <!-- end /.prod_btn -->
                         </div>
@@ -321,14 +151,12 @@
         
                         <div class="product-desc" style="height: 80px;">
                             <a class="product_title">
-                                <h4>Gain Exposure to Startup Skills</h4>
+                                <h4>Drug Activity & Synergy Reported within 7-10 days.</h4>
                             </a>
-                            
+        
                             <!-- <p>Nunc placerat mi id nisi interdum mollis. Praesent pharetra, justo ut scelerisque the mattis,
                                 leo quam aliquet congue.</p> -->
                         </div>
-                        <p style="font-weight: 50; margin: 5px;"><a
-                            [routerLink]="['/', 'dreamjob']">Read More</a></p>
                         <button mat-flat-button color="primary" (click)="authService.login()">JOIN</button>
                         <!-- end /.product-desc -->
                     </div>
@@ -336,6 +164,9 @@
                 </div>
             </div>
         </div>
+        
+
+
                 
                 <!-- <div class="row" style="margin-left: 40px;">
                         <button mat-stroked-button color="primary">Sell</button>

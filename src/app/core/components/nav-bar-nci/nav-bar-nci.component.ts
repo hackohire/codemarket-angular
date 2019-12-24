@@ -13,8 +13,8 @@ import { SearchComponent } from '../search/search.component';
 
 @Component({
   selector: 'app-nav-bar',
-  templateUrl: './nav-bar.component.html',
-  styleUrls: ['./nav-bar.component.scss'],
+  templateUrl: './nav-bar-nci.component.html',
+  styleUrls: ['./nav-bar-nci.component.scss'],
 })
 export class NavBarComponent implements OnInit, OnDestroy {
   @ViewChild('lr', {static: false}) lr: MatAnchor;

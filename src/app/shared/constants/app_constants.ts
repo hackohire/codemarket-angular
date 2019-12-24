@@ -18,7 +18,7 @@ export const appConstants = {
         [PostType.Dreamjob]: 'briefcase'
     },
 
-    fileS3Bucket: 'codemarket-files',
+    fileS3Bucket: 'endcancer-files',
 
     promoCodes: {
         FIRSTMONTHFREE: {

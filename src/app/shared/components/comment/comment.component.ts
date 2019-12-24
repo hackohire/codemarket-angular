@@ -28,7 +28,7 @@ export class CommentComponent implements OnInit {
   replyTextEditorData: BlockToolData;
 
   anonymousAvatar = '../../../../assets/images/anonymous-avatar.jpg';
-  codemarketBucketURL = environment.codemarketFilesBucket;
+  s3FilesBucketURL = environment.s3FilesBucketURL;
 
   constructor(
     public authService: AuthService,

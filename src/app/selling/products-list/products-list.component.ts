@@ -36,7 +36,7 @@ export class ProductsListComponent implements OnInit, OnDestroy, AfterViewInit {
 
   length: number;
   anonymousAvatar = '../../../assets/images/anonymous-avatar.jpg';
-  codemarketBucketURL = environment.codemarketFilesBucket;
+  s3FilesBucketURL = environment.s3FilesBucketURL;
 
   all: boolean;
 

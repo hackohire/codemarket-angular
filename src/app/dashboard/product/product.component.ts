@@ -15,7 +15,7 @@ import { PostService } from 'src/app/shared/services/post.service';
 export class ProductComponent implements OnInit {
   @Input() product: Product;
   anonymousAvatar = '../../../assets/images/anonymous-avatar.jpg';
-  codemarketBucketURL = environment.codemarketFilesBucket;
+  s3FilesBucketURL = environment.s3FilesBucketURL;
   constructor(
     private store: Store<AppState>,
     public productService: ProductService,

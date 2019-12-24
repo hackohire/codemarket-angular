@@ -3,7 +3,7 @@
 
         <a [routerLink]="['/', 'dashboard', 'profile', comment?.createdBy?._id ]">
             <img class="author_avatar_comment"
-                [src]="comment?.createdBy?.avatar ? ((codemarketBucketURL + comment.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                [src]="comment?.createdBy?.avatar ? ((s3FilesBucketURL + comment.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar"
                 alt="Commentator Avatar">
         </a>
     </div>

@@ -26,6 +26,7 @@ import { Company } from '../../shared/models/company.model';
 import { User } from '../../shared/models/user.model';
 import Storage from '@aws-amplify/storage';
 import { Meta, Title } from '@angular/platform-browser';
+import { appConstants } from '../../shared/constants/app_constants';
 
 @Component({
   selector: 'app-details',
@@ -55,7 +56,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
   type: string; // product | help-request | interview | requirement | Testing | Howtodoc
   likeCount: number;
   anonymousAvatar = '../../../assets/images/anonymous-avatar.jpg';
-  codemarketBucketURL = environment.codemarketFilesBucket;
+  s3FilesBucketURL = environment.s3FilesBucketURL;
 
   breadcumb: BreadCumb;
 
@@ -417,7 +418,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
     Storage.vault.put(fileName, pic, {
 
-      bucket: 'codemarket-files',
+      bucket: appConstants.fileS3Bucket,
       path: 'cover',
       level: 'public',
 

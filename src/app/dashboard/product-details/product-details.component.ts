@@ -45,7 +45,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
   purchasedByLoggedInUser: boolean;
 
   anonymousAvatar = '../../../assets/images/anonymous-avatar.jpg';
-  codemarketBucketURL = environment.codemarketFilesBucket;
+  s3FilesBucketURL = environment.s3FilesBucketURL;
 
   commentsList: any[];
 

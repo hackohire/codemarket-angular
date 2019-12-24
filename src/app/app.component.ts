@@ -13,6 +13,7 @@ import { environment } from '../environments/environment';
 import { isPlatformBrowser, DOCUMENT } from '@angular/common';
 import { RouteHelperService } from './core/services/route-helper.service';
 import { SeoService } from './core/services/seo.service';
+import { appConstants } from './shared/constants/app_constants';
 
 @Component({
   selector: 'app-root',
@@ -31,8 +32,8 @@ export class AppComponent implements OnInit, OnDestroy {
     private seoService: SeoService
   ) {
 
-    this.seoService.setTwitterSiteCreator('codemarket');
-    this.seoService.setTwitterCard('summary_large_image');
+    this.seoService.setTwitterSiteCreator(appConstants.SEO.title);
+    this.seoService.setTwitterCard(appConstants.SEO.twitter_card_large);
 
     // const source = timer(1200000);
 

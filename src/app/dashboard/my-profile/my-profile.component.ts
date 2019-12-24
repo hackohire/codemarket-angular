@@ -28,7 +28,7 @@ export class MyProfileComponent implements OnInit {
   breadcumb: BreadCumb;
   navLinks = [];
   anonymousAvatar = '../../../assets/images/anonymous-avatar.jpg';
-  codemarketBucketURL = environment.codemarketFilesBucket;
+  s3FilesBucketURL = environment.s3FilesBucketURL;
   authorId: string;
 
   userData$: Observable<User>;

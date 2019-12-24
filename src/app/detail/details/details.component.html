@@ -71,7 +71,7 @@
 
                             <div class="author-infos">
                                 <div class="author_avatar">
-                                    <img [src]="details?.createdBy?.avatar ? ((codemarketBucketURL + details.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                                    <img [src]="details?.createdBy?.avatar ? ((s3FilesBucketURL + details.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar"
                                         alt="Presenting the broken author avatar :D">
                                 </div>
 
@@ -280,7 +280,7 @@
                                 <ng-container class="row" *ngFor="let attendee of details?.usersAttending">
                                     <div class="col-md-12" style="margin-bottom: 10px;">
                                         <div class="author_avatar_comment" style="vertical-align: middle;">
-                                            <img [src]="attendee?.avatar ? ((codemarketBucketURL + attendee.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                                            <img [src]="attendee?.avatar ? ((s3FilesBucketURL + attendee.avatar) | safe: 'resourceUrl') : anonymousAvatar"
                                                 alt="Presenting the broken author avatar :D">
                                         </div>
                                         <div class="autor__info">
@@ -348,7 +348,7 @@
                     <div class="picture-container" *ngIf="selectedCoverPic || details?.cover">
                         <img #cover draggable="true" scroll="false" id="cover" (drag)="resize($event)" data-top="0"
                             data-left="0"
-                            [src]="selectedCoverPic ? (selectedCoverPic | safe: 'resourceUrl') : ((codemarketBucketURL + details?.cover) | safe: 'resourceUrl')">
+                            [src]="selectedCoverPic ? (selectedCoverPic | safe: 'resourceUrl') : ((s3FilesBucketURL + details?.cover) | safe: 'resourceUrl')">
                         <div class="controls" *ngIf="details?.createdBy?._id === authService?.loggedInUser?._id">
                             <!-- <a href="" class="pos">Reposition</a> -->
                             <a mat-button (click)="selectedCoverPic = null; updateCover();" class="save">Remove</a>
@@ -456,7 +456,7 @@
                 </div>
                 <div class="col-lg-9">
                     <!-- <div style="height: 312px; width: 820px">
-                            <img [src]="avatar?.value ? ((codemarketBucketURL + avatar.value) | safe: 'resourceUrl') : anonymousAvatar" />
+                            <img [src]="avatar?.value ? ((s3FilesBucketURL + avatar.value) | safe: 'resourceUrl') : anonymousAvatar" />
                     </div> -->
 
                     <div class="item-info" *ngIf="companyView === 'description'">
@@ -506,7 +506,7 @@
 
                         <div class="author-infos">
                             <div class="author_avatar">
-                                <img [src]="details?.createdBy?.avatar ? ((codemarketBucketURL + details.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                                <img [src]="details?.createdBy?.avatar ? ((s3FilesBucketURL + details.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar"
                                     alt="Presenting the broken author avatar :D">
                             </div>
 
@@ -606,7 +606,7 @@
                             <ng-container class="row" *ngFor="let userInterested of usersInterestedInCompany">
                                 <div class="col-md-12" style="margin-bottom: 10px;">
                                     <div class="author_avatar_comment" style="vertical-align: middle;">
-                                        <img [src]="userInterested?.avatar ? ((codemarketBucketURL + userInterested.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                                        <img [src]="userInterested?.avatar ? ((s3FilesBucketURL + userInterested.avatar) | safe: 'resourceUrl') : anonymousAvatar"
                                             alt="Presenting the broken author avatar :D">
                                     </div>
                                     <div class="autor__info">
@@ -690,7 +690,7 @@
                 <div class="media-left">
                     <a href="#">
                         <img class="author_avatar_comment"
-                            [src]="authService?.loggedInUser?.avatar ? ((codemarketBucketURL + authService?.loggedInUser?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                            [src]="authService?.loggedInUser?.avatar ? ((s3FilesBucketURL + authService?.loggedInUser?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
                             alt="Commentator Avatar">
                     </a>
                 </div>
@@ -767,7 +767,7 @@
                                                 <a
                                                     [routerLink]="['/', 'dashboard', 'profile', a?.createdBy?._id ]">
                                                     <img class="author_avatar_comment"
-                                                        [src]="a?.createdBy?.avatar ? ((codemarketBucketURL + a.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                                                        [src]="a?.createdBy?.avatar ? ((s3FilesBucketURL + a.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar"
                                                         alt="Commentator Avatar">
                                                 </a>
                                             </div>
@@ -821,7 +821,7 @@
                                 <div class="media-left">
                                     <a href="#">
                                         <img class="author_avatar_comment"
-                                            [src]="authService?.loggedInUser?.avatar ? ((codemarketBucketURL + authService?.loggedInUser?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                                            [src]="authService?.loggedInUser?.avatar ? ((s3FilesBucketURL + authService?.loggedInUser?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
                                             alt="Commentator Avatar">
                                     </a>
                                 </div>
@@ -851,7 +851,7 @@
                 <div class="media-left">
                     <a href="#">
                         <img class="author_avatar_comment"
-                            [src]="authService?.loggedInUser?.avatar ? ((codemarketBucketURL + authService?.loggedInUser?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                            [src]="authService?.loggedInUser?.avatar ? ((s3FilesBucketURL + authService?.loggedInUser?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
                             alt="Commentator Avatar">
                     </a>
                 </div>

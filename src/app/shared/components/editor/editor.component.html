@@ -158,7 +158,7 @@
             <div class="media-left">
                 <a href="#">
                     <img class="author_avatar_comment"
-                        [src]="authService?.loggedInUser?.avatar ? ((codemarketBucketURL + authService?.loggedInUser?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                        [src]="authService?.loggedInUser?.avatar ? ((s3FilesBucketURL + authService?.loggedInUser?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
                         alt="Commentator Avatar">
                 </a>
             </div>

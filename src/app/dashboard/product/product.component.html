@@ -1,7 +1,7 @@
 <!-- start .single-product -->
 <div class="product product--card" class="mat-elevation-z8">
     <div class="product__thumbnail" style="display: none">
-        <img src="http://www.codemarket.io/wp-content/uploads/2019/07/developer.png" alt="Product Image">
+        <img alt="Product Image">
         <div class="prod_btn">
             <a (click)="postService.redirectToPostDetails(product)" class="transparent btn--sm btn--round">More Info</a>
             
@@ -26,7 +26,7 @@
         <ul class="titlebtm">
             <li>
                 <img class="auth-img"
-                [src]="product?.createdBy?.avatar ? ((codemarketBucketURL + product.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                [src]="product?.createdBy?.avatar ? ((s3FilesBucketURL + product.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar"
                     alt="author image">
                 <p>
                     <a [routerLink]="['/', 'dashboard', 'profile', product?.createdBy?._id ]">{{product?.createdBy?.name}}</a>

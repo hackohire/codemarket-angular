@@ -58,7 +58,7 @@
                                         <ng-container class="row" *ngFor="let pu of purchasedBy">
                                             <div class="col-md-12" style="margin-bottom: 10px;">
                                                 <div class="author_avatar_comment" style="vertical-align: middle;">
-                                                    <img [src]="pu?.avatar ? ((codemarketBucketURL + pu.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                                                    <img [src]="pu?.avatar ? ((s3FilesBucketURL + pu.avatar) | safe: 'resourceUrl') : anonymousAvatar"
                                                         alt="Presenting the broken author avatar :D">
                                                 </div>
                                                 <div class="autor__info">
@@ -290,7 +290,7 @@
                         <header class="header">
                             <a [routerLink]="['/', 'dashboard', 'profile', p?.createdBy?._id ]"
                                 class="authorAvatar">
-                                <img [src]="p?.createdBy?.avatar ? ((codemarketBucketURL + p.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                                <img [src]="p?.createdBy?.avatar ? ((s3FilesBucketURL + p.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar"
                                     alt="Profile image for Danielle" class="user-avatar" width="40" height="40"></a>
                             <div class="titleAndAuthor">
                                 <address class="author" style="margin-bottom: 0;"><a

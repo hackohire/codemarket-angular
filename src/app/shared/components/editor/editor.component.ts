@@ -57,7 +57,7 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
   @Input() blockLevelComments = false;
   @Input() commentsList: Comment[]
   anonymousAvatar = '../../../../assets/images/anonymous-avatar.jpg';
-  codemarketBucketURL = environment.codemarketFilesBucket;
+  s3FilesBucketURL = environment.s3FilesBucketURL;
 
   commentForm: FormGroup;
 
@@ -237,7 +237,7 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
 
                   return Storage.vault.put(fileName, file, {
 
-                    bucket: 'codemarket-files',
+                    bucket: appConstants.fileS3Bucket,
 
                     level: 'public',
 
@@ -247,7 +247,7 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
                     return {
                       success: 1,
                       file: {
-                        url: environment.codemarketFilesBucket + uploaded.key,
+                        url: environment.s3FilesBucketURL + uploaded.key,
                         // any other image data you want to store, such as width, height, color, extension, etc
                       }
                     };

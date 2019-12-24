@@ -1,6 +1,7 @@
 import { Injectable, Optional, Inject, PLATFORM_ID } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
+import { appConstants } from '../../shared/constants/app_constants';
 
 export declare enum MetaTagAttr {
   name = "name",
@@ -45,8 +46,8 @@ export class SeoService {
 
   /** Set Default Meta Tags or Based On Data */
   public setMetaTagsFromData(seo) {
-    this.setTwitterCard('summary_large_image');
-    this.setTwitterSiteCreator('codemarket');
+    this.setTwitterCard(appConstants.SEO.twitter_card_large);
+    this.setTwitterSiteCreator(appConstants.SEO.title);
     if (seo) {
       const description: any = seo.description && seo.description.length ? seo.description.find(d => d.type === 'header' || d.type === 'paragraph') : null;
 
@@ -59,7 +60,7 @@ export class SeoService {
       const seoSocialShareData: SeoSocialShareData = {
         title: seo.name,
         description: description && description.data.text ? description.data.text : '',
-        image: 'https://www.codemarket.io/assets/images/logo_qugbvk_c_scalew_282.png',
+        image: appConstants.SEO.logo_url,
         author: seo.createdBy.name,
         url: isPlatformBrowser(this.platformId) ? window.location.href : '',
         type: 'article',
@@ -72,9 +73,9 @@ export class SeoService {
       });
       this.setJsonLDData(jsonLd);
       const seoSocialShareData: SeoSocialShareData = {
-        title: 'Codemarket',
-        description: 'Building Tech Skills, Business Skills & Leadership Skills for  Career Growth',
-        image: 'https://www.codemarket.io/assets/images/cm.gif',
+        title: appConstants.SEO.title,
+        description: appConstants.SEO.description,
+        image: appConstants.SEO.gif_url,
         url: isPlatformBrowser(this.platformId) ? window.location.href : '',
         type: 'website',
         author: 'Sumit Vekariya'
@@ -87,8 +88,8 @@ export class SeoService {
     setMetaTagsForPost(p) {
       const description: any = p.description && p.description.length ? p.description.find(d => d.type === 'header' || d.type === 'paragraph') : null;
       const image: any = p.description && p.description.length ? p.description.find(d => d.type === 'image') : '';
-      this.setTwitterCard('summary_large_image');
-      this.setTwitterSiteCreator('codemarket');
+      this.setTwitterCard(appConstants.SEO.twitter_card_large);
+      this.setTwitterSiteCreator(appConstants.SEO.title);
       const jsonLd = this.getjsonDLObject('BlogPosting', {
         name: p.name,
         url: isPlatformBrowser(this.platformId) ? window.location.href : '',
@@ -100,7 +101,7 @@ export class SeoService {
         }, undefined),
         headline: p.name,
         description: description && description.data.text ? description.data.text : p.name,
-        image: image && image.data.file.url ? image.data.file.url : 'https://www.codemarket.io/assets/images/logo_qugbvk_c_scalew_282.png',
+        image: image && image.data.file.url ? image.data.file.url : appConstants.SEO.logo_url,
         // dateCreated: p.createdAt,
         // datePublished: p.createdAt,
         // dateModified: p.updatedAt,
@@ -109,7 +110,7 @@ export class SeoService {
       const seoData = {
         title: p.name,
         description: description && description.data.text ? description.data.text : p.name,
-        image: image && image.data.file.url ? image.data.file.url : 'https://www.codemarket.io/assets/images/logo_qugbvk_c_scalew_282.png',
+        image: image && image.data.file.url ? image.data.file.url : appConstants.SEO.logo_url,
         url: isPlatformBrowser(this.platformId) ? window.location.href : '',
         type: 'article',
         author: p.createdBy.name,

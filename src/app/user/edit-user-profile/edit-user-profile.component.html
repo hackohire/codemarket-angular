@@ -4,7 +4,7 @@
     <div class="profile-picture">
         <div class="user-info">
             <div class="profile-pic">
-                <img [src]="avatar?.value ? ((codemarketBucketURL + avatar.value) | safe: 'resourceUrl') : anonymousAvatar" />
+                <img [src]="avatar?.value ? ((s3FilesBucketURL + avatar.value) | safe: 'resourceUrl') : anonymousAvatar" />
                 <div class="layer">
                     <div class="loader"></div>
                 </div>

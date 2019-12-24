@@ -18,6 +18,8 @@ export const appConstants = {
         [PostType.Dreamjob]: 'briefcase'
     },
 
+    fileS3Bucket: 'codemarket-files',
+
     promoCodes: {
         FIRSTMONTHFREE: {
           title: 'FIRSTMONTHFREE',
@@ -29,6 +31,14 @@ export const appConstants = {
             message: 'Promocode Applied',
             applied: false
         }
+    },
+
+    SEO: {
+      title: 'Codemarket',
+      description: 'Building Tech Skills, Business Skills & Leadership Skills for  Career Growth',
+      twitter_card_large: 'summary_large_image',
+      logo_url: 'https://www.codemarket.io/assets/images/logo_qugbvk_c_scalew_282.png',
+      gif_url: 'https://www.codemarket.io/assets/images/cm.gif'
     },
 
     imageExtenstions: [

@@ -11,6 +11,7 @@ import { AppState } from 'src/app/core/store/state/app.state';
 import { User } from 'src/app/shared/models/user.model';
 import  Storage  from '@aws-amplify/storage';
 import { environment } from 'src/environments/environment';
+import { appConstants } from '../../shared/constants/app_constants';
 
 @Component({
   selector: 'app-edit-user-profile',
@@ -30,7 +31,7 @@ export class EditUserProfileComponent implements OnInit {
   // s3BucketUrl = environment.s3BucketURL;
   currentAvatarUrl: string;
   anonymousAvatar = '../../../assets/images/ anonymous-avatar.jpg';
-  codemarketBucketURL = environment.codemarketFilesBucket;
+  s3FilesBucketURL = environment.s3FilesBucketURL;
 
   get avatar() { return this.userProfileForm.get('avatar'); }
 
@@ -118,7 +119,7 @@ export class EditUserProfileComponent implements OnInit {
 
     Storage.vault.put(fileName, pic, {
 
-      bucket: 'codemarket-files',
+      bucket: appConstants.fileS3Bucket,
       path: 'avatar',
       level: 'public',
 

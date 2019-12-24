@@ -11,7 +11,7 @@
 						<div class="author-card sidebar-card">
 							<div class="author-infos">
 								<div class="author_avatar">
-									<img [src]="user?.avatar ? ((codemarketBucketURL + user.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+									<img [src]="user?.avatar ? ((s3FilesBucketURL + user.avatar) | safe: 'resourceUrl') : anonymousAvatar"
 										alt="Presenting the broken author avatar :D">
 								</div>
 

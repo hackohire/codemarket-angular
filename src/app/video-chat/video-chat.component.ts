@@ -21,7 +21,7 @@ export class VideoChatComponent {
   breadcumb: BreadCumb;
   navLinks = [];
   anonymousAvatar = '../../assets/images/anonymous-avatar.jpg';
-  codemarketBucketURL = environment.codemarketFilesBucket;
+  s3FilesBucketURL = environment.s3FilesBucketURL;
 
   constraints;
   stream: MediaStream;

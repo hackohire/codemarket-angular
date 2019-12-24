@@ -74,7 +74,7 @@
                                     <div class="media-left">
                                         <a href="#">
                                             <img class="author_avatar_comment" alt="Commentator Avatar"
-                                                [src]="authService?.loggedInUser?.avatar ? ((codemarketBucketURL + authService?.loggedInUser?.avatar) | safe: 'resourceUrl') : anonymousAvatar">
+                                                [src]="authService?.loggedInUser?.avatar ? ((s3FilesBucketURL + authService?.loggedInUser?.avatar) | safe: 'resourceUrl') : anonymousAvatar">
                                         </a>
                                     </div>
                                     <div class="media-body">
@@ -110,7 +110,7 @@
 
                             <div class="author-infos">
                                 <div class="author_avatar">
-                                    <img [src]="product?.createdBy?.avatar ? ((codemarketBucketURL + product.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                                    <img [src]="product?.createdBy?.avatar ? ((s3FilesBucketURL + product.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar"
                                         alt="Presenting the broken author avatar :D">
                                 </div>
 
@@ -289,7 +289,7 @@
                                 <ng-container class="row" *ngFor="let pu of product?.purchasedBy">
                                     <div class="col-md-12" style="margin-bottom: 10px;">
                                         <div class="author_avatar_comment" style="vertical-align: middle;">
-                                            <img [src]="pu?.purchasedBy?.avatar ? ((codemarketBucketURL + pu.purchasedBy.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                                            <img [src]="pu?.purchasedBy?.avatar ? ((s3FilesBucketURL + pu.purchasedBy.avatar) | safe: 'resourceUrl') : anonymousAvatar"
                                                 alt="Presenting the broken author avatar :D">
                                         </div>
                                         <div class="autor__info">

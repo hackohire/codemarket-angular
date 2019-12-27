@@ -7,7 +7,7 @@ import { plans } from '../app/shared/constants/plan_details';
 export const environment = {
   production: false,
   COGNITO_AUTH_DOMAIN: 'https://platform.auth.us-east-1.amazoncognito.com',
-  serverless_url: 'https://kq2nqs8luk.execute-api.ap-south-1.amazonaws.com/billioness/',
+  serverless_url: ' https://kq2nqs8luk.execute-api.ap-south-1.amazonaws.com/billioness/',
   graphql_url: 'https://kq2nqs8luk.execute-api.ap-south-1.amazonaws.com/billioness/graphql',
   applicationId: '5d2ef428bbfa6576b357d5d4',
   s3FilesBucketURL: 'https://billioness-files.s3.amazonaws.com/public/',

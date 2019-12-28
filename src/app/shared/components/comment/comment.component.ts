@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges} from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { tap } from 'rxjs/operators';
 import moment from 'moment';
@@ -20,7 +20,7 @@ export class CommentComponent implements OnInit {
   @Input() referenceId: string;
   @Input() showReplyButton = false;
   @Output() updateRoot = new EventEmitter();
-  @Output() commentDeleted  = new EventEmitter();
+  // @Output() commentDeleted  = new EventEmitter();
   replyCommentForm: FormGroup;
   reply: boolean;
   edit: boolean;
@@ -55,7 +55,7 @@ export class CommentComponent implements OnInit {
 
 
   fromNow(date) {
-    const d = new Date(+date);
+    const d = moment(date).isValid() ? date : new Date(+date);
     return moment(d).fromNow();
   }
 
@@ -67,6 +67,7 @@ export class CommentComponent implements OnInit {
 
   updateFormData(event) {
     console.log('Update Event Fired From editor', event);
+    this.comment.text = event;
     this.replyCommentForm.get('text').setValue(event);
   }
 
@@ -97,7 +98,7 @@ export class CommentComponent implements OnInit {
     this.commentService.deleteComment(this.comment._id).pipe(
       tap((d) => {
         console.log(d);
-        this.commentDeleted.emit(this.comment._id);
+        // this.commentDeleted.emit(this.comment._id);
         this.comment = null;
         this.replyCommentForm = null;
       })

@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/co
 import { Observable, of, Subscription } from 'rxjs';
 import { AppState } from 'src/app/core/store/state/app.state';
 import { Store } from '@ngrx/store';
-import { tap, switchMap, map } from 'rxjs/operators';
+import { tap, switchMap, map, switchMapTo, mapTo } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BreadCumb } from 'src/app/shared/models/bredcumb.model';
 import { FormGroup, FormControl } from '@angular/forms';
@@ -25,7 +25,6 @@ import { CompanyService } from '../../companies/company.service';
 import { Company } from '../../shared/models/company.model';
 import { User } from '../../shared/models/user.model';
 import Storage from '@aws-amplify/storage';
-import { Meta, Title } from '@angular/platform-browser';
 import { appConstants } from '../../shared/constants/app_constants';
 
 @Component({
@@ -74,7 +73,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
   constructor(
     private store: Store<AppState>,
     private activatedRoute: ActivatedRoute,
-    private commentService: CommentService,
+    public commentService: CommentService,
     public authService: AuthService,
     private userService: UserService,
     private dialog: MatDialog,
@@ -83,8 +82,6 @@ export class DetailsComponent implements OnInit, OnDestroy {
     private router: Router,
     private sweetAlertService: SweetalertService,
     private companyService: CompanyService,
-    private meta: Meta,
-    private title: Title
   ) {
     this.breadcumb = {
       path: [
@@ -249,19 +246,12 @@ export class DetailsComponent implements OnInit, OnDestroy {
       type: new FormControl(commentType ? commentType : this.type),
     });
 
-    this.subscription$.add(
-      this.commentService.getCommentsByReferenceId(p._id).pipe(
-        tap((d) => {
-          this.commentsList = d;
-        })
-      ).subscribe({
-        error: (e) => console.log(e)
-      })
-    );
+    this.commentService.getCommentsByReferenceId(p._id);
+
   }
 
   getDate(d: string) {
-    return new Date(+d);
+    return moment(d).isValid() ? d : new Date(+d);
   }
 
 
@@ -271,17 +261,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
       this.commentForm.addControl('createdBy', new FormControl(this.authService.loggedInUser._id));
 
       this.subscription$.add(
-        this.commentService.addComment(this.commentForm.value).pipe(
-          switchMap((d) => {
-            return this.commentService.getCommentsByReferenceId(d.referenceId);
-          }),
-          tap((d) => {
-            console.log(d);
-            if (d && d.length) {
-              this.commentsList = d;
-            }
-          })
-        ).subscribe()
+        this.commentService.addComment(this.commentForm.value).subscribe()
       );
     } else {
       this.authService.checkIfUserIsLoggedIn(true);
@@ -293,7 +273,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
   }
 
   fromNow(date) {
-    const d = new Date(+date);
+    const d = moment(date).isValid() ? date : new Date(+date);
     return moment(d).fromNow();
   }
 

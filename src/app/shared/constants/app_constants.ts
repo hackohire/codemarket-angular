@@ -18,7 +18,7 @@ export const appConstants = {
         [PostType.Dreamjob]: 'briefcase'
     },
 
-    fileS3Bucket: 'realtyee-files',
+    fileS3Bucket: 'writersclub-files',
 
     promoCodes: {
         FIRSTMONTHFREE: {

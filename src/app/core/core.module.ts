@@ -142,7 +142,7 @@ export class CoreModule {
 
     /** Codemarket Apollo Client */
     apollo.create({
-      link: authLink.concat(link).concat(cleanTypeName),
+      link: authLink.concat(cleanTypeName).concat(link),
       cache: new InMemoryCache({
         addTypename: true,
 

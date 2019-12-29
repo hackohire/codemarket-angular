@@ -1935,7 +1935,7 @@ autoprefixer@9.6.1:
     postcss "^7.0.17"
     postcss-value-parser "^4.0.0"
 
-aws-amplify-angular@^4.1.1:
+aws-amplify-angular@4.1.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/aws-amplify-angular/-/aws-amplify-angular-4.1.1.tgz#e71e9a723d08f439336f4a1137050291986e97a9"
   integrity sha512-ZgbQls3vXxhiemgt1EVb9oMNMHGtAKaIAFyPnlZWiKD/RRDr4BaqAfae3+PU7LRE4GcGysgPx/IN8mRGWf9Fzw==

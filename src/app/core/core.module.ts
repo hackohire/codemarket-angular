@@ -73,6 +73,7 @@ export function clearState(reducer) {
     SearchComponent
   ]
 })
+
 export class CoreModule {
   constructor(apollo: Apollo, httpLink: HttpLink, @Inject(PLATFORM_ID) private _platformId: Object) {
 
@@ -92,7 +93,7 @@ export class CoreModule {
 
     let token = '';
 
-    // cleanTypeName to omit __typename field
+    // cleanTypeName to omit __typename && _id(if no value) field 
     const cleanTypeName = new ApolloLink((operation, forward) => {
       if (operation.variables) {
         const omitTypename = (key, value) => {
@@ -111,17 +112,6 @@ export class CoreModule {
       });
     });
 
-    /** using the ability to split links, you can send data to each link */
-    /** depending on what kind of operation is being sent */
-    const link = isPlatformBrowser(this._platformId) ? split(
-      // split based on operation type
-      ({ query }) => {
-        const def = getMainDefinition(query);
-        return def.kind === 'OperationDefinition' && def.operation === 'subscription';
-      },
-      wsLink,
-      httpCodemarket,
-    ) : httpCodemarket;
 
 
     const authLink = new ApolloLink((operation, forward) => {
@@ -140,9 +130,21 @@ export class CoreModule {
       return forward(operation);
     });
 
+        /** using the ability to split links, you can send data to each link */
+    /** depending on what kind of operation is being sent */
+    const link = isPlatformBrowser(this._platformId) ? split(
+      // split based on operation type
+      ({ query }) => {
+        const def = getMainDefinition(query);
+        return def.kind === 'OperationDefinition' && def.operation === 'subscription';
+      },
+      authLink.concat(wsLink).concat(cleanTypeName),
+      authLink.concat(cleanTypeName).concat(httpCodemarket),
+    ) : authLink.concat(cleanTypeName).concat(httpCodemarket);
+
     /** Codemarket Apollo Client */
     apollo.create({
-      link: authLink.concat(cleanTypeName).concat(link),
+      link,
       cache: new InMemoryCache({
         addTypename: true,
 

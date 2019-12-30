@@ -31,7 +31,7 @@ import { appConstants } from '../../shared/constants/app_constants';
   selector: 'app-details',
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.scss'],
-  providers: [ShareService]
+  providers: [ShareService, CommentService]
 })
 export class DetailsComponent implements OnInit, OnDestroy {
 

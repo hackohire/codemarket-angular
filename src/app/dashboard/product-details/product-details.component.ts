@@ -27,7 +27,7 @@ import { Post } from '../../shared/models/post.model';
   selector: 'app-product-details',
   templateUrl: './product-details.component.html',
   styleUrls: ['./product-details.component.scss'],
-  providers: [ShareService]
+  providers: [ShareService, CommentService]
 })
 export class ProductDetailsComponent implements OnInit, OnDestroy {
 

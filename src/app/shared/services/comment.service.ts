@@ -8,9 +8,7 @@ import { tap } from 'rxjs/operators';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { Comment } from '../models/comment.model';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class CommentService {
 
   commentSchema = gql`
@@ -108,6 +106,7 @@ export class CommentService {
   constructor(
     private apollo: Apollo,
   ) {
+    console.log('instance Created')
   }
 
 
@@ -422,5 +421,6 @@ export class CommentService {
 
   unsubscribe() {
     this.subscriptions$.unsubscribe();
+    this.commentsList$.next([]);
   }
 }

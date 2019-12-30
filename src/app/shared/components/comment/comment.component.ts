@@ -12,7 +12,8 @@ import { SweetalertService } from '../../services/sweetalert.service';
 @Component({
   selector: 'app-comment',
   templateUrl: './comment.component.html',
-  styleUrls: ['./comment.component.scss']
+  styleUrls: ['./comment.component.scss'],
+  providers: [CommentService]
 })
 export class CommentComponent implements OnInit {
 

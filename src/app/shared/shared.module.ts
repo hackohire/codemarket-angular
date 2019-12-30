@@ -28,6 +28,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { MdePopoverModule } from '@material-extended/mde';
 import { AgmCoreModule } from '@agm/core';
 import { environment } from '../../environments/environment';
+import { CommentService } from './services/comment.service';
 
 
 export function hljsLanguages() {
@@ -94,6 +95,7 @@ export function hljsLanguages() {
   ],
   entryComponents: [
     VideoChatComponent
-  ]
+  ],
+  providers: [CommentService]
 })
 export class SharedModule { }

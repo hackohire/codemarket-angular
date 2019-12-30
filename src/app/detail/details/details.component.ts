@@ -237,6 +237,8 @@ export class DetailsComponent implements OnInit, OnDestroy {
       this.subscription$.unsubscribe();
       this.store.dispatch(SetSelectedPost({ post: null }));
     }
+    /** Unsubscribes from Comments Related Subscription */
+    this.commentService.unsubscribe();
   }
 
   initializeCommentForm(p, commentType?: string) {

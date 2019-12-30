@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { map } from 'rxjs/internal/operators/map';
 import { description } from 'src/app/shared/constants/fragments_constatnts';
 import { tap } from 'rxjs/operators';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { Comment } from '../models/comment.model';
 
 @Injectable({
@@ -103,6 +103,7 @@ export class CommentService {
 
   commentsQuery: QueryRef<any>;
   commentsList$ = new BehaviorSubject<Comment[]>(null);
+  subscriptions$ = new Subscription();
 
   constructor(
     private apollo: Apollo,
@@ -141,20 +142,23 @@ export class CommentService {
     }
     ${this.commentSchema}
     `;
-    this.apollo.subscribe({
-      query: COMMENTS_SUBSCRIPTION,
-      variables: {
-        postId
-      }
-    }).pipe(
-      map((c: any) => {
-        return c.data.onCommentAdded;
-      }),
-      tap((c: Comment[]) => {
-        comments.push(c);
-        this.commentsList$.next(comments);
-      })
-    ).subscribe();
+
+    this.subscriptions$.add(
+      this.apollo.subscribe({
+        query: COMMENTS_SUBSCRIPTION,
+        variables: {
+          postId
+        }
+      }).pipe(
+        map((c: any) => {
+          return c.data.onCommentAdded;
+        }),
+        tap((c: Comment[]) => {
+          comments.push(c);
+          this.commentsList$.next(comments);
+        })
+      ).subscribe()
+    );
     // this.commentsQuery.subscribeToMore({
     //   document: COMMENTS_SUBSCRIPTION,
     //   updateQuery: (prev, {subscriptionData}) => {
@@ -189,30 +193,33 @@ export class CommentService {
     //   }
     // });
     // return this.commentsQuery.valueChanges;
-    return this.apollo.query(
-      {
-        query: gql`
-          query getCommentsByReferenceId($referenceId: String) {
-            getCommentsByReferenceId(referenceId: $referenceId) {
-              ...Comment
+
+    this.subscriptions$.add(
+      this.apollo.query(
+        {
+          query: gql`
+            query getCommentsByReferenceId($referenceId: String) {
+              getCommentsByReferenceId(referenceId: $referenceId) {
+                ...Comment
+              }
             }
+            ${this.commentSchema}
+          `,
+          fetchPolicy: 'no-cache',
+          variables: {
+            referenceId
           }
-          ${this.commentSchema}
-        `,
-        fetchPolicy: 'no-cache',
-        variables: {
-          referenceId
         }
-      }
-    ).pipe(
-      tap((p: any) => {
-        const comments = p.data.getCommentsByReferenceId;
-        this.commentsList$.next(comments);
-        this.onCommentAdded(referenceId, comments);
-        this.onCommentUpdated(referenceId, comments);
-        this.onCommentDeleted(referenceId, comments);
-      })
-    ).subscribe();
+      ).pipe(
+        tap((p: any) => {
+          const comments = p.data.getCommentsByReferenceId;
+          this.commentsList$.next(comments);
+          this.onCommentAdded(referenceId, comments);
+          this.onCommentUpdated(referenceId, comments);
+          this.onCommentDeleted(referenceId, comments);
+        })
+      ).subscribe()
+    );
   }
 
   onCommentDeleted(postId, comments: Comment[]) {
@@ -224,21 +231,24 @@ export class CommentService {
       }
     }
     `;
-    this.apollo.subscribe({
-      query: COMMENT_DELETE_SUBSCRIPTION,
-      variables: {
-        postId
-      }
-    }).pipe(
-      map((c: any) => {
-        return c.data.onCommentDeleted;
-      }),
-      tap((c) => {
-        const commentIndex = comments.findIndex(com => com._id === c._id);
-        comments.splice(commentIndex, 1);
-        this.commentsList$.next(comments);
-      })
-    ).subscribe();
+
+    this.subscriptions$.add(
+      this.apollo.subscribe({
+        query: COMMENT_DELETE_SUBSCRIPTION,
+        variables: {
+          postId
+        }
+      }).pipe(
+        map((c: any) => {
+          return c.data.onCommentDeleted;
+        }),
+        tap((c) => {
+          const commentIndex = comments.findIndex(com => com._id === c._id);
+          comments.splice(commentIndex, 1);
+          this.commentsList$.next(comments);
+        })
+      ).subscribe()
+    );
   }
 
   deleteComment(commentId): Observable<any> {
@@ -270,21 +280,24 @@ export class CommentService {
     }
     ${this.commentSchema}
     `;
-    this.apollo.subscribe({
-      query: COMMENT_UPDATE_SUBSCRIPTION,
-      variables: {
-        postId
-      }
-    }).pipe(
-      map((c: any) => {
-        return c.data.onCommentUpdated;
-      }),
-      tap((c: Comment) => {
-        const commentIndex = comments.slice().findIndex(com => com._id === c._id);
-        comments[commentIndex]['text'] = c.text;
-        this.commentsList$.next(comments);
-      })
-    ).subscribe();
+
+    this.subscriptions$.add(
+      this.apollo.subscribe({
+        query: COMMENT_UPDATE_SUBSCRIPTION,
+        variables: {
+          postId
+        }
+      }).pipe(
+        map((c: any) => {
+          return c.data.onCommentUpdated;
+        }),
+        tap((c: Comment) => {
+          const commentIndex = comments.slice().findIndex(com => com._id === c._id);
+          comments[commentIndex]['text'] = c.text;
+          this.commentsList$.next(comments);
+        })
+      ).subscribe()
+    );
   }
 
   updateComment(commentId, text): Observable<any> {
@@ -405,5 +418,9 @@ export class CommentService {
         return p.data.updateQuestionOrAnswer;
       }),
     );
+  }
+
+  unsubscribe() {
+    this.subscriptions$.unsubscribe();
   }
 }

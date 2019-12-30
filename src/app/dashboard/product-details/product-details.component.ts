@@ -93,6 +93,9 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
       this.subscription$.unsubscribe();
       this.store.dispatch(SetSelectedPost({ post: null }));
     }
+    
+    /** Unsubscribes from Comments Related Subscription */
+    this.commentService.unsubscribe();
   }
 
   ngOnInit() {

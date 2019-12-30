@@ -135,15 +135,7 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
       this.commentForm.addControl('createdBy', new FormControl(this.authService.loggedInUser._id));
       this.commentForm.get('blockId').setValue(blockId),
 
-        this.commentService.addComment(this.commentForm.value).pipe(
-          tap((d) => {
-            console.log(d);
-            if (d) {
-              this.commentsList.push(d);
-              // this.commentsList = d;
-            }
-          })
-        ).subscribe();
+        this.commentService.addComment(this.commentForm.value).subscribe();
     } else {
       this.authService.checkIfUserIsLoggedIn(true);
     }
@@ -368,9 +360,9 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
   }
 
   /** Listen to the output event from the comment component and delete the comment */
-  deleteComment(id: string) {
-    this.commentsList = this.commentsList.filter(c => c._id !== id);
-  }
+  // deleteComment(id: string) {
+  //   // this.commentsList = this.commentsList.filter(c => c._id !== id);
+  // }
 
   gistFrame(url: string) {
     const template = `<html><body><style type="text/css">.gist .gist-data { height: auto; }</style><script src="gistSrc"></script></body></html>`;

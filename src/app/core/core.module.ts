@@ -21,6 +21,10 @@ import { SearchComponent } from './components/search/search.component';
 import { RouteReuseStrategy } from '@angular/router';
 import { CustomRouteReuseStategy } from '../shared/services/custom_router_reuse';
 import { AmplifyService } from './services/amplify.service';
+import { WebSocketLink } from 'apollo-link-ws';
+import { SubscriptionClient } from 'subscriptions-transport-ws';
+import { split } from 'apollo-link';
+import { getMainDefinition } from 'apollo-utilities';
 
 
 // Injected Token for actionreducermap or combinereducers for build error
@@ -69,15 +73,27 @@ export function clearState(reducer) {
     SearchComponent
   ]
 })
+
 export class CoreModule {
-  constructor(apollo: Apollo, httpLink: HttpLink,     @Inject(PLATFORM_ID) private _platformId: Object) {
+  constructor(apollo: Apollo, httpLink: HttpLink, @Inject(PLATFORM_ID) private _platformId: Object) {
+
+    /** Websocket Client Instance */
+    const wsClient = isPlatformBrowser(this._platformId) ? new SubscriptionClient(
+      environment.webSocketURL,
+      { lazy: true, reconnect: true },
+      null,
+      [],
+    ) : null;
+    
+    /** Weboscket Apollo Link  */
+    const wsLink = isPlatformBrowser(this._platformId) ? new WebSocketLink(wsClient) : null;
+
     // Apollo Server Configuration
     const httpCodemarket = httpLink.create({ uri: environment.graphql_url });
-    // const httpPlatform = httpLink.create({ uri: environment.platform_graphql_url });
 
     let token = '';
 
-    // cleanTypeName to omit __typename field
+    // cleanTypeName to omit __typename && _id(if no value) field 
     const cleanTypeName = new ApolloLink((operation, forward) => {
       if (operation.variables) {
         const omitTypename = (key, value) => {
@@ -97,6 +113,7 @@ export class CoreModule {
     });
 
 
+
     const authLink = new ApolloLink((operation, forward) => {
 
 
@@ -113,9 +130,21 @@ export class CoreModule {
       return forward(operation);
     });
 
+        /** using the ability to split links, you can send data to each link */
+    /** depending on what kind of operation is being sent */
+    const link = isPlatformBrowser(this._platformId) ? split(
+      // split based on operation type
+      ({ query }) => {
+        const def = getMainDefinition(query);
+        return def.kind === 'OperationDefinition' && def.operation === 'subscription';
+      },
+      authLink.concat(wsLink).concat(cleanTypeName),
+      authLink.concat(cleanTypeName).concat(httpCodemarket),
+    ) : authLink.concat(cleanTypeName).concat(httpCodemarket);
+
     /** Codemarket Apollo Client */
     apollo.create({
-      link: authLink.concat(cleanTypeName).concat(httpCodemarket),
+      link,
       cache: new InMemoryCache({
         addTypename: true,
 

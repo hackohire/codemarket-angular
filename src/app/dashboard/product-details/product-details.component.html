@@ -31,7 +31,7 @@
                         <div>
                             <div class="tab-pane fade show product-tab active" id="product-details">
                                 <article>
-                                    <app-editor *ngIf="product?.description" [commentsList]="commentsList"
+                                    <app-editor *ngIf="product?.description" [commentsList]="commentService?.commentsList$ | async"
                                         [blockLevelComments]="true" [readOnly]="true" [data]="product?.description"
                                         [post]="product" [readOnly]="true" [id]="'product-editor'"
                                         [commentType]="'post'">
@@ -58,7 +58,7 @@
                                 <div class="thread">
                                     <ul class="media-list thread-list" style="list-style: none;">
                                         <h4 class="tab-content-wrapper">Comments:</h4>
-                                        <div *ngFor="let c of commentsList">
+                                        <div *ngFor="let c of commentService?.commentsList$ | async">
                                             <li *ngIf="!c?.blockSpecificComment" class="single-thread">
                                                 <app-comment [comment]="c" [referenceId]="product?._id"></app-comment>
                                             </li>

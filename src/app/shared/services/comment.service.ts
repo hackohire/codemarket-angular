@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
-import { Apollo } from 'apollo-angular';
+import { Apollo, QueryRef } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { Observable } from 'rxjs/internal/Observable';
 import { map } from 'rxjs/internal/operators/map';
 import { description } from 'src/app/shared/constants/fragments_constatnts';
+import { tap } from 'rxjs/operators';
+import { BehaviorSubject, Subscription } from 'rxjs';
+import { Comment } from '../models/comment.model';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class CommentService {
 
   commentSchema = gql`
@@ -98,11 +99,14 @@ export class CommentService {
     ${description}
   `
 
-
+  commentsQuery: QueryRef<any>;
+  commentsList$ = new BehaviorSubject<Comment[]>(null);
+  subscriptions$ = new Subscription();
 
   constructor(
     private apollo: Apollo,
   ) {
+    console.log('instance Created')
   }
 
 
@@ -128,27 +132,133 @@ export class CommentService {
     );
   }
 
-
-  getCommentsByReferenceId(referenceId): Observable<any> {
-    return this.apollo.query(
-      {
-        query: gql`
-          query getCommentsByReferenceId($referenceId: String) {
-            getCommentsByReferenceId(referenceId: $referenceId) {
-              ...Comment
-            }
-          }
-          ${this.commentSchema}
-        `,
-        fetchPolicy: 'no-cache',
-        variables: {
-          referenceId
-        }
+  onCommentAdded(postId, comments: Comment[]) {
+    const COMMENTS_SUBSCRIPTION = gql`
+    subscription onCommentAdded($postId: String) {
+      onCommentAdded(postId: $postId){
+        ...Comment
       }
-    ).pipe(
-      map((p: any) => {
-        return p.data.getCommentsByReferenceId;
-      }),
+    }
+    ${this.commentSchema}
+    `;
+
+    this.subscriptions$.add(
+      this.apollo.subscribe({
+        query: COMMENTS_SUBSCRIPTION,
+        variables: {
+          postId
+        }
+      }).pipe(
+        map((c: any) => {
+          return c.data.onCommentAdded;
+        }),
+        tap((c: Comment) => {
+          if (c.parentId) {
+            const commentIndex = comments.slice().findIndex(com => com._id === c.parentId);
+            comments[commentIndex]['children'].push(c);
+          } else {
+            comments.push(c);
+          }
+          this.commentsList$.next(comments);
+        })
+      ).subscribe()
+    );
+    // this.commentsQuery.subscribeToMore({
+    //   document: COMMENTS_SUBSCRIPTION,
+    //   updateQuery: (prev, {subscriptionData}) => {
+    //     if (!subscriptionData.data) {
+    //       return prev;
+    //     }
+
+    //     const newFeedItem = subscriptionData.data.onCommentAdded;
+
+    //     const updated = Object.assign({}, {
+    //       ...prev,
+    //       getCommentsByReferenceId:  [newFeedItem, ...prev.getCommentsByReferenceId].slice()
+    //     });
+    //     return updated;
+    //   }
+    // })
+  }
+
+  getCommentsByReferenceId(referenceId) {
+    // this.commentsQuery = this.apollo.watchQuery({
+    //   query: gql`
+    //   query getCommentsByReferenceId($referenceId: String) {
+    //     getCommentsByReferenceId(referenceId: $referenceId) {
+    //       ...Comment
+    //     }
+    //   }
+    //   ${this.commentSchema}
+    //   `,
+    //   fetchPolicy: 'no-cache',
+    //   variables: {
+    //     referenceId
+    //   }
+    // });
+    // return this.commentsQuery.valueChanges;
+
+    this.subscriptions$.add(
+      this.apollo.query(
+        {
+          query: gql`
+            query getCommentsByReferenceId($referenceId: String) {
+              getCommentsByReferenceId(referenceId: $referenceId) {
+                ...Comment
+              }
+            }
+            ${this.commentSchema}
+          `,
+          fetchPolicy: 'no-cache',
+          variables: {
+            referenceId
+          }
+        }
+      ).pipe(
+        tap((p: any) => {
+          const comments = p.data.getCommentsByReferenceId;
+          this.commentsList$.next(comments);
+          this.onCommentAdded(referenceId, comments);
+          this.onCommentUpdated(referenceId, comments);
+          this.onCommentDeleted(referenceId, comments);
+        })
+      ).subscribe()
+    );
+  }
+
+  onCommentDeleted(postId, comments: Comment[]) {
+    const COMMENT_DELETE_SUBSCRIPTION = gql`
+    subscription onCommentDeleted($postId: String) {
+      onCommentDeleted(postId: $postId) {
+        referenceId
+        parentId
+        _id
+      }
+    }
+    `;
+
+    this.subscriptions$.add(
+      this.apollo.subscribe({
+        query: COMMENT_DELETE_SUBSCRIPTION,
+        variables: {
+          postId
+        }
+      }).pipe(
+        map((c: any) => {
+          return c.data.onCommentDeleted;
+        }),
+        tap((c: Comment) => {
+          if (c.parentId) {
+            const parentCommentIndex = comments.findIndex(com => com._id === c.parentId);
+            const deletedChildCommentIndex = comments[parentCommentIndex]['children'].findIndex(com => com._id === c._id);
+            comments[parentCommentIndex]['children'].splice(deletedChildCommentIndex, 1);
+          } else {
+            const commentIndex = comments.findIndex(com => com._id === c._id);
+            comments.splice(commentIndex, 1);
+          }
+          this.commentsList$.next(comments);
+        })
+      ).subscribe()
     );
   }
 
@@ -160,7 +270,7 @@ export class CommentService {
             deleteComment(commentId: $commentId)
           }
         `,
-        fetchPolicy: 'no-cache',
+        // fetchPolicy: 'no-cache',
         variables: {
           commentId
         }
@@ -169,6 +279,41 @@ export class CommentService {
       map((p: any) => {
         return p.data.deleteComment;
       }),
+    );
+  }
+
+  onCommentUpdated(postId, comments: Comment[]) {
+    const COMMENT_UPDATE_SUBSCRIPTION = gql`
+    subscription onCommentUpdated($postId: String) {
+      onCommentUpdated(postId: $postId){
+        ...Comment
+      }
+    }
+    ${this.commentSchema}
+    `;
+
+    this.subscriptions$.add(
+      this.apollo.subscribe({
+        query: COMMENT_UPDATE_SUBSCRIPTION,
+        variables: {
+          postId
+        }
+      }).pipe(
+        map((c: any) => {
+          return c.data.onCommentUpdated;
+        }),
+        tap((c: Comment) => {
+          if (c.parentId) {
+            const parentCommentIndex = comments.findIndex(com => com._id === c.parentId);
+            const deletedChildCommentIndex = comments[parentCommentIndex]['children'].findIndex(com => com._id === c._id);
+            comments[parentCommentIndex]['children'][deletedChildCommentIndex]['text'] = c.text;
+          } else {
+            const commentIndex = comments.slice().findIndex(com => com._id === c._id);
+            comments[commentIndex]['text'] = c.text;
+          }
+          this.commentsList$.next(comments);
+        })
+      ).subscribe()
     );
   }
 
@@ -222,7 +367,7 @@ export class CommentService {
     );
   }
 
-  
+
   getQuestionAndAnswersByReferenceId(referenceId): Observable<any> {
     return this.apollo.query(
       {
@@ -290,5 +435,10 @@ export class CommentService {
         return p.data.updateQuestionOrAnswer;
       }),
     );
+  }
+
+  unsubscribe() {
+    this.subscriptions$.unsubscribe();
+    this.commentsList$.next([]);
   }
 }

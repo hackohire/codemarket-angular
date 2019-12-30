@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges} from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { tap } from 'rxjs/operators';
 import moment from 'moment';
@@ -12,15 +12,14 @@ import { SweetalertService } from '../../services/sweetalert.service';
 @Component({
   selector: 'app-comment',
   templateUrl: './comment.component.html',
-  styleUrls: ['./comment.component.scss']
+  styleUrls: ['./comment.component.scss'],
+  providers: [CommentService]
 })
 export class CommentComponent implements OnInit {
 
   @Input() comment: Comment;
   @Input() referenceId: string;
-  @Input() showReplyButton = false;
-  @Output() updateRoot = new EventEmitter();
-  @Output() commentDeleted  = new EventEmitter();
+  // @Output() commentDeleted  = new EventEmitter();
   replyCommentForm: FormGroup;
   reply: boolean;
   edit: boolean;
@@ -55,7 +54,7 @@ export class CommentComponent implements OnInit {
 
 
   fromNow(date) {
-    const d = new Date(+date);
+    const d = moment(date).isValid() ? date : new Date(+date);
     return moment(d).fromNow();
   }
 
@@ -66,7 +65,11 @@ export class CommentComponent implements OnInit {
   }
 
   updateFormData(event) {
-    console.log('Update Event Fired From editor', event);
+    // console.log('Update Event Fired From editor', event);
+    this.comment.text = event;
+  }
+
+  updateReplyCommentFormData(event) {
     this.replyCommentForm.get('text').setValue(event);
   }
 
@@ -76,12 +79,9 @@ export class CommentComponent implements OnInit {
     if (this.authService.loggedInUser) {
       this.replyCommentForm.addControl('createdBy', new FormControl(this.authService.loggedInUser._id));
       this.commentService.addComment(this.replyCommentForm.value).pipe(
-        // switchMap((d) => {
-        //   return this.productService.getCommentsByReferenceId(d.referenceId);
-        // }),
         tap((child) => {
           if (child && this.comment.children) {
-            this.comment.children.push(child);
+            // this.comment.children.push(child);
             this.replyTextEditorData = null;
             this.reply = false;
           }
@@ -96,9 +96,8 @@ export class CommentComponent implements OnInit {
     this.sweetAlertService.confirmDelete(() => {
     this.commentService.deleteComment(this.comment._id).pipe(
       tap((d) => {
-        console.log(d);
-        this.commentDeleted.emit(this.comment._id);
-        this.comment = null;
+        // this.commentDeleted.emit(this.comment._id);
+        // this.comment = null;
         this.replyCommentForm = null;
       })
     ).subscribe()

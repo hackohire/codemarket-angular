@@ -37,7 +37,7 @@
             </button> -->
 
             
-            <a style="float: right;" *ngIf="!comment?.parentId && showReplyButton" mat-button (click)="allowReply()">
+            <a style="float: right;" *ngIf="!comment?.parentId" mat-button (click)="allowReply()">
                     <i style="font-size: 1.5rem !important;" class="fad fa-comments fa-lg"></i>
             </a>
             <!-- <button mat-mini-fab style="float: right" *ngIf="!comment?.parentId" (click)="allowReply()" color="primary">
@@ -45,7 +45,8 @@
             </button> -->
 
         </div>
-        <app-editor [readOnly]="edit ? false : true" (output)="updateFormData($event)" [data]="edit ? replyCommentForm?.get('text')?.value : replyCommentForm?.get('text')?.value" [id]="comment?._id"></app-editor>
+
+        <app-editor [readOnly]="edit ? false : true" (output)="updateReplyCommentFormData($event)" [data]="edit ? comment?.text : comment?.text" [id]="comment?._id"></app-editor>
         <br/>
         <button *ngIf="edit" type="button" class="btn btn--md btn--round" (click)="updateComment()">Update</button>
         <!-- <p>{{comment?.text}}</p> -->
@@ -68,10 +69,10 @@
     </div>
     <div class="media-body">
         <div class="comment-reply-form">
-            <app-editor [data]="replyTextEditorData" (output)="updateFormData($event)" [id]="replyEditorId">
+            <app-editor [data]="replyTextEditorData" (output)="updateReplyCommentFormData($event)" [id]="replyEditorId">
             </app-editor>
             <!-- <textarea class="bla" name="reply-comment" placeholder="Write your comment..."></textarea> -->
-            <button type="button" class="btn btn--md btn--round" (click)="addReply()">Reply</button>
+            <button type="button" style="float: right;" class="btn btn--md btn--round" (click)="addReply()">Reply</button>
         </div>
     </div>
 </div>

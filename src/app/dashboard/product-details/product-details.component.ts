@@ -9,13 +9,11 @@ import { BreadCumb } from 'src/app/shared/models/bredcumb.model';
 import { AddToCart } from 'src/app/core/store/actions/cart.actions';
 import { ProductService } from 'src/app/core/services/product.service';
 import { FormGroup, FormControl } from '@angular/forms';
-import { AuthService } from 'src/app/core/services/auth.service';
-import { switchMap } from 'rxjs/operators';
+import { AuthService } from 'src/app/core/services/auth.service'
 import moment from 'moment';
 import { CommentService } from 'src/app/shared/services/comment.service';
 import { environment } from 'src/environments/environment';
 import { ShareService } from '@ngx-share/core';
-import { Meta, Title } from '@angular/platform-browser';
 import { UserService } from 'src/app/user/user.service';
 import { MatDialog } from '@angular/material';
 import { VideoChatComponent } from 'src/app/video-chat/video-chat.component';
@@ -29,7 +27,7 @@ import { Post } from '../../shared/models/post.model';
   selector: 'app-product-details',
   templateUrl: './product-details.component.html',
   styleUrls: ['./product-details.component.scss'],
-  providers: [ShareService]
+  providers: [ShareService, CommentService]
 })
 export class ProductDetailsComponent implements OnInit, OnDestroy {
 
@@ -64,11 +62,9 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     public productService: ProductService,
     public postService: PostService,
     public authService: AuthService,
-    private commentService: CommentService,
+    public commentService: CommentService,
     public share: ShareService,
     private userService: UserService,
-    private meta: Meta,
-    private title: Title,
     private dialog: MatDialog
   ) {
     this.breadcumb = {
@@ -97,6 +93,9 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
       this.subscription$.unsubscribe();
       this.store.dispatch(SetSelectedPost({ post: null }));
     }
+    
+    /** Unsubscribes from Comments Related Subscription */
+    this.commentService.unsubscribe();
   }
 
   ngOnInit() {
@@ -128,13 +127,8 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
             type: new FormControl('post'),
           });
 
-          this.subscription$.add(
-            this.commentService.getCommentsByReferenceId(p._id).pipe(
-              tap((d) => {
-                this.commentsList = d;
-              })
-            ).subscribe()
-          );
+
+          this.commentService.getCommentsByReferenceId(p._id);
 
         } else if (this.productDetails && this.productDetails._id === postId) {
           /** Comes inside this block, only when we are already in a post details page, and by using searh,
@@ -163,20 +157,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     console.log(this.commentForm.value);
     if (this.authService.loggedInUser) {
       this.commentForm.addControl('createdBy', new FormControl(this.authService.loggedInUser._id));
-      this.subscription$.add(
-        this.commentService.addComment(this.commentForm.value).pipe(
-          switchMap((d) => {
-            return this.commentService.getCommentsByReferenceId(d.referenceId);
-          }),
-          tap((d) => {
-            console.log(d);
-            if (d && d.length) {
-              this.commentsList = d;
-              // this.commentForm.patchValue({text: null}, {emitEvent: true});
-            }
-          })
-        ).subscribe()
-      );
+      this.commentService.addComment(this.commentForm.value).subscribe();
     } else {
       this.authService.checkIfUserIsLoggedIn(true);
     }

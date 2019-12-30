@@ -10,7 +10,7 @@ export interface Comment {
     children: [Comment];
     parentId: string;
     referenceId: string;
-    createdBy: User | string;
+    createdBy: User;
     status: string;
 
     blockSpecificComment: boolean;

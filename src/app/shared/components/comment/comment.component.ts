@@ -19,8 +19,6 @@ export class CommentComponent implements OnInit {
 
   @Input() comment: Comment;
   @Input() referenceId: string;
-  @Input() showReplyButton = false;
-  @Output() updateRoot = new EventEmitter();
   // @Output() commentDeleted  = new EventEmitter();
   replyCommentForm: FormGroup;
   reply: boolean;
@@ -67,8 +65,11 @@ export class CommentComponent implements OnInit {
   }
 
   updateFormData(event) {
-    console.log('Update Event Fired From editor', event);
+    // console.log('Update Event Fired From editor', event);
     this.comment.text = event;
+  }
+
+  updateReplyCommentFormData(event) {
     this.replyCommentForm.get('text').setValue(event);
   }
 
@@ -78,12 +79,9 @@ export class CommentComponent implements OnInit {
     if (this.authService.loggedInUser) {
       this.replyCommentForm.addControl('createdBy', new FormControl(this.authService.loggedInUser._id));
       this.commentService.addComment(this.replyCommentForm.value).pipe(
-        // switchMap((d) => {
-        //   return this.productService.getCommentsByReferenceId(d.referenceId);
-        // }),
         tap((child) => {
           if (child && this.comment.children) {
-            this.comment.children.push(child);
+            // this.comment.children.push(child);
             this.replyTextEditorData = null;
             this.reply = false;
           }
@@ -98,9 +96,8 @@ export class CommentComponent implements OnInit {
     this.sweetAlertService.confirmDelete(() => {
     this.commentService.deleteComment(this.comment._id).pipe(
       tap((d) => {
-        console.log(d);
         // this.commentDeleted.emit(this.comment._id);
-        this.comment = null;
+        // this.comment = null;
         this.replyCommentForm = null;
       })
     ).subscribe()

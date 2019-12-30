@@ -132,7 +132,7 @@ export class CommentService {
     );
   }
 
-  onCommentAdded(postId, comments: any[]) {
+  onCommentAdded(postId, comments: Comment[]) {
     const COMMENTS_SUBSCRIPTION = gql`
     subscription onCommentAdded($postId: String) {
       onCommentAdded(postId: $postId){
@@ -152,8 +152,13 @@ export class CommentService {
         map((c: any) => {
           return c.data.onCommentAdded;
         }),
-        tap((c: Comment[]) => {
-          comments.push(c);
+        tap((c: Comment) => {
+          if (c.parentId) {
+            const commentIndex = comments.slice().findIndex(com => com._id === c.parentId);
+            comments[commentIndex]['children'].push(c);
+          } else {
+            comments.push(c);
+          }
           this.commentsList$.next(comments);
         })
       ).subscribe()
@@ -226,6 +231,7 @@ export class CommentService {
     subscription onCommentDeleted($postId: String) {
       onCommentDeleted(postId: $postId) {
         referenceId
+        parentId
         _id
       }
     }
@@ -241,9 +247,15 @@ export class CommentService {
         map((c: any) => {
           return c.data.onCommentDeleted;
         }),
-        tap((c) => {
-          const commentIndex = comments.findIndex(com => com._id === c._id);
-          comments.splice(commentIndex, 1);
+        tap((c: Comment) => {
+          if (c.parentId) {
+            const parentCommentIndex = comments.findIndex(com => com._id === c.parentId);
+            const deletedChildCommentIndex = comments[parentCommentIndex]['children'].findIndex(com => com._id === c._id);
+            comments[parentCommentIndex]['children'].splice(deletedChildCommentIndex, 1);
+          } else {
+            const commentIndex = comments.findIndex(com => com._id === c._id);
+            comments.splice(commentIndex, 1);
+          }
           this.commentsList$.next(comments);
         })
       ).subscribe()
@@ -291,8 +303,14 @@ export class CommentService {
           return c.data.onCommentUpdated;
         }),
         tap((c: Comment) => {
-          const commentIndex = comments.slice().findIndex(com => com._id === c._id);
-          comments[commentIndex]['text'] = c.text;
+          if (c.parentId) {
+            const parentCommentIndex = comments.findIndex(com => com._id === c.parentId);
+            const deletedChildCommentIndex = comments[parentCommentIndex]['children'].findIndex(com => com._id === c._id);
+            comments[parentCommentIndex]['children'][deletedChildCommentIndex]['text'] = c.text;
+          } else {
+            const commentIndex = comments.slice().findIndex(com => com._id === c._id);
+            comments[commentIndex]['text'] = c.text;
+          }
           this.commentsList$.next(comments);
         })
       ).subscribe()

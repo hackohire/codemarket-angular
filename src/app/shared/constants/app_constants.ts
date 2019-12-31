@@ -41,6 +41,8 @@ export const appConstants = {
       gif_url: 'https://www.codemarket.io/assets/images/cm.gif'
     },
 
+    Notification: 'https://notificationsounds.com/soundfiles/4e4b5fbbbb602b6d35bea8460aa8f8e5/file-sounds-1096-light.wav',
+
     imageExtenstions: [
         "ase",
         "art",

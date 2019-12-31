@@ -248,7 +248,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
       type: new FormControl(commentType ? commentType : this.type),
     });
 
-    this.commentService.getCommentsByReferenceId(p._id);
+    this.commentService.getCommentsByReferenceId(p);
 
   }
 

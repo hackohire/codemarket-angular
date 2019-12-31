@@ -106,14 +106,14 @@
                     <!-- Icon to view / collapse comments section -->
                     <div fxFlex="10">
                         <ng-container *ngIf="blockLevelComments">
-                            <a style="text-align: right; padding: 0 8px; text-decoration: none;" *ngIf="!b['show']"
-                                mat-button (click)="b['show'] = true">
+                            <a style="text-align: right; padding: 0 8px; text-decoration: none;" *ngIf="!b['__show']"
+                                mat-button (click)="b['__show'] = true">
                                 <i style="font-size: 1.5rem !important;" class="fad fa-comments-alt fa-lg"></i>
                                 <span>{{' ('}} {{ commentsList && commentsList?.length ? numberOfComments(b?._id) : 0}}
                                     {{')'}}</span>
                             </a>
-                            <a style="padding: 0 8px; text-decoration: none;" *ngIf="b['show']" mat-button
-                                (click)="b['show'] = false">
+                            <a style="padding: 0 8px; text-decoration: none;" *ngIf="b['__show']" mat-button
+                                (click)="b['__show'] = false">
                                 <i style="font-size: 1.5rem !important;" class="fad fa-chevron-circle-up fa-lg"></i>
                                 <span>{{' ('}} {{ commentsList && commentsList?.length ? numberOfComments(b?._id) : 0}}
                                     {{')'}}</span>
@@ -123,7 +123,7 @@
                 </div>
 
                 <!-- Common Add Comment Template -->
-                <div *ngIf="blockLevelComments && b['show']">
+                <div *ngIf="blockLevelComments && b['__show']">
                     <ng-container *ngTemplateOutlet="addCommentTemplate; context: {blockId: b?._id}"></ng-container>
                 </div>
             </ng-container>
@@ -142,7 +142,7 @@
                 <!-- <h4 class="tab-content-wrapper">Comments:</h4> -->
                 <div *ngFor="let c of commentsList">
                     <!-- {{c?.blockId}} - {{blockId}} -->
-                    <li *ngIf="c?.blockSpecificComment && c?.blockId === blockId" class="single-thread">
+                    <li [id]="c?._id" *ngIf="c?.blockSpecificComment && c?.blockId === blockId" class="single-thread">
                         <app-comment [comment]="c" [referenceId]="cDetails?._id"></app-comment>
                     </li>
                 </div>

@@ -650,32 +650,13 @@
 </ng-template>
 
 <ng-template #addCommentTemplate let-cDetails="details">
-
-    <!-- <section class="single-product-desc">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8">
-
-                    <div class="item-info">
-
-                        <div class="tab-pane fade show product-tab active" id="product-details">
-
-
-                            <h4 class="tab-content-wrapper">How Can You Help:</h4>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section> -->
     <div style="background: white;">
         <div class="tab-pane fade show product-tab">
             <div class="thread">
                 <ul class="media-list thread-list" style="list-style: none;">
                     <h4 class="tab-content-wrapper">Comments:</h4>
                     <div *ngFor="let c of commentService?.commentsList$ | async">
-                        <li *ngIf="!c?.blockSpecificComment" class="single-thread">
+                        <li [id]="c?._id" *ngIf="!c?.blockSpecificComment" class="single-thread">
                             <app-comment [comment]="c" [referenceId]="cDetails?._id"></app-comment>
                         </li>
                     </div>
@@ -733,7 +714,7 @@
                                             {{ q?.answers ? q?.answers?.length : 0 }}
                                             {{')'}}</span> -->
                                     </a>
-                                    <a fxFlex="50" style="padding: 0 8px; text-decoration: none;" *ngIf="!q?.show"
+                                    <a fxFlex="50" style="padding: 0 8px; text-decoration: none;" *ngIf="!q?.__show"
                                         mat-button (click)="deleteQuestionOrAnswer(q)">
                                         <i style="font-size: 1.2rem !important;" class="fad fa-minus-octagon fa-lg"></i>
                                     </a>

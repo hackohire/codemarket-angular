@@ -128,7 +128,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
           });
 
 
-          this.commentService.getCommentsByReferenceId(p._id);
+          this.commentService.getCommentsByReferenceId(p);
 
         } else if (this.productDetails && this.productDetails._id === postId) {
           /** Comes inside this block, only when we are already in a post details page, and by using searh,

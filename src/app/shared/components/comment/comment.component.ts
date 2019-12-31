@@ -48,7 +48,9 @@ export class CommentComponent implements OnInit {
       // createdBy: new FormControl(this.authService.loggedInUser._id),
       referenceId: new FormControl(this.comment.referenceId),
       parentId: new FormControl(this.comment._id),
-      type: new FormControl(this.comment.type)
+      type: new FormControl(this.comment.type),
+      blockSpecificComment: new FormControl(this.comment.blockSpecificComment),
+      blockId: new FormControl(this.comment.blockId)
     });
   }
 

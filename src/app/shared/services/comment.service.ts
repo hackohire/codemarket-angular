@@ -171,9 +171,11 @@ export class CommentService {
           audio.play();
 
           /** Tostr Notification */
+          const message = c.parentId ? 'has reaplied to a comment on this post' : 'has added a comment on this post'
+
           this.subscriptions$.add(
             this.toastrService.info(
-              `<b>${c.createdBy.name}</b> has added a comment on this post <br>
+              `<b>${c.createdBy.name}</b> ${message}  <br>
               <u>View</u>
               `
             ).onTap

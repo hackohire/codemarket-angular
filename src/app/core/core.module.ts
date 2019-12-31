@@ -100,7 +100,7 @@ export class CoreModule {
           /** Omit __typename field otherwise GraphQL will gi erro
            * Omit _id field if it is empty
            */
-          if (key === '__typename' || (key === '_id' && !value)) {
+          if (key === '__typename' || (key === '_id' && !value) || key === '__show') {
             return undefined
           } 
           return value;

@@ -29,6 +29,7 @@ import { MdePopoverModule } from '@material-extended/mde';
 import { AgmCoreModule } from '@agm/core';
 import { environment } from '../../environments/environment';
 import { CommentService } from './services/comment.service';
+import { ToastrModule } from 'ngx-toastr';
 
 
 export function hljsLanguages() {
@@ -65,6 +66,10 @@ export function hljsLanguages() {
     AgmCoreModule.forRoot({
       apiKey: environment.googleAPIKey,
       libraries: ['places']
+    }),
+    ToastrModule.forRoot({
+      closeButton: true,
+      enableHtml: true
     })
   ],
   exports: [

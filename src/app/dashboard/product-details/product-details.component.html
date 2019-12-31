@@ -59,7 +59,7 @@
                                     <ul class="media-list thread-list" style="list-style: none;">
                                         <h4 class="tab-content-wrapper">Comments:</h4>
                                         <div *ngFor="let c of commentService?.commentsList$ | async">
-                                            <li *ngIf="!c?.blockSpecificComment" class="single-thread">
+                                            <li [id]="c?._id" *ngIf="!c?.blockSpecificComment" class="single-thread">
                                                 <app-comment [comment]="c" [referenceId]="product?._id"></app-comment>
                                             </li>
                                         </div>

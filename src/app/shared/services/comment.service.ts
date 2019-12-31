@@ -1,12 +1,15 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { Apollo, QueryRef } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { Observable } from 'rxjs/internal/Observable';
 import { map } from 'rxjs/internal/operators/map';
 import { description } from 'src/app/shared/constants/fragments_constatnts';
-import { tap } from 'rxjs/operators';
+import { tap, take } from 'rxjs/operators';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { Comment } from '../models/comment.model';
+import { ToastrService } from 'ngx-toastr';
+import { DOCUMENT, isPlatformBrowser } from '@angular/common';
+import { appConstants } from '../constants/app_constants';
 
 @Injectable()
 export class CommentService {
@@ -105,6 +108,9 @@ export class CommentService {
 
   constructor(
     private apollo: Apollo,
+    private toastrService: ToastrService,
+    @Inject(DOCUMENT) private document: Document,
+    @Inject(PLATFORM_ID) private platformId: any,
   ) {
     console.log('instance Created')
   }
@@ -132,7 +138,7 @@ export class CommentService {
     );
   }
 
-  onCommentAdded(postId, comments: Comment[]) {
+  onCommentAdded(post, comments: Comment[]) {
     const COMMENTS_SUBSCRIPTION = gql`
     subscription onCommentAdded($postId: String) {
       onCommentAdded(postId: $postId){
@@ -146,58 +152,61 @@ export class CommentService {
       this.apollo.subscribe({
         query: COMMENTS_SUBSCRIPTION,
         variables: {
-          postId
+          postId: post._id
         }
       }).pipe(
         map((c: any) => {
           return c.data.onCommentAdded;
         }),
         tap((c: Comment) => {
+
           if (c.parentId) {
             const commentIndex = comments.slice().findIndex(com => com._id === c.parentId);
             comments[commentIndex]['children'].push(c);
           } else {
             comments.push(c);
           }
+          /** Audio Notification */
+          var audio = new Audio(appConstants.Notification);
+          audio.play();
+
+          /** Tostr Notification */
+          this.subscriptions$.add(
+            this.toastrService.info(
+              `<b>${c.createdBy.name}</b> has added a comment on this post <br>
+              <u>View</u>
+              `
+            ).onTap
+            .pipe(take(1))
+            .subscribe(() => {          
+              this.scrollToComment(post.description, c);
+            })
+          );
+
           this.commentsList$.next(comments);
         })
       ).subscribe()
     );
-    // this.commentsQuery.subscribeToMore({
-    //   document: COMMENTS_SUBSCRIPTION,
-    //   updateQuery: (prev, {subscriptionData}) => {
-    //     if (!subscriptionData.data) {
-    //       return prev;
-    //     }
-
-    //     const newFeedItem = subscriptionData.data.onCommentAdded;
-
-    //     const updated = Object.assign({}, {
-    //       ...prev,
-    //       getCommentsByReferenceId:  [newFeedItem, ...prev.getCommentsByReferenceId].slice()
-    //     });
-    //     return updated;
-    //   }
-    // })
   }
 
-  getCommentsByReferenceId(referenceId) {
-    // this.commentsQuery = this.apollo.watchQuery({
-    //   query: gql`
-    //   query getCommentsByReferenceId($referenceId: String) {
-    //     getCommentsByReferenceId(referenceId: $referenceId) {
-    //       ...Comment
-    //     }
-    //   }
-    //   ${this.commentSchema}
-    //   `,
-    //   fetchPolicy: 'no-cache',
-    //   variables: {
-    //     referenceId
-    //   }
-    // });
-    // return this.commentsQuery.valueChanges;
+  scrollToComment(blocks: [], c: Comment) {
+    /** If block specific comment, open the comment section for that block first */
+    if (c.blockSpecificComment) {
+      const b: any = blocks.find((b: any) => b._id === c.blockId);
+      b['__show'] = true;
+    }
 
+    /** If block specific comment, wait for half second to open the comment section for that block first */
+    if (isPlatformBrowser(this.platformId)) {
+      setTimeout(() => {
+        let el = this.document.getElementById(`${c._id}`);
+        el.scrollIntoView({block: 'center', behavior: 'smooth', inline: 'center'}); /** scroll to the element upto the center */
+        el.style.outline = '2px solid #00aeef'; /** Highlighting the element */
+      }, c.blockSpecificComment ? 500 : 0);
+    }
+  }
+
+  getCommentsByReferenceId(post) {
     this.subscriptions$.add(
       this.apollo.query(
         {
@@ -211,22 +220,22 @@ export class CommentService {
           `,
           fetchPolicy: 'no-cache',
           variables: {
-            referenceId
+            referenceId: post._id
           }
         }
       ).pipe(
         tap((p: any) => {
           const comments = p.data.getCommentsByReferenceId;
           this.commentsList$.next(comments);
-          this.onCommentAdded(referenceId, comments);
-          this.onCommentUpdated(referenceId, comments);
-          this.onCommentDeleted(referenceId, comments);
+          this.onCommentAdded(post, comments);
+          this.onCommentUpdated(post, comments);
+          this.onCommentDeleted(post, comments);
         })
       ).subscribe()
     );
   }
 
-  onCommentDeleted(postId, comments: Comment[]) {
+  onCommentDeleted(post, comments: Comment[]) {
     const COMMENT_DELETE_SUBSCRIPTION = gql`
     subscription onCommentDeleted($postId: String) {
       onCommentDeleted(postId: $postId) {
@@ -241,7 +250,7 @@ export class CommentService {
       this.apollo.subscribe({
         query: COMMENT_DELETE_SUBSCRIPTION,
         variables: {
-          postId
+          postId: post._id
         }
       }).pipe(
         map((c: any) => {
@@ -282,7 +291,7 @@ export class CommentService {
     );
   }
 
-  onCommentUpdated(postId, comments: Comment[]) {
+  onCommentUpdated(post, comments: Comment[]) {
     const COMMENT_UPDATE_SUBSCRIPTION = gql`
     subscription onCommentUpdated($postId: String) {
       onCommentUpdated(postId: $postId){
@@ -296,7 +305,7 @@ export class CommentService {
       this.apollo.subscribe({
         query: COMMENT_UPDATE_SUBSCRIPTION,
         variables: {
-          postId
+          postId: post._id
         }
       }).pipe(
         map((c: any) => {

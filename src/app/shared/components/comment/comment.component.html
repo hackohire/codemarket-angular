@@ -38,7 +38,7 @@
 
             
             <a style="float: right;" *ngIf="!comment?.parentId" mat-button (click)="allowReply()">
-                    <i style="font-size: 1.5rem !important;" class="fad fa-comments fa-lg"></i>
+                    <i style="font-size: 1.8rem !important;" class="fad fa-comments fa-lg"></i>
             </a>
             <!-- <button mat-mini-fab style="float: right" *ngIf="!comment?.parentId" (click)="allowReply()" color="primary">
                 <mat-icon>reply</mat-icon>
@@ -54,7 +54,7 @@
 </div>
 
 <!-- Recursive Children -->
-<div class="single-thread depth-2" *ngFor="let r of comment?.children">
+<div [id]="r?._id" class="single-thread depth-2" *ngFor="let r of comment?.children">
     <app-comment [comment]="r" [referenceId]="comment?.referenceId"></app-comment>
 </div>
 
@@ -63,7 +63,7 @@
     <div class="media-left">
         <a href="#">
             <img class="author_avatar_comment"
-                [src]="authService?.loggedInUser?.avatar ? ((authService?.loggedInUser?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                [src]="authService?.loggedInUser?.avatar ? ((s3FilesBucketURL + authService?.loggedInUser?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
                 alt="Commentator Avatar">
         </a>
     </div>

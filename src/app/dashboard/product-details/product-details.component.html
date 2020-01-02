@@ -34,7 +34,7 @@
                                     <app-editor *ngIf="product?.description" [commentsList]="commentService?.commentsList$ | async"
                                         [blockLevelComments]="true" [readOnly]="true" [data]="product?.description"
                                         [post]="product" [readOnly]="true" [id]="'product-editor'"
-                                        [commentType]="'post'">
+                                        [commentType]="'product'">
                                     </app-editor>
                                 </article>
                                 <br />

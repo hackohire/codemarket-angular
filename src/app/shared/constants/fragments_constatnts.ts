@@ -151,3 +151,38 @@ export const description = gql`
     ${embedFragment}
     ${linkToolFragment}
 `;
+
+export const comment = gql`
+fragment Comment on Comment {
+  text {
+    ...Description
+  }
+  _id
+  type
+  referenceId
+  parentId
+  createdAt
+  createdBy {
+    _id
+    name
+    avatar
+  }
+  children {
+    _id
+    text {
+      ...Description
+    }
+    createdAt
+    createdBy {
+      _id
+      name
+      avatar
+    }
+    parentId
+    referenceId
+  }
+  blockId
+  blockSpecificComment
+}
+${description}
+`;

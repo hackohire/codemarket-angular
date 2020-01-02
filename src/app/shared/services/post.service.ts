@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { Observable } from 'rxjs/internal/observable';
 import gql from 'graphql-tag';
 import { map, catchError, tap } from 'rxjs/operators';
@@ -14,9 +14,8 @@ import { of } from 'rxjs/observable/of';
 import { PostType } from '../models/post-types.enum';
 import { appConstants } from '../constants/app_constants';
 import { makeStateKey, TransferState } from '@angular/platform-browser';
-import { environment } from '../../../environments/environment';
-import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { isPlatformServer } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -28,10 +27,10 @@ export class PostService {
   constructor(
     private apollo: Apollo,
     private store: Store<AppState>,
+    @Inject(PLATFORM_ID) private platformId,
     private router: Router,
     private authService: AuthService,
-    private readonly transferState: TransferState,
-    private httpClient: HttpClient,
+    private readonly transferState: TransferState
   ) { }
 
 
@@ -89,6 +88,7 @@ export class PostService {
     const key = makeStateKey(PostId);
     if (this.transferState.hasKey(key)) {
       const post = this.transferState.get(key, null);
+      this.transferState.remove(key);
       return of(post);
     }
     return this.apollo.query(
@@ -103,12 +103,15 @@ export class PostService {
         `,
         variables: {
           PostId
-        }
+        },
+        fetchPolicy: 'no-cache'
       }
     ).pipe(
       map((p: any) => {
         /** Sets the data to transferState */
-        this.transferState.set(key, p.data.getPostById);
+        if (isPlatformServer(this.platformId)) {
+          this.transferState.set(key, p.data.getPostById);
+        }
         return p.data.getPostById;
       }),
     );
@@ -199,7 +202,7 @@ export class PostService {
   }
 
   redirectToPostDetails(post, setSelectedPost?: boolean): void {
-    this.store.dispatch(SetSelectedPost({ post: null }));
+    // this.store.dispatch(SetSelectedPost({ post: null }));
 
     this.router.navigate(['/',
       post.type === 'product' ? 'product' : 'post',

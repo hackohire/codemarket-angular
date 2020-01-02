@@ -2,7 +2,7 @@ import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { Hub } from '@aws-amplify/core';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
-import { map, catchError } from 'rxjs/operators';
+import { map, catchError, tap, take } from 'rxjs/operators';
 import { of } from 'rxjs/internal/observable/of';
 import { CognitoUser, CognitoUserSession } from 'amazon-cognito-identity-js';
 import Auth from '@aws-amplify/auth';
@@ -11,10 +11,14 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../store/state/app.state';
 import { Authorise, SetLoggedInUser } from '../store/actions/user.actions';
 import { selectLoggedInUser } from '../store/selectors/user.selector';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject, Subscription } from 'rxjs';
 import { User } from '../../shared/models/user.model';
 import { Router } from '@angular/router';
-import { isPlatformBrowser } from '@angular/common';
+import { isPlatformBrowser, DOCUMENT } from '@angular/common';
+import { comment } from '../../shared/constants/fragments_constatnts';
+import { appConstants } from '../../shared/constants/app_constants';
+import { Comment } from '../../shared/models/comment.model';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -24,11 +28,15 @@ export class AuthService {
   loggedInUser$: Observable<User>;
   loggedInUser: User;
   openAuthenticationPopover = new BehaviorSubject<boolean>(false);
+  subscriptions$ = new Subscription();
   constructor(
     private apollo: Apollo,
     private store: Store<AppState>,
     private router: Router,
-    @Inject(PLATFORM_ID) private _platformId: Object
+    @Inject(PLATFORM_ID) private _platformId: Object,
+    @Inject(DOCUMENT) private document: Document,
+    private toastrService: ToastrService
+    // private commentService: CommentService
     ) {
 
     this.loggedInUser$ = this.store.select(selectLoggedInUser);
@@ -44,53 +52,12 @@ export class AuthService {
       console.log('Hub', data);
       if (channel === 'auth' && data.payload.event === 'signIn') {
         this.checkIfUserIsLoggedIn();
-
-        // Auth.currentAuthenticatedUser()
-        // .then((user: CognitoUser) => {
-        //   console.log(user.getSignInUserSession().getRefreshToken().getToken());
-
-        //   const idToken = user.getSignInUserSession().getIdToken().getJwtToken();
-        //   if (idToken) {
-        //     this.setIdTokenToLocalStorage(idToken);
-        //     if (!this.loggedInUser) {
-        //       this.store.dispatch(Authorise());
-        //     }
-        //     // this.authorizeWithPlatform();
-        //   }
-        // })
-        // .catch(err => {
-        //   console.log(err);
-        //   // localStorage.clear();
-        //   this.store.dispatch(SetLoggedInUser({payload: null}));
-        // });
       } else if (channel === 'auth' && data.payload.event === 'oAuthSignOut') {
         // localStorage.clear();
         this.store.dispatch(SetLoggedInUser({payload: null}));
         // this.router.navigate(['/']);
       }
     });
-
-    // this.checkIfUserIsLoggedIn();
-
-    // Auth.currentAuthenticatedUser()
-    //   .then((user: CognitoUser) => {
-    //     console.log(user.getSignInUserSession().getIdToken().getJwtToken());
-
-    //     const idToken = user.getSignInUserSession().getIdToken().getJwtToken();
-    //     if (idToken) {
-    //       this.setIdTokenToLocalStorage(idToken);
-    //       if (!this.loggedInUser) {
-    //         this.store.dispatch(Authorise());
-    //       }
-    //       // this.authorizeWithPlatform();
-    //     }
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //     // this.router.navigate(['/']);
-    //     this.store.dispatch(SetLoggedInUser({payload: null}));
-    //     // localStorage.clear();
-    //   });
   }
 
   authorizeWithPlatform(): Observable<User> {
@@ -149,10 +116,86 @@ export class AuthService {
     ).pipe(
       map((d: any) => {
         // console.log('check', d);
+        this.setUserOnline(d.data.authorize);
         return d.data.authorize;
       }),
       catchError(e => of(e)),
     );
+  }
+
+  setUserOnline(u: User) {
+    const USER_SUBSCRIPTION = gql`
+    subscription onUserOnline($user: UserInput) {
+      onUserOnline(user: $user){
+        onCommentAdded {
+          ...Comment
+        }
+        post {
+          ...Post
+        }
+      }
+    }
+    ${comment}
+    ${appConstants.postQuery}
+    `;
+    this.apollo.subscribe({
+      query: USER_SUBSCRIPTION,
+      variables: {
+        user: {
+          name: u.name,
+          _id: u._id,
+          avatar: u.avatar
+        }
+      }
+    }).pipe(
+      map((u: any) => u.data.onUserOnline),
+      tap((u) => {
+        if (u.onCommentAdded && u.post) {
+          
+          this.openToastrNotification(u.post, u.onCommentAdded, true)
+        }
+      })
+    )
+    .subscribe(u => console.log(u));
+  }
+
+  openToastrNotification(post, c: Comment, rediect = true) {
+    const message = c.parentId ? 'has reaplied to a comment on the post you have liked/commented' : 'has commented on the post you have liked/commented'
+
+    this.subscriptions$.add(
+      this.toastrService.info(
+        `<b>${c.createdBy.name}</b> ${message}  <br>
+        <u>View</u>
+        `
+      ).onTap
+      .pipe(take(1))
+      .subscribe((d) => {
+        if (rediect) {
+          this.router.navigate(['/',
+          post.type === 'product' ? 'product' : 'post',
+          post.slug ? post.slug : ''
+        ],
+          { queryParams: { type: post.type, commentId: c._id } });
+        }
+      })
+    );
+  }
+
+  scrollToComment(blocks: [], c: Comment) {
+    /** If block specific comment, open the comment section for that block first */
+    if (c.blockSpecificComment) {
+      const b: any = blocks.find((b: any) => b._id === c.blockId);
+      b['__show'] = true;
+    }
+
+    /** If block specific comment, wait for half second to open the comment section for that block first */
+    if (isPlatformBrowser(this._platformId)) {
+      setTimeout(() => {
+        let el = this.document.getElementById(`${c._id}`);
+        el.scrollIntoView({block: 'center', behavior: 'smooth', inline: 'center'}); /** scroll to the element upto the center */
+        el.style.outline = '2px solid #00aeef'; /** Highlighting the element */
+      }, c.blockSpecificComment ? 500 : 0);
+    }
   }
 
   setIdTokenToLocalStorage(idToken: string): void {

@@ -69,7 +69,9 @@ export function hljsLanguages() {
     }),
     ToastrModule.forRoot({
       closeButton: true,
-      enableHtml: true
+      enableHtml: true,
+      timeOut: 30000,
+      extendedTimeOut: 8000
     })
   ],
   exports: [

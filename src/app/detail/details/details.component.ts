@@ -70,6 +70,8 @@ export class DetailsComponent implements OnInit, OnDestroy {
   answerData: [];
   questionData: [];
 
+  commentId: string;
+
   constructor(
     private store: Store<AppState>,
     private activatedRoute: ActivatedRoute,
@@ -93,17 +95,18 @@ export class DetailsComponent implements OnInit, OnDestroy {
     };
 
     /** Peer Subscription for Video Call */
-    this.userService.peer.subscribe((p) => {
-      if (p) {
-        console.log(p);
-        this.peer = p;
-      }
-    });
+    // this.userService.peer.subscribe((p) => {
+    //   if (p) {
+    //     console.log(p);
+    //     this.peer = p;
+    //   }
+    // });
   }
 
   ngOnInit() {
 
     this.type = this.activatedRoute.snapshot.queryParams.type;
+    this.commentId = this.activatedRoute.snapshot.queryParams['commentId'];
 
     console.log(this.activatedRoute.snapshot.queryParams);
 
@@ -172,7 +175,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
              */
           } else {
             // this.store.dispatch(GetPostById({ postId }));
-            this.details$ = this.store.select(selectSelectedPost);
+            // this.details$ = this.store.select(selectSelectedPost);
           }
 
         })
@@ -235,7 +238,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     if (this.subscription$) {
       this.subscription$.unsubscribe();
-      this.store.dispatch(SetSelectedPost({ post: null }));
+      // this.store.dispatch(SetSelectedPost({ post: null }));
     }
     /** Unsubscribes from Comments Related Subscription */
     this.commentService.unsubscribe();
@@ -248,7 +251,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
       type: new FormControl(commentType ? commentType : this.type),
     });
 
-    this.commentService.getCommentsByReferenceId(p);
+    this.commentService.getCommentsByReferenceId(p, this.commentId);
 
   }
 

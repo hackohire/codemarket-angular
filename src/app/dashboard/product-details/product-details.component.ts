@@ -56,6 +56,8 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
 
   peer: Peer;
 
+  commentId: string;
+
   constructor(
     private store: Store<AppState>,
     private activatedRoute: ActivatedRoute,
@@ -91,7 +93,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     if (this.subscription$) {
       this.subscription$.unsubscribe();
-      this.store.dispatch(SetSelectedPost({ post: null }));
+      // this.store.dispatch(SetSelectedPost({ post: null }));
     }
     
     /** Unsubscribes from Comments Related Subscription */
@@ -101,7 +103,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
   ngOnInit() {
 
     const params = this.activatedRoute.snapshot.params;
-
+    this.commentId = this.activatedRoute.snapshot.queryParams['commentId'];
     const postId = params.slug.split('-').pop();
 
     // this.productDetails$ = this.store.select(selectSelectedPost);
@@ -124,11 +126,11 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
           this.commentForm = new FormGroup({
             text: new FormControl(''),
             referenceId: new FormControl(p._id),
-            type: new FormControl('post'),
+            type: new FormControl('product'),
           });
 
 
-          this.commentService.getCommentsByReferenceId(p);
+          this.commentService.getCommentsByReferenceId(p, this.commentId);
 
         } else if (this.productDetails && this.productDetails._id === postId) {
           /** Comes inside this block, only when we are already in a post details page, and by using searh,

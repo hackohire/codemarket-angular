@@ -3,51 +3,19 @@ import { Apollo, QueryRef } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { Observable } from 'rxjs/internal/Observable';
 import { map } from 'rxjs/internal/operators/map';
-import { description } from 'src/app/shared/constants/fragments_constatnts';
+import { description, comment } from 'src/app/shared/constants/fragments_constatnts';
 import { tap, take } from 'rxjs/operators';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { Comment } from '../models/comment.model';
 import { ToastrService } from 'ngx-toastr';
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { appConstants } from '../constants/app_constants';
+import { PostService } from './post.service';
 
 @Injectable()
 export class CommentService {
 
-  commentSchema = gql`
-    fragment Comment on Comment {
-      text {
-        ...Description
-      }
-      _id
-      type
-      referenceId
-      parentId
-      createdAt
-      createdBy {
-        _id
-        name
-        avatar
-      }
-      children {
-        _id
-        text {
-          ...Description
-        }
-        createdAt
-        createdBy {
-          _id
-          name
-          avatar
-        }
-        parentId
-        referenceId
-      }
-      blockId
-      blockSpecificComment
-    }
-    ${description}
-  `;
+  commentSchema = comment;
 
   questionAndAnswerSchema = gql`
     fragment QuestionAndAnswer on QuestionAndAnswer {
@@ -111,6 +79,7 @@ export class CommentService {
     private toastrService: ToastrService,
     @Inject(DOCUMENT) private document: Document,
     @Inject(PLATFORM_ID) private platformId: any,
+    private postService: PostService
   ) {
     console.log('instance Created')
   }
@@ -167,27 +136,34 @@ export class CommentService {
             comments.push(c);
           }
           /** Audio Notification */
-          var audio = new Audio(appConstants.Notification);
-          audio.play();
+          // var audio = new Audio(appConstants.Notification);
+          // audio.play();
 
           /** Tostr Notification */
-          const message = c.parentId ? 'has reaplied to a comment on this post' : 'has commented on this post'
-
-          this.subscriptions$.add(
-            this.toastrService.info(
-              `<b>${c.createdBy.name}</b> ${message}  <br>
-              <u>View</u>
-              `
-            ).onTap
-            .pipe(take(1))
-            .subscribe(() => {          
-              this.scrollToComment(post.description, c);
-            })
-          );
+          // this.openToastrNotification(post, c)
 
           this.commentsList$.next(comments);
         })
       ).subscribe()
+    );
+  }
+
+  openToastrNotification(post, c, rediect = true) {
+    const message = c.parentId ? 'has reaplied to a comment on this post' : 'has commented on this post'
+
+    this.subscriptions$.add(
+      this.toastrService.info(
+        `<b>${c.createdBy.name}</b> ${message}  <br>
+        <u>View</u>
+        `
+      ).onTap
+      .pipe(take(1))
+      .subscribe(() => {
+        if (rediect) {
+          this.postService.redirectToPostDetails(post);
+        }       
+        this.scrollToComment(post.description, c);
+      })
     );
   }
 
@@ -208,7 +184,7 @@ export class CommentService {
     }
   }
 
-  getCommentsByReferenceId(post) {
+  getCommentsByReferenceId(post, commentId = '') {
     this.subscriptions$.add(
       this.apollo.query(
         {
@@ -232,6 +208,12 @@ export class CommentService {
           this.onCommentAdded(post, comments);
           this.onCommentUpdated(post, comments);
           this.onCommentDeleted(post, comments);
+
+          /** If comment Id is passed scroll down to the comment */
+          if (comments && comments.length && commentId) {
+            const comment = comments.find(c => c._id === commentId)
+            this.scrollToComment(post.description, comment);
+          }
         })
       ).subscribe()
     );

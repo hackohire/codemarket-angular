@@ -14,11 +14,12 @@ import { selectLoggedInUser } from '../store/selectors/user.selector';
 import { Observable, BehaviorSubject, Subscription } from 'rxjs';
 import { User } from '../../shared/models/user.model';
 import { Router } from '@angular/router';
-import { isPlatformBrowser, DOCUMENT } from '@angular/common';
+import { isPlatformBrowser, DOCUMENT, isPlatformServer } from '@angular/common';
 import { comment } from '../../shared/constants/fragments_constatnts';
 import { appConstants } from '../../shared/constants/app_constants';
 import { Comment } from '../../shared/models/comment.model';
 import { ToastrService } from 'ngx-toastr';
+import { TransferState, makeStateKey } from '@angular/platform-browser';
 
 @Injectable({
   providedIn: 'root'
@@ -35,9 +36,10 @@ export class AuthService {
     private router: Router,
     @Inject(PLATFORM_ID) private _platformId: Object,
     @Inject(DOCUMENT) private document: Document,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    private readonly transferState: TransferState
     // private commentService: CommentService
-    ) {
+  ) {
 
     this.loggedInUser$ = this.store.select(selectLoggedInUser);
     this.loggedInUser$.subscribe((u) => this.loggedInUser = u);
@@ -54,13 +56,21 @@ export class AuthService {
         this.checkIfUserIsLoggedIn();
       } else if (channel === 'auth' && data.payload.event === 'oAuthSignOut') {
         // localStorage.clear();
-        this.store.dispatch(SetLoggedInUser({payload: null}));
+        this.store.dispatch(SetLoggedInUser({ payload: null }));
         // this.router.navigate(['/']);
       }
     });
   }
 
   authorizeWithPlatform(): Observable<User> {
+    /** Checks is transferState has passed the data & retrieves */
+    const key = makeStateKey('authorizedUser');
+    if (this.transferState.hasKey(key)) {
+      const user = this.transferState.get(key, null);
+      this.transferState.remove(key);
+      this.setUserOnline(user);
+      return of(user);
+    }
     return this.apollo.mutate(
       {
         mutation: gql`
@@ -109,13 +119,17 @@ export class AuthService {
               }
             }
           }`,
-          variables: {
-            applicationId: environment.applicationId
-          }
+        variables: {
+          applicationId: environment.applicationId
+        }
       }
     ).pipe(
       map((d: any) => {
         // console.log('check', d);
+        /** Sets the data to transferState */
+        if (isPlatformServer(this._platformId)) {
+          this.transferState.set(key, d.data.authorize);
+        }
         this.setUserOnline(d.data.authorize);
         return d.data.authorize;
       }),
@@ -151,12 +165,12 @@ export class AuthService {
       map((u: any) => u.data.onUserOnline),
       tap((u) => {
         if (u.onCommentAdded && u.post) {
-          
+
           this.openToastrNotification(u.post, u.onCommentAdded, true)
         }
       })
     )
-    .subscribe(u => console.log(u));
+      .subscribe(u => console.log(u));
   }
 
   openToastrNotification(post, c: Comment, rediect = true) {
@@ -168,16 +182,16 @@ export class AuthService {
         <u>View</u>
         `
       ).onTap
-      .pipe(take(1))
-      .subscribe((d) => {
-        if (rediect) {
-          this.router.navigate(['/',
-          post.type === 'product' ? 'product' : 'post',
-          post.slug ? post.slug : ''
-        ],
-          { queryParams: { type: post.type, commentId: c._id } });
-        }
-      })
+        .pipe(take(1))
+        .subscribe((d) => {
+          if (rediect) {
+            this.router.navigate(['/',
+              post.type === 'product' ? 'product' : 'post',
+              post.slug ? post.slug : ''
+            ],
+              { queryParams: { type: post.type, commentId: c._id } });
+          }
+        })
     );
   }
 
@@ -192,7 +206,7 @@ export class AuthService {
     if (isPlatformBrowser(this._platformId)) {
       setTimeout(() => {
         let el = this.document.getElementById(`${c._id}`);
-        el.scrollIntoView({block: 'center', behavior: 'smooth', inline: 'center'}); /** scroll to the element upto the center */
+        el.scrollIntoView({ block: 'center', behavior: 'smooth', inline: 'center' }); /** scroll to the element upto the center */
         el.style.outline = '2px solid #00aeef'; /** Highlighting the element */
       }, c.blockSpecificComment ? 500 : 0);
     }
@@ -219,7 +233,7 @@ export class AuthService {
       if (isPlatformBrowser(this._platformId)) {
         localStorage.clear();
       }
-      this.store.dispatch(SetLoggedInUser({payload: null}));
+      this.store.dispatch(SetLoggedInUser({ payload: null }));
       this.router.navigate(['/']);
     });
   }
@@ -258,7 +272,7 @@ export class AuthService {
         if (isPlatformBrowser(this._platformId)) {
           localStorage.clear();
         }
-        this.store.dispatch(SetLoggedInUser({payload: null}));
+        this.store.dispatch(SetLoggedInUser({ payload: null }));
 
         /** Checking if Auth Guard wants to redirect user to login */
         if (redirect) {
@@ -267,7 +281,7 @@ export class AuthService {
            * Otherwise take current URL
            */
           const redirectURLTree = this.router.getCurrentNavigation() ?
-                                  this.router.getCurrentNavigation().extractedUrl.toString() : this.router.url;
+            this.router.getCurrentNavigation().extractedUrl.toString() : this.router.url;
           console.log(redirectURLTree);
           sessionStorage.setItem('redirectURL', redirectURLTree);
           this.openAuthenticationPopover.next(true);

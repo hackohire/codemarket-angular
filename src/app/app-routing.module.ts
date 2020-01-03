@@ -222,6 +222,12 @@ const routes: Routes = [
     // outlet: 'main',
     pathMatch: 'full'
   },
+  {
+    path: 'company/:companyId',
+    loadChildren: () => import('./companies/companies.module').then(module => module.CompaniesModule),
+    data: { noReuse: true, setPostMeta: true },
+    pathMatch: 'full'
+  },
 ];
 
 @NgModule({

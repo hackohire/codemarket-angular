@@ -205,8 +205,8 @@ export class CompanyService {
   }
 
   redirectToCompanyDetails(companyId: string) {
-    this.router.navigate(['/', 'dashboard', `company-details`, companyId],
-    { queryParams: { type: 'company', postId: companyId} });
+    this.router.navigate(['/', `company`, companyId],
+    { queryParams: { type: 'company'} });
   }
 
   editCompany(company: Company) {

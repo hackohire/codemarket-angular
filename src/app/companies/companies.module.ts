@@ -6,6 +6,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AddCompanyComponent } from './add-company/add-company.component';
 import { CompaniesListComponent } from './companies-list/companies-list.component';
 import { AuthGuard } from '../shared/guards/auth.guard';
+import { CompanyDetailsComponent } from './company-details/company-details/company-details.component';
 
 const companyRoutes: Routes = [
   {
@@ -13,6 +14,10 @@ const companyRoutes: Routes = [
     component: CompaniesComponent,
     data: { noReuse: true },
     children: [
+      {
+        path: ':companyId',
+        component: CompanyDetailsComponent
+      },
       {
         path: 'company-list',
         component: CompaniesListComponent
@@ -31,7 +36,7 @@ const companyRoutes: Routes = [
 ];
 
 @NgModule({
-  declarations: [CompaniesComponent, AddCompanyComponent],
+  declarations: [CompaniesComponent, AddCompanyComponent, CompanyDetailsComponent],
   imports: [
     CommonModule,
     SharedModule,

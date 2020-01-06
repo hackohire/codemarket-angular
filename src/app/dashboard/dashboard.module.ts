@@ -59,11 +59,7 @@ const dashboardRoutes: Routes = [
     data: { noReuse: true, setPostMeta: true },
     // outlet: 'main',
     pathMatch: 'full'
-  },
-  {
-    path: 'company-details/:companyId',
-    loadChildren: () => import('../detail/detail.module').then(module => module.DetailModule),
-  },
+  }
 ];
 
 

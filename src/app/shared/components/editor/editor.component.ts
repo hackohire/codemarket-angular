@@ -283,12 +283,12 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
               this._hljs.highlightBlock(block);
             });
 
-            if (this.readOnly && isPlatformBrowser(this._platformId)) {
-              const elements = document.querySelectorAll('[contenteditable=true]');
-              elements.forEach(element => {
-                element.setAttribute('contenteditable', 'false');
-              });
-            }
+            // if (this.readOnly && isPlatformBrowser(this._platformId)) {
+            //   const elements = document.querySelectorAll('[contenteditable=true]');
+            //   elements.forEach(element => {
+            //     element.setAttribute('contenteditable', 'false');
+            //   });
+            // }
           }
 
           this.addControlsIfVideoElement();
@@ -296,7 +296,7 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
         }),
         onChange: (() => {
           this.editor.save().then((outputData) => {
-            console.log(outputData);
+            // console.log(outputData);
             this.output.emit([...outputData.blocks]);
           }).catch((error) => {
             console.log('Saving failed: ', error);

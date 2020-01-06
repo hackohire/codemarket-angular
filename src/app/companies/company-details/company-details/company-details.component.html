@@ -1,0 +1,645 @@
+<!--============================================
+        START COMPANY DETAILS
+    ==============================================-->
+
+<ng-container *ngIf="(companyDetails$ | async) as details">
+    <!--================================
+        START BREADCRUMB AREA
+    =================================-->
+
+    <!-- <app-breadcumb (editPost)="edit(details)"
+        [showEditPostDetails]="details?.createdBy?._id === authService?.loggedInUser?._id ? true : false"
+        [companyDetails]="details" [title]="details?.name" [path]="breadcumb?.path">
+    </app-breadcumb> -->
+
+    <!--================================
+            END BREADCRUMB AREA
+    =================================-->
+
+
+
+    <!--============================================
+        START COMPANY DETAILS AREA
+    ==============================================-->
+    <section class="single-product-desc" style="padding-top: 15px;">
+        <div class="container" style="margin-top: 0; margin-bottom: 15px;"
+            *ngIf=" details?.cover || details?.createdBy?._id === authService?.loggedInUser?._id">
+
+            <div class="row">
+                <div class="col-lg-3">
+                </div>
+                <div class="col-lg-9">
+                    <div class="picture-container" *ngIf="selectedCoverPic || details?.cover">
+                        <img #cover draggable="true" scroll="false" id="cover" data-top="0" data-left="0"
+                            [src]="selectedCoverPic ? (selectedCoverPic | safe: 'resourceUrl') : ((s3FilesBucketURL + details?.cover) | safe: 'resourceUrl')">
+                        <div class="controls" *ngIf="details?.createdBy?._id === authService?.loggedInUser?._id">
+                            <!-- <a href="" class="pos">Reposition</a> -->
+                            <a mat-button (click)="selectedCoverPic = null; updateCover();" class="save">Remove</a>
+                            <a mat-button (click)="updateCover()" class="save">Update Cover</a>
+                        </div>
+                    </div>
+                    <div class="image-upload-wrap" style="height: 300px;" *ngIf="!selectedCoverPic && !details?.cover">
+                        <input #coverPic class="file-upload-input" type='file' (change)="onFilesAdded()"
+                            accept="image/*" />
+                        <div class="drag-text">
+                            <h3>Drag and drop a file or select add Image</h3>
+                        </div>
+                    </div>
+
+                    <div>
+                        <!-- <div #fileUpload class="file-upload" style="height: 312px; width: 820px">
+                            <div class="image-upload-wrap" *ngIf="!selectedCoverPic">
+                                <input #coverPic class="file-upload-input" type='file' (change)="onFilesAdded()"
+                                    accept="image/*" />
+                                <div class="drag-text">
+                                    <h3>Drag and drop a file or select add Image</h3>
+                                </div>
+                            </div>
+                            <div class="file-upload-content" *ngIf="selectedCoverPic">
+                                <img (drag)="resize($event)" class="file-upload-image" [src]="selectedCoverPic | safe: 'resourceUrl'" alt="your image" />
+                                <div class="image-title-wrap">
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-3">
+                    <!-- start aside -->
+                    <aside class="sidebar product--sidebar">
+                        <div class="sidebar-card card--category" style="background: transparent;">
+
+                            <div class="collapse show collapsible-content" id="collapse1">
+                                <ul class="card-content" style="list-style: none;">
+                                    <li>
+                                        <a *ngFor="let cView of companyViewLinks" [routerLink]="['./']" [routerLinkActive]="'active-item'"
+                                            [queryParams]="{view: cView?.view}" [queryParamsHandling]="'merge'">
+                                            <span class="lnr lnr-chevron-right"></span>{{cView?.title}} </a>
+                                            <!-- <span class="item-count">35</span> -->
+                                
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- <div class="sidebar-card card--category"> -->
+                        <a [routerLink]="['/', 'company', 'add-company']" class="btn btn--sm btn--round menu"
+                            style="margin: 0 30px;">Add Company
+                            <!-- <mat-icon style="vertical-align: middle;">library_add</mat-icon> -->
+                            <mat-icon style="vertical-align: middle;">add</mat-icon>
+                        </a>
+                        <a class="btn btn--sm btn--round menu"
+                            style="color: #0674ec !important; background: white; margin: 10px 30px;"
+                            [routerLink]="['./']" [routerLinkActive]="'active-item'" [queryParams]="{view: 'q&a'}"
+                            [queryParamsHandling]="'merge'">Add Question <mat-icon style="vertical-align: middle;">add
+                            </mat-icon>
+                        </a>
+                        <a class="btn btn--sm btn--round menu"
+                            style="color: #0674ec !important; background: white; margin: 10px 30px;"
+                            [state]="{companyDetails: details}" [routerLink]="['/', 'event', 'add-event']">Add Event
+                            <mat-icon style="vertical-align: middle;">add</mat-icon>
+                        </a>
+
+                        <!-- </div> -->
+                    </aside>
+                </div>
+                <div class="col-lg-9">
+                    <!-- <div style="height: 312px; width: 820px">
+                            <img [src]="avatar?.value ? ((s3FilesBucketURL + avatar.value) | safe: 'resourceUrl') : anonymousAvatar" />
+                    </div> -->
+
+                    <div class="item-info" *ngIf="companyView === 'description'">
+                        <div class="tab-pane fade show product-tab active" id="product-details">
+
+
+                            <h4 class="tab-content-wrapper">Description:</h4>
+                            <app-editor *ngIf="details?.description"
+                                [commentsList]="commentService?.commentsList$ | async" [blockLevelComments]="true"
+                                [readOnly]="true" [data]="details?.description" [post]="details"
+                                [id]="'company-details-editor'" [commentType]="'company'">
+                            </app-editor>
+
+                            <!-- <h4 class="tab-content-wrapper">Ideas:</h4>
+                                    <app-editor *ngIf="details?.ideas" [commentsList]="commentsList"
+                                        [blockLevelComments]="true" [readOnly]="true" [data]="details?.ideas"
+                                        [post]="details" [id]="'ideas-editor'" [commentType]="'company'">
+                                    </app-editor> -->
+
+
+
+                            <!-- <h4 class="tab-content-wrapper">Questions:</h4>
+                                    <app-editor *ngIf="details?.questions" [commentsList]="commentsList"
+                                        [blockLevelComments]="true" [readOnly]="true" [data]="details?.questions"
+                                        [post]="details" [id]="'questions-editor'" [commentType]="'company'">
+                                    </app-editor> -->
+                            <br />
+                            <br />
+
+                        </div>
+
+                    </div>
+
+                    <div *ngIf="companyView === 'comments'">
+                        <ng-container *ngTemplateOutlet="addCommentTemplate; context: details">
+                        </ng-container>
+                    </div>
+
+                    <div *ngIf="companyView === 'q&a'">
+                        <ng-container *ngTemplateOutlet="questionAnswersTemplate; context: details">
+                        </ng-container>
+                    </div>
+
+                    <div *ngIf="companyView === 'sales-challenges'">
+                        <ng-container
+                            *ngTemplateOutlet="challengesTemplate; context: { details: details, challengeType: 'sales'}">
+                        </ng-container>
+                    </div>
+
+                    <div *ngIf="companyView === 'team-challenges'">
+                        <ng-container
+                            *ngTemplateOutlet="challengesTemplate; context: { details: details, challengeType: 'team'}">
+                        </ng-container>
+                    </div>
+
+                    <div *ngIf="companyView === 'marketing-challenges'">
+                        <ng-container
+                            *ngTemplateOutlet="challengesTemplate; context: { details: details, challengeType: 'marketing'}">
+                        </ng-container>
+                    </div>
+
+                    <div *ngIf="companyView === 'technical-challenges'">
+                        <ng-container
+                            *ngTemplateOutlet="challengesTemplate; context: { details: details, challengeType: 'technical'}">
+                        </ng-container>
+                    </div>
+
+                    <div *ngIf="companyView === 'business-challenges'">
+                        <ng-container
+                            *ngTemplateOutlet="challengesTemplate; context: { details: details, challengeType: 'business'}">
+                        </ng-container>
+                    </div>
+
+                    <div *ngIf="details?.createdBy?.name && companyView === 'creator'" class="author-card sidebar-card">
+                        <div class="card-title">
+                            <h4>Author Information</h4>
+                        </div>
+
+                        <div class="author-infos">
+                            <div class="author_avatar">
+                                <img [src]="details?.createdBy?.avatar ? ((s3FilesBucketURL + details.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                                    alt="Presenting the broken author avatar :D">
+                            </div>
+
+                            <div class="author">
+                                <a [routerLink]="['/', 'dashboard', 'profile', details?.createdBy?._id ]">
+                                    <h4>{{details?.createdBy?.name}}</h4>
+                                </a>
+                                <!-- <button
+                                    *ngIf="details?.createdBy?._id && authService?.loggedInUser?._id && authService?.loggedInUser?._id !== details?.createdBy?._id"
+                                    (click)="openDialog(details?.createdBy?._id)" mat-mini-fab color="primary">
+                                    <mat-icon>video_call</mat-icon>
+                                </button> -->
+                                <!-- <p>Signed Up: 08 April 2016</p> -->
+                            </div>
+                            <!-- end /.author -->
+
+                            <div class="social social--color--filled">
+                                <ul>
+                                    <li>
+                                        <a href="#">
+                                            <span class="fab fa-facebook fa-lg"></span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <span class="fab fa-github fa-lg"></span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <span class="fab fa-linkedin fa-lg"></span>
+                                        </a>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fab fa-stack-overflow"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- end /.social -->
+
+                            <div class="author-btn">
+                                <a (editPost)="postService?.editPost(details)"
+                                    [routerLink]="['/', 'dashboard', 'profile', details?.createdBy?._id ]"
+                                    class="btn btn--sm btn--round">View Profile</a>
+                                <!-- <a href="#" class="btn btn--sm btn--round">Message</a> -->
+                            </div>
+                        </div>
+                        <!-- end /.author-infos -->
+
+
+                    </div>
+                    <!-- end /.author-card -->
+
+                    <aside *ngIf="companyView === 'info'" class="sidebar sidebar--single-product">
+                        <div class="sidebar-card card--product-infos">
+                            <div class="card-title">
+                                <h4>Information</h4>
+                            </div>
+
+                            <ul class="infos">
+                                <li *ngIf="details?.createdAt">
+                                    <p class="data-label">Created</p>
+                                    <p class="info">{{getDate(details?.createdAt) | date: 'dd/MM/yyyy'}}
+                                    </p>
+                                </li>
+                                <li *ngIf="details?.updatedAt">
+                                    <p class="data-label">Updated</p>
+                                    <p class="info">{{getDate(details?.updatedAt) | date: 'dd/MM/yyyy'}}
+                                    </p>
+                                </li>
+                                <li>
+                                    <p class="data-label">Cities</p>
+                                    <p class="info" *ngFor="let t of details?.cities">{{t?.name + ','}}
+                                    </p>
+                                </li>
+                                <li>
+                                    <p class="data-label">Address</p>
+                                    <p class="info">{{details?.location?.address}}
+                                    </p>
+                                </li>
+                            </ul>
+
+                            <!-- <ng-container *ngTemplateOutlet="locationTemplate; context: {location: details?.location}">
+                            </ng-container> -->
+                        </div>
+                    </aside>
+                    <!-- end /.aside -->
+                    <div *ngIf="type === 'company' && companyView === 'interested-people'"
+                        class="author-card sidebar-card">
+                        <div class="card-title">
+                            <h4>Interested Professionals:
+                                {{ details?.usersInterestedInCompany?.length }}</h4>
+                            <br />
+
+                            <ng-container class="row" *ngFor="let userInterested of usersInterestedInCompany">
+                                <div class="col-md-12" style="margin-bottom: 10px;">
+                                    <div class="author_avatar_comment" style="vertical-align: middle;">
+                                        <img [src]="userInterested?.avatar ? ((s3FilesBucketURL + userInterested.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                                            alt="Presenting the broken author avatar :D">
+                                    </div>
+                                    <div class="autor__info">
+                                        <a [routerLink]="['/', 'dashboard', 'profile', userInterested?._id ]">
+                                            <p class="name">
+                                                {{userInterested?.name}}
+                                            </p>
+                                        </a>
+                                        <!-- <p class="ammount">{{fromNow(pu?.createdAt)}}</p> -->
+                                    </div>
+                                </div>
+
+                            </ng-container>
+                        </div>
+                    </div>
+
+                    <!-- end /.item-info -->
+                </div>
+                <!-- end /.col-md-8 -->
+
+            </div>
+        </div>
+        <!-- end /.row -->
+        <!-- end /.container -->
+    </section>
+    <!--===========================================
+            END SINGLE PRODUCT DESCRIPTION AREA
+        ===============================================-->
+
+</ng-container>
+
+<ng-template #challengesTemplate let-cDetails="details" let-challengeType="challengeType">
+    <app-editor [placeholder]="'Add '+ challengeType + ' Challenges...'"
+        [editorStyle]="{background: 'white', 'padding': '20px 35px', 'min-height': '130px', 'border-radius': '6px'}"
+        (output)="challengesDescription = $event" [id]="challengeType + '-editor'"></app-editor>
+
+    <button style="float: right; margin-top: 10px; margin-bottom: 20px;" type="button" class="btn btn--sm btn--round"
+        (click)="addChallenge(challengeType)">Post</button>
+
+    <div style="padding-top: 80px;">
+        <ng-container *ngFor="let c of cDetails?.challenges; let i=index;">
+            <div class="box image" *ngIf="c?.challengeType === challengeType">
+                <div class="box-header">
+                    <h3>
+                        <a href="">
+                            <img [src]="cDetails?.createdBy?.avatar ? ((s3FilesBucketURL + cDetails?.createdBy?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                                alt="" />{{cDetails?.createdBy?.name}}
+                        </a>
+                        <span>{{fromNow(c?.createdAt)}} <i class="fa fa-globe"></i></span>
+                    </h3>
+    
+                    <!-- Post Actions -->
+                    <i class="fad fa-check-circle" *ngIf="c['__edit']" (click)="updateChallenge(c._id)"></i>
+                    <span style="float: right;" *ngIf="cDetails?.createdBy?._id === auth?.loggedInUser?._id">
+                        <button mat-icon-button [matMenuTriggerFor]="optionsMenu"
+                            aria-label="Example icon-button with a menu">
+                            <mat-icon>more_horiz</mat-icon>
+                        </button>
+                        <mat-menu #optionsMenu="matMenu">
+                            <button mat-menu-item (click)="c['__edit'] = !c['__edit']">
+                                <mat-icon>edit</mat-icon>
+                                <span>Edit</span>
+                            </button>
+                            <button mat-menu-item (click)="deleteChallenge(c?._id)">
+                                <mat-icon>delete</mat-icon>
+                                <span>Delete</span>
+                            </button>
+                        </mat-menu>
+                    </span>
+                    <!-- <span><i class="fa fa-angle-down"></i></span> -->
+                    <div class="window"><span></span></div>
+                </div>
+                <div class="box-content">
+                    <div class="content">
+                        <img src="https://goo.gl/nvqkEz" alt="" />
+                    </div>
+                    <div class="bottom">
+                        <p>
+                            <app-editor [data]="c?.description" [editorStyle]="{background: 'white'}"
+                                (output)="postDescriptionInstances[c?._id] = $event" [id]="c?._id" [readOnly]="!c['__edit']"></app-editor>
+                        </p>
+                        <span><span class="fa fa-search-plus"></span></span>
+                    </div>
+                </div>
+                <!-- <div class="box-likes">
+                    <div class="post-row">
+                        <span><a href="#"><img src="https://goo.gl/oM0Y8G" alt="" /></a></span>
+                        <span><a href="#"><img src="https://goo.gl/vswgSn" alt="" /></a></span>
+                        <span><a href="#"><img src="https://goo.gl/4W27eB" alt="" /></a></span>
+                        <span><a href="#">+99</a></span>
+                        <span>Like this</span>
+                    </div>
+                    <div class="post-row">
+                        <span>145 comments</span>
+                    </div>
+                </div> -->
+                <!-- <div class="box-buttons">
+                    <div class="post-row">
+                        <button><span class="fa fa-thumbs-up"></span></button>
+                        <button (click)="c['__show'] = !c['__show']"><span class="fas fa-comment-lines"></span></button>
+                        <button><span class="ion-share"></span></button>
+                    </div>
+                </div> -->
+    
+                <!-- <div class="box-click"><span><i class="ion-chatbox-working"></i> View 140 more comments</span></div>
+                <div class="box-comments">
+                    <div class="comment">
+                        <img src="https://goo.gl/oM0Y8G" alt="" />
+                        <div class="content">
+                            <h3><a href="">Emily Rudd</a><span><time> 1 hr - </time><a href="#">Like</a></span></h3>
+                            <p>Wow irealy, i love here. Nice pic</p>
+                        </div>
+                    </div>
+                    <div class="comment">
+                        <img src="https://goo.gl/vswgSn" alt="">
+                        <div class="content">
+                            <h3><a href="">barbara Palvin</a><span><time> 1 hr - </time><a href="#">Like</a></span></h3>
+                            <p>The life is perfect, Nice Scene</p>
+                        </div>
+                    </div>
+        
+                </div> -->
+                <!-- <div class="box-new-comment">
+                    <img src="https://goo.gl/oOD0V2" alt="" />
+                    <div class="content">
+                        <div class="post-row">
+                            <app-editor [data]="c?.description"
+                                [editorStyle]="{background: 'white', padding: '0 12px 0 12px', 'border-radius': '20px'}"
+                                (output)="challengesDescription = $event" [id]="c?._id + i"></app-editor>
+                        </div>
+                        <div class="post-row">
+                            <span class="fa fa-globe"></span>
+                            <span class="ion-android-attach"></span>
+                            <span class="fa fa-smile-o"></span>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+        </ng-container>
+    </div>
+</ng-template>
+
+<ng-template #locationTemplate let-location="location">
+    <div *ngIf="location?.latitude || location?.longitude">
+        <h4 class="tab-content-wrapper">Location:</h4>
+        <agm-map [latitude]="location?.latitude" [longitude]="location?.longitude" [zoom]="15">
+            <agm-marker [latitude]="location?.latitude" [longitude]="location?.longitude"></agm-marker>
+        </agm-map>
+    </div>
+
+</ng-template>
+
+<ng-template #addCommentTemplate let-cDetails="details">
+    <div style="background: white;">
+        <div class="tab-pane fade show product-tab">
+            <div class="thread">
+                <ul class="media-list thread-list" style="list-style: none;">
+                    <h4 class="tab-content-wrapper">Comments:</h4>
+                    <div *ngFor="let c of commentService?.commentsList$ | async">
+                        <li [id]="c?._id" *ngIf="!c?.blockSpecificComment" class="single-thread">
+                            <app-comment [comment]="c" [referenceId]="cDetails?._id"></app-comment>
+                        </li>
+                    </div>
+                </ul>
+            </div>
+        </div>
+
+        <div class="comment-form-area" *ngIf="commentForm">
+            <h4>Leave a comment</h4>
+            <!-- comment reply -->
+            <div class="media comment-form">
+                <div class="media-left">
+                    <a href="#">
+                        <img class="author_avatar_comment"
+                            [src]="authService?.loggedInUser?.avatar ? ((s3FilesBucketURL + authService?.loggedInUser?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                            alt="Commentator Avatar">
+                    </a>
+                </div>
+                <div class="media-body">
+                    <div [formGroup]="commentForm" class="comment-reply-form">
+                        <app-editor [id]="'comment-editor'" (output)="updateFormData($event)">
+                        </app-editor>
+
+                        <button style="float: right;" type="button" class="btn btn--sm btn--round"
+                            (click)="addComment()">Post
+                            Comment</button>
+                    </div>
+                </div>
+            </div>
+            <!-- comment reply -->
+        </div>
+    </div>
+</ng-template>
+
+<!-- Implementation of Q&A Start Here -->
+<ng-template #questionAnswersTemplate let-qa="details">
+    <div class="tab-pane product-tab" id="product-faq" style="background: white;">
+        <div class="tab-content-wrapper">
+            <h4 style="padding-bottom: 15px;">Q & A</h4>
+
+            <mat-accordion>
+                <mat-expansion-panel *ngFor="let q of questionsList">
+                    <mat-expansion-panel-header>
+                        <div style="padding: 0; width: 100%;" fxLayout="row" [fxLayoutAlign]="'center center'">
+                            <app-editor fxFlex="92" (output)="questionData = $event;"
+                                [readOnly]="q['edit'] ? false : true" [data]="q?.text" [id]="q['edit']+ q?._id">
+                            </app-editor>
+                            <div fxFlex="8">
+                                <div fxLayout="column" [fxLayoutAlign]="'center center'" style="padding-right: 5px;">
+                                    <a fxFlex="50" style="padding: 0 8px; text-decoration: none;"
+                                        *ngIf="q?.createdBy?._id === authService?.loggedInUser?._id" mat-button
+                                        (click)="q['edit'] = true">
+                                        <i style="font-size: 1.2rem !important;" class="fad fa-edit fa-lg"></i>
+                                        <!-- <span>{{' ('}}
+                                            {{ q?.answers ? q?.answers?.length : 0 }}
+                                            {{')'}}</span> -->
+                                    </a>
+                                    <a fxFlex="50" style="padding: 0 8px; text-decoration: none;" *ngIf="!q?.__show"
+                                        mat-button (click)="deleteQuestionOrAnswer(q)">
+                                        <i style="font-size: 1.2rem !important;" class="fad fa-minus-octagon fa-lg"></i>
+                                    </a>
+                                    <!-- <a fxFlex="33" style="padding: 0 8px; text-decoration: none;"
+                                        *ngIf="!q?.show" mat-button (click)="q['show'] = true">
+                                        <i style="font-size: 1.2rem !important;" class="fad fa-check-circle fa-lg"></i>
+                                    </a>
+                                    <a fxFlex="33" style="padding: 0 8px; text-decoration: none;" *ngIf="q?.show" mat-button
+                                        (click)="q['show'] = false">
+                                        <i style="font-size: 1.2rem !important;" class="fad fa-chevron-circle-up fa-lg"></i>
+                                    </a> -->
+                                </div>
+                            </div>
+                        </div>
+                    </mat-expansion-panel-header>
+                    <br />
+                    <button *ngIf="q?.edit" type="button" style="float: right;" class="btn btn--sm btn--round"
+                        (click)="updateQuestionOrAnswer(q, false)">Update
+                        Question</button>
+                    <br />
+                    <div class="panel-body">
+
+                        <div class="thread">
+                            <ul class="media-list thread-list" style="list-style: none;">
+                                <!-- List of Answers -->
+                                <div *ngFor="let a of q?.answers">
+                                    <li class="single-thread">
+                                        <div class="media">
+                                            <div class="media-left">
+
+                                                <a [routerLink]="['/', 'dashboard', 'profile', a?.createdBy?._id ]">
+                                                    <img class="author_avatar_comment"
+                                                        [src]="a?.createdBy?.avatar ? ((s3FilesBucketURL + a.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                                                        alt="Commentator Avatar">
+                                                </a>
+                                            </div>
+                                            <div class="media-body">
+                                                <div>
+                                                    <div class="media-heading">
+                                                        <a
+                                                            [routerLink]="['/', 'dashboard', 'profile', a?.createdBy?._id ]">
+                                                            <h4>{{a?.createdBy?.name }}</h4>
+                                                        </a>
+                                                        <span>{{fromNow(a?.createdAt)}}</span>
+                                                    </div>
+
+                                                    <!-- Answe actions button -->
+                                                    <a style="float: right;"
+                                                        *ngIf="a?.createdBy?._id === authService?.loggedInUser?._id"
+                                                        mat-button (click)="deleteQuestionOrAnswer(a, q)">
+                                                        <i style="font-size: 2rem !important;"
+                                                            class="fad fa-comment-minus fa-lg"></i>
+                                                    </a>
+
+                                                    <a style="float: right;"
+                                                        *ngIf="a?.createdBy?._id === authService?.loggedInUser?._id"
+                                                        mat-button (click)="a['edit']=true">
+                                                        <i style="font-size: 2rem !important;"
+                                                            class="fad fa-comment-edit fa-lg"></i>
+                                                    </a>
+
+                                                </div>
+
+                                                <!-- View / Update Answer Content -->
+                                                <app-editor [readOnly]="a['edit'] ? false : true"
+                                                    (output)="answerData = $event" [data]="a?.text" [id]="a?._id">
+                                                </app-editor>
+                                                <br />
+                                                <button *ngIf="a['edit']" type="button" style="float: right;"
+                                                    class="btn btn--sm btn--round"
+                                                    (click)="updateQuestionOrAnswer(a, true)">Update
+                                                    Answer</button>
+                                            </div>
+
+                                        </div>
+                                    </li>
+                                </div>
+                            </ul>
+                        </div>
+
+                        <!-- Add Answer Section -->
+                        <div class="comment-form-area">
+                            <div class="media comment-form">
+                                <div class="media-left">
+                                    <a href="#">
+                                        <img class="author_avatar_comment"
+                                            [src]="authService?.loggedInUser?.avatar ? ((s3FilesBucketURL + authService?.loggedInUser?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                                            alt="Commentator Avatar">
+                                    </a>
+                                </div>
+                                <div class="media-body">
+                                    <div class="comment-reply-form">
+                                        <app-editor [id]="'answer' + q?._id" [placeholder]="'Answer'"
+                                            (output)="questionOrAnswerForm.get('text').setValue($event)">
+                                        </app-editor>
+
+                                        <button style="float: right;" type="button" class="btn btn--sm btn--round"
+                                            (click)="addQuestionOrAnswer(false, q)">Answer</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </mat-expansion-panel>
+            </mat-accordion>
+
+
+        </div>
+
+        <!-- Add Question Section -->
+        <div class="comment-form-area">
+            <div class="media comment-form">
+                <div class="media-left">
+                    <a href="#">
+                        <img class="author_avatar_comment"
+                            [src]="authService?.loggedInUser?.avatar ? ((s3FilesBucketURL + authService?.loggedInUser?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                            alt="Commentator Avatar">
+                    </a>
+                </div>
+                <div class="media-body">
+                    <div [formGroup]="questionOrAnswerForm" class="comment-reply-form">
+                        <app-editor [id]="'question-editor'" [placeholder]="'Ask a Question'"
+                            (output)="questionOrAnswerForm.get('text').setValue($event)">
+                        </app-editor>
+
+                        <button style="float: right;" type="button" class="btn btn--sm btn--round"
+                            (click)="addQuestionOrAnswer(true)">Ask a Question</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

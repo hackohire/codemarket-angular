@@ -1,0 +1,564 @@
+.picture-container {
+  margin: 0 auto;
+  overflow: hidden;
+  height: 300px;
+  position: relative;
+  // width: 80%;
+}
+.picture-container img {
+  min-height: 100%;
+  min-width: 100%;
+}
+.controls,
+.picture-container img {
+  position: absolute;
+}
+.controls a {
+  text-decoration: none;
+  color: white;
+  padding: 15px;
+  display: inline-block;
+}
+
+.active-item {
+  background: rgba(0, 0, 0, 0.2);
+  color: #fff !important;
+  border-radius: 18px;
+  text-align: center;
+}
+
+.file-upload {
+  background-color: #ffffff;
+  // width: 600px;
+  margin: 0 auto;
+  height: 100%;
+  // padding: 20px;
+}
+
+.file-upload-btn {
+  width: 100%;
+  margin: 0;
+  color: #fff;
+  background: #0674ec;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  border-bottom: 4px solid #0674ec;
+  transition: all 0.2s ease;
+  outline: none;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.file-upload-btn:hover {
+  background: #0674ec;
+  color: #ffffff;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.file-upload-btn:active {
+  border: 0;
+  transition: all 0.2s ease;
+}
+
+.file-upload-content {
+  // display: none;
+  text-align: center;
+}
+
+.file-upload-input {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  outline: none;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.image-upload-wrap {
+  // margin-top: 20px;
+  height: 100%;
+  border: 2px dashed #0674ec;
+  position: relative;
+}
+
+.image-dropping,
+.image-upload-wrap:hover {
+  background-color: #0674ec52;
+  border: 4px dashed #ffffff;
+}
+
+.image-title-wrap {
+  padding: 0 15px 15px 15px;
+  color: #222;
+}
+
+.drag-text {
+  text-align: center;
+  height: 100%;
+}
+
+.drag-text h3 {
+  font-weight: 100;
+  text-transform: uppercase;
+  color: #0674ec;
+  padding: 60px 0;
+}
+
+.file-upload-image {
+  // max-height: 200px;
+  // max-width: 200px;
+  margin: auto;
+  // padding: 20px;
+}
+
+
+.box {
+  background: #FFF;
+  border-radius: 4px;
+  // box-shadow: 0 0 50px 5px rgba(0,0,0,.25);
+  height: auto;
+  margin: 0px auto 20px;
+  // max-width: 500px;
+  // overflow: hidden;
+  padding: 20px 0 0;
+  position: relative;
+  width: 100%;
+}
+.box > [class*="box-"] {
+  margin: 0 auto;
+  padding: 0 30px;
+  position: relative;
+}
+.box > [class*="box-"] img {
+  display: block;
+  width: 100%;
+}
+.box > .box-header {
+  margin: 0 auto;
+  padding: 0 30px 10px;
+  width: initial;
+}
+.box > .box-header > h3 {
+  font-size: 1.2em;
+  font-weight: 700;
+  height: 60px;
+  margin: 5px auto;
+  overflow: hidden;
+  padding: 5px 0 0;
+  position: relative;
+}
+.box > .box-header > h3 > a {
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+}
+.box > .box-header > h3 > span {
+  color: #9197A3;
+  display: block;
+  font-size: 13px;
+  font-weight: 400;
+  margin-top: 8px;
+}
+.box > .box-header > h3 > span .fa {
+  font-size: 15px;
+  margin-left: 5px;
+}
+
+.box > .box-header > i {
+  position: absolute;
+  float: right;
+  right: 95px;
+  top: 9px;
+  font-size: x-large;
+  cursor: pointer;
+}
+
+.box > .box-header > i:hover {
+  color: #888;
+}
+
+.box > .box-header > span {
+  background: #F4F4F4;
+  border-radius: 3px;
+  color: #BCBFC6;
+  cursor: pointer;
+  font-size: 24px;
+  height: auto;
+  line-height: 18px;
+  // margin: 5px auto 0;
+  // padding: 3px 4px;
+  position: absolute;
+  right: 40px;
+  top: 0;
+}
+.box > .box-header > span:hover {
+  color: #888;
+}
+.box > .box-header > span > i {
+  height: 18px;
+  line-height: 18px;
+}
+.box > .box-header img {
+  border-radius: 100px;
+  float: left;
+  height: 60px;
+  margin: -5px 20px 0 0;
+  object-fit: cover;
+  width: 60px;
+}
+.box > .box-content {
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+  width: initial;
+}
+.box > .box-content > .content {
+  height: auto;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+  width: initial;
+}
+.box > .box-content > .bottom {
+  margin: 0 auto;
+  padding: 0 30px; 
+  position: relative;
+  width: initial;
+}
+.box > .box-content > .bottom > p {
+  color: #71747A;
+  font-size: 15px;
+  line-height: 20px;
+  margin: 0;
+  padding: 0 0 20px 0;
+}
+.box > .box-content > .bottom > span {
+  background: linear-gradient(to top, rgba(0,0,0,.45), rgba(0,0,0,0));
+  height: 160px;
+  left: 0;
+  line-height: 160px;
+  margin: 0 auto;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  text-align: right;
+  top: -160px;
+  vertical-align: bottom;
+  width: 100%;
+}
+.box > .box-content > .bottom > span > span {
+  background: rgba(0,0,0,.35);
+  border-radius: 4px;
+  bottom: 0;
+  color: #FFF;
+  cursor: pointer;
+  font-size: 20px;
+  margin: 0 30px 25px auto;
+  opacity: .75;
+  overflow: hidden;
+  padding: 10px;
+  position: absolute;
+  right: 0;
+  top: auto;
+  -webkit-transition: all .25s ease-in-out;
+     -moz-transition: all .25s ease-in-out;
+          transition: all .25s ease-in-out;
+}
+.box > .box-content > .bottom > span > span:hover {
+  opacity: 1;
+}
+.box > .box-likes {
+  margin: 0 auto;
+  overflow: hidden;
+  padding: 0 30px;
+  position: relative;
+}
+.box > .box-likes > .post-row {
+  border-top: 1px solid #F4F4F4;
+  padding: 20px 0;
+}
+.box > .box-likes > .post-row > span {
+  display: inline-block;
+  font-size: 13px;
+  margin: 0 2px 0 0;
+  position: relative;
+  vertical-align: middle;
+}
+.box > .box-likes > .post-row:first-child {
+  float: left;
+  width: 60%;
+}
+.box > .box-likes > .post-row:last-child {
+  float: left;
+  text-align: end;
+  width: 40%;
+}
+.box > .box-likes > .post-row:first-child > span:nth-child(4) {
+  background: #4D679F;
+  border-radius: 50px;
+  font-weight: bold;
+  padding: 0 8px 0 6px;
+}
+.box > .box-likes > .post-row:first-child > span:nth-child(4) > a {
+  color: #FFF;
+}
+.box > .box-likes > .post-row:first-child > span,
+.box > .box-likes > .post-row:last-child > span {
+  color: #9197A3;
+}
+.box > .box-likes > .post-row:last-child > span {
+  display: inline-block;
+  verrtical-align: middle;
+}
+.box > .box-likes > .post-row img {
+  border-radius: 100px;
+  height: 28px;
+  object-fit: cover;
+  width: 28px;
+}
+.box > .box-buttons {
+  margin: 0 auto;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+}
+.box > .box-buttons *,*::before,*::after {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.box > .box-buttons > .post-row {
+  border-bottom: 1px solid #F4F4F4;
+  border-top: 1px solid #F4F4F4;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+}
+.box > .box-buttons > .post-row > button:last-child {
+  border: 0;
+}
+.box > .box-buttons > .post-row > button {
+  background: #FFF;
+  border: 0;
+  border-right: 1px solid #F4F4F4;
+  color: #9197A3;
+  font-size: 20px;
+  float: left;
+  height: 60px;
+  line-height: 60px;
+  margin: 0;
+  *outline: 1px #08F;
+  padding: 0;
+  width: 33.33333333333%;
+}
+.box > .box-buttons > .post-row > button:hover {
+  background: #F5F5F5;
+  color: #7D8696;
+}
+.box > .box-buttons > .post-row > button:focus {
+  background: #F0F2F2;
+  color: #6C7588;
+  box-shadow: inset 0 0 10px rgba(0,0,0,.2);
+  outline-color: #08F;
+}
+.box > .box-click {
+  color: #4D679F;
+  font-size: 13px;
+  margin: 0 auto;
+  overflow: hidden;
+  padding: 10px 30px;
+  position: relative;
+}
+.box > .box-click > span {
+  cursor: pointer;
+}
+.box > .box-click > span i {
+  font-size: 18px;
+  margin-right: 5px;
+}
+.box > .box-comments {
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+}
+.box > .box-comments > .comment {
+  border-top: 1px solid #F4F4F4;
+  margin: 0;
+  overflow: hidden;
+  padding: 16px 30px;
+  position: relative;
+}
+.box > .box-comments > .comment > img {
+  border-radius: 100px;
+  float: left;
+  height: 56px;
+  margin: 0;
+  object-fit: cover;
+  width: 56px;
+}
+.box > .box-comments > .comment > .content {
+  height: auto;
+  line-height: 20px;
+  margin: 0 0 0 70px;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+  width: initial;
+}
+.box > .box-comments > .comment > .content > h3 {
+  float: left;
+  font-size: 14px;
+  font-weight: 600;
+  margin: 4px auto 0;
+  text-transform: capitalize;
+  width: 150px;
+}
+.box > .box-comments > .comment > .content > h3 > span {
+  color: #9197A3;
+  display: block;
+  font-size: 12px;
+  font-weight: 400;
+  text-transform: none;
+}
+.box > .box-comments > .comment > .content > p {
+  color: #4B4D53;
+  font-size: 13px;
+  margin: 0;
+  padding: 0;
+}
+.box > .box-new-comment {
+  background: #9298A4;
+  margin: 0;
+  // overflow: hidden;
+  padding: 20px 30px;
+  position: relative;
+}
+.box > .box-new-comment > img {
+  border-radius: 100px;
+  float: left;
+  height: 40px;
+  margin: 0;
+  object-fit: cover;
+  width: 40px;  
+}
+.box > .box-new-comment > .content {
+  border-radius: 20px;
+  margin: 4px 0 0 52px;
+  // overflow: hidden;
+  padding: 0;
+  position: relative;
+  width: initial;
+  -webkit-transition: all .25s ease-in-out;
+     -moz-transition: all .25s ease-in-out;
+          transition: all .25s ease-in-out;
+}
+.box > .box-new-comment > .content > .post-row {
+  background: transparent;
+  display: inline-block;
+  // height: 32px;
+  height: auto;
+  min-height: 30px;
+  // overflow: hidden;
+  position: relative;
+  vertical-align: middle;
+  width: 100%;
+  -webkit-transition: all .25s ease-in-out;
+     -moz-transition: all .25s ease-in-out;
+          transition: all .25s ease-in-out;
+}
+.box > .box-new-comment > .content > .post-row:last-child {
+  color: #C6C9D0;
+  font-size: 22px;
+  height: 28px;
+  line-height: 27px;
+  margin: 2px 0;
+  position: absolute;
+  text-align: center;
+  top: 0;
+  right: 10px;
+  width: 40px;
+}
+.box > .box-new-comment > .content > .post-row:last-child > span {cursor: pointer;}
+.box > .box-new-comment > .content > .post-row > textarea {
+  border: 1px solid transparent;
+  border-radius: 20px;
+  color: #555;
+  outline: 0;
+  padding: 0 40px 0 10px;
+  resize: none;
+  width: calc(100% - 52px) !important;
+  -webkit-transition: all .25s ease-in-out;
+     -moz-transition: all .25s ease-in-out;
+          transition: all .25s ease-in-out;
+}
+.box.update,
+.box.text {
+  border: 1px solid #E0E1E4;
+  box-shadow: none;
+  padding: 20px 0 0;
+}
+.box.update > .box-header,
+.box.text > .box-header {
+  padding: 0 30px;
+}
+.box.update > .box-header > span,
+.box.text > .box-header > span{
+  background: transparent;
+  color: #9298A4;
+  font-size: 32px;
+  margin: -10px auto 0;
+}
+.box.update > .box-content > .content > p,
+.box.text > .box-content > .content > p {
+  border-top: 1px solid #F4F4F4;
+  color: #4D5057;
+  font-size: 14px;
+  line-height: 22px;
+  padding: 26px 30px;
+}
+.box.update > .box-content > .content > .img {
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+  width: initial;
+}
+.box.update > .box-content > .content > .img:before {
+  border: 1px solid rgba(0,0,0,.25);
+  bottom: 0;
+  content: "";
+  height: 100%;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100%;
+}
+.box.text > .box-buttons > .post-row > button {
+  font-size: 13px;
+}
+.box.text > .box-buttons > .post-row > button > span {
+  font-size: 20px;
+}
+.box.image > .box-new-comment > .content,
+.box.image > .box-new-comment > .content > .post-row > textarea,
+.box.video > .box-new-comment > .content,
+.box.video > .box-new-comment > .content > .post-row > textarea {
+  background: #9298A4;
+  -webkit-transition: all .25s ease-in-out;
+     -moz-transition: all .25s ease-in-out;
+          transition: all .25s ease-in-out;  
+}
+.box > .box-new-comment > .content > .post-row > textarea:focus,
+.box.image > .box-new-comment > .content:active > .post-row {background: #FFF;}
+.box > .box-new-comment > .content > .post-row > textarea:focus,
+.box.video  .box-new-comment > .content:active > .post-row {background: #FFF;}
+

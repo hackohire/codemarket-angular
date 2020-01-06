@@ -365,7 +365,7 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
   // }
 
   gistFrame(url: string) {
-    const template = `<html><body><style type="text/css">.gist .gist-data { height: auto; }</style><script src="gistSrc"></script></body></html>`;
+    const template = `<html><body><style type="text/css">.gist {overflow:auto;} .gist .gist-file .gist-data { max-height: 86vh; }</style><script src="gistSrc"></script></body></html>`;
     const replaced = template.replace('gistSrc', url + '.js');
     return replaced;
   }

@@ -50,12 +50,12 @@
                         <!-- Embed -->
                         <div *ngSwitchCase="'embed'">
                             <div class="cdx-block embed-tool">
-                                <iframe *ngIf="b?.data?.service !== 'github'; else gistTemplate"
-                                    class="embed-tool__content" style="width:100%;" height="320" frameborder="0"
+                                <iframe *ngIf="b?.data?.service !== 'github'; else gistTemplate" scrolling="no"
+                                    class="embed-tool__content" style="width:100%;" frameborder="0" height="400px"
                                     allowfullscreen [src]="b?.data?.embed | safe : 'resourceUrl'"></iframe>
                                 <!-- When there is Gist -->
                                 <ng-template #gistTemplate>
-                                    <iframe scrolling="yes" width="100%" frameborder="0" allowfullscreen [srcdoc]="gistFrame(b?.data?.embed) | safe: 'html'">
+                                    <iframe scrolling="no" width="100%" frameborder="0" height="350px" allowfullscreen [srcdoc]="gistFrame(b?.data?.embed) | safe: 'html'">
                                     </iframe>
                                 </ng-template>
                                 <div style="text-align: center; margin-top: 5px;" [innerHTML]="b?.data?.caption"></div>

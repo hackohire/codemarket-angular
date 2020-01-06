@@ -283,12 +283,12 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
               this._hljs.highlightBlock(block);
             });
 
-            if (this.readOnly && isPlatformBrowser(this._platformId)) {
-              const elements = document.querySelectorAll('[contenteditable=true]');
-              elements.forEach(element => {
-                element.setAttribute('contenteditable', 'false');
-              });
-            }
+            // if (this.readOnly && isPlatformBrowser(this._platformId)) {
+            //   const elements = document.querySelectorAll('[contenteditable=true]');
+            //   elements.forEach(element => {
+            //     element.setAttribute('contenteditable', 'false');
+            //   });
+            // }
           }
 
           this.addControlsIfVideoElement();

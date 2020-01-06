@@ -21,8 +21,8 @@
     <!--============================================
         START COMPANY DETAILS AREA
     ==============================================-->
-    <section class="single-product-desc">
-        <div class="container" style="margin-top: 0; margin-bottom: 30px;"
+    <section class="single-product-desc" style="padding-top: 15px;">
+        <div class="container" style="margin-top: 0; margin-bottom: 15px;"
             *ngIf=" details?.cover || details?.createdBy?._id === authService?.loggedInUser?._id">
 
             <div class="row">
@@ -30,8 +30,7 @@
                 </div>
                 <div class="col-lg-9">
                     <div class="picture-container" *ngIf="selectedCoverPic || details?.cover">
-                        <img #cover draggable="true" scroll="false" id="cover" data-top="0"
-                            data-left="0"
+                        <img #cover draggable="true" scroll="false" id="cover" data-top="0" data-left="0"
                             [src]="selectedCoverPic ? (selectedCoverPic | safe: 'resourceUrl') : ((s3FilesBucketURL + details?.cover) | safe: 'resourceUrl')">
                         <div class="controls" *ngIf="details?.createdBy?._id === authService?.loggedInUser?._id">
                             <!-- <a href="" class="pos">Reposition</a> -->
@@ -78,61 +77,32 @@
                             <div class="collapse show collapsible-content" id="collapse1">
                                 <ul class="card-content" style="list-style: none;">
                                     <li>
-                                        <a [routerLink]="['./']" [routerLinkActive]="'active-item'"
-                                            [queryParams]="{view: 'description'}" [queryParamsHandling]="'merge'">
-                                            <span class="lnr lnr-chevron-right"></span>Home
+                                        <a *ngFor="let cView of companyViewLinks" [routerLink]="['./']" [routerLinkActive]="'active-item'"
+                                            [queryParams]="{view: cView?.view}" [queryParamsHandling]="'merge'">
+                                            <span class="lnr lnr-chevron-right"></span>{{cView?.title}} </a>
                                             <!-- <span class="item-count">35</span> -->
-                                        </a>
-                                        <a [routerLink]="['./']" [routerLinkActive]="'active-item'"
-                                            [queryParams]="{view: 'comments'}" [queryParamsHandling]="'merge'">
-                                            <span class="lnr lnr-chevron-right"></span>Comments
-                                            <!-- <span class="item-count">35</span> -->
-                                        </a>
-                                        <a [routerLink]="['./']" [routerLinkActive]="'active-item'"
-                                            [queryParams]="{view: 'q&a'}" [queryParamsHandling]="'merge'">
-                                            <span class="lnr lnr-chevron-right"></span>Q & A
-                                            <!-- <span class="item-count">35</span> -->
-                                        </a>
-
-                                        <a [routerLink]="['./']" [routerLinkActive]="'active-item'"
-                                            [queryParams]="{view: 'creator'}" [queryParamsHandling]="'merge'">
-                                            <span class="lnr lnr-chevron-right"></span>Creator
-                                            <!-- <span class="item-count">35</span> -->
-                                        </a>
-
-                                        <a [routerLink]="['./']" [routerLinkActive]="'active-item'"
-                                            [queryParams]="{view: 'interested-people'}" [queryParamsHandling]="'merge'">
-                                            <span class="lnr lnr-chevron-right"></span>Interested Professionals
-                                            <!-- <span class="item-count">35</span> -->
-                                        </a>
-
-                                        <a [routerLink]="['./']" [routerLinkActive]="'active-item'"
-                                            [queryParams]="{view: 'info'}" [queryParamsHandling]="'merge'">
-                                            <span class="lnr lnr-chevron-right"></span>Info
-                                            <!-- <span class="item-count">35</span> -->
-                                        </a>
+                                
                                     </li>
                                 </ul>
                             </div>
                         </div>
 
                         <!-- <div class="sidebar-card card--category"> -->
-                        <a [routerLink]="['/', 'company', 'add-company']"
-                            class="btn btn--sm btn--round menu" style="margin: 0 30px;">Add Company
+                        <a [routerLink]="['/', 'company', 'add-company']" class="btn btn--sm btn--round menu"
+                            style="margin: 0 30px;">Add Company
                             <!-- <mat-icon style="vertical-align: middle;">library_add</mat-icon> -->
                             <mat-icon style="vertical-align: middle;">add</mat-icon>
                         </a>
                         <a class="btn btn--sm btn--round menu"
                             style="color: #0674ec !important; background: white; margin: 10px 30px;"
-                            [routerLink]="['./']" [routerLinkActive]="'active-item'"
-                            [queryParams]="{view: 'q&a'}" [queryParamsHandling]="'merge'">Add Question <mat-icon
-                                style="vertical-align: middle;">add</mat-icon>
+                            [routerLink]="['./']" [routerLinkActive]="'active-item'" [queryParams]="{view: 'q&a'}"
+                            [queryParamsHandling]="'merge'">Add Question <mat-icon style="vertical-align: middle;">add
+                            </mat-icon>
                         </a>
                         <a class="btn btn--sm btn--round menu"
                             style="color: #0674ec !important; background: white; margin: 10px 30px;"
-                            [state]="{companyDetails: details}"
-                            [routerLink]="['/', 'event', 'add-event']">Add Event <mat-icon
-                                style="vertical-align: middle;">add</mat-icon>
+                            [state]="{companyDetails: details}" [routerLink]="['/', 'event', 'add-event']">Add Event
+                            <mat-icon style="vertical-align: middle;">add</mat-icon>
                         </a>
 
                         <!-- </div> -->
@@ -148,9 +118,10 @@
 
 
                             <h4 class="tab-content-wrapper">Description:</h4>
-                            <app-editor *ngIf="details?.description" [commentsList]="commentService?.commentsList$ | async"
-                                [blockLevelComments]="true" [readOnly]="true" [data]="details?.description"
-                                [post]="details" [id]="'company-details-editor'" [commentType]="'company'">
+                            <app-editor *ngIf="details?.description"
+                                [commentsList]="commentService?.commentsList$ | async" [blockLevelComments]="true"
+                                [readOnly]="true" [data]="details?.description" [post]="details"
+                                [id]="'company-details-editor'" [commentType]="'company'">
                             </app-editor>
 
                             <!-- <h4 class="tab-content-wrapper">Ideas:</h4>
@@ -183,6 +154,36 @@
                         </ng-container>
                     </div>
 
+                    <div *ngIf="companyView === 'sales-challenges'">
+                        <ng-container
+                            *ngTemplateOutlet="challengesTemplate; context: { details: details, challengeType: 'sales'}">
+                        </ng-container>
+                    </div>
+
+                    <div *ngIf="companyView === 'team-challenges'">
+                        <ng-container
+                            *ngTemplateOutlet="challengesTemplate; context: { details: details, challengeType: 'team'}">
+                        </ng-container>
+                    </div>
+
+                    <div *ngIf="companyView === 'marketing-challenges'">
+                        <ng-container
+                            *ngTemplateOutlet="challengesTemplate; context: { details: details, challengeType: 'marketing'}">
+                        </ng-container>
+                    </div>
+
+                    <div *ngIf="companyView === 'technical-challenges'">
+                        <ng-container
+                            *ngTemplateOutlet="challengesTemplate; context: { details: details, challengeType: 'technical'}">
+                        </ng-container>
+                    </div>
+
+                    <div *ngIf="companyView === 'business-challenges'">
+                        <ng-container
+                            *ngTemplateOutlet="challengesTemplate; context: { details: details, challengeType: 'business'}">
+                        </ng-container>
+                    </div>
+
                     <div *ngIf="details?.createdBy?.name && companyView === 'creator'" class="author-card sidebar-card">
                         <div class="card-title">
                             <h4>Author Information</h4>
@@ -195,8 +196,7 @@
                             </div>
 
                             <div class="author">
-                                <a
-                                    [routerLink]="['/', 'dashboard', 'profile', details?.createdBy?._id ]">
+                                <a [routerLink]="['/', 'dashboard', 'profile', details?.createdBy?._id ]">
                                     <h4>{{details?.createdBy?.name}}</h4>
                                 </a>
                                 <!-- <button
@@ -294,8 +294,7 @@
                                             alt="Presenting the broken author avatar :D">
                                     </div>
                                     <div class="autor__info">
-                                        <a
-                                            [routerLink]="['/', 'dashboard', 'profile', userInterested?._id ]">
+                                        <a [routerLink]="['/', 'dashboard', 'profile', userInterested?._id ]">
                                             <p class="name">
                                                 {{userInterested?.name}}
                                             </p>
@@ -322,6 +321,117 @@
         ===============================================-->
 
 </ng-container>
+
+<ng-template #challengesTemplate let-cDetails="details" let-challengeType="challengeType">
+    <app-editor [placeholder]="'Add '+ challengeType + ' Challenges...'"
+        [editorStyle]="{background: 'white', 'padding': '20px 35px', 'min-height': '130px', 'border-radius': '6px'}"
+        (output)="challengesDescription = $event" [id]="challengeType + '-editor'"></app-editor>
+
+    <button style="float: right; margin-top: 10px; margin-bottom: 20px;" type="button" class="btn btn--sm btn--round"
+        (click)="addChallenge(challengeType)">Post</button>
+
+    <div style="padding-top: 80px;">
+        <ng-container *ngFor="let c of cDetails?.challenges; let i=index;">
+            <div class="box image" *ngIf="c?.challengeType === challengeType">
+                <div class="box-header">
+                    <h3>
+                        <a href="">
+                            <img [src]="cDetails?.createdBy?.avatar ? ((s3FilesBucketURL + cDetails?.createdBy?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                                alt="" />{{cDetails?.createdBy?.name}}
+                        </a>
+                        <span>{{fromNow(c?.createdAt)}} <i class="fa fa-globe"></i></span>
+                    </h3>
+    
+                    <!-- Post Actions -->
+                    <i class="fad fa-check-circle" *ngIf="c['__edit']" (click)="updateChallenge(c._id)"></i>
+                    <span style="float: right;" *ngIf="cDetails?.createdBy?._id === auth?.loggedInUser?._id">
+                        <button mat-icon-button [matMenuTriggerFor]="optionsMenu"
+                            aria-label="Example icon-button with a menu">
+                            <mat-icon>more_horiz</mat-icon>
+                        </button>
+                        <mat-menu #optionsMenu="matMenu">
+                            <button mat-menu-item (click)="c['__edit'] = !c['__edit']">
+                                <mat-icon>edit</mat-icon>
+                                <span>Edit</span>
+                            </button>
+                            <button mat-menu-item (click)="deleteChallenge(c?._id)">
+                                <mat-icon>delete</mat-icon>
+                                <span>Delete</span>
+                            </button>
+                        </mat-menu>
+                    </span>
+                    <!-- <span><i class="fa fa-angle-down"></i></span> -->
+                    <div class="window"><span></span></div>
+                </div>
+                <div class="box-content">
+                    <div class="content">
+                        <img src="https://goo.gl/nvqkEz" alt="" />
+                    </div>
+                    <div class="bottom">
+                        <p>
+                            <app-editor [data]="c?.description" [editorStyle]="{background: 'white'}"
+                                (output)="postDescriptionInstances[c?._id] = $event" [id]="c?._id" [readOnly]="!c['__edit']"></app-editor>
+                        </p>
+                        <span><span class="fa fa-search-plus"></span></span>
+                    </div>
+                </div>
+                <!-- <div class="box-likes">
+                    <div class="post-row">
+                        <span><a href="#"><img src="https://goo.gl/oM0Y8G" alt="" /></a></span>
+                        <span><a href="#"><img src="https://goo.gl/vswgSn" alt="" /></a></span>
+                        <span><a href="#"><img src="https://goo.gl/4W27eB" alt="" /></a></span>
+                        <span><a href="#">+99</a></span>
+                        <span>Like this</span>
+                    </div>
+                    <div class="post-row">
+                        <span>145 comments</span>
+                    </div>
+                </div> -->
+                <!-- <div class="box-buttons">
+                    <div class="post-row">
+                        <button><span class="fa fa-thumbs-up"></span></button>
+                        <button (click)="c['__show'] = !c['__show']"><span class="fas fa-comment-lines"></span></button>
+                        <button><span class="ion-share"></span></button>
+                    </div>
+                </div> -->
+    
+                <!-- <div class="box-click"><span><i class="ion-chatbox-working"></i> View 140 more comments</span></div>
+                <div class="box-comments">
+                    <div class="comment">
+                        <img src="https://goo.gl/oM0Y8G" alt="" />
+                        <div class="content">
+                            <h3><a href="">Emily Rudd</a><span><time> 1 hr - </time><a href="#">Like</a></span></h3>
+                            <p>Wow irealy, i love here. Nice pic</p>
+                        </div>
+                    </div>
+                    <div class="comment">
+                        <img src="https://goo.gl/vswgSn" alt="">
+                        <div class="content">
+                            <h3><a href="">barbara Palvin</a><span><time> 1 hr - </time><a href="#">Like</a></span></h3>
+                            <p>The life is perfect, Nice Scene</p>
+                        </div>
+                    </div>
+        
+                </div> -->
+                <!-- <div class="box-new-comment">
+                    <img src="https://goo.gl/oOD0V2" alt="" />
+                    <div class="content">
+                        <div class="post-row">
+                            <app-editor [data]="c?.description"
+                                [editorStyle]="{background: 'white', padding: '0 12px 0 12px', 'border-radius': '20px'}"
+                                (output)="challengesDescription = $event" [id]="c?._id + i"></app-editor>
+                        </div>
+                        <div class="post-row">
+                            <span class="fa fa-globe"></span>
+                            <span class="ion-android-attach"></span>
+                            <span class="fa fa-smile-o"></span>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+        </ng-container>
+    </div>
+</ng-template>
 
 <ng-template #locationTemplate let-location="location">
     <div *ngIf="location?.latitude || location?.longitude">
@@ -429,8 +539,7 @@
                                         <div class="media">
                                             <div class="media-left">
 
-                                                <a
-                                                    [routerLink]="['/', 'dashboard', 'profile', a?.createdBy?._id ]">
+                                                <a [routerLink]="['/', 'dashboard', 'profile', a?.createdBy?._id ]">
                                                     <img class="author_avatar_comment"
                                                         [src]="a?.createdBy?.avatar ? ((s3FilesBucketURL + a.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar"
                                                         alt="Commentator Avatar">

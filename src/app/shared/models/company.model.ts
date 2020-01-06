@@ -30,6 +30,15 @@ export interface Company {
     cities?: City[];
     location?: Location;
     cover: string;
+    challenges?: Challenge[]
+}
+
+export interface Challenge {
+    description?: [{
+        type: string;
+        data: BlockToolData
+    }];
+    challengeType: ChallengeTypes
 }
 
 export enum CompanyTypes {
@@ -39,4 +48,12 @@ export enum CompanyTypes {
     smb = 'smb',
     School = 'school',
     Government = 'government'
+}
+
+export enum ChallengeTypes {
+    Sales = 'sales',
+    Marketing = 'marketing',
+    Business = 'business',
+    Team = 'team',
+    Technical = 'technical'
 }

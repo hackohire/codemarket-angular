@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import gql from 'graphql-tag';
 import { description } from '../shared/constants/fragments_constatnts';
 import { Company } from '../shared/models/company.model';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { Apollo } from 'apollo-angular';
+import { Observable, of } from 'rxjs';
+import { map, concatMap, tap } from 'rxjs/operators';
+import { Apollo, QueryRef } from 'apollo-angular';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -44,10 +44,20 @@ export class CompanyService {
       latitude
       address
     }
+    challenges {
+      description {
+        ...Description
+      }
+      createdAt
+      updatedAt
+      challengeType
+      _id
+    }
   }
   ${description}
   `;
 
+  companyQuery: QueryRef<any>;
 
   constructor(
     private apollo: Apollo,
@@ -72,24 +82,59 @@ export class CompanyService {
     );
   }
 
-  updateCompany(company: Company): Observable<Company> {
+  updateCompany(company: Company, updateOperation = null): Observable<Company> {
     return this.apollo.mutate(
       {
         mutation: gql`
-          mutation updateCompany($company: CompanyInput) {
-            updateCompany(company: $company) {
+          mutation updateCompany($company: CompanyInput, $updateOperation: UpdateOperation) {
+            updateCompany(company: $company, updateOperation: $updateOperation) {
               ...Company
             }
           }
           ${this.companyFileds}
         `,
         variables: {
-          company
+          company,
+          updateOperation
         }
       }
     ).pipe(
       map((p: any) => p.data.updateCompany),
     );
+  }
+
+  /** On Adding Challenges, listen Realtime  */
+  onCompanyUpdate(company: Company) {
+    const COMPANY_SUBSCRIPTION = gql`
+    subscription onCompanyUpdate($companyId: String) {
+      onCompanyUpdate(companyId: $companyId){
+        companyUpdated {
+          ...Company
+        }
+      }
+    }
+    ${this.companyFileds}
+    `;
+
+    this.companyQuery.subscribeToMore({
+      document: COMPANY_SUBSCRIPTION,
+      variables: { companyId: company._id },
+      updateQuery: (prev, {subscriptionData}) => {
+        if (!subscriptionData.data) {
+          return prev;
+        }
+
+        const newFeedItem = subscriptionData.data.onCompanyUpdate.companyEdited;
+
+        return {
+          ...prev,
+          onCompanyUpdate: {
+            companyUpdated: newFeedItem
+          }
+        };
+      }
+      
+    });
   }
 
   getCompaniesByUserIdAndType(userId: string, companyType: string): Observable<Company[]> {
@@ -141,7 +186,8 @@ export class CompanyService {
   }
 
   getCompanyById(CompanyId: string): Observable<Company> {
-    return this.apollo.query(
+
+    this.companyQuery = this.apollo.watchQuery(
       {
         query: gql`
           query getCompanyById($CompanyId: String) {
@@ -155,11 +201,18 @@ export class CompanyService {
           CompanyId
         }
       }
-    ).pipe(
+    );
+    return this.companyQuery.valueChanges.pipe(
       map((p: any) => {
         return p.data.getCompanyById;
       }),
-    );
+      /** On the first time fetching companydata, subscribe to liste company edit changes */
+      concatMap((value, index) => { 
+        return index === 0 ? 
+          of(value).pipe(tap(() => this.onCompanyUpdate(value))) : 
+          of(value)
+      })
+    )
   }
 
   deleteCompany(companyId: string): Observable<boolean> {
@@ -206,11 +259,11 @@ export class CompanyService {
 
   redirectToCompanyDetails(companyId: string) {
     this.router.navigate(['/', `company`, companyId],
-    { queryParams: { type: 'company'} });
+      { queryParams: { type: 'company' } });
   }
 
   editCompany(company: Company) {
     this.router.navigate(['/', 'company', 'edit-company', company._id],
-    {queryParams: {type: company.type}});
+      { queryParams: { type: company.type } });
   }
 }

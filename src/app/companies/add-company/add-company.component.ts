@@ -11,7 +11,6 @@ import { Subscription, of } from 'rxjs';
 import { Tag } from '../../shared/models/product.model';
 import { CompanyService } from '../company.service';
 import { CompanyTypes, Company } from '../../shared/models/company.model';
-import { startCase } from 'lodash';
 import Swal from 'sweetalert2';
 import { LocationService } from '../../shared/services/location.service';
 

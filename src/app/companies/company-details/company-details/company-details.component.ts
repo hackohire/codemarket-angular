@@ -19,6 +19,8 @@ import { map } from 'rxjs/internal/operators/map';
 import { appConstants } from '../../../shared/constants/app_constants';
 import Storage from '@aws-amplify/storage';
 import moment from 'moment';
+import { catchError } from 'rxjs/internal/operators/catchError';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-company-details',
@@ -40,7 +42,7 @@ export class CompanyDetailsComponent implements OnInit {
 
 
 
-  postDetails: Post | Company | any;
+  companyDetails: Post | Company | any;
   isUserAttending: boolean; /** Only for the event */
   subscription$: Subscription = new Subscription();
   type: string; // product | help-request | interview | requirement | Testing | Howtodoc
@@ -61,6 +63,55 @@ export class CompanyDetailsComponent implements OnInit {
 
   commentId: string;
 
+  challengesDescription = [];
+  postDescriptionInstances = [];
+  companyViewLinks = [
+    {
+      view: 'description',
+      title: 'Home'
+    },
+    {
+      view: 'sales-challenges',
+      title: 'Sales Challenges'
+    },
+    {
+      view: 'team-challenges',
+      title: 'Team Challenges'
+    },
+    {
+      view: 'business-challenges',
+      title: 'Business Challenges'
+    },
+    {
+      view: 'marketing-challenges',
+      title: 'Marketing Challenges'
+    },
+    {
+      view: 'technical-challenges',
+      title: 'Technical Challenges'
+    },
+    {
+      view: 'comments',
+      title: 'Comments'
+    },
+    {
+      view: 'q&a',
+      title: 'Q & A'
+    },
+    {
+      view: 'creator',
+      title: 'Creator'
+    },
+    {
+      view: 'interested-people',
+      title: 'Interested Professionals'
+    },
+    {
+      view: 'info',
+      title: 'Info'
+    },
+  ]
+
   constructor(
     private activatedRoute: ActivatedRoute,
     public commentService: CommentService,
@@ -70,6 +121,7 @@ export class CompanyDetailsComponent implements OnInit {
     private router: Router,
     private sweetAlertService: SweetalertService,
     private companyService: CompanyService,
+    public auth: AuthService
   ) { }
 
   ngOnInit() {
@@ -85,7 +137,7 @@ export class CompanyDetailsComponent implements OnInit {
       this.companyService.getCompanyById(params.companyId).subscribe({
         next: (c: Company) => {
           this.companyDetails$ = of(c);
-          this.postDetails = c;
+          this.companyDetails = c;
           this.initializeCommentForm(c, 'company');
           this.initializeQuestionAndAnswerForm(c, 'company');
 
@@ -128,7 +180,7 @@ export class CompanyDetailsComponent implements OnInit {
       type: new FormControl(commentType ? commentType : this.type),
     });
 
-    this.commentService.getCommentsByReferenceId(p, this.commentId);
+    // this.commentService.getCommentsByReferenceId(p, this.commentId);
 
   }
 
@@ -238,6 +290,34 @@ export class CompanyDetailsComponent implements OnInit {
     ).subscribe();
   }
 
+  addChallenge(type) {
+    this.updateCompany({}, {field: 'challenges', operation: 'ADD', challenges: {challengeType: type, description: this.challengesDescription}});
+  }
+
+  deleteChallenge(_id: string) {
+    this.updateCompany({}, {field: 'challenges', operation: 'DELETE', challenges: { _id }});
+  }
+
+  updateChallenge(_id: string) {
+    this.updateCompany({}, {field: 'challenges', operation: 'UPDATE', challenges: { _id, description: this.postDescriptionInstances[_id] }});
+  }
+
+  updateCompany(companyDetails, updateOperation = null) { 
+    companyDetails['_id'] = this.companyDetails._id;
+    companyDetails['name'] = this.companyDetails.name;
+    this.companyService.updateCompany(companyDetails, updateOperation).pipe(
+      catchError((e) => {
+        Swal.fire('Name already exists!', '', 'error');
+        return of(false);
+      })
+    )
+    .subscribe((d: any) => {
+      if (d) {
+        // Swal.fire(`${d.name} has been Updated Successfully`, '', 'success');
+      }
+    });
+  }
+
 
   /** Delete Question Or Answer */
   deleteQuestionOrAnswer(answerOrQuestion) {
@@ -292,12 +372,12 @@ export class CompanyDetailsComponent implements OnInit {
 
   updateCover() {
     const companyDetails = {
-      _id: this.postDetails._id,
-      name: this.postDetails.name,
+      _id: this.companyDetails._id,
+      name: this.companyDetails.name,
       cover: this.uploadedCoverUrl
     }
     this.companyService.updateCompany(companyDetails).subscribe(c => {
-      this.postDetails = c;
+      this.companyDetails = c;
       this.companyDetails$ = of(c);
       this.updateCover = null;
       this.uploadedCoverUrl = null;

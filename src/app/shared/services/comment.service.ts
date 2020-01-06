@@ -9,7 +9,6 @@ import { BehaviorSubject, Subscription } from 'rxjs';
 import { Comment } from '../models/comment.model';
 import { ToastrService } from 'ngx-toastr';
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
-import { appConstants } from '../constants/app_constants';
 import { PostService } from './post.service';
 
 @Injectable()

@@ -296,7 +296,7 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
         }),
         onChange: (() => {
           this.editor.save().then((outputData) => {
-            console.log(outputData);
+            // console.log(outputData);
             this.output.emit([...outputData.blocks]);
           }).catch((error) => {
             console.log('Saving failed: ', error);

@@ -22,7 +22,8 @@ import { CompanyService } from '../../companies/company.service';
 @Component({
   selector: 'app-add-dreamjob',
   templateUrl: './add-dreamjob.component.html',
-  styleUrls: ['./add-dreamjob.component.scss']
+  styleUrls: ['./add-dreamjob.component.scss'],
+  providers: [CompanyService]
 })
 export class AddDreamjobComponent implements OnInit {
 

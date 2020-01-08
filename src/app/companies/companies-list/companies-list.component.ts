@@ -18,6 +18,7 @@ import { AuthService } from '../../core/services/auth.service';
   selector: 'app-companies-list',
   templateUrl: './companies-list.component.html',
   styleUrls: ['./companies-list.component.scss'],
+  providers: [CompanyService],
   animations: [
     trigger('detailExpand', [
       state('collapsed', style({ height: '0px', minHeight: '0' })),

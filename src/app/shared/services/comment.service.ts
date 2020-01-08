@@ -10,6 +10,7 @@ import { Comment } from '../models/comment.model';
 import { ToastrService } from 'ngx-toastr';
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { PostService } from './post.service';
+import { CompanyPost } from '../models/company.model';
 
 @Injectable()
 export class CommentService {
@@ -71,6 +72,7 @@ export class CommentService {
 
   commentsQuery: QueryRef<any>;
   commentsList$ = new BehaviorSubject<Comment[]>(null);
+  companyPostsList: CompanyPost[] = []; /** Company Posts List for mutations on the comments when Post gets updated */
   subscriptions$ = new Subscription();
 
   constructor(
@@ -128,20 +130,26 @@ export class CommentService {
         }),
         tap((c: Comment) => {
 
-          if (c.parentId) {
-            const commentIndex = comments.slice().findIndex(com => com._id === c.parentId);
-            comments[commentIndex]['children'].push(c);
+          /** If comment is related to the post of a company */
+          if (c.postId) {
+            const p = this.companyPostsList.find(p => p._id === c.postId);
+            p.comments.push(c);
           } else {
-            comments.push(c);
+            if (c.parentId) {
+              const commentIndex = comments.slice().findIndex(com => com._id === c.parentId);
+              comments[commentIndex]['children'].push(c);
+            } else {
+              comments.push(c);
+            }
+            /** Audio Notification */
+            // var audio = new Audio(appConstants.Notification);
+            // audio.play();
+  
+            /** Tostr Notification */
+            // this.openToastrNotification(post, c)
+  
+            this.commentsList$.next(comments);
           }
-          /** Audio Notification */
-          // var audio = new Audio(appConstants.Notification);
-          // audio.play();
-
-          /** Tostr Notification */
-          // this.openToastrNotification(post, c)
-
-          this.commentsList$.next(comments);
         })
       ).subscribe()
     );
@@ -224,6 +232,7 @@ export class CommentService {
       onCommentDeleted(postId: $postId) {
         referenceId
         parentId
+        postId
         _id
       }
     }
@@ -240,15 +249,23 @@ export class CommentService {
           return c.data.onCommentDeleted;
         }),
         tap((c: Comment) => {
-          if (c.parentId) {
-            const parentCommentIndex = comments.findIndex(com => com._id === c.parentId);
-            const deletedChildCommentIndex = comments[parentCommentIndex]['children'].findIndex(com => com._id === c._id);
-            comments[parentCommentIndex]['children'].splice(deletedChildCommentIndex, 1);
+           /** If comment is related to the post of a company */
+          if (c.postId) {
+            const p = this.companyPostsList.find(p => p._id === c.postId);
+            const i = p.comments.findIndex(com => com._id === c._id);
+            p.comments.splice(i, 1);
+            // p.comments = p.comments.slice();
           } else {
-            const commentIndex = comments.findIndex(com => com._id === c._id);
-            comments.splice(commentIndex, 1);
+            if (c.parentId) {
+              const parentCommentIndex = comments.findIndex(com => com._id === c.parentId);
+              const deletedChildCommentIndex = comments[parentCommentIndex]['children'].findIndex(com => com._id === c._id);
+              comments[parentCommentIndex]['children'].splice(deletedChildCommentIndex, 1);
+            } else {
+              const commentIndex = comments.findIndex(com => com._id === c._id);
+              comments.splice(commentIndex, 1);
+            }
+            this.commentsList$.next(comments);
           }
-          this.commentsList$.next(comments);
         })
       ).subscribe()
     );
@@ -295,15 +312,22 @@ export class CommentService {
           return c.data.onCommentUpdated;
         }),
         tap((c: Comment) => {
-          if (c.parentId) {
-            const parentCommentIndex = comments.findIndex(com => com._id === c.parentId);
-            const deletedChildCommentIndex = comments[parentCommentIndex]['children'].findIndex(com => com._id === c._id);
-            comments[parentCommentIndex]['children'][deletedChildCommentIndex]['text'] = c.text;
+           /** If comment is related to the post of a company */
+          if (c.postId) {
+            const p = this.companyPostsList.find(p => p._id === c.postId);
+            const i = p.comments.findIndex(com => com._id === c._id);
+            p.comments[i] = c;
           } else {
-            const commentIndex = comments.slice().findIndex(com => com._id === c._id);
-            comments[commentIndex]['text'] = c.text;
+            if (c.parentId) {
+              const parentCommentIndex = comments.findIndex(com => com._id === c.parentId);
+              const deletedChildCommentIndex = comments[parentCommentIndex]['children'].findIndex(com => com._id === c._id);
+              comments[parentCommentIndex]['children'][deletedChildCommentIndex]['text'] = c.text;
+            } else {
+              const commentIndex = comments.slice().findIndex(com => com._id === c._id);
+              comments[commentIndex]['text'] = c.text;
+            }
+            this.commentsList$.next(comments);
           }
-          this.commentsList$.next(comments);
         })
       ).subscribe()
     );

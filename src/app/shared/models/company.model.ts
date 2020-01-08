@@ -2,6 +2,7 @@ import { User } from './user.model';
 import { BlockToolData } from '@editorjs/editorjs';
 import { City } from './city.model';
 import { PostStatus } from './poststatus.enum';
+import { Comment } from './comment.model';
 
 
 interface Location {
@@ -30,7 +31,16 @@ export interface Company {
     cities?: City[];
     location?: Location;
     cover: string;
-    challenges?: Challenge[]
+    posts?: CompanyPost[];
+}
+
+export interface CompanyPost {
+    _id?: string;
+    createdAt?: string;
+    updatedAt?: string;
+    postType?: string;
+    challengeType: string;
+    comments: Comment[]
 }
 
 export interface Challenge {

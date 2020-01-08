@@ -183,6 +183,8 @@ fragment Comment on Comment {
   }
   blockId
   blockSpecificComment
+
+  postId
 }
 ${description}
 `;

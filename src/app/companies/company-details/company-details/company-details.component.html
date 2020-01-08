@@ -156,31 +156,43 @@
 
                     <div *ngIf="companyView === 'sales-challenges'">
                         <ng-container
-                            *ngTemplateOutlet="challengesTemplate; context: { details: details, challengeType: 'sales'}">
+                            *ngTemplateOutlet="postTemplate; context: { details: details, postType: 'challenge', challengeType: 'sales'}">
                         </ng-container>
                     </div>
 
                     <div *ngIf="companyView === 'team-challenges'">
                         <ng-container
-                            *ngTemplateOutlet="challengesTemplate; context: { details: details, challengeType: 'team'}">
+                            *ngTemplateOutlet="postTemplate; context: { details: details, postType: 'challenge', challengeType: 'team'}">
                         </ng-container>
                     </div>
 
                     <div *ngIf="companyView === 'marketing-challenges'">
                         <ng-container
-                            *ngTemplateOutlet="challengesTemplate; context: { details: details, challengeType: 'marketing'}">
+                            *ngTemplateOutlet="postTemplate; context: { details: details, postType: 'challenge', challengeType: 'marketing'}">
                         </ng-container>
                     </div>
 
                     <div *ngIf="companyView === 'technical-challenges'">
                         <ng-container
-                            *ngTemplateOutlet="challengesTemplate; context: { details: details, challengeType: 'technical'}">
+                            *ngTemplateOutlet="postTemplate; context: { details: details, postType: 'challenge', challengeType: 'technical'}">
                         </ng-container>
                     </div>
 
                     <div *ngIf="companyView === 'business-challenges'">
                         <ng-container
-                            *ngTemplateOutlet="challengesTemplate; context: { details: details, challengeType: 'business'}">
+                            *ngTemplateOutlet="postTemplate; context: { details: details, postType: 'challenge', challengeType: 'business'}">
+                        </ng-container>
+                    </div>
+
+                    <div *ngIf="companyView === 'mission'">
+                        <ng-container
+                            *ngTemplateOutlet="postTemplate; context: { details: details, postType: 'mission'}">
+                        </ng-container>
+                    </div>
+
+                    <div *ngIf="companyView === 'goals'">
+                        <ng-container
+                            *ngTemplateOutlet="postTemplate; context: { details: details, postType: 'goal'}">
                         </ng-container>
                     </div>
 
@@ -322,20 +334,23 @@
 
 </ng-container>
 
-<ng-template #challengesTemplate let-cDetails="details" let-challengeType="challengeType">
-    <app-editor [placeholder]="'Add '+ challengeType + ' Challenges...'"
+<ng-template  #postTemplate let-cDetails="details" let-challengeType="challengeType" let-postType = "postType">
+
+    <!---------------- ADD POST EDITOR --------------->
+    <app-editor *ngIf="auth?.loggedInUser?._id === cDetails?.createdBy?._id" [placeholder]="'Add '+ postType"
         [editorStyle]="{background: 'white', 'padding': '20px 35px', 'min-height': '130px', 'border-radius': '6px'}"
-        (output)="challengesDescription = $event" [id]="challengeType + '-editor'"></app-editor>
+        (output)="postDescription = $event" [id]="postType + '-editor'"></app-editor>
 
-    <button style="float: right; margin-top: 10px; margin-bottom: 20px;" type="button" class="btn btn--sm btn--round"
-        (click)="addChallenge(challengeType)">Post</button>
+    <button *ngIf="auth?.loggedInUser?._id === cDetails?.createdBy?._id" style="float: right; margin-top: 10px; margin-bottom: 20px;" type="button" class="btn btn--sm btn--round"
+        (click)="addPost(postType, challengeType)">Post</button>
 
-    <div style="padding-top: 80px;">
-        <ng-container *ngFor="let c of cDetails?.challenges; let i=index;">
-            <div class="box image" *ngIf="c?.challengeType === challengeType">
+    <div [ngStyle]="{'padding-top':  auth?.loggedInUser?._id === cDetails?.createdBy?._id ? '80px' : '0'}">
+        <ng-container *ngFor="let c of cDetails?.posts; let i=index;">
+            <!-- <pre>{{c | json}}</pre> -->
+            <div class="box image" *ngIf="(!challengeType && postType === c?.postType) || (challengeType && challengeType === c?.challengeType)">
                 <div class="box-header">
                     <h3>
-                        <a href="">
+                        <a [routerLink]="['/', 'dashboard', 'profile', cDetails?.createdBy?._id ]">
                             <img [src]="cDetails?.createdBy?.avatar ? ((s3FilesBucketURL + cDetails?.createdBy?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
                                 alt="" />{{cDetails?.createdBy?.name}}
                         </a>
@@ -343,7 +358,7 @@
                     </h3>
     
                     <!-- Post Actions -->
-                    <i class="fad fa-check-circle" *ngIf="c['__edit']" (click)="updateChallenge(c._id)"></i>
+                    <i class="fad fa-check-circle" *ngIf="c['__edit']" (click)="updatePost(c._id)"></i>
                     <span style="float: right;" *ngIf="cDetails?.createdBy?._id === auth?.loggedInUser?._id">
                         <button mat-icon-button [matMenuTriggerFor]="optionsMenu"
                             aria-label="Example icon-button with a menu">
@@ -354,7 +369,7 @@
                                 <mat-icon>edit</mat-icon>
                                 <span>Edit</span>
                             </button>
-                            <button mat-menu-item (click)="deleteChallenge(c?._id)">
+                            <button mat-menu-item (click)="deletePost(c?._id)">
                                 <mat-icon>delete</mat-icon>
                                 <span>Delete</span>
                             </button>
@@ -369,24 +384,25 @@
                     </div>
                     <div class="bottom">
                         <p>
-                            <app-editor [data]="c?.description" [editorStyle]="{background: 'white'}"
+                            <!---------------- SINGLE POST EDITOR --------------->
+                            <app-editor [editorStyle]="{background: 'white'}" [data]="c?.description"
                                 (output)="postDescriptionInstances[c?._id] = $event" [id]="c?._id" [readOnly]="!c['__edit']"></app-editor>
                         </p>
                         <span><span class="fa fa-search-plus"></span></span>
                     </div>
                 </div>
-                <!-- <div class="box-likes">
-                    <div class="post-row">
+                <div class="box-likes">
+                    <div class="post-row" style="visibility: hidden; padding: 0;">
                         <span><a href="#"><img src="https://goo.gl/oM0Y8G" alt="" /></a></span>
                         <span><a href="#"><img src="https://goo.gl/vswgSn" alt="" /></a></span>
                         <span><a href="#"><img src="https://goo.gl/4W27eB" alt="" /></a></span>
                         <span><a href="#">+99</a></span>
                         <span>Like this</span>
                     </div>
-                    <div class="post-row">
-                        <span>145 comments</span>
+                    <div class="post-row" style="padding: 0; border: none;">
+                        <span>{{c?.comments?.length}} comments</span>
                     </div>
-                </div> -->
+                </div>
                 <!-- <div class="box-buttons">
                     <div class="post-row">
                         <button><span class="fa fa-thumbs-up"></span></button>
@@ -395,43 +411,55 @@
                     </div>
                 </div> -->
     
-                <!-- <div class="box-click"><span><i class="ion-chatbox-working"></i> View 140 more comments</span></div>
+                <!-- <div class="box-click"><span><i class="ion-chatbox-working"></i> View 140 more comments</span></div> -->
                 <div class="box-comments">
-                    <div class="comment">
-                        <img src="https://goo.gl/oM0Y8G" alt="" />
+                    <div class="comment" *ngFor="let com of c?.comments">
+                        <img [src]="com?.createdBy?.avatar ? ((s3FilesBucketURL + com?.createdBy?.avatar) | safe: 'resourceUrl') : anonymousAvatar" alt="" />
                         <div class="content">
-                            <h3><a href="">Emily Rudd</a><span><time> 1 hr - </time><a href="#">Like</a></span></h3>
-                            <p>Wow irealy, i love here. Nice pic</p>
+                        <h3><a href="">{{com?.createdBy?.name}}</a><span><time> {{fromNow(com?.createdAt)}} </time>
+                        </span></h3>
+                        <i class="fad fa-check-circle" style="font-size: x-large; top: 9px;" *ngIf="com['__edit']" (click)="commentService.updateComment(com._id, commentDescriptionInstances[com?._id]).subscribe()"></i>
+                        <span style="float: right;" *ngIf="com?.createdBy?._id === auth?.loggedInUser?._id">
+                            <button mat-icon-button [matMenuTriggerFor]="optionsMenu"
+                                aria-label="Example icon-button with a menu">
+                                <mat-icon>more_horiz</mat-icon>
+                            </button>
+                            <mat-menu #optionsMenu="matMenu">
+                                <button mat-menu-item (click)="com['__edit'] = !com['__edit']">
+                                    <mat-icon>edit</mat-icon>
+                                    <span>Edit</span>
+                                </button>
+                                <button mat-menu-item (click)="commentService.deleteComment(com?._id).subscribe()">
+                                    <mat-icon>delete</mat-icon>
+                                    <span>Delete</span>
+                                </button>
+                            </mat-menu>
+                        </span>
+                        <!---------------- SINGLE COMMENT EDITOR --------------->
+                            <app-editor [data]="com.text" (output)="commentDescriptionInstances[com?._id] = $event"
+                            [editorStyle]="{display: 'inline-block', width: '90%', background: 'white', padding: '0 12px 0 0px', 'border-radius': '20px'}" [id]="com?._id" [readOnly]="!com['__edit']"></app-editor>
                         </div>
-                    </div>
-                    <div class="comment">
-                        <img src="https://goo.gl/vswgSn" alt="">
-                        <div class="content">
-                            <h3><a href="">barbara Palvin</a><span><time> 1 hr - </time><a href="#">Like</a></span></h3>
-                            <p>The life is perfect, Nice Scene</p>
-                        </div>
-                    </div>
-        
-                </div> -->
-                <!-- <div class="box-new-comment">
-                    <img src="https://goo.gl/oOD0V2" alt="" />
+                    </div>        
+                </div>
+                <div class="box-new-comment">
+                    <img [src]="auth?.loggedInUser?.avatar ? ((s3FilesBucketURL + auth?.loggedInUser?.avatar) | safe: 'resourceUrl') : anonymousAvatar" alt="" />
                     <div class="content">
                         <div class="post-row">
-                            <app-editor [data]="c?.description"
-                                [editorStyle]="{background: 'white', padding: '0 12px 0 12px', 'border-radius': '20px'}"
-                                (output)="challengesDescription = $event" [id]="c?._id + i"></app-editor>
+                            <app-editor [placeholder]="'Write a comment'"
+                                [editorStyle]="{ width: '84%', background: 'white', padding: '0 12px 0 12px', 'border-radius': '20px'}"
+                                (output)="updateFormData($event)" [id]="c?._id + i"></app-editor>
                         </div>
                         <div class="post-row">
-                            <span class="fa fa-globe"></span>
-                            <span class="ion-android-attach"></span>
-                            <span class="fa fa-smile-o"></span>
+                            <!---------------- ADD COMMENT EDITOR --------------->
+                            <button style="float: right;" type="button" class="btn btn--sm btn--round"
+                            (click)="addComment(c?._id)">Post</button>
                         </div>
                     </div>
-                </div> -->
+                </div>
             </div>
         </ng-container>
     </div>
-</ng-template>
+</ng-template >
 
 <ng-template #locationTemplate let-location="location">
     <div *ngIf="location?.latitude || location?.longitude">

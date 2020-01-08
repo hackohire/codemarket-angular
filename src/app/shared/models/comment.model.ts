@@ -15,4 +15,6 @@ export interface Comment {
 
     blockSpecificComment: boolean;
     blockId: string;
+
+    postId: string;
 }

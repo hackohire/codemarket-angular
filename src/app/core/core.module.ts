@@ -146,6 +146,9 @@ export class CoreModule {
     apollo.create({
       link,
       cache: new InMemoryCache({
+        dataIdFromObject: (o: any) => {
+          return o._id
+        },
         addTypename: true,
 
         /*

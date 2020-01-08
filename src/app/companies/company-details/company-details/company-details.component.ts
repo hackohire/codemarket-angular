@@ -25,7 +25,8 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-company-details',
   templateUrl: './company-details.component.html',
-  styleUrls: ['./company-details.component.scss']
+  styleUrls: ['./company-details.component.scss'],
+  providers: [CompanyService, CommentService]
 })
 export class CompanyDetailsComponent implements OnInit {
 
@@ -63,12 +64,21 @@ export class CompanyDetailsComponent implements OnInit {
 
   commentId: string;
 
-  challengesDescription = [];
+  postDescription = [];
   postDescriptionInstances = [];
+  commentDescriptionInstances = [];
   companyViewLinks = [
     {
       view: 'description',
       title: 'Home'
+    },
+    {
+      view: 'mission',
+      title: 'Mission'
+    },
+    {
+      view: 'goals',
+      title: 'Goals'
     },
     {
       view: 'sales-challenges',
@@ -134,7 +144,8 @@ export class CompanyDetailsComponent implements OnInit {
 
 
     this.subscription$.add(
-      this.companyService.getCompanyById(params.companyId).subscribe({
+      this.companyService.getCompanyById(params.companyId)
+      .subscribe({
         next: (c: Company) => {
           this.companyDetails$ = of(c);
           this.companyDetails = c;
@@ -189,11 +200,11 @@ export class CompanyDetailsComponent implements OnInit {
   }
 
 
-  addComment() {
+  addComment(postId = '') {
     console.log(this.commentForm.value);
     if (this.authService.loggedInUser) {
       this.commentForm.addControl('createdBy', new FormControl(this.authService.loggedInUser._id));
-
+      this.commentForm.addControl('postId', new FormControl(postId))
       this.subscription$.add(
         this.commentService.addComment(this.commentForm.value).subscribe()
       );
@@ -290,22 +301,22 @@ export class CompanyDetailsComponent implements OnInit {
     ).subscribe();
   }
 
-  addChallenge(type) {
-    this.updateCompany({}, {field: 'challenges', operation: 'ADD', challenges: {challengeType: type, description: this.challengesDescription}});
+  addPost(postType: string, challengeType = '') {
+    this.updateCompany({}, {operation: 'ADD', post: { challengeType, postType, description: this.postDescription }});
   }
 
-  deleteChallenge(_id: string) {
-    this.updateCompany({}, {field: 'challenges', operation: 'DELETE', challenges: { _id }});
+  deletePost(_id: string) {
+    this.updateCompany({}, {operation: 'DELETE', post: { _id }});
   }
 
-  updateChallenge(_id: string) {
-    this.updateCompany({}, {field: 'challenges', operation: 'UPDATE', challenges: { _id, description: this.postDescriptionInstances[_id] }});
+  updatePost(_id: string) {
+    this.updateCompany({}, {operation: 'UPDATE', post: { _id, description: this.postDescriptionInstances[_id] }});
   }
 
-  updateCompany(companyDetails, updateOperation = null) { 
+  updateCompany(companyDetails, operation = null) { 
     companyDetails['_id'] = this.companyDetails._id;
     companyDetails['name'] = this.companyDetails.name;
-    this.companyService.updateCompany(companyDetails, updateOperation).pipe(
+    this.companyService.updateCompany(companyDetails, operation).pipe(
       catchError((e) => {
         Swal.fire('Name already exists!', '', 'error');
         return of(false);

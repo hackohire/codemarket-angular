@@ -1,15 +1,14 @@
 import { Injectable } from '@angular/core';
 import gql from 'graphql-tag';
-import { description } from '../shared/constants/fragments_constatnts';
+import { description, comment } from '../shared/constants/fragments_constatnts';
 import { Company } from '../shared/models/company.model';
 import { Observable, of } from 'rxjs';
 import { map, concatMap, tap } from 'rxjs/operators';
 import { Apollo, QueryRef } from 'apollo-angular';
 import { Router } from '@angular/router';
+import { CommentService } from '../shared/services/comment.service';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class CompanyService {
 
   companyFileds = gql`
@@ -44,24 +43,30 @@ export class CompanyService {
       latitude
       address
     }
-    challenges {
+    posts {
       description {
         ...Description
       }
       createdAt
       updatedAt
       challengeType
+      postType
       _id
+      comments {
+        ...Comment
+      }
     }
   }
   ${description}
+  ${comment}
   `;
 
   companyQuery: QueryRef<any>;
 
   constructor(
     private apollo: Apollo,
-    private router: Router
+    private router: Router,
+    private commentService: CommentService
   ) { }
 
   addCompany(company: Company): Observable<Company> {
@@ -82,12 +87,12 @@ export class CompanyService {
     );
   }
 
-  updateCompany(company: Company, updateOperation = null): Observable<Company> {
+  updateCompany(company: Company, operation = null): Observable<Company> {
     return this.apollo.mutate(
       {
         mutation: gql`
-          mutation updateCompany($company: CompanyInput, $updateOperation: UpdateOperation) {
-            updateCompany(company: $company, updateOperation: $updateOperation) {
+          mutation updateCompany($company: CompanyInput, $operation: operation) {
+            updateCompany(company: $company, operation: $operation) {
               ...Company
             }
           }
@@ -95,7 +100,7 @@ export class CompanyService {
         `,
         variables: {
           company,
-          updateOperation
+          operation
         }
       }
     ).pipe(
@@ -124,7 +129,8 @@ export class CompanyService {
           return prev;
         }
 
-        const newFeedItem = subscriptionData.data.onCompanyUpdate.companyEdited;
+        // company = subscriptionData.data.onCompanyUpdate.companyUpdated;
+        const newFeedItem = subscriptionData.data.onCompanyUpdate.companyUpdated;
 
         return {
           ...prev,
@@ -197,6 +203,7 @@ export class CompanyService {
           }
           ${this.companyFileds}
         `,
+        // fetchPolicy: 'no-cache',
         variables: {
           CompanyId
         }
@@ -207,9 +214,15 @@ export class CompanyService {
         return p.data.getCompanyById;
       }),
       /** On the first time fetching companydata, subscribe to liste company edit changes */
-      concatMap((value, index) => { 
+      concatMap((value, index) => {
+        this.commentService.companyPostsList = value.posts;
         return index === 0 ? 
-          of(value).pipe(tap(() => this.onCompanyUpdate(value))) : 
+          of(value).pipe(tap(() => {
+            this.onCompanyUpdate(value);
+            this.commentService.onCommentAdded(value, []);
+            this.commentService.onCommentUpdated(value, []);
+            this.commentService.onCommentDeleted(value, []);
+          })) : 
           of(value)
       })
     )

@@ -74,11 +74,6 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
   }
 
   ngOnInit() {
-
-    if (!this.readOnly) {
-      this.initiateEditor();
-    }
-
     if (this.post) {
       this.initializeCommentForm(this.post);
     }
@@ -88,6 +83,10 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
     /** Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
      * Add 'implements AfterViewInit' to the class.
     */
+
+    if (!this.readOnly) {
+      this.initiateEditor();
+    }
 
     /** Get all the code elements from DOM and highlight them as code snippets using highlight.js */
     if (this.editorRef && isPlatformBrowser(this._platformId) && this.editorRef.nativeElement) {
@@ -100,10 +99,10 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
 
   ngOnChanges(changes: SimpleChanges) {
     if (this.editor && this.editor.blocks && changes.readOnly && !changes.readOnly.currentValue) {
-      console.log(this.editor);
       this.editor.destroy();
       this.readOnly = false;
-      this.initiateEditor();
+      // this.initiateEditor();
+      // this.editor.focus();
     } else if (this.editor && changes.readOnly && changes.readOnly.currentValue) {
       this.editor.destroy();
       // this.initiateEditor();
@@ -278,18 +277,21 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
         onReady: (() => {
 
           // Get all the code elements from DOM and highlight them as code snippets using highlight.js
-          if (isPlatformBrowser(this._platformId) && this.editorRef.nativeElement) {
-            this.editorRef.nativeElement.querySelectorAll('pre code').forEach((block: HTMLElement) => {
-              this._hljs.highlightBlock(block);
-            });
+          // if (isPlatformBrowser(this._platformId) && this.editorRef.nativeElement) {
+          //   this.editorRef.nativeElement.querySelectorAll('pre code').forEach((block: HTMLElement) => {
+          //     this._hljs.highlightBlock(block);
+          //   });
 
-            // if (this.readOnly && isPlatformBrowser(this._platformId)) {
-            //   const elements = document.querySelectorAll('[contenteditable=true]');
-            //   elements.forEach(element => {
-            //     element.setAttribute('contenteditable', 'false');
-            //   });
-            // }
-          }
+          //   if (this.readOnly && isPlatformBrowser(this._platformId)) {
+          //     const elements = document.querySelectorAll('[contenteditable=true]');
+          //     elements.forEach(element => {
+          //       element.setAttribute('contenteditable', 'false');
+          //     });
+          //   }
+          // }
+
+          /** Focus at end */
+          this.editor.focus(true);
 
           this.addControlsIfVideoElement();
           this.zoomInZoomOutForImages();

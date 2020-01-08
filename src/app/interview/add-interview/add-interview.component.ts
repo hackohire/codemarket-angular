@@ -24,7 +24,8 @@ import { Post } from '../../shared/models/post.model';
 @Component({
   selector: 'app-add-interview',
   templateUrl: './add-interview.component.html',
-  styleUrls: ['./add-interview.component.scss']
+  styleUrls: ['./add-interview.component.scss'],
+  providers: [CompanyService]
 })
 export class AddInterviewComponent implements OnInit {
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];

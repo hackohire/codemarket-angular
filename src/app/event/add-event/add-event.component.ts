@@ -26,7 +26,8 @@ import { isPlatformBrowser } from '@angular/common';
 @Component({
   selector: 'app-add-event',
   templateUrl: './add-event.component.html',
-  styleUrls: ['./add-event.component.scss']
+  styleUrls: ['./add-event.component.scss'],
+  providers: [CompanyService]
 })
 export class AddEventComponent implements OnInit {
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];

@@ -17,7 +17,8 @@ import { LocationService } from '../../shared/services/location.service';
 @Component({
   selector: 'app-add-company',
   templateUrl: './add-company.component.html',
-  styleUrls: ['./add-company.component.scss']
+  styleUrls: ['./add-company.component.scss'],
+  providers: [CompanyService]
 })
 export class AddCompanyComponent implements OnInit {
 

@@ -166,6 +166,9 @@ export class AuthService {
       tap((u) => {
         if (u.onCommentAdded && u.post) {
 
+          /** Audio Notification */
+          var audio = new Audio(appConstants.Notification);
+          audio.play();
           this.openToastrNotification(u.post, u.onCommentAdded, true)
         }
       })

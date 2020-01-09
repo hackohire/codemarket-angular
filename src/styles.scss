@@ -138,7 +138,8 @@ textarea {
 .no-padding {
   mat-dialog-container {
     padding: 0;
-    overflow: hidden;
+    height: auto;
+    // overflow: hidden;
   }
 }
 

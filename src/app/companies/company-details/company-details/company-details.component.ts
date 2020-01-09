@@ -21,6 +21,9 @@ import Storage from '@aws-amplify/storage';
 import moment from 'moment';
 import { catchError } from 'rxjs/internal/operators/catchError';
 import Swal from 'sweetalert2';
+import { AddEventComponent } from '../../../event/add-event/add-event.component';
+import { MatDialog } from '@angular/material/dialog';
+import { Event } from '../../../shared/models/event.model';
 
 @Component({
   selector: 'app-company-details',
@@ -53,6 +56,10 @@ export class CompanyDetailsComponent implements OnInit {
 
   breadcumb: BreadCumb;
 
+  eventsList: Event[] = [];
+  noPastEvent: boolean;
+  noUpcomingEvents: boolean;
+
   commentForm: FormGroup;
   commentsList: any[];
 
@@ -69,7 +76,7 @@ export class CompanyDetailsComponent implements OnInit {
   commentDescriptionInstances = [];
   companyViewLinks = [
     {
-      view: 'description',
+      view: 'home',
       title: 'Home'
     },
     {
@@ -101,17 +108,17 @@ export class CompanyDetailsComponent implements OnInit {
       title: 'Technical Challenges'
     },
     {
-      view: 'comments',
-      title: 'Comments'
+      view: 'events',
+      title: 'Events'
     },
     {
       view: 'q&a',
       title: 'Q & A'
     },
-    {
-      view: 'creator',
-      title: 'Creator'
-    },
+    // {
+    //   view: 'creator',
+    //   title: 'Creator'
+    // },
     {
       view: 'interested-people',
       title: 'Interested Professionals'
@@ -131,7 +138,8 @@ export class CompanyDetailsComponent implements OnInit {
     private router: Router,
     private sweetAlertService: SweetalertService,
     private companyService: CompanyService,
-    public auth: AuthService
+    public auth: AuthService,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -152,11 +160,21 @@ export class CompanyDetailsComponent implements OnInit {
           this.initializeCommentForm(c, 'company');
           this.initializeQuestionAndAnswerForm(c, 'company');
 
+          /** Get the list of users in a company */
           this.subscription$.add(
             this.companyService.getListOfUsersInACompany(params.companyId).subscribe((u) => {
-              console.log(u);
+              // console.log(u);
               if (u) {
                 this.usersInterestedInCompany = u;
+              }
+            })
+          );
+          
+          /** Fetch the list of events related to the company */
+          this.subscription$.add(
+            this.companyService.getEventsByCompanyId(params.companyId).subscribe(e => {
+              if (e && e.length) {
+                this.eventsList = e;
               }
             })
           );
@@ -194,11 +212,6 @@ export class CompanyDetailsComponent implements OnInit {
     // this.commentService.getCommentsByReferenceId(p, this.commentId);
 
   }
-
-  getDate(d: string) {
-    return moment(d).isValid() ? d : new Date(+d);
-  }
-
 
   addComment(postId = '') {
     console.log(this.commentForm.value);
@@ -302,7 +315,11 @@ export class CompanyDetailsComponent implements OnInit {
   }
 
   addPost(postType: string, challengeType = '') {
-    this.updateCompany({}, {operation: 'ADD', post: { challengeType, postType, description: this.postDescription }});
+    if (this.authService.loggedInUser) {
+      this.updateCompany({}, {operation: 'ADD', post: { challengeType, postType, createdBy: this.authService.loggedInUser._id, description: this.postDescription }});
+    } else {
+      this.authService.checkIfUserIsLoggedIn(true)
+    }
   }
 
   deletePost(_id: string) {
@@ -315,7 +332,7 @@ export class CompanyDetailsComponent implements OnInit {
 
   updateCompany(companyDetails, operation = null) { 
     companyDetails['_id'] = this.companyDetails._id;
-    companyDetails['name'] = this.companyDetails.name;
+    // companyDetails['name'] = this.companyDetails.name;
     this.companyService.updateCompany(companyDetails, operation).pipe(
       catchError((e) => {
         Swal.fire('Name already exists!', '', 'error');
@@ -393,6 +410,38 @@ export class CompanyDetailsComponent implements OnInit {
       this.updateCover = null;
       this.uploadedCoverUrl = null;
     })
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(AddEventComponent, {
+      width: '600px',
+      // height: '550px',
+      // maxHeight: '700px',
+      panelClass: ['no-padding'],
+      data: {company: this.companyDetails},
+      // disableClose: true,
+      height: 'auto'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.eventsList.push(result);
+      // this.animal = result;
+    });
+  }
+
+  getDate(d: string) {
+    return moment(d).isValid() ? moment(d) : moment(new Date(+d));
+  }
+
+  filterEventsBasedOnDate(past: boolean) {
+    const eventsList = this.eventsList.filter((e) => this.isPast(e.dateRange[1] ? e.dateRange[1] : e.dateRange[0]) === past);
+    this.noPastEvent = past ? !Boolean(eventsList.length) : this.noPastEvent;
+    this.noUpcomingEvents = !past ? !Boolean(eventsList.length) : this.noUpcomingEvents;
+    return eventsList
+  }
+  isPast(d): boolean {
+    return this.getDate(d).isBefore(moment());
   }
 
 }

@@ -7,6 +7,7 @@ import { map, concatMap, tap } from 'rxjs/operators';
 import { Apollo, QueryRef } from 'apollo-angular';
 import { Router } from '@angular/router';
 import { CommentService } from '../shared/services/comment.service';
+import { appConstants } from '../shared/constants/app_constants';
 
 @Injectable()
 export class CompanyService {
@@ -46,6 +47,11 @@ export class CompanyService {
     posts {
       description {
         ...Description
+      }
+      createdBy {
+        _id
+        avatar
+        name
       }
       createdAt
       updatedAt
@@ -266,6 +272,28 @@ export class CompanyService {
     ).pipe(
       map((p: any) => {
         return p.data.getListOfUsersInACompany;
+      }),
+    );
+  }
+
+  getEventsByCompanyId(companyId) {
+    return this.apollo.query(
+      {
+        query: gql`
+          query getEventsByCompanyId($companyId: String) {
+            getEventsByCompanyId(companyId: $companyId) {
+              ...Post
+            }
+          }
+          ${appConstants.postQuery}
+        `,
+        variables: {
+          companyId
+        }
+      }
+    ).pipe(
+      map((p: any) => {
+        return p.data.getEventsByCompanyId;
       }),
     );
   }

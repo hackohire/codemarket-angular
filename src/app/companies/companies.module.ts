@@ -7,6 +7,8 @@ import { AddCompanyComponent } from './add-company/add-company.component';
 import { CompaniesListComponent } from './companies-list/companies-list.component';
 import { AuthGuard } from '../shared/guards/auth.guard';
 import { CompanyDetailsComponent } from './company-details/company-details/company-details.component';
+import { AddEventComponent } from '../event/add-event/add-event.component';
+import { AddEventModule } from '../event/add-event/add-event.module';
 
 const companyRoutes: Routes = [
   {
@@ -40,7 +42,9 @@ const companyRoutes: Routes = [
   imports: [
     CommonModule,
     SharedModule,
+    AddEventModule,
     RouterModule.forChild(companyRoutes)
-  ]
+  ],
+  entryComponents: [AddEventComponent]
 })
 export class CompaniesModule { }

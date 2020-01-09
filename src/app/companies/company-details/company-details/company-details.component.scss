@@ -562,3 +562,146 @@
 .box > .box-new-comment > .content > .post-row > textarea:focus,
 .box.video  .box-new-comment > .content:active > .post-row {background: #FFF;}
 
+
+/** Events List */
+* {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+.noselect {
+  user-select: none;
+  cursor: default;
+}
+
+.events h2 {
+  font-size: 200%;
+  font-weight: 300;
+  line-height: 120%;
+  padding-bottom: 30px;
+}
+
+.all {
+  // position: absolute;
+  height: 100%;
+  width: 100%;
+}
+.overlay {
+  position: absolute;
+  background: white;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 1;
+}
+.overlay.current {
+  opacity: 1;
+  visibility: visible;
+  z-index: 3;
+}
+.overlay .top {
+  position:relative;
+  height:300px;
+  width:100%;
+  background:#0674ec;
+}
+.overlay .content {
+  min-height: 200vh;
+}
+
+.home {
+  position:relative;
+  // opacity:0;
+  z-index:2;
+  transition:1s all;
+}
+
+.pagescroll .swiper-slide {
+  height: auto;
+}
+
+.events {
+  width: 100%;
+  // max-width: 600px;
+  // margin:auto;
+  padding: 30px;
+  background: white;
+}
+.events p {
+  margin: 20px 0;
+}
+
+.list-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  border-top: 1px solid #e8e8e8;
+  transition:1s all;
+  cursor: pointer;
+}
+.list-item:last-child {
+  border-bottom: 1px solid #e8e8e8;
+}
+.overlay .list-item {
+    position: absolute;
+    bottom: 0;
+    border: 0;
+    transform: translateX(50%);
+}
+.list-item:after {
+  content: '';
+  position: absolute;
+  height: 100%;
+  width: 85%;
+  top: 0;
+  left: 15%;
+  padding:0 20px;
+  background: transparent;
+  box-shadow: 0 0 2px rgba(0,0,0,0);
+  transition: 0.3s all;
+  transform: scaleY(0.1);
+  z-index: 1;
+}
+.home .list-item:hover:after {
+  transform: scaleY(1);
+  background: #0674ec;
+  box-shadow: 2px 2px 12px rgba(0,0,0,0.3);
+}
+.list-item > * {
+  position: relative;
+  z-index: 2;
+}
+.list-item .date {
+  width: 20%;
+  // margin-left: -20%;
+  // padding-right: 10%;
+  box-sizing: border-box;
+  text-align:center;
+}
+.overlay .list-item .date {
+  color:white;
+}
+.home .list-item:hover .date {
+  color:#0674ec;
+}
+.list-item .date-day {
+  font-size: 30px;
+}
+.list-item .info {
+  padding:20px;
+  // margin-left:-20px;
+  width: 100%;
+}
+.home .list-item:hover .info,
+.overlay .list-item .info {
+  color:white;
+  transition: 0.3s all;
+}
+.list-item .info-time {
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+.list-item .info-title {
+  font-size: 24px;
+  line-height: 140%;
+}
+
+

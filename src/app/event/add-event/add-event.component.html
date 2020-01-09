@@ -15,18 +15,18 @@
                 <h6>Description:</h6>
                 <br />
 
-                <app-editor *ngIf="descriptionFormControl?.value && edit; else add" (output)="updateFormData($event)"
+                <app-editor *ngIf="edit === true; else add" (output)="updateFormData($event)"
                     [data]="descriptionFormControl?.value" [id]="'edit-event-editor'" [importArticleSubscription]="true"></app-editor>
 
                 <ng-template #add>
-                    <app-editor *ngIf="!edit" (output)="updateFormData($event)" [id]="'event-editor'" [importArticleSubscription]="true"></app-editor>
+                    <app-editor *ngIf="edit === false" (output)="updateFormData($event)" [id]="'event-editor'" [importArticleSubscription]="true"></app-editor>
                 </ng-template>
                 <br />
 
                 <!-- Location Details -->
                 <!-- <pre>{{locationFormGroup?.value | json}}</pre> -->
-                <h6>Enter Event Location</h6>
-                <br />
+                <h6>Enter Event Location:</h6>
+                <!-- <br /> -->
                 <mat-form-field class="field-full-width">
                     <input type="text" matInput placeholder="Search Location" #searchLocation>
                     <mat-icon matSuffix (click)="locationService?.setCurrentLocation(locationFormGroup)">my_location
@@ -68,7 +68,8 @@
                 <div class="row">
                     <div class="col-md-6">
                         <!-- Select Company -->
-                        <ng-select placeholder="Select Company" formControlName="company">
+                        {{data | json}}
+                        <ng-select placeholder="Select Company" formControlName="company" [readonly]="data && data.company" [disabled]="data && data.company">
                             <ng-option *ngFor="let cName of allCompanies" [value]="cName._id">
                                 {{ cName?.name }}
                             </ng-option>

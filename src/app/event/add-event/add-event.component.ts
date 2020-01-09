@@ -12,7 +12,7 @@ import { ActivatedRoute } from '@angular/router';
 import { switchMap, tap, startWith, map } from 'rxjs/operators';
 import { FormService } from 'src/app/shared/services/form.service';
 import { Tag } from 'src/app/shared/models/product.model';
-import { MatAutocomplete } from '@angular/material';
+import { MatAutocomplete, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { PostStatus } from 'src/app/shared/models/poststatus.enum';
 import { PostType } from 'src/app/shared/models/post-types.enum';
 import { SetSelectedPost, GetPostById, AddPost, UpdatePost } from 'src/app/core/store/actions/post.actions';
@@ -21,6 +21,8 @@ import { LocationService } from '../../shared/services/location.service';
 import { Company } from '../../shared/models/company.model';
 import { CompanyService } from '../../companies/company.service';
 import { isPlatformBrowser } from '@angular/common';
+import { PostService } from '../../shared/services/post.service';
+import { SweetalertService } from '../../shared/services/sweetalert.service';
 
 
 @Component({
@@ -40,7 +42,7 @@ export class AddEventComponent implements OnInit {
   };
   eventType: string;
 
-  edit: boolean;
+  edit = false;
 
   get createdBy() {
     return this.eventForm.get('createdBy');
@@ -54,9 +56,9 @@ export class AddEventComponent implements OnInit {
     return this.eventForm.get('description');
   }
 
-  get supportDescriptionFormControl() {
-    return this.eventForm.get('support').get('description');
-  }
+  // get supportDescriptionFormControl() {
+  //   return this.eventForm.get('support').get('description');
+  // }
 
   get tagsFormControl() {
     return this.eventForm.get('tags') as FormArray;
@@ -100,7 +102,11 @@ export class AddEventComponent implements OnInit {
     private formService: FormService,
     public locationService: LocationService,
     private companyService: CompanyService,
-    @Inject(PLATFORM_ID) private _platformId: Object
+    private postService: PostService,
+    private sweetAlertService: SweetalertService,
+    @Inject(PLATFORM_ID) private _platformId: Object,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    public dialogRef: MatDialogRef<AddEventComponent>,
   ) {
     this.breadcumb = {
       title: 'Add Event Details',
@@ -122,10 +128,10 @@ export class AddEventComponent implements OnInit {
      * get the event by fetching id from the params
      */
 
-    if (this.activatedRoute.snapshot.parent.routeConfig.path === 'add-event') {
+    if (this.activatedRoute && this.activatedRoute.snapshot && this.activatedRoute.snapshot.parent && this.activatedRoute.snapshot.parent.routeConfig.path === 'add-event') {
       this.store.dispatch(SetSelectedPost({ post: null }));
       this.eventFormInitialization(null);
-      
+
     } else {
       this.subscription$ = this.store.select(selectSelectedPost).pipe(
         tap((h) => {
@@ -167,10 +173,10 @@ export class AddEventComponent implements OnInit {
       _id: new FormControl(i && i._id ? i._id : ''),
       tags: this.fb.array(i && i.tags && i.tags.length ? i.tags : []),
       type: new FormControl(PostType.Event),
-      support: new FormGroup({
-        time: new FormControl(i && i.support && i.support.time ? i.support.time : 0),
-        description: new FormControl(i && i.support && i.support.description ? i.support.description : '')
-      }),
+      // support: new FormGroup({
+      //   time: new FormControl(i && i.support && i.support.time ? i.support.time : 0),
+      //   description: new FormControl(i && i.support && i.support.description ? i.support.description : '')
+      // }),
       membershipRequired: new FormControl(i && i.membershipRequired ? true : false),
       dateRange: new FormControl(i && i.dateRange ? i.dateRange : '', Validators.required),
       location: new FormGroup({
@@ -178,7 +184,7 @@ export class AddEventComponent implements OnInit {
         longitude: new FormControl(i && i.location ? i.location.longitude : 0),
         address: new FormControl(i && i.location ? i.location.address : ''),
       }),
-      company: new FormControl(i && i.company ? i.company._id : ''),
+      company: new FormControl(i && i.company ? i.company._id : '', this.data && this.data.companyDetails ? Validators.required : []),
       eventType: new FormControl(i && i.eventType ? i.eventType : '', Validators.required)
       // address: new FormControl(i && i.address ? i.address : '', Validators.required),
       // snippets: new FormControl(null),
@@ -188,6 +194,12 @@ export class AddEventComponent implements OnInit {
 
     this.companyService.getCompaniesByType('').subscribe((companies) => {
       this.allCompanies = companies;
+
+      if (this.data && this.data.company) {
+        const companyFormControl = this.eventForm.get('company');
+        companyFormControl.setValue(this.data.company._id);
+        // companyFormControl.disable();
+      }
     });
 
     this.formService.findFromCollection('', 'tags').subscribe((tags) => {
@@ -201,20 +213,20 @@ export class AddEventComponent implements OnInit {
       .subscribe((tags) => this.tagSuggestions = tags);
 
 
-      if (isPlatformBrowser(this._platformId)) {
-        const routerStateData = window.history.state
-        if (routerStateData && routerStateData.companyDetails) {
-          if (routerStateData.companyDetails.location) {
-            this.locationFormGroup.get('longitude').setValue(routerStateData.companyDetails.location.longitude);
-            this.locationFormGroup.get('latitude').setValue(routerStateData.companyDetails.location.latitude);
-            this.locationFormGroup.get('address').setValue(routerStateData.companyDetails.location.address);
-          }
-  
-          if (routerStateData.companyDetails._id) {
-            this.eventForm.get('company').setValue(routerStateData.companyDetails._id)
-          }
+    if (isPlatformBrowser(this._platformId)) {
+      const routerStateData = window.history.state
+      if (routerStateData && routerStateData.companyDetails) {
+        if (routerStateData.companyDetails.location) {
+          this.locationFormGroup.get('longitude').setValue(routerStateData.companyDetails.location.longitude);
+          this.locationFormGroup.get('latitude').setValue(routerStateData.companyDetails.location.latitude);
+          this.locationFormGroup.get('address').setValue(routerStateData.companyDetails.location.address);
+        }
+
+        if (routerStateData.companyDetails._id) {
+          this.eventForm.get('company').setValue(routerStateData.companyDetails._id)
         }
       }
+    }
 
   }
 
@@ -227,9 +239,9 @@ export class AddEventComponent implements OnInit {
 
     this.statusFormControl.setValue(status);
 
-    if (!this.supportDescriptionFormControl.value) {
-      this.supportDescriptionFormControl.setValue([]);
-    }
+    // if (!this.supportDescriptionFormControl.value) {
+    //   this.supportDescriptionFormControl.setValue([]);
+    // }
 
     if (!this.descriptionFormControl.value) {
       this.descriptionFormControl.setValue([]);
@@ -241,7 +253,15 @@ export class AddEventComponent implements OnInit {
 
     if (this.idFromControl && !this.idFromControl.value) {
       this.eventForm.removeControl('_id');
-      this.store.dispatch(AddPost({ post: this.eventForm.value }));
+
+      if (this.data && this.data.company) {
+        this.postService.addPost(this.eventForm.value).subscribe((post) => {
+          this.sweetAlertService.success(`${post.type} has been ${post.status} Successfully`, '', 'success');
+          this.dialogRef.close(post);
+        });
+      } else {
+        this.store.dispatch(AddPost({ post: this.eventForm.value }));
+      }
     } else {
       this.store.dispatch(UpdatePost({ post: this.eventForm.value }));
     }
@@ -252,9 +272,9 @@ export class AddEventComponent implements OnInit {
     this.eventForm.get('description').setValue(event);
   }
 
-  updateSupportDescription(event) {
-    this.supportDescriptionFormControl.setValue(event);
-  }
+  // updateSupportDescription(event) {
+  //   this.supportDescriptionFormControl.setValue(event);
+  // }
 
   addTech(event: MatChipInputEvent): void {
     if (!this.matAutocomplete.isOpen) {

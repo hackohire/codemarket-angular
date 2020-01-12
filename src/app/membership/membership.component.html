@@ -10,8 +10,8 @@
     <div class="container">
         <!-- <div class="row"> -->
             <mat-tab-group [selectedIndex]="selected.value" (selectedIndexChange)="selected.setValue($event)">
-                <mat-tab [label]="'Software Developer'">
-                    Upgrade  tech skills, business skills and leadership skills
+                <mat-tab [label]="'Professionals'">
+                    Take Full Control of Your Career
                     <ng-container *ngTemplateOutlet="plansTemplate; context: {plans: listOfPlans, planType: 'software_developer'}">
                     </ng-container>
                 </mat-tab>

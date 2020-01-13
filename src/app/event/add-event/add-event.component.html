@@ -68,7 +68,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <!-- Select Company -->
-                        {{data | json}}
+                        <!-- {{data | json}} -->
                         <ng-select placeholder="Select Company" formControlName="company" [readonly]="data && data.company" [disabled]="data && data.company">
                             <ng-option *ngFor="let cName of allCompanies" [value]="cName._id">
                                 {{ cName?.name }}

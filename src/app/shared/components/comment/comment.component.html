@@ -2,7 +2,7 @@
     <div class="media-left">
 
         <a [routerLink]="['/', 'dashboard', 'profile', comment?.createdBy?._id ]">
-            <img class="author_avatar_comment"
+            <img class="author_avatar_comment" style="width: 45px; height: 45px;"
                 [src]="comment?.createdBy?.avatar ? ((s3FilesBucketURL + comment.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar"
                 alt="Commentator Avatar">
         </a>
@@ -11,7 +11,7 @@
         <div>
             <div class="media-heading">
                 <a [routerLink]="['/', 'dashboard', 'profile', comment?.createdBy?._id ]">
-                    <h4>{{comment?.createdBy?.name }}</h4>
+                    <h4 style="font-size: 16px; line-height: 20px; margin-bottom: 0;">{{comment?.createdBy?.name }}</h4>
                 </a>
                 <span>{{fromNow(comment?.createdAt)}}</span>
             </div>
@@ -46,7 +46,7 @@
 
         </div>
 
-        <app-editor [readOnly]="edit ? false : true" (output)="updateReplyCommentFormData($event)" [data]="edit ? comment?.text : comment?.text" [id]="comment?._id"></app-editor>
+        <app-editor [editorStyle]="{padding: '0 15px', 'border-radius': '19px', border: 'solid 0.5px rgb(236, 236, 236)'}" [readOnly]="edit ? false : true" (output)="updateReplyCommentFormData($event)" [data]="edit ? comment?.text : comment?.text" [id]="comment?._id"></app-editor>
         <br/>
         <button *ngIf="edit" type="button" class="btn btn--md btn--round" (click)="updateComment()">Update</button>
         <!-- <p>{{comment?.text}}</p> -->
@@ -62,14 +62,14 @@
 <div class="media depth-2 reply-comment" *ngIf="reply" [formGroup]="replyCommentForm">
     <div class="media-left">
         <a href="#">
-            <img class="author_avatar_comment"
+            <img class="author_avatar_comment" style="width: 45px; height: 45px;"
                 [src]="authService?.loggedInUser?.avatar ? ((s3FilesBucketURL + authService?.loggedInUser?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
                 alt="Commentator Avatar">
         </a>
     </div>
     <div class="media-body">
         <div class="comment-reply-form">
-            <app-editor [data]="replyTextEditorData" (output)="updateReplyCommentFormData($event)" [id]="replyEditorId">
+            <app-editor [editorStyle]="{padding: '0 15px', 'border-radius': '19px', border: 'solid 0.5px rgb(236, 236, 236)'}" [data]="replyTextEditorData" (output)="updateReplyCommentFormData($event)" [id]="replyEditorId">
             </app-editor>
             <!-- <textarea class="bla" name="reply-comment" placeholder="Write your comment..."></textarea> -->
             <button type="button" style="float: right;" class="btn btn--md btn--round" (click)="addReply()">Reply</button>

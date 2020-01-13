@@ -156,14 +156,14 @@
         <div class="media comment-form">
             <div class="media-left">
                 <a href="#">
-                    <img class="author_avatar_comment"
+                    <img class="author_avatar_comment" style="width: 45px; height: 45px;"
                         [src]="authService?.loggedInUser?.avatar ? ((s3FilesBucketURL + authService?.loggedInUser?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
                         alt="Commentator Avatar">
                 </a>
             </div>
             <div class="media-body">
                 <div [formGroup]="commentForm" class="comment-reply-form">
-                    <app-editor [id]="blockId" [placeholder]="'Add Comment'" (output)="updateFormData($event)">
+                    <app-editor [editorStyle]="{padding: '0 15px', 'border-radius': '19px', border: 'solid 0.5px rgb(236, 236, 236)'}" [id]="blockId" [placeholder]="'Add Comment'" (output)="updateFormData($event)">
                     </app-editor>
 
                     <button type="button" style="float: right;" class="btn btn--sm btn--round"

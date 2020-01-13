@@ -557,10 +557,10 @@
      -moz-transition: all .25s ease-in-out;
           transition: all .25s ease-in-out;  
 }
-.box > .box-new-comment > .content > .post-row > textarea:focus,
-.box.image > .box-new-comment > .content:active > .post-row {background: #FFF;}
-.box > .box-new-comment > .content > .post-row > textarea:focus,
-.box.video  .box-new-comment > .content:active > .post-row {background: #FFF;}
+// .box > .box-new-comment > .content > .post-row > textarea:focus,
+// .box.image > .box-new-comment > .content:active > .post-row {background: #FFF;}
+// .box > .box-new-comment > .content > .post-row > textarea:focus,
+// .box.video  .box-new-comment > .content:active > .post-row {background: #FFF;}
 
 
 /** Events List */

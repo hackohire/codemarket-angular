@@ -174,7 +174,7 @@ export class CommentService {
     );
   }
 
-  scrollToComment(blocks: [], c: Comment) {
+  scrollToComment(blocks: any[], c: Comment) {
     /** If block specific comment, open the comment section for that block first */
     if (c.blockSpecificComment) {
       const b: any = blocks.find((b: any) => b._id === c.blockId);
@@ -186,7 +186,7 @@ export class CommentService {
       setTimeout(() => {
         let el = this.document.getElementById(`${c._id}`);
         el.scrollIntoView({block: 'center', behavior: 'smooth', inline: 'center'}); /** scroll to the element upto the center */
-        el.style.outline = '2px solid #00aeef'; /** Highlighting the element */
+        el.style.border = '2px solid #00aeef'; /** Highlighting the element */
       }, c.blockSpecificComment ? 500 : 0);
     }
   }

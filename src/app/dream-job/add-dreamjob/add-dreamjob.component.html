@@ -25,7 +25,7 @@
                     <app-editor *ngIf="!edit" (output)="updateFormData($event)" [id]="'dreamjob-editor'" [importArticleSubscription]="true"></app-editor>
                 </ng-template>
 
-                <ng-select placeholder="Select Company" formControlName="company">
+                <ng-select placeholder="What are your dream companies?" formControlName="company">
                     <ng-option *ngFor="let cName of allCompanies" [value]="cName._id">
                         {{ cName?.name }}
                     </ng-option>

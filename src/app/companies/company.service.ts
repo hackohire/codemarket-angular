@@ -219,7 +219,7 @@ export class CompanyService {
       map((p: any) => {
         return p.data.getCompanyById;
       }),
-      /** On the first time fetching companydata, subscribe to liste company edit changes */
+      /** On the first time fetching companydata, subscribe to listen company edit changes */
       concatMap((value, index) => {
         this.commentService.companyPostsList = value.posts;
         return index === 0 ? 
@@ -228,6 +228,14 @@ export class CompanyService {
             this.commentService.onCommentAdded(value, []);
             this.commentService.onCommentUpdated(value, []);
             this.commentService.onCommentDeleted(value, []);
+
+            // if (companyPostId && commentId) {
+            //   const post = value.posts.find(p => p._id === companyPostId);
+            //   const comment = post.comments.find(c => c._id === commentId);
+            //   if(comment) {
+            //     this.commentService.scrollToComment(post.blocks, comment);
+            //   }
+            // }
           })) : 
           of(value)
       })
@@ -300,7 +308,8 @@ export class CompanyService {
 
   redirectToCompanyDetails(companyId: string) {
     this.router.navigate(['/', `company`, companyId],
-      { queryParams: { type: 'company' } });
+      // { queryParams: { type: 'company' } }
+      );
   }
 
   editCompany(company: Company) {

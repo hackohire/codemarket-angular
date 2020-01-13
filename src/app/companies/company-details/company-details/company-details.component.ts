@@ -24,6 +24,7 @@ import Swal from 'sweetalert2';
 import { AddEventComponent } from '../../../event/add-event/add-event.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Event } from '../../../shared/models/event.model';
+import { concatMap } from 'rxjs/operators/concatMap';
 
 @Component({
   selector: 'app-company-details',
@@ -145,41 +146,72 @@ export class CompanyDetailsComponent implements OnInit {
   ngOnInit() {
     this.type = this.activatedRoute.snapshot.queryParams.type;
     this.commentId = this.activatedRoute.snapshot.queryParams['commentId'];
-
-    console.log(this.activatedRoute.snapshot.queryParams);
+    const companyPostId = this.activatedRoute.snapshot.queryParams['companyPostId'];
 
     const params = this.activatedRoute.snapshot.params;
 
 
     this.subscription$.add(
       this.companyService.getCompanyById(params.companyId)
-      .subscribe({
-        next: (c: Company) => {
-          this.companyDetails$ = of(c);
-          this.companyDetails = c;
-          this.initializeCommentForm(c, 'company');
-          this.initializeQuestionAndAnswerForm(c, 'company');
+        .pipe(
+          concatMap((company, index) => {
+            return index === 0 ?
+              of(company).pipe(
+                tap(() => {
+                  if (this.commentId && companyPostId && company && company.posts && company.posts.length) {
+                    const post = company.posts.find(p => p._id === companyPostId);
+                    const comment = post.comments.find(c => c._id === this.commentId);
+                    switch (post.postType) {
+                      case 'mission':
+                        this.companyView = 'mission';
+                        break;
+                      case 'goal':
+                        this.companyView = 'goals';
+                        break;
+                      case 'post':
+                        this.companyView = 'home';
+                        break;
+                      case 'challenge':
+                        this.companyView = post.challengeType + '-challenges';
+                        break;
+                      default:
+                        this.companyView = 'home'
+                    }
+                    this.commentService.scrollToComment(post.description, comment);
 
-          /** Get the list of users in a company */
-          this.subscription$.add(
-            this.companyService.getListOfUsersInACompany(params.companyId).subscribe((u) => {
-              // console.log(u);
-              if (u) {
-                this.usersInterestedInCompany = u;
-              }
-            })
-          );
-          
-          /** Fetch the list of events related to the company */
-          this.subscription$.add(
-            this.companyService.getEventsByCompanyId(params.companyId).subscribe(e => {
-              if (e && e.length) {
-                this.eventsList = e;
-              }
-            })
-          );
-        }
-      })
+                    /** Get the list of users in a company */
+                    this.subscription$.add(
+                      this.companyService.getListOfUsersInACompany(params.companyId).subscribe((u) => {
+                        // console.log(u);
+                        if (u) {
+                          this.usersInterestedInCompany = u;
+                        }
+                      })
+                    );
+
+                    /** Fetch the list of events related to the company */
+                    this.subscription$.add(
+                      this.companyService.getEventsByCompanyId(params.companyId).subscribe(e => {
+                        if (e && e.length) {
+                          this.eventsList = e;
+                        }
+                      })
+                    );
+                  }
+                })
+              ) : of(company)
+          })
+        )
+        .subscribe({
+          next: (c: Company) => {
+            if (c && c._id) {
+              this.companyDetails$ = of(c);
+              this.companyDetails = c;
+              this.initializeCommentForm(c, 'company');
+              this.initializeQuestionAndAnswerForm(c, 'company');
+            }
+          }
+        })
     );
 
     this.subscription$.add(
@@ -187,7 +219,7 @@ export class CompanyDetailsComponent implements OnInit {
         if (q && q.view) {
           this.companyView = q.view;
         } else {
-          this.router.navigate(['./'], { queryParams: { view: 'description' }, queryParamsHandling: 'merge', relativeTo: this.activatedRoute })
+          // this.router.navigate(['./'], { queryParams: { view: 'home' }, queryParamsHandling: 'merge', relativeTo: this.activatedRoute });
         }
       })
     );
@@ -316,21 +348,21 @@ export class CompanyDetailsComponent implements OnInit {
 
   addPost(postType: string, challengeType = '') {
     if (this.authService.loggedInUser) {
-      this.updateCompany({}, {operation: 'ADD', post: { challengeType, postType, createdBy: this.authService.loggedInUser._id, description: this.postDescription }});
+      this.updateCompany({}, { operation: 'ADD', post: { challengeType, postType, createdBy: this.authService.loggedInUser._id, description: this.postDescription } });
     } else {
       this.authService.checkIfUserIsLoggedIn(true)
     }
   }
 
   deletePost(_id: string) {
-    this.updateCompany({}, {operation: 'DELETE', post: { _id }});
+    this.updateCompany({}, { operation: 'DELETE', post: { _id } });
   }
 
   updatePost(_id: string) {
-    this.updateCompany({}, {operation: 'UPDATE', post: { _id, description: this.postDescriptionInstances[_id] }});
+    this.updateCompany({}, { operation: 'UPDATE', post: { _id, description: this.postDescriptionInstances[_id] } });
   }
 
-  updateCompany(companyDetails, operation = null) { 
+  updateCompany(companyDetails, operation = null) {
     companyDetails['_id'] = this.companyDetails._id;
     // companyDetails['name'] = this.companyDetails.name;
     this.companyService.updateCompany(companyDetails, operation).pipe(
@@ -339,11 +371,11 @@ export class CompanyDetailsComponent implements OnInit {
         return of(false);
       })
     )
-    .subscribe((d: any) => {
-      if (d) {
-        // Swal.fire(`${d.name} has been Updated Successfully`, '', 'success');
-      }
-    });
+      .subscribe((d: any) => {
+        if (d) {
+          // Swal.fire(`${d.name} has been Updated Successfully`, '', 'success');
+        }
+      });
   }
 
 
@@ -418,7 +450,7 @@ export class CompanyDetailsComponent implements OnInit {
       // height: '550px',
       // maxHeight: '700px',
       panelClass: ['no-padding'],
-      data: {company: this.companyDetails},
+      data: { company: this.companyDetails },
       // disableClose: true,
       height: 'auto'
     });

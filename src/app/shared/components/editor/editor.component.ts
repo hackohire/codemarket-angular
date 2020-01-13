@@ -38,6 +38,7 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
   editor: EditorJS;
   isPlatformBrowser = false;
   @Input() post: Post; /** post for view mode */
+  @Input() companyPostId: string;
   @Input() id: string;
   @Input() readOnly = false; /** read only mode */
   @Input() data: [];
@@ -124,8 +125,11 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
       referenceId: new FormControl(p._id),
       type: new FormControl(this.commentType ? this.commentType : p.type),
       blockSpecificComment: new FormControl(true),
-      blockId: new FormControl('')
+      blockId: new FormControl(''),
     });
+    if (this.commentType === 'company' || p.type === 'company') {
+      this.commentForm.addControl('postId', new FormControl(this.companyPostId))
+    }
   }
 
   addComment(blockId: string) {

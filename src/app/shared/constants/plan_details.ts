@@ -2,12 +2,12 @@ export const plans = {
   dev: {
     'software_developer': [
       {
-        id: 'plan_GEOxM2fHMFLRYj',
+        id: 'plan_GXcP6jdfOKhJ70',
         product_id: 'prod_FwdeAeZ0zF98Nj',
         name: 'Dream Job Starter',
         status: 'ACTIVE',
-        description: 'Career plan',
-       /**  shortDescription: 'Slow Pace',*/
+        description: 'Dream Job Starter',
+        /**  shortDescription: 'Slow Pace',*/
         benefits: [
           'Dream Job Gap Analysis',
           // 'Team IQ',
@@ -29,11 +29,11 @@ export const plans = {
         },
       },
       {
-        id: 'plan_GEOzNfYW7nlzP0',
+        id: 'plan_GXcQIct8XvP6sL',
         product_id: 'prod_FwdeAeZ0zF98Nj',
         name: 'Interview Manager',
         status: 'ACTIVE',
-        description: 'Team plan',
+        description: 'Interview Manager',
         // shortDescription: 'For Small Teams',
         benefits: [
           'Dream Job Gap Analysis',
@@ -55,11 +55,11 @@ export const plans = {
         },
       },
       {
-        id: 'plan_GEOyjrDjrolxtM',
+        id: 'plan_GXcQl62YosrNxR',
         product_id: 'prod_FwdeAeZ0zF98Nj',
         name: 'Hiring Manager',
         status: 'ACTIVE',
-        description: 'Company plan',
+        description: 'Hiring Manager',
         // shortDescription: 'For Large Teams',
         benefits: [
           'Dream Job Gap Analysis',
@@ -71,9 +71,9 @@ export const plans = {
           message: 'Thanks For Choosing Us',
           successBenefits: [
             'Dream Job Gap Analysis',
-          'Dream Job Training',
-          'Interview Manager',
-          'Hiring Manager'
+            'Dream Job Training',
+            'Interview Manager',
+            'Hiring Manager'
           ],
         },
         fixed_price: {
@@ -85,16 +85,16 @@ export const plans = {
     ],
     'business': [
       {
-        id: 'plan_GEP8RvhJzs9nVR',
+        id: 'plan_GXcRN4qKsvoO5T',
         product_id: 'prod_GEP8nA3tXkvO5m',
         name: 'Sales Advisor',
         status: 'ACTIVE',
-        description: 'Sales Mentor',
+        description: 'Sales Advisor',
         // shortDescription: 'For Individual Developers',
         benefits: [
-            'Sales Target Goals',
-            'Sales Gap Analysis',
-            'Sales Manager'
+          'Sales Target Goals',
+          'Sales Gap Analysis',
+          'Sales Manager'
         ],
         success: {
           message: 'Thanks For Choosing Us',
@@ -111,11 +111,11 @@ export const plans = {
         },
       },
       {
-        id: 'plan_GEP9j4dcbjTOCw',
+        id: 'plan_GXcRhKLqK9ABXm',
         product_id: 'prod_GEP8nA3tXkvO5m',
         name: 'Sales Tech Team',
         status: 'ACTIVE',
-        description: 'Medium Size Business',
+        description: 'Sales Tech Team',
         // shortDescription: 'For Small Teams',
         benefits: [
           'Sales Target Goals',
@@ -139,11 +139,11 @@ export const plans = {
         },
       },
       {
-        id: 'plan_GEPAcSDOipQBjo',
+        id: 'plan_GXcScR7nNlfSk4',
         product_id: 'prod_GEP8nA3tXkvO5m',
         name: 'Sales AI Team',
         status: 'ACTIVE',
-        description: 'Large Size Business',
+        description: 'Sales AI Team',
         // shortDescription: 'For Large Teams',
         benefits: [
           'Sales Target Goals',
@@ -155,9 +155,9 @@ export const plans = {
           message: 'Thanks For Choosing Us',
           successBenefits: [
             'Sales Target Goals',
-          'Sales Gap Analysis',
-          'Sales AI Mentor',
-          'Sales AI Team'
+            'Sales Gap Analysis',
+            'Sales AI Mentor',
+            'Sales AI Team'
           ],
         },
         fixed_price: {
@@ -172,179 +172,168 @@ export const plans = {
   prod: {
     'software_developer': [
       {
-        id: 'plan_GEP1xYks2bVvE5',
+        id: 'plan_GXcaCgcDgC3p1U',
         product_id: 'prod_GEP1IoHYJzlADr',
-        name: 'Developer Plan',
+        name: 'Dream Job Starter',
         status: 'ACTIVE',
-        description: 'Career plan',
-        shortDescription: 'For Individual Developers',
+        description: 'Dream Job Starter',
+        /**  shortDescription: 'Slow Pace',*/
         benefits: [
-          '1 Developer',
-          'Team IQ',
-          'Mock Interviews',
-          'Business Skills Mentor',
-          'Leadership Skills Mentoring'
+          'Dream Job Gap Analysis',
+          // 'Team IQ',
+          'Dream Job Training',
+          // 'Business Skills Mentor',
+          // 'Leadership Skills Mentoring'
         ],
         success: {
           message: 'Thanks For Choosing Us',
           successBenefits: [
-            '1 Developer',
-            'Team IQ',
-            'Mock Interviews',
-            'Business Skills Mentor',
-            'Leadership Skills Mentoring'
+            'Dream Job Gap Analysis',
+            'Dream Job Training'
+          ],
+        },
+        fixed_price: {
+          currency_code: 'USD',
+          value: 29.99,
+          postfix: 'per month'
+        },
+      },
+      {
+        id: 'plan_GXcbhPQxCghyr6',
+        product_id: 'prod_GEP1IoHYJzlADr',
+        name: 'Interview Manager',
+        status: 'ACTIVE',
+        description: 'Interview Manager',
+        // shortDescription: 'For Small Teams',
+        benefits: [
+          'Dream Job Gap Analysis',
+          'Dream Job Training',
+          'Interview Manager'
+        ],
+        success: {
+          message: 'Thanks For Choosing Us',
+          successBenefits: [
+            'Dream Job Gap Analysis',
+            'Dream Job Training',
+            'Interview Manager'
+          ],
+        },
+        fixed_price: {
+          currency_code: 'USD',
+          value: 49.99,
+          postfix: 'per month'
+        },
+      },
+      {
+        id: 'plan_GXcb5xkJ9dWNGX',
+        product_id: 'prod_GEP1IoHYJzlADr',
+        name: 'Hiring Manager',
+        status: 'ACTIVE',
+        description: 'Hiring Manager',
+        // shortDescription: 'For Large Teams',
+        benefits: [
+          'Dream Job Gap Analysis',
+          'Dream Job Training',
+          'Interview Manager',
+          'Hiring Manager'
+        ],
+        success: {
+          message: 'Thanks For Choosing Us',
+          successBenefits: [
+            'Dream Job Gap Analysis',
+            'Dream Job Training',
+            'Interview Manager',
+            'Hiring Manager'
           ],
         },
         fixed_price: {
           currency_code: 'USD',
           value: 99.99,
-          postfix: 'development/month'
-        },
-      },
-      {
-        id: 'plan_GEP1DdNwI9Zrtb',
-        product_id: 'prod_GEP1IoHYJzlADr',
-        name: 'Team Plan',
-        status: 'ACTIVE',
-        description: 'Team plan',
-        shortDescription: 'For Small Teams',
-        benefits: [
-          '200 Developer',
-          'Team IQ',
-          'Mock Interviews',
-          'Business Skills Mentor',
-          'Leadership Skills Mentoring'
-        ],
-        success: {
-          message: 'Thanks For Choosing Us',
-          successBenefits: [
-          '<= 200 Developer',
-          'Team IQ',
-          'Mock Interviews',
-          'Business Skills Mentor',
-          'Leadership Skills Mentoring'
-          ],
-        },
-        fixed_price: {
-          currency_code: 'USD',
-          value: 74.99,
-          postfix: 'user/month'
-        },
-      },
-      {
-        id: 'plan_GEP1fZWeCmOSac',
-        product_id: 'prod_GEP1IoHYJzlADr',
-        name: 'Corporate Plan',
-        status: 'ACTIVE',
-        description: 'Company plan',
-        shortDescription: 'For Large Teams',
-        benefits: [
-          '> 200 Developer',
-          'Team IQ',
-          'Mock Interviews',
-          'Business Skills Mentor',
-          'Leadership Skills Mentoring'
-        ],
-        success: {
-          message: 'Thanks For Choosing Us',
-          successBenefits: [
-            '1 Developer',
-          'Team IQ',
-          'Mock Interviews',
-          'Business Skills Mentor',
-          'Leadership Skills Mentoring'
-          ],
-        },
-        fixed_price: {
-          currency_code: 'USD',
-          value: 59.99,
-          postfix: 'user/month',
+          postfix: 'per month',
         },
       }
     ],
     'business': [
       {
-        id: 'plan_GEPCqSJ3DuEyoF',
+        id: 'plan_GXcd26lbiDbYuX',
         product_id: 'prod_GEPCE9oMF9cq3Z',
-        name: 'Small Business',
+        name: 'Sales Advisor',
         status: 'ACTIVE',
-        description: 'Small Business',
-        shortDescription: 'For Individual Developers',
+        description: 'Sales Advisor',
+        // shortDescription: 'For Individual Developers',
         benefits: [
-            'Unlimited Q & A',
-            'Video Conference',
-            '1 meetup/month',
-            '1 Dedicated Innovation Manager 1 hour/month'
+          'Sales Target Goals',
+          'Sales Gap Analysis',
+          'Sales Manager'
         ],
         success: {
           message: 'Thanks For Choosing Us',
           successBenefits: [
-            'Unlimited Q & A',
-            'Video Conference',
-            '1 meetup/month',
-            '1 Dedicated Innovation Manager 1 hour/month'
-          ],
-        },
-        fixed_price: {
-          currency_code: 'USD',
-          value: 99.99,
-          postfix: 'development/month'
-        },
-      },
-      {
-        id: 'plan_GEPCtnP80YjXF0',
-        product_id: 'prod_GEPCE9oMF9cq3Z',
-        name: 'Medium Size Business',
-        status: 'ACTIVE',
-        description: 'Medium Size Business',
-        shortDescription: 'For Small Teams',
-        benefits: [
-            'Unlimited Q & A',
-            'Video Conference',
-            '1 meetup/month',
-            '2 Dedicated Innovation Manager 2 hours/month'
-        ],
-        success: {
-          message: 'Thanks For Choosing Us',
-          successBenefits: [
-            'Unlimited Q & A',
-            'Video Conference',
-            '1 meetup/month',
-            '2 Dedicated Innovation Managers 2 hours/month'
+            'Sales Target Goals',
+            'Sales Gap Analysis',
+            'Sales Manager'
           ],
         },
         fixed_price: {
           currency_code: 'USD',
           value: 199.99,
-          postfix: 'user/month'
+          postfix: 'per month'
         },
       },
       {
-        id: 'plan_GEPCz5LuXgpFVg',
+        id: 'plan_GXcePakYXx1iTs',
         product_id: 'prod_GEPCE9oMF9cq3Z',
-        name: 'Large Size Business',
+        name: 'Sales Tech Team',
         status: 'ACTIVE',
-        description: 'Large Size Business',
-        shortDescription: 'For Large Teams',
+        description: 'Sales Tech Team',
+        // shortDescription: 'For Small Teams',
         benefits: [
-            'Unlimited Q & A',
-            'Video Conference',
-            '1 meetup/month',
-            '3 Dedicated Innovation Managers 3 hours/month'
+          'Sales Target Goals',
+          'Sales Gap Analysis',
+          'Sales Tech Mentor',
+          'Sales Tech Team'
         ],
         success: {
           message: 'Thanks For Choosing Us',
           successBenefits: [
-            'Unlimited Q & A',
-            'Video Conference',
-            '1 meetup/month',
-            '3 Dedicated Innovation Managers 3 hours/month'
+            'Sales Target Goals',
+            'Sales Gap Analysis',
+            'Sales Tech Mentor',
+            'Sales Tech Team'
           ],
         },
         fixed_price: {
           currency_code: 'USD',
-          value: 299.99,
-          postfix: 'user/month',
+          value: 999.99,
+          postfix: 'per month'
+        },
+      },
+      {
+        id: 'plan_GXceVBEltlXikI',
+        product_id: 'prod_GEPCE9oMF9cq3Z',
+        name: 'Sales AI Team',
+        status: 'ACTIVE',
+        description: 'Sales AI Team',
+        // shortDescription: 'For Large Teams',
+        benefits: [
+          'Sales Target Goals',
+          'Sales Gap Analysis',
+          'Sales AI Mentor',
+          'Sales AI Team'
+        ],
+        success: {
+          message: 'Thanks For Choosing Us',
+          successBenefits: [
+            'Sales Target Goals',
+            'Sales Gap Analysis',
+            'Sales AI Mentor',
+            'Sales AI Team'
+          ],
+        },
+        fixed_price: {
+          currency_code: 'USD',
+          value: 1999.99,
+          postfix: 'per month',
         },
       }
     ],

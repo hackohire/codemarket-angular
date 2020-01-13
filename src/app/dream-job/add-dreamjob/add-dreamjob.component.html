@@ -9,9 +9,8 @@
                     <input type="text" matInput formControlName="name" placeholder="Title">
                 </mat-form-field>
 
-                <mat-form-field class="field-full-width">
-                    <input type="text" matInput formControlName="jobProfile" placeholder="Position">
-                </mat-form-field>
+                <ng-select placeholder="Roles" formControlName="jobProfile" [addTag]="addTagFn" [multiple]="true">
+                </ng-select>
 
                 <h6>Dream Job Description:</h6>
                 <br />
@@ -25,13 +24,19 @@
                     <app-editor *ngIf="!edit" (output)="updateFormData($event)" [id]="'dreamjob-editor'" [importArticleSubscription]="true"></app-editor>
                 </ng-template>
 
-                <ng-select placeholder="Select Company" formControlName="company">
-                    <ng-option *ngFor="let cName of allCompanies" [value]="cName._id">
-                        {{ cName?.name }}
-                    </ng-option>
+                <ng-select placeholder="Select Dream Companies" [items]="allCompanies" formControlName="companies" [multiple]="true" bindLabel="name">
+                    <!-- <ng-option *ngFor="let cName of allCompanies" [value]="cName._id"> -->
+                        <!-- {{ cName?.name }} -->
+                    <!-- </ng-option> -->
                 </ng-select>
 
-                <mat-form-field class="field-full-width">
+                <ng-select placeholder="Select Cities" [addTag]="addCitiesFn" [items]="citySuggestions" formControlName="cities" [multiple]="true" bindLabel="name">
+                    <!-- <ng-option *ngFor="let cName of allCompanies" [value]="cName._id"> -->
+                        <!-- {{ cName?.name }} -->
+                    <!-- </ng-option> -->
+                </ng-select>
+
+                <!-- <mat-form-field class="field-full-width">
                     <mat-chip-list #citiesList>
                         <mat-chip *ngFor="let city of citiesFormControl?.value; let i = index;"
                             [selectable]="selectable" [removable]="true" (removed)="remove(i)">
@@ -49,7 +54,7 @@
                             {{city?.name}}
                         </mat-option>
                     </mat-autocomplete>
-                </mat-form-field>
+                </mat-form-field> -->
 
                 <h6>Expected Salary Range:</h6>
                 <br />

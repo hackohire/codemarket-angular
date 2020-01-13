@@ -72,19 +72,16 @@ export class AddDreamjobComponent implements OnInit {
 
   subscription$: Subscription;
 
-  searchText = new FormControl();
   citySuggestions: City[];
-  allCities: City[];
+
   salaryRangeFrom = 30;
   salaryRangeTo = 50;
 
-  @ViewChild('searchInput', {static: false}) searchInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto', {static: false}) matAutocomplete: MatAutocomplete;
 
   constructor(
     private authService: AuthService,
     private store: Store<AppState>,
-    private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
     private formService: FormService,
     private companyService: CompanyService
@@ -141,14 +138,16 @@ export class AddDreamjobComponent implements OnInit {
   ngOnInit() {}
 
   dreamjobFormInitialization(i: Post) {
+    console.log(i && i.companies ? i.companies : []);
     this.dreamjobForm = new FormGroup({
       name: new FormControl(i && i.name ? i.name : '', Validators.required),
       description: new FormControl(i && i.description ? i.description : ''),
-      jobProfile: new FormControl(i && i.jobProfile ? i.jobProfile : ''),
-      company: new FormControl(i && i.company ? i.company._id : '', Validators.required),
+      jobProfile: new FormControl(i && i.jobProfile ? i.jobProfile : []),
+      // company: new FormControl(i && i.company ? i.company._id : ''),
+      companies: new FormControl(i && i.companies ? i.companies : []),
       status: new FormControl(i && i.status ? i.status : PostStatus.Drafted),
       _id: new FormControl(i && i._id ? i._id : ''),
-      cities: this.fb.array(i && i.cities && i.cities.length ? i.cities : []),
+      cities: new FormControl(i && i.cities && i.cities.length ? i.cities : []),
       salaryRangeFrom: new FormControl(i && i.salaryRangeFrom ? i.salaryRangeFrom : 10),
       salaryRangeTo: new FormControl(i && i.salaryRangeTo ? i.salaryRangeTo : 30),
       type: new FormControl(PostType.Dreamjob),
@@ -161,23 +160,12 @@ export class AddDreamjobComponent implements OnInit {
     this.formService.findFromCollection('', 'cities').subscribe((cities) => {
       // const filteredCitys = _.differenceBy(cities, i.cities, '_id');
       this.citySuggestions = cities;
-      this.allCities = cities;
     });
 
     this.companyService.getCompaniesByType('').subscribe((companies) => {
       this.allCompanies = companies;
     });
 
-    this.searchText.valueChanges.pipe(
-      startWith(''),
-      map((text) => text ? this._filter(text) : this.allCities && this.allCities.length ? this.allCities.slice() : []))
-      .subscribe((cities) => this.citySuggestions = cities);
-
-  }
-
-  private _filter(value): City[] {
-    const filterValue = value && value.name ? value.name.toLowerCase() : value.toLowerCase();
-    return this.allCities.filter(city => city.name.toLowerCase().indexOf(filterValue) === 0);
   }
 
   submit(status) {
@@ -194,12 +182,21 @@ export class AddDreamjobComponent implements OnInit {
     if (this.authService.loggedInUser && !this.createdBy.value) {
       this.createdBy.setValue(this.authService.loggedInUser._id);
     }
+    
 
     if (this.idFromControl && !this.idFromControl.value) {
       this.dreamjobForm.removeControl('_id');
-      this.store.dispatch(AddPost({post: this.dreamjobForm.value}));
+      const dreamJobValue = {...this.dreamjobForm.value};
+
+      /** Only Send _id */
+      dreamJobValue.companies = dreamJobValue.companies.map(c => c._id);
+      this.store.dispatch(AddPost({post: dreamJobValue}));
     } else {
-      this.store.dispatch(UpdatePost({post: this.dreamjobForm.value}));
+      const dreamJobValue = {...this.dreamjobForm.value};
+
+      /** Only Send _id */
+      dreamJobValue.companies = dreamJobValue.companies.map(c => c._id);
+      this.store.dispatch(UpdatePost({post: dreamJobValue}));
     }
   }
 
@@ -208,36 +205,12 @@ export class AddDreamjobComponent implements OnInit {
     this.dreamjobForm.get('description').setValue(event);
   }
 
-  addTech(event: MatChipInputEvent): void {
-    if (!this.matAutocomplete.isOpen) {
-      const availableCity = this.citySuggestions.find((t) => t.name.toLowerCase() == event.value.trim().toLowerCase());
-      const formAvailableInTafsFormControl = this.citiesFormControl.value.find((t) => t.name.toLowerCase() == event.value.trim().toLowerCase());
-      if (formAvailableInTafsFormControl && event && event.input && event.input.value) {
-        event.input.value = '';
-      } else if (availableCity) {
-        this.citiesFormControl.push(new FormControl({name: availableCity.name, _id: availableCity._id}));
-      } else {
-        this.formService.addCategory(this.citiesFormControl, event);
-      }
-      this.searchText.setValue(null);
-    }
+  addTagFn(name) {
+    return name;
   }
 
-  selected(event) {
-    const formAvailableInTafsFormControl = this.citiesFormControl.value.find((t) => t.name.toLowerCase() == event.option.value.name.trim().toLowerCase());
-    if (formAvailableInTafsFormControl) {
-      event.option.value = '';
-    } else {
-      this.formService.selectedCategory(this.citiesFormControl, event);
-    }
-    this.searchInput.nativeElement.value = null;
-    this.searchText.setValue(null);
-  }
-
-
-  // Remove a City
-  public remove(index: number): void {
-    this.formService.removeCategory(this.citiesFormControl, index);
+  addCitiesFn(name) {
+    return {name};
   }
 
 }

@@ -6,7 +6,216 @@
 	<section style="padding: 35px;" class="author-profile-area">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-4 col-md-12">
+
+				<div class="col-md-3">
+					<!-- Dream Job -->
+					<div class="row" *ngIf="porfileData">
+						<div class="col-lg-12 col-md-12">
+							<div class="common-box-shadow sidebar-card card--product-infos">
+								<div class="card-title" style="margin-bottom: 0;">
+									<h4 style="display: inline-block;">DreamJob:</h4>
+									<mat-icon style="float: right; vertical-align: bottom;"
+										*ngIf="user?._id === authService?.loggedInUser?._id"
+										[routerLink]="['/', 'post', 'add-dreamjob']">
+										add
+									</mat-icon>
+								</div>
+								<div *ngIf="porfileData">
+									<mat-accordion *ngFor="let p of porfileData?.dreamJob">
+										<mat-expansion-panel>
+											<mat-expansion-panel-header style="height: 50px !important">
+												<mat-panel-title>
+													{{p?.name}}
+												</mat-panel-title>
+											</mat-expansion-panel-header>
+											<ul class="infos">
+												<li *ngIf="p?.jobProfile">
+													<p class="data-label">Position</p>
+													<p class="info" style="text-transform: capitalize;">
+														{{ p?.jobProfile ? p?.jobProfile : '' }}</p>
+												</li>
+
+												<li *ngIf="p?.company">
+													<p class="data-label">Companies</p>
+													<p class="info" style="text-transform: capitalize;"><span
+															*ngFor="let c of p?.companies; let ei = index;">{{c?.name + (ei === p?.companies?.length - 1 ? '' : ', ' )}}</span>
+													</p>
+												</li>
+
+												<li *ngIf="p?.cities && p?.cities?.length">
+													<p class="data-label">Cities</p>
+													<p class="info"><span
+															*ngFor="let c of p?.cities; let ei = index;">{{c?.name + (ei === p?.cities?.length - 1 ? '' : ', ' )}}</span>
+													</p>
+												</li>
+
+												<li *ngIf="p?.salaryRangeFrom">
+													<p class="data-label">Expected Salary</p>
+													<p class="info">
+														{{(p?.salaryRangeFrom | currency: 'USD' : 'symbol' : '1.0-0') + 'k'}}
+														-
+														{{ (p?.salaryRangeTo | currency: 'USD' : 'symbol' : '1.0-0') + 'k'}}
+													</p>
+												</li>
+											</ul>
+
+											<a (click)="postService?.redirectToPostDetails(p)"><span>Read More...</span></a>
+											<!-- <app-editor [readOnly]="true" [data]="p?.description" [id]="p?._id">
+											</app-editor> -->
+										</mat-expansion-panel>
+									</mat-accordion>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Businesses Area Interests -->
+					<div class="row" *ngIf="porfileData">
+						<div class="col-lg-12 col-md-12">
+							<div class="common-box-shadow sidebar-card card--product-infos">
+								<div class="card-title" style="margin-bottom: 0;">
+									<h4 style="display: inline-block;">Business Area Interests:</h4>
+									<mat-icon style="float: right; vertical-align: bottom;"
+										*ngIf="user?._id === authService?.loggedInUser?._id"
+										(click)="selectBusinessAreaInterests = true; addTagAction(porfileData?.businessAreaInterests ? porfileData?.businessAreaInterests : [] );">
+										{{porfileData?.businessAreaInterests && porfileData?.businessAreaInterests.length ? 'edit' : 'add' }}
+									</mat-icon>
+								</div>
+
+								<div *ngIf="selectBusinessAreaInterests" class="product-purchase">
+									<ng-container
+										*ngTemplateOutlet="tagSelectionTemplate; context: {placeholder: 'Business Area Interests:'}">
+									</ng-container>
+								</div>
+
+								<div>
+									<div class="product-purchase">
+										<div *ngFor="let t of (selectBusinessAreaInterests ?  tagsFormControl?.value : porfileData?.businessAreaInterests); let i = index;"
+											class="price_love" style="padding-bottom: 15px;">
+											<span>{{t?.name}} <mat-icon style="vertical-align: middle;"
+													*ngIf="selectBusinessAreaInterests" (click)="remove(i)">cancel
+												</mat-icon>
+											</span>
+										</div>
+										<br>
+										<button *ngIf="selectBusinessAreaInterests" style="float: right;" type="button"
+											class="btn btn--sm btn--round"
+											(click)="updateInterests('businessAreaInterests', 'selectBusinessAreaInterests')">Update</button>
+									</div>
+								</div>
+								<!-- </div> -->
+							</div>
+						</div>
+					</div>
+
+					<!-- Leadership Area Interests -->
+					<div class="row" *ngIf="porfileData">
+						<div class="col-lg-12 col-md-12">
+							<div class="common-box-shadow sidebar-card card--product-infos">
+								<div class="card-title" style="margin-bottom: 0;">
+									<h4 style="display: inline-block;">Leadership Area Interests:</h4>
+									<mat-icon style="float: right; vertical-align: bottom;"
+										*ngIf="user?._id === authService?.loggedInUser?._id"
+										(click)="selectLeadershipAreaInterests = true; addTagAction(porfileData?.leadershipAreaInterests ? porfileData?.leadershipAreaInterests : [] );">
+										{{porfileData?.leadershipAreaInterests && porfileData?.leadershipAreaInterests.length ? 'edit' : 'add' }}
+									</mat-icon>
+								</div>
+
+								<div *ngIf="selectLeadershipAreaInterests" class="product-purchase">
+									<ng-container
+										*ngTemplateOutlet="tagSelectionTemplate; context: {placeholder: 'Leadership Area Interests:'}">
+									</ng-container>
+								</div>
+
+								<div>
+									<div class="product-purchase">
+										<div *ngFor="let t of (selectLeadershipAreaInterests ?  tagsFormControl?.value : porfileData?.leadershipAreaInterests); let i = index;"
+											class="price_love" style="padding-bottom: 15px;">
+											<span>{{t?.name}} <mat-icon style="vertical-align: middle;"
+													*ngIf="selectLeadershipAreaInterests" (click)="remove(i)">cancel
+												</mat-icon>
+											</span>
+										</div>
+										<br>
+										<button *ngIf="selectLeadershipAreaInterests" style="float: right;"
+											type="button" class="btn btn--sm btn--round"
+											(click)="updateInterests('leadershipAreaInterests', 'selectLeadershipAreaInterests')">Update</button>
+									</div>
+								</div>
+								<!-- </div> -->
+							</div>
+						</div>
+					</div>
+
+
+					<!-- Social Impact Interests -->
+					<div class="row" *ngIf="porfileData">
+						<div class="col-lg-12 col-md-12">
+							<div class="common-box-shadow sidebar-card card--product-infos">
+								<div class="card-title" style="margin-bottom: 0;">
+									<h4 style="display: inline-block;">Social Impact Interests:</h4>
+									<mat-icon style="float: right; vertical-align: bottom;"
+										*ngIf="user?._id === authService?.loggedInUser?._id"
+										(click)="selectsocialImpactInterests = true; addTagAction(porfileData?.socialImpactInterests ? porfileData?.socialImpactInterests : [] );">
+										{{porfileData?.socialImpactInterests && porfileData?.socialImpactInterests.length ? 'edit' : 'add' }}
+									</mat-icon>
+								</div>
+
+								<div *ngIf="selectsocialImpactInterests" class="product-purchase">
+									<ng-container
+										*ngTemplateOutlet="tagSelectionTemplate; context: {placeholder: 'Social Impact Interests:'}">
+									</ng-container>
+								</div>
+
+								<div>
+									<div class="product-purchase">
+										<div *ngFor="let t of (selectsocialImpactInterests ?  tagsFormControl?.value : porfileData?.socialImpactInterests); let i = index;"
+											class="price_love" style="padding-bottom: 15px;">
+											<span>{{t?.name}} <mat-icon style="vertical-align: middle;"
+													*ngIf="selectsocialImpactInterests" (click)="remove(i)">cancel
+												</mat-icon>
+											</span>
+										</div>
+										<br>
+										<button *ngIf="selectsocialImpactInterests" style="float: right;" type="button"
+											class="btn btn--sm btn--round"
+											(click)="updateInterests('socialImpactInterests', 'selectsocialImpactInterests')">Update</button>
+									</div>
+								</div>
+								<!-- </div> -->
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-lg-6 col-md-12">
+
+					<div class="row">
+						<div class="col-md-12">
+
+							<nav mat-tab-nav-bar>
+								<a mat-tab-link *ngFor="let link of navLinks" [routerLink]="[link.path]"
+									[queryParams]="link?.queryParams ? link.queryParams : null" routerLinkActive
+									#rla="routerLinkActive" [active]="rla.isActive">
+									{{link.label}}
+								</a>
+
+								<!-- <app-add-post-menu></app-add-post-menu> -->
+							</nav>
+
+							<div>
+								<router-outlet></router-outlet>
+							</div>
+						</div>
+						<!-- end /.col-md-12 -->
+
+
+					</div>
+					<!-- end /.row -->
+				</div>
+				<!-- end /.col-md-6 -->
+				
+				<div class="col-lg-3 col-md-12">
 					<aside class="common-box-shadow sidebar sidebar_author">
 						<div class="author-card sidebar-card">
 							<div class="author-infos">
@@ -77,174 +286,9 @@
 					</aside>
 				</div>
 				<!-- end /.sidebar -->
-
-				<div class="col-lg-8 col-md-12">
-
-					<div class="row">
-						<div class="col-md-12">
-
-							<nav mat-tab-nav-bar>
-								<a mat-tab-link *ngFor="let link of navLinks" [routerLink]="[link.path]"
-									[queryParams]="link?.queryParams ? link.queryParams : null" routerLinkActive
-									#rla="routerLinkActive" [active]="rla.isActive">
-									{{link.label}}
-								</a>
-
-								<!-- <app-add-post-menu></app-add-post-menu> -->
-							</nav>
-
-							<div>
-								<router-outlet></router-outlet>
-							</div>
-						</div>
-						<!-- end /.col-md-12 -->
-
-
-					</div>
-					<!-- end /.row -->
-				</div>
-				<!-- end /.col-md-8 -->
 			</div>
 			<!-- end /.row -->
 
-			<!-- Dream Job -->
-			<div class="row">
-				<div class="col-lg-12 col-md-12">
-					<div class="common-box-shadow sidebar-card card--product-infos">
-						<div class="card-title" style="margin-bottom: 0;">
-							<h4>DreamJob:</h4>
-						</div>
-						<div *ngIf="porfileData">
-							<mat-accordion *ngFor="let p of porfileData?.dreamJob">
-								<mat-expansion-panel>
-									<mat-expansion-panel-header style="height: 50px !important">
-										<mat-panel-title>
-											{{p?.name}}
-										</mat-panel-title>
-									</mat-expansion-panel-header>
-									<app-editor [readOnly]="true" [data]="p?.description" [id]="p?._id">
-									</app-editor>
-								</mat-expansion-panel>
-							</mat-accordion>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<!-- Businesses Area Interests -->
-			<div class="row" *ngIf="porfileData">
-				<div class="col-lg-12 col-md-12">
-					<div class="common-box-shadow sidebar-card card--product-infos">
-						<div class="card-title" style="margin-bottom: 0;">
-							<h4 style="display: inline-block;">Business Area Interests:</h4>
-							<mat-icon style="float: right; vertical-align: bottom;"
-								*ngIf="user?._id === authService?.loggedInUser?._id"
-								(click)="selectBusinessAreaInterests = true; addTagAction(porfileData?.businessAreaInterests ? porfileData?.businessAreaInterests : [] );">
-								{{porfileData?.businessAreaInterests && porfileData?.businessAreaInterests.length ? 'edit' : 'add' }}
-							</mat-icon>
-						</div>
-
-						<div *ngIf="selectBusinessAreaInterests" class="product-purchase">
-							<ng-container
-								*ngTemplateOutlet="tagSelectionTemplate; context: {placeholder: 'Business Area Interests:'}">
-							</ng-container>
-						</div>
-
-						<div>
-							<div class="product-purchase">
-								<div *ngFor="let t of (selectBusinessAreaInterests ?  tagsFormControl?.value : porfileData?.businessAreaInterests); let i = index;"
-									class="price_love" style="padding-bottom: 15px;">
-									<span>{{t?.name}} <mat-icon style="vertical-align: middle;"
-											*ngIf="selectBusinessAreaInterests" (click)="remove(i)">cancel</mat-icon>
-									</span>
-								</div>
-								<br>
-								<button *ngIf="selectBusinessAreaInterests" style="float: right;" type="button"
-									class="btn btn--sm btn--round"
-									(click)="updateInterests('businessAreaInterests', 'selectBusinessAreaInterests')">Update</button>
-							</div>
-						</div>
-						<!-- </div> -->
-					</div>
-				</div>
-			</div>
-
-			<!-- Leadership Area Interests -->
-			<div class="row" *ngIf="porfileData">
-				<div class="col-lg-12 col-md-12">
-					<div class="common-box-shadow sidebar-card card--product-infos">
-						<div class="card-title" style="margin-bottom: 0;">
-							<h4 style="display: inline-block;">Leadership Area Interests:</h4>
-							<mat-icon style="float: right; vertical-align: bottom;"
-								*ngIf="user?._id === authService?.loggedInUser?._id"
-								(click)="selectLeadershipAreaInterests = true; addTagAction(porfileData?.leadershipAreaInterests ? porfileData?.leadershipAreaInterests : [] );">
-								{{porfileData?.leadershipAreaInterests && porfileData?.leadershipAreaInterests.length ? 'edit' : 'add' }}
-							</mat-icon>
-						</div>
-
-						<div *ngIf="selectLeadershipAreaInterests" class="product-purchase">
-							<ng-container
-								*ngTemplateOutlet="tagSelectionTemplate; context: {placeholder: 'Leadership Area Interests:'}">
-							</ng-container>
-						</div>
-
-						<div>
-							<div class="product-purchase">
-								<div *ngFor="let t of (selectLeadershipAreaInterests ?  tagsFormControl?.value : porfileData?.leadershipAreaInterests); let i = index;"
-									class="price_love" style="padding-bottom: 15px;">
-									<span>{{t?.name}} <mat-icon style="vertical-align: middle;"
-											*ngIf="selectLeadershipAreaInterests" (click)="remove(i)">cancel</mat-icon>
-									</span>
-								</div>
-								<br>
-								<button *ngIf="selectLeadershipAreaInterests" style="float: right;" type="button"
-									class="btn btn--sm btn--round"
-									(click)="updateInterests('leadershipAreaInterests', 'selectLeadershipAreaInterests')">Update</button>
-							</div>
-						</div>
-						<!-- </div> -->
-					</div>
-				</div>
-			</div>
-
-
-			<!-- Social Impact Interests -->
-			<div class="row" *ngIf="porfileData">
-				<div class="col-lg-12 col-md-12">
-					<div class="common-box-shadow sidebar-card card--product-infos">
-						<div class="card-title" style="margin-bottom: 0;">
-							<h4 style="display: inline-block;">Social Impact Interests:</h4>
-							<mat-icon style="float: right; vertical-align: bottom;"
-								*ngIf="user?._id === authService?.loggedInUser?._id"
-								(click)="selectsocialImpactInterests = true; addTagAction(porfileData?.socialImpactInterests ? porfileData?.socialImpactInterests : [] );">
-								{{porfileData?.socialImpactInterests && porfileData?.socialImpactInterests.length ? 'edit' : 'add' }}
-							</mat-icon>
-						</div>
-
-						<div *ngIf="selectsocialImpactInterests" class="product-purchase">
-							<ng-container
-								*ngTemplateOutlet="tagSelectionTemplate; context: {placeholder: 'Social Impact Interests:'}">
-							</ng-container>
-						</div>
-
-						<div>
-							<div class="product-purchase">
-								<div *ngFor="let t of (selectsocialImpactInterests ?  tagsFormControl?.value : porfileData?.socialImpactInterests); let i = index;"
-									class="price_love" style="padding-bottom: 15px;">
-									<span>{{t?.name}} <mat-icon style="vertical-align: middle;"
-											*ngIf="selectsocialImpactInterests" (click)="remove(i)">cancel</mat-icon>
-										</span>
-								</div>
-								<br>
-								<button *ngIf="selectsocialImpactInterests" style="float: right;" type="button"
-									class="btn btn--sm btn--round"
-									(click)="updateInterests('socialImpactInterests', 'selectsocialImpactInterests')">Update</button>
-							</div>
-						</div>
-						<!-- </div> -->
-					</div>
-				</div>
-			</div>
 		</div>
 		<!-- end /.container -->
 	</section>

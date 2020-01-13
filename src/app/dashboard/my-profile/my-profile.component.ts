@@ -15,8 +15,7 @@ import { FormService } from '../../shared/services/form.service';
 import { FormControl, FormArray } from '@angular/forms';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { startWith, map, switchMap, tap } from 'rxjs/operators';
-import { Store } from '@ngrx/store';
-import { AppState } from '../../core/store/state/app.state';
+import { PostService } from '../../shared/services/post.service';
 
 @Component({
   selector: 'app-my-profile',
@@ -64,7 +63,7 @@ export class MyProfileComponent implements OnInit {
     private dialog: MatDialog,
     private router: Router,
     private formService: FormService,
-    private store: Store<AppState>
+    public postService: PostService
   ) {
 
     this.breadcumb = {

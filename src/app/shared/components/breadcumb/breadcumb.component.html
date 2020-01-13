@@ -67,9 +67,11 @@
                                 {{ postDetails?.jobProfile ? postDetails?.jobProfile : '' }}</p>
                         </li>
 
-                        <li *ngIf="postDetails?.company">
+                        <li *ngIf="postDetails?.companies">
                             <p class="data-label">Company</p>
-                            <p class="info" style="text-transform: capitalize;">{{ postDetails?.company?.name }}</p>
+                            <p class="info" style="text-transform: capitalize;">
+                                <span
+                                    *ngFor="let c of postDetails?.companies; let ei = index;">{{c?.name + (ei === postDetails?.companies?.length - 1 ? '' : ', ' )}}</span></p>
                         </li>
 
                         <li *ngIf="postDetails?.cities && postDetails?.cities?.length">

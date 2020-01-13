@@ -236,8 +236,8 @@ export const appConstants = {
         latitude
         address
       }
-  
-      company {
+
+      companies {
         name
         _id
       }

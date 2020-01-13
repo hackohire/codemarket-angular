@@ -27,7 +27,9 @@
 
                 <ng-container matColumnDef="company">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'Company'}} </th>
-                    <td mat-cell *matCellDef="let element; let i = index;">{{element['company']['name']}}</td>
+                    <td mat-cell *matCellDef="let element; let i = index;">
+                        <span
+                            *ngFor="let c of element?.companies; let ei = index">{{c?.name + (ei === element?.companies?.length - 1 ? '' : ', ' )}}</span></td>
                 </ng-container>
 
                 <ng-container matColumnDef="createdBy">

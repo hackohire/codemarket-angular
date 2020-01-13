@@ -188,7 +188,7 @@ export class CompanyService {
         variables: {
           companyType
         },
-        fetchPolicy: 'no-cache'
+        // fetchPolicy: 'no-cache'
       }
     ).pipe(
       map((p: any) => {

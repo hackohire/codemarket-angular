@@ -6,3 +6,36 @@ ul {
     padding: 0 !important;
     min-width: 95px !important;
 }
+
+.card--product-infos {
+    .data-label {
+        width: 40%;
+        font-weight: 600;
+        // color: #333333;
+    }
+    
+    .info {
+        width: 60%;
+    }
+    
+    ul.infos li {
+        overflow: hidden;
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    ul.infos li p {
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: -3px;
+        margin: 0;
+        font-size: 12px;
+        vertical-align: top;
+        // line-height: 36px;
+    }
+    
+    p.data-label:after {
+        content: ":";
+        margin-left: 4px
+    }
+}

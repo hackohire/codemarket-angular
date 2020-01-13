@@ -40,7 +40,11 @@ export interface CompanyPost {
     updatedAt?: string;
     postType?: string;
     challengeType: string;
-    comments: Comment[]
+    description: [{
+        type: string;
+        data: BlockToolData
+    }];
+    comments: Comment[];
 }
 
 export interface Challenge {

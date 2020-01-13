@@ -1044,10 +1044,10 @@
     call-me-maybe "^1.0.1"
     glob-to-regexp "^0.3.0"
 
-"@ng-select/ng-select@^3.3.0":
-  version "3.6.2"
-  resolved "https://registry.yarnpkg.com/@ng-select/ng-select/-/ng-select-3.6.2.tgz#ea1e2ab9039024794e7084e77a86e00f0265e805"
-  integrity sha512-OsrToeqUZq/ZFfn7/DJASacuZsnShkJZm6Fy92Pb0t+PCdPP7tRcTRh+t+woOqrgiUXIMUVgPCszXYkbUjZ+Jg==
+"@ng-select/ng-select@^3.7.1":
+  version "3.7.1"
+  resolved "https://registry.yarnpkg.com/@ng-select/ng-select/-/ng-select-3.7.1.tgz#cf357a6a65588605bd1288a8ee804d254c254514"
+  integrity sha512-wV1BpJCuxVU8aCf8t/nMrDp63oFgS2z7TB9BETm3Lul9AhI93JAM809VWkERGbQ9GQQvr7YDkPXvkGISqoUGgg==
   dependencies:
     tslib "^1.9.0"
 

@@ -61,13 +61,18 @@
                             <p class="info" style="text-transform: capitalize;">{{ postDetails?.location?.address }}</p>
                         </li>
 
-                        <li *ngIf="postDetails?.jobProfile">
+                        <li *ngIf="postDetails?.jobProfile && postDetails?.jobProfile?.length">
                             <p class="data-label">Position</p>
                             <p class="info" style="text-transform: capitalize;">
                                 {{ postDetails?.jobProfile ? postDetails?.jobProfile : '' }}</p>
                         </li>
+                        
+                        <li *ngIf="postDetails?.company">
+                            <p class="data-label">Company</p>
+                            <p class="info" style="text-transform: capitalize;">{{ postDetails?.company?.name }}</p>
+                        </li>
 
-                        <li *ngIf="postDetails?.companies">
+                        <li *ngIf="postDetails?.companies && postDetails?.companies?.length">
                             <p class="data-label">Company</p>
                             <p class="info" style="text-transform: capitalize;">
                                 <span
@@ -99,9 +104,9 @@
 <mde-popover #importArticle="mdePopover" [mdePopoverOverlapTrigger]="false" [mdePopoverCloseOnClick]="false"
     [mdePopoverArrowOffsetX]="50" mdePopoverArrowColor="#FFFFFF">
     <div style="background: #f8f9fb; padding: 10px;">
-        <p>Import Article By URL</p>
+        <p>Import {{postDetails?.type}} By URL</p>
         <mat-form-field class="field-full-width">
-            <input [formControl]="articleLink" type="text" matInput placeholder="Article Link">
+            <input [formControl]="articleLink" type="text" matInput placeholder="Link">
         </mat-form-field>
         <mat-icon (click)="import()">send</mat-icon>
     </div>

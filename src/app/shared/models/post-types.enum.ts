@@ -9,5 +9,6 @@ export enum PostType {
     Goal = 'goal',
     Event = 'event',
     Teamskill = 'team-skill',
-    Dreamjob = 'dream-job'
+    Dreamjob = 'dream-job',
+    Job = 'job'
 }

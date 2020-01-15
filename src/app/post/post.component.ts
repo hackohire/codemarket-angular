@@ -129,6 +129,20 @@ export class PostComponent implements OnInit {
         queryParams: { type: PostType.Dreamjob },
         type: PostType.Dreamjob
       },
+
+      /** Job */
+      {
+        path: 'post-list',
+        label: 'Jobs List',
+        queryParams: { type: PostType.Job, all: false },
+        type: PostType.Job
+      },
+      {
+        path: 'add-job',
+        label: 'Add Job',
+        queryParams: { type: PostType.Job },
+        type: PostType.Job
+      },
     ];
 
     /** Filtering Routes Based On Post Type */

@@ -100,9 +100,17 @@ const postRoutes: Routes = [
       {
         path: 'edit-dream-job/:dreamjobId',
         loadChildren: () => import('../dream-job/add-dreamjob/add-dreamjob.module').then(module => module.AddDreamjobModule),
+      },
+      {
+        path: 'add-job',
+        loadChildren: () => import('../job/add-job/add-job.module').then(module => module.AddJobModule),
+      },
+      {
+        path: 'edit-job/:jobId',
+        loadChildren: () => import('../job/add-job/add-job.module').then(module => module.AddJobModule),
       }
     ],
-    runGuardsAndResolvers: 'always',
+    // runGuardsAndResolvers: 'always',
   },
 ];
 

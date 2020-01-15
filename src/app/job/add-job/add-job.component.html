@@ -1,0 +1,62 @@
+<app-breadcumb [title]="breadcumb?.title" [path]="breadcumb?.path" [showImportButton]="true"></app-breadcumb>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div [formGroup]="jobForm" class="job-form-area">
+                <mat-form-field class="field-full-width">
+                    <input type="text" matInput formControlName="name" placeholder="Title">
+                </mat-form-field>
+
+                <ng-select placeholder="Roles" formControlName="jobProfile" [addTag]="addTagFn" [multiple]="true">
+                </ng-select>
+
+                <h6>Job Description:</h6>
+                <br />
+
+                <app-editor *ngIf="descriptionFormControl?.value && edit; else add" (output)="updateFormData($event)"
+                    [data]="descriptionFormControl?.value" [id]="'edit-job-editor'" [importArticleSubscription]="true"></app-editor>
+
+                <br />
+
+                <ng-template #add>
+                    <app-editor *ngIf="!edit" (output)="updateFormData($event)" [id]="'job-editor'" [importArticleSubscription]="true"></app-editor>
+                </ng-template>
+
+                <ng-select placeholder="Select Company" formControlName="company">
+                    <ng-option *ngFor="let cName of allCompanies" [value]="cName._id">
+                        {{ cName?.name }}
+                    </ng-option>
+                </ng-select>
+
+                <ng-select placeholder="Select Cities" [addTag]="addCitiesFn" [items]="citySuggestions" formControlName="cities" [multiple]="true" bindLabel="name">
+                    <!-- <ng-option *ngFor="let cName of allCompanies" [value]="cName._id"> -->
+                        <!-- {{ cName?.name }} -->
+                    <!-- </ng-option> -->
+                </ng-select>
+
+                <h6>Salary Range:</h6>
+                <br />
+
+                <ng5-slider [(value)]="salaryRangeFrom"
+                    [(highValue)]="salaryRangeTo" [options]="options"></ng5-slider>
+                <br />
+                <br />
+
+                <div fxLayout="row" fxLayoutGap="10px">
+                    <button *ngIf="statusFormControl?.value !== 'Published'" type="button" (click)="submit('Drafted')"
+                        [disabled]="jobForm?.invalid" mat-raised-button color="primary">Save</button>
+                    <button type="button" (click)="submit('Published')" [disabled]="jobForm?.invalid"
+                        mat-raised-button
+                        color="primary">{{ statusFormControl?.value === 'Published' ? 'Publish Changes' : 'Publish' }}</button>
+                    <button *ngIf="statusFormControl?.value === 'Published'" type="button"
+                        (click)="submit('Unpublished')" [disabled]="jobForm?.invalid" mat-raised-button
+                        color="primary">{{ 'Unpublish' }}</button>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

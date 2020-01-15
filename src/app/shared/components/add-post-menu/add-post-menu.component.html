@@ -26,38 +26,33 @@
 
 
   <!-- Add Interview Assignment -->
-  <button mat-menu-item [routerLink]="['/', 'post', 'add-interview']"
-    [queryParams]="{type: 'interview'}">
+  <button mat-menu-item [routerLink]="['/', 'post', 'add-interview']" [queryParams]="{type: 'interview'}">
     <i style="font-size: 1.7rem !important;" [class]="'vertical-align-middle fal fa-' + icons.interview + ' fa-fw'"></i>
     <span> Interview</span>
   </button>
 
   <!-- Add Requirements -->
-  <button mat-menu-item [routerLink]="['/', 'post', 'add-requirement']"
-    [queryParams]="{type: 'requirement'}">
+  <button mat-menu-item [routerLink]="['/', 'post', 'add-requirement']" [queryParams]="{type: 'requirement'}">
     <i style="font-size: 1.7rem !important;"
       [class]="'vertical-align-middle fal fa-' + icons.requirement + ' fa-fw'"></i>
     <span> Requirements</span>
   </button>
 
   <!-- Add Testings -->
-  <button mat-menu-item [routerLink]="['/', 'post', 'add-testing']"
-    [queryParams]="{type: 'testing'}">
+  <button mat-menu-item [routerLink]="['/', 'post', 'add-testing']" [queryParams]="{type: 'testing'}">
     <i style="font-size: 1.7rem !important;" [class]="'vertical-align-middle fal fa-' + icons.testing + ' fa-fw'"></i>
     <span> Testing Report</span>
   </button>
 
 
   <!-- Add How To Docs -->
-  <button mat-menu-item [routerLink]="['/', 'post', 'add-howtodoc']"
-    [queryParams]="{type: 'howtodoc'}">
+  <button mat-menu-item [routerLink]="['/', 'post', 'add-howtodoc']" [queryParams]="{type: 'howtodoc'}">
     <i style="font-size: 1.7rem !important;" [class]="'vertical-align-middle fal fa-' + icons.howtodoc + ' fa-fw'"></i>
     <span> How-To-Guide</span>
   </button>
 
   <!-- Add Designs -->
-  <button mat-menu-item [routerLink]="['/', 'post', 'add-design']"
-    [queryParams]="{type: 'design'}">
+  <button mat-menu-item [routerLink]="['/', 'post', 'add-design']" [queryParams]="{type: 'design'}">
     <i style="font-size: 1.7rem !important;" [class]="'vertical-align-middle fal fa-' + icons.design + ' fa-fw'"></i>
     <span> Design</span>
   </button>
@@ -75,8 +70,7 @@
   </button>
 
   <!-- Add Team Skills -->
-  <button mat-menu-item [routerLink]="['/', 'post', 'add-teamskill']"
-    [queryParams]="{type: 'team-skill'}">
+  <button mat-menu-item [routerLink]="['/', 'post', 'add-teamskill']" [queryParams]="{type: 'team-skill'}">
     <i style="font-size: 1.7rem !important;"
       [class]="'vertical-align-middle fal fa-' + icons['team-skill'] + ' fa-fw'"></i>
     <span> Team Skills</span>
@@ -87,5 +81,12 @@
     <i style="font-size: 1.7rem !important;"
       [class]="'vertical-align-middle fal fa-' + icons['dream-job'] + ' fa-fw'"></i>
     <span> Dreamjob</span>
+  </button>
+
+  <!-- Add Job -->
+  <button mat-menu-item [routerLink]="['/', 'post', 'add-job']">
+    <i style="font-size: 1.7rem !important;"
+      [class]="'vertical-align-middle fal fa-' + icons['dream-job'] + ' fa-fw'"></i>
+    <span> Job</span>
   </button>
 </mat-menu>

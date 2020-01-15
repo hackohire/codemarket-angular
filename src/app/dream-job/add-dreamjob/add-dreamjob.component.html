@@ -25,9 +25,6 @@
                 </ng-template>
 
                 <ng-select placeholder="Select Dream Companies" [items]="allCompanies" formControlName="companies" [multiple]="true" bindLabel="name">
-                    <!-- <ng-option *ngFor="let cName of allCompanies" [value]="cName._id"> -->
-                        <!-- {{ cName?.name }} -->
-                    <!-- </ng-option> -->
                 </ng-select>
 
                 <ng-select placeholder="Select Cities" [addTag]="addCitiesFn" [items]="citySuggestions" formControlName="cities" [multiple]="true" bindLabel="name">

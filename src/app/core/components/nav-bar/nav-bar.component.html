@@ -149,12 +149,20 @@
       <div fxFlex></div>
       <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'dashboard', 'company-list']"
         [queryParams]="{all: true}">
-        <i style="font-size: 1.0rem !important;" class="vertical-align-middle fal fa-building fa-fw"></i>
+        <!-- <i style="font-size: 1.0rem !important;" class="vertical-align-middle fal fa-building fa-fw"></i> -->
 
         <div class="line-height-initial" [fxHide.xs]="true"> Business </div>
       </a>
       <!-- <app-add-post-menu style="color: black;"></app-add-post-menu> -->
       <app-software-dev-menu style="color: black;"></app-software-dev-menu>
+      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'dashboard', 'company-list']"
+        [queryParams]="{all: true}">
+      <div class="line-height-initial" [fxHide.xs]="true"> About </div>
+      </a>
+      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'dashboard', 'company-list']"
+        [queryParams]="{all: true}">
+      <div class="line-height-initial" [fxHide.xs]="true"> Membership </div>
+    </a>
 
       <!-- <a mat-button routerLinkActive="mat-primary"
         [routerLink]="['/', 'dashboard', 'company-list']" [queryParams]="{all: true}">

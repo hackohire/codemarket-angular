@@ -17,10 +17,6 @@ const companyRoutes: Routes = [
     data: { noReuse: true },
     children: [
       {
-        path: ':companyId',
-        component: CompanyDetailsComponent
-      },
-      {
         path: 'company-list',
         component: CompaniesListComponent
       },
@@ -28,6 +24,10 @@ const companyRoutes: Routes = [
         path: 'add-company',
         component: AddCompanyComponent,
         canActivateChild: [AuthGuard]
+      },
+      {
+        path: ':companyId',
+        component: CompanyDetailsComponent
       },
       {
         path: 'edit-company/:companyId',
@@ -38,7 +38,7 @@ const companyRoutes: Routes = [
 ];
 
 @NgModule({
-  declarations: [CompaniesComponent, AddCompanyComponent, CompanyDetailsComponent],
+  declarations: [CompaniesComponent, CompanyDetailsComponent, AddCompanyComponent],
   imports: [
     CommonModule,
     SharedModule,

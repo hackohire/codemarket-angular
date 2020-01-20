@@ -223,6 +223,14 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
+    path: 'dream-job/:slug',
+    loadChildren: () => import('./dream-job/dream-job-details/dream-job-details.module').then(module => module.DreamJobDetailsModule),
+    resolve: { seo: PostDataResolver },
+    data: { noReuse: true, setPostMeta: true },
+    // outlet: 'main',
+    pathMatch: 'full'
+  },
+  {
     path: 'company/:companyId',
     loadChildren: () => import('./companies/companies.module').then(module => module.CompaniesModule),
     data: { noReuse: true, setPostMeta: true },

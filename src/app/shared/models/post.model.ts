@@ -4,6 +4,7 @@ import { Tag } from './product.model';
 import { PostStatus } from './poststatus.enum';
 import { City } from './city.model';
 import { Company } from './company.model';
+import { Comment } from './comment.model';
 
 interface Support {
     time: number;
@@ -38,4 +39,7 @@ export interface Post {
     salaryRangeTo?: number;
     jobProfile?: string;
     timeline?: number;
+
+    likeCount?: number;
+    comments?: Comment[];
 }

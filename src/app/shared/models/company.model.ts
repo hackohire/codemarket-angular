@@ -30,7 +30,7 @@ export interface Company {
     updatedAt?: string;
     cities?: City[];
     location?: Location;
-    cover: string;
+    cover?: string;
     posts?: CompanyPost[];
 }
 

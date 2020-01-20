@@ -174,12 +174,12 @@ export class PostService {
     );
   }
 
-  getAllPosts(pageOptions, type): Observable<Post[]> {
+  getAllPosts(pageOptions, type, referencePostId = ''): Observable<Post[]> {
     return this.apollo.query(
       {
         query: gql`
-          query getAllPosts($pageOptions: PageOptionsInput, $type: String) {
-            getAllPosts(pageOptions: $pageOptions, type: $type) {
+          query getAllPosts($pageOptions: PageOptionsInput, $type: String, $referencePostId: String) {
+            getAllPosts(pageOptions: $pageOptions, type: $type, referencePostId: $referencePostId) {
               posts {
                 ...Product
               }
@@ -190,7 +190,8 @@ export class PostService {
         `,
         variables: {
           pageOptions,
-          type: type ? type : ''
+          type: type ? type : '',
+          referencePostId
         },
         fetchPolicy: 'no-cache'
       }
@@ -204,11 +205,19 @@ export class PostService {
   redirectToPostDetails(post, setSelectedPost?: boolean): void {
     // this.store.dispatch(SetSelectedPost({ post: null }));
 
-    this.router.navigate(['/',
+    if (post.type === 'dream-job') {
+      this.redirectToDreamJobDetails(post);
+    } else {
+      this.router.navigate(['/',
       post.type === 'product' ? 'product' : 'post',
       post.slug ? post.slug : ''
     ],
       { queryParams: { type: post.type } });
+    }
+  }
+
+  redirectToDreamJobDetails(dreamJob): void {
+    this.router.navigate(['/', 'dream-job', dreamJob.slug]);
   }
 
   editPost(post): void {

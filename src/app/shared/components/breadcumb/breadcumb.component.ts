@@ -38,6 +38,7 @@ export class BreadcumbComponent implements OnInit {
       .then(res => res.json())
       .then(h => {
         console.log(h.contentHtml);
+        h.contentHtml += `<b>Source: </b><a target="_blank" href="${this.articleLink.value}">${this.articleLink.value}</a>`
         this.postService.contentFromAnotherArticle.next(h.contentHtml);
       })
   }

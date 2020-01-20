@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { appConstants } from '../../constants/app_constants';
+import { MatDialog } from '@angular/material/dialog';
+import { AddJobComponent } from '../../../job/add-job/add-job.component';
 
 @Component({
   selector: 'app-add-post-menu',
@@ -7,11 +9,27 @@ import { appConstants } from '../../constants/app_constants';
   styleUrls: ['./add-post-menu.component.scss']
 })
 export class AddPostMenuComponent implements OnInit {
-  constructor() { }
+  constructor(private dialog: MatDialog) { }
 
   icons = appConstants.icons;
 
   ngOnInit() {
+  }
+
+  openAddJobDialog(): void {
+    const dialogRef = this.dialog.open(AddJobComponent, {
+      width: '630px',
+      height: '550px',
+      maxHeight: '700px',
+      panelClass: 'no-padding',
+      data: null,
+      // disableClose: true
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      // this.animal = result;
+    });
   }
 
 }

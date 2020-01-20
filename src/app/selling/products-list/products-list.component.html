@@ -286,87 +286,9 @@
 
                 <!-- <div class="width-wrapper"> -->
                 <div class="item-grid pen-grid item-grid-large">
-                    <article class="single-post single-item" *ngFor="let p of dataSource?.data">
-                        <header class="header">
-                            <a [routerLink]="['/', 'dashboard', 'profile', p?.createdBy?._id ]"
-                                class="authorAvatar">
-                                <img [src]="p?.createdBy?.avatar ? ((s3FilesBucketURL + p.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar"
-                                    alt="Profile image for Danielle" class="user-avatar" width="40" height="40"></a>
-                            <div class="titleAndAuthor">
-                                <address class="author" style="margin-bottom: 0;"><a
-                                        [routerLink]="['/', 'dashboard', 'profile', p?.createdBy?._id ]"
-                                        class="authorName">{{p?.createdBy?.name}}</a></address>
-                                <p>{{p?.createdBy?.currentJobDetails?.jobProfile ? p?.createdBy?.currentJobDetails?.jobProfile : '-'}}
-                                </p>
-                            </div>
-                            <div
-                                class="action-menu ItemActions_menu-114wt ItemActions_menuSmall-12vVp ActionMenu_menu-2K9wU">
-                                {{fromNow(p?.createdAt)}}
-                            </div>
-                        </header>
-                        <div class="single-title-and-excerpt">
-
-                            <!-- Post Title -->
-                            <h2 class="post-title">
-                                <a style="display: inline-block;"
-                                    (click)="postService?.redirectToPostDetails(p)">{{p?.name}}</a>
-
-                                <!-- Post Actions -->
-                                <span style="float: right;" *ngIf="p?.createdBy?._id === auth?.loggedInUser?._id">
-                                    <button mat-icon-button [matMenuTriggerFor]="optionsMenu"
-                                        aria-label="Example icon-button with a menu">
-                                        <mat-icon>more_horiz</mat-icon>
-                                    </button>
-                                    <mat-menu #optionsMenu="matMenu">
-                                        <button mat-menu-item (click)="postService?.editPost(p)">
-                                            <mat-icon>edit</mat-icon>
-                                            <span>Edit</span>
-                                        </button>
-                                        <button mat-menu-item>
-                                            <mat-icon>delete</mat-icon>
-                                            <span>Delete</span>
-                                        </button>
-                                    </mat-menu>
-                                </span>
-                            </h2>
-
-                            <!-- Post Content -->
-                            <div class="item-content">
-                                <app-editor [readOnly]="true" [editorStyle]="{border: 'none', padding: '10px 0'}"
-                                    [data]="p?.description" [id]="p?._id"></app-editor>
-                            </div>
-
-                            <!-- Post Tags -->
-                            <div>
-                                <span *ngFor="let t of p?.tags"
-                                    style="background: rgba(6, 116, 236, 0.1); display: inline-block;
-                                padding: 0 15px; line-height: 32px;
-                                color: #0674ec; margin-right: 10px;font-size: 15px;font-weight: 200;-webkit-border-radius: 100px;border-radius: 100px;">{{t?.name}}</span>
-                            </div>
-                            <!-- <div class="item-content item-content-long">
-                    <p>When was the last time you wrote vanilla CSS? As a front end developer, it's hard to imagine a
-                        world
-                        without CSS preprocessors and all of the functionality they provide. They give us features like
-                        variables and functions and organizational benefits like partial includes and selector nesting.
-                    </p>
-                    <p>As the most popular CSS preprocessor out there, <a href="http://sass-lang.com/">Sass</a> just
-                        makes CSS
-                        <em>better</em>... but most developers barely even scratch the surface of what it can do.</p>
-                    <p>One of the most widely used features of Sass, and...</p>
-                </div> -->
-                        </div>
-                        <footer class="stats">
-                            <a class="single-stat invisible-button loves loves heart-button loved-0">
-                                <mat-icon style="color: crimson;" class="vertical-align-middle">favorite</mat-icon>
-                                <span class="count"> {{p?.likeCount ? p?.likeCount : 0}}</span>
-                            </a>
-                            <a class="single-stat comments"
-                                href="https://codepen.io/hidanielle/post/level-up-your-sass-with-the-ampersand">
-                                <mat-icon style="color: #0674ec;" class="vertical-align-middle">comment</mat-icon>
-                                <span class="count"> {{p?.comments?.length}}</span>
-                            </a>
-                        </footer>
-                    </article>
+                    <!-- <ng-container > -->
+                    <app-brief-post style="width: 100%;" [p]="p" *ngFor="let p of dataSource?.data"></app-brief-post>
+                    <!-- </ng-container> -->
                 </div>
             </div>
             <!-- </div> -->

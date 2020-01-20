@@ -18,7 +18,8 @@ import {
   MatAutocompleteModule,
   MatRadioModule,
   MatPaginatorModule,
-  MatExpansionModule
+  MatExpansionModule,
+  MatSelectModule
 } from '@angular/material';
 import {MatTableModule} from '@angular/material/table';
 
@@ -45,7 +46,8 @@ import {MatTableModule} from '@angular/material/table';
     MatAutocompleteModule,
     MatRadioModule,
     MatPaginatorModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatSelectModule
   ],
   exports: [
     MatFormFieldModule,
@@ -67,7 +69,8 @@ import {MatTableModule} from '@angular/material/table';
     MatAutocompleteModule,
     MatRadioModule,
     MatPaginatorModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatSelectModule
   ]
 })
 export class MaterialModule {}

@@ -71,14 +71,14 @@ export class ProductsListComponent implements OnInit, OnDestroy, AfterViewInit {
 
 
     this.breadcumb = {
-      title: 'Code Q&A',
+      title: 'CAREER AND BUSINESS GOALS',
       path: [
         {
           name: 'Dashboard',
           pathString: '/'
         },
         {
-          name: 'bugfixes'
+          name: 'Be in Control of Your Career & Business'
         }
       ]
     };

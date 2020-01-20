@@ -10,75 +10,58 @@
                     <input type="text" matInput formControlName="name" placeholder="Name">
                 </mat-form-field>
 
-                <ng-select placeholder="Select Company Type" formControlName="type">
-                    <ng-option *ngFor="let cName of companyTypes" [value]="cName">
-                        {{ cName }}
-                    </ng-option>
-                </ng-select>
+                <!-- <ng-container *ngIf="!data"> -->
 
-                <!-- Location Details -->
-                <!-- <pre>{{locationFormGroup?.value | json}}</pre> -->
-                <br/>
-                <h6>Enter Company Location:</h6>
-                <!-- <br /> -->
-                <mat-form-field class="field-full-width">
-                    <input type="text" matInput placeholder="Search Location" #searchLocation>
-                    <mat-icon matSuffix (click)="locationService?.setCurrentLocation(locationFormGroup)">my_location</mat-icon>
-                </mat-form-field>
+                    <br />
 
+                    <ng-select placeholder="Select Company Type" formControlName="type">
+                        <ng-option *ngFor="let cName of companyTypes" [value]="cName">
+                            {{ cName }}
+                        </ng-option>
+                    </ng-select>
 
-                <div *ngIf="locationFormGroup.get('latitude').value || locationFormGroup.get('longitude').value">
-                    <agm-map [latitude]="locationFormGroup.get('latitude').value" [longitude]="locationFormGroup.get('longitude').value" [zoom]="zoom">
-                        <agm-marker [latitude]="locationFormGroup.get('latitude').value" [longitude]="locationFormGroup.get('longitude').value" [markerDraggable]="true"
-                            (dragEnd)="locationService?.markerDragEnd($event, locationFormGroup)"></agm-marker>
-                    </agm-map>
-                </div>
-<!-- 
-                <h5>Address: {{address}}</h5>
-                <div>Latitude: {{latitude}}</div>
-                <div>Longitude: {{longitude}}</div> -->
+                    <h6>Enter Company Location:</h6>
+                    <mat-form-field class="field-full-width">
+                        <input type="text" matInput placeholder="Search Location" #searchLocation>
+                        <mat-icon matSuffix (click)="locationService?.setCurrentLocation(locationFormGroup)">my_location
+                        </mat-icon>
+                    </mat-form-field>
 
-                <mat-form-field class="field-full-width" [formGroupName]="'location'">
-                    <textarea type="text" matInput formControlName="address" placeholder="Address"></textarea>
-                    <!-- <mat-icon matSuffix>location</mat-icon> -->
-                </mat-form-field>
+                    <div *ngIf="locationFormGroup.get('latitude').value || locationFormGroup.get('longitude').value">
+                        <agm-map [latitude]="locationFormGroup.get('latitude').value"
+                            [longitude]="locationFormGroup.get('longitude').value" [zoom]="zoom">
+                            <agm-marker [latitude]="locationFormGroup.get('latitude').value"
+                                [longitude]="locationFormGroup.get('longitude').value" [markerDraggable]="true"
+                                (dragEnd)="locationService?.markerDragEnd($event, locationFormGroup)"></agm-marker>
+                        </agm-map>
+                    </div>
 
+                    <mat-form-field class="field-full-width" [formGroupName]="'location'">
+                        <textarea type="text" matInput formControlName="address" placeholder="Address"></textarea>
+                        <!-- <mat-icon matSuffix>location</mat-icon> -->
+                    </mat-form-field>
 
-                <mat-form-field class="field-full-width">
-                    <mat-chip-list #citiesList>
-                        <mat-chip *ngFor="let city of citiesFormControl?.value; let i = index;" [selectable]="selectable"
-                            [removable]="true" (removed)="remove(i)">
-                            {{city?.name}}
-                            <mat-icon matChipRemove>cancel</mat-icon>
-                        </mat-chip>
-                        <input #searchInput [formControl]="searchText" [matAutocomplete]="auto"
-                            placeholder="Add Cities" [matChipInputFor]="citiesList"
-                            [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
-                            (matChipInputTokenEnd)="addTech($event)">
-                        <mat-icon matSuffix>location_city</mat-icon>
-                    </mat-chip-list>
-                    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-                        <mat-option *ngFor="let city of citySuggestions" [value]="city">
-                            {{city?.name}}
-                        </mat-option>
-                    </mat-autocomplete>
-                </mat-form-field>
+                    <ng-select placeholder="Select Cities" [addTag]="addCitiesFn" [items]="allCities"
+                        formControlName="cities" [multiple]="true" bindLabel="name">
+                    </ng-select>
 
-                <br />
+                    <br />
+                    <h6>Description</h6>
+                    <br />
 
-                
-                <h6>Description</h6>
-                <br />
-
-                <app-editor *ngIf="descriptionFormControl?.value && edit; else add" (output)="descriptionFormControl.setValue($event)"
-                    [data]="descriptionFormControl?.value" [id]="'edit-company-editor'"></app-editor>
+                    <app-editor *ngIf="descriptionFormControl?.value && edit; else add"
+                        (output)="descriptionFormControl.setValue($event)" [data]="descriptionFormControl?.value"
+                        [id]="'edit-company-editor'"></app-editor>
 
 
-                <ng-template #add>
-                    <app-editor *ngIf="!edit" (output)="descriptionFormControl.setValue($event)" [id]="'company-editor'"></app-editor>
-                </ng-template>
+                    <ng-template #add>
+                        <app-editor *ngIf="!edit" (output)="descriptionFormControl.setValue($event)"
+                            [id]="'company-editor'"></app-editor>
+                    </ng-template>
 
-                <br />
+                    <br />
+
+                <!-- </ng-container> -->
                 <!-- <h6>Ideas:</h6>
                 <br />
 
@@ -98,16 +81,17 @@
                     [data]="ideasFormControl?.value" [id]="'edit-questions-editor'" [placeholder]="'Add Questions!'"></app-editor> -->
 
 
-                <ng-template #addQuestions>
+                <!-- <ng-template #addQuestions>
                     <app-editor *ngIf="!edit" (output)="questionsFormControl.setValue($event)" [id]="'questions-editor'" [placeholder]="'Add Questions!'"></app-editor>
-                </ng-template>
+                </ng-template> -->
 
 
 
-                <br/>
+                <br />
 
                 <div fxLayout="row" fxLayoutGap="10px">
-                    <button type="button" (click)="submit('Published')" [disabled]="companyForm?.invalid" mat-raised-button color="primary">{{ idFromControl?.value ? 'Update' : 'Save' }}</button>
+                    <button type="button" (click)="submit('Published')" [disabled]="companyForm?.invalid"
+                        mat-raised-button color="primary">{{ idFromControl?.value ? 'Update' : 'Save' }}</button>
                 </div>
 
             </div>

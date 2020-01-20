@@ -89,7 +89,7 @@ export class CoreModule {
     const wsLink = isPlatformBrowser(this._platformId) ? new WebSocketLink(wsClient) : null;
 
     // Apollo Server Configuration
-    const httpCodemarket = httpLink.create({ uri: environment.graphql_url });
+    const httpailocalsummit = httpLink.create({ uri: environment.graphql_url });
 
     let token = '';
 
@@ -139,10 +139,10 @@ export class CoreModule {
         return def.kind === 'OperationDefinition' && def.operation === 'subscription';
       },
       authLink.concat(wsLink).concat(cleanTypeName),
-      authLink.concat(cleanTypeName).concat(httpCodemarket),
-    ) : authLink.concat(cleanTypeName).concat(httpCodemarket);
+      authLink.concat(cleanTypeName).concat(httpailocalsummit),
+    ) : authLink.concat(cleanTypeName).concat(httpailocalsummit);
 
-    /** Codemarket Apollo Client */
+    /** ailocalsummit Apollo Client */
     apollo.create({
       link,
       cache: new InMemoryCache({
@@ -179,7 +179,7 @@ export class CoreModule {
       }),
 
     });
-    /** Codemarket Apollo Client ends here */
+    /** ailocalsummit Apollo Client ends here */
 
     /** Platform Apollo Client */
     // apollo.createNamed(

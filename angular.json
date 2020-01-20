@@ -75,18 +75,18 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
             "port": 4800,
-            "browserTarget": "codemarket:build"
+            "browserTarget": "ailocalsummit:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "codemarket:build:production"
+              "browserTarget": "ailocalsummit:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "codemarket:build"
+            "browserTarget": "ailocalsummit:build"
           }
         },
         "test": {
@@ -124,11 +124,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "codemarket:serve"
+            "devServerTarget": "ailocalsummit:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "codemarket:serve:production"
+              "devServerTarget": "ailocalsummit:serve:production"
             }
           }
         },
@@ -166,5 +166,5 @@
       }
     }
   },
-  "defaultProject": "codemarket"
+  "defaultProject": "ailocalsummit"
 }

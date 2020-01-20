@@ -68,7 +68,7 @@ export class SeoService {
       this.setData(seoSocialShareData);
     } else {
       const jsonLd = this.getjsonDLObject('Website', {
-        name: 'Codemarket',
+        name: 'ailocalsummit',
         url: isPlatformBrowser(this.platformId) ? window.location.href : ''
       });
       this.setJsonLDData(jsonLd);

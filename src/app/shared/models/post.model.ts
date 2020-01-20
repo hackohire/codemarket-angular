@@ -33,7 +33,9 @@ export interface Post {
     cities?: City[];
     company?: Company & string;
     companies?: [Company & string];
+    salaryCurrency?: String;
     salaryRangeFrom?: number;
     salaryRangeTo?: number;
     jobProfile?: string;
+    timeline?: number;
 }

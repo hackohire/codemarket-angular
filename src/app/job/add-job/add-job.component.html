@@ -12,35 +12,37 @@
                 <ng-select placeholder="Roles" formControlName="jobProfile" [addTag]="addTagFn" [multiple]="true">
                 </ng-select>
 
-                <h6>Job Description:</h6>
-                <br />
-
-                <app-editor *ngIf="descriptionFormControl?.value && edit; else add" (output)="updateFormData($event)"
+                <app-editor [placeholder]="'Job Description:'" *ngIf="descriptionFormControl?.value && edit; else add" (output)="updateFormData($event)"
                     [data]="descriptionFormControl?.value" [id]="'edit-job-editor'" [importArticleSubscription]="true"></app-editor>
 
                 <br />
 
                 <ng-template #add>
-                    <app-editor *ngIf="!edit" (output)="updateFormData($event)" [id]="'job-editor'" [importArticleSubscription]="true"></app-editor>
+                    <app-editor [placeholder]="'Job Description:'" *ngIf="!edit" (output)="updateFormData($event)" [id]="'job-editor'" [importArticleSubscription]="true"></app-editor>
                 </ng-template>
 
-                <ng-select placeholder="Select Company" formControlName="company">
-                    <ng-option *ngFor="let cName of allCompanies" [value]="cName._id">
-                        {{ cName?.name }}
-                    </ng-option>
-                </ng-select>
+                <div class="row">
+                    <ng-select class="col-md-6" [addTag]="addCompany" placeholder="Select Company" formControlName="company" bindLabel="name">
+                        <ng-option *ngFor="let cName of allCompanies" [value]="cName._id">
+                            {{ cName?.name }}
+                        </ng-option>
+                    </ng-select>
+    
+                    <ng-select class="col-md-6" placeholder="Select Cities" [addTag]="addCitiesFn" [items]="citySuggestions" formControlName="cities" [multiple]="true" bindLabel="name">
+                    </ng-select>
+                </div>
 
-                <ng-select placeholder="Select Cities" [addTag]="addCitiesFn" [items]="citySuggestions" formControlName="cities" [multiple]="true" bindLabel="name">
-                    <!-- <ng-option *ngFor="let cName of allCompanies" [value]="cName._id"> -->
-                        <!-- {{ cName?.name }} -->
-                    <!-- </ng-option> -->
-                </ng-select>
+                <mat-form-field appearance="outline">
+                    <mat-label>Expected Salary(Yearly)(In Thousands)</mat-label>
+                    <!-- <mat-hint matSuffix>K</mat-hint> -->
+                    <input type="number" matInput formControlName="salaryRangeFrom" placeholder="Expected Salary">
+                    <mat-select matSuffix style="width: 35px; vertical-align: super;" formControlName="salaryCurrency">
+                        <mat-option value="$">$</mat-option>
+                        <mat-option value="€">€</mat-option>
+                        <mat-option value="₹">₹</mat-option>
+                    </mat-select>
+                </mat-form-field>
 
-                <h6>Salary Range:</h6>
-                <br />
-
-                <ng5-slider [(value)]="salaryRangeFrom"
-                    [(highValue)]="salaryRangeTo" [options]="options"></ng5-slider>
                 <br />
                 <br />
 
@@ -53,6 +55,9 @@
                     <button *ngIf="statusFormControl?.value === 'Published'" type="button"
                         (click)="submit('Unpublished')" [disabled]="jobForm?.invalid" mat-raised-button
                         color="primary">{{ 'Unpublish' }}</button>
+                    <button *ngIf="data" type="button"
+                        (click)="dialogRef.close(null)" mat-raised-button
+                        color="warn">{{ 'Cancel' }}</button>
                 </div>
 
             </div>

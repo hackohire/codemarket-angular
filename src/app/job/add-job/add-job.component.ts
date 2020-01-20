@@ -1,10 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject, OnDestroy, Injector } from '@angular/core';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { BreadCumb } from '../../shared/models/bredcumb.model';
 import { FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 import { Subscription, of } from 'rxjs';
 import { City } from '../../shared/models/city.model';
-import { MatAutocomplete } from '@angular/material';
+import { MatAutocomplete } from '@angular/material/autocomplete';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { AuthService } from '../../core/services/auth.service';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../core/store/state/app.state';
@@ -17,7 +18,8 @@ import { tap, switchMap } from 'rxjs/operators';
 import { Post } from '../../shared/models/post.model';
 import { PostStatus } from '../../shared/models/poststatus.enum';
 import { PostType } from '../../shared/models/post-types.enum';
-import { Options } from 'ng5-slider/options';
+import { PostService } from '../../shared/services/post.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-add-job',
@@ -25,22 +27,11 @@ import { Options } from 'ng5-slider/options';
   styleUrls: ['./add-job.component.scss'],
   providers: [CompanyService]
 })
-export class AddJobComponent implements OnInit {
+export class AddJobComponent implements OnInit, OnDestroy {
 
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   breadcumb: BreadCumb;
   jobForm: FormGroup;
-  options: Options = {
-    floor: 0,
-    ceil: 300,
-    step: 10,
-    // showTicks: true,
-    draggableRange: true,
-    translate: (value: number): string => {
-      return '$' + value + ' k';
-    }
-  };
-
   allCompanies = [];
 
   edit: boolean;
@@ -77,6 +68,9 @@ export class AddJobComponent implements OnInit {
   salaryRangeFrom = 30;
   salaryRangeTo = 50;
 
+  public dialogRef = null;
+  public data;
+
   @ViewChild('auto', {static: false}) matAutocomplete: MatAutocomplete;
 
   constructor(
@@ -84,8 +78,13 @@ export class AddJobComponent implements OnInit {
     private store: Store<AppState>,
     private activatedRoute: ActivatedRoute,
     private formService: FormService,
-    private companyService: CompanyService
+    private companyService: CompanyService,
+    private postService: PostService,
+    private injector: Injector,
   ) {
+    this.dialogRef = this.injector.get(MatDialogRef, null);
+    this.data = this.injector.get(MAT_DIALOG_DATA, null);
+
     this.breadcumb = {
       title: 'Add Job Details',
       path: [
@@ -106,7 +105,7 @@ export class AddJobComponent implements OnInit {
      * get the job by fetching id from the params
      */
 
-    if (this.activatedRoute.snapshot.parent.routeConfig.path === 'add-job') {
+    if (this.activatedRoute.snapshot.parent && this.activatedRoute.snapshot.parent.routeConfig && this.activatedRoute.snapshot.parent.routeConfig.path === 'add-job' || (this.data && this.data.referencePostId)) {
       this.store.dispatch(SetSelectedPost({ post: null }));
       this.jobFormInitialization(null);
     } else {
@@ -135,23 +134,31 @@ export class AddJobComponent implements OnInit {
     // this.jobFormInitialization();
   }
 
+  ngOnDestroy() {
+    this.store.dispatch(SetSelectedPost({post: null}));
+  }
+
   ngOnInit() {}
 
   jobFormInitialization(i: Post) {
-    console.log(i && i.companies ? i.companies : []);
     this.jobForm = new FormGroup({
       name: new FormControl(i && i.name ? i.name : '', Validators.required),
       description: new FormControl(i && i.description ? i.description : ''),
       jobProfile: new FormControl(i && i.jobProfile ? i.jobProfile : []),
-      company: new FormControl(i && i.company ? i.company._id : ''),
+      company: new FormControl(i && i.company ? i.company._id : '', Validators.required),
       status: new FormControl(i && i.status ? i.status : PostStatus.Drafted),
       _id: new FormControl(i && i._id ? i._id : ''),
       cities: new FormControl(i && i.cities && i.cities.length ? i.cities : []),
+      salaryCurrency: new FormControl(i && i.salaryCurrency ? i.salaryCurrency : '$'),
       salaryRangeFrom: new FormControl(i && i.salaryRangeFrom ? i.salaryRangeFrom : 10),
       salaryRangeTo: new FormControl(i && i.salaryRangeTo ? i.salaryRangeTo : 30),
       type: new FormControl(PostType.Job),
       createdBy: new FormControl(i && i.createdBy && i.createdBy._id ? i.createdBy._id : ''),
     });
+
+    if(this.data && this.data.referencePostId) {
+      this.jobForm.addControl('referencePostId', new FormControl(this.data.referencePostId));
+    }
 
     this.salaryRangeFrom = this.jobForm.get('salaryRangeFrom').value;
     this.salaryRangeTo = this.jobForm.get('salaryRangeTo').value;
@@ -186,7 +193,18 @@ export class AddJobComponent implements OnInit {
     if (this.idFromControl && !this.idFromControl.value) {
       this.jobForm.removeControl('_id');
       const jobValue = {...this.jobForm.value};
-      this.store.dispatch(AddPost({post: jobValue}));
+      jobValue.company = jobValue && jobValue.company ? jobValue.company._id : '';
+      if (this.data && this.data.referencePostId) {
+        this.postService.addPost(jobValue).subscribe((p) => {
+          if (p) {
+            Swal.fire(`${p.type} has been ${p.status} Successfully`, '', 'success');
+            this.dialogRef.close(p);
+            this.store.dispatch(SetSelectedPost({post: null}));
+          }
+        })
+      } else {
+        this.store.dispatch(AddPost({post: jobValue}));
+      }
     } else {
       const jobValue = {...this.jobForm.value};
       this.store.dispatch(UpdatePost({post: jobValue}));
@@ -204,6 +222,18 @@ export class AddJobComponent implements OnInit {
 
   addCitiesFn(name) {
     return {name};
+  }
+
+  addCompany = (name: string) => {
+    if (name) {
+      return new Promise((resolve, reject) => {
+        this.companyService.addCompany({name, createdBy: this.authService.loggedInUser._id}).subscribe(c => {
+          this.allCompanies.unshift(c);
+          this.allCompanies = this.allCompanies.slice();
+          return resolve(c.name);
+        })
+      })
+    }
   }
 
 }

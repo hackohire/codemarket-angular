@@ -30,6 +30,9 @@ import { AgmCoreModule } from '@agm/core';
 import { environment } from '../../environments/environment';
 import { CommentService } from './services/comment.service';
 import { ToastrModule } from 'ngx-toastr';
+import { AddJobComponent } from '../job/add-job/add-job.component';
+import { AddCompanyComponent } from '../companies/add-company/add-company.component';
+import { BriefPostComponent } from './components/brief-post/brief-post.component';
 
 
 export function hljsLanguages() {
@@ -40,7 +43,7 @@ export function hljsLanguages() {
   ];
 }
 @NgModule({
-  declarations: [BreadcumbComponent, EditorComponent, CommentComponent, DatatableComponent, SafePipe, LikeDislikeComponent, VideoChatComponent, AddPostMenuComponent, SoftwareDevMenuComponent, CompaniesListComponent],
+  declarations: [BreadcumbComponent, EditorComponent, CommentComponent, DatatableComponent, SafePipe, LikeDislikeComponent, VideoChatComponent, AddPostMenuComponent, SoftwareDevMenuComponent, CompaniesListComponent, AddJobComponent, BriefPostComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -83,6 +86,7 @@ export function hljsLanguages() {
     VideoChatComponent,
     AddPostMenuComponent,
     SoftwareDevMenuComponent,
+    BriefPostComponent,
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
@@ -101,6 +105,7 @@ export function hljsLanguages() {
     AgmCoreModule
   ],
   entryComponents: [
+    AddJobComponent,
     VideoChatComponent
   ],
   providers: [CommentService]

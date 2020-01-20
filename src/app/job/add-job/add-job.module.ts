@@ -14,7 +14,7 @@ const addJobRoutes: Routes = [
 
 
 @NgModule({
-  declarations: [AddJobComponent],
+  declarations: [],
   imports: [
     CommonModule,
     SharedModule,

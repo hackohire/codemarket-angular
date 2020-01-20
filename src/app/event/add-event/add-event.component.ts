@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Inject, PLATFORM_ID, Injector } from '@angular/core';
 import { BreadCumb } from 'src/app/shared/models/bredcumb.model';
 import { FormGroup, FormControl, Validators, FormArray, FormBuilder } from '@angular/forms';
 import { EventTypes } from 'src/app/shared/models/event.model';
@@ -94,6 +94,9 @@ export class AddEventComponent implements OnInit {
   @ViewChild('searchInput', { static: false }) searchInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto', { static: false }) matAutocomplete: MatAutocomplete;
 
+  public dialogRef = null;
+  public data;
+
   constructor(
     private authService: AuthService,
     private store: Store<AppState>,
@@ -105,9 +108,12 @@ export class AddEventComponent implements OnInit {
     private postService: PostService,
     private sweetAlertService: SweetalertService,
     @Inject(PLATFORM_ID) private _platformId: Object,
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    public dialogRef: MatDialogRef<AddEventComponent>,
+    private injector: Injector,
   ) {
+
+    this.dialogRef = this.injector.get(MatDialogRef, null);
+    this.data = this.injector.get(MAT_DIALOG_DATA, null);
+
     this.breadcumb = {
       title: 'Add Event Details',
       path: [

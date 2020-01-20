@@ -1,5 +1,5 @@
 <mat-sidenav-container class="sidenav-container">
-
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Helvetica:300,400,500,700,400italic">
   <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'main'" [opened]="(isHandset$ | async) === false">
     <mat-toolbar>Menu</mat-toolbar>
@@ -64,37 +64,37 @@
   </mat-sidenav>
 
   <mat-sidenav-content>
-    <mat-toolbar style="padding: 10px 0; background-color: rgb(8, 8, 8);">
+    <mat-toolbar style="padding: 10px 0; background-color:transparent;display: none;">
 
       
       
       <!-- Search -->
-      <a mat-button routerLinkActive="mat-primary" (click)="openSearchDialog()">
+      <!-- <a mat-button routerLinkActive="mat-primary" (click)="openSearchDialog()">
         <i style="font-size: 1.0rem !important; color: #ffff00;" class="vertical-align-middle fal fa-search fa-fw"></i>
         <span style="color: #ffffff;" class="line-height-initial" [fxHide.xs]="true"> Search</span>
-      </a>
+      </a> -->
 
       <!-- membership -->
-      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'membership']">
+      <!-- <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'membership']">
         <i style="font-size: 1.0rem !important; color: #ffff00;" class="vertical-align-middle fal fa-id-card-alt fa-fw"></i>
         <span style="color: #ffffff;" class="line-height-initial" [fxHide.xs]="true"> Membership</span>
-      </a>
+      </a> -->
       <!-- Login -->
-      <ng-template #logIn>
+      <!-- <ng-template #logIn>
         <a #lr mat-button (click)="login()" [mdePopoverTriggerFor]="authentication" [mdePopoverTargetAt]="lr"
           mdePopoverTriggerOn="click">
           <i style="font-size: 1.0rem !important; color: #ffff00;" class="vertical-align-middle fal fa-user-circle fa-fw"></i>
           <span style="color: #ffffff;" class="line-height-initial" [fxHide.xs]="true"> Login/Register</span>
         </a>
-      </ng-template>
+      </ng-template> -->
 
-      <mde-popover #authentication="mdePopover" [mdePopoverOverlapTrigger]="false" [mdePopoverCloseOnClick]="false"
+      <!-- <mde-popover #authentication="mdePopover" [mdePopoverOverlapTrigger]="false" [mdePopoverCloseOnClick]="false"
         [mdePopoverArrowOffsetX]="58" mdePopoverArrowColor="#FFFFFF">
         <amplify-authenticator [signUpConfig]="signUpConfig" [usernameAttributes]="'email'"></amplify-authenticator>
-      </mde-popover>
+      </mde-popover> -->
 
       <!-- My Profile -->
-      <button mat-button [matMenuTriggerFor]="userMenu" *ngIf="authService.loggedInUser; else logIn">
+      <!-- <button mat-button [matMenuTriggerFor]="userMenu" *ngIf="authService.loggedInUser; else logIn">
         <a style="padding: 0;" mat-button routerLinkActive="mat-primary" *ngIf="loggedInUser;"
           [routerLink]="['/', 'dashboard', 'my-profile']">
           <i style="font-size: 1.0rem !important; color: #ffff00;" class="vertical-align-middle fal fa-user-circle fa-fw"></i>
@@ -102,30 +102,30 @@
               style="vertical-align: middle; height: 28px;">keyboard_arrow_down</mat-icon>
           </span>
         </a>
-      </button>
+      </button> -->
       <div style="float: right">
         <!-- accelerator -->
-      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'accelerator']">
+      <!-- <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'accelerator']">
         <i style="font-size: 1.0rem !important; color: #00ffff;" class="vertical-align-middle fal fa-rocket fa-fw"></i>
         <span style="color: #ffff00;" class="line-height-initial" [fxHide.xs]="true"> ACCELERATOR</span>
         <i class="fal fa-rocket"></i>
-      </a>
+      </a> -->
 
       </div>
       <mat-menu #userMenu="matMenu" panelClass="menu-width">
         <div class="menu-width">
           <!-- Shopping Cart -->
-          <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'cart']">
+          <!-- <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'cart']">
             <mat-icon>shopping_cart
             </mat-icon> Cart({{cartListLength | async}})
-          </a>
+          </a> -->
 
           <!-- Logout -->
-          <a mat-button (click)="authService?.logout()">
+          <!-- <a mat-button (click)="authService?.logout()">
             <mat-icon>power_settings_new
             </mat-icon>
             Logout
-          </a>
+          </a> -->
         </div>
       </mat-menu>
 
@@ -134,7 +134,7 @@
     <mat-toolbar [ngStyle]="{'padding-bottom': '10px'}">
 
       <!-- Toggle Sidebar Button -->
-      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" style="padding-top:4px;">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
 
@@ -142,49 +142,71 @@
       <!-- <img (click)="redirect()" sizes="(max-width: 282px) 100vw, 282px"
         srcset="../../../../assets/images/logo_qugbvk_c_scalew_200.png 200w, ../../../../assets/images/logo_qugbvk_c_scalew_282.png 282w"
         src="../../../../assets/images/logo_qugbvk_c_scalew_282.png" alt=""> -->
-      <img (click)="redirect()" src="../../../../assets/images/logo.png">
-      <!-- <h2 [routerLink]="['/']">Codemarket</h2> -->
+      <!-- <img (click)="redirect()" src="../../../../assets/images/logo.png"> -->
+      <!-- <div class="row">
+      <div class="col-sm-12">
+        <div class="col-sm-3" style="border: 1px solid #000;"> Hi </div>
+        <div class="col-sm-6"> AL LOCAL SUMMIT </div>
+        <div class="col-sm-3"> Hi </div>
+      </div> 
+     
+      </div>-->
+      <!-- <h2 [routerLink]="['/']">ailocalsummit</h2> -->
 
       <!-- End Items -->
-      <div fxFlex></div>
+      <div fxFlex>
+        <!-- Code for Facebook Confernace Design -->
+      <div class="row">
+        <div class="col-sm-12" style="display: inherit;padding-top:10px;">
+          <div class="col-sm-4" style="color:#616262;
+          font-size:18px;opacity:.6;font-weight: normal;text-align:right;"> May 05 — 06, 2020</div>
+          <div class="col-sm-4" style="color:#616262;
+          font-size:42px;font-weight:500;text-align: center"> AI LOCAL SUMMIT
+          </div>
+          <div class="col-sm-4" style="color:#616262;opacity:.6;
+          font-size: 18px;font-weight: normal;text-align:left;"> San Jose, CA </div>
+        </div>
+       
+        </div></div>
 
+        
       <!-- <app-add-post-menu style="color: black;"></app-add-post-menu> -->
-      <app-software-dev-menu style="color: black;"></app-software-dev-menu>
+      <!-- <app-software-dev-menu style="color: black;"></app-software-dev-menu> -->
 
-      <a mat-button routerLinkActive="mat-primary"
+      <!-- <a mat-button routerLinkActive="mat-primary"
         [routerLink]="['/', 'dashboard', 'company-list']" [queryParams]="{all: true}">
         <i style="font-size: 1.0rem !important;" class="vertical-align-middle fal fa-brain fa-fw"></i>
         
-        <div class="line-height-initial" [fxHide.xs]="true"> ML/AI </div>
-      </a>
+        <div class="line-height-initial" [fxHide.xs]="true"> ML/AI nilesh  </div>
+      </a> -->
 
-      <a mat-button routerLinkActive="mat-primary"
+      <!-- <a mat-button routerLinkActive="mat-primary"
         [routerLink]="['/', 'dashboard', 'company-list']" [queryParams]="{all: true}">
         <i style="font-size: 1.0rem !important;" class="vertical-align-middle fal fa-megaphone fa-fw"></i>
         <div class="line-height-initial" [fxHide.xs]="true"> Marketing </div>
-      </a>
+      </a> -->
 
         
-        <a mat-button routerLinkActive="mat-primary"
+        <!-- <a mat-button routerLinkActive="mat-primary"
           [routerLink]="['/', 'dashboard', 'company-list']" [queryParams]="{all: true}">
           <i style="font-size: 1.0rem !important;" class="vertical-align-middle fal fa-funnel-dollar fa-fw"></i>
           
           <div class="line-height-initial" [fxHide.xs]="true"> Sales </div>
-        </a>
+        </a> -->
        
-        <a mat-button routerLinkActive="mat-primary"
+        <!-- <a mat-button routerLinkActive="mat-primary"
           [routerLink]="['/', 'dashboard', 'company-list']" [queryParams]="{all: true}">
           <i style="font-size: 1.0rem !important;" class="vertical-align-middle fal fa-palette fa-fw"></i>
           
           <div class="line-height-initial" [fxHide.xs]="true"> Designer </div>
-        </a>
+        </a> -->
 
-        <a mat-button routerLinkActive="mat-primary"
+        <!-- <a mat-button routerLinkActive="mat-primary"
           [routerLink]="['/', 'dashboard', 'company-list']" [queryParams]="{all: true}">
           <i style="font-size: 1.0rem !important;" class="vertical-align-middle fal fa-sack-dollar fa-fw"></i>
 
-          <div class="line-height-initial" [fxHide.xs]="true"> Capital </div>
-        </a>
+          <div class="line-height-initial" [fxHide.xs]="true"> San Joe </div>
+        </a> -->
 
       <!-- All Bugfixes -->
       <!-- <a mat-button routerLinkActive="mat-primary"
@@ -201,37 +223,37 @@
       </a>-->
 
       <!-- Companies -->
-      <a mat-button routerLinkActive="mat-primary"
+      <!-- <a mat-button routerLinkActive="mat-primary"
         [routerLink]="['/', 'dashboard', 'company-list']" [queryParams]="{all: true}">
         <i style="font-size: 1.0rem !important;" class="vertical-align-middle fal fa-building fa-fw"></i>
         
         <div class="line-height-initial" [fxHide.xs]="true"> Business </div>
-      </a>
+      </a> -->
       <!-- Startup -->
-      <a mat-button routerLinkActive="mat-primary"
+      <!-- <a mat-button routerLinkActive="mat-primary"
         [routerLink]="['/', 'dashboard', 'company-list']" [queryParams]="{all: true}">
         <i style="font-size: 1.0rem !important;" class="vertical-align-middle fal fa-lightbulb-dollar fa-fw"></i>
         <div class="line-height-initial" [fxHide.xs]="true"> Startup </div>
-      </a>
+      </a> -->
       <!-- All Events -->
-      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'social-impact']">
+      <!-- <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'social-impact']">
         <i style="font-size: 1.0rem !important;" class="vertical-align-middle fal fa-hand-holding-heart fa-fw"></i>
         <div class="line-height-initial" [fxHide.xs]="true"> Non-Profit</div>
-      </a>
+      </a> -->
 
       <!-- Companoies -->
-      <a mat-button routerLinkActive="mat-primary"
+      <!-- <a mat-button routerLinkActive="mat-primary"
         [routerLink]="['/', 'dashboard', 'company-list']" [queryParams]="{all: true}">
         <i style="font-size: 1.0rem !important;" class="vertical-align-middle fal fa-user-crown fa-fw"></i>
         <div class="line-height-initial" [fxHide.xs]="true"> Government</div>
-      </a>
+      </a> -->
 
       <!-- Schools -->
-      <a mat-button routerLinkActive="mat-primary"
+      <!-- <a mat-button routerLinkActive="mat-primary"
         [routerLink]="['/', 'dashboard', 'company-list']" [queryParams]="{all: true}">
         <i style="font-size: 1.0rem !important;" class="vertical-align-middle fal fa-graduation-cap fa-fw"></i>
         <div class="line-height-initial" [fxHide.xs]="true"> School</div>
-      </a>
+      </a> -->
 
       <!-- Hackathon 
       <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'hackathon']">
@@ -291,7 +313,7 @@
 
             <!-- Grid column -->
             <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-              <h6 class="text-uppercase mb-4 font-weight-bold">Codemarket</h6>
+              <h6 class="text-uppercase mb-4 font-weight-bold">ailocalsummit</h6>
               <p>Our mission is to bring innovation to every problem by teaching software development to everyone.</p>
             </div>
             <!-- Grid column -->
@@ -344,7 +366,7 @@
               <p>
                 <i class="fas fa-home mr-3"></i> Palo Alto, CA 94306, US</p>
               <p>
-                <i class="fas fa-envelope mr-3"></i> sumi@codemarket.io</p>
+                <i class="fas fa-envelope mr-3"></i> sumi@ailocalsummit.io</p>
               <p>
                 <i class="fas fa-phone mr-3"></i> + 01 805 300 7217</p>
 
@@ -365,8 +387,8 @@
 
               <!--Copyright-->
               <p class="text-center text-md-left">© 2019 Copyright:
-                <a href="https://www.codemarket.io">
-                  <strong> codemarket.io</strong>
+                <a href="https://www.ailocalsummit.io">
+                  <strong> ailocalsummit.io</strong>
                 </a>
               </p>
 

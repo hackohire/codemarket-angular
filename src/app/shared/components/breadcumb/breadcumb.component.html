@@ -89,8 +89,9 @@
                         <li *ngIf="postDetails?.salaryRangeFrom">
                             <p class="data-label">Expected Salary</p>
                             <p class="info">
-                                {{(postDetails?.salaryRangeFrom | currency: 'USD' : 'symbol' : '1.0-0') + 'k'}} -
-                                {{ (postDetails?.salaryRangeTo | currency: 'USD' : 'symbol' : '1.0-0') + 'k'}}</p>
+                                {{(postDetails?.salaryRangeFrom | currency: 'USD' : 'symbol' : '1.0-0') + 'k'}} 
+                                <!-- - -->
+                                <!-- {{ (postDetails?.salaryRangeTo | currency: 'USD' : 'symbol' : '1.0-0') + 'k'}}</p> -->
                         </li>
                     </ul>
                 </div>

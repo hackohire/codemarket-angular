@@ -75,7 +75,7 @@ export class CompanyService {
     private commentService: CommentService
   ) { }
 
-  addCompany(company: Company): Observable<Company> {
+  addCompany(company: any): Observable<Company> {
     return this.apollo.mutate({
       mutation: gql`
         mutation addCompany($company: CompanyInput) {

@@ -1,0 +1,87 @@
+.active-item {
+    background: rgba(0, 0, 0, 0.2);
+    color: #fff !important;
+    border-radius: 18px;
+    text-align: center;
+  }
+
+
+
+  
+  .item-grid {
+    grid-column-start: 1;
+    grid-column-end: 3;
+  }
+  
+  
+  .item-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    -webkit-box-align: start;
+    -webkit-align-items: start;
+    -ms-flex-align: start;
+    align-items: start;
+    justify-items: center;
+    grid-gap: 4rem 3rem;
+  }
+  @media (min-width: 1101px) {
+    .item-grid {
+      grid-template-columns: repeat(auto-fill, minmax(90%, 1fr));
+    }
+  }
+  
+  .item-grid,
+  .item-grid,
+  .item-grid {
+    grid-gap: 6rem 3rem;
+    margin-bottom: 5rem;
+  }
+  .item-grid .full-width {
+    grid-column: 1 / 4;
+  }
+  .item-grid-large {
+    display: grid;
+    -webkit-box-align: start;
+    -webkit-align-items: start;
+    -ms-flex-align: start;
+    align-items: start;
+    justify-items: center;
+    grid-gap: 4rem 3rem;
+  }
+  @media (max-width: 1280px) {
+    .item-grid-large {
+      grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    }
+    .item-grid-large > :nth-child(6n + 1),
+    .item-grid-large > :nth-child(6n + 5) {
+      grid-row: span 2;
+    }
+    .item-grid-large > :nth-child(6n + 1) .item-content,
+    .item-grid-large > :nth-child(6n + 5) .item-content {
+      display: none;
+    }
+    .item-grid-large > :nth-child(6n + 1) .item-content-long,
+    .item-grid-large > :nth-child(6n + 5) .item-content-long {
+      display: block;
+    }
+  }
+  @media (min-width: 1281px) {
+    .item-grid-large {
+      grid-template-columns: repeat(1, 1fr);
+    }
+    .item-grid-large > :nth-child(12n + 1),
+    .item-grid-large > :nth-child(12n + 5),
+    .item-grid-large > :nth-child(12n + 9) {
+      grid-row: span 2;
+    }
+    .item-grid-large > :nth-child(12n + 1) .item-content,
+    .item-grid-large > :nth-child(12n + 5) .item-content,
+    .item-grid-large > :nth-child(12n + 9) .item-content {
+      display: none;
+    }
+    .item-grid-large > :nth-child(12n + 1) .item-content-long,
+    .item-grid-large > :nth-child(12n + 5) .item-content-long,
+    .item-grid-large > :nth-child(12n + 9) .item-content-long {
+      display: block;
+    }
+  }

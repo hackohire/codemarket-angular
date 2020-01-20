@@ -17,7 +17,6 @@ import { CodeWithLanguageSelection } from 'src/app/insert-code-snippet';
 import { HighlightJS } from 'ngx-highlightjs';
 import { appConstants } from '../../constants/app_constants';
 import { FormGroup, FormControl } from '@angular/forms';
-import { tap } from 'rxjs/operators';
 import { AuthService } from '../../../core/services/auth.service';
 import { CommentService } from '../../services/comment.service';
 import { Post } from '../../models/post.model';
@@ -301,12 +300,14 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
           this.zoomInZoomOutForImages();
         }),
         onChange: (() => {
-          this.editor.save().then((outputData) => {
-            // console.log(outputData);
-            this.output.emit([...outputData.blocks]);
-          }).catch((error) => {
-            console.log('Saving failed: ', error);
-          });
+          if (this.editor && this.editor.save) {
+            this.editor.save().then((outputData) => {
+              // console.log(outputData);
+              this.output.emit([...outputData.blocks]);
+            }).catch((error) => {
+              console.log('Saving failed: ', error);
+            });
+          }
 
           this.addControlsIfVideoElement();
         })

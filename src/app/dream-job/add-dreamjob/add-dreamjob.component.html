@@ -12,26 +12,29 @@
                 <ng-select placeholder="Roles" formControlName="jobProfile" [addTag]="addTagFn" [multiple]="true">
                 </ng-select>
 
-                <h6>Dream Job Description:</h6>
-                <br />
-
                 <app-editor *ngIf="descriptionFormControl?.value && edit; else add" (output)="updateFormData($event)"
-                    [data]="descriptionFormControl?.value" [id]="'edit-dreamjob-editor'" [importArticleSubscription]="true"></app-editor>
+                    [data]="descriptionFormControl?.value" [id]="'edit-dreamjob-editor'" [importArticleSubscription]="true" [placeholder]="'Dream Job Description:'"></app-editor>
 
                 <br />
 
                 <ng-template #add>
-                    <app-editor *ngIf="!edit" (output)="updateFormData($event)" [id]="'dreamjob-editor'" [importArticleSubscription]="true"></app-editor>
+                    <app-editor *ngIf="!edit" [placeholder]="'Dream Job Description:'" (output)="updateFormData($event)" [id]="'dreamjob-editor'" [importArticleSubscription]="true"></app-editor>
                 </ng-template>
 
-                <ng-select placeholder="Select Dream Companies" [items]="allCompanies" formControlName="companies" [multiple]="true" bindLabel="name">
-                </ng-select>
-
-                <ng-select placeholder="Select Cities" [addTag]="addCitiesFn" [items]="citySuggestions" formControlName="cities" [multiple]="true" bindLabel="name">
-                    <!-- <ng-option *ngFor="let cName of allCompanies" [value]="cName._id"> -->
-                        <!-- {{ cName?.name }} -->
-                    <!-- </ng-option> -->
-                </ng-select>
+                <div class="row">
+                    <ng-select class="col-md-6"  placeholder="Select Dream Companies" [addTag]="addCompany" [items]="allCompanies" formControlName="companies" [multiple]="true" bindLabel="name">
+                        <ng-option *ngFor="let cName of allCompanies" [value]="cName._id">
+                            {{ cName?.name }}
+                        </ng-option>
+                        <!-- <ng-option disabled (click)="openAddCompanyDialog()">+ Add Company</ng-option> -->
+                    </ng-select>
+    
+                    <ng-select class="col-md-6" placeholder="Select Cities" [addTag]="addCitiesFn" [items]="citySuggestions" formControlName="cities" [multiple]="true" bindLabel="name">
+                        <!-- <ng-option *ngFor="let cName of allCompanies" [value]="cName._id"> -->
+                            <!-- {{ cName?.name }} -->
+                        <!-- </ng-option> -->
+                    </ng-select>
+                </div>
 
                 <!-- <mat-form-field class="field-full-width">
                     <mat-chip-list #citiesList>
@@ -53,11 +56,34 @@
                     </mat-autocomplete>
                 </mat-form-field> -->
 
-                <h6>Expected Salary Range:</h6>
-                <br />
+                <!-- <h6>Expected Salary Range:</h6>
+                <br /> -->
 
-                <ng5-slider [(value)]="salaryRangeFrom"
+                <mat-form-field appearance="outline">
+                    <mat-label>Expected Salary(Yearly)(In Thousands)</mat-label>
+                    <input type="number" matInput formControlName="salaryRangeFrom" placeholder="Expected Salary">
+                    <!-- <mat-hint matSuffix>K</mat-hint> -->
+                    <mat-select matSuffix style="width: 35px; vertical-align: super;" formControlName="salaryCurrency">
+                        <mat-option value="$">$</mat-option>
+                        <mat-option value="€">€</mat-option>
+                        <mat-option value="₹">₹</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" style="margin-left: 10px;">
+                    <mat-label>Timeline(In Years)</mat-label>
+                    <input type="number" matInput formControlName="timeline" placeholder="Timeline">
+                    <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+                    <!-- <mat-hint>Timeline</mat-hint> -->
+                </mat-form-field>
+
+                <!-- <mat-form-field class="field-full-width" style="width: 30%; padding-left: 10px;">
+                    <input type="number" matInput formControlName="salaryRangeFrom" placeholder="Timeline">
+                </mat-form-field> -->
+                
+                <!-- <ng5-slider [(value)]="salaryRangeFrom"
                     [(highValue)]="salaryRangeTo" [options]="options"></ng5-slider>
+                <br /> -->
                 <br />
                 <br />
 

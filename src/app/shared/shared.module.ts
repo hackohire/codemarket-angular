@@ -23,7 +23,7 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { AddPostMenuComponent } from './components/add-post-menu/add-post-menu.component';
 import { SoftwareDevMenuComponent } from './components/software-dev-menu/software-dev-menu.component';
 import { CompaniesListComponent } from '../companies/companies-list/companies-list.component';
-import { Ng5SliderModule } from 'ng5-slider';
+// import { Ng5SliderModule } from 'ng5-slider';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { MdePopoverModule } from '@material-extended/mde';
 import { AgmCoreModule } from '@agm/core';
@@ -63,7 +63,7 @@ export function hljsLanguages() {
     ShareModule,
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
-    Ng5SliderModule,
+    // Ng5SliderModule,
     NgSelectModule,
     MdePopoverModule,
     AgmCoreModule.forRoot({
@@ -99,7 +99,7 @@ export function hljsLanguages() {
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
     SafePipe,
-    Ng5SliderModule,
+    // Ng5SliderModule,
     NgSelectModule,
     MdePopoverModule,
     AgmCoreModule

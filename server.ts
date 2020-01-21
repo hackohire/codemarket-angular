@@ -23,6 +23,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const DIST_FOLDER = join(process.cwd(), 'dist/browser');
 const domino = require('domino');
+var Element = domino.impl.Element;
 import fs from 'fs';
 const template = fs.readFileSync(join(DIST_FOLDER, 'index.html')).toString();
 import { Blob } from "blob-polyfill";
@@ -34,6 +35,7 @@ global['document'] = win.document;
 global["branch"] = null;
 global["object"] = win.object;
 global["HTMLElement"] = win.HTMLElement;
+global['Element'] = Element;
 global["navigator"] = win.navigator;
 global['Blob'] = Blob;
 global['Event'] = null;

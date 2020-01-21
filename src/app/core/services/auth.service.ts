@@ -191,7 +191,10 @@ export class AuthService {
             if (c.type === 'company') {
               this.router.navigate(['/', `company`, post._id],
                 { queryParams: { type: 'company', commentId: c._id, companyPostId: c.postId  } });
-            } else {
+            } else if(c.type === 'dream-job') {
+              this.router.navigate(['/', 'dream-job', post.slug ? post.slug : ''], { queryParams: { type: post.type, commentId: c._id} })
+            }
+             else {
               this.router.navigate(['/',
                 post.type === 'product' ? 'product' : 'post',
                 post.slug ? post.slug : ''

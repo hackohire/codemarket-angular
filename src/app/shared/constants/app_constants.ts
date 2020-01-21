@@ -172,6 +172,7 @@ export const appConstants = {
       name
       type
       categories
+      referencePostUrl
       description {
         ...Description
       }

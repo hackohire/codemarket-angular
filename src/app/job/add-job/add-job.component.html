@@ -1,10 +1,19 @@
-<app-breadcumb [title]="breadcumb?.title" [path]="breadcumb?.path" [showImportButton]="true"></app-breadcumb>
+<app-breadcumb [title]="breadcumb?.title" [path]="breadcumb?.path"></app-breadcumb>
 
 
 <div class="container">
     <div class="row">
         <div class="col-md-12">
             <div [formGroup]="jobForm" class="job-form-area">
+                <mat-form-field class="field-full-width" style="width: 85%;">
+                    <input #url formControlName="referencePostUrl" type="text" matInput
+                        placeholder="Import Post By Url">
+                </mat-form-field>
+                <a matSuffix type="button" (click)="formService?.import(url?.value, jobForm?.get('name'))" class="btn btn--sm btn--round menu"
+                    style="margin-left: 8px;">
+                    <mat-icon style="vertical-align: middle;">arrow_downward</mat-icon>Import
+                </a>
+
                 <mat-form-field class="field-full-width">
                     <input type="text" matInput formControlName="name" placeholder="Title">
                 </mat-form-field>
@@ -12,23 +21,27 @@
                 <ng-select placeholder="Roles" formControlName="jobProfile" [addTag]="addTagFn" [multiple]="true">
                 </ng-select>
 
-                <app-editor [placeholder]="'Job Description:'" *ngIf="descriptionFormControl?.value && edit; else add" (output)="updateFormData($event)"
-                    [data]="descriptionFormControl?.value" [id]="'edit-job-editor'" [importArticleSubscription]="true"></app-editor>
+                <app-editor [placeholder]="'Job Description:'" *ngIf="descriptionFormControl?.value && edit; else add"
+                    (output)="updateFormData($event)" [data]="descriptionFormControl?.value" [id]="'edit-job-editor'"
+                    [importArticleSubscription]="true"></app-editor>
 
                 <br />
 
                 <ng-template #add>
-                    <app-editor [placeholder]="'Job Description:'" *ngIf="!edit" (output)="updateFormData($event)" [id]="'job-editor'" [importArticleSubscription]="true"></app-editor>
+                    <app-editor [placeholder]="'Job Description:'" *ngIf="!edit" (output)="updateFormData($event)"
+                        [id]="'job-editor'" [importArticleSubscription]="true"></app-editor>
                 </ng-template>
 
                 <div class="row">
-                    <ng-select class="col-md-6" [addTag]="addCompany" placeholder="Select Company" formControlName="company" bindLabel="name">
-                        <ng-option *ngFor="let cName of allCompanies" [value]="cName._id">
+                    <ng-select class="col-md-6" [addTag]="addCompany" [items]="allCompanies"
+                        placeholder="Select Company" formControlName="company" bindLabel="name" bindValue="_id">
+                        <!-- <ng-option *ngFor="let cName of allCompanies" [value]="cName._id">
                             {{ cName?.name }}
-                        </ng-option>
+                        </ng-option> -->
                     </ng-select>
-    
-                    <ng-select class="col-md-6" placeholder="Select Cities" [addTag]="addCitiesFn" [items]="citySuggestions" formControlName="cities" [multiple]="true" bindLabel="name">
+
+                    <ng-select class="col-md-6" placeholder="Select Cities" [addTag]="addCitiesFn"
+                        [items]="citySuggestions" formControlName="cities" [multiple]="true" bindLabel="name">
                     </ng-select>
                 </div>
 
@@ -49,15 +62,11 @@
                 <div fxLayout="row" fxLayoutGap="10px">
                     <button *ngIf="statusFormControl?.value !== 'Published'" type="button" (click)="submit('Drafted')"
                         [disabled]="jobForm?.invalid" mat-raised-button color="primary">Save</button>
-                    <button type="button" (click)="submit('Published')" [disabled]="jobForm?.invalid"
-                        mat-raised-button
+                    <button type="button" (click)="submit('Published')" [disabled]="jobForm?.invalid" mat-raised-button
                         color="primary">{{ statusFormControl?.value === 'Published' ? 'Publish Changes' : 'Publish' }}</button>
                     <button *ngIf="statusFormControl?.value === 'Published'" type="button"
                         (click)="submit('Unpublished')" [disabled]="jobForm?.invalid" mat-raised-button
                         color="primary">{{ 'Unpublish' }}</button>
-                    <button *ngIf="data" type="button"
-                        (click)="dialogRef.close(null)" mat-raised-button
-                        color="warn">{{ 'Cancel' }}</button>
                 </div>
 
             </div>

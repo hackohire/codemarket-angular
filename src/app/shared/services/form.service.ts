@@ -6,6 +6,8 @@ import { Tag } from '../models/product.model';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { map } from 'rxjs/internal/operators/map';
+import { environment } from '../../../environments/environment';
+import { PostService } from './post.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +15,8 @@ import { map } from 'rxjs/internal/operators/map';
 export class FormService {
 
   constructor(
-    private apollo: Apollo
+    private apollo: Apollo,
+    private postService: PostService
   ) { }
 
 
@@ -90,6 +93,21 @@ export class FormService {
         return p.data.searchCities;
       }),
     );
+  }
+
+  import(postLink, titleFormControl?: FormControl) {
+    console.log();
+    fetch(`${environment.serverless_url}fetchArticleByLink?url=${encodeURIComponent(postLink)}`)
+      .then(res => res.json())
+      .then(h => {
+        console.log(h.contentHtml);
+        h.contentHtml += `<b>Source: </b><a target="_blank" href="${postLink}">${postLink}</a>`
+        this.postService.contentFromAnotherArticle.next(h.contentHtml);
+
+        if (titleFormControl && h && h.title) {
+          titleFormControl.setValue(h.title);
+        }
+      })
   }
 
 

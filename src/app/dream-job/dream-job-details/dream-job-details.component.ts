@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { Observable, Subscription, of } from 'rxjs';
 import { Post } from '../../shared/models/post.model';
@@ -24,7 +24,7 @@ import { SetSelectedPost, GetPostById } from '../../core/store/actions/post.acti
   templateUrl: './dream-job-details.component.html',
   styleUrls: ['./dream-job-details.component.scss']
 })
-export class DreamJobDetailsComponent implements OnInit {
+export class DreamJobDetailsComponent implements OnInit, OnDestroy {
 
   details$: Observable<Post>;
 
@@ -100,7 +100,7 @@ export class DreamJobDetailsComponent implements OnInit {
         if (p) {
           this.postDetails = p;
           this.details$ = of(p);
-          this.initializeCommentForm(p, 'post');
+          this.initializeCommentForm(p, 'dream-job');
           this.getJobsConnectedWithDreamJob(postId);
         } else if (this.postDetails && this.postDetails._id === postId) {
           /** Comes inside this block, only when we are already in a post details page, and by using searh,
@@ -120,17 +120,17 @@ export class DreamJobDetailsComponent implements OnInit {
   ngOnDestroy(): void {
     if (this.subscription$) {
       this.subscription$.unsubscribe();
-      this.store.dispatch(SetSelectedPost({ post: null }));
+      // this.store.dispatch(SetSelectedPost({ post: null }));
     }
     /** Unsubscribes from Comments Related Subscription */
-    this.commentService.unsubscribe();
+    // this.commentService.unsubscribe();
   }
 
   initializeCommentForm(p, commentType?: string) {
     this.commentForm = new FormGroup({
       text: new FormControl(''),
       referenceId: new FormControl(p._id),
-      type: new FormControl(commentType ? commentType : 'post'),
+      type: new FormControl(commentType ? commentType : 'dream-job'),
     });
 
     this.commentService.getCommentsByReferenceId(p, this.commentId);

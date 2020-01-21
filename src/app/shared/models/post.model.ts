@@ -27,6 +27,7 @@ export interface Post {
     createdAt?: string;
     updatedAt?: string;
     slug?: string;
+    referencePostUrl?: string;
     tags?: Tag[];
     support?: Support;
     usersAttending?: [User]; /** Only for events */

@@ -1,10 +1,21 @@
-<app-breadcumb [title]="breadcumb?.title" [path]="breadcumb?.path" [showImportButton]="true"></app-breadcumb>
+<app-breadcumb [title]="breadcumb?.title" [path]="breadcumb?.path"></app-breadcumb>
 
 
 <div class="container">
     <div class="row">
         <div class="col-md-12">
             <div [formGroup]="dreamjobForm" class="dreamjob-form-area">
+
+                <mat-form-field class="field-full-width" style="width: 85%;">
+                    <input #url formControlName="referencePostUrl" type="text" matInput
+                        placeholder="Import Post By Url">
+                </mat-form-field>
+                <a matSuffix type="button" (click)="formService?.import(url?.value, dreamjobForm?.get('name'))" class="btn btn--sm btn--round menu"
+                    style="margin-left: 8px;">
+                    <mat-icon style="vertical-align: middle;">arrow_downward</mat-icon>Import
+                </a>
+
+
                 <mat-form-field class="field-full-width">
                     <input type="text" matInput formControlName="name" placeholder="Title">
                 </mat-form-field>

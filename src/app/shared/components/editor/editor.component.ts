@@ -26,6 +26,7 @@ const path = require('path');
 import editorJS from '../../../editor-js/dist/editor';
 import EditorJS from '@editorjs/editorjs';
 import { PostService } from '../../services/post.service';
+import { Subscription } from 'rxjs/internal/Subscription';
 @Component({
   selector: 'app-editor',
   templateUrl: './editor.component.html',
@@ -46,6 +47,8 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
   @Output() output: EventEmitter<any> = new EventEmitter(); /** Emitting data with user interactions */
   @Input() importArticleSubscription = false;
   @ViewChild('editorRef', { static: false }) editorRef: ElementRef;
+
+  subscriptions$  = new Subscription();
 
   @Input() editorStyle = {
     background: '#eff1f570',
@@ -116,6 +119,7 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
     if (this.editor && this.editor.clear) {
       this.editor.destroy();
     }
+    this.subscriptions$.unsubscribe();
   }
 
   initializeCommentForm(p) {
@@ -136,8 +140,9 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
     if (this.authService.loggedInUser) {
       this.commentForm.addControl('createdBy', new FormControl(this.authService.loggedInUser._id));
       this.commentForm.get('blockId').setValue(blockId),
-
-        this.commentService.addComment(this.commentForm.value).subscribe();
+      this.subscriptions$.add(
+        this.commentService.addComment(this.commentForm.value).subscribe()
+      )
     } else {
       this.authService.checkIfUserIsLoggedIn(true);
     }
@@ -154,11 +159,13 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
     if (isPlatformBrowser(this._platformId)) {
       // this.goalFormInitialization();
       if (this.importArticleSubscription) {
-        this.postService.contentFromAnotherArticle.subscribe(p => {
-          if (p) {
-            this.editor.blocks.renderFromHTML(p);
-          }
-        });
+        this.subscriptions$.add(
+          this.postService.contentFromAnotherArticle.subscribe(p => {
+            if (p) {
+              this.editor.blocks.renderFromHTML(p);
+            }
+          })
+        )
       }
 
       this.editor = new editorJS({

@@ -72,11 +72,11 @@
       </a>
 
       <!-- membership -->
-      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'membership']">
+     <!--  <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'membership']">
         <i style="font-size: 1.0rem !important; color: #ffff00;"
           class="vertical-align-middle fal fa-id-card-alt fa-fw"></i>
         <span style="color: #ffffff;" class="line-height-initial" [fxHide.xs]="true"> Membership</span>
-      </a>
+      </a> -->
       <!-- Login -->
       <ng-template #logIn>
         <a #lr mat-button (click)="login()" [mdePopoverTriggerFor]="authentication" [mdePopoverTargetAt]="lr"
@@ -147,7 +147,26 @@
 
       <!-- End Items -->
       <div fxFlex></div>
-      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'dashboard', 'company-list']"
+      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'post', 'add-dreamjob']"
+        [queryParams]="{all: true}">
+        <!-- <i style="font-size: 1.0rem !important;" class="vertical-align-middle fal fa-building fa-fw"></i> -->
+
+        <div class="line-height-initial" [fxHide.xs]="true"> Career Coach </div>
+      </a>
+
+      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'post', 'add-dreamjob']"
+        [queryParams]="{all: true}">
+        <!-- <i style="font-size: 1.0rem !important;" class="vertical-align-middle fal fa-building fa-fw"></i> -->
+
+        <div class="line-height-initial" [fxHide.xs]="true"> Business Coach</div>
+      </a>
+      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'company', 'add-company']"
+      [queryParams]="{all: true}">
+      <!-- <i style="font-size: 1.0rem !important;" class="vertical-align-middle fal fa-building fa-fw"></i> -->
+
+      <div class="line-height-initial" [fxHide.xs]="true"> Professional </div>
+    </a>
+      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'company', 'add-company']"
         [queryParams]="{all: true}">
         <!-- <i style="font-size: 1.0rem !important;" class="vertical-align-middle fal fa-building fa-fw"></i> -->
 
@@ -155,11 +174,11 @@
       </a>
       <!-- <app-add-post-menu style="color: black;"></app-add-post-menu> -->
       <app-software-dev-menu style="color: black;"></app-software-dev-menu>
-      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'dashboard', 'company-list']"
+      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'dashboard']"
         [queryParams]="{all: true}">
       <div class="line-height-initial" [fxHide.xs]="true"> About </div>
       </a>
-      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'dashboard', 'company-list']"
+      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'membership']"
         [queryParams]="{all: true}">
       <div class="line-height-initial" [fxHide.xs]="true"> Membership </div>
     </a>

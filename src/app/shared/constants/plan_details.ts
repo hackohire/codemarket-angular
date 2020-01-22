@@ -4,22 +4,20 @@ export const plans = {
       {
         id: 'plan_GXcP6jdfOKhJ70',
         product_id: 'prod_FwdeAeZ0zF98Nj',
-        name: 'Dream Job Starter',
+        name: 'Career Coach Starter',
         status: 'ACTIVE',
-        description: 'Dream Job Starter',
+        description: 'Career Coach Starter',
         /**  shortDescription: 'Slow Pace',*/
         benefits: [
-          'Dream Job Gap Analysis',
+          'Career Goal Resume Gap Analysis',
           // 'Team IQ',
-          'Dream Job Training',
-          // 'Business Skills Mentor',
-          // 'Leadership Skills Mentoring'
+          'Career Coach  30 min Sessions - 1 per Month '
         ],
         success: {
           message: 'Thanks For Choosing Us',
           successBenefits: [
-            'Dream Job Gap Analysis',
-            'Dream Job Training'
+            'Career Goal Resume Gap Analysis',
+            'Career Coach 30 min Sessions - 1 per Month '
           ],
         },
         fixed_price: {
@@ -31,21 +29,21 @@ export const plans = {
       {
         id: 'plan_GXcQIct8XvP6sL',
         product_id: 'prod_FwdeAeZ0zF98Nj',
-        name: 'Interview Manager',
+            name: 'Career Coach Premium',
         status: 'ACTIVE',
-        description: 'Interview Manager',
+        description: 'Career Coach Premium',
         // shortDescription: 'For Small Teams',
         benefits: [
-          'Dream Job Gap Analysis',
-          'Dream Job Training',
-          'Interview Manager'
+          'Career Goal Resume Gap Analysis',
+          'Peer-Career Coach, 30 min Sessions - 4 per Month',
+          '1 Mock Interview per Month'
         ],
         success: {
           message: 'Thanks For Choosing Us',
           successBenefits: [
-            'Dream Job Gap Analysis',
-            'Dream Job Training',
-            'Interview Manager'
+            'Career Goal Resume Gap Analysis',
+            'Peer-Career Coach, 30 min Sessions - 4 per Month',
+            '1 Mock Interview per Month'
           ],
         },
         fixed_price: {
@@ -57,23 +55,25 @@ export const plans = {
       {
         id: 'plan_GXcQl62YosrNxR',
         product_id: 'prod_FwdeAeZ0zF98Nj',
-        name: 'Hiring Manager',
+        name: 'Career Coach Focus',
         status: 'ACTIVE',
-        description: 'Hiring Manager',
+        description: 'Career Coach Focus',
         // shortDescription: 'For Large Teams',
         benefits: [
-          'Dream Job Gap Analysis',
-          'Dream Job Training',
-          'Interview Manager',
-          'Hiring Manager'
+          'Career Goal Resume Gap Analysis',
+          'Peer-Career Coach, 30 min Sessions - 4 per Month',
+          '1 Mock Interview per Month',
+          'Hiring Manager Career Coach, 30 min Sessionn - 1 per Month',
+          'AI Local Summit Presentation Slot'
         ],
         success: {
           message: 'Thanks For Choosing Us',
           successBenefits: [
-            'Dream Job Gap Analysis',
-            'Dream Job Training',
-            'Interview Manager',
-            'Hiring Manager'
+            'Career Goal Resume Gap Analysis',
+            'Peer-Career Coach, 30 min Sessions - 4 per Month',
+            '1 Mock Interview per Month',
+            'Hiring Manager Career Coach, 30 min Sessionn - 1 per Month',
+            'AI Local Summit Presentation Slot'
           ],
         },
         fixed_price: {
@@ -179,17 +179,17 @@ export const plans = {
         description: 'Dream Job Starter',
         /**  shortDescription: 'Slow Pace',*/
         benefits: [
-          'Dream Job Gap Analysis',
+          'Career Goal Resume Gap Analysis',
           // 'Team IQ',
-          'Dream Job Training',
+          'Career Coach Sessions - ',
           // 'Business Skills Mentor',
           // 'Leadership Skills Mentoring'
         ],
         success: {
           message: 'Thanks For Choosing Us',
           successBenefits: [
-            'Dream Job Gap Analysis',
-            'Dream Job Training'
+            'Career Goal Resume Gap Analysis',
+            'Career Coach Sessions - '
           ],
         },
         fixed_price: {
@@ -201,20 +201,20 @@ export const plans = {
       {
         id: 'plan_GXcbhPQxCghyr6',
         product_id: 'prod_GEP1IoHYJzlADr',
-        name: 'Interview Manager',
+        name: 'Career Coach Starter',
         status: 'ACTIVE',
         description: 'Interview Manager',
         // shortDescription: 'For Small Teams',
         benefits: [
-          'Dream Job Gap Analysis',
-          'Dream Job Training',
+          'Career Goal Resume Gap Analysis',
+          'Career Coach Sessions - ',
           'Interview Manager'
         ],
         success: {
           message: 'Thanks For Choosing Us',
           successBenefits: [
-            'Dream Job Gap Analysis',
-            'Dream Job Training',
+            'Career Goal Resume Gap Analysis',
+            'Career Coach Sessions - ',
             'Interview Manager'
           ],
         },
@@ -232,16 +232,16 @@ export const plans = {
         description: 'Hiring Manager',
         // shortDescription: 'For Large Teams',
         benefits: [
-          'Dream Job Gap Analysis',
-          'Dream Job Training',
+          'Career Goal Resume Gap Analysis',
+          'Career Coach Sessions - ',
           'Interview Manager',
           'Hiring Manager'
         ],
         success: {
           message: 'Thanks For Choosing Us',
           successBenefits: [
-            'Dream Job Gap Analysis',
-            'Dream Job Training',
+            'Career Goal Resume Gap Analysis',
+            'Career Coach Sessions - ',
             'Interview Manager',
             'Hiring Manager'
           ],

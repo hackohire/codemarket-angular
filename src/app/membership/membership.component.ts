@@ -51,7 +51,7 @@ export class MembershipComponent implements OnInit {
       this.DOMAIN = window.location.href;
     }
     this.breadcumb = {
-      title: 'Membership Plans',
+      title: 'Take Full Control of Your Career Goals and Business Goals',
       path: [
         {
           name: 'Dashboard',

@@ -41,6 +41,12 @@ export interface Post {
     jobProfile?: string;
     timeline?: number;
 
+    /** Fields related to Career Coach */
+    gapAnalysis?: boolean;
+    careerCoachSessions?: boolean;
+    helpingWithMockInterviews?: boolean;
+    hiringMentoringSessions?: boolean;
+
     likeCount?: number;
     comments?: Comment[];
 }

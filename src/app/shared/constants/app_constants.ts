@@ -41,6 +41,13 @@ export const appConstants = {
     gif_url: 'https://www.codemarket.io/assets/images/cm.gif'
   },
 
+  careerCoachQuestions: {
+    gapAnalysis: 'I can do resume gap analysis',
+    careerCoachSessions: 'I can take part in weekly 30 mins career coach sessions',
+    helpingWithMockInterviews: 'I can take part in helping with mock interviews',
+    hiringMentoringSessions: 'I can take part in hiring mentoring sessions'
+  },
+
   Notification: 'https://notificationsounds.com/soundfiles/4e4b5fbbbb602b6d35bea8460aa8f8e5/file-sounds-1096-light.wav',
 
   imageExtenstions: [
@@ -252,6 +259,13 @@ export const appConstants = {
         name
         _id
       }
+
+      gapAnalysis
+      careerCoachSessions
+      helpingWithMockInterviews
+      hiringMentoringSessions
+
+
       jobProfile
       timeline
   

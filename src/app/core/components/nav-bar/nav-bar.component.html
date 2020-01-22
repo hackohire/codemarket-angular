@@ -68,14 +68,14 @@
       <!-- Search -->
       <a mat-button routerLinkActive="mat-primary" (click)="openSearchDialog()">
         <i style="font-size: 1.0rem !important; color: #ffff00;" class="vertical-align-middle fal fa-search fa-fw"></i>
-        <span style="color: #ffffff;" class="line-height-initial" [fxHide.xs]="true"> Search</span>
+        <span style="color: #ffffff;" class="line-height-initial" > Search</span>
       </a>
 
       <!-- membership -->
      <!--  <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'membership']">
         <i style="font-size: 1.0rem !important; color: #ffff00;"
           class="vertical-align-middle fal fa-id-card-alt fa-fw"></i>
-        <span style="color: #ffffff;" class="line-height-initial" [fxHide.xs]="true"> Membership</span>
+        <span style="color: #ffffff;" class="line-height-initial" > Membership</span>
       </a> -->
       <!-- Login -->
       <ng-template #logIn>
@@ -83,7 +83,7 @@
           mdePopoverTriggerOn="click">
           <i style="font-size: 1.0rem !important; color: #ffff00;"
             class="vertical-align-middle fal fa-user-circle fa-fw"></i>
-          <span style="color: #ffffff;" class="line-height-initial" [fxHide.xs]="true"> Login/Register</span>
+          <span style="color: #ffffff;" class="line-height-initial" > Login/Register</span>
         </a>
       </ng-template>
 
@@ -98,7 +98,7 @@
           [routerLink]="['/', 'dashboard', 'my-profile']">
           <i style="font-size: 1.0rem !important; color: #ffff00;"
             class="vertical-align-middle fal fa-user-circle fa-fw"></i>
-          <span style="color: #ffffff;" class="line-height-initial" [fxHide.xs]="true"> My Profile <mat-icon
+          <span style="color: #ffffff;" class="line-height-initial" > My Profile <mat-icon
               style="vertical-align: middle; height: 28px;">keyboard_arrow_down</mat-icon>
           </span>
         </a>
@@ -107,7 +107,7 @@
         <!-- accelerator -->
         <!-- <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'accelerator']">
         <i style="font-size: 1.0rem !important; color: #00ffff;" class="vertical-align-middle fal fa-rocket fa-fw"></i>
-        <span style="color: #ffff00;" class="line-height-initial" [fxHide.xs]="true"> ACCELERATOR</span>
+        <span style="color: #ffff00;" class="line-height-initial" > ACCELERATOR</span>
         <i class="fal fa-rocket"></i>
       </a> -->
 
@@ -147,53 +147,52 @@
 
       <!-- End Items -->
       <div fxFlex></div>
-      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'post', 'add-dreamjob']"
-        [queryParams]="{all: true}">
+      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'post', 'add-career-coach']">
         <!-- <i style="font-size: 1.0rem !important;" class="vertical-align-middle fal fa-building fa-fw"></i> -->
 
-        <div class="line-height-initial" [fxHide.xs]="true"> Career Coach </div>
+        <div class="line-height-initial" > Career Coach </div>
       </a>
 
       <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'post', 'add-dreamjob']"
         [queryParams]="{all: true}">
         <!-- <i style="font-size: 1.0rem !important;" class="vertical-align-middle fal fa-building fa-fw"></i> -->
 
-        <div class="line-height-initial" [fxHide.xs]="true"> Business Coach</div>
+        <div class="line-height-initial" > Business Coach</div>
       </a>
       <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'company', 'add-company']"
       [queryParams]="{all: true}">
       <!-- <i style="font-size: 1.0rem !important;" class="vertical-align-middle fal fa-building fa-fw"></i> -->
 
-      <div class="line-height-initial" [fxHide.xs]="true"> Professional </div>
+      <div class="line-height-initial" > Professional </div>
     </a>
       <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'post', 'add-dreamjob']"
         [queryParams]="{all: true}">
         <!-- <i style="font-size: 1.0rem !important;" class="vertical-align-middle fal fa-building fa-fw"></i> -->
 
-        <div class="line-height-initial" [fxHide.xs]="true"> Business </div>
+        <div class="line-height-initial"> Business </div>
       </a>
       <!-- <app-add-post-menu style="color: black;"></app-add-post-menu> -->
       <app-software-dev-menu style="color: black;"></app-software-dev-menu>
       <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'dashboard']"
         [queryParams]="{all: true}">
-      <div class="line-height-initial" [fxHide.xs]="true"> About </div>
+      <div class="line-height-initial"> About </div>
       </a>
       <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'membership']"
         [queryParams]="{all: true}">
-      <div class="line-height-initial" [fxHide.xs]="true"> Membership </div>
+      <div class="line-height-initial"> Membership </div>
     </a>
 
       <!-- <a mat-button routerLinkActive="mat-primary"
         [routerLink]="['/', 'dashboard', 'company-list']" [queryParams]="{all: true}">
         <i style="font-size: 1.0rem !important;" class="vertical-align-middle fal fa-brain fa-fw"></i>
         
-        <div class="line-height-initial" [fxHide.xs]="true"> ML/AI </div>
+        <div class="line-height-initial" > ML/AI </div>
       </a>
  -->
       <!--  <a mat-button routerLinkActive="mat-primary"
         [routerLink]="['/', 'dashboard', 'company-list']" [queryParams]="{all: true}">
         <i style="font-size: 1.0rem !important;" class="vertical-align-middle fal fa-megaphone fa-fw"></i>
-        <div class="line-height-initial" [fxHide.xs]="true"> Marketing </div>
+        <div class="line-height-initial" > Marketing </div>
       </a> -->
 
 
@@ -201,35 +200,35 @@
           [routerLink]="['/', 'dashboard', 'company-list']" [queryParams]="{all: true}">
           <i style="font-size: 1.0rem !important;" class="vertical-align-middle fal fa-funnel-dollar fa-fw"></i>
           
-          <div class="line-height-initial" [fxHide.xs]="true"> Sales </div>
+          <div class="line-height-initial" > Sales </div>
         </a> -->
 
       <!-- <a mat-button routerLinkActive="mat-primary"
           [routerLink]="['/', 'dashboard', 'company-list']" [queryParams]="{all: true}">
           <i style="font-size: 1.0rem !important;" class="vertical-align-middle fal fa-palette fa-fw"></i>
           
-          <div class="line-height-initial" [fxHide.xs]="true"> Designer </div>
+          <div class="line-height-initial" > Designer </div>
         </a> -->
 
       <!-- <a mat-button routerLinkActive="mat-primary"
           [routerLink]="['/', 'dashboard', 'company-list']" [queryParams]="{all: true}">
           <i style="font-size: 1.0rem !important;" class="vertical-align-middle fal fa-sack-dollar fa-fw"></i>
 
-          <div class="line-height-initial" [fxHide.xs]="true"> Capital </div>
+          <div class="line-height-initial" > Capital </div>
         </a> -->
 
       <!-- All Bugfixes -->
       <!-- <a mat-button routerLinkActive="mat-primary"
         [routerLink]="['/', 'dashboard', 'bugfixes-all']">
         <i style="font-size: 1.7rem !important;" class="vertical-align-middle fad fa-lightbulb-dollar fa-fw"></i>
-        <div class="line-height-initial" [fxHide.xs]="true">Software Developer</div>
+        <div class="line-height-initial" >Software Developer</div>
       </a> -->
 
       <!-- Team IQ 
       <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'dashboard', 'post-list']"
         [queryParams]="{type: 'event', all: true}">
         <i style="font-size: 1.7rem !important;" class="vertical-align-middle fad fa-question-circle fa-fw"></i>
-        <div class="line-height-initial" [fxHide.xs]="true">Businesses</div>
+        <div class="line-height-initial" >Businesses</div>
       </a>-->
 
       <!-- Companies -->
@@ -237,38 +236,38 @@
         [routerLink]="['/', 'dashboard', 'company-list']" [queryParams]="{all: true}">
         <i style="font-size: 1.0rem !important;" class="vertical-align-middle fal fa-building fa-fw"></i>
         
-        <div class="line-height-initial" [fxHide.xs]="true"> Business </div>
+        <div class="line-height-initial" > Business </div>
       </a> -->
       <!-- Startup -->
       <!-- <a mat-button routerLinkActive="mat-primary"
         [routerLink]="['/', 'dashboard', 'company-list']" [queryParams]="{all: true}">
         <i style="font-size: 1.0rem !important;" class="vertical-align-middle fal fa-lightbulb-dollar fa-fw"></i>
-        <div class="line-height-initial" [fxHide.xs]="true"> Startup </div>
+        <div class="line-height-initial" > Startup </div>
       </a> -->
       <!-- All Events -->
       <!-- <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'social-impact']">
         <i style="font-size: 1.0rem !important;" class="vertical-align-middle fal fa-hand-holding-heart fa-fw"></i>
-        <div class="line-height-initial" [fxHide.xs]="true"> Non-Profit</div>
+        <div class="line-height-initial" > Non-Profit</div>
       </a> -->
 
       <!-- Companoies -->
       <!--  <a mat-button routerLinkActive="mat-primary"
         [routerLink]="['/', 'dashboard', 'company-list']" [queryParams]="{all: true}">
         <i style="font-size: 1.0rem !important;" class="vertical-align-middle fal fa-user-crown fa-fw"></i>
-        <div class="line-height-initial" [fxHide.xs]="true"> Government</div>
+        <div class="line-height-initial" > Government</div>
       </a> -->
 
       <!-- Schools -->
       <!--  <a mat-button routerLinkActive="mat-primary"
         [routerLink]="['/', 'dashboard', 'company-list']" [queryParams]="{all: true}">
         <i style="font-size: 1.0rem !important;" class="vertical-align-middle fal fa-graduation-cap fa-fw"></i>
-        <div class="line-height-initial" [fxHide.xs]="true"> School</div>
+        <div class="line-height-initial" > School</div>
       </a> -->
 
       <!-- Hackathon 
       <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'hackathon']">
         <i style="font-size: 1.7rem !important;" class="vertical-align-middle fad fa-laptop-code fa-fw"></i>
-        <div class="line-height-initial" [fxHide.xs]="true"> Schools</div>
+        <div class="line-height-initial" > Schools</div>
       </a>-->
 
       <!-- Dreamjob 
@@ -276,13 +275,13 @@
         [routerLink]="['/', 'dashboard', 'dream-job-list']"
         [queryParams]="{type: 'dream-job', all: true}">
         <i style="font-size: 1.7rem !important;" class="vertical-align-middle fad fa-briefcase fa-fw"></i>
-        <div class="line-height-initial" [fxHide.xs]="true"> Dream Job</div>
+        <div class="line-height-initial" > Dream Job</div>
       </a>-->
 
       <!-- Wellness -->
       <!-- <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'wellness']">
         <i style="font-size: 1.7rem !important;" class="vertical-align-middle fad fa-heartbeat fa-fw"></i>
-        <div [fxHide.xs]="true"> Wellness</div>
+        <div > Wellness</div>
       </a> -->
 
       <!-- Local Businesses -->
@@ -290,7 +289,7 @@
         [routerLink]="['/', 'dashboard', 'company-list']"
         [queryParams]="{type: 'local-business', all: true}">
         <i style="font-size: 1.7rem !important;" class="vertical-align-middle fad fa-briefcase fa-fw"></i>
-        <div [fxHide.xs]="true"> Local Business</div>
+        <div > Local Business</div>
       </a> -->
 
 
@@ -299,7 +298,7 @@
         [routerLink]="['/', 'dashboard', 'company-list']"
         [queryParams]="{type: 'non-profit', all: true}">
         <i style="font-size: 1.7rem !important;" class="vertical-align-middle fad fa-hand-holding-heart fa-fw"></i>
-        <div [fxHide.xs]="true"> Non Profits</div>
+        <div > Non Profits</div>
       </a> -->
 
 
@@ -307,7 +306,7 @@
       <!-- About Us
       <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'about']">
         <i style="font-size: 1.5rem !important;" class="vertical-align-middle fad fa-info fa-fw"></i>
-        <div class="line-height-initial" [fxHide.xs]="true"> About Us</div>
+        <div class="line-height-initial" > About Us</div>
       </a> -->
     </mat-toolbar>
 

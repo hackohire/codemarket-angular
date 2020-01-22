@@ -93,7 +93,7 @@ export class AddJobComponent implements OnInit, OnDestroy {
       ]
     };
 
-    const referencePostId = this.activatedRoute.queryParams['referencePostId'];
+    const referencePostId = this.activatedRoute.snapshot.queryParams['referencePostId'];
 
     /** If it is "add-job" route intialize empty job form, but we are setting store property of "Selectedjob" as null
      * and if it is "edit-job route" we need to subscribe to get "Selectedjob" and user refresh the tab,

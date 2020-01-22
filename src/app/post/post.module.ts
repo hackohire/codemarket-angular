@@ -108,6 +108,14 @@ const postRoutes: Routes = [
       {
         path: 'edit-job/:jobId',
         loadChildren: () => import('../job/add-job/add-job.module').then(module => module.AddJobModule),
+      },
+      {
+        path: 'add-career-coach',
+        loadChildren: () => import('../career-coach/add-career-coach/add-career-coach.module').then(module => module.AddCareerCoachModule),
+      },
+      {
+        path: 'edit-career-coach/:careerCoachId',
+        loadChildren: () => import('../career-coach/add-career-coach/add-career-coach.module').then(module => module.AddCareerCoachModule),
       }
     ],
     // runGuardsAndResolvers: 'always',

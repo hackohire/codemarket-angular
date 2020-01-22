@@ -22,6 +22,7 @@ import { SweetalertService } from '../../shared/services/sweetalert.service';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { Company } from '../../shared/models/company.model';
 import { User } from '../../shared/models/user.model';
+import { appConstants } from '../../shared/constants/app_constants';
 
 @Component({
   selector: 'app-details',
@@ -50,6 +51,8 @@ export class DetailsComponent implements OnInit, OnDestroy {
   peer: Peer;
 
   commentId: string;
+
+  careerCoachQuestions = appConstants.careerCoachQuestions;
 
   constructor(
     private store: Store<AppState>,

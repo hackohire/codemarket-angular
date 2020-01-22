@@ -28,14 +28,65 @@
                             <div class="tab-pane fade show product-tab active" id="product-details">
                                 <article>
 
-                                    <app-editor *ngIf="details?.description" [commentsList]="commentService?.commentsList$ | async"
+                                    <app-editor *ngIf="details?.description && details?.description?.length"
+                                        [commentsList]="commentService?.commentsList$ | async"
                                         [blockLevelComments]="true" [readOnly]="true" [data]="details?.description"
                                         [id]="'details-editor'" [post]="details" [commentType]="'post'">
                                     </app-editor>
 
                                     <br />
+
+                                    <ng-container *ngIf="details.type === 'career-coach'">
+                                        <div class="tab-content-wrapper" fxLayout="row">
+                                            <h4 fxFlex="90" class="plan-description"
+                                                style="color: black; vertical-align: middle; display: inline;">
+                                                {{careerCoachQuestions['gapAnalysis']}}
+                                            </h4>
+                                            <i fxFlex="10"
+                                                [ngClass]="details?.gapAnalysis ? 'fad fa-check-circle' : 'fad fa-times-circle'"
+                                                style="vertical-align: middle; font-size: 1.5em;"></i>
+                                        </div>
+                                    </ng-container>
+
+                                    <ng-container *ngIf="details.type === 'career-coach'">
+                                        <div class="tab-content-wrapper" fxLayout="row">
+                                            <h4 fxFlex="90" class="plan-description"
+                                                style="color: black; vertical-align: middle; display: inline;">
+                                                {{careerCoachQuestions['careerCoachSessions']}}
+                                            </h4>
+                                            <i fxFlex="10"
+                                                [ngClass]="details?.careerCoachSessions ? 'fad fa-check-circle' : 'fad fa-times-circle'"
+                                                style="vertical-align: middle; font-size: 1.5em;"></i>
+                                        </div>
+                                    </ng-container>
+
+                                    <ng-container *ngIf="details.type === 'career-coach'">
+                                        <div class="tab-content-wrapper" fxLayout="row">
+                                            <h4 fxFlex="90" class="plan-description"
+                                                style="color: black; vertical-align: middle;">
+                                                {{careerCoachQuestions['helpingWithMockInterviews']}}
+                                            </h4>
+                                            <i fxFlex="10"
+                                                [ngClass]="details?.helpingWithMockInterviews ? 'fad fa-check-circle' : 'fad fa-times-circle'"
+                                                style="vertical-align: middle; font-size: 1.5em;"></i>
+                                        </div>
+                                    </ng-container>
+
+                                    <ng-container *ngIf="details.type === 'career-coach'">
+                                        <div class="tab-content-wrapper" fxLayout="row">
+                                            <h4 fxFlex="90" class="plan-description"
+                                                style="color: black; vertical-align: middle; display: inline;">
+                                                {{careerCoachQuestions['hiringMentoringSessions']}}
+                                            </h4>
+                                            <i fxFlex="10"
+                                                [ngClass]="details?.hiringMentoringSessions ? 'fad fa-check-circle' : 'fad fa-times-circle'"
+                                                style="vertical-align: middle; font-size: 1.5em;"></i>
+                                        </div>
+                                    </ng-container>
+
                                     <br />
-                                    <h4 class="tab-content-wrapper">Support Details:</h4>
+                                    <h4 class="tab-content-wrapper" *ngIf="details.type !== 'career-coach'">Support
+                                        Details:</h4>
 
                                     <app-editor *ngIf="details?.support?.description" [readOnly]="true"
                                         [data]="details?.support?.description" [id]="'details-support-editor'"
@@ -72,8 +123,7 @@
                                 </div>
 
                                 <div class="author">
-                                    <a
-                                        [routerLink]="['/', 'dashboard', 'profile', details?.createdBy?._id ]">
+                                    <a [routerLink]="['/', 'dashboard', 'profile', details?.createdBy?._id ]">
                                         <h4>{{details?.createdBy?.name}}</h4>
                                     </a>
                                     <button
@@ -280,8 +330,7 @@
                                                 alt="Presenting the broken author avatar :D">
                                         </div>
                                         <div class="autor__info">
-                                            <a
-                                                [routerLink]="['/', 'dashboard', 'profile', attendee?._id ]">
+                                            <a [routerLink]="['/', 'dashboard', 'profile', attendee?._id ]">
                                                 <p class="name">
                                                     {{attendee?.name}}
                                                 </p>
@@ -353,7 +402,9 @@
                 </div>
                 <div class="media-body">
                     <div [formGroup]="commentForm" class="comment-reply-form">
-                        <app-editor [id]="'comment-editor'" [editorStyle]="{padding: '0 15px', 'border-radius': '19px', border: 'solid 0.5px rgb(236, 236, 236)'}" (output)="updateFormData($event)">
+                        <app-editor [id]="'comment-editor'"
+                            [editorStyle]="{padding: '0 15px', 'border-radius': '19px', border: 'solid 0.5px rgb(236, 236, 236)'}"
+                            (output)="updateFormData($event)">
                         </app-editor>
 
                         <button style="float: right;" type="button" class="btn btn--sm btn--round"
@@ -372,7 +423,7 @@
         <p>You have been successfully added in the list of Attendees</p>`
         <p>You can visit the list of events you have RSVP for: By Clicking
             <p></p>
-            <a class="btn btn--sm btn--round"
-                [routerLink]="['/', 'dashboard', 'my-profile', 'my-rsvp']">My RSVP Events</a>
+            <a class="btn btn--sm btn--round" [routerLink]="['/', 'dashboard', 'my-profile', 'my-rsvp']">My RSVP
+                Events</a>
     </div>
 </swal>

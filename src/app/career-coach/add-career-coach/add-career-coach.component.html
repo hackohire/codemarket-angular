@@ -1,0 +1,90 @@
+<app-breadcumb [title]="breadcumb?.title" [path]="breadcumb?.path"></app-breadcumb>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div [formGroup]="careerCoachForm" class="careercoach-form-area">
+
+                <mat-form-field class="field-full-width">
+                    <input type="text" matInput formControlName="name" placeholder="Title">
+                </mat-form-field>
+
+                <ng-select placeholder="Roles" formControlName="jobProfile" [addTag]="addTagFn" [multiple]="true">
+                </ng-select>
+
+                <app-editor *ngIf="descriptionFormControl?.value && edit; else add" (output)="updateFormData($event)"
+                    [data]="descriptionFormControl?.value" [id]="'edit-dreamjob-editor'"
+                    [importArticleSubscription]="true" [placeholder]="'Career Coach Description:'"></app-editor>
+
+                <br />
+
+                <ng-template #add>
+                    <app-editor *ngIf="!edit" [placeholder]="'Dream Job Description:'" (output)="updateFormData($event)"
+                        [id]="'dreamjob-editor'" [importArticleSubscription]="true"></app-editor>
+                </ng-template>
+
+
+                <!-- <div class="row"> -->
+                <ng-select placeholder="Select Companies" [addTag]="addCompany" [items]="allCompanies"
+                    formControlName="companies" [multiple]="true" bindLabel="name">
+                    <ng-option *ngFor="let cName of allCompanies" [value]="cName._id">
+                        {{ cName?.name }}
+                    </ng-option>
+                </ng-select>
+                <!-- </div> -->
+
+                <div>
+                    <label style="margin-bottom: 0 !important;">{{careerCoachQuestions['gapAnalysis']}}: </label>
+                    <mat-radio-group [color]="'primary'" formControlName="gapAnalysis">
+                        <mat-radio-button [value]="true">Yes</mat-radio-button>
+                        <mat-radio-button [value]="false">No</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+
+                <div>
+                    <label style="margin-bottom: 0 !important;">{{careerCoachQuestions['careerCoachSessions']}}:
+                    </label>
+                    <mat-radio-group [color]="'primary'" formControlName="careerCoachSessions">
+                        <mat-radio-button [value]="true">Yes</mat-radio-button>
+                        <mat-radio-button [value]="false">No</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+
+                <div>
+                    <label style="margin-bottom: 0 !important;">{{careerCoachQuestions['helpingWithMockInterviews']}}:
+                    </label>
+                    <mat-radio-group [color]="'primary'" formControlName="helpingWithMockInterviews">
+                        <mat-radio-button [value]="true">Yes</mat-radio-button>
+                        <mat-radio-button [value]="false">No</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+
+                <div>
+                    <label style="margin-bottom: 0 !important;">{{careerCoachQuestions['hiringMentoringSessions']}}:
+                    </label>
+                    <mat-radio-group [color]="'primary'" formControlName="hiringMentoringSessions">
+                        <mat-radio-button [value]="true">Yes</mat-radio-button>
+                        <mat-radio-button [value]="false">No</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+
+
+                <br />
+
+                <div fxLayout="row" fxLayoutGap="10px">
+                    <button *ngIf="statusFormControl?.value !== 'Published'" type="button" (click)="submit('Drafted')"
+                        [disabled]="careerCoachForm?.invalid" mat-raised-button color="primary">Save</button>
+                    <button type="button" (click)="submit('Published')" [disabled]="careerCoachForm?.invalid"
+                        mat-raised-button
+                        color="primary">{{ statusFormControl?.value === 'Published' ? 'Publish Changes' : 'Publish' }}</button>
+                    <button *ngIf="statusFormControl?.value === 'Published'" type="button"
+                        (click)="submit('Unpublished')" [disabled]="careerCoachForm?.invalid" mat-raised-button
+                        color="primary">{{ 'Unpublish' }}</button>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

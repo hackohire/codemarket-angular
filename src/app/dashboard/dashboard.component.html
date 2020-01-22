@@ -1,5 +1,40 @@
 <!-- Header Section Starts HERE -->
+<style> 
+    .heading-text{
+        -webkit-animation: color-change 5s infinite;
+        -moz-animation: color-change 5s infinite;
+        -o-animation: color-change 5s infinite;
+        -ms-animation: color-change 5s infinite;
+        animation: color-change 5s infinite;
+        
+    }
 
+    @-webkit-keyframes color-change {
+        30% { color: red; }
+        60% { color: blue; }
+        100% { color: black; }
+    }
+    @-moz-keyframes color-change {
+        30% { color: red; }
+        60% { color: blue; }
+        100% { color: black; }
+    }
+    @-ms-keyframes color-change {
+        30% { color: red; }
+        60% { color: blue; }
+        100% { color: black; }
+    }
+    @-o-keyframes color-change {
+        30% { color: red; }
+        50% { color: blue; }
+        100% { color: black; }
+    }
+    @keyframes color-change {
+        30% { color: red; }
+        60% { color: blue; }
+        100% { color: black; }
+    }
+</style>
 <!-- <section class="hero-area bgimage"> -->
 <div class="container">
     <!-- <h1
@@ -9,7 +44,7 @@
     <div class="row" style="padding-top: 150px;">
         <div class="col-md-12">
             <h1
-                style="font-size: 60px; max-width: 100%; font-weight: 400; text-align: center;">
+                style="font-size: 60px; max-width: 100%; font-weight: 400; text-align: center;" class="heading-text">
                 LOCAL, INNOVATION & PROSPERITY<br />
             </h1>
             <button mat-flat-button color="primary" (click)="authService.login()">REGISTER</button>

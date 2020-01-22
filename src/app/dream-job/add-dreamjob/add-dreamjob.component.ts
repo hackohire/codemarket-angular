@@ -4,7 +4,7 @@ import { City } from '../../shared/models/city.model';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { BreadCumb } from '../../shared/models/bredcumb.model';
 import { FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
-import { MatAutocomplete, MatDialog } from '@angular/material';
+import { MatAutocomplete } from '@angular/material';
 import { AuthService } from '../../core/services/auth.service';
 import { Store } from '@ngrx/store';
 import { ActivatedRoute } from '@angular/router';
@@ -16,7 +16,7 @@ import { PostStatus } from '../../shared/models/poststatus.enum';
 import { PostType } from '../../shared/models/post-types.enum';
 import { AppState } from '../../core/store/state/app.state';
 import { Post } from '../../shared/models/post.model';
-import { Options } from 'ng5-slider/options';
+// import { Options } from 'ng5-slider/options';
 import { CompanyService } from '../../companies/company.service';
 import { PostService } from '../../shared/services/post.service';
 // import { AddCompanyComponent } from '../../companies/add-company/add-company.component';
@@ -32,16 +32,16 @@ export class AddDreamjobComponent implements OnInit {
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   breadcumb: BreadCumb;
   dreamjobForm: FormGroup;
-  options: Options = {
-    floor: 0,
-    ceil: 300,
-    step: 10,
-    // showTicks: true,
-    draggableRange: true,
-    translate: (value: number): string => {
-      return '$' + value + ' k';
-    }
-  };
+  // options: Options = {
+  //   floor: 0,
+  //   ceil: 300,
+  //   step: 10,
+  //   // showTicks: true,
+  //   // draggableRange: true,
+  //   // translate: (value: number): string => {
+  //   //   return '$' + value + ' k';
+  //   // }
+  // };
 
   allCompanies = [];
 
@@ -85,7 +85,7 @@ export class AddDreamjobComponent implements OnInit {
     private authService: AuthService,
     private store: Store<AppState>,
     private activatedRoute: ActivatedRoute,
-    private formService: FormService,
+    public formService: FormService,
     private companyService: CompanyService,
     private postService: PostService
   ) {
@@ -159,8 +159,8 @@ export class AddDreamjobComponent implements OnInit {
       createdBy: new FormControl(i && i.createdBy && i.createdBy._id ? i.createdBy._id : ''),
     });
 
-    this.salaryRangeFrom = this.dreamjobForm.get('salaryRangeFrom').value;
-    this.salaryRangeTo = this.dreamjobForm.get('salaryRangeTo').value;
+    // this.salaryRangeFrom = this.dreamjobForm.get('salaryRangeFrom').value;
+    // this.salaryRangeTo = this.dreamjobForm.get('salaryRangeTo').value;
 
     this.formService.findFromCollection('', 'cities').subscribe((cities) => {
       this.citySuggestions = cities;

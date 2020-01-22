@@ -90,7 +90,7 @@ export class AddDreamjobComponent implements OnInit {
     private postService: PostService
   ) {
     this.breadcumb = {
-      title: 'Add Dream job Details',
+      title: 'Add Your Career Goal or Your Dream job Details',
       path: [
         {
           name: 'Dashboard',

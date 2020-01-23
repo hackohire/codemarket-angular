@@ -22,6 +22,7 @@ import {
   MatSelectModule
 } from '@angular/material';
 import {MatTableModule} from '@angular/material/table';
+import { CdkAccordionModule } from '@angular/cdk/accordion';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import {MatTableModule} from '@angular/material/table';
     MatRadioModule,
     MatPaginatorModule,
     MatExpansionModule,
-    MatSelectModule
+    MatSelectModule,
+    CdkAccordionModule,
   ],
   exports: [
     MatFormFieldModule,
@@ -70,7 +72,8 @@ import {MatTableModule} from '@angular/material/table';
     MatRadioModule,
     MatPaginatorModule,
     MatExpansionModule,
-    MatSelectModule
+    MatSelectModule,
+    CdkAccordionModule,
   ]
 })
 export class MaterialModule {}

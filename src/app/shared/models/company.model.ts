@@ -39,7 +39,8 @@ export interface CompanyPost {
     createdAt?: string;
     updatedAt?: string;
     postType?: string;
-    challengeType: string;
+    challengeType?: string;
+    goalType?: string;
     description: [{
         type: string;
         data: BlockToolData
@@ -53,6 +54,14 @@ export interface Challenge {
         data: BlockToolData
     }];
     challengeType: ChallengeTypes
+}
+
+export interface Challenge {
+    description?: [{
+        type: string;
+        data: BlockToolData
+    }];
+    goalType: ChallengeTypes
 }
 
 export enum CompanyTypes {

@@ -56,6 +56,7 @@ export class CompanyService {
       createdAt
       updatedAt
       challengeType
+      goalType
       postType
       _id
       comments {

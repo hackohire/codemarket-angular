@@ -25,12 +25,20 @@ import { AddEventComponent } from '../../../event/add-event/add-event.component'
 import { MatDialog } from '@angular/material/dialog';
 import { Event } from '../../../shared/models/event.model';
 import { concatMap } from 'rxjs/operators/concatMap';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-company-details',
   templateUrl: './company-details.component.html',
   styleUrls: ['./company-details.component.scss'],
-  providers: [CompanyService, CommentService]
+  providers: [CompanyService, CommentService],
+  animations: [
+    trigger('bodyExpansion', [
+      state('collapsed', style({ height: '0px', display: 'none' })),
+      state('expanded', style({ height: '*', display: 'block' })),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4,0.0,0.2,1)')),
+    ]),
+  ],
 })
 export class CompanyDetailsComponent implements OnInit {
 
@@ -64,6 +72,9 @@ export class CompanyDetailsComponent implements OnInit {
   commentForm: FormGroup;
   commentsList: any[];
 
+  dreamJobsList = [];
+  jobsList = [];
+
   /** Q&A Related Variables */
   questionOrAnswerForm: FormGroup;
   questionsList: any[];
@@ -85,28 +96,64 @@ export class CompanyDetailsComponent implements OnInit {
       title: 'Mission'
     },
     {
+      view: 'jobs',
+      title: 'Jobs'
+    },
+    {
+      view: 'dream-jobs',
+      title: 'Dream Jobs'
+    },
+    {
       view: 'goals',
-      title: 'Goals'
+      title: 'Goals',
+      types: [
+        {
+          view: 'sales-goals',
+          title: 'Sales Goals'
+        },
+        {
+          view: 'team-goals',
+          title: 'Team Goals'
+        },
+        {
+          view: 'business-goals',
+          title: 'Business Goals'
+        },
+        {
+          view: 'marketing-goals',
+          title: 'Marketing Goals'
+        },
+        {
+          view: 'technical-goals',
+          title: 'Technical Goals'
+        },
+      ]
     },
     {
-      view: 'sales-challenges',
-      title: 'Sales Challenges'
-    },
-    {
-      view: 'team-challenges',
-      title: 'Team Challenges'
-    },
-    {
-      view: 'business-challenges',
-      title: 'Business Challenges'
-    },
-    {
-      view: 'marketing-challenges',
-      title: 'Marketing Challenges'
-    },
-    {
-      view: 'technical-challenges',
-      title: 'Technical Challenges'
+      view: 'challenges',
+      title: 'Challenges',
+      types: [
+        {
+          view: 'sales-challenges',
+          title: 'Sales Challenges'
+        },
+        {
+          view: 'team-challenges',
+          title: 'Team Challenges'
+        },
+        {
+          view: 'business-challenges',
+          title: 'Business Challenges'
+        },
+        {
+          view: 'marketing-challenges',
+          title: 'Marketing Challenges'
+        },
+        {
+          view: 'technical-challenges',
+          title: 'Technical Challenges'
+        },
+      ]
     },
     {
       view: 'events',
@@ -128,7 +175,7 @@ export class CompanyDetailsComponent implements OnInit {
       view: 'info',
       title: 'Info'
     },
-  ]
+  ];
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -166,7 +213,7 @@ export class CompanyDetailsComponent implements OnInit {
                         this.companyView = 'mission';
                         break;
                       case 'goal':
-                        this.companyView = 'goals';
+                        this.companyView = post.goalType + '-goals';
                         break;
                       case 'post':
                         this.companyView = 'home';
@@ -175,7 +222,7 @@ export class CompanyDetailsComponent implements OnInit {
                         this.companyView = post.challengeType + '-challenges';
                         break;
                       default:
-                        this.companyView = 'home'
+                        this.companyView = 'home';
                     }
                     this.commentService.scrollToComment(post.description, comment);
 
@@ -199,7 +246,7 @@ export class CompanyDetailsComponent implements OnInit {
                     );
                   }
                 })
-              ) : of(company)
+              ) : of(company);
           })
         )
         .subscribe({
@@ -209,6 +256,7 @@ export class CompanyDetailsComponent implements OnInit {
               this.companyDetails = c;
               this.initializeCommentForm(c, 'company');
               this.initializeQuestionAndAnswerForm(c, 'company');
+              this.fetchJobsAndDreamJobs(c);
             }
           }
         })
@@ -346,11 +394,16 @@ export class CompanyDetailsComponent implements OnInit {
     ).subscribe();
   }
 
-  addPost(postType: string, challengeType = '') {
+  addPost(postType: string, challengeType = '', goalType = '') {
     if (this.authService.loggedInUser) {
-      this.updateCompany({}, { operation: 'ADD', post: { challengeType, postType, createdBy: this.authService.loggedInUser._id, description: this.postDescription } });
+      this.updateCompany(
+        {},
+        {
+          operation: 'ADD',
+          post: { challengeType, goalType, postType, createdBy: this.authService.loggedInUser._id, description: this.postDescription }
+        });
     } else {
-      this.authService.checkIfUserIsLoggedIn(true)
+      this.authService.checkIfUserIsLoggedIn(true);
     }
   }
 
@@ -470,10 +523,29 @@ export class CompanyDetailsComponent implements OnInit {
     const eventsList = this.eventsList.filter((e) => this.isPast(e.dateRange[1] ? e.dateRange[1] : e.dateRange[0]) === past);
     this.noPastEvent = past ? !Boolean(eventsList.length) : this.noPastEvent;
     this.noUpcomingEvents = !past ? !Boolean(eventsList.length) : this.noUpcomingEvents;
-    return eventsList
+    return eventsList;
   }
+
   isPast(d): boolean {
     return this.getDate(d).isBefore(moment());
   }
+
+  selectMainCategory(category, panel) {
+    if (!category.types) {
+      this.router.navigate(['./'], { relativeTo: this.activatedRoute, skipLocationChange: true, queryParams: { view: category.view }, queryParamsHandling: 'merge' });
+    } else {
+      panel.toggle();
+    }
+  }
+
+  fetchJobsAndDreamJobs(c) {
+    this.postService.getAllPosts({ limit: 0, pageNumber: 0 }, '', '', c._id).subscribe(c => {
+      if (c && c.posts) {
+        this.dreamJobsList = c.posts.filter(comp => comp.type === 'dream-job');
+        this.jobsList = c.posts.filter(comp => comp.type === 'job');
+      }
+    });
+  }
+
 
 }

@@ -24,7 +24,7 @@
                 (click)="postService?.redirectToPostDetails(p)">{{p?.name}}</a>
 
             <!-- Post Actions -->
-            <span style="float: right;" *ngIf="p?.createdBy?._id === authService?.loggedInUser?._id">
+            <!-- <span style="float: right;" *ngIf="p?.createdBy?._id === authService?.loggedInUser?._id">
                 <button mat-icon-button [matMenuTriggerFor]="optionsMenu"
                     aria-label="Example icon-button with a menu">
                     <mat-icon>more_horiz</mat-icon>
@@ -39,7 +39,7 @@
                         <span>Delete</span>
                     </button>
                 </mat-menu>
-            </span>
+            </span> -->
         </h2>
 
         <!-- Post Content -->

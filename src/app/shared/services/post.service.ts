@@ -174,12 +174,12 @@ export class PostService {
     );
   }
 
-  getAllPosts(pageOptions, type, referencePostId = ''): Observable<Post[]> {
+  getAllPosts(pageOptions, type, referencePostId = '', companyId = ''): Observable<{posts: Post[], total: number}> {
     return this.apollo.query(
       {
         query: gql`
-          query getAllPosts($pageOptions: PageOptionsInput, $type: String, $referencePostId: String) {
-            getAllPosts(pageOptions: $pageOptions, type: $type, referencePostId: $referencePostId) {
+          query getAllPosts($pageOptions: PageOptionsInput, $type: String, $referencePostId: String, $companyId: String) {
+            getAllPosts(pageOptions: $pageOptions, type: $type, referencePostId: $referencePostId, companyId: $companyId) {
               posts {
                 ...Product
               }
@@ -191,7 +191,8 @@ export class PostService {
         variables: {
           pageOptions,
           type: type ? type : '',
-          referencePostId
+          referencePostId,
+          companyId
         },
         fetchPolicy: 'no-cache'
       }

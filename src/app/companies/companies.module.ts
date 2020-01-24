@@ -14,7 +14,7 @@ const companyRoutes: Routes = [
   {
     path: '',
     component: CompaniesComponent,
-    data: { noReuse: true },
+    // data: { noReuse: true },
     children: [
       {
         path: 'company-list',

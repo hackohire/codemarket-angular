@@ -233,7 +233,7 @@ const routes: Routes = [
   {
     path: 'company/:companyId',
     loadChildren: () => import('./companies/companies.module').then(module => module.CompaniesModule),
-    data: { noReuse: true, setPostMeta: true },
+    data: { setPostMeta: true },
     pathMatch: 'full'
   },
 ];

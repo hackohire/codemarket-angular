@@ -35,10 +35,10 @@ export interface Post {
     cities?: City[];
     company?: Company & string;
     companies?: [Company & string];
-    salaryCurrency?: String;
+    salaryCurrency?: string;
     salaryRangeFrom?: number;
     salaryRangeTo?: number;
-    jobProfile?: string;
+    jobProfile?: [Tag];
     timeline?: number;
 
     /** Fields related to Career Coach */
@@ -46,6 +46,20 @@ export interface Post {
     careerCoachSessions?: boolean;
     helpingWithMockInterviews?: boolean;
     hiringMentoringSessions?: boolean;
+
+    /** Fields related to Business Coach */
+    businessCoachSessions?: boolean;
+    businessAreas?: [Tag];
+    businessGoals?: [Tag];
+    businessChallenges?: [Tag];
+    sellProducts?: {
+        sellProducts?: boolean,
+        products?: [Tag]
+    };
+    sellServices?: {
+        sellServices: boolean,
+        services?: [Tag]
+    };
 
     likeCount?: number;
     comments?: Comment[];

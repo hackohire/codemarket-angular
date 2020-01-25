@@ -116,6 +116,14 @@ const postRoutes: Routes = [
       {
         path: 'edit-career-coach/:careerCoachId',
         loadChildren: () => import('../career-coach/add-career-coach/add-career-coach.module').then(module => module.AddCareerCoachModule),
+      },
+      {
+        path: 'add-business-coach',
+        loadChildren: () => import('../business-coach/add-business-coach/add-business-coach.module').then(module => module.AddBusinessCoachModule),
+      },
+      {
+        path: 'edit-business-coach/:businessCoachId',
+        loadChildren: () => import('../business-coach/add-business-coach/add-business-coach.module').then(module => module.AddBusinessCoachModule),
       }
     ],
     // runGuardsAndResolvers: 'always',

@@ -53,6 +53,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
   commentId: string;
 
   careerCoachQuestions = appConstants.careerCoachQuestions;
+  businessCoachQuestions = appConstants.businessCoachQuestions;
 
   constructor(
     private store: Store<AppState>,

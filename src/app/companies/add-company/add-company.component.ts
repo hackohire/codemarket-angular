@@ -88,7 +88,7 @@ export class AddCompanyComponent implements OnInit {
     private authService: AuthService,
     private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
-    private formService: FormService,
+    public formService: FormService,
     private companyService: CompanyService,
     public locationService: LocationService,
     // @Inject(MAT_DIALOG_DATA) public data: any,

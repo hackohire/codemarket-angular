@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { BreadCumb } from '../../shared/models/bredcumb.model';
 import { FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
-import { Subscription, of } from 'rxjs';
+import { Subscription, of, concat, Observable, Subject } from 'rxjs';
 import { City } from '../../shared/models/city.model';
 import { MatAutocomplete } from '@angular/material/autocomplete';
 import { AuthService } from '../../core/services/auth.service';
@@ -13,7 +13,7 @@ import { FormService } from '../../shared/services/form.service';
 import { CompanyService } from '../../companies/company.service';
 import { SetSelectedPost, GetPostById, AddPost, UpdatePost } from '../../core/store/actions/post.actions';
 import { selectSelectedPost } from '../../core/store/selectors/post.selectors';
-import { tap, switchMap } from 'rxjs/operators';
+import { tap, switchMap, distinctUntilChanged, catchError } from 'rxjs/operators';
 import { Post } from '../../shared/models/post.model';
 import { PostStatus } from '../../shared/models/poststatus.enum';
 import { PostType } from '../../shared/models/post-types.enum';
@@ -60,7 +60,13 @@ export class AddJobComponent implements OnInit, OnDestroy {
 
   subscription$: Subscription;
 
-  citySuggestions: City[];
+  citySuggestions$: Observable<City[]>;
+  cityInput$ = new Subject<string>();
+  citiesLoading = false;
+
+  roles$: Observable<any[]>;
+  rolesLoading = false;
+  roleInput$ = new Subject<string>();
 
   salaryRangeFrom = 30;
   salaryRangeTo = 50;
@@ -161,10 +167,29 @@ export class AddJobComponent implements OnInit, OnDestroy {
     this.salaryRangeFrom = this.jobForm.get('salaryRangeFrom').value;
     this.salaryRangeTo = this.jobForm.get('salaryRangeTo').value;
 
-    this.formService.findFromCollection('', 'cities').subscribe((cities) => {
-      // const filteredCitys = _.differenceBy(cities, i.cities, '_id');
-      this.citySuggestions = cities;
-    });
+    this.citySuggestions$ = concat(
+      of([]), // default items
+      this.cityInput$.pipe(
+        distinctUntilChanged(),
+        tap(() => this.citiesLoading = true),
+        switchMap(term => this.formService.findFromCollection(term, 'cities').pipe(
+          catchError(() => of([])), // empty list on error
+          tap(() => this.citiesLoading = false)
+          ))
+        )
+    );
+
+    this.roles$ = concat(
+      of([]), // default items
+      this.roleInput$.pipe(
+        distinctUntilChanged(),
+        tap(() => this.rolesLoading = true),
+        switchMap(term => this.formService.findFromCollection(term, 'tags', 'role').pipe(
+          catchError(() => of([])), // empty list on error
+          tap(() => this.rolesLoading = false)
+          ))
+        )
+    );
 
     this.companyService.getCompaniesByType('').subscribe((companies) => {
       this.allCompanies = companies;
@@ -191,13 +216,18 @@ export class AddJobComponent implements OnInit, OnDestroy {
     if (this.idFromControl && !this.idFromControl.value) {
       this.jobForm.removeControl('_id');
       const jobValue = { ...this.jobForm.value };
-      // jobValue.company = jobValue && jobValue.company && jobValue.company._id ? jobValue.company._id : jobValue.company;
+      this.onlySendIdForTags(jobValue);
       this.store.dispatch(AddPost({ post: jobValue }));
     } else {
       const jobValue = { ...this.jobForm.value };
-      // jobValue.company = jobValue && jobValue.company ? jobValue.company._id : jobValue.company;
+      this.onlySendIdForTags(jobValue);
       this.store.dispatch(UpdatePost({ post: jobValue }));
     }
+  }
+
+  onlySendIdForTags(jobValue) {
+    jobValue.cities = jobValue.cities.map(c => c._id);
+    jobValue.jobProfile = jobValue.jobProfile.map(c => c._id);
   }
 
   updateFormData(event) {

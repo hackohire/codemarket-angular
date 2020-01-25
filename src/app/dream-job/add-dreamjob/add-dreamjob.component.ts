@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Subscription, of } from 'rxjs';
+import { Subscription, of, Observable, Subject, concat } from 'rxjs';
 import { City } from '../../shared/models/city.model';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { BreadCumb } from '../../shared/models/bredcumb.model';
@@ -11,7 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FormService } from '../../shared/services/form.service';
 import { SetSelectedPost, GetPostById } from '../../core/store/actions/post.actions';
 import { selectSelectedPost } from '../../core/store/selectors/post.selectors';
-import { tap, switchMap } from 'rxjs/operators';
+import { tap, switchMap, distinctUntilChanged, catchError } from 'rxjs/operators';
 import { PostStatus } from '../../shared/models/poststatus.enum';
 import { PostType } from '../../shared/models/post-types.enum';
 import { AppState } from '../../core/store/state/app.state';
@@ -32,16 +32,6 @@ export class AddDreamjobComponent implements OnInit {
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   breadcumb: BreadCumb;
   dreamjobForm: FormGroup;
-  // options: Options = {
-  //   floor: 0,
-  //   ceil: 300,
-  //   step: 10,
-  //   // showTicks: true,
-  //   // draggableRange: true,
-  //   // translate: (value: number): string => {
-  //   //   return '$' + value + ' k';
-  //   // }
-  // };
 
   allCompanies = [];
 
@@ -74,7 +64,13 @@ export class AddDreamjobComponent implements OnInit {
 
   subscription$: Subscription;
 
-  citySuggestions: City[];
+  citySuggestions$: Observable<City[]>;
+  cityInput$ = new Subject<string>();
+  citiesLoading = false;
+
+  roles$: Observable<any[]>;
+  rolesLoading = false;
+  roleInput$ = new Subject<string>();
 
   salaryRangeFrom = 30;
   salaryRangeTo = 50;
@@ -162,9 +158,29 @@ export class AddDreamjobComponent implements OnInit {
     // this.salaryRangeFrom = this.dreamjobForm.get('salaryRangeFrom').value;
     // this.salaryRangeTo = this.dreamjobForm.get('salaryRangeTo').value;
 
-    this.formService.findFromCollection('', 'cities').subscribe((cities) => {
-      this.citySuggestions = cities;
-    });
+    this.roles$ = concat(
+      of([]), // default items
+      this.roleInput$.pipe(
+        distinctUntilChanged(),
+        tap(() => this.rolesLoading = true),
+        switchMap(term => this.formService.findFromCollection(term, 'tags', 'role').pipe(
+          catchError(() => of([])), // empty list on error
+          tap(() => this.rolesLoading = false)
+          ))
+        )
+    );
+
+    this.citySuggestions$ = concat(
+      of([]), // default items
+      this.cityInput$.pipe(
+        distinctUntilChanged(),
+        tap(() => this.citiesLoading = true),
+        switchMap(term => this.formService.findFromCollection(term, 'cities').pipe(
+          catchError(() => of([])), // empty list on error
+          tap(() => this.citiesLoading = false)
+          ))
+        )
+    );
 
     this.companyService.getCompaniesByType('').subscribe((companies) => {
       this.allCompanies = companies;
@@ -192,23 +208,29 @@ export class AddDreamjobComponent implements OnInit {
       const dreamJobValue = { ...this.dreamjobForm.value };
 
       /** Only Send _id */
-      dreamJobValue.companies = dreamJobValue.companies.map(c => c._id);
+      this.onlySendIdForTags(dreamJobValue);
       this.postService.addPost(dreamJobValue).subscribe((j) => {
         if (j) {
           this.postService.redirectToDreamJobDetails(j);
         }
-      })
+      });
     } else {
       const dreamJobValue = { ...this.dreamjobForm.value };
 
       /** Only Send _id */
-      dreamJobValue.companies = dreamJobValue.companies.map(c => c._id);
+      this.onlySendIdForTags(dreamJobValue);
       this.postService.updatePost(dreamJobValue).subscribe((j) => {
         if (j) {
           this.postService.redirectToDreamJobDetails(j);
         }
-      })
+      });
     }
+  }
+
+  onlySendIdForTags(dreamJobValue) {
+    dreamJobValue.companies = dreamJobValue.companies.map(c => c._id);
+    dreamJobValue.cities = dreamJobValue.cities.map(c => c._id);
+    dreamJobValue.jobProfile = dreamJobValue.jobProfile.map(c => c._id);
   }
 
   updateFormData(event) {

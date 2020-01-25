@@ -53,10 +53,6 @@ export class AddCareerCoachComponent implements OnInit {
     return this.careerCoachForm.get('description');
   }
 
-  get citiesFormControl() {
-    return this.careerCoachForm.get('cities') as FormArray;
-  }
-
   get statusFormControl() {
     return this.careerCoachForm.get('status');
   }
@@ -151,9 +147,9 @@ export class AddCareerCoachComponent implements OnInit {
     // this.salaryRangeFrom = this.careerCoachForm.get('salaryRangeFrom').value;
     // this.salaryRangeTo = this.careerCoachForm.get('salaryRangeTo').value;
 
-    this.formService.findFromCollection('', 'cities').subscribe((cities) => {
-      this.citySuggestions = cities;
-    });
+    // this.formService.findFromCollection('', 'cities').subscribe((cities) => {
+    //   this.citySuggestions = cities;
+    // });
 
     this.companyService.getCompaniesByType('').subscribe((companies) => {
       this.allCompanies = companies;

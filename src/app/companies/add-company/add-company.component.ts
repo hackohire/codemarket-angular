@@ -7,13 +7,14 @@ import { MatAutocomplete } from '@angular/material';
 import { AuthService } from '../../core/services/auth.service';
 import { ActivatedRoute } from '@angular/router';
 import { FormService } from '../../shared/services/form.service';
-import { catchError } from 'rxjs/operators';
-import { Subscription, of } from 'rxjs';
+import { catchError, distinctUntilChanged, tap, switchMap } from 'rxjs/operators';
+import { Subscription, of, Observable, Subject, concat } from 'rxjs';
 import { Tag } from '../../shared/models/product.model';
 import { CompanyService } from '../company.service';
 import { CompanyTypes, Company } from '../../shared/models/company.model';
 import Swal from 'sweetalert2';
 import { LocationService } from '../../shared/services/location.service';
+import { City } from '../../shared/models/city.model';
 
 @Component({
   selector: 'app-add-company',
@@ -68,6 +69,10 @@ export class AddCompanyComponent implements OnInit {
   removable = true;
   addOnBlur = true;
 
+  citySuggestions$: Observable<City[]>;
+  cityInput$ = new Subject<string>();
+  citiesLoading = false;
+
   subscription$: Subscription;
 
   allCities: Tag[];
@@ -83,7 +88,7 @@ export class AddCompanyComponent implements OnInit {
     private authService: AuthService,
     private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
-    private formService: FormService,
+    public formService: FormService,
     private companyService: CompanyService,
     public locationService: LocationService,
     // @Inject(MAT_DIALOG_DATA) public data: any,
@@ -147,9 +152,17 @@ export class AddCompanyComponent implements OnInit {
       }),
     });
 
-    // if (this.data) {
-    //   this.companyForm.controls['name'].setValue(this.data.name);
-    // }
+    this.citySuggestions$ = concat(
+      of([]), // default items
+      this.cityInput$.pipe(
+        distinctUntilChanged(),
+        tap(() => this.citiesLoading = true),
+        switchMap(term => this.formService.findFromCollection(term, 'cities').pipe(
+          catchError(() => of([])), // empty list on error
+          tap(() => this.citiesLoading = false)
+        ))
+      )
+    );
 
     await this.locationService.setLocaionSearhAutoComplete(this.searchLocation, this.locationFormGroup);
 
@@ -181,11 +194,7 @@ export class AddCompanyComponent implements OnInit {
         })
       ).subscribe((d: any) => {
         Swal.fire(`${d.name} has been Created Successfully`, '', 'success').then(() => {
-          // if (this.data) {
-            // this.dialogRef.close(d);
-          // } else {
-            this.companyService.redirectToCompanyDetails(d._id);
-          // }
+          this.companyService.redirectToCompanyDetails(d._id);
         });
         this.companyFormInitialization(d);
       });

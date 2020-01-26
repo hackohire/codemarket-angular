@@ -25,7 +25,7 @@ export class FormService {
     const value = event.value;
 
     if ((value || '').trim()) {
-      categoriesFormControl.push(new FormControl({name: value.trim()}));
+      categoriesFormControl.push(new FormControl({ name: value.trim() }));
     }
 
     // Reset the input value
@@ -36,7 +36,7 @@ export class FormService {
 
   selectedCategory(categoriesFormControl: FormArray, event) {
     const value = event.option.value;
-    categoriesFormControl.push(new FormControl({name: value.name, _id: value._id}));
+    categoriesFormControl.push(new FormControl({ name: value.name, _id: value._id }));
   }
 
   // valueChange(searchText: FormControl) {
@@ -50,12 +50,12 @@ export class FormService {
     // this.productForm.updateValueAndValidity();
   }
 
-  findFromCollection(keyWord: string, searchCollection: string): Observable<Tag[]> {
+  findFromCollection(keyWord: string, searchCollection: string, type = ''): Observable<Tag[]> {
     return this.apollo.query(
       {
         query: gql`
-          query findFromCollection($keyWord: String, $searchCollection: String) {
-            findFromCollection(keyWord: $keyWord, searchCollection: $searchCollection) {
+          query findFromCollection($keyWord: String, $searchCollection: String, $type: String) {
+            findFromCollection(keyWord: $keyWord, searchCollection: $searchCollection, type: $type) {
               _id
               name
             }
@@ -63,12 +63,37 @@ export class FormService {
         `,
         variables: {
           keyWord,
-          searchCollection
+          searchCollection,
+          type
         }
       }
     ).pipe(
       map((p: any) => {
         return p.data.findFromCollection;
+      }),
+    );
+  }
+
+  addToCollection(keyWord: string, searchCollection: string, type = ''): Observable<Tag[]> {
+    return this.apollo.mutate(
+      {
+        mutation: gql`
+          mutation addToCollection($keyWord: String, $searchCollection: String, $type: String) {
+            addToCollection(keyWord: $keyWord, searchCollection: $searchCollection, type: $type) {
+              _id
+              name
+            }
+          }
+        `,
+        variables: {
+          keyWord,
+          searchCollection,
+          type
+        }
+      }
+    ).pipe(
+      map((p: any) => {
+        return p.data.addToCollection;
       }),
     );
   }
@@ -107,8 +132,19 @@ export class FormService {
         if (titleFormControl && h && h.title) {
           titleFormControl.setValue(h.title);
         }
-      })
+      });
   }
 
+  addRoleFn = (name) => {
+    return this.addToCollection(name, 'tags', 'role').toPromise();
+  }
+
+  addCityFn = (name) => {
+    return this.addToCollection(name, 'cities').toPromise();
+  }
+
+  addBusinessKeywordsFn = (name) => {
+    return this.addToCollection(name, 'tags', 'business').toPromise();
+  }
 
 }

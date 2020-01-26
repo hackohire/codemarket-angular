@@ -10,8 +10,8 @@
                     <input #url formControlName="referencePostUrl" type="text" matInput
                         placeholder="Import Post By Url">
                 </mat-form-field>
-                <a matSuffix type="button" (click)="formService?.import(url?.value, dreamjobForm?.get('name'))" class="btn btn--sm btn--round menu"
-                    style="margin-left: 8px;">
+                <a matSuffix type="button" (click)="formService?.import(url?.value, dreamjobForm?.get('name'))"
+                    class="btn btn--sm btn--round menu" style="margin-left: 8px;">
                     <mat-icon style="vertical-align: middle;">arrow_downward</mat-icon>Import
                 </a>
 
@@ -20,30 +20,35 @@
                     <input type="text" matInput formControlName="name" placeholder="Title">
                 </mat-form-field>
 
-                <ng-select placeholder="Roles" formControlName="jobProfile" [addTag]="addTagFn" [multiple]="true">
+                <ng-select placeholder="Roles"
+                    [items]="roles$ | async" [hideSelected]="true" formControlName="jobProfile"
+                    [addTag]="formService?.addRoleFn" [bindLabel]="'name'" [minTermLength]="2" [loading]="rolesLoading"
+                    [multiple]="true" [typeahead]="roleInput$">
                 </ng-select>
 
                 <app-editor *ngIf="descriptionFormControl?.value && edit; else add" (output)="updateFormData($event)"
-                    [data]="descriptionFormControl?.value" [id]="'edit-dreamjob-editor'" [importArticleSubscription]="true" [placeholder]="'Dream Job Description:'"></app-editor>
+                    [data]="descriptionFormControl?.value" [id]="'edit-dreamjob-editor'"
+                    [importArticleSubscription]="true" [placeholder]="'Dream Job Description:'"></app-editor>
 
                 <br />
 
                 <ng-template #add>
-                    <app-editor *ngIf="!edit" [placeholder]="'Dream Job Description:'" (output)="updateFormData($event)" [id]="'dreamjob-editor'" [importArticleSubscription]="true"></app-editor>
+                    <app-editor *ngIf="!edit" [placeholder]="'Dream Job Description:'" (output)="updateFormData($event)"
+                        [id]="'dreamjob-editor'" [importArticleSubscription]="true"></app-editor>
                 </ng-template>
 
                 <div class="row">
-                    <ng-select class="col-md-6"  placeholder="Select Dream Companies" [addTag]="addCompany" [items]="allCompanies" formControlName="companies" [multiple]="true" bindLabel="name">
+                    <ng-select class="col-md-6" placeholder="Select Dream Companies" [addTag]="addCompany"
+                        [items]="allCompanies" formControlName="companies" [multiple]="true" bindLabel="name">
                         <ng-option *ngFor="let cName of allCompanies" [value]="cName._id">
                             {{ cName?.name }}
                         </ng-option>
                         <!-- <ng-option disabled (click)="openAddCompanyDialog()">+ Add Company</ng-option> -->
                     </ng-select>
-    
-                    <ng-select class="col-md-6" placeholder="Select Cities" [addTag]="addCitiesFn" [items]="citySuggestions" formControlName="cities" [multiple]="true" bindLabel="name">
-                        <!-- <ng-option *ngFor="let cName of allCompanies" [value]="cName._id"> -->
-                            <!-- {{ cName?.name }} -->
-                        <!-- </ng-option> -->
+
+                    <ng-select [hideSelected]="true" placeholder="Cities" [addTag]="formService.addCityFn"
+                        [loading]="citiesLoading" [items]="citySuggestions$ | async" [typeahead]="cityInput$"
+                        formControlName="cities" [multiple]="true" bindLabel="name">
                     </ng-select>
                 </div>
 
@@ -91,7 +96,7 @@
                 <!-- <mat-form-field class="field-full-width" style="width: 30%; padding-left: 10px;">
                     <input type="number" matInput formControlName="salaryRangeFrom" placeholder="Timeline">
                 </mat-form-field> -->
-                
+
                 <!-- <ng5-slider [(value)]="salaryRangeFrom"
                     [(highValue)]="salaryRangeTo" [options]="options"></ng5-slider>
                 <br /> -->

@@ -36,6 +36,11 @@
 
                                     <br />
 
+                                    <div *ngIf="details?.type === 'business-coach'">
+                                        <ng-container *ngTemplateOutlet="businessCoachDetailsTemplate; context: {details: details}">
+                                        </ng-container>
+                                    </div>
+
                                     <ng-container *ngIf="details.type === 'career-coach'">
                                         <div class="tab-content-wrapper" fxLayout="row">
                                             <h4 fxFlex="90" class="plan-description"
@@ -98,6 +103,7 @@
                                 </article>
                             </div>
                         </div>
+                    
                         <ng-container *ngTemplateOutlet="locationTemplate; context: {location: details?.location}">
                         </ng-container>
                         <ng-container *ngTemplateOutlet="addCommentTemplate; context: details"></ng-container>
@@ -416,6 +422,135 @@
             <!-- comment reply -->
         </div>
     </div>
+</ng-template>
+
+<ng-template #businessCoachDetailsTemplate let-cDetails="details">
+    <mat-accordion class="example-headers-align" [multi]="true">
+
+        <mat-expansion-panel [expanded]="true" hideToggle>
+          <mat-expansion-panel-header>
+            <mat-panel-title style="font-weight: 500;">
+              {{businessCoachQuestions['cities']}}
+            </mat-panel-title>
+            <mat-panel-description style="place-content: flex-end; align-items: center;">
+                <i class="fas fa-city"></i>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+      
+          <span *ngFor="let c of cDetails?.cities; let last=last;">{{c?.name + (!last ? ', ' : '')}}</span>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel [expanded]="true" hideToggle>
+            <mat-expansion-panel-header>
+              <mat-panel-title style="font-weight: 500;">
+                {{businessCoachQuestions['roles']}}
+              </mat-panel-title>
+              <mat-panel-description style="place-content: flex-end; align-items: center;">
+                <i class="fas fa-user-tie"></i>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+        
+            <span *ngFor="let c of cDetails?.jobProfile; let last=last;">{{c?.name + (!last ? ', ' : '')}}</span>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel [expanded]="true" hideToggle>
+            <mat-expansion-panel-header>
+              <mat-panel-title style="font-weight: 500;">
+                {{businessCoachQuestions['companies']}}
+              </mat-panel-title>
+              <mat-panel-description style="place-content: flex-end; align-items: center;">
+                <i class="fas fa-industry-alt"></i>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+        
+            <span *ngFor="let c of cDetails?.companies; let last=last;">{{c?.name + (!last ? ', ' : '')}}</span>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel [expanded]="true" hideToggle>
+            <mat-expansion-panel-header>
+              <mat-panel-title style="font-weight: 500;">
+                {{businessCoachQuestions['businessAreas']}}
+              </mat-panel-title>
+              <mat-panel-description style="place-content: flex-end; align-items: center;">
+                <i class="fas fa-briefcase"></i>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+        
+            <span *ngFor="let c of cDetails?.businessAreas; let last=last;">{{c?.name + (!last ? ', ' : '')}}</span>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel [expanded]="true" hideToggle>
+            <mat-expansion-panel-header>
+              <mat-panel-title style="font-weight: 500;">
+                {{businessCoachQuestions['businessGoals']}}
+              </mat-panel-title>
+              <mat-panel-description style="place-content: flex-end; align-items: center;">
+                <i class="fas fa-bullseye-arrow"></i>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+        
+            <span *ngFor="let c of cDetails?.businessGoals; let last=last;">{{c?.name + (!last ? ', ' : '')}}</span>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel [expanded]="true" hideToggle>
+            <mat-expansion-panel-header>
+              <mat-panel-title style="font-weight: 500;">
+                {{businessCoachQuestions['businessChallenges']}}
+              </mat-panel-title>
+              <mat-panel-description style="place-content: flex-end; align-items: center;">
+                <i class="fas fa-exclamation-circle"></i>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+        
+            <span *ngFor="let c of cDetails?.businessChallenges; let last=last;">{{c?.name + (!last ? ', ' : '')}}</span>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel [expanded]="true" hideToggle>
+            <mat-expansion-panel-header>
+              <mat-panel-title style="font-weight: 500;">
+                {{businessCoachQuestions['businessCoachSessions']}}
+              </mat-panel-title>
+              <mat-panel-description style="place-content: flex-end; align-items: center;">
+                {{cDetails?.businessCoachSessions ? 'Yes' : 'No'}}
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel [expanded]="true" hideToggle>
+            <mat-expansion-panel-header>
+              <mat-panel-title style="font-weight: 500;">
+                {{businessCoachQuestions['sellProducts']}}
+              </mat-panel-title>
+              <mat-panel-description style="place-content: flex-end; align-items: center;">
+                {{cDetails?.sellServices?.sellServices ? 'Yes' : 'No'}}
+                <!-- <mat-icon>{{cDetails?.sellProducts?.sellProducts ? 'fad fa-check-circle' : 'fad fa-times-circle'}}</mat-icon> -->
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+        
+            <ng-container *ngIf="cDetails?.sellServices?.sellServices">
+                <span *ngFor="let c of cDetails?.sellProducts?.products; let last=last;">{{c?.name + (!last ? ', ' : '')}}</span>
+            </ng-container>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel [expanded]="true" hideToggle>
+            <mat-expansion-panel-header>
+              <mat-panel-title style="font-weight: 500;">
+                {{businessCoachQuestions['sellServices']}}
+              </mat-panel-title>
+              <mat-panel-description style="place-content: flex-end; align-items: center;">
+                {{cDetails?.sellServices?.sellServices ? 'Yes' : 'No'}}
+                <!-- <i fxFlex="10" [ngClass]="cDetails?.sellServices?.sellServices ? 'fad fa-check-circle' : 'fad fa-times-circle'"
+                    style="vertical-align: middle; font-size: 1.5em;"></i> -->
+              <!-- <mat-icon>{{cDetails?.sellServices?.sellServices ? 'fad fa-check-circle' : 'fad fa-times-circle'}}</mat-icon> -->
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+        
+            <ng-container *ngIf="cDetails?.sellServices?.sellServices">
+                <span *ngFor="let c of cDetails?.sellServices?.services; let last=last;">{{c?.name + (!last ? ', ' : '')}}</span>
+            </ng-container>
+        </mat-expansion-panel>
+
+    </mat-accordion>
 </ng-template>
 
 <swal #successfulRSVP title="RSVP Successful!" type="success" [showConfirmButton]="false">

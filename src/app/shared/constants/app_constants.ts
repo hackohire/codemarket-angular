@@ -48,129 +48,141 @@ export const appConstants = {
     hiringMentoringSessions: 'I can take part in hiring mentoring sessions'
   },
 
+  businessCoachQuestions: {
+    businessCoachSessions: 'Can You Take Part In Weekly 30 Mins Business Coaching?',
+    cities: 'In which cities can you provide business coaching?',
+    roles: 'What would you like to gain from business coaching? (Dream Job positions)',
+    companies: 'What are all companies can you coach?',
+    businessAreas: 'In what business areas can you provide business coaching?',
+    businessGoals: 'What business goals can you help with your coaching?',
+    businessChallenges: 'What business challenges can you give coaching for?',
+    sellProducts: 'Do you sell any products?',
+    sellServices: 'Do you sell any services?'
+  },
+
   Notification: 'https://notificationsounds.com/soundfiles/4e4b5fbbbb602b6d35bea8460aa8f8e5/file-sounds-1096-light.wav',
 
   imageExtenstions: [
-    "ase",
-    "art",
-    "bmp",
-    "blp",
-    "cd5",
-    "cit",
-    "cpt",
-    "cr2",
-    "cut",
-    "dds",
-    "dib",
-    "djvu",
-    "egt",
-    "exif",
-    "gif",
-    "gpl",
-    "grf",
-    "icns",
-    "ico",
-    "iff",
-    "jng",
-    "jpeg",
-    "jpg",
-    "jfif",
-    "jp2",
-    "jps",
-    "lbm",
-    "max",
-    "miff",
-    "mng",
-    "msp",
-    "nitf",
-    "ota",
-    "pbm",
-    "pc1",
-    "pc2",
-    "pc3",
-    "pcf",
-    "pcx",
-    "pdn",
-    "pgm",
-    "PI1",
-    "PI2",
-    "PI3",
-    "pict",
-    "pct",
-    "pnm",
-    "pns",
-    "ppm",
-    "psb",
-    "psd",
-    "pdd",
-    "psp",
-    "px",
-    "pxm",
-    "pxr",
-    "qfx",
-    "raw",
-    "rle",
-    "sct",
-    "sgi",
-    "rgb",
-    "int",
-    "bw",
-    "tga",
-    "tiff",
-    "tif",
-    "vtf",
-    "xbm",
-    "xcf",
-    "xpm",
-    "3dv",
-    "amf",
-    "ai",
-    "awg",
-    "cgm",
-    "cdr",
-    "cmx",
-    "dxf",
-    "e2d",
-    "egt",
-    "eps",
-    "fs",
-    "gbr",
-    "odg",
-    "svg",
-    "stl",
-    "vrml",
-    "x3d",
-    "sxd",
-    "v2d",
-    "vnd",
-    "wmf",
-    "emf",
-    "art",
-    "xar",
-    "png",
-    "webp",
-    "jxr",
-    "hdp",
-    "wdp",
-    "cur",
-    "ecw",
-    "iff",
-    "lbm",
-    "liff",
-    "nrrd",
-    "pam",
-    "pcx",
-    "pgf",
-    "sgi",
-    "rgb",
-    "rgba",
-    "bw",
-    "int",
-    "inta",
-    "sid",
-    "ras",
-    "sun",
-    "tga"
+    'ase',
+    'art',
+    'bmp',
+    'blp',
+    'cd5',
+    'cit',
+    'cpt',
+    'cr2',
+    'cut',
+    'dds',
+    'dib',
+    'djvu',
+    'egt',
+    'exif',
+    'gif',
+    'gpl',
+    'grf',
+    'icns',
+    'ico',
+    'iff',
+    'jng',
+    'jpeg',
+    'jpg',
+    'jfif',
+    'jp2',
+    'jps',
+    'lbm',
+    'max',
+    'miff',
+    'mng',
+    'msp',
+    'nitf',
+    'ota',
+    'pbm',
+    'pc1',
+    'pc2',
+    'pc3',
+    'pcf',
+    'pcx',
+    'pdn',
+    'pgm',
+    'PI1',
+    'PI2',
+    'PI3',
+    'pict',
+    'pct',
+    'pnm',
+    'pns',
+    'ppm',
+    'psb',
+    'psd',
+    'pdd',
+    'psp',
+    'px',
+    'pxm',
+    'pxr',
+    'qfx',
+    'raw',
+    'rle',
+    'sct',
+    'sgi',
+    'rgb',
+    'int',
+    'bw',
+    'tga',
+    'tiff',
+    'tif',
+    'vtf',
+    'xbm',
+    'xcf',
+    'xpm',
+    '3dv',
+    'amf',
+    'ai',
+    'awg',
+    'cgm',
+    'cdr',
+    'cmx',
+    'dxf',
+    'e2d',
+    'egt',
+    'eps',
+    'fs',
+    'gbr',
+    'odg',
+    'svg',
+    'stl',
+    'vrml',
+    'x3d',
+    'sxd',
+    'v2d',
+    'vnd',
+    'wmf',
+    'emf',
+    'art',
+    'xar',
+    'png',
+    'webp',
+    'jxr',
+    'hdp',
+    'wdp',
+    'cur',
+    'ecw',
+    'iff',
+    'lbm',
+    'liff',
+    'nrrd',
+    'pam',
+    'pcx',
+    'pgf',
+    'sgi',
+    'rgb',
+    'rgba',
+    'bw',
+    'int',
+    'inta',
+    'sid',
+    'ras',
+    'sun',
+    'tga'
   ],
 
   postQuery: gql`
@@ -230,7 +242,7 @@ export const appConstants = {
         blockId
         blockSpecificComment
       }
-  
+
       dateRange
       address
       eventType
@@ -265,8 +277,45 @@ export const appConstants = {
       helpingWithMockInterviews
       hiringMentoringSessions
 
+      businessCoachSessions,
+      businessAreas {
+        name
+        _id
+        type
+      }
+      businessGoals {
+        name
+        _id
+        type
+      }
+      businessChallenges {
+        name
+        _id
+        type
+      }
+      sellProducts {
+        sellProducts
+        products {
+          name
+          _id
+          type
+        }
+      }
+      sellServices {
+        sellServices
+        services {
+          name
+          _id
+          type
+        }
+      }
 
-      jobProfile
+
+      jobProfile {
+        _id
+        name
+        type
+      }
       timeline
   
     }

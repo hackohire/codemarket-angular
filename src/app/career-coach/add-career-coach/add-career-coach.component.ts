@@ -1,6 +1,6 @@
 
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Subscription, of } from 'rxjs';
+import { Subscription, of, Observable, Subject, concat } from 'rxjs';
 import { City } from '../../shared/models/city.model';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { BreadCumb } from '../../shared/models/bredcumb.model';
@@ -12,7 +12,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FormService } from '../../shared/services/form.service';
 import { SetSelectedPost, GetPostById } from '../../core/store/actions/post.actions';
 import { selectSelectedPost } from '../../core/store/selectors/post.selectors';
-import { tap, switchMap } from 'rxjs/operators';
+import { tap, switchMap, distinctUntilChanged, catchError } from 'rxjs/operators';
 import { PostStatus } from '../../shared/models/poststatus.enum';
 import { PostType } from '../../shared/models/post-types.enum';
 import { AppState } from '../../core/store/state/app.state';
@@ -21,6 +21,7 @@ import { Post } from '../../shared/models/post.model';
 import { CompanyService } from '../../companies/company.service';
 import { PostService } from '../../shared/services/post.service';
 import { appConstants } from '../../shared/constants/app_constants';
+import { environment } from '../../../environments/environment';
 
 // import { AddCompanyComponent } from '../../companies/add-company/add-company.component';
 
@@ -57,6 +58,14 @@ export class AddCareerCoachComponent implements OnInit {
     return this.careerCoachForm.get('status');
   }
 
+  listOfCareerCoaches: any[] = [];
+  careerCoachPageNumber = 1;
+  totalCareerCoaches: number;
+
+  listOfDreamJobs: any[] = [];
+  dreamJobPageNumber = 1;
+  totalDreamJobs: number;
+
   visible = true;
   selectable = true;
   removable = true;
@@ -66,6 +75,13 @@ export class AddCareerCoachComponent implements OnInit {
 
   citySuggestions: City[];
 
+  roles$: Observable<any[]>;
+  rolesLoading = false;
+  roleInput$ = new Subject<string>();
+
+  anonymousAvatar = '../../../../assets/images/anonymous-avatar.jpg';
+  s3FilesBucketURL = environment.s3FilesBucketURL;
+
   @ViewChild('auto', { static: false }) matAutocomplete: MatAutocomplete;
 
   constructor(
@@ -74,7 +90,7 @@ export class AddCareerCoachComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     public formService: FormService,
     private companyService: CompanyService,
-    private postService: PostService
+    public postService: PostService
   ) {
     this.breadcumb = {
       title: 'Add Career Coach',
@@ -122,10 +138,12 @@ export class AddCareerCoachComponent implements OnInit {
       ).subscribe();
     }
 
-    // this.careerCoachFormInitialization();
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.fetchCareerCoaches(1);
+    this.fetchDreamJobs(1);
+  }
 
   careerCoachFormInitialization(i: Post) {
     console.log(i && i.companies ? i.companies : []);
@@ -144,16 +162,22 @@ export class AddCareerCoachComponent implements OnInit {
       createdBy: new FormControl(i && i.createdBy && i.createdBy._id ? i.createdBy._id : ''),
     });
 
-    // this.salaryRangeFrom = this.careerCoachForm.get('salaryRangeFrom').value;
-    // this.salaryRangeTo = this.careerCoachForm.get('salaryRangeTo').value;
-
-    // this.formService.findFromCollection('', 'cities').subscribe((cities) => {
-    //   this.citySuggestions = cities;
-    // });
 
     this.companyService.getCompaniesByType('').subscribe((companies) => {
       this.allCompanies = companies;
     });
+
+    this.roles$ = concat(
+      of([]), // default items
+      this.roleInput$.pipe(
+        distinctUntilChanged(),
+        tap(() => this.rolesLoading = true),
+        switchMap(term => this.formService.findFromCollection(term, 'tags', 'role').pipe(
+          catchError(() => of([])), // empty list on error
+          tap(() => this.rolesLoading = false)
+          ))
+        )
+    );
 
   }
 
@@ -174,7 +198,7 @@ export class AddCareerCoachComponent implements OnInit {
       const careerCoachValue = { ...this.careerCoachForm.value };
 
       /** Only Send _id */
-      careerCoachValue.companies = careerCoachValue.companies.map(c => c._id);
+      this.onlySendIdForTags(careerCoachValue);
       this.postService.addPost(careerCoachValue).subscribe((j) => {
         if (j) {
           this.postService.redirectToPostDetails(j);
@@ -184,13 +208,36 @@ export class AddCareerCoachComponent implements OnInit {
       const careerCoachValue = { ...this.careerCoachForm.value };
 
       /** Only Send _id */
-      careerCoachValue.companies = careerCoachValue.companies.map(c => c._id);
+      this.onlySendIdForTags(careerCoachValue);
       this.postService.updatePost(careerCoachValue).subscribe((j) => {
         if (j) {
           this.postService.redirectToPostDetails(j);
         }
-      })
+      });
     }
+  }
+
+  onlySendIdForTags(careercoach) {
+    careercoach.jobProfile = careercoach.jobProfile.map(c => c._id);
+    careercoach.companies = careercoach.companies.map(c => c._id);
+  }
+
+  fetchCareerCoaches(pageNumber) {
+    this.postService.getAllPosts({pageNumber, limit: 3}, 'career-coach').subscribe((cc) => {
+      if (cc && cc.posts) {
+        this.listOfCareerCoaches = this.listOfCareerCoaches.concat(cc.posts);
+        this.totalCareerCoaches = cc.total;
+      }
+    });
+  }
+
+  fetchDreamJobs(pageNumber) {
+    this.postService.getAllPosts({pageNumber, limit: 3}, 'dream-job').subscribe((dj) => {
+      if (dj && dj.posts) {
+        this.listOfDreamJobs = this.listOfDreamJobs.concat(dj.posts);
+        this.totalDreamJobs = dj.total;
+      }
+    });
   }
 
   updateFormData(event) {
@@ -209,30 +256,12 @@ export class AddCareerCoachComponent implements OnInit {
   addCompany = (name: string) => {
     if (name) {
       return new Promise((resolve, reject) => {
-        // const dialogRef = this.dialog.open(AddCompanyComponent, {
-        //   width: '630px',
-        //   height: '550px',
-        //   maxHeight: '700px',
-        //   panelClass: 'no-padding',
-        //   data: {name},
-        //   // disableClose: true
-        // });
-
         this.companyService.addCompany({name, createdBy: this.authService.loggedInUser._id}).subscribe(c => {
           this.allCompanies.unshift(c);
           this.allCompanies = this.allCompanies.slice();
           return resolve(c.name);
-        })
-  
-        // dialogRef.afterClosed().subscribe(result => {
-        //   if(result) {
-        //     this.allCompanies.unshift(result);
-        //     this.allCompanies = this.allCompanies.slice();
-        //     return resolve(result.name);
-        //   }
-        //   console.log('The dialog was closed');
-        // });
-      })
+        });
+      });
     }
   }
 

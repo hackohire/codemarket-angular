@@ -3,14 +3,17 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-8">
             <div [formGroup]="careerCoachForm" class="careercoach-form-area">
 
                 <mat-form-field class="field-full-width">
                     <input type="text" matInput formControlName="name" placeholder="Title">
                 </mat-form-field>
 
-                <ng-select placeholder="Roles" formControlName="jobProfile" [addTag]="addTagFn" [multiple]="true">
+                <ng-select placeholder="Roles"
+                    [items]="roles$ | async" [hideSelected]="true" formControlName="jobProfile"
+                    [addTag]="formService?.addRoleFn" [bindLabel]="'name'" [minTermLength]="2" [loading]="rolesLoading"
+                    [multiple]="true" [typeahead]="roleInput$">
                 </ng-select>
 
                 <app-editor *ngIf="descriptionFormControl?.value && edit; else add" (output)="updateFormData($event)"
@@ -20,8 +23,8 @@
                 <br />
 
                 <ng-template #add>
-                    <app-editor *ngIf="!edit" [placeholder]="'Dream Job Description:'" (output)="updateFormData($event)"
-                        [id]="'dreamjob-editor'" [importArticleSubscription]="true"></app-editor>
+                    <app-editor [placeholder]="'Career Coach Details:'" (output)="updateFormData($event)"
+                        [id]="'career-coach-editor'" [importArticleSubscription]="true"></app-editor>
                 </ng-template>
 
 
@@ -84,6 +87,42 @@
                 </div>
 
             </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <mat-list class="careercoach-form-area">
+                <h3 style="font-size: large;" mat-subheader>Career Coaches:</h3>
+                <mat-list-item *ngFor="let cc of listOfCareerCoaches; let last=last">
+                    <!-- <mat-icon mat-list-icon>folder</mat-icon> -->
+                    <img height="35px" width="35px" style="border-radius: 50%;"
+                        [src]="cc?.createdBy?.avatar ? ((s3FilesBucketURL + cc.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar">
+                    <h4 mat-line><a>{{cc.name}}</a></h4>
+                    <p mat-line> {{cc.createdAt | date}} </p>
+                </mat-list-item>
+                <div class="pagination-area" *ngIf="listOfCareerCoaches?.length < totalCareerCoaches">
+                    <span 
+                        style="text-decoration: underline; cursor: pointer;"
+                (click)="fetchCareerCoaches(careerCoachPageNumber + 1)">+ Load More{{'(' + (totalCareerCoaches - listOfCareerCoaches?.length) + ')'}}</span>
+                </div>
+            </mat-list>
+
+            <mat-list class="careercoach-form-area">
+                <h3 style="font-size: large;" mat-subheader>Dream Jobs:</h3>
+                <mat-list-item *ngFor="let cc of listOfDreamJobs; let last=last">
+                    <!-- <mat-icon mat-list-icon>folder</mat-icon> -->
+                    <img height="35px" width="35px" style="border-radius: 50%;"
+                        [src]="cc?.createdBy?.avatar ? ((s3FilesBucketURL + cc.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar">
+                    <h4 mat-line><a>{{cc.name}}</a></h4>
+                    <p mat-line> {{cc.createdAt | date}} </p>
+                </mat-list-item>
+                <div class="pagination-area" *ngIf="listOfDreamJobs?.length < totalDreamJobs">
+                    <span 
+                        style="text-decoration: underline; cursor: pointer;"
+                        (click)="fetchDreamJobs(dreamJobPageNumber + 1)">+ Load More{{'(' + (totalDreamJobs - listOfDreamJobs?.length) + ')'}}</span>
+                </div>
+            </mat-list>
 
         </div>
     </div>

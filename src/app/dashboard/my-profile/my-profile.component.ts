@@ -164,6 +164,17 @@ export class MyProfileComponent implements OnInit {
       );
       this.router.navigate(['products-list'], { relativeTo: this.activatedRoute });
     }
+
+    this.navLinks.push(
+      {
+        path: 'business-coaches',
+        label: 'Business Coach'
+      },
+      {
+        path: 'career-coaches',
+        label: 'Career Coach'
+      }
+    );
   }
 
   openDialog(): void {

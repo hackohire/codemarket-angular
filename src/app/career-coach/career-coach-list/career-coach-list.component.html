@@ -1,0 +1,19 @@
+<mat-list class="career-coach-form-area common-box-shadow">
+    <!-- <h3 style="font-size: large;" mat-subheader>Career Coaches:</h3> -->
+    <div style="display: flex; justify-content: flex-end; padding-bottom: 10px;">
+        <a class="btn btn--sm btn--round menu" style="background-color: #0674ec !important; color: white;" [routerLink]="['/', 'post', 'add-career-coach']">Add<mat-icon style="vertical-align: middle;">add</mat-icon>
+        </a>    
+    </div>
+    <mat-list-item *ngFor="let bc of listOfCareerCoaches; let last=last">
+        <!-- <mat-icon mat-list-icon>folder</mat-icon> -->
+        <img height="35px" width="35px" style="border-radius: 50%;"
+            [src]="bc?.createdBy?.avatar ? ((s3FilesBucketURL + bc.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar">
+        <h4 mat-line><a>{{bc.name}}</a></h4>
+        <p mat-line> {{bc.createdAt | date}} </p>
+    </mat-list-item>
+    <div class="pagination-area" *ngIf="listOfCareerCoaches?.length < totalCareerCoaches">
+        <span style="text-decoration: underline; cursor: pointer;"
+            (click)="fetchCareerCoaches(careerCoachPageNumber + 1)">+ Load
+            More{{'(' + (totalCareerCoaches - listOfCareerCoaches?.length) + ')'}}</span>
+    </div>
+</mat-list>

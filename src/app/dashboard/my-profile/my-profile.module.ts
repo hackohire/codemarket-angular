@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { MyProfileComponent } from './my-profile.component';
 import { Routes, RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { BusinessCoachListComponent } from '../../business-coach/business-coach-list/business-coach-list.component';
+import { CareerCoachListComponent } from '../../career-coach/career-coach-list/career-coach-list.component';
 
 const myProfileRoutes: Routes = [
   {
@@ -29,6 +31,14 @@ const myProfileRoutes: Routes = [
       {
         path: 'membership-list',
         loadChildren: () => import('../../membership/membership-list/membership-list.module').then(module => module.MembershipListModule)
+      },
+      {
+        path: 'business-coaches',
+        component: BusinessCoachListComponent
+      },
+      {
+        path: 'career-coaches',
+        component: CareerCoachListComponent
       },
       {
         path: 'my-rsvp',
@@ -81,7 +91,7 @@ const myProfileRoutes: Routes = [
 
 
 @NgModule({
-  declarations: [MyProfileComponent],
+  declarations: [MyProfileComponent, BusinessCoachListComponent, CareerCoachListComponent],
   imports: [
     CommonModule,
     SharedModule,

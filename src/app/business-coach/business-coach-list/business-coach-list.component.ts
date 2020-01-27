@@ -29,16 +29,19 @@ export class BusinessCoachListComponent implements OnInit {
   }
 
   fetchBusinessCoaches(pageNumber) {
-    
     this.postService.getPostsByUserIdAndType(
       this.activatedRoute.queryParams['userId'] ? this.activatedRoute.queryParams['userId'] : this.authService.loggedInUser._id,
-      '', 'business-coach').subscribe((dj) => {
-      // if (dj && dj.posts) {
-      //   this.listOfBusinessCoaches = this.listOfBusinessCoaches.concat(dj.posts);
-      //   // this.totalBusinessCoaches = dj.total;
-      // }
-      this.listOfBusinessCoaches = dj;
-    });
+      '',
+      'business-coach',
+      {pageNumber, limit: 6}
+    )
+      .subscribe((dj) => {
+        if (dj && dj.posts) {
+          this.listOfBusinessCoaches = this.listOfBusinessCoaches.concat(dj.posts);
+          // this.totalBusinessCoaches = dj.total;
+        }
+        // this.listOfBusinessCoaches = dj;
+      });
   }
 
 }

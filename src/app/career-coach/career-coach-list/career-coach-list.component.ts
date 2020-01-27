@@ -29,17 +29,22 @@ export class CareerCoachListComponent implements OnInit {
   }
 
   fetchCareerCoaches(pageNumber) {
-    // this.postService.getAllPosts({pageNumber, limit: 6}, 'career-coach').subscribe((dj) => {
-    //   if (dj && dj.posts) {
-    //     this.listOfCareerCoaches = this.listOfCareerCoaches.concat(dj.posts);
-    //     this.totalCareerCoaches = dj.total;
-    //   }
-    // });
     this.postService.getPostsByUserIdAndType(
       this.activatedRoute.queryParams['userId'] ? this.activatedRoute.queryParams['userId'] : this.authService.loggedInUser._id,
-    '', 'career-coach').subscribe((cc) => {
-      this.listOfCareerCoaches = cc;
-    })
+      '',
+      'career-coach',
+      {pageNumber, limit: 6},
+      ).subscribe((dj) => {
+      if (dj && dj.posts) {
+        this.listOfCareerCoaches = this.listOfCareerCoaches.concat(dj.posts);
+        this.totalCareerCoaches = dj.total;
+      }
+    });
+    // this.postService.getPostsByUserIdAndType(
+    //   this.activatedRoute.queryParams['userId'] ? this.activatedRoute.queryParams['userId'] : this.authService.loggedInUser._id,
+    // '', 'career-coach').subscribe((cc) => {
+    //   this.listOfCareerCoaches = cc;
+    // })
   }
 
 }

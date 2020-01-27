@@ -34,13 +34,16 @@ export class PostService {
   ) { }
 
 
-  getPostsByUserIdAndType(userId: string, status: string, postType: string): Observable<Post[]> {
+  getPostsByUserIdAndType(userId: string, status: string, postType: string, pageOptions = {pageNumber: 0, limit: 0}): Observable<{posts: Post[], total: number}> {
     return this.apollo.query(
       {
         query: gql`
-          query getPostsByUserIdAndType($userId: String, $status: String, $postType: String) {
-            getPostsByUserIdAndType(userId: $userId, status: $status, postType: $postType) {
-              ...Post
+          query getPostsByUserIdAndType($userId: String, $status: String, $postType: String, $pageOptions: PageOptionsInput) {
+            getPostsByUserIdAndType(userId: $userId, status: $status, postType: $postType, pageOptions: $pageOptions) {
+              posts {
+                ...Post
+              }
+              total
             }
           }
           ${this.postFields}
@@ -48,7 +51,8 @@ export class PostService {
         variables: {
           userId,
           status,
-          postType
+          postType,
+          pageOptions
         },
         fetchPolicy: 'no-cache'
       }

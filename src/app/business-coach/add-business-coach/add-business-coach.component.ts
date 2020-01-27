@@ -186,9 +186,6 @@ export class AddBusinessCoachComponent implements OnInit {
       }),
     });
 
-    // this.salaryRangeFrom = this.businessCoachForm.get('salaryRangeFrom').value;
-    // this.salaryRangeTo = this.businessCoachForm.get('salaryRangeTo').value;
-
     this.roles$ = concat(
       of([]), // default items
       this.roleInput$.pipe(

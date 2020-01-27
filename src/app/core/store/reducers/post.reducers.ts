@@ -9,9 +9,10 @@ export const postReducers = createReducer(
         ...state,
         selectedPost: post
     })),
-    on(SetPostsByUserIdAndType, (state, {post}) => ({
+    on(SetPostsByUserIdAndType, (state, {post, total}) => ({
         ...state,
-        postsByUserIdAndType: post
+        postsByUserIdAndType: post,
+        total
     })),
     on(SetSelectedPost, (state, {post}) => ({
         ...state,

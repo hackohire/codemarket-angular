@@ -43,7 +43,7 @@ export const GetPostById = createAction(
 
 export const SetPostsByUserIdAndType = createAction(
     EPostActions.SetPostsByUserIdAndType,
-    props<{post: Post[]}>()
+    props<{post: Post[], total?: number}>()
 );
 
 export const SetSelectedPost = createAction(

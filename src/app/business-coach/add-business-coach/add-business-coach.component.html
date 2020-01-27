@@ -17,7 +17,7 @@
                 <br />
 
                 <ng-template #add>
-                    <app-editor *ngIf="!edit" [placeholder]="'Business Coach Description:'"
+                    <app-editor [placeholder]="'Business Coach Description:'"
                         (output)="updateFormData($event)" [id]="'business-coach-editor'"
                         [importArticleSubscription]="true"></app-editor>
                 </ng-template>

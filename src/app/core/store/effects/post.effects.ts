@@ -29,9 +29,9 @@ export class PostEffects {
         ofType(GetPostsByUserIdAndType),
         switchMap((value) => this.postService.getPostsByUserIdAndType(value.userId, value.status, value.postType)),
         tap(u => console.log(u)),
-        map((post: Post[]) => {
-            console.log(post);
-            return SetPostsByUserIdAndType({ post });
+        map((res) => {
+            console.log(res);
+            return SetPostsByUserIdAndType({post: res.posts, total: res.total });
         })
     );
 

@@ -168,11 +168,13 @@ export class MyProfileComponent implements OnInit {
     this.navLinks.push(
       {
         path: 'business-coaches',
-        label: 'Business Coach'
+        label: 'Business Coach',
+        queryParams: { userId: this.authorId }
       },
       {
         path: 'career-coaches',
-        label: 'Career Coach'
+        label: 'Career Coach',
+        queryParams: { userId: this.authorId }
       }
     );
   }

@@ -8,7 +8,7 @@
         <!-- <mat-icon mat-list-icon>folder</mat-icon> -->
         <img height="35px" width="35px" style="border-radius: 50%;"
             [src]="bc?.createdBy?.avatar ? ((s3FilesBucketURL + bc.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar">
-        <h4 mat-line><a>{{bc.name}}</a></h4>
+        <h4 mat-line (click)="postService?.redirectToPostDetails(bc)"><a>{{bc.name}}</a></h4>
         <p mat-line> {{bc.createdAt | date}} </p>
     </mat-list-item>
     <div class="pagination-area" *ngIf="listOfBusinessCoaches?.length < totalBusinessCoaches">

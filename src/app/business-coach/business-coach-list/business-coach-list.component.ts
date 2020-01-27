@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { PostService } from '../../shared/services/post.service';
 import { environment } from '../../../environments/environment';
+import { ActivatedRoute } from '@angular/router';
+import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-business-coach-list',
@@ -17,7 +19,9 @@ export class BusinessCoachListComponent implements OnInit {
   s3FilesBucketURL = environment.s3FilesBucketURL;
 
   constructor(
-    public postService: PostService
+    public postService: PostService,
+    private activatedRoute: ActivatedRoute,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
@@ -25,11 +29,15 @@ export class BusinessCoachListComponent implements OnInit {
   }
 
   fetchBusinessCoaches(pageNumber) {
-    this.postService.getAllPosts({pageNumber, limit: 6}, 'business-coach').subscribe((dj) => {
-      if (dj && dj.posts) {
-        this.listOfBusinessCoaches = this.listOfBusinessCoaches.concat(dj.posts);
-        this.totalBusinessCoaches = dj.total;
-      }
+    
+    this.postService.getPostsByUserIdAndType(
+      this.activatedRoute.queryParams['userId'] ? this.activatedRoute.queryParams['userId'] : this.authService.loggedInUser._id,
+      '', 'business-coach').subscribe((dj) => {
+      // if (dj && dj.posts) {
+      //   this.listOfBusinessCoaches = this.listOfBusinessCoaches.concat(dj.posts);
+      //   // this.totalBusinessCoaches = dj.total;
+      // }
+      this.listOfBusinessCoaches = dj;
     });
   }
 

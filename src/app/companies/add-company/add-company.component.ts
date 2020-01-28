@@ -15,6 +15,7 @@ import { CompanyTypes, Company } from '../../shared/models/company.model';
 import Swal from 'sweetalert2';
 import { LocationService } from '../../shared/services/location.service';
 import { City } from '../../shared/models/city.model';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-add-company',
@@ -69,11 +70,18 @@ export class AddCompanyComponent implements OnInit {
   removable = true;
   addOnBlur = true;
 
+  listOfCompanies: any[] = [];
+  companiesPageNumber = 1;
+  totalCompanies: number;
+
   citySuggestions$: Observable<City[]>;
   cityInput$ = new Subject<string>();
   citiesLoading = false;
 
   subscription$: Subscription;
+
+  anonymousAvatar = '../../../../assets/images/anonymous-avatar.jpg';
+  s3FilesBucketURL = environment.s3FilesBucketURL;
 
   allCities: Tag[];
 
@@ -111,14 +119,6 @@ export class AddCompanyComponent implements OnInit {
       ]
     };
 
-    /** If it is "add-company" route intialize empty company form, but we are setting store property of "Selectedcompany" as null
-     * and if it is "edit-company route" we need to subscribe to get "Selectedcompany" and user refresh the tab,
-     * there won't be any selected company,
-     * so we need to make the call to
-     * get the company by fetching id from the params
-     */
-
-    // this.companyFormInitialization(null);
     if (params.companyId) {
       this.subscription$ = this.companyService.getCompanyById(params.companyId).subscribe((c) => {
         this.edit = true;
@@ -132,6 +132,7 @@ export class AddCompanyComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.fetchCompanies(1);
   }
 
   async companyFormInitialization(i: Company) {
@@ -215,6 +216,19 @@ export class AddCompanyComponent implements OnInit {
           }
         });
     }
+  }
+
+  fetchCompanies(pageNumber) {
+    this.companyService.getCompaniesByType('', {pageNumber, limit: 3}).subscribe((dj: any) => {
+      if (dj && dj.companies) {
+        this.listOfCompanies = this.listOfCompanies.concat(dj.companies);
+        this.totalCompanies = dj.total;
+      }
+    });
+  }
+
+  fetCompaniesPosts(pageNumber) {
+    this.companyService.getCompaniesPostsByPostType('')
   }
 
   addCitiesFn(name) {

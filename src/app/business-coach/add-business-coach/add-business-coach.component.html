@@ -3,7 +3,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-8">
             <div [formGroup]="businessCoachForm" class="businesscoach-form-area">
 
                 <mat-form-field class="field-full-width">
@@ -17,25 +17,21 @@
                 <br />
 
                 <ng-template #add>
-                    <app-editor [placeholder]="'Business Coach Description:'"
-                        (output)="updateFormData($event)" [id]="'business-coach-editor'"
-                        [importArticleSubscription]="true"></app-editor>
+                    <app-editor [placeholder]="'Business Coach Description:'" (output)="updateFormData($event)"
+                        [id]="'business-coach-editor'" [importArticleSubscription]="true"></app-editor>
                 </ng-template>
 
                 <!-- 1. In which cities can you provide business coaching? - list of cities like other forms (select or add) -->
-                <ng-select [hideSelected]="true"
-                    placeholder="In which cities can you provide business coaching?"
-                    [addTag]="formService.addCityFn" [loading]="citiesLoading"
-                    [items]="citySuggestions$ | async" [typeahead]="cityInput$" formControlName="cities"
-                    [multiple]="true" bindLabel="name">
+                <ng-select [hideSelected]="true" placeholder="In which cities can you provide business coaching?"
+                    [addTag]="formService.addCityFn" [loading]="citiesLoading" [items]="citySuggestions$ | async"
+                    [typeahead]="cityInput$" formControlName="cities" [multiple]="true" bindLabel="name">
                 </ng-select>
 
                 <!-- 2. What would you like to gain from business coaching? - list like dream job positions (select or add) -->
-                <ng-select
-                    placeholder="What would you like to gain from business coaching? (Dream Job positions)"
+                <ng-select placeholder="What would you like to gain from business coaching? (Dream Job positions)"
                     [items]="roles$ | async" [hideSelected]="true" formControlName="jobProfile"
-                    [addTag]="formService?.addRoleFn" [bindLabel]="'name'" [minTermLength]="2"
-                    [loading]="rolesLoading" [multiple]="true" [typeahead]="roleInput$">
+                    [addTag]="formService?.addRoleFn" [bindLabel]="'name'" [minTermLength]="2" [loading]="rolesLoading"
+                    [multiple]="true" [typeahead]="roleInput$">
                 </ng-select>
 
                 <!-- 3. What type of businesses can you coach? List of businesses like other places (select or add) -->
@@ -47,24 +43,21 @@
                 </ng-select>
 
                 <!-- 4.In what business areas can you provide business coaching? - list like other areas(select or add) -->
-                <ng-select
-                    placeholder="In what business areas can you provide business coaching?"
+                <ng-select placeholder="In what business areas can you provide business coaching?"
                     [items]="businessAreas$ | async" [hideSelected]="true" formControlName="businessAreas"
                     [addTag]="formService?.addBusinessKeywordsFn" [bindLabel]="'name'" [minTermLength]="2"
                     [loading]="businessAreasLoading" [multiple]="true" [typeahead]="businessAreasInput$">
                 </ng-select>
 
                 <!-- 5.What business challenges can you give coaching for?- list like other areas(select or add) -->
-                <ng-select
-                    placeholder="What business challenges can you give coaching for?"
+                <ng-select placeholder="What business challenges can you give coaching for?"
                     [items]="businessChallenges$ | async" [hideSelected]="true" formControlName="businessChallenges"
                     [addTag]="formService?.addBusinessKeywordsFn" [bindLabel]="'name'" [minTermLength]="2"
                     [loading]="businessChallengesLoading" [multiple]="true" [typeahead]="businessChallengesInput$">
                 </ng-select>
 
                 <!-- 6. What business goals can you help with your coaching?- list like other areas(select or add) -->
-                <ng-select
-                    placeholder="What business goals can you help with your coaching?"
+                <ng-select placeholder="What business goals can you help with your coaching?"
                     [items]="businessGoals$ | async" [hideSelected]="true" formControlName="businessGoals"
                     [addTag]="formService?.addBusinessKeywordsFn" [bindLabel]="'name'" [minTermLength]="2"
                     [loading]="businessGoalsLoading" [multiple]="true" [typeahead]="businessGoalsInput$">
@@ -100,7 +93,7 @@
                     <div fxLayout="row">
                         <label fxFlex="80"
                             style="margin-bottom: 0 !important;">{{businessCoachQuestions['sellServices']}} </label>
-                        <mat-radio-group fxFlex="20" [color]="'primary'" formControlName="sellServices" >
+                        <mat-radio-group fxFlex="20" [color]="'primary'" formControlName="sellServices">
                             <mat-radio-button [value]="true">Yes</mat-radio-button>
                             <mat-radio-button [value]="false">No</mat-radio-button>
                         </mat-radio-group>
@@ -127,6 +120,26 @@
                 </div>
 
             </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <mat-list class="businesscoach-form-area">
+                <h3 style="font-size: large;" mat-subheader>Business Coaches:</h3>
+                <mat-list-item *ngFor="let cc of listOfBusinessCoaches; let last=last">
+                    <!-- <mat-icon mat-list-icon>folder</mat-icon> -->
+                    <img height="35px" width="35px" style="border-radius: 50%;"
+                        [src]="cc?.createdBy?.avatar ? ((s3FilesBucketURL + cc.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar">
+                    <h4 mat-line><a>{{cc.name}}</a></h4>
+                    <p mat-line> {{cc.createdAt | date}} </p>
+                </mat-list-item>
+                <div class="pagination-area" *ngIf="listOfBusinessCoaches?.length < totalBusinessCoaches">
+                    <span style="text-decoration: underline; cursor: pointer;"
+                        (click)="fetchBusinessCoaches(businessCoachPageNumber + 1)">+ Load
+                        More{{'(' + (totalBusinessCoaches - listOfBusinessCoaches?.length) + ')'}}</span>
+                </div>
+            </mat-list>
 
         </div>
     </div>

@@ -20,6 +20,7 @@ import { Post } from '../../shared/models/post.model';
 import { CompanyService } from '../../companies/company.service';
 import { PostService } from '../../shared/services/post.service';
 import { appConstants } from '../../shared/constants/app_constants';
+import { environment } from '../../../environments/environment';
 
 // import { AddCompanyComponent } from '../../companies/add-company/add-company.component';
 
@@ -61,6 +62,10 @@ export class AddBusinessCoachComponent implements OnInit {
     return this.businessCoachForm.get('status');
   }
 
+  listOfBusinessCoaches: any[] = [];
+  businessCoachPageNumber = 1;
+  totalBusinessCoaches: number;
+
   visible = true;
   selectable = true;
   removable = true;
@@ -75,6 +80,9 @@ export class AddBusinessCoachComponent implements OnInit {
   roles$: Observable<any[]>;
   rolesLoading = false;
   roleInput$ = new Subject<string>();
+
+  anonymousAvatar = '../../../../assets/images/anonymous-avatar.jpg';
+  s3FilesBucketURL = environment.s3FilesBucketURL;
 
   businessAreas$: Observable<any[]>;
   businessAreasLoading = false;
@@ -108,26 +116,26 @@ export class AddBusinessCoachComponent implements OnInit {
     private postService: PostService
   ) {
     this.breadcumb = {
-      title: 'Add Career Coach',
+      title: 'Add Business Coach',
       path: [
         {
           name: 'Dashboard',
           pathString: '/'
         },
         {
-          name: 'Add Career Coach'
+          name: 'Add Business Coach'
         }
       ]
     };
 
-    /** If it is "add-careercoach" route intialize empty careercoach form, but we are setting store property of "SelectedbusinessCoach" as null
-     * and if it is "edit-careercoach route" we need to subscribe to get "SelectedbusinessCoach" and user refresh the tab,
-     * there won't be any selected careercoach,
+    /** If it is "add-businesscoach" route intialize empty businesscoach form, but we are setting store property of "SelectedbusinessCoach" as null
+     * and if it is "edit-businesscoach route" we need to subscribe to get "SelectedbusinessCoach" and user refresh the tab,
+     * there won't be any selected businesscoach,
      * so we need to make the call to
-     * get the careercoach by fetching id from the params
+     * get the businesscoach by fetching id from the params
      */
 
-    if (this.activatedRoute.snapshot.parent && this.activatedRoute.snapshot.parent.routeConfig.path === 'add-careercoach') {
+    if (this.activatedRoute.snapshot.parent && this.activatedRoute.snapshot.parent.routeConfig.path === 'add-businesscoach') {
       this.store.dispatch(SetSelectedPost({ post: null }));
       this.businessCoachFormInitialization(null);
     } else {
@@ -143,8 +151,8 @@ export class AddBusinessCoachComponent implements OnInit {
           return of({ businessCoachId: '' });
         }),
         tap((params) => {
-          /** When user refresh the tab, there won't be any selected careercoach, so we need to make the call to
-           * get the careercoach by fetching id from the params
+          /** When user refresh the tab, there won't be any selected businesscoach, so we need to make the call to
+           * get the businesscoach by fetching id from the params
            */
           if (params.businessCoachId) {
             this.store.dispatch(GetPostById({ postId: params.businessCoachId }));
@@ -156,7 +164,9 @@ export class AddBusinessCoachComponent implements OnInit {
     // this.businessCoachFormInitialization();
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.fetchBusinessCoaches(1);
+  }
 
   businessCoachFormInitialization(i: Post) {
     console.log(i && i.companies ? i.companies : []);
@@ -327,6 +337,15 @@ export class AddBusinessCoachComponent implements OnInit {
     businessCoachValue.sellProducts.products = businessCoachValue.sellProducts.products.map(c => c._id);
     businessCoachValue.sellServices.services = businessCoachValue.sellServices.services.map(c => c._id);
     businessCoachValue.companies = businessCoachValue.companies.map(c => c._id);
+  }
+
+  fetchBusinessCoaches(pageNumber) {
+    this.postService.getAllPosts({pageNumber, limit: 3}, 'business-coach').subscribe((cc) => {
+      if (cc && cc.posts) {
+        this.listOfBusinessCoaches = this.listOfBusinessCoaches.concat(cc.posts);
+        this.totalBusinessCoaches = cc.total;
+      }
+    });
   }
 
   updateFormData(event) {

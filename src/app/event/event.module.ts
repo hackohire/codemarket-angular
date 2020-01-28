@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { EventComponent } from './event.component';
+import { AuthGuard } from '../shared/guards/auth.guard';
 
 const eventRoutes: Routes = [
   {
@@ -25,10 +26,12 @@ const eventRoutes: Routes = [
       {
         path: 'add-event',
         loadChildren: () => import('./add-event/add-event.module').then(module => module.AddEventModule),
+        canLoad: [AuthGuard]
       },
       {
         path: 'edit-event/:eventId',
         loadChildren: () => import('./add-event/add-event.module').then(module => module.AddEventModule),
+        canLoad: [AuthGuard]
       }
     ]
   },

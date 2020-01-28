@@ -97,7 +97,7 @@ export class AddCompanyComponent implements OnInit {
     private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
     public formService: FormService,
-    private companyService: CompanyService,
+    public companyService: CompanyService,
     public locationService: LocationService,
     // @Inject(MAT_DIALOG_DATA) public data: any,
     // public dialogRef: MatDialogRef<AddCompanyComponent>

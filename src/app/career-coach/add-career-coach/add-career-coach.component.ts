@@ -1,4 +1,3 @@
-
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Subscription, of, Observable, Subject, concat } from 'rxjs';
 import { City } from '../../shared/models/city.model';
@@ -203,7 +202,7 @@ export class AddCareerCoachComponent implements OnInit {
         if (j) {
           this.postService.redirectToPostDetails(j);
         }
-      })
+      });
     } else {
       const careerCoachValue = { ...this.careerCoachForm.value };
 

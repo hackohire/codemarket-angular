@@ -108,14 +108,14 @@ export class AddBusinessCoachComponent implements OnInit {
     private postService: PostService
   ) {
     this.breadcumb = {
-      title: 'Add Career Coach',
+      title: 'Add Business Coach',
       path: [
         {
           name: 'Dashboard',
           pathString: '/'
         },
         {
-          name: 'Add Career Coach'
+          name: 'Add Business Coach'
         }
       ]
     };

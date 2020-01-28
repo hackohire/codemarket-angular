@@ -16,9 +16,14 @@ import { PostDataResolver } from './core/resolver';
 // import { PostDataResolver } from './core/resolver';
 
 const routes: Routes = [
-  {
+ /*  {
     path: '',
     redirectTo: '/dashboard',
+    pathMatch: 'full'
+  }, */
+  {
+    path: '',
+    redirectTo: '/dashboard/bugfixes-all',
     pathMatch: 'full'
   },
   {

@@ -99,14 +99,14 @@ export class AddCompanyComponent implements OnInit {
     const params: any = this.activatedRoute.snapshot.params;
 
     this.breadcumb = {
-      title: 'Add Company',
+      title: 'Add Business',
       path: [
         {
           name: 'Dashboard',
           pathString: '/'
         },
         {
-          name: 'Add Company'
+          name: 'Add Business'
         }
       ]
     };

@@ -19,6 +19,7 @@ export class CommentComponent implements OnInit {
 
   @Input() comment: Comment;
   @Input() referenceId: string;
+  @Input() companyReferenceId: string;
   // @Output() commentDeleted  = new EventEmitter();
   replyCommentForm: FormGroup;
   reply: boolean;
@@ -47,6 +48,7 @@ export class CommentComponent implements OnInit {
       text: new FormControl(this.comment.text),
       // createdBy: new FormControl(this.authService.loggedInUser._id),
       referenceId: new FormControl(this.comment.referenceId),
+      companyReferenceId: new FormControl(this.companyReferenceId ? this.companyReferenceId : this.comment.companyReferenceId),
       parentId: new FormControl(this.comment._id),
       type: new FormControl(this.comment.type),
       blockSpecificComment: new FormControl(this.comment.blockSpecificComment),
@@ -102,7 +104,7 @@ export class CommentComponent implements OnInit {
         // this.comment = null;
         this.replyCommentForm = null;
       })
-    ).subscribe()
+    ).subscribe();
     });
   }
 

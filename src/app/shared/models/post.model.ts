@@ -14,7 +14,7 @@ interface Support {
     };
 }
 export interface Post {
-    name: string;
+    name?: string;
     description?: [{
         type: string;
         data: BlockToolData
@@ -23,7 +23,7 @@ export interface Post {
     price?: number;
     _id?: string;
     status?: PostStatus;
-    createdBy?: User;
+    createdBy?: User & string;
     createdAt?: string;
     updatedAt?: string;
     slug?: string;
@@ -34,6 +34,7 @@ export interface Post {
 
     cities?: City[];
     company?: Company & string;
+    isPostUnderCompany?: boolean;
     companies?: [Company & string];
     salaryCurrency?: string;
     salaryRangeFrom?: number;

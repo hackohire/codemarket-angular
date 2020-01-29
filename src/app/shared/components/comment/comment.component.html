@@ -37,7 +37,7 @@
             </button> -->
 
             
-            <a style="float: right;" *ngIf="!comment?.parentId" mat-button (click)="allowReply()">
+            <a style="float: right;" *ngIf="!comment?.parentId && !comment?.companyReferenceId" mat-button (click)="allowReply()">
                     <i style="font-size: 1.8rem !important;" class="fad fa-comments fa-lg"></i>
             </a>
             <!-- <button mat-mini-fab style="float: right" *ngIf="!comment?.parentId" (click)="allowReply()" color="primary">

@@ -11,6 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { PostService } from './post.service';
 import { CompanyPost } from '../models/company.model';
+import { Post } from '../models/post.model';
 
 @Injectable()
 export class CommentService {
@@ -72,7 +73,7 @@ export class CommentService {
 
   commentsQuery: QueryRef<any>;
   commentsList$ = new BehaviorSubject<Comment[]>(null);
-  companyPostsList: CompanyPost[] = []; /** Company Posts List for mutations on the comments when Post gets updated */
+  companyPostsList: Post[] = []; /** Company Posts List for mutations on the comments when Post gets updated */
   subscriptions$ = new Subscription();
 
   constructor(
@@ -108,10 +109,10 @@ export class CommentService {
     );
   }
 
-  onCommentAdded(post, comments: Comment[]) {
+  onCommentAdded(post, company, comments: Comment[]) {
     const COMMENTS_SUBSCRIPTION = gql`
-    subscription onCommentAdded($postId: String) {
-      onCommentAdded(postId: $postId){
+    subscription onCommentAdded($postId: String, $companyId: String) {
+      onCommentAdded(postId: $postId, companyId: $companyId){
         ...Comment
       }
     }
@@ -122,7 +123,8 @@ export class CommentService {
       this.apollo.subscribe({
         query: COMMENTS_SUBSCRIPTION,
         variables: {
-          postId: post._id
+          postId: post ? post._id : 'null',
+          companyId: company ? company._id : 'null'
         }
       }).pipe(
         map((c: any) => {
@@ -131,8 +133,8 @@ export class CommentService {
         tap((c: Comment) => {
 
           /** If comment is related to the post of a company */
-          if (c.postId) {
-            const p = this.companyPostsList.find(p => p._id === c.postId);
+          if (c.companyReferenceId) {
+            const p = this.companyPostsList.find(p => p._id === c.referenceId);
             p.comments.push(c);
           } else {
             if (c.parentId) {
@@ -168,7 +170,7 @@ export class CommentService {
       .subscribe(() => {
         if (rediect) {
           this.postService.redirectToPostDetails(post);
-        }       
+        }
         this.scrollToComment(post.description, c);
       })
     );
@@ -212,13 +214,13 @@ export class CommentService {
         tap((p: any) => {
           const comments = p.data.getCommentsByReferenceId;
           this.commentsList$.next(comments);
-          this.onCommentAdded(post, comments);
-          this.onCommentUpdated(post, comments);
-          this.onCommentDeleted(post, comments);
+          this.onCommentAdded(post, null, comments);
+          this.onCommentUpdated(post, null, comments);
+          this.onCommentDeleted(post, null, comments);
 
           /** If comment Id is passed scroll down to the comment */
           if (comments && comments.length && commentId) {
-            const comment = comments.find(c => c._id === commentId)
+            const comment = comments.find(c => c._id === commentId);
             this.scrollToComment(post.description, comment);
           }
         })
@@ -226,13 +228,13 @@ export class CommentService {
     );
   }
 
-  onCommentDeleted(post, comments: Comment[]) {
+  onCommentDeleted(post, company, comments: Comment[]) {
     const COMMENT_DELETE_SUBSCRIPTION = gql`
-    subscription onCommentDeleted($postId: String) {
-      onCommentDeleted(postId: $postId) {
+    subscription onCommentDeleted($postId: String, $companyId: String) {
+      onCommentDeleted(postId: $postId, companyId: $companyId) {
         referenceId
         parentId
-        postId
+        companyReferenceId
         _id
       }
     }
@@ -242,7 +244,8 @@ export class CommentService {
       this.apollo.subscribe({
         query: COMMENT_DELETE_SUBSCRIPTION,
         variables: {
-          postId: post._id
+          postId: post ? post._id : 'null',
+          companyId: company ? company._id : 'null'
         }
       }).pipe(
         map((c: any) => {
@@ -250,8 +253,8 @@ export class CommentService {
         }),
         tap((c: Comment) => {
            /** If comment is related to the post of a company */
-          if (c.postId) {
-            const p = this.companyPostsList.find(p => p._id === c.postId);
+          if (c.companyReferenceId) {
+            const p = this.companyPostsList.find(p => p._id === c.referenceId);
             const i = p.comments.findIndex(com => com._id === c._id);
             p.comments.splice(i, 1);
             // p.comments = p.comments.slice();
@@ -291,10 +294,10 @@ export class CommentService {
     );
   }
 
-  onCommentUpdated(post, comments: Comment[]) {
+  onCommentUpdated(post, company, comments: Comment[]) {
     const COMMENT_UPDATE_SUBSCRIPTION = gql`
-    subscription onCommentUpdated($postId: String) {
-      onCommentUpdated(postId: $postId){
+    subscription onCommentUpdated($postId: String, $companyId: String) {
+      onCommentUpdated(postId: $postId, companyId: $companyId){
         ...Comment
       }
     }
@@ -305,7 +308,8 @@ export class CommentService {
       this.apollo.subscribe({
         query: COMMENT_UPDATE_SUBSCRIPTION,
         variables: {
-          postId: post._id
+          postId: post ? post._id : 'null',
+          companyId: company ? company._id : 'null'
         }
       }).pipe(
         map((c: any) => {
@@ -313,8 +317,8 @@ export class CommentService {
         }),
         tap((c: Comment) => {
            /** If comment is related to the post of a company */
-          if (c.postId) {
-            const p = this.companyPostsList.find(p => p._id === c.postId);
+          if (c.companyReferenceId) {
+            const p = this.companyPostsList.find(p => p._id === c.referenceId);
             const i = p.comments.findIndex(com => com._id === c._id);
             p.comments[i] = c;
           } else {

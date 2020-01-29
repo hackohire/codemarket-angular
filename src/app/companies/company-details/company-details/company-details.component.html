@@ -22,17 +22,16 @@
         START COMPANY DETAILS AREA
     ==============================================-->
     <section class="single-product-desc" style="padding-top: 15px;">
-        <div class="container" style="margin-top: 0; margin-bottom: 15px;"
-            *ngIf=" details?.cover || details?.createdBy?._id === authService?.loggedInUser?._id">
+        <div class="container" style="margin-top: 0; margin-bottom: 15px;">
 
             <div class="row">
                 <div class="col-lg-3 align-items-center justify-content-center" style="margin: auto;">
                     <div class="avatar-circle" style="margin: auto;">
-                    <span class="initials">{{details?.name[0]}}</span>
+                    <span class="initials">{{details?.name ? details?.name[0] : ''}}</span>
                     </div>
                 <h4 style="text-align: center; padding-top: 10px;">{{details?.name}}</h4>
                 </div>
-                <div class="col-lg-9">
+                <div class="col-lg-9" *ngIf=" details?.cover || details?.createdBy?._id === authService?.loggedInUser?._id">
                     <div class="picture-container" *ngIf="selectedCoverPic || details?.cover">
                         <img #cover draggable="true" scroll="false" id="cover" data-top="0" data-left="0"
                             [src]="selectedCoverPic ? (selectedCoverPic | safe: 'resourceUrl') : ((s3FilesBucketURL + details?.cover) | safe: 'resourceUrl')">
@@ -75,11 +74,10 @@
             <div class="row">
                 <div class="col-lg-3">
                     <!-- start aside -->
-
                     <div class="docs-component-viewer-nav common-box-shadow">
                         <div class="docs-component-viewer-nav-content">
                             <div *ngFor="let category of companyViewLinks; let last = last;">
-                                <button cdkAccordionItem #panel="cdkAccordionItem" [expanded]="companyView?.includes(category.view)" (click)="selectMainCategory(category, panel)"
+                                <button cdkAccordionItem #panel="cdkAccordionItem" [expanded]="category?.types ? (category) : false" (click)="selectMainCategory(category, panel)"
                                     expanded="true" class="docs-nav-content-btn"
                                     [ngClass]="companyView === category.view ? 'docs-component-viewer-sidenav-item-selected' : ''"
                                     [attr.aria-controls]="'panel-' + category.view" [attr.aria-expanded]="panel.expanded">
@@ -144,7 +142,7 @@
                     </div> -->
 
                     <div *ngIf="companyView === 'home'">
-                        <ng-container *ngTemplateOutlet="postTemplate; context: { details: details, postType: 'post'}">
+                        <ng-container *ngTemplateOutlet="postTemplate; context: { details: details, postType: 'company-post'}">
                         </ng-container>
                     </div>
 
@@ -168,63 +166,63 @@
                         </ng-container>
                     </div>
 
-                    <div *ngIf="companyView === 'sales-goals'">
+                    <div *ngIf="companyView === 'sales-goal'">
                         <ng-container
-                            *ngTemplateOutlet="postTemplate; context: { details: details, postType: 'goal', goalType: 'sales'}">
+                            *ngTemplateOutlet="postTemplate; context: { details: details, postType: 'sales-goal', goalType: 'sales'}">
                         </ng-container>
                     </div>
 
-                    <div *ngIf="companyView === 'team-goals'">
+                    <div *ngIf="companyView === 'team-goal'">
                         <ng-container
-                            *ngTemplateOutlet="postTemplate; context: { details: details, postType: 'goal', goalType: 'team'}">
+                            *ngTemplateOutlet="postTemplate; context: { details: details, postType: 'team-goal', goalType: 'team'}">
                         </ng-container>
                     </div>
 
-                    <div *ngIf="companyView === 'marketing-goals'">
+                    <div *ngIf="companyView === 'marketing-goal'">
                         <ng-container
-                            *ngTemplateOutlet="postTemplate; context: { details: details, postType: 'goal', goalType: 'marketing'}">
+                            *ngTemplateOutlet="postTemplate; context: { details: details, postType: 'marketing-goal', goalType: 'marketing'}">
                         </ng-container>
                     </div>
 
-                    <div *ngIf="companyView === 'technical-goals'">
+                    <div *ngIf="companyView === 'technical-goal'">
                         <ng-container
-                            *ngTemplateOutlet="postTemplate; context: { details: details, postType: 'goal', goalType: 'technical'}">
+                            *ngTemplateOutlet="postTemplate; context: { details: details, postType: 'technical-goal', goalType: 'technical'}">
                         </ng-container>
                     </div>
 
-                    <div *ngIf="companyView === 'business-goals'">
+                    <div *ngIf="companyView === 'business-goal'">
                         <ng-container
-                            *ngTemplateOutlet="postTemplate; context: { details: details, postType: 'goal', goalType: 'business'}">
+                            *ngTemplateOutlet="postTemplate; context: { details: details, postType: 'business-goal', goalType: 'business'}">
                         </ng-container>
                     </div>
 
-                    <div *ngIf="companyView === 'sales-challenges'">
+                    <div *ngIf="companyView === 'sales-challenge'">
                         <ng-container
-                            *ngTemplateOutlet="postTemplate; context: { details: details, postType: 'challenge', challengeType: 'sales'}">
+                            *ngTemplateOutlet="postTemplate; context: { details: details, postType: 'sales-challenge', challengeType: 'sales'}">
                         </ng-container>
                     </div>
 
-                    <div *ngIf="companyView === 'team-challenges'">
+                    <div *ngIf="companyView === 'team-challenge'">
                         <ng-container
-                            *ngTemplateOutlet="postTemplate; context: { details: details, postType: 'challenge', challengeType: 'team'}">
+                            *ngTemplateOutlet="postTemplate; context: { details: details, postType: 'team-challenge', challengeType: 'team'}">
                         </ng-container>
                     </div>
 
-                    <div *ngIf="companyView === 'marketing-challenges'">
+                    <div *ngIf="companyView === 'marketing-challenge'">
                         <ng-container
-                            *ngTemplateOutlet="postTemplate; context: { details: details, postType: 'challenge', challengeType: 'marketing'}">
+                            *ngTemplateOutlet="postTemplate; context: { details: details, postType: 'marketing-challenge', challengeType: 'marketing'}">
                         </ng-container>
                     </div>
 
-                    <div *ngIf="companyView === 'technical-challenges'">
+                    <div *ngIf="companyView === 'technical-challenge'">
                         <ng-container
-                            *ngTemplateOutlet="postTemplate; context: { details: details, postType: 'challenge', challengeType: 'technical'}">
+                            *ngTemplateOutlet="postTemplate; context: { details: details, postType: 'technical-challenge', challengeType: 'technical'}">
                         </ng-container>
                     </div>
 
-                    <div *ngIf="companyView === 'business-challenges'">
+                    <div *ngIf="companyView === 'business-challenge'">
                         <ng-container
-                            *ngTemplateOutlet="postTemplate; context: { details: details, postType: 'challenge', challengeType: 'business'}">
+                            *ngTemplateOutlet="postTemplate; context: { details: details, postType: 'business-challenge', challengeType: 'business'}">
                         </ng-container>
                     </div>
 
@@ -372,23 +370,22 @@
 
 </ng-container>
 
-<ng-template #postTemplate let-cDetails="details" let-goalType="goalType" let-challengeType="challengeType" let-postType="postType">
+<ng-template #postTemplate let-cDetails="details" let-postType="postType">
 
-    <div class="common-box-shadow" *ngIf="auth?.loggedInUser?._id === cDetails?.createdBy?._id  || postType === 'post'">
+    <div class="common-box-shadow" *ngIf="auth?.loggedInUser?._id === cDetails?.createdBy?._id  || postType === 'company-post'">
         <!---------------- ADD POST EDITOR --------------->
         <app-editor [placeholder]="'Add '+ postType"
             [editorStyle]="{background: 'white', 'padding': '20px 35px', 'min-height': '130px', 'border-radius': '6px'}"
             (output)="postDescription = $event" [id]="postType + '-editor'"></app-editor>
 
         <button style="float: right; margin-top: 10px; margin-bottom: 20px;" type="button" class="btn btn--sm btn--round"
-            (click)="addPost(postType, challengeType, goalType)">Post</button>
+            (click)="addPost(postType)">Post</button>
     </div>
 
-    <div [ngStyle]="{'padding-top':  auth?.loggedInUser?._id === cDetails?.createdBy?._id || postType === 'post' ? '80px' : '0'}">
-        <ng-container *ngFor="let c of cDetails?.posts; let i=index;">
+    <div [ngStyle]="{'padding-top':  auth?.loggedInUser?._id === cDetails?.createdBy?._id || postType === 'company-post' ? '80px' : '0'}">
+        <ng-container *ngFor="let c of allCompanyRelatedPosts; let i=index;">
 
-            <div class="box image common-box-shadow"
-                *ngIf="(!challengeType && !goalType && postType === c?.postType) || (challengeType && challengeType === c?.challengeType) || (goalType && goalType === c?.goalType)">
+            <div class="box image common-box-shadow" *ngIf="postType === c?.type">
                 <div class="box-header">
                     <h3>
                         <a [routerLink]="['/', 'dashboard', 'profile', cDetails?.createdBy?._id ]">
@@ -399,7 +396,7 @@
                     </h3>
 
                     <!-- Post Actions -->
-                    <i class="fad fa-check-circle" *ngIf="c['__edit']" (click)="updatePost(c._id)"></i>
+                    <i class="fad fa-check-circle" *ngIf="c['__edit']" (click)="updatePost(c)"></i>
                     <span style="float: right;" *ngIf="c?.createdBy?._id === auth?.loggedInUser?._id">
                         <button mat-icon-button [matMenuTriggerFor]="optionsMenu"
                             aria-label="Example icon-button with a menu">
@@ -427,9 +424,10 @@
                         <p>
                             <!---------------- SINGLE POST EDITOR --------------->
                             <app-editor [editorStyle]="{background: 'white'}" [data]="c?.description"
+                                [companyPostId]="cDetails._id"
                                 (output)="postDescriptionInstances[c?._id] = $event" [id]="c?._id"
-                                [readOnly]="!c['__edit']" [blockLevelComments]="true" [commentType]="'company'"
-                                [companyPostId]="c?._id" [post]="cDetails" [commentsList]="c?.comments"></app-editor>
+                                [readOnly]="!c['__edit']" [blockLevelComments]="true" [commentType]="'post'"
+                                [companyPostId]="c?._id" [post]="c" [commentsList]="c?.comments"></app-editor>
                         </p>
                         <span><span class="fa fa-search-plus"></span></span>
                     </div>
@@ -486,6 +484,7 @@
                                 </span>
                                 <!---------------- SINGLE COMMENT EDITOR --------------->
                                 <app-editor [data]="com.text" (output)="commentDescriptionInstances[com?._id] = $event"
+                                    [companyPostId]="cDetails._id"
                                     [editorStyle]="{display: 'inline-block', width: '90%', background: 'white', padding: '0 12px 0 0px', 'border-radius': '20px'}"
                                     [id]="com?._id" [readOnly]="!com['__edit']"></app-editor>
                             </div>

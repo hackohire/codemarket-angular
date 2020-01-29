@@ -10,6 +10,7 @@ export interface Comment {
     children: [Comment];
     parentId: string;
     referenceId: string;
+    companyReferenceId?: string;
     createdBy: User;
     status: string;
 

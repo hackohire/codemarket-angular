@@ -167,9 +167,6 @@ export class AddDreamjobComponent implements OnInit {
       createdBy: new FormControl(i && i.createdBy && i.createdBy._id ? i.createdBy._id : ''),
     });
 
-    // this.salaryRangeFrom = this.dreamjobForm.get('salaryRangeFrom').value;
-    // this.salaryRangeTo = this.dreamjobForm.get('salaryRangeTo').value;
-
     this.roles$ = concat(
       of([]), // default items
       this.roleInput$.pipe(

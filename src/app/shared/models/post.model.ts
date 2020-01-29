@@ -23,7 +23,7 @@ export interface Post {
     price?: number;
     _id?: string;
     status?: PostStatus;
-    createdBy?: User & string;
+    createdBy?: User;
     createdAt?: string;
     updatedAt?: string;
     slug?: string;

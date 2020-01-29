@@ -391,14 +391,15 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
 
   addPost(type: string) {
     if (this.authService.loggedInUser) {
-      this.postService.addPost({
+      const post: any = {
         type,
         createdBy: this.authService.loggedInUser._id,
         description: this.postDescription,
         isPostUnderCompany: true,
         status: PostStatus.Published,
         company: this.companyDetails._id
-      }).subscribe();
+      }
+      this.postService.addPost(post).subscribe();
     } else {
       this.authService.checkIfUserIsLoggedIn(true);
     }

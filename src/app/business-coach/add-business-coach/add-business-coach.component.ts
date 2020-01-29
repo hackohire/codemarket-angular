@@ -66,6 +66,11 @@ export class AddBusinessCoachComponent implements OnInit {
   businessCoachPageNumber = 1;
   totalBusinessCoaches: number;
 
+  listOfBusinessGoals: any[] = [];
+  businessGoalsPageNumber = 1;
+  totalBusinessGoals: number;
+
+
   visible = true;
   selectable = true;
   removable = true;
@@ -112,7 +117,7 @@ export class AddBusinessCoachComponent implements OnInit {
     private store: Store<AppState>,
     private activatedRoute: ActivatedRoute,
     public formService: FormService,
-    private companyService: CompanyService,
+    public companyService: CompanyService,
     private postService: PostService
   ) {
     this.breadcumb = {
@@ -166,6 +171,7 @@ export class AddBusinessCoachComponent implements OnInit {
 
   ngOnInit() {
     this.fetchBusinessCoaches(1);
+    this.fetchBusinessGoals(1);
   }
 
   businessCoachFormInitialization(i: Post) {
@@ -344,6 +350,15 @@ export class AddBusinessCoachComponent implements OnInit {
       if (cc && cc.posts) {
         this.listOfBusinessCoaches = this.listOfBusinessCoaches.concat(cc.posts);
         this.totalBusinessCoaches = cc.total;
+      }
+    });
+  }
+
+  fetchBusinessGoals(pageNumber) {
+    this.postService.getAllPosts({pageNumber, limit: 3}, 'business-goal').subscribe((cc) => {
+      if (cc && cc.posts) {
+        this.listOfBusinessGoals = this.listOfBusinessGoals.concat(cc.posts);
+        this.totalBusinessGoals = cc.total;
       }
     });
   }

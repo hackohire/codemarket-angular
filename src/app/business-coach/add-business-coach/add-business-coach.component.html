@@ -136,8 +136,24 @@
                 </mat-list-item>
                 <div class="pagination-area" *ngIf="listOfBusinessCoaches?.length < totalBusinessCoaches">
                     <span style="text-decoration: underline; cursor: pointer;"
-                        (click)="fetchBusinessCoaches(businessCoachPageNumber + 1)">+ Load
+                        (click)="businessCoachPageNumber = businessCoachPageNumber + 1; fetchBusinessCoaches(businessCoachPageNumber)">+ Load
                         More{{'(' + (totalBusinessCoaches - listOfBusinessCoaches?.length) + ')'}}</span>
+                </div>
+            </mat-list>
+
+            <mat-list class="businesscoach-form-area">
+                <h3 style="font-size: large;" mat-subheader>Business Goals:</h3>
+                <mat-list-item *ngFor="let cc of listOfBusinessGoals; let last=last">
+                    <img height="35px" width="35px" style="border-radius: 50%;"
+                        [src]="cc?.createdBy?.avatar ? ((s3FilesBucketURL + cc.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar">
+                    <h4 mat-line><a>{{cc.name}}</a></h4>
+                    <app-editor mat-line class="business-goal"  (click)="companyService.redirectToCompanyDetails(cc?.company?._id, 'business-goal')" [editorStyle]="{background: none, border: none, padding: 0, 'font-family': 'roboto'}" [readOnly]="true" [data]="cc?.description"></app-editor>
+                    <p mat-line> {{cc.createdAt | date}} </p>
+                </mat-list-item>
+                <div class="pagination-area" *ngIf="listOfBusinessGoals?.length < totalBusinessGoals">
+                    <span style="text-decoration: underline; cursor: pointer;"
+                        (click)="businessGoalsPageNumber = businessGoalsPageNumber + 1; fetchBusinessGoals(businessGoalsPageNumber)">+ Load
+                        More{{'(' + (totalBusinessGoals - listOfBusinessGoals?.length) + ')'}}</span>
                 </div>
             </mat-list>
 

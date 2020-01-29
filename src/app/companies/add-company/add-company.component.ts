@@ -227,10 +227,6 @@ export class AddCompanyComponent implements OnInit {
     });
   }
 
-  fetCompaniesPosts(pageNumber) {
-    this.companyService.getCompaniesPostsByPostType('')
-  }
-
   addCitiesFn(name) {
     return { name };
   }

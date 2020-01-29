@@ -310,7 +310,22 @@ export const appConstants = {
         }
       }
 
-
+      fundingCurrency
+      fundingAmount
+      fundingBy {
+        name
+        _id
+      }
+      fundingTo {
+        name
+        _id
+      }
+      fundingDate
+      fundingProcess {
+        name
+        _id
+        type
+      }
       jobProfile {
         _id
         name

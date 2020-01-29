@@ -147,4 +147,8 @@ export class FormService {
     return this.addToCollection(name, 'tags', 'business').toPromise();
   }
 
+  addFundingProcessFn = (name) => {
+    return this.addToCollection(name, 'tags', 'funding-process').toPromise();
+  }
+
 }

@@ -12,5 +12,6 @@ export enum PostType {
     Dreamjob = 'dream-job',
     Job = 'job',
     CareerCoach = 'career-coach',
-    BusinessCoach = 'business-coach'
+    BusinessCoach = 'business-coach',
+    CapitalFunding = 'capital-funding'
 }

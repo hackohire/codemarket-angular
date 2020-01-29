@@ -61,6 +61,14 @@ export interface Post {
         services?: [Tag]
     };
 
+    /** Fields related to Capital Funding */
+    fundingDate?: string;
+    fundingCurrency?: string;
+    fundingAmount?: string;
+    fundingBy?: [Company & string];
+    fundingTo?: [Company & string];
+    fundingProcess?: [];
+
     likeCount?: number;
     comments?: Comment[];
 }

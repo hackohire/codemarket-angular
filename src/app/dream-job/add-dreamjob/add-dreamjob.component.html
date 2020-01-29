@@ -3,10 +3,10 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-8">
             <div [formGroup]="dreamjobForm" class="dreamjob-form-area">
 
-                <mat-form-field class="field-full-width" style="width: 85%;">
+                <mat-form-field class="field-full-width" style="width: 77%;">
                     <input #url formControlName="referencePostUrl" type="text" matInput
                         placeholder="Import Post By Url">
                 </mat-form-field>
@@ -115,6 +115,40 @@
                 </div>
 
             </div>
+
+        </div>
+
+        <div class="col-md-4">
+            <mat-list class="dreamjob-form-area">
+                <h3 style="font-size: large;" mat-subheader>Dream Jobs:</h3>
+                <mat-list-item *ngFor="let cc of listOfDreamJobs; let last=last">
+                    <!-- <mat-icon mat-list-icon>folder</mat-icon> -->
+                    <img height="35px" width="35px" style="border-radius: 50%;"
+                        [src]="cc?.createdBy?.avatar ? ((s3FilesBucketURL + cc.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar">
+                    <h4 mat-line (click)="postService?.redirectToPostDetails(cc)"><a>{{cc.name}}</a></h4>
+                    <p mat-line> {{cc.createdAt | date}} </p>
+                </mat-list-item>
+                <div class="pagination-area" *ngIf="listOfDreamJobs?.length < totalDreamJobs">
+                    <span 
+                        style="text-decoration: underline; cursor: pointer;"
+                        (click)="fetchDreamJobs(dreamJobPageNumber + 1)">+ Load More{{'(' + (totalDreamJobs - listOfDreamJobs?.length) + ')'}}</span>
+                </div>
+            </mat-list>
+
+            <mat-list class="dreamjob-form-area">
+                <h3 style="font-size: large;" mat-subheader>Jobs:</h3>
+                <mat-list-item *ngFor="let cc of listOfJobs; let last=last">
+                    <img height="35px" width="35px" style="border-radius: 50%;"
+                        [src]="cc?.createdBy?.avatar ? ((s3FilesBucketURL + cc.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar">
+                    <h4 mat-line><a>{{cc.name}}</a></h4>
+                    <p mat-line> {{cc.createdAt | date}} </p>
+                </mat-list-item>
+                <div class="pagination-area" *ngIf="listOfJobs?.length < totalJobs">
+                    <span 
+                        style="text-decoration: underline; cursor: pointer;"
+                        (click)="fetchJobs(jobPageNumber + 1)">+ Load More{{'(' + (totalJobs - listOfJobs?.length) + ')'}}</span>
+                </div>
+            </mat-list>
 
         </div>
     </div>

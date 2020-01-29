@@ -19,6 +19,7 @@ import { Post } from '../../shared/models/post.model';
 // import { Options } from 'ng5-slider/options';
 import { CompanyService } from '../../companies/company.service';
 import { PostService } from '../../shared/services/post.service';
+import { environment } from '../../../environments/environment';
 // import { AddCompanyComponent } from '../../companies/add-company/add-company.component';
 
 @Component({
@@ -62,6 +63,14 @@ export class AddDreamjobComponent implements OnInit {
   removable = true;
   addOnBlur = true;
 
+  listOfDreamJobs: any[] = [];
+  dreamJobPageNumber = 1;
+  totalDreamJobs: number;
+
+  listOfJobs: any[] = [];
+  jobPageNumber = 1;
+  totalJobs: number;
+
   subscription$: Subscription;
 
   citySuggestions$: Observable<City[]>;
@@ -72,8 +81,8 @@ export class AddDreamjobComponent implements OnInit {
   rolesLoading = false;
   roleInput$ = new Subject<string>();
 
-  salaryRangeFrom = 30;
-  salaryRangeTo = 50;
+  anonymousAvatar = '../../../../assets/images/anonymous-avatar.jpg';
+  s3FilesBucketURL = environment.s3FilesBucketURL;
 
   @ViewChild('auto', { static: false }) matAutocomplete: MatAutocomplete;
 
@@ -83,7 +92,7 @@ export class AddDreamjobComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     public formService: FormService,
     private companyService: CompanyService,
-    private postService: PostService
+    public postService: PostService
   ) {
     this.breadcumb = {
       title: 'Add Your Career Goal or Your Dream Job Details',
@@ -134,7 +143,10 @@ export class AddDreamjobComponent implements OnInit {
     // this.dreamjobFormInitialization();
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.fetchDreamJobs(1);
+    this.fetchJobs(1);
+  }
 
   dreamjobFormInitialization(i: Post) {
     console.log(i && i.companies ? i.companies : []);
@@ -154,9 +166,6 @@ export class AddDreamjobComponent implements OnInit {
       timeline: new FormControl(i && i.timeline ? i.timeline : 0),
       createdBy: new FormControl(i && i.createdBy && i.createdBy._id ? i.createdBy._id : ''),
     });
-
-    // this.salaryRangeFrom = this.dreamjobForm.get('salaryRangeFrom').value;
-    // this.salaryRangeTo = this.dreamjobForm.get('salaryRangeTo').value;
 
     this.roles$ = concat(
       of([]), // default items
@@ -192,8 +201,6 @@ export class AddDreamjobComponent implements OnInit {
 
     this.statusFormControl.setValue(status);
 
-    this.dreamjobForm.get('salaryRangeFrom').setValue(this.salaryRangeFrom);
-    this.dreamjobForm.get('salaryRangeTo').setValue(this.salaryRangeTo);
 
     if (!this.descriptionFormControl.value) {
       this.descriptionFormControl.setValue([]);
@@ -246,33 +253,33 @@ export class AddDreamjobComponent implements OnInit {
     return { name };
   }
 
+  fetchDreamJobs(pageNumber) {
+    this.postService.getAllPosts({pageNumber, limit: 3}, 'dream-job').subscribe((dj) => {
+      if (dj && dj.posts) {
+        this.listOfDreamJobs = this.listOfDreamJobs.concat(dj.posts);
+        this.totalDreamJobs = dj.total;
+      }
+    });
+  }
+
+  fetchJobs(pageNumber) {
+    this.postService.getAllPosts({pageNumber, limit: 3}, 'job').subscribe((dj) => {
+      if (dj && dj.posts) {
+        this.listOfJobs = this.listOfJobs.concat(dj.posts);
+        this.totalJobs = dj.total;
+      }
+    });
+  }
+
   addCompany = (name: string) => {
     if (name) {
       return new Promise((resolve, reject) => {
-        // const dialogRef = this.dialog.open(AddCompanyComponent, {
-        //   width: '630px',
-        //   height: '550px',
-        //   maxHeight: '700px',
-        //   panelClass: 'no-padding',
-        //   data: {name},
-        //   // disableClose: true
-        // });
-
         this.companyService.addCompany({name, createdBy: this.authService.loggedInUser._id}).subscribe(c => {
           this.allCompanies.unshift(c);
           this.allCompanies = this.allCompanies.slice();
           return resolve(c.name);
-        })
-  
-        // dialogRef.afterClosed().subscribe(result => {
-        //   if(result) {
-        //     this.allCompanies.unshift(result);
-        //     this.allCompanies = this.allCompanies.slice();
-        //     return resolve(result.name);
-        //   }
-        //   console.log('The dialog was closed');
-        // });
-      })
+        });
+      });
     }
   }
 

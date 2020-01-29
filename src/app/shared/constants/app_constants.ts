@@ -1,6 +1,6 @@
 import { PostType } from '../models/post-types.enum';
 import gql from 'graphql-tag';
-import { description } from './fragments_constatnts';
+import { description, comment } from './fragments_constatnts';
 
 export const appConstants = {
 
@@ -203,6 +203,9 @@ export const appConstants = {
         name
         _id
       }
+      comments {
+        ...Comment
+      }
       support {
         time
         description {
@@ -310,7 +313,22 @@ export const appConstants = {
         }
       }
 
-
+      fundingCurrency
+      fundingAmount
+      fundingBy {
+        name
+        _id
+      }
+      fundingTo {
+        name
+        _id
+      }
+      fundingDate
+      fundingProcess {
+        name
+        _id
+        type
+      }
       jobProfile {
         _id
         name
@@ -320,5 +338,6 @@ export const appConstants = {
   
     }
     ${description}
+    ${comment}
     `
 };

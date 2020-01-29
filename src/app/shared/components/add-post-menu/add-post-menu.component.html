@@ -31,6 +31,13 @@
     <span> Interview</span>
   </button>
 
+  <!-- Add Capital Funding -->
+  <button mat-menu-item [routerLink]="['/', 'post', 'add-capital-funding']" [queryParams]="{type: 'capital-funding'}">
+    <i style="font-size: 1.7rem !important;"
+      [class]="'vertical-align-middle fal fa-' + icons.requirement + ' fa-fw'"></i>
+    <span> Capital Funding</span>
+  </button>
+
   <!-- Add Requirements -->
   <button mat-menu-item [routerLink]="['/', 'post', 'add-requirement']" [queryParams]="{type: 'requirement'}">
     <i style="font-size: 1.7rem !important;"

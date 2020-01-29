@@ -185,12 +185,12 @@ export class PostService {
           query getAllPosts($pageOptions: PageOptionsInput, $type: String, $referencePostId: String, $companyId: String) {
             getAllPosts(pageOptions: $pageOptions, type: $type, referencePostId: $referencePostId, companyId: $companyId) {
               posts {
-                ...Product
+                ...Post
               }
               total
             }
           }
-          ${productConstants.productQueryFields}
+          ${appConstants.postQuery}
         `,
         variables: {
           pageOptions,

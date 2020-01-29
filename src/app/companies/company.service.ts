@@ -44,28 +44,8 @@ export class CompanyService {
       latitude
       address
     }
-    posts {
-      description {
-        ...Description
-      }
-      createdBy {
-        _id
-        avatar
-        name
-      }
-      createdAt
-      updatedAt
-      challengeType
-      goalType
-      postType
-      _id
-      comments {
-        ...Comment
-      }
-    }
   }
   ${description}
-  ${comment}
   `;
 
   companyQuery: QueryRef<any>;
@@ -115,39 +95,44 @@ export class CompanyService {
     );
   }
 
-  /** On Adding Challenges, listen Realtime  */
-  onCompanyUpdate(company: Company) {
+  /** On Adding Post Related to the company, listen Realtime  */
+  onCompanyPostChanges(company: Company) {
     const COMPANY_SUBSCRIPTION = gql`
-    subscription onCompanyUpdate($companyId: String) {
-      onCompanyUpdate(companyId: $companyId){
-        companyUpdated {
-          ...Company
+    subscription onCompanyPostChanges($companyId: String) {
+      onCompanyPostChanges(companyId: $companyId){
+        postUpdated {
+          ...Post
+        }
+        postAdded {
+          ...Post
+        }
+        postDeleted {
+          _id
         }
       }
     }
-    ${this.companyFileds}
+    ${appConstants.postQuery}
     `;
 
-    this.companyQuery.subscribeToMore({
-      document: COMPANY_SUBSCRIPTION,
-      variables: { companyId: company._id },
-      updateQuery: (prev, {subscriptionData}) => {
-        if (!subscriptionData.data) {
-          return prev;
+    this.apollo.subscribe({
+      query: COMPANY_SUBSCRIPTION,
+      variables: { companyId: company._id }
+    }).pipe(
+      tap((p: any) => {
+        /** companyPostsList in the comment Service are mutable and hence we are mutating them here */
+        const data = p.data.onCompanyPostChanges;
+        if (data && data.postAdded) {
+          this.commentService.companyPostsList.unshift(data.postAdded);
+        } else if (data && data.postUpdated) {
+          const postToBeUpdated = this.commentService.companyPostsList.find(post => post._id === data.postUpdated._id);
+          postToBeUpdated['description'] = data.postUpdated.description;
+          postToBeUpdated['__edit'] = false;
+        } else if (data && data.postDeleted) {
+          const i = this.commentService.companyPostsList.findIndex(post => post._id === data.postDeleted._id);
+          this.commentService.companyPostsList.splice(i, 1);
         }
-
-        // company = subscriptionData.data.onCompanyUpdate.companyUpdated;
-        const newFeedItem = subscriptionData.data.onCompanyUpdate.companyUpdated;
-
-        return {
-          ...prev,
-          onCompanyUpdate: {
-            companyUpdated: newFeedItem
-          }
-        };
-      }
-      
-    });
+      })
+    ).subscribe();
   }
 
   getCompaniesByUserIdAndType(userId: string, companyType: string): Observable<Company[]> {
@@ -175,25 +160,29 @@ export class CompanyService {
   }
 
 
-  getCompaniesByType(companyType: string): Observable<Company[]> {
+  getCompaniesByType(companyType: string, pageOptions = {pageNumber: 0, limit: 0}): Observable<any> {
     return this.apollo.query(
       {
         query: gql`
-          query getCompaniesByType($companyType: String) {
-            getCompaniesByType(companyType: $companyType) {
-              ...Company
+          query getCompaniesByType($companyType: String, $pageOptions: PageOptionsInput) {
+            getCompaniesByType(companyType: $companyType, pageOptions: $pageOptions) {
+              companies {
+                ...Company
+              }
+              total
             }
           }
           ${this.companyFileds}
         `,
         variables: {
-          companyType
+          companyType,
+          pageOptions
         },
         // fetchPolicy: 'no-cache'
       }
     ).pipe(
       map((p: any) => {
-        return p.data.getCompaniesByType;
+        return pageOptions && pageOptions.limit ? p.data.getCompaniesByType : p.data.getCompaniesByType.companies;
       }),
     );
   }
@@ -210,7 +199,7 @@ export class CompanyService {
           }
           ${this.companyFileds}
         `,
-        // fetchPolicy: 'no-cache',
+        fetchPolicy: 'no-cache',
         variables: {
           CompanyId
         }
@@ -222,13 +211,12 @@ export class CompanyService {
       }),
       /** On the first time fetching companydata, subscribe to listen company edit changes */
       concatMap((value, index) => {
-        this.commentService.companyPostsList = value.posts;
-        return index === 0 ? 
+        return index === 0 ?
           of(value).pipe(tap(() => {
-            this.onCompanyUpdate(value);
-            this.commentService.onCommentAdded(value, []);
-            this.commentService.onCommentUpdated(value, []);
-            this.commentService.onCommentDeleted(value, []);
+            this.onCompanyPostChanges(value);
+            this.commentService.onCommentAdded(null, value, []);
+            this.commentService.onCommentUpdated(null, value, []);
+            this.commentService.onCommentDeleted(null, value, []);
 
             // if (companyPostId && commentId) {
             //   const post = value.posts.find(p => p._id === companyPostId);
@@ -237,8 +225,8 @@ export class CompanyService {
             //     this.commentService.scrollToComment(post.blocks, comment);
             //   }
             // }
-          })) : 
-          of(value)
+          })) :
+          of(value);
       })
     )
   }
@@ -307,9 +295,9 @@ export class CompanyService {
     );
   }
 
-  redirectToCompanyDetails(companyId: string) {
+  redirectToCompanyDetails(companyId: string, view = 'home') {
     this.router.navigate(['/', `company`, companyId],
-      // { queryParams: { type: 'company' } }
+      { queryParams: { view } }
       );
   }
 

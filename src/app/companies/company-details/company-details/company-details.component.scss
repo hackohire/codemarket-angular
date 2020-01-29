@@ -461,7 +461,7 @@
   padding: 0;
 }
 .box > .box-new-comment {
-  background: #9298A4;
+  background: #e8e9ed;
   margin: 0;
   // overflow: hidden;
   padding: 10px 30px;
@@ -538,7 +538,7 @@
 .box.update > .box-header > span,
 .box.text > .box-header > span{
   background: transparent;
-  color: #9298A4;
+  color: #e8e9ed;
   font-size: 32px;
   margin: -10px auto 0;
 }
@@ -578,7 +578,7 @@
 .box.image > .box-new-comment > .content > .post-row > textarea,
 .box.video > .box-new-comment > .content,
 .box.video > .box-new-comment > .content > .post-row > textarea {
-  background: #9298A4;
+  background: #e8e9ed;
   -webkit-transition: all .25s ease-in-out;
      -moz-transition: all .25s ease-in-out;
           transition: all .25s ease-in-out;  

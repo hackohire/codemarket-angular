@@ -141,7 +141,6 @@
             <ul class="media-list thread-list" style="list-style: none; padding-bottom: 0;">
                 <!-- <h4 class="tab-content-wrapper">Comments:</h4> -->
                 <div *ngFor="let c of commentsList">
-                    <!-- {{c?.blockId}} - {{blockId}} -->
                     <li [id]="c?._id" *ngIf="c?.blockSpecificComment && c?.blockId === blockId" class="single-thread">
                         <app-comment [comment]="c" [referenceId]="cDetails?._id"></app-comment>
                     </li>

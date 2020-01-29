@@ -124,7 +124,15 @@ const postRoutes: Routes = [
       {
         path: 'edit-business-coach/:businessCoachId',
         loadChildren: () => import('../business-coach/add-business-coach/add-business-coach.module').then(module => module.AddBusinessCoachModule),
-      }
+      },
+      {
+        path: 'add-capital-funding',
+        loadChildren: () => import('../capital-funding/add-capital-funding/add-capital-funding.module').then(module => module.AddCapitalFundingModule),
+      },
+      {
+        path: 'edit-capital-funding/:capitalFundingId',
+        loadChildren: () => import('../capital-funding/add-capital-funding/add-capital-funding.module').then(module => module.AddCapitalFundingModule),
+      },
     ],
     // runGuardsAndResolvers: 'always',
   },

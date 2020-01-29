@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommentService } from '../../../shared/services/comment.service';
 import { AuthService } from '../../../core/services/auth.service';
@@ -26,6 +26,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { Event } from '../../../shared/models/event.model';
 import { concatMap } from 'rxjs/operators/concatMap';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { description } from '../../../shared/constants/fragments_constatnts';
+import { BlockToolData } from '@editorjs/editorjs/types/tools';
+import { PostStatus } from '../../../shared/models/poststatus.enum';
 
 @Component({
   selector: 'app-company-details',
@@ -40,7 +43,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
     ]),
   ],
 })
-export class CompanyDetailsComponent implements OnInit {
+export class CompanyDetailsComponent implements OnInit, OnDestroy {
 
   @ViewChild('successfulRSVP', { static: false }) successfulRSVP: SwalComponent;
 
@@ -74,6 +77,7 @@ export class CompanyDetailsComponent implements OnInit {
 
   dreamJobsList = [];
   jobsList = [];
+  allCompanyRelatedPosts = [];
 
   /** Q&A Related Variables */
   questionOrAnswerForm: FormGroup;
@@ -83,7 +87,10 @@ export class CompanyDetailsComponent implements OnInit {
 
   commentId: string;
 
-  postDescription = [];
+  postDescription: [{
+    type: string;
+    data: BlockToolData
+  }];
   postDescriptionInstances = [];
   commentDescriptionInstances = [];
   companyViewLinks = [
@@ -108,23 +115,23 @@ export class CompanyDetailsComponent implements OnInit {
       title: 'Goals',
       types: [
         {
-          view: 'sales-goals',
+          view: 'sales-goal',
           title: 'Sales Goals'
         },
         {
-          view: 'team-goals',
+          view: 'team-goal',
           title: 'Team Goals'
         },
         {
-          view: 'business-goals',
+          view: 'business-goal',
           title: 'Business Goals'
         },
         {
-          view: 'marketing-goals',
+          view: 'marketing-goal',
           title: 'Marketing Goals'
         },
         {
-          view: 'technical-goals',
+          view: 'technical-goal',
           title: 'Technical Goals'
         },
       ]
@@ -134,23 +141,23 @@ export class CompanyDetailsComponent implements OnInit {
       title: 'Challenges',
       types: [
         {
-          view: 'sales-challenges',
+          view: 'sales-challenge',
           title: 'Sales Challenges'
         },
         {
-          view: 'team-challenges',
+          view: 'team-challenge',
           title: 'Team Challenges'
         },
         {
-          view: 'business-challenges',
+          view: 'business-challenge',
           title: 'Business Challenges'
         },
         {
-          view: 'marketing-challenges',
+          view: 'marketing-challenge',
           title: 'Marketing Challenges'
         },
         {
-          view: 'technical-challenges',
+          view: 'technical-challenge',
           title: 'Technical Challenges'
         },
       ]
@@ -205,26 +212,7 @@ export class CompanyDetailsComponent implements OnInit {
             return index === 0 ?
               of(company).pipe(
                 tap(() => {
-                  if (this.commentId && companyPostId && company && company.posts && company.posts.length) {
-                    const post = company.posts.find(p => p._id === companyPostId);
-                    const comment = post.comments.find(c => c._id === this.commentId);
-                    switch (post.postType) {
-                      case 'mission':
-                        this.companyView = 'mission';
-                        break;
-                      case 'goal':
-                        this.companyView = post.goalType + '-goals';
-                        break;
-                      case 'post':
-                        this.companyView = 'home';
-                        break;
-                      case 'challenge':
-                        this.companyView = post.challengeType + '-challenges';
-                        break;
-                      default:
-                        this.companyView = 'home';
-                    }
-                    this.commentService.scrollToComment(post.description, comment);
+                  
 
                     /** Get the list of users in a company */
                     this.subscription$.add(
@@ -244,7 +232,6 @@ export class CompanyDetailsComponent implements OnInit {
                         }
                       })
                     );
-                  }
                 })
               ) : of(company);
           })
@@ -254,7 +241,7 @@ export class CompanyDetailsComponent implements OnInit {
             if (c && c._id) {
               this.companyDetails$ = of(c);
               this.companyDetails = c;
-              this.initializeCommentForm(c, 'company');
+              this.initializeCommentForm(c, 'post');
               this.initializeQuestionAndAnswerForm(c, 'company');
               this.fetchJobsAndDreamJobs(c);
             }
@@ -285,7 +272,8 @@ export class CompanyDetailsComponent implements OnInit {
   initializeCommentForm(p, commentType?: string) {
     this.commentForm = new FormGroup({
       text: new FormControl(''),
-      referenceId: new FormControl(p._id),
+      referenceId: new FormControl(),
+      companyReferenceId: new FormControl(p._id),
       type: new FormControl(commentType ? commentType : this.type),
     });
 
@@ -293,11 +281,18 @@ export class CompanyDetailsComponent implements OnInit {
 
   }
 
+  isExpanded(category) {
+    if (category && category.types) {
+      return category.types.indexOf(c => c.view === this.companyView) > 0;
+    }
+    return false;
+  }
+
   addComment(postId = '') {
     console.log(this.commentForm.value);
     if (this.authService.loggedInUser) {
       this.commentForm.addControl('createdBy', new FormControl(this.authService.loggedInUser._id));
-      this.commentForm.addControl('postId', new FormControl(postId))
+      this.commentForm.patchValue({referenceId: postId});
       this.subscription$.add(
         this.commentService.addComment(this.commentForm.value).subscribe()
       );
@@ -388,31 +383,37 @@ export class CompanyDetailsComponent implements OnInit {
         console.log(d);
         if (d) {
           qa['edit'] = false;
-          qa.text = d.text
+          qa.text = d.text;
         }
       })
     ).subscribe();
   }
 
-  addPost(postType: string, challengeType = '', goalType = '') {
+  addPost(type: string) {
     if (this.authService.loggedInUser) {
-      this.updateCompany(
-        {},
-        {
-          operation: 'ADD',
-          post: { challengeType, goalType, postType, createdBy: this.authService.loggedInUser._id, description: this.postDescription }
-        });
+      this.postService.addPost({
+        type,
+        createdBy: this.authService.loggedInUser._id,
+        description: this.postDescription,
+        isPostUnderCompany: true,
+        status: PostStatus.Published,
+        company: this.companyDetails._id
+      }).subscribe();
     } else {
       this.authService.checkIfUserIsLoggedIn(true);
     }
   }
 
   deletePost(_id: string) {
-    this.updateCompany({}, { operation: 'DELETE', post: { _id } });
+    this.postService.deletePost(_id).subscribe();
   }
 
-  updatePost(_id: string) {
-    this.updateCompany({}, { operation: 'UPDATE', post: { _id, description: this.postDescriptionInstances[_id] } });
+  updatePost(post) {
+    const postToBeUpdated = {};
+    postToBeUpdated['description'] = this.postDescriptionInstances[post._id];
+    postToBeUpdated['isPostUnderCompany'] = true;
+    postToBeUpdated['_id'] = post._id;
+    this.postService.updatePost(postToBeUpdated).subscribe();
   }
 
   updateCompany(companyDetails, operation = null) {
@@ -543,6 +544,9 @@ export class CompanyDetailsComponent implements OnInit {
       if (c && c.posts) {
         this.dreamJobsList = c.posts.filter(comp => comp.type === 'dream-job');
         this.jobsList = c.posts.filter(comp => comp.type === 'job');
+
+        this.allCompanyRelatedPosts = c.posts;
+        this.commentService.companyPostsList = c.posts;
       }
     });
   }

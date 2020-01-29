@@ -160,6 +160,7 @@ fragment Comment on Comment {
   _id
   type
   referenceId
+  companyReferenceId
   parentId
   createdAt
   createdBy {
@@ -183,8 +184,6 @@ fragment Comment on Comment {
   }
   blockId
   blockSpecificComment
-
-  postId
 }
 ${description}
 `;

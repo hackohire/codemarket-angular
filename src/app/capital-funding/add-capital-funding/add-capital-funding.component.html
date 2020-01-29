@@ -1,0 +1,91 @@
+<app-breadcumb [title]="breadcumb?.title" [path]="breadcumb?.path"></app-breadcumb>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div [formGroup]="capitalfundingForm" class="capitalfunding-form-area">
+
+                <mat-form-field class="field-full-width">
+                    <input type="text" matInput formControlName="name" placeholder="Title">
+                </mat-form-field>
+
+                <div class="row">
+                    <ng-select class="col-md-6" placeholder="Funding By" [addTag]="addCompany" [items]="allCompanies"
+                        formControlName="fundingBy" [multiple]="true" bindLabel="name">
+                        <ng-option *ngFor="let cName of allCompanies" [value]="cName._id">
+                            {{ cName?.name }}
+                        </ng-option>
+                    </ng-select>
+
+                    <ng-select class="col-md-6" placeholder="Funding To" [addTag]="addCompany" [items]="allCompanies"
+                        formControlName="fundingTo" [multiple]="true" bindLabel="name">
+                        <ng-option *ngFor="let cName of allCompanies" [value]="cName._id">
+                            {{ cName?.name }}
+                        </ng-option>
+                    </ng-select>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <mat-form-field class="field-full-width">
+                            <mat-label>Funding Amount(In Thousands)</mat-label>
+                            <input type="number" matInput formControlName="fundingAmount" placeholder="Funding Amount">
+                            <!-- <mat-hint matSuffix>K</mat-hint> -->
+                            <mat-select matSuffix style="width: 35px; vertical-align: super;"
+                                formControlName="fundingCurrency">
+                                <mat-option value="$">$</mat-option>
+                                <mat-option value="€">€</mat-option>
+                                <mat-option value="₹">₹</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-6" >
+                        <!-- Event Date Range -->
+                        <mat-form-field class="field-full-width">
+                            <input (click)="dt2.open()" formControlName="fundingDate" matInput [owlDateTime]="dt2"
+                                [selectMode]="'single'" placeholder="Date">
+                            <mat-icon matSuffix [owlDateTimeTrigger]="dt2">date_range</mat-icon>
+                            <owl-date-time #dt2 [pickerType]="'calendar'"></owl-date-time>
+                        </mat-form-field>
+                    </div>
+
+                </div>
+
+                <ng-select placeholder="Funding Process"
+                    [items]="fundingProcess$ | async" [hideSelected]="true" formControlName="fundingProcess"
+                    [addTag]="formService?.addFundingProcessFn" [bindLabel]="'name'" [minTermLength]="2" [loading]="fundingProcessLoading"
+                    [multiple]="true" [typeahead]="fundingProcessInput$">
+                </ng-select>
+
+                <app-editor *ngIf="descriptionFormControl?.value && edit; else add" (output)="updateFormData($event)"
+                    [data]="descriptionFormControl?.value" [id]="'edit-capitalfunding-editor'"
+                    [importArticleSubscription]="true" [placeholder]="'Capital Funding Description:'"></app-editor>
+
+                <br />
+
+                <ng-template #add>
+                    <app-editor *ngIf="!edit" [placeholder]="'Capital Funding Description:'" (output)="updateFormData($event)"
+                        [id]="'capitalfunding-editor'"></app-editor>
+                </ng-template>
+
+                <br />
+                <!-- <br /> -->
+
+                <div fxLayout="row" fxLayoutGap="10px">
+                    <button *ngIf="statusFormControl?.value !== 'Published'" type="button" (click)="submit('Drafted')"
+                        [disabled]="capitalfundingForm?.invalid" mat-raised-button color="primary">Save</button>
+                    <button type="button" (click)="submit('Published')" [disabled]="capitalfundingForm?.invalid"
+                        mat-raised-button
+                        color="primary">{{ statusFormControl?.value === 'Published' ? 'Publish Changes' : 'Publish' }}</button>
+                    <button *ngIf="statusFormControl?.value === 'Published'" type="button"
+                        (click)="submit('Unpublished')" [disabled]="capitalfundingForm?.invalid" mat-raised-button
+                        color="primary">{{ 'Unpublish' }}</button>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

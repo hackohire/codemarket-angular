@@ -12,5 +12,22 @@ export enum PostType {
     Dreamjob = 'dream-job',
     Job = 'job',
     CareerCoach = 'career-coach',
-    BusinessCoach = 'business-coach'
+    BusinessCoach = 'business-coach',
+    CapitalFunding = 'capital-funding',
+}
+
+/** Same as other posts */
+export enum CompanyPosts {
+    SalesChallenge = 'sales-challenge',
+    MarketingChallenge = 'marketing-challenge',
+    TechnicalChallenge = 'technical-challenge',
+    BusinessChallenge = 'business-challenge',
+    TeamChallenge = 'team-challenge',
+    SalesGoal = 'sales-goal',
+    MarketingGoal = 'marketing-goal',
+    TechnicalGoal = 'technical-goal',
+    BusinessGoal = 'business-goal',
+    TeamGoal = 'team-goal',
+    Mission = 'mission',
+    CompanyPost = 'company-post'
 }

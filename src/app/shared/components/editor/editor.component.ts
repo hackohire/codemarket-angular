@@ -130,8 +130,8 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
       blockSpecificComment: new FormControl(true),
       blockId: new FormControl(''),
     });
-    if (this.commentType === 'company' || p.type === 'company') {
-      this.commentForm.addControl('postId', new FormControl(this.companyPostId))
+    if (this.companyPostId) {
+      this.commentForm.addControl('companyReferenceId', new FormControl(this.companyPostId));
     }
   }
 

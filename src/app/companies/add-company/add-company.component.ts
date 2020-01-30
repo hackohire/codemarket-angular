@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, Inject } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { BreadCumb } from '../../shared/models/bredcumb.model';
 import { FormGroup, FormArray, FormControl, FormBuilder, Validators } from '@angular/forms';
@@ -16,6 +16,8 @@ import Swal from 'sweetalert2';
 import { LocationService } from '../../shared/services/location.service';
 import { City } from '../../shared/models/city.model';
 import { environment } from '../../../environments/environment';
+import { PostService } from '../../shared/services/post.service';
+import { PostType, CompanyPostTypes } from '../../shared/models/post-types.enum';
 
 @Component({
   selector: 'app-add-company',
@@ -36,6 +38,9 @@ export class AddCompanyComponent implements OnInit {
   companyTypes = Object.values(CompanyTypes);
 
   edit: boolean;
+
+  postTypes = PostType;
+  companyPostTypes = CompanyPostTypes;
 
   get createdBy() {
     return this.companyForm.get('createdBy');
@@ -74,6 +79,8 @@ export class AddCompanyComponent implements OnInit {
   companiesPageNumber = 1;
   totalCompanies: number;
 
+  listOfBusinessChallenges: any[] = [];
+
   citySuggestions$: Observable<City[]>;
   cityInput$ = new Subject<string>();
   citiesLoading = false;
@@ -99,6 +106,7 @@ export class AddCompanyComponent implements OnInit {
     public formService: FormService,
     public companyService: CompanyService,
     public locationService: LocationService,
+    public postService: PostService
     // @Inject(MAT_DIALOG_DATA) public data: any,
     // public dialogRef: MatDialogRef<AddCompanyComponent>
   ) {
@@ -133,6 +141,7 @@ export class AddCompanyComponent implements OnInit {
 
   ngOnInit() {
     this.fetchCompanies(1);
+    this.fetchBusinessChallenges();
   }
 
   async companyFormInitialization(i: Company) {
@@ -223,6 +232,14 @@ export class AddCompanyComponent implements OnInit {
       if (dj && dj.companies) {
         this.listOfCompanies = this.listOfCompanies.concat(dj.companies);
         this.totalCompanies = dj.total;
+      }
+    });
+  }
+
+  fetchBusinessChallenges() {
+    this.postService.getAllPosts({pageNumber: 1, limit: 3}, 'business-challenge').subscribe((dj: any) => {
+      if (dj && dj.posts) {
+        this.listOfBusinessChallenges = dj.posts;
       }
     });
   }

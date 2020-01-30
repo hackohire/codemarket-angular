@@ -17,7 +17,7 @@ export enum PostType {
 }
 
 /** Same as other posts */
-export enum CompanyPosts {
+export enum CompanyPostTypes {
     SalesChallenge = 'sales-challenge',
     MarketingChallenge = 'marketing-challenge',
     TechnicalChallenge = 'technical-challenge',

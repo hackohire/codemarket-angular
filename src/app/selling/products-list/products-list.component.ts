@@ -16,7 +16,7 @@ import { environment } from 'src/environments/environment';
 import { PostService } from 'src/app/shared/services/post.service';
 import { selectLoggedInUser } from '../../core/store/selectors/user.selector';
 import { GetPostsByUserIdAndType, DeletePost, SetSelectedPost } from '../../core/store/actions/post.actions';
-import { PostType } from '../../shared/models/post-types.enum';
+import { PostType, CompanyPostTypes } from '../../shared/models/post-types.enum';
 import { selectPostsByUserIdAndType } from '../../core/store/selectors/post.selectors';
 import { SweetalertService } from '../../shared/services/sweetalert.service';
 
@@ -56,6 +56,7 @@ export class ProductsListComponent implements OnInit, OnDestroy, AfterViewInit {
   authorId: string; // Id of the user whose profile is being visited by loggedInUser
 
   postTypes = Object.values(PostType);
+  companyPostTypes = Object.values(CompanyPostTypes);
 
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   selectedPostType = '';
@@ -88,6 +89,7 @@ export class ProductsListComponent implements OnInit, OnDestroy, AfterViewInit {
     this.dataSource.sort = this.sort;
 
     const path = this.activatedRoute.parent.routeConfig.path;
+    this.selectedPostType = this.activatedRoute.snapshot.queryParams['view'] ? this.activatedRoute.snapshot.queryParams['view'] : '';
 
     // Checking if authorId is there to see if user is trying to visit somebody else's profile or his own profile(loggedin User's own Profile)
     this.authorId = this.activatedRoute.parent.snapshot.parent.params.authorId;
@@ -219,7 +221,7 @@ export class ProductsListComponent implements OnInit, OnDestroy, AfterViewInit {
       this.paginator.pageIndex = 0;
     }
     const paginationObj = {pageNumber: this.paginator.pageIndex + 1, limit: 10, sort: {order: ""}};
-    this.postService.getAllPosts(paginationObj, this.selectedPostType ?this.selectedPostType : type ).pipe(
+    this.postService.getAllPosts(paginationObj, this.selectedPostType ? this.selectedPostType : type ).pipe(
       map((result: any) => {
         if (result && result.posts) {
           /** Set the data for the datatable  */

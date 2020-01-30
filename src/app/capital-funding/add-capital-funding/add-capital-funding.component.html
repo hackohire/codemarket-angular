@@ -41,7 +41,7 @@
                         </mat-form-field>
                     </div>
 
-                    <div class="col-md-6" >
+                    <div class="col-md-6">
                         <!-- Event Date Range -->
                         <mat-form-field class="field-full-width">
                             <input (click)="dt2.open()" formControlName="fundingDate" matInput [owlDateTime]="dt2"
@@ -52,12 +52,20 @@
                     </div>
 
                 </div>
+                <div formArrayName="fundingProcess">
+                    <div *ngFor="let p of process?.controls; let i=index; let last=last;">
+                        <div [formGroupName]="i">
+                            <div style="margin: 26px 10px 5px 0">
+                                <h6 style="display: inline; margin: 0 10px 0 0;">{{'Funding Step - '+ (i+1)  }}</h6>
+                                <mat-icon style="vertical-align: sub;" (click)="addStep(i)">add_circle_outline</mat-icon>
+                                <mat-icon *ngIf="process?.controls?.length > 1" style="vertical-align: sub;" (click)="removeStep(i)">remove_circle_outline</mat-icon>
+                            </div>
+                            <app-editor [id]="'process' + i" (output)="updateProcess($event, i)" [placeholder]="'Write Step Details'"></app-editor>
+                        </div>
+                    </div>
+                </div>
 
-                <ng-select placeholder="Funding Process"
-                    [items]="fundingProcess$ | async" [hideSelected]="true" formControlName="fundingProcess"
-                    [addTag]="formService?.addFundingProcessFn" [bindLabel]="'name'" [minTermLength]="2" [loading]="fundingProcessLoading"
-                    [multiple]="true" [typeahead]="fundingProcessInput$">
-                </ng-select>
+                <br />
 
                 <app-editor *ngIf="descriptionFormControl?.value && edit; else add" (output)="updateFormData($event)"
                     [data]="descriptionFormControl?.value" [id]="'edit-capitalfunding-editor'"
@@ -66,8 +74,8 @@
                 <br />
 
                 <ng-template #add>
-                    <app-editor *ngIf="!edit" [placeholder]="'Capital Funding Description:'" (output)="updateFormData($event)"
-                        [id]="'capitalfunding-editor'"></app-editor>
+                    <app-editor *ngIf="!edit" [placeholder]="'Capital Funding Description:'"
+                        (output)="updateFormData($event)" [id]="'capitalfunding-editor'"></app-editor>
                 </ng-template>
 
                 <br />

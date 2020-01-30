@@ -19,7 +19,7 @@
     <div class="single-title-and-excerpt">
 
         <!-- Post Title -->
-        <h2 class="post-title">
+        <h2 class="post-title" *ngIf="p?.name">
             <a style="display: inline-block;"
                 (click)="postService?.redirectToPostDetails(p)">{{p?.name}}</a>
 

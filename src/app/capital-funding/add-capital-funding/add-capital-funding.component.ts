@@ -51,9 +51,9 @@ export class AddCapitalFundingComponent implements OnInit {
     return this.capitalfundingForm.get('status');
   }
 
-  fundingProcess$: Observable<any[]>;
-  fundingProcessLoading = false;
-  fundingProcessInput$ = new Subject<string>();
+  get process(): FormArray {
+    return this.capitalfundingForm.get('fundingProcess') as FormArray;
+  }
 
   subscription$: Subscription;
 
@@ -125,7 +125,7 @@ export class AddCapitalFundingComponent implements OnInit {
       fundingBy: new FormControl(i && i.fundingBy ? i.fundingBy : []),
       fundingTo: new FormControl(i && i.fundingTo ? i.fundingTo : []),
       fundingDate: new FormControl(i && i.fundingDate ? i.fundingDate : []),
-      fundingProcess: new FormControl(i && i.fundingProcess ? i.fundingProcess : []),
+      fundingProcess: new FormArray([new FormControl([])]),
       status: new FormControl(i && i.status ? i.status : PostStatus.Drafted),
       _id: new FormControl(i && i._id ? i._id : ''),
       fundingCurrency: new FormControl(i && i.fundingCurrency ? i.fundingCurrency : '$'),
@@ -137,19 +137,6 @@ export class AddCapitalFundingComponent implements OnInit {
     this.companyService.getCompaniesByType('').subscribe((companies) => {
       this.allCompanies = companies;
     });
-
-    this.fundingProcess$ = concat(
-      of([]), // default items
-      this.fundingProcessInput$.pipe(
-        distinctUntilChanged(),
-        tap(() => this.fundingProcessLoading = true),
-        switchMap(term => this.formService.findFromCollection(term, 'tags', 'funding-process').pipe(
-          catchError(() => of([])), // empty list on error
-          tap(() => this.fundingProcessLoading = false)
-          ))
-        )
-    );
-
   }
 
   submit(status) {
@@ -192,7 +179,6 @@ export class AddCapitalFundingComponent implements OnInit {
   onlySendIdForTags(capitalfundingValue) {
     capitalfundingValue.fundingBy = capitalfundingValue.fundingBy.map(c => c._id);
     capitalfundingValue.fundingTo = capitalfundingValue.fundingTo.map(c => c._id);
-    capitalfundingValue.fundingProcess = capitalfundingValue.fundingProcess.map(c => c._id);
   }
 
   updateFormData(event) {
@@ -210,6 +196,18 @@ export class AddCapitalFundingComponent implements OnInit {
         });
       });
     }
+  }
+
+  addStep(i: number) {
+    this.process.insert(i, new FormControl([]));
+  }
+
+  removeStep(i: number) {
+    this.process.removeAt(i);
+  }
+
+  updateProcess(d, i: number) {
+    this.process.at(i).setValue(d);
   }
 
 }

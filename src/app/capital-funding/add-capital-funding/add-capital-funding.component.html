@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <div [formGroup]="capitalfundingForm" class="capitalfunding-form-area">
+            <div [formGroup]="capitalfundingForm" class="add-form-area common-box-shadow">
 
                 <mat-form-field class="field-full-width">
                     <input type="text" matInput formControlName="name" placeholder="Title">
@@ -60,7 +60,7 @@
                                 <mat-icon style="vertical-align: sub;" (click)="addStep(i)">add_circle_outline</mat-icon>
                                 <mat-icon *ngIf="process?.controls?.length > 1" style="vertical-align: sub;" (click)="removeStep(i)">remove_circle_outline</mat-icon>
                             </div>
-                            <app-editor [id]="'process' + i" (output)="updateProcess($event, i)" [placeholder]="'Write Step Details'"></app-editor>
+                            <app-editor [id]="'process' + i" (output)="updateProcess($event, i)" [data]="p?.value" [placeholder]="'Write Step Details'"></app-editor>
                         </div>
                     </div>
                 </div>

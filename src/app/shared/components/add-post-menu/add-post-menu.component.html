@@ -31,6 +31,13 @@
     <span> Interview</span>
   </button>
 
+    <!-- Add Hiring Process -->
+    <button mat-menu-item [routerLink]="['/', 'post', 'add-hiring-process']" [queryParams]="{type: 'hiring-process'}">
+      <i style="font-size: 1.7rem !important;"
+        [class]="'vertical-align-middle fal fa-' + icons.requirement + ' fa-fw'"></i>
+      <span> Hiring Process</span>
+    </button>
+
   <!-- Add Capital Funding -->
   <button mat-menu-item [routerLink]="['/', 'post', 'add-capital-funding']" [queryParams]="{type: 'capital-funding'}">
     <i style="font-size: 1.7rem !important;"

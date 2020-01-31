@@ -119,19 +119,33 @@ const postRoutes: Routes = [
       },
       {
         path: 'add-business-coach',
-        loadChildren: () => import('../business-coach/add-business-coach/add-business-coach.module').then(module => module.AddBusinessCoachModule),
+        loadChildren: () => import('../business-coach/add-business-coach/add-business-coach.module')
+        .then(module => module.AddBusinessCoachModule),
       },
       {
         path: 'edit-business-coach/:businessCoachId',
-        loadChildren: () => import('../business-coach/add-business-coach/add-business-coach.module').then(module => module.AddBusinessCoachModule),
+        loadChildren: () => import('../business-coach/add-business-coach/add-business-coach.module')
+        .then(module => module.AddBusinessCoachModule),
       },
       {
         path: 'add-capital-funding',
-        loadChildren: () => import('../capital-funding/add-capital-funding/add-capital-funding.module').then(module => module.AddCapitalFundingModule),
+        loadChildren: () => import('../capital-funding/add-capital-funding/add-capital-funding.module')
+        .then(module => module.AddCapitalFundingModule),
       },
       {
         path: 'edit-capital-funding/:capitalFundingId',
-        loadChildren: () => import('../capital-funding/add-capital-funding/add-capital-funding.module').then(module => module.AddCapitalFundingModule),
+        loadChildren: () => import('../capital-funding/add-capital-funding/add-capital-funding.module')
+        .then(module => module.AddCapitalFundingModule),
+      },
+      {
+        path: 'add-hiring-process',
+        loadChildren: () => import('../hiring-process/add-hiring-process/add-hiring-process.module')
+        .then(module => module.AddHiringProcessModule),
+      },
+      {
+        path: 'edit-hiring-process/:hiringProcessId',
+        loadChildren: () => import('../hiring-process/add-hiring-process/add-hiring-process.module')
+        .then(module => module.AddHiringProcessModule),
       },
     ],
     // runGuardsAndResolvers: 'always',

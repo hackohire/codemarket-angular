@@ -327,6 +327,12 @@ export const appConstants = {
       fundingProcess {
         ...Description
       }
+
+      hiringProcess {
+        ...Description
+      }
+
+
       jobProfile {
         _id
         name

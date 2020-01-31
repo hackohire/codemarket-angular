@@ -19,7 +19,6 @@ import { LocalBusinessComponent } from './read-more/local-business/local-busines
 import { CodingExpertsComponent } from './read-more/coding-experts/coding-experts.component';
 import { GovernmentComponent } from './read-more/government/government.component';
 import { DiversityComponent } from './read-more/diversity/diversity.component';
-import { AboutUsComponent } from './about-us/about-us.component';
 import { AmplifyModule } from './core/amplify/amplify.module';
 import { PostDataResolver } from './core/resolver';
 
@@ -37,8 +36,7 @@ import { PostDataResolver } from './core/resolver';
     LocalBusinessComponent,
     CodingExpertsComponent,
     GovernmentComponent,
-    DiversityComponent,
-    AboutUsComponent
+    DiversityComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

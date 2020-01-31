@@ -11,7 +11,6 @@ import { CodingExpertsComponent } from './read-more/coding-experts/coding-expert
 import { LocalBusinessComponent } from './read-more/local-business/local-business.component';
 import { GovernmentComponent } from './read-more/government/government.component';
 import { DiversityComponent } from './read-more/diversity/diversity.component';
-import { AboutUsComponent } from './about-us/about-us.component';
 import { PostDataResolver } from './core/resolver';
 // import { PostDataResolver } from './core/resolver';
 
@@ -196,12 +195,6 @@ const routes: Routes = [
     path: 'diversity',
     component: DiversityComponent,
     // outlet: 'main',
-  },
-
-  {
-    path: 'about',
-    component: AboutUsComponent,
-    // outlet: 'main'
   },
 
   {

@@ -92,10 +92,6 @@ $ipad: 992px;
     }
   }
 
-  /* PROPOSAL AREA */
-  .proposal{
-    padding: 100px 13%;
-  }
   .footer-area{
     .social ul li+li{
       margin-left: 6px;
@@ -459,23 +455,6 @@ $ipad: 992px;
   }
   .section-title p{
     padding: 0 125px;
-  }
-
-  /* hero area */
-  .hero-content{
-    .hero__content__title {
-      h1 {
-        font-size: 50px;
-      }
-      .tagline{
-        line-height: 35px ;
-      }
-    }
-  }
-  .logo{
-    img{
-      width: 100%;
-    }
   }
 
   /* featured area */
@@ -1114,33 +1093,6 @@ $ipad: 992px;
     line-height: 50px;
   }
 
-
-  /* hero area */
-  .hero-area{
-    height: 660px;
-    .hero-content .content-wrapper{
-      vertical-align: top;
-      padding-top: 90px;
-    }
-    .hero__content__title{
-      .tagline{
-        line-height: 30px;
-      }
-      h1{
-        font-size: 40px;
-      }
-    }
-    .search_box{
-      padding: 30px;
-      text-align: center;
-      .text_field, .search__select{
-        width: 100%;
-        border-left: 1px solid $borderColor;
-        margin-bottom: 20px;
-      }
-    }
-  }
-
   /* CUSTOM RADIO */
   .custom-radio.custom_radio--big{
     span.circle{
@@ -1294,11 +1246,6 @@ $ipad: 992px;
     }
   }
 
-  /* proposal area */
-  .proposal {
-    text-align: center;
-    padding: 66px 13%;
-  }
 
   /* call to action */
   .call-to-action{
@@ -1906,22 +1853,6 @@ $ipad: 992px;
       display: none;
     }
   }
-  .timeline{
-    .happening{
-      &:nth-child(2n+2){
-        .happening--detail{
-          padding: 50px 30px 0 0;
-        }
-      }
-      .happening--period{
-        padding: 45px 30px 0 0;
-      }
-      .happening--detail{
-        padding: 45px 0 0 30px;
-      }
-    }
-  }
-
 
 
   /* 404 PAGE */
@@ -2105,49 +2036,6 @@ $ipad: 992px;
     }
   }
 
-
-
-
-
-  /* HERO AREA */
-  .hero-area {
-    height: 539px;
-    .hero-content{
-      .content-wrapper{
-        padding-top: 70px;
-      }
-    }
-
-    .hero__content__title{
-      h1{
-        font-size: 30px;
-      }
-      .tagline{
-        font-size: 18px;
-        padding-bottom: 30px;
-      }
-    }
-    .search_box .search-btn{
-      margin-left: 0;
-    }
-
-    .hero__btn-area .btn{
-      &:first-child{
-        margin-right: 0;
-      }
-      margin-right: 0;
-      margin-bottom: 20px;
-    }
-    .search-area{
-      position: relative;
-      -webkit-transform: translateY(-23%);
-      -moz-transform: translateY(-23%);
-      -ms-transform: translateY(-23%);
-      -o-transform: translateY(-23%);
-      transform: translateY(-23%);
-    }
-  }
-
   /* FEATURED PRODUCT AREA */
   .featured-products .featured__product-description {
     padding: 25px 25px 0 25px;
@@ -2240,32 +2128,6 @@ $ipad: 992px;
     .page-numbers{
       line-height: 32px;
       min-width: 40px;
-    }
-  }
-
-  /* ITEM PREVIEW */
-  .item-preview {
-    .item__preview-thumb {
-      .thumb-slider{
-        width: calc(100% - 90px);
-      }
-      .prev-nav{
-        span{
-          line-height: 30px;
-          font-size: 14px;
-          padding: 0 10px;
-          &+span{
-            margin-left: 5px;
-          }
-        }
-      }
-    }
-    .item-action{
-      margin-top: -20px;
-      a{
-        margin-left: 0 !important;
-        margin-top: 20px;
-      }
     }
   }
 
@@ -2449,75 +2311,7 @@ $ipad: 992px;
     }
   }
 
-  /* SINGLE JOB PAGE HERO AREA */
-  .job_hero_area{
-    padding-top: 110px;
-    padding-bottom: 100px;
-    p{
-      padding: 30px 0 40px;
-      font-size: 18px;
-    }
-    h1{
-      font-size: 42px;
-      line-height: 48px;
-    }
-  }
-  .dashboard_module .dashboard__content {
-    padding: 0 20px 18px;
-  }
-  .job_area {
-    .single_job{
-      padding: 30px;
-      .job__title{
-        font-size: 20px;
-        margin-bottom: 15px;
-      }
-      .job__location_type{
-        p{
-          margin-bottom: 10px;
-        }
-      }
-    }
-  }
-
-  .feature_area{
-    .single_feature{
-      text-align: center;
-      .feature__icon{
-        vertical-align: top;
-        margin-bottom: 15px;
-      }
-      .feature__content{
-        width: 100%;
-        padding-left: 0;
-      }
-    }
-  }
-
-  /* JOB PAGE */
-  .job_detail_module{
-    .job__title{
-      font-size: 22px;
-      line-height: 30px;
-    }
-    &.information{
-      .job__content{
-        .informations li {
-          width: 100%;
-          margin-bottom: 20px;
-        }
-      }
-    }
-    .job__content{
-      .content_list{
-        padding-left: 20px;
-        li{
-          padding-left: 20px;
-        }
-      }
-    }
-  }
-
+ 
   /* DASHBOARD PAGE */
   .country_statistics{
     .dashboard__title{

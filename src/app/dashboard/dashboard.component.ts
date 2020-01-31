@@ -12,7 +12,6 @@ import { AuthService } from '../core/services/auth.service';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { ActivatedRoute } from '@angular/router';
 import { MembershipService } from '../membership/membership.service';
-import { AcceleratorService } from '../accelerator/accelerator.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -31,7 +30,6 @@ export class DashboardComponent implements OnInit {
   @ViewChild(MatSort, {static: false}) sort: MatSort;
 
   constructor(
-    private store: Store<AppState>,
     private userService: UserService,
     public postService: PostService,
     public authService: AuthService,

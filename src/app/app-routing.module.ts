@@ -131,11 +131,6 @@ const routes: Routes = [
     loadChildren: () => import('./membership/membership.module').then(module => module.MembershipModule),
     // outlet: 'main',
   },
-  {
-    path: 'accelerator',
-    loadChildren: () => import('./accelerator/accelerator.module').then(module => module.AcceleratorModule),
-    // outlet: 'main',
-  },
 
   {
     path: 'hackathon',

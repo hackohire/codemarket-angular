@@ -68,7 +68,16 @@ export interface Post {
     fundingAmount?: string;
     fundingBy?: [Company & string];
     fundingTo?: [Company & string];
-    fundingProcess?: [];
+    fundingProcess?: [[{
+        type: string;
+        data: BlockToolData
+    }]];
+
+    /** Field related to hiring process */
+    hiringProcess?: [[{
+        type: string;
+        data: BlockToolData
+    }]];
 
     likeCount?: number;
     comments?: Comment[];

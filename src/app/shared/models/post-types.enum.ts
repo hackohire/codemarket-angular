@@ -14,10 +14,11 @@ export enum PostType {
     CareerCoach = 'career-coach',
     BusinessCoach = 'business-coach',
     CapitalFunding = 'capital-funding',
+    HiringProcess = 'hiring-process'
 }
 
 /** Same as other posts */
-export enum CompanyPosts {
+export enum CompanyPostTypes {
     SalesChallenge = 'sales-challenge',
     MarketingChallenge = 'marketing-challenge',
     TechnicalChallenge = 'technical-challenge',

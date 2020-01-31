@@ -17,42 +17,47 @@ import { CompanyService } from '../../companies/company.service';
 import { PostService } from '../../shared/services/post.service';
 
 @Component({
-  selector: 'app-add-capital-funding',
-  templateUrl: './add-capital-funding.component.html',
-  styleUrls: ['./add-capital-funding.component.scss'],
+  selector: 'app-add-hiring-process',
+  templateUrl: './add-hiring-process.component.html',
+  styleUrls: ['./add-hiring-process.component.scss'],
   providers: [CompanyService]
 })
-export class AddCapitalFundingComponent implements OnInit {
+
+export class AddHiringProcessComponent implements OnInit {
 
   breadcumb: BreadCumb;
-  capitalfundingForm: FormGroup;
+  hiringprocessForm: FormGroup;
 
   allCompanies = [];
 
   edit: boolean;
 
+  roles$: Observable<any[]>;
+  rolesLoading = false;
+  roleInput$ = new Subject<string>();
+
   get createdBy() {
-    return this.capitalfundingForm.get('createdBy');
+    return this.hiringprocessForm.get('createdBy');
   }
 
   get idFromControl() {
-    return this.capitalfundingForm.get('_id');
+    return this.hiringprocessForm.get('_id');
   }
 
   get descriptionFormControl() {
-    return this.capitalfundingForm.get('description');
+    return this.hiringprocessForm.get('description');
   }
 
   get citiesFormControl() {
-    return this.capitalfundingForm.get('cities') as FormArray;
+    return this.hiringprocessForm.get('cities') as FormArray;
   }
 
   get statusFormControl() {
-    return this.capitalfundingForm.get('status');
+    return this.hiringprocessForm.get('status');
   }
 
   get process(): FormArray {
-    return this.capitalfundingForm.get('fundingProcess') as FormArray;
+    return this.hiringprocessForm.get('hiringProcess') as FormArray;
   }
 
   subscription$: Subscription;
@@ -66,52 +71,52 @@ export class AddCapitalFundingComponent implements OnInit {
     public postService: PostService
   ) {
     this.breadcumb = {
-      title: 'Add Capital Funding',
+      title: 'Add Hiring Process',
       path: [
         {
           name: 'Dashboard',
           pathString: '/'
         },
         {
-          name: 'Add Capital Funding'
+          name: 'Add Hiring Process'
         }
       ]
     };
 
-    /** If it is "add-capitalfunding" route intialize empty capitalfunding form, but we are setting store property of "Selectedcapitalfunding" as null
-     * and if it is "edit-capitalfunding route" we need to subscribe to get "Selectedcapitalfunding" and user refresh the tab,
-     * there won't be any selected capitalfunding,
+    /** If it is "add-hiringprocess" route intialize empty hiringprocess form, but we are setting store property of "Selectedhiringprocess" as null
+     * and if it is "edit-hiringprocess route" we need to subscribe to get "Selectedhiringprocess" and user refresh the tab,
+     * there won't be any selected hiringprocess,
      * so we need to make the call to
-     * get the capitalfunding by fetching id from the params
+     * get the hiringprocess by fetching id from the params
      */
 
-    if (this.activatedRoute.snapshot.parent && this.activatedRoute.snapshot.parent.routeConfig.path === 'add-capital-funding') {
+    if (this.activatedRoute.snapshot.parent && this.activatedRoute.snapshot.parent.routeConfig.path === 'add-hiring-process') {
       this.store.dispatch(SetSelectedPost({ post: null }));
-      this.capitalfundingFormInitialization(null);
+      this.hiringprocessFormInitialization(null);
     } else {
       this.subscription$ = this.store.select(selectSelectedPost).pipe(
         tap((h: Post) => {
-          this.capitalfundingFormInitialization(h);
+          this.hiringprocessFormInitialization(h);
           this.edit = true;
         }),
         switchMap((h: Post) => {
           if (!h) {
             return this.activatedRoute.params;
           }
-          return of({ capitalFundingId: '' });
+          return of({ hiringProcessId: '' });
         }),
         tap((params) => {
-          /** When user refresh the tab, there won't be any selected capitalfunding, so we need to make the call to
-           * get the capitalfunding by fetching id from the params
+          /** When user refresh the tab, there won't be any selected hiringprocess, so we need to make the call to
+           * get the hiringprocess by fetching id from the params
            */
-          if (params.capitalFundingId) {
-            this.store.dispatch(GetPostById({ postId: params.capitalFundingId }));
+          if (params.hiringProcessId) {
+            this.store.dispatch(GetPostById({ postId: params.hiringProcessId }));
           }
         })
       ).subscribe();
     }
 
-    // this.capitalfundingFormInitialization();
+    // this.hiringprocessFormInitialization();
   }
 
   ngOnInit() {
@@ -125,26 +130,36 @@ export class AddCapitalFundingComponent implements OnInit {
     return hiringProcessStepsControls;
   }
 
-  capitalfundingFormInitialization(i: Post) {
+  hiringprocessFormInitialization(i: Post) {
     console.log(i && i.companies ? i.companies : []);
-    this.capitalfundingForm = new FormGroup({
+    this.hiringprocessForm = new FormGroup({
       name: new FormControl(i && i.name ? i.name : '', Validators.required),
+      jobProfile: new FormControl(i && i.jobProfile ? i.jobProfile : []),
       description: new FormControl(i && i.description ? i.description : ''),
-      fundingBy: new FormControl(i && i.fundingBy ? i.fundingBy : []),
-      fundingTo: new FormControl(i && i.fundingTo ? i.fundingTo : []),
-      fundingDate: new FormControl(i && i.fundingDate ? i.fundingDate : []),
-      fundingProcess: new FormArray(i && i.hiringProcess ? this.setProcessFormControl(i.fundingProcess) : [new FormControl([])]),
+      company: new FormControl(i && i.company ? i.company._id : []),
+      hiringProcess: new FormArray(i && i.hiringProcess ? this.setProcessFormControl(i.hiringProcess) : [new FormControl([])]),
       status: new FormControl(i && i.status ? i.status : PostStatus.Drafted),
       _id: new FormControl(i && i._id ? i._id : ''),
-      fundingCurrency: new FormControl(i && i.fundingCurrency ? i.fundingCurrency : '$'),
-      fundingAmount: new FormControl(i && i.fundingAmount ? i.fundingAmount : 10),
-      type: new FormControl(PostType.CapitalFunding),
+      type: new FormControl(PostType.HiringProcess),
       createdBy: new FormControl(i && i.createdBy && i.createdBy._id ? i.createdBy._id : ''),
     });
+
 
     this.companyService.getCompaniesByType('').subscribe((companies) => {
       this.allCompanies = companies;
     });
+
+    this.roles$ = concat(
+      of([]), // default items
+      this.roleInput$.pipe(
+        distinctUntilChanged(),
+        tap(() => this.rolesLoading = true),
+        switchMap(term => this.formService.findFromCollection(term, 'tags', 'role').pipe(
+          catchError(() => of([])), // empty list on error
+          tap(() => this.rolesLoading = false)
+          ))
+        )
+    );
   }
 
   submit(status) {
@@ -161,22 +176,22 @@ export class AddCapitalFundingComponent implements OnInit {
     }
 
     if (this.idFromControl && !this.idFromControl.value) {
-      this.capitalfundingForm.removeControl('_id');
-      const capitalfundingValue = { ...this.capitalfundingForm.value };
+      this.hiringprocessForm.removeControl('_id');
+      const hiringprocessValue = { ...this.hiringprocessForm.value };
 
       /** Only Send _id */
-      this.onlySendIdForTags(capitalfundingValue);
-      this.postService.addPost(capitalfundingValue).subscribe((j) => {
+      this.onlySendIdForTags(hiringprocessValue);
+      this.postService.addPost(hiringprocessValue).subscribe((j) => {
         if (j) {
           this.postService.redirectToPostDetails(j);
         }
       });
     } else {
-      const capitalfundingValue = { ...this.capitalfundingForm.value };
+      const hiringprocessValue = { ...this.hiringprocessForm.value };
 
       /** Only Send _id */
-      this.onlySendIdForTags(capitalfundingValue);
-      this.postService.updatePost(capitalfundingValue).subscribe((j) => {
+      this.onlySendIdForTags(hiringprocessValue);
+      this.postService.updatePost(hiringprocessValue).subscribe((j) => {
         if (j) {
           this.postService.redirectToPostDetails(j);
         }
@@ -184,13 +199,12 @@ export class AddCapitalFundingComponent implements OnInit {
     }
   }
 
-  onlySendIdForTags(capitalfundingValue) {
-    capitalfundingValue.fundingBy = capitalfundingValue.fundingBy.map(c => c._id);
-    capitalfundingValue.fundingTo = capitalfundingValue.fundingTo.map(c => c._id);
+  onlySendIdForTags(hiringprocessValue) {
+    hiringprocessValue.jobProfile = hiringprocessValue.jobProfile.map(c => c._id);
   }
 
   updateFormData(event) {
-    this.capitalfundingForm.get('description').setValue(event);
+    this.hiringprocessForm.get('description').setValue(event);
   }
 
 
@@ -219,3 +233,4 @@ export class AddCapitalFundingComponent implements OnInit {
   }
 
 }
+

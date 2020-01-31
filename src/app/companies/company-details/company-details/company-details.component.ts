@@ -204,6 +204,8 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
 
     const params = this.activatedRoute.snapshot.params;
 
+    this.companyView = this.activatedRoute.snapshot.queryParams['view'] ? this.activatedRoute.snapshot.queryParams['view'] : 'home';
+
 
     this.subscription$.add(
       this.companyService.getCompanyById(params.companyId)
@@ -212,7 +214,6 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
             return index === 0 ?
               of(company).pipe(
                 tap(() => {
-                  
 
                     /** Get the list of users in a company */
                     this.subscription$.add(
@@ -247,16 +248,6 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
             }
           }
         })
-    );
-
-    this.subscription$.add(
-      this.activatedRoute.queryParams.subscribe((q) => {
-        if (q && q.view) {
-          this.companyView = q.view;
-        } else {
-          // this.router.navigate(['./'], { queryParams: { view: 'home' }, queryParamsHandling: 'merge', relativeTo: this.activatedRoute });
-        }
-      })
     );
   }
 
@@ -417,10 +408,10 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
     this.postService.updatePost(postToBeUpdated).subscribe();
   }
 
-  updateCompany(companyDetails, operation = null) {
+  updateCompany(companyDetails) {
     companyDetails['_id'] = this.companyDetails._id;
     // companyDetails['name'] = this.companyDetails.name;
-    this.companyService.updateCompany(companyDetails, operation).pipe(
+    this.companyService.updateCompany(companyDetails).pipe(
       catchError((e) => {
         Swal.fire('Name already exists!', '', 'error');
         return of(false);
@@ -496,7 +487,7 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
       this.companyDetails$ = of(c);
       this.updateCover = null;
       this.uploadedCoverUrl = null;
-    })
+    });
   }
 
   openDialog(): void {
@@ -534,7 +525,8 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
 
   selectMainCategory(category, panel) {
     if (!category.types) {
-      this.router.navigate(['./'], { relativeTo: this.activatedRoute, skipLocationChange: true, queryParams: { view: category.view }, queryParamsHandling: 'merge' });
+      this.companyView = category.view;
+      this.router.navigate(['./'], { relativeTo: this.activatedRoute, queryParams: { view: category.view }, queryParamsHandling: 'merge' });
     } else {
       panel.toggle();
     }

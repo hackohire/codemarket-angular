@@ -325,10 +325,14 @@ export const appConstants = {
       }
       fundingDate
       fundingProcess {
-        name
-        _id
-        type
+        ...Description
       }
+
+      hiringProcess {
+        ...Description
+      }
+
+
       jobProfile {
         _id
         name

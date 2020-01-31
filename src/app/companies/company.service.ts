@@ -74,20 +74,19 @@ export class CompanyService {
     );
   }
 
-  updateCompany(company: Company, operation = null): Observable<Company> {
+  updateCompany(company: Company): Observable<Company> {
     return this.apollo.mutate(
       {
         mutation: gql`
-          mutation updateCompany($company: CompanyInput, $operation: operation) {
-            updateCompany(company: $company, operation: $operation) {
+          mutation updateCompany($company: CompanyInput) {
+            updateCompany(company: $company) {
               ...Company
             }
           }
           ${this.companyFileds}
         `,
         variables: {
-          company,
-          operation
+          company
         }
       }
     ).pipe(
@@ -259,6 +258,9 @@ export class CompanyService {
                 name
                 avatar
                 _id
+                currentJobDetails {
+                  jobProfile
+                }
             }
           }
         `,

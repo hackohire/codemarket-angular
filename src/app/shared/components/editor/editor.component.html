@@ -108,13 +108,13 @@
                         <ng-container *ngIf="blockLevelComments">
                             <a style="text-align: right; padding: 0 8px; text-decoration: none;" *ngIf="!b['__show']"
                                 mat-button (click)="b['__show'] = true">
-                                <i style="font-size: 1.5rem !important;" class="fad fa-comments-alt fa-lg"></i>
+                                <i style="font-size: 1.3rem !important; font-style: normal;" class="fad fa-comments-alt fa-lg"></i>
                                 <span>{{' ('}} {{ commentsList && commentsList?.length ? numberOfComments(b?._id) : 0}}
                                     {{')'}}</span>
                             </a>
                             <a style="padding: 0 8px; text-decoration: none;" *ngIf="b['__show']" mat-button
                                 (click)="b['__show'] = false">
-                                <i style="font-size: 1.5rem !important;" class="fad fa-chevron-circle-up fa-lg"></i>
+                                <i style="font-size: 1.3rem !important; font-style: normal;" class="fad fa-chevron-circle-up fa-lg"></i>
                                 <span>{{' ('}} {{ commentsList && commentsList?.length ? numberOfComments(b?._id) : 0}}
                                     {{')'}}</span>
                             </a>

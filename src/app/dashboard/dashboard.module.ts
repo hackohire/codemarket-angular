@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DashboardComponent } from './dashboard.component';
 import { Routes, RouterModule } from '@angular/router';
-import { ProductComponent } from './product/product.component';
 import { SharedModule } from '../shared/shared.module';
 import { CompaniesListComponent } from '../companies/companies-list/companies-list.component';
 
@@ -65,7 +64,7 @@ const dashboardRoutes: Routes = [
 
 
 @NgModule({
-  declarations: [DashboardComponent, ProductComponent],
+  declarations: [DashboardComponent],
   imports: [
     CommonModule,
     SharedModule,

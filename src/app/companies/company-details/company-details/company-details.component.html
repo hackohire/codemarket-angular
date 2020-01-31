@@ -25,13 +25,14 @@
         <div class="container" style="margin-top: 0; margin-bottom: 15px;">
 
             <div class="row">
-                <div class="col-lg-3 align-items-center justify-content-center" style="margin: auto;">
+                <div class="col-lg-3 col-md-3 col-sm-3 align-items-center justify-content-center" style="margin: auto;">
                     <div class="avatar-circle" style="margin: auto;">
-                    <span class="initials">{{details?.name ? details?.name[0] : ''}}</span>
+                        <span class="initials">{{details?.name ? details?.name[0] : ''}}</span>
                     </div>
-                <h4 style="text-align: center; padding-top: 10px;">{{details?.name}}</h4>
+                    <h4 style="text-align: center; padding-top: 10px;">{{details?.name}}</h4>
                 </div>
-                <div class="col-lg-9" *ngIf=" details?.cover || details?.createdBy?._id === authService?.loggedInUser?._id">
+                <div class="col-lg-9 col-md-9 col-sm-9"
+                    *ngIf=" details?.cover || details?.createdBy?._id === authService?.loggedInUser?._id">
                     <div class="picture-container" *ngIf="selectedCoverPic || details?.cover">
                         <img #cover draggable="true" scroll="false" id="cover" data-top="0" data-left="0"
                             [src]="selectedCoverPic ? (selectedCoverPic | safe: 'resourceUrl') : ((s3FilesBucketURL + details?.cover) | safe: 'resourceUrl')">
@@ -74,24 +75,25 @@
             <div class="row">
                 <div class="col-lg-3">
                     <!-- start aside -->
-                    <div class="docs-component-viewer-nav common-box-shadow">
+                    <div class="docs-component-viewer-nav common-box-shadow" style="margin-bottom: 20px;">
                         <div class="docs-component-viewer-nav-content">
                             <div *ngFor="let category of companyViewLinks; let last = last;">
-                                <button cdkAccordionItem #panel="cdkAccordionItem" [expanded]="category?.types ? (category) : false" (click)="selectMainCategory(category, panel)"
-                                    expanded="true" class="docs-nav-content-btn"
+                                <button cdkAccordionItem #panel="cdkAccordionItem"
+                                    [expanded]="category?.types ? (category) : false"
+                                    (click)="selectMainCategory(category, panel)"
+                                    class="docs-nav-content-btn"
                                     [ngClass]="companyView === category.view ? 'docs-component-viewer-sidenav-item-selected' : ''"
-                                    [attr.aria-controls]="'panel-' + category.view" [attr.aria-expanded]="panel.expanded">
+                                    [attr.aria-controls]="'panel-' + category.view"
+                                    [attr.aria-expanded]="panel.expanded">
                                     {{category.title}}
-                                    <mat-icon *ngIf="category?.types">{{panel.expanded ? 'keyboard_arrow_up' :  'keyboard_arrow_down'}}
+                                    <mat-icon *ngIf="category?.types">
+                                        {{panel.expanded ? 'keyboard_arrow_up' :  'keyboard_arrow_down'}}
                                     </mat-icon>
                                 </button>
                                 <mat-nav-list dense [@bodyExpansion]="panel.expanded ? 'expanded' : 'collapsed'"
                                     id="panel-{{category.view}}" [attr.aria-label]="category.view">
-                                    <a mat-list-item *ngFor="let component of category?.types"
-                                        [routerLink]="'./'"
-                                        [queryParams]="{view: component?.view}"
-                                        [queryParamsHandling]="'merge'"
-                                        routerLinkActive="docs-component-viewer-sidenav-item-selected"
+                                    <a mat-list-item *ngFor="let component of category?.types" (click)="selectMainCategory(component, panel)"
+                                        [ngClass]="component.view === companyView ? 'docs-component-viewer-sidenav-item-selected': ''"
                                         [attr.aria-current]="companyView === component.view ? 'page': 'false'">
                                         {{component.title}}
                                     </a>
@@ -142,7 +144,8 @@
                     </div> -->
 
                     <div *ngIf="companyView === 'home'">
-                        <ng-container *ngTemplateOutlet="postTemplate; context: { details: details, postType: 'company-post'}">
+                        <ng-container
+                            *ngTemplateOutlet="postTemplate; context: { details: details, postType: 'company-post'}">
                         </ng-container>
                     </div>
 
@@ -233,6 +236,7 @@
                     </div>
 
                     <div *ngIf="details?.createdBy?.name && companyView === 'creator'" class="author-card sidebar-card">
+                        <ng-container *ngTemplateOutlet="addCompanypostTemplate; context: { details: details, postType: 'company-post'}"></ng-container>
                         <div class="card-title">
                             <h4>Author Information</h4>
                         </div>
@@ -295,6 +299,7 @@
                     <!-- end /.author-card -->
 
                     <aside *ngIf="companyView === 'info'" class="sidebar sidebar--single-product">
+                        <ng-container *ngTemplateOutlet="addCompanypostTemplate; context: { details: details, postType: 'company-post'}"></ng-container>
                         <div class="sidebar-card card--product-infos">
                             <div class="card-title">
                                 <h4>Information</h4>
@@ -328,30 +333,34 @@
                         </div>
                     </aside>
                     <!-- end /.aside -->
-                    <div *ngIf="type === 'company' && companyView === 'interested-people'"
-                        class="author-card sidebar-card">
-                        <div class="card-title">
-                            <h4>Interested Professionals:
-                                {{ details?.usersInterestedInCompany?.length }}</h4>
-                            <br />
-
-                            <ng-container class="row" *ngFor="let userInterested of usersInterestedInCompany">
-                                <div class="col-md-12" style="margin-bottom: 10px;">
-                                    <div class="author_avatar_comment" style="vertical-align: middle;">
-                                        <img [src]="userInterested?.avatar ? ((s3FilesBucketURL + userInterested.avatar) | safe: 'resourceUrl') : anonymousAvatar"
-                                            alt="Presenting the broken author avatar :D">
+                    <div *ngIf="companyView === 'interested-people'">
+                        <ng-container *ngTemplateOutlet="addCompanypostTemplate; context: { details: details, postType: 'company-post'}"></ng-container>
+                        <div class="author-card sidebar-card">
+                            <div class="card-title">
+                                <h4>Interested Professionals:
+                                    {{ details?.usersInterestedInCompany?.length }}</h4>
+                                <br />
+    
+                                <ng-container class="row" *ngFor="let userInterested of usersInterestedInCompany">
+                                    <div class="col-md-12" style="margin-bottom: 10px;">
+                                        <div class="author_avatar_comment" style="vertical-align: middle;">
+                                            <img [src]="userInterested?.avatar ? ((s3FilesBucketURL + userInterested.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                                                alt="Presenting the broken author avatar :D">
+                                        </div>
+                                        <div class="autor__info">
+                                            <a [routerLink]="['/', 'dashboard', 'profile', userInterested?._id ]">
+                                                <p class="name">
+                                                    {{userInterested?.name}}
+                                                </p>
+                                                <p style="color: lightgray;">{{userInterested?.currentJobDetails?.jobProfile ? userInterested?.currentJobDetails?.jobProfile : '-'}}
+                                                </p>
+                                            </a>
+                                            <!-- <p class="ammount">{{fromNow(pu?.createdAt)}}</p> -->
+                                        </div>
                                     </div>
-                                    <div class="autor__info">
-                                        <a [routerLink]="['/', 'dashboard', 'profile', userInterested?._id ]">
-                                            <p class="name">
-                                                {{userInterested?.name}}
-                                            </p>
-                                        </a>
-                                        <!-- <p class="ammount">{{fromNow(pu?.createdAt)}}</p> -->
-                                    </div>
-                                </div>
-
-                            </ng-container>
+    
+                                </ng-container>
+                            </div>
                         </div>
                     </div>
 
@@ -370,19 +379,39 @@
 
 </ng-container>
 
+<ng-template #addCompanypostTemplate let-cDetails="details" let-postType="postType">
+        <div class="comment-form-area" style="padding: 0;">
+            <div class="media comment-form">
+                <div class="media-left">
+                    <a href="#">
+                        <img class="author_avatar_comment" style="height: 45px; width:45px;"
+                            [src]="authService?.loggedInUser?.avatar ? ((s3FilesBucketURL + authService?.loggedInUser?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                            alt="Commentator Avatar">
+                    </a>
+                </div>
+                <div class="media-body">
+                    <div class="comment-reply-form">
+                        <!---------------- ADD POST EDITOR --------------->
+                        <app-editor [placeholder]="'Add '+ postType"
+                            [editorStyle]="{background: 'white', 'padding': '20px 35px', 'min-height': '130px', 'border-radius': '6px'}"
+                            (output)="postDescription = $event" [id]="'editor' + postType"></app-editor>
+
+                        <button style="float: right; margin-top: 10px; margin-bottom: 20px;" type="button"
+                            class="btn btn--sm btn--round" (click)="addPost(postType)">Post</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+</ng-template>
+
 <ng-template #postTemplate let-cDetails="details" let-postType="postType">
 
-    <div class="common-box-shadow" *ngIf="auth?.loggedInUser?._id === cDetails?.createdBy?._id  || postType === 'company-post'">
-        <!---------------- ADD POST EDITOR --------------->
-        <app-editor [placeholder]="'Add '+ postType"
-            [editorStyle]="{background: 'white', 'padding': '20px 35px', 'min-height': '130px', 'border-radius': '6px'}"
-            (output)="postDescription = $event" [id]="postType + '-editor'"></app-editor>
+    <ng-container *ngTemplateOutlet="addCompanypostTemplate; context: { details: details, postType: postType}">
+    </ng-container>
 
-        <button style="float: right; margin-top: 10px; margin-bottom: 20px;" type="button" class="btn btn--sm btn--round"
-            (click)="addPost(postType)">Post</button>
-    </div>
-
-    <div [ngStyle]="{'padding-top':  auth?.loggedInUser?._id === cDetails?.createdBy?._id || postType === 'company-post' ? '80px' : '0'}">
+    <div
+        [ngStyle]="{'padding-top':  auth?.loggedInUser?._id === cDetails?.createdBy?._id || postType === 'company-post' ? '45px' : '0'}">
         <ng-container *ngFor="let c of allCompanyRelatedPosts; let i=index;">
 
             <div class="box image common-box-shadow" *ngIf="postType === c?.type">
@@ -424,10 +453,10 @@
                         <p>
                             <!---------------- SINGLE POST EDITOR --------------->
                             <app-editor [editorStyle]="{background: 'white'}" [data]="c?.description"
-                                [companyPostId]="cDetails._id"
-                                (output)="postDescriptionInstances[c?._id] = $event" [id]="c?._id"
-                                [readOnly]="!c['__edit']" [blockLevelComments]="true" [commentType]="'post'"
-                                [companyPostId]="c?._id" [post]="c" [commentsList]="c?.comments"></app-editor>
+                                [companyPostId]="cDetails._id" (output)="postDescriptionInstances[c?._id] = $event"
+                                [id]="c?._id" [readOnly]="!c['__edit']" [blockLevelComments]="true"
+                                [commentType]="'post'" [companyPostId]="c?._id" [post]="c" [commentsList]="c?.comments">
+                            </app-editor>
                         </p>
                         <span><span class="fa fa-search-plus"></span></span>
                     </div>
@@ -566,7 +595,30 @@
 
 <!-- Implementation of Q&A Start Here -->
 <ng-template #questionAnswersTemplate let-qa="details">
-    <div class="tab-pane product-tab" id="product-faq" style="background: white;">
+    <!-- Add Question Section -->
+    <div class="comment-form-area" style="padding: 0;">
+        <div class="media comment-form">
+            <div class="media-left">
+                <a href="#">
+                    <img class="author_avatar_comment"
+                        [src]="authService?.loggedInUser?.avatar ? ((s3FilesBucketURL + authService?.loggedInUser?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                        alt="Commentator Avatar">
+                </a>
+            </div>
+            <div class="media-body">
+                <div [formGroup]="questionOrAnswerForm" class="comment-reply-form">
+                    <app-editor [id]="'question-editor'"
+                        [editorStyle]="{background: 'white', 'padding': '20px 35px', 'min-height': '130px', 'border-radius': '6px'}"
+                        [placeholder]="'Ask a Question'" (output)="questionOrAnswerForm.get('text').setValue($event)">
+                    </app-editor>
+
+                    <button style="float: right;" type="button" class="btn btn--sm btn--round"
+                        (click)="addQuestionOrAnswer(true)">Ask a Question</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane product-tab" *ngIf="questionsList?.length" id="product-faq" style="background: white; margin-top: 20px;">
         <div class="tab-content-wrapper">
             <h4 style="padding-bottom: 15px;">Q & A</h4>
 
@@ -697,33 +749,12 @@
 
 
         </div>
-
-        <!-- Add Question Section -->
-        <div class="comment-form-area">
-            <div class="media comment-form">
-                <div class="media-left">
-                    <a href="#">
-                        <img class="author_avatar_comment"
-                            [src]="authService?.loggedInUser?.avatar ? ((s3FilesBucketURL + authService?.loggedInUser?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
-                            alt="Commentator Avatar">
-                    </a>
-                </div>
-                <div class="media-body">
-                    <div [formGroup]="questionOrAnswerForm" class="comment-reply-form">
-                        <app-editor [id]="'question-editor'" [placeholder]="'Ask a Question'"
-                            (output)="questionOrAnswerForm.get('text').setValue($event)">
-                        </app-editor>
-
-                        <button style="float: right;" type="button" class="btn btn--sm btn--round"
-                            (click)="addQuestionOrAnswer(true)">Ask a Question</button>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </ng-template>
 
-<ng-template #jobsTemplate let-cDetails="details">   
+<ng-template #jobsTemplate let-cDetails="details">
+    <ng-container *ngTemplateOutlet="addCompanypostTemplate; context: { details: details, postType: 'company-post'}">
+    </ng-container>
     <div class="item-grid pen-grid item-grid-large">
         <!-- <ng-container > -->
         <ng-container *ngIf="companyView === 'dream-jobs'; else jobList">
@@ -738,6 +769,7 @@
 </ng-template>
 
 <ng-template #eventsListTemplate>
+    <ng-container *ngTemplateOutlet="addCompanypostTemplate; context: { details: details, postType: 'company-post'}"></ng-container>
     <div class="all noselect">
         <div class="swiper-container pagescroll home current">
             <div class="swiper-wrapper">

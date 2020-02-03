@@ -5,7 +5,7 @@
         <div class="ce-block__content">
             <ng-container [ngSwitch]="b?.type" *ngFor="let b of data; let i = index">
                 <div fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="start center">
-                    <div fxFlex="90">
+                    <div [fxFlex]="blockLevelComments ? '90' : '100'">
                         <!-- Paragraph -->
                         <div *ngSwitchCase="'paragraph'">
                             <div class="ce-paragraph cdx-block" [innerHTML]="b?.data?.text">
@@ -104,7 +104,7 @@
                     </div>
 
                     <!-- Icon to view / collapse comments section -->
-                    <div fxFlex="10">
+                    <div [fxFlex]="blockLevelComments ? '10' : '0'">
                         <ng-container *ngIf="blockLevelComments">
                             <a style="text-align: right; padding: 0 8px; text-decoration: none;" *ngIf="!b['__show']"
                                 mat-button (click)="b['__show'] = true">
@@ -162,11 +162,11 @@
             </div>
             <div class="media-body">
                 <div [formGroup]="commentForm" class="comment-reply-form">
-                    <app-editor [editorStyle]="{padding: '0 15px', 'border-radius': '19px', border: 'solid 0.5px rgb(236, 236, 236)'}" [id]="blockId" [placeholder]="'Add Comment'" (output)="updateFormData($event)">
+                    <app-editor #addCommentEditor [editorStyle]="{padding: '0 15px', 'border-radius': '19px', background: '#f2f3f5', border: 'solid 0.5px rgb(236, 236, 236)'}" [id]="blockId" [placeholder]="'Add Comment'">
                     </app-editor>
 
-                    <button type="button" style="float: right;" class="btn btn--sm btn--round"
-                        (click)="addComment(blockId)">Post
+                    <button type="button" style="float: right;" class="btn btn--vsm btn--round"
+                        (click)="addComment(blockId, addCommentEditor)">Post
                         Comment</button>
                 </div>
             </div>

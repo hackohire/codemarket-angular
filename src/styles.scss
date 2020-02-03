@@ -95,7 +95,7 @@ textarea {
 
 .ce-header {
   font-family: "charterbold", sans-serif !important;
-  padding: 1em 0;
+  // padding: 1em 0;
   margin: 0;
   margin-bottom: -0.9em;
   line-height: 1.5em;
@@ -2139,8 +2139,8 @@ h6 {
 }
 
 .author_avatar_comment {
-  width: 80px;
-  height: 80px;
+  width: 45px;
+  height: 45px;
   display: inline-block;
   -webkit-border-radius: 50%;
   border-radius: 50%;
@@ -9583,11 +9583,11 @@ ul.nav-tabs.nav--tabs2 li a::before {
 }
 
 .thread .thread-list .single-thread .media {
-  padding: 30px 30px 26px;
+  padding: 30px 0px 26px 0px;
 }
 
 .thread .thread-list .single-thread .media-left {
-  padding-right: 19px;
+  padding-right: 10px;
 }
 
 .thread .thread-list .single-thread .media-left a {
@@ -9623,12 +9623,12 @@ ul.nav-tabs.nav--tabs2 li a::before {
   vertical-align: top;
   font-size: 12px;
   color: #fff;
-  line-height: 28px;
+  line-height: 22px;
   text-transform: capitalize;
   -webkit-border-radius: 200px;
   border-radius: 200px;
   font-weight: 500;
-  padding: 0 10px;
+  padding: 0 6px;
   margin-left: 15px;
 }
 
@@ -9658,7 +9658,7 @@ ul.nav-tabs.nav--tabs2 li a::before {
 }
 
 .thread .thread-list .single-thread .depth-2 {
-  margin-left: 93px;
+  margin-left: 63px;
   border-top: 1px solid #ececec;
   border-bottom: 0;
 }
@@ -9755,7 +9755,7 @@ ul.nav-tabs.nav--tabs2 li a::before {
 
 .comment-reply-form button,
 .comment-form-area .comment-form button {
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 .comment-form-area {
@@ -9770,7 +9770,7 @@ ul.nav-tabs.nav--tabs2 li a::before {
 }
 
 .comment-form-area .comment-form .media-left {
-  margin-right: 15px;
+  margin-right: 10px;
 }
 
 .comment-form-area .support__comment .trumbowyg-box {

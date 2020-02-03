@@ -167,6 +167,9 @@ fragment Comment on Comment {
     _id
     name
     avatar
+    currentJobDetails {
+      jobProfile
+    }
   }
   children {
     _id
@@ -178,6 +181,9 @@ fragment Comment on Comment {
       _id
       name
       avatar
+      currentJobDetails {
+        jobProfile
+      }
     }
     parentId
     referenceId

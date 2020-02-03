@@ -247,7 +247,7 @@
                 <ul class="media-list thread-list" style="list-style: none;">
                     <h4 class="tab-content-wrapper">Comments:</h4>
                     <div *ngFor="let c of commentService?.commentsList$ | async">
-                        <li [id]="c?._id" *ngIf="!c?.blockSpecificComment" class="single-thread">
+                        <li style="padding-left: 30px; padding-right: 30px;" [id]="c?._id" *ngIf="!c?.blockSpecificComment" class="single-thread">
                             <app-comment [comment]="c" [referenceId]="cDetails?._id"></app-comment>
                         </li>
                     </div>
@@ -268,13 +268,12 @@
                 </div>
                 <div class="media-body">
                     <div [formGroup]="commentForm" class="comment-reply-form">
-                        <app-editor [id]="'comment-editor'"
-                            [editorStyle]="{padding: '0 15px', 'border-radius': '19px', border: 'solid 0.5px rgb(236, 236, 236)'}"
-                            (output)="updateFormData($event)">
+                        <app-editor [id]="'comment-editor'" #addCommentEditor
+                            [editorStyle]="{padding: '0 15px', 'border-radius': '19px', background: '#f2f3f5', border: 'solid 0.5px rgb(236, 236, 236)'}">
                         </app-editor>
 
                         <button style="float: right;" type="button" class="btn btn--sm btn--round"
-                            (click)="addComment()">Post
+                            (click)="addComment(addCommentEditor)">Post
                             Comment</button>
                     </div>
                 </div>

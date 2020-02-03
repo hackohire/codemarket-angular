@@ -51,9 +51,10 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
   subscriptions$  = new Subscription();
 
   @Input() editorStyle = {
-    background: '#eff1f570',
+    // background: '#eff1f570',
+    'word-break': 'break-word',
     padding: '15px',
-    border: 'dotted #ececec'
+    // border: 'dotted #ececec'
   };
 
   /** Variables related to block level comments */
@@ -135,13 +136,19 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
     }
   }
 
-  addComment(blockId: string) {
+  async addComment(blockId: string, addCommentEditor: EditorComponent) {
     console.log(this.commentForm.value);
     if (this.authService.loggedInUser) {
+      const blocks =  await addCommentEditor.editor.save();
+      this.commentForm.get('text').setValue(blocks.blocks);
       this.commentForm.addControl('createdBy', new FormControl(this.authService.loggedInUser._id));
       this.commentForm.get('blockId').setValue(blockId),
       this.subscriptions$.add(
-        this.commentService.addComment(this.commentForm.value).subscribe()
+        this.commentService.addComment(this.commentForm.value).subscribe((c) => {
+          if (c) {
+            addCommentEditor.editor.blocks.clear();
+          }
+        })
       )
     } else {
       this.authService.checkIfUserIsLoggedIn(true);

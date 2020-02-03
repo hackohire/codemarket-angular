@@ -1,4 +1,4 @@
-<div class="media" *ngIf="replyCommentForm?.value">
+<div class="media" style="padding: 10px 0px 0px;" *ngIf="replyCommentForm?.value">
     <div class="media-left">
 
         <a [routerLink]="['/', 'dashboard', 'profile', comment?.createdBy?._id ]">
@@ -10,61 +10,61 @@
     <div class="media-body">
         <div>
             <div class="media-heading">
-                <a [routerLink]="['/', 'dashboard', 'profile', comment?.createdBy?._id ]">
-                    <h4 style="font-size: 16px; line-height: 20px; margin-bottom: 0;">{{comment?.createdBy?.name }}</h4>
+                <a [routerLink]="['/', 'dashboard', 'profile', comment?.createdBy?._id ]" style="text-decoration: none;">
+                    <h4 style="font-size: 16px; line-height: 14px; margin-bottom: 0;">{{comment?.createdBy?.name }}</h4>
                 </a>
-                <span>{{fromNow(comment?.createdAt)}}</span>
+            <span style="font-size: 12px;">{{comment?.createdBy?.currentJobDetails?.jobProfile}}</span>
             </div>
 
-            <!-- <span class="comment-tag buyer">Purchased</span> -->
-
-
-            <div style="display: inline-block; float: right;">
-                <a style="min-width: 45px; padding: 0;" *ngIf="!comment?.parentId && !comment?.companyReferenceId" mat-button (click)="allowReply()">
-                    <i style="font-size: 1.5rem !important;" class="fad fa-comments fa-lg"></i>
-                </a>
-                <a style="min-width: 45px; padding: 0;"  *ngIf="comment?.createdBy?._id === authService?.loggedInUser?._id" mat-button
-                    (click)="deleteComment()">
-                    <i style="font-size: 1.5rem !important; font-style: normal;" class="fad fa-comment-minus fa-lg"></i>
-                </a>
-
-                <!-- <button mat-mini-fab style="float: right" *ngIf="comment?.createdBy?._id === authService?.loggedInUser?._id"
-                (click)="deleteComment()" color="warn">
-                    <mat-icon>delete</mat-icon>
-                </button> -->
-
-                <a style="min-width: 45px; padding: 0;" *ngIf="comment?.createdBy?._id === authService?.loggedInUser?._id" mat-button (click)="edit=true">
-                    <i style="font-size: 1.5rem !important; font-style: normal;" class="fad fa-comment-edit fa-lg"></i>
-                </a>
-
-                <!-- <button mat-mini-fab style="float: right" *ngIf="comment?.createdBy?._id === authService?.loggedInUser?._id" (click)="edit=true" color="primary">
-                    <mat-icon>edit</mat-icon>
-                </button> -->
-
-                <!-- <button mat-mini-fab style="float: right" *ngIf="!comment?.parentId" (click)="allowReply()" color="primary">
-                    <mat-icon>reply</mat-icon>
-                </button> -->
-            </div>
+            <!-- <span class="comment-tag buyer" *ngIf="authService?.loggedInUser?._id === comment?.createdBy?._id">Author</span> -->
 
         </div>
 
+        <!-- SINGLE COMMENT EDITOR -->
         <app-editor
-            [editorStyle]="{padding: '0 15px', 'border-radius': '19px', border: 'solid 0.5px rgb(236, 236, 236)'}"
-            [readOnly]="edit ? false : true" (output)="updateReplyCommentFormData($event)" [data]="comment?.text"
+            [editorStyle]="{padding: '0 15px', 'border-radius': '19px', background: '#f2f3f5', border: 'solid 0.5px rgb(236, 236, 236)'}"
+            [readOnly]="edit ? false : true" #singleCommentEditor [data]="comment?.text"
             [id]="'comment-' + comment._id"></app-editor>
-        <br />
-        <button *ngIf="edit" type="button" class="btn btn--sm btn--round" (click)="updateComment()">Update</button>
+
+        <div class="comment-actions" style="display: inline-block;">
+            <!-- On Click open Relpy comment UI -->
+            <a style="min-width: 45px; padding: 0;" mat-button (click)="allowReply();">
+                <!-- <i style="font-size: 1.5rem !important;" class="fad fa-comments fa-lg"></i> -->
+                Reply
+            </a> {{comment?.createdBy?._id === authService?.loggedInUser?._id ? '|' : ''}}
+
+            <!-- On click Ask for deleting the comment -->
+            <a style="min-width: 45px; padding: 0;"  *ngIf="comment?.createdBy?._id === authService?.loggedInUser?._id" mat-button
+                (click)="deleteComment()">
+                <!-- <i style="font-size: 1.5rem !important; font-style: normal;" class="fad fa-comment-minus fa-lg"></i> -->
+                Delete
+            </a> {{comment?.createdBy?._id === authService?.loggedInUser?._id ? '|' : ''}}
+
+            <!-- On click open the editor in read only mode -->
+            <a style="min-width: 45px; padding: 0;" *ngIf="comment?.createdBy?._id === authService?.loggedInUser?._id" mat-button (click)="edit=true">
+                <!-- <i style="font-size: 1.5rem !important; font-style: normal;" class="fad fa-comment-edit fa-lg"></i> -->
+                Edit
+            </a>
+            <span>{{fromNow(comment?.createdAt)}}</span>
+            <button *ngIf="edit" style="margin-left: 8px;" type="button" class="btn btn--vsm btn--round" (click)="updateComment(singleCommentEditor)">Update</button>
+        </div>
+
+        <!-- <div style="float: inline-end;">
+           
+        </div> -->
         <!-- <p>{{comment?.text}}</p> -->
     </div>
 </div>
 
 <!-- Recursive Children -->
+<!-- If Children comment asks to reply to the comment call the allowReply method -->
 <div [id]="r?._id" class="single-thread depth-2" *ngFor="let r of comment?.children">
-    <app-comment [comment]="r" [referenceId]="comment?.referenceId"></app-comment>
+    <!-- CHILD COMMENT EDITOR -->
+    <app-comment  [comment]="r" [referenceId]="comment?.referenceId" (allowReplyToParent)="allowReply()"></app-comment >
 </div>
 
 <!-- comment reply -->
-<div class="media depth-2 reply-comment" *ngIf="reply" [formGroup]="replyCommentForm">
+<div class="media depth-2 reply-comment" style="padding: 15px 0 15px 0;" *ngIf="reply" [formGroup]="replyCommentForm">
     <div class="media-left">
         <a href="#">
             <img class="author_avatar_comment" style="width: 45px; height: 45px;"
@@ -74,13 +74,13 @@
     </div>
     <div class="media-body">
         <div class="comment-reply-form">
-            <app-editor
-                [editorStyle]="{padding: '0 15px', 'border-radius': '19px', border: 'solid 0.5px rgb(236, 236, 236)'}"
-                [data]="replyTextEditorData" (output)="updateReplyCommentFormData($event)" [id]="replyEditorId">
+            <!-- COMMENT REPLY EDITOR -->
+            <app-editor #commentReplyEditor [placeholder]="'Add a Reply!'"
+                [editorStyle]="{padding: '0 15px', 'border-radius': '19px', background: '#f2f3f5', border: 'solid 0.5px rgb(236, 236, 236)'}" [id]="'reply'+ comment?._id">
             </app-editor>
             <!-- <textarea class="bla" name="reply-comment" placeholder="Write your comment..."></textarea> -->
-            <button type="button" style="float: right;" class="btn btn--sm btn--round"
-                (click)="addReply()">Reply</button>
+            <button type="button" style="float: right;" class="btn btn--vsm btn--round"
+                (click)="addReply(commentReplyEditor)">Reply</button>
         </div>
     </div>
 </div>

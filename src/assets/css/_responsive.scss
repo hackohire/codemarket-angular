@@ -1903,6 +1903,12 @@ $ipad: 992px;
 
 /* 320 TO 480 */
 @media (max-width: 480px) {
+
+  .ce-toolbox__button {
+    width: 23px !important;
+    height: 23px !important;
+  }
+
     .credit_modules .custom_amount input{
         width: 205px;
     }
@@ -2138,14 +2144,14 @@ $ipad: 992px;
         .media-body{
           .comment-tag.buyer{
             margin-left: 0;
-            margin-top: 10px;
+            margin-top: 0px;
           }
           a.reply-link{
             padding-top: 13px;
           }
         }
         .media-left{
-          padding-right: 15px;
+          padding-right: 0px;
           a{
             height: 55px;
             width: 55px;

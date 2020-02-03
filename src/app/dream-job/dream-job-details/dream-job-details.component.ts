@@ -18,6 +18,7 @@ import { tap, map } from 'rxjs/operators';
 import moment from 'moment';
 import { AddJobComponent } from '../../job/add-job/add-job.component';
 import { SetSelectedPost, GetPostById } from '../../core/store/actions/post.actions';
+import { EditorComponent } from '../../shared/components/editor/editor.component';
 
 @Component({
   selector: 'app-dream-job-details',
@@ -142,13 +143,18 @@ export class DreamJobDetailsComponent implements OnInit, OnDestroy {
   }
 
 
-  addComment() {
-    console.log(this.commentForm.value);
+  async addComment(addCommentEditor: EditorComponent) {
     if (this.authService.loggedInUser) {
+      const blocks =  await addCommentEditor.editor.save();
+      this.commentForm.get('text').setValue(blocks.blocks);
       this.commentForm.addControl('createdBy', new FormControl(this.authService.loggedInUser._id));
 
       this.subscription$.add(
-        this.commentService.addComment(this.commentForm.value).subscribe()
+        this.commentService.addComment(this.commentForm.value).subscribe(c => {
+          if(c) {
+            addCommentEditor.editor.blocks.clear();
+          }
+        })
       );
     } else {
       this.authService.checkIfUserIsLoggedIn(true);

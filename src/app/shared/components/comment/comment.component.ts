@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnChanges} from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges, ViewChild} from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { tap } from 'rxjs/operators';
 import moment from 'moment';
@@ -8,6 +8,7 @@ import { CommentService } from '../../services/comment.service';
 import { Comment } from '../../models/comment.model';
 import { environment } from 'src/environments/environment';
 import { SweetalertService } from '../../services/sweetalert.service';
+import { EditorComponent } from '../editor/editor.component';
 
 @Component({
   selector: 'app-comment',
@@ -20,12 +21,15 @@ export class CommentComponent implements OnInit {
   @Input() comment: Comment;
   @Input() referenceId: string;
   @Input() companyReferenceId: string;
+  @Input() postCreatedBy: string;
   // @Output() commentDeleted  = new EventEmitter();
+  @Output() allowReplyToParent = new EventEmitter();
   replyCommentForm: FormGroup;
   reply: boolean;
   edit: boolean;
   replyEditorId: string;
-  replyTextEditorData: BlockToolData;
+
+  @ViewChild('commentReplyEditor', {static: false}) commentReplyEditor: EditorComponent;
 
   anonymousAvatar = '../../../../assets/images/anonymous-avatar.jpg';
   s3FilesBucketURL = environment.s3FilesBucketURL;
@@ -37,9 +41,7 @@ export class CommentComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // console.log(this.comment);
     this.initializeReplyForm();
-
   }
 
 
@@ -63,31 +65,26 @@ export class CommentComponent implements OnInit {
   }
 
   allowReply() {
-    this.initializeReplyForm();
-    this.replyEditorId = new Date().toDateString();
-    this.reply = true;
+    if (!this.comment.parentId && !this.comment.companyReferenceId) {
+      this.initializeReplyForm();
+      // this.replyEditorId = new Date().toDateString();
+      this.reply = true;
+    } else {
+      this.allowReplyToParent.emit();
+    }
   }
 
-  updateFormData(event) {
-    // console.log('Update Event Fired From editor', event);
-    this.comment.text = event;
-  }
-
-  updateReplyCommentFormData(event) {
-    this.replyCommentForm.get('text').setValue(event);
-  }
-
-
-  addReply() {
-    // console.log(this.commentForm.value);
+  async addReply(commentReplyEditor: EditorComponent) {
     if (this.authService.loggedInUser) {
+      const blocks =  await commentReplyEditor.editor.save();
+      this.replyCommentForm.get('text').setValue(blocks.blocks);
       this.replyCommentForm.addControl('createdBy', new FormControl(this.authService.loggedInUser._id));
       this.commentService.addComment(this.replyCommentForm.value).pipe(
         tap((child) => {
           if (child && this.comment.children) {
             // this.comment.children.push(child);
-            this.replyTextEditorData = null;
-            this.reply = false;
+            // this.reply = false;
+            commentReplyEditor.editor.blocks.clear();
           }
         })
       ).subscribe();
@@ -108,10 +105,12 @@ export class CommentComponent implements OnInit {
     });
   }
 
-  updateComment() {
+  async updateComment(singleCommentEditor: EditorComponent) {
+    const blocks =  await singleCommentEditor.editor.save();
+    this.replyCommentForm.get('text').setValue(blocks.blocks);
+
     this.commentService.updateComment(this.comment._id, this.replyCommentForm.get('text').value).pipe(
       tap((d) => {
-        console.log(d);
         if (d) {
           this.edit = false;
         }

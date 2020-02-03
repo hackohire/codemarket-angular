@@ -23,6 +23,7 @@ import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { Company } from '../../shared/models/company.model';
 import { User } from '../../shared/models/user.model';
 import { appConstants } from '../../shared/constants/app_constants';
+import { EditorComponent } from '../../shared/components/editor/editor.component';
 
 @Component({
   selector: 'app-details',
@@ -209,21 +210,20 @@ export class DetailsComponent implements OnInit, OnDestroy {
   }
 
 
-  addComment() {
-    console.log(this.commentForm.value);
+  async addComment(addCommentEditor: EditorComponent) {
     if (this.authService.loggedInUser) {
+      const blocks =  await addCommentEditor.editor.save();
+      this.commentForm.get('text').setValue(blocks.blocks);
       this.commentForm.addControl('createdBy', new FormControl(this.authService.loggedInUser._id));
 
       this.subscription$.add(
-        this.commentService.addComment(this.commentForm.value).subscribe()
+        this.commentService.addComment(this.commentForm.value).subscribe((c) => {
+          addCommentEditor.editor.clear();
+        })
       );
     } else {
       this.authService.checkIfUserIsLoggedIn(true);
     }
-  }
-
-  updateFormData(event) {
-    this.commentForm.get('text').setValue(event);
   }
 
   fromNow(date) {

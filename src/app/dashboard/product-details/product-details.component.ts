@@ -22,6 +22,7 @@ import { PostService } from '../../shared/services/post.service';
 import { SetSelectedPost } from '../../core/store/actions/post.actions';
 import { selectSelectedPost } from '../../core/store/selectors/post.selectors';
 import { Post } from '../../shared/models/post.model';
+import { EditorComponent } from '../../shared/components/editor/editor.component';
 
 @Component({
   selector: 'app-product-details',
@@ -155,11 +156,16 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     }
   }
 
-  addComment() {
-    console.log(this.commentForm.value);
+  async addComment(addCommentEditor: EditorComponent) {
     if (this.authService.loggedInUser) {
+      const blocks =  await addCommentEditor.editor.save();
+      this.commentForm.get('text').setValue(blocks.blocks);
       this.commentForm.addControl('createdBy', new FormControl(this.authService.loggedInUser._id));
-      this.commentService.addComment(this.commentForm.value).subscribe();
+      this.commentService.addComment(this.commentForm.value).subscribe(c => {
+        if (c) {
+          addCommentEditor.editor.blocks.clear();
+        }
+      });
     } else {
       this.authService.checkIfUserIsLoggedIn(true);
     }

@@ -6,7 +6,6 @@ import { ShareService } from '@ngx-share/core';
 import { PostService } from '../../../shared/services/post.service';
 import { SweetalertService } from '../../../shared/services/sweetalert.service';
 import { CompanyService } from '../../company.service';
-import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { Observable, Subscription, of } from 'rxjs';
 import { Post } from '../../../shared/models/post.model';
 import { Company } from '../../../shared/models/company.model';
@@ -19,16 +18,14 @@ import { map } from 'rxjs/internal/operators/map';
 import { appConstants } from '../../../shared/constants/app_constants';
 import Storage from '@aws-amplify/storage';
 import moment from 'moment';
-import { catchError } from 'rxjs/internal/operators/catchError';
-import Swal from 'sweetalert2';
 import { AddEventComponent } from '../../../event/add-event/add-event.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Event } from '../../../shared/models/event.model';
 import { concatMap } from 'rxjs/operators/concatMap';
 import { trigger, state, style, transition, animate } from '@angular/animations';
-import { description } from '../../../shared/constants/fragments_constatnts';
 import { BlockToolData } from '@editorjs/editorjs/types/tools';
 import { PostStatus } from '../../../shared/models/poststatus.enum';
+import { EditorComponent } from '../../../shared/components/editor/editor.component';
 
 @Component({
   selector: 'app-company-details',
@@ -44,8 +41,6 @@ import { PostStatus } from '../../../shared/models/poststatus.enum';
   ],
 })
 export class CompanyDetailsComponent implements OnInit, OnDestroy {
-
-  @ViewChild('successfulRSVP', { static: false }) successfulRSVP: SwalComponent;
 
   /** Company Details Related Varibale */
   companyDetails$: Observable<Company>;
@@ -279,13 +274,17 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
     return false;
   }
 
-  addComment(postId = '') {
+  addComment(postId = '', commentEditor: EditorComponent) {
     console.log(this.commentForm.value);
     if (this.authService.loggedInUser) {
       this.commentForm.addControl('createdBy', new FormControl(this.authService.loggedInUser._id));
       this.commentForm.patchValue({referenceId: postId});
       this.subscription$.add(
-        this.commentService.addComment(this.commentForm.value).subscribe()
+        this.commentService.addComment(this.commentForm.value).subscribe(c => {
+          if (c) {
+            commentEditor.editor.clear();
+          }
+        })
       );
     } else {
       this.authService.checkIfUserIsLoggedIn(true);
@@ -380,17 +379,22 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
     ).subscribe();
   }
 
-  addPost(type: string) {
+  async addPost(type: string, addPostEditor: EditorComponent) {
     if (this.authService.loggedInUser) {
+      const blocks =  await addPostEditor.editor.save();
       const post: any = {
         type,
         createdBy: this.authService.loggedInUser._id,
-        description: this.postDescription,
+        description: blocks.blocks,
         isPostUnderCompany: true,
         status: PostStatus.Published,
         company: this.companyDetails._id
-      }
-      this.postService.addPost(post).subscribe();
+      };
+      this.postService.addPost(post).subscribe(p => {
+        if (p) {
+          addPostEditor.editor.clear();
+        }
+      });
     } else {
       this.authService.checkIfUserIsLoggedIn(true);
     }
@@ -400,9 +404,10 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
     this.postService.deletePost(_id).subscribe();
   }
 
-  updatePost(post) {
+  async updatePost(post, singlePostEditor: EditorComponent) {
+    const blocks =  await singlePostEditor.editor.save();
     const postToBeUpdated = {};
-    postToBeUpdated['description'] = this.postDescriptionInstances[post._id];
+    postToBeUpdated['description'] = blocks.blocks;
     postToBeUpdated['isPostUnderCompany'] = true;
     postToBeUpdated['_id'] = post._id;
     this.postService.updatePost(postToBeUpdated).subscribe();
@@ -411,17 +416,8 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
   updateCompany(companyDetails) {
     companyDetails['_id'] = this.companyDetails._id;
     // companyDetails['name'] = this.companyDetails.name;
-    this.companyService.updateCompany(companyDetails).pipe(
-      catchError((e) => {
-        Swal.fire('Name already exists!', '', 'error');
-        return of(false);
-      })
-    )
-      .subscribe((d: any) => {
-        if (d) {
-          // Swal.fire(`${d.name} has been Updated Successfully`, '', 'success');
-        }
-      });
+    this.companyService.updateCompany(companyDetails).pipe()
+      .subscribe();
   }
 
 

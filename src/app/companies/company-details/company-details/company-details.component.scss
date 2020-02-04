@@ -409,57 +409,6 @@
   font-size: 18px;
   margin-right: 5px;
 }
-.box > .box-comments {
-  margin: 0;
-  overflow: hidden;
-  padding: 0;
-  position: relative;
-}
-.box > .box-comments > .comment {
-  border-top: 1px solid #F4F4F4;
-  margin: 0;
-  overflow: hidden;
-  padding: 16px 30px;
-  position: relative;
-}
-.box > .box-comments > .comment > img {
-  border-radius: 100px;
-  float: left;
-  height: 56px;
-  margin: 0;
-  object-fit: cover;
-  width: 56px;
-}
-.box > .box-comments > .comment > .content {
-  height: auto;
-  line-height: 20px;
-  margin: 0 0 0 70px;
-  overflow: hidden;
-  padding: 0;
-  position: relative;
-  width: initial;
-}
-.box > .box-comments > .comment > .content > h3 {
-  float: left;
-  font-size: 14px;
-  font-weight: 600;
-  margin: 4px auto 0;
-  text-transform: capitalize;
-  width: 88%;
-}
-.box > .box-comments > .comment > .content > h3 > span {
-  color: #9197A3;
-  display: block;
-  font-size: 12px;
-  font-weight: 400;
-  text-transform: none;
-}
-.box > .box-comments > .comment > .content > p {
-  color: #4B4D53;
-  font-size: 13px;
-  margin: 0;
-  padding: 0;
-}
 .box > .box-new-comment {
   background: #e8e9ed;
   margin: 0;
@@ -477,7 +426,7 @@
 }
 .box > .box-new-comment > .content {
   border-radius: 20px;
-  margin: 4px 0 0 52px;
+  margin: 0px 0 0 52px;
   // overflow: hidden;
   padding: 0;
   position: relative;

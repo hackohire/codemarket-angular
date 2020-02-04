@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewChildren, QueryList } from '@angular/core';
 import { Subscription, of, Observable, Subject, concat } from 'rxjs';
 import { BreadCumb } from '../../shared/models/bredcumb.model';
 import { FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
@@ -15,6 +15,7 @@ import { AppState } from '../../core/store/state/app.state';
 import { Post } from '../../shared/models/post.model';
 import { CompanyService } from '../../companies/company.service';
 import { PostService } from '../../shared/services/post.service';
+import { EditorComponent } from '../../shared/components/editor/editor.component';
 
 @Component({
   selector: 'app-add-capital-funding',
@@ -54,6 +55,10 @@ export class AddCapitalFundingComponent implements OnInit {
   get process(): FormArray {
     return this.capitalfundingForm.get('fundingProcess') as FormArray;
   }
+
+  @ViewChild('descriptionEditor', { static: true }) descriptionEditor: EditorComponent;
+  @ViewChildren('steps') steps: QueryList<EditorComponent>;
+
 
   subscription$: Subscription;
 
@@ -147,10 +152,19 @@ export class AddCapitalFundingComponent implements OnInit {
     });
   }
 
-  submit(status) {
+  async submit(status) {
 
     this.statusFormControl.setValue(status);
 
+    /** Setting Up Steps Data Runtime while saving the form.by accessing the editor references */
+    const steps = this.steps.toArray();
+    this.process.controls.forEach(async (pC, i) => {
+      const stepsBlocks =  await steps[i].editor.save();
+      pC.setValue(stepsBlocks.blocks);
+    });
+
+    const blocks =  await this.descriptionEditor.editor.save();
+    this.capitalfundingForm.get('description').setValue(blocks.blocks);
 
     if (!this.descriptionFormControl.value) {
       this.descriptionFormControl.setValue([]);
@@ -190,7 +204,8 @@ export class AddCapitalFundingComponent implements OnInit {
   }
 
   updateFormData(event) {
-    this.capitalfundingForm.get('description').setValue(event);
+    console.log(this.steps.toArray());
+    // this.capitalfundingForm.get('description').setValue(event);
   }
 
 

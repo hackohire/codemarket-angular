@@ -3,8 +3,7 @@ import { Subscription, of, Observable, Subject, concat } from 'rxjs';
 import { City } from '../../shared/models/city.model';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { BreadCumb } from '../../shared/models/bredcumb.model';
-import { FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
-import { MatAutocomplete } from '@angular/material';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from '../../core/services/auth.service';
 import { Store } from '@ngrx/store';
 import { ActivatedRoute } from '@angular/router';
@@ -21,6 +20,7 @@ import { CompanyService } from '../../companies/company.service';
 import { PostService } from '../../shared/services/post.service';
 import { appConstants } from '../../shared/constants/app_constants';
 import { environment } from '../../../environments/environment';
+import { EditorComponent } from '../../shared/components/editor/editor.component';
 
 // import { AddCompanyComponent } from '../../companies/add-company/add-company.component';
 
@@ -81,7 +81,7 @@ export class AddCareerCoachComponent implements OnInit {
   anonymousAvatar = '../../../../assets/images/anonymous-avatar.jpg';
   s3FilesBucketURL = environment.s3FilesBucketURL;
 
-  @ViewChild('auto', { static: false }) matAutocomplete: MatAutocomplete;
+  @ViewChild('careerCoachEditor', { static: true }) careerCoachEditor: EditorComponent;
 
   constructor(
     private authService: AuthService,
@@ -148,7 +148,7 @@ export class AddCareerCoachComponent implements OnInit {
     console.log(i && i.companies ? i.companies : []);
     this.careerCoachForm = new FormGroup({
       name: new FormControl(i && i.name ? i.name : '', Validators.required),
-      description: new FormControl(i && i.description ? i.description : ''),
+      description: new FormControl(i && i.description ? i.description : []),
       jobProfile: new FormControl(i && i.jobProfile ? i.jobProfile : []),
       companies: new FormControl(i && i.companies ? i.companies : []),
       status: new FormControl(i && i.status ? i.status : PostStatus.Drafted),
@@ -180,13 +180,12 @@ export class AddCareerCoachComponent implements OnInit {
 
   }
 
-  submit(status) {
+  async submit(status) {
 
     this.statusFormControl.setValue(status);
 
-    if (!this.descriptionFormControl.value) {
-      this.descriptionFormControl.setValue([]);
-    }
+    const blocks =  await this.careerCoachEditor.editor.save();
+    this.careerCoachForm.get('description').setValue(blocks.blocks);
 
     if (this.authService.loggedInUser && !this.createdBy.value) {
       this.createdBy.setValue(this.authService.loggedInUser._id);
@@ -237,11 +236,6 @@ export class AddCareerCoachComponent implements OnInit {
         this.totalDreamJobs = dj.total;
       }
     });
-  }
-
-  updateFormData(event) {
-    console.log(event);
-    this.careerCoachForm.get('description').setValue(event);
   }
 
   addTagFn(name) {

@@ -60,23 +60,17 @@
                                 <mat-icon style="vertical-align: sub;" (click)="addStep(i)">add_circle_outline</mat-icon>
                                 <mat-icon *ngIf="process?.controls?.length > 1" style="vertical-align: sub;" (click)="removeStep(i)">remove_circle_outline</mat-icon>
                             </div>
-                            <app-editor [id]="'process' + i" (output)="updateProcess($event, i)" [data]="p?.value" [placeholder]="'Write Step Details'"></app-editor>
+                            <app-editor #steps [id]="'process' + i" [data]="p?.value" [placeholder]="'Write Step Details'"></app-editor>
                         </div>
                     </div>
                 </div>
 
                 <br />
 
-                <app-editor *ngIf="descriptionFormControl?.value && edit; else add" (output)="updateFormData($event)"
+                <app-editor #descriptionEditor
                     [data]="descriptionFormControl?.value" [id]="'edit-capitalfunding-editor'"
                     [importArticleSubscription]="true" [placeholder]="'Capital Funding Description:'"></app-editor>
 
-                <br />
-
-                <ng-template #add>
-                    <app-editor *ngIf="!edit" [placeholder]="'Capital Funding Description:'"
-                        (output)="updateFormData($event)" [id]="'capitalfunding-editor'"></app-editor>
-                </ng-template>
 
                 <br />
                 <!-- <br /> -->

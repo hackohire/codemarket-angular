@@ -161,6 +161,7 @@ fragment Comment on Comment {
   type
   referenceId
   companyReferenceId
+  userReferenceId
   parentId
   createdAt
   createdBy {

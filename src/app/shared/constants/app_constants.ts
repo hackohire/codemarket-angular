@@ -228,6 +228,13 @@ export const appConstants = {
         avatar
       }
       slug
+      connectedWithUser {
+        _id
+        name
+        avatar
+      }
+    
+
       comments {
         text {
           ...Description

@@ -32,6 +32,10 @@ export interface Post {
     support?: Support;
     usersAttending?: [User]; /** Only for events */
 
+    /** FOr posts created under user's profile */
+    isPostUnderUser?: boolean;
+    connectedWithUser?: User & string;
+
     cities?: City[];
     company?: Company & string;
     isPostUnderCompany?: boolean;

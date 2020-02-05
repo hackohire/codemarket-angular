@@ -11,6 +11,7 @@ export interface Comment {
     parentId: string;
     referenceId: string;
     companyReferenceId?: string;
+    userReferenceId?: string;
     createdBy: User;
     status: string;
 

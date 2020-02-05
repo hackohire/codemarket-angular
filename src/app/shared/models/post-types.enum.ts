@@ -17,6 +17,16 @@ export enum PostType {
     HiringProcess = 'hiring-process'
 }
 
+export enum UserProfilePostTypes {
+    BusinessGoal = 'business-goal',
+    StartupGoal = 'startup-goal',
+    TechnicalGoal = 'technical-goal',
+    SocialImpactGoal = 'social-impact-goal',
+    BusinessChallenge = 'business-challenge',
+    TechnicalChallenge = 'technical-challenge',
+    LeadershipChallenge = 'leadership-challenge'
+}
+
 /** Same as other posts */
 export enum CompanyPostTypes {
     SalesChallenge = 'sales-challenge',

@@ -209,15 +209,15 @@ export class CompanyService {
         return p.data.getCompanyById;
       }),
       /** On the first time fetching companydata, subscribe to listen company edit changes */
-      concatMap((value, index) => {
+      concatMap((company, index) => {
         return index === 0 ?
-          of(value).pipe(tap(() => {
-            this.onCompanyPostChanges(value);
-            this.commentService.onCommentAdded(null, value, []);
-            this.commentService.onCommentUpdated(null, value, []);
-            this.commentService.onCommentDeleted(null, value, []);
+          of(company).pipe(tap(() => {
+            this.onCompanyPostChanges(company);
+            this.commentService.onCommentAdded({company}, []);
+            this.commentService.onCommentUpdated({company}, []);
+            this.commentService.onCommentDeleted({company}, []);
           })) :
-          of(value);
+          of(company);
       })
     );
   }

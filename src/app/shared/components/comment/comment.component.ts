@@ -21,6 +21,7 @@ export class CommentComponent implements OnInit {
   @Input() comment: Comment;
   @Input() referenceId: string;
   @Input() companyReferenceId: string;
+  @Input() userReferenceId: string;
   @Input() postCreatedBy: string;
   // @Output() commentDeleted  = new EventEmitter();
   @Output() allowReplyToParent = new EventEmitter();
@@ -51,6 +52,7 @@ export class CommentComponent implements OnInit {
       // createdBy: new FormControl(this.authService.loggedInUser._id),
       referenceId: new FormControl(this.comment.referenceId),
       companyReferenceId: new FormControl(this.companyReferenceId ? this.companyReferenceId : this.comment.companyReferenceId),
+      userReferenceId: new FormControl(this.userReferenceId ? this.userReferenceId : this.comment.userReferenceId),
       parentId: new FormControl(this.comment._id),
       type: new FormControl(this.comment.type),
       blockSpecificComment: new FormControl(this.comment.blockSpecificComment),

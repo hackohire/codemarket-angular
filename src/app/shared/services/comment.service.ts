@@ -74,6 +74,7 @@ export class CommentService {
   commentsQuery: QueryRef<any>;
   commentsList$ = new BehaviorSubject<Comment[]>(null);
   companyPostsList: Post[] = []; /** Company Posts List for mutations on the comments when Post gets updated */
+  usersPostsList: Post[] = []; /** Users Posts List for mutations on the comments when Post gets updated */
   subscriptions$ = new Subscription();
 
   constructor(
@@ -83,7 +84,7 @@ export class CommentService {
     @Inject(PLATFORM_ID) private platformId: any,
     private postService: PostService
   ) {
-    console.log('instance Created')
+    console.log('instance Created');
   }
 
 
@@ -109,10 +110,10 @@ export class CommentService {
     );
   }
 
-  onCommentAdded(post, company, comments: Comment[]) {
+  onCommentAdded(reference, comments: Comment[]) {
     const COMMENTS_SUBSCRIPTION = gql`
-    subscription onCommentAdded($postId: String, $companyId: String) {
-      onCommentAdded(postId: $postId, companyId: $companyId){
+    subscription onCommentAdded($postId: String, $companyId: String, $userId: String) {
+      onCommentAdded(postId: $postId, companyId: $companyId, userId: $userId){
         ...Comment
       }
     }
@@ -123,8 +124,9 @@ export class CommentService {
       this.apollo.subscribe({
         query: COMMENTS_SUBSCRIPTION,
         variables: {
-          postId: post ? post._id : 'null',
-          companyId: company ? company._id : 'null'
+          postId: reference && reference.post ? reference.post._id : 'null',
+          companyId: reference && reference.company ? reference.company._id : 'null',
+          userId: reference && reference.user ? reference.user._id : 'null'
         }
       }).pipe(
         map((c: any) => {
@@ -135,7 +137,22 @@ export class CommentService {
           /** If comment is related to the post of a company */
           if (c.companyReferenceId) {
             const p = this.companyPostsList.find(p => p._id === c.referenceId);
-            p.comments.push(c);
+            if (c.parentId) {
+              const commentIndex = p.comments.slice().findIndex(com => com._id === c.parentId);
+              p.comments[commentIndex]['children'].push(c);
+            } else {
+              p.comments.push(c);
+            }
+          } else if (c.userReferenceId) {
+            /** If comment is related to the posts under user */
+            const p = this.usersPostsList.find(p => p._id === c.referenceId);
+
+            if (c.parentId) {
+              const commentIndex = p.comments.slice().findIndex(com => com._id === c.parentId);
+              p.comments[commentIndex]['children'].push(c);
+            } else {
+              p.comments.push(c);
+            }
           } else {
             if (c.parentId) {
               const commentIndex = comments.slice().findIndex(com => com._id === c.parentId);
@@ -146,10 +163,10 @@ export class CommentService {
             /** Audio Notification */
             // var audio = new Audio(appConstants.Notification);
             // audio.play();
-  
+
             /** Tostr Notification */
             // this.openToastrNotification(post, c)
-  
+
             this.commentsList$.next(comments);
           }
         })
@@ -158,7 +175,7 @@ export class CommentService {
   }
 
   openToastrNotification(post, c, rediect = true) {
-    const message = c.parentId ? 'has reaplied to a comment on this post' : 'has commented on this post'
+    const message = c.parentId ? 'has reaplied to a comment on this post' : 'has commented on this post';
 
     this.subscriptions$.add(
       this.toastrService.info(
@@ -214,9 +231,9 @@ export class CommentService {
         tap((p: any) => {
           const comments = p.data.getCommentsByReferenceId;
           this.commentsList$.next(comments);
-          this.onCommentAdded(post, null, comments);
-          this.onCommentUpdated(post, null, comments);
-          this.onCommentDeleted(post, null, comments);
+          this.onCommentAdded({post}, comments);
+          this.onCommentUpdated({post}, comments);
+          this.onCommentDeleted({post}, comments);
 
           /** If comment Id is passed scroll down to the comment */
           if (comments && comments.length && commentId) {
@@ -228,13 +245,14 @@ export class CommentService {
     );
   }
 
-  onCommentDeleted(post, company, comments: Comment[]) {
+  onCommentDeleted(reference, comments: Comment[]) {
     const COMMENT_DELETE_SUBSCRIPTION = gql`
-    subscription onCommentDeleted($postId: String, $companyId: String) {
-      onCommentDeleted(postId: $postId, companyId: $companyId) {
+    subscription onCommentDeleted($postId: String, $companyId: String, $userId: String) {
+      onCommentDeleted(postId: $postId, companyId: $companyId, userId: $userId) {
         referenceId
         parentId
         companyReferenceId
+        userReferenceId
         _id
       }
     }
@@ -244,8 +262,9 @@ export class CommentService {
       this.apollo.subscribe({
         query: COMMENT_DELETE_SUBSCRIPTION,
         variables: {
-          postId: post ? post._id : 'null',
-          companyId: company ? company._id : 'null'
+          postId: reference && reference.post ? reference.post._id : 'null',
+          companyId: reference && reference.company ? reference.company._id : 'null',
+          userId: reference && reference.user ? reference.user._id : 'null'
         }
       }).pipe(
         map((c: any) => {
@@ -255,9 +274,27 @@ export class CommentService {
            /** If comment is related to the post of a company */
           if (c.companyReferenceId) {
             const p = this.companyPostsList.find(p => p._id === c.referenceId);
-            const i = p.comments.findIndex(com => com._id === c._id);
-            p.comments.splice(i, 1);
-            // p.comments = p.comments.slice();
+
+            if (c.parentId) {
+              const parentCommentIndex = p.comments.findIndex(com => com._id === c.parentId);
+              const deletedChildCommentIndex = p.comments[parentCommentIndex]['children'].findIndex(com => com._id === c._id);
+              p.comments[parentCommentIndex]['children'].splice(deletedChildCommentIndex, 1);
+            } else {
+              const commentIndex = comments.findIndex(com => com._id === c._id);
+              p.comments.splice(commentIndex, 1);
+            }
+          } else if (c.userReferenceId) {
+            /** If comment is related to the posts under user */
+            const p = this.usersPostsList.find(p => p._id === c.referenceId);
+
+            if (c.parentId) {
+              const parentCommentIndex = p.comments.findIndex(com => com._id === c.parentId);
+              const deletedChildCommentIndex = p.comments[parentCommentIndex]['children'].findIndex(com => com._id === c._id);
+              p.comments[parentCommentIndex]['children'].splice(deletedChildCommentIndex, 1);
+            } else {
+              const commentIndex = comments.findIndex(com => com._id === c._id);
+              p.comments.splice(commentIndex, 1);
+            }
           } else {
             if (c.parentId) {
               const parentCommentIndex = comments.findIndex(com => com._id === c.parentId);
@@ -294,10 +331,10 @@ export class CommentService {
     );
   }
 
-  onCommentUpdated(post, company, comments: Comment[]) {
+  onCommentUpdated(reference, comments: Comment[]) {
     const COMMENT_UPDATE_SUBSCRIPTION = gql`
-    subscription onCommentUpdated($postId: String, $companyId: String) {
-      onCommentUpdated(postId: $postId, companyId: $companyId){
+    subscription onCommentUpdated($postId: String, $companyId: String, $userId: String) {
+      onCommentUpdated(postId: $postId, companyId: $companyId, userId: $userId){
         ...Comment
       }
     }
@@ -308,8 +345,9 @@ export class CommentService {
       this.apollo.subscribe({
         query: COMMENT_UPDATE_SUBSCRIPTION,
         variables: {
-          postId: post ? post._id : 'null',
-          companyId: company ? company._id : 'null'
+          postId: reference && reference.post ? reference.post._id : 'null',
+          companyId: reference && reference.company ? reference.company._id : 'null',
+          userId: reference && reference.user ? reference.user._id : 'null'
         }
       }).pipe(
         map((c: any) => {
@@ -318,10 +356,34 @@ export class CommentService {
         tap((c: Comment) => {
            /** If comment is related to the post of a company */
           if (c.companyReferenceId) {
+
             const p = this.companyPostsList.find(p => p._id === c.referenceId);
-            const i = p.comments.findIndex(com => com._id === c._id);
-            p.comments[i] = c;
+
+            if (c.parentId) {
+              const parentCommentIndex = p.comments.findIndex(com => com._id === c.parentId);
+              const deletedChildCommentIndex = p.comments[parentCommentIndex]['children'].findIndex(com => com._id === c._id);
+              p.comments[parentCommentIndex]['children'][deletedChildCommentIndex]['text'] = c.text;
+            } else {
+              const commentIndex = p.comments.slice().findIndex(com => com._id === c._id);
+              p.comments[commentIndex]['text'] = c.text;
+            }
+
+          } else if (c.userReferenceId) {
+
+            /** If comment is related to the posts under user */
+            const p = this.usersPostsList.find(p => p._id === c.referenceId);
+
+            if (c.parentId) {
+              const parentCommentIndex = p.comments.findIndex(com => com._id === c.parentId);
+              const deletedChildCommentIndex = p.comments[parentCommentIndex]['children'].findIndex(com => com._id === c._id);
+              p.comments[parentCommentIndex]['children'][deletedChildCommentIndex]['text'] = c.text;
+            } else {
+              const commentIndex = p.comments.slice().findIndex(com => com._id === c._id);
+              p.comments[commentIndex]['text'] = c.text;
+            }
+
           } else {
+
             if (c.parentId) {
               const parentCommentIndex = comments.findIndex(com => com._id === c.parentId);
               const deletedChildCommentIndex = comments[parentCommentIndex]['children'].findIndex(com => com._id === c._id);
@@ -331,6 +393,7 @@ export class CommentService {
               comments[commentIndex]['text'] = c.text;
             }
             this.commentsList$.next(comments);
+
           }
         })
       ).subscribe()

@@ -3,10 +3,11 @@ import { Observable, of, Subject, BehaviorSubject } from 'rxjs';
 import { User } from '../shared/models/user.model';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
-import { map } from 'rxjs/operators';
+import { map, concatMap, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import Peer from 'peerjs';
 import { appConstants } from '../shared/constants/app_constants';
+import { CommentService } from '../shared/services/comment.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -28,6 +29,7 @@ export class UserService {
     }
     programming_languages
     avatar
+    cover
     roles
     createdAt
     likeCount
@@ -58,7 +60,7 @@ export class UserService {
   `;
 
   updateUserQuery = gql`
-  mutation user($user: UserInput!) {
+  mutation updateUser($user: UserInput!) {
     updateUser(user: $user)
     {
       ${this.userFields}
@@ -67,7 +69,8 @@ export class UserService {
 
   constructor(
     private apollo: Apollo,
-    private router: Router
+    private router: Router,
+    private commentService: CommentService
   ) { }
 
   createUser(user): Observable<any> {
@@ -82,7 +85,8 @@ export class UserService {
         mutation: this.updateUserQuery,
         variables: {
           user: u,
-        }
+        },
+        fetchPolicy: 'no-cache'
       }
     ).pipe(
       map((d: any) => {
@@ -128,9 +132,55 @@ export class UserService {
     ).pipe(
       map((d: any) => {
         return d.data.getUserById;
-      })
+      }),
     );
   }
+
+    /** On Adding Post Related to the company, listen Realtime  */
+    onUsersPostChanges(userId) {
+      const USER_POST_SUBSCRIPTION = gql`
+      subscription onUsersPostChanges($userId: String) {
+        onUsersPostChanges(userId: $userId){
+          postUpdated {
+            ...Post
+          }
+          postAdded {
+            ...Post
+          }
+          postDeleted {
+            _id
+          }
+        }
+      }
+      ${appConstants.postQuery}
+      `;
+
+      this.apollo.subscribe({
+        query: USER_POST_SUBSCRIPTION,
+        variables: { userId }
+      }).pipe(
+        tap((p: any) => {
+          /** userPostList in the comment Service are mutable and hence we are mutating them here */
+          const data = p.data.onUsersPostChanges;
+          if (data && data.postAdded) {
+
+            this.commentService.usersPostsList.unshift(data.postAdded);
+
+          } else if (data && data.postUpdated) {
+
+            const postToBeUpdated = this.commentService.usersPostsList.find(post => post._id === data.postUpdated._id);
+            postToBeUpdated['description'] = data.postUpdated.description;
+            postToBeUpdated['__edit'] = false;
+
+          } else if (data && data.postDeleted) {
+
+            const i = this.commentService.usersPostsList.findIndex(post => post._id === data.postDeleted._id);
+            this.commentService.usersPostsList.splice(i, 1);
+
+          }
+        })
+      ).subscribe();
+    }
 
   getMyProfileInfo(userId: string): Observable<any> {
     return this.apollo.query(

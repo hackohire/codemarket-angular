@@ -45,6 +45,7 @@ export const productConstants = {
             type
             referenceId
             companyReferenceId
+            userReferenceId
             parentId
             createdAt
             createdBy {

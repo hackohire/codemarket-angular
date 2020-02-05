@@ -101,6 +101,7 @@ export class AuthService {
               }
               programming_languages
               avatar
+              cover
               roles
               likeCount
               createdAt

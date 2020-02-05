@@ -353,7 +353,7 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
               if (d.isQuestion) {
                 this.questionsList.push(d);
               } else if (d.isAnswer) {
-                question.answers.push(d)
+                question.answers.push(d);
               }
             }
 

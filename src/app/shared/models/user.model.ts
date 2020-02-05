@@ -14,6 +14,7 @@ export interface User {
     currentJobDetails?: CurrentJobDetails;
     programming_languages?: string[];
     avatar?: string;
+    cover?: string;
     roles?: Roles[];
     stripeId?: string;
     subscription?: Subscription[];

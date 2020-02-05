@@ -41,7 +41,22 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
   @Input() companyPostId: string;
   @Input() id: string;
   @Input() readOnly = false; /** read only mode */
-  @Input() data: [];
+
+  _data: any [];
+  @Input()
+  set data(updatedData) {
+    this._data = updatedData;
+    if (this.editor) {
+      if (updatedData && updatedData.length) {
+        this.editor.blocks.render({blocks: updatedData});
+      } else {
+        this.editor.blocks.clear();
+      }
+    }
+  }
+  get data() {
+    return this._data;
+  }
   @Input() placeholder: string;
   @Input() commentType: string;
   @Output() output: EventEmitter<any> = new EventEmitter(); /** Emitting data with user interactions */
@@ -51,7 +66,7 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
   subscriptions$  = new Subscription();
 
   @Input() editorStyle = {
-    // background: '#eff1f570',
+    background: '#eff1f570',
     'word-break': 'break-word',
     padding: '15px',
     // border: 'dotted #ececec'

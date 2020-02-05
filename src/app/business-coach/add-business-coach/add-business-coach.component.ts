@@ -4,7 +4,6 @@ import { City } from '../../shared/models/city.model';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { BreadCumb } from '../../shared/models/bredcumb.model';
 import { FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
-import { MatAutocomplete } from '@angular/material';
 import { AuthService } from '../../core/services/auth.service';
 import { Store } from '@ngrx/store';
 import { ActivatedRoute } from '@angular/router';
@@ -21,6 +20,7 @@ import { CompanyService } from '../../companies/company.service';
 import { PostService } from '../../shared/services/post.service';
 import { appConstants } from '../../shared/constants/app_constants';
 import { environment } from '../../../environments/environment';
+import { EditorComponent } from '../../shared/components/editor/editor.component';
 
 // import { AddCompanyComponent } from '../../companies/add-company/add-company.component';
 
@@ -109,8 +109,7 @@ export class AddBusinessCoachComponent implements OnInit {
   servicesLoading = false;
   servicesInput$ = new Subject<string>();
 
-
-  @ViewChild('auto', { static: false }) matAutocomplete: MatAutocomplete;
+  @ViewChild('businessCoachEditor', { static: true }) businessCoachEditor: EditorComponent;
 
   constructor(
     private authService: AuthService,
@@ -178,7 +177,7 @@ export class AddBusinessCoachComponent implements OnInit {
     console.log(i && i.companies ? i.companies : []);
     this.businessCoachForm = new FormGroup({
       name: new FormControl(i && i.name ? i.name : '', Validators.required),
-      description: new FormControl(i && i.description ? i.description : ''),
+      description: new FormControl(i && i.description ? i.description : []),
       status: new FormControl(i && i.status ? i.status : PostStatus.Drafted),
       _id: new FormControl(i && i._id ? i._id : ''),
       type: new FormControl(PostType.BusinessCoach),
@@ -297,7 +296,10 @@ export class AddBusinessCoachComponent implements OnInit {
 
   }
 
-  submit(status) {
+  async submit(status) {
+
+    const blocks =  await this.businessCoachEditor.editor.save();
+    this.businessCoachForm.get('description').setValue(blocks.blocks);
 
     this.statusFormControl.setValue(status);
 
@@ -361,11 +363,6 @@ export class AddBusinessCoachComponent implements OnInit {
         this.totalBusinessGoals = cc.total;
       }
     });
-  }
-
-  updateFormData(event) {
-    console.log(event);
-    this.businessCoachForm.get('description').setValue(event);
   }
 
   addTagFn(name) {

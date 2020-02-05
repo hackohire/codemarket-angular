@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChildren, QueryList, ViewChild } from '@angular/core';
 import { Subscription, of, Observable, Subject, concat } from 'rxjs';
 import { BreadCumb } from '../../shared/models/bredcumb.model';
 import { FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
@@ -15,6 +15,7 @@ import { AppState } from '../../core/store/state/app.state';
 import { Post } from '../../shared/models/post.model';
 import { CompanyService } from '../../companies/company.service';
 import { PostService } from '../../shared/services/post.service';
+import { EditorComponent } from '../../shared/components/editor/editor.component';
 
 @Component({
   selector: 'app-add-hiring-process',
@@ -59,6 +60,9 @@ export class AddHiringProcessComponent implements OnInit {
   get process(): FormArray {
     return this.hiringprocessForm.get('hiringProcess') as FormArray;
   }
+
+  @ViewChild('descriptionEditor', { static: true }) descriptionEditor: EditorComponent;
+  @ViewChildren('steps') steps: QueryList<EditorComponent>;
 
   subscription$: Subscription;
 
@@ -122,7 +126,7 @@ export class AddHiringProcessComponent implements OnInit {
   ngOnInit() {
   }
 
-  setProcessFormControl(hiringProcessSteps: any []) {
+  setProcessFormControl(hiringProcessSteps: any[]) {
     const hiringProcessStepsControls = [];
     hiringProcessSteps.forEach((s) => {
       hiringProcessStepsControls.push(new FormControl(s));
@@ -157,15 +161,24 @@ export class AddHiringProcessComponent implements OnInit {
         switchMap(term => this.formService.findFromCollection(term, 'tags', 'role').pipe(
           catchError(() => of([])), // empty list on error
           tap(() => this.rolesLoading = false)
-          ))
-        )
+        ))
+      )
     );
   }
 
-  submit(status) {
+  async submit(status) {
 
     this.statusFormControl.setValue(status);
 
+    /** Setting Up Steps Data Runtime while saving the form.by accessing the editor references */
+    const steps = this.steps.toArray();
+    this.process.controls.forEach(async (pC, i) => {
+      const stepsBlocks = await steps[i].editor.save();
+      pC.setValue(stepsBlocks.blocks);
+    });
+
+    const blocks =  await this.descriptionEditor.editor.save();
+    this.hiringprocessForm.get('description').setValue(blocks.blocks);
 
     if (!this.descriptionFormControl.value) {
       this.descriptionFormControl.setValue([]);
@@ -203,15 +216,11 @@ export class AddHiringProcessComponent implements OnInit {
     hiringprocessValue.jobProfile = hiringprocessValue.jobProfile.map(c => c._id);
   }
 
-  updateFormData(event) {
-    this.hiringprocessForm.get('description').setValue(event);
-  }
-
 
   addCompany = (name: string) => {
     if (name) {
       return new Promise((resolve, reject) => {
-        this.companyService.addCompany({name, createdBy: this.authService.loggedInUser._id}).subscribe(c => {
+        this.companyService.addCompany({ name, createdBy: this.authService.loggedInUser._id }).subscribe(c => {
           this.allCompanies.unshift(c);
           this.allCompanies = this.allCompanies.slice();
           return resolve(c.name);
@@ -226,10 +235,6 @@ export class AddHiringProcessComponent implements OnInit {
 
   removeStep(i: number) {
     this.process.removeAt(i);
-  }
-
-  updateProcess(d, i: number) {
-    this.process.at(i).setValue(d);
   }
 
 }

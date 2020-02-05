@@ -216,18 +216,10 @@ export class CompanyService {
             this.commentService.onCommentAdded(null, value, []);
             this.commentService.onCommentUpdated(null, value, []);
             this.commentService.onCommentDeleted(null, value, []);
-
-            // if (companyPostId && commentId) {
-            //   const post = value.posts.find(p => p._id === companyPostId);
-            //   const comment = post.comments.find(c => c._id === commentId);
-            //   if(comment) {
-            //     this.commentService.scrollToComment(post.blocks, comment);
-            //   }
-            // }
           })) :
           of(value);
       })
-    )
+    );
   }
 
   deleteCompany(companyId: string): Observable<boolean> {

@@ -32,7 +32,7 @@
                                 <mat-icon *ngIf="process?.controls?.length > 1" style="vertical-align: sub;"
                                     (click)="removeStep(i)">remove_circle_outline</mat-icon>
                             </div>
-                            <app-editor [id]="'process' + i" (output)="updateProcess($event, i)"
+                            <app-editor #steps [id]="'process' + i"
                                 [placeholder]="'Write Step Details'" [data]="p?.value"></app-editor>
                         </div>
                     </div>
@@ -40,16 +40,9 @@
 
                 <br />
 
-                <app-editor *ngIf="descriptionFormControl?.value && edit; else add" (output)="updateFormData($event)"
+                <app-editor #descriptionEditor
                     [data]="descriptionFormControl?.value" [id]="'edit-hiringprocess-editor'"
                     [importArticleSubscription]="true" [placeholder]="'Hiring Process Description:'"></app-editor>
-
-                <br />
-
-                <ng-template #add>
-                    <app-editor *ngIf="!edit" [placeholder]="'Hiring Process Description:'"
-                        (output)="updateFormData($event)" [id]="'hiringprocess-editor'"></app-editor>
-                </ng-template>
 
                 <br />
                 <!-- <br /> -->

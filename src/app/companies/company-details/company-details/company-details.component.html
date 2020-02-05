@@ -392,12 +392,12 @@
                 <div class="media-body">
                     <div class="comment-reply-form">
                         <!---------------- ADD POST EDITOR --------------->
-                        <app-editor [placeholder]="'Add '+ postType"
+                        <app-editor #addPostEditor [placeholder]="'Add '+ postType"
                             [editorStyle]="{background: 'white', 'padding': '20px 35px', 'min-height': '130px', 'border-radius': '6px'}"
-                            (output)="postDescription = $event" [id]="'editor' + postType"></app-editor>
+                            [id]="'editor' + postType"></app-editor>
 
                         <button style="float: right; margin-top: 10px; margin-bottom: 20px;" type="button"
-                            class="btn btn--sm btn--round" (click)="addPost(postType)">Post</button>
+                            class="btn btn--sm btn--round" (click)="addPost(postType, addPostEditor)">Post</button>
                     </div>
                 </div>
             </div>
@@ -425,7 +425,7 @@
                     </h3>
 
                     <!-- Post Actions -->
-                    <i class="fad fa-check-circle" *ngIf="c['__edit']" (click)="updatePost(c)"></i>
+                    <i class="fad fa-check-circle" *ngIf="c['__edit']" (click)="updatePost(c, singlePostEditor)"></i>
                     <span style="float: right;" *ngIf="c?.createdBy?._id === auth?.loggedInUser?._id">
                         <button mat-icon-button [matMenuTriggerFor]="optionsMenu"
                             aria-label="Example icon-button with a menu">
@@ -452,9 +452,8 @@
                     <div class="bottom">
                         <p>
                             <!---------------- SINGLE POST EDITOR --------------->
-                            <app-editor [editorStyle]="{background: 'white'}" [data]="c?.description"
-                                [companyPostId]="cDetails._id" (output)="postDescriptionInstances[c?._id] = $event"
-                                [id]="c?._id" [readOnly]="!c['__edit']" [blockLevelComments]="true"
+                            <app-editor #singlePostEditor [editorStyle]="{background: 'white'}" [data]="c?.description"
+                                [companyPostId]="cDetails._id" [id]="'post' + c?._id" [readOnly]="!c['__edit']" [blockLevelComments]="true"
                                 [commentType]="'post'" [companyPostId]="c?._id" [post]="c" [commentsList]="c?.comments">
                             </app-editor>
                         </p>
@@ -483,56 +482,29 @@
 
                 <!-- <div class="box-click"><span><i class="ion-chatbox-working"></i> View 140 more comments</span></div> -->
                 <div class="box-comments">
-                    <ng-container *ngFor="let com of c?.comments">
-                        <div [id]="com?._id" class="comment" *ngIf="!com?.blockSpecificComment">
-                            <img [src]="com?.createdBy?.avatar ? ((s3FilesBucketURL + com?.createdBy?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
-                                alt="" />
-                            <div class="content">
-                                <h3><a href="">{{com?.createdBy?.name}}</a><span><time> {{fromNow(com?.createdAt)}}
-                                        </time>
-                                    </span></h3>
-                                <i class="fad fa-check-circle" style="font-size: x-large; top: 9px;"
-                                    *ngIf="com['__edit']"
-                                    (click)="commentService.updateComment(com._id, commentDescriptionInstances[com?._id]).subscribe()"></i>
-                                <span style="float: right;" *ngIf="com?.createdBy?._id === auth?.loggedInUser?._id">
-                                    <button mat-icon-button [matMenuTriggerFor]="optionsMenu"
-                                        aria-label="Example icon-button with a menu">
-                                        <mat-icon>more_horiz</mat-icon>
-                                    </button>
-                                    <mat-menu #optionsMenu="matMenu">
-                                        <button mat-menu-item (click)="com['__edit'] = !com['__edit']">
-                                            <mat-icon>edit</mat-icon>
-                                            <span>Edit</span>
-                                        </button>
-                                        <button mat-menu-item
-                                            (click)="commentService.deleteComment(com?._id).subscribe()">
-                                            <mat-icon>delete</mat-icon>
-                                            <span>Delete</span>
-                                        </button>
-                                    </mat-menu>
-                                </span>
-                                <!---------------- SINGLE COMMENT EDITOR --------------->
-                                <app-editor [data]="com.text" (output)="commentDescriptionInstances[com?._id] = $event"
-                                    [companyPostId]="cDetails._id"
-                                    [editorStyle]="{display: 'inline-block', width: '90%', background: 'white', padding: '0 12px 0 0px', 'border-radius': '20px'}"
-                                    [id]="com?._id" [readOnly]="!com['__edit']"></app-editor>
+                    <div class="thread">
+                        <ul class="media-list thread-list" style="border-top: 1px solid #f4f4f4; padding: 10px 30px 0px 30px; list-style: none;">
+                            <div *ngFor="let com of c?.comments">
+                                <li *ngIf="!com?.blockSpecificComment" class="single-thread">
+                                    <app-comment [comment]="com"></app-comment>
+                                </li>
                             </div>
-                        </div>
-                    </ng-container>
+                        </ul>
+                    </div>
                 </div>
                 <div class="box-new-comment">
                     <img [src]="auth?.loggedInUser?.avatar ? ((s3FilesBucketURL + auth?.loggedInUser?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
                         alt="" />
                     <div class="content">
                         <!-- <div class="post-row"> -->
-                        <app-editor [placeholder]="'Write a comment'"
+                        <app-editor #commentEditor [placeholder]="'Write a comment'"
                             [editorStyle]="{ width: '84%', background: 'white', padding: '0 12px 0 12px', 'border-radius': '20px'}"
-                            (output)="updateFormData($event)" [id]="c?._id + i"></app-editor>
+                            [id]="c?._id + i"></app-editor>
                         <!-- </div> -->
                         <div class="post-row">
                             <!---------------- ADD COMMENT EDITOR --------------->
                             <button style="float: right;" type="button" class="btn btn--sm btn--round"
-                                (click)="addComment(c?._id)">Post</button>
+                                (click)="addComment(c?._id, commentEditor)">Post</button>
                         </div>
                     </div>
                 </div>

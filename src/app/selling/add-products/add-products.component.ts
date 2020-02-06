@@ -207,8 +207,8 @@ export class AddProductsComponent implements OnInit, OnDestroy {
 
   async submit(status) {
 
-    if (!this.authService.loggedInUser) {
-      this.authService.checkIfUserIsLoggedIn(true);
+    if (!this.auth.loggedInUser) {
+      this.auth.checkIfUserIsLoggedIn(true);
       return;
     }
 

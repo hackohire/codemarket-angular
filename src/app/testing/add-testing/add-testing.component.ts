@@ -174,6 +174,11 @@ export class AddTestingComponent implements OnInit {
 
   async submit(status) {
 
+    if (!this.authService.loggedInUser) {
+      this.authService.checkIfUserIsLoggedIn(true);
+      return;
+    }
+
     this.statusFormControl.setValue(status);
 
     const supportBlocks =  await this.supportDescriptionEditor.editor.save();

@@ -168,6 +168,11 @@ export class AddHiringProcessComponent implements OnInit {
 
   async submit(status) {
 
+    if (!this.authService.loggedInUser) {
+      this.authService.checkIfUserIsLoggedIn(true);
+      return;
+    }
+
     this.statusFormControl.setValue(status);
 
     /** Setting Up Steps Data Runtime while saving the form.by accessing the editor references */

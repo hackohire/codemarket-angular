@@ -173,6 +173,11 @@ export class AddRequirementsComponent implements OnInit {
 
   async submit(status) {
 
+    if (!this.authService.loggedInUser) {
+      this.authService.checkIfUserIsLoggedIn(true);
+      return;
+    }
+
     this.statusFormControl.setValue(status);
 
     const blocks =  await this.descriptionEditor.editor.save();

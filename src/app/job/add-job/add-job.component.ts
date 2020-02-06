@@ -201,6 +201,11 @@ export class AddJobComponent implements OnInit, OnDestroy {
 
   async submit(status) {
 
+    if (!this.authService.loggedInUser) {
+      this.authService.checkIfUserIsLoggedIn(true);
+      return;
+    }
+
     this.statusFormControl.setValue(status);
 
     this.jobForm.get('salaryRangeFrom').setValue(this.salaryRangeFrom);

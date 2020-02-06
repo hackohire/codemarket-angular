@@ -298,6 +298,11 @@ export class AddBusinessCoachComponent implements OnInit {
 
   async submit(status) {
 
+    if (!this.authService.loggedInUser) {
+      this.authService.checkIfUserIsLoggedIn(true);
+      return;
+    }
+
 
     this.statusFormControl.setValue(status);
 

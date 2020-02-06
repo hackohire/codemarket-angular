@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './shared/guards/auth.guard';
 import { PostDataResolver } from './core/resolver';
+import { AboutUsComponent } from './about-us/about-us.component';
 // import { PostDataResolver } from './core/resolver';
 
 const routes: Routes = [
@@ -157,6 +158,11 @@ const routes: Routes = [
     data: { setPostMeta: true },
     pathMatch: 'full'
   },
+
+  {
+    path: 'about-us',
+    component: AboutUsComponent
+  }
 ];
 
 @NgModule({

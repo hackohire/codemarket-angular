@@ -11,11 +11,13 @@ import { LayoutModule } from '@angular/cdk/layout';
 import 'zone.js/dist/zone-patch-rxjs';
 import { AmplifyModule } from './core/amplify/amplify.module';
 import { PostDataResolver } from './core/resolver';
+import { AboutUsComponent } from './about-us/about-us.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavBarComponent,
+    AboutUsComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

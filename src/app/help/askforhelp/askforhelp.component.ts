@@ -50,8 +50,8 @@ export class AskforhelpComponent implements OnInit {
   @ViewChild('searchInput', {static: false}) searchInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto', {static: false}) matAutocomplete: MatAutocomplete;
 
-  @ViewChild('descriptionEditor', { static: true }) descriptionEditor: EditorComponent;
-  @ViewChild('supportDescriptionEditor', { static: true }) supportDescriptionEditor: EditorComponent;
+  @ViewChild('descriptionEditor', { static: false }) descriptionEditor: EditorComponent;
+  @ViewChild('supportDescriptionEditor', { static: false }) supportDescriptionEditor: EditorComponent;
 
   get createdBy() {
     return this.askForHelpForm.get('createdBy');

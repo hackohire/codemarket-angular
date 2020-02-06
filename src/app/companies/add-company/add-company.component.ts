@@ -100,7 +100,7 @@ export class AddCompanyComponent implements OnInit {
   @ViewChild('searchInput', { static: false }) searchInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto', { static: false }) matAutocomplete: MatAutocomplete;
 
-  @ViewChild('descriptionEditor', { static: true }) descriptionEditor: EditorComponent;
+  @ViewChild('descriptionEditor', { static: false }) descriptionEditor: EditorComponent;
 
   constructor(
     private authService: AuthService,
@@ -187,6 +187,10 @@ export class AddCompanyComponent implements OnInit {
 
   async submit(status) {
 
+    if (!this.authService.loggedInUser) {
+      this.authService.checkIfUserIsLoggedIn(true);
+      return;
+    }
     // this.statusFormControl.setValue(status);
 
     const blocks =  await this.descriptionEditor.editor.save();

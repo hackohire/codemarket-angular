@@ -109,7 +109,7 @@ export class AddBusinessCoachComponent implements OnInit {
   servicesLoading = false;
   servicesInput$ = new Subject<string>();
 
-  @ViewChild('descriptionEditor', { static: true }) descriptionEditor: EditorComponent;
+  @ViewChild('descriptionEditor', { static: false }) descriptionEditor: EditorComponent;
 
   constructor(
     private authService: AuthService,

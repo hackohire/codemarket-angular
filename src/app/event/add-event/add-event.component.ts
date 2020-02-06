@@ -95,7 +95,7 @@ export class AddEventComponent implements OnInit {
   @ViewChild('searchInput', { static: false }) searchInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto', { static: false }) matAutocomplete: MatAutocomplete;
 
-  @ViewChild('descriptionEditor', { static: true }) descriptionEditor: EditorComponent;
+  @ViewChild('descriptionEditor', { static: false }) descriptionEditor: EditorComponent;
 
   public dialogRef = null;
   public data;

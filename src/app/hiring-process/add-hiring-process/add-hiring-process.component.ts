@@ -61,7 +61,7 @@ export class AddHiringProcessComponent implements OnInit {
     return this.hiringprocessForm.get('hiringProcess') as FormArray;
   }
 
-  @ViewChild('descriptionEditor', { static: true }) descriptionEditor: EditorComponent;
+  @ViewChild('descriptionEditor', { static: false }) descriptionEditor: EditorComponent;
   @ViewChildren('steps') steps: QueryList<EditorComponent>;
 
   subscription$: Subscription;

@@ -81,7 +81,7 @@ export class AddCareerCoachComponent implements OnInit {
   anonymousAvatar = '../../../../assets/images/anonymous-avatar.jpg';
   s3FilesBucketURL = environment.s3FilesBucketURL;
 
-  @ViewChild('descriptionEditor', { static: true }) descriptionEditor: EditorComponent;
+  @ViewChild('descriptionEditor', { static: false }) descriptionEditor: EditorComponent;
 
   constructor(
     private authService: AuthService,

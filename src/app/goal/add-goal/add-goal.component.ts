@@ -63,8 +63,8 @@ export class AddGoalComponent implements OnInit {
     return this.goalForm.get('status');
   }
 
-  @ViewChild('descriptionEditor', { static: true }) descriptionEditor: EditorComponent;
-  @ViewChild('supportDescriptionEditor', { static: true }) supportDescriptionEditor: EditorComponent;
+  @ViewChild('descriptionEditor', { static: false }) descriptionEditor: EditorComponent;
+  @ViewChild('supportDescriptionEditor', { static: false }) supportDescriptionEditor: EditorComponent;
 
   visible = true;
   selectable = true;

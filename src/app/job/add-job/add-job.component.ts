@@ -76,7 +76,7 @@ export class AddJobComponent implements OnInit, OnDestroy {
   // public data;
 
   @ViewChild('auto', { static: false }) matAutocomplete: MatAutocomplete;
-  @ViewChild('descriptionEditor', { static: true }) descriptionEditor: EditorComponent;
+  @ViewChild('descriptionEditor', { static: false }) descriptionEditor: EditorComponent;
 
   constructor(
     private authService: AuthService,

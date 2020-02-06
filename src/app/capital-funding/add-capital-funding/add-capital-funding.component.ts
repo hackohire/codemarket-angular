@@ -56,7 +56,7 @@ export class AddCapitalFundingComponent implements OnInit {
     return this.capitalfundingForm.get('fundingProcess') as FormArray;
   }
 
-  @ViewChild('descriptionEditor', { static: true }) descriptionEditor: EditorComponent;
+  @ViewChild('descriptionEditor', { static: false }) descriptionEditor: EditorComponent;
   @ViewChildren('steps') steps: QueryList<EditorComponent>;
 
 

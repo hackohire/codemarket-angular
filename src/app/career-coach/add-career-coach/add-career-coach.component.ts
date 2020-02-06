@@ -81,7 +81,7 @@ export class AddCareerCoachComponent implements OnInit {
   anonymousAvatar = '../../../../assets/images/anonymous-avatar.jpg';
   s3FilesBucketURL = environment.s3FilesBucketURL;
 
-  @ViewChild('careerCoachEditor', { static: true }) careerCoachEditor: EditorComponent;
+  @ViewChild('descriptionEditor', { static: true }) descriptionEditor: EditorComponent;
 
   constructor(
     private authService: AuthService,
@@ -184,7 +184,7 @@ export class AddCareerCoachComponent implements OnInit {
 
     this.statusFormControl.setValue(status);
 
-    const blocks =  await this.careerCoachEditor.editor.save();
+    const blocks =  await this.descriptionEditor.editor.save();
     this.careerCoachForm.get('description').setValue(blocks.blocks);
 
     if (this.authService.loggedInUser && !this.createdBy.value) {

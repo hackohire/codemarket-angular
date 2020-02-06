@@ -166,10 +166,6 @@ export class AddCapitalFundingComponent implements OnInit {
     const blocks =  await this.descriptionEditor.editor.save();
     this.capitalfundingForm.get('description').setValue(blocks.blocks);
 
-    if (!this.descriptionFormControl.value) {
-      this.descriptionFormControl.setValue([]);
-    }
-
     if (this.authService.loggedInUser && !this.createdBy.value) {
       this.createdBy.setValue(this.authService.loggedInUser._id);
     }

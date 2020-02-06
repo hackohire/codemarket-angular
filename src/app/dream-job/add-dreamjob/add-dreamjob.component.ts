@@ -20,6 +20,7 @@ import { Post } from '../../shared/models/post.model';
 import { CompanyService } from '../../companies/company.service';
 import { PostService } from '../../shared/services/post.service';
 import { environment } from '../../../environments/environment';
+import { EditorComponent } from '../../shared/components/editor/editor.component';
 // import { AddCompanyComponent } from '../../companies/add-company/add-company.component';
 
 @Component({
@@ -85,6 +86,7 @@ export class AddDreamjobComponent implements OnInit {
   s3FilesBucketURL = environment.s3FilesBucketURL;
 
   @ViewChild('auto', { static: false }) matAutocomplete: MatAutocomplete;
+  @ViewChild('descriptionEditor', { static: true }) descriptionEditor: EditorComponent;
 
   constructor(
     private authService: AuthService,
@@ -197,14 +199,13 @@ export class AddDreamjobComponent implements OnInit {
 
   }
 
-  submit(status) {
+  async submit(status) {
 
     this.statusFormControl.setValue(status);
 
 
-    if (!this.descriptionFormControl.value) {
-      this.descriptionFormControl.setValue([]);
-    }
+    const blocks =  await this.descriptionEditor.editor.save();
+    this.descriptionFormControl.setValue(blocks.blocks);
 
     if (this.authService.loggedInUser && !this.createdBy.value) {
       this.createdBy.setValue(this.authService.loggedInUser._id);

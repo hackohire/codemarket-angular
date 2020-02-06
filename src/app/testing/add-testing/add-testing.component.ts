@@ -17,6 +17,7 @@ import { PostStatus } from 'src/app/shared/models/poststatus.enum';
 import { PostType } from 'src/app/shared/models/post-types.enum';
 import { SetSelectedPost, GetPostById, AddPost, UpdatePost } from 'src/app/core/store/actions/post.actions';
 import { selectSelectedPost } from 'src/app/core/store/selectors/post.selectors';
+import { EditorComponent } from '../../shared/components/editor/editor.component';
 
 
 @Component({
@@ -73,6 +74,9 @@ export class AddTestingComponent implements OnInit {
 
   @ViewChild('searchInput', { static: false }) searchInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto', { static: false }) matAutocomplete: MatAutocomplete;
+
+  @ViewChild('descriptionEditor', { static: true }) descriptionEditor: EditorComponent;
+  @ViewChild('supportDescriptionEditor', { static: true }) supportDescriptionEditor: EditorComponent;
 
   constructor(
     private authService: AuthService,
@@ -168,17 +172,15 @@ export class AddTestingComponent implements OnInit {
     return this.allTags.filter(tag => tag.name.toLowerCase().indexOf(filterValue) === 0);
   }
 
-  submit(status) {
+  async submit(status) {
 
     this.statusFormControl.setValue(status);
 
-    if (!this.supportDescriptionFormControl.value) {
-      this.supportDescriptionFormControl.setValue([]);
-    }
+    const supportBlocks =  await this.supportDescriptionEditor.editor.save();
+    this.supportDescriptionFormControl.setValue(supportBlocks.blocks);
 
-    if (!this.descriptionFormControl.value) {
-      this.descriptionFormControl.setValue([]);
-    }
+    const blocks =  await this.descriptionEditor.editor.save();
+    this.descriptionFormControl.setValue(blocks.blocks);
 
     if (this.authService.loggedInUser && !this.createdBy.value) {
       this.createdBy.setValue(this.authService.loggedInUser._id);

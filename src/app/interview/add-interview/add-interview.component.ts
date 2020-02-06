@@ -19,6 +19,7 @@ import { AddPost, UpdatePost, SetSelectedPost, GetPostById } from 'src/app/core/
 import { selectSelectedPost } from 'src/app/core/store/selectors/post.selectors';
 import { CompanyService } from '../../companies/company.service';
 import { Post } from '../../shared/models/post.model';
+import { EditorComponent } from '../../shared/components/editor/editor.component';
 
 
 @Component({
@@ -77,6 +78,9 @@ export class AddInterviewComponent implements OnInit {
 
   @ViewChild('searchInput', {static: false}) searchInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto', {static: false}) matAutocomplete: MatAutocomplete;
+
+  @ViewChild('descriptionEditor', { static: true }) descriptionEditor: EditorComponent;
+  @ViewChild('supportDescriptionEditor', { static: true }) supportDescriptionEditor: EditorComponent;
 
   constructor(
     private authService: AuthService,
@@ -179,17 +183,15 @@ export class AddInterviewComponent implements OnInit {
     return this.allTags.filter(tag => tag.name.toLowerCase().indexOf(filterValue) === 0);
   }
 
-  submit(status) {
+  async submit(status) {
 
     this.statusFormControl.setValue(status);
 
-    if (!this.supportDescriptionFormControl.value) {
-      this.supportDescriptionFormControl.setValue([]);
-    }
+    const blocks =  await this.descriptionEditor.editor.save();
+    this.descriptionFormControl.setValue(blocks.blocks);
 
-    if (!this.descriptionFormControl.value) {
-      this.descriptionFormControl.setValue([]);
-    }
+    const supportBlocks =  await this.supportDescriptionEditor.editor.save();
+    this.supportDescriptionFormControl.setValue(supportBlocks.blocks);
 
     if (this.authService.loggedInUser && !this.createdBy.value) {
       this.createdBy.setValue(this.authService.loggedInUser._id);

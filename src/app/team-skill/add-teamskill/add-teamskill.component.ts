@@ -17,6 +17,7 @@ import { PostType } from '../../shared/models/post-types.enum';
 import { PostStatus } from '../../shared/models/poststatus.enum';
 import { Tag } from '../../shared/models/product.model';
 import { FormService } from '../../shared/services/form.service';
+import { EditorComponent } from '../../shared/components/editor/editor.component';
 
 
 
@@ -76,6 +77,8 @@ export class AddTeamskillComponent implements OnInit {
   @ViewChild('searchInput', {static: false}) searchInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto', {static: false}) matAutocomplete: MatAutocomplete;
 
+  @ViewChild('descriptionEditor', { static: true }) descriptionEditor: EditorComponent;
+  @ViewChild('supportDescriptionEditor', { static: true }) supportDescriptionEditor: EditorComponent;
   constructor(
     private authService: AuthService,
     private store: Store<AppState>,
@@ -169,17 +172,15 @@ export class AddTeamskillComponent implements OnInit {
     return this.allTags.filter(tag => tag.name.toLowerCase().indexOf(filterValue) === 0);
   }
 
-  submit(status) {
+  async submit(status) {
 
     this.statusFormControl.setValue(status);
 
-    if (!this.supportDescriptionFormControl.value) {
-      this.supportDescriptionFormControl.setValue([]);
-    }
+    const supportBlocks =  await this.supportDescriptionEditor.editor.save();
+    this.supportDescriptionFormControl.setValue(supportBlocks.blocks);
 
-    if (!this.descriptionFormControl.value) {
-      this.descriptionFormControl.setValue([]);
-    }
+    const blocks =  await this.descriptionEditor.editor.save();
+    this.descriptionFormControl.setValue(blocks.blocks);
 
     if (this.authService.loggedInUser && !this.createdBy.value) {
       this.createdBy.setValue(this.authService.loggedInUser._id);

@@ -26,16 +26,11 @@
                     [multiple]="true" [typeahead]="roleInput$">
                 </ng-select>
 
-                <app-editor *ngIf="descriptionFormControl?.value && edit; else add" (output)="updateFormData($event)"
+                <app-editor #descriptionEditor
                     [data]="descriptionFormControl?.value" [id]="'edit-dreamjob-editor'"
                     [importArticleSubscription]="true" [placeholder]="'Dream Job Description:'"></app-editor>
 
                 <br />
-
-                <ng-template #add>
-                    <app-editor *ngIf="!edit" [placeholder]="'Dream Job Description:'" (output)="updateFormData($event)"
-                        [id]="'dreamjob-editor'" [importArticleSubscription]="true"></app-editor>
-                </ng-template>
 
                 <div class="row">
                     <ng-select class="col-md-6" placeholder="Select Dream Companies" [addTag]="addCompany"
@@ -51,29 +46,6 @@
                         formControlName="cities" [multiple]="true" bindLabel="name">
                     </ng-select>
                 </div>
-
-                <!-- <mat-form-field class="field-full-width">
-                    <mat-chip-list #citiesList>
-                        <mat-chip *ngFor="let city of citiesFormControl?.value; let i = index;"
-                            [selectable]="selectable" [removable]="true" (removed)="remove(i)">
-                            {{city?.name}}
-                            <mat-icon matChipRemove>cancel</mat-icon>
-                        </mat-chip>
-                        <input #searchInput [formControl]="searchText" [matAutocomplete]="auto"
-                            placeholder="Choose Cities" [matChipInputFor]="citiesList"
-                            [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
-                            (matChipInputTokenEnd)="addTech($event)">
-                        <mat-icon matSuffix>location_city</mat-icon>
-                    </mat-chip-list>
-                    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-                        <mat-option *ngFor="let city of citySuggestions" [value]="city">
-                            {{city?.name}}
-                        </mat-option>
-                    </mat-autocomplete>
-                </mat-form-field> -->
-
-                <!-- <h6>Expected Salary Range:</h6>
-                <br /> -->
 
                 <mat-form-field appearance="outline">
                     <mat-label>Expected Salary(Yearly)(In Thousands)</mat-label>
@@ -93,13 +65,6 @@
                     <!-- <mat-hint>Timeline</mat-hint> -->
                 </mat-form-field>
 
-                <!-- <mat-form-field class="field-full-width" style="width: 30%; padding-left: 10px;">
-                    <input type="number" matInput formControlName="salaryRangeFrom" placeholder="Timeline">
-                </mat-form-field> -->
-
-                <!-- <ng5-slider [(value)]="salaryRangeFrom"
-                    [(highValue)]="salaryRangeTo" [options]="options"></ng5-slider>
-                <br /> -->
                 <br />
                 <br />
 

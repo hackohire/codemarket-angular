@@ -23,6 +23,7 @@ import { CompanyService } from '../../companies/company.service';
 import { isPlatformBrowser } from '@angular/common';
 import { PostService } from '../../shared/services/post.service';
 import { SweetalertService } from '../../shared/services/sweetalert.service';
+import { EditorComponent } from '../../shared/components/editor/editor.component';
 
 
 @Component({
@@ -93,6 +94,8 @@ export class AddEventComponent implements OnInit {
 
   @ViewChild('searchInput', { static: false }) searchInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto', { static: false }) matAutocomplete: MatAutocomplete;
+
+  @ViewChild('descriptionEditor', { static: true }) descriptionEditor: EditorComponent;
 
   public dialogRef = null;
   public data;
@@ -241,17 +244,12 @@ export class AddEventComponent implements OnInit {
     return this.allTags.filter(tag => tag.name.toLowerCase().indexOf(filterValue) === 0);
   }
 
-  submit(status) {
+  async submit(status) {
 
     this.statusFormControl.setValue(status);
 
-    // if (!this.supportDescriptionFormControl.value) {
-    //   this.supportDescriptionFormControl.setValue([]);
-    // }
-
-    if (!this.descriptionFormControl.value) {
-      this.descriptionFormControl.setValue([]);
-    }
+    const blocks =  await this.descriptionEditor.editor.save();
+    this.descriptionFormControl.setValue(blocks.blocks);
 
     if (this.authService.loggedInUser && !this.createdBy.value) {
       this.createdBy.setValue(this.authService.loggedInUser._id);

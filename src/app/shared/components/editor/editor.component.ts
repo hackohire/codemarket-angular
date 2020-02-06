@@ -333,14 +333,14 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
           this.zoomInZoomOutForImages();
         }),
         onChange: (() => {
-          if (this.editor && this.editor.save) {
-            this.editor.save().then((outputData) => {
-              // console.log(outputData);
-              this.output.emit([...outputData.blocks]);
-            }).catch((error) => {
-              console.log('Saving failed: ', error);
-            });
-          }
+          // if (this.editor && this.editor.save) {
+          //   this.editor.save().then((outputData) => {
+          //     // console.log(outputData);
+          //     this.output.emit([...outputData.blocks]);
+          //   }).catch((error) => {
+          //     console.log('Saving failed: ', error);
+          //   });
+          // }
 
           this.addControlsIfVideoElement();
         })

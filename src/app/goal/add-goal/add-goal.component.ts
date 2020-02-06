@@ -17,6 +17,7 @@ import { PostType } from '../../shared/models/post-types.enum';
 import { PostStatus } from '../../shared/models/poststatus.enum';
 import { Tag } from '../../shared/models/product.model';
 import { FormService } from '../../shared/services/form.service';
+import { EditorComponent } from '../../shared/components/editor/editor.component';
 
 
 
@@ -61,6 +62,9 @@ export class AddGoalComponent implements OnInit {
   get statusFormControl() {
     return this.goalForm.get('status');
   }
+
+  @ViewChild('descriptionEditor', { static: true }) descriptionEditor: EditorComponent;
+  @ViewChild('supportDescriptionEditor', { static: true }) supportDescriptionEditor: EditorComponent;
 
   visible = true;
   selectable = true;
@@ -138,7 +142,7 @@ export class AddGoalComponent implements OnInit {
   goalFormInitialization(i: Goal) {
     this.goalForm = new FormGroup({
       name: new FormControl(i && i.name ? i.name : '', Validators.required),
-      description: new FormControl(i && i.description ? i.description : ''),
+      description: new FormControl(i && i.description ? i.description : []),
       price: new FormControl(i && i.price ? i.price : 0, Validators.required),
       createdBy: new FormControl(i && i.createdBy && i.createdBy._id ? i.createdBy._id : ''),
       categories: new FormControl(i && i.categories ? i.categories : []),
@@ -148,7 +152,7 @@ export class AddGoalComponent implements OnInit {
       type: new FormControl(PostType.Goal),
       support: new FormGroup({
         time: new FormControl(i && i.support && i.support.time ? i.support.time : 0),
-        description: new FormControl(i && i.support && i.support.description ? i.support.description : '')
+        description: new FormControl(i && i.support && i.support.description ? i.support.description : [])
       })
       // snippets: new FormControl(null),
     });
@@ -171,17 +175,15 @@ export class AddGoalComponent implements OnInit {
     return this.allTags.filter(tag => tag.name.toLowerCase().indexOf(filterValue) === 0);
   }
 
-  submit(status) {
+  async submit(status) {
 
     this.statusFormControl.setValue(status);
 
-    if (!this.supportDescriptionFormControl.value) {
-      this.supportDescriptionFormControl.setValue([]);
-    }
+    const blocks =  await this.descriptionEditor.editor.save();
+    this.descriptionFormControl.setValue(blocks.blocks);
 
-    if (!this.descriptionFormControl.value) {
-      this.descriptionFormControl.setValue([]);
-    }
+    const supportBlocks =  await this.supportDescriptionEditor.editor.save();
+    this.supportDescriptionFormControl.setValue(supportBlocks.blocks);
 
     if (this.authService.loggedInUser && !this.createdBy.value) {
       this.createdBy.setValue(this.authService.loggedInUser._id);

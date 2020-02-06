@@ -17,6 +17,7 @@ import { PostStatus } from 'src/app/shared/models/poststatus.enum';
 import { PostType } from 'src/app/shared/models/post-types.enum';
 import { SetSelectedPost, GetPostById, AddPost, UpdatePost } from 'src/app/core/store/actions/post.actions';
 import { selectSelectedPost } from 'src/app/core/store/selectors/post.selectors';
+import { EditorComponent } from '../../shared/components/editor/editor.component';
 
 @Component({
   selector: 'app-add-requirements',
@@ -72,6 +73,9 @@ export class AddRequirementsComponent implements OnInit {
 
   @ViewChild('searchInput', {static: false}) searchInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto', {static: false}) matAutocomplete: MatAutocomplete;
+
+  @ViewChild('descriptionEditor', { static: true }) descriptionEditor: EditorComponent;
+  @ViewChild('supportDescriptionEditor', { static: true }) supportDescriptionEditor: EditorComponent;
 
   constructor(
     private authService: AuthService,
@@ -135,7 +139,7 @@ export class AddRequirementsComponent implements OnInit {
   requirementFormInitialization(r: Requirement) {
     this.requirementForm = new FormGroup({
       name: new FormControl(r && r.name ? r.name : '', Validators.required),
-      description: new FormControl(r && r.description ? r.description : ''),
+      description: new FormControl(r && r.description ? r.description : []),
       price: new FormControl(r && r.price ? r.price : 0, Validators.required),
       createdBy: new FormControl(r && r.createdBy && r.createdBy._id ? r.createdBy._id : ''),
       categories: new FormControl(r && r.categories ? r.categories : []),
@@ -145,7 +149,7 @@ export class AddRequirementsComponent implements OnInit {
       type: new FormControl(PostType.Requirement),
       support: new FormGroup({
         time: new FormControl(r && r.support && r.support.time ? r.support.time : 0),
-        description: new FormControl(r && r.support && r.support.description ? r.support.description : '')
+        description: new FormControl(r && r.support && r.support.description ? r.support.description : [])
       })
       // snippets: new FormControl(null),
     });
@@ -167,17 +171,15 @@ export class AddRequirementsComponent implements OnInit {
     return this.allTags.filter(tag => tag.name.toLowerCase().indexOf(filterValue) === 0);
   }
 
-  submit(status) {
+  async submit(status) {
 
     this.statusFormControl.setValue(status);
 
-    if (!this.supportDescriptionFormControl.value) {
-      this.supportDescriptionFormControl.setValue([]);
-    }
+    const blocks =  await this.descriptionEditor.editor.save();
+    this.descriptionFormControl.setValue(blocks.blocks);
 
-    if (!this.descriptionFormControl.value) {
-      this.descriptionFormControl.setValue([]);
-    }
+    const supportBlocks =  await this.supportDescriptionEditor.editor.save();
+    this.supportDescriptionFormControl.setValue(supportBlocks.blocks);
 
     if (this.authService.loggedInUser && !this.createdBy.value) {
       this.createdBy.setValue(this.authService.loggedInUser._id);

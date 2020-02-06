@@ -178,11 +178,7 @@ export class AddHiringProcessComponent implements OnInit {
     });
 
     const blocks =  await this.descriptionEditor.editor.save();
-    this.hiringprocessForm.get('description').setValue(blocks.blocks);
-
-    if (!this.descriptionFormControl.value) {
-      this.descriptionFormControl.setValue([]);
-    }
+    this.descriptionFormControl.setValue(blocks.blocks);
 
     if (this.authService.loggedInUser && !this.createdBy.value) {
       this.createdBy.setValue(this.authService.loggedInUser._id);

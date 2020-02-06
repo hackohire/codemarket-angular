@@ -23,16 +23,10 @@
                     [minTermLength]="2" [loading]="rolesLoading" [multiple]="true" [typeahead]="roleInput$">
                 </ng-select>
 
-                <app-editor [placeholder]="'Job Description:'" *ngIf="descriptionFormControl?.value && edit; else add"
-                    (output)="updateFormData($event)" [data]="descriptionFormControl?.value" [id]="'edit-job-editor'"
+                <app-editor #descriptionEditor [placeholder]="'Job Description:'" [data]="descriptionFormControl?.value" [id]="'edit-job-editor'"
                     [importArticleSubscription]="true"></app-editor>
 
                 <br />
-
-                <ng-template #add>
-                    <app-editor [placeholder]="'Job Description:'" *ngIf="!edit" (output)="updateFormData($event)"
-                        [id]="'job-editor'" [importArticleSubscription]="true"></app-editor>
-                </ng-template>
 
                 <div class="row">
                     <ng-select class="col-md-6" [addTag]="addCompany" [items]="allCompanies"

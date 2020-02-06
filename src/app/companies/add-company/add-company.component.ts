@@ -18,6 +18,7 @@ import { City } from '../../shared/models/city.model';
 import { environment } from '../../../environments/environment';
 import { PostService } from '../../shared/services/post.service';
 import { PostType, CompanyPostTypes } from '../../shared/models/post-types.enum';
+import { EditorComponent } from '../../shared/components/editor/editor.component';
 
 @Component({
   selector: 'app-add-company',
@@ -98,6 +99,8 @@ export class AddCompanyComponent implements OnInit {
 
   @ViewChild('searchInput', { static: false }) searchInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto', { static: false }) matAutocomplete: MatAutocomplete;
+
+  @ViewChild('descriptionEditor', { static: true }) descriptionEditor: EditorComponent;
 
   constructor(
     private authService: AuthService,
@@ -182,13 +185,12 @@ export class AddCompanyComponent implements OnInit {
 
   }
 
-  submit(status) {
+  async submit(status) {
 
     // this.statusFormControl.setValue(status);
 
-    if (!this.descriptionFormControl.value) {
-      this.descriptionFormControl.setValue([]);
-    }
+    const blocks =  await this.descriptionEditor.editor.save();
+    this.descriptionFormControl.setValue(blocks.blocks);
 
     if (this.authService.loggedInUser && !this.createdBy.value) {
       this.createdBy.setValue(this.authService.loggedInUser._id);

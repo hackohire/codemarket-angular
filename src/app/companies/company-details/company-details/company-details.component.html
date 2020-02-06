@@ -551,7 +551,7 @@
                 </div>
                 <div class="media-body">
                     <div [formGroup]="commentForm" class="comment-reply-form">
-                        <app-editor [id]="'comment-editor'" (output)="updateFormData($event)">
+                        <app-editor [id]="'comment-editor'">
                         </app-editor>
 
                         <button style="float: right;" type="button" class="btn btn--sm btn--round"
@@ -579,13 +579,13 @@
             </div>
             <div class="media-body">
                 <div [formGroup]="questionOrAnswerForm" class="comment-reply-form">
-                    <app-editor [id]="'question-editor'"
+                    <app-editor #questionEditor [id]="'question-editor'"
                         [editorStyle]="{background: 'white', 'padding': '20px 35px', 'min-height': '130px', 'border-radius': '6px'}"
-                        [placeholder]="'Ask a Question'" (output)="questionOrAnswerForm.get('text').setValue($event)">
+                        [placeholder]="'Ask a Question'">
                     </app-editor>
 
                     <button style="float: right;" type="button" class="btn btn--sm btn--round"
-                        (click)="addQuestionOrAnswer(true)">Ask a Question</button>
+                        (click)="addQuestionOrAnswer(true, null, questionEditor)">Ask a Question</button>
                 </div>
             </div>
         </div>
@@ -598,7 +598,7 @@
                 <mat-expansion-panel *ngFor="let q of questionsList">
                     <mat-expansion-panel-header>
                         <div style="padding: 0; width: 100%;" fxLayout="row" [fxLayoutAlign]="'center center'">
-                            <app-editor fxFlex="92" (output)="questionData = $event;"
+                            <app-editor fxFlex="92" #editQuestionEditor
                                 [readOnly]="q['edit'] ? false : true" [data]="q?.text" [id]="q['edit']+ q?._id">
                             </app-editor>
                             <div fxFlex="8">
@@ -629,7 +629,7 @@
                     </mat-expansion-panel-header>
                     <br />
                     <button *ngIf="q?.edit" type="button" style="float: right;" class="btn btn--sm btn--round"
-                        (click)="updateQuestionOrAnswer(q, false)">Update
+                        (click)="updateQuestionOrAnswer(q, false, editQuestionEditor)">Update
                         Question</button>
                     <br />
                     <div class="panel-body">
@@ -676,13 +676,12 @@
                                                 </div>
 
                                                 <!-- View / Update Answer Content -->
-                                                <app-editor [readOnly]="a['edit'] ? false : true"
-                                                    (output)="answerData = $event" [data]="a?.text" [id]="a?._id">
+                                                <app-editor [readOnly]="a['edit'] ? false : true" #editAnswerEditor [data]="a?.text" [id]="a?._id">
                                                 </app-editor>
                                                 <br />
                                                 <button *ngIf="a['edit']" type="button" style="float: right;"
                                                     class="btn btn--sm btn--round"
-                                                    (click)="updateQuestionOrAnswer(a, true)">Update
+                                                    (click)="updateQuestionOrAnswer(a, true, editAnswerEditor)">Update
                                                     Answer</button>
                                             </div>
 
@@ -704,12 +703,11 @@
                                 </div>
                                 <div class="media-body">
                                     <div class="comment-reply-form">
-                                        <app-editor [id]="'answer' + q?._id" [placeholder]="'Answer'"
-                                            (output)="questionOrAnswerForm.get('text').setValue($event)">
+                                        <app-editor [id]="'answer' + q?._id" [placeholder]="'Answer'" #answerEditor>
                                         </app-editor>
 
                                         <button style="float: right;" type="button" class="btn btn--sm btn--round"
-                                            (click)="addQuestionOrAnswer(false, q)">Answer</button>
+                                            (click)="addQuestionOrAnswer(false, q, answerEditor)">Answer</button>
                                     </div>
                                 </div>
                             </div>

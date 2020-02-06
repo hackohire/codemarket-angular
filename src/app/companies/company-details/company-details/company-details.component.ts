@@ -274,9 +274,11 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
     return false;
   }
 
-  addComment(postId = '', commentEditor: EditorComponent) {
+  async addComment(postId = '', commentEditor: EditorComponent) {
     console.log(this.commentForm.value);
     if (this.authService.loggedInUser) {
+      const blocks =  await commentEditor.editor.save();
+      this.commentForm.get('text').setValue(blocks.blocks);
       this.commentForm.addControl('createdBy', new FormControl(this.authService.loggedInUser._id));
       this.commentForm.patchValue({referenceId: postId});
       this.subscription$.add(
@@ -331,9 +333,12 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
   }
 
   /** Add Question Or Answer */
-  addQuestionOrAnswer(isQuestion, question = null) {
+  async addQuestionOrAnswer(isQuestion, question = null, questionAnswerEditor: EditorComponent) {
     console.log(this.questionOrAnswerForm.value);
     if (this.authService.loggedInUser) {
+      const blocks =  await questionAnswerEditor.editor.save();
+      this.questionOrAnswerForm.get('text').setValue(blocks.blocks);
+
       this.questionOrAnswerForm.addControl('createdBy', new FormControl(this.authService.loggedInUser._id));
       this.questionOrAnswerForm.get('isQuestion').setValue(isQuestion);
       this.questionOrAnswerForm.get('isAnswer').setValue(!isQuestion);
@@ -367,8 +372,9 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
    * @param qa - object if question / answer
    * @param isAnswer - to check if the object is qustion / answer
    */
-  updateQuestionOrAnswer(qa, isAnswer) {
-    this.commentService.updateQuestionOrAnswer(qa._id, isAnswer ? this.answerData : this.questionData).pipe(
+  async updateQuestionOrAnswer(qa, isAnswer, questionAnswerEditor: EditorComponent) {
+    const blocks =  await questionAnswerEditor.editor.save();
+    this.commentService.updateQuestionOrAnswer(qa._id, blocks.blocks).pipe(
       tap((d) => {
         console.log(d);
         if (d) {

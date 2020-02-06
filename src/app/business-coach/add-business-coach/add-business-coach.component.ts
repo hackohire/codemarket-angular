@@ -109,7 +109,7 @@ export class AddBusinessCoachComponent implements OnInit {
   servicesLoading = false;
   servicesInput$ = new Subject<string>();
 
-  @ViewChild('businessCoachEditor', { static: true }) businessCoachEditor: EditorComponent;
+  @ViewChild('descriptionEditor', { static: true }) descriptionEditor: EditorComponent;
 
   constructor(
     private authService: AuthService,
@@ -298,14 +298,11 @@ export class AddBusinessCoachComponent implements OnInit {
 
   async submit(status) {
 
-    const blocks =  await this.businessCoachEditor.editor.save();
-    this.businessCoachForm.get('description').setValue(blocks.blocks);
 
     this.statusFormControl.setValue(status);
 
-    if (!this.descriptionFormControl.value) {
-      this.descriptionFormControl.setValue([]);
-    }
+    const blocks =  await this.descriptionEditor.editor.save();
+    this.descriptionFormControl.setValue(blocks.blocks);
 
     if (this.authService.loggedInUser && !this.createdBy.value) {
       this.createdBy.setValue(this.authService.loggedInUser._id);

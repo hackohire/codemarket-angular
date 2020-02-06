@@ -17,6 +17,7 @@ import { tap, switchMap, distinctUntilChanged, catchError } from 'rxjs/operators
 import { Post } from '../../shared/models/post.model';
 import { PostStatus } from '../../shared/models/poststatus.enum';
 import { PostType } from '../../shared/models/post-types.enum';
+import { EditorComponent } from '../../shared/components/editor/editor.component';
 
 @Component({
   selector: 'app-add-job',
@@ -75,6 +76,7 @@ export class AddJobComponent implements OnInit, OnDestroy {
   // public data;
 
   @ViewChild('auto', { static: false }) matAutocomplete: MatAutocomplete;
+  @ViewChild('descriptionEditor', { static: true }) descriptionEditor: EditorComponent;
 
   constructor(
     private authService: AuthService,
@@ -197,16 +199,15 @@ export class AddJobComponent implements OnInit, OnDestroy {
 
   }
 
-  submit(status) {
+  async submit(status) {
 
     this.statusFormControl.setValue(status);
 
     this.jobForm.get('salaryRangeFrom').setValue(this.salaryRangeFrom);
     this.jobForm.get('salaryRangeTo').setValue(this.salaryRangeTo);
 
-    if (!this.descriptionFormControl.value) {
-      this.descriptionFormControl.setValue([]);
-    }
+    const blocks =  await this.descriptionEditor.editor.save();
+    this.descriptionFormControl.setValue(blocks.blocks);
 
     if (this.authService.loggedInUser && !this.createdBy.value) {
       this.createdBy.setValue(this.authService.loggedInUser._id);

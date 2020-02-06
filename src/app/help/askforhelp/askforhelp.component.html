@@ -14,13 +14,7 @@
             </h6>
             <br />
 
-            <app-editor *ngIf="descriptionFormControl?.value && edit; else add" (output)="updateFormData($event)"
-                [data]="askForHelpForm?.get('description')?.value" [id]="'edit-help-editor'"></app-editor>
-
-
-            <ng-template #add>
-                <app-editor (output)="updateFormData($event)" [id]="'help-editor'"></app-editor>
-            </ng-template>
+            <app-editor #descriptionEditor [data]="askForHelpForm?.get('description')?.value" [id]="'edit-help-editor'"></app-editor>
 
 
             <!-- <quill-editor #editor formControlName="description" [modules]="modules">
@@ -87,16 +81,11 @@
                 </h6>
                 <br />
 
-                <ng-container *ngIf="supportDescriptionFormControl?.value && edit; else addSupport">
-                    <app-editor [data]="supportDescriptionFormControl?.value"
-                        (output)="updateSupportDescription($event)" [id]="'edit-help-request-support-editor'">
+                <ng-container>
+                    <app-editor #supportDescriptionEditor [data]="supportDescriptionFormControl?.value" [id]="'edit-help-request-support-editor'">
                     </app-editor>
                 </ng-container>
 
-                <ng-template #addSupport>
-                    <app-editor (output)="updateSupportDescription($event)" [id]="'add-help-request-support-editor'">
-                    </app-editor>
-                </ng-template>
 
             </div>
 

@@ -51,15 +51,8 @@
                 <h6>Description</h6>
                 <br />
 
-                <app-editor *ngIf="descriptionFormControl?.value && edit; else add"
-                    (output)="descriptionFormControl.setValue($event)" [data]="descriptionFormControl?.value"
+                <app-editor #descriptionEditor [data]="descriptionFormControl?.value"
                     [id]="'edit-company-editor'"></app-editor>
-
-
-                <ng-template #add>
-                    <app-editor *ngIf="!edit" (output)="descriptionFormControl.setValue($event)"
-                        [id]="'company-editor'"></app-editor>
-                </ng-template>
 
                 <br />
 

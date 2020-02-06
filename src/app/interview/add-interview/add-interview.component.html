@@ -22,44 +22,13 @@
                 <h6>Description:</h6>
                 <br />
 
-                <app-editor *ngIf="descriptionFormControl?.value && edit; else add" (output)="updateFormData($event)"
+                <app-editor #descriptionEditor
                     [data]="descriptionFormControl?.value" [id]="'edit-interview-editor'" [importArticleSubscription]="true"></app-editor>
-
-
-                <ng-template #add>
-                    <app-editor *ngIf="!edit" (output)="updateFormData($event)" [id]="'interview-editor'" [importArticleSubscription]="true"></app-editor>
-                </ng-template>
-
-
-
-
-
-                <!-- <mat-form-field class="field-full-width">
-                    <input matInput formControlName="shortDescription" placeholder="Short Description">
-                </mat-form-field> -->
 
                 <mat-form-field class="field-full-width">
                     <input type="number" matInput formControlName="price" placeholder="price">
                     <mat-icon matSuffix>monetization_on</mat-icon>
                 </mat-form-field>
-
-                <!-- <mat-form-field class="field-full-width">
-                    <input matInput formControlName="demo_url" placeholder="Demo Url">
-                    <mat-error *ngIf="interviewForm?.get('demo_url')?.invalid">{{'Please enter a valid URL'}}
-                    </mat-error>
-                </mat-form-field> -->
-
-                <!-- <mat-form-field class="field-full-width">
-                    <input matInput formControlName="documentation_url" placeholder="Documentation Url">
-                    <mat-error *ngIf="interviewForm?.get('documentation_url')?.invalid">{{'Please enter a valid URL'}}
-                    </mat-error>
-                </mat-form-field>
-
-                <mat-form-field class="field-full-width">
-                    <input matInput formControlName="video_url" placeholder="Video Url">
-                    <mat-error *ngIf="interviewForm?.get('video_url')?.invalid">{{'Please enter a valid URL'}}
-                    </mat-error>
-                </mat-form-field> -->
 
                 <mat-form-field class="field-full-width">
                     <mat-chip-list #tagsList>
@@ -94,16 +63,10 @@
                     </h6>
                     <br />
 
-                    <ng-container *ngIf="supportDescriptionFormControl?.value && edit; else addSupport">
-                        <app-editor [data]="supportDescriptionFormControl?.value"
-                            (output)="updateSupportDescription($event)" [id]="'edit-interview-support-editor'">
+                    <ng-container>
+                        <app-editor #supportDescriptionEditor [data]="supportDescriptionFormControl?.value" [id]="'edit-interview-support-editor'">
                         </app-editor>
                     </ng-container>
-
-                    <ng-template #addSupport>
-                        <app-editor (output)="updateSupportDescription($event)" [id]="'add-interview-support-editor'">
-                        </app-editor>
-                    </ng-template>
 
                 </div>
 

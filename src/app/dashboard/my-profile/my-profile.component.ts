@@ -10,7 +10,7 @@ import { VideoChatComponent } from '../../video-chat/video-chat.component';
 import { MatDialog } from '@angular/material';
 import Peer from 'peerjs';
 import { PostType } from '../../shared/models/post-types.enum';
-import { switchMap, tap } from 'rxjs/operators';
+import { switchMap, tap, map } from 'rxjs/operators';
 import { PostService } from '../../shared/services/post.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { Post } from '../../shared/models/post.model';
@@ -65,7 +65,6 @@ export class MyProfileComponent implements OnInit {
   authorId: string;
 
   userData$: Observable<User>;
-  porfileData: any;
 
   peer: Peer;
 
@@ -262,17 +261,12 @@ export class MyProfileComponent implements OnInit {
 
       this.initializeCommentForm(this.authorId, 'post');
 
-      this.subscription.add(
-        this.userService.getMyProfileInfo(this.authorId).subscribe(d => {
-          this.porfileData = d;
-        })
-      );
     } else {
       this.userData$ = this.authService.loggedInUser$;
 
       this.subscription.add(
         this.authService.loggedInUser$.pipe(
-          switchMap((user) => {
+          map((user) => {
             if (user) {
               this.fetchPostsConnectedWithUser(user._id);
               this.userService.onUsersPostChanges(user._id);
@@ -280,13 +274,6 @@ export class MyProfileComponent implements OnInit {
               this.commentService.onCommentUpdated({user}, []);
               this.commentService.onCommentDeleted({user}, []);
               this.initializeCommentForm(user._id, 'post');
-              return this.userService.getMyProfileInfo(user._id);
-            }
-            return of(null);
-          }),
-          tap((d) => {
-            if (d) {
-              this.porfileData = d;
             }
           })
         ).subscribe()

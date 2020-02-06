@@ -18,10 +18,8 @@ export interface User {
     cover?: string;
     roles?: Roles[];
     stripeId?: string;
+    createdAt?: string;
     subscription?: Subscription[];
-    businessAreaInterests?: Tag[];
-    leadershipAreaInterests?: Tag[];
-    socialImpactInterests?: Tag[];
 }
 
 interface Subscription {

@@ -52,18 +52,6 @@ export class UserService {
       _id
       status
     }
-    businessAreaInterests {
-      name
-      _id
-    }
-    leadershipAreaInterests {
-      name
-      _id
-    }
-    socialImpactInterests {
-      name
-      _id
-    }
   `;
 
   updateUserQuery = gql`
@@ -188,42 +176,6 @@ export class UserService {
         })
       ).subscribe();
     }
-
-  getMyProfileInfo(userId: string): Observable<any> {
-    return this.apollo.query(
-      {
-        query: gql`
-        query getMyProfileInfo($userId: String) {
-          getMyProfileInfo(userId: $userId) {
-            dreamJob {
-              ...Post
-            }
-            businessAreaInterests {
-              name
-              _id
-            }
-            leadershipAreaInterests {
-              name
-              _id
-            }
-            socialImpactInterests {
-              name
-              _id
-            }
-          }
-        }
-        ${appConstants.postQuery}
-      `,
-        variables: {
-          userId
-        }
-      }
-    ).pipe(
-      map((d: any) => {
-        return d.data.getMyProfileInfo;
-      })
-    );
-  }
 
   redirectToUserProfile(user: User) {
     this.router.navigate(['/', { outlets: { main: ['dashboard', 'profile', user._id] } }]);

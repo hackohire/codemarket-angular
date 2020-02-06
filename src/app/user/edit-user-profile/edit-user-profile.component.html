@@ -55,21 +55,13 @@
     </mat-form-field>
 
     <div formGroupName="currentJobDetails">
-        <mat-form-field class="field-full-width">
-            <input matInput formControlName="jobProfile" [value]="user?.currentJobDetails?.jobProfile"
-                placeholder="Current Job Profile">
-        </mat-form-field>
-
-        <mat-form-field class="field-full-width">
-            <input matInput formControlName="companyName" [value]="user?.currentJobDetails?.companyName"
-                placeholder="Company Name">
-        </mat-form-field>
-
-        <mat-form-field class="field-full-width">
-            <input matInput formControlName="companyLocation" [value]="user?.currentJobDetails?.companyLocation"
-                placeholder="Company Location">
-        </mat-form-field>
-
+        <ng-select [addTag]="addCompany" [items]="allCompanies"
+                        placeholder="Select Company" formControlName="company" bindLabel="name" bindValue="_id">
+        </ng-select>
+        <ng-select placeholder="Roles" [items]="roles$ | async" [hideSelected]="true"
+                    formControlName="jobProfile" [addTag]="formService?.addRoleFn" [bindLabel]="'name'"
+                    [minTermLength]="2" [loading]="rolesLoading" [multiple]="true" [typeahead]="roleInput$">
+        </ng-select>
     </div>
 
     <button mat-raised-button color="primary">Update Profile</button>

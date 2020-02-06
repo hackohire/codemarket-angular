@@ -218,7 +218,11 @@ export const appConstants = {
         name
         avatar
         currentJobDetails {
-          jobProfile
+          jobProfile {
+            name
+            _id
+            type
+          }
         }
       }
       purchasedBy {

@@ -166,9 +166,6 @@ export class AddJobComponent implements OnInit, OnDestroy {
       this.jobForm.addControl('referencePostId', new FormControl(referencePostId));
     }
 
-    this.salaryRangeFrom = this.jobForm.get('salaryRangeFrom').value;
-    this.salaryRangeTo = this.jobForm.get('salaryRangeTo').value;
-
     this.citySuggestions$ = concat(
       of([]), // default items
       this.cityInput$.pipe(

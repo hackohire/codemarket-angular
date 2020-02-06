@@ -13,7 +13,11 @@ export const productConstants = {
             avatar
             _id
             currentJobDetails {
-                jobProfile
+                jobProfile {
+                    name
+                    _id
+                    type
+                }
             }
         }
         type

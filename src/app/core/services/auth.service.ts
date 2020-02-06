@@ -84,8 +84,15 @@ export class AuthService {
               stackoverflow_url
               location
               currentJobDetails {
-                jobProfile
-                companyName
+                jobProfile {
+                  name
+                  _id
+                  type
+                }
+                company {
+                  name
+                  _id
+                }
                 companyLocation
               }
               subscription {

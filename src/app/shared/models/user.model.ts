@@ -1,4 +1,5 @@
 import { Tag } from './product.model';
+import { Company } from './company.model';
 
 export interface User {
     _id?: string;
@@ -47,7 +48,7 @@ enum Roles {
 }
 
 interface CurrentJobDetails {
-    jobProfile?: string;
-    companyName?: string;
-    companyLocation?: string;
+    jobProfile?: Tag [];
+    company?: Company;
+    // companyLocation?: string;
 }

@@ -169,7 +169,11 @@ fragment Comment on Comment {
     name
     avatar
     currentJobDetails {
-      jobProfile
+      jobProfile {
+        name
+        _id
+        type
+      }
     }
   }
   children {
@@ -183,7 +187,11 @@ fragment Comment on Comment {
       name
       avatar
       currentJobDetails {
-        jobProfile
+        jobProfile {
+          name
+          _id
+          type
+        }
       }
     }
     parentId

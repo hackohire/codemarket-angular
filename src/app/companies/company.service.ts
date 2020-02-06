@@ -251,7 +251,11 @@ export class CompanyService {
                 avatar
                 _id
                 currentJobDetails {
-                  jobProfile
+                  jobProfile {
+                    name
+                    _id
+                    type
+                  }
                 }
             }
           }

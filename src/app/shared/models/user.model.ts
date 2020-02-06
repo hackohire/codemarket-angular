@@ -19,6 +19,7 @@ export interface User {
     roles?: Roles[];
     stripeId?: string;
     createdAt?: string;
+    likeCount?: number;
     subscription?: Subscription[];
 }
 

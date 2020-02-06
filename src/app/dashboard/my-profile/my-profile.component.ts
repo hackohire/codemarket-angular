@@ -28,6 +28,7 @@ enum navLinkName {
   sell = 'sell',
   info = 'info',
   membership = 'membership',
+  posts = 'posts',
   myrsvp = 'my-rsvp',
   events = 'events',
   dreamjobs = 'dream-jobs',
@@ -79,12 +80,17 @@ export class MyProfileComponent implements OnInit {
   listOfEvents$: Observable<{ posts: Post[], total: number }>;
   listOfDreamJobs$: Observable<{ posts: Post[], total: number }>;
 
+  listOfAllOtherPosts: { posts: Post[], total?: number } = {posts: []};
+  totalOtherPosts: number;
+
   commentForm: FormGroup;
 
   @ViewChild('coverPic', { static: false }) coverPic;
   @ViewChild('cover', { static: false }) cover: ElementRef;
   selectedCoverPic: string = '';
   uploadedCoverUrl: string = '';
+
+  otherPostsPageNumber = 1;
 
   profileViewLinks = [
     // {
@@ -161,6 +167,10 @@ export class MyProfileComponent implements OnInit {
           title: 'Business Challenges'
         }
       ]
+    },
+    {
+      view: navLinkName.posts,
+      title: 'Posts'
     },
     {
       view: navLinkName.info,
@@ -261,6 +271,8 @@ export class MyProfileComponent implements OnInit {
 
       this.initializeCommentForm(this.authorId, 'post');
 
+      this.loadDataBasedOnViewType(this.profileView);
+
     } else {
       this.userData$ = this.authService.loggedInUser$;
 
@@ -274,12 +286,13 @@ export class MyProfileComponent implements OnInit {
               this.commentService.onCommentUpdated({user}, []);
               this.commentService.onCommentDeleted({user}, []);
               this.initializeCommentForm(user._id, 'post');
+
+              this.loadDataBasedOnViewType(this.profileView);
             }
           })
         ).subscribe()
       );
     }
-    this.createTabs();
 
     // this.userService.peer.subscribe((p) => {
     //   if (p) {
@@ -395,8 +408,11 @@ export class MyProfileComponent implements OnInit {
     } else {
       panel.toggle();
     }
+    this.loadDataBasedOnViewType(category.view);
+  }
 
-    switch (category.view) {
+  loadDataBasedOnViewType(view) {
+    switch (view) {
       case navLinkName.events:
         this.listOfEvents$ = this.postService.getPostsByUserIdAndType(
           this.authorId ? this.authorId : this.authService.loggedInUser._id,
@@ -413,7 +429,22 @@ export class MyProfileComponent implements OnInit {
         );
         break;
 
+      case navLinkName.posts:
+          this.fetchAllOtherPosts();
+          break;
+
     }
+  }
+
+    /** Fetch the list of posts for the posts tab based on the pagination */
+  fetchAllOtherPosts(postType = '') {
+    this.postService.getAllPosts(
+      { limit: 5, pageNumber: this.otherPostsPageNumber }, postType, '', '', '',
+      this.authorId ? this.authorId : this.authService.loggedInUser._id,
+    ).subscribe((u) => {
+      this.listOfAllOtherPosts.posts = this.listOfAllOtherPosts.posts.concat(u.posts);
+      this.totalOtherPosts = u.total;
+    });
   }
 
   fetchPostsConnectedWithUser(userId) {

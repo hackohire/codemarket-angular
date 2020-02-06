@@ -24,7 +24,8 @@
 								<!-- <a href="" class="pos">Reposition</a> -->
 								<a mat-button (click)="selectedCoverPic = null; updateCover(user?._id);"
 									class="save">Remove</a>
-								<a mat-button *ngIf="!user?.cover" (click)="updateCover(user?._id)" class="save">Update Cover</a>
+								<a mat-button *ngIf="!user?.cover" (click)="updateCover(user?._id)" class="save">Update
+									Cover</a>
 							</div>
 						</div>
 						<div class="image-upload-wrap" style="height: 300px;" *ngIf="!selectedCoverPic && !user?.cover">
@@ -118,6 +119,20 @@
 								<app-brief-post style="width: 100%;" [p]="e"
 									*ngFor="let e of (listOfDreamJobs$ | async)?.posts"></app-brief-post>
 							</div>
+
+							<!-- Showing the list of posts for the posts tab, everytime user clicks on the "load more", we increase the page number and call
+							fetchAllOtherPosts method to fetch subsequent posts -->
+							<ng-container *ngIf="profileView === navLinkName.posts">
+								<div class="item-grid pen-grid item-grid-large">
+									<app-brief-post style="width: 100%;" [p]="e"
+										*ngFor="let e of listOfAllOtherPosts?.posts"></app-brief-post>
+								</div>
+								<div class="pagination-area" *ngIf="listOfAllOtherPosts?.posts?.length < totalOtherPosts">
+									<span style="text-decoration: underline; cursor: pointer;"
+										(click)="otherPostsPageNumber = otherPostsPageNumber + 1; fetchAllOtherPosts('')">+ Load
+										More{{'(' + (totalOtherPosts - listOfAllOtherPosts?.posts?.length) + ')'}}</span>
+								</div>
+							</ng-container>
 
 							<div *ngIf="profileView === navLinkName.businesschallenge">
 								<ng-container

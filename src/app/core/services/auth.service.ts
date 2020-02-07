@@ -54,6 +54,7 @@ export class AuthService {
       console.log('Hub', data);
       if (channel === 'auth' && data.payload.event === 'signIn') {
         this.checkIfUserIsLoggedIn();
+        this.router.navigate(['/', 'dashboard', 'my-profile']);
       } else if (channel === 'auth' && data.payload.event === 'oAuthSignOut') {
         // localStorage.clear();
         this.store.dispatch(SetLoggedInUser({ payload: null }));

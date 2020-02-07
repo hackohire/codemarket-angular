@@ -62,7 +62,7 @@ export class ProductsListComponent implements OnInit, OnDestroy, AfterViewInit {
   selectedPostType = '';
 
   constructor(
-    public auth: AuthService,
+    public authService: AuthService,
     private store: Store<AppState>,
     private activatedRoute: ActivatedRoute,
     private productService: ProductService,
@@ -132,7 +132,7 @@ export class ProductsListComponent implements OnInit, OnDestroy, AfterViewInit {
           if (u) {
             this.store.dispatch(GetPostsByUserIdAndType(
               {
-                userId: this.auth.loggedInUser._id,
+                userId: this.authService.loggedInUser._id,
                 status,
                 postType: PostType.Product
               }));

@@ -196,7 +196,7 @@ export class ForgotPasswordComponentCore implements OnInit {
 	getforgotPwUsername() {
 		switch (this._usernameAttributes) {
 			case UsernameAttributes.EMAIL:
-				return this.email;
+				return this.email || this.username;
 			case UsernameAttributes.PHONE_NUMBER:
 				return composePhoneNumber(this.country_code, this.local_phone_number);
 			default:

@@ -1,4 +1,4 @@
-<app-breadcumb [title]="breadcumb?.title" [path]="breadcumb?.path"></app-breadcumb>
+<!-- <app-breadcumb [title]="breadcumb?.title" [path]="breadcumb?.path"></app-breadcumb> -->
 <div class="container">
     <div class="row">
         <div style="padding: 0" class="col-md-12">
@@ -119,9 +119,7 @@
                     <div class="sidebar-card card--filter">
                         <a class="card-title" href="#collapse2" role="button" data-toggle="collapse"
                             aria-expanded="false" aria-controls="collapse2">
-                            <h4>Filter Posts
-                                <span class="lnr lnr-chevron-down"></span>
-                            </h4>
+                            <app-add-post-menu style="color: #0674ec !important; margin-left: auto;"></app-add-post-menu>
                         </a>
                         <div class="collapse show collapsible-content" id="collapse2">
                             <ul class="card-content" style="list-style: none;">
@@ -178,16 +176,16 @@
                     </div>
                 </div>
 
-                <mat-paginator style="margin-bottom: 43px; border-radius: 6px;" [length]="length" [pageSize]="10"
-                    [pageSizeOptions]="[5, 10, 25, 100]">
-                </mat-paginator>
-
                 <!-- <div class="width-wrapper"> -->
                 <div class="item-grid pen-grid item-grid-large">
                     <!-- <ng-container > -->
                     <app-brief-post style="width: 100%;" [p]="p" *ngFor="let p of dataSource?.data"></app-brief-post>
                     <!-- </ng-container> -->
                 </div>
+
+                <mat-paginator style="margin-bottom: 43px; border-radius: 6px;" [length]="length" [pageSize]="10"
+                    [pageSizeOptions]="[5, 10, 25, 100]">
+                </mat-paginator>
             </div>
             <!-- </div> -->
         </div>

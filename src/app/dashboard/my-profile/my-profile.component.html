@@ -94,28 +94,46 @@
 						<div class="col-md-12">
 
 							<div *ngIf="profileView === navLinkName.buy">
+								<ng-container
+									*ngTemplateOutlet="postTemplate; context: { postType: '' }">
+								</ng-container>
 								<router-outlet></router-outlet>
 							</div>
 
 							<div *ngIf="profileView === navLinkName.sell">
+								<ng-container
+									*ngTemplateOutlet="postTemplate; context: { postType: '' }">
+								</ng-container>
 								<router-outlet></router-outlet>
 							</div>
 
 							<div *ngIf="profileView === navLinkName.membership">
+								<ng-container
+									*ngTemplateOutlet="postTemplate; context: { postType: '' }">
+								</ng-container>
 								<router-outlet></router-outlet>
 							</div>
 
 							<div *ngIf="profileView === navLinkName.myrsvp">
+								<ng-container
+									*ngTemplateOutlet="postTemplate; context: { postType: '' }">
+								</ng-container>
 								<router-outlet></router-outlet>
 							</div>
 
 							<div *ngIf="profileView === navLinkName.events" class="item-grid pen-grid item-grid-large">
+								<ng-container
+									*ngTemplateOutlet="postTemplate; context: { postType: '' }">
+								</ng-container>
 								<app-brief-post style="width: 100%;" [p]="e"
 									*ngFor="let e of (listOfEvents$ | async)?.posts"></app-brief-post>
 							</div>
 
 							<div *ngIf="profileView === navLinkName.dreamjobs"
 								class="item-grid pen-grid item-grid-large">
+								<ng-container
+									*ngTemplateOutlet="postTemplate; context: { postType: '' }">
+								</ng-container>
 								<app-brief-post style="width: 100%;" [p]="e"
 									*ngFor="let e of (listOfDreamJobs$ | async)?.posts"></app-brief-post>
 							</div>
@@ -123,13 +141,18 @@
 							<!-- Showing the list of posts for the posts tab, everytime user clicks on the "load more", we increase the page number and call
 							fetchAllOtherPosts method to fetch subsequent posts -->
 							<ng-container *ngIf="profileView === navLinkName.posts">
+								<ng-container
+									*ngTemplateOutlet="postTemplate; context: { postType: '' }">
+								</ng-container>
 								<div class="item-grid pen-grid item-grid-large">
 									<app-brief-post style="width: 100%;" [p]="e"
 										*ngFor="let e of listOfAllOtherPosts?.posts"></app-brief-post>
 								</div>
-								<div class="pagination-area" *ngIf="listOfAllOtherPosts?.posts?.length < totalOtherPosts">
+								<div class="pagination-area"
+									*ngIf="listOfAllOtherPosts?.posts?.length < totalOtherPosts">
 									<span style="text-decoration: underline; cursor: pointer;"
-										(click)="otherPostsPageNumber = otherPostsPageNumber + 1; fetchAllOtherPosts('')">+ Load
+										(click)="otherPostsPageNumber = otherPostsPageNumber + 1; fetchAllOtherPosts('')">+
+										Load
 										More{{'(' + (totalOtherPosts - listOfAllOtherPosts?.posts?.length) + ')'}}</span>
 								</div>
 							</ng-container>
@@ -172,6 +195,9 @@
 							</div>
 
 							<div *ngIf="profileView === navLinkName?.info && (userData$) | async as user">
+								<ng-container
+									*ngTemplateOutlet="postTemplate; context: { postType: '' }">
+								</ng-container>
 								<div class="col-lg-12 col-md-12">
 									<aside class="common-box-shadow sidebar sidebar_author">
 										<div class="author-card sidebar-card">

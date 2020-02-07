@@ -141,10 +141,7 @@ export class EditUserProfileComponent implements OnInit {
   }
 
   onFilesAdded() {
-    // const files: { [key: string]: File } = this.file.nativeElement.files;
     const pic: File = this.profilePic.nativeElement.files[0];
-    console.log(pic);
-
     const fileNameSplitArray = pic.name.split('.');
     const fileExt = fileNameSplitArray.pop();
     const fileName = fileNameSplitArray[0] + '-' + new Date().toISOString() + '.' + fileExt;
@@ -158,15 +155,11 @@ export class EditUserProfileComponent implements OnInit {
       contentType: pic.type,
 
     }).then((uploaded: any) => {
-      console.log(uploaded);
       console.log('uploaded', uploaded);
       this.avatar.setValue(uploaded.key);
     });
 
-
     this.profilePic.nativeElement.value = null;
-
-    // console.log(this.files);
   }
 
   addCompany = (name: string) => {

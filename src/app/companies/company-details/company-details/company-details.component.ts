@@ -46,10 +46,12 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
   companyDetails$: Observable<Company>;
   usersInterestedInCompany: User[];
   companyView: string;
-  @ViewChild('coverPic', { static: false }) coverPic;
+
+    @ViewChild('coverPic', { static: false }) coverPic;
   @ViewChild('cover', { static: false }) cover: ElementRef;
-  selectedCoverPic: string = '';
-  uploadedCoverUrl: string = '';
+  selectedCoverPic: File;
+  selectedCoverPicURL = '';
+  uploadedCoverUrl = '';
 
 
 
@@ -449,36 +451,29 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
 
   /** On Picture Added */
   onFilesAdded() {
-    // const files: { [key: string]: File } = this.file.nativeElement.files;
     const pic: File = this.coverPic.nativeElement.files[0];
-    this.selectedCoverPic = window.URL.createObjectURL(pic);
+    this.selectedCoverPic = pic;
+    this.selectedCoverPicURL = URL.createObjectURL(pic);
     console.log(pic);
-
-    const fileNameSplitArray = pic.name.split('.');
-    const fileExt = fileNameSplitArray.pop();
-    const fileName = fileNameSplitArray[0] + '-' + new Date().toISOString() + '.' + fileExt;
-
-    Storage.vault.put(fileName, pic, {
-
-      bucket: appConstants.fileS3Bucket,
-      path: 'cover',
-      level: 'public',
-
-      contentType: pic.type,
-
-    }).then((uploaded: any) => {
-      console.log(uploaded);
-      console.log('uploaded', uploaded);
-      this.uploadedCoverUrl = uploaded.key;
-    });
-
-
-    // this.coverPic.nativeElement.value = null;
-
-    // console.log(this.files);
   }
 
-  updateCover() {
+  async updateCover() {
+    if (this.selectedCoverPic) {
+      const fileNameSplitArray = this.selectedCoverPic.name.split('.');
+      const fileExt = fileNameSplitArray.pop();
+      const fileName = fileNameSplitArray[0] + '-' + new Date().toISOString() + '.' + fileExt;
+      await Storage.vault.put(fileName, this.selectedCoverPic, {
+
+        bucket: appConstants.fileS3Bucket,
+        path: 'cover',
+        level: 'public',
+        contentType: this.selectedCoverPic.type,
+      }).then((uploaded: any) => {
+        console.log('uploaded', uploaded);
+        this.uploadedCoverUrl = uploaded.key;
+      });
+    }
+
     const companyDetails = {
       _id: this.companyDetails._id,
       name: this.companyDetails.name,
@@ -487,9 +482,20 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
     this.companyService.updateCompany(companyDetails).subscribe(c => {
       this.companyDetails = c;
       this.companyDetails$ = of(c);
-      this.updateCover = null;
-      this.uploadedCoverUrl = null;
+      this.selectedCoverPic = null;
+      this.selectedCoverPicURL = '';
+      this.uploadedCoverUrl = '';
     });
+  }
+
+  removeCover(userId: string) {
+    if (this.selectedCoverPic) {
+      this.selectedCoverPic = null;
+      this.selectedCoverPicURL = null;
+      return;
+    }
+    this.uploadedCoverUrl = null;
+    this.updateCover();
   }
 
   openDialog(): void {

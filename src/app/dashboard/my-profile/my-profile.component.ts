@@ -80,15 +80,20 @@ export class MyProfileComponent implements OnInit {
   listOfEvents$: Observable<{ posts: Post[], total: number }>;
   listOfDreamJobs$: Observable<{ posts: Post[], total: number }>;
 
-  listOfAllOtherPosts: { posts: Post[], total?: number } = {posts: []};
+  listOfAllOtherPosts: { posts: Post[], total?: number } = { posts: [] };
   totalOtherPosts: number;
 
   commentForm: FormGroup;
 
   @ViewChild('coverPic', { static: false }) coverPic;
   @ViewChild('cover', { static: false }) cover: ElementRef;
-  selectedCoverPic: string = '';
-  uploadedCoverUrl: string = '';
+  selectedCoverPic: File;
+  selectedCoverPicURL = '';
+  uploadedCoverUrl = '';
+
+  @ViewChild('profilePic', { static: false }) profilePic;
+  selectedProfilePic: File;
+  selectedProfilePicURL = '';
 
   otherPostsPageNumber = 1;
 
@@ -214,7 +219,7 @@ export class MyProfileComponent implements OnInit {
 
   async addPost(type: string, addPostEditor: EditorComponent) {
     if (this.authService.loggedInUser) {
-      const blocks =  await addPostEditor.editor.save();
+      const blocks = await addPostEditor.editor.save();
       const post: any = {
         type,
         createdBy: this.authService.loggedInUser._id,
@@ -245,7 +250,7 @@ export class MyProfileComponent implements OnInit {
   }
 
   async updatePost(post, singlePostEditor: EditorComponent) {
-    const blocks =  await singlePostEditor.editor.save();
+    const blocks = await singlePostEditor.editor.save();
     const postToBeUpdated = {};
     postToBeUpdated['description'] = blocks.blocks;
     postToBeUpdated['_id'] = post._id;
@@ -265,9 +270,9 @@ export class MyProfileComponent implements OnInit {
       this.fetchPostsConnectedWithUser(this.authorId);
 
       this.userService.onUsersPostChanges(this.authorId);
-      this.commentService.onCommentAdded({user: {_id: this.authorId}}, []);
-      this.commentService.onCommentUpdated({user: {_id: this.authorId}}, []);
-      this.commentService.onCommentDeleted({user: {_id: this.authorId}}, []);
+      this.commentService.onCommentAdded({ user: { _id: this.authorId } }, []);
+      this.commentService.onCommentUpdated({ user: { _id: this.authorId } }, []);
+      this.commentService.onCommentDeleted({ user: { _id: this.authorId } }, []);
 
       this.initializeCommentForm(this.authorId, 'post');
 
@@ -282,9 +287,9 @@ export class MyProfileComponent implements OnInit {
             if (user) {
               this.fetchPostsConnectedWithUser(user._id);
               this.userService.onUsersPostChanges(user._id);
-              this.commentService.onCommentAdded({user}, []);
-              this.commentService.onCommentUpdated({user}, []);
-              this.commentService.onCommentDeleted({user}, []);
+              this.commentService.onCommentAdded({ user }, []);
+              this.commentService.onCommentUpdated({ user }, []);
+              this.commentService.onCommentDeleted({ user }, []);
               this.initializeCommentForm(user._id, 'post');
 
               this.loadDataBasedOnViewType(this.profileView);
@@ -380,11 +385,11 @@ export class MyProfileComponent implements OnInit {
   async addComment(postId = '', addCommentEditor: EditorComponent) {
     console.log(this.commentForm.value);
     if (this.authService.loggedInUser) {
-      const blocks =  await addCommentEditor.editor.save();
+      const blocks = await addCommentEditor.editor.save();
       this.commentForm.get('text').setValue(blocks.blocks);
 
       this.commentForm.addControl('createdBy', new FormControl(this.authService.loggedInUser._id));
-      this.commentForm.patchValue({referenceId: postId});
+      this.commentForm.patchValue({ referenceId: postId });
       this.subscription.add(
         this.commentService.addComment(this.commentForm.value).subscribe(c => {
           if (c) {
@@ -430,13 +435,13 @@ export class MyProfileComponent implements OnInit {
         break;
 
       case navLinkName.posts:
-          this.fetchAllOtherPosts();
-          break;
+        this.fetchAllOtherPosts();
+        break;
 
     }
   }
 
-    /** Fetch the list of posts for the posts tab based on the pagination */
+  /** Fetch the list of posts for the posts tab based on the pagination */
   fetchAllOtherPosts(postType = '') {
     this.postService.getAllPosts(
       { limit: 5, pageNumber: this.otherPostsPageNumber }, postType, '', '', '',
@@ -456,48 +461,107 @@ export class MyProfileComponent implements OnInit {
     });
   }
 
-  /** On Picture Added */
-  onFilesAdded() {
-    // const files: { [key: string]: File } = this.file.nativeElement.files;
-    const pic: File = this.coverPic.nativeElement.files[0];
-    this.selectedCoverPic = window.URL.createObjectURL(pic);
-    console.log(pic);
-
-    const fileNameSplitArray = pic.name.split('.');
-    const fileExt = fileNameSplitArray.pop();
-    const fileName = fileNameSplitArray[0] + '-' + new Date().toISOString() + '.' + fileExt;
-
-    Storage.vault.put(fileName, pic, {
-
-      bucket: appConstants.fileS3Bucket,
-      path: 'cover',
-      level: 'public',
-
-      contentType: pic.type,
-
-    }).then((uploaded: any) => {
-      console.log(uploaded);
-      console.log('uploaded', uploaded);
-      this.uploadedCoverUrl = uploaded.key;
-    });
-
-
-    // this.coverPic.nativeElement.value = null;
-
-    // console.log(this.files);
+  addProfilePic() {
+    this.profilePic.nativeElement.click();
   }
 
-  updateCover(userId: string) {
+  onProfilePicAdded() {
+    const pic: File = this.profilePic.nativeElement.files[0];
+    this.selectedProfilePic = pic;
+    this.selectedProfilePicURL = URL.createObjectURL(pic);
+  }
+
+  async updateProfilePicture(userId) {
+    let uploadedProfilePicURL = '';
+
+    if (this.selectedProfilePic) {
+      const fileNameSplitArray = this.selectedProfilePic.name.split('.');
+      const fileExt = fileNameSplitArray.pop();
+      const fileName = fileNameSplitArray[0] + '-' + new Date().toISOString() + '.' + fileExt;
+
+      await Storage.vault.put(fileName, this.selectedProfilePic, {
+
+        bucket: appConstants.fileS3Bucket,
+        path: 'avatar',
+        level: 'public',
+        contentType: this.selectedProfilePic.type,
+      }).then((uploaded: any) => {
+        console.log('uploaded', uploaded);
+        uploadedProfilePicURL = uploaded.key;
+      });
+    }
+
     const userDetails = {
       _id: userId,
-      cover: this.uploadedCoverUrl
+      avatar: uploadedProfilePicURL
     };
+
     this.userService.updateUser(userDetails).subscribe((u) => {
-      if(u) {
+      if (u) {
         this.userData$ = of(u);
+        this.selectedProfilePic = null;
+        this.selectedProfilePicURL = '';
       }
     });
   }
 
+  removeProfilePic(userId: string) {
+    if (this.selectedProfilePic) {
+      this.selectedProfilePic = null;
+      this.selectedProfilePicURL = null;
+      return;
+    }
+    this.updateProfilePicture(userId);
+  }
+
+  /** On Picture Added */
+  onFilesAdded() {
+    const pic: File = this.coverPic.nativeElement.files[0];
+    this.selectedCoverPic = pic;
+    this.selectedCoverPicURL = URL.createObjectURL(pic);
+    console.log(pic);
+  }
+
+  async updateCover(userId: string) {
+    if (this.selectedCoverPic) {
+      const fileNameSplitArray = this.selectedCoverPic.name.split('.');
+      const fileExt = fileNameSplitArray.pop();
+      const fileName = fileNameSplitArray[0] + '-' + new Date().toISOString() + '.' + fileExt;
+      await Storage.vault.put(fileName, this.selectedCoverPic, {
+
+        bucket: appConstants.fileS3Bucket,
+        path: 'cover',
+        level: 'public',
+        contentType: this.selectedCoverPic.type,
+      }).then((uploaded: any) => {
+        console.log('uploaded', uploaded);
+        this.uploadedCoverUrl = uploaded.key;
+      });
+    }
+
+    const userDetails = {
+      _id: userId,
+      cover: this.uploadedCoverUrl
+    };
+
+    this.userService.updateUser(userDetails).subscribe((u) => {
+      if (u) {
+        this.userData$ = of(u);
+        this.selectedCoverPic = null;
+        this.selectedCoverPicURL = '';
+        this.uploadedCoverUrl = '';
+      }
+    });
+  }
+
+  removeCover(userId: string) {
+    if (this.selectedCoverPic) {
+      this.selectedCoverPic = null;
+      this.selectedCoverPicURL = null;
+      return;
+    }
+    this.uploadedCoverUrl = null;
+    this.updateCover(userId);
+  }
 
 }

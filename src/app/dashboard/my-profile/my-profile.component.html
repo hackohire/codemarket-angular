@@ -3,54 +3,55 @@
 
 
 
-	<section style="padding: 35px;" class="author-profile-area">
-		<div class="container">
+	<section style="padding-top: 35px;" class="author-profile-area">
+		<div class="container" style="margin: auto;">
 			<div class="container" style="margin-top: 0; margin-bottom: 15px;">
 
 				<div class="row">
 					<div class="col-lg-3 col-md-3 col-sm-3 align-items-center justify-content-center"
 						style="margin: auto;">
-						<div class="avatar-circle" style="margin: auto;">
-							<img
-								[src]="user?.avatar ? ((s3FilesBucketURL + user?.avatar) | safe: 'resourceUrl') : anonymousAvatar">
+						<div class="profile-picture">
+							<div class="user-info">
+								<div class="profile-pic">
+									<img
+										[src]="selectedProfilePicURL ? (selectedProfilePicURL | safe: 'resourceUrl') : user?.avatar ? ((s3FilesBucketURL + user?.avatar) | safe: 'resourceUrl') : anonymousAvatar" />
+									<div class="layer">
+										<div class="loader"></div>
+									</div>
+									<a class="image-wrapper">
+										<mat-icon class="edit glyphicon glyphicon-pencil" (click)="addProfilePic()">edit</mat-icon>
+										<mat-icon class="edit glyphicon glyphicon-pencil" (click)="removeProfilePic(user?._id)">delete</mat-icon>
+									</a>
+								</div>
+							</div>
+							<input type="file" #profilePic style="display: none" (change)="onProfilePicAdded()" />
+						</div>
+						<div style="display: flex;">
+							<button *ngIf="selectedProfilePic" style="margin: auto;" type="button" class="btn btn--vsm btn--round"
+								(click)="updateProfilePicture(user?._id)">Update</button>
 						</div>
 						<h4 style="text-align: center; padding-top: 10px;">{{user?.name}}</h4>
 					</div>
-					<div class="col-lg-9 col-md-9 col-sm-9" *ngIf="user?._id === authService?.loggedInUser?._id">
-						<div class="picture-container" *ngIf="selectedCoverPic || user?.cover">
-							<img #cover draggable="true" scroll="false" id="cover" data-top="0" data-left="0"
-								[src]="selectedCoverPic ? (selectedCoverPic | safe: 'resourceUrl') : ((s3FilesBucketURL + user?.cover) | safe: 'resourceUrl')">
+					<div class="col-lg-9 col-md-9 col-sm-9" style="padding: 0;">
+						<div class="picture-container" *ngIf="selectedCoverPic?.name || user?.cover">
+
+							<img #cover
+								[src]="selectedCoverPic ? (selectedCoverPicURL | safe: 'resourceUrl') : ((s3FilesBucketURL + user?.cover) | safe: 'resourceUrl')">
+
 							<div class="controls" *ngIf="user?._id === authService?.loggedInUser?._id">
-								<!-- <a href="" class="pos">Reposition</a> -->
-								<a mat-button (click)="selectedCoverPic = null; updateCover(user?._id);"
-									class="save">Remove</a>
-								<a mat-button *ngIf="!user?.cover" (click)="updateCover(user?._id)" class="save">Update
+								<a mat-button style="background-color: #ff00007a;" (click)="removeCover(user?._id);" class="save">Remove</a>
+								<a mat-button style="background-color: #0674ec" *ngIf="!user?.cover" (click)="updateCover(user?._id)" class="save">Upload
 									Cover</a>
 							</div>
+
 						</div>
-						<div class="image-upload-wrap" style="height: 300px;" *ngIf="!selectedCoverPic && !user?.cover">
+						<div class="image-upload-wrap" style="height: 300px;"
+							*ngIf="user?._id === authService?.loggedInUser?._id && !selectedCoverPic && !user?.cover">
 							<input #coverPic class="file-upload-input" type='file' (change)="onFilesAdded()"
 								accept="image/*" />
 							<div class="drag-text">
-								<h3>Drag and drop a file or select add Image</h3>
+								<h3>Drag and drop a file or select add Image 685w x 300h</h3>
 							</div>
-						</div>
-
-						<div>
-							<!-- <div #fileUpload class="file-upload" style="height: 312px; width: 820px">
-				<div class="image-upload-wrap" *ngIf="!selectedCoverPic">
-					<input #coverPic class="file-upload-input" type='file' (change)="onFilesAdded()"
-						accept="image/*" />
-					<div class="drag-text">
-						<h3>Drag and drop a file or select add Image</h3>
-					</div>
-				</div>
-				<div class="file-upload-content" *ngIf="selectedCoverPic">
-					<img (drag)="resize($event)" class="file-upload-image" [src]="selectedCoverPic | safe: 'resourceUrl'" alt="your image" />
-					<div class="image-title-wrap">
-					</div>
-				</div>
-			</div> -->
 						</div>
 					</div>
 				</div>
@@ -94,36 +95,31 @@
 						<div class="col-md-12">
 
 							<div *ngIf="profileView === navLinkName.buy">
-								<ng-container
-									*ngTemplateOutlet="postTemplate; context: { postType: '' }">
+								<ng-container *ngTemplateOutlet="postTemplate; context: { postType: '' }">
 								</ng-container>
 								<router-outlet></router-outlet>
 							</div>
 
 							<div *ngIf="profileView === navLinkName.sell">
-								<ng-container
-									*ngTemplateOutlet="postTemplate; context: { postType: '' }">
+								<ng-container *ngTemplateOutlet="postTemplate; context: { postType: '' }">
 								</ng-container>
 								<router-outlet></router-outlet>
 							</div>
 
 							<div *ngIf="profileView === navLinkName.membership">
-								<ng-container
-									*ngTemplateOutlet="postTemplate; context: { postType: '' }">
+								<ng-container *ngTemplateOutlet="postTemplate; context: { postType: '' }">
 								</ng-container>
 								<router-outlet></router-outlet>
 							</div>
 
 							<div *ngIf="profileView === navLinkName.myrsvp">
-								<ng-container
-									*ngTemplateOutlet="postTemplate; context: { postType: '' }">
+								<ng-container *ngTemplateOutlet="postTemplate; context: { postType: '' }">
 								</ng-container>
 								<router-outlet></router-outlet>
 							</div>
 
 							<div *ngIf="profileView === navLinkName.events" class="item-grid pen-grid item-grid-large">
-								<ng-container
-									*ngTemplateOutlet="postTemplate; context: { postType: '' }">
+								<ng-container *ngTemplateOutlet="postTemplate; context: { postType: '' }">
 								</ng-container>
 								<app-brief-post style="width: 100%;" [p]="e"
 									*ngFor="let e of (listOfEvents$ | async)?.posts"></app-brief-post>
@@ -131,8 +127,7 @@
 
 							<div *ngIf="profileView === navLinkName.dreamjobs"
 								class="item-grid pen-grid item-grid-large">
-								<ng-container
-									*ngTemplateOutlet="postTemplate; context: { postType: '' }">
+								<ng-container *ngTemplateOutlet="postTemplate; context: { postType: '' }">
 								</ng-container>
 								<app-brief-post style="width: 100%;" [p]="e"
 									*ngFor="let e of (listOfDreamJobs$ | async)?.posts"></app-brief-post>
@@ -141,8 +136,7 @@
 							<!-- Showing the list of posts for the posts tab, everytime user clicks on the "load more", we increase the page number and call
 							fetchAllOtherPosts method to fetch subsequent posts -->
 							<ng-container *ngIf="profileView === navLinkName.posts">
-								<ng-container
-									*ngTemplateOutlet="postTemplate; context: { postType: '' }">
+								<ng-container *ngTemplateOutlet="postTemplate; context: { postType: '' }">
 								</ng-container>
 								<div class="item-grid pen-grid item-grid-large">
 									<app-brief-post style="width: 100%;" [p]="e"
@@ -195,8 +189,7 @@
 							</div>
 
 							<div *ngIf="profileView === navLinkName?.info && (userData$) | async as user">
-								<ng-container
-									*ngTemplateOutlet="postTemplate; context: { postType: '' }">
+								<ng-container *ngTemplateOutlet="postTemplate; context: { postType: '' }">
 								</ng-container>
 								<div class="col-lg-12 col-md-12">
 									<aside class="common-box-shadow sidebar sidebar_author">

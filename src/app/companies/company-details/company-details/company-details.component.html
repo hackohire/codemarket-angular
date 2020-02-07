@@ -31,40 +31,28 @@
                     </div>
                     <h4 style="text-align: center; padding-top: 10px;">{{details?.name}}</h4>
                 </div>
-                <div class="col-lg-9 col-md-9 col-sm-9"
-                    *ngIf=" details?.cover || details?.createdBy?._id === authService?.loggedInUser?._id">
-                    <div class="picture-container" *ngIf="selectedCoverPic || details?.cover">
-                        <img #cover draggable="true" scroll="false" id="cover" data-top="0" data-left="0"
-                            [src]="selectedCoverPic ? (selectedCoverPic | safe: 'resourceUrl') : ((s3FilesBucketURL + details?.cover) | safe: 'resourceUrl')">
+                <div class="col-lg-9 col-md-9 col-sm-9" style="padding: 0;">
+                    <div class="picture-container" *ngIf="selectedCoverPic || companyDetails?.cover">
+
+                        <img #cover
+                            [src]="selectedCoverPic ? (selectedCoverPicURL | safe: 'resourceUrl') : ((s3FilesBucketURL + details?.cover) | safe: 'resourceUrl')">
+
                         <div class="controls" *ngIf="details?.createdBy?._id === authService?.loggedInUser?._id">
-                            <!-- <a href="" class="pos">Reposition</a> -->
-                            <a mat-button (click)="selectedCoverPic = null; updateCover();" class="save">Remove</a>
-                            <a mat-button (click)="updateCover()" class="save">Update Cover</a>
+                            <a mat-button style="background-color: #ff00007a;" (click)="removeCover();"
+                                class="save">Remove</a>
+                            <a mat-button style="background-color: #0674ec" *ngIf="!details?.cover"
+                                (click)="updateCover()" class="save">Upload
+                                Cover</a>
                         </div>
+
                     </div>
-                    <div class="image-upload-wrap" style="height: 300px;" *ngIf="!selectedCoverPic && !details?.cover">
-                        <input #coverPic class="file-upload-input" type='file' (change)="onFilesAdded()"
+                    <div class="image-upload-wrap" style="height: 300px;"
+                        *ngIf="!selectedCoverPic && details?.createdBy?._id === authService?.loggedInUser?._id && !details?.cover">
+                        <input #coverPic class="file-upload-input" type="file" (change)="onFilesAdded()"
                             accept="image/*" />
                         <div class="drag-text">
-                            <h3>Drag and drop a file or select add Image</h3>
+                            <h3>Drag and drop a file or select add Image 685w x 300h</h3>
                         </div>
-                    </div>
-
-                    <div>
-                        <!-- <div #fileUpload class="file-upload" style="height: 312px; width: 820px">
-                            <div class="image-upload-wrap" *ngIf="!selectedCoverPic">
-                                <input #coverPic class="file-upload-input" type='file' (change)="onFilesAdded()"
-                                    accept="image/*" />
-                                <div class="drag-text">
-                                    <h3>Drag and drop a file or select add Image</h3>
-                                </div>
-                            </div>
-                            <div class="file-upload-content" *ngIf="selectedCoverPic">
-                                <img (drag)="resize($event)" class="file-upload-image" [src]="selectedCoverPic | safe: 'resourceUrl'" alt="your image" />
-                                <div class="image-title-wrap">
-                                </div>
-                            </div>
-                        </div> -->
                     </div>
                 </div>
             </div>
@@ -80,8 +68,7 @@
                             <div *ngFor="let category of companyViewLinks; let last = last;">
                                 <button cdkAccordionItem #panel="cdkAccordionItem"
                                     [expanded]="category?.types ? (category) : false"
-                                    (click)="selectMainCategory(category, panel)"
-                                    class="docs-nav-content-btn"
+                                    (click)="selectMainCategory(category, panel)" class="docs-nav-content-btn"
                                     [ngClass]="companyView === category.view ? 'docs-component-viewer-sidenav-item-selected' : ''"
                                     [attr.aria-controls]="'panel-' + category.view"
                                     [attr.aria-expanded]="panel.expanded">
@@ -92,7 +79,8 @@
                                 </button>
                                 <mat-nav-list dense [@bodyExpansion]="panel.expanded ? 'expanded' : 'collapsed'"
                                     id="panel-{{category.view}}" [attr.aria-label]="category.view">
-                                    <a mat-list-item *ngFor="let component of category?.types" (click)="selectMainCategory(component, panel)"
+                                    <a mat-list-item *ngFor="let component of category?.types"
+                                        (click)="selectMainCategory(component, panel)"
                                         [ngClass]="component.view === companyView ? 'docs-component-viewer-sidenav-item-selected': ''"
                                         [attr.aria-current]="companyView === component.view ? 'page': 'false'">
                                         {{component.title}}
@@ -236,7 +224,9 @@
                     </div>
 
                     <div *ngIf="details?.createdBy?.name && companyView === 'creator'" class="author-card sidebar-card">
-                        <ng-container *ngTemplateOutlet="addCompanypostTemplate; context: { details: details, postType: 'company-post'}"></ng-container>
+                        <ng-container
+                            *ngTemplateOutlet="addCompanypostTemplate; context: { details: details, postType: 'company-post'}">
+                        </ng-container>
                         <div class="card-title">
                             <h4>Author Information</h4>
                         </div>
@@ -299,7 +289,9 @@
                     <!-- end /.author-card -->
 
                     <aside *ngIf="companyView === 'info'" class="sidebar sidebar--single-product">
-                        <ng-container *ngTemplateOutlet="addCompanypostTemplate; context: { details: details, postType: 'company-post'}"></ng-container>
+                        <ng-container
+                            *ngTemplateOutlet="addCompanypostTemplate; context: { details: details, postType: 'company-post'}">
+                        </ng-container>
                         <div class="sidebar-card card--product-infos">
                             <div class="card-title">
                                 <h4>Information</h4>
@@ -334,13 +326,15 @@
                     </aside>
                     <!-- end /.aside -->
                     <div *ngIf="companyView === 'interested-people'">
-                        <ng-container *ngTemplateOutlet="addCompanypostTemplate; context: { details: details, postType: 'company-post'}"></ng-container>
+                        <ng-container
+                            *ngTemplateOutlet="addCompanypostTemplate; context: { details: details, postType: 'company-post'}">
+                        </ng-container>
                         <div class="author-card sidebar-card">
                             <div class="card-title">
                                 <h4>Interested Professionals:
                                     {{ details?.usersInterestedInCompany?.length }}</h4>
                                 <br />
-    
+
                                 <ng-container class="row" *ngFor="let userInterested of usersInterestedInCompany">
                                     <div class="col-md-12" style="margin-bottom: 10px;">
                                         <div class="author_avatar_comment" style="vertical-align: middle;">
@@ -352,13 +346,14 @@
                                                 <p class="name">
                                                     {{userInterested?.name}}
                                                 </p>
-                                                <p style="color: lightgray;">{{userInterested?.currentJobDetails?.jobProfile ? userInterested?.currentJobDetails?.jobProfile : '-'}}
+                                                <p style="color: lightgray;">
+                                                    {{userInterested?.currentJobDetails?.jobProfile ? userInterested?.currentJobDetails?.jobProfile : '-'}}
                                                 </p>
                                             </a>
                                             <!-- <p class="ammount">{{fromNow(pu?.createdAt)}}</p> -->
                                         </div>
                                     </div>
-    
+
                                 </ng-container>
                             </div>
                         </div>
@@ -380,28 +375,28 @@
 </ng-container>
 
 <ng-template #addCompanypostTemplate let-cDetails="details" let-postType="postType">
-        <div class="comment-form-area" style="padding: 0;">
-            <div class="media comment-form">
-                <div class="media-left">
-                    <a href="#">
-                        <img class="author_avatar_comment" style="height: 45px; width:45px;"
-                            [src]="authService?.loggedInUser?.avatar ? ((s3FilesBucketURL + authService?.loggedInUser?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
-                            alt="Commentator Avatar">
-                    </a>
-                </div>
-                <div class="media-body">
-                    <div class="comment-reply-form">
-                        <!---------------- ADD POST EDITOR --------------->
-                        <app-editor #addPostEditor [placeholder]="'Add '+ postType"
-                            [editorStyle]="{background: 'white', 'padding': '20px 35px', 'min-height': '130px', 'border-radius': '6px'}"
-                            [id]="'editor' + postType"></app-editor>
+    <div class="comment-form-area" style="padding: 0;">
+        <div class="media comment-form">
+            <div class="media-left">
+                <a href="#">
+                    <img class="author_avatar_comment" style="height: 45px; width:45px;"
+                        [src]="authService?.loggedInUser?.avatar ? ((s3FilesBucketURL + authService?.loggedInUser?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                        alt="Commentator Avatar">
+                </a>
+            </div>
+            <div class="media-body">
+                <div class="comment-reply-form">
+                    <!---------------- ADD POST EDITOR --------------->
+                    <app-editor #addPostEditor [placeholder]="'Add '+ postType"
+                        [editorStyle]="{background: 'white', 'padding': '20px 35px', 'min-height': '130px', 'border-radius': '6px'}"
+                        [id]="'editor' + postType"></app-editor>
 
-                        <button style="float: right; margin-top: 10px; margin-bottom: 20px;" type="button"
-                            class="btn btn--sm btn--round" (click)="addPost(postType, addPostEditor)">Post</button>
-                    </div>
+                    <button style="float: right; margin-top: 10px; margin-bottom: 20px;" type="button"
+                        class="btn btn--sm btn--round" (click)="addPost(postType, addPostEditor)">Post</button>
                 </div>
             </div>
         </div>
+    </div>
 
 </ng-template>
 
@@ -453,8 +448,9 @@
                         <p>
                             <!---------------- SINGLE POST EDITOR --------------->
                             <app-editor #singlePostEditor [editorStyle]="{background: 'white'}" [data]="c?.description"
-                                [companyPostId]="cDetails._id" [id]="'post' + c?._id" [readOnly]="!c['__edit']" [blockLevelComments]="true"
-                                [commentType]="'post'" [companyPostId]="c?._id" [post]="c" [commentsList]="c?.comments">
+                                [companyPostId]="cDetails._id" [id]="'post' + c?._id" [readOnly]="!c['__edit']"
+                                [blockLevelComments]="true" [commentType]="'post'" [companyPostId]="c?._id" [post]="c"
+                                [commentsList]="c?.comments">
                             </app-editor>
                         </p>
                         <span><span class="fa fa-search-plus"></span></span>
@@ -483,7 +479,8 @@
                 <!-- <div class="box-click"><span><i class="ion-chatbox-working"></i> View 140 more comments</span></div> -->
                 <div class="box-comments">
                     <div class="thread">
-                        <ul class="media-list thread-list" style="border-top: 1px solid #f4f4f4; padding: 10px 30px 0px 30px; list-style: none;">
+                        <ul class="media-list thread-list"
+                            style="border-top: 1px solid #f4f4f4; padding: 10px 30px 0px 30px; list-style: none;">
                             <div *ngFor="let com of c?.comments">
                                 <li *ngIf="!com?.blockSpecificComment" class="single-thread">
                                     <app-comment [comment]="com"></app-comment>
@@ -590,7 +587,8 @@
             </div>
         </div>
     </div>
-    <div class="tab-pane product-tab" *ngIf="questionsList?.length" id="product-faq" style="background: white; margin-top: 20px;">
+    <div class="tab-pane product-tab" *ngIf="questionsList?.length" id="product-faq"
+        style="background: white; margin-top: 20px;">
         <div class="tab-content-wrapper">
             <h4 style="padding-bottom: 15px;">Q & A</h4>
 
@@ -598,8 +596,8 @@
                 <mat-expansion-panel *ngFor="let q of questionsList">
                     <mat-expansion-panel-header>
                         <div style="padding: 0; width: 100%;" fxLayout="row" [fxLayoutAlign]="'center center'">
-                            <app-editor fxFlex="92" #editQuestionEditor
-                                [readOnly]="q['edit'] ? false : true" [data]="q?.text" [id]="q['edit']+ q?._id">
+                            <app-editor fxFlex="92" #editQuestionEditor [readOnly]="q['edit'] ? false : true"
+                                [data]="q?.text" [id]="q['edit']+ q?._id">
                             </app-editor>
                             <div fxFlex="8">
                                 <div fxLayout="column" [fxLayoutAlign]="'center center'" style="padding-right: 5px;">
@@ -676,7 +674,8 @@
                                                 </div>
 
                                                 <!-- View / Update Answer Content -->
-                                                <app-editor [readOnly]="a['edit'] ? false : true" #editAnswerEditor [data]="a?.text" [id]="a?._id">
+                                                <app-editor [readOnly]="a['edit'] ? false : true" #editAnswerEditor
+                                                    [data]="a?.text" [id]="a?._id">
                                                 </app-editor>
                                                 <br />
                                                 <button *ngIf="a['edit']" type="button" style="float: right;"
@@ -739,7 +738,8 @@
 </ng-template>
 
 <ng-template #eventsListTemplate>
-    <ng-container *ngTemplateOutlet="addCompanypostTemplate; context: { details: details, postType: 'company-post'}"></ng-container>
+    <ng-container *ngTemplateOutlet="addCompanypostTemplate; context: { details: details, postType: 'company-post'}">
+    </ng-container>
     <div class="all noselect">
         <div class="swiper-container pagescroll home current">
             <div class="swiper-wrapper">

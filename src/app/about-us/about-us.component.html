@@ -1,1 +1,84 @@
-<p>about-us works!</p>
+<!-- Header Section Starts HERE -->
+
+<!-- <section class="hero-area bgimage"> -->
+        <div class="container">
+                <!-- <h1
+                    style="font-size: 50px; margin: 150px 40px 20px 13px; max-width: 100%; font-weight: 400; text-align: left;">
+                    Innovation made <br/>Accessible & Affordable for <br/>Everyone
+                </h1> -->
+                <div style=" width: 90%; align-content: center; align-self: center; " class="col-md-12">
+                        <img src="./../assets/images/connect.png">
+                    </div>
+                <div class="row" style="padding-top: 150px;">
+                    <div class="col-md-12">
+                        <h1
+                            style="font-size: 60px; max-width: 100%; font-weight: 400; text-align: left;">
+                           Our mission is to build thriving local communities by connecting people and businesses in local communities around business goals and career goals.
+                        </h1>
+                        <p style="font-weight: 200; margin: 5px;"><a
+                            [routerLink]="['/', 'company', 'add-company']">JOIN TODAY</a></p>
+                        <!-- <button mat-flat-button color="primary" (click)="authService.login()">JOIN TODAY</button> -->
+                    </div>
+                    
+                </div>
+                <div class="row" style="margin-top: 170px;">
+                <div class="col-md-12">
+                    <h1
+                        style="font-size: 65px; max-width: 100%; font-weight: 400; text-align: center;">
+                        Our Team
+                    </h1>
+                    
+                </div>
+                </div>
+                <div class="row" style="margin-top: 10px;">
+                    <div class="col-md-12" style="align-self: start;">
+                        <h6 style="font-weight: 600; margin: 5px; font-size: 2.4em;">Sumithra Jonnalagadda</h6><br/>
+                        <img style="height: 60%; width: 60%;" [src]="'../../assets/images/sumi_pic_about_page.jpeg'"
+                        alt="Product Image"><br/>
+                        <h3 style="font-weight: 200; margin: 5px; font-size: 30px;">As a child growing up in rural India I was facinated by stories of mathameticians and scientists 
+                            from far off lands that solved problems of humanities. That facination  paved the path to do my engineering at one of the prestageous technical 
+                            institute Indian Institute of Technology, Madras. Technology also became a way to help my mother and my siblings back in India. From there
+                    on I became curious about business world and  went on to do my MBA at premier Indian Institute of Management, Bangalore. Since then my inetrest has always been applying my experince in 
+                technology and business to solve human problems. That interest brought me to USA to work at Amgen. In the past 20 years I honed my business skills working at 
+            both large corporations and also at tech startups. I found my purpose when I started a meal planning and delivery business the same year my father passed away from diabetes and Steven Jobs passed away from 
+        Cancer. Building my own small business gave me first hand experince of the struggles of local businesses. Small Business are passionate and work hard to 
+    solve problems in our local communities but they do not have the access to the technical solutions that can help scale their businesses. Equipped with 
+that understanding I started codemarket to help local businesses scale their businesses using technical solutions that large corporations uses. </h3><br/>
+                        <p style="font-weight: 70; margin: 5px;">
+                            <a routerLinkActive="mat-primary" [routerLink]="['/dashboard', 'profile', '5d3885741af2fd1db7fa5e84']">My Career & Business Goals</a></p>
+                        <!-- <button mat-flat-button color="primary" (click)="authService.login()">SET YOUR CAREER GOALS</button> -->
+                    </div>
+                    <br/>
+                    
+                    <!-- <div class="col-md-2" style="text-align: center; margin-bottom: 30px; padding: 0;">
+                        <img style="width: 100%" src="./../assets/images/fly720x550.png">
+                    </div> -->
+            
+                    <div class="col-md-12" style="align-self: center;">
+                        <h6 style="font-weight: 600; margin: 5px; font-size: 2.4em; align-content: center">William Gulliver</h6><br/>
+                        <img style="height: 50%; width: 50%; align-content: center" [src]="'../../assets/images/bill_pic_about_page.jpeg'" alt="Product Image"><br/>
+                        <h3 style="font-weight: 200; margin: 5px; font-size: 30px; align-content: center">
+                            My work ethic is shaped by my time in US Army when I was at 17 years old. </h3><br/><br/>
+                            <p style="font-weight: 70; margin: 5px;"><a
+                                [routerLink]="['/', 'company', 'add-company']">SET YOUR BUSINESS GOALS</a></p>
+                            <!-- <button mat-flat-button color="primary" (click)="authService.login()">SET YOUR BUSINESS GOALS</button> -->
+                    </div>
+                </div>
+                <!-- <table><tr>
+                        <td  height="550px"><img class="header-image" src="../../assets/images/fly720x550.png"
+                            alt="background-image"></td><td style="font-size: 67px; margin: 20px 40px 20px 40px; max-width: 550px; font-weight: 700;">FLY IN YOUR TECH CAREER</td>
+                        </tr></table> -->
+            </div>
+           
+           
+                            
+            <!--</section>-->
+            
+            <swal #successInvitationAccept title="Congratulations!" type="success" [showConfirmButton]="false">
+                <div *swalPartial class="alert alert-info">
+                    <h4>You have accepted Invitation Successfully</h4>
+                    <p></p>
+                    <a class="btn btn--sm btn--round" [routerLink]="['/', 'dashboard', 'post-list']"
+                        [queryParams]="{type: 'event', all: true}">Events</a>
+                </div>
+            </swal>

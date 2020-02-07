@@ -112,43 +112,40 @@
     <div class="container">
         <div class="row">
 
-            <!-- start .col-md-3 -->
             <div class="col-lg-3">
-                <!-- start aside -->
-                <aside class="sidebar product--sidebar">
-                    <div class="sidebar-card card--filter">
-                        <a class="card-title" href="#collapse2" role="button" data-toggle="collapse"
-                            aria-expanded="false" aria-controls="collapse2">
-                            <app-add-post-menu style="color: #0674ec !important; margin-left: auto;"></app-add-post-menu>
-                        </a>
-                        <div class="collapse show collapsible-content" id="collapse2">
-                            <ul class="card-content" style="list-style: none;">
-                                <li>
-                                    <div class="custom-radio" [routerLink]="[]" [queryParams]="{view: 'all'}"
-                                        (click)="selectedPostType = ''; getAllPosts('')">
-                                        <input type="radio" [checked]="selectedPostType === ''" [id]="'all'" class=""
-                                            name="filter_opt">
-                                        <label [for]="'all'">
-                                            <span class="circle"></span>All</label>
-                                    </div>
-                                </li>
-                                <li *ngFor="let p of postTypes?.concat(companyPostTypes)">
-                                    <div class="custom-radio" [routerLink]="[]" [queryParams]="{view: p}"
-                                        (click)="selectedPostType = p; getAllPosts(p)">
-                                        <input type="radio" [id]="p" class="" [checked]="selectedPostType === p"
-                                            name="filter_opt">
-                                        <label [for]="p" style="text-transform: capitalize;">
-                                            <span class="circle"></span>{{p}}</label>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- end /.sidebar-card -->
-                </aside>
-                <!-- end aside -->
+
+                <!-- Side Nav Bar -->
+                <app-add-post-menu style="color: #0674ec !important; margin-left: auto;"></app-add-post-menu>
+                <div class="docs-component-viewer-nav common-box-shadow" style="margin-bottom: 20px; margin-top: 10px;">
+					<div class="docs-component-viewer-nav-content">
+						<div *ngFor="let category of filtersMainCategory; let last = last;">
+                            <button cdkAccordionItem #panel="cdkAccordionItem"
+                                [expanded]="category?.types ? isExpanded(category) : false"
+                                (click)="selectMainCategory(category, panel)" class="docs-nav-content-btn"
+                                [ngClass]="selectedPostType === category.view ? 'docs-component-viewer-sidenav-item-selected' : ''"
+                                [attr.aria-controls]="'panel-' + category.view"
+                                [attr.aria-expanded]="panel.expanded">
+                                {{category.title}}
+                                <mat-icon *ngIf="category?.types">
+                                    {{panel.expanded ? 'keyboard_arrow_up' :  'keyboard_arrow_down'}}
+                                </mat-icon>
+                            </button>
+                            <mat-nav-list dense [@bodyExpansion]="panel.expanded ? 'expanded' : 'collapsed'"
+                                id="panel-{{category.view}}" [attr.aria-label]="category">
+                                <a mat-list-item *ngFor="let component of category?.types"
+                                    (click)="selectedPostType = component; getAllPosts(component)"
+                                    [routerLink]="[]" [queryParams]="{view: component}"
+                                    [ngClass]="component === selectedPostType ? 'docs-component-viewer-sidenav-item-selected': ''"
+                                    [attr.aria-current]="selectedPostType === component ? 'page': 'false'">
+                                    {{component}}
+                                </a>
+                            </mat-nav-list>
+							<hr *ngIf="!last" />
+						</div>
+					</div>
+				</div>
+
             </div>
-            <!-- end /.col-md-3 -->
 
             <div class="col-lg-9">
 
@@ -187,7 +184,6 @@
                     [pageSizeOptions]="[5, 10, 25, 100]">
                 </mat-paginator>
             </div>
-            <!-- </div> -->
         </div>
     </div>
 </section>

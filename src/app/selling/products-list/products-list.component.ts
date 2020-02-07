@@ -7,7 +7,7 @@ import { Product } from 'src/app/shared/models/product.model';
 import { Subscription, merge, of } from 'rxjs';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { map, startWith, catchError, switchMap, switchMapTo, mapTo } from 'rxjs/operators';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from 'src/app/core/services/product.service';
 import { BreadCumb } from 'src/app/shared/models/bredcumb.model';
 import { PostStatus } from 'src/app/shared/models/poststatus.enum';
@@ -16,7 +16,7 @@ import { environment } from 'src/environments/environment';
 import { PostService } from 'src/app/shared/services/post.service';
 import { selectLoggedInUser } from '../../core/store/selectors/user.selector';
 import { GetPostsByUserIdAndType, DeletePost, SetSelectedPost } from '../../core/store/actions/post.actions';
-import { PostType, CompanyPostTypes } from '../../shared/models/post-types.enum';
+import { PostType, CompanyPostTypes, UserProfilePostTypes } from '../../shared/models/post-types.enum';
 import { selectPostsByUserIdAndType } from '../../core/store/selectors/post.selectors';
 import { SweetalertService } from '../../shared/services/sweetalert.service';
 
@@ -29,6 +29,11 @@ import { SweetalertService } from '../../shared/services/sweetalert.service';
       state('collapsed', style({ height: '0px', minHeight: '0' })),
       state('expanded', style({ height: '*' })),
       transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+    trigger('bodyExpansion', [
+      state('collapsed', style({ height: '0px', display: 'none' })),
+      state('expanded', style({ height: '*', display: 'block' })),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4,0.0,0.2,1)')),
     ]),
   ],
 })
@@ -57,9 +62,34 @@ export class ProductsListComponent implements OnInit, OnDestroy, AfterViewInit {
 
   postTypes = Object.values(PostType);
   companyPostTypes = Object.values(CompanyPostTypes);
+  userProfilePostTypes = Object.values(UserProfilePostTypes);
 
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   selectedPostType = '';
+
+  /** Side bar to filter the categories */
+  filtersMainCategory = [
+    {
+      view: '',
+      title: 'All',
+      path: ''
+    },
+    {
+      view: 'Posts',
+      title: 'Posts',
+      types: this.postTypes
+    },
+    {
+      view: 'Businesses',
+      title: 'Businesses',
+      types: this.companyPostTypes
+    },
+    {
+      view: 'Proffessionals',
+      title: 'Proffessionals',
+      types: this.userProfilePostTypes
+    },
+  ];
 
   constructor(
     public authService: AuthService,
@@ -67,22 +97,23 @@ export class ProductsListComponent implements OnInit, OnDestroy, AfterViewInit {
     private activatedRoute: ActivatedRoute,
     private productService: ProductService,
     public postService: PostService,
-    public sweetAlertService: SweetalertService
+    public sweetAlertService: SweetalertService,
+    private router: Router
   ) {
 
 
-    this.breadcumb = {
-      title: 'CAREER GOALS AND BUSINESS GOALS',
-      path: [
-        {
-          name: 'Dashboard',
-          pathString: '/'
-        },
-        {
-          name: 'Be in Control of Your Career & Business'
-        }
-      ]
-    };
+    // this.breadcumb = {
+    //   title: 'CAREER GOALS AND BUSINESS GOALS',
+    //   path: [
+    //     {
+    //       name: 'Dashboard',
+    //       pathString: '/'
+    //     },
+    //     {
+    //       name: 'Be in Control of Your Career & Business'
+    //     }
+    //   ]
+    // };
   }
 
   ngOnInit() {
@@ -167,7 +198,7 @@ export class ProductsListComponent implements OnInit, OnDestroy, AfterViewInit {
       //     order: this.sort && this.sort.direction ? this.sort.direction : ''
       //   }
       // }
-      this.getAllPosts('');
+      this.getAllPosts(this.selectedPostType);
       console.log(data);
     });
   }
@@ -220,7 +251,7 @@ export class ProductsListComponent implements OnInit, OnDestroy, AfterViewInit {
     if (type) {
       this.paginator.pageIndex = 0;
     }
-    const paginationObj = {pageNumber: this.paginator.pageIndex + 1, limit: 10, sort: {order: ""}};
+    const paginationObj = {pageNumber: this.paginator.pageIndex + 1, limit: 10, sort: {order: ''}};
     this.postService.getAllPosts(paginationObj, this.selectedPostType ? this.selectedPostType : type ).pipe(
       map((result: any) => {
         if (result && result.posts) {
@@ -229,7 +260,31 @@ export class ProductsListComponent implements OnInit, OnDestroy, AfterViewInit {
           this.dataSource.data = result.posts;
         }
       })
-    ).subscribe()
+    ).subscribe();
+  }
+
+  /** Select the category */
+  selectMainCategory(category, panel) {
+    if (!category.types) {
+      this.selectedPostType = '';
+      this.router.navigate([category && category.path ? category.path : './'],
+        {
+          relativeTo: this.activatedRoute,
+          queryParams: { view: category.view }, queryParamsHandling: 'merge'
+        });
+      this.getAllPosts('');
+    } else {
+      panel.toggle();
+    }
+  }
+
+  /** If "view" query param is sub post type then expand the main category */
+  isExpanded(category) {
+    if (category && category.types) {
+      const i = category.types.indexOf(this.selectedPostType) > -1;
+      return i;
+    }
+    return false;
   }
 
 }

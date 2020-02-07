@@ -126,15 +126,19 @@
                         <div class="collapse show collapsible-content" id="collapse2">
                             <ul class="card-content" style="list-style: none;">
                                 <li>
-                                    <div class="custom-radio" [routerLink]="[]" [queryParams]="{view: 'all'}" (click)="selectedPostType = ''; getAllPosts('')">
-                                        <input type="radio" [checked]="selectedPostType === ''" [id]="'all'" class="" name="filter_opt">
+                                    <div class="custom-radio" [routerLink]="[]" [queryParams]="{view: 'all'}"
+                                        (click)="selectedPostType = ''; getAllPosts('')">
+                                        <input type="radio" [checked]="selectedPostType === ''" [id]="'all'" class=""
+                                            name="filter_opt">
                                         <label [for]="'all'">
                                             <span class="circle"></span>All</label>
                                     </div>
                                 </li>
                                 <li *ngFor="let p of postTypes?.concat(companyPostTypes)">
-                                    <div class="custom-radio" [routerLink]="[]" [queryParams]="{view: p}" (click)="selectedPostType = p; getAllPosts(p)">
-                                        <input type="radio" [id]="p" class="" [checked]="selectedPostType === p" name="filter_opt">
+                                    <div class="custom-radio" [routerLink]="[]" [queryParams]="{view: p}"
+                                        (click)="selectedPostType = p; getAllPosts(p)">
+                                        <input type="radio" [id]="p" class="" [checked]="selectedPostType === p"
+                                            name="filter_opt">
                                         <label [for]="p" style="text-transform: capitalize;">
                                             <span class="circle"></span>{{p}}</label>
                                     </div>
@@ -149,8 +153,34 @@
             <!-- end /.col-md-3 -->
 
             <div class="col-lg-9">
-                    <mat-paginator style="margin-bottom: 43px; border-radius: 6px;" [length]="length" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]">
-                        </mat-paginator>
+
+                <div class="comment-form-area" style="padding: 0;">
+                    <div class="media comment-form">
+                        <div class="media-left">
+                            <a href="#">
+                                <img class="author_avatar_comment" style="height: 45px; width:45px;"
+                                    [src]="authService?.loggedInUser?.avatar ? ((s3FilesBucketURL + authService?.loggedInUser?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                                    alt="Commentator Avatar">
+                            </a>
+                        </div>
+                        <div class="media-body">
+                            <div class="comment-reply-form">
+                                <!---------------- ADD POST EDITOR --------------->
+                                <app-editor #addPostEditor [placeholder]="'Add'"
+                                    [editorStyle]="{background: 'white', 'padding': '20px 35px', 'min-height': '130px', 'border-radius': '6px'}"
+                                    [id]="'editor'"></app-editor>
+
+                                <button style="float: right; margin-top: 10px; margin-bottom: 20px;" type="button"
+                                    class="btn btn--sm btn--round"
+                                    (click)="null">Post</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <mat-paginator style="margin-bottom: 43px; border-radius: 6px;" [length]="length" [pageSize]="10"
+                    [pageSizeOptions]="[5, 10, 25, 100]">
+                </mat-paginator>
 
                 <!-- <div class="width-wrapper"> -->
                 <div class="item-grid pen-grid item-grid-large">

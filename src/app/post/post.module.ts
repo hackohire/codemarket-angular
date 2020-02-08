@@ -173,17 +173,18 @@ const postRoutes: Routes = [
       },
 
       /** Add Company Sales Challege */
-      /** Add company goal */
       {
-        path: `add-${CompanyPostTypes.SalesChallenge}`,
-        loadChildren: () => import('../sales-challenge/add-sales-challenge/add-sales-challenge.module')
-        .then(module => module.AddSalesChallengeModule),
+        path: `add-${CompanyPostTypes.MarketingChallenge}`,
+        loadChildren: () => import('../marketing-challenge/add-marketing-challenge/add-marketing-challenge.module')
+        .then(module => module.AddMarketingChallengeModule),
       },
       {
-        path: `edit-${CompanyPostTypes.SalesChallenge}/:postId`,
-        loadChildren: () => import('../sales-challenge/add-sales-challenge/add-sales-challenge.module')
-        .then(module => module.AddSalesChallengeModule),
+        path: `edit-${CompanyPostTypes.MarketingChallenge}/:postId`,
+        loadChildren: () => import('../marketing-challenge/add-marketing-challenge/add-marketing-challenge.module')
+        .then(module => module.AddMarketingChallengeModule),
       },
+
+      /** Add Company Marketing Challenge */
     ],
     // runGuardsAndResolvers: 'always',
   },

@@ -122,4 +122,10 @@
       [class]="'vertical-align-middle fal fa-' + icons['dream-job'] + ' fa-fw'"></i>
     <span> {{companyPostTypes.SalesChallenge}}</span>
   </button>
+
+  <button mat-menu-item [routerLink]="['/', 'post', 'add-' + companyPostTypes.MarketingChallenge]">
+    <i style="font-size: 1.7rem !important;"
+      [class]="'vertical-align-middle fal fa-' + icons['dream-job'] + ' fa-fw'"></i>
+    <span> {{companyPostTypes.MarketingChallenge}}</span>
+  </button>
 </mat-menu>

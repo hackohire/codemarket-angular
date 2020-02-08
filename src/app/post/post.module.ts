@@ -148,7 +148,7 @@ const postRoutes: Routes = [
         loadChildren: () => import('../hiring-process/add-hiring-process/add-hiring-process.module')
         .then(module => module.AddHiringProcessModule),
       },
-
+      /* add two routes blocks */ 
       {
         path: `add-${CompanyPostTypes.BusinessChallenge}`,
         loadChildren: () => import('../business-challenge/add-business-challenge/add-business-challenge.module')

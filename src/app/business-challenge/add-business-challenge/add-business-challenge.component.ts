@@ -122,6 +122,7 @@ export class AddBusinessChallengeComponent implements OnInit {
       createdBy: new FormControl(i && i.createdBy && i.createdBy._id ? i.createdBy._id : ''),
       status: new FormControl(i && i.status ? i.status : PostStatus.Drafted),
       _id: new FormControl(i && i._id ? i._id : ''),
+      // change this line
       type: new FormControl(CompanyPostTypes.BusinessChallenge),
     });
   }

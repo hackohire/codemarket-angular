@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
-import { fromEvent } from 'rxjs/internal/observable/fromEvent';
+import { fromEvent } from 'rxjs/observable/fromEvent';
 import { of, Observable, concat, Subscription } from 'rxjs';
-import { debounceTime } from 'rxjs/internal/operators/debounceTime';
+import { debounceTime } from 'rxjs/operators/debounceTime';
 import { distinctUntilChanged, switchMap, map, tap } from 'rxjs/operators';
 import { Post } from '../../../shared/models/post.model';
 import { PostService } from '../../../shared/services/post.service';

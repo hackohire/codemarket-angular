@@ -1,5 +1,5 @@
 import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
-import { Observable } from 'rxjs/internal/observable';
+import { Observable } from 'rxjs';
 import gql from 'graphql-tag';
 import { map, catchError, tap } from 'rxjs/operators';
 import { Apollo } from 'apollo-angular';

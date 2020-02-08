@@ -24,7 +24,8 @@ export enum UserProfilePostTypes {
     SocialImpactGoal = 'social-impact-goal',
     BusinessChallenge = 'business-challenge',
     TechnicalChallenge = 'technical-challenge',
-    LeadershipChallenge = 'leadership-challenge'
+    LeadershipChallenge = 'leadership-challenge',
+    StressManagement = 'stress-management'
 }
 
 /** Same as other posts */

@@ -160,6 +160,20 @@ export class PostComponent implements OnInit {
         type: CompanyPostTypes.BusinessChallenge
       },
 
+      /** Business Goal */
+      {
+        path: 'post-list',
+        label: 'Business Goals List',
+        queryParams: { type: CompanyPostTypes.BusinessGoal, all: false },
+        type: CompanyPostTypes.BusinessGoal
+      },
+      {
+        path: 'add-' + CompanyPostTypes.BusinessGoal,
+        label: 'Add ' + CompanyPostTypes.BusinessGoal,
+        queryParams: { type: CompanyPostTypes.BusinessGoal },
+        type: CompanyPostTypes.BusinessGoal
+      },
+
       /** COMPANY POST TYPES ENDS HERE */
 
 

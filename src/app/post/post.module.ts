@@ -159,6 +159,18 @@ const postRoutes: Routes = [
         loadChildren: () => import('../business-challenge/add-business-challenge/add-business-challenge.module')
         .then(module => module.AddBusinessChallengeModule),
       },
+
+      /** Add company goal */
+      {
+        path: `add-${CompanyPostTypes.BusinessGoal}`,
+        loadChildren: () => import('../business-goal/add-business-goal/add-business-goal.module')
+        .then(module => module.AddBusinessGoalModule),
+      },
+      {
+        path: `edit-${CompanyPostTypes.BusinessGoal}/:postId`,
+        loadChildren: () => import('../business-goal/add-business-goal/add-business-goal.module')
+        .then(module => module.AddBusinessGoalModule),
+      },
     ],
     // runGuardsAndResolvers: 'always',
   },

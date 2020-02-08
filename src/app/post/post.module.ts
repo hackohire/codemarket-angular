@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { PostComponent } from './post.component';
 import { AuthGuard } from '../shared/guards/auth.guard';
+import { CompanyPostTypes } from '../shared/models/post-types.enum';
 
 const postRoutes: Routes = [
   {
@@ -146,6 +147,17 @@ const postRoutes: Routes = [
         path: 'edit-hiring-process/:hiringProcessId',
         loadChildren: () => import('../hiring-process/add-hiring-process/add-hiring-process.module')
         .then(module => module.AddHiringProcessModule),
+      },
+
+      {
+        path: `add-${CompanyPostTypes.BusinessChallenge}`,
+        loadChildren: () => import('../business-challenge/add-business-challenge/add-business-challenge.module')
+        .then(module => module.AddBusinessChallengeModule),
+      },
+      {
+        path: `edit-${CompanyPostTypes.BusinessChallenge}/:postId`,
+        loadChildren: () => import('../business-challenge/add-business-challenge/add-business-challenge.module')
+        .then(module => module.AddBusinessChallengeModule),
       },
     ],
     // runGuardsAndResolvers: 'always',

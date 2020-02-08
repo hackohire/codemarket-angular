@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PostType } from '../shared/models/post-types.enum';
+import { PostType, CompanyPostTypes } from '../shared/models/post-types.enum';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -143,6 +143,30 @@ export class PostComponent implements OnInit {
         queryParams: { type: PostType.Job },
         type: PostType.Job
       },
+
+      /** COMPANY POST TYPES */
+
+      /** Business Challenge */
+      {
+        path: 'post-list',
+        label: 'Business Challenges List',
+        queryParams: { type: CompanyPostTypes.BusinessChallenge, all: false },
+        type: CompanyPostTypes.BusinessChallenge
+      },
+      {
+        path: 'add-' + CompanyPostTypes.BusinessChallenge,
+        label: 'Add ' + CompanyPostTypes.BusinessChallenge,
+        queryParams: { type: CompanyPostTypes.BusinessChallenge },
+        type: CompanyPostTypes.BusinessChallenge
+      },
+
+      /** COMPANY POST TYPES ENDS HERE */
+
+
+      /** Posts Related to User Profile */
+
+
+      /** Posts Related to User Profile ENDS HERE */
     ];
 
     /** Filtering Routes Based On Post Type */

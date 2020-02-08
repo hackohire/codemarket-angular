@@ -1,8 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { appConstants } from '../../constants/app_constants';
 import { MatDialog } from '@angular/material/dialog';
 import { AddJobComponent } from '../../../job/add-job/add-job.component';
 import { PostType, CompanyPostTypes, UserProfilePostTypes } from '../../models/post-types.enum';
+import { MatMenuTrigger } from '@angular/material/menu';
 
 @Component({
   selector: 'app-add-post-menu',
@@ -17,7 +18,13 @@ export class AddPostMenuComponent implements OnInit {
   companyPostTypes = CompanyPostTypes;
   UserProfilePostTypes = UserProfilePostTypes;
 
+  @ViewChild('addPostMenu', {static: false}) addPostMenu: MatMenuTrigger;
+
   ngOnInit() {
+  }
+
+  openMenu() {
+    this.addPostMenu.openMenu();
   }
 
   openAddJobDialog(): void {

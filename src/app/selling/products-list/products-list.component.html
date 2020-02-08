@@ -115,7 +115,7 @@
             <div class="col-lg-3">
 
                 <!-- Side Nav Bar -->
-                <app-add-post-menu style="color: #0674ec !important; margin-left: auto;"></app-add-post-menu>
+                <app-add-post-menu #addPostMenu style="color: #0674ec !important; margin-left: auto;"></app-add-post-menu>
                 <div class="docs-component-viewer-nav common-box-shadow" style="margin-bottom: 20px; margin-top: 10px;">
 					<div class="docs-component-viewer-nav-content">
 						<div *ngFor="let category of filtersMainCategory; let last = last;">
@@ -161,13 +161,13 @@
                         <div class="media-body">
                             <div class="comment-reply-form">
                                 <!---------------- ADD POST EDITOR --------------->
-                                <app-editor #addPostEditor [placeholder]="'Add'"
+                                <app-editor (click)="$event.stopPropagation(); addPostMenu.openMenu();" #addPostEditor [placeholder]="'Add Post'"
                                     [editorStyle]="{background: 'white', 'padding': '20px 35px', 'min-height': '130px', 'border-radius': '6px'}"
                                     [id]="'editor'"></app-editor>
 
                                 <button style="float: right; margin-top: 10px; margin-bottom: 20px;" type="button"
                                     class="btn btn--sm btn--round"
-                                    (click)="null">Post</button>
+                                    (click)="addPostMenu.openMenu();">Post</button>
                             </div>
                         </div>
                     </div>

@@ -31,12 +31,12 @@
     <span> Interview</span>
   </button>
 
-    <!-- Add Hiring Process -->
-    <button mat-menu-item [routerLink]="['/', 'post', 'add-hiring-process']" [queryParams]="{type: 'hiring-process'}">
-      <i style="font-size: 1.7rem !important;"
-        [class]="'vertical-align-middle fal fa-' + icons.requirement + ' fa-fw'"></i>
-      <span> Hiring Process</span>
-    </button>
+  <!-- Add Hiring Process -->
+  <button mat-menu-item [routerLink]="['/', 'post', 'add-hiring-process']" [queryParams]="{type: 'hiring-process'}">
+    <i style="font-size: 1.7rem !important;"
+      [class]="'vertical-align-middle fal fa-' + icons.requirement + ' fa-fw'"></i>
+    <span> Hiring Process</span>
+  </button>
 
   <!-- Add Capital Funding -->
   <button mat-menu-item [routerLink]="['/', 'post', 'add-capital-funding']" [queryParams]="{type: 'capital-funding'}">
@@ -102,5 +102,12 @@
     <i style="font-size: 1.7rem !important;"
       [class]="'vertical-align-middle fal fa-' + icons['dream-job'] + ' fa-fw'"></i>
     <span> Job</span>
+  </button>
+
+  <!-- Add Job -->
+  <button mat-menu-item [routerLink]="['/', 'post', 'add-' + companyPostTypes.BusinessChallenge]">
+    <i style="font-size: 1.7rem !important;"
+      [class]="'vertical-align-middle fal fa-' + icons['dream-job'] + ' fa-fw'"></i>
+    <span> {{companyPostTypes.BusinessChallenge}}</span>
   </button>
 </mat-menu>

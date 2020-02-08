@@ -10,6 +10,7 @@ import { selectCartListLength } from '../../store/selectors/cart.selectors';
 import { Router } from '@angular/router';
 import { MatDialog, MatAnchor } from '@angular/material';
 import { SearchComponent } from '../search/search.component';
+import { CompanyPostTypes, UserProfilePostTypes, PostType } from '../../../shared/models/post-types.enum';
 
 @Component({
   selector: 'app-nav-bar',
@@ -18,6 +19,9 @@ import { SearchComponent } from '../search/search.component';
 })
 export class NavBarComponent implements OnInit, OnDestroy {
   @ViewChild('lr', {static: false}) lr: MatAnchor;
+  companyPostTypes = CompanyPostTypes;
+  userProfilePostTypes = UserProfilePostTypes;
+  postTypes = PostType;
   signUpConfig = {
     // header: 'My Customized Sign Up',
     hideAllDefaults: true,

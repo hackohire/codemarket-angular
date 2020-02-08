@@ -70,7 +70,7 @@
 						<div class="docs-component-viewer-nav-content">
 							<div *ngFor="let category of profileViewLinks; let last = last;">
 								<button cdkAccordionItem #panel="cdkAccordionItem"
-									[expanded]="category?.types ? (category) : false"
+									[expanded]="category?.types ? isExpanded(category) : false"
 									(click)="selectMainCategory(category, panel)" class="docs-nav-content-btn"
 									[ngClass]="profileView === category.view ? 'docs-component-viewer-sidenav-item-selected' : ''"
 									[attr.aria-controls]="'panel-' + category.view"
@@ -124,7 +124,7 @@
 									</div>
 								</div>
 							</div>
-							<-- POST EDITOR ENDS HERE -->
+							<!-- POST EDITOR ENDS HERE -->
 
 							<div *ngIf="profileView === navLinkName.buy">
 								<ng-container *ngTemplateOutlet="postTemplate; context: { postType: '' }">

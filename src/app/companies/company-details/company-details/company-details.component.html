@@ -68,7 +68,7 @@
                         <div class="docs-component-viewer-nav-content">
                             <div *ngFor="let category of companyViewLinks; let last = last;">
                                 <button cdkAccordionItem #panel="cdkAccordionItem"
-                                    [expanded]="category?.types ? (category) : false"
+                                    [expanded]="category?.types ? isExpanded(category) : false"
                                     (click)="selectMainCategory(category, panel)" class="docs-nav-content-btn"
                                     [ngClass]="companyView === category.view ? 'docs-component-viewer-sidenav-item-selected' : ''"
                                     [attr.aria-controls]="'panel-' + category.view"

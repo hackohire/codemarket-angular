@@ -261,7 +261,7 @@ export class MyProfileComponent implements OnInit {
   ngOnInit() {
     this.authorId = this.activatedRoute.snapshot.params.authorId;
 
-    this.profileView = this.activatedRoute.snapshot.queryParams['view'] ? this.activatedRoute.snapshot.queryParams['view'] : 'info';
+    this.profileView = this.activatedRoute.snapshot.queryParams['view'] ? this.activatedRoute.snapshot.queryParams['view'] : 'posts';
 
     // If user is visitng somebody else's profile
     if (this.authorId) {
@@ -453,7 +453,7 @@ export class MyProfileComponent implements OnInit {
   }
 
   fetchPostsConnectedWithUser(userId) {
-    this.postService.getAllPosts({ limit: 0, pageNumber: 0 }, '', '', '', userId).subscribe(c => {
+    this.postService.getAllPosts({ limit: 0, pageNumber: 0 }, '', '', '', '', userId).subscribe(c => {
       if (c && c.posts) {
         this.postsUnderUser = c.posts;
         this.commentService.usersPostsList = c.posts;

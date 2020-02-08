@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { appConstants } from '../../constants/app_constants';
 import { MatDialog } from '@angular/material/dialog';
 import { AddJobComponent } from '../../../job/add-job/add-job.component';
+import { PostType, CompanyPostTypes, UserProfilePostTypes } from '../../models/post-types.enum';
 
 @Component({
   selector: 'app-add-post-menu',
@@ -12,6 +13,9 @@ export class AddPostMenuComponent implements OnInit {
   constructor(private dialog: MatDialog) { }
 
   icons = appConstants.icons;
+  postTypes = PostType;
+  companyPostTypes = CompanyPostTypes;
+  UserProfilePostTypes = UserProfilePostTypes;
 
   ngOnInit() {
   }

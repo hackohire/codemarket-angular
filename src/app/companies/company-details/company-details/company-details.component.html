@@ -63,7 +63,8 @@
             <div class="row">
                 <div class="col-lg-3">
                     <!-- start aside -->
-                    <div class="docs-component-viewer-nav common-box-shadow" style="margin-bottom: 20px;">
+                    <app-add-post-menu #addPostMenu style="color: #0674ec !important; margin-left: auto;"></app-add-post-menu>
+                    <div class="docs-component-viewer-nav common-box-shadow" style="margin-bottom: 20px; margin-top: 10px;">
                         <div class="docs-component-viewer-nav-content">
                             <div *ngFor="let category of companyViewLinks; let last = last;">
                                 <button cdkAccordionItem #panel="cdkAccordionItem"
@@ -130,6 +131,28 @@
                     <!-- <div style="height: 312px; width: 820px">
                             <img [src]="avatar?.value ? ((s3FilesBucketURL + avatar.value) | safe: 'resourceUrl') : anonymousAvatar" />
                     </div> -->
+                    <div class="comment-form-area" style="padding: 0;">
+                        <div class="media comment-form">
+                            <div class="media-left">
+                                <a href="#">
+                                    <img class="author_avatar_comment" style="height: 45px; width:45px;"
+                                        [src]="authService?.loggedInUser?.avatar ? ((s3FilesBucketURL + authService?.loggedInUser?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                                        alt="Commentator Avatar">
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                <div class="comment-reply-form">
+                                    <!---------------- ADD POST EDITOR --------------->
+                                    <app-editor (click)="$event.stopPropagation(); addPostMenu.openMenu()" #addPostEditor [placeholder]="'Add Post'"
+                                        [editorStyle]="{background: 'white', 'padding': '20px 35px', 'min-height': '130px', 'border-radius': '6px'}"
+                                        [id]="'editor'"></app-editor>
+                
+                                    <button style="float: right; margin-top: 10px; margin-bottom: 20px;" type="button"
+                                        class="btn btn--sm btn--round" (click)="addPostMenu.openMenu()">Post</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                     <div *ngIf="companyView === 'home'">
                         <ng-container
@@ -224,9 +247,9 @@
                     </div>
 
                     <div *ngIf="details?.createdBy?.name && companyView === 'creator'" class="author-card sidebar-card">
-                        <ng-container
+                        <!-- <ng-container
                             *ngTemplateOutlet="addCompanypostTemplate; context: { details: details, postType: 'company-post'}">
-                        </ng-container>
+                        </ng-container> -->
                         <div class="card-title">
                             <h4>Author Information</h4>
                         </div>
@@ -289,9 +312,9 @@
                     <!-- end /.author-card -->
 
                     <aside *ngIf="companyView === 'info'" class="sidebar sidebar--single-product">
-                        <ng-container
+                        <!-- <ng-container
                             *ngTemplateOutlet="addCompanypostTemplate; context: { details: details, postType: 'company-post'}">
-                        </ng-container>
+                        </ng-container> -->
                         <div class="sidebar-card card--product-infos">
                             <div class="card-title">
                                 <h4>Information</h4>
@@ -326,9 +349,9 @@
                     </aside>
                     <!-- end /.aside -->
                     <div *ngIf="companyView === 'interested-people'">
-                        <ng-container
+                        <!-- <ng-container
                             *ngTemplateOutlet="addCompanypostTemplate; context: { details: details, postType: 'company-post'}">
-                        </ng-container>
+                        </ng-container> -->
                         <div class="author-card sidebar-card">
                             <div class="card-title">
                                 <h4>Interested Professionals:
@@ -374,36 +397,7 @@
 
 </ng-container>
 
-<ng-template #addCompanypostTemplate let-cDetails="details" let-postType="postType">
-    <div class="comment-form-area" style="padding: 0;">
-        <div class="media comment-form">
-            <div class="media-left">
-                <a href="#">
-                    <img class="author_avatar_comment" style="height: 45px; width:45px;"
-                        [src]="authService?.loggedInUser?.avatar ? ((s3FilesBucketURL + authService?.loggedInUser?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
-                        alt="Commentator Avatar">
-                </a>
-            </div>
-            <div class="media-body">
-                <div class="comment-reply-form">
-                    <!---------------- ADD POST EDITOR --------------->
-                    <app-editor #addPostEditor [placeholder]="'Add '+ postType"
-                        [editorStyle]="{background: 'white', 'padding': '20px 35px', 'min-height': '130px', 'border-radius': '6px'}"
-                        [id]="'editor' + postType"></app-editor>
-
-                    <button style="float: right; margin-top: 10px; margin-bottom: 20px;" type="button"
-                        class="btn btn--sm btn--round" (click)="addPost(postType, addPostEditor)">Post</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-</ng-template>
-
 <ng-template #postTemplate let-cDetails="details" let-postType="postType">
-
-    <ng-container *ngTemplateOutlet="addCompanypostTemplate; context: { details: details, postType: postType}">
-    </ng-container>
 
     <div
         [ngStyle]="{'padding-top':  auth?.loggedInUser?._id === cDetails?.createdBy?._id || postType === 'company-post' ? '45px' : '0'}">
@@ -722,8 +716,8 @@
 </ng-template>
 
 <ng-template #jobsTemplate let-cDetails="details">
-    <ng-container *ngTemplateOutlet="addCompanypostTemplate; context: { details: details, postType: 'company-post'}">
-    </ng-container>
+    <!-- <ng-container *ngTemplateOutlet="addCompanypostTemplate; context: { details: details, postType: 'company-post'}">
+    </ng-container> -->
     <div class="item-grid pen-grid item-grid-large">
         <!-- <ng-container > -->
         <ng-container *ngIf="companyView === 'dream-jobs'; else jobList">
@@ -738,8 +732,8 @@
 </ng-template>
 
 <ng-template #eventsListTemplate>
-    <ng-container *ngTemplateOutlet="addCompanypostTemplate; context: { details: details, postType: 'company-post'}">
-    </ng-container>
+    <!-- <ng-container *ngTemplateOutlet="addCompanypostTemplate; context: { details: details, postType: 'company-post'}">
+    </ng-container> -->
     <div class="all noselect">
         <div class="swiper-container pagescroll home current">
             <div class="swiper-wrapper">

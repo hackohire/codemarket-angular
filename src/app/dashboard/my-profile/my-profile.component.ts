@@ -217,26 +217,26 @@ export class MyProfileComponent implements OnInit {
     // );
   }
 
-  async addPost(type: string, addPostEditor: EditorComponent) {
-    if (this.authService.loggedInUser) {
-      const blocks = await addPostEditor.editor.save();
-      const post: any = {
-        type,
-        createdBy: this.authService.loggedInUser._id,
-        description: blocks.blocks,
-        isPostUnderUser: true,
-        connectedWithUser: this.authorId ? this.authorId : this.authService.loggedInUser._id,
-        status: PostStatus.Published,
-      };
-      this.postService.addPost(post).subscribe(p => {
-        if (p) {
-          addPostEditor.editor.clear();
-        }
-      });
-    } else {
-      this.authService.checkIfUserIsLoggedIn(true);
-    }
-  }
+  // async addPost(type: string, addPostEditor: EditorComponent) {
+  //   if (this.authService.loggedInUser) {
+  //     const blocks = await addPostEditor.editor.save();
+  //     const post: any = {
+  //       type,
+  //       createdBy: this.authService.loggedInUser._id,
+  //       description: blocks.blocks,
+  //       isPostUnderUser: true,
+  //       connectedWithUser: this.authorId ? this.authorId : this.authService.loggedInUser._id,
+  //       status: PostStatus.Published,
+  //     };
+  //     this.postService.addPost(post).subscribe(p => {
+  //       if (p) {
+  //         addPostEditor.editor.clear();
+  //       }
+  //     });
+  //   } else {
+  //     this.authService.checkIfUserIsLoggedIn(true);
+  //   }
+  // }
 
   deletePost(_id: string) {
     this.postService.deletePost(_id).subscribe();

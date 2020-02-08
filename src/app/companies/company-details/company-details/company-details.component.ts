@@ -387,26 +387,26 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
     ).subscribe();
   }
 
-  async addPost(type: string, addPostEditor: EditorComponent) {
-    if (this.authService.loggedInUser) {
-      const blocks =  await addPostEditor.editor.save();
-      const post: any = {
-        type,
-        createdBy: this.authService.loggedInUser._id,
-        description: blocks.blocks,
-        isPostUnderCompany: true,
-        status: PostStatus.Published,
-        company: this.companyDetails._id
-      };
-      this.postService.addPost(post).subscribe(p => {
-        if (p) {
-          addPostEditor.editor.clear();
-        }
-      });
-    } else {
-      this.authService.checkIfUserIsLoggedIn(true);
-    }
-  }
+  // async addPost(type: string, addPostEditor: EditorComponent) {
+  //   if (this.authService.loggedInUser) {
+  //     const blocks =  await addPostEditor.editor.save();
+  //     const post: any = {
+  //       type,
+  //       createdBy: this.authService.loggedInUser._id,
+  //       description: blocks.blocks,
+  //       isPostUnderCompany: true,
+  //       status: PostStatus.Published,
+  //       company: this.companyDetails._id
+  //     };
+  //     this.postService.addPost(post).subscribe(p => {
+  //       if (p) {
+  //         addPostEditor.editor.clear();
+  //       }
+  //     });
+  //   } else {
+  //     this.authService.checkIfUserIsLoggedIn(true);
+  //   }
+  // }
 
   deletePost(_id: string) {
     this.postService.deletePost(_id).subscribe();

@@ -19,15 +19,18 @@
 										<div class="loader"></div>
 									</div>
 									<a class="image-wrapper">
-										<mat-icon class="edit glyphicon glyphicon-pencil" (click)="addProfilePic()">edit</mat-icon>
-										<mat-icon class="edit glyphicon glyphicon-pencil" (click)="removeProfilePic(user?._id)">delete</mat-icon>
+										<mat-icon class="edit glyphicon glyphicon-pencil" (click)="addProfilePic()">edit
+										</mat-icon>
+										<mat-icon class="edit glyphicon glyphicon-pencil"
+											(click)="removeProfilePic(user?._id)">delete</mat-icon>
 									</a>
 								</div>
 							</div>
 							<input type="file" #profilePic style="display: none" (change)="onProfilePicAdded()" />
 						</div>
 						<div style="display: flex;">
-							<button *ngIf="selectedProfilePic" style="margin: auto;" type="button" class="btn btn--vsm btn--round"
+							<button *ngIf="selectedProfilePic" style="margin: auto;" type="button"
+								class="btn btn--vsm btn--round"
 								(click)="updateProfilePicture(user?._id)">Update</button>
 						</div>
 						<h4 style="text-align: center; padding-top: 10px;">{{user?.name}}</h4>
@@ -39,8 +42,10 @@
 								[src]="selectedCoverPic ? (selectedCoverPicURL | safe: 'resourceUrl') : ((s3FilesBucketURL + user?.cover) | safe: 'resourceUrl')">
 
 							<div class="controls" *ngIf="user?._id === authService?.loggedInUser?._id">
-								<a mat-button style="background-color: #ff00007a;" (click)="removeCover(user?._id);" class="save">Remove</a>
-								<a mat-button style="background-color: #0674ec" *ngIf="!user?.cover" (click)="updateCover(user?._id)" class="save">Upload
+								<a mat-button style="background-color: #ff00007a;" (click)="removeCover(user?._id);"
+									class="save">Remove</a>
+								<a mat-button style="background-color: #0674ec" *ngIf="!user?.cover"
+									(click)="updateCover(user?._id)" class="save">Upload
 									Cover</a>
 							</div>
 
@@ -60,7 +65,8 @@
 
 				<!-- start aside -->
 				<div class="col-md-3">
-					<div class="docs-component-viewer-nav common-box-shadow" style="margin-bottom: 20px;">
+					<app-add-post-menu #addPostMenu style="color: #0674ec !important; margin-left: auto;"></app-add-post-menu>
+					<div class="docs-component-viewer-nav common-box-shadow" style="margin-bottom: 20px; margin-top: 10px;">
 						<div class="docs-component-viewer-nav-content">
 							<div *ngFor="let category of profileViewLinks; let last = last;">
 								<button cdkAccordionItem #panel="cdkAccordionItem"
@@ -93,6 +99,32 @@
 
 					<div class="row">
 						<div class="col-md-12">
+
+							<!-- POST EDITOR STARTS HERE -->
+							<div class="comment-form-area" style="padding: 0;">
+								<div class="media comment-form">
+									<div class="media-left">
+										<a href="#">
+											<img class="author_avatar_comment" style="height: 45px; width:45px;"
+												[src]="authService?.loggedInUser?.avatar ? ((s3FilesBucketURL + authService?.loggedInUser?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+												alt="Commentator Avatar">
+										</a>
+									</div>
+									<div class="media-body">
+										<div class="comment-reply-form">
+											<!---------------- ADD POST EDITOR --------------->
+											<app-editor (click)="$event.stopPropagation(); addPostMenu.openMenu()" #addPostEditor [placeholder]="'Add Post'"
+												[editorStyle]="{background: 'white', 'padding': '20px 35px', 'min-height': '130px', 'border-radius': '6px'}"
+												[id]="'editor'"></app-editor>
+
+											<button style="float: right; margin-top: 10px; margin-bottom: 20px;"
+												type="button" class="btn btn--sm btn--round"
+												(click)="addPostMenu.openMenu()">Post</button>
+										</div>
+									</div>
+								</div>
+							</div>
+							<-- POST EDITOR ENDS HERE -->
 
 							<div *ngIf="profileView === navLinkName.buy">
 								<ng-container *ngTemplateOutlet="postTemplate; context: { postType: '' }">
@@ -278,38 +310,7 @@
 	</section>
 </div>
 
-
-
-<ng-template #addPostTemplate let-postType="postType">
-	<div class="comment-form-area" style="padding: 0;">
-		<div class="media comment-form">
-			<div class="media-left">
-				<a href="#">
-					<img class="author_avatar_comment" style="height: 45px; width:45px;"
-						[src]="authService?.loggedInUser?.avatar ? ((s3FilesBucketURL + authService?.loggedInUser?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
-						alt="Commentator Avatar">
-				</a>
-			</div>
-			<div class="media-body">
-				<div class="comment-reply-form">
-					<!---------------- ADD POST EDITOR --------------->
-					<app-editor #addPostEditor [placeholder]="'Add '+ postType"
-						[editorStyle]="{background: 'white', 'padding': '20px 35px', 'min-height': '130px', 'border-radius': '6px'}"
-						[id]="'editor' + postType"></app-editor>
-
-					<button style="float: right; margin-top: 10px; margin-bottom: 20px;" type="button"
-						class="btn btn--sm btn--round" (click)="addPost(postType, addPostEditor)">Post</button>
-				</div>
-			</div>
-		</div>
-	</div>
-
-</ng-template>
-
 <ng-template #postTemplate let-postType="postType">
-
-	<ng-container *ngTemplateOutlet="addPostTemplate; context: { postType: postType}">
-	</ng-container>
 
 	<div>
 		<ng-container *ngFor="let c of postsUnderUser; let i=index;">

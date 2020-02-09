@@ -341,6 +341,20 @@ export class PostComponent implements OnInit {
         queryParams: { type: UserProfilePostTypes.SocialImpactGoal },
         type: UserProfilePostTypes.SocialImpactGoal
       },
+
+      /** User Leadership challenge */
+      {
+        path: 'post-list',
+        label: 'Leadership Challenge List',
+        queryParams: { type: UserProfilePostTypes.LeadershipChallenge, all: false },
+        type: UserProfilePostTypes.LeadershipChallenge
+      },
+      {
+        path: 'add-' + UserProfilePostTypes.LeadershipChallenge,
+        label: 'Add ' + UserProfilePostTypes.LeadershipChallenge,
+        queryParams: { type: UserProfilePostTypes.LeadershipChallenge },
+        type: UserProfilePostTypes.LeadershipChallenge
+      },
       /** COMPANY POST TYPES ENDS HERE */
 
 

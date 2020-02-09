@@ -316,6 +316,18 @@ const postRoutes: Routes = [
         loadChildren: () => import('../social-impact-goal/add-social-impact-goal/add-social-impact-goal.module')
         .then(module => module.AddSocialImpactGoalModule)
       },
+
+      /** Add User Leadership challenge */
+      {
+        path: `add-${UserProfilePostTypes.LeadershipChallenge}`,
+        loadChildren: () => import('../leadership-challenge/add-leadership-challenge/add-leadership-challenge.module')
+        .then(module => module.AddLeadershipChallengeModule),
+      },
+      {
+        path: `edit-${UserProfilePostTypes.LeadershipChallenge}/:postId`,
+        loadChildren: () => import('../leadership-challenge/add-leadership-challenge/add-leadership-challenge.module')
+        .then(module => module.AddLeadershipChallengeModule),
+      },
     ],
     // runGuardsAndResolvers: 'always',
   },

@@ -285,6 +285,20 @@ export class PostComponent implements OnInit {
         queryParams: { type: CompanyPostTypes.TeamGoal },
         type: CompanyPostTypes.TeamGoal
       },
+
+      /** Mission */
+      {
+        path: 'post-list',
+        label: 'Mission List',
+        queryParams: { type: CompanyPostTypes.Mission, all: false },
+        type: CompanyPostTypes.Mission
+      },
+      {
+        path: 'add-' + CompanyPostTypes.Mission,
+        label: 'Add ' + CompanyPostTypes.Mission,
+        queryParams: { type: CompanyPostTypes.Mission },
+        type: CompanyPostTypes.Mission
+      },
       /** COMPANY POST TYPES ENDS HERE */
 
 

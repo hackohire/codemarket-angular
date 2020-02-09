@@ -268,6 +268,18 @@ const postRoutes: Routes = [
         loadChildren: () => import('../team-goal/add-team-goal/add-team-goal.module')
         .then(module => module.AddTeamGoalModule),
       },
+
+      /** Add Company Mission */
+      {
+        path: `add-${CompanyPostTypes.Mission}`,
+        loadChildren: () => import('../mission/add-mission/add-mission.module')
+        .then(module => module.AddMissionModule),
+      },
+      {
+        path: `edit-${CompanyPostTypes.Mission}/:postId`,
+        loadChildren: () => import('../mission/add-mission/add-mission.module')
+        .then(module => module.AddMissionModule),
+      },
     ],
     // runGuardsAndResolvers: 'always',
   },

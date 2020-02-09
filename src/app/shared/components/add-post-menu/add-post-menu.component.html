@@ -176,4 +176,16 @@
       [class]="'vertical-align-middle fal fa-' + icons['dream-job'] + ' fa-fw'"></i>
     <span> Company Post</span>
   </button>
+
+  <button mat-menu-item [routerLink]="['/', 'post', 'add-' + UserProfilePostTypes.StartupGoal]">
+    <i style="font-size: 1.7rem !important;"
+      [class]="'vertical-align-middle fal fa-' + icons['dream-job'] + ' fa-fw'"></i>
+    <span> Startup Goal</span>
+  </button>
+
+  <button mat-menu-item [routerLink]="['/', 'post', 'add-' + UserProfilePostTypes.SocialImpactGoal]">
+    <i style="font-size: 1.7rem !important;"
+      [class]="'vertical-align-middle fal fa-' + icons['dream-job'] + ' fa-fw'"></i>
+    <span> Social Impact Goal</span>
+  </button>
 </mat-menu>

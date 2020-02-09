@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PostType, CompanyPostTypes } from '../shared/models/post-types.enum';
+import { PostType, CompanyPostTypes, UserProfilePostTypes } from '../shared/models/post-types.enum';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -312,6 +312,34 @@ export class PostComponent implements OnInit {
         label: 'Add ' + CompanyPostTypes.CompanyPost,
         queryParams: { type: CompanyPostTypes.CompanyPost },
         type: CompanyPostTypes.CompanyPost
+      },
+
+      /** User Startup Goal */
+      {
+        path: 'post-list',
+        label: 'Startup Goal List',
+        queryParams: { type: UserProfilePostTypes.StartupGoal, all: false },
+        type: UserProfilePostTypes.StartupGoal
+      },
+      {
+        path: 'add-' + UserProfilePostTypes.StartupGoal,
+        label: 'Add ' + UserProfilePostTypes.StartupGoal,
+        queryParams: { type: UserProfilePostTypes.StartupGoal },
+        type: UserProfilePostTypes.StartupGoal
+      },
+
+      /** User Social Impact Goal */
+      {
+        path: 'post-list',
+        label: 'Social Impact Goal List',
+        queryParams: { type: UserProfilePostTypes.SocialImpactGoal, all: false },
+        type: UserProfilePostTypes.SocialImpactGoal
+      },
+      {
+        path: 'add-' + UserProfilePostTypes.SocialImpactGoal,
+        label: 'Add ' + UserProfilePostTypes.SocialImpactGoal,
+        queryParams: { type: UserProfilePostTypes.SocialImpactGoal },
+        type: UserProfilePostTypes.SocialImpactGoal
       },
       /** COMPANY POST TYPES ENDS HERE */
 

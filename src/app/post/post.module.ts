@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { PostComponent } from './post.component';
 import { AuthGuard } from '../shared/guards/auth.guard';
-import { CompanyPostTypes } from '../shared/models/post-types.enum';
+import { CompanyPostTypes, UserProfilePostTypes } from '../shared/models/post-types.enum';
 
 const postRoutes: Routes = [
   {
@@ -291,6 +291,30 @@ const postRoutes: Routes = [
         path: `edit-${CompanyPostTypes.Mission}/:postId`,
         loadChildren: () => import('../company-post/add-company-post/add-company-post.module')
         .then(module => module.AddCompanyPostModule),
+      },
+
+      /** Add User Startup Goal */
+      {
+        path: `add-${UserProfilePostTypes.StartupGoal}`,
+        loadChildren: () => import('../startup-goal/add-startup-goal/add-startup-goal.module')
+        .then(module => module.AddStartupGoalModule),
+      },
+      {
+        path: `edit-${UserProfilePostTypes.StartupGoal}/:postId`,
+        loadChildren: () => import('../startup-goal/add-startup-goal/add-startup-goal.module')
+        .then(module => module.AddStartupGoalModule),
+      },
+
+      /** Add User Social Impact Goal */
+      {
+        path: `add-${UserProfilePostTypes.SocialImpactGoal}`,
+        loadChildren: () => import('../social-impact-goal/add-social-impact-goal/add-social-impact-goal.module')
+        .then(module => module.AddSocialImpactGoalModule),
+      },
+      {
+        path: `edit-${UserProfilePostTypes.SocialImpactGoal}/:postId`,
+        loadChildren: () => import('../social-impact-goal/add-social-impact-goal/add-social-impact-goal.module')
+        .then(module => module.AddSocialImpactGoalModule)
       },
     ],
     // runGuardsAndResolvers: 'always',

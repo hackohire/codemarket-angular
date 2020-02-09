@@ -243,6 +243,20 @@ export class PostComponent implements OnInit {
         queryParams: { type: CompanyPostTypes.SalesGoal },
         type: CompanyPostTypes.SalesGoal
       },
+
+      /** Marketgin Goal */
+      {
+        path: 'post-list',
+        label: 'Marketing Goal List',
+        queryParams: { type: CompanyPostTypes.MarketingGoal, all: false },
+        type: CompanyPostTypes.MarketingGoal
+      },
+      {
+        path: 'add-' + CompanyPostTypes.MarketingGoal,
+        label: 'Add ' + CompanyPostTypes.MarketingGoal,
+        queryParams: { type: CompanyPostTypes.MarketingGoal },
+        type: CompanyPostTypes.MarketingGoal
+      },
       /** COMPANY POST TYPES ENDS HERE */
 
 

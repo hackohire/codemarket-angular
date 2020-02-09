@@ -256,6 +256,18 @@ const postRoutes: Routes = [
         loadChildren: () => import('../technical-goal/add-technical-goal/add-technical-goal.module')
         .then(module => module.AddTechnicalGoalModule),
       },
+
+       /** Add Company Team Goal */
+       {
+        path: `add-${CompanyPostTypes.TeamGoal}`,
+        loadChildren: () => import('../team-goal/add-team-goal/add-team-goal.module')
+        .then(module => module.AddTeamGoalModule),
+      },
+      {
+        path: `edit-${CompanyPostTypes.TeamGoal}/:postId`,
+        loadChildren: () => import('../team-goal/add-team-goal/add-team-goal.module')
+        .then(module => module.AddTeamGoalModule),
+      },
     ],
     // runGuardsAndResolvers: 'always',
   },

@@ -158,4 +158,10 @@
       [class]="'vertical-align-middle fal fa-' + icons['dream-job'] + ' fa-fw'"></i>
     <span> Technical Goal</span>
   </button>
+
+  <button mat-menu-item [routerLink]="['/', 'post', 'add-' + companyPostTypes.TeamGoal]">
+    <i style="font-size: 1.7rem !important;"
+      [class]="'vertical-align-middle fal fa-' + icons['dream-job'] + ' fa-fw'"></i>
+    <span> Team Goal</span>
+  </button>
 </mat-menu>

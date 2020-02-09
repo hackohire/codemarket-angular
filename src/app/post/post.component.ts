@@ -244,7 +244,7 @@ export class PostComponent implements OnInit {
         type: CompanyPostTypes.SalesGoal
       },
 
-      /** Marketgin Goal */
+      /** Marketing Goal */
       {
         path: 'post-list',
         label: 'Marketing Goal List',
@@ -256,6 +256,20 @@ export class PostComponent implements OnInit {
         label: 'Add ' + CompanyPostTypes.MarketingGoal,
         queryParams: { type: CompanyPostTypes.MarketingGoal },
         type: CompanyPostTypes.MarketingGoal
+      },
+
+      /** Technical Goal */
+      {
+        path: 'post-list',
+        label: 'Technical Goal List',
+        queryParams: { type: CompanyPostTypes.TechnicalGoal, all: false },
+        type: CompanyPostTypes.TechnicalGoal
+      },
+      {
+        path: 'add-' + CompanyPostTypes.TechnicalGoal,
+        label: 'Add ' + CompanyPostTypes.TechnicalGoal,
+        queryParams: { type: CompanyPostTypes.TechnicalGoal },
+        type: CompanyPostTypes.TechnicalGoal
       },
       /** COMPANY POST TYPES ENDS HERE */
 

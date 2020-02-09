@@ -244,6 +244,18 @@ const postRoutes: Routes = [
         loadChildren: () => import('../marketing-goal/add-marketing-goal/add-marketing-goal.module')
         .then(module => module.AddMarketingGoalModule),
       },
+
+      /** Add Company Technical Goal */
+      {
+        path: `add-${CompanyPostTypes.TechnicalGoal}`,
+        loadChildren: () => import('../technical-goal/add-technical-goal/add-technical-goal.module')
+        .then(module => module.AddTechnicalGoalModule),
+      },
+      {
+        path: `edit-${CompanyPostTypes.TechnicalGoal}/:postId`,
+        loadChildren: () => import('../technical-goal/add-technical-goal/add-technical-goal.module')
+        .then(module => module.AddTechnicalGoalModule),
+      },
     ],
     // runGuardsAndResolvers: 'always',
   },

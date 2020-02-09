@@ -197,7 +197,7 @@ const postRoutes: Routes = [
       },
 
        /** Add Company Technical Challege */
-       {
+      {
         path: `add-${CompanyPostTypes.TechnicalChallenge}`,
         loadChildren: () => import('../technical-challenge/add-technical-challenge/add-technical-challenge.module')
         .then(module => module.AddTechnicalChallengeModule),
@@ -209,6 +209,17 @@ const postRoutes: Routes = [
       },
 
      
+      /** Add Company Team Challege */
+      {
+        path: `add-${CompanyPostTypes.TeamChallenge}`,
+        loadChildren: () => import('../team-challenge/add-team-challenge/add-team-challenge.module')
+        .then(module => module.AddTeamChallengeModule),
+      },
+      {
+        path: `edit-${CompanyPostTypes.TeamChallenge}/:postId`,
+        loadChildren: () => import('../team-challenge/add-team-challenge/add-team-challenge.module')
+        .then(module => module.AddTeamChallengeModule),
+      },
     ],
     // runGuardsAndResolvers: 'always',
   },

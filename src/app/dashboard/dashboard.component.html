@@ -6,20 +6,21 @@
         style="font-size: 50px; margin: 150px 40px 20px 13px; max-width: 100%; font-weight: 400; text-align: left;">
         Innovation made <br/>Accessible & Affordable for <br/>Everyone
     </h1> -->
-    <div class="row" style="padding-top: 150px;">
-        <div class="col-md-9">
+    <div class="row" style="padding-top: 150px; align-self: right;">
+        <div class="col-md-6" style="align-self: right;">
             <h1
-                style="font-size: 80px; max-width: 100%; font-weight: 400; text-align: left;">
+                style="font-size: 80px; max-width: 100%; font-weight: 400; text-align: right;">
                 Make Local Communities <br />Innovative & Prosperous<br />
             </h1>
-            <h1 style="font-size: 80px; font-weight: 400; margin: 5px;"><a
+            <h1 style="font-size: 80px; font-weight: 400; margin: 5px; text-align: right;"><a
                 [routerLink]="['/', 'company', 'add-company']">JOIN TODAY</a></h1>
             <!-- <button mat-flat-button color="primary" (click)="authService.login()">JOIN TODAY</button> -->
         </div>
-        <div style="text-align: center; align-self: center; " class="col-md-3">
+        <div style="text-align: right; align-self: right; " class="col-md-6">
             <img src="./../assets/images/cm.gif">
         </div>
     </div>
+</div>
     <div class="row" style="margin-top: 170px;">
     <div class="col-md-12">
         <h1
@@ -29,26 +30,24 @@
         
     </div>
     </div>
-    <div class="row" style="margin-top: 10px;">
-        <div class="col-md-4" style="align-self: start;">
+    <div class="container">
+    <div class="row" style="margin-top: 10px;  align-self: right;">
+        <div class="col-md-4" style="align-self: right;">
             <h6 style="font-weight: 600; margin: 5px; font-size: 2.4em;">Professionals</h6>
             <br/>
-            <img style="height: 60%; width: 60%;" [src]="'../../assets/images/professional_training.png'"
-            alt="Product Image"><br/>
-            <h6 style="font-weight: 600; margin: 5px; font-size: 2.0em;">Career Accelerator</h6>
-            <h3 style="font-weight: 200; margin: 5px; font-size: 30px;">Your Career Goals, Your Dream Jobs.</h3><br/>
+            <img style="height: 40%; width: 50%; align-content: center" [src]="'../../assets/images/professional_training.png'" alt="Product Image"><br/>
+            <h6 style="font-weight: 600; margin: 5px; font-size: 2.0em; align-content: center">Career Accelerator</h6>
+            <h3 style="font-weight: 200; margin: 5px; font-size: 30px; align-content: center">Your Career Goals, Your Dream Jobs.</h3><br/>
             <p style="font-size: 30px; font-weight: 400; margin: 5px;">
-                <a routerLinkActive="mat-primary" [routerLink]="['/', 'post', 'add-dreamjob']">SET CAREER GOALS</a></p>
-            <!-- <button mat-flat-button color="primary" (click)="authService.login()">SET YOUR CAREER GOALS</button> -->
+                <a [routerLink]="['/', 'post', 'add-dreamjob']">SET CAREER GOALS</a></p>
         </div>
         <div class="col-md-4" style="align-self: center;">
             <h6 style="font-weight: 600; margin: 5px; font-size: 2.4em; align-content: center">Local Business</h6><br/>
             <img style="height: 50%; width: 50%; align-content: center" [src]="'../../assets/images/shop2.png'" alt="Product Image"><br/>
             <h6 style="font-weight: 600; margin: 5px; font-size: 2.0em; align-content: center">Sales Accelerator</h6>
-            <h3 style="font-weight: 200; margin: 5px; font-size: 30px; align-content: center">
-                Grow your Sales and Your Business.</h3><br/><br/>
-                <p style="font-size: 30px; font-weight: 400; margin: 5px;"><a
-                    [routerLink]="['/', 'company', 'add-company']">SET BUSINESS GOALS</a></p>
+            <h3 style="font-weight: 200; margin: 5px; font-size: 30px; align-content: center">Grow your Sales and Your Business.</h3><br/><br/>
+                <p style="font-size: 30px; font-weight: 400; margin: 5px;">
+                    <a [routerLink]="['/', 'company', 'add-company']">SET BUSINESS GOALS</a></p>
                 
         </div>
       
@@ -65,11 +64,12 @@
                 <!-- <button mat-flat-button color="primary" (click)="authService.login()">SET YOUR BUSINESS GOALS</button> -->
         </div>
     </div>
+</div>
     <!-- <table><tr>
             <td  height="550px"><img class="header-image" src="../../assets/images/fly720x550.png"
                 alt="background-image"></td><td style="font-size: 67px; margin: 20px 40px 20px 40px; max-width: 550px; font-weight: 700;">FLY IN YOUR TECH CAREER</td>
             </tr></table> -->
-</div>
+<!-- </div> contianer end-->
 <!-- </section> -->
 
 <mat-divider style="margin: 50px;"></mat-divider>
@@ -80,15 +80,21 @@
         <h3
             style="font-size: 65px; margin: 10px 10px 20px 13px; max-width: 100%; font-weight: 400; text-align: center;">
                     Sales Accelerator
-        </h3><br/>
-        <h6
-            style="font-size: 30px; margin: 20px 40px 20px 13px; max-width: 100%; font-weight: 200; text-align: center;">
-            Grow Your Business With Outsourced Sales & Technical Teams
-        </h6>
+        </h3>
     </div>
+    <br/>
+    <div class="row" style="margin-top: 10px; margin-bottom: 10px; text-align: center;">
+    <div class="col-md-6" style="align-self: left;">
+        <img style="height: 80%; width: 80%; align-content: left" [src]="'../../assets/images/sales2.png'" alt="Sales Accelerator"><br/>
+</div>
+        <div class="col-md-6" style="align-self: left;">
+        <h6
+            style="font-size: 40px; margin: 50px 10px 10px 10px; max-width: 100%; font-weight: 200; text-align: center;">
+            Cost effective way to grow your sales by leveraging skilled teams working on your business.
+        </h6>
 
-    <div class="row">
-        <div class="col-lg-4 col-md-6">
+   
+        <div class="col-md-6; text-align: center;">
             <div class="product product--card">
                 <h6 style="font-weight: 600; margin: 10px; font-size: 2.4em;">March 21st, 2020</h6>
                 <h6 style="font-weight: 300; margin: 10px; font-size: 2.4em;">3 Months</h6>
@@ -96,23 +102,21 @@
                     [routerLink]="['/', 'post', 'add-dreamjob']">APPLY</a></h2>
         </div>
         </div>
+    
     </div>
-</div>
-
-
-           
+    </div>
+</div>       
                 <div class="container">
                         <div class="row" style="margin-top: 10px; margin-bottom: 10px; text-align: center;">
                             <h4
-                                style="font-size: 45px; margin: 10px 10px 20px 13px; max-width: 100%; font-weight: 400; text-align: center;">
-                                Benefits to Businesses
+                                style="font-size: 55px; margin: 10px 10px 20px 13px; max-width: 100%; font-weight: 300; text-align: left;">
+                                Benefits to Local Businesses
                             </h4>
                             
                         </div>
                         <br/>
-                        <img style="height: 20%; width: 20%; align-content: left" [src]="'../../assets/images/sales2.png'" alt="Product Image"><br/>
                                             <h6
-                                                style="font-size: 30px; margin: 20px 40px 20px 13px; max-width: 100%; font-weight: 200; text-align: left;">
+                                                style="font-size: 30px; margin: 10px 40px 20px 13px; max-width: 100%; font-weight: 200; text-align: left;">
                                                 Skilled experts and dedicated professionals working on helping your business.
                                             </h6>
                         <div class="row">
@@ -132,35 +136,95 @@
                         </div>
                     </div>
                     
-                        
+                    <div class="container">
+                    <div class="row" style="margin-top: 10px; margin-bottom: 10px; text-align: center; ">
+                        <div class="col-md-3" style="align-self: left;">
+                            <p style="font-weight: 600; margin: 10px; font-size: 2.0em;">Innovate</p>
+                            <img style="height: 80%; width: 80%; align-content: left" [src]="'../../assets/images/innovate.png'" alt="Sales Accelerator"><br/>
+                            </div>
+                            <div class="col-md-3" style="align-self: left;">
+                                <p style="font-weight: 600; margin: 10px; font-size: 2.0em;">Affordable</p>
+                                <img style="height: 80%; width: 80%; align-content: left" [src]="'../../assets/images/affordable.png'" alt="Sales Accelerator"><br/>
+                            </div>
+                            <div class="col-md-3" style="align-self: left;">
+                                <p style="font-weight: 600; margin: 10px; font-size: 2.0em;">Get Work Done</p>
+                                <img style="height: 80%; width: 80%; align-content: left" [src]="'../../assets/images/project.png'" alt="Sales Accelerator"><br/>
+                            </div>
+                            <div class="col-md-3" style="align-self: left;">
+                                <p style="font-weight: 600; margin: 10px; font-size: 2.0em;">Dedicated Team</p>
+                                <img style="height: 80%; width: 80%; align-content: left" [src]="'../../assets/images/team.png'" alt="Sales Accelerator"><br/>
+                            </div>
+                    </div>  
+                
+                    <div class="row" style="margin-top: 10px; margin-bottom: 10px; text-align: center;">
+                        <div class="col-md-3" style="align-self: left;">
+                            <p style="font-weight: 600; margin: 10px; font-size: 2.0em;">Website</p>
+                            <img style="height: 60%; width: 80%; align-content: left" [src]="'../../assets/images/website.png'" alt="Sales Accelerator"><br/>
+                            </div>
+                            <div class="col-md-3" style="align-self: left;">
+                                <p style="font-weight: 600; margin: 10px; font-size: 2.0em;">Email Marketing</p>
+                                <img style="height: 60%; width: 80%; align-content: left" [src]="'../../assets/images/email.png'" alt="Sales Accelerator"><br/>
+                            </div>
+                            <div class="col-md-3" style="align-self: left;">
+                                <p style="font-weight: 600; margin: 10px; font-size: 2.0em;">Social Media Marketing</p>
+                                <img style="height: 60%; width: 80%; align-content: left" [src]="'../../assets/images/social.png'" alt="Sales Accelerator"><br/>
+                            </div>
+                            <div class="col-md-3" style="align-self: left;">
+                                <p style="font-weight: 600; margin: 10px; font-size: 2.0em;">CRM</p>
+                                <img style="height: 60%; width: 80%; align-content: left" [src]="'../../assets/images/crm2.png'" alt="Sales Accelerator"><br/>
+                            </div>
+                    </div>   
+                    <div class="row" style="margin-top: 10px; margin-bottom: 10px; text-align: center;">
+                        <div class="col-md-3" style="align-self: left;">
+                            <p style="font-weight: 600; margin: 10px; font-size: 2.0em;">Referral Network</p>
+                            <img style="height: 60%; width: 80%; align-content: left" [src]="'../../assets/images/referral.png'" alt="Sales Accelerator"><br/>
+                            </div>
+                            <div class="col-md-3" style="align-self: left;">
+                                <p style="font-weight: 600; margin: 10px; font-size: 2.0em;">Sales Growth Strategy</p>
+                                <img style="height: 60%; width: 80%; align-content: left" [src]="'../../assets/images/sales_strategy.png'" alt="Sales Accelerator"><br/>
+                            </div>
+                            <div class="col-md-3" style="align-self: left;">
+                                <p style="font-weight: 600; margin: 10px; font-size: 2.0em;">AI Strategy</p>
+                                <img style="height: 60%; width: 80%; align-content: left" [src]="'../../assets/images/ai_strategy.png'" alt="Sales Accelerator"><br/>
+                            </div>
+                            <div class="col-md-3" style="align-self: left;">
+                                <p style="font-weight: 600; margin: 10px; font-size: 2.0em;">Exit Strategy</p>
+                                <img style="height: 60%; width: 80%; align-content: left" [src]="'../../assets/images/exit.png'" alt="Sales Accelerator"><br/>
+                            </div>
+                    </div>   
+                </div>
 
-
-<div class="container">
-    <div class="row" style="margin-top: 10px; margin-bottom: 10px; text-align: center;">
-        <h3
-            style="font-size: 65px; margin: 10px 10px 20px 13px; max-width: 100%; font-weight: 400; text-align: center;">
-                    Career Accelerator
-        </h3>
-    </div>
-    <br/>
-        <h6
-            style="font-size: 30px; margin: 20px 40px 20px 13px; max-width: 100%; font-weight: 200; text-align: left;">
-            Take Control of Your Career and Future.
-        </h6>
-
-    <div class="row">
-        <div class="col-lg-4 col-md-6">
-            <div class="product product--card">
-                <h6 style="font-weight: 600; margin: 10px; font-size: 2.4em;">March 21st, 2020</h6>
-                <h6 style="font-weight: 300; margin: 10px; font-size: 2.4em;">3 Months</h6>
-                <h2 style="font-weight: 400; margin: 10px;"><a
-                    [routerLink]="['/', 'post', 'add-dreamjob']">APPLY</a></h2>
-        </div>
-        </div>
-    </div>
-</div>
-
-
+                <div class="container">
+                    <div class="row" style="margin-top: 10px; margin-bottom: 10px; text-align: center;">
+                        <h3
+                            style="font-size: 65px; margin: 10px 10px 20px 13px; max-width: 100%; font-weight: 400; text-align: center;">
+                            Career Accelerator
+                        </h3>
+                    </div>
+                    <br/>
+                    <div class="row" style="margin-top: 10px; margin-bottom: 10px; text-align: center;">
+                    <div class="col-md-6" style="align-self: left;">
+                        <img style="height: 80%; width: 80%; align-content: left" [src]="'../../assets/images/career.png'" alt="Sales Accelerator"><br/>
+                </div>
+                        <div class="col-md-6" style="align-self: left;">
+                        <h6
+                            style="font-size: 40px; margin: 50px 10px 10px 10px; max-width: 100%; font-weight: 200; text-align: center;">
+                            Take Control of Your Career and Future.
+                        </h6>
+                
+                   
+                        <div class="col-md-6; text-align: center;">
+                            <div class="product product--card">
+                                <h6 style="font-weight: 600; margin: 10px; font-size: 2.4em;">March 21st, 2020</h6>
+                                <h6 style="font-weight: 300; margin: 10px; font-size: 2.4em;">3 Months</h6>
+                                <h2 style="font-weight: 400; margin: 10px;"><a
+                                    [routerLink]="['/', 'post', 'add-dreamjob']">APPLY</a></h2>
+                        </div>
+                        </div>
+                    
+                    </div>
+                    </div>
+                </div>   
 <div class="container">
     <div class="row" style="margin-top: 10px; margin-bottom: 10px; text-align: center;">
         <h4
@@ -169,8 +233,7 @@
         </h4>
         
     </div>
-    <br/>
-            <img style="height: 30%; width: 30%;" [src]="'../../assets/images/career.png'" alt="Product Image"><br/>
+   <br/>
         <h6
             style="font-size: 30px; margin: 20px 40px 20px 13px; max-width: 100%; font-weight: 200; text-align: left;">
             Upgrade your skills by training with experts and working on real projects.
@@ -191,44 +254,126 @@
         </div>
        
     </div>
-    <div class="container">
-        <div class="row" style="margin-top: 10px; margin-bottom: 10px; text-align: center;">
-            <h3
-                style="font-size: 65px; margin: 10px 10px 20px 13px; max-width: 100%; font-weight: 400; text-align: center;">
-                        Vendor Accelerator
-            </h3>
-            <h6
-                style="font-size: 30px; margin: 20px 40px 20px 13px; max-width: 100%; font-weight: 200; text-align: center;">
-                Build Deep Engagement and Stories Around Usage of Your Product.
-            </h6>
-        </div>
-    
-        <div class="row">
-            <div class="col-lg-4 col-md-6">
-                <div class="product product--card">
-                    <h6 style="font-weight: 600; margin: 10px; font-size: 2.4em;">March 21st, 2020</h6>
-                    <h6 style="font-weight: 300; margin: 10px; font-size: 2.4em;">3 Months</h6>
-                    <h2 style="font-weight: 400; margin: 10px;"><a
-                        [routerLink]="['/', 'post', 'add-dreamjob']">APPLY</a></h2>
-            </div>
-            </div>
-        </div>
-        <div class="row" style="margin-top: 20px; margin-bottom: 10px; text-align: left;">
-            <h4
-                style="font-size: 45px; margin: 10px 10px 20px 13px; max-width: 100%; font-weight: 400; text-align: center;">
-                Benefits to Vendors
-            </h4>
-           
-        </div>
-        <br/>
-        <img style="float: left; height: 30%; width: 30%;" [src]="'../../assets/images/vendor.png'" alt="Product Image"><br/>
-    <h6
-        style="font-size: 30px; margin: 20px 40px 20px 13px; max-width: 100%; font-weight: 200; text-align: left;">
-        Create Real Stories of Your Product Usage and Product Advocates.
-    </h6>
-    </div>
-    
 </div>
+<div class="container">
+    <div class="row" style="margin-top: 10px; margin-bottom: 10px; text-align: center; ">
+        <div class="col-md-3" style="align-self: left;">
+            <p style="font-weight: 600; margin: 10px; font-size: 2.0em;">Training from Experts</p>
+            <img style="height: 60%; width: 80%; align-content: left" [src]="'../../assets/images/training3.png'" alt="Sales Accelerator"><br/>
+            </div>
+            <div class="col-md-3" style="align-self: left;">
+                <p style="font-weight: 600; margin: 10px; font-size: 2.0em;">Real Projects</p>
+                <img style="height: 60%; width: 80%; align-content: left" [src]="'../../assets/images/real_projects.png'" alt="Sales Accelerator"><br/>
+            </div>
+            <div class="col-md-3" style="align-self: left;">
+                <p style="font-weight: 600; margin: 10px; font-size: 2.0em;">Mock Interviews</p>
+                <img style="height: 60%; width: 80%; align-content: left" [src]="'../../assets/images/mock2.png'" alt="Sales Accelerator"><br/>
+            </div>
+            <div class="col-md-3" style="align-self: left;">
+                <p style="font-weight: 600; margin: 10px; font-size: 2.0em;">Dream Job Mentors</p>
+                <img style="height: 60%; width: 80%; align-content: left" [src]="'../../assets/images/career_mentor.png'" alt="Sales Accelerator"><br/>
+            </div>
+    </div>  
+    <div class="row" style="margin-top: 10px; margin-bottom: 10px; text-align: center; ">
+        <div class="col-md-3" style="align-self: left;">
+            <p style="font-weight: 600; margin: 10px; font-size: 2.0em;">Stress Management</p>
+            <img style="height: 60%; width: 80%; align-content: left" [src]="'../../assets/images/stress.png'" alt="Sales Accelerator"><br/>
+            </div>
+            <div class="col-md-3" style="align-self: left;">
+                <p style="font-weight: 600; margin: 10px; font-size: 2.0em;">Resume Gap Analysis</p>
+                <img style="height: 60%; width: 80%; align-content: left" [src]="'../../assets/images/mock.png'" alt="Sales Accelerator"><br/>
+            </div>
+            <div class="col-md-3" style="align-self: left;">
+                <p style="font-weight: 600; margin: 10px; font-size: 2.0em;">Peer Networking</p>
+                <img style="height: 60%; width: 80%; align-content: left" [src]="'../../assets/images/network.png'" alt="Sales Accelerator"><br/>
+            </div>
+            <div class="col-md-3" style="align-self: left;">
+                <p style="font-weight: 600; margin: 10px; font-size: 2.0em;">Leadership Training</p>
+                <img style="height: 60%; width: 80%; align-content: left" [src]="'../../assets/images/leader.png'" alt="Sales Accelerator"><br/>
+            </div>
+    </div> 
+</div>
+<div class="container">
+    <div class="row" style="margin-top: 10px; margin-bottom: 10px; text-align: center;">
+        <h3
+            style="font-size: 65px; margin: 10px 10px 20px 13px; max-width: 100%; font-weight: 400; text-align: center;">
+            Impact Marketing Program
+        </h3>
+    </div>
+    <br/>
+    <div class="row" style="margin-top: 10px; margin-bottom: 10px; text-align: center;">
+    <div class="col-md-6" style="align-self: left;">
+        <img style="height: 80%; width: 80%; align-content: left" [src]="'../../assets/images/impact.png'" alt="Sales Accelerator"><br/>
+</div>
+        <div class="col-md-6" style="align-self: left;">
+        <h6
+            style="font-size: 40px; margin: 50px 10px 10px 10px; max-width: 100%; font-weight: 200; text-align: center;">
+            Create deep engagement of your products and services with  local businesses and local professionals.
+        </h6>
+
+   
+        <div class="col-md-6; text-align: center;">
+            <div class="product product--card">
+                <h6 style="font-weight: 600; margin: 10px; font-size: 2.4em;">March 21st, 2020</h6>
+                <h6 style="font-weight: 300; margin: 10px; font-size: 2.4em;">3 Months</h6>
+                <h2 style="font-weight: 400; margin: 10px;"><a
+                    [routerLink]="['/', 'post', 'add-dreamjob']">APPLY</a></h2>
+        </div>
+        </div>
+    
+    </div>
+    <div class="row" style="margin-top: 10px; margin-bottom: 10px; text-align: center;">
+        <h4
+            style="font-size: 45px; margin: 10px 10px 20px 13px; max-width: 100%; font-weight: 400; text-align: center;">
+            Benefits to Vendors
+        </h4>
+        
+    </div>
+   <br/>
+        <h6
+            style="font-size: 30px; margin: 20px 40px 20px 13px; max-width: 100%; font-weight: 200; text-align: left;">
+            Create Real Stories of Your Product Usage and Product Advocates.
+            
+        </h6>
+
+    <div class="row">
+        <div class="col-lg-12 col-md-6">
+            <!-- start .single-product -->
+            <div class="product product--card">
+                <h6 style="font-weight: 600; margin: 10px; font-size: 2.4em;">3 months engagement</h6>
+                <h6 style="font-weight: 300; margin: 10px; font-size: 2.4em;">Opportunity to build sticky and viral marketing stories</h6>
+                <h2 style="font-weight: 400; margin: 10px;"><a
+                    [routerLink]="['/', 'post','add-dreamjob']">APPLY</a></h2>
+               
+            <!-- end /.single-product -->
+        </div>
+       
+        </div>
+       
+    </div>
+    <div class="row" style="margin-top: 10px; margin-bottom: 10px; text-align: center; ">
+        <div class="col-md-3" style="align-self: left;">
+            <p style="font-weight: 600; margin: 10px; font-size: 2.0em;">Sticky</p>
+            <img style="height: 60%; width: 80%; align-content: left" [src]="'../../assets/images/sticky.png'" alt="Sales Accelerator"><br/>
+            </div>
+            <div class="col-md-3" style="align-self: left;">
+                <p style="font-weight: 600; margin: 10px; font-size: 2.0em;">Viral</p>
+                <img style="height: 60%; width: 80%; align-content: left" [src]="'../../assets/images/viral.png'" alt="Sales Accelerator"><br/>
+            </div>
+            <div class="col-md-3" style="align-self: left;">
+                <p style="font-weight: 600; margin: 10px; font-size: 2.0em;">Community Impact Stories</p>
+                <img style="height: 60%; width: 80%; align-content: left" [src]="'../../assets/images/community2.png'" alt="Sales Accelerator"><br/>
+            </div>
+            <div class="col-md-3" style="align-self: left;">
+                <p style="font-weight: 600; margin: 10px; font-size: 2.0em;">Advocates & Influencers</p>
+                <img style="height: 60%; width: 80%; align-content: left" [src]="'../../assets/images/influencer.png'" alt="Sales Accelerator"><br/>
+            </div>
+    </div> 
+    </div>
+</div>   
+   
+    
+
                         
     <!-- start container -->
     

@@ -220,6 +220,18 @@ const postRoutes: Routes = [
         loadChildren: () => import('../team-challenge/add-team-challenge/add-team-challenge.module')
         .then(module => module.AddTeamChallengeModule),
       },
+
+      /** Add Company Sale Goal */
+      {
+        path: `add-${CompanyPostTypes.SalesGoal}`,
+        loadChildren: () => import('../sales-goal/add-sales-goal/add-sales-goal.module')
+        .then(module => module.AddSalesGoalModule),
+      },
+      {
+        path: `edit-${CompanyPostTypes.SalesGoal}/:postId`,
+        loadChildren: () => import('../sales-goal/add-sales-goal/add-sales-goal.module')
+        .then(module => module.AddSalesGoalModule),
+      },
     ],
     // runGuardsAndResolvers: 'always',
   },

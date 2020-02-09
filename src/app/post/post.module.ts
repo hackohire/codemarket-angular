@@ -328,6 +328,18 @@ const postRoutes: Routes = [
         loadChildren: () => import('../leadership-challenge/add-leadership-challenge/add-leadership-challenge.module')
         .then(module => module.AddLeadershipChallengeModule),
       },
+
+      /** Add User Stress Management */
+      {
+        path: `add-${UserProfilePostTypes.StressManagement}`,
+        loadChildren: () => import('../stress-management/add-stress-management/add-stress-management.module')
+        .then(module => module.AddStressManagementModule),
+      },
+      {
+        path: `edit-${UserProfilePostTypes.LeadershipChallenge}/:postId`,
+        loadChildren: () => import('../stress-management/add-stress-management/add-stress-management.module')
+        .then(module => module.AddStressManagementModule),
+      },
     ],
     // runGuardsAndResolvers: 'always',
   },

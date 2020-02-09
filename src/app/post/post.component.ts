@@ -355,6 +355,20 @@ export class PostComponent implements OnInit {
         queryParams: { type: UserProfilePostTypes.LeadershipChallenge },
         type: UserProfilePostTypes.LeadershipChallenge
       },
+
+      /** User Stress Management */
+      {
+        path: 'post-list',
+        label: 'Stress Management List',
+        queryParams: { type: UserProfilePostTypes.StressManagement, all: false },
+        type: UserProfilePostTypes.StressManagement
+      },
+      {
+        path: 'add-' + UserProfilePostTypes.StressManagement,
+        label: 'Add ' + UserProfilePostTypes.StressManagement,
+        queryParams: { type: UserProfilePostTypes.StressManagement },
+        type: UserProfilePostTypes.StressManagement
+      },
       /** COMPANY POST TYPES ENDS HERE */
 
 

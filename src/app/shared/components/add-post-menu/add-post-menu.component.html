@@ -170,4 +170,10 @@
       [class]="'vertical-align-middle fal fa-' + icons['dream-job'] + ' fa-fw'"></i>
     <span> Mission</span>
   </button>
+
+  <button mat-menu-item [routerLink]="['/', 'post', 'add-' + companyPostTypes.CompanyPost]">
+    <i style="font-size: 1.7rem !important;"
+      [class]="'vertical-align-middle fal fa-' + icons['dream-job'] + ' fa-fw'"></i>
+    <span> Company Post</span>
+  </button>
 </mat-menu>

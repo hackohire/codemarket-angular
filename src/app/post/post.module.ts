@@ -280,6 +280,18 @@ const postRoutes: Routes = [
         loadChildren: () => import('../mission/add-mission/add-mission.module')
         .then(module => module.AddMissionModule),
       },
+
+      /** Add Company Post */
+      {
+        path: `add-${CompanyPostTypes.CompanyPost}`,
+        loadChildren: () => import('../company-post/add-company-post/add-company-post.module')
+        .then(module => module.AddCompanyPostModule),
+      },
+      {
+        path: `edit-${CompanyPostTypes.Mission}/:postId`,
+        loadChildren: () => import('../company-post/add-company-post/add-company-post.module')
+        .then(module => module.AddCompanyPostModule),
+      },
     ],
     // runGuardsAndResolvers: 'always',
   },

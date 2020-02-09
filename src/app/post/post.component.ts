@@ -201,6 +201,20 @@ export class PostComponent implements OnInit {
         queryParams: { type: CompanyPostTypes.MarketingChallenge },
         type: CompanyPostTypes.MarketingChallenge
       },
+
+      /** Technical Challenge */
+      {
+        path: 'post-list',
+        label: 'Technical Challenge List',
+        queryParams: { type: CompanyPostTypes.TechnicalChallenge, all: false },
+        type: CompanyPostTypes.TechnicalChallenge
+      },
+      {
+        path: 'add-' + CompanyPostTypes.TechnicalChallenge,
+        label: 'Add ' + CompanyPostTypes.TechnicalChallenge,
+        queryParams: { type: CompanyPostTypes.TechnicalChallenge },
+        type: CompanyPostTypes.TechnicalChallenge
+      },
       /** COMPANY POST TYPES ENDS HERE */
 
 

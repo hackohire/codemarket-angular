@@ -172,7 +172,7 @@ const postRoutes: Routes = [
         .then(module => module.AddBusinessGoalModule),
       },
 
-      /** Add Company Sales Challege */
+      /** Add Company Marketing Challege */
       {
         path: `add-${CompanyPostTypes.MarketingChallenge}`,
         loadChildren: () => import('../marketing-challenge/add-marketing-challenge/add-marketing-challenge.module')
@@ -184,7 +184,31 @@ const postRoutes: Routes = [
         .then(module => module.AddMarketingChallengeModule),
       },
 
-      /** Add Company Marketing Challenge */
+      /** Add Company Sales Challege */
+      {
+        path: `add-${CompanyPostTypes.SalesChallenge}`,
+        loadChildren: () => import('../sales-challenge/add-sales-challenge/add-sales-challenge.module')
+        .then(module => module.AddSalesChallengeModule),
+      },
+      {
+        path: `edit-${CompanyPostTypes.SalesChallenge}/:postId`,
+        loadChildren: () => import('../sales-challenge/add-sales-challenge/add-sales-challenge.module')
+        .then(module => module.AddSalesChallengeModule),
+      },
+
+       /** Add Company Technical Challege */
+       {
+        path: `add-${CompanyPostTypes.TechnicalChallenge}`,
+        loadChildren: () => import('../technical-challenge/add-technical-challenge/add-technical-challenge.module')
+        .then(module => module.AddTechnicalChallengeModule),
+      },
+      {
+        path: `edit-${CompanyPostTypes.TechnicalChallenge}/:postId`,
+        loadChildren: () => import('../technical-challenge/add-technical-challenge/add-technical-challenge.module')
+        .then(module => module.AddTechnicalChallengeModule),
+      },
+
+     
     ],
     // runGuardsAndResolvers: 'always',
   },

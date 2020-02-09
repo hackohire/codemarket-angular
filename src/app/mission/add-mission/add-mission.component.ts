@@ -84,7 +84,7 @@ export class AddMissionComponent implements OnInit {
     };
 
      /** Make the Changes here while creating new post type */
-    if (this.activatedRoute.snapshot.parent.routeConfig.path === `add-${CompanyPostTypes.BusinessChallenge}`) {
+    if (this.activatedRoute.snapshot.parent.routeConfig.path === `add-${CompanyPostTypes.Mission}`) {
       this.store.dispatch(SetSelectedPost({ post: null }));
       this.postFormInitialization(null);
     } else {

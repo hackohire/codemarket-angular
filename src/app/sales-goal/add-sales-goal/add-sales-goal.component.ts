@@ -84,7 +84,7 @@ export class AddSalesGoalComponent implements OnInit {
     };
 
      /** Make the Changes here while creating new post type */
-    if (this.activatedRoute.snapshot.parent.routeConfig.path === `add-${CompanyPostTypes.BusinessChallenge}`) {
+    if (this.activatedRoute.snapshot.parent.routeConfig.path === `add-${CompanyPostTypes.SalesGoal}`) {
       this.store.dispatch(SetSelectedPost({ post: null }));
       this.postFormInitialization(null);
     } else {

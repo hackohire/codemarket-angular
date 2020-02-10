@@ -19,11 +19,11 @@ import { Post } from '../../shared/models/post.model';
 
 
 @Component({
-  selector: 'app-add-business-challenge',
-  templateUrl: './add-business-challenge.component.html',
-  styleUrls: ['./add-business-challenge.component.scss']
+  selector: 'app-add-marketing-challenge',
+  templateUrl: './add-marketing-challenge.component.html',
+  styleUrls: ['./add-marketing-challenge.component.scss']
 })
-export class AddBusinessChallengeComponent implements OnInit {
+export class AddMarketingChallengeComponent implements OnInit {
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   urlRegex = '^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$';
   breadcumb: BreadCumb;
@@ -71,14 +71,14 @@ export class AddBusinessChallengeComponent implements OnInit {
 
     /** Make the Changes here while creating new post type */
     this.breadcumb = {
-      title: 'Add Business Challenge Details',
+      title: 'Add Marketing Challenge Details',
       path: [
         {
           name: 'Dashboard',
           pathString: '/'
         },
         {
-          name: 'Add Business Challenge'
+          name: 'Add Marketing Challenge'
         }
       ]
     };
@@ -123,7 +123,7 @@ export class AddBusinessChallengeComponent implements OnInit {
       status: new FormControl(i && i.status ? i.status : PostStatus.Drafted),
       _id: new FormControl(i && i._id ? i._id : ''),
       // change this line
-      type: new FormControl(CompanyPostTypes.BusinessChallenge),
+      type: new FormControl(CompanyPostTypes.MarketingChallenge),
     });
   }
 

@@ -10,7 +10,7 @@ import { AddPost, GetPostById, SetSelectedPost, UpdatePost } from '../../core/st
 import { selectSelectedPost } from '../../core/store/selectors/post.selectors';
 import { AppState } from '../../core/store/state/app.state';
 import { BreadCumb } from '../../shared/models/bredcumb.model';
-import { CompanyPostTypes } from '../../shared/models/post-types.enum';
+import { UserProfilePostTypes } from '../../shared/models/post-types.enum';
 import { PostStatus } from '../../shared/models/poststatus.enum';
 import { FormService } from '../../shared/services/form.service';
 import { EditorComponent } from '../../shared/components/editor/editor.component';
@@ -19,11 +19,11 @@ import { Post } from '../../shared/models/post.model';
 
 
 @Component({
-  selector: 'app-add-business-challenge',
-  templateUrl: './add-business-challenge.component.html',
-  styleUrls: ['./add-business-challenge.component.scss']
+  selector: 'app-add-social-impact-goal',
+  templateUrl: './add-social-impact-goal.component.html',
+  styleUrls: ['./add-social-impact-goal.component.scss']
 })
-export class AddBusinessChallengeComponent implements OnInit {
+export class AddSocialImpactGoalComponent implements OnInit {
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   urlRegex = '^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$';
   breadcumb: BreadCumb;
@@ -71,20 +71,20 @@ export class AddBusinessChallengeComponent implements OnInit {
 
     /** Make the Changes here while creating new post type */
     this.breadcumb = {
-      title: 'Add Business Challenge Details',
+      title: 'Add Social Impact Goal Details',
       path: [
         {
           name: 'Dashboard',
           pathString: '/'
         },
         {
-          name: 'Add Business Challenge'
+          name: 'Add Social Impact Goal'
         }
       ]
     };
 
      /** Make the Changes here while creating new post type */
-    if (this.activatedRoute.snapshot.parent.routeConfig.path === `add-${CompanyPostTypes.BusinessChallenge}`) {
+    if (this.activatedRoute.snapshot.parent.routeConfig.path === `add-${UserProfilePostTypes.SocialImpactGoal}`) {
       this.store.dispatch(SetSelectedPost({ post: null }));
       this.postFormInitialization(null);
     } else {
@@ -123,7 +123,7 @@ export class AddBusinessChallengeComponent implements OnInit {
       status: new FormControl(i && i.status ? i.status : PostStatus.Drafted),
       _id: new FormControl(i && i._id ? i._id : ''),
       // change this line
-      type: new FormControl(CompanyPostTypes.BusinessChallenge),
+      type: new FormControl(UserProfilePostTypes.SocialImpactGoal),
     });
   }
 

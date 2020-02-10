@@ -158,25 +158,30 @@
                                     alt="Commentator Avatar">
                             </a>
                         </div>
-                        <div class="media-body">
-                            <app-add-post-menu #addPostMenu style="position: absolute; visibility: hidden;">
-                            </app-add-post-menu>
-                            <div (click)="addPostMenu.openMenu();" class="comment-reply-form">
-                                <textarea placeholder="Add Post!"
-                                    style="background: white; height: 100px; padding: 20px 35px; width: 100%; min-height: 130px; border-radius: 6px;">
-                                </textarea>
+                            <div class="media-body">
+                                <!-- Created AddPostMenuComponent Instance, and kep it hidden becuase here we want to show the box -->
+                                <app-add-post-menu #addPostMenu style="position: absolute; visibility: hidden;">
+                                </app-add-post-menu>
 
-                                <button style="float: right; margin-top: 10px; margin-bottom: 20px;" type="button"
-                                    class="btn btn--sm btn--round" (click)="addPostMenu.openMenu();">Post</button>
+                                <div (click)="addPostMenu.openMenu();" class="comment-reply-form">
+                                    <!-- Created Dummy Textbox  -->
+                                    <textarea placeholder="Add Post!"
+                                        style="background: white; height: 100px; padding: 20px 35px; width: 100%; min-height: 130px; border-radius: 6px;">
+                                    </textarea>
+
+                                    <!-- When Clickd on textbox, access the AddPostMenuComponent instance we have created above and call the 
+                                        openMenu() method -->
+                                    <button style="float: right; margin-top: 10px; margin-bottom: 20px;" type="button"
+                                        class="btn btn--sm btn--round" (click)="addPostMenu.openMenu();">Post</button>
+                                </div>
                             </div>
-                        </div>
                     </div>
                 </div>
 
                 <!-- <div class="width-wrapper"> -->
                 <div class="item-grid pen-grid item-grid-large">
                     <!-- <ng-container > -->
-                    <app-brief-post style="width: 100%;" [p]="p" *ngFor="let p of dataSource?.data"></app-brief-post>
+                    <app-brief-post style="width: 100%;" [p]="p" [readMore]="true" *ngFor="let p of dataSource?.data"></app-brief-post>
                     <!-- </ng-container> -->
                 </div>
 

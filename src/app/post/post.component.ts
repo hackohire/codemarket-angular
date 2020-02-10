@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PostType, CompanyPostTypes } from '../shared/models/post-types.enum';
+import { PostType, CompanyPostTypes, UserProfilePostTypes } from '../shared/models/post-types.enum';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -160,6 +160,215 @@ export class PostComponent implements OnInit {
         type: CompanyPostTypes.BusinessChallenge
       },
 
+      /** Business Goal */
+      {
+        path: 'post-list',
+        label: 'Business Goals List',
+        queryParams: { type: CompanyPostTypes.BusinessGoal, all: false },
+        type: CompanyPostTypes.BusinessGoal
+      },
+      {
+        path: 'add-' + CompanyPostTypes.BusinessGoal,
+        label: 'Add ' + CompanyPostTypes.BusinessGoal,
+        queryParams: { type: CompanyPostTypes.BusinessGoal },
+        type: CompanyPostTypes.BusinessGoal
+      },
+
+      /** Sales Challenge */
+      {
+        path: 'post-list',
+        label: 'Sales Challenge List',
+        queryParams: { type: CompanyPostTypes.SalesChallenge, all: false },
+        type: CompanyPostTypes.SalesChallenge
+      },
+      {
+        path: 'add-' + CompanyPostTypes.SalesChallenge,
+        label: 'Add ' + CompanyPostTypes.SalesChallenge,
+        queryParams: { type: CompanyPostTypes.SalesChallenge },
+        type: CompanyPostTypes.SalesChallenge
+      },
+
+      /** Marketing Challenge */
+      {
+        path: 'post-list',
+        label: 'Marketing Challenge List',
+        queryParams: { type: CompanyPostTypes.MarketingChallenge, all: false },
+        type: CompanyPostTypes.MarketingChallenge
+      },
+      {
+        path: 'add-' + CompanyPostTypes.MarketingChallenge,
+        label: 'Add ' + CompanyPostTypes.MarketingChallenge,
+        queryParams: { type: CompanyPostTypes.MarketingChallenge },
+        type: CompanyPostTypes.MarketingChallenge
+      },
+
+      /** Technical Challenge */
+      {
+        path: 'post-list',
+        label: 'Technical Challenge List',
+        queryParams: { type: CompanyPostTypes.TechnicalChallenge, all: false },
+        type: CompanyPostTypes.TechnicalChallenge
+      },
+      {
+        path: 'add-' + CompanyPostTypes.TechnicalChallenge,
+        label: 'Add ' + CompanyPostTypes.TechnicalChallenge,
+        queryParams: { type: CompanyPostTypes.TechnicalChallenge },
+        type: CompanyPostTypes.TechnicalChallenge
+      },
+
+      /** Team Challenge */
+      {
+        path: 'post-list',
+        label: 'Team Challenge List',
+        queryParams: { type: CompanyPostTypes.TeamChallenge, all: false },
+        type: CompanyPostTypes.TeamChallenge
+      },
+      {
+        path: 'add-' + CompanyPostTypes.TeamChallenge,
+        label: 'Add ' + CompanyPostTypes.TeamChallenge,
+        queryParams: { type: CompanyPostTypes.TeamChallenge },
+        type: CompanyPostTypes.TeamChallenge
+      },
+
+      /** Sales Goal */
+      {
+        path: 'post-list',
+        label: 'Sales Goal List',
+        queryParams: { type: CompanyPostTypes.SalesGoal, all: false },
+        type: CompanyPostTypes.SalesGoal
+      },
+      {
+        path: 'add-' + CompanyPostTypes.SalesGoal,
+        label: 'Add ' + CompanyPostTypes.SalesGoal,
+        queryParams: { type: CompanyPostTypes.SalesGoal },
+        type: CompanyPostTypes.SalesGoal
+      },
+
+      /** Marketing Goal */
+      {
+        path: 'post-list',
+        label: 'Marketing Goal List',
+        queryParams: { type: CompanyPostTypes.MarketingGoal, all: false },
+        type: CompanyPostTypes.MarketingGoal
+      },
+      {
+        path: 'add-' + CompanyPostTypes.MarketingGoal,
+        label: 'Add ' + CompanyPostTypes.MarketingGoal,
+        queryParams: { type: CompanyPostTypes.MarketingGoal },
+        type: CompanyPostTypes.MarketingGoal
+      },
+
+      /** Technical Goal */
+      {
+        path: 'post-list',
+        label: 'Technical Goal List',
+        queryParams: { type: CompanyPostTypes.TechnicalGoal, all: false },
+        type: CompanyPostTypes.TechnicalGoal
+      },
+      {
+        path: 'add-' + CompanyPostTypes.TechnicalGoal,
+        label: 'Add ' + CompanyPostTypes.TechnicalGoal,
+        queryParams: { type: CompanyPostTypes.TechnicalGoal },
+        type: CompanyPostTypes.TechnicalGoal
+      },
+
+      /** Team Goal */
+      {
+        path: 'post-list',
+        label: 'Team Goal List',
+        queryParams: { type: CompanyPostTypes.TeamGoal, all: false },
+        type: CompanyPostTypes.TeamGoal
+      },
+      {
+        path: 'add-' + CompanyPostTypes.TeamGoal,
+        label: 'Add ' + CompanyPostTypes.TeamGoal,
+        queryParams: { type: CompanyPostTypes.TeamGoal },
+        type: CompanyPostTypes.TeamGoal
+      },
+
+      /** Mission */
+      {
+        path: 'post-list',
+        label: 'Mission List',
+        queryParams: { type: CompanyPostTypes.Mission, all: false },
+        type: CompanyPostTypes.Mission
+      },
+      {
+        path: 'add-' + CompanyPostTypes.Mission,
+        label: 'Add ' + CompanyPostTypes.Mission,
+        queryParams: { type: CompanyPostTypes.Mission },
+        type: CompanyPostTypes.Mission
+      },
+
+       /** Company Post */
+       {
+        path: 'post-list',
+        label: 'Company Post List',
+        queryParams: { type: CompanyPostTypes.CompanyPost, all: false },
+        type: CompanyPostTypes.CompanyPost
+      },
+      {
+        path: 'add-' + CompanyPostTypes.CompanyPost,
+        label: 'Add ' + CompanyPostTypes.CompanyPost,
+        queryParams: { type: CompanyPostTypes.CompanyPost },
+        type: CompanyPostTypes.CompanyPost
+      },
+
+      /** User Startup Goal */
+      {
+        path: 'post-list',
+        label: 'Startup Goal List',
+        queryParams: { type: UserProfilePostTypes.StartupGoal, all: false },
+        type: UserProfilePostTypes.StartupGoal
+      },
+      {
+        path: 'add-' + UserProfilePostTypes.StartupGoal,
+        label: 'Add ' + UserProfilePostTypes.StartupGoal,
+        queryParams: { type: UserProfilePostTypes.StartupGoal },
+        type: UserProfilePostTypes.StartupGoal
+      },
+
+      /** User Social Impact Goal */
+      {
+        path: 'post-list',
+        label: 'Social Impact Goal List',
+        queryParams: { type: UserProfilePostTypes.SocialImpactGoal, all: false },
+        type: UserProfilePostTypes.SocialImpactGoal
+      },
+      {
+        path: 'add-' + UserProfilePostTypes.SocialImpactGoal,
+        label: 'Add ' + UserProfilePostTypes.SocialImpactGoal,
+        queryParams: { type: UserProfilePostTypes.SocialImpactGoal },
+        type: UserProfilePostTypes.SocialImpactGoal
+      },
+
+      /** User Leadership challenge */
+      {
+        path: 'post-list',
+        label: 'Leadership Challenge List',
+        queryParams: { type: UserProfilePostTypes.LeadershipChallenge, all: false },
+        type: UserProfilePostTypes.LeadershipChallenge
+      },
+      {
+        path: 'add-' + UserProfilePostTypes.LeadershipChallenge,
+        label: 'Add ' + UserProfilePostTypes.LeadershipChallenge,
+        queryParams: { type: UserProfilePostTypes.LeadershipChallenge },
+        type: UserProfilePostTypes.LeadershipChallenge
+      },
+
+      /** User Stress Management */
+      {
+        path: 'post-list',
+        label: 'Stress Management List',
+        queryParams: { type: UserProfilePostTypes.StressManagement, all: false },
+        type: UserProfilePostTypes.StressManagement
+      },
+      {
+        path: 'add-' + UserProfilePostTypes.StressManagement,
+        label: 'Add ' + UserProfilePostTypes.StressManagement,
+        queryParams: { type: UserProfilePostTypes.StressManagement },
+        type: UserProfilePostTypes.StressManagement
+      },
       /** COMPANY POST TYPES ENDS HERE */
 
 

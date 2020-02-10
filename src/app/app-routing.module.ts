@@ -3,6 +3,19 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './shared/guards/auth.guard';
 import { PostDataResolver } from './core/resolver';
 import { AboutUsComponent } from './about-us/about-us.component';
+import { InnovateComponent } from './innovate/innovate.component';
+import { AffordableComponent } from './affordable/affordable.component';
+import { GetWorkDoneComponent } from './get-work-done/get-work-done.component';
+import { DedicatedTeamComponent } from './dedicated-team/dedicated-team.component';
+import { WebsiteComponent } from './website/website.component';
+import { EmailMarketingComponent } from './email-marketing/email-marketing.component';
+import { SocialMediaMarketingComponent } from './social-media-marketing/social-media-marketing.component';
+import { CrmComponent } from './crm/crm.component';
+import { ReferralNetworkComponent } from './referral-network/referral-network.component';
+import { SalesGrowthStrategyComponent } from './sales-growth-strategy/sales-growth-strategy.component';
+import { AiStrategyComponent } from './ai-strategy/ai-strategy.component';
+import { ExitStrategyComponent } from './exit-strategy/exit-strategy.component';
+import { TrainingFromExpertsComponent } from './training-from-experts/training-from-experts.component';
 // import { PostDataResolver } from './core/resolver';
 
 const routes: Routes = [
@@ -162,7 +175,62 @@ const routes: Routes = [
   {
     path: 'about-us',
     component: AboutUsComponent
+  },
+
+  /** Static routes starts here */
+  {
+    path: 'innovate',
+    component: InnovateComponent
+  },
+  {
+    path: 'affordable',
+    component: AffordableComponent
+  },
+  {
+    path: 'get-work-done',
+    component: GetWorkDoneComponent
+  },
+  {
+    path: 'dedicated-team',
+    component: DedicatedTeamComponent
+  },
+  {
+    path: 'website',
+    component: WebsiteComponent
+  },
+  {
+    path: 'email-marketing',
+    component: EmailMarketingComponent
+  },
+  {
+    path: 'social-media-marketing',
+    component: SocialMediaMarketingComponent
+  },
+  {
+    path: 'crm',
+    component: CrmComponent
+  },
+  {
+    path: 'referral-network',
+    component: ReferralNetworkComponent
+  },
+  {
+    path: 'sales-growth-strategy',
+    component: SalesGrowthStrategyComponent
+  },
+  {
+    path: 'ai-strategy',
+    component: AiStrategyComponent
+  },
+  {
+    path: 'exit-strategy',
+    component: ExitStrategyComponent
+  },
+  {
+    path: 'training-from-experts',
+    component: TrainingFromExpertsComponent
   }
+  /** Static routes ends here */
 ];
 
 @NgModule({

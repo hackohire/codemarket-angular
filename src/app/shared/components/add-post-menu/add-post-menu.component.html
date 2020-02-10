@@ -7,7 +7,7 @@
   <!-- <mat-icon style="vertical-align: middle;">library_add</mat-icon> -->
   <mat-icon style="vertical-align: middle;">keyboard_arrow_down</mat-icon>
 </a>
-<mat-menu #menu="matMenu">
+<mat-menu #menu="matMenu" [yPosition]="'below'" [xPosition]="'after'" [overlapTrigger]="false">
 
   <!-- Add Product -->
   <button mat-menu-item [routerLink]="['/', 'sell', 'add-product']">

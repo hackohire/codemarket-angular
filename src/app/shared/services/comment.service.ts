@@ -135,25 +135,25 @@ export class CommentService {
         tap((c: Comment) => {
 
           /** If comment is related to the post of a company */
-          if (c.companyReferenceId) {
-            const p = this.companyPostsList.find(p => p._id === c.referenceId);
-            if (c.parentId) {
-              const commentIndex = p.comments.slice().findIndex(com => com._id === c.parentId);
-              p.comments[commentIndex]['children'].push(c);
-            } else {
-              p.comments.push(c);
-            }
-          } else if (c.userReferenceId) {
-            /** If comment is related to the posts under user */
-            const p = this.usersPostsList.find(p => p._id === c.referenceId);
+          // if (c.companyReferenceId) {
+          //   const p = this.companyPostsList.find(p => p._id === c.referenceId);
+          //   if (c.parentId) {
+          //     const commentIndex = p.comments.slice().findIndex(com => com._id === c.parentId);
+          //     p.comments[commentIndex]['children'].push(c);
+          //   } else {
+          //     p.comments.push(c);
+          //   }
+          // } else if (c.userReferenceId) {
+          //   /** If comment is related to the posts under user */
+          //   const p = this.usersPostsList.find(p => p._id === c.referenceId);
 
-            if (c.parentId) {
-              const commentIndex = p.comments.slice().findIndex(com => com._id === c.parentId);
-              p.comments[commentIndex]['children'].push(c);
-            } else {
-              p.comments.push(c);
-            }
-          } else {
+          //   if (c.parentId) {
+          //     const commentIndex = p.comments.slice().findIndex(com => com._id === c.parentId);
+          //     p.comments[commentIndex]['children'].push(c);
+          //   } else {
+          //     p.comments.push(c);
+          //   }
+          // } else {
             if (c.parentId) {
               const commentIndex = comments.slice().findIndex(com => com._id === c.parentId);
               comments[commentIndex]['children'].push(c);
@@ -168,7 +168,7 @@ export class CommentService {
             // this.openToastrNotification(post, c)
 
             this.commentsList$.next(comments);
-          }
+          // }
         })
       ).subscribe()
     );
@@ -355,34 +355,34 @@ export class CommentService {
         }),
         tap((c: Comment) => {
            /** If comment is related to the post of a company */
-          if (c.companyReferenceId) {
+          // if (c.companyReferenceId) {
 
-            const p = this.companyPostsList.find(p => p._id === c.referenceId);
+          //   const p = this.companyPostsList.find(p => p._id === c.referenceId);
 
-            if (c.parentId) {
-              const parentCommentIndex = p.comments.findIndex(com => com._id === c.parentId);
-              const deletedChildCommentIndex = p.comments[parentCommentIndex]['children'].findIndex(com => com._id === c._id);
-              p.comments[parentCommentIndex]['children'][deletedChildCommentIndex]['text'] = c.text;
-            } else {
-              const commentIndex = p.comments.slice().findIndex(com => com._id === c._id);
-              p.comments[commentIndex]['text'] = c.text;
-            }
+          //   if (c.parentId) {
+          //     const parentCommentIndex = p.comments.findIndex(com => com._id === c.parentId);
+          //     const deletedChildCommentIndex = p.comments[parentCommentIndex]['children'].findIndex(com => com._id === c._id);
+          //     p.comments[parentCommentIndex]['children'][deletedChildCommentIndex]['text'] = c.text;
+          //   } else {
+          //     const commentIndex = p.comments.slice().findIndex(com => com._id === c._id);
+          //     p.comments[commentIndex]['text'] = c.text;
+          //   }
 
-          } else if (c.userReferenceId) {
+          // } else if (c.userReferenceId) {
 
-            /** If comment is related to the posts under user */
-            const p = this.usersPostsList.find(p => p._id === c.referenceId);
+          //   /** If comment is related to the posts under user */
+          //   const p = this.usersPostsList.find(p => p._id === c.referenceId);
 
-            if (c.parentId) {
-              const parentCommentIndex = p.comments.findIndex(com => com._id === c.parentId);
-              const deletedChildCommentIndex = p.comments[parentCommentIndex]['children'].findIndex(com => com._id === c._id);
-              p.comments[parentCommentIndex]['children'][deletedChildCommentIndex]['text'] = c.text;
-            } else {
-              const commentIndex = p.comments.slice().findIndex(com => com._id === c._id);
-              p.comments[commentIndex]['text'] = c.text;
-            }
+          //   if (c.parentId) {
+          //     const parentCommentIndex = p.comments.findIndex(com => com._id === c.parentId);
+          //     const deletedChildCommentIndex = p.comments[parentCommentIndex]['children'].findIndex(com => com._id === c._id);
+          //     p.comments[parentCommentIndex]['children'][deletedChildCommentIndex]['text'] = c.text;
+          //   } else {
+          //     const commentIndex = p.comments.slice().findIndex(com => com._id === c._id);
+          //     p.comments[commentIndex]['text'] = c.text;
+          //   }
 
-          } else {
+          // } else {
 
             if (c.parentId) {
               const parentCommentIndex = comments.findIndex(com => com._id === c.parentId);
@@ -394,7 +394,7 @@ export class CommentService {
             }
             this.commentsList$.next(comments);
 
-          }
+          // }
         })
       ).subscribe()
     );

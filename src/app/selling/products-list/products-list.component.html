@@ -115,16 +115,16 @@
             <div class="col-lg-3">
 
                 <!-- Side Nav Bar -->
-                <app-add-post-menu #addPostMenu style="color: #0674ec !important; margin-left: auto;"></app-add-post-menu>
+                <app-add-post-menu style="color: #0674ec !important; margin-left: auto;">
+                </app-add-post-menu>
                 <div class="docs-component-viewer-nav common-box-shadow" style="margin-bottom: 20px; margin-top: 10px;">
-					<div class="docs-component-viewer-nav-content">
-						<div *ngFor="let category of filtersMainCategory; let last = last;">
+                    <div class="docs-component-viewer-nav-content">
+                        <div *ngFor="let category of filtersMainCategory; let last = last;">
                             <button cdkAccordionItem #panel="cdkAccordionItem"
                                 [expanded]="category?.types ? isExpanded(category) : false"
                                 (click)="selectMainCategory(category, panel)" class="docs-nav-content-btn"
                                 [ngClass]="selectedPostType === category.view ? 'docs-component-viewer-sidenav-item-selected' : ''"
-                                [attr.aria-controls]="'panel-' + category.view"
-                                [attr.aria-expanded]="panel.expanded">
+                                [attr.aria-controls]="'panel-' + category.view" [attr.aria-expanded]="panel.expanded">
                                 {{category.title}}
                                 <mat-icon *ngIf="category?.types">
                                     {{panel.expanded ? 'keyboard_arrow_up' :  'keyboard_arrow_down'}}
@@ -133,17 +133,17 @@
                             <mat-nav-list dense [@bodyExpansion]="panel.expanded ? 'expanded' : 'collapsed'"
                                 id="panel-{{category.view}}" [attr.aria-label]="category">
                                 <a mat-list-item *ngFor="let component of category?.types"
-                                    (click)="selectedPostType = component; getAllPosts(component)"
-                                    [routerLink]="[]" [queryParams]="{view: component}"
+                                    (click)="selectedPostType = component; getAllPosts(component)" [routerLink]="[]"
+                                    [queryParams]="{view: component}"
                                     [ngClass]="component === selectedPostType ? 'docs-component-viewer-sidenav-item-selected': ''"
                                     [attr.aria-current]="selectedPostType === component ? 'page': 'false'">
                                     {{component}}
                                 </a>
                             </mat-nav-list>
-							<hr *ngIf="!last" />
-						</div>
-					</div>
-				</div>
+                            <hr *ngIf="!last" />
+                        </div>
+                    </div>
+                </div>
 
             </div>
 
@@ -152,31 +152,36 @@
                 <div class="comment-form-area" style="padding: 0;">
                     <div class="media comment-form">
                         <div class="media-left">
-                            <a href="#">
+                            <a [routerLink]="['/', 'dashboard', 'profile', authService?.loggedInUser?._id ]">
                                 <img class="author_avatar_comment" style="height: 45px; width:45px;"
                                     [src]="authService?.loggedInUser?.avatar ? ((s3FilesBucketURL + authService?.loggedInUser?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
                                     alt="Commentator Avatar">
                             </a>
                         </div>
-                        <div class="media-body">
-                            <div class="comment-reply-form">
-                                <!---------------- ADD POST EDITOR --------------->
-                                <app-editor (click)="$event.stopPropagation(); addPostMenu.openMenu();" #addPostEditor [placeholder]="'Add Post'"
-                                    [editorStyle]="{background: 'white', 'padding': '20px 35px', 'min-height': '130px', 'border-radius': '6px'}"
-                                    [id]="'editor'"></app-editor>
+                            <div class="media-body">
+                                <!-- Created AddPostMenuComponent Instance, and kep it hidden becuase here we want to show the box -->
+                                <app-add-post-menu #addPostMenu style="position: absolute; visibility: hidden;">
+                                </app-add-post-menu>
 
-                                <button style="float: right; margin-top: 10px; margin-bottom: 20px;" type="button"
-                                    class="btn btn--sm btn--round"
-                                    (click)="addPostMenu.openMenu();">Post</button>
+                                <div (click)="addPostMenu.openMenu();" class="comment-reply-form">
+                                    <!-- Created Dummy Textbox  -->
+                                    <textarea placeholder="Add Post!"
+                                        style="background: white; height: 100px; padding: 20px 35px; width: 100%; min-height: 130px; border-radius: 6px;">
+                                    </textarea>
+
+                                    <!-- When Clickd on textbox, access the AddPostMenuComponent instance we have created above and call the 
+                                        openMenu() method -->
+                                    <button style="float: right; margin-top: 10px; margin-bottom: 20px;" type="button"
+                                        class="btn btn--sm btn--round" (click)="addPostMenu.openMenu();">Post</button>
+                                </div>
                             </div>
-                        </div>
                     </div>
                 </div>
 
                 <!-- <div class="width-wrapper"> -->
                 <div class="item-grid pen-grid item-grid-large">
                     <!-- <ng-container > -->
-                    <app-brief-post style="width: 100%;" [p]="p" *ngFor="let p of dataSource?.data"></app-brief-post>
+                    <app-brief-post style="width: 100%;" [p]="p" [readMore]="true" *ngFor="let p of dataSource?.data"></app-brief-post>
                     <!-- </ng-container> -->
                 </div>
 

@@ -1,7 +1,6 @@
-<article class="single-post single-item">
+<article class="single-post single-item" *ngIf="false">
     <header class="header">
-        <a [routerLink]="['/', 'dashboard', 'profile', p?.createdBy?._id ]"
-            class="authorAvatar">
+        <a [routerLink]="['/', 'dashboard', 'profile', p?.createdBy?._id ]" class="authorAvatar">
             <img [src]="p?.createdBy?.avatar ? ((s3FilesBucketURL + p.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar"
                 class="user-avatar" width="40" height="40"></a>
         <div class="titleAndAuthor">
@@ -11,8 +10,7 @@
             <p>{{p?.createdBy?.currentJobDetails?.jobProfile ? p?.createdBy?.currentJobDetails?.jobProfile : '-'}}
             </p>
         </div>
-        <div
-            class="action-menu">
+        <div class="action-menu">
             {{fromNow(p?.createdAt)}}
         </div>
     </header>
@@ -20,8 +18,7 @@
 
         <!-- Post Title -->
         <h2 class="post-title" *ngIf="p?.name">
-            <a style="display: inline-block;"
-                (click)="postService?.redirectToPostDetails(p)">{{p?.name}}</a>
+            <a style="display: inline-block;" (click)="postService?.redirectToPostDetails(p)">{{p?.name}}</a>
 
             <!-- Post Actions -->
             <!-- <span style="float: right;" *ngIf="p?.createdBy?._id === authService?.loggedInUser?._id">
@@ -44,8 +41,8 @@
 
         <!-- Post Content -->
         <div class="item-content">
-            <app-editor [readOnly]="true" [editorStyle]="{border: 'none', padding: '10px 0'}"
-                [data]="p?.description" [id]="p?._id"></app-editor>
+            <app-editor [readOnly]="true" [editorStyle]="{border: 'none', padding: '10px 0'}" [data]="p?.description"
+                [id]="p?._id"></app-editor>
         </div>
 
         <!-- Post Tags -->
@@ -55,17 +52,6 @@
             padding: 0 15px; line-height: 32px;
             color: #0674ec; margin-right: 10px;font-size: 15px;font-weight: 200;-webkit-border-radius: 100px;border-radius: 100px;">{{t?.name}}</span>
         </div>
-        <!-- <div class="item-content item-content-long">
-<p>When was the last time you wrote vanilla CSS? As a front end developer, it's hard to imagine a
-    world
-    without CSS preprocessors and all of the functionality they provide. They give us features like
-    variables and functions and organizational benefits like partial includes and selector nesting.
-</p>
-<p>As the most popular CSS preprocessor out there, <a href="http://sass-lang.com/">Sass</a> just
-    makes CSS
-    <em>better</em>... but most developers barely even scratch the surface of what it can do.</p>
-<p>One of the most widely used features of Sass, and...</p>
-</div> -->
     </div>
     <footer class="stats">
         <a class="single-stat invisible-button loves loves heart-button loved-0">
@@ -78,3 +64,126 @@
         </a>
     </footer>
 </article>
+
+
+<!-- Single Post UI -->
+<div class="box image common-box-shadow">
+    <div class="box-header">
+        <!-- Post Title -->
+        <h2 class="post-title" *ngIf="p?.name">
+            <a style="display: inline-block;" (click)="postService?.redirectToPostDetails(p)">{{p?.name}}</a>
+        </h2>
+
+        <!-- USER'S AVATAR & NAME -->
+        <h3>
+            <a [routerLink]="['/', 'dashboard', 'profile', p?.createdBy?._id ]">
+                <img [src]="p?.createdBy?.avatar ? ((s3FilesBucketURL + p?.createdBy?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                    alt="" />{{p?.createdBy?.name}}
+            </a>
+            <span>{{fromNow(p?.createdAt)}} <i class="fa fa-globe"></i></span>
+        </h3>
+
+        <!-- Post Actions -->
+        <!-- <i class="fad fa-check-circle" *ngIf="p['__edit']" (click)="updatePost(p, singlePostEditor)"></i> -->
+        <span style="float: right; display: none" *ngIf="p?.createdBy?._id === authService?.loggedInUser?._id">
+            <button mat-icon-button [matMenuTriggerFor]="optionsMenu" aria-label="Example icon-button with a menu">
+                <mat-icon>more_horiz</mat-icon>
+            </button>
+            <mat-menu #optionsMenu="matMenu">
+                <button mat-menu-item (click)="p['__edit'] = !p['__edit']">
+                    <mat-icon>edit</mat-icon>
+                    <span>Edit</span>
+                </button>
+                <button mat-menu-item (click)="deletePost(p?._id)">
+                    <mat-icon>delete</mat-icon>
+                    <span>Delete</span>
+                </button>
+            </mat-menu>
+        </span>
+        <!-- <span><i class="fa fa-angle-down"></i></span> -->
+        <div class="window"><span></span></div>
+    </div>
+    <div class="box-content">
+        <div class="content">
+            <img alt="" />
+        </div>
+        <div class="bottom">
+            <p [ngClass]="readMore ? 'readMore' : ''">
+                <!---------------- SINGLE POST EDITOR --------------->
+                <app-editor #singlePostEditor [editorStyle]="{background: 'white'}"
+                    [data]="p?.description" [id]="'post' + p?._id" [readOnly]="!p['__edit']" [blockLevelComments]="!readMore"
+                    [commentType]="'post'" [post]="p" [commentsList]="(commentService.commentsList$ | async)">
+                </app-editor>
+            </p>
+            <span><span class="fa fa-search-plus"></span></span>
+        </div>
+    </div>
+
+    <!-- Read More Button to Fetch comments and show full description-->
+    <div class="ce-block" *ngIf="readMore" style="padding: 10px 0 0 30px;" (click)="readMore = false; fetchComments(p)"><a>Read More...</a></div>
+
+    <div class="box-likes">
+        <div class="post-row" style="display: none; padding: 0;">
+            <span><a href="#"><img src="https://goo.gl/oM0Y8G" alt="" /></a></span>
+            <span><a href="#"><img src="https://goo.gl/vswgSn" alt="" /></a></span>
+            <span><a href="#"><img src="https://goo.gl/4W27eB" alt="" /></a></span>
+            <span><a href="#">+99</a></span>
+            <span>Like this</span>
+        </div>
+
+        <!-- Show Number of Likes & Comments -->
+        <footer style="float: left; margin-left: -18px;">
+            <a mat-button class="single-stat invisible-button loves loves heart-button loved-0">
+                <mat-icon style="color: crimson;" class="vertical-align-middle">favorite</mat-icon>
+                <span class="count"> {{p?.likeCount ? p?.likeCount : 0}}</span>
+            </a>
+            <a mat-button class="single-stat comments" (click)="readMore = false; fetchComments(p) ">
+                <mat-icon style="color: #0674ec;" class="vertical-align-middle">comment</mat-icon>
+                <span class="count"> {{p?.comments?.length}}</span>
+            </a>
+        </footer>
+        <!-- <div class="post-row" style="padding: 0; border: none;">
+            <span>{{p?.comments?.length}} comments</span>
+        </div> -->
+    </div>
+    <!-- <div class="box-buttons">
+                <div class="post-row">
+                    <button><span class="fa fa-thumbs-up"></span></button>
+                    <button (click)="p['__show'] = !p['__show']"><span class="fas fa-comment-lines"></span></button>
+                    <button><span class="ion-share"></span></button>
+                </div>
+            </div> -->
+
+    <!-- <div class="box-click"><span><i class="ion-chatbox-working"></i> View 140 more comments</span></div> -->
+    <!-- Show List of Comments + Add Comment UI only when user clicks on read more or comment icon -->
+    <div class="box-comments" style="border-top: 2px solid #f4f4f4;" *ngIf="readMore === false">
+        <div class="thread">
+            <ul class="media-list thread-list"
+                style="padding: 10px 0px 0px 0px; list-style: none;">
+                <div *ngFor="let com of (commentService.commentsList$ | async)">
+                    <li *ngIf="!com?.blockSpecificComment" class="single-thread">
+                        <app-comment [comment]="com"></app-comment>
+                    </li>
+                </div>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Show List of Comments + Add Comment UI only when user clicks on read more or comment icon -->
+    <div class="box-new-comment" *ngIf="readMore === false">
+        <img [src]="authService?.loggedInUser?.avatar ? ((s3FilesBucketURL + authService?.loggedInUser?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+            alt="" />
+        <div class="content">
+            <!-- <div class="post-row"> -->
+            <!---------------- ADD COMMENT EDITOR --------------->
+            <app-editor #addCommentEditor [placeholder]="'Write a comment'"
+                [editorStyle]="{ width: '84%', background: 'white', padding: '0 12px 0 12px', 'border-radius': '20px'}"
+                [id]="'comment' + p?._id"></app-editor>
+            <!-- </div> -->
+            <div class="post-row">
+                <button style="float: right;" type="button" class="btn btn--sm btn--round"
+                    (click)="addComment(addCommentEditor)">Post</button>
+            </div>
+        </div>
+    </div>
+</div>

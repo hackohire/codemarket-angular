@@ -52,7 +52,7 @@ export class CommentComponent implements OnInit {
       // createdBy: new FormControl(this.authService.loggedInUser._id),
       referenceId: new FormControl(this.comment.referenceId),
       companyReferenceId: new FormControl(this.companyReferenceId ? this.companyReferenceId : this.comment.companyReferenceId),
-      userReferenceId: new FormControl(this.userReferenceId ? this.userReferenceId : this.comment.userReferenceId),
+      // userReferenceId: new FormControl(this.userReferenceId ? this.userReferenceId : this.comment.userReferenceId),
       parentId: new FormControl(this.comment._id),
       type: new FormControl(this.comment.type),
       blockSpecificComment: new FormControl(this.comment.blockSpecificComment),
@@ -67,7 +67,7 @@ export class CommentComponent implements OnInit {
   }
 
   allowReply() {
-    if (!this.comment.parentId && !this.comment.companyReferenceId) {
+    if (!this.comment.parentId) {
       this.initializeReplyForm();
       // this.replyEditorId = new Date().toDateString();
       this.reply = true;

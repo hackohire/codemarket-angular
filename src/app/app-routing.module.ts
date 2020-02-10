@@ -23,6 +23,10 @@ import { StressManagementComponent } from './stress-management/stress-management
 import { ResumeGapAnalysisComponent } from './resume-gap-analysis/resume-gap-analysis.component';
 import { PeerNetworkingComponent } from './peer-networking/peer-networking.component';
 import { LeadershipTrainingComponent } from './leadership-training/leadership-training.component';
+import { StickyComponent } from './sticky/sticky.component';
+import { ViralComponent } from './viral/viral.component';
+import { CommunityImpactStoriesComponent } from './community-impact-stories/community-impact-stories.component';
+import { AdvocatesInfluencersComponent } from './advocates-influencers/advocates-influencers.component';
 // import { PostDataResolver } from './core/resolver';
 
 const routes: Routes = [
@@ -264,6 +268,22 @@ const routes: Routes = [
   {
     path: 'leadership-training',
     component: LeadershipTrainingComponent
+  },
+  {
+    path: 'sticky',
+    component: StickyComponent
+  },
+  {
+    path: 'viral',
+    component: ViralComponent
+  },
+  {
+    path: 'community-impact-stories',
+    component: CommunityImpactStoriesComponent
+  },
+  {
+    path: 'advocates-influencers',
+    component: AdvocatesInfluencersComponent
   }
   /** Static routes ends here */
 ];

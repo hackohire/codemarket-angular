@@ -47,7 +47,7 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
   @Input()
   set data(updatedData) {
     this._data = updatedData;
-    if (this.editor) {
+    if (this.editor && Object.keys(this.editor).length !== 0) {
       if (updatedData && updatedData.length) {
         this.editor.blocks.render({blocks: updatedData});
       } else {

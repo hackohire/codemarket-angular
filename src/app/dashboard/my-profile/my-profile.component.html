@@ -65,8 +65,10 @@
 
 				<!-- start aside -->
 				<div class="col-md-3">
-					<app-add-post-menu #addPostMenu style="color: #0674ec !important; margin-left: auto;"></app-add-post-menu>
-					<div class="docs-component-viewer-nav common-box-shadow" style="margin-bottom: 20px; margin-top: 10px;">
+					<app-add-post-menu style="color: #0674ec !important; margin-left: auto;">
+					</app-add-post-menu>
+					<div class="docs-component-viewer-nav common-box-shadow"
+						style="margin-bottom: 20px; margin-top: 10px;">
 						<div class="docs-component-viewer-nav-content">
 							<div *ngFor="let category of profileViewLinks; let last = last;">
 								<button cdkAccordionItem #panel="cdkAccordionItem"
@@ -104,7 +106,7 @@
 							<div class="comment-form-area" style="padding: 0;">
 								<div class="media comment-form">
 									<div class="media-left">
-										<a href="#">
+										<a [routerLink]="['/', 'dashboard', 'profile', authService?.loggedInUser?._id ]">
 											<img class="author_avatar_comment" style="height: 45px; width:45px;"
 												[src]="authService?.loggedInUser?.avatar ? ((s3FilesBucketURL + authService?.loggedInUser?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
 												alt="Commentator Avatar">
@@ -112,14 +114,17 @@
 									</div>
 									<div class="media-body">
 										<div class="comment-reply-form">
-											<!---------------- ADD POST EDITOR --------------->
-											<app-editor (click)="$event.stopPropagation(); addPostMenu.openMenu()" #addPostEditor [placeholder]="'Add Post'"
-												[editorStyle]="{background: 'white', 'padding': '20px 35px', 'min-height': '130px', 'border-radius': '6px'}"
-												[id]="'editor'"></app-editor>
+											<app-add-post-menu #addPostMenu
+												style="position: absolute; visibility: hidden;">
+											</app-add-post-menu>
+											<div (click)="addPostMenu.openMenu();" class="comment-reply-form">
+												<textarea placeholder="Add Post!"
+													style="background: white; height: 100px; padding: 20px 35px; width: 100%; min-height: 130px; border-radius: 6px;"></textarea>
 
-											<button style="float: right; margin-top: 10px; margin-bottom: 20px;"
-												type="button" class="btn btn--sm btn--round"
-												(click)="addPostMenu.openMenu()">Post</button>
+												<button style="float: right; margin-top: 10px; margin-bottom: 20px;"
+													type="button" class="btn btn--sm btn--round"
+													(click)="addPostMenu.openMenu();">Post</button>
+											</div>
 										</div>
 									</div>
 								</div>

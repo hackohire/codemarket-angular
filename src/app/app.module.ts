@@ -25,6 +25,13 @@ import { SalesGrowthStrategyComponent } from './sales-growth-strategy/sales-grow
 import { AiStrategyComponent } from './ai-strategy/ai-strategy.component';
 import { ExitStrategyComponent } from './exit-strategy/exit-strategy.component';
 import { TrainingFromExpertsComponent } from './training-from-experts/training-from-experts.component';
+import { RealProjectsComponent } from './real-projects/real-projects.component';
+import { MockInterviewsComponent } from './mock-interviews/mock-interviews.component';
+import { DreamJobMentorsComponent } from './dream-job-mentors/dream-job-mentors.component';
+import { StressManagementComponent } from './stress-management/stress-management.component';
+import { ResumeGapAnalysisComponent } from './resume-gap-analysis/resume-gap-analysis.component';
+import { PeerNetworkingComponent } from './peer-networking/peer-networking.component';
+import { LeadershipTrainingComponent } from './leadership-training/leadership-training.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +50,14 @@ import { TrainingFromExpertsComponent } from './training-from-experts/training-f
     SalesGrowthStrategyComponent,
     AiStrategyComponent,
     ExitStrategyComponent,
-    TrainingFromExpertsComponent
+    TrainingFromExpertsComponent,
+    RealProjectsComponent,
+    MockInterviewsComponent,
+    DreamJobMentorsComponent,
+    StressManagementComponent,
+    ResumeGapAnalysisComponent,
+    PeerNetworkingComponent,
+    LeadershipTrainingComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

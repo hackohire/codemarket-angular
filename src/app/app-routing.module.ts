@@ -16,6 +16,13 @@ import { SalesGrowthStrategyComponent } from './sales-growth-strategy/sales-grow
 import { AiStrategyComponent } from './ai-strategy/ai-strategy.component';
 import { ExitStrategyComponent } from './exit-strategy/exit-strategy.component';
 import { TrainingFromExpertsComponent } from './training-from-experts/training-from-experts.component';
+import { RealProjectsComponent } from './real-projects/real-projects.component';
+import { MockInterviewsComponent } from './mock-interviews/mock-interviews.component';
+import { DreamJobMentorsComponent } from './dream-job-mentors/dream-job-mentors.component';
+import { StressManagementComponent } from './stress-management/stress-management.component';
+import { ResumeGapAnalysisComponent } from './resume-gap-analysis/resume-gap-analysis.component';
+import { PeerNetworkingComponent } from './peer-networking/peer-networking.component';
+import { LeadershipTrainingComponent } from './leadership-training/leadership-training.component';
 // import { PostDataResolver } from './core/resolver';
 
 const routes: Routes = [
@@ -229,6 +236,34 @@ const routes: Routes = [
   {
     path: 'training-from-experts',
     component: TrainingFromExpertsComponent
+  },
+  {
+    path: 'real-projects',
+    component: RealProjectsComponent
+  },
+  {
+    path: 'mock-interviews',
+    component: MockInterviewsComponent
+  },
+  {
+    path: 'dream-job-mentors',
+    component: DreamJobMentorsComponent
+  },
+  {
+    path: 'stress-management',
+    component: StressManagementComponent
+  },
+  {
+    path: 'resume-gap-analysis',
+    component: ResumeGapAnalysisComponent
+  },
+  {
+    path: 'peer-networking',
+    component: PeerNetworkingComponent
+  },
+  {
+    path: 'leadership-training',
+    component: LeadershipTrainingComponent
   }
   /** Static routes ends here */
 ];

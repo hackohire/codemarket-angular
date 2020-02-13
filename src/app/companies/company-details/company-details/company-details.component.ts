@@ -110,6 +110,7 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
     {
       view: 'goals',
       title: 'Goals',
+      showHighlight: true,
       types: [
         {
           view: 'sales-goal',
@@ -136,6 +137,7 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
     {
       view: 'challenges',
       title: 'Challenges',
+      showHighlight: true,
       types: [
         {
           view: 'sales-challenge',

@@ -82,12 +82,15 @@ export class ProductsListComponent implements OnInit, OnDestroy, AfterViewInit {
     {
       view: 'Businesses',
       title: 'Businesses',
-      types: this.companyPostTypes
+      types: this.companyPostTypes,
+      showHighlight: true,
+      showAddBusiness: true
     },
     {
       view: 'Proffessionals',
       title: 'Proffessionals',
-      types: this.userProfilePostTypes
+      types: this.userProfilePostTypes,
+      showHighlight: true,
     },
   ];
 

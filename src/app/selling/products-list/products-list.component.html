@@ -122,10 +122,15 @@
                         <div *ngFor="let category of filtersMainCategory; let last = last;">
                             <button cdkAccordionItem #panel="cdkAccordionItem"
                                 [expanded]="category?.types ? isExpanded(category) : false"
-                                (click)="selectMainCategory(category, panel)" class="docs-nav-content-btn"
+                                (click)="selectMainCategory(category, panel)" class="category docs-nav-content-btn"
                                 [ngClass]="selectedPostType === category.view ? 'docs-component-viewer-sidenav-item-selected' : ''"
                                 [attr.aria-controls]="'panel-' + category.view" [attr.aria-expanded]="panel.expanded">
                                 {{category.title}}
+
+                                <i *ngIf="category?.showHighlight" style="color: red;" class="fas fa-exclamation"></i>
+
+                                <button *ngIf="category?.showAddBusiness" [routerLink]="['/', 'company', 'add-company']" style="margin-left: 8px; line-height: 23px; padding: 0 6px; font-size: 10px;" type="button" class="btn btn--vsm btn--round">Add Business</button>
+
                                 <mat-icon *ngIf="category?.types">
                                     {{panel.expanded ? 'keyboard_arrow_up' :  'keyboard_arrow_down'}}
                                 </mat-icon>
@@ -158,23 +163,23 @@
                                     alt="Commentator Avatar">
                             </a>
                         </div>
-                            <div class="media-body">
-                                <!-- Created AddPostMenuComponent Instance, and kep it hidden becuase here we want to show the box -->
-                                <app-add-post-menu #addPostMenu style="position: absolute; visibility: hidden;">
-                                </app-add-post-menu>
+                        <div class="media-body">
+                            <!-- Created AddPostMenuComponent Instance, and kep it hidden becuase here we want to show the box -->
+                            <app-add-post-menu #addPostMenu style="position: absolute; visibility: hidden;">
+                            </app-add-post-menu>
 
-                                <div (click)="addPostMenu.openMenu();" class="comment-reply-form">
-                                    <!-- Created Dummy Textbox  -->
-                                    <textarea placeholder="Add Post!"
-                                        style="background: white; height: 100px; padding: 20px 35px; width: 100%; min-height: 130px; border-radius: 6px;">
-                                    </textarea>
+                            <div (click)="addPostMenu.openMenu();" class="comment-reply-form">
+                                <!-- Created Dummy Textbox  -->
+                                <textarea placeholder="Add Post!"
+                                    style="background: white; height: 100px; padding: 20px 35px; width: 100%; min-height: 130px; border-radius: 6px;">
+                                </textarea>
 
-                                    <!-- When Clickd on textbox, access the AddPostMenuComponent instance we have created above and call the 
-                                        openMenu() method -->
-                                    <button style="float: right; margin-top: 10px; margin-bottom: 20px;" type="button"
-                                        class="btn btn--sm btn--round" (click)="addPostMenu.openMenu();">Post</button>
-                                </div>
+                                <!-- When Clickd on textbox, access the AddPostMenuComponent instance we have created above and call the 
+                                    openMenu() method -->
+                                <button style="float: right; margin-top: 10px; margin-bottom: 20px;" type="button"
+                                    class="btn btn--sm btn--round" (click)="addPostMenu.openMenu();">Post</button>
                             </div>
+                        </div>
                     </div>
                 </div>
 

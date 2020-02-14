@@ -11,6 +11,9 @@ import { Router } from '@angular/router';
 import { MatDialog, MatAnchor } from '@angular/material';
 import { SearchComponent } from '../search/search.component';
 import { CompanyPostTypes, UserProfilePostTypes, PostType } from '../../../shared/models/post-types.enum';
+import { PostService } from '../../../shared/services/post.service';
+import { dummyEmails } from '../../../emails';
+import { Validators, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-nav-bar',
@@ -66,7 +69,8 @@ export class NavBarComponent implements OnInit, OnDestroy {
     private store: Store<AppState>,
     public authService: AuthService,
     private router: Router,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private postService: PostService
     ) {
   }
 
@@ -135,6 +139,23 @@ export class NavBarComponent implements OnInit, OnDestroy {
     const dialogRef = this.dialog.open(SearchComponent, {
       panelClass: 'no-padding',
       disableClose: false
+    });
+  }
+
+  sendEmails() {
+    dummyEmails.forEach((e, i) => {
+      setTimeout(() => {
+        if (!Validators.email(new FormControl(e.email))) {
+          this.postService.sendEmailWithStaticContent(e.email).toPromise().then((o) => {
+            console.log(o);
+            if (o) {
+              dummyEmails[i]['sent'] = true;
+            }
+          }).catch((e) => {
+            console.log(e);
+          });
+        }
+      }, i * 5000);
     });
   }
 }

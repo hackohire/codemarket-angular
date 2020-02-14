@@ -193,10 +193,15 @@
         [queryParams]="{all: true}">
       <div class="line-height-initial"> About </div>
       </a>
+      
       <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'membership']"
         [queryParams]="{all: true}">
       <div class="line-height-initial"> Membership </div>
-    </a>
+      </a>
+
+      <a mat-button routerLinkActive="mat-primary" (click)="sendEmails()">
+      <div class="line-height-initial"> Send Email </div>
+      </a>
 
     
      

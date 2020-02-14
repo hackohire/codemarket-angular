@@ -16,6 +16,8 @@ import { appConstants } from '../constants/app_constants';
 import { makeStateKey, TransferState } from '@angular/platform-browser';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { isPlatformServer } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +32,8 @@ export class PostService {
     @Inject(PLATFORM_ID) private platformId,
     private router: Router,
     private authService: AuthService,
-    private readonly transferState: TransferState
+    private readonly transferState: TransferState,
+    private http: HttpClient
   ) { }
 
 
@@ -345,5 +348,10 @@ export class PostService {
         return p.data.fullSearch;
       }),
     );
+  }
+
+  sendEmailWithStaticContent(email: string) {
+    const body = { email };
+    return this.http.post(`${environment.serverless_url}sendEmailWithStaticContent`, body);
   }
 }

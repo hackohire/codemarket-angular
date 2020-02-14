@@ -2,7 +2,7 @@
         START COMPANY DETAILS
     ==============================================-->
 
-<ng-container *ngIf="(companyDetails$ | async) as details">
+<ng-container *ngIf="(companyDetails) as details">
     <!--================================
         START BREADCRUMB AREA
     =================================-->
@@ -30,6 +30,46 @@
                         <span class="initials">{{details?.name ? details?.name[0] : ''}}</span>
                     </div>
                     <h4 style="text-align: center; padding-top: 10px;">{{details?.name}}</h4>
+
+                    <!-- Social Media Links & Popover to edit those links -->
+                    <div class="social" fxLayout="row wrap" fxLayoutGap="10px" fxLayoutAlign="center start">
+                        <a [href]="details?.facebookLink" target="_blank" style="color: inherit;"><i class="fab fa-facebook"></i></a>
+                        <a [href]="details?.twitterLink" target="_blank" style="color: inherit;"><i class="fab fa-twitter"></i></a>
+                        <a [href]="details?.linkedinLink" target="_blank" style="color: inherit;"><i class="fab fa-linkedin"></i></a>
+                        <a [href]="details?.yelpLink" target="_blank" style="color: inherit;"><i class="fab fa-yelp"></i></a>
+                        <a [href]="details?.websiteLink" target="_blank" style="color: inherit;"><i class="far fa-rss"></i></a>
+                        <a *ngIf="details?.createdBy?._id === authService?.loggedInUser?._id"><i class="fas fa-pen" [mdePopoverTriggerFor]="socialMediaLinks" [mdePopoverTargetAt]="lr"
+                            mdePopoverTriggerOn="click"></i></a>
+                        
+                    </div>
+
+                    <mde-popover #socialMediaLinks="mdePopover" [mdePopoverOverlapTrigger]="false"
+                        [mdePopoverCloseOnClick]="false" [mdePopoverArrowWidth]="0" mdePopoverArrowColor="#FFFFFF">
+                        <div class="common-box-shadow" style="padding: 15px; min-width: 500px; border-radius: 19px; background: #f2f3f5; border: solid 0.5px rgb(236, 236, 236)">
+                            <mat-form-field style="display: block;" >
+                                <input #fb [value]="details?.facebookLink" type="text" matInput placeholder="Facebook Page">
+                            </mat-form-field>
+                            <mat-form-field style="display: block;" >
+                                <input #tw [value]="details?.twitterLink" type="text" matInput placeholder="Twitter Handle">
+                            </mat-form-field>
+                            <mat-form-field style="display: block;" >
+                                <input #li [value]="details?.linkedinLink" type="text" matInput placeholder="Linkedin">
+                            </mat-form-field>
+                            <mat-form-field style="display: block;" >
+                                <input #ig [value]="details?.instagramLink" type="text" matInput placeholder="Instagram">
+                            </mat-form-field>
+                            <mat-form-field style="display: block;" >
+                                <input #yelp [value]="details?.yelpLink" type="text" matInput placeholder="Yelp">
+                            </mat-form-field>
+                            <mat-form-field style="display: block;" >
+                                <input #cw [value]="details?.websiteLink" type="text" matInput placeholder="Company Website">
+                            </mat-form-field>
+                            <a class="btn btn--vsm btn--round menu" (click)="updateSocialMedia(fb.value, tw.value, li.value, ig.value, yelp.value, cw.value)"
+                            style="color: white; background: #0674ec !important;">Update
+                        </a>
+                        </div>
+                    </mde-popover>
+
                 </div>
                 <div class="col-lg-9 col-md-9 col-sm-9" style="padding: 0;">
                     <div class="picture-container" *ngIf="selectedCoverPic || companyDetails?.cover">
@@ -64,7 +104,8 @@
                 <div class="col-lg-3">
                     <!-- start aside -->
                     <app-add-post-menu style="color: #0674ec !important; margin-left: auto;"></app-add-post-menu>
-                    <div class="docs-component-viewer-nav common-box-shadow" style="margin-bottom: 20px; margin-top: 10px;">
+                    <div class="docs-component-viewer-nav common-box-shadow"
+                        style="margin-bottom: 20px; margin-top: 10px;">
                         <div class="docs-component-viewer-nav-content">
                             <div *ngFor="let category of companyViewLinks; let last = last;">
                                 <button cdkAccordionItem #panel="cdkAccordionItem"
@@ -75,8 +116,9 @@
                                     [attr.aria-expanded]="panel.expanded">
                                     {{category.title}}
 
-                                    <i *ngIf="category?.showHighlight" style="color: red;" class="fas fa-exclamation"></i>
-                                    
+                                    <i *ngIf="category?.showHighlight" style="color: red;"
+                                        class="fas fa-exclamation"></i>
+
                                     <mat-icon *ngIf="category?.types">
                                         {{panel.expanded ? 'keyboard_arrow_up' :  'keyboard_arrow_down'}}
                                     </mat-icon>
@@ -151,9 +193,10 @@
                                         <textarea placeholder="Add Post!"
                                             style="background: white; height: 100px; padding: 20px 35px; width: 100%; min-height: 130px; border-radius: 6px;">
                                         </textarea>
-        
-                                        <button style="float: right; margin-top: 10px; margin-bottom: 20px;" type="button"
-                                            class="btn btn--sm btn--round" (click)="addPostMenu.openMenu();">Post</button>
+
+                                        <button style="float: right; margin-top: 10px; margin-bottom: 20px;"
+                                            type="button" class="btn btn--sm btn--round"
+                                            (click)="addPostMenu.openMenu();">Post</button>
                                     </div>
                                 </div>
                             </div>

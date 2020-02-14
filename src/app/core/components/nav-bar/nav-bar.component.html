@@ -172,8 +172,8 @@
       <a mat-button routerLinkActive="mat-primary">
         <!-- <i style="font-size: 1.0rem !important;" class="vertical-align-middle fal fa-building fa-fw"></i> -->
 
-        <div class="line-height-initial" > Create Goals </div>
-        <app-add-post-menu style="color: #0674ec !important; margin-left: auto;">Create Goals</app-add-post-menu>
+        <!-- <div class="line-height-initial" > Create Goals </div> -->
+        <app-add-post-menu style="color: #0674ec !important; margin-left: auto;" [label]="'Create Goals'"></app-add-post-menu>
       </a>
       <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'company', 'add-company']">
         <!-- <i style="font-size: 1.0rem !important;" class="vertical-align-middle fal fa-building fa-fw"></i> -->

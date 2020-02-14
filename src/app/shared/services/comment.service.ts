@@ -10,7 +10,6 @@ import { Comment } from '../models/comment.model';
 import { ToastrService } from 'ngx-toastr';
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { PostService } from './post.service';
-import { CompanyPost } from '../models/company.model';
 import { Post } from '../models/post.model';
 
 @Injectable()

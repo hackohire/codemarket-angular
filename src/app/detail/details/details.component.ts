@@ -86,10 +86,11 @@ export class DetailsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-
+    /** Read the type of the post  */
     this.type = this.activatedRoute.snapshot.queryParams.type;
 
-    this.breadcumb.path.push({name: this.type});
+    /** show the type of the post in "breadcrumb" */
+    this.breadcumb.path.push({ name: this.type });
 
     this.commentId = this.activatedRoute.snapshot.queryParams['commentId'];
 
@@ -106,8 +107,9 @@ export class DetailsComponent implements OnInit, OnDestroy {
           this.details$ = of(p);
           this.initializeCommentForm(p, 'post');
 
+          /** SHow company in breadcrumb */
           if (p.company && p.company.name) {
-            this.breadcumb.path.unshift({name: p.company.name})
+            this.breadcumb.path.unshift({ name: p.company.name })
           }
 
           /** Subscribe to loggedinuser, once loggedInUse is got, Check if the loggedInUder is
@@ -219,7 +221,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
   async addComment(addCommentEditor: EditorComponent) {
     if (this.authService.loggedInUser) {
-      const blocks =  await addCommentEditor.editor.save();
+      const blocks = await addCommentEditor.editor.save();
       this.commentForm.get('text').setValue(blocks.blocks);
       this.commentForm.addControl('createdBy', new FormControl(this.authService.loggedInUser._id));
 

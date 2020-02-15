@@ -293,6 +293,18 @@ const postRoutes: Routes = [
         .then(module => module.AddCompanyPostModule),
       },
 
+      /** Add Customer Template */
+      {
+        path: `add-${CompanyPostTypes.CustomerTemplate}`,
+        loadChildren: () => import('../customer-template/add-customer-template/add-customer-template.module')
+        .then(module => module.AddCustomerTemplateModule),
+      },
+      {
+        path: `edit-${CompanyPostTypes.CustomerTemplate}/:postId`,
+        loadChildren: () => import('../customer-template/add-customer-template/add-customer-template.module')
+        .then(module => module.AddCustomerTemplateModule),
+      },
+
       /** Add User Startup Goal */
       {
         path: `add-${UserProfilePostTypes.StartupGoal}`,

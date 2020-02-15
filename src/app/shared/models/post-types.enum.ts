@@ -41,5 +41,8 @@ export enum CompanyPostTypes {
     BusinessGoal = 'business-goal',
     TeamGoal = 'team-goal',
     Mission = 'mission',
-    CompanyPost = 'company-post'
+    CompanyPost = 'company-post',
+    CustomerTemplate = 'customer-template',
+    CustomerProfile = 'customer-profile',
+    CompetitiveAdvantage = 'competitive-advantage'
 }

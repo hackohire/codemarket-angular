@@ -26,6 +26,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 import { BlockToolData } from '@editorjs/editorjs/types/tools';
 import { PostStatus } from '../../../shared/models/poststatus.enum';
 import { EditorComponent } from '../../../shared/components/editor/editor.component';
+import { MdePopoverTrigger } from '@material-extended/mde';
 
 @Component({
   selector: 'app-company-details',
@@ -42,18 +43,14 @@ import { EditorComponent } from '../../../shared/components/editor/editor.compon
 })
 export class CompanyDetailsComponent implements OnInit, OnDestroy {
 
-  /** Company Details Related Varibale */
-  companyDetails$: Observable<Company>;
   usersInterestedInCompany: User[];
   companyView: string;
 
-    @ViewChild('coverPic', { static: false }) coverPic;
+  @ViewChild('coverPic', { static: false }) coverPic;
   @ViewChild('cover', { static: false }) cover: ElementRef;
   selectedCoverPic: File;
   selectedCoverPicURL = '';
   uploadedCoverUrl = '';
-
-
 
   companyDetails: Post | Company | any;
   isUserAttending: boolean; /** Only for the event */
@@ -88,8 +85,9 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
     type: string;
     data: BlockToolData
   }];
-  postDescriptionInstances = [];
-  commentDescriptionInstances = [];
+
+  @ViewChild(MdePopoverTrigger, {static: false}) socialMediaPopover: MdePopoverTrigger;
+
   companyViewLinks = [
     {
       view: 'home',
@@ -180,7 +178,7 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
     {
       view: 'info',
       title: 'Info'
-    },
+    }
   ];
 
   constructor(
@@ -239,7 +237,6 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
         .subscribe({
           next: (c: Company) => {
             if (c && c._id) {
-              this.companyDetails$ = of(c);
               this.companyDetails = c;
               this.initializeCommentForm(c, 'post');
               this.initializeQuestionAndAnswerForm(c, 'company');
@@ -483,7 +480,6 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
     }
     this.companyService.updateCompany(companyDetails).subscribe(c => {
       this.companyDetails = c;
-      this.companyDetails$ = of(c);
       this.selectedCoverPic = null;
       this.selectedCoverPicURL = '';
       this.uploadedCoverUrl = '';
@@ -552,6 +548,27 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
         this.commentService.companyPostsList = c.posts;
       }
     });
+  }
+
+  /** Update Social Media Links and clos the popover after successful update */
+  updateSocialMedia(fb, twitter, linkedin, instagram, yelp, website) {
+    const companyData: Company = {
+      _id: this.companyDetails._id,
+      name: this.companyDetails.name,
+      facebookLink: fb,
+      twitterLink: twitter,
+      linkedinLink: linkedin,
+      instagramLink: instagram,
+      yelpLink: yelp,
+      websiteLink: website,
+    };
+    this.companyService.updateCompany(companyData).pipe()
+      .subscribe(c => {
+        if (c) {
+          this.companyDetails = c;
+          this.socialMediaPopover.closePopover();
+        }
+      });
   }
 
 

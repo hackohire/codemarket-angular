@@ -18,6 +18,8 @@ export class AddPostMenuComponent implements OnInit {
   companyPostTypes = CompanyPostTypes;
   UserProfilePostTypes = UserProfilePostTypes;
 
+  @Input() label = 'Add';
+
   @ViewChild('addPostMenu', {static: false}) addPostMenu: MatMenuTrigger;
 
   ngOnInit() {

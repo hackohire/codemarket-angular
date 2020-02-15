@@ -317,6 +317,18 @@ const postRoutes: Routes = [
         .then(module => module.AddCustomerProfileModule),
       },
       
+      /** Add Competitive Advantage */
+      {
+        path: `add-${CompanyPostTypes.CompetitiveAdvantage}`,
+        loadChildren: () => import('../competitive-advantage/add-competitive-advantage/add-competitive-advantage.module')
+        .then(module => module.AddCompetitiveAdvantageModule),
+      },
+      {
+        path: `edit-${CompanyPostTypes.CompetitiveAdvantage}/:postId`,
+        loadChildren: () => import('../competitive-advantage/add-competitive-advantage/add-competitive-advantage.module')
+        .then(module => module.AddCompetitiveAdvantageModule),
+      },
+
       /** Add User Startup Goal */
       {
         path: `add-${UserProfilePostTypes.StartupGoal}`,

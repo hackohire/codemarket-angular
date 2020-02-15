@@ -342,6 +342,19 @@ export class PostComponent implements OnInit {
         type: CompanyPostTypes.CustomerProfile
       },
 
+      /** Competitive Advantage */
+      {
+        path: 'post-list',
+        label: 'Competitive Advantage List',
+        queryParams: { type: CompanyPostTypes.CompetitiveAdvantage, all: false },
+        type: CompanyPostTypes.CompetitiveAdvantage
+      },
+      {
+        path: 'add-' + CompanyPostTypes.CompetitiveAdvantage,
+        label: 'Add ' + CompanyPostTypes.CompetitiveAdvantage,
+        queryParams: { type: CompanyPostTypes.CompetitiveAdvantage },
+        type: CompanyPostTypes.CompetitiveAdvantage
+      },
 
       /** User Startup Goal */
       {

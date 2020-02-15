@@ -17,6 +17,7 @@ import { PostType } from 'src/app/shared/models/post-types.enum';
 import { SetSelectedPost, GetPostById, AddPost, UpdatePost } from 'src/app/core/store/actions/post.actions';
 import { selectSelectedPost } from 'src/app/core/store/selectors/post.selectors';
 import { EditorComponent } from '../../shared/components/editor/editor.component';
+import { ENTER, COMMA } from '@angular/cdk/keycodes';
 
 
 @Component({
@@ -25,6 +26,8 @@ import { EditorComponent } from '../../shared/components/editor/editor.component
   styleUrls: ['./add-design.component.scss']
 })
 export class AddDesignComponent implements OnInit {
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+
   breadcumb: BreadCumb;
   designForm: FormGroup;
 
@@ -51,6 +54,11 @@ export class AddDesignComponent implements OnInit {
   get statusFormControl() {
     return this.designForm.get('status');
   }
+
+  visible = true;
+  selectable = true;
+  removable = true;
+  addOnBlur = true;
 
   subscription$: Subscription;
 

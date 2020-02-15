@@ -28,6 +28,7 @@ import { EditorComponent } from '../../shared/components/editor/editor.component
   styleUrls: ['./add-goal.component.scss']
 })
 export class AddGoalComponent implements OnInit {
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   breadcumb: BreadCumb;
   goalForm: FormGroup;
 
@@ -58,6 +59,11 @@ export class AddGoalComponent implements OnInit {
   @ViewChild('descriptionEditor', { static: false }) descriptionEditor: EditorComponent;
   @ViewChild('supportDescriptionEditor', { static: false }) supportDescriptionEditor: EditorComponent;
 
+  visible = true;
+  selectable = true;
+  removable = true;
+  addOnBlur = true;
+  
   subscription$: Subscription;
 
   searchText = new FormControl();

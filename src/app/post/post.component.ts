@@ -328,6 +328,21 @@ export class PostComponent implements OnInit {
         type: CompanyPostTypes.CustomerTemplate
       },
 
+      /** Customer Profile */
+      {
+        path: 'post-list',
+        label: 'Customer Profile List',
+        queryParams: { type: CompanyPostTypes.CustomerProfile, all: false },
+        type: CompanyPostTypes.CustomerProfile
+      },
+      {
+        path: 'add-' + CompanyPostTypes.CustomerProfile,
+        label: 'Add ' + CompanyPostTypes.CustomerProfile,
+        queryParams: { type: CompanyPostTypes.CustomerProfile },
+        type: CompanyPostTypes.CustomerProfile
+      },
+
+
       /** User Startup Goal */
       {
         path: 'post-list',

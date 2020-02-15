@@ -183,6 +183,12 @@
     <span> Customer Template</span>
   </button>
 
+  <button mat-menu-item [routerLink]="['/', 'post', 'add-' + companyPostTypes.CustomerProfile]">
+    <i style="font-size: 1.7rem !important;"
+      [class]="'vertical-align-middle fal fa-' + icons['dream-job'] + ' fa-fw'"></i>
+    <span> Customer Profile</span>
+  </button>
+
   <button mat-menu-item [routerLink]="['/', 'post', 'add-' + UserProfilePostTypes.StartupGoal]">
     <i style="font-size: 1.7rem !important;"
       [class]="'vertical-align-middle fal fa-' + icons['dream-job'] + ' fa-fw'"></i>

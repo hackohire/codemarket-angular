@@ -305,6 +305,18 @@ const postRoutes: Routes = [
         .then(module => module.AddCustomerTemplateModule),
       },
 
+      /** Add Customer Profile */
+      {
+        path: `add-${CompanyPostTypes.CustomerProfile}`,
+        loadChildren: () => import('../customer-profile/add-customer-profile/add-customer-profile.module')
+        .then(module => module.AddCustomerProfileModule),
+      },
+      {
+        path: `edit-${CompanyPostTypes.CustomerProfile}/:postId`,
+        loadChildren: () => import('../customer-profile/add-customer-profile/add-customer-profile.module')
+        .then(module => module.AddCustomerProfileModule),
+      },
+      
       /** Add User Startup Goal */
       {
         path: `add-${UserProfilePostTypes.StartupGoal}`,

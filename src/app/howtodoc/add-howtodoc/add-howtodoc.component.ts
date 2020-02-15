@@ -26,6 +26,8 @@ import { EditorComponent } from '../../shared/components/editor/editor.component
   styleUrls: ['./add-howtodoc.component.scss']
 })
 export class AddHowtodocComponent implements OnInit {
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+
   breadcumb: BreadCumb;
   howtodocForm: FormGroup;
 

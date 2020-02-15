@@ -15,6 +15,7 @@ import { AuthService } from '../../../core/services/auth.service';
 })
 export class AutocompleteComponent implements OnInit, OnDestroy {
 
+  /** Items list and state */
   public items$: Observable<any[]>;
   public itemsLoading = false;
   public itemInput$ = new Subject<string>();
@@ -23,10 +24,15 @@ export class AutocompleteComponent implements OnInit, OnDestroy {
 
   @Input() collection: string;
   @Input() type: string;
+
+  /** multiple - to allow user to select multiple values or only single value */
   @Input() autoComplete: FormControl;
+
+  /** placeholder - the label of the control such as "Select a Company" */
   @Input() placeholder: string;
+
+  /** autocomplete - the actual formcontrol, which is created in parent component */
   @Input() multiple = false;
-  // @Input() controlName: string;
 
   constructor(
     private formService: FormService,
@@ -36,22 +42,24 @@ export class AutocompleteComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.items$ = concat(
-      of([]), // default items
+      of([]), /** default items */
       this.itemInput$.pipe(
         distinctUntilChanged(),
         tap(() => this.itemsLoading = true),
         switchMap(term => this.formService.findFromCollection(term, this.collection, this.type).pipe(
-          catchError(() => of([])), // empty list on error
+          catchError(() => of([])), /** empty list on error */
           tap(() => this.itemsLoading = false)
           ))
         )
     );
   }
 
+  /** Destroy the subscription */
   ngOnDestroy() {
     this.subscription$.unsubscribe();
   }
 
+  /** Add the value if not available */
   public add = (name) => {
     return this.formService.addToCollection(name, this.collection, this.type).toPromise();
   }

@@ -20,11 +20,7 @@
                     <input type="text" matInput formControlName="name" placeholder="Title">
                 </mat-form-field>
 
-                <ng-select placeholder="Roles"
-                    [items]="roles$ | async" [hideSelected]="true" formControlName="jobProfile"
-                    [addTag]="formService?.addRoleFn" [bindLabel]="'name'" [minTermLength]="2" [loading]="rolesLoading"
-                    [multiple]="true" [typeahead]="roleInput$">
-                </ng-select>
+                <app-autocomplete [autoComplete]="dreamjobForm?.get('jobProfile')" [placeholder]="'Roles'" [collection]="'tags'" [type]="'role'" [multiple]="true"></app-autocomplete>
 
                 <app-editor #descriptionEditor
                     [data]="descriptionFormControl?.value" [id]="'edit-dreamjob-editor'"
@@ -33,18 +29,8 @@
                 <br />
 
                 <div class="row">
-                    <ng-select class="col-md-6" placeholder="Select Dream Companies" [addTag]="addCompany"
-                        [items]="allCompanies" formControlName="companies" [multiple]="true" bindLabel="name">
-                        <ng-option *ngFor="let cName of allCompanies" [value]="cName._id">
-                            {{ cName?.name }}
-                        </ng-option>
-                        <!-- <ng-option disabled (click)="openAddCompanyDialog()">+ Add Company</ng-option> -->
-                    </ng-select>
-
-                    <ng-select [hideSelected]="true" placeholder="Cities" [addTag]="formService.addCityFn"
-                        [loading]="citiesLoading" [items]="citySuggestions$ | async" [typeahead]="cityInput$"
-                        formControlName="cities" [multiple]="true" bindLabel="name">
-                    </ng-select>
+                    <app-autocomplete class="col-md-6" [autoComplete]="dreamjobForm?.get('companies')" [placeholder]="'Select Dream Companies'" [collection]="'companies'" [type]="" [multiple]="true"></app-autocomplete>
+                    <app-autocomplete class="col-md-6" [autoComplete]="dreamjobForm?.get('cities')" [placeholder]="'cities'" [collection]="'cities'" [type]="" [multiple]="true"></app-autocomplete>
                 </div>
 
                 <mat-form-field appearance="outline">

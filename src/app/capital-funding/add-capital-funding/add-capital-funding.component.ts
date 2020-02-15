@@ -8,7 +8,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FormService } from '../../shared/services/form.service';
 import { SetSelectedPost, GetPostById } from '../../core/store/actions/post.actions';
 import { selectSelectedPost } from '../../core/store/selectors/post.selectors';
-import { tap, switchMap, distinctUntilChanged, catchError } from 'rxjs/operators';
+import { tap, switchMap, } from 'rxjs/operators';
 import { PostStatus } from '../../shared/models/poststatus.enum';
 import { PostType } from '../../shared/models/post-types.enum';
 import { AppState } from '../../core/store/state/app.state';
@@ -27,8 +27,6 @@ export class AddCapitalFundingComponent implements OnInit {
 
   breadcumb: BreadCumb;
   capitalfundingForm: FormGroup;
-
-  allCompanies = [];
 
   edit: boolean;
 
@@ -67,7 +65,6 @@ export class AddCapitalFundingComponent implements OnInit {
     private store: Store<AppState>,
     private activatedRoute: ActivatedRoute,
     public formService: FormService,
-    private companyService: CompanyService,
     public postService: PostService
   ) {
     this.breadcumb = {
@@ -146,10 +143,6 @@ export class AddCapitalFundingComponent implements OnInit {
       type: new FormControl(PostType.CapitalFunding),
       createdBy: new FormControl(i && i.createdBy && i.createdBy._id ? i.createdBy._id : ''),
     });
-
-    this.companyService.getCompaniesByType('').subscribe((companies) => {
-      this.allCompanies = companies;
-    });
   }
 
   async submit(status) {
@@ -207,19 +200,6 @@ export class AddCapitalFundingComponent implements OnInit {
   updateFormData(event) {
     console.log(this.steps.toArray());
     // this.capitalfundingForm.get('description').setValue(event);
-  }
-
-
-  addCompany = (name: string) => {
-    if (name) {
-      return new Promise((resolve, reject) => {
-        this.companyService.addCompany({name, createdBy: this.authService.loggedInUser._id}).subscribe(c => {
-          this.allCompanies.unshift(c);
-          this.allCompanies = this.allCompanies.slice();
-          return resolve(c.name);
-        });
-      });
-    }
   }
 
   addStep(i: number) {

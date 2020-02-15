@@ -33,6 +33,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { AddJobComponent } from '../job/add-job/add-job.component';
 import { AddCompanyComponent } from '../companies/add-company/add-company.component';
 import { BriefPostComponent } from './components/brief-post/brief-post.component';
+import { AutocompleteComponent } from './components/autocomplete/autocomplete.component';
 
 
 export function hljsLanguages() {
@@ -43,7 +44,7 @@ export function hljsLanguages() {
   ];
 }
 @NgModule({
-  declarations: [BreadcumbComponent, EditorComponent, CommentComponent, DatatableComponent, SafePipe, LikeDislikeComponent, VideoChatComponent, AddPostMenuComponent, SoftwareDevMenuComponent, CompaniesListComponent, AddJobComponent, BriefPostComponent],
+  declarations: [BreadcumbComponent, EditorComponent, CommentComponent, DatatableComponent, SafePipe, LikeDislikeComponent, VideoChatComponent, AddPostMenuComponent, SoftwareDevMenuComponent, CompaniesListComponent, AddJobComponent, BriefPostComponent, AutocompleteComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -87,6 +88,7 @@ export function hljsLanguages() {
     AddPostMenuComponent,
     SoftwareDevMenuComponent,
     BriefPostComponent,
+    AutocompleteComponent,
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,

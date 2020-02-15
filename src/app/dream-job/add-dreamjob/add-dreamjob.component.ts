@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Subscription, of, Observable, Subject, concat } from 'rxjs';
+import { Subscription, of, } from 'rxjs';
 import { City } from '../../shared/models/city.model';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { BreadCumb } from '../../shared/models/bredcumb.model';
@@ -11,7 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FormService } from '../../shared/services/form.service';
 import { SetSelectedPost, GetPostById } from '../../core/store/actions/post.actions';
 import { selectSelectedPost } from '../../core/store/selectors/post.selectors';
-import { tap, switchMap, distinctUntilChanged, catchError } from 'rxjs/operators';
+import { tap, switchMap, } from 'rxjs/operators';
 import { PostStatus } from '../../shared/models/poststatus.enum';
 import { PostType } from '../../shared/models/post-types.enum';
 import { AppState } from '../../core/store/state/app.state';
@@ -31,11 +31,8 @@ import { EditorComponent } from '../../shared/components/editor/editor.component
 })
 export class AddDreamjobComponent implements OnInit {
 
-  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   breadcumb: BreadCumb;
   dreamjobForm: FormGroup;
-
-  allCompanies = [];
 
   edit: boolean;
 
@@ -59,11 +56,6 @@ export class AddDreamjobComponent implements OnInit {
     return this.dreamjobForm.get('status');
   }
 
-  visible = true;
-  selectable = true;
-  removable = true;
-  addOnBlur = true;
-
   listOfDreamJobs: any[] = [];
   dreamJobPageNumber = 1;
   totalDreamJobs: number;
@@ -74,13 +66,6 @@ export class AddDreamjobComponent implements OnInit {
 
   subscription$: Subscription;
 
-  citySuggestions$: Observable<City[]>;
-  cityInput$ = new Subject<string>();
-  citiesLoading = false;
-
-  roles$: Observable<any[]>;
-  rolesLoading = false;
-  roleInput$ = new Subject<string>();
 
   anonymousAvatar = '../../../../assets/images/anonymous-avatar.jpg';
   s3FilesBucketURL = environment.s3FilesBucketURL;
@@ -169,34 +154,6 @@ export class AddDreamjobComponent implements OnInit {
       createdBy: new FormControl(i && i.createdBy && i.createdBy._id ? i.createdBy._id : ''),
     });
 
-    this.roles$ = concat(
-      of([]), // default items
-      this.roleInput$.pipe(
-        distinctUntilChanged(),
-        tap(() => this.rolesLoading = true),
-        switchMap(term => this.formService.findFromCollection(term, 'tags', 'role').pipe(
-          catchError(() => of([])), // empty list on error
-          tap(() => this.rolesLoading = false)
-          ))
-        )
-    );
-
-    this.citySuggestions$ = concat(
-      of([]), // default items
-      this.cityInput$.pipe(
-        distinctUntilChanged(),
-        tap(() => this.citiesLoading = true),
-        switchMap(term => this.formService.findFromCollection(term, 'cities').pipe(
-          catchError(() => of([])), // empty list on error
-          tap(() => this.citiesLoading = false)
-          ))
-        )
-    );
-
-    this.companyService.getCompaniesByType('').subscribe((companies) => {
-      this.allCompanies = companies;
-    });
-
   }
 
   async submit(status) {
@@ -276,18 +233,4 @@ export class AddDreamjobComponent implements OnInit {
       }
     });
   }
-
-  addCompany = (name: string) => {
-    if (name) {
-      return new Promise((resolve, reject) => {
-        this.companyService.addCompany({name, createdBy: this.authService.loggedInUser._id}).subscribe(c => {
-          this.allCompanies.unshift(c);
-          this.allCompanies = this.allCompanies.slice();
-          return resolve(c.name);
-        });
-      });
-    }
-  }
-
-
 }

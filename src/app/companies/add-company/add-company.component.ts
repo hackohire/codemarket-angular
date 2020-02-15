@@ -7,7 +7,7 @@ import { MatAutocomplete } from '@angular/material';
 import { AuthService } from '../../core/services/auth.service';
 import { ActivatedRoute } from '@angular/router';
 import { FormService } from '../../shared/services/form.service';
-import { catchError, distinctUntilChanged, tap, switchMap } from 'rxjs/operators';
+import { catchError, } from 'rxjs/operators';
 import { Subscription, of, Observable, Subject, concat } from 'rxjs';
 import { Tag } from '../../shared/models/product.model';
 import { CompanyService } from '../company.service';
@@ -165,18 +165,6 @@ export class AddCompanyComponent implements OnInit {
       }),
     });
 
-    this.citySuggestions$ = concat(
-      of([]), // default items
-      this.cityInput$.pipe(
-        distinctUntilChanged(),
-        tap(() => this.citiesLoading = true),
-        switchMap(term => this.formService.findFromCollection(term, 'cities').pipe(
-          catchError(() => of([])), // empty list on error
-          tap(() => this.citiesLoading = false)
-        ))
-      )
-    );
-
     await this.locationService.setLocaionSearhAutoComplete(this.searchLocation, this.locationFormGroup);
 
     this.formService.findFromCollection('', 'cities').subscribe((cities) => {
@@ -248,10 +236,6 @@ export class AddCompanyComponent implements OnInit {
         this.listOfBusinessChallenges = dj.posts;
       }
     });
-  }
-
-  addCitiesFn(name) {
-    return { name };
   }
 }
 

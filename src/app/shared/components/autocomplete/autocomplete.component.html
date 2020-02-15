@@ -1,0 +1,6 @@
+<ng-select [placeholder]="placeholder" [items]="items$ | async" [formControl]="autoComplete" [hideSelected]="true" [addTag]="add" [minTermLength]="2" [loading]="itemsLoading"
+    [multiple]="multiple" [typeahead]="itemInput$" [bindLabel]="'name'">
+    <!-- <ng-option *ngFor="let cName of (items$ | async)" [value]="cName._id">
+        {{ cName?.name }}
+    </ng-option> -->
+</ng-select>

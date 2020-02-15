@@ -193,7 +193,7 @@ export class AddEventComponent implements OnInit {
         longitude: new FormControl(i && i.location ? i.location.longitude : 0),
         address: new FormControl(i && i.location ? i.location.address : ''),
       }),
-      company: new FormControl(i && i.company ? i.company._id : '', this.data && this.data.companyDetails ? Validators.required : []),
+      company: new FormControl(i && i.company ? i.company : '', this.data && this.data.companyDetails ? Validators.required : []),
       eventType: new FormControl(i && i.eventType ? i.eventType : '', Validators.required)
       // address: new FormControl(i && i.address ? i.address : '', Validators.required),
       // snippets: new FormControl(null),
@@ -206,7 +206,7 @@ export class AddEventComponent implements OnInit {
 
       if (this.data && this.data.company) {
         const companyFormControl = this.eventForm.get('company');
-        companyFormControl.setValue(this.data.company._id);
+        companyFormControl.setValue(this.data.company);
         // companyFormControl.disable();
       }
     });
@@ -232,7 +232,7 @@ export class AddEventComponent implements OnInit {
         }
 
         if (routerStateData.companyDetails._id) {
-          this.eventForm.get('company').setValue(routerStateData.companyDetails._id)
+          this.eventForm.get('company').setValue(routerStateData.companyDetails);
         }
       }
     }
@@ -253,7 +253,7 @@ export class AddEventComponent implements OnInit {
 
     this.statusFormControl.setValue(status);
 
-    const blocks =  await this.descriptionEditor.editor.save();
+    const blocks = await this.descriptionEditor.editor.save();
     this.descriptionFormControl.setValue(blocks.blocks);
 
     if (this.authService.loggedInUser && !this.createdBy.value) {
@@ -262,17 +262,25 @@ export class AddEventComponent implements OnInit {
 
     if (this.idFromControl && !this.idFromControl.value) {
       this.eventForm.removeControl('_id');
+      const eventFormValue = { ...this.eventForm.value };
+
+      /** Only Send _id */
+      eventFormValue.company = eventFormValue.company && eventFormValue.company._id ? eventFormValue.company._id : eventFormValue.company;
 
       if (this.data && this.data.company) {
-        this.postService.addPost(this.eventForm.value).subscribe((post) => {
+        this.postService.addPost(eventFormValue).subscribe((post) => {
           this.sweetAlertService.success(`${post.type} has been ${post.status} Successfully`, '', 'success');
           this.dialogRef.close(post);
         });
       } else {
-        this.store.dispatch(AddPost({ post: this.eventForm.value }));
+        this.store.dispatch(AddPost({ post: eventFormValue }));
       }
     } else {
-      this.store.dispatch(UpdatePost({ post: this.eventForm.value }));
+      const eventFormValue = { ...this.eventForm.value };
+
+      /** Only Send _id */
+      eventFormValue.company = eventFormValue.company && eventFormValue.company._id ? eventFormValue.company._id : eventFormValue.company;
+      this.store.dispatch(UpdatePost({ post: eventFormValue }));
     }
   }
 

@@ -55,13 +55,8 @@
     </mat-form-field>
 
     <div formGroupName="currentJobDetails">
-        <ng-select [addTag]="addCompany" [items]="allCompanies"
-                        placeholder="Select Company" formControlName="company" bindLabel="name" bindValue="_id">
-        </ng-select>
-        <ng-select placeholder="Roles" [items]="roles$ | async" [hideSelected]="true"
-                    formControlName="jobProfile" [addTag]="formService?.addRoleFn" [bindLabel]="'name'"
-                    [minTermLength]="2" [loading]="rolesLoading" [multiple]="true" [typeahead]="roleInput$">
-        </ng-select>
+        <app-autocomplete [autoComplete]="userProfileForm?.get('currentJobDetails.company')" [placeholder]="'Select Company'" [collection]="'companies'" [type]="" [multiple]="false"></app-autocomplete>
+        <app-autocomplete [autoComplete]="userProfileForm?.get('currentJobDetails.jobProfile')" [placeholder]="'Roles'" [collection]="'tags'" [type]="'role'" [multiple]="true"></app-autocomplete>
     </div>
 
     <button mat-raised-button color="primary">Update Profile</button>

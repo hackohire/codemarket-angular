@@ -1,2945 +1,2960 @@
-export const emails = [
+export const emails1 = [
   {
-    Email: 'financialwellness@asuc.org'
+    email: 'financialwellness@asuc.org'
   },
   {
-    Email: 'housing@asuc.org'
+    email: 'housing@asuc.org'
   },
   {
-    Email: 'mentalhealthcommission@asuc.org'
+    email: 'mentalhealthcommission@asuc.org'
   },
   {
-    Email: 'derek.imai@berkeley.edu'
+    email: 'derek.imai@berkeley.edu'
   },
   {
-    Email: 'nanyanwu@asuc.org'
+    email: 'nanyanwu@asuc.org'
   },
   {
-    Email: 'rsoo@asuc.org'
+    email: 'rsoo@asuc.org'
   },
   {
-    Email: 'sylviaktarg@berkeley.edu'
+    email: 'sylviaktarg@berkeley.edu'
   },
   {
-    Email: 'sexualviolence@asuc.org'
+    email: 'sexualviolence@asuc.org'
   },
   {
-    Email: 'help@berkeleysao.org'
+    email: 'help@berkeleysao.org'
   },
   {
-    Email: 'asuclegalclinic@gmail.com'
+    email: 'asuclegalclinic@gmail.com'
   },
   {
-    Email: 'superb@berkeley.edu'
+    email: 'superb@berkeley.edu'
   },
   {
-    Email: 'sustainability@asuc.org'
+    email: 'sustainability@asuc.org'
   },
   {
-    Email: 'ysl.yuanlin (at) berkeley (dot) edu'
+    email: 'ysl.yuanlin (at) berkeley (dot) edu'
   },
   {
-    Email: 'auroraconsultingcal@gmail.com'
+    email: 'auroraconsultingcal@gmail.com'
   },
   {
-    Email: 'calaurumcosmetics@gmail.com'
+    email: 'calaurumcosmetics@gmail.com'
   },
   {
-    Email: 'urobotics.berkeley@gmail.com'
+    email: 'urobotics.berkeley@gmail.com'
   },
   {
-    Email: 'ucb.azaad@gmail.com'
+    email: 'ucb.azaad@gmail.com'
   },
   {
-    Email: 'berkeleybside@gmail.com'
+    email: 'berkeleybside@gmail.com'
   },
   {
-    Email: 'ptyson2293@berkeley.edu'
+    email: 'ptyson2293@berkeley.edu'
   },
   {
-    Email: 'ballet.berkeley@gmail.com'
+    email: 'ballet.berkeley@gmail.com'
   },
   {
-    Email: 'reflejosdemexico.cal@gmail.com'
+    email: 'reflejosdemexico.cal@gmail.com'
   },
   {
-    Email: 'leadership@berkeley.edu'
+    email: 'leadership@berkeley.edu'
   },
   {
-    Email: 'barbellatberkeley@gmail.com'
+    email: 'barbellatberkeley@gmail.com'
   },
   {
-    Email: 'editor@baremagazine.org'
+    email: 'editor@baremagazine.org'
   },
   {
-    Email: 'info@beacn.berkeley.edu'
+    email: 'info@beacn.berkeley.edu'
   },
   {
-    Email: 'baoc.rep@gmail.com'
+    email: 'baoc.rep@gmail.com'
   },
   {
-    Email: 'tsimmons@berkeley.edu'
+    email: 'tsimmons@berkeley.edu'
   },
   {
-    Email: 'berkeleybavrd@gmail.com'
+    email: 'berkeleybavrd@gmail.com'
   },
   {
-    Email: 'bethematch.berkeley@gmail.com'
+    email: 'bethematch.berkeley@gmail.com'
   },
   {
-    Email: 'bearbuddies.berkeleylaw@gmail.com'
+    email: 'bearbuddies.berkeleylaw@gmail.com'
   },
   {
-    Email: 'calbearcloset@gmail.com'
+    email: 'calbearcloset@gmail.com'
   },
   {
-    Email: 'derektzeng@berkeley.edu'
+    email: 'derektzeng@berkeley.edu'
   },
   {
-    Email: 'ryanwchen@berkeley.edu'
+    email: 'ryanwchen@berkeley.edu'
   },
   {
-    Email: 'bears4elderwelfare@gmail.com'
+    email: 'bears4elderwelfare@gmail.com'
   },
   {
-    Email: 'bearsforisrael@gmail.com'
+    email: 'bearsforisrael@gmail.com'
   },
   {
-    Email: 'info@bearsforpalestine.org'
+    email: 'info@bearsforpalestine.org'
   },
   {
-    Email: 'robert.newell@berkeley.edu'
+    email: 'robert.newell@berkeley.edu'
   },
   {
-    Email: 'berc.undergraduate@gmail.com'
+    email: 'berc.undergraduate@gmail.com'
   },
   {
-    Email: 'berke1337-admin@lists.berkeley.edu'
+    email: 'berke1337-admin@lists.berkeley.edu'
   },
   {
-    Email: 'bampfasc@gmail.com'
+    email: 'bampfasc@gmail.com'
   },
   {
-    Email: 'berkeleybahaiclub@gmail.com'
+    email: 'berkeleybahaiclub@gmail.com'
   },
   {
-    Email: 'BerkeleyBusinessSociety@gmail.com'
+    email: 'BerkeleyBusinessSociety@gmail.com'
   },
   {
-    Email: 'bcsa.core@gmail.com'
+    email: 'bcsa.core@gmail.com'
   },
   {
-    Email: 'calbells@gmail.com'
+    email: 'calbells@gmail.com'
   },
   {
-    Email: 'bcssa.official@gmail.com'
+    email: 'bcssa.official@gmail.com'
   },
   {
-    Email: 'bcf.tjc@gmail.com'
+    email: 'bcf.tjc@gmail.com'
   },
   {
-    Email: 'calcollegerepublicans@gmail.com'
+    email: 'calcollegerepublicans@gmail.com'
   },
   {
-    Email: 'henryskrehot@berkeley.edu'
+    email: 'henryskrehot@berkeley.edu'
   },
   {
-    Email: 'BerkeleyDisasterTeam@berkeley.edu'
+    email: 'BerkeleyDisasterTeam@berkeley.edu'
   },
   {
-    Email: 'editor@econreview.berkeley.edu'
+    email: 'editor@econreview.berkeley.edu'
   },
   {
-    Email: 'copresidents@berc.berkeley.edu'
+    email: 'copresidents@berc.berkeley.edu'
   },
   {
-    Email: 'berkeleyfictionreview@gmail.com'
+    email: 'berkeleyfictionreview@gmail.com'
   },
   {
-    Email: 'info@forum.berkeley.edu'
+    email: 'info@forum.berkeley.edu'
   },
   {
-    Email: 'theberkeleygroup@gmail.com'
+    email: 'theberkeleygroup@gmail.com'
   },
   {
-    Email: 'berkeleybisa@gmail.com'
+    email: 'berkeleybisa@gmail.com'
   },
   {
-    Email: 'berkeley.innovation@gmail.com'
+    email: 'berkeley.innovation@gmail.com'
   },
   {
-    Email: 'sashachang@berkeley.edu'
+    email: 'sashachang@berkeley.edu'
   },
   {
-    Email: 'berkeleyinvestmentgroup@gmail.com'
+    email: 'berkeleyinvestmentgroup@gmail.com'
   },
   {
-    Email: 'bjalp@berkeley.edu'
+    email: 'bjalp@berkeley.edu'
   },
   {
-    Email: 'bjcl@berkeley.edu'
+    email: 'bjcl@berkeley.edu'
   },
   {
-    Email: 'adamsb@berkeley.edu'
+    email: 'adamsb@berkeley.edu'
   },
   {
-    Email: 'bjesl@berkeley.edu'
+    email: 'bjesl@berkeley.edu'
   },
   {
-    Email: 'bglj@berkeley.edu'
+    email: 'bglj@berkeley.edu'
   },
   {
-    Email: 'bjil@berkeley.edu'
+    email: 'bjil@berkeley.edu'
   },
   {
-    Email: 'probonobloc@law.berkeley.edu'
+    email: 'probonobloc@law.berkeley.edu'
   },
   {
-    Email: 'berkeleylaw.anti.trafficking@gmail.com'
+    email: 'berkeleylaw.anti.trafficking@gmail.com'
   },
   {
-    Email: 'berkeleylawmsa@gmail.com'
+    email: 'berkeleylawmsa@gmail.com'
   },
   {
-    Email: 'berkeleylegals@gmail.com'
+    email: 'berkeleylegals@gmail.com'
   },
   {
-    Email: 'externalaffairs@berkeleymrc.org'
+    email: 'externalaffairs@berkeleymrc.org'
   },
   {
-    Email: 'sg@bmun.org'
+    email: 'sg@bmun.org'
   },
   {
-    Email: 'curtisrumrill@berkeley.edu'
+    email: 'curtisrumrill@berkeley.edu'
   },
   {
-    Email: 'contact@boaa.berkeley.edu'
+    email: 'contact@boaa.berkeley.edu'
   },
   {
-    Email: 'bpreditors@gmail.com'
+    email: 'bpreditors@gmail.com'
   },
   {
-    Email: 'bproutreach@gmail.com'
+    email: 'bproutreach@gmail.com'
   },
   {
-    Email: 'executive@berkeleyproject.org'
+    email: 'executive@berkeleyproject.org'
   },
   {
-    Email: 'contact@bppj.berkeley.edu'
+    email: 'contact@bppj.berkeley.edu'
   },
   {
-    Email: 'bre_editor@berkeley.edu'
+    email: 'bre_editor@berkeley.edu'
   },
   {
-    Email: 'sciencereview@gmail.com'
+    email: 'sciencereview@gmail.com'
   },
   {
-    Email: 'bsj.berkeley@gmail.com'
+    email: 'bsj.berkeley@gmail.com'
   },
   {
-    Email: 'ansmalling@berkeley.edu'
+    email: 'ansmalling@berkeley.edu'
   },
   {
-    Email: 'berkeleytennisassociation@gmail.com'
+    email: 'berkeleytennisassociation@gmail.com'
   },
   {
-    Email: 'buj@berkeley.edu'
+    email: 'buj@berkeley.edu'
   },
   {
-    Email: 'berkeleywatergroupidealab@gmail.com'
+    email: 'berkeleywatergroupidealab@gmail.com'
   },
   {
-    Email: 'president@berkeleywomeninbusiness.com'
+    email: 'president@berkeleywomeninbusiness.com'
   },
   {
-    Email: 'berkeleybestbuddies@gmail.com'
+    email: 'berkeleybestbuddies@gmail.com'
   },
   {
-    Email: 'bestlaidplansimprov@gmail.com'
+    email: 'bestlaidplansimprov@gmail.com'
   },
   {
-    Email: 'sh5407@berkeley.edu'
+    email: 'sh5407@berkeley.edu'
   },
   {
-    Email: 'dkwon98@berkeley.edu'
+    email: 'dkwon98@berkeley.edu'
   },
   {
-    Email: 'info@beyondacademia.berkeley.edu'
+    email: 'info@beyondacademia.berkeley.edu'
   },
   {
-    Email: 'beyondthebinaryucb@gmail.com'
+    email: 'beyondthebinaryucb@gmail.com'
   },
   {
-    Email: 'ucberkeley@bpshi.com'
+    email: 'ucberkeley@bpshi.com'
   },
   {
-    Email: 'biasbusters-admin@lists.eecs.berkeley.edu'
+    email: 'biasbusters-admin@lists.eecs.berkeley.edu'
   },
   {
-    Email: 'bicycalcoop@gmail.com'
+    email: 'bicycalcoop@gmail.com'
   },
   {
-    Email: 'bigdata.berkeley@gmail.com'
+    email: 'bigdata.berkeley@gmail.com'
   },
   {
-    Email: 'biobusinessinitiative@gmail.com'
+    email: 'biobusinessinitiative@gmail.com'
   },
   {
-    Email: 'bioeBEAST@gmail.com'
+    email: 'bioeBEAST@gmail.com'
   },
   {
-    Email: 'bioehs.exec@lists.berkeley.edu'
+    email: 'bioehs.exec@lists.berkeley.edu'
   },
   {
-    Email: 'biofuelstechnology@gmail.com'
+    email: 'biofuelstechnology@gmail.com'
   },
   {
-    Email: 'calbmes@gmail.com'
+    email: 'calbmes@gmail.com'
   },
   {
-    Email: 'calbiophysics@gmail.com'
+    email: 'calbiophysics@gmail.com'
   },
   {
-    Email: 'admin@bioprinting.berkeley.edu'
+    email: 'admin@bioprinting.berkeley.edu'
   },
   {
-    Email: 'berkeley.bsgsa@gmail.com'
+    email: 'berkeley.bsgsa@gmail.com'
   },
   {
-    Email: 'baeh@berkeley.edu'
+    email: 'baeh@berkeley.edu'
   },
   {
-    Email: 'eyiwunmilaseinde@berkeley.edu'
+    email: 'eyiwunmilaseinde@berkeley.edu'
   },
   {
-    Email: 'ucberkeleybessa@gmail.com'
+    email: 'ucberkeleybessa@gmail.com'
   },
   {
-    Email: 'kaily.heitz@berkeley.edu'
+    email: 'kaily.heitz@berkeley.edu'
   },
   {
-    Email: 'bgess.berkeley@gmail.com'
+    email: 'bgess.berkeley@gmail.com'
   },
   {
-    Email: 'caleb_dawson@berkeley.edu'
+    email: 'caleb_dawson@berkeley.edu'
   },
   {
-    Email: 'bplaberkeley@gmail.com'
+    email: 'bplaberkeley@gmail.com'
   },
   {
-    Email: 'brrcboard@gmail.com'
+    email: 'brrcboard@gmail.com'
   },
   {
-    Email: 'blacksociologicalalliance@gmail.com'
+    email: 'blacksociologicalalliance@gmail.com'
   },
   {
-    Email: 'chair.calbsu@gmail.com'
+    email: 'chair.calbsu@gmail.com'
   },
   {
-    Email: 'calbsha@gmail.com'
+    email: 'calbsha@gmail.com'
   },
   {
-    Email: 'angelicapagan@berkeley.edu'
+    email: 'angelicapagan@berkeley.edu'
   },
   {
-    Email: 'admin@blockchain.berkeley.edu'
+    email: 'admin@blockchain.berkeley.edu'
   },
   {
-    Email: 'projectbloodpressure@gmail.com'
+    email: 'projectbloodpressure@gmail.com'
   },
   {
-    Email: 'info@yearbook.berkeley.edu'
+    email: 'info@yearbook.berkeley.edu'
   },
   {
-    Email: 'team@calblueprint.org'
+    email: 'team@calblueprint.org'
   },
   {
-    Email: 'berkeleyimmigrationgroup@law.berkeley.edu'
+    email: 'berkeleyimmigrationgroup@law.berkeley.edu'
   },
   {
-    Email: 'blast@law.berkeley.edu'
+    email: 'blast@law.berkeley.edu'
   },
   {
-    Email: 'Ucberkeleygames@gmail.com'
+    email: 'Ucberkeleygames@gmail.com'
   },
   {
-    Email: 'Skashley@berkeley.edu'
+    email: 'Skashley@berkeley.edu'
   },
   {
-    Email: 'info@bhi.berkeley.edu'
+    email: 'info@bhi.berkeley.edu'
   },
   {
-    Email: 'mainlinecomedyforce@gmail.com'
+    email: 'mainlinecomedyforce@gmail.com'
   },
   {
-    Email: 'bordersbodiescollective@gmail.com'
+    email: 'bordersbodiescollective@gmail.com'
   },
   {
-    Email: 'boricuasinberkeley@gmail.com'
+    email: 'boricuasinberkeley@gmail.com'
   },
   {
-    Email: 'benjamin.stollman@berkeley.edu'
+    email: 'benjamin.stollman@berkeley.edu'
   },
   {
-    Email: 'brasaberkeley@gmail.com'
+    email: 'brasaberkeley@gmail.com'
   },
   {
-    Email: 'info@breathe.berkeley.edu'
+    email: 'info@breathe.berkeley.edu'
   },
   {
-    Email: 'executivebridges@gmail.com'
+    email: 'executivebridges@gmail.com'
   },
   {
-    Email: 'bridgecal2017@gmail.com'
+    email: 'bridgecal2017@gmail.com'
   },
   {
-    Email: 'brownissues.ucb@gmail.com'
+    email: 'brownissues.ucb@gmail.com'
   },
+];
+
+export const emails2 = [
   {
-    Email: 'buildliteracy@berkeley.edu'
+    email: 'buildliteracy@berkeley.edu'
   },
   {
-    Email: 'jtooley8g@berkeley.edu'
+    email: 'jtooley8g@berkeley.edu'
   },
   {
-    Email: 'bab.berkeley@gmail.com'
+    email: 'bab.berkeley@gmail.com'
   },
   {
-    Email: 'calbcec@gmail.com'
+    email: 'calbcec@gmail.com'
   },
   {
-    Email: 'businessreviewatberkeley@gmail.com'
+    email: 'businessreviewatberkeley@gmail.com'
   },
   {
-    Email: 'nanki@berkeley.edu'
+    email: 'nanki@berkeley.edu'
   },
   {
-    Email: 'cal.actuarial.president@gmail.com'
+    email: 'cal.actuarial.president@gmail.com'
   },
   {
-    Email: 'students@casa.berkeley.edu'
+    email: 'students@casa.berkeley.edu'
   },
   {
-    Email: 'webmaster@calanimagealpha.com'
+    email: 'webmaster@calanimagealpha.com'
   },
   {
-    Email: 'president@caldems.com'
+    email: 'president@caldems.com'
   },
   {
-    Email: 'calbhangra@gmail.com'
+    email: 'calbhangra@gmail.com'
   },
   {
-    Email: 'intervarsityccf@gmail.com'
+    email: 'intervarsityccf@gmail.com'
   },
   {
-    Email: 'calcommunitymusic@gmail.com'
+    email: 'calcommunitymusic@gmail.com'
   },
   {
-    Email: 'angelicavohland@berkeley.edu'
+    email: 'angelicavohland@berkeley.edu'
   },
   {
-    Email: 'caldragonboat@gmail.com'
+    email: 'caldragonboat@gmail.com'
   },
   {
-    Email: 'calhabitat.pres@gmail.com'
+    email: 'calhabitat.pres@gmail.com'
   },
   {
-    Email: 'cschmid@berkeley.edu'
+    email: 'cschmid@berkeley.edu'
   },
   {
-    Email: 'calhawaiiclub@gmail.com'
+    email: 'calhawaiiclub@gmail.com'
   },
   {
-    Email: 'chaos-officers@lists.berkeley.edu'
+    email: 'chaos-officers@lists.berkeley.edu'
   },
   {
-    Email: 'publicserviceinternships@berkeley.edu'
+    email: 'publicserviceinternships@berkeley.edu'
   },
   {
-    Email: 'calinthecapital@gmail.com'
+    email: 'calinthecapital@gmail.com'
   },
   {
-    Email: 'caljapanclub@gmail.com'
+    email: 'caljapanclub@gmail.com'
   },
   {
-    Email: 'clam.art.editor@gmail.com'
+    email: 'clam.art.editor@gmail.com'
   },
   {
-    Email: 'safta@calperformances.org'
+    email: 'safta@calperformances.org'
   },
   {
-    Email: 'calprevet.president@gmail.com'
+    email: 'calprevet.president@gmail.com'
   },
   {
-    Email: 'cal.q.and.a@gmail.com'
+    email: 'cal.q.and.a@gmail.com'
   },
   {
-    Email: 'info@calrotaract.org'
+    email: 'info@calrotaract.org'
   },
   {
-    Email: 'calseismicteam@gmail.com'
+    email: 'calseismicteam@gmail.com'
   },
   {
-    Email: 'staph@berkeley.edu'
+    email: 'staph@berkeley.edu'
   },
   {
-    Email: 'calphilanthropy.president@gmail.com'
+    email: 'calphilanthropy.president@gmail.com'
   },
   {
-    Email: 'calsmv@gmail.com'
+    email: 'calsmv@gmail.com'
   },
   {
-    Email: 'caltaiko@gmail.com'
+    email: 'caltaiko@gmail.com'
   },
   {
-    Email: 'caluphc.publichealth@gmail.com'
+    email: 'caluphc.publichealth@gmail.com'
   },
   {
-    Email: 'calvetsgroup@gmail.com'
+    email: 'calvetsgroup@gmail.com'
   },
   {
-    Email: 'calibermag@gmail.com'
+    email: 'calibermag@gmail.com'
   },
   {
-    Email: 'california.archery@gmail.com'
+    email: 'california.archery@gmail.com'
   },
   {
-    Email: 'carccoordinator@gmail.com'
+    email: 'carccoordinator@gmail.com'
   },
   {
-    Email: 'cahpsa.berkeley@gmail.com'
+    email: 'cahpsa.berkeley@gmail.com'
   },
   {
-    Email: 'calmocktrial@gmail.com'
+    email: 'calmocktrial@gmail.com'
   },
   {
-    Email: 'calpirgstudents@berkeley.edu'
+    email: 'calpirgstudents@berkeley.edu'
   },
   {
-    Email: 'berkeleyscc@gmail.com'
+    email: 'berkeleyscc@gmail.com'
   },
   {
-    Email: 'lead@berkeley.edu'
+    email: 'lead@berkeley.edu'
   },
   {
-    Email: 'calslamdirectors@gmail.com'
+    email: 'calslamdirectors@gmail.com'
   },
   {
-    Email: 'calsol-me@berkeley.edu'
+    email: 'calsol-me@berkeley.edu'
   },
   {
-    Email: 'exec@caltv.berkeley.edu'
+    email: 'exec@caltv.berkeley.edu'
   },
   {
-    Email: 'berkeley@campkesem.org'
+    email: 'berkeley@campkesem.org'
   },
   {
-    Email: 'cef.berkeley@gmail.com'
+    email: 'cef.berkeley@gmail.com'
   },
   {
-    Email: 'cls@law.berkeley.edu'
+    email: 'cls@law.berkeley.edu'
   },
   {
-    Email: 'nkumar@berkeley.edu'
+    email: 'nkumar@berkeley.edu'
   },
   {
-    Email: 'claudinenarayan@berkeley.edu'
+    email: 'claudinenarayan@berkeley.edu'
   },
   {
-    Email: 'calbeardoves@gmail.com'
+    email: 'calbeardoves@gmail.com'
   },
   {
-    Email: 'catholicsatberkeleylaw@gmail.com'
+    email: 'catholicsatberkeleylaw@gmail.com'
   },
   {
-    Email: 'k.ogidi@berkeley.edu OR amielleano@berkeley.edu'
+    email: 'k.ogidi@berkeley.edu OR amielleano@berkeley.edu'
   },
   {
-    Email: 'CAFEatucb@gmail.com'
+    email: 'CAFEatucb@gmail.com'
   },
   {
-    Email: 'brachagamzu@yahoo.com'
+    email: 'brachagamzu@yahoo.com'
   },
   {
-    Email: 'bluehydrangea@berkeley.edu'
+    email: 'bluehydrangea@berkeley.edu'
   },
   {
-    Email: 'chec.berkeley@gmail.com'
+    email: 'chec.berkeley@gmail.com'
   },
   {
-    Email: 'gsac@lists.berkeley.edu'
+    email: 'gsac@lists.berkeley.edu'
   },
   {
-    Email: 'berkeley.chemecar@gmail.com'
+    email: 'berkeley.chemecar@gmail.com'
   },
   {
-    Email: 'ucbglc@gmail.com'
+    email: 'ucbglc@gmail.com'
   },
   {
-    Email: 'nathanfong@berkeley.edu'
+    email: 'nathanfong@berkeley.edu'
   },
   {
-    Email: 'berkeleyxe@gmail.com'
+    email: 'berkeleyxe@gmail.com'
   },
   {
-    Email: 'calchiomegapresident@gmail.com'
+    email: 'calchiomegapresident@gmail.com'
   },
   {
-    Email: 'udaysuresh@berkeley.edu'
+    email: 'udaysuresh@berkeley.edu'
   },
   {
-    Email: 'checochair2@gmail.com'
+    email: 'checochair2@gmail.com'
   },
   {
-    Email: 'casaboard@lists.berkeley.edu'
+    email: 'casaboard@lists.berkeley.edu'
   },
   {
-    Email: 'berkeleychineseacappella@gmail.com'
+    email: 'berkeleychineseacappella@gmail.com'
   },
   {
-    Email: 'chinesefinanceclub@gmail.com'
+    email: 'chinesefinanceclub@gmail.com'
   },
   {
-    Email: 'berkeleycgpsa@gmail.com'
+    email: 'berkeleycgpsa@gmail.com'
   },
   {
-    Email: 'chinesepeopleunion@gmail.com'
+    email: 'chinesepeopleunion@gmail.com'
   },
   {
-    Email: 'berkeleypsychologygroup@gmail.com'
+    email: 'berkeleypsychologygroup@gmail.com'
   },
   {
-    Email: 'berkeley.reading@gmail.com'
+    email: 'berkeley.reading@gmail.com'
   },
   {
-    Email: 'csaberkeley@gmail.com'
+    email: 'csaberkeley@gmail.com'
   },
   {
-    Email: 'amywang.wy@berkeley.edu'
+    email: 'amywang.wy@berkeley.edu'
   },
   {
-    Email: 'chyk-berkeley-active@googlegroups.com'
+    email: 'chyk-berkeley-active@googlegroups.com'
   },
   {
-    Email: 'berkeleycmda@gmail.com'
+    email: 'berkeleycmda@gmail.com'
   },
   {
-    Email: 'christiansatboalt@gmail.com'
+    email: 'christiansatboalt@gmail.com'
   },
   {
-    Email: 'ucb.coc@gmail.com'
+    email: 'ucb.coc@gmail.com'
   },
   {
-    Email: 'chunjinahm@gmail.com'
+    email: 'chunjinahm@gmail.com'
   },
   {
-    Email: 'info.cinebears@gmail.com'
+    email: 'info.cinebears@gmail.com'
   },
   {
-    Email: 'capclubberkeley@gmail.com'
+    email: 'capclubberkeley@gmail.com'
   },
   {
-    Email: 'cki-president@lists.berkeley.edu'
+    email: 'cki-president@lists.berkeley.edu'
   },
   {
-    Email: 'ryan_canavan@berkeley.edu'
+    email: 'ryan_canavan@berkeley.edu'
   },
   {
-    Email: 'ceejfc@berkeley.edu'
+    email: 'ceejfc@berkeley.edu'
   },
   {
-    Email: 'js98@berkeley.edu'
+    email: 'js98@berkeley.edu'
   },
   {
-    Email: 'classicalforumberkeley@gmail.com'
+    email: 'classicalforumberkeley@gmail.com'
   },
   {
-    Email: 'calclimbingofficers@googlegroups.com'
+    email: 'calclimbingofficers@googlegroups.com'
   },
   {
-    Email: 'cliosscroll@gmail.com'
+    email: 'cliosscroll@gmail.com'
   },
   {
-    Email: 'berkeleycmg@gmail.com'
+    email: 'berkeleycmg@gmail.com'
   },
   {
-    Email: 'curtisrumrill@berkeley.edu'
+    email: 'curtisrumrill@berkeley.edu'
   },
   {
-    Email: 'coachingcorpsucb@gmail.com'
+    email: 'coachingcorpsucb@gmail.com'
   },
   {
-    Email: 'coalitionfordiversity@gmail.com'
+    email: 'coalitionfordiversity@gmail.com'
   },
   {
-    Email: 'california@bamn.com'
+    email: 'california@bamn.com'
   },
   {
-    Email: 'contact@codebase.berkeley.edu'
+    email: 'contact@codebase.berkeley.edu'
   },
   {
-    Email: 'cssa.berkeley@gmail.com'
+    email: 'cssa.berkeley@gmail.com'
   },
   {
-    Email: 'ztgstover@berkeley.edu'
+    email: 'ztgstover@berkeley.edu'
   },
   {
-    Email: 'collegesagainstcancer.berkeley@gmail.com'
+    email: 'collegesagainstcancer.berkeley@gmail.com'
   },
   {
-    Email: 'ucbcollegiate@gmail.com'
+    email: 'ucbcollegiate@gmail.com'
   },
   {
-    Email: 'juan@berkeley.edu'
+    email: 'juan@berkeley.edu'
   },
   {
-    Email: 'colorsoftheater@gmail.com'
+    email: 'colorsoftheater@gmail.com'
   },
   {
-    Email: 'cks.staff@gmail.com'
+    email: 'cks.staff@gmail.com'
   },
   {
-    Email: 'trw@berkeley.edu'
+    email: 'trw@berkeley.edu'
   },
   {
-    Email: 'rjslp@berkeley.edu'
+    email: 'rjslp@berkeley.edu'
   },
   {
-    Email: 'a.eckmayer@berkeley.edu'
+    email: 'a.eckmayer@berkeley.edu'
   },
   {
-    Email: 'berkeleycluj@gmail.com'
+    email: 'berkeleycluj@gmail.com'
   },
   {
-    Email: 'mentors@berkeley.edu'
+    email: 'mentors@berkeley.edu'
   },
   {
-    Email: 'pb@csua.berkeley.edu'
+    email: 'pb@csua.berkeley.edu'
   },
   {
-    Email: 'kmyap@berkeley.edu'
+    email: 'kmyap@berkeley.edu'
   },
   {
-    Email: 'confiatcal@gmail.com'
+    email: 'confiatcal@gmail.com'
   },
   {
-    Email: 'caresatberkeley@gmail.com'
+    email: 'caresatberkeley@gmail.com'
   },
   {
-    Email: 'ucbconstructionteam@gmail.com'
+    email: 'ucbconstructionteam@gmail.com'
   },
   {
-    Email: 'berkeley@consultyourcommunity.org'
+    email: 'berkeley@consultyourcommunity.org'
   },
   {
-    Email: 'caps@law.berkeley.edu'
+    email: 'caps@law.berkeley.edu'
   },
   {
-    Email: 'crw@berkeley.edu'
+    email: 'crw@berkeley.edu'
   },
   {
-    Email: 'caitlinboucher@berkeley.edu'
+    email: 'caitlinboucher@berkeley.edu'
   },
   {
-    Email: 'gov2001@berkeley.edu'
+    email: 'gov2001@berkeley.edu'
   },
   {
-    Email: 'calorigami@gmail.com'
+    email: 'calorigami@gmail.com'
   },
   {
-    Email: 'calcreate@gmail.com'
+    email: 'calcreate@gmail.com'
   },
   {
-    Email: 'willskirkland@berkeley.edu'
+    email: 'willskirkland@berkeley.edu'
   },
   {
-    Email: 'cal.ccas@gmail.com'
+    email: 'cal.ccas@gmail.com'
   },
   {
-    Email: 'xroads@berkeley.edu'
+    email: 'xroads@berkeley.edu'
   },
   {
-    Email: 'crsso@lists.berkeley.edu'
+    email: 'crsso@lists.berkeley.edu'
   },
   {
-    Email: 'berkeleycru@gmail.com'
+    email: 'berkeleycru@gmail.com'
   },
   {
-    Email: 'cskickstart@gmail.com'
+    email: 'cskickstart@gmail.com'
   },
   {
-    Email: 'calcurling@gmail.com'
+    email: 'calcurling@gmail.com'
   },
   {
-    Email: 'berkeleydancecommunity@gmail.com'
+    email: 'berkeleydancecommunity@gmail.com'
   },
   {
-    Email: 'ding200403@berkeley.edu'
+    email: 'ding200403@berkeley.edu'
   },
   {
-    Email: 'dancethebay@gmail.com'
+    email: 'dancethebay@gmail.com'
   },
   {
-    Email: 'dwxpresidents@gmail.com'
+    email: 'dwxpresidents@gmail.com'
   },
   {
-    Email: 'daraja.berkeley@gmail.com'
+    email: 'daraja.berkeley@gmail.com'
   },
   {
-    Email: 'alanlp@berkeley.edu'
+    email: 'alanlp@berkeley.edu'
   },
   {
-    Email: 'dss.berkeley@gmail.com'
+    email: 'dss.berkeley@gmail.com'
   },
   {
-    Email: 'datongsociety@163.com'
+    email: 'datongsociety@163.com'
   },
   {
-    Email: 'destresswithdogs@gmail.com'
+    email: 'destresswithdogs@gmail.com'
   },
   {
-    Email: 'contact@debate.berkeley.edu'
+    email: 'contact@debate.berkeley.edu'
   },
   {
-    Email: 'decadence.berkeley@gmail.com'
+    email: 'decadence.berkeley@gmail.com'
   },
   {
-    Email: 'caltrideltapresident@gmail.com'
+    email: 'caltrideltapresident@gmail.com'
   },
   {
-    Email: 'president@berkeley.dka.org'
+    email: 'president@berkeley.dka.org'
   },
   {
-    Email: 'berkeleydpe@gmail.com'
+    email: 'berkeleydpe@gmail.com'
   },
   {
-    Email: 'kappa1921@gmail.com'
+    email: 'kappa1921@gmail.com'
   },
   {
-    Email: 'ucbdeltaxiphi@gmail.com'
+    email: 'ucbdeltaxiphi@gmail.com'
   },
   {
-    Email: 'decalprogram@gmail.com'
+    email: 'decalprogram@gmail.com'
   },
   {
-    Email: 'caldibs@gmail.com'
+    email: 'caldibs@gmail.com'
   },
   {
-    Email: 'farahnanji@berkeley.edu'
+    email: 'farahnanji@berkeley.edu'
   },
   {
-    Email: 'digitalrightsproject@law.berkeley.edu'
+    email: 'digitalrightsproject@law.berkeley.edu'
   },
   {
-    Email: 'ucberkeleydilse@gmail.com'
+    email: 'ucberkeleydilse@gmail.com'
   },
   {
-    Email: 'disneyclubatberkeley@gmail.com'
+    email: 'disneyclubatberkeley@gmail.com'
   },
   {
-    Email: 'diversatech.berkeley@gmail.com'
+    email: 'diversatech.berkeley@gmail.com'
   },
   {
-    Email: 'msf.ucberkeley@gmail.com'
+    email: 'msf.ucberkeley@gmail.com'
   },
   {
-    Email: 'downsyndromeberkeley@gmail.com'
+    email: 'downsyndromeberkeley@gmail.com'
   },
   {
-    Email: 'cal.drawntoscale@gmail.com'
+    email: 'cal.drawntoscale@gmail.com'
   },
   {
-    Email: 'Berkeley.Dream@gmail.com'
+    email: 'Berkeley.Dream@gmail.com'
   },
   {
-    Email: 'dutchstudentassn@gmail.com'
+    email: 'dutchstudentassn@gmail.com'
   },
   {
-    Email: 'eeri@berkeley.edu'
+    email: 'eeri@berkeley.edu'
   },
   {
-    Email: 'chair@eau.berkeley.edu'
+    email: 'chair@eau.berkeley.edu'
   },
   {
-    Email: 'minsookim729@berkeley.edu'
+    email: 'minsookim729@berkeley.edu'
   },
   {
-    Email: 'dreamersclinic@berkeley.edu'
+    email: 'dreamersclinic@berkeley.edu'
   },
   {
-    Email: 'jsycoff@berkeley.edu'
+    email: 'jsycoff@berkeley.edu'
   },
   {
-    Email: 'brower_cody@berkeley.edu'
+    email: 'brower_cody@berkeley.edu'
   },
   {
-    Email: 'info@eaucb.org'
+    email: 'info@eaucb.org'
   },
   {
-    Email: 'epic.berkeley@gmail.com'
+    email: 'epic.berkeley@gmail.com'
   },
   {
-    Email: 'eggsteroverall@gmail.com'
+    email: 'eggsteroverall@gmail.com'
   },
   {
-    Email: 'ego.staff@lists.berkeley.edu'
+    email: 'ego.staff@lists.berkeley.edu'
   },
   {
-    Email: 'sarahhassan@berkeley.edu'
+    email: 'sarahhassan@berkeley.edu'
   },
   {
-    Email: 'kcourtney@berkeley.edu'
+    email: 'kcourtney@berkeley.edu'
   },
   {
-    Email: 'eleven.ucb@gmail.com'
+    email: 'eleven.ucb@gmail.com'
   },
   {
-    Email: 'enabletechberkeley@gmail.com'
+    email: 'enabletechberkeley@gmail.com'
   },
   {
-    Email: 'ssherfa@berkeley.edu'
+    email: 'ssherfa@berkeley.edu'
   },
   {
-    Email: 'endo@berkeley.edu'
+    email: 'endo@berkeley.edu'
   },
   {
-    Email: 'info@e4k.berkeley.edu'
+    email: 'info@e4k.berkeley.edu'
   },
   {
-    Email: 'president@esc.berkeley.edu'
+    email: 'president@esc.berkeley.edu'
   },
   {
-    Email: 'engineeringwellnessatberkeley@gmail.com'
+    email: 'engineeringwellnessatberkeley@gmail.com'
   },
   {
-    Email: 'beam.teach@gmail.com'
+    email: 'beam.teach@gmail.com'
   },
   {
-    Email: 'esw.ucberkeley@gmail.com'
+    email: 'esw.ucberkeley@gmail.com'
   },
   {
-    Email: 'ewb.ucb@gmail.com'
+    email: 'ewb.ucb@gmail.com'
   },
   {
-    Email: 'berkeley.eua@gmail.com'
+    email: 'berkeley.eua@gmail.com'
   },
   {
-    Email: 'cal.entomology@gmail.com'
+    email: 'cal.entomology@gmail.com'
   },
   {
-    Email: 'eso@lists.berkeley.edu'
+    email: 'eso@lists.berkeley.edu'
   },
   {
-    Email: 'admin@entrepreneurs.berkeley.edu'
+    email: 'admin@entrepreneurs.berkeley.edu'
   },
   {
-    Email: 'matt.chung@berkeley.edu'
+    email: 'matt.chung@berkeley.edu'
   },
   {
-    Email: 'nstone@berkeley.edu'
+    email: 'nstone@berkeley.edu'
   },
   {
-    Email: 'environment@law.berkeley.edu'
+    email: 'environment@law.berkeley.edu'
   },
   {
-    Email: 'berkeley.essa@gmail.com'
+    email: 'berkeley.essa@gmail.com'
   },
   {
-    Email: 'calenviroteam@gmail.com'
+    email: 'calenviroteam@gmail.com'
   },
   {
-    Email: 'epsilonetaberkeley@gmail.com'
+    email: 'epsilonetaberkeley@gmail.com'
   },
   {
-    Email: 'ergo@lists.berkeley.edu'
+    email: 'ergo@lists.berkeley.edu'
   },
   {
-    Email: 'espm.gdc@lists.berkeley.edu'
+    email: 'espm.gdc@lists.berkeley.edu'
   },
   {
-    Email: 'espmgsa@gmail.com'
+    email: 'espmgsa@gmail.com'
   },
   {
-    Email: 'Biancav@berkeley.edu'
+    email: 'Biancav@berkeley.edu'
   },
   {
-    Email: 'hkn@hkn.eecs.berkeley.edu'
+    email: 'hkn@hkn.eecs.berkeley.edu'
   },
   {
-    Email: 'etaomegachi@gmail.com'
+    email: 'etaomegachi@gmail.com'
   },
   {
-    Email: 'ethicalapparel@gmail.com'
+    email: 'ethicalapparel@gmail.com'
   },
   {
-    Email: 'ecf@ebcb.org'
+    email: 'ecf@ebcb.org'
   },
   {
-    Email: 'expdancecrew@gmail.com'
+    email: 'expdancecrew@gmail.com'
   },
   {
-    Email: 'eyh_ucb@googlegroups.com'
+    email: 'eyh_ucb@googlegroups.com'
   },
   {
-    Email: 'exposureos.ucb@gmail.com'
+    email: 'exposureos.ucb@gmail.com'
   },
   {
-    Email: 'contact@xr.berkeley.edu'
+    email: 'contact@xr.berkeley.edu'
   },
   {
-    Email: 'kayle_edwards@berkeley.edu'
+    email: 'kayle_edwards@berkeley.edu'
   },
   {
-    Email: 'famcalberkeley@gmail.com'
+    email: 'famcalberkeley@gmail.com'
   },
   {
-    Email: 'boaltparentnetwork@gmail.com'
+    email: 'boaltparentnetwork@gmail.com'
   },
   {
-    Email: 'calfastinternal@gmail.com'
+    email: 'calfastinternal@gmail.com'
   },
   {
-    Email: 'berkeleyfederalistsociety@gmail.com'
+    email: 'berkeleyfederalistsociety@gmail.com'
   },
   {
-    Email: 'feelgoodberkeley@gmail.com'
+    email: 'feelgoodberkeley@gmail.com'
   },
   {
-    Email: 'dance.chinese@gmail.com'
+    email: 'dance.chinese@gmail.com'
   },
   {
-    Email: 'kirstychoi@berkeley.edu'
+    email: 'kirstychoi@berkeley.edu'
   },
   {
-    Email: 'FMLAofBerkeley@gmail.com'
+    email: 'FMLAofBerkeley@gmail.com'
   },
   {
-    Email: 'femtechberkeley@gmail.com'
+    email: 'femtechberkeley@gmail.com'
   },
   {
-    Email: 'ucberkeleyflsa@berkeley.edu'
+    email: 'ucberkeleyflsa@berkeley.edu'
   },
   {
-    Email: 'gutierrezk@berkeley.edu'
+    email: 'gutierrezk@berkeley.edu'
   },
   {
-    Email: 'flejcon@gmail.com'
+    email: 'flejcon@gmail.com'
   },
   {
-    Email: 'berkeleylawfgp@gmail.com'
+    email: 'berkeleylawfgp@gmail.com'
   },
   {
-    Email: 'eddieland12@berkeley.edu'
+    email: 'eddieland12@berkeley.edu'
   },
   {
-    Email: 'noaht@berkeley.edu'
+    email: 'noaht@berkeley.edu'
   },
   {
-    Email: 'dkwon98@berkeley.edu'
+    email: 'dkwon98@berkeley.edu'
   },
   {
-    Email: 'foodjustice@law.berkeley.edu'
+    email: 'foodjustice@law.berkeley.edu'
   },
   {
-    Email: 'fstatcal@gmail.com'
+    email: 'fstatcal@gmail.com'
   },
   {
-    Email: 'feedberkeley@gmail.com'
+    email: 'feedberkeley@gmail.com'
   },
   {
-    Email: 'FCSBerkeley@gmail.com'
+    email: 'FCSBerkeley@gmail.com'
   },
   {
-    Email: 'foresight.president@gmail.com'
+    email: 'foresight.president@gmail.com'
   },
   {
-    Email: 'berkeleyformulae@gmail.com'
+    email: 'berkeleyformulae@gmail.com'
   },
   {
-    Email: 'fsae@me.berkeley.edu'
+    email: 'fsae@me.berkeley.edu'
   },
   {
-    Email: 'fosteredproject@gmail.com'
+    email: 'fosteredproject@gmail.com'
   },
   {
-    Email: 'samueljmackinnon@berkeley.edu'
+    email: 'samueljmackinnon@berkeley.edu'
   },
   {
-    Email: 'pranav.gulati@berkeley.edu'
+    email: 'pranav.gulati@berkeley.edu'
   },
   {
-    Email: 'swetham49@berkeley.edu'
+    email: 'swetham49@berkeley.edu'
   },
   {
-    Email: 'aharmon@berkeley.edu'
+    email: 'aharmon@berkeley.edu'
   },
   {
-    Email: 'president@bsc.coop'
+    email: 'president@bsc.coop'
   },
   {
-    Email: 'ac663@berkeley.edu'
+    email: 'ac663@berkeley.edu'
   },
   {
-    Email: 'm2mpostpartum@gmail.com'
+    email: 'm2mpostpartum@gmail.com'
   },
   {
-    Email: 'berkeleypblexecs@lists.berkeley.edu'
+    email: 'berkeleypblexecs@lists.berkeley.edu'
   },
   {
-    Email: 'tiffani.johnson@berkeley.edu'
+    email: 'tiffani.johnson@berkeley.edu'
   },
   {
-    Email: 'bblj@law.berkeley.edu'
+    email: 'bblj@law.berkeley.edu'
   },
   {
-    Email: 'cavp@ga.berkeley.edu'
+    email: 'cavp@ga.berkeley.edu'
   },
   {
-    Email: 'funding-ga@berkeley.edu'
+    email: 'funding-ga@berkeley.edu'
   },
   {
-    Email: 'https://callink.berkeley.edu/organization/gagraduateevents: "",'
+    email: 'https://callink.berkeley.edu/organization/gagraduateevents: "",'
   },
   {
-    Email: 'https://callink.berkeley.edu/organization/gamiscactivitiesaccount: "",'
+    email: 'https://callink.berkeley.edu/organization/gamiscactivitiesaccount: "",'
   },
   {
-    Email: 'businessoffice@ga.berkeley.edu'
+    email: 'businessoffice@ga.berkeley.edu'
   },
   {
-    Email: 'president@ga.berkeley.edu'
+    email: 'president@ga.berkeley.edu'
   },
   {
-    Email: 'https://callink.berkeley.edu/organization/gaprojects: "",'
+    email: 'https://callink.berkeley.edu/organization/gaprojects: "",'
   },
   {
-    Email: 'rules@ga.berkeley.edu'
+    email: 'rules@ga.berkeley.edu'
   },
   {
-    Email: 'calgamedesign@gmail.com'
+    email: 'calgamedesign@gmail.com'
   },
   {
-    Email: 'ucbesports@gmail.com'
+    email: 'ucbesports@gmail.com'
   },
   {
-    Email: 'cal.gammaphi.pres@gmail.com'
+    email: 'cal.gammaphi.pres@gmail.com'
   },
   {
-    Email: 'lambda@gammarholambda.org'
+    email: 'lambda@gammarholambda.org'
   },
   {
-    Email: 'calgammas@gmail.com'
+    email: 'calgammas@gmail.com'
   },
   {
-    Email: 'berkeleygarb@gmail.com'
+    email: 'berkeleygarb@gmail.com'
   },
   {
-    Email: 'gmsa.berkeley@gmail.com'
+    email: 'gmsa.berkeley@gmail.com'
   },
   {
-    Email: 'ucberkeleygensex@gmail.com'
+    email: 'ucberkeleygensex@gmail.com'
   },
   {
-    Email: 'info@geostudents.berkeley.edu'
+    email: 'info@geostudents.berkeley.edu'
   },
   {
-    Email: 'pettis@berkeley.edu'
+    email: 'pettis@berkeley.edu'
   },
   {
-    Email: 'franmeyer@berkeley.edu'
+    email: 'franmeyer@berkeley.edu'
   },
   {
-    Email: 'germanic@berkeley.edu'
+    email: 'germanic@berkeley.edu'
   },
   {
-    Email: 'giamag.ucb@gmail.com'
+    email: 'giamag.ucb@gmail.com'
   },
   {
-    Email: 'giantfilmmakers@gmail.com'
+    email: 'giantfilmmakers@gmail.com'
   },
   {
-    Email: 'contact@gilltractfarm.org'
+    email: 'contact@gilltractfarm.org'
   },
   {
-    Email: 'berkeleygbb@gmail.com'
+    email: 'berkeleygbb@gmail.com'
   },
   {
-    Email: 'boaltglobal@law.berkeley.edu'
+    email: 'boaltglobal@law.berkeley.edu'
   },
   {
-    Email: 'gmbberkeley@gmail.com'
+    email: 'gmbberkeley@gmail.com'
   },
   {
-    Email: 'globerkeley.president@gmail.com'
+    email: 'globerkeley.president@gmail.com'
   },
   {
-    Email: 'berkeleygmma@gmail.com'
+    email: 'berkeleygmma@gmail.com'
   },
   {
-    Email: 'rebecca.blackwood@berkeley.edu'
+    email: 'rebecca.blackwood@berkeley.edu'
   },
   {
-    Email: 'akar23@berkeley.edu'
+    email: 'akar23@berkeley.edu'
   },
   {
-    Email: 'jsk0915@berkeley.edu'
+    email: 'jsk0915@berkeley.edu'
   },
   {
-    Email: 'berkeley@globemed.org'
+    email: 'berkeley@globemed.org'
   },
   {
-    Email: 'hello@goldenrecords.us'
+    email: 'hello@goldenrecords.us'
   },
   {
-    Email: 'adamnunes@berkeley.edu'
+    email: 'adamnunes@berkeley.edu'
   },
   {
-    Email: 'ced.gradstudentunion@berkeley.edu'
+    email: 'ced.gradstudentunion@berkeley.edu'
   },
   {
-    Email: 'gasp@berkelek.edu'
+    email: 'gasp@berkelek.edu'
   },
   {
-    Email: 'gea@econ.berkeley.edu'
+    email: 'gea@econ.berkeley.edu'
   },
   {
-    Email: 'samstein@berkeley.edu'
+    email: 'samstein@berkeley.edu'
   },
   {
-    Email: 'https://callink.berkeley.edu/organization/graduateglobaldevelopment: "",'
+    email: 'https://callink.berkeley.edu/organization/graduateglobaldevelopment: "",'
   },
   {
-    Email: 'educationresearchday@gmail.com'
+    email: 'educationresearchday@gmail.com'
   },
   {
-    Email: 'gradsrza@gmail.com'
+    email: 'gradsrza@gmail.com'
   },
   {
-    Email: 'gradswe@berkeley.edu'
+    email: 'gradswe@berkeley.edu'
   },
   {
-    Email: 'berkeley.grantswishes@gmail.com'
+    email: 'berkeley.grantswishes@gmail.com'
   },
   {
-    Email: 'greeningthegreeks@berkeley.edu'
+    email: 'greeningthegreeks@berkeley.edu'
   },
   {
-    Email: 'groundupjournal@gmail.com'
+    email: 'groundupjournal@gmail.com'
   },
   {
-    Email: 'gvpp@berkeley.edu'
+    email: 'gvpp@berkeley.edu'
   },
   {
-    Email: 'hbsageneral@gmail.com'
+    email: 'hbsageneral@gmail.com'
   },
   {
-    Email: 'ucbhubba@gmail.com'
+    email: 'ucbhubba@gmail.com'
   },
   {
-    Email: 'team@calhacks.io'
+    email: 'team@calhacks.io'
   },
   {
-    Email: 'handsandfeetberkeley@gmail.com'
+    email: 'handsandfeetberkeley@gmail.com'
   },
   {
-    Email: 'happyperiodberkeley@gmail.com'
+    email: 'happyperiodberkeley@gmail.com'
   },
   {
-    Email: 'hmap@berkeley.edu'
+    email: 'hmap@berkeley.edu'
   },
   {
-    Email: 'berkeleyhealthcoaching@gmail.com'
+    email: 'berkeleyhealthcoaching@gmail.com'
   },
   {
-    Email: 'berkeley@healthguardians.org'
+    email: 'berkeley@healthguardians.org'
   },
   {
-    Email: 'afan@healthleadsca.org'
+    email: 'afan@healthleadsca.org'
   },
   {
-    Email: 'healthsolutionsofberkeley@gmail.com'
+    email: 'healthsolutionsofberkeley@gmail.com'
   },
   {
-    Email: 'hbls@law.berkeley.edu'
+    email: 'hbls@law.berkeley.edu'
   },
   {
-    Email: 'danielrusu.13@berkeley.edu'
+    email: 'danielrusu.13@berkeley.edu'
   },
   {
-    Email: 'heartchan.berkeley@gmail.com'
+    email: 'heartchan.berkeley@gmail.com'
   },
   {
-    Email: 'heartfulness.berkeley20@gmail.com'
+    email: 'heartfulness.berkeley20@gmail.com'
   },
   {
-    Email: 'contact@thehelixgroup.org'
+    email: 'contact@thehelixgroup.org'
   },
   {
-    Email: 'hepbproject@gmail.com'
+    email: 'hepbproject@gmail.com'
   },
   {
-    Email: 'uc-berkeley@hercampus.com'
+    email: 'uc-berkeley@hercampus.com'
   },
   {
-    Email: 'ucbhau.cochairs@gmail.com'
+    email: 'ucbhau.cochairs@gmail.com'
   },
   {
-    Email: 'huchochairs@berkeley.edu'
+    email: 'huchochairs@berkeley.edu'
   },
   {
-    Email: 'heuristicsquelch@gmail.com'
+    email: 'heuristicsquelch@gmail.com'
   },
   {
-    Email: 'lorihorhor@berkeley.edu'
+    email: 'lorihorhor@berkeley.edu'
   },
   {
-    Email: 'studentboardpres@berkeleyhillel.org'
+    email: 'studentboardpres@berkeleyhillel.org'
   },
   {
-    Email: 'hesberkeley8@gmail.com'
+    email: 'hesberkeley8@gmail.com'
   },
   {
-    Email: 'steelonsteelhfc@gmail.com'
+    email: 'steelonsteelhfc@gmail.com'
   },
   {
-    Email: 'hga@berkeley.edu'
+    email: 'hga@berkeley.edu'
   },
   {
-    Email: 'hsaberkeley@gmail.com'
+    email: 'hsaberkeley@gmail.com'
   },
   {
-    Email: 'hosfellowship@gmail.com'
+    email: 'hosfellowship@gmail.com'
   },
   {
-    Email: 'hkaaberk@gmail.com'
+    email: 'hkaaberk@gmail.com'
   },
   {
-    Email: 'berkeleyhksa@gmail.com'
+    email: 'berkeleyhksa@gmail.com'
   },
   {
-    Email: 'hpv-me@berkeley.edu'
+    email: 'hpv-me@berkeley.edu'
   },
   {
-    Email: 'lili.s.spira@gmail.com'
+    email: 'lili.s.spira@gmail.com'
   },
   {
-    Email: 'anyal23@berkeley.edu'
+    email: 'anyal23@berkeley.edu'
   },
   {
-    Email: 'ideafactoryadv@gmail.com'
+    email: 'ideafactoryadv@gmail.com'
   },
   {
-    Email: 'journalhm@gmail.com'
+    email: 'journalhm@gmail.com'
   },
   {
-    Email: 'igs@ocf.berkeley.edu'
+    email: 'igs@ocf.berkeley.edu'
   },
   {
-    Email: 'ieee@berkeley.edu'
+    email: 'ieee@berkeley.edu'
   },
   {
-    Email: 'stefan.zukin@berkeley.edu'
+    email: 'stefan.zukin@berkeley.edu'
   },
   {
-    Email: 't4cimprov@gmail.com'
+    email: 't4cimprov@gmail.com'
   },
   {
-    Email: 'contact@isa.berkeley.edu'
+    email: 'contact@isa.berkeley.edu'
   },
   {
-    Email: 'natives@berkeley.edu'
+    email: 'natives@berkeley.edu'
   },
   {
-    Email: 'imsa@ischool.berkeley.edu'
+    email: 'imsa@ischool.berkeley.edu'
   },
   {
-    Email: 'InnovateBerkeley@gmail.com'
+    email: 'InnovateBerkeley@gmail.com'
   },
   {
-    Email: 'innovativedesignatcal@gmail.com'
+    email: 'innovativedesignatcal@gmail.com'
   },
   {
-    Email: 'albert.lee@berkeley.edu'
+    email: 'albert.lee@berkeley.edu'
   },
   {
-    Email: 'ilr.ucb@gmail.com'
+    email: 'ilr.ucb@gmail.com'
   },
   {
-    Email: 'iise@berkeley.edu'
+    email: 'iise@berkeley.edu'
   },
   {
-    Email: 'ucberkeleyite@gmail.com'
+    email: 'ucberkeleyite@gmail.com'
   },
   {
-    Email: 'emehlferber@berkeley.edu'
+    email: 'emehlferber@berkeley.edu'
   },
   {
-    Email: 'ifjberkeley@gmail.com'
+    email: 'ifjberkeley@gmail.com'
   },
   {
-    Email: 'cduarte@berkeley.edu'
+    email: 'cduarte@berkeley.edu'
   },
   {
-    Email: 'ihrwslp@berkeley.edu'
+    email: 'ihrwslp@berkeley.edu'
   },
   {
-    Email: 'berkeleyrefugeerights@gmail.com'
+    email: 'berkeleyrefugeerights@gmail.com'
   },
   {
-    Email: 'ircofberkeley@gmail.com'
+    email: 'ircofberkeley@gmail.com'
   },
   {
-    Email: 'international@calrotaract.org'
+    email: 'international@calrotaract.org'
   },
   {
-    Email: 'crystal.gong@berkeley.edu'
+    email: 'crystal.gong@berkeley.edu'
   },
   {
-    Email: 'officers@isab.berkeley.edu'
+    email: 'officers@isab.berkeley.edu'
   },
   {
-    Email: 'connect@mail.iusmberkeley.org'
+    email: 'connect@mail.iusmberkeley.org'
   },
   {
-    Email: 'berkeleysocialequality@gmail.com'
+    email: 'berkeleysocialequality@gmail.com'
   },
   {
-    Email: 'natives@berkeley.edu'
+    email: 'natives@berkeley.edu'
   },
   {
-    Email: 'intervarsityccf@gmail.com'
+    email: 'intervarsityccf@gmail.com'
   },
   {
-    Email: 'eduhmc@berkeley.edu'
+    email: 'eduhmc@berkeley.edu'
   },
   {
-    Email: 'inventioncorps@icb.berkeley.edu'
+    email: 'inventioncorps@icb.berkeley.edu'
   },
   {
-    Email: 'gammazeta1963@gmail.com'
+    email: 'gammazeta1963@gmail.com'
   },
   {
-    Email: 'iotasigmapi@gmail.com'
+    email: 'iotasigmapi@gmail.com'
   },
   {
-    Email: 'isaaatcal@gmail.com'
+    email: 'isaaatcal@gmail.com'
   },
   {
-    Email: 'iscoucb@gmail.com'
+    email: 'iscoucb@gmail.com'
   },
   {
-    Email: 'irish.dancers.berkeley@gmail.com'
+    email: 'irish.dancers.berkeley@gmail.com'
   },
   {
-    Email: 'isbah.bandeali@berkeley.edu'
+    email: 'isbah.bandeali@berkeley.edu'
   },
   {
-    Email: 'info@italiansocietyberkeley.org'
+    email: 'info@italiansocietyberkeley.org'
   },
   {
-    Email: 'MienStudents@lists.berkeley.edu'
+    email: 'MienStudents@lists.berkeley.edu'
   },
   {
-    Email: 'shshah2018@berkeley.edu ; khushimalde@berkeley.edu'
+    email: 'shshah2018@berkeley.edu ; khushimalde@berkeley.edu'
   },
   {
-    Email: 'jdhillon813@berkeley.edu'
+    email: 'jdhillon813@berkeley.edu'
   },
   {
-    Email: 'nitipawar@berkeley.edu'
+    email: 'nitipawar@berkeley.edu'
   },
   {
-    Email: 'jerichocomedy@gmail.com'
+    email: 'jerichocomedy@gmail.com'
   },
   {
-    Email: 'jsabl@law.berkeley.edu'
+    email: 'jsabl@law.berkeley.edu'
   },
   {
-    Email: 'adammolnar@berkeley.edu'
+    email: 'adammolnar@berkeley.edu'
   },
   {
-    Email: 'jurisbrewdence@gmail.com'
+    email: 'jurisbrewdence@gmail.com'
   },
   {
-    Email: 'calkpopular@gmail.com'
+    email: 'calkpopular@gmail.com'
   },
   {
-    Email: 'oliviawang@berkeley.edu'
+    email: 'oliviawang@berkeley.edu'
   },
   {
-    Email: 'kapiucb.president@gmail.com'
+    email: 'kapiucb.president@gmail.com'
   },
   {
-    Email: 'omegathetaceo@gmail.com'
+    email: 'omegathetaceo@gmail.com'
   },
   {
-    Email: 'ucbkgdpresident@gmail.com'
+    email: 'ucbkgdpresident@gmail.com'
   },
   {
-    Email: 'kkgucbpresident@gmail.com'
+    email: 'kkgucbpresident@gmail.com'
   },
   {
-    Email: 'calkappasig@gmail.com'
+    email: 'calkappasig@gmail.com'
   },
   {
-    Email: 'kendoclub.berkeley@gmail.com'
+    email: 'kendoclub.berkeley@gmail.com'
   },
   {
-    Email: 'berkeleykdsap@gmail.com'
+    email: 'berkeleykdsap@gmail.com'
   },
   {
-    Email: 'ucbkin@gmail.com'
+    email: 'ucbkin@gmail.com'
   },
   {
-    Email: 'kinkclubberkeley@gmail.com'
+    email: 'kinkclubberkeley@gmail.com'
   },
   {
-    Email: 'colefh@berkeley.edu'
+    email: 'colefh@berkeley.edu'
   },
   {
-    Email: 'michaelspencer990@berkeley.edu'
+    email: 'michaelspencer990@berkeley.edu'
   },
   {
-    Email: 'jjlinucb@berkeley.edu'
+    email: 'jjlinucb@berkeley.edu'
   },
   {
-    Email: 'taeyoung_k@berkeley.edu'
+    email: 'taeyoung_k@berkeley.edu'
   },
   {
-    Email: 'ucbkccc@gmail.com'
+    email: 'ucbkccc@gmail.com'
   },
   {
-    Email: 'calkasa@gmail.com'
+    email: 'calkasa@gmail.com'
   },
   {
-    Email: 'briankim2022@berkeley.edu'
+    email: 'briankim2022@berkeley.edu'
   },
   {
-    Email: 'kpg.cal@gmail.com'
+    email: 'kpg.cal@gmail.com'
   },
   {
-    Email: 'admin@berkeleykorean.com'
+    email: 'admin@berkeleykorean.com'
   },
   {
-    Email: 'minjoo.lee.63@berkeley.edu'
+    email: 'minjoo.lee.63@berkeley.edu'
   },
   {
-    Email: 'kosmosucb@gmail.com'
+    email: 'kosmosucb@gmail.com'
   },
   {
-    Email: 'sarahrymorris@berkeley.edu'
+    email: 'sarahrymorris@berkeley.edu'
   },
   {
-    Email: 'ucberkeleylafe@gmail.com'
+    email: 'ucberkeleylafe@gmail.com'
   },
   {
-    Email: 'lrlj@berkeley.edu'
+    email: 'lrlj@berkeley.edu'
   },
   {
-    Email: 'reynoso@berkeley.edu'
+    email: 'reynoso@berkeley.edu'
   },
   {
-    Email: 'LaRazaSLP@berkeley.edu'
+    email: 'LaRazaSLP@berkeley.edu'
   },
   {
-    Email: 'ahs.laborcoach@gmail.com'
+    email: 'ahs.laborcoach@gmail.com'
   },
   {
-    Email: 'lfcberkeley@gmail.com'
+    email: 'lfcberkeley@gmail.com'
   },
   {
-    Email: 'lta.do.president@gmail.com'
+    email: 'lta.do.president@gmail.com'
   },
   {
-    Email: 'LambdaThetaNu.Berkeley@gmail.com'
+    email: 'LambdaThetaNu.Berkeley@gmail.com'
   },
   {
-    Email: 'llsatberkeley@gmail.com'
+    email: 'llsatberkeley@gmail.com'
   },
   {
-    Email: 'ucblbsa.president@gmail.com'
+    email: 'ucblbsa.president@gmail.com'
   },
   {
-    Email: 'latinx.caucusucb@gmail.com'
+    email: 'latinx.caucusucb@gmail.com'
   },
   {
-    Email: 'lplsexecutivedirector@gmail.com'
+    email: 'lplsexecutivedirector@gmail.com'
   },
   {
-    Email: 'team@callaunchpad.org'
+    email: 'team@callaunchpad.org'
   },
   {
-    Email: 'berkeley.lpesoc@gmail.com'
+    email: 'berkeley.lpesoc@gmail.com'
   },
   {
-    Email: 'rafael_grilloavila@berkeley.edu'
+    email: 'rafael_grilloavila@berkeley.edu'
   },
   {
-    Email: 'berkeleylsjp@gmail.com'
+    email: 'berkeleylsjp@gmail.com'
   },
   {
-    Email: 'lsad@law.berkeley.edu'
+    email: 'lsad@law.berkeley.edu'
   },
   {
-    Email: 'layaofberkeley@gmail.com'
+    email: 'layaofberkeley@gmail.com'
   },
   {
-    Email: 'adamnavar@berkeley.edu'
+    email: 'adamnavar@berkeley.edu'
   },
   {
-    Email: 'clairecombredet@berkeley.edu'
+    email: 'clairecombredet@berkeley.edu'
   },
   {
-    Email: 'ucberkeley@learningenterprises.org'
+    email: 'ucberkeley@learningenterprises.org'
   },
   {
-    Email: 'legalautomation@berkeley.edu'
+    email: 'legalautomation@berkeley.edu'
   },
   {
-    Email: 'berkeleyleagueoflegends@gmail.com'
+    email: 'berkeleyleagueoflegends@gmail.com'
   },
   {
-    Email: 'letsrisementorship@gmail.com'
+    email: 'letsrisementorship@gmail.com'
   },
   {
-    Email: 'linkbayarea@gmail.com'
+    email: 'linkbayarea@gmail.com'
   },
   {
-    Email: 'lindyonthesproul@gmail.com'
+    email: 'lindyonthesproul@gmail.com'
   },
   {
-    Email: 'callinguaphiles@gmail.com'
+    email: 'callinguaphiles@gmail.com'
   },
   {
-    Email: 'livepoetsatberkeley@gmail.com'
+    email: 'livepoetsatberkeley@gmail.com'
   },
   {
-    Email: 'local@calrotaract.org'
+    email: 'local@calrotaract.org'
   },
   {
-    Email: 'Buckingbears@gmail.com'
+    email: 'Buckingbears@gmail.com'
   },
   {
-    Email: 'berkeleylym@gmail.com'
+    email: 'berkeleylym@gmail.com'
   },
   {
-    Email: 'passionlivingwater@gmail.com'
+    email: 'passionlivingwater@gmail.com'
   },
   {
-    Email: 'ml.at.berkeley@gmail.com'
+    email: 'ml.at.berkeley@gmail.com'
   },
   {
-    Email: 'maganda.eic@gmail.com'
+    email: 'maganda.eic@gmail.com'
   },
   {
-    Email: 'magicatcal@gmail.com'
+    email: 'magicatcal@gmail.com'
   },
   {
-    Email: 'isaacgoldstein@berkeley.edu'
+    email: 'isaacgoldstein@berkeley.edu'
   },
   {
-    Email: 'mainstacksdance@gmail.com'
+    email: 'mainstacksdance@gmail.com'
   },
   {
-    Email: 'berkeleymasa@gmail.com'
+    email: 'berkeleymasa@gmail.com'
   },
   {
-    Email: 'jaesung29@berkeley.edu'
+    email: 'jaesung29@berkeley.edu'
   },
   {
-    Email: 'sthalanki@berkeley.edu'
+    email: 'sthalanki@berkeley.edu'
   },
   {
-    Email: 'marchofdimesberkeley@gmail.com'
+    email: 'marchofdimesberkeley@gmail.com'
   },
   {
-    Email: 'ucbmariachi@gmail.com'
+    email: 'ucbmariachi@gmail.com'
   },
   {
-    Email: 'general@msea.berkeley.edu'
+    email: 'general@msea.berkeley.edu'
   },
   {
-    Email: 'martin.siron@berkeley.edu'
+    email: 'martin.siron@berkeley.edu'
   },
   {
-    Email: 'berkeleymt@gmail.com'
+    email: 'berkeleymt@gmail.com'
   },
   {
-    Email: 'mgsa@math.berkeley.edu'
+    email: 'mgsa@math.berkeley.edu'
   },
   {
-    Email: 'musa@math.berkeley.edu'
+    email: 'musa@math.berkeley.edu'
   },
   {
-    Email: 'info@matriculate.org'
+    email: 'info@matriculate.org'
   },
   {
-    Email: 'mayaatcal@gmail.com'
+    email: 'mayaatcal@gmail.com'
   },
   {
-    Email: 'jmpsuitcase@gmail.com'
+    email: 'jmpsuitcase@gmail.com'
   },
   {
-    Email: 'ucbmeditativearts@gmail.com'
+    email: 'ucbmeditativearts@gmail.com'
   },
   {
-    Email: 'ucbmedlife@gmail.com'
+    email: 'ucbmedlife@gmail.com'
   },
   {
-    Email: 'bruno.anaya@berkeley.edu'
+    email: 'bruno.anaya@berkeley.edu'
   },
   {
-    Email: 'cbarber@berkeley.edu'
+    email: 'cbarber@berkeley.edu'
   },
   {
-    Email: 'calmicrobes@gmail.com'
+    email: 'calmicrobes@gmail.com'
   },
   {
-    Email: 'berkeleymicrofinance@gmail.com'
+    email: 'berkeleymicrofinance@gmail.com'
   },
   {
-    Email: 'berkeleylawmelsa@gmail.com'
+    email: 'berkeleylawmelsa@gmail.com'
   },
   {
-    Email: 'ucberkeleymenarrc@gmail.com'
+    email: 'ucberkeleymenarrc@gmail.com'
   },
   {
-    Email: 'migrantadvocacyproject@gmail.com'
+    email: 'migrantadvocacyproject@gmail.com'
   },
   {
-    Email: 'bamv@googlegroups.com'
+    email: 'bamv@googlegroups.com'
   },
   {
-    Email: 'ucbmbn@gmail.com'
+    email: 'ucbmbn@gmail.com'
   },
   {
-    Email: 'mindfulnessatberkeley@gmail.com'
+    email: 'mindfulnessatberkeley@gmail.com'
   },
   {
-    Email: 'minecraft@berkeley.edu'
+    email: 'minecraft@berkeley.edu'
   },
   {
-    Email: 'mixedatberkeley.com'
+    email: 'mixedatberkeley.com'
   },
   {
-    Email: 'contact@mdb.dev'
+    email: 'contact@mdb.dev'
   },
   {
-    Email: 'mcbcdna@gmail.com'
+    email: 'mcbcdna@gmail.com'
   },
   {
-    Email: 'mcbgso@gmail.com'
+    email: 'mcbgso@gmail.com'
   },
   {
-    Email: 'mcbusa@gmail.com'
+    email: 'mcbusa@gmail.com'
   },
   {
-    Email: 'moodpsych@gmail.com'
+    email: 'moodpsych@gmail.com'
   },
   {
-    Email: 'admin@morningsignout.berkeley.edu'
+    email: 'admin@morningsignout.berkeley.edu'
   },
   {
-    Email: 'movefellowshipcal@gmail.com'
+    email: 'movefellowshipcal@gmail.com'
   },
   {
-    Email: 'ucb.movement@gmail.com'
+    email: 'ucb.movement@gmail.com'
   },
   {
-    Email: 'mcgc.president@calgreeks.com'
+    email: 'mcgc.president@calgreeks.com'
   },
   {
-    Email: 'tmcberkeley@gmail.com'
+    email: 'tmcberkeley@gmail.com'
   },
   {
-    Email: 'board@msa.berkeley.edu'
+    email: 'board@msa.berkeley.edu'
   },
   {
-    Email: 'malcs.ucberkeley@gmail.com'
+    email: 'malcs.ucberkeley@gmail.com'
   },
   {
-    Email: 'nalaproject@berkeley.edu'
+    email: 'nalaproject@berkeley.edu'
   },
   {
-    Email: 'ngwberkeley@gmail.com'
+    email: 'ngwberkeley@gmail.com'
   },
   {
-    Email: 'namiucb@gmail.com'
+    email: 'namiucb@gmail.com'
   },
   {
-    Email: 'office@naoshop.org'
+    email: 'office@naoshop.org'
   },
   {
-    Email: 'bo_tefu24@berkeley.edu'
+    email: 'bo_tefu24@berkeley.edu'
   },
   {
-    Email: 'ucbncnw@gmail.com'
+    email: 'ucbncnw@gmail.com'
   },
   {
-    Email: 'nlgberkeleylaw@gmail.com'
+    email: 'nlgberkeleylaw@gmail.com'
   },
   {
-    Email: 'nosa.berkeley@gmail.com'
+    email: 'nosa.berkeley@gmail.com'
   },
   {
-    Email: 'now.berkeley@gmail.com'
+    email: 'now.berkeley@gmail.com'
   },
   {
-    Email: 'calnphc9@gmail.com'
+    email: 'calnphc9@gmail.com'
   },
   {
-    Email: 'nalsa.ucberkeley@gmail.com'
+    email: 'nalsa.ucberkeley@gmail.com'
   },
   {
-    Email: 'natyaberkeley@gmail.com'
+    email: 'natyaberkeley@gmail.com'
   },
   {
-    Email: 'nrotc.ucberkeley@gmail.com'
+    email: 'nrotc.ucberkeley@gmail.com'
   },
   {
-    Email: 'calkathak@gmail.com'
+    email: 'calkathak@gmail.com'
   },
   {
-    Email: 'sbohara@berkeley.edu'
+    email: 'sbohara@berkeley.edu'
   },
   {
-    Email: 'nibundergrad@gmail.com'
+    email: 'nibundergrad@gmail.com'
   },
   {
-    Email: 'admin@nscb.berkeley.edu'
+    email: 'admin@nscb.berkeley.edu'
   },
   {
-    Email: 'contact@neurotech.berkeley.edu'
+    email: 'contact@neurotech.berkeley.edu'
   },
   {
-    Email: 'nijinyu@berkeley.edu'
+    email: 'nijinyu@berkeley.edu'
   },
   {
-    Email: 'ngcberkeley@gmail.com'
+    email: 'ngcberkeley@gmail.com'
   },
   {
-    Email: 'nsa.ucb@gmail.com'
+    email: 'nsa.ucb@gmail.com'
   },
   {
-    Email: 'nikkeichoralensemble@gmail.com'
+    email: 'nikkeichoralensemble@gmail.com'
   },
   {
-    Email: 'berkeleynsu@gmail.com'
+    email: 'berkeleynsu@gmail.com'
   },
   {
-    Email: 'madisonhales@berkeley.edu'
+    email: 'madisonhales@berkeley.edu'
   },
   {
-    Email: 'areddie@berkeley.edu'
+    email: 'areddie@berkeley.edu'
   },
   {
-    Email: 'nicu@nicu.berkeley.edu'
+    email: 'nicu@nicu.berkeley.edu'
   },
   {
-    Email: 'nutrigenomxberkeley@gmail.com'
+    email: 'nutrigenomxberkeley@gmail.com'
   },
   {
-    Email: 'oases@ebayc.org'
+    email: 'oases@ebayc.org'
   },
   {
-    Email: 'rhershkowitz@berkeley.edu'
+    email: 'rhershkowitz@berkeley.edu'
   },
   {
-    Email: 'berkeley.owls@gmail.com'
+    email: 'berkeley.owls@gmail.com'
   },
   {
-    Email: 'otiberkeley@gmail.com'
+    email: 'otiberkeley@gmail.com'
   },
   {
-    Email: 'betamu@omegaphibeta.org'
+    email: 'betamu@omegaphibeta.org'
   },
   {
-    Email: 'theomniscienttutor@gmail.com'
+    email: 'theomniscienttutor@gmail.com'
   },
   {
-    Email: 'mcrusmantijo@gmail.com'
+    email: 'mcrusmantijo@gmail.com'
   },
   {
-    Email: 'devnull@ocf.berkeley.edu'
+    email: 'devnull@ocf.berkeley.edu'
   },
   {
-    Email: 'eldavis@berkeley.edu'
+    email: 'eldavis@berkeley.edu'
   },
   {
-    Email: 'optimirconsulting@gmail.com'
+    email: 'optimirconsulting@gmail.com'
   },
   {
-    Email: 'ucbso.obm@gmail.com'
+    email: 'ucbso.obm@gmail.com'
   },
   {
-    Email: 'ucosa.president@gmail.com'
+    email: 'ucosa.president@gmail.com'
   },
   {
-    Email: 'ucosa.2021classpres@gmail.com'
+    email: 'ucosa.2021classpres@gmail.com'
   },
   {
-    Email: 'ucosa.2022ClassPres@gmail.com'
+    email: 'ucosa.2022ClassPres@gmail.com'
   },
   {
-    Email: 'ucosa.2023classpres@gmail.com'
+    email: 'ucosa.2023classpres@gmail.com'
   },
   {
-    Email: 'sfk@berkeley.edu'
+    email: 'sfk@berkeley.edu'
   },
   {
-    Email: 'd_brown@berkeley.edu'
+    email: 'd_brown@berkeley.edu'
   },
   {
-    Email: 'ocfberkeley@gmail.com'
+    email: 'ocfberkeley@gmail.com'
   },
   {
-    Email: 'o4batberkeley@gmail.com'
+    email: 'o4batberkeley@gmail.com'
   },
   {
-    Email: 'ostemberkeley@gmail.com'
+    email: 'ostemberkeley@gmail.com'
   },
   {
-    Email: 'outlet.berkeley@gmail.com'
+    email: 'outlet.berkeley@gmail.com'
   },
   {
-    Email: 'cwierschem@berkeley.edu'
+    email: 'cwierschem@berkeley.edu'
   },
   {
-    Email: 'berkeleypsa@gmail.com'
+    email: 'berkeleypsa@gmail.com'
   },
   {
-    Email: 'phc.communications@calgreeks.com'
+    email: 'phc.communications@calgreeks.com'
   },
   {
-    Email: 'calparli@gmail.com'
+    email: 'calparli@gmail.com'
   },
   {
-    Email: 'pih.engage.ucberkeley@gmail.com'
+    email: 'pih.engage.ucberkeley@gmail.com'
   },
   {
-    Email: 'ucberkeleyp4@gmail.com'
+    email: 'ucberkeleyp4@gmail.com'
   },
   {
-    Email: 'patent.berkeley@gmail.com'
+    email: 'patent.berkeley@gmail.com'
   },
   {
-    Email: 'ptc.peered@berkeley.edu'
+    email: 'ptc.peered@berkeley.edu'
   },
   {
-    Email: 'patricia98@berkeley.edu'
+    email: 'patricia98@berkeley.edu'
   },
   {
-    Email: 'pathberkeley@gmail.com'
+    email: 'pathberkeley@gmail.com'
   },
   {
-    Email: 'peerwellnesscoalition@gmail.com'
+    email: 'peerwellnesscoalition@gmail.com'
   },
   {
-    Email: 'peaceatberkeley@gmail.com'
+    email: 'peaceatberkeley@gmail.com'
   },
   {
-    Email: 'penciltopaperucb@gmail.com'
+    email: 'penciltopaperucb@gmail.com'
   },
   {
-    Email: 'ptps.berkeley@gmail.com'
+    email: 'ptps.berkeley@gmail.com'
   },
   {
-    Email: 'calperennial@gmail.com'
+    email: 'calperennial@gmail.com'
   },
   {
-    Email: 'psresearchcollective@gmail.com'
+    email: 'psresearchcollective@gmail.com'
   },
   {
-    Email: 'info@perspective.berkeley.edu'
+    email: 'info@perspective.berkeley.edu'
   },
   {
-    Email: 'phalanxpremed@gmail.com'
+    email: 'phalanxpremed@gmail.com'
   },
   {
-    Email: 'phdconsultingclub@gmail.com'
+    email: 'phdconsultingclub@gmail.com'
   },
   {
-    Email: 'president.berkeleypad@gmail.com'
+    email: 'president.berkeleypad@gmail.com'
   },
   {
-    Email: 'phat.berkeley@gmail.com'
+    email: 'phat.berkeley@gmail.com'
   },
   {
-    Email: 'deltabetachapter1965@gmail.com'
+    email: 'deltabetachapter1965@gmail.com'
   },
   {
-    Email: 'berkeleyphichi@gmail.com'
+    email: 'berkeleyphichi@gmail.com'
   },
   {
-    Email: 'berkeleyphide@gmail.com'
+    email: 'berkeleyphide@gmail.com'
   },
   {
-    Email: 'calphipsi@gmail.com'
+    email: 'calphipsi@gmail.com'
   },
   {
-    Email: 'jswegleitner@berkeley.edu'
+    email: 'jswegleitner@berkeley.edu'
   },
   {
-    Email: 'calphirho@gmail.com'
+    email: 'calphirho@gmail.com'
   },
   {
-    Email: 'calphilforum@gmail.com'
+    email: 'calphilforum@gmail.com'
   },
   {
-    Email: 'phoenixconsulting.berkeley@gmail.com'
+    email: 'phoenixconsulting.berkeley@gmail.com'
   },
   {
-    Email: 'phoenixsymphonyab@gmail.com'
+    email: 'phoenixsymphonyab@gmail.com'
   },
   {
-    Email: 'rexcalpilam@gmail.com'
+    email: 'rexcalpilam@gmail.com'
   },
   {
-    Email: 'berkeleypse.president@gmail.com'
+    email: 'berkeleypse.president@gmail.com'
   },
   {
-    Email: 'samanthayang@berkeley.edu'
+    email: 'samanthayang@berkeley.edu'
   },
   {
-    Email: 'paa.chair@gmail.com'
+    email: 'paa.chair@gmail.com'
   },
   {
-    Email: 'pahc.exec@gmail.com'
+    email: 'pahc.exec@gmail.com'
   },
   {
-    Email: 'ucbpba.exec@gmail.com'
+    email: 'ucbpba.exec@gmail.com'
   },
   {
-    Email: 'executive@pass.berkeley.edu'
+    email: 'executive@pass.berkeley.edu'
   },
   {
-    Email: 'general@pasae.berkeley.edu'
+    email: 'general@pasae.berkeley.edu'
   },
   {
-    Email: 'recruiting@pioneers.berkeley.edu'
+    email: 'recruiting@pioneers.berkeley.edu'
   },
   {
-    Email: 'ivana_rosas@berkeley.edu'
+    email: 'ivana_rosas@berkeley.edu'
   },
   {
-    Email: 'pointe.berkeley@gmail.com'
+    email: 'pointe.berkeley@gmail.com'
   },
   {
-    Email: 'pokemonclubcal@gmail.com'
+    email: 'pokemonclubcal@gmail.com'
   },
   {
-    Email: 'berkeleypolicereviewproject@law.berkeley.edu'
+    email: 'berkeleypolicereviewproject@law.berkeley.edu'
   },
   {
-    Email: 'policyreviewberkeley@gmail.com'
+    email: 'policyreviewberkeley@gmail.com'
   },
   {
-    Email: 'info@polishclub.berkeley.edu'
+    email: 'info@polishclub.berkeley.edu'
   },
   {
-    Email: 'Kimberly.plumer@berkeley.edu'
+    email: 'Kimberly.plumer@berkeley.edu'
   },
   {
-    Email: 'pcs.berkeley@gmail.com'
+    email: 'pcs.berkeley@gmail.com'
   },
   {
-    Email: 'p-cap@berkeley.edu'
+    email: 'p-cap@berkeley.edu'
   },
   {
-    Email: 'calphsc@gmail.com'
+    email: 'calphsc@gmail.com'
   },
   {
-    Email: 'ucberkeleypmhs@gmail.com'
+    email: 'ucberkeleypmhs@gmail.com'
   },
   {
-    Email: 'prenursingsociety@gmail.com'
+    email: 'prenursingsociety@gmail.com'
   },
   {
-    Email: 'pills.prepharmacy@gmail.com'
+    email: 'pills.prepharmacy@gmail.com'
   },
   {
-    Email: 'calpredentalsociety@gmail.com'
+    email: 'calpredentalsociety@gmail.com'
   },
   {
-    Email: 'lwpresence@googlegroups.com'
+    email: 'lwpresence@googlegroups.com'
   },
   {
-    Email: 'prisoneradvocacy@berkeley.edu'
+    email: 'prisoneradvocacy@berkeley.edu'
   },
   {
-    Email: 'privacylawatberkeley@gmail.com'
+    email: 'privacylawatberkeley@gmail.com'
   },
   {
-    Email: 'boaltacappella@gmail.com'
+    email: 'boaltacappella@gmail.com'
   },
   {
-    Email: 'justinwong777@berkeley.edu'
+    email: 'justinwong777@berkeley.edu'
   },
   {
-    Email: 'ismailazam@berkeley.edu'
+    email: 'ismailazam@berkeley.edu'
   },
   {
-    Email: 'OurRevUCB@gmail.com'
+    email: 'OurRevUCB@gmail.com'
   },
   {
-    Email: 'ucberkeleychapter@projectpengyou.org'
+    email: 'ucberkeleychapter@projectpengyou.org'
   },
   {
-    Email: 'ucberkeley@projectrishi.org'
+    email: 'ucberkeley@projectrishi.org'
   },
   {
-    Email: 'psmileinfo@gmail.com'
+    email: 'psmileinfo@gmail.com'
   },
   {
-    Email: 'calprojectvision@gmail.com'
+    email: 'calprojectvision@gmail.com'
   },
   {
-    Email: 'berkeley.psichi@gmail.com'
+    email: 'berkeley.psichi@gmail.com'
   },
   {
-    Email: 'editorialboard@pha.berkeley.edu'
+    email: 'editorialboard@pha.berkeley.edu'
   },
   {
-    Email: 'studentmedia@berkeley.edu'
+    email: 'studentmedia@berkeley.edu'
   },
   {
-    Email: 'puenteatberkeley@gmail.com'
+    email: 'puenteatberkeley@gmail.com'
   },
   {
-    Email: 'rosaleeenriquez@berkeley.edu'
+    email: 'rosaleeenriquez@berkeley.edu'
   },
   {
-    Email: 'punjabatberkeley@gmail.com'
+    email: 'punjabatberkeley@gmail.com'
   },
   {
-    Email: 'afineberg@berkeley.edu'
+    email: 'afineberg@berkeley.edu'
   },
   {
-    Email: 'debayanband@berkeley.edu'
+    email: 'debayanband@berkeley.edu'
   },
   {
-    Email: 'berkeleyqappa@gmail.com'
+    email: 'berkeleyqappa@gmail.com'
   },
   {
-    Email: 'board@ucbqarc.org'
+    email: 'board@ucbqarc.org'
   },
   {
-    Email: 'samstein@berkeley.edu'
+    email: 'samstein@berkeley.edu'
   },
   {
-    Email: 'caucus@law.berkeley.edu'
+    email: 'caucus@law.berkeley.edu'
   },
   {
-    Email: 'qsuberkeley@gmail.com'
+    email: 'qsuberkeley@gmail.com'
   },
   {
-    Email: 'team@qtsab.berkeley.edu'
+    email: 'team@qtsab.berkeley.edu'
   },
   {
-    Email: 'berkeleyquirs@gmail.com'
+    email: 'berkeleyquirs@gmail.com'
   },
   {
-    Email: 'lem@berkeley.edu'
+    email: 'lem@berkeley.edu'
   },
   {
-    Email: 'captains.calquidditch@gmail.com'
+    email: 'captains.calquidditch@gmail.com'
   },
   {
-    Email: 'rkeyal@berkeley.edu'
+    email: 'rkeyal@berkeley.edu'
   },
   {
-    Email: 'raon.staff@gmail.com'
+    email: 'raon.staff@gmail.com'
   },
   {
-    Email: 'ucb.raasramzat@gmail.com'
+    email: 'ucb.raasramzat@gmail.com'
   },
   {
-    Email: 'nanderman@berkeley.edu'
+    email: 'nanderman@berkeley.edu'
   },
   {
-    Email: 'yasminekasra@berkeley.edu'
+    email: 'yasminekasra@berkeley.edu'
   },
   {
-    Email: 'rawmediaonline@gmail.com'
+    email: 'rawmediaonline@gmail.com'
   },
   {
-    Email: 'raices.executivestaff@gmail.com'
+    email: 'raices.executivestaff@gmail.com'
   },
   {
-    Email: 'rtsa.berkeley@gmail.com'
+    email: 'rtsa.berkeley@gmail.com'
   },
   {
-    Email: 'core@reach.berkeley.edu'
+    email: 'core@reach.berkeley.edu'
   },
   {
-    Email: 'reentryadvocacy@berkeley.edu'
+    email: 'reentryadvocacy@berkeley.edu'
   },
   {
-    Email: 'Chase.daws@ruf.org'
+    email: 'Chase.daws@ruf.org'
   },
   {
-    Email: 'berkeleyrcsa@gmail.com'
+    email: 'berkeleyrcsa@gmail.com'
   },
   {
-    Email: 'asucrlastaff@gmail.com'
+    email: 'asucrlastaff@gmail.com'
   },
   {
-    Email: 'simoneliebanlevine@berkeley.edu'
+    email: 'simoneliebanlevine@berkeley.edu'
   },
   {
-    Email: 'rhershkowitz@berkeley.edu'
+    email: 'rhershkowitz@berkeley.edu'
   },
   {
-    Email: 'communityrj@gmail.com'
+    email: 'communityrj@gmail.com'
   },
   {
-    Email: 'rjl.berkeley@gmail.com'
+    email: 'rjl.berkeley@gmail.com'
   },
   {
-    Email: 'ucberkeleyreuse@gmail.com'
+    email: 'ucberkeleyreuse@gmail.com'
   },
   {
-    Email: 'riseatberkeley@gmail.com'
+    email: 'riseatberkeley@gmail.com'
   },
   {
-    Email: 'calrobobears@gmail.com'
+    email: 'calrobobears@gmail.com'
   },
   {
-    Email: 'robomasteratberkeley@gmail.com'
+    email: 'robomasteratberkeley@gmail.com'
   },
   {
-    Email: 'fvaleriano@berkeley.edu'
+    email: 'fvaleriano@berkeley.edu'
   },
   {
-    Email: 'leadership@rab.berkeley.edu'
+    email: 'leadership@rab.berkeley.edu'
   },
   {
-    Email: 'berkeleycubeclub@gmail.com'
+    email: 'berkeleycubeclub@gmail.com'
   },
   {
-    Email: 'russian.berkeley@gmail.com'
+    email: 'russian.berkeley@gmail.com'
   },
   {
-    Email: 'berkeley.sacnas@gmail.com'
+    email: 'berkeley.sacnas@gmail.com'
   },
   {
-    Email: 'president@sagementorship.org'
+    email: 'president@sagementorship.org'
   },
   {
-    Email: 'shevya.awasthi@berkeley.edu'
+    email: 'shevya.awasthi@berkeley.edu'
   },
   {
-    Email: 'berkeleyfinanceclub@gmail.com'
+    email: 'berkeleyfinanceclub@gmail.com'
   },
   {
-    Email: 'berkeley.salesforce@gmail.com'
+    email: 'berkeley.salesforce@gmail.com'
   },
   {
-    Email: 'salsaatcal@gmail.com'
+    email: 'salsaatcal@gmail.com'
   },
   {
-    Email: 'sphsg@berkeley.edu'
+    email: 'sphsg@berkeley.edu'
   },
   {
-    Email: 'spsa.info@gmail.com'
+    email: 'spsa.info@gmail.com'
   },
   {
-    Email: 'scifiandfantasywritersworkshop@gmail.com'
+    email: 'scifiandfantasywritersworkshop@gmail.com'
   },
   {
-    Email: 'berkeley.SLAM@gmail.com'
+    email: 'berkeley.SLAM@gmail.com'
   },
   {
-    Email: 'calscipol@gmail.com'
+    email: 'calscipol@gmail.com'
   },
   {
-    Email: 'calsecularists@gmail.com'
+    email: 'calsecularists@gmail.com'
   },
   {
-    Email: 'seealsoliteraryjournal@gmail.com'
+    email: 'seealsoliteraryjournal@gmail.com'
   },
   {
-    Email: 'sklouie17@berkeley.edu'
+    email: 'sklouie17@berkeley.edu'
   },
   {
-    Email: 'seedbaseconsulting@gmail.com'
+    email: 'seedbaseconsulting@gmail.com'
   },
   {
-    Email: 'ucberkeleyseeds@gmail.com'
+    email: 'ucberkeleyseeds@gmail.com'
   },
   {
-    Email: 'contact@she256.org'
+    email: 'contact@she256.org'
   },
   {
-    Email: 'saecalbeta.president@gmail.com'
+    email: 'saecalbeta.president@gmail.com'
   },
   {
-    Email: 'calsam.prior@gmail.com'
+    email: 'calsam.prior@gmail.com'
   },
   {
-    Email: 'calsigmaalphanu@gmail.com'
+    email: 'calsigmaalphanu@gmail.com'
   },
   {
-    Email: 'info@sigmaepsilonomega.com'
+    email: 'info@sigmaepsilonomega.com'
   },
   {
-    Email: 'ucbsep@gmail.com'
+    email: 'ucbsep@gmail.com'
   },
   {
-    Email: 'betapsichapter1958@gmail.com'
+    email: 'betapsichapter1958@gmail.com'
   },
   {
-    Email: 'ucbsmdpresident@gmail.com'
+    email: 'ucbsmdpresident@gmail.com'
   },
   {
-    Email: 'alphasopipresident@gmail.com'
+    email: 'alphasopipresident@gmail.com'
   },
   {
-    Email: 'alphachapter.president1996@gmail.com'
+    email: 'alphachapter.president1996@gmail.com'
   },
   {
-    Email: 'ucbssa@gmail.com'
+    email: 'ucbssa@gmail.com'
   },
   {
-    Email: 'contactus@ssa.berkeley.edu'
+    email: 'contactus@ssa.berkeley.edu'
   },
   {
-    Email: 'sketchicho.ucb@gmail.com'
+    email: 'sketchicho.ucb@gmail.com'
   },
   {
-    Email: 'calskiandsnowboardteam@gmail.com'
+    email: 'calskiandsnowboardteam@gmail.com'
   },
   {
-    Email: 'skybreathingberkeley@gmail.com'
+    email: 'skybreathingberkeley@gmail.com'
   },
   {
-    Email: 'smartass@caldems.com'
+    email: 'smartass@caldems.com'
   },
   {
-    Email: 'sws@berkeley.edu'
+    email: 'sws@berkeley.edu'
   },
   {
-    Email: 'smashatberkeley@gmail.com'
+    email: 'smashatberkeley@gmail.com'
   },
   {
-    Email: 'vickyzamarripa@berkeley.edu'
+    email: 'vickyzamarripa@berkeley.edu'
   },
   {
-    Email: 'ucbsjs@gmail.com'
+    email: 'ucbsjs@gmail.com'
   },
   {
-    Email: 'socialwelfareberkeley@gmail.com'
+    email: 'socialwelfareberkeley@gmail.com'
   },
   {
-    Email: 'swagg.berkeley@gmail.com'
+    email: 'swagg.berkeley@gmail.com'
   },
   {
-    Email: 'socialwelfaregrads@gmail.com'
+    email: 'socialwelfaregrads@gmail.com'
   },
   {
-    Email: 'karezoo2017@berkeley.edu'
+    email: 'karezoo2017@berkeley.edu'
   },
   {
-    Email: 'consbio@lists.berkeley.edu'
+    email: 'consbio@lists.berkeley.edu'
   },
   {
-    Email: 'erin_lawrence@berkeley.edu'
+    email: 'erin_lawrence@berkeley.edu'
   },
   {
-    Email: 'berkeley@saseconnect.org'
+    email: 'berkeley@saseconnect.org'
   },
   {
-    Email: 'berkeleyses@gmail.com'
+    email: 'berkeleyses@gmail.com'
   },
   {
-    Email: 'calslugs@gmail.com'
+    email: 'calslugs@gmail.com'
   },
   {
-    Email: 'ucbsps@gmail.com'
+    email: 'ucbsps@gmail.com'
   },
   {
-    Email: 'swe.berkeley@gmail.com'
+    email: 'swe.berkeley@gmail.com'
   },
   {
-    Email: 'ucberkeleysymposium@gmail.com'
+    email: 'ucberkeleysymposium@gmail.com'
   },
   {
-    Email: 'rebel.bailey@berkeley.edu'
+    email: 'rebel.bailey@berkeley.edu'
   },
   {
-    Email: 'serc@berkeley.edu'
+    email: 'serc@berkeley.edu'
   },
   {
-    Email: 'seessaucberkeley@gmail.com'
+    email: 'seessaucberkeley@gmail.com'
   },
   {
-    Email: 'songwriting.at.berkeley@gmail.com'
+    email: 'songwriting.at.berkeley@gmail.com'
   },
   {
-    Email: 'sorayyadance@gmail.com'
+    email: 'sorayyadance@gmail.com'
   },
   {
-    Email: 'salsa@law.berkeley.edu'
+    email: 'salsa@law.berkeley.edu'
   },
   {
-    Email: 'anushamohan@berkeley.edu'
+    email: 'anushamohan@berkeley.edu'
   },
   {
-    Email: 'SEAMentorship@gmail.com'
+    email: 'SEAMentorship@gmail.com'
   },
   {
-    Email: 'UCB.SASC@gmail.com'
+    email: 'UCB.SASC@gmail.com'
   },
   {
-    Email: 'spaceenterpriseatberkeley@gmail.com'
+    email: 'spaceenterpriseatberkeley@gmail.com'
   },
   {
-    Email: 'spacelawsociety@law.berkeley.edu'
+    email: 'spacelawsociety@law.berkeley.edu'
   },
   {
-    Email: 'ucberkeleystar@gmail.com'
+    email: 'ucberkeleystar@gmail.com'
   },
   {
-    Email: 'davidbyang@berkeley.edu'
+    email: 'davidbyang@berkeley.edu'
   },
   {
-    Email: 'speakoutnowcal@gmail.com'
+    email: 'speakoutnowcal@gmail.com'
   },
   {
-    Email: 'indiaconference@berkeley.edu'
+    email: 'indiaconference@berkeley.edu'
   },
   {
-    Email: 'spectrumatcal@gmail.com'
+    email: 'spectrumatcal@gmail.com'
   },
   {
-    Email: 'berkeleyspeech@gmail.com'
+    email: 'berkeleyspeech@gmail.com'
   },
   {
-    Email: 'kairavsharma@berkeley.edu'
+    email: 'kairavsharma@berkeley.edu'
   },
   {
-    Email: 'info@spirehk.org'
+    email: 'info@spirehk.org'
   },
   {
-    Email: 'splash.berkeley@gmail.com'
+    email: 'splash.berkeley@gmail.com'
   },
   {
-    Email: 'calspoonuniversity@gmail.com'
+    email: 'calspoonuniversity@gmail.com'
   },
   {
-    Email: 'derektopper@gmail.com'
+    email: 'derektopper@gmail.com'
   },
   {
-    Email: 'selsberkeleylaw@gmail.com'
+    email: 'selsberkeleylaw@gmail.com'
   },
   {
-    Email: 'springfoundation.berkeley@gmail.com'
+    email: 'springfoundation.berkeley@gmail.com'
   },
   {
-    Email: 'sprompspromp@gmail.com'
+    email: 'sprompspromp@gmail.com'
   },
   {
-    Email: 'steelbridge.berkeley@gmail.com'
+    email: 'steelbridge.berkeley@gmail.com'
   },
   {
-    Email: 'admin@sro.berkeley.edu'
+    email: 'admin@sro.berkeley.edu'
   },
   {
-    Email: 'chenrui20000425@berkeley.edu'
+    email: 'chenrui20000425@berkeley.edu'
   },
   {
-    Email: 'straittalk.berkeley@gmail.com'
+    email: 'straittalk.berkeley@gmail.com'
   },
   {
-    Email: 'josh.lewis525@berkeley.edu'
+    email: 'josh.lewis525@berkeley.edu'
   },
   {
-    Email: 'execs@saas.berkeley.edu'
+    email: 'execs@saas.berkeley.edu'
   },
   {
-    Email: 'ctubbesing@berkeley.edu'
+    email: 'ctubbesing@berkeley.edu'
   },
   {
-    Email: 'scdrberkeley@gmail.com'
+    email: 'scdrberkeley@gmail.com'
   },
   {
-    Email: 'scil@berkeley.edu'
+    email: 'scil@berkeley.edu'
   },
   {
-    Email: 'chair@foodcollective.org'
+    email: 'chair@foodcollective.org'
   },
   {
-    Email: 'volunteer@ywca-berkeley.org'
+    email: 'volunteer@ywca-berkeley.org'
   },
   {
-    Email: 'ucbsnac@gmail.com'
+    email: 'ucbsnac@gmail.com'
   },
   {
-    Email: 'sof@berkeley.edu'
+    email: 'sof@berkeley.edu'
   },
   {
-    Email: 'sparr.at.ucb@gmail.com'
+    email: 'sparr.at.ucb@gmail.com'
   },
   {
-    Email: 'fooddonations@ocf.berkeley.edu'
+    email: 'fooddonations@ocf.berkeley.edu'
   },
   {
-    Email: 'advisors@spanberkeley.com'
+    email: 'advisors@spanberkeley.com'
   },
   {
-    Email: 'techfund@berkeley.edu'
+    email: 'techfund@berkeley.edu'
   },
   {
-    Email: 'sspcemail@gmail.com'
+    email: 'sspcemail@gmail.com'
   },
   {
-    Email: 'kirstenbattle@berkeley.edu'
+    email: 'kirstenbattle@berkeley.edu'
   },
   {
-    Email: 'seej.berkeleylaw@gmail.com'
+    email: 'seej.berkeleylaw@gmail.com'
   },
   {
-    Email: 'seed-berc@berkeley.edu'
+    email: 'seed-berc@berkeley.edu'
   },
   {
-    Email: 's4hiphop@gmail.com'
+    email: 's4hiphop@gmail.com'
   },
   {
-    Email: 'ucberkeley4bernie@gmail.com'
+    email: 'ucberkeley4bernie@gmail.com'
   },
   {
-    Email: 'cal.sjp.inbox@gmail.com'
+    email: 'cal.sjp.inbox@gmail.com'
   },
   {
-    Email: 'berkeley4life@gmail.com'
+    email: 'berkeley4life@gmail.com'
   },
   {
-    Email: 'mkane@berkeley.edu'
+    email: 'mkane@berkeley.edu'
   },
   {
-    Email: 'kyliemurdock@berkeley.edu'
+    email: 'kyliemurdock@berkeley.edu'
   },
   {
-    Email: 'aststudents@lists.berkeley.edu'
+    email: 'aststudents@lists.berkeley.edu'
   },
   {
-    Email: 'cal.socee@gmail.com'
+    email: 'cal.socee@gmail.com'
   },
   {
-    Email: 'socenvcollective@gmail.com'
+    email: 'socenvcollective@gmail.com'
   },
   {
-    Email: 'scipp.leadership@lists.berkeley.edu'
+    email: 'scipp.leadership@lists.berkeley.edu'
   },
   {
-    Email: 'suitcaseclinic1989@gmail.com'
+    email: 'suitcaseclinic1989@gmail.com'
   },
   {
-    Email: 'sunriseberkeley@gmail.com'
+    email: 'sunriseberkeley@gmail.com'
   },
   {
-    Email: 'calsendforc@gmail.com'
+    email: 'calsendforc@gmail.com'
   },
   {
-    Email: 'spillberkeley@gmail.com'
+    email: 'spillberkeley@gmail.com'
   },
   {
-    Email: 'hlukanuski@berkeley.edu'
+    email: 'hlukanuski@berkeley.edu'
   },
   {
-    Email: 'alexsamano@berkeley.edu'
+    email: 'alexsamano@berkeley.edu'
   },
   {
-    Email: 'berkeley@clubs.surfrider.org'
+    email: 'berkeley@clubs.surfrider.org'
   },
   {
-    Email: 'BerkeleyLawSap@berkeley.edu'
+    email: 'BerkeleyLawSap@berkeley.edu'
   },
   {
-    Email: 'berkeleystc@gmail.com'
+    email: 'berkeleystc@gmail.com'
   },
   {
-    Email: 'sara.ye@berkeley.edu'
+    email: 'sara.ye@berkeley.edu'
   },
   {
-    Email: 'synapseatcal@gmail.com'
+    email: 'synapseatcal@gmail.com'
   },
   {
-    Email: 'blustic@berkeley.edu'
+    email: 'blustic@berkeley.edu'
   },
   {
-    Email: 'tcal@berkeley.edu'
+    email: 'tcal@berkeley.edu'
   },
   {
-    Email: 'tiny.berkeley@gmail.com'
+    email: 'tiny.berkeley@gmail.com'
   },
   {
-    Email: 'tasa.berkeley@gmail.com'
+    email: 'tasa.berkeley@gmail.com'
   },
   {
-    Email: 'tsa.berkeley@gmail.com'
+    email: 'tsa.berkeley@gmail.com'
   },
   {
-    Email: 'ucbtamid@gmail.com'
+    email: 'ucbtamid@gmail.com'
   },
   {
-    Email: 'sandy.liang@berkeley.edu'
+    email: 'sandy.liang@berkeley.edu'
   },
   {
-    Email: 'current-exec@tbp.berkeley.edu'
+    email: 'current-exec@tbp.berkeley.edu'
   },
   {
-    Email: 'contact@tkenu.com'
+    email: 'contact@tkenu.com'
   },
   {
-    Email: 'tbdcomedy@gmail.com'
+    email: 'tbdcomedy@gmail.com'
   },
   {
-    Email: 'teachinprison@gmail.com'
+    email: 'teachinprison@gmail.com'
   },
   {
-    Email: 'ucberkeley@teamhbv.org'
+    email: 'ucberkeley@teamhbv.org'
   },
   {
-    Email: 'vrapsrawr@gmail.com'
+    email: 'vrapsrawr@gmail.com'
   },
   {
-    Email: 'techimpactberkeley@gmail.com'
+    email: 'techimpactberkeley@gmail.com'
   },
   {
-    Email: 'tpilp@law.berkeley.edu'
+    email: 'tpilp@law.berkeley.edu'
   },
   {
-    Email: 'cal.thaisa@gmail.com'
+    email: 'cal.thaisa@gmail.com'
   },
   {
-    Email: 'berkeleyaltprotein@gmail.com'
+    email: 'berkeleyaltprotein@gmail.com'
   },
   {
-    Email: 'bearettesatberkeley@gmail.com'
+    email: 'bearettesatberkeley@gmail.com'
   },
   {
-    Email: 'berkeleygraduate@ga.berkeley.edu'
+    email: 'berkeleygraduate@ga.berkeley.edu'
   },
   {
-    Email: 'helenfroats@berkeley.edu'
+    email: 'helenfroats@berkeley.edu'
   },
   {
-    Email: 'ucbclear@gmail.com'
+    email: 'ucbclear@gmail.com'
   },
   {
-    Email: 'cifmpatcal@gmail.com'
+    email: 'cifmpatcal@gmail.com'
   },
   {
-    Email: 'editor@dailycal.org'
+    email: 'editor@dailycal.org'
   },
   {
-    Email: 'goldenwomenatberkeley@gmail.com'
+    email: 'goldenwomenatberkeley@gmail.com'
   },
   {
-    Email: 'intermissionberkeley@gmail.com'
+    email: 'intermissionberkeley@gmail.com'
   },
   {
-    Email: 'period.berkeley@gmail.com'
+    email: 'period.berkeley@gmail.com'
   },
   {
-    Email: 'startuplawinitiative@berkeley.edu'
+    email: 'startuplawinitiative@berkeley.edu'
   },
   {
-    Email: 'studentimmigrationreliefclinic@gmail.com'
+    email: 'studentimmigrationreliefclinic@gmail.com'
   },
   {
-    Email: 'notxarb@berkeley.edu'
+    email: 'notxarb@berkeley.edu'
   },
   {
-    Email: 'ucbtheaterforcharity@gmail.com'
+    email: 'ucbtheaterforcharity@gmail.com'
   },
   {
-    Email: 'president@caltdx.com'
+    email: 'president@caltdx.com'
   },
   {
-    Email: 'cal.theta.tau@gmail.com'
+    email: 'cal.theta.tau@gmail.com'
   },
   {
-    Email: 'devenss@berkeley.edu'
+    email: 'devenss@berkeley.edu'
   },
   {
-    Email: 'threadsatcal@gmail.com'
+    email: 'threadsatcal@gmail.com'
   },
   {
-    Email: 'thriveaspirelead@gmail.com'
+    email: 'thriveaspirelead@gmail.com'
   },
   {
-    Email: 'thrivedance.cal@gmail.com'
+    email: 'thrivedance.cal@gmail.com'
   },
   {
-    Email: 'ucberkeley.thriving.in.science@gmail.com'
+    email: 'ucberkeley.thriving.in.science@gmail.com'
   },
   {
-    Email: 'taug@berkeley.edu'
+    email: 'taug@berkeley.edu'
   },
   {
-    Email: 'toastmastersoncampus@gmail.com'
+    email: 'toastmastersoncampus@gmail.com'
   },
   {
-    Email: 'teachatberkeley@gmail.com'
+    email: 'teachatberkeley@gmail.com'
   },
   {
-    Email: 'counselor@tokiha.org'
+    email: 'counselor@tokiha.org'
   },
   {
-    Email: 'transfercoalition@gmail.com'
+    email: 'transfercoalition@gmail.com'
   },
   {
-    Email: 'ssscr.berkeley@gmail.com'
+    email: 'ssscr.berkeley@gmail.com'
   },
   {
-    Email: 'transoc@berkeley.edu'
+    email: 'transoc@berkeley.edu'
   },
   {
-    Email: 'trenza.cochairs@gmail.com'
+    email: 'trenza.cochairs@gmail.com'
   },
   {
-    Email: 'president@caltriathlon.com'
+    email: 'president@caltriathlon.com'
   },
   {
-    Email: 'troikaberkeley@gmail.com'
+    email: 'troikaberkeley@gmail.com'
   },
   {
-    Email: 'truelement@gmail.com'
+    email: 'truelement@gmail.com'
   },
   {
-    Email: 'turk.ucb@gmail.com'
+    email: 'turk.ucb@gmail.com'
   },
   {
-    Email: 'berkeleytc@gmail.com'
+    email: 'berkeleytc@gmail.com'
   },
   {
-    Email: 'induspresidents@gmail.com'
+    email: 'induspresidents@gmail.com'
   },
   {
-    Email: 'president@mun.berkeley.edu'
+    email: 'president@mun.berkeley.edu'
   },
   {
-    Email: 'tmoore@ucjazz.berkeley.edu'
+    email: 'tmoore@ucjazz.berkeley.edu'
   },
   {
-    Email: 'ucrc.chair@gmail.com'
+    email: 'ucrc.chair@gmail.com'
   },
   {
-    Email: 'urep@math.berkeley.edu'
+    email: 'urep@math.berkeley.edu'
   },
   {
-    Email: 'unconsciousbiasstem@gmail.com'
+    email: 'unconsciousbiasstem@gmail.com'
   },
   {
-    Email: 'rpanman@berkeley.edu'
+    email: 'rpanman@berkeley.edu'
   },
   {
-    Email: 'berkeley.uca@gmail.com'
+    email: 'berkeley.uca@gmail.com'
   },
   {
-    Email: 'ucberkeleyuea@gmail.com'
+    email: 'ucberkeleyuea@gmail.com'
   },
   {
-    Email: 'ufa.umcg@gmail.com'
+    email: 'ufa.umcg@gmail.com'
   },
   {
-    Email: 'ugtcs@berkeley.edu'
+    email: 'ugtcs@berkeley.edu'
   },
   {
-    Email: 'berkeleyujc@gmail.com'
+    email: 'berkeleyujc@gmail.com'
   },
   {
-    Email: 'directors@ulab.berkeley.edu'
+    email: 'directors@ulab.berkeley.edu'
   },
   {
-    Email: 'board@ulhs.berkeley.edu'
+    email: 'board@ulhs.berkeley.edu'
   },
   {
-    Email: 'umaucberkeley@gmail.com'
+    email: 'umaucberkeley@gmail.com'
   },
   {
-    Email: 'upsa.berkeley@gmail.com'
+    email: 'upsa.berkeley@gmail.com'
   },
   {
-    Email: 'ryan.kc@berkeley.edu'
+    email: 'ryan.kc@berkeley.edu'
   },
   {
-    Email: 'cedugsc@berkeley.edu'
+    email: 'cedugsc@berkeley.edu'
   },
   {
-    Email: 'undergroundscholars@berkeley.edu'
+    email: 'undergroundscholars@berkeley.edu'
   },
   {
-    Email: 'soceberkeley@gmail.com'
+    email: 'soceberkeley@gmail.com'
   },
   {
-    Email: 'calunicef@gmail.com'
+    email: 'calunicef@gmail.com'
   },
   {
-    Email: 'unaberkeley@gmail.com'
+    email: 'unaberkeley@gmail.com'
   },
   {
-    Email: 'calunityinchrist@gmail.com'
+    email: 'calunityinchrist@gmail.com'
   },
   {
-    Email: 'unitytp@berkeley.edu'
+    email: 'unitytp@berkeley.edu'
   },
   {
-    Email: 'justeqatcal@gmail.com'
+    email: 'justeqatcal@gmail.com'
   },
   {
-    Email: 'caluaem@gmail.com'
+    email: 'caluaem@gmail.com'
   },
   {
-    Email: 'admin@uav.berkeley.edu'
+    email: 'admin@uav.berkeley.edu'
   },
   {
-    Email: 'info@upe.berkeley.edu'
+    email: 'info@upe.berkeley.edu'
   },
   {
-    Email: 'ourmonsucb@gmail.com'
+    email: 'ourmonsucb@gmail.com'
   },
   {
-    Email: 'info@vcg.berkeley.edu'
+    email: 'info@vcg.berkeley.edu'
   },
   {
-    Email: 'amitpampati@berkeley.edu'
+    email: 'amitpampati@berkeley.edu'
   },
   {
-    Email: 'berkeleyvss@gmail.com'
+    email: 'berkeleyvss@gmail.com'
   },
   {
-    Email: 'veritasleaders@lists.berkeley.edu'
+    email: 'veritasleaders@lists.berkeley.edu'
   },
   {
-    Email: 'vexuberkeley@gmail.com'
+    email: 'vexuberkeley@gmail.com'
   },
   {
-    Email: 'vspinkcal@gmail.com'
+    email: 'vspinkcal@gmail.com'
   },
   {
-    Email: 'berkeley@vidavolunteertravel.org'
+    email: 'berkeley@vidavolunteertravel.org'
   },
   {
-    Email: 'president@calvsa.com'
+    email: 'president@calvsa.com'
   },
+];
+
+export const emails3 = [
   {
-    Email: 'outreach@calvsa.com'
+    email: 'outreach@calvsa.com'
   },
   {
-    Email: 'visiondevelopmentclub.ucb@gmail.com'
+    email: 'visiondevelopmentclub.ucb@gmail.com'
   },
   {
-    Email: 'teresa_canasbajo@berkeley.edu'
+    email: 'teresa_canasbajo@berkeley.edu'
   },
   {
-    Email: 'j.tai@berkeley.edu'
+    email: 'j.tai@berkeley.edu'
   },
   {
-    Email: 'cal.vhio@gmail.com'
+    email: 'cal.vhio@gmail.com'
   },
   {
-    Email: 'ucberkeleyvita@gmail.com'
+    email: 'ucberkeleyvita@gmail.com'
   },
   {
-    Email: 'berkeleyvaw@gmail.com'
+    email: 'berkeleyvaw@gmail.com'
   },
   {
-    Email: 'calvmo@gmail.com'
+    email: 'calvmo@gmail.com'
   },
   {
-    Email: 'info.voyagerconsulting@gmail.com'
+    email: 'info.voyagerconsulting@gmail.com'
   },
   {
-    Email: 'berkeleywagejustice@berkeley.edu'
+    email: 'berkeleywagejustice@berkeley.edu'
   },
   {
-    Email: 'WaveMakers@berkeley.edu'
+    email: 'WaveMakers@berkeley.edu'
   },
   {
-    Email: 'ask@wdd.io'
+    email: 'ask@wdd.io'
   },
   {
-    Email: 'westcoastswing.berkeley@gmail.com'
+    email: 'westcoastswing.berkeley@gmail.com'
   },
   {
-    Email: 'wiciberkeley@gmail.com'
+    email: 'wiciberkeley@gmail.com'
   },
   {
-    Email: 'wicse-presidents@lists.eecs.berkeley.edu'
+    email: 'wicse-presidents@lists.eecs.berkeley.edu'
   },
   {
-    Email: 'womeninpoliticsatberkeley@gmail.com'
+    email: 'womeninpoliticsatberkeley@gmail.com'
   },
   {
-    Email: 'ashleigh_lussenden@berkeley.edu'
+    email: 'ashleigh_lussenden@berkeley.edu'
   },
   {
-    Email: 'womxnigniteatberkeley@gmail.com'
+    email: 'womxnigniteatberkeley@gmail.com'
   },
   {
-    Email: 'ucbwim@gmail.com'
+    email: 'ucbwim@gmail.com'
   },
   {
-    Email: 'wobl@law.berkeley.edu'
+    email: 'wobl@law.berkeley.edu'
   },
   {
-    Email: 'berkeleylawwocc@gmail.com'
+    email: 'berkeleylawwocc@gmail.com'
   },
   {
-    Email: 'calwonderworks@gmail.com'
+    email: 'calwonderworks@gmail.com'
   },
   {
-    Email: 'berkeley.wrdlc@gmail.com'
+    email: 'berkeley.wrdlc@gmail.com'
   },
   {
-    Email: 'workersrightsclinic@berkeley.edu'
+    email: 'workersrightsclinic@berkeley.edu'
   },
   {
-    Email: 'calwpb@gmail.com'
+    email: 'calwpb@gmail.com'
   },
   {
-    Email: 'ysa.berkeley@gmail.com'
+    email: 'ysa.berkeley@gmail.com'
   },
   {
-    Email: 'youmeanmore@gmail.com'
+    email: 'youmeanmore@gmail.com'
   },
   {
-    Email: 'douglas_koehler@berkeley.edu'
+    email: 'douglas_koehler@berkeley.edu'
   },
   {
-    Email: 'calydsa@gmail.com'
+    email: 'calydsa@gmail.com'
   },
   {
-    Email: 'amanda.boyd@berkeley.edu'
+    email: 'amanda.boyd@berkeley.edu'
   },
   {
-    Email: 'johnwangpiano@berkeley.edu'
+    email: 'johnwangpiano@berkeley.edu'
   },
   {
-    Email: 'internal@ucbqarc.org'
+    email: 'internal@ucbqarc.org'
   },
   {
-    Email: 'ggmp@ywca-berkeley.edu'
+    email: 'ggmp@ywca-berkeley.edu'
   },
   {
-    Email: 'ucberkeleyzahanat@gmail.com'
+    email: 'ucberkeleyzahanat@gmail.com'
   },
   {
-    Email: 'KERBYLYNCH@BERKELEY.EDU'
+    email: 'KERBYLYNCH@BERKELEY.EDU'
   },
   {
-    Email: 'jkim933@berkeley.ed'
+    email: 'jkim933@berkeley.ed'
   }
 ];
 
-export const dummyEmails = [
+export const dummyemails = [
+  // {
+  //   email: 'sumi@codemarket.io'
+  // },
+  // {
+  //   email: 'sumitvekariya7@gmail.com'
+  // },
+  // {
+  //   email: 'bg4018@gmail.com'
+  // },
+  // {
+  //   email: 'jaysojitra13@gmail.com'
+  // },
   {
-    email: 'sumitvekariya7@gmail.com'
-  },
-  {
-    email: 'sarkazein7@gmail.com'
+    email: 'mysumifoods@gmail.com'
   }
 ];

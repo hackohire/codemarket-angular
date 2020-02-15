@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 import { CommentService } from '../shared/services/comment.service';
 import { appConstants } from '../shared/constants/app_constants';
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class CompanyService {
 
   companyFileds = gql`

@@ -44,6 +44,12 @@ export class CompanyService {
       latitude
       address
     }
+    facebookLink
+    instagramLink
+    twitterLink
+    yelpLink
+    linkedinLink
+    websiteLink
   }
   ${description}
   `;

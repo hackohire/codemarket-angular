@@ -8,7 +8,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FormService } from '../../shared/services/form.service';
 import { SetSelectedPost, GetPostById } from '../../core/store/actions/post.actions';
 import { selectSelectedPost } from '../../core/store/selectors/post.selectors';
-import { tap, switchMap, distinctUntilChanged, catchError } from 'rxjs/operators';
+import { tap, switchMap, } from 'rxjs/operators';
 import { PostStatus } from '../../shared/models/poststatus.enum';
 import { PostType } from '../../shared/models/post-types.enum';
 import { AppState } from '../../core/store/state/app.state';
@@ -27,10 +27,6 @@ export class AddCapitalFundingComponent implements OnInit {
 
   breadcumb: BreadCumb;
   capitalfundingForm: FormGroup;
-
-  allCompanies = [];
-
-  edit: boolean;
 
   get createdBy() {
     return this.capitalfundingForm.get('createdBy');
@@ -67,18 +63,14 @@ export class AddCapitalFundingComponent implements OnInit {
     private store: Store<AppState>,
     private activatedRoute: ActivatedRoute,
     public formService: FormService,
-    private companyService: CompanyService,
     public postService: PostService
   ) {
     this.breadcumb = {
       title: 'Add Capital Funding',
       path: [
+
         {
-          name: 'Dashboard',
-          pathString: '/'
-        },
-        {
-          name: 'Add Capital Funding'
+          name: PostType.CapitalFunding
         }
       ]
     };
@@ -90,14 +82,13 @@ export class AddCapitalFundingComponent implements OnInit {
      * get the capitalfunding by fetching id from the params
      */
 
-    if (this.activatedRoute.snapshot.parent && this.activatedRoute.snapshot.parent.routeConfig.path === 'add-capital-funding') {
+    if (this.activatedRoute.snapshot.parent && this.activatedRoute.snapshot.parent.routeConfig.path === `add-${PostType.CapitalFunding}`) {
       this.store.dispatch(SetSelectedPost({ post: null }));
       this.capitalfundingFormInitialization(null);
     } else {
       this.subscription$ = this.store.select(selectSelectedPost).pipe(
         tap((h: Post) => {
           this.capitalfundingFormInitialization(h);
-          this.edit = true;
         }),
         switchMap((h: Post) => {
           if (!h) {
@@ -145,10 +136,6 @@ export class AddCapitalFundingComponent implements OnInit {
       fundingAmount: new FormControl(i && i.fundingAmount ? i.fundingAmount : 10),
       type: new FormControl(PostType.CapitalFunding),
       createdBy: new FormControl(i && i.createdBy && i.createdBy._id ? i.createdBy._id : ''),
-    });
-
-    this.companyService.getCompaniesByType('').subscribe((companies) => {
-      this.allCompanies = companies;
     });
   }
 
@@ -207,19 +194,6 @@ export class AddCapitalFundingComponent implements OnInit {
   updateFormData(event) {
     console.log(this.steps.toArray());
     // this.capitalfundingForm.get('description').setValue(event);
-  }
-
-
-  addCompany = (name: string) => {
-    if (name) {
-      return new Promise((resolve, reject) => {
-        this.companyService.addCompany({name, createdBy: this.authService.loggedInUser._id}).subscribe(c => {
-          this.allCompanies.unshift(c);
-          this.allCompanies = this.allCompanies.slice();
-          return resolve(c.name);
-        });
-      });
-    }
   }
 
   addStep(i: number) {

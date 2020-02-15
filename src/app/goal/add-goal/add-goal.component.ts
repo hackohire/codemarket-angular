@@ -28,16 +28,8 @@ import { EditorComponent } from '../../shared/components/editor/editor.component
   styleUrls: ['./add-goal.component.scss']
 })
 export class AddGoalComponent implements OnInit {
-  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
-  urlRegex = '^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$';
   breadcumb: BreadCumb;
   goalForm: FormGroup;
-  modules = {
-    formula: true,
-    syntax: true,
-  };
-
-  edit: boolean;
 
   get createdBy() {
     return this.goalForm.get('createdBy');
@@ -66,11 +58,6 @@ export class AddGoalComponent implements OnInit {
   @ViewChild('descriptionEditor', { static: false }) descriptionEditor: EditorComponent;
   @ViewChild('supportDescriptionEditor', { static: false }) supportDescriptionEditor: EditorComponent;
 
-  visible = true;
-  selectable = true;
-  removable = true;
-  addOnBlur = true;
-
   subscription$: Subscription;
 
   searchText = new FormControl();
@@ -91,11 +78,7 @@ export class AddGoalComponent implements OnInit {
       title: 'Add Goal Details',
       path: [
         {
-          name: 'Dashboard',
-          pathString: '/'
-        },
-        {
-          name: 'Add Goal'
+          name: PostType.Goal
         }
       ]
     };
@@ -107,14 +90,13 @@ export class AddGoalComponent implements OnInit {
      * get the goal by fetching id from the params
      */
 
-    if (this.activatedRoute.snapshot.parent.routeConfig.path === 'add-goal') {
+    if (this.activatedRoute.snapshot.parent.routeConfig.path === `add-${PostType.Goal}`) {
       this.store.dispatch(SetSelectedPost({ post: null }));
       this.goalFormInitialization(null);
     } else {
       this.subscription$ = this.store.select(selectSelectedPost).pipe(
         tap((h: Goal) => {
           this.goalFormInitialization(h);
-          this.edit = true;
         }),
         switchMap((h: Goal) => {
           if (!h) {
@@ -150,6 +132,7 @@ export class AddGoalComponent implements OnInit {
       _id: new FormControl(i && i._id ? i._id : ''),
       tags: this.fb.array(i && i.tags && i.tags.length ? i.tags : []),
       type: new FormControl(PostType.Goal),
+      company: new FormControl(i && i.company ? i.company : ''),
       support: new FormGroup({
         time: new FormControl(i && i.support && i.support.time ? i.support.time : 0),
         description: new FormControl(i && i.support && i.support.description ? i.support.description : [])

@@ -69,10 +69,10 @@ export class DetailsComponent implements OnInit, OnDestroy {
   ) {
     this.breadcumb = {
       path: [
-        {
-          name: 'Dashboard',
-          pathString: '/'
-        }
+        // {
+        //   name: 'Dashboard',
+        //   pathString: '/'
+        // }
       ]
     };
 
@@ -88,6 +88,9 @@ export class DetailsComponent implements OnInit, OnDestroy {
   ngOnInit() {
 
     this.type = this.activatedRoute.snapshot.queryParams.type;
+
+    this.breadcumb.path.push({name: this.type});
+
     this.commentId = this.activatedRoute.snapshot.queryParams['commentId'];
 
     console.log(this.activatedRoute.snapshot.queryParams);
@@ -102,6 +105,10 @@ export class DetailsComponent implements OnInit, OnDestroy {
           this.postDetails = p;
           this.details$ = of(p);
           this.initializeCommentForm(p, 'post');
+
+          if (p.company && p.company.name) {
+            this.breadcumb.path.unshift({name: p.company.name})
+          }
 
           /** Subscribe to loggedinuser, once loggedInUse is got, Check if the loggedInUder is
            * in the list of attendess or not
@@ -118,7 +125,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
                 this.isUserAttending = false;
               }
             })
-          )
+          );
         } else if (this.postDetails && this.postDetails._id === postId) {
           /** Comes inside this block, only when we are already in a post details page, and by using searh,
            * we try to open any other post detials page

@@ -10,11 +10,7 @@
                     <input type="text" matInput formControlName="name" placeholder="Title">
                 </mat-form-field>
 
-                <ng-select placeholder="Roles"
-                    [items]="roles$ | async" [hideSelected]="true" formControlName="jobProfile"
-                    [addTag]="formService?.addRoleFn" [bindLabel]="'name'" [minTermLength]="2" [loading]="rolesLoading"
-                    [multiple]="true" [typeahead]="roleInput$">
-                </ng-select>
+                <app-autocomplete [autoComplete]="careerCoachForm?.get('jobProfile')" [placeholder]="'Roles'" [collection]="'tags'" [type]="'role'" [multiple]="true"></app-autocomplete>
 
                 <app-editor #descriptionEditor
                     [data]="descriptionFormControl.value" [id]="'edit-career-coach-editor'"
@@ -22,15 +18,7 @@
 
                 <br />
 
-
-                <!-- <div class="row"> -->
-                <ng-select placeholder="Select Companies" [addTag]="addCompany" [items]="allCompanies"
-                    formControlName="companies" [multiple]="true" bindLabel="name">
-                    <ng-option *ngFor="let cName of allCompanies" [value]="cName._id">
-                        {{ cName?.name }}
-                    </ng-option>
-                </ng-select>
-                <!-- </div> -->
+                <app-autocomplete class="col-md-6" [autoComplete]="careerCoachForm?.get('companies')" [placeholder]="'Select Companies'" [collection]="'companies'" [type]="" [multiple]="true"></app-autocomplete>
 
                 <div>
                     <label style="margin-bottom: 0 !important;">{{careerCoachQuestions['gapAnalysis']}}: </label>

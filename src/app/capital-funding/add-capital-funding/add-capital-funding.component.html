@@ -11,19 +11,8 @@
                 </mat-form-field>
 
                 <div class="row">
-                    <ng-select class="col-md-6" placeholder="Funding By" [addTag]="addCompany" [items]="allCompanies"
-                        formControlName="fundingBy" [multiple]="true" bindLabel="name">
-                        <ng-option *ngFor="let cName of allCompanies" [value]="cName._id">
-                            {{ cName?.name }}
-                        </ng-option>
-                    </ng-select>
-
-                    <ng-select class="col-md-6" placeholder="Funding To" [addTag]="addCompany" [items]="allCompanies"
-                        formControlName="fundingTo" [multiple]="true" bindLabel="name">
-                        <ng-option *ngFor="let cName of allCompanies" [value]="cName._id">
-                            {{ cName?.name }}
-                        </ng-option>
-                    </ng-select>
+                    <app-autocomplete class="col-md-6" [autoComplete]="capitalfundingForm?.get('fundingBy')" [placeholder]="'Funding By'" [collection]="'companies'" [type]="" [multiple]="true"></app-autocomplete>
+                    <app-autocomplete class="col-md-6" [autoComplete]="capitalfundingForm?.get('fundingTo')" [placeholder]="'Funding To'" [collection]="'companies'" [type]="" [multiple]="true"></app-autocomplete>
                 </div>
 
                 <div class="row">

@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { BreadCumb } from 'src/app/shared/models/bredcumb.model';
 import { FormGroup, FormControl, Validators, FormArray, FormBuilder } from '@angular/forms';
-import { Interview } from 'src/app/shared/models/interview.model';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/core/store/state/app.state';
@@ -32,12 +31,6 @@ export class AddInterviewComponent implements OnInit {
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   breadcumb: BreadCumb;
   interviewForm: FormGroup;
-  modules = {
-    formula: true,
-    syntax: true,
-  };
-
-  edit: boolean;
 
   get createdBy() {
     return this.interviewForm.get('createdBy');
@@ -74,8 +67,6 @@ export class AddInterviewComponent implements OnInit {
   tagSuggestions: Tag[];
   allTags: Tag[];
 
-  allCompanies = [];
-
   @ViewChild('searchInput', {static: false}) searchInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto', {static: false}) matAutocomplete: MatAutocomplete;
 
@@ -87,18 +78,13 @@ export class AddInterviewComponent implements OnInit {
     private store: Store<AppState>,
     private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
-    private formService: FormService,
-    private companyService: CompanyService
+    private formService: FormService
   ) {
     this.breadcumb = {
       title: 'Add Interview Details',
       path: [
         {
-          name: 'Dashboard',
-          pathString: '/'
-        },
-        {
-          name: 'Add Interview'
+          name: PostType.Interview
         }
       ]
     };
@@ -110,14 +96,13 @@ export class AddInterviewComponent implements OnInit {
      * get the interview by fetching id from the params
      */
 
-    if (this.activatedRoute.snapshot.parent.routeConfig.path === 'add-interview') {
+    if (this.activatedRoute.snapshot.parent.routeConfig.path === `add-${PostType.Interview}`) {
       this.store.dispatch(SetSelectedPost({ post: null }));
       this.interviewFormInitialization(null);
     } else {
       this.subscription$ = this.store.select(selectSelectedPost).pipe(
         tap((h: Post) => {
           this.interviewFormInitialization(h);
-          this.edit = true;
         }),
         switchMap((h: Post) => {
           if (!h) {
@@ -148,7 +133,7 @@ export class AddInterviewComponent implements OnInit {
       description: new FormControl(i && i.description ? i.description : ''),
       price: new FormControl(i && i.price ? i.price : 0, Validators.required),
       jobProfile: new FormControl(i && i.jobProfile ? i.jobProfile : ''),
-      company: new FormControl(i && i.company ? i.company._id : ''),
+      company: new FormControl(i && i.company ? i.company : ''),
       createdBy: new FormControl(i && i.createdBy && i.createdBy._id ? i.createdBy._id : ''),
       // categories: new FormControl(i && i.categories ? i.categories : []),
       status: new FormControl(i && i.status ? i.status : PostStatus.Drafted),
@@ -162,10 +147,6 @@ export class AddInterviewComponent implements OnInit {
       // snippets: new FormControl(null),
     });
 
-    this.companyService.getCompaniesByType('').subscribe((companies) => {
-      this.allCompanies = companies;
-    });
-    
     this.formService.findFromCollection('', 'tags').subscribe((tags) => {
       this.tagSuggestions = tags;
       this.allTags = tags;

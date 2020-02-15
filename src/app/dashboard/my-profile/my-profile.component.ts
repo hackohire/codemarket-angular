@@ -196,10 +196,7 @@ export class MyProfileComponent implements OnInit {
     this.breadcumb = {
       title: 'Profile',
       path: [
-        {
-          name: 'Dashboard',
-          pathString: '/'
-        },
+
         {
           name: 'My Profile'
         }

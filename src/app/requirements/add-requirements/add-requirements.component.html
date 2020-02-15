@@ -20,6 +20,9 @@
                     <mat-icon matSuffix>monetization_on</mat-icon>
                 </mat-form-field>
 
+                <!-- Select Company -->
+                <app-autocomplete class="field-full-width" [autoComplete]="requirementForm?.get('company')" [placeholder]="'Select Company'" [collection]="'companies'" [type]="" [multiple]="false"></app-autocomplete>
+
                 <mat-form-field class="field-full-width">
                     <mat-chip-list #tagsList>
                         <mat-chip *ngFor="let tag of tagsFormControl?.value; let i = index;" [selectable]="selectable"

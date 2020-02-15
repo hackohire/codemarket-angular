@@ -25,10 +25,7 @@ export class CartComponent implements OnInit {
     this.breadcumb = {
       title: 'Amazing Products in Your Cart',
       path: [
-        {
-          name: 'Dashboard',
-          pathString: '/'
-        },
+
         {
           name: 'Cart'
         }

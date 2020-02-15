@@ -26,15 +26,8 @@ import { EditorComponent } from '../../shared/components/editor/editor.component
 })
 export class AskforhelpComponent implements OnInit {
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
-  urlRegex = '^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$';
   breadcumb: BreadCumb;
   askForHelpForm: FormGroup;
-  modules = {
-    formula: true,
-    syntax: true,
-  };
-
-  edit: boolean;
 
   visible = true;
   selectable = true;
@@ -92,7 +85,7 @@ export class AskforhelpComponent implements OnInit {
           name: 'Dashboard'
         },
         {
-          name: 'Help'
+          name: PostType.HelpRequest
         }
       ]
     };
@@ -104,14 +97,13 @@ export class AskforhelpComponent implements OnInit {
      * get the helpRequest by fetching id from the params
      */
 
-    if (this.activatedRoute.snapshot.parent.routeConfig.path === 'add-help-request') {
+    if (this.activatedRoute.snapshot.parent.routeConfig.path === `add-${PostType.HelpRequest}`) {
       this.store.dispatch(SetSelectedPost({ post: null }));
       this.askForHelpFormInitialization(null);
     } else {
       this.subscription$ = this.store.select(selectSelectedPost).pipe(
         tap((h: HelpQuery) => {
           this.askForHelpFormInitialization(h);
-          this.edit = true;
         }),
         switchMap((h: HelpQuery) => {
           if (!h) {

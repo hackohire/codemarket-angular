@@ -24,16 +24,8 @@ import { Post } from '../../shared/models/post.model';
   styleUrls: ['./add-team-goal.component.scss']
 })
 export class AddTeamGoalComponent implements OnInit {
-  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
-  urlRegex = '^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$';
   breadcumb: BreadCumb;
   postForm: FormGroup;
-  modules = {
-    formula: true,
-    syntax: true,
-  };
-
-  edit: boolean;
 
   get createdBy() {
     return this.postForm.get('createdBy');
@@ -53,11 +45,6 @@ export class AddTeamGoalComponent implements OnInit {
 
   @ViewChild('descriptionEditor', { static: false }) descriptionEditor: EditorComponent;
 
-  visible = true;
-  selectable = true;
-  removable = true;
-  addOnBlur = true;
-
   subscription$: Subscription;
 
 
@@ -71,14 +58,11 @@ export class AddTeamGoalComponent implements OnInit {
 
     /** Make the Changes here while creating new post type */
     this.breadcumb = {
-      title: 'Add Technical Goal Details',
+      title: 'Add Team Goal Details',
       path: [
+
         {
-          name: 'Dashboard',
-          pathString: '/'
-        },
-        {
-          name: 'Add Technical Goal'
+          name: CompanyPostTypes.TeamGoal
         }
       ]
     };

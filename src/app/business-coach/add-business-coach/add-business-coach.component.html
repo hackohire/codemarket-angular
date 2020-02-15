@@ -17,46 +17,22 @@
                 <br />
 
                 <!-- 1. In which cities can you provide business coaching? - list of cities like other forms (select or add) -->
-                <ng-select [hideSelected]="true" placeholder="In which cities can you provide business coaching?"
-                    [addTag]="formService.addCityFn" [loading]="citiesLoading" [items]="citySuggestions$ | async"
-                    [typeahead]="cityInput$" formControlName="cities" [multiple]="true" bindLabel="name">
-                </ng-select>
+                <app-autocomplete [autoComplete]="businessCoachForm?.get('cities')" [placeholder]="'In which cities can you provide business coaching?'" [collection]="'cities'" [type]="" [multiple]="true"></app-autocomplete>
 
                 <!-- 2. What would you like to gain from business coaching? - list like dream job positions (select or add) -->
-                <ng-select placeholder="What would you like to gain from business coaching? (Dream Job positions)"
-                    [items]="roles$ | async" [hideSelected]="true" formControlName="jobProfile"
-                    [addTag]="formService?.addRoleFn" [bindLabel]="'name'" [minTermLength]="2" [loading]="rolesLoading"
-                    [multiple]="true" [typeahead]="roleInput$">
-                </ng-select>
+                <app-autocomplete [autoComplete]="businessCoachForm?.get('jobProfile')" [placeholder]="'What would you like to gain from business coaching? (Dream Job positions)'" [collection]="'tags'" [type]="'role'" [multiple]="true"></app-autocomplete>
 
                 <!-- 3. What type of businesses can you coach? List of businesses like other places (select or add) -->
-                <ng-select placeholder="What are all companies can you coach?" [addTag]="addCompany"
-                    [items]="allCompanies" formControlName="companies" [multiple]="true" bindLabel="name">
-                    <ng-option *ngFor="let cName of allCompanies" [value]="cName._id">
-                        {{ cName?.name }}
-                    </ng-option>
-                </ng-select>
+                <app-autocomplete [autoComplete]="businessCoachForm?.get('companies')" [placeholder]="'What are all companies can you coach?'" [collection]="'companies'" [type]="" [multiple]="true"></app-autocomplete>
 
                 <!-- 4.In what business areas can you provide business coaching? - list like other areas(select or add) -->
-                <ng-select placeholder="In what business areas can you provide business coaching?"
-                    [items]="businessAreas$ | async" [hideSelected]="true" formControlName="businessAreas"
-                    [addTag]="formService?.addBusinessKeywordsFn" [bindLabel]="'name'" [minTermLength]="2"
-                    [loading]="businessAreasLoading" [multiple]="true" [typeahead]="businessAreasInput$">
-                </ng-select>
-
+                <app-autocomplete [autoComplete]="businessCoachForm?.get('businessAreas')" [placeholder]="'In what business areas can you provide business coaching?'" [collection]="'tags'" [type]="'business'" [multiple]="true"></app-autocomplete>
+                
                 <!-- 5.What business challenges can you give coaching for?- list like other areas(select or add) -->
-                <ng-select placeholder="What business challenges can you give coaching for?"
-                    [items]="businessChallenges$ | async" [hideSelected]="true" formControlName="businessChallenges"
-                    [addTag]="formService?.addBusinessKeywordsFn" [bindLabel]="'name'" [minTermLength]="2"
-                    [loading]="businessChallengesLoading" [multiple]="true" [typeahead]="businessChallengesInput$">
-                </ng-select>
+                <app-autocomplete [autoComplete]="businessCoachForm?.get('businessChallenges')" [placeholder]="'What business challenges can you give coaching for?'" [collection]="'tags'" [type]="'business'" [multiple]="true"></app-autocomplete>
 
                 <!-- 6. What business goals can you help with your coaching?- list like other areas(select or add) -->
-                <ng-select placeholder="What business goals can you help with your coaching?"
-                    [items]="businessGoals$ | async" [hideSelected]="true" formControlName="businessGoals"
-                    [addTag]="formService?.addBusinessKeywordsFn" [bindLabel]="'name'" [minTermLength]="2"
-                    [loading]="businessGoalsLoading" [multiple]="true" [typeahead]="businessGoalsInput$">
-                </ng-select>
+                <app-autocomplete [autoComplete]="businessCoachForm?.get('businessGoals')" [placeholder]="'What business goals can you help with your coaching?'" [collection]="'tags'" [type]="'business'" [multiple]="true"></app-autocomplete>
 
                 <div fxLayout="row">
                     <label fxFlex="80"
@@ -77,11 +53,7 @@
                             <mat-radio-button [value]="false">No</mat-radio-button>
                         </mat-radio-group>
                     </div>
-                    <ng-select *ngIf="businessCoachForm.get('sellProducts.sellProducts')?.value" [hideSelected]="true"
-                        placeholder="Add Prdoucts" [addTag]="formService.addBusinessKeywordsFn"
-                        [loading]="productsLoading" [items]="products$ | async" [typeahead]="productsInput$"
-                        formControlName="products" [multiple]="true" bindLabel="name">
-                    </ng-select>
+                    <app-autocomplete *ngIf="businessCoachForm.get('sellProducts.sellProducts')?.value" [autoComplete]="businessCoachForm?.get('products')" [placeholder]="'Add Prdoucts'" [collection]="'tags'" [type]="'business'" [multiple]="true"></app-autocomplete>
                 </div>
 
                 <div formGroupName="sellServices">
@@ -93,11 +65,7 @@
                             <mat-radio-button [value]="false">No</mat-radio-button>
                         </mat-radio-group>
                     </div>
-                    <ng-select *ngIf="businessCoachForm.get('sellServices.sellServices')?.value" [hideSelected]="true"
-                        placeholder="Add Services" [addTag]="formService.addBusinessKeywordsFn"
-                        [loading]="servicesLoading" [items]="services$ | async" [typeahead]="servicesInput$"
-                        formControlName="services" [multiple]="true" bindLabel="name">
-                    </ng-select>
+                    <app-autocomplete *ngIf="businessCoachForm.get('sellServices.sellServices')?.value" [autoComplete]="businessCoachForm?.get('services')" [placeholder]="'Add Servicess'" [collection]="'tags'" [type]="'business'" [multiple]="true"></app-autocomplete>
                 </div>
 
 
@@ -142,7 +110,7 @@
                     <img height="35px" width="35px" style="border-radius: 50%;"
                         [src]="cc?.createdBy?.avatar ? ((s3FilesBucketURL + cc.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar">
                     <h4 mat-line><a>{{cc.name}}</a></h4>
-                    <app-editor mat-line class="business-goal"  (click)="companyService.redirectToCompanyDetails(cc?.company?._id, 'business-goal')" [editorStyle]="{background: none, border: none, padding: 0, 'font-family': 'roboto'}" [readOnly]="true" [data]="cc?.description"></app-editor>
+                    <app-editor mat-line class="business-goal" [editorStyle]="{background: none, border: none, padding: 0, 'font-family': 'roboto'}" [readOnly]="true" [data]="cc?.description"></app-editor>
                     <p mat-line> {{cc.createdAt | date}} </p>
                 </mat-list-item>
                 <div class="pagination-area" *ngIf="listOfBusinessGoals?.length < totalBusinessGoals">

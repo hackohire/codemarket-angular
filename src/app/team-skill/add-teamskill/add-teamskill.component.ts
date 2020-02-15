@@ -29,15 +29,9 @@ import { EditorComponent } from '../../shared/components/editor/editor.component
 })
 export class AddTeamskillComponent implements OnInit {
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
-  urlRegex = '^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$';
   breadcumb: BreadCumb;
   teamskillForm: FormGroup;
-  modules = {
-    formula: true,
-    syntax: true,
-  };
 
-  edit: boolean;
 
   get createdBy() {
     return this.teamskillForm.get('createdBy');
@@ -89,12 +83,9 @@ export class AddTeamskillComponent implements OnInit {
     this.breadcumb = {
       title: 'Add Teamskill Details',
       path: [
+
         {
-          name: 'Dashboard',
-          pathString: '/'
-        },
-        {
-          name: 'Add Teamskill'
+          name: PostType.Teamskill
         }
       ]
     };
@@ -106,14 +97,13 @@ export class AddTeamskillComponent implements OnInit {
      * get the teamskill by fetching id from the params
      */
 
-    if (this.activatedRoute.snapshot.parent.routeConfig.path === 'add-teamskill') {
+    if (this.activatedRoute.snapshot.parent.routeConfig.path === `add-${PostType.Teamskill}`) {
       this.store.dispatch(SetSelectedPost({ post: null }));
       this.teamskillFormInitialization(null);
     } else {
       this.subscription$ = this.store.select(selectSelectedPost).pipe(
         tap((h: Post) => {
           this.teamskillFormInitialization(h);
-          this.edit = true;
         }),
         switchMap((h: Post) => {
           if (!h) {

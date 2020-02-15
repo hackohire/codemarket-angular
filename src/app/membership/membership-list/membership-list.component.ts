@@ -40,10 +40,7 @@ export class MembershipListComponent implements OnInit {
     this.breadcumb = {
       title: 'List of Subscriptions',
       path: [
-        {
-          name: 'Dashboard',
-          pathString: '/'
-        },
+
         {
           name: 'My Profile',
           // pathString: '/'

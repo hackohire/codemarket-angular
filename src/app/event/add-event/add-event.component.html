@@ -65,12 +65,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <!-- Select Company -->
-                        <!-- {{data | json}} -->
-                        <ng-select placeholder="Select Company" formControlName="company" [readonly]="data && data.company" [disabled]="data && data.company">
-                            <ng-option *ngFor="let cName of allCompanies" [value]="cName._id">
-                                {{ cName?.name }}
-                            </ng-option>
-                        </ng-select>
+                        <app-autocomplete class="col-md-6" [autoComplete]="eventForm?.get('company')" [placeholder]="'Select Company'" [collection]="'companies'" [type]="" [multiple]="false"></app-autocomplete>
                     </div>
                     <div class="col-md-6">
                         <!-- Select Company Type -->

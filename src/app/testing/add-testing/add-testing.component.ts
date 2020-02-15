@@ -27,15 +27,8 @@ import { EditorComponent } from '../../shared/components/editor/editor.component
 })
 export class AddTestingComponent implements OnInit {
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
-  urlRegex = '^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$';
   breadcumb: BreadCumb;
   testingForm: FormGroup;
-  modules = {
-    formula: true,
-    syntax: true,
-  };
-
-  edit: boolean;
 
   get createdBy() {
     return this.testingForm.get('createdBy');
@@ -88,12 +81,9 @@ export class AddTestingComponent implements OnInit {
     this.breadcumb = {
       title: 'Add Testing Details',
       path: [
+
         {
-          name: 'Dashboard',
-          pathString: '/'
-        },
-        {
-          name: 'Add Testing Report'
+          name: PostType.Design
         }
       ]
     };
@@ -105,14 +95,13 @@ export class AddTestingComponent implements OnInit {
      * get the testing by fetching id from the params
      */
 
-    if (this.activatedRoute.snapshot.parent.routeConfig.path === 'add-testing') {
+    if (this.activatedRoute.snapshot.parent.routeConfig.path === `add-${PostType.Design}`) {
       this.store.dispatch(SetSelectedPost({ post: null }));
       this.testingFormInitialization(null);
     } else {
       this.subscription$ = this.store.select(selectSelectedPost).pipe(
         tap((h: Testing) => {
           this.testingFormInitialization(h);
-          this.edit = true;
         }),
         switchMap((h: Testing) => {
           if (!h) {

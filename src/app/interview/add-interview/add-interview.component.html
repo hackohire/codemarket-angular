@@ -9,11 +9,7 @@
                     <input type="text" matInput formControlName="name" placeholder="Name">
                 </mat-form-field>
 
-                <ng-select placeholder="Select Company" formControlName="company">
-                    <ng-option *ngFor="let cName of allCompanies" [value]="cName._id">
-                        {{ cName?.name }}
-                    </ng-option>
-                </ng-select>
+                <app-autocomplete class="col-md-6" [autoComplete]="interviewForm?.get('companies')" [placeholder]="'Select Companies'" [collection]="'companies'" [type]="" [multiple]="true"></app-autocomplete>
 
                 <mat-form-field class="field-full-width">
                     <input type="text" matInput formControlName="jobProfile" placeholder="Position">

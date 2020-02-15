@@ -18,23 +18,18 @@ import { PostType } from 'src/app/shared/models/post-types.enum';
 import { SetSelectedPost, GetPostById, AddPost, UpdatePost } from 'src/app/core/store/actions/post.actions';
 import { selectSelectedPost } from 'src/app/core/store/selectors/post.selectors';
 import { EditorComponent } from '../../shared/components/editor/editor.component';
+import { CompanyService } from '../../companies/company.service';
 
 @Component({
   selector: 'app-add-requirements',
   templateUrl: './add-requirements.component.html',
-  styleUrls: ['./add-requirements.component.scss']
+  styleUrls: ['./add-requirements.component.scss'],
+  providers: [CompanyService]
 })
 export class AddRequirementsComponent implements OnInit {
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
-  urlRegex = '^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$';
   breadcumb: BreadCumb;
   requirementForm: FormGroup;
-  modules = {
-    formula: true,
-    syntax: true,
-  };
-
-  edit: boolean;
 
   visible = true;
   selectable = true;
@@ -87,12 +82,12 @@ export class AddRequirementsComponent implements OnInit {
     this.breadcumb = {
       title: 'Add Requirement Details',
       path: [
+        // {
+        //   name: 'Dashboard',
+        //   pathString: '/'
+        // },
         {
-          name: 'Dashboard',
-          pathString: '/'
-        },
-        {
-          name: 'Add Requirements'
+          name: 'Add ' + PostType.Requirement
         }
       ]
     };
@@ -104,14 +99,13 @@ export class AddRequirementsComponent implements OnInit {
      * get the requirement by fetching id from the params
      */
 
-    if (this.activatedRoute.snapshot.parent.routeConfig.path === 'add-requirement') {
+    if (this.activatedRoute.snapshot.parent.routeConfig.path === `add-${PostType.Requirement}`) {
       this.store.dispatch(SetSelectedPost({ post: null }));
       this.requirementFormInitialization(null);
     } else {
       this.subscription$ = this.store.select(selectSelectedPost).pipe(
         tap((h: Requirement) => {
           this.requirementFormInitialization(h);
-          this.edit = true;
         }),
         switchMap((h: Requirement) => {
           if (!h) {
@@ -147,6 +141,7 @@ export class AddRequirementsComponent implements OnInit {
       _id: new FormControl(r && r._id ? r._id : ''),
       tags: this.fb.array(r && r.tags && r.tags.length ? r.tags : []),
       type: new FormControl(PostType.Requirement),
+      company: new FormControl(r && r.company ? r.company : ''),
       support: new FormGroup({
         time: new FormControl(r && r.support && r.support.time ? r.support.time : 0),
         description: new FormControl(r && r.support && r.support.description ? r.support.description : [])

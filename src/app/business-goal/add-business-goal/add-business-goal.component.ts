@@ -1,6 +1,5 @@
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { of, Subscription } from 'rxjs';
@@ -12,7 +11,6 @@ import { AppState } from '../../core/store/state/app.state';
 import { BreadCumb } from '../../shared/models/bredcumb.model';
 import { CompanyPostTypes } from '../../shared/models/post-types.enum';
 import { PostStatus } from '../../shared/models/poststatus.enum';
-import { FormService } from '../../shared/services/form.service';
 import { EditorComponent } from '../../shared/components/editor/editor.component';
 import { Post } from '../../shared/models/post.model';
 
@@ -24,16 +22,8 @@ import { Post } from '../../shared/models/post.model';
   styleUrls: ['./add-business-goal.component.scss']
 })
 export class AddBusinessGoalComponent implements OnInit {
-  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
-  urlRegex = '^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$';
   breadcumb: BreadCumb;
   postForm: FormGroup;
-  modules = {
-    formula: true,
-    syntax: true,
-  };
-
-  edit: boolean;
 
   get createdBy() {
     return this.postForm.get('createdBy');
@@ -53,32 +43,22 @@ export class AddBusinessGoalComponent implements OnInit {
 
   @ViewChild('descriptionEditor', { static: false }) descriptionEditor: EditorComponent;
 
-  visible = true;
-  selectable = true;
-  removable = true;
-  addOnBlur = true;
-
   subscription$: Subscription;
 
 
   constructor(
     private authService: AuthService,
     private store: Store<AppState>,
-    private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
-    private formService: FormService
   ) {
 
     /** Make the Changes here while creating new post type */
     this.breadcumb = {
       title: 'Add Business Goal Details',
       path: [
+
         {
-          name: 'Dashboard',
-          pathString: '/'
-        },
-        {
-          name: 'Add Business Goal'
+          name: CompanyPostTypes.BusinessGoal
         }
       ]
     };

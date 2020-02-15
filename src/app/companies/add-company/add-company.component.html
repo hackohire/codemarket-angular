@@ -41,11 +41,7 @@
                     <!-- <mat-icon matSuffix>location</mat-icon> -->
                 </mat-form-field>
 
-                <ng-select [hideSelected]="true"
-                    placeholder="Cities"
-                    [addTag]="formService.addCityFn" [loading]="citiesLoading" [items]="citySuggestions$ | async"
-                    [typeahead]="cityInput$" formControlName="cities" [multiple]="true" bindLabel="name">
-                </ng-select>
+                <app-autocomplete [autoComplete]="companyForm?.get('cities')" [placeholder]="'cities'" [collection]="'cities'" [type]="" [multiple]="true"></app-autocomplete>
 
                 <br />
                 <h6>Description</h6>

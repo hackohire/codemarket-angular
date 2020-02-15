@@ -84,7 +84,7 @@ export class CoreModule {
       null,
       [],
     ) : null;
-    
+
     /** Weboscket Apollo Link  */
     const wsLink = isPlatformBrowser(this._platformId) ? new WebSocketLink(wsClient) : null;
 
@@ -101,8 +101,10 @@ export class CoreModule {
            * Omit _id field if it is empty
            */
           if (key === '__typename' || (key === '_id' && !value) || key === '__show') {
-            return undefined
-          } 
+            return undefined;
+          } else if (key === 'company') {
+            return value && value._id ? value._id : value;
+          }
           return value;
         }
         operation.variables = JSON.parse(JSON.stringify(operation.variables), omitTypename);

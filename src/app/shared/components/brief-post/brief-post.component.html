@@ -110,8 +110,8 @@
         <div class="bottom">
             <p [ngClass]="readMore ? 'readMore' : ''">
                 <!---------------- SINGLE POST EDITOR --------------->
-                <app-editor #singlePostEditor [editorStyle]="{background: 'white'}"
-                    [data]="p?.description" [id]="'post' + p?._id" [readOnly]="!p['__edit']" [blockLevelComments]="!readMore"
+                <app-editor #singlePostEditor [editorStyle]="{background: 'white'}" [data]="p?.description"
+                    [id]="'post' + p?._id" [readOnly]="!p['__edit']" [blockLevelComments]="!readMore"
                     [commentType]="'post'" [post]="p" [commentsList]="(commentService.commentsList$ | async)">
                 </app-editor>
             </p>
@@ -119,8 +119,17 @@
         </div>
     </div>
 
+    <!-- Post Tags -->
+    <div style="padding: 10px 0 0 30px;">
+        <span *ngFor="let t of p?.tags"
+            style="background: rgba(6, 116, 236, 0.1); display: inline-block;
+                padding: 0 15px; line-height: 32px;
+                color: #0674ec; margin-right: 10px;font-size: 15px;font-weight: 200;-webkit-border-radius: 100px;border-radius: 100px;">{{t?.name}}</span>
+    </div>
+    
     <!-- Read More Button to Fetch comments and show full description-->
-    <div class="ce-block" *ngIf="readMore" style="padding: 10px 0 0 30px;" (click)="readMore = false; fetchComments(p)"><a>Read More...</a></div>
+    <div class="ce-block" *ngIf="readMore" style="padding: 10px 0 0 30px;" (click)="readMore = false; fetchComments(p)">
+        <a>Read More...</a></div>
 
     <div class="box-likes">
         <div class="post-row" style="display: none; padding: 0;">
@@ -158,8 +167,7 @@
     <!-- Show List of Comments + Add Comment UI only when user clicks on read more or comment icon -->
     <div class="box-comments" style="border-top: 2px solid #f4f4f4;" *ngIf="readMore === false">
         <div class="thread">
-            <ul class="media-list thread-list"
-                style="padding: 10px 0px 0px 0px; list-style: none;">
+            <ul class="media-list thread-list" style="padding: 10px 0px 0px 0px; list-style: none;">
                 <div *ngFor="let com of (commentService.commentsList$ | async)">
                     <li *ngIf="!com?.blockSpecificComment" class="single-thread">
                         <app-comment [comment]="com"></app-comment>

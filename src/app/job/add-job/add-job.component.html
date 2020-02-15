@@ -18,10 +18,7 @@
                     <input type="text" matInput formControlName="name" placeholder="Title">
                 </mat-form-field>
 
-                <ng-select placeholder="Roles" [items]="roles$ | async" [hideSelected]="true"
-                    formControlName="jobProfile" [addTag]="formService?.addRoleFn" [bindLabel]="'name'"
-                    [minTermLength]="2" [loading]="rolesLoading" [multiple]="true" [typeahead]="roleInput$">
-                </ng-select>
+                <app-autocomplete [autoComplete]="jobForm?.get('jobProfile')" [placeholder]="'Roles'" [collection]="'tags'" [type]="'role'" [multiple]="true"></app-autocomplete>
 
                 <app-editor #descriptionEditor [placeholder]="'Job Description:'" [data]="descriptionFormControl?.value" [id]="'edit-job-editor'"
                     [importArticleSubscription]="true"></app-editor>
@@ -29,18 +26,8 @@
                 <br />
 
                 <div class="row">
-                    <ng-select class="col-md-6" [addTag]="addCompany" [items]="allCompanies"
-                        placeholder="Select Company" formControlName="company" bindLabel="name" bindValue="_id">
-                        <!-- <ng-option *ngFor="let cName of allCompanies" [value]="cName._id">
-                            {{ cName?.name }}
-                        </ng-option> -->
-                    </ng-select>
-
-                    <ng-select [hideSelected]="true"
-                        placeholder="Cities"
-                        [addTag]="formService.addCityFn" [loading]="citiesLoading" [items]="citySuggestions$ | async"
-                        [typeahead]="cityInput$" formControlName="cities" [multiple]="true" bindLabel="name">
-                    </ng-select>
+                    <app-autocomplete class="col-md-6" [autoComplete]="jobForm?.get('company')" [placeholder]="'Select Company'" [collection]="'companies'" [type]="" [multiple]="false"></app-autocomplete>
+                    <app-autocomplete class="col-md-6" [autoComplete]="jobForm?.get('cities')" [placeholder]="'cities'" [collection]="'cities'" [type]="" [multiple]="true"></app-autocomplete>
                 </div>
 
                 <mat-form-field appearance="outline">

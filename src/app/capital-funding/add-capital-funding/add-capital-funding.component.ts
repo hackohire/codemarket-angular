@@ -28,8 +28,6 @@ export class AddCapitalFundingComponent implements OnInit {
   breadcumb: BreadCumb;
   capitalfundingForm: FormGroup;
 
-  edit: boolean;
-
   get createdBy() {
     return this.capitalfundingForm.get('createdBy');
   }
@@ -70,12 +68,9 @@ export class AddCapitalFundingComponent implements OnInit {
     this.breadcumb = {
       title: 'Add Capital Funding',
       path: [
+
         {
-          name: 'Dashboard',
-          pathString: '/'
-        },
-        {
-          name: 'Add Capital Funding'
+          name: PostType.CapitalFunding
         }
       ]
     };
@@ -87,14 +82,13 @@ export class AddCapitalFundingComponent implements OnInit {
      * get the capitalfunding by fetching id from the params
      */
 
-    if (this.activatedRoute.snapshot.parent && this.activatedRoute.snapshot.parent.routeConfig.path === 'add-capital-funding') {
+    if (this.activatedRoute.snapshot.parent && this.activatedRoute.snapshot.parent.routeConfig.path === `add-${PostType.CapitalFunding}`) {
       this.store.dispatch(SetSelectedPost({ post: null }));
       this.capitalfundingFormInitialization(null);
     } else {
       this.subscription$ = this.store.select(selectSelectedPost).pipe(
         tap((h: Post) => {
           this.capitalfundingFormInitialization(h);
-          this.edit = true;
         }),
         switchMap((h: Post) => {
           if (!h) {

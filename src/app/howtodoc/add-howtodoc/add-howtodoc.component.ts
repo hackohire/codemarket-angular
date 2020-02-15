@@ -26,16 +26,8 @@ import { EditorComponent } from '../../shared/components/editor/editor.component
   styleUrls: ['./add-howtodoc.component.scss']
 })
 export class AddHowtodocComponent implements OnInit {
-  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
-  urlRegex = '^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$';
   breadcumb: BreadCumb;
   howtodocForm: FormGroup;
-  modules = {
-    formula: true,
-    syntax: true,
-  };
-
-  edit: boolean;
 
   get createdBy() {
     return this.howtodocForm.get('createdBy');
@@ -89,11 +81,7 @@ export class AddHowtodocComponent implements OnInit {
       title: 'Add How-To-Guide Details',
       path: [
         {
-          name: 'Dashboard',
-          pathString: '/'
-        },
-        {
-          name: 'Add How-To-Guide'
+          name: PostType.Howtodoc
         }
       ]
     };
@@ -105,14 +93,13 @@ export class AddHowtodocComponent implements OnInit {
      * get the howtodoc by fetching id from the params
      */
 
-    if (this.activatedRoute.snapshot.parent.routeConfig.path === 'add-howtodoc') {
+    if (this.activatedRoute.snapshot.parent.routeConfig.path === `add-${PostType.Howtodoc}`) {
       this.store.dispatch(SetSelectedPost({ post: null }));
       this.howtodocFormInitialization(null);
     } else {
       this.subscription$ = this.store.select(selectSelectedPost).pipe(
         tap((h: Howtodoc) => {
           this.howtodocFormInitialization(h);
-          this.edit = true;
         }),
         switchMap((h: Howtodoc) => {
           if (!h) {

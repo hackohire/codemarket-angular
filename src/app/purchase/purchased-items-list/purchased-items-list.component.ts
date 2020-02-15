@@ -26,10 +26,7 @@ export class PurchasedItemsListComponent implements OnInit {
     this.breadcumb = {
       title: 'List of Purchased Items',
       path: [
-        {
-          name: 'Dashboard',
-          pathString: '/'
-        },
+
         {
           name: 'My Profile',
           // pathString: '/'

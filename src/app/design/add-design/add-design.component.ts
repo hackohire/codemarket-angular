@@ -6,7 +6,6 @@ import { AuthService } from 'src/app/core/services/auth.service';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/core/store/state/app.state';
 import { MatChipInputEvent } from '@angular/material/chips';
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Subscription, of } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap, tap, startWith, map } from 'rxjs/operators';
@@ -26,16 +25,8 @@ import { EditorComponent } from '../../shared/components/editor/editor.component
   styleUrls: ['./add-design.component.scss']
 })
 export class AddDesignComponent implements OnInit {
-  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
-  urlRegex = '^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$';
   breadcumb: BreadCumb;
   designForm: FormGroup;
-  modules = {
-    formula: true,
-    syntax: true,
-  };
-
-  edit: boolean;
 
   get createdBy() {
     return this.designForm.get('createdBy');
@@ -61,11 +52,6 @@ export class AddDesignComponent implements OnInit {
     return this.designForm.get('status');
   }
 
-  visible = true;
-  selectable = true;
-  removable = true;
-  addOnBlur = true;
-
   subscription$: Subscription;
 
   searchText = new FormControl();
@@ -89,11 +75,7 @@ export class AddDesignComponent implements OnInit {
       title: 'Add Design Details',
       path: [
         {
-          name: 'Dashboard',
-          pathString: '/'
-        },
-        {
-          name: 'Add Design '
+          name: PostType.Design
         }
       ]
     };
@@ -105,14 +87,13 @@ export class AddDesignComponent implements OnInit {
      * get the design by fetching id from the params
      */
 
-    if (this.activatedRoute.snapshot.parent.routeConfig.path === 'add-design') {
+    if (this.activatedRoute.snapshot.parent.routeConfig.path === `add-${PostType.Design}`) {
       this.store.dispatch(SetSelectedPost({ post: null }));
       this.designFormInitialization(null);
     } else {
       this.subscription$ = this.store.select(selectSelectedPost).pipe(
         tap((h: Design) => {
           this.designFormInitialization(h);
-          this.edit = true;
         }),
         switchMap((h: Design) => {
           if (!h) {

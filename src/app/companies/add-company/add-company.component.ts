@@ -27,18 +27,10 @@ import { EditorComponent } from '../../shared/components/editor/editor.component
   providers: [CompanyService]
 })
 export class AddCompanyComponent implements OnInit {
-
-  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   breadcumb: BreadCumb;
   companyForm: FormGroup;
-  modules = {
-    formula: true,
-    syntax: true,
-  };
 
   companyTypes = Object.values(CompanyTypes);
-
-  edit: boolean;
 
   postTypes = PostType;
   companyPostTypes = CompanyPostTypes;
@@ -82,10 +74,6 @@ export class AddCompanyComponent implements OnInit {
 
   listOfBusinessChallenges: any[] = [];
 
-  citySuggestions$: Observable<City[]>;
-  cityInput$ = new Subject<string>();
-  citiesLoading = false;
-
   subscription$: Subscription;
 
   anonymousAvatar = '../../../../assets/images/anonymous-avatar.jpg';
@@ -120,10 +108,7 @@ export class AddCompanyComponent implements OnInit {
     this.breadcumb = {
       title: 'Add Business',
       path: [
-        {
-          name: 'Dashboard',
-          pathString: '/'
-        },
+
         {
           name: 'Add Business'
         }
@@ -132,7 +117,6 @@ export class AddCompanyComponent implements OnInit {
 
     if (params.companyId) {
       this.subscription$ = this.companyService.getCompanyById(params.companyId).subscribe((c) => {
-        this.edit = true;
         this.companyFormInitialization(c);
       });
     } else {

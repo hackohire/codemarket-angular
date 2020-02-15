@@ -1,11 +1,10 @@
 import { Component, OnInit, ViewChildren, QueryList, ViewChild } from '@angular/core';
-import { Subscription, of, Observable, Subject, } from 'rxjs';
+import { Subscription, of, } from 'rxjs';
 import { BreadCumb } from '../../shared/models/bredcumb.model';
 import { FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 import { AuthService } from '../../core/services/auth.service';
 import { Store } from '@ngrx/store';
 import { ActivatedRoute } from '@angular/router';
-import { FormService } from '../../shared/services/form.service';
 import { SetSelectedPost, GetPostById } from '../../core/store/actions/post.actions';
 import { selectSelectedPost } from '../../core/store/selectors/post.selectors';
 import { tap, switchMap, } from 'rxjs/operators';
@@ -13,7 +12,6 @@ import { PostStatus } from '../../shared/models/poststatus.enum';
 import { PostType } from '../../shared/models/post-types.enum';
 import { AppState } from '../../core/store/state/app.state';
 import { Post } from '../../shared/models/post.model';
-import { CompanyService } from '../../companies/company.service';
 import { PostService } from '../../shared/services/post.service';
 import { EditorComponent } from '../../shared/components/editor/editor.component';
 
@@ -21,19 +19,12 @@ import { EditorComponent } from '../../shared/components/editor/editor.component
   selector: 'app-add-hiring-process',
   templateUrl: './add-hiring-process.component.html',
   styleUrls: ['./add-hiring-process.component.scss'],
-  providers: [CompanyService]
 })
 
 export class AddHiringProcessComponent implements OnInit {
 
   breadcumb: BreadCumb;
   hiringprocessForm: FormGroup;
-
-  edit: boolean;
-
-  roles$: Observable<any[]>;
-  rolesLoading = false;
-  roleInput$ = new Subject<string>();
 
   get createdBy() {
     return this.hiringprocessForm.get('createdBy');
@@ -68,18 +59,14 @@ export class AddHiringProcessComponent implements OnInit {
     private authService: AuthService,
     private store: Store<AppState>,
     private activatedRoute: ActivatedRoute,
-    public formService: FormService,
     public postService: PostService
   ) {
     this.breadcumb = {
       title: 'Add Hiring Process',
       path: [
+
         {
-          name: 'Dashboard',
-          pathString: '/'
-        },
-        {
-          name: 'Add Hiring Process'
+          name: PostType.HiringProcess
         }
       ]
     };
@@ -91,14 +78,13 @@ export class AddHiringProcessComponent implements OnInit {
      * get the hiringprocess by fetching id from the params
      */
 
-    if (this.activatedRoute.snapshot.parent && this.activatedRoute.snapshot.parent.routeConfig.path === 'add-hiring-process') {
+    if (this.activatedRoute.snapshot.parent && this.activatedRoute.snapshot.parent.routeConfig.path === `add-${PostType.HiringProcess}`) {
       this.store.dispatch(SetSelectedPost({ post: null }));
       this.hiringprocessFormInitialization(null);
     } else {
       this.subscription$ = this.store.select(selectSelectedPost).pipe(
         tap((h: Post) => {
           this.hiringprocessFormInitialization(h);
-          this.edit = true;
         }),
         switchMap((h: Post) => {
           if (!h) {

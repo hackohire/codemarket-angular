@@ -1,13 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Subscription, of, Subject, Observable, concat } from 'rxjs';
-import { City } from '../../shared/models/city.model';
-import { ENTER, COMMA } from '@angular/cdk/keycodes';
+import { Subscription, of, } from 'rxjs';
 import { BreadCumb } from '../../shared/models/bredcumb.model';
 import { FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 import { AuthService } from '../../core/services/auth.service';
 import { Store } from '@ngrx/store';
 import { ActivatedRoute } from '@angular/router';
-import { FormService } from '../../shared/services/form.service';
 import { SetSelectedPost, GetPostById } from '../../core/store/actions/post.actions';
 import { selectSelectedPost } from '../../core/store/selectors/post.selectors';
 import { tap, switchMap } from 'rxjs/operators';
@@ -16,7 +13,6 @@ import { PostType } from '../../shared/models/post-types.enum';
 import { AppState } from '../../core/store/state/app.state';
 import { Post } from '../../shared/models/post.model';
 // import { Options } from 'ng5-slider/options';
-import { CompanyService } from '../../companies/company.service';
 import { PostService } from '../../shared/services/post.service';
 import { appConstants } from '../../shared/constants/app_constants';
 import { environment } from '../../../environments/environment';
@@ -30,16 +26,12 @@ import { EditorComponent } from '../../shared/components/editor/editor.component
   selector: 'app-add-business-coach',
   templateUrl: './add-business-coach.component.html',
   styleUrls: ['./add-business-coach.component.scss'],
-  providers: [CompanyService]
 })
 
 export class AddBusinessCoachComponent implements OnInit {
-
-  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   breadcumb: BreadCumb;
   businessCoachForm: FormGroup;
-  allCompanies = [];
-  edit: boolean;
+
   businessCoachQuestions = appConstants.businessCoachQuestions;
 
   get createdBy() {
@@ -87,19 +79,14 @@ export class AddBusinessCoachComponent implements OnInit {
     private authService: AuthService,
     private store: Store<AppState>,
     private activatedRoute: ActivatedRoute,
-    public formService: FormService,
-    public companyService: CompanyService,
     private postService: PostService
   ) {
     this.breadcumb = {
       title: 'Add Business Coach',
       path: [
+
         {
-          name: 'Dashboard',
-          pathString: '/'
-        },
-        {
-          name: 'Add Business Coach'
+          name: PostType.BusinessCoach
         }
       ]
     };
@@ -111,14 +98,13 @@ export class AddBusinessCoachComponent implements OnInit {
      * get the businesscoach by fetching id from the params
      */
 
-    if (this.activatedRoute.snapshot.parent && this.activatedRoute.snapshot.parent.routeConfig.path === 'add-businesscoach') {
+    if (this.activatedRoute.snapshot.parent && this.activatedRoute.snapshot.parent.routeConfig.path === `add-${PostType.BusinessCoach}`) {
       this.store.dispatch(SetSelectedPost({ post: null }));
       this.businessCoachFormInitialization(null);
     } else {
       this.subscription$ = this.store.select(selectSelectedPost).pipe(
         tap((h: Post) => {
           this.businessCoachFormInitialization(h);
-          this.edit = true;
         }),
         switchMap((h: Post) => {
           if (!h) {
@@ -172,10 +158,6 @@ export class AddBusinessCoachComponent implements OnInit {
         services: new FormControl(i && i.sellServices && i.sellServices.sellServices ? i.sellServices.services : [])
       }),
     });
-    this.companyService.getCompaniesByType('').subscribe((companies) => {
-      this.allCompanies = companies;
-    });
-
   }
 
   async submit(status) {
@@ -256,19 +238,6 @@ export class AddBusinessCoachComponent implements OnInit {
   addCitiesFn(name) {
     return { name };
   }
-
-  addCompany = (name: string) => {
-    if (name) {
-      return new Promise((resolve, reject) => {
-        this.companyService.addCompany({ name, createdBy: this.authService.loggedInUser._id }).subscribe(c => {
-          this.allCompanies.unshift(c);
-          this.allCompanies = this.allCompanies.slice();
-          return resolve(c.name);
-        });
-      });
-    }
-  }
-
 
 }
 

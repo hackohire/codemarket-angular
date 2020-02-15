@@ -34,16 +34,10 @@ import { EditorComponent } from '../../shared/components/editor/editor.component
 })
 export class AddEventComponent implements OnInit {
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
-  urlRegex = '^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$';
   breadcumb: BreadCumb;
   eventForm: FormGroup;
-  modules = {
-    formula: true,
-    syntax: true,
-  };
-  eventType: string;
 
-  edit = false;
+  eventType: string;
 
   get createdBy() {
     return this.eventForm.get('createdBy');
@@ -120,10 +114,7 @@ export class AddEventComponent implements OnInit {
     this.breadcumb = {
       title: 'Add Event Details',
       path: [
-        {
-          name: 'Dashboard',
-          pathString: '/'
-        },
+
         {
           name: 'Add Event'
         }
@@ -145,7 +136,6 @@ export class AddEventComponent implements OnInit {
       this.subscription$ = this.store.select(selectSelectedPost).pipe(
         tap((h) => {
           this.eventFormInitialization(h);
-          this.edit = true;
         }),
         switchMap((h) => {
           if (!h) {

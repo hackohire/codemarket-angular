@@ -34,8 +34,6 @@ export class AddDreamjobComponent implements OnInit {
   breadcumb: BreadCumb;
   dreamjobForm: FormGroup;
 
-  edit: boolean;
-
   get createdBy() {
     return this.dreamjobForm.get('createdBy');
   }
@@ -78,16 +76,12 @@ export class AddDreamjobComponent implements OnInit {
     private store: Store<AppState>,
     private activatedRoute: ActivatedRoute,
     public formService: FormService,
-    private companyService: CompanyService,
     public postService: PostService
   ) {
     this.breadcumb = {
       title: 'Add Your Career Goal or Your Dream Job Details',
       path: [
-        {
-          name: 'Dashboard',
-          pathString: '/'
-        },
+
         {
           name: 'Add Dream job'
         }
@@ -108,7 +102,6 @@ export class AddDreamjobComponent implements OnInit {
       this.subscription$ = this.store.select(selectSelectedPost).pipe(
         tap((h: Post) => {
           this.dreamjobFormInitialization(h);
-          this.edit = true;
         }),
         switchMap((h: Post) => {
           if (!h) {

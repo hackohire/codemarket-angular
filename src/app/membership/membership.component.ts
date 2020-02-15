@@ -53,10 +53,7 @@ export class MembershipComponent implements OnInit {
     this.breadcumb = {
       title: 'Take Full Control of Your Career Goals and Business Goals',
       path: [
-        {
-          name: 'Dashboard',
-          pathString: '/'
-        },
+
         {
           name: 'Membership'
         }

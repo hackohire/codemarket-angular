@@ -30,10 +30,7 @@ export class MyRsvpComponent implements OnInit {
     this.breadcumb = {
       title: 'List of Events I\'m Attending',
       path: [
-        {
-          name: 'Dashboard',
-          pathString: '/'
-        },
+
         {
           name: 'My Profile',
           // pathString: '/'

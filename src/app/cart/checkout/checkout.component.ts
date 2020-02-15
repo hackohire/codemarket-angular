@@ -65,10 +65,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     this.breadcumb = {
       title: 'Please Make the Payment to Purchase These Amazing Products',
       path: [
-        {
-          name: 'Dashboard',
-          pathString: '/'
-        },
+
         {
           name: 'Cart'
         },

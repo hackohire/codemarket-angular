@@ -2,6 +2,7 @@ import { User } from './user.model';
 import { BlockToolData } from '@editorjs/editorjs';
 import { Tag } from './product.model';
 import { PostStatus } from './poststatus.enum';
+import { Company } from './company.model';
 
 interface Files {
     file: string;
@@ -16,25 +17,26 @@ interface Support {
     };
 }
 export interface Requirement {
-    name: string;
-    description: [{
+    name?: string;
+    description?: [{
         type: string;
         data: BlockToolData
     }];
     type?: string;
-    price: number;
+    price?: number;
     _id?: string;
-    status: PostStatus;
-    createdBy: User;
-    createdAt: string;
-    updatedAt: string;
+    status?: PostStatus;
+    createdBy?: User;
+    createdAt?: string;
+    updatedAt?: string;
     categories?: [];
     demo_url?: string;
+    company?: Company;
     // documentation_url?: string;
     // video_url?: string;
     // snippets?: [HighlightResult];
     shortDescription?: string;
-    tags: Tag[];
+    tags?: Tag[];
     support?: Support;
     // files: [Files];
 }

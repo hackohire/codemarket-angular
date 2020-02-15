@@ -31,12 +31,6 @@ export class AddInterviewComponent implements OnInit {
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   breadcumb: BreadCumb;
   interviewForm: FormGroup;
-  modules = {
-    formula: true,
-    syntax: true,
-  };
-
-  edit: boolean;
 
   get createdBy() {
     return this.interviewForm.get('createdBy');
@@ -90,11 +84,7 @@ export class AddInterviewComponent implements OnInit {
       title: 'Add Interview Details',
       path: [
         {
-          name: 'Dashboard',
-          pathString: '/'
-        },
-        {
-          name: 'Add Interview'
+          name: PostType.Interview
         }
       ]
     };
@@ -106,14 +96,13 @@ export class AddInterviewComponent implements OnInit {
      * get the interview by fetching id from the params
      */
 
-    if (this.activatedRoute.snapshot.parent.routeConfig.path === 'add-interview') {
+    if (this.activatedRoute.snapshot.parent.routeConfig.path === `add-${PostType.Interview}`) {
       this.store.dispatch(SetSelectedPost({ post: null }));
       this.interviewFormInitialization(null);
     } else {
       this.subscription$ = this.store.select(selectSelectedPost).pipe(
         tap((h: Post) => {
           this.interviewFormInitialization(h);
-          this.edit = true;
         }),
         switchMap((h: Post) => {
           if (!h) {

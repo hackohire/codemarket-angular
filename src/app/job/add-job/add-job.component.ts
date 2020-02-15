@@ -8,7 +8,6 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../../core/store/state/app.state';
 import { ActivatedRoute } from '@angular/router';
 import { FormService } from '../../shared/services/form.service';
-import { CompanyService } from '../../companies/company.service';
 import { SetSelectedPost, GetPostById, AddPost, UpdatePost } from '../../core/store/actions/post.actions';
 import { selectSelectedPost } from '../../core/store/selectors/post.selectors';
 import { tap, switchMap, } from 'rxjs/operators';
@@ -20,15 +19,12 @@ import { EditorComponent } from '../../shared/components/editor/editor.component
 @Component({
   selector: 'app-add-job',
   templateUrl: './add-job.component.html',
-  styleUrls: ['./add-job.component.scss'],
-  providers: [CompanyService]
+  styleUrls: ['./add-job.component.scss']
 })
 export class AddJobComponent implements OnInit, OnDestroy {
 
   breadcumb: BreadCumb;
   jobForm: FormGroup;
-
-  edit: boolean;
 
   get createdBy() {
     return this.jobForm.get('createdBy');
@@ -70,12 +66,9 @@ export class AddJobComponent implements OnInit, OnDestroy {
     this.breadcumb = {
       title: 'Add Job Details',
       path: [
+
         {
-          name: 'Dashboard',
-          pathString: '/'
-        },
-        {
-          name: 'Add Job'
+          name: PostType.Job
         }
       ]
     };
@@ -89,14 +82,13 @@ export class AddJobComponent implements OnInit, OnDestroy {
      * get the job by fetching id from the params
      */
 
-    if (this.activatedRoute.snapshot.parent && this.activatedRoute.snapshot.parent.routeConfig && this.activatedRoute.snapshot.parent.routeConfig.path === 'add-job') {
+    if (this.activatedRoute.snapshot.parent && this.activatedRoute.snapshot.parent.routeConfig && this.activatedRoute.snapshot.parent.routeConfig.path === `add-${PostType.Job}`) {
       this.store.dispatch(SetSelectedPost({ post: null }));
       this.jobFormInitialization(null, referencePostId);
     } else {
       this.subscription$ = this.store.select(selectSelectedPost).pipe(
         tap((h: Post) => {
           this.jobFormInitialization(h, referencePostId);
-          this.edit = true;
         }),
         switchMap((h: Post) => {
           if (!h) {

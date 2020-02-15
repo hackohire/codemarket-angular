@@ -34,7 +34,6 @@ export class AddCareerCoachComponent implements OnInit {
 
   breadcumb: BreadCumb;
   careerCoachForm: FormGroup;
-  edit: boolean;
   careerCoachQuestions = appConstants.careerCoachQuestions;
 
   get createdBy() {
@@ -79,12 +78,9 @@ export class AddCareerCoachComponent implements OnInit {
     this.breadcumb = {
       title: 'Add Career Coach',
       path: [
+
         {
-          name: 'Dashboard',
-          pathString: '/'
-        },
-        {
-          name: 'Add Career Coach'
+          name: PostType.CareerCoach
         }
       ]
     };
@@ -96,14 +92,13 @@ export class AddCareerCoachComponent implements OnInit {
      * get the careercoach by fetching id from the params
      */
 
-    if (this.activatedRoute.snapshot.parent && this.activatedRoute.snapshot.parent.routeConfig.path === 'add-careercoach') {
+    if (this.activatedRoute.snapshot.parent && this.activatedRoute.snapshot.parent.routeConfig.path === `add-${PostType.CareerCoach}`) {
       this.store.dispatch(SetSelectedPost({ post: null }));
       this.careerCoachFormInitialization(null);
     } else {
       this.subscription$ = this.store.select(selectSelectedPost).pipe(
         tap((h: Post) => {
           this.careerCoachFormInitialization(h);
-          this.edit = true;
         }),
         switchMap((h: Post) => {
           if (!h) {

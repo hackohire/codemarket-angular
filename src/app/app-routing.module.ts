@@ -190,7 +190,7 @@ const routes: Routes = [
 
   /** Static routes starts here */
   // {
-  //   path: 'innovate',
+  //  path: 'innovate',
   //   component: InnovateComponent
   // },
   // {
@@ -205,10 +205,10 @@ const routes: Routes = [
   //   path: 'dedicated-team',
   //   component: DedicatedTeamComponent
   // },
-  // {
-  //   path: 'website',
-  //   component: WebsiteComponent
-  // },
+   {
+     path: 'website',
+     component: WebsiteComponent
+   },
   // {
   //   path: 'email-marketing',
   //   component: EmailMarketingComponent

@@ -189,102 +189,102 @@ const routes: Routes = [
   },
 
   /** Static routes starts here */
-  // {
-  //  path: 'innovate',
-  //   component: InnovateComponent
-  // },
-  // {
-  //   path: 'affordable',
-  //   component: AffordableComponent
-  // },
-  // {
-  //   path: 'get-work-done',
-  //   component: GetWorkDoneComponent
-  // },
-  // {
-  //   path: 'dedicated-team',
-  //   component: DedicatedTeamComponent
-  // },
+   {
+    path: 'innovate',
+     component: InnovateComponent
+   },
+   {
+     path: 'affordable',
+     component: AffordableComponent
+   },
+   {
+    path: 'get-work-done',
+    component: GetWorkDoneComponent
+   },
+   {
+     path: 'dedicated-team',
+     component: DedicatedTeamComponent
+   },
    {
      path: 'website',
      component: WebsiteComponent
    },
-  // {
-  //   path: 'email-marketing',
-  //   component: EmailMarketingComponent
-  // },
-  // {
-  //   path: 'social-media-marketing',
-  //   component: SocialMediaMarketingComponent
-  // },
-  // {
-  //   path: 'crm',
-  //   component: CrmComponent
-  // },
-  // {
-  //   path: 'referral-network',
-  //   component: ReferralNetworkComponent
-  // },
-  // {
-  //   path: 'sales-growth-strategy',
-  //   component: SalesGrowthStrategyComponent
-  // },
-  // {
-  //   path: 'ai-strategy',
-  //   component: AiStrategyComponent
-  // },
-  // {
-  //   path: 'exit-strategy',
-  //   component: ExitStrategyComponent
-  // },
-  // {
-  //   path: 'training-from-experts',
-  //   component: TrainingFromExpertsComponent
-  // },
-  // {
-  //   path: 'real-projects',
-  //   component: RealProjectsComponent
-  // },
-  // {
-  //   path: 'mock-interviews',
-  //   component: MockInterviewsComponent
-  // },
-  // {
-  //   path: 'dream-job-mentors',
-  //   component: DreamJobMentorsComponent
-  // },
-  // {
-  //   path: 'stress-management',
-  //   component: StressManagementComponent
-  // },
-  // {
-  //   path: 'resume-gap-analysis',
-  //   component: ResumeGapAnalysisComponent
-  // },
-  // {
-  //   path: 'peer-networking',
-  //   component: PeerNetworkingComponent
-  // },
-  // {
-  //   path: 'leadership-training',
-  //   component: LeadershipTrainingComponent
-  // },
-  // {
-  //   path: 'sticky',
-  //   component: StickyComponent
-  // },
-  // {
-  //   path: 'viral',
-  //   component: ViralComponent
-  // },
-  // {
-  //   path: 'community-impact-stories',
-  //   component: CommunityImpactStoriesComponent
-  // },
-  // {
-  //   path: 'advocates-influencers',
-  //   component: AdvocatesInfluencersComponent
-  // }
+   {
+     path: 'email-marketing',
+     component: EmailMarketingComponent
+   },
+   {
+     path: 'social-media-marketing',
+     component: SocialMediaMarketingComponent
+   },
+   {
+     path: 'crm',
+     component: CrmComponent
+   },
+   {
+     path: 'referral-network',
+     component: ReferralNetworkComponent
+   },
+   {
+     path: 'sales-growth-strategy',
+     component: SalesGrowthStrategyComponent
+   },
+   {
+     path: 'ai-strategy',
+     component: AiStrategyComponent
+   },
+   {
+     path: 'exit-strategy',
+     component: ExitStrategyComponent
+   },
+   {
+     path: 'training-from-experts',
+     component: TrainingFromExpertsComponent
+   },
+   {
+     path: 'real-projects',
+     component: RealProjectsComponent
+   },
+   {
+     path: 'mock-interviews',
+     component: MockInterviewsComponent
+   },
+   {
+     path: 'dream-job-mentors',
+     component: DreamJobMentorsComponent
+   },
+   {
+     path: 'stress-management',
+     component: StressManagementComponent
+   },
+   {
+     path: 'resume-gap-analysis',
+     component: ResumeGapAnalysisComponent
+   },
+   {
+     path: 'peer-networking',
+     component: PeerNetworkingComponent
+   },
+   {
+     path: 'leadership-training',
+     component: LeadershipTrainingComponent
+   },
+   {
+     path: 'sticky',
+     component: StickyComponent
+   },
+   {
+     path: 'viral',
+     component: ViralComponent
+   },
+   {
+     path: 'community-impact-stories',
+     component: CommunityImpactStoriesComponent
+   },
+   {
+     path: 'advocates-influencers',
+     component: AdvocatesInfluencersComponent
+   }
   /** Static routes ends here */
 ];
 

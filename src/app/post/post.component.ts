@@ -300,8 +300,8 @@ export class PostComponent implements OnInit {
         type: CompanyPostTypes.Mission
       },
 
-       /** Company Post */
-       {
+      /** Company Post */
+      {
         path: 'post-list',
         label: 'Company Post List',
         queryParams: { type: CompanyPostTypes.CompanyPost, all: false },
@@ -369,6 +369,22 @@ export class PostComponent implements OnInit {
         queryParams: { type: UserProfilePostTypes.StressManagement },
         type: UserProfilePostTypes.StressManagement
       },
+
+      /** User Stress Management */
+      {
+        path: 'post-list',
+        label: 'Assignment List',
+        queryParams: { type: PostType.Assignment, all: false },
+        type: PostType.Assignment
+      },
+      {
+        path: 'add-' + PostType.Assignment,
+        label: 'Add ' + PostType.Assignment,
+        queryParams: { type: PostType.Assignment },
+        type: PostType.Assignment
+      },
+
+
       /** COMPANY POST TYPES ENDS HERE */
 
 

@@ -27,7 +27,7 @@ export const AddPost = createAction(
 
 export const PostAddedSuccessfully = createAction(
     EPostActions.PostAddedSuccessfully,
-    props<{post: Post}>()
+    props<{post: Post, redirect?: boolean}>()
 );
 
 

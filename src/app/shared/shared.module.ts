@@ -91,6 +91,8 @@ export function hljsLanguages() {
     SoftwareDevMenuComponent,
     BriefPostComponent,
     AutocompleteComponent,
+    AddHowtodocComponent,
+    AddAssignmentComponent,
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,

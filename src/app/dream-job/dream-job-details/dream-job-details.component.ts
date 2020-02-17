@@ -189,7 +189,7 @@ export class DreamJobDetailsComponent implements OnInit, OnDestroy {
   }
 
   getJobsConnectedWithDreamJob(postId) {
-    this.postService.getAllPosts({limit: 0, pageNumber: 0}, 'job', postId).pipe(
+    this.postService.getAllPosts({limit: 0, pageNumber: 0}, 'job', {referencePostId: postId}).pipe(
       map((result: any) => {
         if (result && result.posts) {
           /** Set the data for the datatable  */

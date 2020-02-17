@@ -178,12 +178,12 @@ export class PostService {
     );
   }
 
-  getAllPosts(pageOptions, type, referencePostId = '', companyId = '', connectedWithUser = '', createdBy = ''): Observable<{posts: Post[], total: number}> {
+  getAllPosts(pageOptions, type, reference = null, companyId = '', connectedWithUser = '', createdBy = ''): Observable<{posts: Post[], total: number}> {
     return this.apollo.query(
       {
         query: gql`
-          query getAllPosts($pageOptions: PageOptionsInput, $type: String, $referencePostId: String, $companyId: String, $connectedWithUser: String, $createdBy: String) {
-            getAllPosts(pageOptions: $pageOptions, type: $type, referencePostId: $referencePostId, companyId: $companyId, connectedWithUser: $connectedWithUser, createdBy: $createdBy) {
+          query getAllPosts($pageOptions: PageOptionsInput, $type: String, $reference: ReferenceObject, $companyId: String, $connectedWithUser: String, $createdBy: String) {
+            getAllPosts(pageOptions: $pageOptions, type: $type, reference: $reference, companyId: $companyId, connectedWithUser: $connectedWithUser, createdBy: $createdBy) {
               posts {
                 ...Post
               }
@@ -195,7 +195,7 @@ export class PostService {
         variables: {
           pageOptions,
           type: type ? type : '',
-          referencePostId,
+          reference,
           companyId,
           connectedWithUser,
           createdBy
@@ -212,11 +212,13 @@ export class PostService {
   redirectToPostDetails(post, setSelectedPost?: boolean): void {
     // this.store.dispatch(SetSelectedPost({ post: null }));
 
-    if (post.type === 'dream-job') {
+    if (post.type === PostType.Dreamjob) {
       this.redirectToDreamJobDetails(post);
+    } else if (post.type === PostType.Event) {
+      this.redirectToEventDetails(post);
     } else {
       this.router.navigate(['/',
-      post.type === 'product' ? 'product' : 'post',
+      post.type === PostType.Product ? PostType.Product : 'post',
       post.slug ? post.slug : ''
     ],
       { queryParams: { type: post.type } });
@@ -224,7 +226,11 @@ export class PostService {
   }
 
   redirectToDreamJobDetails(dreamJob): void {
-    this.router.navigate(['/', 'dream-job', dreamJob.slug]);
+    this.router.navigate(['/', PostType.Dreamjob, dreamJob.slug]);
+  }
+
+  redirectToEventDetails(event): void {
+    this.router.navigate(['/', PostType.Event, event.slug]);
   }
 
   editPost(post): void {

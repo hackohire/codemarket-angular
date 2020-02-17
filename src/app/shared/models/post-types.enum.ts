@@ -5,7 +5,8 @@ export enum PostType {
     HelpRequest = 'help-request',
     Design = 'design',
     Testing = 'testing',
-    Howtodoc = 'howtodoc',
+    Howtodoc = 'howtodoc',     /** Can Connect with Event */
+    Assignment = 'assignment', /** Can Connect with Event */
     Goal = 'goal',
     Event = 'event',
     Teamskill = 'team-skill',

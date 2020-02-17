@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
 import { BreadCumb } from 'src/app/shared/models/bredcumb.model';
 import { FormGroup, FormControl, Validators, FormArray, FormBuilder } from '@angular/forms';
 import { Howtodoc } from 'src/app/shared/models/howtodoc.model';
@@ -26,6 +26,10 @@ import { EditorComponent } from '../../shared/components/editor/editor.component
   styleUrls: ['./add-howtodoc.component.scss']
 })
 export class AddHowtodocComponent implements OnInit {
+
+  @Input() connectedEvent: string;
+
+
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
   breadcumb: BreadCumb;
@@ -87,7 +91,9 @@ export class AddHowtodocComponent implements OnInit {
         }
       ]
     };
+  }
 
+  ngOnInit() {
     /** If it is "add-howtodoc" route intialize empty howtodoc form, but we are setting store property of "Selectedhowtodoc" as null
      * and if it is "edit-howtodoc route" we need to subscribe to get "Selectedhowtodoc" and user refresh the tab,
      * there won't be any selected howtodoc,
@@ -95,7 +101,7 @@ export class AddHowtodocComponent implements OnInit {
      * get the howtodoc by fetching id from the params
      */
 
-    if (this.activatedRoute.snapshot.parent.routeConfig.path === `add-${PostType.Howtodoc}`) {
+    if (this.activatedRoute.snapshot.parent.routeConfig.path === `add-${PostType.Howtodoc}` || this.connectedEvent) {
       this.store.dispatch(SetSelectedPost({ post: null }));
       this.howtodocFormInitialization(null);
     } else {
@@ -119,11 +125,6 @@ export class AddHowtodocComponent implements OnInit {
         })
       ).subscribe();
     }
-
-    // this.howtodocFormInitialization();
-  }
-
-  ngOnInit() {
   }
 
   howtodocFormInitialization(i: Howtodoc) {
@@ -141,8 +142,12 @@ export class AddHowtodocComponent implements OnInit {
         time: new FormControl(i && i.support && i.support.time ? i.support.time : 0),
         description: new FormControl(i && i.support && i.support.description ? i.support.description : '')
       })
-      // snippets: new FormControl(null),
     });
+
+    /** If @connectedEventId from input paramter */
+    if (this.connectedEvent) {
+      this.howtodocForm.addControl('connectedEvent', new FormControl(this.connectedEvent));
+    }
 
     this.formService.findFromCollection('', 'tags').subscribe((tags) => {
       this.tagSuggestions = tags;

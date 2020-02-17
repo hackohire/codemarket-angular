@@ -1,0 +1,403 @@
+@import '../../../assets/css/theme';
+
+
+.picture-container {
+  margin: 0 auto;
+  overflow: hidden;
+  height: 300px;
+  position: relative;
+  // width: 80%;
+}
+.picture-container img {
+  min-height: 100%;
+  min-width: 100%;
+}
+
+.controls {
+  background: rgba(0, 0, 0, 0.2);
+  top: -50px;
+  height: 38p;
+  left: 0;
+  position: absolute;
+  transition: top 0.15s linear;
+  width: 100%;
+}
+
+.picture-container:hover .controls {
+  top: 0;
+}
+
+.picture-container img {
+  position: absolute;
+}
+.controls a {
+  text-decoration: none;
+  color: white;
+  // padding: 15px;
+  display: inline-block;
+}
+
+.file-upload-input {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  outline: none;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.image-upload-wrap {
+  // margin-top: 20px;
+  height: 100%;
+  border: 2px dashed #0674ec;
+  position: relative;
+}
+
+.image-dropping,
+.image-upload-wrap:hover {
+  background-color: #0674ec52;
+  border: 4px dashed #ffffff;
+}
+
+.drag-text {
+  text-align: center;
+  height: 100%;
+}
+
+.drag-text h3 {
+  font-weight: 100;
+  text-transform: uppercase;
+  color: #0674ec;
+  padding: 60px 0;
+}
+
+
+// Side Navbar CSS Starts here
+.docs-component-viewer-nav-content {
+    background: rgba(0, 0, 0, 0.03);
+  
+    &::-webkit-scrollbar-thumb {
+      background: rgba(0, 0, 0, .26);
+    }
+  
+    .docs-nav-content-btn {
+      color: rgba(0,0,0,.5);
+      font-family: Roboto, "Helvetica Neue", sans-serif;
+  
+      &:focus {
+        // override the default background
+        background: rgba(0, 0, 0, 0.08);
+      }
+    }
+  
+    hr {
+      border: none;
+      border-top: 1px solid rgba(0,0,0,.1);
+    }
+  
+    a {
+      color: rgba(0,0,0,.54);
+  
+      &.docs-component-viewer-sidenav-item-selected,
+      &:hover {
+        color: $pcolor !important;
+      }
+  
+      &.docs-component-viewer-sidenav-item-selected {
+        background: rgba(0, 0, 0, 0.08);
+      }
+    }
+  }
+  
+  
+  
+  .docs-component-viewer-nav {
+    position: sticky;
+    top: 25px;
+  
+    .docs-component-viewer-nav-content {
+      // margin: 25px;
+      // width: $sidenav-width;
+      max-height: 75vh;
+      overflow: auto;
+  
+      &::-webkit-scrollbar {
+        height: 4px;
+        width: 4px;
+      }
+  
+      .category {
+        padding: 10px 15px;
+        font-weight: 700;
+        line-height: 16px;
+        margin: 0;
+        font-size: 13px;
+        cursor: pointer;
+        position: relative;
+        display: block;
+        width: 100%;
+        text-align: left;
+        background: none;
+        border: none;
+  
+        &:focus {
+          outline: none;
+        }
+  
+        .mat-icon {
+          position: absolute;
+          right: 5px;
+          font-size: 18px;
+        }
+  
+        &.docs-component-viewer-sidenav-item-selected,
+        &:hover {
+          color: $pcolor;
+        }
+      }
+  
+      hr {
+        padding: 0;
+        margin: 0;
+      }
+  
+      ul {
+        list-style-type: none;
+        margin: 0 0 5px 0;
+        padding: 0;
+        overflow: hidden;
+      }
+  
+      li {
+        font-size: 13px;
+        line-height: 16px;
+        margin: 0;
+        padding: 5px 15px 5px 20px;
+      }
+  
+      a {
+        display: block;
+        text-decoration: none;
+        color: rgba(0,0,0,.54);
+      }
+    }
+}
+
+// Side Navbar CSS Ends here
+
+
+// Brief Post List CSS copied from Codepen
+.item-grid {
+    grid-column-start: 1;
+    grid-column-end: 3;
+  }
+  
+  
+  .item-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    -webkit-box-align: start;
+    -webkit-align-items: start;
+    -ms-flex-align: start;
+    align-items: start;
+    justify-items: center;
+    grid-gap: 4rem 3rem;
+  }
+  @media (min-width: 1101px) {
+    .item-grid {
+      grid-template-columns: repeat(auto-fill, minmax(90%, 1fr));
+    }
+  }
+  
+  .item-grid,
+  .item-grid,
+  .item-grid {
+    grid-gap: 6rem 3rem;
+    margin-bottom: 5rem;
+  }
+  .item-grid .full-width {
+    grid-column: 1 / 4;
+  }
+  .item-grid-large {
+    display: grid;
+    -webkit-box-align: start;
+    -webkit-align-items: start;
+    -ms-flex-align: start;
+    align-items: start;
+    justify-items: center;
+    grid-gap: 4rem 3rem;
+  }
+  @media (max-width: 1280px) {
+    .item-grid-large {
+      grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    }
+    .item-grid-large > :nth-child(6n + 1),
+    .item-grid-large > :nth-child(6n + 5) {
+      grid-row: span 2;
+    }
+    .item-grid-large > :nth-child(6n + 1) .item-content,
+    .item-grid-large > :nth-child(6n + 5) .item-content {
+      display: none;
+    }
+    .item-grid-large > :nth-child(6n + 1) .item-content-long,
+    .item-grid-large > :nth-child(6n + 5) .item-content-long {
+      display: block;
+    }
+  }
+  @media (min-width: 1281px) {
+    .item-grid-large {
+      grid-template-columns: repeat(1, 1fr);
+    }
+    .item-grid-large > :nth-child(12n + 1),
+    .item-grid-large > :nth-child(12n + 5),
+    .item-grid-large > :nth-child(12n + 9) {
+      grid-row: span 2;
+    }
+    .item-grid-large > :nth-child(12n + 1) .item-content,
+    .item-grid-large > :nth-child(12n + 5) .item-content,
+    .item-grid-large > :nth-child(12n + 9) .item-content {
+      display: none;
+    }
+    .item-grid-large > :nth-child(12n + 1) .item-content-long,
+    .item-grid-large > :nth-child(12n + 5) .item-content-long,
+    .item-grid-large > :nth-child(12n + 9) .item-content-long {
+      display: block;
+    }
+  }
+  
+  
+  
+  .loader {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translateY(-50%) translateX(-50%);
+            transform: translateY(-50%) translateX(-50%);
+    -webkit-animation: spin 0.35s infinite linear;
+            animation: spin 0.35s infinite linear;
+    border: 2px solid #707070;
+    border-radius: 50%;
+    border-top-color: white;
+    height: 25px;
+    -webkit-transform-origin: left;
+            transform-origin: left;
+    top: 45%;
+    width: 25px;
+  }
+  .hidden-input {
+    left: -999px;
+    position: absolute;
+  }
+  .profile {
+    *zoom: 1;
+    background-color: white;
+    border-radius: 2px;
+    display: block;
+    float: none;
+    margin: 5px auto;
+    overflow: hidden;
+    padding-bottom: 20px;
+    width: 400px;
+  }
+  .profile:before,
+  .profile:after {
+    content: "";
+    display: table;
+  }
+  .profile:after {
+    clear: both;
+  }
+  .about {
+    // font-family: Helvetica, "Helvetica Neue", "Tahoma";
+    font-size: 12px;
+    color: #adadad;
+    line-height: 17px;
+  }
+  .image-wrapper {
+    background: rgba(0, 0, 0, 0.2);
+    bottom: -50px;
+    height: 50px;
+    left: 0;
+    position: absolute;
+    transition: bottom 0.15s linear;
+    width: 100%;
+  }
+  .edit {
+    position: relative;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+    color: white;
+    cursor: pointer;
+    font-size: 22px;
+    top: 10px;
+  }
+  .profile-pic {
+    position: relative;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+    border-radius: 50%;
+    border: 4px solid white;
+    height: 180px;
+    overflow: hidden;
+    // -webkit-transform: translateX(-50%) translateY(-50%);
+    //         transform: translateX(-50%) translateY(-50%);
+    width: 180px;
+    top: 0;
+  }
+  .profile-pic img {
+    box-sizing: border-box;
+    // height: 100%;
+    height: 180px;
+    width: 180px;
+    left: 50%;
+    // max-height: 100%;
+    position: absolute;
+    -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+    transition: all 0.15s ease-out;
+    // width: auto;
+  }
+  
+  .profile-pic:hover .image-wrapper {
+    bottom: 0;
+  }
+  .username {
+    margin-top: 122px;
+    text-align: center;
+  }
+  .user-info {
+    *zoom: 1;
+    padding: 8px;
+    position: relative;
+  }
+  .user-info:before,
+  .user-info:after {
+    content: "";
+    display: table;
+  }
+  .user-info:after {
+    clear: both;
+  }
+  body {
+    background-color: #202020;
+  }
+  .container {
+    margin: 40px auto 50px;
+    max-width: 960px;
+  }
+  .layer {
+    background-color: rgba(0, 0, 0, 0.25);
+    display: none;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+  .layer.visible {
+    display: block;
+  }

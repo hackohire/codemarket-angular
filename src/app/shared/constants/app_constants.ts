@@ -260,6 +260,7 @@ export const appConstants = {
       dateRange
       address
       eventType
+      cover
       usersAttending {
         name
         _id
@@ -278,6 +279,7 @@ export const appConstants = {
         name
         _id
       }
+
       salaryCurrency
       salaryRangeFrom
       salaryRangeTo

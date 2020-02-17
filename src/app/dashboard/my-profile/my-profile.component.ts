@@ -10,7 +10,7 @@ import { VideoChatComponent } from '../../video-chat/video-chat.component';
 import { MatDialog } from '@angular/material';
 import Peer from 'peerjs';
 import { PostType } from '../../shared/models/post-types.enum';
-import { switchMap, tap, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { PostService } from '../../shared/services/post.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { Post } from '../../shared/models/post.model';

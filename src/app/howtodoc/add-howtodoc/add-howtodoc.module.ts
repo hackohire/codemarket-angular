@@ -18,6 +18,9 @@ const addHowtodocRoutes: Routes = [
     CommonModule,
     SharedModule,
     RouterModule.forChild(addHowtodocRoutes)
+  ],
+  exports: [
+    AddHowtodocComponent
   ]
 })
 export class AddHowtodocModule { }

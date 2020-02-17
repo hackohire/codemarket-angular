@@ -177,6 +177,13 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
+    path: 'event/:slug',
+    loadChildren: () => import('./event/event-details/event-details.module').then(module => module.EventDetailsModule),
+    resolve: { seo: PostDataResolver },
+    data: { noReuse: false, setPostMeta: true },
+    pathMatch: 'full'
+  },
+  {
     path: 'company/:companyId',
     loadChildren: () => import('./companies/companies.module').then(module => module.CompaniesModule),
     data: { setPostMeta: true },

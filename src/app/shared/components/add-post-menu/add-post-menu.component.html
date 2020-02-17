@@ -201,4 +201,10 @@
     <span>Stress Management</span>
   </button>
 
+  <button mat-menu-item [routerLink]="['/', 'post', 'add-' + postTypes.Assignment]">
+    <i style="font-size: 1.7rem !important;"
+      [class]="'vertical-align-middle fal fa-' + icons['dream-job'] + ' fa-fw'"></i>
+    <span>Assignment</span>
+  </button>
+
 </mat-menu>

@@ -16,7 +16,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [EventDetailsComponent, AddHowtodocComponent, AddAssignmentComponent],
+  declarations: [EventDetailsComponent],
   imports: [
     CommonModule,
     SharedModule,

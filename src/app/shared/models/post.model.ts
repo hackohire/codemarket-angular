@@ -5,6 +5,7 @@ import { PostStatus } from './poststatus.enum';
 import { City } from './city.model';
 import { Company } from './company.model';
 import { Comment } from './comment.model';
+import { Event } from './event.model';
 
 interface Support {
     time: number;
@@ -30,6 +31,7 @@ export interface Post {
     referencePostUrl?: string;
     tags?: Tag[];
     support?: Support;
+    cover?: string;
     usersAttending?: [User]; /** Only for events */
 
     /** FOr posts created under user's profile */
@@ -85,4 +87,5 @@ export interface Post {
 
     likeCount?: number;
     comments?: Comment[];
+    connectedEvent?: Event | string;
 }

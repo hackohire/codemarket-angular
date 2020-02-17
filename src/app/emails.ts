@@ -1,4 +1,4 @@
-export const emails1 = [
+export const emails = [
   {
     email: 'financialwellness@asuc.org'
   },
@@ -395,9 +395,6 @@ export const emails1 = [
   {
     email: 'brownissues.ucb@gmail.com'
   },
-];
-
-export const emails2 = [
   {
     email: 'buildliteracy@berkeley.edu'
   },
@@ -2828,9 +2825,6 @@ export const emails2 = [
   {
     email: 'president@calvsa.com'
   },
-];
-
-export const emails3 = [
   {
     email: 'outreach@calvsa.com'
   },
@@ -2945,9 +2939,9 @@ export const dummyemails = [
   // {
   //   email: 'sumi@codemarket.io'
   // },
-  // {
-  //   email: 'sumitvekariya7@gmail.com'
-  // },
+  {
+    email: 'sumitvekariya7@gmail.com'
+  },
   // {
   //   email: 'bg4018@gmail.com'
   // },

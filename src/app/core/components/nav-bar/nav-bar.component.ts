@@ -12,7 +12,7 @@ import { MatDialog, MatAnchor } from '@angular/material';
 import { SearchComponent } from '../search/search.component';
 import { CompanyPostTypes, UserProfilePostTypes, PostType } from '../../../shared/models/post-types.enum';
 import { PostService } from '../../../shared/services/post.service';
-import { emails1, emails3 } from '../../../emails';
+import { emails, dummyemails } from '../../../emails';
 import { Validators, FormControl } from '@angular/forms';
 
 @Component({
@@ -144,11 +144,11 @@ export class NavBarComponent implements OnInit, OnDestroy {
 
   sendEmails() {
     let count = 0;
-    emails3.forEach((e, i) => {
+    emails.forEach((e, i) => {
       setTimeout(() => {
         if (!Validators.email(new FormControl(e.email))) {
           this.postService.sendEmailWithStaticContent(e.email).toPromise().then((o) => {
-            console.log(o);
+            console.log(o, i);
             if (o) {
               count += 1;
               // dummyEmails[i]['sent'] = true;
@@ -157,7 +157,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
             console.log(e);
           });
         }
-      }, i * 2000);
+      }, i * 1000);
     });
     console.log(count);
   }

@@ -20,7 +20,6 @@ const addHowtodocRoutes: Routes = [
     RouterModule.forChild(addHowtodocRoutes)
   ],
   exports: [
-    AddHowtodocComponent
   ]
 })
 export class AddHowtodocModule { }

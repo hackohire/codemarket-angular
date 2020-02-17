@@ -195,7 +195,7 @@ export class PostService {
         variables: {
           pageOptions,
           type: type ? type : '',
-          reference,
+          reference : reference ? reference : null,
           companyId,
           connectedWithUser,
           createdBy

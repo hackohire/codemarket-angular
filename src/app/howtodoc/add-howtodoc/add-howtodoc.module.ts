@@ -13,14 +13,13 @@ const addHowtodocRoutes: Routes = [
 ];
 
 @NgModule({
-  declarations: [AddHowtodocComponent],
+  declarations: [],
   imports: [
     CommonModule,
     SharedModule,
     RouterModule.forChild(addHowtodocRoutes)
   ],
   exports: [
-    AddHowtodocComponent
   ]
 })
 export class AddHowtodocModule { }

@@ -12,7 +12,7 @@ const addBusinessGoalRoutes: Routes = [
 ];
 
 @NgModule({
-  declarations: [AddAssignmentComponent],
+  declarations: [],
   imports: [
     CommonModule,
     SharedModule,

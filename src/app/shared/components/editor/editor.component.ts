@@ -110,8 +110,8 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
     }
 
     /** Get all the code elements from DOM and highlight them as code snippets using highlight.js */
-    if (this.editorRef && isPlatformBrowser(this._platformId) && this.editorRef.nativeElement) {
-      this.editorRef.nativeElement.querySelectorAll('pre code').forEach((block: HTMLElement) => {
+    if (this.editorViewRef && isPlatformBrowser(this._platformId) && this.editorViewRef.nativeElement) {
+      this.editorViewRef.nativeElement.querySelectorAll('pre code').forEach((block: HTMLElement) => {
         this._hljs.highlightBlock(block);
       });
     }

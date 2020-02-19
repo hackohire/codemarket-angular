@@ -94,9 +94,15 @@ export class SendEmailComponent implements OnInit {
     /** Set the updated description blocks */
     this.descriptionFormControl.setValue(blocks.blocks);
 
+    /** Here we are asking to detectchanges again because when we fetch the blocks to save the description in formcontrol,
+     * we need the HTML also, so for that detectchanges will render the changes again with saved block and we can access the html again
+     */
     this.changeDetector.detectChanges();
 
 
+    /** Fetch the html content also becuase when we send email, email only understands the html content so we need to store html
+     * content also
+     */
     this.descriptionHTMLFormControl.setValue(this.descriptionEditor.editorViewRef.nativeElement.innerHTML);
 
     this.emailForm.get('to').setValue(this.emailForm.get('to').value.map(element => element.label ? element.label : element));
@@ -107,6 +113,7 @@ export class SendEmailComponent implements OnInit {
       this.createdBy.setValue(this.authService.loggedInUser._id);
     }
 
+    /** Send the email and redirect to actual email post */
     this.emailService.sendEmail(this.emailForm.value).subscribe(e => {
       if (e) {
         Swal.fire(`Emai has been Send Successfully`, '', 'success').then(() => {

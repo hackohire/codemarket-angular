@@ -1,14 +1,12 @@
 import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { Observable } from 'rxjs';
 import gql from 'graphql-tag';
-import { map, catchError, tap } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 import { Apollo } from 'apollo-angular';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { AppState } from '../../core/store/state/app.state';
 import { Post } from '../models/post.model';
-import { SetSelectedPost } from '../../core/store/actions/post.actions';
-import { productConstants } from '../constants/product_constants';
 import { AuthService } from '../../core/services/auth.service';
 import { of } from 'rxjs/observable/of';
 import { PostType } from '../models/post-types.enum';

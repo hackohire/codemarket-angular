@@ -141,7 +141,7 @@ export class AddRequirementsComponent implements OnInit {
       _id: new FormControl(r && r._id ? r._id : ''),
       tags: this.fb.array(r && r.tags && r.tags.length ? r.tags : []),
       type: new FormControl(PostType.Requirement),
-      company: new FormControl(r && r.company ? r.company : ''),
+      company: new FormControl(r && r.company ? r.company : null),
       support: new FormGroup({
         time: new FormControl(r && r.support && r.support.time ? r.support.time : 0),
         description: new FormControl(r && r.support && r.support.description ? r.support.description : [])

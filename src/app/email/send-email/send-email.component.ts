@@ -1,14 +1,15 @@
-import { Component, OnInit, ViewChild, Input, ChangeDetectorRef } from '@angular/core';
-import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
+import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { EditorComponent } from '../../shared/components/editor/editor.component';
 import { AuthService } from '../../core/services/auth.service';
 import { BreadCumb } from '../../shared/models/bredcumb.model';
 import { Email } from '../../shared/models/email.model';
 import { EmailService } from '../email.service';
-import { ActivatedRoute } from '@angular/router';
 import { PostStatus } from '../../shared/models/poststatus.enum';
 import { PostType } from '../../shared/models/post-types.enum';
+import Swal from 'sweetalert2';
+import { PostService } from '../../shared/services/post.service';
 
 @Component({
   selector: 'app-send-email',
@@ -44,7 +45,7 @@ export class SendEmailComponent implements OnInit {
     private authService: AuthService,
     private emailService: EmailService,
     private changeDetector: ChangeDetectorRef,
-    private activatedRoute: ActivatedRoute
+    private postService: PostService
   ) {
 
     /** Make the Changes here while creating new post type */
@@ -90,17 +91,6 @@ export class SendEmailComponent implements OnInit {
     /** Fetch description blocks */
     const blocks = await this.descriptionEditor.editor.save();
 
-    /** If company is set add the company link */
-    // if (this.emailForm.get('company')) {
-    //   blocks.blocks.push({
-    //     type: 'paragraph',
-    //     data: {
-    //       text: `<div style="padding-top: 20px;">Company: <a href="https://${window.location.host}/company/${this.companyFormControl.value._id}">
-    //               ${this.companyFormControl.value.name}</a></div>`
-    //     }
-    //   });
-    // }
-
     /** Set the updated description blocks */
     this.descriptionFormControl.setValue(blocks.blocks);
 
@@ -117,7 +107,13 @@ export class SendEmailComponent implements OnInit {
       this.createdBy.setValue(this.authService.loggedInUser._id);
     }
 
-    this.emailService.sendEmail(this.emailForm.value).subscribe(e => console.log(e));
+    this.emailService.sendEmail(this.emailForm.value).subscribe(e => {
+      if (e) {
+        Swal.fire(`Emai has been Send Successfully`, '', 'success').then(() => {
+          this.postService.redirectToPostDetails(e);
+        });
+      }
+    });
 
   }
 

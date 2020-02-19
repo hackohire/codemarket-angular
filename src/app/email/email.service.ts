@@ -31,6 +31,8 @@ export class EmailService {
         ...Description
       }
       descriptionHTML
+
+      slug
     }
     ${description}
   `;

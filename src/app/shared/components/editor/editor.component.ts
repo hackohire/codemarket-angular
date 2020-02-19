@@ -63,6 +63,7 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
   @Output() output: EventEmitter<any> = new EventEmitter(); /** Emitting data with user interactions */
   @Input() importArticleSubscription = false;
   @ViewChild('editorRef', { static: false }) editorRef: ElementRef;
+  @ViewChild('editorViewRef', { static: true }) editorViewRef: ElementRef;
 
   subscriptions$  = new Subscription();
 

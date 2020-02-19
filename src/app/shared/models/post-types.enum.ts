@@ -16,6 +16,8 @@ export enum PostType {
   CapitalFunding = 'capital-funding',
   HiringProcess = 'hiring-process',
   Assignment = 'assignment',
+
+  Email = 'email'
 }
 
 export enum UserProfilePostTypes {

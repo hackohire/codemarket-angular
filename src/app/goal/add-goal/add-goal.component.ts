@@ -138,7 +138,7 @@ export class AddGoalComponent implements OnInit {
       _id: new FormControl(i && i._id ? i._id : ''),
       tags: this.fb.array(i && i.tags && i.tags.length ? i.tags : []),
       type: new FormControl(PostType.Goal),
-      company: new FormControl(i && i.company ? i.company : ''),
+      company: new FormControl(i && i.company ? i.company : null),
       support: new FormGroup({
         time: new FormControl(i && i.support && i.support.time ? i.support.time : 0),
         description: new FormControl(i && i.support && i.support.description ? i.support.description : [])

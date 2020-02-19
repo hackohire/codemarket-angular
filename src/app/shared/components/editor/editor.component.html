@@ -1,6 +1,6 @@
 <div *ngIf="!readOnly && isPlatformBrowser" #editorRef [ngStyle]="editorStyle" [id]="id"></div>
 
-<div *ngIf="readOnly" #editorRef [ngStyle]="editorStyle">
+<div #editorViewRef [ngStyle]="editorStyle" [ngClass]="readOnly ? '' : 'visibility-hidden'">
     <div class="ce-block">
         <div class="ce-block__content">
             <ng-container [ngSwitch]="b?.type" *ngFor="let b of data; let i = index">

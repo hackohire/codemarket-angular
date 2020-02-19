@@ -1,0 +1,44 @@
+<app-breadcumb [title]="breadcumb?.title" [path]="breadcumb?.path" [showImportButton]="true"></app-breadcumb>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div [formGroup]="emailForm" class="add-form-area common-box-shadow">
+                <ng-select [addTag]="true" [placeholder]="'To'" formControlName="to" [hideSelected]="true" [multiple]="true">
+                </ng-select>
+
+                <ng-select [addTag]="true" [placeholder]="'CC'" formControlName="cc" [hideSelected]="true" [multiple]="true">
+                </ng-select>
+
+                <ng-select [addTag]="true" [placeholder]="'BCC'" formControlName="bcc" [hideSelected]="true" [multiple]="true">
+                </ng-select>
+
+                <app-autocomplete class="col-md-6" [autoComplete]="emailForm?.get('company')" [placeholder]="'Select Company'" [collection]="'companies'" [type]="" [multiple]="false" [forCompany]="true"></app-autocomplete>
+
+                <mat-form-field class="field-full-width">
+                    <input (click)="dt2.open()" formControlName="dateRange" matInput [owlDateTime]="dt2"
+                        [selectMode]="'range'" placeholder="Appointment Date & Time">
+                    <mat-icon matSuffix [owlDateTimeTrigger]="dt2">date_range</mat-icon>
+                    <owl-date-time #dt2 [pickerType]="'both'"></owl-date-time>
+                </mat-form-field>
+                
+                <mat-form-field class="field-full-width">
+                    <input type="text" matInput formControlName="subject" placeholder="Subject">
+                </mat-form-field>
+
+                <app-editor #descriptionEditor [placeholder]="'Email Description'"
+                    [data]="descriptionFormControl?.value" [id]="'edit-post-editor'">
+                </app-editor>
+
+                <br />
+
+                <div fxLayout="row" fxLayoutGap="10px">
+                    <button type="button" (click)="submit()" [disabled]="emailForm?.invalid" mat-raised-button color="primary">{{ 'Send Email' }}</button>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

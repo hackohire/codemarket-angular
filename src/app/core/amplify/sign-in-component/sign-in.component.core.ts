@@ -240,7 +240,7 @@ export class SignInComponentCore implements OnInit {
 	getSignInUsername() {
 		switch (this._usernameAttributes) {
 			case UsernameAttributes.EMAIL:
-				return this.email;
+				return this.email ? this.email : this.username;
 			case UsernameAttributes.PHONE_NUMBER:
 				return composePhoneNumber(this.country_code, this.local_phone_number);
 			default:

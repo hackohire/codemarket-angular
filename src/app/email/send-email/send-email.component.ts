@@ -69,7 +69,7 @@ export class SendEmailComponent implements OnInit {
       cc: new FormControl([]),
       bcc: new FormControl([]),
       company: new FormControl(),
-      dateRange: new FormControl([], Validators.required),
+      dateRange: new FormControl([]),
       subject: new FormControl('', Validators.required),
       type: new FormControl(PostType.Email),
       status: new FormControl(PostStatus.Published),

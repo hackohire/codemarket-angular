@@ -16,7 +16,7 @@ import { UsernameAttributes, UsernameFieldOutput } from '../types';
 import { Component, Input, OnInit, Inject } from '@angular/core';
 import { AmplifyService } from '../../services/amplify.service';
 import { AuthState } from 'aws-amplify-angular/dist/src/providers/auth.state';
-import { labelMap, composePhoneNumber } from '../common';
+import { labelMap, composePhoneNumber, includes } from '../common';
 import { auth } from '../assets/data-test-attributes';
 
 const template = `
@@ -139,7 +139,7 @@ export class ForgotPasswordComponentCore implements OnInit {
 	@Input()
 	set data(data: any) {
 		this._authState = data.authState;
-		this._show = data.authState.state === 'forgotPassword';
+		this._show = includes(['forgotPassword', 'forgotPassword_failure'], data.authState.state);
 		this._usernameAttributes = data.usernameAttributes;
 		this.hide = data.hide ? data.hide : this.hide;
 
@@ -158,7 +158,7 @@ export class ForgotPasswordComponentCore implements OnInit {
 	@Input()
 	set authState(authState: AuthState) {
 		this._authState = authState;
-		this._show = authState.state === 'forgotPassword';
+		this._show = includes(['forgotPassword', 'forgotPassword_failure'], authState.state);
 
 		this.email =
 			authState.user && authState.user.email ? authState.user.email : '';
@@ -196,7 +196,7 @@ export class ForgotPasswordComponentCore implements OnInit {
 	getforgotPwUsername() {
 		switch (this._usernameAttributes) {
 			case UsernameAttributes.EMAIL:
-				return this.email || this.username;
+				return this.email ? this.email : this.username;
 			case UsernameAttributes.PHONE_NUMBER:
 				return composePhoneNumber(this.country_code, this.local_phone_number);
 			default:

@@ -41,7 +41,8 @@
         Business Coaches</a>
       <a mat-list-item [routerLink]="['/', 'post', 'post-list']" [queryParams]="{type: 'career-coach', all: false}">My
         Career Coaches</a>
-      <a mat-list-item [routerLink]="['/', 'post', 'post-list']" [queryParams]="{type: 'capital-funding', all: false}">My
+      <a mat-list-item [routerLink]="['/', 'post', 'post-list']"
+        [queryParams]="{type: 'capital-funding', all: false}">My
         Capital Fundings</a>
 
       <a mat-list-item [routerLink]="['/', 'company', 'company-list']" [queryParams]="{all: false}">My Companies</a>
@@ -63,29 +64,46 @@
 
       <a mat-list-item [routerLink]="['/', 'post', 'post-list']" [queryParams]="{type: 'job', all: false}">My
         Jobs</a>
-      <a mat-list-item [routerLink]="['/', 'post', 'post-list']" [queryParams]="{type: companyPostTypes.BusinessChallenge, all: false}">My
+      <a mat-list-item [routerLink]="['/', 'post', 'post-list']"
+        [queryParams]="{type: companyPostTypes.BusinessChallenge, all: false}">My
         Business Challenge</a>
-      <a mat-list-item [routerLink]="['/', 'post', 'post-list']" [queryParams]="{type: companyPostTypes.BusinessGoal, all: false}">My
+      <a mat-list-item [routerLink]="['/', 'post', 'post-list']"
+        [queryParams]="{type: companyPostTypes.BusinessGoal, all: false}">My
         Business Goal</a>
-      <a mat-list-item [routerLink]="['/', 'post', 'post-list']" [queryParams]="{type: companyPostTypes.SalesChallenge, all: false}">My
+      <a mat-list-item [routerLink]="['/', 'post', 'post-list']"
+        [queryParams]="{type: companyPostTypes.SalesChallenge, all: false}">My
         Sales Challenge</a>
-      <a mat-list-item [routerLink]="['/', 'post', 'post-list']" [queryParams]="{type: companyPostTypes.MarketingChallenge, all: false}">My
+      <a mat-list-item [routerLink]="['/', 'post', 'post-list']"
+        [queryParams]="{type: companyPostTypes.MarketingChallenge, all: false}">My
         Marketing Challenge</a>
-      <a mat-list-item [routerLink]="['/', 'post', 'post-list']" [queryParams]="{type: companyPostTypes.TechnicalChallenge, all: false}">My
+      <a mat-list-item [routerLink]="['/', 'post', 'post-list']"
+        [queryParams]="{type: companyPostTypes.TechnicalChallenge, all: false}">My
         Technical Challenge</a>
-      <a mat-list-item [routerLink]="['/', 'post', 'post-list']" [queryParams]="{type: companyPostTypes.TeamChallenge, all: false}">My
+      <a mat-list-item [routerLink]="['/', 'post', 'post-list']"
+        [queryParams]="{type: companyPostTypes.TeamChallenge, all: false}">My
         Team Challenge</a>
-      <a mat-list-item [routerLink]="['/', 'post', 'post-list']" [queryParams]="{type: companyPostTypes.SalesGoal, all: false}">My Sales Goal</a>
-      <a mat-list-item [routerLink]="['/', 'post', 'post-list']" [queryParams]="{type: companyPostTypes.MarketingGoal, all: false}">My Marketing Goal</a>
-      <a mat-list-item [routerLink]="['/', 'post', 'post-list']" [queryParams]="{type: companyPostTypes.TechnicalGoal, all: false}">My Technical Goal</a>
-      <a mat-list-item [routerLink]="['/', 'post', 'post-list']" [queryParams]="{type: companyPostTypes.TeamGoal, all: false}">My Team Goal</a>
-      <a mat-list-item [routerLink]="['/', 'post', 'post-list']" [queryParams]="{type: companyPostTypes.Mission, all: false}">My Mission</a>
-      <a mat-list-item [routerLink]="['/', 'post', 'post-list']" [queryParams]="{type: companyPostTypes.CompanyPost, all: false}">My Company Post</a>
-      <a mat-list-item [routerLink]="['/', 'post', 'post-list']" [queryParams]="{type: userProfilePostTypes.StartupGoal, all: false}">My Startup Goal</a>
-      <a mat-list-item [routerLink]="['/', 'post', 'post-list']" [queryParams]="{type: userProfilePostTypes.SocialImpactGoal, all: false}">My Social Impact Goal</a>
-      <a mat-list-item [routerLink]="['/', 'post', 'post-list']" [queryParams]="{type: userProfilePostTypes.LeadershipChallenge, all: false}">My Leadership Challenge</a>
-      <a mat-list-item [routerLink]="['/', 'post', 'post-list']" [queryParams]="{type: userProfilePostTypes.StressManagement, all: false}">My Stress Management</a>
-      <a mat-list-item [routerLink]="['/', 'post', 'post-list']" [queryParams]="{type: postTypes.Assignment, all: false}">My Assignments</a>
+      <a mat-list-item [routerLink]="['/', 'post', 'post-list']"
+        [queryParams]="{type: companyPostTypes.SalesGoal, all: false}">My Sales Goal</a>
+      <a mat-list-item [routerLink]="['/', 'post', 'post-list']"
+        [queryParams]="{type: companyPostTypes.MarketingGoal, all: false}">My Marketing Goal</a>
+      <a mat-list-item [routerLink]="['/', 'post', 'post-list']"
+        [queryParams]="{type: companyPostTypes.TechnicalGoal, all: false}">My Technical Goal</a>
+      <a mat-list-item [routerLink]="['/', 'post', 'post-list']"
+        [queryParams]="{type: companyPostTypes.TeamGoal, all: false}">My Team Goal</a>
+      <a mat-list-item [routerLink]="['/', 'post', 'post-list']"
+        [queryParams]="{type: companyPostTypes.Mission, all: false}">My Mission</a>
+      <a mat-list-item [routerLink]="['/', 'post', 'post-list']"
+        [queryParams]="{type: companyPostTypes.CompanyPost, all: false}">My Company Post</a>
+      <a mat-list-item [routerLink]="['/', 'post', 'post-list']"
+        [queryParams]="{type: userProfilePostTypes.StartupGoal, all: false}">My Startup Goal</a>
+      <a mat-list-item [routerLink]="['/', 'post', 'post-list']"
+        [queryParams]="{type: userProfilePostTypes.SocialImpactGoal, all: false}">My Social Impact Goal</a>
+      <a mat-list-item [routerLink]="['/', 'post', 'post-list']"
+        [queryParams]="{type: userProfilePostTypes.LeadershipChallenge, all: false}">My Leadership Challenge</a>
+      <a mat-list-item [routerLink]="['/', 'post', 'post-list']"
+        [queryParams]="{type: userProfilePostTypes.StressManagement, all: false}">My Stress Management</a>
+      <a mat-list-item [routerLink]="['/', 'post', 'post-list']"
+        [queryParams]="{type: postTypes.Assignment, all: false}">My Assignments</a>
     </mat-nav-list>
   </mat-sidenav>p
 
@@ -97,11 +115,11 @@
       <!-- Search -->
       <a mat-button routerLinkActive="mat-primary" (click)="openSearchDialog()">
         <i style="font-size: 1.0rem !important; color: #ffff00;" class="vertical-align-middle fal fa-search fa-fw"></i>
-        <span style="color: #ffffff;" class="line-height-initial" > Search</span>
+        <span style="color: #ffffff;" class="line-height-initial"> Search</span>
       </a>
 
       <!-- membership -->
-     <!--  <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'membership']">
+      <!--  <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'membership']">
         <i style="font-size: 1.0rem !important; color: #ffff00;"
           class="vertical-align-middle fal fa-id-card-alt fa-fw"></i>
         <span style="color: #ffffff;" class="line-height-initial" > Membership</span>
@@ -112,7 +130,7 @@
           mdePopoverTriggerOn="click">
           <i style="font-size: 1.0rem !important; color: #ffff00;"
             class="vertical-align-middle fal fa-user-circle fa-fw"></i>
-          <span style="color: #ffffff;" class="line-height-initial" > Login/Register</span>
+          <span style="color: #ffffff;" class="line-height-initial"> Login/Register</span>
         </a>
       </ng-template>
 
@@ -127,7 +145,7 @@
           [routerLink]="['/', 'dashboard', 'my-profile']">
           <i style="font-size: 1.0rem !important; color: #ffff00;"
             class="vertical-align-middle fal fa-user-circle fa-fw"></i>
-          <span style="color: #ffffff;" class="line-height-initial" > My Profile <mat-icon
+          <span style="color: #ffffff;" class="line-height-initial"> My Profile <mat-icon
               style="vertical-align: middle; height: 28px;">keyboard_arrow_down</mat-icon>
           </span>
         </a>
@@ -154,7 +172,7 @@
 
     </mat-toolbar>
 
-    <mat-toolbar [ngStyle]="{'padding-bottom': '10px'}">
+    <mat-toolbar>
 
       <!-- Toggle Sidebar Button -->
       <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
@@ -170,37 +188,81 @@
 
       <!-- End Items -->
       <div fxFlex></div>
+
+      <!-- Message Alert Area -->
+
+      <div class="author__notification_area">
+        <ul>
+          <li class="has_dropdown" style="padding: 0;">
+            <div class="icon_wrap">
+              <span style="font-size: 1.5rem !important;" class="vertical-align-middle far fa-bell"></span>
+              <span class="notification_count noti" style="height: 7px; min-width: 7px;" *ngIf="isUnread((messageService.messagesList$ | async)?.messages)"></span>
+            </div>
+
+            <div class="dropdowns notification--dropdown">
+
+              <div class="dropdown_module_header">
+                <h4>My Notifications</h4>
+                <!-- <a href="notification.html">View All</a> -->
+              </div>
+              <div class="notifications_module">
+                <div (click)="redirectToPost(m)" class="notification" *ngFor="let m of (messageService.messagesList$ | async)?.messages">
+                  <div class="notification__info">
+                    <div class="info_avatar" [routerLink]="['/', 'dashboard', 'profile', m?.createdBy?._id ]">
+                      <img [src]="m?.createdBy?.avatar ? ((s3FilesBucketURL + m.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar" alt="">
+                    </div>
+                    <div class="info">
+                      <p>
+                        <span [routerLink]="['/', 'dashboard', 'profile', m?.createdBy?._id ]">{{m?.createdBy?.name}}</span> has added a comment on
+                        <a *ngIf="m?.referencePost">{{m?.referencePost?.name}}</a>
+                        <a *ngIf="m?.referenceCompany">{{m?.referenceCompany?.name}}</a>
+                      </p>
+                      <p class="time">{{fromNow(m?.createdAt)}}</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="pagination-area">
+                  <span style="text-decoration: underline; cursor: pointer;"
+                      (click)="messagesPageNumber = messagesPageNumber + 1; messageService.fetchLatestCommentsForTheUserEngaged({pageNumber: messagesPageNumber, limit: 10}, authService?.loggedInUser?._id);">+ Load
+                      More</span>
+              </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+
       <a mat-button routerLinkActive="mat-primary">
         <!-- <i style="font-size: 1.0rem !important;" class="vertical-align-middle fal fa-building fa-fw"></i> -->
 
         <!-- <div class="line-height-initial" > Create Goals </div> -->
-        <app-add-post-menu style="color: #0674ec !important; margin-left: auto;" [label]="'Create Goals'"></app-add-post-menu>
+        <app-add-post-menu style="color: #0674ec !important; margin-left: auto;" [label]="'Create Goals'">
+        </app-add-post-menu>
       </a>
       <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'company', 'add-company']">
         <!-- <i style="font-size: 1.0rem !important;" class="vertical-align-middle fal fa-building fa-fw"></i> -->
 
-        <div class="line-height-initial" > Sales Accelerator </div>
+        <div class="line-height-initial"> Sales Accelerator </div>
       </a>
       <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'post', 'add-dreamjob']">
         <!-- <i style="font-size: 1.0rem !important;" class="vertical-align-middle fal fa-building fa-fw"></i> -->
 
-        <div class="line-height-initial" > Career Accelerator </div>
+        <div class="line-height-initial"> Career Accelerator </div>
       </a>
 
-     
+
       <!-- <app-add-post-menu style="color: black;"></app-add-post-menu> -->
       <!-- <app-software-dev-menu style="color: black;"></app-software-dev-menu> -->
-      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'about-us']"
-        [queryParams]="{all: true}">
-      <div class="line-height-initial"> About </div>
+      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'about-us']" [queryParams]="{all: true}">
+        <div class="line-height-initial"> About </div>
       </a>
-      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'membership']"
-        [queryParams]="{all: true}">
-      <div class="line-height-initial"> Membership </div>
-    </a>
+      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'membership']" [queryParams]="{all: true}">
+        <div class="line-height-initial"> Membership </div>
+      </a>
 
-    
-     
+
+
     </mat-toolbar>
 
     <!-- {{loggedInUser | json}} -->

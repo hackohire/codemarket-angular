@@ -11,6 +11,11 @@ import { Router } from '@angular/router';
 import { MatDialog, MatAnchor } from '@angular/material';
 import { SearchComponent } from '../search/search.component';
 import { CompanyPostTypes, UserProfilePostTypes, PostType } from '../../../shared/models/post-types.enum';
+import { MessageService } from '../../../shared/services/message.service';
+import { environment } from '../../../../environments/environment';
+import moment from 'moment';
+import { PostService } from '../../../shared/services/post.service';
+import { CompanyService } from '../../../companies/company.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -18,6 +23,10 @@ import { CompanyPostTypes, UserProfilePostTypes, PostType } from '../../../share
   styleUrls: ['./nav-bar.component.scss'],
 })
 export class NavBarComponent implements OnInit, OnDestroy {
+
+  anonymousAvatar = '../../../../assets/images/anonymous-avatar.jpg';
+  s3FilesBucketURL = environment.s3FilesBucketURL;
+
   @ViewChild('lr', {static: false}) lr: MatAnchor;
   companyPostTypes = CompanyPostTypes;
   userProfilePostTypes = UserProfilePostTypes;
@@ -59,6 +68,8 @@ export class NavBarComponent implements OnInit, OnDestroy {
 
   cartListLength: Observable<number>;
 
+  messagesPageNumber = 1;
+
   private subscription: Subscription = new Subscription();
 
   constructor(
@@ -66,7 +77,10 @@ export class NavBarComponent implements OnInit, OnDestroy {
     private store: Store<AppState>,
     public authService: AuthService,
     private router: Router,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    public messageService: MessageService,
+    public postService: PostService,
+    private companyService: CompanyService
     ) {
   }
 
@@ -96,6 +110,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
         if (u) {
           // this.ref.detach();
           this.loggedInUser = {...u};
+          this.messageService.fetchLatestCommentsForTheUserEngaged(null, u._id);
           // this.ref.detectChanges();
         } else {
           this.loggedInUser = u;
@@ -131,10 +146,28 @@ export class NavBarComponent implements OnInit, OnDestroy {
     this.router.navigate(['/']);
   }
 
+  redirectToPost(m) {
+    m['__show'] = false;
+    if (m.referencePost) {
+      this.postService.redirectToPostDetails(m.referencePost, m._id);
+    } else if (m.companyPost) {
+      this.companyService.redirectToCompanyDetails(m.companyPost._id);
+    }
+  }
+
+  isUnread(messages) {
+    return messages.find(m => m.__show);
+  }
+
   openSearchDialog(): void {
     const dialogRef = this.dialog.open(SearchComponent, {
       panelClass: 'no-padding',
       disableClose: false
     });
+  }
+
+  fromNow(date) {
+    const d = moment(date).isValid() ? date : new Date(+date);
+    return moment(d).fromNow();
   }
 }

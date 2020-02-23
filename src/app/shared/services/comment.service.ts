@@ -93,7 +93,7 @@ export class CommentService {
         mutation: gql`
           mutation addComment($comment: CommentInput) {
             addComment(comment: $comment) {
-              ...Comment
+              ...Comments
             }
           }
           ${this.commentSchema}
@@ -113,7 +113,7 @@ export class CommentService {
     const COMMENTS_SUBSCRIPTION = gql`
     subscription onCommentAdded($postId: String, $companyId: String, $userId: String) {
       onCommentAdded(postId: $postId, companyId: $companyId, userId: $userId){
-        ...Comment
+        ...Comments
       }
     }
     ${this.commentSchema}
@@ -205,7 +205,7 @@ export class CommentService {
         let el = this.document.getElementById(`${c._id}`);
         el.scrollIntoView({block: 'center', behavior: 'smooth', inline: 'center'}); /** scroll to the element upto the center */
         el.style.border = '2px solid #00aeef'; /** Highlighting the element */
-      }, c.blockSpecificComment ? 500 : 0);
+      }, c.blockSpecificComment ? 1000 : 0);
     }
   }
 
@@ -216,7 +216,7 @@ export class CommentService {
           query: gql`
             query getCommentsByReferenceId($referenceId: String) {
               getCommentsByReferenceId(referenceId: $referenceId) {
-                ...Comment
+                ...Comments
               }
             }
             ${this.commentSchema}
@@ -236,7 +236,7 @@ export class CommentService {
 
           /** If comment Id is passed scroll down to the comment */
           if (comments && comments.length && commentId) {
-            const comment = comments.find(c => c._id === commentId);
+            const comment = comments.find(c => c._id === commentId || c.children.find(ch => ch._id === commentId));
             this.scrollToComment(post.description, comment);
           }
         })
@@ -334,7 +334,7 @@ export class CommentService {
     const COMMENT_UPDATE_SUBSCRIPTION = gql`
     subscription onCommentUpdated($postId: String, $companyId: String, $userId: String) {
       onCommentUpdated(postId: $postId, companyId: $companyId, userId: $userId){
-        ...Comment
+        ...Comments
       }
     }
     ${this.commentSchema}

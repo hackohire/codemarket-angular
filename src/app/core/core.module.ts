@@ -62,7 +62,7 @@ export function clearState(reducer) {
     // StoreDevtoolsModule.instrument(),
   ],
   providers: [
-    AmplifyService,    
+    AmplifyService, 
     {
       provide: REDUCER_TOKEN,
       useValue: appReducesrs()

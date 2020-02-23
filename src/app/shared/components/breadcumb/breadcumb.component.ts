@@ -4,6 +4,7 @@ import { Company } from '../../models/company.model';
 import { FormControl, Validators } from '@angular/forms';
 import { environment } from '../../../../environments/environment';
 import { PostService } from '../../services/post.service';
+import { SearchComponent } from 'src/app/core/components/search/search.component';
 
 @Component({
   selector: 'app-breadcumb',
@@ -21,7 +22,8 @@ export class BreadcumbComponent implements OnInit {
   @Input('showMenu') showMenu = true;
   @Input('showImportButton') showImportButton = false;
   @Input('showEditPostDetails') showEditPostDetails: boolean;
-
+  @Input('showAddCollaborators') showAddCollaborators: boolean;
+  
   @Output() editPost = new EventEmitter();
 
   articleLink = new FormControl('', Validators.required)

@@ -52,6 +52,7 @@ export class AutocompleteComponent implements OnInit, OnDestroy {
           ))
         )
     );
+    console.log("123 ==> ", this.items$)
   }
 
   /** Destroy the subscription */

@@ -6267,18 +6267,18 @@ h6 {
 }
 
 .dropdowns.notification--dropdown {
-  width: 370px;
+  width: auto;
   padding: 0;
   left: -15px;
 }
 
 .dropdowns.notification--dropdown:before {
   bottom: 100%;
-  left: 30px;
+  left: 15px;
 }
 
 .dropdowns.notification--dropdown .notifications_module .notification {
-  padding: 20px 25px 15px;
+  padding: 10px 15px 10px;;
 }
 
 .dropdowns.notification--dropdown
@@ -6586,7 +6586,7 @@ h6 {
 
 .dropdowns .dropdown_module_header {
   overflow: hidden;
-  padding: 20px 25px;
+  padding: 10px 15px;
   border-bottom: 1px solid #ececec;
 }
 
@@ -8321,6 +8321,8 @@ ul.nav-tabs.nav--tabs2 li a::before {
 }
 
 .author__notification_area ul li .notification_count {
+  display: inline-flex;
+  align-items: center;
   height: 22px;
   -webkit-border-radius: 50%;
   border-radius: 50%;
@@ -8376,7 +8378,7 @@ ul.nav-tabs.nav--tabs2 li a::before {
 .has_dropdown:hover .dropdowns {
   visibility: visible;
   opacity: 1;
-  top: 100%;
+  // top: 100%;
 }
 
 /* start mainenu area css */
@@ -11833,6 +11835,10 @@ ul.nav-tabs.nav--tabs2 li a::before {
 /***************************************
 	START NOTIFICATIONS AREA
 ****************************************/
+.notifications_module {
+  overflow-y: scroll;
+  height: 600px;
+}
 .notifications_module .notification {
   overflow: hidden;
   padding: 20px 30px;
@@ -11888,6 +11894,7 @@ ul.nav-tabs.nav--tabs2 li a::before {
   -webkit-border-radius: 50%;
   border-radius: 50%;
   width: 100%;
+  height: -webkit-fill-available;
 }
 
 .notifications_module .notification .notification__info .info_avatar,

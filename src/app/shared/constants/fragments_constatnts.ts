@@ -152,7 +152,7 @@ export const description = gql`
     ${linkToolFragment}
 `;
 
-export const comment = gql`
+const CommentFragment = gql`
 fragment Comment on Comment {
   text {
     ...Description
@@ -176,29 +176,30 @@ fragment Comment on Comment {
       }
     }
   }
-  children {
-    _id
-    text {
-      ...Description
-    }
-    createdAt
-    createdBy {
-      _id
-      name
-      avatar
-      currentJobDetails {
-        jobProfile {
-          name
-          _id
-          type
-        }
-      }
-    }
-    parentId
-    referenceId
-  }
   blockId
   blockSpecificComment
+
+  referencePost {
+    name
+    _id
+    type
+    slug
+  }
+  referenceCompany {
+    name
+    _id
+    type
+  }
 }
 ${description}
+`;
+
+export const comment = gql`
+fragment Comments on Comment {
+  ...Comment
+  children {
+    ...Comment
+  }
+}
+${CommentFragment}
 `;

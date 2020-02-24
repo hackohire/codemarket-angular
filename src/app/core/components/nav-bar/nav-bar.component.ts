@@ -13,9 +13,7 @@ import { SearchComponent } from '../search/search.component';
 import { CompanyPostTypes, UserProfilePostTypes, PostType } from '../../../shared/models/post-types.enum';
 import { MessageService } from '../../../shared/services/message.service';
 import { environment } from '../../../../environments/environment';
-import moment from 'moment';
 import { PostService } from '../../../shared/services/post.service';
-import { CompanyService } from '../../../companies/company.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -23,9 +21,6 @@ import { CompanyService } from '../../../companies/company.service';
   styleUrls: ['./nav-bar.component.scss'],
 })
 export class NavBarComponent implements OnInit, OnDestroy {
-
-  anonymousAvatar = '../../../../assets/images/anonymous-avatar.jpg';
-  s3FilesBucketURL = environment.s3FilesBucketURL;
 
   @ViewChild('lr', {static: false}) lr: MatAnchor;
   companyPostTypes = CompanyPostTypes;
@@ -79,8 +74,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
     private router: Router,
     private dialog: MatDialog,
     public messageService: MessageService,
-    public postService: PostService,
-    private companyService: CompanyService
+    public postService: PostService
     ) {
   }
 
@@ -146,15 +140,6 @@ export class NavBarComponent implements OnInit, OnDestroy {
     this.router.navigate(['/']);
   }
 
-  redirectToPost(m) {
-    m['__show'] = false;
-    if (m.referencePost) {
-      this.postService.redirectToPostDetails(m.referencePost, m._id);
-    } else if (m.companyPost) {
-      this.companyService.redirectToCompanyDetails(m.companyPost._id);
-    }
-  }
-
   isUnread(messages) {
     return messages.find(m => m.__show);
   }
@@ -164,10 +149,5 @@ export class NavBarComponent implements OnInit, OnDestroy {
       panelClass: 'no-padding',
       disableClose: false
     });
-  }
-
-  fromNow(date) {
-    const d = moment(date).isValid() ? date : new Date(+date);
-    return moment(d).fromNow();
   }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { PostService } from '../../services/post.service';
-
+import { selectSelectedPost } from '../../../core/store/selectors/post.selectors';
 @Component({
   selector: 'app-add-collaborators',
   templateUrl: './add-collaborators.component.html',

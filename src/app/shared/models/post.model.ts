@@ -15,10 +15,6 @@ interface Support {
     };
 }
 
-interface Collaborator {
-    _id: string;
-    name: string
-}
 export interface Post {
     name?: string;
     description?: [{
@@ -95,5 +91,5 @@ export interface Post {
     connectedEvent?: Event | string;
 
     /** Field for collaborator */
-    collaborators?: [Collaborator]
+    collaborators?: [User]
 }

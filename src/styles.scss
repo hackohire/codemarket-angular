@@ -8320,7 +8320,7 @@ ul.nav-tabs.nav--tabs2 li a::before {
   position: relative;
 }
 
-.author__notification_area ul li .notification_count {
+.notification_count {
   display: inline-flex;
   align-items: center;
   height: 22px;
@@ -8336,12 +8336,12 @@ ul.nav-tabs.nav--tabs2 li a::before {
   right: 0;
   min-width: 22px;
   text-align: center;
-  -webkit-transform: translate(50%, -50%);
-  -ms-transform: translate(50%, -50%);
-  transform: translate(50%, -50%);
+  -webkit-transform: translate(-150%, 0%);
+  -ms-transform: translate(-150%, 0%);
+  transform: translate(-150%, 0%);
 }
 
-.author__notification_area ul li .notification_count.noti {
+.notification_count.noti {
   background: #ff6a6d;
 }
 
@@ -11835,10 +11835,10 @@ ul.nav-tabs.nav--tabs2 li a::before {
 /***************************************
 	START NOTIFICATIONS AREA
 ****************************************/
-.notifications_module {
-  overflow-y: scroll;
-  height: 600px;
-}
+// .notifications_module {
+//   overflow-y: scroll;
+//   height: 600px;
+// }
 .notifications_module .notification {
   overflow: hidden;
   padding: 20px 30px;

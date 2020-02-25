@@ -4,7 +4,10 @@
         =================================-->
     <app-breadcumb (editPost)="postService?.editPost(details)"
         [showEditPostDetails]="details?.createdBy?._id === authService?.loggedInUser?._id ? true : false"
-        [title]="details?.name" [path]="breadcumb?.path" [eventDate]="details?.dateRange" [postDetails]="details">
+        [title]="details?.name" [path]="breadcumb?.path" [eventDate]="details?.dateRange" [postDetails]="details"
+        [showAddCollaborators]="details?.createdBy?._id === authService?.loggedInUser?._id ? true : false"
+        [postDetails]="details"
+        >
     </app-breadcumb>
 
     <!--================================

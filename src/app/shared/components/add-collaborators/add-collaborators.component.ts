@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { PostService } from '../../services/post.service';
-import { selectSelectedPost } from '../../../core/store/selectors/post.selectors';
 @Component({
   selector: 'app-add-collaborators',
   templateUrl: './add-collaborators.component.html',
@@ -9,21 +8,28 @@ import { selectSelectedPost } from '../../../core/store/selectors/post.selectors
 })
 export class AddCollaboratorsComponent implements OnInit {
 
+  @Input() postDetails;
+
   public addCollaboratorForm = new FormGroup({
     collaborators : new FormControl('', Validators.required)
   })
 
   
   constructor(
-    private postService: PostService
+    private postService: PostService,
   ) { }
 
   ngOnInit() {
+    if (this.postDetails.collaborators && this.postDetails.collaborators.length > 0) {
+      this.addCollaboratorForm.controls.collaborators.setValue(this.postDetails.collaborators);
   }
-
+ }
+ 
   addCollaborators() {
-    console.log(this.addCollaboratorForm.value);
-    const collaboratorsObj = {...this.addCollaboratorForm.value};
+    const collaboratorsObj = {
+      _id: this.postDetails._id,
+      ...this.addCollaboratorForm.value
+    };
     this.postService.updatePost(collaboratorsObj).subscribe((j) => {
       
     })

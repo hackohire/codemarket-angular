@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { Tag } from '../models/product.model';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
-import { map } from 'rxjs/internal/operators/map';
+import { map } from 'rxjs/operators/map';
 import { environment } from '../../../environments/environment';
 import { PostService } from './post.service';
 

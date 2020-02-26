@@ -4,7 +4,7 @@ import { BreadCumb } from '../shared/models/bredcumb.model';
 import { AuthService } from '../core/services/auth.service';
 import { environment } from '../../environments/environment';
 import { ActivatedRoute } from '@angular/router';
-import { first } from 'rxjs/internal/operators/first';
+import { first } from 'rxjs/operators/first';
 import { HttpClient } from '@angular/common/http';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { MatDialog } from '@angular/material';

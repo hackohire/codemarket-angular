@@ -3,7 +3,7 @@ import { Hub } from '@aws-amplify/core';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { map, catchError, tap, take } from 'rxjs/operators';
-import { of } from 'rxjs/internal/observable/of';
+import { of } from 'rxjs/observable/of';
 import { CognitoUser, CognitoUserSession } from 'amazon-cognito-identity-js';
 import Auth from '@aws-amplify/auth';
 import { environment } from 'src/environments/environment';

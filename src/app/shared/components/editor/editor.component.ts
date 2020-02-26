@@ -26,7 +26,7 @@ const path = require('path');
 import editorJS from '../../../editor-js/dist/editor';
 import EditorJS from '@editorjs/editorjs';
 import { PostService } from '../../services/post.service';
-import { Subscription } from 'rxjs/internal/Subscription';
+import { Subscription } from 'rxjs/Subscription';
 @Component({
   selector: 'app-editor',
   templateUrl: './editor.component.html',

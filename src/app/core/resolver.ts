@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Resolve } from '@angular/router';
 import { ActivatedRouteSnapshot } from '@angular/router';
 import { PostService } from '../shared/services/post.service';
-import { of } from 'rxjs/internal/observable/of';
+import { of } from 'rxjs/observable/of';
 import { tap } from 'rxjs/operators/tap';
 import { Store } from '@ngrx/store';
 import { AppState } from './store/state/app.state';

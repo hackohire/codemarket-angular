@@ -1,8 +1,8 @@
 import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { Apollo, QueryRef } from 'apollo-angular';
 import gql from 'graphql-tag';
-import { Observable } from 'rxjs/internal/Observable';
-import { map } from 'rxjs/internal/operators/map';
+import { Observable } from 'rxjs/Observable';
+import { map } from 'rxjs/operators/map';
 import { description, comment } from 'src/app/shared/constants/fragments_constatnts';
 import { tap, take } from 'rxjs/operators';
 import { BehaviorSubject, Subscription } from 'rxjs';

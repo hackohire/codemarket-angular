@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
-import { map } from 'rxjs/internal/operators/map';
+import { map } from 'rxjs/operators/map';
 import { AuthService } from '../../core/services/auth.service';
 
 @Injectable({

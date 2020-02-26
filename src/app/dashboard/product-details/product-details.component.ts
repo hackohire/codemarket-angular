@@ -4,7 +4,7 @@ import { Product } from 'src/app/shared/models/product.model';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/core/store/state/app.state';
 import { ActivatedRoute } from '@angular/router';
-import { tap } from 'rxjs/internal/operators/tap';
+import { tap } from 'rxjs/operators/tap';
 import { BreadCumb } from 'src/app/shared/models/bredcumb.model';
 import { AddToCart } from 'src/app/core/store/actions/cart.actions';
 import { ProductService } from 'src/app/core/services/product.service';

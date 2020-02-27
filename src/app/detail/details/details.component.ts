@@ -48,7 +48,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
   commentForm: FormGroup;
   commentsList: any[];
-
+  collaborators: String[];
   peer: Peer;
 
   commentId: string;
@@ -104,6 +104,9 @@ export class DetailsComponent implements OnInit, OnDestroy {
       tap((p: Post) => {
         if (p) {
           this.postDetails = p;
+          this.collaborators = this.postDetails.collaborators.map((cDetail) => {
+            return cDetail._id;
+          })
           this.details$ = of(p);
           this.initializeCommentForm(p, 'post');
 

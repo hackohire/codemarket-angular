@@ -42,7 +42,7 @@ export class EventDetailsComponent implements OnInit, OnDestroy {
   view: string;
 
   navLinkName = navLinkName;
-
+  collaborators: String[];
   postTypes = PostType;
 
   @ViewChild('coverPic', { static: false }) coverPic;
@@ -131,6 +131,9 @@ export class EventDetailsComponent implements OnInit, OnDestroy {
       tap((p: Post) => {
         if (p) {
           this.details = p;
+          this.collaborators = this.details.collaborators.map((cDetail) => {
+            return cDetail._id;
+          })
           this.initializeCommentForm(p, 'post');
           this.fetchPostsConnectedWithEvent(p);
 

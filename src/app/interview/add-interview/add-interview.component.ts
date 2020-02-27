@@ -133,7 +133,7 @@ export class AddInterviewComponent implements OnInit {
       description: new FormControl(i && i.description ? i.description : ''),
       price: new FormControl(i && i.price ? i.price : 0, Validators.required),
       jobProfile: new FormControl(i && i.jobProfile ? i.jobProfile : ''),
-      company: new FormControl(i && i.company ? i.company : ''),
+      company: new FormControl(i && i.company ? i.company : null),
       createdBy: new FormControl(i && i.createdBy && i.createdBy._id ? i.createdBy._id : ''),
       // categories: new FormControl(i && i.categories ? i.categories : []),
       status: new FormControl(i && i.status ? i.status : PostStatus.Drafted),

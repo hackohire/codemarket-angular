@@ -195,6 +195,11 @@ const routes: Routes = [
     component: AboutUsComponent
   },
 
+  {
+    path: 'messages',
+    loadChildren: () => import('./core/messages/messages.module').then(module => module.MessagesModule),
+  },
+
   /** Static routes starts here */
    {
     path: 'innovate',

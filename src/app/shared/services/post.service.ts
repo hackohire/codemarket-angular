@@ -1,14 +1,12 @@
 import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { Observable } from 'rxjs';
 import gql from 'graphql-tag';
-import { map, catchError, tap } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 import { Apollo } from 'apollo-angular';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { AppState } from '../../core/store/state/app.state';
 import { Post } from '../models/post.model';
-import { SetSelectedPost } from '../../core/store/actions/post.actions';
-import { productConstants } from '../constants/product_constants';
 import { AuthService } from '../../core/services/auth.service';
 import { of } from 'rxjs/observable/of';
 import { PostType } from '../models/post-types.enum';
@@ -209,28 +207,28 @@ export class PostService {
     );
   }
 
-  redirectToPostDetails(post, setSelectedPost?: boolean): void {
+  redirectToPostDetails(post, commentId = ''): void {
     // this.store.dispatch(SetSelectedPost({ post: null }));
 
     if (post.type === PostType.Dreamjob) {
-      this.redirectToDreamJobDetails(post);
+      this.redirectToDreamJobDetails(post, commentId);
     } else if (post.type === PostType.Event) {
-      this.redirectToEventDetails(post);
+      this.redirectToEventDetails(post, commentId);
     } else {
       this.router.navigate(['/',
       post.type === PostType.Product ? PostType.Product : 'post',
       post.slug ? post.slug : ''
     ],
-      { queryParams: { type: post.type } });
+      { queryParams: { type: post.type, commentId} });
     }
   }
 
-  redirectToDreamJobDetails(dreamJob): void {
-    this.router.navigate(['/', PostType.Dreamjob, dreamJob.slug]);
+  redirectToDreamJobDetails(dreamJob, commentId = ''): void {
+    this.router.navigate(['/', PostType.Dreamjob, dreamJob.slug], { queryParams: { commentId} });
   }
 
-  redirectToEventDetails(event): void {
-    this.router.navigate(['/', PostType.Event, event.slug]);
+  redirectToEventDetails(event, commentId = ''): void {
+    this.router.navigate(['/', PostType.Event, event.slug], { queryParams: { commentId} });
   }
 
   editPost(post): void {

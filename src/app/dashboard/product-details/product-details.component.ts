@@ -41,7 +41,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
   s3FilesBucketURL = environment.s3FilesBucketURL;
 
   commentsList: any[];
-  collaborators: String[];
+  collaborators: string[];
   breadcumb: BreadCumb;
 
   commentForm: FormGroup;

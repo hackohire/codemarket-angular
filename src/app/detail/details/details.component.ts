@@ -48,7 +48,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
   commentForm: FormGroup;
   commentsList: any[];
-  collaborators: String[];
+  collaborators: string[];
   peer: Peer;
 
   commentId: string;

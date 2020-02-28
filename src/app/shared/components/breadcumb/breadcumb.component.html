@@ -13,6 +13,9 @@
                         </li>
                     </ul>
                     <div style="margin-left: auto;">
+
+                        <app-add-collaborators *ngIf="showAddCollaborators" [postDetails]="postDetails"></app-add-collaborators>
+
                         <a *ngIf="showImportButton" class="btn btn--sm btn--round menu"
                             style="color: #0674ec !important; background: white;" [mdePopoverTriggerFor]="importArticle"
                             [mdePopoverTargetAt]="lr" mdePopoverTriggerOn="click">Import

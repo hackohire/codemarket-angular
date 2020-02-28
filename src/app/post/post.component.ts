@@ -314,6 +314,48 @@ export class PostComponent implements OnInit {
         type: CompanyPostTypes.CompanyPost
       },
 
+      /** Customer Template */
+      {
+        path: 'post-list',
+        label: 'Customer Template List',
+        queryParams: { type: CompanyPostTypes.CustomerTemplate, all: false },
+        type: CompanyPostTypes.CustomerTemplate
+      },
+      {
+        path: 'add-' + CompanyPostTypes.CustomerTemplate,
+        label: 'Add ' + CompanyPostTypes.CustomerTemplate,
+        queryParams: { type: CompanyPostTypes.CustomerTemplate },
+        type: CompanyPostTypes.CustomerTemplate
+      },
+
+      /** Customer Profile */
+      {
+        path: 'post-list',
+        label: 'Customer Profile List',
+        queryParams: { type: CompanyPostTypes.CustomerProfile, all: false },
+        type: CompanyPostTypes.CustomerProfile
+      },
+      {
+        path: 'add-' + CompanyPostTypes.CustomerProfile,
+        label: 'Add ' + CompanyPostTypes.CustomerProfile,
+        queryParams: { type: CompanyPostTypes.CustomerProfile },
+        type: CompanyPostTypes.CustomerProfile
+      },
+
+      /** Competitive Advantage */
+      {
+        path: 'post-list',
+        label: 'Competitive Advantage List',
+        queryParams: { type: CompanyPostTypes.CompetitiveAdvantage, all: false },
+        type: CompanyPostTypes.CompetitiveAdvantage
+      },
+      {
+        path: 'add-' + CompanyPostTypes.CompetitiveAdvantage,
+        label: 'Add ' + CompanyPostTypes.CompetitiveAdvantage,
+        queryParams: { type: CompanyPostTypes.CompetitiveAdvantage },
+        type: CompanyPostTypes.CompetitiveAdvantage
+      },
+
       /** User Startup Goal */
       {
         path: 'post-list',

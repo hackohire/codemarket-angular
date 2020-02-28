@@ -14,6 +14,7 @@ interface Support {
         data: BlockToolData
     };
 }
+
 export interface Post {
     name?: string;
     description?: [{
@@ -88,4 +89,7 @@ export interface Post {
     likeCount?: number;
     comments?: Comment[];
     connectedEvent?: Event | string;
+
+    /** Field for collaborator */
+    collaborators?: [User]
 }

@@ -7,8 +7,10 @@
     =================================-->
 
     <app-breadcumb (editPost)="postService?.editPost(details)"
-        [showEditPostDetails]="details?.createdBy?._id === authService?.loggedInUser?._id ? true : false"
-        [title]="details?.name" [path]="breadcumb?.path" [postDetails]="details">
+        [showEditPostDetails]="(details?.createdBy?._id === authService?.loggedInUser?._id || collaborators.indexOf(authService?.loggedInUser?._id) >= 0) ? true : false"
+        [title]="details?.name" [path]="breadcumb?.path" [postDetails]="details"
+        [showAddCollaborators]="details?.createdBy?._id === authService?.loggedInUser?._id ? true : false"
+        [postDetails]="details">
     </app-breadcumb>
 
     <!--================================

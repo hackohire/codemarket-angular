@@ -293,6 +293,42 @@ const postRoutes: Routes = [
           .then(module => module.AddCompanyPostModule),
       },
 
+      /** Add Customer Template */
+      {
+        path: `add-${CompanyPostTypes.CustomerTemplate}`,
+        loadChildren: () => import('../customer-template/add-customer-template/add-customer-template.module')
+        .then(module => module.AddCustomerTemplateModule),
+      },
+      {
+        path: `edit-${CompanyPostTypes.CustomerTemplate}/:postId`,
+        loadChildren: () => import('../customer-template/add-customer-template/add-customer-template.module')
+        .then(module => module.AddCustomerTemplateModule),
+      },
+
+      /** Add Customer Profile */
+      {
+        path: `add-${CompanyPostTypes.CustomerProfile}`,
+        loadChildren: () => import('../customer-profile/add-customer-profile/add-customer-profile.module')
+        .then(module => module.AddCustomerProfileModule),
+      },
+      {
+        path: `edit-${CompanyPostTypes.CustomerProfile}/:postId`,
+        loadChildren: () => import('../customer-profile/add-customer-profile/add-customer-profile.module')
+        .then(module => module.AddCustomerProfileModule),
+      },
+      
+      /** Add Competitive Advantage */
+      {
+        path: `add-${CompanyPostTypes.CompetitiveAdvantage}`,
+        loadChildren: () => import('../competitive-advantage/add-competitive-advantage/add-competitive-advantage.module')
+        .then(module => module.AddCompetitiveAdvantageModule),
+      },
+      {
+        path: `edit-${CompanyPostTypes.CompetitiveAdvantage}/:postId`,
+        loadChildren: () => import('../competitive-advantage/add-competitive-advantage/add-competitive-advantage.module')
+        .then(module => module.AddCompetitiveAdvantageModule),
+      },
+
       /** Add User Startup Goal */
       {
         path: `add-${UserProfilePostTypes.StartupGoal}`,

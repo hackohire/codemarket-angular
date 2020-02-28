@@ -345,6 +345,10 @@ export const appConstants = {
         ...Description
       }
 
+      collaborators {
+        _id
+        name
+      }
 
       jobProfile {
         _id

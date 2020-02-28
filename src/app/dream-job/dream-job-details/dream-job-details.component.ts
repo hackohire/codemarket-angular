@@ -30,6 +30,8 @@ export class DreamJobDetailsComponent implements OnInit, OnDestroy {
 
   details$: Observable<Post>;
 
+  collaborators: string[];
+
   postDetails: Post;
   isUserAttending: boolean; /** Only for the event */
   subscription$: Subscription = new Subscription();
@@ -44,7 +46,7 @@ export class DreamJobDetailsComponent implements OnInit, OnDestroy {
 
   commentId: string;
 
-  connectedJobsList = []
+  connectedJobsList = [];
 
   dreamJobView = '';
   dreamJobViewLinks = [

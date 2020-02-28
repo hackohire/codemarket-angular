@@ -46,5 +46,6 @@ export interface Product {
     tags: Tag[];
     support: Support;
     purchasedBy?: User [];
+    collaborators: any ;
     // addedToCart?: boolean;
 }

@@ -41,7 +41,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
   s3FilesBucketURL = environment.s3FilesBucketURL;
 
   commentsList: any[];
-
+  collaborators: string[];
   breadcumb: BreadCumb;
 
   commentForm: FormGroup;
@@ -103,7 +103,9 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
       tap((p: Product) => {
         if (p) {
           this.productDetails = p;
-
+          this.collaborators = this.productDetails.collaborators.map((cDetail) => {
+            return cDetail._id;
+          })
           this.productDetails$ = of(p);
 
           this.subscription$.add(

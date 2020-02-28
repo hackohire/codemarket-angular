@@ -37,6 +37,8 @@ export class AutocompleteComponent implements OnInit, OnDestroy {
 
   @Input() forCompany = false;
 
+  @Input() allowToAdd = true;
+
   constructor(
     private formService: FormService,
     private companyService: CompanyService,
@@ -64,7 +66,9 @@ export class AutocompleteComponent implements OnInit, OnDestroy {
 
   /** Add the value if not available */
   public add = (name) => {
-    return this.formService.addToCollection(name, this.collection, this.type).toPromise();
+    if (this.allowToAdd) {
+      return this.formService.addToCollection(name, this.collection, this.type).toPromise();
+    }
   }
 
   addCompany = (name: string) => {

@@ -1,0 +1,258 @@
+@import '../../../assets/css/theme';
+
+
+.item-grid {
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+
+
+.item-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  -webkit-box-align: start;
+  -webkit-align-items: start;
+  -ms-flex-align: start;
+  align-items: start;
+  justify-items: center;
+  grid-gap: 0rem 3rem;
+}
+@media (min-width: 1101px) {
+  .item-grid {
+    grid-template-columns: repeat(auto-fill, minmax(90%, 1fr));
+  }
+}
+
+.item-grid,
+.item-grid,
+.item-grid {
+  grid-gap: 6rem 3rem;
+  margin-bottom: 5rem;
+}
+.item-grid .full-width {
+  grid-column: 1 / 4;
+}
+.item-grid-large {
+  display: grid;
+  -webkit-box-align: start;
+  -webkit-align-items: start;
+  -ms-flex-align: start;
+  align-items: start;
+  justify-items: center;
+  grid-gap: 0rem 3rem;
+}
+@media (max-width: 1280px) {
+  .item-grid-large {
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  }
+  .item-grid-large > :nth-child(6n + 1),
+  .item-grid-large > :nth-child(6n + 5) {
+    grid-row: span 2;
+  }
+  .item-grid-large > :nth-child(6n + 1) .item-content,
+  .item-grid-large > :nth-child(6n + 5) .item-content {
+    display: none;
+  }
+  .item-grid-large > :nth-child(6n + 1) .item-content-long,
+  .item-grid-large > :nth-child(6n + 5) .item-content-long {
+    display: block;
+  }
+}
+@media (min-width: 1281px) {
+  .item-grid-large {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .item-grid-large > :nth-child(12n + 1),
+  .item-grid-large > :nth-child(12n + 5),
+  .item-grid-large > :nth-child(12n + 9) {
+    grid-row: span 2;
+  }
+  .item-grid-large > :nth-child(12n + 1) .item-content,
+  .item-grid-large > :nth-child(12n + 5) .item-content,
+  .item-grid-large > :nth-child(12n + 9) .item-content {
+    display: none;
+  }
+  .item-grid-large > :nth-child(12n + 1) .item-content-long,
+  .item-grid-large > :nth-child(12n + 5) .item-content-long,
+  .item-grid-large > :nth-child(12n + 9) .item-content-long {
+    display: block;
+  }
+}
+
+.video {
+  height: 0;
+  position: relative;
+}
+.video iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+th.mat-sort-header-sorted {
+  color: black;
+}
+table {
+  width: 100%;
+}
+
+tr.example-detail-row {
+  height: 0;
+}
+
+tr.example-product-row:not(.example-expanded-row):hover {
+  background: #777;
+}
+
+tr.example-product-row:not(.example-expanded-row):active {
+  background: #efefef;
+}
+
+.example-product-row td {
+  border-bottom-width: 0;
+}
+
+.example-product-detail {
+  overflow: hidden;
+  display: flex;
+}
+
+.example-product-diagram {
+  min-width: 80px;
+  border: 2px solid black;
+  padding: 8px;
+  font-weight: lighter;
+  margin: 8px 0;
+  height: 104px;
+}
+
+.example-product-symbol {
+  font-weight: bold;
+  font-size: 40px;
+  line-height: normal;
+}
+
+.example-product-description {
+  padding: 16px;
+}
+
+.example-product-description-attribution {
+  opacity: 0.5;
+}
+
+
+
+// Side Navbar CSS Starts here
+.docs-component-viewer-nav-content {
+  background: rgba(0, 0, 0, 0.03);
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, .26);
+  }
+
+  .docs-nav-content-btn {
+    color: rgba(0,0,0,.5);
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+
+    &:focus {
+      // override the default background
+      background: rgba(0, 0, 0, 0.08);
+    }
+  }
+
+  hr {
+    border: none;
+    border-top: 1px solid rgba(0,0,0,.1);
+  }
+
+  a {
+    color: rgba(0,0,0,.54);
+
+    &.docs-component-viewer-sidenav-item-selected,
+    &:hover {
+      color: $pcolor !important;
+    }
+
+    &.docs-component-viewer-sidenav-item-selected {
+      background: rgba(0, 0, 0, 0.08);
+    }
+  }
+}
+
+
+
+.docs-component-viewer-nav {
+  position: sticky;
+  top: 25px;
+
+  .docs-component-viewer-nav-content {
+    // margin: 25px;
+    // width: $sidenav-width;
+    max-height: 75vh;
+    overflow: auto;
+
+    &::-webkit-scrollbar {
+      height: 4px;
+      width: 4px;
+    }
+
+    .category {
+      padding: 10px 15px;
+      font-weight: 700;
+      line-height: 16px;
+      margin: 0;
+      font-size: 13px;
+      cursor: pointer;
+      position: relative;
+      display: block;
+      width: 100%;
+      text-align: left;
+      background: none;
+      border: none;
+
+      &:focus {
+        outline: none;
+      }
+
+      .mat-icon {
+        position: absolute;
+        right: 5px;
+        font-size: 18px;
+      }
+
+      &.docs-component-viewer-sidenav-item-selected,
+      &:hover {
+        color: $pcolor;
+      }
+    }
+
+    hr {
+      padding: 0;
+      margin: 0;
+    }
+
+    ul {
+      list-style-type: none;
+      margin: 0 0 5px 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    li {
+      font-size: 13px;
+      line-height: 16px;
+      margin: 0;
+      padding: 5px 15px 5px 20px;
+    }
+
+    a {
+      display: block;
+      text-decoration: none;
+      color: rgba(0,0,0,.54);
+    }
+  }
+}
+
+// Side Navbar CSS Ends here

@@ -1,0 +1,49 @@
+<!-- <div class="col-md-12"> -->
+    <div class="single_product clearfix" *ngIf="product">
+        <div class="col-lg-5 col-md-7 v_middle" (click)="postService.redirectToPostDetails(product)">
+            <div class="product__description">
+                <!-- <img src="http://www.codemarket.io/wp-content/uploads/2019/07/developer.png" alt="Purchase image"> -->
+                <div class="short_desc">
+                    <a>
+                        <h4>{{product?.name}}</h4>
+                    </a>
+                    <!-- <p>{{product?.shortDescription ? product?.shortDescription : '-'}}</p> -->
+                </div>
+            </div>
+            <!-- end /.product__description -->
+        </div>
+        <!-- end /.col-md-5 -->
+
+        <div class="col-lg-3 col-md-2 v_middle">
+            <div class="product__additional_info">
+                <ul>
+                    <li>
+                        <!-- <a> -->
+                                <span *ngFor="let c of product?.tags; let ei = index">{{c?.name + (ei === product?.length - 1 ? '' : ', ' )}}</span>
+                            <!-- {{product?.category ? product?.category : '-'}} -->
+                        <!-- </a> -->
+                    </li>
+                </ul>
+            </div>
+            <!-- end /.product__additional_info -->
+        </div>
+        <!-- end /.col-md-3 -->
+
+        <div class="col-lg-4 col-md-3 v_middle">
+            <div class="product__price_download">
+                <div class="item_price v_middle">
+                    <span>{{(product?.price ? product?.price : '0') | currency}}</span>
+                </div>
+                <div class="item_action v_middle">
+                    <a class="remove_from_cart" (click)="removeProductFromCart(product._id)">
+                        <span class="lnr lnr-trash"></span>
+                    </a>
+                </div>
+                <!-- end /.item_action -->
+            </div>
+            <!-- end /.product__price_download -->
+        </div>
+        <!-- end /.col-md-4 -->
+    </div>
+    <!-- end /.single_product -->
+<!-- </div> -->

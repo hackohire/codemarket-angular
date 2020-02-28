@@ -1,0 +1,421 @@
+<div *ngIf="userData$ | async as user">
+	<!-- <app-breadcumb [title]="user?.name" [path]="breadcumb?.path"></app-breadcumb>  -->
+
+
+	<section style="padding-top: 35px;" class="author-profile-area">
+		<div class="container" style="margin: auto;">
+			<div class="container" style="margin-top: 0; margin-bottom: 15px;">
+
+				<div class="row">
+					<div class="col-lg-3 col-md-3 col-sm-3 align-items-center justify-content-center"
+						style="margin: auto;">
+						<div class="profile-picture">
+							<div class="user-info">
+								<div class="profile-pic">
+									<img
+										[src]="selectedProfilePicURL ? (selectedProfilePicURL | safe: 'resourceUrl') : user?.avatar ? ((s3FilesBucketURL + user?.avatar) | safe: 'resourceUrl') : anonymousAvatar" />
+									<div class="layer">
+										<div class="loader"></div>
+									</div>
+									<a class="image-wrapper">
+										<mat-icon class="edit glyphicon glyphicon-pencil" (click)="addProfilePic()">edit
+										</mat-icon>
+										<mat-icon class="edit glyphicon glyphicon-pencil"
+											(click)="removeProfilePic(user?._id)">delete</mat-icon>
+									</a>
+								</div>
+							</div>
+							<input type="file" #profilePic style="display: none" (change)="onProfilePicAdded()" />
+						</div>
+						<div style="display: flex;">
+							<button *ngIf="selectedProfilePic" style="margin: auto;" type="button"
+								class="btn btn--vsm btn--round"
+								(click)="updateProfilePicture(user?._id)">Update</button>
+						</div>
+						<h4 style="text-align: center; padding-top: 10px;">{{user?.name}}</h4>
+					</div>
+					<div class="col-lg-9 col-md-9 col-sm-9" style="padding: 0;">
+						<div class="picture-container" *ngIf="selectedCoverPic?.name || user?.cover">
+
+							<img #cover
+								[src]="selectedCoverPic ? (selectedCoverPicURL | safe: 'resourceUrl') : ((s3FilesBucketURL + user?.cover) | safe: 'resourceUrl')">
+
+							<div class="controls" *ngIf="user?._id === authService?.loggedInUser?._id">
+								<a mat-button style="background-color: #ff00007a;" (click)="removeCover(user?._id);"
+									class="save">Remove</a>
+								<a mat-button style="background-color: #0674ec" *ngIf="!user?.cover"
+									(click)="updateCover(user?._id)" class="save">Upload
+									Cover</a>
+							</div>
+
+						</div>
+						<div class="image-upload-wrap" style="height: 300px;"
+							*ngIf="user?._id === authService?.loggedInUser?._id && !selectedCoverPic && !user?.cover">
+							<input #coverPic class="file-upload-input" type='file' (change)="onFilesAdded()"
+								accept="image/*" />
+							<div class="drag-text">
+								<h3>Drag and drop a file or select add Image 685w x 300h</h3>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+
+				<!-- start aside -->
+				<div class="col-md-3">
+					<app-add-post-menu style="color: #0674ec !important; margin-left: auto;">
+					</app-add-post-menu>
+					<div class="docs-component-viewer-nav common-box-shadow"
+						style="margin-bottom: 20px; margin-top: 10px;">
+						<div class="docs-component-viewer-nav-content">
+							<div *ngFor="let category of profileViewLinks; let last = last;">
+								<button cdkAccordionItem #panel="cdkAccordionItem"
+									[expanded]="category?.types ? isExpanded(category) : false"
+									(click)="selectMainCategory(category, panel)" class="docs-nav-content-btn"
+									[ngClass]="profileView === category.view ? 'docs-component-viewer-sidenav-item-selected' : ''"
+									[attr.aria-controls]="'panel-' + category.view"
+									[attr.aria-expanded]="panel.expanded">
+									{{category.title}}
+									<mat-icon *ngIf="category?.types">
+										{{panel.expanded ? 'keyboard_arrow_up' :  'keyboard_arrow_down'}}
+									</mat-icon>
+								</button>
+								<mat-nav-list dense [@bodyExpansion]="panel.expanded ? 'expanded' : 'collapsed'"
+									id="panel-{{category.view}}" [attr.aria-label]="category.view">
+									<a mat-list-item *ngFor="let component of category?.types"
+										(click)="selectMainCategory(component, panel)"
+										[ngClass]="component.view === profileView ? 'docs-component-viewer-sidenav-item-selected': ''"
+										[attr.aria-current]="profileView === component.view ? 'page': 'false'">
+										{{component.title}}
+									</a>
+								</mat-nav-list>
+								<hr *ngIf="!last" />
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-lg-9 col-md-9">
+
+					<div class="row">
+						<div class="col-md-12">
+
+							<!-- POST EDITOR STARTS HERE -->
+							<div class="comment-form-area" style="padding: 0;">
+								<div class="media comment-form">
+									<div class="media-left">
+										<a [routerLink]="['/', 'dashboard', 'profile', authService?.loggedInUser?._id ]">
+											<img class="author_avatar_comment" style="height: 45px; width:45px;"
+												[src]="authService?.loggedInUser?.avatar ? ((s3FilesBucketURL + authService?.loggedInUser?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+												alt="Commentator Avatar">
+										</a>
+									</div>
+									<div class="media-body">
+										<div class="comment-reply-form">
+											<app-add-post-menu #addPostMenu
+												style="position: absolute; visibility: hidden;">
+											</app-add-post-menu>
+											<div (click)="addPostMenu.openMenu();" class="comment-reply-form">
+												<textarea placeholder="Add Post!"
+													style="background: white; height: 100px; padding: 20px 35px; width: 100%; min-height: 130px; border-radius: 6px;"></textarea>
+
+												<button style="float: right; margin-top: 10px; margin-bottom: 20px;"
+													type="button" class="btn btn--sm btn--round"
+													(click)="addPostMenu.openMenu();">Post</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- POST EDITOR ENDS HERE -->
+
+							<div *ngIf="profileView === navLinkName.buy">
+								<ng-container *ngTemplateOutlet="postTemplate; context: { postType: '' }">
+								</ng-container>
+								<router-outlet></router-outlet>
+							</div>
+
+							<div *ngIf="profileView === navLinkName.sell">
+								<ng-container *ngTemplateOutlet="postTemplate; context: { postType: '' }">
+								</ng-container>
+								<router-outlet></router-outlet>
+							</div>
+
+							<div *ngIf="profileView === navLinkName.membership">
+								<ng-container *ngTemplateOutlet="postTemplate; context: { postType: '' }">
+								</ng-container>
+								<router-outlet></router-outlet>
+							</div>
+
+							<div *ngIf="profileView === navLinkName.myrsvp">
+								<ng-container *ngTemplateOutlet="postTemplate; context: { postType: '' }">
+								</ng-container>
+								<router-outlet></router-outlet>
+							</div>
+
+							<div *ngIf="profileView === navLinkName.events" class="item-grid pen-grid item-grid-large">
+								<ng-container *ngTemplateOutlet="postTemplate; context: { postType: '' }">
+								</ng-container>
+								<app-brief-post style="width: 100%;" [p]="e"
+									*ngFor="let e of (listOfEvents$ | async)?.posts" [readMore]="true"></app-brief-post>
+							</div>
+
+							<div *ngIf="profileView === navLinkName.dreamjobs"
+								class="item-grid pen-grid item-grid-large">
+								<ng-container *ngTemplateOutlet="postTemplate; context: { postType: '' }">
+								</ng-container>
+								<app-brief-post style="width: 100%;" [p]="e"
+									*ngFor="let e of (listOfDreamJobs$ | async)?.posts" [readMore]="true"></app-brief-post>
+							</div>
+
+							<!-- Showing the list of posts for the posts tab, everytime user clicks on the "load more", we increase the page number and call
+							fetchAllOtherPosts method to fetch subsequent posts -->
+							<ng-container *ngIf="profileView === navLinkName.posts">
+								<ng-container *ngTemplateOutlet="postTemplate; context: { postType: '' }">
+								</ng-container>
+								<div class="item-grid pen-grid item-grid-large">
+									<app-brief-post style="width: 100%;" [p]="e"
+										*ngFor="let e of listOfAllOtherPosts?.posts" [readMore]="true"></app-brief-post>
+								</div>
+								<div class="pagination-area"
+									*ngIf="listOfAllOtherPosts?.posts?.length < totalOtherPosts">
+									<span style="text-decoration: underline; cursor: pointer;"
+										(click)="otherPostsPageNumber = otherPostsPageNumber + 1; fetchAllOtherPosts('')">+
+										Load
+										More{{'(' + (totalOtherPosts - listOfAllOtherPosts?.posts?.length) + ')'}}</span>
+								</div>
+							</ng-container>
+
+							<div *ngIf="profileView === navLinkName.businesschallenge">
+								<ng-container
+									*ngTemplateOutlet="postTemplate; context: { details: details, postType: navLinkName.businesschallenge }">
+								</ng-container>
+							</div>
+							<div *ngIf="profileView === navLinkName.leadershipchallenge ">
+								<ng-container
+									*ngTemplateOutlet="postTemplate; context: { details: details, postType: navLinkName.leadershipchallenge }">
+								</ng-container>
+							</div>
+							<div *ngIf="profileView === navLinkName.technicalchallenge ">
+								<ng-container
+									*ngTemplateOutlet="postTemplate; context: { details: details, postType: navLinkName.technicalchallenge }">
+								</ng-container>
+							</div>
+
+							<div *ngIf="profileView === navLinkName.technicalgoal ">
+								<ng-container
+									*ngTemplateOutlet="postTemplate; context: { details: details, postType: navLinkName.technicalgoal }">
+								</ng-container>
+							</div>
+							<div *ngIf="profileView === navLinkName.businessgoal ">
+								<ng-container
+									*ngTemplateOutlet="postTemplate; context: { details: details, postType: navLinkName.businessgoal }">
+								</ng-container>
+							</div>
+							<div *ngIf="profileView === navLinkName.startupgoal ">
+								<ng-container
+									*ngTemplateOutlet="postTemplate; context: { details: details, postType: navLinkName.startupgoal }">
+								</ng-container>
+							</div>
+							<div *ngIf="profileView === navLinkName.socialimpactgoal ">
+								<ng-container
+									*ngTemplateOutlet="postTemplate; context: { details: details, postType: navLinkName.socialimpactgoal }">
+								</ng-container>
+							</div>
+
+							<div *ngIf="profileView === navLinkName?.info && (userData$) | async as user">
+								<ng-container *ngTemplateOutlet="postTemplate; context: { postType: '' }">
+								</ng-container>
+								<div class="col-lg-12 col-md-12">
+									<aside class="common-box-shadow sidebar sidebar_author">
+										<div class="author-card sidebar-card">
+											<div class="author-infos">
+												<div class="author_avatar">
+													<img [src]="user?.avatar ? ((s3FilesBucketURL + user.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+														alt="Presenting the broken author avatar :D">
+												</div>
+
+												<div class="author">
+													<h4>{{user?.name}}</h4>
+													<button
+														*ngIf="authorId && authService?.loggedInUser?._id && authService?.loggedInUser?._id !== authorId"
+														(click)="openDialog()" mat-mini-fab color="primary">
+														<mat-icon>video_call</mat-icon>
+													</button>
+													<p>On platform since {{user?.createdAt | date}}</p>
+												</div>
+												<!-- end /.author -->
+
+
+												<div class="social social--color--filled">
+													<ul>
+														<li style="margin: 5px; color: initial">
+															<a [href]="user?.linkedin_url">
+																<i style="font-size: 1.7rem !important;"
+																	class="fab fa-linkedin"></i>
+															</a>
+														</li>
+														<li style="margin: 5px">
+															<a [href]="user?.github_url">
+																<i style="font-size: 1.7rem !important;"
+																	class="fab fa-stack-overflow"></i>
+															</a>
+														</li>
+														<li style="margin: 5px">
+															<a [href]="user?.stackoverflow_url">
+																<i style="font-size: 1.7rem !important;"
+																	class="fab fa-github"></i>
+															</a>
+														</li>
+													</ul>
+												</div>
+
+
+
+												<ul class="infos">
+													<li>
+														<span class="data-label">Likes: </span>
+														<span class="info"
+															*ngIf="authService?.loggedInUser; else likeCount">
+															<app-like-dislike [data]="user" [type]="'user'"
+																[likeCount]="null">
+															</app-like-dislike>
+														</span>
+														<ng-template #likeCount>
+															<div class="info">
+																{{user?.likeCount}}
+															</div>
+														</ng-template>
+													</li>
+												</ul>
+												<!-- end /.social -->
+
+												<!-- <div class="author-btn">
+																				<a href="#" class="btn btn--md btn--round">Follow</a>
+																		</div> -->
+												<!-- end /.author-btn -->
+											</div>
+											<!-- end /.author-infos -->
+										</div>
+										<!-- end /.author-card -->
+									</aside>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+
+	</section>
+</div>
+
+<ng-template #postTemplate let-postType="postType">
+
+	<div>
+		<ng-container *ngFor="let c of postsUnderUser; let i=index;">
+
+			<div class="box image common-box-shadow" *ngIf="postType === c?.type">
+				<div class="box-header">
+					<h3>
+						<a [routerLink]="['/', 'dashboard', 'profile', (userData$ | async)?._id ]">
+							<img [src]="c?.createdBy?.avatar ? ((s3FilesBucketURL + c?.createdBy?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+								alt="" />{{c?.createdBy?.name}}
+						</a>
+						<span>{{fromNow(c?.createdAt)}} <i class="fa fa-globe"></i></span>
+					</h3>
+
+					<!-- Post Actions -->
+					<i class="fad fa-check-circle" *ngIf="c['__edit']" (click)="updatePost(c, singlePostEditor)"></i>
+					<span style="float: right;" *ngIf="c?.createdBy?._id === authService?.loggedInUser?._id">
+						<button mat-icon-button [matMenuTriggerFor]="optionsMenu"
+							aria-label="Example icon-button with a menu">
+							<mat-icon>more_horiz</mat-icon>
+						</button>
+						<mat-menu #optionsMenu="matMenu">
+							<button mat-menu-item (click)="c['__edit'] = !c['__edit']">
+								<mat-icon>edit</mat-icon>
+								<span>Edit</span>
+							</button>
+							<button mat-menu-item (click)="deletePost(c?._id)">
+								<mat-icon>delete</mat-icon>
+								<span>Delete</span>
+							</button>
+						</mat-menu>
+					</span>
+					<!-- <span><i class="fa fa-angle-down"></i></span> -->
+					<div class="window"><span></span></div>
+				</div>
+				<div class="box-content">
+					<div class="content">
+						<img alt="" />
+					</div>
+					<div class="bottom">
+						<p>
+							<!---------------- SINGLE POST EDITOR --------------->
+							<app-editor #singlePostEditor [editorStyle]="{background: 'white'}" [data]="c?.description"
+								[userReferenceId]="(userData$ | async)?._id" [id]="'post' + c?._id"
+								[readOnly]="!c['__edit']" [blockLevelComments]="true" [commentType]="'post'" [post]="c"
+								[commentsList]="c?.comments">
+							</app-editor>
+						</p>
+						<span><span class="fa fa-search-plus"></span></span>
+					</div>
+				</div>
+				<div class="box-likes">
+					<div class="post-row" style="visibility: hidden; padding: 0;">
+						<span><a href="#"><img src="https://goo.gl/oM0Y8G" alt="" /></a></span>
+						<span><a href="#"><img src="https://goo.gl/vswgSn" alt="" /></a></span>
+						<span><a href="#"><img src="https://goo.gl/4W27eB" alt="" /></a></span>
+						<span><a href="#">+99</a></span>
+						<span>Like this</span>
+					</div>
+					<div class="post-row" style="padding: 0; border: none;">
+						<span>{{c?.comments?.length}} comments</span>
+					</div>
+				</div>
+				<!-- <div class="box-buttons">
+                    <div class="post-row">
+                        <button><span class="fa fa-thumbs-up"></span></button>
+                        <button (click)="c['__show'] = !c['__show']"><span class="fas fa-comment-lines"></span></button>
+                        <button><span class="ion-share"></span></button>
+                    </div>
+                </div> -->
+
+				<!-- <div class="box-click"><span><i class="ion-chatbox-working"></i> View 140 more comments</span></div> -->
+				<div class="box-comments">
+					<div class="thread">
+						<ul class="media-list thread-list"
+							style="border-top: 1px solid #f4f4f4; padding: 10px 30px 0px 30px; list-style: none;">
+							<div *ngFor="let com of c?.comments">
+								<li *ngIf="!com?.blockSpecificComment" class="single-thread">
+									<app-comment [comment]="com"></app-comment>
+								</li>
+							</div>
+						</ul>
+					</div>
+				</div>
+				<div class="box-new-comment">
+					<img [src]="authService?.loggedInUser?.avatar ? ((s3FilesBucketURL + authService?.loggedInUser?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+						alt="" />
+					<div class="content">
+						<!-- <div class="post-row"> -->
+						<!---------------- ADD COMMENT EDITOR --------------->
+						<app-editor #addCommentEditor [placeholder]="'Write a comment'"
+							[editorStyle]="{ width: '84%', background: 'white', padding: '0 12px 0 12px', 'border-radius': '20px'}"
+							[id]="c?._id + i"></app-editor>
+						<!-- </div> -->
+						<div class="post-row">
+							<button style="float: right;" type="button" class="btn btn--sm btn--round"
+								(click)="addComment(c?._id, addCommentEditor)">Post</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</ng-container>
+	</div>
+</ng-template>

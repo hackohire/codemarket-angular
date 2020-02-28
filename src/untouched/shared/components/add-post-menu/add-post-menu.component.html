@@ -1,0 +1,217 @@
+<!-- <button mat-icon-button [matMenuTriggerFor]="menu" class="menu">
+  <mat-icon>library_add</mat-icon>
+  <mat-icon>keyboard_arrow_down</mat-icon>
+</button> -->
+
+<a class="btn btn--sm btn--round menu" #addPostMenu="matMenuTrigger" [matMenuTriggerFor]="menu">{{label}}
+  <!-- <mat-icon style="vertical-align: middle;">library_add</mat-icon> -->
+  <mat-icon style="vertical-align: middle;">keyboard_arrow_down</mat-icon>
+</a>
+<mat-menu #menu="matMenu" [yPosition]="'below'" [xPosition]="'after'" [overlapTrigger]="false">
+
+  <!-- Add Product -->
+  <button mat-menu-item [routerLink]="['/', 'sell', 'add-product']">
+    <!-- <mat-icon>dialpad</mat-icon> -->
+    <i style="font-size: 1.7rem !important;" [class]="'vertical-align-middle fal fa-' + icons.product + ' fa-fw'"></i>
+    <span class="vertical-align-middle"> Bugfix</span>
+  </button>
+
+  <!-- Add Help Request -->
+  <button mat-menu-item [routerLink]="['/', 'help-request', 'add-help-request']">
+    <!-- <mat-icon>Help Request</mat-icon> -->
+    <i style="font-size: 1.7rem !important;"
+      [class]="'vertical-align-middle fal fa-' + icons['help-request'] + ' fa-fw'"></i>
+    <span> Help Request</span>
+  </button>
+
+
+  <!-- Add Interview Assignment -->
+  <button mat-menu-item [routerLink]="['/', 'post', 'add-interview']" [queryParams]="{type: 'interview'}">
+    <i style="font-size: 1.7rem !important;" [class]="'vertical-align-middle fal fa-' + icons.interview + ' fa-fw'"></i>
+    <span> Interview</span>
+  </button>
+
+  <!-- Add Hiring Process -->
+  <button mat-menu-item [routerLink]="['/', 'post', 'add-hiring-process']" [queryParams]="{type: 'hiring-process'}">
+    <i style="font-size: 1.7rem !important;"
+      [class]="'vertical-align-middle fal fa-' + icons.requirement + ' fa-fw'"></i>
+    <span> Hiring Process</span>
+  </button>
+
+  <!-- Add Capital Funding -->
+  <button mat-menu-item [routerLink]="['/', 'post', 'add-capital-funding']" [queryParams]="{type: 'capital-funding'}">
+    <i style="font-size: 1.7rem !important;"
+      [class]="'vertical-align-middle fal fa-' + icons.requirement + ' fa-fw'"></i>
+    <span> Capital Funding</span>
+  </button>
+
+  <!-- Add Requirements -->
+  <button mat-menu-item [routerLink]="['/', 'post', 'add-requirement']" [queryParams]="{type: 'requirement'}">
+    <i style="font-size: 1.7rem !important;"
+      [class]="'vertical-align-middle fal fa-' + icons.requirement + ' fa-fw'"></i>
+    <span> Requirements</span>
+  </button>
+
+  <!-- Add Testings -->
+  <button mat-menu-item [routerLink]="['/', 'post', 'add-testing']" [queryParams]="{type: 'testing'}">
+    <i style="font-size: 1.7rem !important;" [class]="'vertical-align-middle fal fa-' + icons.testing + ' fa-fw'"></i>
+    <span> Testing Report</span>
+  </button>
+
+
+  <!-- Add How To Docs -->
+  <button mat-menu-item [routerLink]="['/', 'post', 'add-howtodoc']" [queryParams]="{type: 'howtodoc'}">
+    <i style="font-size: 1.7rem !important;" [class]="'vertical-align-middle fal fa-' + icons.howtodoc + ' fa-fw'"></i>
+    <span> How-To-Guide</span>
+  </button>
+
+  <!-- Add Designs -->
+  <button mat-menu-item [routerLink]="['/', 'post', 'add-design']" [queryParams]="{type: 'design'}">
+    <i style="font-size: 1.7rem !important;" [class]="'vertical-align-middle fal fa-' + icons.design + ' fa-fw'"></i>
+    <span> Design</span>
+  </button>
+
+  <!-- Add Goals -->
+  <button mat-menu-item [routerLink]="['/', 'post', 'add-goal']" [queryParams]="{type: 'goal'}">
+    <i style="font-size: 1.7rem !important;" [class]="'vertical-align-middle fal fa-' + icons.goal + ' fa-fw'"></i>
+    <span> Goals</span>
+  </button>
+
+  <!-- Add Events -->
+  <button mat-menu-item [routerLink]="['/', 'event', 'add-event']">
+    <i style="font-size: 1.7rem !important;" [class]="'vertical-align-middle fal fa-' + icons.event + ' fa-fw'"></i>
+    <span> Events</span>
+  </button>
+
+  <!-- Add Team Skills -->
+  <button mat-menu-item [routerLink]="['/', 'post', 'add-teamskill']" [queryParams]="{type: 'team-skill'}">
+    <i style="font-size: 1.7rem !important;"
+      [class]="'vertical-align-middle fal fa-' + icons['team-skill'] + ' fa-fw'"></i>
+    <span> Team Skills</span>
+  </button>
+
+  <!-- Add Dream Job -->
+  <button mat-menu-item [routerLink]="['/', 'post', 'add-dreamjob']">
+    <i style="font-size: 1.7rem !important;"
+      [class]="'vertical-align-middle fal fa-' + icons['dream-job'] + ' fa-fw'"></i>
+    <span> Dreamjob</span>
+  </button>
+
+  <!-- Add Job -->
+  <button mat-menu-item [routerLink]="['/', 'post', 'add-job']">
+    <i style="font-size: 1.7rem !important;"
+      [class]="'vertical-align-middle fal fa-' + icons['dream-job'] + ' fa-fw'"></i>
+    <span> Job</span>
+  </button>
+
+  <!-- Add Job -->
+  <button mat-menu-item [routerLink]="['/', 'post', 'add-' + companyPostTypes.BusinessChallenge]">
+    <i style="font-size: 1.7rem !important;"
+      [class]="'vertical-align-middle fal fa-' + icons['dream-job'] + ' fa-fw'"></i>
+    <span>Business Chanllenge</span>
+  </button>
+
+  <button mat-menu-item [routerLink]="['/', 'post', 'add-' + companyPostTypes.BusinessGoal]">
+    <i style="font-size: 1.7rem !important;"
+      [class]="'vertical-align-middle fal fa-' + icons['dream-job'] + ' fa-fw'"></i>
+    <span>Business Goal</span>
+  </button>
+
+  <button mat-menu-item [routerLink]="['/', 'post', 'add-' + companyPostTypes.SalesChallenge]">
+    <i style="font-size: 1.7rem !important;"
+      [class]="'vertical-align-middle fal fa-' + icons['dream-job'] + ' fa-fw'"></i>
+    <span>Sales Challenge</span>
+  </button>
+
+  <button mat-menu-item [routerLink]="['/', 'post', 'add-' + companyPostTypes.MarketingChallenge]">
+    <i style="font-size: 1.7rem !important;"
+      [class]="'vertical-align-middle fal fa-' + icons['dream-job'] + ' fa-fw'"></i>
+    <span> Marketing Challenge</span>
+  </button>
+
+  <button mat-menu-item [routerLink]="['/', 'post', 'add-' + companyPostTypes.TechnicalChallenge]">
+    <i style="font-size: 1.7rem !important;"
+      [class]="'vertical-align-middle fal fa-' + icons['dream-job'] + ' fa-fw'"></i>
+    <span> Technical Challenge</span>
+  </button>
+
+  <button mat-menu-item [routerLink]="['/', 'post', 'add-' + companyPostTypes.TeamChallenge]">
+    <i style="font-size: 1.7rem !important;"
+      [class]="'vertical-align-middle fal fa-' + icons['dream-job'] + ' fa-fw'"></i>
+    <span> Team Challenge</span>
+  </button>
+
+  <button mat-menu-item [routerLink]="['/', 'post', 'add-' + companyPostTypes.SalesGoal]">
+    <i style="font-size: 1.7rem !important;"
+      [class]="'vertical-align-middle fal fa-' + icons['dream-job'] + ' fa-fw'"></i>
+    <span> Sales Goal</span>
+  </button>
+
+  <button mat-menu-item [routerLink]="['/', 'post', 'add-' + companyPostTypes.MarketingGoal]">
+    <i style="font-size: 1.7rem !important;"
+      [class]="'vertical-align-middle fal fa-' + icons['dream-job'] + ' fa-fw'"></i>
+    <span> Marketing Goal</span>
+  </button>
+
+  <button mat-menu-item [routerLink]="['/', 'post', 'add-' + companyPostTypes.TechnicalGoal]">
+    <i style="font-size: 1.7rem !important;"
+      [class]="'vertical-align-middle fal fa-' + icons['dream-job'] + ' fa-fw'"></i>
+    <span> Technical Goal</span>
+  </button>
+
+  <button mat-menu-item [routerLink]="['/', 'post', 'add-' + companyPostTypes.TeamGoal]">
+    <i style="font-size: 1.7rem !important;"
+      [class]="'vertical-align-middle fal fa-' + icons['dream-job'] + ' fa-fw'"></i>
+    <span> Team Goal</span>
+  </button>
+
+  <button mat-menu-item [routerLink]="['/', 'post', 'add-' + companyPostTypes.Mission]">
+    <i style="font-size: 1.7rem !important;"
+      [class]="'vertical-align-middle fal fa-' + icons['dream-job'] + ' fa-fw'"></i>
+    <span> Mission</span>
+  </button>
+
+  <button mat-menu-item [routerLink]="['/', 'post', 'add-' + companyPostTypes.CompanyPost]">
+    <i style="font-size: 1.7rem !important;"
+      [class]="'vertical-align-middle fal fa-' + icons['dream-job'] + ' fa-fw'"></i>
+    <span> Company Post</span>
+  </button>
+
+  <button mat-menu-item [routerLink]="['/', 'post', 'add-' + UserProfilePostTypes.StartupGoal]">
+    <i style="font-size: 1.7rem !important;"
+      [class]="'vertical-align-middle fal fa-' + icons['dream-job'] + ' fa-fw'"></i>
+    <span> Startup Goal</span>
+  </button>
+
+  <button mat-menu-item [routerLink]="['/', 'post', 'add-' + UserProfilePostTypes.SocialImpactGoal]">
+    <i style="font-size: 1.7rem !important;"
+      [class]="'vertical-align-middle fal fa-' + icons['dream-job'] + ' fa-fw'"></i>
+    <span> Social Impact Goal</span>
+  </button>
+
+  <button mat-menu-item [routerLink]="['/', 'post', 'add-' + UserProfilePostTypes.LeadershipChallenge]">
+    <i style="font-size: 1.7rem !important;"
+      [class]="'vertical-align-middle fal fa-' + icons['dream-job'] + ' fa-fw'"></i>
+    <span>Leadership Challenge</span>
+  </button>
+
+  <button mat-menu-item [routerLink]="['/', 'post', 'add-' + UserProfilePostTypes.StressManagement]">
+    <i style="font-size: 1.7rem !important;"
+      [class]="'vertical-align-middle fal fa-' + icons['dream-job'] + ' fa-fw'"></i>
+    <span>Stress Management</span>
+  </button>
+
+  <button mat-menu-item [routerLink]="['/', 'post', 'add-' + postTypes.Assignment]">
+    <i style="font-size: 1.7rem !important;"
+      [class]="'vertical-align-middle fal fa-' + icons['dream-job'] + ' fa-fw'"></i>
+    <span>Assignment</span>
+  </button>
+
+  <!-- SEND EMAIL -->
+  <button mat-menu-item [routerLink]="['/', 'post', 'send-' + postTypes.Email]">
+    <i style="font-size: 1.7rem !important;"
+      [class]="'vertical-align-middle fal fa-' + icons['dream-job'] + ' fa-fw'"></i>
+    <span>Email</span>
+  </button>
+
+</mat-menu>

@@ -1,0 +1,7 @@
+<ng-container *ngIf="authService?.loggedInUser">
+    <span (click)="likeToggle(data?._id, !like)">
+        <mat-icon [ngClass]="color" (mouseover)="color='crimson'" (mouseout)="color='normal'" class="vertical-align-middle" *ngIf="!like">favorite_border</mat-icon>
+        <mat-icon style="color: crimson;" class="vertical-align-middle" *ngIf="like">favorite</mat-icon>
+        {{'(' + likeCount + ')'}}
+    </span>
+</ng-container>

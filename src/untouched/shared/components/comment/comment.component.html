@@ -1,0 +1,82 @@
+<div class="media" style="padding: 10px 0px 0px;" *ngIf="replyCommentForm?.value">
+    <div class="media-left">
+
+        <a [routerLink]="['/', 'dashboard', 'profile', comment?.createdBy?._id ]">
+            <img class="author_avatar_comment" style="width: 45px; height: 45px;"
+                [src]="comment?.createdBy?.avatar ? ((s3FilesBucketURL + comment.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                alt="Commentator Avatar">
+        </a>
+    </div>
+    <div class="media-body">
+        <div>
+            <div class="media-heading">
+                <a [routerLink]="['/', 'dashboard', 'profile', comment?.createdBy?._id ]" style="text-decoration: none;">
+                    <h4 style="font-size: 16px; line-height: 14px; margin-bottom: 0;">{{comment?.createdBy?.name }}</h4>
+                </a>
+            <span style="font-size: 12px;">{{comment?.createdBy?.currentJobDetails?.jobProfile}}</span>
+            </div>
+
+            <!-- <span class="comment-tag buyer" *ngIf="authService?.loggedInUser?._id === comment?.createdBy?._id">Author</span> -->
+
+        </div>
+
+        <!-- SINGLE COMMENT EDITOR -->
+        <app-editor
+            [editorStyle]="{padding: '0 15px', 'border-radius': '19px', background: '#f2f3f5', border: 'solid 0.5px rgb(236, 236, 236)'}"
+            [readOnly]="edit ? false : true" #singleCommentEditor [data]="comment?.text"
+            [id]="'comment-' + comment._id"></app-editor>
+
+        <div class="comment-actions" style="display: inline-block;">
+            <!-- On Click open Relpy comment UI -->
+            <a style="min-width: 45px; padding: 0;" mat-button (click)="allowReply();">
+                <!-- <i style="font-size: 1.5rem !important;" class="fad fa-comments fa-lg"></i> -->
+                Reply
+            </a> {{comment?.createdBy?._id === authService?.loggedInUser?._id ? '|' : ''}}
+
+            <!-- On click Ask for deleting the comment -->
+            <a style="min-width: 45px; padding: 0;"  *ngIf="comment?.createdBy?._id === authService?.loggedInUser?._id" mat-button
+                (click)="deleteComment()">
+                <!-- <i style="font-size: 1.5rem !important; font-style: normal;" class="fad fa-comment-minus fa-lg"></i> -->
+                Delete
+            </a> {{comment?.createdBy?._id === authService?.loggedInUser?._id ? '|' : ''}}
+
+            <!-- On click open the editor in read only mode -->
+            <a style="min-width: 45px; padding: 0;" *ngIf="comment?.createdBy?._id === authService?.loggedInUser?._id" mat-button (click)="edit=true">
+                <!-- <i style="font-size: 1.5rem !important; font-style: normal;" class="fad fa-comment-edit fa-lg"></i> -->
+                Edit
+            </a>
+            <span>{{fromNow(comment?.createdAt)}}</span>
+            <button *ngIf="edit" style="margin-left: 8px;" type="button" class="btn btn--vsm btn--round" (click)="updateComment(singleCommentEditor)">Update</button>
+        </div>
+    </div>
+</div>
+
+<!-- Recursive Children -->
+<!-- If Children comment asks to reply to the comment call the allowReply method -->
+<div [id]="r?._id" class="single-thread depth-2" *ngFor="let r of comment?.children">
+    <!-- CHILD COMMENT EDITOR -->
+    <app-comment  [comment]="r" [referenceId]="comment?.referenceId" (allowReplyToParent)="allowReply()"></app-comment >
+</div>
+
+<!-- comment reply -->
+<div class="media depth-2 reply-comment" style="padding: 15px 0 15px 0;" *ngIf="reply" [formGroup]="replyCommentForm">
+    <div class="media-left">
+        <a href="#">
+            <img class="author_avatar_comment" style="width: 45px; height: 45px;"
+                [src]="authService?.loggedInUser?.avatar ? ((s3FilesBucketURL + authService?.loggedInUser?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                alt="Commentator Avatar">
+        </a>
+    </div>
+    <div class="media-body">
+        <div class="comment-reply-form">
+            <!-- COMMENT REPLY EDITOR -->
+            <app-editor #commentReplyEditor [placeholder]="'Add a Reply!'"
+                [editorStyle]="{padding: '0 15px', 'border-radius': '19px', background: '#f2f3f5', border: 'solid 0.5px rgb(236, 236, 236)'}" [id]="'reply'+ comment?._id">
+            </app-editor>
+            <!-- <textarea class="bla" name="reply-comment" placeholder="Write your comment..."></textarea> -->
+            <button type="button" style="float: right;" class="btn btn--vsm btn--round"
+                (click)="addReply(commentReplyEditor)">Reply</button>
+        </div>
+    </div>
+</div>
+<!-- comment reply -->

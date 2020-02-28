@@ -1,0 +1,82 @@
+<app-breadcumb [title]="breadcumb?.title" [path]="breadcumb?.path"></app-breadcumb>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div [formGroup]="capitalfundingForm" class="add-form-area common-box-shadow">
+
+                <mat-form-field class="field-full-width">
+                    <input type="text" matInput formControlName="name" placeholder="Title">
+                </mat-form-field>
+
+                <div class="row">
+                    <app-autocomplete class="col-md-6" [autoComplete]="capitalfundingForm?.get('fundingBy')" [placeholder]="'Funding By'" [collection]="'companies'" [type]="" [multiple]="true"></app-autocomplete>
+                    <app-autocomplete class="col-md-6" [autoComplete]="capitalfundingForm?.get('fundingTo')" [placeholder]="'Funding To'" [collection]="'companies'" [type]="" [multiple]="true"></app-autocomplete>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <mat-form-field class="field-full-width">
+                            <mat-label>Funding Amount(In Thousands)</mat-label>
+                            <input type="number" matInput formControlName="fundingAmount" placeholder="Funding Amount">
+                            <!-- <mat-hint matSuffix>K</mat-hint> -->
+                            <mat-select matSuffix style="width: 35px; vertical-align: super;"
+                                formControlName="fundingCurrency">
+                                <mat-option value="$">$</mat-option>
+                                <mat-option value="€">€</mat-option>
+                                <mat-option value="₹">₹</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-6">
+                        <!-- Event Date Range -->
+                        <mat-form-field class="field-full-width">
+                            <input (click)="dt2.open()" formControlName="fundingDate" matInput [owlDateTime]="dt2"
+                                [selectMode]="'single'" placeholder="Date">
+                            <mat-icon matSuffix [owlDateTimeTrigger]="dt2">date_range</mat-icon>
+                            <owl-date-time #dt2 [pickerType]="'calendar'"></owl-date-time>
+                        </mat-form-field>
+                    </div>
+
+                </div>
+                <div formArrayName="fundingProcess">
+                    <div *ngFor="let p of process?.controls; let i=index; let last=last;">
+                        <div [formGroupName]="i">
+                            <div style="margin: 26px 10px 5px 0">
+                                <h6 style="display: inline; margin: 0 10px 0 0;">{{'Funding Step - '+ (i+1)  }}</h6>
+                                <mat-icon style="vertical-align: sub;" (click)="addStep(i)">add_circle_outline</mat-icon>
+                                <mat-icon *ngIf="process?.controls?.length > 1" style="vertical-align: sub;" (click)="removeStep(i)">remove_circle_outline</mat-icon>
+                            </div>
+                            <app-editor #steps [id]="'process' + i" [data]="p?.value" [placeholder]="'Write Step Details'"></app-editor>
+                        </div>
+                    </div>
+                </div>
+
+                <br />
+
+                <app-editor #descriptionEditor
+                    [data]="descriptionFormControl?.value" [id]="'edit-capitalfunding-editor'"
+                    [importArticleSubscription]="true" [placeholder]="'Capital Funding Description:'"></app-editor>
+
+
+                <br />
+                <!-- <br /> -->
+
+                <div fxLayout="row" fxLayoutGap="10px">
+                    <button *ngIf="statusFormControl?.value !== 'Published'" type="button" (click)="submit('Drafted')"
+                        [disabled]="capitalfundingForm?.invalid" mat-raised-button color="primary">Save</button>
+                    <button type="button" (click)="submit('Published')" [disabled]="capitalfundingForm?.invalid"
+                        mat-raised-button
+                        color="primary">{{ statusFormControl?.value === 'Published' ? 'Publish Changes' : 'Publish' }}</button>
+                    <button *ngIf="statusFormControl?.value === 'Published'" type="button"
+                        (click)="submit('Unpublished')" [disabled]="capitalfundingForm?.invalid" mat-raised-button
+                        color="primary">{{ 'Unpublish' }}</button>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

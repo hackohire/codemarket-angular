@@ -17,7 +17,8 @@ import { appConstants } from './shared/constants/app_constants';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
+  // templateUrl: './app.component.html',
+  templateUrl: './hello.html',
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, OnDestroy {

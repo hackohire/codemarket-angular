@@ -1,0 +1,132 @@
+<!--================================
+        START BREADCRUMB AREA
+=================================-->
+
+<section class="breadcrumb-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="breadcrumb" style="align-items: center;">
+                    <ul>
+                        <li *ngFor="let p of path; let i = index" [ngClass]="{'active': (path?.length - 1) === i}">
+                            <a [routerLink]="[p?.pathString ? p.pathString : '/']">{{p?.name}}</a>
+                        </li>
+                    </ul>
+                    <div style="margin-left: auto;">
+                        <a *ngIf="showImportButton" class="btn btn--sm btn--round menu"
+                            style="color: #0674ec !important; background: white;" [mdePopoverTriggerFor]="importArticle"
+                            [mdePopoverTargetAt]="lr" mdePopoverTriggerOn="click">Import
+                        </a>
+                        <!--
+                            <app-add-post-menu style="color: #0674ec !important; margin-left: auto;"></app-add-post-menu>
+                            -->
+                        <a *ngIf="showEditPostDetails" class="btn btn--sm btn--round menu"
+                            style="color: #0674ec !important; background: white; margin-right: 5px;"
+                            (click)="editPost.emit()">Edit <mat-icon style="vertical-align: middle;">edit</mat-icon>
+                        </a>
+                        <!--
+                        <a *ngIf="postDetails?.type === 'event'" class="btn btn--sm btn--round menu"
+                            style="color: #0674ec !important; background: white;"
+                            [routerLink]="['/', 'event', 'add-event']">Add Event <mat-icon
+                                style="vertical-align: middle;">add</mat-icon>
+                        </a>
+                        <a *ngIf="companyDetails" class="btn btn--sm btn--round menu"
+                            style="color: #0674ec !important; background: white;"
+                            [state]="{companyDetails: companyDetails}" [routerLink]="['/', 'event', 'add-event']">Add
+                            Event <mat-icon style="vertical-align: middle;">add</mat-icon>
+                        </a>
+                        -->
+                        <!--
+                            <app-add-post-menu *ngIf="showMenu" [ngStyle]="{'color': color}" style="padding-left: 10px;"></app-add-post-menu>
+                        -->
+
+                        
+
+                    </div>
+                </div>
+                <h1 class="page-title">{{title}}</h1>
+
+                <div style="color: white; padding-top: 8px">
+
+                    <ul class="infos">
+                        <li *ngIf="eventDate && eventDate?.length">
+                            <p class="data-label">From</p>
+                            <p class="info">
+                                <mat-icon style="vertical-align: middle;">date_range</mat-icon>
+                                {{eventDate[0] | date: 'EEEE, MMMM d, y, h:mm a' }}
+                            </p>
+                        </li>
+                        <li *ngIf="eventDate && eventDate?.length">
+                            <p class="data-label">To</p>
+                            <p class="info">
+                                <mat-icon style="vertical-align: middle;">date_range</mat-icon>
+                                {{ eventDate[1] | date: 'EEEE, MMMM d, y, h:mm a'}}
+                            </p>
+                        </li>
+
+                        <li *ngIf="postDetails?.location">
+                            <p class="data-label">Location</p>
+                            <p class="info" style="text-transform: capitalize;">{{ postDetails?.location?.address }}</p>
+                        </li>
+
+                        <li *ngIf="postDetails?.jobProfile && postDetails?.jobProfile?.length">
+                            <p class="data-label">Position</p>
+                            <p class="info" style="text-transform: capitalize;">
+                                <span
+                                    *ngFor="let c of postDetails?.jobProfile; let ei = index;">{{c?.name + (ei === postDetails?.jobProfile?.length - 1 ? '' : ', ' )}}</span>
+                            </p>
+                        </li>
+
+                        <li *ngIf="postDetails?.company">
+                            <p class="data-label">Company</p>
+                            <p class="info" style="text-transform: capitalize;">{{ postDetails?.company?.name }}</p>
+                        </li>
+
+                        <li *ngIf="postDetails?.companies && postDetails?.companies?.length">
+                            <p class="data-label">Company</p>
+                            <p class="info" style="text-transform: capitalize;">
+                                <span
+                                    *ngFor="let c of postDetails?.companies; let ei = index;">{{c?.name + (ei === postDetails?.companies?.length - 1 ? '' : ', ' )}}</span>
+                            </p>
+                        </li>
+
+                        <li *ngIf="postDetails?.cities && postDetails?.cities?.length">
+                            <p class="data-label">Cities</p>
+                            <p class="info"><span
+                                    *ngFor="let c of postDetails?.cities; let ei = index;">{{c?.name + (ei === postDetails?.cities?.length - 1 ? '' : ', ' )}}</span>
+                            </p>
+                        </li>
+
+                        <li *ngIf="postDetails?.salaryRangeFrom">
+                            <p class="data-label">Expected Salary</p>
+                            <p class="info">
+                                {{(postDetails?.salaryRangeFrom | currency: 'USD' : 'symbol' : '1.0-0') + 'k'}}
+                                <!-- - -->
+                                <!-- {{ (postDetails?.salaryRangeTo | currency: 'USD' : 'symbol' : '1.0-0') + 'k'}}</p> -->
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- end /.col-md-12 -->
+        </div>
+        <!-- end /.row -->
+    </div>
+    <!-- end /.container -->
+</section>
+<mde-popover #importArticle="mdePopover" [mdePopoverOverlapTrigger]="false" [mdePopoverCloseOnClick]="false"
+    [mdePopoverArrowOffsetX]="50" mdePopoverArrowColor="#FFFFFF">
+    <div style="background: #f8f9fb; padding: 10px;">
+        <p>Import {{postDetails?.type}} By URL</p>
+        <mat-form-field class="field-full-width">
+            <input [formControl]="articleLink" type="text" matInput placeholder="Link">
+        </mat-form-field>
+        <mat-icon (click)="import()">send</mat-icon>
+    </div>
+    <!-- <a class="btn btn--sm btn--round menu" (click)="import()"
+        style="color: #0674ec !important; background: white; float: right;">Ok
+    </a> -->
+</mde-popover>
+
+<!--================================
+                END BREADCRUMB AREA
+=================================-->

@@ -1,0 +1,58 @@
+<app-breadcumb [title]="breadcumb?.title" [path]="breadcumb?.path"></app-breadcumb>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div [formGroup]="hiringprocessForm" class="add-form-area common-box-shadow">
+
+                <mat-form-field class="field-full-width">
+                    <input type="text" matInput formControlName="name" placeholder="Title">
+                </mat-form-field>
+
+                <div class="row">
+                    <app-autocomplete class="col-md-6" [autoComplete]="hiringprocessForm?.get('company')" [placeholder]="'Select Company'" [collection]="'companies'" [type]="" [multiple]="false"></app-autocomplete>
+                    <app-autocomplete class="col-md-6" [autoComplete]="hiringprocessForm?.get('jobProfile')" [placeholder]="'Roles'" [collection]="'tags'" [type]="'role'" [multiple]="true"></app-autocomplete>
+                </div>
+
+                <div formArrayName="hiringProcess">
+                    <div *ngFor="let p of process?.controls; let i=index; let last=last;">
+                        <div [formGroupName]="i">
+                            <div style="margin: 26px 10px 5px 0">
+                                <h6 style="display: inline; margin: 0 10px 0 0;">{{'Hiring Step - '+ (i+1)  }}</h6>
+                                <mat-icon style="vertical-align: sub;" (click)="addStep(i)">add_circle_outline
+                                </mat-icon>
+                                <mat-icon *ngIf="process?.controls?.length > 1" style="vertical-align: sub;"
+                                    (click)="removeStep(i)">remove_circle_outline</mat-icon>
+                            </div>
+                            <app-editor #steps [id]="'process' + i"
+                                [placeholder]="'Write Step Details'" [data]="p?.value"></app-editor>
+                        </div>
+                    </div>
+                </div>
+
+                <br />
+
+                <app-editor #descriptionEditor
+                    [data]="descriptionFormControl?.value" [id]="'edit-hiringprocess-editor'"
+                    [importArticleSubscription]="true" [placeholder]="'Hiring Process Description:'"></app-editor>
+
+                <br />
+                <!-- <br /> -->
+
+                <div fxLayout="row" fxLayoutGap="10px">
+                    <button *ngIf="statusFormControl?.value !== 'Published'" type="button" (click)="submit('Drafted')"
+                        [disabled]="hiringprocessForm?.invalid" mat-raised-button color="primary">Save</button>
+                    <button type="button" (click)="submit('Published')" [disabled]="hiringprocessForm?.invalid"
+                        mat-raised-button
+                        color="primary">{{ statusFormControl?.value === 'Published' ? 'Publish Changes' : 'Publish' }}</button>
+                    <button *ngIf="statusFormControl?.value === 'Published'" type="button"
+                        (click)="submit('Unpublished')" [disabled]="hiringprocessForm?.invalid" mat-raised-button
+                        color="primary">{{ 'Unpublish' }}</button>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,106 @@
+<app-breadcumb [title]="breadcumb?.title" [path]="breadcumb?.path"></app-breadcumb>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <div [formGroup]="dreamjobForm" class="dreamjob-form-area">
+
+                <mat-form-field class="field-full-width" style="width: 77%;">
+                    <input #url formControlName="referencePostUrl" type="text" matInput
+                        placeholder="Import Post By Url">
+                </mat-form-field>
+                <a matSuffix type="button" (click)="formService?.import(url?.value, dreamjobForm?.get('name'))"
+                    class="btn btn--sm btn--round menu" style="margin-left: 8px;">
+                    <mat-icon style="vertical-align: middle;">arrow_downward</mat-icon>Import
+                </a>
+
+
+                <mat-form-field class="field-full-width">
+                    <input type="text" matInput formControlName="name" placeholder="Title">
+                </mat-form-field>
+
+                <app-autocomplete [autoComplete]="dreamjobForm?.get('jobProfile')" [placeholder]="'Roles'" [collection]="'tags'" [type]="'role'" [multiple]="true"></app-autocomplete>
+
+                <app-editor #descriptionEditor
+                    [data]="descriptionFormControl?.value" [id]="'edit-dreamjob-editor'"
+                    [importArticleSubscription]="true" [placeholder]="'Dream Job Description:'"></app-editor>
+
+                <br />
+
+                <div class="row">
+                    <app-autocomplete class="col-md-6" [autoComplete]="dreamjobForm?.get('companies')" [placeholder]="'Select Dream Companies'" [collection]="'companies'" [type]="" [multiple]="true"></app-autocomplete>
+                    <app-autocomplete class="col-md-6" [autoComplete]="dreamjobForm?.get('cities')" [placeholder]="'cities'" [collection]="'cities'" [type]="" [multiple]="true"></app-autocomplete>
+                </div>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Expected Salary(Yearly)(In Thousands)</mat-label>
+                    <input type="number" matInput formControlName="salaryRangeFrom" placeholder="Expected Salary">
+                    <!-- <mat-hint matSuffix>K</mat-hint> -->
+                    <mat-select matSuffix style="width: 35px; vertical-align: super;" formControlName="salaryCurrency">
+                        <mat-option value="$">$</mat-option>
+                        <mat-option value="€">€</mat-option>
+                        <mat-option value="₹">₹</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" style="margin-left: 10px;">
+                    <mat-label>Timeline(In Years)</mat-label>
+                    <input type="number" matInput formControlName="timeline" placeholder="Timeline">
+                    <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+                    <!-- <mat-hint>Timeline</mat-hint> -->
+                </mat-form-field>
+
+                <br />
+                <br />
+
+                <div fxLayout="row" fxLayoutGap="10px">
+                    <button *ngIf="statusFormControl?.value !== 'Published'" type="button" (click)="submit('Drafted')"
+                        [disabled]="dreamjobForm?.invalid" mat-raised-button color="primary">Save</button>
+                    <button type="button" (click)="submit('Published')" [disabled]="dreamjobForm?.invalid"
+                        mat-raised-button
+                        color="primary">{{ statusFormControl?.value === 'Published' ? 'Publish Changes' : 'Publish' }}</button>
+                    <button *ngIf="statusFormControl?.value === 'Published'" type="button"
+                        (click)="submit('Unpublished')" [disabled]="dreamjobForm?.invalid" mat-raised-button
+                        color="primary">{{ 'Unpublish' }}</button>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+            <mat-list class="dreamjob-form-area">
+                <h3 style="font-size: large;" mat-subheader>Dream Jobs:</h3>
+                <mat-list-item *ngFor="let cc of listOfDreamJobs; let last=last">
+                    <!-- <mat-icon mat-list-icon>folder</mat-icon> -->
+                    <img height="35px" width="35px" style="border-radius: 50%;"
+                        [src]="cc?.createdBy?.avatar ? ((s3FilesBucketURL + cc.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar">
+                    <h4 mat-line (click)="postService?.redirectToPostDetails(cc)"><a>{{cc.name}}</a></h4>
+                    <p mat-line> {{cc.createdAt | date}} </p>
+                </mat-list-item>
+                <div class="pagination-area" *ngIf="listOfDreamJobs?.length < totalDreamJobs">
+                    <span 
+                        style="text-decoration: underline; cursor: pointer;"
+                        (click)="fetchDreamJobs(dreamJobPageNumber + 1)">+ Load More{{'(' + (totalDreamJobs - listOfDreamJobs?.length) + ')'}}</span>
+                </div>
+            </mat-list>
+
+            <mat-list class="dreamjob-form-area">
+                <h3 style="font-size: large;" mat-subheader>Jobs:</h3>
+                <mat-list-item *ngFor="let cc of listOfJobs; let last=last">
+                    <img height="35px" width="35px" style="border-radius: 50%;"
+                        [src]="cc?.createdBy?.avatar ? ((s3FilesBucketURL + cc.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar">
+                    <h4 mat-line><a>{{cc.name}}</a></h4>
+                    <p mat-line> {{cc.createdAt | date}} </p>
+                </mat-list-item>
+                <div class="pagination-area" *ngIf="listOfJobs?.length < totalJobs">
+                    <span 
+                        style="text-decoration: underline; cursor: pointer;"
+                        (click)="fetchJobs(jobPageNumber + 1)">+ Load More{{'(' + (totalJobs - listOfJobs?.length) + ')'}}</span>
+                </div>
+            </mat-list>
+
+        </div>
+    </div>
+</div>

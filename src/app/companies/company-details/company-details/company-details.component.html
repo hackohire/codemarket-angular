@@ -770,11 +770,11 @@
     <div class="item-grid pen-grid item-grid-large">
         <!-- <ng-container > -->
         <ng-container *ngIf="companyView === 'dream-jobs'; else jobList">
-            <app-brief-post style="width: 100%;" [p]="p" *ngFor="let p of dreamJobsList"></app-brief-post>
+            <app-brief-post style="width: 100%;" [p]="p" *ngFor="let p of dreamJobsList" [readMore]="true"></app-brief-post>
         </ng-container>
 
         <ng-template #jobList>
-            <app-brief-post style="width: 100%;" [p]="p" *ngFor="let p of jobsList"></app-brief-post>
+            <app-brief-post style="width: 100%;" [p]="p" *ngFor="let p of jobsList" [readMore]="true"></app-brief-post>
         </ng-template>
         <!-- </ng-container> -->
     </div>

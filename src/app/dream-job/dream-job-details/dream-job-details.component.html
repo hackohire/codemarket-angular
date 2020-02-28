@@ -238,7 +238,7 @@
 
     <div class="item-grid pen-grid item-grid-large">
         <!-- <ng-container > -->
-        <app-brief-post style="width: 100%;" (delete)="deleteJob($event)" [p]="p" *ngFor="let p of connectedJobsList"></app-brief-post>
+        <app-brief-post style="width: 100%;" (delete)="deleteJob($event)" [p]="p" *ngFor="let p of connectedJobsList" [readMore]="true"></app-brief-post>
         <!-- </ng-container> -->
     </div>
 </ng-template>

@@ -121,7 +121,7 @@ export class AddJobComponent implements OnInit, OnDestroy {
       name: new FormControl(i && i.name ? i.name : '', Validators.required),
       description: new FormControl(i && i.description ? i.description : ''),
       jobProfile: new FormControl(i && i.jobProfile ? i.jobProfile : []),
-      company: new FormControl(i && i.company ? i.company : '', Validators.required),
+      company: new FormControl(i && i.company ? i.company : null, Validators.required),
       status: new FormControl(i && i.status ? i.status : PostStatus.Drafted),
       _id: new FormControl(i && i._id ? i._id : ''),
       cities: new FormControl(i && i.cities && i.cities.length ? i.cities : []),
@@ -167,7 +167,6 @@ export class AddJobComponent implements OnInit, OnDestroy {
   }
 
   onlySendIdForTags(jobValue) {
-    jobValue.company = jobValue.company && jobValue.company._id ? jobValue.company._id : jobValue.company;
     jobValue.cities = jobValue.cities.map(c => c._id);
     jobValue.jobProfile = jobValue.jobProfile.map(c => c._id);
   }

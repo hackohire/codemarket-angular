@@ -77,6 +77,10 @@ export class EventDetailsComponent implements OnInit, OnDestroy {
 
   viewLinks = [
     {
+      view: 'info',
+      title: 'Info'
+    },
+    {
       view: navLinkName.howtoguide,
       title: 'How to Docs',
       showAdd: true
@@ -90,10 +94,6 @@ export class EventDetailsComponent implements OnInit, OnDestroy {
     //   view: 'interested-people',
     //   title: 'Interested Professionals'
     // },
-    {
-      view: 'info',
-      title: 'Info'
-    }
   ];
 
   constructor(
@@ -125,7 +125,7 @@ export class EventDetailsComponent implements OnInit, OnDestroy {
 
     const postId = params && params.slug ? params.slug.split('-').pop() : '';
 
-    this.view = this.activatedRoute.snapshot.queryParams['view'] ? this.activatedRoute.snapshot.queryParams['view'] : 'home';
+    this.view = this.activatedRoute.snapshot.queryParams['view'] ? this.activatedRoute.snapshot.queryParams['view'] : 'info';
 
     this.subscription$.add(this.store.select(selectSelectedPost).pipe(
       tap((p: Post) => {

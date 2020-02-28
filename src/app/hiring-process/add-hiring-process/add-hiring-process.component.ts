@@ -123,7 +123,7 @@ export class AddHiringProcessComponent implements OnInit {
       name: new FormControl(i && i.name ? i.name : '', Validators.required),
       jobProfile: new FormControl(i && i.jobProfile ? i.jobProfile : []),
       description: new FormControl(i && i.description ? i.description : ''),
-      company: new FormControl(i && i.company ? i.company : []),
+      company: new FormControl(i && i.company ? i.company : null),
       hiringProcess: new FormArray(i && i.hiringProcess ? this.setProcessFormControl(i.hiringProcess) : [new FormControl([])]),
       status: new FormControl(i && i.status ? i.status : PostStatus.Drafted),
       _id: new FormControl(i && i._id ? i._id : ''),
@@ -180,7 +180,6 @@ export class AddHiringProcessComponent implements OnInit {
   }
 
   onlySendIdForTags(hiringprocessValue) {
-    hiringprocessValue.company = hiringprocessValue.company && hiringprocessValue.company._id ? hiringprocessValue.company._id : hiringprocessValue.company;
     hiringprocessValue.jobProfile = hiringprocessValue.jobProfile.map(c => c._id);
   }
 

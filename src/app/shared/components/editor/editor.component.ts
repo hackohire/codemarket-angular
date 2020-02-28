@@ -63,6 +63,7 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
   @Output() output: EventEmitter<any> = new EventEmitter(); /** Emitting data with user interactions */
   @Input() importArticleSubscription = false;
   @ViewChild('editorRef', { static: false }) editorRef: ElementRef;
+  @ViewChild('editorViewRef', { static: true }) editorViewRef: ElementRef;
 
   subscriptions$  = new Subscription();
 
@@ -109,8 +110,8 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
     }
 
     /** Get all the code elements from DOM and highlight them as code snippets using highlight.js */
-    if (this.editorRef && isPlatformBrowser(this._platformId) && this.editorRef.nativeElement) {
-      this.editorRef.nativeElement.querySelectorAll('pre code').forEach((block: HTMLElement) => {
+    if (this.editorViewRef && isPlatformBrowser(this._platformId) && this.editorViewRef.nativeElement) {
+      this.editorViewRef.nativeElement.querySelectorAll('pre code').forEach((block: HTMLElement) => {
         this._hljs.highlightBlock(block);
       });
     }
@@ -363,10 +364,10 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
   /** On click on every image of the editor zoom in */
   zoomInZoomOutForImages() {
     /** Checking if editor referene is there */
-    if (this.editorRef && isPlatformBrowser(this._platformId)) {
+    if (this.editorViewRef && isPlatformBrowser(this._platformId)) {
       /** FInding and running the loop over all the img elements in editor reference */
 
-      this.editorRef.nativeElement.querySelectorAll('img').forEach((v: HTMLImageElement) => {
+      this.editorViewRef.nativeElement.querySelectorAll('img').forEach((v: HTMLImageElement) => {
         /** Setting zoom icon in normal mode */
         v.style.cursor = 'zoom-in';
 

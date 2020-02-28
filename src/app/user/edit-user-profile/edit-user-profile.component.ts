@@ -62,7 +62,7 @@ export class EditUserProfileComponent implements OnInit {
           location: new FormControl(this.loggedInUser ? this.loggedInUser.location : ''),
           programming_languages: new FormControl(this.loggedInUser && this.loggedInUser.programming_languages ? this.loggedInUser.programming_languages : []),
           currentJobDetails: new FormGroup({
-            jobProfile: new FormControl(this.loggedInUser && this.loggedInUser.currentJobDetails ? this.loggedInUser.currentJobDetails.jobProfile : []),
+            jobProfile: new FormControl(this.loggedInUser && this.loggedInUser.currentJobDetails ? this.loggedInUser.currentJobDetails.jobProfile : null),
             company: new FormControl(this.loggedInUser && this.loggedInUser.currentJobDetails && this.loggedInUser.currentJobDetails.company ? this.loggedInUser.currentJobDetails.company : ''),
             // jobProfile: new FormControl(this.loggedInUser && this.loggedInUser.currentJobDetails ?
             //   this.loggedInUser.currentJobDetails.jobProfile : ''),
@@ -89,7 +89,6 @@ export class EditUserProfileComponent implements OnInit {
   updateUser(): void {
     console.log(this.userProfileForm.value);
     const user = {...this.userProfileForm.value};
-    user.currentJobDetails.company = user.currentJobDetails && user.currentJobDetails.company && user.currentJobDetails.company._id ? user.currentJobDetails.company._id : user.currentJobDetails.company;
     user.currentJobDetails.jobProfile = user.currentJobDetails.jobProfile.map(c => c._id);
     this.store.dispatch(UpdateUser({ payload: user }));
   }

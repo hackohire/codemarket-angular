@@ -204,7 +204,7 @@ export const appConstants = {
         _id
       }
       comments {
-        ...Comment
+        ...Comments
       }
       support {
         time

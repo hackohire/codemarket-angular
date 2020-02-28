@@ -42,7 +42,7 @@ export class EventDetailsComponent implements OnInit, OnDestroy {
   view: string;
 
   navLinkName = navLinkName;
-  collaborators: String[];
+  collaborators: string[];
   postTypes = PostType;
 
   @ViewChild('coverPic', { static: false }) coverPic;

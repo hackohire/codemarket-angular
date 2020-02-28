@@ -1,10 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { Post } from '../../models/post.model';
 import { Company } from '../../models/company.model';
 import { FormControl, Validators } from '@angular/forms';
 import { environment } from '../../../../environments/environment';
 import { PostService } from '../../services/post.service';
 import { SearchComponent } from 'src/app/core/components/search/search.component';
+import { MdePopoverTrigger } from '@material-extended/mde';
 
 @Component({
   selector: 'app-breadcumb',
@@ -23,10 +24,10 @@ export class BreadcumbComponent implements OnInit {
   @Input('showImportButton') showImportButton = false;
   @Input('showEditPostDetails') showEditPostDetails: boolean;
   @Input('showAddCollaborators') showAddCollaborators: boolean;
-  
+
   @Output() editPost = new EventEmitter();
 
-  articleLink = new FormControl('', Validators.required)
+  articleLink = new FormControl('', Validators.required);
   constructor(
     private postService: PostService
   ) { }
@@ -42,7 +43,7 @@ export class BreadcumbComponent implements OnInit {
         console.log(h.contentHtml);
         h.contentHtml += `<b>Source: </b><a target="_blank" href="${this.articleLink.value}">${this.articleLink.value}</a>`
         this.postService.contentFromAnotherArticle.next(h.contentHtml);
-      })
+      });
   }
 
 }

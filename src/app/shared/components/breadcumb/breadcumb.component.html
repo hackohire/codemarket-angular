@@ -13,10 +13,9 @@
                         </li>
                     </ul>
                     <div style="margin-left: auto;">
-                        <a *ngIf="showAddCollaborators" class="btn btn--sm btn--round menu"
-                            style="color: #0674ec !important; background: white;" [mdePopoverTriggerFor]="addCollaborators"
-                            [mdePopoverTargetAt]="lr" mdePopoverTriggerOn="click">Add Collaborators
-                        </a>
+
+                        <app-add-collaborators *ngIf="showAddCollaborators" [postDetails]="postDetails"></app-add-collaborators>
+
                         <a *ngIf="showImportButton" class="btn btn--sm btn--round menu"
                             style="color: #0674ec !important; background: white;" [mdePopoverTriggerFor]="importArticle"
                             [mdePopoverTargetAt]="lr" mdePopoverTriggerOn="click">Import
@@ -129,11 +128,6 @@
     <!-- <a class="btn btn--sm btn--round menu" (click)="import()"
         style="color: #0674ec !important; background: white; float: right;">Ok
     </a> -->
-</mde-popover>
-
-<mde-popover #addCollaborators="mdePopover" [mdePopoverOverlapTrigger]="false" [mdePopoverCloseOnClick]="false"
-        [mdePopoverArrowOffsetX]="58" mdePopoverArrowColor="#FFFFFF">
-       <app-add-collaborators [postDetails]="postDetails"></app-add-collaborators>
 </mde-popover>
 
 <!--================================

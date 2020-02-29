@@ -348,6 +348,7 @@ export const appConstants = {
       collaborators {
         _id
         name
+        avatar
       }
 
       jobProfile {

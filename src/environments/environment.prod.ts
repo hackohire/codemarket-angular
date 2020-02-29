@@ -3,12 +3,12 @@ import { plans } from '../app/shared/constants/plan_details';
 export const environment = {
   production: true,
   COGNITO_AUTH_DOMAIN: 'https://platform.auth.us-east-1.amazoncognito.com',
-  serverless_url: 'https://ue0641boj7.execute-api.ap-south-1.amazonaws.com/eugene/',
-  graphql_url: 'https://ue0641boj7.execute-api.ap-south-1.amazonaws.com/eugene/graphql',
-  s3FilesBucketURL: 'https://codemarket-eugene-files.s3.amazonaws.com/public/',
+  serverless_url: 'https://qnzhh56xx7.execute-api.ap-south-1.amazonaws.com/prod/',
+  graphql_url: 'https://qnzhh56xx7.execute-api.ap-south-1.amazonaws.com/prod/graphql',
+  s3FilesBucketURL: 'https://codemarket-files.s3.amazonaws.com/public/',
   stripe_public_key: 'pk_live_EYCoYtpLszr802sOl89WeuW1',
   // stripe_public_key: 'pk_test_ighmL2U9UqAx0O4b8dKkSvdq',
-  webSocketURL: 'wss://idxm80aq72.execute-api.ap-south-1.amazonaws.com/eugene',
+  webSocketURL: 'wss://miqlzvwu0g.execute-api.ap-south-1.amazonaws.com/prod',
   applicationId: '5d2ef428bbfa6576b357d5d4',
   googleAPIKey: 'AIzaSyAOpIXHUPA5bMssoAW3NDUGHveOf0N_tsY',
   // planDetails: plans.prod,
@@ -21,10 +21,10 @@ export const environment = {
     scope: ['email', 'profile', 'openid'],
 
     // Callback URL
-    redirectSignIn: 'https://eugene.codemarket.io', // or 'exp://127.0.0.1:19000/--/', 'myapp://main/'
+    redirectSignIn: 'https://www.codemarket.io', // or 'exp://127.0.0.1:19000/--/', 'myapp://main/'
 
     // Sign out URL
-    redirectSignOut: 'https://eugene.codemarket.io', // or 'exp://127.0.0.1:19000/--/', 'myapp://main/'
+    redirectSignOut: 'https://www.codemarket.io', // or 'exp://127.0.0.1:19000/--/', 'myapp://main/'
 
     // 'code' for Authorization code grant,
     // 'token' for Implicit grant
@@ -36,6 +36,7 @@ export const environment = {
       // Indicates if the data collection is enabled to support Cognito advanced security features. By default, this flag is set to true.
       AdvancedSecurityDataCollectionFlag: true
     },
-  },
+  }
+,
 	baseHref: '/'
 };

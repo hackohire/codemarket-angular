@@ -20,6 +20,7 @@ import { appConstants } from '../../shared/constants/app_constants';
 import { Comment } from '../../shared/models/comment.model';
 import { ToastrService } from 'ngx-toastr';
 import { TransferState, makeStateKey } from '@angular/platform-browser';
+import { MessageService } from '../../shared/services/message.service';
 
 @Injectable({
   providedIn: 'root'
@@ -37,7 +38,8 @@ export class AuthService {
     @Inject(PLATFORM_ID) private _platformId: Object,
     @Inject(DOCUMENT) private document: Document,
     private toastrService: ToastrService,
-    private readonly transferState: TransferState
+    private readonly transferState: TransferState,
+    private messageService: MessageService
     // private commentService: CommentService
   ) {
 
@@ -139,15 +141,11 @@ export class AuthService {
     subscription onUserOnline($user: UserInput) {
       onUserOnline(user: $user){
         onCommentAdded {
-          ...Comment
-        }
-        post {
-          ...Post
+          ...Comments
         }
       }
     }
     ${comment}
-    ${appConstants.postQuery}
     `;
     this.apollo.subscribe({
       query: USER_SUBSCRIPTION,
@@ -161,64 +159,65 @@ export class AuthService {
     }).pipe(
       map((u: any) => u.data.onUserOnline),
       tap((u) => {
-        if (u.onCommentAdded && u.post) {
+        if (u.onCommentAdded) {
 
           /** Audio Notification */
           var audio = new Audio(appConstants.Notification);
           audio.play();
-          this.openToastrNotification(u.post, u.onCommentAdded, true)
+          this.messageService.addNewMessage(u.onCommentAdded);
+          // this.openToastrNotification(u.post, u.onCommentAdded, true);
         }
       })
     )
       .subscribe(u => console.log(u));
   }
 
-  openToastrNotification(post, c: Comment, rediect = true) {
-    const message = c.parentId ? 'has reaplied to a comment on the post you have liked/commented' : 'has commented on the post you have liked/commented'
+  // openToastrNotification(post, c: Comment, rediect = true) {
+  //   const message = c.parentId ? 'has reaplied to a comment on the post you have liked/commented' : 'has commented on the post you have liked/commented'
 
-    this.subscriptions$.add(
-      this.toastrService.info(
-        `<b>${c.createdBy.name}</b> ${message}  <br>
-        <u>View</u>
-        `
-      ).onTap
-        .pipe(take(1))
-        .subscribe((d) => {
-          if (rediect) {
-            if (c.type === 'company') {
-              this.router.navigate(['/', `company`, post._id],
-                { queryParams: { type: 'company', commentId: c._id, companyPostId: c.postId  } });
-            } else if(c.type === 'dream-job') {
-              this.router.navigate(['/', 'dream-job', post.slug ? post.slug : ''], { queryParams: { type: post.type, commentId: c._id} })
-            }
-             else {
-              this.router.navigate(['/',
-                post.type === 'product' ? 'product' : 'post',
-                post.slug ? post.slug : ''
-              ],
-                { queryParams: { type: post.type, commentId: c._id} });
-            }
-          }
-        })
-    );
-  }
+  //   this.subscriptions$.add(
+  //     this.toastrService.info(
+  //       `<b>${c.createdBy.name}</b> ${message}  <br>
+  //       <u>View</u>
+  //       `
+  //     ).onTap
+  //       .pipe(take(1))
+  //       .subscribe((d) => {
 
-  scrollToComment(blocks: [], c: Comment) {
-    /** If block specific comment, open the comment section for that block first */
-    if (c.blockSpecificComment) {
-      const b: any = blocks.find((b: any) => b._id === c.blockId);
-      b['__show'] = true;
-    }
+  //         if (rediect) {
+  //           if (c.type === 'company') {
+  //             this.router.navigate(['/', `company`, post._id],
+  //               { queryParams: { type: 'company', commentId: c._id, companyPostId: c.postId  } });
+  //           } else if(c.type === 'dream-job') {
+  //             this.router.navigate(['/', 'dream-job', post.slug ? post.slug : ''], { queryParams: { type: post.type, commentId: c._id} })
+  //           } else {
+  //             this.router.navigate(['/',
+  //               post.type === 'product' ? 'product' : 'post',
+  //               post.slug ? post.slug : ''
+  //             ],
+  //               { queryParams: { type: post.type, commentId: c._id} });
+  //           }
+  //         }
+  //       })
+  //   );
+  // }
 
-    /** If block specific comment, wait for half second to open the comment section for that block first */
-    if (isPlatformBrowser(this._platformId)) {
-      setTimeout(() => {
-        let el = this.document.getElementById(`${c._id}`);
-        el.scrollIntoView({ block: 'center', behavior: 'smooth', inline: 'center' }); /** scroll to the element upto the center */
-        el.style.outline = '2px solid #00aeef'; /** Highlighting the element */
-      }, c.blockSpecificComment ? 500 : 0);
-    }
-  }
+  // scrollToComment(blocks: [], c: Comment) {
+  //   /** If block specific comment, open the comment section for that block first */
+  //   if (c.blockSpecificComment) {
+  //     const b: any = blocks.find((b: any) => b._id === c.blockId);
+  //     b['__show'] = true;
+  //   }
+
+  //   /** If block specific comment, wait for half second to open the comment section for that block first */
+  //   if (isPlatformBrowser(this._platformId)) {
+  //     setTimeout(() => {
+  //       let el = this.document.getElementById(`${c._id}`);
+  //       el.scrollIntoView({ block: 'center', behavior: 'smooth', inline: 'center' }); /** scroll to the element upto the center */
+  //       el.style.outline = '2px solid #00aeef'; /** Highlighting the element */
+  //     }, c.blockSpecificComment ? 500 : 0);
+  //   }
+  // }
 
   setIdTokenToLocalStorage(idToken: string): void {
     if (isPlatformBrowser(this._platformId)) {

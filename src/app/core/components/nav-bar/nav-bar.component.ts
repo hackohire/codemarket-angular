@@ -11,6 +11,9 @@ import { Router } from '@angular/router';
 import { MatDialog, MatAnchor } from '@angular/material';
 import { SearchComponent } from '../search/search.component';
 import { CompanyPostTypes, UserProfilePostTypes, PostType } from '../../../shared/models/post-types.enum';
+import { MessageService } from '../../../shared/services/message.service';
+import { environment } from '../../../../environments/environment';
+import { PostService } from '../../../shared/services/post.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -18,6 +21,7 @@ import { CompanyPostTypes, UserProfilePostTypes, PostType } from '../../../share
   styleUrls: ['./nav-bar.component.scss'],
 })
 export class NavBarComponent implements OnInit, OnDestroy {
+
   @ViewChild('lr', {static: false}) lr: MatAnchor;
   companyPostTypes = CompanyPostTypes;
   userProfilePostTypes = UserProfilePostTypes;
@@ -59,6 +63,8 @@ export class NavBarComponent implements OnInit, OnDestroy {
 
   cartListLength: Observable<number>;
 
+  messagesPageNumber = 1;
+
   private subscription: Subscription = new Subscription();
 
   constructor(
@@ -66,7 +72,9 @@ export class NavBarComponent implements OnInit, OnDestroy {
     private store: Store<AppState>,
     public authService: AuthService,
     private router: Router,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    public messageService: MessageService,
+    public postService: PostService
     ) {
   }
 
@@ -96,6 +104,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
         if (u) {
           // this.ref.detach();
           this.loggedInUser = {...u};
+          this.messageService.fetchLatestCommentsForTheUserEngaged(null, u._id);
           // this.ref.detectChanges();
         } else {
           this.loggedInUser = u;
@@ -129,6 +138,10 @@ export class NavBarComponent implements OnInit, OnDestroy {
 
   redirect() {
     this.router.navigate(['/']);
+  }
+
+  isUnread(messages) {
+    return messages.find(m => m.__show);
   }
 
   openSearchDialog(): void {

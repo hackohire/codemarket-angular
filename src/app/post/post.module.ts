@@ -388,6 +388,13 @@ const postRoutes: Routes = [
         loadChildren: () => import('../assignment/add-assignment/add-assignment.module')
           .then(module => module.AddAssignmentModule),
       },
+
+      /** SEND EMAIL */
+      {
+        path: `send-${PostType.Email}`,
+        loadChildren: () => import('../email/send-email/send-email.module')
+          .then(module => module.SendEmailModule),
+      },
     ],
     // runGuardsAndResolvers: 'always',
   },

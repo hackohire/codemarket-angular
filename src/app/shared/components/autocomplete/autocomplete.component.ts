@@ -12,6 +12,7 @@ import { AuthService } from '../../../core/services/auth.service';
   selector: 'app-autocomplete',
   templateUrl: './autocomplete.component.html',
   styleUrls: ['./autocomplete.component.scss'],
+  providers: [CompanyService]
 })
 export class AutocompleteComponent implements OnInit, OnDestroy {
 
@@ -33,6 +34,10 @@ export class AutocompleteComponent implements OnInit, OnDestroy {
 
   /** autocomplete - the actual formcontrol, which is created in parent component */
   @Input() multiple = false;
+
+  @Input() forCompany = false;
+
+  @Input() allowToAdd = true;
 
   constructor(
     private formService: FormService,
@@ -61,19 +66,13 @@ export class AutocompleteComponent implements OnInit, OnDestroy {
 
   /** Add the value if not available */
   public add = (name) => {
-    return this.formService.addToCollection(name, this.collection, this.type).toPromise();
+    if (this.allowToAdd) {
+      return this.formService.addToCollection(name, this.collection, this.type).toPromise();
+    }
   }
 
   addCompany = (name: string) => {
-    if (name) {
-      return new Promise((resolve, reject) => {
-        this.subscription$.add(
-          this.companyService.addCompany({name, createdBy: this.authService.loggedInUser._id}).subscribe(c => {
-            return resolve(c.name);
-          })
-        );
-      });
-    }
+    return this.companyService.addCompany({name, createdBy: this.authService.loggedInUser._id}).toPromise();
   }
 
 }

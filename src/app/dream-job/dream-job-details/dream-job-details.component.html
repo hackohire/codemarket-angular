@@ -7,11 +7,10 @@
     =================================-->
 
     <app-breadcumb (editPost)="postService?.editPost(details)"
-        [showEditPostDetails]="details?.createdBy?._id === authService?.loggedInUser?._id ? true : false"
+        [showEditPostDetails]="(details?.createdBy?._id === authService?.loggedInUser?._id || collaborators.indexOf(authService?.loggedInUser?._id) >= 0) ? true : false"
         [title]="details?.name" [path]="breadcumb?.path" [postDetails]="details"
         [showAddCollaborators]="details?.createdBy?._id === authService?.loggedInUser?._id ? true : false"
-        [postDetails]="details"
-        >
+        [postDetails]="details">
     </app-breadcumb>
 
     <!--================================
@@ -238,7 +237,7 @@
 
     <div class="item-grid pen-grid item-grid-large">
         <!-- <ng-container > -->
-        <app-brief-post style="width: 100%;" (delete)="deleteJob($event)" [p]="p" *ngFor="let p of connectedJobsList"></app-brief-post>
+        <app-brief-post style="width: 100%;" (delete)="deleteJob($event)" [p]="p" *ngFor="let p of connectedJobsList" [readMore]="true"></app-brief-post>
         <!-- </ng-container> -->
     </div>
 </ng-template>

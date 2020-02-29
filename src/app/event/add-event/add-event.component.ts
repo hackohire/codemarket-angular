@@ -183,7 +183,7 @@ export class AddEventComponent implements OnInit {
         longitude: new FormControl(i && i.location ? i.location.longitude : 0),
         address: new FormControl(i && i.location ? i.location.address : ''),
       }),
-      company: new FormControl(i && i.company ? i.company : '', this.data && this.data.companyDetails ? Validators.required : []),
+      company: new FormControl(i && i.company ? i.company : '', this.data && this.data.companyDetails ? Validators.required : null),
       eventType: new FormControl(i && i.eventType ? i.eventType : '', Validators.required)
       // address: new FormControl(i && i.address ? i.address : '', Validators.required),
       // snippets: new FormControl(null),
@@ -253,9 +253,6 @@ export class AddEventComponent implements OnInit {
     if (this.idFromControl && !this.idFromControl.value) {
       this.eventForm.removeControl('_id');
       const eventFormValue = { ...this.eventForm.value };
-
-      /** Only Send _id */
-      eventFormValue.company = eventFormValue.company && eventFormValue.company._id ? eventFormValue.company._id : eventFormValue.company;
 
       if (this.data && this.data.company) {
         this.postService.addPost(eventFormValue).subscribe((post) => {

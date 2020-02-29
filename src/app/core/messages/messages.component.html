@@ -1,0 +1,98 @@
+<!--================================
+        START BREADCRUMB AREA
+    =================================-->
+<section class="breadcrumb-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="breadcrumb">
+                    <ul>
+                        <li class="active">
+                            <a href="#">Messages</a>
+                        </li>
+                    </ul>
+                </div>
+                <h1 class="page-title">All Messages</h1>
+            </div>
+            <!-- end /.col-md-12 -->
+        </div>
+        <!-- end /.row -->
+    </div>
+    <!-- end /.container -->
+</section>
+<!--================================
+        END BREADCRUMB AREA
+    =================================-->
+
+<!--================================
+            START DASHBOARD AREA
+    =================================-->
+<section class="dashboard-area">
+
+    <div class="dashboard_contents" style="padding: 30px;">
+        <div class="container">
+            <div class="row mb-3" *ngFor="let d of uniqueDatesArray">
+                <div class="col-md-12">
+                    <div class="selected-date">
+                        
+                        <span class="day">{{d | date: 'fullDate'}}</span>
+
+                        <!-- <span class="day">{{selectedDayAndMonth.day}}</span> -->
+                        <!-- <span class="month">{{selectedDayAndMonth.month | capitalize}}</span> -->
+                    </div>
+                    <div class="cardify notifications_module" [@fadeInOut]>
+                        <!-- {{convertDate(m?.createdAt)}} - {{d}} {{convertDate(m?.createdAt) == d}} -->
+                        <ng-container *ngFor="let m of (messageService.messagesList$ | async)?.messages">
+                            <div *ngIf="convertDate(m?.createdAt) == d" class="notification">
+                                <span *ngIf="m['__show']" class="line"></span>
+                                <div class="notification__info">
+                                    <div class="info_avatar"
+                                        [routerLink]="['/', 'dashboard', 'profile', m?.createdBy?._id ]">
+                                        <img [src]="m?.createdBy?.avatar ? ((s3FilesBucketURL + m.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                                            alt="">
+                                    </div>
+                                    <div class="info" (click)="redirectToPost(m)">
+                                        <p>
+                                            <span
+                                                [routerLink]="['/', 'dashboard', 'profile', m?.createdBy?._id ]">{{m?.createdBy?.name}}</span>
+                                            has added a {{m?.parentId ? 'reply to your comment' : 'comment'}} on
+                                            <a *ngIf="m?.referencePost">{{m?.referencePost?.name}}</a>
+                                            <a *ngIf="m?.referenceCompany">{{m?.referenceCompany?.name}}</a>
+                                        </p>
+                                        <p class="time">{{fromNow(m?.createdAt)}}</p>
+                                    </div>
+                                </div>
+                                <!-- end /.notifications -->
+
+                                <div class="notification__icons">
+                                    <i class="fal fa-comment"></i>
+                                    <!-- <span class="lnr lnr-cross"></span> -->
+                                </div>
+                                <!-- end /.notifications -->
+                            </div>
+                        </ng-container>
+                    </div>
+                    <!-- end /.notifications_modules -->
+                </div>
+                <!-- end /.col-md-12 -->
+            </div>
+            <!-- end /.row -->
+            <!-- pagination -->
+            <div *ngIf="!(((messageService.messagesList$ | async)?.messages?.length) < 10)"
+                class="pagination-area pagination-area2">
+                <nav class="navigation pagination " role="navigation">
+                    <span style="text-decoration: underline; cursor: pointer;"
+                        (click)="messagesPageNumber = messagesPageNumber + 1; messageService.fetchLatestCommentsForTheUserEngaged({pageNumber: messagesPageNumber, limit: 10}, authService?.loggedInUser?._id);">+
+                        Load
+                        More</span>
+                </nav>
+            </div>
+            <!-- end /.pagination -->
+        </div>
+        <!-- end /.container -->
+    </div>
+    <!-- end /.dashboard_menu_area -->
+</section>
+<!--================================
+            END DASHBOARD AREA
+    ================================= -->

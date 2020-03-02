@@ -91,5 +91,6 @@ export interface Post {
     connectedEvent?: Event | string;
 
     /** Field for collaborator */
-    collaborators?: [User]
+    collaborators?: [User];
+    assignees?: [User];
 }

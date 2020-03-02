@@ -350,6 +350,11 @@ export const appConstants = {
         name
       }
 
+      assignees {
+        _id
+        name
+      }
+
       jobProfile {
         _id
         name

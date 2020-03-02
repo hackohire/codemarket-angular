@@ -19,11 +19,12 @@ export class BreadcumbComponent implements OnInit {
   @Input() eventDate: [];
   @Input() postDetails;
   @Input() companyDetails: Company;
-  @Input('color') color = 'white';
-  @Input('showMenu') showMenu = true;
-  @Input('showImportButton') showImportButton = false;
-  @Input('showEditPostDetails') showEditPostDetails: boolean;
-  @Input('showAddCollaborators') showAddCollaborators: boolean;
+  @Input() color = 'white';
+  @Input() showMenu = true;
+  @Input() showImportButton = false;
+  @Input() showEditPostDetails: boolean;
+  @Input() showAddCollaborators: boolean;
+  @Input() showAddAssignee: boolean;
 
   @Output() editPost = new EventEmitter();
 

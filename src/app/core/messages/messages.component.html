@@ -34,11 +34,7 @@
             <div class="row mb-3" *ngFor="let d of uniqueDatesArray">
                 <div class="col-md-12">
                     <div class="selected-date">
-                        
                         <span class="day">{{d | date: 'fullDate'}}</span>
-
-                        <!-- <span class="day">{{selectedDayAndMonth.day}}</span> -->
-                        <!-- <span class="month">{{selectedDayAndMonth.month | capitalize}}</span> -->
                     </div>
                     <div class="cardify notifications_module" [@fadeInOut]>
                         <!-- {{convertDate(m?.createdAt)}} - {{d}} {{convertDate(m?.createdAt) == d}} -->

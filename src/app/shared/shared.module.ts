@@ -37,6 +37,7 @@ import { AutocompleteComponent } from './components/autocomplete/autocomplete.co
 import { AddHowtodocComponent } from '../howtodoc/add-howtodoc/add-howtodoc.component';
 import { AddAssignmentComponent } from '../assignment/add-assignment/add-assignment.component';
 import { AddCollaboratorsComponent } from './components/add-collaborators/add-collaborators.component';
+import { AddAssigneeComponent } from './components/add-assignee/add-assignee.component';
 
 
 export function hljsLanguages() {
@@ -47,7 +48,7 @@ export function hljsLanguages() {
   ];
 }
 @NgModule({
-  declarations: [BreadcumbComponent, EditorComponent, CommentComponent, DatatableComponent, SafePipe, LikeDislikeComponent, VideoChatComponent, AddPostMenuComponent, SoftwareDevMenuComponent, CompaniesListComponent, AddJobComponent, BriefPostComponent, AutocompleteComponent, AddHowtodocComponent, AddAssignmentComponent, AddCollaboratorsComponent],
+  declarations: [BreadcumbComponent, EditorComponent, CommentComponent, DatatableComponent, SafePipe, LikeDislikeComponent, VideoChatComponent, AddPostMenuComponent, SoftwareDevMenuComponent, CompaniesListComponent, AddJobComponent, BriefPostComponent, AutocompleteComponent, AddHowtodocComponent, AddAssignmentComponent, AddCollaboratorsComponent, AddAssigneeComponent],
   imports: [
     CommonModule,
     FormsModule,

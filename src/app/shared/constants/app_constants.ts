@@ -351,6 +351,11 @@ export const appConstants = {
         avatar
       }
 
+      assignees {
+        _id
+        name
+      }
+
       jobProfile {
         _id
         name

@@ -1,0 +1,14 @@
+<a class="btn btn--sm btn--round menu"
+    style="color: #0674ec !important; background: white;" [mdePopoverTriggerFor]="addAssigneesPopover"
+    mdePopoverTriggerOn="click">Add Assignees
+</a>
+
+<mde-popover #addAssigneesPopover="mdePopover" [mdePopoverOverlapTrigger]="false" [mdePopoverCloseOnClick]="false"
+        [mdePopoverArrowOffsetX]="58" mdePopoverArrowColor="#FFFFFF">
+        <div style="background: #f8f9fb; padding: 10px;">
+            <app-autocomplete class="field-full-width" [allowToAdd]="false" [autoComplete]="addAssigneesForm.get('assignees')"
+                [placeholder]="'Select Students'" [collection]="'users'" [type]="" [multiple]="true" matInput>
+            </app-autocomplete>
+            <mat-icon (click)="addAssignees()">send</mat-icon>
+        </div>
+</mde-popover>

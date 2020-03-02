@@ -15,10 +15,11 @@
                     <div style="margin-left: auto;">
 
                         <app-add-collaborators *ngIf="showAddCollaborators" [postDetails]="postDetails"></app-add-collaborators>
+                        <app-add-assignee *ngIf="showAddAssignee" [postDetails]="postDetails"></app-add-assignee>
 
                         <a *ngIf="showImportButton" class="btn btn--sm btn--round menu"
                             style="color: #0674ec !important; background: white;" [mdePopoverTriggerFor]="importArticle"
-                            [mdePopoverTargetAt]="lr" mdePopoverTriggerOn="click">Import
+                            mdePopoverTriggerOn="click">Import
                         </a>
                         <!--
                             <app-add-post-menu style="color: #0674ec !important; margin-left: auto;"></app-add-post-menu>

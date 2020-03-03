@@ -342,6 +342,20 @@ export class PostComponent implements OnInit {
         type: CompanyPostTypes.CustomerProfile
       },
 
+      /** Customer Profile */
+      {
+        path: 'post-list',
+        label: 'Business Services List',
+        queryParams: { type: CompanyPostTypes.BusinessServices, all: false },
+        type: CompanyPostTypes.BusinessServices
+      },
+      {
+        path: 'add-' + CompanyPostTypes.BusinessServices,
+        label: 'Add ' + CompanyPostTypes.BusinessServices,
+        queryParams: { type: CompanyPostTypes.BusinessServices },
+        type: CompanyPostTypes.BusinessServices
+      },
+
       /** Competitive Advantage */
       {
         path: 'post-list',

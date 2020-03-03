@@ -47,5 +47,6 @@ export enum CompanyPostTypes {
     CompanyPost = 'company-post',
     CustomerTemplate = 'customer-template',
     CustomerProfile = 'customer-profile',
-    CompetitiveAdvantage = 'competitive-advantage'
+    CompetitiveAdvantage = 'competitive-advantage',
+    BusinessServices = 'business-services'
 }

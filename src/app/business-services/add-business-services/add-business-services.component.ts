@@ -1,27 +1,26 @@
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { Store } from '@ngrx/store';
-import { of, Subscription } from 'rxjs';
-import { switchMap, tap } from 'rxjs/operators';
-import { AuthService } from '../../core/services/auth.service';
-import { AddPost, GetPostById, SetSelectedPost, UpdatePost } from '../../core/store/actions/post.actions';
-import { selectSelectedPost } from '../../core/store/selectors/post.selectors';
-import { AppState } from '../../core/store/state/app.state';
-import { BreadCumb } from '../../shared/models/bredcumb.model';
 import { CompanyPostTypes } from '../../shared/models/post-types.enum';
-import { PostStatus } from '../../shared/models/poststatus.enum';
-import { FormService } from '../../shared/services/form.service';
+import { AuthService } from '../../core/services/auth.service';
+import { AppState } from '../../core/store/state/app.state';
+import { Store } from '@ngrx/store';
+import { BreadCumb } from '../../shared/models/bredcumb.model';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { EditorComponent } from '../../shared/components/editor/editor.component';
+import { Subscription, of } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { SetSelectedPost, GetPostById, AddPost, UpdatePost } from '../../core/store/actions/post.actions';
+import { selectSelectedPost } from '../../core/store/selectors/post.selectors';
+import { tap, switchMap } from 'rxjs/operators';
 import { Post } from '../../shared/models/post.model';
+import { PostStatus } from '../../shared/models/poststatus.enum';
 
 @Component({
-  selector: 'app-add-customer-profile',
-  templateUrl: './add-customer-profile.component.html',
-  styleUrls: ['./add-customer-profile.component.scss']
+  selector: 'app-add-business-services',
+  templateUrl: './add-business-services.component.html',
+  styleUrls: ['./add-business-services.component.scss']
 })
-export class AddCustomerProfileComponent implements OnInit {
+export class AddBusinessServicesComponent implements OnInit {
+
   breadcumb: BreadCumb;
   postForm: FormGroup;
 
@@ -54,11 +53,11 @@ export class AddCustomerProfileComponent implements OnInit {
 
     /** Make the Changes here while creating new post type */
     this.breadcumb = {
-      title: 'Add Sales Goal Details',
+      title: 'Add Business Services Details',
       path: [
 
         {
-          name: CompanyPostTypes.SalesGoal
+          name: CompanyPostTypes.BusinessServices
         }
       ]
     };
@@ -99,12 +98,12 @@ export class AddCustomerProfileComponent implements OnInit {
     this.postForm = new FormGroup({
       name: new FormControl(i && i.name ? i.name : '', Validators.required),
       description: new FormControl(i && i.description ? i.description : []),
-      company: new FormControl(i && i.company ? i.company : null, Validators.required),
       createdBy: new FormControl(i && i.createdBy && i.createdBy._id ? i.createdBy._id : ''),
+      company: new FormControl(i && i.company ? i.company : null, Validators.required),
       status: new FormControl(i && i.status ? i.status : PostStatus.Drafted),
       _id: new FormControl(i && i._id ? i._id : ''),
       // change this line
-      type: new FormControl(CompanyPostTypes.CustomerProfile),
+      type: new FormControl(CompanyPostTypes.BusinessServices),
     });
   }
 
@@ -132,5 +131,5 @@ export class AddCustomerProfileComponent implements OnInit {
       this.store.dispatch(UpdatePost({post: this.postForm.value}));
     }
   }
-}
 
+}

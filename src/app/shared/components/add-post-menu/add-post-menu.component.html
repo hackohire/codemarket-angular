@@ -195,6 +195,20 @@
     <span> Competitive Advantage</span>
   </button>
 
+  <!-- Business Services -->
+  <button mat-menu-item [routerLink]="['/', 'post', 'add-' + companyPostTypes.BusinessServices]">
+    <i style="font-size: 1.7rem !important;"
+      [class]="'vertical-align-middle fal fa-' + icons['dream-job'] + ' fa-fw'"></i>
+    <span> Business Services</span>
+  </button>
+
+  <!-- Customer Profile -->
+  <button mat-menu-item [routerLink]="['/', 'post', 'add-' + companyPostTypes.CustomerProfile]">
+    <i style="font-size: 1.7rem !important;"
+      [class]="'vertical-align-middle fal fa-' + icons['dream-job'] + ' fa-fw'"></i>
+    <span> Customer Profile</span>
+  </button>
+
   <button mat-menu-item [routerLink]="['/', 'post', 'add-' + UserProfilePostTypes.StartupGoal]">
     <i style="font-size: 1.7rem !important;"
       [class]="'vertical-align-middle fal fa-' + icons['dream-job'] + ' fa-fw'"></i>

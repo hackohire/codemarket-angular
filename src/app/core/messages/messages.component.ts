@@ -43,7 +43,7 @@ export class MessagesComponent implements OnInit, OnDestroy {
     this.subscription$.add(
       this.messageService.messagesList$.subscribe(mList => {
         if (mList.messages && mList.messages.length) {
-          console.log(new Date(+(mList.messages[0].createdAt)).toISOString());
+          // console.log(new Date(+(mList.messages[0].createdAt)).toISOString());
           this.uniqueDatesArray = [...new Set(mList.messages.map(item => new Date(+(item.createdAt)).toISOString().split('T')[0]))];
         }
         console.log(this.uniqueDatesArray);

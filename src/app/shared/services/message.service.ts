@@ -20,7 +20,6 @@ export class MessageService {
 
   constructor(
     private apollo: Apollo,
-    private router: Router,
     @Inject(PLATFORM_ID) private platformId,
     private readonly transferState: TransferState
   ) { }
@@ -68,6 +67,7 @@ export class MessageService {
 
   addNewMessage(c) {
     c['__show'] = true;
+    c['createdAt'] = new Date(c['createdAt']).getTime();
     const messages = this.messages$.getValue();
     messages.messages.unshift(c);
     this.messages$.next(messages);

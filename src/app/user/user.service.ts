@@ -69,7 +69,26 @@ export class UserService {
   ) { }
 
   createUser(user): Observable<any> {
-    return of([]);
+    return this.apollo.mutate(
+      {
+        mutation: gql`
+        mutation createUser($user: UserInput!) {
+          createUser(user: $user) {
+            name
+            email
+            _id
+          }
+        }
+        `,
+        variables: {
+          user
+        }
+      }
+    ).pipe(
+      map((d: any) => {
+        return d.data.createUser;
+      })
+    );
   }
 
   updateUser(u: User) {

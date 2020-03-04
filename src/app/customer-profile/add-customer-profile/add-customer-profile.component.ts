@@ -54,11 +54,11 @@ export class AddCustomerProfileComponent implements OnInit {
 
     /** Make the Changes here while creating new post type */
     this.breadcumb = {
-      title: 'Add Sales Goal Details',
+      title: 'Add Customer Profile Details',
       path: [
 
         {
-          name: CompanyPostTypes.SalesGoal
+          name: CompanyPostTypes.CustomerProfile
         }
       ]
     };

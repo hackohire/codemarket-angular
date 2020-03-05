@@ -172,53 +172,6 @@ export class AuthService {
       .subscribe(u => console.log(u));
   }
 
-  // openToastrNotification(post, c: Comment, rediect = true) {
-  //   const message = c.parentId ? 'has reaplied to a comment on the post you have liked/commented' : 'has commented on the post you have liked/commented'
-
-  //   this.subscriptions$.add(
-  //     this.toastrService.info(
-  //       `<b>${c.createdBy.name}</b> ${message}  <br>
-  //       <u>View</u>
-  //       `
-  //     ).onTap
-  //       .pipe(take(1))
-  //       .subscribe((d) => {
-
-  //         if (rediect) {
-  //           if (c.type === 'company') {
-  //             this.router.navigate(['/', `company`, post._id],
-  //               { queryParams: { type: 'company', commentId: c._id, companyPostId: c.postId  } });
-  //           } else if(c.type === 'dream-job') {
-  //             this.router.navigate(['/', 'dream-job', post.slug ? post.slug : ''], { queryParams: { type: post.type, commentId: c._id} })
-  //           } else {
-  //             this.router.navigate(['/',
-  //               post.type === 'product' ? 'product' : 'post',
-  //               post.slug ? post.slug : ''
-  //             ],
-  //               { queryParams: { type: post.type, commentId: c._id} });
-  //           }
-  //         }
-  //       })
-  //   );
-  // }
-
-  // scrollToComment(blocks: [], c: Comment) {
-  //   /** If block specific comment, open the comment section for that block first */
-  //   if (c.blockSpecificComment) {
-  //     const b: any = blocks.find((b: any) => b._id === c.blockId);
-  //     b['__show'] = true;
-  //   }
-
-  //   /** If block specific comment, wait for half second to open the comment section for that block first */
-  //   if (isPlatformBrowser(this._platformId)) {
-  //     setTimeout(() => {
-  //       let el = this.document.getElementById(`${c._id}`);
-  //       el.scrollIntoView({ block: 'center', behavior: 'smooth', inline: 'center' }); /** scroll to the element upto the center */
-  //       el.style.outline = '2px solid #00aeef'; /** Highlighting the element */
-  //     }, c.blockSpecificComment ? 500 : 0);
-  //   }
-  // }
-
   setIdTokenToLocalStorage(idToken: string): void {
     if (isPlatformBrowser(this._platformId)) {
       localStorage.setItem('idToken', idToken);
@@ -226,20 +179,16 @@ export class AuthService {
   }
 
   login(): void {
-    // const config = Amplify.Auth._config;
-    // const oauth = Amplify.Auth._config.oauth;
-    // const url = `${environment.COGNITO_AUTH_DOMAIN}/login?response_type=${oauth.responseType}&client_id=${config.aws_user_pools_web_client_id}&redirect_uri=${oauth.redirectSignIn}`;
-    // console.log(Amplify.Auth._config);
-    // window.location.assign(url);
     Auth.federatedSignIn();
   }
 
   logout(): void {
     Auth.signOut().then(d => {
-      console.log('user has been signed out');
+
       if (isPlatformBrowser(this._platformId)) {
         localStorage.clear();
       }
+
       this.store.dispatch(SetLoggedInUser({ payload: null }));
       this.router.navigate(['/']);
     });
@@ -251,8 +200,7 @@ export class AuthService {
 
   checkIfUserIsLoggedIn(redirect?: boolean): Promise<boolean> {
     return Auth.currentAuthenticatedUser().then((u: CognitoUser) => {
-      console.log(u);
-      console.log(u.getSignInUserSession().getIdToken().getJwtToken());
+      
       if (!this.loggedInUser) {
         this.setIdTokenToLocalStorage(u.getSignInUserSession().getIdToken().getJwtToken());
         this.store.dispatch(Authorise());
@@ -288,8 +236,9 @@ export class AuthService {
            * Otherwise take current URL
            */
           const redirectURLTree = this.router.getCurrentNavigation() ?
-            this.router.getCurrentNavigation().extractedUrl.toString() : this.router.url;
-          console.log(redirectURLTree);
+            this.router.getCurrentNavigation().extractedUrl.toString() : 
+            this.router.url;
+
           sessionStorage.setItem('redirectURL', redirectURLTree);
           this.openAuthenticationPopover.next(true);
           // this.login();

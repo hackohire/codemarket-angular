@@ -102,10 +102,8 @@ export class NavBarComponent implements OnInit, OnDestroy {
     this.subscription.add(
       this.authService.loggedInUser$.subscribe(u => {
         if (u) {
-          // this.ref.detach();
           this.loggedInUser = {...u};
           this.messageService.fetchLatestCommentsForTheUserEngaged(null, u._id);
-          // this.ref.detectChanges();
         } else {
           this.loggedInUser = u;
         }
@@ -119,17 +117,6 @@ export class NavBarComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
-  }
-
-  login() {
-      // const dialogRef = this.dialog.open(AuthDialogComponent, {
-      //   // panelClass: 'no-padding',
-      // });
-
-      // dialogRef.afterClosed().subscribe(result => {
-      //   console.log('The dialog was closed');
-      // });
-    // this.authService.login();
   }
 
   logout() {

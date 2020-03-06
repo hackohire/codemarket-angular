@@ -1,0 +1,7 @@
+<div class="auth-box common-box-shadow">
+    <app-sign-in *ngIf="authState?.state === 'signIn' || authState?.state === 'signOut' || authState?.state === 'signIn_failure'"></app-sign-in>
+    <app-sign-up *ngIf="authState?.state === 'signUp' || authState?.state === 'signUp_failure'"></app-sign-up>
+    <app-confirm-code *ngIf="authState?.state === 'confirmSignUp'"></app-confirm-code>
+    <app-forgot-password *ngIf="authState?.state === 'forgotPasswordRequest' || authState?.state === 'forgotPassword_failure'"></app-forgot-password>
+    <app-reset-password *ngIf="authState?.state === 'resetPassword' || authState?.state === 'forgotPasswordSubmit_failure'"></app-reset-password>
+</div>

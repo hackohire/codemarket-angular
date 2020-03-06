@@ -1,0 +1,14 @@
+<form [formGroup]="confirmForm">
+  <h2>Confirm your email address</h2>
+  <mat-form-field appearance="outline" class="field-full-width">
+    <mat-label>Email</mat-label>
+    <input matInput placeholder="Email" type="email" formControlName="email">
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="field-full-width">
+    <mat-label>Enter the confirmation code that was emailed to you</mat-label>
+    <input matInput placeholder="Confirmation Code" type="text" formControlName="code" autocomplete="false" required>
+    <!-- <mat-hint *ngIf="!codeInput.value">Enter the confirmation code that was emailed to you</mat-hint> -->
+  </mat-form-field>
+  <button mat-raised-button color="primary" [disabled]="confirmForm?.invalid" (click)="confirmCode()">Confirm</button>
+  <span style="float: right;">Didn't receive a code? <a href="javascript:void(null)" (click)="authService?.resendCode(email)">Send again</a></span>
+</form>

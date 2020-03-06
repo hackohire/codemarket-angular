@@ -11,7 +11,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../store/state/app.state';
 import { Authorise, SetLoggedInUser } from '../store/actions/user.actions';
 import { selectLoggedInUser } from '../store/selectors/user.selector';
-import { Observable, BehaviorSubject, Subscription } from 'rxjs';
+import { Observable, BehaviorSubject, Subscription, Subject } from 'rxjs';
 import { User } from '../../shared/models/user.model';
 import { Router } from '@angular/router';
 import { isPlatformBrowser, DOCUMENT, isPlatformServer } from '@angular/common';
@@ -21,16 +21,33 @@ import { Comment } from '../../shared/models/comment.model';
 import { ToastrService } from 'ngx-toastr';
 import { TransferState, makeStateKey } from '@angular/platform-browser';
 import { MessageService } from '../../shared/services/message.service';
+import { NotificationService } from '../../auth/notification.service';
+
+export interface NewUser {
+  email: string;
+  password: string;
+  name: string;
+}
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
+  /** Authentication Related Variables */
+  public static SIGN_IN = 'signIn';
+  public static SIGN_OUT = 'signOut';
+
+  public loggedIn: boolean;
+  _authState: BehaviorSubject<CognitoUser|any> = new BehaviorSubject<CognitoUser|any>(null);
+  authState: Observable<CognitoUser|any> = this._authState.asObservable();
+
   loggedInUser$: Observable<User>;
   loggedInUser: User;
   openAuthenticationPopover = new BehaviorSubject<boolean>(false);
   subscriptions$ = new Subscription();
+
   constructor(
     private apollo: Apollo,
     private store: Store<AppState>,
@@ -39,12 +56,19 @@ export class AuthService {
     @Inject(DOCUMENT) private document: Document,
     private toastrService: ToastrService,
     private readonly transferState: TransferState,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private _notification: NotificationService
     // private commentService: CommentService
   ) {
-
     this.loggedInUser$ = this.store.select(selectLoggedInUser);
     this.loggedInUser$.subscribe((u) => this.loggedInUser = u);
+
+    Hub.listen('auth', (data) => {
+      const { channel, payload } = data;
+      if (channel === 'auth') {
+        this._authState.next({ state: payload.event });
+      }
+    });
 
     /** Hub listening for auth state changes */
     Hub.listen('auth', async (data) => {
@@ -135,6 +159,46 @@ export class AuthService {
       catchError(e => of(e)),
     );
   }
+
+  /** Authentication Related Methods Starts here */
+
+  signUp(user: NewUser): Promise<CognitoUser|any> {
+    return Auth.signUp({
+      username: user.email,
+      password: user.password,
+      attributes: {
+        email: user.email,
+        name: user.name
+      }
+    });
+  }
+
+  signIn(username: string, password: string): Promise<CognitoUser|any> {
+    return new Promise((resolve, reject) => {
+      Auth.signIn(username, password)
+      .then((user: CognitoUser|any) => {
+        this.loggedIn = true;
+        resolve(user);
+      }).catch((error: any) => reject(error));
+    });
+  }
+
+  forgotPasswordRequest(email: string): Promise<any> {
+    return Auth.forgotPassword(email);
+  }
+
+  resendCode(email: string) {
+    Auth.resendSignUp(email)
+      .then(() => this._notification.show('A code has been emailed to you'))
+      .catch(() => this._notification.show('An error occurred'));
+  }
+
+  signOut(): Promise<any> {
+    return Auth.signOut()
+      .then(() => this.loggedIn = false);
+  }
+
+  /** Authentication Related Methods Ends here */
 
   setUserOnline(u: User) {
     const USER_SUBSCRIPTION = gql`

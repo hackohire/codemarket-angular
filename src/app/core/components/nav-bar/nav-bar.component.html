@@ -119,7 +119,7 @@
       </a> -->
       <!-- Login -->
       <ng-template #logIn>
-        <a #lr mat-button (click)="login()" [mdePopoverTriggerFor]="authentication" [mdePopoverTargetAt]="lr"
+        <a #lr mat-button [mdePopoverTriggerFor]="authentication" [mdePopoverTargetAt]="lr"
           mdePopoverTriggerOn="click">
           <i style="font-size: 1.0rem !important; color: #ffff00;"
             class="vertical-align-middle fal fa-user-circle fa-fw"></i>
@@ -129,7 +129,7 @@
 
       <mde-popover #authentication="mdePopover" [mdePopoverOverlapTrigger]="false" [mdePopoverCloseOnClick]="false"
         [mdePopoverArrowOffsetX]="58" mdePopoverArrowColor="#FFFFFF">
-        <amplify-authenticator [signUpConfig]="signUpConfig" [usernameAttributes]="'email'"></amplify-authenticator>
+        <app-auth></app-auth>
       </mde-popover>
 
       <!-- My Profile -->

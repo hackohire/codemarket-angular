@@ -20,6 +20,19 @@ span {
   color: inherit;
 }
 
+form > * {
+  // margin-bottom: 1.5em;
+  // width: 100%;
+}
+
+.auth-box {
+  background-color: #ececec; 
+  padding: 15px;
+  max-width: 500px;
+  min-width: 500px;
+  border-radius: 10px;
+}
+
 .cdx-input link-tool__input {
   white-space: pre-wrap !important;
 }
@@ -34,7 +47,7 @@ span {
 
 .field-full-width {
   width: 100%;
-  margin: 20px 0 20px 0;
+  margin: 10px 0 10px 0;
 }
 
 

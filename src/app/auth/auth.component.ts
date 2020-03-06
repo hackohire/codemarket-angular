@@ -1,10 +1,6 @@
 import { Component, OnInit, NgZone, Input, OnDestroy } from '@angular/core';
-import Auth from '@aws-amplify/auth';
-import { Router } from '@angular/router';
-import { Hub } from '@aws-amplify/core';
 import { AuthService } from '../core/services/auth.service';
 import { Subscription } from 'rxjs';
-import { auth } from '../core/amplify/assets/data-test-attributes';
 
 export interface AuthState {
   state: string;

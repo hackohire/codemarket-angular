@@ -9,7 +9,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavBarComponent } from './core/components/nav-bar/nav-bar.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import 'zone.js/dist/zone-patch-rxjs';
-import { AmplifyModule } from './core/amplify/amplify.module';
 import { PostDataResolver } from './core/resolver';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { InnovateComponent } from './innovate/innovate.component';
@@ -91,8 +90,7 @@ import { ResetPasswordComponent } from './auth/reset-password/reset-password.com
     CoreModule,
     SharedModule,
     BrowserAnimationsModule,
-    LayoutModule,
-    AmplifyModule
+    LayoutModule
   ],
   providers: [PostDataResolver],
   bootstrap: [AppComponent],

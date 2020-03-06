@@ -20,7 +20,6 @@ import { appReducesrs } from './store/reducers/app.reducers';
 import { SearchComponent } from './components/search/search.component';
 import { RouteReuseStrategy } from '@angular/router';
 import { CustomRouteReuseStategy } from '../shared/services/custom_router_reuse';
-import { AmplifyService } from './services/amplify.service';
 import { WebSocketLink } from 'apollo-link-ws';
 import { SubscriptionClient } from 'subscriptions-transport-ws';
 import { split } from 'apollo-link';
@@ -62,7 +61,6 @@ export function clearState(reducer) {
     // StoreDevtoolsModule.instrument(),
   ],
   providers: [
-    AmplifyService, 
     {
       provide: REDUCER_TOKEN,
       useValue: appReducesrs()

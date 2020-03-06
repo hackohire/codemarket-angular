@@ -18,7 +18,7 @@ import { Subscription } from 'rxjs';
 export class NotificationService implements OnDestroy {
 
   // Configuration api subscription
-  private _configState: Subscription;
+  private _configState = new Subscription();
   /**
    * Constructor
    * @param toast  {MatSnackBar}

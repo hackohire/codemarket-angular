@@ -1860,7 +1860,7 @@ export const emails = [
     email: 'mcrusmantijo@gmail.com'
   },
   {
-    email: 'devnull@ocf.berkeley.edu'
+    email: 'dev@ocf.berkeley.edu'
   },
   {
     email: 'eldavis@berkeley.edu'
@@ -2940,15 +2940,257 @@ export const dummyemails = [
   //   email: 'sumi@codemarket.io'
   // },
   {
-    email: 'sumitvekariya7@gmail.com'
+    email: ['sumitvekariya7@gmail.com'],
+    name: 'Sumit Vekariya',
+    companyName: 'Codemarket',
+    image: 'https://codemarket-files.s3.amazonaws.com/public/email-marketing/yesania.gif'
   },
   // {
-  //   email: 'bg4018@gmail.com'
+  //   email: 'sumi@codemarket.io',
+  //   name: 'Sumithra Devi',
+  //   companyName: 'Codemarket',
+  //   image: 'https://codemarket-files.s3.amazonaws.com/public/animation%20(4)-2020-03-05T09:06:52.156Z.gif'
   // },
   // {
-  //   email: 'jaysojitra13@gmail.com'
-  // },
+  //   email: 'mysumifoods@gmail.com',
+  //   name: 'Sumi Devi',
+  //   companyName: 'Sumi Foods',
+  //   image: 'https://codemarket-files.s3.amazonaws.com/public/animation%20(5)-2020-03-05T09:07:04.109Z.gif'
+  // }
+];
+
+export const bniSouthBayEmail = [
   {
-    email: 'mysumifoods@gmail.com'
+    BNIName: 'BNI South Bay Business Alliance - CA Long Beach-South Bay',
+    name: 'Bruno Perron',
+    companyName: 'Still Got it Fitness',
+    SiteURL: 'stillgotit.club',
+    image: 'https://codemarket-files.s3.amazonaws.com/public/email-marketing/still-got.gif',
+    Address: 'Bruno PerronStill Got it Fitness2173 Lomita BlvdLomita, CA 90717',
+    Phone: '(310) 294-1104',
+    email: ['j.doe@inbox.com', 'info@stillgotit.club']
+  },
+  {
+    BNIName: 'BNI South Bay Business Alliance - CA Long Beach-South Bay',
+    name: 'Cebert Tre Green',
+    companyName: 'Pro-Value Construction Services Inc.',
+    SiteURL: 'Provalueconstruction.com',
+    image: 'https://codemarket-files.s3.amazonaws.com/public/email-marketing/pro.gif',
+    Address: 'Mr. Cebert Tre GreenPro-Value Construction Services Inc.46-E Peninsula Center #538Rolling Hills Estates, CA 90274',
+    Phone: 3104159420,
+    email: ['info@provalueconstruction.com']
+  },
+  {
+    BNIName: 'BNI South Bay Business Alliance - CA Long Beach-South Bay',
+    name: 'George Sulc',
+    companyName: 'Envision Web Design',
+    SiteURL: 'envisionwebdesign.net',
+    image: 'https://codemarket-files.s3.amazonaws.com/public/email-marketing/envision.gif',
+    Address: 'Mr. George SulcEnvision Web Design2936 W. 234th StreetTorrance, CA 90505',
+    Phone: 4244886076,
+    email: ['j.doe@inbox.com', 'george@envisionwebdesign.net', 'searches.seo-optimization@envisionwebdesign.net', 'seo-optimization@envisionwebdesign.net']
+  },
+  {
+    BNIName: 'BNI South Bay Business Alliance - CA Long Beach-South Bay',
+    name: 'Oscar Mejia',
+    companyName: 'Mr. Rooter of Torrance',
+    SiteURL: 'www.mrrooter.com',
+    image: 'https://codemarket-files.s3.amazonaws.com/public/email-marketing/rooter.gif',
+    Address: 'Mr. Oscar MejiaMr. Rooter of Torrance4026 Hickman DriveTorrance, Ca 90504',
+    Phone: 3103496346,
+    email: ['webaccessibility@nbly.com']
+  },
+  {
+    BNIName: 'BNI South Bay Business Alliance - CA Long Beach-South Bay',
+    name: 'Raymond R. Ochoa',
+    companyName: 'Minuteman Press',
+    SiteURL: 'www.minutemantorrance.com',
+    image: 'https://codemarket-files.s3.amazonaws.com/public/email-marketing/minuteman.gif',
+    Address: 'Mr. Raymond R. OchoaMinuteman Press2281 W. 205th StreetSuite105Torrance, CA 90501',
+    Phone: '310-802-2094',
+    email: ['info@minutemantorrance.com']
+  },
+  {
+    BNIName: 'BNI South Bay Business Alliance - CA Long Beach-South Bay',
+    name: 'Stacy Campos',
+    companyName: 'Paychex',
+    SiteURL: 'paychex.com',
+    image: 'https://codemarket-files.s3.amazonaws.com/public/email-marketing/paychex.gif',
+    Address: 'Ms. Stacy CamposPaychex300 Corporate PointeSuite 150Culver City, Los Angeles 90277',
+    Phone: '310-750-7631',
+    email: ['social_media_careers@paychex.com']
+  },
+  {
+    BNIName: 'BNI South Bay Business Alliance - CA Long Beach-South Bay',
+    name: 'Yeni Fichtenbaum',
+    companyName: 'Nasif, Hicks, Harris & Co, LLP',
+    SiteURL: 'www.nhhco.com',
+    image: 'https://codemarket-files.s3.amazonaws.com/public/email-marketing/nasif.gif',
+    Address: 'CA,n                                Torrance',
+    Phone: 8059799381,
+    email: ['jvanscoyoc@nhhco.com', 'jharris@nhhco.com', 'jbishop@nhhco.com', 'eolson@nhhco.com', 'etsai@nhhco.com', 'rlyons@nhhco.com', 'echase@nhhco.com', 'ljette@nhhco.com', 'jpuckett@nhhco.com', 'lfechtman@nhhco.com', 'mthomas@nhhco.com', 'glittle@nhhco.com', 'emund@nhhco.com', 'mhansen@nhhco.com', 'lbrown@nhhco.com', 'eortega@nhhco.com', 'info@nhhco.com', 'smowatt@nhhco.com', 'bnasif@nhhco.com', 'tburk@nhhco.com', 'tolson@nhhco.com', 'jgreen@nhhco.com', 'aburnett@nhhco.com', 'mcotnoir@nhhco.com', 'abalayan@nhhco.com', 'sturner@nhhco.com', 'ksmith@nhhco.com', 'yfichtenbaum@nhhco.com', 'amitchell@nhhco.com', 'rbarnier@nhhco.com', 'cli@nhhco.com', 'jdolan@nhhco.com']
+  },
+  {
+    BNIName: 'BNI South Bay Business Alliance - CA Long Beach-South Bay',
+    name: 'Yesenia Ruano',
+    companyName: 'Yesenia Ruano Insurance Agency',
+    SiteURL: 'www.farmersagent.com',
+    image: 'https://codemarket-files.s3.amazonaws.com/public/email-marketing/yesania.gif',
+    Address: 'Yesenia RuanoYesenia Ruano Insurance Agency18726 S. Western AveGardena, CA 90248',
+    Phone: '(424) 246-2518',
+    email: ['farmers-support@yext.com.', 'serveyoubetter101@gmail.com']
+  },
+];
+
+export const bniPipelineEmails = [
+  {
+    BNIName: 'Pipeline BNI - CA Long Beach-South Bay',
+    name: 'Alfonso Bundoc',
+    companyName: 'Premier Tax Service',
+    SiteURL: 'www.Premiertax.us.com',
+    image: 'https://codemarket-files.s3.amazonaws.com/public/email-marketing/premier.gif',
+    Address: 'Mr. Alfonso BundocPremier Tax Service713 S. PCH Suite GRedondo Beach, CA 90277',
+    Phone: '310-540-3434',
+    email: ['david@premiertax.us.com', 'info@premiertax.us.com']
+  },
+  {
+    BNIName: 'Pipeline BNI - CA Long Beach-South Bay',
+    name: 'Carla Green',
+    companyName: 'Clarity Designworks',
+    SiteURL: 'www.claritydesignworks.com',
+    image: 'https://codemarket-files.s3.amazonaws.com/public/email-marketing/clarity.gif',
+    Address: 'Carla GreenClarity Designworks36 Pony LnRolling Hills Estates, CA 90274-4123',
+    Phone: '310.493.8226',
+    email: ['carla@claritydesignworks.com']
+  },
+  {
+    BNIName: 'Pipeline BNI - CA Long Beach-South Bay',
+    name: 'Debby Bernstein',
+    companyName: 'United Healthcare/Bernstein Agency',
+    SiteURL: 'myuhcagent.com',
+    image: 'https://codemarket-files.s3.amazonaws.com/public/email-marketing/united.gif',
+    Address: 'Debby BernsteinUnited Healthcare/Bernstein Agency2535 W 237th Street #104Torrance, Ca 90505',
+    Phone: '310-738-1753',
+    email: ['agent.debby@yahoo.com', 'DMCARegisteredAgent@uhc.com']
+  },
+  {
+    BNIName: 'Pipeline BNI - CA Long Beach-South Bay',
+    name: 'John W. Blalock',
+    companyName: 'Charge Into Health Family Chiropractic',
+    SiteURL: 'www.cihfc.com',
+    image: 'https://codemarket-files.s3.amazonaws.com/public/email-marketing/charge-into.gif',
+    Address: 'Dr. John W. BlalockCharge Into Health Family Chiropractic3855 Pacific Coast Highway, #5ATorrance, Los Angeles 90505',
+    Phone: '310-375-2333',
+    email: ['drjwblalock@gmail.com']
+  },
+  {
+    BNIName: 'Pipeline BNI - CA Long Beach-South Bay',
+    name: 'Konni Tanaka',
+    companyName: 'Konni Tanaka Design Group',
+    SiteURL: 'www.konnitanaka.com',
+    image: 'https://codemarket-files.s3.amazonaws.com/public/email-marketing/konni.gif',
+    Address: 'Ms. Konni TanakaKonni Tanaka Design Group2325 Palos Verdes Drive West#207Palos Verdes Estates, CA 90274',
+    Phone: '310-265-3632',
+    email: ['info@konnitanaka.com']
+  },
+  {
+    BNIName: 'Pipeline BNI - CA Long Beach-South Bay',
+    name: 'Kristen Roby Garcia',
+    companyName: 'Juice Plus',
+    SiteURL: 'www.allthingshealthy.org',
+    image: 'https://codemarket-files.s3.amazonaws.com/public/email-marketing/juice.gif',
+    Address: 'Kristen Roby GarciaJuice Plus1521 252nd StreetHarbor City 90710',
+    Phone: '818-419-1315',
+    email: ['info@allthingshealthy.org']
+  },
+  {
+    BNIName: 'Pipeline BNI - CA Long Beach-South Bay',
+    name: 'Lori Richard',
+    companyName: 'Lori Richard State Farm',
+    SiteURL: 'www.loririchard.com',
+    image: 'https://codemarket-files.s3.amazonaws.com/public/email-marketing/lori.gif',
+    Address: 'Lori RichardLori Richard State Farm222 Avenida del Norte suite #202Redondo Beach, CA 90277',
+    Phone: '310-792-9900',
+    email: ['ashlee.harris.p07m@statefarm.com', 'rachael.g.ziegler.u7r4@statefarm.com', 'tsege.ray.jclo@statefarm.com']
+  },
+  {
+    BNIName: 'Pipeline BNI - CA Long Beach-South Bay',
+    name: 'Mary Lyn Miller',
+    companyName: 'Fired Up for Success Mentoring & Mastermind',
+    SiteURL: 'www.findyourdirection.com',
+    image: 'https://codemarket-files.s3.amazonaws.com/public/email-marketing/fired-up.gif',
+    Address: '',
+    Phone: '310-378-4417',
+    email: ['mail@findyourdirection.com']
+  },
+  {
+    BNIName: 'Pipeline BNI - CA Long Beach-South Bay',
+    name: 'Melissa Moore',
+    companyName: 'Moore Money',
+    SiteURL: 'mooremoney.co',
+    image: 'https://codemarket-files.s3.amazonaws.com/public/email-marketing/moore.gif',
+    Address: 'Ms. Melissa MooreMoore Money840 Apollo StreetSuite 100El Segundo, CA 90245',
+    Phone: '310-694-3277',
+    email: ['support@mooremoney.co']
+  },
+  {
+    BNIName: 'Pipeline BNI - CA Long Beach-South Bay',
+    name: 'Michael McNeirney',
+    companyName: 'GYMGUYZ South Bay',
+    SiteURL: 'www.gymguyz.com',
+    image: 'https://codemarket-files.s3.amazonaws.com/public/email-marketing/gymguyz.gif',
+    Address: 'Mr. Michael McNeirneyGYMGUYZ South Bay505 N Helberta AvenueRedondo Beach, CA 90277',
+    Phone: '424-247-5060',
+    email: ['info@gymguyz.com']
+  },
+  {
+    BNIName: 'Pipeline BNI - CA Long Beach-South Bay',
+    name: 'Nicole Henkens',
+    companyName: 'Nicole Henkens Agency Farmers Insurance',
+    SiteURL: 'agents.farmers.com',
+    image: 'https://codemarket-files.s3.amazonaws.com/public/email-marketing/nicole.gif',
+    Address: 'Nicole HenkensNicole Henkens Agency Farmers Insurance 18825 Crenshaw BlvdTorrance, Ca 90504',
+    Phone: '310-424-8585',
+    email: ['serveyoubetter101@gmail.com', 'farmers-support@yext.com']
+  },
+  {
+    BNIName: 'Pipeline BNI - CA Long Beach-South Bay',
+    name: 'Pedro D. Magana',
+    companyName: 'Paychex',
+    SiteURL: 'www.paychex.com',
+    image: 'https://codemarket-files.s3.amazonaws.com/public/email-marketing/paychex.gif',
+    Address: 'Pedro D. MaganaPaychex300 Corporate PointeSuite 150Culver City, Ca 90230',
+    Phone: 3109631137,
+    email: ['social_media_careers@paychex.com']
+  },
+  {
+    BNIName: 'Pipeline BNI - CA Long Beach-South Bay',
+    name: 'Sally R. Agosto',
+    companyName: 'Pacific Volkswagen',
+    SiteURL: 'www.pacificvolkswagen.com',
+    image: 'https://codemarket-files.s3.amazonaws.com/public/email-marketing/pacific.gif',
+    Address: 'Ms. Sally R. AgostoPacific Volkswagen14900 Hindry AveHawthorne, Ca 90250',
+    Phone: 3105319483,
+    email: ['sales@pacificvolkswagen.com', 'Privacy@LAcarGUY.com', 'service@pacificvolkswagen.com']
+  },
+  {
+    BNIName: 'Pipeline BNI - CA Long Beach-South Bay',
+    name: 'Uyen Tran',
+    companyName: 'Southwood Pharmacy',
+    SiteURL: 'www.southwoodrx.com',
+    image: 'https://codemarket-files.s3.amazonaws.com/public/email-marketing/southwood.gif',
+    Address: 'Uyen TranSouthwood Pharmacy22220 Palos Verdes BlvdTorrance, Los Angeles 90505',
+    Phone: '310-802-9891',
+    email: ['info@southwoodrx.com']
+  },
+  {
+    BNIName: 'Pipeline BNI - CA Long Beach-South Bay',
+    name: 'Virginia Green',
+    companyName: 'Stillwater Family Therapy Group, Inc.',
+    SiteURL: 'www.stillwaterfamilytherapy.com',
+    image: 'https://codemarket-files.s3.amazonaws.com/public/email-marketing/still-water.gif',
+    Address: 'Dr. Virginia GreenStillwater Family Therapy Group, Inc.Stillwater Family Therapy Group, Inc.4727 W. 164th StLawndale, CA 90260',
+    Phone: '310-378-2520',
+    email: ['stillv@aol.com', 'virginiagreen@stillwaterfamilytherapy.com']
   }
 ];

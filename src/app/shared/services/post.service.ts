@@ -350,8 +350,8 @@ export class PostService {
     );
   }
 
-  sendEmailWithStaticContent(email: string) {
-    const body = { email };
+  sendEmailWithStaticContent(email: string, name: string, companyName: string, image: string) {
+    const body = { email, name, companyName, image };
     return this.http.post(`${environment.serverless_url}sendEmailWithStaticContent`, body);
   }
 }

@@ -27,22 +27,14 @@ export class ForgotPasswordComponent implements OnInit {
   ngOnInit() {
   }
 
-  getEmailInputError() {
-    if (this.emailInput.hasError('email')) {
-      return 'Please enter a valid email address.';
-    }
-    if (this.emailInput.hasError('required')) {
-      return 'An Email is required.';
-    }
-  }
-
   onSend() {
     this._loader.show();
     this.authService.forgotPasswordRequest(this.emailInput.value)
       .then((v) => {
-        console.log(v);
         environment.confirm.email = this.emailInput.value;
         this._loader.hide();
+
+        /** On successful request, User will be redirected to ResetPassword page */
         this.authService._authState.next({state: 'resetPassword'});
       })
       .catch((error: any) => {

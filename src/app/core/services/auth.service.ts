@@ -36,10 +36,6 @@ export interface NewUser {
 export class AuthService {
 
   /** Authentication Related Variables */
-  public static SIGN_IN = 'signIn';
-  public static SIGN_OUT = 'signOut';
-
-  public loggedIn: boolean;
   _authState: BehaviorSubject<CognitoUser|any> = new BehaviorSubject<CognitoUser|any>(null);
   authState: Observable<CognitoUser|any> = this._authState.asObservable();
 
@@ -63,28 +59,21 @@ export class AuthService {
     this.loggedInUser$ = this.store.select(selectLoggedInUser);
     this.loggedInUser$.subscribe((u) => this.loggedInUser = u);
 
-    Hub.listen('auth', (data) => {
-      const { channel, payload } = data;
-      if (channel === 'auth') {
-        this._authState.next({ state: payload.event });
-      }
-    });
-
     /** Hub listening for auth state changes */
     Hub.listen('auth', async (data) => {
       const { channel, payload } = data;
-      const state = {
-        state: payload.event,
-        user: payload.data
-      };
       console.log('Hub', data);
-      if (channel === 'auth' && data.payload.event === 'signIn') {
-        this.checkIfUserIsLoggedIn();
-        this.router.navigate(['/', 'dashboard', 'bugfixes-all']);
-      } else if (channel === 'auth' && data.payload.event === 'oAuthSignOut') {
-        // localStorage.clear();
-        this.store.dispatch(SetLoggedInUser({ payload: null }));
-        // this.router.navigate(['/']);
+      if (channel === 'auth') {
+
+        /** Setting the state to load the respective auth components  */
+        this._authState.next({ state: payload.event });
+
+        if (payload.event === 'signIn') {
+          this.checkIfUserIsLoggedIn();
+          this.router.navigate(['/', 'dashboard', 'bugfixes-all']);
+        } else if (payload.event === 'oAuthSignOut') {
+          this.store.dispatch(SetLoggedInUser({ payload: null }));
+        }
       }
     });
   }
@@ -177,7 +166,6 @@ export class AuthService {
     return new Promise((resolve, reject) => {
       Auth.signIn(username, password)
       .then((user: CognitoUser|any) => {
-        this.loggedIn = true;
         resolve(user);
       }).catch((error: any) => reject(error));
     });
@@ -191,11 +179,6 @@ export class AuthService {
     Auth.resendSignUp(email)
       .then(() => this._notification.show('A code has been emailed to you'))
       .catch(() => this._notification.show('An error occurred'));
-  }
-
-  signOut(): Promise<any> {
-    return Auth.signOut()
-      .then(() => this.loggedIn = false);
   }
 
   /** Authentication Related Methods Ends here */

@@ -13,6 +13,7 @@ export interface AuthState {
   styleUrls: ['./auth.component.scss']
 })
 export class AuthComponent implements OnInit, OnDestroy {
+  /** Initial State */
   authState: AuthState = {
     state: 'signIn',
     user: null,
@@ -20,12 +21,10 @@ export class AuthComponent implements OnInit, OnDestroy {
 
   subscription = new Subscription();
 
-  @Input()
-  hide: string[] = [];
-
   constructor(
     public authService: AuthService
   ) {
+    /** Listent to the state events and render the components based on that */
     this.subscription.add(
       this.authService._authState.subscribe((state) => {
         if (state) {
@@ -38,6 +37,7 @@ export class AuthComponent implements OnInit, OnDestroy {
   ngOnInit() {
   }
 
+  /** Remove Subscription on Componen destroy */
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }

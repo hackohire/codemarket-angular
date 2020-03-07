@@ -14,7 +14,7 @@ import Auth from '@aws-amplify/auth';
 export class ResetPasswordComponent implements OnInit {
 
   email = environment.confirm.email;
-  
+
   resetPasswordForm = new FormGroup({
     code: new FormControl('', [ Validators.required, Validators.min(3) ]),
     password: new FormControl('', [ Validators.required, Validators.min(6) ])
@@ -34,12 +34,7 @@ export class ResetPasswordComponent implements OnInit {
   ngOnInit() {
   }
 
-  getPasswordInputError() {
-    if (this.passwordInput.hasError('required')) {
-      return 'A password is required.';
-    }
-  }
-
+  /** Set new password, If successful, login the user with the new [assword */
   setPassword() {
     Auth.forgotPasswordSubmit(this.email, this.codeInput.value, this.passwordInput.value)
       .then((data: any) => {
@@ -49,11 +44,9 @@ export class ResetPasswordComponent implements OnInit {
           Auth.signIn(this.email, environment.confirm.password)
             .then(() => {
               this.authService._authState.next({state: 'signedId'});
-              // this._router.navigate(['']);
             }).catch((error: any) => {
               this._notification.show(error.message);
               this.authService._authState.next({state: 'signIn'});
-              // this._router.navigate(['auth/signin']);
             });
         }
       })
@@ -63,13 +56,13 @@ export class ResetPasswordComponent implements OnInit {
       });
   }
 
+  /** Method send the code again touser's email address */
   sendCodeAgainForResetPassword() {
     this._loader.show();
     this.authService.forgotPasswordRequest(this.email)
       .then((v) => {
         console.log(v);
         this._loader.hide();
-        // this.authService._authState.next({state: 'resetPassword'});
       })
       .catch((error: any) => {
         this._loader.hide();

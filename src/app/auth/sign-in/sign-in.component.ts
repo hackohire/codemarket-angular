@@ -32,21 +32,9 @@ export class SignInComponent {
     private _loader: LoaderService,
     ) { }
 
-  getEmailInputError() {
-    if (this.emailInput.hasError('email')) {
-      return 'Please enter a valid email address.';
-    }
-    if (this.emailInput.hasError('required')) {
-      return 'An Email is required.';
-    }
-  }
-
-  getPasswordInputError() {
-    if (this.passwordInput.hasError('required')) {
-      return 'A password is required.';
-    }
-  }
-
+  /** If successful signin, do nothing
+   * Otherwise, If UserNotConfirmedException error => set email & password in environment varibale which we will be using to varify email
+   */
   signIn() {
     this._loader.show();
     this.auth.signIn(this.emailInput.value, this.passwordInput.value)
@@ -63,7 +51,6 @@ export class SignInComponent {
             this.auth._authState.next({state: 'confirmSignUp'});
             break;
           case 'UsernameExistsException':
-            // this._router.navigate(['auth/signin']);
             break;
         }
       });

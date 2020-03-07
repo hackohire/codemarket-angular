@@ -6517,13 +6517,6 @@ ngx-highlightjs@^3.0.2:
   dependencies:
     tslib "^1.9.0"
 
-ngx-seo@^3.1.0:
-  version "3.3.3"
-  resolved "https://registry.yarnpkg.com/ngx-seo/-/ngx-seo-3.3.3.tgz#9061d8329f3276bef233cd192da32f123f971d7c"
-  integrity sha512-vVn3q3/vlQeiUmij0bfOoMDmcxTA9SUHwxmFA4vEN7oqMpOOJzJkTSFmytTrYZzlVWVt1GxjIA7bCTgTf9tEIg==
-  dependencies:
-    tslib "^1.9.0"
-
 ngx-toastr@^11.2.1:
   version "11.3.3"
   resolved "https://registry.yarnpkg.com/ngx-toastr/-/ngx-toastr-11.3.3.tgz#d360061edb2bee0a045e6b3bf832754007ac7b3d"

@@ -43,13 +43,13 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
   @Input() id: string;
   @Input() readOnly = false; /** read only mode */
 
-  _data: any [];
+  _data: any[];
   @Input()
   set data(updatedData) {
     this._data = updatedData;
     if (this.editor && Object.keys(this.editor).length !== 0) {
       if (updatedData && updatedData.length) {
-        this.editor.blocks.render({blocks: updatedData});
+        this.editor.blocks.render({ blocks: updatedData });
       } else {
         this.editor.blocks.clear();
       }
@@ -65,7 +65,7 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
   @ViewChild('editorRef', { static: false }) editorRef: ElementRef;
   @ViewChild('editorViewRef', { static: true }) editorViewRef: ElementRef;
 
-  subscriptions$  = new Subscription();
+  subscriptions$ = new Subscription();
 
   @Input() editorStyle = {
     background: '#eff1f570',
@@ -159,17 +159,17 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
   async addComment(blockId: string, addCommentEditor: EditorComponent) {
     console.log(this.commentForm.value);
     if (this.authService.loggedInUser) {
-      const blocks =  await addCommentEditor.editor.save();
+      const blocks = await addCommentEditor.editor.save();
       this.commentForm.get('text').setValue(blocks.blocks);
       this.commentForm.addControl('createdBy', new FormControl(this.authService.loggedInUser._id));
       this.commentForm.get('blockId').setValue(blockId),
-      this.subscriptions$.add(
-        this.commentService.addComment(this.commentForm.value).subscribe((c) => {
-          if (c) {
-            addCommentEditor.editor.blocks.clear();
-          }
-        })
-      )
+        this.subscriptions$.add(
+          this.commentService.addComment(this.commentForm.value).subscribe((c) => {
+            if (c) {
+              addCommentEditor.editor.blocks.clear();
+            }
+          })
+        )
     } else {
       this.authService.checkIfUserIsLoggedIn(true);
     }
@@ -312,26 +312,20 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
         },
         placeholder: this.placeholder ? this.placeholder : 'Let`s write!',
         onReady: (() => {
-
-          // Get all the code elements from DOM and highlight them as code snippets using highlight.js
-          // if (isPlatformBrowser(this._platformId) && this.editorRef.nativeElement) {
-          //   this.editorRef.nativeElement.querySelectorAll('pre code').forEach((block: HTMLElement) => {
-          //     this._hljs.highlightBlock(block);
-          //   });
-
-          //   if (this.readOnly && isPlatformBrowser(this._platformId)) {
-          //     const elements = document.querySelectorAll('[contenteditable=true]');
-          //     elements.forEach(element => {
-          //       element.setAttribute('contenteditable', 'false');
-          //     });
-          //   }
-          // }
-
           /** Focus at end */
           this.editor.focus(true);
 
           this.addControlsIfVideoElement();
           this.zoomInZoomOutForImages();
+
+          /** Open editor toolbar manually, which will load only "+" icon */
+          this.editor.toolbar.open();
+
+          /** Then we fetch the reference of "+" button and click it programatically */
+          setTimeout(() => {
+            const a = this.editorRef.nativeElement.getElementsByClassName('ce-toolbar__plus');
+            a[0].click();
+          }, 500);
         }),
         onChange: (() => {
           // if (this.editor && this.editor.save) {

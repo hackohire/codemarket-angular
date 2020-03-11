@@ -24,9 +24,10 @@ import { Comment } from '../../models/comment.model';
 import { isPlatformBrowser } from '@angular/common';
 const path = require('path');
 import editorJS from '../../../editor-js/dist/editor';
-import EditorJS from '@editorjs/editorjs';
+import EditorJS, { EditorConfig } from '@editorjs/editorjs';
 import { PostService } from '../../services/post.service';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { PatchedEditor } from './patch-editor';
 @Component({
   selector: 'app-editor',
   templateUrl: './editor.component.html',
@@ -35,7 +36,7 @@ import { Subscription } from 'rxjs/internal/Subscription';
 })
 export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit {
 
-  editor: EditorJS;
+  editor;
   isPlatformBrowser = false;
   @Input() post: Post; /** post for view mode */
   @Input() companyPostId: string;
@@ -76,7 +77,7 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
 
   /** Variables related to block level comments */
   @Input() blockLevelComments = false;
-  @Input() commentsList: Comment[]
+  @Input() commentsList: Comment[];
   anonymousAvatar = '../../../../assets/images/anonymous-avatar.jpg';
   s3FilesBucketURL = environment.s3FilesBucketURL;
 
@@ -192,10 +193,10 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
               this.editor.blocks.renderFromHTML(p);
             }
           })
-        )
+        );
       }
 
-      this.editor = new editorJS({
+      this.editor = new PatchedEditor({
         tools: {
           header: Header,
           /** Config Editor.js For Embedding Youtube Videos and Codepen and etc */
@@ -322,10 +323,11 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
           this.editor.toolbar.open();
 
           /** Then we fetch the reference of "+" button and click it programatically */
-          setTimeout(() => {
-            const a = this.editorRef.nativeElement.getElementsByClassName('ce-toolbar__plus');
-            a[0].click();
-          }, 500);
+          // setTimeout(() => {
+          //   const a = this.editorRef.nativeElement.getElementsByClassName('ce-toolbar__plus');
+          //   console.log(a);
+          //   a[0].click();
+          // }, 500);
         }),
         onChange: (() => {
           // if (this.editor && this.editor.save) {

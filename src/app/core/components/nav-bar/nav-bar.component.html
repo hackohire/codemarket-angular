@@ -104,6 +104,10 @@
     <mat-toolbar style="padding: 10px 0; background-color: rgb(8, 8, 8);">
 
 
+      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'add-post-type']">
+        <i style="font-size: 1.0rem !important; color: #ffff00;" class="vertical-align-middle fal fa-add fa-fw"></i>
+        <span style="color: #ffffff;" class="line-height-initial"> Add Post Type </span>
+      </a>
 
       <!-- Search -->
       <a mat-button routerLinkActive="mat-primary" (click)="openSearchDialog()">

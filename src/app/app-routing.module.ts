@@ -49,6 +49,10 @@ const routes: Routes = [
     redirectTo: '/dashboard',
   },
   {
+    path: 'add-post-type',
+    loadChildren: () => import('./post-type/add-post-type/add-post-type.module').then(module => module.AddPostTypeModule),
+  },
+  {
     path: 'dashboard',
     loadChildren: () => import('./dashboard/dashboard.module').then(module => module.DashboardModule),
     // outlet: 'main'

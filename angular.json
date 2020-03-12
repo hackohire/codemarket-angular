@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "medighee": {
+    "jane": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -75,18 +75,18 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
             "port": 4800,
-            "browserTarget": "medighee:build"
+            "browserTarget": "jane:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "medighee:build:production"
+              "browserTarget": "jane:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "medighee:build"
+            "browserTarget": "jane:build"
           }
         },
         "test": {
@@ -124,11 +124,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "medighee:serve"
+            "devServerTarget": "jane:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "medighee:serve:production"
+              "devServerTarget": "jane:serve:production"
             }
           }
         },
@@ -166,5 +166,5 @@
       }
     }
   },
-  "defaultProject": "medighee"
+  "defaultProject": "jane"
 }

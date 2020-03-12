@@ -3,12 +3,12 @@ import { plans } from '../app/shared/constants/plan_details';
 export const environment = {
   production: true,
   COGNITO_AUTH_DOMAIN: 'https://platform.auth.us-east-1.amazoncognito.com',
-  serverless_url: 'https://joel-api.codemarket.io/',
-  graphql_url: 'https://joel-api.codemarket.io/graphql',
-  s3FilesBucketURL: 'https://joel-files.s3.amazonaws.com/public/',
+  serverless_url: 'https://amber-api.codemarket.io/',
+  graphql_url: 'https://amber-api.codemarket.io/graphql',
+  s3FilesBucketURL: 'https://amber-files.s3.amazonaws.com/public/',
   stripe_public_key: 'pk_live_EYCoYtpLszr802sOl89WeuW1',
   // stripe_public_key: 'pk_test_ighmL2U9UqAx0O4b8dKkSvdq',
-  webSocketURL: 'wss://kflxdv1ls6.execute-api.us-east-1.amazonaws.com/joel',
+  webSocketURL: 'wss://198kf3924d.execute-api.us-east-1.amazonaws.com/amber',
   applicationId: '5d2ef428bbfa6576b357d5d4',
   googleAPIKey: 'AIzaSyAOpIXHUPA5bMssoAW3NDUGHveOf0N_tsY',
   // planDetails: plans.prod,
@@ -21,10 +21,10 @@ export const environment = {
     scope: ['email', 'profile', 'openid'],
 
     // Callback URL
-    redirectSignIn: 'https://www.joel.io', // or 'exp://127.0.0.1:19000/--/', 'myapp://main/'
+    redirectSignIn: 'https://www.amber.io', // or 'exp://127.0.0.1:19000/--/', 'myapp://main/'
 
     // Sign out URL
-    redirectSignOut: 'https://www.joel.io', // or 'exp://127.0.0.1:19000/--/', 'myapp://main/'
+    redirectSignOut: 'https://www.amber.io', // or 'exp://127.0.0.1:19000/--/', 'myapp://main/'
 
     // 'code' for Authorization code grant,
     // 'token' for Implicit grant

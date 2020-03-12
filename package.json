@@ -1,5 +1,5 @@
 {
-  "name": "dro",
+  "name": "joel",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -16,7 +16,7 @@
     "compile:server": "webpack --config webpack.server.config.js --progress --colors",
     "serve:ssr": "node dist/server",
     "build:ssr": "npm run build:client-and-server-bundles && npm run compile:server",
-    "build:client-and-server-bundles": "yarn run build:only && ng run dro:server:production --bundleDependencies all",
+    "build:client-and-server-bundles": "yarn run build:only && ng run joel:server:production --bundleDependencies all",
     "build:browser:prod": "yarn run build:only",
     "build:browser:serverless": "yarn run build:only",
     "build:serverless": "npm run build:browser:serverless && npm run build:server:serverless",
@@ -25,8 +25,8 @@
     "build:prod:deploy": "npm run build:prod && npm run deploy",
     "build:serverless:deploy": "npm run build:serverless && npm run deploy",
     "deploy": "serverless deploy",
-    "build:server:prod": "ng run dro:server:production && webpack --config webpack.server.config.js --progress --colors",
-    "build:server:serverless": "ng run dro:server:production && webpack --config webpack.server.config.js --progress --colors"
+    "build:server:prod": "ng run joel:server:production && webpack --config webpack.server.config.js --progress --colors",
+    "build:server:serverless": "ng run joel:server:production && webpack --config webpack.server.config.js --progress --colors"
   },
   "private": true,
   "dependencies": {

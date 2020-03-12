@@ -1,10 +1,10 @@
 {
   "serverless": {
     "provider": "aws",
-    "project": "dro",
+    "project": "joel",
     "skipInstall": false,
     "directory": ".",
-    "clientProject": "dro",
+    "clientProject": "joel",
     "serverless": {
       "aws": {},
       "gcloud": {}

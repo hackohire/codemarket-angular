@@ -1,0 +1,1477 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>codemarket documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">codemarket documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li>EditUserProfileComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/user/edit-user-profile/edit-user-profile.component.ts</code>
+</p>
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+    </p>
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover">
+        <tbody>
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">providers</td>
+                <td class="col-md-9">
+                                <code><a href="../injectables/CompanyService.html" target="_self" >CompanyService</a></code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-edit-user-profile</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./edit-user-profile.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./edit-user-profile.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#anonymousAvatar">anonymousAvatar</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#authService">authService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#companyService">companyService</a>
+                            </li>
+                            <li>
+                                <a href="#currentAvatarUrl">currentAvatarUrl</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#formService">formService</a>
+                            </li>
+                            <li>
+                                <a href="#loggedInUser">loggedInUser</a>
+                            </li>
+                            <li>
+                                <a href="#profilePic">profilePic</a>
+                            </li>
+                            <li>
+                                <a href="#s3FilesBucketURL">s3FilesBucketURL</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#separatorKeysCodes">separatorKeysCodes</a>
+                            </li>
+                            <li>
+                                <a href="#user$">user$</a>
+                            </li>
+                            <li>
+                                <a href="#userProfileForm">userProfileForm</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#addProfilePic">addProfilePic</a>
+                            </li>
+                            <li>
+                                <a href="#addProgrammingLanguage">addProgrammingLanguage</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit">ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#onFilesAdded">onFilesAdded</a>
+                            </li>
+                            <li>
+                                <a href="#onRemoveProgrammingLanguage">onRemoveProgrammingLanguage</a>
+                            </li>
+                            <li>
+                                <a href="#updateUser">updateUser</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Accessors</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#avatar">avatar</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(store: <a href="../interfaces/AppState.html">Store<AppState></a>, authService: <a href="../injectables/AuthService.html">AuthService</a>, formService: <a href="../injectables/FormService.html">FormService</a>, companyService: <a href="../injectables/CompanyService.html">CompanyService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/user/edit-user-profile/edit-user-profile.component.ts:40</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>store</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../interfaces/AppState.html" target="_self" >Store&lt;AppState&gt;</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>authService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/AuthService.html" target="_self" >AuthService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>formService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/FormService.html" target="_self" >FormService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>companyService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/CompanyService.html" target="_self" >CompanyService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="addProfilePic"></a>
+                    <span class="name">
+                        <b>
+                            addProfilePic
+                        </b>
+                        <a href="#addProfilePic"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>addProfilePic()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="117"
+                            class="link-to-prism">src/app/user/edit-user-profile/edit-user-profile.component.ts:117</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="addProgrammingLanguage"></a>
+                    <span class="name">
+                        <b>
+                            addProgrammingLanguage
+                        </b>
+                        <a href="#addProgrammingLanguage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>addProgrammingLanguage(event: <a href="../interfaces/Event.html">MatChipInputEvent</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="96"
+                            class="link-to-prism">src/app/user/edit-user-profile/edit-user-profile.component.ts:96</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>event</td>
+                                    <td>
+                                                <code><a href="../interfaces/Event.html" target="_self" >MatChipInputEvent</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <b>
+                            ngOnInit
+                        </b>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="85"
+                            class="link-to-prism">src/app/user/edit-user-profile/edit-user-profile.component.ts:85</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onFilesAdded"></a>
+                    <span class="name">
+                        <b>
+                            onFilesAdded
+                        </b>
+                        <a href="#onFilesAdded"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onFilesAdded()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="121"
+                            class="link-to-prism">src/app/user/edit-user-profile/edit-user-profile.component.ts:121</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onRemoveProgrammingLanguage"></a>
+                    <span class="name">
+                        <b>
+                            onRemoveProgrammingLanguage
+                        </b>
+                        <a href="#onRemoveProgrammingLanguage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onRemoveProgrammingLanguage(email: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="108"
+                            class="link-to-prism">src/app/user/edit-user-profile/edit-user-profile.component.ts:108</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>email</td>
+                                    <td>
+                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateUser"></a>
+                    <span class="name">
+                        <b>
+                            updateUser
+                        </b>
+                        <a href="#updateUser"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>updateUser()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="89"
+                            class="link-to-prism">src/app/user/edit-user-profile/edit-user-profile.component.ts:89</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="anonymousAvatar"></a>
+                        <span class="name">
+                            <b>
+                            anonymousAvatar</b>
+                            <a href="#anonymousAvatar"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>&#x27;../../../assets/images/ anonymous-avatar.jpg&#x27;</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/user/edit-user-profile/edit-user-profile.component.ts:37</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="authService"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            authService</b>
+                            <a href="#authService"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../injectables/AuthService.html" target="_self" >AuthService</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/user/edit-user-profile/edit-user-profile.component.ts:44</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="companyService"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            companyService</b>
+                            <a href="#companyService"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../injectables/CompanyService.html" target="_self" >CompanyService</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/user/edit-user-profile/edit-user-profile.component.ts:46</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="currentAvatarUrl"></a>
+                        <span class="name">
+                            <b>
+                            currentAvatarUrl</b>
+                            <a href="#currentAvatarUrl"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/user/edit-user-profile/edit-user-profile.component.ts:36</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="formService"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            formService</b>
+                            <a href="#formService"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../injectables/FormService.html" target="_self" >FormService</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/user/edit-user-profile/edit-user-profile.component.ts:45</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="loggedInUser"></a>
+                        <span class="name">
+                            <b>
+                            loggedInUser</b>
+                            <a href="#loggedInUser"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../interfaces/User.html" target="_self" >User</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/user/edit-user-profile/edit-user-profile.component.ts:29</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="profilePic"></a>
+                        <span class="name">
+                            <b>
+                            profilePic</b>
+                            <a href="#profilePic"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <b>Decorators : </b>
+                            <br />
+                            <code>
+                                @ViewChild(&#x27;profilePic&#x27;, {static: false})<br />
+                            </code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/user/edit-user-profile/edit-user-profile.component.ts:27</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="s3FilesBucketURL"></a>
+                        <span class="name">
+                            <b>
+                            s3FilesBucketURL</b>
+                            <a href="#s3FilesBucketURL"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>environment.s3FilesBucketURL</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/user/edit-user-profile/edit-user-profile.component.ts:38</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="separatorKeysCodes"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Readonly</span>
+                            separatorKeysCodes</b>
+                            <a href="#separatorKeysCodes"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>number[]</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>[ENTER, COMMA, SPACE]</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/user/edit-user-profile/edit-user-profile.component.ts:26</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="user$"></a>
+                        <span class="name">
+                            <b>
+                            user$</b>
+                            <a href="#user$"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../interfaces/User.html" target="_self" >Observable&lt;User&gt;</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/user/edit-user-profile/edit-user-profile.component.ts:30</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="userProfileForm"></a>
+                        <span class="name">
+                            <b>
+                            userProfileForm</b>
+                            <a href="#userProfileForm"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://angular.io/api/forms/FormGroup" target="_blank" >FormGroup</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/user/edit-user-profile/edit-user-profile.component.ts:28</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+</section>
+
+    <section>
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="avatar"></a>
+                        <span class="name"><b>avatar</b><a href="#avatar"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>avatar()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/user/edit-user-profile/edit-user-profile.component.ts:40</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+</section>
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, ViewChild } from &#x27;@angular/core&#x27;;
+import { ENTER, COMMA, SPACE } from &#x27;@angular/cdk/keycodes&#x27;;
+import { FormGroup, FormControl } from &#x27;@angular/forms&#x27;;
+import { Observable, } from &#x27;rxjs&#x27;;
+import { Store } from &#x27;@ngrx/store&#x27;;
+import { AuthService } from &#x27;src/app/core/services/auth.service&#x27;;
+import { selectLoggedInUser } from &#x27;src/app/core/store/selectors/user.selector&#x27;;
+import { UpdateUser } from &#x27;src/app/core/store/actions/user.actions&#x27;;
+import { MatChipInputEvent } from &#x27;@angular/material&#x27;;
+import { AppState } from &#x27;src/app/core/store/state/app.state&#x27;;
+import { User } from &#x27;src/app/shared/models/user.model&#x27;;
+import  Storage  from &#x27;@aws-amplify/storage&#x27;;
+import { environment } from &#x27;src/environments/environment&#x27;;
+import { appConstants } from &#x27;../../shared/constants/app_constants&#x27;;
+import { FormService } from &#x27;../../shared/services/form.service&#x27;;
+import { CompanyService } from &#x27;../../companies/company.service&#x27;;
+
+@Component({
+  selector: &#x27;app-edit-user-profile&#x27;,
+  templateUrl: &#x27;./edit-user-profile.component.html&#x27;,
+  styleUrls: [&#x27;./edit-user-profile.component.scss&#x27;],
+  providers: [CompanyService]
+})
+export class EditUserProfileComponent implements OnInit {
+
+  readonly separatorKeysCodes: number[] &#x3D; [ENTER, COMMA, SPACE];
+  @ViewChild(&#x27;profilePic&#x27;, { static: false }) profilePic;
+  userProfileForm: FormGroup;
+  loggedInUser: User;
+  user$: Observable&lt;User&gt;;
+
+  // Profile Picture
+  // image: Base64;
+  // s3BucketUrl &#x3D; environment.s3BucketURL;
+
+  currentAvatarUrl: string;
+  anonymousAvatar &#x3D; &#x27;../../../assets/images/ anonymous-avatar.jpg&#x27;;
+  s3FilesBucketURL &#x3D; environment.s3FilesBucketURL;
+
+  get avatar() { return this.userProfileForm.get(&#x27;avatar&#x27;); }
+
+  constructor(
+    private store: Store&lt;AppState&gt;,
+    public authService: AuthService,
+    public formService: FormService,
+    public companyService: CompanyService
+  ) {
+
+    this.user$ &#x3D; this.store.select(selectLoggedInUser);
+
+    this.store.select(selectLoggedInUser).subscribe((u: User) &#x3D;&gt; {
+      console.log(u);
+      this.loggedInUser &#x3D; u;
+      if (u) {
+        // this.userProfileForm.setValue(u);
+        this.userProfileForm &#x3D; new FormGroup({
+          name: new FormControl({ value: this.loggedInUser ? this.loggedInUser.name : &#x27;&#x27;, disabled: true }),
+          email: new FormControl({ value: this.loggedInUser ? this.loggedInUser.email : &#x27;&#x27;, disabled: true }),
+          linkedin_url: new FormControl(this.loggedInUser ? this.loggedInUser.linkedin_url : &#x27;&#x27;),
+          github_url: new FormControl(this.loggedInUser ? this.loggedInUser.github_url : &#x27;&#x27;),
+          stackoverflow_url: new FormControl(this.loggedInUser ? this.loggedInUser.stackoverflow_url : &#x27;&#x27;),
+          location: new FormControl(this.loggedInUser ? this.loggedInUser.location : &#x27;&#x27;),
+          programming_languages: new FormControl(this.loggedInUser &amp;&amp; this.loggedInUser.programming_languages ? this.loggedInUser.programming_languages : []),
+          currentJobDetails: new FormGroup({
+            jobProfile: new FormControl(this.loggedInUser &amp;&amp; this.loggedInUser.currentJobDetails ? this.loggedInUser.currentJobDetails.jobProfile : null),
+            company: new FormControl(this.loggedInUser &amp;&amp; this.loggedInUser.currentJobDetails &amp;&amp; this.loggedInUser.currentJobDetails.company ? this.loggedInUser.currentJobDetails.company : &#x27;&#x27;),
+            // jobProfile: new FormControl(this.loggedInUser &amp;&amp; this.loggedInUser.currentJobDetails ?
+            //   this.loggedInUser.currentJobDetails.jobProfile : &#x27;&#x27;),
+            // companyName: new FormControl(this.loggedInUser &amp;&amp; this.loggedInUser.currentJobDetails ?
+            //   this.loggedInUser.currentJobDetails.companyName : &#x27;&#x27;),
+            // companyLocation: new FormControl(this.loggedInUser &amp;&amp; this.loggedInUser.currentJobDetails ?
+            //   this.loggedInUser.currentJobDetails.companyLocation : &#x27;&#x27;)
+          }),
+          _id: new FormControl(this.loggedInUser ? this.loggedInUser._id : &#x27;&#x27;),
+          avatar: new FormControl(this.loggedInUser &amp;&amp; this.loggedInUser.avatar ? this.loggedInUser.avatar : &#x27;&#x27;)
+        });
+
+        // if (this.avatar.value) {
+        //   this.currentAvatarUrl &#x3D; this.s3BucketUrl + this.avatar.value;
+        // }
+      }
+    });
+  }
+
+  ngOnInit() {
+
+  }
+
+  updateUser(): void {
+    console.log(this.userProfileForm.value);
+    const user &#x3D; {...this.userProfileForm.value};
+    user.currentJobDetails.jobProfile &#x3D; user.currentJobDetails.jobProfile.map(c &#x3D;&gt; c._id);
+    this.store.dispatch(UpdateUser({ payload: user }));
+  }
+
+  addProgrammingLanguage(event: MatChipInputEvent) {
+    const input &#x3D; event.input;
+    const value &#x3D; event.value;
+    if ((value.trim() !&#x3D;&#x3D; &#x27;&#x27;)) {
+      // this.loggedInUser.programming_languages.push(value);
+
+      this.userProfileForm.get(&#x27;programming_languages&#x27;).value.push(value);
+      this.userProfileForm.controls.programming_languages.markAsDirty();
+      input.value &#x3D; &#x27;&#x27;;
+    }
+  }
+
+  onRemoveProgrammingLanguage(email: any) {
+    const controller &#x3D; this.userProfileForm.controls.programming_languages;
+    const index &#x3D; this.loggedInUser.programming_languages.indexOf(email, 0);
+    if (index &gt; -1) {
+      this.userProfileForm.get(&#x27;programming_languages&#x27;).value.splice(index, 1);
+    }
+    controller.markAsDirty();
+  }
+
+  addProfilePic() {
+    this.profilePic.nativeElement.click();
+  }
+
+  onFilesAdded() {
+    const pic: File &#x3D; this.profilePic.nativeElement.files[0];
+    const fileNameSplitArray &#x3D; pic.name.split(&#x27;.&#x27;);
+    const fileExt &#x3D; fileNameSplitArray.pop();
+    const fileName &#x3D; fileNameSplitArray[0] + &#x27;-&#x27; + new Date().toISOString() + &#x27;.&#x27; + fileExt;
+
+    Storage.vault.put(fileName, pic, {
+
+      bucket: appConstants.fileS3Bucket,
+      path: &#x27;avatar&#x27;,
+      level: &#x27;public&#x27;,
+
+      contentType: pic.type,
+
+    }).then((uploaded: any) &#x3D;&gt; {
+      console.log(&#x27;uploaded&#x27;, uploaded);
+      this.avatar.setValue(uploaded.key);
+    });
+
+    this.profilePic.nativeElement.value &#x3D; null;
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;!-- &lt;div&gt; --&gt;
+
+&lt;form [formGroup]&#x3D;&quot;userProfileForm&quot; class&#x3D;&quot;profile-form&quot; *ngIf&#x3D;&quot;(user$ | async) as user&quot; (ngSubmit)&#x3D;&quot;updateUser()&quot;&gt;
+    &lt;div class&#x3D;&quot;profile-picture&quot;&gt;
+        &lt;div class&#x3D;&quot;user-info&quot;&gt;
+            &lt;div class&#x3D;&quot;profile-pic&quot;&gt;
+                &lt;img [src]&#x3D;&quot;avatar?.value ? ((s3FilesBucketURL + avatar.value) | safe: &#x27;resourceUrl&#x27;) : anonymousAvatar&quot; /&gt;
+                &lt;div class&#x3D;&quot;layer&quot;&gt;
+                    &lt;div class&#x3D;&quot;loader&quot;&gt;&lt;/div&gt;
+                &lt;/div&gt;
+                &lt;a class&#x3D;&quot;image-wrapper&quot; (click)&#x3D;&quot;addProfilePic()&quot;&gt;
+                    &lt;mat-icon class&#x3D;&quot;edit glyphicon glyphicon-pencil&quot;&gt;edit&lt;/mat-icon&gt;
+                &lt;/a&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;input type&#x3D;&quot;file&quot; #profilePic style&#x3D;&quot;display: none&quot; (change)&#x3D;&quot;onFilesAdded()&quot; /&gt;
+    &lt;/div&gt;
+    &lt;mat-form-field class&#x3D;&quot;field-full-width&quot;&gt;
+        &lt;input matInput disabled formControlName&#x3D;&quot;name&quot; disabled placeholder&#x3D;&quot;Name&quot;&gt;
+    &lt;/mat-form-field&gt;
+
+    &lt;mat-form-field class&#x3D;&quot;field-full-width&quot;&gt;
+        &lt;input matInput formControlName&#x3D;&quot;email&quot; disabled placeholder&#x3D;&quot;Email&quot;&gt;
+    &lt;/mat-form-field&gt;
+
+    &lt;mat-form-field class&#x3D;&quot;field-full-width&quot;&gt;
+        &lt;input matInput formControlName&#x3D;&quot;linkedin_url&quot; placeholder&#x3D;&quot;Linkedin Profile&quot;&gt;
+    &lt;/mat-form-field&gt;
+
+    &lt;mat-form-field class&#x3D;&quot;field-full-width&quot;&gt;
+        &lt;input matInput formControlName&#x3D;&quot;github_url&quot; placeholder&#x3D;&quot;Github Profile&quot;&gt;
+    &lt;/mat-form-field&gt;
+
+    &lt;mat-form-field class&#x3D;&quot;field-full-width&quot;&gt;
+        &lt;input matInput formControlName&#x3D;&quot;stackoverflow_url&quot; placeholder&#x3D;&quot;Stackoverflow Profile&quot;&gt;
+    &lt;/mat-form-field&gt;
+
+    &lt;mat-form-field class&#x3D;&quot;field-full-width&quot;&gt;
+        &lt;input matInput formControlName&#x3D;&quot;location&quot; placeholder&#x3D;&quot;Current Location&quot;&gt;
+    &lt;/mat-form-field&gt;
+
+    &lt;mat-form-field class&#x3D;&quot;field-full-width&quot;&gt;
+        &lt;mat-chip-list #programingLanguagesList&gt;
+            &lt;!--Iterate by array of data and display a chip for eavh value.--&gt;
+            &lt;mat-chip *ngFor&#x3D;&quot;let lan of userProfileForm?.get(&#x27;programming_languages&#x27;)?.value&quot; removable
+                (removed)&#x3D;&quot;onRemoveProgrammingLanguage(lan)&quot;&gt;
+                {{lan}}
+                &lt;!--Icon that is used as a button when &#x27;removable&#x27; set to true.--&gt;
+                &lt;mat-icon matChipRemove&gt;cancel&lt;/mat-icon&gt;
+            &lt;/mat-chip&gt;
+            &lt;input placeholder&#x3D;&quot;Add Programming Languages&quot; [matChipInputAddOnBlur]&#x3D;&quot;true&quot;
+                [matChipInputFor]&#x3D;&quot;programingLanguagesList&quot; [matChipInputSeparatorKeyCodes]&#x3D;&quot;separatorKeysCodes&quot;
+                (matChipInputTokenEnd)&#x3D;&quot;addProgrammingLanguage($event)&quot;&gt;
+        &lt;/mat-chip-list&gt;
+    &lt;/mat-form-field&gt;
+
+    &lt;div formGroupName&#x3D;&quot;currentJobDetails&quot;&gt;
+        &lt;app-autocomplete [autoComplete]&#x3D;&quot;userProfileForm?.get(&#x27;currentJobDetails.company&#x27;)&quot; [placeholder]&#x3D;&quot;&#x27;Select Company&#x27;&quot; [collection]&#x3D;&quot;&#x27;companies&#x27;&quot; [type]&#x3D;&quot;&quot; [multiple]&#x3D;&quot;false&quot;&gt;&lt;/app-autocomplete&gt;
+        &lt;app-autocomplete [autoComplete]&#x3D;&quot;userProfileForm?.get(&#x27;currentJobDetails.jobProfile&#x27;)&quot; [placeholder]&#x3D;&quot;&#x27;Roles&#x27;&quot; [collection]&#x3D;&quot;&#x27;tags&#x27;&quot; [type]&#x3D;&quot;&#x27;role&#x27;&quot; [multiple]&#x3D;&quot;true&quot;&gt;&lt;/app-autocomplete&gt;
+    &lt;/div&gt;
+
+    &lt;button mat-raised-button color&#x3D;&quot;primary&quot;&gt;Update Profile&lt;/button&gt;
+
+&lt;/form&gt;
+&lt;!-- &lt;/div&gt; --&gt;</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-styleData">
+                <p class="comment">
+                    <code>./edit-user-profile.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">.profile-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+    margin: auto;
+}
+  
+.field-full-width {
+    width: 100%;
+}
+
+
+@-webkit-keyframes spin {
+    0% {
+      -webkit-transform: rotate(0deg) translate(-50%);
+              transform: rotate(0deg) translate(-50%);
+    }
+    100% {
+      -webkit-transform: rotate(360deg) translate(-50%);
+              transform: rotate(360deg) translate(-50%);
+    }
+  }
+  @keyframes spin {
+    0% {
+      -webkit-transform: rotate(0deg) translate(-50%);
+              transform: rotate(0deg) translate(-50%);
+    }
+    100% {
+      -webkit-transform: rotate(360deg) translate(-50%);
+              transform: rotate(360deg) translate(-50%);
+    }
+  }
+  .loader {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translateY(-50%) translateX(-50%);
+            transform: translateY(-50%) translateX(-50%);
+    -webkit-animation: spin 0.35s infinite linear;
+            animation: spin 0.35s infinite linear;
+    border: 2px solid #707070;
+    border-radius: 50%;
+    border-top-color: white;
+    height: 25px;
+    -webkit-transform-origin: left;
+            transform-origin: left;
+    top: 45%;
+    width: 25px;
+  }
+  .hidden-input {
+    left: -999px;
+    position: absolute;
+  }
+  .profile {
+    *zoom: 1;
+    background-color: white;
+    border-radius: 2px;
+    display: block;
+    float: none;
+    margin: 5px auto;
+    overflow: hidden;
+    padding-bottom: 20px;
+    width: 400px;
+  }
+  .profile:before,
+  .profile:after {
+    content: &quot;&quot;;
+    display: table;
+  }
+  .profile:after {
+    clear: both;
+  }
+  .about {
+    // font-family: Helvetica, &quot;Helvetica Neue&quot;, &quot;Tahoma&quot;;
+    font-size: 12px;
+    color: #adadad;
+    line-height: 17px;
+  }
+  .image-wrapper {
+    background: rgba(0, 0, 0, 0.2);
+    bottom: -50px;
+    height: 50px;
+    left: 0;
+    position: absolute;
+    transition: bottom 0.15s linear;
+    width: 100%;
+  }
+  .edit {
+    position: relative;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+    color: white;
+    cursor: pointer;
+    font-size: 22px;
+    top: 10px;
+  }
+  .cover {
+    height: 300px;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+  }
+  .cover img {
+    position: absolute;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+    height: 300px;
+  }
+  .cover .image-wrapper {
+    bottom: auto;
+    height: 45px;
+    left: auto;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 45px;
+  }
+  .name {
+    // font-family: Helvetica, &quot;Helvetica Neue&quot;, &quot;Tahoma&quot;;
+    font-size: 18px;
+  }
+  .profile-pic {
+    position: relative;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+    border-radius: 50%;
+    border: 4px solid white;
+    height: 210px;
+    overflow: hidden;
+    // -webkit-transform: translateX(-50%) translateY(-50%);
+    //         transform: translateX(-50%) translateY(-50%);
+    width: 210px;
+    top: 0;
+  }
+  .profile-pic img {
+    box-sizing: border-box;
+    // height: 100%;
+    height: 200px;
+    width: 200px;
+    left: 50%;
+    // max-height: 100%;
+    position: absolute;
+    -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+    transition: all 0.15s ease-out;
+    // width: auto;
+  }
+  .profile-pic:hover .image-wrapper {
+    bottom: 0;
+  }
+  .username {
+    margin-top: 122px;
+    text-align: center;
+  }
+  .user-info {
+    *zoom: 1;
+    padding: 8px;
+    position: relative;
+  }
+  .user-info:before,
+  .user-info:after {
+    content: &quot;&quot;;
+    display: table;
+  }
+  .user-info:after {
+    clear: both;
+  }
+  body {
+    background-color: #202020;
+  }
+  .container {
+    margin: 40px auto 50px;
+    max-width: 960px;
+  }
+  .layer {
+    background-color: rgba(0, 0, 0, 0.25);
+    display: none;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+  .layer.visible {
+    display: block;
+  }
+  </code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><!-- <div> --><form [formGroup]="userProfileForm" class="profile-form" *ngIf="(user$ | async) as user" (ngSubmit)="updateUser()">    <div class="profile-picture">        <div class="user-info">            <div class="profile-pic">                <img [src]="avatar?.value ? ((s3FilesBucketURL + avatar.value) | safe: \'resourceUrl\') : anonymousAvatar" />                <div class="layer">                    <div class="loader"></div>                </div>                <a class="image-wrapper" (click)="addProfilePic()">                    <mat-icon class="edit glyphicon glyphicon-pencil">edit</mat-icon>                </a>            </div>        </div>        <input type="file" #profilePic style="display: none" (change)="onFilesAdded()" />    </div>    <mat-form-field class="field-full-width">        <input matInput disabled formControlName="name" disabled placeholder="Name">    </mat-form-field>    <mat-form-field class="field-full-width">        <input matInput formControlName="email" disabled placeholder="Email">    </mat-form-field>    <mat-form-field class="field-full-width">        <input matInput formControlName="linkedin_url" placeholder="Linkedin Profile">    </mat-form-field>    <mat-form-field class="field-full-width">        <input matInput formControlName="github_url" placeholder="Github Profile">    </mat-form-field>    <mat-form-field class="field-full-width">        <input matInput formControlName="stackoverflow_url" placeholder="Stackoverflow Profile">    </mat-form-field>    <mat-form-field class="field-full-width">        <input matInput formControlName="location" placeholder="Current Location">    </mat-form-field>    <mat-form-field class="field-full-width">        <mat-chip-list #programingLanguagesList>            <!--Iterate by array of data and display a chip for eavh value.-->            <mat-chip *ngFor="let lan of userProfileForm?.get(\'programming_languages\')?.value" removable                (removed)="onRemoveProgrammingLanguage(lan)">                {{lan}}                <!--Icon that is used as a button when \'removable\' set to true.-->                <mat-icon matChipRemove>cancel</mat-icon>            </mat-chip>            <input placeholder="Add Programming Languages" [matChipInputAddOnBlur]="true"                [matChipInputFor]="programingLanguagesList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"                (matChipInputTokenEnd)="addProgrammingLanguage($event)">        </mat-chip-list>    </mat-form-field>    <div formGroupName="currentJobDetails">        <app-autocomplete [autoComplete]="userProfileForm?.get(\'currentJobDetails.company\')" [placeholder]="\'Select Company\'" [collection]="\'companies\'" [type]="" [multiple]="false"></app-autocomplete>        <app-autocomplete [autoComplete]="userProfileForm?.get(\'currentJobDetails.jobProfile\')" [placeholder]="\'Roles\'" [collection]="\'tags\'" [type]="\'role\'" [multiple]="true"></app-autocomplete>    </div>    <button mat-raised-button color="primary">Update Profile</button></form><!-- </div> --></div>'
+    var COMPONENTS = [{'name': 'AboutUsComponent', 'selector': 'app-about-us'},{'name': 'AddAssigneeComponent', 'selector': 'app-add-assignee'},{'name': 'AddAssignmentComponent', 'selector': 'app-add-assignment'},{'name': 'AddBusinessChallengeComponent', 'selector': 'app-add-business-challenge'},{'name': 'AddBusinessCoachComponent', 'selector': 'app-add-business-coach'},{'name': 'AddBusinessGoalComponent', 'selector': 'app-add-business-goal'},{'name': 'AddBusinessServicesComponent', 'selector': 'app-add-business-services'},{'name': 'AddCapitalFundingComponent', 'selector': 'app-add-capital-funding'},{'name': 'AddCareerCoachComponent', 'selector': 'app-add-career-coach'},{'name': 'AddCollaboratorsComponent', 'selector': 'app-add-collaborators'},{'name': 'AddCompanyComponent', 'selector': 'app-add-company'},{'name': 'AddCompanyPostComponent', 'selector': 'app-add-company-post'},{'name': 'AddCompetitiveAdvantageComponent', 'selector': 'app-add-competitive-advantage'},{'name': 'AddCustomerProfileComponent', 'selector': 'app-add-customer-profile'},{'name': 'AddCustomerTemplateComponent', 'selector': 'app-add-customer-template'},{'name': 'AddDesignComponent', 'selector': 'app-add-design'},{'name': 'AddDreamjobComponent', 'selector': 'app-add-dreamjob'},{'name': 'AddEventComponent', 'selector': 'app-add-event'},{'name': 'AddGoalComponent', 'selector': 'app-add-goal'},{'name': 'AddHiringProcessComponent', 'selector': 'app-add-hiring-process'},{'name': 'AddHowtodocComponent', 'selector': 'app-add-howtodoc'},{'name': 'AddInterviewComponent', 'selector': 'app-add-interview'},{'name': 'AddJobComponent', 'selector': 'app-add-job'},{'name': 'AddLeadershipChallengeComponent', 'selector': 'app-add-leadership-challenge'},{'name': 'AddMarketingChallengeComponent', 'selector': 'app-add-marketing-challenge'},{'name': 'AddMarketingGoalComponent', 'selector': 'app-add-marketing-goal'},{'name': 'AddMissionComponent', 'selector': 'app-add-mission'},{'name': 'AddPostMenuComponent', 'selector': 'app-add-post-menu'},{'name': 'AddPostTypeComponent', 'selector': 'app-add-post-type'},{'name': 'AddProductsComponent', 'selector': 'app-add-products'},{'name': 'AddRequirementsComponent', 'selector': 'app-add-requirements'},{'name': 'AddSalesChallengeComponent', 'selector': 'app-add-sales-challenge'},{'name': 'AddSalesGoalComponent', 'selector': 'app-add-sales-goal'},{'name': 'AddSocialImpactGoalComponent', 'selector': 'app-add-social-impact-goal'},{'name': 'AddStartupGoalComponent', 'selector': 'app-add-startup-goal'},{'name': 'AddStressManagementComponent', 'selector': 'app-add-stress-management'},{'name': 'AddTeamChallengeComponent', 'selector': 'app-add-team-challenge'},{'name': 'AddTeamGoalComponent', 'selector': 'app-add-team-goal'},{'name': 'AddTeamskillComponent', 'selector': 'app-add-teamskill'},{'name': 'AddTechnicalChallengeComponent', 'selector': 'app-add-technical-challenge'},{'name': 'AddTechnicalGoalComponent', 'selector': 'app-add-technical-goal'},{'name': 'AddTestingComponent', 'selector': 'app-add-testing'},{'name': 'AdvocatesInfluencersComponent', 'selector': 'app-advocates-influencers'},{'name': 'AffordableComponent', 'selector': 'app-affordable'},{'name': 'AiStrategyComponent', 'selector': 'app-ai-strategy'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AskforhelpComponent', 'selector': 'app-askforhelp'},{'name': 'AuthComponent', 'selector': 'app-auth'},{'name': 'AutocompleteComponent', 'selector': 'app-autocomplete'},{'name': 'BreadcumbComponent', 'selector': 'app-breadcumb'},{'name': 'BriefPostComponent', 'selector': 'app-brief-post'},{'name': 'BusinessCoachListComponent', 'selector': 'app-business-coach-list'},{'name': 'CareerCoachListComponent', 'selector': 'app-career-coach-list'},{'name': 'CartComponent', 'selector': 'app-cart'},{'name': 'CheckoutComponent', 'selector': 'app-checkout'},{'name': 'CommentComponent', 'selector': 'app-comment'},{'name': 'CommunityImpactStoriesComponent', 'selector': 'app-community-impact-stories'},{'name': 'CompaniesComponent', 'selector': 'app-companies'},{'name': 'CompaniesListComponent', 'selector': 'app-companies-list'},{'name': 'CompanyDetailsComponent', 'selector': 'app-company-details'},{'name': 'ConfirmCodeComponent', 'selector': 'app-confirm-code'},{'name': 'CrmComponent', 'selector': 'app-crm'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'DatatableComponent', 'selector': 'app-datatable'},{'name': 'DedicatedTeamComponent', 'selector': 'app-dedicated-team'},{'name': 'DetailsComponent', 'selector': 'app-details'},{'name': 'DreamJobDetailsComponent', 'selector': 'app-dream-job-details'},{'name': 'DreamjobListComponent', 'selector': 'app-dreamjob-list'},{'name': 'DreamJobMentorsComponent', 'selector': 'app-dream-job-mentors'},{'name': 'EditorComponent', 'selector': 'app-editor'},{'name': 'EditUserProfileComponent', 'selector': 'app-edit-user-profile'},{'name': 'EmailMarketingComponent', 'selector': 'app-email-marketing'},{'name': 'EventComponent', 'selector': 'app-event'},{'name': 'EventDetailsComponent', 'selector': 'app-event-details'},{'name': 'ExitStrategyComponent', 'selector': 'app-exit-strategy'},{'name': 'ForgotPasswordComponent', 'selector': 'app-forgot-password'},{'name': 'GetWorkDoneComponent', 'selector': 'app-get-work-done'},{'name': 'HelpComponent', 'selector': 'app-help'},{'name': 'InnovateComponent', 'selector': 'app-innovate'},{'name': 'InviteMembersDialogComponent', 'selector': 'app-invite-members-dialog'},{'name': 'LeadershipTrainingComponent', 'selector': 'app-leadership-training'},{'name': 'LikeDislikeComponent', 'selector': 'app-like-dislike'},{'name': 'LoaderComponent', 'selector': 'app-loader'},{'name': 'MembershipComponent', 'selector': 'app-membership'},{'name': 'MembershipListComponent', 'selector': 'app-membership-list'},{'name': 'MessagesComponent', 'selector': 'app-messages'},{'name': 'MockInterviewsComponent', 'selector': 'app-mock-interviews'},{'name': 'MyProfileComponent', 'selector': 'app-my-profile'},{'name': 'MyRsvpComponent', 'selector': 'app-my-rsvp'},{'name': 'NavBarComponent', 'selector': 'app-nav-bar'},{'name': 'PeerNetworkingComponent', 'selector': 'app-peer-networking'},{'name': 'PostComponent', 'selector': 'app-post'},{'name': 'PostsListComponent', 'selector': 'app-posts-list'},{'name': 'ProductDetailsComponent', 'selector': 'app-product-details'},{'name': 'ProductsListComponent', 'selector': 'app-products-list'},{'name': 'PurchasedItemsListComponent', 'selector': 'app-purchased-items-list'},{'name': 'RealProjectsComponent', 'selector': 'app-real-projects'},{'name': 'ReferralNetworkComponent', 'selector': 'app-referral-network'},{'name': 'ResetPasswordComponent', 'selector': 'app-reset-password'},{'name': 'ResumeGapAnalysisComponent', 'selector': 'app-resume-gap-analysis'},{'name': 'SalesGrowthStrategyComponent', 'selector': 'app-sales-growth-strategy'},{'name': 'SearchComponent', 'selector': 'app-search'},{'name': 'SellingProductsComponent', 'selector': 'app-selling-products'},{'name': 'SendEmailComponent', 'selector': 'app-send-email'},{'name': 'SignInComponent', 'selector': 'app-sign-in'},{'name': 'SignUpComponent', 'selector': 'app-sign-up'},{'name': 'SingleCartProductComponent', 'selector': 'app-single-cart-product'},{'name': 'SocialMediaMarketingComponent', 'selector': 'app-social-media-marketing'},{'name': 'SoftwareDevMenuComponent', 'selector': 'app-software-dev-menu'},{'name': 'StickyComponent', 'selector': 'app-sticky'},{'name': 'StressManagementComponent', 'selector': 'app-stress-management'},{'name': 'SubscriptionDialogComponent', 'selector': 'app-subscription-dialog'},{'name': 'SubscriptionSuccessComponent', 'selector': 'app-subscription-success'},{'name': 'TrainingFromExpertsComponent', 'selector': 'app-training-from-experts'},{'name': 'VideoChatComponent', 'selector': 'app-video-chat'},{'name': 'ViralComponent', 'selector': 'app-viral'},{'name': 'WebsiteComponent', 'selector': 'app-website'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'EditUserProfileComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+                   
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'EditUserProfileComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

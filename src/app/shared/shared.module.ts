@@ -21,7 +21,6 @@ import { LikeDislikeComponent } from './components/like-dislike/like-dislike.com
 import { VideoChatComponent } from '../video-chat/video-chat.component';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { AddPostMenuComponent } from './components/add-post-menu/add-post-menu.component';
-import { SoftwareDevMenuComponent } from './components/software-dev-menu/software-dev-menu.component';
 import { CompaniesListComponent } from '../companies/companies-list/companies-list.component';
 // import { Ng5SliderModule } from 'ng5-slider';
 import { NgSelectModule } from '@ng-select/ng-select';
@@ -48,7 +47,7 @@ export function hljsLanguages() {
   ];
 }
 @NgModule({
-  declarations: [BreadcumbComponent, EditorComponent, CommentComponent, DatatableComponent, SafePipe, LikeDislikeComponent, VideoChatComponent, AddPostMenuComponent, SoftwareDevMenuComponent, CompaniesListComponent, AddJobComponent, BriefPostComponent, AutocompleteComponent, AddHowtodocComponent, AddAssignmentComponent, AddCollaboratorsComponent, AddAssigneeComponent],
+  declarations: [BreadcumbComponent, EditorComponent, CommentComponent, DatatableComponent, SafePipe, LikeDislikeComponent, VideoChatComponent, AddPostMenuComponent, CompaniesListComponent, AddJobComponent, BriefPostComponent, AutocompleteComponent, AddHowtodocComponent, AddAssignmentComponent, AddCollaboratorsComponent, AddAssigneeComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -90,7 +89,6 @@ export function hljsLanguages() {
     LikeDislikeComponent,
     VideoChatComponent,
     AddPostMenuComponent,
-    SoftwareDevMenuComponent,
     BriefPostComponent,
     AutocompleteComponent,
     AddHowtodocComponent,

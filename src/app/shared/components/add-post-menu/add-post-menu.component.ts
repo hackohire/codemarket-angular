@@ -15,6 +15,7 @@ export class AddPostMenuComponent implements OnInit {
 
   icons = appConstants.icons;
   postTypes = PostType;
+  postTypesArray = appConstants.postTypesArray;
   companyPostTypes = CompanyPostTypes;
   UserProfilePostTypes = UserProfilePostTypes;
 

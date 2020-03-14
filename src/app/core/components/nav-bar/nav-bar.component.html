@@ -11,15 +11,15 @@
 
       <a mat-list-item [routerLink]="['/', 'user', 'edit-profile']">Edit Profile</a>
 
+      <ng-container *ngFor="let p of postTypesArray">
+        <a mat-list-item [routerLink]="['/', 'post', 'post-list']" [queryParams]="{type: p.name, all: false}">My <span style="text-transform: capitalize;">{{ p.name}}</span></a>
+      </ng-container>
+
       <!-- Selling -->
       <a mat-list-item [routerLink]="['/', 'sell']">My Bugfixes</a>
 
       <a mat-list-item [routerLink]="['/', 'help-request']" [queryParams]="{type: 'help-request', all: false}">My Help
         Requests</a>
-
-
-      <a mat-list-item [routerLink]="['/', 'post', 'post-list']" [queryParams]="{type: 'interview', all: false}">My
-        Interviews</a>
 
 
       <a mat-list-item [routerLink]="['/', 'post', 'post-list']" [queryParams]="{type: 'requirement', all: false}">My

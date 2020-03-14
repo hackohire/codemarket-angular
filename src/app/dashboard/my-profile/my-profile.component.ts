@@ -67,6 +67,9 @@ export class MyProfileComponent implements OnInit {
 
   userData$: Observable<User>;
 
+  postTypesArray = appConstants.postTypesArray;
+  postTypes = PostType;
+
   peer: Peer;
 
   subscription = new Subscription();

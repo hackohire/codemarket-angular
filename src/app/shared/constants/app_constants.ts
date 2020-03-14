@@ -361,9 +361,17 @@ export const appConstants = {
         type
       }
       timeline
-  
     }
     ${description}
     ${comment}
-    `
+    `,
+
+  postTypesArray: [
+    {
+      name: PostType.Requirement,
+      label: 'Requirement'
+    }
+  ]
+
+
 };

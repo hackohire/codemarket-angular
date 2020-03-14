@@ -14,6 +14,7 @@ import { CompanyPostTypes, UserProfilePostTypes, PostType } from '../../../share
 import { MessageService } from '../../../shared/services/message.service';
 import { environment } from '../../../../environments/environment';
 import { PostService } from '../../../shared/services/post.service';
+import { appConstants } from '../../../shared/constants/app_constants';
 
 @Component({
   selector: 'app-nav-bar',
@@ -26,6 +27,9 @@ export class NavBarComponent implements OnInit, OnDestroy {
   companyPostTypes = CompanyPostTypes;
   userProfilePostTypes = UserProfilePostTypes;
   postTypes = PostType;
+
+  postTypesArray = appConstants.postTypesArray;
+
   signUpConfig = {
     // header: 'My Customized Sign Up',
     hideAllDefaults: true,

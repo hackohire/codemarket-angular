@@ -92,6 +92,18 @@
 								</mat-nav-list>
 								<hr *ngIf="!last" />
 							</div>
+							<div *ngFor="let p of postTypesArray; let last = last;">
+								<button cdkAccordionItem
+									[routerLink]="[]"
+									[queryParams]="{ view: p.name }"
+									[queryParamsHandling]="'merge'"
+									(click)="profileView = p.name; fetchAllOtherPosts(p.name);"
+									class="docs-nav-content-btn"
+									[ngClass]="profileView === p.name ? 'docs-component-viewer-sidenav-item-selected' : ''">
+									{{p.name}}
+								</button>
+								<hr *ngIf="!last" />
+							</div>
 						</div>
 					</div>
 				</div>
@@ -171,7 +183,7 @@
 
 							<!-- Showing the list of posts for the posts tab, everytime user clicks on the "load more", we increase the page number and call
 							fetchAllOtherPosts method to fetch subsequent posts -->
-							<ng-container *ngIf="profileView === navLinkName.posts">
+							<ng-container *ngIf="profileView === navLinkName.posts || profileView === postTypes.Requirement">
 								<ng-container *ngTemplateOutlet="postTemplate; context: { postType: '' }">
 								</ng-container>
 								<div class="item-grid pen-grid item-grid-large">

@@ -237,6 +237,8 @@ export class PostService {
 
     if (post.type === PostType.Product) {
       this.router.navigate(['/', 'sell', 'edit-product', post._id]);
+    } else if (post.type === PostType.Requirement) {
+      this.router.navigate(['/', 'edit-post', post._id], {queryParams: {type: post.type}});
     } else {
       this.router.navigate(['/', 'post', 'edit-' + post.type, post._id]);
     }

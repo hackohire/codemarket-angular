@@ -9,6 +9,14 @@
 </a>
 <mat-menu #menu="matMenu" [yPosition]="'below'" [xPosition]="'after'" [overlapTrigger]="false">
 
+  <ng-container *ngFor="let p of postTypesArray">
+    <button mat-menu-item [routerLink]="['/', 'add-post']" [queryParams]="{type: p.name}">
+      <i style="font-size: 1.7rem !important;"
+        [class]="'vertical-align-middle fal fa-' + icons[p.name] + ' fa-fw'"></i>
+      <span style="text-transform: capitalize;"> {{p.name}}</span>
+    </button>
+  </ng-container>
+
   <!-- Add Product -->
   <button mat-menu-item [routerLink]="['/', 'sell', 'add-product']">
     <!-- <mat-icon>dialpad</mat-icon> -->
@@ -43,13 +51,6 @@
     <i style="font-size: 1.7rem !important;"
       [class]="'vertical-align-middle fal fa-' + icons.requirement + ' fa-fw'"></i>
     <span> Capital Funding</span>
-  </button>
-
-  <!-- Add Requirements -->
-  <button mat-menu-item [routerLink]="['/', 'post', 'add-requirement']" [queryParams]="{type: 'requirement'}">
-    <i style="font-size: 1.7rem !important;"
-      [class]="'vertical-align-middle fal fa-' + icons.requirement + ' fa-fw'"></i>
-    <span> Requirements</span>
   </button>
 
   <!-- Add Testings -->

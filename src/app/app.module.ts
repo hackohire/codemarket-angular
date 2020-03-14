@@ -35,25 +35,15 @@ import { StickyComponent } from './sticky/sticky.component';
 import { ViralComponent } from './viral/viral.component';
 import { CommunityImpactStoriesComponent } from './community-impact-stories/community-impact-stories.component';
 import { AdvocatesInfluencersComponent } from './advocates-influencers/advocates-influencers.component';
-import { ConfirmCodeComponent } from './auth/confirm-code/confirm-code.component';
-import { AuthComponent } from './auth/auth.component';
-import { SignInComponent } from './auth/sign-in/sign-in.component';
-import { SignUpComponent } from './auth/sign-up/sign-up.component';
 import { LoaderComponent } from './auth/loader/loader.component';
-import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
-import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
+import { AuthModule } from './auth/auth.module';
+
 // import { SignInComponent } from './core/amplify/sign-in-component';
 
 @NgModule({
   declarations: [
     AppComponent,
 
-    AuthComponent,
-    SignInComponent,
-    SignUpComponent,
-    ForgotPasswordComponent,
-    ConfirmCodeComponent,
-    ResetPasswordComponent,
     LoaderComponent,
 
     NavBarComponent,
@@ -90,7 +80,8 @@ import { ResetPasswordComponent } from './auth/reset-password/reset-password.com
     CoreModule,
     SharedModule,
     BrowserAnimationsModule,
-    LayoutModule
+    LayoutModule,
+    AuthModule
   ],
   providers: [PostDataResolver],
   bootstrap: [AppComponent],

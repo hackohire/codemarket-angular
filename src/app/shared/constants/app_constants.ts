@@ -370,6 +370,22 @@ export const appConstants = {
     {
       name: PostType.Requirement,
       label: 'Requirement'
+    },
+    {
+      name: PostType.Goal,
+      label: 'Goal'
+    },
+    {
+      name: PostType.Howtodoc,
+      label: 'How-To-Doc'
+    },
+    {
+      name: PostType.Testing,
+      label: 'Testing'
+    },
+    {
+      name: PostType.Dreamjob,
+      label: 'Dream Job'
     }
   ]
 

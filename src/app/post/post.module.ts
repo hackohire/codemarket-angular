@@ -31,14 +31,6 @@ const postRoutes: Routes = [
         loadChildren: () => import('../dream-job/dreamjob-list/dreamjob-list.module').then(module => module.DreamjobListModule)
       },
       {
-        path: 'add-goal',
-        loadChildren: () => import('../goal/add-goal/add-goal.module').then(module => module.AddGoalModule),
-      },
-      {
-        path: 'edit-goal/:goalId',
-        loadChildren: () => import('../goal/add-goal/add-goal.module').then(module => module.AddGoalModule),
-      },
-      {
         path: 'add-design',
         loadChildren: () => import('../design/add-design/add-design.module').then(module => module.AddDesignModule),
       },
@@ -47,36 +39,12 @@ const postRoutes: Routes = [
         loadChildren: () => import('../design/add-design/add-design.module').then(module => module.AddDesignModule),
       },
       {
-        path: 'add-testing',
-        loadChildren: () => import('../testing/add-testing/add-testing.module').then(module => module.AddTestingModule),
-      },
-      {
-        path: 'edit-testing/:testingId',
-        loadChildren: () => import('../testing/add-testing/add-testing.module').then(module => module.AddTestingModule),
-      },
-      {
-        path: 'add-howtodoc',
-        loadChildren: () => import('../howtodoc/add-howtodoc/add-howtodoc.module').then(module => module.AddHowtodocModule),
-      },
-      {
-        path: 'edit-howtodoc/:howtodocId',
-        loadChildren: () => import('../howtodoc/add-howtodoc/add-howtodoc.module').then(module => module.AddHowtodocModule),
-      },
-      {
         path: 'add-interview',
         loadChildren: () => import('../interview/add-interview/add-interview.module').then(module => module.AddInterviewModule),
       },
       {
         path: 'edit-interview/:interviewId',
         loadChildren: () => import('../interview/add-interview/add-interview.module').then(module => module.AddInterviewModule),
-      },
-      {
-        path: 'add-requirement',
-        loadChildren: () => import('../requirements/add-requirements/add-requirement.module').then(module => module.AddRequirementModule),
-      },
-      {
-        path: 'edit-requirement/:requirementId',
-        loadChildren: () => import('../requirements/add-requirements/add-requirement.module').then(module => module.AddRequirementModule),
       },
       {
         path: 'add-teamskill',
@@ -93,14 +61,6 @@ const postRoutes: Routes = [
       {
         path: 'edit-event/:eventId',
         loadChildren: () => import('../event/add-event/add-event.module').then(module => module.AddEventModule),
-      },
-      {
-        path: 'add-dreamjob',
-        loadChildren: () => import('../dream-job/add-dreamjob/add-dreamjob.module').then(module => module.AddDreamjobModule),
-      },
-      {
-        path: 'edit-dream-job/:dreamjobId',
-        loadChildren: () => import('../dream-job/add-dreamjob/add-dreamjob.module').then(module => module.AddDreamjobModule),
       },
       {
         path: 'add-job',

@@ -12,7 +12,7 @@ import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { PostService } from './post.service';
 import { Post } from '../models/post.model';
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class CommentService {
 
   commentSchema = comment;

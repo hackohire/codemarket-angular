@@ -83,7 +83,9 @@ export class AddPostComponent implements OnInit {
     this.postForm = new FormGroup({
       name: new FormControl(i && i.name ? i.name : '', Validators.required),
       description: new FormControl(i && i.description ? i.description : []),
+      tags: new FormControl(i && i.tags ? i.tags : []),
       companies: new FormControl(i && i.companies ? i.companies : []),
+      users: new FormControl(i && i.users ? i.users : []),
       createdBy: new FormControl(i && i.createdBy && i.createdBy._id ? i.createdBy._id : ''),
       status: new FormControl(i && i.status ? i.status : PostStatus.Drafted),
       type: new FormControl(i && i.type ? i.type : this.postType),
@@ -110,7 +112,8 @@ export class AddPostComponent implements OnInit {
     }
 
     const postFormValue = {...this.postForm.value};
-    postFormValue.companies = postFormValue.companies.map(c => c._id);
+    postFormValue['status'] = status;
+    // postFormValue.companies = postFormValue.companies.map(c => c._id);
 
     if (this.postId) {
       this.store.dispatch(UpdatePost({post: postFormValue}));

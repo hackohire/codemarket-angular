@@ -70,17 +70,12 @@ const routes: Routes = [
     // outlet: 'main',
     canLoad: [AuthGuard]
   },
-
-  {
-    path: 'help-request',
-    loadChildren: () => import('./help/help.module').then(module => module.HelpModule),
-    // outlet: 'main',
-    canLoad: [AuthGuard]
-  },
-
   {
     path: 'add-post',
     loadChildren: () => import('./post/add-post/add-post.module').then(module => module.AddPostModule),
+    data: {
+      noReuse: true
+    }
   },
   {
     path: 'edit-post/:postId',

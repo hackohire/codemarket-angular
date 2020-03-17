@@ -111,7 +111,7 @@
                     </div> -->
 
                     <div *ngIf="view === navLinkName.howtoguide">
-                        <app-add-howtodoc [connectedEvent]="details?._id"></app-add-howtodoc>
+                        <!-- <app-add-howtodoc [connectedEvent]="details?._id"></app-add-howtodoc> -->
                         <div class="item-grid pen-grid item-grid-large">
                             <ng-container *ngFor="let p of postsConnectedWithEvent">
                                 <app-brief-post *ngIf="p?.type === postTypes?.Howtodoc" style="width: 100%;" [p]="p"
@@ -121,7 +121,7 @@
                     </div>
 
                     <div *ngIf="view === navLinkName?.assignments">
-                        <app-add-assignment [connectedEvent]="details?._id"></app-add-assignment>
+                        <!-- <app-add-assignment [connectedEvent]="details?._id"></app-add-assignment> -->
                         <div class="item-grid pen-grid item-grid-large">
                             <ng-container *ngFor="let p of postsConnectedWithEvent">
                                 <app-brief-post *ngIf="p?.type === postTypes?.Assignment" style="width: 100%;" [p]="p"

@@ -33,8 +33,6 @@ import { AddJobComponent } from '../job/add-job/add-job.component';
 import { AddCompanyComponent } from '../companies/add-company/add-company.component';
 import { BriefPostComponent } from './components/brief-post/brief-post.component';
 import { AutocompleteComponent } from './components/autocomplete/autocomplete.component';
-import { AddHowtodocComponent } from '../howtodoc/add-howtodoc/add-howtodoc.component';
-import { AddAssignmentComponent } from '../assignment/add-assignment/add-assignment.component';
 import { AddCollaboratorsComponent } from './components/add-collaborators/add-collaborators.component';
 import { AddAssigneeComponent } from './components/add-assignee/add-assignee.component';
 
@@ -47,7 +45,7 @@ export function hljsLanguages() {
   ];
 }
 @NgModule({
-  declarations: [BreadcumbComponent, EditorComponent, CommentComponent, DatatableComponent, SafePipe, LikeDislikeComponent, VideoChatComponent, AddPostMenuComponent, CompaniesListComponent, AddJobComponent, BriefPostComponent, AutocompleteComponent, AddHowtodocComponent, AddAssignmentComponent, AddCollaboratorsComponent, AddAssigneeComponent],
+  declarations: [BreadcumbComponent, EditorComponent, CommentComponent, DatatableComponent, SafePipe, LikeDislikeComponent, VideoChatComponent, AddPostMenuComponent, CompaniesListComponent, AddJobComponent, BriefPostComponent, AutocompleteComponent, AddCollaboratorsComponent, AddAssigneeComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -91,8 +89,6 @@ export function hljsLanguages() {
     AddPostMenuComponent,
     BriefPostComponent,
     AutocompleteComponent,
-    AddHowtodocComponent,
-    AddAssignmentComponent,
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,

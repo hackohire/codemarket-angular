@@ -14,6 +14,12 @@ export const appConstants = {
     [PostType.Event]: 'calendar-plus',
     [PostType.Goal]: 'bullseye-arrow',
     [PostType.Dreamjob]: 'briefcase',
+    [PostType.Job]: 'briefcase',
+    [PostType.Bug]: 'bug',
+    [PostType.Challenge]: 'puzzle-piece',
+    [PostType.Class]: 'briefcase',
+    [PostType.Service]: 'briefcase',
+    [PostType.CompetitiveAdvantage]: 'briefcase',
     [PostType.Assignment]: 'sticky-note'
   },
 
@@ -323,16 +329,20 @@ export const appConstants = {
       label: 'Interview'
     },
     {
-      name: PostType.Bug,
-      label: 'Bug'
-    },
-    {
       name: PostType.CompetitiveAdvantage,
       label: 'Competitive Advantage'
     },
     {
       name: PostType.Assignment,
       label: 'Assignment'
+    },
+    {
+      name: PostType.Class,
+      label: 'Class'
+    },
+    {
+      name: PostType.Service,
+      label: 'Service'
     },
   ]
 

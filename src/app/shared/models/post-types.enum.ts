@@ -11,6 +11,8 @@ export enum PostType {
   Job = 'job',
   Bug = 'bug',
   Challenge = 'challenge',
+  Class = 'class',
+  Service = 'service',
   CompetitiveAdvantage = 'competitive-advantage',
 
   Assignment = 'assignment',

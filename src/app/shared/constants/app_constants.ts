@@ -15,7 +15,8 @@ export const appConstants = {
     [PostType.Design]: 'marker',
     [PostType.Event]: 'calendar-plus',
     [PostType.Goal]: 'bullseye-arrow',
-    [PostType.Dreamjob]: 'briefcase'
+    [PostType.Dreamjob]: 'briefcase',
+    [PostType.Assignment]: 'sticky-note'
   },
 
   fileS3Bucket: 'codemarket-files',
@@ -386,7 +387,43 @@ export const appConstants = {
     {
       name: PostType.Dreamjob,
       label: 'Dream Job'
-    }
+    },
+    {
+      name: PostType.Product,
+      label: 'Product'
+    },
+    {
+      name: PostType.Job,
+      label: 'Job'
+    },
+    {
+      name: PostType.Bug,
+      label: 'Bug'
+    },
+    {
+      name: PostType.Event,
+      label: 'Event'
+    },
+    {
+      name: PostType.Challenge,
+      label: 'Challenge'
+    },
+    {
+      name: PostType.Interview,
+      label: 'Interview'
+    },
+    {
+      name: PostType.Bug,
+      label: 'Bug'
+    },
+    {
+      name: PostType.CompetitiveAdvantage,
+      label: 'Competitive Advantage'
+    },
+    {
+      name: PostType.Assignment,
+      label: 'Assignment'
+    },
   ]
 
 

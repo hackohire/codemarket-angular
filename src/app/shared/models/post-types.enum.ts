@@ -3,21 +3,26 @@ export enum PostType {
   Interview = 'interview',
   Requirement = 'requirement',
   HelpRequest = 'help-request',
-  Design = 'design',
   Testing = 'testing',
   Howtodoc = 'howtodoc',
   Goal = 'goal',
   Event = 'event',
-  Teamskill = 'team-skill',
   Dreamjob = 'dream-job',
   Job = 'job',
+  Bug = 'bug',
+  Challenge = 'challenge',
+  CompetitiveAdvantage = 'competitive-advantage',
+
+  Assignment = 'assignment',
+
+  Email = 'email',
+
   CareerCoach = 'career-coach',
   BusinessCoach = 'business-coach',
   CapitalFunding = 'capital-funding',
   HiringProcess = 'hiring-process',
-  Assignment = 'assignment',
-
-  Email = 'email'
+  Design = 'design',
+  Teamskill = 'team-skill',
 }
 
 export enum UserProfilePostTypes {

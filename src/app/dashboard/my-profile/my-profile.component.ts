@@ -14,7 +14,6 @@ import { map } from 'rxjs/operators';
 import { PostService } from '../../shared/services/post.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { Post } from '../../shared/models/post.model';
-import { PostStatus } from '../../shared/models/poststatus.enum';
 import { EditorComponent } from '../../shared/components/editor/editor.component';
 import moment from 'moment';
 import { CommentService } from '../../shared/services/comment.service';
@@ -79,9 +78,6 @@ export class MyProfileComponent implements OnInit {
   navLinkName = navLinkName;
 
   postsUnderUser: Post[];
-
-  listOfEvents$: Observable<{ posts: Post[], total: number }>;
-  listOfDreamJobs$: Observable<{ posts: Post[], total: number }>;
 
   listOfAllOtherPosts: { posts: Post[], total?: number } = { posts: [] };
   totalOtherPosts: number;
@@ -208,15 +204,6 @@ export class MyProfileComponent implements OnInit {
       return category.types.indexOf(c => c.view === this.profileView) > 0;
     }
     return false;
-  }
-
-  async updatePost(post, singlePostEditor: EditorComponent) {
-    const blocks = await singlePostEditor.editor.save();
-    const postToBeUpdated = {};
-    postToBeUpdated['description'] = blocks.blocks;
-    postToBeUpdated['_id'] = post._id;
-    postToBeUpdated['isPostUnderUser'] = true;
-    this.postService.updatePost(postToBeUpdated).subscribe();
   }
 
   ngOnInit() {

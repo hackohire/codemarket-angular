@@ -40,25 +40,6 @@ export const appConstants = {
     gif_url: 'https://www.codemarket.io/assets/images/cm.gif'
   },
 
-  careerCoachQuestions: {
-    gapAnalysis: 'I can do resume gap analysis',
-    careerCoachSessions: 'I can take part in weekly 30 mins career coach sessions',
-    helpingWithMockInterviews: 'I can take part in helping with mock interviews',
-    hiringMentoringSessions: 'I can take part in hiring mentoring sessions'
-  },
-
-  businessCoachQuestions: {
-    businessCoachSessions: 'Can You Take Part In Weekly 30 Mins Business Coaching?',
-    cities: 'In which cities can you provide business coaching?',
-    roles: 'What would you like to gain from business coaching? (Dream Job positions)',
-    companies: 'What are all companies can you coach?',
-    businessAreas: 'In what business areas can you provide business coaching?',
-    businessGoals: 'What business goals can you help with your coaching?',
-    businessChallenges: 'What business challenges can you give coaching for?',
-    sellProducts: 'Do you sell any products?',
-    sellServices: 'Do you sell any services?'
-  },
-
   Notification: 'https://notificationsounds.com/soundfiles/4e4b5fbbbb602b6d35bea8460aa8f8e5/file-sounds-1096-light.wav',
 
   imageExtenstions: [
@@ -205,13 +186,12 @@ export const appConstants = {
       comments {
         ...Comments
       }
-      support {
-        time
-        description {
-          ...Description
-        }
-      }
       likeCount
+      users {
+        _id
+        name
+        avatar
+      }
       createdBy {
         _id
         name
@@ -231,13 +211,6 @@ export const appConstants = {
         avatar
       }
       slug
-      connectedWithUser {
-        _id
-        name
-        avatar
-      }
-    
-
       comments {
         text {
           ...Description
@@ -270,10 +243,6 @@ export const appConstants = {
         latitude
         address
       }
-      company {
-        name
-        _id
-      }
       companies {
         name
         _id
@@ -285,63 +254,6 @@ export const appConstants = {
       cities {
         name
         _id
-      }
-
-      gapAnalysis
-      careerCoachSessions
-      helpingWithMockInterviews
-      hiringMentoringSessions
-
-      businessCoachSessions,
-      businessAreas {
-        name
-        _id
-        type
-      }
-      businessGoals {
-        name
-        _id
-        type
-      }
-      businessChallenges {
-        name
-        _id
-        type
-      }
-      sellProducts {
-        sellProducts
-        products {
-          name
-          _id
-          type
-        }
-      }
-      sellServices {
-        sellServices
-        services {
-          name
-          _id
-          type
-        }
-      }
-
-      fundingCurrency
-      fundingAmount
-      fundingBy {
-        name
-        _id
-      }
-      fundingTo {
-        name
-        _id
-      }
-      fundingDate
-      fundingProcess {
-        ...Description
-      }
-
-      hiringProcess {
-        ...Description
       }
 
       collaborators {

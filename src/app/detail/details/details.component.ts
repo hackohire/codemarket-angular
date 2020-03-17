@@ -53,9 +53,6 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
   commentId: string;
 
-  careerCoachQuestions = appConstants.careerCoachQuestions;
-  businessCoachQuestions = appConstants.businessCoachQuestions;
-
   constructor(
     private store: Store<AppState>,
     private activatedRoute: ActivatedRoute,
@@ -67,15 +64,6 @@ export class DetailsComponent implements OnInit, OnDestroy {
     private router: Router,
     private sweetAlertService: SweetalertService
   ) {
-    this.breadcumb = {
-      path: [
-        // {
-        //   name: 'Dashboard',
-        //   pathString: '/'
-        // }
-      ]
-    };
-
     /** Peer Subscription for Video Call */
     // this.userService.peer.subscribe((p) => {
     //   if (p) {
@@ -89,8 +77,6 @@ export class DetailsComponent implements OnInit, OnDestroy {
     /** Read the type of the post  */
     this.type = this.activatedRoute.snapshot.queryParams.type;
 
-    /** show the type of the post in "breadcrumb" */
-    this.breadcumb.path.push({ name: this.type });
 
     this.commentId = this.activatedRoute.snapshot.queryParams['commentId'];
 
@@ -111,13 +97,22 @@ export class DetailsComponent implements OnInit, OnDestroy {
           this.initializeCommentForm(p, 'post');
 
           /** SHow company in breadcrumb */
-          if (p.company && p.company.name) {
-            this.breadcumb.path.unshift({ name: p.company.name })
-          }
+          // if (p.companies && p.companies.length) {
+          //   this.breadcumb.path.unshift({ name: p.type });
+          // }
 
           /** Subscribe to loggedinuser, once loggedInUse is got, Check if the loggedInUder is
            * in the list of attendess or not
            **/
+
+          this.breadcumb = {
+            path: [
+              {
+                name: p.type,
+                pathString: '/'
+              }
+            ]
+          };
 
           this.subscription$.add(
             this.authService.loggedInUser$.subscribe((user) => {

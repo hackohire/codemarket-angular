@@ -16,7 +16,7 @@ import { environment } from 'src/environments/environment';
 import { PostService } from 'src/app/shared/services/post.service';
 import { selectLoggedInUser } from '../../core/store/selectors/user.selector';
 import { GetPostsByUserIdAndType, DeletePost, SetSelectedPost } from '../../core/store/actions/post.actions';
-import { PostType, CompanyPostTypes, UserProfilePostTypes } from '../../shared/models/post-types.enum';
+import { PostType } from '../../shared/models/post-types.enum';
 import { selectPostsByUserIdAndType } from '../../core/store/selectors/post.selectors';
 import { SweetalertService } from '../../shared/services/sweetalert.service';
 
@@ -61,8 +61,6 @@ export class ProductsListComponent implements OnInit, OnDestroy, AfterViewInit {
   authorId: string; // Id of the user whose profile is being visited by loggedInUser
 
   postTypes = Object.values(PostType);
-  companyPostTypes = Object.values(CompanyPostTypes);
-  userProfilePostTypes = Object.values(UserProfilePostTypes);
 
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   selectedPostType = '';
@@ -79,19 +77,19 @@ export class ProductsListComponent implements OnInit, OnDestroy, AfterViewInit {
       title: 'Posts',
       types: this.postTypes
     },
-    {
-      view: 'Businesses',
-      title: 'Businesses',
-      types: this.companyPostTypes,
-      showHighlight: true,
-      showAddBusiness: true
-    },
-    {
-      view: 'Proffessionals',
-      title: 'Proffessionals',
-      types: this.userProfilePostTypes,
-      showHighlight: true,
-    },
+    // {
+    //   view: 'Businesses',
+    //   title: 'Businesses',
+    //   types: this.companyPostTypes,
+    //   showHighlight: true,
+    //   showAddBusiness: true
+    // },
+    // {
+    //   view: 'Proffessionals',
+    //   title: 'Proffessionals',
+    //   types: this.userProfilePostTypes,
+    //   showHighlight: true,
+    // },
   ];
 
   constructor(

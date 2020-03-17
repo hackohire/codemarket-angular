@@ -2,8 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
-import { AuthGuard } from '../shared/guards/auth.guard';
-import { CompanyPostTypes, UserProfilePostTypes, PostType } from '../shared/models/post-types.enum';
+import { PostType } from '../shared/models/post-types.enum';
 
 const postRoutes: Routes = [
   {
@@ -18,8 +17,7 @@ const postRoutes: Routes = [
   /** SEND EMAIL */
   {
     path: `send-${PostType.Email}`,
-    loadChildren: () => import('../email/send-email/send-email.module')
-      .then(module => module.SendEmailModule),
+    loadChildren: () => import('../email/send-email/send-email.module').then(module => module.SendEmailModule),
   },
 ];
 

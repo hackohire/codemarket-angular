@@ -11,8 +11,6 @@ export const appConstants = {
     [PostType.HelpRequest]: 'question-circle',
     [PostType.Howtodoc]: 'file-exclamation',
     [PostType.Testing]: 'tasks',
-    [PostType.Teamskill]: 'users-crown',
-    [PostType.Design]: 'marker',
     [PostType.Event]: 'calendar-plus',
     [PostType.Goal]: 'bullseye-arrow',
     [PostType.Dreamjob]: 'briefcase',

@@ -27,7 +27,6 @@ import { TrainingFromExpertsComponent } from './training-from-experts/training-f
 import { RealProjectsComponent } from './real-projects/real-projects.component';
 import { MockInterviewsComponent } from './mock-interviews/mock-interviews.component';
 import { DreamJobMentorsComponent } from './dream-job-mentors/dream-job-mentors.component';
-import { StressManagementComponent } from './stress-management/stress-management.component';
 import { ResumeGapAnalysisComponent } from './resume-gap-analysis/resume-gap-analysis.component';
 import { PeerNetworkingComponent } from './peer-networking/peer-networking.component';
 import { LeadershipTrainingComponent } from './leadership-training/leadership-training.component';
@@ -37,6 +36,7 @@ import { CommunityImpactStoriesComponent } from './community-impact-stories/comm
 import { AdvocatesInfluencersComponent } from './advocates-influencers/advocates-influencers.component';
 import { LoaderComponent } from './auth/loader/loader.component';
 import { AuthModule } from './auth/auth.module';
+import { StressManagementComponent } from './stress-management/stress-management.component';
 
 // import { SignInComponent } from './core/amplify/sign-in-component';
 
@@ -64,12 +64,12 @@ import { AuthModule } from './auth/auth.module';
     RealProjectsComponent,
     MockInterviewsComponent,
     DreamJobMentorsComponent,
-    StressManagementComponent,
     ResumeGapAnalysisComponent,
     PeerNetworkingComponent,
     LeadershipTrainingComponent,
     StickyComponent,
     ViralComponent,
+    StressManagementComponent,
     CommunityImpactStoriesComponent,
     AdvocatesInfluencersComponent
   ],

@@ -121,3 +121,362 @@
   .hero-area+section{
 	// padding-top: 187px;
   }
+
+
+
+
+
+
+//General CSS for shanainsurance.com 
+
+body {
+	margin: 0 0 0 0px;
+	padding: 0 0 0 0px;
+	background-image: url(../../assets/images/insuranceBG.jpg);
+	background-repeat: no-repeat;
+	background-position: center top;
+	background-color: #141c26;
+	font-family: Arial, Helvetica, sans-serif;
+	color: #444444;
+	font-size: 13px;
+	line-height: 20px;
+	font-weight: normal;
+	text-align: left;
+}
+
+a:link, a:visited, a:active {
+font-family: Arial, Helvetica, sans-serif;
+color: #f5830b;
+font-size: 13px;
+font-weight: normal;
+}
+a:hover {
+	font-family: Arial, Helvetica, sans-serif;
+	color: #101824;
+	font-size: 13px;
+	font-weight: normal;
+}
+.clear {
+	clear: both;
+}
+img {
+	border: none;
+}
+hr {
+	background-color: #fb9a16;
+	height: 1px;
+	border: none;
+}
+.home-pics
+{
+	width:69px;
+	height:50px;
+	margin-right:10px;
+	margin-top:3px;
+	margin-bottom:3px;
+	float:left;
+	border:4px solid #f0f0f0;
+}
+
+
+//Main Content CSS
+
+/* CONTENT AREA */
+#insurance-content {
+	display: table;
+	background-image: url(../../assets/images/insurance-content.png);
+	background-repeat: repeat-y;
+	margin-right: auto;
+	margin-left: auto;
+	width: 1012px;
+	padding-bottom:10px;
+}
+#insurance-content-main {
+	display: table;
+	width: 560px;
+		border-top: 8px solid #f09e47;
+		float:left;
+	margin-left:44px;
+		margin-top:20px;
+		background-color:#FFF;
+		padding-left:25px;
+		padding-right:33px;
+		padding-top:20px;
+}
+#insurance-content-main h1 {
+	font-family: 'Roboto', sans-serif;
+	font-weight: bold;
+	font-size: 21px;
+	color: #f09e47;
+	margin-bottom:6px;
+	padding-bottom:6px;
+	padding-top:0px;
+	margin-top:0px;
+}
+#insurance-content-main h2 {
+	font-family: 'Roboto', sans-serif;
+	font-weight: normal;
+	font-size: 18px;
+	color: #0a477f;
+	margin-bottom:3px;
+	padding-bottom:3px;
+	padding-top:0px;
+	margin-top:0px;
+}
+
+#insurance-sidebar {
+	width: 280px;
+		float:left;
+		margin-left:27px;
+		margin-top:20px;
+}
+#insurance-sidebar-title2 {
+	
+	width: 260px;
+	background-color:#f09e47;
+	padding:10px;
+	margin-bottom:-13px;
+
+}
+#insurance-sidebar-title2 h4 {
+	font-family: 'Roboto', sans-serif;
+	font-weight: normal;
+	font-size: 18px;
+	color: #0a477f;
+	text-transform:uppercase;
+	text-align:center;
+	margin-bottom:0px;
+	padding-bottom:0px;
+	padding-top:0px;
+	margin-top:0px;
+	text-shadow: 1px 1px 1px #ccc;
+
+}
+#insurance-sidebar-title {
+	width: 260px;
+	background-color:#f09e47;
+	padding:10px;
+
+}
+#insurance-sidebar-title h4 {
+	font-family: 'Roboto', sans-serif;
+	font-weight: normal;
+	font-size: 18px;
+	color: #0a477f;
+	text-transform:uppercase;
+	text-align:center;
+	margin-bottom:0px;
+	padding-bottom:0px;
+	padding-top:0px;
+	margin-top:0px;
+	text-shadow: 1px 1px 1px #ccc;
+
+}
+#sidebar-nav {
+	width: 280px;
+	background-color:#1b2f64;
+	padding:0px;
+	margin:0px;
+}
+#sidebar-nav ul {
+	text-align:right;
+	margin-left: 0;
+	padding-left: 0;
+	list-style-type: none;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: normal;
+	font-size: 13px;
+	color: #fff;
+	text-transform:uppercase;
+	text-decoration: none;
+}
+#sidebar-nav a {
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: normal;
+	font-size: 13px;
+	color: #fff;
+	text-transform:uppercase;
+	text-decoration: none;
+	text-align:left;
+	display: block;
+	padding: 8px;
+	
+	padding-left:14px;
+	padding-bottom: 6px;
+	width: 258px;
+	border-bottom: 2px dotted #666;
+}
+#sidebar-nav a:link, #navlist a:visited {
+	color:#fff;
+	text-decoration: none;
+}
+#sidebar-nav a:hover {
+	background-color:#F0F0F0;
+	color: #1b2f64;
+}
+
+#sidebar-box {
+	width: 280px;
+	background-color:#F0F0F0;
+	padding:0px;
+	margin:0px;
+}
+
+#sidebar-nav2 {
+	width: 280px;
+	background-color:#F0F0F0;
+	padding:0px;
+	margin:0px;
+}
+#sidebar-nav2 ul {
+	text-align:right;
+	margin-left: 0;
+	padding-left: 0;
+	list-style-type: none;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: normal;
+	font-size: 13px;
+	color: #1b2f64;
+	text-transform:uppercase;
+	text-decoration: none;
+}
+#sidebar-nav2 a {
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: normal;
+	font-size: 13px;
+	color: #1b2f64;
+	text-transform:uppercase;
+	text-decoration: none;
+	text-align:left;
+	display: block;
+	padding: 8px;
+	
+	padding-left:14px;
+	padding-bottom: 6px;
+	width: 258px;
+	border-bottom: 2px dotted #ccc;
+}
+#sidebar-nav2 a:link, #navlist2 a:visited {
+	color: #1b2f64;
+	text-decoration: none;
+}
+#sidebar-nav2 a:hover {
+	background-color:#1b2f64;
+	color: #F0F0F0;
+}
+
+#sidebar-shana{
+	width: 270px;
+	text-align:right;
+	font-size:12px;
+	padding-right:10px;
+}
+
+
+#insurance-bottom {
+	background-image: url(../../assets/images/insurance-bottom.png);
+	background-repeat: no-repeat;
+	margin-right: auto;
+	margin-left: auto;
+	width: 1012px;
+	height: 39px;
+	margin-bottom: 30px;
+}
+
+#insurance-footer {
+margin-right: auto;
+	margin-left: auto;
+	width: 1012px;
+	padding-top:12px;
+	padding-bottom:12px;
+	background-image: url(../../assets/images/insurance-content.png);
+	background-repeat: repeat-y;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:11px;
+	color:#666;
+	line-height:16px;
+	text-align:center;
+}
+
+#insurance-footer a:link, #insurance-footer a:visited {
+	font-family: Arial, Helvetica, sans-serif;
+	color: #101824;
+font-weight: normal;
+	font-size: 11px;
+	text-decoration: none;
+	line-height:16px;
+}
+#insurance-footer a:hover {
+	font-family: Arial, Helvetica, sans-serif;
+	color: #101824;
+font-weight: normal;
+	font-size: 11px;
+	text-decoration: underline;
+}
+
+
+#insurance-links {
+	margin-right: auto;
+	margin-left: auto;
+	width: 1012px;
+	margin-top: 10px;
+	padding-top:12px;
+	padding-bottom:6px;
+	background-image: url(../../assets/images/insurance-content.png);
+	background-repeat: repeat-y;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:11px;
+	color:#666;
+	line-height:16px;
+	
+}
+#insurance-links a:link, #insurance-links a:visited {
+	font-family: Arial, Helvetica, sans-serif;
+	color: #101824;
+font-weight: normal;
+	font-size: 11px;
+	text-decoration: none;
+	line-height:16px;
+}
+#insurance-links a:hover {
+	font-family: Arial, Helvetica, sans-serif;
+	color: #101824;
+font-weight: normal;
+	font-size: 11px;
+	text-decoration: underline;
+}
+
+/* collapsible panel */
+.CollapsiblePanel {
+	margin: 0px;
+	width: 900px;
+		margin-right: auto;
+	margin-left: auto;
+	padding: 0px;
+}
+.CollapsiblePanelTab {
+	width: 900px;
+	margin: 0px;
+	padding: 2px;
+	cursor: pointer;
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	text-align:center;
+}
+.CollapsiblePanelContent {
+	margin: 0px;
+	padding: 0px;
+}
+.CollapsiblePanelTab a {
+	color: black;
+	text-decoration: none;
+}
+.CollapsiblePanelOpen .CollapsiblePanelTab {
+}
+.CollapsiblePanelClosed .CollapsiblePanelTab {
+/* background-color: #EFEFEF */
+}
+.CollapsiblePanelTabHover, .CollapsiblePanelOpen .CollapsiblePanelTabHover {
+}
+.CollapsiblePanelFocused .CollapsiblePanelTab {
+}

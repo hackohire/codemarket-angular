@@ -50,3 +50,267 @@ div::-webkit-scrollbar-thumb {
 }
 
 
+
+/* California Insurance TOP Header */
+#insurance-headerTop {
+	background-image: url(../../../../assets/images/insurance-top.png);
+	background-repeat: no-repeat;
+	margin-right: auto;
+	margin-left: auto;
+	width: 1012px;
+	height: 55px;
+}
+#insurance-Top-nav {
+	float: left;
+	width: 475px;
+	height: 41px;
+	margin-left: 26px;
+}
+#insurance-Top-phone {
+	float: left;
+	width: 252px;
+	height: 50px;
+	font-family: 'Roboto', sans-serif;
+	font-weight: bold;
+	font-size: 26px;
+	color: #f09e47;
+	text-shadow: 1px 1px 1px #000;
+	padding-left: 8px;
+	padding-top: 5px;
+}
+#insurance-Top-quote {
+	float: left;
+	width: 210px;
+	height: 55px;
+}
+/* TOP NAVIGATION */
+#insurance-nav-bg {
+	width: 100%;
+	height: 41px;
+}
+#navi {
+	height: 41px;
+	width: 470px;
+	margin-right: auto;
+	margin-left: auto;
+}
+#navi ul {
+	list-style-type: none;
+	height: 41px;
+	width: 470px;
+	margin: auto;
+	padding-left: 2px;
+}
+#navi li {
+	float: left;
+}
+#navi ul a {
+	padding-right: 14px;
+	padding-left: 14px;
+	display: block;
+	line-height: 41px;
+	text-decoration: none;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 400;
+	font-size: 14px;
+	color: #fff;
+	text-shadow: 1px 1px 1px #000;
+	text-transform: uppercase;
+	background-image: url(../../../../assets/images/lines.png);
+	background-repeat: no-repeat;
+	background-position: right;
+}
+#navi ul a:hover {
+	color: #101824;
+	text-shadow: 1px 1px 1px #fff;
+	background-color: #f09e47;
+}
+
+/* California Insurance PRIMARY Header */
+#insurance-header {
+	background-image: url(../../../../assets/images/insurance-header.png);
+	background-repeat: no-repeat;
+	margin-right: auto;
+	margin-left: auto;
+	width: 1012px;
+	height: 96px;
+}
+#insurance-header-logo {
+	float: left;
+	margin-left: 35px;
+	width: 200px;
+	height: 96px;
+}
+#insurance-header-nav {
+	float: left;
+	margin-left: 1px;
+	width: 738px;
+	height: 96px;
+	text-align: left;
+}
+#insurance-header-info {
+	height: 37px;
+	padding-top: 8px;
+	width: 720px;
+	text-align: right;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: normal;
+	font-size: 11px;
+	color: #666;
+}
+#insurance-header-mega {
+	float: left;
+	margin-left: 1px;
+	height: 50px;
+	width: 738px;
+	text-align: left;
+}
+/* MEGA MENU STYLES */
+#menu {
+	list-style: none;
+	width: 735px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	margin-left: -25px;
+	height: 50px;
+}
+#menu li {
+	float: left;
+	display: block;
+	text-align: center;
+	position: relative;
+	padding: 3px 13px 3px 13px;
+	margin-right: 1px;
+	margin-top: 1px;
+	border: none;
+}
+#menu li:hover {
+	padding: 3px 13px 3px 13px;
+	background: #1b2f64;
+	color: #fff;
+}
+#menu li a {
+	text-decoration: none;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: normal;
+	font-size: 15px;
+	line-height: 19px;
+	color: #1b2f64;
+	display: block;
+	outline: 0;
+}
+#menu li:hover a {
+	color: #fff;
+}
+#menu li .drop {
+}
+#menu li:hover .drop {
+}
+.dropdown_1column, .dropdown_2columns {
+	margin: 2px auto;
+	float: left;
+	position: absolute;
+	left: -999em; /* Hides the drop down */
+	text-align: left;
+	padding: 10px 5px 6px 5px;
+	border: 1px solid #ccc;
+	background: #1b2f64;
+	text-align: left;
+}
+.dropdown_1column {
+	width: 190px;
+}
+.dropdown_2columns {
+	width: 190px;
+}
+#menu li:hover .dropdown_1column, #menu li:hover .dropdown_2columns {
+	left: -50px;
+	top: auto;
+}
+#menu li:hover .dropdown_2columns {
+	left: -38px;
+	top: auto;
+}
+.col_1, .col_2 {
+	display: inline;
+	float: left;
+	position: relative;
+	margin-left: 4px;
+	margin-right: 4px;
+}
+.col_1 {
+	width: 182px;
+}
+.col_2 {
+	width: 176px;
+}
+#menu p, #menu h3, #menu ul li {
+	line-height: 16px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: normal;
+	font-size: 12px;
+	text-align: left;
+	color: #fff;
+}
+#menu h3 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: normal;
+	font-size: 12px;
+	padding-top: 1px;
+	margin-top: 1px;
+	padding-bottom: 4px;
+	margin-bottom: 4px;
+	border-bottom: 1px solid #e8e8e8;
+	color: #999;
+}
+#menu p {
+	line-height: 18px;
+	margin: 0 0 10px 0;
+	color: #fff;
+}
+#menu li:hover div a {
+	font-size: 12px;
+	color: #16376c;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: normal;
+	color: #fff;
+	line-height: 18px;
+}
+#menu li:hover div a:hover {
+	color: #fe9700;
+}
+#menu li ul {
+	list-style: none;
+	padding: 0;
+	margin: 0 0 10px 0;
+	color: #fff;
+	text-align: left;
+}
+#menu li ul li {
+	font-size: 12px;
+	line-height: 24px;
+	position: relative;
+	text-shadow: 1px 1px 1px #000;
+	padding: 0;
+	margin: 0;
+	float: none;
+	text-align: left;
+	width: 130px;
+	color: #fff;
+}
+#menu li ul li:hover {
+	background: none;
+	border: none;
+	padding: 0;
+	margin: 0;
+}
+/* end mega menu */
+/* BANNER STYLES */
+#insurance-banner {
+	background-image: url(../../../../assets/images/insurance-banner.png);
+	background-repeat: no-repeat;
+	margin-right: auto;
+	margin-left: auto;
+	width: 1012px;
+	height: 217px;
+}

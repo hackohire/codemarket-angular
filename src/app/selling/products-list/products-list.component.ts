@@ -214,11 +214,6 @@ export class ProductsListComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
-  editProduct(post): void {
-    this.store.dispatch(SetSelectedPost({ post }));
-    // this.router.navigate(['/add-product'], );
-  }
-
   deleteProduct(postId: string) {
     this.sweetAlertService.confirmDelete((e) => {
       this.store.dispatch(DeletePost({ postId }));

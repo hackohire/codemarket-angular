@@ -10,8 +10,15 @@ const postRoutes: Routes = [
     loadChildren: () => import('../post/posts-list/posts-list.module').then(module => module.PostsListModule)
   },
   {
-    path: 'dream-job-list',
-    loadChildren: () => import('../dream-job/dreamjob-list/dreamjob-list.module').then(module => module.DreamjobListModule)
+    path: 'add-post',
+    loadChildren: () => import('../post/add-post/add-post.module').then(module => module.AddPostModule),
+    data: {
+      noReuse: true
+    }
+  },
+  {
+    path: 'edit-post/:postId',
+    loadChildren: () => import('../post/add-post/add-post.module').then(module => module.AddPostModule),
   },
 
   /** SEND EMAIL */

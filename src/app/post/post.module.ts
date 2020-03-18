@@ -7,7 +7,10 @@ import { PostType } from '../shared/models/post-types.enum';
 const postRoutes: Routes = [
   {
     path: 'post-list',
-    loadChildren: () => import('../post/posts-list/posts-list.module').then(module => module.PostsListModule)
+    loadChildren: () => import('../post/posts-list/posts-list.module').then(module => module.PostsListModule),
+    data: {
+      noReuse: true
+    }
   },
   {
     path: 'add-post',

@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { of, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { AuthService } from '../../core/services/auth.service';
 import { AddPost, UpdatePost } from '../../core/store/actions/post.actions';
 import { AppState } from '../../core/store/state/app.state';
@@ -22,7 +22,7 @@ export class AddPostComponent implements OnInit {
   breadcumb: BreadCumb;
   postForm: FormGroup;
 
-  @Input() postType: string;
+  @Input() postType = '';
   @Input() postId: string;
 
   get createdBy() {
@@ -73,6 +73,9 @@ export class AddPostComponent implements OnInit {
     if (this.postId) {
       this.subscription$.add(
         this.postService.getPostById(this.postId).subscribe((p) => {
+          this.postType = p.type;
+          this.breadcumb.title = this.postType;
+          this.breadcumb.path[0].name = this.postType;
           this.postFormInitialization(p);
         })
       );

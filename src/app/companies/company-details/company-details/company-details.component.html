@@ -151,7 +151,7 @@
                             <div *ngFor="let p of postTypesArray; let last = last;">
                                 <button cdkAccordionItem [routerLink]="[]" [queryParams]="{ view: p.name }"
                                     [queryParamsHandling]="'merge'"
-                                    (click)="companyView = p.name; fetchAllCompanyRealtedePosts(p.name, true);"
+                                    (click)="companyView = p.name; fetchAllCompanyRealtedePosts(p.name);"
                                     class="docs-nav-content-btn"
                                     [ngClass]="companyView === p.name ? 'docs-component-viewer-sidenav-item-selected' : ''">
                                     {{p.label}}
@@ -234,12 +234,8 @@
                             <app-brief-post style="width: 100%;" [p]="e" *ngFor="let e of companyRelatedPosts?.posts"
                                 [readMore]="true"></app-brief-post>
                         </div>
-                        <div class="pagination-area" *ngIf="companyRelatedPosts?.posts?.length < totalcompanyRelatedPosts">
-                            <span style="text-decoration: underline; cursor: pointer;"
-                                (click)="companyRelatedPostsPageNumber = companyRelatedPostsPageNumber + 1; fetchAllCompanyRealtedePosts('')">+
-                                Load
-                                More{{'(' + (totalcompanyRelatedPosts - companyRelatedPosts?.posts?.length) + ')'}}</span>
-                        </div>
+                        <app-paginator [length]="totalcompanyRelatedPosts" (fetchData)="paginator = $event; fetchAllCompanyRealtedePosts()">
+                        </app-paginator>
                     </ng-container>
 
                     <ng-container *ngFor="let p of postTypesArray">
@@ -248,13 +244,8 @@
                                 <app-brief-post style="width: 100%;" [p]="e"
                                     *ngFor="let e of companyRelatedPosts?.posts" [readMore]="true"></app-brief-post>
                             </div>
-                            <div class="pagination-area"
-                                *ngIf="companyRelatedPosts?.posts?.length < totalcompanyRelatedPosts">
-                                <span style="text-decoration: underline; cursor: pointer;"
-                                    (click)="companyRelatedPostsPageNumber = companyRelatedPostsPageNumber + 1; fetchAllCompanyRealtedePosts(p.name)">+
-                                    Load
-                                    More{{'(' + (totalcompanyRelatedPosts - companyRelatedPosts?.posts?.length) + ')'}}</span>
-                            </div>
+                            <app-paginator [length]="totalcompanyRelatedPosts" (fetchData)="paginator = $event; fetchAllCompanyRealtedePosts(p.name)">
+                            </app-paginator>
                         </ng-container>
                     </ng-container>
 

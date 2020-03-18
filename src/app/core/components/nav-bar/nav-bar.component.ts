@@ -64,8 +64,6 @@ export class NavBarComponent implements OnInit, OnDestroy {
 
   cartListLength: Observable<number>;
 
-  messagesPageNumber = 1;
-
   private subscription: Subscription = new Subscription();
 
   constructor(
@@ -105,7 +103,6 @@ export class NavBarComponent implements OnInit, OnDestroy {
         if (u) {
           // this.ref.detach();
           this.loggedInUser = {...u};
-          this.messageService.fetchLatestCommentsForTheUserEngaged(null, u._id);
           // this.ref.detectChanges();
         } else {
           this.loggedInUser = u;

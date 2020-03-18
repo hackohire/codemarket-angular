@@ -26,6 +26,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 import { BlockToolData } from '@editorjs/editorjs/types/tools';
 import { EditorComponent } from '../../../shared/components/editor/editor.component';
 import { MdePopoverTrigger } from '@material-extended/mde';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-company-details',
@@ -68,7 +69,7 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
 
   companyRelatedPosts: { posts: Post[], total?: number } = { posts: [] };
   totalcompanyRelatedPosts: number;
-  companyRelatedPostsPageNumber = 1;
+  paginator: MatPaginator;
 
   /** Q&A Related Variables */
   questionOrAnswerForm: FormGroup;
@@ -160,12 +161,6 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
               this.companyDetails = c;
               this.initializeCommentForm(c, 'post');
               this.initializeQuestionAndAnswerForm(c, 'company');
-
-              if (this.companyView === 'posts') {
-                this.fetchAllCompanyRealtedePosts('');
-              } else if (this.postTypesArray.find(p => p.name === this.companyView)) {
-                this.fetchAllCompanyRealtedePosts(this.companyView);
-              }
             }
           }
         })
@@ -398,10 +393,6 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
     } else {
       panel.toggle();
     }
-
-    if (this.companyView === 'posts') {
-      this.fetchAllCompanyRealtedePosts('', true);
-    }
   }
 
   /** Update Social Media Links and clos the popover after successful update */
@@ -426,14 +417,13 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
   }
 
   /** Fetch the list of posts connected with company based on the pagination */
-  fetchAllCompanyRealtedePosts(postType = '', clear = false) {
-    if (clear) {
-      this.totalcompanyRelatedPosts = 0;
-      this.companyRelatedPosts.posts = [];
-    }
+  fetchAllCompanyRealtedePosts(postType = '') {
+    const paginationObj = {
+      pageNumber: this.paginator.pageIndex + 1, limit: this.paginator.pageSize ? this.paginator.pageSize : 10,
+      sort: {order: ''}};
     this.postService.getAllPosts(
-      { limit: 5, pageNumber: this.companyRelatedPostsPageNumber }, postType, '', this.companyDetails._id).subscribe((u) => {
-        this.companyRelatedPosts.posts = this.companyRelatedPosts.posts.concat(u.posts);
+      paginationObj, postType, '', this.companyDetails._id).subscribe((u) => {
+        this.companyRelatedPosts.posts = u.posts;
         this.totalcompanyRelatedPosts = u.total;
       });
   }

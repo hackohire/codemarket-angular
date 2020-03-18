@@ -44,18 +44,19 @@
                                 <div class="notification__info">
 
                                     <!-- User Avatar  -->
-                                    <div class="info_avatar" style="vertical-align: top;"
-                                        [routerLink]="['/', 'dashboard', 'profile', m?.createdBy?._id ]">
-                                        <img [src]="m?.createdBy?.avatar ? ((s3FilesBucketURL + m.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                                    <div class="info_avatar" style="vertical-align: top;">
+                                        <a [href]="'/'+ 'dashboard' + '/' + 'profile' + '/' + m?.createdBy?._id" target="_blank">
+                                            <img [src]="m?.createdBy?.avatar ? ((s3FilesBucketURL + m.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar"
                                             alt="">
+                                        </a>
                                     </div>
-                                    <div class="info" style="max-width: 90%;" (click)="redirectToPost(m)">
+                                    <div class="info" style="max-width: 90%;">
                                         <p>
-                                            <span [routerLink]="['/', 'dashboard', 'profile', m?.createdBy?._id ]">{{m?.createdBy?.name}}</span>
+                                            <span><a [href]="'/'+ 'dashboard' + '/' + 'profile' + '/' + m?.createdBy?._id" target="_blank">{{m?.createdBy?.name}}</a></span>
                                             has added a {{m?.parentId ? 'reply to your comment' : 'comment'}} on
 
                                             <!-- Post Name -->
-                                            <a *ngIf="m?.referencePost">{{m?.referencePost?.name}}</a>
+                                            <a *ngIf="m?.referencePost" [href]="'/' + m?.referenceId?.type === 'product' ? 'product' : 'post' + '/' + m?.referencePost?.slug + '?commentId=' + m._id" target="_blank">{{m?.referencePost?.name}}</a>
 
                                             <!-- Company Name -->
                                             <a *ngIf="m?.referenceCompany">{{m?.referenceCompany?.name}}</a>
@@ -80,15 +81,10 @@
             </div>
             <!-- end /.row -->
             <!-- pagination -->
-            <div *ngIf="!(((messageService.messagesList$ | async)?.messages?.length) < 10)"
-                class="pagination-area pagination-area2">
-                <nav class="navigation pagination " role="navigation">
-                    <span style="text-decoration: underline; cursor: pointer;"
-                        (click)="messagesPageNumber = messagesPageNumber + 1; messageService.fetchLatestCommentsForTheUserEngaged({pageNumber: messagesPageNumber, limit: 10}, authService?.loggedInUser?._id);">+
-                        Load
-                        More</span>
-                </nav>
-            </div>
+            <app-paginator *ngIf="authService?.loggedInUser"
+                [length]="(messageService.messagesList$ | async)?.total"
+                (fetchData)="messageService.fetchLatestCommentsForTheUserEngaged({pageNumber: $event.pageIndex + 1, limit: $event.pageSize ? $event.pageSize : 10}, authService?.loggedInUser?._id);">
+            </app-paginator>
             <!-- end /.pagination -->
         </div>
         <!-- end /.container -->

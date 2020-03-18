@@ -284,67 +284,20 @@ export const appConstants = {
     `,
 
   postTypesArray: [
-    {
-      name: PostType.Requirement,
-      label: 'Requirement'
-    },
-    {
-      name: PostType.Goal,
-      label: 'Goal'
-    },
-    {
-      name: PostType.Howtodoc,
-      label: 'How-To-Doc'
-    },
-    {
-      name: PostType.Testing,
-      label: 'Testing'
-    },
-    {
-      name: PostType.Dreamjob,
-      label: 'Dream Job'
-    },
-    {
-      name: PostType.Product,
-      label: 'Product'
-    },
-    {
-      name: PostType.Job,
-      label: 'Job'
-    },
-    {
-      name: PostType.Bug,
-      label: 'Bug'
-    },
-    {
-      name: PostType.Event,
-      label: 'Event'
-    },
-    {
-      name: PostType.Challenge,
-      label: 'Challenge'
-    },
-    {
-      name: PostType.Interview,
-      label: 'Interview'
-    },
-    {
-      name: PostType.CompetitiveAdvantage,
-      label: 'Competitive Advantage'
-    },
-    {
-      name: PostType.Assignment,
-      label: 'Assignment'
-    },
-    {
-      name: PostType.Class,
-      label: 'Class'
-    },
-    {
-      name: PostType.Service,
-      label: 'Service'
-    },
-  ]
-
-
+    { name: PostType.Assignment, label: 'Assignment' },
+    { name: PostType.Bug, label: 'Bug' },
+    { name: PostType.Challenge, label: 'Challenge' },
+    { name: PostType.Class, label: 'Class' },
+    { name: PostType.CompetitiveAdvantage, label: 'Competitive Advantage' },
+    { name: PostType.Dreamjob, label: 'Dream Job' },
+    { name: PostType.Event, label: 'Event' },
+    { name: PostType.Goal, label: 'Goal' },
+    { name: PostType.Howtodoc, label: 'How-To-Doc' },
+    { name: PostType.Interview, label: 'Interview' },
+    { name: PostType.Job, label: 'Job' },
+    { name: PostType.Product, label: 'Product' },
+    { name: PostType.Requirement, label: 'Requirement' },
+    { name: PostType.Service, label: 'Service' },
+    { name: PostType.Testing, label: 'Testing' }
+  ],
 };

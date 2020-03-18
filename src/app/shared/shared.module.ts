@@ -35,6 +35,7 @@ import { BriefPostComponent } from './components/brief-post/brief-post.component
 import { AutocompleteComponent } from './components/autocomplete/autocomplete.component';
 import { AddCollaboratorsComponent } from './components/add-collaborators/add-collaborators.component';
 import { AddAssigneeComponent } from './components/add-assignee/add-assignee.component';
+import { PaginatorComponent } from './components/paginator/paginator.component';
 
 
 export function hljsLanguages() {
@@ -45,7 +46,23 @@ export function hljsLanguages() {
   ];
 }
 @NgModule({
-  declarations: [BreadcumbComponent, EditorComponent, CommentComponent, DatatableComponent, SafePipe, LikeDislikeComponent, VideoChatComponent, AddPostMenuComponent, CompaniesListComponent, AddJobComponent, BriefPostComponent, AutocompleteComponent, AddCollaboratorsComponent, AddAssigneeComponent],
+  declarations: [
+    BreadcumbComponent,
+    EditorComponent,
+    CommentComponent,
+    DatatableComponent,
+    SafePipe,
+    LikeDislikeComponent,
+    VideoChatComponent,
+    AddPostMenuComponent,
+    CompaniesListComponent,
+    AddJobComponent,
+    BriefPostComponent,
+    AutocompleteComponent,
+    AddCollaboratorsComponent,
+    AddAssigneeComponent,
+    PaginatorComponent
+  ],
   imports: [
     CommonModule,
     FormsModule,
@@ -89,6 +106,7 @@ export function hljsLanguages() {
     AddPostMenuComponent,
     BriefPostComponent,
     AutocompleteComponent,
+    PaginatorComponent,
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,

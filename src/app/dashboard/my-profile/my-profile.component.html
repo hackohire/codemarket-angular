@@ -99,7 +99,7 @@
 									[routerLink]="[]"
 									[queryParams]="{ view: p.name }"
 									[queryParamsHandling]="'merge'"
-									(click)="profileView = p.name; fetchAllOtherPosts(p.name, true);"
+									(click)="profileView = p.name; fetchAllOtherPosts(p.name);"
 									class="docs-nav-content-btn"
 									[ngClass]="profileView === p.name ? 'docs-component-viewer-sidenav-item-selected' : ''">
 									{{p.name}}
@@ -166,13 +166,8 @@
 								<div class="item-grid pen-grid item-grid-large">
 									<app-brief-post style="width: 100%;" [p]="e" *ngFor="let e of listOfAllOtherPosts?.posts" [readMore]="true"></app-brief-post>
 								</div>
-								<div class="pagination-area"
-									*ngIf="listOfAllOtherPosts?.posts?.length < totalOtherPosts">
-									<span style="text-decoration: underline; cursor: pointer;"
-										(click)="otherPostsPageNumber = otherPostsPageNumber + 1; fetchAllOtherPosts('')">+
-										Load
-										More{{'(' + (totalOtherPosts - listOfAllOtherPosts?.posts?.length) + ')'}}</span>
-								</div>
+								<app-paginator [length]="totalOtherPosts" (fetchData)="paginator = $event; fetchAllOtherPosts()">
+								</app-paginator>
 							</ng-container>
 
 							<ng-container *ngFor="let p of postTypesArray">
@@ -181,13 +176,8 @@
 										<app-brief-post style="width: 100%;" [p]="e"
 											*ngFor="let e of listOfAllOtherPosts?.posts" [readMore]="true"></app-brief-post>
 									</div>
-									<div class="pagination-area"
-										*ngIf="listOfAllOtherPosts?.posts?.length < totalOtherPosts">
-										<span style="text-decoration: underline; cursor: pointer;"
-											(click)="otherPostsPageNumber = otherPostsPageNumber + 1; fetchAllOtherPosts(p.name)">+
-											Load
-											More{{'(' + (totalOtherPosts - listOfAllOtherPosts?.posts?.length) + ')'}}</span>
-									</div>
+									<app-paginator [length]="totalOtherPosts" (fetchData)="paginator = $event; fetchAllOtherPosts(p.name)">
+									</app-paginator>
 								</ng-container>
 							</ng-container>
 

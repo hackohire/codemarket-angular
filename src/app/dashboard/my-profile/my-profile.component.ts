@@ -7,7 +7,7 @@ import { UserService } from '../../user/user.service';
 import { User } from '../../shared/models/user.model';
 import { Observable, Subscription, of } from 'rxjs';
 import { VideoChatComponent } from '../../video-chat/video-chat.component';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatPaginator } from '@angular/material';
 import Peer from 'peerjs';
 import { PostType } from '../../shared/models/post-types.enum';
 import { map } from 'rxjs/operators';
@@ -77,10 +77,9 @@ export class MyProfileComponent implements OnInit {
 
   navLinkName = navLinkName;
 
-  postsUnderUser: Post[];
-
   listOfAllOtherPosts: { posts: Post[], total?: number } = { posts: [] };
   totalOtherPosts: number;
+  paginator: MatPaginator;
 
   commentForm: FormGroup;
 
@@ -93,8 +92,6 @@ export class MyProfileComponent implements OnInit {
   @ViewChild('profilePic', { static: false }) profilePic;
   selectedProfilePic: File;
   selectedProfilePicURL = '';
-
-  otherPostsPageNumber = 1;
 
   profileViewLinks = [
     // {
@@ -177,7 +174,6 @@ export class MyProfileComponent implements OnInit {
     this.breadcumb = {
       title: 'Profile',
       path: [
-
         {
           name: 'My Profile'
         }
@@ -215,7 +211,7 @@ export class MyProfileComponent implements OnInit {
     if (this.authorId) {
       // this.navLinks = this.navLinks.filter(n => !n.showOnlyToLoggedInUser);
       this.userData$ = this.userService.getUserById(this.authorId);
-      this.fetchPostsConnectedWithUser(this.authorId);
+      // this.fetchPostsConnectedWithUser(this.authorId);
 
       // this.userService.onUsersPostChanges(this.authorId);
       // this.commentService.onCommentAdded({ user: { _id: this.authorId } }, []);
@@ -224,8 +220,6 @@ export class MyProfileComponent implements OnInit {
 
       this.initializeCommentForm(this.authorId, 'post');
 
-      this.loadDataBasedOnViewType(this.profileView);
-
     } else {
       this.userData$ = this.authService.loggedInUser$;
 
@@ -233,14 +227,12 @@ export class MyProfileComponent implements OnInit {
         this.authService.loggedInUser$.pipe(
           map((user) => {
             if (user) {
-              this.fetchPostsConnectedWithUser(user._id);
+              // this.fetchPostsConnectedWithUser(user._id);
               // this.userService.onUsersPostChanges(user._id);
               // this.commentService.onCommentAdded({ user }, []);
               // this.commentService.onCommentUpdated({ user }, []);
               // this.commentService.onCommentDeleted({ user }, []);
               this.initializeCommentForm(user._id, 'post');
-
-              this.loadDataBasedOnViewType(this.profileView);
             }
           })
         ).subscribe()
@@ -348,71 +340,18 @@ export class MyProfileComponent implements OnInit {
     } else {
       panel.toggle();
     }
-    this.loadDataBasedOnViewType(category.view);
-  }
-
-  loadDataBasedOnViewType(view) {
-    switch (view) {
-      case navLinkName.buy:
-        break;
-
-      case navLinkName.membership:
-        break;
-
-      case navLinkName.sell:
-        break;
-
-      case navLinkName.myrsvp:
-        break;
-
-
-      // case navLinkName.events:
-      //   this.listOfEvents$ = this.postService.getPostsByUserIdAndType(
-      //     this.authorId ? this.authorId : this.authService.loggedInUser._id,
-      //     PostStatus.Published,
-      //     PostType.Event
-      //   );
-      //   break;
-
-      // case navLinkName.dreamjobs:
-      //   this.listOfDreamJobs$ = this.postService.getPostsByUserIdAndType(
-      //     this.authorId ? this.authorId : this.authService.loggedInUser._id,
-      //     PostStatus.Published,
-      //     PostType.Dreamjob
-      //   );
-      //   break;
-
-      case navLinkName.posts:
-        this.fetchAllOtherPosts();
-        break;
-
-      default:
-        this.fetchAllOtherPosts(view);
-
-    }
   }
 
   /** Fetch the list of posts for the posts tab based on the pagination */
-  fetchAllOtherPosts(postType = '', clear = false) {
-    if (clear) {
-      this.totalOtherPosts = 0;
-      this.listOfAllOtherPosts.posts = [];
-    }
-    this.postService.getAllPosts(
-      { limit: 5, pageNumber: this.otherPostsPageNumber }, postType, '', '', '',
+  fetchAllOtherPosts(postType = '') {
+    const paginationObj = {
+      pageNumber: this.paginator.pageIndex + 1, limit: this.paginator.pageSize ? this.paginator.pageSize : 10,
+      sort: {order: ''}};
+    this.postService.getAllPosts(paginationObj, postType, '', '', '',
       this.authorId ? this.authorId : this.authService.loggedInUser._id,
     ).subscribe((u) => {
-      this.listOfAllOtherPosts.posts = this.listOfAllOtherPosts.posts.concat(u.posts);
+      this.listOfAllOtherPosts.posts = u.posts;
       this.totalOtherPosts = u.total;
-    });
-  }
-
-  fetchPostsConnectedWithUser(userId) {
-    this.postService.getAllPosts({ limit: 0, pageNumber: 0 }, '', '', '', '', userId).subscribe(c => {
-      if (c && c.posts) {
-        this.postsUnderUser = c.posts;
-        this.commentService.usersPostsList = c.posts;
-      }
     });
   }
 

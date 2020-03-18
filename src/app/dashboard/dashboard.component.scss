@@ -121,3 +121,3965 @@
   .hero-area+section{
 	// padding-top: 187px;
   }
+
+
+
+
+
+  /* --------------------------------------------------------------
+  SASS Mixins
+-------------------------------------------------------------- */
+/*** Fonts ***/
+/*** Colours ***/
+.rupertspira article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+nav,
+section,
+summary {
+  display: block; }
+
+.rupertspira audio,
+canvas,
+video {
+  display: inline-block;
+  *display: inline;
+  *zoom: 1; }
+
+.rupertspira audio:not([controls]) {
+  display: none;
+  height: 0; }
+
+[hidden] {
+  display: none; }
+
+html {
+  font-family: sans-serif;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%; }
+
+.rupertspira body {
+  margin: 0;
+  font-family: sans-serif;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%; }
+
+.rupertspira a:focus {
+  outline: none; }
+
+.rupertspira a:active,
+a:hover {
+  outline: 0; }
+
+.rupertspira abbr[title] {
+  border-bottom: 1px dotted; }
+
+.rupertspira b,
+strong {
+  font-weight: 700; }
+
+.rupertspira dfn {
+  font-style: italic; }
+
+.rupertspira hr {
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  height: 0; }
+
+.rupertspira mark {
+  background: #ff0;
+  color: #000; }
+
+.rupertspira code,
+kbd,
+pre,
+samp {
+  font-family: monospace, serif;
+  font-size: 1em; }
+
+.rupertspira pre {
+  white-space: pre-wrap; }
+
+.rupertspira q {
+  quotes: "\201C" "\201D" "\2018" "\2019"; }
+
+.rupertspira small {
+  font-size: 80%; }
+
+.rupertspira sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline; }
+
+.rupertspira sup {
+  top: -0.5em; }
+
+.rupertspira sub {
+  bottom: -0.25em; }
+
+.rupertspira img {
+  border: 0; }
+
+.rupertspira svg:not(:root) {
+  overflow: hidden; }
+
+.rupertspira figure {
+  margin: 0; }
+
+.rupertspira fieldset {
+  border: 1px solid #c0c0c0;
+  margin: 0 2px;
+  padding: 0.35em 0.625em 0.75em; }
+
+.rupertspira legend {
+  border: 0;
+  padding: 0; }
+
+.rupertspira button,
+input,
+select,
+textarea {
+  font-family: inherit;
+  font-size: 100%;
+  margin: 0; }
+
+.rupertspira button,
+input {
+  line-height: normal; }
+
+.rupertspira button,
+select {
+  text-transform: none; }
+
+.rupertspira button,
+html input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  -webkit-appearance: button;
+  cursor: pointer; }
+
+.rupertspira button[disabled],
+html input[disabled] {
+  cursor: default; }
+
+.rupertspira input[type="checkbox"],
+input[type="radio"] {
+  -moz-box-sizing: border-box;
+       box-sizing: border-box;
+  padding: 0; }
+
+.rupertspira input[type="search"] {
+  -webkit-appearance: textfield;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box; }
+
+.rupertspira input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none; }
+
+.rupertspira button::-moz-focus-inner,
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0; }
+
+.rupertspira textarea {
+  overflow: auto;
+  vertical-align: top; }
+
+.rupertspira table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+.rupertspira td {
+  vertical-align: top; }
+
+.rupertspira .ir {
+  background-color: transparent;
+  background-repeat: no-repeat;
+  direction: ltr;
+  display: block;
+  overflow: hidden;
+  text-align: left;
+  text-indent: 100%; }
+  .ir br {
+    display: none; }
+
+.rupertspira .hidden {
+  display: none !important;
+  visibility: hidden; }
+
+.rupertspira .invisible {
+  visibility: hidden; }
+
+.rupertspira .left {
+  float: left; }
+
+.rupertspira .right {
+  float: right; }
+
+.tipsy {
+  font-size: 11px;
+  position: absolute;
+  padding: 5px;
+  z-index: 100000; }
+
+.rupertspira .tipsy-inner {
+  background-color: #888;
+  color: #FFF;
+  max-width: 200px;
+  padding: 5px 8px 4px 8px;
+  text-align: center; }
+
+/* Rounded corners */
+.rupertspira .tipsy-inner {
+  padding: 10px 5px;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px; }
+
+/* Uncomment for shadow */
+/*.tipsy-inner { box-shadow: 0 0 5px #000000; -webkit-box-shadow: 0 0 5px #000000; -moz-box-shadow: 0 0 5px #000000; }*/
+.rupertspira .tipsy-arrow {
+  position: absolute;
+  width: 0;
+  height: 0;
+  line-height: 0;
+  border: 5px dashed #888; }
+
+/* Rules to colour arrows */
+.rupertspira .tipsy-arrow-n {
+  border-bottom-color: #888; }
+
+.rupertspira .tipsy-arrow-s {
+  border-top-color: #888; }
+
+.rupertspira .tipsy-arrow-e {
+  border-left-color: #888; }
+
+.rupertspira .tipsy-arrow-w {
+  border-right-color: #888; }
+
+.rupertspira .tipsy-n .tipsy-arrow {
+  top: 0px;
+  left: 50%;
+  margin-left: -5px;
+  border-bottom-style: solid;
+  border-top: none;
+  border-left-color: transparent;
+  border-right-color: transparent; }
+
+.rupertspira .tipsy-nw .tipsy-arrow {
+  top: 0;
+  left: 10px;
+  border-bottom-style: solid;
+  border-top: none;
+  border-left-color: transparent;
+  border-right-color: transparent; }
+
+.rupertspira .tipsy-ne .tipsy-arrow {
+  top: 0;
+  right: 10px;
+  border-bottom-style: solid;
+  border-top: none;
+  border-left-color: transparent;
+  border-right-color: transparent; }
+
+.rupertspira .tipsy-s .tipsy-arrow {
+  bottom: 0;
+  left: 50%;
+  margin-left: -5px;
+  border-top-style: solid;
+  border-bottom: none;
+  border-left-color: transparent;
+  border-right-color: transparent; }
+
+.rupertspira .tipsy-sw .tipsy-arrow {
+  bottom: 0;
+  left: 10px;
+  border-top-style: solid;
+  border-bottom: none;
+  border-left-color: transparent;
+  border-right-color: transparent; }
+
+.rupertspira .tipsy-se .tipsy-arrow {
+  bottom: 0;
+  right: 10px;
+  border-top-style: solid;
+  border-bottom: none;
+  border-left-color: transparent;
+  border-right-color: transparent; }
+
+.rupertspira .tipsy-e .tipsy-arrow {
+  right: 0;
+  top: 50%;
+  margin-top: -5px;
+  border-left-style: solid;
+  border-right: none;
+  border-top-color: transparent;
+  border-bottom-color: transparent; }
+
+.rupertspira .tipsy-w .tipsy-arrow {
+  left: 0;
+  top: 50%;
+  margin-top: -5px;
+  border-right-style: solid;
+  border-left: none;
+  border-top-color: transparent;
+  border-bottom-color: transparent; }
+
+/*! fancyBox v2.1.2 fancyapps.com | fancyapps.com/fancybox/#license */
+.rupertspira .fancybox-wrap,
+.fancybox-skin,
+.fancybox-outer,
+.fancybox-inner,
+.fancybox-image,
+.fancybox-wrap iframe,
+.fancybox-wrap object,
+.fancybox-nav,
+.fancybox-nav span,
+.fancybox-tmp {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  outline: none;
+  vertical-align: top; }
+
+.rupertspira .fancybox-wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 8020; }
+
+.rupertspira .fancybox-skin {
+  position: relative;
+  background: #f9f9f9;
+  color: #444;
+  text-shadow: none;
+  border-radius: 4px; }
+
+.rupertspira .fancybox-opened {
+  z-index: 8030; }
+
+.rupertspira .fancybox-opened .fancybox-skin {
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5); }
+
+.rupertspira .fancybox-outer, .fancybox-inner {
+  position: relative; }
+
+.rupertspira .fancybox-inner {
+  overflow: hidden; }
+
+.rupertspira  .fancybox-type-iframe .fancybox-inner {
+  -webkit-overflow-scrolling: touch; }
+
+.rupertspira  .fancybox-error {
+  color: #444;
+  font: 14px/20px "Helvetica Neue",Helvetica,Arial,sans-serif;
+  margin: 0;
+  padding: 15px;
+  white-space: nowrap; }
+
+.rupertspira .fancybox-image, .fancybox-iframe {
+  display: block;
+  width: 100%;
+  height: 100%; }
+
+.rupertspira .fancybox-image {
+  max-width: 100%;
+  max-height: 100%; }
+
+.rupertspira  #fancybox-loading,
+.fancybox-close,
+.fancybox-prev span,
+.fancybox-next span {
+  background-image: url(../../assets/images/fancybox_sprite.png);
+  border-bottom: none; }
+
+.rupertspira #fancybox-loading {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -22px;
+  margin-left: -22px;
+  background-position: 0 -108px;
+  opacity: 0.8;
+  cursor: pointer;
+  z-index: 8060; }
+
+.rupertspira #fancybox-loading div {
+  width: 44px;
+  height: 44px;
+  background: url(../../assets/images/fancybox_loading.gif) center center no-repeat; }
+
+.rupertspira .fancybox-close {
+  position: absolute;
+  top: -18px;
+  right: -18px;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  z-index: 8040; }
+
+.rupertspira .fancybox-nav {
+  position: absolute;
+  top: 0;
+  width: 40%;
+  height: 100%;
+  cursor: pointer;
+  text-decoration: none;
+  background: transparent url(https://non-duality.rupertspira.com/assets/app/img/fancybox/blank.gif);
+  /* helps IE */
+  -webkit-tap-highlight-color: transparent;
+  z-index: 8040; }
+
+.rupertspira .fancybox-prev {
+  left: 0; }
+
+.rupertspira .fancybox-next {
+  right: 0; }
+
+.rupertspira .fancybox-nav span {
+  position: absolute;
+  top: 50%;
+  width: 36px;
+  height: 34px;
+  margin-top: -18px;
+  cursor: pointer;
+  z-index: 8040;
+  visibility: hidden; }
+
+.rupertspira .fancybox-prev span {
+  left: 10px;
+  background-position: 0 -36px; }
+
+.rupertspira .fancybox-next span {
+  right: 10px;
+  background-position: 0 -72px; }
+
+.rupertspira .fancybox-nav:hover span {
+  visibility: visible; }
+
+.rupertspira .fancybox-tmp {
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+  visibility: hidden; }
+
+/* Overlay helper */
+.rupertspira .fancybox-lock {
+  overflow: hidden; }
+
+.rupertspira .fancybox-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  display: none;
+  z-index: 8010;
+  background: url(https://non-duality.rupertspira.com/assets/app/img/fancybox_overlay.png); }
+
+.rupertspira .fancybox-overlay-fixed {
+  position: fixed;
+  bottom: 0;
+  right: 0; }
+
+.rupertspira .fancybox-lock .fancybox-overlay {
+  overflow: auto;
+  overflow-y: scroll; }
+
+/* Title helper */
+.rupertspira .fancybox-title {
+  visibility: hidden;
+  font: normal 13px/20px "Helvetica Neue",Helvetica,Arial,sans-serif;
+  position: relative;
+  text-shadow: none;
+  z-index: 8050; }
+
+.rupertspira .fancybox-opened .fancybox-title {
+  visibility: visible; }
+
+.rupertspira .fancybox-title-float-wrap {
+  position: absolute;
+  bottom: 0;
+  right: 50%;
+  margin-bottom: -35px;
+  z-index: 8050;
+  text-align: center; }
+
+.rupertspira .fancybox-title-float-wrap .child {
+  display: inline-block;
+  margin-right: -100%;
+  padding: 2px 20px;
+  background: transparent;
+  /* Fallback for web browsers that doesn't support RGBa */
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 15px;
+  text-shadow: 0 1px 2px #222;
+  color: #FFF;
+  font-weight: bold;
+  line-height: 24px;
+  white-space: nowrap; }
+
+.rupertspira .fancybox-title-outside-wrap {
+  position: relative;
+  margin-top: 10px;
+  color: #fff; }
+
+.rupertspira .fancybox-title-inside-wrap {
+  padding-top: 10px; }
+
+.rupertspira .fancybox-title-over-wrap {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  color: #fff;
+  padding: 10px;
+  background: #000;
+  background: rgba(0, 0, 0, 0.8); }
+
+/*
+ * CSS Styles that are needed by jScrollPane for it to operate correctly.
+ *
+ * Include this stylesheet in your site or copy and paste the styles below into your stylesheet - jScrollPane
+ * may not operate correctly without them.
+ */
+.rupertspira .jspScrollable {
+  outline: none; }
+
+.rupertspira .jspContainer {
+  overflow: hidden;
+  position: relative; }
+
+.rupertspira .jspPane {
+  position: absolute; }
+
+.rupertspira .jspVerticalBar {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 10px;
+  height: 100%;
+  background: red; }
+
+.rupertspira .jspHorizontalBar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 16px;
+  background: red; }
+
+.rupertspira .jspVerticalBar *,
+.jspHorizontalBar * {
+  margin: 0;
+  padding: 0; }
+
+.rupertspira .jspCap {
+  display: none; }
+
+.rupertspira .jspHorizontalBar .jspCap {
+  float: left; }
+
+.rupertspira .jspTrack {
+  background: #efe9e5;
+  position: relative; }
+
+.rupertspira .jspDrag {
+  background: #908C86;
+  position: relative;
+  top: 0;
+  left: 0;
+  cursor: pointer; }
+
+.rupertspira .jspHorizontalBar .jspTrack,
+.jspHorizontalBar .jspDrag {
+  float: left;
+  height: 100%; }
+
+.rupertspira .jspArrow {
+  background: #50506d;
+  text-indent: -20000px;
+  display: block;
+  cursor: pointer; }
+
+.rupertspira .jspArrow.jspDisabled {
+  cursor: default;
+  background: #80808d; }
+
+.rupertspira .jspVerticalBar .jspArrow {
+  height: 16px; }
+
+.rupertspira .jspHorizontalBar .jspArrow {
+  width: 16px;
+  float: left;
+  height: 100%; }
+
+.rupertspira .jspVerticalBar .jspArrow:focus {
+  outline: none; }
+
+.rupertspira .jspCorner {
+  background: #eeeef4;
+  float: left;
+  height: 100%; }
+
+/*! jQuery FlexSlider v2.2.0 */
+/* Browser Resets
+*********************************/
+.rupertspira .flex-container a:active,
+.flexslider a:active,
+.flex-container a:focus,
+.flexslider a:focus {
+  outline: none; }
+
+.rupertspira .slides,
+.flex-control-nav,
+.flex-direction-nav {
+  margin: 0;
+  padding: 0;
+  list-style: none; }
+
+/* FlexSlider Necessary Styles
+*********************************/
+.rupertspira .flexslider {
+  margin: 0;
+  padding: 0; }
+
+.rupertspira .flexslider .slides > li {
+  display: none;
+  -webkit-backface-visibility: hidden;
+  margin-bottom: 0; }
+
+/* Hide the slides before the JS is loaded. Avoids image jumping */
+.rupertspira .flexslider .slides img {
+  display: block; }
+
+.rupertspira .flex-pauseplay span {
+  text-transform: capitalize; }
+
+/* Clearfix for the .slides element */
+.rupertspira .slides:after {
+  content: "\0020";
+  display: block;
+  clear: both;
+  visibility: hidden;
+  line-height: 0;
+  height: 0; }
+
+html[xmlns] .slides {
+  display: block; }
+
+* html .slides {
+  height: 1%; }
+
+/* No JavaScript Fallback */
+/* If you are not using another script, such as Modernizr, make sure you
+ * include js that eliminates this class on page load */
+.rupertspira .no-js .slides > li:first-child {
+  display: block; }
+
+/* FlexSlider Default Theme
+*********************************/
+.rupertspira .flexslider {
+  background: white;
+  position: relative;
+  zoom: 1;
+  border-radius: 5px; }
+
+.rupertspira .flex-viewport {
+  max-height: 2000px;
+  -webkit-transition: all 1s ease;
+  transition: all 1s ease; }
+
+.rupertspira .flex-viewport li {
+  border-radius: 5px; }
+
+.rupertspira .loading .flex-viewport {
+  max-height: 300px; }
+
+.rupertspira .flexslider .slides {
+  zoom: 1; }
+
+.rupertspira .carousel li {
+  margin-right: 5px; }
+
+/* Direction Nav */
+.rupertspira .flex-direction-nav {
+  *height: 0; }
+
+.rupertspira .flex-direction-nav a {
+  display: block;
+  width: 40px;
+  height: 40px;
+  margin: -20px 0 0;
+  position: absolute;
+  top: 50%;
+  z-index: 10;
+  overflow: hidden;
+  opacity: 0;
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.8);
+  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.3);
+  -webkit-transition: all .3s ease;
+  transition: all .3s ease; }
+
+.rupertspira .flex-direction-nav .flex-prev {
+  left: -50px; }
+
+.rupertspira .flex-direction-nav .flex-next {
+  right: -50px;
+  text-align: right; }
+
+.rupertspira .flexslider:hover .flex-prev {
+  opacity: 0.7;
+  left: 10px; }
+
+.rupertspira .flexslider:hover .flex-next {
+  opacity: 0.7;
+  right: 10px; }
+
+.rupertspira .flexslider:hover .flex-next:hover, .flexslider:hover .flex-prev:hover {
+  opacity: 1; }
+
+.rupertspira .flex-direction-nav .flex-disabled {
+  opacity: 0 !important;
+  filter: alpha(opacity=0);
+  cursor: default; }
+
+.rupertspira .flex-direction-nav a:before {
+  font-size: 40px;
+  display: inline-block;
+  content: '\f001'; }
+
+.rupertspira .flex-direction-nav a.flex-next:before {
+  content: '\f002'; }
+
+/* Pause/Play */
+.rupertspira .flex-pauseplay a {
+  display: block;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  bottom: 5px;
+  left: 10px;
+  opacity: 0.8;
+  z-index: 10;
+  overflow: hidden;
+  cursor: pointer;
+  color: #000; }
+
+.rupertspira .flex-pauseplay a:before {
+  font-size: 20px;
+  display: inline-block;
+  content: '\f004'; }
+
+.rupertspira .flex-pauseplay a:hover {
+  opacity: 1; }
+
+.rupertspira .flex-pauseplay a.flex-play:before {
+  content: '\f003'; }
+
+/* Control Nav */
+.rupertspira .flex-control-nav {
+  width: 100%;
+  position: absolute;
+  bottom: -40px;
+  text-align: center; }
+
+.rupertspira .flex-control-nav li {
+  margin: 0 8px 0 0;
+  display: inline-block;
+  zoom: 1;
+  *display: inline; }
+
+.rupertspira .flex-control-paging li a {
+  width: 13px;
+  height: 13px;
+  display: block;
+  background: #D4CCC0;
+  cursor: pointer;
+  text-indent: -9999em;
+  border-bottom: 0; }
+
+.rupertspira .flex-control-paging li a:hover {
+  background: #6A6660; }
+
+.rupertspira .flex-control-paging li a.flex-active {
+  background: #908C86;
+  cursor: default; }
+
+.rupertspira .flex-control-thumbs {
+  margin: 5px 0 0;
+  position: static;
+  overflow: hidden; }
+
+.rupertspira .flex-control-thumbs li {
+  width: 25%;
+  float: left;
+  margin: 0; }
+
+.rupertspira .flex-control-thumbs img {
+  width: 100%;
+  display: block;
+  opacity: .7;
+  cursor: pointer; }
+
+.rupertspira .flex-control-thumbs img:hover {
+  opacity: 1; }
+
+.rupertspira .flex-control-thumbs .flex-active {
+  opacity: 1;
+  cursor: default; }
+
+@media screen and (max-width: 860px) {
+  .rupertspira .flex-direction-nav .flex-prev {
+    opacity: 1;
+    left: 10px; }
+
+  .rupertspira .flex-direction-nav .flex-next {
+    opacity: 1;
+    right: 10px; } }
+.rupertspira table.tablesorter th {
+  background: #999;
+  text-align: left; }
+  .rupertspira table.tablesorter th:hover {
+    background: #888; }
+.rupertspira table.tablesorter td {
+  color: black;
+  font-size: 11px;
+  padding: 4px 2px;
+  vertical-align: top; }
+.rupertspira table.tablesorter .even {
+  background-color: #fbfbf7; }
+.rupertspira table.tablesorter .odd {
+  background-color: #F5F0ED; }
+.rupertspira table.tablesorter .header {
+  height: auto; }
+.rupertspira table.tablesorter thead tr {
+  position: relative; }
+  .rupertspira table.tablesorter thead tr .header {
+    background-image: url(../../assets/images/bg.gif);
+    background-repeat: no-repeat;
+    background-position: center right;
+    cursor: pointer; }
+  .rupertspira table.tablesorter thead tr .headerSortUp {
+    background-color: #888;
+    background-image: url(../../assets/images/asc.gif); }
+  .rupertspira table.tablesorter thead tr .headerSortDown {
+    background-color: #888;
+    background-image: url(../../assets/images/desc.gif); }
+.rupertspira table.tablesorter ul {
+  margin: 0;
+  padding: 0; }
+  .rupertspira table.tablesorter ul li {
+    list-style: none;
+    margin: 0;
+    padding: 0; }
+    .rupertspira table.tablesorter ul li img {
+      vertical-align: middle; }
+
+.rupertspira .play_image {
+  float: left;
+  margin: 1px 8px 0 0;
+  padding: 0; }
+
+/* --------------------------------------------------------------
+  Sprites
+-------------------------------------------------------------- */
+.rupertspira .social {
+  background-color: transparent !important;
+  background-image: url(../../assets/images/social-sprite.png) !important;
+  background-repeat: no-repeat !important;
+  display: block !important;
+  height: 25px !important;
+  width: 25px !important;
+  margin-left: 4px;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+  filter: alpha(opacity=50);
+  -moz-opacity: 0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5; }
+  .rupertspira .social:hover {
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+    filter: alpha(opacity=100);
+    -moz-opacity: 1;
+    -khtml-opacity: 1;
+    opacity: 1; }
+  .rupertspira .social.about_me {
+    background-position: 0 -35px; }
+  .rupertspira .social.add_this {
+    background-position: 0 -70px; }
+  .rupertspira .social.amazon {
+    background-position: 0 -105px; }
+  .rupertspira .social.aol {
+    background-position: 0 -140px; }
+  .rupertspira .social.app_store {
+    background-position: 0 -175px; }
+  .rupertspira .social.app_store_alt {
+    background-position: 0 -210px; }
+  .rupertspira .social.apple {
+    background-position: 0 -245px; }
+  .rupertspira .social.bebo {
+    background-position: 0 -280px; }
+  .rupertspira .social.behance {
+    background-position: 0 -315px; }
+  .rupertspira .social.bing {
+    background-position: 0 -350px; }
+  .rupertspira .social.blip {
+    background-position: 0 -385px; }
+  .rupertspira .social.blogger {
+    background-position: 0 -420px; }
+  .rupertspira .social.coroflot {
+    background-position: 0 -455px; }
+  .rupertspira .social.daytum {
+    background-position: 0 -490px; }
+  .rupertspira .social.delicious {
+    background-position: 0 -525px; }
+  .rupertspira .social.design_bump {
+    background-position: 0 -560px; }
+  .rupertspira .social.designfloat {
+    background-position: 0 -595px; }
+  .rupertspira .social.deviant_art {
+    background-position: 0 -630px; }
+  .rupertspira .social.digg {
+    background-position: 0 -665px; }
+  .rupertspira .social.digg_alt {
+    background-position: 0 -700px; }
+  .rupertspira .social.dribbble {
+    background-position: 0 -735px; }
+  .rupertspira .social.drupal {
+    background-position: 0 -770px; }
+  .rupertspira .social.ebay {
+    background-position: 0 -805px; }
+  .rupertspira .social.email {
+    background-position: 0 -840px; }
+  .rupertspira .social.ember_app {
+    background-position: 0 -875px; }
+  .rupertspira .social.etsy {
+    background-position: 0 -910px; }
+  .rupertspira .social.facebook {
+    background-position: 0 -945px; }
+  .rupertspira .social.feed_burner {
+    background-position: 0 -980px; }
+  .rupertspira .social.flickr {
+    background-position: 0 -1015px; }
+  .rupertspira .social.foodspotting {
+    background-position: 0 -1050px; }
+  .rupertspira .social.forrst {
+    background-position: 0 -1085px; }
+  .rupertspira .social.foursquare {
+    background-position: 0 -1120px; }
+  .rupertspira .social.friendsfeed {
+    background-position: 0 -1155px; }
+  .rupertspira .social.friendstar {
+    background-position: 0 -1190px; }
+  .rupertspira .social.gdgt {
+    background-position: 0 -1225px; }
+  .rupertspira .social.github {
+    background-position: 0 -1260px; }
+  .rupertspira .social.google_buzz {
+    background-position: 0 -1295px; }
+  .rupertspira .social.google_talk {
+    background-position: 0 -1330px; }
+  .rupertspira .social.google {
+    background-position: 0 -1260px; }
+  .rupertspira .social.gowalla {
+    background-position: 0 -1365px; }
+  .rupertspira .social.gowalla_pin {
+    background-position: 0 -1400px; }
+  .rupertspira .social.grooveshark {
+    background-position: 0 -1435px; }
+  .rupertspira .social.heart {
+    background-position: 0 -1470px; }
+  .rupertspira .social.hyves {
+    background-position: 0 -1505px; }
+  .rupertspira .social.icondock {
+    background-position: 0 -1540px; }
+  .rupertspira .social.icq {
+    background-position: 0 -1575px; }
+  .rupertspira .social.identica {
+    background-position: 0 -1610px; }
+  .rupertspira .social.imessage {
+    background-position: 0 -1645px; }
+  .rupertspira .social.itune {
+    background-position: 0 -1680px; }
+  .rupertspira .social.lastfm {
+    background-position: 0 -1715px; }
+  .rupertspira .social.linkedin {
+    background-position: 0 -1750px; }
+  .rupertspira .social.meetup {
+    background-position: 0 -1785px; }
+  .rupertspira .social.metacafe {
+    background-position: 0 -1820px; }
+  .rupertspira .social.mixx {
+    background-position: 0 -1855px; }
+  .rupertspira .social.mobileme {
+    background-position: 0 -1890px; }
+  .rupertspira .social.mr_wong {
+    background-position: 0 -1925px; }
+  .rupertspira .social.msn {
+    background-position: 0 -1960px; }
+  .rupertspira .social.myspace {
+    background-position: -35px 0; }
+  .rupertspira .social.newsvine {
+    background-position: -35px -35px; }
+  .rupertspira .social.paypal {
+    background-position: -35px -70px; }
+  .rupertspira .social.photobucket {
+    background-position: -35px -105px; }
+  .rupertspira .social.picasa {
+    background-position: -35px -140px; }
+  .rupertspira .social.pinterest {
+    background-position: -35px -175px; }
+  .rupertspira .social.podcast {
+    background-position: -35px -210px; }
+  .rupertspira .social.posterous {
+    background-position: -35px -245px; }
+  .rupertspira .social.qik {
+    background-position: -35px -280px; }
+  .rupertspira .social.quora {
+    background-position: -35px -315px; }
+  .rupertspira .social.reddit {
+    background-position: -35px -350px; }
+  .rupertspira .social.retweet {
+    background-position: -35px -385px; }
+  .rupertspira .social.rss {
+    background-position: -35px -420px; }
+  .rupertspira .social.scribd {
+    background-position: -35px -455px; }
+  .rupertspira .social.share_this {
+    background-position: -35px -490px; }
+  .rupertspira .social.skype {
+    background-position: -35px -525px; }
+  .rupertspira .social.slashdot {
+    background-position: -35px -560px; }
+  .rupertspira .social.slideshare {
+    background-position: -35px -595px; }
+  .rupertspira .social.smugmug {
+    background-position: -35px -630px; }
+  .rupertspira .social.sound_cloud {
+    background-position: -35px -665px; }
+  .rupertspira .social.spotify {
+    background-position: -35px -700px; }
+  .rupertspira .social.squidoo {
+    background-position: -35px -735px; }
+  .rupertspira .social.stackoverflow {
+    background-position: -35px -770px; }
+  .rupertspira .social.star {
+    background-position: -35px -805px; }
+  .rupertspira .social.stumbleupon {
+    background-position: -35px -840px; }
+  .rupertspira .social.technorati {
+    background-position: -35px -875px; }
+  .rupertspira .social.tumblr {
+    background-position: -35px -910px; }
+  .rupertspira .social.twitter {
+    background-position: -35px -945px; }
+  .rupertspira .social.twitter_bird {
+    background-position: -35px -980px; }
+  .rupertspira .social.viddler {
+    background-position: -35px -1015px; }
+  .rupertspira .social.vimeo {
+    background-position: -35px -1050px; }
+  .rupertspira .social.virb {
+    background-position: -35px -1085px; }
+  .rupertspira .social.w3 {
+    background-position: -35px -1120px; }
+  .rupertspira .social.wikipedia {
+    background-position: -35px -1155px; }
+  .rupertspira .social.windows {
+    background-position: -35px -1190px; }
+  .rupertspira .social.wordpress {
+    background-position: -35px -1225px; }
+  .rupertspira .social.xing {
+    background-position: -35px -1260px; }
+  .rupertspira .social.yahoo {
+    background-position: -35px -1295px; }
+  .rupertspira .social.yahoo_buzz {
+    background-position: -35px -1330px; }
+  .rupertspira .social.yelp {
+    background-position: -35px -1365px; }
+  .rupertspira .social.youtube {
+    background-position: -35px -1400px; }
+
+/* --------------------------------------------------------------
+  Global
+-------------------------------------------------------------- */
+@-ms-viewport {
+  width: device-width; }
+*,
+*:before,
+*:after {
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
+
+html {
+  font-size: 62.5%;
+  -webkit-tap-highlight-color: transparent; }
+
+.rupertspira body {
+  background: #fbfbf7;
+  color: black;
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 1.69;
+  -webkit-font-smoothing: antialiased; }
+
+.rupertspira input,
+button,
+select,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit; }
+
+.rupertspira button,
+input,
+select[multiple],
+textarea {
+  background-image: none; }
+
+.rupertspira abbr,
+acronym {
+  border-bottom: 1px dotted #666; }
+
+.rupertspira address {
+  margin-top: 1.5em;
+  font-style: italic; }
+
+.rupertspira del {
+  color: #666; }
+
+.rupertspira sup {
+  font-size: 9px;
+  vertical-align: top; }
+
+.rupertspira dfn {
+  font-weight: 700; }
+
+.rupertspira pre,
+code {
+  margin: 1.5em 0;
+  white-space: pre; }
+
+.rupertspira pre,
+code,
+tt {
+  font: 12px 'andale mono', 'monotype.com', 'lucida console', monospace;
+  line-height: 1.5; }
+
+.rupertspira tt {
+  display: block;
+  margin: 1.5em 0;
+  line-height: 1.5; }
+
+.rupertspira hr {
+  border: 0;
+  border-bottom: 1px dotted #ccc;
+  margin: 1em 0 2em; }
+
+/*** Images ***/
+.rupertspira img {
+  vertical-align: middle; }
+  .rupertspira img.img_res {
+    display: block;
+    height: auto;
+    max-width: 100%; }
+
+/*** Links ***/
+.rupertspira a {
+  -moz-transition: color 150ms ease-out 0s;
+  -o-transition: color 150ms ease-out 0s;
+  -webkit-transition: color 150ms ease-out;
+  -webkit-transition-delay: 0s;
+  -webkit-transition: color 150ms ease-out 0s;
+  transition: color 150ms ease-out 0s;
+  border-bottom: 1px solid #ccc;
+  color: black;
+  text-decoration: none; }
+  a:hover, a:focus {
+    color: #d80000;
+    text-decoration: none; }
+
+/*** Columns ***/
+.rupertspira .css3-columns-2 {
+  -webkit-column-count: 2;
+  -webkit-column-gap: 20px;
+  -moz-column-count: 2;
+  -moz-column-gap: 20px;
+  -webkit-column-count: 2;
+     -moz-column-count: 2;
+          column-count: 2;
+  -webkit-column-gap: 20px;
+     -moz-column-gap: 20px;
+          column-gap: 20px; }
+
+.rupertspira .css3-columns-3 {
+  -webkit-column-count: 3;
+  -webkit-column-gap: 20px;
+  -moz-column-count: 3;
+  -moz-column-gap: 20px;
+  -webkit-column-count: 3;
+     -moz-column-count: 3;
+          column-count: 3;
+  -webkit-column-gap: 20px;
+     -moz-column-gap: 20px;
+          column-gap: 20px; }
+
+/*** Headings ***/
+.rupertspira h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: black;
+  font-family: "Lato", sans-serif;
+  font-size: 30px;
+  font-weight: 300;
+  margin-top: 7px;
+  text-align: left; }
+
+.rupertspira h1 {
+  font-size: 18px;
+  margin-bottom: 10px; }
+
+.rupertspira h2 {
+  font-size: 24px;
+  margin-bottom: 20px; }
+
+.rupertspira h3 {
+  font-size: 16px;
+  margin-bottom: 20px; }
+
+.rupertspira h5 {
+  font-size: 12px; }
+
+.rupertspira h6 {
+  font-size: 14px;
+  text-decoration: underline;
+  font: 13px/22px Arial, "Helvetica Neue", Helvetica, sans-serif;
+  font-weight: 100;
+  margin-bottom: 0; }
+
+/*** Paragrapgh ***/
+.rupertspira p {
+  color: black;
+  margin: 0 0 1.5em;
+  text-align: justify; }
+  .rupertspira p.last {
+    margin-bottom: 0; }
+
+/*** Typography ***/
+.rupertspira em,
+dfn {
+  font-style: italic; }
+
+/*** Lists ***/
+.rupertspira ul,
+ol {
+  margin: 0 0 1.5em 28px; }
+
+.rupertspira li {
+  margin-bottom: .5em; }
+
+.rupertspira li ul,
+li ol {
+  margin-top: 1em; }
+
+.rupertspira ul li {
+  list-style-type: disc; }
+
+.rupertspira dl {
+  margin: 0 0 1.5em 0 dt;
+    margin-font-weight: 700; }
+
+.rupertspira dd {
+  margin-left: 1.5em; }
+
+/*** Form ***/
+.rupertspira label {
+  color: black;
+  float: right;
+  font-weight: 700;
+  text-align: right; }
+
+.rupertspira input[type=text],
+input[type=email],
+input[type=password] {
+  border: 1px solid #ccc;
+  margin: 0;
+  min-width: 160px;
+  padding: 6px; }
+
+.rupertspira textarea {
+  border: 1px solid #ccc;
+  padding: 6px;
+  margin: 0;
+  min-width: 140px; }
+
+/*** Text highlight - Keep the space here so SASS does not mess this up ***/
+::-moz-selection {
+  background: #e3e3e1; }
+::selection {
+  background: #e3e3e1; }
+
+::-moz-selection {
+  background: #e3e3e1; }
+
+/*** Clear ***/
+.rupertspira .clear {
+  clear: both; }
+
+.rupertspira .clearfix, #top_hdr, #mn_hdr, #mn_ftr, .dd_nav, .home_slider .slides li.styled, .preview-container, .full-container, .pane-list ul li, #about_rupert {
+  *zoom: 1; }
+  .rupertspira .clearfix:after, #top_hdr:after, #mn_hdr:after, #mn_ftr:after, .dd_nav:after, .home_slider .slides li.styled:after, .preview-container:after, .full-container:after, .pane-list ul li:after, #about_rupert:after {
+    content: "";
+    display: table;
+    clear: both; }
+
+/* --------------------------------------------------------------
+  Sprites
+-------------------------------------------------------------- */
+/* --------------------------------------------------------------
+  General Layout
+-------------------------------------------------------------- */
+/*** No JS ***/
+.rupertspira #no_js {
+  background: #666;
+  border-bottom: 1px solid #333;
+  min-height: 40px;
+  padding: 7px; }
+  .rupertspira #no_js p {
+    color: white;
+    margin: 0;
+    padding: 0;
+    text-align: center; }
+  .rupertspira #no_js a {
+    color: white;
+    text-decoration: underline; }
+  .rupertspira #no_js strong {
+    font-size: 1.15em; }
+
+.rupertspira .frm {
+  margin: 11px auto 20px;
+  padding: 0 20px; }
+
+.rupertspira .container {
+  margin: 0 auto;
+  max-width: 940px;
+  width: 940px; }
+
+.rupertspira .content {
+  background: #efe9e5;
+  min-width: 960px; }
+  .rupertspira .content .container {
+    max-width: 940px;
+    padding: 40px 0 20px; }
+  .rupertspira .content h1 {
+    margin-bottom: 22px; }
+
+.rupertspira #top_hdr {
+  margin-bottom: 13px; }
+  .rupertspira #top_hdr a {
+    border-bottom: none;
+    line-height: 20px; }
+  .rupertspira #top_hdr ul {
+    float: right;
+    font-size: 11px;
+    margin: 0;
+    padding: 0;
+    text-indent: 0; }
+    .rupertspira #top_hdr ul li {
+      color: #999;
+      float: left;
+      list-style: none;
+      margin: 0 12px 0 0; }
+
+.rupertspira #mn_hdr {
+  /*** Logo ***/ }
+  .rupertspira #mn_hdr .logo {
+    height: auto;
+    width: 200px; }
+    .rupertspira #mn_hdr .logo h1 {
+      line-height: 1; }
+      .rupertspira #mn_hdr .logo h1 a {
+        border: none;
+        font-size: 37px;
+        font-weight: 300;
+        margin-top: 7px;
+        text-decoration: none;
+        width: auto; }
+    .rupertspira #mn_hdr .logo h2 {
+      font-size: 11px;
+      line-height: 1;
+      margin: -1px 0 0 3px;
+      width: auto; }
+  .rupertspira #mn_hdr #mn_nav {
+    margin-top: 20px; }
+    .rupertspira #mn_hdr #mn_nav .dd_nav {
+      font-family: "Lato", sans-serif; }
+    .rupertspira #mn_hdr #mn_nav .dd_btn {
+      font-size: 13px; }
+      .rupertspira #mn_hdr #mn_nav .dd_btn.hover .dd {
+        background: #efe9e5; }
+    .rupertspira #mn_hdr #mn_nav .menu_dd {
+      background: #efe9e5;
+      width: 170px; }
+
+.rupertspira #mn_ftr {
+  margin-top: 20px; }
+  .rupertspira #mn_ftr a {
+    border: 0 none;
+    font-family: "Lato", sans-serif;
+    font-weight: 300;
+    line-height: 100%;
+    padding: 0 10px;
+    text-decoration: none; }
+  .rupertspira #mn_ftr #ftr_nav table th,
+  .rupertspira #mn_ftr #ftr_nav table td {
+    padding: 0 20px 0 0;
+    margin: 0;
+    text-align: left;
+    color: #000;
+    vertical-align: top;
+    font-weight: 300;
+    font-family: "Lato", sans-serif;
+    width: auto; }
+    .rupertspira #mn_ftr #ftr_nav table th ul,
+    .rupertspira #mn_ftr #ftr_nav table td ul {
+      margin: 0;
+      padding: 0; }
+      .rupertspira #mn_ftr #ftr_nav table th ul li,
+      .rupertspira #mn_ftr #ftr_nav table td ul li {
+        margin: 0;
+        padding: 0;
+        text-indent: 0;
+        list-style: none;
+        font-size: 12px; }
+        .rupertspira #mn_ftr #ftr_nav table th ul li a,
+        .rupertspira #mn_ftr #ftr_nav table td ul li a {
+          display: block;
+          padding: 3px 0;
+          color: #939598; }
+        .rupertspira #mn_ftr #ftr_nav table th ul li a:hover,
+        .rupertspira #mn_ftr #ftr_nav table td ul li a:hover {
+          color: red; }
+  .rupertspira #mn_ftr #ftr_copyright {
+    float: left;
+    padding: 5px 0 0 0; }
+    .rupertspira #mn_ftr #ftr_copyright p {
+      color: #ccc;
+      font-size: 80%;
+      margin: 0; }
+      .rupertspira #mn_ftr #ftr_copyright p a {
+        padding: 0; }
+    .rupertspira #mn_ftr #ftr_copyright img {
+      -webkit-filter: grayscale(100%);
+      filter: grayscale(100%);
+      -webkit-filter: gray;
+              filter: gray;
+      filter: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' height='0'><filter id='greyscale'><feColorMatrix type='matrix' values='0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0' /></filter></svg>#greyscale");
+      opacity: 0.6; }
+  .rupertspira #mn_ftr #ftr_social {
+    float: right;
+    margin-top: 18px; }
+    .rupertspira #mn_ftr #ftr_social a {
+      float: left; }
+
+/* --------------------------------------------------------------
+  Global Elements
+-------------------------------------------------------------- */
+.rupertspira .featured p:first-child {
+  color: #d80000;
+  font-size: 15px;
+  line-height: 23px; }
+
+/*** Dropdown Nav ***/
+.rupertspira .dd_nav {
+  margin: 0;
+  padding: 0; }
+  .rupertspira .dd_nav a {
+    border: 0;
+    display: block;
+    font-weight: 300;
+    line-height: 150%;
+    text-decoration: none; }
+  .rupertspira .dd_nav li {
+    list-style-type: none; }
+  .rupertspira .dd_nav .dd_btn {
+    float: left;
+    position: relative;
+    z-index: 1000; }
+    .rupertspira .dd_nav .dd_btn a {
+      padding: 8px 13px; }
+    .rupertspira .dd_nav .dd_btn.active .dd_tab {
+      color: #d80000; }
+  .rupertspira .dd_nav .dd_btn:first-child a {
+    padding-left: 2px; }
+  .rupertspira .dd_nav .dd_btn:last-child a {
+    padding-right: 2px; }
+  .rupertspira .dd_nav .menu_dd {
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
+    border: 0;
+    color: black;
+    display: none;
+    font-size: 13px;
+    padding: 10px 10px 2px 10px;
+    position: absolute;
+    top: 90%;
+    z-index: 1100; }
+    .rupertspira .dd_nav .menu_dd ul {
+      margin: 0;
+      padding: 0; }
+    .rupertspira .dd_nav .menu_dd li {
+      margin-bottom: 0.4em; }
+    .rupertspira .dd_nav .menu_dd a {
+      padding: 2px 0; }
+
+.rupertspira .account_drop .dd_btn {
+  z-index: 1200; }
+  .rupertspira .account_drop .dd_btn a {
+    padding: 0; }
+.rupertspira .account_drop .dd_tab {
+  background: url(https://non-duality.rupertspira.com/assets/app/img/arr_down.png) no-repeat right 5px;
+  padding-right: 13px !important; }
+.rupertspira .account_drop .menu_dd {
+  background: white;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
+  font-size: 10px;
+  margin: 0 0 0 -5px;
+  padding: 5px 15px;
+  width: 130px;
+  z-index: 1200; }
+  .rupertspira .account_drop .menu_dd a span {
+    display: block;
+    float: left;
+    height: 11px;
+    margin: 5px 7px 0 5px;
+    width: 16px; }
+
+.rupertspira .language_drop .dd_btn {
+  z-index: 1200; }
+  .rupertspira .language_drop .dd_btn a {
+    padding: 0; }
+.rupertspira .language_drop .dd_tab {
+  background: url(https://non-duality.rupertspira.com/assets/app/img/arr_down.png) no-repeat right 5px;
+  padding-right20: 13px !important; }
+.rupertspira .language_drop .menu_dd {
+  background: white;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
+  font-size: 10px;
+  margin: 0 0 0 -5px;
+  padding: 5px 8px;
+  width: 110px;
+  z-index: 1200; }
+  .rupertspira .language_drop .menu_dd a span {
+    display: block;
+    float: left;
+    height: 11px;
+    margin: 5px 7px 0 5px;
+    width: 16px; }
+
+/*** Tables ***/
+.rupertspira table {
+  border: 0;
+  margin-bottom: 2em;
+  width: 100%; }
+  .rupertspira table thead th,
+  .rupertspira table tfoot th {
+    background-color: #999;
+    color: white;
+    font-weight: 400;
+    padding: 5px;
+    text-align: left; }
+  .rupertspira table td {
+    vertical-align: top; }
+  .rupertspira table tbody tr td {
+    background: transparent;
+    border-bottom: 0 solid black;
+    vertical-align: middle; }
+  .rupertspira table th {
+    padding: 10px 0; }
+  .rupertspira table tbody td {
+    padding: 10px; }
+  .rupertspira table.links, table.links tr {
+    margin: 0;
+    padding: 0; }
+  .rupertspira table.links tr td {
+    margin: 0;
+    padding: 14px 0 0 0; }
+
+/*** Page quote ***/
+.rupertspira #page_quote {
+  margin: 22px 0;
+  padding: 0; }
+  .rupertspira #page_quote p {
+    color: #939598;
+    font-family: "Lato", sans-serif;
+    font-size: 16px;
+    margin-bottom: 0; }
+
+/*** Basket ***/
+.rupertspira .basket a.less,
+.basket a.more {
+  background: url(../../assets/images/basket-moreless.png);
+  display: block;
+  float: left;
+  height: 15px;
+  position: relative;
+  text-indent: -9999em;
+  top: 3px;
+  width: 15px; }
+  .rupertspira .basket a.less:hover,
+  .basket a.more:hover {
+    background-position-x: 15px; }
+.rupertspira .basket a.less {
+  background-position-y: -15px; }
+.rupertspira .basket a.more {
+  float: right; }
+
+.rupertspira .basket_notify {
+  background: #eee;
+  left: 0;
+  padding: 20px;
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 100%;
+  z-index: 9999; }
+  .rupertspira .basket_notify p {
+    color: #d80000;
+    font-size: 100%;
+    margin: 0;
+    padding: 0;
+    text-align: center; }
+
+/* Messages */
+.rupertspira .error {
+  background: #eee;
+  color: #d80000;
+  font-size: 10px;
+  margin-bottom: 10px;
+  padding: 5px 10px;
+  text-align: center; }
+
+.rupertspira .error_bordered {
+  background: white;
+  color: #d80000;
+  font-size: 10px;
+  margin-bottom: 20px;
+  padding: 4px 10px;
+  text-align: center; }
+  .rupertspira .error_bordered p {
+    color: #d80000;
+    margin: 0;
+    text-align: center; }
+
+.rupertspira .rss {
+  background: #eee;
+  color: black;
+  font-size: 10px;
+  margin-bottom: 0;
+  padding: 10px 10px 2px 10px;
+  text-align: center; }
+
+.rupertspira .error_inline {
+  color: #d80000;
+  font-size: 10px;
+  text-align: left; }
+
+.rupertspira .success {
+  background: #eee;
+  color: green;
+  font-size: 10px;
+  margin-bottom: 10px;
+  padding: 5px 10px;
+  text-align: center; }
+
+.rupertspira .notice {
+  background: #eee;
+  font-size: 10px;
+  margin-bottom: 10px;
+  padding: 5px 10px;
+  text-align: center; }
+
+/*** Subcriptions ***/
+.rupertspira .subscriptions {
+  /*     background: #efe9e5; */
+  color: #999;
+  font-size: 11px;
+  margin: 0 0 10px 0;
+  /*  padding: 5px 5px 5px 5px; */
+  text-align: left; }
+  .rupertspira .subscriptions a,
+  .subscriptions a:visited {
+    color: #d80000; }
+
+/*** Buttons ***/
+.rupertspira .btn {
+  color: white;
+  cursor: pointer;
+  display: block;
+  font-size: 12px;
+  font-weight: 400;
+  height: 32px;
+  line-height: 29px;
+  padding: 0 8px; }
+  .btn.grey {
+    background: #999; }
+    .btn.grey:hover {
+      background: #888; }
+
+/* --------------------------------------------------------------
+   Buttons
+-------------------------------------------------------------- */
+.rupertspira .btn,
+.btn-icon,
+.btn-mini {
+  background-repeat: repeat-x;
+  color: #FFF;
+  display: inline-block;
+  text-decoration: none;
+  border-width: 0px;
+  border-style: solid;
+  padding: 0px 8px;
+  margin: 0;
+  -moz-border-radius: 1px;
+  -webkit-border-radius: 1px;
+  cursor: pointer;
+  position: relative;
+  font-weight: normal;
+  font-size: 11px; }
+
+/* Active/Click state */
+.rupertspira .btn:active, .btn-icon:active, .btn-mini:active {
+  top: 1px; }
+
+/* Sizes */
+.rupertspira .btn, .btn-icon {
+  background-position: 0 -80px;
+  font-size: 12px;
+  height: 32px;
+  line-height: 29px; }
+
+.rupertspira .btn.btn-small, .btn-icon.btn-small {
+  background-position: 0 0;
+  font-size: 10px;
+  height: 26px;
+  line-height: 26px; }
+
+.rupertspira .btn.btn-large, .btn-icon.btn-large {
+  background-position: 0 -160px;
+  font-size: 15px;
+  height: 42px;
+  line-height: 40px; }
+
+/* Sizes - Line height for A buttons need to be different */
+.rupertspira a.btn, a.btn-icon {
+  height: 32px;
+  line-height: 32px;
+  padding-bottom: 0; }
+
+.rupertspira a.btn.btn-small, a.btn-icon.btn-small {
+  line-height: 26px;
+  padding-bottom: 0; }
+
+.rupertspira a.btn.btn-large, a.btn-icon.btn-large {
+  line-height: 42px;
+  padding-bottom: 0; }
+
+/* Custom hack for remove button */
+.rupertspira .btn-remove {
+  font-size: 8px;
+  height: 20px;
+  line-height: 22px;
+  margin-top: 5px; }
+
+/* Fix the button in IE7 :-( */
+* + html .btn, * + html .btn-icon {
+  border-color: none;
+  border: 1px solid transparent; }
+
+/* Set default button colors */
+.rupertspira .btn, .btn-icon, .btn-mini,
+.btn:visited, .btn-icon:visited, .btn-mini:visited {
+  background-color: #263849;
+  border-color: #16222C;
+  color: #FFF; }
+
+.rupertspira .btn:hover, .btn-icon:hover, .btn-mini:hover {
+  background-color: #16222C;
+  color: #FFF; }
+
+/* Colors */
+.rupertspira .btn-pink,
+.btn-pink:visited {
+  background-color: #FF0066;
+  border-color: #DA0C59; }
+
+.rupertspira .btn-pink:hover {
+  background-color: #DA0C59; }
+
+.rupertspira .btn-blue,
+.btn-blue:visited {
+  background-color: #066ECD;
+  border-color: #0561B4; }
+
+.rupertspira .btn-blue:hover {
+  background-color: #0561B4; }
+
+.rupertspira .btn-red,
+.btn-red:visited {
+  background-color: #E40001;
+  border-color: #CC0000; }
+
+.rupertspira .btn-red:hover {
+  background-color: #CC0000; }
+
+.rupertspira .btn-green,
+.btn-green:visited {
+  background-color: #77B32F;
+  border-color: #689C29; }
+
+.rupertspira .btn-green:hover {
+  background-color: #689C29; }
+
+.rupertspira .btn-black,
+.btn-black:visited {
+  background-color: #111;
+  border-color: #000; }
+
+.rupertspira .btn-black:hover {
+  background-color: #000; }
+
+.rupertspira .btn-purple,
+.btn-purple:visited {
+  background-color: #7B0F75;
+  border-color: #6A0D66; }
+
+.rupertspira .btn-purple:hover {
+  background-color: #6A0D66; }
+
+.rupertspira .btn-maroon,
+.btn-maroon:visited {
+  background-color: #750000;
+  border-color: #530000; }
+
+.rupertspira .btn-maroon:hover {
+  background-color: #530000; }
+
+.rupertspira .btn-yellow,
+.btn-yellow:visited {
+  border-color: #D9AD01; }
+
+.btn-yellow:hover {
+  background-color: #D9AD01; }
+
+.rupertspira .btn-teal,
+.btn-teal:visited {
+  background-color: #39A7B6;
+  border-color: #2E8794; }
+
+.rupertspira .btn-teal:hover {
+  background-color: #2E8794; }
+
+.rupertspira .btn-orange,
+.btn-orange:visited {
+  background-color: #F90;
+  border-color: #D58000;
+  color: #FFF; }
+
+.rupertspira .btn-orange:hover {
+  background-color: #D58000;
+  color: #FFF; }
+
+.rupertspira .btn-grey,
+.btn-grey:visited {
+  background-color: #999;
+  border-color: #888;
+  color: #FFF; }
+
+.rupertspira .btn-grey:hover {
+  background-color: #888;
+  color: #FFF; }
+
+.rupertspira .btn-tapa,
+.btn-tapa:visited {
+  background-color: #7D7973;
+  border-color: #7D7973;
+  color: #FFF; }
+
+.rupertspira .btn-tapa:hover {
+  background-color: #888;
+  color: #FFF; }
+
+/* Icon Button Styles */
+.rupertspira .btn-icon {
+  padding-left: 32px !important; }
+
+* + html .btn-icon {
+  padding-left: 20px !important;
+  padding-right: 5px !important; }
+
+.rupertspira .btn-icon span {
+  background-image: url(/assets/images/amp-btn-icon-sprite.png);
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  left: 6px;
+  top: 6px; }
+
+.rupertspira .btn-icon.btn-small span {
+  top: 4px; }
+
+.rupertspira .btn-icon.btn-large span {
+  top: 12px; }
+
+@-moz-document url-prefix() {
+  .btn-icon span {
+    left: -24px;
+    top: 0px; }
+
+  .rupertspira .btn-icon.btn-small span {
+    top: -1px; }
+
+  .rupertspira .btn-icon.btn-large span {
+    top: 4px; } }
+/* Mini Buttons */
+.rupertspira .btn-mini {
+  background-position: 0 0;
+  width: 32px;
+  height: 26px !important;
+  line-height: 500px !important;
+  overflow: hidden;
+  padding: 0; }
+
+.rupertspira .btn-mini span {
+  background-image: url(/assets/images/amp-btn-icon-sprite.png);
+  background-repeat: no-repeat;
+  display: block;
+  width: 16px;
+  height: 16px;
+  line-height: 0;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -8px;
+  margin-top: -8px; }
+
+/* Icon Classes */
+.rupertspira .btn-arrow-down span {
+  background-position: -48px 0; }
+
+.rupertspira .btn-arrow-up span {
+  background-position: -32px 0; }
+
+.rupertspira .btn-arrow-right span {
+  background-position: -16px 0; }
+
+.rupertspira .btn-arrow-left span {
+  background-position: 0 0; }
+
+.rupertspira .btn-comment span {
+  background-position: -112px 0; }
+
+.rupertspira .btn-heart span {
+  background-position: -96px 0; }
+
+.rupertspira .btn-star span {
+  background-position: -80px 0; }
+
+.rupertspira .btn-cart span {
+  background-position: -64px 0; }
+
+.btn-print span {
+  background-position: -128px 0; }
+
+.rupertspira .btn-rss span {
+  background-position: -144px 0; }
+
+.rupertspira .btn-person span {
+  background-position: 0 -16px; }
+
+.rupertspira .btn-check span {
+  background-position: -16px -16px; }
+
+.rupertspira .btn-dollar span {
+  background-position: -32px -16px; }
+
+.rupertspira .btn-refresh span {
+  background-position: -48px -16px; }
+
+.rupertspira .btn-home span {
+  background-position: -64px -16px; }
+
+.rupertspira .btn-plus span {
+  background-position: -80px -16px; }
+
+.rupertspira .btn-minus span {
+  background-position: -96px -16px; }
+
+.rupertspira .btn-cross span {
+  background-position: -112px -16px; }
+
+.rupertspira .price-vat {
+  opacity: 0.3;
+  font-style: italic; }
+
+/* RS BUTTONS */
+.rupertspira .lovely-button, .lovely-button:visited {
+  background: #666;
+  display: inline-block;
+  padding: 0;
+  color: #fff !important;
+  text-decoration: none !important;
+  position: relative;
+  cursor: pointer;
+  font-weight: normal !important;
+  font-family: 'DINProLight', 'Arial', sans-serif;
+  text-transform: uppercase;
+  vertical-align: text-bottom;
+  border-bottom: none !important; }
+
+.rupertspira .lovely-button-red {
+  color: #fff !important; }
+
+.rupertspira .lovely-button-red span.text {
+  display: block;
+  float: left;
+  padding: 1px 6px 0px; }
+
+.rupertspira .lovely-button-red span.number {
+  display: block;
+  float: right;
+  background: transparent url(/assets/app/img/lovely-buttons/btn-bg-red.png) no-repeat left;
+  padding: 1px 6px 0px 9px; }
+
+.rupertspira .lovely-button-blue {
+  color: #fff !important; }
+
+.rupertspira .lovely-button-blue span.text {
+  display: block;
+  float: left;
+  padding: 1px 6px 0px; }
+
+.rupertspira .lovely-button-blue span.number {
+  display: block;
+  float: right;
+  background: transparent url(/assets/app/img/lovely-buttons/btn-bg-blue.png) no-repeat left;
+  padding: 1px 6px 0px 9px; }
+
+.rupertspira .lovely-button-play {
+  color: #fff !important;
+  background: #ccc !important; }
+
+.rupertspira .lovely-button-play span.text {
+  display: block;
+  float: left;
+  padding: 1px 6px 0px; }
+
+.rupertspira .lovely-button-play span.number {
+  display: block;
+  float: right;
+  background: transparent url(/assets/app/img/lovely-buttons/btn-bg-blue.png) no-repeat left;
+  padding: 1px 6px 0px 9px; }
+
+.rupertspira .lovely-button:hover {
+  background-color: #111 !important;
+  color: #fff !important; }
+
+.rupertspira .lovely-button:active {
+  top: 1px; }
+
+.rupertspira .xsmall.lovely-button, .xsmall.lovely-button:visited {
+  font-size: 9px; }
+
+.rupertspira .inactive {
+  color: #777; }
+
+/*** Images ***/
+.rupertspira .inline-image {
+  background: white;
+  box-shadow: 2px 2px 2px #ccc;
+  float: left;
+  margin: 0 20px 20px 0;
+  padding: 6px; }
+
+/*** Forms ***/
+.rupertspira .system-form {
+  border: none; }
+
+/*** Messages ***/
+.rupertspira span.error {
+  background: none;
+  position: absolute;
+  text-align: left;
+  width: 280px; }
+
+/*** Icons ***/
+.rupertspira .rss_mini_icon {
+  background: url(../../assets/images/rss_mini.png) no-repeat;
+  display: block;
+  height: 13px;
+  margin-top: 3px;
+  width: 12px; }
+
+.rupertspira .flag {
+  background: url(../../assets/images/flags.png) no-repeat;
+  height: 11px;
+  width: 16px; }
+  .rupertspira .flag.flag-ad {
+    background-position: -16px 0; }
+  .rupertspira .flag.flag-ae {
+    background-position: -32px 0; }
+  .rupertspira .flag.flag-af {
+    background-position: -48px 0; }
+  .rupertspira .flag.flag-ag {
+    background-position: -64px 0; }
+  .rupertspira .flag.flag-ai {
+    background-position: -80px 0; }
+  .rupertspira .flag.flag-al {
+    background-position: -96px 0; }
+  .rupertspira .flag.flag-am {
+    background-position: -112px 0; }
+  .rupertspira .flag.flag-an {
+    background-position: -128px 0; }
+  .rupertspira .flag.flag-ao {
+    background-position: -144px 0; }
+  .rupertspira .flag.flag-ar {
+    background-position: -160px 0; }
+  .rupertspira .flag.flag-as {
+    background-position: -176px 0; }
+  .rupertspira .flag.flag-at {
+    background-position: -192px 0; }
+  .rupertspira .flag.flag-au {
+    background-position: -208px 0; }
+  .rupertspira .flag.flag-aw {
+    background-position: -224px 0; }
+  .rupertspira .flag.flag-az {
+    background-position: -240px 0; }
+  .rupertspira .flag.flag-ba {
+    background-position: 0 -11px; }
+  .rupertspira .flag.flag-bb {
+    background-position: -16px -11px; }
+  .rupertspira .flag.flag-bd {
+    background-position: -32px -11px; }
+  .rupertspira .flag.flag-be {
+    background-position: -48px -11px; }
+  .rupertspira .flag.flag-bf {
+    background-position: -64px -11px; }
+  .rupertspira .flag.flag-bg {
+    background-position: -80px -11px; }
+  .rupertspira .flag.flag-bh {
+    background-position: -96px -11px; }
+  .rupertspira .flag.flag-bi {
+    background-position: -112px -11px; }
+  .rupertspira .flag.flag-bj {
+    background-position: -128px -11px; }
+  .rupertspira .flag.flag-bm {
+    background-position: -144px -11px; }
+  .rupertspira .flag.flag-bn {
+    background-position: -160px -11px; }
+  .rupertspira .flag.flag-bo {
+    background-position: -176px -11px; }
+  .rupertspira .flag.flag-br {
+    background-position: -192px -11px; }
+  .rupertspira .flag.flag-bs {
+    background-position: -208px -11px; }
+  .rupertspira .flag.flag-bt {
+    background-position: -224px -11px; }
+  .rupertspira .flag.flag-bv {
+    background-position: -240px -11px; }
+  .rupertspira .flag.flag-bw {
+    background-position: 0 -22px; }
+  .rupertspira .flag.flag-by {
+    background-position: -16px -22px; }
+  .rupertspira .flag.flag-bz {
+    background-position: -32px -22px; }
+  .rupertspira .flag.flag-ca {
+    background-position: -48px -22px; }
+  .rupertspira .flag.flag-catalonia {
+    background-position: -64px -22px; }
+  .rupertspira .flag.flag-cd {
+    background-position: -80px -22px; }
+  .rupertspira .flag.flag-cf {
+    background-position: -96px -22px; }
+  .rupertspira .flag.flag-cg {
+    background-position: -112px -22px; }
+  .rupertspira .flag.flag-ch {
+    background-position: -128px -22px; }
+  .rupertspira .flag.flag-ci {
+    background-position: -144px -22px; }
+  .rupertspira .flag.flag-ck {
+    background-position: -160px -22px; }
+  .rupertspira .flag.flag-cl {
+    background-position: -176px -22px; }
+  .rupertspira .flag.flag-cm {
+    background-position: -192px -22px; }
+  .rupertspira .flag.flag-cn {
+    background-position: -208px -22px; }
+  .rupertspira .flag.flag-co {
+    background-position: -224px -22px; }
+  .rupertspira .flag.flag-cr {
+    background-position: -240px -22px; }
+  .rupertspira .flag.flag-cu {
+    background-position: 0 -33px; }
+  .rupertspira .flag.flag-cv {
+    background-position: -16px -33px; }
+  .rupertspira .flag.flag-cy {
+    background-position: -32px -33px; }
+  .rupertspira .flag.flag-cz {
+    background-position: -48px -33px; }
+  .rupertspira .flag.flag-de {
+    background-position: -64px -33px; }
+  .rupertspira .flag.flag-dj {
+    background-position: -80px -33px; }
+  .rupertspira .flag.flag-dk {
+    background-position: -96px -33px; }
+  .rupertspira .flag.flag-dm {
+    background-position: -112px -33px; }
+  .rupertspira .flag.flag-do {
+    background-position: -128px -33px; }
+  .rupertspira .flag.flag-dz {
+    background-position: -144px -33px; }
+  .rupertspira .flag.flag-ec {
+    background-position: -160px -33px; }
+  .rupertspira .flag.flag-ee {
+    background-position: -176px -33px; }
+  .rupertspira .flag.flag-eg {
+    background-position: -192px -33px; }
+  .rupertspira .flag.flag-eh {
+    background-position: -208px -33px; }
+  .rupertspira .flag.flag-england {
+    background-position: -224px -33px; }
+  .rupertspira .flag.flag-er {
+    background-position: -240px -33px; }
+  .rupertspira .flag.flag-es {
+    background-position: 0 -44px; }
+  .rupertspira .flag.flag-et {
+    background-position: -16px -44px; }
+  .rupertspira .flag.flag-eu {
+    background-position: -32px -44px; }
+  .rupertspira .flag.flag-fi {
+    background-position: -48px -44px; }
+  .rupertspira .flag.flag-fj {
+    background-position: -64px -44px; }
+  .rupertspira .flag.flag-fk {
+    background-position: -80px -44px; }
+  .rupertspira .flag.flag-fm {
+    background-position: -96px -44px; }
+  .rupertspira .flag.flag-fo {
+    background-position: -112px -44px; }
+  .rupertspira .flag.flag-fr {
+    background-position: -128px -44px; }
+  .rupertspira .flag.flag-ga {
+    background-position: -144px -44px; }
+  .rupertspira .flag.flag-gb {
+    background-position: -160px -44px; }
+  .rupertspira .flag.flag-gd {
+    background-position: -176px -44px; }
+  .rupertspira .flag.flag-ge {
+    background-position: -192px -44px; }
+  .rupertspira .flag.flag-gf {
+    background-position: -208px -44px; }
+  .rupertspira .flag.flag-gh {
+    background-position: -224px -44px; }
+  .rupertspira .flag.flag-gi {
+    background-position: -240px -44px; }
+  .rupertspira .flag.flag-gl {
+    background-position: 0 -55px; }
+  .rupertspira .flag.flag-gm {
+    background-position: -16px -55px; }
+  .rupertspira .flag.flag-gn {
+    background-position: -32px -55px; }
+  .rupertspira .flag.flag-gp {
+    background-position: -48px -55px; }
+  .rupertspira .flag.flag-gq {
+    background-position: -64px -55px; }
+  .rupertspira .flag.flag-gr {
+    background-position: -80px -55px; }
+  .rupertspira .flag.flag-gs {
+    background-position: -96px -55px; }
+  .rupertspira .flag.flag-gt {
+    background-position: -112px -55px; }
+  .rupertspira .flag.flag-gu {
+    background-position: -128px -55px; }
+  .rupertspira .flag.flag-gw {
+    background-position: -144px -55px; }
+  .rupertspira .flag.flag-gy {
+    background-position: -160px -55px; }
+  .rupertspira .flag.flag-hk {
+    background-position: -176px -55px; }
+  .rupertspira .flag.flag-hm {
+    background-position: -192px -55px; }
+  .rupertspira .flag.flag-hn {
+    background-position: -208px -55px; }
+  .rupertspira .flag.flag-hr {
+    background-position: -224px -55px; }
+  .rupertspira .flag.flag-ht {
+    background-position: -240px -55px; }
+  .rupertspira .flag.flag-hu {
+    background-position: 0 -66px; }
+  .rupertspira .flag.flag-id {
+    background-position: -16px -66px; }
+  .rupertspira .flag.flag-ie {
+    background-position: -32px -66px; }
+  .rupertspira .flag.flag-il {
+    background-position: -48px -66px; }
+  .rupertspira .flag.flag-in {
+    background-position: -64px -66px; }
+  .rupertspira .flag.flag-io {
+    background-position: -80px -66px; }
+  .rupertspira .flag.flag-iq {
+    background-position: -96px -66px; }
+  .rupertspira .flag.flag-ir {
+    background-position: -112px -66px; }
+  .rupertspira .flag.flag-is {
+    background-position: -128px -66px; }
+  .rupertspira .flag.flag-it {
+    background-position: -144px -66px; }
+  .rupertspira .flag.flag-jm {
+    background-position: -160px -66px; }
+  .rupertspira .flag.flag-jo {
+    background-position: -176px -66px; }
+  .rupertspira .flag.flag-jp {
+    background-position: -192px -66px; }
+  .rupertspira .flag.flag-ke {
+    background-position: -208px -66px; }
+  .rupertspira .flag.flag-kg {
+    background-position: -224px -66px; }
+  .rupertspira .flag.flag-kh {
+    background-position: -240px -66px; }
+  .rupertspira .flag.flag-ki {
+    background-position: 0 -77px; }
+  .rupertspira .flag.flag-km {
+    background-position: -16px -77px; }
+  .rupertspira .flag.flag-kn {
+    background-position: -32px -77px; }
+  .rupertspira .flag.flag-kp {
+    background-position: -48px -77px; }
+  .rupertspira .flag.flag-kr {
+    background-position: -64px -77px; }
+  .rupertspira .flag.flag-kw {
+    background-position: -80px -77px; }
+  .rupertspira .flag.flag-ky {
+    background-position: -96px -77px; }
+  .rupertspira .flag.flag-kz {
+    background-position: -112px -77px; }
+  .rupertspira .flag.flag-la {
+    background-position: -128px -77px; }
+  .rupertspira .flag.flag-lb {
+    background-position: -144px -77px; }
+  .rupertspira .flag.flag-lc {
+    background-position: -160px -77px; }
+  .rupertspira .flag.flag-li {
+    background-position: -176px -77px; }
+  .rupertspira .flag.flag-lk {
+    background-position: -192px -77px; }
+  .rupertspira .flag.flag-lr {
+    background-position: -208px -77px; }
+  .rupertspira .flag.flag-ls {
+    background-position: -224px -77px; }
+  .rupertspira .flag.flag-lt {
+    background-position: -240px -77px; }
+  .rupertspira .flag.flag-lu {
+    background-position: 0 -88px; }
+  .rupertspira .flag.flag-lv {
+    background-position: -16px -88px; }
+  .rupertspira .flag.flag-ly {
+    background-position: -32px -88px; }
+  .rupertspira .flag.flag-ma {
+    background-position: -48px -88px; }
+  .rupertspira .flag.flag-mc {
+    background-position: -64px -88px; }
+  .rupertspira .flag.flag-md {
+    background-position: -80px -88px; }
+  .rupertspira .flag.flag-me {
+    background-position: -96px -88px; }
+  .rupertspira .flag.flag-mg {
+    background-position: -112px -88px; }
+  .rupertspira .flag.flag-mh {
+    background-position: -128px -88px; }
+  .rupertspira .flag.flag-mk {
+    background-position: -144px -88px; }
+  .rupertspira .flag.flag-ml {
+    background-position: -160px -88px; }
+  .rupertspira .flag.flag-mm {
+    background-position: -176px -88px; }
+  .rupertspira .flag.flag-mn {
+    background-position: -192px -88px; }
+  .rupertspira .flag.flag-mo {
+    background-position: -208px -88px; }
+  .rupertspira .flag.flag-mp {
+    background-position: -224px -88px; }
+  .rupertspira .flag.flag-mq {
+    background-position: -240px -88px; }
+  .rupertspira .flag.flag-mr {
+    background-position: 0 -99px; }
+  .rupertspira .flag.flag-ms {
+    background-position: -16px -99px; }
+  .rupertspira .flag.flag-mt {
+    background-position: -32px -99px; }
+  .rupertspira .flag.flag-mu {
+    background-position: -48px -99px; }
+  .rupertspira .flag.flag-mv {
+    background-position: -64px -99px; }
+  .rupertspira .flag.flag-mw {
+    background-position: -80px -99px; }
+  .rupertspira .flag.flag-mx {
+    background-position: -96px -99px; }
+  .rupertspira .flag.flag-my {
+    background-position: -112px -99px; }
+  .rupertspira .flag.flag-mz {
+    background-position: -128px -99px; }
+  .rupertspira .flag.flag-na {
+    background-position: -144px -99px; }
+  .rupertspira .flag.flag-nc {
+    background-position: -160px -99px; }
+  .rupertspira .flag.flag-ne {
+    background-position: -176px -99px; }
+  .rupertspira .flag.flag-nf {
+    background-position: -192px -99px; }
+  .rupertspira .flag.flag-ng {
+    background-position: -208px -99px; }
+  .rupertspira .flag.flag-ni {
+    background-position: -224px -99px; }
+  .rupertspira .flag.flag-nl {
+    background-position: -240px -99px; }
+  .rupertspira .flag.flag-no {
+    background-position: 0 -110px; }
+  .rupertspira .flag.flag-np {
+    background-position: -16px -110px; }
+  .rupertspira .flag.flag-nr {
+    background-position: -32px -110px; }
+  .rupertspira .flag.flag-nu {
+    background-position: -48px -110px; }
+  .rupertspira .flag.flag-nz {
+    background-position: -64px -110px; }
+  .rupertspira .flag.flag-om {
+    background-position: -80px -110px; }
+  .rupertspira .flag.flag-pa {
+    background-position: -96px -110px; }
+  .rupertspira .flag.flag-pe {
+    background-position: -112px -110px; }
+  .rupertspira .flag.flag-pf {
+    background-position: -128px -110px; }
+  .rupertspira .flag.flag-pg {
+    background-position: -144px -110px; }
+  .rupertspira .flag.flag-ph {
+    background-position: -160px -110px; }
+  .rupertspira .flag.flag-pk {
+    background-position: -176px -110px; }
+  .rupertspira .flag.flag-pl {
+    background-position: -192px -110px; }
+  .rupertspira .flag.flag-pm {
+    background-position: -208px -110px; }
+  .rupertspira .flag.flag-pn {
+    background-position: -224px -110px; }
+  .rupertspira .flag.flag-pr {
+    background-position: -240px -110px; }
+  .rupertspira .flag.flag-ps {
+    background-position: 0 -121px; }
+  .rupertspira .flag.flag-pt {
+    background-position: -16px -121px; }
+  .rupertspira .flag.flag-pw {
+    background-position: -32px -121px; }
+  .rupertspira .flag.flag-py {
+    background-position: -48px -121px; }
+  .rupertspira .flag.flag-qa {
+    background-position: -64px -121px; }
+  .rupertspira .flag.flag-re {
+    background-position: -80px -121px; }
+  .rupertspira .flag.flag-ro {
+    background-position: -96px -121px; }
+  .rupertspira .flag.flag-rs {
+    background-position: -112px -121px; }
+  .rupertspira .flag.flag-ru {
+    background-position: -128px -121px; }
+  .rupertspira .flag.flag-rw {
+    background-position: -144px -121px; }
+  .rupertspira .flag.flag-sa {
+    background-position: -160px -121px; }
+  .rupertspira .flag.flag-sb {
+    background-position: -176px -121px; }
+  .rupertspira .flag.flag-sc {
+    background-position: -192px -121px; }
+  .rupertspira .flag.flag-scotland {
+    background-position: -208px -121px; }
+  .rupertspira .flag.flag-sd {
+    background-position: -224px -121px; }
+  .rupertspira .flag.flag-se {
+    background-position: -240px -121px; }
+  .rupertspira .flag.flag-sg {
+    background-position: 0 -132px; }
+  .rupertspira .flag.flag-sh {
+    background-position: -16px -132px; }
+  .rupertspira .flag.flag-si {
+    background-position: -32px -132px; }
+  .rupertspira .flag.flag-sk {
+    background-position: -48px -132px; }
+  .rupertspira .flag.flag-sl {
+    background-position: -64px -132px; }
+  .rupertspira .flag.flag-sm {
+    background-position: -80px -132px; }
+  .rupertspira .flag.flag-sn {
+    background-position: -96px -132px; }
+  .rupertspira .flag.flag-so {
+    background-position: -112px -132px; }
+  .rupertspira .flag.flag-sr {
+    background-position: -128px -132px; }
+  .rupertspira .flag.flag-ss {
+    background-position: -144px -132px; }
+  .rupertspira .flag.flag-st {
+    background-position: -160px -132px; }
+  .rupertspira .flag.flag-sv {
+    background-position: -176px -132px; }
+  .rupertspira .flag.flag-sy {
+    background-position: -192px -132px; }
+  .rupertspira .flag.flag-sz {
+    background-position: -208px -132px; }
+  .rupertspira .flag.flag-tc {
+    background-position: -224px -132px; }
+  .rupertspira .flag.flag-td {
+    background-position: -240px -132px; }
+  .rupertspira .flag.flag-tf {
+    background-position: 0 -143px; }
+  .rupertspira .flag.flag-tg {
+    background-position: -16px -143px; }
+  .rupertspira .flag.flag-th {
+    background-position: -32px -143px; }
+  .rupertspira .flag.flag-tj {
+    background-position: -48px -143px; }
+  .rupertspira .flag.flag-tk {
+    background-position: -64px -143px; }
+  .rupertspira .flag.flag-tl {
+    background-position: -80px -143px; }
+  .rupertspira .flag.flag-tm {
+    background-position: -96px -143px; }
+  .rupertspira .flag.flag-tn {
+    background-position: -112px -143px; }
+  .rupertspira .flag.flag-to {
+    background-position: -128px -143px; }
+  .rupertspira .flag.flag-tr {
+    background-position: -144px -143px; }
+  .rupertspira .flag.flag-tt {
+    background-position: -160px -143px; }
+  .rupertspira .flag.flag-tv {
+    background-position: -176px -143px; }
+  .rupertspira .flag.flag-tw {
+    background-position: -192px -143px; }
+  .rupertspira .flag.flag-tz {
+    background-position: -208px -143px; }
+  .rupertspira .flag.flag-ua {
+    background-position: -224px -143px; }
+  .rupertspira .flag.flag-ug {
+    background-position: -240px -143px; }
+  .rupertspira .flag.flag-um {
+    background-position: 0 -154px; }
+  .rupertspira .flag.flag-us {
+    background-position: -16px -154px; }
+  .rupertspira .flag.flag-uy {
+    background-position: -32px -154px; }
+  .rupertspira .flag.flag-uz {
+    background-position: -48px -154px; }
+  .rupertspira .flag.flag-va {
+    background-position: -64px -154px; }
+  .rupertspira .flag.flag-vc {
+    background-position: -80px -154px; }
+  .rupertspira .flag.flag-ve {
+    background-position: -96px -154px; }
+  .rupertspira .flag.flag-vg {
+    background-position: -112px -154px; }
+  .rupertspira .flag.flag-vi {
+    background-position: -128px -154px; }
+  .rupertspira .flag.flag-vn {
+    background-position: -144px -154px; }
+  .rupertspira .flag.flag-vu {
+    background-position: -160px -154px; }
+  .rupertspira .flag.flag-wales {
+    background-position: -176px -154px; }
+  .rupertspira .flag.flag-wf {
+    background-position: -192px -154px; }
+  .rupertspira .flag.flag-ws {
+    background-position: -208px -154px; }
+  .rupertspira .flag.flag-ye {
+    background-position: -224px -154px; }
+  .rupertspira .flag.flag-yt {
+    background-position: -240px -154px; }
+  .rupertspira .flag.flag-za {
+    background-position: 0 -165px; }
+  .rupertspira .flag.flag-zm {
+    background-position: -16px -165px; }
+  .rupertspira .flag.flag-zw {
+    background-position: -32px -165px; }
+
+/* --------------------------------------------------------------
+   Home Page Layout
+-------------------------------------------------------------- */
+/*** Home Slider ***/
+.rupertspira .home_slider {
+  margin-bottom: 30px;
+  background: #fbfbf7; }
+  .rupertspira .home_slider .slides li.styled {
+    height: 280px; }
+    .rupertspira .home_slider .slides li.styled .slide_img {
+      float: left;
+      width: 380px; }
+      .rupertspira .home_slider .slides li.styled .slide_img img {
+        border-radius: 5px 0 0 5px; }
+    .rupertspira .home_slider .slides li.styled .slide_text {
+      float: right;
+      font-family: "Lato", sans-serif;
+      padding-right: 20px;
+      width: 520px; }
+      .rupertspira .home_slider .slides li.styled .slide_text h2 {
+        color: #c2b9ac;
+        font-size: 40px;
+        line-height: 1.4;
+        margin: 30px 0 20px; }
+        .rupertspira .home_slider .slides li.styled .slide_text h2 a {
+          border-bottom: none;
+          color: #c2b9ac; }
+      .rupertspira .home_slider .slides li.styled .slide_text p {
+        font-size: 18px;
+        text-align: left; }
+  .rupertspira .home_slider .flex-control-nav {
+    bottom: 8px;
+    margin-left: 395px;
+    text-align: left;
+    width: auto;
+    z-index: 500; }
+
+/*** Preview Tabs ***/
+.rupertspira .preview-tabs ul {
+  list-style-type: none;
+  width: auto;
+  height: 38px;
+  margin: 18px 0 0;
+  padding: 0;
+  float: left; }
+  .rupertspira .preview-tabs ul li {
+    display: block;
+    float: left;
+    height: 38px;
+    text-indent: 0;
+    margin: 0;
+    padding: 0;
+    list-style-type: none; }
+    .rupertspira .preview-tabs ul li img {
+      margin-right: 5px;
+      border: 0; }
+    .rupertspira .preview-tabs ul li a,
+    .preview-tabs ul li a:link,
+    .preview-tabs ul li a:visited {
+      border: none;
+      color: #999;
+      margin: 0 4px 0 0;
+      padding: 8px;
+      position: relative;
+      top: 11px; }
+      .rupertspira .preview-tabs ul li a:hover,
+      .preview-tabs ul li a:link:hover,
+      .preview-tabs ul li a:visited:hover {
+        color: #d80000; }
+    .rupertspira .preview-tabs ul li.active a, .preview-tabs ul li.active a:link, .preview-tabs ul li.active a:visited {
+      background: #fbfbf7;
+      border-radius: 5px 5px 0 0;
+      border-bottom: 1px solid #FBFBF7;
+      color: #d80000;
+      margin: 0 4px 0 0;
+      padding: 8px; }
+.rupertspira .preview-tabs .all-media-link {
+  float: right;
+  margin: 28px 12px 0 0;
+  border: none;
+  color: #999; }
+  .rupertspira .preview-tabs .all-media-link:hover {
+    color: #d80000; }
+  .rupertspira .preview-tabs .all-media-link.all-listen {
+    display: none; }
+
+.rupertspira .preview-container {
+  background: #fbfbf7;
+  border-radius: 0 5px 5px 5px;
+  clear: left;
+  margin: 0 0 40px 0;
+  width: 940px; }
+
+.rupertspira .full-container {
+  background: #fbfbf7;
+  margin: 0 auto 40px auto;
+  padding: 10px;
+  width: auto; }
+
+.rupertspira .inside {
+  padding: 12px; }
+
+.rupertspira .scroll_pane_head {
+  text-align: left;
+  background: #efe9e5;
+  padding: 5px 7px 5px 8px;
+  font-size: 13px;
+  font-weight: lighter;
+  color: #c2b9ac;
+  line-height: 160%;
+  margin-bottom: 10px; }
+  .rupertspira .scroll_pane_head .filter-links a {
+    display: inline-block;
+    font-size: 12px;
+    color: #c2b9ac;
+    border-bottom: none;
+    background: rgba(255, 255, 255, 0.3);
+    padding: 4px 6px;
+    border-radius: 4px;
+    line-height: 1em; }
+    .rupertspira .scroll_pane_head .filter-links a:hover {
+      color: #d80000; }
+    .rupertspira .scroll_pane_head .filter-links a.active {
+      background: white;
+      color: #d80000; }
+  .rupertspira .scroll_pane_head .filter-display {
+    margin-top: -2px; }
+    .rupertspira .scroll_pane_head .filter-display a {
+      display: inline-block;
+      border: none;
+      text-decoration: none;
+      margin: 0 0 0 3px;
+      padding: 2px 5px 2px 5px;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 4px; }
+      .rupertspira .scroll_pane_head .filter-display a.active {
+        background: white; }
+
+.rupertspira .pane-active {
+  float: left;
+  margin: 10px 0 10px 10px;
+  width: 536px; }
+
+.rupertspira .pane-view-all {
+  font-size: 11px;
+  margin: 8px 0 0px 4px; }
+
+.rupertspira .text-reader {
+  height: 300px;
+  overflow: auto;
+  padding-right: 10px;
+  text-align: justify;
+  width: 530px; }
+  .rupertspira .text-reader .writing_read {
+    padding-right: 20px; }
+
+.rupertspira .pane-list {
+  float: right;
+  height: 300px;
+  margin: 10px 10px 10px 0;
+  overflow: auto;
+  text-align: left;
+  width: 370px; }
+  .rupertspira .pane-list ul {
+    list-style: none;
+    text-indent: 0;
+    margin: 0 4px 0 0;
+    padding: 0; }
+    .rupertspira .pane-list ul li {
+      list-style: none;
+      margin: 2px 4px 0 0;
+      text-indent: 0; }
+      .rupertspira .pane-list ul li:last-child {
+        border-bottom: none;
+        margin: 0 4px 0 0;
+        padding: 0 0 0 0; }
+    .rupertspira .pane-list ul .active .square,
+    .pane-list ul .active-link .square {
+      background: #D4CCC1; }
+    .rupertspira .pane-list ul a {
+      border-bottom: 0;
+      font-family: "Lato", sans-serif;
+      font-size: 14px;
+      font-weight: normal; }
+    .rupertspira .pane-list ul .square {
+      display: inline-block;
+      vertical-align: middle;
+      *vertical-align: auto;
+      *zoom: 1;
+      *display: inline;
+      background: #F0EBE2;
+      height: 13px;
+      margin: -4px 5px 0 0;
+      width: 13px; }
+  .rupertspira .pane-list ul.plain-list li {
+    float: none; }
+  .rupertspira .pane-list ul.thumbnail-list {
+    margin: 0; }
+    .rupertspira .pane-list ul.thumbnail-list li {
+      width: 170px;
+      display: inline-block;
+      padding: 0;
+      margin: 0 6px 8px 0; }
+      .rupertspira .pane-list ul.thumbnail-list li img {
+        width: 100%;
+        height: auto; }
+      .rupertspira .pane-list ul.thumbnail-list li .active_img {
+        display: none; }
+      .rupertspira .pane-list ul.thumbnail-list li.active-link .inactive_img {
+        display: none; }
+      .rupertspira .pane-list ul.thumbnail-list li.active-link .active_img {
+        display: block; }
+
+.rupertspira .pane-text {
+  font-size: 11px;
+  margin: 0;
+  padding: 0; }
+
+.rupertspira .scrolling-text .pane-text {
+  text-align: left;
+  width: auto; }
+
+.rupertspira .meta {
+  color: #999;
+  font-weight: normal;
+  font-size: 10px;
+  text-transform: uppercase;
+  border-top: 1px solid white;
+  margin-top: 12px;
+  padding-top: 10px;
+  line-height: 160%; }
+
+.rupertspira .description {
+  padding-top: 15px; }
+
+.rupertspira .preview-container-table {
+  width: 940px; }
+  .rupertspira .preview-container-table table {
+    margin: 0 4px 4px 0;
+    padding: 0 0 4px 0;
+    border-bottom: 1px dotted #ccc; }
+  .rupertspira .preview-container-table thead tr,
+  .rupertspira .preview-container-table tr {
+    border-bottom: 1px dotted #ccc; }
+
+.rupertspira #top_social {
+  float: right; }
+  .rupertspira #top_social a {
+    float: left;
+    text-decoration: none;
+    height: 27px !important;
+    border-bottom: none; }
+
+/* Video */
+.rupertspira .player-pane {
+  width: 580px;
+  float: left; }
+  .rupertspira .player-pane .padding,
+  .rupertspira .player-pane .cuepoints {
+    background: #fbfbf7;
+    padding: 10px; }
+  .rupertspira .player-pane .cuepoints {
+    margin: 0;
+    margin-top: 20px; }
+    .rupertspira .player-pane .cuepoints li {
+      list-style-type: none;
+      margin: 0; }
+    .rupertspira .player-pane .cuepoints li.intro {
+      border-bottom: 1px solid #eee;
+      padding-bottom: 10px;
+      margin-bottom: 10px; }
+    .rupertspira .player-pane .cuepoints li.cuepoint {
+      margin-bottom: 10px; }
+      .rupertspira .player-pane .cuepoints li.cuepoint a {
+        font-weight: bold; }
+      .rupertspira .player-pane .cuepoints li.cuepoint a.active {
+        color: #d80000; }
+      .rupertspira .player-pane .cuepoints li.cuepoint em {
+        font-size: 0.85em; }
+      .rupertspira .player-pane .cuepoints li.cuepoint p {
+        margin: 0; }
+
+.rupertspira .video-meta,
+.audio-meta {
+  width: 340px;
+  float: right;
+  background: #fbfbf7;
+  padding: 10px; }
+
+.rupertspira .player-pane .head,
+.video-meta .head,
+.audio-meta .head {
+  text-align: left;
+  background: #efe9e5;
+  padding: 6px 10px 5px 10px;
+  font-size: 13px;
+  font-weight: lighter;
+  color: #c2b9ac;
+  line-height: 160%;
+  margin-bottom: 10px; }
+  .rupertspira .player-pane .head .right,
+  .video-meta .head .right,
+  .audio-meta .head .right {
+    margin-top: -2px; }
+    .rupertspira .player-pane .head .right a,
+    .video-meta .head .right a,
+    .audio-meta .head .right a {
+      background: #fbfbf7;
+      display: inline-block;
+      font-size: 12px;
+      padding: 5px 8px 3px 8px;
+      color: #c2b9ac;
+      line-height: 160%;
+      border-bottom: none; }
+    .rupertspira .player-pane .head .right a:hover,
+    .video-meta .head .right a:hover,
+    .audio-meta .head .right a:hover {
+      color: #000; }
+
+/* Audio */
+.rupertspira .audio-pane {
+  margin-bottom: 40px;
+  width: 560px;
+  float: left; }
+
+.rupertspira .jp-audio {
+  width: auto;
+  color: white;
+  background: black;
+  height: 70px;
+  padding-top: 1px;
+  padding-bottom: 13px;
+  padding-left: 10px;
+  padding-right: 20px; }
+
+.rupertspira .jp-controls {
+  list-style-type: none;
+  margin-left: 5px; }
+
+.rupertspira .jp-controls li {
+  display: block;
+  float: left; }
+
+.rupertspira .jp-controls li a {
+  border-radius: 18px;
+  height: 33px;
+  width: 33px;
+  display: block;
+  margin-right: 15px; }
+
+.rupertspira .jp-play,
+.jp-pause {
+  margin-left: -40px; }
+
+.rupertspira .jp-play img,
+.jp-pause img {
+  border: 0;
+  margin: 0;
+  padding: 0; }
+
+.rupertspira .jp-progress {
+  background: rgba(255, 255, 255, 0.3);
+  background-size: 30px 30px;
+  background-image: -webkit-linear-gradient(45deg, rgba(0, 0, 0, 0.07) 25%, rgba(0, 0, 0, 0) 25%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.07) 50%, rgba(0, 0, 0, 0.07) 75%, rgba(0, 0, 0, 0) 75%, rgba(0, 0, 0, 0));
+  background-image: linear-gradient(45deg, rgba(0, 0, 0, 0.07) 25%, rgba(0, 0, 0, 0) 25%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.07) 50%, rgba(0, 0, 0, 0.07) 75%, rgba(0, 0, 0, 0) 75%, rgba(0, 0, 0, 0));
+  min-height: 10px;
+  min-width: 10px;
+  margin-left: 52px;
+  border-radius: 5px;
+  position: relative;
+  overflow: hidden; }
+  .rupertspira .jp-progress .jp-seek-bar {
+    background: rgba(255, 255, 255, 0.25);
+    position: absolute;
+    left: 0;
+    top: 0; }
+  .rupertspira .jp-progress .jp-play-bar {
+    background: rgba(255, 255, 255, 0.3);
+    height: 10px; }
+  .rupertspira .jp-progress .audio-cuepoint {
+    height: 10px;
+    width: 10px;
+    background-color: red;
+    position: absolute;
+    left: 0px;
+    top: 0px; }
+
+.rupertspira .jp-volume-bar {
+  background: blue; }
+
+.rupertspira .jp-current-time {
+  color: #ccc;
+  float: left;
+  padding-top: 9px;
+  font-size: 10px; }
+
+.rupertspira .jp-duration {
+  color: #ccc;
+  float: right;
+  padding-top: 9px;
+  font-size: 10px; }
+
+/* --------------------------------------------------------------
+   About Page Layout
+-------------------------------------------------------------- */
+.rupertspira #about_rupert .left {
+  width: 770px; }
+  .rupertspira #about_rupert .left #images {
+    float: left;
+    width: 310px; }
+.rupertspira #about_rupert .right {
+  padding-left: 30px;
+  width: 140px; }
+
+/* --------------------------------------------------------------
+   Yoga Page Layout
+-------------------------------------------------------------- */
+.rupertspira #yoga .grey {
+  color: #999; }
+
+/* --------------------------------------------------------------
+   Store Layout
+-------------------------------------------------------------- */
+.rupertspira .product_box {
+  float: left;
+  font-family: "Lato",sans-serif;
+  font-size: 14px;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  min-height: 315px;
+  padding: 10px;
+  position: relative;
+  width: 176px; }
+  .rupertspira .product_box:nth-child(5n) {
+    margin-right: 0; }
+  .rupertspira .product_box img {
+    margin-bottom: 4px; }
+  .rupertspira .product_box a {
+    border-bottom: none; }
+  .rupertspira .product_box p a {
+    border-bottom: 1px solid #ccc; }
+
+/* --------------------------------------------------------------
+   Event Layout
+-------------------------------------------------------------- */
+.rupertspira .events_table tbody tr td table {
+  border: 0px solid transparent;
+  margin: 0;
+  padding: 0;
+  width: 50% !important; }
+
+.rupertspira .events_table tbody tr td {
+  padding: 10px 0; }
+
+.rupertspira .events_table tbody tr td table tbody tr td {
+  border: 0;
+  margin: 0;
+  padding: 0; }
+
+.rupertspira .events_table tbody tr td .fancybox {
+  border-bottom: none !important; }
+
+.rupertspira .events_table tbody tr td .fancybox img {
+  margin: 0 4px 0 0;
+  border: 0;
+  padding: 6px;
+  background: #fff;
+  box-shadow: 2px 2px 2px #ccc;
+  -webkit-box-shadow: 2px 2px 2px #ccc;
+  -moz-box-shadow: 2px 2px 2px #ccc; }
+
+.rupertspira .events_table p {
+  padding: 0;
+  margin: 0; }
+
+.rupertspira .events_table em,
+.events_table i,
+.events_table italic {
+  color: blue !important; }
+
+.rupertspira .vat {
+  font-size: 80%;
+  background: #efe9e5;
+  margin: 5px 0 0 0;
+  text-align: center;
+  padding: 5px; }
+
+/* --------------------------------------------------------------
+   Discussion Layout
+-------------------------------------------------------------- */
+.rupertspira .discussion-area {
+  margin: 30px 80px 20px 80px; }
+
+.rupertspira .discussion-compose-profile-image,
+.discussion-post-profile-image {
+  float: left;
+  width: 110px;
+  color: #000;
+  font-size: 11px;
+  margin-top: 20px; }
+
+.rupertspira .discussion-compose-message textarea {
+  border: 0;
+  width: 584px;
+  min-height: 120px;
+  margin-bottom: 14px; }
+
+.rupertspira .discussion-compose-message,
+.discussion-post-message {
+  position: relative;
+  float: right;
+  width: 616px;
+  background: #EFE9E5;
+  padding: 15px;
+  margin-bottom: 30px;
+  margin-top: 20px; }
+
+.rupertspira .discussion-compose-message:after,
+.discussion-post-message:after {
+  right: 100%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none; }
+
+.rupertspira .discussion-compose-message:after,
+.discussion-post-message:after {
+  border-color: rgba(136, 183, 213, 0);
+  border-right-color: #EFE9E5;
+  border-width: 15px;
+  top: 25px;
+  margin-top: -15px; }
+
+.rupertspira .discussion-post-message p {
+  font-size: 11px;
+  line-height: 160%;
+  margin: 4px 0;
+  font-style: italic; }
+
+.rupertspira .discussion-post .clear {
+  padding-top: 20px; }
+
+.rupertspira .attchment_container input {
+  display: inline-block;
+  width: 400px;
+  margin-bottom: 5px; }
+
+.rupertspira .reply-container,
+.reply-compose {
+  width: 616px;
+  margin-left: 140px; }
+
+.rupertspira .reply-profile-image,
+.reply-profile-image-compose {
+  float: left;
+  width: 90px;
+  color: #000;
+  font-size: 11px; }
+
+.rupertspira .reply-compose textarea {
+  border: 0;
+  width: 464px;
+  min-height: 50px;
+  margin-bottom: 14px; }
+
+.rupertspira .reply-compose-message,
+.reply-message {
+  position: relative;
+  float: right;
+  width: 495px;
+  background: #EFE9E5;
+  padding: 15px; }
+
+.rupertspira .reply-compose-message:after,
+.reply-message:after {
+  right: 100%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none; }
+
+.rupertspira .reply-compose-message:after,
+.reply-message:after {
+  border-color: rgba(136, 183, 213, 0);
+  border-right-color: #EFE9E5;
+  border-width: 15px;
+  top: 25px;
+  margin-top: -15px; }
+
+.rupertspira .reply-message p {
+  font-size: 11px;
+  line-height: 160%;
+  margin: 4px 0;
+  font-style: italic; }
+
+.rupertspira .reply_attchment_container input {
+  display: inline-block;
+  width: 300px;
+  margin-bottom: 5px; }
+
+/* --------------------------------------------------------------
+   Friends Layout
+-------------------------------------------------------------- */
+.rupertspira .links {
+  color: #999; }
+  .rupertspira .links h1 {
+    margin: 0;
+    color: #000;
+    text-align: center; }
+  .rupertspira .links h2 {
+    margin: 0;
+    text-align: center; }
+  .rupertspira .links p {
+    text-align: center; }
+
+.rupertspira .sharelinks {
+  margin: 20px 0 0 0; }
+
+.rupertspira .sharelinks,
+.sharelinks:before,
+.sharelinks:after,
+.sharelinks span,
+.sharelinks span:before,
+.sharelinks span:after {
+  -moz-box-sizing: content-box !important;
+  box-sizing: content-box !important; }
+
+.rupertspira .introduction .item {
+  padding-top: 20px;
+  padding-bottom: 10px; }
+  .rupertspira .introduction .item .video {
+    float: left;
+    width: 450px; }
+    .rupertspira .introduction .item .video img {
+      width: 450px;
+      height: auto; }
+  .rupertspira .introduction .item .copy {
+    float: right;
+    width: 460px;
+    font-size: 150%;
+    color: #6A6660;
+    font-weight: lighter; }
+
+@media screen and (max-width: 400px) {
+  @-ms-viewport {
+    width: 320px; } }
+@media (min-width: 768px) {
+  .rupertspira .nav-justified > li {
+    display: table-cell;
+    width: 1%; }
+
+  .rupertspira .nav-tabs.nav-justified > li {
+    display: table-cell;
+    width: 1%; }
+
+  .rupertspira .navbar-right .dropdown-menu {
+    right: 0;
+    left: auto; }
+
+  .rupertspira .modal-dialog {
+    left: 50%;
+    right: auto;
+    width: 600px;
+    padding-top: 30px;
+    padding-bottom: 30px; }
+
+  .rupertspira .modal-content {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5); } }
+@media print {
+  * {
+    background: transparent !important;
+    color: black !important;
+    text-shadow: none !important;
+    -webkit-filter: none !important;
+            filter: none !important;
+    -ms-filter: none !important; }
+
+  .rupertspira a,
+  a:visited {
+    text-decoration: underline; }
+
+  .rupertspira a[href]:after {
+    content: " (" attr(href) ")"; }
+
+  .rupertspira abbr[title]:after {
+    content: " (" attr(title) ")"; }
+
+  .rupertspira .ir a:after,
+  a[href^="javascript:"]:after,
+  a[href^="#"]:after {
+    content: ""; }
+
+  .rupertspira pre,
+  blockquote {
+    border: 1px solid #999;
+    page-break-inside: avoid; }
+
+  .rupertspira thead {
+    display: table-header-group; }
+
+  .rupertspira tr,
+  img {
+    page-break-inside: avoid; }
+
+  .rupertspira img {
+    max-width: 100% !important; }
+
+  @page {
+    margin: 0.5cm; }
+  .rupertspira p,
+  h2,
+  h3 {
+    orphans: 3;
+    widows: 3; }
+
+  .rupertspira h2,
+  h3 {
+    page-break-after: avoid; }
+
+  .rupertspira .table td,
+  .table th {
+    background-color: #fff !important; }
+
+  .rupertspira .btn > .caret,
+  .dropup > .btn > .caret {
+    border-top-color: #000 !important; }
+
+  .rupertspira .label {
+    border: 1px solid #000; }
+
+  .rupertspira .table {
+    border-collapse: collapse !important; }
+
+  .rupertspira .table-bordered th,
+  .table-bordered td {
+    border: 1px solid #ddd !important; }
+
+  .rupertspira .navbar {
+    display: none; } }
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url("../../assets/fonts/glyphicons-halflings-regular.eot");
+  src: url("../../assets/fonts/glyphicons-halflings-regular.eot?#iefix") format("embedded-opentype"), url("../../assets/fonts/glyphicons-halflings-regular.woff") format("woff"), url("../../assets/fonts/glyphicons-halflings-regular.ttf") format("truetype"), url("https://non-duality.rupertspira.com/assets/app/fonts/glyphicons-halflings-regular.svg#glyphicons-halflingsregular") format("svg"); }
+.rupertspira .glyphicon {
+  position: relative;
+  top: 1px;
+  display: inline-block;
+  font-family: 'Glyphicons Halflings';
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; }
+
+.rupertspira .glyphicon:empty {
+  width: 1em; }
+
+.rupertspira .glyphicon-asterisk:before {
+  content: "\2a"; }
+
+.rupertspira .glyphicon-plus:before {
+  content: "\2b"; }
+
+.rupertspira .glyphicon-euro:before {
+  content: "\20ac"; }
+
+.rupertspira .glyphicon-minus:before {
+  content: "\2212"; }
+
+.rupertspira .glyphicon-cloud:before {
+  content: "\2601"; }
+
+.rupertspira .glyphicon-envelope:before {
+  content: "\2709"; }
+
+.rupertspira .glyphicon-pencil:before {
+  content: "\270f"; }
+
+.rupertspira .glyphicon-glass:before {
+  content: "\e001"; }
+
+.rupertspira .glyphicon-music:before {
+  content: "\e002"; }
+
+.rupertspira .glyphicon-search:before {
+  content: "\e003"; }
+
+.rupertspira .glyphicon-heart:before {
+  content: "\e005"; }
+
+.rupertspira .glyphicon-star:before {
+  content: "\e006"; }
+
+.rupertspira .glyphicon-star-empty:before {
+  content: "\e007"; }
+
+.rupertspira .glyphicon-user:before {
+  content: "\e008"; }
+
+.rupertspira .glyphicon-film:before {
+  content: "\e009"; }
+
+.rupertspira .glyphicon-th-large:before {
+  content: "\e010"; }
+
+.rupertspira .glyphicon-th:before {
+  content: "\e011"; }
+
+.rupertspira .glyphicon-th-list:before {
+  content: "\e012"; }
+
+.rupertspira .glyphicon-ok:before {
+  content: "\e013"; }
+
+.rupertspira .glyphicon-remove:before {
+  content: "\e014"; }
+
+.rupertspira .glyphicon-zoom-in:before {
+  content: "\e015"; }
+
+.rupertspira .glyphicon-zoom-out:before {
+  content: "\e016"; }
+
+.rupertspira .glyphicon-off:before {
+  content: "\e017"; }
+
+.rupertspira .glyphicon-signal:before {
+  content: "\e018"; }
+
+.rupertspira .glyphicon-cog:before {
+  content: "\e019"; }
+
+.rupertspira .glyphicon-trash:before {
+  content: "\e020"; }
+
+.rupertspira .glyphicon-home:before {
+  content: "\e021"; }
+
+.rupertspira .glyphicon-file:before {
+  content: "\e022"; }
+
+.rupertspira .glyphicon-time:before {
+  content: "\e023"; }
+
+.rupertspira .glyphicon-road:before {
+  content: "\e024"; }
+
+.rupertspira .glyphicon-download-alt:before {
+  content: "\e025"; }
+
+.rupertspira .glyphicon-download:before {
+  content: "\e026"; }
+
+.rupertspira .glyphicon-upload:before {
+  content: "\e027"; }
+
+.rupertspira .glyphicon-inbox:before {
+  content: "\e028"; }
+
+.rupertspira .glyphicon-play-circle:before {
+  content: "\e029"; }
+
+.rupertspira .glyphicon-repeat:before {
+  content: "\e030"; }
+
+.rupertspira .glyphicon-refresh:before {
+  content: "\e031"; }
+
+.rupertspira .glyphicon-list-alt:before {
+  content: "\e032"; }
+
+.rupertspira .glyphicon-lock:before {
+  content: "\e033"; }
+
+.rupertspira .glyphicon-flag:before {
+  content: "\e034"; }
+
+.rupertspira .glyphicon-headphones:before {
+  content: "\e035"; }
+
+.rupertspira .glyphicon-volume-off:before {
+  content: "\e036"; }
+
+.rupertspira .glyphicon-volume-down:before {
+  content: "\e037"; }
+
+.rupertspira .glyphicon-volume-up:before {
+  content: "\e038"; }
+
+.rupertspira .glyphicon-qrcode:before {
+  content: "\e039"; }
+
+.rupertspira .glyphicon-barcode:before {
+  content: "\e040"; }
+
+.rupertspira .glyphicon-tag:before {
+  content: "\e041"; }
+
+.rupertspira .glyphicon-tags:before {
+  content: "\e042"; }
+
+.rupertspira .glyphicon-book:before {
+  content: "\e043"; }
+
+.rupertspira .glyphicon-bookmark:before {
+  content: "\e044"; }
+
+.rupertspira .glyphicon-print:before {
+  content: "\e045"; }
+
+.rupertspira .glyphicon-camera:before {
+  content: "\e046"; }
+
+.rupertspira .glyphicon-font:before {
+  content: "\e047"; }
+
+.rupertspira .glyphicon-bold:before {
+  content: "\e048"; }
+
+.rupertspira .glyphicon-italic:before {
+  content: "\e049"; }
+
+.rupertspira .glyphicon-text-height:before {
+  content: "\e050"; }
+
+.rupertspira .glyphicon-text-width:before {
+  content: "\e051"; }
+
+.rupertspira .glyphicon-align-left:before {
+  content: "\e052"; }
+
+.rupertspira .glyphicon-align-center:before {
+  content: "\e053"; }
+
+.rupertspira .glyphicon-align-right:before {
+  content: "\e054"; }
+
+.rupertspira .glyphicon-align-justify:before {
+  content: "\e055"; }
+
+.rupertspira .glyphicon-list:before {
+  content: "\e056"; }
+
+.rupertspira .glyphicon-indent-left:before {
+  content: "\e057"; }
+
+.rupertspira .glyphicon-indent-right:before {
+  content: "\e058"; }
+
+.rupertspira .glyphicon-facetime-video:before {
+  content: "\e059"; }
+
+.rupertspira .glyphicon-picture:before {
+  content: "\e060"; }
+
+.rupertspira .glyphicon-map-marker:before {
+  content: "\e062"; }
+
+.rupertspira .glyphicon-adjust:before {
+  content: "\e063"; }
+
+.rupertspira .glyphicon-tint:before {
+  content: "\e064"; }
+
+.rupertspira .glyphicon-edit:before {
+  content: "\e065"; }
+
+.rupertspira .glyphicon-share:before {
+  content: "\e066"; }
+
+.rupertspira .glyphicon-check:before {
+  content: "\e067"; }
+
+.rupertspira .glyphicon-move:before {
+  content: "\e068"; }
+
+.rupertspira .glyphicon-step-backward:before {
+  content: "\e069"; }
+
+.rupertspira .glyphicon-fast-backward:before {
+  content: "\e070"; }
+
+.rupertspira .glyphicon-backward:before {
+  content: "\e071"; }
+
+.rupertspira .glyphicon-play:before {
+  content: "\e072"; }
+
+.rupertspira .glyphicon-pause:before {
+  content: "\e073"; }
+
+.rupertspira .glyphicon-stop:before {
+  content: "\e074"; }
+
+.rupertspira .glyphicon-forward:before {
+  content: "\e075"; }
+
+.rupertspira .glyphicon-fast-forward:before {
+  content: "\e076"; }
+
+.rupertspira .glyphicon-step-forward:before {
+  content: "\e077"; }
+
+.rupertspira .glyphicon-eject:before {
+  content: "\e078"; }
+
+.rupertspira .glyphicon-chevron-left:before {
+  content: "\e079"; }
+
+.rupertspira .glyphicon-chevron-right:before {
+  content: "\e080"; }
+
+.rupertspira .glyphicon-plus-sign:before {
+  content: "\e081"; }
+
+.rupertspira .glyphicon-minus-sign:before {
+  content: "\e082"; }
+
+.rupertspira .glyphicon-remove-sign:before {
+  content: "\e083"; }
+
+.rupertspira .glyphicon-ok-sign:before {
+  content: "\e084"; }
+
+.rupertspira .glyphicon-question-sign:before {
+  content: "\e085"; }
+
+.rupertspira .glyphicon-info-sign:before {
+  content: "\e086"; }
+
+.rupertspira .glyphicon-screenshot:before {
+  content: "\e087"; }
+
+.rupertspira .glyphicon-remove-circle:before {
+  content: "\e088"; }
+
+.rupertspira .glyphicon-ok-circle:before {
+  content: "\e089"; }
+
+.rupertspira .glyphicon-ban-circle:before {
+  content: "\e090"; }
+
+.rupertspira .glyphicon-arrow-left:before {
+  content: "\e091"; }
+
+.rupertspira .glyphicon-arrow-right:before {
+  content: "\e092"; }
+
+.rupertspira .glyphicon-arrow-up:before {
+  content: "\e093"; }
+
+.rupertspira .glyphicon-arrow-down:before {
+  content: "\e094"; }
+
+.rupertspira .glyphicon-share-alt:before {
+  content: "\e095"; }
+
+.rupertspira .glyphicon-resize-full:before {
+  content: "\e096"; }
+
+.rupertspira .glyphicon-resize-small:before {
+  content: "\e097"; }
+
+.rupertspira .glyphicon-exclamation-sign:before {
+  content: "\e101"; }
+
+.rupertspira .glyphicon-gift:before {
+  content: "\e102"; }
+
+.rupertspira .glyphicon-leaf:before {
+  content: "\e103"; }
+
+.rupertspira .glyphicon-fire:before {
+  content: "\e104"; }
+
+.rupertspira .glyphicon-eye-open:before {
+  content: "\e105"; }
+
+.rupertspira .glyphicon-eye-close:before {
+  content: "\e106"; }
+
+.rupertspira .glyphicon-warning-sign:before {
+  content: "\e107"; }
+
+.rupertspira .glyphicon-plane:before {
+  content: "\e108"; }
+
+.rupertspira .glyphicon-calendar:before {
+  content: "\e109"; }
+
+.rupertspira .glyphicon-random:before {
+  content: "\e110"; }
+
+.rupertspira .glyphicon-comment:before {
+  content: "\e111"; }
+
+.rupertspira .glyphicon-magnet:before {
+  content: "\e112"; }
+
+.rupertspira .glyphicon-chevron-up:before {
+  content: "\e113"; }
+
+.rupertspira .glyphicon-chevron-down:before {
+  content: "\e114"; }
+
+.rupertspira .glyphicon-retweet:before {
+  content: "\e115"; }
+
+.rupertspira .glyphicon-shopping-cart:before {
+  content: "\e116"; }
+
+.rupertspira .glyphicon-folder-close:before {
+  content: "\e117"; }
+
+.rupertspira .glyphicon-folder-open:before {
+  content: "\e118"; }
+
+.rupertspira .glyphicon-resize-vertical:before {
+  content: "\e119"; }
+
+.rupertspira .glyphicon-resize-horizontal:before {
+  content: "\e120"; }
+
+.rupertspira .glyphicon-hdd:before {
+  content: "\e121"; }
+
+.rupertspira .glyphicon-bullhorn:before {
+  content: "\e122"; }
+
+.rupertspira .glyphicon-bell:before {
+  content: "\e123"; }
+
+.rupertspira .glyphicon-certificate:before {
+  content: "\e124"; }
+
+.rupertspira .glyphicon-thumbs-up:before {
+  content: "\e125"; }
+
+.rupertspira .glyphicon-thumbs-down:before {
+  content: "\e126"; }
+
+.rupertspira .glyphicon-hand-right:before {
+  content: "\e127"; }
+
+.rupertspira .glyphicon-hand-left:before {
+  content: "\e128"; }
+
+.rupertspira .glyphicon-hand-up:before {
+  content: "\e129"; }
+
+.rupertspira .glyphicon-hand-down:before {
+  content: "\e130"; }
+
+.rupertspira .glyphicon-circle-arrow-right:before {
+  content: "\e131"; }
+
+.rupertspira .glyphicon-circle-arrow-left:before {
+  content: "\e132"; }
+
+.rupertspira .glyphicon-circle-arrow-up:before {
+  content: "\e133"; }
+
+.rupertspira .glyphicon-circle-arrow-down:before {
+  content: "\e134"; }
+
+.rupertspira .glyphicon-globe:before {
+  content: "\e135"; }
+
+.rupertspira .glyphicon-wrench:before {
+  content: "\e136"; }
+
+.rupertspira .glyphicon-tasks:before {
+  content: "\e137"; }
+
+.rupertspira .glyphicon-filter:before {
+  content: "\e138"; }
+
+.rupertspira .glyphicon-briefcase:before {
+  content: "\e139"; }
+
+.rupertspira .glyphicon-fullscreen:before {
+  content: "\e140"; }
+
+.rupertspira .glyphicon-dashboard:before {
+  content: "\e141"; }
+
+.rupertspira .glyphicon-paperclip:before {
+  content: "\e142"; }
+
+.rupertspira .glyphicon-heart-empty:before {
+  content: "\e143"; }
+
+.rupertspira .glyphicon-link:before {
+  content: "\e144"; }
+
+.rupertspira .glyphicon-phone:before {
+  content: "\e145"; }
+
+.rupertspira .glyphicon-pushpin:before {
+  content: "\e146"; }
+
+.rupertspira .glyphicon-usd:before {
+  content: "\e148"; }
+
+.rupertspira .glyphicon-gbp:before {
+  content: "\e149"; }
+
+.rupertspira .glyphicon-sort:before {
+  content: "\e150"; }
+
+.rupertspira .glyphicon-sort-by-alphabet:before {
+  content: "\e151"; }
+
+.rupertspira .glyphicon-sort-by-alphabet-alt:before {
+  content: "\e152"; }
+
+.rupertspira .glyphicon-sort-by-order:before {
+  content: "\e153"; }
+
+.rupertspira .glyphicon-sort-by-order-alt:before {
+  content: "\e154"; }
+
+.rupertspira .glyphicon-sort-by-attributes:before {
+  content: "\e155"; }
+
+.rupertspira .glyphicon-sort-by-attributes-alt:before {
+  content: "\e156"; }
+
+.rupertspira .glyphicon-unchecked:before {
+  content: "\e157"; }
+
+.rupertspira .glyphicon-expand:before {
+  content: "\e158"; }
+
+.rupertspira .glyphicon-collapse-down:before {
+  content: "\e159"; }
+
+.rupertspira .glyphicon-collapse-up:before {
+  content: "\e160"; }
+
+.rupertspira .glyphicon-log-in:before {
+  content: "\e161"; }
+
+.rupertspira .glyphicon-flash:before {
+  content: "\e162"; }
+
+.rupertspira .glyphicon-log-out:before {
+  content: "\e163"; }
+
+.rupertspira .glyphicon-new-window:before {
+  content: "\e164"; }
+
+.rupertspira .glyphicon-record:before {
+  content: "\e165"; }
+
+.rupertspira .glyphicon-save:before {
+  content: "\e166"; }
+
+.rupertspira .glyphicon-open:before {
+  content: "\e167"; }
+
+.rupertspira .glyphicon-saved:before {
+  content: "\e168"; }
+
+.rupertspira .glyphicon-import:before {
+  content: "\e169"; }
+
+.rupertspira .glyphicon-export:before {
+  content: "\e170"; }
+
+.rupertspira .glyphicon-send:before {
+  content: "\e171"; }
+
+.rupertspira .glyphicon-floppy-disk:before {
+  content: "\e172"; }
+
+.rupertspira .glyphicon-floppy-saved:before {
+  content: "\e173"; }
+
+.rupertspira .glyphicon-floppy-remove:before {
+  content: "\e174"; }
+
+.rupertspira .glyphicon-floppy-save:before {
+  content: "\e175"; }
+
+.rupertspira .glyphicon-floppy-open:before {
+  content: "\e176"; }
+
+.rupertspira .glyphicon-credit-card:before {
+  content: "\e177"; }
+
+.rupertspira .glyphicon-transfer:before {
+  content: "\e178"; }
+
+.rupertspira .glyphicon-cutlery:before {
+  content: "\e179"; }
+
+.rupertspira .glyphicon-header:before {
+  content: "\e180"; }
+
+.rupertspira .glyphicon-compressed:before {
+  content: "\e181"; }
+
+.rupertspira .glyphicon-earphone:before {
+  content: "\e182"; }
+
+.rupertspira .glyphicon-phone-alt:before {
+  content: "\e183"; }
+
+.rupertspira .glyphicon-tower:before {
+  content: "\e184"; }
+
+.rupertspira .glyphicon-stats:before {
+  content: "\e185"; }
+
+.rupertspira .glyphicon-sd-video:before {
+  content: "\e186"; }
+
+.rupertspira .glyphicon-hd-video:before {
+  content: "\e187"; }
+
+.rupertspira .glyphicon-subtitles:before {
+  content: "\e188"; }
+
+.rupertspira .glyphicon-sound-stereo:before {
+  content: "\e189"; }
+
+.rupertspira .glyphicon-sound-dolby:before {
+  content: "\e190"; }
+
+.rupertspira .glyphicon-sound-5-1:before {
+  content: "\e191"; }
+
+.rupertspira .glyphicon-sound-6-1:before {
+  content: "\e192"; }
+
+.rupertspira .glyphicon-sound-7-1:before {
+  content: "\e193"; }
+
+.rupertspira .glyphicon-copyright-mark:before {
+  content: "\e194"; }
+
+.rupertspira .glyphicon-registration-mark:before {
+  content: "\e195"; }
+
+.rupertspira .glyphicon-cloud-download:before {
+  content: "\e197"; }
+
+.rupertspira .glyphicon-cloud-upload:before {
+  content: "\e198"; }
+
+.rupertspira .glyphicon-tree-conifer:before {
+  content: "\e199"; }
+
+.rupertspira .glyphicon-tree-deciduous:before {
+  content: "\e200"; }

@@ -368,16 +368,23 @@
 
 
 <!-- Jane add -->
-<div id="container">
-    <div><h2>Jane's Life Insurance Company</h2></div>
+<div id="container" style="display: block; float: left; width: 100%;background-color: lightblue; font-family: verdana; font-size: 20px;">
+    <div><h2 style="color: royalblue; text-align: center;">Jane's Life Insurance Company</h2></div>
 
-    <div id="quote_information">
-        <input type="text" id="age" min="0" max="150" maxlength="3" pattern="[0-9]*" required><span>Age</span>
-        <input type="text" id="sex" required><span>Sex</span>
-        <input type="range" min="10000" max="2000000" id="coverage_amt"><span>Coverage Amount</span>
+    <div id="quote_information" style="display: block;
+    float: left;
+    width: 400px;
+    background-color: white;
+    padding: 3%; 
+    margin: 5%;
+    border: 10px solid darkblue;
+    border-radius: 10px;">
+        <input type="text" id="age" min="0" max="150" maxlength="3" pattern="[0-9]*" required style="float: left;clear: left; margin: 5px;"><span select="float: right; clear: right; margin: 5px;">Age</span>
+        <input type="text" id="sex" required style="float: left; clear: left; margin: 5px;"><span style="float: right; clear: right; margin: 5px;">Sex</span>
+        <input type="range" min="10000" max="2000000" id="coverage_amt" style="float: left; clear: left; margin: 5px;"><span style="float: right;clear: right; margin: 5px;">Coverage Amount</span>
     
-        <label><span>Term Length</span></label>
-        <select id="term_len" name="term_len">
+        <label><span style="float: right; clear: right; margin: 5px;">Term Length</span></label>
+        <select id="term_len" name="term_len" style="color: black; font-size: 12px; float: left; clear: left; margin: 5px;">
             <option value="10">10 Years</option>
             <option value="20">20 Years</option>
             <option value="30">30 Years</option>
@@ -385,27 +392,54 @@
             <option value="50">50 Years</option>
         </select>
 
-        <label><span>Health Level</span></label>
-        <select id="health_level" name="health_level">
-               <option value="1">Very Healthy</option>
+        <label><span style="float: right; clear: right; margin: 5px;">Health Level</span></label>
+        <select id="health_level" name="health_level" style="color: black; font-size: 12px; float: left; clear: left; margin: 5px;">
+             <option value="1">Very Healthy</option>
              <option value="2">Healthy</option>
              <option value="3">Healthyish</option>
         </select>
     </div>
 
-    <div id="right_sub_container">
-        <div id="customer_information">
-            <input type="text" id="name" required><span>Name</span>
-            <input type="email" id="customer_email" required><span>E-mail</span>
-            <input type="text" id="zip_code" min="10000" maxlength="5" minlength="5" size="5" pattern="[0-9]*" required><span>Zip Code</span>
+    <div id="right_sub_container" style="display: block;
+    float: left;
+    width: 400px;
+    background-color: white;
+    padding: 4%;
+    margin: auto;
+    border: 10px solid darkblue;
+    border-radius: 10px;">
+        <div id="customer_information" style="display: block;
+        float: left;
+        width: 100%;
+        margin: auto;
+        padding: 1%;
+        border: 2px solid lightblue;">
+            <input type="text" id="name" required style="float: left; clear: left; margin: 5px;"><span style="float: right; clear: right; margin: 5px;">Name</span>
+            <input type="email" id="customer_email" required style="float: left; clear: left; margin: 5px;"><span style="float: right; clear: right; margin: 5px;">E-mail</span>
+            <input type="text" id="zip_code" min="10000" maxlength="5" minlength="5" size="5" pattern="[0-9]*" required style="float: left; clear: left; margin: 5px;"><span style="float: right; clear: right; margin: 5px;">Zip Code</span>
         </div>
 
-        <div id="get_quote">
-            <button type="button" id="calculate_quote" onclick="getQuote()">Compare Quote</button>
+        <div id="get_quote" style="display: block;
+        float: left;
+        align: center;
+        width: 100%;
+        height: 120px;
+        margin-top: 20%;
+        padding: 1%;">
+            <button type="button" id="calculate_quote" onclick="getQuote()" style="display: block;
+            float: left;
+            background-color: lightblue;
+            width: 150px; 
+            height: 75px;
+            color: red;
+            font-size: 24px;
+            font-weight: bold;
+            border: 10px lightblue;
+            border-style: groove solid outset;">Compare Quote</button>
             <br/><br/><br/>
         
-            <span>Your quote:</span>
-            <h1 id="customer_quote"></h1>
+            <span style="float: right; clear: right; margin: 5px;">Your quote:</span>
+            <h1 id="customer_quote" style="float: right; clear: right;color: red; text-align: left; font-size: 26px;"></h1>
         </div>
     </div>
 </div>

@@ -56,7 +56,7 @@
                                             has added a {{m?.parentId ? 'reply to your comment' : 'comment'}} on
 
                                             <!-- Post Name -->
-                                            <a *ngIf="m?.referencePost" [href]="'/' + m?.referenceId?.type === 'product' ? 'product' : 'post' + '/' + m?.referencePost?.slug + '?commentId=' + m._id" target="_blank">{{m?.referencePost?.name}}</a>
+                                            <a *ngIf="m?.referencePost" [href]="'/' + 'post' + '/' + m?.referencePost?.slug + '?commentId=' + m._id" target="_blank">{{m?.referencePost?.name}}</a>
 
                                             <!-- Company Name -->
                                             <a *ngIf="m?.referenceCompany">{{m?.referenceCompany?.name}}</a>

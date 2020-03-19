@@ -8,6 +8,27 @@
     width: 90%;
 }
 
+.tag {
+    background: #00000033;
+    display: inline-block;
+    color: white;
+    padding: 0 15px;
+    line-height: 32px;
+    margin-right: 10px;
+    font-size: 15px;
+    font-weight: 200;
+    -webkit-border-radius: 100px;
+    border-radius: 100px;
+
+    img {
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        margin-right: 5px;
+        vertical-align: sub;
+    }
+}
+
 ul.infos li {
     overflow: hidden;
     display: flex;

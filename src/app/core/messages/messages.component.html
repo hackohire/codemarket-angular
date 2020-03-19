@@ -45,31 +45,34 @@
 
                                     <!-- User Avatar  -->
                                     <div class="info_avatar" style="vertical-align: top;">
-                                        <a [href]="'/'+ 'dashboard' + '/' + 'profile' + '/' + m?.createdBy?._id" target="_blank">
+                                        <a [href]="'/'+ 'dashboard' + '/' + 'profile' + '/' + m?.createdBy?._id"
+                                            target="_blank">
                                             <img [src]="m?.createdBy?.avatar ? ((s3FilesBucketURL + m.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar"
-                                            alt="">
+                                                alt="">
                                         </a>
                                     </div>
                                     <div class="info" style="max-width: 90%;">
                                         <p>
-                                            <span><a [href]="'/'+ 'dashboard' + '/' + 'profile' + '/' + m?.createdBy?._id" target="_blank">{{m?.createdBy?.name}}</a></span>
+                                            <span><a [href]="'/'+ 'dashboard' + '/' + 'profile' + '/' + m?.createdBy?._id"
+                                                    target="_blank">{{m?.createdBy?.name}}</a></span>
                                             has added a {{m?.parentId ? 'reply to your comment' : 'comment'}} on
 
                                             <!-- Post Name -->
-                                            <a *ngIf="m?.referencePost" [href]="'/' + 'post' + '/' + m?.referencePost?.slug + '?commentId=' + m._id" target="_blank">{{m?.referencePost?.name}}</a>
+                                            <a *ngIf="m?.referencePost"
+                                                [href]="'/' + 'post' + '/' + m?.referencePost?.slug + '?commentId=' + m._id"
+                                                target="_blank">{{m?.referencePost?.name}}</a>
 
                                             <!-- Company Name -->
                                             <a *ngIf="m?.referenceCompany">{{m?.referenceCompany?.name}}</a>
                                         </p>
-                                        
+
                                         <!-- Message Time -->
                                         <p class="time">{{fromNow(m?.createdAt)}}</p>
 
                                         <!-- Actual Comment Text -->
                                         <app-editor
-                                        [editorStyle]="{padding: '0 15px', width: 'fit-content', 'border-radius': '19px', background: '#f2f3f5', border: 'solid 0.5px rgb(236, 236, 236)'}"
-                                        [data]="m?.text" [readOnly]="true"
-                                        [id]="'comment-' + m._id"></app-editor>
+                                            [editorStyle]="{padding: '0 15px', width: 'fit-content', 'border-radius': '19px', background: '#f2f3f5', border: 'solid 0.5px rgb(236, 236, 236)'}"
+                                            [data]="m?.text" [readOnly]="true" [id]="'comment-' + m._id"></app-editor>
                                     </div>
                                 </div>
                             </div>
@@ -81,8 +84,7 @@
             </div>
             <!-- end /.row -->
             <!-- pagination -->
-            <app-paginator *ngIf="authService?.loggedInUser"
-                [length]="(messageService.messagesList$ | async)?.total"
+            <app-paginator *ngIf="authService?.loggedInUser" [length]="(messageService.messagesList$ | async)?.total"
                 (fetchData)="messageService.fetchLatestCommentsForTheUserEngaged({pageNumber: $event.pageIndex + 1, limit: $event.pageSize ? $event.pageSize : 10}, authService?.loggedInUser?._id);">
             </app-paginator>
             <!-- end /.pagination -->

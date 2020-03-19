@@ -73,6 +73,23 @@
                             <p class="info" style="text-transform: capitalize;">{{ postDetails?.location?.address }}</p>
                         </li>
 
+                        <li *ngIf="postDetails?.tags">
+                            <p class="data-label">Tags</p>
+                            <p class="info">
+                                <span class="tag" *ngFor="let t of postDetails?.tags">{{t?.name}}</span>
+                            </p>
+                        </li>
+                        <li *ngIf="postDetails?.users">
+                            <p class="data-label">Users</p>
+                            <p class="info">
+                                <a *ngFor="let t of postDetails?.users" target="_blank" [href]="'/'+ 'dashboard' + '/' + 'profile' + '/' + t?._id">
+                                    <span class="tag">
+                                        <img [src]="t?.avatar ? ((s3FilesBucketURL + t?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                                        alt="">{{t?.name}}</span>
+                                </a>
+                            </p>
+                        </li>
+
                         <li *ngIf="postDetails?.jobProfile && postDetails?.jobProfile?.length">
                             <p class="data-label">Position</p>
                             <p class="info" style="text-transform: capitalize;">

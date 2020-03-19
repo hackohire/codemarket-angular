@@ -365,3 +365,49 @@
             [queryParams]="{type: 'event', all: true}">Events</a>
     </div>
 </swal>
+
+
+<!-- Jane add -->
+<div id="container">
+    <div><h2>Jane's Life Insurance Company</h2></div>
+
+    <div id="quote_information">
+        <input type="text" id="age" min="0" max="150" maxlength="3" pattern="[0-9]*" required><span>Age</span>
+        <input type="text" id="sex" required><span>Sex</span>
+        <input type="range" min="10000" max="2000000" id="coverage_amt"><span>Coverage Amount</span>
+    
+        <label><span>Term Length</span></label>
+        <select id="term_len" name="term_len">
+            <option value="10">10 Years</option>
+            <option value="20">20 Years</option>
+            <option value="30">30 Years</option>
+            <option value="40">40 Years</option>
+            <option value="50">50 Years</option>
+        </select>
+
+        <label><span>Health Level</span></label>
+        <select id="health_level" name="health_level">
+               <option value="1">Very Healthy</option>
+             <option value="2">Healthy</option>
+             <option value="3">Healthyish</option>
+        </select>
+    </div>
+
+    <div id="right_sub_container">
+        <div id="customer_information">
+            <input type="text" id="name" required><span>Name</span>
+            <input type="email" id="customer_email" required><span>E-mail</span>
+            <input type="text" id="zip_code" min="10000" maxlength="5" minlength="5" size="5" pattern="[0-9]*" required><span>Zip Code</span>
+        </div>
+
+        <div id="get_quote">
+            <button type="button" id="calculate_quote" onclick="getQuote()">Compare Quote</button>
+            <br/><br/><br/>
+        
+            <span>Your quote:</span>
+            <h1 id="customer_quote"></h1>
+        </div>
+    </div>
+</div>
+
+<!-- Jane add end -->

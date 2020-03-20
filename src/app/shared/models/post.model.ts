@@ -53,9 +53,9 @@ export interface Post {
     users?: [User];
 
     /** Contact Related Fields */
-    phone: [string];
-    email: [string];
-    birthDate: string;
-    address: string;
-    website: string;
+    phone?: [string];
+    email?: [string];
+    birthDate?: string;
+    address?: string;
+    website?: string;
 }

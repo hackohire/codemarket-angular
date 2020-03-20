@@ -132,7 +132,7 @@ export class AuthService {
             }
           }`,
         variables: {
-          applicationId: environment.applicationId
+          applicationId: ''
         }
       }
     ).pipe(

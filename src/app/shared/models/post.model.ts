@@ -51,4 +51,11 @@ export interface Post {
     assignees?: [User];
 
     users?: [User];
+
+    /** Contact Related Fields */
+    phone: [string];
+    email: [string];
+    birthDate: string;
+    address: string;
+    website: string;
 }

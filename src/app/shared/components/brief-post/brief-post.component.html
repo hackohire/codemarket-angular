@@ -3,7 +3,7 @@
     <div class="box-header">
         <!-- Post Title -->
         <h2 class="post-title" *ngIf="p?.name">
-            <a style="display: inline-block;" [href]="'/' + p?.type === 'product' ? 'product' : 'post' + '/' + p.slug" target="_blank">{{p?.name}}</a>
+            <a style="display: inline-block;" [href]="'/' + (p?.type === 'product' ? 'product' : 'post') + '/' + (p?.slug ? p.slug : p._id)" target="_blank">{{p?.name}}</a>
         </h2>
 
         <!-- USER'S AVATAR & NAME -->

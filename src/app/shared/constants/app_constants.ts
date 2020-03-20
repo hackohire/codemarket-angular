@@ -278,6 +278,12 @@ export const appConstants = {
         type
       }
       timeline
+
+      phone
+      email
+      birthDate
+      address
+      website
     }
     ${description}
     ${comment}
@@ -289,6 +295,7 @@ export const appConstants = {
     { name: PostType.Challenge, label: 'Challenge' },
     { name: PostType.Class, label: 'Class' },
     { name: PostType.CompetitiveAdvantage, label: 'Competitive Advantage' },
+    { name: PostType.Contact, label: 'Contact' },
     { name: PostType.Dreamjob, label: 'Dream Job' },
     { name: PostType.Event, label: 'Event' },
     { name: PostType.Goal, label: 'Goal' },

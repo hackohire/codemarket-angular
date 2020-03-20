@@ -3,13 +3,12 @@ import { plans } from '../app/shared/constants/plan_details';
 export const environment = {
   production: true,
   COGNITO_AUTH_DOMAIN: 'https://platform.auth.us-east-1.amazoncognito.com',
-  serverless_url: 'https://qnzhh56xx7.execute-api.ap-south-1.amazonaws.com/prod/',
-  graphql_url: 'https://qnzhh56xx7.execute-api.ap-south-1.amazonaws.com/prod/graphql',
+  serverless_url: 'https://codemarketapi-staging.codemarket.io/',
+  graphql_url: 'https://codemarketapi-staging.codemarket.io/graphql',
   s3FilesBucketURL: 'https://codemarket-files.s3.amazonaws.com/public/',
   stripe_public_key: 'pk_live_EYCoYtpLszr802sOl89WeuW1',
   // stripe_public_key: 'pk_test_ighmL2U9UqAx0O4b8dKkSvdq',
-  webSocketURL: 'wss://miqlzvwu0g.execute-api.ap-south-1.amazonaws.com/prod',
-  applicationId: '5d2ef428bbfa6576b357d5d4',
+  webSocketURL: 'wss://mp6gs0sdx5.execute-api.us-east-1.amazonaws.com/staging',
   googleAPIKey: 'AIzaSyAOpIXHUPA5bMssoAW3NDUGHveOf0N_tsY',
   // planDetails: plans.prod,
   planDetails: plans.prod,
@@ -19,12 +18,6 @@ export const environment = {
 
     // Authorized scopes
     scope: ['email', 'profile', 'openid'],
-
-    // Callback URL
-    redirectSignIn: 'https://www.codemarket.io', // or 'exp://127.0.0.1:19000/--/', 'myapp://main/'
-
-    // Sign out URL
-    redirectSignOut: 'https://www.codemarket.io', // or 'exp://127.0.0.1:19000/--/', 'myapp://main/'
 
     // 'code' for Authorization code grant,
     // 'token' for Implicit grant
@@ -36,7 +29,10 @@ export const environment = {
       // Indicates if the data collection is enabled to support Cognito advanced security features. By default, this flag is set to true.
       AdvancedSecurityDataCollectionFlag: true
     },
+  },
+  baseHref: '/',
+  confirm: {
+    email: '',
+    password: ''
   }
-,
-	baseHref: '/'
 };

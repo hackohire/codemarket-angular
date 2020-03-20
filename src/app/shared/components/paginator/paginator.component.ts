@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, AfterViewInit, ViewChild, Output, EventEmitter } from '@angular/core';
-import { MatSort, MatPaginator } from '@angular/material';
+import { MatPaginator } from '@angular/material';
 import { merge, of } from 'rxjs';
 import { startWith, catchError } from 'rxjs/operators';
 
@@ -10,16 +10,17 @@ import { startWith, catchError } from 'rxjs/operators';
 })
 export class PaginatorComponent implements AfterViewInit {
 
-  @Input() length: number;
-  @ViewChild(MatSort, { static: true }) sort: MatSort;
-  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
+  @Input() length: number; /** Total number of elements */
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator; /** Mat Paginator Trmplate Reference  */
 
   @Output() fetchData = new EventEmitter();
 
   constructor() { }
 
   ngAfterViewInit() {
-    this.paginator.pageSize = 10;
+    this.paginator.pageSize = 10;     /** By default, number of element in single page is 10 */
+
+    /** Wheneve user changes number of elements / next or previous page */
     merge(this.paginator.page)
     .pipe(
       startWith({}),
@@ -28,6 +29,7 @@ export class PaginatorComponent implements AfterViewInit {
       })
     )
     .subscribe(data => {
+      /** Inform the parent component to make the API call to fetch the next page */
       this.fetchData.emit(this.paginator);
     });
   }

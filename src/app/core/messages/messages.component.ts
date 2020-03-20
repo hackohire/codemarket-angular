@@ -6,7 +6,7 @@ import moment from 'moment';
 import { environment } from '../../../environments/environment';
 import { AuthService } from '../services/auth.service';
 import { Subscription } from 'rxjs';
-import { trigger, transition, query, stagger, animate, style, state } from '@angular/animations';
+import { trigger, transition, animate, style, state } from '@angular/animations';
 
 @Component({
   selector: 'app-messages',

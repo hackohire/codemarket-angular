@@ -1,82 +1,14 @@
-<article class="single-post single-item" *ngIf="false">
-    <header class="header">
-        <a [routerLink]="['/', 'dashboard', 'profile', p?.createdBy?._id ]" class="authorAvatar">
-            <img [src]="p?.createdBy?.avatar ? ((s3FilesBucketURL + p.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar"
-                class="user-avatar" width="40" height="40"></a>
-        <div class="titleAndAuthor">
-            <address class="author" style="margin-bottom: 0;"><a
-                    [routerLink]="['/', 'dashboard', 'profile', p?.createdBy?._id ]"
-                    class="authorName">{{p?.createdBy?.name}}</a></address>
-            <p>{{p?.createdBy?.currentJobDetails?.jobProfile ? p?.createdBy?.currentJobDetails?.jobProfile : '-'}}
-            </p>
-        </div>
-        <div class="action-menu">
-            {{fromNow(p?.createdAt)}}
-        </div>
-    </header>
-    <div class="single-title-and-excerpt">
-
-        <!-- Post Title -->
-        <h2 class="post-title" *ngIf="p?.name">
-            <a style="display: inline-block;" (click)="postService?.redirectToPostDetails(p)">{{p?.name}}</a>
-
-            <!-- Post Actions -->
-            <!-- <span style="float: right;" *ngIf="p?.createdBy?._id === authService?.loggedInUser?._id">
-                <button mat-icon-button [matMenuTriggerFor]="optionsMenu"
-                    aria-label="Example icon-button with a menu">
-                    <mat-icon>more_horiz</mat-icon>
-                </button>
-                <mat-menu #optionsMenu="matMenu">
-                    <button mat-menu-item (click)="postService?.editPost(p)">
-                        <mat-icon>edit</mat-icon>
-                        <span>Edit</span>
-                    </button>
-                    <button mat-menu-item (click)="deletePost(p._id)">
-                        <mat-icon>delete</mat-icon>
-                        <span>Delete</span>
-                    </button>
-                </mat-menu>
-            </span> -->
-        </h2>
-
-        <!-- Post Content -->
-        <div class="item-content">
-            <app-editor [readOnly]="true" [editorStyle]="{border: 'none', padding: '10px 0'}" [data]="p?.description"
-                [id]="p?._id"></app-editor>
-        </div>
-
-        <!-- Post Tags -->
-        <div>
-            <span *ngFor="let t of p?.tags"
-                style="background: rgba(6, 116, 236, 0.1); display: inline-block;
-            padding: 0 15px; line-height: 32px;
-            color: #0674ec; margin-right: 10px;font-size: 15px;font-weight: 200;-webkit-border-radius: 100px;border-radius: 100px;">{{t?.name}}</span>
-        </div>
-    </div>
-    <footer class="stats">
-        <a class="single-stat invisible-button loves loves heart-button loved-0">
-            <mat-icon style="color: crimson;" class="vertical-align-middle">favorite</mat-icon>
-            <span class="count"> {{p?.likeCount ? p?.likeCount : 0}}</span>
-        </a>
-        <a class="single-stat comments">
-            <mat-icon style="color: #0674ec;" class="vertical-align-middle">comment</mat-icon>
-            <span class="count"> {{p?.comments?.length}}</span>
-        </a>
-    </footer>
-</article>
-
-
 <!-- Single Post UI -->
 <div class="box image common-box-shadow">
     <div class="box-header">
         <!-- Post Title -->
         <h2 class="post-title" *ngIf="p?.name">
-            <a style="display: inline-block;" (click)="postService?.redirectToPostDetails(p)">{{p?.name}}</a>
+            <a style="display: inline-block;" [href]="'/' + (p?.type === 'product' ? 'product' : 'post') + '/' + (p?.slug ? p.slug : p._id)" target="_blank">{{p?.name}}</a>
         </h2>
 
         <!-- USER'S AVATAR & NAME -->
         <h3>
-            <a [routerLink]="['/', 'dashboard', 'profile', p?.createdBy?._id ]">
+            <a [href]="'/'+ 'dashboard' + '/' + 'profile' + '/' + p?.createdBy?._id" target="_blank">
                 <img [src]="p?.createdBy?.avatar ? ((s3FilesBucketURL + p?.createdBy?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
                     alt="" />{{p?.createdBy?.name}}
             </a>

@@ -9,7 +9,7 @@
     <app-breadcumb (editPost)="postService?.editPost(details)"
         [showEditPostDetails]="(details?.createdBy?._id === authService?.loggedInUser?._id || collaborators.indexOf(authService?.loggedInUser?._id) >= 0) ? true : false"
         [showAddCollaborators]="details?.createdBy?._id === authService?.loggedInUser?._id ? true : false"
-        [showAddAssignee]="details?.createdBy?._id === authService?.loggedInUser?._id && details?.type === 'assignment' ? true : false"
+        [showAddAssignee]="details?.createdBy?._id === authService?.loggedInUser?._id"
         [postDetails]="postDetails"
         [title]="details?.name" [path]="breadcumb?.path" [eventDate]="details?.dateRange" [postDetails]="details">
     </app-breadcumb>
@@ -39,67 +39,6 @@
 
                                     <br />
 
-                                    <div *ngIf="details?.type === 'business-coach'">
-                                        <ng-container *ngTemplateOutlet="businessCoachDetailsTemplate; context: {details: details}">
-                                        </ng-container>
-                                    </div>
-
-                                    <ng-container *ngIf="details.type === 'career-coach'">
-                                        <div class="tab-content-wrapper" fxLayout="row">
-                                            <h4 fxFlex="90" class="plan-description"
-                                                style="color: black; vertical-align: middle; display: inline;">
-                                                {{careerCoachQuestions['gapAnalysis']}}
-                                            </h4>
-                                            <i fxFlex="10"
-                                                [ngClass]="details?.gapAnalysis ? 'fad fa-check-circle' : 'fad fa-times-circle'"
-                                                style="vertical-align: middle; font-size: 1.5em;"></i>
-                                        </div>
-                                    </ng-container>
-
-                                    <ng-container *ngIf="details.type === 'career-coach'">
-                                        <div class="tab-content-wrapper" fxLayout="row">
-                                            <h4 fxFlex="90" class="plan-description"
-                                                style="color: black; vertical-align: middle; display: inline;">
-                                                {{careerCoachQuestions['careerCoachSessions']}}
-                                            </h4>
-                                            <i fxFlex="10"
-                                                [ngClass]="details?.careerCoachSessions ? 'fad fa-check-circle' : 'fad fa-times-circle'"
-                                                style="vertical-align: middle; font-size: 1.5em;"></i>
-                                        </div>
-                                    </ng-container>
-
-                                    <ng-container *ngIf="details.type === 'career-coach'">
-                                        <div class="tab-content-wrapper" fxLayout="row">
-                                            <h4 fxFlex="90" class="plan-description"
-                                                style="color: black; vertical-align: middle;">
-                                                {{careerCoachQuestions['helpingWithMockInterviews']}}
-                                            </h4>
-                                            <i fxFlex="10"
-                                                [ngClass]="details?.helpingWithMockInterviews ? 'fad fa-check-circle' : 'fad fa-times-circle'"
-                                                style="vertical-align: middle; font-size: 1.5em;"></i>
-                                        </div>
-                                    </ng-container>
-
-                                    <ng-container *ngIf="details.type === 'career-coach'">
-                                        <div class="tab-content-wrapper" fxLayout="row">
-                                            <h4 fxFlex="90" class="plan-description"
-                                                style="color: black; vertical-align: middle; display: inline;">
-                                                {{careerCoachQuestions['hiringMentoringSessions']}}
-                                            </h4>
-                                            <i fxFlex="10"
-                                                [ngClass]="details?.hiringMentoringSessions ? 'fad fa-check-circle' : 'fad fa-times-circle'"
-                                                style="vertical-align: middle; font-size: 1.5em;"></i>
-                                        </div>
-                                    </ng-container>
-
-                                    <br />
-                                    <h4 class="tab-content-wrapper" *ngIf="details.type !== 'career-coach'">Support
-                                        Details:</h4>
-
-                                    <app-editor *ngIf="details?.support?.description" [readOnly]="true"
-                                        [data]="details?.support?.description" [id]="'details-support-editor'"
-                                        [commentType]="'post'">
-                                    </app-editor>
                                     <ng-template #noDescription>
                                         <span>No Description</span>
                                     </ng-template>

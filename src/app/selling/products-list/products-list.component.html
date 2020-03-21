@@ -27,8 +27,7 @@
                 <ng-container matColumnDef="action">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
                     <td mat-cell *matCellDef="let product" (click)="$event.stopPropagation()">
-                        <button mat-mini-fab color="primary" (click)="editProduct(product)"
-                            [routerLink]="['/', 'sell', 'edit-product', product._id]">
+                        <button mat-mini-fab color="primary" [routerLink]="['/', 'post', 'edit-post', product._id]">
                             <mat-icon>edit</mat-icon>
                         </button>
                         <button mat-mini-fab color="warn" (click)="deleteProduct(product._id)">
@@ -127,9 +126,9 @@
                                 [attr.aria-controls]="'panel-' + category.view" [attr.aria-expanded]="panel.expanded">
                                 {{category.title}}
 
-                                <i *ngIf="category?.showHighlight" style="color: red;" class="fas fa-exclamation"></i>
+                                <!-- <i *ngIf="category?.showHighlight" style="color: red;" class="fas fa-exclamation"></i> -->
 
-                                <button *ngIf="category?.showAddBusiness" [routerLink]="['/', 'company', 'add-company']" style="margin-left: 8px; line-height: 23px; padding: 0 12px; font-size: 10px;" type="button" class="btn btn--vsm btn--round">+</button>
+                                <!-- <button *ngIf="category?.showAddBusiness" [routerLink]="['/', 'company', 'add-company']" style="margin-left: 8px; line-height: 23px; padding: 0 12px; font-size: 10px;" type="button" class="btn btn--vsm btn--round">+</button> -->
 
                                 <mat-icon *ngIf="category?.types">
                                     {{panel.expanded ? 'keyboard_arrow_up' :  'keyboard_arrow_down'}}
@@ -145,6 +144,18 @@
                                     {{component}}
                                 </a>
                             </mat-nav-list>
+                            <hr *ngIf="!last" />
+                        </div>
+
+                        <!-- Based On the List Of Post Types -->
+                        <div *ngFor="let p of postTypesArray; let last = last;">
+                            <button cdkAccordionItem [routerLink]="[]" [queryParams]="{ view: p.name }"
+                                [queryParamsHandling]="'merge'"
+                                (click)="selectedPostType = p.name; getAllPosts(p.name);"
+                                class="category docs-nav-content-btn"
+                                [ngClass]="selectedPostType === p.name ? 'docs-component-viewer-sidenav-item-selected' : ''">
+                                {{p.label}}
+                            </button>
                             <hr *ngIf="!last" />
                         </div>
                     </div>
@@ -186,13 +197,13 @@
                 <!-- <div class="width-wrapper"> -->
                 <div class="item-grid pen-grid item-grid-large">
                     <!-- <ng-container > -->
-                    <app-brief-post style="width: 100%;" [p]="p" [readMore]="true" *ngFor="let p of dataSource?.data"></app-brief-post>
+                    <app-brief-post style="width: 100%;" [p]="p" [readMore]="true" *ngFor="let p of dataSource?.data">
+                    </app-brief-post>
                     <!-- </ng-container> -->
                 </div>
 
-                <mat-paginator style="margin-bottom: 43px; border-radius: 6px;" [length]="length" [pageSize]="10"
-                    [pageSizeOptions]="[5, 10, 25, 100]">
-                </mat-paginator>
+                <app-paginator [length]="length" (fetchData)="paginator = $event; getAllPosts()">
+                </app-paginator>
             </div>
         </div>
     </div>

@@ -6,7 +6,7 @@ import { ShareService } from '@ngx-share/core';
 import { PostService } from '../../../shared/services/post.service';
 import { SweetalertService } from '../../../shared/services/sweetalert.service';
 import { CompanyService } from '../../company.service';
-import { Observable, Subscription, of } from 'rxjs';
+import { Subscription, of } from 'rxjs';
 import { Post } from '../../../shared/models/post.model';
 import { Company } from '../../../shared/models/company.model';
 import { User } from '../../../shared/models/user.model';
@@ -24,9 +24,9 @@ import { Event } from '../../../shared/models/event.model';
 import { concatMap } from 'rxjs/operators/concatMap';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { BlockToolData } from '@editorjs/editorjs/types/tools';
-import { PostStatus } from '../../../shared/models/poststatus.enum';
 import { EditorComponent } from '../../../shared/components/editor/editor.component';
 import { MdePopoverTrigger } from '@material-extended/mde';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-company-details',
@@ -46,6 +46,8 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
   usersInterestedInCompany: User[];
   companyView: string;
 
+  postTypesArray = appConstants.postTypesArray;
+
   @ViewChild('coverPic', { static: false }) coverPic;
   @ViewChild('cover', { static: false }) cover: ElementRef;
   selectedCoverPic: File;
@@ -62,16 +64,12 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
 
   breadcumb: BreadCumb;
 
-  eventsList: Event[] = [];
-  noPastEvent: boolean;
-  noUpcomingEvents: boolean;
-
   commentForm: FormGroup;
   commentsList: any[];
 
-  dreamJobsList = [];
-  jobsList = [];
-  allCompanyRelatedPosts = [];
+  companyRelatedPosts: { posts: Post[], total?: number } = { posts: [] };
+  totalcompanyRelatedPosts: number;
+  paginator: MatPaginator;
 
   /** Q&A Related Variables */
   questionOrAnswerForm: FormGroup;
@@ -86,82 +84,12 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
     data: BlockToolData
   }];
 
-  @ViewChild(MdePopoverTrigger, {static: false}) socialMediaPopover: MdePopoverTrigger;
+  @ViewChild(MdePopoverTrigger, { static: false }) socialMediaPopover: MdePopoverTrigger;
 
   companyViewLinks = [
     {
       view: 'home',
       title: 'Home'
-    },
-    {
-      view: 'mission',
-      title: 'Mission'
-    },
-    {
-      view: 'jobs',
-      title: 'Jobs'
-    },
-    {
-      view: 'dream-jobs',
-      title: 'Dream Jobs'
-    },
-    {
-      view: 'goals',
-      title: 'Goals',
-      showHighlight: true,
-      types: [
-        {
-          view: 'sales-goal',
-          title: 'Sales Goals'
-        },
-        {
-          view: 'team-goal',
-          title: 'Team Goals'
-        },
-        {
-          view: 'business-goal',
-          title: 'Business Goals'
-        },
-        {
-          view: 'marketing-goal',
-          title: 'Marketing Goals'
-        },
-        {
-          view: 'technical-goal',
-          title: 'Technical Goals'
-        },
-      ]
-    },
-    {
-      view: 'challenges',
-      title: 'Challenges',
-      showHighlight: true,
-      types: [
-        {
-          view: 'sales-challenge',
-          title: 'Sales Challenges'
-        },
-        {
-          view: 'team-challenge',
-          title: 'Team Challenges'
-        },
-        {
-          view: 'business-challenge',
-          title: 'Business Challenges'
-        },
-        {
-          view: 'marketing-challenge',
-          title: 'Marketing Challenges'
-        },
-        {
-          view: 'technical-challenge',
-          title: 'Technical Challenges'
-        },
-      ]
-    },
-    {
-      view: 'events',
-      title: 'Events'
     },
     {
       view: 'q&a',
@@ -178,7 +106,11 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
     {
       view: 'info',
       title: 'Info'
-    }
+    },
+    {
+      view: 'posts',
+      title: 'Posts'
+    },
   ];
 
   constructor(
@@ -197,11 +129,10 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.type = this.activatedRoute.snapshot.queryParams.type;
     this.commentId = this.activatedRoute.snapshot.queryParams['commentId'];
-    const companyPostId = this.activatedRoute.snapshot.queryParams['companyPostId'];
 
     const params = this.activatedRoute.snapshot.params;
 
-    this.companyView = this.activatedRoute.snapshot.queryParams['view'] ? this.activatedRoute.snapshot.queryParams['view'] : 'home';
+    this.companyView = this.activatedRoute.snapshot.queryParams['view'] ? this.activatedRoute.snapshot.queryParams['view'] : 'posts';
 
 
     this.subscription$.add(
@@ -211,25 +142,15 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
             return index === 0 ?
               of(company).pipe(
                 tap(() => {
-
-                    /** Get the list of users in a company */
-                    this.subscription$.add(
-                      this.companyService.getListOfUsersInACompany(params.companyId).subscribe((u) => {
-                        // console.log(u);
-                        if (u) {
-                          this.usersInterestedInCompany = u;
-                        }
-                      })
-                    );
-
-                    /** Fetch the list of events related to the company */
-                    this.subscription$.add(
-                      this.companyService.getEventsByCompanyId(params.companyId).subscribe(e => {
-                        if (e && e.length) {
-                          this.eventsList = e;
-                        }
-                      })
-                    );
+                  /** Get the list of users in a company */
+                  this.subscription$.add(
+                    this.companyService.getListOfUsersInACompany(params.companyId).subscribe((u) => {
+                      // console.log(u);
+                      if (u) {
+                        this.usersInterestedInCompany = u;
+                      }
+                    })
+                  );
                 })
               ) : of(company);
           })
@@ -240,7 +161,6 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
               this.companyDetails = c;
               this.initializeCommentForm(c, 'post');
               this.initializeQuestionAndAnswerForm(c, 'company');
-              this.fetchJobsAndDreamJobs(c);
             }
           }
         })
@@ -278,10 +198,10 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
   async addComment(postId = '', commentEditor: EditorComponent) {
     console.log(this.commentForm.value);
     if (this.authService.loggedInUser) {
-      const blocks =  await commentEditor.editor.save();
+      const blocks = await commentEditor.editor.save();
       this.commentForm.get('text').setValue(blocks.blocks);
       this.commentForm.addControl('createdBy', new FormControl(this.authService.loggedInUser._id));
-      this.commentForm.patchValue({referenceId: postId});
+      this.commentForm.patchValue({ referenceId: postId });
       this.subscription$.add(
         this.commentService.addComment(this.commentForm.value).subscribe(c => {
           if (c) {
@@ -292,10 +212,6 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
     } else {
       this.authService.checkIfUserIsLoggedIn(true);
     }
-  }
-
-  updateFormData(event) {
-    this.commentForm.get('text').setValue(event);
   }
 
   fromNow(date) {
@@ -337,7 +253,7 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
   async addQuestionOrAnswer(isQuestion, question = null, questionAnswerEditor: EditorComponent) {
     console.log(this.questionOrAnswerForm.value);
     if (this.authService.loggedInUser) {
-      const blocks =  await questionAnswerEditor.editor.save();
+      const blocks = await questionAnswerEditor.editor.save();
       this.questionOrAnswerForm.get('text').setValue(blocks.blocks);
 
       this.questionOrAnswerForm.addControl('createdBy', new FormControl(this.authService.loggedInUser._id));
@@ -374,7 +290,7 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
    * @param isAnswer - to check if the object is qustion / answer
    */
   async updateQuestionOrAnswer(qa, isAnswer, questionAnswerEditor: EditorComponent) {
-    const blocks =  await questionAnswerEditor.editor.save();
+    const blocks = await questionAnswerEditor.editor.save();
     this.commentService.updateQuestionOrAnswer(qa._id, blocks.blocks).pipe(
       tap((d) => {
         console.log(d);
@@ -386,38 +302,8 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
     ).subscribe();
   }
 
-  // async addPost(type: string, addPostEditor: EditorComponent) {
-  //   if (this.authService.loggedInUser) {
-  //     const blocks =  await addPostEditor.editor.save();
-  //     const post: any = {
-  //       type,
-  //       createdBy: this.authService.loggedInUser._id,
-  //       description: blocks.blocks,
-  //       isPostUnderCompany: true,
-  //       status: PostStatus.Published,
-  //       company: this.companyDetails._id
-  //     };
-  //     this.postService.addPost(post).subscribe(p => {
-  //       if (p) {
-  //         addPostEditor.editor.clear();
-  //       }
-  //     });
-  //   } else {
-  //     this.authService.checkIfUserIsLoggedIn(true);
-  //   }
-  // }
-
   deletePost(_id: string) {
     this.postService.deletePost(_id).subscribe();
-  }
-
-  async updatePost(post, singlePostEditor: EditorComponent) {
-    const blocks =  await singlePostEditor.editor.save();
-    const postToBeUpdated = {};
-    postToBeUpdated['description'] = blocks.blocks;
-    postToBeUpdated['isPostUnderCompany'] = true;
-    postToBeUpdated['_id'] = post._id;
-    this.postService.updatePost(postToBeUpdated).subscribe();
   }
 
   updateCompany(companyDetails) {
@@ -496,37 +382,8 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
     this.updateCover();
   }
 
-  openDialog(): void {
-    const dialogRef = this.dialog.open(AddEventComponent, {
-      width: '600px',
-      // height: '550px',
-      // maxHeight: '700px',
-      panelClass: ['no-padding'],
-      data: { company: this.companyDetails },
-      // disableClose: true,
-      height: 'auto'
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.eventsList.push(result);
-      // this.animal = result;
-    });
-  }
-
   getDate(d: string) {
     return moment(d).isValid() ? moment(d) : moment(new Date(+d));
-  }
-
-  filterEventsBasedOnDate(past: boolean) {
-    const eventsList = this.eventsList.filter((e) => this.isPast(e.dateRange[1] ? e.dateRange[1] : e.dateRange[0]) === past);
-    this.noPastEvent = past ? !Boolean(eventsList.length) : this.noPastEvent;
-    this.noUpcomingEvents = !past ? !Boolean(eventsList.length) : this.noUpcomingEvents;
-    return eventsList;
-  }
-
-  isPast(d): boolean {
-    return this.getDate(d).isBefore(moment());
   }
 
   selectMainCategory(category, panel) {
@@ -536,18 +393,6 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
     } else {
       panel.toggle();
     }
-  }
-
-  fetchJobsAndDreamJobs(c) {
-    this.postService.getAllPosts({ limit: 0, pageNumber: 0 }, '', '', c._id).subscribe(c => {
-      if (c && c.posts) {
-        this.dreamJobsList = c.posts.filter(comp => comp.type === 'dream-job');
-        this.jobsList = c.posts.filter(comp => comp.type === 'job');
-
-        this.allCompanyRelatedPosts = c.posts;
-        this.commentService.companyPostsList = c.posts;
-      }
-    });
   }
 
   /** Update Social Media Links and clos the popover after successful update */
@@ -571,5 +416,16 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
       });
   }
 
+  /** Fetch the list of posts connected with company based on the pagination */
+  fetchAllCompanyRealtedePosts(postType = '') {
+    const paginationObj = {
+      pageNumber: this.paginator.pageIndex + 1, limit: this.paginator.pageSize ? this.paginator.pageSize : 10,
+      sort: {order: ''}};
+    this.postService.getAllPosts(
+      paginationObj, postType, '', this.companyDetails._id).subscribe((u) => {
+        this.companyRelatedPosts.posts = u.posts;
+        this.totalcompanyRelatedPosts = u.total;
+      });
+  }
 
 }

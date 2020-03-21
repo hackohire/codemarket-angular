@@ -1,0 +1,2780 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>codemarket documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">codemarket documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li>BriefPostComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/shared/components/brief-post/brief-post.component.ts</code>
+</p>
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+                    <code><a href="https://angular.io/api/core/OnDestroy" target="_blank" >OnDestroy</a></code>
+    </p>
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover">
+        <tbody>
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">providers</td>
+                <td class="col-md-9">
+                                <code><a href="../injectables/CommentService.html" target="_self" >CommentService</a></code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-brief-post</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./brief-post.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./brief-post.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#anonymousAvatar">anonymousAvatar</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#authService">authService</a>
+                            </li>
+                            <li>
+                                <a href="#commentForm">commentForm</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#commentService">commentService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#postService">postService</a>
+                            </li>
+                            <li>
+                                <a href="#s3FilesBucketURL">s3FilesBucketURL</a>
+                            </li>
+                            <li>
+                                <a href="#subscription$">subscription$</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#addComment">addComment</a>
+                            </li>
+                            <li>
+                                <a href="#deletePost">deletePost</a>
+                            </li>
+                            <li>
+                                <a href="#fetchComments">fetchComments</a>
+                            </li>
+                            <li>
+                                <a href="#fromNow">fromNow</a>
+                            </li>
+                            <li>
+                                <a href="#initializeCommentForm">initializeCommentForm</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnDestroy">ngOnDestroy</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit">ngOnInit</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#p">p</a>
+                            </li>
+                            <li>
+                                <a href="#readMore">readMore</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Outputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#delete">delete</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(postService: <a href="../injectables/PostService.html">PostService</a>, authService: <a href="../injectables/AuthService.html">AuthService</a>, commentService: <a href="../injectables/CommentService.html">CommentService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/shared/components/brief-post/brief-post.component.ts:28</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>postService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/PostService.html" target="_self" >PostService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>authService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/AuthService.html" target="_self" >AuthService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>commentService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/CommentService.html" target="_self" >CommentService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section>
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="p"></a>
+                        <b>p</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Post.html" target="_self" >Post</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/shared/components/brief-post/brief-post.component.ts:19</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="readMore"></a>
+                        <b>readMore</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/app/shared/components/brief-post/brief-post.component.ts:21</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+    <section>
+    <h3 id="outputs">Outputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="delete"></a>
+                        <b>delete</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Event.html" target="_self" >EventEmitter</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/shared/components/brief-post/brief-post.component.ts:25</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+
+
+    <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="addComment"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Async</span>
+                            addComment
+                        </b>
+                        <a href="#addComment"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>addComment(addCommentEditor: <a href="../components/EditorComponent.html">EditorComponent</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="60"
+                            class="link-to-prism">src/app/shared/components/brief-post/brief-post.component.ts:60</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Check if user is loggedin or not, if loggedin allow to comment, otherwise open the login popup UI </p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>addCommentEditor</td>
+                                    <td>
+                                                <code><a href="../components/EditorComponent.html" target="_self" >EditorComponent</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="deletePost"></a>
+                    <span class="name">
+                        <b>
+                            deletePost
+                        </b>
+                        <a href="#deletePost"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>deletePost(postId)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="46"
+                            class="link-to-prism">src/app/shared/components/brief-post/brief-post.component.ts:46</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>postId</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fetchComments"></a>
+                    <span class="name">
+                        <b>
+                            fetchComments
+                        </b>
+                        <a href="#fetchComments"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>fetchComments(post)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="55"
+                            class="link-to-prism">src/app/shared/components/brief-post/brief-post.component.ts:55</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Fetch comments related to the post </p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>post</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fromNow"></a>
+                    <span class="name">
+                        <b>
+                            fromNow
+                        </b>
+                        <a href="#fromNow"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>fromNow(date)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="40"
+                            class="link-to-prism">src/app/shared/components/brief-post/brief-post.component.ts:40</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>date</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="initializeCommentForm"></a>
+                    <span class="name">
+                        <b>
+                            initializeCommentForm
+                        </b>
+                        <a href="#initializeCommentForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>initializeCommentForm(p, commentType?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="77"
+                            class="link-to-prism">src/app/shared/components/brief-post/brief-post.component.ts:77</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Comment form initialization for adding comment </p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>p</td>
+                                    <td>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>commentType</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnDestroy"></a>
+                    <span class="name">
+                        <b>
+                            ngOnDestroy
+                        </b>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnDestroy()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="87"
+                            class="link-to-prism">src/app/shared/components/brief-post/brief-post.component.ts:87</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Destroy subscriptions </p>
+</div>
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <b>
+                            ngOnInit
+                        </b>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="36"
+                            class="link-to-prism">src/app/shared/components/brief-post/brief-post.component.ts:36</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="anonymousAvatar"></a>
+                        <span class="name">
+                            <b>
+                            anonymousAvatar</b>
+                            <a href="#anonymousAvatar"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>&#x27;../../../../assets/images/anonymous-avatar.jpg&#x27;</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/shared/components/brief-post/brief-post.component.ts:26</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="authService"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            authService</b>
+                            <a href="#authService"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../injectables/AuthService.html" target="_self" >AuthService</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/shared/components/brief-post/brief-post.component.ts:32</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="commentForm"></a>
+                        <span class="name">
+                            <b>
+                            commentForm</b>
+                            <a href="#commentForm"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://angular.io/api/forms/FormGroup" target="_blank" >FormGroup</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/shared/components/brief-post/brief-post.component.ts:23</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="commentService"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            commentService</b>
+                            <a href="#commentService"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../injectables/CommentService.html" target="_self" >CommentService</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/shared/components/brief-post/brief-post.component.ts:33</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="postService"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            postService</b>
+                            <a href="#postService"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../injectables/PostService.html" target="_self" >PostService</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/shared/components/brief-post/brief-post.component.ts:31</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="s3FilesBucketURL"></a>
+                        <span class="name">
+                            <b>
+                            s3FilesBucketURL</b>
+                            <a href="#s3FilesBucketURL"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>environment.s3FilesBucketURL</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/shared/components/brief-post/brief-post.component.ts:27</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="subscription$"></a>
+                        <span class="name">
+                            <b>
+                            subscription$</b>
+                            <a href="#subscription$"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>new Subscription()</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/shared/components/brief-post/brief-post.component.ts:28</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from &#x27;@angular/core&#x27;;
+import { Post } from &#x27;../../models/post.model&#x27;;
+import moment from &#x27;moment&#x27;;
+import { PostService } from &#x27;../../services/post.service&#x27;;
+import { environment } from &#x27;../../../../environments/environment&#x27;;
+import { AuthService } from &#x27;../../../core/services/auth.service&#x27;;
+import { CommentService } from &#x27;../../services/comment.service&#x27;;
+import { EditorComponent } from &#x27;../editor/editor.component&#x27;;
+import { FormGroup, FormControl } from &#x27;@angular/forms&#x27;;
+import { Subscription } from &#x27;rxjs&#x27;;
+
+@Component({
+  selector: &#x27;app-brief-post&#x27;,
+  templateUrl: &#x27;./brief-post.component.html&#x27;,
+  styleUrls: [&#x27;./brief-post.component.scss&#x27;],
+  providers: [CommentService]
+})
+export class BriefPostComponent implements OnInit, OnDestroy {
+  @Input() p: Post;
+
+  @Input() readMore: boolean;
+
+  commentForm: FormGroup;
+
+  @Output() delete &#x3D; new EventEmitter();
+  anonymousAvatar &#x3D; &#x27;../../../../assets/images/anonymous-avatar.jpg&#x27;;
+  s3FilesBucketURL &#x3D; environment.s3FilesBucketURL;
+  subscription$ &#x3D; new Subscription();
+
+  constructor(
+    public postService: PostService,
+    public authService: AuthService,
+    public commentService: CommentService
+  ) { }
+
+  ngOnInit() {
+    this.initializeCommentForm(this.p);
+  }
+
+  fromNow(date) {
+    const d &#x3D; moment(date).isValid() ? date : new Date(+date);
+    return moment(d).fromNow();
+  }
+
+
+  deletePost(postId) {
+    this.postService.deletePost(postId).subscribe(d &#x3D;&gt; {
+      if (d) {
+        this.delete.emit(postId);
+      }
+    });
+  }
+
+  /** Fetch comments related to the post */
+  fetchComments(post) {
+    this.commentService.getCommentsByReferenceId(post);
+  }
+
+  /** Check if user is loggedin or not, if loggedin allow to comment, otherwise open the login popup UI */
+  async addComment(addCommentEditor: EditorComponent) {
+    if (this.authService.loggedInUser) {
+      const blocks &#x3D;  await addCommentEditor.editor.save();
+      this.commentForm.get(&#x27;text&#x27;).setValue(blocks.blocks);
+      this.commentForm.addControl(&#x27;createdBy&#x27;, new FormControl(this.authService.loggedInUser._id));
+
+      this.subscription$.add(
+        this.commentService.addComment(this.commentForm.value).subscribe((c) &#x3D;&gt; {
+          addCommentEditor.editor.clear();
+        })
+      );
+    } else {
+      this.authService.checkIfUserIsLoggedIn(true);
+    }
+  }
+
+  /** Comment form initialization for adding comment */
+  initializeCommentForm(p, commentType?: string) {
+    this.commentForm &#x3D; new FormGroup({
+      text: new FormControl(&#x27;&#x27;),
+      referenceId: new FormControl(p._id),
+      type: new FormControl(&#x27;post&#x27;),
+    });
+
+  }
+
+  /** Destroy subscriptions */
+  ngOnDestroy() {
+    this.commentService.unsubscribe();
+    this.subscription$.unsubscribe();
+  }
+
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;article class&#x3D;&quot;single-post single-item&quot; *ngIf&#x3D;&quot;false&quot;&gt;
+    &lt;header class&#x3D;&quot;header&quot;&gt;
+        &lt;a [routerLink]&#x3D;&quot;[&#x27;/&#x27;, &#x27;dashboard&#x27;, &#x27;profile&#x27;, p?.createdBy?._id ]&quot; class&#x3D;&quot;authorAvatar&quot;&gt;
+            &lt;img [src]&#x3D;&quot;p?.createdBy?.avatar ? ((s3FilesBucketURL + p.createdBy.avatar) | safe: &#x27;resourceUrl&#x27;) : anonymousAvatar&quot;
+                class&#x3D;&quot;user-avatar&quot; width&#x3D;&quot;40&quot; height&#x3D;&quot;40&quot;&gt;&lt;/a&gt;
+        &lt;div class&#x3D;&quot;titleAndAuthor&quot;&gt;
+            &lt;address class&#x3D;&quot;author&quot; style&#x3D;&quot;margin-bottom: 0;&quot;&gt;&lt;a
+                    [routerLink]&#x3D;&quot;[&#x27;/&#x27;, &#x27;dashboard&#x27;, &#x27;profile&#x27;, p?.createdBy?._id ]&quot;
+                    class&#x3D;&quot;authorName&quot;&gt;{{p?.createdBy?.name}}&lt;/a&gt;&lt;/address&gt;
+            &lt;p&gt;{{p?.createdBy?.currentJobDetails?.jobProfile ? p?.createdBy?.currentJobDetails?.jobProfile : &#x27;-&#x27;}}
+            &lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class&#x3D;&quot;action-menu&quot;&gt;
+            {{fromNow(p?.createdAt)}}
+        &lt;/div&gt;
+    &lt;/header&gt;
+    &lt;div class&#x3D;&quot;single-title-and-excerpt&quot;&gt;
+
+        &lt;!-- Post Title --&gt;
+        &lt;h2 class&#x3D;&quot;post-title&quot; *ngIf&#x3D;&quot;p?.name&quot;&gt;
+            &lt;a style&#x3D;&quot;display: inline-block;&quot; (click)&#x3D;&quot;postService?.redirectToPostDetails(p)&quot;&gt;{{p?.name}}&lt;/a&gt;
+
+            &lt;!-- Post Actions --&gt;
+            &lt;!-- &lt;span style&#x3D;&quot;float: right;&quot; *ngIf&#x3D;&quot;p?.createdBy?._id &#x3D;&#x3D;&#x3D; authService?.loggedInUser?._id&quot;&gt;
+                &lt;button mat-icon-button [matMenuTriggerFor]&#x3D;&quot;optionsMenu&quot;
+                    aria-label&#x3D;&quot;Example icon-button with a menu&quot;&gt;
+                    &lt;mat-icon&gt;more_horiz&lt;/mat-icon&gt;
+                &lt;/button&gt;
+                &lt;mat-menu #optionsMenu&#x3D;&quot;matMenu&quot;&gt;
+                    &lt;button mat-menu-item (click)&#x3D;&quot;postService?.editPost(p)&quot;&gt;
+                        &lt;mat-icon&gt;edit&lt;/mat-icon&gt;
+                        &lt;span&gt;Edit&lt;/span&gt;
+                    &lt;/button&gt;
+                    &lt;button mat-menu-item (click)&#x3D;&quot;deletePost(p._id)&quot;&gt;
+                        &lt;mat-icon&gt;delete&lt;/mat-icon&gt;
+                        &lt;span&gt;Delete&lt;/span&gt;
+                    &lt;/button&gt;
+                &lt;/mat-menu&gt;
+            &lt;/span&gt; --&gt;
+        &lt;/h2&gt;
+
+        &lt;!-- Post Content --&gt;
+        &lt;div class&#x3D;&quot;item-content&quot;&gt;
+            &lt;app-editor [readOnly]&#x3D;&quot;true&quot; [editorStyle]&#x3D;&quot;{border: &#x27;none&#x27;, padding: &#x27;10px 0&#x27;}&quot; [data]&#x3D;&quot;p?.description&quot;
+                [id]&#x3D;&quot;p?._id&quot;&gt;&lt;/app-editor&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Post Tags --&gt;
+        &lt;div&gt;
+            &lt;span *ngFor&#x3D;&quot;let t of p?.tags&quot;
+                style&#x3D;&quot;background: rgba(6, 116, 236, 0.1); display: inline-block;
+            padding: 0 15px; line-height: 32px;
+            color: #0674ec; margin-right: 10px;font-size: 15px;font-weight: 200;-webkit-border-radius: 100px;border-radius: 100px;&quot;&gt;{{t?.name}}&lt;/span&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;footer class&#x3D;&quot;stats&quot;&gt;
+        &lt;a class&#x3D;&quot;single-stat invisible-button loves loves heart-button loved-0&quot;&gt;
+            &lt;mat-icon style&#x3D;&quot;color: crimson;&quot; class&#x3D;&quot;vertical-align-middle&quot;&gt;favorite&lt;/mat-icon&gt;
+            &lt;span class&#x3D;&quot;count&quot;&gt; {{p?.likeCount ? p?.likeCount : 0}}&lt;/span&gt;
+        &lt;/a&gt;
+        &lt;a class&#x3D;&quot;single-stat comments&quot;&gt;
+            &lt;mat-icon style&#x3D;&quot;color: #0674ec;&quot; class&#x3D;&quot;vertical-align-middle&quot;&gt;comment&lt;/mat-icon&gt;
+            &lt;span class&#x3D;&quot;count&quot;&gt; {{p?.comments?.length}}&lt;/span&gt;
+        &lt;/a&gt;
+    &lt;/footer&gt;
+&lt;/article&gt;
+
+
+&lt;!-- Single Post UI --&gt;
+&lt;div class&#x3D;&quot;box image common-box-shadow&quot;&gt;
+    &lt;div class&#x3D;&quot;box-header&quot;&gt;
+        &lt;!-- Post Title --&gt;
+        &lt;h2 class&#x3D;&quot;post-title&quot; *ngIf&#x3D;&quot;p?.name&quot;&gt;
+            &lt;a style&#x3D;&quot;display: inline-block;&quot; (click)&#x3D;&quot;postService?.redirectToPostDetails(p)&quot;&gt;{{p?.name}}&lt;/a&gt;
+        &lt;/h2&gt;
+
+        &lt;!-- USER&#x27;S AVATAR &amp; NAME --&gt;
+        &lt;h3&gt;
+            &lt;a [routerLink]&#x3D;&quot;[&#x27;/&#x27;, &#x27;dashboard&#x27;, &#x27;profile&#x27;, p?.createdBy?._id ]&quot;&gt;
+                &lt;img [src]&#x3D;&quot;p?.createdBy?.avatar ? ((s3FilesBucketURL + p?.createdBy?.avatar) | safe: &#x27;resourceUrl&#x27;) : anonymousAvatar&quot;
+                    alt&#x3D;&quot;&quot; /&gt;{{p?.createdBy?.name}}
+            &lt;/a&gt;
+            &lt;span&gt;{{fromNow(p?.createdAt)}} &lt;i class&#x3D;&quot;fa fa-globe&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+        &lt;/h3&gt;
+
+        &lt;!-- Post Actions --&gt;
+        &lt;!-- &lt;i class&#x3D;&quot;fad fa-check-circle&quot; *ngIf&#x3D;&quot;p[&#x27;__edit&#x27;]&quot; (click)&#x3D;&quot;updatePost(p, singlePostEditor)&quot;&gt;&lt;/i&gt; --&gt;
+        &lt;span style&#x3D;&quot;float: right; display: none&quot; *ngIf&#x3D;&quot;p?.createdBy?._id &#x3D;&#x3D;&#x3D; authService?.loggedInUser?._id&quot;&gt;
+            &lt;button mat-icon-button [matMenuTriggerFor]&#x3D;&quot;optionsMenu&quot; aria-label&#x3D;&quot;Example icon-button with a menu&quot;&gt;
+                &lt;mat-icon&gt;more_horiz&lt;/mat-icon&gt;
+            &lt;/button&gt;
+            &lt;mat-menu #optionsMenu&#x3D;&quot;matMenu&quot;&gt;
+                &lt;button mat-menu-item (click)&#x3D;&quot;p[&#x27;__edit&#x27;] &#x3D; !p[&#x27;__edit&#x27;]&quot;&gt;
+                    &lt;mat-icon&gt;edit&lt;/mat-icon&gt;
+                    &lt;span&gt;Edit&lt;/span&gt;
+                &lt;/button&gt;
+                &lt;button mat-menu-item (click)&#x3D;&quot;deletePost(p?._id)&quot;&gt;
+                    &lt;mat-icon&gt;delete&lt;/mat-icon&gt;
+                    &lt;span&gt;Delete&lt;/span&gt;
+                &lt;/button&gt;
+            &lt;/mat-menu&gt;
+        &lt;/span&gt;
+        &lt;!-- &lt;span&gt;&lt;i class&#x3D;&quot;fa fa-angle-down&quot;&gt;&lt;/i&gt;&lt;/span&gt; --&gt;
+        &lt;div class&#x3D;&quot;window&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class&#x3D;&quot;box-content&quot;&gt;
+        &lt;div class&#x3D;&quot;content&quot;&gt;
+            &lt;img alt&#x3D;&quot;&quot; /&gt;
+        &lt;/div&gt;
+        &lt;div class&#x3D;&quot;bottom&quot;&gt;
+            &lt;p [ngClass]&#x3D;&quot;readMore ? &#x27;readMore&#x27; : &#x27;&#x27;&quot;&gt;
+                &lt;!---------------- SINGLE POST EDITOR ---------------&gt;
+                &lt;app-editor #singlePostEditor [editorStyle]&#x3D;&quot;{background: &#x27;white&#x27;}&quot; [data]&#x3D;&quot;p?.description&quot;
+                    [id]&#x3D;&quot;&#x27;post&#x27; + p?._id&quot; [readOnly]&#x3D;&quot;!p[&#x27;__edit&#x27;]&quot; [blockLevelComments]&#x3D;&quot;!readMore&quot;
+                    [commentType]&#x3D;&quot;&#x27;post&#x27;&quot; [post]&#x3D;&quot;p&quot; [commentsList]&#x3D;&quot;(commentService.commentsList$ | async)&quot;&gt;
+                &lt;/app-editor&gt;
+            &lt;/p&gt;
+            &lt;span&gt;&lt;span class&#x3D;&quot;fa fa-search-plus&quot;&gt;&lt;/span&gt;&lt;/span&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Post Tags --&gt;
+    &lt;div style&#x3D;&quot;padding: 10px 0 0 30px;&quot;&gt;
+        &lt;span *ngFor&#x3D;&quot;let t of p?.tags&quot;
+            style&#x3D;&quot;background: rgba(6, 116, 236, 0.1); display: inline-block;
+                padding: 0 15px; line-height: 32px;
+                color: #0674ec; margin-right: 10px;font-size: 15px;font-weight: 200;-webkit-border-radius: 100px;border-radius: 100px;&quot;&gt;{{t?.name}}&lt;/span&gt;
+    &lt;/div&gt;
+    
+    &lt;!-- Read More Button to Fetch comments and show full description--&gt;
+    &lt;div class&#x3D;&quot;ce-block&quot; *ngIf&#x3D;&quot;readMore&quot; style&#x3D;&quot;padding: 10px 0 0 30px;&quot; (click)&#x3D;&quot;readMore &#x3D; false; fetchComments(p)&quot;&gt;
+        &lt;a&gt;Read More...&lt;/a&gt;&lt;/div&gt;
+
+    &lt;div class&#x3D;&quot;box-likes&quot;&gt;
+        &lt;div class&#x3D;&quot;post-row&quot; style&#x3D;&quot;display: none; padding: 0;&quot;&gt;
+            &lt;span&gt;&lt;a href&#x3D;&quot;#&quot;&gt;&lt;img src&#x3D;&quot;https://goo.gl/oM0Y8G&quot; alt&#x3D;&quot;&quot; /&gt;&lt;/a&gt;&lt;/span&gt;
+            &lt;span&gt;&lt;a href&#x3D;&quot;#&quot;&gt;&lt;img src&#x3D;&quot;https://goo.gl/vswgSn&quot; alt&#x3D;&quot;&quot; /&gt;&lt;/a&gt;&lt;/span&gt;
+            &lt;span&gt;&lt;a href&#x3D;&quot;#&quot;&gt;&lt;img src&#x3D;&quot;https://goo.gl/4W27eB&quot; alt&#x3D;&quot;&quot; /&gt;&lt;/a&gt;&lt;/span&gt;
+            &lt;span&gt;&lt;a href&#x3D;&quot;#&quot;&gt;+99&lt;/a&gt;&lt;/span&gt;
+            &lt;span&gt;Like this&lt;/span&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Show Number of Likes &amp; Comments --&gt;
+        &lt;footer style&#x3D;&quot;float: left; margin-left: -18px;&quot;&gt;
+            &lt;a mat-button class&#x3D;&quot;single-stat invisible-button loves loves heart-button loved-0&quot;&gt;
+                &lt;mat-icon style&#x3D;&quot;color: crimson;&quot; class&#x3D;&quot;vertical-align-middle&quot;&gt;favorite&lt;/mat-icon&gt;
+                &lt;span class&#x3D;&quot;count&quot;&gt; {{p?.likeCount ? p?.likeCount : 0}}&lt;/span&gt;
+            &lt;/a&gt;
+            &lt;a mat-button class&#x3D;&quot;single-stat comments&quot; (click)&#x3D;&quot;readMore &#x3D; false; fetchComments(p) &quot;&gt;
+                &lt;mat-icon style&#x3D;&quot;color: #0674ec;&quot; class&#x3D;&quot;vertical-align-middle&quot;&gt;comment&lt;/mat-icon&gt;
+                &lt;span class&#x3D;&quot;count&quot;&gt; {{p?.comments?.length}}&lt;/span&gt;
+            &lt;/a&gt;
+        &lt;/footer&gt;
+        &lt;!-- &lt;div class&#x3D;&quot;post-row&quot; style&#x3D;&quot;padding: 0; border: none;&quot;&gt;
+            &lt;span&gt;{{p?.comments?.length}} comments&lt;/span&gt;
+        &lt;/div&gt; --&gt;
+    &lt;/div&gt;
+    &lt;!-- &lt;div class&#x3D;&quot;box-buttons&quot;&gt;
+                &lt;div class&#x3D;&quot;post-row&quot;&gt;
+                    &lt;button&gt;&lt;span class&#x3D;&quot;fa fa-thumbs-up&quot;&gt;&lt;/span&gt;&lt;/button&gt;
+                    &lt;button (click)&#x3D;&quot;p[&#x27;__show&#x27;] &#x3D; !p[&#x27;__show&#x27;]&quot;&gt;&lt;span class&#x3D;&quot;fas fa-comment-lines&quot;&gt;&lt;/span&gt;&lt;/button&gt;
+                    &lt;button&gt;&lt;span class&#x3D;&quot;ion-share&quot;&gt;&lt;/span&gt;&lt;/button&gt;
+                &lt;/div&gt;
+            &lt;/div&gt; --&gt;
+
+    &lt;!-- &lt;div class&#x3D;&quot;box-click&quot;&gt;&lt;span&gt;&lt;i class&#x3D;&quot;ion-chatbox-working&quot;&gt;&lt;/i&gt; View 140 more comments&lt;/span&gt;&lt;/div&gt; --&gt;
+    &lt;!-- Show List of Comments + Add Comment UI only when user clicks on read more or comment icon --&gt;
+    &lt;div class&#x3D;&quot;box-comments&quot; style&#x3D;&quot;border-top: 2px solid #f4f4f4;&quot; *ngIf&#x3D;&quot;readMore &#x3D;&#x3D;&#x3D; false&quot;&gt;
+        &lt;div class&#x3D;&quot;thread&quot;&gt;
+            &lt;ul class&#x3D;&quot;media-list thread-list&quot; style&#x3D;&quot;padding: 10px 0px 0px 0px; list-style: none;&quot;&gt;
+                &lt;div *ngFor&#x3D;&quot;let com of (commentService.commentsList$ | async)&quot;&gt;
+                    &lt;li *ngIf&#x3D;&quot;!com?.blockSpecificComment&quot; class&#x3D;&quot;single-thread&quot;&gt;
+                        &lt;app-comment [comment]&#x3D;&quot;com&quot;&gt;&lt;/app-comment&gt;
+                    &lt;/li&gt;
+                &lt;/div&gt;
+            &lt;/ul&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Show List of Comments + Add Comment UI only when user clicks on read more or comment icon --&gt;
+    &lt;div class&#x3D;&quot;box-new-comment&quot; *ngIf&#x3D;&quot;readMore &#x3D;&#x3D;&#x3D; false&quot;&gt;
+        &lt;img [src]&#x3D;&quot;authService?.loggedInUser?.avatar ? ((s3FilesBucketURL + authService?.loggedInUser?.avatar) | safe: &#x27;resourceUrl&#x27;) : anonymousAvatar&quot;
+            alt&#x3D;&quot;&quot; /&gt;
+        &lt;div class&#x3D;&quot;content&quot;&gt;
+            &lt;!-- &lt;div class&#x3D;&quot;post-row&quot;&gt; --&gt;
+            &lt;!---------------- ADD COMMENT EDITOR ---------------&gt;
+            &lt;app-editor #addCommentEditor [placeholder]&#x3D;&quot;&#x27;Write a comment&#x27;&quot;
+                [editorStyle]&#x3D;&quot;{ width: &#x27;84%&#x27;, background: &#x27;white&#x27;, padding: &#x27;0 12px 0 12px&#x27;, &#x27;border-radius&#x27;: &#x27;20px&#x27;}&quot;
+                [id]&#x3D;&quot;&#x27;comment&#x27; + p?._id&quot;&gt;&lt;/app-editor&gt;
+            &lt;!-- &lt;/div&gt; --&gt;
+            &lt;div class&#x3D;&quot;post-row&quot;&gt;
+                &lt;button style&#x3D;&quot;float: right;&quot; type&#x3D;&quot;button&quot; class&#x3D;&quot;btn btn--sm btn--round&quot;
+                    (click)&#x3D;&quot;addComment(addCommentEditor)&quot;&gt;Post&lt;/button&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-styleData">
+                <p class="comment">
+                    <code>./brief-post.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">.readMore {
+  max-height: 200px;
+}
+
+
+
+
+.single-item.single-spam-post {
+    width: 290px;
+    padding: 6px;
+    background: #fff;
+    color: #2c303a;
+  }
+  .single-item.single-spam-post .spam-title {
+    font-size: 1.3rem;
+  }
+  .single-item.single-spam-post a {
+    color: #006f98;
+  }
+  .single-item.single-spam-collection {
+    width: 290px;
+    padding: 6px;
+    background: #fff;
+    color: #2c303a;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    overflow: hidden;
+    max-height: 8em;
+  }
+  .single-item.single-spam-collection .spam-title {
+    font-size: 1.3rem;
+  }
+  .single-item.single-spam-collection a {
+    color: #006f98;
+  }
+
+
+
+  .single-item {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    color: #717790;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+  .single-item::after {
+    position: absolute;
+    content: &quot;&quot;;
+    right: -1rem;
+    bottom: 0rem;
+    left: 1rem;
+    top: 1rem;
+    background: #1f222914;
+    border-radius: 10px;
+    z-index: -1;
+    -webkit-transition: 0.3s ease;
+    transition: 0.3s ease;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .single-item::after {
+      -webkit-transition: none;
+      transition: none;
+    }
+  }
+  .challenge-grid .single-item::after {
+    bottom: -1rem;
+  }
+  .organize-grid .single-item::after {
+    display: none;
+  }
+  .single-item.hide-owner::after {
+    bottom: -3rem;
+    left: 0;
+  }
+  .single-item.single-post.hide-owner::after {
+    bottom: -1rem;
+  }
+  .single-item.has-modal {
+    z-index: 2;
+  }
+  .single-item:hover::after,
+  .single-item:focus::after,
+  .single-item:active::after {
+    left: -1rem;
+    right: -1rem;
+    top: -1rem;
+    bottom: -2rem;
+  }
+  .challenge-grid .single-item:hover::after,
+  .challenge-grid .single-item:focus::after,
+  .challenge-grid .single-item:active::after {
+    bottom: -1rem;
+  }
+  .single-item:focus-within {
+    z-index: 2;
+  }
+  .single-item:focus-within::after {
+    left: -1rem;
+    right: -1rem;
+    top: -1rem;
+    bottom: -3rem;
+  }
+  .challenge-grid .single-item:focus-within::after {
+    bottom: -1rem;
+  }
+  .profile-grid-pens .single-item.featured-pen {
+    margin-bottom: 5rem;
+  }
+  .single-item .cover-link {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    border: 0 !important;
+    z-index: 1;
+  }
+
+
+  .single-item .header {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    // -webkit-box-align: center;
+    // -webkit-align-items: center;
+    // -ms-flex-align: center;
+    // align-items: center;
+    margin-top: 1rem;
+    -webkit-box-ordinal-group: 4;
+    -webkit-order: 3;
+    -ms-flex-order: 3;
+    order: 3;
+  }
+  .single-item .authorAvatar {
+    display: block;
+    margin-right: 0.75rem;
+    position: relative;
+    z-index: 1;
+  }
+  .authorAvatar &gt; img {
+    display: block;
+    width: 40px;
+    height: 40px;
+    background: #444857;
+    overflow: hidden;
+    font: 10px/1 monospace;
+  }
+  .titleAndAuthor {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    margin: 0 1rem 0 0;
+  }
+  .titleAndAuthor,
+  .titleAndAuthor .title {
+    width: 95%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .single-item .title {
+    font-family: &quot;Lato&quot;, &quot;Lucida Grande&quot;, &quot;Lucida Sans Unicode&quot;, Tahoma,
+      Sans-Serif;
+    font-weight: 900;
+    font-size: 17px;
+    margin: 0 0 0.25rem;
+    display: block;
+  }
+  .single-item .title a {
+    color: white;
+  }
+  .single-item.hide-owner .title {
+    margin-left: 1rem;
+  }
+  .single-item .author {
+    // color: #c0c3d0;
+    font: inherit;
+    font-size: 14px;
+    line-height: 1.2;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+  .user-avatar {
+    border-radius: 50%;
+  }
+  .single-item .author:hover .authorInfo {
+    opacity: 1;
+    visibility: visible;
+  }
+  .single-item .author:hover .authorName {
+    color: #0674ec;
+  }
+  .single-item .authorName {
+    color: inherit;
+    display: inline-block;
+    position: relative;
+    z-index: 1;
+    -webkit-transition: 0.2s ease all;
+    transition: 0.2s ease all;
+    font-weight: 500;
+    font-size: large;
+  }
+  .single-item .authorName ~ .pro-link {
+    margin-left: 0.5rem;
+  }
+  .single-item .type {
+    display: inline-block;
+    margin: 0 0.5rem;
+  }
+  .single-item .authorInfo {
+    position: absolute;
+    bottom: 0;
+    right: -1rem;
+    background: #1f2229;
+    width: calc(100% + 2rem);
+    border-radius: 6px;
+    opacity: 0;
+    visibility: hidden;
+    -webkit-transition: 0.2s ease all 2s;
+    transition: 0.2s ease all 2s;
+  }
+  .single-item .authorInfoPens {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .single-item .authorInfoPens li &gt; div {
+    border-radius: 0;
+  }
+  .single-item .authorInfoPens li:first-child &gt; div {
+    border-radius: 6px 0 0 0;
+  }
+  .single-item .authorInfoPens li:last-child &gt; div {
+    border-radius: 0 6px 0 0;
+  }
+
+
+
+  .single-item:not(.hide-owner) .single-stat {
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    opacity: 0;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+    -webkit-transition-property: opacity, -webkit-transform;
+    transition-property: opacity, -webkit-transform;
+    transition-property: transform, opacity;
+    transition-property: transform, opacity, -webkit-transform;
+    -webkit-transition-timing-function: cubic-bezier(1, 0, 0.65, 0.75), linear;
+    transition-timing-function: cubic-bezier(1, 0, 0.65, 0.75), linear;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .single-item:not(.hide-owner) .single-stat {
+      -webkit-transform: none;
+      transform: none;
+      -webkit-transition-delay: 0s !important;
+      transition-delay: 0s !important;
+    }
+  }
+  .single-item:not(.hide-owner) .single-stat:nth-child(2) {
+    -webkit-transition-delay: 0.05s;
+    transition-delay: 0.05s;
+  }
+  .single-item:not(.hide-owner):hover .single-stat,
+  .single-item:not(.hide-owner):active .single-stat,
+  .single-item:not(.hide-owner):focus .single-stat {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1;
+    -webkit-transition-timing-function: cubic-bezier(0.2, 0.15, 0.1, 1), ease;
+    transition-timing-function: cubic-bezier(0.2, 0.15, 0.1, 1), ease;
+    -webkit-transition-delay: 0.2s;
+    transition-delay: 0.2s;
+  }
+  .single-item:not(.hide-owner):hover .single-stat:nth-child(2),
+  .single-item:not(.hide-owner):active .single-stat:nth-child(2),
+  .single-item:not(.hide-owner):focus .single-stat:nth-child(2) {
+    -webkit-transition-delay: 0.15s;
+    transition-delay: 0.15s;
+  }
+  .single-item:not(.hide-owner):focus-within .single-stat {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1;
+    -webkit-transition-timing-function: cubic-bezier(0.2, 0.15, 0.1, 1), ease;
+    transition-timing-function: cubic-bezier(0.2, 0.15, 0.1, 1), ease;
+    -webkit-transition-delay: 0.2s;
+    transition-delay: 0.2s;
+  }
+  .single-item:not(.hide-owner):focus-within .single-stat:nth-child(2) {
+    -webkit-transition-delay: 0.15s;
+    transition-delay: 0.15s;
+  }
+  .single-item:not(.hide-owner):focus-within .single-stat:nth-child(3) {
+    -webkit-transition-delay: 0.1s;
+    transition-delay: 0.1s;
+  }
+  
+  
+  .module {
+    display: block;
+    padding: 20px;
+    position: relative;
+    background: #2c303a;
+    border-radius: 6px;
+    margin: 0 0 20px 0;
+  }
+  .module p,
+  .module li,
+  .module .item-content {
+    color: #b7bbc8;
+  }
+  .module .item-content {
+    margin: 0 0 1em 0;
+  }
+  .module:not(.single-collection) &gt; h1,
+  .module:not(.single-collection) &gt; h2,
+  .module:not(.single-collection) &gt; h3,
+  .module:not(.single-collection) &gt; h4,
+  .module:not(.single-post) &gt; h1,
+  .module:not(.single-post) &gt; h2,
+  .module:not(.single-post) &gt; h3,
+  .module:not(.single-post) &gt; h4 {
+    border-bottom: 3px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 10px;
+    position: relative;
+  }
+  .error .module {
+    background: rgba(0, 0, 0, 0.8);
+  }
+  .module .module {
+    background: #2c303a;
+  }
+
+  .flex-wrap {
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+  }
+  
+  .module {
+    display: block;
+    padding: 20px;
+    position: relative;
+    background: #2c303a;
+    border-radius: 6px;
+    margin: 0 0 20px 0;
+  }
+  .module p,
+  .module li,
+  .module .item-content {
+    color: #b7bbc8;
+  }
+  .module .item-content {
+    margin: 0 0 1em 0;
+  }
+  .module:not(.single-collection) &gt; h1,
+  .module:not(.single-collection) &gt; h2,
+  .module:not(.single-collection) &gt; h3,
+  .module:not(.single-collection) &gt; h4,
+  .module:not(.single-post) &gt; h1,
+  .module:not(.single-post) &gt; h2,
+  .module:not(.single-post) &gt; h3,
+  .module:not(.single-post) &gt; h4 {
+    border-bottom: 3px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 10px;
+    position: relative;
+  }
+  .error .module {
+    background: rgba(0, 0, 0, 0.8);
+  }
+  .module .module {
+    background: #2c303a;
+  }
+
+  .direction {
+    position: relative;
+    top: -1px;
+    left: 2px;
+  }
+  .items-in-list-view {
+    width: 100%;
+    margin: 0 0 20px 0;
+    table-layout: fixed;
+    white-space: nowrap;
+  }
+  .items-in-list-view th,
+  .items-in-list-view td {
+    padding: 5px 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .items-in-list-view th {
+    text-align: left;
+  }
+  .items-in-list-view th.stats-header {
+    text-align: center;
+    width: 20%;
+  }
+  .items-in-list-view th.title-header {
+    width: 50%;
+  }
+  .items-in-list-view th.sort-updated_at {
+    width: 15%;
+  }
+  .items-in-list-view th.sort-created_at {
+    width: 15%;
+  }
+  .items-in-list-view th.sorted_asc .sort-icon-up {
+    display: block;
+  }
+  .items-in-list-view th.sorted_desc .sort-icon-down {
+    display: block;
+  }
+  .items-in-list-view .sort-icon {
+    width: 10px;
+    height: 18px;
+    float: left;
+    position: relative;
+    margin-right: 5px;
+    top: 2px;
+  }
+  .items-in-list-view .sort-icon-up,
+  .items-in-list-view .sort-icon-down {
+    display: none;
+  }
+  .items-in-list-view-wrap {
+    overflow-x: auto;
+  }
+  .item-in-list-view {
+    background: rgba(0, 0, 0, 0.2);
+    margin-bottom: 1px;
+    overflow: hidden;
+    color: #9b9dad;
+  }
+  .item-in-list-view:hover {
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+  }
+  .item-in-list-view .title {
+    width: 50%;
+    font-family: &quot;Lato&quot;, &quot;Lucida Grande&quot;, &quot;Lucida Sans Unicode&quot;, Tahoma,
+      Sans-Serif;
+    font-weight: normal;
+    font-size: 1em;
+    margin: 0;
+    white-space: normal;
+  }
+  .item-in-list-view .title a {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+  .item-in-list-view .title a .title-text {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  .item-in-list-view .title a .private-icon {
+    display: inline-block;
+    position: static;
+    float: none;
+    margin-left: 0.25em;
+  }
+  .item-in-list-view .date {
+    font-size: 1em;
+    width: 20%;
+  }
+  .item-in-list-view .stat-value {
+    width: 10%;
+    text-align: right;
+  }
+  .item-in-list-view .stat-value &gt; svg {
+    width: 12px;
+    height: 12px;
+    fill: #9b9dad;
+    position: relative;
+    top: 1px;
+    margin-left: 2px;
+  }
+  .item-in-list-view .stat-value .icon-comment {
+    width: 11px;
+    height: 11px;
+  }
+  .item-in-list-view .stat-value .icon-eye {
+    width: 14px;
+    height: 14px;
+    top: 2px;
+  }
+  @media (max-width: 700px) {
+    .items-in-list-view thead,
+    .items-in-list-view tbody,
+    .items-in-list-view tr,
+    .items-in-list-view td,
+    .items-in-list-view th {
+      display: block;
+    }
+    .items-in-list-view th {
+      display: none;
+    }
+    .items-in-list-view .item-in-list-view {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+      -webkit-box-pack: justify;
+      -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+      justify-content: space-between;
+      padding: 8px 10px;
+      border-bottom: solid 1px #5a5f73;
+    }
+    .items-in-list-view .title {
+      width: 100%;
+      padding: 0;
+      margin: 0 0 2px 0;
+    }
+    .items-in-list-view .date {
+      -webkit-flex-basis: 50%;
+      -ms-flex-preferred-size: 50%;
+      flex-basis: 50%;
+      -webkit-box-flex: 1;
+      -webkit-flex-grow: 1;
+      -ms-flex-positive: 1;
+      flex-grow: 1;
+      padding: 0;
+      margin: 0 0 2px 0;
+    }
+    .items-in-list-view .stat-value {
+      width: auto;
+      padding: 0;
+    }
+  }
+
+  .module {
+    display: block;
+    padding: 20px;
+    position: relative;
+    background: #2c303a;
+    border-radius: 6px;
+    margin: 0 0 20px 0;
+  }
+  .module p,
+  .module li,
+  .module .item-content {
+    color: #b7bbc8;
+  }
+  .module .item-content {
+    margin: 0 0 1em 0;
+  }
+  .module:not(.single-collection) &gt; h1,
+  .module:not(.single-collection) &gt; h2,
+  .module:not(.single-collection) &gt; h3,
+  .module:not(.single-collection) &gt; h4,
+  .module:not(.single-post) &gt; h1,
+  .module:not(.single-post) &gt; h2,
+  .module:not(.single-post) &gt; h3,
+  .module:not(.single-post) &gt; h4 {
+    border-bottom: 3px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 10px;
+    position: relative;
+  }
+  .error .module {
+    background: rgba(0, 0, 0, 0.8);
+  }
+  .module .module {
+    background: #2c303a;
+  }
+  
+  .single-pen-fpo .iframe-wrap {
+    height: 100%;
+  }
+  .single-pen-fpo.collections-fpo .iframe-wrap {
+    background: black;
+  }
+  .iframe-wrap,
+  .thumbnail-wrap {
+    position: relative;
+    height: 0;
+    border-radius: 6px;
+    padding-top: 56.25%;
+    overflow: hidden;
+    background: #444857;
+  }
+  .iframe-wrap iframe,
+  .thumbnail-wrap iframe {
+    width: calc(200% + 5px);
+    height: calc(200% + 5px);
+    border: 0;
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    background: white;
+    -webkit-transform: scale(0.5);
+    transform: scale(0.5);
+    -webkit-transform-origin: top left;
+    transform-origin: top left;
+    -webkit-transition: opacity 1s, visibility 1s;
+    transition: opacity 1s, visibility 1s;
+    opacity: 0;
+    visibility: hidden;
+  }
+  .iframe-wrap iframe.no-hover,
+  .thumbnail-wrap iframe.no-hover {
+    opacity: 1;
+    visibility: visible;
+  }
+  .iframe-wrap.loaded iframe,
+  .featured-pen .iframe-wrap iframe,
+  .thumbnail-wrap.loaded iframe,
+  .featured-pen .thumbnail-wrap iframe {
+    visibility: visible;
+    opacity: 1;
+  }
+  .iframe-wrap .grid-preview-image,
+  .thumbnail-wrap .grid-preview-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-position: center center;
+    background-size: cover;
+  }
+  .preview-loading {
+    background: black;
+    color: #b7bbc8;
+    text-align: center;
+    padding-top: 20%;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+  }
+  .single-title-and-excerpt {
+    position: relative;
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    background: white;
+    padding: 20px;
+    word-break: break-word;
+    overflow: hidden;
+    border-radius: 6px;
+    border-bottom: 3px solid transparent;
+    -webkit-transition: 0.3s ease all;
+    transition: 0.3s ease all;
+  }
+  .single-collection .single-title-and-excerpt {
+    background: black;
+    color: #9b9dad;
+    min-height: 235px;
+  }
+  .single-post:hover .single-title-and-excerpt {
+    border-radius: 6px 6px 0 0;
+    border-bottom-color: #0674ec;
+    cursor: pointer;
+  }
+  .single-collection:hover .single-title-and-excerpt {
+    border-radius: 6px 6px 0 0;
+    border-bottom-color: #ae63e4;
+    cursor: pointer;
+  }
+  .single-collection:hover .single-title-and-excerpt h2 {
+    color: #ae63e4;
+  }
+  .single-title-and-excerpt .post-title a {
+    color: #2c303a;
+    display: block;
+  }
+  .single-title-and-excerpt .post-title a:hover,
+  .single-title-and-excerpt .post-title a:focus {
+    color: #0674ec;
+  }
+  .single-title-and-excerpt .collection-title {
+    color: white;
+    display: block;
+  }
+  .single-title-and-excerpt .item-content a {
+    color: #1f798f;
+    border-bottom: 1px solid #1f798f;
+  }
+  .single-title-and-excerpt .item-content a:hover,
+  .single-title-and-excerpt .item-content a:focus {
+    color: #289cb9;
+    border-bottom: none;
+  }
+  .single-collection .single-title-and-excerpt .item-content a {
+    color: #56bcf9;
+    border-bottom: 1px solid #56bcf9;
+  }
+  .single-collection .single-title-and-excerpt .item-content a:hover,
+  .single-collection .single-title-and-excerpt .item-content a:focus {
+    color: #87d0fb;
+    border-bottom: none;
+  }
+  .single-title-and-excerpt .item-content hr {
+    display: none;
+  }
+  .single-title-and-excerpt .item-content pre,
+  .single-title-and-excerpt .item-content code {
+    word-break: break-word;
+    white-space: pre-wrap;
+  }
+  .single-title-and-excerpt .item-content-long {
+    display: none;
+  }
+
+  .module {
+    display: block;
+    padding: 20px;
+    position: relative;
+    background: #2c303a;
+    border-radius: 6px;
+    margin: 0 0 20px 0;
+  }
+  .module p,
+  .module li,
+  .module .item-content {
+    color: #b7bbc8;
+  }
+  .module .item-content {
+    margin: 0 0 1em 0;
+  }
+
+  .module:not(.single-post) &gt; h1,
+  .module:not(.single-post) &gt; h2,
+  .module:not(.single-post) &gt; h3,
+  .module:not(.single-post) &gt; h4 {
+    border-bottom: 3px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 10px;
+    position: relative;
+  }
+  
+  .user-avatar {
+    border-radius: 18px;
+  }
+  
+  .stats {
+    position: absolute;
+    bottom: -29px;
+    left: -7px;
+    padding: 0 0 0 7px;
+    height: 45px;
+    z-index: 1;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    font-size: 12px;
+    overflow: hidden;
+  }
+  .stats {
+    margin-left: 1rem;
+    height: auto;
+    bottom: -2rem;
+    -webkit-transition: 0.3s ease transform;
+    transition: 0.3s ease transform;
+  }
+  .single-post.hide-owner .stats {
+    bottom: 0;
+  }
+  .stats .single-stat {
+    font: inherit;
+    margin-right: 5px;
+    // background: rgba(0, 0, 0, 0.9);
+    // border-radius: 4px;
+    padding: 0.25rem 0.5rem 0.2rem;
+    // color: white;
+    cursor: pointer;
+  }
+  .stats .single-stat svg {
+    -webkit-transition: 0.1s ease all;
+    transition: 0.1s ease all;
+  }
+  .stats .single-stat:hover,
+  .stats .single-stat:focus {
+    background: white;
+    color: black;
+  }
+  .stats .single-stat:hover svg,
+  .stats .single-stat:focus svg {
+    fill: #47cf73;
+  }
+  .stats .single-stat.loves:hover,
+  .stats .single-stat.loves:focus {
+    background: white;
+    color: black;
+  }
+  .stats .single-stat.loves:hover svg,
+  .stats .single-stat.loves:focus svg {
+    fill: #f19994;
+  }
+  .stats svg {
+    width: 12px;
+    height: 12px;
+    display: inline-block;
+    position: relative;
+    top: -1px;
+    vertical-align: middle;
+    margin-right: 5px;
+    fill: white;
+  }
+  .stats svg.icon-eye {
+    top: -2px;
+    width: 17px;
+  }
+  .stats svg.icon-heart {
+    width: 13px;
+  }
+  .stats .loves {
+    position: relative;
+  }
+  .stats .loves::after {
+    content: &quot;&quot;;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .stats .loves .icon-heart {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-transition: all 0.25s linear;
+    transition: all 0.25s linear;
+  }
+  .collections-mini-modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    padding: 60px 10px 10px 10px;
+    z-index: 4;
+    text-align: center;
+    border-radius: 5px;
+  }
+  .collection-choice {
+    width: 100%;
+  }
+  .close-button-collections-mini-modal {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+  .close-button-collections-mini-modal svg {
+    pointer-events: none;
+    width: 12px;
+    height: 12px;
+    fill: #b7bbc8;
+  }
+  .close-button-collections-mini-modal:hover svg,
+  .close-button-collections-mini-modal:active svg {
+    fill: white;
+  }
+  .ad {
+    position: relative;
+  }
+  .ad .ad-wrap {
+    max-width: 300px;
+    margin: 0 auto;
+  }
+  .ad .ad-wrap iframe {
+    border: 0;
+  }
+  #bsap_1299665 {
+    font-family: &quot;Lucida Grande&quot;, &quot;Lucida Sans Unicode&quot;, Tahoma, Sans-Serif;
+  }
+  #bsap_1299665 &gt; iframe {
+    width: 100%;
+    height: 250px;
+  }
+  #bsap_1299665 &gt; a &gt; img {
+    width: 100%;
+    max-width: 300px;
+    height: auto !important;
+    display: block;
+  }
+  #bsap_1299665 .adhere {
+    text-align: center;
+    color: white;
+    vertical-align: center;
+  }
+  #bsap_1299665 .adhere:before {
+    content: &quot;&quot;;
+    width: 1px;
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+  }
+  #bsap_1299665 .adhere:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+  #bsap_1299665 .bsap_adhere {
+    display: none;
+  }
+  .carbon-img,
+  .carbon-img img,
+  .carbon-text {
+    display: block;
+  }
+  .carbon-img {
+    margin: 0 0 10px 0;
+  }
+  .carbon-text {
+    font-size: 12px;
+    margin: 0 0 5px 0;
+  }
+  .carbon-text,
+  .carbon-poweredby {
+    line-height: 1.5;
+    color: #9b9dad;
+    text-decoration: none;
+  }
+  .carbon-poweredby {
+    display: none;
+  }
+
+
+  // Posts Feed CSS copied from Facebook
+.box {
+  background: #FFF;
+  border-radius: 4px;
+  // box-shadow: 0 0 50px 5px rgba(0,0,0,.25);
+  height: auto;
+  margin: 0px auto 20px;
+  // max-width: 500px;
+  // overflow: hidden;
+  padding: 20px 0 20px;
+  position: relative;
+  width: 100%;
+}
+.box &gt; [class*&#x3D;&quot;box-&quot;] {
+  margin: 0 auto;
+  padding: 0 30px;
+  position: relative;
+}
+.box &gt; [class*&#x3D;&quot;box-&quot;] img {
+  display: block;
+  width: 100%;
+}
+.box &gt; .box-header {
+  margin: 0 auto;
+  padding: 0 30px 10px;
+  width: initial;
+}
+.box &gt; .box-header &gt; h3 {
+  font-size: 1em;
+  font-weight: 700;
+  height: 60px;
+  margin: 5px auto;
+  overflow: hidden;
+  padding: 5px 0 0;
+  position: relative;
+}
+.box &gt; .box-header &gt; h3 &gt; a {
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+}
+.box &gt; .box-header &gt; h3 &gt; span {
+  color: #9197A3;
+  display: block;
+  font-size: 13px;
+  font-weight: 400;
+  margin-top: 8px;
+}
+.box &gt; .box-header &gt; h3 &gt; span .fa {
+  font-size: 15px;
+  margin-left: 5px;
+}
+
+.box &gt; .box-header &gt; i {
+  position: absolute;
+  float: right;
+  right: 95px;
+  top: 9px;
+  font-size: x-large;
+  cursor: pointer;
+}
+
+.box &gt; .box-header &gt; i:hover {
+  color: #888;
+}
+
+.box &gt; .box-header &gt; span {
+  background: #F4F4F4;
+  border-radius: 3px;
+  color: #BCBFC6;
+  cursor: pointer;
+  font-size: 24px;
+  height: auto;
+  line-height: 18px;
+  // margin: 5px auto 0;
+  // padding: 3px 4px;
+  position: absolute;
+  right: 40px;
+  top: 0;
+}
+.box &gt; .box-header &gt; span:hover {
+  color: #888;
+}
+.box &gt; .box-header &gt; span &gt; i {
+  height: 18px;
+  line-height: 18px;
+}
+.box &gt; .box-header img {
+  border-radius: 100px;
+  float: left;
+  height: 45px;
+  margin: 0px 10px 0 0;
+  object-fit: cover;
+  width: 45px;
+}
+.box &gt; .box-content {
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+  width: initial;
+}
+.box &gt; .box-content &gt; .content {
+  height: auto;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+  width: initial;
+}
+.box &gt; .box-content &gt; .bottom {
+  margin: 0 auto;
+  padding: 0 30px; 
+  position: relative;
+  width: initial;
+}
+.box &gt; .box-content &gt; .bottom &gt; p {
+  color: #71747A;
+  font-size: 15px;
+  line-height: 20px;
+  margin: 0;
+  // padding: 0 0 20px 0;
+}
+.box &gt; .box-content &gt; .bottom &gt; span {
+  background: linear-gradient(to top, rgba(0,0,0,.45), rgba(0,0,0,0));
+  height: 160px;
+  left: 0;
+  line-height: 160px;
+  margin: 0 auto;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  text-align: right;
+  top: -160px;
+  vertical-align: bottom;
+  width: 100%;
+}
+.box &gt; .box-content &gt; .bottom &gt; span &gt; span {
+  background: rgba(0,0,0,.35);
+  border-radius: 4px;
+  bottom: 0;
+  color: #FFF;
+  cursor: pointer;
+  font-size: 20px;
+  margin: 0 30px 25px auto;
+  opacity: .75;
+  overflow: hidden;
+  padding: 10px;
+  position: absolute;
+  right: 0;
+  top: auto;
+  -webkit-transition: all .25s ease-in-out;
+     -moz-transition: all .25s ease-in-out;
+          transition: all .25s ease-in-out;
+}
+.box &gt; .box-content &gt; .bottom &gt; span &gt; span:hover {
+  opacity: 1;
+}
+.box &gt; .box-likes {
+  margin: 0 auto;
+  overflow: hidden;
+  padding: 0 30px;
+  position: relative;
+}
+.box &gt; .box-likes &gt; .post-row {
+  border-top: 1px solid #F4F4F4;
+  padding: 20px 0;
+}
+.box &gt; .box-likes &gt; .post-row &gt; span {
+  display: inline-block;
+  font-size: 13px;
+  margin: 0 2px 0 0;
+  position: relative;
+  vertical-align: middle;
+}
+.box &gt; .box-likes &gt; .post-row:first-child {
+  float: left;
+  width: 60%;
+}
+.box &gt; .box-likes &gt; .post-row:last-child {
+  float: left;
+  text-align: end;
+  width: 40%;
+}
+.box &gt; .box-likes &gt; .post-row:first-child &gt; span:nth-child(4) {
+  background: #4D679F;
+  border-radius: 50px;
+  font-weight: bold;
+  padding: 0 8px 0 6px;
+}
+.box &gt; .box-likes &gt; .post-row:first-child &gt; span:nth-child(4) &gt; a {
+  color: #FFF;
+}
+.box &gt; .box-likes &gt; .post-row:first-child &gt; span,
+.box &gt; .box-likes &gt; .post-row:last-child &gt; span {
+  color: #9197A3;
+}
+.box &gt; .box-likes &gt; .post-row:last-child &gt; span {
+  display: inline-block;
+  verrtical-align: middle;
+}
+.box &gt; .box-likes &gt; .post-row img {
+  border-radius: 100px;
+  height: 28px;
+  object-fit: cover;
+  width: 28px;
+}
+.box &gt; .box-buttons {
+  margin: 0 auto;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+}
+.box &gt; .box-buttons *,*::before,*::after {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.box &gt; .box-buttons &gt; .post-row {
+  border-bottom: 1px solid #F4F4F4;
+  border-top: 1px solid #F4F4F4;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+}
+.box &gt; .box-buttons &gt; .post-row &gt; button:last-child {
+  border: 0;
+}
+.box &gt; .box-buttons &gt; .post-row &gt; button {
+  background: #FFF;
+  border: 0;
+  border-right: 1px solid #F4F4F4;
+  color: #9197A3;
+  font-size: 20px;
+  float: left;
+  height: 60px;
+  line-height: 60px;
+  margin: 0;
+  *outline: 1px #08F;
+  padding: 0;
+  width: 33.33333333333%;
+}
+.box &gt; .box-buttons &gt; .post-row &gt; button:hover {
+  background: #F5F5F5;
+  color: #7D8696;
+}
+.box &gt; .box-buttons &gt; .post-row &gt; button:focus {
+  background: #F0F2F2;
+  color: #6C7588;
+  box-shadow: inset 0 0 10px rgba(0,0,0,.2);
+  outline-color: #08F;
+}
+.box &gt; .box-click {
+  color: #4D679F;
+  font-size: 13px;
+  margin: 0 auto;
+  overflow: hidden;
+  padding: 10px 30px;
+  position: relative;
+}
+.box &gt; .box-click &gt; span {
+  cursor: pointer;
+}
+.box &gt; .box-click &gt; span i {
+  font-size: 18px;
+  margin-right: 5px;
+}
+.box &gt; .box-new-comment {
+  background: #e8e9ed;
+  margin: 0;
+  // overflow: hidden;
+  padding: 10px 30px;
+  position: relative;
+}
+.box &gt; .box-new-comment &gt; img {
+  border-radius: 100px;
+  float: left;
+  height: 40px;
+  margin: 0;
+  object-fit: cover;
+  width: 40px;  
+}
+.box &gt; .box-new-comment &gt; .content {
+  border-radius: 20px;
+  margin: 0px 0 0 52px;
+  // overflow: hidden;
+  padding: 0;
+  position: relative;
+  width: initial;
+  -webkit-transition: all .25s ease-in-out;
+     -moz-transition: all .25s ease-in-out;
+          transition: all .25s ease-in-out;
+}
+.box &gt; .box-new-comment &gt; .content &gt; .post-row {
+  background: transparent;
+  display: inline-block;
+  // height: 32px;
+  height: auto;
+  min-height: 30px;
+  // overflow: hidden;
+  position: relative;
+  vertical-align: middle;
+  width: 100%;
+  -webkit-transition: all .25s ease-in-out;
+     -moz-transition: all .25s ease-in-out;
+          transition: all .25s ease-in-out;
+}
+.box &gt; .box-new-comment &gt; .content &gt; .post-row:last-child {
+  color: #C6C9D0;
+  font-size: 22px;
+  height: 28px;
+  line-height: 27px;
+  margin: 2px 0;
+  position: absolute;
+  text-align: center;
+  top: 0;
+  right: 10px;
+  width: 40px;
+}
+.box &gt; .box-new-comment &gt; .content &gt; .post-row:last-child &gt; span {cursor: pointer;}
+.box &gt; .box-new-comment &gt; .content &gt; .post-row &gt; textarea {
+  border: 1px solid transparent;
+  border-radius: 20px;
+  color: #555;
+  outline: 0;
+  padding: 0 40px 0 10px;
+  resize: none;
+  width: calc(100% - 52px) !important;
+  -webkit-transition: all .25s ease-in-out;
+     -moz-transition: all .25s ease-in-out;
+          transition: all .25s ease-in-out;
+}
+.box.update,
+.box.text {
+  border: 1px solid #E0E1E4;
+  box-shadow: none;
+  padding: 20px 0 0;
+}
+.box.update &gt; .box-header,
+.box.text &gt; .box-header {
+  padding: 0 30px;
+}
+.box.update &gt; .box-header &gt; span,
+.box.text &gt; .box-header &gt; span{
+  background: transparent;
+  color: #e8e9ed;
+  font-size: 32px;
+  margin: -10px auto 0;
+}
+.box.update &gt; .box-content &gt; .content &gt; p,
+.box.text &gt; .box-content &gt; .content &gt; p {
+  border-top: 1px solid #F4F4F4;
+  color: #4D5057;
+  font-size: 14px;
+  line-height: 22px;
+  padding: 26px 30px;
+}
+.box.update &gt; .box-content &gt; .content &gt; .img {
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+  width: initial;
+}
+.box.update &gt; .box-content &gt; .content &gt; .img:before {
+  border: 1px solid rgba(0,0,0,.25);
+  bottom: 0;
+  content: &quot;&quot;;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100%;
+}
+.box.text &gt; .box-buttons &gt; .post-row &gt; button {
+  font-size: 13px;
+}
+.box.text &gt; .box-buttons &gt; .post-row &gt; button &gt; span {
+  font-size: 20px;
+}
+.box.image &gt; .box-new-comment &gt; .content,
+.box.image &gt; .box-new-comment &gt; .content &gt; .post-row &gt; textarea,
+.box.video &gt; .box-new-comment &gt; .content,
+.box.video &gt; .box-new-comment &gt; .content &gt; .post-row &gt; textarea {
+  background: #e8e9ed;
+  -webkit-transition: all .25s ease-in-out;
+     -moz-transition: all .25s ease-in-out;
+          transition: all .25s ease-in-out;  
+}
+  </code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><article class="single-post single-item" *ngIf="false">    <header class="header">        <a [routerLink]="[\'/\', \'dashboard\', \'profile\', p?.createdBy?._id ]" class="authorAvatar">            <img [src]="p?.createdBy?.avatar ? ((s3FilesBucketURL + p.createdBy.avatar) | safe: \'resourceUrl\') : anonymousAvatar"                class="user-avatar" width="40" height="40"></a>        <div class="titleAndAuthor">            <address class="author" style="margin-bottom: 0;"><a                    [routerLink]="[\'/\', \'dashboard\', \'profile\', p?.createdBy?._id ]"                    class="authorName">{{p?.createdBy?.name}}</a></address>            <p>{{p?.createdBy?.currentJobDetails?.jobProfile ? p?.createdBy?.currentJobDetails?.jobProfile : \'-\'}}            </p>        </div>        <div class="action-menu">            {{fromNow(p?.createdAt)}}        </div>    </header>    <div class="single-title-and-excerpt">        <!-- Post Title -->        <h2 class="post-title" *ngIf="p?.name">            <a style="display: inline-block;" (click)="postService?.redirectToPostDetails(p)">{{p?.name}}</a>            <!-- Post Actions -->            <!-- <span style="float: right;" *ngIf="p?.createdBy?._id === authService?.loggedInUser?._id">                <button mat-icon-button [matMenuTriggerFor]="optionsMenu"                    aria-label="Example icon-button with a menu">                    <mat-icon>more_horiz</mat-icon>                </button>                <mat-menu #optionsMenu="matMenu">                    <button mat-menu-item (click)="postService?.editPost(p)">                        <mat-icon>edit</mat-icon>                        <span>Edit</span>                    </button>                    <button mat-menu-item (click)="deletePost(p._id)">                        <mat-icon>delete</mat-icon>                        <span>Delete</span>                    </button>                </mat-menu>            </span> -->        </h2>        <!-- Post Content -->        <div class="item-content">            <app-editor [readOnly]="true" [editorStyle]="{border: \'none\', padding: \'10px 0\'}" [data]="p?.description"                [id]="p?._id"></app-editor>        </div>        <!-- Post Tags -->        <div>            <span *ngFor="let t of p?.tags"                style="background: rgba(6, 116, 236, 0.1); display: inline-block;            padding: 0 15px; line-height: 32px;            color: #0674ec; margin-right: 10px;font-size: 15px;font-weight: 200;-webkit-border-radius: 100px;border-radius: 100px;">{{t?.name}}</span>        </div>    </div>    <footer class="stats">        <a class="single-stat invisible-button loves loves heart-button loved-0">            <mat-icon style="color: crimson;" class="vertical-align-middle">favorite</mat-icon>            <span class="count"> {{p?.likeCount ? p?.likeCount : 0}}</span>        </a>        <a class="single-stat comments">            <mat-icon style="color: #0674ec;" class="vertical-align-middle">comment</mat-icon>            <span class="count"> {{p?.comments?.length}}</span>        </a>    </footer></article><!-- Single Post UI --><div class="box image common-box-shadow">    <div class="box-header">        <!-- Post Title -->        <h2 class="post-title" *ngIf="p?.name">            <a style="display: inline-block;" (click)="postService?.redirectToPostDetails(p)">{{p?.name}}</a>        </h2>        <!-- USER\'S AVATAR & NAME -->        <h3>            <a [routerLink]="[\'/\', \'dashboard\', \'profile\', p?.createdBy?._id ]">                <img [src]="p?.createdBy?.avatar ? ((s3FilesBucketURL + p?.createdBy?.avatar) | safe: \'resourceUrl\') : anonymousAvatar"                    alt="" />{{p?.createdBy?.name}}            </a>            <span>{{fromNow(p?.createdAt)}} <i class="fa fa-globe"></i></span>        </h3>        <!-- Post Actions -->        <!-- <i class="fad fa-check-circle" *ngIf="p[\'__edit\']" (click)="updatePost(p, singlePostEditor)"></i> -->        <span style="float: right; display: none" *ngIf="p?.createdBy?._id === authService?.loggedInUser?._id">            <button mat-icon-button [matMenuTriggerFor]="optionsMenu" aria-label="Example icon-button with a menu">                <mat-icon>more_horiz</mat-icon>            </button>            <mat-menu #optionsMenu="matMenu">                <button mat-menu-item (click)="p[\'__edit\'] = !p[\'__edit\']">                    <mat-icon>edit</mat-icon>                    <span>Edit</span>                </button>                <button mat-menu-item (click)="deletePost(p?._id)">                    <mat-icon>delete</mat-icon>                    <span>Delete</span>                </button>            </mat-menu>        </span>        <!-- <span><i class="fa fa-angle-down"></i></span> -->        <div class="window"><span></span></div>    </div>    <div class="box-content">        <div class="content">            <img alt="" />        </div>        <div class="bottom">            <p [ngClass]="readMore ? \'readMore\' : \'\'">                <!---------------- SINGLE POST EDITOR --------------->                <app-editor #singlePostEditor [editorStyle]="{background: \'white\'}" [data]="p?.description"                    [id]="\'post\' + p?._id" [readOnly]="!p[\'__edit\']" [blockLevelComments]="!readMore"                    [commentType]="\'post\'" [post]="p" [commentsList]="(commentService.commentsList$ | async)">                </app-editor>            </p>            <span><span class="fa fa-search-plus"></span></span>        </div>    </div>    <!-- Post Tags -->    <div style="padding: 10px 0 0 30px;">        <span *ngFor="let t of p?.tags"            style="background: rgba(6, 116, 236, 0.1); display: inline-block;                padding: 0 15px; line-height: 32px;                color: #0674ec; margin-right: 10px;font-size: 15px;font-weight: 200;-webkit-border-radius: 100px;border-radius: 100px;">{{t?.name}}</span>    </div>        <!-- Read More Button to Fetch comments and show full description-->    <div class="ce-block" *ngIf="readMore" style="padding: 10px 0 0 30px;" (click)="readMore = false; fetchComments(p)">        <a>Read More...</a></div>    <div class="box-likes">        <div class="post-row" style="display: none; padding: 0;">            <span><a href="#"><img src="https://goo.gl/oM0Y8G" alt="" /></a></span>            <span><a href="#"><img src="https://goo.gl/vswgSn" alt="" /></a></span>            <span><a href="#"><img src="https://goo.gl/4W27eB" alt="" /></a></span>            <span><a href="#">+99</a></span>            <span>Like this</span>        </div>        <!-- Show Number of Likes & Comments -->        <footer style="float: left; margin-left: -18px;">            <a mat-button class="single-stat invisible-button loves loves heart-button loved-0">                <mat-icon style="color: crimson;" class="vertical-align-middle">favorite</mat-icon>                <span class="count"> {{p?.likeCount ? p?.likeCount : 0}}</span>            </a>            <a mat-button class="single-stat comments" (click)="readMore = false; fetchComments(p) ">                <mat-icon style="color: #0674ec;" class="vertical-align-middle">comment</mat-icon>                <span class="count"> {{p?.comments?.length}}</span>            </a>        </footer>        <!-- <div class="post-row" style="padding: 0; border: none;">            <span>{{p?.comments?.length}} comments</span>        </div> -->    </div>    <!-- <div class="box-buttons">                <div class="post-row">                    <button><span class="fa fa-thumbs-up"></span></button>                    <button (click)="p[\'__show\'] = !p[\'__show\']"><span class="fas fa-comment-lines"></span></button>                    <button><span class="ion-share"></span></button>                </div>            </div> -->    <!-- <div class="box-click"><span><i class="ion-chatbox-working"></i> View 140 more comments</span></div> -->    <!-- Show List of Comments + Add Comment UI only when user clicks on read more or comment icon -->    <div class="box-comments" style="border-top: 2px solid #f4f4f4;" *ngIf="readMore === false">        <div class="thread">            <ul class="media-list thread-list" style="padding: 10px 0px 0px 0px; list-style: none;">                <div *ngFor="let com of (commentService.commentsList$ | async)">                    <li *ngIf="!com?.blockSpecificComment" class="single-thread">                        <app-comment [comment]="com"></app-comment>                    </li>                </div>            </ul>        </div>    </div>    <!-- Show List of Comments + Add Comment UI only when user clicks on read more or comment icon -->    <div class="box-new-comment" *ngIf="readMore === false">        <img [src]="authService?.loggedInUser?.avatar ? ((s3FilesBucketURL + authService?.loggedInUser?.avatar) | safe: \'resourceUrl\') : anonymousAvatar"            alt="" />        <div class="content">            <!-- <div class="post-row"> -->            <!---------------- ADD COMMENT EDITOR --------------->            <app-editor #addCommentEditor [placeholder]="\'Write a comment\'"                [editorStyle]="{ width: \'84%\', background: \'white\', padding: \'0 12px 0 12px\', \'border-radius\': \'20px\'}"                [id]="\'comment\' + p?._id"></app-editor>            <!-- </div> -->            <div class="post-row">                <button style="float: right;" type="button" class="btn btn--sm btn--round"                    (click)="addComment(addCommentEditor)">Post</button>            </div>        </div>    </div></div></div>'
+    var COMPONENTS = [{'name': 'AboutUsComponent', 'selector': 'app-about-us'},{'name': 'AddAssigneeComponent', 'selector': 'app-add-assignee'},{'name': 'AddAssignmentComponent', 'selector': 'app-add-assignment'},{'name': 'AddBusinessChallengeComponent', 'selector': 'app-add-business-challenge'},{'name': 'AddBusinessCoachComponent', 'selector': 'app-add-business-coach'},{'name': 'AddBusinessGoalComponent', 'selector': 'app-add-business-goal'},{'name': 'AddBusinessServicesComponent', 'selector': 'app-add-business-services'},{'name': 'AddCapitalFundingComponent', 'selector': 'app-add-capital-funding'},{'name': 'AddCareerCoachComponent', 'selector': 'app-add-career-coach'},{'name': 'AddCollaboratorsComponent', 'selector': 'app-add-collaborators'},{'name': 'AddCompanyComponent', 'selector': 'app-add-company'},{'name': 'AddCompanyPostComponent', 'selector': 'app-add-company-post'},{'name': 'AddCompetitiveAdvantageComponent', 'selector': 'app-add-competitive-advantage'},{'name': 'AddCustomerProfileComponent', 'selector': 'app-add-customer-profile'},{'name': 'AddCustomerTemplateComponent', 'selector': 'app-add-customer-template'},{'name': 'AddDesignComponent', 'selector': 'app-add-design'},{'name': 'AddDreamjobComponent', 'selector': 'app-add-dreamjob'},{'name': 'AddEventComponent', 'selector': 'app-add-event'},{'name': 'AddGoalComponent', 'selector': 'app-add-goal'},{'name': 'AddHiringProcessComponent', 'selector': 'app-add-hiring-process'},{'name': 'AddHowtodocComponent', 'selector': 'app-add-howtodoc'},{'name': 'AddInterviewComponent', 'selector': 'app-add-interview'},{'name': 'AddJobComponent', 'selector': 'app-add-job'},{'name': 'AddLeadershipChallengeComponent', 'selector': 'app-add-leadership-challenge'},{'name': 'AddMarketingChallengeComponent', 'selector': 'app-add-marketing-challenge'},{'name': 'AddMarketingGoalComponent', 'selector': 'app-add-marketing-goal'},{'name': 'AddMissionComponent', 'selector': 'app-add-mission'},{'name': 'AddPostMenuComponent', 'selector': 'app-add-post-menu'},{'name': 'AddPostTypeComponent', 'selector': 'app-add-post-type'},{'name': 'AddProductsComponent', 'selector': 'app-add-products'},{'name': 'AddRequirementsComponent', 'selector': 'app-add-requirements'},{'name': 'AddSalesChallengeComponent', 'selector': 'app-add-sales-challenge'},{'name': 'AddSalesGoalComponent', 'selector': 'app-add-sales-goal'},{'name': 'AddSocialImpactGoalComponent', 'selector': 'app-add-social-impact-goal'},{'name': 'AddStartupGoalComponent', 'selector': 'app-add-startup-goal'},{'name': 'AddStressManagementComponent', 'selector': 'app-add-stress-management'},{'name': 'AddTeamChallengeComponent', 'selector': 'app-add-team-challenge'},{'name': 'AddTeamGoalComponent', 'selector': 'app-add-team-goal'},{'name': 'AddTeamskillComponent', 'selector': 'app-add-teamskill'},{'name': 'AddTechnicalChallengeComponent', 'selector': 'app-add-technical-challenge'},{'name': 'AddTechnicalGoalComponent', 'selector': 'app-add-technical-goal'},{'name': 'AddTestingComponent', 'selector': 'app-add-testing'},{'name': 'AdvocatesInfluencersComponent', 'selector': 'app-advocates-influencers'},{'name': 'AffordableComponent', 'selector': 'app-affordable'},{'name': 'AiStrategyComponent', 'selector': 'app-ai-strategy'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AskforhelpComponent', 'selector': 'app-askforhelp'},{'name': 'AuthComponent', 'selector': 'app-auth'},{'name': 'AutocompleteComponent', 'selector': 'app-autocomplete'},{'name': 'BreadcumbComponent', 'selector': 'app-breadcumb'},{'name': 'BriefPostComponent', 'selector': 'app-brief-post'},{'name': 'BusinessCoachListComponent', 'selector': 'app-business-coach-list'},{'name': 'CareerCoachListComponent', 'selector': 'app-career-coach-list'},{'name': 'CartComponent', 'selector': 'app-cart'},{'name': 'CheckoutComponent', 'selector': 'app-checkout'},{'name': 'CommentComponent', 'selector': 'app-comment'},{'name': 'CommunityImpactStoriesComponent', 'selector': 'app-community-impact-stories'},{'name': 'CompaniesComponent', 'selector': 'app-companies'},{'name': 'CompaniesListComponent', 'selector': 'app-companies-list'},{'name': 'CompanyDetailsComponent', 'selector': 'app-company-details'},{'name': 'ConfirmCodeComponent', 'selector': 'app-confirm-code'},{'name': 'CrmComponent', 'selector': 'app-crm'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'DatatableComponent', 'selector': 'app-datatable'},{'name': 'DedicatedTeamComponent', 'selector': 'app-dedicated-team'},{'name': 'DetailsComponent', 'selector': 'app-details'},{'name': 'DreamJobDetailsComponent', 'selector': 'app-dream-job-details'},{'name': 'DreamjobListComponent', 'selector': 'app-dreamjob-list'},{'name': 'DreamJobMentorsComponent', 'selector': 'app-dream-job-mentors'},{'name': 'EditorComponent', 'selector': 'app-editor'},{'name': 'EditUserProfileComponent', 'selector': 'app-edit-user-profile'},{'name': 'EmailMarketingComponent', 'selector': 'app-email-marketing'},{'name': 'EventComponent', 'selector': 'app-event'},{'name': 'EventDetailsComponent', 'selector': 'app-event-details'},{'name': 'ExitStrategyComponent', 'selector': 'app-exit-strategy'},{'name': 'ForgotPasswordComponent', 'selector': 'app-forgot-password'},{'name': 'GetWorkDoneComponent', 'selector': 'app-get-work-done'},{'name': 'HelpComponent', 'selector': 'app-help'},{'name': 'InnovateComponent', 'selector': 'app-innovate'},{'name': 'InviteMembersDialogComponent', 'selector': 'app-invite-members-dialog'},{'name': 'LeadershipTrainingComponent', 'selector': 'app-leadership-training'},{'name': 'LikeDislikeComponent', 'selector': 'app-like-dislike'},{'name': 'LoaderComponent', 'selector': 'app-loader'},{'name': 'MembershipComponent', 'selector': 'app-membership'},{'name': 'MembershipListComponent', 'selector': 'app-membership-list'},{'name': 'MessagesComponent', 'selector': 'app-messages'},{'name': 'MockInterviewsComponent', 'selector': 'app-mock-interviews'},{'name': 'MyProfileComponent', 'selector': 'app-my-profile'},{'name': 'MyRsvpComponent', 'selector': 'app-my-rsvp'},{'name': 'NavBarComponent', 'selector': 'app-nav-bar'},{'name': 'PeerNetworkingComponent', 'selector': 'app-peer-networking'},{'name': 'PostComponent', 'selector': 'app-post'},{'name': 'PostsListComponent', 'selector': 'app-posts-list'},{'name': 'ProductDetailsComponent', 'selector': 'app-product-details'},{'name': 'ProductsListComponent', 'selector': 'app-products-list'},{'name': 'PurchasedItemsListComponent', 'selector': 'app-purchased-items-list'},{'name': 'RealProjectsComponent', 'selector': 'app-real-projects'},{'name': 'ReferralNetworkComponent', 'selector': 'app-referral-network'},{'name': 'ResetPasswordComponent', 'selector': 'app-reset-password'},{'name': 'ResumeGapAnalysisComponent', 'selector': 'app-resume-gap-analysis'},{'name': 'SalesGrowthStrategyComponent', 'selector': 'app-sales-growth-strategy'},{'name': 'SearchComponent', 'selector': 'app-search'},{'name': 'SellingProductsComponent', 'selector': 'app-selling-products'},{'name': 'SendEmailComponent', 'selector': 'app-send-email'},{'name': 'SignInComponent', 'selector': 'app-sign-in'},{'name': 'SignUpComponent', 'selector': 'app-sign-up'},{'name': 'SingleCartProductComponent', 'selector': 'app-single-cart-product'},{'name': 'SocialMediaMarketingComponent', 'selector': 'app-social-media-marketing'},{'name': 'SoftwareDevMenuComponent', 'selector': 'app-software-dev-menu'},{'name': 'StickyComponent', 'selector': 'app-sticky'},{'name': 'StressManagementComponent', 'selector': 'app-stress-management'},{'name': 'SubscriptionDialogComponent', 'selector': 'app-subscription-dialog'},{'name': 'SubscriptionSuccessComponent', 'selector': 'app-subscription-success'},{'name': 'TrainingFromExpertsComponent', 'selector': 'app-training-from-experts'},{'name': 'VideoChatComponent', 'selector': 'app-video-chat'},{'name': 'ViralComponent', 'selector': 'app-viral'},{'name': 'WebsiteComponent', 'selector': 'app-website'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'BriefPostComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+                   
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'BriefPostComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

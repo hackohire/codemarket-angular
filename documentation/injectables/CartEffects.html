@@ -1,0 +1,588 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>codemarket documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">codemarket documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content injectable">
+                   <div class="content-data">
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li>Injectables</li>
+  <li>CartEffects</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/core/store/effects/cart.effects.ts</code>
+        </p>
+
+
+
+
+            <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#addProductToCart$">addProductToCart$</a>
+                            </li>
+                            <li>
+                                <a href="#getCartProductsList$">getCartProductsList$</a>
+                            </li>
+                            <li>
+                                <a href="#getPurchasedItemsByUser$">getPurchasedItemsByUser$</a>
+                            </li>
+                            <li>
+                                <a href="#removeProductFromCart$">removeProductFromCart$</a>
+                            </li>
+                            <li>
+                                <a href="#updateCartTotal$">updateCartTotal$</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+            <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(actions$: Actions, _store: <a href="../interfaces/AppState.html">Store<AppState></a>, sellingService: <a href="../injectables/SellingProductsService.html">SellingProductsService</a>, router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="91" class="link-to-prism">src/app/core/store/effects/cart.effects.ts:91</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>actions$</td>
+                                                  
+                                                        <td>
+                                                                    <code>Actions</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>_store</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../interfaces/AppState.html" target="_self" >Store&lt;AppState&gt;</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>sellingService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/SellingProductsService.html" target="_self" >SellingProductsService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/router/Router" target="_blank" >Router</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+            <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="addProductToCart$"></a>
+                        <span class="name">
+                            <b>
+                            addProductToCart$</b>
+                            <a href="#addProductToCart$"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>this.actions$.pipe(
+        ofType(AddToCart),
+        map(action &#x3D;&gt; action.productId),
+        switchMap((id: string) &#x3D;&gt; {
+            return this.sellingService.addToCart(id);
+        }),
+        map(cartItems &#x3D;&gt; cartItems &amp;&amp; cartItems.length ? cartItems.map(i &#x3D;&gt; i.referenceId) : []),
+        switchMap((cartItems) &#x3D;&gt; [UpdateCartProductList({cartItems}), UpdateCartTotal({cartItems})]),
+        tap(() &#x3D;&gt; this.router.navigate([&#x27;/&#x27;, { outlets: { main: [&#x27;cart&#x27;] } }]))
+    )</code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <b>Decorators : </b>
+                            <br />
+                            <code>
+                                @Effect()<br />
+                            </code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/core/store/effects/cart.effects.ts:33</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="getCartProductsList$"></a>
+                        <span class="name">
+                            <b>
+                            getCartProductsList$</b>
+                            <a href="#getCartProductsList$"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>this.actions$.pipe(
+        ofType(GetCartProductsList),
+        switchMap(() &#x3D;&gt; this.sellingService.getCartItemsList()),
+        map(cartItems &#x3D;&gt; cartItems &amp;&amp; cartItems.length ? cartItems.map(i &#x3D;&gt; i.referenceId) : []),
+        switchMap((cartItems) &#x3D;&gt; [UpdateCartProductList({cartItems}), UpdateCartTotal({cartItems})])
+    )</code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <b>Decorators : </b>
+                            <br />
+                            <code>
+                                @Effect()<br />
+                            </code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="75" class="link-to-prism">src/app/core/store/effects/cart.effects.ts:75</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="getPurchasedItemsByUser$"></a>
+                        <span class="name">
+                            <b>
+                            getPurchasedItemsByUser$</b>
+                            <a href="#getPurchasedItemsByUser$"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>this.actions$.pipe(
+        ofType(GetPurchasedItemsByUser),
+        switchMap(() &#x3D;&gt; this.sellingService.getPurchasedUnitsByUserId()),
+        tap(u &#x3D;&gt; console.log(u)),
+        map((purchasedItems: any[]) &#x3D;&gt; {
+            console.log(purchasedItems);
+            return SetPurchasedItemsByUser({purchasedItems});
+        })
+    )</code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <b>Decorators : </b>
+                            <br />
+                            <code>
+                                @Effect()<br />
+                            </code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="83" class="link-to-prism">src/app/core/store/effects/cart.effects.ts:83</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="removeProductFromCart$"></a>
+                        <span class="name">
+                            <b>
+                            removeProductFromCart$</b>
+                            <a href="#removeProductFromCart$"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>this.actions$.pipe(
+        ofType(RemoveProductFromCart),
+        map(action &#x3D;&gt; action.productId),
+        switchMap((id: string) &#x3D;&gt; {
+            return this.sellingService.removeItemFromCart(id);
+        }),
+        tap(t &#x3D;&gt; console.log(t)),
+        map(cartItems &#x3D;&gt; cartItems &amp;&amp; cartItems.length ? cartItems.map(i &#x3D;&gt; i.referenceId) : []),
+        switchMap((cartItems) &#x3D;&gt; [UpdateCartProductList({cartItems}), UpdateCartTotal({cartItems})])
+        // switchMap((productIds: string[]) &#x3D;&gt; of(UpdateCartProductList({products: productIds}), UpdateCartTotal()))
+    )</code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <b>Decorators : </b>
+                            <br />
+                            <code>
+                                @Effect()<br />
+                            </code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/core/store/effects/cart.effects.ts:61</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="updateCartTotal$"></a>
+                        <span class="name">
+                            <b>
+                            updateCartTotal$</b>
+                            <a href="#updateCartTotal$"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>this.actions$.pipe(
+        ofType(UpdateCartTotal),
+        // tap((t) &#x3D;&gt; console.log(t)),
+        map(action &#x3D;&gt; action.cartItems),
+        switchMap((list) &#x3D;&gt; list ? of(list) : this._store.select(selectCartProductList)),
+        switchMap((items) &#x3D;&gt; {
+            let total &#x3D; 0;
+            items.forEach((i) &#x3D;&gt; {
+                total +&#x3D; i.price;
+            });
+            return of(total);
+        }),
+        switchMap((total: number) &#x3D;&gt; of(UpdateCartTotalSuccess({cartTotal: total})))
+    )</code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <b>Decorators : </b>
+                            <br />
+                            <code>
+                                @Effect()<br />
+                            </code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/core/store/effects/cart.effects.ts:45</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+</section>
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
+import { Effect, Actions, ofType } from &#x27;@ngrx/effects&#x27;;
+import { Store } from &#x27;@ngrx/store&#x27;;
+import { AppState } from &#x27;../state/app.state&#x27;;
+import { map, withLatestFrom, tap, switchMap} from &#x27;rxjs/operators/&#x27;;
+import { AddToCart, UpdateCartProductList, RemoveProductFromCart, UpdateCartTotal, UpdateCartTotalSuccess, GetPurchasedItemsByUser, SetPurchasedItemsByUser, GetCartProductsList } from &#x27;../actions/cart.actions&#x27;;
+import { selectAllProductsList } from &#x27;../selectors/product.selectors&#x27;;
+import { of } from &#x27;rxjs&#x27;;
+import { selectCartProductList } from &#x27;../selectors/cart.selectors&#x27;;
+import { SellingProductsService } from &#x27;src/app/selling/selling-products.service&#x27;;
+import { Router } from &#x27;@angular/router&#x27;;
+
+@Injectable()
+export class CartEffects {
+
+    @Effect()
+    // addProductToCart$ &#x3D; this.actions$.pipe(
+    //     ofType(AddToCart),
+    //     map(action &#x3D;&gt; action.productId),
+    //     withLatestFrom(this._store.select(selectCartProductList)),
+    //     switchMap(([id, products]) &#x3D;&gt; {
+    //         const i &#x3D; products.length ? products.findIndex(prod &#x3D;&gt; prod &#x3D;&#x3D;&#x3D; id) : -1;
+    //         // products[i].addedToCart &#x3D; true;
+    //         if (i &lt; 0) {
+    //             products.push(id);
+    //         }
+    //         return of(products);
+    //     }),
+    //     tap(t &#x3D;&gt; console.log(t)),
+    //     switchMap((productIds: string[]) &#x3D;&gt; [UpdateCartProductList({products: productIds}), UpdateCartTotal()])
+    // );
+
+    addProductToCart$ &#x3D; this.actions$.pipe(
+        ofType(AddToCart),
+        map(action &#x3D;&gt; action.productId),
+        switchMap((id: string) &#x3D;&gt; {
+            return this.sellingService.addToCart(id);
+        }),
+        map(cartItems &#x3D;&gt; cartItems &amp;&amp; cartItems.length ? cartItems.map(i &#x3D;&gt; i.referenceId) : []),
+        switchMap((cartItems) &#x3D;&gt; [UpdateCartProductList({cartItems}), UpdateCartTotal({cartItems})]),
+        tap(() &#x3D;&gt; this.router.navigate([&#x27;/&#x27;, { outlets: { main: [&#x27;cart&#x27;] } }]))
+    );
+
+    @Effect()
+    updateCartTotal$ &#x3D; this.actions$.pipe(
+        ofType(UpdateCartTotal),
+        // tap((t) &#x3D;&gt; console.log(t)),
+        map(action &#x3D;&gt; action.cartItems),
+        switchMap((list) &#x3D;&gt; list ? of(list) : this._store.select(selectCartProductList)),
+        switchMap((items) &#x3D;&gt; {
+            let total &#x3D; 0;
+            items.forEach((i) &#x3D;&gt; {
+                total +&#x3D; i.price;
+            });
+            return of(total);
+        }),
+        switchMap((total: number) &#x3D;&gt; of(UpdateCartTotalSuccess({cartTotal: total})))
+    );
+
+    @Effect()
+    removeProductFromCart$ &#x3D; this.actions$.pipe(
+        ofType(RemoveProductFromCart),
+        map(action &#x3D;&gt; action.productId),
+        switchMap((id: string) &#x3D;&gt; {
+            return this.sellingService.removeItemFromCart(id);
+        }),
+        tap(t &#x3D;&gt; console.log(t)),
+        map(cartItems &#x3D;&gt; cartItems &amp;&amp; cartItems.length ? cartItems.map(i &#x3D;&gt; i.referenceId) : []),
+        switchMap((cartItems) &#x3D;&gt; [UpdateCartProductList({cartItems}), UpdateCartTotal({cartItems})])
+        // switchMap((productIds: string[]) &#x3D;&gt; of(UpdateCartProductList({products: productIds}), UpdateCartTotal()))
+    );
+
+
+    @Effect()
+    getCartProductsList$ &#x3D; this.actions$.pipe(
+        ofType(GetCartProductsList),
+        switchMap(() &#x3D;&gt; this.sellingService.getCartItemsList()),
+        map(cartItems &#x3D;&gt; cartItems &amp;&amp; cartItems.length ? cartItems.map(i &#x3D;&gt; i.referenceId) : []),
+        switchMap((cartItems) &#x3D;&gt; [UpdateCartProductList({cartItems}), UpdateCartTotal({cartItems})])
+    );
+
+    @Effect()
+    getPurchasedItemsByUser$ &#x3D; this.actions$.pipe(
+        ofType(GetPurchasedItemsByUser),
+        switchMap(() &#x3D;&gt; this.sellingService.getPurchasedUnitsByUserId()),
+        tap(u &#x3D;&gt; console.log(u)),
+        map((purchasedItems: any[]) &#x3D;&gt; {
+            console.log(purchasedItems);
+            return SetPurchasedItemsByUser({purchasedItems});
+        })
+    );
+
+    constructor(
+        private actions$: Actions,
+        private _store: Store&lt;AppState&gt;,
+        private sellingService: SellingProductsService,
+        private router: Router
+    ) {
+
+    }
+}
+</code></pre>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+                   
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
+            var COMPODOC_CURRENT_PAGE_URL = 'CartEffects.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

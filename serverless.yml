@@ -31,6 +31,14 @@ custom:
   apigwBinary:
     types:
       - '*/*'
+  customDomain:
+    domainName: ${self:provider.stage}.codemarket.io
+    basePath: ''
+    certificateName: '*.codemarket.io'
+    createRoute53Record:	false
+    endpointType: 'edge'
+    securityPolicy: tls_1_2
+    stage: ${self:provider.stage}
 
   customDomain:
     domainName: ${self:service}.codemarket.io

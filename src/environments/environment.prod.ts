@@ -20,12 +20,6 @@ export const environment = {
     // Authorized scopes
     scope: ['email', 'profile', 'openid'],
 
-    // Callback URL
-    redirectSignIn: 'https://www.jtinsurance.io', // or 'exp://127.0.0.1:19000/--/', 'myapp://main/'
-
-    // Sign out URL
-    redirectSignOut: 'https://www.jtinsurance.io', // or 'exp://127.0.0.1:19000/--/', 'myapp://main/'
-
     // 'code' for Authorization code grant,
     // 'token' for Implicit grant
     // Note that REFRESH token will only be generated when the responseType is code

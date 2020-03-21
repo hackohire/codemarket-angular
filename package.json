@@ -12,21 +12,25 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "analyze": "webpack-bundle-analyzer dist/browser/stats-es2015.json",
+    "compodoc": "npx compodoc -p tsconfig.app.json",
     "compress": "npx gzipper --verbose ./dist/browser/",
     "compile:server": "webpack --config webpack.server.config.js --progress --colors",
     "serve:ssr": "node dist/server",
     "build:ssr": "npm run build:client-and-server-bundles && npm run compile:server",
     "build:client-and-server-bundles": "yarn run build:only && ng run jtinsurance:server:production --bundleDependencies all",
     "build:browser:prod": "yarn run build:only",
-    "build:browser:serverless": "yarn run build:only",
-    "build:serverless": "npm run build:browser:serverless && npm run build:server:serverless",
-    "build:prod": "npm run build:browser:prod && npm run build:server:prod",
-    "server": "node local.js",
+  
     "build:prod:deploy": "npm run build:prod && npm run deploy",
-    "build:serverless:deploy": "npm run build:serverless && npm run deploy",
-    "deploy": "serverless deploy",
     "build:server:prod": "ng run jtinsurance:server:production && webpack --config webpack.server.config.js --progress --colors",
-    "build:server:serverless": "ng run jtinsurance:server:production && webpack --config webpack.server.config.js --progress --colors"
+    "build:prod": "npm run build:browser:prod && npm run build:server:prod",
+
+    "build:staging:deploy": "npm run build:staging && serverless deploy --stage staging",
+    "build:staging": "node --max_old_space_size=8192 node_modules/@angular/cli/bin/ng build --configuration=staging && npm run build:server:staging",
+    "build:server:staging": "ng run jtinsurance:server:staging && webpack --config webpack.server.config.js --progress --colors",
+
+
+    "server": "node local.js",
+    "deploy": "serverless deploy"
   },
   "private": true,
   "dependencies": {
@@ -92,6 +96,7 @@
     "@angular/cli": "~8.3.20",
     "@angular/compiler-cli": "~8.2.14",
     "@angular/language-service": "~8.2.14",
+    "@compodoc/compodoc": "^1.1.11",
     "@editorjs/editorjs": "^2.15.1",
     "@editorjs/header": "^2.3.0",
     "@editorjs/image": "^2.3.1",

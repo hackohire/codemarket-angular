@@ -12,7 +12,7 @@
                 <img [src]="p?.createdBy?.avatar ? ((s3FilesBucketURL + p?.createdBy?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
                     alt="" />{{p?.createdBy?.name}}
             </a>
-            <span>{{fromNow(p?.createdAt)}} <i class="fa fa-globe"></i></span>
+            <span>{{fromNow(p?.createdAt)}} {{' • '}} {{p?.createdAt | date: 'medium'}} <i class="fa fa-globe"></i></span>
         </h3>
 
         <!-- Post Actions -->

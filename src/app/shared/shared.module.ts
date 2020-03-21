@@ -36,6 +36,7 @@ import { AutocompleteComponent } from './components/autocomplete/autocomplete.co
 import { AddCollaboratorsComponent } from './components/add-collaborators/add-collaborators.component';
 import { AddAssigneeComponent } from './components/add-assignee/add-assignee.component';
 import { PaginatorComponent } from './components/paginator/paginator.component';
+import { AddCommentComponent } from './components/add-comment/add-comment.component';
 
 
 export function hljsLanguages() {
@@ -61,7 +62,8 @@ export function hljsLanguages() {
     AutocompleteComponent,
     AddCollaboratorsComponent,
     AddAssigneeComponent,
-    PaginatorComponent
+    PaginatorComponent,
+    AddCommentComponent
   ],
   imports: [
     CommonModule,
@@ -100,6 +102,7 @@ export function hljsLanguages() {
     BreadcumbComponent,
     EditorComponent,
     CommentComponent,
+    AddCommentComponent,
     DatatableComponent,
     LikeDislikeComponent,
     VideoChatComponent,

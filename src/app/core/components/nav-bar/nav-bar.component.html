@@ -169,7 +169,7 @@
 
     </mat-toolbar>
 
-    <mat-toolbar>
+    <mat-toolbar *ngIf="false">
 
       <!-- Toggle Sidebar Button -->
       <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
@@ -192,30 +192,7 @@
         <span *ngIf="isUnread((messageService.messagesList$ | async)?.messages)" class="notification_count noti" style="height: 5px; min-width: 5px;"></span>
       </a>
 
-      <!-- <div class="icon_wrap" routerLinkActive="mat-primary" [routerLink]="['/', 'messages']">
-        <span style="font-size: 1.5rem !important;" class="vertical-align-middle far fa-bell"></span>
-        <span class="notification_count noti" style="height: 7px; min-width: 7px;"
-          *ngIf="isUnread((messageService.messagesList$ | async)?.messages)"></span>
-      </div> -->
 
-
-      <a mat-button routerLinkActive="mat-primary">
-        <!-- <i style="font-size: 1.0rem !important;" class="vertical-align-middle fal fa-building fa-fw"></i> -->
-
-        <!-- <div class="line-height-initial" > Create Goals </div> -->
-        <app-add-post-menu style="color: #0674ec !important; margin-left: auto;" [label]="'Create Goals'">
-        </app-add-post-menu>
-      </a>
-      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'company', 'add-company']">
-        <!-- <i style="font-size: 1.0rem !important;" class="vertical-align-middle fal fa-building fa-fw"></i> -->
-
-        <div class="line-height-initial"> Sales Accelerator </div>
-      </a>
-      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'post', 'add-dreamjob']">
-        <!-- <i style="font-size: 1.0rem !important;" class="vertical-align-middle fal fa-building fa-fw"></i> -->
-
-        <div class="line-height-initial"> Career Accelerator </div>
-      </a>
 
 
       <!-- <app-add-post-menu style="color: black;"></app-add-post-menu> -->
@@ -298,8 +275,8 @@
             
             <header id="mn_hdr">
                 <div class="logo">
-            <h1><a href="/home" title="Rupert Spira">Rupert Spira</a></h1>
-            <h2>Contemplating the Nature of Experience</h2>
+            <h1><a href="/home" title="Rupert Spira">Joel Drazner</a></h1>
+            <h2>Happiness Coach</h2>
             </div>
             
                 <nav id="mn_nav">
@@ -309,157 +286,37 @@
                 Home
               </a>
             </li>
-            
+
             <li class="dd_btn">
-              <a class="dd_tab dd" title="About Rupert Spira | Non-duality Teachings" href="#">
-                About
+              <a class="dd_tab" href="/home">
+                Media Apperarances
               </a>
-              <div class="menu_dd">
-                <ul>
-                  <li><a title="About Non-Duality" href="/about/non-duality/">About Non-Duality</a></li>
-                                    <li><a title="About Yoga" href="/yoga/">About Yoga</a></li>
-                  <li><a title="About Rupert Spira" href="/about/rupert-spira">About Rupert Spira</a></li>
-                </ul>
-              </div>
             </li>
-            
-                        <li class="dd_btn">
-                            <a class="dd_tab" title="Rupert Spira | Introduction" href="/introduction">
-                                Introduction
-                            </a>
-                        </li>
-            
+
             <li class="dd_btn">
-              <a class="dd_tab dd" href="#">
-                Watch
-              </a>
-              <div class="menu_dd">
-                <ul>
-                                    <li><a href="https://non-duality.rupertspira.com/introduction" title="Watch non-duality videos">Introductory Videos</a></li>
-                  <li><a href="https://non-duality.rupertspira.com/watch" title="Watch non-duality videos" class="dropdown-tabs-override-watch" rel="all">All Video</a></li>
-                  <li><a href="https://non-duality.rupertspira.com/watch/general_meditations_dialogues" title="Watch non-duality meditations and dialogues" class="dropdown-tabs-override-watch" rel="meditations_dialogues">General Meditations &amp; Dialogues</a></li>
-                  <li><a href="https://non-duality.rupertspira.com/watch/yoga_meditations_dialogues" title="Watch non-duality yoga meditations and dialogues" class="dropdown-tabs-override-watch" rel="yoga_meditations_dialogues">Yoga Meditations &amp; Dialogues</a></li>
-                  <li><a href="https://non-duality.rupertspira.com/watch/dialogue" title="Watch non-duality dialogue videos" class="dropdown-tabs-override-watch" rel="dialogue">Dialogue Only</a></li>
-                  <li><a href="https://non-duality.rupertspira.com/watch/yoga_meditations" title="Watch non-duality yoga meditations" class="dropdown-tabs-override-watch" rel="yoga_meditation">Yoga Meditation Only</a></li>
-                  <li><a href="https://non-duality.rupertspira.com/watch/interviews" title="Watch non-duality interviews" class="dropdown-tabs-override-watch" rel="interviews">Interviews</a></li>
-            
-                  <li><a href="https://itunes.apple.com/gb/podcast/essence-non-duality-video/id563549782" title="Subscribe to Rupert\s non-duality meditations and dialogues via iTunes">iTunes Video Podcasts</a></li>
-                  <li><a href="https://non-duality.rupertspira.com/subscriptions/video" title="Annual subscription to non-duality video">Annual Subscription</a></li>
-                  <li><a href="https://non-duality.rupertspira.com/store" title="Non-duality DVDs">DVDs</a></li>
-                                                  </ul>
-              </div>
-            </li>
-            
-            <li class="dd_btn">
-              <a class="dd_tab dd" href="#">
-                Listen
-              </a>
-              <div class="menu_dd">
-                <ul>
-                  <li><a href="https://non-duality.rupertspira.com/listen/#all" title="Listen to non-duality mp3s" class="dropdown-tabs-override-listen" rel="all">All Audio</a></li>
-                  <li><a href="https://non-duality.rupertspira.com/listen/#meditations_dialogues" title="Listen to non-duality meditations and dialogues" class="dropdown-tabs-override-listen" rel="meditations_dialogues">General Meditations &amp; Dialogues</a></li>
-                  <li><a href="https://non-duality.rupertspira.com/listen/#yoga_meditations_dialogues" title="Listen to non-duality yoga meditations and dialogues" class="dropdown-tabs-override-listen" rel="yoga_meditations_dialogues">Yoga Meditations &amp; Dialogues</a></li>
-                  <li><a href="https://non-duality.rupertspira.com/listen/#dialogue" title="Listen to non-duality dialogue videos" class="dropdown-tabs-override-listen" rel="dialogue">Dialogue Only</a></li>
-                  <li><a href="https://non-duality.rupertspira.com/listen/#yoga_meditation" title="Listen to non-duality yoga meditations" class="dropdown-tabs-override-listen" rel="yoga_meditation">Yoga Meditation Only</a></li>
-                  <li><a href="https://non-duality.rupertspira.com/listen/#interviews" title="Listen to non-duality interviews" class="dropdown-tabs-override-listen" rel="interviews">Interviews</a></li>
-                  <li><a href="https://itunes.apple.com/gb/podcast/essence-non-duality-audio/id563550372" title="Subscribe to Rupert\s non-duality meditations and dialogues via iTunes">iTunes Audio Podcasts</a></li>
-                  <li><a href="https://non-duality.rupertspira.com/subscriptions/audio" title="Annual subscription to non-duality audio">Annual Subscription</a></li>
-                                                  </ul>
-              </div>
-            </li>
-            
-            <li class="dd_btn">
-              <a class="dd_tab dd" href="#">
-                Read
-              </a>
-              <div class="menu_dd">
-                <ul>
-                  <li><a href="https://non-duality.rupertspira.com/read" title="Read Non-duality Writings">All</a></li>
-                  <li><a href="https://non-duality.rupertspira.com/read/#essays" title="Read Non-duality Essays">Essays</a></li>
-                  <li><a href="https://non-duality.rupertspira.com/read/#questions" title="Read Non-duality Questions and Answers">Questions &amp; Answers</a></li>
-                  <li><a href="https://non-duality.rupertspira.com/read/#interviews" title="Read Non-duality Interviews">Interviews</a></li>
-                  <li><a href="https://non-duality.rupertspira.com/store" title="Buy Non-duality Books">Books</a></li>
-                  <li><a href="https://non-duality.rupertspira.com/quotes" title="Read Rupert Spira Quotes">Quotes</a></li>
-                </ul>
-              </div>
-            </li>
-            
-            <li class="dd_btn">
-              <a class="dd_tab dd" href="#">
+              <a class="dd_tab" href="/home">
                 Events
               </a>
-              <div class="menu_dd">
-                <ul>
-                  <li><a href="https://non-duality.rupertspira.com/meet/#online" title="Non-duality Events Online">Online</a></li>
-                  <li><a href="https://non-duality.rupertspira.com/meet/#united_kingdom" title="Non-duality Events in the UK">United Kingdom</a></li>
-                  <li><a href="https://non-duality.rupertspira.com/meet/#united_states" title="Non-duality Events in the US">United States</a></li>
-                  <li><a href="https://non-duality.rupertspira.com/meet/#france" title="Non-duality Events in France">France</a></li>
-                  <li><a href="https://non-duality.rupertspira.com/meet/#spain" title="Non-duality Events in Spain">Spain</a></li>
-                  <li><a href="https://non-duality.rupertspira.com/meet/#netherlands" title="Non-duality Events in the Netherlands">Netherlands</a></li>
-                  <li><a href="https://non-duality.rupertspira.com/meet/#denmark" title="Non-duality Events in Denmark">Denmark</a></li>
-                  <li><a href="https://non-duality.rupertspira.com/meet/#italy" title="Non-duality Events in Italy">Italy</a></li>
-                                    <li><a href="https://non-duality.rupertspira.com/meet/#germany" title="Non-duality Events in Germany">Germany</a></li>
-                  <li><a href="https://non-duality.rupertspira.com/meet/#2020" title="Non-duality Events in 2020 ">2020 (All Countries)</a></li>
-                  <li><a href="https://non-duality.rupertspira.com/meet/#2021" title="Non-duality Events in 2021 ">2021 (All Countries)</a></li>
-                                                  </ul>
-              </div>
             </li>
-            
+
             <li class="dd_btn">
-              <a class="dd_tab" href="/webinar">
-                Webinars
+              <a class="dd_tab" href="/home">
+                What They're saying
               </a>
             </li>
             
             <li class="dd_btn">
-              <a class="dd_tab dd" href="#">
-                Store
+              <a class="dd_tab" [routerLink]="['/', 'work-with-joel']">
+                Work with Joel
               </a>
-              <div class="menu_dd">
-                <ul>
-                  <li><a href="https://non-duality.rupertspira.com/store">Books &amp; DVDs</a></li>
-                  <li><a href="https://non-duality.rupertspira.com/watch">Video</a></li>
-                  <li><a href="https://non-duality.rupertspira.com/listen">Audio</a></li>
-                  <li><a href="https://non-duality.rupertspira.com/subscriptions/video">Video Subscriptions</a></li>
-                  <li><a href="https://non-duality.rupertspira.com/subscriptions/audio">Audio Subscriptions</a></li>
-                  <li><a href="https://non-duality.rupertspira.com/meet">Events &amp; Retreats</a></li>
-                </ul>
-              </div>
             </li>
-            
+
             <li class="dd_btn">
-              <a class="dd_tab dd" href="#">
-                Friends
+              <a class="dd_tab" href="/home">
+                Blog
               </a>
-              <div class="menu_dd">
-                <ul>
-                  <li><a href="/friends#links" class="override-friends-links" rel="links">Links</a></li>
-                  <li><a href="/friends#groups" class="override-friends-links" rel="groups">Groups</a></li>
-                                    <li><a href="/friends#youtube" class="override-friends-links" rel="youtube">YouTube</a></li>
-                                    <li><a href="/friends#facebook" class="override-friends-links" rel="facebook">Friends</a></li>
-                </ul>
-              </div>
             </li>
-            
-            <li class="dd_btn">
-              <a class="dd_tab dd" href="#">
-                Contribute
-              </a>
-              <div class="menu_dd">
-                <ul>
-                  <li><a href="/help/volunteer">Volunteer</a></li>
-                  <li><a href="/help/donate">Scholarship Fund</a></li>
-                </ul>
-              </div>
-            </li>
-            
-            <li class="dd_btn">
-              <a class="dd_tab" href="/contact">Contact</a>
-            </li>
-            
-            <li class="dd_btn">
-              <a class="dd_tab" href="http://www.sahajapublications.com" target="_blank">Sahaja Publications</a>
-            </li>
+
             
             </ul><!-- / .dd_nav -->
                 </nav><!-- / #mn_nav -->
@@ -467,7 +324,7 @@
             
             
                         <blockquote id="page_quote">
-                    <p>To begin with I, Awareness, seem to be in the world, then the world seems to be in Me and finally the distinction between Myself and the world dissolves.</p>                </blockquote>
+                    <p>Behind all of our experience, no matter how fraught or emotionally charged, there is unlimited inner peace, unconditional loving, and unbreakable resilience.</p>                </blockquote>
                 </div>
     </div>
 

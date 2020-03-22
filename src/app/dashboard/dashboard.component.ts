@@ -67,7 +67,7 @@ export class DashboardComponent implements OnInit {
   }
 
 
-  // Jane add
+  // Jane add for Insurance Quote
   getQuote(name, email, zipCode, age, sex, coverageAmount, termLength, healthLevel) {
     this.formFieldObject = {
     name: name,

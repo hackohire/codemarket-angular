@@ -49,7 +49,7 @@
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> {{col}} </th>
                 <td mat-cell *matCellDef="let element; let i = index;" (click)="$event.stopPropagation()">
                         <button  *ngIf="element?.createdBy?._id === authService?.loggedInUser?._id" mat-mini-fab color="primary" (click)="postService?.editPost(element)"
-                            [routerLink]="['/', 'sell', 'edit-element', element._id]">
+                            [routerLink]="['/post', 'edit-post', element._id]">
                             <mat-icon>edit</mat-icon>
                         </button>
                         <button  *ngIf="element?.createdBy?._id === authService?.loggedInUser?._id" mat-mini-fab color="warn" (click)="deletePost(element, i)">

@@ -112,11 +112,11 @@
                     <img height="35px" width="35px" style="border-radius: 50%;"
                         [src]="cc?.createdBy?.avatar ? ((s3FilesBucketURL + cc.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar">
                     <h4 mat-line><a>{{cc.name}}</a></h4>
-                    <app-editor mat-line class="business-goal"  (click)="companyService.redirectToCompanyDetails(cc?.company?._id, companyPostTypes.BusinessChallenge)" [editorStyle]="{background: none, border: none, padding: 0, 'font-family': 'roboto'}" [readOnly]="true" [data]="cc?.description"></app-editor>
+                    <app-editor mat-line class="business-goal"  (click)="companyService.redirectToCompanyDetails(cc?.company?._id)" [editorStyle]="{background: none, border: none, padding: 0, 'font-family': 'roboto'}" [readOnly]="true" [data]="cc?.description"></app-editor>
                     <p mat-line> {{cc.createdAt | date}} </p>
                 </mat-list-item>
                 <div class="pagination-area">
-                    <a style="text-decoration: underline; cursor: pointer;" [routerLink]="['/', 'dashboard', 'bugfixes-all']" [queryParams]="{view: companyPostTypes.BusinessChallenge}">+ Load
+                    <a style="text-decoration: underline; cursor: pointer;" [routerLink]="['/', 'dashboard', 'bugfixes-all']">+ Load
                         More</a>
                 </div>
             </mat-list>

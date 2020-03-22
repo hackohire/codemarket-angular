@@ -1,13 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { Store } from '@ngrx/store';
-import { of, Subscription } from 'rxjs';
-import { switchMap, tap } from 'rxjs/operators';
 import { AuthService } from '../../core/services/auth.service';
-import { AppState } from '../../core/store/state/app.state';
 import { BreadCumb } from '../../shared/models/bredcumb.model';
-import { CompanyPostTypes } from '../../shared/models/post-types.enum';
 import { PostStatus } from '../../shared/models/poststatus.enum';
 import { EditorComponent } from '../../shared/components/editor/editor.component';
 import { Post } from '../../shared/models/post.model';
@@ -39,8 +33,6 @@ export class AddPostTypeComponent implements OnInit {
   }
 
   @ViewChild('descriptionEditor', { static: false }) descriptionEditor: EditorComponent;
-
-  subscription$: Subscription;
 
   fields = [
     /** Common Fields */
@@ -95,10 +87,10 @@ export class AddPostTypeComponent implements OnInit {
 
     /** Make the Changes here while creating new post type */
     this.breadcumb = {
-      title: 'Add Company Post Details',
+      title: 'Add Post Type Details',
       path: [
         {
-          name: CompanyPostTypes.CompanyPost
+          name: 'New Post Type'
         }
       ]
     };

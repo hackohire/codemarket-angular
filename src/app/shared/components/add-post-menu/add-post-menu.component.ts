@@ -2,7 +2,7 @@ import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { appConstants } from '../../constants/app_constants';
 import { MatDialog } from '@angular/material/dialog';
 import { AddJobComponent } from '../../../job/add-job/add-job.component';
-import { PostType } from '../../models/post-types.enum';
+import { PostType, CompanyPostTypes, UserProfilePostTypes } from '../../models/post-types.enum';
 import { MatMenuTrigger } from '@angular/material/menu';
 
 @Component({
@@ -15,7 +15,8 @@ export class AddPostMenuComponent implements OnInit {
 
   icons = appConstants.icons;
   postTypes = PostType;
-  postTypesArray = appConstants.postTypesArray;
+  companyPostTypes = CompanyPostTypes;
+  UserProfilePostTypes = UserProfilePostTypes;
 
   @Input() label = 'Add';
 
@@ -27,4 +28,21 @@ export class AddPostMenuComponent implements OnInit {
   openMenu() {
     this.addPostMenu.openMenu();
   }
+
+  openAddJobDialog(): void {
+    const dialogRef = this.dialog.open(AddJobComponent, {
+      width: '630px',
+      height: '550px',
+      maxHeight: '700px',
+      panelClass: 'no-padding',
+      data: null,
+      // disableClose: true
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      // this.animal = result;
+    });
+  }
+
 }

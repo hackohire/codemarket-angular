@@ -10,10 +10,10 @@ import { selectCartListLength } from '../../store/selectors/cart.selectors';
 import { Router } from '@angular/router';
 import { MatDialog, MatAnchor } from '@angular/material';
 import { SearchComponent } from '../search/search.component';
-import { PostType } from '../../../shared/models/post-types.enum';
+import { CompanyPostTypes, UserProfilePostTypes, PostType } from '../../../shared/models/post-types.enum';
 import { MessageService } from '../../../shared/services/message.service';
+import { environment } from '../../../../environments/environment';
 import { PostService } from '../../../shared/services/post.service';
-import { appConstants } from '../../../shared/constants/app_constants';
 
 @Component({
   selector: 'app-nav-bar',
@@ -23,10 +23,9 @@ import { appConstants } from '../../../shared/constants/app_constants';
 export class NavBarComponent implements OnInit, OnDestroy {
 
   @ViewChild('lr', {static: false}) lr: MatAnchor;
+  companyPostTypes = CompanyPostTypes;
+  userProfilePostTypes = UserProfilePostTypes;
   postTypes = PostType;
-
-  postTypesArray = appConstants.postTypesArray;
-
   signUpConfig = {
     // header: 'My Customized Sign Up',
     hideAllDefaults: true,
@@ -63,6 +62,8 @@ export class NavBarComponent implements OnInit, OnDestroy {
   );
 
   cartListLength: Observable<number>;
+
+  messagesPageNumber = 1;
 
   private subscription: Subscription = new Subscription();
 
@@ -103,6 +104,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
         if (u) {
           // this.ref.detach();
           this.loggedInUser = {...u};
+          this.messageService.fetchLatestCommentsForTheUserEngaged(null, u._id);
           // this.ref.detectChanges();
         } else {
           this.loggedInUser = u;

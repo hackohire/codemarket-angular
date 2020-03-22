@@ -35,7 +35,13 @@ export interface Post {
     cover?: string;
     usersAttending?: [User]; /** Only for events */
 
+    /** FOr posts created under user's profile */
+    isPostUnderUser?: boolean;
+    connectedWithUser?: User & string;
+
     cities?: City[];
+    company?: Company & string;
+    isPostUnderCompany?: boolean;
     companies?: [Company & string];
     salaryCurrency?: string;
     salaryRangeFrom?: number;
@@ -43,19 +49,48 @@ export interface Post {
     jobProfile?: [Tag];
     timeline?: number;
 
+    /** Fields related to Career Coach */
+    gapAnalysis?: boolean;
+    careerCoachSessions?: boolean;
+    helpingWithMockInterviews?: boolean;
+    hiringMentoringSessions?: boolean;
+
+    /** Fields related to Business Coach */
+    businessCoachSessions?: boolean;
+    businessAreas?: [Tag];
+    businessGoals?: [Tag];
+    businessChallenges?: [Tag];
+    sellProducts?: {
+        sellProducts?: boolean,
+        products?: [Tag]
+    };
+    sellServices?: {
+        sellServices: boolean,
+        services?: [Tag]
+    };
+
+    /** Fields related to Capital Funding */
+    fundingDate?: string;
+    fundingCurrency?: string;
+    fundingAmount?: string;
+    fundingBy?: [Company & string];
+    fundingTo?: [Company & string];
+    fundingProcess?: [[{
+        type: string;
+        data: BlockToolData
+    }]];
+
+    /** Field related to hiring process */
+    hiringProcess?: [[{
+        type: string;
+        data: BlockToolData
+    }]];
+
     likeCount?: number;
     comments?: Comment[];
+    connectedEvent?: Event | string;
 
     /** Field for collaborator */
     collaborators?: [User];
     assignees?: [User];
-
-    users?: [User];
-
-    /** Contact Related Fields */
-    phone?: [string];
-    email?: [string];
-    birthDate?: string;
-    address?: string;
-    website?: string;
 }

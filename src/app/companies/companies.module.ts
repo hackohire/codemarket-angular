@@ -27,8 +27,7 @@ const companyRoutes: Routes = [
       },
       {
         path: ':companyId',
-        component: CompanyDetailsComponent,
-        // data: { noReuse: true }
+        component: CompanyDetailsComponent
       },
       {
         path: 'edit-company/:companyId',

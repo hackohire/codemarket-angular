@@ -21,6 +21,7 @@ import { LikeDislikeComponent } from './components/like-dislike/like-dislike.com
 import { VideoChatComponent } from '../video-chat/video-chat.component';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { AddPostMenuComponent } from './components/add-post-menu/add-post-menu.component';
+import { SoftwareDevMenuComponent } from './components/software-dev-menu/software-dev-menu.component';
 import { CompaniesListComponent } from '../companies/companies-list/companies-list.component';
 // import { Ng5SliderModule } from 'ng5-slider';
 import { NgSelectModule } from '@ng-select/ng-select';
@@ -33,10 +34,10 @@ import { AddJobComponent } from '../job/add-job/add-job.component';
 import { AddCompanyComponent } from '../companies/add-company/add-company.component';
 import { BriefPostComponent } from './components/brief-post/brief-post.component';
 import { AutocompleteComponent } from './components/autocomplete/autocomplete.component';
+import { AddHowtodocComponent } from '../howtodoc/add-howtodoc/add-howtodoc.component';
+import { AddAssignmentComponent } from '../assignment/add-assignment/add-assignment.component';
 import { AddCollaboratorsComponent } from './components/add-collaborators/add-collaborators.component';
 import { AddAssigneeComponent } from './components/add-assignee/add-assignee.component';
-import { PaginatorComponent } from './components/paginator/paginator.component';
-import { AddCommentComponent } from './components/add-comment/add-comment.component';
 
 
 export function hljsLanguages() {
@@ -47,24 +48,7 @@ export function hljsLanguages() {
   ];
 }
 @NgModule({
-  declarations: [
-    BreadcumbComponent,
-    EditorComponent,
-    CommentComponent,
-    DatatableComponent,
-    SafePipe,
-    LikeDislikeComponent,
-    VideoChatComponent,
-    AddPostMenuComponent,
-    CompaniesListComponent,
-    AddJobComponent,
-    BriefPostComponent,
-    AutocompleteComponent,
-    AddCollaboratorsComponent,
-    AddAssigneeComponent,
-    PaginatorComponent,
-    AddCommentComponent
-  ],
+  declarations: [BreadcumbComponent, EditorComponent, CommentComponent, DatatableComponent, SafePipe, LikeDislikeComponent, VideoChatComponent, AddPostMenuComponent, SoftwareDevMenuComponent, CompaniesListComponent, AddJobComponent, BriefPostComponent, AutocompleteComponent, AddHowtodocComponent, AddAssignmentComponent, AddCollaboratorsComponent, AddAssigneeComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -102,14 +86,15 @@ export function hljsLanguages() {
     BreadcumbComponent,
     EditorComponent,
     CommentComponent,
-    AddCommentComponent,
     DatatableComponent,
     LikeDislikeComponent,
     VideoChatComponent,
     AddPostMenuComponent,
+    SoftwareDevMenuComponent,
     BriefPostComponent,
     AutocompleteComponent,
-    PaginatorComponent,
+    AddHowtodocComponent,
+    AddAssignmentComponent,
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,

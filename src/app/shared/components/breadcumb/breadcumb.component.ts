@@ -29,10 +29,6 @@ export class BreadcumbComponent implements OnInit {
   @Output() editPost = new EventEmitter();
 
   articleLink = new FormControl('', Validators.required);
-
-  anonymousAvatar = '../../../../assets/images/anonymous-avatar.jpg';
-  s3FilesBucketURL = environment.s3FilesBucketURL;
-
   constructor(
     private postService: PostService
   ) { }

@@ -13,13 +13,16 @@ import { EditorComponent } from '../editor/editor.component';
 @Component({
   selector: 'app-comment',
   templateUrl: './comment.component.html',
-  styleUrls: ['./comment.component.scss']
+  styleUrls: ['./comment.component.scss'],
+  providers: [CommentService]
 })
 export class CommentComponent implements OnInit {
 
   @Input() comment: Comment;
   @Input() referenceId: string;
   @Input() companyReferenceId: string;
+  @Input() userReferenceId: string;
+  @Input() postCreatedBy: string;
   // @Output() commentDeleted  = new EventEmitter();
   @Output() allowReplyToParent = new EventEmitter();
   replyCommentForm: FormGroup;

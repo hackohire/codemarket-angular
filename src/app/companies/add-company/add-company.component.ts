@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { BreadCumb } from '../../shared/models/bredcumb.model';
 import { FormGroup, FormArray, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { MatAutocomplete } from '@angular/material';
@@ -7,15 +8,16 @@ import { AuthService } from '../../core/services/auth.service';
 import { ActivatedRoute } from '@angular/router';
 import { FormService } from '../../shared/services/form.service';
 import { catchError, } from 'rxjs/operators';
-import { Subscription, of } from 'rxjs';
+import { Subscription, of, Observable, Subject, concat } from 'rxjs';
 import { Tag } from '../../shared/models/product.model';
 import { CompanyService } from '../company.service';
 import { CompanyTypes, Company } from '../../shared/models/company.model';
 import Swal from 'sweetalert2';
 import { LocationService } from '../../shared/services/location.service';
+import { City } from '../../shared/models/city.model';
 import { environment } from '../../../environments/environment';
 import { PostService } from '../../shared/services/post.service';
-import { PostType } from '../../shared/models/post-types.enum';
+import { PostType, CompanyPostTypes } from '../../shared/models/post-types.enum';
 import { EditorComponent } from '../../shared/components/editor/editor.component';
 
 @Component({
@@ -31,6 +33,7 @@ export class AddCompanyComponent implements OnInit {
   companyTypes = Object.values(CompanyTypes);
 
   postTypes = PostType;
+  companyPostTypes = CompanyPostTypes;
 
   get createdBy() {
     return this.companyForm.get('createdBy');

@@ -137,6 +137,11 @@ export class EventDetailsComponent implements OnInit, OnDestroy {
           this.initializeCommentForm(p, 'post');
           this.fetchPostsConnectedWithEvent(p);
 
+          /** SHow company in breadcrumb */
+          if (p.company && p.company.name) {
+            this.breadcumb.path.unshift({ name: p.company.name });
+          }
+
           /** Subscribe to loggedinuser, once loggedInUse is got, Check if the loggedInUder is
            * in the list of attendess or not
           */

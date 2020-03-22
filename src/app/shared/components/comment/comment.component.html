@@ -45,7 +45,7 @@
                 <!-- <i style="font-size: 1.5rem !important; font-style: normal;" class="fad fa-comment-edit fa-lg"></i> -->
                 Edit
             </a>
-            <span>{{fromNow(comment?.createdAt)}}</span> {{' • '}} <span>{{comment?.createdAt | date: 'medium'}}</span>
+            <span>{{fromNow(comment?.createdAt)}}</span>
             <button *ngIf="edit" style="margin-left: 8px;" type="button" class="btn btn--vsm btn--round" (click)="updateComment(singleCommentEditor)">Update</button>
         </div>
     </div>

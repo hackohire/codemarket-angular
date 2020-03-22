@@ -27,6 +27,7 @@ import { TrainingFromExpertsComponent } from './training-from-experts/training-f
 import { RealProjectsComponent } from './real-projects/real-projects.component';
 import { MockInterviewsComponent } from './mock-interviews/mock-interviews.component';
 import { DreamJobMentorsComponent } from './dream-job-mentors/dream-job-mentors.component';
+import { StressManagementComponent } from './stress-management/stress-management.component';
 import { ResumeGapAnalysisComponent } from './resume-gap-analysis/resume-gap-analysis.component';
 import { PeerNetworkingComponent } from './peer-networking/peer-networking.component';
 import { LeadershipTrainingComponent } from './leadership-training/leadership-training.component';
@@ -34,16 +35,25 @@ import { StickyComponent } from './sticky/sticky.component';
 import { ViralComponent } from './viral/viral.component';
 import { CommunityImpactStoriesComponent } from './community-impact-stories/community-impact-stories.component';
 import { AdvocatesInfluencersComponent } from './advocates-influencers/advocates-influencers.component';
+import { ConfirmCodeComponent } from './auth/confirm-code/confirm-code.component';
+import { AuthComponent } from './auth/auth.component';
+import { SignInComponent } from './auth/sign-in/sign-in.component';
+import { SignUpComponent } from './auth/sign-up/sign-up.component';
 import { LoaderComponent } from './auth/loader/loader.component';
-import { AuthModule } from './auth/auth.module';
-import { StressManagementComponent } from './stress-management/stress-management.component';
-
+import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
 // import { SignInComponent } from './core/amplify/sign-in-component';
 
 @NgModule({
   declarations: [
     AppComponent,
 
+    AuthComponent,
+    SignInComponent,
+    SignUpComponent,
+    ForgotPasswordComponent,
+    ConfirmCodeComponent,
+    ResetPasswordComponent,
     LoaderComponent,
 
     NavBarComponent,
@@ -64,12 +74,12 @@ import { StressManagementComponent } from './stress-management/stress-management
     RealProjectsComponent,
     MockInterviewsComponent,
     DreamJobMentorsComponent,
+    StressManagementComponent,
     ResumeGapAnalysisComponent,
     PeerNetworkingComponent,
     LeadershipTrainingComponent,
     StickyComponent,
     ViralComponent,
-    StressManagementComponent,
     CommunityImpactStoriesComponent,
     AdvocatesInfluencersComponent
   ],
@@ -80,8 +90,7 @@ import { StressManagementComponent } from './stress-management/stress-management
     CoreModule,
     SharedModule,
     BrowserAnimationsModule,
-    LayoutModule,
-    AuthModule
+    LayoutModule
   ],
   providers: [PostDataResolver],
   bootstrap: [AppComponent],

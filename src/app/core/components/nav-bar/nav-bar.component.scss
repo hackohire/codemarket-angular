@@ -307,8 +307,9 @@ div::-webkit-scrollbar-thumb {
 /* end mega menu */
 /* BANNER STYLES */
 #insurance-banner {
-	background-image: url(../../../../assets/images/insurance-banner.png);
-	background-repeat: no-repeat;
+	background-image: url(../../../../assets/images/building.jpeg);
+	// background-repeat: no-repeat;
+	background-repeat: round;
 	margin-right: auto;
 	margin-left: auto;
 	width: 1012px;

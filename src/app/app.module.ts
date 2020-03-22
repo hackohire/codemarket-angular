@@ -42,6 +42,8 @@ import { SignUpComponent } from './auth/sign-up/sign-up.component';
 import { LoaderComponent } from './auth/loader/loader.component';
 import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
+import { ContactComponent } from './contact/contact.component';
+import { GetQuoteComponent } from './get-quote/get-quote.component';
 // import { SignInComponent } from './core/amplify/sign-in-component';
 
 @NgModule({
@@ -81,7 +83,9 @@ import { ResetPasswordComponent } from './auth/reset-password/reset-password.com
     StickyComponent,
     ViralComponent,
     CommunityImpactStoriesComponent,
-    AdvocatesInfluencersComponent
+    AdvocatesInfluencersComponent,
+    ContactComponent,
+    GetQuoteComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

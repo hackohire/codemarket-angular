@@ -27,6 +27,8 @@ import { StickyComponent } from './sticky/sticky.component';
 import { ViralComponent } from './viral/viral.component';
 import { CommunityImpactStoriesComponent } from './community-impact-stories/community-impact-stories.component';
 import { AdvocatesInfluencersComponent } from './advocates-influencers/advocates-influencers.component';
+import { ContactComponent } from './contact/contact.component';
+import { GetQuoteComponent } from './get-quote/get-quote.component';
 // import { PostDataResolver } from './core/resolver';
 
 const routes: Routes = [
@@ -300,7 +302,15 @@ const routes: Routes = [
    {
      path: 'advocates-influencers',
      component: AdvocatesInfluencersComponent
-   }
+   },
+   {
+    path: 'contact',
+    component: ContactComponent
+  },
+  {
+    path: 'get-quote',
+    component: GetQuoteComponent
+  }
   /** Static routes ends here */
 ];
 

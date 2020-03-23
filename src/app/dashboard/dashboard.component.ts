@@ -20,6 +20,10 @@ import { MembershipService } from '../membership/membership.service';
 })
 export class DashboardComponent implements OnInit {
 
+  // Jane add
+  formFieldObject: any;
+  // Jane add end
+
   @ViewChild('successInvitationAccept', { static: false }) successInvitationAccept: SwalComponent;
   productsList$: Observable<Product[]>;
   helpRequestList$: Observable<HelpQuery[]>;
@@ -27,7 +31,7 @@ export class DashboardComponent implements OnInit {
 
   displayedColumnsForHelpRequest: string[] = ['number', 'name', 'price', 'createdBy', 'createdAt'];
   dataSource = new MatTableDataSource();
-  @ViewChild(MatSort, {static: false}) sort: MatSort;
+  @ViewChild(MatSort, { static: false }) sort: MatSort;
 
   constructor(
     private userService: UserService,
@@ -61,5 +65,21 @@ export class DashboardComponent implements OnInit {
     console.log(event);
     this.userService.redirectToUserProfile(event);
   }
+
+
+  // Jane add for Insurance Quote
+  getQuote(name, email, zipCode, age, sex, coverageAmount, termLength, healthLevel) {
+    this.formFieldObject = {
+      name: name,
+      email: email,
+      zipCode: zipCode,
+      age: age,
+      sex: sex,
+      coverageAmount: coverageAmount,
+      termLength: termLength,
+      healthLevel: healthLevel
+    };
+  }
+  // Jane add end
 
 }

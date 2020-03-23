@@ -37,7 +37,7 @@ import { AdvocatesInfluencersComponent } from './advocates-influencers/advocates
 import { LoaderComponent } from './auth/loader/loader.component';
 import { AuthModule } from './auth/auth.module';
 import { StressManagementComponent } from './stress-management/stress-management.component';
-
+import { ClassroomComponent } from './classroom/classroom.component';
 // import { SignInComponent } from './core/amplify/sign-in-component';
 
 @NgModule({
@@ -71,7 +71,8 @@ import { StressManagementComponent } from './stress-management/stress-management
     ViralComponent,
     StressManagementComponent,
     CommunityImpactStoriesComponent,
-    AdvocatesInfluencersComponent
+    AdvocatesInfluencersComponent,
+    ClassroomComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

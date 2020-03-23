@@ -58,8 +58,8 @@ export class MessageService {
           if (isPlatformServer(this.platformId)) {
             this.transferState.set(key, p.data.fetchLatestCommentsForTheUserEngaged);
           }
-          const messages = this.messages$.getValue().messages.concat(p.data.fetchLatestCommentsForTheUserEngaged.messages);
-          this.messages$.next({messages, total: p.data.fetchLatestCommentsForTheUserEngaged.total});
+          const messages = p.data.fetchLatestCommentsForTheUserEngaged;
+          this.messages$.next({messages: messages.messages, total: messages.total});
         }),
       ).subscribe();
     }

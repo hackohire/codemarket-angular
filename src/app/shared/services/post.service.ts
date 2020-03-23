@@ -234,12 +234,7 @@ export class PostService {
   }
 
   editPost(post): void {
-
-    if (post.type === PostType.Product) {
-      this.router.navigate(['/', 'sell', 'edit-product', post._id]);
-    } else {
-      this.router.navigate(['/', 'post', 'edit-' + post.type, post._id]);
-    }
+    this.router.navigate(['/post', 'edit-post', post._id], {queryParams: {type: post.type}});
   }
 
   rsvpEvent(eventId: string): Observable<any> {

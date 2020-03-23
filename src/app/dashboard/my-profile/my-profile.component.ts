@@ -7,14 +7,13 @@ import { UserService } from '../../user/user.service';
 import { User } from '../../shared/models/user.model';
 import { Observable, Subscription, of } from 'rxjs';
 import { VideoChatComponent } from '../../video-chat/video-chat.component';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatPaginator } from '@angular/material';
 import Peer from 'peerjs';
 import { PostType } from '../../shared/models/post-types.enum';
 import { map } from 'rxjs/operators';
 import { PostService } from '../../shared/services/post.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { Post } from '../../shared/models/post.model';
-import { PostStatus } from '../../shared/models/poststatus.enum';
 import { EditorComponent } from '../../shared/components/editor/editor.component';
 import moment from 'moment';
 import { CommentService } from '../../shared/services/comment.service';
@@ -48,7 +47,7 @@ enum navLinkName {
   /** Creating Separate Instance for User Service & Comment Service is very important, Because we are creating the instances of
    * User's posts and then mutating it, for realtime post & comment => add / edit / delete
    */
-  providers: [CommentService, UserService],
+  providers: [UserService],
   animations: [
     trigger('bodyExpansion', [
       state('collapsed', style({ height: '0px', display: 'none' })),
@@ -67,6 +66,9 @@ export class MyProfileComponent implements OnInit {
 
   userData$: Observable<User>;
 
+  postTypesArray = appConstants.postTypesArray;
+  postTypes = PostType;
+
   peer: Peer;
 
   subscription = new Subscription();
@@ -75,13 +77,9 @@ export class MyProfileComponent implements OnInit {
 
   navLinkName = navLinkName;
 
-  postsUnderUser: Post[];
-
-  listOfEvents$: Observable<{ posts: Post[], total: number }>;
-  listOfDreamJobs$: Observable<{ posts: Post[], total: number }>;
-
   listOfAllOtherPosts: { posts: Post[], total?: number } = { posts: [] };
   totalOtherPosts: number;
+  paginator: MatPaginator;
 
   commentForm: FormGroup;
 
@@ -94,8 +92,6 @@ export class MyProfileComponent implements OnInit {
   @ViewChild('profilePic', { static: false }) profilePic;
   selectedProfilePic: File;
   selectedProfilePicURL = '';
-
-  otherPostsPageNumber = 1;
 
   profileViewLinks = [
     // {
@@ -125,54 +121,36 @@ export class MyProfileComponent implements OnInit {
       path: 'my-rsvp',
       showOnlyToLoggedInUser: true
     },
-    {
-      view: navLinkName.events,
-      title: 'Events'
-    },
-    {
-      view: navLinkName.dreamjobs,
-      title: 'Dream Jobs'
-    },
-    {
-      view: 'goals',
-      title: 'Goals',
-      types: [
-        {
-          view: navLinkName.businessgoal,
-          title: 'Business Goals'
-        },
-        {
-          view: navLinkName.startupgoal,
-          title: 'Startup Goals'
-        },
-        {
-          view: navLinkName.technicalgoal,
-          title: 'Technical Goals'
-        }
-      ]
-    },
-    {
-      view: navLinkName.socialimpactgoal,
-      title: 'Social Impact Goals'
-    },
-    {
-      view: 'challenges',
-      title: 'Challenges',
-      types: [
-        {
-          view: navLinkName.leadershipchallenge,
-          title: 'Leadership Challenges'
-        },
-        {
-          view: navLinkName.technicalchallenge,
-          title: 'Technical Challenges'
-        },
-        {
-          view: navLinkName.businesschallenge,
-          title: 'Business Challenges'
-        }
-      ]
-    },
+    // {
+    //   view: navLinkName.events,
+    //   title: 'Events'
+    // },
+    // {
+    //   view: navLinkName.dreamjobs,
+    //   title: 'Dream Jobs'
+    // },
+    // {
+    //   view: navLinkName.socialimpactgoal,
+    //   title: 'Social Impact Goals'
+    // },
+    // {
+    //   view: 'challenges',
+    //   title: 'Challenges',
+    //   types: [
+    //     {
+    //       view: navLinkName.leadershipchallenge,
+    //       title: 'Leadership Challenges'
+    //     },
+    //     {
+    //       view: navLinkName.technicalchallenge,
+    //       title: 'Technical Challenges'
+    //     },
+    //     {
+    //       view: navLinkName.businesschallenge,
+    //       title: 'Business Challenges'
+    //     }
+    //   ]
+    // },
     {
       view: navLinkName.posts,
       title: 'Posts'
@@ -196,7 +174,6 @@ export class MyProfileComponent implements OnInit {
     this.breadcumb = {
       title: 'Profile',
       path: [
-
         {
           name: 'My Profile'
         }
@@ -214,27 +191,6 @@ export class MyProfileComponent implements OnInit {
     // );
   }
 
-  // async addPost(type: string, addPostEditor: EditorComponent) {
-  //   if (this.authService.loggedInUser) {
-  //     const blocks = await addPostEditor.editor.save();
-  //     const post: any = {
-  //       type,
-  //       createdBy: this.authService.loggedInUser._id,
-  //       description: blocks.blocks,
-  //       isPostUnderUser: true,
-  //       connectedWithUser: this.authorId ? this.authorId : this.authService.loggedInUser._id,
-  //       status: PostStatus.Published,
-  //     };
-  //     this.postService.addPost(post).subscribe(p => {
-  //       if (p) {
-  //         addPostEditor.editor.clear();
-  //       }
-  //     });
-  //   } else {
-  //     this.authService.checkIfUserIsLoggedIn(true);
-  //   }
-  // }
-
   deletePost(_id: string) {
     this.postService.deletePost(_id).subscribe();
   }
@@ -246,15 +202,6 @@ export class MyProfileComponent implements OnInit {
     return false;
   }
 
-  async updatePost(post, singlePostEditor: EditorComponent) {
-    const blocks = await singlePostEditor.editor.save();
-    const postToBeUpdated = {};
-    postToBeUpdated['description'] = blocks.blocks;
-    postToBeUpdated['_id'] = post._id;
-    postToBeUpdated['isPostUnderUser'] = true;
-    this.postService.updatePost(postToBeUpdated).subscribe();
-  }
-
   ngOnInit() {
     this.authorId = this.activatedRoute.snapshot.params.authorId;
 
@@ -264,16 +211,14 @@ export class MyProfileComponent implements OnInit {
     if (this.authorId) {
       // this.navLinks = this.navLinks.filter(n => !n.showOnlyToLoggedInUser);
       this.userData$ = this.userService.getUserById(this.authorId);
-      this.fetchPostsConnectedWithUser(this.authorId);
+      // this.fetchPostsConnectedWithUser(this.authorId);
 
-      this.userService.onUsersPostChanges(this.authorId);
-      this.commentService.onCommentAdded({ user: { _id: this.authorId } }, []);
-      this.commentService.onCommentUpdated({ user: { _id: this.authorId } }, []);
-      this.commentService.onCommentDeleted({ user: { _id: this.authorId } }, []);
+      // this.userService.onUsersPostChanges(this.authorId);
+      // this.commentService.onCommentAdded({ user: { _id: this.authorId } }, []);
+      // this.commentService.onCommentUpdated({ user: { _id: this.authorId } }, []);
+      // this.commentService.onCommentDeleted({ user: { _id: this.authorId } }, []);
 
       this.initializeCommentForm(this.authorId, 'post');
-
-      this.loadDataBasedOnViewType(this.profileView);
 
     } else {
       this.userData$ = this.authService.loggedInUser$;
@@ -282,14 +227,12 @@ export class MyProfileComponent implements OnInit {
         this.authService.loggedInUser$.pipe(
           map((user) => {
             if (user) {
-              this.fetchPostsConnectedWithUser(user._id);
-              this.userService.onUsersPostChanges(user._id);
-              this.commentService.onCommentAdded({ user }, []);
-              this.commentService.onCommentUpdated({ user }, []);
-              this.commentService.onCommentDeleted({ user }, []);
+              // this.fetchPostsConnectedWithUser(user._id);
+              // this.userService.onUsersPostChanges(user._id);
+              // this.commentService.onCommentAdded({ user }, []);
+              // this.commentService.onCommentUpdated({ user }, []);
+              // this.commentService.onCommentDeleted({ user }, []);
               this.initializeCommentForm(user._id, 'post');
-
-              this.loadDataBasedOnViewType(this.profileView);
             }
           })
         ).subscribe()
@@ -342,19 +285,6 @@ export class MyProfileComponent implements OnInit {
       );
       // this.router.navigate(['products-list'], { relativeTo: this.activatedRoute });
     }
-
-    this.navLinks.push(
-      {
-        path: 'business-coaches',
-        label: 'Business Coach',
-        queryParams: { userId: this.authorId }
-      },
-      {
-        path: 'career-coaches',
-        label: 'Career Coach',
-        queryParams: { userId: this.authorId }
-      }
-    );
   }
 
   fromNow(date) {
@@ -410,51 +340,18 @@ export class MyProfileComponent implements OnInit {
     } else {
       panel.toggle();
     }
-    this.loadDataBasedOnViewType(category.view);
-  }
-
-  loadDataBasedOnViewType(view) {
-    switch (view) {
-      case navLinkName.events:
-        this.listOfEvents$ = this.postService.getPostsByUserIdAndType(
-          this.authorId ? this.authorId : this.authService.loggedInUser._id,
-          PostStatus.Published,
-          PostType.Event
-        );
-        break;
-
-      case navLinkName.dreamjobs:
-        this.listOfDreamJobs$ = this.postService.getPostsByUserIdAndType(
-          this.authorId ? this.authorId : this.authService.loggedInUser._id,
-          PostStatus.Published,
-          PostType.Dreamjob
-        );
-        break;
-
-      case navLinkName.posts:
-        this.fetchAllOtherPosts();
-        break;
-
-    }
   }
 
   /** Fetch the list of posts for the posts tab based on the pagination */
   fetchAllOtherPosts(postType = '') {
-    this.postService.getAllPosts(
-      { limit: 5, pageNumber: this.otherPostsPageNumber }, postType, '', '', '',
+    const paginationObj = {
+      pageNumber: this.paginator.pageIndex + 1, limit: this.paginator.pageSize ? this.paginator.pageSize : 10,
+      sort: {order: ''}};
+    this.postService.getAllPosts(paginationObj, postType, '', '', '',
       this.authorId ? this.authorId : this.authService.loggedInUser._id,
     ).subscribe((u) => {
-      this.listOfAllOtherPosts.posts = this.listOfAllOtherPosts.posts.concat(u.posts);
+      this.listOfAllOtherPosts.posts = u.posts;
       this.totalOtherPosts = u.total;
-    });
-  }
-
-  fetchPostsConnectedWithUser(userId) {
-    this.postService.getAllPosts({ limit: 0, pageNumber: 0 }, '', '', '', '', userId).subscribe(c => {
-      if (c && c.posts) {
-        this.postsUnderUser = c.posts;
-        this.commentService.usersPostsList = c.posts;
-      }
     });
   }
 

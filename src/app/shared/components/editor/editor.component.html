@@ -107,14 +107,14 @@
                     <div [fxFlex]="blockLevelComments ? '10' : '0'">
                         <ng-container *ngIf="blockLevelComments">
                             <a style="text-align: right; padding: 0 8px; text-decoration: none;" *ngIf="!b['__show']"
-                                mat-button (click)="b['__show'] = true">
-                                <i style="font-size: 1.3rem !important; font-style: normal;" class="fad fa-comments-alt fa-lg"></i>
+                                mat-button (click)=" commentForm?.get('blockId')?.setValue(b?._id); b['__show'] = true">
+                                <i [style.color]=" commentsList && commentsList?.length && numberOfComments(b?._id) > 0 ? '#0674ec' : ''" style="font-size: 1.3rem !important; font-style: normal;" class="fad fa-comments-alt fa-lg"></i>
                                 <span>{{' ('}} {{ commentsList && commentsList?.length ? numberOfComments(b?._id) : 0}}
                                     {{')'}}</span>
                             </a>
                             <a style="padding: 0 8px; text-decoration: none;" *ngIf="b['__show']" mat-button
                                 (click)="b['__show'] = false">
-                                <i style="font-size: 1.3rem !important; font-style: normal;" class="fad fa-chevron-circle-up fa-lg"></i>
+                                <i [style.color]="commentsList && commentsList?.length && numberOfComments(b?._id) > 0 ? '#0674ec' : ''" style="font-size: 1.3rem !important; font-style: normal;" class="fad fa-chevron-circle-up fa-lg"></i>
                                 <span>{{' ('}} {{ commentsList && commentsList?.length ? numberOfComments(b?._id) : 0}}
                                     {{')'}}</span>
                             </a>
@@ -150,27 +150,7 @@
     </div>
 
     <div class="comment-form-area" style="padding-left: 0; padding-right: 0;">
-        <!-- <h4>Leave a comment</h4> -->
-        <!-- comment reply -->
-        <div class="media comment-form">
-            <div class="media-left">
-                <a href="#">
-                    <img class="author_avatar_comment" style="width: 45px; height: 45px;"
-                        [src]="authService?.loggedInUser?.avatar ? ((s3FilesBucketURL + authService?.loggedInUser?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
-                        alt="Commentator Avatar">
-                </a>
-            </div>
-            <div class="media-body">
-                <div [formGroup]="commentForm" class="comment-reply-form">
-                    <app-editor #addCommentEditor [editorStyle]="{padding: '0 15px', 'border-radius': '19px', background: '#f2f3f5', border: 'solid 0.5px rgb(236, 236, 236)'}" [id]="blockId" [placeholder]="'Add Comment'">
-                    </app-editor>
-
-                    <button type="button" style="float: right;" class="btn btn--vsm btn--round"
-                        (click)="addComment(blockId, addCommentEditor)">Post
-                        Comment</button>
-                </div>
-            </div>
-        </div>
+        <app-add-comment [commentForm]="commentForm"></app-add-comment>
         <!-- comment reply -->
     </div>
 </ng-template>

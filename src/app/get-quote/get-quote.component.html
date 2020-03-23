@@ -1,4 +1,4 @@
-<app-breadcumb [title]="breadcumb?.title" [path]="breadcumb?.path" [showImportButton]="true"></app-breadcumb>
+<app-breadcumb [title]="breadcumb?.title" [path]="breadcumb?.path"></app-breadcumb>
 
 
 <div class="container">
@@ -17,15 +17,16 @@
                     <input type="number" matInput formControlName="phone" placeholder="phone">
                 </mat-form-field>
 
-                <mat-form-field class="field-full-width" formControlName="insuranceType">
+                <mat-form-field class="field-full-width">
                     <mat-label>Insurance Type:</mat-label>
-                    <select matNativeControl required>
+                    <select matNativeControl required formControlName="insuranceType">
                       <option value="Commercial">Commercial</option>
                       <option value="Worker">Worker</option>
                       <option value="Life">Life</option>
                       <option value="Health">Health</option>
                       <option value="Home">Home</option>
                       <option value="Auto">Auto</option>
+                      <option value="Auto">Others</option>
                     </select>
                   </mat-form-field>
 

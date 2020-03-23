@@ -62,7 +62,7 @@
                                         </p>
                                         
                                         <!-- Message Time -->
-                                        <p class="time">{{fromNow(m?.createdAt)}}</p>
+                                        <p class="time">{{fromNow(m?.createdAt)}}{{' • '}}{{m?.createdAt | date: 'medium'}}</p>
 
                                         <!-- Actual Comment Text -->
                                         <app-editor

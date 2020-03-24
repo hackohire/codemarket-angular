@@ -6,6 +6,7 @@ import List from '@editorjs/list';
 import Marker from '@editorjs/marker';
 // import Quote from '@editorjs/quote';
 import Table from '@editorjs/table';
+import Delimiter from '@editorjs/delimiter';
 // import Embed from '@editorjs/embed';
 import Embed from '../../../editor-js/plugins/embed';
 import Paragraph from '../../../editor-js/plugins/paragraph/bundle';
@@ -27,7 +28,7 @@ import editorJS from '../../../editor-js/dist/editor';
 import EditorJS, { EditorConfig } from '@editorjs/editorjs';
 import { PostService } from '../../services/post.service';
 import { Subscription } from 'rxjs/internal/Subscription';
-import { PatchedEditor } from './patch-editor';
+
 @Component({
   selector: 'app-editor',
   templateUrl: './editor.component.html',
@@ -36,7 +37,7 @@ import { PatchedEditor } from './patch-editor';
 })
 export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit {
 
-  editor;
+  editor: EditorJS;
   isPlatformBrowser = false;
   @Input() post: Post; /** post for view mode */
   @Input() companyPostId: string;
@@ -104,7 +105,7 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
   ngAfterViewInit(): void {
     /** Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
      * Add 'implements AfterViewInit' to the class.
-    */
+     */
 
     if (!this.readOnly) {
       this.initiateEditor();
@@ -185,7 +186,6 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
 
     console.log(this.id);
     if (isPlatformBrowser(this._platformId)) {
-      // this.goalFormInitialization();
       if (this.importArticleSubscription) {
         this.subscriptions$.add(
           this.postService.contentFromAnotherArticle.subscribe(p => {
@@ -196,7 +196,7 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
         );
       }
 
-      this.editor = new PatchedEditor({
+      this.editor = new editorJS({
         tools: {
           header: Header,
           /** Config Editor.js For Embedding Youtube Videos and Codepen and etc */
@@ -204,6 +204,10 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
             class: Embed,
             inlineToolbar: true
           },
+          delimiter: Delimiter,
+          // delimiter: {
+          //   class: Delimiter
+          // },
           paragraph: {
             class: Paragraph
           },

@@ -10,6 +10,15 @@ fragment Header on HeaderBlock {
     }
 }
 `;
+export const delimiterFragment = gql`
+fragment Delimiter on DelimiterBlock {
+    type
+    _id
+    data {
+      text
+    }
+}
+`;
 
 export const paragraphFragment = gql`
 fragment Paragraph on ParagraphBlock {
@@ -139,6 +148,7 @@ export const description = gql`
         ...Warning
         ...Embed
         ...LinkTool
+        ...Delimiter
     }
     ${codeFragment}
     ${imageFragment}
@@ -150,6 +160,7 @@ export const description = gql`
     ${warningFragment}
     ${embedFragment}
     ${linkToolFragment}
+    ${delimiterFragment}
 `;
 
 const CommentFragment = gql`

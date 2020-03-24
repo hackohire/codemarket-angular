@@ -102,7 +102,12 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div *ngSwitchCase="'delimiter'">
+                            <div class="ce-delimiter cdx-block"></div>
+                        </div>
                     </div>
+                   
 
                     <!-- Icon to view / collapse comments section -->
                     <div [fxFlex]="blockLevelComments ? '10' : '0'">

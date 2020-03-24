@@ -216,6 +216,7 @@ div::-webkit-scrollbar-thumb {
 	border: 1px solid #ccc;
 	background: #1b2f64;
 	text-align: left;
+	z-index: 100;
 }
 .dropdown_1column {
 	width: 190px;

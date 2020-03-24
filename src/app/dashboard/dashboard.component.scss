@@ -1,6 +1,16 @@
 @import '../../assets/css/_general.scss';
 @import '../../assets/css/_theme.scss';
 
+#insurance-banner {
+	background-image: url(../../assets/images/building.jpg);
+	background-repeat: round;
+    margin-right: auto;
+    background-size: cover;
+    margin-left: auto;
+    width: 958px;
+    height: 217px;
+}
+
 .blocks h6 {
 	font-size: 24px;
 }

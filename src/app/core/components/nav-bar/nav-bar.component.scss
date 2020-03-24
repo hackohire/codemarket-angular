@@ -1,3 +1,5 @@
+@import url(//db.onlinewebfonts.com/c/66ea2f27441b782f8f036eba1471d3ab?family=Hero);
+
 .center-content {
   width: 100%;
   max-width: 800px;
@@ -53,7 +55,8 @@ div::-webkit-scrollbar-thumb {
 
 /* California Insurance TOP Header */
 #insurance-headerTop {
-	background-image: url(../../../../assets/images/insurance-top.png);
+	// background-image: url(../../../../assets/images/insurance-top.png);
+	background: purple;
 	background-repeat: no-repeat;
 	margin-right: auto;
 	margin-left: auto;

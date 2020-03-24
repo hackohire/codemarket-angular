@@ -204,7 +204,8 @@ hr {
 #insurance-content-main {
 	display: table;
 	width: 560px;
-		border-top: 8px solid #f09e47;
+		// border-top: 8px solid #f09e47;
+		border-top: 8px solid purple;
 		float:left;
 	margin-left:44px;
 		margin-top:20px;
@@ -217,7 +218,7 @@ hr {
 	font-family: 'Roboto', sans-serif;
 	font-weight: bold;
 	font-size: 21px;
-	color: #f09e47;
+	color: purple;
 	margin-bottom:6px;
 	padding-bottom:6px;
 	padding-top:0px;
@@ -243,7 +244,7 @@ hr {
 #insurance-sidebar-title2 {
 	
 	width: 260px;
-	background-color:#f09e47;
+	background-color: purple;
 	padding:10px;
 	margin-bottom:-13px;
 
@@ -252,7 +253,7 @@ hr {
 	font-family: 'Roboto', sans-serif;
 	font-weight: normal;
 	font-size: 18px;
-	color: #0a477f;
+	color: #f09e47;
 	text-transform:uppercase;
 	text-align:center;
 	margin-bottom:0px;
@@ -264,7 +265,7 @@ hr {
 }
 #insurance-sidebar-title {
 	width: 260px;
-	background-color:#f09e47;
+	background-color:purple;
 	padding:10px;
 
 }
@@ -272,7 +273,7 @@ hr {
 	font-family: 'Roboto', sans-serif;
 	font-weight: normal;
 	font-size: 18px;
-	color: #0a477f;
+	color: #f09e47;
 	text-transform:uppercase;
 	text-align:center;
 	margin-bottom:0px;

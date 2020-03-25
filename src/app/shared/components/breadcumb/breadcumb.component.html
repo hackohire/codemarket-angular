@@ -104,6 +104,39 @@
                             </p>
                         </li>
 
+                        <!-- <li *ngIf="postDetails?.users">
+                            <p class="data-label">Users</p>
+                            <p class="info">
+                                <a *ngFor="let t of postDetails?.users" target="_blank" [href]="'/'+ 'dashboard' + '/' + 'profile' + '/' + t?._id">
+                                    <span class="tag">
+                                        <img [src]="t?.avatar ? ((s3FilesBucketURL + t?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                                        alt="">{{t?.name}}</span>
+                                </a>
+                            </p>
+                        </li> -->
+
+                        <li *ngIf="postDetails?.assignee && postDetails?.assignee?.length">
+                            <p class="data-label">Assignee</p>
+                            <p class="info">
+                                <a *ngFor="let t of postDetails?.assignee" target="_blank" [href]="'/'+ 'dashboard' + '/' + 'profile' + '/' + t?._id">
+                                    <span class="tag">
+                                        <img [src]="t?.avatar ? ((s3FilesBucketURL + t?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                                        alt="">{{t?.name}}</span>
+                                </a>
+                            </p>
+                        </li>
+
+                        <li *ngIf="postDetails?.collaborators && postDetails?.collaborators?.length">
+                            <p class="data-label">Collaborators</p>
+                            <p class="info">
+                                <a *ngFor="let t of postDetails?.collaborators" target="_blank" [href]="'/'+ 'dashboard' + '/' + 'profile' + '/' + t?._id">
+                                    <span class="tag">
+                                        <img [src]="t?.avatar ? ((s3FilesBucketURL + t?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                                        alt="">{{t?.name}}</span>
+                                </a>
+                            </p>
+                        </li>
+
                         <li *ngIf="postDetails?.jobProfile && postDetails?.jobProfile?.length">
                             <p class="data-label">Position</p>
                             <p class="info" style="text-transform: capitalize;">

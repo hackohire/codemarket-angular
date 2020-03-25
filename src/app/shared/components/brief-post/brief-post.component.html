@@ -9,11 +9,61 @@
         <!-- USER'S AVATAR & NAME -->
         <h3>
             <a [href]="'/'+ 'dashboard' + '/' + 'profile' + '/' + p?.createdBy?._id" target="_blank">
-                <img [src]="p?.createdBy?.avatar ? ((s3FilesBucketURL + p?.createdBy?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                <img class="creator" [src]="p?.createdBy?.avatar ? ((s3FilesBucketURL + p?.createdBy?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
                     alt="" />{{p?.createdBy?.name}}
             </a>
             <span>{{fromNow(p?.createdAt)}} {{' • '}} {{p?.createdAt | date: 'medium'}} <i class="fa fa-globe"></i></span>
         </h3>
+
+        <ul class="infos" *ngIf="p?.type">
+            <li>
+                <p class="data-label">Type</p>
+                <p class="info">
+                    <a>
+                        <span class="tag">{{p?.type}}</span>
+                    </a>
+                </p>
+            </li>
+        </ul>
+
+        <ul class="infos" *ngIf="p?.assignees && p?.assignees?.length">
+            <li>
+                <p class="data-label">Assignees</p>
+                <p class="info">
+                    <a *ngFor="let t of p?.assignees" target="_blank" [href]="'/'+ 'dashboard' + '/' + 'profile' + '/' + t?._id">
+                        <span class="tag">
+                            <img class="avatar" [src]="t?.avatar ? ((s3FilesBucketURL + t?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                            alt="">{{t?.name}}</span>
+                    </a>
+                </p>
+            </li>
+        </ul>
+        <ul class="infos" *ngIf="p?.collaborators && p?.collaborators?.length">
+            <li>
+                <p class="data-label">Collaborators</p>
+                <p class="info">
+                    <a *ngFor="let t of p?.collaborators" target="_blank" [href]="'/'+ 'dashboard' + '/' + 'profile' + '/' + t?._id">
+                        <span class="tag">
+                            <img class="avatar" [src]="t?.avatar ? ((s3FilesBucketURL + t?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                            alt="">{{t?.name}}</span>
+                    </a>
+                </p>
+            </li>
+        </ul>
+        <ul class="infos" *ngIf="p?.companies && p?.companies?.length">
+            <li>
+                <p class="data-label">Company</p>
+                <p class="info">
+                    <a *ngFor="let t of p?.companies" target="_blank" [href]="'/'+ 'company' + '/' + t?._id">
+                        <span class="tag">
+                            <!-- <img class="avatar" [src]="t?.avatar ? ((s3FilesBucketURL + t?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                            alt=""> -->
+                            {{t?.name}}</span>
+                    </a>
+                </p>
+            </li>
+        </ul>
+
 
         <!-- Post Actions -->
         <!-- <i class="fad fa-check-circle" *ngIf="p['__edit']" (click)="updatePost(p, singlePostEditor)"></i> -->
@@ -47,7 +97,7 @@
                     [commentType]="'post'" [post]="p" [commentsList]="(commentService.commentsList$ | async)">
                 </app-editor>
             </p>
-            <span><span class="fa fa-search-plus"></span></span>
+            <!-- <span><span class="fa fa-search-plus"></span></span> -->
         </div>
     </div>
 

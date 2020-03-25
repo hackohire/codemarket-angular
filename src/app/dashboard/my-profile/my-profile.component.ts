@@ -344,12 +344,11 @@ export class MyProfileComponent implements OnInit {
 
   /** Fetch the list of posts for the posts tab based on the pagination */
   fetchAllOtherPosts(postType = '') {
+    const userId = this.authorId ? this.authorId : this.authService.loggedInUser._id;
     const paginationObj = {
       pageNumber: this.paginator.pageIndex + 1, limit: this.paginator.pageSize ? this.paginator.pageSize : 10,
       sort: {order: ''}};
-    this.postService.getAllPosts(paginationObj, postType, '', '', '',
-      this.authorId ? this.authorId : this.authService.loggedInUser._id,
-    ).subscribe((u) => {
+    this.postService.getAllPosts(paginationObj, postType, '', '', userId, userId).subscribe((u) => {
       this.listOfAllOtherPosts.posts = u.posts;
       this.totalOtherPosts = u.total;
     });

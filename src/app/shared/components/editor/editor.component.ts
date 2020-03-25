@@ -25,6 +25,7 @@ import { Comment } from '../../models/comment.model';
 import { isPlatformBrowser } from '@angular/common';
 const path = require('path');
 import editorJS from '../../../editor-js/dist/editor';
+import InlineCode from '@editorjs/inline-code';
 import EditorJS, { EditorConfig } from '@editorjs/editorjs';
 import { PostService } from '../../services/post.service';
 import { Subscription } from 'rxjs/internal/Subscription';
@@ -205,6 +206,7 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
             inlineToolbar: true
           },
           delimiter: Delimiter,
+          inlineCode: InlineCode,
           // delimiter: {
           //   class: Delimiter
           // },
@@ -258,7 +260,7 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
               uploader: {
                 /**
                  * Upload file to the server and return an uploaded image data
-                 * @param {File} file - file selected from the device or pasted by drag-n-drop
+                 * @param { File } file - file selected from the device or pasted by drag-n-drop
                  * @return {Promise.<{success, file: {url}}>}
                  */
                 uploadByFile(file) {
@@ -323,14 +325,15 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
           this.addControlsIfVideoElement();
           this.zoomInZoomOutForImages();
 
-          /** Open editor toolbar manually, which will load only "+" icon */
-          this.editor.toolbar.open();
+          // /** Open editor toolbar manually, which will load only "+" icon */
+          // this.editor.toolbar.open();
 
-          /** Then we fetch the reference of "+" button and click it programatically */
+          // /** Then we fetch the reference of "+" button and click it programatically */
           // setTimeout(() => {
           //   const a = this.editorRef.nativeElement.getElementsByClassName('ce-toolbar__plus');
           //   console.log(a);
           //   a[0].click();
+          //   a[0].blur();
           // }, 500);
         }),
         onChange: (() => {
@@ -409,6 +412,11 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
     const template = `<html><body><style type="text/css">.gist {overflow:auto;} .gist .gist-file .gist-data { max-height: 86vh; }</style><script src="gistSrc"></script></body></html>`;
     const replaced = template.replace('gistSrc', url + '.js');
     return replaced;
+  }
+
+  insertNewBlock(type: string) {
+    this.editor.blocks.insert(type, {}, {}, this.editorRef.nativeElement.getElementsByClassName('ce-block').length, true);
+    this.editor.focus(true);
   }
 
 }

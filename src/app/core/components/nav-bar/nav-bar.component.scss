@@ -60,7 +60,7 @@ div::-webkit-scrollbar-thumb {
 	background-repeat: no-repeat;
 	margin-right: auto;
 	margin-left: auto;
-	width: 1012px;
+	// width: 1012px;
 	height: 55px;
 }
 #insurance-Top-nav {
@@ -131,23 +131,24 @@ div::-webkit-scrollbar-thumb {
 
 /* California Insurance PRIMARY Header */
 #insurance-header {
-	background-image: url(../../../../assets/images/insurance-header.png);
-	background-repeat: no-repeat;
-	margin-right: auto;
-	margin-left: auto;
-	width: 1012px;
-	height: 96px;
+	// background-image: url(insurance-header.png)
+    background-repeat: no-repeat;
+    /* margin-right: auto; */
+    /* margin-left: auto; */
+    /* width: 1046px; */
+    background-color: #daeefb;
+    height: 96px;
 }
 #insurance-header-logo {
 	float: left;
-	margin-left: 35px;
-	width: 200px;
+	margin-left: 45px;
+	width: 226px;
 	height: 96px;
 }
 #insurance-header-nav {
-	float: left;
-	margin-left: 1px;
-	width: 738px;
+	float: right;
+	// margin-left: 1px;
+	// width: 738px;
 	height: 96px;
 	text-align: left;
 }
@@ -174,7 +175,7 @@ div::-webkit-scrollbar-thumb {
 	width: 735px;
 	margin-top: 0px;
 	margin-bottom: 0px;
-	margin-left: -25px;
+	// margin-left: -25px;
 	height: 50px;
 }
 #menu li {
@@ -182,7 +183,8 @@ div::-webkit-scrollbar-thumb {
 	display: block;
 	text-align: center;
 	position: relative;
-	padding: 3px 13px 3px 13px;
+	// padding: 3px 13px 3px 13px;
+	padding: 3px 13px 3px 12px;
 	margin-right: 1px;
 	margin-top: 1px;
 	border: none;

@@ -7,7 +7,7 @@
     margin-right: auto;
     background-size: cover;
     margin-left: auto;
-    width: 958px;
+    // width: 958px;
     height: 217px;
 }
 
@@ -193,21 +193,21 @@ hr {
 
 /* CONTENT AREA */
 #insurance-content {
-	display: table;
-	background-image: url(../../assets/images/insurance-content.png);
-	background-repeat: repeat-y;
-	margin-right: auto;
-	margin-left: auto;
-	width: 1012px;
+	display: block;
+	// background-image: url(../../assets/images/insurance-content.png);
+	// background-repeat: repeat-y;
+	// margin-right: auto;
+	// margin-left: auto;
+	// width: 1012px;
 	padding-bottom:10px;
 }
 #insurance-content-main {
 	display: table;
-	width: 560px;
+	max-width: 803px;
 		// border-top: 8px solid #f09e47;
 		border-top: 8px solid purple;
 		float:left;
-	margin-left:44px;
+	// margin-left:44px;
 		margin-top:20px;
 		background-color:#FFF;
 		padding-left:25px;
@@ -243,10 +243,10 @@ hr {
 }
 #insurance-sidebar-title2 {
 	
-	width: 260px;
+	width: 280px;
 	background-color: purple;
 	padding:10px;
-	margin-bottom:-13px;
+	// margin-bottom:-13px;
 
 }
 #insurance-sidebar-title2 h4 {
@@ -334,7 +334,7 @@ hr {
 }
 
 #sidebar-nav2 {
-	width: 280px;
+	width: 281px;
 	background-color:#F0F0F0;
 	padding:0px;
 	margin:0px;
@@ -396,17 +396,18 @@ hr {
 
 #insurance-footer {
 margin-right: auto;
-	margin-left: auto;
-	width: 1012px;
+	// margin-left: auto;
+	// width: 1012px;
 	padding-top:12px;
 	padding-bottom:12px;
-	background-image: url(../../assets/images/insurance-content.png);
-	background-repeat: repeat-y;
+	// background-image: url(../../assets/images/insurance-content.png);
+	// background-repeat: repeat-y;
 	font-family:Arial, Helvetica, sans-serif;
 	font-size:11px;
 	color:#666;
 	line-height:16px;
 	text-align:center;
+	background-color: #daeefb;
 }
 
 #insurance-footer a:link, #insurance-footer a:visited {

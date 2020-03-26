@@ -10,12 +10,6 @@ fragment Header on HeaderBlock {
     }
 }
 `;
-export const delimiterFragment = gql`
-fragment Delimiters on DelimitersBlock {
-    type
-    _id
-}
-`;
 
 export const paragraphFragment = gql`
 fragment Paragraph on ParagraphBlock {

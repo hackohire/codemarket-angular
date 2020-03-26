@@ -5,263 +5,115 @@
     <div class="content">
         <div class="container">
             <div class="flexslider home_slider" style="width:940px;height:280px;">
-                <ul class="slides">
+                <ul class="slides" style="background-color: #fbfbf7;">
                     <li class="styled flex-active-slide"
                         style="width: 100%; float: left; margin-right: -100%; position: relative; opacity: 1; display: block; z-index: 2;">
                         <div class="slide_img">
 
-                            <div class="overlay_z" style="position:absolute;z-index:9999;">
-                                <a href="#" class="firstposter_z"><img src="/assets/app/img/intro-video-poster-7.jpg"
-                                        border="0" style="" draggable="false"></a>
-                            </div>
+
 
                             <img src="../../../../assets/images/joel_profile.jpg">
                             <!-- <video id="intro_player" width="353" height="260" poster="https://non-duality.rupertspira.com/assets/app/img/intro-video-poster-7.jpg" style="margin:10px;">
                         <source src="https://s3-eu-west-1.amazonaws.com/rupert-spira-static-assets/introduction.mp4" type="video/mp4">
                     </video> -->
 
-                            <script type="text/javascript">
-
-                                $(document).ready(function () {
-
-                                    $('.overlay_z').click(function (e) {
-
-                                        $(this).hide();
-
-                                        var flexslider = $('.flexslider').data('flexslider');
-                                        flexslider.stop();
-
-                                        var intro_player = document.getElementById('intro_player');
-                                        intro_player.play();
-
-                                        e.preventDefault();
-                                        return false;
-
-                                    });
-
-                                    // --------------------------------------------------------------------------
-
-                                    $(document).on("click", ".flex-control-paging li a", function () {
-
-                                        var intro_player = document.getElementById('intro_player');
-                                        intro_player.pause();
-
-                                        var flexslider = $('.flexslider').data('flexslider');
-                                        flexslider.play();
-                                    });
-
-                                });
-
-                                // --------------------------------------------------------------------------
-
-                                $(window).load(function () {
-                                    /*** Home slider ***/
-                                    if ($('.home_slider').length) {
-                                        $('.home_slider').flexslider({
-                                            animation: 'fade',
-                                            directionNav: false,
-                                            pauseOnHover: false,
-                                            animationSpeed: 1200,
-                                            pauseOnAction: true,
-                                            touch: true,
-                                            slideshow: false
-                                        });
-                                    }// END if
-                                });
-
-
-                            </script>
+                            
 
                         </div>
 
-                        <div class="slide_text">
+                        <div style="display: inline-block; width: 75%" id="demo" class="carousel slide" data-ride="carousel">
+
+                            <!-- Indicators -->
+                            <ul class="carousel-indicators">
+                                <li data-target="#demo" data-slide-to="0" class="navigation active"></li>
+                                <li data-target="#demo" data-slide-to="1" class="navigation"></li>
+                                <li data-target="#demo" data-slide-to="2" class="navigation"></li>
+                            </ul>
+                        
+                            <!-- The slideshow -->
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <img src="https://dummyimage.com/680x225/fbfbf7/000000.png&text=+">
+                                    <!-- <h1 style="background-color: antiquewhite;">Test</h1> -->
+                                    <!-- <img src="https://images.unsplash.com/photo-1585216658790-094546fa88e1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1055&q=80"
+                                        alt="Los Angeles" width="1100" height="500"> -->
+                                    <div class="header-text hidden-xs">
+                                        <div class="col-md-12 text-center">
+                                            <h2>
+                                                <span><strong style="font-size: 32px;">Happiness Coach</strong></span>
+                                            </h2>
+                                            <br>
+                                            <h3>
+                                                <span>And it doesn’t require meditating on the top of a mountain, or any other sort of
+                                                    withdrawal from daily life in order to achieve a state that exists in a future place and
+                                                    time. The peaceful, loving resilience is available to you without pause, just as you
+                                                    are. All that’s required is that we know where to look.</span>
+                                            </h3>
+                                        </div>
+                                    </div><!-- /header-text -->
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="https://dummyimage.com/680x225/fbfbf7/000000.png&text=+">
+                                    <div class="header-text hidden-xs">
+                                        <div class="col-md-12 text-center">
+                                            <h2>
+                                                <span><strong style="font-size: 32px;">Performance Coach</strong></span>
+                                            </h2>
+                                            <br>
+                                            <h3>
+                                                <span>And it doesn’t require meditating on the top of a mountain, or any other sort of
+                                                    withdrawal from daily life in order to achieve a state that exists in a future place and
+                                                    time. The peaceful, loving resilience is available to you without pause, just as you
+                                                    are. All that’s required is that we know where to look.</span>
+                                            </h3>
+                                            
+                                        </div>
+                                    </div><!-- /header-text -->
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="https://dummyimage.com/680x225/fbfbf7/000000.png&text=+">
+                                    <div class="header-text hidden-xs">
+                                        <div class="col-md-12 text-center">
+                                            <h2>
+                                                <span><strong style="font-size: 32px;">Resilience Coach</strong></span>
+                                            </h2>
+                                            <br>
+                                            <h3>
+                                                <span>And it doesn’t require meditating on the top of a mountain, or any other sort of
+                                                    withdrawal from daily life in order to achieve a state that exists in a future place and
+                                                    time. The peaceful, loving resilience is available to you without pause, just as you
+                                                    are. All that’s required is that we know where to look.</span>
+                                            </h3>
+                                        </div>
+                                    </div><!-- /header-text -->
+                                </div>
+                            </div>
+                        
+                            <!-- Left and right controls -->
+                            <!-- <a class="carousel-control-prev" href="#demo" data-slide="prev">
+                                <span class="carousel-control-prev-icon"></span>
+                            </a>
+                            <a class="carousel-control-next" href="#demo" data-slide="next">
+                                <span class="carousel-control-next-icon"></span>
+                            </a> -->
+                        </div>
+
+                        <!-- <div class="slide_text">
                             <h2><a href="#" title="">Happiness Coach</a></h2>
                             <p>And it doesn’t require meditating on the top of a mountain, or any other sort of
                                 withdrawal from daily life in order to achieve a state that exists in a future place and
                                 time. The peaceful, loving resilience is available to you without pause, just as you
                                 are. All that’s required is that we know where to look.</p>
-                        </div>
+                        </div> -->
 
                     </li>
 
-
-                    <li class="styled"
-                        style="width: 100%; float: left; margin-right: -100%; position: relative; opacity: 0; display: block; z-index: 1;">
-                        <div class="slide_img">
-                            <a href="https://non-duality.rupertspira.com/meet/2020/03/20/seven-day-retreat-at-mercy-center-ca-march-2020"
-                                title=""><img
-                                    src="https://non-duality.rupertspira.com/img/thumb/assets-uploads/86d904a7530bdea11e48692e1490301c.png/380/280"
-                                    alt="" title="" draggable="false"></a>
-                        </div>
-
-                        <div class="slide_text">
-                            <h2><a href="https://non-duality.rupertspira.com/meet/2020/03/20/seven-day-retreat-at-mercy-center-ca-march-2020"
-                                    title="">Retreat at Mercy Center - 20 - 27 March</a></h2>
-                            <p>All sessions will be live streamed. </p>
-                        </div>
-                    </li>
-
-
-                    <li class="styled"
-                        style="width: 100%; float: left; margin-right: -100%; position: relative; opacity: 0; display: block; z-index: 1;">
-                        <div class="slide_img">
-                            <a href="https://non-duality.rupertspira.com/meet/2020/04/17/weekend-in-amsterdam-april-2020"
-                                title=""><img
-                                    src="https://non-duality.rupertspira.com/img/thumb/assets-uploads/7b9395a90a6ca3c8c1184154a7e934f5.jpg/380/280"
-                                    alt="" title="" draggable="false"></a>
-                        </div>
-
-                        <div class="slide_text">
-                            <h2><a href="https://non-duality.rupertspira.com/meet/2020/04/17/weekend-in-amsterdam-april-2020"
-                                    title="">Weekend in Amsterdam (Live-streamed) - 17 to 19 April</a></h2>
-                            <p>All of the sessions will be live streamed </p>
-                        </div>
-                    </li>
-
-
-                    <li class="styled"
-                        style="width: 100%; float: left; margin-right: -100%; position: relative; opacity: 0; display: block; z-index: 1;">
-                        <div class="slide_img">
-                            <a href="https://non-duality.rupertspira.com/meet/2020/03/12/live-webinar-by-donation-time-change"
-                                title=""><img
-                                    src="https://non-duality.rupertspira.com/img/thumb/assets-uploads/a19eae44bac384bbe74e0b208c4046ed.png/380/280"
-                                    alt="" title="" draggable="false"></a>
-                        </div>
-
-                        <div class="slide_text">
-                            <h2><a href="https://non-duality.rupertspira.com/meet/2020/03/12/live-webinar-by-donation-time-change"
-                                    title="">Live Webinar - 12th March</a></h2>
-                            <p>The webinars begin with a meditation led by Rupert, after which there is an open question
-                                and answer session.</p>
-                        </div>
-                    </li>
-
-
-                    <li class="styled"
-                        style="width: 100%; float: left; margin-right: -100%; position: relative; opacity: 0; display: block; z-index: 1;">
-                        <div class="slide_img">
-                            <a href="https://non-duality.rupertspira.com/meet/2020/03/28/evening-meeting-at-new-york-open-center-march"
-                                title=""><img
-                                    src="https://non-duality.rupertspira.com/img/thumb/assets-uploads/47fc9478e0e1db73b1fbcf3c8cbd1165.jpg/380/280"
-                                    alt="" title="" draggable="false"></a>
-                        </div>
-
-                        <div class="slide_text">
-                            <h2><a href="https://non-duality.rupertspira.com/meet/2020/03/28/evening-meeting-at-new-york-open-center-march"
-                                    title="">Evening Meeting in New York - 28th March</a></h2>
-                            <p>These meetings start with a contemplation followed by questions and answers.</p>
-                        </div>
-                    </li>
-
-
-                    <li class="styled"
-                        style="width: 100%; float: left; margin-right: -100%; position: relative; opacity: 0; display: block; z-index: 1;">
-                        <div class="slide_img">
-                            <a href="http://www.sahajapublications.com/books/the-nature-of-consciousness" title=""><img
-                                    src="https://non-duality.rupertspira.com/img/thumb/assets-uploads/3298a47c591adae10fdad13e47e04c3a.png/380/280"
-                                    alt="" title="" draggable="false"></a>
-                        </div>
-
-                        <div class="slide_text">
-                            <h2><a href="http://www.sahajapublications.com/books/the-nature-of-consciousness"
-                                    title="">The Nature of Consciousness</a></h2>
-                            <p>Rupert's new paperback The Nature of Consciousness: Essays on the Unity of Mind and
-                                Matter. Foreword by Deepak Chopra.</p>
-                        </div>
-                    </li>
-
-
-                    <li class="styled"
-                        style="width: 100%; float: left; margin-right: -100%; position: relative; opacity: 0; display: block; z-index: 1;">
-                        <div class="slide_img">
-                            <a href="http://www.sahajapublications.com/books/being-aware-of-being-aware" title=""><img
-                                    src="https://non-duality.rupertspira.com/img/thumb/assets-uploads/19d765b628b64f39f4d0fe6016b4cb2f.jpg/380/280"
-                                    alt="" title="" draggable="false"></a>
-                        </div>
-
-                        <div class="slide_text">
-                            <h2><a href="http://www.sahajapublications.com/books/being-aware-of-being-aware"
-                                    title="">Being Aware of Being Aware </a></h2>
-                            <p>Rupert Spira’s new paperback on the essence of meditation</p>
-                        </div>
-                    </li>
 
 
                 </ul><!-- / .bxslider -->
-                <ol class="flex-control-nav flex-control-paging">
-                    <li><a class="flex-active">1</a></li>
-                    <li><a>2</a></li>
-                    <li><a>3</a></li>
-                    <li><a>4</a></li>
-                    <li><a>5</a></li>
-                    <li><a>6</a></li>
-                    <li><a>7</a></li>
-                </ol>
             </div><!-- / .home_slider -->
 
 
-
-            <script>
-                $(document).ready(function () {
-
-                    $('.preview-container-watch .pane-list').jScrollPane({ verticalGutter: 10 });
-
-                    /*** Home Preview Tabs ***/
-                    $('.preview-tabs ul li').click(function () {
-
-                        var section = $(this).attr('id');
-                        $('.preview-tabs ul li').removeClass('active');
-                        $(this).addClass('active');
-                        $('.preview-container').hide();
-                        $('.preview-container-' + section).show();
-
-                        // --------------------------------------------------------------------------
-
-                        //	Reset full length link
-                        $('.all-media-link').hide();
-                        $('.all-' + section).show();
-
-                        // --------------------------------------------------------------------------
-
-                        //  Reset nth child rules
-                        var numCols = 2;
-                        $("ul.thumbnail-list li").css('margin-right', '');//
-                        $('ul.thumbnail-list li:visible').each(function (i) {
-                            if (i % numCols == (numCols - 1)) {
-                                $(this).css('margin-right', '0px');
-                            }
-                        });
-
-                        //  Re-initalize scroll pane-list (uncomment this when we have enough content)
-                        $('.preview-container-watch .pane-list').jScrollPane({ verticalGutter: 10 });
-                        $('.preview-container-listen .pane-list').jScrollPane({ verticalGutter: 10 });
-
-                        //	Kill players
-                        var player = document.getElementById('player');
-                        player.pause();
-
-                        //	Hack the CSS into shape
-                        $('#player_media_image').css('top', '0');
-                        $('#player_media_image').css('height', '100%');
-
-                        $("#jplayer").jPlayer('clearMedia');
-                        $("#jplayer").jPlayer('setMedia', {
-                            mp3: 'https://d1cqwoehd283k8.cloudfront.net/RS18048_Bathing_in_the_Warm_Glow_of_Awareness_GM.mp3?Expires=1584691245&Signature=dDg35Ka2PNtl~N-DDz2cQvB9MWwoFv5UeGqLNPh5Lt-k9CJXglHvCsxJ5OysaPALt4iQ4xOlrPJ8qv9F7X2u17Q4HHUxUrhGEyjJIXyTRG~ZsOZwmyZYNm2SyesdixdbnZNp-qWfWHoGj2ouWl1Ii-Qc4Zy0g8xDRWspKIOyHOU_&Key-Pair-Id=APKAJEEYJX3BYBQDQ3ZA'
-                        });
-                        $("#jplayer").jPlayer('stop');
-
-                        //	Reinitialise jScrollerthing
-                        $('.preview-container-' + section + ' .pane-list').jScrollPane({ verticalGutter: 10 });
-
-                        //	Setup jscrollpane for the 'read' page
-                        $('.text-reader').jScrollPane();
-
-                        return false;
-
-                    });
-
-                });
-            </script>
 
 
             <!-- Tabs for latest content -->
@@ -475,7 +327,10 @@
                                                 href="https://non-duality.rupertspira.com/watch/true-peace-can-not-be-disturbed">True
                                                 Peace Can Not Be Disturbed</a></div>
                                     </div>
-                                    <iframe width="560" height="315" src="https://www.youtube.com/embed/CCztoMavQQY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    <iframe width="560" height="315" src="https://www.youtube.com/embed/CCztoMavQQY"
+                                        frameborder="0"
+                                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                        allowfullscreen></iframe>
 
                                     <!-- <a href="#" id="video_0" class="set_item video" rel="0" data-video_id="2498"
                                         data-youtube-id="wRwU8CmuLbk">
@@ -1478,7 +1333,8 @@
 
                                 <li class="video-type type-qa" style="margin-right: 0px;">
                                     <div class="parent_53" style="display:none;">
-                                        <div style="margin-top:6px;margin-bottom:-6px;">Full Length Video: <a
+                                        rgb(128, 76, 42) <div style="margin-top:6px;margin-bottom:-6px;">Full Length
+                                            Video: <a
                                                 href="https://non-duality.rupertspira.com/watch/there-is-nothing-other-than-consciousness">There
                                                 Is Nothing Other Than Consciousness</a></div>
                                     </div>
@@ -5350,7 +5206,10 @@
                                                 Peace Can Not Be Disturbed</a></div>
                                     </div>
 
-                                    <iframe width="460" height="315" src="https://www.youtube.com/embed/fyvCakYRvZM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    <iframe width="460" height="315" src="https://www.youtube.com/embed/fyvCakYRvZM"
+                                        frameborder="0"
+                                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                        allowfullscreen></iframe>
 
                                     <!-- <p class="pane-text">
                                         <span class="square"></span>

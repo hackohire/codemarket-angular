@@ -1,6 +1,35 @@
 @import '../../assets/css/_general.scss';
 @import '../../assets/css/_theme.scss';
 
+.navigation {
+  background-color: #ad7cea !important;
+}
+
+/* Carousel Header Styles */
+.header-text {
+  position: absolute;
+  top: 6%;
+  left: 1.8%;
+  right: auto;
+  width: 96.66666666666666%;
+  color: #fff;
+}
+
+.header-text h2 {
+  font-size: 40px;
+}
+
+.header-text h2 span {
+  color: #9e9391;
+  // background-color: #2980b9;
+  // padding: 10px;
+}
+
+.header-text h3 span {
+// background-color: #000;
+  // padding: 15px;
+}
+
 .blocks h6 {
 	font-size: 24px;
 }
@@ -1385,7 +1414,8 @@ dfn {
 /*** Lists ***/
 .rupertspira ul,
 ol {
-  margin: 0 0 1.5em 28px; }
+  // margin: 0 0 1.5em 28px; 
+}
 
 .rupertspira li {
   margin-bottom: .5em; }
@@ -1478,7 +1508,7 @@ input[type=password] {
   width: 940px; }
 
 .rupertspira .content {
-  background: #efe9e5;
+  background: #ad7cea;
   min-width: 960px; }
   .rupertspira .content .container {
     max-width: 940px;
@@ -2734,7 +2764,8 @@ input[type=password] {
     height: 280px; }
     .rupertspira .home_slider .slides li.styled .slide_img {
       float: left;
-      width: 380px; }
+      // width: 380px; 
+    }
       .rupertspira .home_slider .slides li.styled .slide_img img {
         border-radius: 5px 0 0 5px; }
     .rupertspira .home_slider .slides li.styled .slide_text {

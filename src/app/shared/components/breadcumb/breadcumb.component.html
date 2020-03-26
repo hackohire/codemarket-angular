@@ -93,7 +93,7 @@
                                 <span class="tag" *ngFor="let t of postDetails?.tags">{{t?.name}}</span>
                             </p>
                         </li>
-                        <li *ngIf="postDetails?.users">
+                        <!-- <li *ngIf="postDetails?.users">
                             <p class="data-label">Users</p>
                             <p class="info">
                                 <a *ngFor="let t of postDetails?.users" target="_blank" [href]="'/'+ 'dashboard' + '/' + 'profile' + '/' + t?._id">
@@ -102,7 +102,7 @@
                                         alt="">{{t?.name}}</span>
                                 </a>
                             </p>
-                        </li>
+                        </li> -->
 
                         <!-- <li *ngIf="postDetails?.users">
                             <p class="data-label">Users</p>

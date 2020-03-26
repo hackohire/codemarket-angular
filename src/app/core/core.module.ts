@@ -100,12 +100,9 @@ export class CoreModule {
            */
           if (key === '__typename' || (key === '_id' && !value) || key === '__show') {
             return undefined;
-          } 
-          // else if (key === 'company') {
-          //   return value && value._id ? value._id : undefined;
-          // }
+          }
           return value;
-        }
+        };
         operation.variables = JSON.parse(JSON.stringify(operation.variables), omitTypename);
       }
       return forward(operation).map((data) => {
@@ -148,7 +145,7 @@ export class CoreModule {
       link,
       cache: new InMemoryCache({
         dataIdFromObject: (o: any) => {
-          return o._id
+          return o._id;
         },
         addTypename: true,
 
@@ -173,7 +170,7 @@ export class CoreModule {
                     { name: 'TableBlock' },
                     { name: 'WarningBlock' },
                     { name: 'EmbedBlock' },
-                    { name: 'LinkToolBlock' }
+                    { name: 'LinkToolBlock' },
                   ],
                 },
               ],

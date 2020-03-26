@@ -11,92 +11,11 @@
 
       <a mat-list-item [routerLink]="['/', 'user', 'edit-profile']">Edit Profile</a>
 
-      <!-- Selling -->
-      <a mat-list-item [routerLink]="['/', 'sell']">My Bugfixes</a>
-
-      <a mat-list-item [routerLink]="['/', 'help-request']" [queryParams]="{type: 'help-request', all: false}">My Help
-        Requests</a>
-
-
-      <a mat-list-item [routerLink]="['/', 'post', 'post-list']" [queryParams]="{type: 'interview', all: false}">My
-        Interviews</a>
-
-
-      <a mat-list-item [routerLink]="['/', 'post', 'post-list']" [queryParams]="{type: 'requirement', all: false}">My
-        Requirements</a>
-
-      <a mat-list-item [routerLink]="['/', 'post', 'post-list']" [queryParams]="{type: 'testing', all: false}">My
-        Testing Reports</a>
-      <a mat-list-item [routerLink]="['/', 'post', 'post-list']" [queryParams]="{type: 'howtodoc', all: false}">My
-        How-To-Guides</a>
-      <a mat-list-item [routerLink]="['/', 'post', 'post-list']" [queryParams]="{type: 'design', all: false}">My
-        Designs</a>
-      <a mat-list-item [routerLink]="['/', 'post', 'post-list']" [queryParams]="{type: 'goal', all: false}">My
-        Goals</a>
-      <a mat-list-item [routerLink]="['/', 'event', 'post-list']" [queryParams]="{type: 'event', all: false}">My
-        Events</a>
-      <a mat-list-item [routerLink]="['/', 'post', 'post-list']" [queryParams]="{type: 'team-skill', all: false}">My
-        Team Skills</a>
-      <a mat-list-item [routerLink]="['/', 'post', 'post-list']" [queryParams]="{type: 'business-coach', all: false}">My
-        Business Coaches</a>
-      <a mat-list-item [routerLink]="['/', 'post', 'post-list']" [queryParams]="{type: 'career-coach', all: false}">My
-        Career Coaches</a>
-      <a mat-list-item [routerLink]="['/', 'post', 'post-list']"
-        [queryParams]="{type: 'capital-funding', all: false}">My
-        Capital Fundings</a>
+      <ng-container *ngFor="let p of postTypesArray">
+        <a mat-list-item [routerLink]="['/', 'post', 'post-list']" [queryParams]="{type: p.name, all: false}">My &nbsp;<span style="text-transform: capitalize;">{{p.name}}</span></a>
+      </ng-container>
 
       <a mat-list-item [routerLink]="['/', 'company', 'company-list']" [queryParams]="{all: false}">My Companies</a>
-
-      <!-- <a mat-list-item [routerLink]="['/', 'company', 'company-list']"
-        [queryParams]="{type: 'local-business', all: false}">My
-        Local Businesses</a>
-
-      <a mat-list-item [routerLink]="['/', 'company', 'company-list']"
-        [queryParams]="{type: 'non-profit', all: false}">My
-        Non Profits</a>
-
-      <a mat-list-item [routerLink]="['/', 'company', 'company-list']"
-        [queryParams]="{type: 'startup', all: false}">My
-        Startups</a> -->
-
-      <a mat-list-item [routerLink]="['/', 'post', 'dream-job-list']" [queryParams]="{type: 'dream-job', all: false}">My
-        Dream Jobs</a>
-
-      <a mat-list-item [routerLink]="['/', 'post', 'post-list']" [queryParams]="{type: 'job', all: false}">My
-        Jobs</a>
-      <a mat-list-item [routerLink]="['/', 'post', 'post-list']"
-        [queryParams]="{type: companyPostTypes.BusinessChallenge, all: false}">My
-        Business Challenge</a>
-      <a mat-list-item [routerLink]="['/', 'post', 'post-list']"
-        [queryParams]="{type: companyPostTypes.BusinessGoal, all: false}">My
-        Business Goal</a>
-      <a mat-list-item [routerLink]="['/', 'post', 'post-list']"
-        [queryParams]="{type: companyPostTypes.SalesChallenge, all: false}">My
-        Sales Challenge</a>
-      <a mat-list-item [routerLink]="['/', 'post', 'post-list']"
-        [queryParams]="{type: companyPostTypes.MarketingChallenge, all: false}">My
-        Marketing Challenge</a>
-      <a mat-list-item [routerLink]="['/', 'post', 'post-list']"
-        [queryParams]="{type: companyPostTypes.TechnicalChallenge, all: false}">My
-        Technical Challenge</a>
-      <a mat-list-item [routerLink]="['/', 'post', 'post-list']"
-        [queryParams]="{type: companyPostTypes.TeamChallenge, all: false}">My
-        Team Challenge</a>
-      <a mat-list-item [routerLink]="['/', 'post', 'post-list']" [queryParams]="{type: companyPostTypes.SalesGoal, all: false}">My Sales Goal</a>
-      <a mat-list-item [routerLink]="['/', 'post', 'post-list']" [queryParams]="{type: companyPostTypes.MarketingGoal, all: false}">My Marketing Goal</a>
-      <a mat-list-item [routerLink]="['/', 'post', 'post-list']" [queryParams]="{type: companyPostTypes.TechnicalGoal, all: false}">My Technical Goal</a>
-      <a mat-list-item [routerLink]="['/', 'post', 'post-list']" [queryParams]="{type: companyPostTypes.TeamGoal, all: false}">My Team Goal</a>
-      <a mat-list-item [routerLink]="['/', 'post', 'post-list']" [queryParams]="{type: companyPostTypes.Mission, all: false}">My Mission</a>
-      <a mat-list-item [routerLink]="['/', 'post', 'post-list']" [queryParams]="{type: companyPostTypes.CompanyPost, all: false}">My Company Post</a>
-      <a mat-list-item [routerLink]="['/', 'post', 'post-list']" [queryParams]="{type: companyPostTypes.CustomerTemplate, all: false}">My Customer Template</a>
-      <a mat-list-item [routerLink]="['/', 'post', 'post-list']" [queryParams]="{type: companyPostTypes.CustomerProfile, all: false}">My Customer Profile</a>
-      <a mat-list-item [routerLink]="['/', 'post', 'post-list']" [queryParams]="{type: companyPostTypes.BusinessServices, all: false}">My Business Services</a>
-      <a mat-list-item [routerLink]="['/', 'post', 'post-list']" [queryParams]="{type: companyPostTypes.CompetitiveAdvantage, all: false}">My Competitive Advantage</a>
-      <a mat-list-item [routerLink]="['/', 'post', 'post-list']" [queryParams]="{type: userProfilePostTypes.StartupGoal, all: false}">My Startup Goal</a>
-      <a mat-list-item [routerLink]="['/', 'post', 'post-list']" [queryParams]="{type: userProfilePostTypes.SocialImpactGoal, all: false}">My Social Impact Goal</a>
-      <a mat-list-item [routerLink]="['/', 'post', 'post-list']" [queryParams]="{type: userProfilePostTypes.LeadershipChallenge, all: false}">My Leadership Challenge</a>
-      <a mat-list-item [routerLink]="['/', 'post', 'post-list']" [queryParams]="{type: userProfilePostTypes.StressManagement, all: false}">My Stress Management</a>
-      <a mat-list-item [routerLink]="['/', 'post', 'post-list']" [queryParams]="{type: postTypes.Assignment, all: false}">My Assignments</a>
     </mat-nav-list>
   </mat-sidenav>p
 
@@ -104,10 +23,10 @@
     <mat-toolbar style="padding: 10px 0; background-color: rgb(8, 8, 8);">
 
 
-      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'add-post-type']">
+      <!-- <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'add-post-type']">
         <i style="font-size: 1.0rem !important; color: #ffff00;" class="vertical-align-middle fal fa-add fa-fw"></i>
         <span style="color: #ffffff;" class="line-height-initial"> Add Post Type </span>
-      </a>
+      </a> -->
 
       <!-- Search -->
       <a mat-button routerLinkActive="mat-primary" (click)="openSearchDialog()">

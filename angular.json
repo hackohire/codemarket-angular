@@ -68,6 +68,30 @@
                   "maximumError": "15mb"
                 }
               ]
+            },
+            "staging": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.staging.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "5mb",
+                  "maximumError": "15mb"
+                }
+              ]
             }
           }
         },
@@ -80,6 +104,9 @@
           "configurations": {
             "production": {
               "browserTarget": "joel:build:production"
+            },
+            "staging": {
+              "browserTarget": "joel:build:staging"
             }
           }
         },
@@ -129,6 +156,9 @@
           "configurations": {
             "production": {
               "devServerTarget": "joel:serve:production"
+            },
+            "staging": {
+              "devServerTarget": "joel:serve:staging"
             }
           }
         },
@@ -153,13 +183,18 @@
                 "styles": true
               }
             },
-            "serverless": {
+            "staging": {
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.serverless.ts"
+                  "with": "src/environments/environment.staging.ts"
                 }
-              ]
+              ],
+              "sourceMap": false,
+              "optimization": {
+                "scripts": false,
+                "styles": true
+              }
             }
           }
         }

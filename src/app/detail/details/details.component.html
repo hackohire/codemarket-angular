@@ -28,7 +28,7 @@
                     <div class="docs-component-viewer-nav common-box-shadow" style="margin-bottom: 20px;">
                         <div class="docs-component-viewer-nav-content">
                             <div *ngFor="let p of postTypesArray; let last = last;">
-                                <button (click)="redirectToAddPost(details)" cdkAccordionItem class="docs-nav-content-btn">
+                                <button (click)="redirectToAddPost(details, p?.name)" cdkAccordionItem class="docs-nav-content-btn">
                                     {{p.label}} <mat-icon>add</mat-icon>
                                 </button>
                                 <hr *ngIf="!last" />

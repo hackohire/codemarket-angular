@@ -38,6 +38,7 @@ import { LoaderComponent } from './auth/loader/loader.component';
 import { AuthModule } from './auth/auth.module';
 import { StressManagementComponent } from './stress-management/stress-management.component';
 import { ClassroomComponent } from './classroom/classroom.component';
+import { HomeworkComponent } from './homework/homework.component';
 // import { SignInComponent } from './core/amplify/sign-in-component';
 
 @NgModule({
@@ -72,7 +73,8 @@ import { ClassroomComponent } from './classroom/classroom.component';
     StressManagementComponent,
     CommunityImpactStoriesComponent,
     AdvocatesInfluencersComponent,
-    ClassroomComponent
+    ClassroomComponent,
+    HomeworkComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

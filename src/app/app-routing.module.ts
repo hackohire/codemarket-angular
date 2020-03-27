@@ -28,6 +28,7 @@ import { ViralComponent } from './viral/viral.component';
 import { CommunityImpactStoriesComponent } from './community-impact-stories/community-impact-stories.component';
 import { AdvocatesInfluencersComponent } from './advocates-influencers/advocates-influencers.component';
 import { ClassroomComponent } from './classroom/classroom.component';
+import { HomeworkComponent } from './homework/homework.component';
 // import { PostDataResolver } from './core/resolver';
 
 const routes: Routes = [
@@ -257,6 +258,10 @@ const routes: Routes = [
    {
     path: 'classroom',
     component: ClassroomComponent
+  },
+  {
+    path: 'homework',
+    component: HomeworkComponent
   }
   /** Static routes ends here */
 ];

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { QuoteService } from './quote.service';
 
 @Component({
   selector: 'app-classroom',
@@ -12,14 +13,16 @@ export class ClassroomComponent implements OnInit {
   formFieldObject: any;
   // Jane add end
 
-  constructor() { }
+  constructor(
+    private quoteService: QuoteService
+  ) { }
 
   ngOnInit() {
   }
 
   // Jane add for Insurance Quote
   getQuote(name, email, zipCode, age, sex, coverageAmount, termLength, healthLevel) {
-    this.formFieldObject = {
+    const formFieldObject = {
     name: name,
     email: email,
     zipCode: zipCode,
@@ -29,6 +32,12 @@ export class ClassroomComponent implements OnInit {
     termLength: termLength,
     healthLevel: healthLevel
     };
+
+    this.quoteService.getQuote(formFieldObject).subscribe((quote) => {
+      if (quote) {
+        this.formFieldObject = quote;
+      }
+    })
   }
   // Jane add end
 

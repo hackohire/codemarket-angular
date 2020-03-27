@@ -19,4 +19,6 @@ export enum PostType {
   Assignment = 'assignment',
 
   Email = 'email',
+
+  Note = 'note'
 }

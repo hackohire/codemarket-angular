@@ -20,7 +20,8 @@ export const appConstants = {
     [PostType.Class]: 'briefcase',
     [PostType.Service]: 'briefcase',
     [PostType.CompetitiveAdvantage]: 'briefcase',
-    [PostType.Assignment]: 'sticky-note'
+    [PostType.Assignment]: 'sticky-note',
+    [PostType.Note]: 'sticky-note'
   },
 
   fileS3Bucket: 'codemarket-files',
@@ -259,6 +260,12 @@ export const appConstants = {
       salaryRangeTo
       cities {
         name
+        _id
+      }
+
+      connectedPosts {
+        name
+        slug
         _id
       }
 

@@ -1,6 +1,57 @@
 @import '../../assets/css/_general.scss';
 @import '../../assets/css/_theme.scss';
 
+
+
+
+.midbox {
+    padding: 22px 0px 92px 0;
+}
+
+.home_product {
+	padding: 4px 3px 27px 3px;  
+	float: left;     
+	width: 204px;    
+	margin-left: 12px;     
+	background: #f6f6f6;     
+	text-align: center;     
+	box-shadow: 0 2px 1px 1px rgba(93, 127, 162, 0.8);     
+	position: relative;     
+	border-radius: 0px 0px 7px 7px;     
+	-webkit-border-radius: 0px 0px 7px 7px;     
+	cursor: pointer;
+}
+
+.home_product .list-pro {
+	position: relative;
+    height: 1px;
+   }
+
+.home_product ul.product_hover {
+    padding: 25px 20px;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    position: absolute;
+    left: 37px;
+    bottom: 42px;
+    width: 200px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    list-style: none;
+    background: #879fb9;
+}
+
+.home_product ul.product_hover li {
+    padding: 5px 0;
+    margin: 0px;
+    text-align: left;
+    list-style: none;
+    list-style-type: none;
+    font-family: 'PT Sans', sans-serif;
+	font-size: 14px;
+	word-wrap: break-word;
+}
+
 #insurance-banner {
 	background-image: url(../../assets/images/building.jpg);
 	background-repeat: round;
@@ -193,7 +244,7 @@ hr {
 
 /* CONTENT AREA */
 #insurance-content {
-	display: block;
+	//display: block;
 	// background-image: url(../../assets/images/insurance-content.png);
 	// background-repeat: repeat-y;
 	// margin-right: auto;

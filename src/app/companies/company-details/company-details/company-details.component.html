@@ -31,6 +31,7 @@
                     </div>
                     <h4 style="text-align: center; padding-top: 10px;">{{details?.name}}</h4>
                     <p *ngIf="details?.createdAt" style="text-align: center;">On platform since {{details?.createdAt | date}}</p>
+                    <p *ngIf="details?.createdBy" style="text-align: center;">Creator: <a target="_blank" [href]="'/'+ 'dashboard' + '/' + 'profile' + '/' + details?.createdBy?._id">{{details?.createdBy?.name}}</a></p>
                     <!-- Social Media Links & Popover to edit those links -->
                     <div class="social" fxLayout="row wrap" fxLayoutGap="10px" fxLayoutAlign="center start">
                         <a [href]="details?.facebookLink" target="_blank" style="color: inherit;"><i

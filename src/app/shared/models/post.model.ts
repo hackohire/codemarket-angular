@@ -46,6 +46,8 @@ export interface Post {
     likeCount?: number;
     comments?: Comment[];
 
+    /** Array of ID of posts, a post is tied to */
+    connectedPosts?: Post[];
     /** Field for collaborator */
     collaborators?: [User];
     assignees?: [User];

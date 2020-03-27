@@ -15,8 +15,8 @@
             <span>{{fromNow(p?.createdAt)}} {{' • '}} {{p?.createdAt | date: 'medium'}} <i class="fa fa-globe"></i></span>
         </h3>
 
-        <ul class="infos" *ngIf="p?.type">
-            <li>
+        <ul class="infos">
+            <li *ngIf="p?.type">
                 <p class="data-label">Type</p>
                 <p class="info">
                     <a>
@@ -24,10 +24,7 @@
                     </a>
                 </p>
             </li>
-        </ul>
-
-        <ul class="infos" *ngIf="p?.assignees && p?.assignees?.length">
-            <li>
+            <li *ngIf="p?.assignees && p?.assignees?.length">
                 <p class="data-label">Assignees</p>
                 <p class="info">
                     <a *ngFor="let t of p?.assignees" target="_blank" [href]="'/'+ 'dashboard' + '/' + 'profile' + '/' + t?._id">
@@ -37,9 +34,7 @@
                     </a>
                 </p>
             </li>
-        </ul>
-        <ul class="infos" *ngIf="p?.collaborators && p?.collaborators?.length">
-            <li>
+            <li *ngIf="p?.collaborators && p?.collaborators?.length">
                 <p class="data-label">Collaborators</p>
                 <p class="info">
                     <a *ngFor="let t of p?.collaborators" target="_blank" [href]="'/'+ 'dashboard' + '/' + 'profile' + '/' + t?._id">
@@ -49,9 +44,7 @@
                     </a>
                 </p>
             </li>
-        </ul>
-        <ul class="infos" *ngIf="p?.companies && p?.companies?.length">
-            <li>
+            <li *ngIf="p?.companies && p?.companies?.length">
                 <p class="data-label">Company</p>
                 <p class="info">
                     <a *ngFor="let t of p?.companies" target="_blank" [href]="'/'+ 'company' + '/' + t?._id">
@@ -60,6 +53,14 @@
                             alt=""> -->
                             {{t?.name}}</span>
                     </a>
+                </p>
+            </li>
+            <li *ngIf="p?.connectedPosts && p?.connectedPosts?.length">
+                <p class="data-label">Reference Posts</p>
+                <p class="info">
+                    <span style="text-decoration: underline;" *ngFor="let t of p?.connectedPosts; let last=last;">
+                        <a [href]="'/' + 'post' + '/' + t?.slug" target="_blank">{{t?.name}} {{last ? '' : ','}}</a>
+                    </span>
                 </p>
             </li>
         </ul>

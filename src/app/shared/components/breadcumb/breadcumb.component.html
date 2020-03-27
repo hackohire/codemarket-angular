@@ -14,17 +14,17 @@
                     </ul>
                     <div style="margin-left: auto;">
 
-                        <app-add-collaborators *ngIf="showAddCollaborators" [postDetails]="postDetails"></app-add-collaborators>
-                        <app-add-assignee *ngIf="showAddAssignee" [postDetails]="postDetails"></app-add-assignee>
+                        <app-add-collaborators style="margin-right: 5px;" *ngIf="showAddCollaborators" [postDetails]="postDetails"></app-add-collaborators>
+                        <app-add-assignee style="margin-right: 5px;" *ngIf="showAddAssignee" [postDetails]="postDetails"></app-add-assignee>
 
-                        <a *ngIf="showImportButton" class="btn btn--sm btn--round menu"
+                        <a *ngIf="showImportButton" class="btn btn--vsm btn--round menu"
                             style="color: #0674ec !important; background: white;" [mdePopoverTriggerFor]="importArticle"
                             mdePopoverTriggerOn="click">Import
                         </a>
                         <!--
                             <app-add-post-menu style="color: #0674ec !important; margin-left: auto;"></app-add-post-menu>
                             -->
-                        <a *ngIf="showEditPostDetails" class="btn btn--sm btn--round menu"
+                        <a *ngIf="showEditPostDetails" class="btn btn--vsm btn--round menu"
                             style="color: #0674ec !important; background: white; margin-right: 5px;"
                             (click)="editPost.emit()">Edit <mat-icon style="vertical-align: middle;">edit</mat-icon>
                         </a>
@@ -87,10 +87,19 @@
                             </p>
                         </li>
 
-                        <li *ngIf="postDetails?.tags">
+                        <li *ngIf="postDetails?.tags && postDetails?.tags?.length">
                             <p class="data-label">Tags</p>
                             <p class="info">
                                 <span class="tag" *ngFor="let t of postDetails?.tags">{{t?.name}}</span>
+                            </p>
+                        </li>
+
+                        <li *ngIf="postDetails?.connectedPosts && postDetails?.connectedPosts?.length">
+                            <p class="data-label">Reference Posts</p>
+                            <p class="info">
+                                <span style="text-decoration: underline;" *ngFor="let t of postDetails?.connectedPosts; let last=last;">
+                                    <a style="color: white;" [href]="'/' + 'post' + '/' + t?.slug" target="_blank">{{t?.name}} {{last ? '' : ','}}</a>
+                                </span>
                             </p>
                         </li>
                         <!-- <li *ngIf="postDetails?.users">

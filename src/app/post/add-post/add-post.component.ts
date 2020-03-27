@@ -10,6 +10,7 @@ import { BreadCumb } from '../../shared/models/bredcumb.model';
 import { PostStatus } from '../../shared/models/poststatus.enum';
 import { EditorComponent } from '../../shared/components/editor/editor.component';
 import { Post } from '../../shared/models/post.model';
+import { Location } from '@angular/common';
 import { PostService } from '../../shared/services/post.service';
 
 @Component({
@@ -21,6 +22,11 @@ export class AddPostComponent implements OnInit {
 
   breadcumb: BreadCumb;
   postForm: FormGroup;
+
+  editPostDetails: Post;
+
+  /** When a user tries to tie a post with this post */
+  postFromRoute: Post;
 
   @Input() postType = '';
   @Input() postId: string;
@@ -50,7 +56,8 @@ export class AddPostComponent implements OnInit {
     private authService: AuthService,
     private store: Store<AppState>,
     private activatedRoute: ActivatedRoute,
-    private postService: PostService
+    private postService: PostService,
+    private location: Location,
   ) {
 
     this.postType = this.activatedRoute.snapshot.queryParams['type'];
@@ -73,6 +80,7 @@ export class AddPostComponent implements OnInit {
     if (this.postId) {
       this.subscription$.add(
         this.postService.getPostById(this.postId).subscribe((p) => {
+          this.editPostDetails = p;
           this.postType = p.type;
           this.breadcumb.title = this.postType;
           this.breadcumb.path[0].name = this.postType;
@@ -97,6 +105,19 @@ export class AddPostComponent implements OnInit {
 
     if (this.postId || (i && i._id)) {
       this.postForm.addControl('_id', new FormControl(i && i._id ? i._id : ''));
+    }
+
+
+    /** If somebody tries to tie a post with this post */
+    this.postFromRoute = this.location.getState()['post'];
+
+    if (this.postFromRoute) {
+      this.postForm.get('tags').setValue(this.postFromRoute.tags);
+      this.postForm.get('assignees').setValue(this.postFromRoute.assignees);
+      this.postForm.get('collaborators').setValue(this.postFromRoute.collaborators);
+      this.postForm.get('companies').setValue(this.postFromRoute.companies);
+
+      this.postForm.addControl('connectedPosts', new FormControl([this.postFromRoute._id]));
     }
   }
 

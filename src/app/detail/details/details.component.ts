@@ -22,6 +22,7 @@ import { SweetalertService } from '../../shared/services/sweetalert.service';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { Company } from '../../shared/models/company.model';
 import { User } from '../../shared/models/user.model';
+import { appConstants } from '../../shared/constants/app_constants';
 
 @Component({
   selector: 'app-details',
@@ -33,6 +34,8 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
   @ViewChild('successfulRSVP', { static: false }) successfulRSVP: SwalComponent;
   details$: Observable<Post>;
+
+  postTypesArray = appConstants.postTypesArray;
 
   postDetails: Post | Company | any;
   isUserAttending: boolean; /** Only for the event */
@@ -74,7 +77,6 @@ export class DetailsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     /** Read the type of the post  */
     this.type = this.activatedRoute.snapshot.queryParams.type;
-
 
     this.commentId = this.activatedRoute.snapshot.queryParams['commentId'];
 
@@ -236,6 +238,10 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
   trackByFn(index, item) {
     return index; // or item.id
+  }
+
+  redirectToAddPost(p) {
+    this.router.navigate(['../add-post'], {relativeTo: this.activatedRoute, state: {post: p}, queryParams: {type: p.type}});
   }
 
 }

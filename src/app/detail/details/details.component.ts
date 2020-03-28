@@ -241,7 +241,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
   }
 
   redirectToAddPost(p, postType) {
-    this.router.navigate(['../add-post'], {relativeTo: this.activatedRoute, state: {post: p}, queryParams: {type: p.type}});
+    this.router.navigate(['../add-post'], {relativeTo: this.activatedRoute, state: {post: p}, queryParams: {type: postType}});
   }
 
 }

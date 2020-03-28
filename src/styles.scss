@@ -6,7 +6,6 @@
 @import url("assets/fonts/charter/webfonts/stylesheet.css");
 @import "~@ng-select/ng-select/themes/material.theme.css";
 @import "~@ngx-share/button/themes/default/default-theme";
-// @import '~aws-amplify-angular/Theme.css';
 
 html,
 body {
@@ -24,6 +23,18 @@ span {
   font-weight: bold;
 }
 
+form > * {
+  // margin-bottom: 1.5em;
+  // width: 100%;
+}
+
+.auth-box {
+  background-color: #ececec; 
+  padding: 15px;
+  max-width: 500px;
+  min-width: 500px;
+  border-radius: 10px;
+}
 
 .cdx-input link-tool__input {
   white-space: pre-wrap !important;
@@ -39,7 +50,7 @@ span {
 
 .field-full-width {
   width: 100%;
-  margin: 20px 0 20px 0;
+  margin: 10px 0 10px 0;
 }
 
 
@@ -95,6 +106,7 @@ textarea {
 .cdx-block {
   font-family: "charterregular", sans-serif !important;
   font-size: 19px;
+  word-break: break-word;
   // padding: 0;
 }
 
@@ -3515,8 +3527,11 @@ h6 {
 .breadcrumb-area {
   // padding-top: 52px !important;
   // padding-bottom: 50px;
-  padding-top: 27px !important;
-  padding-bottom: 25px;
+  // padding-top: 27px !important;
+  // padding-bottom: 25px;
+
+  padding-top: 10px !important;
+  padding-bottom: 8px;
 }
 
 .breadcrumb-area .breadcrumb ul li a {

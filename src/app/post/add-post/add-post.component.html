@@ -1,0 +1,54 @@
+<app-breadcumb [title]="breadcumb?.title" [path]="breadcumb?.path" [showImportButton]="true" [postDetails]="{ connectedPosts: editPostDetails ? editPostDetails?.connectedPosts : postFromRoute ? [postFromRoute] : []}"></app-breadcumb>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div [formGroup]="postForm" class="add-form-area common-box-shadow">
+                <mat-form-field class="field-full-width">
+                    <input type="text" matInput formControlName="name" placeholder="Title">
+                </mat-form-field>
+
+                <br />
+
+                <app-autocomplete class="col-md-6" [autoComplete]="postForm?.get('companies')" [forCompany]="true"
+                    [placeholder]="'Select Company'" [collection]="'companies'" [type]="" [multiple]="true">
+                </app-autocomplete>
+
+                <app-editor #descriptionEditor [placeholder]="postType + ' description'"
+                    [data]="descriptionFormControl?.value" [id]="'edit-post-editor'" [importArticleSubscription]="true">
+                </app-editor>
+
+                <br />
+
+                <app-autocomplete class="field-full-width" [allowToAdd]="false"
+                    [autoComplete]="postForm?.get('collaborators')" [placeholder]="'Select Collaborators'"
+                    [collection]="'users'" [type]="" [multiple]="true" matInput>
+                </app-autocomplete>
+
+                <app-autocomplete class="field-full-width" [allowToAdd]="false"
+                    [autoComplete]="postForm.get('assignees')" [placeholder]="'Select Students'"
+                    [collection]="'users'" [type]="" [multiple]="true" matInput>
+                </app-autocomplete>
+
+                <!-- <app-autocomplete [autoComplete]="postForm?.get('users')" [placeholder]="'Users'" [collection]="'users'"
+                    [multiple]="true" [allowToAdd]="false"></app-autocomplete> -->
+
+                <app-autocomplete [autoComplete]="postForm?.get('tags')" [placeholder]="'Tags'" [collection]="'tags'"
+                    [type]="'tag'" [multiple]="true"></app-autocomplete>
+
+                <div fxLayout="row" fxLayoutGap="10px">
+                    <button *ngIf="statusFormControl?.value !== 'Published'" type="button" (click)="submit('Drafted')"
+                        [disabled]="postForm?.invalid" mat-raised-button color="primary">Save</button>
+                    <button type="button" (click)="submit('Published')" [disabled]="postForm?.invalid" mat-raised-button
+                        color="primary">{{ statusFormControl?.value === 'Published' ? 'Publish Changes' : 'Publish' }}</button>
+                    <button *ngIf="statusFormControl?.value === 'Published'" type="button"
+                        (click)="submit('Unpublished')" [disabled]="postForm?.invalid" mat-raised-button
+                        color="primary">{{ 'Unpublish' }}</button>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

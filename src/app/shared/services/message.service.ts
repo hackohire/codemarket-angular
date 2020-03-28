@@ -20,7 +20,6 @@ export class MessageService {
 
   constructor(
     private apollo: Apollo,
-    private router: Router,
     @Inject(PLATFORM_ID) private platformId,
     private readonly transferState: TransferState
   ) { }
@@ -59,8 +58,8 @@ export class MessageService {
           if (isPlatformServer(this.platformId)) {
             this.transferState.set(key, p.data.fetchLatestCommentsForTheUserEngaged);
           }
-          const messages = this.messages$.getValue().messages.concat(p.data.fetchLatestCommentsForTheUserEngaged.messages);
-          this.messages$.next({messages, total: p.data.fetchLatestCommentsForTheUserEngaged.total});
+          const messages = p.data.fetchLatestCommentsForTheUserEngaged;
+          this.messages$.next({messages: messages.messages, total: messages.total});
         }),
       ).subscribe();
     }
@@ -68,6 +67,7 @@ export class MessageService {
 
   addNewMessage(c) {
     c['__show'] = true;
+    c['createdAt'] = new Date(c['createdAt']).getTime();
     const messages = this.messages$.getValue();
     messages.messages.unshift(c);
     this.messages$.next(messages);

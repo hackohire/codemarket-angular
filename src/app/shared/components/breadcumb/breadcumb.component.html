@@ -14,17 +14,17 @@
                     </ul>
                     <div style="margin-left: auto;">
 
-                        <app-add-collaborators *ngIf="showAddCollaborators" [postDetails]="postDetails"></app-add-collaborators>
-                        <app-add-assignee *ngIf="showAddAssignee" [postDetails]="postDetails"></app-add-assignee>
+                        <app-add-collaborators style="margin-right: 5px;" *ngIf="showAddCollaborators" [postDetails]="postDetails"></app-add-collaborators>
+                        <app-add-assignee style="margin-right: 5px;" *ngIf="showAddAssignee" [postDetails]="postDetails"></app-add-assignee>
 
-                        <a *ngIf="showImportButton" class="btn btn--sm btn--round menu"
+                        <a *ngIf="showImportButton" class="btn btn--vsm btn--round menu"
                             style="color: #0674ec !important; background: white;" [mdePopoverTriggerFor]="importArticle"
                             mdePopoverTriggerOn="click">Import
                         </a>
                         <!--
                             <app-add-post-menu style="color: #0674ec !important; margin-left: auto;"></app-add-post-menu>
                             -->
-                        <a *ngIf="showEditPostDetails" class="btn btn--sm btn--round menu"
+                        <a *ngIf="showEditPostDetails" class="btn btn--vsm btn--round menu"
                             style="color: #0674ec !important; background: white; margin-right: 5px;"
                             (click)="editPost.emit()">Edit <mat-icon style="vertical-align: middle;">edit</mat-icon>
                         </a>
@@ -73,6 +73,79 @@
                             <p class="info" style="text-transform: capitalize;">{{ postDetails?.location?.address }}</p>
                         </li>
 
+                        <li *ngIf="postDetails?.email && postDetails?.emmail?.length">
+                            <p class="data-label">Email</p>
+                            <p class="info">
+                                <span class="tag" *ngFor="let t of postDetails?.email">{{t}}</span>
+                            </p>
+                        </li>
+
+                        <li *ngIf="postDetails?.phone && postDetails?.phone?.length">
+                            <p class="data-label">Phone</p>
+                            <p class="info">
+                                <span class="tag" *ngFor="let t of postDetails?.phone">{{t}}</span>
+                            </p>
+                        </li>
+
+                        <li *ngIf="postDetails?.tags && postDetails?.tags?.length">
+                            <p class="data-label">Tags</p>
+                            <p class="info">
+                                <span class="tag" *ngFor="let t of postDetails?.tags">{{t?.name}}</span>
+                            </p>
+                        </li>
+
+                        <li *ngIf="postDetails?.connectedPosts && postDetails?.connectedPosts?.length">
+                            <p class="data-label">Reference Posts</p>
+                            <p class="info">
+                                <span style="text-decoration: underline;" *ngFor="let t of postDetails?.connectedPosts; let last=last;">
+                                    <a style="color: white;" [href]="'/' + 'post' + '/' + t?.slug" target="_blank">{{t?.name}} {{last ? '' : ','}}</a>
+                                </span>
+                            </p>
+                        </li>
+                        <!-- <li *ngIf="postDetails?.users">
+                            <p class="data-label">Users</p>
+                            <p class="info">
+                                <a *ngFor="let t of postDetails?.users" target="_blank" [href]="'/'+ 'dashboard' + '/' + 'profile' + '/' + t?._id">
+                                    <span class="tag">
+                                        <img [src]="t?.avatar ? ((s3FilesBucketURL + t?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                                        alt="">{{t?.name}}</span>
+                                </a>
+                            </p>
+                        </li> -->
+
+                        <!-- <li *ngIf="postDetails?.users">
+                            <p class="data-label">Users</p>
+                            <p class="info">
+                                <a *ngFor="let t of postDetails?.users" target="_blank" [href]="'/'+ 'dashboard' + '/' + 'profile' + '/' + t?._id">
+                                    <span class="tag">
+                                        <img [src]="t?.avatar ? ((s3FilesBucketURL + t?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                                        alt="">{{t?.name}}</span>
+                                </a>
+                            </p>
+                        </li> -->
+
+                        <li *ngIf="postDetails?.assignee && postDetails?.assignee?.length">
+                            <p class="data-label">Assignee</p>
+                            <p class="info">
+                                <a *ngFor="let t of postDetails?.assignee" target="_blank" [href]="'/'+ 'dashboard' + '/' + 'profile' + '/' + t?._id">
+                                    <span class="tag">
+                                        <img [src]="t?.avatar ? ((s3FilesBucketURL + t?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                                        alt="">{{t?.name}}</span>
+                                </a>
+                            </p>
+                        </li>
+
+                        <li *ngIf="postDetails?.collaborators && postDetails?.collaborators?.length">
+                            <p class="data-label">Collaborators</p>
+                            <p class="info">
+                                <a *ngFor="let t of postDetails?.collaborators" target="_blank" [href]="'/'+ 'dashboard' + '/' + 'profile' + '/' + t?._id">
+                                    <span class="tag">
+                                        <img [src]="t?.avatar ? ((s3FilesBucketURL + t?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                                        alt="">{{t?.name}}</span>
+                                </a>
+                            </p>
+                        </li>
+
                         <li *ngIf="postDetails?.jobProfile && postDetails?.jobProfile?.length">
                             <p class="data-label">Position</p>
                             <p class="info" style="text-transform: capitalize;">
@@ -83,14 +156,14 @@
 
                         <li *ngIf="postDetails?.company">
                             <p class="data-label">Company</p>
-                            <p class="info" style="text-transform: capitalize;">{{ postDetails?.company?.name }}</p>
+                            <p class="info" style="text-transform: capitalize; cursor: pointer;" [routerLink]="['/', 'company', postDetails?.company._id]">{{ postDetails?.company?.name }}</p>
                         </li>
 
                         <li *ngIf="postDetails?.companies && postDetails?.companies?.length">
                             <p class="data-label">Company</p>
-                            <p class="info" style="text-transform: capitalize;">
+                            <p class="info" style="text-transform: capitalize; cursor: pointer;">
                                 <span
-                                    *ngFor="let c of postDetails?.companies; let ei = index;">{{c?.name + (ei === postDetails?.companies?.length - 1 ? '' : ', ' )}}</span>
+                                    *ngFor="let c of postDetails?.companies; let ei = index;" [routerLink]="['/', 'company', c?._id]">{{c?.name + (ei === postDetails?.companies?.length - 1 ? '' : ', ' )}}</span>
                             </p>
                         </li>
 

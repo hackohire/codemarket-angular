@@ -20,7 +20,6 @@ import { appReducesrs } from './store/reducers/app.reducers';
 import { SearchComponent } from './components/search/search.component';
 import { RouteReuseStrategy } from '@angular/router';
 import { CustomRouteReuseStategy } from '../shared/services/custom_router_reuse';
-import { AmplifyService } from './services/amplify.service';
 import { WebSocketLink } from 'apollo-link-ws';
 import { SubscriptionClient } from 'subscriptions-transport-ws';
 import { split } from 'apollo-link';
@@ -62,7 +61,6 @@ export function clearState(reducer) {
     // StoreDevtoolsModule.instrument(),
   ],
   providers: [
-    AmplifyService, 
     {
       provide: REDUCER_TOKEN,
       useValue: appReducesrs()
@@ -102,12 +100,9 @@ export class CoreModule {
            */
           if (key === '__typename' || (key === '_id' && !value) || key === '__show') {
             return undefined;
-          } 
-          // else if (key === 'company') {
-          //   return value && value._id ? value._id : undefined;
-          // }
+          }
           return value;
-        }
+        };
         operation.variables = JSON.parse(JSON.stringify(operation.variables), omitTypename);
       }
       return forward(operation).map((data) => {
@@ -150,7 +145,7 @@ export class CoreModule {
       link,
       cache: new InMemoryCache({
         dataIdFromObject: (o: any) => {
-          return o._id
+          return o._id;
         },
         addTypename: true,
 
@@ -175,7 +170,7 @@ export class CoreModule {
                     { name: 'TableBlock' },
                     { name: 'WarningBlock' },
                     { name: 'EmbedBlock' },
-                    { name: 'LinkToolBlock' }
+                    { name: 'LinkToolBlock' },
                   ],
                 },
               ],

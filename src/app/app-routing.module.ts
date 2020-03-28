@@ -49,6 +49,10 @@ const routes: Routes = [
     redirectTo: '/dashboard',
   },
   {
+    path: 'add-post-type',
+    loadChildren: () => import('./post-type/add-post-type/add-post-type.module').then(module => module.AddPostTypeModule),
+  },
+  {
     path: 'dashboard',
     loadChildren: () => import('./dashboard/dashboard.module').then(module => module.DashboardModule),
     // outlet: 'main'
@@ -66,54 +70,6 @@ const routes: Routes = [
     // outlet: 'main',
     canLoad: [AuthGuard]
   },
-
-  {
-    path: 'help-request',
-    loadChildren: () => import('./help/help.module').then(module => module.HelpModule),
-    // outlet: 'main',
-    canLoad: [AuthGuard]
-  },
-
-  // {
-  //   path: 'interview',
-  //   loadChildren: () => import('./interview/interview.module').then(module => module.InterviewModule),
-  //   outlet: 'main',
-  //   canLoad: [AuthGuard]
-  // },
-  // {
-  //   path: 'requirement',
-  //   loadChildren: () => import('./requirements/requirements.module').then(module => module.RequirementsModule),
-  //   outlet: 'main',
-  //   canLoad: [AuthGuard]
-  // },
-
-  // {
-  //   path: 'testing',
-  //   loadChildren: () => import('./testing/testing.module').then(module => module.TestingModule),
-  //   outlet: 'main',
-  //   canLoad: [AuthGuard]
-  // },
-
-  // {
-  //   path: 'howtodoc',
-  //   loadChildren: () => import('./howtodoc/howtodoc.module').then(module => module.HowtodocModule),
-  //   outlet: 'main',
-  //   canLoad: [AuthGuard]
-  // },
-
-  // {
-  //   path: 'design',
-  //   loadChildren: () => import('./design/design.module').then(module => module.DesignModule),
-  //   outlet: 'main',
-  //   canLoad: [AuthGuard]
-  // },
-
-  // {
-  //   path: 'goal',
-  //   loadChildren: () => import('./goal/goal.module').then(module => module.GoalModule),
-  //   outlet: 'main',
-  //   canLoad: [AuthGuard]
-  // },
   {
     path: 'post',
     loadChildren: () => import('./post/post.module').then(module => module.PostModule),

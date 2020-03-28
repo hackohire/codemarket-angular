@@ -14,6 +14,7 @@ import { appConstants } from '../constants/app_constants';
 import { makeStateKey, TransferState } from '@angular/platform-browser';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { isPlatformServer } from '@angular/common';
+import { comment } from '../constants/fragments_constatnts';
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +33,7 @@ export class PostService {
   ) { }
 
 
-  getPostsByUserIdAndType(userId: string, status: string, postType: string, pageOptions = {pageNumber: 0, limit: 0}): Observable<{posts: Post[], total: number}> {
+  getPostsByUserIdAndType(userId: string, status: string, postType: string, pageOptions = { pageNumber: 0, limit: 0 }): Observable<{ posts: Post[], total: number }> {
     return this.apollo.query(
       {
         query: gql`
@@ -176,7 +177,7 @@ export class PostService {
     );
   }
 
-  getAllPosts(pageOptions, type, reference = null, companyId = '', connectedWithUser = '', createdBy = ''): Observable<{posts: Post[], total: number}> {
+  getAllPosts(pageOptions, type, reference = null, companyId = '', connectedWithUser = '', createdBy = ''): Observable<{ posts: Post[], total: number }> {
     return this.apollo.query(
       {
         query: gql`
@@ -193,7 +194,7 @@ export class PostService {
         variables: {
           pageOptions,
           type: type ? type : '',
-          reference : reference ? reference : null,
+          reference: reference ? reference : null,
           companyId,
           connectedWithUser,
           createdBy
@@ -216,28 +217,24 @@ export class PostService {
       this.redirectToEventDetails(post, commentId);
     } else {
       this.router.navigate(['/',
-      post.type === PostType.Product ? PostType.Product : 'post',
-      post.slug ? post.slug : ''
-    ],
-      { queryParams: { type: post.type, commentId} });
+        post.type === PostType.Product ? PostType.Product : 'post',
+        post.slug ? post.slug : ''
+      ],
+        { queryParams: commentId ? { commentId } : null }
+      );
     }
   }
 
   redirectToDreamJobDetails(dreamJob, commentId = ''): void {
-    this.router.navigate(['/', PostType.Dreamjob, dreamJob.slug], { queryParams: { commentId} });
+    this.router.navigate(['/', PostType.Dreamjob, dreamJob.slug], { queryParams: commentId ? { commentId } : null });
   }
 
   redirectToEventDetails(event, commentId = ''): void {
-    this.router.navigate(['/', PostType.Event, event.slug], { queryParams: { commentId} });
+    this.router.navigate(['/', PostType.Event, event.slug], { queryParams: commentId ? { commentId } : null });
   }
 
   editPost(post): void {
-
-    if (post.type === PostType.Product) {
-      this.router.navigate(['/', 'sell', 'edit-product', post._id]);
-    } else {
-      this.router.navigate(['/', 'post', 'edit-' + post.type, post._id]);
-    }
+    this.router.navigate(['/post', 'edit-post', post._id], {queryParams: {type: post.type}});
   }
 
   rsvpEvent(eventId: string): Observable<any> {

@@ -1,11 +1,32 @@
 .data-label {
-    width: 10%;
+    // width: 10%;
     font-weight: 600;
     // color: #333333;
 }
 
 .info {
     width: 90%;
+}
+
+.tag {
+    background: #00000033;
+    display: inline-block;
+    color: white;
+    padding: 0 10px;
+    line-height: 28px;
+    margin-right: 10px;
+    font-size: 13px;
+    font-weight: 200;
+    -webkit-border-radius: 100px;
+    border-radius: 100px;
+
+    img {
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        margin-right: 5px;
+        vertical-align: middle;
+    }
 }
 
 ul.infos li {
@@ -19,7 +40,7 @@ ul.infos li p {
     vertical-align: middle;
     margin-right: -3px;
     margin: 0;
-    font-size: 17px;
+    font-size: 15px;
     vertical-align: top;
     line-height: 36px;
 }

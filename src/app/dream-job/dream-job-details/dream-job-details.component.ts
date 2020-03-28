@@ -101,6 +101,10 @@ export class DreamJobDetailsComponent implements OnInit, OnDestroy {
           this.details$ = of(p);
           this.initializeCommentForm(p, PostType.Dreamjob);
           this.getJobsConnectedWithDreamJob(postId);
+
+          this.collaborators = p.collaborators.map((cDetail) => {
+            return cDetail._id;
+          });
         } else if (this.postDetails && this.postDetails._id === postId) {
           /** Comes inside this block, only when we are already in a post details page, and by using searh,
            * we try to open any other post detials page

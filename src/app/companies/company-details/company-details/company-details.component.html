@@ -30,43 +30,56 @@
                         <span class="initials">{{details?.name ? details?.name[0] : ''}}</span>
                     </div>
                     <h4 style="text-align: center; padding-top: 10px;">{{details?.name}}</h4>
-
+                    <p *ngIf="details?.createdAt" style="text-align: center;">On platform since {{details?.createdAt | date}}</p>
+                    <p *ngIf="details?.createdBy" style="text-align: center;">Creator: <a target="_blank" [href]="'/'+ 'dashboard' + '/' + 'profile' + '/' + details?.createdBy?._id">{{details?.createdBy?.name}}</a></p>
                     <!-- Social Media Links & Popover to edit those links -->
                     <div class="social" fxLayout="row wrap" fxLayoutGap="10px" fxLayoutAlign="center start">
-                        <a [href]="details?.facebookLink" target="_blank" style="color: inherit;"><i class="fab fa-facebook"></i></a>
-                        <a [href]="details?.twitterLink" target="_blank" style="color: inherit;"><i class="fab fa-twitter"></i></a>
-                        <a [href]="details?.linkedinLink" target="_blank" style="color: inherit;"><i class="fab fa-linkedin"></i></a>
-                        <a [href]="details?.yelpLink" target="_blank" style="color: inherit;"><i class="fab fa-yelp"></i></a>
-                        <a [href]="details?.websiteLink" target="_blank" style="color: inherit;"><i class="far fa-rss"></i></a>
-                        <a *ngIf="details?.createdBy?._id === authService?.loggedInUser?._id"><i class="fas fa-pen" [mdePopoverTriggerFor]="socialMediaLinks" [mdePopoverTargetAt]="lr"
-                            mdePopoverTriggerOn="click"></i></a>
-                        
+                        <a [href]="details?.facebookLink" target="_blank" style="color: inherit;"><i
+                                class="fab fa-facebook"></i></a>
+                        <a [href]="details?.twitterLink" target="_blank" style="color: inherit;"><i
+                                class="fab fa-twitter"></i></a>
+                        <a [href]="details?.linkedinLink" target="_blank" style="color: inherit;"><i
+                                class="fab fa-linkedin"></i></a>
+                        <a [href]="details?.yelpLink" target="_blank" style="color: inherit;"><i
+                                class="fab fa-yelp"></i></a>
+                        <a [href]="details?.websiteLink" target="_blank" style="color: inherit;"><i
+                                class="far fa-rss"></i></a>
+                        <a *ngIf="details?.createdBy?._id === authService?.loggedInUser?._id"><i class="fas fa-pen"
+                                [mdePopoverTriggerFor]="socialMediaLinks" [mdePopoverTargetAt]="lr"
+                                mdePopoverTriggerOn="click"></i></a>
+
                     </div>
 
                     <mde-popover #socialMediaLinks="mdePopover" [mdePopoverOverlapTrigger]="false"
                         [mdePopoverCloseOnClick]="false" [mdePopoverArrowWidth]="0" mdePopoverArrowColor="#FFFFFF">
-                        <div class="common-box-shadow" style="padding: 15px; min-width: 500px; border-radius: 19px; background: #f2f3f5; border: solid 0.5px rgb(236, 236, 236)">
-                            <mat-form-field style="display: block;" >
-                                <input #fb [value]="details?.facebookLink" type="text" matInput placeholder="Facebook Page">
+                        <div class="common-box-shadow"
+                            style="padding: 15px; min-width: 500px; border-radius: 19px; background: #f2f3f5; border: solid 0.5px rgb(236, 236, 236)">
+                            <mat-form-field style="display: block;">
+                                <input #fb [value]="details?.facebookLink" type="text" matInput
+                                    placeholder="Facebook Page">
                             </mat-form-field>
-                            <mat-form-field style="display: block;" >
-                                <input #tw [value]="details?.twitterLink" type="text" matInput placeholder="Twitter Handle">
+                            <mat-form-field style="display: block;">
+                                <input #tw [value]="details?.twitterLink" type="text" matInput
+                                    placeholder="Twitter Handle">
                             </mat-form-field>
-                            <mat-form-field style="display: block;" >
+                            <mat-form-field style="display: block;">
                                 <input #li [value]="details?.linkedinLink" type="text" matInput placeholder="Linkedin">
                             </mat-form-field>
-                            <mat-form-field style="display: block;" >
-                                <input #ig [value]="details?.instagramLink" type="text" matInput placeholder="Instagram">
+                            <mat-form-field style="display: block;">
+                                <input #ig [value]="details?.instagramLink" type="text" matInput
+                                    placeholder="Instagram">
                             </mat-form-field>
-                            <mat-form-field style="display: block;" >
+                            <mat-form-field style="display: block;">
                                 <input #yelp [value]="details?.yelpLink" type="text" matInput placeholder="Yelp">
                             </mat-form-field>
-                            <mat-form-field style="display: block;" >
-                                <input #cw [value]="details?.websiteLink" type="text" matInput placeholder="Company Website">
+                            <mat-form-field style="display: block;">
+                                <input #cw [value]="details?.websiteLink" type="text" matInput
+                                    placeholder="Company Website">
                             </mat-form-field>
-                            <a class="btn btn--vsm btn--round menu" (click)="updateSocialMedia(fb.value, tw.value, li.value, ig.value, yelp.value, cw.value)"
-                            style="color: white; background: #0674ec !important;">Update
-                        </a>
+                            <a class="btn btn--vsm btn--round menu"
+                                (click)="updateSocialMedia(fb.value, tw.value, li.value, ig.value, yelp.value, cw.value)"
+                                style="color: white; background: #0674ec !important;">Update
+                            </a>
                         </div>
                     </mde-popover>
 
@@ -103,7 +116,7 @@
             <div class="row">
                 <div class="col-lg-3">
                     <!-- start aside -->
-                    <app-add-post-menu style="color: #0674ec !important; margin-left: auto;"></app-add-post-menu>
+                    <!-- <app-add-post-menu style="color: #0674ec !important; margin-left: auto;"></app-add-post-menu> -->
                     <div class="docs-component-viewer-nav common-box-shadow"
                         style="margin-bottom: 20px; margin-top: 10px;">
                         <div class="docs-component-viewer-nav-content">
@@ -116,8 +129,8 @@
                                     [attr.aria-expanded]="panel.expanded">
                                     {{category.title}}
 
-                                    <i *ngIf="category?.showHighlight" style="color: red;"
-                                        class="fas fa-exclamation"></i>
+                                    <!-- <i *ngIf="category?.showHighlight" style="color: red;"
+                                        class="fas fa-exclamation"></i> -->
 
                                     <mat-icon *ngIf="category?.types">
                                         {{panel.expanded ? 'keyboard_arrow_up' :  'keyboard_arrow_down'}}
@@ -132,6 +145,18 @@
                                         {{component.title}}
                                     </a>
                                 </mat-nav-list>
+                                <hr *ngIf="!last" />
+                            </div>
+
+                            <!-- Based On the List Of Post Types -->
+                            <div *ngFor="let p of postTypesArray; let last = last;">
+                                <button cdkAccordionItem [routerLink]="[]" [queryParams]="{ view: p.name }"
+                                    [queryParamsHandling]="'merge'"
+                                    (click)="companyView = p.name; fetchAllCompanyRealtedePosts(p.name);"
+                                    class="docs-nav-content-btn"
+                                    [ngClass]="companyView === p.name ? 'docs-component-viewer-sidenav-item-selected' : ''">
+                                    {{p.label}}
+                                </button>
                                 <hr *ngIf="!last" />
                             </div>
                         </div>
@@ -203,16 +228,27 @@
                         </div>
                     </div>
 
-                    <div *ngIf="companyView === 'home'">
-                        <ng-container
-                            *ngTemplateOutlet="postTemplate; context: { details: details, postType: 'company-post'}">
-                        </ng-container>
-                    </div>
+                    <!-- Showing the list of posts for the posts tab, everytime user clicks on the "load more", we increase the page number and call
+							fetchAllOtherPosts method to fetch subsequent posts -->
+                    <ng-container *ngIf="companyView === 'posts'">
+                        <div class="item-grid pen-grid item-grid-large">
+                            <app-brief-post style="width: 100%;" [p]="e" *ngFor="let e of companyRelatedPosts?.posts"
+                                [readMore]="true"></app-brief-post>
+                        </div>
+                        <app-paginator [length]="totalcompanyRelatedPosts" (fetchData)="paginator = $event; fetchAllCompanyRealtedePosts()">
+                        </app-paginator>
+                    </ng-container>
 
-                    <div *ngIf="companyView === 'jobs' || companyView === 'dream-jobs'">
-                        <ng-container *ngTemplateOutlet="jobsTemplate; context: { details: details}">
+                    <ng-container *ngFor="let p of postTypesArray">
+                        <ng-container *ngIf="companyView === p.name">
+                            <div class="item-grid pen-grid item-grid-large">
+                                <app-brief-post style="width: 100%;" [p]="e"
+                                    *ngFor="let e of companyRelatedPosts?.posts" [readMore]="true"></app-brief-post>
+                            </div>
+                            <app-paginator [length]="totalcompanyRelatedPosts" (fetchData)="paginator = $event; fetchAllCompanyRealtedePosts(p.name)">
+                            </app-paginator>
                         </ng-container>
-                    </div>
+                    </ng-container>
 
                     <div *ngIf="companyView === 'comments'">
                         <ng-container *ngTemplateOutlet="addCommentTemplate; context: details">
@@ -221,77 +257,6 @@
 
                     <div *ngIf="companyView === 'q&a'">
                         <ng-container *ngTemplateOutlet="questionAnswersTemplate; context: details">
-                        </ng-container>
-                    </div>
-
-                    <div *ngIf="companyView === 'events'">
-                        <ng-container *ngTemplateOutlet="eventsListTemplate; context: details">
-                        </ng-container>
-                    </div>
-
-                    <div *ngIf="companyView === 'sales-goal'">
-                        <ng-container
-                            *ngTemplateOutlet="postTemplate; context: { details: details, postType: 'sales-goal', goalType: 'sales'}">
-                        </ng-container>
-                    </div>
-
-                    <div *ngIf="companyView === 'team-goal'">
-                        <ng-container
-                            *ngTemplateOutlet="postTemplate; context: { details: details, postType: 'team-goal', goalType: 'team'}">
-                        </ng-container>
-                    </div>
-
-                    <div *ngIf="companyView === 'marketing-goal'">
-                        <ng-container
-                            *ngTemplateOutlet="postTemplate; context: { details: details, postType: 'marketing-goal', goalType: 'marketing'}">
-                        </ng-container>
-                    </div>
-
-                    <div *ngIf="companyView === 'technical-goal'">
-                        <ng-container
-                            *ngTemplateOutlet="postTemplate; context: { details: details, postType: 'technical-goal', goalType: 'technical'}">
-                        </ng-container>
-                    </div>
-
-                    <div *ngIf="companyView === 'business-goal'">
-                        <ng-container
-                            *ngTemplateOutlet="postTemplate; context: { details: details, postType: 'business-goal', goalType: 'business'}">
-                        </ng-container>
-                    </div>
-
-                    <div *ngIf="companyView === 'sales-challenge'">
-                        <ng-container
-                            *ngTemplateOutlet="postTemplate; context: { details: details, postType: 'sales-challenge', challengeType: 'sales'}">
-                        </ng-container>
-                    </div>
-
-                    <div *ngIf="companyView === 'team-challenge'">
-                        <ng-container
-                            *ngTemplateOutlet="postTemplate; context: { details: details, postType: 'team-challenge', challengeType: 'team'}">
-                        </ng-container>
-                    </div>
-
-                    <div *ngIf="companyView === 'marketing-challenge'">
-                        <ng-container
-                            *ngTemplateOutlet="postTemplate; context: { details: details, postType: 'marketing-challenge', challengeType: 'marketing'}">
-                        </ng-container>
-                    </div>
-
-                    <div *ngIf="companyView === 'technical-challenge'">
-                        <ng-container
-                            *ngTemplateOutlet="postTemplate; context: { details: details, postType: 'technical-challenge', challengeType: 'technical'}">
-                        </ng-container>
-                    </div>
-
-                    <div *ngIf="companyView === 'business-challenge'">
-                        <ng-container
-                            *ngTemplateOutlet="postTemplate; context: { details: details, postType: 'business-challenge', challengeType: 'business'}">
-                        </ng-container>
-                    </div>
-
-                    <div *ngIf="companyView === 'mission'">
-                        <ng-container
-                            *ngTemplateOutlet="postTemplate; context: { details: details, postType: 'mission'}">
                         </ng-container>
                     </div>
 
@@ -445,113 +410,6 @@
         ===============================================-->
 
 </ng-container>
-
-<ng-template #postTemplate let-cDetails="details" let-postType="postType">
-
-    <div
-        [ngStyle]="{'padding-top':  auth?.loggedInUser?._id === cDetails?.createdBy?._id || postType === 'company-post' ? '45px' : '0'}">
-        <ng-container *ngFor="let c of allCompanyRelatedPosts; let i=index;">
-
-            <div class="box image common-box-shadow" *ngIf="postType === c?.type">
-                <div class="box-header">
-                    <h3>
-                        <a [routerLink]="['/', 'dashboard', 'profile', cDetails?.createdBy?._id ]">
-                            <img [src]="c?.createdBy?.avatar ? ((s3FilesBucketURL + c?.createdBy?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
-                                alt="" />{{c?.createdBy?.name}}
-                        </a>
-                        <span>{{fromNow(c?.createdAt)}} <i class="fa fa-globe"></i></span>
-                    </h3>
-
-                    <!-- Post Actions -->
-                    <i class="fad fa-check-circle" *ngIf="c['__edit']" (click)="updatePost(c, singlePostEditor)"></i>
-                    <span style="float: right;" *ngIf="c?.createdBy?._id === auth?.loggedInUser?._id">
-                        <button mat-icon-button [matMenuTriggerFor]="optionsMenu"
-                            aria-label="Example icon-button with a menu">
-                            <mat-icon>more_horiz</mat-icon>
-                        </button>
-                        <mat-menu #optionsMenu="matMenu">
-                            <button mat-menu-item (click)="c['__edit'] = !c['__edit']">
-                                <mat-icon>edit</mat-icon>
-                                <span>Edit</span>
-                            </button>
-                            <button mat-menu-item (click)="deletePost(c?._id)">
-                                <mat-icon>delete</mat-icon>
-                                <span>Delete</span>
-                            </button>
-                        </mat-menu>
-                    </span>
-                    <!-- <span><i class="fa fa-angle-down"></i></span> -->
-                    <div class="window"><span></span></div>
-                </div>
-                <div class="box-content">
-                    <div class="content">
-                        <img alt="" />
-                    </div>
-                    <div class="bottom">
-                        <p>
-                            <!---------------- SINGLE POST EDITOR --------------->
-                            <app-editor #singlePostEditor [editorStyle]="{background: 'white'}" [data]="c?.description"
-                                [companyPostId]="cDetails._id" [id]="'post' + c?._id" [readOnly]="!c['__edit']"
-                                [blockLevelComments]="true" [commentType]="'post'" [companyPostId]="c?._id" [post]="c"
-                                [commentsList]="c?.comments">
-                            </app-editor>
-                        </p>
-                        <span><span class="fa fa-search-plus"></span></span>
-                    </div>
-                </div>
-                <div class="box-likes">
-                    <div class="post-row" style="visibility: hidden; padding: 0;">
-                        <span><a href="#"><img src="https://goo.gl/oM0Y8G" alt="" /></a></span>
-                        <span><a href="#"><img src="https://goo.gl/vswgSn" alt="" /></a></span>
-                        <span><a href="#"><img src="https://goo.gl/4W27eB" alt="" /></a></span>
-                        <span><a href="#">+99</a></span>
-                        <span>Like this</span>
-                    </div>
-                    <div class="post-row" style="padding: 0; border: none;">
-                        <span>{{c?.comments?.length}} comments</span>
-                    </div>
-                </div>
-                <!-- <div class="box-buttons">
-                    <div class="post-row">
-                        <button><span class="fa fa-thumbs-up"></span></button>
-                        <button (click)="c['__show'] = !c['__show']"><span class="fas fa-comment-lines"></span></button>
-                        <button><span class="ion-share"></span></button>
-                    </div>
-                </div> -->
-
-                <!-- <div class="box-click"><span><i class="ion-chatbox-working"></i> View 140 more comments</span></div> -->
-                <div class="box-comments">
-                    <div class="thread">
-                        <ul class="media-list thread-list"
-                            style="border-top: 1px solid #f4f4f4; padding: 10px 30px 0px 30px; list-style: none;">
-                            <div *ngFor="let com of c?.comments">
-                                <li *ngIf="!com?.blockSpecificComment" class="single-thread">
-                                    <app-comment [comment]="com"></app-comment>
-                                </li>
-                            </div>
-                        </ul>
-                    </div>
-                </div>
-                <div class="box-new-comment">
-                    <img [src]="auth?.loggedInUser?.avatar ? ((s3FilesBucketURL + auth?.loggedInUser?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
-                        alt="" />
-                    <div class="content">
-                        <!-- <div class="post-row"> -->
-                        <app-editor #commentEditor [placeholder]="'Write a comment'"
-                            [editorStyle]="{ width: '84%', background: 'white', padding: '0 12px 0 12px', 'border-radius': '20px'}"
-                            [id]="c?._id + i"></app-editor>
-                        <!-- </div> -->
-                        <div class="post-row">
-                            <!---------------- ADD COMMENT EDITOR --------------->
-                            <button style="float: right;" type="button" class="btn btn--sm btn--round"
-                                (click)="addComment(c?._id, commentEditor)">Post</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </ng-container>
-    </div>
-</ng-template>
 
 <ng-template #locationTemplate let-location="location">
     <div *ngIf="location?.latitude || location?.longitude">
@@ -760,87 +618,6 @@
             </mat-accordion>
 
 
-        </div>
-    </div>
-</ng-template>
-
-<ng-template #jobsTemplate let-cDetails="details">
-    <!-- <ng-container *ngTemplateOutlet="addCompanypostTemplate; context: { details: details, postType: 'company-post'}">
-    </ng-container> -->
-    <div class="item-grid pen-grid item-grid-large">
-        <!-- <ng-container > -->
-        <ng-container *ngIf="companyView === 'dream-jobs'; else jobList">
-            <app-brief-post style="width: 100%;" [p]="p" *ngFor="let p of dreamJobsList" [readMore]="true"></app-brief-post>
-        </ng-container>
-
-        <ng-template #jobList>
-            <app-brief-post style="width: 100%;" [p]="p" *ngFor="let p of jobsList" [readMore]="true"></app-brief-post>
-        </ng-template>
-        <!-- </ng-container> -->
-    </div>
-</ng-template>
-
-<ng-template #eventsListTemplate>
-    <!-- <ng-container *ngTemplateOutlet="addCompanypostTemplate; context: { details: details, postType: 'company-post'}">
-    </ng-container> -->
-    <div class="all noselect">
-        <div class="swiper-container pagescroll home current">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                    <div class="events">
-                        <h2>Upcoming Events</h2>
-                        <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec porta diam non sapien fermentum, non facilisis arcu auctor. Sed quis mattis ipsum, a malesuada odio.</p> -->
-                        <div class="list">
-                            <div *ngFor="let e of filterEventsBasedOnDate(false)"
-                                (click)="postService.redirectToPostDetails(e)">
-                                <div class="list-item">
-                                    <div class="date">
-
-                                        <div class="date-day">{{getDate(e?.createdAt) | date : 'd'}}</div>
-                                        <div class="date-month">{{getDate(e?.createdAt) | date : 'MMM'}}</div>
-                                    </div>
-                                    <div class="info">
-                                        <div class="info-time">{{getDate(e?.dateRange[0]) | date: 'short'}} -
-                                            {{getDate(e?.dateRange[1]) | date: 'short'}}</div>
-                                        <div class="info-title">{{e?.name}}</div>
-                                        <!-- <div class="info-desc">Description of the events</div> -->
-                                    </div>
-                                </div>
-                            </div>
-                            <div *ngIf="noUpcomingEvents">
-                                <h5 style="text-align: center;">No Upcoming Events</h5>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <div class="events">
-                        <h2>Past Events</h2>
-                        <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec porta diam non sapien fermentum, non facilisis arcu auctor. Sed quis mattis ipsum, a malesuada odio.</p> -->
-                        <div class="list">
-                            <div *ngFor="let e of filterEventsBasedOnDate(true)"
-                                (click)="postService.redirectToPostDetails(e)">
-                                <div class="list-item">
-                                    <div class="date">
-                                        <div class="date-day">{{getDate(e?.createdAt) | date : 'd'}}</div>
-                                        <div class="date-month">{{getDate(e?.createdAt) | date : 'MMM'}}</div>
-                                    </div>
-                                    <div class="info">
-                                        <div class="info-time">{{getDate(e?.dateRange[0]) | date: 'short'}} -
-                                            {{getDate(e?.dateRange[1]) | date: 'short'}}</div>
-                                        <div class="info-title">{{e?.name}}</div>
-                                        <!-- <div class="info-desc">Description of the events</div> -->
-                                    </div>
-                                </div>
-                            </div>
-                            <div *ngIf="noPastEvent">
-                                <h5 style="text-align: center;">No Past Events</h5>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="swiper-scrollbar"></div>
         </div>
     </div>
 </ng-template>

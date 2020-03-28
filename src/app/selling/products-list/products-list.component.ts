@@ -16,9 +16,10 @@ import { environment } from 'src/environments/environment';
 import { PostService } from 'src/app/shared/services/post.service';
 import { selectLoggedInUser } from '../../core/store/selectors/user.selector';
 import { GetPostsByUserIdAndType, DeletePost, SetSelectedPost } from '../../core/store/actions/post.actions';
-import { PostType, CompanyPostTypes, UserProfilePostTypes } from '../../shared/models/post-types.enum';
+import { PostType } from '../../shared/models/post-types.enum';
 import { selectPostsByUserIdAndType } from '../../core/store/selectors/post.selectors';
 import { SweetalertService } from '../../shared/services/sweetalert.service';
+import { appConstants } from '../../shared/constants/app_constants';
 
 @Component({
   selector: 'app-products-list',
@@ -43,6 +44,8 @@ export class ProductsListComponent implements OnInit, OnDestroy, AfterViewInit {
   anonymousAvatar = '../../../assets/images/anonymous-avatar.jpg';
   s3FilesBucketURL = environment.s3FilesBucketURL;
 
+  postTypesArray = appConstants.postTypesArray;
+
   all: boolean;
 
   displayedColumns: string[];
@@ -54,17 +57,13 @@ export class ProductsListComponent implements OnInit, OnDestroy, AfterViewInit {
   userSubsription: Subscription;
   productsListSubscription: Subscription;
 
-  @ViewChild(MatSort, { static: true }) sort: MatSort;
-
   breadcumb: BreadCumb;
 
   authorId: string; // Id of the user whose profile is being visited by loggedInUser
 
   postTypes = Object.values(PostType);
-  companyPostTypes = Object.values(CompanyPostTypes);
-  userProfilePostTypes = Object.values(UserProfilePostTypes);
 
-  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
+  paginator: MatPaginator;
   selectedPostType = '';
 
   /** Side bar to filter the categories */
@@ -73,24 +72,6 @@ export class ProductsListComponent implements OnInit, OnDestroy, AfterViewInit {
       view: '',
       title: 'All',
       path: ''
-    },
-    {
-      view: 'Posts',
-      title: 'Posts',
-      types: this.postTypes
-    },
-    {
-      view: 'Businesses',
-      title: 'Businesses',
-      types: this.companyPostTypes,
-      showHighlight: true,
-      showAddBusiness: true
-    },
-    {
-      view: 'Proffessionals',
-      title: 'Proffessionals',
-      types: this.userProfilePostTypes,
-      showHighlight: true,
     },
   ];
 
@@ -103,25 +84,9 @@ export class ProductsListComponent implements OnInit, OnDestroy, AfterViewInit {
     public sweetAlertService: SweetalertService,
     private router: Router
   ) {
-
-
-    // this.breadcumb = {
-    //   title: 'CAREER GOALS AND BUSINESS GOALS',
-    //   path: [
-    //     {
-    //       name: 'Dashboard',
-    //       pathString: '/'
-    //     },
-    //     {
-    //       name: 'Be in Control of Your Career & Business'
-    //     }
-    //   ]
-    // };
   }
 
   ngOnInit() {
-    this.dataSource.sort = this.sort;
-
     const path = this.activatedRoute.parent.routeConfig.path;
     this.selectedPostType = this.activatedRoute.snapshot.queryParams['view'] ? this.activatedRoute.snapshot.queryParams['view'] : '';
 
@@ -133,19 +98,6 @@ export class ProductsListComponent implements OnInit, OnDestroy, AfterViewInit {
       /** Set the columns visible in the table */
       this.displayedColumns = ['number', 'name', 'price', 'createdBy', 'type', 'category', 'createdAt', 'action'];
       this.all = true;
-
-      // this.getAllPosts('');
-      // this.productsListSubscription = this.postService.getAllPosts({ pageNumber: 1, limit: 10 }).pipe(
-      //   map((posts) => {
-      //     if (posts) {
-      //       /** Set the data for the datatable  */
-      //       this.dataSource.data = posts;
-
-
-      //     }
-      //   })
-      // ).subscribe();
-
     } else {
 
       let status = '';
@@ -185,25 +137,7 @@ export class ProductsListComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    merge(this.paginator.page)
-    .pipe(
-      startWith({}),
-      catchError((e) => {
-        return of(e);
-      })
-    )
-    .subscribe(data => {
-      // const paginationObj = {
-      //   pageNumber: this.paginator.pageIndex + 1,
-      //   limit: 5,
-      //   sort: {
-      //     field: this.sort && this.sort.active ? this.sort.active : 'createdAt',
-      //     order: this.sort && this.sort.direction ? this.sort.direction : ''
-      //   }
-      // }
-      this.getAllPosts(this.selectedPostType);
-      console.log(data);
-    });
+
   }
 
   ngOnDestroy(): void {
@@ -214,11 +148,6 @@ export class ProductsListComponent implements OnInit, OnDestroy, AfterViewInit {
     if (this.userSubsription) {
       this.userSubsription.unsubscribe();
     }
-  }
-
-  editProduct(post): void {
-    this.store.dispatch(SetSelectedPost({ post }));
-    // this.router.navigate(['/add-product'], );
   }
 
   deleteProduct(postId: string) {
@@ -254,7 +183,9 @@ export class ProductsListComponent implements OnInit, OnDestroy, AfterViewInit {
     if (type) {
       this.paginator.pageIndex = 0;
     }
-    const paginationObj = {pageNumber: this.paginator.pageIndex + 1, limit: 10, sort: {order: ''}};
+    const paginationObj = {
+      pageNumber: this.paginator.pageIndex + 1, limit: this.paginator.pageSize ? this.paginator.pageSize : 10,
+      sort: {order: ''}};
     this.postService.getAllPosts(paginationObj, this.selectedPostType ? this.selectedPostType : type ).pipe(
       map((result: any) => {
         if (result && result.posts) {

@@ -4,9 +4,11 @@ import { Subject } from 'rxjs/Subject';
 import { concat, of, Subscription } from 'rxjs';
 import { distinctUntilChanged, tap, switchMap, catchError } from 'rxjs/operators';
 import { FormService } from '../../services/form.service';
-import { FormControl } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { CompanyService } from '../../../companies/company.service';
 import { AuthService } from '../../../core/services/auth.service';
+import { UserService } from '../../../user/user.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-autocomplete',
@@ -42,7 +44,8 @@ export class AutocompleteComponent implements OnInit, OnDestroy {
   constructor(
     private formService: FormService,
     private companyService: CompanyService,
-    private authService: AuthService
+    private authService: AuthService,
+    private userService: UserService,
   ) { }
 
   ngOnInit() {
@@ -68,10 +71,19 @@ export class AutocompleteComponent implements OnInit, OnDestroy {
   public add = (name) => {
     if (this.allowToAdd) {
       return this.formService.addToCollection(name, this.collection, this.type).toPromise();
+    } else {
+      if (new FormControl(name, Validators.email).valid) {
+        return this.userService.createUser({name, email: name}).toPromise();
+      } else {
+        Swal.fire('If User is not found, You can add the user by adding a valid email', '', 'info');
+      }
     }
   }
 
   addCompany = (name: string) => {
+    if (!this.authService.checkIfUserIsLoggedIn(true)) {
+      return;
+    }
     return this.companyService.addCompany({name, createdBy: this.authService.loggedInUser._id}).toPromise();
   }
 

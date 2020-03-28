@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Observable, of, Subscription } from 'rxjs';
 import { AppState } from 'src/app/core/store/state/app.state';
 import { Store } from '@ngrx/store';
-import { tap } from 'rxjs/operators/tap';
+import { tap } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BreadCumb } from 'src/app/shared/models/bredcumb.model';
 import { FormGroup, FormControl } from '@angular/forms';
@@ -23,7 +23,6 @@ import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { Company } from '../../shared/models/company.model';
 import { User } from '../../shared/models/user.model';
 import { appConstants } from '../../shared/constants/app_constants';
-import { EditorComponent } from '../../shared/components/editor/editor.component';
 
 @Component({
   selector: 'app-details',
@@ -35,6 +34,8 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
   @ViewChild('successfulRSVP', { static: false }) successfulRSVP: SwalComponent;
   details$: Observable<Post>;
+
+  postTypesArray = appConstants.postTypesArray;
 
   postDetails: Post | Company | any;
   isUserAttending: boolean; /** Only for the event */
@@ -53,9 +54,6 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
   commentId: string;
 
-  careerCoachQuestions = appConstants.careerCoachQuestions;
-  businessCoachQuestions = appConstants.businessCoachQuestions;
-
   constructor(
     private store: Store<AppState>,
     private activatedRoute: ActivatedRoute,
@@ -67,15 +65,6 @@ export class DetailsComponent implements OnInit, OnDestroy {
     private router: Router,
     private sweetAlertService: SweetalertService
   ) {
-    this.breadcumb = {
-      path: [
-        // {
-        //   name: 'Dashboard',
-        //   pathString: '/'
-        // }
-      ]
-    };
-
     /** Peer Subscription for Video Call */
     // this.userService.peer.subscribe((p) => {
     //   if (p) {
@@ -88,9 +77,6 @@ export class DetailsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     /** Read the type of the post  */
     this.type = this.activatedRoute.snapshot.queryParams.type;
-
-    /** show the type of the post in "breadcrumb" */
-    this.breadcumb.path.push({ name: this.type });
 
     this.commentId = this.activatedRoute.snapshot.queryParams['commentId'];
 
@@ -111,13 +97,22 @@ export class DetailsComponent implements OnInit, OnDestroy {
           this.initializeCommentForm(p, 'post');
 
           /** SHow company in breadcrumb */
-          if (p.company && p.company.name) {
-            this.breadcumb.path.unshift({ name: p.company.name })
-          }
+          // if (p.companies && p.companies.length) {
+          //   this.breadcumb.path.unshift({ name: p.type });
+          // }
 
           /** Subscribe to loggedinuser, once loggedInUse is got, Check if the loggedInUder is
            * in the list of attendess or not
            **/
+
+          this.breadcumb = {
+            path: [
+              {
+                name: p.type,
+                pathString: '/'
+              }
+            ]
+          };
 
           this.subscription$.add(
             this.authService.loggedInUser$.subscribe((user) => {
@@ -222,21 +217,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
   }
 
 
-  async addComment(addCommentEditor: EditorComponent) {
-    if (this.authService.loggedInUser) {
-      const blocks = await addCommentEditor.editor.save();
-      this.commentForm.get('text').setValue(blocks.blocks);
-      this.commentForm.addControl('createdBy', new FormControl(this.authService.loggedInUser._id));
 
-      this.subscription$.add(
-        this.commentService.addComment(this.commentForm.value).subscribe((c) => {
-          addCommentEditor.editor.clear();
-        })
-      );
-    } else {
-      this.authService.checkIfUserIsLoggedIn(true);
-    }
-  }
 
   fromNow(date) {
     const d = moment(date).isValid() ? date : new Date(+date);
@@ -253,6 +234,14 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
   edit(details) {
     this.postService.editPost(details);
+  }
+
+  trackByFn(index, item) {
+    return index; // or item.id
+  }
+
+  redirectToAddPost(p, postType) {
+    this.router.navigate(['../add-post'], {relativeTo: this.activatedRoute, state: {post: p}, queryParams: {type: postType}});
   }
 
 }

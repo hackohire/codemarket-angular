@@ -1,0 +1,44 @@
+<app-breadcumb [title]="breadcumb?.title" [path]="breadcumb?.path" [showImportButton]="true"></app-breadcumb>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div [formGroup]="postTypeForm" class="add-form-area common-box-shadow">
+                <mat-form-field class="field-full-width">
+                    <input type="text" matInput formControlName="name" placeholder="Unique Post Type Name">
+                    <mat-hint>Don't use Characters such as $ _ , . </mat-hint>
+                    <mat-hint>Example: 'business-coach'</mat-hint>
+                </mat-form-field>
+
+                <h6>Post Type Description:</h6>
+                <br />
+
+                <app-editor #descriptionEditor
+                    [data]="descriptionFormControl?.value" [id]="'edit-post-editor'" [importArticleSubscription]="true"></app-editor>
+
+                <br />
+
+                <ng-container formArrayName="fields">
+                    <div fxLayout="row" *ngFor="let f of fieldsFormControl?.controls; let i = index;">
+                        <ng-container [formGroupName]="i">
+                            <label fxFlex="80" style="margin-bottom: 0 !important;"> {{ f?.value?.field?.name }} - {{f?.value?.field?.label}} </label>
+                            <mat-radio-group formControlName="selected" fxFlex="20" [color]="'primary'">
+                                <mat-radio-button class="ml-2" [value]="true">Yes</mat-radio-button>
+                                <mat-radio-button class="ml-2" [value]="false">No</mat-radio-button>
+                            </mat-radio-group>
+                        </ng-container>
+                    </div>
+                </ng-container>
+
+                <!-- <div fxLayout="row" fxLayoutGap="10px">
+                    <button *ngIf="statusFormControl?.value !== 'Published'" type="button" (click)="submit('Drafted')" [disabled]="postTypeForm?.invalid" mat-raised-button color="primary">Save</button>
+                    <button type="button" (click)="submit('Published')" [disabled]="postTypeForm?.invalid" mat-raised-button color="primary">{{ statusFormControl?.value === 'Published' ? 'Publish Changes' : 'Publish' }}</button>
+                    <button *ngIf="statusFormControl?.value === 'Published'" type="button" (click)="submit('Unpublished')" [disabled]="postTypeForm?.invalid" mat-raised-button color="primary">{{ 'Unpublish' }}</button>
+                </div> -->
+
+            </div>
+
+        </div>
+    </div>
+</div>

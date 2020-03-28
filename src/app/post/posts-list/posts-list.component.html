@@ -28,7 +28,7 @@
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
               <td mat-cell *matCellDef="let post" (click)="$event.stopPropagation()">
                 <button mat-mini-fab color="primary" (click)="editPost(post)"
-                  [routerLink]="['/', 'post', 'edit-' + post.type, post._id]">
+                  [routerLink]="['/', 'post', 'edit-post', post._id]">
                   <mat-icon>edit</mat-icon>
                 </button>
                 <button mat-mini-fab color="warn" (click)="deletePost(post._id)">

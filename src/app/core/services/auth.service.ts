@@ -11,7 +11,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../store/state/app.state';
 import { Authorise, SetLoggedInUser } from '../store/actions/user.actions';
 import { selectLoggedInUser } from '../store/selectors/user.selector';
-import { Observable, BehaviorSubject, Subscription } from 'rxjs';
+import { Observable, BehaviorSubject, Subscription, Subject } from 'rxjs';
 import { User } from '../../shared/models/user.model';
 import { Router } from '@angular/router';
 import { isPlatformBrowser, DOCUMENT, isPlatformServer } from '@angular/common';
@@ -21,16 +21,29 @@ import { Comment } from '../../shared/models/comment.model';
 import { ToastrService } from 'ngx-toastr';
 import { TransferState, makeStateKey } from '@angular/platform-browser';
 import { MessageService } from '../../shared/services/message.service';
+import { NotificationService } from '../../auth/notification.service';
+
+export interface NewUser {
+  email: string;
+  password: string;
+  name: string;
+}
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
+  /** Authentication Related Variables */
+  _authState: BehaviorSubject<CognitoUser|any> = new BehaviorSubject<CognitoUser|any>(null);
+  authState: Observable<CognitoUser|any> = this._authState.asObservable();
+
   loggedInUser$: Observable<User>;
   loggedInUser: User;
   openAuthenticationPopover = new BehaviorSubject<boolean>(false);
   subscriptions$ = new Subscription();
+
   constructor(
     private apollo: Apollo,
     private store: Store<AppState>,
@@ -39,28 +52,28 @@ export class AuthService {
     @Inject(DOCUMENT) private document: Document,
     private toastrService: ToastrService,
     private readonly transferState: TransferState,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private _notification: NotificationService
     // private commentService: CommentService
   ) {
-
     this.loggedInUser$ = this.store.select(selectLoggedInUser);
     this.loggedInUser$.subscribe((u) => this.loggedInUser = u);
 
     /** Hub listening for auth state changes */
     Hub.listen('auth', async (data) => {
       const { channel, payload } = data;
-      const state = {
-        state: payload.event,
-        user: payload.data
-      };
       console.log('Hub', data);
-      if (channel === 'auth' && data.payload.event === 'signIn') {
-        this.checkIfUserIsLoggedIn();
-        this.router.navigate(['/', 'dashboard', 'bugfixes-all']);
-      } else if (channel === 'auth' && data.payload.event === 'oAuthSignOut') {
-        // localStorage.clear();
-        this.store.dispatch(SetLoggedInUser({ payload: null }));
-        // this.router.navigate(['/']);
+      if (channel === 'auth') {
+
+        /** Setting the state to load the respective auth components  */
+        this._authState.next({ state: payload.event });
+
+        if (payload.event === 'signIn') {
+          this.checkIfUserIsLoggedIn();
+          this.router.navigate(['/', 'dashboard', 'bugfixes-all']);
+        } else if (payload.event === 'oAuthSignOut') {
+          this.store.dispatch(SetLoggedInUser({ payload: null }));
+        }
       }
     });
   }
@@ -119,7 +132,7 @@ export class AuthService {
             }
           }`,
         variables: {
-          applicationId: environment.applicationId
+          applicationId: ''
         }
       }
     ).pipe(
@@ -135,6 +148,40 @@ export class AuthService {
       catchError(e => of(e)),
     );
   }
+
+  /** Authentication Related Methods Starts here */
+
+  signUp(user: NewUser): Promise<CognitoUser|any> {
+    return Auth.signUp({
+      username: user.email,
+      password: user.password,
+      attributes: {
+        email: user.email,
+        name: user.name
+      }
+    });
+  }
+
+  signIn(username: string, password: string): Promise<CognitoUser|any> {
+    return new Promise((resolve, reject) => {
+      Auth.signIn(username, password)
+      .then((user: CognitoUser|any) => {
+        resolve(user);
+      }).catch((error: any) => reject(error));
+    });
+  }
+
+  forgotPasswordRequest(email: string): Promise<any> {
+    return Auth.forgotPassword(email);
+  }
+
+  resendCode(email: string) {
+    Auth.resendSignUp(email)
+      .then(() => this._notification.show('A code has been emailed to you'))
+      .catch(() => this._notification.show('An error occurred'));
+  }
+
+  /** Authentication Related Methods Ends here */
 
   setUserOnline(u: User) {
     const USER_SUBSCRIPTION = gql`

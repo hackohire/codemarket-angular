@@ -24,4 +24,8 @@ export class HomeworkComponent implements OnInit {
     };
   }
 
+  addAssignment(assignmentNo, assignmentPost) {}
+
+  updateAssignment(assignmentNo) {}
+
 }

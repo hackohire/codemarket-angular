@@ -1,12 +1,45 @@
 <p>homework works!</p>
-<div id="container" style="display: block; float: left; width: 100%;background-color: lightblue; font-family: verdana; font-size: 20px;">
+<div id="container"
+    style="display: block; float: left; width: 100%;background-color: lightblue; font-family: verdana; font-size: 20px;">
     <h1 style="text-align: center; color: white; margin-bottom: 30px;">Homework Assignment</h1>
 
-    <input #assignmentNo type="text" style="float:left; clear: both; margin: 10px 20% 10px 20%;">Enter Assignment Number to Search
+    <input #assignmentNo type="text" style="float:left; clear: both; margin: 10px 20% 10px 20%;">Enter Assignment Number
+    to Search
 
-    <textarea #assignmentPost type="textarea" style="float:left; clear: both; align-self: center; margin: 10px 20% 10px 20%;">{{this.formFieldObject?.assignmentPost}}</textarea>
-   
-    <button id="get_assignment" type="button" (click)="getAssignment(assignmentNo?.value)" style="display: block;
+    <textarea #assignmentPost type="textarea"
+        style="float:left; clear: left; align-self: center; width: 300px; height: 400px; margin: 10px 20% 10px 20%;">{{this.formFieldObject?.assignmentPost}}</textarea>
+
+    <div class="" style="float: left; clear: right;">
+        <button id="add_assignment" type="button" (click)="addAssignment(assignmentNo?.value, assignmentPost?.value)"
+            style="display: block;
+    float: right;
+    clear: both;
+    background-color: lightgray;
+    width: 150px; 
+    height: 75px;
+    color: red;
+    font-size: 14px;
+    font-weight: bold;
+    border: 10px lightgray;
+    border-style: groove solid outset;
+    margin: 10px 20% 10px 20%;">Add Assignment</button>
+
+
+        <button id="update_assignment" type="button" (click)="updateAssignment(assignmentNo?.value)" style="display: block;
+    float: right;
+    clear: both;
+    background-color: lightgray;
+    width: 150px; 
+    height: 75px;
+    color: red;
+    font-size: 14px;
+    font-weight: bold;
+    border: 10px lightgray;
+    border-style: groove solid outset;
+    margin: 10px 20% 10px 20%;">Update Assignment</button>
+
+
+        <button id="get_assignment" type="button" (click)="getAssignment(assignmentNo?.value)" style="display: block;
     float: right;
     clear: both;
     background-color: lightgray;
@@ -18,4 +51,5 @@
     border: 10px lightgray;
     border-style: groove solid outset;
     margin: 10px 20% 10px 20%;">Get Assignment</button>
+    </div>
 </div>

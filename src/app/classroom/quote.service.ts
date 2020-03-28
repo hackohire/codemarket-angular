@@ -23,7 +23,7 @@ export class QuoteService {
           getQuote(quote: $quote) {
             name
             email
-            ZipCode
+            zipCode
             age
             sex
             coverageAmount

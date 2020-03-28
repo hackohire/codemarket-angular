@@ -12,7 +12,8 @@
       <a mat-list-item [routerLink]="['/', 'user', 'edit-profile']">Edit Profile</a>
 
       <ng-container *ngFor="let p of postTypesArray">
-        <a mat-list-item [routerLink]="['/', 'post', 'post-list']" [queryParams]="{type: p.name, all: false}">My &nbsp;<span style="text-transform: capitalize;">{{p.name}}</span></a>
+        <a mat-list-item [routerLink]="['/', 'post', 'post-list']" [queryParams]="{type: p.name, all: false}">My
+          &nbsp;<span style="text-transform: capitalize;">{{p.name}}</span></a>
       </ng-container>
 
       <a mat-list-item [routerLink]="['/', 'company', 'company-list']" [queryParams]="{all: false}">My Companies</a>
@@ -42,8 +43,7 @@
       </a> -->
       <!-- Login -->
       <ng-template #logIn>
-        <a #lr mat-button [mdePopoverTriggerFor]="authentication" [mdePopoverTargetAt]="lr"
-          mdePopoverTriggerOn="click">
+        <a #lr mat-button [mdePopoverTriggerFor]="authentication" [mdePopoverTargetAt]="lr" mdePopoverTriggerOn="click">
           <i style="font-size: 1.0rem !important; color: #ffff00;"
             class="vertical-align-middle fal fa-user-circle fa-fw"></i>
           <span style="color: #ffffff;" class="line-height-initial"> Login/Register</span>
@@ -108,7 +108,8 @@
       <!-- Message Alert Area -->
       <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'messages']">
         <span style="font-size: 1.3rem !important;" class="vertical-align-middle far fa-bell"></span>
-        <span *ngIf="isUnread((messageService.messagesList$ | async)?.messages)" class="notification_count noti" style="height: 5px; min-width: 5px;"></span>
+        <span *ngIf="isUnread((messageService.messagesList$ | async)?.messages)" class="notification_count noti"
+          style="height: 5px; min-width: 5px;"></span>
       </a>
 
 
@@ -129,122 +130,172 @@
 
 
     <div class="rupertspira">
-        <div class="container">
+      <div class="container">
 
-            <div id="top_hdr">
-                <ul>
-                    
-            
-                                
+        <div id="top_hdr">
+          <ul>
+
+
+
             <li style="display:none;" class="basket">
-            <a href="/basket" class="basket"><img src="https://non-duality.rupertspira.com/assets/app/img/basket.png" align="top" style="float:left;margin-top:2px;margin-right:5px;"> Your Basket (<span class="js_basket_qty" style="display:none;">0</span><span class="js_basket_size">0 items</span>)</a>
+              <a href="/basket" class="basket"><img src="https://non-duality.rupertspira.com/assets/app/img/basket.png"
+                  align="top" style="float:left;margin-top:2px;margin-right:5px;"> Your Basket (<span
+                  class="js_basket_qty" style="display:none;">0</span><span class="js_basket_size">0 items</span>)</a>
             </li>
-            
-            
-              <li>
-                <a href="/auth/login?return_to=home" class="login tipsy-n" rel="tooltip" original-title="If you receive regular e-mails from Rupert or have made a purchase in the past, you may login to access content you have purchased and update your account details using your e-mail address">Log in</a>
-                <span> &nbsp; | &nbsp; </span>
-                <a href="/subscribe" class="login tipsy-n" rel="tooltip" original-title="Subscribe and sign up to receive Rupert's free e-mail newsletter.">Sign Up for Free E-Mail Newsletter</a>
+
+
+            <li>
+              <a href="/auth/login?return_to=home" class="login tipsy-n" rel="tooltip"
+                original-title="If you receive regular e-mails from Rupert or have made a purchase in the past, you may login to access content you have purchased and update your account details using your e-mail address">Log
+                in</a>
+              <span> &nbsp; | &nbsp; </span>
+              <a href="/subscribe" class="login tipsy-n" rel="tooltip"
+                original-title="Subscribe and sign up to receive Rupert's free e-mail newsletter.">Sign Up for Free
+                E-Mail Newsletter</a>
               <span> &nbsp; |</span>
-              </li>
-            
-            
-            
-            
+            </li>
+
+
+
+
             <li class="language_drop dd_nav">
-                        <div class="dd_btn">
+              <div class="dd_btn">
                 <a class="dd_tab dd" href="#">Language</a>
                 <div class="menu_dd">
-                                                                        <a href="/feeds/en/#video">
-                                            <span class="flag flag-gb" style="width:16px !important;height:11px !important;display:block;float:left;margin:5px 7px 0 5px"></span>
-                                            English                                        </a>
-                                                                                <a href="/feeds/fr/#video">
-                                            <span class="flag flag-fr" style="width:16px !important;height:11px !important;display:block;float:left;margin:5px 7px 0 5px"></span>
-                                            French                                        </a>
-                                                                                <a href="/feeds/nl/#video">
-                                            <span class="flag flag-nl" style="width:16px !important;height:11px !important;display:block;float:left;margin:5px 7px 0 5px"></span>
-                                            Dutch                                        </a>
-                                                                                <a href="/feeds/es/#video">
-                                            <span class="flag flag-es" style="width:16px !important;height:11px !important;display:block;float:left;margin:5px 7px 0 5px"></span>
-                                            Spanish                                        </a>
-                                                                                <a href="/feeds/it/#video">
-                                            <span class="flag flag-it" style="width:16px !important;height:11px !important;display:block;float:left;margin:5px 7px 0 5px"></span>
-                                            Italian                                        </a>
-                                                                                <a href="/feeds/de/#video">
-                                            <span class="flag flag-de" style="width:16px !important;height:11px !important;display:block;float:left;margin:5px 7px 0 5px"></span>
-                                            German                                        </a>
-                                                                                <a href="/feeds/jp/#video">
-                                            <span class="flag flag-jp" style="width:16px !important;height:11px !important;display:block;float:left;margin:5px 7px 0 5px"></span>
-                                            Japanese                                        </a>
-                                                                                <a href="/feeds/ru/#video">
-                                            <span class="flag flag-ru" style="width:16px !important;height:11px !important;display:block;float:left;margin:5px 7px 0 5px"></span>
-                                            Russian                                        </a>
-                                                                                <a href="/feeds/ro/#video">
-                                            <span class="flag flag-ro" style="width:16px !important;height:11px !important;display:block;float:left;margin:5px 7px 0 5px"></span>
-                                            Romanian                                        </a>
-                                                                                <a href="/feeds/cz/#video">
-                                            <span class="flag flag-cz" style="width:16px !important;height:11px !important;display:block;float:left;margin:5px 7px 0 5px"></span>
-                                            Czech Republic                                        </a>
-                                                        </div><!-- / .menu_dd -->
-                        </div><!-- / .dd_btn -->
+                  <a href="/feeds/en/#video">
+                    <span class="flag flag-gb"
+                      style="width:16px !important;height:11px !important;display:block;float:left;margin:5px 7px 0 5px"></span>
+                    English </a>
+                  <a href="/feeds/fr/#video">
+                    <span class="flag flag-fr"
+                      style="width:16px !important;height:11px !important;display:block;float:left;margin:5px 7px 0 5px"></span>
+                    French </a>
+                  <a href="/feeds/nl/#video">
+                    <span class="flag flag-nl"
+                      style="width:16px !important;height:11px !important;display:block;float:left;margin:5px 7px 0 5px"></span>
+                    Dutch </a>
+                  <a href="/feeds/es/#video">
+                    <span class="flag flag-es"
+                      style="width:16px !important;height:11px !important;display:block;float:left;margin:5px 7px 0 5px"></span>
+                    Spanish </a>
+                  <a href="/feeds/it/#video">
+                    <span class="flag flag-it"
+                      style="width:16px !important;height:11px !important;display:block;float:left;margin:5px 7px 0 5px"></span>
+                    Italian </a>
+                  <a href="/feeds/de/#video">
+                    <span class="flag flag-de"
+                      style="width:16px !important;height:11px !important;display:block;float:left;margin:5px 7px 0 5px"></span>
+                    German </a>
+                  <a href="/feeds/jp/#video">
+                    <span class="flag flag-jp"
+                      style="width:16px !important;height:11px !important;display:block;float:left;margin:5px 7px 0 5px"></span>
+                    Japanese </a>
+                  <a href="/feeds/ru/#video">
+                    <span class="flag flag-ru"
+                      style="width:16px !important;height:11px !important;display:block;float:left;margin:5px 7px 0 5px"></span>
+                    Russian </a>
+                  <a href="/feeds/ro/#video">
+                    <span class="flag flag-ro"
+                      style="width:16px !important;height:11px !important;display:block;float:left;margin:5px 7px 0 5px"></span>
+                    Romanian </a>
+                  <a href="/feeds/cz/#video">
+                    <span class="flag flag-cz"
+                      style="width:16px !important;height:11px !important;display:block;float:left;margin:5px 7px 0 5px"></span>
+                    Czech Republic </a>
+                </div><!-- / .menu_dd -->
+              </div><!-- / .dd_btn -->
             </li>
-            </ul>
-            </div><!-- / #top_hdr -->
-            
-            
-            <header id="mn_hdr">
-                <div class="logo">
+          </ul>
+        </div><!-- / #top_hdr -->
+
+
+        <header id="mn_hdr">
+          <div class="logo">
             <h1><a href="/home" title="Rupert Spira">Joel Drazner</a></h1>
             <h2>Happiness Coach</h2>
-            </div>
-            
-                <nav id="mn_nav">
-                    <ul class="dd_nav">
-            <li class="dd_btn active">
-              <a class="dd_tab" title="Rupert Spira | Non-duality Teachings" href="/home">
-                Home
-              </a>
-            </li>
+          </div>
 
-            <li class="dd_btn">
-              <a class="dd_tab" href="/home">
-                Media Apperarances
-              </a>
-            </li>
+          <nav id="mn_nav">
+            <ul class="dd_nav">
+              <li class="dd_btn active">
+                <a class="dd_tab" title="Rupert Spira | Non-duality Teachings" href="/home">
+                  Home
+                </a>
+              </li>
 
-            <li class="dd_btn">
-              <a class="dd_tab" href="/home">
-                Events
-              </a>
-            </li>
+              <li class="dd_btn">
+                <a class="dd_tab" href="/home">
+                  Media Apperarances
+                </a>
+              </li>
 
-            <li class="dd_btn">
-              <a class="dd_tab" href="/home">
-                What They're saying
-              </a>
-            </li>
-            
-            <li class="dd_btn">
-              <a class="dd_tab" [routerLink]="['/', 'work-with-joel']">
-                Work with Joel
-              </a>
-            </li>
+              <li class="dd_btn">
+                <a class="dd_tab" href="/home">
+                  Events
+                </a>
+              </li>
 
-            <li class="dd_btn">
-              <a class="dd_tab" href="/home">
-                Blog
-              </a>
-            </li>
+              <li class="dd_btn">
+                <a class="dd_tab" href="/home">
+                  What They're saying
+                </a>
+              </li>
 
-            
+              <li class="dd_btn">
+                <a class="dd_tab" [routerLink]="['/', 'work-with-joel']">
+                  Work with Joel
+                </a>
+              </li>
+
+              <li class="dd_btn">
+                <a class="dd_tab" [routerLink]="['/', 'contact']">
+                  Contact
+                </a>
+              </li>
+
+              <li class="dd_btn">
+                <a class="dd_tab" href="/home">
+                  Blog
+                </a>
+              </li>
+
+
             </ul><!-- / .dd_nav -->
-                </nav><!-- / #mn_nav -->
-            </header><!-- / #mn_hdr -->
-            
-            
-                        <blockquote id="page_quote">
-                    <p>Behind all of our experience, no matter how fraught or emotionally charged, there is unlimited inner peace, unconditional loving, and unbreakable resilience.</p>                </blockquote>
-                </div>
+          </nav><!-- / #mn_nav -->
+        </header><!-- / #mn_hdr -->
+
+        <div _ngcontent-serverapp-c1="" class="row" style="background:#f7f7f7;padding-top: 50px;padding-bottom: 50px;">
+          <div _ngcontent-serverapp-c1="" class="col-8" style="padding-top: 46px;">
+            <h2 _ngcontent-serverapp-c1="" style="
+              text-align: -webkit-center;
+              font-size: 28px;
+              color: #115172;
+          ">HIGH-FUNCTIONAL </h2>
+            <h4 _ngcontent-serverapp-c1="" style="
+              text-align: center;
+              font-style: italic;
+              font-weight: 600;
+              font-size: 54px;
+              color: #115172;
+              margin-bottom: 20px;
+          ">INNER PEACE</h4>
+            <h3 _ngcontent-serverapp-c1="" style="
+              text-align: center;
+              font-size: 22px;
+          ">WITH JOEL DRAZNER, RESILIENCE COACH</h3>
+          </div>
+          <div _ngcontent-serverapp-c1="" class="col-4"><img _ngcontent-serverapp-c1=""
+              alt="Apartment Building Insurance Los Angeles"
+              class="attachment-Home_product Thumbnail size-Home_product Thumbnail wp-post-image" height=""
+              src="../../../../assets/images/joel_profile.jpg" width="274"></div>
+        </div>
+
+
+        <blockquote id="page_quote">
+          <p>Behind all of our experience, no matter how fraught or emotionally charged, there is unlimited inner peace,
+            unconditional loving, and unbreakable resilience.</p>
+        </blockquote>
+      </div>
     </div>
 
     <!-- {{loggedInUser | json}} -->

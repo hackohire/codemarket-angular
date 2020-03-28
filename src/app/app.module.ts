@@ -36,6 +36,7 @@ import { CommunityImpactStoriesComponent } from './community-impact-stories/comm
 import { AdvocatesInfluencersComponent } from './advocates-influencers/advocates-influencers.component';
 import { LoaderComponent } from './auth/loader/loader.component';
 import { WorkWithJoelComponent } from './work-with-joel/work-with-joel.component';
+import { ContactComponent } from './contact/contact.component';
 import { AuthModule } from './auth/auth.module';
 import { StressManagementComponent } from './stress-management/stress-management.component';
 
@@ -73,7 +74,7 @@ import { StressManagementComponent } from './stress-management/stress-management
     StressManagementComponent,
     CommunityImpactStoriesComponent,
     AdvocatesInfluencersComponent,
-
+    ContactComponent,
     WorkWithJoelComponent
   ],
   imports: [

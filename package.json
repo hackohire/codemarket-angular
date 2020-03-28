@@ -21,7 +21,6 @@
     "build:browser:prod": "yarn run build:only",
     "build:prod:deploy": "npm run build:prod && npm run deploy",
     "build:server:prod": "ng run joel:server:production && webpack --config webpack.server.config.js --progress --colors",
-
     "build:prod": "npm run build:browser:prod && npm run build:server:prod",
     "build:staging:deploy": "npm run build:staging && serverless deploy --stage staging",
     "build:staging": "node --max_old_space_size=8192 node_modules/@angular/cli/bin/ng build --configuration=staging && npm run build:server:staging",

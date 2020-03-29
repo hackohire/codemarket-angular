@@ -1,57 +1,86 @@
 <!-- Header Section Starts HERE -->
 
 <!-- <section class="hero-area bgimage"> -->
-        <div class="container">
-                <div class="row" style="padding-top: 10px;">
-                    
-                    <div style="text-align: center; align-self: center; margin-top: 100px;" class="col-md-6">
-                        <img src="./../assets/images/freepik_jane_pic_about_page.jpg">
-                    </div>
-                    <div class="col-md-6">
-                    <br/>
-                    <br/>
-                    <br/>
-                    <br/>
-                    <br/>
-                    <br/>
-                    <br/>
-                    <br/>
-                        <h1
-                            style="font-size: 50px; max-width: 100%; font-weight: 400; text-align: left;">
-                            Jane<br />
-                        </h1>
-                        <p style="font-weight: 70; margin: 5px;">
-                                <a routerLinkActive="mat-primary" [routerLink]="['/dashboard', 'profile', '5d3885741af2fd1db7fa5e84']">My Career & Business Goals</a></p>
-                      
-                    </div>
-                </div>
-                <div class="row" style="margin-top: 10px;">
-                    <div class="col-md-12" style="align-self: start;">
-                        
-                       
-                        <h3 style="font-weight: 200; margin: 5px; font-size: 30px;">
-                            Learning Angular and Node.js, in order to look for a junior level full-stack software developr job in 2021.
-                        </h3>
+<div class="container">
+    <div class="row" style="padding-top: 10px;">
 
-                    </div>
-                    <br/>
-                    
+        <div style="text-align: center; align-self: center; margin-top: 100px;">
+            <img src="./../assets/images/rabbitwell_tshirt_screenshot.png">
+        </div>
+
+        <div style="padding-top: 10px; display: block; float: left;">
+            <div class="col-md-6">
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <h1 style="font-size: 50px; max-width: 100%; font-weight: 400; text-align: left;">
+                    Jane<br />
+                </h1>
+                <p style="font-weight: 70; margin: 5px; color: red;">
+                    My Goal
+                    <br />
+                </p>
+                <!--
+            <p style="font-weight: 70; margin: 5px;">
+                <a routerLinkActive="mat-primary"
+                    [routerLink]="['/dashboard', 'profile', '5d3885741af2fd1db7fa5e84']">My Career & Business Goals</a>
+            </p>
+            -->
+
+            </div>
+            <div style="margin-top: 10px;">
+                <div class="col-md-12" style="align-self: start;">
+
+
+                    <h4 style="font-weight: 200; margin: 5px; font-size: 30px;">
+                        Learning Angular and Node.js, in order to look for a junior level full-stack software developr
+                        job
+                        in 2021<br /><br/>
+                    </h4>
+                    <p>
+                        Hi, I'm an animator. Check out my animation: <a href="http://www.rabbitwell.com/youtube">Rabbit Well</a>
+                    </p>
+                    <p>
+                        Today is March 29th, 2020. I'm currently learning Angular and Node.js.
+                        I'm documenting my process everyday here.
+                        I would like you to use this quarantine time to follow and learn with me together.
+                    </p>
+                    <p>
+                        If you would like to support my animation. Please subscribe my youtube site:
+                    </p>
+                    <p>
+                        youtube: <a href="http://www.rabbitwell.com/youtube">http://www.rabbitwell.com/youtube</a>
+                    </p>
+                    <!--
+                    <p>
+                        t-shirt: <a href="http://www.rabbitwell.com/amazon">http://www.rabbitwell.com/amazon</a>
+                    </p>
+                    <p>
+                        100% profit this year 2020 of Rabbit Well will be donated to Amerian Red Cross.
+                    </p>
+                    -->
+
                 </div>
-                <!-- <table><tr>
+                <br />
+
+            </div>
+            <!-- <table><tr>
                         <td  height="550px"><img class="header-image" src="../../assets/images/fly720x550.png"
                             alt="background-image"></td><td style="font-size: 67px; margin: 20px 40px 20px 40px; max-width: 550px; font-weight: 700;">FLY IN YOUR TECH CAREER</td>
                         </tr></table> -->
+        </div>
+
+
+
+        <!--</section>-->
+
+        <swal #successInvitationAccept title="Congratulations!" type="success" [showConfirmButton]="false">
+            <div *swalPartial class="alert alert-info">
+                <h4>You have accepted Invitation Successfully</h4>
+                <p></p>
+                <a class="btn btn--sm btn--round" [routerLink]="['/', 'dashboard', 'post-list']"
+                    [queryParams]="{type: 'event', all: true}">Events</a>
             </div>
-           
-           
-                            
-            <!--</section>-->
-            
-            <swal #successInvitationAccept title="Congratulations!" type="success" [showConfirmButton]="false">
-                <div *swalPartial class="alert alert-info">
-                    <h4>You have accepted Invitation Successfully</h4>
-                    <p></p>
-                    <a class="btn btn--sm btn--round" [routerLink]="['/', 'dashboard', 'post-list']"
-                        [queryParams]="{type: 'event', all: true}">Events</a>
-                </div>
-            </swal>
+        </swal>

@@ -23,6 +23,8 @@ export class BriefPostComponent implements OnInit, OnDestroy {
   commentForm: FormGroup;
 
   @Output() delete = new EventEmitter();
+  @Output() showComments: EventEmitter<{ block: any }> = new EventEmitter();
+
   anonymousAvatar = '../../../../assets/images/anonymous-avatar.jpg';
   s3FilesBucketURL = environment.s3FilesBucketURL;
   subscription$ = new Subscription();

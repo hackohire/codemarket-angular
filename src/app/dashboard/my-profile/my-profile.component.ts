@@ -81,6 +81,11 @@ export class MyProfileComponent implements OnInit {
   totalOtherPosts: number;
   paginator: MatPaginator;
 
+  selectedBlock = null;
+
+  selectedPost: Post;
+  selectedPostComments: Observable<Comment[]>;
+
   commentForm: FormGroup;
 
   @ViewChild('coverPic', { static: false }) coverPic;
@@ -329,17 +334,26 @@ export class MyProfileComponent implements OnInit {
     }
   }
 
-  selectMainCategory(category, panel) {
+  selectMainCategory(category) {
     if (!category.types) {
-      this.profileView = category.view;
-      this.router.navigate([category && category.path ? category.path : './'],
+      this.profileView = category;
+      this.router.navigate(['./'],
         {
           relativeTo: this.activatedRoute,
-          queryParams: { view: category.view }, queryParamsHandling: 'merge'
+          queryParams: { view: category }, queryParamsHandling: 'merge'
         });
-    } else {
-      panel.toggle();
     }
+  }
+
+  showCommentsOnSide(event: { block: any, comments, selectedPost}) {
+    console.log(event);
+    this.selectedBlock = event.block;
+    this.selectedPostComments = event.comments;
+    this.selectedPost = event.selectedPost;
+  }
+
+  redirectToAddPost(postType) {
+    this.router.navigate(['./post/add-post'], { queryParams: { type: postType } });
   }
 
   /** Fetch the list of posts for the posts tab based on the pagination */

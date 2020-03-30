@@ -3,7 +3,7 @@
     <div class="box-header">
         <!-- Post Title -->
         <h2 class="post-title" *ngIf="p?.name">
-            <a style="display: inline-block;" [href]="'/' + (p?.type === 'product' ? 'product' : 'post') + '/' + (p?.slug ? p.slug : p._id)" target="_blank">{{p?.name}}</a>
+            <a style="display: inline-block;" [href]="'/post' + '/' + (p?.slug ? p.slug : p._id)" target="_blank">{{p?.name}}</a>
         </h2>
 
         <!-- USER'S AVATAR & NAME -->
@@ -93,7 +93,7 @@
         <div class="bottom">
             <p [ngClass]="readMore ? 'readMore' : ''">
                 <!---------------- SINGLE POST EDITOR --------------->
-                <app-editor #singlePostEditor [editorStyle]="{background: 'white'}" [data]="p?.description"
+                <app-editor #singlePostEditor (showComments)="showComments.emit({block : $event.block, selectedPost: p, comments: commentService.commentsList$})" [editorStyle]="{background: 'white'}" [data]="p?.description"
                     [id]="'post' + p?._id" [readOnly]="!p['__edit']" [blockLevelComments]="!readMore"
                     [commentType]="'post'" [post]="p" [commentsList]="(commentService.commentsList$ | async)">
                 </app-editor>

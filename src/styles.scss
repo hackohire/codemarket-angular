@@ -3,7 +3,6 @@
 @import "../node_modules/highlight.js/styles/rainbow.css";
 @import "~ng-pick-datetime/assets/style/picker.min.css";
 
-@import url("assets/fonts/charter/webfonts/stylesheet.css");
 @import "~@ng-select/ng-select/themes/material.theme.css";
 @import "~@ngx-share/button/themes/default/default-theme";
 
@@ -100,8 +99,8 @@ textarea {
 }
 
 .cdx-block {
-  font-family: "charterregular", sans-serif !important;
-  font-size: 19px;
+  // font-family: "charterregular", sans-serif !important;
+  font-size: 16px;
   word-break: break-word;
   // padding: 0;
 }
@@ -111,7 +110,7 @@ textarea {
 }
 
 .ce-header {
-  font-family: "charterbold", sans-serif !important;
+  // font-family: "charterbold", sans-serif !important;
   // padding: 1em 0;
   margin: 0;
   margin-bottom: -0.9em;

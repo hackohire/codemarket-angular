@@ -20,6 +20,12 @@ import { MembershipService } from '../membership/membership.service';
 })
 export class DashboardComponent implements OnInit {
 
+  msbapTitle = 'Audio Title';
+  msbapAudioUrl = '../../assets/audio/happy-Joel-Drazner.mp3';   
+
+  msbapDisplayTitle = false; 
+  msbapDisplayVolumeControls = true; 
+
   @ViewChild('successInvitationAccept', { static: false }) successInvitationAccept: SwalComponent;
   productsList$: Observable<Product[]>;
   helpRequestList$: Observable<HelpQuery[]>;

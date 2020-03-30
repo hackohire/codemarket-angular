@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { NgxAudioPlayerModule } from 'ngx-audio-player';
 import { CommonModule } from '@angular/common';
 import { DashboardComponent } from './dashboard.component';
 import { Routes, RouterModule } from '@angular/router';
@@ -64,6 +65,7 @@ const dashboardRoutes: Routes = [
   imports: [
     CommonModule,
     SharedModule,
+    NgxAudioPlayerModule,
     // CompaniesModule,
     RouterModule.forChild(dashboardRoutes)
   ]

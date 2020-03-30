@@ -78,6 +78,7 @@
     "highlight.js": "^9.15.8",
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
+    "ngx-audio-player": "^9.0.6",
     "ngx-highlightjs": "^3.0.2",
     "ngx-toastr": "^11.2.1",
     "peerjs": "^1.1.0",

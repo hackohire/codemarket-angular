@@ -39,6 +39,7 @@ import { WorkWithJoelComponent } from './work-with-joel/work-with-joel.component
 import { ContactComponent } from './contact/contact.component';
 import { AuthModule } from './auth/auth.module';
 import { StressManagementComponent } from './stress-management/stress-management.component';
+import { NgxAudioPlayerModule } from 'ngx-audio-player';
 
 // import { SignInComponent } from './core/amplify/sign-in-component';
 
@@ -75,7 +76,7 @@ import { StressManagementComponent } from './stress-management/stress-management
     CommunityImpactStoriesComponent,
     AdvocatesInfluencersComponent,
     ContactComponent,
-    WorkWithJoelComponent
+    WorkWithJoelComponent    
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -85,7 +86,8 @@ import { StressManagementComponent } from './stress-management/stress-management
     SharedModule,
     BrowserAnimationsModule,
     LayoutModule,
-    AuthModule
+    AuthModule,
+    NgxAudioPlayerModule
   ],
   providers: [PostDataResolver],
   bootstrap: [AppComponent],

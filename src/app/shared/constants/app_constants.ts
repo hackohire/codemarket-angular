@@ -21,6 +21,7 @@ export const appConstants = {
     [PostType.Service]: 'briefcase',
     [PostType.CompetitiveAdvantage]: 'briefcase',
     [PostType.Assignment]: 'sticky-note',
+    [PostType.Question]: 'sticky-note',
     [PostType.Note]: 'sticky-note'
   },
 
@@ -310,7 +311,9 @@ export const appConstants = {
     { name: PostType.Howtodoc, label: 'How-To-Doc' },
     { name: PostType.Interview, label: 'Interview' },
     { name: PostType.Job, label: 'Job' },
+    { name: PostType.Note, label: 'Notes' },
     { name: PostType.Product, label: 'Product' },
+    { name: PostType.Question, label: 'Questions' },
     { name: PostType.Requirement, label: 'Requirement' },
     { name: PostType.Service, label: 'Service' },
     { name: PostType.Testing, label: 'Testing' }

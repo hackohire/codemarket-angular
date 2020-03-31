@@ -58,7 +58,7 @@
     <div class="ce-block">
         <div class="ce-block__content" style="word-break: break-all">
             <ng-container [ngSwitch]="b?.type" *ngFor="let b of data; let i = index">
-                <div fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="start center" [style.backgroundColor]="b?.__show && selectedBlockIndex ? 'beige' : ''">
+                <div fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="start center" [style.backgroundColor]="b?.__show && selectedBlockIndex > -1 ? 'beige' : ''">
                     <div [fxFlex]="blockLevelComments ? '90' : '100'">
                         <!-- Paragraph -->
                         <div *ngSwitchCase="'paragraph'">

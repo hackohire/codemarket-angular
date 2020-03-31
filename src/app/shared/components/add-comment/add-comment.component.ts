@@ -31,12 +31,15 @@ export class AddCommentComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    if (!this.commentForm) {
+    // if (!this.commentForm) {
       this.commentForm = new FormGroup({
         text: new FormControl(''),
         type: new FormControl('post'),
+        blockId: new FormControl(''),
+        blockSpecificComment: new FormControl(false),
+        referenceId: new FormControl('')
       });
-    }
+    // }
   }
 
 
@@ -46,12 +49,12 @@ export class AddCommentComponent implements OnInit {
       this.commentForm.get('text').setValue(blocks.blocks);
 
       if (this.blockId) {
-        this.commentForm.addControl('blockId', new FormControl(this.blockId));
-        this.commentForm.addControl('blockSpecificComment', new FormControl(true));
+        this.commentForm.get('blockId').setValue(this.blockId);
+        this.commentForm.get('blockSpecificComment').setValue(true);
       }
 
       if (this.referenceId) {
-        this.commentForm.addControl('referenceId', new FormControl(this.referenceId ? this.referenceId : ''));
+        this.commentForm.get('referenceId').setValue(this.referenceId ? this.referenceId : '');
       }
 
       this.commentForm.addControl('createdBy', new FormControl(this.authService.loggedInUser._id));

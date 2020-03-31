@@ -221,7 +221,7 @@
 <ng-template #addBlockLevelCommentTemplate let-cDetails="details" let-comments="comments">
     <!-- {{selectedBlock | json}} -->
     <aside class="sidebar">
-        <app-comment-side-nav (closeCommentSideBar)="selectedBlock['__show'] = null; selectedBlock = null" [selectedBlock]="selectedBlock" [selectedPost]="cDetails" [comments]="comments"></app-comment-side-nav>
+        <app-comment-side-nav (closeCommentSideBar)="selectedBlock = null" [selectedBlock]="selectedBlock" [selectedPost]="cDetails" [comments]="comments"></app-comment-side-nav>
     </aside>
     <!-- <ng-container *ngIf="selectedBlock && !(isHandset$ | async)">
         <mat-icon (click)="selectedBlock['__show'] = null; selectedBlock = null">close</mat-icon>

@@ -172,23 +172,25 @@
             <!-- end /.row -->
         </div>
         <!-- end /.container -->
-        <aside class="chat-box">
-            <header class="msg-overlay-bubble-header flex-row align-items-center" [mdePopoverTriggerFor]="showChatWindow"
-                 mdePopoverTriggerOn="click">
-                <button class="chat-button truncate" (click)="onChatClicked()">
-                    <span class="chat-font-size">Chat</span>
-                </button>
-            </header>
-           
-            <mde-popover #showChatWindow="mdePopover" [mdePopoverOverlapTrigger]="false" [mdePopoverCloseOnClick]="false"
-                [mdePopoverArrowOffsetX]="40" mdePopoverArrowColor="#FFFFFF">
-                <div *ngIf="displayChatBox" class="border border-dark" style="background: #ffffff; padding: 10px; width: 350px; height: 350px; padding: 5px 0 0 0; overflow-y: scroll;">
-                     <app-chat-box [comments]="commentService?.commentsList$ | async" [loggedInUserId]="authService?.loggedInUser?._id" [postDetails]="postDetails"></app-chat-box>
-                     
-                     <!-- <mat-icon class="send-button">send</mat-icon> -->
-                </div>
-            </mde-popover>
-        </aside>
+
+        <!-- Start of chat box code -->
+
+        <section class="chat-window docked" #chatWindow>
+            <div class="chat-header" (click)="chatWindow.classList.toggle('docked')">
+              <p>Live Chat</p>
+              <span class="close"></span>
+            </div>
+            <div class="chat-body">
+              <div class="message-container">
+                <app-chat-box [comments]="commentService?.commentsList$ | async" [loggedInUserId]="authService?.loggedInUser?._id" [postDetails]="postDetails"></app-chat-box>
+              </div>
+            </div>
+            <div class="chat-footer">
+              <div class="form-area">
+              </div>
+            </div>
+          </section>
+        <!-- End of chat box code -->
     </section>
     <!--===========================================
             END SINGLE PRODUCT DESCRIPTION AREA

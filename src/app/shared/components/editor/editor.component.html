@@ -58,7 +58,7 @@
     <div class="ce-block">
         <div class="ce-block__content" style="word-break: break-all">
             <ng-container [ngSwitch]="b?.type" *ngFor="let b of data; let i = index">
-                <div fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="start center">
+                <div fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="start center" [style.backgroundColor]="b?.__show && selectedBlockIndex ? 'beige' : ''">
                     <div [fxFlex]="blockLevelComments ? '90' : '100'">
                         <!-- Paragraph -->
                         <div *ngSwitchCase="'paragraph'">
@@ -155,6 +155,7 @@
                                     </table>
                                 </div>
                             </div>
+                            
                         </div>
 
                         <div *ngSwitchCase="'delimiter'">
@@ -164,21 +165,21 @@
 
 
                     <!-- Icon to view / collapse comments section -->
-                    <div [fxFlex]="blockLevelComments ? '10' : '0'">
+                    <div [fxFlex]="blockLevelComments ? '10' : '0'" style="text-align: right;">
                         <ng-container *ngIf="blockLevelComments">
-                            <a style="text-align: right; padding: 0 8px; text-decoration: none;" *ngIf="!b['__show']"
-                                mat-button (click)="b['__show'] = true">
+                            <a style="text-align: right; padding: 0 8px; text-decoration: none;" *ngIf="!b?.__show;"
+                                mat-button (click)="b['__show'] = true; showComments.emit({block: b, comments: of(commentsList)}); selectedBlockIndex > -1 ? data[selectedBlockIndex]['__show'] = false : null; selectedBlockIndex = i">
                                 <i [style.color]=" commentsList && commentsList?.length && numberOfComments(b?._id) > 0 ? '#0674ec' : ''"
                                     style="font-size: 1.3rem !important; font-style: normal;"
-                                    class="fad fa-comments-alt fa-lg"></i>
+                                    [ngClass]="'fad fa-comments-alt fa-lg'"></i>
                                 <span>{{' ('}} {{ commentsList && commentsList?.length ? numberOfComments(b?._id) : 0}}
                                     {{')'}}</span>
                             </a>
-                            <a style="padding: 0 8px; text-decoration: none;" *ngIf="b['__show']" mat-button
-                                (click)="b['__show'] = false">
+                            <a style="padding: 0 8px; text-decoration: none;" *ngIf="b?.__show" mat-button
+                                (click)="b.__show = false; showComments.emit({block: null, comments: null});">
                                 <i [style.color]="commentsList && commentsList?.length && numberOfComments(b?._id) > 0 ? '#0674ec' : ''"
                                     style="font-size: 1.3rem !important; font-style: normal;"
-                                    class="fad fa-chevron-circle-up fa-lg"></i>
+                                    [ngClass]="'fad fa-chevron-circle-' + ((isHandset$ | async ) ? 'up' : 'right') + ' fa-lg'"></i>
                                 <span>{{' ('}} {{ commentsList && commentsList?.length ? numberOfComments(b?._id) : 0}}
                                     {{')'}}</span>
                             </a>
@@ -187,7 +188,7 @@
                 </div>
 
                 <!-- Common Add Comment Template -->
-                <div *ngIf="blockLevelComments && b['__show']">
+                <div *ngIf="(isHandset$ | async) && blockLevelComments && b['__show']">
                     <ng-container *ngTemplateOutlet="addCommentTemplate; context: {blockId: b?._id}"></ng-container>
                 </div>
             </ng-container>
@@ -198,12 +199,9 @@
 </div>
 
 <ng-template #addCommentTemplate let-cDetails="details" let-blockId="blockId">
-    <!-- {{blockId}} -->
-    <!-- {{cDetails | json}} -->
     <div class="tab-pane fade show product-tab">
         <div class="thread">
             <ul class="media-list thread-list" style="list-style: none; padding-bottom: 0;">
-                <!-- <h4 class="tab-content-wrapper">Comments:</h4> -->
                 <div *ngFor="let c of commentsList">
                     <li [id]="c?._id" *ngIf="c?.blockSpecificComment && c?.blockId === blockId" class="single-thread">
                         <app-comment [comment]="c" [referenceId]="cDetails?._id"></app-comment>

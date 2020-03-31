@@ -29,6 +29,9 @@ import InlineCode from '@editorjs/inline-code';
 import EditorJS, { EditorConfig } from '@editorjs/editorjs';
 import { PostService } from '../../services/post.service';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { Observable, of } from 'rxjs';
+import { map, share } from 'rxjs/operators';
 
 @Component({
   selector: 'app-editor',
@@ -39,6 +42,8 @@ import { Subscription } from 'rxjs/internal/Subscription';
 export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit {
 
   editor: EditorJS;
+  of = of;
+  selectedBlockIndex: number;
   isPlatformBrowser = false;
   @Input() post: Post; /** post for view mode */
   @Input() companyPostId: string;
@@ -68,6 +73,8 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
   @ViewChild('editorRef', { static: false }) editorRef: ElementRef;
   @ViewChild('editorViewRef', { static: true }) editorViewRef: ElementRef;
 
+  @Output() showComments: EventEmitter<{ block: any }> = new EventEmitter();
+
   subscriptions$ = new Subscription();
 
   @Input() editorStyle = {
@@ -87,12 +94,19 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
 
   extensions = new Set(appConstants.imageExtenstions);
 
+  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
+    .pipe(
+      map(result => result.matches),
+      share()
+    );
+
   constructor(
     private _hljs: HighlightJS,
     public authService: AuthService,
     public commentService: CommentService,
     @Inject(PLATFORM_ID) public _platformId: Object,
-    private postService: PostService
+    private postService: PostService,
+    private breakpointObserver: BreakpointObserver,
   ) {
     this.isPlatformBrowser = isPlatformBrowser(this._platformId);
   }

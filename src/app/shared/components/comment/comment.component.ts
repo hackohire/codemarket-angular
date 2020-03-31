@@ -3,12 +3,12 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { tap } from 'rxjs/operators';
 import moment from 'moment';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { BlockToolData } from '@editorjs/editorjs';
 import { CommentService } from '../../services/comment.service';
 import { Comment } from '../../models/comment.model';
 import { environment } from 'src/environments/environment';
 import { SweetalertService } from '../../services/sweetalert.service';
 import { EditorComponent } from '../editor/editor.component';
+import uniqBy from 'lodash/uniqBy';
 
 @Component({
   selector: 'app-comment',
@@ -115,6 +115,10 @@ export class CommentComponent implements OnInit {
         }
       })
     ).subscribe();
+  }
+
+  fetchCommentators(children) {
+    return uniqBy(children, '_id');
   }
 
 }

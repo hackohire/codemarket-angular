@@ -6,6 +6,7 @@ import { environment } from '../../../../environments/environment';
 import { PostService } from '../../services/post.service';
 import { SearchComponent } from 'src/app/core/components/search/search.component';
 import { MdePopoverTrigger } from '@material-extended/mde';
+import { ShareService } from '@ngx-share/core';
 
 @Component({
   selector: 'app-breadcumb',
@@ -25,6 +26,7 @@ export class BreadcumbComponent implements OnInit {
   @Input() showEditPostDetails: boolean;
   @Input() showAddCollaborators: boolean;
   @Input() showAddAssignee: boolean;
+  @Input() showShareButtons: boolean;
 
   @Output() editPost = new EventEmitter();
 
@@ -34,7 +36,8 @@ export class BreadcumbComponent implements OnInit {
   s3FilesBucketURL = environment.s3FilesBucketURL;
 
   constructor(
-    private postService: PostService
+    private postService: PostService,
+    public share: ShareService,
   ) { }
 
   ngOnInit() {

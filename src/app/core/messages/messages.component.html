@@ -59,7 +59,7 @@
 
                                             <!-- Post Name -->
                                             <a *ngIf="m?.referencePost"
-                                                [href]="'/' + 'post' + '/' + m?.referencePost?.slug + '?commentId=' + m._id"
+                                                [href]="'/' + 'post' + '/' + m?.referencePost?.slug + '?commentId=' + m._id + '&blockId=' + m?.blockId"
                                                 target="_blank">{{m?.referencePost?.name}}</a>
 
                                             <!-- Company Name -->

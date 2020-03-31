@@ -309,6 +309,22 @@
             <!-- end /.row -->
         </div>
         <!-- end /.container -->
+        <aside class="chat-box">
+            <header class="msg-overlay-bubble-header flex-row align-items-center" [mdePopoverTriggerFor]="showChatWindow"
+                 mdePopoverTriggerOn="click">
+                <button class="chat-button truncate" >
+                    <span class="chat-font-size">Chat</span>
+                </button>
+            </header>
+           
+            <mde-popover #showChatWindow="mdePopover" [mdePopoverOverlapTrigger]="false" [mdePopoverCloseOnClick]="false"
+                [mdePopoverArrowOffsetX]="40" mdePopoverArrowColor="#FFFFFF">
+                <div class="border border-dark" style="background: #ffffff; padding: 10px; width: 350px; height: 350px; padding: 5px 0 0 0;">
+                     <app-chat-box [comments]="commentService?.commentsList$ | async" [loggedInUserId]="authService?.loggedInUser?._id"></app-chat-box>
+                     <!-- <mat-icon class="send-button">send</mat-icon> -->
+                </div>
+            </mde-popover>
+        </aside>
     </section>
     <!--===========================================
             END SINGLE PRODUCT DESCRIPTION AREA

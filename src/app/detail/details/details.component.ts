@@ -54,6 +54,8 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
   commentId: string;
 
+  displayChatBox = false;
+
   constructor(
     private store: Store<AppState>,
     private activatedRoute: ActivatedRoute,
@@ -209,7 +211,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
     });
 
     this.commentService.getCommentsByReferenceId(p, this.commentId);
-
+    console.log("Comments ==> ", this.commentService.commentsList$);
   }
 
   getDate(d: string) {
@@ -244,4 +246,8 @@ export class DetailsComponent implements OnInit, OnDestroy {
     this.router.navigate(['../add-post'], {relativeTo: this.activatedRoute, state: {post: p}, queryParams: {type: postType}});
   }
 
+  showChatWindow() {
+    this.displayChatBox = this.displayChatBox ? false : true;
+    console.log(this.displayChatBox);
+  }
 }

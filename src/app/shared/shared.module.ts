@@ -37,6 +37,7 @@ import { AddCollaboratorsComponent } from './components/add-collaborators/add-co
 import { AddAssigneeComponent } from './components/add-assignee/add-assignee.component';
 import { PaginatorComponent } from './components/paginator/paginator.component';
 import { AddCommentComponent } from './components/add-comment/add-comment.component';
+import { ChatBoxComponent } from './components/chat-box/chat-box.component';
 
 
 export function hljsLanguages() {
@@ -63,7 +64,8 @@ export function hljsLanguages() {
     AddCollaboratorsComponent,
     AddAssigneeComponent,
     PaginatorComponent,
-    AddCommentComponent
+    AddCommentComponent,
+    ChatBoxComponent
   ],
   imports: [
     CommonModule,
@@ -100,6 +102,7 @@ export function hljsLanguages() {
   ],
   exports: [
     BreadcumbComponent,
+    ChatBoxComponent,
     EditorComponent,
     CommentComponent,
     AddCommentComponent,

@@ -20,9 +20,14 @@
                 [id]="'c-' + c._id"></app-editor> -->
             </div>
         </div>
-        <!-- <app-editor [id]="'comment-editor'" #addCommentEditor
-            [editorStyle]="{padding: '0 15px', 'border-radius': '19px', background: '#f2f3f5', border: 'solid 0.5px rgb(236, 236, 236)'}">
+            <app-add-comment [referenceId]="postDetails._id" ></app-add-comment>
+        
+         <!-- <app-editor #commentReplyEditor [placeholder]="'Add a Reply!'"
+                [editorStyle]="{padding: '0 15px', 'border-radius': '19px', background: '#f2f3f5', border: 'solid 0.5px rgb(236, 236, 236)'}"
+                [id]="123">
         </app-editor> -->
-        <mat-icon class="send-button">send</mat-icon>
     </div>
+    <!-- <div class="d-flex flex-row bd-highlight">
+        <mat-icon class="p-2 bd-highlight" class="send-button">send</mat-icon>
+    </div> -->
 <!-- </div> -->

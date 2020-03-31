@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, Output, EventEmitter } from '@angular/core';
 import { Observable, of, Subscription } from 'rxjs';
 import { AppState } from 'src/app/core/store/state/app.state';
 import { Store } from '@ngrx/store';
@@ -302,8 +302,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
     }
   }
 
-  showChatWindow() {
-    this.displayChatBox = this.displayChatBox ? false : true;
-    console.log(this.displayChatBox);
+  onChatClicked() {
+    this.displayChatBox = true;
   }
 }

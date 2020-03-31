@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Post } from '../../models/post.model';
 import { Comment } from '../../models/comment.model';
 import { Observable } from 'rxjs';
@@ -10,9 +10,9 @@ import { map, share } from 'rxjs/operators';
   templateUrl: './comment-side-nav.component.html',
   styleUrls: ['./comment-side-nav.component.scss']
 })
-export class CommentSideNavComponent implements OnInit, OnChanges {
+export class CommentSideNavComponent implements OnInit {
 
-  @Input() selectedBlock = null;
+  @Input() selectedBlock;
   @Input() selectedPost: Post;
   @Input() comments: Comment[];
 
@@ -30,10 +30,6 @@ export class CommentSideNavComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     console.log(this.selectedBlock);
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
-    console.log(changes);
   }
 
 }

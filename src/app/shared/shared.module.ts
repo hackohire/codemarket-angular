@@ -38,6 +38,8 @@ import { AddAssigneeComponent } from './components/add-assignee/add-assignee.com
 import { PaginatorComponent } from './components/paginator/paginator.component';
 import { AddCommentComponent } from './components/add-comment/add-comment.component';
 import { ChatBoxComponent } from './components/chat-box/chat-box.component';
+import { PostTypeNavComponent } from './components/post-type-nav/post-type-nav.component';
+import { CommentSideNavComponent } from './components/comment-side-nav/comment-side-nav.component';
 
 
 export function hljsLanguages() {
@@ -65,7 +67,9 @@ export function hljsLanguages() {
     AddAssigneeComponent,
     PaginatorComponent,
     AddCommentComponent,
-    ChatBoxComponent
+    ChatBoxComponent,
+    PostTypeNavComponent,
+    CommentSideNavComponent,
   ],
   imports: [
     CommonModule,
@@ -113,6 +117,8 @@ export function hljsLanguages() {
     BriefPostComponent,
     AutocompleteComponent,
     PaginatorComponent,
+    PostTypeNavComponent,
+    CommentSideNavComponent,
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,

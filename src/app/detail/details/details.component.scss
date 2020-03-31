@@ -1,115 +1,19 @@
 @import '../../../assets/css/theme';
 
-// Side Navbar CSS Starts here
-.docs-component-viewer-nav-content {
-    background: rgba(0, 0, 0, 0.03);
-  
-    &::-webkit-scrollbar-thumb {
-      background: rgba(0, 0, 0, .26);
-    }
-  
-    .docs-nav-content-btn {
-      color: rgba(0,0,0,.5);
-      font-family: Roboto, "Helvetica Neue", sans-serif;
-      text-transform: capitalize;
-  
-      &:focus {
-        // override the default background
-        background: rgba(0, 0, 0, 0.08);
-      }
-    }
-  
-    hr {
-      border: none;
-      border-top: 1px solid rgba(0,0,0,.1);
-    }
-  
-    a {
-      color: rgba(0,0,0,.54);
-  
-      &.docs-component-viewer-sidenav-item-selected,
-      &:hover {
-        color: $pcolor !important;
-      }
-  
-      &.docs-component-viewer-sidenav-item-selected {
-        background: rgba(0, 0, 0, 0.08);
-      }
-    }
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1335px !important;
   }
-  
-  
-  
-  .docs-component-viewer-nav {
-    position: sticky;
-    top: 25px;
-  
-    .docs-component-viewer-nav-content {
-      // margin: 25px;
-      // width: $sidenav-width;
-      max-height: 75vh;
-      overflow: auto;
-  
-      &::-webkit-scrollbar {
-        height: 4px;
-        width: 4px;
-      }
-  
-      button {
-        padding: 10px 15px;
-        font-weight: 700;
-        line-height: 16px;
-        margin: 0;
-        font-size: 13px;
-        cursor: pointer;
-        position: relative;
-        display: block;
-        width: 100%;
-        text-align: left;
-        background: none;
-        border: none;
-  
-        &:focus {
-          outline: none;
-        }
-  
-        .mat-icon {
-          position: absolute;
-          right: 5px;
-          font-size: 18px;
-        }
-  
-        &.docs-component-viewer-sidenav-item-selected,
-        &:hover {
-          color: $pcolor;
-        }
-      }
-  
-      hr {
-        padding: 0;
-        margin: 0;
-      }
-  
-      ul {
-        list-style-type: none;
-        margin: 0 0 5px 0;
-        padding: 0;
-        overflow: hidden;
-      }
-  
-      li {
-        font-size: 13px;
-        line-height: 16px;
-        margin: 0;
-        padding: 5px 15px 5px 20px;
-      }
-  
-      a {
-        display: block;
-        text-decoration: none;
-        color: rgba(0,0,0,.54);
-      }
-    }
+}
+
+ aside.sidebar {
+  position: sticky;
+  max-height: 85vh;
+  top: 55px;
+  overflow: auto;
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, .26);
   }
 
  .chat-box {
@@ -164,3 +68,8 @@
   font-size: 1.2rem;;
 }
 // Side Navbar CSS Ends here
+  &::-webkit-scrollbar {
+    height: 4px;
+    width: 4px;
+  }
+}

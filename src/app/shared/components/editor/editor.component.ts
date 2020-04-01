@@ -31,7 +31,7 @@ import { PostService } from '../../services/post.service';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable, of } from 'rxjs';
-import { map, share } from 'rxjs/operators';
+import { map, share, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-editor',
@@ -40,6 +40,8 @@ import { map, share } from 'rxjs/operators';
   // encapsulation: ViewEncapsulation.None
 })
 export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit {
+
+  isHandset: boolean;
 
   editor: EditorJS;
   of = of;
@@ -94,12 +96,6 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
 
   extensions = new Set(appConstants.imageExtenstions);
 
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
-    .pipe(
-      map(result => result.matches),
-      share()
-    );
-
   constructor(
     private _hljs: HighlightJS,
     public authService: AuthService,
@@ -115,6 +111,15 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
     if (this.post) {
       this.initializeCommentForm(this.post);
     }
+
+    this.subscriptions$.add(
+      this.breakpointObserver.observe(Breakpoints.Handset)
+      .pipe(
+        map(result => result.matches),
+        tap(result => this.isHandset = result),
+        share()
+      ).subscribe()
+    );
   }
 
   ngAfterViewInit(): void {

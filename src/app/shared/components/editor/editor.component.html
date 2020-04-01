@@ -179,7 +179,7 @@
                                 (click)="b.__show = false; showComments.emit({block: null, comments: null});">
                                 <i [style.color]="commentsList && commentsList?.length && numberOfComments(b?._id) > 0 ? '#0674ec' : ''"
                                     style="font-size: 1.3rem !important; font-style: normal;"
-                                    [ngClass]="'fad fa-chevron-circle-' + ((isHandset$ | async ) ? 'up' : 'right') + ' fa-lg'"></i>
+                                    [ngClass]="'fad fa-chevron-circle-' + ((isHandset) ? 'up' : 'right') + ' fa-lg'"></i>
                                 <span>{{' ('}} {{ commentsList && commentsList?.length ? numberOfComments(b?._id) : 0}}
                                     {{')'}}</span>
                             </a>
@@ -188,9 +188,9 @@
                 </div>
 
                 <!-- Common Add Comment Template -->
-                <div *ngIf="(isHandset$ | async) && blockLevelComments && b['__show']">
+                <ng-container *ngIf="blockLevelComments && b['__show'] && (isHandset)">
                     <ng-container *ngTemplateOutlet="addCommentTemplate; context: {blockId: b?._id}"></ng-container>
-                </div>
+                </ng-container>
             </ng-container>
         </div>
     </div>

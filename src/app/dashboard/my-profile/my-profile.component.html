@@ -33,6 +33,9 @@
 								(click)="updateProfilePicture(user?._id)">Update</button>
 						</div>
 						<h4 style="text-align: center; padding-top: 10px;">{{user?.name}}</h4>
+						<button *ngIf="authService?.loggedInUser && authService?.loggedInUser?._id !== authorId" (click)="openDialog()" mat-mini-fab color="primary">
+                                        <mat-icon>video_call</mat-icon>
+                                    </button>
 					</div>
 					<div class="col-lg-10 col-md-10 col-sm-9" style="padding: 0;">
 						<div class="picture-container" *ngIf="selectedCoverPic?.name || user?.cover">

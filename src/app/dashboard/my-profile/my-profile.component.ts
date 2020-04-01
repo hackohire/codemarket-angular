@@ -47,7 +47,7 @@ enum navLinkName {
   /** Creating Separate Instance for User Service & Comment Service is very important, Because we are creating the instances of
    * User's posts and then mutating it, for realtime post & comment => add / edit / delete
    */
-  providers: [UserService],
+  providers: [],
   animations: [
     trigger('bodyExpansion', [
       state('collapsed', style({ height: '0px', display: 'none' })),
@@ -134,28 +134,6 @@ export class MyProfileComponent implements OnInit {
     //   view: navLinkName.dreamjobs,
     //   title: 'Dream Jobs'
     // },
-    // {
-    //   view: navLinkName.socialimpactgoal,
-    //   title: 'Social Impact Goals'
-    // },
-    // {
-    //   view: 'challenges',
-    //   title: 'Challenges',
-    //   types: [
-    //     {
-    //       view: navLinkName.leadershipchallenge,
-    //       title: 'Leadership Challenges'
-    //     },
-    //     {
-    //       view: navLinkName.technicalchallenge,
-    //       title: 'Technical Challenges'
-    //     },
-    //     {
-    //       view: navLinkName.businesschallenge,
-    //       title: 'Business Challenges'
-    //     }
-    //   ]
-    // },
     {
       view: navLinkName.posts,
       title: 'Posts'
@@ -187,7 +165,7 @@ export class MyProfileComponent implements OnInit {
 
     /** Peer Subscription for Video Call */
     // this.subscription.add(
-    //   this.userService.peer.subscribe((p) => {
+    //   this.userService.peer.asObservable().subscribe((p) => {
     //     if (p) {
     //       console.log(p);
     //       this.peer = p;
@@ -198,13 +176,6 @@ export class MyProfileComponent implements OnInit {
 
   deletePost(_id: string) {
     this.postService.deletePost(_id).subscribe();
-  }
-
-  isExpanded(category) {
-    if (category && category.types) {
-      return category.types.indexOf(c => c.view === this.profileView) > 0;
-    }
-    return false;
   }
 
   ngOnInit() {
@@ -244,12 +215,12 @@ export class MyProfileComponent implements OnInit {
       );
     }
 
-    // this.userService.peer.subscribe((p) => {
-    //   if (p) {
-    //     console.log(p);
-    //     this.peer = p;
-    //   }
-    // });
+    this.userService.peer.asObservable().subscribe((p) => {
+      if (p) {
+        console.log(p);
+        this.peer = p;
+      }
+    });
   }
 
   createTabs() {
@@ -300,7 +271,7 @@ export class MyProfileComponent implements OnInit {
   openDialog(): void {
     this.dialog.open(VideoChatComponent, {
       width: '550px',
-      data: { authorId: this.authorId, peer: this.peer },
+      data: { authorId: this.authorId, peer: this.userService.peer.value },
       disableClose: true
     });
   }

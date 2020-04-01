@@ -20,6 +20,7 @@ export class CommentComponent implements OnInit {
   @Input() comment: Comment;
   @Input() referenceId: string;
   @Input() companyReferenceId: string;
+  @Input() fromWhere: string;
   // @Output() commentDeleted  = new EventEmitter();
   @Output() allowReplyToParent = new EventEmitter();
   replyCommentForm: FormGroup;
@@ -82,7 +83,7 @@ export class CommentComponent implements OnInit {
         tap((child) => {
           if (child && this.comment.children) {
             // this.comment.children.push(child);
-            // this.reply = false;
+            this.reply = this.fromWhere === 'chat' ? false: true;
             commentReplyEditor.editor.blocks.clear();
           }
         })

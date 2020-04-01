@@ -195,7 +195,7 @@ a {
 }
 
 .float-right {
-  float: right;
+  float: right !important;
 }
 
 input[type="number"]::-webkit-inner-spin-button,
@@ -17749,7 +17749,7 @@ ul.nav-tabs.nav--tabs2 li a::before {
     }
   }
   .chat-body {
-    height: calc(550px - ( 45px + 70px));
+    height: 85%;
     border: 1px solid #263238;
     background: #fff;
     border-top: 0;
@@ -17769,7 +17769,7 @@ ul.nav-tabs.nav--tabs2 li a::before {
       position: relative;
       padding: 1em .7em 2em;
       margin-bottom: .5em;
-      border-bottom: 1px dotted #cfd8dc;
+      // border-bottom: 1px dotted #cfd8dc;
       .profile {
         position: absolute;
         top: 1em;
@@ -17831,7 +17831,7 @@ ul.nav-tabs.nav--tabs2 li a::before {
           float: left;
         }
         .message-meta{
-          p {
+          div {
             float: right;
             &:last-child {
               float: left;
@@ -17839,9 +17839,9 @@ ul.nav-tabs.nav--tabs2 li a::before {
           }
         }
         .message-content {
-          p {
+          // p {
             text-align: right;
-          }
+          // }
         }
       }
     }
@@ -17936,6 +17936,16 @@ ul.nav-tabs.nav--tabs2 li a::before {
   opacity: 0!important;
 }
 
+.chat-user-profile {
+  float: right;
+}
 
+.w-80 {
+  width: 80%
+}
+
+.bottom-border {
+  border-bottom: 1px solid #cfd8dc;
+}
 // End of Chat box CSS
 /*# sourceMappingURL=src/map/style.css.map */

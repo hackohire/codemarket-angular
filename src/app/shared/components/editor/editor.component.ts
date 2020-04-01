@@ -11,6 +11,7 @@ import Delimiter from '@editorjs/delimiter';
 import Embed from '../../../editor-js/plugins/embed';
 import Paragraph from '../../../editor-js/plugins/paragraph/bundle';
 import LinkTool from '@editorjs/link';
+import { AttachesTool } from '../../../editor-js/plugins/attach-files/attach';
 // import Warning from '@editorjs/warning';
 import Storage from '@aws-amplify/storage';
 import { environment } from 'src/environments/environment';
@@ -30,7 +31,7 @@ import EditorJS, { EditorConfig } from '@editorjs/editorjs';
 import { PostService } from '../../services/post.service';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Observable, of } from 'rxjs';
+import { of } from 'rxjs';
 import { map, share, tap } from 'rxjs/operators';
 
 @Component({
@@ -42,6 +43,8 @@ import { map, share, tap } from 'rxjs/operators';
 export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit {
 
   isHandset: boolean;
+
+  fileExtensions = AttachesTool.EXTENSIONS;
 
   editor: EditorJS;
   of = of;
@@ -191,7 +194,7 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
               addCommentEditor.editor.blocks.clear();
             }
           })
-        )
+        );
     } else {
       this.authService.checkIfUserIsLoggedIn(true);
     }
@@ -252,7 +255,7 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
             inlineToolbar: true,
             config: {
               rows: 2,
-              cols: 3,
+              cols: 2,
             },
           },
           Marker: {
@@ -268,6 +271,49 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
           list: {
             class: List,
             inlineToolbar: true,
+          },
+          attaches: {
+            class: AttachesTool,
+            toolbox: {
+              title: 'Attach Files'
+            },
+            config: {
+              endpoint: 'https://codemarket-files.s3.amazonaws.com/public/',
+              uploader: {
+                /**
+                 * Upload file to the server and return an uploaded image data
+                 * @param { File } file - file selected from the device or pasted by drag-n-drop
+                 * @return {Promise.<{success, file: {url}}>}
+                 */
+                uploadByFile(file) {
+                  // your own uploading logic here
+
+                  const fileNameSplitArray = file.name.split('.');
+                  const fileExt = fileNameSplitArray.pop();
+                  const fileName = fileNameSplitArray[0] + '-' + new Date().toISOString() + '.' + fileExt;
+
+                  return Storage.vault.put(fileName, file, {
+
+                    bucket: appConstants.fileS3Bucket,
+
+                    level: 'public',
+
+                    contentType: file.type,
+                  }).then((uploaded: any) => {
+                    console.log('uploaded', uploaded);
+                    return {
+                      success: 1,
+                      file: {
+                        url: environment.s3FilesBucketURL + uploaded.key,
+                        name: fileName,
+                        size: file.size
+                        // any other image data you want to store, such as width, height, color, extension, etc
+                      }
+                    };
+                  });
+                },
+              }
+            }
           },
           image: {
             class: ImageTool,

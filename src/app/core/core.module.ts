@@ -171,6 +171,7 @@ export class CoreModule {
                     { name: 'WarningBlock' },
                     { name: 'EmbedBlock' },
                     { name: 'LinkToolBlock' },
+                    { name: 'AttachesBlock' }
                   ],
                 },
               ],

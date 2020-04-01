@@ -437,7 +437,7 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
   }
 
   redirectToAddPost(postType) {
-    this.router.navigate(['./post/add-post'], { queryParams: { type: postType } });
+    this.router.navigate(['./post/add-post'], {state: {post: {companies: [{name: this.companyDetails.name, _id: this.companyDetails._id}]}}, queryParams: { type: postType } });
   }
 
 }

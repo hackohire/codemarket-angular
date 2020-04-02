@@ -1,10 +1,10 @@
 {
   "serverless": {
     "provider": "aws",
-    "project": "mehul",
+    "project": "codemarket",
     "skipInstall": false,
     "directory": ".",
-    "clientProject": "mehul",
+    "clientProject": "codemarket",
     "serverless": {
       "aws": {},
       "gcloud": {}

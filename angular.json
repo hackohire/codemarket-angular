@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "mehul": {
+    "codemarket": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -99,21 +99,21 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
             "port": 4800,
-            "browserTarget": "mehul:build"
+            "browserTarget": "codemarket:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "mehul:build:production"
+              "browserTarget": "codemarket:build:production"
             },
             "staging": {
-              "browserTarget": "mehul:build:staging"
+              "browserTarget": "codemarket:build:staging"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "mehul:build"
+            "browserTarget": "codemarket:build"
           }
         },
         "test": {
@@ -151,14 +151,14 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "mehul:serve"
+            "devServerTarget": "codemarket:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "mehul:serve:production"
+              "devServerTarget": "codemarket:serve:production"
             },
             "staging": {
-              "devServerTarget": "mehul:serve:staging"
+              "devServerTarget": "codemarket:serve:staging"
             }
           }
         },
@@ -201,5 +201,5 @@
       }
     }
   },
-  "defaultProject": "mehul"
+  "defaultProject": "codemarket"
 }

@@ -1,5 +1,5 @@
 @font-face {
-    font-family: 'Rectory';
+    font-family: 'Rectory Regular';
     src: url('Rectory-Regular.eot');
     src: local('Rectory Regular'), local('Rectory-Regular'),
         url('Rectory-Regular.eot?#iefix') format('embedded-opentype'),
@@ -12,7 +12,7 @@
 }
 
 @font-face {
-    font-family: 'Rectory';
+    font-family: 'Rectory Bold';
     src: url('Rectory-Bold.eot');
     src: local('Rectory Bold'), local('Rectory-Bold'),
         url('Rectory-Bold.eot?#iefix') format('embedded-opentype'),
@@ -38,7 +38,7 @@
 }
 
 @font-face {
-    font-family: 'Rectory';
+    font-family: 'Rectory Thin';
     src: url('Rectory-Thin.eot');
     src: local('Rectory Thin'), local('Rectory-Thin'),
         url('Rectory-Thin.eot?#iefix') format('embedded-opentype'),

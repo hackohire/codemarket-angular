@@ -21,6 +21,7 @@ export class CommentComponent implements OnInit {
   @Input() referenceId: string;
   @Input() companyReferenceId: string;
   @Input() fromWhere: string;
+  @Input() isChildComment: boolean;
   // @Output() commentDeleted  = new EventEmitter();
   @Output() allowReplyToParent = new EventEmitter();
   replyCommentForm: FormGroup;

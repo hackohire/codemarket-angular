@@ -1,4 +1,4 @@
-<div style="padding: 10px 0px 0px;" *ngIf="replyCommentForm?.value" [ngClass]="comment.createdBy._id === authService.loggedInUser._id && fromWhere === 'chat' ? '' : 'media'">
+<div style="padding: 10px 0px 0px;" *ngIf="replyCommentForm?.value" [ngClass]="comment.createdBy._id === authService.loggedInUser._id && fromWhere === 'chat' ? isChildComment ? 'reply-comment' : '' : 'media'">
 <!-- <div class="media"> -->
 
     <!-- <div class="media-left"> -->
@@ -73,7 +73,7 @@
 
 <div [id]="r?._id" class="single-thread depth-2" *ngFor="let r of comment?.children">
     <!-- CHILD COMMENT EDITOR -->
-    <app-comment [comment]="r" [referenceId]="comment?.referenceId" (allowReplyToParent)="allowReply()" [fromWhere]="fromWhere === 'chat' ? 'chat': ''"></app-comment>
+    <app-comment [comment]="r" [referenceId]="comment?.referenceId" (allowReplyToParent)="allowReply()" [fromWhere]="fromWhere === 'chat' ? 'chat': ''" [isChildComment]="fromWhere === 'chat' ? true: false"></app-comment>
 </div>
 
 <!-- comment reply -->

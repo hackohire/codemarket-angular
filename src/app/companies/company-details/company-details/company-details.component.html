@@ -25,7 +25,7 @@
         <div class="container" style="margin-top: 0; margin-bottom: 15px;">
 
             <div class="row">
-                <div class="col-lg-3 col-md-3 col-sm-3 align-items-center justify-content-center" style="margin: auto;">
+                <div class="col-lg-2 col-md-2 col-sm-3 align-items-center justify-content-center" style="margin: auto;">
                     <div class="avatar-circle" style="margin: auto;">
                         <span class="initials">{{details?.name ? details?.name[0] : ''}}</span>
                     </div>
@@ -84,7 +84,7 @@
                     </mde-popover>
 
                 </div>
-                <div class="col-lg-9 col-md-9 col-sm-9" style="padding: 0;">
+                <div class="col-lg-10 col-md-10 col-sm-9" style="padding: 0;">
                     <div class="picture-container" *ngIf="selectedCoverPic || companyDetails?.cover">
 
                         <img #cover
@@ -114,10 +114,13 @@
         <div class="container">
 
             <div class="row">
-                <div class="col-lg-3">
+                <div class="col-lg-2">
+                    <app-post-type-nav [selectedPostType]="companyView"
+					(postTypeClick)="selectMainCategory($event);"
+					(plusButtonClick)="redirectToAddPost($event)"></app-post-type-nav>
                     <!-- start aside -->
                     <!-- <app-add-post-menu style="color: #0674ec !important; margin-left: auto;"></app-add-post-menu> -->
-                    <div class="docs-component-viewer-nav common-box-shadow"
+                    <!-- <div class="docs-component-viewer-nav common-box-shadow"
                         style="margin-bottom: 20px; margin-top: 10px;">
                         <div class="docs-component-viewer-nav-content">
                             <div *ngFor="let category of companyViewLinks; let last = last;">
@@ -128,9 +131,6 @@
                                     [attr.aria-controls]="'panel-' + category.view"
                                     [attr.aria-expanded]="panel.expanded">
                                     {{category.title}}
-
-                                    <!-- <i *ngIf="category?.showHighlight" style="color: red;"
-                                        class="fas fa-exclamation"></i> -->
 
                                     <mat-icon *ngIf="category?.types">
                                         {{panel.expanded ? 'keyboard_arrow_up' :  'keyboard_arrow_down'}}
@@ -148,7 +148,6 @@
                                 <hr *ngIf="!last" />
                             </div>
 
-                            <!-- Based On the List Of Post Types -->
                             <div *ngFor="let p of postTypesArray; let last = last;">
                                 <button cdkAccordionItem [routerLink]="[]" [queryParams]="{ view: p.name }"
                                     [queryParamsHandling]="'merge'"
@@ -160,7 +159,7 @@
                                 <hr *ngIf="!last" />
                             </div>
                         </div>
-                    </div>
+                    </div> -->
 
 
 
@@ -201,202 +200,211 @@
                     <!-- <div style="height: 312px; width: 820px">
                             <img [src]="avatar?.value ? ((s3FilesBucketURL + avatar.value) | safe: 'resourceUrl') : anonymousAvatar" />
                     </div> -->
-                    <div class="comment-form-area" style="padding: 0;">
-                        <div class="media comment-form">
-                            <div class="media-left">
-                                <a [routerLink]="['/', 'dashboard', 'profile', authService?.loggedInUser?._id ]">
-                                    <img class="author_avatar_comment" style="height: 45px; width:45px;"
-                                        [src]="authService?.loggedInUser?.avatar ? ((s3FilesBucketURL + authService?.loggedInUser?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
-                                        alt="Commentator Avatar">
-                                </a>
-                            </div>
-                            <div class="media-body">
-                                <div class="comment-reply-form">
-                                    <app-add-post-menu #addPostMenu style="position: absolute; visibility: hidden;">
-                                    </app-add-post-menu>
-                                    <div (click)="addPostMenu.openMenu();" class="comment-reply-form">
-                                        <textarea placeholder="Add Post!"
-                                            style="background: white; height: 100px; padding: 20px 35px; width: 100%; min-height: 130px; border-radius: 6px;">
-                                        </textarea>
-
-                                        <button style="float: right; margin-top: 10px; margin-bottom: 20px;"
-                                            type="button" class="btn btn--sm btn--round"
-                                            (click)="addPostMenu.openMenu();">Post</button>
+                    <div class="row">
+                        <div class="col-md-12 comment-form-area" style="padding: 0 15px;">
+                            <div class="media comment-form">
+                                <div class="media-left">
+                                    <a [routerLink]="['/', 'dashboard', 'profile', authService?.loggedInUser?._id ]">
+                                        <img class="author_avatar_comment" style="height: 45px; width:45px;"
+                                            [src]="authService?.loggedInUser?.avatar ? ((s3FilesBucketURL + authService?.loggedInUser?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                                            alt="Commentator Avatar">
+                                    </a>
+                                </div>
+                                <div class="media-body">
+                                    <div class="comment-reply-form">
+                                        <app-add-post-menu #addPostMenu style="position: absolute; visibility: hidden;">
+                                        </app-add-post-menu>
+                                        <div (click)="addPostMenu.openMenu();" class="comment-reply-form">
+                                            <textarea placeholder="Add Post!"
+                                                style="background: white; height: 100px; padding: 20px 35px; width: 100%; min-height: 130px; border-radius: 6px;">
+                                            </textarea>
+    
+                                            <button style="float: right; margin-top: 10px; margin-bottom: 20px;"
+                                                type="button" class="btn btn--sm btn--round"
+                                                (click)="addPostMenu.openMenu();">Post</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
+                    <div class="row">
+                        <div [ngClass]="selectedBlock ? 'col-md-8 col-lg-8' : 'col-lg-10 col-md-10'">
                     <!-- Showing the list of posts for the posts tab, everytime user clicks on the "load more", we increase the page number and call
 							fetchAllOtherPosts method to fetch subsequent posts -->
-                    <ng-container *ngIf="companyView === 'posts'">
-                        <div class="item-grid pen-grid item-grid-large">
-                            <app-brief-post style="width: 100%;" [p]="e" *ngFor="let e of companyRelatedPosts?.posts"
-                                [readMore]="true"></app-brief-post>
-                        </div>
-                        <app-paginator [length]="totalcompanyRelatedPosts" (fetchData)="paginator = $event; fetchAllCompanyRealtedePosts()">
-                        </app-paginator>
-                    </ng-container>
-
-                    <ng-container *ngFor="let p of postTypesArray">
-                        <ng-container *ngIf="companyView === p.name">
-                            <div class="item-grid pen-grid item-grid-large">
-                                <app-brief-post style="width: 100%;" [p]="e"
-                                    *ngFor="let e of companyRelatedPosts?.posts" [readMore]="true"></app-brief-post>
-                            </div>
-                            <app-paginator [length]="totalcompanyRelatedPosts" (fetchData)="paginator = $event; fetchAllCompanyRealtedePosts(p.name)">
-                            </app-paginator>
-                        </ng-container>
-                    </ng-container>
-
-                    <div *ngIf="companyView === 'comments'">
-                        <ng-container *ngTemplateOutlet="addCommentTemplate; context: details">
-                        </ng-container>
-                    </div>
-
-                    <div *ngIf="companyView === 'q&a'">
-                        <ng-container *ngTemplateOutlet="questionAnswersTemplate; context: details">
-                        </ng-container>
-                    </div>
-
-                    <div *ngIf="details?.createdBy?.name && companyView === 'creator'" class="author-card sidebar-card">
-                        <!-- <ng-container
-                            *ngTemplateOutlet="addCompanypostTemplate; context: { details: details, postType: 'company-post'}">
-                        </ng-container> -->
-                        <div class="card-title">
-                            <h4>Author Information</h4>
-                        </div>
-
-                        <div class="author-infos">
-                            <div class="author_avatar">
-                                <img [src]="details?.createdBy?.avatar ? ((s3FilesBucketURL + details.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar"
-                                    alt="Presenting the broken author avatar :D">
-                            </div>
-
-                            <div class="author">
-                                <a [routerLink]="['/', 'dashboard', 'profile', details?.createdBy?._id ]">
-                                    <h4>{{details?.createdBy?.name}}</h4>
-                                </a>
-                                <!-- <button
-                                    *ngIf="details?.createdBy?._id && authService?.loggedInUser?._id && authService?.loggedInUser?._id !== details?.createdBy?._id"
-                                    (click)="openDialog(details?.createdBy?._id)" mat-mini-fab color="primary">
-                                    <mat-icon>video_call</mat-icon>
-                                </button> -->
-                                <!-- <p>Signed Up: 08 April 2016</p> -->
-                            </div>
-                            <!-- end /.author -->
-
-                            <div class="social social--color--filled">
-                                <ul>
-                                    <li>
-                                        <a href="#">
-                                            <span class="fab fa-facebook fa-lg"></span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <span class="fab fa-github fa-lg"></span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <span class="fab fa-linkedin fa-lg"></span>
-                                        </a>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fab fa-stack-overflow"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <!-- end /.social -->
-
-                            <div class="author-btn">
-                                <a (editPost)="postService?.editPost(details)"
-                                    [routerLink]="['/', 'dashboard', 'profile', details?.createdBy?._id ]"
-                                    class="btn btn--sm btn--round">View Profile</a>
-                                <!-- <a href="#" class="btn btn--sm btn--round">Message</a> -->
-                            </div>
-                        </div>
-                        <!-- end /.author-infos -->
-
-
-                    </div>
-                    <!-- end /.author-card -->
-
-                    <aside *ngIf="companyView === 'info'" class="sidebar sidebar--single-product">
-                        <!-- <ng-container
-                            *ngTemplateOutlet="addCompanypostTemplate; context: { details: details, postType: 'company-post'}">
-                        </ng-container> -->
-                        <div class="sidebar-card card--product-infos">
-                            <div class="card-title">
-                                <h4>Information</h4>
-                            </div>
-
-                            <ul class="infos">
-                                <li *ngIf="details?.createdAt">
-                                    <p class="data-label">Created</p>
-                                    <p class="info">{{getDate(details?.createdAt) | date: 'dd/MM/yyyy'}}
-                                    </p>
-                                </li>
-                                <li *ngIf="details?.updatedAt">
-                                    <p class="data-label">Updated</p>
-                                    <p class="info">{{getDate(details?.updatedAt) | date: 'dd/MM/yyyy'}}
-                                    </p>
-                                </li>
-                                <li>
-                                    <p class="data-label">Cities</p>
-                                    <p class="info" *ngFor="let t of details?.cities">{{t?.name + ','}}
-                                    </p>
-                                </li>
-                                <li>
-                                    <p class="data-label">Address</p>
-                                    <p class="info">{{details?.location?.address}}
-                                    </p>
-                                </li>
-                            </ul>
-
-                            <!-- <ng-container *ngTemplateOutlet="locationTemplate; context: {location: details?.location}">
-                            </ng-container> -->
-                        </div>
-                    </aside>
-                    <!-- end /.aside -->
-                    <div *ngIf="companyView === 'interested-people'">
-                        <!-- <ng-container
-                            *ngTemplateOutlet="addCompanypostTemplate; context: { details: details, postType: 'company-post'}">
-                        </ng-container> -->
-                        <div class="author-card sidebar-card">
-                            <div class="card-title">
-                                <h4>Interested Professionals:
-                                    {{ details?.usersInterestedInCompany?.length }}</h4>
-                                <br />
-
-                                <ng-container class="row" *ngFor="let userInterested of usersInterestedInCompany">
-                                    <div class="col-md-12" style="margin-bottom: 10px;">
-                                        <div class="author_avatar_comment" style="vertical-align: middle;">
-                                            <img [src]="userInterested?.avatar ? ((s3FilesBucketURL + userInterested.avatar) | safe: 'resourceUrl') : anonymousAvatar"
-                                                alt="Presenting the broken author avatar :D">
-                                        </div>
-                                        <div class="autor__info">
-                                            <a [routerLink]="['/', 'dashboard', 'profile', userInterested?._id ]">
-                                                <p class="name">
-                                                    {{userInterested?.name}}
-                                                </p>
-                                                <p style="color: lightgray;">
-                                                    {{userInterested?.currentJobDetails?.jobProfile ? userInterested?.currentJobDetails?.jobProfile : '-'}}
-                                                </p>
-                                            </a>
-                                            <!-- <p class="ammount">{{fromNow(pu?.createdAt)}}</p> -->
-                                        </div>
+                            <ng-container *ngIf="companyView === 'posts'">
+                                <div class="item-grid pen-grid item-grid-large">
+                                    <app-brief-post style="width: 100%;" [p]="e" *ngFor="let e of companyRelatedPosts?.posts"
+                                        [readMore]="true" (showComments)="showCommentsOnSide($event)"></app-brief-post>
+                                </div>
+                                <app-paginator [length]="totalcompanyRelatedPosts" (fetchData)="paginator = $event; fetchAllCompanyRealtedePosts()">
+                                </app-paginator>
+                            </ng-container>
+        
+                            <ng-container *ngFor="let p of postTypesArray">
+                                <ng-container *ngIf="companyView === p.name">
+                                    <div class="item-grid pen-grid item-grid-large">
+                                        <app-brief-post style="width: 100%;" [p]="e"
+                                            *ngFor="let e of companyRelatedPosts?.posts" [readMore]="true" (showComments)="showCommentsOnSide($event)"></app-brief-post>
                                     </div>
-
+                                    <app-paginator [length]="totalcompanyRelatedPosts" (fetchData)="paginator = $event; fetchAllCompanyRealtedePosts(p.name)">
+                                    </app-paginator>
+                                </ng-container>
+                            </ng-container>
+        
+                            <div *ngIf="companyView === 'comments'">
+                                <ng-container *ngTemplateOutlet="addCommentTemplate; context: details">
                                 </ng-container>
                             </div>
+        
+                            <div *ngIf="companyView === 'q&a'">
+                                <ng-container *ngTemplateOutlet="questionAnswersTemplate; context: details">
+                                </ng-container>
+                            </div>
+        
+                            <div *ngIf="details?.createdBy?.name && companyView === 'creator'" class="author-card sidebar-card">
+                                <!-- <ng-container
+                                    *ngTemplateOutlet="addCompanypostTemplate; context: { details: details, postType: 'company-post'}">
+                                </ng-container> -->
+                                <div class="card-title">
+                                    <h4>Author Information</h4>
+                                </div>
+        
+                                <div class="author-infos">
+                                    <div class="author_avatar">
+                                        <img [src]="details?.createdBy?.avatar ? ((s3FilesBucketURL + details.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                                            alt="Presenting the broken author avatar :D">
+                                    </div>
+        
+                                    <div class="author">
+                                        <a [routerLink]="['/', 'dashboard', 'profile', details?.createdBy?._id ]">
+                                            <h4>{{details?.createdBy?.name}}</h4>
+                                        </a>
+                                        <!-- <button
+                                            *ngIf="details?.createdBy?._id && authService?.loggedInUser?._id && authService?.loggedInUser?._id !== details?.createdBy?._id"
+                                            (click)="openDialog(details?.createdBy?._id)" mat-mini-fab color="primary">
+                                            <mat-icon>video_call</mat-icon>
+                                        </button> -->
+                                        <!-- <p>Signed Up: 08 April 2016</p> -->
+                                    </div>
+                                    <!-- end /.author -->
+        
+                                    <div class="social social--color--filled">
+                                        <ul>
+                                            <li>
+                                                <a href="#">
+                                                    <span class="fab fa-facebook fa-lg"></span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <span class="fab fa-github fa-lg"></span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <span class="fab fa-linkedin fa-lg"></span>
+                                                </a>
+                                            <li>
+                                                <a href="#">
+                                                    <i class="fab fa-stack-overflow"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <!-- end /.social -->
+        
+                                    <div class="author-btn">
+                                        <a (editPost)="postService?.editPost(details)"
+                                            [routerLink]="['/', 'dashboard', 'profile', details?.createdBy?._id ]"
+                                            class="btn btn--sm btn--round">View Profile</a>
+                                        <!-- <a href="#" class="btn btn--sm btn--round">Message</a> -->
+                                    </div>
+                                </div>
+                                <!-- end /.author-infos -->
+        
+        
+                            </div>
+                            <!-- end /.author-card -->
+        
+                            <aside *ngIf="companyView === 'info'" class="sidebar sidebar--single-product">
+                                <!-- <ng-container
+                                    *ngTemplateOutlet="addCompanypostTemplate; context: { details: details, postType: 'company-post'}">
+                                </ng-container> -->
+                                <div class="sidebar-card card--product-infos">
+                                    <div class="card-title">
+                                        <h4>Information</h4>
+                                    </div>
+        
+                                    <ul class="infos">
+                                        <li *ngIf="details?.createdAt">
+                                            <p class="data-label">Created</p>
+                                            <p class="info">{{getDate(details?.createdAt) | date: 'dd/MM/yyyy'}}
+                                            </p>
+                                        </li>
+                                        <li *ngIf="details?.updatedAt">
+                                            <p class="data-label">Updated</p>
+                                            <p class="info">{{getDate(details?.updatedAt) | date: 'dd/MM/yyyy'}}
+                                            </p>
+                                        </li>
+                                        <li>
+                                            <p class="data-label">Cities</p>
+                                            <p class="info" *ngFor="let t of details?.cities">{{t?.name + ','}}
+                                            </p>
+                                        </li>
+                                        <li>
+                                            <p class="data-label">Address</p>
+                                            <p class="info">{{details?.location?.address}}
+                                            </p>
+                                        </li>
+                                    </ul>
+        
+                                    <!-- <ng-container *ngTemplateOutlet="locationTemplate; context: {location: details?.location}">
+                                    </ng-container> -->
+                                </div>
+                            </aside>
+                            <!-- end /.aside -->
+                            <div *ngIf="companyView === 'interested-people'">
+                                <!-- <ng-container
+                                    *ngTemplateOutlet="addCompanypostTemplate; context: { details: details, postType: 'company-post'}">
+                                </ng-container> -->
+                                <div class="author-card sidebar-card">
+                                    <div class="card-title">
+                                        <h4>Interested Professionals:
+                                            {{ details?.usersInterestedInCompany?.length }}</h4>
+                                        <br />
+        
+                                        <ng-container class="row" *ngFor="let userInterested of usersInterestedInCompany">
+                                            <div class="col-md-12" style="margin-bottom: 10px;">
+                                                <div class="author_avatar_comment" style="vertical-align: middle;">
+                                                    <img [src]="userInterested?.avatar ? ((s3FilesBucketURL + userInterested.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                                                        alt="Presenting the broken author avatar :D">
+                                                </div>
+                                                <div class="autor__info">
+                                                    <a [routerLink]="['/', 'dashboard', 'profile', userInterested?._id ]">
+                                                        <p class="name">
+                                                            {{userInterested?.name}}
+                                                        </p>
+                                                        <p style="color: lightgray;">
+                                                            {{userInterested?.currentJobDetails?.jobProfile ? userInterested?.currentJobDetails?.jobProfile : '-'}}
+                                                        </p>
+                                                    </a>
+                                                    <!-- <p class="ammount">{{fromNow(pu?.createdAt)}}</p> -->
+                                                </div>
+                                            </div>
+        
+                                        </ng-container>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                        <div [ngClass]="selectedBlock ? 'col-md-4 col-lg-4' : ''">
+							<ng-container
+								*ngTemplateOutlet="addBlockLevelCommentTemplate; context: {details: selectedPost, comments: selectedPostComments | async}">
+							</ng-container>
+						</div>
                     </div>
 
-                    <!-- end /.item-info -->
                 </div>
                 <!-- end /.col-md-8 -->
 
@@ -410,16 +418,6 @@
         ===============================================-->
 
 </ng-container>
-
-<ng-template #locationTemplate let-location="location">
-    <div *ngIf="location?.latitude || location?.longitude">
-        <h4 class="tab-content-wrapper">Location:</h4>
-        <agm-map [latitude]="location?.latitude" [longitude]="location?.longitude" [zoom]="15">
-            <agm-marker [latitude]="location?.latitude" [longitude]="location?.longitude"></agm-marker>
-        </agm-map>
-    </div>
-
-</ng-template>
 
 <ng-template #addCommentTemplate let-cDetails="details">
     <div style="background: white;">
@@ -620,4 +618,12 @@
 
         </div>
     </div>
+</ng-template>
+
+<ng-template #addBlockLevelCommentTemplate let-cDetails="details" let-comments="comments">
+	<aside class="sidebar">
+		<app-comment-side-nav *ngIf="selectedBlock"
+			(closeCommentSideBar)="selectedBlock['__show'] = null; selectedBlock = null" [selectedBlock]="selectedBlock"
+			[selectedPost]="cDetails" [comments]="comments"></app-comment-side-nav>
+	</aside>
 </ng-template>

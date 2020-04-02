@@ -48,6 +48,22 @@ export const imageFragment = gql`
 }
 `;
 
+export const attachesFragment = gql`
+  fragment Attaches on AttachesBlock {
+  type
+  _id
+  data {
+    title
+    file {
+      url
+      name
+      extension
+      size
+    }
+  }
+}
+`;
+
 export const listFragment = gql`
 fragment List on ListBlock {
   type
@@ -139,6 +155,7 @@ export const description = gql`
         ...Warning
         ...Embed
         ...LinkTool
+        ...Attaches
     }
     ${codeFragment}
     ${imageFragment}
@@ -150,6 +167,7 @@ export const description = gql`
     ${warningFragment}
     ${embedFragment}
     ${linkToolFragment}
+    ${attachesFragment}
 `;
 
 const CommentFragment = gql`

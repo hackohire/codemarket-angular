@@ -25,18 +25,17 @@ import { CompaniesListComponent } from '../companies/companies-list/companies-li
 // import { Ng5SliderModule } from 'ng5-slider';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { MdePopoverModule } from '@material-extended/mde';
-import { AgmCoreModule } from '@agm/core';
-import { environment } from '../../environments/environment';
 import { CommentService } from './services/comment.service';
 import { ToastrModule } from 'ngx-toastr';
 import { AddJobComponent } from '../job/add-job/add-job.component';
-import { AddCompanyComponent } from '../companies/add-company/add-company.component';
 import { BriefPostComponent } from './components/brief-post/brief-post.component';
 import { AutocompleteComponent } from './components/autocomplete/autocomplete.component';
 import { AddCollaboratorsComponent } from './components/add-collaborators/add-collaborators.component';
 import { AddAssigneeComponent } from './components/add-assignee/add-assignee.component';
 import { PaginatorComponent } from './components/paginator/paginator.component';
 import { AddCommentComponent } from './components/add-comment/add-comment.component';
+import { PostTypeNavComponent } from './components/post-type-nav/post-type-nav.component';
+import { CommentSideNavComponent } from './components/comment-side-nav/comment-side-nav.component';
 
 
 export function hljsLanguages() {
@@ -63,7 +62,9 @@ export function hljsLanguages() {
     AddCollaboratorsComponent,
     AddAssigneeComponent,
     PaginatorComponent,
-    AddCommentComponent
+    AddCommentComponent,
+    PostTypeNavComponent,
+    CommentSideNavComponent,
   ],
   imports: [
     CommonModule,
@@ -87,10 +88,6 @@ export function hljsLanguages() {
     // Ng5SliderModule,
     NgSelectModule,
     MdePopoverModule,
-    AgmCoreModule.forRoot({
-      apiKey: environment.googleAPIKey,
-      libraries: ['places']
-    }),
     ToastrModule.forRoot({
       closeButton: true,
       enableHtml: true,
@@ -110,6 +107,8 @@ export function hljsLanguages() {
     BriefPostComponent,
     AutocompleteComponent,
     PaginatorComponent,
+    PostTypeNavComponent,
+    CommentSideNavComponent,
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
@@ -124,8 +123,7 @@ export function hljsLanguages() {
     SafePipe,
     // Ng5SliderModule,
     NgSelectModule,
-    MdePopoverModule,
-    AgmCoreModule
+    MdePopoverModule
   ],
   entryComponents: [
     AddJobComponent,

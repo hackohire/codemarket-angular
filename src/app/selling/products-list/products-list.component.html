@@ -114,9 +114,9 @@
             <div class="col-lg-3">
 
                 <!-- Side Nav Bar -->
-                <app-add-post-menu style="color: #0674ec !important; margin-left: auto;">
-                </app-add-post-menu>
-                <div class="docs-component-viewer-nav common-box-shadow" style="margin-bottom: 20px; margin-top: 10px;">
+
+
+                <!-- <div class="docs-component-viewer-nav common-box-shadow" style="margin-bottom: 20px; margin-top: 10px;">
                     <div class="docs-component-viewer-nav-content">
                         <div *ngFor="let category of filtersMainCategory; let last = last;">
                             <button cdkAccordionItem #panel="cdkAccordionItem"
@@ -125,10 +125,6 @@
                                 [ngClass]="selectedPostType === category.view ? 'docs-component-viewer-sidenav-item-selected' : ''"
                                 [attr.aria-controls]="'panel-' + category.view" [attr.aria-expanded]="panel.expanded">
                                 {{category.title}}
-
-                                <!-- <i *ngIf="category?.showHighlight" style="color: red;" class="fas fa-exclamation"></i> -->
-
-                                <!-- <button *ngIf="category?.showAddBusiness" [routerLink]="['/', 'company', 'add-company']" style="margin-left: 8px; line-height: 23px; padding: 0 12px; font-size: 10px;" type="button" class="btn btn--vsm btn--round">+</button> -->
 
                                 <mat-icon *ngIf="category?.types">
                                     {{panel.expanded ? 'keyboard_arrow_up' :  'keyboard_arrow_down'}}
@@ -147,7 +143,6 @@
                             <hr *ngIf="!last" />
                         </div>
 
-                        <!-- Based On the List Of Post Types -->
                         <div *ngFor="let p of postTypesArray; let last = last;">
                             <button cdkAccordionItem [routerLink]="[]" [queryParams]="{ view: p.name }"
                                 [queryParamsHandling]="'merge'"
@@ -159,7 +154,7 @@
                             <hr *ngIf="!last" />
                         </div>
                     </div>
-                </div>
+                </div> -->
 
             </div>
 
@@ -193,18 +188,47 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
 
+        <div class="row">
+            <div class="col-md-2">
+                <app-post-type-nav [selectedPostType]="selectedPostType"
+                    (postTypeClick)="selectedPostType = $event; getAllPosts($event);"
+                    (plusButtonClick)="redirectToAddPost($event)"></app-post-type-nav>
+            </div>
+            <div class="col-md-10">
                 <!-- <div class="width-wrapper"> -->
-                <div class="item-grid pen-grid item-grid-large">
-                    <!-- <ng-container > -->
-                    <app-brief-post style="width: 100%;" [p]="p" [readMore]="true" *ngFor="let p of dataSource?.data">
-                    </app-brief-post>
-                    <!-- </ng-container> -->
+                <div class="row">
+                    <div [ngClass]="selectedBlock ? 'col-md-8 col-lg-8' : 'col-lg-10 col-md-10'">
+                        <div class="item-grid pen-grid item-grid-large">
+                            <!-- <ng-container > -->
+                            <app-brief-post style="width: 100%;" [p]="p" [readMore]="true"
+                                *ngFor="let p of dataSource?.data" (showComments)="showCommentsOnSide($event)">
+                            </app-brief-post>
+                            <!-- </ng-container> -->
+                        </div>
+
+                        <app-paginator [length]="length" (fetchData)="paginator = $event; getAllPosts()">
+                        </app-paginator>
+                    </div>
+
+                    <div [ngClass]="selectedBlock ? 'col-md-4 col-lg-4' : ''">
+                        <ng-container
+                            *ngTemplateOutlet="addBlockLevelCommentTemplate; context: {details: selectedPost, comments: selectedPostComments | async}">
+                        </ng-container>
+                    </div>
                 </div>
 
-                <app-paginator [length]="length" (fetchData)="paginator = $event; getAllPosts()">
-                </app-paginator>
             </div>
         </div>
     </div>
 </section>
+
+<ng-template #addBlockLevelCommentTemplate let-cDetails="details" let-comments="comments">
+    <aside class="sidebar">
+        <app-comment-side-nav *ngIf="selectedBlock"
+            (closeCommentSideBar)="selectedBlock['__show'] = null; selectedBlock = null" [selectedBlock]="selectedBlock"
+            [selectedPost]="cDetails" [comments]="comments"></app-comment-side-nav>
+    </aside>
+</ng-template>

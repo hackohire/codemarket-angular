@@ -6,7 +6,7 @@ import { ShareService } from '@ngx-share/core';
 import { PostService } from '../../../shared/services/post.service';
 import { SweetalertService } from '../../../shared/services/sweetalert.service';
 import { CompanyService } from '../../company.service';
-import { Subscription, of } from 'rxjs';
+import { Subscription, of, Observable } from 'rxjs';
 import { Post } from '../../../shared/models/post.model';
 import { Company } from '../../../shared/models/company.model';
 import { User } from '../../../shared/models/user.model';
@@ -18,9 +18,7 @@ import { map } from 'rxjs/internal/operators/map';
 import { appConstants } from '../../../shared/constants/app_constants';
 import Storage from '@aws-amplify/storage';
 import moment from 'moment';
-import { AddEventComponent } from '../../../event/add-event/add-event.component';
 import { MatDialog } from '@angular/material/dialog';
-import { Event } from '../../../shared/models/event.model';
 import { concatMap } from 'rxjs/operators/concatMap';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { BlockToolData } from '@editorjs/editorjs/types/tools';
@@ -70,6 +68,11 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
   companyRelatedPosts: { posts: Post[], total?: number } = { posts: [] };
   totalcompanyRelatedPosts: number;
   paginator: MatPaginator;
+
+  selectedBlock = null;
+
+  selectedPost: Post;
+  selectedPostComments: Observable<Comment[]>;
 
   /** Q&A Related Variables */
   questionOrAnswerForm: FormGroup;
@@ -386,12 +389,10 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
     return moment(d).isValid() ? moment(d) : moment(new Date(+d));
   }
 
-  selectMainCategory(category, panel) {
+  selectMainCategory(category) {
     if (!category.types) {
-      this.companyView = category.view;
-      this.router.navigate(['./'], { relativeTo: this.activatedRoute, queryParams: { view: category.view }, queryParamsHandling: 'merge' });
-    } else {
-      panel.toggle();
+      this.companyView = category;
+      this.router.navigate(['./'], { relativeTo: this.activatedRoute, queryParams: { view: category }, queryParamsHandling: 'merge' });
     }
   }
 
@@ -416,6 +417,13 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
       });
   }
 
+  showCommentsOnSide(event: { block: any, comments, selectedPost}) {
+    console.log(event);
+    this.selectedBlock = event.block;
+    this.selectedPostComments = event.comments;
+    this.selectedPost = event.selectedPost;
+  }
+
   /** Fetch the list of posts connected with company based on the pagination */
   fetchAllCompanyRealtedePosts(postType = '') {
     const paginationObj = {
@@ -426,6 +434,10 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
         this.companyRelatedPosts.posts = u.posts;
         this.totalcompanyRelatedPosts = u.total;
       });
+  }
+
+  redirectToAddPost(postType) {
+    this.router.navigate(['./post/add-post'], {state: {post: {companies: [{name: this.companyDetails.name, _id: this.companyDetails._id}]}}, queryParams: { type: postType } });
   }
 
 }

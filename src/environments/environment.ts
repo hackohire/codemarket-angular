@@ -12,7 +12,6 @@ export const environment = {
   s3FilesBucketURL: 'https://mehul-files.s3.amazonaws.com/public/',
   stripe_public_key: 'pk_test_ighmL2U9UqAx0O4b8dKkSvdq',
   webSocketURL: 'ws://localhost:3001',
-  googleAPIKey: 'AIzaSyAOpIXHUPA5bMssoAW3NDUGHveOf0N_tsY',
   planDetails: plans.dev,
   oauth: {
     // Domain name

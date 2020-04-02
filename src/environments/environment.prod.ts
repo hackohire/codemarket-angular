@@ -9,7 +9,6 @@ export const environment = {
   stripe_public_key: 'pk_live_EYCoYtpLszr802sOl89WeuW1',
   // stripe_public_key: 'pk_test_ighmL2U9UqAx0O4b8dKkSvdq',
   webSocketURL: 'wss://miqlzvwu0g.execute-api.ap-south-1.amazonaws.com/prod',
-  googleAPIKey: 'AIzaSyAOpIXHUPA5bMssoAW3NDUGHveOf0N_tsY',
   // planDetails: plans.prod,
   planDetails: plans.prod,
   oauth: {

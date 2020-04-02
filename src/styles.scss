@@ -2,9 +2,8 @@
 @import "~bootstrap/dist/css/bootstrap.min.css";
 @import "../node_modules/highlight.js/styles/rainbow.css";
 @import "~ng-pick-datetime/assets/style/picker.min.css";
-
-@import url("assets/fonts/charter/webfonts/stylesheet.css");
 @import url("assets/fonts/rectory/stylesheet.css");
+
 @import "~@ng-select/ng-select/themes/material.theme.css";
 @import "~@ngx-share/button/themes/default/default-theme";
 
@@ -101,8 +100,8 @@ textarea {
 }
 
 .cdx-block {
-  font-family: "charterregular", sans-serif !important;
-  font-size: 19px;
+  // font-family: "charterregular", sans-serif !important;
+  font-size: 16px;
   word-break: break-word;
   // padding: 0;
 }
@@ -112,7 +111,7 @@ textarea {
 }
 
 .ce-header {
-  font-family: "charterbold", sans-serif !important;
+  // font-family: "charterbold", sans-serif !important;
   // padding: 1em 0;
   margin: 0;
   margin-bottom: -0.9em;
@@ -348,6 +347,74 @@ li {
 
 .codex-editor__redactor {
   padding-bottom: 0 !important;
+}
+
+.cdx-attaches--with-file {
+  display: flex;
+  padding: 13px 20px;
+  border: 1px solid #e6e9eb;
+  border-radius: 3px;
+  background: #fff;
+}
+.cdx-attaches__file-info {
+  flex-grow: 8;
+  max-width: calc(100% - 80px);
+}
+.cdx-attaches__download-button {
+  display: flex;
+  align-items: center;
+}
+.cdx-attaches__download-button svg {
+  fill: #7b7e89;
+}
+.cdx-attaches__file-icon {
+  margin-right: 20px;
+  position: relative;
+}
+.cdx-attaches__file-icon::before {
+  position: absolute;
+  bottom: 7px;
+  left: 8.5px;
+  font-size: 8px;
+  font-weight: 900;
+  text-transform: uppercase;
+  background: #fff;
+  line-height: 150%;
+  content: attr(data-extension);
+}
+.cdx-attaches__file-icon svg {
+  fill: currentColor;
+}
+.cdx-attaches__size {
+  color: #7b7e89;
+}
+.cdx-attaches__size::after {
+  content: attr(data-size);
+  margin-left: 0.2em;
+}
+.cdx-attaches__title {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  outline: none;
+  max-width: 90%;
+}
+.cdx-attaches__title, .cdx-attaches__file-icon, .cdx-attaches__size, .cdx-attaches__download-button, .cdx-attaches__button {
+  opacity: 1;
+  font-size: 14px;
+}
+.cdx-attaches__button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cdx-attaches__button svg {
+  height: 14px;
+  margin-top: 0;
+  margin-right: 8px;
+}
+.cdx-attaches__button:hover {
+  color: #393f52;
 }
 
 a:hover,

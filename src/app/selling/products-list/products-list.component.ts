@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/core/store/state/app.state';
 import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
 import { Product } from 'src/app/shared/models/product.model';
-import { Subscription, merge, of } from 'rxjs';
+import { Subscription, merge, of, Observable } from 'rxjs';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { map, startWith, catchError, switchMap, switchMapTo, mapTo } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -20,6 +20,7 @@ import { PostType } from '../../shared/models/post-types.enum';
 import { selectPostsByUserIdAndType } from '../../core/store/selectors/post.selectors';
 import { SweetalertService } from '../../shared/services/sweetalert.service';
 import { appConstants } from '../../shared/constants/app_constants';
+import { Post } from '../../shared/models/post.model';
 
 @Component({
   selector: 'app-products-list',
@@ -65,6 +66,11 @@ export class ProductsListComponent implements OnInit, OnDestroy, AfterViewInit {
 
   paginator: MatPaginator;
   selectedPostType = '';
+
+  selectedBlock = null;
+
+  selectedPost: Post;
+  selectedPostComments: Observable<Comment[]>;
 
   /** Side bar to filter the categories */
   filtersMainCategory = [
@@ -210,6 +216,17 @@ export class ProductsListComponent implements OnInit, OnDestroy, AfterViewInit {
     } else {
       panel.toggle();
     }
+  }
+
+  showCommentsOnSide(event: { block: any, comments, selectedPost}) {
+    console.log(event);
+    this.selectedBlock = event.block;
+    this.selectedPostComments = event.comments;
+    this.selectedPost = event.selectedPost;
+  }
+
+  redirectToAddPost(postType) {
+    this.router.navigate(['../post/add-post'], { queryParams: { type: postType } });
   }
 
   /** If "view" query param is sub post type then expand the main category */

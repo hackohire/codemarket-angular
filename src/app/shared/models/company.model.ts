@@ -26,6 +26,7 @@ export interface Company {
     _id?: string;
     status?: PostStatus;
     createdBy?: User;
+    owners?: User[];
     createdAt?: string;
     updatedAt?: string;
     cities?: City[];

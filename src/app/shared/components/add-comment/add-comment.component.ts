@@ -14,7 +14,12 @@ import { environment } from '../../../../environments/environment';
 export class AddCommentComponent implements OnInit {
 
   @Input() commentForm: FormGroup;
+  @Input() blockId: string;
   @Input() showLabel: false;
+  @Input() referenceId: string;
+
+
+  editorId = Math.random().toString();
   subscription$ = new Subscription();
 
   anonymousAvatar = '../../../assets/images/anonymous-avatar.jpg';
@@ -26,11 +31,32 @@ export class AddCommentComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    // if (!this.commentForm) {
+      this.commentForm = new FormGroup({
+        text: new FormControl(''),
+        type: new FormControl('post'),
+        blockId: new FormControl(''),
+        blockSpecificComment: new FormControl(false),
+        referenceId: new FormControl('')
+      });
+    // }
   }
+
+
   async addComment(addCommentEditor: EditorComponent) {
     if (this.authService.loggedInUser) {
       const blocks = await addCommentEditor.editor.save();
       this.commentForm.get('text').setValue(blocks.blocks);
+
+      if (this.blockId) {
+        this.commentForm.get('blockId').setValue(this.blockId);
+        this.commentForm.get('blockSpecificComment').setValue(true);
+      }
+
+      if (this.referenceId) {
+        this.commentForm.get('referenceId').setValue(this.referenceId ? this.referenceId : '');
+      }
+
       this.commentForm.addControl('createdBy', new FormControl(this.authService.loggedInUser._id));
 
       this.subscription$.add(

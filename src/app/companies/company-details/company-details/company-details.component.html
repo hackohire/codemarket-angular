@@ -419,16 +419,6 @@
 
 </ng-container>
 
-<ng-template #locationTemplate let-location="location">
-    <div *ngIf="location?.latitude || location?.longitude">
-        <h4 class="tab-content-wrapper">Location:</h4>
-        <agm-map [latitude]="location?.latitude" [longitude]="location?.longitude" [zoom]="15">
-            <agm-marker [latitude]="location?.latitude" [longitude]="location?.longitude"></agm-marker>
-        </agm-map>
-    </div>
-
-</ng-template>
-
 <ng-template #addCommentTemplate let-cDetails="details">
     <div style="background: white;">
         <div class="tab-pane fade show product-tab">

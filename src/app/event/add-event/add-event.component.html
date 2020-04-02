@@ -20,30 +20,6 @@
 
                 <br />
 
-                <!-- Location Details -->
-                <!-- <pre>{{locationFormGroup?.value | json}}</pre> -->
-                <h6>Enter Event Location:</h6>
-                <!-- <br /> -->
-                <mat-form-field class="field-full-width">
-                    <input type="text" matInput placeholder="Search Location" #searchLocation>
-                    <mat-icon matSuffix (click)="locationService?.setCurrentLocation(locationFormGroup)">my_location
-                    </mat-icon>
-                </mat-form-field>
-
-
-                <div *ngIf="locationFormGroup.get('latitude').value || locationFormGroup.get('longitude').value">
-                    <agm-map [latitude]="locationFormGroup.get('latitude').value"
-                        [longitude]="locationFormGroup.get('longitude').value" [zoom]="zoom">
-                        <agm-marker [latitude]="locationFormGroup.get('latitude').value"
-                            [longitude]="locationFormGroup.get('longitude').value" [markerDraggable]="true"
-                            (dragEnd)="locationService?.markerDragEnd($event, locationFormGroup)"></agm-marker>
-                    </agm-map>
-                </div>
-                <!-- 
-                <h5>Address: {{address}}</h5>
-                <div>Latitude: {{latitude}}</div>
-                <div>Longitude: {{longitude}}</div> -->
-
                 <div class="row">
                     <div class="col-md-6">
                         <mat-form-field class="field-full-width" [formGroupName]="'location'">
@@ -93,26 +69,6 @@
                         </mat-form-field>
                     </div>
                 </div>
-
-                <mat-form-field class="field-full-width">
-                    <mat-chip-list #tagsList>
-                        <mat-chip *ngFor="let tag of tagsFormControl?.value; let i = index;" [selectable]="selectable"
-                            [removable]="true" (removed)="remove(i)">
-                            {{tag?.name}}
-                            <mat-icon matChipRemove>cancel</mat-icon>
-                        </mat-chip>
-                        <input #searchInput [formControl]="searchText" [matAutocomplete]="auto"
-                            placeholder="Add Programming Language Tags" [matChipInputFor]="tagsList"
-                            [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
-                            (matChipInputTokenEnd)="addTech($event)">
-                        <mat-icon matSuffix>code</mat-icon>
-                    </mat-chip-list>
-                    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-                        <mat-option *ngFor="let tag of tagSuggestions" [value]="tag">
-                            {{tag?.name}}
-                        </mat-option>
-                    </mat-autocomplete>
-                </mat-form-field>
 
                 <br />
 

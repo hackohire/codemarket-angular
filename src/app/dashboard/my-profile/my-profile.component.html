@@ -33,7 +33,7 @@
 								(click)="updateProfilePicture(user?._id)">Update</button>
 						</div>
 						<h4 style="text-align: center; padding-top: 10px;">{{user?.name}}</h4>
-						<button *ngIf="authService?.loggedInUser && authService?.loggedInUser?._id !== authorId" (click)="openDialog()" mat-mini-fab color="primary">
+						<button *ngIf="authService?.loggedInUser && authorId && authService?.loggedInUser?._id !== authorId" (click)="openDialog()" mat-mini-fab color="primary">
                                         <mat-icon>video_call</mat-icon>
                                     </button>
 					</div>

@@ -25,12 +25,9 @@ import { CompaniesListComponent } from '../companies/companies-list/companies-li
 // import { Ng5SliderModule } from 'ng5-slider';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { MdePopoverModule } from '@material-extended/mde';
-import { AgmCoreModule } from '@agm/core';
-import { environment } from '../../environments/environment';
 import { CommentService } from './services/comment.service';
 import { ToastrModule } from 'ngx-toastr';
 import { AddJobComponent } from '../job/add-job/add-job.component';
-import { AddCompanyComponent } from '../companies/add-company/add-company.component';
 import { BriefPostComponent } from './components/brief-post/brief-post.component';
 import { AutocompleteComponent } from './components/autocomplete/autocomplete.component';
 import { AddCollaboratorsComponent } from './components/add-collaborators/add-collaborators.component';
@@ -91,10 +88,6 @@ export function hljsLanguages() {
     // Ng5SliderModule,
     NgSelectModule,
     MdePopoverModule,
-    AgmCoreModule.forRoot({
-      apiKey: environment.googleAPIKey,
-      libraries: ['places']
-    }),
     ToastrModule.forRoot({
       closeButton: true,
       enableHtml: true,
@@ -130,8 +123,7 @@ export function hljsLanguages() {
     SafePipe,
     // Ng5SliderModule,
     NgSelectModule,
-    MdePopoverModule,
-    AgmCoreModule
+    MdePopoverModule
   ],
   entryComponents: [
     AddJobComponent,

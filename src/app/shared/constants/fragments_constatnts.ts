@@ -155,7 +155,6 @@ export const description = gql`
         ...Warning
         ...Embed
         ...LinkTool
-        ...Attaches
     }
     ${codeFragment}
     ${imageFragment}
@@ -167,7 +166,6 @@ export const description = gql`
     ${warningFragment}
     ${embedFragment}
     ${linkToolFragment}
-    ${attachesFragment}
 `;
 
 const CommentFragment = gql`

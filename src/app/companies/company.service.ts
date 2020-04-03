@@ -22,6 +22,11 @@ export class CompanyService {
       name
       _id
     }
+    owners {
+      name
+      avatar
+      _id
+    }
     description {
       ...Description
     }

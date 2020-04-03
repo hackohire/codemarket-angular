@@ -12,7 +12,7 @@ export class ContactService {
     private apollo: Apollo,
   ) { }
 
-  getQuote(formFieldObject) {
+  getContact(formFieldObject) {
     return this.apollo.mutate(
       {
         /** Mutation Query */

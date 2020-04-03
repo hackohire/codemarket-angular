@@ -49,7 +49,9 @@ div::-webkit-scrollbar-thumb {
   outline: 1px solid slategrey;
 }
 
-
+.rupertspira {
+  background: #ad7cea;
+}
 
 
 /* --------------------------------------------------------------
@@ -1645,10 +1647,11 @@ input[type=password] {
 
 /*** Page quote ***/
 .rupertspira #page_quote {
-  margin: 22px 0;
-  padding: 0; }
+  padding: 0; 
+  margin: 0px;
+}
   .rupertspira #page_quote p {
-    color: #939598;
+    color: black;
     font-family: "Lato", sans-serif;
     font-size: 16px;
     margin-bottom: 0; }

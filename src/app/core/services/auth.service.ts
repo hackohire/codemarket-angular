@@ -70,7 +70,7 @@ export class AuthService {
 
         if (payload.event === 'signIn') {
           this.checkIfUserIsLoggedIn();
-          this.router.navigate(['/', 'dashboard', 'bugfixes-all']);
+          this.router.navigate(['/', 'dashboard', 'my-proile']);
         } else if (payload.event === 'oAuthSignOut') {
           this.store.dispatch(SetLoggedInUser({ payload: null }));
         }

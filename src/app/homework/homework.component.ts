@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TILDE } from '@angular/cdk/keycodes';
 
 @Component({
   selector: 'app-homework',
@@ -15,17 +16,27 @@ export class HomeworkComponent implements OnInit {
   ngOnInit() {
   }
 
-  getAssignment(assignmentNo) {
+  getAssignment(assignmentNo, title) {
 
     var assignmentPost = "This is your homework assignment!"
     this.formFieldObject = {
       assignmentNo: assignmentNo,
+      title: title,
       assignmentPost: assignmentPost
     };
   }
 
-  addAssignment(assignmentNo, assignmentPost) {}
+  addAssignment(assignmentNo, title, assignmentUrl, assignmentPost) {
 
-  updateAssignment(assignmentNo) {}
+    this.formFieldObject = {
+      assignmentNo: assignmentNo,
+      title: title,
+      assignmentUrl: assignmentUrl,
+      assignmentPost: assignmentPost
+    };
+
+  }
+
+  updateAssignment(assignmentNoassignmentNo, title, assignmentUrl, assignmentPost) {}
 
 }

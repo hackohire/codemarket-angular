@@ -70,7 +70,7 @@ export class AuthService {
 
         if (payload.event === 'signIn') {
           this.checkIfUserIsLoggedIn();
-          this.router.navigate(['/', 'dashboard', 'bugfixes-all']);
+          this.router.navigate(['/', 'dashboard', 'my-profile']);
         } else if (payload.event === 'oAuthSignOut') {
           this.store.dispatch(SetLoggedInUser({ payload: null }));
         }
@@ -84,7 +84,9 @@ export class AuthService {
     if (this.transferState.hasKey(key)) {
       const user = this.transferState.get(key, null);
       this.transferState.remove(key);
-      this.setUserOnline(user);
+      if (user) {
+        this.setUserOnline(user);
+      }
       return of(user);
     }
     return this.apollo.mutate(
@@ -142,7 +144,9 @@ export class AuthService {
         if (isPlatformServer(this._platformId)) {
           this.transferState.set(key, d.data.authorize);
         }
-        this.setUserOnline(d.data.authorize);
+        if (d && d.data && d.data.authorize) {
+          this.setUserOnline(d.data.authorize);
+        }
         return d.data.authorize;
       }),
       catchError(e => of(e)),

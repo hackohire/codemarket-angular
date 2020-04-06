@@ -117,7 +117,7 @@
             <div class="row">
                 <div class="col-lg-2">
                     <app-post-type-nav [selectedPostType]="companyView"
-					(postTypeClick)="selectMainCategory($event);"
+					(postTypeClick)="selectMainCategory($event?.name);"
 					(plusButtonClick)="redirectToAddPost($event)"></app-post-type-nav>
                     <!-- start aside -->
                     <!-- <app-add-post-menu style="color: #0674ec !important; margin-left: auto;"></app-add-post-menu> -->

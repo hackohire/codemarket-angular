@@ -27,7 +27,7 @@
                 <div class="col-lg-2">
                     <!-- Based On the List Of Post Types -->
                     <app-post-type-nav [selectedPostType]="selectedPostType" 
-                     (postTypeClick)="selectedBlock = null; getConnectedPosts($event); showConnectedPosts = true"
+                     (postTypeClick)="selectedBlock = null; getConnectedPosts($event?.name); showConnectedPosts = true"
                      (plusButtonClick)="redirectToAddPost(details, $event)"
                      ></app-post-type-nav>
                     <!-- <div class="docs-component-viewer-nav common-box-shadow" style="margin-bottom: 20px;">

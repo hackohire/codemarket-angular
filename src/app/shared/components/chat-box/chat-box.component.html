@@ -1,0 +1,8 @@
+<div class="main-container">
+    <div *ngFor="let c of comments">
+        <div [id]="c?._id" style="padding-left: 3px; padding-right: 3px;"
+        *ngIf="!c?.blockSpecificComment" class="single-thread">
+            <app-comment [fromWhere]="'chat'" [comment]="c" [referenceId]="cDetails?._id" ></app-comment>
+        </div>
+    </div>
+    <app-add-comment [referenceId]="postDetails._id" ></app-add-comment>

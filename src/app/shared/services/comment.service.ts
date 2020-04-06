@@ -310,17 +310,18 @@ export class CommentService {
     );
   }
 
-  deleteComment(commentId): Observable<any> {
+  deleteComment(commentId, postId): Observable<any> {
     return this.apollo.query(
       {
         query: gql`
-          query deleteComment($commentId: String) {
-            deleteComment(commentId: $commentId)
+          query deleteComment($commentId: String, $postId: String) {
+            deleteComment(commentId: $commentId, postId: $postId)
           }
         `,
         // fetchPolicy: 'no-cache',
         variables: {
-          commentId
+          commentId,
+          postId
         }
       }
     ).pipe(
@@ -399,12 +400,12 @@ export class CommentService {
     );
   }
 
-  updateComment(commentId, text): Observable<any> {
+  updateComment(commentId, postId, text): Observable<any> {
     return this.apollo.mutate(
       {
         mutation: gql`
-          mutation updateComment($commentId: String, $text: [InputdescriptionBlock]) {
-            updateComment(commentId: $commentId, text: $text) {
+          mutation updateComment($commentId: String, $postId: String, $text: [InputdescriptionBlock]) {
+            updateComment(commentId: $commentId, postId: $postId, text: $text) {
                 text {
                   ...Description
                 }
@@ -415,6 +416,7 @@ export class CommentService {
         fetchPolicy: 'no-cache',
         variables: {
           commentId,
+          postId,
           text
         }
       }

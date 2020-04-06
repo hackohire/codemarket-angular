@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, Output, EventEmitter } from '@angular/core';
 import { Observable, of, Subscription } from 'rxjs';
 import { AppState } from 'src/app/core/store/state/app.state';
 import { Store } from '@ngrx/store';
@@ -72,6 +72,8 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
   selectedPost: Post;
   selectedPostComments: Observable<Comment[]>;
+
+  displayChatBox = false;
 
   constructor(
     private store: Store<AppState>,
@@ -300,4 +302,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
     }
   }
 
+  onChatClicked() {
+    this.displayChatBox = true;
+  }
 }

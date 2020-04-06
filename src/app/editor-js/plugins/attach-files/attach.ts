@@ -304,7 +304,7 @@ export class AttachesTool {
           name,
           size
         },
-        createdBy: body.createdBy._id || '',
+        createdBy: body.createdBy || '',
         title: name
       };
 

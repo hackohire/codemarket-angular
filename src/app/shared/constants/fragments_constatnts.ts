@@ -54,6 +54,10 @@ export const attachesFragment = gql`
   _id
   data {
     title
+    createdBy {
+      name
+      _id
+    }
     file {
       url
       name

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import gql from 'graphql-tag';
-import { Apollo } from 'apollo-angular';
+import { Apollo, QueryRef } from 'apollo-angular';
 import { map } from 'rxjs/operators';
 import { Contact } from '../shared/models/contact.model';
 import { Observable, of } from 'rxjs';
@@ -61,6 +61,28 @@ export class ContactService {
         `,
         variables: {
           contact
+        }
+      }).pipe(
+        map((q: any) => q.data.addContact)
+      );
+    }
+
+    
+    fetchContacs(pageOptions = {pageNumber: 0, limit: 0}): Observable<any> {
+      return this.apollo.query({
+        query: gql`
+          query fetchContacts($pageOptions: PageOptionsInput) {
+            fetchContacts(pageOptions: $pageOptions) {
+              contacts {
+                ...Contact
+              }
+              total
+            }
+          }
+          ${this.contactFileds}
+        `,
+        variables: {
+          pageOptions
         }
       }).pipe(
         map((q: any) => q.data.addContact)

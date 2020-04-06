@@ -36,10 +36,10 @@ import { CommunityImpactStoriesComponent } from './community-impact-stories/comm
 import { AdvocatesInfluencersComponent } from './advocates-influencers/advocates-influencers.component';
 import { LoaderComponent } from './auth/loader/loader.component';
 import { WorkWithJoelComponent } from './work-with-joel/work-with-joel.component';
-import { ContactComponent } from './contact/contact.component';
 import { AuthModule } from './auth/auth.module';
 import { StressManagementComponent } from './stress-management/stress-management.component';
 import { NgxAudioPlayerModule } from 'ngx-audio-player';
+import { ContactModule } from './contact/contact.module';
 
 // import { SignInComponent } from './core/amplify/sign-in-component';
 
@@ -75,8 +75,7 @@ import { NgxAudioPlayerModule } from 'ngx-audio-player';
     StressManagementComponent,
     CommunityImpactStoriesComponent,
     AdvocatesInfluencersComponent,
-    ContactComponent,
-    WorkWithJoelComponent    
+    WorkWithJoelComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -87,7 +86,8 @@ import { NgxAudioPlayerModule } from 'ngx-audio-player';
     BrowserAnimationsModule,
     LayoutModule,
     AuthModule,
-    NgxAudioPlayerModule
+    NgxAudioPlayerModule,
+    ContactModule
   ],
   providers: [PostDataResolver],
   bootstrap: [AppComponent],

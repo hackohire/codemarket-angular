@@ -20,7 +20,7 @@
                 </mat-form-field>
 
                 <div fxLayout="row" fxLayoutGap="10px">
-                    <button *ngIf="statusFormControl?.value !== 'Published'" type="button" (click)="submit()"
+                    <button type="button" (click)="submit()"
                         [disabled]="newsletterForm?.invalid" mat-raised-button color="primary">Submit</button>
                 </div>
 

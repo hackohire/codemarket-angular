@@ -143,6 +143,7 @@ export class CoreModule {
     /** Codemarket Apollo Client */
     apollo.create({
       link,
+      connectToDevTools: true,
       cache: new InMemoryCache({
         dataIdFromObject: (o: any) => {
           return o._id;
@@ -171,7 +172,7 @@ export class CoreModule {
                     { name: 'WarningBlock' },
                     { name: 'EmbedBlock' },
                     { name: 'LinkToolBlock' },
-                    // { name: 'AttachesBlock' }
+                    { name: 'AttachesBlock' }
                   ],
                 },
               ],

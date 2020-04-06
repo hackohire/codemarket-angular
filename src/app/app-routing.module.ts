@@ -27,6 +27,9 @@ import { StickyComponent } from './sticky/sticky.component';
 import { ViralComponent } from './viral/viral.component';
 import { CommunityImpactStoriesComponent } from './community-impact-stories/community-impact-stories.component';
 import { AdvocatesInfluencersComponent } from './advocates-influencers/advocates-influencers.component';
+import {NewsletterComponent} from './newsletter/newsletter.component';
+import { VolunteerComponent } from './volunteer/volunteer.component';
+import {DonateComponent} from './donate/donate.component'
 // import { PostDataResolver } from './core/resolver';
 
 const routes: Routes = [
@@ -252,7 +255,20 @@ const routes: Routes = [
    {
      path: 'advocates-influencers',
      component: AdvocatesInfluencersComponent
+   },
+   {
+     path:'newsletter',
+     component: NewsletterComponent
+   },
+   {
+     path:'volunteer',
+     component: VolunteerComponent
+   },
+   {
+     path: 'donate',
+     component: DonateComponent
    }
+
   /** Static routes ends here */
 ];
 

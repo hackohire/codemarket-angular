@@ -77,7 +77,7 @@
 </div>
 
 <!-- comment reply -->
-<div class="media depth-2 reply-comment" style="padding: 15px 0 15px 0;" *ngIf="reply" [formGroup]="replyCommentForm">
+<div [ngClass]="fromWhere === 'chat' ? 'media depth-2 reply-comment': 'media depth-2'" style="padding: 15px 0 15px 0;" *ngIf="reply" [formGroup]="replyCommentForm">
     <div class="media-left">
         <a href="#">
             <img class="author_avatar_comment" style="width: 45px; height: 45px;"

@@ -96,7 +96,7 @@ export class CommentComponent implements OnInit {
 
   deleteComment() {
     this.sweetAlertService.confirmDelete(() => {
-    this.commentService.deleteComment(this.comment._id).pipe(
+    this.commentService.deleteComment(this.comment._id, this.comment.referenceId).pipe(
       tap((d) => {
         // this.commentDeleted.emit(this.comment._id);
         // this.comment = null;
@@ -110,7 +110,7 @@ export class CommentComponent implements OnInit {
     const blocks =  await singleCommentEditor.editor.save();
     this.replyCommentForm.get('text').setValue(blocks.blocks);
 
-    this.commentService.updateComment(this.comment._id, this.replyCommentForm.get('text').value).pipe(
+    this.commentService.updateComment(this.comment._id, this.comment.referenceId, this.replyCommentForm.get('text').value).pipe(
       tap((d) => {
         if (d) {
           this.edit = false;

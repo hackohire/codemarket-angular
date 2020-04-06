@@ -33,7 +33,7 @@
 								(click)="updateProfilePicture(user?._id)">Update</button>
 						</div>
 						<h4 style="text-align: center; padding-top: 10px;">{{user?.name}}</h4>
-						<button *ngIf="authService?.loggedInUser && authService?.loggedInUser?._id !== authorId" (click)="openDialog()" mat-mini-fab color="primary">
+						<button *ngIf="authService?.loggedInUser && authorId && authService?.loggedInUser?._id !== authorId" (click)="openDialog()" mat-mini-fab color="primary">
                                         <mat-icon>video_call</mat-icon>
                                     </button>
 					</div>
@@ -69,7 +69,7 @@
 				<div class="col-md-2">
 					<!-- <app-add-post-menu style="color: #0674ec !important; margin-left: auto;">
 					</app-add-post-menu> -->
-					<app-post-type-nav [selectedPostType]="profileView" (postTypeClick)="selectMainCategory($event);"
+					<app-post-type-nav [customTabs]="authService?.loggedInUser && authService?.loggedInUser?._id == authorId ? customTabs : []" [selectedPostType]="profileView" (postTypeClick)="$event?.isCustom ? fetchBasedOnCustomTab($event) : selectMainCategory($event?.name);"
 						(plusButtonClick)="redirectToAddPost($event)"></app-post-type-nav>
 					<!-- <div class="docs-component-viewer-nav common-box-shadow"
 						style="margin-bottom: 20px; margin-top: 10px;">
@@ -146,9 +146,14 @@
 					</div>
 					<div class="row">
 						<div [ngClass]="selectedBlock ? 'col-md-8 col-lg-8' : 'col-lg-10 col-md-10'">
-
+							<!-- {{profileView}} -->
 							<div *ngIf="profileView === navLinkName.buy">
 								<router-outlet></router-outlet>
+							</div>
+
+							<div *ngIf="profileView === 'files'">
+								<ng-container *ngTemplateOutlet="filesList; context: {details: selectedPost, files: files}">
+								</ng-container>
 							</div>
 
 							<div *ngIf="profileView === navLinkName.sell">
@@ -292,4 +297,8 @@
 			(closeCommentSideBar)="selectedBlock['__show'] = null; selectedBlock = null" [selectedBlock]="selectedBlock"
 			[selectedPost]="cDetails" [comments]="comments"></app-comment-side-nav>
 	</aside>
+</ng-template>
+
+<ng-template #filesList let-cDetails="details" let-comments="files">
+	<app-editor [id]="f?._id" *ngFor="let f of files" [data]="[f]" [readOnly]="true"></app-editor>
 </ng-template>

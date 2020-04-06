@@ -66,6 +66,8 @@ export class MyProfileComponent implements OnInit {
 
   userData$: Observable<User>;
 
+  files = [];
+
   postTypesArray = appConstants.postTypesArray;
   postTypes = PostType;
 
@@ -97,6 +99,14 @@ export class MyProfileComponent implements OnInit {
   @ViewChild('profilePic', { static: false }) profilePic;
   selectedProfilePic: File;
   selectedProfilePicURL = '';
+
+  customTabs = [
+    {
+      name: 'files',
+      label: 'Files',
+      isCustom: true
+    }
+  ];
 
   profileViewLinks = [
     // {
@@ -203,6 +213,7 @@ export class MyProfileComponent implements OnInit {
         this.authService.loggedInUser$.pipe(
           map((user) => {
             if (user) {
+              this.authorId = user._id;
               // this.fetchPostsConnectedWithUser(user._id);
               // this.userService.onUsersPostChanges(user._id);
               // this.commentService.onCommentAdded({ user }, []);
@@ -336,6 +347,22 @@ export class MyProfileComponent implements OnInit {
     this.postService.getAllPosts(paginationObj, postType, '', '', userId, userId).subscribe((u) => {
       this.listOfAllOtherPosts.posts = u.posts;
       this.totalOtherPosts = u.total;
+    });
+  }
+
+  fetchBasedOnCustomTab(tab) {
+    switch (tab.name) {
+      case 'files':
+        this.profileView = tab.name;
+        this.selectedBlock = null;
+        this.fetchFilesUploadedByUser();
+        break;
+    }
+  }
+
+  fetchFilesUploadedByUser() {
+    this.postService.fetchFiles('attaches', this.authService.loggedInUser._id).subscribe((f) => {
+      this.files = f;
     });
   }
 

@@ -1,4 +1,6 @@
-<app-breadcumb [title]="breadcumb?.title" [path]="breadcumb?.path" [showImportButton]="true" [postDetails]="{ connectedPosts: editPostDetails ? editPostDetails?.connectedPosts : postFromRoute ? [postFromRoute] : []}"></app-breadcumb>
+<app-breadcumb [title]="breadcumb?.title" [path]="breadcumb?.path" [showImportButton]="true"
+    [postDetails]="{ connectedPosts: editPostDetails ? editPostDetails?.connectedPosts : postFromRoute ? [postFromRoute] : []}">
+</app-breadcumb>
 
 
 <div class="container">
@@ -27,8 +29,8 @@
                 </app-autocomplete>
 
                 <app-autocomplete class="field-full-width" [allowToAdd]="false"
-                    [autoComplete]="postForm.get('assignees')" [placeholder]="'Select Students'"
-                    [collection]="'users'" [type]="" [multiple]="true" matInput>
+                    [autoComplete]="postForm.get('assignees')" [placeholder]="'Select Students'" [collection]="'users'"
+                    [type]="" [multiple]="true" matInput>
                 </app-autocomplete>
 
                 <!-- <app-autocomplete [autoComplete]="postForm?.get('users')" [placeholder]="'Users'" [collection]="'users'"
@@ -40,11 +42,11 @@
                 <div fxLayout="row" fxLayoutGap="10px">
                     <button *ngIf="statusFormControl?.value !== 'Published'" type="button" (click)="submit('Drafted')"
                         [disabled]="postForm?.invalid" mat-raised-button color="primary">Save</button>
-                    <button type="button" (click)="submit('Published')" [disabled]="postForm?.invalid" mat-raised-button
-                        color="primary">{{ statusFormControl?.value === 'Published' ? 'Publish Changes' : 'Publish' }}</button>
                     <button *ngIf="statusFormControl?.value === 'Published'" type="button"
                         (click)="submit('Unpublished')" [disabled]="postForm?.invalid" mat-raised-button
-                        color="primary">{{ 'Unpublish' }}</button>
+                        color="primary">{{ 'Save' }}</button>
+                    <button type="button" (click)="submit('Published')" [disabled]="postForm?.invalid" mat-raised-button
+                        color="primary">{{ 'Publish' }}</button>
                 </div>
 
             </div>

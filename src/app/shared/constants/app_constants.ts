@@ -22,7 +22,8 @@ export const appConstants = {
     [PostType.CompetitiveAdvantage]: 'briefcase',
     [PostType.Assignment]: 'sticky-note',
     [PostType.Question]: 'sticky-note',
-    [PostType.Note]: 'sticky-note'
+    [PostType.Note]: 'sticky-note',
+    [PostType.Business]: 'sticky-note'
   },
 
   fileS3Bucket: 'codemarket-files',
@@ -301,6 +302,7 @@ export const appConstants = {
   postTypesArray: [
     { name: PostType.Assignment, label: 'Assignment' },
     { name: PostType.Bug, label: 'Bug' },
+    { name: PostType.Business, label: 'Business' },
     { name: PostType.Challenge, label: 'Challenge' },
     { name: PostType.Class, label: 'Class' },
     { name: PostType.CompetitiveAdvantage, label: 'Competitive Advantage' },
@@ -316,6 +318,6 @@ export const appConstants = {
     { name: PostType.Question, label: 'Questions' },
     { name: PostType.Requirement, label: 'Requirement' },
     { name: PostType.Service, label: 'Service' },
-    { name: PostType.Testing, label: 'Testing' }
+    { name: PostType.Testing, label: 'Testing' },
   ],
 };

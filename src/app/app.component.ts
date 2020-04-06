@@ -65,7 +65,7 @@ export class AppComponent implements OnInit, OnDestroy {
               console.log(call);
               this.openDialog(call, peer);
             });
-            this.store.dispatch(GetCartProductsList());
+            // this.store.dispatch(GetCartProductsList());
           }
         })
       ).subscribe()

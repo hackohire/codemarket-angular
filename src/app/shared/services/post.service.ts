@@ -14,7 +14,7 @@ import { appConstants } from '../constants/app_constants';
 import { makeStateKey, TransferState } from '@angular/platform-browser';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { isPlatformServer } from '@angular/common';
-import { comment } from '../constants/fragments_constatnts';
+import { comment, description } from '../constants/fragments_constatnts';
 
 @Injectable({
   providedIn: 'root'
@@ -344,6 +344,30 @@ export class PostService {
     ).pipe(
       map((p: any) => {
         return p.data.fullSearch;
+      }),
+    );
+  }
+
+  fetchFiles(blockType: string, userId: string) {
+    return this.apollo.query(
+      {
+        query: gql`
+          query fetchFiles($blockType: String, $userId: String) {
+            fetchFiles(blockType: $blockType, userId: $userId) {
+              ...Description
+            }
+          }
+          ${description}
+        `,
+        variables: {
+          blockType,
+          userId
+        },
+        fetchPolicy: 'no-cache'
+      }
+    ).pipe(
+      map((p: any) => {
+        return p.data.fetchFiles;
       }),
     );
   }

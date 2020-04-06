@@ -22,6 +22,11 @@ export class CompanyService {
       name
       _id
     }
+    owners {
+      name
+      avatar
+      _id
+    }
     description {
       ...Description
     }
@@ -259,7 +264,7 @@ export class CompanyService {
     );
   }
 
-  redirectToCompanyDetails(companyId: string, view = 'home') {
+  redirectToCompanyDetails(companyId: string, view = 'posts') {
     this.router.navigate(['/', `company`, companyId],
       { queryParams: { view } }
       );

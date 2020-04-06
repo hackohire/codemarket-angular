@@ -15,6 +15,7 @@ export enum PostType {
   Service = 'service',
   CompetitiveAdvantage = 'competitive-advantage',
   Contact = 'contact',
+  Business = 'business',
 
   Assignment = 'assignment',
 

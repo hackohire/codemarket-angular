@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Injector } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../core/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -25,12 +25,9 @@ import { CompaniesListComponent } from '../companies/companies-list/companies-li
 // import { Ng5SliderModule } from 'ng5-slider';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { MdePopoverModule } from '@material-extended/mde';
-import { AgmCoreModule } from '@agm/core';
-import { environment } from '../../environments/environment';
 import { CommentService } from './services/comment.service';
 import { ToastrModule } from 'ngx-toastr';
 import { AddJobComponent } from '../job/add-job/add-job.component';
-import { AddCompanyComponent } from '../companies/add-company/add-company.component';
 import { BriefPostComponent } from './components/brief-post/brief-post.component';
 import { AutocompleteComponent } from './components/autocomplete/autocomplete.component';
 import { AddCollaboratorsComponent } from './components/add-collaborators/add-collaborators.component';
@@ -40,7 +37,7 @@ import { AddCommentComponent } from './components/add-comment/add-comment.compon
 import { ChatBoxComponent } from './components/chat-box/chat-box.component';
 import { PostTypeNavComponent } from './components/post-type-nav/post-type-nav.component';
 import { CommentSideNavComponent } from './components/comment-side-nav/comment-side-nav.component';
-
+import { AppInjector } from './services/app.injector.service';
 
 export function hljsLanguages() {
   return [
@@ -93,10 +90,6 @@ export function hljsLanguages() {
     // Ng5SliderModule,
     NgSelectModule,
     MdePopoverModule,
-    AgmCoreModule.forRoot({
-      apiKey: environment.googleAPIKey,
-      libraries: ['places']
-    }),
     ToastrModule.forRoot({
       closeButton: true,
       enableHtml: true,
@@ -133,8 +126,7 @@ export function hljsLanguages() {
     SafePipe,
     // Ng5SliderModule,
     NgSelectModule,
-    MdePopoverModule,
-    AgmCoreModule
+    MdePopoverModule
   ],
   entryComponents: [
     AddJobComponent,
@@ -142,4 +134,8 @@ export function hljsLanguages() {
   ],
   providers: [CommentService]
 })
-export class SharedModule { }
+export class SharedModule {
+  constructor(private injector: Injector) {
+    AppInjector.setInjector(this.injector);
+  }
+}

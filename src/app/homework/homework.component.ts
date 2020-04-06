@@ -18,25 +18,24 @@ export class HomeworkComponent implements OnInit {
 
   getAssignment(assignmentNo, title) {
 
-    var assignmentPost = "This is your homework assignment!"
+    var assignmentDescription = "This is your homework assignment!"
     this.formFieldObject = {
       assignmentNo: assignmentNo,
       title: title,
-      assignmentPost: assignmentPost
+      assignmentDescription: assignmentDescription
     };
   }
 
-  addAssignment(assignmentNo, title, assignmentUrl, assignmentPost) {
+  addAssignment(assignmentNo, title, assignmentDescription) {
 
     this.formFieldObject = {
       assignmentNo: assignmentNo,
       title: title,
-      assignmentUrl: assignmentUrl,
-      assignmentPost: assignmentPost
+      assignmentDescription: assignmentDescription
     };
 
   }
 
-  updateAssignment(assignmentNoassignmentNo, title, assignmentUrl, assignmentPost) {}
+  updateAssignment(assignmentNoassignmentNo, title, assignmentUrl, assignmentDescription) {}
 
 }

@@ -19,7 +19,9 @@ import {
   MatRadioModule,
   MatPaginatorModule,
   MatExpansionModule,
-  MatSelectModule
+  MatSelectModule,
+  MatSnackBarModule,
+  MatProgressSpinnerModule
 } from '@angular/material';
 import {MatTableModule} from '@angular/material/table';
 import { CdkAccordionModule } from '@angular/cdk/accordion';
@@ -50,6 +52,8 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
     MatExpansionModule,
     MatSelectModule,
     CdkAccordionModule,
+    MatSnackBarModule,
+    MatProgressSpinnerModule
   ],
   exports: [
     MatFormFieldModule,
@@ -74,6 +78,8 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
     MatExpansionModule,
     MatSelectModule,
     CdkAccordionModule,
+    MatSnackBarModule,
+    MatProgressSpinnerModule
   ]
 })
 export class MaterialModule {}

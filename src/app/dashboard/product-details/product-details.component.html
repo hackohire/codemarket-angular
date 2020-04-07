@@ -7,8 +7,11 @@
     =================================-->
 
     <app-breadcumb (editPost)="postService?.editPost(product)"
-        [showEditPostDetails]="product?.createdBy?._id === authService?.loggedInUser?._id ? true : false"
-        [title]="product?.name" [path]="breadcumb?.path">
+        [showEditPostDetails]="(product?.createdBy?._id === authService?.loggedInUser?._id || collaborators.indexOf(authService?.loggedInUser?._id) >= 0) ? true : false"
+        [title]="product?.name" [path]="breadcumb?.path"
+        [showAddCollaborators]="product?.createdBy?._id === authService?.loggedInUser?._id ? true : false"
+        [postDetails]="productDetails"
+        >
     </app-breadcumb>
 
     <!--================================
@@ -304,7 +307,21 @@
                             </div>
                         </div>
 
+                        <!-- Display Collaborator List-->
+                        <div class="sidebar-card card--product-infos" *ngIf="productDetails.collaborators.length > 0">
+                            <div class="card-title">
+                                <h4>Collaborators</h4>
+                            </div>
 
+                            <ul class="infos">
+                                <li *ngFor="let cb of productDetails?.collaborators">
+                                    <p class="bold">{{cb.name}}</p>
+                                    <img class="author_avatar_comment" alt="Commentator Avatar" style="width: 45px; height: 45px;"
+                                        [src]="cb?.avatar ? ((s3FilesBucketURL + cb?.avatar) | safe: 'resourceUrl') : anonymousAvatar">
+                                </li>
+                            </ul>
+                        </div>
+                        
                     </aside>
                     <!-- end /.aside -->
                 </div>

@@ -1,0 +1,12 @@
+<div class="docs-component-viewer-nav common-box-shadow" style="margin-bottom: 20px;">
+    <div class="docs-component-viewer-nav-content">
+        <div *ngFor="let p of customTabs.concat(postTypesArray); let last = last;">
+            <button cdkAccordionItem class="docs-nav-content-btn"
+                [ngClass]="selectedPostType === p.name ? 'docs-component-viewer-sidenav-item-selected' : ''">
+                <span (click)="postTypeClick.emit(p)">{{p.label}}</span>
+                <mat-icon *ngIf="!p?.isCustom" (click)="plusButtonClick.emit(p?.name)">add</mat-icon>
+            </button>
+            <hr *ngIf="!last" />
+        </div>
+    </div>
+</div>

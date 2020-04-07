@@ -1,9 +1,12 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { Post } from '../../models/post.model';
 import { Company } from '../../models/company.model';
 import { FormControl, Validators } from '@angular/forms';
 import { environment } from '../../../../environments/environment';
 import { PostService } from '../../services/post.service';
+import { SearchComponent } from 'src/app/core/components/search/search.component';
+import { MdePopoverTrigger } from '@material-extended/mde';
+import { ShareService } from '@ngx-share/core';
 
 @Component({
   selector: 'app-breadcumb',
@@ -17,16 +20,24 @@ export class BreadcumbComponent implements OnInit {
   @Input() eventDate: [];
   @Input() postDetails;
   @Input() companyDetails: Company;
-  @Input('color') color = 'white';
-  @Input('showMenu') showMenu = true;
-  @Input('showImportButton') showImportButton = false;
-  @Input('showEditPostDetails') showEditPostDetails: boolean;
+  @Input() color = 'white';
+  @Input() showMenu = true;
+  @Input() showImportButton = false;
+  @Input() showEditPostDetails: boolean;
+  @Input() showAddCollaborators: boolean;
+  @Input() showAddAssignee: boolean;
+  @Input() showShareButtons: boolean;
 
   @Output() editPost = new EventEmitter();
 
-  articleLink = new FormControl('', Validators.required)
+  articleLink = new FormControl('', Validators.required);
+
+  anonymousAvatar = '../../../../assets/images/anonymous-avatar.jpg';
+  s3FilesBucketURL = environment.s3FilesBucketURL;
+
   constructor(
-    private postService: PostService
+    private postService: PostService,
+    public share: ShareService,
   ) { }
 
   ngOnInit() {
@@ -40,7 +51,7 @@ export class BreadcumbComponent implements OnInit {
         console.log(h.contentHtml);
         h.contentHtml += `<b>Source: </b><a target="_blank" href="${this.articleLink.value}">${this.articleLink.value}</a>`
         this.postService.contentFromAnotherArticle.next(h.contentHtml);
-      })
+      });
   }
 
 }

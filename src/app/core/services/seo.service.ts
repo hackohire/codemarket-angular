@@ -44,6 +44,10 @@ export class SeoService {
     @Inject(DOCUMENT) private readonly document,
   ) { }
 
+  removeHTMLTags(str: string) {
+    return str.replace( /(<([^>]+)>)/ig, '');
+  }
+
   /** Set Default Meta Tags or Based On Data */
   public setMetaTagsFromData(seo) {
     this.setTwitterCard(appConstants.SEO.twitter_card_large);
@@ -59,7 +63,7 @@ export class SeoService {
 
       const seoSocialShareData: SeoSocialShareData = {
         title: seo.name,
-        description: description && description.data.text ? description.data.text : '',
+        description: description && description.data.text ? description.data.text : seo.name,
         image: appConstants.SEO.logo_url,
         author: seo.createdBy.name,
         url: isPlatformBrowser(this.platformId) ? window.location.href : '',
@@ -122,7 +126,7 @@ export class SeoService {
 
   public setData(data: SeoSocialShareData): void {
     this.setTitle(data.title);
-    this.setMetaDescription(data.description);
+    this.setMetaDescription(this.removeHTMLTags(data.description));
     this.setUrl(data.url);
     this.setImage(data.image);
     this.setPublished(data.published);

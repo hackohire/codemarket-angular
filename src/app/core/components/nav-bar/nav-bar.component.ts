@@ -10,10 +10,12 @@ import { selectCartListLength } from '../../store/selectors/cart.selectors';
 import { Router } from '@angular/router';
 import { MatDialog, MatAnchor } from '@angular/material';
 import { SearchComponent } from '../search/search.component';
-import { CompanyPostTypes, UserProfilePostTypes, PostType } from '../../../shared/models/post-types.enum';
-import { PostService } from '../../../shared/services/post.service';
 import { emails, dummyemails, bniSouthBayEmail, bniPipelineEmails } from '../../../emails';
 import { Validators, FormControl } from '@angular/forms';
+import { PostType } from '../../../shared/models/post-types.enum';
+import { MessageService } from '../../../shared/services/message.service';
+import { PostService } from '../../../shared/services/post.service';
+import { appConstants } from '../../../shared/constants/app_constants';
 
 @Component({
   selector: 'app-nav-bar',
@@ -21,10 +23,12 @@ import { Validators, FormControl } from '@angular/forms';
   styleUrls: ['./nav-bar.component.scss'],
 })
 export class NavBarComponent implements OnInit, OnDestroy {
+
   @ViewChild('lr', {static: false}) lr: MatAnchor;
-  companyPostTypes = CompanyPostTypes;
-  userProfilePostTypes = UserProfilePostTypes;
   postTypes = PostType;
+
+  postTypesArray = appConstants.postTypesArray;
+
   signUpConfig = {
     // header: 'My Customized Sign Up',
     hideAllDefaults: true,
@@ -70,7 +74,8 @@ export class NavBarComponent implements OnInit, OnDestroy {
     public authService: AuthService,
     private router: Router,
     private dialog: MatDialog,
-    private postService: PostService
+    private postService: PostService,
+    public messageService: MessageService,
     ) {
   }
 
@@ -133,6 +138,10 @@ export class NavBarComponent implements OnInit, OnDestroy {
 
   redirect() {
     this.router.navigate(['/']);
+  }
+
+  isUnread(messages) {
+    return messages.find(m => m.__show);
   }
 
   openSearchDialog(): void {

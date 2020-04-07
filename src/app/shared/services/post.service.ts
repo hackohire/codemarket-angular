@@ -1,14 +1,12 @@
 import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { Observable } from 'rxjs';
 import gql from 'graphql-tag';
-import { map, catchError, tap } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 import { Apollo } from 'apollo-angular';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { AppState } from '../../core/store/state/app.state';
 import { Post } from '../models/post.model';
-import { SetSelectedPost } from '../../core/store/actions/post.actions';
-import { productConstants } from '../constants/product_constants';
 import { AuthService } from '../../core/services/auth.service';
 import { of } from 'rxjs/observable/of';
 import { PostType } from '../models/post-types.enum';
@@ -18,6 +16,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { isPlatformServer } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
+import { description } from '../constants/fragments_constatnts';
 
 @Injectable({
   providedIn: 'root'
@@ -37,7 +36,7 @@ export class PostService {
   ) { }
 
 
-  getPostsByUserIdAndType(userId: string, status: string, postType: string, pageOptions = {pageNumber: 0, limit: 0}): Observable<{posts: Post[], total: number}> {
+  getPostsByUserIdAndType(userId: string, status: string, postType: string, pageOptions = { pageNumber: 0, limit: 0 }): Observable<{ posts: Post[], total: number }> {
     return this.apollo.query(
       {
         query: gql`
@@ -181,12 +180,12 @@ export class PostService {
     );
   }
 
-  getAllPosts(pageOptions, type, referencePostId = '', companyId = '', connectedWithUser = '', createdBy = ''): Observable<{posts: Post[], total: number}> {
+  getAllPosts(pageOptions, type, reference = null, companyId = '', connectedWithUser = '', createdBy = ''): Observable<{ posts: Post[], total: number }> {
     return this.apollo.query(
       {
         query: gql`
-          query getAllPosts($pageOptions: PageOptionsInput, $type: String, $referencePostId: String, $companyId: String, $connectedWithUser: String, $createdBy: String) {
-            getAllPosts(pageOptions: $pageOptions, type: $type, referencePostId: $referencePostId, companyId: $companyId, connectedWithUser: $connectedWithUser, createdBy: $createdBy) {
+          query getAllPosts($pageOptions: PageOptionsInput, $type: String, $reference: ReferenceObject, $companyId: String, $connectedWithUser: String, $createdBy: String) {
+            getAllPosts(pageOptions: $pageOptions, type: $type, reference: $reference, companyId: $companyId, connectedWithUser: $connectedWithUser, createdBy: $createdBy) {
               posts {
                 ...Post
               }
@@ -198,7 +197,7 @@ export class PostService {
         variables: {
           pageOptions,
           type: type ? type : '',
-          referencePostId,
+          reference: reference ? reference : null,
           companyId,
           connectedWithUser,
           createdBy
@@ -212,31 +211,33 @@ export class PostService {
     );
   }
 
-  redirectToPostDetails(post, setSelectedPost?: boolean): void {
+  redirectToPostDetails(post, commentId = ''): void {
     // this.store.dispatch(SetSelectedPost({ post: null }));
 
-    if (post.type === 'dream-job') {
-      this.redirectToDreamJobDetails(post);
+    if (post.type === PostType.Dreamjob) {
+      this.redirectToDreamJobDetails(post, commentId);
+    } else if (post.type === PostType.Event) {
+      this.redirectToEventDetails(post, commentId);
     } else {
       this.router.navigate(['/',
-      post.type === 'product' ? 'product' : 'post',
-      post.slug ? post.slug : ''
-    ],
-      { queryParams: { type: post.type } });
+        post.type === PostType.Product ? PostType.Product : 'post',
+        post.slug ? post.slug : ''
+      ],
+        { queryParams: commentId ? { commentId } : null }
+      );
     }
   }
 
-  redirectToDreamJobDetails(dreamJob): void {
-    this.router.navigate(['/', 'dream-job', dreamJob.slug]);
+  redirectToDreamJobDetails(dreamJob, commentId = ''): void {
+    this.router.navigate(['/', PostType.Dreamjob, dreamJob.slug], { queryParams: commentId ? { commentId } : null });
+  }
+
+  redirectToEventDetails(event, commentId = ''): void {
+    this.router.navigate(['/', PostType.Event, event.slug], { queryParams: commentId ? { commentId } : null });
   }
 
   editPost(post): void {
-
-    if (post.type === PostType.Product) {
-      this.router.navigate(['/', 'sell', 'edit-product', post._id]);
-    } else {
-      this.router.navigate(['/', 'post', 'edit-' + post.type, post._id]);
-    }
+    this.router.navigate(['/post', 'edit-post', post._id], {queryParams: {type: post.type}});
   }
 
   rsvpEvent(eventId: string): Observable<any> {
@@ -353,5 +354,29 @@ export class PostService {
   sendEmailWithStaticContent(email: string, name: string, companyName: string, image: string) {
     const body = { email, name, companyName, image };
     return this.http.post(`${environment.serverless_url}sendEmailWithStaticContent`, body);
+  }
+
+  fetchFiles(blockType: string, userId: string) {
+    return this.apollo.query(
+      {
+        query: gql`
+          query fetchFiles($blockType: String, $userId: String) {
+            fetchFiles(blockType: $blockType, userId: $userId) {
+              ...Description
+            }
+          }
+          ${description}
+        `,
+        variables: {
+          blockType,
+          userId
+        },
+        fetchPolicy: 'no-cache'
+      }
+    ).pipe(
+      map((p: any) => {
+        return p.data.fetchFiles;
+      }),
+    );
   }
 }

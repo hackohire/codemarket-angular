@@ -26,42 +26,18 @@ export interface Company {
     _id?: string;
     status?: PostStatus;
     createdBy?: User;
+    owners?: User[];
     createdAt?: string;
     updatedAt?: string;
     cities?: City[];
     location?: Location;
     cover?: string;
-    posts?: CompanyPost[];
-}
-
-export interface CompanyPost {
-    _id?: string;
-    createdAt?: string;
-    updatedAt?: string;
-    postType?: string;
-    challengeType?: string;
-    goalType?: string;
-    description: [{
-        type: string;
-        data: BlockToolData
-    }];
-    comments: Comment[];
-}
-
-export interface Challenge {
-    description?: [{
-        type: string;
-        data: BlockToolData
-    }];
-    challengeType: ChallengeTypes
-}
-
-export interface Challenge {
-    description?: [{
-        type: string;
-        data: BlockToolData
-    }];
-    goalType: ChallengeTypes
+    websiteLink?: string;
+    facebookLink?: string;
+    instagramLink?: string;
+    twitterLink?: string;
+    yelpLink?: string;
+    linkedinLink?: string;
 }
 
 export enum CompanyTypes {
@@ -71,12 +47,4 @@ export enum CompanyTypes {
     smb = 'smb',
     School = 'school',
     Government = 'government'
-}
-
-export enum ChallengeTypes {
-    Sales = 'sales',
-    Marketing = 'marketing',
-    Business = 'business',
-    Team = 'team',
-    Technical = 'technical'
 }

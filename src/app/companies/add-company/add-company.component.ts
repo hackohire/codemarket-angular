@@ -1,5 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { ENTER, COMMA } from '@angular/cdk/keycodes';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { BreadCumb } from '../../shared/models/bredcumb.model';
 import { FormGroup, FormArray, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { MatAutocomplete } from '@angular/material';
@@ -7,17 +6,15 @@ import { MatAutocomplete } from '@angular/material';
 import { AuthService } from '../../core/services/auth.service';
 import { ActivatedRoute } from '@angular/router';
 import { FormService } from '../../shared/services/form.service';
-import { catchError, distinctUntilChanged, tap, switchMap } from 'rxjs/operators';
-import { Subscription, of, Observable, Subject, concat } from 'rxjs';
+import { catchError, } from 'rxjs/operators';
+import { Subscription, of } from 'rxjs';
 import { Tag } from '../../shared/models/product.model';
 import { CompanyService } from '../company.service';
 import { CompanyTypes, Company } from '../../shared/models/company.model';
 import Swal from 'sweetalert2';
-import { LocationService } from '../../shared/services/location.service';
-import { City } from '../../shared/models/city.model';
 import { environment } from '../../../environments/environment';
 import { PostService } from '../../shared/services/post.service';
-import { PostType, CompanyPostTypes } from '../../shared/models/post-types.enum';
+import { PostType } from '../../shared/models/post-types.enum';
 import { EditorComponent } from '../../shared/components/editor/editor.component';
 
 @Component({
@@ -27,21 +24,12 @@ import { EditorComponent } from '../../shared/components/editor/editor.component
   providers: [CompanyService]
 })
 export class AddCompanyComponent implements OnInit {
-
-  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   breadcumb: BreadCumb;
   companyForm: FormGroup;
-  modules = {
-    formula: true,
-    syntax: true,
-  };
 
   companyTypes = Object.values(CompanyTypes);
 
-  edit: boolean;
-
   postTypes = PostType;
-  companyPostTypes = CompanyPostTypes;
 
   get createdBy() {
     return this.companyForm.get('createdBy');
@@ -71,20 +59,9 @@ export class AddCompanyComponent implements OnInit {
     return this.companyForm.get('location');
   }
 
-  visible = true;
-  selectable = true;
-  removable = true;
-  addOnBlur = true;
-
   listOfCompanies: any[] = [];
   companiesPageNumber = 1;
   totalCompanies: number;
-
-  listOfBusinessChallenges: any[] = [];
-
-  citySuggestions$: Observable<City[]>;
-  cityInput$ = new Subject<string>();
-  citiesLoading = false;
 
   subscription$: Subscription;
 
@@ -93,22 +70,13 @@ export class AddCompanyComponent implements OnInit {
 
   allCities: Tag[];
 
-  /** Location Variables */
-  zoom: number = 15;
-  @ViewChild('searchLocation', { static: true }) public searchLocation: ElementRef;
-
-  @ViewChild('searchInput', { static: false }) searchInput: ElementRef<HTMLInputElement>;
-  @ViewChild('auto', { static: false }) matAutocomplete: MatAutocomplete;
-
   @ViewChild('descriptionEditor', { static: false }) descriptionEditor: EditorComponent;
 
   constructor(
     private authService: AuthService,
-    private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
     public formService: FormService,
     public companyService: CompanyService,
-    public locationService: LocationService,
     public postService: PostService
     // @Inject(MAT_DIALOG_DATA) public data: any,
     // public dialogRef: MatDialogRef<AddCompanyComponent>
@@ -118,21 +86,16 @@ export class AddCompanyComponent implements OnInit {
     const params: any = this.activatedRoute.snapshot.params;
 
     this.breadcumb = {
-      title: 'Add Business',
+      title: 'Add Company',
       path: [
         {
-          name: 'Dashboard',
-          pathString: '/'
-        },
-        {
-          name: 'Add Business'
+          name: 'Add Company'
         }
       ]
     };
 
     if (params.companyId) {
       this.subscription$ = this.companyService.getCompanyById(params.companyId).subscribe((c) => {
-        this.edit = true;
         this.companyFormInitialization(c);
       });
     } else {
@@ -144,7 +107,6 @@ export class AddCompanyComponent implements OnInit {
 
   ngOnInit() {
     this.fetchCompanies(1);
-    this.fetchBusinessChallenges();
   }
 
   async companyFormInitialization(i: Company) {
@@ -156,28 +118,13 @@ export class AddCompanyComponent implements OnInit {
       // ideas: new FormControl(i && i.ideas ? i.ideas : ''),
       // questions: new FormControl(i && i.questions ? i.questions : ''),
       createdBy: new FormControl(i && i.createdBy && i.createdBy._id ? i.createdBy._id : ''),
+      owners: new FormControl(i && i.owners ? i.owners : []),
       status: new FormControl(i && i.status ? i.status : 'Created'),
       _id: new FormControl(i && i._id ? i._id : ''),
       location: new FormGroup({
-        latitude: new FormControl(i && i.location ? i.location.latitude : 0),
-        longitude: new FormControl(i && i.location ? i.location.longitude : 0),
         address: new FormControl(i && i.location ? i.location.address : ''),
       }),
     });
-
-    this.citySuggestions$ = concat(
-      of([]), // default items
-      this.cityInput$.pipe(
-        distinctUntilChanged(),
-        tap(() => this.citiesLoading = true),
-        switchMap(term => this.formService.findFromCollection(term, 'cities').pipe(
-          catchError(() => of([])), // empty list on error
-          tap(() => this.citiesLoading = false)
-        ))
-      )
-    );
-
-    await this.locationService.setLocaionSearhAutoComplete(this.searchLocation, this.locationFormGroup);
 
     this.formService.findFromCollection('', 'cities').subscribe((cities) => {
       this.allCities = cities;
@@ -209,10 +156,12 @@ export class AddCompanyComponent implements OnInit {
           return of(false);
         })
       ).subscribe((d: any) => {
-        Swal.fire(`${d.name} has been Created Successfully`, '', 'success').then(() => {
-          this.companyService.redirectToCompanyDetails(d._id);
-        });
-        this.companyFormInitialization(d);
+        if (d) {
+          Swal.fire(`${d.name} has been Created Successfully`, '', 'success').then(() => {
+            this.companyService.redirectToCompanyDetails(d._id);
+          });
+          this.companyFormInitialization(d);
+        }
       });
 
     } else {
@@ -240,18 +189,6 @@ export class AddCompanyComponent implements OnInit {
         this.totalCompanies = dj.total;
       }
     });
-  }
-
-  fetchBusinessChallenges() {
-    this.postService.getAllPosts({pageNumber: 1, limit: 3}, 'business-challenge').subscribe((dj: any) => {
-      if (dj && dj.posts) {
-        this.listOfBusinessChallenges = dj.posts;
-      }
-    });
-  }
-
-  addCitiesFn(name) {
-    return { name };
   }
 }
 

@@ -9,11 +9,9 @@ export const environment = {
   COGNITO_AUTH_DOMAIN: 'https://platform.auth.us-east-1.amazoncognito.com',
   serverless_url: 'http://localhost:3200/',
   graphql_url: 'http://localhost:3200/graphql',
-  applicationId: '5d2ef428bbfa6576b357d5d4',
   s3FilesBucketURL: 'https://codemarket-files.s3.amazonaws.com/public/',
   stripe_public_key: 'pk_test_ighmL2U9UqAx0O4b8dKkSvdq',
   webSocketURL: 'ws://localhost:3001',
-  googleAPIKey: 'AIzaSyAOpIXHUPA5bMssoAW3NDUGHveOf0N_tsY',
   planDetails: plans.dev,
   oauth: {
     // Domain name
@@ -38,9 +36,12 @@ export const environment = {
       // Indicates if the data collection is enabled to support Cognito advanced security features. By default, this flag is set to true.
       AdvancedSecurityDataCollectionFlag: true
     },
+  },
+  baseHref: '/',
+  confirm: {
+    email: '',
+    password: ''
   }
-,
-	baseHref: '/'
 };
 
 /*

@@ -47,4 +47,5 @@ Thumbs.db
 
 /dist
 .serverless
+/documentation
 # /deploy.sh

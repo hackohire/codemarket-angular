@@ -10,10 +10,9 @@ import { Comment } from '../models/comment.model';
 import { ToastrService } from 'ngx-toastr';
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { PostService } from './post.service';
-import { CompanyPost } from '../models/company.model';
 import { Post } from '../models/post.model';
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class CommentService {
 
   commentSchema = comment;
@@ -94,7 +93,7 @@ export class CommentService {
         mutation: gql`
           mutation addComment($comment: CommentInput) {
             addComment(comment: $comment) {
-              ...Comment
+              ...Comments
             }
           }
           ${this.commentSchema}
@@ -114,7 +113,7 @@ export class CommentService {
     const COMMENTS_SUBSCRIPTION = gql`
     subscription onCommentAdded($postId: String, $companyId: String, $userId: String) {
       onCommentAdded(postId: $postId, companyId: $companyId, userId: $userId){
-        ...Comment
+        ...Comments
       }
     }
     ${this.commentSchema}
@@ -206,7 +205,7 @@ export class CommentService {
         let el = this.document.getElementById(`${c._id}`);
         el.scrollIntoView({block: 'center', behavior: 'smooth', inline: 'center'}); /** scroll to the element upto the center */
         el.style.border = '2px solid #00aeef'; /** Highlighting the element */
-      }, c.blockSpecificComment ? 500 : 0);
+      }, c.blockSpecificComment ? 1000 : 0);
     }
   }
 
@@ -217,7 +216,7 @@ export class CommentService {
           query: gql`
             query getCommentsByReferenceId($referenceId: String) {
               getCommentsByReferenceId(referenceId: $referenceId) {
-                ...Comment
+                ...Comments
               }
             }
             ${this.commentSchema}
@@ -237,7 +236,7 @@ export class CommentService {
 
           /** If comment Id is passed scroll down to the comment */
           if (comments && comments.length && commentId) {
-            const comment = comments.find(c => c._id === commentId);
+            const comment = comments.find(c => c._id === commentId || c.children.find(ch => ch._id === commentId));
             this.scrollToComment(post.description, comment);
           }
         })
@@ -311,17 +310,18 @@ export class CommentService {
     );
   }
 
-  deleteComment(commentId): Observable<any> {
+  deleteComment(commentId, postId): Observable<any> {
     return this.apollo.query(
       {
         query: gql`
-          query deleteComment($commentId: String) {
-            deleteComment(commentId: $commentId)
+          query deleteComment($commentId: String, $postId: String) {
+            deleteComment(commentId: $commentId, postId: $postId)
           }
         `,
         // fetchPolicy: 'no-cache',
         variables: {
-          commentId
+          commentId,
+          postId
         }
       }
     ).pipe(
@@ -335,7 +335,7 @@ export class CommentService {
     const COMMENT_UPDATE_SUBSCRIPTION = gql`
     subscription onCommentUpdated($postId: String, $companyId: String, $userId: String) {
       onCommentUpdated(postId: $postId, companyId: $companyId, userId: $userId){
-        ...Comment
+        ...Comments
       }
     }
     ${this.commentSchema}
@@ -400,12 +400,12 @@ export class CommentService {
     );
   }
 
-  updateComment(commentId, text): Observable<any> {
+  updateComment(commentId, postId, text): Observable<any> {
     return this.apollo.mutate(
       {
         mutation: gql`
-          mutation updateComment($commentId: String, $text: [InputdescriptionBlock]) {
-            updateComment(commentId: $commentId, text: $text) {
+          mutation updateComment($commentId: String, $postId: String, $text: [InputdescriptionBlock]) {
+            updateComment(commentId: $commentId, postId: $postId, text: $text) {
                 text {
                   ...Description
                 }
@@ -416,6 +416,7 @@ export class CommentService {
         fetchPolicy: 'no-cache',
         variables: {
           commentId,
+          postId,
           text
         }
       }

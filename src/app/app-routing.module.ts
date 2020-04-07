@@ -27,6 +27,9 @@ import { StickyComponent } from './sticky/sticky.component';
 import { ViralComponent } from './viral/viral.component';
 import { CommunityImpactStoriesComponent } from './community-impact-stories/community-impact-stories.component';
 import { AdvocatesInfluencersComponent } from './advocates-influencers/advocates-influencers.component';
+import {NewsletterComponent} from './newsletter/newsletter.component';
+import { VolunteerComponent } from './volunteer/volunteer.component';
+import {DonateComponent} from './donate/donate.component'
 // import { PostDataResolver } from './core/resolver';
 
 const routes: Routes = [
@@ -49,6 +52,10 @@ const routes: Routes = [
     redirectTo: '/dashboard',
   },
   {
+    path: 'add-post-type',
+    loadChildren: () => import('./post-type/add-post-type/add-post-type.module').then(module => module.AddPostTypeModule),
+  },
+  {
     path: 'dashboard',
     loadChildren: () => import('./dashboard/dashboard.module').then(module => module.DashboardModule),
     // outlet: 'main'
@@ -66,54 +73,6 @@ const routes: Routes = [
     // outlet: 'main',
     canLoad: [AuthGuard]
   },
-
-  {
-    path: 'help-request',
-    loadChildren: () => import('./help/help.module').then(module => module.HelpModule),
-    // outlet: 'main',
-    canLoad: [AuthGuard]
-  },
-
-  // {
-  //   path: 'interview',
-  //   loadChildren: () => import('./interview/interview.module').then(module => module.InterviewModule),
-  //   outlet: 'main',
-  //   canLoad: [AuthGuard]
-  // },
-  // {
-  //   path: 'requirement',
-  //   loadChildren: () => import('./requirements/requirements.module').then(module => module.RequirementsModule),
-  //   outlet: 'main',
-  //   canLoad: [AuthGuard]
-  // },
-
-  // {
-  //   path: 'testing',
-  //   loadChildren: () => import('./testing/testing.module').then(module => module.TestingModule),
-  //   outlet: 'main',
-  //   canLoad: [AuthGuard]
-  // },
-
-  // {
-  //   path: 'howtodoc',
-  //   loadChildren: () => import('./howtodoc/howtodoc.module').then(module => module.HowtodocModule),
-  //   outlet: 'main',
-  //   canLoad: [AuthGuard]
-  // },
-
-  // {
-  //   path: 'design',
-  //   loadChildren: () => import('./design/design.module').then(module => module.DesignModule),
-  //   outlet: 'main',
-  //   canLoad: [AuthGuard]
-  // },
-
-  // {
-  //   path: 'goal',
-  //   loadChildren: () => import('./goal/goal.module').then(module => module.GoalModule),
-  //   outlet: 'main',
-  //   canLoad: [AuthGuard]
-  // },
   {
     path: 'post',
     loadChildren: () => import('./post/post.module').then(module => module.PostModule),
@@ -177,6 +136,13 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
+    path: 'event/:slug',
+    loadChildren: () => import('./event/event-details/event-details.module').then(module => module.EventDetailsModule),
+    resolve: { seo: PostDataResolver },
+    data: { noReuse: false, setPostMeta: true },
+    pathMatch: 'full'
+  },
+  {
     path: 'company/:companyId',
     loadChildren: () => import('./companies/companies.module').then(module => module.CompaniesModule),
     data: { setPostMeta: true },
@@ -188,103 +154,121 @@ const routes: Routes = [
     component: AboutUsComponent
   },
 
+  {
+    path: 'messages',
+    loadChildren: () => import('./core/messages/messages.module').then(module => module.MessagesModule),
+  },
+
   /** Static routes starts here */
-  {
+   {
     path: 'innovate',
-    component: InnovateComponent
-  },
-  {
-    path: 'affordable',
-    component: AffordableComponent
-  },
-  {
+     component: InnovateComponent
+   },
+   {
+     path: 'affordable',
+     component: AffordableComponent
+   },
+   {
     path: 'get-work-done',
     component: GetWorkDoneComponent
-  },
-  {
-    path: 'dedicated-team',
-    component: DedicatedTeamComponent
-  },
-  {
-    path: 'website',
-    component: WebsiteComponent
-  },
-  {
-    path: 'email-marketing',
-    component: EmailMarketingComponent
-  },
-  {
-    path: 'social-media-marketing',
-    component: SocialMediaMarketingComponent
-  },
-  {
-    path: 'crm',
-    component: CrmComponent
-  },
-  {
-    path: 'referral-network',
-    component: ReferralNetworkComponent
-  },
-  {
-    path: 'sales-growth-strategy',
-    component: SalesGrowthStrategyComponent
-  },
-  {
-    path: 'ai-strategy',
-    component: AiStrategyComponent
-  },
-  {
-    path: 'exit-strategy',
-    component: ExitStrategyComponent
-  },
-  {
-    path: 'training-from-experts',
-    component: TrainingFromExpertsComponent
-  },
-  {
-    path: 'real-projects',
-    component: RealProjectsComponent
-  },
-  {
-    path: 'mock-interviews',
-    component: MockInterviewsComponent
-  },
-  {
-    path: 'dream-job-mentors',
-    component: DreamJobMentorsComponent
-  },
-  {
-    path: 'stress-management',
-    component: StressManagementComponent
-  },
-  {
-    path: 'resume-gap-analysis',
-    component: ResumeGapAnalysisComponent
-  },
-  {
-    path: 'peer-networking',
-    component: PeerNetworkingComponent
-  },
-  {
-    path: 'leadership-training',
-    component: LeadershipTrainingComponent
-  },
-  {
-    path: 'sticky',
-    component: StickyComponent
-  },
-  {
-    path: 'viral',
-    component: ViralComponent
-  },
-  {
-    path: 'community-impact-stories',
-    component: CommunityImpactStoriesComponent
-  },
-  {
-    path: 'advocates-influencers',
-    component: AdvocatesInfluencersComponent
-  }
+   },
+   {
+     path: 'dedicated-team',
+     component: DedicatedTeamComponent
+   },
+   {
+     path: 'website',
+     component: WebsiteComponent
+   },
+   {
+     path: 'email-marketing',
+     component: EmailMarketingComponent
+   },
+   {
+     path: 'social-media-marketing',
+     component: SocialMediaMarketingComponent
+   },
+   {
+     path: 'crm',
+     component: CrmComponent
+   },
+   {
+     path: 'referral-network',
+     component: ReferralNetworkComponent
+   },
+   {
+     path: 'sales-growth-strategy',
+     component: SalesGrowthStrategyComponent
+   },
+   {
+     path: 'ai-strategy',
+     component: AiStrategyComponent
+   },
+   {
+     path: 'exit-strategy',
+     component: ExitStrategyComponent
+   },
+   {
+     path: 'training-from-experts',
+     component: TrainingFromExpertsComponent
+   },
+   {
+     path: 'real-projects',
+     component: RealProjectsComponent
+   },
+   {
+     path: 'mock-interviews',
+     component: MockInterviewsComponent
+   },
+   {
+     path: 'dream-job-mentors',
+     component: DreamJobMentorsComponent
+   },
+   {
+     path: 'stress-management',
+     component: StressManagementComponent
+   },
+   {
+     path: 'resume-gap-analysis',
+     component: ResumeGapAnalysisComponent
+   },
+   {
+     path: 'peer-networking',
+     component: PeerNetworkingComponent
+   },
+   {
+     path: 'leadership-training',
+     component: LeadershipTrainingComponent
+   },
+   {
+     path: 'sticky',
+     component: StickyComponent
+   },
+   {
+     path: 'viral',
+     component: ViralComponent
+   },
+   {
+     path: 'community-impact-stories',
+     component: CommunityImpactStoriesComponent
+   },
+   {
+     path: 'advocates-influencers',
+     component: AdvocatesInfluencersComponent
+   },
+   {
+     path:'newsletter',
+     component: NewsletterComponent
+   },
+   {
+     path:'volunteer',
+     component: VolunteerComponent
+   },
+   {
+     path: 'donate',
+     component: DonateComponent
+   }
+
   /** Static routes ends here */
 ];
 

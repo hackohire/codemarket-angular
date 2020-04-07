@@ -7,8 +7,11 @@
     =================================-->
 
     <app-breadcumb (editPost)="postService?.editPost(details)"
-        [showEditPostDetails]="details?.createdBy?._id === authService?.loggedInUser?._id ? true : false"
-        [title]="details?.name" [path]="breadcumb?.path" [eventDate]="details?.dateRange" [postDetails]="details">
+        [showEditPostDetails]="(details?.createdBy?._id === authService?.loggedInUser?._id || collaborators.indexOf(authService?.loggedInUser?._id) >= 0) ? true : false"
+        [showAddCollaborators]="details?.createdBy?._id === authService?.loggedInUser?._id ? true : false"
+        [showShareButtons]="true" [showAddAssignee]="details?.createdBy?._id === authService?.loggedInUser?._id"
+        [postDetails]="postDetails" [title]="details?.name" [path]="breadcumb?.path" [eventDate]="details?.dateRange"
+        [postDetails]="details">
     </app-breadcumb>
 
     <!--================================
@@ -21,14 +24,34 @@
     <section class="single-product-desc">
         <div class="container">
             <div class="row">
-                <div class="col-lg-8">
+                <div class="col-lg-2">
+                    <!-- Based On the List Of Post Types -->
+                    <app-post-type-nav [selectedPostType]="selectedPostType" 
+                     (postTypeClick)="selectedBlock = null; getConnectedPosts($event?.name); showConnectedPosts = true"
+                     (plusButtonClick)="redirectToAddPost(details, $event)"
+                     ></app-post-type-nav>
+                    <!-- <div class="docs-component-viewer-nav common-box-shadow" style="margin-bottom: 20px;">
+                        <div class="docs-component-viewer-nav-content">
+                            <div *ngFor="let p of postTypesArray; let last = last;">
+                                <button cdkAccordionItem class="docs-nav-content-btn"
+                                    [ngClass]="selectedPostType === p.name ? 'docs-component-viewer-sidenav-item-selected' : ''">
+                                    <span
+                                        (postTypeClick)="getConnectedPosts($event); showConnectedPosts = true">{{p.label}}</span>
+                                    <mat-icon (plusButtonClick)="redirectToAddPost(details, $event)">add</mat-icon>
+                                </button>
+                                <hr *ngIf="!last" />
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+                <div *ngIf="!showConnectedPosts" [ngClass]="selectedBlock ? 'col-lg-6 col-md-6' : 'col-lg-10 col-md-10'" style="padding: 0;">
 
                     <div class="item-info">
                         <div>
                             <div class="tab-pane fade show product-tab active" id="product-details">
                                 <article>
-
                                     <app-editor *ngIf="details?.description && details?.description?.length"
+                                        (showComments)="showCommentsOnSide($event)"
                                         [commentsList]="commentService?.commentsList$ | async"
                                         [blockLevelComments]="true" [readOnly]="true" [data]="details?.description"
                                         [id]="'details-editor'" [post]="details" [commentType]="'post'">
@@ -36,157 +59,30 @@
 
                                     <br />
 
-                                    <div *ngIf="details?.type === 'business-coach'">
-                                        <ng-container *ngTemplateOutlet="businessCoachDetailsTemplate; context: {details: details}">
-                                        </ng-container>
-                                    </div>
-
-                                    <ng-container *ngIf="details.type === 'career-coach'">
-                                        <div class="tab-content-wrapper" fxLayout="row">
-                                            <h4 fxFlex="90" class="plan-description"
-                                                style="color: black; vertical-align: middle; display: inline;">
-                                                {{careerCoachQuestions['gapAnalysis']}}
-                                            </h4>
-                                            <i fxFlex="10"
-                                                [ngClass]="details?.gapAnalysis ? 'fad fa-check-circle' : 'fad fa-times-circle'"
-                                                style="vertical-align: middle; font-size: 1.5em;"></i>
-                                        </div>
-                                    </ng-container>
-
-                                    <ng-container *ngIf="details.type === 'career-coach'">
-                                        <div class="tab-content-wrapper" fxLayout="row">
-                                            <h4 fxFlex="90" class="plan-description"
-                                                style="color: black; vertical-align: middle; display: inline;">
-                                                {{careerCoachQuestions['careerCoachSessions']}}
-                                            </h4>
-                                            <i fxFlex="10"
-                                                [ngClass]="details?.careerCoachSessions ? 'fad fa-check-circle' : 'fad fa-times-circle'"
-                                                style="vertical-align: middle; font-size: 1.5em;"></i>
-                                        </div>
-                                    </ng-container>
-
-                                    <ng-container *ngIf="details.type === 'career-coach'">
-                                        <div class="tab-content-wrapper" fxLayout="row">
-                                            <h4 fxFlex="90" class="plan-description"
-                                                style="color: black; vertical-align: middle;">
-                                                {{careerCoachQuestions['helpingWithMockInterviews']}}
-                                            </h4>
-                                            <i fxFlex="10"
-                                                [ngClass]="details?.helpingWithMockInterviews ? 'fad fa-check-circle' : 'fad fa-times-circle'"
-                                                style="vertical-align: middle; font-size: 1.5em;"></i>
-                                        </div>
-                                    </ng-container>
-
-                                    <ng-container *ngIf="details.type === 'career-coach'">
-                                        <div class="tab-content-wrapper" fxLayout="row">
-                                            <h4 fxFlex="90" class="plan-description"
-                                                style="color: black; vertical-align: middle; display: inline;">
-                                                {{careerCoachQuestions['hiringMentoringSessions']}}
-                                            </h4>
-                                            <i fxFlex="10"
-                                                [ngClass]="details?.hiringMentoringSessions ? 'fad fa-check-circle' : 'fad fa-times-circle'"
-                                                style="vertical-align: middle; font-size: 1.5em;"></i>
-                                        </div>
-                                    </ng-container>
-
-                                    <br />
-                                    <h4 class="tab-content-wrapper" *ngIf="details.type !== 'career-coach'">Support
-                                        Details:</h4>
-
-                                    <app-editor *ngIf="details?.support?.description" [readOnly]="true"
-                                        [data]="details?.support?.description" [id]="'details-support-editor'"
-                                        [commentType]="'post'">
-                                    </app-editor>
                                     <ng-template #noDescription>
                                         <span>No Description</span>
                                     </ng-template>
                                 </article>
                             </div>
+
+                            <ng-container *ngTemplateOutlet="addCommentTemplate; context: {details: details}">
+                            </ng-container>
                         </div>
-                    
-                        <ng-container *ngTemplateOutlet="locationTemplate; context: {location: details?.location}">
-                        </ng-container>
-                        <ng-container *ngTemplateOutlet="addCommentTemplate; context: details"></ng-container>
+
                     </div>
 
                     <!-- end /.item-info -->
                 </div>
                 <!-- end /.col-md-8 -->
 
-                <div class="col-lg-4">
-                    <aside class="sidebar sidebar--single-product">
+                <div *ngIf="!showConnectedPosts" class="col-md-6 col-lg-4">
+                    <!-- <aside class="sidebar sidebar--single-product"> -->
 
-
-                        <div class="author-card sidebar-card " *ngIf="details?.createdBy?.name">
-                            <div class="card-title">
-                                <h4>Author Information</h4>
-                            </div>
-
-                            <div class="author-infos">
-                                <div class="author_avatar">
-                                    <img [src]="details?.createdBy?.avatar ? ((s3FilesBucketURL + details.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar"
-                                        alt="Presenting the broken author avatar :D">
-                                </div>
-
-                                <div class="author">
-                                    <a [routerLink]="['/', 'dashboard', 'profile', details?.createdBy?._id ]">
-                                        <h4>{{details?.createdBy?.name}}</h4>
-                                    </a>
-                                    <button
-                                        *ngIf="details?.createdBy?._id && authService?.loggedInUser?._id && authService?.loggedInUser?._id !== details?.createdBy?._id"
-                                        (click)="openDialog(details?.createdBy?._id)" mat-mini-fab color="primary">
-                                        <mat-icon>video_call</mat-icon>
-                                    </button>
-                                    <!-- <p>Signed Up: 08 April 2016</p> -->
-                                </div>
-                                <!-- end /.author -->
-
-                                <div class="social social--color--filled">
-                                    <ul>
-                                        <li>
-                                            <a href="#">
-                                                <span class="fab fa-facebook fa-lg"></span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <span class="fab fa-github fa-lg"></span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <span class="fab fa-linkedin fa-lg"></span>
-                                            </a>
-                                        <li>
-                                            <a href="#">
-                                                <i class="fab fa-stack-overflow"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <!-- end /.social -->
-
-                                <div class="author-btn">
-                                    <a (editPost)="postService?.editPost(details)"
-                                        [routerLink]="['/', 'dashboard', 'profile', details?.createdBy?._id ]"
-                                        class="btn btn--sm btn--round">View Profile</a>
-                                    <!-- <a href="#" class="btn btn--sm btn--round">Message</a> -->
-                                </div>
-                            </div>
-                            <!-- end /.author-infos -->
-
-
-                        </div>
-                        <!-- end /.author-card -->
+                        <ng-container *ngTemplateOutlet="addBlockLevelCommentTemplate; context: {details: details, comments: (commentService?.commentsList$ | async)}">
+                        </ng-container>
 
 
                         <div class="sidebar-card card-pricing card--pricing2" *ngIf="details?.type !== 'dream-job'">
-                            <div class="price">
-                                <h1>
-                                    <span>{{details?.price | currency}}</span>
-                                    <!-- <sup>$</sup> -->
-                                </h1>
-                            </div>
 
                             <div class="purchase-button" *ngIf="details?.type === 'event'">
                                 <!-- <a href="#" class="btn btn--lg btn--round">Purchase Now</a> -->
@@ -202,9 +98,6 @@
                                     class="btn btn--lg btn--round cart-btn" style="padding: 12px;">
                                     <h5>Cancel RSVP</h5>
                                 </a> -->
-
-
-
                                 <ng-template #eventRSVP>
                                     <h3 style="text-align: center;" (click)="rsvpEvent(details?._id)">Are you going?
                                         <button color="primary" mat-mini-fab
@@ -218,108 +111,6 @@
                                         <h5></h5>
                                     </a> -->
                                 </ng-template>
-                            </div>
-
-                        </div>
-
-
-
-                        <div class="sidebar-card card--product-infos">
-                            <div class="card-title">
-                                <h4>Information</h4>
-                            </div>
-
-                            <ul class="infos">
-                                <li>
-                                    <p class="data-label">Likes</p>
-                                    <p class="info" *ngIf="authService?.loggedInUser; else likeCount">
-                                        <app-like-dislike [data]="details" [type]="type" [likeCount]="null">
-                                        </app-like-dislike>
-                                    </p>
-                                    <ng-template #likeCount>
-                                        <p class="info">
-                                            {{details?.likeCount}}
-                                        </p>
-                                    </ng-template>
-                                </li>
-                                <li *ngIf="details?.createdAt">
-                                    <p class="data-label">Created</p>
-                                    <p class="info">{{getDate(details?.createdAt) | date: 'dd/MM/yyyy'}}</p>
-                                </li>
-                                <li *ngIf="details?.updatedAt">
-                                    <p class="data-label">Updated</p>
-                                    <p class="info">{{getDate(details?.updatedAt) | date: 'dd/MM/yyyy'}}</p>
-                                </li>
-                                <li *ngIf="details?.dateRange && details?.dateRange?.length">
-                                    <p class="data-label">Event Dates</p>
-                                    <p class="info">{{details?.dateRange[0] | date: 'dd/MM/yyyy hh:ss'}} -
-                                        {{details?.dateRange[1] | date: 'dd/MM/yyyy hh:ss'}}</p>
-                                </li>
-                                <li *ngIf="details?.address">
-                                    <p class="data-label">Address</p>
-                                    <p class="info">{{details?.address}}</p>
-                                </li>
-                                <li *ngIf="details?.cities && details?.cities?.length">
-                                    <p class="data-label">Cities</p>
-                                    <p class="info"><span
-                                            *ngFor="let c of details?.cities; let ei = index;">{{c?.name + (ei === details?.cities?.length - 1 ? '' : ', ' )}}</span>
-                                    </p>
-                                </li>
-                                <!-- <li>
-                                    <p class="data-label">Version</p>
-                                    <p class="info">{{details?.version}}{{'-'}}</p>
-                                </li> -->
-                                <li>
-                                    <p class="data-label">Category</p>
-                                    <p class="info" *ngFor="let t of details?.tags">{{t?.name + ','}}</p>
-                                </li>
-                                <li *ngIf="details?.support">
-                                    <p class="data-label">Support</p>
-                                    <p class="info">{{details?.support?.time}} {{ 'Minutes'}}</p>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- end /.aside -->
-
-                        <div class="author-card sidebar-card ">
-                            <div class="card-title">
-                                <h4>Share:</h4>
-                                <br />
-                                <div class="social social--color--filled">
-                                    <ul>
-                                        <li>
-                                            <button mat-fab shareButton="facebook"
-                                                [style.backgroundColor]="share?.prop?.facebook.color">
-                                                <!-- <fa-icon [icon]="share?.prop?.facebook.icon" size="lg"></fa-icon> -->
-
-                                                <i class="fab fa-facebook-f"></i>
-                                            </button>
-                                        </li>
-                                        <li>
-                                            <button mat-fab shareButton="twitter"
-                                                [style.backgroundColor]="share?.prop?.twitter.color">
-                                                <!-- <fa-icon [icon]="share?.prop?.twitter.icon" size="lg"></fa-icon> -->
-
-                                                <i class="fab fa-twitter"></i>
-                                            </button>
-                                        </li>
-                                        <li>
-                                            <button mat-fab shareButton="linkedin"
-                                                [style.backgroundColor]="share?.prop?.linkedin.color">
-                                                <!-- <fa-icon [icon]="share?.prop?.linkedin.icon" size="lg"></fa-icon> -->
-
-                                                <i class="fab fa-linkedin"></i>
-                                            </button>
-                                        <li>
-                                            <button mat-fab shareButton="whatsapp"
-                                                [style.backgroundColor]="share?.prop?.whatsapp.color">
-                                                <!-- <fa-icon [icon]="share?.prop?.whatsapp.icon" size="lg"></fa-icon> -->
-
-                                                <i class="fab fa-whatsapp"></i>
-                                            </button>
-                                        </li>
-                                    </ul>
-                                </div>
                             </div>
 
                         </div>
@@ -349,14 +140,56 @@
                             </div>
                         </div>
 
-                    </aside>
+                    <!-- </aside> -->
                     <!-- end /.aside -->
                 </div>
                 <!-- end /.col-md-4 -->
+
+                <div class="col-md-10 col-lg-10" *ngIf="showConnectedPosts">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <a mat-stroked-button color="primary" style="margin-bottom: 10px;" (click)="selectedBlock = null; showConnectedPosts = false; selectedPostType = ''">
+                                <mat-icon>keyboard_arrow_left</mat-icon>Back
+                            </a>
+                            <div class="item-grid pen-grid item-grid-large">
+                                <app-brief-post style="width: 100%;" [p]="e" *ngFor="let e of listOfConnectedPosts?.posts"
+                                    [readMore]="true" (showComments)="showCommentsOnSide($event)"></app-brief-post>
+                            </div>
+                            <app-paginator [length]="totalOtherPosts"
+                                (fetchData)="paginator = $event; getConnectedPosts(selectedPostType)">
+                            </app-paginator>
+                        </div>
+
+                        <div class="col-md-4">
+                            <ng-container *ngTemplateOutlet="addBlockLevelCommentTemplate; context: {details: selectedPost, comments: selectedPostComments | async}">
+                            </ng-container>
+                        </div>
+
+                    </div>
+                </div>
             </div>
             <!-- end /.row -->
         </div>
         <!-- end /.container -->
+
+        <!-- Start of chat box code -->
+
+        <section class="chat-window docked" #chatWindow>
+            <div class="chat-header" (click)="chatWindow.classList.toggle('docked')">
+              <p>Live Chat</p>
+              <span class="close"></span>
+            </div>
+            <div class="chat-body">
+              <div class="message-container">
+                <app-chat-box [comments]="commentService?.commentsList$ | async" [loggedInUserId]="authService?.loggedInUser?._id" [postDetails]="postDetails"></app-chat-box>
+              </div>
+            </div>
+            <!-- <div class="chat-footer">
+              <div class="form-area">
+              </div>
+            </div> -->
+          </section>
+        <!-- End of chat box code -->
     </section>
     <!--===========================================
             END SINGLE PRODUCT DESCRIPTION AREA
@@ -370,24 +203,15 @@
     ==============================================-->
 
 
-<ng-template #locationTemplate let-location="location">
-    <div *ngIf="location?.latitude || location?.longitude">
-        <h4 class="tab-content-wrapper">Location:</h4>
-        <agm-map [latitude]="location?.latitude" [longitude]="location?.longitude" [zoom]="15">
-            <agm-marker [latitude]="location?.latitude" [longitude]="location?.longitude"></agm-marker>
-        </agm-map>
-    </div>
-
-</ng-template>
-
 <ng-template #addCommentTemplate let-cDetails="details">
     <div style="background: white;">
         <div class="tab-pane fade show product-tab">
             <div class="thread">
                 <ul class="media-list thread-list" style="list-style: none;">
                     <h4 class="tab-content-wrapper">Comments:</h4>
-                    <div *ngFor="let c of commentService?.commentsList$ | async">
-                        <li [id]="c?._id" style="padding-left: 30px; padding-right: 30px;" *ngIf="!c?.blockSpecificComment" class="single-thread">
+                    <div *ngFor="let c of commentService?.commentsList$ | async; trackBy: trackByFn">
+                        <li [id]="c?._id" style="padding-left: 30px; padding-right: 30px;"
+                            *ngIf="!c?.blockSpecificComment" class="single-thread">
                             <app-comment [comment]="c" [referenceId]="cDetails?._id"></app-comment>
                         </li>
                     </div>
@@ -395,161 +219,11 @@
             </div>
         </div>
 
-        <div class="comment-form-area" *ngIf="commentForm">
-            <h4>Leave a comment</h4>
-            <!-- comment reply -->
-            <div class="media comment-form">
-                <div class="media-left">
-                    <a href="#">
-                        <img class="author_avatar_comment" style="width: 45px; height: 45px;"
-                            [src]="authService?.loggedInUser?.avatar ? ((s3FilesBucketURL + authService?.loggedInUser?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
-                            alt="Commentator Avatar">
-                    </a>
-                </div>
-                <div class="media-body">
-                    <div [formGroup]="commentForm" class="comment-reply-form">
-                        <app-editor [id]="'comment-editor'" #addCommentEditor
-                            [editorStyle]="{padding: '0 15px', 'border-radius': '19px', background: '#f2f3f5', border: 'solid 0.5px rgb(236, 236, 236)'}">
-                        </app-editor>
-
-                        <button style="float: right;" type="button" class="btn btn--vsm btn--round"
-                            (click)="addComment(addCommentEditor)">Post
-                            Comment</button>
-                    </div>
-                </div>
-            </div>
-            <!-- comment reply -->
+        <div class="comment-form-area">
+            <app-add-comment *ngIf="commentForm" [commentForm]="commentForm" [showLabel]="true"></app-add-comment>
         </div>
+
     </div>
-</ng-template>
-
-<ng-template #businessCoachDetailsTemplate let-cDetails="details">
-    <mat-accordion class="example-headers-align" [multi]="true">
-
-        <mat-expansion-panel [expanded]="true" hideToggle>
-          <mat-expansion-panel-header>
-            <mat-panel-title style="font-weight: 500;">
-              {{businessCoachQuestions['cities']}}
-            </mat-panel-title>
-            <mat-panel-description style="place-content: flex-end; align-items: center;">
-                <i class="fas fa-city"></i>
-            </mat-panel-description>
-          </mat-expansion-panel-header>
-      
-          <span *ngFor="let c of cDetails?.cities; let last=last;">{{c?.name + (!last ? ', ' : '')}}</span>
-        </mat-expansion-panel>
-
-        <mat-expansion-panel [expanded]="true" hideToggle>
-            <mat-expansion-panel-header>
-              <mat-panel-title style="font-weight: 500;">
-                {{businessCoachQuestions['roles']}}
-              </mat-panel-title>
-              <mat-panel-description style="place-content: flex-end; align-items: center;">
-                <i class="fas fa-user-tie"></i>
-              </mat-panel-description>
-            </mat-expansion-panel-header>
-        
-            <span *ngFor="let c of cDetails?.jobProfile; let last=last;">{{c?.name + (!last ? ', ' : '')}}</span>
-        </mat-expansion-panel>
-
-        <mat-expansion-panel [expanded]="true" hideToggle>
-            <mat-expansion-panel-header>
-              <mat-panel-title style="font-weight: 500;">
-                {{businessCoachQuestions['companies']}}
-              </mat-panel-title>
-              <mat-panel-description style="place-content: flex-end; align-items: center;">
-                <i class="fas fa-industry-alt"></i>
-              </mat-panel-description>
-            </mat-expansion-panel-header>
-        
-            <span *ngFor="let c of cDetails?.companies; let last=last;">{{c?.name + (!last ? ', ' : '')}}</span>
-        </mat-expansion-panel>
-
-        <mat-expansion-panel [expanded]="true" hideToggle>
-            <mat-expansion-panel-header>
-              <mat-panel-title style="font-weight: 500;">
-                {{businessCoachQuestions['businessAreas']}}
-              </mat-panel-title>
-              <mat-panel-description style="place-content: flex-end; align-items: center;">
-                <i class="fas fa-briefcase"></i>
-              </mat-panel-description>
-            </mat-expansion-panel-header>
-        
-            <span *ngFor="let c of cDetails?.businessAreas; let last=last;">{{c?.name + (!last ? ', ' : '')}}</span>
-        </mat-expansion-panel>
-
-        <mat-expansion-panel [expanded]="true" hideToggle>
-            <mat-expansion-panel-header>
-              <mat-panel-title style="font-weight: 500;">
-                {{businessCoachQuestions['businessGoals']}}
-              </mat-panel-title>
-              <mat-panel-description style="place-content: flex-end; align-items: center;">
-                <i class="fas fa-bullseye-arrow"></i>
-              </mat-panel-description>
-            </mat-expansion-panel-header>
-        
-            <span *ngFor="let c of cDetails?.businessGoals; let last=last;">{{c?.name + (!last ? ', ' : '')}}</span>
-        </mat-expansion-panel>
-
-        <mat-expansion-panel [expanded]="true" hideToggle>
-            <mat-expansion-panel-header>
-              <mat-panel-title style="font-weight: 500;">
-                {{businessCoachQuestions['businessChallenges']}}
-              </mat-panel-title>
-              <mat-panel-description style="place-content: flex-end; align-items: center;">
-                <i class="fas fa-exclamation-circle"></i>
-              </mat-panel-description>
-            </mat-expansion-panel-header>
-        
-            <span *ngFor="let c of cDetails?.businessChallenges; let last=last;">{{c?.name + (!last ? ', ' : '')}}</span>
-        </mat-expansion-panel>
-
-        <mat-expansion-panel [expanded]="true" hideToggle>
-            <mat-expansion-panel-header>
-              <mat-panel-title style="font-weight: 500;">
-                {{businessCoachQuestions['businessCoachSessions']}}
-              </mat-panel-title>
-              <mat-panel-description style="place-content: flex-end; align-items: center;">
-                {{cDetails?.businessCoachSessions ? 'Yes' : 'No'}}
-              </mat-panel-description>
-            </mat-expansion-panel-header>
-        </mat-expansion-panel>
-
-        <mat-expansion-panel [expanded]="true" hideToggle>
-            <mat-expansion-panel-header>
-              <mat-panel-title style="font-weight: 500;">
-                {{businessCoachQuestions['sellProducts']}}
-              </mat-panel-title>
-              <mat-panel-description style="place-content: flex-end; align-items: center;">
-                {{cDetails?.sellServices?.sellServices ? 'Yes' : 'No'}}
-                <!-- <mat-icon>{{cDetails?.sellProducts?.sellProducts ? 'fad fa-check-circle' : 'fad fa-times-circle'}}</mat-icon> -->
-              </mat-panel-description>
-            </mat-expansion-panel-header>
-        
-            <ng-container *ngIf="cDetails?.sellServices?.sellServices">
-                <span *ngFor="let c of cDetails?.sellProducts?.products; let last=last;">{{c?.name + (!last ? ', ' : '')}}</span>
-            </ng-container>
-        </mat-expansion-panel>
-
-        <mat-expansion-panel [expanded]="true" hideToggle>
-            <mat-expansion-panel-header>
-              <mat-panel-title style="font-weight: 500;">
-                {{businessCoachQuestions['sellServices']}}
-              </mat-panel-title>
-              <mat-panel-description style="place-content: flex-end; align-items: center;">
-                {{cDetails?.sellServices?.sellServices ? 'Yes' : 'No'}}
-                <!-- <i fxFlex="10" [ngClass]="cDetails?.sellServices?.sellServices ? 'fad fa-check-circle' : 'fad fa-times-circle'"
-                    style="vertical-align: middle; font-size: 1.5em;"></i> -->
-              <!-- <mat-icon>{{cDetails?.sellServices?.sellServices ? 'fad fa-check-circle' : 'fad fa-times-circle'}}</mat-icon> -->
-              </mat-panel-description>
-            </mat-expansion-panel-header>
-        
-            <ng-container *ngIf="cDetails?.sellServices?.sellServices">
-                <span *ngFor="let c of cDetails?.sellServices?.services; let last=last;">{{c?.name + (!last ? ', ' : '')}}</span>
-            </ng-container>
-        </mat-expansion-panel>
-
-    </mat-accordion>
 </ng-template>
 
 <swal #successfulRSVP title="RSVP Successful!" type="success" [showConfirmButton]="false">
@@ -561,3 +235,32 @@
                 Events</a>
     </div>
 </swal>
+
+<ng-template #addBlockLevelCommentTemplate let-cDetails="details" let-comments="comments">
+    <!-- {{selectedBlock | json}} -->
+    <aside class="sidebar" *ngIf="!(isHandset$ | async)">
+        <app-comment-side-nav (closeCommentSideBar)="selectedBlock = null" [selectedBlock]="selectedBlock" [selectedPost]="cDetails" [comments]="comments"></app-comment-side-nav>
+    </aside>
+    <!-- <ng-container *ngIf="selectedBlock && (isHandset$ | async)">
+        <mat-icon (click)="selectedBlock['__show'] = null; selectedBlock = null">close</mat-icon>
+        <div class="sidebar-card" style="padding: 10px; width: fit-content;">
+            <div class="tab-pane fade show product-tab">
+                <div class="thread">
+                    <ul class="media-list thread-list" style="list-style: none; padding-bottom: 0;">
+                        <div *ngFor="let c of comments">
+                            <li [id]="c?._id" *ngIf="c?.blockSpecificComment && c?.blockId === selectedBlock?._id"
+                                class="single-thread">
+                                <app-comment [comment]="c" [referenceId]="cDetails?._id"></app-comment>
+                            </li>
+                        </div>
+                    </ul>
+                </div>
+            </div>
+    
+            <div class="comment-form-area" style="padding-left: 0; padding-right: 0;">
+                <app-add-comment [referenceId]="cDetails?._id" [blockId]="selectedBlock?._id"
+                    [showLabel]="true"></app-add-comment>
+            </div>
+        </div>
+    </ng-container> -->
+</ng-template>

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Injector } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../core/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -21,19 +21,23 @@ import { LikeDislikeComponent } from './components/like-dislike/like-dislike.com
 import { VideoChatComponent } from '../video-chat/video-chat.component';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { AddPostMenuComponent } from './components/add-post-menu/add-post-menu.component';
-import { SoftwareDevMenuComponent } from './components/software-dev-menu/software-dev-menu.component';
 import { CompaniesListComponent } from '../companies/companies-list/companies-list.component';
 // import { Ng5SliderModule } from 'ng5-slider';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { MdePopoverModule } from '@material-extended/mde';
-import { AgmCoreModule } from '@agm/core';
-import { environment } from '../../environments/environment';
 import { CommentService } from './services/comment.service';
 import { ToastrModule } from 'ngx-toastr';
 import { AddJobComponent } from '../job/add-job/add-job.component';
-import { AddCompanyComponent } from '../companies/add-company/add-company.component';
 import { BriefPostComponent } from './components/brief-post/brief-post.component';
-
+import { AutocompleteComponent } from './components/autocomplete/autocomplete.component';
+import { AddCollaboratorsComponent } from './components/add-collaborators/add-collaborators.component';
+import { AddAssigneeComponent } from './components/add-assignee/add-assignee.component';
+import { PaginatorComponent } from './components/paginator/paginator.component';
+import { AddCommentComponent } from './components/add-comment/add-comment.component';
+import { ChatBoxComponent } from './components/chat-box/chat-box.component';
+import { PostTypeNavComponent } from './components/post-type-nav/post-type-nav.component';
+import { CommentSideNavComponent } from './components/comment-side-nav/comment-side-nav.component';
+import { AppInjector } from './services/app.injector.service';
 
 export function hljsLanguages() {
   return [
@@ -43,7 +47,27 @@ export function hljsLanguages() {
   ];
 }
 @NgModule({
-  declarations: [BreadcumbComponent, EditorComponent, CommentComponent, DatatableComponent, SafePipe, LikeDislikeComponent, VideoChatComponent, AddPostMenuComponent, SoftwareDevMenuComponent, CompaniesListComponent, AddJobComponent, BriefPostComponent],
+  declarations: [
+    BreadcumbComponent,
+    EditorComponent,
+    CommentComponent,
+    DatatableComponent,
+    SafePipe,
+    LikeDislikeComponent,
+    VideoChatComponent,
+    AddPostMenuComponent,
+    CompaniesListComponent,
+    AddJobComponent,
+    BriefPostComponent,
+    AutocompleteComponent,
+    AddCollaboratorsComponent,
+    AddAssigneeComponent,
+    PaginatorComponent,
+    AddCommentComponent,
+    ChatBoxComponent,
+    PostTypeNavComponent,
+    CommentSideNavComponent,
+  ],
   imports: [
     CommonModule,
     FormsModule,
@@ -66,10 +90,6 @@ export function hljsLanguages() {
     // Ng5SliderModule,
     NgSelectModule,
     MdePopoverModule,
-    AgmCoreModule.forRoot({
-      apiKey: environment.googleAPIKey,
-      libraries: ['places']
-    }),
     ToastrModule.forRoot({
       closeButton: true,
       enableHtml: true,
@@ -79,14 +99,19 @@ export function hljsLanguages() {
   ],
   exports: [
     BreadcumbComponent,
+    ChatBoxComponent,
     EditorComponent,
     CommentComponent,
+    AddCommentComponent,
     DatatableComponent,
     LikeDislikeComponent,
     VideoChatComponent,
     AddPostMenuComponent,
-    SoftwareDevMenuComponent,
     BriefPostComponent,
+    AutocompleteComponent,
+    PaginatorComponent,
+    PostTypeNavComponent,
+    CommentSideNavComponent,
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
@@ -101,8 +126,7 @@ export function hljsLanguages() {
     SafePipe,
     // Ng5SliderModule,
     NgSelectModule,
-    MdePopoverModule,
-    AgmCoreModule
+    MdePopoverModule
   ],
   entryComponents: [
     AddJobComponent,
@@ -110,4 +134,8 @@ export function hljsLanguages() {
   ],
   providers: [CommentService]
 })
-export class SharedModule { }
+export class SharedModule {
+  constructor(private injector: Injector) {
+    AppInjector.setInjector(this.injector);
+  }
+}

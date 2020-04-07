@@ -1,19 +1,16 @@
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
-import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { BreadCumb } from '../../shared/models/bredcumb.model';
 import { FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
-import { Subscription, of, concat, Observable, Subject } from 'rxjs';
-import { City } from '../../shared/models/city.model';
+import { Subscription, of, } from 'rxjs';
 import { MatAutocomplete } from '@angular/material/autocomplete';
 import { AuthService } from '../../core/services/auth.service';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../core/store/state/app.state';
 import { ActivatedRoute } from '@angular/router';
 import { FormService } from '../../shared/services/form.service';
-import { CompanyService } from '../../companies/company.service';
 import { SetSelectedPost, GetPostById, AddPost, UpdatePost } from '../../core/store/actions/post.actions';
 import { selectSelectedPost } from '../../core/store/selectors/post.selectors';
-import { tap, switchMap, distinctUntilChanged, catchError } from 'rxjs/operators';
+import { tap, switchMap, } from 'rxjs/operators';
 import { Post } from '../../shared/models/post.model';
 import { PostStatus } from '../../shared/models/poststatus.enum';
 import { PostType } from '../../shared/models/post-types.enum';
@@ -22,17 +19,12 @@ import { EditorComponent } from '../../shared/components/editor/editor.component
 @Component({
   selector: 'app-add-job',
   templateUrl: './add-job.component.html',
-  styleUrls: ['./add-job.component.scss'],
-  providers: [CompanyService]
+  styleUrls: ['./add-job.component.scss']
 })
 export class AddJobComponent implements OnInit, OnDestroy {
 
-  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   breadcumb: BreadCumb;
   jobForm: FormGroup;
-  allCompanies = [];
-
-  edit: boolean;
 
   get createdBy() {
     return this.jobForm.get('createdBy');
@@ -54,23 +46,7 @@ export class AddJobComponent implements OnInit, OnDestroy {
     return this.jobForm.get('status');
   }
 
-  visible = true;
-  selectable = true;
-  removable = true;
-  addOnBlur = true;
-
   subscription$: Subscription;
-
-  citySuggestions$: Observable<City[]>;
-  cityInput$ = new Subject<string>();
-  citiesLoading = false;
-
-  roles$: Observable<any[]>;
-  rolesLoading = false;
-  roleInput$ = new Subject<string>();
-
-  salaryRangeFrom = 30;
-  salaryRangeTo = 50;
 
   // public dialogRef = null;
   // public data;
@@ -83,7 +59,6 @@ export class AddJobComponent implements OnInit, OnDestroy {
     private store: Store<AppState>,
     private activatedRoute: ActivatedRoute,
     public formService: FormService,
-    private companyService: CompanyService,
   ) {
     // this.dialogRef = this.injector.get(MatDialogRef, null);
     // this.data = this.injector.get(MAT_DIALOG_DATA, null);
@@ -91,12 +66,9 @@ export class AddJobComponent implements OnInit, OnDestroy {
     this.breadcumb = {
       title: 'Add Job Details',
       path: [
+
         {
-          name: 'Dashboard',
-          pathString: '/'
-        },
-        {
-          name: 'Add Job'
+          name: PostType.Job
         }
       ]
     };
@@ -110,14 +82,13 @@ export class AddJobComponent implements OnInit, OnDestroy {
      * get the job by fetching id from the params
      */
 
-    if (this.activatedRoute.snapshot.parent && this.activatedRoute.snapshot.parent.routeConfig && this.activatedRoute.snapshot.parent.routeConfig.path === 'add-job') {
+    if (this.activatedRoute.snapshot.parent && this.activatedRoute.snapshot.parent.routeConfig && this.activatedRoute.snapshot.parent.routeConfig.path === `add-${PostType.Job}`) {
       this.store.dispatch(SetSelectedPost({ post: null }));
       this.jobFormInitialization(null, referencePostId);
     } else {
       this.subscription$ = this.store.select(selectSelectedPost).pipe(
         tap((h: Post) => {
           this.jobFormInitialization(h, referencePostId);
-          this.edit = true;
         }),
         switchMap((h: Post) => {
           if (!h) {
@@ -150,7 +121,6 @@ export class AddJobComponent implements OnInit, OnDestroy {
       name: new FormControl(i && i.name ? i.name : '', Validators.required),
       description: new FormControl(i && i.description ? i.description : ''),
       jobProfile: new FormControl(i && i.jobProfile ? i.jobProfile : []),
-      company: new FormControl(i && i.company ? i.company._id : '', Validators.required),
       status: new FormControl(i && i.status ? i.status : PostStatus.Drafted),
       _id: new FormControl(i && i._id ? i._id : ''),
       cities: new FormControl(i && i.cities && i.cities.length ? i.cities : []),
@@ -165,35 +135,6 @@ export class AddJobComponent implements OnInit, OnDestroy {
     if (referencePostId) {
       this.jobForm.addControl('referencePostId', new FormControl(referencePostId));
     }
-
-    this.citySuggestions$ = concat(
-      of([]), // default items
-      this.cityInput$.pipe(
-        distinctUntilChanged(),
-        tap(() => this.citiesLoading = true),
-        switchMap(term => this.formService.findFromCollection(term, 'cities').pipe(
-          catchError(() => of([])), // empty list on error
-          tap(() => this.citiesLoading = false)
-          ))
-        )
-    );
-
-    this.roles$ = concat(
-      of([]), // default items
-      this.roleInput$.pipe(
-        distinctUntilChanged(),
-        tap(() => this.rolesLoading = true),
-        switchMap(term => this.formService.findFromCollection(term, 'tags', 'role').pipe(
-          catchError(() => of([])), // empty list on error
-          tap(() => this.rolesLoading = false)
-          ))
-        )
-    );
-
-    this.companyService.getCompaniesByType('').subscribe((companies) => {
-      this.allCompanies = companies;
-    });
-
   }
 
   async submit(status) {
@@ -205,16 +146,12 @@ export class AddJobComponent implements OnInit, OnDestroy {
 
     this.statusFormControl.setValue(status);
 
-    this.jobForm.get('salaryRangeFrom').setValue(this.salaryRangeFrom);
-    this.jobForm.get('salaryRangeTo').setValue(this.salaryRangeTo);
-
     const blocks =  await this.descriptionEditor.editor.save();
     this.descriptionFormControl.setValue(blocks.blocks);
 
     if (this.authService.loggedInUser && !this.createdBy.value) {
       this.createdBy.setValue(this.authService.loggedInUser._id);
     }
-
 
     if (this.idFromControl && !this.idFromControl.value) {
       this.jobForm.removeControl('_id');
@@ -244,18 +181,6 @@ export class AddJobComponent implements OnInit, OnDestroy {
 
   addCitiesFn(name) {
     return { name };
-  }
-
-  addCompany = (name: string) => {
-    if (name) {
-      return new Promise((resolve, reject) => {
-        this.companyService.addCompany({ name, createdBy: this.authService.loggedInUser._id }).subscribe(c => {
-          this.allCompanies.unshift(c);
-          this.allCompanies = this.allCompanies.slice();
-          return resolve({name: c.name, _id: c._id});
-        })
-      })
-    }
   }
 
 }

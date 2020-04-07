@@ -21,10 +21,7 @@ export class SubscriptionSuccessComponent implements OnInit {
     this.breadcumb = {
       title: 'Succesfully Subscribed',
       path: [
-        {
-          name: 'Dashboard',
-          pathString: '/'
-        },
+
         {
           name: 'Membership'
         },

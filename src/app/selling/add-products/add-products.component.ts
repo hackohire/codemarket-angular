@@ -30,16 +30,6 @@ export class AddProductsComponent implements OnInit, OnDestroy {
 
   productForm: FormGroup;
 
-  modules = {
-    formula: true,
-    // imageResize: {},
-    syntax: true,
-  };
-
-  edit: boolean;
-
-  urlRegex = '^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$';
-
   get createdByFormControlValue() {
     return this.productForm.get('createdBy').value;
   }
@@ -105,12 +95,9 @@ export class AddProductsComponent implements OnInit, OnDestroy {
     this.breadcumb = {
       title: 'Add the Coding Problems you face in your day to day life with their solution, And start earning passive income',
       path: [
+
         {
-          name: 'Dashboard',
-          pathString: '/'
-        },
-        {
-          name: 'Add Product'
+          name: PostType.Product
         }
       ]
     };
@@ -123,14 +110,13 @@ export class AddProductsComponent implements OnInit, OnDestroy {
      * get the product by fetching id from the params
      */
 
-    if (this.activatedRoute.snapshot.parent.routeConfig.path === 'add-product') {
+    if (this.activatedRoute.snapshot.parent.routeConfig.path === `add-${PostType.Product}`) {
       this.store.dispatch(SetSelectedPost({ post: null }));
       this.productFormInitialization(null);
     } else {
       this.subscription$ = this.store.select(selectSelectedPost).pipe(
         tap((p: Product) => {
           this.productFormInitialization(p);
-          this.edit = true;
         }),
         switchMap((p: Product) => {
           if (!p) {

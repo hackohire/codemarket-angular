@@ -19,6 +19,7 @@ import moment from 'moment';
 import { AddJobComponent } from '../../job/add-job/add-job.component';
 import { SetSelectedPost, GetPostById } from '../../core/store/actions/post.actions';
 import { EditorComponent } from '../../shared/components/editor/editor.component';
+import { PostType } from '../../shared/models/post-types.enum';
 
 @Component({
   selector: 'app-dream-job-details',
@@ -28,6 +29,8 @@ import { EditorComponent } from '../../shared/components/editor/editor.component
 export class DreamJobDetailsComponent implements OnInit, OnDestroy {
 
   details$: Observable<Post>;
+
+  collaborators: string[];
 
   postDetails: Post;
   isUserAttending: boolean; /** Only for the event */
@@ -43,7 +46,7 @@ export class DreamJobDetailsComponent implements OnInit, OnDestroy {
 
   commentId: string;
 
-  connectedJobsList = []
+  connectedJobsList = [];
 
   dreamJobView = '';
   dreamJobViewLinks = [
@@ -67,12 +70,7 @@ export class DreamJobDetailsComponent implements OnInit, OnDestroy {
     public dialog: MatDialog
   ) {
     this.breadcumb = {
-      path: [
-        {
-          name: 'Dashboard',
-          pathString: '/'
-        }
-      ]
+      path: [{name: PostType.Dreamjob}]
     };
 
     /** Peer Subscription for Video Call */
@@ -101,8 +99,12 @@ export class DreamJobDetailsComponent implements OnInit, OnDestroy {
         if (p) {
           this.postDetails = p;
           this.details$ = of(p);
-          this.initializeCommentForm(p, 'dream-job');
+          this.initializeCommentForm(p, PostType.Dreamjob);
           this.getJobsConnectedWithDreamJob(postId);
+
+          this.collaborators = p.collaborators.map((cDetail) => {
+            return cDetail._id;
+          });
         } else if (this.postDetails && this.postDetails._id === postId) {
           /** Comes inside this block, only when we are already in a post details page, and by using searh,
            * we try to open any other post detials page
@@ -131,7 +133,7 @@ export class DreamJobDetailsComponent implements OnInit, OnDestroy {
     this.commentForm = new FormGroup({
       text: new FormControl(''),
       referenceId: new FormControl(p._id),
-      type: new FormControl(commentType ? commentType : 'dream-job'),
+      type: new FormControl(commentType ? commentType : PostType.Dreamjob),
     });
 
     this.commentService.getCommentsByReferenceId(p, this.commentId);
@@ -193,7 +195,7 @@ export class DreamJobDetailsComponent implements OnInit, OnDestroy {
   }
 
   getJobsConnectedWithDreamJob(postId) {
-    this.postService.getAllPosts({limit: 0, pageNumber: 0}, 'job', postId).pipe(
+    this.postService.getAllPosts({limit: 0, pageNumber: 0}, 'job', {referencePostId: postId}).pipe(
       map((result: any) => {
         if (result && result.posts) {
           /** Set the data for the datatable  */

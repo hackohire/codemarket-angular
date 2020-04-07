@@ -6,10 +6,12 @@ import List from '@editorjs/list';
 import Marker from '@editorjs/marker';
 // import Quote from '@editorjs/quote';
 import Table from '@editorjs/table';
+import Delimiter from '@editorjs/delimiter';
 // import Embed from '@editorjs/embed';
 import Embed from '../../../editor-js/plugins/embed';
 import Paragraph from '../../../editor-js/plugins/paragraph/bundle';
 import LinkTool from '@editorjs/link';
+import { AttachesTool } from '../../../editor-js/plugins/attach-files/attach';
 // import Warning from '@editorjs/warning';
 import Storage from '@aws-amplify/storage';
 import { environment } from 'src/environments/environment';
@@ -24,9 +26,14 @@ import { Comment } from '../../models/comment.model';
 import { isPlatformBrowser } from '@angular/common';
 const path = require('path');
 import editorJS from '../../../editor-js/dist/editor';
-import EditorJS from '@editorjs/editorjs';
+import InlineCode from '@editorjs/inline-code';
+import EditorJS, { EditorConfig } from '@editorjs/editorjs';
 import { PostService } from '../../services/post.service';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { of } from 'rxjs';
+import { map, share, tap } from 'rxjs/operators';
+
 @Component({
   selector: 'app-editor',
   templateUrl: './editor.component.html',
@@ -35,7 +42,13 @@ import { Subscription } from 'rxjs/internal/Subscription';
 })
 export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit {
 
+  isHandset: boolean;
+
+  fileExtensions = AttachesTool.EXTENSIONS;
+
   editor: EditorJS;
+  of = of;
+  selectedBlockIndex: number;
   isPlatformBrowser = false;
   @Input() post: Post; /** post for view mode */
   @Input() companyPostId: string;
@@ -43,13 +56,13 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
   @Input() id: string;
   @Input() readOnly = false; /** read only mode */
 
-  _data: any [];
+  _data: any[];
   @Input()
   set data(updatedData) {
     this._data = updatedData;
     if (this.editor && Object.keys(this.editor).length !== 0) {
       if (updatedData && updatedData.length) {
-        this.editor.blocks.render({blocks: updatedData});
+        this.editor.render({ blocks: updatedData });
       } else {
         this.editor.blocks.clear();
       }
@@ -63,8 +76,11 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
   @Output() output: EventEmitter<any> = new EventEmitter(); /** Emitting data with user interactions */
   @Input() importArticleSubscription = false;
   @ViewChild('editorRef', { static: false }) editorRef: ElementRef;
+  @ViewChild('editorViewRef', { static: true }) editorViewRef: ElementRef;
 
-  subscriptions$  = new Subscription();
+  @Output() showComments: EventEmitter<{ block: any }> = new EventEmitter();
+
+  subscriptions$ = new Subscription();
 
   @Input() editorStyle = {
     background: '#eff1f570',
@@ -75,7 +91,7 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
 
   /** Variables related to block level comments */
   @Input() blockLevelComments = false;
-  @Input() commentsList: Comment[]
+  @Input() commentsList: Comment[];
   anonymousAvatar = '../../../../assets/images/anonymous-avatar.jpg';
   s3FilesBucketURL = environment.s3FilesBucketURL;
 
@@ -88,7 +104,8 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
     public authService: AuthService,
     public commentService: CommentService,
     @Inject(PLATFORM_ID) public _platformId: Object,
-    private postService: PostService
+    private postService: PostService,
+    private breakpointObserver: BreakpointObserver,
   ) {
     this.isPlatformBrowser = isPlatformBrowser(this._platformId);
   }
@@ -97,20 +114,29 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
     if (this.post) {
       this.initializeCommentForm(this.post);
     }
+
+    this.subscriptions$.add(
+      this.breakpointObserver.observe(Breakpoints.Handset)
+      .pipe(
+        map(result => result.matches),
+        tap(result => this.isHandset = result),
+        share()
+      ).subscribe()
+    );
   }
 
   ngAfterViewInit(): void {
     /** Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
      * Add 'implements AfterViewInit' to the class.
-    */
+     */
 
     if (!this.readOnly) {
       this.initiateEditor();
     }
 
     /** Get all the code elements from DOM and highlight them as code snippets using highlight.js */
-    if (this.editorRef && isPlatformBrowser(this._platformId) && this.editorRef.nativeElement) {
-      this.editorRef.nativeElement.querySelectorAll('pre code').forEach((block: HTMLElement) => {
+    if (this.editorViewRef && isPlatformBrowser(this._platformId) && this.editorViewRef.nativeElement) {
+      this.editorViewRef.nativeElement.querySelectorAll('pre code').forEach((block: HTMLElement) => {
         this._hljs.highlightBlock(block);
       });
     }
@@ -158,17 +184,17 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
   async addComment(blockId: string, addCommentEditor: EditorComponent) {
     console.log(this.commentForm.value);
     if (this.authService.loggedInUser) {
-      const blocks =  await addCommentEditor.editor.save();
+      const blocks = await addCommentEditor.editor.save();
       this.commentForm.get('text').setValue(blocks.blocks);
       this.commentForm.addControl('createdBy', new FormControl(this.authService.loggedInUser._id));
       this.commentForm.get('blockId').setValue(blockId),
-      this.subscriptions$.add(
-        this.commentService.addComment(this.commentForm.value).subscribe((c) => {
-          if (c) {
-            addCommentEditor.editor.blocks.clear();
-          }
-        })
-      )
+        this.subscriptions$.add(
+          this.commentService.addComment(this.commentForm.value).subscribe((c) => {
+            if (c) {
+              addCommentEditor.editor.blocks.clear();
+            }
+          })
+        );
     } else {
       this.authService.checkIfUserIsLoggedIn(true);
     }
@@ -183,7 +209,6 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
 
     console.log(this.id);
     if (isPlatformBrowser(this._platformId)) {
-      // this.goalFormInitialization();
       if (this.importArticleSubscription) {
         this.subscriptions$.add(
           this.postService.contentFromAnotherArticle.subscribe(p => {
@@ -191,7 +216,7 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
               this.editor.blocks.renderFromHTML(p);
             }
           })
-        )
+        );
       }
 
       this.editor = new editorJS({
@@ -202,6 +227,11 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
             class: Embed,
             inlineToolbar: true
           },
+          delimiter: Delimiter,
+          inlineCode: InlineCode,
+          // delimiter: {
+          //   class: Delimiter
+          // },
           paragraph: {
             class: Paragraph
           },
@@ -225,7 +255,7 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
             inlineToolbar: true,
             config: {
               rows: 2,
-              cols: 3,
+              cols: 2,
             },
           },
           Marker: {
@@ -242,6 +272,51 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
             class: List,
             inlineToolbar: true,
           },
+          attaches: {
+            class: AttachesTool,
+            toolbox: {
+              title: 'Attach Files'
+            },
+            config: {
+              // injector: this.injector,
+              endpoint: environment.s3FilesBucketURL,
+              uploader: {
+                /**
+                 * Upload file to the server and return an uploaded image data
+                 * @param { File } file - file selected from the device or pasted by drag-n-drop
+                 * @return {Promise.<{success, file: {url}}>}
+                 */
+                uploadByFile: (file) => {
+                  // your own uploading logic here
+
+                  const fileNameSplitArray = file.name.split('.');
+                  const fileExt = fileNameSplitArray.pop();
+                  const fileName = fileNameSplitArray[0] + '-' + new Date().toISOString() + '.' + fileExt;
+
+                  return Storage.vault.put(fileName, file, {
+
+                    bucket: appConstants.fileS3Bucket,
+
+                    level: 'public',
+
+                    contentType: file.type,
+                  }).then((uploaded: any) => {
+                    console.log('uploaded', uploaded);
+                    return {
+                      success: 1,
+                      createdBy: {_id: this.authService.loggedInUser._id },
+                      file: {
+                        url: environment.s3FilesBucketURL + uploaded.key,
+                        name: fileName,
+                        size: file.size
+                        // any other image data you want to store, such as width, height, color, extension, etc
+                      }
+                    };
+                  });
+                },
+              }
+            }
+          },
           image: {
             class: ImageTool,
             toolbox: {
@@ -252,7 +327,7 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
               uploader: {
                 /**
                  * Upload file to the server and return an uploaded image data
-                 * @param {File} file - file selected from the device or pasted by drag-n-drop
+                 * @param { File } file - file selected from the device or pasted by drag-n-drop
                  * @return {Promise.<{success, file: {url}}>}
                  */
                 uploadByFile(file) {
@@ -312,25 +387,24 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
         placeholder: this.placeholder ? this.placeholder : 'Let`s write!',
         onReady: (() => {
 
-          // Get all the code elements from DOM and highlight them as code snippets using highlight.js
-          // if (isPlatformBrowser(this._platformId) && this.editorRef.nativeElement) {
-          //   this.editorRef.nativeElement.querySelectorAll('pre code').forEach((block: HTMLElement) => {
-          //     this._hljs.highlightBlock(block);
-          //   });
-
-          //   if (this.readOnly && isPlatformBrowser(this._platformId)) {
-          //     const elements = document.querySelectorAll('[contenteditable=true]');
-          //     elements.forEach(element => {
-          //       element.setAttribute('contenteditable', 'false');
-          //     });
-          //   }
-          // }
+          // this.editor.blocks.render({blocks: this.data});
 
           /** Focus at end */
           this.editor.focus(true);
 
           this.addControlsIfVideoElement();
           this.zoomInZoomOutForImages();
+
+          // /** Open editor toolbar manually, which will load only "+" icon */
+          // this.editor.toolbar.open();
+
+          // /** Then we fetch the reference of "+" button and click it programatically */
+          // setTimeout(() => {
+          //   const a = this.editorRef.nativeElement.getElementsByClassName('ce-toolbar__plus');
+          //   console.log(a);
+          //   a[0].click();
+          //   a[0].blur();
+          // }, 500);
         }),
         onChange: (() => {
           // if (this.editor && this.editor.save) {
@@ -363,10 +437,10 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
   /** On click on every image of the editor zoom in */
   zoomInZoomOutForImages() {
     /** Checking if editor referene is there */
-    if (this.editorRef && isPlatformBrowser(this._platformId)) {
+    if (this.editorViewRef && isPlatformBrowser(this._platformId)) {
       /** FInding and running the loop over all the img elements in editor reference */
 
-      this.editorRef.nativeElement.querySelectorAll('img').forEach((v: HTMLImageElement) => {
+      this.editorViewRef.nativeElement.querySelectorAll('img').forEach((v: HTMLImageElement) => {
         /** Setting zoom icon in normal mode */
         v.style.cursor = 'zoom-in';
 
@@ -408,6 +482,11 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
     const template = `<html><body><style type="text/css">.gist {overflow:auto;} .gist .gist-file .gist-data { max-height: 86vh; }</style><script src="gistSrc"></script></body></html>`;
     const replaced = template.replace('gistSrc', url + '.js');
     return replaced;
+  }
+
+  insertNewBlock(type: string) {
+    this.editor.blocks.insert(type, {}, {}, this.editorRef.nativeElement.getElementsByClassName('ce-block').length, true);
+    this.editor.focus(true);
   }
 
 }

@@ -23,6 +23,7 @@ import { SetSelectedPost } from '../../core/store/actions/post.actions';
 import { selectSelectedPost } from '../../core/store/selectors/post.selectors';
 import { Post } from '../../shared/models/post.model';
 import { EditorComponent } from '../../shared/components/editor/editor.component';
+import { PostType } from '../../shared/models/post-types.enum';
 
 @Component({
   selector: 'app-product-details',
@@ -32,13 +33,6 @@ import { EditorComponent } from '../../shared/components/editor/editor.component
 })
 export class ProductDetailsComponent implements OnInit, OnDestroy {
 
-  // modules for quill view component
-  modules = {
-    formula: true,
-    // imageResize: {},
-    syntax: true,
-  };
-
   likeCount: number;
   productDetails: Product;
   purchasedByLoggedInUser: boolean;
@@ -47,7 +41,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
   s3FilesBucketURL = environment.s3FilesBucketURL;
 
   commentsList: any[];
-
+  collaborators: string[];
   breadcumb: BreadCumb;
 
   commentForm: FormGroup;
@@ -73,11 +67,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     this.breadcumb = {
       path: [
         {
-          name: 'Dashboard',
-          pathString: '/'
-        },
-        {
-          name: 'Product Details'
+          name: PostType.Product
         }
       ]
     };
@@ -96,7 +86,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
       this.subscription$.unsubscribe();
       // this.store.dispatch(SetSelectedPost({ post: null }));
     }
-    
+
     /** Unsubscribes from Comments Related Subscription */
     this.commentService.unsubscribe();
   }
@@ -113,7 +103,9 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
       tap((p: Product) => {
         if (p) {
           this.productDetails = p;
-
+          this.collaborators = this.productDetails.collaborators.map((cDetail) => {
+            return cDetail._id;
+          })
           this.productDetails$ = of(p);
 
           this.subscription$.add(
@@ -127,7 +119,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
           this.commentForm = new FormGroup({
             text: new FormControl(''),
             referenceId: new FormControl(p._id),
-            type: new FormControl('product'),
+            type: new FormControl(PostType.Product),
           });
 
 

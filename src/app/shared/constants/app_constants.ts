@@ -11,11 +11,19 @@ export const appConstants = {
     [PostType.HelpRequest]: 'question-circle',
     [PostType.Howtodoc]: 'file-exclamation',
     [PostType.Testing]: 'tasks',
-    [PostType.Teamskill]: 'users-crown',
-    [PostType.Design]: 'marker',
     [PostType.Event]: 'calendar-plus',
     [PostType.Goal]: 'bullseye-arrow',
-    [PostType.Dreamjob]: 'briefcase'
+    [PostType.Dreamjob]: 'briefcase',
+    [PostType.Job]: 'briefcase',
+    [PostType.Bug]: 'bug',
+    [PostType.Challenge]: 'puzzle-piece',
+    [PostType.Class]: 'briefcase',
+    [PostType.Service]: 'briefcase',
+    [PostType.CompetitiveAdvantage]: 'briefcase',
+    [PostType.Assignment]: 'sticky-note',
+    [PostType.Question]: 'sticky-note',
+    [PostType.Note]: 'sticky-note',
+    [PostType.Business]: 'sticky-note'
   },
 
   fileS3Bucket: 'codemarket-files',
@@ -39,25 +47,6 @@ export const appConstants = {
     twitter_card_large: 'summary_large_image',
     logo_url: 'https://www.codemarket.io/assets/images/logo_qugbvk_c_scalew_282.png',
     gif_url: 'https://www.codemarket.io/assets/images/cm.gif'
-  },
-
-  careerCoachQuestions: {
-    gapAnalysis: 'I can do resume gap analysis',
-    careerCoachSessions: 'I can take part in weekly 30 mins career coach sessions',
-    helpingWithMockInterviews: 'I can take part in helping with mock interviews',
-    hiringMentoringSessions: 'I can take part in hiring mentoring sessions'
-  },
-
-  businessCoachQuestions: {
-    businessCoachSessions: 'Can You Take Part In Weekly 30 Mins Business Coaching?',
-    cities: 'In which cities can you provide business coaching?',
-    roles: 'What would you like to gain from business coaching? (Dream Job positions)',
-    companies: 'What are all companies can you coach?',
-    businessAreas: 'In what business areas can you provide business coaching?',
-    businessGoals: 'What business goals can you help with your coaching?',
-    businessChallenges: 'What business challenges can you give coaching for?',
-    sellProducts: 'Do you sell any products?',
-    sellServices: 'Do you sell any services?'
   },
 
   Notification: 'https://notificationsounds.com/soundfiles/4e4b5fbbbb602b6d35bea8460aa8f8e5/file-sounds-1096-light.wav',
@@ -204,15 +193,14 @@ export const appConstants = {
         _id
       }
       comments {
-        ...Comment
-      }
-      support {
-        time
-        description {
-          ...Description
-        }
+        ...Comments
       }
       likeCount
+      users {
+        _id
+        name
+        avatar
+      }
       createdBy {
         _id
         name
@@ -232,13 +220,6 @@ export const appConstants = {
         avatar
       }
       slug
-      connectedWithUser {
-        _id
-        name
-        avatar
-      }
-    
-
       comments {
         text {
           ...Description
@@ -260,6 +241,7 @@ export const appConstants = {
       dateRange
       address
       eventType
+      cover
       usersAttending {
         name
         _id
@@ -270,14 +252,11 @@ export const appConstants = {
         latitude
         address
       }
-      company {
-        name
-        _id
-      }
       companies {
         name
         _id
       }
+
       salaryCurrency
       salaryRangeFrom
       salaryRangeTo
@@ -286,63 +265,22 @@ export const appConstants = {
         _id
       }
 
-      gapAnalysis
-      careerCoachSessions
-      helpingWithMockInterviews
-      hiringMentoringSessions
-
-      businessCoachSessions,
-      businessAreas {
+      connectedPosts {
         name
+        slug
         _id
-        type
-      }
-      businessGoals {
-        name
-        _id
-        type
-      }
-      businessChallenges {
-        name
-        _id
-        type
-      }
-      sellProducts {
-        sellProducts
-        products {
-          name
-          _id
-          type
-        }
-      }
-      sellServices {
-        sellServices
-        services {
-          name
-          _id
-          type
-        }
       }
 
-      fundingCurrency
-      fundingAmount
-      fundingBy {
-        name
+      collaborators {
         _id
-      }
-      fundingTo {
         name
-        _id
-      }
-      fundingDate
-      fundingProcess {
-        ...Description
+        avatar
       }
 
-      hiringProcess {
-        ...Description
+      assignees {
+        _id
+        name
       }
-
 
       jobProfile {
         _id
@@ -350,9 +288,36 @@ export const appConstants = {
         type
       }
       timeline
-  
+
+      phone
+      email
+      birthDate
+      address
+      website
     }
     ${description}
     ${comment}
-    `
+    `,
+
+  postTypesArray: [
+    { name: PostType.Assignment, label: 'Assignment' },
+    { name: PostType.Bug, label: 'Bug' },
+    { name: PostType.Business, label: 'Business' },
+    { name: PostType.Challenge, label: 'Challenge' },
+    { name: PostType.Class, label: 'Class' },
+    { name: PostType.CompetitiveAdvantage, label: 'Competitive Advantage' },
+    { name: PostType.Contact, label: 'Contact' },
+    { name: PostType.Dreamjob, label: 'Dream Job' },
+    { name: PostType.Event, label: 'Event' },
+    { name: PostType.Goal, label: 'Goal' },
+    { name: PostType.Howtodoc, label: 'How-To-Doc' },
+    { name: PostType.Interview, label: 'Interview' },
+    { name: PostType.Job, label: 'Job' },
+    { name: PostType.Note, label: 'Notes' },
+    { name: PostType.Product, label: 'Product' },
+    { name: PostType.Question, label: 'Questions' },
+    { name: PostType.Requirement, label: 'Requirement' },
+    { name: PostType.Service, label: 'Service' },
+    { name: PostType.Testing, label: 'Testing' },
+  ],
 };

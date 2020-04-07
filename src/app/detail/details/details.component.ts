@@ -1,8 +1,8 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, Output, EventEmitter } from '@angular/core';
 import { Observable, of, Subscription } from 'rxjs';
 import { AppState } from 'src/app/core/store/state/app.state';
 import { Store } from '@ngrx/store';
-import { tap } from 'rxjs/operators/tap';
+import { tap, map, share } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BreadCumb } from 'src/app/shared/models/bredcumb.model';
 import { FormGroup, FormControl } from '@angular/forms';
@@ -10,11 +10,10 @@ import moment from 'moment';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { CommentService } from 'src/app/shared/services/comment.service';
 import { environment } from 'src/environments/environment';
-import { ShareService } from '@ngx-share/core';
 import { selectSelectedPost } from 'src/app/core/store/selectors/post.selectors';
 import { SetSelectedPost } from 'src/app/core/store/actions/post.actions';
 import { Post } from 'src/app/shared/models/post.model';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatPaginator } from '@angular/material';
 import { VideoChatComponent } from 'src/app/video-chat/video-chat.component';
 import Peer from 'peerjs';
 import { PostService } from '../../shared/services/post.service';
@@ -23,20 +22,28 @@ import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { Company } from '../../shared/models/company.model';
 import { User } from '../../shared/models/user.model';
 import { appConstants } from '../../shared/constants/app_constants';
-import { EditorComponent } from '../../shared/components/editor/editor.component';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-details',
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.scss'],
-  providers: [ShareService, CommentService]
+  providers: [CommentService]
 })
 export class DetailsComponent implements OnInit, OnDestroy {
 
   @ViewChild('successfulRSVP', { static: false }) successfulRSVP: SwalComponent;
   details$: Observable<Post>;
 
-  postDetails: Post | Company | any;
+  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
+    .pipe(
+      map(result => result.matches),
+      share()
+    );
+
+  postTypesArray = appConstants.postTypesArray;
+
+  postDetails: Post;
   isUserAttending: boolean; /** Only for the event */
   subscription$: Subscription = new Subscription();
   type: string; // product | help-request | interview | requirement | Testing | Howtodoc
@@ -48,13 +55,25 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
   commentForm: FormGroup;
   commentsList: any[];
-
+  collaborators: string[];
   peer: Peer;
 
   commentId: string;
+  blockId: string;
 
-  careerCoachQuestions = appConstants.careerCoachQuestions;
-  businessCoachQuestions = appConstants.businessCoachQuestions;
+  listOfConnectedPosts: { posts: Post[], total?: number } = { posts: [] };
+  totalOtherPosts: number;
+  paginator: MatPaginator;
+
+  showConnectedPosts = false;
+  selectedPostType = '';
+
+  selectedBlock = null;
+
+  selectedPost: Post;
+  selectedPostComments: Observable<Comment[]>;
+
+  displayChatBox = false;
 
   constructor(
     private store: Store<AppState>,
@@ -62,20 +81,11 @@ export class DetailsComponent implements OnInit, OnDestroy {
     public commentService: CommentService,
     public authService: AuthService,
     private dialog: MatDialog,
-    public share: ShareService,
     public postService: PostService,
     private router: Router,
-    private sweetAlertService: SweetalertService
+    private sweetAlertService: SweetalertService,
+    private breakpointObserver: BreakpointObserver,
   ) {
-    this.breadcumb = {
-      path: [
-        {
-          name: 'Dashboard',
-          pathString: '/'
-        }
-      ]
-    };
-
     /** Peer Subscription for Video Call */
     // this.userService.peer.subscribe((p) => {
     //   if (p) {
@@ -86,9 +96,11 @@ export class DetailsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-
+    /** Read the type of the post  */
     this.type = this.activatedRoute.snapshot.queryParams.type;
+
     this.commentId = this.activatedRoute.snapshot.queryParams['commentId'];
+    this.blockId = this.activatedRoute.snapshot.queryParams['blockId'];
 
     console.log(this.activatedRoute.snapshot.queryParams);
 
@@ -100,12 +112,29 @@ export class DetailsComponent implements OnInit, OnDestroy {
       tap((p: Post) => {
         if (p) {
           this.postDetails = p;
+          this.collaborators = this.postDetails.collaborators.map((cDetail) => {
+            return cDetail._id;
+          })
           this.details$ = of(p);
           this.initializeCommentForm(p, 'post');
+
+          /** SHow company in breadcrumb */
+          // if (p.companies && p.companies.length) {
+          //   this.breadcumb.path.unshift({ name: p.type });
+          // }
 
           /** Subscribe to loggedinuser, once loggedInUse is got, Check if the loggedInUder is
            * in the list of attendess or not
            **/
+
+          this.breadcumb = {
+            path: [
+              {
+                name: p.type,
+                pathString: '/'
+              }
+            ]
+          };
 
           this.subscription$.add(
             this.authService.loggedInUser$.subscribe((user) => {
@@ -118,7 +147,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
                 this.isUserAttending = false;
               }
             })
-          )
+          );
         } else if (this.postDetails && this.postDetails._id === postId) {
           /** Comes inside this block, only when we are already in a post details page, and by using searh,
            * we try to open any other post detials page
@@ -203,6 +232,11 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
     this.commentService.getCommentsByReferenceId(p, this.commentId);
 
+    if (this.blockId) {
+      this.selectedBlock = this.postDetails.description.find((b: any) => b._id === this.blockId);
+      console.log(this.selectedBlock);
+    }
+
   }
 
   getDate(d: string) {
@@ -210,21 +244,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
   }
 
 
-  async addComment(addCommentEditor: EditorComponent) {
-    if (this.authService.loggedInUser) {
-      const blocks =  await addCommentEditor.editor.save();
-      this.commentForm.get('text').setValue(blocks.blocks);
-      this.commentForm.addControl('createdBy', new FormControl(this.authService.loggedInUser._id));
 
-      this.subscription$.add(
-        this.commentService.addComment(this.commentForm.value).subscribe((c) => {
-          addCommentEditor.editor.clear();
-        })
-      );
-    } else {
-      this.authService.checkIfUserIsLoggedIn(true);
-    }
-  }
 
   fromNow(date) {
     const d = moment(date).isValid() ? date : new Date(+date);
@@ -243,4 +263,46 @@ export class DetailsComponent implements OnInit, OnDestroy {
     this.postService.editPost(details);
   }
 
+  trackByFn(index, item) {
+    return index; // or item.id
+  }
+
+  redirectToAddPost(p, postType) {
+    this.router.navigate(['../add-post'], { relativeTo: this.activatedRoute, state: { post: p }, queryParams: { type: postType } });
+  }
+
+  showCommentsOnSide(event: { block: any, comments, selectedPost}) {
+    console.log(event);
+    this.selectedBlock = event.block;
+    this.selectedPostComments = event.comments;
+    this.selectedPost = event.selectedPost;
+  }
+
+  getConnectedPosts(postType) {
+    this.showConnectedPosts = true;
+    this.selectedPostType = postType;
+
+    if (this.paginator) {
+      const paginationObj = {
+        pageNumber: this.paginator.pageIndex + 1, limit: this.paginator.pageSize ? this.paginator.pageSize : 10,
+        sort: { order: '' }
+      };
+
+      this.postService.getAllPosts(
+        paginationObj, '',
+        {
+          referencePostId: [this.postDetails._id],
+          connectedPosts: this.postDetails.connectedPosts.map(p => p._id),
+          postType
+        }
+      ).subscribe((u) => {
+        this.listOfConnectedPosts.posts = u.posts;
+        this.totalOtherPosts = u.total;
+      });
+    }
+  }
+
+  onChatClicked() {
+    this.displayChatBox = true;
+  }
 }

@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 import { CommentService } from '../shared/services/comment.service';
 import { appConstants } from '../shared/constants/app_constants';
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class CompanyService {
 
   companyFileds = gql`
@@ -20,6 +20,11 @@ export class CompanyService {
     cover
     cities {
       name
+      _id
+    }
+    owners {
+      name
+      avatar
       _id
     }
     description {
@@ -44,6 +49,12 @@ export class CompanyService {
       latitude
       address
     }
+    facebookLink
+    instagramLink
+    twitterLink
+    yelpLink
+    linkedinLink
+    websiteLink
   }
   ${description}
   `;
@@ -92,46 +103,6 @@ export class CompanyService {
     ).pipe(
       map((p: any) => p.data.updateCompany),
     );
-  }
-
-  /** On Adding Post Related to the company, listen Realtime  */
-  onCompanyPostChanges(company: Company) {
-    const COMPANY_SUBSCRIPTION = gql`
-    subscription onCompanyPostChanges($companyId: String) {
-      onCompanyPostChanges(companyId: $companyId){
-        postUpdated {
-          ...Post
-        }
-        postAdded {
-          ...Post
-        }
-        postDeleted {
-          _id
-        }
-      }
-    }
-    ${appConstants.postQuery}
-    `;
-
-    this.apollo.subscribe({
-      query: COMPANY_SUBSCRIPTION,
-      variables: { companyId: company._id }
-    }).pipe(
-      tap((p: any) => {
-        /** companyPostsList in the comment Service are mutable and hence we are mutating them here */
-        const data = p.data.onCompanyPostChanges;
-        if (data && data.postAdded) {
-          this.commentService.companyPostsList.unshift(data.postAdded);
-        } else if (data && data.postUpdated) {
-          const postToBeUpdated = this.commentService.companyPostsList.find(post => post._id === data.postUpdated._id);
-          postToBeUpdated['description'] = data.postUpdated.description;
-          postToBeUpdated['__edit'] = false;
-        } else if (data && data.postDeleted) {
-          const i = this.commentService.companyPostsList.findIndex(post => post._id === data.postDeleted._id);
-          this.commentService.companyPostsList.splice(i, 1);
-        }
-      })
-    ).subscribe();
   }
 
   getCompaniesByUserIdAndType(userId: string, companyType: string): Observable<Company[]> {
@@ -212,7 +183,7 @@ export class CompanyService {
       concatMap((company, index) => {
         return index === 0 ?
           of(company).pipe(tap(() => {
-            this.onCompanyPostChanges(company);
+            // this.onCompanyPostChanges(company);
             this.commentService.onCommentAdded({company}, []);
             this.commentService.onCommentUpdated({company}, []);
             this.commentService.onCommentDeleted({company}, []);
@@ -293,7 +264,7 @@ export class CompanyService {
     );
   }
 
-  redirectToCompanyDetails(companyId: string, view = 'home') {
+  redirectToCompanyDetails(companyId: string, view = 'posts') {
     this.router.navigate(['/', `company`, companyId],
       { queryParams: { view } }
       );

@@ -48,6 +48,26 @@ export const imageFragment = gql`
 }
 `;
 
+export const attachesFragment = gql`
+  fragment Attaches on AttachesBlock {
+  type
+  _id
+  data {
+    title
+    createdBy {
+      name
+      _id
+    }
+    file {
+      url
+      name
+      extension
+      size
+    }
+  }
+}
+`;
+
 export const listFragment = gql`
 fragment List on ListBlock {
   type
@@ -139,6 +159,7 @@ export const description = gql`
         ...Warning
         ...Embed
         ...LinkTool
+        ...Attaches
     }
     ${codeFragment}
     ${imageFragment}
@@ -150,9 +171,10 @@ export const description = gql`
     ${warningFragment}
     ${embedFragment}
     ${linkToolFragment}
+    ${attachesFragment}
 `;
 
-export const comment = gql`
+const CommentFragment = gql`
 fragment Comment on Comment {
   text {
     ...Description
@@ -176,29 +198,30 @@ fragment Comment on Comment {
       }
     }
   }
-  children {
-    _id
-    text {
-      ...Description
-    }
-    createdAt
-    createdBy {
-      _id
-      name
-      avatar
-      currentJobDetails {
-        jobProfile {
-          name
-          _id
-          type
-        }
-      }
-    }
-    parentId
-    referenceId
-  }
   blockId
   blockSpecificComment
+
+  referencePost {
+    name
+    _id
+    type
+    slug
+  }
+  referenceCompany {
+    name
+    _id
+    type
+  }
 }
 ${description}
+`;
+
+export const comment = gql`
+fragment Comments on Comment {
+  ...Comment
+  children {
+    ...Comment
+  }
+}
+${CommentFragment}
 `;

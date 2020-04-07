@@ -3,26 +3,25 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { tap } from 'rxjs/operators';
 import moment from 'moment';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { BlockToolData } from '@editorjs/editorjs';
 import { CommentService } from '../../services/comment.service';
 import { Comment } from '../../models/comment.model';
 import { environment } from 'src/environments/environment';
 import { SweetalertService } from '../../services/sweetalert.service';
 import { EditorComponent } from '../editor/editor.component';
+import uniqBy from 'lodash/uniqBy';
 
 @Component({
   selector: 'app-comment',
   templateUrl: './comment.component.html',
-  styleUrls: ['./comment.component.scss'],
-  providers: [CommentService]
+  styleUrls: ['./comment.component.scss']
 })
 export class CommentComponent implements OnInit {
 
   @Input() comment: Comment;
   @Input() referenceId: string;
   @Input() companyReferenceId: string;
-  @Input() userReferenceId: string;
-  @Input() postCreatedBy: string;
+  @Input() fromWhere: string;
+  @Input() isChildComment: boolean;
   // @Output() commentDeleted  = new EventEmitter();
   @Output() allowReplyToParent = new EventEmitter();
   replyCommentForm: FormGroup;
@@ -85,7 +84,7 @@ export class CommentComponent implements OnInit {
         tap((child) => {
           if (child && this.comment.children) {
             // this.comment.children.push(child);
-            // this.reply = false;
+            this.reply = this.fromWhere === 'chat' ? false: true;
             commentReplyEditor.editor.blocks.clear();
           }
         })
@@ -97,7 +96,7 @@ export class CommentComponent implements OnInit {
 
   deleteComment() {
     this.sweetAlertService.confirmDelete(() => {
-    this.commentService.deleteComment(this.comment._id).pipe(
+    this.commentService.deleteComment(this.comment._id, this.comment.referenceId).pipe(
       tap((d) => {
         // this.commentDeleted.emit(this.comment._id);
         // this.comment = null;
@@ -111,13 +110,17 @@ export class CommentComponent implements OnInit {
     const blocks =  await singleCommentEditor.editor.save();
     this.replyCommentForm.get('text').setValue(blocks.blocks);
 
-    this.commentService.updateComment(this.comment._id, this.replyCommentForm.get('text').value).pipe(
+    this.commentService.updateComment(this.comment._id, this.comment.referenceId, this.replyCommentForm.get('text').value).pipe(
       tap((d) => {
         if (d) {
           this.edit = false;
         }
       })
     ).subscribe();
+  }
+
+  fetchCommentators(children) {
+    return uniqBy(children, '_id');
   }
 
 }

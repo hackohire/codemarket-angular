@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ENTER, COMMA, SPACE } from '@angular/cdk/keycodes';
 import { FormGroup, FormControl } from '@angular/forms';
-import { Observable, Subject, concat, of } from 'rxjs';
+import { Observable, } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { selectLoggedInUser } from 'src/app/core/store/selectors/user.selector';
@@ -14,7 +14,6 @@ import { environment } from 'src/environments/environment';
 import { appConstants } from '../../shared/constants/app_constants';
 import { FormService } from '../../shared/services/form.service';
 import { CompanyService } from '../../companies/company.service';
-import { distinctUntilChanged, tap, switchMap, catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-edit-user-profile',
@@ -33,11 +32,6 @@ export class EditUserProfileComponent implements OnInit {
   // Profile Picture
   // image: Base64;
   // s3BucketUrl = environment.s3BucketURL;
-  roles$: Observable<any[]>;
-  rolesLoading = false;
-  roleInput$ = new Subject<string>();
-
-  allCompanies = [];
 
   currentAvatarUrl: string;
   anonymousAvatar = '../../../assets/images/ anonymous-avatar.jpg';
@@ -68,8 +62,8 @@ export class EditUserProfileComponent implements OnInit {
           location: new FormControl(this.loggedInUser ? this.loggedInUser.location : ''),
           programming_languages: new FormControl(this.loggedInUser && this.loggedInUser.programming_languages ? this.loggedInUser.programming_languages : []),
           currentJobDetails: new FormGroup({
-            jobProfile: new FormControl(this.loggedInUser && this.loggedInUser.currentJobDetails ? this.loggedInUser.currentJobDetails.jobProfile : []),
-            company: new FormControl(this.loggedInUser && this.loggedInUser.currentJobDetails && this.loggedInUser.currentJobDetails.company ? this.loggedInUser.currentJobDetails.company._id : ''),
+            jobProfile: new FormControl(this.loggedInUser && this.loggedInUser.currentJobDetails ? this.loggedInUser.currentJobDetails.jobProfile : null),
+            company: new FormControl(this.loggedInUser && this.loggedInUser.currentJobDetails && this.loggedInUser.currentJobDetails.company ? this.loggedInUser.currentJobDetails.company : ''),
             // jobProfile: new FormControl(this.loggedInUser && this.loggedInUser.currentJobDetails ?
             //   this.loggedInUser.currentJobDetails.jobProfile : ''),
             // companyName: new FormControl(this.loggedInUser && this.loggedInUser.currentJobDetails ?
@@ -79,22 +73,6 @@ export class EditUserProfileComponent implements OnInit {
           }),
           _id: new FormControl(this.loggedInUser ? this.loggedInUser._id : ''),
           avatar: new FormControl(this.loggedInUser && this.loggedInUser.avatar ? this.loggedInUser.avatar : '')
-        });
-
-        this.roles$ = concat(
-          of([]), // default items
-          this.roleInput$.pipe(
-            distinctUntilChanged(),
-            tap(() => this.rolesLoading = true),
-            switchMap(term => this.formService.findFromCollection(term, 'tags', 'role').pipe(
-              catchError(() => of([])), // empty list on error
-              tap(() => this.rolesLoading = false)
-              ))
-            )
-        );
-
-        this.companyService.getCompaniesByType('').subscribe((companies) => {
-          this.allCompanies = companies;
         });
 
         // if (this.avatar.value) {
@@ -161,22 +139,4 @@ export class EditUserProfileComponent implements OnInit {
 
     this.profilePic.nativeElement.value = null;
   }
-
-  addCompany = (name: string) => {
-    if (this.authService.loggedInUser) {
-      this.authService.checkIfUserIsLoggedIn(true);
-      return;
-    }
-    if (name) {
-      return new Promise((resolve, reject) => {
-        this.companyService.addCompany({ name, createdBy: this.authService.loggedInUser._id }).subscribe(c => {
-          this.allCompanies.unshift(c);
-          this.allCompanies = this.allCompanies.slice();
-          return resolve({name: c.name, _id: c._id});
-        });
-      });
-    }
-  }
-
-
 }

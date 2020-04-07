@@ -1,0 +1,52 @@
+@font-face {
+    font-family: 'Rectory Regular';
+    src: url('Rectory-Regular.eot');
+    src: local('Rectory Regular'), local('Rectory-Regular'),
+        url('Rectory-Regular.eot?#iefix') format('embedded-opentype'),
+        url('Rectory-Regular.woff2') format('woff2'),
+        url('Rectory-Regular.woff') format('woff'),
+        url('Rectory-Regular.ttf') format('truetype'),
+        url('Rectory-Regular.svg#Rectory-Regular') format('svg');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Rectory Bold';
+    src: url('Rectory-Bold.eot');
+    src: local('Rectory Bold'), local('Rectory-Bold'),
+        url('Rectory-Bold.eot?#iefix') format('embedded-opentype'),
+        url('Rectory-Bold.woff2') format('woff2'),
+        url('Rectory-Bold.woff') format('woff'),
+        url('Rectory-Bold.ttf') format('truetype'),
+        url('Rectory-Bold.svg#Rectory-Bold') format('svg');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Rectory Semi';
+    src: url('Rectory-SemiBold.eot');
+    src: local('Rectory Semi Bold'), local('Rectory-SemiBold'),
+        url('Rectory-SemiBold.eot?#iefix') format('embedded-opentype'),
+        url('Rectory-SemiBold.woff2') format('woff2'),
+        url('Rectory-SemiBold.woff') format('woff'),
+        url('Rectory-SemiBold.ttf') format('truetype'),
+        url('Rectory-SemiBold.svg#Rectory-SemiBold') format('svg');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Rectory Thin';
+    src: url('Rectory-Thin.eot');
+    src: local('Rectory Thin'), local('Rectory-Thin'),
+        url('Rectory-Thin.eot?#iefix') format('embedded-opentype'),
+        url('Rectory-Thin.woff2') format('woff2'),
+        url('Rectory-Thin.woff') format('woff'),
+        url('Rectory-Thin.ttf') format('truetype'),
+        url('Rectory-Thin.svg#Rectory-Thin') format('svg');
+    font-weight: 100;
+    font-style: normal;
+}
+

@@ -9,6 +9,7 @@ import { appConstants } from '../../constants/app_constants';
 export class PostTypeNavComponent implements OnInit {
 
   postTypesArray = appConstants.postTypesArray;
+  @Input() customTabs = [];
   @Input() selectedPostType = '';
 
   @Output() postTypeClick = new EventEmitter();

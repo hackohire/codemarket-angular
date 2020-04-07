@@ -1,4 +1,6 @@
 import Uploader from './uploader';
+import { AuthService } from '../../../core/services/auth.service';
+import { AppInjector } from '../../../shared/services/app.injector.service';
 const LOADER_TIMEOUT = 500;
 
 /**
@@ -54,6 +56,8 @@ const LOADER_TIMEOUT = 500;
  */
 export class AttachesTool {
 
+  authService: AuthService;
+
   FileIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="40">
     <g fill="#A8ACB8" fill-rule="evenodd">
       <path fill-rule="nonzero" d="M17 0l15 14V3v34a3 3 0 0 1-3 3H3a3 3 0 0 1-3-3V3a3 3 0 0 1 3-3h20-6zm0 2H3a1 1 0 0 0-1 1v34a1 1 0 0 0 1 1h26a1 1 0 0 0 1-1V14H17V2zm2 10h7.926L19 4.602V12z" />
@@ -76,7 +80,7 @@ export class AttachesTool {
   uploader: Uploader;
   api: any;
   nodes: { wrapper: any, button: any, title: any };
-  _data: { file: any, title: string };
+  _data: { file: any, title: string, createdBy?: any };
   config: { endpoint: string, field: string, types: any, buttonText: string, errorMessage: string, uploader: any };
 
 
@@ -92,6 +96,8 @@ export class AttachesTool {
 
     this.api = api;
 
+    this.authService = AppInjector.getInjector().get(AuthService);
+
     this.nodes = {
       wrapper: null,
       button: null,
@@ -100,7 +106,8 @@ export class AttachesTool {
 
     this._data = {
       file: {},
-      title: ''
+      title: '',
+      // createdBy: this.authService.loggedInUser._id
     };
 
     this.config = {
@@ -211,8 +218,8 @@ export class AttachesTool {
      */
     if (this.pluginHasData()) {
       const title = toolsContent.querySelector(`.${this.CSS.title}`).innerHTML;
-
-      Object.assign(this.data, { title });
+      const createdBy = this.data.createdBy ? this.data.createdBy._id : this.authService.loggedInUser._id;
+      Object.assign(this.data, { title, createdBy });
     }
 
     return this.data;
@@ -254,6 +261,10 @@ export class AttachesTool {
    * @public
    */
   appendCallback() {
+    if (!this.authService.loggedInUser) {
+      this.authService.checkIfUserIsLoggedIn(true);
+      return;
+    }
     this.nodes.button.click();
   }
 
@@ -293,6 +304,7 @@ export class AttachesTool {
           name,
           size
         },
+        createdBy: body.createdBy || '',
         title: name
       };
 
@@ -408,7 +420,7 @@ export class AttachesTool {
    * Stores all Tool's data
    * @param {AttachesToolData} data
    */
-  set data({ file, title }) {
+  set data({ file, title, createdBy }) {
     this._data = Object.assign({}, {
       file: {
         url: (file && file.url) || this._data.file.url,
@@ -416,6 +428,7 @@ export class AttachesTool {
         extension: (file && file.extension) || this._data.file.extension,
         size: (file && file.size) || this._data.file.size
       },
+      createdBy: createdBy || { _id: this.authService.loggedInUser._id },
       title: title || this._data.title
     });
   }

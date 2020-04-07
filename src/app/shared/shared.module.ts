@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Injector } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../core/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -34,9 +34,10 @@ import { AddCollaboratorsComponent } from './components/add-collaborators/add-co
 import { AddAssigneeComponent } from './components/add-assignee/add-assignee.component';
 import { PaginatorComponent } from './components/paginator/paginator.component';
 import { AddCommentComponent } from './components/add-comment/add-comment.component';
+import { ChatBoxComponent } from './components/chat-box/chat-box.component';
 import { PostTypeNavComponent } from './components/post-type-nav/post-type-nav.component';
 import { CommentSideNavComponent } from './components/comment-side-nav/comment-side-nav.component';
-
+import { AppInjector } from './services/app.injector.service';
 
 export function hljsLanguages() {
   return [
@@ -63,6 +64,7 @@ export function hljsLanguages() {
     AddAssigneeComponent,
     PaginatorComponent,
     AddCommentComponent,
+    ChatBoxComponent,
     PostTypeNavComponent,
     CommentSideNavComponent,
   ],
@@ -97,6 +99,7 @@ export function hljsLanguages() {
   ],
   exports: [
     BreadcumbComponent,
+    ChatBoxComponent,
     EditorComponent,
     CommentComponent,
     AddCommentComponent,
@@ -131,4 +134,8 @@ export function hljsLanguages() {
   ],
   providers: [CommentService]
 })
-export class SharedModule { }
+export class SharedModule {
+  constructor(private injector: Injector) {
+    AppInjector.setInjector(this.injector);
+  }
+}

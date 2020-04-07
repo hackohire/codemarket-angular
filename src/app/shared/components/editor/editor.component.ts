@@ -62,7 +62,7 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
     this._data = updatedData;
     if (this.editor && Object.keys(this.editor).length !== 0) {
       if (updatedData && updatedData.length) {
-        this.editor.blocks.render({ blocks: updatedData });
+        this.editor.render({ blocks: updatedData });
       } else {
         this.editor.blocks.clear();
       }
@@ -278,14 +278,15 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
               title: 'Attach Files'
             },
             config: {
-              endpoint: 'https://codemarket-files.s3.amazonaws.com/public/',
+              // injector: this.injector,
+              endpoint: environment.s3FilesBucketURL,
               uploader: {
                 /**
                  * Upload file to the server and return an uploaded image data
                  * @param { File } file - file selected from the device or pasted by drag-n-drop
                  * @return {Promise.<{success, file: {url}}>}
                  */
-                uploadByFile(file) {
+                uploadByFile: (file) => {
                   // your own uploading logic here
 
                   const fileNameSplitArray = file.name.split('.');
@@ -303,6 +304,7 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
                     console.log('uploaded', uploaded);
                     return {
                       success: 1,
+                      createdBy: {_id: this.authService.loggedInUser._id },
                       file: {
                         url: environment.s3FilesBucketURL + uploaded.key,
                         name: fileName,
@@ -384,6 +386,9 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
         },
         placeholder: this.placeholder ? this.placeholder : 'Let`s write!',
         onReady: (() => {
+
+          // this.editor.blocks.render({blocks: this.data});
+
           /** Focus at end */
           this.editor.focus(true);
 

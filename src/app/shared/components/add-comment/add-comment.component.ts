@@ -35,7 +35,7 @@ export class AddCommentComponent implements OnInit {
       this.commentForm = new FormGroup({
         text: new FormControl(''),
         type: new FormControl('post'),
-        blockId: new FormControl(''),
+        blockId: new FormControl(null),
         blockSpecificComment: new FormControl(false),
         referenceId: new FormControl('')
       });

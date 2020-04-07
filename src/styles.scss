@@ -19,6 +19,10 @@ span {
   color: inherit;
 }
 
+.bold {
+  font-weight: bold;
+}
+
 form > * {
   // margin-bottom: 1.5em;
   // width: 100%;
@@ -192,7 +196,7 @@ a {
 }
 
 .float-right {
-  float: right;
+  float: right !important;
 }
 
 input[type="number"]::-webkit-inner-spin-button,
@@ -17725,4 +17729,296 @@ ul.nav-tabs.nav--tabs2 li a::before {
   }
 }
 
+// Start of Chat box CSS
+.chat-window {
+  position: fixed;
+  bottom: 0;
+  right: 3em;
+  width: 350px;
+  height: 420px;
+  transition: all ease-out 250ms;
+  z-index: 1;
+
+  &.docked {
+    transform: translateY(375px);
+    
+    .chat-header span {
+      opacity: 0;
+    }
+  }
+  
+  p {
+    margin: 0;
+  }
+  .chat-header {
+    height: 45px;
+    border-radius: 6px 6px 0 0;
+    background: #0674ec;
+    position: relative;
+    cursor: pointer;
+    p {
+      display: block;
+      padding: 0 1em 0 2em;
+      color: #fff;
+      font-weight: 700;
+      line-height: 45px;
+    }
+    span {
+      opacity: 1;
+      position: absolute;
+      display: block;
+      top: calc(50% - (1em / 2));
+      right: calc(1.5em - (1em / 2));
+      ;
+      width: 1em;
+      height: 1em;
+      transition-delay: 250ms;
+      transition: all ease 350ms;
+      &:before,
+      &:after {
+        content: '';
+        display: block;
+        position: absolute;
+        top: calc(50% - (5px / 2));
+        left: -11%;
+        width: 120%;
+        height: 5px;
+        background: #fff;
+        transform-origin: 50% 50%;
+        border-radius: 20px;
+      }
+      &:before {
+        transform: rotate(45deg);
+      }
+      &:after {
+        transform: rotate(-45deg);
+      }
+    }
+    &:before {
+      content: '';
+      position: absolute;
+      display: block;
+      top: calc(50% - (.7em / 2));
+      left: calc(1em - (.7em / 2));
+      ;
+      width: .7em;
+      height: .7em;
+      border-radius: 100%;
+      /* background: #fff; */
+    }
+    &.online {
+      &:before {
+        background: #43a047;
+      }
+    }
+    &.offline {
+      &:before {
+        background: #c62828;
+      }
+    }
+  }
+  .chat-body {
+    height: 85%;
+    border: 1px solid #263238;
+    background: #fff;
+    border-top: 0;
+    border-bottom: 0;
+    position: relative;
+    
+    .message-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow-y: scroll;
+      overflow-x: hidden;
+    }
+    .message {
+      position: relative;
+      padding: 1em .7em 2em;
+      margin-bottom: .5em;
+      // border-bottom: 1px dotted #cfd8dc;
+      .profile {
+        position: absolute;
+        top: 1em;
+        left: .7em;
+        img {
+          width: 40px;
+          height: auto;
+          border-radius: 100%;
+        }
+      }
+      .message-meta {
+        width: calc(100% - (40px + 1em));
+        height: 25px;
+        float: right;
+        p {
+          display: inline-block;
+          font-size: .75em;
+          font-weight: 700;
+          color: #90a4ae;
+          margin-top: 5px;
+          
+          &:last-child {
+            font-size: .5em;
+            vertical-align: bottom;
+            margin-top: 7px;
+            float: right;
+          }
+        }
+      }
+      .message-content {
+        width: calc(100% - (40px + 1em));
+        height: 40px;
+        float: right;
+        p {
+          text-align: left;
+          line-height: 1.2;
+          font-size: .9em;
+          color: #263238;
+          
+          + p {
+            margin-top: .5em;
+          }
+        }
+      }
+      &:after {
+        content: '';
+        display: block;
+        width: 100%;
+        clear: both;
+      }
+      
+      &.user {
+        .profile {
+          left: auto;
+          right: .7em;
+        }
+        .message-meta,
+        .message-content {
+          float: left;
+        }
+        .message-meta{
+          div {
+            float: right;
+            &:last-child {
+              float: left;
+            }
+          }
+        }
+        .message-content {
+          // p {
+            text-align: right;
+          // }
+        }
+      }
+    }
+  }
+  
+  .chat-footer {
+    height: 70px;
+    border: 1px solid #263238;
+    border-top: 0;
+    border-bottom: 0;
+    margin-top: -30px;
+    
+    .progress-indicator {
+      opacity:1;
+      background: rgba(255, 255, 255, .9);
+      height: 30px;
+      text-align: center;
+      font-size: .7em;
+      font-weight: 300;
+      line-height: 30px;
+      position: relative;
+      z-index: 4;
+      transition: all ease 150ms;
+    }
+    
+    .form-area {
+      height: 40px;
+      position: relative;
+      input {
+        height: 40px;
+        width: calc(100% - (.7em + 2.5em + 2px));
+        border:0;
+        padding: 0 .7em;
+        font-size: 1em;
+        border-top: 1px dotted #607d8b;
+        outline: none;
+        font-family: 'Open Sans', sans-serif;
+        
+        &:focus {
+          & + button {
+            &:after {
+             border-left: 1.6em solid #66bb6a; 
+            }
+          }
+        }
+      }
+      button {
+        border: 0;
+        border-top: 1px dotted #607d8b;
+        position: absolute;
+        display: block;
+        width: 2.5em;
+        height: 40px;
+        top: 0;
+        right: 0;
+        z-index: 2;
+        background: transparent;
+        outline: none;
+        
+        &:before {
+          position: absolute;
+          top: calc(50% - .4em);
+          left: 0.4em;
+          content:'';
+          display: block;
+          width:0;
+          height:0;
+          border-top: .4em solid transparent;
+          border-right: .4em solid transparent;
+          border-bottom: .4em solid transparent;
+          border-left: .4em solid #fff;
+          z-index:3;
+        }
+        
+        &:after {
+          content:'';
+          display: block;
+          width:0;
+          height:0;
+          border-top: .8em solid transparent;
+          border-right: .8em solid transparent;
+          border-bottom: .8em solid transparent;
+          border-left: 1.6em solid #b0bec5;
+          z-index:2;
+        }
+      }
+    }
+  }
+}
+
+.hide {
+  opacity: 0!important;
+}
+
+.chat-user-profile {
+  float: right;
+}
+
+.w-80 {
+  width: 80%
+}
+
+.reply-comment {
+  background-color: #c2bfbf;
+}
+
+.bottom-border {
+  border-bottom: 1px solid #cfd8dc;
+}
+// End of Chat box CSS
 /*# sourceMappingURL=src/map/style.css.map */

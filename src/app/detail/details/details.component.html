@@ -27,7 +27,7 @@
                 <div class="col-lg-2">
                     <!-- Based On the List Of Post Types -->
                     <app-post-type-nav [selectedPostType]="selectedPostType" 
-                     (postTypeClick)="selectedBlock = null; getConnectedPosts($event); showConnectedPosts = true"
+                     (postTypeClick)="selectedBlock = null; getConnectedPosts($event?.name); showConnectedPosts = true"
                      (plusButtonClick)="redirectToAddPost(details, $event)"
                      ></app-post-type-nav>
                     <!-- <div class="docs-component-viewer-nav common-box-shadow" style="margin-bottom: 20px;">
@@ -171,6 +171,25 @@
             <!-- end /.row -->
         </div>
         <!-- end /.container -->
+
+        <!-- Start of chat box code -->
+
+        <section class="chat-window docked" #chatWindow>
+            <div class="chat-header" (click)="chatWindow.classList.toggle('docked')">
+              <p>Live Chat</p>
+              <span class="close"></span>
+            </div>
+            <div class="chat-body">
+              <div class="message-container">
+                <app-chat-box [comments]="commentService?.commentsList$ | async" [loggedInUserId]="authService?.loggedInUser?._id" [postDetails]="postDetails"></app-chat-box>
+              </div>
+            </div>
+            <!-- <div class="chat-footer">
+              <div class="form-area">
+              </div>
+            </div> -->
+          </section>
+        <!-- End of chat box code -->
     </section>
     <!--===========================================
             END SINGLE PRODUCT DESCRIPTION AREA

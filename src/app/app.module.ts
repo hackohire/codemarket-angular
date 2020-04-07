@@ -40,6 +40,7 @@ import { StressManagementComponent } from './stress-management/stress-management
 import { NewsletterComponent } from './newsletter/newsletter.component';
 import {VolunteerComponent} from './volunteer/volunteer.component';
 import {DonateComponent} from './donate/donate.component'
+import { MakemoneyonlineComponent } from './makemoneyonline/makemoneyonline.component';
 
 // import { SignInComponent } from './core/amplify/sign-in-component';
 
@@ -77,7 +78,8 @@ import {DonateComponent} from './donate/donate.component'
     AdvocatesInfluencersComponent,
     NewsletterComponent,
     VolunteerComponent,
-    DonateComponent
+    DonateComponent,
+    MakemoneyonlineComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

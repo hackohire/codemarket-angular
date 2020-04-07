@@ -30,6 +30,7 @@ import { AdvocatesInfluencersComponent } from './advocates-influencers/advocates
 import {NewsletterComponent} from './newsletter/newsletter.component';
 import { VolunteerComponent } from './volunteer/volunteer.component';
 import {DonateComponent} from './donate/donate.component'
+import { MakemoneyonlineComponent } from './makemoneyonline/makemoneyonline.component';
 // import { PostDataResolver } from './core/resolver';
 
 const routes: Routes = [
@@ -267,6 +268,10 @@ const routes: Routes = [
    {
      path: 'donate',
      component: DonateComponent
+   },
+   {
+    path: 'makemoneyonline',
+    component: MakemoneyonlineComponent
    }
 
   /** Static routes ends here */

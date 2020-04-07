@@ -36,7 +36,7 @@
                 <br />
 
                 <mat-form-field *ngIf="selectedRadio === 'Yes'" class="field-full-width">
-                    <textarea type="text" matInput formControlName="describeBusiness." placeholder="Describe your business."></textarea>
+                    <textarea type="text" matInput formControlName="describeBusiness" placeholder="Describe your business."></textarea>
                 </mat-form-field>
 
                 <br />
@@ -54,8 +54,7 @@
                 <br />
 
                 <div fxLayout="row" fxLayoutGap="10px">
-                    <button type="button" (click)="submit()"
-                        [disabled]="makeMoneyOnlineForm?.invalid" mat-raised-button color="primary">Submit</button>
+                    <button type="button" (click)="submit()" mat-raised-button color="primary">Submit</button>
                 </div>
 
             </div>

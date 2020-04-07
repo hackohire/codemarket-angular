@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { BreadCumb } from './../shared/models/bredcumb.model';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup,FormBuilder, Validators } from '@angular/forms';
 import {MakeMoney} from './../shared/models/makemony.model';
+import {MakemoneyonlineService} from './makemoneyonline.service';
+import Swal from 'sweetalert2';
+import { catchError, } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-makemoneyonline',
@@ -10,7 +14,9 @@ import {MakeMoney} from './../shared/models/makemony.model';
 })
 export class MakemoneyonlineComponent implements OnInit {
 
-  constructor() {
+  constructor(private makemoneyonlineService: MakemoneyonlineService,   private fb: FormBuilder) {
+
+    
     /** Make the Changes here while creating new post type */
     this.breadcumb = {
       title: `Make Money Online`,
@@ -46,5 +52,19 @@ export class MakemoneyonlineComponent implements OnInit {
   }
 
   submit(){
+
+    this.makemoneyonlineService.addMakeMoney(this.makeMoneyOnlineForm.value).pipe(
+      catchError((e) => {
+        Swal.fire('Name already exists!', '', 'error');
+        return of(false);
+      })
+    ).subscribe((d: any) => {
+      if (d) {
+        Swal.fire(`${d.firstName} has been Added Successfully`, '', 'success').then(() => {
+          this.makemoneyonlineService.redirectToCompanyDetails(d._id);
+        });
+      }
+    });
+
   }
 }

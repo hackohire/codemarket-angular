@@ -3,12 +3,12 @@ import { User } from './user.model';
 import { Company } from './company.model';
 
 export interface Email {
-    to?: [string];
-    cc?: [string];
-    bcc?: [string];
+    to?: string[];
+    cc?: string[];
+    bcc?: string[];
     subject?: string;
     company?: Company;
-    dateRange?: [string];
+    dateRange?: string[];
     description?: [{
         type?: string;
         data?: BlockToolData

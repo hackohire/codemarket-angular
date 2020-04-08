@@ -10,12 +10,15 @@ import { selectCartListLength } from '../../store/selectors/cart.selectors';
 import { Router } from '@angular/router';
 import { MatDialog, MatAnchor } from '@angular/material';
 import { SearchComponent } from '../search/search.component';
-import { emails, dummyemails, bniSouthBayEmail, bniPipelineEmails } from '../../../emails';
+import { emails } from '../../../emails';
 import { Validators, FormControl } from '@angular/forms';
 import { PostType } from '../../../shared/models/post-types.enum';
 import { MessageService } from '../../../shared/services/message.service';
 import { PostService } from '../../../shared/services/post.service';
 import { appConstants } from '../../../shared/constants/app_constants';
+import { EmailService } from '../../../email/email.service';
+import { PostStatus } from '../../../shared/models/poststatus.enum';
+import { emailTemplate } from '../../../shared/email-template';
 
 @Component({
   selector: 'app-nav-bar',
@@ -24,7 +27,7 @@ import { appConstants } from '../../../shared/constants/app_constants';
 })
 export class NavBarComponent implements OnInit, OnDestroy {
 
-  @ViewChild('lr', {static: false}) lr: MatAnchor;
+  @ViewChild('lr', { static: false }) lr: MatAnchor;
   postTypes = PostType;
 
   postTypesArray = appConstants.postTypesArray;
@@ -62,7 +65,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
     .pipe(
       map(result => result.matches),
       share()
-  );
+    );
 
   cartListLength: Observable<number>;
 
@@ -76,7 +79,8 @@ export class NavBarComponent implements OnInit, OnDestroy {
     private dialog: MatDialog,
     private postService: PostService,
     public messageService: MessageService,
-    ) {
+    private emailService: EmailService
+  ) {
   }
 
   /** Load the Login/ Register popover on the page automatically if user is not loggedin */
@@ -85,7 +89,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
     this.subscription.add(
       this.authService.openAuthenticationPopover.subscribe(open => {
         if (open) {
-         this.lr._elementRef.nativeElement.click();
+          this.lr._elementRef.nativeElement.click();
         }
       })
     );
@@ -104,7 +108,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
       this.authService.loggedInUser$.subscribe(u => {
         if (u) {
           // this.ref.detach();
-          this.loggedInUser = {...u};
+          this.loggedInUser = { ...u };
           // this.ref.detectChanges();
         } else {
           this.loggedInUser = u;
@@ -122,13 +126,13 @@ export class NavBarComponent implements OnInit, OnDestroy {
   }
 
   login() {
-      // const dialogRef = this.dialog.open(AuthDialogComponent, {
-      //   // panelClass: 'no-padding',
-      // });
+    // const dialogRef = this.dialog.open(AuthDialogComponent, {
+    //   // panelClass: 'no-padding',
+    // });
 
-      // dialogRef.afterClosed().subscribe(result => {
-      //   console.log('The dialog was closed');
-      // });
+    // dialogRef.afterClosed().subscribe(result => {
+    //   console.log('The dialog was closed');
+    // });
     // this.authService.login();
   }
 
@@ -153,23 +157,44 @@ export class NavBarComponent implements OnInit, OnDestroy {
 
   sendEmails() {
     let count = 0;
-    bniPipelineEmails.forEach((e, i) => {
-      e.email.forEach((email, j) => {
-        setTimeout(() => {
-          if (!Validators.email(new FormControl(email))) {
-            this.postService.sendEmailWithStaticContent(email, e.name, e.companyName, e.image).toPromise().then((o) => {
-              console.log(o, i);
-              if (o) {
-                count += 1;
-                // dummyEmails[i]['sent'] = true;
+    emails.forEach((e, i) => {
+      setTimeout(() => {
+        e.email.forEach((email, j) => {
+          setTimeout(() => {
+            if (!Validators.email(new FormControl(email))) {
+              const emailObj = {
+                to: [email],
+                subject: 'MAKE MONEY ONLINE',
+                companies: [{ _id: '5db1c84ec10c45224c4b95fd' }],
+                type: PostType.Email,
+                status: PostStatus.Published,
+                descriptionHTML: emailTemplate.replace('{First Name}', e.name),
+                createdBy: '5d4c1cdf91e63a3fe84bb43a',
+                campaignId: '5e8db413194f75696c162682'
               }
-            }).catch((e) => {
-              console.log(e);
-            });
-          }
-        }, j * 1000);
-      });
-      console.log(count);
-      });
+              this.emailService.sendEmail(emailObj).toPromise().then((o) => {
+                console.log(o, i);
+                if (o) {
+                  count += 1;
+                  // dummyEmails[i]['sent'] = true;
+                }
+              }).catch((e) => {
+                console.log(e);
+              });
+              // this.postService.sendEmailWithStaticContent(email, e.name, e.companyName, e.image).toPromise().then((o) => {
+              //   console.log(o, i);
+              //   if (o) {
+              //     count += 1;
+              //     // dummyEmails[i]['sent'] = true;
+              //   }
+              // }).catch((e) => {
+              //   console.log(e);
+              // });
+            }
+          }, j * 1500);
+        });
+        console.log(count);
+      }, i * 1000);
+    });
   }
 }

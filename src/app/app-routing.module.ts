@@ -88,10 +88,10 @@ const routes: Routes = [
     loadChildren: () => import('./companies/companies.module').then(module => module.CompaniesModule),
     // outlet: 'main',
   },
-  {
-    path: 'contact',
-    loadChildren: () => import('./contact/contact.module').then(module => module.ContactModule),
-  },
+ // {
+   // path: 'contact',
+    //loadChildren: () => import('./contact/contact.module').then(module => module.ContactModule),
+  //},
   {
     path: 'event',
     loadChildren: () => import('./event/event.module').then(module => module.EventModule),

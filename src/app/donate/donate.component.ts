@@ -11,7 +11,7 @@ export class DonateComponent implements OnInit {
 
   constructor() { 
     this.breadcumb = {
-      title: `Donate Here`
+      title: `Donate to help LA Small Businesses`
     };
   }
 

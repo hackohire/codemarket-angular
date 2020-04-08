@@ -50,4 +50,29 @@ export class MakemoneyonlineService {
   redirectToCompanyDetails(companyId: string, view = 'home') {
     this.router.navigate(['/', 'dashboard']);
   }
+
+
+  
+  fetchMakeMoney(): Observable<any> {
+    return this.apollo.query({
+      query: gql`
+        query fetchMakeMoney {
+          fetchMakeMoney{
+            firstName
+            lastName
+            email
+            phone
+            haveBusiness
+            describeBusiness
+            WebsiteLink
+            businessAddress
+          }
+        }
+      `,
+      variables: {
+      }
+    }).pipe(
+      map((q: any) => q.data.fetchMakeMoney)
+    );
+  }
 }

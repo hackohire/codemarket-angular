@@ -149,7 +149,10 @@ const routes: Routes = [
     data: { setPostMeta: true },
     pathMatch: 'full'
   },
-
+  {
+    path: 'makemoneyonline',
+    loadChildren: () => import('./makemoneyonline/makemoneyonline.module').then(module => module.MakemoneyonlineModule),
+  },
   {
     path: 'about-us',
     component: AboutUsComponent
@@ -268,10 +271,6 @@ const routes: Routes = [
    {
      path: 'donate',
      component: DonateComponent
-   },
-   {
-    path: 'makemoneyonline',
-    component: MakemoneyonlineComponent
    }
 
   /** Static routes ends here */

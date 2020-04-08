@@ -3,6 +3,7 @@ import { BreadCumb } from '../../shared/models/bredcumb.model';
 import { AuthService } from '../../core/services/auth.service';
 import { environment } from '../../../environments/environment';
 import { ActivatedRoute, Router } from '@angular/router';
+import { keyBy } from 'lodash';
 import { UserService } from '../../user/user.service';
 import { User } from '../../shared/models/user.model';
 import { Observable, Subscription, of } from 'rxjs';
@@ -100,11 +101,14 @@ export class MyProfileComponent implements OnInit {
   selectedProfilePic: File;
   selectedProfilePicURL = '';
 
+  postTypeCounts;
+
   customTabs = [
     {
       name: 'files',
       label: 'Files',
-      isCustom: true
+      isCustom: true,
+      count: 0
     }
   ];
 
@@ -226,6 +230,16 @@ export class MyProfileComponent implements OnInit {
       );
     }
 
+    this.postService.getCountOfAllPost(this.authService.loggedInUser._id, '', "").subscribe((data) => {
+      if (data.length) {
+        data = keyBy(data, '_id');
+        appConstants.postTypesArray.forEach((obj) => {
+          obj['count'] = data[obj.name] ? data[obj.name].count : 0
+        });
+        this.customTabs[0].count = data['files'] ? data['files'].count: 0;
+      }
+    });
+    
     this.userService.peer.asObservable().subscribe((p) => {
       if (p) {
         console.log(p);

@@ -174,7 +174,7 @@
 
         <!-- Start of chat box code -->
 
-        <section class="chat-window docked" #chatWindow>
+        <!-- <section class="chat-window docked" #chatWindow>
             <div class="chat-header" (click)="chatWindow.classList.toggle('docked')">
               <p>Live Chat</p>
               <span class="close"></span>
@@ -184,11 +184,11 @@
                 <app-chat-box [comments]="commentService?.commentsList$ | async" [loggedInUserId]="authService?.loggedInUser?._id" [postDetails]="postDetails"></app-chat-box>
               </div>
             </div>
-            <!-- <div class="chat-footer">
+            <div class="chat-footer">
               <div class="form-area">
               </div>
-            </div> -->
-          </section>
+            </div>
+        </section> -->
         <!-- End of chat box code -->
     </section>
     <!--===========================================
@@ -208,7 +208,7 @@
         <div class="tab-pane fade show product-tab">
             <div class="thread">
                 <ul class="media-list thread-list" style="list-style: none;">
-                    <h4 class="tab-content-wrapper">Comments:</h4>
+                    <!-- <h4 class="tab-content-wrapper">Comments:</h4> -->
                     <div *ngFor="let c of commentService?.commentsList$ | async; trackBy: trackByFn">
                         <li [id]="c?._id" style="padding-left: 30px; padding-right: 30px;"
                             *ngIf="!c?.blockSpecificComment" class="single-thread">

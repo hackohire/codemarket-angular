@@ -195,6 +195,7 @@ export const appConstants = {
       comments {
         ...Comments
       }
+      commentCount
       likeCount
       users {
         _id

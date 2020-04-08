@@ -85,7 +85,7 @@ export class AuthService {
       const user = this.transferState.get(key, null);
       this.transferState.remove(key);
       if (user) {
-        this.setUserOnline(user);
+        // this.setUserOnline(user);
       }
       return of(user);
     }
@@ -145,7 +145,7 @@ export class AuthService {
           this.transferState.set(key, d.data.authorize);
         }
         if (d && d.data && d.data.authorize) {
-          this.setUserOnline(d.data.authorize);
+          // this.setUserOnline(d.data.authorize);
         }
         return d.data.authorize;
       }),

@@ -7,6 +7,7 @@ import { PostService } from '../../../shared/services/post.service';
 import { SweetalertService } from '../../../shared/services/sweetalert.service';
 import { CompanyService } from '../../company.service';
 import { Subscription, of, Observable } from 'rxjs';
+import { keyBy } from 'lodash';
 import { Post } from '../../../shared/models/post.model';
 import { Company } from '../../../shared/models/company.model';
 import { User } from '../../../shared/models/user.model';
@@ -137,6 +138,15 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
 
     this.companyView = this.activatedRoute.snapshot.queryParams['view'] ? this.activatedRoute.snapshot.queryParams['view'] : 'posts';
 
+
+    this.postService.getCountOfAllPost("", params.companyId, "").subscribe((data) => {
+      if (data.length) {
+        data = keyBy(data, '_id');
+        appConstants.postTypesArray.forEach((obj) => {
+          obj['count'] = data[obj.name] ? data[obj.name].count : 0
+        });
+      }
+    });
 
     this.subscription$.add(
       this.companyService.getCompanyById(params.companyId)

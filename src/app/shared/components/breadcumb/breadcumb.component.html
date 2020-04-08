@@ -191,6 +191,31 @@
                                         <!-- - -->
                                         <!-- {{ (postDetails?.salaryRangeTo | currency: 'USD' : 'symbol' : '1.0-0') + 'k'}}</p> -->
                                 </li>
+                                <!-- <li *ngIf="postDetails?.createdAt">
+                                    <p class="data-label">CreatedAt</p>
+                                    <p class="info">
+                                        <a *ngFor="let t of postDetails?.collaborators" target="_blank"
+                                            [href]="'/'+ 'dashboard' + '/' + 'profile' + '/' + t?._id">
+                                            <span class="tag">
+                                                <img [src]="t?.avatar ? ((s3FilesBucketURL + t?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                                                    alt="">{{t?.name}}</span>
+                                        </a>
+                                    </p>
+                                </li> -->
+                                <li *ngIf="postDetails?.createdAt">
+                                    <p class="data-label">CreatedAt</p>
+                                    <p class="info">
+                                        <mat-icon style="vertical-align: middle;">date_range</mat-icon>
+                                        {{ postDetails?.createdAt | date: 'EEEE, MMMM d, y, h:mm a'}}
+                                    </p>
+                                </li>
+                                <li *ngIf="postDetails?.updatedAt">
+                                    <p class="data-label">UpdatedAt</p>
+                                    <p class="info">
+                                        <mat-icon style="vertical-align: middle;">date_range</mat-icon>
+                                        {{ postDetails?.updatedAt | date: 'EEEE, MMMM d, y, h:mm a'}}
+                                    </p>
+                                </li>
                             </div>
 
                             <div class="col-md-6 col-sm-12">

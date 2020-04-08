@@ -7,6 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BreadCumb } from 'src/app/shared/models/bredcumb.model';
 import { FormGroup, FormControl } from '@angular/forms';
 import moment from 'moment';
+import { keyBy } from 'lodash';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { CommentService } from 'src/app/shared/services/comment.service';
 import { environment } from 'src/environments/environment';
@@ -148,6 +149,21 @@ export class DetailsComponent implements OnInit, OnDestroy {
               }
             })
           );
+
+          this.postService.getCountOfAllPost('', '', 
+          {
+            referencePostId: [this.postDetails._id],
+            connectedPosts: this.postDetails.connectedPosts.map(p => p._id),
+            postType: null
+          }).subscribe((data) => {
+            if (data.length) {
+              data = keyBy(data, '_id');
+              appConstants.postTypesArray.forEach((obj) => {
+                obj['count'] = data[obj.name] ? data[obj.name].count : 0
+              });
+            }
+          });
+
         } else if (this.postDetails && this.postDetails._id === postId) {
           /** Comes inside this block, only when we are already in a post details page, and by using searh,
            * we try to open any other post detials page

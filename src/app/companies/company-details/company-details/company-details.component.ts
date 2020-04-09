@@ -45,6 +45,14 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
   usersInterestedInCompany: User[];
   companyView: string;
 
+  customTabs = [
+    {
+      name: 'campaigns',
+      label: 'Campaigns',
+      isCustom: true
+    }
+  ];
+
   postTypesArray = appConstants.postTypesArray;
 
   @ViewChild('coverPic', { static: false }) coverPic;
@@ -125,9 +133,8 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
     public postService: PostService,
     private router: Router,
     private sweetAlertService: SweetalertService,
-    private companyService: CompanyService,
+    public companyService: CompanyService,
     public auth: AuthService,
-    private dialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -137,9 +144,7 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
     const params = this.activatedRoute.snapshot.params;
 
     this.companyView = this.activatedRoute.snapshot.queryParams['view'] ? this.activatedRoute.snapshot.queryParams['view'] : 'posts';
-
-
-    this.postService.getCountOfAllPost("", params.companyId, "").subscribe((data) => {
+    this.postService.getCountOfAllPost('', params.companyId, '').subscribe((data) => {
       if (data.length) {
         data = keyBy(data, '_id');
         appConstants.postTypesArray.forEach((obj) => {
@@ -147,7 +152,6 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
         });
       }
     });
-
     this.subscription$.add(
       this.companyService.getCompanyById(params.companyId)
         .pipe(
@@ -343,7 +347,7 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
             }
           }
         })
-      ).subscribe()
+      ).subscribe();
     });
   }
 
@@ -400,9 +404,19 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
   }
 
   selectMainCategory(category) {
-    if (!category.types) {
-      this.companyView = category;
-      this.router.navigate(['./'], { relativeTo: this.activatedRoute, queryParams: { view: category }, queryParamsHandling: 'merge' });
+    if (!category.custom) {
+      this.companyView = category.name;
+      this.router.navigate(['./'], { relativeTo: this.activatedRoute, queryParams: { view: category.name }, queryParamsHandling: 'merge' });
+    }
+
+    switch (category.name) {
+      case 'campaigns':
+        this.subscription$.add(
+          this.companyService.getCampaignsWithTracking(this.companyDetails._id).subscribe(c => {
+            console.log(c);
+          })
+        );
+        break;
     }
   }
 
@@ -427,7 +441,7 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
       });
   }
 
-  showCommentsOnSide(event: { block: any, comments, selectedPost}) {
+  showCommentsOnSide(event: { block: any, comments, selectedPost }) {
     console.log(event);
     this.selectedBlock = event.block;
     this.selectedPostComments = event.comments;
@@ -438,7 +452,8 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
   fetchAllCompanyRealtedePosts(postType = '') {
     const paginationObj = {
       pageNumber: this.paginator.pageIndex + 1, limit: this.paginator.pageSize ? this.paginator.pageSize : 10,
-      sort: {order: ''}};
+      sort: { order: '' }
+    };
     this.postService.getAllPosts(
       paginationObj, postType, '', this.companyDetails._id).subscribe((u) => {
         this.companyRelatedPosts.posts = u.posts;
@@ -447,7 +462,7 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
   }
 
   redirectToAddPost(postType) {
-    this.router.navigate(['./post/add-post'], {state: {post: {companies: [{name: this.companyDetails.name, _id: this.companyDetails._id}]}}, queryParams: { type: postType } });
+    this.router.navigate(['./post/add-post'], { state: { post: { companies: [{ name: this.companyDetails.name, _id: this.companyDetails._id }] } }, queryParams: { type: postType } });
   }
 
 }

@@ -116,8 +116,8 @@
 
             <div class="row">
                 <div class="col-lg-2">
-                    <app-post-type-nav [selectedPostType]="companyView"
-					(postTypeClick)="selectMainCategory($event?.name);"
+                    <app-post-type-nav [selectedPostType]="companyView" [customTabs]="customTabs"
+					(postTypeClick)="selectMainCategory($event);"
 					(plusButtonClick)="redirectToAddPost($event)"></app-post-type-nav>
                     <!-- start aside -->
                     <!-- <app-add-post-menu style="color: #0674ec !important; margin-left: auto;"></app-add-post-menu> -->
@@ -252,11 +252,16 @@
                                     </app-paginator>
                                 </ng-container>
                             </ng-container>
-        
-                            <div *ngIf="companyView === 'comments'">
-                                <ng-container *ngTemplateOutlet="addCommentTemplate; context: details">
+
+                            <div *ngIf="companyView === 'campaigns' && details?._id">
+                                <ng-container *ngTemplateOutlet="campaignsTemplate; context: {details: details}">
                                 </ng-container>
                             </div>
+        
+                            <!-- <div *ngIf="companyView === 'comments'">
+                                <ng-container *ngTemplateOutlet="addCommentTemplate; context: details">
+                                </ng-container>
+                            </div> -->
         
                             <div *ngIf="companyView === 'q&a'">
                                 <ng-container *ngTemplateOutlet="questionAnswersTemplate; context: details">
@@ -420,47 +425,6 @@
 
 </ng-container>
 
-<ng-template #addCommentTemplate let-cDetails="details">
-    <div style="background: white;">
-        <div class="tab-pane fade show product-tab">
-            <div class="thread">
-                <ul class="media-list thread-list" style="list-style: none;">
-                    <h4 class="tab-content-wrapper">Comments:</h4>
-                    <div *ngFor="let c of commentService?.commentsList$ | async">
-                        <li [id]="c?._id" *ngIf="!c?.blockSpecificComment" class="single-thread">
-                            <app-comment [comment]="c" [referenceId]="cDetails?._id"></app-comment>
-                        </li>
-                    </div>
-                </ul>
-            </div>
-        </div>
-
-        <div class="comment-form-area" *ngIf="commentForm">
-            <h4>Leave a comment</h4>
-            <!-- comment reply -->
-            <div class="media comment-form">
-                <div class="media-left">
-                    <a href="#">
-                        <img class="author_avatar_comment"
-                            [src]="authService?.loggedInUser?.avatar ? ((s3FilesBucketURL + authService?.loggedInUser?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
-                            alt="Commentator Avatar">
-                    </a>
-                </div>
-                <div class="media-body">
-                    <div [formGroup]="commentForm" class="comment-reply-form">
-                        <app-editor [id]="'comment-editor'">
-                        </app-editor>
-
-                        <button style="float: right;" type="button" class="btn btn--sm btn--round"
-                            (click)="addComment()">Post
-                            Comment</button>
-                    </div>
-                </div>
-            </div>
-            <!-- comment reply -->
-        </div>
-    </div>
-</ng-template>
 
 <!-- Implementation of Q&A Start Here -->
 <ng-template #questionAnswersTemplate let-qa="details">
@@ -618,6 +582,12 @@
 
 
         </div>
+    </div>
+</ng-template>
+
+<ng-template #campaignsTemplate let-cDetails="details">
+    <div>
+        <!-- {{companyService?.getCampaignsWithTracking(cDetails?._id) | async | json}} -->
     </div>
 </ng-template>
 

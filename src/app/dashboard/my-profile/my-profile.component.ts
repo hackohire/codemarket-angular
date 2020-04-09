@@ -202,7 +202,7 @@ export class MyProfileComponent implements OnInit {
       // this.navLinks = this.navLinks.filter(n => !n.showOnlyToLoggedInUser);
       this.userData$ = this.userService.getUserById(this.authorId);
       // this.fetchPostsConnectedWithUser(this.authorId);
-
+      this.fetchCounts(this.authorId);
       // this.userService.onUsersPostChanges(this.authorId);
       // this.commentService.onCommentAdded({ user: { _id: this.authorId } }, []);
       // this.commentService.onCommentUpdated({ user: { _id: this.authorId } }, []);
@@ -218,6 +218,7 @@ export class MyProfileComponent implements OnInit {
           map((user) => {
             if (user) {
               this.authorId = user._id;
+              this.fetchCounts(user._id);
               // this.fetchPostsConnectedWithUser(user._id);
               // this.userService.onUsersPostChanges(user._id);
               // this.commentService.onCommentAdded({ user }, []);
@@ -229,21 +230,23 @@ export class MyProfileComponent implements OnInit {
         ).subscribe()
       );
     }
+    
+    this.userService.peer.asObservable().subscribe((p) => {
+      if (p) {
+        console.log(p);
+        this.peer = p;
+      }
+    });
+  }
 
-    this.postService.getCountOfAllPost(this.authService.loggedInUser._id, '', "").subscribe((data) => {
+  fetchCounts(userId) {
+    this.postService.getCountOfAllPost(userId, '', "").subscribe((data) => {
       if (data.length) {
         data = keyBy(data, '_id');
         appConstants.postTypesArray.forEach((obj) => {
           obj['count'] = data[obj.name] ? data[obj.name].count : 0
         });
         this.customTabs[0].count = data['files'] ? data['files'].count: 0;
-      }
-    });
-    
-    this.userService.peer.asObservable().subscribe((p) => {
-      if (p) {
-        console.log(p);
-        this.peer = p;
       }
     });
   }

@@ -13,6 +13,11 @@
 
                 <br />
 
+                <app-autocomplete class="field-full-width" [allowToAdd]="false"
+                    [autoComplete]="postForm?.get('collaborators')" [placeholder]="'Select Collaborators'"
+                    [collection]="'users'" [type]="" [multiple]="true" matInput>
+                </app-autocomplete>
+
                 <app-autocomplete class="col-md-6" [autoComplete]="postForm?.get('companies')" [forCompany]="true"
                     [placeholder]="'Select Company'" [collection]="'companies'" [type]="" [multiple]="true">
                 </app-autocomplete>
@@ -22,11 +27,6 @@
                 </app-editor>
 
                 <br />
-
-                <app-autocomplete class="field-full-width" [allowToAdd]="false"
-                    [autoComplete]="postForm?.get('collaborators')" [placeholder]="'Select Collaborators'"
-                    [collection]="'users'" [type]="" [multiple]="true" matInput>
-                </app-autocomplete>
 
                 <app-autocomplete class="field-full-width" [allowToAdd]="false"
                     [autoComplete]="postForm.get('assignees')" [placeholder]="'Select Students'" [collection]="'users'"

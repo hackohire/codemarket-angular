@@ -272,18 +272,30 @@ export class CompanyService {
             getCampaignsWithTracking(companyId: $companyId) {
               name
               label
+              descriptionHTML
               createdBy {
                 name
                 _id
                 avatar
               }
-              trackingData {
+              emailData {
                 _id
-                eventType
-                open {
-                  timestamp
-                  userAgent
-                  ipAddress
+                to
+                createdAt
+                subject
+                descriptionHTML
+                tracking {
+                  eventType
+                  open {
+                    timestamp
+                    userAgent
+                    ipAddress
+                  }
+                  mail {
+                    timestamp
+                    source
+                    destination
+                  }
                 }
               }
             }

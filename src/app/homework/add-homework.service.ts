@@ -34,7 +34,7 @@ export class AddHomeworkService {
       }
     ).pipe(
       map((p: any) => {
-        return p.data.addAssignment;
+        return p.data.addHomework;
       }),
     );
   }

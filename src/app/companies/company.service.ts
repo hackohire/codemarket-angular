@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 import { CommentService } from '../shared/services/comment.service';
 import { appConstants } from '../shared/constants/app_constants';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class CompanyService {
 
   companyFileds = gql`
@@ -130,7 +130,7 @@ export class CompanyService {
   }
 
 
-  getCompaniesByType(companyType: string, pageOptions = {pageNumber: 0, limit: 0}): Observable<any> {
+  getCompaniesByType(companyType: string, pageOptions = { pageNumber: 0, limit: 0 }): Observable<any> {
     return this.apollo.query(
       {
         query: gql`
@@ -184,9 +184,9 @@ export class CompanyService {
         return index === 0 ?
           of(company).pipe(tap(() => {
             // this.onCompanyPostChanges(company);
-            this.commentService.onCommentAdded({company}, []);
-            this.commentService.onCommentUpdated({company}, []);
-            this.commentService.onCommentDeleted({company}, []);
+            this.commentService.onCommentAdded({ company }, []);
+            this.commentService.onCommentUpdated({ company }, []);
+            this.commentService.onCommentDeleted({ company }, []);
           })) :
           of(company);
       })
@@ -264,10 +264,47 @@ export class CompanyService {
     );
   }
 
+  getCampaignsWithTracking(companyId) {
+    return this.apollo.query(
+      {
+        query: gql`
+          query getCampaignsWithTracking($companyId: String) {
+            getCampaignsWithTracking(companyId: $companyId) {
+              name
+              label
+              createdBy {
+                name
+                _id
+                avatar
+              }
+              trackingData {
+                _id
+                eventType
+                open {
+                  timestamp
+                  userAgent
+                  ipAddress
+                }
+              }
+            }
+          }
+        `,
+        variables: {
+          companyId
+        },
+        fetchPolicy: 'no-cache'
+      }
+    ).pipe(
+      map((p: any) => {
+        return p.data.getCampaignsWithTracking;
+      }),
+    );
+  }
+
   redirectToCompanyDetails(companyId: string, view = 'posts') {
     this.router.navigate(['/', `company`, companyId],
       { queryParams: { view } }
-      );
+    );
   }
 
   editCompany(company: Company) {

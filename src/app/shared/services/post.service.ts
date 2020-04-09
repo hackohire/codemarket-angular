@@ -211,21 +211,42 @@ export class PostService {
     );
   }
 
+  getCountOfAllPost(userId: string, companyId: string, reference: any): Observable<any> {
+    return this.apollo.query({
+      query : gql`
+        query getCountOfAllPost($userId: String, $companyId: String, $reference: ReferenceObject) {
+          getCountOfAllPost(userId: $userId, companyId: $companyId, reference: $reference) {
+            _id
+            count
+          }
+        }
+      `,
+      variables: {
+        userId: userId ? userId : null,
+        companyId: companyId ? companyId : null,
+        reference: reference? reference : null
+      },
+      fetchPolicy: 'no-cache'
+    }
+    ).pipe(
+      map((p: any) => {
+        return p.data.getCountOfAllPost
+      }),
+    )
+  }
+
   redirectToPostDetails(post, commentId = ''): void {
     // this.store.dispatch(SetSelectedPost({ post: null }));
 
-    if (post.type === PostType.Dreamjob) {
-      this.redirectToDreamJobDetails(post, commentId);
-    } else if (post.type === PostType.Event) {
-      this.redirectToEventDetails(post, commentId);
-    } else {
-      this.router.navigate(['/',
-        post.type === PostType.Product ? PostType.Product : 'post',
-        post.slug ? post.slug : ''
-      ],
-        { queryParams: commentId ? { commentId } : null }
-      );
-    }
+    // if (post.type === PostType.Dreamjob) {
+    //   this.redirectToDreamJobDetails(post, commentId);
+    // } else if (post.type === PostType.Event) {
+    //   this.redirectToEventDetails(post, commentId);
+    // } else {
+    // }
+    this.router.navigate(['/','post',post.slug ? post.slug : ''],
+      { queryParams: commentId ? { commentId } : null }
+    );
   }
 
   redirectToDreamJobDetails(dreamJob, commentId = ''): void {

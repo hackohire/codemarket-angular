@@ -131,7 +131,7 @@
             </a>
             <a mat-button class="single-stat comments" (click)="readMore = false; fetchComments(p) ">
                 <mat-icon style="color: #0674ec;" class="vertical-align-middle">comment</mat-icon>
-                <span class="count"> {{p?.comments?.length}}</span>
+                <span class="count"> {{(commentService.commentsList$ | async)?.length ? (commentService.commentsList$ | async)?.length : p?.commentCount}}</span>
             </a>
         </footer>
         <!-- <div class="post-row" style="padding: 0; border: none;">

@@ -30,6 +30,7 @@ import { AdvocatesInfluencersComponent } from './advocates-influencers/advocates
 import {NewsletterComponent} from './newsletter/newsletter.component';
 import { VolunteerComponent } from './volunteer/volunteer.component';
 import {DonateComponent} from './donate/donate.component'
+import { MakemoneyonlineComponent } from './makemoneyonline/makemoneyonline.component';
 // import { PostDataResolver } from './core/resolver';
 
 const routes: Routes = [
@@ -148,7 +149,10 @@ const routes: Routes = [
     data: { setPostMeta: true },
     pathMatch: 'full'
   },
-
+  {
+    path: 'makemoneyonline',
+    loadChildren: () => import('./makemoneyonline/makemoneyonline.module').then(module => module.MakemoneyonlineModule),
+  },
   {
     path: 'about-us',
     component: AboutUsComponent

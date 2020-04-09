@@ -45,6 +45,7 @@ export interface Post {
 
     likeCount?: number;
     comments?: Comment[];
+    commentCount?: number;
 
     /** Array of ID of posts, a post is tied to */
     connectedPosts?: Post[];

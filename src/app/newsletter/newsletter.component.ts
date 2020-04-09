@@ -11,7 +11,7 @@ export class NewsletterComponent implements OnInit {
 
   constructor() { 
     this.breadcumb = {
-      title: `Subscribe News Letter`
+      title: `Subscribe Newsletter`
     };
   }
 

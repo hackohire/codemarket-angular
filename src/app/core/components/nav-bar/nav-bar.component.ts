@@ -19,6 +19,7 @@ import { appConstants } from '../../../shared/constants/app_constants';
 import { EmailService } from '../../../email/email.service';
 import { PostStatus } from '../../../shared/models/poststatus.enum';
 import { emailTemplate } from '../../../shared/email-template';
+import { allBinEmailTemplate } from '../../../shared/all-bni-email-template';
 
 @Component({
   selector: 'app-nav-bar',
@@ -164,14 +165,14 @@ export class NavBarComponent implements OnInit, OnDestroy {
             if (!Validators.email(new FormControl(email))) {
               const emailObj = {
                 to: [email],
-                subject: 'MAKE MONEY ONLINE',
+                subject: `${e.companyName} & COVID-19`,
                 companies: [{ _id: '5db1c84ec10c45224c4b95fd' }],
                 type: PostType.Email,
                 status: PostStatus.Published,
-                descriptionHTML: emailTemplate.replace('{First Name}', e.name),
+                descriptionHTML: allBinEmailTemplate.replace('{name}', e.name).replace('{BNINAME}', e.BNIName),
                 createdBy: '5d4c1cdf91e63a3fe84bb43a',
-                campaignId: '5e8db413194f75696c162682'
-              }
+                campaignId: '5e9088de5b227244642612f1'
+              };
               this.emailService.sendEmail(emailObj).toPromise().then((o) => {
                 console.log(o, i);
                 if (o) {

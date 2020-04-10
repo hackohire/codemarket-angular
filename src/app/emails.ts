@@ -12,7 +12,15 @@ export const emails = [
   //   email: ['sumi@codemarket.io']
   // },
   {
+    name: 'Sumi',
+    companyName: 'Company Name',
+    BNIName: 'BNI NAME',
+    email: ['sumi@codemarket.io']
+  },
+  {
     name: 'Sumit',
+    companyName: 'Company Name',
+    BNIName: 'BNI NAME',
     email: ['sarkazein7@gmail.com']
   }
 ];

@@ -1,5 +1,4 @@
 export const emailTemplate = `<html><head>
-<title>Template</title>
 <link href="https://fonts.googleapis.com/css?family=Montserrat:100" rel="stylesheet">
 </head>
 <body style="

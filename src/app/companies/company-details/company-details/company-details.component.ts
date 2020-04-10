@@ -19,7 +19,6 @@ import { map } from 'rxjs/internal/operators/map';
 import { appConstants } from '../../../shared/constants/app_constants';
 import Storage from '@aws-amplify/storage';
 import moment from 'moment';
-import { MatDialog } from '@angular/material/dialog';
 import { concatMap } from 'rxjs/operators/concatMap';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { BlockToolData } from '@editorjs/editorjs/types/tools';
@@ -52,6 +51,8 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
       isCustom: true
     }
   ];
+
+  campaignsList = [];
 
   postTypesArray = appConstants.postTypesArray;
 
@@ -160,14 +161,14 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
               of(company).pipe(
                 tap(() => {
                   /** Get the list of users in a company */
-                  this.subscription$.add(
-                    this.companyService.getListOfUsersInACompany(params.companyId).subscribe((u) => {
-                      // console.log(u);
-                      if (u) {
-                        this.usersInterestedInCompany = u;
-                      }
-                    })
-                  );
+                  // this.subscription$.add(
+                  //   this.companyService.getListOfUsersInACompany(params.companyId).subscribe((u) => {
+                  //     // console.log(u);
+                  //     if (u) {
+                  //       this.usersInterestedInCompany = u;
+                  //     }
+                  //   })
+                  // );
                 })
               ) : of(company);
           })
@@ -178,6 +179,8 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
               this.companyDetails = c;
               this.initializeCommentForm(c, 'post');
               this.initializeQuestionAndAnswerForm(c, 'company');
+
+              this.selectMainCategory({name: this.companyView});
             }
           }
         })
@@ -413,7 +416,9 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
       case 'campaigns':
         this.subscription$.add(
           this.companyService.getCampaignsWithTracking(this.companyDetails._id).subscribe(c => {
-            console.log(c);
+            if (c && c.length) {
+              this.campaignsList = c;
+            }
           })
         );
         break;

@@ -1,9 +1,35 @@
 <!-- Header Section Starts HERE -->
 
 <!-- <section class="hero-area bgimage"> -->
-<div class="container">
-    <div class="row" style="height:80vh; align-items: center; align-self: right; margin-left: 0; margin-right: 0;">
-        <div class="col-md-7" style="align-self: right;"  class="col-md-7">
+
+<section id="hero" style="padding: 100px 0;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7 pt-5 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center aos-init aos-animate"
+                data-aos="fade-up">
+                <div>
+                    <h1
+                        style="font-size: 60px; max-width: 100%; font-weight: 200; text-align: left;font-family: 'Rectory Thin';color:#ff6640">
+                        Launch & Grow A Successful Digital Products Company<br />
+                    </h1>
+
+                    <h1
+                        style="font-size: 60px; margin: 5px; font-weight: 200; text-align: left; font-family: 'Rectory Regular';color:#0674ec">
+                        <a [routerLink]="['/', 'company', 'add-company']">JOIN TODAY</a></h1>
+                </div>
+            </div>
+            <div class="col-lg-5 order-1 order-lg-2 hero-img aos-init aos-animate" data-aos="fade-left">
+                <img src="./../assets/images/prosperous2.png" class="img-fluid" alt="">
+            </div>
+        </div>
+    </div>
+
+</section>
+
+
+<!-- <div class="container d-flex align-items-center" style="height: 92vh;">
+    <div class="row">
+        <div class="col-lg-6 pt-5 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
 
             <h1
                 style="font-size: 60px; max-width: 100%; font-weight: 200; text-align: left;font-family: 'Rectory Thin';color:#ff6640">
@@ -14,23 +40,23 @@
                 style="font-size: 60px; margin: 5px; font-weight: 200; text-align: left; font-family: 'Rectory Regular';color:#0674ec">
                 <a [routerLink]="['/', 'company', 'add-company']">JOIN TODAY</a></h1>
         </div>
-        <div style="text-align: right; align-self: right; width: 100%;" class="col-md-5">
+        <div class="col-lg-6 pt-5 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
             <img src="./../assets/images/prosperous2.png">
         </div>
     </div>
-</div>
+</div> -->
 
-<div style="background: #f1f1f1;">
-    <div class="container">
-        <div class="row" style="height:80vh; align-items: center; margin-left: 0; margin-right: 0;">
-            <div class="col-md-12">
+<div style="background: #f1f1f1; padding: 50px 0;">
+    <div class="container d-flex align-items-center">
+        <div class="row" style="align-items: center; margin-left: 0; margin-right: 0;">
+            <div class="col-md-12 col-sm-12">
                 <h1
                     style="font-size: 55px; max-width: 100%; font-family: 'Rectory Regular'; text-align: center; color: #595959">
-                    Monetize Your Digital Products and  Generate Revenue 
+                    Monetize Your Digital Products and Generate Revenue
                 </h1>
                 <hr style="max-width: 60vw; padding: 2rem; margin-top: 2rem;">
-                <div class="col-md-12" style="align-self: left;">
-                   
+                <div class="col-md-12 col-sm-12" style="align-self: left;">
+
                 </div>
 
                 <div class="mt-4 col-md-12">
@@ -44,7 +70,7 @@
 </div>
 
 <div class="container">
-    <div class="row" style="height:60vh; align-items: center; margin-top: 40px; margin-left: 0; margin-right: 0;">
+    <div class="row" style="align-items: center; margin-top: 40px; margin-left: 0; margin-right: 0;">
         <div class="col-md-12 col-md-12">
             <h4
                 style="font-size: 55px; margin: auto; max-width: 100%;  text-align: center; font-family: 'Rectory Thin'; color: #ff6640;">
@@ -52,27 +78,27 @@
             </h4>
         </div>
 
-        <div class="col-lg-4 col-md-4" style="text-align: center;">
+        <div class="col-lg-4 col-md-4 col-sm-12" style="text-align: center;">
             <img src="https://codemarket-files.s3.amazonaws.com/public/step1-2020-03-30T19:37:44.350Z.png">
-            
-                <div >
-                    <h2 style="font-size: 55px; font-family: 'Rectory Semi';  margin: 10px; text-align: center;"><a
-                            [routerLink]="['/', 'post', 'add-dreamjob']"> Digital Products</a></h2>
-                </div>
+
+            <div>
+                <h2 style="font-size: 55px; font-family: 'Rectory Semi';  margin: 10px; text-align: center;"><a
+                        [routerLink]="['/', 'post', 'add-dreamjob']"> Digital Products</a></h2>
+            </div>
         </div>
-        <div class="col-lg-4 col-md-4" style="text-align: center;">
+        <div class="col-lg-4 col-md-4 col-sm-12" style="text-align: center;">
             <img src="https://codemarket-files.s3.amazonaws.com/public/step2-2020-03-30T19:37:50.406Z.png">
-            <div >
+            <div>
                 <h2 style="font-size: 55px; font-family: 'Rectory Semi';  margin: 10px; text-align: center;"><a
                         [routerLink]="['/', 'post', 'add-dreamjob']"> Online Community </a></h2>
             </div>
-            
+
         </div>
-        <div class="col-lg-4 col-md-4" style="text-align: center;">
+        <div class="col-lg-4 col-md-4 col-sm-12" style="text-align: center;">
             <img src="https://codemarket-files.s3.amazonaws.com/public/step3-2020-03-30T19:38:01.351Z.png">
             <h2 style="font-size: 55px; font-family: 'Rectory Semi';  margin: 10px; text-align: center;"><a
-                [routerLink]="['/', 'post', 'add-dreamjob']">Sell & Monetize</a></h2>
-            
+                    [routerLink]="['/', 'post', 'add-dreamjob']">Sell & Monetize</a></h2>
+
         </div>
     </div>
 </div>
@@ -81,21 +107,21 @@
 <br>
 
 <div style="background: #f1f1f1;">
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 </div>
 <div class="container">
-    <div class="row" style="height:80vh; align-items: center; margin-left: 0; margin-right: 0;">
+    <div class="row" style="padding: 50px 0; align-items: center; margin-left: 0; margin-right: 0;">
         <div class="col-md-12">
             <h1
                 style="font-size: 55px; max-width: 100%; font-family: 'Rectory Regular'; text-align: center; color: #0267d6">

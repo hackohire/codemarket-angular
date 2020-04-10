@@ -68,27 +68,24 @@ export class ContactService {
     }
 
     
-    fetchContacs(pageOptions = {pageNumber: 0, limit: 0}): Observable<any> {
+    fetchContacts(): Observable<any> {
       return this.apollo.query({
         query: gql`
-          query fetchContacts($pageOptions: PageOptionsInput) {
-            fetchContacts(pageOptions: $pageOptions) {
-              contacts {
-                ...Contact
-              }
-              total
+          query fetchContacts {
+            fetchContacts{
+              name
+              email
+              subject
+              description
             }
           }
-          ${this.contactFileds}
         `,
         variables: {
-          pageOptions
         }
       }).pipe(
-        map((q: any) => q.data.addContact)
+        map((q: any) => q.data.fetchContacts)
       );
     }
-
 
     redirectToCompanyDetails(companyId: string, view = 'home') {
       this.router.navigate(['/', 'dashboard']);

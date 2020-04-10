@@ -118,6 +118,10 @@ const routes: Routes = [
     // outlet: 'main'
   },
   {
+    path: 'contact',
+    loadChildren: () => import('./contact/contact.module').then(module => module.ContactModule),
+  },
+  {
     path: 'product/:slug',
     loadChildren: () => import('./dashboard/product-details/product-details.module').then(module => module.ProductDetailsModule),
     resolve: { seo: PostDataResolver },

@@ -220,7 +220,7 @@
         </div>
 
         <div class="comment-form-area">
-            <app-add-comment *ngIf="commentForm" [commentForm]="commentForm" [showLabel]="true"></app-add-comment>
+            <app-add-comment *ngIf="commentForm" [showLabel]="true" [referenceId]="cDetails?._id"></app-add-comment>
         </div>
 
     </div>

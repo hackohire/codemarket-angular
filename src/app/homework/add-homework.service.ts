@@ -15,12 +15,12 @@ export class AddHomeworkService {
   /** Add Add-homework graphql API call to save the homework assignment
    * fields in the DB
    */
-  addAssignment(fromFieldObject) {
+  addHomework(formFieldObject) {
     return this.apollo.mutate(
       {
         /** Mutation Query */
         mutation: gql`
-          mutation addHomework($assignment: HomeworkFieldsInput) {
+          mutation addHomework($assignment: AssignmentFieldsInput) {
             addHomework(assignment: $assignment) {
               assignmentNo
               title
@@ -29,7 +29,7 @@ export class AddHomeworkService {
           }
           `,
         variables: {
-          assignment: fromFieldObject
+          assignment: formFieldObject
         },
       }
     ).pipe(

@@ -19,6 +19,7 @@ export class HomeworkComponent implements OnInit {
   ngOnInit() {
   }
 
+  /*
   getAssignment(assignmentNo, title) {
 
     var assignmentDescription = "This is your homework assignment!"
@@ -28,23 +29,32 @@ export class HomeworkComponent implements OnInit {
       assignmentDescription: assignmentDescription
     };
   }
+  */
 
-  addAssignment(assignmentNo, title, assignmentDescription) {
+  addAssignment(assignmentNo, title, detailDescription) {
 
-    this.formFieldObject = {
-      assignmentNo: assignmentNo,
-      title: title,
-      assignmentDescription: assignmentDescription
-    };
+    try {
+      //var assignmentNoInt = parseInt(assignmentNo);
 
-    this.addHomeworkService.addAssignment(this.formFieldObject).subscribe( (assignment) => {
-      if (assignment) {
-        this.formFieldObject = assignment;
-      }
-    })
-  
+      const formFieldObject = {
+        assignmentNo: assignmentNo,
+        title: title,
+        detailDescription: detailDescription
+      };
+
+      this.addHomeworkService.addHomework(formFieldObject).subscribe((assignment) => {
+        if (assignment) {
+          this.formFieldObject = assignment;
+        }
+      })
+
+    }
+    catch (e) {
+      console.log("Error:  input field assignmentNo is not a valid integer\n");
+    }
+
   }
 
-  updateAssignment(assignmentNoassignmentNo, title, assignmentUrl, assignmentDescription) {}
+  //updateAssignment(assignmentNoassignmentNo, title, assignmentUrl, assignmentDescription) { }
 
 }

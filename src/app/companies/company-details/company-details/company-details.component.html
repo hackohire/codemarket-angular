@@ -229,6 +229,8 @@
                             </div>
                         </div>
                     </div>
+
+                        
                     <div class="row">
                         <div [ngClass]="selectedBlock ? 'col-md-8 col-lg-8' : 'col-lg-10 col-md-10'">
                     <!-- Showing the list of posts for the posts tab, everytime user clicks on the "load more", we increase the page number and call
@@ -241,18 +243,20 @@
                                 <app-paginator [length]="totalcompanyRelatedPosts" (fetchData)="paginator = $event; fetchAllCompanyRealtedePosts()">
                                 </app-paginator>
                             </ng-container>
-        
-                            <ng-container *ngFor="let p of postTypesArray">
-                                <ng-container *ngIf="companyView === p.name">
-                                    <div class="item-grid pen-grid item-grid-large">
-                                        <app-brief-post style="width: 100%;" [p]="e"
-                                            *ngFor="let e of companyRelatedPosts?.posts" [readMore]="true" (showComments)="showCommentsOnSide($event)"></app-brief-post>
-                                    </div>
-                                    <app-paginator [length]="totalcompanyRelatedPosts" (fetchData)="paginator = $event; fetchAllCompanyRealtedePosts(p.name)">
-                                    </app-paginator>
+                            
+                            <ng-container *ngIf="companyView !== 'contact'">
+                                <ng-container *ngFor="let p of postTypesArray">
+                                    <ng-container *ngIf="companyView === p.name">
+                                        <div class="item-grid pen-grid item-grid-large">
+                                            <app-brief-post style="width: 100%;" [p]="e"
+                                                *ngFor="let e of companyRelatedPosts?.posts" [readMore]="true" (showComments)="showCommentsOnSide($event)"></app-brief-post>
+                                        </div>
+                                        <app-paginator [length]="totalcompanyRelatedPosts" (fetchData)="paginator = $event; fetchAllCompanyRealtedePosts(p.name)">
+                                        </app-paginator>
+                                    </ng-container>
                                 </ng-container>
                             </ng-container>
-        
+
                             <div *ngIf="companyView === 'comments'">
                                 <ng-container *ngTemplateOutlet="addCommentTemplate; context: details">
                                 </ng-container>
@@ -260,6 +264,11 @@
         
                             <div *ngIf="companyView === 'q&a'">
                                 <ng-container *ngTemplateOutlet="questionAnswersTemplate; context: details">
+                                </ng-container>
+                            </div>
+
+                            <div *ngIf="companyView === 'contact'">
+                                <ng-container *ngTemplateOutlet="contactTemplate; context: details">
                                 </ng-container>
                             </div>
         
@@ -619,6 +628,51 @@
 
         </div>
     </div>
+</ng-template>
+
+<!-- Contact Template -->
+<ng-template #contactTemplate let-contacts="details">
+    <div style="background: white;">
+            <table class="table table-striped" >
+                <thead>
+                    <tr>
+                        <th>Name 
+                            <span *ngIf="nameAsc">
+                                <i class="fas fa-sort-up" (click)="changeOrder('name','asc','contact')"></i>
+                            </span>
+                            <span *ngIf="!nameAsc">
+                                <i class="fas fa-sort-down" (click)="changeOrder('name','desc','contact')"></i>
+                            </span>
+                        </th>
+                        <th>Email
+                            <span *ngIf="emailAsc">
+                                <i class="fas fa-sort-up" (click)="changeOrder('email','asc','contact')"></i>
+                            </span>
+                            <span *ngIf="!emailAsc">
+                                <i class="fas fa-sort-down" (click)="changeOrder('email','desc','contact')"></i>
+                            </span>
+                        </th>
+                        <th>Phone
+                            <span *ngIf="phoneAsc">
+                                <i class="fas fa-sort-up" (click)="changeOrder('phone','asc','contact')"></i>
+                            </span>
+                            <span *ngIf="!phoneAsc">
+                                <i class="fas fa-sort-down" (click)="changeOrder('phone','desc','contact')"></i>
+                            </span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr  *ngFor="let e of companyRelatedPosts?.posts">
+                        <td>{{e.name}}</td>
+                        <td>{{e.email}}</td>
+                        <td>{{e.phone}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <app-paginator [length]="totalcompanyRelatedPosts" (fetchData)="paginator = $event; fetchAllCompanyRealtedePosts('contact')">
+        </app-paginator>
 </ng-template>
 
 <ng-template #addBlockLevelCommentTemplate let-cDetails="details" let-comments="comments">

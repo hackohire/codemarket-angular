@@ -309,7 +309,7 @@ const routes: Routes = [
     component: ContactComponent
   },
   {
-    path: 'get-quote/:insuranceType',
+    path: 'get-quote',
     component: GetQuoteComponent
   },
   {

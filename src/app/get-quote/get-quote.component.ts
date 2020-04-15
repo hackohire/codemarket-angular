@@ -3,7 +3,7 @@ import { Validators, FormGroup, FormControl } from '@angular/forms';
 import { BreadCumb } from '../shared/models/bredcumb.model';
 import { EditorComponent } from '../shared/components/editor/editor.component';
 import { Subscription } from 'rxjs';
-
+import { Router ,ActivatedRoute} from '@angular/router';
 @Component({
   selector: 'app-get-quote',
   templateUrl: './get-quote.component.html',
@@ -13,6 +13,8 @@ export class GetQuoteComponent implements OnInit {
 
   breadcumb: BreadCumb;
   postForm: FormGroup;
+  preInsuranceType = null;
+  preInsuranceTypevalue =null;
 
   get createdBy() {
     return this.postForm.get('createdBy');
@@ -35,14 +37,18 @@ export class GetQuoteComponent implements OnInit {
   subscription$: Subscription;
 
 
-  constructor(
+  constructor(private router:Router, private activatedRoute:ActivatedRoute
     // private authService: AuthService,
     // private store: Store<AppState>,
     // private fb: FormBuilder,
     // private activatedRoute: ActivatedRoute,
     // private formService: FormService
+   
   ) {
-
+    this.preInsuranceType = this.router.getCurrentNavigation().extras.state
+    if(this.preInsuranceType){
+      this.preInsuranceTypevalue = this.preInsuranceType.name
+    }
     /** Make the Changes here while creating new post type */
     this.breadcumb = {
       title: 'Get Quote',

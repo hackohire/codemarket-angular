@@ -60,7 +60,7 @@
 
                  <div style="
                  margin-left: 32%;
-                 color: #000B4F;
+                 color: #323232;
                  margin-top: 15px;
                  font-size: 30px;
              ">TESTIMONIALS</div>
@@ -157,16 +157,16 @@
                 </div>
                 <div id="sidebar-nav2">
                     <ul id="navlist2">
-                        <li><a href="get-quote" target="_blank">Property Insurance</a></li>
-                        <li><a href="get-quote" target="_blank">Commercial Insurance</a></li>
+                        <li><a [routerLink]="['/', 'get-quote']" [state]="{name:'Property'}" >Property Insurance</a></li>
+                        <li><a [routerLink]="['/', 'get-quote']" [state]="{name:'Commercial'}">Commercial Insurance</a></li>
 
-                        <li><a href="get-quote" target="_blank">Employee Benefits</a></li>
-                        <li><a href="get-quote" target="_blank">Worker's Compensation</a></li>
+                        <li><a [routerLink]="['/', 'get-quote']" [state]="{name:'Others'}">Employee Benefits</a></li>
+                        <li><a [routerLink]="['/', 'get-quote']" [state]="{name:'Worker'}">Worker's Compensation</a></li>
 
-                        <li><a href="get-quote" target="_blank">Home Insurance</a></li>
-                        <li><a href="get-quote" target="_blank">Auto Insurance</a></li>
+                        <li><a [routerLink]="['/', 'get-quote']" [state]="{name:'Home'}">Home Insurance</a></li>
+                        <li><a [routerLink]="['/', 'get-quote']" [state]="{name:'Auto'}">Auto Insurance</a></li>
 
-                        <li><a href="get-quote" target="_blank">Health Insurance</a></li>
+                        <li><a [routerLink]="['/', 'get-quote']" [state]="{name:'Health'}">Health Insurance</a></li>
                     </ul>
                 </div>
                 <div id="sidebar-box">
@@ -247,6 +247,40 @@
                                 padding-bottom: 10px;
                                 border-radius: 8px;
                             " [routerLink]="['/', 'learn-more']">Learn More...</a></h4>
+                        </div>
+                
+                    </div>
+                </div>
+
+                <div class="home_product post2">
+                    <div class="list-pro">
+                        <ul class="product_hover" style="display: none;">
+                            <li><a href="https://www.fullerins.com/insurance-products/apartment/#apartment-buildings">Apartment
+                                    Buildings (5+ Units)</a></li>
+                            <li><a href="https://www.fullerins.com/insurance-products/apartment/#landlord-insurance">Landlord
+                                    Insurance (1-4 Units)</a></li>
+                        </ul>
+                    </div>
+                    <div class="fulink">
+                        <a href="#"><img width="274" height="198"
+                                src="../../assets/images/property_Insurance.jpg"
+                                class="attachment-Home_product Thumbnail size-Home_product Thumbnail wp-post-image"
+                                alt="Commercial Insurance Los Angeles CA | Fuller Insurance"></a>
+                
+                        <h2 style="color:#000B4F; font-weight: 400;">Property insurance</h2>
+                
+                        <div style="margin-top: 15px;">
+                            <h4><a style="
+                                color: #EBEBEBEB;
+                                background: #000B4F;
+                                font-size: 18px;
+                                text-align: center;
+                                padding-left: 25px;
+                                padding-right: 25px;
+                                padding-top: 10px;
+                                padding-bottom: 10px;
+                                border-radius: 8px;
+                            " [routerLink]="['/', 'dashboard']">Learn More...</a></h4>
                         </div>
                 
                     </div>

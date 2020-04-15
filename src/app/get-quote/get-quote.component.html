@@ -19,18 +19,18 @@
                 <mat-form-field class="field-full-width">
                     <input type="number" matInput formControlName="phone" placeholder="phone">
                 </mat-form-field>
-
+                
                 <mat-form-field class="field-full-width">
                     <mat-label>Insurance Type:</mat-label>
                     <select matNativeControl required formControlName="insuranceType">
-                      <option value="Life">Life</option>
-                      <option value="Property">Property</option>
-                      <option value="Commercial">Commercial</option>
-                      <option value="Worker">Worker</option>
-                      <option value="Health">Health</option>
-                      <option value="Home">Home</option>
-                      <option value="Auto">Auto</option>
-                      <option value="Auto">Others</option>
+                      <option [selected]="preInsuranceTypevalue == 'Life'" value="Life">Life</option>
+                      <option [selected]="preInsuranceTypevalue == 'Property'" value="Property">Property</option>
+                      <option [selected]="preInsuranceTypevalue == 'Commercial'" value="Commercial">Commercial</option>
+                      <option [selected]="preInsuranceTypevalue == 'Worker'" value="Worker">Worker</option>
+                      <option [selected]="preInsuranceTypevalue == 'Health'" value="Health">Health</option>
+                      <option [selected]="preInsuranceTypevalue == 'Home'" value="Home">Home</option>
+                      <option [selected]="preInsuranceTypevalue == 'Auto'" value="Auto">Auto</option>
+                      <option [selected]="preInsuranceTypevalue == 'Auto'" value="Auto">Others</option>
                     </select>
                   </mat-form-field>
 

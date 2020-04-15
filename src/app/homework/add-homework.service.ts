@@ -20,8 +20,8 @@ export class AddHomeworkService {
       {
         /** Mutation Query */
         mutation: gql`
-          mutation addHomework($assignment: AssignmentFieldsInput) {
-            addHomework(assignment: $assignment) {
+          mutation addHomework($homework: HomeworkFieldsInput) {
+            addHomework(homework: $homework) {
               assignmentNo
               title
               detailDescription
@@ -29,7 +29,7 @@ export class AddHomeworkService {
           }
           `,
         variables: {
-          assignment: formFieldObject
+          homework: formFieldObject
         },
       }
     ).pipe(

@@ -8,7 +8,7 @@ export const environment = {
   s3FilesBucketURL: 'https://joel-files.s3.amazonaws.com/public/',
   stripe_public_key: 'pk_live_EYCoYtpLszr802sOl89WeuW1',
   // stripe_public_key: 'pk_test_ighmL2U9UqAx0O4b8dKkSvdq',
-  webSocketURL: 'wss://kflxdv1ls6.execute-api.us-east-1.amazonaws.com/joel',
+  webSocketURL: 'wss://f1wx6ianbc.execute-api.us-east-1.amazonaws.com/joel',
   applicationId: '5d2ef428bbfa6576b357d5d4',
   googleAPIKey: 'AIzaSyAOpIXHUPA5bMssoAW3NDUGHveOf0N_tsY',
   // planDetails: plans.prod,

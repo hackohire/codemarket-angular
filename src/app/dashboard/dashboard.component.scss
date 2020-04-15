@@ -11,8 +11,8 @@
 .home_product {
 	padding: 4px 3px 27px 3px;  
 	float: left;     
-	width: 204px;    
-	margin-left: 12px;     
+	width: 279px;    
+	margin-top: 30px;     
 	background: #f6f6f6;     
 	text-align: center;     
 	box-shadow: 0 2px 1px 1px rgba(93, 127, 162, 0.8);     
@@ -622,18 +622,7 @@ overflow: hidden;
   transition: background-color 0.6s linear;
 }
 
-.testimonialslider blockquote:after { 
-  content: " "; 
-  height: 0; 
-  width: 0; 
-  position: absolute; 
-  top: 100%; 
-  border: solid transparent; 
-  border-top-color: #daeefb;
-  border-left-color:#daeefb;
-  border-width: 10px; 
-  left: 10%; 
-} 
+
 .testimonialslider #second:checked ~ .two blockquote {
   background-color:#daeefb;
 }

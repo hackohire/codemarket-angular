@@ -29,6 +29,7 @@ import { CommunityImpactStoriesComponent } from './community-impact-stories/comm
 import { AdvocatesInfluencersComponent } from './advocates-influencers/advocates-influencers.component';
 import { ContactComponent } from './contact/contact.component';
 import { GetQuoteComponent } from './get-quote/get-quote.component';
+import { LearnMoreComponent } from './learn-more/learn-more.component';
 // import { PostDataResolver } from './core/resolver';
 
 const routes: Routes = [
@@ -308,8 +309,12 @@ const routes: Routes = [
     component: ContactComponent
   },
   {
-    path: 'get-quote',
+    path: 'get-quote/:insuranceType',
     component: GetQuoteComponent
+  },
+  {
+    path: 'learn-more',
+    component: LearnMoreComponent
   }
   /** Static routes ends here */
 ];

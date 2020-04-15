@@ -44,6 +44,7 @@ import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.
 import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
 import { ContactComponent } from './contact/contact.component';
 import { GetQuoteComponent } from './get-quote/get-quote.component';
+import { LearnMoreComponent } from './learn-more/learn-more.component';
 // import { SignInComponent } from './core/amplify/sign-in-component';
 
 @NgModule({
@@ -85,7 +86,8 @@ import { GetQuoteComponent } from './get-quote/get-quote.component';
     CommunityImpactStoriesComponent,
     AdvocatesInfluencersComponent,
     ContactComponent,
-    GetQuoteComponent
+    GetQuoteComponent,
+    LearnMoreComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

@@ -8,7 +8,7 @@ export const environment = {
   s3FilesBucketURL: 'https://codemarket-files.s3.amazonaws.com/public/',
   stripe_public_key: 'pk_live_EYCoYtpLszr802sOl89WeuW1',
   // stripe_public_key: 'pk_test_ighmL2U9UqAx0O4b8dKkSvdq',
-  webSocketURL: 'wss://hgo07730wk.execute-api.us-east-1.amazonaws.com/prod',
+  webSocketURL: 'wss://rn9gdz7ty7.execute-api.us-east-1.amazonaws.com/prod',
   // planDetails: plans.prod,
   planDetails: plans.prod,
   oauth: {

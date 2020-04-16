@@ -2,7 +2,9 @@ import { Component, OnInit, ViewChild, OnDestroy, AfterViewInit } from '@angular
 import { AuthService } from 'src/app/core/services/auth.service';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/core/store/state/app.state';
-import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { Product } from 'src/app/shared/models/product.model';
 import { Subscription, merge, of, Observable } from 'rxjs';
 import { trigger, state, style, transition, animate } from '@angular/animations';

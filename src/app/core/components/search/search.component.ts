@@ -6,7 +6,7 @@ import { distinctUntilChanged, switchMap, map, tap } from 'rxjs/operators';
 import { Post } from '../../../shared/models/post.model';
 import { PostService } from '../../../shared/services/post.service';
 import { appConstants } from '../../../shared/constants/app_constants';
-import { MatDialogRef } from '@angular/material';
+import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 
 @Component({

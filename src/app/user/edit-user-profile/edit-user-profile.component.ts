@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { selectLoggedInUser } from 'src/app/core/store/selectors/user.selector';
 import { UpdateUser } from 'src/app/core/store/actions/user.actions';
-import { MatChipInputEvent } from '@angular/material';
+import { MatChipInputEvent } from '@angular/material/chips';
 import { AppState } from 'src/app/core/store/state/app.state';
 import { User } from 'src/app/shared/models/user.model';
 import  Storage  from '@aws-amplify/storage';
@@ -24,7 +24,7 @@ import { CompanyService } from '../../companies/company.service';
 export class EditUserProfileComponent implements OnInit {
 
   readonly separatorKeysCodes: number[] = [ENTER, COMMA, SPACE];
-  @ViewChild('profilePic', { static: false }) profilePic;
+  @ViewChild('profilePic') profilePic;
   userProfileForm: FormGroup;
   loggedInUser: User;
   user$: Observable<User>;

@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MembershipService } from '../membership.service';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import Swal from 'sweetalert2';
@@ -17,7 +17,7 @@ export class InviteMembersDialogComponent implements OnInit {
     return this.usersListForm.get('list') as FormArray;
   }
   subscriptionResponse: any;
-  @ViewChild('successfulInvitation', { static: false }) successfulInvitation: SwalComponent;
+  @ViewChild('successfulInvitation') successfulInvitation: SwalComponent;
 
   constructor(
     private fb: FormBuilder,

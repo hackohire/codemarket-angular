@@ -32,7 +32,7 @@ export class AddPostTypeComponent implements OnInit {
     return this.postTypeForm.get('status');
   }
 
-  @ViewChild('descriptionEditor', { static: false }) descriptionEditor: EditorComponent;
+  @ViewChild('descriptionEditor') descriptionEditor: EditorComponent;
 
   fields = [
     /** Common Fields */

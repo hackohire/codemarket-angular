@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from './core/store/state/app.state';
 import { GetCartProductsList } from './core/store/actions/cart.actions';
 import { tap } from 'rxjs/operators';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { VideoChatComponent } from './video-chat/video-chat.component';
 import { UserService } from './user/user.service';
 import Peer from 'peerjs';

@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild, Input, Output, EventEmitter, OnChanges, SimpleChanges, AfterViewInit } from '@angular/core';
-import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { AuthService } from '../../../core/services/auth.service';
 import { PostService } from '../../services/post.service';
 import { DeletePost } from '../../../core/store/actions/post.actions';
@@ -25,7 +27,7 @@ export class DatatableComponent implements OnInit, OnChanges, AfterViewInit {
 
   @Input() dataSource = new MatTableDataSource();
   @ViewChild(MatSort, { static: true }) sort: MatSort;
-  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   @Output() redirect = new EventEmitter();
   @Output() getAllPosts = new EventEmitter();

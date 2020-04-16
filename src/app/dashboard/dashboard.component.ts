@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { Product } from '../shared/models/product.model';
 import { MatTableDataSource } from '@angular/material/table';
 import { HelpQuery } from '../shared/models/help-query.model';
-import { MatSort } from '@angular/material';
+import { MatSort } from '@angular/material/sort';
 import { UserService } from '../user/user.service';
 import { PostService } from '../shared/services/post.service';
 import { AuthService } from '../core/services/auth.service';
@@ -20,14 +20,14 @@ import { MembershipService } from '../membership/membership.service';
 })
 export class DashboardComponent implements OnInit {
 
-  @ViewChild('successInvitationAccept', { static: false }) successInvitationAccept: SwalComponent;
+  @ViewChild('successInvitationAccept') successInvitationAccept: SwalComponent;
   productsList$: Observable<Product[]>;
   helpRequestList$: Observable<HelpQuery[]>;
   usersListAndTheirBugFixes$: Observable<[]>;
 
   displayedColumnsForHelpRequest: string[] = ['number', 'name', 'price', 'createdBy', 'createdAt'];
   dataSource = new MatTableDataSource();
-  @ViewChild(MatSort, {static: false}) sort: MatSort;
+  @ViewChild(MatSort) sort: MatSort;
 
   constructor(
     private userService: UserService,

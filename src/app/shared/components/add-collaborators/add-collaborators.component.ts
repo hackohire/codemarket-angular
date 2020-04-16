@@ -16,7 +16,7 @@ export class AddCollaboratorsComponent implements OnInit {
     collaborators : new FormControl('', Validators.required)
   });
 
-  @ViewChild(MdePopoverTrigger, {static: false}) collaboratorsPopover: MdePopoverTrigger;
+  @ViewChild(MdePopoverTrigger) collaboratorsPopover: MdePopoverTrigger;
 
   constructor(
     private postService: PostService,

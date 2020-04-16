@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTableDataSource, MatSort } from '@angular/material';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { Company } from '../../shared/models/company.model';
 import { BreadCumb } from '../../shared/models/bredcumb.model';
 import { ActivatedRoute } from '@angular/router';

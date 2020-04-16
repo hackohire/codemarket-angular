@@ -14,7 +14,8 @@ import { environment } from 'src/environments/environment';
 import { selectSelectedPost } from 'src/app/core/store/selectors/post.selectors';
 import { SetSelectedPost } from 'src/app/core/store/actions/post.actions';
 import { Post } from 'src/app/shared/models/post.model';
-import { MatDialog, MatPaginator } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
 import { VideoChatComponent } from 'src/app/video-chat/video-chat.component';
 import Peer from 'peerjs';
 import { PostService } from '../../shared/services/post.service';
@@ -33,7 +34,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 })
 export class DetailsComponent implements OnInit, OnDestroy {
 
-  @ViewChild('successfulRSVP', { static: false }) successfulRSVP: SwalComponent;
+  @ViewChild('successfulRSVP') successfulRSVP: SwalComponent;
   details$: Observable<Post>;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)

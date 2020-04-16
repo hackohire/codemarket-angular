@@ -12,7 +12,8 @@ import { ActivatedRoute } from '@angular/router';
 import { switchMap, tap, startWith, map } from 'rxjs/operators';
 import { FormService } from 'src/app/shared/services/form.service';
 import { Tag } from 'src/app/shared/models/product.model';
-import { MatAutocomplete, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { MatAutocomplete } from '@angular/material/autocomplete';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { PostStatus } from 'src/app/shared/models/poststatus.enum';
 import { PostType } from 'src/app/shared/models/post-types.enum';
 import { SetSelectedPost, GetPostById, AddPost, UpdatePost } from 'src/app/core/store/actions/post.actions';
@@ -82,7 +83,7 @@ export class AddEventComponent implements OnInit {
 
   eventTypes = Object.values(EventTypes);
 
-  @ViewChild('descriptionEditor', { static: false }) descriptionEditor: EditorComponent;
+  @ViewChild('descriptionEditor') descriptionEditor: EditorComponent;
 
   public dialogRef = null;
   public data;

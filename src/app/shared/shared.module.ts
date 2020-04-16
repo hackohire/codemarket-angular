@@ -19,7 +19,7 @@ import { SafePipe } from './pipes/safe.pipe';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { LikeDislikeComponent } from './components/like-dislike/like-dislike.component';
 import { VideoChatComponent } from '../video-chat/video-chat.component';
-import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from '@danielmoncada/angular-datetime-picker';
 import { AddPostMenuComponent } from './components/add-post-menu/add-post-menu.component';
 import { CompaniesListComponent } from '../companies/companies-list/companies-list.component';
 // import { Ng5SliderModule } from 'ng5-slider';

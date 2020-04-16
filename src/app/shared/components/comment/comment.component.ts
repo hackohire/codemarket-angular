@@ -29,7 +29,7 @@ export class CommentComponent implements OnInit {
   edit: boolean;
   replyEditorId: string;
 
-  @ViewChild('commentReplyEditor', {static: false}) commentReplyEditor: EditorComponent;
+  @ViewChild('commentReplyEditor') commentReplyEditor: EditorComponent;
 
   anonymousAvatar = '../../../../assets/images/anonymous-avatar.jpg';
   s3FilesBucketURL = environment.s3FilesBucketURL;

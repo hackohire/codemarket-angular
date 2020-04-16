@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject, ViewChild, ElementRef, AfterViewInit, PLATFORM_ID } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormGroup, FormBuilder, FormArray, Validators, FormControl } from '@angular/forms';
 import { environment } from '../../../environments/environment';
 import { AuthService } from '../../core/services/auth.service';
@@ -39,8 +39,8 @@ const card = elements.create('card', {
 })
 export class SubscriptionDialogComponent implements OnInit, AfterViewInit {
 
-  @ViewChild('cardForm', { static: false }) cardForm: ElementRef;
-  @ViewChild('successfulPayment', { static: false }) successfulPayment: SwalComponent;
+  @ViewChild('cardForm') cardForm: ElementRef;
+  @ViewChild('successfulPayment') successfulPayment: SwalComponent;
   promoCodeControl = new FormControl('');
   trial_period_days: number;
 

@@ -56,8 +56,8 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
 
   postTypesArray = appConstants.postTypesArray;
 
-  @ViewChild('coverPic', { static: false }) coverPic;
-  @ViewChild('cover', { static: false }) cover: ElementRef;
+  @ViewChild('coverPic') coverPic;
+  @ViewChild('cover') cover: ElementRef;
   selectedCoverPic: File;
   selectedCoverPicURL = '';
   uploadedCoverUrl = '';
@@ -97,7 +97,7 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
     data: BlockToolData
   }];
 
-  @ViewChild(MdePopoverTrigger, { static: false }) socialMediaPopover: MdePopoverTrigger;
+  @ViewChild(MdePopoverTrigger) socialMediaPopover: MdePopoverTrigger;
 
   companyViewLinks = [
     {

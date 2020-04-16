@@ -7,7 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { first } from 'rxjs/internal/operators/first';
 import { HttpClient } from '@angular/common/http';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { SubscriptionDialogComponent } from './subscription-dialog/subscription-dialog.component';
 import { SellingProductsService } from '../selling/selling-products.service';
 import { tap } from 'rxjs/operators';
@@ -33,7 +33,7 @@ export class MembershipComponent implements OnInit {
   breadcumb: BreadCumb;
   listOfPlans = environment.planDetails;
   stripe;
-  @ViewChild('successfulPayment', { static: false }) successfulPayment: SwalComponent;
+  @ViewChild('successfulPayment') successfulPayment: SwalComponent;
   successfulPurchasedSubscription: any;
   sessionId: string;
   tabs = ['First', 'Second', 'Third'];

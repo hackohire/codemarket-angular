@@ -11,7 +11,7 @@ import { BreadCumb } from '../../shared/models/bredcumb.model';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { FormService } from '../../shared/services/form.service';
-import { MatAutocomplete } from '@angular/material';
+import { MatAutocomplete } from '@angular/material/autocomplete';
 import { PostStatus } from '../../shared/models/poststatus.enum';
 import { PostType } from '../../shared/models/post-types.enum';
 import { AddPost, UpdatePost, GetPostById, SetSelectedPost } from '../../core/store/actions/post.actions';
@@ -67,7 +67,7 @@ export class AddProductsComponent implements OnInit, OnDestroy {
 
   tags: Tag[];
 
-  @ViewChild('file', { static: false }) file;
+  @ViewChild('file') file;
   public files: File[];
 
   visible = true;
@@ -78,11 +78,11 @@ export class AddProductsComponent implements OnInit, OnDestroy {
   tagSuggestions: Tag[];
   allTags: Tag[];
 
-  @ViewChild('searchInput', {static: false}) searchInput: ElementRef<HTMLInputElement>;
-  @ViewChild('auto', {static: false}) matAutocomplete: MatAutocomplete;
+  @ViewChild('searchInput') searchInput: ElementRef<HTMLInputElement>;
+  @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
-  @ViewChild('descriptionEditor', { static: false }) descriptionEditor: EditorComponent;
-  @ViewChild('supportDescriptionEditor', { static: false }) supportDescriptionEditor: EditorComponent;
+  @ViewChild('descriptionEditor') descriptionEditor: EditorComponent;
+  @ViewChild('supportDescriptionEditor') supportDescriptionEditor: EditorComponent;
 
   constructor(
     public auth: AuthService,

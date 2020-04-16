@@ -37,7 +37,7 @@ export class SendEmailComponent implements OnInit {
     return this.emailForm.get('company');
   }
 
-  @ViewChild('descriptionEditor', { static: false }) descriptionEditor: EditorComponent;
+  @ViewChild('descriptionEditor') descriptionEditor: EditorComponent;
 
   subscription$: Subscription;
 

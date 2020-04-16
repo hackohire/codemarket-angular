@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, AfterViewInit, ViewChild, Output, EventEmitter } from '@angular/core';
-import { MatPaginator } from '@angular/material';
+import { MatPaginator } from '@angular/material/paginator';
 import { merge, of } from 'rxjs';
 import { startWith, catchError } from 'rxjs/operators';
 
@@ -11,7 +11,7 @@ import { startWith, catchError } from 'rxjs/operators';
 export class PaginatorComponent implements AfterViewInit {
 
   @Input() length: number; /** Total number of elements */
-  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator; /** Mat Paginator Trmplate Reference  */
+  @ViewChild(MatPaginator) paginator: MatPaginator; /** Mat Paginator Trmplate Reference  */
 
   @Output() fetchData = new EventEmitter();
 

@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { BreadCumb } from '../../shared/models/bredcumb.model';
 import { FormGroup, FormArray, FormControl, FormBuilder, Validators } from '@angular/forms';
-import { MatAutocomplete } from '@angular/material';
+import { MatAutocomplete } from '@angular/material/autocomplete';
 // import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 import { AuthService } from '../../core/services/auth.service';
 import { ActivatedRoute } from '@angular/router';
@@ -70,7 +70,7 @@ export class AddCompanyComponent implements OnInit {
 
   allCities: Tag[];
 
-  @ViewChild('descriptionEditor', { static: false }) descriptionEditor: EditorComponent;
+  @ViewChild('descriptionEditor') descriptionEditor: EditorComponent;
 
   constructor(
     private authService: AuthService,

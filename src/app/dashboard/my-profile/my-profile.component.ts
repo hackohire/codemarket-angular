@@ -8,7 +8,8 @@ import { UserService } from '../../user/user.service';
 import { User } from '../../shared/models/user.model';
 import { Observable, Subscription, of } from 'rxjs';
 import { VideoChatComponent } from '../../video-chat/video-chat.component';
-import { MatDialog, MatPaginator } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
 import Peer from 'peerjs';
 import { PostType } from '../../shared/models/post-types.enum';
 import { map } from 'rxjs/operators';
@@ -91,13 +92,13 @@ export class MyProfileComponent implements OnInit {
 
   commentForm: FormGroup;
 
-  @ViewChild('coverPic', { static: false }) coverPic;
-  @ViewChild('cover', { static: false }) cover: ElementRef;
+  @ViewChild('coverPic') coverPic;
+  @ViewChild('cover') cover: ElementRef;
   selectedCoverPic: File;
   selectedCoverPicURL = '';
   uploadedCoverUrl = '';
 
-  @ViewChild('profilePic', { static: false }) profilePic;
+  @ViewChild('profilePic') profilePic;
   selectedProfilePic: File;
   selectedProfilePicURL = '';
 

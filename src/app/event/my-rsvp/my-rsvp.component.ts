@@ -7,7 +7,8 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../../core/store/state/app.state';
 import { selectLoggedInUser } from '../../core/store/selectors/user.selector';
 import { tap, switchMap } from 'rxjs/operators';
-import { MatSort, MatTableDataSource } from '@angular/material';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-my-rsvp',

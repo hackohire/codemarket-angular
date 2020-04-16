@@ -8,7 +8,8 @@ import { AppState } from '../../store/state/app.state';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { selectCartListLength } from '../../store/selectors/cart.selectors';
 import { Router } from '@angular/router';
-import { MatDialog, MatAnchor } from '@angular/material';
+import { MatAnchor } from '@angular/material/button';
+import { MatDialog } from '@angular/material/dialog';
 import { SearchComponent } from '../search/search.component';
 import { PostType } from '../../../shared/models/post-types.enum';
 import { MessageService } from '../../../shared/services/message.service';
@@ -22,7 +23,7 @@ import { appConstants } from '../../../shared/constants/app_constants';
 })
 export class NavBarComponent implements OnInit, OnDestroy {
 
-  @ViewChild('lr', {static: false}) lr: MatAnchor;
+  @ViewChild('lr') lr: MatAnchor;
   postTypes = PostType;
 
   postTypesArray = appConstants.postTypesArray;

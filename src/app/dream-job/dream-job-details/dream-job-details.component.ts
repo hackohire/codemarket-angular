@@ -10,7 +10,7 @@ import { AppState } from '../../core/store/state/app.state';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommentService } from '../../shared/services/comment.service';
 import { AuthService } from '../../core/services/auth.service';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { ShareService } from '@ngx-share/core';
 import { PostService } from '../../shared/services/post.service';
 import { selectSelectedPost } from '../../core/store/selectors/post.selectors';

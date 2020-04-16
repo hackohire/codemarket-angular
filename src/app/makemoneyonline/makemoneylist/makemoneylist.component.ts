@@ -1,6 +1,7 @@
 import { Component, OnInit , ViewChild} from '@angular/core';
 import { BreadCumb } from '../../shared/models/bredcumb.model';
-import { MatTableDataSource, MatSort } from '@angular/material';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
 import { SweetalertService } from '../../shared/services/sweetalert.service';
 import { MakemoneyonlineService } from '../makemoneyonline.service';

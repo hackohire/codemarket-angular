@@ -1,5 +1,6 @@
 import { Component, ViewChild, ElementRef, Inject, PLATFORM_ID } from '@angular/core';
-import { MatButton, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { MatButton } from '@angular/material/button';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { BreadCumb } from '../shared/models/bredcumb.model';
 import { environment } from 'src/environments/environment';
 import { AuthService } from '../core/services/auth.service';
@@ -13,10 +14,10 @@ import { isPlatformBrowser } from '@angular/common';
 
 export class VideoChatComponent {
   // @ViewChild('localVideo', { static: false }) localVideo: ElementRef<HTMLVideoElement>;
-  @ViewChild('remoteVideo', { static: false }) remoteVideo: ElementRef<HTMLVideoElement>;
-  @ViewChild('callButton', { static: false }) callButton: MatButton;
-  @ViewChild('answerButton', { static: false }) answerButton: MatButton;
-  @ViewChild('rejectButton', { static: false }) rejectButton: MatButton;
+  @ViewChild('remoteVideo') remoteVideo: ElementRef<HTMLVideoElement>;
+  @ViewChild('callButton') callButton: MatButton;
+  @ViewChild('answerButton') answerButton: MatButton;
+  @ViewChild('rejectButton') rejectButton: MatButton;
 
   breadcumb: BreadCumb;
   navLinks = [];

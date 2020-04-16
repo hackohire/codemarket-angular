@@ -19,7 +19,7 @@ export class AddPostMenuComponent implements OnInit {
 
   @Input() label = 'Add';
 
-  @ViewChild('addPostMenu', {static: false}) addPostMenu: MatMenuTrigger;
+  @ViewChild('addPostMenu') addPostMenu: MatMenuTrigger;
 
   ngOnInit() {
   }

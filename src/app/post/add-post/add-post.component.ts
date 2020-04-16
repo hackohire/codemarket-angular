@@ -47,7 +47,7 @@ export class AddPostComponent implements OnInit {
     return this.postForm.get('status');
   }
 
-  @ViewChild('descriptionEditor', { static: false }) descriptionEditor: EditorComponent;
+  @ViewChild('descriptionEditor') descriptionEditor: EditorComponent;
 
   subscription$ = new Subscription();
 

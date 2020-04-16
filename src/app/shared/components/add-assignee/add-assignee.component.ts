@@ -17,7 +17,7 @@ export class AddAssigneeComponent implements OnInit {
     assignees : new FormControl('', Validators.required)
   });
 
-  @ViewChild(MdePopoverTrigger, {static: false}) assigneesPopover: MdePopoverTrigger;
+  @ViewChild(MdePopoverTrigger) assigneesPopover: MdePopoverTrigger;
 
   constructor(
     private postService: PostService,

@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "codemarket": {
+    "akash": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -99,21 +99,21 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
             "port": 4800,
-            "browserTarget": "codemarket:build"
+            "browserTarget": "akash:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "codemarket:build:production"
+              "browserTarget": "akash:build:production"
             },
             "staging": {
-              "browserTarget": "codemarket:build:staging"
+              "browserTarget": "akash:build:staging"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "codemarket:build"
+            "browserTarget": "akash:build"
           }
         },
         "test": {
@@ -151,14 +151,14 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "codemarket:serve"
+            "devServerTarget": "akash:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "codemarket:serve:production"
+              "devServerTarget": "akash:serve:production"
             },
             "staging": {
-              "devServerTarget": "codemarket:serve:staging"
+              "devServerTarget": "akash:serve:staging"
             }
           }
         },
@@ -201,5 +201,5 @@
       }
     }
   },
-  "defaultProject": "codemarket"
+  "defaultProject": "akash"
 }

@@ -8,7 +8,7 @@ export const environment = {
   s3FilesBucketURL: 'https://akash-files.s3.amazonaws.com/public/',
   stripe_public_key: 'pk_live_EYCoYtpLszr802sOl89WeuW1',
   // stripe_public_key: 'pk_test_ighmL2U9UqAx0O4b8dKkSvdq',
-  webSocketURL: 'wss://2jkjblx806.execute-api.us-east-1.amazonaws.com/akash',
+  webSocketURL: 'wss://dr1xvo5ghj.execute-api.us-east-1.amazonaws.com/akash',
   // planDetails: plans.prod,
   planDetails: plans.prod,
   oauth: {

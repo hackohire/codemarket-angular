@@ -7,7 +7,7 @@ import { PostService } from '../../../shared/services/post.service';
 import { SweetalertService } from '../../../shared/services/sweetalert.service';
 import { CompanyService } from '../../company.service';
 import { Subscription, of, Observable } from 'rxjs';
-import { keyBy } from 'lodash';
+import { keyBy, orderBy } from 'lodash';
 import { Post } from '../../../shared/models/post.model';
 import { Company } from '../../../shared/models/company.model';
 import { User } from '../../../shared/models/user.model';
@@ -91,6 +91,10 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
   questionData: [];
 
   commentId: string;
+
+  emailAsc = true;
+  nameAsc = true;
+  phoneAsc = true;
 
   postDescription: [{
     type: string;
@@ -470,4 +474,52 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
     this.router.navigate(['./post/add-post'], { state: { post: { companies: [{ name: this.companyDetails.name, _id: this.companyDetails._id }] } }, queryParams: { type: postType } });
   }
 
+  changeOrder(value, order, postType) {
+
+    const paginationObj = {
+      pageNumber: this.paginator.pageIndex + 1, limit: this.paginator.pageSize ? this.paginator.pageSize : 10,
+      sort: {order: ''}};
+
+      paginationObj.sort['field'] = value;
+      paginationObj.sort['order'] = order === 'asc' ? '1' : '-1';
+
+    this.postService.getAllPosts(
+      paginationObj, postType, '', this.companyDetails._id).subscribe((u) => {
+        this.companyRelatedPosts.posts = u.posts;
+        this.totalcompanyRelatedPosts = u.total;
+        if (order === 'asc') {
+          switch (value) {
+            case 'email':
+          this.emailAsc = false;
+          break;
+          case 'phone':
+            this.phoneAsc = false;
+            break;
+          case 'name':
+            this.nameAsc = false;
+            break;
+          default:
+            break;
+          }
+        }
+        if (order === 'desc') {
+          switch (value) {
+          case 'email':
+            this.emailAsc = true;
+            break;
+          case 'phone':
+            this.phoneAsc = true;
+            break;
+          case 'name':
+            this.nameAsc = true;
+            break;
+          default:
+            break;
+          }
+        }
+
+      });
+
+    // this.companyRelatedPosts.posts = orderBy(this.games, [value], order);
+  }
 }

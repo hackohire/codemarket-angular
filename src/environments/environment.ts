@@ -11,7 +11,7 @@ export const environment = {
   graphql_url: 'http://localhost:3200/graphql',
   s3FilesBucketURL: 'https://codearket-upload-files.s3.amazonaws.com/public/',
   stripe_public_key: 'pk_test_ighmL2U9UqAx0O4b8dKkSvdq',
-  webSocketURL: 'wss://vgvyg9uqe2.execute-api.us-east-1.amazonaws.com/prod',
+  webSocketURL: 'wss://localhost:3001',
   planDetails: plans.dev,
   oauth: {
     // Domain name

@@ -323,7 +323,7 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
   }
 
   deletePost(_id: string) {
-    this.postService.deletePost(_id).subscribe();
+    this.postService.deletePost(_id, {name: this.authService.loggedInUser.name, _id: this.authService.loggedInUser.name}).subscribe();
   }
 
   updateCompany(companyDetails) {

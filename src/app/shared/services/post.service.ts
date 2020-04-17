@@ -138,19 +138,20 @@ export class PostService {
     );
   }
 
-  updatePost(post: Post): Observable<Post> {
+  updatePost(post: Post, updatedBy = null): Observable<Post> {
     return this.apollo.mutate(
       {
         mutation: gql`
-          mutation updatePost($post: PostInput) {
-            updatePost(post: $post) {
+          mutation updatePost($post: PostInput, $updatedBy: UserInput) {
+            updatePost(post: $post, updatedBy: $updatedBy) {
               ...Post
             }
           }
           ${this.postFields}
         `,
         variables: {
-          post
+          post,
+          updatedBy
         }
       }
     ).pipe(
@@ -158,16 +159,17 @@ export class PostService {
     );
   }
 
-  deletePost(postId: string): Observable<boolean> {
+  deletePost(postId: string, deletedBy = null): Observable<boolean> {
     return this.apollo.mutate(
       {
         mutation: gql`
-          mutation deletePost($postId: String) {
-            deletePost(postId: $postId)
+          mutation deletePost($postId: String, $deletedBy: UserInput) {
+            deletePost(postId: $postId, deletedBy: $deletedBy)
           }
         `,
         variables: {
-          postId
+          postId,
+          deletedBy
         }
       }
     ).pipe(

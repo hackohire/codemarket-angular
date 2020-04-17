@@ -82,7 +82,7 @@ export class DatatableComponent implements OnInit, OnChanges, AfterViewInit {
   deletePost(post, i: number) {
 
     this.sweetAlertService.confirmDelete(() => {
-      this.dataSource._renderChangesSubscription = this.postService.deletePost(post._id).subscribe((d) => {
+      this.dataSource._renderChangesSubscription = this.postService.deletePost(post._id, {name: this.authService.loggedInUser.name, _id: this.authService.loggedInUser.name}).subscribe((d) => {
         if (d) {
           this.dataSource.data = this.dataSource.data.filter((d: any) => d._id !== post._id);
           this.length = this.length - 1;

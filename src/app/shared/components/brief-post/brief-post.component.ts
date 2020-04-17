@@ -46,7 +46,7 @@ export class BriefPostComponent implements OnInit, OnDestroy {
 
 
   deletePost(postId) {
-    this.postService.deletePost(postId).subscribe(d => {
+    this.postService.deletePost(postId, {name: this.authService.loggedInUser.name, _id: this.authService.loggedInUser.name}).subscribe(d => {
       if (d) {
         this.delete.emit(postId);
       }

@@ -1,5 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { Post } from 'src/app/shared/models/post.model';
+import { User } from '../../../shared/models/user.model';
 
 export enum EPostActions {
     AddPost = '[Post] Add Post',
@@ -63,7 +64,7 @@ export const SetPostsByType = createAction(
 
 export const UpdatePost = createAction(
     EPostActions.UpdatePost,
-    props<{post: Post}>()
+    props<{post: Post, updatedBy?: User}>()
 );
 
 export const PostUpdated = createAction(
@@ -73,6 +74,6 @@ export const PostUpdated = createAction(
 
 export const DeletePost = createAction(
     EPostActions.DeletePost,
-    props<{postId: string}>()
+    props<{postId: string, deletedBy?: User}>()
 );
 

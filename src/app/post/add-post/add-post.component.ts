@@ -141,7 +141,9 @@ export class AddPostComponent implements OnInit {
     // postFormValue.companies = postFormValue.companies.map(c => c._id);
 
     if (this.postId) {
-      this.store.dispatch(UpdatePost({post: postFormValue}));
+      this.store.dispatch(UpdatePost({
+        post: postFormValue, updatedBy: {name: this.authService.loggedInUser.name, _id: this.authService.loggedInUser.name}
+      }));
     } else {
       this.store.dispatch(AddPost({post: postFormValue}));
     }

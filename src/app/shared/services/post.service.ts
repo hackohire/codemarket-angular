@@ -232,6 +232,29 @@ export class PostService {
     )
   }
 
+  getEmailPhoneCountForContact(type: string): Observable<any> {
+    return this.apollo.query({
+      query : gql`
+        query getEmailPhoneCountForContact($type: String) {
+          getEmailPhoneCountForContact(type: $type) {
+            _id
+            emailCount
+            phoneCount
+          }
+        }
+      `,
+      variables: {
+        type: type ? type : 'contact'
+      },
+      fetchPolicy: 'no-cache'
+    }
+    ).pipe(
+      map((p: any) => {
+        return p.data.getEmailPhoneCountForContact
+      }),
+    )
+  }
+
   redirectToPostDetails(post, commentId = ''): void {
     // this.store.dispatch(SetSelectedPost({ post: null }));
 

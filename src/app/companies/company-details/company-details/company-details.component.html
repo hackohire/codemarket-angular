@@ -644,7 +644,7 @@
                                 <i class="fas fa-sort-down" (click)="changeOrder('name','desc','contact')"></i>
                             </span>
                         </th>
-                        <th>Email
+                        <th>Email ({{emailCount}})
                             <span *ngIf="emailAsc">
                                 <i class="fas fa-sort-up" (click)="changeOrder('email','asc','contact')"></i>
                             </span>
@@ -652,7 +652,7 @@
                                 <i class="fas fa-sort-down" (click)="changeOrder('email','desc','contact')"></i>
                             </span>
                         </th>
-                        <th>Phone
+                        <th>Phone ({{phoneCount}})
                             <span *ngIf="phoneAsc">
                                 <i class="fas fa-sort-up" (click)="changeOrder('phone','asc','contact')"></i>
                             </span>
@@ -663,7 +663,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr  *ngFor="let e of companyRelatedPosts?.posts">
+                    <tr  *ngFor="let e of companyRelatedPosts?.posts" [routerLink]="['/','post',e._id]">
                         <td>{{e.name}}</td>
                         <td>{{e.email}}</td>
                         <td>{{e.phone}}</td>

@@ -86,6 +86,11 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
   emailAsc = true;
   nameAsc = true;
   phoneAsc = true;
+  currentOrderValue = 'name';
+  currentOrder = '-1';
+
+  emailCount = 0;
+  phoneCount = 0;
 
   postDescription: [{
     type: string;
@@ -443,10 +448,23 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
     const paginationObj = {
       pageNumber: this.paginator.pageIndex + 1, limit: this.paginator.pageSize ? this.paginator.pageSize : 10,
       sort: {order: ''}};
+    
+    if (postType === 'contact') {
+      if (this.currentOrderValue) {
+        paginationObj.sort.order = this.currentOrder;
+        paginationObj.sort['field'] = this.currentOrderValue;
+      }
+    }
+
     this.postService.getAllPosts(
       paginationObj, postType, '', this.companyDetails._id).subscribe((u) => {
-        this.companyRelatedPosts.posts = u.posts;
-        this.totalcompanyRelatedPosts = u.total;
+        this.postService.getEmailPhoneCountForContact(postType).subscribe((b) => {
+          this.companyRelatedPosts.posts = u.posts;
+          this.totalcompanyRelatedPosts = u.total;
+          this.emailCount = b[0].emailCount ? b[0].emailCount : 0;
+          this.phoneCount = b[0].phoneCount ? b[0].phoneCount : 0;
+        })
+
       });
   }
 
@@ -462,6 +480,8 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
 
       paginationObj.sort['field'] = value;
       paginationObj.sort['order'] = order === 'asc' ? '1' : '-1';
+      this.currentOrderValue = value;
+      this.currentOrder = order === 'asc' ? '1' : '-1';
 
     this.postService.getAllPosts(
       paginationObj, postType, '', this.companyDetails._id).subscribe((u) => {
@@ -469,9 +489,9 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
         this.totalcompanyRelatedPosts = u.total;
         if (order === 'asc') {
           switch (value) {
-            case 'email':
-          this.emailAsc = false;
-          break;
+          case 'email':
+            this.emailAsc = false;
+            break;
           case 'phone':
             this.phoneAsc = false;
             break;

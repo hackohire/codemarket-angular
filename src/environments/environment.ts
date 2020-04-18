@@ -7,11 +7,11 @@ import { plans } from '../app/shared/constants/plan_details';
 export const environment = {
   production: false,
   COGNITO_AUTH_DOMAIN: 'https://platform.auth.us-east-1.amazoncognito.com',
-  serverless_url: 'http://localhost:3200/',
-  graphql_url: 'http://localhost:3200/graphql',
+  serverless_url: 'http://localhost:3200/dev/',
+  graphql_url: 'http://localhost:3200/dev/graphql',
   s3FilesBucketURL: 'https://codemarket-files.s3.amazonaws.com/public/',
   stripe_public_key: 'pk_test_ighmL2U9UqAx0O4b8dKkSvdq',
-  webSocketURL: 'ws://localhost:3001/',
+  webSocketURL: 'ws://localhost:3001',
   planDetails: plans.dev,
   oauth: {
     // Domain name

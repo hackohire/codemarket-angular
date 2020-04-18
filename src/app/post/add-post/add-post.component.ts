@@ -97,6 +97,7 @@ export class AddPostComponent implements OnInit {
       tags: new FormControl(i && i.tags ? i.tags : []),
       companies: new FormControl(i && i.companies ? i.companies : []),
       assignees: new FormControl(i && i.assignees ? i.assignees : []),
+      clients: new FormControl(i && i.clients ? i.clients : []),
       collaborators: new FormControl(i && i.collaborators ? i.collaborators : []),
       createdBy: new FormControl(i && i.createdBy && i.createdBy._id ? i.createdBy._id : ''),
       status: new FormControl(i && i.status ? i.status : PostStatus.Drafted),
@@ -147,6 +148,10 @@ export class AddPostComponent implements OnInit {
     } else {
       this.store.dispatch(AddPost({post: postFormValue}));
     }
+  }
+
+  cancelClicked() {
+    this.location.back();
   }
 
 }

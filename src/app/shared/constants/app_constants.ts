@@ -283,6 +283,11 @@ export const appConstants = {
         name
       }
 
+      clients {
+        _id
+        name
+      }
+
       jobProfile {
         _id
         name

@@ -52,7 +52,8 @@ export interface Post {
     /** Field for collaborator */
     collaborators?: [User];
     assignees?: [User];
-
+    clients?: [User];
+    
     users?: [User];
 
     /** Contact Related Fields */

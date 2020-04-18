@@ -90,7 +90,7 @@
             <!-- COMMENT REPLY EDITOR -->
             <app-editor #commentReplyEditor [placeholder]="'Add a Reply!'"
                 [editorStyle]="{padding: '0 15px', 'border-radius': '19px', background: '#f2f3f5', border: 'solid 0.5px rgb(236, 236, 236)'}"
-                [id]="'reply'+ comment?._id">
+                [id]="'reply'+ comment?._id" [data]="replyCommentForm.get('text')?.value">
             </app-editor>
             <!-- <textarea class="bla" name="reply-comment" placeholder="Write your comment..."></textarea> -->
             <button type="button" style="float: right;" class="btn btn--vsm btn--round"

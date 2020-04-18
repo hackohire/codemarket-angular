@@ -1,9 +1,9 @@
-import { BlockTool } from '@editorjs/editorjs';
+import { BlockTool, BlockToolData } from '@editorjs/editorjs';
 import { User } from './user.model';
 
 export interface Comment {
     _id?: string;
-    text?: BlockTool;
+    text?: any [];
     type: string;
     createdAt: string;
     updatedAt: string;
@@ -19,4 +19,6 @@ export interface Comment {
     blockId: string;
 
     postId: string;
+
+    textHTML?: string;
 }

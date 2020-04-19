@@ -22,22 +22,30 @@ export class ClassroomComponent implements OnInit {
 
   // Jane add for Insurance Quote
   getQuote(name, email, zipCode, age, sex, coverageAmount, termLength, healthLevel) {
-    const formFieldObject = {
-    name: name,
-    email: email,
-    zipCode: zipCode,
-    age: age,
-    sex: sex,
-    coverageAmount: coverageAmount,
-    termLength: termLength,
-    healthLevel: healthLevel
-    };
+    try {
+      var ageInt = parseInt(age);
+      var zipCodeInt = parseInt(zipCode);
 
-    this.quoteService.getQuote(formFieldObject).subscribe((quote) => {
-      if (quote) {
-        this.formFieldObject = quote;
-      }
-    })
+      const formFieldObject = {
+        name: name,
+        email: email,
+        zipCode: zipCodeInt,
+        age: ageInt,
+        sex: sex,
+        coverageAmount: coverageAmount,
+        termLength: termLength,
+        healthLevel: healthLevel
+      };
+
+      this.quoteService.getQuote(formFieldObject).subscribe((quote) => {
+        if (quote) {
+          this.formFieldObject = quote;
+        }
+      })
+    }
+    catch (e) {
+      console.log("Error:  input fields: age and zip code is not a valid integer\n");
+    }
   }
   // Jane add end
 

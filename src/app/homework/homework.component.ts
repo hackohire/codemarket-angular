@@ -19,25 +19,15 @@ export class HomeworkComponent implements OnInit {
   ngOnInit() {
   }
 
-  /*
-  getAssignment(assignmentNo, title) {
-
-    var assignmentDescription = "This is your homework assignment!"
-    this.formFieldObject = {
-      assignmentNo: assignmentNo,
-      title: title,
-      assignmentDescription: assignmentDescription
-    };
-  }
-  */
+ 
 
   addAssignment(assignmentNo, title, detailDescription) {
 
     try {
-      //var assignmentNoInt = parseInt(assignmentNo);
+      var assignmentNoInt = parseInt(assignmentNo);
 
       const formFieldObject = {
-        assignmentNo: assignmentNo,
+        assignmentNo: assignmentNoInt,
         title: title,
         detailDescription: detailDescription
       };

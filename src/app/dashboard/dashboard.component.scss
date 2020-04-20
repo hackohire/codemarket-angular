@@ -11,7 +11,7 @@
 .home_product {
 	padding: 4px 3px 27px 3px;  
 	float: left;     
-	width: 279px;    
+	width: 100%;    
 	margin-top: 30px;     
 	background: #f6f6f6;     
 	text-align: center;     
@@ -243,6 +243,37 @@ hr {
 //Main Content CSS
 
 /* CONTENT AREA */
+
+@media only screen and (max-width: 480px), only screen and (max-device-width: 480px) {
+	.displaytest{
+		display: block;
+	}
+	.address{
+		margin-top: 142%;
+	}
+}
+
+@media only screen and (min-width: 1200px) {
+	.displaytest{
+		display: flex;
+	}
+
+	.address{
+	margin-top: 15%;	
+	}
+}
+@media only screen and (min-width: 1024px) and (max-width: 1199px) {
+	.address{
+		margin-top: 180px;
+	}
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+	.address{
+		margin-top: 330px;
+	}
+}
+
 #insurance-content {
 	//display: block;
 	// background-image: url(../../assets/images/insurance-content.png);
@@ -287,15 +318,12 @@ hr {
 }
 
 #insurance-sidebar {
-	width: 280px;
 		float:left;
-		margin-left:27px;
 		margin-top:20px;
 		font-family: garamonda;
 }
 #insurance-sidebar-title2 {
 	
-	width: 280px;
 	background-color: #000B4F;
 	padding:10px;
 	// margin-bottom:-13px;
@@ -316,7 +344,6 @@ hr {
 
 }
 #insurance-sidebar-title {
-	width: 260px;
 	background-color:purple;
 	padding:10px;
 
@@ -336,7 +363,6 @@ hr {
 
 }
 #sidebar-nav {
-	width: 280px;
 	background-color:#1b2f64;
 	padding:0px;
 	margin:0px;
@@ -366,7 +392,6 @@ hr {
 	
 	padding-left:14px;
 	padding-bottom: 6px;
-	width: 258px;
 	border-bottom: 2px dotted #666;
 }
 #sidebar-nav a:link, #navlist a:visited {
@@ -386,7 +411,6 @@ hr {
 }
 
 #sidebar-nav2 {
-	width: 281px;
 	background-color:#F0F0F0;
 	padding:0px;
 	margin:0px;
@@ -416,12 +440,12 @@ hr {
 	
 	padding-left:14px;
 	padding-bottom: 6px;
-	width: 258px;
 	border-bottom: 2px dotted #ccc;
 }
 #sidebar-nav2 a:link, #navlist2 a:visited {
 	color: #1b2f64;
 	text-decoration: none;
+	text-align: center;
 }
 #sidebar-nav2 a:hover {
 	background-color:#1b2f64;
@@ -429,7 +453,6 @@ hr {
 }
 
 #sidebar-shana{
-	width: 270px;
 	text-align:right;
 	font-size:16px;
 	padding-right:10px;
@@ -447,7 +470,8 @@ hr {
 }
 
 #insurance-footer {
-margin-right: auto;
+	margin-right: auto;
+	margin-left: auto;
 	// margin-left: auto;
 	// width: 1012px;
 	padding-top:12px;
@@ -464,17 +488,17 @@ margin-right: auto;
 
 #insurance-footer a:link, #insurance-footer a:visited {
 	font-family: Arial, Helvetica, sans-serif;
-	color: #101824;
+	color: #EBEBEB;
 font-weight: normal;
-	font-size: 11px;
+	font-size: 16px;
 	text-decoration: none;
 	line-height:16px;
 }
 #insurance-footer a:hover {
 	font-family: Arial, Helvetica, sans-serif;
-	color: #101824;
+	color: #EBEBEB;
 font-weight: normal;
-	font-size: 11px;
+	font-size: 16px;
 	text-decoration: underline;
 }
 
@@ -596,7 +620,7 @@ overflow: hidden;
 }
 .testimonialslider label{
   display:block;
-  width:32%;
+  width:25%;
   border: 4px solid #000B4F;
   position:absolute;
   bottom:5px;

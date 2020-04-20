@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router ,ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-learn-more',
@@ -7,7 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LearnMoreComponent implements OnInit {
 
-  constructor() { }
+  learnMoreType = null;
+  learnMoreTypeValue = null;
+
+  constructor(private router:Router, private activatedRoute:ActivatedRoute) {
+    this.learnMoreType = this.router.getCurrentNavigation().extras.state
+    console.log(this.learnMoreType)
+    if(this.learnMoreType){
+      this.learnMoreTypeValue = this.learnMoreType.about
+    }
+   }
 
   ngOnInit() {
   }

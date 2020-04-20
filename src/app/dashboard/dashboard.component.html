@@ -9,7 +9,7 @@
     margin-right: 2px;">
 
         <!-- left side content start -->
-        <div class="col-8">
+        <div class="col-lg-8 col-md-8 col-xs-12  col-sm-8">
             <div id="insurance-content-main" style="width: 100%">
                 <h1>Joseph Tishbi Insurance - California Insurance Provider</h1>
                 Tishbi Insurance is an independent insurance agency providing insurance and investment solutions to
@@ -32,11 +32,11 @@
                 <br>
                
                 <br/>
-                <div _ngcontent-serverapp-c19="" class="row col-12" style="margin-right: 550px;background: #daeefb;">
-                    <div _ngcontent-serverapp-c19="" class="col-4" style="padding: 10px;"><img _ngcontent-serverapp-c19="" src="../../assets/images/Facetune95.jpg" style="
+                <div _ngcontent-serverapp-c19="" class="col-lg-12 col-md-12 col-sm-12 displaytest" style="background: #daeefb;">
+                    <div _ngcontent-serverapp-c19="" class="col-lg-4 col-md-12 col-sm-12" style="padding: 10px;"><img _ngcontent-serverapp-c19="" src="../../assets/images/Facetune95.jpg" style="
                        border-radius: 118px;
                        "></div>
-                    <div _ngcontent-serverapp-c19="" class="col-8" style="
+                    <div _ngcontent-serverapp-c19="" class="col-lg-8 col-md-12 col-sm-12" style="
                        font-size: 16px;
                        color: #000B4F;
                        text-align: center;
@@ -59,12 +59,13 @@
                  </div>
 
                  <div style="
-                 margin-left: 32%;
+                 text-align: center;
                  color: #323232;
                  margin-top: 15px;
                  font-size: 30px;
              ">TESTIMONIALS</div>
-                <div class=" row col-12 container testimonialslider" style="margin-top: 45px;">
+
+                <div class="col-lg-12 col-md-12 container testimonialslider" style="margin-top: 45px;">
                 <input type="radio" name="nav" id="first" checked/>
                 <input type="radio" name="nav" id="second" />
                 <input type="radio" name="nav" id="third" />
@@ -83,9 +84,7 @@
                 ">Udo N.</h2>
                      <span class="rightq quotes">&bdquo; </span>
                     </blockquote>
-                    
-                    
-                    
+ 
                 </div>
                 
                 <div class="two slide">
@@ -96,8 +95,6 @@
                     font-size: 18px;
                 ">Arman M.</h2>
                 </blockquote>
-                   
-                    
                     
                 </div> 
                 
@@ -109,7 +106,7 @@
                     font-size: 18px;
                 ">Sincerely, Cathrine Zarrabi</h2>
                 </blockquote>
-                    
+
                 </div>
                 
                 
@@ -123,8 +120,7 @@
                 <br>
                 <br>
                 <br>
-                <div style="
-                margin-top: 30px;
+                <div class="address" style="
                 font-size: 18px;
                 text-align: center;
             ">
@@ -138,9 +134,9 @@
             </div>
         </div>
         <!-- end left side content -->
-        <div class="col-4" style="float: right;">
+        <div class="col-lg-4 col-md-4 col-xs-12 " style="float: right;">
             <!-- START SIDEBAR -->
-            <div id="insurance-sidebar">
+            <div id="insurance-sidebar" class="col-lg-12 col-md-12">
                 <div id="insurance-sidebar-title2">
                     <h4>Get an Instant Quote</h4>
                 </div>
@@ -189,6 +185,7 @@
                         font-size: 30px;
                         color: #ebebebeb;
                         font-weight: 900;
+                        text-align: center;
                     ">
                             <i class="fa fa-mobile" style="color: #769dd2;font-size: 32px;"></i>
                             <!-- <img src="../../../../assets/images/phone.png" width="31" height="42" style="vertical-align:middle;"
@@ -205,8 +202,10 @@
                         font-size: 22px;
                         color: #ebebebeb;
                         font-weight: 900;
+                        text-align: center;
+                        word-break: break-word;
                     ">
-                            <i class="fa fa-envelope" style="color: #769dd2;font-size: 32px;"></i>
+                            <i class="fa fa-envelope" style="color: #769dd2;font-size: 32px; word-break: break-word;"></i>
                             <!-- <img src="../../../../assets/images/phone.png" width="31" height="42" style="vertical-align:middle;"
                                 alt="Joseph Tishbi Insurance California"> -->
                                 jtishbi@outlook.com
@@ -246,7 +245,7 @@
                                 padding-top: 10px;
                                 padding-bottom: 10px;
                                 border-radius: 8px;
-                            " [routerLink]="['/', 'learn-more']">Learn More...</a></h4>
+                            " [state]="{about:'family'}" [routerLink]="['/', 'learn-more']">Learn More...</a></h4>
                         </div>
                 
                     </div>
@@ -280,7 +279,7 @@
                                 padding-top: 10px;
                                 padding-bottom: 10px;
                                 border-radius: 8px;
-                            " [routerLink]="['/', 'dashboard']">Learn More...</a></h4>
+                            " [state]="{about:'property'}" [routerLink]="['/', 'learn-more']">Learn More...</a></h4>
                         </div>
                 
                     </div>
@@ -299,15 +298,36 @@
     
     
 
-    <div id="insurance-footer" class="common-box-shadow">
+    <div id="insurance-footer" class="common-box-shadow row">
+    <div class="col-md-12 col-lg-12 col-xs-12">
+            <p>
+            An insurance premium is the amount of money an individual or business pays for an insurance policy. Insurance premiums are paid for policies that cover healthcare, auto, home, life, and others.
+            Once earned, the premium is income for the insurance company. It also represents a liability, as the insurer must provide coverage for claims being made against the policy. Failure to pay the premium may result in the cancellation of the policy.
+            </p>
+        </div>
+        <div class="col-md-12 col-lg-12 col-xs-12" style="font-size: 50px; text-align: left;">
+                <span style="font-size: 20px;">Share:</span>
+                <a href="https://twitter.com/UTishbi" style="font-size: 32px;"><span><i class="fab fa-twitter-square col-xs-4" style="background: #EBEBEBEB;color: #000B4F;"></i></span></a>
+                <a href="https://www.facebook.com/JosephTishbiINS/" style="font-size: 32px;"> <span><i class="fab fa-facebook-square col-xs-4" style="background: #EBEBEBEB;color: #000B4F; margin-left: 10px;"></i></span></a>
+                <a href="https://www.linkedin.com/in/joseph-tishbi-mba-277128177/" style="font-size: 32px;"><span><i class="fab fa-linkedin col-xs-4" style="background: #EBEBEBEB;color: #000B4F; margin-left: 10px;"></i></span></a>
+        </div>
+    <div class="col-md-12 col-lg-12 col-xs-12" style="
+    background: #000B4F;
+    padding: 18px;
+    color: #ebebebeb;
+    font-size: 16px;
+">
         © Copyright 2020 Joseph Tishbi Insurance. All Rights Reserved - <a href="index.php">Insurance California</a>
-        <a href="https://www.facebook.com/JosephTishbiINS/"><img src="../../assets/images/Face.png" style="
-        padding-left: 10px; padding-right: 10px;
-    "></a><a href="https://www.linkedin.com/in/joseph-tishbi-mba-277128177/"><img src="../../assets/images/link.png" style="
-    padding-right: 10px;
-"></a><a href="https://twitter.com/UTishbi"><img src="../../assets/images/twi.png" style="
-    padding-right: 10px;
-"></a>
+        <a href="https://www.facebook.com/JosephTishbiINS/" style="font-size: 32px;">
+            <i class="fab fa-facebook" style="margin-left: 10px; color: #EBEBEBEB; font-size: 32px;"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/joseph-tishbi-mba-277128177/" style="font-size: 32px;">
+            <i class="fab fa-linkedin-in" style="color: #EBEBEBEB; margin-left: 10px; font-size: 32px;"></i>
+        </a>
+        <a href="https://twitter.com/UTishbi" style="font-size: 32px;">
+            <i class="fab fa-twitter" style="color: #EBEBEBEB; margin-left: 10px; font-size: 32px;"></i>
+        </a>
+</div>
     </div>
     <!-- start container -->
 </div>

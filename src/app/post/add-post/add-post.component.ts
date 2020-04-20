@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, ChangeDetectorRef } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -58,6 +58,7 @@ export class AddPostComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private postService: PostService,
     private location: Location,
+    private changeDetector: ChangeDetectorRef
   ) {
 
     this.postType = this.activatedRoute.snapshot.queryParams['type'];
@@ -102,6 +103,7 @@ export class AddPostComponent implements OnInit {
       createdBy: new FormControl(i && i.createdBy && i.createdBy._id ? i.createdBy._id : ''),
       status: new FormControl(i && i.status ? i.status : PostStatus.Drafted),
       type: new FormControl(i && i.type ? i.type : this.postType),
+      descriptionHTML: new FormControl(i && i.descriptionHTML ? i.descriptionHTML : '')
     });
 
     if (this.postId || (i && i._id)) {
@@ -123,7 +125,7 @@ export class AddPostComponent implements OnInit {
   }
 
 
-  async submit(status) {
+  async submit(status, descriptionEditor?: EditorComponent) {
 
     if (!this.authService.loggedInUser) {
       this.authService.checkIfUserIsLoggedIn(true);
@@ -137,13 +139,16 @@ export class AddPostComponent implements OnInit {
       this.createdBy.setValue(this.authService.loggedInUser._id);
     }
 
+    this.changeDetector.detectChanges();
+
     const postFormValue = {...this.postForm.value};
     postFormValue['status'] = status;
+    postFormValue['descriptionHTML'] = descriptionEditor.editorViewRef.nativeElement.innerHTML;
     // postFormValue.companies = postFormValue.companies.map(c => c._id);
 
     if (this.postId) {
       this.store.dispatch(UpdatePost({
-        post: postFormValue, updatedBy: {name: this.authService.loggedInUser.name, _id: this.authService.loggedInUser.name}
+        post: postFormValue, updatedBy: {name: this.authService.loggedInUser.name, _id: this.authService.loggedInUser.name},
       }));
     } else {
       this.store.dispatch(AddPost({post: postFormValue}));

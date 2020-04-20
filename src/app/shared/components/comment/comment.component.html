@@ -40,7 +40,7 @@
 
             <!-- On click Ask for deleting the comment -->
             <a style="min-width: 35px; padding: 0;" *ngIf="comment?.createdBy?._id === authService?.loggedInUser?._id"
-                mat-button (click)="deleteComment()">
+                mat-button (click)="deleteComment(singleCommentEditor)">
                 <!-- <i style="font-size: 1.5rem !important; font-style: normal;" class="fad fa-comment-minus fa-lg"></i> -->
                 Delete
             </a> {{comment?.createdBy?._id === authService?.loggedInUser?._id ? '|' : ''}}

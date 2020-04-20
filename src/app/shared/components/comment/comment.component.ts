@@ -107,9 +107,9 @@ export class CommentComponent implements OnInit {
     }
   }
 
-  deleteComment() {
+  deleteComment(singleCommentEditor: EditorComponent) {
     this.sweetAlertService.confirmDelete(() => {
-    this.commentService.deleteComment(this.comment._id, this.comment.referenceId).pipe(
+    this.commentService.deleteComment(this.comment._id, this.comment.referenceId, singleCommentEditor.editorViewRef.nativeElement.innerHTML).pipe(
       tap((d) => {
         // this.commentDeleted.emit(this.comment._id);
         // this.comment = null;

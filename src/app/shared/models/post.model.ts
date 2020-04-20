@@ -62,4 +62,5 @@ export interface Post {
     birthDate?: string;
     address?: string;
     website?: string;
+    descriptionHTML? : string;
 }

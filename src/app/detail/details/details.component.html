@@ -9,7 +9,7 @@
     <app-breadcumb (editPost)="postService?.editPost(details)"
         [showEditPostDetails]="(details?.createdBy?._id === authService?.loggedInUser?._id || collaborators.indexOf(authService?.loggedInUser?._id) >= 0) ? true : false"
         [showAddCollaborators]="details?.createdBy?._id === authService?.loggedInUser?._id ? true : false"
-        [showShareButtons]="true"
+        [showShareButtons]="true" [showAddClients]="details?.createdBy?._id === authService?.loggedInUser?._id"
         [postDetails]="postDetails" [title]="details?.name" [path]="breadcumb?.path" [eventDate]="details?.dateRange"
         [postDetails]="details">
     </app-breadcumb>

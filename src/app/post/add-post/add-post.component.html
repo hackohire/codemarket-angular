@@ -22,12 +22,6 @@
                     [placeholder]="'Select Company'" [collection]="'companies'" [type]="" [multiple]="true">
                 </app-autocomplete>
 
-                <app-editor #descriptionEditor [placeholder]="postType + ' description'"
-                    [data]="descriptionFormControl?.value" [id]="'edit-post-editor'" [importArticleSubscription]="true">
-                </app-editor>
-
-                <br />
-
                 <app-autocomplete class="field-full-width" [allowToAdd]="false"
                     [autoComplete]="postForm.get('clients')" [placeholder]="'Select Clients'" [collection]="'users'"
                     [type]="" [multiple]="true" matInput>
@@ -38,14 +32,21 @@
 
                 <app-autocomplete [autoComplete]="postForm?.get('tags')" [placeholder]="'Tags'" [collection]="'tags'"
                     [type]="'tag'" [multiple]="true"></app-autocomplete>
+                
+                <br/>
+                <app-editor #descriptionEditor [placeholder]="postType + ' description'"
+                    [data]="descriptionFormControl?.value" [id]="'edit-post-editor'" [importArticleSubscription]="true">
+                </app-editor>
+
+                <br />
 
                 <div fxLayout="row" fxLayoutGap="10px">
                     <button *ngIf="statusFormControl?.value !== 'Published'" type="button" (click)="submit('Drafted')"
                         [disabled]="postForm?.invalid" mat-raised-button color="primary">Save</button>
                     <button *ngIf="statusFormControl?.value === 'Published'" type="button"
                         (click)="submit('Unpublished')" [disabled]="postForm?.invalid" mat-raised-button
-                        color="primary">{{ 'Save' }}</button>
-                    <button type="button" (click)="submit('Published')" [disabled]="postForm?.invalid" mat-raised-button
+                        style="background-color: #28a745; color: white;">{{ 'Save' }}</button>
+                    <button type="button" (click)="submit('Published', descriptionEditor)" [disabled]="postForm?.invalid" mat-raised-button
                         color="primary">{{ 'Publish' }}</button>
                         <button type="button" (click)="cancelClicked()" mat-raised-button
                         color="warn">{{ 'Cancel' }}</button>

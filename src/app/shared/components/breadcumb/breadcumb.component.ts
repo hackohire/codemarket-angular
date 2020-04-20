@@ -26,6 +26,7 @@ export class BreadcumbComponent implements OnInit {
   @Input() showEditPostDetails: boolean;
   @Input() showAddCollaborators: boolean;
   @Input() showAddAssignee: boolean;
+  @Input() showAddClients: boolean;
   @Input() showShareButtons: boolean;
 
   @Output() editPost = new EventEmitter();

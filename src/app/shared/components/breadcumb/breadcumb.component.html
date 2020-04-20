@@ -153,7 +153,19 @@
                                         </a>
                                     </p>
                                 </li>
-    
+                                
+                                <li *ngIf="postDetails?.clients && postDetails?.clients?.length">
+                                    <p class="data-label">Clients</p>
+                                    <p class="info">
+                                        <a *ngFor="let t of postDetails?.clients" target="_blank"
+                                            [href]="'/'+ 'dashboard' + '/' + 'profile' + '/' + t?._id">
+                                            <span class="tag">
+                                                <img [src]="t?.avatar ? ((s3FilesBucketURL + t?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                                                    alt="">{{t?.name}}</span>
+                                        </a>
+                                    </p>
+                                </li>
+                                
                                 <li *ngIf="postDetails?.jobProfile && postDetails?.jobProfile?.length">
                                     <p class="data-label">Position</p>
                                     <p class="info" style="text-transform: capitalize;">

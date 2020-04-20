@@ -311,18 +311,19 @@ export class CommentService {
     );
   }
 
-  deleteComment(commentId, postId): Observable<any> {
+  deleteComment(commentId, postId, textHTML: string): Observable<any> {
     return this.apollo.query(
       {
         query: gql`
-          query deleteComment($commentId: String, $postId: String) {
-            deleteComment(commentId: $commentId, postId: $postId)
+          query deleteComment($commentId: String, $postId: String, $textHTML: String) {
+            deleteComment(commentId: $commentId, postId: $postId, textHTML: $textHTML)
           }
         `,
         // fetchPolicy: 'no-cache',
         variables: {
           commentId,
-          postId
+          postId,
+          textHTML
         }
       }
     ).pipe(

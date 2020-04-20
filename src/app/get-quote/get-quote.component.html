@@ -9,7 +9,7 @@
     ">
             <div [formGroup]="postForm" class="add-form-area common-box-shadow">
                 <mat-form-field class="field-full-width">
-                    <input type="text" matInput formControlName="name" placeholder="name">
+                    <input type="text" matInput formControlName="firstName" placeholder="name">
                 </mat-form-field>
 
                 <mat-form-field class="field-full-width">
@@ -17,12 +17,12 @@
                 </mat-form-field>
 
                 <mat-form-field class="field-full-width">
-                    <input type="number" matInput formControlName="phone" placeholder="phone">
+                    <input type="text" matInput formControlName="phone" placeholder="phone">
                 </mat-form-field>
                 
                 <mat-form-field class="field-full-width">
                     <mat-label>Insurance Type:</mat-label>
-                    <select matNativeControl required formControlName="insuranceType">
+                    <select matNativeControl required formControlName="InsuranceType">
                       <option [selected]="preInsuranceTypevalue == 'Life'" value="Life">Life</option>
                       <option [selected]="preInsuranceTypevalue == 'Property'" value="Property">Property</option>
                       <option [selected]="preInsuranceTypevalue == 'Commercial'" value="Commercial">Commercial</option>
@@ -34,16 +34,16 @@
                     </select>
                   </mat-form-field>
 
-                <h6>Description:</h6>
                 <br />
-
-                <app-editor #descriptionEditor
-                    [data]="descriptionFormControl?.value" [id]="'edit-post-editor'" [importArticleSubscription]="true"></app-editor>
-
+                 
+                <mat-form-field class="field-full-width">
+                    <textarea type="text" matInput formControlName="description" placeholder="Description"></textarea>
+                </mat-form-field>
+                
                 <br />
 
                 <div fxLayout="row" fxLayoutGap="10px">
-                    <button *ngIf="statusFormControl?.value !== 'Published'" type="button" [disabled]="postForm?.invalid" mat-raised-button color="primary">Get Quote</button>
+                    <button (click)="submit()" *ngIf="statusFormControl?.value !== 'Published'" type="button" [disabled]="postForm?.invalid" mat-raised-button color="primary">Get Quote</button>
                     <!-- <button type="button" [disabled]="postForm?.invalid" mat-raised-button color="primary">{{ statusFormControl?.value === 'Published' ? 'Publish Changes' : 'Publish' }}</button> -->
                     <!-- <button *ngIf="statusFormControl?.value === 'Published'" type="button" (click)="submit('Unpublished')" [disabled]="postForm?.invalid" mat-raised-button color="primary">{{ 'Unpublish' }}</button> -->
                 </div>

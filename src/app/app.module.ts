@@ -43,8 +43,8 @@ import { LoaderComponent } from './auth/loader/loader.component';
 import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
 import { ContactComponent } from './contact/contact.component';
-import { GetQuoteComponent } from './get-quote/get-quote.component';
 import { LearnMoreComponent } from './learn-more/learn-more.component';
+import {GetQuoteModule} from './get-quote/get-quote.module';
 // import { SignInComponent } from './core/amplify/sign-in-component';
 
 @NgModule({
@@ -86,7 +86,6 @@ import { LearnMoreComponent } from './learn-more/learn-more.component';
     CommunityImpactStoriesComponent,
     AdvocatesInfluencersComponent,
     ContactComponent,
-    GetQuoteComponent,
     LearnMoreComponent
   ],
   imports: [
@@ -96,7 +95,8 @@ import { LearnMoreComponent } from './learn-more/learn-more.component';
     CoreModule,
     SharedModule,
     BrowserAnimationsModule,
-    LayoutModule
+    LayoutModule,
+    GetQuoteModule
   ],
   providers: [PostDataResolver],
   bootstrap: [AppComponent],

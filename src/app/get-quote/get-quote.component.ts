@@ -4,6 +4,10 @@ import { BreadCumb } from '../shared/models/bredcumb.model';
 import { EditorComponent } from '../shared/components/editor/editor.component';
 import { Subscription } from 'rxjs';
 import { Router ,ActivatedRoute} from '@angular/router';
+import {QuoteService} from './quote.service';
+import Swal from 'sweetalert2';
+import { catchError, } from 'rxjs/operators';
+import { of } from 'rxjs';
 @Component({
   selector: 'app-get-quote',
   templateUrl: './get-quote.component.html',
@@ -37,7 +41,7 @@ export class GetQuoteComponent implements OnInit {
   subscription$: Subscription;
 
 
-  constructor(private router:Router, private activatedRoute:ActivatedRoute
+  constructor(private quoteService: QuoteService,private router:Router, private activatedRoute:ActivatedRoute
     // private authService: AuthService,
     // private store: Store<AppState>,
     // private fb: FormBuilder,
@@ -67,38 +71,29 @@ export class GetQuoteComponent implements OnInit {
 
   postFormInitialization() {
     this.postForm = new FormGroup({
-      name: new FormControl('', Validators.required),
+      firstName: new FormControl('', Validators.required),
       description: new FormControl([]),
       email: new FormControl('', Validators.email),
       phone: new FormControl(''),
-      insuranceType: new FormControl(''),
+      InsuranceType: new FormControl(''),
       // change this line
     });
   }
 
 
-  // async submit(status) {
-
-  //   if (!this.authService.loggedInUser) {
-  //     this.authService.checkIfUserIsLoggedIn(true);
-  //     return;
-  //   }
-
-  //   this.statusFormControl.setValue(status);
-
-  //   const blocks =  await this.descriptionEditor.editor.save();
-  //   this.descriptionFormControl.setValue(blocks.blocks);
-
-  //   if (this.authService.loggedInUser && !this.createdBy.value) {
-  //     this.createdBy.setValue(this.authService.loggedInUser._id);
-  //   }
-
-  //   if (this.idFromControl && !this.idFromControl.value) {
-  //     this.postForm.removeControl('_id');
-  //     this.store.dispatch(AddPost({post: this.postForm.value}));
-  //   } else {
-  //     this.store.dispatch(UpdatePost({post: this.postForm.value}));
-  //   }
-  // }
+   async submit() {
+    this.quoteService.addquote(this.postForm.value).pipe(
+      catchError((e) => {
+        Swal.fire('Email already exists!', '', 'error');
+        return of(false);
+      })
+    ).subscribe((d: any) => {
+      if (d) {
+        Swal.fire(`${d.firstName} has been Added Successfully`, '', 'success').then(() => {
+          this.quoteService.redirectToDashboard(d._id);
+        });
+      }
+    });
+   }
 
 }

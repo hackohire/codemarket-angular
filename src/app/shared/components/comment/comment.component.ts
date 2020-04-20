@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnChanges, ViewChild} from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges, ViewChild, ChangeDetectorRef} from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { tap } from 'rxjs/operators';
 import moment from 'moment';
@@ -37,7 +37,8 @@ export class CommentComponent implements OnInit {
   constructor(
     public authService: AuthService,
     private commentService: CommentService,
-    private sweetAlertService: SweetalertService
+    private sweetAlertService: SweetalertService,
+    private changeDetector: ChangeDetectorRef
   ) { }
 
   ngOnInit() {
@@ -47,7 +48,7 @@ export class CommentComponent implements OnInit {
 
   initializeReplyForm() {
     this.replyCommentForm = new FormGroup({
-      text: new FormControl(this.comment.text),
+      text: new FormControl([]),
       // createdBy: new FormControl(this.authService.loggedInUser._id),
       referenceId: new FormControl(this.comment.referenceId),
       companyReferenceId: new FormControl(this.companyReferenceId ? this.companyReferenceId : this.comment.companyReferenceId),
@@ -55,7 +56,8 @@ export class CommentComponent implements OnInit {
       parentId: new FormControl(this.comment._id),
       type: new FormControl(this.comment.type),
       blockSpecificComment: new FormControl(this.comment.blockSpecificComment),
-      blockId: new FormControl(this.comment.blockId)
+      blockId: new FormControl(this.comment.blockId),
+      textHTML: new FormControl(this.comment.textHTML)
     });
   }
 
@@ -78,7 +80,18 @@ export class CommentComponent implements OnInit {
   async addReply(commentReplyEditor: EditorComponent) {
     if (this.authService.loggedInUser) {
       const blocks =  await commentReplyEditor.editor.save();
+
       this.replyCommentForm.get('text').setValue(blocks.blocks);
+
+      this.changeDetector.detectChanges();
+
+
+      /** Fetch the html content also becuase when we send email, email only understands the html content so we need to store html
+       * content also
+       */
+      this.replyCommentForm.get('textHTML').setValue(commentReplyEditor.editorViewRef.nativeElement.innerHTML);
+
+
       this.replyCommentForm.addControl('createdBy', new FormControl(this.authService.loggedInUser._id));
       this.commentService.addComment(this.replyCommentForm.value).pipe(
         tap((child) => {
@@ -108,15 +121,22 @@ export class CommentComponent implements OnInit {
 
   async updateComment(singleCommentEditor: EditorComponent) {
     const blocks =  await singleCommentEditor.editor.save();
-    this.replyCommentForm.get('text').setValue(blocks.blocks);
+    this.comment.text = blocks.blocks;
 
-    this.commentService.updateComment(this.comment._id, this.comment.referenceId, this.replyCommentForm.get('text').value).pipe(
+    this.changeDetector.detectChanges();
+
+    await this.commentService.updateComment(
+      this.comment._id,
+      this.comment.referenceId,
+      this.comment.text,
+      singleCommentEditor.editorViewRef.nativeElement.innerHTML
+    ).pipe(
       tap((d) => {
         if (d) {
           this.edit = false;
         }
       })
-    ).subscribe();
+    ).toPromise();
   }
 
   fetchCommentators(children) {

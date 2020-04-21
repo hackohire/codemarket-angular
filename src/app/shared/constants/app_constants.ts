@@ -23,7 +23,7 @@ export const appConstants = {
     [PostType.Assignment]: 'sticky-note'
   },
 
-  fileS3Bucket: 'joel-files',
+  fileS3Bucket: 'joelupload-files',
 
   promoCodes: {
     FIRSTMONTHFREE: {

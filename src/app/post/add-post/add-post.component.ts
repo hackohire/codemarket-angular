@@ -148,7 +148,7 @@ export class AddPostComponent implements OnInit {
 
     if (this.postId) {
       this.store.dispatch(UpdatePost({
-        post: postFormValue, updatedBy: {name: this.authService.loggedInUser.name, _id: this.authService.loggedInUser.name},
+        post: postFormValue, updatedBy: {name: this.authService.loggedInUser.name, _id: this.authService.loggedInUser._id},
       }));
     } else {
       this.store.dispatch(AddPost({post: postFormValue}));

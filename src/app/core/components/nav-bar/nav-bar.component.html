@@ -238,168 +238,275 @@
     </mat-toolbar>
 
     <div class="container">
-      <div id="insurance-headerTop">
-        <div id="insurance-Top-nav">
-          <div id="insurance-nav-bg">
-            <div id="navi">
-              <ul>
-                <li><a [routerLink]="['/', 'dashboard']">Home</a></li>
-                <li><a [routerLink]="['/', 'about-us']">About</a></li>
 
-                <li><a [routerLink]="['/', 'contact']">Contact</a></li>
-
-              </ul>
+        <div id="insurance-headerTop" class="row">
+            <div id="insurance-Top-nav" class="col-md-4 col-lg-4 col-xs-12">
+              <div id="insurance-nav-bg">
+                <div id="navi">
+                  <ul>
+                    <li><a [routerLink]="['/', 'dashboard']">Home</a></li>
+                    <li><a [routerLink]="['/', 'about-us']">About</a></li>
+    
+                    <li><a [routerLink]="['/', 'contact']">Contact</a></li>
+    
+                  </ul>
+                </div>
+              </div>
+            </div>
+    
+            <div class="col-md-8 col-lg-8 col-xs-12" style="text-align: center;">
+              <!-- Insurance Select Menu -->
+              <div id="insurance-Top-phone" class="col-md-6 col-lg-6 col-xs-12">
+                <i class="fa fa-mobile" style="color: #769dd2;"></i>
+                <!-- <img src="../../../../assets/images/phone.png" width="31" height="42" style="vertical-align:middle;"
+                  alt="Joseph Tishbi Insurance California"> -->
+                1- 310 569-5515
+              </div>
+              <div id="insurance-Top-quote" class="col-md-6 col-lg-6 col-xs-12">
+                <a href="https://app.back9ins.com/apply/JosephTishbi"><h3 style="font-size: 17px; color: #EBEBEB;">GET AN INSTANT QUOTE</h3></a>
+                <!-- <img src="../../../../assets/images/get-quote.jpg" width="180" height="22"
+                  alt="get a quote" style="margin-bottom:-3px;"> -->
+                <!-- <br> -->
+                <script src="../../../../assets/js/dropdown.js" type="text/javascript"></script>
+                <form action="" method="POST" onsubmit="return dropdown(this.gourl)" style="padding-top:2px;">
+                  <select name="gourl">
+                    <option value="#" selected="selected">Get a Quote</option>
+                    <option value="auto-insurance-quote.html">Life Insurance</option>
+                  </select>
+                  <a href="https://app.back9ins.com/apply/JosephTishbi" target="_blank">
+                    <a href="https://app.back9ins.com/apply/JosephTishbi" target="_blank" mat-raised-button style="background-color: #96b2d9; color: #0c4071; min-width: 40px;
+                    line-height: 26px; padding: 0 10px;">Go</a>
+                    <!-- <img src="../../../../assets/images/go.gif" type="image" style="vertical-align:top; "> -->
+                  </a>
+                </form>
+              </div>
+              
             </div>
           </div>
-        </div>
 
-        <div style="float: right;">
-          <div id="insurance-Top-phone">
-            <i class="fa fa-mobile" style="color: #769dd2;"></i>
-            <!-- <img src="../../../../assets/images/phone.png" width="31" height="42" style="vertical-align:middle;"
-              alt="Joseph Tishbi Insurance California"> -->
-            1- 310 569-5515
-          </div>
-
-          <!-- Insurance Select Menu -->
-          <div id="insurance-Top-quote">
-            <a href="https://app.back9ins.com/apply/JosephTishbi"><h3 style="font-size: 17px; color: #EBEBEB;">GET A INSTANT QUOTE</h3></a>
-            <!-- <img src="../../../../assets/images/get-quote.jpg" width="180" height="22"
-              alt="get a quote" style="margin-bottom:-3px;"> -->
-            <!-- <br> -->
-            <script src="../../../../assets/js/dropdown.js" type="text/javascript"></script>
-            <form action="" method="POST" onsubmit="return dropdown(this.gourl)" style="padding-top:2px;">
-              <select name="gourl">
-                <option value="#" selected="selected">Get a Quote</option>
-                <option value="auto-insurance-quote.html">Life Insurance</option>
-              </select>
-              <a href="https://app.back9ins.com/apply/JosephTishbi" target="_blank">
-                <a href="https://app.back9ins.com/apply/JosephTishbi" target="_blank" mat-raised-button style="background-color: #96b2d9; color: #0c4071; min-width: 40px;
-                line-height: 26px; padding: 0 10px;">Go</a>
-                <!-- <img src="../../../../assets/images/go.gif" type="image" style="vertical-align:top; "> -->
-              </a>
-            </form>
-          </div>
-          <div class="clear"></div>
-        </div>
-      </div>
-
+     
       <div id="insurance-header">
-        <div id="insurance-header-logo">
-          <a [routerLink]="['/', 'dashboard']"><img src="../../../../assets/images/jtinsurance_logo1.png"
-              style="max-width: 38%;" width="199" height="96" alt="California Insurance Company"></a>
-          <div [routerLink]="['/', 'dashboard']" style="font-family: hero; font-size: 37px; display: inline-grid; line-height: 33px; font-weight: 900; margin-left:
-            23px; color: #000B4F;">
+        <div id="insurance-header-logo" class="row pushwid">
+          <div class="col-xs-4 pushleft">
+            <a [routerLink]="['/', 'dashboard']"><img src="../../../../assets/images/jtinsurance_logo1.png"
+                height="96" alt="California Insurance Company"></a>
+          </div>
+          <div class="col-xs-4 pushleft" [routerLink]="['/', 'dashboard']" style="font-family: hero; font-size: 37px; display: inline-grid; font-weight: 900; color: #000B4F;">
             Tishbi
             <span style="font-size: 21px;color: #000B4F; padding-left: 8px;">Insurance</span>
           </div>
+          <div class="col-xs-4 pushleft">
+          <button class="mobileMenu" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+            <mat-icon class="mobileMenu1">list</mat-icon> 
+            </button>
+            <mat-menu class="mobileMenu" #menu="matMenu">
+                <button mat-menu-item>
+                    <a href="get-quote" target="_blank" target="_blank" class="drop"><strong>PROPERTY</strong><br>
+                    Insurance</a>
+                    <div class="dropdown_2columns">
+                    <a href="get-quote" target="_blank">
+                        <h2 href="get-quote" target="_blank"
+                        style="color: #113265; text-align: center; background-color: #f09e47;">Get Quote</h2>
+                    </a>
+                    </div>
+                </button>
+                
+                <button mat-menu-item><a href="https://app.back9ins.com/apply/JosephTishbi" target="_blank"
+                    class="drop"><strong>LIFE</strong><br>
+                    Insurance/Investment <br>
+                    Products</a>
+                <div class="dropdown_2columns">
+                    <a href="https://app.back9ins.com/apply/JosephTishbi" target="_blank">
+                    <h2 href="https://app.back9ins.com/apply/JosephTishbi"
+                        style="color: #113265; text-align: center; background-color: #f09e47;">Get Quote</h2>
+                    </a>
+                </div>
+                </button>
+                
+                <!-- Property Insurance -->
+                <button mat-menu-item><a href="get-quote" target="_blank" target="_blank" class="drop"><strong>PROPERTY</strong><br>
+                    Insurance</a>
+                <div class="dropdown_2columns">
+                    <a href="get-quote" target="_blank">
+                    <h2 href="get-quote" target="_blank"
+                        style="color: #113265; text-align: center; background-color: #f09e47;">Get Quote</h2>
+                    </a>
+                </div>
+                </button>
+                
+                <!-- Commercial Insurance -->
+                <button mat-menu-item><a href="get-quote" target="_blank" class="drop"><strong>COMMERCIAL</strong><br>
+                    Insurance</a>
+                <div class="dropdown_2columns">
+                    <a href="get-quote" target="_blank">
+                    <h2 style="color: #113265; text-align: center; background-color: #f09e47;">Get Quote</h2>
+                    </a>
+                </div>
+                </button>
+                
+                
+                
+                <button mat-menu-item><a _ngcontent-serverapp-c1="" class="drop" href="get-quote"
+                    target="_blank"><strong _ngcontent-serverapp-c1="">EMPLOYEE</strong><br
+                    _ngcontent-serverapp-c1="">Benefits</a>
+                <div _ngcontent-serverapp-c1="" class="dropdown_2columns">
+                  <a _ngcontent-serverapp-c1="" href="get-quote" target="_blank">
+                    <h2 _ngcontent-serverapp-c1="" href="get-quote"
+                        style="color: #113265; text-align: center; background-color: #f09e47;" target="_blank">Get Quote
+                    </h2>
+                    </a></div>
+                </button>
+                
+                
+                <!-- Workmans Comp -->
+                <button mat-menu-item><a href="get-quote" target="_blank" class="drop"><strong>WORKER'S</strong><br>
+                    Compensation</a>
+                <div class="dropdown_2columns">
+                    <a href="get-quote" target="_blank">
+                    <h2 href="get-quote" target="_blank"
+                        style="color: #113265; text-align: center; background-color: #f09e47;">Get Quote</h2>
+                    </a>
+                </div>
+                </button>
+                
+                <!-- Home Insurance -->
+                <button mat-menu-item><a href="get-quote" target="_blank" class="drop"><strong>HOME</strong><br>
+                    Insurance</a>
+                <div class="dropdown_2columns">
+                    <a href="get-quote" target="_blank">
+                    <h2 href="get-quote" target="_blank"
+                        style="color: #113265; text-align: center; background-color: #f09e47;">Get Quote</h2>
+                    </a>
+                </div>
+                </button>
+                <!-- Auto Insurance -->
+                <button mat-menu-item><a href="get-quote" target="_blank" class="drop"><strong>AUTO</strong><br>
+                    Insurance</a>
+                <div class="dropdown_2columns">
+                    <a href="get-quote" target="_blank">
+                    <h2 href="get-quote" target="_blank"
+                        style="color: #113265; text-align: center; background-color: #f09e47;">Get Quote</h2>
+                    </a>
+                </div>
+                </button>
+                
+                <!-- Health Insurance -->
+                <button mat-menu-item><a href="get-quote" target="_blank" class="drop"><strong>HEALTH</strong><br>
+                Insurance</a>
+                <div class="dropdown_2columns">
+                    <a href="get-quote" target="_blank">
+                    <h2 href="get-quote" target="_blank"
+                        style="color: #113265; text-align: center; background-color: #f09e47;">Get Quote</h2>
+                    </a>
+                </div>
+                </button>    
+            </mat-menu>
+          </div>
+          <div id="insurance-header-nav">
+              <div id="insurance-header-mega">
+    
+                <!-- START MEGA MENU -->
+                <ul id="menu">
+    
+                  <!-- Life Insurance -->
+                  <li><a href="https://app.back9ins.com/apply/JosephTishbi" target="_blank"
+                      class="drop"><strong>LIFE</strong><br>
+                      Insurance/Investment <br>
+                      Products</a>
+                    <div class="dropdown_2columns">
+                      <a href="https://app.back9ins.com/apply/JosephTishbi" target="_blank">
+                        <h2 href="https://app.back9ins.com/apply/JosephTishbi"
+                          style="color: #113265; text-align: center; background-color: #f09e47;">Get Quote</h2>
+                      </a>
+                    </div>
+                  </li>
+    
+                  <!-- Property Insurance -->
+                  <li><a href="get-quote" target="_blank" target="_blank" class="drop"><strong>PROPERTY</strong><br>
+                      Insurance</a>
+                    <div class="dropdown_2columns">
+                      <a href="get-quote" target="_blank">
+                        <h2 href="get-quote" target="_blank"
+                          style="color: #113265; text-align: center; background-color: #f09e47;">Get Quote</h2>
+                      </a>
+                    </div>
+                  </li>
+    
+                  <!-- Commercial Insurance -->
+                  <li><a href="get-quote" target="_blank" class="drop"><strong>COMMERCIAL</strong><br>
+                      Insurance</a>
+                    <div class="dropdown_2columns">
+                      <a href="get-quote" target="_blank">
+                        <h2 style="color: #113265; text-align: center; background-color: #f09e47;">Get Quote</h2>
+                      </a>
+                    </div>
+                  </li>
+    
+                
+    
+                  <li _ngcontent-serverapp-c1=""><a _ngcontent-serverapp-c1="" class="drop" href="get-quote"
+                      target="_blank"><strong _ngcontent-serverapp-c1="">EMPLOYEE</strong><br
+                        _ngcontent-serverapp-c1="">Benefits</a>
+                    <div _ngcontent-serverapp-c1="" class="dropdown_2columns"><a _ngcontent-serverapp-c1="" href="get-quote"
+                        target="_blank">
+                        <h2 _ngcontent-serverapp-c1="" href="get-quote"
+                          style="color: #113265; text-align: center; background-color: #f09e47;" target="_blank">Get Quote
+                        </h2>
+                      </a></div>
+                  </li>
+    
+    
+                    <!-- Workmans Comp -->
+                    <li><a href="get-quote" target="_blank" class="drop"><strong>WORKER'S</strong><br>
+                      Compensation</a>
+                    <div class="dropdown_2columns">
+                      <a href="get-quote" target="_blank">
+                        <h2 href="get-quote" target="_blank"
+                          style="color: #113265; text-align: center; background-color: #f09e47;">Get Quote</h2>
+                      </a>
+                    </div>
+                  </li>
+    
+                  <!-- Home Insurance -->
+                  <li><a href="get-quote" target="_blank" class="drop"><strong>HOME</strong><br>
+                      Insurance</a>
+                    <div class="dropdown_2columns">
+                      <a href="get-quote" target="_blank">
+                        <h2 href="get-quote" target="_blank"
+                          style="color: #113265; text-align: center; background-color: #f09e47;">Get Quote</h2>
+                      </a>
+                    </div>
+                  </li>
+                  <!-- Auto Insurance -->
+                  <li><a href="get-quote" target="_blank" class="drop"><strong>AUTO</strong><br>
+                      Insurance</a>
+                    <div class="dropdown_2columns">
+                      <a href="get-quote" target="_blank">
+                        <h2 href="get-quote" target="_blank"
+                          style="color: #113265; text-align: center; background-color: #f09e47;">Get Quote</h2>
+                      </a>
+                    </div>
+                  </li>
+    
+                  <!-- Health Insurance -->
+                  <li><a href="get-quote" target="_blank" class="drop"><strong>HEALTH</strong><br>
+                    Insurance</a>
+                    <div class="dropdown_2columns">
+                      <a href="get-quote" target="_blank">
+                        <h2 href="get-quote" target="_blank"
+                          style="color: #113265; text-align: center; background-color: #f09e47;">Get Quote</h2>
+                      </a>
+                    </div>
+                  </li>
+    
+                </ul>
+                <!-- End MEGA Menu -->
+              </div>
+            </div>
           <!-- <a href="index.php"><img src="../../../../assets/images/jt_logo.png" width="199" height="96"
               alt="California Insurance Company"></a> -->
         </div>
-        <div id="insurance-header-nav">
-          <div id="insurance-header-info">
-            Joseph Tishbi Insurance. | California Insurance License # 0M67664
-          </div>
-          <div id="insurance-header-mega">
-
-            <!-- START MEGA MENU -->
-            <ul id="menu">
-
-              <!-- Life Insurance -->
-              <li><a href="https://app.back9ins.com/apply/JosephTishbi" target="_blank"
-                  class="drop"><strong>LIFE</strong><br>
-                  Insurance/Investment <br>
-                  Products</a>
-                <div class="dropdown_2columns">
-                  <a href="https://app.back9ins.com/apply/JosephTishbi" target="_blank">
-                    <h2 href="https://app.back9ins.com/apply/JosephTishbi"
-                      style="color: #113265; text-align: center; background-color: #f09e47;">Get Quote</h2>
-                  </a>
-                </div>
-              </li>
-
-              <!-- Property Insurance -->
-              <li><a href="get-quote" target="_blank" target="_blank" class="drop"><strong>PROPERTY</strong><br>
-                  Insurance</a>
-                <div class="dropdown_2columns">
-                  <a href="get-quote" target="_blank">
-                    <h2 href="get-quote" target="_blank"
-                      style="color: #113265; text-align: center; background-color: #f09e47;">Get Quote</h2>
-                  </a>
-                </div>
-              </li>
-
-              <!-- Commercial Insurance -->
-              <li><a href="get-quote" target="_blank" class="drop"><strong>COMMERCIAL</strong><br>
-                  Insurance</a>
-                <div class="dropdown_2columns">
-                  <a href="get-quote" target="_blank">
-                    <h2 style="color: #113265; text-align: center; background-color: #f09e47;">Get Quote</h2>
-                  </a>
-                </div>
-              </li>
-
-            
-
-              <li _ngcontent-serverapp-c1=""><a _ngcontent-serverapp-c1="" class="drop" href="get-quote"
-                  target="_blank"><strong _ngcontent-serverapp-c1="">EMPLOYEE</strong><br
-                    _ngcontent-serverapp-c1="">Benefits</a>
-                <div _ngcontent-serverapp-c1="" class="dropdown_2columns"><a _ngcontent-serverapp-c1="" href="get-quote"
-                    target="_blank">
-                    <h2 _ngcontent-serverapp-c1="" href="get-quote"
-                      style="color: #113265; text-align: center; background-color: #f09e47;" target="_blank">Get Quote
-                    </h2>
-                  </a></div>
-              </li>
-
-
-                <!-- Workmans Comp -->
-                <li><a href="get-quote" target="_blank" class="drop"><strong>WORKER'S</strong><br>
-                  Compensation</a>
-                <div class="dropdown_2columns">
-                  <a href="get-quote" target="_blank">
-                    <h2 href="get-quote" target="_blank"
-                      style="color: #113265; text-align: center; background-color: #f09e47;">Get Quote</h2>
-                  </a>
-                </div>
-              </li>
-
-              <!-- Home Insurance -->
-              <li><a href="get-quote" target="_blank" class="drop"><strong>HOME</strong><br>
-                  Insurance</a>
-                <div class="dropdown_2columns">
-                  <a href="get-quote" target="_blank">
-                    <h2 href="get-quote" target="_blank"
-                      style="color: #113265; text-align: center; background-color: #f09e47;">Get Quote</h2>
-                  </a>
-                </div>
-              </li>
-              <!-- Auto Insurance -->
-              <li><a href="get-quote" target="_blank" class="drop"><strong>AUTO</strong><br>
-                  Insurance</a>
-                <div class="dropdown_2columns">
-                  <a href="get-quote" target="_blank">
-                    <h2 href="get-quote" target="_blank"
-                      style="color: #113265; text-align: center; background-color: #f09e47;">Get Quote</h2>
-                  </a>
-                </div>
-              </li>
-
-              <!-- Health Insurance -->
-              <li><a href="get-quote" target="_blank" class="drop"><strong>HEALTH</strong><br>
-                Insurance</a>
-                <div class="dropdown_2columns">
-                  <a href="get-quote" target="_blank">
-                    <h2 href="get-quote" target="_blank"
-                      style="color: #113265; text-align: center; background-color: #f09e47;">Get Quote</h2>
-                  </a>
-                </div>
-              </li>
-
-            </ul>
-            <!-- End MEGA Menu -->
-          </div>
-        </div>
+        
         <div class="clear"></div>
       </div>
     </div>

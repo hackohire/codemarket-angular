@@ -4,7 +4,7 @@
     <div id="insurance-content" class="common-box-shadow row" style="
     margin-left: 2px;
     margin-right: 2px; padding: 15px;">
-<div  style="margin-top: 30px;">
+<div  style="margin-top: 30px;" *ngIf="learnMoreTypeValue == 'family'">
     <p>
         There are reasons to use the cash-value portion of your parmanent life insurance
         policy for investing and reasons to buy term insurance and invest the difference.
@@ -30,5 +30,18 @@
         they have paid in as the policy typically expires before the beneficiary can file a claim.
     </p>
 </div>
+
+<div  style="margin-top: 30px;" *ngIf="learnMoreTypeValue == 'property'">
+    <p>
+        Property insurance provides protection against most risks to property, such as fire, theft and some weather damage.
+        This includes specialized forms of insurance such as fire insurance, flood insurance, earthquake insurance, home insurance, or boiler insurance.
+    </p>
+
+    <p>
+        Commercial property insurance protects commercial property from such perils as fire, theft, and natural disaster.
+        A variety of businesses, including manufacturers, retailers, service-oriented businesses, and not-for-profit organizations carry commercial property insurance. 
+    </p>
+</div>
+
 </div>
 </div>

@@ -133,7 +133,10 @@ const routes: Routes = [
     loadChildren: () => import('./companies/companies.module').then(module => module.CompaniesModule),
     // outlet: 'main',
   },
-
+  {
+    path: 'get-quote',
+    loadChildren: () => import('./get-quote/get-quote.module').then(module => module.GetQuoteModule),
+  },
   {
     path: 'event',
     loadChildren: () => import('./event/event.module').then(module => module.EventModule),
@@ -307,10 +310,6 @@ const routes: Routes = [
    {
     path: 'contact',
     component: ContactComponent
-  },
-  {
-    path: 'get-quote',
-    component: GetQuoteComponent
   },
   {
     path: 'learn-more',

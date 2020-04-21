@@ -11,7 +11,7 @@
 .home_product {
 	padding: 4px 3px 27px 3px;  
 	float: left;     
-	width: 279px;    
+	width: 100%;    
 	margin-top: 30px;     
 	background: #f6f6f6;     
 	text-align: center;     
@@ -243,6 +243,25 @@ hr {
 //Main Content CSS
 
 /* CONTENT AREA */
+
+@media only screen and (max-width: 480px), only screen and (max-device-width: 480px) {
+	.displaytest{
+		display: block;
+	}
+}
+
+@media only screen and (min-width: 1200px) {
+	.displaytest{
+		display: flex;
+	}
+
+}
+@media only screen and (min-width: 1024px) and (max-width: 1199px) {
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+}
+
 #insurance-content {
 	//display: block;
 	// background-image: url(../../assets/images/insurance-content.png);
@@ -287,15 +306,12 @@ hr {
 }
 
 #insurance-sidebar {
-	width: 280px;
 		float:left;
-		margin-left:27px;
 		margin-top:20px;
 		font-family: garamonda;
 }
 #insurance-sidebar-title2 {
 	
-	width: 280px;
 	background-color: #000B4F;
 	padding:10px;
 	// margin-bottom:-13px;
@@ -316,7 +332,6 @@ hr {
 
 }
 #insurance-sidebar-title {
-	width: 260px;
 	background-color:purple;
 	padding:10px;
 
@@ -336,7 +351,6 @@ hr {
 
 }
 #sidebar-nav {
-	width: 280px;
 	background-color:#1b2f64;
 	padding:0px;
 	margin:0px;
@@ -366,7 +380,6 @@ hr {
 	
 	padding-left:14px;
 	padding-bottom: 6px;
-	width: 258px;
 	border-bottom: 2px dotted #666;
 }
 #sidebar-nav a:link, #navlist a:visited {
@@ -386,7 +399,6 @@ hr {
 }
 
 #sidebar-nav2 {
-	width: 281px;
 	background-color:#F0F0F0;
 	padding:0px;
 	margin:0px;
@@ -416,12 +428,12 @@ hr {
 	
 	padding-left:14px;
 	padding-bottom: 6px;
-	width: 258px;
 	border-bottom: 2px dotted #ccc;
 }
 #sidebar-nav2 a:link, #navlist2 a:visited {
 	color: #1b2f64;
 	text-decoration: none;
+	text-align: center;
 }
 #sidebar-nav2 a:hover {
 	background-color:#1b2f64;
@@ -429,7 +441,6 @@ hr {
 }
 
 #sidebar-shana{
-	width: 270px;
 	text-align:right;
 	font-size:16px;
 	padding-right:10px;
@@ -447,7 +458,8 @@ hr {
 }
 
 #insurance-footer {
-margin-right: auto;
+	margin-right: auto;
+	margin-left: auto;
 	// margin-left: auto;
 	// width: 1012px;
 	padding-top:12px;
@@ -464,17 +476,17 @@ margin-right: auto;
 
 #insurance-footer a:link, #insurance-footer a:visited {
 	font-family: Arial, Helvetica, sans-serif;
-	color: #101824;
+	color: #EBEBEB;
 font-weight: normal;
-	font-size: 11px;
+	font-size: 16px;
 	text-decoration: none;
 	line-height:16px;
 }
 #insurance-footer a:hover {
 	font-family: Arial, Helvetica, sans-serif;
-	color: #101824;
+	color: #EBEBEB;
 font-weight: normal;
-	font-size: 11px;
+	font-size: 16px;
 	text-decoration: underline;
 }
 
@@ -596,7 +608,7 @@ overflow: hidden;
 }
 .testimonialslider label{
   display:block;
-  width:32%;
+  width:25%;
   border: 4px solid #000B4F;
   position:absolute;
   bottom:5px;
@@ -689,5 +701,97 @@ overflow: hidden;
 .testimonialslider #third:checked ~ div.three {
   left:0;
   opacity:1;
+}
+
+
+
+
+.testimonialslider1 *{
+  box-sizing:border-box;
+}
+.testimonialslider1 html, body{
+  height:100%;
+  font: normal 1em/1.5 "Open Sans";
+  background-color:#ddd;
+  background-size:cover;
+}
+.testimonialslider1 a{
+  color:#ccc;
+}
+.testimonialslider1 .container{
+  width:500px;
+  min-height:315px;
+  margin:0 auto;
+  position:relative;
+  padding-bottom:30px;
+  overflow:hidden;
+}
+.testimonialslider1 h1{
+  text-align:center;
+  text-shadow:0 1px white;
+  color:#02303F;
+}
+
+.testimonialslider1 label{
+  display:block;
+  width:25%;
+  border: 4px solid #000B4F;
+  position:absolute;
+  bottom:5px;
+  cursor: pointer;
+  transition: border-color 0.3s linear;
+}
+
+.testimonialslider1 label.second{
+  left:34%;
+}
+.testimonialslider1 label.third{
+  left:68%;
+}
+
+.testimonialslider1 blockquote{
+  margin:0;
+  padding:30px;
+  width:100%;
+  background-color: #daeefb;
+  color:#000B4F;
+  box-shadow: 0 5px 2px rgba(0,0,0,0.1);
+  position:relative;
+  transition: background-color 0.6s linear;
+}
+
+
+.testimonialslider1 #second:checked ~ .two blockquote {
+  background-color:#daeefb;
+}
+.testimonialslider1 .two blockquote:after{
+  border: solid transparent; 
+  border-top-color: #daeefb;
+  border-left-color:#daeefb;
+  border-width: 10px;
+}
+.testimonialslider1 #third:checked ~ .three blockquote{
+  background-color:#daeefb;
+}
+.testimonialslider1 .three blockquote:after{
+  border: solid transparent; 
+  border-top-color: #daeefb;
+  border-left-color: #daeefb;
+  border-width: 10px;
+}
+.testimonialslider1 .quotes{
+  position:absolute;
+  color:rgba(255,255,255,0.5);
+  font-size:5em;
+}
+.testimonialslider1 .leftq{
+  top:-25px;
+  left:5px;
+  color: #000B4F;
+}
+.testimonialslider1 .rightq{
+  bottom:-10px;
+  right:5px;
+  color: #000B4F;
 }
 

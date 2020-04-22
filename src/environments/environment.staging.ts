@@ -5,7 +5,7 @@ export const environment = {
   COGNITO_AUTH_DOMAIN: 'https://platform.auth.us-east-1.amazoncognito.com',
   serverless_url: 'https://codemarketapi-staging.codemarket.io/',
   graphql_url: 'https://codemarketapi-staging.codemarket.io/graphql',
-  s3FilesBucketURL: 'https://codemarket-files-upload.s3.amazonaws.com/public/',
+  s3FilesBucketURL: 'https://codemarket-files.s3.amazonaws.com/public/',
   stripe_public_key: 'pk_live_EYCoYtpLszr802sOl89WeuW1',
   // stripe_public_key: 'pk_test_ighmL2U9UqAx0O4b8dKkSvdq',
   webSocketURL: 'wss://rykjcx8k5f.execute-api.us-east-1.amazonaws.com/staging',

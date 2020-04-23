@@ -3,9 +3,9 @@ import { plans } from '../app/shared/constants/plan_details';
 export const environment = {
   production: true,
   COGNITO_AUTH_DOMAIN: 'https://platform.auth.us-east-1.amazoncognito.com',
-  serverless_url: 'https://jtinsurance1-api.codemarket.io/',
-  graphql_url: 'https://jtinsurance1-api.codemarket.io/graphql',
-  s3FilesBucketURL: 'https://jtinsurance-upload-files.s3.amazonaws.com/public/',
+  serverless_url: 'https://jtinsurance-api.codemarket.io/',
+  graphql_url: 'https://jtinsurance-api.codemarket.io/graphql',
+  s3FilesBucketURL: 'https://jtinsurance-files.s3.amazonaws.com/public/',
   stripe_public_key: 'pk_live_EYCoYtpLszr802sOl89WeuW1',
   // stripe_public_key: 'pk_test_ighmL2U9UqAx0O4b8dKkSvdq',
   webSocketURL: 'wss://uiagb78qmd.execute-api.us-east-1.amazonaws.com/jtinsurance',

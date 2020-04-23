@@ -8,7 +8,7 @@ export const environment = {
   s3FilesBucketURL: 'https://dro-files.s3.amazonaws.com/public/',
   stripe_public_key: 'pk_live_EYCoYtpLszr802sOl89WeuW1',
   // stripe_public_key: 'pk_test_ighmL2U9UqAx0O4b8dKkSvdq',
-  webSocketURL: 'wss://hbo1eigjfb.execute-api.us-east-1.amazonaws.com/dro',
+  webSocketURL: 'wss://nji9lfu94a.execute-api.us-east-1.amazonaws.com/dro',
   applicationId: '5d2ef428bbfa6576b357d5d4',
   googleAPIKey: 'AIzaSyAOpIXHUPA5bMssoAW3NDUGHveOf0N_tsY',
   // planDetails: plans.prod,

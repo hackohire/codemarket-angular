@@ -8,7 +8,7 @@ export const environment = {
   production: false,
   COGNITO_AUTH_DOMAIN: 'https://platform.auth.us-east-1.amazoncognito.com',
   serverless_url: 'http://localhost:3200/',
-  graphql_url: 'http://localhost:3200/graphql',
+  graphql_url: 'http://localhost:3200/dev/graphql',
   applicationId: '5d2ef428bbfa6576b357d5d4',
   s3FilesBucketURL: 'https://dro-files.s3.amazonaws.com/public/',
   stripe_public_key: 'pk_test_ighmL2U9UqAx0O4b8dKkSvdq',

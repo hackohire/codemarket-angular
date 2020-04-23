@@ -29,7 +29,7 @@
                 <br />
 
                 <app-autocomplete class="field-full-width" [allowToAdd]="false"
-                    [autoComplete]="postForm.get('assignees')" [placeholder]="'Select Students'" [collection]="'users'"
+                    [autoComplete]="postForm.get('clients')" [placeholder]="'Select Clients'" [collection]="'users'"
                     [type]="" [multiple]="true" matInput>
                 </app-autocomplete>
 
@@ -47,6 +47,8 @@
                         color="primary">{{ 'Save' }}</button>
                     <button type="button" (click)="submit('Published')" [disabled]="postForm?.invalid" mat-raised-button
                         color="primary">{{ 'Publish' }}</button>
+                        <button type="button" (click)="cancelClicked()" mat-raised-button
+                        color="warn">{{ 'Cancel' }}</button>
                 </div>
 
             </div>

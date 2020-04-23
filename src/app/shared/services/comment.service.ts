@@ -22,6 +22,7 @@ export class CommentService {
       text {
         ...Description
       }
+      textHTML
       _id
       type
       referenceId
@@ -68,7 +69,7 @@ export class CommentService {
       }
     }
     ${description}
-  `
+  `;
 
   commentsQuery: QueryRef<any>;
   commentsList$ = new BehaviorSubject<Comment[]>(null);
@@ -400,15 +401,16 @@ export class CommentService {
     );
   }
 
-  updateComment(commentId, postId, text): Observable<any> {
+  updateComment(commentId, postId, text, textHTML: string): Observable<any> {
     return this.apollo.mutate(
       {
         mutation: gql`
-          mutation updateComment($commentId: String, $postId: String, $text: [InputdescriptionBlock]) {
-            updateComment(commentId: $commentId, postId: $postId, text: $text) {
+          mutation updateComment($commentId: String, $postId: String, $text: [InputdescriptionBlock], $textHTML: String) {
+            updateComment(commentId: $commentId, postId: $postId, text: $text, textHTML: $textHTML) {
                 text {
                   ...Description
                 }
+                textHTML
             }
           }
           ${description}
@@ -417,7 +419,8 @@ export class CommentService {
         variables: {
           commentId,
           postId,
-          text
+          text,
+          textHTML
         }
       }
     ).pipe(

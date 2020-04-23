@@ -97,6 +97,7 @@ export class AddPostComponent implements OnInit {
       tags: new FormControl(i && i.tags ? i.tags : []),
       companies: new FormControl(i && i.companies ? i.companies : []),
       assignees: new FormControl(i && i.assignees ? i.assignees : []),
+      clients: new FormControl(i && i.clients ? i.clients : []),
       collaborators: new FormControl(i && i.collaborators ? i.collaborators : []),
       createdBy: new FormControl(i && i.createdBy && i.createdBy._id ? i.createdBy._id : ''),
       status: new FormControl(i && i.status ? i.status : PostStatus.Drafted),
@@ -141,10 +142,16 @@ export class AddPostComponent implements OnInit {
     // postFormValue.companies = postFormValue.companies.map(c => c._id);
 
     if (this.postId) {
-      this.store.dispatch(UpdatePost({post: postFormValue}));
+      this.store.dispatch(UpdatePost({
+        post: postFormValue, updatedBy: {name: this.authService.loggedInUser.name, _id: this.authService.loggedInUser.name}
+      }));
     } else {
       this.store.dispatch(AddPost({post: postFormValue}));
     }
+  }
+
+  cancelClicked() {
+    this.location.back();
   }
 
 }

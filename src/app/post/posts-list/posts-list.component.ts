@@ -130,7 +130,7 @@ export class PostsListComponent implements OnInit, OnDestroy {
 
   deletePost(postId: string) {
     this.sweetAlertService.confirmDelete(() => {
-      this.store.dispatch(DeletePost({ postId }));
+      this.store.dispatch(DeletePost({ postId, deletedBy: {name: this.authService.loggedInUser.name, _id: this.authService.loggedInUser._id}}));
     });
   }
 

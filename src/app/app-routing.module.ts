@@ -27,6 +27,7 @@ import { StickyComponent } from './sticky/sticky.component';
 import { ViralComponent } from './viral/viral.component';
 import { CommunityImpactStoriesComponent } from './community-impact-stories/community-impact-stories.component';
 import { AdvocatesInfluencersComponent } from './advocates-influencers/advocates-influencers.component';
+import {ContactComponent} from './contact/contact.component';
 // import { PostDataResolver } from './core/resolver';
 
 const routes: Routes = [
@@ -34,6 +35,10 @@ const routes: Routes = [
     path: '',
     redirectTo: '/dashboard',
     pathMatch: 'full'
+  },
+  {
+    path: 'pick-show-date',
+    component: ContactComponent,
   },
  /*  {
     path: '',

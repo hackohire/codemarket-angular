@@ -20,7 +20,7 @@ export enum PostType {
   Assignment = 'assignment',
 
   Email = 'email',
-
+  Review = 'review',
   Note = 'note',
 
   Question = 'question'

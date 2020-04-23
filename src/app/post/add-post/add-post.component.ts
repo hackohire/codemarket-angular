@@ -136,7 +136,8 @@ export class AddPostComponent implements OnInit {
     if (this.authService.loggedInUser && !this.createdBy.value) {
       this.createdBy.setValue(this.authService.loggedInUser._id);
     }
-
+    console.log(this.postForm.value);
+  
     const postFormValue = {...this.postForm.value};
     postFormValue['status'] = status;
     // postFormValue.companies = postFormValue.companies.map(c => c._id);

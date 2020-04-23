@@ -45,6 +45,7 @@ export class ContactComponent implements OnInit {
 
     this.contactService.addcontact(this.contactForm.value).pipe(
       catchError((e) => {
+        console.log("Error : "+e )
         Swal.fire('Name already exists!', '', 'error');
         return of(false);
       })

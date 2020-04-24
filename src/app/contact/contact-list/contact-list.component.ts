@@ -36,7 +36,7 @@ export class ContactListComponent implements OnInit {
 
   ngOnInit() {
     this.breadcumb = {
-      title: 'Subsriber List',
+      title: 'Subscribers List',
     };
     
     this.displayedColumns = ['firstName', 'lastName', 'email', 'phone', 'address','showDate'];

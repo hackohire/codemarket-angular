@@ -37,7 +37,7 @@ import { AdvocatesInfluencersComponent } from './advocates-influencers/advocates
 import { LoaderComponent } from './auth/loader/loader.component';
 import { AuthModule } from './auth/auth.module';
 import { StressManagementComponent } from './stress-management/stress-management.component';
-import {ContactComponent} from './contact/contact.component';
+import {ContactModule} from './contact/contact.module';
 
 // import { SignInComponent } from './core/amplify/sign-in-component';
 
@@ -72,8 +72,7 @@ import {ContactComponent} from './contact/contact.component';
     ViralComponent,
     StressManagementComponent,
     CommunityImpactStoriesComponent,
-    AdvocatesInfluencersComponent,
-    ContactComponent
+    AdvocatesInfluencersComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -83,7 +82,8 @@ import {ContactComponent} from './contact/contact.component';
     SharedModule,
     BrowserAnimationsModule,
     LayoutModule,
-    AuthModule
+    AuthModule,
+    ContactModule
   ],
   providers: [PostDataResolver],
   bootstrap: [AppComponent],

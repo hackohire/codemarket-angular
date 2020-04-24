@@ -45,6 +45,27 @@ export class ContactService {
     );
   }
 
+  fetchcontact(): Observable<any> {
+    return this.apollo.query({
+      query: gql`
+        query fetchcontact {
+          fetchcontact{
+            firstName
+            lastName
+            email
+            phone
+            address
+            showDate
+          }
+        }
+      `,
+      variables: {
+      }
+    }).pipe(
+      map((q: any) => q.data.fetchcontact)
+    );
+  }
+
   redirectToCompanyDetails(companyId: string, view = 'home') {
     this.router.navigate(['/', 'dashboard']);
   }

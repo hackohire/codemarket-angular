@@ -36,10 +36,6 @@ const routes: Routes = [
     redirectTo: '/dashboard',
     pathMatch: 'full'
   },
-  {
-    path: 'pick-show-date',
-    component: ContactComponent,
-  },
  /*  {
     path: '',
     redirectTo: '/dashboard/bugfixes-all',
@@ -81,7 +77,10 @@ const routes: Routes = [
     // outlet: 'main',
     // canLoad: [AuthGuard]
   },
-
+  {
+    path: 'pick-show-date',
+    loadChildren: () => import('./contact/contact.module').then(module => module.ContactModule),
+  },
   {
     path: 'company',
     loadChildren: () => import('./companies/companies.module').then(module => module.CompaniesModule),

@@ -8,7 +8,7 @@ export const environment = {
   s3FilesBucketURL: 'https://jobsfiles.s3.amazonaws.com/public/',
   stripe_public_key: 'pk_live_EYCoYtpLszr802sOl89WeuW1',
   // stripe_public_key: 'pk_test_ighmL2U9UqAx0O4b8dKkSvdq',
-  webSocketURL: 'wss://do7y7jdud7.execute-api.us-east-1.amazonaws.com/jobs',
+  webSocketURL: 'wss://rjpb0j2ny4.execute-api.us-east-1.amazonaws.com/jobs',
   // planDetails: plans.prod,
   planDetails: plans.prod,
   oauth: {

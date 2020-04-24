@@ -61,6 +61,11 @@ export class SendEmailComponent implements OnInit {
 
   ngOnInit() {
     this.emailFormInitialization(null);
+
+    this.emailService.getPostsByType("contact").subscribe(e => {
+      console.log(e)
+    });
+
   }
 
   emailFormInitialization(i: Email) {

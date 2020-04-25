@@ -37,6 +37,15 @@ export class EmailService {
     ${description}
   `;
 
+  postFields = gql`
+  fragment Post on Post {
+    _id
+    name
+    type
+    phone
+    email
+  }`;
+
   constructor(
     private apollo: Apollo,
   ) { }
@@ -60,6 +69,32 @@ export class EmailService {
     ).pipe(
       map((p: any) => {
         return p.data.sendEmail;
+      }),
+    );
+  }
+
+  getPostsByType(postTye: string) {
+    return this.apollo.query(
+      {
+        query: gql`
+          query getPostsByType($postTye: String) {
+            getPostsByType(postType: $postTye) {
+              _id
+              name
+              type
+              phone
+              email
+            }
+          }
+        `,
+        variables: {
+          postTye
+        },
+        fetchPolicy: 'no-cache'
+      }
+    ).pipe(
+      map((p: any) => {
+        return p.data.getPostsByType;
       }),
     );
   }

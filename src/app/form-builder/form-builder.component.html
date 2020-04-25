@@ -1,0 +1,120 @@
+<form-builder id="builder" [form]="form" (change)="onChange($event)"></form-builder>
+
+<div class="well jsonviewer">
+    <pre id="json"><code class="language-json" #json></code></pre>
+  </div>
+
+<formio [form]="{components: [
+    {
+      type: 'textfield',
+      label: 'FirstName',
+      key: 'firstName',
+      input: true
+    },
+    {
+      type: 'textfield',
+      label: 'LastName',
+      key: 'lastName',
+      input: true
+    },
+    {
+      type: 'email',
+      label: 'Email',
+      key: 'email',
+      input: true
+    },
+    {
+      type: 'button',
+      action: 'Submit',
+      label: 'Submit',
+      theme: 'primary'
+    }
+  ]}" [submission]="{
+    data: {
+      firstName: 'Joe',
+      lastName: 'Smith',
+      email: 'joe@example.com'
+    }
+  }"></formio>
+
+
+
+  <formio [form]='{
+    "title": "My Test Form",
+    "components": [
+        {
+            "type": "textfield",
+            "input": true,
+            "tableView": true,
+            "inputType": "text",
+            "inputMask": "",
+            "label": "First Name",
+            "key": "firstName",
+            "placeholder": "Enter your first name",
+            "prefix": "",
+            "suffix": "",
+            "multiple": false,
+            "defaultValue": "",
+            "protected": false,
+            "unique": false,
+            "persistent": true,
+            "validate": {
+                "required": true,
+                "minLength": 2,
+                "maxLength": 10,
+                "pattern": "",
+                "custom": "",
+                "customPrivate": false
+            },
+            "conditional": {
+                "show": "",
+                "when": null,
+                "eq": ""
+            }
+        },
+        {
+            "type": "textfield",
+            "input": true,
+            "tableView": true,
+            "inputType": "text",
+            "inputMask": "",
+            "label": "Last Name",
+            "key": "lastName",
+            "placeholder": "Enter your last name",
+            "prefix": "",
+            "suffix": "",
+            "multiple": false,
+            "defaultValue": "",
+            "protected": false,
+            "unique": false,
+            "persistent": true,
+            "validate": {
+                "required": true,
+                "minLength": 2,
+                "maxLength": 10,
+                "pattern": "",
+                "custom": "",
+                "customPrivate": false
+            },
+            "conditional": {
+                "show": "",
+                "when": null,
+                "eq": ""
+            }
+        },
+        {
+            "input": true,
+            "label": "Submit",
+            "tableView": false,
+            "key": "submit",
+            "size": "md",
+            "leftIcon": "",
+            "rightIcon": "",
+            "block": false,
+            "action": "submit",
+            "disableOnInvalid": true,
+            "theme": "primary",
+            "type": "button"
+        }
+    ]
+}'></formio>

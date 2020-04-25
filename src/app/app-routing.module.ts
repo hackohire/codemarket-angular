@@ -31,6 +31,7 @@ import {NewsletterComponent} from './newsletter/newsletter.component';
 import { VolunteerComponent } from './volunteer/volunteer.component';
 import {DonateComponent} from './donate/donate.component'
 import { MakemoneyonlineComponent } from './makemoneyonline/makemoneyonline.component';
+import { FormBuilderComponent } from './form-builder/form-builder.component';
 // import { PostDataResolver } from './core/resolver';
 
 const routes: Routes = [
@@ -271,7 +272,12 @@ const routes: Routes = [
    {
      path: 'donate',
      component: DonateComponent
-   }
+   },
+   {
+    path: 'form-builder',
+    component: FormBuilderComponent
+  }
+
 
   /** Static routes ends here */
 ];

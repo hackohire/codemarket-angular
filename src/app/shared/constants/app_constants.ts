@@ -26,7 +26,7 @@ export const appConstants = {
     [PostType.Business]: 'sticky-note'
   },
 
-  fileS3Bucket: 'codemarket-files',
+  fileS3Bucket: 'cityfiles',
 
   promoCodes: {
     FIRSTMONTHFREE: {

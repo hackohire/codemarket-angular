@@ -264,12 +264,13 @@ export class CompanyService {
     );
   }
 
-  getCampaignsWithTracking(companyId) {
+  getCampaignsWithTracking(pageOptions, companyId) {
     return this.apollo.query(
       {
         query: gql`
-          query getCampaignsWithTracking($companyId: String) {
-            getCampaignsWithTracking(companyId: $companyId) {
+          query getCampaignsWithTracking($pageOptions: PageOptionsInput, $companyId: String) {
+            getCampaignsWithTracking(pageOptions: $pageOptions, companyId: $companyId) {
+              _id
               name
               label
               descriptionHTML
@@ -278,6 +279,7 @@ export class CompanyService {
                 _id
                 avatar
               }
+              count
               emailData {
                 _id
                 to
@@ -302,6 +304,7 @@ export class CompanyService {
           }
         `,
         variables: {
+          pageOptions,
           companyId
         },
         fetchPolicy: 'no-cache'
@@ -309,6 +312,47 @@ export class CompanyService {
     ).pipe(
       map((p: any) => {
         return p.data.getCampaignsWithTracking;
+      }),
+    );
+  }
+
+  getCampaignEmails(pageOptions, campaignId) {
+    return this.apollo.query({
+      query: gql`
+        query getCampaignEmails($pageOptions: PageOptionsInput, $campaignId: String) {
+          getCampaignEmails(pageOptions: $pageOptions, campaignId: $campaignId) {
+            emails {
+              _id
+              to
+              createdAt
+              subject
+              descriptionHTML
+              tracking {
+                eventType
+                open {
+                  timestamp
+                  userAgent
+                  ipAddress
+                }
+                mail {
+                  timestamp
+                  source
+                  destination
+                }
+              }
+            }
+            total
+          }
+        }
+      `,
+      variables: {
+        pageOptions,
+        campaignId: campaignId
+      },
+      fetchPolicy: 'no-cache'
+    }).pipe(
+      map((p: any) => {
+        return p.data.getCampaignEmails;
       }),
     );
   }

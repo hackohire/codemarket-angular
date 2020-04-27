@@ -43,6 +43,7 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
 
   usersInterestedInCompany: User[];
   companyView: string;
+  totalCampaign: number;
 
   customTabs = [
     {
@@ -259,23 +260,23 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
 
   /** Initializing Question & Answer Form */
   initializeQuestionAndAnswerForm(p, questionType?: string) {
-    this.questionOrAnswerForm = new FormGroup({
-      text: new FormControl(''),
-      referenceId: new FormControl(p._id),
-      type: new FormControl(questionType ? questionType : this.type),
-      isQuestion: new FormControl(),
-      isAnswer: new FormControl()
-    });
+    // this.questionOrAnswerForm = new FormGroup({
+    //   text: new FormControl(''),
+    //   referenceId: new FormControl(p._id),
+    //   type: new FormControl(questionType ? questionType : this.type),
+    //   isQuestion: new FormControl(),
+    //   isAnswer: new FormControl()
+    // });
 
-    this.subscription$.add(
-      this.commentService.getQuestionAndAnswersByReferenceId(p._id).pipe(
-        tap((d) => {
-          this.questionsList = d;
-        })
-      ).subscribe({
-        error: (e) => console.log(e)
-      })
-    );
+    // this.subscription$.add(
+    //   this.commentService.getQuestionAndAnswersByReferenceId(p._id).pipe(
+    //     tap((d) => {
+    //       this.questionsList = d;
+    //     })
+    //   ).subscribe({
+    //     error: (e) => console.log(e)
+    //   })
+    // );
   }
 
   /** Add Question Or Answer */
@@ -421,10 +422,28 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
       this.router.navigate(['./'], { relativeTo: this.activatedRoute, queryParams: { view: category.name }, queryParamsHandling: 'merge' });
     }
 
+    // if (category.name === 'campaigns') {
+    //   const paginationObj = {
+    //     pageNumber: this.paginator.pageIndex + 1, limit: this.paginator.pageSize ? this.paginator.pageSize : 10,
+    //     sort: {order: ''}};
+
+    //   this.subscription$.add(
+    //     this.companyService.getCampaignsWithTracking(paginationObj, this.companyDetails._id).subscribe(c => {
+    //       if (c && c.length) {
+    //         this.campaignsList = c;
+    //       }
+    //     })
+    //   );
+    // }
+
     switch (category.name) {
       case 'campaigns':
+        const paginationObj = {
+          pageNumber: 1, limit: 10,
+          sort: {order: ''}};
+
         this.subscription$.add(
-          this.companyService.getCampaignsWithTracking(this.companyDetails._id).subscribe(c => {
+          this.companyService.getCampaignsWithTracking(paginationObj, this.companyDetails._id).subscribe(c => {
             if (c && c.length) {
               this.campaignsList = c;
             }
@@ -485,6 +504,24 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
         })
 
       });
+  }
+
+  /** Fetch the list of posts connected with company based on the pagination */
+  fetchEmailsConnectedWithCampaign(campaignId, campaignIndex) {
+    const paginationObj = {
+      pageNumber: this.paginator.pageIndex + 1, limit: this.paginator.pageSize ? this.paginator.pageSize : 10,
+      sort: {order: ''}};
+    
+    // this.companyService.getCampaignsWithTracking(paginationObj, this.companyDetails._id).subscribe(c => {
+    //   if (c && c.length) {
+    //     this.campaignsList = c;
+    //   }
+    // })
+    this.companyService.getCampaignEmails(paginationObj, campaignId).subscribe(c => {
+      if (c && c.emails && c.emails.length) {
+        this.campaignsList[campaignIndex].emailData  = c.emails;
+      }
+    });
   }
 
   redirectToAddPost(postType) {

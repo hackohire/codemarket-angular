@@ -300,6 +300,8 @@ export const appConstants = {
       birthDate
       address
       website
+
+      descriptionHTML
     }
     ${description}
     ${comment}

@@ -27,7 +27,7 @@
         <div [ngClass]="comment.createdBy._id === authService.loggedInUser._id && fromWhere === 'chat' ? 'w-80 float-right' : ''">
             <app-editor 
                 [editorStyle]="{padding: '0 15px', 'border-radius': '19px', background: '#f2f3f5', border: 'solid 0.5px rgb(236, 236, 236)'}"
-                [readOnly]="edit ? false : true" #singleCommentEditor [data]="comment?.text"
+                [readOnly]="edit ? false : true" #singleCommentEditor [data]="comment?.text" [html]="comment?.textHTML"
                 [id]="'comment-' + comment._id"></app-editor>
         </div>
 
@@ -89,7 +89,7 @@
         <div class="comment-reply-form">
             <!-- COMMENT REPLY EDITOR -->
             <app-editor #commentReplyEditor [placeholder]="'Add a Reply!'"
-                [editorStyle]="{padding: '0 15px', 'border-radius': '19px', background: '#f2f3f5', border: 'solid 0.5px rgb(236, 236, 236)'}"
+                [editorStyle]="{'border-radius': '19px', background: '#f2f3f5', border: 'solid 0.5px rgb(236, 236, 236)'}"
                 [id]="'reply'+ comment?._id" [data]="replyCommentForm.get('text')?.value">
             </app-editor>
             <!-- <textarea class="bla" name="reply-comment" placeholder="Write your comment..."></textarea> -->

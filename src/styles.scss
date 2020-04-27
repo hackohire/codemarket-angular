@@ -10,9 +10,23 @@
 html,
 body {
   height: 100%;
-}
-body {
   margin: 0;
+}
+
+.readonly {
+  .tox-tinymce {
+    border: none !important;
+  }
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.readonly > .tox .tox-edit-area__iframe {
+  background: none !important;
+}
+
+.my_class {
+  margin: 0 !important;
 }
 
 span {
@@ -9849,7 +9863,7 @@ ul.nav-tabs.nav--tabs2 li a::before {
 
 .comment-reply-form button,
 .comment-form-area .comment-form button {
-  margin-top: 10px;
+  // margin-top: 10px;
 }
 
 .comment-form-area {

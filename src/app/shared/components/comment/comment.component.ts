@@ -79,17 +79,17 @@ export class CommentComponent implements OnInit {
 
   async addReply(commentReplyEditor: EditorComponent) {
     if (this.authService.loggedInUser) {
-      const blocks =  await commentReplyEditor.editor.save();
+      // const blocks =  await commentReplyEditor.editor.save();
 
-      this.replyCommentForm.get('text').setValue(blocks.blocks);
+      // this.replyCommentForm.get('text').setValue(blocks.blocks);
 
-      this.changeDetector.detectChanges();
+      // this.changeDetector.detectChanges();
 
 
       /** Fetch the html content also becuase when we send email, email only understands the html content so we need to store html
        * content also
        */
-      this.replyCommentForm.get('textHTML').setValue(commentReplyEditor.editorViewRef.nativeElement.innerHTML);
+      this.replyCommentForm.get('textHTML').setValue(commentReplyEditor.html);
 
 
       this.replyCommentForm.addControl('createdBy', new FormControl(this.authService.loggedInUser._id));
@@ -98,7 +98,7 @@ export class CommentComponent implements OnInit {
           if (child && this.comment.children) {
             // this.comment.children.push(child);
             this.reply = this.fromWhere === 'chat' ? false: true;
-            commentReplyEditor.editor.blocks.clear();
+            // commentReplyEditor.editor.blocks.clear();
           }
         })
       ).subscribe();
@@ -120,16 +120,17 @@ export class CommentComponent implements OnInit {
   }
 
   async updateComment(singleCommentEditor: EditorComponent) {
-    const blocks =  await singleCommentEditor.editor.save();
-    this.comment.text = blocks.blocks;
+    // const blocks =  await singleCommentEditor.editor.save();
+    // this.comment.text = blocks.blocks;
 
-    this.changeDetector.detectChanges();
+    // this.changeDetector.detectChanges();
 
     await this.commentService.updateComment(
       this.comment._id,
       this.comment.referenceId,
       this.comment.text,
-      singleCommentEditor.editorViewRef.nativeElement.innerHTML
+      singleCommentEditor.html
+      // singleCommentEditor.editorViewRef.nativeElement.innerHTML
     ).pipe(
       tap((d) => {
         if (d) {

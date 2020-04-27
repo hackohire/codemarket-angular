@@ -46,6 +46,8 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
 
   fileExtensions = AttachesTool.EXTENSIONS;
 
+  tinyMCEApi = environment.tiny_api;
+
   editor: EditorJS;
   of = of;
   selectedBlockIndex: number;
@@ -55,6 +57,7 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
   @Input() userReferenceId: string;
   @Input() id: string;
   @Input() readOnly = false; /** read only mode */
+  @Input() html: string;
 
   _data: any[];
   @Input()
@@ -85,7 +88,7 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
   @Input() editorStyle = {
     background: '#eff1f570',
     'word-break': 'break-word',
-    padding: '15px',
+    // padding: '15px',
     // border: 'dotted #ececec'
   };
 

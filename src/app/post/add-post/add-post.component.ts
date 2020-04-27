@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, AfterViewInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -12,18 +12,26 @@ import { EditorComponent } from '../../shared/components/editor/editor.component
 import { Post } from '../../shared/models/post.model';
 import { Location } from '@angular/common';
 import { PostService } from '../../shared/services/post.service';
+import { environment } from '../../../environments/environment';
+declare var tinymce;
 
 @Component({
   selector: 'app-add-post',
   templateUrl: './add-post.component.html',
-  styleUrls: ['./add-post.component.scss']
+  styleUrls: ['./add-post.component.scss'],
 })
-export class AddPostComponent implements OnInit {
+export class AddPostComponent implements OnInit, AfterViewInit {
+
+  // @ViewChild('tinymce', {static: true})
+
+  s3Bucket = environment.s3FilesBucketURL;
 
   breadcumb: BreadCumb;
   postForm: FormGroup;
 
   editPostDetails: Post;
+
+  tinyMCEApi = environment.tiny_api;
 
   /** When a user tries to tie a post with this post */
   postFromRoute: Post;
@@ -53,15 +61,15 @@ export class AddPostComponent implements OnInit {
 
 
   constructor(
-    private authService: AuthService,
+    public authService: AuthService,
     private store: Store<AppState>,
     private activatedRoute: ActivatedRoute,
     private postService: PostService,
     private location: Location,
   ) {
 
-    this.postType = this.activatedRoute.snapshot.queryParams['type'];
-    this.postId = this.activatedRoute.snapshot.params['postId'];
+    this.postType = this.activatedRoute.snapshot.queryParams.type;
+    this.postId = this.activatedRoute.snapshot.params.postId;
 
     /** Make the Changes here while creating new post type */
     this.breadcumb = {
@@ -74,6 +82,19 @@ export class AddPostComponent implements OnInit {
     };
 
     this.postFormInitialization(null);
+  }
+
+  ngAfterViewInit(): void {
+    // TINYMCE_SCRIPT_SRC.init({
+    //   selector: '#default',
+    //   images_upload_url: 'postAcceptor.php',
+    //   file_upload_handler: this.authService.uploadImage,
+    //   file_picker_types: 'file image media',
+    //   image_title: true,
+    //   automatic_uploads: false,
+    //   plugins: [ 'lists codesample link image paste help wordcount autoresize autolink powerpaste preview' ],
+    //   toolbar: 'preview | undo redo | image | formatselect | bold italic code codesample | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | help'
+    // });
   }
 
   ngOnInit() {
@@ -94,6 +115,7 @@ export class AddPostComponent implements OnInit {
     this.postForm = new FormGroup({
       name: new FormControl(i && i.name ? i.name : '', Validators.required),
       description: new FormControl(i && i.description ? i.description : []),
+      descriptionHTML: new FormControl(i && i.descriptionHTML ? i.descriptionHTML : ''),
       tags: new FormControl(i && i.tags ? i.tags : []),
       companies: new FormControl(i && i.companies ? i.companies : []),
       assignees: new FormControl(i && i.assignees ? i.assignees : []),
@@ -110,7 +132,7 @@ export class AddPostComponent implements OnInit {
 
 
     /** If somebody tries to tie a post with this post */
-    this.postFromRoute = this.location.getState()['post'];
+    this.postFromRoute = (this.location.getState() as any).post;
 
     if (this.postFromRoute) {
       this.postForm.get('tags').setValue(this.postFromRoute.tags);
@@ -130,28 +152,33 @@ export class AddPostComponent implements OnInit {
       return;
     }
 
-    const blocks =  await this.descriptionEditor.editor.save();
-    this.descriptionFormControl.setValue(blocks.blocks);
+    // const blocks = await this.descriptionEditor.editor.save();
+    // this.descriptionFormControl.setValue(blocks.blocks);
 
     if (this.authService.loggedInUser && !this.createdBy.value) {
       this.createdBy.setValue(this.authService.loggedInUser._id);
     }
 
-    const postFormValue = {...this.postForm.value};
-    postFormValue['status'] = status;
+    const postFormValue = { ...this.postForm.value };
+    postFormValue.status = status;
     // postFormValue.companies = postFormValue.companies.map(c => c._id);
 
     if (this.postId) {
       this.store.dispatch(UpdatePost({
-        post: postFormValue, updatedBy: {name: this.authService.loggedInUser.name, _id: this.authService.loggedInUser.name}
+        post: postFormValue, updatedBy: { name: this.authService.loggedInUser.name, _id: this.authService.loggedInUser.name }
       }));
     } else {
-      this.store.dispatch(AddPost({post: postFormValue}));
+      this.store.dispatch(AddPost({ post: postFormValue }));
     }
   }
 
   cancelClicked() {
     this.location.back();
   }
+
+  uploadImage(a, b, c) {
+    console.log(a, b, c);
+  }
+
 
 }

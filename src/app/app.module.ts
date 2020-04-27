@@ -39,7 +39,7 @@ import { AuthModule } from './auth/auth.module';
 import { StressManagementComponent } from './stress-management/stress-management.component';
 import { NewsletterComponent } from './newsletter/newsletter.component';
 import {VolunteerComponent} from './volunteer/volunteer.component';
-import {DonateComponent} from './donate/donate.component'
+import {DonateComponent} from './donate/donate.component';
 import {MakemoneyonlineModule} from './makemoneyonline/makemoneyonline.module';
 
 // import { SignInComponent } from './core/amplify/sign-in-component';

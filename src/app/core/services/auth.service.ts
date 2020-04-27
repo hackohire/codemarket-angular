@@ -2,7 +2,7 @@ import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { Hub } from '@aws-amplify/core';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
-import { map, catchError, tap, take } from 'rxjs/operators';
+import { map, catchError, tap } from 'rxjs/operators';
 import { of } from 'rxjs/internal/observable/of';
 import { CognitoUser, CognitoUserSession } from 'amazon-cognito-identity-js';
 import Auth from '@aws-amplify/auth';
@@ -11,7 +11,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../store/state/app.state';
 import { Authorise, SetLoggedInUser } from '../store/actions/user.actions';
 import { selectLoggedInUser } from '../store/selectors/user.selector';
-import { Observable, BehaviorSubject, Subscription, Subject } from 'rxjs';
+import { Observable, BehaviorSubject, Subscription } from 'rxjs';
 import { User } from '../../shared/models/user.model';
 import { Router } from '@angular/router';
 import { isPlatformBrowser, DOCUMENT, isPlatformServer } from '@angular/common';
@@ -22,6 +22,8 @@ import { ToastrService } from 'ngx-toastr';
 import { TransferState, makeStateKey } from '@angular/platform-browser';
 import { MessageService } from '../../shared/services/message.service';
 import { NotificationService } from '../../auth/notification.service';
+import Storage from '@aws-amplify/storage';
+declare var tinymce;
 
 export interface NewUser {
   email: string;
@@ -276,15 +278,6 @@ export class AuthService {
     }
   }
 
-  login(): void {
-    // const config = Amplify.Auth._config;
-    // const oauth = Amplify.Auth._config.oauth;
-    // const url = `${environment.COGNITO_AUTH_DOMAIN}/login?response_type=${oauth.responseType}&client_id=${config.aws_user_pools_web_client_id}&redirect_uri=${oauth.redirectSignIn}`;
-    // console.log(Amplify.Auth._config);
-    // window.location.assign(url);
-    Auth.federatedSignIn();
-  }
-
   logout(): void {
     Auth.signOut().then(d => {
       console.log('user has been signed out');
@@ -348,5 +341,36 @@ export class AuthService {
         return false;
       });
     });
+  }
+
+
+  filePickerCallback(cb, value, meta) {
+    const input = document.createElement('input');
+    input.setAttribute('type', 'file');
+    // input.setAttribute('accept', 'image/*');
+    input.onchange = (f) => {
+      console.log(f);
+      const file = input.files[0];
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        const fileNameSplitArray = file.name.split('.');
+        const fileExt = fileNameSplitArray.pop();
+        const fileName = fileNameSplitArray[0] + '-' + new Date().toISOString() + '.' + fileExt;
+
+        Storage.vault.put(fileName, file, {
+
+          bucket: appConstants.fileS3Bucket,
+
+          level: 'public',
+
+          contentType: file.type,
+        }).then((uploaded: any) => {
+          console.log('uploaded', uploaded);
+          cb(environment.s3FilesBucketURL + uploaded.key, { title: file.name });
+        });
+      };
+    };
+    input.click();
   }
 }

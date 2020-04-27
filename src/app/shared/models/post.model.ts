@@ -21,6 +21,7 @@ export interface Post {
         type: string;
         data: BlockToolData
     }];
+    descriptionHTML?: string;
     type?: string;
     price?: number;
     _id?: string;
@@ -53,7 +54,7 @@ export interface Post {
     collaborators?: [User];
     assignees?: [User];
     clients?: [User];
-    
+
     users?: [User];
 
     /** Contact Related Fields */

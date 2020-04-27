@@ -115,7 +115,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
           this.postDetails = p;
           this.collaborators = this.postDetails.collaborators.map((cDetail) => {
             return cDetail._id;
-          })
+          });
           this.details$ = of(p);
           this.initializeCommentForm(p, 'post');
 
@@ -150,7 +150,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
             })
           );
 
-          this.postService.getCountOfAllPost('', '', 
+          this.postService.getCountOfAllPost('', '',
           {
             referencePostId: [this.postDetails._id],
             connectedPosts: this.postDetails.connectedPosts.map(p => p._id),

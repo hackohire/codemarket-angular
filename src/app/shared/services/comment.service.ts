@@ -22,7 +22,6 @@ export class CommentService {
       text {
         ...Description
       }
-      textHTML
       _id
       type
       referenceId
@@ -390,9 +389,11 @@ export class CommentService {
               const parentCommentIndex = comments.findIndex(com => com._id === c.parentId);
               const deletedChildCommentIndex = comments[parentCommentIndex]['children'].findIndex(com => com._id === c._id);
               comments[parentCommentIndex]['children'][deletedChildCommentIndex]['text'] = c.text;
+              comments[parentCommentIndex]['children'][deletedChildCommentIndex]['textHTML'] = c.textHTML;
             } else {
               const commentIndex = comments.slice().findIndex(com => com._id === c._id);
               comments[commentIndex]['text'] = c.text;
+              comments[commentIndex]['textHTML'] = c.textHTML;
             }
             this.commentsList$.next(comments);
 

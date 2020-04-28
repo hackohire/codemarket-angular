@@ -94,7 +94,7 @@
             <p [ngClass]="readMore ? 'readMore' : ''">
                 <!---------------- SINGLE POST EDITOR --------------->
                 <app-editor #singlePostEditor (showComments)="showComments.emit({block : $event.block, selectedPost: p, comments: commentService.commentsList$})" [editorStyle]="{background: 'white'}" [data]="p?.description"
-                    [id]="'post' + p?._id" [readOnly]="!p['__edit']" [blockLevelComments]="!readMore"
+                    [id]="'post' + p?._id" [readOnly]="!p['__edit']" [blockLevelComments]="!readMore" [html]="p?.descriptionHTML"
                     [commentType]="'post'" [post]="p" [commentsList]="(commentService.commentsList$ | async)">
                 </app-editor>
             </p>

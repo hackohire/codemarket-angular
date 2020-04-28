@@ -179,6 +179,7 @@ fragment Comment on Comment {
   text {
     ...Description
   }
+  textHTML
   _id
   type
   referenceId

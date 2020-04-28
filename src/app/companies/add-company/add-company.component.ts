@@ -140,8 +140,8 @@ export class AddCompanyComponent implements OnInit {
     }
     // this.statusFormControl.setValue(status);
 
-    const blocks =  await this.descriptionEditor.editor.save();
-    this.descriptionFormControl.setValue(blocks.blocks);
+    // const blocks =  await this.descriptionEditor.editor.save();
+    // this.descriptionFormControl.setValue(blocks.blocks);
 
     if (this.authService.loggedInUser && !this.createdBy.value) {
       this.createdBy.setValue(this.authService.loggedInUser._id);

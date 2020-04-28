@@ -64,7 +64,7 @@ export const droEmailTemplate = `<html>
                                                                                     </h3>
 
                                                                                     <p>
-                                                                                    My Name is Dr. Aaron Orpelli, DC.  Hope you are taking care of yourself during these dangerous times. To guide my patients and community at large into wellness, I am starting <strong style="font-size: 15px;">The Dr.O Show</strong> on YouTube. In this program, I will talk directly to my patients, and the general public,  in regards to the health of their immune system.
+                                                                                    My Name is Dr. Aaron Orpelli, DC.  Hope you are taking care of yourself during these dangerous times. To guide my patients and community at large into wellness, I am starting <strong style="font-size: 15px;">The Dr. O Show</strong> on YouTube. In this program, I will talk directly to my patients, and the general public,  in regards to the health of their immune system.
                                                                                     </p>
 
                                                                                     <p>

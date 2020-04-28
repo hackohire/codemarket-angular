@@ -6,6 +6,7 @@ import {CreateFormTemplateComponent} from './create-form-template/create-form-te
 import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { FormioModule } from 'angular-formio';
+import { ViewFormDataListComponent } from './view-form-data-list/view-form-data-list.component';
 
 
 const contactRoutes: Routes = [
@@ -23,6 +24,10 @@ const contactRoutes: Routes = [
         loadChildren: () => import('./add-form-data/add-form-data.module').then(module => module.AddFormDataModule),
       },
       {
+        path: 'view-form-data-list/:formname',
+        component: ViewFormDataListComponent
+      },
+      {
         path: 'create-form-template',
         component: CreateFormTemplateComponent
       },
@@ -31,7 +36,7 @@ const contactRoutes: Routes = [
 ];
 
 @NgModule({
-  declarations: [FormBuilderComponent,CreateFormTemplateComponent],
+  declarations: [FormBuilderComponent,CreateFormTemplateComponent, ViewFormDataListComponent],
   imports: [
     CommonModule,
     SharedModule,

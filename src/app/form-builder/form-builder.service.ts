@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import {FormJson} from '../shared/models/FormJson.model';
+import {FormData} from '../shared/models/FormData.model';
 
 
 @Injectable({
@@ -58,6 +59,46 @@ export class FormBuilderService {
       }
     }).pipe(
       map((q: any) => q.data.fetchformJson)
+    );
+  }
+
+  addformData(formData : any): Observable<FormData>{
+    return this.apollo.mutate({
+      mutation: gql`
+        mutation addformData($formData: formDataInput) {
+          addformData(formData: $formData) {
+            formname
+            jsonstring
+          }
+        }
+      `,
+      variables: {  
+        formData   
+      }
+    }).pipe(
+      map((q: any) => q.data.addformData)
+    );
+  }
+
+  redirectToBack(companyId: string, view = 'home') {
+    this.router.navigate(['/', 'form-builder']);
+  }
+
+  fetchformData(formname: string): Observable<any> {
+    return this.apollo.query({
+      query: gql`
+        query fetchformData($formname: String) {
+          fetchformData(formname: $formname){
+            formname
+            jsonstring
+          }
+        }
+      `,
+      variables: {
+        formname
+      }
+    }).pipe(
+      map((q: any) => q.data.fetchformData)
     );
   }
 

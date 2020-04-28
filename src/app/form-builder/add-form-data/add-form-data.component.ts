@@ -16,7 +16,7 @@ export class AddFormDataComponent implements OnInit {
 
   constructor(private formBuilderService: FormBuilderService,
     private activatedRoute: ActivatedRoute) {
-    this.formName = this.activatedRoute.snapshot.queryParams['formname'];
+    this.formName = this.activatedRoute.snapshot.params['formname'];
   }
   formJsonListSubscription: Subscription;
   breadcumb: BreadCumb

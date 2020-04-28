@@ -156,7 +156,7 @@
         <div class="thread">
             <ul class="media-list thread-list" style="padding: 10px 0px 0px 0px; list-style: none;">
                 <div *ngFor="let com of (commentService.commentsList$ | async)">
-                    <li *ngIf="!com?.blockSpecificComment" class="single-thread">
+                    <li *ngIf="!com?.blockSpecificComment || true" class="single-thread">
                         <app-comment [comment]="com"></app-comment>
                     </li>
                 </div>

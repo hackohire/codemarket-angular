@@ -1,5 +1,7 @@
 .visibility-hidden {
-  display: none;
+  // visibility: none;
+  height: 0;
+  opacity: 0;
 }
 
 .ce-toolbox__button:hover {

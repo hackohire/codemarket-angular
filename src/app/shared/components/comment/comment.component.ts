@@ -89,7 +89,7 @@ export class CommentComponent implements OnInit {
       /** Fetch the html content also becuase when we send email, email only understands the html content so we need to store html
        * content also
        */
-      this.replyCommentForm.get('textHTML').setValue(commentReplyEditor.html);
+      this.replyCommentForm.get('textHTML').setValue(commentReplyEditor.html ? commentReplyEditor.html : commentReplyEditor.editorUI);
 
 
       this.replyCommentForm.addControl('createdBy', new FormControl(this.authService.loggedInUser._id));
@@ -97,7 +97,8 @@ export class CommentComponent implements OnInit {
         tap((child) => {
           if (child && this.comment.children) {
             // this.comment.children.push(child);
-            this.reply = this.fromWhere === 'chat' ? false: true;
+            commentReplyEditor.html = '';
+            this.reply = this.fromWhere === 'chat' ? false : true;
             // commentReplyEditor.editor.blocks.clear();
           }
         })
@@ -109,7 +110,7 @@ export class CommentComponent implements OnInit {
 
   deleteComment(singleCommentEditor: EditorComponent) {
     this.sweetAlertService.confirmDelete(() => {
-    this.commentService.deleteComment(this.comment._id, this.comment.referenceId, singleCommentEditor.editorViewRef.nativeElement.innerHTML).pipe(
+    this.commentService.deleteComment(this.comment._id, this.comment.referenceId, singleCommentEditor.html).pipe(
       tap((d) => {
         // this.commentDeleted.emit(this.comment._id);
         // this.comment = null;
@@ -129,7 +130,7 @@ export class CommentComponent implements OnInit {
       this.comment._id,
       this.comment.referenceId,
       this.comment.text,
-      singleCommentEditor.html
+      singleCommentEditor.html ? singleCommentEditor.html : singleCommentEditor.editorUI
       // singleCommentEditor.editorViewRef.nativeElement.innerHTML
     ).pipe(
       tap((d) => {

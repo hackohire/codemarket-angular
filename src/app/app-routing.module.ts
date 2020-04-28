@@ -29,9 +29,8 @@ import { CommunityImpactStoriesComponent } from './community-impact-stories/comm
 import { AdvocatesInfluencersComponent } from './advocates-influencers/advocates-influencers.component';
 import {NewsletterComponent} from './newsletter/newsletter.component';
 import { VolunteerComponent } from './volunteer/volunteer.component';
-import {DonateComponent} from './donate/donate.component'
-import { MakemoneyonlineComponent } from './makemoneyonline/makemoneyonline.component';
-import { FormBuilderComponent } from './form-builder/form-builder.component';
+import {DonateComponent} from './donate/donate.component';
+
 // import { PostDataResolver } from './core/resolver';
 
 const routes: Routes = [
@@ -155,6 +154,10 @@ const routes: Routes = [
     loadChildren: () => import('./makemoneyonline/makemoneyonline.module').then(module => module.MakemoneyonlineModule),
   },
   {
+    path: 'form-builder',
+    loadChildren: () => import('./form-builder/form-builder.module').then(module => module.FormBuilderModule),
+  },
+  {
     path: 'about-us',
     component: AboutUsComponent
   },
@@ -272,11 +275,7 @@ const routes: Routes = [
    {
      path: 'donate',
      component: DonateComponent
-   },
-   {
-    path: 'form-builder',
-    component: FormBuilderComponent
-  }
+   }
 
 
   /** Static routes ends here */

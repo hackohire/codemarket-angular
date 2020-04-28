@@ -1,5 +1,13 @@
 import { Component, OnInit,  ElementRef, ViewChild } from '@angular/core';
 import * as CryptoJS from 'crypto-js';
+import { FormControl, FormGroup,FormBuilder, Validators } from '@angular/forms';
+import {FormBuilderService} from './form-builder.service';
+import Swal from 'sweetalert2';
+import { catchError, } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { Subscription } from 'rxjs';
+import { BreadCumb } from './../shared/models/bredcumb.model';
+import { MatTableDataSource, MatSort } from '@angular/material';
 
 @Component({
   selector: 'app-form-builder',
@@ -8,23 +16,37 @@ import * as CryptoJS from 'crypto-js';
 })
 export class FormBuilderComponent implements OnInit {
 
-  @ViewChild('json', {static: true}) jsonElement?: ElementRef;
-  public form: Object = {components: []};
-
-  
-
-  onChange(event) {
-    this.formJSON = JSON.stringify(event.form, null, 4);
-    // console.log("encripted : " + this.encryptData(JSON.stringify(event.form, null, 4)))
-    // console.log("Decrypted : " + this.decryptData(this.encryptData(JSON.stringify(event.form, null, 4))))
-  }
-
   encryptSecretKey = 'codemarket';
   formJSON = null;
+  formDetails: FormGroup;
+  jsonstring = null;
+  formjson = null;
+  public form1: Object = {components: []};
+  testFormStructure = null;
+  testFormStructureCompo = null;
 
-  constructor() { }
+  displayedColumns: string[];
+  dataSource = new MatTableDataSource();
+  breadcumb: BreadCumb
+
+  formJsonListSubscription: Subscription;
+  
+  constructor(private formBuilderService: FormBuilderService) {
+   }
 
   ngOnInit() {
+    this.breadcumb = {
+      title: 'Form Template List',
+    };
+
+    this.formJsonListSubscription = this.formBuilderService.fetchformJson().subscribe((formJsonlist) => {
+      this.displayedColumns = ['formName','action'];
+      this.dataSource.data = formJsonlist;
+    });
+  }
+
+  onSubmitForm1(event) {
+    console.log(event.data);
   }
 
   encryptData(data) {
@@ -48,10 +70,4 @@ export class FormBuilderComponent implements OnInit {
       console.log(e);
     }
   }
-
-  submit(){
-    console.log(this.formJSON)
-    console.log(this.encryptData(this.formJSON));
-  }
-
 }

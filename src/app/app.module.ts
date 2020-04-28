@@ -42,7 +42,7 @@ import {VolunteerComponent} from './volunteer/volunteer.component';
 import {DonateComponent} from './donate/donate.component'
 import {MakemoneyonlineModule} from './makemoneyonline/makemoneyonline.module';
 import { FormioModule } from 'angular-formio';
-import {FormBuilderComponent} from './form-builder/form-builder.component'
+import {FormBuilderModule} from './form-builder/form-builder.module';
 
 // import { SignInComponent } from './core/amplify/sign-in-component';
 
@@ -80,8 +80,7 @@ import {FormBuilderComponent} from './form-builder/form-builder.component'
     AdvocatesInfluencersComponent,
     NewsletterComponent,
     VolunteerComponent,
-    DonateComponent,
-    FormBuilderComponent
+    DonateComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -93,7 +92,8 @@ import {FormBuilderComponent} from './form-builder/form-builder.component'
     LayoutModule,
     AuthModule,
     MakemoneyonlineModule,
-    FormioModule
+    FormioModule,
+    FormBuilderModule
   ],
   providers: [PostDataResolver],
   bootstrap: [AppComponent],

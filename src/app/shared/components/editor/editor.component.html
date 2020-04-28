@@ -55,12 +55,14 @@
         </svg></li>
 </div>
 <!-- {{html}} -->
-<editor class="readonly" [ngStyle]="editorStyle" *ngIf="html && readOnly" [id]="id" [disabled]="true" [init]="{
+<!-- {{editorUI}} -->
+<editor class="readonly" [ngStyle]="editorStyle" *ngIf="(html || editorUI) && readOnly" [id]="id" [disabled]="true" [init]="{
     body_class: 'my_class',
     'min_height': '40px',
     menubar: false, branding: false, statusbar: false, toolbar: false, readonly: true, autoresize: true,
- plugins: [ 'autoresize'] }" [apiKey]="tinyMCEApi" [ngModel]="html"></editor>
-
+ plugins: [ 'autoresize'] }" [apiKey]="tinyMCEApi" [ngModel]="html ? html : editorUI"></editor>
+<!-- {{html}} -->
+<!-- {{editorUI}} -->
  <editor *ngIf="!readOnly" [id]="id" [disabled]="readOnly" [init]="{
     menubar: true, branding: false, statusbar: true, toolbar: true, autoresize: true,
     images_upload_base_path: s3FilesBucketURL,
@@ -69,13 +71,13 @@
                   image_title: true,
                   automatic_uploads: true,
                   media_live_embeds: true,
-                  plugins: [ 'lists codesample pagebreak hr emoticons link image media help wordcount autoresize autolink powerpaste preview' ],
-                  toolbar: 'preview | undo redo | image media emoticons | formatselect pagebreak hr | bold italic code codesample | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | help'
+                  plugins: [ 'lists table advtable codesample pagebreak hr emoticons link image media help wordcount autoresize autolink powerpaste preview' ],
+                  toolbar: 'preview | undo redo | image media table emoticons | formatselect pagebreak hr | bold italic code codesample | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | help'
 }" [apiKey]="tinyMCEApi" [(ngModel)]="html"></editor>
 
 <div *ngIf="false && !readOnly && isPlatformBrowser" #editorRef [ngStyle]="editorStyle" [id]="id"></div>
 
-<div *ngIf="false" #editorViewRef [ngStyle]="editorStyle" [ngClass]="readOnly ? '' : 'visibility-hidden'">
+<div #editorViewRef [ngStyle]="editorStyle" [ngClass]="'visibility-hidden'">
     <div class="ce-block">
         <div class="ce-block__content" style="word-break: break-all">
             <ng-container [ngSwitch]="b?.type" *ngFor="let b of data; let i = index">

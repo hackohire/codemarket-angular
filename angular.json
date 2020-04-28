@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "codemarket": {
+    "mayursinh": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -99,21 +99,21 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
             "port": 4800,
-            "browserTarget": "codemarket:build"
+            "browserTarget": "mayursinh:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "codemarket:build:production"
+              "browserTarget": "mayursinh:build:production"
             },
             "staging": {
-              "browserTarget": "codemarket:build:staging"
+              "browserTarget": "mayursinh:build:staging"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "codemarket:build"
+            "browserTarget": "mayursinh:build"
           }
         },
         "test": {
@@ -151,14 +151,14 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "codemarket:serve"
+            "devServerTarget": "mayursinh:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "codemarket:serve:production"
+              "devServerTarget": "mayursinh:serve:production"
             },
             "staging": {
-              "devServerTarget": "codemarket:serve:staging"
+              "devServerTarget": "mayursinh:serve:staging"
             }
           }
         },
@@ -201,5 +201,5 @@
       }
     }
   },
-  "defaultProject": "codemarket"
+  "defaultProject": "mayursinh"
 }

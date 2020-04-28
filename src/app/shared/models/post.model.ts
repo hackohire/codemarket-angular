@@ -21,7 +21,6 @@ export interface Post {
         type: string;
         data: BlockToolData
     }];
-    descriptionHTML?: string;
     type?: string;
     price?: number;
     _id?: string;

@@ -37,6 +37,7 @@ global["object"] = win.object;
 global["HTMLElement"] = win.HTMLElement;
 global['Element'] = Element;
 global["navigator"] = win.navigator;
+global['HTMLCanvasElement'] = win.HTMLCanvasElement;
 global['Blob'] = Blob;
 global['Event'] = null;
 global['KeyboardEvent'] = null;

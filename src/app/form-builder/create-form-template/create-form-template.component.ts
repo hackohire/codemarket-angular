@@ -1,4 +1,4 @@
-import { Component, OnInit,  ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit,  ElementRef, ViewChild, Inject, PLATFORM_ID } from '@angular/core';
 import { FormControl, FormGroup,FormBuilder, Validators } from '@angular/forms';
 import {FormBuilderService} from '../form-builder.service';
 import * as CryptoJS from 'crypto-js';
@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import { catchError, } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { Subscription } from 'rxjs';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-create-form-template',
@@ -38,7 +39,7 @@ export class CreateFormTemplateComponent implements OnInit {
     });
   }
 
-  constructor(private formBuilderService: FormBuilderService) {
+  constructor(private formBuilderService: FormBuilderService, @Inject(PLATFORM_ID) private _platformId: Object) {
     this.formDetailsInitialization(null);
    }
    
@@ -84,4 +85,7 @@ export class CreateFormTemplateComponent implements OnInit {
 
   }
 
+  isBrowser(){
+    return isPlatformBrowser(this._platformId);
+  }
 }

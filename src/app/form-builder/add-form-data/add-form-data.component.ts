@@ -1,4 +1,4 @@
-import { Component, OnInit ,Input} from '@angular/core';
+import { Component, OnInit ,Input, Inject,PLATFORM_ID } from '@angular/core';
 import { BreadCumb } from '../../shared/models/bredcumb.model';
 import * as CryptoJS from 'crypto-js'
 import {FormBuilderService} from '../form-builder.service';
@@ -8,6 +8,7 @@ import { FormControl, FormGroup,FormBuilder, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { catchError, } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-add-form-data',
@@ -19,7 +20,7 @@ export class AddFormDataComponent implements OnInit {
   @Input() formName = '';
 
   constructor(private formBuilderService: FormBuilderService,
-    private activatedRoute: ActivatedRoute) {
+    private activatedRoute: ActivatedRoute,  @Inject(PLATFORM_ID) private _platformId: Object) {
     this.formName = this.activatedRoute.snapshot.params['formname'];
     this.formDetailsInitialization(null);
   }
@@ -106,6 +107,11 @@ export class AddFormDataComponent implements OnInit {
     } catch (e) {
       console.log(e);
     }
+  }
+
+
+  isBrowser(){
+    return isPlatformBrowser(this._platformId);
   }
 
 }

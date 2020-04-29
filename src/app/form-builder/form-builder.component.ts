@@ -1,4 +1,4 @@
-import { Component, OnInit,  ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, Inject, ElementRef, ViewChild, PLATFORM_ID } from '@angular/core';
 import * as CryptoJS from 'crypto-js';
 import { FormControl, FormGroup,FormBuilder, Validators } from '@angular/forms';
 import {FormBuilderService} from './form-builder.service';
@@ -31,8 +31,8 @@ export class FormBuilderComponent implements OnInit {
 
   formJsonListSubscription: Subscription;
   
-  constructor(private formBuilderService: FormBuilderService) {
-   }
+  constructor(private formBuilderService: FormBuilderService, @Inject(PLATFORM_ID) private _platformId: Object ) {
+  }
 
   ngOnInit() {
     this.breadcumb = {

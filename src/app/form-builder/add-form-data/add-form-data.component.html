@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row">
-        <div class="col-md-12">
+        <div *ngIf="isBrowser()" class="col-md-12">
           <formio [form]="form1" (submit)="onSubmitForm1($event)"></formio>
         </div>
     </div>

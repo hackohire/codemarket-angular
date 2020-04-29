@@ -3,7 +3,7 @@
     <div class="box-header">
         <!-- Post Title -->
         <div *ngIf="p?.activities?.length > 0">
-            {{p?.activities[0]?.message}}
+            {{p?.activities[0]?.message}} at {{p?.activities[0]?.activityDate | date: 'MMMM d, y, h:mm a'}}.
         </div>
         <hr/>
         <h2 class="post-title" *ngIf="p?.name">

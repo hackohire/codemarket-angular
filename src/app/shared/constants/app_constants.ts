@@ -302,6 +302,17 @@ export const appConstants = {
       website
 
       descriptionHTML
+      activities {
+        action
+        activityDate
+        by {
+          _id
+          name
+        }
+        commentId
+        postId
+        message
+      }
     }
     ${description}
     ${comment}

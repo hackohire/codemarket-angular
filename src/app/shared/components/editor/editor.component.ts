@@ -65,12 +65,15 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
     this._data = updatedData;
     if (this.editor && Object.keys(this.editor).length !== 0) {
       if (updatedData && updatedData.length) {
-        this.editor.render({ blocks: updatedData });
+        // this.editor.render({ blocks: updatedData });
       } else {
-        this.editor.blocks.clear();
+        // this.editor.blocks.clear();
       }
     }
   }
+
+  editorUI: string;
+  
   get data() {
     return this._data;
   }
@@ -134,7 +137,7 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
      */
 
     if (!this.readOnly) {
-      this.initiateEditor();
+      // this.initiateEditor();
     }
 
     /** Get all the code elements from DOM and highlight them as code snippets using highlight.js */
@@ -142,6 +145,8 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
       this.editorViewRef.nativeElement.querySelectorAll('pre code').forEach((block: HTMLElement) => {
         this._hljs.highlightBlock(block);
       });
+      this.editorUI = this.html ? this.html : this.data && this.data.length ? this.editorViewRef.nativeElement.innerHTML : '';
+      this.html = this.html ? this.html : this.data && this.data.length ? this.editorViewRef.nativeElement.innerHTML : '';
     }
     this.zoomInZoomOutForImages();
   }
@@ -157,7 +162,7 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
       // this.initiateEditor();
     } else if ((!this.editor || !this.editor.clear) && changes.readOnly && !changes.readOnly.currentValue) {
       this.readOnly = false;
-      this.initiateEditor();
+      // this.initiateEditor();
     }
   }
 
@@ -170,7 +175,7 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
 
   initializeCommentForm(p) {
     this.commentForm = new FormGroup({
-      text: new FormControl(''),
+      text: new FormControl([]),
       referenceId: new FormControl(p._id),
       type: new FormControl(this.commentType ? this.commentType : p.type),
       blockSpecificComment: new FormControl(true),
@@ -428,7 +433,7 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
 
   /** When User will upload / load a video, this method will set an attribute "controls" to show video controls */
   addControlsIfVideoElement() {
-    if (isPlatformBrowser(this._platformId) && this.editorRef.nativeElement) {
+    if (this.editorRef && isPlatformBrowser(this._platformId) && this.editorRef.nativeElement) {
       this.editorRef.nativeElement.querySelectorAll('video').forEach((v: HTMLVideoElement) => {
         if (!v.hasAttribute('controls')) {
           v.setAttribute('controls', '');

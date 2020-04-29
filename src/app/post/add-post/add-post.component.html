@@ -26,8 +26,11 @@
                     [autoComplete]="postForm.get('clients')" [placeholder]="'Select Clients'" [collection]="'users'"
                     [type]="" [multiple]="true" matInput>
                 </app-autocomplete>
+
+                <app-autocomplete [autoComplete]="postForm?.get('tags')" [collection]="'tags'" [multiple]="true"
+                [placeholder]="'Tags'" [type]="'tag'"></app-autocomplete>
                 
-                <editor [formControlName]="'descriptionHTML'" [apiKey]="tinyMCEApi" [id]="'edit-post-editor'" [init]="{
+                <!-- <editor [formControlName]="'descriptionHTML'" [apiKey]="tinyMCEApi" [id]="'edit-post-editor'" [init]="{
                   branding: false,
                   images_upload_base_path: s3Bucket,
                   file_picker_types: 'file image media',
@@ -36,30 +39,17 @@
                   automatic_uploads: true,
                   media_live_embeds: true,
                   plugins: [ 'lists codesample pagebreak hr emoticons link image media help wordcount autoresize autolink powerpaste preview' ],
-                  toolbar: 'preview | undo redo | image media emoticons | formatselect pagebreak hr | bold italic code codesample | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | help' }"></editor>
+                  toolbar: 'preview | undo redo | image media emoticons | formatselect pagebreak hr | bold italic code codesample | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | help' }"></editor> -->
 
-                <!-- <app-editor #descriptionEditor [data]="descriptionFormControl?.value"
+                <app-editor *ngIf="(postId && editPostDetails) || !postId" #descriptionEditor [data]="descriptionFormControl?.value" [readOnly]="false" [html]="postForm?.get('descriptionHTML')?.value"
                     [id]="'edit-post-editor'" [importArticleSubscription]="true" [placeholder]="postType + ' description'">
-                </app-editor> -->
+                </app-editor>
 
                 <br />
-
-                <app-autocomplete [allowToAdd]="false" [autoComplete]="postForm.get('clients')" [collection]="'users'"
-                    [multiple]="true" [placeholder]="'Select Clients'" [type]="" class="field-full-width" matInput>
-                </app-autocomplete>
 
                 <!-- <app-autocomplete [autoComplete]="postForm?.get('users')" [placeholder]="'Users'" [collection]="'users'"
                     [multiple]="true" [allowToAdd]="false"></app-autocomplete> -->
 
-                <app-autocomplete [autoComplete]="postForm?.get('tags')" [placeholder]="'Tags'" [collection]="'tags'"
-                    [type]="'tag'" [multiple]="true"></app-autocomplete>
-                
-                <br/>
-                <app-editor #descriptionEditor [placeholder]="postType + ' description'"
-                    [data]="descriptionFormControl?.value" [id]="'edit-post-editor'" [importArticleSubscription]="true">
-                </app-editor>
-
-                <br />
 
                 <div fxLayout="row" fxLayoutGap="10px">
                     <button *ngIf="statusFormControl?.value !== 'Published'" type="button" (click)="submit('Drafted')"
@@ -71,19 +61,6 @@
                         color="primary">{{ 'Publish' }}</button>
                         <button type="button" (click)="cancelClicked()" mat-raised-button
                         color="warn">{{ 'Cancel' }}</button>
-                <app-autocomplete [autoComplete]="postForm?.get('tags')" [collection]="'tags'" [multiple]="true"
-                    [placeholder]="'Tags'" [type]="'tag'"></app-autocomplete>
-
-                <div fxLayout="row" fxLayoutGap="10px">
-                    <button (click)="submit('Drafted')" *ngIf="statusFormControl?.value !== 'Published'" [disabled]="postForm?.invalid"
-                        color="primary" mat-raised-button type="button">Save</button>
-                    <button (click)="submit('Unpublished')" *ngIf="statusFormControl?.value === 'Published'"
-                        [disabled]="postForm?.invalid" color="primary" mat-raised-button
-                        type="button">{{ 'Save' }}</button>
-                    <button (click)="submit('Published')" [disabled]="postForm?.invalid" color="primary" mat-raised-button
-                        type="button">{{ 'Publish' }}</button>
-                    <button (click)="cancelClicked()" color="warn" mat-raised-button
-                        type="button">{{ 'Cancel' }}</button>
                 </div>
 
             </div>

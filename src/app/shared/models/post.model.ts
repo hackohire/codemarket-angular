@@ -63,4 +63,5 @@ export interface Post {
     address?: string;
     website?: string;
     descriptionHTML? : string;
+    activities?: any[];
 }

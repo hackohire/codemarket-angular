@@ -72,15 +72,18 @@ export class BreadcumbComponent implements OnInit {
       _id: this.postDetails._id,
       name: this.postTitle
     };
-    this.displaySave = true;
-
-    this.postService.updatePost(
-      postObj,
-      { name: this.authService.loggedInUser.name, _id: this.authService.loggedInUser._id }
-    ).subscribe((j) => {
-      if (j) {
-        this.displaySave = false;
-      }
-    });
+    
+    if (this.title !== this.postTitle.replace(/\&nbsp;/g, '')) {
+      this.displaySave = true;
+      this.postService.updatePost(
+        postObj,
+        { name: this.authService.loggedInUser.name, _id: this.authService.loggedInUser._id }
+      ).subscribe((j) => {
+        if (j) {
+          this.title = this.postTitle.replace(/\&nbsp;/g, '');
+          this.displaySave = false;
+        }
+      });
+    }
   }
 }

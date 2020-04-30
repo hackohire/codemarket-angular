@@ -2,9 +2,6 @@ import { Component, OnInit, Inject, ElementRef, ViewChild, PLATFORM_ID } from '@
 import * as CryptoJS from 'crypto-js';
 import { FormControl, FormGroup,FormBuilder, Validators } from '@angular/forms';
 import {FormBuilderService} from './form-builder.service';
-import Swal from 'sweetalert2';
-import { catchError, } from 'rxjs/operators';
-import { of } from 'rxjs';
 import { Subscription } from 'rxjs';
 import { BreadCumb } from './../shared/models/bredcumb.model';
 import { MatTableDataSource, MatSort } from '@angular/material';

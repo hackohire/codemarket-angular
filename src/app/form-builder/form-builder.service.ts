@@ -81,7 +81,7 @@ export class FormBuilderService {
   }
 
   redirectToBack(companyId: string, view = 'home') {
-    this.router.navigate(['/', 'form-builder']);
+    this.router.navigate(['/', 'dashboard']);
   }
 
   fetchformData(formname: string): Observable<any> {

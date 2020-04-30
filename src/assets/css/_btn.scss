@@ -9,7 +9,7 @@
 .btn--round{
   border-radius: 100px;
 }
-.btn{
+.btn:not(.builder-group-button):not(.formcomponent){
   background: $pcolor;
   padding: 0;
   margin: 0;
@@ -55,11 +55,22 @@
   }
 }
 
-form-builder .btn{
-  color: black !important;
-  padding: 10px;
+
+form-builder .btn .btn--color2, .btn-success, .btn--success, .btn.btn--color2:hover, .btn-success:hover, .btn--success:hover {
+  background: #77de51 !important;
+  padding: .375rem .75rem !important;
 }
 
+
+form-builder .btn.btn--color1, .btn-secondary, .btn--secondary, .btn.btn--color1:hover, .btn-secondary:hover, .btn--secondary:hover {
+  background: #7347c1 !important;
+  padding: .375rem .75rem !important;
+}
+
+.btn.btn--color5, .btn--danger, .btn-danger, .btn.btn--color5:hover, .btn--danger:hover, .btn-danger:hover {
+  background: #ff6a6d !important;
+  padding: .375rem .75rem !important;
+}
 
 .btn--bordered,
 .btn--bordered:hover, .btn--bordered:focus, .btn--bordered:active{

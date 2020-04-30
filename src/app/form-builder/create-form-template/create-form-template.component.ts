@@ -1,4 +1,4 @@
-import { Component, OnInit,  ElementRef, ViewChild, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, OnInit,  ElementRef, ViewChild, Inject, PLATFORM_ID ,ViewEncapsulation} from '@angular/core';
 import { FormControl, FormGroup,FormBuilder, Validators } from '@angular/forms';
 import {FormBuilderService} from '../form-builder.service';
 import * as CryptoJS from 'crypto-js';
@@ -7,18 +7,24 @@ import { catchError, } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { Subscription } from 'rxjs';
 import { isPlatformBrowser } from '@angular/common';
+import { BreadCumb } from '../../shared/models/bredcumb.model';
 
 @Component({
   selector: 'app-create-form-template',
   templateUrl: './create-form-template.component.html',
-  styleUrls: ['./create-form-template.component.scss']
+  styleUrls: ['./create-form-template.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class CreateFormTemplateComponent implements OnInit {
 
   @ViewChild('json', {static: true}) jsonElement?: ElementRef;
   public form: Object = {components: []};
+  breadcumb: BreadCumb;
 
   ngOnInit() {
+    this.breadcumb = {
+      title: 'Create Template',
+    };
   }
   formJSON = null;
   formDetails: FormGroup;

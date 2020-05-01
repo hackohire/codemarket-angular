@@ -159,7 +159,7 @@ export class AddPostComponent implements OnInit, AfterViewInit {
 
     // const blocks = await this.descriptionEditor.editor.save();
     // this.descriptionFormControl.setValue(blocks.blocks);
-    this.postForm.get('descriptionHTML').setValue(this.descriptionEditor.html ? this.descriptionEditor.html : this.descriptionEditor.editorUI);
+    this.postForm.get('descriptionHTML').setValue(this.descriptionEditor.html);
 
     if (this.authService.loggedInUser && !this.createdBy.value) {
       this.createdBy.setValue(this.authService.loggedInUser._id);

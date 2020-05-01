@@ -61,7 +61,7 @@ export class AddCommentComponent implements OnInit {
       // /** Fetch the html content also becuase when we send email, email only understands the html content so we need to store html
       //  * content also
       //  */
-      this.commentForm.get('textHTML').setValue(addCommentEditor.html ? addCommentEditor.html : addCommentEditor.editorUI);
+      this.commentForm.get('textHTML').setValue(addCommentEditor.html);
 
       if (this.blockId) {
         this.commentForm.get('blockId').setValue(this.blockId);

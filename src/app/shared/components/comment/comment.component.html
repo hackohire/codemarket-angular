@@ -1,8 +1,8 @@
-<div style="padding: 10px 0px 0px;" *ngIf="replyCommentForm?.value" [ngClass]="comment.createdBy._id === authService.loggedInUser._id && fromWhere === 'chat' ? isChildComment ? 'reply-comment' : '' : 'media'">
+<div style="padding: 10px 0px 0px;" *ngIf="replyCommentForm?.value" [ngClass]="comment?.createdBy?._id === authService?.loggedInUser?._id && fromWhere === 'chat' ? isChildComment ? 'reply-comment' : '' : 'media'">
 <!-- <div class="media"> -->
 
     <!-- <div class="media-left"> -->
-    <div [ngClass]="comment.createdBy._id === authService.loggedInUser._id && fromWhere === 'chat' ? 'chat-user-profile' : 'media-left'">
+    <div [ngClass]="comment?.createdBy?._id === authService?.loggedInUser?._id && fromWhere === 'chat' ? 'chat-user-profile' : 'media-left'">
         <a [routerLink]="['/', 'dashboard', 'profile', comment?.createdBy?._id ]">
             <img class="author_avatar_comment" style="width: 45px; height: 45px;"
                 [src]="comment?.createdBy?.avatar ? ((s3FilesBucketURL + comment.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar"
@@ -10,9 +10,9 @@
         </a>
     </div>
     <!-- <div [ngClass]="comment.createdBy._id === authService.loggedInUser._id && fromWhere === 'chat' ? 'message-meta' : 'media-body'"> -->
-    <div class="media-body">
+    <div style="width: -webkit-fill-available;">
             <!-- <div class="media-heading"> -->
-            <div [ngClass]="comment.createdBy._id === authService.loggedInUser._id && fromWhere === 'chat' ? 'float-right' : 'media-heading'">
+            <div [ngClass]="comment?.createdBy?._id === authService?.loggedInUser?._id && fromWhere === 'chat' ? 'float-right' : 'media-heading'">
                 <a [routerLink]="['/', 'dashboard', 'profile', comment?.createdBy?._id ]"
                     style="text-decoration: none;">
                     <h4 style="font-size: 16px; line-height: 14px; margin-bottom: 0;">{{comment?.createdBy?.name }}</h4>

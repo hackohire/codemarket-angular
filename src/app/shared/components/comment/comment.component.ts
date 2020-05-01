@@ -89,7 +89,7 @@ export class CommentComponent implements OnInit {
       /** Fetch the html content also becuase when we send email, email only understands the html content so we need to store html
        * content also
        */
-      this.replyCommentForm.get('textHTML').setValue(commentReplyEditor.html ? commentReplyEditor.html : commentReplyEditor.editorUI);
+      this.replyCommentForm.get('textHTML').setValue(commentReplyEditor.html);
 
 
       this.replyCommentForm.addControl('createdBy', new FormControl(this.authService.loggedInUser._id));
@@ -130,7 +130,7 @@ export class CommentComponent implements OnInit {
       this.comment._id,
       this.comment.referenceId,
       this.comment.text,
-      singleCommentEditor.html ? singleCommentEditor.html : singleCommentEditor.editorUI
+      singleCommentEditor.html
       // singleCommentEditor.editorViewRef.nativeElement.innerHTML
     ).pipe(
       tap((d) => {

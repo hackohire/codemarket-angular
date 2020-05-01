@@ -2546,133 +2546,137 @@ h6 {
 /*****************************
 	-- THEME
 *****************************/
-.btn--round {
-  -webkit-border-radius: 100px;
-  border-radius: 100px;
+
+*:not(.builder-group-button):not(.formcomponent, .menu) {
+  .btn--round {
+    -webkit-border-radius: 100px;
+    border-radius: 100px;
+  }
+  
+  .btn {
+    background: #0674ec;
+    padding: 0;
+    margin: 0;
+    text-transform: capitalize;
+    font-size: 15px;
+    font-weight: 500;
+    color: #fff;
+    display: inline-block;
+    -webkit-box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    -webkit-transition: 0.3s ease;
+    -o-transition: 0.3s ease;
+    transition: 0.3s ease;
+    border: none;
+    position: relative;
+  }
+  
+  .btn:before {
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: #000;
+    left: 0;
+    -webkit-transition: 0.3s;
+    -o-transition: 0.3s;
+    transition: 0.3s;
+    top: 0;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 0;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+  }
+  
+  .btn:focus,
+  .btn:active {
+    color: #fff;
+    outline: 0;
+  }
+  
+  .btn:hover {
+    color: #fff;
+  }
+  
+  .btn:hover:before {
+    opacity: 0.07;
+    visibility: visible;
+  }
+  
+  .btn.btn--round:hover:before {
+    -webkit-border-radius: 200px;
+    border-radius: 200px;
+  }
+  
+  .btn--bordered,
+  .btn--bordered:hover,
+  .btn--bordered:focus,
+  .btn--bordered:active {
+    background: none;
+    border: 1px solid #0674ec;
+    color: #0674ec;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+  
+  .btn.btn--white,
+  .btn-light,
+  .btn--light,
+  .btn.btn--white:hover,
+  .btn-light:hover,
+  .btn--light:hover {
+    background: #fff;
+    color: #0674ec !important;
+  }
+  
+  .btn--default {
+    line-height: 50px;
+    min-width: 170px;
+  }
+  
+  .btn-default {
+    line-height: 50px;
+    min-width: 170px;
+  }
+  
+  .btn--lg,
+  .btn-lg {
+    line-height: 55px;
+    font-size: 16px;
+    min-width: 195px;
+  }
+  
+  .btn--md,
+  .btn-md {
+    line-height: 45px;
+    padding: 0 22px;
+    min-width: 150px;
+  }
+  
+  .btn--xs {
+    line-height: 36px;
+    padding: 0 19px;
+    font-size: 14px;
+  }
+  
+  .btn--fullwidth {
+    width: 100%;
+  }
+  
+  .btn--sm,
+  .btn-sm {
+    line-height: 40px;
+    padding: 0 22px;
+  }
+  
+  .btn--icon span {
+    margin-right: 5px;
+    line-height: inherit;
+    display: inline-block;
+  }
 }
 
-.btn:not(.builder-group-button):not(.formcomponent) {
-  background: #0674ec;
-  padding: 0;
-  margin: 0;
-  text-transform: capitalize;
-  font-size: 15px;
-  font-weight: 500;
-  color: #fff;
-  display: inline-block;
-  -webkit-box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  -webkit-transition: 0.3s ease;
-  -o-transition: 0.3s ease;
-  transition: 0.3s ease;
-  border: none;
-  position: relative;
-}
-
-.btn:before {
-  content: "";
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  background: #000;
-  left: 0;
-  -webkit-transition: 0.3s;
-  -o-transition: 0.3s;
-  transition: 0.3s;
-  top: 0;
-  opacity: 0;
-  visibility: hidden;
-  z-index: 0;
-  -webkit-border-radius: 4px;
-  border-radius: 4px;
-}
-
-.btn:focus:not(.builder-group-button):not(.formcomponent),
-.btn:active:not(.builder-group-button):not(.formcomponent) {
-  color: #fff;
-  outline: 0;
-}
-
-.btn:hover:not(.builder-group-button):not(.formcomponent) {
-  color: #fff;
-}
-
-.btn:hover:before {
-  opacity: 0.07;
-  visibility: visible;
-}
-
-.btn.btn--round:hover:before {
-  -webkit-border-radius: 200px;
-  border-radius: 200px;
-}
-
-.btn--bordered,
-.btn--bordered:hover,
-.btn--bordered:focus,
-.btn--bordered:active {
-  background: none;
-  border: 1px solid #0674ec;
-  color: #0674ec;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-}
-
-.btn.btn--white,
-.btn-light,
-.btn--light,
-.btn.btn--white:hover,
-.btn-light:hover,
-.btn--light:hover {
-  background: #fff;
-  color: #0674ec !important;
-}
-
-.btn--default {
-  line-height: 50px;
-  min-width: 170px;
-}
-
-.btn-default {
-  line-height: 50px;
-  min-width: 170px;
-}
-
-.btn--lg,
-.btn-lg {
-  line-height: 55px;
-  font-size: 16px;
-  min-width: 195px;
-}
-
-.btn--md,
-.btn-md {
-  line-height: 45px;
-  padding: 0 22px;
-  min-width: 150px;
-}
-
-.btn--xs {
-  line-height: 36px;
-  padding: 0 19px;
-  font-size: 14px;
-}
-
-.btn--fullwidth {
-  width: 100%;
-}
-
-.btn--sm,
-.btn-sm {
-  line-height: 40px;
-  padding: 0 22px;
-}
-
-.btn--icon span {
-  margin-right: 5px;
-  line-height: inherit;
-  display: inline-block;
-}
 
 .btn--faq {
   min-width: 140px;

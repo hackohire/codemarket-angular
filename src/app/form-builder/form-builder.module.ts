@@ -12,11 +12,10 @@ import { ViewFormDataListComponent } from './view-form-data-list/view-form-data-
 const contactRoutes: Routes = [
   {
     path: '',
-   
     // data: { noReuse: true },
     children: [
       {
-        path:'',
+        path: '',
         component: FormBuilderComponent
       },
       {

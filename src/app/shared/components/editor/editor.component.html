@@ -3,7 +3,7 @@
 </div> -->
 <editor [id]="id" class="readonly" [ngStyle]="editorStyle" *ngIf="html && readOnly" [disabled]="true" [init]="{
     'min_height': '40px',
-    content_style: 'border: none',
+    content_style: 'img { width:100%; height: auto; }',
     menubar: false, branding: false, statusbar: false, toolbar: false, readonly: true, autoresize: true,
  plugins: [ 'autoresize'] }" [apiKey]="tinyMCEApi" [ngModel]="html"></editor>
 

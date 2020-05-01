@@ -16,7 +16,7 @@
                   automatic_uploads: true,
                   media_live_embeds: true,
                   plugins: [ 'lists table advtable codesample pagebreak hr emoticons link image media help wordcount autoresize autolink powerpaste preview' ],
-                  toolbar: 'preview | undo redo | image media table emoticons | formatselect pagebreak hr | bold italic code codesample | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | help'
+                  toolbar: 'preview | undo redo | link image media table emoticons | formatselect pagebreak hr | bold italic code codesample | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | help'
 }" [apiKey]="tinyMCEApi" [(ngModel)]="html"></editor>
 
 <div *ngIf="false" #editorViewRef [ngStyle]="editorStyle" [ngClass]="'visibility-hidden'">

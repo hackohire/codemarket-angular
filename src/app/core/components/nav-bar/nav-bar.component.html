@@ -91,7 +91,7 @@
     <mat-toolbar>
 
       <!-- Toggle Sidebar Button -->
-      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
+      <button *ngIf="false" type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
 
@@ -122,7 +122,7 @@
         <!-- <i style="font-size: 1.0rem !important;" class="vertical-align-middle fal fa-building fa-fw"></i> -->
 
         <!-- <div class="line-height-initial" > Create Goals </div> -->
-        <app-add-post-menu style="color: #0674ec !important; margin-left: auto;" [label]="'Create Goals'">
+        <app-add-post-menu style="color: #0674ec !important; margin-left: auto;" [label]="'Create'">
         </app-add-post-menu>
       </a>
 

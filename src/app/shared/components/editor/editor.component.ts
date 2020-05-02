@@ -8,7 +8,6 @@ import { Post } from '../../models/post.model';
 import { Comment } from '../../models/comment.model';
 import { isPlatformBrowser } from '@angular/common';
 const path = require('path');
-import EditorJS, { EditorConfig } from '@editorjs/editorjs';
 import { PostService } from '../../services/post.service';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
@@ -29,7 +28,7 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
 
   tinyMCEApi = environment.tiny_api;
 
-  editor: EditorJS;
+  editor: any;
   of = of;
   selectedBlockIndex: number;
   isPlatformBrowser = false;

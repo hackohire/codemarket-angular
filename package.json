@@ -1,5 +1,5 @@
 {
-  "name": "codemarket",
+  "name": "krutarth",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -17,14 +17,14 @@
     "compile:server": "webpack --config webpack.server.config.js --progress --colors",
     "serve:ssr": "node dist/server",
     "build:ssr": "npm run build:client-and-server-bundles && npm run compile:server",
-    "build:client-and-server-bundles": "yarn run build:only && ng run codemarket:server:production --bundleDependencies all",
+    "build:client-and-server-bundles": "yarn run build:only && ng run krutarth:server:production --bundleDependencies all",
     "build:browser:prod": "yarn run build:only",
     "build:prod:deploy": "npm run build:prod && npm run deploy",
     "build:prod": "npm run build:browser:prod && npm run build:server:prod",
-    "build:server:prod": "ng run codemarket:server:production && webpack --config webpack.server.config.js --progress --colors",
+    "build:server:prod": "ng run krutarth:server:production && webpack --config webpack.server.config.js --progress --colors",
     "build:staging:deploy": "npm run build:staging && serverless deploy --stage staging",
     "build:staging": "node --max_old_space_size=8192 node_modules/@angular/cli/bin/ng build --configuration=staging && npm run build:server:staging",
-    "build:server:staging": "ng run codemarket:server:staging && webpack --config webpack.server.config.js --progress --colors",
+    "build:server:staging": "ng run krutarth:server:staging && webpack --config webpack.server.config.js --progress --colors",
     "server": "node local.js",
     "deploy": "serverless deploy"
   },

@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "codemarket": {
+    "krutarth": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -98,21 +98,21 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
             "port": 4800,
-            "browserTarget": "codemarket:build"
+            "browserTarget": "krutarth:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "codemarket:build:production"
+              "browserTarget": "krutarth:build:production"
             },
             "staging": {
-              "browserTarget": "codemarket:build:staging"
+              "browserTarget": "krutarth:build:staging"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "codemarket:build"
+            "browserTarget": "krutarth:build"
           }
         },
         "test": {
@@ -150,14 +150,14 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "codemarket:serve"
+            "devServerTarget": "krutarth:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "codemarket:serve:production"
+              "devServerTarget": "krutarth:serve:production"
             },
             "staging": {
-              "devServerTarget": "codemarket:serve:staging"
+              "devServerTarget": "krutarth:serve:staging"
             }
           }
         },
@@ -200,5 +200,5 @@
       }
     }
   },
-  "defaultProject": "codemarket"
+  "defaultProject": "krutarth"
 }

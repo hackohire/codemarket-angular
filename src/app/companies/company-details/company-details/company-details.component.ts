@@ -21,7 +21,6 @@ import Storage from '@aws-amplify/storage';
 import moment from 'moment';
 import { concatMap } from 'rxjs/operators/concatMap';
 import { trigger, state, style, transition, animate } from '@angular/animations';
-import { BlockToolData } from '@editorjs/editorjs/types/tools';
 import { EditorComponent } from '../../../shared/components/editor/editor.component';
 import { MdePopoverTrigger } from '@material-extended/mde';
 import { MatPaginator } from '@angular/material/paginator';
@@ -104,7 +103,7 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
 
   postDescription: [{
     type: string;
-    data: BlockToolData
+    data: any
   }];
 
   @ViewChild(MdePopoverTrigger, { static: false }) socialMediaPopover: MdePopoverTrigger;

@@ -31,6 +31,13 @@ import {NewsletterComponent} from './newsletter/newsletter.component';
 import { VolunteerComponent } from './volunteer/volunteer.component';
 import {DonateComponent} from './donate/donate.component'
 import { MakemoneyonlineComponent } from './makemoneyonline/makemoneyonline.component';
+import { EducationComponent } from './education/education.component';
+import { Covid19Component } from './covid19/covid19.component';
+import { DownPaymentHelpComponent } from './down-payment-help/down-payment-help.component';
+import { LoanOfficerFormComponent } from './loan-officer-form/loan-officer-form.component';
+import { LoanOfficerSubscriberComponent } from './loan-officer-subscriber/loan-officer-subscriber.component';
+import { SuccessStoryComponent } from './success-story/success-story.component';
+import { BlogComponent } from './blog/blog.component';
 // import { PostDataResolver } from './core/resolver';
 
 const routes: Routes = [
@@ -271,7 +278,36 @@ const routes: Routes = [
    {
      path: 'donate',
      component: DonateComponent
-   }
+   },
+   {
+    path: 'education',
+    component: EducationComponent
+  },
+  {
+    path: 'covid19',
+    component: Covid19Component
+  },
+  {
+    path: 'loan-officer-form',
+    component: LoanOfficerFormComponent
+  },
+  {
+    path: 'loan-officer-subscriber',
+    component: LoanOfficerSubscriberComponent
+  },
+  {
+    path: 'down-payment-help',
+    component: DownPaymentHelpComponent
+  },
+  {
+    path: 'success-story',
+    component: SuccessStoryComponent
+  },
+  {
+    path: 'blog',
+    component: BlogComponent
+  }
+
 
   /** Static routes ends here */
 ];

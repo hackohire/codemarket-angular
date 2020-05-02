@@ -1,0 +1,731 @@
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+<div class="dpa page-template page-template-page-eligibility-request page-template-page-eligibility-request-php page page-id-46 page-parent are-you-eligible page-eligibility-request" data-gr-c-s-loaded="true">
+    <!--[if lt IE 9]>
+    <div class="alert alert-warning">
+      You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.    </div>
+    <![endif]-->
+    <div class="wrapper">
+<header class="header" role="banner">
+  <div class="container">
+    <div class="row">
+      <div class="header_in">
+        <a class="logo" title="Home" [routerLink]="['/', 'dashboard']">
+          <img src="https://downpaymentresource.com/wp-content/themes/dpr/dist/images/logo.png" alt="Down Payment Resource" width="267" height="59">
+        </a>
+        <nav role="navigation">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          </div><!-- /.navbar-header -->
+          <div id="main-navbar" class="collapse navbar-collapse"><ul id="menu-main-navbar" class="navbar-nav navbar-right">
+            
+              <li id="menu-item-3314" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3314"><a title="Find Down Payment Help" [routerLink]="['/', 'down-payment-help']" >Find Down Payment Help</a></li>
+
+              <li id="menu-item-3312" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3312"><a title="Success Stories" [routerLink]="['/', 'success-story']">Success Stories</a></li>
+              
+              <li id="menu-item-3315" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3315"><a title="Education" [routerLink]="['/', 'education']">Education</a></li>
+              
+              <li id="menu-item-3316" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3316"><a title="Blog" [routerLink]="['/', 'blog']">Blog</a></li>
+              
+              <li id="menu-item-4894" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4894"><a title="COVID-19 Impact" [routerLink]="['/', 'covid19']">COVID-19 Impact</a></li>
+            </ul><div class="clear"></div></div>        </nav>
+      </div><!-- /.header_in -->
+    </div><!-- /.row -->
+  </div><!-- /.container -->
+</header>
+
+<section class="banner" style="background-image: url('https://downpaymentresource.com/wp-content/uploads/2012/04/bg-page-banner-dark.jpg'); height: 535px;">
+  <div class="banner_in">
+    <div class="banner_content">
+      <div class="container">
+        <div class="row">
+          <div class="info col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
+            <h2>Down payment<br>money is out there.</h2><p>We’ll help you find it.</p>          </div><!-- .info -->
+        </div><!-- .row -->
+        <div class="text-center">
+                    <a class="btn btn-xlg btn-outline-inverse" href="#eligibility-form-section" data-scroll="" data-tracking-pixel="see-if-eligible">Let’s see if you’re eligible</a>
+                  </div>      </div><!-- .container -->
+    </div><!-- .banner_content -->
+  </div><!-- .banner_in -->
+</section><!-- .banner -->
+
+<div class="page-subtitle">
+          <div class="row">
+      <div class="col-md-10 col-md-offset-1 col-xs-12">
+        <blockquote>
+                  <p>I never knew these programs existed, but I found the down payment help we needed and we bought a home near family.</p>
+<footer>Anna Rendell</footer>
+                </blockquote>
+      </div>
+    </div><!-- /.row -->
+      </div><!-- /.page-subtitle -->
+      <div class="wrap container" role="document">
+        <div class="content row">
+          <main class="main" role="main">
+
+<script src="https://www.google.com/recaptcha/api.js"></script>
+<script src="/js/jquery-ui-1.10.4.custom.min.js"></script>
+<script src="/js/dpr-jquery-plugins.js"></script>
+<script>
+  window.cxtData = {"auth":{"type":"trustedClientJwt","token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiI1ZGY2NzI1ZS03MWFiLTQzMDQtOWIwMi0yYmU2M2RiZWExZGEiLCJpYXQiOiIxNDM1ODU2NTg1IiwidGVuYW50SWQiOiJkb3ducGF5bWVudHJlc291cmNlIn0.KVfvh3cQxsgZWiV_EBJ_B7gF3rcAsOy9BBaWPnk41bU"},"accessProfileId":"5df6725e-71ab-4304-9b02-2be63dbea1da","entryPointId":"e09e7bd7-86ed-4adc-8295-82ef92dc277e","engagementMedium":"none","ECX_SITE_API_NAME":"PUBLICSITE","ECX_SITE":"PublicSite","ECX_SITE_REGION_API_NAME":"ELIGIBILITY","ECX_SITE_REGION":"Eligibility","ECX_EVENT_CATEGORY_API_NAME":"VIEWELIGIBILITYFORM","ECX_EVENT_FLEX3_NAME":"DPR","REFERRAL_SOURCE":""};
+
+  DPR_api_key = "dbd8b33334d88035d7f5cd22eb7588a1";
+  DPR_api_nonce = "ed6140aef555e2eb6bcf397a25cc06a74630938cfd86d293cb07d0c06ff4dd5f";
+  DPR_search_url = "//api.workforce-resource.com/eligibility/place_names.json";
+  DPR_update_url = "//api.workforce-resource.com/eligibility/wp_get_eligible_count.json";
+  DPR_search_scope = {};
+  DPR_require_contact = 1;
+  DPR_cookie_name = "_dpl_form_values";
+
+  jQuery(function($) {
+    var box = $('.resultsbox'),
+        setPos = function() { box.css('left', box.offset().left + 'px'); if (box.width() > box.height()) box.css('margin', '0'); },
+        clrPos = function() { box.css('left', ''); if (box.width() > box.height()) box.css('margin', '0 auto'); },
+        nomatchDlg = $('#nomatch_dlg');
+    box.on('affix.bs.affix', setPos);
+    box.on('affix-top.bs.affix affix-bottom.bs.affix', clrPos);
+    box.data('offset-top', box.offset().top);
+    $(window).resize(function() {
+      if (box.hasClass('affix')) {
+        box.removeClass('affix');
+        setPos();
+        box.addClass('affix');
+      }
+      else if (box.hasClass('affix-bottom')) {
+        clrPos();
+      }
+    });
+    nomatchDlg.on('shown.bs.modal', function() { reportClick('nomatch') });
+    nomatchDlg.on('click', '[data-ga-report-click="@NerdWallet"]', function() { nomatchDlg.modal('hide') });
+  });
+</script>
+<script src="/js/dpr-eligibility-form.js"></script>
+
+<section id="eligibility-form-section" class="eligibility">
+  <div class="row">
+    <div class="col-md-8 col-xs-12">
+      <div class="eligibility-form-heading">
+        <h1 class="text-center">CHECK YOUR ELIGIBILITY NOW</h1>
+        <p class="text-center"><strong style="font-size:125%;">Please answer a few questions to learn how many programs may be available to you.</strong></p>
+      </div>
+
+      <form accept-charset="UTF-8" data-action="results/" data-nomatch-action="no-results/" id="eligibility_form" method="post" role="form">
+        <input name="filter_org" type="hidden" value="WFR">
+        <input name="filter_all" type="hidden" value="true">
+        <div class="eligibility-form-fields">
+
+              <aside class="resultsbox affix-top" data-spy="affix">
+                <div class="resultscontent">
+                  <div class="preview">
+                    <h3>Matched Programs</h3>
+                  </div>
+                  <div class="preview preview-results" role="status" aria-live="polite">
+                    <p><span aria-hidden="true">—</span><span class="sr-only">No results yet</span></p>
+                  </div>
+                  <div class="preview preview-button">
+                    <input class="btn btn-primary btn-block" tabindex="400" type="submit" disabled="" name="commit" value="Get Details" data-tracking-pixel="get-details" aria-hidden="true">
+                  </div>
+                </div><!-- /.resultscontent -->
+              </aside><!-- /.resultsbox -->
+
+              <!-- Property Information panel -->
+              <section id="property" class="tab-pane">
+                <h2>Where are you looking to buy?</h2>
+                <div class="form-bglayer">
+                  <!-- BEGIN Address Inputs & Area Search-->
+                  <div class="incomplete" id="loc-group">
+                    <label>In a neighborhood, city or county</label>
+                    <div class="formgroup">
+                      <div class="formitem formitem-search">
+                        <label for="place_search">General Area <span class="sub">(start typing for a menu of options)</span></label>
+                        <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span><input aria-required="true" id="place_search" name="place_search" tabindex="103" type="text" class="ui-autocomplete-input" autocomplete="off">
+                        <input id="feature_id" name="feature_id" type="hidden" value="">
+                      </div><!-- /.formitem -->
+                    </div><!-- /.formgroup -->
+
+                    <p class="text-center"><strong style="font-size:175%">— <em>OR</em> —</strong></p>
+
+                    <label>A specific property address</label>
+                    <div class="formgroup">
+                      <div class="formitem formitem-addr">
+                        <label for="sAddress">Number and Street <span class="sub">(e.g. 123 Main St)</span></label>
+                        <input aria-required="true" id="sAddress" name="sAddress" tabindex="101" type="text" autocomplete="false" value="">
+                      </div><!-- /.formitem -->
+                      <div class="formitem formitem-zip">
+                        <label for="sZip">Zip Code</label>
+                        <input aria-required="true" id="sZip" name="sZip" tabindex="102" type="text" pattern="\d{5}(-?\d{4})?" autocomplete="false" value="">
+                      </div><!-- /.formitem -->
+                    </div>
+                  </div><!-- /#loc-group -->
+                  <!-- END Address Inputs & Area Search-->
+
+                  <p class="warn-no-location hidden" role="alert" aria-live="polite" tabindex="100">
+                    <span class="glyphicon glyphicon-exclamation-sign"></span>
+                    Please pick a <strong>General Area</strong> or enter a <strong>Number and Street</strong> and <strong>Zip Code</strong>.
+                  </p>
+
+                  <!-- BEGIN Sales Price-->
+                  <div class="formgroup">
+                    <div class="formitem">
+                      <label for="sSalesPrice">Estimated purchase price</label>
+                      <input id="sSalesPrice" name="sSalesPrice" tabindex="104" type="number" value="">
+                    </div><!-- /.formitem -->
+                  </div><!-- /.formgroup -->
+                  <!-- END Sales Price-->
+
+                  <!-- BEGIN Multi-Family / Foreclosure Questions-->
+                  <div class="formgroup">
+                    <div class="formitem formitem-inline">
+                      <fieldset>
+                        <legend>Is this a Multi-Family Home?</legend>
+                        <label><input checked="checked" id="multi_family_false" name="multi_family" tabindex="105" type="radio" value="false"> Single-Family</label>
+                        <label><input id="multi_family_true" name="multi_family" tabindex="105" type="radio" value="true"> Multi-Family</label>
+                      </fieldset>
+                    </div><!-- /.formitem -->
+
+                    <div class="formitem formitem-inline">
+                      <fieldset>
+                        <legend>Is the home in foreclosure?</legend>
+                        <label><input id="sForeclosure" name="sForeclosure" tabindex="106" type="checkbox" value="foreclosure"> Yes</label>
+                      </fieldset>
+                    </div><!-- /.formitem -->
+                  </div><!-- /.formgroup -->
+                  <!-- END Multi-Family / Foreclosure Questions-->
+
+                </div><!-- /.form-bglayer -->
+
+              </section><!-- #property -->
+              <!-- end Property Information panel -->
+
+              <!-- Household Information panel -->
+              <section id="household" class="tab-pane">
+
+                <h2>About your household</h2>
+
+                <div class="form-bglayer">
+
+                  <!-- BEGIN Household Size-->
+                  <div class="formgroup">
+                    <div class="formitem formitem-inline">
+                      <label for="sHouseholdSize">How many people live in your household?<br>
+                        <span class="sub">Include yourself, spouse, children, other adults and senior dependents.</span></label>
+                      <select id="sHouseholdSize" name="sHouseholdSize" tabindex="201"><option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8+</option>
+                      </select>
+                    </div><!-- /.formitem -->
+                  </div><!-- /.formgroup -->
+                  <!-- END Household Size-->
+
+                  <!-- BEGIN Home Ownership History-->
+                  <div class="formgroup">
+                    <div class="formitem formitem-inline">
+                      <label for="sOwnership">Do you currently own a home?</label>
+                      <select id="sOwnership" name="sOwnership" tabindex="203"><option value=""></option>
+                        <option value="yes">Yes</option>
+                        <option value="no1">No, I have never owned a home</option>
+                        <option value="no2">No, but I did within the last 3 years</option>
+                        <option value="no3">No, but I did more than 3 years ago</option>
+                      </select>
+                    </div><!-- /.formitem -->
+                  </div><!-- /.formgroup -->
+                  <!-- END Home Ownership History-->
+
+                  <!-- BEGIN Annual HH Income-->
+                  <div class="formgroup">
+                    <div class="formitem">
+                      <label for="sIncome">What is your annual household income?<br>
+                        <span class="sub">Include all taxable income for all occupants over 18 years of age.</span>
+                      </label>
+                      <input id="sIncome" name="sIncome" tabindex="205" type="number" value="">
+                      <a href="#" class="tipper" data-toggle="tooltip" data-placement="bottom" data-html="true" data-trigger="focus" tabindex="206" title="" data-original-title="<p>Annual Household Income is a major factor in determining your eligibility for down payment assistance. Your information is for calculation purposes only and will not be stored or otherwise used.</p>
+                      <span class='sr-only'>Press tab to close. End of layer</span>"> Learn more<span class="sr-only"> about why we ask for household income. layer</span></a>
+                    </div><!-- /.formitem -->
+                  </div><!-- /.formgroup -->
+                  <!-- END Annual HH Income-->
+
+                  <!-- BEGIN Veteran / Native American status -->
+                  <div class="formgroup">
+                    <div class="formitem formitem-inline">
+                      <fieldset>
+                        <legend>Are you (or a co-borrower) a veteran?</legend>
+                        <label><input id="sOccupation_veteran" name="sOccupation[]" tabindex="208" type="checkbox" value="veteran"> Yes</label>
+                      </fieldset>
+                    </div><!-- /.formitem -->
+
+                    <div class="formitem formitem-inline">
+                      <fieldset>
+                        <legend>Are you (or a co-borrower) American Indian?</legend>
+                        <label><input id="sOccupation_native" name="sOccupation[]" tabindex="209" type="checkbox" value="native"> Yes</label>
+                      </fieldset>
+                    </div><!-- /.formitem -->
+                  </div><!-- /.formgroup -->
+                  <!-- END Veteran / Native American status -->
+
+                  <!-- BEGIN Special Circumstances toggle -->
+                  <div class="formgroup">
+                    <div class="formitem formitem-inline">
+                      <fieldset>
+                        <legend>Certain special circumstances may expand your eligibility.</legend>
+                        <label><input aria-controls="special" aria-expanded="false" class="toggle-special" data-target="#special" data-toggle="collapse" id="ui-collapse-61" type="checkbox" value="" role="tab" aria-selected="false" tabindex="210"> <span>Check for more opportunities</span></label>
+                      </fieldset>
+                    </div><!-- /.formitem -->
+                  </div><!-- /.formgroup -->
+                  <!-- END Special Circumstances toggle -->
+
+                </div><!-- /.form-bglayer -->
+
+              </section><!-- #household -->
+              <!-- end Household Information panel -->
+
+              <!-- Special Circumstances panel -->
+              <section id="special" class="tab-pane collapse">
+
+                <h2 class="sr-only">Special Circumstances</h2>
+
+                <div class="form-bglayer">
+
+                  <!-- BEGIN Occupation-->
+                  <div class="formgroup">
+                    <div class="formitem formitem-inline">
+                      <fieldset>
+                        <legend>Do you (or a co-borrower) work in any of these professions?</legend>
+                        <label><input id="sOccupation_education" name="sOccupation[]" tabindex="301" type="checkbox" value="education">&nbsp;Education</label>
+                        <label><input id="sOccupation_police" name="sOccupation[]" tabindex="301" type="checkbox" value="police">&nbsp;Law&nbsp;Enforcement</label>
+                        <label><input id="sOccupation_fire" name="sOccupation[]" tabindex="301" type="checkbox" value="fire">&nbsp;Firefighter</label>
+                        <label><input id="sOccupation_healthcare" name="sOccupation[]" tabindex="301" type="checkbox" value="healthcare">&nbsp;Healthcare</label>
+                        <a href="#" class="tipper" data-toggle="tooltip" data-placement="bottom" data-html="true" data-trigger="focus" tabindex="302" title="" data-original-title="<p>Each program has its own guidelines to determine eligibility based on specific jobs within these professions.</p>
+                          <span class='sr-only'>Press tab to close. End of layer</span>"> Learn more<span class="sr-only"> about eligibility based on your profession. layer</span></a>
+                      </fieldset>
+                    </div><!-- /.formitem -->
+                  </div><!-- /.formgroup -->
+                  <!-- END Occupation-->
+
+                  <!-- BEGIN Disability-->
+                  <div class="formgroup">
+                    <div class="formitem formitem-inline">
+                      <fieldset>
+                        <legend>Do you (or a co-borrower or dependent household member) have a disability?</legend>
+                        <label><input id="sDisability" name="sDisability" tabindex="303" type="checkbox" value="disability"> Yes</label>
+                        <a href="#" class="tipper" data-toggle="tooltip" data-placement="bottom" data-html="true" data-trigger="focus" tabindex="304" title="" data-original-title="<p>Each program has its own guidelines to determine eligibile disabilities.</p>
+                          <span class='sr-only'>Press tab to close. End of layer</span>"> Learn more<span class="sr-only"> about eligibile disabilities. layer</span></a>
+                      </fieldset>
+                    </div><!-- /.formitem -->
+                  </div><!-- /.formgroup -->
+                  <!-- END Disability-->
+
+                  <!-- BEGIN Military-->
+                  <div class="formgroup">
+                    <div class="formitem formitem-inline">
+                      <fieldset>
+                        <legend>Are you (or a co-borrower) a member of the U.S. military?</legend>
+                        <label><input id="sArmyguard" name="sArmyguard" tabindex="305" type="checkbox" value="military"> Yes</label>
+                      </fieldset>
+                    </div><!-- /.formitem -->
+                  </div><!-- /.formgroup -->
+                  <!-- END Military-->
+
+                  <!-- BEGIN Surviving Spouse-->
+                  <div class="formgroup">
+                    <div class="formitem formitem-inline">
+                      <fieldset>
+                        <legend>Are you the surviving spouse of a military member or public protector?</legend>
+                        <label><input id="sSpouse" name="sSpouse" tabindex="307" type="checkbox" value="surviving_spouse"> Yes</label>
+                      </fieldset>
+                    </div><!-- /.formitem -->
+                  </div><!-- /.formgroup -->
+                  <!-- END Surviving Spouse-->
+
+                  <!-- BEGIN Efficient-->
+                  <div class="formgroup">
+                    <div class="formitem formitem-inline">
+                      <fieldset>
+                        <legend>Are you purchasing an energy efficient or visitable home?</legend>
+                        <label><input id="sEnergy" name="sEnergy" tabindex="310" type="checkbox" value="energy"> Yes</label>
+                        <a href="#" class="tipper" data-toggle="tooltip" data-placement="bottom" data-html="true" data-trigger="focus" tabindex="311" title="" data-original-title="<p>The EV program is designed to encourage the construction and purchase of homes that are energy efficient and homes that are easily visitable by individuals with mobility impairments. To be eligible for the EV program the property must meet the requirements of EarthCraft House™, ENERGY STAR®, or EasyLiving Home™.</p>
+                        <span class='sr-only'>Press tab to close. End of layer</span>"> Learn more<span class="sr-only">Press tab to close. End of layer</span></a>
+                     </fieldset>
+                    </div><!-- /.formitem -->
+                  </div><!-- /.formgroup -->
+                  <!-- END Efficient-->
+
+                </div><!-- /.form-bglayer -->
+
+              </section><!-- #special -->
+              <!-- end Special Circumstances panel -->
+
+              <!-- Contact Form panel -->
+              <div class="modal fade" id="contact" data-backdrop="static">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-body">
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                      <h2 class="modal-title">You are eligible for programs.</h2>
+                      <p class="matches-message text-center"><strong>Get your results, learn more and find the money.</strong></p>
+                      <p class="nomatch-message text-center"><strong>Let us know how to get in touch with you<br>and we'll get started right away.</strong></p>
+                      <div class="form-bglayer">
+                        <div class="formgroup">
+                          <div class="formitem formitem-inline required incomplete">
+                            <label for="contact_firstName">First Name</label>
+                            <input type="text" id="contact_firstName" name="contact[firstName]" value="" aria-required="true" tabindex="401">
+                          </div><!-- .formitem -->
+                          <div class="formitem formitem-inline required incomplete">
+                            <label for="contact_lastName">Last Name</label>
+                            <input type="text" id="contact_lastName" name="contact[lastName]" value="" aria-required="true" tabindex="402">
+                          </div><!-- .formitem -->
+                          <div class="formitem formitem-inline required incomplete">
+                            <label for="contact_email">Email</label>
+                            <input type="text" id="contact_email" name="contact[email]" value="" aria-required="true" tabindex="403">
+                          </div><!-- .formitem -->
+                          <textarea class="phone-template" style="display: none;">                            &lt;div class="formitem formitem-inline formitem-phone required"&gt;
+                              &lt;label for="contact_phone"&gt;Telephone&lt;/label&gt;
+                              &lt;input type="text" id="contact_phone" name="contact[phone]" value="" aria-required="true" tabindex="404"&gt;
+                            &lt;/div&gt;&lt;!-- .formitem --&gt;
+                          </textarea>
+                          <br>
+                          <div class="formitem formitem-inline required incomplete">
+                            <label for="contact_role">I am ...</label>
+                            <select id="contact_role" name="contact[role]" aria-required="true" tabindex="405">
+                              <option value=""></option>
+                              <option value="Homebuyer-Active">Actively looking to buy</option>
+                              <option value="Homebuyer-Aspiring">Hoping to buy someday</option>
+                              <option value="REALTOR">A REALTOR</option>
+                              <option value="Lending Professional">A Lending Professional</option>
+                              <option value="HFA Professional">An HFA Professional</option>
+                              <option value="MLS Executive">An MLS Executive</option>
+                              <option value="Other">Other</option>
+                            </select>
+                          </div><!-- .formitem -->
+                          <p></p>
+                          <div class="formitem formitem-inline">
+                            <label>
+                              <input type="checkbox" id="contact_subscribe" name="contact[subscribe]" value="c2932622ad" tabindex="407" checked="checked">
+                              I would like to subscribe to your newsletter                            </label>
+                          </div><!-- .formitem -->
+                        </div><!-- .formgroup -->
+
+
+
+                        <script>function recaptchaChanged() { jQuery('[name="g-recaptcha-response"]').change() }</script>
+                        <div class="formgroup" id="recaptcha">
+                          <div class="formitem required">
+                            <div class="g-recaptcha" data-callback="recaptchaChanged" data-expired-callback="recaptchaChanged" data-tabindex="409" data-sitekey="6LcO-iUTAAAAAPhSdV2avKhgqZy04pObQ5t5no9w"><div style="width: 304px; height: 78px;"><div><iframe src="https://www.google.com/recaptcha/api2/anchor?ar=1&amp;k=6LcO-iUTAAAAAPhSdV2avKhgqZy04pObQ5t5no9w&amp;co=aHR0cHM6Ly9kb3ducGF5bWVudHJlc291cmNlLmNvbTo0NDM.&amp;hl=en&amp;v=wk6lx42JIeYmEAQSHndnyT8Q&amp;size=normal&amp;cb=lsg6t5d3rb11" width="304" height="78" role="presentation" name="a-enk678uf5vyp" frameborder="0" scrolling="no" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox"></iframe></div><textarea id="g-recaptcha-response" name="g-recaptcha-response" class="g-recaptcha-response" style="width: 250px; height: 40px; border: 1px solid rgb(193, 193, 193); margin: 10px 25px; padding: 0px; resize: none; display: none;"></textarea></div></div>
+                          </div>
+                        </div>
+
+                        <div class="formgroup" id="contactError" style="">
+                          <p class="q incomplete text-center">Please enter responses for all <span class="required">highlighted fields</span>.</p>
+                        </div><!-- .formgroup -->
+
+                      </div><!-- .form-bglayer -->
+
+                      <div class="bottom-nav text-center">
+                        <p class="text-center small">
+                          <strong class="small">
+                            By continuing I acknowledge that I have read your
+                            <a href="/privacy-policy/" target="_blank">Privacy Policy</a> and
+                            <a href="/terms-of-use/" target="_blank">Terms of Use</a>.
+                          </strong>
+                        </p>
+                        <input id="contactSubmit" class="btn btn-primary btn-lg" type="submit" data-value="Get Details" data-nomatch-value="Find a Real Estate Agent" data-match-tracking-pixel="submit-contact" disabled="" aria-hidden="true" tabindex="409">
+                      </div>
+                    </div><!--.modal-body-->
+                  </div><!--.modal-content-->
+                </div><!--.modal-dialog-->
+              </div><!--.modal-->
+              <!-- end Contact Form panel -->
+
+            <div class="bottom-nav text-center">
+              <input aria-hidden="true" class="btn btn-primary btn-xlg btn-block" disabled="" name="commit" tabindex="312" type="submit" value="Get Details" data-tracking-pixel="get-details">
+            </div>
+
+        </div><!-- /.eligibility-form-fields -->
+
+        <div id="nomatch_dlg" class="modal fade" data-backdrop="static">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-body text-center">
+                <button type="button" class="close" data-dismiss="modal" data-ga-report-click="@nomatchClose" aria-hidden="true">×</button>
+                <h2>We didn't find any matches, so let's find you some help</h2>
+                <p>We account for income, purchase price, homeownership history and more when finding down payment help for you.</p>
+                <p>
+                  You can <a href="#" class="plain" data-dismiss="modal" data-ga-report-click="@nomatchRevise">change your search criteria</a> and try again,
+                  or get help from one of our trusted partners.
+                </p>
+                <p>
+                  NerdWallet can help you find the best financing solution for your home.
+                  <a href="#" class="tipper" data-toggle="tooltip" data-placement="bottom" data-html="true" data-trigger="focus" title="" data-original-title="<p>Down Payment Resource partners with NerdWallet, a nationwide consumer finance publisher and network of top mortgage lenders, to help you find the best mortgage products and rates available. Click the button below to visit their rate quote tool and start your mortgage finance process.</p><span class='sr-only'>Press tab to close. End of layer</span>">
+                    <span class="sr-only">Learn more about getting a rate quote. layer</span>
+                  </a>
+                </p>
+                <p>
+                  <a href="https://www.nerdwallet.com/mortgages/mortgage-rates?utm_campaign=mr_mktg_012717_dprhomebuyer&amp;utm_source=BD&amp;utm_medium=plc" class="btn btn-primary btn-lg" data-ga-report-click="@NerdWallet" target="_blank">Get a Rate Quote</a>
+                </p>
+                <p>
+                  Referral Exchange can help connect you to a real estate agent who might be able to assist you in finding a home.
+                  <a href="#" class="tipper" data-toggle="tooltip" data-placement="bottom" data-html="true" data-trigger="focus" title="" data-original-title="<p>Down Payment Resource partners with ReferralExchange, a nationwide network of over 17,000 top-performing real estate agents. After clicking the button, complete the form and ReferralExchange will contact you to match you with top-performing agents in your area who can best serve your needs.</p><span class='sr-only'>Press tab to close. End of layer</span>">
+                    <span class="sr-only">Learn more about finding an agent. layer</span>
+                  </a>
+                </p>
+                <p><input class="btn btn-primary btn-lg" type="submit" data-ga-report-click="@findAgent" value="Find a Real Estate Agent"></p>
+              </div><!-- .modal-body -->
+            </div><!-- .modal-content -->
+          </div><!-- .modal-dialog -->
+        </div><!-- #nomatch_dlg -->
+
+      </form><!-- #eligibility_form -->
+
+    </div><!-- /.col -->
+
+    <div class="sidebar-primary col-md-4 col-xs-12">
+<section class="adspace-widget widget" data-ga-impression="sidebar1-eHA"><a href="http://ehomeamerica.org/dpr.html" data-ga-report-click="@sidebar1-eHA" target="_blank"><img src="https://downpaymentresource.com/wp-content/uploads/2016/08/eHA-banner-300x250-animated-b.gif" alt="Sponsored by eHome America"></a></section>    </div><!-- /.col -->
+
+  </div><!-- /.row -->
+</section><!-- /#eligibility-form-section -->
+          </main><!-- /.main -->
+
+        </div><!-- /.content -->
+      </div><!-- /.wrap -->
+<footer role="contentinfo" class="page_footer">
+  <div class="container">
+    <div>
+      <div class="footer_nav">
+        <section class="widget nav_menu-3 widget_nav_menu"><div class="menu-footer-nav-container"><ul id="menu-footer-nav" class="menu"><li id="menu-item-3319" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3319"><a href="https://downpaymentresource.com/about/">About</a></li>
+<li id="menu-item-3317" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3317"><a href="https://downpaymentresource.com/press/">Press</a></li>
+<li id="menu-item-4722" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4722"><a href="https://downpaymentresource.com/contact/">Contact</a></li>
+</ul></div></section>        <div class="hr"></div>
+        <section class="widget widget_social_links-2 widget_widget_social_links"><ul class="social_icon"><li><a href="https://facebook.com/DownPaymentResource" target="_blank"><i class="fa fa-facebook"></i></a></li><li><a href="http://www.twitter.com/dwnpmtresource" target="_blank"><i class="fa fa-twitter"></i></a></li><li><a href="https://youtube.com/user/workforceresource" target="_blank"><i class="fa fa-youtube"></i></a></li></ul><!-- /.social_icon --></section>        <div class="clearfix"></div>
+      </div><!-- /.footer_nav -->
+    </div><!-- /.row -->
+
+    <div class="row">
+      <div class="col-sm-6 col-sm-push-6 col-xs-12">
+        <section class="widget text-2 widget_text">			<div class="textwidget"><div class="newsletter"><div role="form" class="wpcf7" id="wpcf7-f3328-o1" lang="en-US" dir="ltr">
+<div class="screen-reader-response"></div>
+<form action="/are-you-eligible/#wpcf7-f3328-o1" method="post" class="wpcf7-form" novalidate="novalidate">
+<div style="display: none;">
+<input type="hidden" name="_wpcf7" value="3328">
+<input type="hidden" name="_wpcf7_version" value="5.1.7">
+<input type="hidden" name="_wpcf7_locale" value="en_US">
+<input type="hidden" name="_wpcf7_unit_tag" value="wpcf7-f3328-o1">
+<input type="hidden" name="_wpcf7_container_post" value="0">
+<input type="hidden" name="g-recaptcha-response" value="03AGdBq24FHLDK7aA0tCrSM1o-8rJGqT2OBlO99USAGIG1Hjn1pr08zWnfmGExO3oJ5iB6VUhRfZRG82oemyejYfr9pXdhGn1h6hXhfv0YY1XMfuJVFKBRmkCjgnrjMafcN61z3HcK2yUJ114PYVEyOwf-EteJUqwhsKEZ8thWkHypbDuj8shNkjK12MerMiHZefw6p7epwnlLcXOn6yi_dWpHWAkweiQiPgNlzBL_qqm7sFOSnzVu7jRZ7MF_sWn7zSqrEsXBgOcU_jPbLrojUW-Z24c3xUzbjsmE-ZNrvjboqipqn4XH2oBN1RRxFfBWBauYADRxwxUQGMKkGQMnEJf-FmrX0ZtbIM5T7AbaZzpf8l26IvOkhbEhG5jHQu9Np2MvFCWTQF-AOYyBS_31BjCNR9sGFJbeqw">
+</div>
+<h3>Get insider info <img class="ajax-loader" style="visibility:hidden" src="/wp-content/plugins/contact-form-7/images/ajax-loader.gif"></h3>
+<p><span class="wpcf7-form-control-wrap user-name"><input type="text" name="user-name" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required input_type" aria-required="true" aria-invalid="false" placeholder="Name"></span><br>
+<span class="wpcf7-form-control-wrap user-email"><input type="email" name="user-email" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-required wpcf7-validates-as-email input_type" aria-required="true" aria-invalid="false" placeholder="Email"></span><br>
+<span class="wpcf7-form-control-wrap user-role"><select name="user-role" class="wpcf7-form-control wpcf7-select wpcf7-validates-as-required selectpicker bs-select-hidden" aria-required="true" aria-invalid="false"><option value="">I am a...</option><option value="Homebuyer">Homebuyer</option><option value="REALTOR">REALTOR</option><option value="Lending Professional">Lending Professional</option><option value="HFA Professional">HFA Professional</option><option value="MLS Executive">MLS Executive</option><option value="Other">Other</option></select><div class="btn-group bootstrap-select wpcf7-form-control wpcf7-select wpcf7-validates-as-required"><button type="button" class="btn dropdown-toggle btn-default" data-toggle="dropdown" title="I am a..."><span class="filter-option pull-left">I am a...</span>&nbsp;<span class="caret"></span></button><div class="dropdown-menu open"><ul class="dropdown-menu inner" role="menu"><li data-original-index="0" class="selected"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">I am a...</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="1"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">Homebuyer</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="2"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">REALTOR</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="3"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">Lending Professional</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="4"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">HFA Professional</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="5"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">MLS Executive</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="6"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">Other</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li></ul></div></div></span><br>
+<button type="submit" class="signup">newsletter sign up</button></p>
+<div style="display:none">
+  <input type="hidden" name="subscribe" value="subscribe"><br>
+  <input type="hidden" name="list-id" value="c2932622ad"><br>
+  <input type="hidden" name="suppress-email" value="true">
+</div>
+<div class="wpcf7-response-output wpcf7-display-none"></div></form></div></div></div>
+		</section>      </div>
+      <div class="col-sm-6 col-sm-pull-6 col-xs-12">
+        <div class="f_left">
+          <section class="widget text-3 widget_text">			<div class="textwidget"><p>
+© 2008-2020 Workforce Resource LLC. DOWN PAYMENT RESOURCE® is a registered trademark of Workforce Resource LLC.
+</p></div>
+		</section><section class="widget nav_menu-2 widget_nav_menu"><div class="menu-legalese-nav-container"><ul id="menu-legalese-nav" class="menu"><li id="menu-item-3322" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3322"><a href="https://downpaymentresource.com/privacy-policy/">Privacy Policy</a></li>
+<li id="menu-item-3320" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3320"><a href="https://downpaymentresource.com/terms-of-use/">Terms of Use</a></li>
+</ul></div></section>        </div><!-- /.f_left -->
+      </div>
+    </div><!-- /.row -->
+
+  </div><!-- /.container -->
+</footer>
+<script type="text/javascript">
+/* <![CDATA[ */
+var wpcf7 = {"apiSettings":{"root":"https:\/\/downpaymentresource.com\/wp-json\/contact-form-7\/v1","namespace":"contact-form-7\/v1"},"cached":"1"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="https://downpaymentresource.com/wp-content/plugins/contact-form-7/includes/js/scripts.js?ver=5.1.7"></script>
+<script type="text/javascript" src="https://downpaymentresource.com/wp-content/plugins/wp-video-popup/assets/js/wp-video-popup.js?ver=2.5.1"></script>
+<script type="text/javascript" src="https://www.google.com/recaptcha/api.js?render=6LdytYYUAAAAAJz-3B8geqMm0hxXGhBRcy8Nw9Op&amp;ver=3.0"></script>
+<script type="text/javascript" src="https://downpaymentresource.com/wp-includes/js/wp-embed.min.js?ver=5.3.2"></script>
+<script type="text/javascript">
+( function( grecaptcha, sitekey, actions ) {
+
+	var wpcf7recaptcha = {
+
+		execute: function( action ) {
+			grecaptcha.execute(
+				sitekey,
+				{ action: action }
+			).then( function( token ) {
+				var forms = document.getElementsByTagName( 'form' );
+
+				for ( var i = 0; i < forms.length; i++ ) {
+					var fields = forms[ i ].getElementsByTagName( 'input' );
+
+					for ( var j = 0; j < fields.length; j++ ) {
+						var field = fields[ j ];
+
+						if ( 'g-recaptcha-response' === field.getAttribute( 'name' ) ) {
+							field.setAttribute( 'value', token );
+							break;
+						}
+					}
+				}
+			} );
+		},
+
+		executeOnHomepage: function() {
+			wpcf7recaptcha.execute( actions[ 'homepage' ] );
+		},
+
+		executeOnContactform: function() {
+			wpcf7recaptcha.execute( actions[ 'contactform' ] );
+		},
+
+	};
+
+	grecaptcha.ready(
+		wpcf7recaptcha.executeOnHomepage
+	);
+
+	document.addEventListener( 'change',
+		wpcf7recaptcha.executeOnContactform, false
+	);
+
+	document.addEventListener( 'wpcf7submit',
+		wpcf7recaptcha.executeOnHomepage, false
+	);
+
+} )(
+	grecaptcha,
+	'6LdytYYUAAAAAJz-3B8geqMm0hxXGhBRcy8Nw9Op',
+	{"homepage":"homepage","contactform":"contactform"}
+);
+</script>
+<script type="text/javascript">		
+		document.addEventListener("DOMContentLoaded", function() {
+			var if_ssb_exist = document.getElementsByClassName( "simplesocialbuttons" ).length > 0;
+			if (if_ssb_exist) {
+				var ssb_admin_ajax = 'https://downpaymentresource.com/wp-admin/admin-ajax.php';
+				var ssb_post_id = 46 ;
+				var ssb_post_url = 'https://downpaymentresource.com/are-you-eligible/';
+				var ssb_alternate_post_url = 'http://downpaymentresource.com/are-you-eligible/';
+				jQuery( document ).ready(function(){
+				var is_ssb_used = jQuery('.simplesocialbuttons');
+				if( is_ssb_used ) {
+
+					var data = {
+					'action': 'ssb_fetch_data',
+					'postID': ssb_post_id
+				};
+					jQuery.post(ssb_admin_ajax, data, function(data, textStatus, xhr) {
+						var array = JSON.parse(data);
+						console.log( array );
+						jQuery.each( array, function( index, value ){
+
+							if( index == 'total' ){
+								jQuery('.ssb_'+ index +'_counter').html(value + '<span>Shares</span>');
+							}else{
+								jQuery('.ssb_'+ index +'_counter').html(value);
+							}
+						});
+
+					});
+				}
+				})
+
+			//	ssbPlugin.fetchFacebookShares();
+			}
+		});
+
+
+		</script><script type="text/javascript">function initTwitCount(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://static1.twitcount.com/js/twitcount.js';fjs.parentNode.insertBefore(js,fjs)}}
+        var ssb_twit_count_init=!1;addEventListener('mouseover',function(event){if(!ssb_twit_count_init){initTwitCount(document,'script','twitcount_plugins')
+        ssb_twit_count_init=!0}})</script>    </div><!-- /.wrapper -->
+    <script>
+      if (typeof ga == "function") {
+        ga('create', 'UA-10005017-5', 'auto', {'siteSpeedSampleRate': 10});
+        if (typeof gaReportData == "object") ga('set', gaReportData);
+        ga('send', 'pageview');
+      }
+      if (typeof fbq == "function") {
+        fbq('init', '1112161972175532');
+        fbq('track', "PageView");
+      }
+      jQuery(function($) {
+        $(document).on('click', 'a[href^="#"][data-scroll]', function() { // Smooth scroll
+          var target = $(this.hash);
+          target = target.length ? target : $('[name="' + this.hash.slice(1) +'"]');
+          if (target.length) {
+            $('html,body').animate({ scrollTop: target.offset().top }, 600);
+            return false;
+          }
+        });
+        $(document).on('click', 'a[target=_blank]', function() {
+          ga('send', 'event', 'Outbound Link', 'Follow', this.href);
+        });
+        $(document).on('click', '[data-ga-pageview-url]', function() {
+          var url = $(this).data('ga-pageview-url');
+          if (url.length > 0) recordPageView(url);
+        });
+        $(document).on('click', '[data-ga-report-click]', function() {
+          var link = $(this).data('ga-report-click');
+          if (link.length > 0) reportClick(link);
+        });
+        $(document).on('click', '[data-tracking-pixel]', function() {
+          loadTrackingPixel($(this).data('tracking-pixel'));
+        });
+        $('[data-ga-impression]').each(function() {
+          var link = $(this).data('ga-impression');
+          if (link.substr(0, 1) == '/') recordPageView(link);
+          else if (link.length > 0) reportClick(link);
+        });
+      });
+    </script>
+    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1112161972175532&ev=PageView&noscript=1"></noscript>
+    <div id="ttdUniversalPixelTag08694a03fc294c4cb14a1ee6ed74ccb8" style="display:none;">
+      <script src="https://js.adsrvr.org/up_loader.1.1.0.js"></script>
+      <script>
+        (
+          function(global) {
+            if (typeof TTDUniversalPixelApi === 'function') {
+              var universalPixelApi = new TTDUniversalPixelApi();
+              universalPixelApi.init("25zswal", ["fufd1mt"], "https://insight.adsrvr.org/track/up", "ttdUniversalPixelTag08694a03fc294c4cb14a1ee6ed74ccb8");
+            }
+          }
+        )(this);
+      </script>
+    </div>
+    <!-- Start of HubSpot Embed Code -->
+    <script type="text/javascript" id="hs-script-loader" async="" defer="" src="//js.hs-scripts.com/4307043.js"></script>
+    <!-- End of HubSpot Embed Code -->
+  <script type="text/javascript" charset="utf-8" src="//downloads.mailchimp.com/js/signup-forms/popup/1.0/popup.js"></script><script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script><script type="text/javascript">require(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us1.list-manage.com","uuid":"ffe649bcdec2ca115ca176be5","lid":"c2932622ad"}) })</script>
+  
+
+<ul class="ui-autocomplete ui-front ui-menu ui-widget ui-widget-content ui-corner-all" id="ui-id-1" tabindex="0" style="display: none;"></ul><div><div class="grecaptcha-badge" data-style="bottomright" style="width: 256px; height: 60px; display: block; transition: right 0.3s ease 0s; position: fixed; bottom: 14px; right: -186px; box-shadow: gray 0px 0px 5px; border-radius: 2px; overflow: hidden;"><div class="grecaptcha-logo"><iframe src="https://www.google.com/recaptcha/api2/anchor?ar=1&amp;k=6LdytYYUAAAAAJz-3B8geqMm0hxXGhBRcy8Nw9Op&amp;co=aHR0cHM6Ly9kb3ducGF5bWVudHJlc291cmNlLmNvbTo0NDM.&amp;hl=en&amp;v=wk6lx42JIeYmEAQSHndnyT8Q&amp;size=invisible&amp;cb=acxyyyatgurz" width="256" height="60" role="presentation" name="a-3hmqj7b08z6c" frameborder="0" scrolling="no" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox"></iframe></div><div class="grecaptcha-error"></div><textarea id="g-recaptcha-response-100000" name="g-recaptcha-response" class="g-recaptcha-response" style="width: 250px; height: 40px; border: 1px solid rgb(193, 193, 193); margin: 10px 25px; padding: 0px; resize: none; display: none;"></textarea></div><iframe style="display: none;"></iframe></div><div id="PopupSignupForm_0" widgetid="PopupSignupForm_0">
+    <!-- MC BANNER -->
+    <div class="mc-banner" data-dojo-attach-point="bannerContainer" style="display: none;">
+        <div class="mc-layout__bannerContent">
+            <iframe src="about:blank" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="width:100%;" data-dojo-attach-point="iframeBannerContainer"></iframe>
+        </div>
+    </div>
+
+    <!-- MC MODAL -->
+    <div class="mc-modal" data-dojo-attach-point="modalContainer" style="display: none;">
+        <div class="mc-closeModal" data-action="close-mc-modal" data-dojo-attach-point="modalClose"></div>
+        <div class="mc-layout__modalContent">
+            <iframe src="about:blank" frameborder="0" marginwidth="0" marginheight="0" style="width:100%;" data-dojo-attach-point="iframeModalContainer"></iframe>
+        </div>
+    </div>
+
+    <!-- MC MODAL OVERLAY -->
+    <div class="mc-modal-bg" data-dojo-attach-point="modalOverlay" style="display: none;"></div>
+</div><iframe style="display: none;"></iframe><iframe scrolling="no" frameborder="0" allowtransparency="true" src="https://platform.twitter.com/widgets/widget_iframe.c63890edc4243ee77048d507b181eeec.html?origin=https%3A%2F%2Fdownpaymentresource.com" title="Twitter settings iframe" style="display: none;"></iframe><div style="background-color: rgb(255, 255, 255); border: 1px solid rgb(204, 204, 204); box-shadow: rgba(0, 0, 0, 0.2) 2px 2px 3px; position: absolute; transition: visibility 0s linear 0.3s, opacity 0.3s linear 0s; opacity: 0; visibility: hidden; z-index: 2000000000; left: 0px; top: -10000px;"><div style="width: 100%; height: 100%; position: fixed; top: 0px; left: 0px; z-index: 2000000000; background-color: rgb(255, 255, 255); opacity: 0.05;"></div><div class="g-recaptcha-bubble-arrow" style="border: 11px solid transparent; width: 0px; height: 0px; position: absolute; pointer-events: none; margin-top: -11px; z-index: 2000000000;"></div><div class="g-recaptcha-bubble-arrow" style="border: 10px solid transparent; width: 0px; height: 0px; position: absolute; pointer-events: none; margin-top: -10px; z-index: 2000000000;"></div><div style="z-index: 2000000000; position: relative;"><iframe title="recaptcha challenge" src="https://www.google.com/recaptcha/api2/bframe?hl=en&amp;v=wk6lx42JIeYmEAQSHndnyT8Q&amp;k=6LcO-iUTAAAAAPhSdV2avKhgqZy04pObQ5t5no9w&amp;cb=29en131f5gbr" name="c-enk678uf5vyp" frameborder="0" scrolling="no" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox" style="width: 100%; height: 100%;"></iframe></div></div><iframe id="universal_pixel_fufd1mt" height="0" width="0" style="display:none;" src="https://insight.adsrvr.org/track/up?adv=25zswal&amp;ref=https%3A%2F%2Fdownpaymentresource.com%2Fare-you-eligible%2F&amp;upid=fufd1mt&amp;upv=1.1.0" title="TTD Universal Pixel"></iframe><style>.tb_button {padding:1px;cursor:pointer;border-right: 1px solid #8b8b8b;border-left: 1px solid #FFF;border-bottom: 1px solid #fff;}.tb_button.hover {borer:2px outset #def; background-color: #f8f8f8 !important;}.ws_toolbar {z-index:100000} .ws_toolbar .ws_tb_btn {cursor:pointer;border:1px solid #555;padding:3px}   .tb_highlight{background-color:yellow} .tb_hide {visibility:hidden} .ws_toolbar img {padding:2px;margin:0px}</style></div>

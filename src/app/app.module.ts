@@ -41,6 +41,13 @@ import { NewsletterComponent } from './newsletter/newsletter.component';
 import {VolunteerComponent} from './volunteer/volunteer.component';
 import {DonateComponent} from './donate/donate.component';
 import {MakemoneyonlineModule} from './makemoneyonline/makemoneyonline.module';
+import { EducationComponent } from './education/education.component';
+import { Covid19Component } from './covid19/covid19.component';
+import { DownPaymentHelpComponent } from './down-payment-help/down-payment-help.component';
+import { LoanOfficerFormComponent } from './loan-officer-form/loan-officer-form.component';
+import { LoanOfficerSubscriberComponent } from './loan-officer-subscriber/loan-officer-subscriber.component';
+import { SuccessStoryComponent } from './success-story/success-story.component';
+import { BlogComponent } from './blog/blog.component';
 
 // import { SignInComponent } from './core/amplify/sign-in-component';
 
@@ -78,7 +85,15 @@ import {MakemoneyonlineModule} from './makemoneyonline/makemoneyonline.module';
     AdvocatesInfluencersComponent,
     NewsletterComponent,
     VolunteerComponent,
-    DonateComponent
+    DonateComponent,
+    EducationComponent,
+    Covid19Component,
+    DownPaymentHelpComponent,
+    LoanOfficerFormComponent,
+    LoanOfficerSubscriberComponent,
+    DownPaymentHelpComponent,
+    SuccessStoryComponent,
+    BlogComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

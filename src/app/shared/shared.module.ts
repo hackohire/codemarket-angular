@@ -40,6 +40,7 @@ import { CommentSideNavComponent } from './components/comment-side-nav/comment-s
 import { AppInjector } from './services/app.injector.service';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { TinyEditorComponent } from './components/tiny-editor/tiny-editor.component';
+import { ChatService } from './services/chat.service';
 
 export function hljsLanguages() {
   return [
@@ -138,7 +139,7 @@ export function hljsLanguages() {
     AddJobComponent,
     VideoChatComponent
   ],
-  providers: [CommentService]
+  providers: [CommentService, ChatService]
 })
 export class SharedModule {
   constructor(private injector: Injector) {

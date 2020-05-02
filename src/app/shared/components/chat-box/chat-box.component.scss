@@ -1,15 +1,109 @@
 .main-container {
-    background-color: #ffffff;
-    // overflow-y: scroll;
-    height: 90%;
+  background-color: #dddddd5e;
+  height: 100%;
 }
 
 .send-button {
-    position: fixed;
-    bottom: 15px;
-    right: 20px;
+  position: fixed;
+  bottom: 15px;
+  right: 20px;
 }
 
-.chat-header {
-    background-color: #9879cf;
+div.left {
+  float: left;
+  clear: both;
+  padding: 8px;
+  background: #fff;
+  position: relative;
+  word-break: break-word;
+  margin: 7px;
+  border-radius: 5px 0px 5px 5px;
+}
+div.left:after {
+  content: "";
+  position: absolute;
+  left: -13px;
+  top: 0px;
+  width: 0;
+  height: 0;
+  border: 13px solid transparent;
+  border-right-color: #fff;
+  border-left: 0;
+  border-top: 0;
+}
+
+div.right {
+  float: right;
+  clear: both;
+  padding: 8px;
+  background: #0674eccc;
+  color: #fff;
+  margin: 7px;
+  position: relative;
+  word-break: break-word;
+  border-radius: 5px 0px 5px 5px;
+}
+div.right:after {
+  content: "";
+  position: absolute;
+  right: -13px;
+  top: 0px;
+  width: 0;
+  height: 0;
+  border: 13px solid transparent;
+  border-left-color: #0674eccc;
+  border-right: 0;
+  border-top: 0;
+}
+
+#chat-input {
+  background: #f4f7f9;
+  width: 99.3%;
+  position: absolute;
+  bottom: 0px;
+  height: 47px;
+  padding-top: 10px;
+  padding-right: 50px;
+  padding-bottom: 10px;
+  padding-left: 15px;
+  border: none;
+  resize: none;
+  outline: none;
+  border: 1px solid #FFF;
+  color: #888;
+  border-top: none;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  overflow: hidden;
+}
+.chat-input > form {
+  margin-bottom: 0;
+}
+#chat-input::-webkit-input-placeholder {
+  /* Chrome/Opera/Safari */
+  color: #ccc;
+}
+#chat-input::-moz-placeholder {
+  /* Firefox 19+ */
+  color: #ccc;
+}
+#chat-input:-ms-input-placeholder {
+  /* IE 10+ */
+  color: #ccc;
+}
+#chat-input:-moz-placeholder {
+  /* Firefox 18- */
+  color: #ccc;
+}
+.chat-submit {
+  position: absolute;
+  bottom: 3px;
+  right: 10px;
+  background: transparent;
+  box-shadow: none;
+  border: none;
+  border-radius: 50%;
+  color: #0674ec;
+  width: 35px;
+  height: 35px;
 }

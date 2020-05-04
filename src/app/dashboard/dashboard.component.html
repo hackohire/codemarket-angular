@@ -2,28 +2,43 @@
 
 <!-- <section class="hero-area bgimage"> -->
 
-<section id="hero" style="padding: 100px 0;">
+<section id="hero" style="padding: 20px 0;background: #f2f9ff;">
+    <div style="position: absolute; top: 41px; left: 47px; font-size: 23px; color: peru; font-weight: bold;">coding+marketing</div>
     <div class="container">
         <div class="row">
-            <div class="col-lg-7 pt-5 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center aos-init aos-animate"
-                data-aos="fade-up">
-                <div>
-                    <h1
-                        style="font-size: 60px; max-width: 100%; font-weight: 200; text-align: left;font-family: 'Rectory Thin';color:#ff6640">
-                        Launch & Grow A Successful Digital Products Company<br />
-                    </h1>
-
-                    <h1
-                        style="font-size: 60px; margin: 5px; font-weight: 200; text-align: left; font-family: 'Rectory Regular';color:#0674ec">
-                        <a [routerLink]="['/', 'company', 'add-company']">JOIN TODAY</a></h1>
-                </div>
+            <div class="col-lg-7 order-1 order-lg-2 hero-img aos-init aos-animate" data-aos="fade-left">
+                <img src="./../assets/images/new-header.png" class="img-fluid" alt="">
             </div>
-            <div class="col-lg-5 order-1 order-lg-2 hero-img aos-init aos-animate" data-aos="fade-left">
-                <img src="./../assets/images/prosperous2.png" class="img-fluid" alt="">
+            <div class="col-lg-5 pt-5 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center aos-init aos-animate" data-aos="fade-up">
+                <div>
+                    <h1 style="font-size: 42px; line-height: normal; max-width: 100%; font-weight: bolder; text-align: left;font-family: 'Rectory Thin';color:#000; text-transform: uppercase;margin-bottom: 1rem;">
+                        Grow Your Sales
+                    </h1>
+                    <h2 style="font-size: 30px; line-height: normal; max-width: 100%; font-weight: bolder; text-align: left;font-family: 'Rectory Thin';color:#777; text-transform: uppercase;margin-bottom: 1.5rem;">
+                        <b>Connect & Manage All Your Data From One center</b>
+                    </h2>
+                    <!-- <h1 style="font-size: 32px; line-height: normal; margin: 20px 0 0 0; font-weight: 200; text-align: left; font-family: 'Rectory Regular';color:#0674ec">
+                        <a class="btn btn-primary btn-md" [routerLink]="['/', 'company', 'add-company']">JOIN TODAY</a>
+                    </h1> -->
+                    <form>
+                        <div id="append_location" class="individuals-signup-cta__form-group">
+                          <label class="individuals-signup-cta__label">Enter your email address</label>
+                          <input type="hidden" name="fyi_from_landing" value="true">
+                          <input id="email_input" class="individuals-signup-cta__email-input email_input" type="email" name="fyi_email">
+                          <button id="submitBtn" class="google-button special" type="submit" >
+                            <span class="button-flex-wrapper">
+                              Start Today
+                            </span>
+                          </button>
+                        </div>
+                    </form>
+                    <div class="individuals-signup__underform">
+                        <span>Safe. Secure. Organized.</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-
 </section>
 
 
@@ -46,91 +61,80 @@
     </div>
 </div> -->
 
-<div style="background: #f1f1f1; padding: 50px 0;">
-    <div class="container d-flex align-items-center">
-        <div class="row" style="align-items: center; margin-left: 0; margin-right: 0;">
+<div style="background: #0099ff; padding: 80px 0 60px 0;">
+    <div class="container">
+        <div class="row">
             <div class="col-md-12 col-sm-12">
-                <h1
-                    style="font-size: 55px; max-width: 100%; font-family: 'Rectory Regular'; text-align: center; color: #595959">
+                <h1 style="font-size: 42px; max-width: 100%; font-family: 'Rectory Regular'; text-align: center; color: #ffffff">
                     Monetize Your Digital Products and Generate Revenue
                 </h1>
-                <hr style="max-width: 60vw; padding: 2rem; margin-top: 2rem;">
-                <div class="col-md-12 col-sm-12" style="align-self: left;">
-
-                </div>
-
+                <hr style="max-width: 60vw; margin-top: 2rem; border-color: white;">
                 <div class="mt-4 col-md-12">
-                    <h2 style="font-size: 55px; font-family: 'Rectory Semi';  margin: 10px; text-align: center;"><a
-                            [routerLink]="['/', 'post', 'add-dreamjob']">START TODAY</a></h2>
+                    <h2 style="font-size: 32px; font-family: 'Rectory Semi';  margin: 10px; text-align: center;"><a [routerLink]="['/', 'post', 'add-dreamjob']" style="color: white;">» START TODAY «</a></h2>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
 
+<div class="container-fluid" style="padding: 70px 0;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-md-12">
+                <h4 style="font-size: 42px; margin: auto; max-width: 100%; text-align: center; font-family: 'Rectory Thin'; color: #575757; font-weight: 500; margin-bottom: 50px;">
+                    3 Steps to create a profitable digital products business
+                </h4>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12" style="text-align: center;">
+                <img src="https://codemarket-files.s3.amazonaws.com/public/step1-2020-03-30T19:37:44.350Z.png" style="width: 180px;">
+                <div>
+                    <h2 style="font-size: 32px; font-family: 'Rectory Semi';  margin: 10px 0; text-align: center;">
+                        <a [routerLink]="['/', 'post', 'add-dreamjob']"> Digital Products</a></h2>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12" style="text-align: center;">
+                <img src="https://codemarket-files.s3.amazonaws.com/public/step2-2020-03-30T19:37:50.406Z.png" style="width: 180px;">
+                <div>
+                    <h2 style="font-size: 32px; font-family: 'Rectory Semi';  margin: 10px 0; text-align: center;">
+                        <a [routerLink]="['/', 'post', 'add-dreamjob']"> Online Community </a></h2>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12" style="text-align: center;">
+                <img src="https://codemarket-files.s3.amazonaws.com/public/step3-2020-03-30T19:38:01.351Z.png" style="width: 180px;">
+                <div>
+                    <h2 style="font-size: 32px; font-family: 'Rectory Semi';  margin: 10px 0; text-align: center;">
+                        <a [routerLink]="['/', 'post', 'add-dreamjob']">Sell & Monetize</a></h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div style="background: #0099ff; padding: 80px 0 60px 0;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <h1 style="font-size: 42px; max-width: 100%; font-family: 'Rectory Regular'; text-align: center; color: #ffffff">
+                    Create Digital Products
+                </h1>
+                <hr style="max-width: 30vw; margin-top: 2rem; border-color: white;">
+                <div class="mt-4 col-md-12">
+                    <h2 style="font-size: 32px; font-family: 'Rectory Semi';  margin: 10px; text-align: center;"><a [routerLink]="['/', 'post', 'add-dreamjob']" style="color: white;">» START TODAY «</a></h2>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
 <div class="container">
-    <div class="row" style="align-items: center; margin-top: 40px; margin-left: 0; margin-right: 0;">
-        <div class="col-md-12 col-md-12">
-            <h4
-                style="font-size: 55px; margin: auto; max-width: 100%;  text-align: center; font-family: 'Rectory Thin'; color: #ff6640;">
-                3 Steps to create a profitable digital products business
-            </h4>
-        </div>
-
-        <div class="col-lg-4 col-md-4 col-sm-12" style="text-align: center;">
-            <img src="https://codemarket-files.s3.amazonaws.com/public/step1-2020-03-30T19:37:44.350Z.png">
-
-            <div>
-                <h2 style="font-size: 55px; font-family: 'Rectory Semi';  margin: 10px; text-align: center;"><a
-                        [routerLink]="['/', 'post', 'add-dreamjob']"> Digital Products</a></h2>
-            </div>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-12" style="text-align: center;">
-            <img src="https://codemarket-files.s3.amazonaws.com/public/step2-2020-03-30T19:37:50.406Z.png">
-            <div>
-                <h2 style="font-size: 55px; font-family: 'Rectory Semi';  margin: 10px; text-align: center;"><a
-                        [routerLink]="['/', 'post', 'add-dreamjob']"> Online Community </a></h2>
-            </div>
-
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-12" style="text-align: center;">
-            <img src="https://codemarket-files.s3.amazonaws.com/public/step3-2020-03-30T19:38:01.351Z.png">
-            <h2 style="font-size: 55px; font-family: 'Rectory Semi';  margin: 10px; text-align: center;"><a
-                    [routerLink]="['/', 'post', 'add-dreamjob']">Sell & Monetize</a></h2>
-
-        </div>
-    </div>
-</div>
-<br>
-<br>
-<br>
-
-<div style="background: #f1f1f1;">
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-</div>
-<div class="container">
-    <div class="row" style="padding: 50px 0; align-items: center; margin-left: 0; margin-right: 0;">
+    <div class="row" style="padding: 80px 0 20px; align-items: center; margin: 0;">
         <div class="col-md-12">
-            <h1
-                style="font-size: 55px; max-width: 100%; font-family: 'Rectory Regular'; text-align: center; color: #0267d6">
+            <h1 style="font-size: 42px;max-width: 100%;font-family: 'Rectory Regular';text-align: center;color: #0099ff;">
                 Digital Infrastructure Tailor-Made to Your Business Goals
             </h1>
-            <hr style="border-color: #ff6640; max-width: 60vw; padding: 1rem; margin-top: 2rem;">
+            <hr style="border-color: #ff6640; max-width: 62vw; margin-top: 2rem; padding-bottom: 10px;">
             <div class="col-md-12" style="align-self: left;">
-                <h6
-                    style="font-size: 55px; margin: auto; font-family: 'Rectory Thin'; color: #575757; text-align: center;">
+                <h6 style="font-size: 32px; margin: auto; font-family: 'Rectory Thin'; color: #575757; text-align: center;">
                     Do You Want To Add Additional Revenue Steams to Your Business?
                 </h6>
             </div>
@@ -138,8 +142,7 @@
     </div>
 </div>
 
-
-<div class="container business-communitites-label">
+<div class="container business-communitites-label" style="margin-bottom: 100px;">
     <div class="row mt-5 mb-5" style="margin-top: 10px; margin-bottom: 10px; text-align: center; ">
         <div class="col-md-3" style="align-self: left;">
             <img style="align-content: left" [src]="'../../assets/images/1.png'" alt="Sales Accelerator"><br />
@@ -409,12 +412,7 @@
     </div>
 </div> -->
 
-
-
-
 <!-- start container -->
-
-
 
 <!--</section>-->
 

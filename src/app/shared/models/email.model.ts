@@ -1,4 +1,4 @@
-import { BlockToolData } from '@editorjs/editorjs';
+
 import { User } from './user.model';
 import { Company } from './company.model';
 
@@ -11,7 +11,7 @@ export interface Email {
     dateRange?: string[];
     description?: [{
         type?: string;
-        data?: BlockToolData
+        data?: any
     }];
     descriptionHTML?: string;
     type?: string;

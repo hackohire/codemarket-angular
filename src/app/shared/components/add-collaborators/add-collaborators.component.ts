@@ -37,7 +37,7 @@ export class AddCollaboratorsComponent implements OnInit {
     };
     this.postService.updatePost(
       collaboratorsObj,
-      { name: this.authService.loggedInUser.name, _id: this.authService.loggedInUser.name }
+      { name: this.authService.loggedInUser.name, _id: this.authService.loggedInUser._id }
     ).subscribe((j) => {
       if (j) {
         this.postDetails.collaborators = j.collaborators;

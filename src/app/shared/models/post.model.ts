@@ -1,5 +1,5 @@
 import { User } from './user.model';
-import { BlockToolData } from '@editorjs/editorjs';
+
 import { Tag } from './product.model';
 import { PostStatus } from './poststatus.enum';
 import { City } from './city.model';
@@ -11,7 +11,7 @@ interface Support {
     time: number;
     description: {
         type: string;
-        data: BlockToolData
+        data: any
     };
 }
 
@@ -19,7 +19,7 @@ export interface Post {
     name?: string;
     description?: [{
         type: string;
-        data: BlockToolData
+        data: any
     }];
     type?: string;
     price?: number;
@@ -53,7 +53,7 @@ export interface Post {
     collaborators?: [User];
     assignees?: [User];
     clients?: [User];
-    
+
     users?: [User];
 
     /** Contact Related Fields */
@@ -62,4 +62,6 @@ export interface Post {
     birthDate?: string;
     address?: string;
     website?: string;
+    descriptionHTML? : string;
+    activities?: any[];
 }

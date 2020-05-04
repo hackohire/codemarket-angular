@@ -21,7 +21,6 @@ import Storage from '@aws-amplify/storage';
 import moment from 'moment';
 import { concatMap } from 'rxjs/operators/concatMap';
 import { trigger, state, style, transition, animate } from '@angular/animations';
-import { BlockToolData } from '@editorjs/editorjs/types/tools';
 import { EditorComponent } from '../../../shared/components/editor/editor.component';
 import { MdePopoverTrigger } from '@material-extended/mde';
 import { MatPaginator } from '@angular/material/paginator';
@@ -43,6 +42,7 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
 
   usersInterestedInCompany: User[];
   companyView: string;
+  totalCampaign: number;
 
   customTabs = [
     {
@@ -103,7 +103,7 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
 
   postDescription: [{
     type: string;
-    data: BlockToolData
+    data: any
   }];
 
   @ViewChild(MdePopoverTrigger, { static: false }) socialMediaPopover: MdePopoverTrigger;
@@ -259,23 +259,23 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
 
   /** Initializing Question & Answer Form */
   initializeQuestionAndAnswerForm(p, questionType?: string) {
-    this.questionOrAnswerForm = new FormGroup({
-      text: new FormControl(''),
-      referenceId: new FormControl(p._id),
-      type: new FormControl(questionType ? questionType : this.type),
-      isQuestion: new FormControl(),
-      isAnswer: new FormControl()
-    });
+    // this.questionOrAnswerForm = new FormGroup({
+    //   text: new FormControl(''),
+    //   referenceId: new FormControl(p._id),
+    //   type: new FormControl(questionType ? questionType : this.type),
+    //   isQuestion: new FormControl(),
+    //   isAnswer: new FormControl()
+    // });
 
-    this.subscription$.add(
-      this.commentService.getQuestionAndAnswersByReferenceId(p._id).pipe(
-        tap((d) => {
-          this.questionsList = d;
-        })
-      ).subscribe({
-        error: (e) => console.log(e)
-      })
-    );
+    // this.subscription$.add(
+    //   this.commentService.getQuestionAndAnswersByReferenceId(p._id).pipe(
+    //     tap((d) => {
+    //       this.questionsList = d;
+    //     })
+    //   ).subscribe({
+    //     error: (e) => console.log(e)
+    //   })
+    // );
   }
 
   /** Add Question Or Answer */
@@ -421,10 +421,28 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
       this.router.navigate(['./'], { relativeTo: this.activatedRoute, queryParams: { view: category.name }, queryParamsHandling: 'merge' });
     }
 
+    // if (category.name === 'campaigns') {
+    //   const paginationObj = {
+    //     pageNumber: this.paginator.pageIndex + 1, limit: this.paginator.pageSize ? this.paginator.pageSize : 10,
+    //     sort: {order: ''}};
+
+    //   this.subscription$.add(
+    //     this.companyService.getCampaignsWithTracking(paginationObj, this.companyDetails._id).subscribe(c => {
+    //       if (c && c.length) {
+    //         this.campaignsList = c;
+    //       }
+    //     })
+    //   );
+    // }
+
     switch (category.name) {
       case 'campaigns':
+        const paginationObj = {
+          pageNumber: 1, limit: 10,
+          sort: {order: ''}};
+
         this.subscription$.add(
-          this.companyService.getCampaignsWithTracking(this.companyDetails._id).subscribe(c => {
+          this.companyService.getCampaignsWithTracking(paginationObj, this.companyDetails._id).subscribe(c => {
             if (c && c.length) {
               this.campaignsList = c;
             }
@@ -477,14 +495,34 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
 
     this.postService.getAllPosts(
       paginationObj, postType, '', this.companyDetails._id).subscribe((u) => {
-        this.postService.getEmailPhoneCountForContact(postType).subscribe((b) => {
-          this.companyRelatedPosts.posts = u.posts;
-          this.totalcompanyRelatedPosts = u.total;
-          this.emailCount = b[0].emailCount ? b[0].emailCount : 0;
-          this.phoneCount = b[0].phoneCount ? b[0].phoneCount : 0;
-        })
+        this.companyRelatedPosts.posts = u.posts;
+        this.totalcompanyRelatedPosts = u.total;
+        if (postType === 'contact') {
+          this.postService.getEmailPhoneCountForContact(postType).subscribe((b) => {
+            this.emailCount = b[0].emailCount ? b[0].emailCount : 0;
+            this.phoneCount = b[0].phoneCount ? b[0].phoneCount : 0;
+          })
+        }
 
       });
+  }
+
+  /** Fetch the list of posts connected with company based on the pagination */
+  fetchEmailsConnectedWithCampaign(campaignId, campaignIndex) {
+    const paginationObj = {
+      pageNumber: this.paginator.pageIndex + 1, limit: this.paginator.pageSize ? this.paginator.pageSize : 10,
+      sort: {order: ''}};
+    
+    // this.companyService.getCampaignsWithTracking(paginationObj, this.companyDetails._id).subscribe(c => {
+    //   if (c && c.length) {
+    //     this.campaignsList = c;
+    //   }
+    // })
+    this.companyService.getCampaignEmails(paginationObj, campaignId).subscribe(c => {
+      if (c && c.emails && c.emails.length) {
+        this.campaignsList[campaignIndex].emailData  = c.emails;
+      }
+    });
   }
 
   redirectToAddPost(postType) {

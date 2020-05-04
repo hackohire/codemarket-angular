@@ -2,6 +2,10 @@
 <div class="box image common-box-shadow">
     <div class="box-header">
         <!-- Post Title -->
+        <div *ngIf="p?.activities?.length > 0">
+            {{p?.activities[0]?.message}} at {{p?.activities[0]?.activityDate | date: 'MMMM d, y, h:mm a'}}.
+        </div>
+        <hr/>
         <h2 class="post-title" *ngIf="p?.name">
             <a style="display: inline-block;" [href]="'/post' + '/' + (p?.slug ? p.slug : p._id)" target="_blank">{{p?.name}}</a>
         </h2>
@@ -94,7 +98,7 @@
             <p [ngClass]="readMore ? 'readMore' : ''">
                 <!---------------- SINGLE POST EDITOR --------------->
                 <app-editor #singlePostEditor (showComments)="showComments.emit({block : $event.block, selectedPost: p, comments: commentService.commentsList$})" [editorStyle]="{background: 'white'}" [data]="p?.description"
-                    [id]="'post' + p?._id" [readOnly]="!p['__edit']" [blockLevelComments]="!readMore"
+                    [id]="'post' + p?._id" [readOnly]="!p['__edit']" [blockLevelComments]="!readMore" [html]="p?.descriptionHTML"
                     [commentType]="'post'" [post]="p" [commentsList]="(commentService.commentsList$ | async)">
                 </app-editor>
             </p>
@@ -152,7 +156,7 @@
         <div class="thread">
             <ul class="media-list thread-list" style="padding: 10px 0px 0px 0px; list-style: none;">
                 <div *ngFor="let com of (commentService.commentsList$ | async)">
-                    <li *ngIf="!com?.blockSpecificComment" class="single-thread">
+                    <li *ngIf="!com?.blockSpecificComment || true" class="single-thread">
                         <app-comment [comment]="com"></app-comment>
                     </li>
                 </div>

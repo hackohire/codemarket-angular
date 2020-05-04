@@ -256,6 +256,10 @@
                             <div *ngIf="companyView === 'campaigns' && details?._id">
                                 <ng-container *ngTemplateOutlet="campaignsTemplate; context: {details: details}">
                                     </ng-container>
+                                <!-- <div *ngFor="let c of campaignsList">
+                                    <app-paginator [length]="c.count" (fetchData)="paginator = $event; fetchAllCampaign('')">
+                                    </app-paginator>
+                                </div> -->
                             </div>
 
                             <ng-container *ngIf="companyView !== 'contact'">
@@ -617,24 +621,24 @@
 
 <ng-template #campaignsTemplate let-cDetails="details">
     <mat-accordion class="example-headers-align">
-        <mat-expansion-panel *ngFor="let c of campaignsList">
-            <mat-expansion-panel-header>
+        <mat-expansion-panel #ep *ngFor="let c of campaignsList; let i = index;">
+            <mat-expansion-panel-header (click)="fetchEmailsConnectedWithCampaign(c._id, i)">
                 <mat-panel-title>
                     {{c?.name}}
                 </mat-panel-title>
                 <mat-panel-description>
                     <!-- Type your name and age -->
-                    {{ '(' + c?.emailData?.length + ')'}} <mat-icon>email</mat-icon>
+                    {{ '(' + c?.count + ')'}} <mat-icon>email</mat-icon>
                 </mat-panel-description>
             </mat-expansion-panel-header>
 
             <div style="border: solid 1px black;" [innerHTML]="c?.descriptionHTML"></div>
 
             <mat-list>
-                <mat-list-item *ngFor="let e of c?.emailData; let i=index;">
+                <mat-list-item *ngFor="let e of c?.emailData; let j=index;">
                     <div mat-list-icon style="padding-right: 12px;">
                         <span
-                            style="padding-right: 5px; vertical-align: super; font-size: 16px;">{{(i + 1 + '.')}}</span>
+                            style="padding-right: 5px; vertical-align: super; font-size: 16px;">{{(j + 1 + '.')}}</span>
                         <mat-icon style="display: inline;">email</mat-icon>
                     </div>
 
@@ -649,9 +653,13 @@
                 </mat-list-item>
             </mat-list>
 
-
+           {{paginator?.pageIndex}}
+           {{ep?.expanded}}
+            <app-paginator [length]="c?.count" (fetchData)="paginator = $event; ep?.expanded ? fetchEmailsConnectedWithCampaign(c._id, i) : null">
+            </app-paginator>
         </mat-expansion-panel>
-
+        <!-- <div *ngFor="let c of campaignsList">
+        </div> -->
     </mat-accordion>
 </ng-template>
 <!-- Contact Template -->

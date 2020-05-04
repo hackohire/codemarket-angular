@@ -7,6 +7,8 @@ import { PostService } from '../../services/post.service';
 import { SearchComponent } from 'src/app/core/components/search/search.component';
 import { MdePopoverTrigger } from '@material-extended/mde';
 import { ShareService } from '@ngx-share/core';
+import { debounceTime } from 'rxjs/operators';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-breadcumb',
@@ -26,11 +28,16 @@ export class BreadcumbComponent implements OnInit {
   @Input() showEditPostDetails: boolean;
   @Input() showAddCollaborators: boolean;
   @Input() showAddAssignee: boolean;
+  @Input() showAddClients: boolean;
   @Input() showShareButtons: boolean;
 
   @Output() editPost = new EventEmitter();
 
   articleLink = new FormControl('', Validators.required);
+
+  postTitle;
+
+  displaySave = false;
 
   anonymousAvatar = '../../../../assets/images/anonymous-avatar.jpg';
   s3FilesBucketURL = environment.s3FilesBucketURL;
@@ -38,6 +45,7 @@ export class BreadcumbComponent implements OnInit {
   constructor(
     private postService: PostService,
     public share: ShareService,
+    public authService: AuthService
   ) { }
 
   ngOnInit() {
@@ -54,4 +62,28 @@ export class BreadcumbComponent implements OnInit {
       });
   }
 
+  onContentChange(event:any) {
+    let a = document.getElementById('test').innerHTML;
+    this.postTitle = a;
+  }
+
+  myFunction() {
+    const postObj = {
+      _id: this.postDetails._id,
+      name: this.postTitle
+    };
+    
+    if (this.title !== this.postTitle.replace(/\&nbsp;/g, '')) {
+      this.displaySave = true;
+      this.postService.updatePost(
+        postObj,
+        { name: this.authService.loggedInUser.name, _id: this.authService.loggedInUser._id }
+      ).subscribe((j) => {
+        if (j) {
+          this.title = this.postTitle.replace(/\&nbsp;/g, '');
+          this.displaySave = false;
+        }
+      });
+    }
+  }
 }

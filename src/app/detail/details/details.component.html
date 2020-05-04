@@ -9,7 +9,7 @@
     <app-breadcumb (editPost)="postService?.editPost(details)"
         [showEditPostDetails]="(details?.createdBy?._id === authService?.loggedInUser?._id || collaborators.indexOf(authService?.loggedInUser?._id) >= 0) ? true : false"
         [showAddCollaborators]="details?.createdBy?._id === authService?.loggedInUser?._id ? true : false"
-        [showShareButtons]="true"
+        [showShareButtons]="true" [showAddClients]="details?.createdBy?._id === authService?.loggedInUser?._id"
         [postDetails]="postDetails" [title]="details?.name" [path]="breadcumb?.path" [eventDate]="details?.dateRange"
         [postDetails]="details">
     </app-breadcumb>
@@ -26,7 +26,7 @@
             <div class="row">
                 <div class="col-lg-2">
                     <!-- Based On the List Of Post Types -->
-                    <app-post-type-nav [selectedPostType]="selectedPostType" 
+                    <app-post-type-nav [selectedPostType]="selectedPostType"
                      (postTypeClick)="selectedBlock = null; getConnectedPosts($event?.name); showConnectedPosts = true"
                      (plusButtonClick)="redirectToAddPost(details, $event)"
                      ></app-post-type-nav>
@@ -50,11 +50,12 @@
                         <div>
                             <div class="tab-pane fade show product-tab active" id="product-details">
                                 <article>
-                                    <app-editor *ngIf="details?.description && details?.description?.length"
+                                    <app-editor
                                         (showComments)="showCommentsOnSide($event)"
+                                        [data]="details?.description"
                                         [commentsList]="commentService?.commentsList$ | async"
-                                        [blockLevelComments]="true" [readOnly]="true" [data]="details?.description"
-                                        [id]="'details-editor'" [post]="details" [commentType]="'post'">
+                                        [blockLevelComments]="false" [readOnly]="true"
+                                        [id]="'details-editor'" [html]="details?.descriptionHTML" [post]="details" [commentType]="'post'">
                                     </app-editor>
 
                                     <br />
@@ -94,7 +95,7 @@
                                         aria-label="Example icon-button with a heart icon">
                                         <mat-icon>close</mat-icon>
                                     </button></h3>
-                                <!-- <a 
+                                <!-- <a
                                     class="btn btn--lg btn--round cart-btn" style="padding: 12px;">
                                     <h5>Cancel RSVP</h5>
                                 </a> -->
@@ -211,7 +212,7 @@
                     <!-- <h4 class="tab-content-wrapper">Comments:</h4> -->
                     <div *ngFor="let c of commentService?.commentsList$ | async; trackBy: trackByFn">
                         <li [id]="c?._id" style="padding-left: 30px; padding-right: 30px;"
-                            *ngIf="!c?.blockSpecificComment" class="single-thread">
+                            *ngIf="!c?.blockSpecificComment || true" class="single-thread">
                             <app-comment [comment]="c" [referenceId]="cDetails?._id"></app-comment>
                         </li>
                     </div>
@@ -256,7 +257,7 @@
                     </ul>
                 </div>
             </div>
-    
+
             <div class="comment-form-area" style="padding-left: 0; padding-right: 0;">
                 <app-add-comment [referenceId]="cDetails?._id" [blockId]="selectedBlock?._id"
                     [showLabel]="true"></app-add-comment>

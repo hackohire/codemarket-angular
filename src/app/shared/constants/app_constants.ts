@@ -181,9 +181,6 @@ export const appConstants = {
       type
       categories
       referencePostUrl
-      description {
-        ...Description
-      }
       price
       status
       createdAt
@@ -222,9 +219,6 @@ export const appConstants = {
       }
       slug
       comments {
-        text {
-          ...Description
-        }
         _id
         type
         referenceId
@@ -300,8 +294,20 @@ export const appConstants = {
       birthDate
       address
       website
+
+      descriptionHTML
+      activities {
+        action
+        activityDate
+        by {
+          _id
+          name
+        }
+        commentId
+        postId
+        message
+      }
     }
-    ${description}
     ${comment}
     `,
 

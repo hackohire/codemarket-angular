@@ -104,12 +104,12 @@ export class MyProfileComponent implements OnInit {
   postTypeCounts;
 
   customTabs = [
-    {
-      name: 'files',
-      label: 'Files',
-      isCustom: true,
-      count: 0
-    }
+    // {
+    //   name: 'files',
+    //   label: 'Files',
+    //   isCustom: true,
+    //   count: 0
+    // }
   ];
 
   profileViewLinks = [
@@ -246,7 +246,7 @@ export class MyProfileComponent implements OnInit {
         appConstants.postTypesArray.forEach((obj) => {
           obj['count'] = data[obj.name] ? data[obj.name].count : 0
         });
-        this.customTabs[0].count = data['files'] ? data['files'].count: 0;
+        // this.customTabs[0].count = data['files'] ? data['files'].count: 0;
       }
     });
   }

@@ -19,10 +19,6 @@ export class CommentService {
 
   questionAndAnswerSchema = gql`
     fragment QuestionAndAnswer on QuestionAndAnswer {
-      text {
-        ...Description
-      }
-      textHTML
       _id
       type
       referenceId
@@ -35,9 +31,6 @@ export class CommentService {
         avatar
       }
       answers {
-        text {
-          ...Description
-        }
         _id
         type
         referenceId
@@ -53,9 +46,6 @@ export class CommentService {
         }
       }
       questionId {
-        text {
-          ...Description
-        }
         _id
         type
         referenceId
@@ -68,7 +58,6 @@ export class CommentService {
         }
       }
     }
-    ${description}
   `;
 
   commentsQuery: QueryRef<any>;
@@ -311,18 +300,19 @@ export class CommentService {
     );
   }
 
-  deleteComment(commentId, postId): Observable<any> {
+  deleteComment(commentId, postId, textHTML: string): Observable<any> {
     return this.apollo.query(
       {
         query: gql`
-          query deleteComment($commentId: String, $postId: String) {
-            deleteComment(commentId: $commentId, postId: $postId)
+          query deleteComment($commentId: String, $postId: String, $textHTML: String) {
+            deleteComment(commentId: $commentId, postId: $postId, textHTML: $textHTML)
           }
         `,
         // fetchPolicy: 'no-cache',
         variables: {
           commentId,
-          postId
+          postId,
+          textHTML
         }
       }
     ).pipe(
@@ -389,9 +379,11 @@ export class CommentService {
               const parentCommentIndex = comments.findIndex(com => com._id === c.parentId);
               const deletedChildCommentIndex = comments[parentCommentIndex]['children'].findIndex(com => com._id === c._id);
               comments[parentCommentIndex]['children'][deletedChildCommentIndex]['text'] = c.text;
+              comments[parentCommentIndex]['children'][deletedChildCommentIndex]['textHTML'] = c.textHTML;
             } else {
               const commentIndex = comments.slice().findIndex(com => com._id === c._id);
               comments[commentIndex]['text'] = c.text;
+              comments[commentIndex]['textHTML'] = c.textHTML;
             }
             this.commentsList$.next(comments);
 
@@ -407,13 +399,9 @@ export class CommentService {
         mutation: gql`
           mutation updateComment($commentId: String, $postId: String, $text: [InputdescriptionBlock], $textHTML: String) {
             updateComment(commentId: $commentId, postId: $postId, text: $text, textHTML: $textHTML) {
-                text {
-                  ...Description
-                }
                 textHTML
             }
           }
-          ${description}
         `,
         fetchPolicy: 'no-cache',
         variables: {
@@ -503,13 +491,8 @@ export class CommentService {
       {
         mutation: gql`
           mutation updateQuestionOrAnswer($questionOrAnswerId: String, $text: [InputdescriptionBlock]) {
-            updateQuestionOrAnswer(questionOrAnswerId: $questionOrAnswerId, text: $text) {
-                text {
-                  ...Description
-                }
-            }
+            updateQuestionOrAnswer(questionOrAnswerId: $questionOrAnswerId, text: $text)
           }
-          ${description}
         `,
         fetchPolicy: 'no-cache',
         variables: {

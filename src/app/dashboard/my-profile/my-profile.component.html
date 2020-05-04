@@ -171,7 +171,7 @@
 							<!-- Showing the list of posts for the posts tab, everytime user clicks on the "load more", we increase the page number and call
 							fetchAllOtherPosts method to fetch subsequent posts -->
 							<ng-container *ngIf="profileView === navLinkName.posts">
-								<div class="item-grid pen-grid item-grid-large">
+								<div class="">
 									<app-brief-post style="width: 100%;" [p]="e"
 										*ngFor="let e of listOfAllOtherPosts?.posts"
 										(showComments)="showCommentsOnSide($event)" [readMore]="true"></app-brief-post>

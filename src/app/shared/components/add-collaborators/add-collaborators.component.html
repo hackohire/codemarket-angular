@@ -1,10 +1,13 @@
-<a class="btn btn--vsm btn--round menu"
+<!-- <a class="btn btn--vsm btn--round menu"
     style="color: #0674ec !important; background: white;" [mdePopoverTriggerFor]="addCollaboratorsPopover"
     mdePopoverTriggerOn="click">Add Collaborators
-</a>
+</a> -->
+
+<a [mdePopoverTriggerFor]="addCollaboratorsPopover"
+mdePopoverTriggerOn="click"><i class="fa fa-plus-square" aria-hidden="true" ></i></a>
 
 <mde-popover #addCollaboratorsPopover="mdePopover" [mdePopoverOverlapTrigger]="false" [mdePopoverCloseOnClick]="false"
-        [mdePopoverArrowOffsetX]="58" mdePopoverArrowColor="#FFFFFF">
+        [mdePopoverArrowOffsetX]="8" mdePopoverArrowColor="#FFFFFF">
         <div style="background: #f8f9fb; padding: 10px;">
             <app-autocomplete class="field-full-width" [allowToAdd]="false" [autoComplete]="addCollaboratorForm?.get('collaborators')"
                 [placeholder]="'Select Collaborators'" [collection]="'users'" [type]="" [multiple]="true" matInput>

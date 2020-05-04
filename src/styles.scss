@@ -45,6 +45,11 @@ form > * {
   // width: 100%;
 }
 
+.fa-plus-square:before {
+  content: "\f0fe" !important;
+  color: white !important;
+}
+
 .auth-box {
   background-color: #ececec; 
   padding: 15px;

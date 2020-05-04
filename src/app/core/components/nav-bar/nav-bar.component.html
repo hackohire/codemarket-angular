@@ -1,6 +1,6 @@
 <mat-sidenav-container class="sidenav-container">
 
-  <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+  <mat-sidenav  *ngIf="false" #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'main'" [opened]="(isHandset$ | async) === false">
     <mat-toolbar style="height: 48px; font-size: 14px; font-weight: 400; letter-spacing: 4px; text-transform: uppercase; color: #999; background: #eee;">navigation</mat-toolbar>
 

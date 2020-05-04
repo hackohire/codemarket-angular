@@ -1,0 +1,86 @@
+<app-breadcumb [title]="breadcumb?.title">
+</app-breadcumb>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div [formGroup]="postForm" class="add-form-area common-box-shadow">
+                <mat-form-field appearance="outline" class="field-full-width">
+                    <input formControlName="businessName" matInput placeholder="Business Name" type="text">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="field-full-width">
+                    <input formControlName="website" matInput placeholder="Website" type="text">
+                </mat-form-field>
+
+                <div class="row">
+                    <mat-form-field appearance="outline" class="field-full-width col-md-6 col-sm-12">
+                        <input formControlName="firstName" matInput placeholder="First Name" type="text">
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="field-full-width col-md-6 col-sm-12">
+                        <input formControlName="lastName" matInput placeholder="Last Name" type="text">
+                    </mat-form-field>
+                </div>
+
+
+                <mat-form-field appearance="outline" class="field-full-width">
+                    <input formControlName="mobileNumber" matInput placeholder="Mobile Number" type="number">
+                </mat-form-field>
+
+
+                <br />
+
+                <!-- <app-autocomplete [allowToAdd]="false" [autoComplete]="postForm?.get('collaborators')"
+                    [collection]="'users'" [multiple]="true"
+                    [placeholder]="'Select Collaborators'" [type]="" class="field-full-width" matInput>
+                </app-autocomplete> -->
+
+                <div class="wrap">
+                    <h2>Select Business Areas You need help with your sales:</h2>
+                    <!-- <p></p> -->
+
+                    <div class="line">
+                        <a class="area-btn" #area
+                            (click)="addOrRemoveSelectedBusinessAreas(b); area.classList.toggle('active'); check.classList.toggle('far');  check.classList.toggle('fa-check-circle')"
+                            *ngFor="let b of businessAreas">
+                            <span><i #check style="margin-right: 5px;"></i>{{b?.name}}</span>
+                        </a>
+                        <a contenteditable="false" class="area-btn" #add (click)="editMode = true;">
+                            <!-- {{addSpan | json}} -->
+                            <mat-form-field *ngIf="editMode" style="width: -webkit-fill-available;">
+                                <input [(ngModel)]="addBusinessAreaString"  [ngModelOptions]="{standalone: true}" matInput placeholder="Add Business Area">
+                            </mat-form-field>
+                            <button *ngIf="editMode" [disabled]="!addBusinessAreaString" mat-raised-button style="margin-top: -17px;" color="primary" (click)="addNewBusinessArea()">Add</button>
+                            <span #addSpan *ngIf="!editMode">Add <mat-icon style="vertical-align: middle;">add</mat-icon></span>
+                        </a>
+                    </div>
+                    <!-- <div class="line">
+                    <a class="btn"><i class="fa fa-square-o" ></i>Ruby</a>
+                    <a class="btn"><i class="fa fa-square-o" ></i>Wordpress</a>
+                    <a class="btn"><i class="fa fa-square-o" ></i>Filter</a>
+                    <a class="btn"><i class="fa fa-square-o" ></i>MySQL</a>
+                    <a class="btn"><i class="fa fa-square-o" ></i>C#</a>
+                    <a class="btn"><i class="fa fa-square-o" ></i>ReactJS</a>
+                    </div> -->
+                </div>
+
+                <!-- <app-autocomplete [autoComplete]="postForm?.get('tags')" [collection]="'tags'" [multiple]="true"
+                [placeholder]="'Tags'" [type]="'tag'"></app-autocomplete> -->
+
+                <br />
+
+                <!-- <app-autocomplete [autoComplete]="postForm?.get('users')" [placeholder]="'Users'" [collection]="'users'"
+                    [multiple]="true" [allowToAdd]="false"></app-autocomplete> -->
+
+
+                <div fxLayout="row" fxLayoutGap="10px">
+                    <button type="button" (click)="submit()" [disabled]="postForm?.invalid" mat-raised-button
+                        color="primary">Save</button>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

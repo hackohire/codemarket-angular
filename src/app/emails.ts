@@ -13,39 +13,34 @@ export const emails = [
   // },
   {
     name: 'Jay Sojitra',
+    firstName: 'Jay',
     // companyName: 'Company Name',
     // BNIName: 'BNI NAME',
     link: 'www.youtube.com',
     email: ['jaysojitra13@gmail.com']
   },
-  {
-    name: 'Sumi Devi',
-    // companyName: 'Company Name',
-    // BNIName: 'BNI NAME',
-    link: 'www.youtube.com',
-    email: ['sumi@codemarket.io']
-  },
-  {
-    name: 'Sumit Vekariya',
-    // companyName: 'Company Name',
-    // BNIName: 'BNI NAME',
-    link: 'www.youtube.com',
-    email: ['sumitvekariya7@gmail.com']
-  },
-  {
-    name: 'Mayur Vaghela',
-    // companyName: 'Company Name',
-    // BNIName: 'BNI NAME',
-    link: 'www.youtube.com',
-    email: ['mayurshin.vaghela43@gmail.com']
-  },
-  {
-    name: 'Geet',
-    // companyName: 'Company Name',
-    // BNIName: 'BNI NAME',
-    link: 'www.youtube.com',
-    email: ['weaponx7@gmail.com']
-  },
+  // {
+  //   name: 'Sumi Devi',
+  //   // companyName: 'Company Name',
+  //   // BNIName: 'BNI NAME',
+  //   link: 'www.youtube.com',
+  //   email: ['sumi@codemarket.io']
+  // },
+  // {
+  //   name: 'Sumit Vekariya',
+  //   firstName: 'Sumit',
+  //   // companyName: 'Company Name',
+  //   // BNIName: 'BNI NAME',
+  //   link: 'www.youtube.com',
+  //   email: ['sumitvekariya7@gmail.com']
+  // },
+  // {
+  //   name: 'Mayur Vaghela',
+  //   // companyName: 'Company Name',
+  //   // BNIName: 'BNI NAME',
+  //   link: 'www.youtube.com',
+  //   email: ['mayurshin.vaghela43@gmail.com']
+  // },
   // {
   //   name: 'Sumit',
   //   companyName: 'Company Name',

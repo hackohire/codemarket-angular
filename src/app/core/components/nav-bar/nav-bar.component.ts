@@ -10,7 +10,7 @@ import { selectCartListLength } from '../../store/selectors/cart.selectors';
 import { Router } from '@angular/router';
 import { MatDialog, MatAnchor } from '@angular/material';
 import { SearchComponent } from '../search/search.component';
-import { droEmails } from '../../../emails';
+import { droEmails, emails } from '../../../emails';
 import { Validators, FormControl } from '@angular/forms';
 import { PostType } from '../../../shared/models/post-types.enum';
 import { MessageService } from '../../../shared/services/message.service';
@@ -21,6 +21,7 @@ import { PostStatus } from '../../../shared/models/poststatus.enum';
 import { emailTemplate } from '../../../shared/email-template';
 import { allBinEmailTemplate } from '../../../shared/all-bni-email-template';
 import { droEmailTemplate } from '../../../shared/dro-email-template';
+import { la2050 } from '../../../shared/la2050-template';
 
 @Component({
   selector: 'app-nav-bar',
@@ -159,20 +160,21 @@ export class NavBarComponent implements OnInit, OnDestroy {
 
   sendEmails() {
     let count = 0;
-    droEmails.forEach((e, i) => {
+    emails.forEach((e, i) => {
+      console.log(e.firstName)
       setTimeout(() => {
         e.email.forEach((email, j) => {
           setTimeout(() => {
             if (!Validators.email(new FormControl(email))) {
               const emailObj = {
                 to: [email],
-                subject: `Dr.Aaron Orpelli Invites You to Dr.O Show`,
-                companies: [{ _id: '5e729a491df3ab17c5860c50' }],
+                subject: `${e.firstName} Los Angeles vs. San Francisco`,
+                companies: [{ _id: '5db1c84ec10c45224c4b95fd' }],
                 type: PostType.Email,
                 status: PostStatus.Published,
-                descriptionHTML: droEmailTemplate.replace('{name}', e.name),
+                descriptionHTML: la2050.replace('{name}', e.firstName).replace('{email}', email),
                 createdBy: '5d4c1cdf91e63a3fe84bb43a',
-                campaignId: '5ea19354d5a86192bf883106'
+                campaignId: '5eb01f437dbc34330797a131'
               };
               this.emailService.sendEmail(emailObj).toPromise().then((o) => {
                 console.log(o, i);

@@ -1,4 +1,4 @@
-<html>
+export const la2050 = `<html>
 
 <head>
     <link href="https://fonts.googleapis.com/css?family=Montserrat:100" rel="stylesheet" />
@@ -50,8 +50,13 @@
                                                                         border="0">
                                                                         <tbody>
                                                                             <tr>
-                                                                                <td style="padding: 0px 10px 10px 10px;">
-
+                                                                                <td style="padding: 25px 10px 10px 10px;">
+                                                                                <div style="text-align: center;">
+                                                                                <a href="https://www.codemarket.io/makemoneyonline">
+                                                                                <img
+                                                                                    src="https://www.codemarket.io/assets/images/logo.png" />
+                                                                                </a>
+                                                                                </div>
                                                                                     <br>
                                                                                     <h3 style="font-size: 18px; color: #3c3950;">
                                                                                         Dear {name},
@@ -68,7 +73,7 @@
                                                                                         Reserve your spot by clicking on <a href="https://www.codemarket.io/help-business-grow?email={email}" target="_blank">this link </a>
                                                                                     </p>
                                                                                     <div style="line-height: 9px; padding-top: 10px;">
-                                                                                        <p>Sumithra Devi</p>
+                                                                                    <p>Sumithra Devi</p>
                                                                                         <p><a
                                                                                                 href="https://us04web.zoom.us/j/3765532935">Zoom</a>
                                                                                         </p>
@@ -101,4 +106,4 @@
     </table>
 </body>
 
-</html>
+</html>`;

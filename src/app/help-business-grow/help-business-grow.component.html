@@ -6,28 +6,48 @@
     <div class="row">
         <div class="col-md-12">
             <div [formGroup]="postForm" class="add-form-area common-box-shadow">
-                <mat-form-field appearance="outline" class="field-full-width">
-                    <input formControlName="businessName" matInput placeholder="Business Name" type="text">
-                </mat-form-field>
-
-                <mat-form-field appearance="outline" class="field-full-width">
-                    <input formControlName="website" matInput placeholder="Website" type="text">
-                </mat-form-field>
-
                 <div class="row">
-                    <mat-form-field appearance="outline" class="field-full-width col-md-6 col-sm-12">
-                        <input formControlName="firstName" matInput placeholder="First Name" type="text">
-                    </mat-form-field>
-                    <mat-form-field appearance="outline" class="field-full-width col-md-6 col-sm-12">
-                        <input formControlName="lastName" matInput placeholder="Last Name" type="text">
-                    </mat-form-field>
+                    <div class="form-group col-md-6">
+                        <label>First Name*</label>
+                        <input formControlName="firstName" type="email" class="form-control" aria-describedby="firstName" placeholder="First Name*">
+                        <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Last Name</label>
+                        <input formControlName="lastName" type="text" class="form-control" aria-describedby="lastName" placeholder="Last Name">
+                        <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+                    </div>
+                </div>
+ 
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label>Business Name*</label>
+                        <input formControlName="businessName" type="text" class="form-control" aria-describedby="businessName" placeholder="Business Name*">
+                        <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Mobile Number*</label>
+                        <input formControlName="mobileNumber" type="number" class="form-control" aria-describedby="Mobile" placeholder="Mobile Number*">
+                        <small id="emailHelp" class="form-text text-muted">We'll never share your mobile number with anyone else.</small>
+                    </div>
+
                 </div>
 
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label>Website</label>
+                        <input formControlName="website" type="text" class="form-control" aria-describedby="website" placeholder="Website">
+                        <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+                    </div>
 
-                <mat-form-field appearance="outline" class="field-full-width">
-                    <input formControlName="mobileNumber" matInput placeholder="Mobile Number" type="number">
-                </mat-form-field>
-
+                    <div class="form-group col-md-6">
+                        <label>City</label>
+                        <input formControlName="city" type="text" class="form-control" aria-describedby="city" placeholder="City">
+                        <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+                    </div>
+    
+                </div>
+                
 
                 <br />
 
@@ -38,22 +58,31 @@
 
                 <div class="wrap">
                     <h2>Select Business Areas You need help with your sales:</h2>
+                    <mat-chip-list style="display: block; padding-bottom: 20px;">
+                        <mat-chip *ngFor="let ba of selectedBusinessAreas" [removable]="true"
+                            (removed)="removeSelectedBusinessAreas(ba)">
+                            {{ba.name}}
+                            <mat-icon matChipRemove>cancel</mat-icon>
+                        </mat-chip>
+                    </mat-chip-list>
                     <!-- <p></p> -->
 
                     <div class="line">
                         <a class="area-btn" #area
-                            (click)="addOrRemoveSelectedBusinessAreas(b); area.classList.toggle('active'); check.classList.toggle('far');  check.classList.toggle('fa-check-circle')"
+                            (click)="addSelectedBusinessAreas(b); area.classList.toggle('active'); check.classList.toggle('far');  check.classList.toggle('fa-check-circle')"
                             *ngFor="let b of businessAreas">
                             <span><i #check style="margin-right: 5px;"></i>{{b?.name}}</span>
                         </a>
-                        <a contenteditable="false" class="area-btn" #add (click)="editMode = true;">
-                            <!-- {{addSpan | json}} -->
+                        <!-- <a contenteditable="false" class="area-btn" #add (click)="editMode = true;">
                             <mat-form-field *ngIf="editMode" style="width: -webkit-fill-available;">
-                                <input [(ngModel)]="addBusinessAreaString"  [ngModelOptions]="{standalone: true}" matInput placeholder="Add Business Area">
+                                <input [(ngModel)]="addBusinessAreaString" [ngModelOptions]="{standalone: true}"
+                                    matInput placeholder="Add Business Area">
                             </mat-form-field>
-                            <button *ngIf="editMode" [disabled]="!addBusinessAreaString" mat-raised-button style="margin-top: -17px;" color="primary" (click)="addNewBusinessArea()">Add</button>
-                            <span #addSpan *ngIf="!editMode">Add <mat-icon style="vertical-align: middle;">add</mat-icon></span>
-                        </a>
+                            <button *ngIf="editMode" [disabled]="!addBusinessAreaString" mat-raised-button
+                                style="margin-top: -17px;" color="primary" (click)="addNewBusinessArea()">Add</button>
+                            <span #addSpan *ngIf="!editMode">Add <mat-icon style="vertical-align: middle;">add
+                                </mat-icon></span>
+                        </a> -->
                     </div>
                     <!-- <div class="line">
                     <a class="btn"><i class="fa fa-square-o" ></i>Ruby</a>

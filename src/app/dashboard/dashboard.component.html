@@ -29,9 +29,10 @@
                         <div id="append_location" class="individuals-signup-cta__form-group">
                             <label class="individuals-signup-cta__label">Enter your email address</label>
                             <input type="hidden" name="fyi_from_landing" value="true">
-                            <input id="email_input" class="individuals-signup-cta__email-input email_input" type="email"
-                                name="fyi_email">
-                            <button id="submitBtn" class="google-button special" type="submit">
+                            <input [(ngModel)]="emailInput" id="email_input"
+                                class="individuals-signup-cta__email-input email_input" type="email" name="fyi_email">
+                            <button [disabled]="!emailInput" id="submitBtn" class="google-button special" type="button"
+                                [routerLink]="['../', 'help-business-grow']" [queryParams]="{email: emailInput}">
                                 <span class="button-flex-wrapper">
                                     Start Today
                                 </span>

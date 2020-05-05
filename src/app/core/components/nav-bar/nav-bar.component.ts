@@ -71,7 +71,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
     private breakpointObserver: BreakpointObserver,
     private store: Store<AppState>,
     public authService: AuthService,
-    private router: Router,
+    public router: Router,
     private dialog: MatDialog,
     public messageService: MessageService,
     public postService: PostService

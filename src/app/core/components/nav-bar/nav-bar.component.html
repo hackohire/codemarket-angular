@@ -1,6 +1,6 @@
 <mat-sidenav-container class="sidenav-container">
 
-  <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+  <!-- <mat-sidenav *ngIf="this.router.url !== '/dashboard'" #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'main'" [opened]="(isHandset$ | async) === false">
     <mat-toolbar>Menu</mat-toolbar>
 
@@ -102,10 +102,10 @@
       <a mat-list-item [routerLink]="['/', 'post', 'post-list']"
         [queryParams]="{type: postTypes.Assignment, all: false}">My Assignments</a>
     </mat-nav-list>
-  </mat-sidenav>
-  <mat-sidenav-content>
+  </mat-sidenav>  -->
+  <mat-sidenav-content >
     
-     <mat-toolbar style="padding: 10px 0; background-color: rgb(8, 8, 8);">
+     <!--<mat-toolbar *ngIf="this.router.url !== '/dashboard'" style="padding: 10px 0; background-color: rgb(8, 8, 8);">
 
 
       <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'add-post-type']">
@@ -166,7 +166,7 @@
 
     </mat-toolbar>
 
-    <mat-toolbar>
+    <mat-toolbar *ngIf="this.router.url !== '/dashboard'">
 
       
       <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
@@ -200,7 +200,7 @@
 
 
 
-    </mat-toolbar> 
+    </mat-toolbar>  -->
 
     <div class="container">
 

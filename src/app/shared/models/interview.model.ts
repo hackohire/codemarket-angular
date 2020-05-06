@@ -1,5 +1,5 @@
 import { User } from './user.model';
-import { BlockToolData } from '@editorjs/editorjs';
+
 import { Tag } from './product.model';
 import { PostStatus } from './poststatus.enum';
 import { Company } from './company.model';
@@ -13,14 +13,14 @@ interface Support {
     time: number;
     description: {
         type: string;
-        data: BlockToolData
+        data: any
     };
 }
 export interface Interview {
     name: string;
     description: [{
         type: string;
-        data: BlockToolData
+        data: any
     }];
     type?: string;
     price: number;

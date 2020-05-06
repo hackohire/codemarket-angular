@@ -157,6 +157,10 @@ const routes: Routes = [
     loadChildren: () => import('./makemoneyonline/makemoneyonline.module').then(module => module.MakemoneyonlineModule),
   },
   {
+    path: 'help-business-grow',
+    loadChildren: () => import('./help-business-grow/help-business-grow.module').then(module => module.HelpBusinessGrowModule),
+  },
+  {
     path: 'about-us',
     component: AboutUsComponent
   },

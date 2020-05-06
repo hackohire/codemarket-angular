@@ -52,8 +52,9 @@
                                 <article>
                                     <app-editor
                                         (showComments)="showCommentsOnSide($event)"
+                                        [data]="details?.description"
                                         [commentsList]="commentService?.commentsList$ | async"
-                                        [blockLevelComments]="true" [readOnly]="true"
+                                        [blockLevelComments]="false" [readOnly]="true"
                                         [id]="'details-editor'" [html]="details?.descriptionHTML" [post]="details" [commentType]="'post'">
                                     </app-editor>
 
@@ -211,7 +212,7 @@
                     <!-- <h4 class="tab-content-wrapper">Comments:</h4> -->
                     <div *ngFor="let c of commentService?.commentsList$ | async; trackBy: trackByFn">
                         <li [id]="c?._id" style="padding-left: 30px; padding-right: 30px;"
-                            *ngIf="!c?.blockSpecificComment" class="single-thread">
+                            *ngIf="!c?.blockSpecificComment || true" class="single-thread">
                             <app-comment [comment]="c" [referenceId]="cDetails?._id"></app-comment>
                         </li>
                     </div>

@@ -21,7 +21,6 @@ import Storage from '@aws-amplify/storage';
 import moment from 'moment';
 import { concatMap } from 'rxjs/operators/concatMap';
 import { trigger, state, style, transition, animate } from '@angular/animations';
-import { BlockToolData } from '@editorjs/editorjs/types/tools';
 import { EditorComponent } from '../../../shared/components/editor/editor.component';
 import { MdePopoverTrigger } from '@material-extended/mde';
 import { MatPaginator } from '@angular/material/paginator';
@@ -104,7 +103,7 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
 
   postDescription: [{
     type: string;
-    data: BlockToolData
+    data: any
   }];
 
   @ViewChild(MdePopoverTrigger, { static: false }) socialMediaPopover: MdePopoverTrigger;
@@ -496,12 +495,14 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
 
     this.postService.getAllPosts(
       paginationObj, postType, '', this.companyDetails._id).subscribe((u) => {
-        this.postService.getEmailPhoneCountForContact(postType).subscribe((b) => {
-          this.companyRelatedPosts.posts = u.posts;
-          this.totalcompanyRelatedPosts = u.total;
-          this.emailCount = b[0].emailCount ? b[0].emailCount : 0;
-          this.phoneCount = b[0].phoneCount ? b[0].phoneCount : 0;
-        })
+        this.companyRelatedPosts.posts = u.posts;
+        this.totalcompanyRelatedPosts = u.total;
+        if (postType === 'contact') {
+          this.postService.getEmailPhoneCountForContact(postType).subscribe((b) => {
+            this.emailCount = b[0].emailCount ? b[0].emailCount : 0;
+            this.phoneCount = b[0].phoneCount ? b[0].phoneCount : 0;
+          })
+        }
 
       });
   }

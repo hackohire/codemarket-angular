@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
-@import "~bootstrap/dist/css/bootstrap.min.css";
-@import "../node_modules/highlight.js/styles/rainbow.css";
+
+
+@import "~~bootstrap/scss/bootstrap";
 @import "~ng-pick-datetime/assets/style/picker.min.css";
 @import url("assets/fonts/rectory/stylesheet.css");
 
@@ -10,7 +11,7 @@
 html,
 body {
   height: 100%;
-  margin: 0;
+  // margin: 0;
 }
 
 .readonly {
@@ -26,7 +27,9 @@ body {
 }
 
 .my_class {
-  margin: 0 !important;
+  body {
+    margin: 0 !important;
+  }
 }
 
 span {
@@ -50,10 +53,6 @@ form > * {
   border-radius: 10px;
 }
 
-.cdx-input link-tool__input {
-  white-space: pre-wrap !important;
-}
-
 .add-form-area {
   background: #fff;
   padding: 32px 30px 32px;
@@ -68,9 +67,9 @@ form > * {
 }
 
 
-.image-tool__image-picture {
-  margin: auto !important;
-}
+// .image-tool__image-picture {
+//   margin: auto !important;
+// }
 
 .line-height-initial {
   line-height: initial;
@@ -78,10 +77,6 @@ form > * {
 
 .common-box-shadow {
   box-shadow: 0 0 0 1px rgba(0,0,0,.15), 0 2px 3px rgba(0,0,0,.2) !important;
-}
-
-agm-map {
-  height: 300px;
 }
 
 mat-expansion-panel-header {
@@ -100,89 +95,51 @@ textarea {
   background-color: #0674ec !important;
 }
 
-.amplify-authenticator {
-  background-color: #f5f5f5 !important;
-}
+// .amplify-authenticator {
+//   background-color: #f5f5f5 !important;
+// }
 
-.media-body {
-  // overflow: auto;
-}
+// .media-body {
+//   // overflow: auto;
+// }
 
 // .ng5-slider-pointer,
 // .ng5-slider-selection {
 //   background-color: #0674ec !important;
 // }
 
-.ce-code {
-  display: grid !important;
-}
+// .ce-code {
+//   display: grid !important;
+// }
 
-.cdx-block {
-  // font-family: "charterregular", sans-serif !important;
-  font-size: 16px;
-  word-break: break-word;
-  // padding: 0;
-}
+// .cdx-block {
+//   // font-family: "charterregular", sans-serif !important;
+//   font-size: 16px;
+//   word-break: break-word;
+//   // padding: 0;
+// }
 
 .page-title {
   font-family: "roboto", sans-serif !important;
 }
 
-.ce-header {
-  // font-family: "charterbold", sans-serif !important;
-  // padding: 1em 0;
-  margin: 0;
-  margin-bottom: -0.9em;
-  line-height: 1.5em;
-  outline: none;
-  // font-size: 21px;
-}
+// .ce-header {
+//   // font-family: "charterbold", sans-serif !important;
+//   // padding: 1em 0;
+//   margin: 0;
+//   margin-bottom: -0.9em;
+//   line-height: 1.5em;
+//   outline: none;
+//   // font-size: 21px;
+// }
 
-.ce-block__content {
-  max-width: 100%;
-}
+// .ce-block__content {
+//   max-width: 100%;
+// }
 
-.inside-container-area {
-  background: #fff;
-  padding: 32px 30px 32px;
-  margin-bottom: 30px;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
 
 /** CSS for the Parent Elemets of the img in editor */
 
-.lightbox {
-  display: block;
-  position: fixed;
-  z-index: 999;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  top: 0;
-  left: 0;
-  background: rgba(0, 0, 0, 0.8);
-}
-
-/** CSS for all img in Ediotr */
-
-.lightbox-img {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: auto;
-  margin-bottom: auto;
-  padding-top: 100px;
-  -ms-transform: scale(1.2);
-  -moz-transform: scale(1.2);
-  -webkit-transform: scale(1.2);
-  -o-transform: scale(1.2);
-  transform: scale(1.2);
-}
-
-.link-tool__image {
-  display: block !important;
-}
 
 .no-padding {
   mat-dialog-container {
@@ -349,9 +306,9 @@ NB: this file contains the list of components/scss partial along with the style.
 *****************************/
 body {
   font-family: "Roboto", sans-serif;
-  position: relative;
-  font-weight: 400;
-  font-size: 15px;
+  // position: relative;
+  // font-weight: 400;
+  // font-size: 15px;
 }
 
 ul {
@@ -568,9 +525,9 @@ h4,
 h5,
 h6 {
   font-family: "Roboto", sans-serif;
-  margin: 0;
+  // margin: 0;
   // font-weight: 400;
-  padding: 0;
+  // padding: 0;
   //   color: #000000;
 }
 
@@ -699,7 +656,7 @@ a {
 }
 
 .pcolor {
-  color: #0674ec;
+  color: #00aeef;
 }
 
 .scolor {
@@ -1549,29 +1506,29 @@ a {
 *****************************/
 /* container sizes for various devices */
 /* Custom scrollbar */
-h1 {
-  font-size: 36px;
-}
+// h1 {
+//   font-size: 36px;
+// }
 
-h2 {
-  font-size: 30px;
-}
+// h2 {
+//   font-size: 30px;
+// }
 
-h3 {
-  font-size: 24px;
-}
+// h3 {
+//   font-size: 24px;
+// }
 
-h4 {
-  font-size: 22px;
-}
+// h4 {
+//   font-size: 22px;
+// }
 
-h5 {
-  font-size: 20px;
-}
+// h5 {
+//   font-size: 20px;
+// }
 
-h6 {
-  font-size: 18px;
-}
+// h6 {
+//   font-size: 18px;
+// }
 
 /*****************************
 	--- MENU
@@ -4058,7 +4015,7 @@ h6 {
 }
 
 .pcolor {
-  color: #0674ec;
+  color: #00aeef;
 }
 
 .scolor {
@@ -5471,7 +5428,7 @@ h6 {
 }
 
 .pcolor {
-  color: #0674ec;
+  color: #00aeef;
 }
 
 .scolor {
@@ -7049,7 +7006,7 @@ h6 {
 }
 
 .pcolor {
-  color: #0674ec;
+  color: #00aeef;
 }
 
 .scolor {
@@ -16248,15 +16205,15 @@ ul.nav-tabs.nav--tabs2 li a::before {
     margin: 30px 0;
   }
   /* typography */
-  h1 {
-    font-size: 30px;
-  }
-  h2 {
-    font-size: 26px;
-  }
-  h3 {
-    font-size: 22px;
-  }
+  // h1 {
+  //   font-size: 30px;
+  // }
+  // h2 {
+  //   font-size: 26px;
+  // }
+  // h3 {
+  //   font-size: 22px;
+  // }
   /*-------------- general scss ----------------*/
   .search_box .search-btn {
     margin-left: 0;

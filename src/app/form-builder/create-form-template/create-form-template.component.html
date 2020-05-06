@@ -1,0 +1,26 @@
+<app-breadcumb [title]="breadcumb?.title"></app-breadcumb>
+<br>
+<br>
+<div class="container">
+  <div class="row">
+      <div class="col-md-12">
+        <div>
+            <form-builder *ngIf="isBrowser()" id="builder" [form]="form" (change)="onChange($event)"></form-builder>
+        </div>
+        <br>
+        <br>
+        <div [formGroup]="formDetails" class="add-form-area common-box-shadow">
+          
+          <mat-form-field class="field-full-width">
+            <input type="text" matInput formControlName="formname" placeholder="Enter Form Name">
+          </mat-form-field>
+
+          <input type="hidden" formControlName="formStructureJSON">
+
+          <div fxLayout="row" fxLayoutGap="10px">
+            <button type="button" (click)="submit()" mat-raised-button color="primary">Save From</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 

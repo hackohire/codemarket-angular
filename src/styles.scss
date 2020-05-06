@@ -1,8 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
-@import "~bootstrap/dist/css/bootstrap.min.css";
-@import "../node_modules/highlight.js/styles/rainbow.css";
+
+
+@import "~~bootstrap/scss/bootstrap";
 @import "~ng-pick-datetime/assets/style/picker.min.css";
 @import url("assets/fonts/rectory/stylesheet.css");
+
+@import "~src/assets/css/general";
+@import "~src/assets/css/theme";
+@import "~src/assets/css/product";
+@import "~src/assets/css/responsive";
+@import "~src/assets/css/btn";
 
 @import "~@ng-select/ng-select/themes/material.theme.css";
 @import "~@ngx-share/button/themes/default/default-theme";
@@ -10,7 +17,7 @@
 html,
 body {
   height: 100%;
-  margin: 0;
+  // margin: 0;
 }
 
 .readonly {
@@ -26,7 +33,9 @@ body {
 }
 
 .my_class {
-  margin: 0 !important;
+  body {
+    margin: 0 !important;
+  }
 }
 
 span {
@@ -50,10 +59,6 @@ form > * {
   border-radius: 10px;
 }
 
-.cdx-input link-tool__input {
-  white-space: pre-wrap !important;
-}
-
 .add-form-area {
   background: #fff;
   padding: 32px 30px 32px;
@@ -68,9 +73,9 @@ form > * {
 }
 
 
-.image-tool__image-picture {
-  margin: auto !important;
-}
+// .image-tool__image-picture {
+//   margin: auto !important;
+// }
 
 .line-height-initial {
   line-height: initial;
@@ -78,10 +83,6 @@ form > * {
 
 .common-box-shadow {
   box-shadow: 0 0 0 1px rgba(0,0,0,.15), 0 2px 3px rgba(0,0,0,.2) !important;
-}
-
-agm-map {
-  height: 300px;
 }
 
 mat-expansion-panel-header {
@@ -100,89 +101,51 @@ textarea {
   background-color: #0674ec !important;
 }
 
-.amplify-authenticator {
-  background-color: #f5f5f5 !important;
-}
+// .amplify-authenticator {
+//   background-color: #f5f5f5 !important;
+// }
 
-.media-body {
-  // overflow: auto;
-}
+// .media-body {
+//   // overflow: auto;
+// }
 
 // .ng5-slider-pointer,
 // .ng5-slider-selection {
 //   background-color: #0674ec !important;
 // }
 
-.ce-code {
-  display: grid !important;
-}
+// .ce-code {
+//   display: grid !important;
+// }
 
-.cdx-block {
-  // font-family: "charterregular", sans-serif !important;
-  font-size: 16px;
-  word-break: break-word;
-  // padding: 0;
-}
+// .cdx-block {
+//   // font-family: "charterregular", sans-serif !important;
+//   font-size: 16px;
+//   word-break: break-word;
+//   // padding: 0;
+// }
 
 .page-title {
   font-family: "roboto", sans-serif !important;
 }
 
-.ce-header {
-  // font-family: "charterbold", sans-serif !important;
-  // padding: 1em 0;
-  margin: 0;
-  margin-bottom: -0.9em;
-  line-height: 1.5em;
-  outline: none;
-  // font-size: 21px;
-}
+// .ce-header {
+//   // font-family: "charterbold", sans-serif !important;
+//   // padding: 1em 0;
+//   margin: 0;
+//   margin-bottom: -0.9em;
+//   line-height: 1.5em;
+//   outline: none;
+//   // font-size: 21px;
+// }
 
-.ce-block__content {
-  max-width: 100%;
-}
+// .ce-block__content {
+//   max-width: 100%;
+// }
 
-.inside-container-area {
-  background: #fff;
-  padding: 32px 30px 32px;
-  margin-bottom: 30px;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
 
 /** CSS for the Parent Elemets of the img in editor */
 
-.lightbox {
-  display: block;
-  position: fixed;
-  z-index: 999;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  top: 0;
-  left: 0;
-  background: rgba(0, 0, 0, 0.8);
-}
-
-/** CSS for all img in Ediotr */
-
-.lightbox-img {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: auto;
-  margin-bottom: auto;
-  padding-top: 100px;
-  -ms-transform: scale(1.2);
-  -moz-transform: scale(1.2);
-  -webkit-transform: scale(1.2);
-  -o-transform: scale(1.2);
-  transform: scale(1.2);
-}
-
-.link-tool__image {
-  display: block !important;
-}
 
 .no-padding {
   mat-dialog-container {
@@ -349,9 +312,9 @@ NB: this file contains the list of components/scss partial along with the style.
 *****************************/
 body {
   font-family: "Roboto", sans-serif;
-  position: relative;
-  font-weight: 400;
-  font-size: 15px;
+  // position: relative;
+  // font-weight: 400;
+  // font-size: 15px;
 }
 
 ul {
@@ -568,9 +531,9 @@ h4,
 h5,
 h6 {
   font-family: "Roboto", sans-serif;
-  margin: 0;
+  // margin: 0;
   // font-weight: 400;
-  padding: 0;
+  // padding: 0;
   //   color: #000000;
 }
 
@@ -1549,29 +1512,29 @@ a {
 *****************************/
 /* container sizes for various devices */
 /* Custom scrollbar */
-h1 {
-  font-size: 36px;
-}
+// h1 {
+//   font-size: 36px;
+// }
 
-h2 {
-  font-size: 30px;
-}
+// h2 {
+//   font-size: 30px;
+// }
 
-h3 {
-  font-size: 24px;
-}
+// h3 {
+//   font-size: 24px;
+// }
 
-h4 {
-  font-size: 22px;
-}
+// h4 {
+//   font-size: 22px;
+// }
 
-h5 {
-  font-size: 20px;
-}
+// h5 {
+//   font-size: 20px;
+// }
 
-h6 {
-  font-size: 18px;
-}
+// h6 {
+//   font-size: 18px;
+// }
 
 /*****************************
 	--- MENU
@@ -2546,133 +2509,8 @@ h6 {
 /*****************************
 	-- THEME
 *****************************/
-.btn--round {
-  -webkit-border-radius: 100px;
-  border-radius: 100px;
-}
 
-.btn {
-  background: #0674ec;
-  padding: 0;
-  margin: 0;
-  text-transform: capitalize;
-  font-size: 15px;
-  font-weight: 500;
-  color: #fff;
-  display: inline-block;
-  -webkit-box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  -webkit-transition: 0.3s ease;
-  -o-transition: 0.3s ease;
-  transition: 0.3s ease;
-  border: none;
-  position: relative;
-}
 
-.btn:before {
-  content: "";
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  background: #000;
-  left: 0;
-  -webkit-transition: 0.3s;
-  -o-transition: 0.3s;
-  transition: 0.3s;
-  top: 0;
-  opacity: 0;
-  visibility: hidden;
-  z-index: 0;
-  -webkit-border-radius: 4px;
-  border-radius: 4px;
-}
-
-.btn:focus,
-.btn:active {
-  color: #fff;
-  outline: 0;
-}
-
-.btn:hover {
-  color: #fff;
-}
-
-.btn:hover:before {
-  opacity: 0.07;
-  visibility: visible;
-}
-
-.btn.btn--round:hover:before {
-  -webkit-border-radius: 200px;
-  border-radius: 200px;
-}
-
-.btn--bordered,
-.btn--bordered:hover,
-.btn--bordered:focus,
-.btn--bordered:active {
-  background: none;
-  border: 1px solid #0674ec;
-  color: #0674ec;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-}
-
-.btn.btn--white,
-.btn-light,
-.btn--light,
-.btn.btn--white:hover,
-.btn-light:hover,
-.btn--light:hover {
-  background: #fff;
-  color: #0674ec !important;
-}
-
-.btn--default {
-  line-height: 50px;
-  min-width: 170px;
-}
-
-.btn-default {
-  line-height: 50px;
-  min-width: 170px;
-}
-
-.btn--lg,
-.btn-lg {
-  line-height: 55px;
-  font-size: 16px;
-  min-width: 195px;
-}
-
-.btn--md,
-.btn-md {
-  line-height: 45px;
-  padding: 0 22px;
-  min-width: 150px;
-}
-
-.btn--xs {
-  line-height: 36px;
-  padding: 0 19px;
-  font-size: 14px;
-}
-
-.btn--fullwidth {
-  width: 100%;
-}
-
-.btn--sm,
-.btn-sm {
-  line-height: 40px;
-  padding: 0 22px;
-}
-
-.btn--icon span {
-  margin-right: 5px;
-  line-height: inherit;
-  display: inline-block;
-}
 
 .btn--faq {
   min-width: 140px;
@@ -2695,7 +2533,7 @@ h6 {
 .btn.btn--color1:hover,
 .btn-secondary:hover,
 .btn--secondary:hover {
-  background: #7347c1;
+  // background: #7347c1;
 }
 
 .btn.btn--color1.btn--bordered,
@@ -3843,10 +3681,10 @@ h6 {
 }
 
 .table thead > tr > th {
-  color: #000;
-  font-size: 16px;
-  font-weight: 500;
-  padding: 25px 0 25px 28px;
+  // color: #000;
+  // font-size: 16px;
+  // font-weight: 500;
+  // padding: 25px 0 25px 28px;
 }
 
 .table tbody > tr {
@@ -3854,10 +3692,10 @@ h6 {
 }
 
 .table tbody > tr > td {
-  padding: 20px 0 20px 28px;
-  font-size: 16px;
-  vertical-align: middle;
-  color: #333;
+  // padding: 20px 0 20px 28px;
+  // font-size: 16px;
+  // vertical-align: middle;
+  // color: #333;
 }
 
 .table tbody > tr > td.author {
@@ -8177,91 +8015,7 @@ h6 {
 /*****************************
 	--- LISTS STYLE
 *****************************/
-ul.nav-tabs {
-  border: 0;
-}
 
-ul.nav-tabs li {
-  position: relative;
-  border-bottom: 1px solid #ececec;
-  display: inline-block;
-  margin-right: -1px;
-}
-
-ul.nav-tabs li + li {
-  border-left: 1px solid #ececec;
-}
-
-ul.nav-tabs li a {
-  color: #000;
-  font-size: 17px;
-  text-transform: capitalize;
-  padding: 0 28px;
-  display: block;
-  margin-right: 0;
-  line-height: 70px;
-  border: none;
-  -webkit-transition: 0.3s;
-  -o-transition: 0.3s;
-  transition: 0.3s;
-}
-
-ul.nav-tabs li a:hover {
-  border: none;
-  background: none;
-  color: #0674ec;
-}
-
-ul.nav-tabs li a span {
-  font-weight: 500;
-}
-
-ul.nav-tabs li a:before {
-  content: "";
-  position: absolute;
-  height: 3px;
-  width: 100%;
-  background: #0674ec;
-  opacity: 0;
-  left: 0;
-  -webkit-transition: 0.3s ease;
-  -o-transition: 0.3s ease;
-  transition: 0.3s ease;
-  visibility: hidden;
-}
-
-ul.nav-tabs li a.active {
-  border-bottom: 0;
-  border: 0;
-  background: none;
-  color: #0674ec;
-}
-
-ul.nav-tabs li a.active:before {
-  opacity: 1;
-  visibility: visible;
-}
-
-ul.nav-tabs li:last-child > a {
-  padding-right: 60px;
-}
-
-ul.nav-tabs.nav--tabs2 {
-  display: inline-block;
-  margin-bottom: -4px;
-}
-
-ul.nav-tabs.nav--tabs2 li {
-  border: none;
-}
-
-ul.nav-tabs.nav--tabs2 li a {
-  padding-right: 30px;
-}
-
-ul.nav-tabs.nav--tabs2 li a::before {
-  bottom: 0;
-}
 
 .tab .tab-content {
   margin-top: 30px;
@@ -16244,15 +15998,15 @@ ul.nav-tabs.nav--tabs2 li a::before {
     margin: 30px 0;
   }
   /* typography */
-  h1 {
-    font-size: 30px;
-  }
-  h2 {
-    font-size: 26px;
-  }
-  h3 {
-    font-size: 22px;
-  }
+  // h1 {
+  //   font-size: 30px;
+  // }
+  // h2 {
+  //   font-size: 26px;
+  // }
+  // h3 {
+  //   font-size: 22px;
+  // }
   /*-------------- general scss ----------------*/
   .search_box .search-btn {
     margin-left: 0;
@@ -18036,3 +17790,10 @@ ul.nav-tabs.nav--tabs2 li a::before {
 }
 // End of Chat box CSS
 /*# sourceMappingURL=src/map/style.css.map */
+
+
+
+
+.form-builder-group-header {
+  padding: 0 !important;
+}

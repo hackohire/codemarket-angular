@@ -12,7 +12,7 @@ import { PostService } from '../../shared/services/post.service';
 import { SweetalertService } from '../../shared/services/sweetalert.service';
 import { CompanyService } from '../../companies/company.service';
 import { MatDialog } from '@angular/material';
-import { BlockToolData } from '@editorjs/editorjs';
+
 import { BreadCumb } from '../../shared/models/bredcumb.model';
 import { environment } from '../../../environments/environment';
 import { Subscription } from 'rxjs';
@@ -70,7 +70,7 @@ export class EventDetailsComponent implements OnInit, OnDestroy {
 
   postDescription: [{
     type: string;
-    data: BlockToolData
+    data: any
   }];
 
   postsConnectedWithEvent: Post[];

@@ -1,0 +1,45 @@
+<app-breadcumb [title]="breadcumb?.title"></app-breadcumb>
+
+<div class="container">
+    <div fxLayout="row" fxLayoutGap="10px" style="margin-top: 10px; margin-bottom: 10px">
+      <button type="button" [routerLink]="['/', 'create-form-template']" mat-raised-button color="primary">Create Form Template</button>
+    </div>
+    <div class="row">
+        <div style="padding: 0" class="col-md-12">
+            
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="formName">
+        <th mat-header-cell *matHeaderCellDef > Template Name </th>
+        <td mat-cell
+            *matCellDef="let MakeMoney"> {{MakeMoney?.formname}} </td>
+    </ng-container>
+
+  <!--  <ng-container matColumnDef="TemplateJson" >
+        <th mat-header-cell *matHeaderCellDef >Template Structure</th>
+        <td mat-cell
+            *matCellDef="let MakeMoney"> {{MakeMoney?.jsonstring}} </td>
+    </ng-container>
+   --> 
+     <!-- Action Column -->
+     <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef> Action </th>
+      <td mat-cell *matCellDef="let form" (click)="$event.stopPropagation()">
+        <button mat-mini-fab color="primary"
+          [routerLink]="['/', 'add-form-data', form.formname, form._id]">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-mini-fab color="primary" [routerLink]="['/', 'view-form-data-list', form.formname, form._id]">
+          <mat-icon>view_agenda</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+</div>
+</div>
+</div>

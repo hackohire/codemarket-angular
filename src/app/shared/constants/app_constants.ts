@@ -26,7 +26,7 @@ export const appConstants = {
     [PostType.Business]: 'sticky-note'
   },
 
-  fileS3Bucket: 'dhawal-files',
+  fileS3Bucket: 'codemarket-files',
 
   promoCodes: {
     FIRSTMONTHFREE: {
@@ -181,9 +181,6 @@ export const appConstants = {
       type
       categories
       referencePostUrl
-      description {
-        ...Description
-      }
       price
       status
       createdAt
@@ -222,9 +219,6 @@ export const appConstants = {
       }
       slug
       comments {
-        text {
-          ...Description
-        }
         _id
         type
         referenceId
@@ -302,8 +296,18 @@ export const appConstants = {
       website
 
       descriptionHTML
+      activities {
+        action
+        activityDate
+        by {
+          _id
+          name
+        }
+        commentId
+        postId
+        message
+      }
     }
-    ${description}
     ${comment}
     `,
 
@@ -327,5 +331,6 @@ export const appConstants = {
     { name: PostType.Requirement, label: 'Requirement' },
     { name: PostType.Service, label: 'Service' },
     { name: PostType.Testing, label: 'Testing' },
+    { name: PostType.Forms, label: 'Forms' }
   ],
 };

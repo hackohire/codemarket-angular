@@ -97,7 +97,8 @@ export class CommentComponent implements OnInit {
         tap((child) => {
           if (child && this.comment.children) {
             // this.comment.children.push(child);
-            this.reply = this.fromWhere === 'chat' ? false: true;
+            commentReplyEditor.html = '';
+            this.reply = this.fromWhere === 'chat' ? false : true;
             // commentReplyEditor.editor.blocks.clear();
           }
         })
@@ -109,7 +110,7 @@ export class CommentComponent implements OnInit {
 
   deleteComment(singleCommentEditor: EditorComponent) {
     this.sweetAlertService.confirmDelete(() => {
-    this.commentService.deleteComment(this.comment._id, this.comment.referenceId, singleCommentEditor.editorViewRef.nativeElement.innerHTML).pipe(
+    this.commentService.deleteComment(this.comment._id, this.comment.referenceId, singleCommentEditor.html).pipe(
       tap((d) => {
         // this.commentDeleted.emit(this.comment._id);
         // this.comment = null;

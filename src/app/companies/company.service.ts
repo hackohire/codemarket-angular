@@ -27,15 +27,6 @@ export class CompanyService {
       avatar
       _id
     }
-    description {
-      ...Description
-    }
-    ideas {
-      ...Description
-    }
-    questions {
-      ...Description
-    }
     status
     createdAt
     updatedAt
@@ -56,7 +47,6 @@ export class CompanyService {
     linkedinLink
     websiteLink
   }
-  ${description}
   `;
 
   companyQuery: QueryRef<any>;

@@ -143,6 +143,10 @@ export class AddPostComponent implements OnInit, AfterViewInit {
 
       this.postForm.addControl('connectedPosts', new FormControl([this.postFromRoute._id]));
     }
+
+    if (i && !i.descriptionHTML && i.description.length) {
+      // this.postForm.get('descriptionHTML').setValue(this.descriptionEditor.editorUI);
+    }
   }
 
 
@@ -155,6 +159,7 @@ export class AddPostComponent implements OnInit, AfterViewInit {
 
     // const blocks = await this.descriptionEditor.editor.save();
     // this.descriptionFormControl.setValue(blocks.blocks);
+    this.postForm.get('descriptionHTML').setValue(this.descriptionEditor.html);
 
     if (this.authService.loggedInUser && !this.createdBy.value) {
       this.createdBy.setValue(this.authService.loggedInUser._id);

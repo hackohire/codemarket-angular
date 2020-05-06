@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "codemarket": {
+    "cancer": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -98,21 +98,21 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
             "port": 4800,
-            "browserTarget": "codemarket:build"
+            "browserTarget": "cancer:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "codemarket:build:production"
+              "browserTarget": "cancer:build:production"
             },
             "staging": {
-              "browserTarget": "codemarket:build:staging"
+              "browserTarget": "cancer:build:staging"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "codemarket:build"
+            "browserTarget": "cancer:build"
           }
         },
         "test": {
@@ -150,14 +150,14 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "codemarket:serve"
+            "devServerTarget": "cancer:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "codemarket:serve:production"
+              "devServerTarget": "cancer:serve:production"
             },
             "staging": {
-              "devServerTarget": "codemarket:serve:staging"
+              "devServerTarget": "cancer:serve:staging"
             }
           }
         },
@@ -200,5 +200,5 @@
       }
     }
   },
-  "defaultProject": "codemarket"
+  "defaultProject": "cancer"
 }

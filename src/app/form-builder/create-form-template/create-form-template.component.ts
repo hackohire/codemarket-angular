@@ -13,7 +13,7 @@ import { BreadCumb } from '../../shared/models/bredcumb.model';
   selector: 'app-create-form-template',
   templateUrl: './create-form-template.component.html',
   styleUrls: ['./create-form-template.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  // encapsulation: ViewEncapsulation.None
 })
 export class CreateFormTemplateComponent implements OnInit {
 

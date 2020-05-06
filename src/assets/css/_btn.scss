@@ -7,13 +7,13 @@
 @import "theme";
 @import "general";
 
-*:not(.builder-group-button):not(.formcomponent, .menu) {
+// *:not(.builder-group-button):not(.formcomponent, .menu) {
   .btn--round{
     border-radius: 100px;
   }
-  .btn{
+  .btn:not(.component-settings-button):not(.builder-group-button):not(.formcomponent):not([name="data[submit]"]):not([ref="saveButton"]):not([ref="cancelButton"]):not([ref="removeButton"]){
     background: $pcolor;
-    padding: 0;
+    // padding: 0;
     margin: 0;
     text-transform: capitalize;
     font-size: 15px;
@@ -71,14 +71,11 @@
     color: $pcolor;
   }
   // btn default
-  .btn--default{
+  .btn--default:not(.component-settings-button):not(.builder-group-button):not(.formcomponent){
     line-height: 50px;
     min-width: 170px;
   }
-  .btn-default{
-    line-height: 50px;
-    min-width: 170px;
-  }
+
   // btn lg
   .btn--lg, .btn-lg{
     line-height: 55px;
@@ -193,4 +190,4 @@
       color: #000;
     }
   }
-}
+// }

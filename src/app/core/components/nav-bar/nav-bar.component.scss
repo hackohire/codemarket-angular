@@ -60,6 +60,11 @@
 //   box-shadow: none;
 // }
 
+.brand-logo {
+  padding: 10px 0;
+  max-width: 240px;
+}
+
 @media (min-width: 991px) {
   /* width */
   ::-webkit-scrollbar {
@@ -99,15 +104,15 @@
     left: 0;
   }
   .NavBarBox {
-    padding: 5px 0 15px 0;
+    padding: 10px 0;
     border-bottom: 1px solid #ccc;
   }
   .NavBarBox > div:nth-of-type(1) {
     display: none !important;
   }
   .brand-logo {
-    margin: 0 15% 10px;
-    height: 56px;
+    max-width: 55%;
+    margin-right: 5%;
   }
 }
 

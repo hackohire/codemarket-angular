@@ -11,7 +11,7 @@
   .btn--round{
     border-radius: 100px;
   }
-  .btn:not(.component-settings-button):not(.builder-group-button):not(.formcomponent):not([name="data[submit]"]):not([ref="saveButton"]):not([ref="cancelButton"]):not([ref="removeButton"]){
+  .btn:not(.component-settings-button):not(.builder-group-button):not(.formcomponent):not(.formio-button-remove-row):not(.formio-drag-button):not([name="data[submit]"]):not([ref="editgrid-logic-addRow"]):not(.formio-button-add-row):not([ref="saveButton"]):not([ref="cancelButton"]):not([ref="removeButton"]){
     background: $pcolor;
     // padding: 0;
     margin: 0;
@@ -135,7 +135,7 @@
   }
   
   /* btn colors */
-  .btn.btn--color1, .btn-secondary, .btn--secondary,
+  .btn.btn--color1, .btn-secondary:not(.formio-button-remove-row), .btn--secondary,
   .btn.btn--color1:hover, .btn-secondary:hover, .btn--secondary:hover{
     background: $scolor;
     &.btn--bordered{

@@ -14,7 +14,7 @@
     <ng-container style="flex: 0 0 25% !important; min-width: 104px !important;"  *ngFor="let column of displayedColumns" matColumnDef="{{column}}">
         <th mat-header-cell *matHeaderCellDef > {{column}} </th>
         <td setwidth mat-cell
-            *matCellDef="let MakeMoney"> {{MakeMoney[column]}} </td>
+            *matCellDef="let form"> {{form[column]}} </td>
     </ng-container>
 
     <!-- <ng-container matColumnDef="action">

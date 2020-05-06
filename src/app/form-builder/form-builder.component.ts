@@ -37,7 +37,7 @@ export class FormBuilderComponent implements OnInit {
     };
 
     this.formJsonListSubscription = this.formBuilderService.fetchformJson().subscribe((formJsonlist) => {
-      this.displayedColumns = ['formName','action'];
+      this.displayedColumns = ['formName', 'action'];
       this.dataSource.data = formJsonlist;
     });
   }

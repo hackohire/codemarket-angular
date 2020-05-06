@@ -28,20 +28,21 @@ export class FormBuilderService {
       mutation: gql`
         mutation addformJson($formJson: formJsonInput) {
           addformJson(formJson: $formJson) {
+            _id
             formname
-            jsonstring
+            formStructureJSON
           }
         }
       `,
-      variables: {  
-        formJson   
+      variables: {
+        formJson
       }
     }).pipe(
       map((q: any) => q.data.addformJson)
     );
   }
 
-  redirectToCompanyDetails(companyId: string, view = 'home') {
+  redirectToFormBuilder() {
     this.router.navigate(['/', 'form-builder']);
   }
 
@@ -51,7 +52,8 @@ export class FormBuilderService {
         query fetchformJson {
           fetchformJson{
             formname
-            jsonstring
+            formStructureJSON
+            _id
           }
         }
       `,
@@ -62,18 +64,19 @@ export class FormBuilderService {
     );
   }
 
-  addformData(formData : any): Observable<FormData>{
+  addformData(formData: any): Observable<FormData> {
     return this.apollo.mutate({
       mutation: gql`
         mutation addformData($formData: formDataInput) {
           addformData(formData: $formData) {
+            _id
             formname
-            jsonstring
+            formDataJson
           }
         }
       `,
-      variables: {  
-        formData   
+      variables: {
+        formData
       }
     }).pipe(
       map((q: any) => q.data.addformData)
@@ -89,8 +92,9 @@ export class FormBuilderService {
       query: gql`
         query fetchformData($formname: String) {
           fetchformData(formname: $formname){
+            _id
             formname
-            jsonstring
+            formDataJson
           }
         }
       `,

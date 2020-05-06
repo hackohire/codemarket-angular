@@ -1,10 +1,9 @@
-import { Component, OnInit ,Input, Inject,PLATFORM_ID } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { BreadCumb } from '../../shared/models/bredcumb.model';
-import * as CryptoJS from 'crypto-js'
 import {FormBuilderService} from '../form-builder.service';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { FormControl, FormGroup,FormBuilder, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { catchError, } from 'rxjs/operators';
 import { of } from 'rxjs';
@@ -17,58 +16,42 @@ import { isPlatformBrowser } from '@angular/common';
 })
 export class AddFormDataComponent implements OnInit {
 
-  @Input() formName = '';
+  formName = '';
+  connectedFormStructureId = '';
 
-  constructor(private formBuilderService: FormBuilderService,
-    private activatedRoute: ActivatedRoute,  @Inject(PLATFORM_ID) private _platformId: Object) {
+  constructor(
+    private formBuilderService: FormBuilderService,
+    private activatedRoute: ActivatedRoute,
+    @Inject(PLATFORM_ID) private _platformId) {
     this.formName = this.activatedRoute.snapshot.params['formname'];
-    this.formDetailsInitialization(null);
+    this.connectedFormStructureId = this.activatedRoute.snapshot.params['formId'];
   }
   formJsonListSubscription: Subscription;
-  breadcumb: BreadCumb
-  testFormStructure = null;
-  testFormStructureCompo = null;
-  encryptSecretKey = 'codemarket';
-  public form1: Object = {components: []};
-  currentForm = null;
+  breadcumb: BreadCumb;
+  public form1 = {components: []};
   formDetails: FormGroup;
 
 
   ngOnInit() {
     this.breadcumb = {
-      title: 'Add Form Data',
+      title: 'Fill Form Data',
     };
 
     this.formJsonListSubscription = this.formBuilderService.fetchformJson().subscribe((formJsonlist) => {
-      for (let form of formJsonlist) {
-        if (form.formname == this.formName){
-          this.currentForm = form;
-        }
+      if (formJsonlist && formJsonlist.length) {
+        this.form1 = formJsonlist.find(form => form._id === this.connectedFormStructureId).formStructureJSON;
       }
-      try {
-        const bytes = CryptoJS.AES.decrypt(this.currentForm.jsonstring, this.encryptSecretKey);
-        if (bytes.toString()) {
-          this.testFormStructure = JSON.parse(bytes.toString(CryptoJS.enc.Utf8)); 
-        }
-        else{
-          this.testFormStructure = this.currentForm.jsonstring
-        }
-      } catch (e) {
-        console.log(e);
-      }
-      console.log(this.testFormStructure)
-      this.form1 = JSON.parse(this.testFormStructure);
+      this.formDetailsInitialization(null);
     });
   }
 
   onSubmitForm1(event) {
     console.log(event.data);
-    this.formDetails.value.formname = this.formName;
-    this.formDetails.value.jsonstring = this.encryptData(event.data);
+    this.formDetails.value.formDataJson = event.data;
 
     this.formBuilderService.addformData(this.formDetails.value).pipe(
       catchError((e) => {
-        Swal.fire('Name already exists!', '', 'error');
+        console.log(e);
         return of(false);
       })
     ).subscribe((d: any) => {
@@ -82,35 +65,13 @@ export class AddFormDataComponent implements OnInit {
 
   formDetailsInitialization(i: any) {
     this.formDetails = new FormGroup({
-      formname: new FormControl(i && i.formname ? i.formname : '', Validators.required),
-      jsonstring: new FormControl(i && i.jsonstring ? i.jsonstring : '', Validators.required)
+      formname: new FormControl(i && i.formname ? i.formname : this.formName, Validators.required),
+      formDataJson: new FormControl(i && i.jsonstring ? i.jsonstring : '', Validators.required),
+      connectedFormStructureId: new FormControl(i && i._id ? i._id : this.connectedFormStructureId)
     });
   }
 
-  encryptData(data) {
-
-    try {
-      return CryptoJS.AES.encrypt(JSON.stringify(data), this.encryptSecretKey).toString();
-    } catch (e) {
-      console.log(e);
-    }
-  }
-
-  decryptData(data) {
-
-    try {
-      const bytes = CryptoJS.AES.decrypt(data, this.encryptSecretKey);
-      if (bytes.toString()) {
-        return JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
-      }
-      return data;
-    } catch (e) {
-      console.log(e);
-    }
-  }
-
-
-  isBrowser(){
+  isBrowser() {
     return isPlatformBrowser(this._platformId);
   }
 

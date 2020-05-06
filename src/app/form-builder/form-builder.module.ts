@@ -19,11 +19,11 @@ const contactRoutes: Routes = [
         component: FormBuilderComponent
       },
       {
-        path: 'add-form-data/:formname',
+        path: 'add-form-data/:formname/:formId',
         loadChildren: () => import('./add-form-data/add-form-data.module').then(module => module.AddFormDataModule),
       },
       {
-        path: 'view-form-data-list/:formname',
+        path: 'view-form-data-list/:formname/:formId',
         component: ViewFormDataListComponent
       },
       {

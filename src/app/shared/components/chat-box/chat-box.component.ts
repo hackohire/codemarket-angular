@@ -1,6 +1,7 @@
-import { Component, OnInit, Input, AfterViewInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input, AfterViewChecked, EventEmitter, Output, ViewChild, ElementRef } from '@angular/core';
 import { ChatService } from '../../services/chat.service';
-const Chat = require('twilio-chat');
+import * as Chat from 'twilio-chat';
+import moment from 'moment';
 
 @Component({
   selector: 'app-chat-box',
@@ -8,15 +9,18 @@ const Chat = require('twilio-chat');
   styleUrls: ['./chat-box.component.scss']
 })
 export class ChatBoxComponent implements OnInit {
- 
+
   @Input() loggedInUserId;
   @Input() postDetails;
+  @ViewChild('scrollMe', { static: false }) private myScrollContainer: ElementRef;
 
   public commentsList = [];
-  public username:string = '';
+  public username: string = '';
   public chatToken: string = '';
   public channelName: string = "";
   public channelStatus: string = "";
+  public disableScrollDown = false  
+
   chatClient: any;
   generalChannel: any;
   public msg: any;
@@ -61,8 +65,6 @@ export class ChatBoxComponent implements OnInit {
   }
 
   setupChannel() {
-    // Join the general channel
-    // if (this.generalChannel.state.status !== 'joined') {
     if (this.channelStatus !== 'joined') {
       this.generalChannel.join().then(channel => {
         if (channel.state.status === 'joined') {
@@ -83,6 +85,7 @@ export class ChatBoxComponent implements OnInit {
         if (this.commentsList.length > 0) {
           this.generalChannel.updateLastConsumedMessageIndex(this.commentsList[this.commentsList.length - 1].index).then((data) => {
           });
+          this.scrollToBottom();
         }
       });
     }
@@ -91,6 +94,7 @@ export class ChatBoxComponent implements OnInit {
     this.generalChannel.on('messageAdded', message => {
       this.commentsList.push(message);
       if (this.commentsList.length > 0) {
+        console.log(this.commentsList);
         this.generalChannel.updateLastConsumedMessageIndex(this.commentsList[this.commentsList.length - 1].index).then((data) => {
         });
       }
@@ -99,11 +103,26 @@ export class ChatBoxComponent implements OnInit {
 
   sendMsg() {
     if (this.generalChannel.members.size === 1) {
-      // this.sendNotificationForChat();
+      // Send Notification
     }
     if (this.msg !== '' && this.msg !== undefined && this.msg.trim() !== '') {
       this.generalChannel.sendMessage(this.msg);
       this.msg = '';
+      this.scrollToBottom();
     }
+  }
+
+  getFormatedDate(datetime) {
+    if (moment().format('DD MMM YYYY') === moment(datetime).format('DD MMM YYYY')) {
+      return moment(datetime).format('hh:mm A');
+    } else {
+      return moment(datetime).format('hh:mm A') + ' ' + moment(datetime).format('DD MMM YYYY');
+    }
+  }
+
+  scrollToBottom() {
+    try {
+      this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
+    } catch (err) { }
   }
 }

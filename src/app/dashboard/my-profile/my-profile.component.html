@@ -46,7 +46,7 @@
 							<div class="controls" *ngIf="user?._id === authService?.loggedInUser?._id">
 								<a mat-button style="background-color: #ff00007a;" (click)="removeCover(user?._id);"
 									class="save">Remove</a>
-								<a mat-button style="background-color: #0674ec" *ngIf="!user?.cover"
+								<a mat-button style="background-color: #00aeef" *ngIf="!user?.cover"
 									(click)="updateCover(user?._id)" class="save">Upload
 									Cover</a>
 							</div>
@@ -67,7 +67,7 @@
 
 				<!-- start aside -->
 				<div class="col-md-2">
-					<!-- <app-add-post-menu style="color: #0674ec !important; margin-left: auto;">
+					<!-- <app-add-post-menu style="color: #00aeef !important; margin-left: auto;">
 					</app-add-post-menu> -->
 					<app-post-type-nav [customTabs]="authService?.loggedInUser && authService?.loggedInUser?._id == authorId ? customTabs : []" [selectedPostType]="profileView" (postTypeClick)="$event?.isCustom ? fetchBasedOnCustomTab($event) : selectMainCategory($event?.name);"
 						(plusButtonClick)="redirectToAddPost($event)"></app-post-type-nav>

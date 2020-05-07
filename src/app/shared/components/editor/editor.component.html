@@ -157,7 +157,7 @@
                             <a style="text-align: right; padding: 0 8px; text-decoration: none;" *ngIf="!b?.__show;"
                                 mat-button
                                 (click)="b['__show'] = true; showComments.emit({block: b, comments: of(commentsList)}); selectedBlockIndex > -1 ? data[selectedBlockIndex]['__show'] = false : null; selectedBlockIndex = i">
-                                <i [style.color]=" commentsList && commentsList?.length && numberOfComments(b?._id) > 0 ? '#0674ec' : ''"
+                                <i [style.color]=" commentsList && commentsList?.length && numberOfComments(b?._id) > 0 ? '#00aeef' : ''"
                                     style="font-size: 1.3rem !important; font-style: normal;"
                                     [ngClass]="'fad fa-comments-alt fa-lg'"></i>
                                 <span>{{' ('}} {{ commentsList && commentsList?.length ? numberOfComments(b?._id) : 0}}
@@ -165,7 +165,7 @@
                             </a>
                             <a style="padding: 0 8px; text-decoration: none;" *ngIf="b?.__show" mat-button
                                 (click)="b.__show = false; showComments.emit({block: null, comments: null});">
-                                <i [style.color]="commentsList && commentsList?.length && numberOfComments(b?._id) > 0 ? '#0674ec' : ''"
+                                <i [style.color]="commentsList && commentsList?.length && numberOfComments(b?._id) > 0 ? '#00aeef' : ''"
                                     style="font-size: 1.3rem !important; font-style: normal;"
                                     [ngClass]="'fad fa-chevron-circle-' + ((isHandset) ? 'up' : 'right') + ' fa-lg'"></i>
                                 <span>{{' ('}} {{ commentsList && commentsList?.length ? numberOfComments(b?._id) : 0}}

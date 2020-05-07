@@ -20,24 +20,24 @@
                             [postDetails]="postDetails"></app-add-assignee>
 
                         <a *ngIf="showImportButton" class="btn btn--vsm btn--round menu"
-                            style="color: #0674ec !important; background: white;" [mdePopoverTriggerFor]="importArticle"
+                            style="color: #00aeef !important; background: white;" [mdePopoverTriggerFor]="importArticle"
                             mdePopoverTriggerOn="click">Import
                         </a>
                         <!--
-                            <app-add-post-menu style="color: #0674ec !important; margin-left: auto;"></app-add-post-menu>
+                            <app-add-post-menu style="color: #00aeef !important; margin-left: auto;"></app-add-post-menu>
                             -->
                         <a *ngIf="showEditPostDetails" class="btn btn--vsm btn--round menu"
-                            style="color: #0674ec !important; background: white; margin-right: 5px;"
+                            style="color: #00aeef !important; background: white; margin-right: 5px;"
                             (click)="editPost.emit()">Edit <mat-icon style="vertical-align: middle;">edit</mat-icon>
                         </a>
                         <!--
                         <a *ngIf="postDetails?.type === 'event'" class="btn btn--sm btn--round menu"
-                            style="color: #0674ec !important; background: white;"
+                            style="color: #00aeef !important; background: white;"
                             [routerLink]="['/', 'event', 'add-event']">Add Event <mat-icon
                                 style="vertical-align: middle;">add</mat-icon>
                         </a>
                         <a *ngIf="companyDetails" class="btn btn--sm btn--round menu"
-                            style="color: #0674ec !important; background: white;"
+                            style="color: #00aeef !important; background: white;"
                             [state]="{companyDetails: companyDetails}" [routerLink]="['/', 'event', 'add-event']">Add
                             Event <mat-icon style="vertical-align: middle;">add</mat-icon>
                         </a>
@@ -291,7 +291,7 @@
         <mat-icon (click)="import()">send</mat-icon>
     </div>
     <!-- <a class="btn btn--sm btn--round menu" (click)="import()"
-        style="color: #0674ec !important; background: white; float: right;">Ok
+        style="color: #00aeef !important; background: white; float: right;">Ok
     </a> -->
 </mde-popover>
 

@@ -61,8 +61,12 @@
 // }
 
 .brand-logo {
-  padding: 11px 0;
-  max-width: 240px;
+  padding: 11px 0 12px;
+  max-width: 220px;
+}
+
+.btn {
+  box-shadow: none !important;
 }
 
 @media (min-width: 991px) {
@@ -112,7 +116,7 @@
   }
   .brand-logo {
     max-width: 55%;
-    margin-right: 5%;
+    margin-right: 7%;
   }
 }
 

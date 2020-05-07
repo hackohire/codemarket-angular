@@ -18,12 +18,14 @@ export class SignInComponent {
 
   signinForm: FormGroup = new FormGroup({
     email: new FormControl('', [ Validators.email, Validators.required ]),
+    phone: new FormControl('', [ Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$") ,Validators.required ]),
     password: new FormControl('', [ Validators.required, Validators.minLength(6) ])
   });
 
   hide = true;
 
   get emailInput() { return this.signinForm.get('email'); }
+  get phoneInput() { return this.signinForm.get('phone'); }
   get passwordInput() { return this.signinForm.get('password'); }
 
   constructor(
@@ -44,6 +46,7 @@ export class SignInComponent {
           this._loader.show();
           environment.confirm.email = this.emailInput.value;
           environment.confirm.password = this.passwordInput.value;
+          environment.confirm.phone = this.phoneInput.value;
           Auth.completeNewPassword(user, environment.confirm.password, {
             email: environment.confirm.email,
           }).then(a => {
@@ -63,6 +66,7 @@ export class SignInComponent {
           case 'UserNotConfirmedException':
             environment.confirm.email = this.emailInput.value;
             environment.confirm.password = this.passwordInput.value;
+            environment.confirm.phone = this.phoneInput.value;
             this.auth._authState.next({state: 'confirmSignUp'});
             break;
           case 'UsernameExistsException':

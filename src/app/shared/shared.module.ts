@@ -16,6 +16,7 @@ import { DatatableComponent } from './components/datatable/datatable.component';
 import { ShareButtonsModule } from '@ngx-share/buttons';
 import { ShareModule } from '@ngx-share/core';
 import { SafePipe } from './pipes/safe.pipe';
+import { FilterPipe } from './pipes/filter.pipe';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { LikeDislikeComponent } from './components/like-dislike/like-dislike.component';
 import { VideoChatComponent } from '../video-chat/video-chat.component';
@@ -55,6 +56,7 @@ export function hljsLanguages() {
     CommentComponent,
     DatatableComponent,
     SafePipe,
+    FilterPipe,
     LikeDislikeComponent,
     VideoChatComponent,
     AddPostMenuComponent,
@@ -129,6 +131,7 @@ export function hljsLanguages() {
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
     SafePipe,
+    FilterPipe,
     // Ng5SliderModule,
     NgSelectModule,
     MdePopoverModule,

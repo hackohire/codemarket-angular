@@ -28,6 +28,7 @@ export interface NewUser {
   email: string;
   password: string;
   name: string;
+  phone: string
 }
 
 
@@ -163,7 +164,8 @@ export class AuthService {
       password: user.password,
       attributes: {
         email: user.email,
-        name: user.name
+        name: user.name,
+        phone_number: user.phone
       }
     });
   }

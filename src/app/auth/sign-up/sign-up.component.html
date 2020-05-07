@@ -7,6 +7,33 @@
       <input matInput placeholder="Email" type="email" formControlName="email" autocomplete="email" required>
   </mat-form-field>
 
+ 
+
+  <!-- <intl-input-phone [CountryList]="selectedCountryList"  [ConfigurationOption]="configOption1" ></intl-input-phone> -->
+
+  <!-- <mat-form-field class="full-width country-filter">
+    <input matInput [(ngModel)]="searchText" placeholder="Filter Countries">
+  </mat-form-field> -->
+  <!-- <mat-label>Country Code</mat-label> -->
+  <div style="display: flex;">
+    <mat-form-field style="display: flex;">
+      <mat-label>Country Code</mat-label>
+      <mat-select formControlName="countryCode">
+        <mat-option  *ngFor="let code of countryCodes" value="{{code.dial_code}}">{{code.code}} ({{code.dial_code}})</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="field-full-width" appearance="outline" style="display: inline; margin: 0 0 0 20px;">
+      <mat-label>Enter your phone number</mat-label>
+      <input matInput placeholder="Phone" type="number" formControlName="phone" autocomplete="phone" required>
+    </mat-form-field>
+  </div>
+  <!-- <mat-nav-list class="country-list" style="overflow-y: scroll;">
+    <a mat-list-item *ngFor="let code of countryCodes | filter : searchText" (click)="selectCountry(code)">
+      <span mat-line>{{ code.name }}</span>
+      <span mat-line>{{ code.dial_code }}</span>
+    </a>
+  </mat-nav-list> -->
+
   <!-- Name Field -->
   <mat-form-field class="field-full-width" appearance="outline">
       <mat-label>Enter your name</mat-label>

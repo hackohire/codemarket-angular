@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "dhawal": {
+    "codemarket": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -93,21 +93,21 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
             "port": 4800,
-            "browserTarget": "dhawal:build"
+            "browserTarget": "codemarket:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "dhawal:build:production"
+              "browserTarget": "codemarket:build:production"
             },
             "staging": {
-              "browserTarget": "dhawal:build:staging"
+              "browserTarget": "codemarket:build:staging"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "dhawal:build"
+            "browserTarget": "codemarket:build"
           }
         },
         "test": {
@@ -145,14 +145,14 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "dhawal:serve"
+            "devServerTarget": "codemarket:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "dhawal:serve:production"
+              "devServerTarget": "codemarket:serve:production"
             },
             "staging": {
-              "devServerTarget": "dhawal:serve:staging"
+              "devServerTarget": "codemarket:serve:staging"
             }
           }
         },
@@ -195,5 +195,5 @@
       }
     }
   },
-  "defaultProject": "dhawal"
+  "defaultProject": "codemarket"
 }

@@ -48,6 +48,8 @@ import { LoanOfficerFormComponent } from './loan-officer-form/loan-officer-form.
 import { LoanOfficerSubscriberComponent } from './loan-officer-subscriber/loan-officer-subscriber.component';
 import { SuccessStoryComponent } from './success-story/success-story.component';
 import { BlogComponent } from './blog/blog.component';
+import { FormioModule } from 'angular-formio';
+import {FormBuilderModule} from './form-builder/form-builder.module';
 
 // import { SignInComponent } from './core/amplify/sign-in-component';
 
@@ -104,7 +106,9 @@ import { BlogComponent } from './blog/blog.component';
     BrowserAnimationsModule,
     LayoutModule,
     AuthModule,
-    MakemoneyonlineModule
+    MakemoneyonlineModule,
+    FormioModule,
+    FormBuilderModule
   ],
   providers: [PostDataResolver],
   bootstrap: [AppComponent],

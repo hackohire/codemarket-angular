@@ -23,7 +23,6 @@ import { TransferState, makeStateKey } from '@angular/platform-browser';
 import { MessageService } from '../../shared/services/message.service';
 import { NotificationService } from '../../auth/notification.service';
 import Storage from '@aws-amplify/storage';
-declare var tinymce;
 
 export interface NewUser {
   email: string;
@@ -58,6 +57,7 @@ export class AuthService {
     private _notification: NotificationService
     // private commentService: CommentService
   ) {
+
     this.loggedInUser$ = this.store.select(selectLoggedInUser);
     this.loggedInUser$.subscribe((u) => this.loggedInUser = u);
 

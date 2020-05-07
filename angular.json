@@ -30,12 +30,7 @@
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "./node_modules/ngx-toastr/toastr.css",
-              "src/styles.scss",
-              "src/assets/css/_general.scss",
-              "src/assets/css/_theme.scss",
-              "src/assets/css/_product.scss",
-              "src/assets/css/_responsive.scss",
-              "src/assets/css/_btn.scss"
+              "src/styles.scss"
             ],
             "scripts": [
               "./node_modules/jquery/dist/jquery.min.js",

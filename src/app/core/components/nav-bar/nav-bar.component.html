@@ -1,13 +1,13 @@
 <mat-sidenav-container class="sidenav-container">
-
+<!--
   <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'main'" [opened]="(isHandset$ | async) === false">
     <mat-toolbar style="height: 48px; font-size: 14px; font-weight: 400; letter-spacing: 4px; text-transform: uppercase; color: #999; background: #eee;">navigation</mat-toolbar>
 
     <!-- Sidebar Navigation List Item -->
-    <mat-nav-list>
+    <!--<mat-nav-list>
       <!-- Dashboard -->
-      <a mat-list-item [routerLink]="['/', 'dashboard']">Dashboard</a>
+      <!--<a mat-list-item [routerLink]="['/', 'dashboard']">Dashboard</a>
 
       <a mat-list-item [routerLink]="['/', 'user', 'edit-profile']">Edit Profile</a>
 
@@ -17,11 +17,11 @@
 
       <a mat-list-item [routerLink]="['/', 'company', 'company-list']" [queryParams]="{all: false}">My Companies</a>
     </mat-nav-list>
-  </mat-sidenav>p
+  </mat-sidenav>
+-->
 
   <mat-sidenav-content>
-    <mat-toolbar style="background-color: #555; width: 250px; border-radius: 0 0 10px 10px; height: 48px; position: fixed;  z-index: 12; left: calc(50% - 125px); padding: 0;">
-
+    <mat-toolbar class="SearchLoginBox">
 
       <!-- <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'add-post-type']">
         <i style="font-size: 1.0rem !important; color: #ffff00;" class="vertical-align-middle fal fa-add fa-fw"></i>
@@ -66,9 +66,6 @@
           </span>
         </a>
       </button>
-      <div style="float: right">
-
-      </div>
       <mat-menu #userMenu="matMenu" panelClass="menu-width">
         <div class="menu-width">
           <!-- Shopping Cart -->
@@ -88,7 +85,7 @@
 
     </mat-toolbar>
 
-    <mat-toolbar>
+    <mat-toolbar class="NavBarBox">
 
       <!-- Toggle Sidebar Button -->
       <button *ngIf="false" type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
@@ -99,9 +96,9 @@
       <!-- <img (click)="redirect()" sizes="(max-width: 282px) 100vw, 282px"
         srcset="../../../../assets/images/logo_qugbvk_c_scalew_200.png 200w, ../../../../assets/images/logo_qugbvk_c_scalew_282.png 282w"
         src="../../../../assets/images/logo_qugbvk_c_scalew_282.png" alt=""> -->
-      <img (click)="redirect()" src="../../../../assets/images/logo.png" height="48px" >
+      <img (click)="redirect()" src="../../../../assets/images/CodemarketSVG.svg" class="brand-logo" >
       <!-- <h2 [routerLink]="['/']">Codemarket</h2> -->
-
+      
       <!-- End Items -->
       <div fxFlex></div>
 
@@ -117,21 +114,8 @@
           *ngIf="isUnread((messageService.messagesList$ | async)?.messages)"></span>
       </div> -->
 
-
-      <a mat-button routerLinkActive="mat-primary" style="padding: 0;">
-        <!-- <i style="font-size: 1.0rem !important;" class="vertical-align-middle fal fa-building fa-fw"></i> -->
-        <style>
-          a.btn.btn--sm.btn--round.menu.mat-menu-trigger {
-              line-height: 32px;
-              padding: 0 5px 0 10px;
-              vertical-align: super;
-              margin-top: 7px;
-          }
-        </style>
-        <!-- <div class="line-height-initial" > Create Goals </div> -->
-        <app-add-post-menu [label]="'Create'" [class]="'btn-floating'">
-        </app-add-post-menu>
-      </a>
+      <app-add-post-menu [label]="'Create'">
+      </app-add-post-menu>
 
       <!-- <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'company', 'add-company']">
         <div class="line-height-initial"> Sales Accelerator </div>
@@ -146,14 +130,12 @@
       <!-- <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'company', 'company-list']" [queryParams]="{all: true}">
         <div class="line-height-initial"> Businesses </div>
       </a> -->
-      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'about-us']" [queryParams]="{all: true}" style="margin-left:5px; padding: 8px 16px;">
+      <!-- <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'about-us']" [queryParams]="{all: true}" style="margin-left:5px; padding: 8px 16px;">
         <div class="line-height-initial"> About </div>
       </a>
       <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'membership']" [queryParams]="{all: true}" style="margin-left:5px; padding: 8px 16px;">
         <div class="line-height-initial"> Membership </div>
-      </a>
-
-
+      </a> -->
 
     </mat-toolbar>
 
@@ -174,7 +156,7 @@
             </div>
             <!-- Grid column -->
 
-            <hr class="w-100 clearfix d-md-none">
+            <hr class="w-100 clearfix d-md-none border-0">
 
             <!-- Grid column 
             <div class="col-md-2 col-lg-2 col-xl-2 mt-3">
@@ -214,7 +196,7 @@
             </div>-->
 
             <!-- Grid column -->
-            <hr class="w-100 clearfix d-md-none">
+            <hr class="w-100 clearfix d-md-none border-0">
 
             <!-- Grid column -->
             <div class="col-md-4 col-lg-3 col-xl-3 mx-auto">

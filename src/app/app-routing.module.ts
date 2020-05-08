@@ -38,6 +38,7 @@ import { LoanOfficerFormComponent } from './loan-officer-form/loan-officer-form.
 import { LoanOfficerSubscriberComponent } from './loan-officer-subscriber/loan-officer-subscriber.component';
 import { SuccessStoryComponent } from './success-story/success-story.component';
 import { BlogComponent } from './blog/blog.component';
+import { ProgramlistComponent } from './programlist/programlist.component';
 // import { PostDataResolver } from './core/resolver';
 
 const routes: Routes = [
@@ -313,6 +314,10 @@ const routes: Routes = [
   {
     path: 'blog',
     component: BlogComponent
+  },
+  {
+    path: 'program-list',
+    component: ProgramlistComponent
   }
 
 

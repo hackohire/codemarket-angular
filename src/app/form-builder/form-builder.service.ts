@@ -106,5 +106,25 @@ export class FormBuilderService {
     );
   }
 
+  fetchFormStructureById(formId: string): Observable<any> {
+    return this.apollo.query({
+      query: gql`
+        query fetchFormStructureById($formId: String) {
+          fetchFormStructureById(formId: $formId){
+            _id
+            formname
+            formStructureJSON
+            createdAt
+            updatedAt
+          }
+        }
+      `,
+      variables: {
+        formId
+      }
+    }).pipe(
+      map((q: any) => q.data.fetchFormStructureById)
+    );
+  }
 
 }

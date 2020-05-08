@@ -33,6 +33,7 @@
               "src/styles.scss"
             ],
             "scripts": [
+              "./node_modules/@webcomponents/custom-elements/src/native-shim.js",
               "./node_modules/jquery/dist/jquery.min.js",
               "./node_modules/bootstrap/dist/js/bootstrap.min.js",
               "./node_modules/peerjs/dist/peerjs.min.js"

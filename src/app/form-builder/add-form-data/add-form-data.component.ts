@@ -37,9 +37,9 @@ export class AddFormDataComponent implements OnInit {
       title: 'Fill Form Data',
     };
 
-    this.formJsonListSubscription = this.formBuilderService.fetchformJson().subscribe((formJsonlist) => {
-      if (formJsonlist && formJsonlist.length) {
-        this.form1 = formJsonlist.find(form => form._id === this.connectedFormStructureId).formStructureJSON;
+    this.formJsonListSubscription = this.formBuilderService.fetchFormStructureById(this.connectedFormStructureId).subscribe((form) => {
+      if (form) {
+        this.form1 = form.formStructureJSON;
       }
       this.formDetailsInitialization(null);
     });

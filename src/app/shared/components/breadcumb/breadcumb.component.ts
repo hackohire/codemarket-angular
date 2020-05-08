@@ -1,7 +1,8 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, AfterViewInit } from '@angular/core';
 import { Post } from '../../models/post.model';
 import { Company } from '../../models/company.model';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl, Validators, FormGroup } from '@angular/forms';
+import { PostStatus } from '../../../shared/models/poststatus.enum';
 import { environment } from '../../../../environments/environment';
 import { PostService } from '../../services/post.service';
 import { SearchComponent } from 'src/app/core/components/search/search.component';
@@ -30,14 +31,27 @@ export class BreadcumbComponent implements OnInit {
   @Input() showAddAssignee: boolean;
   @Input() showAddClients: boolean;
   @Input() showShareButtons: boolean;
+  @Input() fromAddPost = false;
+  @Input() postForm: FormGroup;
 
   @Output() editPost = new EventEmitter();
 
+  @Output() addPostData = new EventEmitter();
+
   articleLink = new FormControl('', Validators.required);
 
-  postTitle;
+  postTitle = '';
 
   displaySave = false;
+
+  public emptyPostForm: FormGroup;
+
+  public name; 
+
+  @ViewChild(MdePopoverTrigger, {static: false}) addTagsPopover: MdePopoverTrigger;
+  @ViewChild(MdePopoverTrigger, {static: false}) addCopmaniesPopover: MdePopoverTrigger;
+  @ViewChild(MdePopoverTrigger, {static: false}) addClientsPopover: MdePopoverTrigger;
+  @ViewChild(MdePopoverTrigger, {static: false}) addCollaboratorsPopover: MdePopoverTrigger;
 
   anonymousAvatar = '../../../../assets/images/anonymous-avatar.jpg';
   s3FilesBucketURL = environment.s3FilesBucketURL;
@@ -65,6 +79,7 @@ export class BreadcumbComponent implements OnInit {
   onContentChange(event:any) {
     let a = document.getElementById('test').innerHTML;
     this.postTitle = a;
+    this.postForm.get('name').setValue(this.postTitle.replace(/\&nbsp;/g, ''));
   }
 
   myFunction() {
@@ -73,7 +88,7 @@ export class BreadcumbComponent implements OnInit {
       name: this.postTitle
     };
     
-    if (this.title !== this.postTitle.replace(/\&nbsp;/g, '')) {
+    if (this.title !== this.postTitle.replace(/\&nbsp;/g, '') && this.postTitle.replace(/\&nbsp;/g, '') !== '') {
       this.displaySave = true;
       this.postService.updatePost(
         postObj,
@@ -85,5 +100,70 @@ export class BreadcumbComponent implements OnInit {
         }
       });
     }
+  }
+
+  addDataOfPost(data) {
+    const postObj = {
+      _id: this.postDetails._id,
+    };
+    if (data === 'tags') {
+      postObj['tags'] = this.postForm.controls.tags.value;
+      this.postService.updatePost(
+        postObj,
+        { name: this.authService.loggedInUser.name, _id: this.authService.loggedInUser._id }
+      ).subscribe((j) => {
+        if (j) {
+          this.postDetails.tags = j.tags;
+          this.addTagsPopover.closePopover();
+        }
+      });
+    }
+
+    if (data === 'companies') {
+      postObj['companies'] = this.postForm.controls.companies.value;
+      this.postService.updatePost(
+        postObj,
+        { name: this.authService.loggedInUser.name, _id: this.authService.loggedInUser._id }
+      ).subscribe((j) => {
+        if (j) {
+          this.postDetails.companies = j.companies;
+          this.addCopmaniesPopover.closePopover();
+        }
+      });
+    }
+
+    if (data === 'clients') {
+      postObj['clients'] = this.postForm.controls.clients.value;
+      this.postService.updatePost(
+        postObj,
+        { name: this.authService.loggedInUser.name, _id: this.authService.loggedInUser._id }
+      ).subscribe((j) => {
+        if (j) {
+          this.postDetails.clients = j.clients;
+          this.addClientsPopover.closePopover();
+        }
+      });
+    }
+
+    if (data === 'collaborators') {
+      postObj['collaborators'] = this.postForm.controls.collaborators.value;
+      this.postService.updatePost(
+        postObj,
+        { name: this.authService.loggedInUser.name, _id: this.authService.loggedInUser._id }
+      ).subscribe((j) => {
+        if (j) {
+          this.postDetails.collaborators = j.collaborators;
+          this.addCollaboratorsPopover.closePopover();
+        }
+      });
+    }
+  }
+
+  displayData(data) {
+    this.addPostData.emit(this.postForm.value);
+  }
+
+  doNothing() {
+    console.log("Do nothing called  ");
   }
 }

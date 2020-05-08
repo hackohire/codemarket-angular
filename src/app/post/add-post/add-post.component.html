@@ -1,19 +1,19 @@
-<app-breadcumb [path]="breadcumb?.path" [postDetails]="{ connectedPosts: editPostDetails ? editPostDetails?.connectedPosts : postFromRoute ? [postFromRoute] : []}" [showImportButton]="true"
-    [title]="breadcumb?.title">
+<app-breadcumb [path]="breadcumb?.path" [postDetails]="{ connectedPosts: editPostDetails ? editPostDetails?.connectedPosts : postFromRoute ? [postFromRoute] : [], tags: postForm?.get('tags')?.value, clients: postForm?.get('clients')?.value, collaborators: postForm?.get('collaborators')?.value, companies: postForm?.get('companies')?.value, name: postForm?.get('name')?.value}" [showImportButton]="true" [fromAddPost]="true"
+    [title]="postTitle" (addPostData)="recieveEvent($event)" [postForm]="postForm">
 </app-breadcumb>
 
 
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <div [formGroup]="postForm" class="add-form-area common-box-shadow">
-                <mat-form-field class="field-full-width">
+            <div [formGroup]="postForm" class="">
+                <!-- <mat-form-field class="field-full-width">
                     <input formControlName="name" matInput placeholder="Title" type="text">
-                </mat-form-field>
+                </mat-form-field> -->
 
                 <br />
 
-                <app-autocomplete [allowToAdd]="false" [autoComplete]="postForm?.get('collaborators')"
+                <!-- <app-autocomplete [allowToAdd]="false" [autoComplete]="postForm?.get('collaborators')"
                     [collection]="'users'" [multiple]="true"
                     [placeholder]="'Select Collaborators'" [type]="" class="field-full-width" matInput>
                 </app-autocomplete>
@@ -28,7 +28,7 @@
                 </app-autocomplete>
 
                 <app-autocomplete [autoComplete]="postForm?.get('tags')" [collection]="'tags'" [multiple]="true"
-                [placeholder]="'Tags'" [type]="'tag'"></app-autocomplete>
+                [placeholder]="'Tags'" [type]="'tag'"></app-autocomplete> -->
                 
                 <!-- <editor [formControlName]="'descriptionHTML'" [apiKey]="tinyMCEApi" [id]="'edit-post-editor'" [init]="{
                   branding: false,

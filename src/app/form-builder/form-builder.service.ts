@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import {FormJson} from '../shared/models/FormJson.model';
 import {FormData} from '../shared/models/FormData.model';
+import {BankFormDataRef} from '../shared/models/bankFormDataRef.model';
+
 
 
 @Injectable({
@@ -80,6 +82,27 @@ export class FormBuilderService {
       }
     }).pipe(
       map((q: any) => q.data.addformData)
+    );
+  }
+
+
+  addBankFormDataRef(bankFormDataRef: any): Observable<BankFormDataRef> {
+    return this.apollo.mutate({
+      mutation: gql`
+        mutation addBankFormDataRef($bankFormDataRef: bankFormDataRefInput) {
+          addBankFormDataRef(bankFormDataRef: $bankFormDataRef) {
+            formname
+            connectedFormStructureId
+            connectedFormDataId
+            companyName
+          }
+        }
+      `,
+      variables: {
+        bankFormDataRef
+      }
+    }).pipe(
+      map((q: any) => q.data.addBankFormDataRef)
     );
   }
 

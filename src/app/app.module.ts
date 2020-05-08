@@ -51,6 +51,8 @@ import { BlogComponent } from './blog/blog.component';
 import { FormioModule } from 'angular-formio';
 import {FormBuilderModule} from './form-builder/form-builder.module';
 import { ProgramlistComponent } from './programlist/programlist.component';
+import { DprComponent, FormDetailsDialog } from './dpr/dpr.component';
+
 
 // import { SignInComponent } from './core/amplify/sign-in-component';
 
@@ -98,7 +100,9 @@ import { ProgramlistComponent } from './programlist/programlist.component';
     SuccessStoryComponent,
     BlogComponent,
     DialogOverviewExampleDialog,
-    ProgramlistComponent
+    ProgramlistComponent,
+    DprComponent,
+    FormDetailsDialog
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -115,6 +119,6 @@ import { ProgramlistComponent } from './programlist/programlist.component';
   ],
   providers: [PostDataResolver],
   bootstrap: [AppComponent],
-  entryComponents: [LoaderComponent,DialogOverviewExampleDialog]
+  entryComponents: [LoaderComponent,DialogOverviewExampleDialog,FormDetailsDialog]
 })
 export class AppModule {}

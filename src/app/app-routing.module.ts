@@ -39,6 +39,7 @@ import { LoanOfficerSubscriberComponent } from './loan-officer-subscriber/loan-o
 import { SuccessStoryComponent } from './success-story/success-story.component';
 import { BlogComponent } from './blog/blog.component';
 import { ProgramlistComponent } from './programlist/programlist.component';
+import { DprComponent } from './dpr/dpr.component';
 // import { PostDataResolver } from './core/resolver';
 
 const routes: Routes = [
@@ -167,6 +168,10 @@ const routes: Routes = [
   {
     path: 'help-business-grow',
     loadChildren: () => import('./help-business-grow/help-business-grow.module').then(module => module.HelpBusinessGrowModule),
+  },
+  {
+    path: 'dpr/:companyName',
+    component: DprComponent
   },
   {
     path: 'about-us',

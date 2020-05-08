@@ -56,7 +56,7 @@ export class AddFormDataComponent implements OnInit {
       })
     ).subscribe((d: any) => {
       if (d) {
-        Swal.fire(`${d.formname} has been Added Successfully`, '', 'success').then(() => {
+        Swal.fire(`${d.formname} has been Added Successfully  ${d._id}` , '', 'success').then(() => {
           this.formBuilderService.redirectToBack(d._id);
         });
       }

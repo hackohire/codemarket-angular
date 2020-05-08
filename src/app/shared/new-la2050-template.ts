@@ -1,23 +1,23 @@
-export const la2050 = `<html>
+export const newla2050 = `<html>
 
 <head>
     <link href="https://fonts.googleapis.com/css?family=Montserrat:100" rel="stylesheet" />
     <style>
         p {
-            font-family: monospace;
+            font-family: Calibri;
             text-align: left;
             font-size: 15px;
         }
 
         strong {
-            font-family: monospace;
+            font-family: Calibri;
             text-align: left;
             font-size: 20px;
         }
     </style>
 </head>
 
-<body style="font-family: monospace;">
+<body style="font-family: Calibri;">
     <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tbody>
             <tr>
@@ -38,7 +38,7 @@ export const la2050 = `<html>
                       border-color: #222222;
                     ">
                                     <table width="100%" cellpadding="0" cellspacing="0" border="0"
-                                        style="max-width: 600px; border: 1px solid;">
+                                        style="max-width: 600px;>
                                         <tbody>
                                             <tr>
                                                 <td align="center" style="background-color: transparent;">
@@ -51,36 +51,28 @@ export const la2050 = `<html>
                                                                         <tbody>
                                                                             <tr>
                                                                                 <td>
-                                                                                <div style="text-align: center;">
-                                                                                <a href="https://www.codemarket.io/makemoneyonline">
-                                                                                <img
-                                                                                    src="https://www.codemarket.io/assets/images/logo.png" />
-                                                                                </a>
-                                                                                </div>
                                                                                     <br>
-                                                                                    <h3 style="font-size: 18px; color: #3c3950;">
-                                                                                        Dear {name},
-                                                                                    </h3>
-
                                                                                     <p>
-                                                                                    Los Angeles vs. San Francisco is a contest between businesses in Los Angeles and busiensses in San Francisco to drive economic innovation to rebuild  prosperous communities.
+                                                                                        Hi,
                                                                                     </p>
 
                                                                                     <p>
-                                                                                    Are you a business in need of help to grow your online sales or a professional in need of help launch your online business?
+                                                                                    Your proposal on LA2050 "{proposalName}" is amazing.
+                                                                                    </p>
+
+                                                                                    <p>
+                                                                                    I would love to help you with online community building around your proposal.
                                                                                     </p>
                                                                                     <p>
-                                                                                        Reserve your spot by clicking on <a href="https://www.codemarket.io/help-business-grow?email={email}" target="_blank">this link </a>
+                                                                                    Do you know who would be a good person on your team to dicuss about this?
                                                                                     </p>
                                                                                     <div style="line-height: 9px; padding-top: 10px;">
                                                                                     <p>Sumithra Devi</p>
-                                                                                        <p><a
-                                                                                                href="https://us04web.zoom.us/j/3765532935">Zoom</a>
+                                                                                    <p><a href="https://www.codemarket.io">Codemarket</a></p>
+                                                                                    <p><a
+                                                                                                href="https://us02web.zoom.us/j/3765532935">Zoom</a>
                                                                                         </p>
                                                                                         <p>805-300-7217</p>
-                                                                                        <p>sumi@codemarket.io</p>
-                                                                                        <p>CEO & Founder</p>
-                                                                                        <p><a href="https://codemarket.io">Codemarket</a></p>
                                                                                     </div>
 
 

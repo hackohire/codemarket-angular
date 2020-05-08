@@ -22,6 +22,7 @@ import { emailTemplate } from '../../../shared/email-template';
 import { allBinEmailTemplate } from '../../../shared/all-bni-email-template';
 import { droEmailTemplate } from '../../../shared/dro-email-template';
 import { la2050 } from '../../../shared/la2050-template';
+import { newla2050 } from '../../../shared/new-la2050-template';
 
 @Component({
   selector: 'app-nav-bar',
@@ -161,18 +162,17 @@ export class NavBarComponent implements OnInit, OnDestroy {
   sendEmails() {
     let count = 0;
     emails.forEach((e, i) => {
-      console.log(e.firstName)
       setTimeout(() => {
         e.email.forEach((email, j) => {
           setTimeout(() => {
             if (!Validators.email(new FormControl(email))) {
               const emailObj = {
                 to: [email],
-                subject: `${e.firstName} Los Angeles vs. San Francisco`,
+                subject: e.proposalName,
                 companies: [{ _id: '5db1c84ec10c45224c4b95fd' }],
                 type: PostType.Email,
                 status: PostStatus.Published,
-                descriptionHTML: la2050.replace('{name}', e.firstName).replace('{email}', email),
+                descriptionHTML: newla2050.replace('{proposalName}', e.proposalName),
                 createdBy: '5d4c1cdf91e63a3fe84bb43a',
                 campaignId: '5eb01f437dbc34330797a131'
               };

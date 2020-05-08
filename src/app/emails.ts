@@ -16,13 +16,17 @@ export const emails = [
     firstName: 'Jay',
     // companyName: 'Company Name',
     // BNIName: 'BNI NAME',
+    "OrganizatinName": "Social and Environmental Entrepreneurs",
+    "proposalName": "Bringing LA's Green New Deal to Our Neighborhoods",
     link: 'www.youtube.com',
-    email: ['jaysojitra13@gmail.com']
+    "email": ['jaysojitra13@gmail.com']
   },
   // {
   //   name: 'Sumi Devi',
   //   // companyName: 'Company Name',
   //   // BNIName: 'BNI NAME',
+  //   "OrganizatinName": "Social and Environmental Entrepreneurs",
+  //   "proposalName": "Bringing LA's Green New Deal to Our Neighborhoods",
   //   link: 'www.youtube.com',
   //   email: ['sumi@codemarket.io']
   // },
@@ -31,6 +35,8 @@ export const emails = [
   //   firstName: 'Sumit',
   //   // companyName: 'Company Name',
   //   // BNIName: 'BNI NAME',
+  //   "OrganizatinName": "Social and Environmental Entrepreneurs",
+  //   "proposalName": "Bringing LA's Green New Deal to Our Neighborhoods",
   //   link: 'www.youtube.com',
   //   email: ['sumitvekariya7@gmail.com']
   // },
@@ -18035,5 +18041,7208 @@ export const droEmails = [
     "email": ["fzweig1@yahoo.com"],
     "name": "Zweig Farrah",
     "status": "Ok"
+  }
+]
+
+export const la2050Emails = [
+  {
+      "_id": "5eb3ef59f03f0116884aa4fc",
+      "OrganizatinName": "Social and Environmental Entrepreneurs",
+      "proposalName": "Bringing LA's Green New Deal to Our Neighborhoods",
+      "email": [
+          {
+              "_id": "5eb3ef59f03f0116884aa4fd",
+              "email": "amber.elton@lacity.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3ef59f03f0116884aa4fe",
+              "email": "trees@ncsa.la",
+              "status": true
+          },
+          {
+              "_id": "5eb3ef59f03f0116884aa501",
+              "email": "councilmember.bonin@lacity.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3ef59f03f0116884aa502",
+              "email": "gary.lee.moore@lacity.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3ef59f03f0116884aa503",
+              "email": "admin@ncsa.emailnb.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3ef59f03f0116884aa504",
+              "email": "kevin.james@lacity.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3ef59f03f0116884aa506",
+              "email": "julie.sauter@lacity.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3ef59f03f0116884aa507",
+              "email": "aura.garcia@lacity.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3ef59f03f0116884aa508",
+              "email": "nancyloum@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3ef59f03f0116884aa50a",
+              "email": "mayor.helpdesk@lacity.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3ef59f03f0116884aa50c",
+              "email": "teresa.villegas@lacity.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3ef59f03f0116884aa50d",
+              "email": "advocacy@ncsa.la",
+              "status": true
+          },
+          {
+              "_id": "5eb3ef59f03f0116884aa50e",
+              "email": "lisahart@ncsa.la",
+              "status": true
+          },
+          {
+              "_id": "5eb3ef59f03f0116884aa50f",
+              "email": "dank@kegel.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3ef59f03f0116884aa510",
+              "email": "paulawaxman@soronc.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3ef59f03f0116884aa511",
+              "email": "adel.hagekhalil@lacity.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3ef59f03f0116884aa512",
+              "email": "robert.vega@lacity.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3ef59f03f0116884aa513",
+              "email": "lisamariehart@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3ef59f03f0116884aa514",
+              "email": "jessia.caloza@lacity.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3ef59f03f0116884aa518",
+              "email": "phil.ganchev@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3ef59f03f0116884aa51b",
+              "email": "fernando.campos@lacity.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3ef59f03f0116884aa51c",
+              "email": "lawngarden@aqmd.gov",
+              "status": true
+          },
+          {
+              "_id": "5eb3ef59f03f0116884aa51f",
+              "email": "shilpa.gupta@lacity.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3ef59f03f0116884aa520",
+              "email": "carolyn.casavan@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3ef59f03f0116884aa522",
+              "email": "info.ncsa@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3ef59f03f0116884aa523",
+              "email": "mike.davis@lacity.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3ef59f03f0116884aa524",
+              "email": "martin.schlageter@lacity.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3ef59f03f0116884aa527",
+              "email": "paul.koretz@lacity.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3f09f6f59871863f229a5",
+      "OrganizatinName": "Vista Del Mar Child and Family Services",
+      "proposalName": "Remote Mental Health Services",
+      "email": []
+  },
+  {
+      "_id": "5eb3f09f6f59871863f229b8",
+      "OrganizatinName": "Southern California Public Radio/KPCC/LAist",
+      "proposalName": "How To New LA",
+      "email": []
+  },
+  {
+      "_id": "5eb3f0aa6f59871863f229bd",
+      "OrganizatinName": "Roots & Wings Institute of Social and Emotional Learning",
+      "proposalName": "The Good Life Academy: Helping LA Teens Get the Support they Need to Live Their Best Life",
+      "email": [
+          {
+              "_id": "5eb3f0aa6f59871863f229be",
+              "email": "drmelissamuller@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3f0aa6f59871863f229c0",
+              "email": "elizabethtoppphd@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3f0aa6f59871863f229c3",
+              "email": "hello@rootsnwings.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3f2276f59871863f229c4",
+      "OrganizatinName": "Peer Health Exchange",
+      "proposalName": "Empowering LA's Youth to Make Healthy Decisions",
+      "email": []
+  },
+  {
+      "_id": "5eb3f22b6f59871863f22a03",
+      "OrganizatinName": "A Place Called Home",
+      "proposalName": "A “Whole Child” Approach to Mental Health and Wellbeing at A Place Called Home",
+      "email": [
+          {
+              "_id": "5eb3f22b6f59871863f22a1f",
+              "email": "info@apch.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f22b6f59871863f22a3b",
+              "email": "hannah@apch.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3f22b6f59871863f22a3f",
+      "OrganizatinName": "Safe Place for Youth, a project of Community Partners",
+      "proposalName": "Safe Pods for Youth",
+      "email": []
+  },
+  {
+      "_id": "5eb3f22b6f59871863f22a5b",
+      "OrganizatinName": "U.S. Green Building Council-Los Angeles",
+      "proposalName": "The LA Healthy Building Alliance",
+      "email": []
+  },
+  {
+      "_id": "5eb3f22b6f59871863f22a60",
+      "OrganizatinName": "The Midnight Mission",
+      "proposalName": "Recovery from Homelessness to Self-Sufficiency",
+      "email": []
+  },
+  {
+      "_id": "5eb3f22b6f59871863f22a85",
+      "OrganizatinName": "Strategic Actions for a Just Economy (SAJE)",
+      "proposalName": "Eviction Prevention Tool, During Coronavirus and Beyond",
+      "email": []
+  },
+  {
+      "_id": "5eb3f2336f59871863f22a97",
+      "OrganizatinName": "ONEgeneration",
+      "proposalName": "ONEgeneration Shared Housing Project",
+      "email": []
+  },
+  {
+      "_id": "5eb3f23b6f59871863f22a9e",
+      "OrganizatinName": "Information and Referral Federation of LA County (DBA 211 LA)",
+      "proposalName": "LA Homeless Resource Portal",
+      "email": [
+          {
+              "_id": "5eb3f23b6f59871863f22aa0",
+              "email": "resourcemailinglist@211la.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f23b6f59871863f22aa1",
+              "email": "events@211la.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3f2416f59871863f22aa2",
+      "OrganizatinName": "Alzheimer's Los Angeles",
+      "proposalName": "ALZ Sucks®: Providing Support for LGBTQ+ People with Alzheimer’s Disease and their Families",
+      "email": []
+  },
+  {
+      "_id": "5eb3f2416f59871863f22aa5",
+      "OrganizatinName": "Abundant Housing LA",
+      "proposalName": "FAIR Plan for Los Angeles",
+      "email": []
+  },
+  {
+      "_id": "5eb3f2416f59871863f22ab9",
+      "OrganizatinName": "The Heart Touch Project",
+      "proposalName": "Filling the gap for non-phamacological interventions for pain management in our current healthcare system",
+      "email": []
+  },
+  {
+      "_id": "5eb3f2416f59871863f22abe",
+      "OrganizatinName": "Los Angeles Room & Board",
+      "proposalName": "Open Spaces",
+      "email": []
+  },
+  {
+      "_id": "5eb3f2446f59871863f22ad5",
+      "OrganizatinName": "Hollywood Food Coalition",
+      "proposalName": "Hollywood Food Coalition \"Food Hub\"",
+      "email": [
+          {
+              "_id": "5eb3f2446f59871863f22ad6",
+              "email": "info@hofoco.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3f2b16f59871863f22ad8",
+      "OrganizatinName": "Social and Environmental Entrepreneurs",
+      "proposalName": "Bringing LA's Green New Deal to Our Neighborhoods",
+      "email": [
+          {
+              "_id": "5eb3f2b16f59871863f22ad9",
+              "email": "shilpa.gupta@lacity.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f2b16f59871863f22ada",
+              "email": "julie.sauter@lacity.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f2b16f59871863f22adb",
+              "email": "paulawaxman@soronc.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f2b16f59871863f22ade",
+              "email": "mike.davis@lacity.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f2b16f59871863f22ae3",
+              "email": "lisamariehart@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3f2b16f59871863f22ae4",
+              "email": "jessia.caloza@lacity.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f2b16f59871863f22ae6",
+              "email": "admin@ncsa.emailnb.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3f2b16f59871863f22ae7",
+              "email": "gary.lee.moore@lacity.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f2b16f59871863f22ae8",
+              "email": "lisahart@ncsa.la",
+              "status": true
+          },
+          {
+              "_id": "5eb3f2b16f59871863f22aea",
+              "email": "info.ncsa@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3f2b16f59871863f22aee",
+              "email": "teresa.villegas@lacity.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f2b16f59871863f22aef",
+              "email": "advocacy@ncsa.la",
+              "status": true
+          },
+          {
+              "_id": "5eb3f2b16f59871863f22af2",
+              "email": "martin.schlageter@lacity.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f2b16f59871863f22af3",
+              "email": "carolyn.casavan@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3f2b16f59871863f22af4",
+              "email": "mayor.helpdesk@lacity.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f2b16f59871863f22af5",
+              "email": "lawngarden@aqmd.gov",
+              "status": true
+          },
+          {
+              "_id": "5eb3f2b16f59871863f22af6",
+              "email": "paul.koretz@lacity.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f2b16f59871863f22af7",
+              "email": "kevin.james@lacity.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f2b16f59871863f22af8",
+              "email": "fernando.campos@lacity.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f2b16f59871863f22afa",
+              "email": "phil.ganchev@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3f2b16f59871863f22afc",
+              "email": "trees@ncsa.la",
+              "status": true
+          },
+          {
+              "_id": "5eb3f2b16f59871863f22afd",
+              "email": "dank@kegel.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3f2b16f59871863f22afe",
+              "email": "nancyloum@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3f2b16f59871863f22aff",
+              "email": "robert.vega@lacity.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f2b16f59871863f22b00",
+              "email": "aura.garcia@lacity.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f2b16f59871863f22b01",
+              "email": "amber.elton@lacity.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f2b16f59871863f22b03",
+              "email": "adel.hagekhalil@lacity.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f2b16f59871863f22b04",
+              "email": "councilmember.bonin@lacity.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3f2c06f59871863f22b05",
+      "OrganizatinName": "Young Invincibles",
+      "proposalName": "Young Adult Food Security Initiative",
+      "email": [
+          {
+              "_id": "5eb3f2c06f59871863f22b07",
+              "email": "tremayne.jackson@younginvincibles.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f2c06f59871863f22b08",
+              "email": "heidi.gider@younginvincibles.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f2c06f59871863f22b09",
+              "email": "allie.aguilera@younginvincibles.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f2c06f59871863f22b0a",
+              "email": "Questions@YoungInvincibles.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f2c06f59871863f22b0c",
+              "email": "sarah.schultz@younginvincibles.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f2c06f59871863f22b0d",
+              "email": "members@younginvincibles.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f2c06f59871863f22b0e",
+              "email": "paydon.miller@younginvincibles.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3f2c06f59871863f22b0f",
+      "OrganizatinName": "San Pedro Meals on Wheels",
+      "proposalName": "Meals on Wheels Does More Than Deliver Food",
+      "email": []
+  },
+  {
+      "_id": "5eb3f2c06f59871863f22b33",
+      "OrganizatinName": "NULL",
+      "proposalName": "Find Your Anchor",
+      "email": []
+  },
+  {
+      "_id": "5eb3f2c56f59871863f22b50",
+      "OrganizatinName": "Esperanza Community Housing Corporation",
+      "proposalName": "Esperanza’s Promotores de Salud (Community Health Promoters)",
+      "email": [
+          {
+              "_id": "5eb3f2c56f59871863f22b51",
+              "email": "ivy@esperanzacommunityhousing.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f2c56f59871863f22b52",
+              "email": "events@esperanzacommunityhousing.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f2c56f59871863f22b53",
+              "email": "info@esperanzacommunityhousing.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3f2c56f59871863f22b54",
+      "OrganizatinName": "Crayon Collection dba Habits Of Waste",
+      "proposalName": "DrinkTap",
+      "email": []
+  },
+  {
+      "_id": "5eb3f2c56f59871863f22b70",
+      "OrganizatinName": "Saban Community Clinic",
+      "proposalName": "Expanding Healthcare Access for All",
+      "email": []
+  },
+  {
+      "_id": "5eb3f2c56f59871863f22b75",
+      "OrganizatinName": "Share Our Strength",
+      "proposalName": "No Kid Hungry California - Breakfast After The Bell",
+      "email": []
+  },
+  {
+      "_id": "5eb3f2c96f59871863f22b7a",
+      "OrganizatinName": "Harvest All Resource Center (HARC)",
+      "proposalName": "The Nia Intentional Living Opportunity Youth Project (NILOY)",
+      "email": []
+  },
+  {
+      "_id": "5eb3f2c96f59871863f22b92",
+      "OrganizatinName": "Neighborhood Housing Services of Los Angeles County",
+      "proposalName": "The Sustainable Communities Initiative",
+      "email": []
+  },
+  {
+      "_id": "5eb3f2cd6f59871863f22b97",
+      "OrganizatinName": "LA Forward",
+      "proposalName": "LA Forward’s Response to the COVID-19 Pandemic",
+      "email": [
+          {
+              "_id": "5eb3f2cd6f59871863f22b98",
+              "email": "press@actblue.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3f2cd6f59871863f22b9a",
+              "email": "support@actblue.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3f2cd6f59871863f22b9b",
+              "email": "info@actblue.com",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3f2eb6f59871863f22b9c",
+      "OrganizatinName": "Move LA, a project of Community Partners",
+      "proposalName": "Boulevards of Opportunity for Affordable Housing",
+      "email": []
+  },
+  {
+      "_id": "5eb3f2ee6f59871863f22ba3",
+      "OrganizatinName": "Golden State Opportunity",
+      "proposalName": "Helping Angelenos Access Services and Thrive",
+      "email": [
+          {
+              "_id": "5eb3f2ee6f59871863f22ba4",
+              "email": "press@actblue.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3f2ee6f59871863f22ba6",
+              "email": "support@actblue.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3f2ee6f59871863f22ba7",
+              "email": "info@actblue.com",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3f2f16f59871863f22ba8",
+      "OrganizatinName": "United Parents and Students",
+      "proposalName": "United Parents and Students: Strengthening Access to High-Quality Supermarkets in Low-Income Communities Across Los Angeles",
+      "email": []
+  },
+  {
+      "_id": "5eb3f2f16f59871863f22bb3",
+      "OrganizatinName": "L.A. Compost",
+      "proposalName": "Community Scale Composting across L.A County",
+      "email": []
+  },
+  {
+      "_id": "5eb3f2f16f59871863f22bca",
+      "OrganizatinName": "International Association for Human Values",
+      "proposalName": "Nonviolence Ambassadors of LA",
+      "email": []
+  },
+  {
+      "_id": "5eb3f2f36f59871863f22bcf",
+      "OrganizatinName": "Huarache Farms LLC",
+      "proposalName": "Huarache Farms: Building Transparent Cooperative Backyard Farms",
+      "email": [
+          {
+              "_id": "5eb3f2f36f59871863f22bd0",
+              "email": "huarachefarms@gmail.com",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3f3016f59871863f22bd2",
+      "OrganizatinName": "The Urban Homestead",
+      "proposalName": "The Urban Homestead Radio Podcast",
+      "email": [
+          {
+              "_id": "5eb3f3016f59871863f22bd4",
+              "email": "jordanne@urbanhomestead.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f3016f59871863f22bd5",
+              "email": "anais@urbanhomestead.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f3016f59871863f22bd7",
+              "email": "info@urbanhomestead.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f3016f59871863f22bd8",
+              "email": "justin@urbanhomestead.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3f30d6f59871863f22bd9",
+      "OrganizatinName": "The SeaChange Agency",
+      "proposalName": "Stand Up for the Ocean",
+      "email": []
+  },
+  {
+      "_id": "5eb3f31c6f59871863f22bdc",
+      "OrganizatinName": "Novus Think Tank",
+      "proposalName": "BYOM - Bring Your Own Mug",
+      "email": [
+          {
+              "_id": "5eb3f31c6f59871863f22bdd",
+              "email": "rojasort@usc.edu",
+              "status": true
+          },
+          {
+              "_id": "5eb3f31c6f59871863f22bde",
+              "email": "igilles@usc.edu",
+              "status": true
+          },
+          {
+              "_id": "5eb3f31c6f59871863f22bdf",
+              "email": "novusthinktank@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3f31c6f59871863f22be0",
+              "email": "bhargavs@usc.edu",
+              "status": true
+          },
+          {
+              "_id": "5eb3f31c6f59871863f22be1",
+              "email": "ecarrera@usc.edu",
+              "status": true
+          },
+          {
+              "_id": "5eb3f31c6f59871863f22be2",
+              "email": "garganub@usc.edu",
+              "status": true
+          },
+          {
+              "_id": "5eb3f31c6f59871863f22be3",
+              "email": "amauro@usc.edu",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3f32c6f59871863f22be4",
+      "OrganizatinName": "Kingdom Causes Bellflower",
+      "proposalName": "A place to live, a place to work, a place to belong.",
+      "email": [
+          {
+              "_id": "5eb3f32c6f59871863f22be6",
+              "email": "admin@kcbellflower.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f32c6f59871863f22be7",
+              "email": "tpheifer@kcbellflower.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3f3316f59871863f22be9",
+      "OrganizatinName": "The GroundTruth Project, home of Report for America",
+      "proposalName": "Report for Los Angeles",
+      "email": [
+          {
+              "_id": "5eb3f3316f59871863f22bf4",
+              "email": "info@reportforamerica.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f3316f59871863f22bf7",
+              "email": "lmckown@thegroundtruthproject.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3f33c6f59871863f22bfd",
+      "OrganizatinName": "LIFT-Los Angeles",
+      "proposalName": "LIFT’s Family Goal Fund: Moving Money into the Hands of Families who Need it Most",
+      "email": []
+  },
+  {
+      "_id": "5eb3f33c6f59871863f22c00",
+      "OrganizatinName": "Safe Parking LA, a Project of Community Partners",
+      "proposalName": "Neighbors for Home",
+      "email": []
+  },
+  {
+      "_id": "5eb3f33f6f59871863f22c05",
+      "OrganizatinName": "Unycyn Civic Arts",
+      "proposalName": "Flowproject.la Neighborhood Resiliency Garden (NRG)",
+      "email": [
+          {
+              "_id": "5eb3f33f6f59871863f22c07",
+              "email": "unycyn@gmail.com",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3f33f6f59871863f22c08",
+      "OrganizatinName": "Environmental Health Coalition / CEJA",
+      "proposalName": "Regenerate California",
+      "email": []
+  },
+  {
+      "_id": "5eb3f3726f59871863f22c0d",
+      "OrganizatinName": "Cooperative Resources and Services Project (CRSP)",
+      "proposalName": "LA Eco-Village Community Hub",
+      "email": [
+          {
+              "_id": "5eb3f3726f59871863f22c0e",
+              "email": "ngracia356@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3f3726f59871863f22c0f",
+              "email": "philipa474@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3f3726f59871863f22c10",
+              "email": "somerset.waters@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3f3726f59871863f22c12",
+              "email": "hourworldtemp@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3f3726f59871863f22c13",
+              "email": "linton.joe@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3f3726f59871863f22c15",
+              "email": "crsp@igc.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f3726f59871863f22c17",
+              "email": "churchoffice@stjohnsla.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f3726f59871863f22c18",
+              "email": "labikezombie@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3f3726f59871863f22c19",
+              "email": "foodlobbymembers@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3f3726f59871863f22c1a",
+              "email": "danah.morgan@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3f3726f59871863f22c1c",
+              "email": "dileanjimenez@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3f3726f59871863f22c1d",
+              "email": "ecomaya@azteca.net",
+              "status": true
+          },
+          {
+              "_id": "5eb3f3726f59871863f22c1f",
+              "email": "adrianaswain@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3f3726f59871863f22c20",
+              "email": "urbansoil-visitor@googlegroups.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3f3726f59871863f22c21",
+              "email": "laev-membership@googlegroups.com",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3f3726f59871863f22c22",
+      "OrganizatinName": "Bread Head",
+      "proposalName": "Bread Head Youth Ambassadors: Building a Resilient Community",
+      "email": []
+  },
+  {
+      "_id": "5eb3f3786f59871863f22c27",
+      "OrganizatinName": "Valley InterCommunity Council",
+      "proposalName": "Live Better: Helping Low-Income Seniors Not Only Survive, But Thrive",
+      "email": []
+  },
+  {
+      "_id": "5eb3f3786f59871863f22c3e",
+      "OrganizatinName": "My Friends House, Inc.",
+      "proposalName": "Food Pantry Selection Driven by Health Need",
+      "email": []
+  },
+  {
+      "_id": "5eb3f37a6f59871863f22c5d",
+      "OrganizatinName": "Hollywood Food Coalition",
+      "proposalName": "Hollywood Food Coalition \"Food Hub\"",
+      "email": [
+          {
+              "_id": "5eb3f37a6f59871863f22c5f",
+              "email": "info@hofoco.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3f3bf6f59871863f22c60",
+      "OrganizatinName": "Mother Jones",
+      "proposalName": "Los Angeles Investigative Reporting",
+      "email": []
+  },
+  {
+      "_id": "5eb3f3c16f59871863f22c6b",
+      "OrganizatinName": "United Parents and Students",
+      "proposalName": "United Parents and Students: Strengthening Access to High-Quality Supermarkets in Low-Income Communities Across Los Angeles",
+      "email": []
+  },
+  {
+      "_id": "5eb3f3c56f59871863f22c76",
+      "OrganizatinName": "Clinica Msr. Oscar A. Romero",
+      "proposalName": "Telehealth for Medically Underserved LA Neighborhoods",
+      "email": [
+          {
+              "_id": "5eb3f3c56f59871863f22c7a",
+              "email": "jobs@clinicaromero.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3f3c56f59871863f22c7d",
+              "email": "slemus@clinicaromero.com",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3f3c56f59871863f22c7e",
+      "OrganizatinName": "NULL",
+      "proposalName": "SoCal 350",
+      "email": []
+  },
+  {
+      "_id": "5eb3f3cb6f59871863f22c97",
+      "OrganizatinName": "The Dream Center Foundation",
+      "proposalName": "Dream Center Crisis Relief",
+      "email": [
+          {
+              "_id": "5eb3f3cb6f59871863f22c98",
+              "email": "info@dreamcenter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f3cb6f59871863f22c99",
+              "email": "communications@dreamcenter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f3cb6f59871863f22c9a",
+              "email": "jhigh@dreamcenter.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3f3ce6f59871863f22c9b",
+      "OrganizatinName": "Crop Swap LA",
+      "proposalName": "Create a Residential Garden District in Los Angeles",
+      "email": [
+          {
+              "_id": "5eb3f3ce6f59871863f22ca0",
+              "email": "developer@venmo.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3f3ce6f59871863f22ca5",
+              "email": "press@venmo.com",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3f3d46f59871863f22ca7",
+      "OrganizatinName": "Back on My Feet Los Angeles",
+      "proposalName": "Combatting Homelessness One Mile at a Time",
+      "email": []
+  },
+  {
+      "_id": "5eb3f3d46f59871863f22caf",
+      "OrganizatinName": "CleanSlate",
+      "proposalName": "WECARE Trauma-Informed Training",
+      "email": []
+  },
+  {
+      "_id": "5eb3f3e16f59871863f22cca",
+      "OrganizatinName": "NULL",
+      "proposalName": "Community Veteran Justice Project",
+      "email": [
+          {
+              "_id": "5eb3f3e16f59871863f22cde",
+              "email": "office.cvjp@gmail.com",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3f3e46f59871863f22cea",
+      "OrganizatinName": "Clinica Msr. Oscar A. Romero",
+      "proposalName": "Telehealth for Medically Underserved LA Neighborhoods",
+      "email": [
+          {
+              "_id": "5eb3f3e46f59871863f22cec",
+              "email": "slemus@clinicaromero.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3f3e46f59871863f22ced",
+              "email": "jobs@clinicaromero.com",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3f41a6f59871863f22cf2",
+      "OrganizatinName": "Mother Jones",
+      "proposalName": "Los Angeles Investigative Reporting",
+      "email": []
+  },
+  {
+      "_id": "5eb3f4206f59871863f22cfd",
+      "OrganizatinName": "Back on My Feet Los Angeles",
+      "proposalName": "Combatting Homelessness One Mile at a Time",
+      "email": []
+  },
+  {
+      "_id": "5eb3f4256f59871863f22d05",
+      "OrganizatinName": "Valley InterCommunity Council",
+      "proposalName": "Live Better: Helping Low-Income Seniors Not Only Survive, But Thrive",
+      "email": []
+  },
+  {
+      "_id": "5eb3f4296f59871863f22d1c",
+      "OrganizatinName": "Sprouts of Promise Foundation",
+      "proposalName": "LA Farmers' Market Coalition",
+      "email": [
+          {
+              "_id": "5eb3f4296f59871863f22d1d",
+              "email": "community@farmermark.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3f4296f59871863f22d1e",
+              "email": "info@farmermark.com",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3f4296f59871863f22d1f",
+      "OrganizatinName": "urban possibilities",
+      "proposalName": "Launching Urban Possibilities Classes Online",
+      "email": []
+  },
+  {
+      "_id": "5eb3f42c6f59871863f22d3b",
+      "OrganizatinName": "Crop Swap LA",
+      "proposalName": "Create a Residential Garden District in Los Angeles",
+      "email": [
+          {
+              "_id": "5eb3f42c6f59871863f22d3e",
+              "email": "developer@venmo.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3f42c6f59871863f22d3f",
+              "email": "press@venmo.com",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3f4376f59871863f22d46",
+      "OrganizatinName": "NULL",
+      "proposalName": "Community Veteran Justice Project",
+      "email": [
+          {
+              "_id": "5eb3f4376f59871863f22d57",
+              "email": "office.cvjp@gmail.com",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3f43a6f59871863f22d66",
+      "OrganizatinName": "Jenesse Center, Inc.",
+      "proposalName": "Domestic Violence Intervention and Prevention Program",
+      "email": [
+          {
+              "_id": "5eb3f43a6f59871863f22d67",
+              "email": "info@jenesse.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f43a6f59871863f22d68",
+              "email": "40hour@jenesse.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3f43e6f59871863f22d69",
+      "OrganizatinName": "The Dream Center Foundation",
+      "proposalName": "Dream Center Crisis Relief",
+      "email": [
+          {
+              "_id": "5eb3f43e6f59871863f22d6a",
+              "email": "communications@dreamcenter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f43e6f59871863f22d6b",
+              "email": "info@dreamcenter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f43e6f59871863f22d6c",
+              "email": "jhigh@dreamcenter.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3f4406f59871863f22d6d",
+      "OrganizatinName": "United Parents and Students",
+      "proposalName": "United Parents and Students: Strengthening Access to High-Quality Supermarkets in Low-Income Communities Across Los Angeles",
+      "email": []
+  },
+  {
+      "_id": "5eb3f4446f59871863f22d78",
+      "OrganizatinName": "Education Through Music-Los Angeles",
+      "proposalName": "In-School Music Education Program for Low-Income Schools",
+      "email": [
+          {
+              "_id": "5eb3f4446f59871863f22d7a",
+              "email": "development@etmla.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f4446f59871863f22d7b",
+              "email": "info@etmla.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3f4546f59871863f22d7c",
+      "OrganizatinName": "Heart of Los Angeles (HOLA)",
+      "proposalName": "Heart of Los Angeles’s (HOLA) Visual Arts Department",
+      "email": [
+          {
+              "_id": "5eb3f4546f59871863f22d7d",
+              "email": "blykins@heartofla.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f4546f59871863f22d7e",
+              "email": "cschuster@heartofla.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f4546f59871863f22d7f",
+              "email": "kkouot@heartofla.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f4546f59871863f22d80",
+              "email": "info@heartofla.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f4546f59871863f22d81",
+              "email": "anataren@heartofla.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f4546f59871863f22d82",
+              "email": "volunteer@heartofla.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f4546f59871863f22d84",
+              "email": "abraham@heartofla.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f4546f59871863f22d85",
+              "email": "ssilberman@heartofla.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f4546f59871863f22d86",
+              "email": "aadams@heartofla.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3f45b6f59871863f22d87",
+      "OrganizatinName": "Little Kids Rock",
+      "proposalName": "Modern Band Los Angeles County",
+      "email": [
+          {
+              "_id": "5eb3f45b6f59871863f22d88",
+              "email": "keith@littlekidsrock.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f45b6f59871863f22d89",
+              "email": "info@littlekidsrock.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f45b6f59871863f22d8a",
+              "email": "HigherEd@littlekidsrock.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f45b6f59871863f22d8b",
+              "email": "highered@littlekidsrock.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3f4656f59871863f22d8d",
+      "OrganizatinName": "Santa Monica College",
+      "proposalName": "Meal Project",
+      "email": []
+  },
+  {
+      "_id": "5eb3f4956f59871863f22d99",
+      "OrganizatinName": "WriteGirl, a project of Community Partners",
+      "proposalName": "WriteGirl Connected",
+      "email": [
+          {
+              "_id": "5eb3f4956f59871863f22d9a",
+              "email": "musicisintheuniverse@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3f4956f59871863f22d9b",
+              "email": "submissions@brightlitemag.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3f4956f59871863f22da0",
+              "email": "boldinkwriters@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3f4956f59871863f22da4",
+              "email": "zoefblog@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3f4956f59871863f22da7",
+              "email": "thegirltalkmagazine@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3f4956f59871863f22da9",
+              "email": "gileskirsten@gmail.com",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3f4a86f59871863f22daf",
+      "OrganizatinName": "Los Angeles Audubon Society",
+      "proposalName": "Los Angeles Audubon - Urban Nature Network",
+      "email": [
+          {
+              "_id": "5eb3f4a86f59871863f22db0",
+              "email": "tern@laaudubon.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f4a86f59871863f22db1",
+              "email": "laas@laaudubon.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f4a86f59871863f22db4",
+              "email": "volunteer@laaudubon.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f4a86f59871863f22db5",
+              "email": "carolbabeli@laaudubon.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f4a86f59871863f22db6",
+              "email": "cindyhardin@laaudubon.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f4a86f59871863f22db7",
+              "email": "fieldtrips@laaudubon.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3f4ac6f59871863f22db8",
+      "OrganizatinName": "Get Lit - Words Ignite",
+      "proposalName": "Get Lit – Words Ignite Online Curriculum",
+      "email": [
+          {
+              "_id": "5eb3f4ac6f59871863f22dba",
+              "email": "info@getlit.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f4ac6f59871863f22dbd",
+              "email": "diane@getlit.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3f4f86f59871863f22dbe",
+      "OrganizatinName": "Pediatric Therapy Network",
+      "proposalName": "Best We Can Be Early Education Program",
+      "email": [
+          {
+              "_id": "5eb3f4f86f59871863f22dbf",
+              "email": "merryl@ptnmail.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f4f86f59871863f22dc0",
+              "email": "bindig@ptnmail.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f4f86f59871863f22dc1",
+              "email": "blanche@chan.usc.edu",
+              "status": true
+          },
+          {
+              "_id": "5eb3f4f86f59871863f22dc2",
+              "email": "ToddlerTalk@ptnmail.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f4f86f59871863f22dc3",
+              "email": "donate@ptnmail.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f4f86f59871863f22dc4",
+              "email": "aracelie@ptnmail.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f4f86f59871863f22dc6",
+              "email": "jerryp@ptnmail.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f4f86f59871863f22dc7",
+              "email": "haifahv@ptnmail.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f4f86f59871863f22dc8",
+              "email": "heathermc@ptnmail.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f4f86f59871863f22dc9",
+              "email": "destinyl@ptnmail.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f4f86f59871863f22dca",
+              "email": "nancys@ptnmail.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f4f86f59871863f22dcc",
+              "email": "karenr@ptnmail.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f4f86f59871863f22dcd",
+              "email": "kathym@ptnmail.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f4f86f59871863f22dcf",
+              "email": "info@dreamcatcherla.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3f4f86f59871863f22dd0",
+              "email": "mail@usarc.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f4f86f59871863f22dd1",
+              "email": "andrear@ptnmail.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f4f86f59871863f22dd2",
+              "email": "rosalindag@ptnmail.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f4f86f59871863f22dd3",
+              "email": "natalieg@ptnmail.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f4f86f59871863f22dd4",
+              "email": "stephaniet@ptnmail.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f4f86f59871863f22dd5",
+              "email": "kimberleee@ptnmail.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f4f86f59871863f22dd6",
+              "email": "ashleys@ptnmail.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f4f86f59871863f22dd7",
+              "email": "buddyclub@ptnmail.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f4f86f59871863f22dd9",
+              "email": "pamm@ptnmail.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f4f86f59871863f22ddc",
+              "email": "terrin@ptnmail.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f4f86f59871863f22ddd",
+              "email": "abbieg@ptnmail.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3f5016f59871863f22ddf",
+      "OrganizatinName": "Aim4theheart.org",
+      "proposalName": "LA Aims 4 the Heart",
+      "email": [
+          {
+              "_id": "5eb3f5016f59871863f22de0",
+              "email": "info@aim4theheart.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f5016f59871863f22de1",
+              "email": "marisol@aim4theheart.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f5016f59871863f22deb",
+              "email": "donations@aim4theheart.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f5016f59871863f22df0",
+              "email": "marisol@AIM4theHEART.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f5016f59871863f22df1",
+              "email": "marito7576@gmail.com",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3f50c6f59871863f22dfc",
+      "OrganizatinName": "Novus Think Tank",
+      "proposalName": "The Why Project",
+      "email": [
+          {
+              "_id": "5eb3f50c6f59871863f22dfd",
+              "email": "rojasort@usc.edu",
+              "status": true
+          },
+          {
+              "_id": "5eb3f50c6f59871863f22dfe",
+              "email": "bhargavs@usc.edu",
+              "status": true
+          },
+          {
+              "_id": "5eb3f50c6f59871863f22dff",
+              "email": "garganub@usc.edu",
+              "status": true
+          },
+          {
+              "_id": "5eb3f50c6f59871863f22e00",
+              "email": "ecarrera@usc.edu",
+              "status": true
+          },
+          {
+              "_id": "5eb3f50c6f59871863f22e01",
+              "email": "novusthinktank@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3f50c6f59871863f22e02",
+              "email": "igilles@usc.edu",
+              "status": true
+          },
+          {
+              "_id": "5eb3f50c6f59871863f22e03",
+              "email": "amauro@usc.edu",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3f5116f59871863f22e04",
+      "OrganizatinName": "L.O.V.E. Living Our Vision Everyday Foundation",
+      "proposalName": "Sanctuary of Love Resource and Referral Center",
+      "email": [
+          {
+              "_id": "5eb3f5116f59871863f22e05",
+              "email": "gjohnson@lovefoun.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f5116f59871863f22e06",
+              "email": "thelovefoundationservices@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3f5116f59871863f22e07",
+              "email": "love@lovefoun.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3f51b6f59871863f22e08",
+      "OrganizatinName": "New Earth",
+      "proposalName": "High School Diploma Program and Reentry Services for Justice System Impacted Youth",
+      "email": []
+  },
+  {
+      "_id": "5eb3f51b6f59871863f22e0c",
+      "OrganizatinName": "City Year Los Angeles",
+      "proposalName": "City Year Inglewood USD Expansion",
+      "email": []
+  },
+  {
+      "_id": "5eb3f51b6f59871863f22e22",
+      "OrganizatinName": "NULL",
+      "proposalName": "CostsBeyondTuition.org",
+      "email": []
+  },
+  {
+      "_id": "5eb3f51f6f59871863f22e27",
+      "OrganizatinName": "Operation Jump Start",
+      "proposalName": "College Success",
+      "email": [
+          {
+              "_id": "5eb3f51f6f59871863f22e28",
+              "email": "maria.r@operationjumpstart.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f51f6f59871863f22e29",
+              "email": "ojs@operationjumpstart.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3f51f6f59871863f22e2a",
+      "OrganizatinName": "Refresh Youth Center",
+      "proposalName": "RYC After School & STEAM Summer Youth Development & Community Arts Programs for L.A.",
+      "email": []
+  },
+  {
+      "_id": "5eb3f5316f59871863f22e2f",
+      "OrganizatinName": "Emile Cohl Art Academy",
+      "proposalName": "Tuition-Free Digital Arts Education",
+      "email": [
+          {
+              "_id": "5eb3f5316f59871863f22e33",
+              "email": "emilecohlartacademy@gmail.com",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3f5316f59871863f22e34",
+      "OrganizatinName": "Inner-City Arts",
+      "proposalName": "Inner-City Arts: Virtual Arts Education Project",
+      "email": []
+  },
+  {
+      "_id": "5eb3f5316f59871863f22e51",
+      "OrganizatinName": "Music Forward Foundation",
+      "proposalName": "Music Forward: Helping Engage our Youth through Careers in the Music Industry",
+      "email": []
+  },
+  {
+      "_id": "5eb3f5386f59871863f22e56",
+      "OrganizatinName": "Rise, Inc.",
+      "proposalName": "Scaling Student Advocacy to End Campus Hunger and Homelessness",
+      "email": []
+  },
+  {
+      "_id": "5eb3f5386f59871863f22e5d",
+      "OrganizatinName": "MOSTe MOTIVATING OUR STUDENTS THROUGH EXPERIENCE",
+      "proposalName": "Exploring Careers to Drive Girls' College Success",
+      "email": []
+  },
+  {
+      "_id": "5eb3f5386f59871863f22e70",
+      "OrganizatinName": "LASA - The Los Angeles Service Academy",
+      "proposalName": "Towards a Student-Led Future for Los Angeles",
+      "email": []
+  },
+  {
+      "_id": "5eb3f5386f59871863f22e75",
+      "OrganizatinName": "Center for Powerful Public Schools",
+      "proposalName": "Center For Powerful Public Schools",
+      "email": []
+  },
+  {
+      "_id": "5eb3f53a6f59871863f22e7a",
+      "OrganizatinName": "Alliance College-Ready Public Schools Foundation",
+      "proposalName": "Social and Emotional Learning at Alliance",
+      "email": []
+  },
+  {
+      "_id": "5eb3f5446f59871863f22e7d",
+      "OrganizatinName": "The Literacy Club",
+      "proposalName": "Seeding Book Deserts™ One Book, One Child & One Community Book Box",
+      "email": [
+          {
+              "_id": "5eb3f5446f59871863f22e7e",
+              "email": "jean@theliteracyclub.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3f5856f59871863f22e81",
+      "OrganizatinName": "Ednovate",
+      "proposalName": "Creating Positive Multigenerational Change through LA’s High Schoolers",
+      "email": [
+          {
+              "_id": "5eb3f5856f59871863f22e82",
+              "email": "bvalle@ednovate.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f5856f59871863f22e83",
+              "email": "ecastro@usccollegeprepsa.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f5856f59871863f22e84",
+              "email": "info@usceastcollegeprep.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f5856f59871863f22e85",
+              "email": "lfullerton@ednovate.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f5856f59871863f22e86",
+              "email": "mmacaulay@uschybridhigh.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f5856f59871863f22e87",
+              "email": "osicat@ednovate.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f5856f59871863f22e88",
+              "email": "newstudent@uschybridhigh.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f5856f59871863f22e89",
+              "email": "support@ednovate.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f5856f59871863f22e8a",
+              "email": "awright@ednovate.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f5856f59871863f22e8b",
+              "email": "stenorio@uscbrio.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f5856f59871863f22e8c",
+              "email": "maldridge@ednovate.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f5856f59871863f22e8e",
+              "email": "kcorbosiero@ednovate.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f5856f59871863f22e8f",
+              "email": "admissions@uschybridhigh.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f5856f59871863f22e90",
+              "email": "jjovel@ednovate.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f5856f59871863f22e91",
+              "email": "info@uschybridhigh.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f5856f59871863f22e92",
+              "email": "INFO@EDNOVATE.ORG",
+              "status": true
+          },
+          {
+              "_id": "5eb3f5856f59871863f22e93",
+              "email": "jaguas@ednovate.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f5856f59871863f22e94",
+              "email": "mbarnes@ednovate.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f5856f59871863f22e95",
+              "email": "esaiger@ednovate.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f5856f59871863f22e96",
+              "email": "slevy@ednovate.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f5856f59871863f22e97",
+              "email": "asmith@ednovate.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f5856f59871863f22e98",
+              "email": "info@ednovate.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f5856f59871863f22e99",
+              "email": "npage@ednovate.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f5856f59871863f22e9a",
+              "email": "jnoonan@ednovate.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f5856f59871863f22e9b",
+              "email": "mducey@ednovate.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f5856f59871863f22e9c",
+              "email": "knham@ednovate.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f5856f59871863f22e9d",
+              "email": "khart@ednovate.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f5856f59871863f22e9e",
+              "email": "jhernandez@ednovate.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f5856f59871863f22e9f",
+              "email": "mthomsen@ednovate.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f5856f59871863f22ea0",
+              "email": "Ccervantes@usceastcollegeprep.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f5856f59871863f22ea1",
+              "email": "agoltermann@usceastcollegeprep.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f5856f59871863f22ea2",
+              "email": "kmaguire@ednovate.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f5856f59871863f22ea3",
+              "email": "ralanis@ednovate.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f5856f59871863f22ea4",
+              "email": "mainoffice@uschybridhigh.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f5856f59871863f22ea5",
+              "email": "cruelas@ednovate.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f5856f59871863f22ea6",
+              "email": "iarmenta@ednovate.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3f5926f59871863f22ea7",
+      "OrganizatinName": "College Access Plan",
+      "proposalName": "PUSD to College Graduation",
+      "email": [
+          {
+              "_id": "5eb3f5926f59871863f22eab",
+              "email": "mo@collegeaccessplan.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f5926f59871863f22eb2",
+              "email": "joanne@collegeaccessplan.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3f5b46f59871863f22eb3",
+      "OrganizatinName": "Southern California College Access Network",
+      "proposalName": "Project SOAR: Breaking the Cycle of Poverty Through Education",
+      "email": []
+  },
+  {
+      "_id": "5eb3f5b46f59871863f22ebc",
+      "OrganizatinName": "Network for Teaching Entrepreneurship, Los Angeles (NFTE LA)",
+      "proposalName": "Entrepreneurship in Every School: Los Angeles",
+      "email": []
+  },
+  {
+      "_id": "5eb3f5b86f59871863f22ec1",
+      "OrganizatinName": "Global Arts Corporation",
+      "proposalName": "Global Arts Professional Development Series: The Use of Teacher Development to Increase Student Success",
+      "email": [
+          {
+              "_id": "5eb3f5b86f59871863f22ed4",
+              "email": "globalartsla@gmail.com",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3f5bd6f59871863f22ed9",
+      "OrganizatinName": "Freedom and Fashion",
+      "proposalName": "Freedom and Fashion Program",
+      "email": [
+          {
+              "_id": "5eb3f5bd6f59871863f22eda",
+              "email": "john@snow.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3f5bd6f59871863f22edb",
+              "email": "info@freedomandfashion.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3f62c6f59871863f22edc",
+      "OrganizatinName": "Central American Resource Center-CARECEN-of California",
+      "proposalName": "CARECEN's Parent and Youth Center",
+      "email": [
+          {
+              "_id": "5eb3f62c6f59871863f22ede",
+              "email": "armando2k7@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3f62c6f59871863f22ef1",
+              "email": "armando@tzunu.com",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3f62f6f59871863f22ef3",
+      "OrganizatinName": "Junior High, Incorporated",
+      "proposalName": "Money Makers",
+      "email": [
+          {
+              "_id": "5eb3f62f6f59871863f22ef4",
+              "email": "contact@juniorhighlosangeles.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3f62f6f59871863f22ef5",
+              "email": "juniorhighla@gmail.com",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3f62f6f59871863f22ef7",
+      "OrganizatinName": "ProjectArt",
+      "proposalName": "ProjectArt LA: A Solution for Budget Cuts",
+      "email": []
+  },
+  {
+      "_id": "5eb3f62f6f59871863f22efc",
+      "OrganizatinName": "TWO BIT CIRCUS FOUNDATION",
+      "proposalName": "STEAM Lab Makerspace: Learn, Create, Play!",
+      "email": []
+  },
+  {
+      "_id": "5eb3f6306f59871863f22f16",
+      "OrganizatinName": "Fulfillment Fund",
+      "proposalName": "Destination College +",
+      "email": []
+  },
+  {
+      "_id": "5eb3f6306f59871863f22f1b",
+      "OrganizatinName": "Skyhook Foundation",
+      "proposalName": "Camp Skyhook",
+      "email": []
+  },
+  {
+      "_id": "5eb3f6346f59871863f22f3a",
+      "OrganizatinName": "Fulcrum Arts",
+      "proposalName": "Big City Lab",
+      "email": [
+          {
+              "_id": "5eb3f6346f59871863f22f3d",
+              "email": "customerservice@Wediditfundraising.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3f6346f59871863f22f3e",
+              "email": "community@wedid.it",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3f7376f59871863f22f3f",
+      "OrganizatinName": "Larchmont Charter School",
+      "proposalName": "REAL SCHOOL for LA Kids",
+      "email": [
+          {
+              "_id": "5eb3f7376f59871863f22f40",
+              "email": "hoon.juoh@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f41",
+              "email": "tatiana.ignatenko@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f42",
+              "email": "hannah.choi@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f43",
+              "email": "development@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f44",
+              "email": "Sarah.McElroy@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f45",
+              "email": "jacob.bear@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f46",
+              "email": "ashli.choi@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f47",
+              "email": "cassandra.brink@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f48",
+              "email": "sofia.potik@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f49",
+              "email": "Cheryl.Himmelstein@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f4a",
+              "email": "marlene.espinoza@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f4b",
+              "email": "alison.cole-kelly@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f4c",
+              "email": "laura.kettle@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f4d",
+              "email": "dianna.schonfield@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f4e",
+              "email": "paul.choi@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f4f",
+              "email": "brandi.dompe@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f50",
+              "email": "jennifer.bledsoe@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f51",
+              "email": "charlie.seo@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f52",
+              "email": "esmeralda.roblesgarcia@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f53",
+              "email": "kelly.bartle@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f54",
+              "email": "Jeffrey.Sapin@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f55",
+              "email": "shelly.price@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f56",
+              "email": "gina.rozner@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f57",
+              "email": "eva.orozco@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f58",
+              "email": "alissa.chariton@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f59",
+              "email": "Bethany.Williams@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f5a",
+              "email": "elizabeth.kohne@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f5b",
+              "email": "thomas.johnson@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f5c",
+              "email": "sarah.perkins@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f5d",
+              "email": "avery.watts@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f5e",
+              "email": "michelle.figueroa@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f5f",
+              "email": "karen.azcunaga@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f60",
+              "email": "beverly.meyer@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f61",
+              "email": "domi.miyamoto@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f62",
+              "email": "maritess.trillo@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f63",
+              "email": "Katherine@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f64",
+              "email": "Allison.Pratt@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f65",
+              "email": "jenna.fortner@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f66",
+              "email": "elham.tavabi@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f67",
+              "email": "angel.pennington@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f68",
+              "email": "bethany.cook@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f69",
+              "email": "michelle.cantrell@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f6a",
+              "email": "Lorena.Orlosky@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f6b",
+              "email": "mersedeh.emrani@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f6c",
+              "email": "robin.power@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f6d",
+              "email": "mike.kang@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f6e",
+              "email": "matthew.yazzetta@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f6f",
+              "email": "info@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f70",
+              "email": "kathryn.cohen@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f71",
+              "email": "saramlev@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f73",
+              "email": "juliet.leman@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f74",
+              "email": "michelle.alger-mintie@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f75",
+              "email": "kimberly.mcdonald@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f76",
+              "email": "daniel.loh@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f77",
+              "email": "david.wagstaffe@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f78",
+              "email": "lissette.rivas@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f79",
+              "email": "sara.thompson@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f7b",
+              "email": "keith.harris@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f7c",
+              "email": "barbara.wittner@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f7e",
+              "email": "jennifer.bae@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f7f",
+              "email": "Julie.Johnson@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f80",
+              "email": "danielle.walsh@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f81",
+              "email": "jill.stefani@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f82",
+              "email": "tracy.erlandzehnder@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f83",
+              "email": "miguel.alvarez@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f84",
+              "email": "scott.lenhert@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f85",
+              "email": "colin.woodside@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f86",
+              "email": "sabina.couturier@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f87",
+              "email": "vanessa.vazquez@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f88",
+              "email": "cassey.jenkins@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f89",
+              "email": "heather.rios@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f8b",
+              "email": "mari.worden@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f8c",
+              "email": "maja.watkins@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f8d",
+              "email": "board@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f8e",
+              "email": "kendall.gilbert@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f8f",
+              "email": "chris.galvan@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f90",
+              "email": "Charise.VanDuin@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f91",
+              "email": "hunter.lee@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f92",
+              "email": "Amanda.Jellings@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f93",
+              "email": "may.oey@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f94",
+              "email": "dave.dumonde@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f95",
+              "email": "ashley.post@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f96",
+              "email": "Hideaki.Tokunaga@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f97",
+              "email": "hilary.thomas@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f99",
+              "email": "sarah.eun@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f9a",
+              "email": "paolo.escalante@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f9c",
+              "email": "amanda.konieczny@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f9d",
+              "email": "sue.hudelson@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f9e",
+              "email": "kyle.samouel@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22f9f",
+              "email": "malcolm.moore@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22fa0",
+              "email": "rick.dechance@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22fa1",
+              "email": "kwan.tam@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22fa2",
+              "email": "lori.lausche@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22fa3",
+              "email": "jennifer.harper@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22fa4",
+              "email": "rasika.ramdasi@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22fa6",
+              "email": "jenny.rosser@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22fa7",
+              "email": "tamara.jordan@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22fa8",
+              "email": "heidi.porter@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22fa9",
+              "email": "ethan.adshade@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22faa",
+              "email": "joseph.ehrlichmann@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22fab",
+              "email": "abby.corbett@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22fac",
+              "email": "yovy.daniels@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22fad",
+              "email": "kelsi.mills@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22faf",
+              "email": "Jonathan.Mundy@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22fb0",
+              "email": "alan.morales@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22fb1",
+              "email": "Kimkayh@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22fb2",
+              "email": "admissions@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22fb3",
+              "email": "travis.fowler@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22fb4",
+              "email": "miriam.espinoza@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22fb5",
+              "email": "accountspayable@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22fb6",
+              "email": "Tracy.ErlandZehnder@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22fb7",
+              "email": "mike.brennan@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22fb8",
+              "email": "marjorie.wilburn@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22fb9",
+              "email": "Harriet.Levine@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22fba",
+              "email": "myra.salinas@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22fbb",
+              "email": "stacey.major@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22fbc",
+              "email": "jennifer.dowty@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22fbe",
+              "email": "mae.calma@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22fbf",
+              "email": "mimi.bonetti@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22fc0",
+              "email": "ffxphotos@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22fc1",
+              "email": "marcia.macdonald@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22fc2",
+              "email": "andrew.brannon@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22fc3",
+              "email": "robert.crocker@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22fc4",
+              "email": "Ian.Jewett@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22fc5",
+              "email": "Candice.Allen@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22fc6",
+              "email": "nickey.reed@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22fc7",
+              "email": "Jill.Friedlander@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22fc8",
+              "email": "angelica.pineda@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22fc9",
+              "email": "rich.kane@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22fca",
+              "email": "kate.thompson@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22fcc",
+              "email": "kathryne.edwards@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22fcd",
+              "email": "glaiza.collera@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22fce",
+              "email": "sarah.minaise@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22fcf",
+              "email": "danielle.lovell@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22fd0",
+              "email": "cheryl.cleary@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22fd1",
+              "email": "edwin.co@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22fd2",
+              "email": "tevin.joslen@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22fd3",
+              "email": "Lily.Sais@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22fd4",
+              "email": "ebony.powell@larchmontcharter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7376f59871863f22fd5",
+              "email": "jamia.weir@larchmontcharter.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3f73b6f59871863f22fd6",
+      "OrganizatinName": "Collegespring",
+      "proposalName": "Providing Equitable SAT Prep in Los Angeles",
+      "email": [
+          {
+              "_id": "5eb3f73b6f59871863f22fd7",
+              "email": "careers@classy.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f73b6f59871863f22fdc",
+              "email": "donations@collegespring.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3f7406f59871863f22fdd",
+      "OrganizatinName": "Ryman Arts",
+      "proposalName": "Future Creatives – Access and Equity for Young Artists",
+      "email": []
+  },
+  {
+      "_id": "5eb3f7406f59871863f22fe0",
+      "OrganizatinName": "West Valley Boys & Girls Club",
+      "proposalName": "Future Ready",
+      "email": []
+  },
+  {
+      "_id": "5eb3f7406f59871863f22fe5",
+      "OrganizatinName": "After-School All-Stars Los Angeles",
+      "proposalName": "After-School All-Stars Los Angeles CampUS",
+      "email": []
+  },
+  {
+      "_id": "5eb3f7436f59871863f22ff9",
+      "OrganizatinName": "Reading Partners",
+      "proposalName": "Reading Partners LA: The Path to Fourth Grade Reading Proficiency for 1,000 Children",
+      "email": [
+          {
+              "_id": "5eb3f7436f59871863f22ffa",
+              "email": "donate@readingpartners.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3f7436f59871863f22ffc",
+      "OrganizatinName": "Turnaround Arts: California",
+      "proposalName": "Turnaround Arts: CA Los Angeles School Partnerships",
+      "email": []
+  },
+  {
+      "_id": "5eb3f7476f59871863f2301b",
+      "OrganizatinName": "Dance Arts Foundation",
+      "proposalName": "Dance Arts Foundation Workshop Series",
+      "email": [
+          {
+              "_id": "5eb3f7476f59871863f2301d",
+              "email": "info@danceartsfoundation.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3f7476f59871863f23033",
+      "OrganizatinName": "Pueblo Nuevo Education & Development Group",
+      "proposalName": "Next Generation STEM Leaders in MacArthur Park",
+      "email": []
+  },
+  {
+      "_id": "5eb3f74a6f59871863f2304f",
+      "OrganizatinName": "EnCorps STEM Teachers",
+      "proposalName": "EnCorps STEM Teachers in Los Angeles",
+      "email": [
+          {
+              "_id": "5eb3f74a6f59871863f23050",
+              "email": "grants@encorps.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f74a6f59871863f23051",
+              "email": "contact@encorps.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3f74d6f59871863f23052",
+      "OrganizatinName": "NULL",
+      "proposalName": "Believe In Music",
+      "email": [
+          {
+              "_id": "5eb3f74d6f59871863f23053",
+              "email": "info@believeinmusiconline.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3f74d6f59871863f23054",
+              "email": "believeinmusicorg@gmail.com",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3f75f6f59871863f23055",
+      "OrganizatinName": "Gladeo",
+      "proposalName": "An Inclusive, Next-Gen Digital Career Navigation Hub for LA’s Green Jobs (Presented by Gladeo and LACI)",
+      "email": [
+          {
+              "_id": "5eb3f75f6f59871863f23056",
+              "email": "privacy@gladeo.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f75f6f59871863f23058",
+              "email": "katelyn@gladeo.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f75f6f59871863f23059",
+              "email": "grace@gladeo.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f75f6f59871863f2305a",
+              "email": "michelle@gladeo.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f75f6f59871863f2305b",
+              "email": "connor@gladeo.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f75f6f59871863f2305d",
+              "email": "contact@gladeo.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f75f6f59871863f2305e",
+              "email": "joseph@gladeo.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f75f6f59871863f2305f",
+              "email": "cory@gladeo.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f75f6f59871863f23060",
+              "email": "partnerships@gladeo.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3f75f6f59871863f23061",
+      "OrganizatinName": "Circle of Friends - The Path to Inclusion",
+      "proposalName": "Circle of Friends for LA Students",
+      "email": []
+  },
+  {
+      "_id": "5eb3f7726f59871863f23066",
+      "OrganizatinName": "Women's Voices Now",
+      "proposalName": "Girls' Voices Now",
+      "email": [
+          {
+              "_id": "5eb3f7726f59871863f23067",
+              "email": "wvnonlinefilmfestival@womensvoicesnow.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7726f59871863f23068",
+              "email": "alexandra@womensvoicesnow.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7726f59871863f23069",
+              "email": "clancey@womensvoicesnow.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7726f59871863f2306a",
+              "email": "Leila@womensvoicesnow.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7726f59871863f2306c",
+              "email": "heidi@womensvoicesnow.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7726f59871863f2306f",
+              "email": "yasmeen@womensvoicesnow.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7726f59871863f23070",
+              "email": "info@womensvoicesnow.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7726f59871863f23071",
+              "email": "wvnfilmarchive@womensvoicesnow.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7726f59871863f23072",
+              "email": "soizic@womensvoicesnow.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7726f59871863f23073",
+              "email": "ariane@womensvoicesnow.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3f7756f59871863f23076",
+      "OrganizatinName": "Education Through Music-Los Angeles",
+      "proposalName": "In-School Music Education Program for Low-Income Schools",
+      "email": [
+          {
+              "_id": "5eb3f7756f59871863f23078",
+              "email": "info@etmla.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7756f59871863f23079",
+              "email": "development@etmla.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3f7806f59871863f2307a",
+      "OrganizatinName": "reDiscover Center",
+      "proposalName": "Help ReDiscover Center establish one of the largest Youth Makerspace Facilities in the entire country!",
+      "email": [
+          {
+              "_id": "5eb3f7806f59871863f2307c",
+              "email": "hr@rediscovercenter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7806f59871863f2307e",
+              "email": "mail@rediscovercenter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7806f59871863f23080",
+              "email": "jonathan@rediscovercenter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7806f59871863f23081",
+              "email": "volunteer@rediscovercenter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7806f59871863f23082",
+              "email": "tinkering@rediscovercenter.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7806f59871863f23083",
+              "email": "barb@rediscovercenter.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3f79d6f59871863f23084",
+      "OrganizatinName": "The Unusual Suspects Theatre Company",
+      "proposalName": "VAST Enrichment Program: Creating accessible pathways to classroom engagement for English Language Learners & Special Education students",
+      "email": [
+          {
+              "_id": "5eb3f79d6f59871863f23085",
+              "email": "info@theunusualsuspects.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f79d6f59871863f23086",
+              "email": "melissa@theunusualsuspects.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f79d6f59871863f23087",
+              "email": "rsvp@theunusualsuspects.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f79d6f59871863f23089",
+              "email": "rachel.reed@theunusualsuspects.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f79d6f59871863f2308a",
+              "email": "jobs@theunusualsuspects.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f79d6f59871863f2308c",
+              "email": "adrienne@theunusualsuspects.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f79d6f59871863f2308d",
+              "email": "jake.arky@theunusualsuspects.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f79d6f59871863f2308e",
+              "email": "hedi@theunusualsuspects.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f79d6f59871863f2308f",
+              "email": "michael@theunusualsuspects.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f79d6f59871863f23090",
+              "email": "yolanda@theunusualsuspects.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f79d6f59871863f23091",
+              "email": "nick@theunusualsuspects.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f79d6f59871863f23092",
+              "email": "meisha@theunusualsuspects.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f79d6f59871863f23093",
+              "email": "caroline@theunusualsuspects.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f79d6f59871863f23095",
+              "email": "Adrienne@theunusualsuspects.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f79d6f59871863f23096",
+              "email": "yolanda.androzzo@theunusualsuspects.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f79d6f59871863f23097",
+              "email": "rafael.sanchez@theunusualsuspects.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3f79e6f59871863f23098",
+      "OrganizatinName": "9 Dots",
+      "proposalName": "CS Proficiency: Closing the Achievement Gap in Los Angeles",
+      "email": []
+  },
+  {
+      "_id": "5eb3f7b96f59871863f2309b",
+      "OrganizatinName": "Children Now",
+      "proposalName": "Improving Educational Outcomes for Foster Youth in LA County",
+      "email": []
+  },
+  {
+      "_id": "5eb3f7c16f59871863f230a0",
+      "OrganizatinName": "Access Books",
+      "proposalName": "Transforming School Libraries in Low Income Neighborhoods",
+      "email": []
+  },
+  {
+      "_id": "5eb3f7c16f59871863f230a5",
+      "OrganizatinName": "Saving the West Foundation",
+      "proposalName": "Green Thumb Classes!",
+      "email": []
+  },
+  {
+      "_id": "5eb3f7c16f59871863f230aa",
+      "OrganizatinName": "CHAMPS Charter High School of the Arts",
+      "proposalName": "CHAMPS Charter High School of the Arts Takes the Show on the Road",
+      "email": []
+  },
+  {
+      "_id": "5eb3f7c16f59871863f230c5",
+      "OrganizatinName": "Crayon Collection",
+      "proposalName": "Crayon Collection's Arts in Education Expansion",
+      "email": []
+  },
+  {
+      "_id": "5eb3f7c66f59871863f230e3",
+      "OrganizatinName": "Book Club for Kids podcast, a project of Community Partners",
+      "proposalName": "LA is the Best Place for Bookworms! Creating Lifelong Readers With Digital Media",
+      "email": [
+          {
+              "_id": "5eb3f7c66f59871863f230fd",
+              "email": "inquiries@kinagrannis.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7c66f59871863f23106",
+              "email": "whyineeddiversegames@gmail.com",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3f7c86f59871863f23109",
+      "OrganizatinName": "United Friends of the Children",
+      "proposalName": "United Friends Scholars Program",
+      "email": [
+          {
+              "_id": "5eb3f7c86f59871863f2310a",
+              "email": "info@unitedfriends.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3f7c86f59871863f2310c",
+      "OrganizatinName": "Careers in Entertainment",
+      "proposalName": "The Careers in Entertainment Mobile Classroom",
+      "email": []
+  },
+  {
+      "_id": "5eb3f7c86f59871863f23111",
+      "OrganizatinName": "America Scores Los Angeles",
+      "proposalName": "Literacy in Action",
+      "email": []
+  },
+  {
+      "_id": "5eb3f7d36f59871863f2312c",
+      "OrganizatinName": "Bob Baker Marionette Theater",
+      "proposalName": "The Academy of Puppetry and Allied Arts",
+      "email": [
+          {
+              "_id": "5eb3f7d36f59871863f2312d",
+              "email": "missy@bobbakermarionettetheater.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7d36f59871863f2312e",
+              "email": "molly@bobbakermarionettetheater.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7d36f59871863f2312f",
+              "email": "winona@bobbakermarionettetheater.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7d36f59871863f23130",
+              "email": "hello@bobbakermarionettetheater.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7d36f59871863f23131",
+              "email": "kevin@bobbakermarionettetheater.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7d36f59871863f23132",
+              "email": "alex@bobbakermarionettetheater.com",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3f7d66f59871863f23133",
+      "OrganizatinName": "Cheshire Moon",
+      "proposalName": "Crimson Square Writer's Lab",
+      "email": [
+          {
+              "_id": "5eb3f7d66f59871863f23135",
+              "email": "DancescapeLA@gmail.com",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3f7d76f59871863f23136",
+      "OrganizatinName": "FA-MLI, Inc.",
+      "proposalName": "See A Man, Be A Man (SAMBAM) Program",
+      "email": [
+          {
+              "_id": "5eb3f7d76f59871863f23142",
+              "email": "info@sambam.us",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3f7d86f59871863f2314d",
+      "OrganizatinName": "Fostering Dreams Project",
+      "proposalName": "Fostering Dreams",
+      "email": [
+          {
+              "_id": "5eb3f7d86f59871863f2314f",
+              "email": "melaniebuttarazzi@gmail.com",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3f7f06f59871863f23164",
+      "OrganizatinName": "Friends of Girls Academic Leadership Academy (GALA)",
+      "proposalName": "GALA: Girls in STEM",
+      "email": [
+          {
+              "_id": "5eb3f7f06f59871863f23165",
+              "email": "vp@fogala.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7f06f59871863f23169",
+              "email": "finance@fogala.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7f06f59871863f2316c",
+              "email": "fogala.info@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7f06f59871863f2316d",
+              "email": "jenirissier@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7f06f59871863f2316e",
+              "email": "Secretary@fogala.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7f06f59871863f23173",
+              "email": "Operations@fogala.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7f06f59871863f23174",
+              "email": "VP@fogala.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7f06f59871863f23175",
+              "email": "treasurer@fogala.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7f06f59871863f23177",
+              "email": "operations@fogala.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7f06f59871863f2317d",
+              "email": "president@fogala.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7f06f59871863f23181",
+              "email": "Treasurer@fogala.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7f06f59871863f23182",
+              "email": "annualgive@fogala.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7f06f59871863f23183",
+              "email": "Annualgive@fogala.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7f06f59871863f23187",
+              "email": "vkissane@fogala.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3f7f06f59871863f23189",
+      "OrganizatinName": "Kids Coalition",
+      "proposalName": "Establishing a legal right to a high quality public education",
+      "email": []
+  },
+  {
+      "_id": "5eb3f7f06f59871863f231a3",
+      "OrganizatinName": "New Directions for Youth",
+      "proposalName": "After School Program",
+      "email": []
+  },
+  {
+      "_id": "5eb3f7f06f59871863f231a8",
+      "OrganizatinName": "NULL",
+      "proposalName": "New Village Girls Academy",
+      "email": []
+  },
+  {
+      "_id": "5eb3f7fa6f59871863f231ad",
+      "OrganizatinName": "Social & Emotional Wellness Initiative",
+      "proposalName": "Fill the gaps, all our youth deserve to thrive!",
+      "email": [
+          {
+              "_id": "5eb3f7fa6f59871863f231b9",
+              "email": "info@sewi.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7fa6f59871863f231ba",
+              "email": "ssheppard@sewi.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7fa6f59871863f231bb",
+              "email": "syancor@sewi.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7fa6f59871863f231bc",
+              "email": "lpatterson@sewi.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7fa6f59871863f231bd",
+              "email": "spring@sewi.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7fa6f59871863f231be",
+              "email": "jrubecindo@sewi.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3f7fe6f59871863f231ca",
+      "OrganizatinName": "The Actors' Gang",
+      "proposalName": "Theater Arts Integration and Study in Continuation High Schools",
+      "email": [
+          {
+              "_id": "5eb3f7fe6f59871863f231cb",
+              "email": "boxoffice@theactorsgang.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3f7fe6f59871863f231cc",
+              "email": "Boxoffice@TheActorsGang.com",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3f80f6f59871863f231cd",
+      "OrganizatinName": "The Boys & Girls Clubs of Santa Monica",
+      "proposalName": "The Boys & Girls Clubs of Santa Monica Youth Development Programs",
+      "email": []
+  },
+  {
+      "_id": "5eb3f85c6f59871863f231d1",
+      "OrganizatinName": "The Music Center",
+      "proposalName": "A Very Special Arts Festival (VSAF) 2020",
+      "email": []
+  },
+  {
+      "_id": "5eb3f85c6f59871863f231dc",
+      "OrganizatinName": "The Young Shakespeareans (a project of Community Partners, a 501c3 Non-Profit Charity)",
+      "proposalName": "The Young Shakespeareans (TYS)",
+      "email": []
+  },
+  {
+      "_id": "5eb3f8b96f59871863f231e1",
+      "OrganizatinName": "National Association of Latino Independent Producers (NALIP)",
+      "proposalName": "Latino Lens Incubators",
+      "email": [
+          {
+              "_id": "5eb3f8b96f59871863f231e2",
+              "email": "Sally@nalip.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f8b96f59871863f231e3",
+              "email": "kcervantes@variety.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3f8b96f59871863f231e6",
+              "email": "michelle@nalip.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f8b96f59871863f231e7",
+              "email": "info@nalip.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f8b96f59871863f231e9",
+              "email": "Info@nalip.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f8b96f59871863f231ea",
+              "email": "dwimi@nalip.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f8b96f59871863f231eb",
+              "email": "lmm@nalip.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f8b96f59871863f231ec",
+              "email": "abullard@variety.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3f8b96f59871863f231ed",
+              "email": "Workshop@nalip.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f8b96f59871863f231ee",
+              "email": "general@blcklst.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3f8b96f59871863f231f1",
+              "email": "help@interfolio.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3f8b96f59871863f231f2",
+              "email": "LatinoMediaFest@nalip.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f8b96f59871863f231f3",
+              "email": "skelban@austin.utexas.edu",
+              "status": true
+          },
+          {
+              "_id": "5eb3f8b96f59871863f231f5",
+              "email": "andrew.shea@austin.utexas.edu",
+              "status": true
+          },
+          {
+              "_id": "5eb3f8b96f59871863f231f6",
+              "email": "DWIMI@nalip.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f8b96f59871863f231f7",
+              "email": "membership@nalip.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f8b96f59871863f231f8",
+              "email": "Kammile.Whitener@nalip.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f8b96f59871863f231fa",
+              "email": "Press@nalip.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f8b96f59871863f231fb",
+              "email": "latinolens@nalip.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f8b96f59871863f231fc",
+              "email": "Michelle@nalip.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f8b96f59871863f231fe",
+              "email": "brittany.mathieu@bwr-pr.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3f8b96f59871863f231ff",
+              "email": "paulette.kam@bwr-pr.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3f8b96f59871863f23200",
+              "email": "LatinoLens@nalip.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f8b96f59871863f23201",
+              "email": "joseph.meehan@variety.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3f8b96f59871863f23203",
+              "email": "Support@Blcklst.Com",
+              "status": true
+          },
+          {
+              "_id": "5eb3f8b96f59871863f23205",
+              "email": "workshop@nalip.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f8b96f59871863f23206",
+              "email": "latinomediafest@nalip.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f8b96f59871863f23207",
+              "email": "joegonzales.81@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3f8b96f59871863f23208",
+              "email": "miguelberg@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3f8b96f59871863f2320a",
+              "email": "press@nalip.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f8b96f59871863f2320d",
+              "email": "liliana@nalip.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f8b96f59871863f2320e",
+              "email": "mediasummit@nalip.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f8b96f59871863f2320f",
+              "email": "opps@nalip.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f8b96f59871863f23210",
+              "email": "ben@nalip.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f8b96f59871863f23211",
+              "email": "General@Blcklst.Com",
+              "status": true
+          },
+          {
+              "_id": "5eb3f8b96f59871863f23213",
+              "email": "huludocasst@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3f8b96f59871863f23214",
+              "email": "Opps@nalip.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3f8b96f59871863f23215",
+      "OrganizatinName": "LA Plaza De Cultura y Artes",
+      "proposalName": "LA Plaza Cocina- the nation’s first museum and teaching kitchen dedicated to Mexican Cuisine",
+      "email": []
+  },
+  {
+      "_id": "5eb3f8b96f59871863f2321a",
+      "OrganizatinName": "Mi Terro",
+      "proposalName": "Mi Terro Food Waste",
+      "email": []
+  },
+  {
+      "_id": "5eb3f8b96f59871863f2322e",
+      "OrganizatinName": "Codemarket",
+      "proposalName": "Small Business Tech Booster Project",
+      "email": []
+  },
+  {
+      "_id": "5eb3f8c36f59871863f23245",
+      "OrganizatinName": "The LEAGUE of EXPERIENTIAL & IMMERSIVE ARTISTS (LEIA)",
+      "proposalName": "License to Open LA (LOLA)",
+      "email": [
+          {
+              "_id": "5eb3f8c36f59871863f23253",
+              "email": "noah@noproscenium.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3f8c36f59871863f2325e",
+              "email": "whyineeddiversegames@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3f8c36f59871863f23261",
+              "email": "inquiries@kinagrannis.com",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3f8d86f59871863f23271",
+      "OrganizatinName": "RespectAbility",
+      "proposalName": "Los Angeles Disability Employment Initiative",
+      "email": []
+  },
+  {
+      "_id": "5eb3f8d86f59871863f23282",
+      "OrganizatinName": "Creative Futures Collective",
+      "proposalName": "Creative Futures",
+      "email": []
+  },
+  {
+      "_id": "5eb3f8dc6f59871863f23297",
+      "OrganizatinName": "Project Equity, a program of Multiplier",
+      "proposalName": "Employee Ownership: Building a More Equitable and Resilient Future with LA’s Manufacturers and Workers",
+      "email": [
+          {
+              "_id": "5eb3f8dc6f59871863f23299",
+              "email": "alison@project-equity.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3f8dc6f59871863f2329b",
+      "OrganizatinName": "Youth Business Alliance",
+      "proposalName": "Career & Entrepreneurship Education for Youth",
+      "email": []
+  },
+  {
+      "_id": "5eb3f8dc6f59871863f232b9",
+      "OrganizatinName": "Las Fotos Project",
+      "proposalName": "A Girl-Powered Foto Studio by Las Fotos Project",
+      "email": []
+  },
+  {
+      "_id": "5eb3f8dc6f59871863f232be",
+      "OrganizatinName": "The RightWay Foundation",
+      "proposalName": "Operation Emancipation",
+      "email": []
+  },
+  {
+      "_id": "5eb3f8dd6f59871863f232c3",
+      "OrganizatinName": "3-D SPACE",
+      "proposalName": "3-D SPACE: STEREO/SCOPE",
+      "email": [
+          {
+              "_id": "5eb3f8dd6f59871863f232c6",
+              "email": "3D@3-DSPACE.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3f8eb6f59871863f232da",
+      "OrganizatinName": "Refoundry",
+      "proposalName": "Refoundry Los Angeles Program",
+      "email": [
+          {
+              "_id": "5eb3f8eb6f59871863f232dd",
+              "email": "LAOffice@refoundry.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f8eb6f59871863f232df",
+              "email": "NYOffice@refoundry.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f8eb6f59871863f232e0",
+              "email": "press@refoundry.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3f8eb6f59871863f232e1",
+      "OrganizatinName": "Alliance for Southern California Innovation",
+      "proposalName": "DTLA: From Underdog to Innovation Superhero",
+      "email": []
+  },
+  {
+      "_id": "5eb3f8eb6f59871863f232e6",
+      "OrganizatinName": "Truthseekers Inc",
+      "proposalName": "PharcydeTV",
+      "email": []
+  },
+  {
+      "_id": "5eb3f8f26f59871863f232eb",
+      "OrganizatinName": "Connecting Cultures Mobile Museum",
+      "proposalName": "CCMM-in-Schools Program",
+      "email": [
+          {
+              "_id": "5eb3f8f26f59871863f232ec",
+              "email": "connectingcultures@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3f8f26f59871863f232ed",
+              "email": "info@connectingcultures.us",
+              "status": true
+          },
+          {
+              "_id": "5eb3f8f26f59871863f232ee",
+              "email": "valerie.lezin@connectingcultures.us",
+              "status": true
+          },
+          {
+              "_id": "5eb3f8f26f59871863f232ef",
+              "email": "julia.goldman@connectingcultures.us",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3f93b6f59871863f232f0",
+      "OrganizatinName": "Venice Community Housing",
+      "proposalName": "Empowering Community Through Cultural Creativity",
+      "email": []
+  },
+  {
+      "_id": "5eb3f93b6f59871863f232fd",
+      "OrganizatinName": "People's Yoga",
+      "proposalName": "Empower the Next Generation of Community Yoga Leaders!",
+      "email": []
+  },
+  {
+      "_id": "5eb3f9436f59871863f23316",
+      "OrganizatinName": "Lost Angels Children's Project",
+      "proposalName": "Good Life Manufacturing",
+      "email": [
+          {
+              "_id": "5eb3f9436f59871863f2331c",
+              "email": "donate@lostangelscp.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f9436f59871863f23320",
+              "email": "info@lostangelscp.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f9436f59871863f23321",
+              "email": "orders@lostangelscp.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f9436f59871863f23327",
+              "email": "press@lostangelscp.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3f9436f59871863f23328",
+              "email": "donations@lostangelscp.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3f9496f59871863f23332",
+      "OrganizatinName": "Los Angeles Review of Books",
+      "proposalName": "Los Angeles Review of Books Publishing Workshop",
+      "email": []
+  },
+  {
+      "_id": "5eb3fa2d6f59871863f23336",
+      "OrganizatinName": "COOP Careers",
+      "proposalName": "COOP Careers LA Expansion",
+      "email": [
+          {
+              "_id": "5eb3fa2d6f59871863f23337",
+              "email": "ab.zieouattara@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f23338",
+              "email": "hliu0616@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f23339",
+              "email": "franktfd@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f2333a",
+              "email": "alexrendon13@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f2333b",
+              "email": "darren@coopcareers.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f2333c",
+              "email": "deleon.jer@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f2333e",
+              "email": "idairo90@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f2333f",
+              "email": "alexanderguzman0607@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f23340",
+              "email": "randy@coopcareers.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f23341",
+              "email": "michaeld.cadet@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f23342",
+              "email": "jrob907@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f23343",
+              "email": "lucy.pichardo02@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f23344",
+              "email": "gmantilladiaz@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f23345",
+              "email": "kaiwen.f.ye@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f23346",
+              "email": "j.rjs624@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f23347",
+              "email": "j.lowe1128@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f23348",
+              "email": "johnnyb0907@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f23349",
+              "email": "dc.morgan1000@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f2334a",
+              "email": "akaawar93@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f2334b",
+              "email": "gaetanaugustin593@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f2334c",
+              "email": "rychelle@coopcareers.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f2334d",
+              "email": "r.capellan1294@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f2334e",
+              "email": "zipporah.porter@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f2334f",
+              "email": "bingyuyao@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f23350",
+              "email": "matt@coopcareers.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f23351",
+              "email": "darrylbobbie@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f23352",
+              "email": "korpo.daniels@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f23353",
+              "email": "gabriela.delmar.perez@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f23354",
+              "email": "jennifer.prado01@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f23355",
+              "email": "herveylamothe@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f23356",
+              "email": "rahiesbelfon@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f23357",
+              "email": "apineiro56@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f23358",
+              "email": "kristinaelizabeth.rodriguez@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f23359",
+              "email": "duartea.george@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f2335a",
+              "email": "cathrynpalmero@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f2335b",
+              "email": "indiabot@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f2335c",
+              "email": "samanthaghanie@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f2335d",
+              "email": "alyce2129@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f2335e",
+              "email": "jmurphy227@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f2335f",
+              "email": "weigin.li3@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f23360",
+              "email": "farzana@coopcareers.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f23361",
+              "email": "glyka.lilaj@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f23363",
+              "email": "ruby@coopcareers.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f23364",
+              "email": "wonlee023@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f23365",
+              "email": "adams.abreu@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f23366",
+              "email": "melissa.photo.mateo@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f23367",
+              "email": "anselmoevans17@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f23368",
+              "email": "ramyh.saad@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f23369",
+              "email": "maybe.tw1@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f2336a",
+              "email": "vernon.huang27@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f2336b",
+              "email": "maria@coopcareers.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f2336c",
+              "email": "gen.amoncio@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f2336d",
+              "email": "mdln.dz@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f2336e",
+              "email": "chykee@coop.cx",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f2336f",
+              "email": "12syed17@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f23370",
+              "email": "ary.ariano@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f23372",
+              "email": "cristopherpgarcia@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f23373",
+              "email": "kevn.chng@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f23374",
+              "email": "max.cl.xu@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f23375",
+              "email": "chin.tiffany96@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f23376",
+              "email": "kunaalphulesar@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f23377",
+              "email": "majed5331@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f23378",
+              "email": "rudyguerrero87@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f23379",
+              "email": "nebula155@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f2337a",
+              "email": "melissa23medina@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f2337b",
+              "email": "chinchay.noelli@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f2337c",
+              "email": "nikki@coopcareers.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f2337d",
+              "email": "rickycheuk524@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f2337e",
+              "email": "jamessabella95@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f2337f",
+              "email": "abbas.asmaa@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f23380",
+              "email": "mizanur015@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f23381",
+              "email": "linda@coop.cx",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f23382",
+              "email": "csmoris@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f23383",
+              "email": "oscarkey25@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f23384",
+              "email": "shatieseswilson@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f23385",
+              "email": "darlenebueno.3@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f23386",
+              "email": "yencidaniel94@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f23387",
+              "email": "synthia92@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f23388",
+              "email": "mdiallo0518@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f23389",
+              "email": "michellecummings17@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f2338a",
+              "email": "rfrancis8@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f2338b",
+              "email": "melissanma@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f2338c",
+              "email": "arshiana95@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f2338d",
+              "email": "olamide91@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f2338e",
+              "email": "alvarezkevin92@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f2338f",
+              "email": "alisonxchen@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f23390",
+              "email": "monica@coopcareers.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f23391",
+              "email": "kevinralphrodriguez@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f23392",
+              "email": "mayaruizcamacho@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f23393",
+              "email": "jhernan402@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f23394",
+              "email": "isaaclyakubov@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f23395",
+              "email": "morrell@coopcareers.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f23396",
+              "email": "nikeeyia@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f23397",
+              "email": "jmath9782@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f23398",
+              "email": "apply@coopcareers.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f23399",
+              "email": "george@coopcareers.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f2339a",
+              "email": "carina@coopcareers.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f2339b",
+              "email": "valerio.winnie@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f2339c",
+              "email": "leora@coopcareers.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f2339d",
+              "email": "jennifer@coopcareers.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f2339e",
+              "email": "peter.delorbe@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f2339f",
+              "email": "may.hhz94@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f233a0",
+              "email": "elena.x.michaelides@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f233a1",
+              "email": "tsagli.bright@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f233a2",
+              "email": "dlaila24@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f233a4",
+              "email": "kassandraarosario@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f233a5",
+              "email": "shivana.brhamadat@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f233a6",
+              "email": "yoshidakarla@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f233a8",
+              "email": "zainm797@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f233a9",
+              "email": "loryy8713@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f233aa",
+              "email": "euniceadarquah@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f233ab",
+              "email": "luseny.m@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f233ac",
+              "email": "silviasanchez39@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f233ad",
+              "email": "crystalr1221@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f233ae",
+              "email": "liao.steven08@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f233af",
+              "email": "ashrafali.627@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f233b0",
+              "email": "krystlejohnson1995@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f233b1",
+              "email": "jairo.mata89@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f233b2",
+              "email": "kalani@coopcareers.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f233b3",
+              "email": "l.rubiera05@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f233b4",
+              "email": "carolynpanicker@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f233b5",
+              "email": "yanyee.chung@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f233b6",
+              "email": "kevin@coopcareers.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f233b7",
+              "email": "flow.kun@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f233b8",
+              "email": "kennyjin1995@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f233b9",
+              "email": "sadia.mili01@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f233ba",
+              "email": "markus@coopcareers.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa2d6f59871863f233bb",
+              "email": "adprotain@gmail.com",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3fa2d6f59871863f233bc",
+      "OrganizatinName": "Flintridge Center",
+      "proposalName": "Apprenticeship Preparation Program",
+      "email": []
+  },
+  {
+      "_id": "5eb3fa2d6f59871863f233d8",
+      "OrganizatinName": "AltaSea at the Port of Los Angeles",
+      "proposalName": "Be an Aquaculture Scientist",
+      "email": []
+  },
+  {
+      "_id": "5eb3fa2d6f59871863f233ee",
+      "OrganizatinName": "Cal State L.A. University Auxiliary Services, Inc.",
+      "proposalName": "Expanding High-Growth Inclusive Bioentrepreneurship",
+      "email": []
+  },
+  {
+      "_id": "5eb3fa2d6f59871863f233f3",
+      "OrganizatinName": "Chrysalis",
+      "proposalName": "Pathways to Stability for Justice-involved Individuals",
+      "email": []
+  },
+  {
+      "_id": "5eb3fa306f59871863f233f8",
+      "OrganizatinName": "Convergence Creative Solutions",
+      "proposalName": "Convergence LA 2050",
+      "email": [
+          {
+              "_id": "5eb3fa306f59871863f233fa",
+              "email": "veronica@weconverge.net",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa306f59871863f233fc",
+              "email": "info@weconverge.net",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3fa306f59871863f233ff",
+      "OrganizatinName": "Hacker Fund",
+      "proposalName": "S.T.E.A.M. Collective",
+      "email": []
+  },
+  {
+      "_id": "5eb3fa306f59871863f23404",
+      "OrganizatinName": "Hustle & Hustle",
+      "proposalName": "Reach Los Angeles",
+      "email": []
+  },
+  {
+      "_id": "5eb3fa406f59871863f23409",
+      "OrganizatinName": "Los Angeles Center of Photography",
+      "proposalName": "LA Photo Hub",
+      "email": [
+          {
+              "_id": "5eb3fa406f59871863f23430",
+              "email": "cgwilkinson@gmail.com",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3fa406f59871863f23435",
+      "OrganizatinName": "Red Hen Press",
+      "proposalName": "Get LA Lit: Honoring Our Cultures Through Publishing",
+      "email": []
+  },
+  {
+      "_id": "5eb3fa406f59871863f23450",
+      "OrganizatinName": "Saturday Night Bath Concert Fund",
+      "proposalName": "One interactive, 7-professional-musician popular music concert and educational presentation, at 3 continuation high schools that provide inspiration for at-risk youth in the Los Angeles area.",
+      "email": []
+  },
+  {
+      "_id": "5eb3fa9b6f59871863f2346f",
+      "OrganizatinName": "The Alliance for Media Arts + Culture",
+      "proposalName": "Arts2Work LA",
+      "email": [
+          {
+              "_id": "5eb3fa9b6f59871863f23474",
+              "email": "jocelyn@arboradiko.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa9b6f59871863f23478",
+              "email": "Jason@thealliance.media",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa9b6f59871863f23479",
+              "email": "prisgenet@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa9b6f59871863f2347c",
+              "email": "simon@documentary.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa9b6f59871863f2347d",
+              "email": "cherrypix@thealliance.media",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa9b6f59871863f2347e",
+              "email": "elspethrcg@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa9b6f59871863f23488",
+              "email": "patriciarzimmermann@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa9b6f59871863f2348c",
+              "email": "megan.a.zebrowski@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa9b6f59871863f2348e",
+              "email": "kasandra@spyhop.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa9b6f59871863f2348f",
+              "email": "jason@thealliance.media",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa9b6f59871863f23493",
+              "email": "loudertogether@pen.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa9b6f59871863f23494",
+              "email": "wendy@thealliance.media",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa9b6f59871863f2349d",
+              "email": "trish@thealliance.media",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa9b6f59871863f2349f",
+              "email": "elspethrevere@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa9b6f59871863f234a1",
+              "email": "shannon@docsociety.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa9b6f59871863f234a3",
+              "email": "editor@immerse.news",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3fa9c6f59871863f234a8",
+      "OrganizatinName": "Two Bit Circus Foundation",
+      "proposalName": "Play with Music",
+      "email": []
+  },
+  {
+      "_id": "5eb3fa9c6f59871863f234c2",
+      "OrganizatinName": "University of Southern California",
+      "proposalName": "Fighting Social Inequality For College Students",
+      "email": []
+  },
+  {
+      "_id": "5eb3fa9c6f59871863f234c7",
+      "OrganizatinName": "Warehouse TV",
+      "proposalName": "In the Treehouse by Warehouse TV",
+      "email": []
+  },
+  {
+      "_id": "5eb3fa9f6f59871863f234e7",
+      "OrganizatinName": "Up2Us, Inc.",
+      "proposalName": "The Healing Power of Coaches",
+      "email": [
+          {
+              "_id": "5eb3fa9f6f59871863f234e8",
+              "email": "devo@up2ussports.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fa9f6f59871863f234e9",
+              "email": "careers@classy.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3fac56f59871863f234ed",
+      "OrganizatinName": "Los Angeles Dodgers Foundation",
+      "proposalName": "Bigger than Baseball",
+      "email": [
+          {
+              "_id": "5eb3fac56f59871863f234ee",
+              "email": "mandy.bell@mlb.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fac56f59871863f234ef",
+              "email": "ian.browne@mlb.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fac56f59871863f234f0",
+              "email": "Mike.Rosenbaum@mlb.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fac56f59871863f234f1",
+              "email": "Paul.Casella@mlb.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fac56f59871863f234f2",
+              "email": "adam.berry@mlb.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fac56f59871863f234f3",
+              "email": "David.Adler@mlb.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fac56f59871863f234f4",
+              "email": "greg.johns@mlb.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fac56f59871863f234f6",
+              "email": "Daniel.Kramer@mlb.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fac56f59871863f234f7",
+              "email": "anthony.castrovince@mlb.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fac56f59871863f234f9",
+              "email": "maria.guardado@mlb.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fac56f59871863f234fa",
+              "email": "Do-Hyoung.Park@mlb.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fac56f59871863f234fb",
+              "email": "Manny.Randhawa@mlb.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fac56f59871863f234fc",
+              "email": "scott.merkin@mlb.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fac56f59871863f234fd",
+              "email": "tr.sullivan@MLB.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fac56f59871863f234fe",
+              "email": "Chad.Thornburg@mlb.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fac56f59871863f234ff",
+              "email": "John.Crosby@mlb.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fac56f59871863f23500",
+              "email": "development@dodgersfoundation.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fac56f59871863f23501",
+              "email": "Matt.Kelly@mlb.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fac56f59871863f23503",
+              "email": "jim.callis@mlb.com",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3fac76f59871863f23504",
+      "OrganizatinName": "City of Los Angeles Department of Recreation and Parks",
+      "proposalName": "Mobile Recreation Program",
+      "email": []
+  },
+  {
+      "_id": "5eb3fad46f59871863f23508",
+      "OrganizatinName": "Nature for All",
+      "proposalName": "Leadership Development",
+      "email": [
+          {
+              "_id": "5eb3fad46f59871863f23509",
+              "email": "people@mobilityjustice.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fad46f59871863f2350a",
+              "email": "jobs@cirweb.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fad46f59871863f2350b",
+              "email": "contact@lanatureforall.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fad46f59871863f2350c",
+              "email": "jsolomon@treepeople.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fad46f59871863f2350d",
+              "email": "kim@lanatureforall.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fad46f59871863f2350e",
+              "email": "omar@lanatureforall.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fad46f59871863f23510",
+              "email": "bryan@lanatureforall.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3fad66f59871863f23511",
+      "OrganizatinName": "Harmony Project",
+      "proposalName": "Harmony Project Music Program",
+      "email": [
+          {
+              "_id": "5eb3fad66f59871863f23512",
+              "email": "info@harmony-project.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3fafb6f59871863f23514",
+      "OrganizatinName": "CicLAvia",
+      "proposalName": "CicLAvia: Open Streets bring Healthier Connections",
+      "email": [
+          {
+              "_id": "5eb3fafb6f59871863f23518",
+              "email": "alex@ciclavia.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fafb6f59871863f2351c",
+              "email": "meg@ciclavia.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fafb6f59871863f2351d",
+              "email": "pr@ciclavia.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fafb6f59871863f23520",
+              "email": "tafarai@ciclavia.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fafb6f59871863f23521",
+              "email": "rachel@ciclavia.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fafb6f59871863f23523",
+              "email": "meisha@ciclavia.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fafb6f59871863f23525",
+              "email": "volunteer@ciclavia.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fafb6f59871863f23526",
+              "email": "romel@ciclavia.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fafb6f59871863f23527",
+              "email": "jennifer@ciclavia.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fafb6f59871863f23529",
+              "email": "info@ciclavia.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fafb6f59871863f2352a",
+              "email": "jobs@ciclavia.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fafb6f59871863f2352c",
+              "email": "john@ciclavia.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fafb6f59871863f23531",
+              "email": "aerienne@ciclavia.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3fb4e6f59871863f23534",
+      "OrganizatinName": "Harlem Lacrosse - Los Angeles",
+      "proposalName": "\"Keep Playing\"",
+      "email": [
+          {
+              "_id": "5eb3fb4e6f59871863f23535",
+              "email": "adrian@harlemlacrosse.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fb4e6f59871863f23536",
+              "email": "alfonse@harlemlacrosse.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fb4e6f59871863f23537",
+              "email": "coachmaddy@harlemlacrosse.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fb4e6f59871863f23538",
+              "email": "joel@harlemlacrosse.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fb4e6f59871863f23539",
+              "email": "franchesca@harlemlacrosse.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fb4e6f59871863f2353a",
+              "email": "jenny@harlemlacrosse.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fb4e6f59871863f2353b",
+              "email": "jill@harlemlacrosse.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fb4e6f59871863f2353c",
+              "email": "bart@harlemlacrosse.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fb4e6f59871863f2353d",
+              "email": "mary@harlemlacrosse.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fb4e6f59871863f2353e",
+              "email": "jaime@harlemlacrosse.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fb4e6f59871863f2353f",
+              "email": "alicia@harlemlacrosse.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fb4e6f59871863f23540",
+              "email": "cormac@harlemlacrosse.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fb4e6f59871863f23541",
+              "email": "coachmike@harlemlacrosse.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fb4e6f59871863f23542",
+              "email": "murray@harlemlacrosse.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fb4e6f59871863f23543",
+              "email": "lantz@harlemlacrosse.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fb4e6f59871863f23544",
+              "email": "richard@harlemlacrosse.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fb4e6f59871863f23545",
+              "email": "claudia@harlemlacrosse.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fb4e6f59871863f23546",
+              "email": "coachcharlotte@harlemlacrosse.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fb4e6f59871863f23547",
+              "email": "greta@harlemlacrosse.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fb4e6f59871863f23548",
+              "email": "charles@harlemlacrosse.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fb4e6f59871863f23549",
+              "email": "mleonard@harlemlacrosse.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fb4e6f59871863f2354a",
+              "email": "coachrod@harlemlacrosse.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fb4e6f59871863f2354b",
+              "email": "jackie@harlemlacrosse.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fb4e6f59871863f2354c",
+              "email": "elise@harlemlacrosse.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fb4e6f59871863f2354d",
+              "email": "jacques@harlemlacrosse.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fb4e6f59871863f2354e",
+              "email": "mlong@harlemlacrosse.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fb4e6f59871863f23550",
+              "email": "coachernie@harlemlacrosse.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fb4e6f59871863f23551",
+              "email": "natasha@harlemlacrosse.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fb4e6f59871863f23552",
+              "email": "coachpat@harlemlacrosse.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fb4e6f59871863f23553",
+              "email": "devin@harlemlacrosse.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fb4e6f59871863f23554",
+              "email": "jmayer@harlemlacrosse.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fb4e6f59871863f23555",
+              "email": "christine@harlemlacrosse.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fb4e6f59871863f23556",
+              "email": "kevin@harlemlacrosse.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fb4e6f59871863f23557",
+              "email": "marissa@harlemlacrosse.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fb4e6f59871863f23558",
+              "email": "info@harlemlacrosse.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fb4e6f59871863f23559",
+              "email": "josiah@harlemlacrosse.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fb4e6f59871863f2355a",
+              "email": "kim@harlemlacrosse.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3fb556f59871863f2355b",
+      "OrganizatinName": "American Heart Association",
+      "proposalName": "Community STEPS",
+      "email": []
+  },
+  {
+      "_id": "5eb3fb556f59871863f2355e",
+      "OrganizatinName": "Angel City Alliance",
+      "proposalName": "Angel City Sports",
+      "email": []
+  },
+  {
+      "_id": "5eb3fb6e6f59871863f23563",
+      "OrganizatinName": "Woodcraft Rangers",
+      "proposalName": "Woodcraft Rangers Summer Enrichment Day Camp",
+      "email": []
+  },
+  {
+      "_id": "5eb3fb776f59871863f2356e",
+      "OrganizatinName": "Cedars Sinai Medical Center",
+      "proposalName": "ShineLA: Transforming the way Angelenos feel, move, and connect in our city",
+      "email": []
+  },
+  {
+      "_id": "5eb3fb776f59871863f23574",
+      "OrganizatinName": "The Urban Warehouse",
+      "proposalName": "Skate-4-Education",
+      "email": []
+  },
+  {
+      "_id": "5eb3fb7b6f59871863f23596",
+      "OrganizatinName": "Public Matters",
+      "proposalName": "University Park Slow Jams",
+      "email": [
+          {
+              "_id": "5eb3fb7b6f59871863f23599",
+              "email": "community@wedid.it",
+              "status": true
+          },
+          {
+              "_id": "5eb3fb7b6f59871863f2359a",
+              "email": "customerservice@Wediditfundraising.com",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3fb856f59871863f2359b",
+      "OrganizatinName": "Nature for All",
+      "proposalName": "Leadership Development",
+      "email": [
+          {
+              "_id": "5eb3fb856f59871863f2359c",
+              "email": "jobs@cirweb.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fb856f59871863f2359d",
+              "email": "people@mobilityjustice.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fb856f59871863f2359e",
+              "email": "omar@lanatureforall.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fb856f59871863f235a0",
+              "email": "bryan@lanatureforall.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fb856f59871863f235a1",
+              "email": "kim@lanatureforall.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fb856f59871863f235a2",
+              "email": "jsolomon@treepeople.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fb856f59871863f235a3",
+              "email": "contact@lanatureforall.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3fb856f59871863f235a4",
+      "OrganizatinName": "America SCORES Los Angeles",
+      "proposalName": "Literacy in Action",
+      "email": []
+  },
+  {
+      "_id": "5eb3fb8a6f59871863f235bf",
+      "OrganizatinName": "Bicycle Kitchen/La Bicicocina",
+      "proposalName": "Bikes for the People",
+      "email": []
+  },
+  {
+      "_id": "5eb3fb8c6f59871863f235c3",
+      "OrganizatinName": "City of Los Angeles Department of Recreation and Parks",
+      "proposalName": "Mobile Recreation Program",
+      "email": []
+  },
+  {
+      "_id": "5eb3fb8e6f59871863f235c7",
+      "OrganizatinName": "Harmony Project",
+      "proposalName": "Harmony Project Music Program",
+      "email": [
+          {
+              "_id": "5eb3fb8e6f59871863f235c9",
+              "email": "info@harmony-project.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3fb8e6f59871863f235ca",
+      "OrganizatinName": "Jail Guitar Doors",
+      "proposalName": "Community Arts Programming & Outreach (CAPO) Project",
+      "email": []
+  },
+  {
+      "_id": "5eb3fbb26f59871863f235cf",
+      "OrganizatinName": "Los Angeles Dodgers Foundation",
+      "proposalName": "Bigger than Baseball",
+      "email": [
+          {
+              "_id": "5eb3fbb26f59871863f235d0",
+              "email": "John.Crosby@mlb.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fbb26f59871863f235d1",
+              "email": "Do-Hyoung.Park@mlb.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fbb26f59871863f235d2",
+              "email": "Matt.Kelly@mlb.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fbb26f59871863f235d3",
+              "email": "David.Adler@mlb.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fbb26f59871863f235d4",
+              "email": "ian.browne@mlb.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fbb26f59871863f235d6",
+              "email": "Paul.Casella@mlb.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fbb26f59871863f235d7",
+              "email": "scott.merkin@mlb.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fbb26f59871863f235d8",
+              "email": "mandy.bell@mlb.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fbb26f59871863f235d9",
+              "email": "Manny.Randhawa@mlb.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fbb26f59871863f235db",
+              "email": "Mike.Rosenbaum@mlb.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fbb26f59871863f235dc",
+              "email": "adam.berry@mlb.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fbb26f59871863f235de",
+              "email": "anthony.castrovince@mlb.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fbb26f59871863f235df",
+              "email": "maria.guardado@mlb.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fbb26f59871863f235e0",
+              "email": "tr.sullivan@MLB.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fbb26f59871863f235e1",
+              "email": "Chad.Thornburg@mlb.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fbb26f59871863f235e2",
+              "email": "development@dodgersfoundation.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fbb26f59871863f235e3",
+              "email": "Daniel.Kramer@mlb.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fbb26f59871863f235e4",
+              "email": "greg.johns@mlb.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fbb26f59871863f235e5",
+              "email": "jim.callis@mlb.com",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3fbbc6f59871863f235e6",
+      "OrganizatinName": "Los Angeles Maritime Institute",
+      "proposalName": "Ocean Adventure Together!",
+      "email": [
+          {
+              "_id": "5eb3fbbc6f59871863f235e7",
+              "email": "VolunteerCoordinator@lamitopsail.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fbbc6f59871863f235e9",
+              "email": "Mark.friedman@lamitopsail.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fbbc6f59871863f235ea",
+              "email": "marklewisfriedman@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fbbc6f59871863f235eb",
+              "email": "volunteercoordinator@lamitopsail.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fbbc6f59871863f235ec",
+              "email": "info@lamitopsail.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3fbbc6f59871863f235ed",
+      "OrganizatinName": "Los Angeles Neighborhood Initiative (LANI)",
+      "proposalName": "#SelfiesforAll: Creating Public Art Together",
+      "email": []
+  },
+  {
+      "_id": "5eb3fbc86f59871863f235f2",
+      "OrganizatinName": "Malibu Foundation",
+      "proposalName": "Endless Summer Surf Camp",
+      "email": [
+          {
+              "_id": "5eb3fbc86f59871863f235f3",
+              "email": "emergencyrelief@bgcmalibu.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fbc86f59871863f235f4",
+              "email": "aucc.aula@antioch.edu",
+              "status": true
+          },
+          {
+              "_id": "5eb3fbc86f59871863f235f5",
+              "email": "wellnessinfo@bgcmalibu.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3fbd36f59871863f235f7",
+      "OrganizatinName": "NULL",
+      "proposalName": "POPS the Club",
+      "email": [
+          {
+              "_id": "5eb3fbd36f59871863f235f8",
+              "email": "arielle@popsclubs.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fbd36f59871863f235fb",
+              "email": "Amy@popsclubs.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fbd36f59871863f235fd",
+              "email": "sonia@popsclubs.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fbd36f59871863f235ff",
+              "email": "amy@popsclubs.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fbd36f59871863f23601",
+              "email": "Arielle@popsclubs.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fbd36f59871863f23602",
+              "email": "info@popsclubs.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fbd36f59871863f23603",
+              "email": "apalmer@popsclubs.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3fbd66f59871863f23604",
+      "OrganizatinName": "Up2Us, Inc.",
+      "proposalName": "The Healing Power of Coaches",
+      "email": [
+          {
+              "_id": "5eb3fbd66f59871863f23608",
+              "email": "devo@up2ussports.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fbd66f59871863f23609",
+              "email": "careers@classy.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3fbf26f59871863f2360a",
+      "OrganizatinName": "Jewish Big Brothers Big Sisters of Los Angeles",
+      "proposalName": "Teen Talk",
+      "email": []
+  },
+  {
+      "_id": "5eb3fbf86f59871863f2362c",
+      "OrganizatinName": "Special Olympics Southern California",
+      "proposalName": "Build Acceptance & Inclusion of Persons with Disabilities in LAUSD via Special Olympics Unified Champion Schools®",
+      "email": []
+  },
+  {
+      "_id": "5eb3fc0b6f59871863f2362f",
+      "OrganizatinName": "Arts Bridging the Gap",
+      "proposalName": "100 Murals for Peace",
+      "email": [
+          {
+              "_id": "5eb3fc0b6f59871863f23630",
+              "email": "andrew@artsbridgingthegap.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fc0b6f59871863f23631",
+              "email": "johnk@artsbridgingthegap.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fc0b6f59871863f23632",
+              "email": "paula@artsbridgingthegap.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fc0b6f59871863f23633",
+              "email": "cory@artsbridgingthegap.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fc0b6f59871863f23634",
+              "email": "elia@artsbridgingthegap.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fc0b6f59871863f23635",
+              "email": "steve@artsbridgingthegap.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fc0b6f59871863f23636",
+              "email": "john@artsbridgingthegap.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fc0b6f59871863f23639",
+              "email": "pamela@artsbridgingthegap.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fc0b6f59871863f2363a",
+              "email": "mollie@artsbridgingthegap.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3fc1a6f59871863f2363b",
+      "OrganizatinName": "human-I-T",
+      "proposalName": "#include",
+      "email": [
+          {
+              "_id": "5eb3fc1a6f59871863f2363c",
+              "email": "marketing@human-I-T.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fc1a6f59871863f2363d",
+              "email": "programs@smarthuman.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fc1a6f59871863f2363e",
+              "email": "info@human-i-t.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fc1a6f59871863f2363f",
+              "email": "fundraising@human-i-t.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fc1a6f59871863f23640",
+              "email": "donate@human-i-t.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fc1a6f59871863f23641",
+              "email": "recruiting@human-i-t.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3fc1e6f59871863f23643",
+      "OrganizatinName": "EveryoneOn",
+      "proposalName": "Connected & Empowered Communities (CEC)",
+      "email": [
+          {
+              "_id": "5eb3fc1e6f59871863f23644",
+              "email": "support@everyoneon.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fc1e6f59871863f23645",
+              "email": "development@everyoneon.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3fc276f59871863f23647",
+      "OrganizatinName": "Korean American Family Services",
+      "proposalName": "Share Your Heart, Share Your Home",
+      "email": []
+  },
+  {
+      "_id": "5eb3fc276f59871863f2364d",
+      "OrganizatinName": "Facing History and Ourselves",
+      "proposalName": "Facing History LA",
+      "email": []
+  },
+  {
+      "_id": "5eb3fc4c6f59871863f23652",
+      "OrganizatinName": "OneJustice",
+      "proposalName": "Los Angeles Asylum Legal Clinic and Resource Fairs Collaborative",
+      "email": [
+          {
+              "_id": "5eb3fc4c6f59871863f23653",
+              "email": "covid_response@one-justice.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fc4c6f59871863f23654",
+              "email": "epringsheim@one-justice.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fc4c6f59871863f23656",
+              "email": "milanc@advancingjustice-alc.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fc4c6f59871863f23658",
+              "email": "pjames@one-justice.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fc4c6f59871863f23659",
+              "email": "sabrinac@advancingjustice-alc.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fc4c6f59871863f2365b",
+              "email": "lgasparyan@one-justice.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fc4c6f59871863f2365c",
+              "email": "socalclinics@one-justice.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fc4c6f59871863f2365d",
+              "email": "norcalclinics@one-justice.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fc4c6f59871863f2365f",
+              "email": "development@one-justice.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fc4c6f59871863f23660",
+              "email": "dmarquez@one-justice.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fc4c6f59871863f23661",
+              "email": "pfodell@one-justice.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fc4c6f59871863f23662",
+              "email": "lhipolito@one-justice.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fc4c6f59871863f23663",
+              "email": "rmangiliman@one-justice.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3fc4d6f59871863f23664",
+      "OrganizatinName": "The Foundation for Living Beauty",
+      "proposalName": "Virtual programming",
+      "email": []
+  },
+  {
+      "_id": "5eb3fc596f59871863f2367e",
+      "OrganizatinName": "Civy, Inc.",
+      "proposalName": "Civy - Civic Engagement Platform",
+      "email": []
+  },
+  {
+      "_id": "5eb3fc5e6f59871863f23681",
+      "OrganizatinName": "Trauma Informed LA (TILA)",
+      "proposalName": "Our Stories Matter: Connecting Los Angeles through Stories of Healing",
+      "email": [
+          {
+              "_id": "5eb3fc5e6f59871863f23693",
+              "email": "Legal@GoFundMe.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fc5e6f59871863f23698",
+              "email": "legal@gofundme.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fc5e6f59871863f2369a",
+              "email": "nposupport@gofundme.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fc5e6f59871863f2369d",
+              "email": "GFMlegal@gofundme.com",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3fc606f59871863f236a0",
+      "OrganizatinName": "Miry's List",
+      "proposalName": "Welcome, Neighbor 2020",
+      "email": [
+          {
+              "_id": "5eb3fc606f59871863f236a2",
+              "email": "welcome@miryslist.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3fc606f59871863f236a3",
+      "OrganizatinName": "Living Through Giving Foundation",
+      "proposalName": "#Hashtag Lunchbag across Los Angeles",
+      "email": []
+  },
+  {
+      "_id": "5eb3fc736f59871863f236a8",
+      "OrganizatinName": "Venice Family Clinic",
+      "proposalName": "West L.A. Votes! — A Civic Engagement Initiative",
+      "email": [
+          {
+              "_id": "5eb3fc736f59871863f236a9",
+              "email": "SPEstrada@mednet.ucla.edu",
+              "status": true
+          },
+          {
+              "_id": "5eb3fc736f59871863f236aa",
+              "email": "VFChealthcoverage@mednet.ucla.edu",
+              "status": true
+          },
+          {
+              "_id": "5eb3fc736f59871863f236ab",
+              "email": "VFCinfo@mednet.ucla.edu",
+              "status": true
+          },
+          {
+              "_id": "5eb3fc736f59871863f236ac",
+              "email": "VFCInfo@mednet.ucla.edu",
+              "status": true
+          },
+          {
+              "_id": "5eb3fc736f59871863f236ad",
+              "email": "MStuffmann@mednet.ucla.edu",
+              "status": true
+          },
+          {
+              "_id": "5eb3fc736f59871863f236af",
+              "email": "VFCvolunteer@mednet.ucla.edu",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3fc826f59871863f236b1",
+      "OrganizatinName": "Arts Bridging the Gap",
+      "proposalName": "100 Murals for Peace",
+      "email": [
+          {
+              "_id": "5eb3fc826f59871863f236b3",
+              "email": "john@artsbridgingthegap.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fc826f59871863f236b4",
+              "email": "paula@artsbridgingthegap.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fc826f59871863f236b5",
+              "email": "andrew@artsbridgingthegap.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fc826f59871863f236b6",
+              "email": "cory@artsbridgingthegap.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fc826f59871863f236b8",
+              "email": "mollie@artsbridgingthegap.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fc826f59871863f236b9",
+              "email": "steve@artsbridgingthegap.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fc826f59871863f236ba",
+              "email": "pamela@artsbridgingthegap.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fc826f59871863f236bb",
+              "email": "johnk@artsbridgingthegap.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fc826f59871863f236bc",
+              "email": "elia@artsbridgingthegap.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3fcc56f59871863f236bd",
+      "OrganizatinName": "Union Rescue Mission",
+      "proposalName": "Every Child & Family Off the Streets",
+      "email": []
+  },
+  {
+      "_id": "5eb3fcc56f59871863f236ca",
+      "OrganizatinName": "Changeist",
+      "proposalName": "Changeist: Young people engaging in community",
+      "email": []
+  },
+  {
+      "_id": "5eb3fd1f6f59871863f236cf",
+      "OrganizatinName": "National Association of Latino Independent Producers (NALIP)",
+      "proposalName": "Emerging Content Creators Inclusion Initiative (ECCII)",
+      "email": [
+          {
+              "_id": "5eb3fd1f6f59871863f236d0",
+              "email": "joegonzales.81@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fd1f6f59871863f236d2",
+              "email": "mediasummit@nalip.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fd1f6f59871863f236d3",
+              "email": "Opps@nalip.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fd1f6f59871863f236d4",
+              "email": "Info@nalip.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fd1f6f59871863f236d5",
+              "email": "abullard@variety.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fd1f6f59871863f236d6",
+              "email": "Kammile.Whitener@nalip.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fd1f6f59871863f236d8",
+              "email": "lmm@nalip.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fd1f6f59871863f236da",
+              "email": "brittany.mathieu@bwr-pr.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fd1f6f59871863f236dc",
+              "email": "michelle@nalip.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fd1f6f59871863f236dd",
+              "email": "latinomediafest@nalip.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fd1f6f59871863f236de",
+              "email": "General@Blcklst.Com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fd1f6f59871863f236df",
+              "email": "membership@nalip.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fd1f6f59871863f236e0",
+              "email": "LatinoMediaFest@nalip.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fd1f6f59871863f236e2",
+              "email": "andrew.shea@austin.utexas.edu",
+              "status": true
+          },
+          {
+              "_id": "5eb3fd1f6f59871863f236e3",
+              "email": "DWIMI@nalip.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fd1f6f59871863f236e5",
+              "email": "skelban@austin.utexas.edu",
+              "status": true
+          },
+          {
+              "_id": "5eb3fd1f6f59871863f236e6",
+              "email": "miguelberg@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fd1f6f59871863f236e7",
+              "email": "paulette.kam@bwr-pr.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fd1f6f59871863f236e8",
+              "email": "dwimi@nalip.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fd1f6f59871863f236e9",
+              "email": "general@blcklst.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fd1f6f59871863f236ea",
+              "email": "opps@nalip.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fd1f6f59871863f236eb",
+              "email": "latinolens@nalip.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fd1f6f59871863f236ed",
+              "email": "workshop@nalip.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fd1f6f59871863f236ee",
+              "email": "Mediasummit@nalip.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fd1f6f59871863f236f0",
+              "email": "help@interfolio.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fd1f6f59871863f236f3",
+              "email": "info@nalip.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fd1f6f59871863f236f4",
+              "email": "Press@nalip.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fd1f6f59871863f236f5",
+              "email": "kcervantes@variety.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fd1f6f59871863f236f6",
+              "email": "Workshop@nalip.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fd1f6f59871863f236f7",
+              "email": "huludocasst@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fd1f6f59871863f236f9",
+              "email": "Support@Blcklst.Com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fd1f6f59871863f236fa",
+              "email": "liliana@nalip.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fd1f6f59871863f236fb",
+              "email": "press@nalip.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fd1f6f59871863f236fd",
+              "email": "ben@nalip.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fd1f6f59871863f236fe",
+              "email": "joseph.meehan@variety.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fd1f6f59871863f236ff",
+              "email": "Sally@nalip.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fd1f6f59871863f23700",
+              "email": "Michelle@nalip.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fd1f6f59871863f23704",
+              "email": "LatinoLens@nalip.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3fd236f59871863f23705",
+      "OrganizatinName": "Walk With Sally",
+      "proposalName": "Help Support Children Impacted by Cancer",
+      "email": [
+          {
+              "_id": "5eb3fd236f59871863f23706",
+              "email": "careers@classy.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fd236f59871863f23708",
+              "email": "info@walkwithsally.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3fd266f59871863f2370a",
+      "OrganizatinName": "Friendship Foundation",
+      "proposalName": "Friendship Clubs: Building Community for ALL Children",
+      "email": [
+          {
+              "_id": "5eb3fd266f59871863f2370c",
+              "email": "Danielle@friendshipfoundation.com",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3fd296f59871863f2370d",
+      "OrganizatinName": "Voices Beyond Assault",
+      "proposalName": "Beauty of Survival Project- Empowering Survivors of Sexual Assault",
+      "email": [
+          {
+              "_id": "5eb3fd296f59871863f2370f",
+              "email": "info@voicesbeyondassault.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3fd336f59871863f23724",
+      "OrganizatinName": "Citizens Of Culture",
+      "proposalName": "Community Practice",
+      "email": [
+          {
+              "_id": "5eb3fd336f59871863f23725",
+              "email": "citizensofculturela@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fd336f59871863f23727",
+              "email": "hello@bvalkyrie.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fd336f59871863f23728",
+              "email": "editors@citizensofculture.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fd336f59871863f23729",
+              "email": "maceo@citizensofculture.com",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3fd3e6f59871863f2372a",
+      "OrganizatinName": "Center for Council, a project of Community Partners",
+      "proposalName": "Circle Up Los Angeles (C-U-LA)",
+      "email": [
+          {
+              "_id": "5eb3fd3e6f59871863f2372b",
+              "email": "katelipkis@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fd3e6f59871863f2372c",
+              "email": "tools.for.togetherness@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fd3e6f59871863f2372e",
+              "email": "contact@centerforcouncil.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3fd3e6f59871863f2372f",
+      "OrganizatinName": "Altadena Library District",
+      "proposalName": "Curiosity Connection: Altadena Library on Wheels",
+      "email": []
+  },
+  {
+      "_id": "5eb3fd3e6f59871863f23734",
+      "OrganizatinName": "InsightLA",
+      "proposalName": "Insight in Action",
+      "email": []
+  },
+  {
+      "_id": "5eb3fd3f6f59871863f23757",
+      "OrganizatinName": "Dressember",
+      "proposalName": "Building a Legion of Advocates",
+      "email": [
+          {
+              "_id": "5eb3fd3f6f59871863f2375a",
+              "email": "hello@dressember.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3fd3f6f59871863f2375b",
+      "OrganizatinName": "Ready to Succeed",
+      "proposalName": "Creating Connection & Community for Youth in Foster Care",
+      "email": []
+  },
+  {
+      "_id": "5eb3fd3f6f59871863f23760",
+      "OrganizatinName": "Heidi Duckler Dance",
+      "proposalName": "Los Angeles Street",
+      "email": []
+  },
+  {
+      "_id": "5eb3fd486f59871863f2377a",
+      "OrganizatinName": "Creative Acts",
+      "proposalName": "Art Attacks",
+      "email": [
+          {
+              "_id": "5eb3fd486f59871863f2377b",
+              "email": "dani@creativeacts.us",
+              "status": true
+          },
+          {
+              "_id": "5eb3fd486f59871863f2377e",
+              "email": "info@creativeacts.us",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3fd486f59871863f2377f",
+      "OrganizatinName": "International Eye LA",
+      "proposalName": "Leimert Park Village Festival Series",
+      "email": []
+  },
+  {
+      "_id": "5eb3fd4c6f59871863f23784",
+      "OrganizatinName": "resisterhoodLA",
+      "proposalName": "Quarterly Hygiene Kit Builds Events to benefit our Unhoused Neighbors",
+      "email": [
+          {
+              "_id": "5eb3fd4c6f59871863f2378b",
+              "email": "volunteer@resisterhoodLA.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3fd6a6f59871863f23799",
+      "OrganizatinName": "OneJustice",
+      "proposalName": "Los Angeles Asylum Legal Clinic and Resource Fairs Collaborative",
+      "email": [
+          {
+              "_id": "5eb3fd6a6f59871863f2379b",
+              "email": "covid_response@one-justice.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fd6a6f59871863f2379c",
+              "email": "lgasparyan@one-justice.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fd6a6f59871863f2379e",
+              "email": "epringsheim@one-justice.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fd6a6f59871863f2379f",
+              "email": "milanc@advancingjustice-alc.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fd6a6f59871863f237a0",
+              "email": "rmangiliman@one-justice.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fd6a6f59871863f237a1",
+              "email": "lhipolito@one-justice.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fd6a6f59871863f237a2",
+              "email": "pjames@one-justice.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fd6a6f59871863f237a5",
+              "email": "norcalclinics@one-justice.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fd6a6f59871863f237a6",
+              "email": "sabrinac@advancingjustice-alc.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fd6a6f59871863f237a7",
+              "email": "dmarquez@one-justice.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fd6a6f59871863f237a8",
+              "email": "development@one-justice.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fd6a6f59871863f237a9",
+              "email": "pfodell@one-justice.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fd6a6f59871863f237aa",
+              "email": "socalclinics@one-justice.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3fd6a6f59871863f237ab",
+      "OrganizatinName": "Startups in the Sky",
+      "proposalName": "InTECHrity Conference (powered by Startups in the Sky)",
+      "email": []
+  },
+  {
+      "_id": "5eb3fd756f59871863f237bc",
+      "OrganizatinName": "Southern California Curling Center",
+      "proposalName": "Connect With Curling",
+      "email": [
+          {
+              "_id": "5eb3fd756f59871863f237bd",
+              "email": "Liza@HollywoodCurling.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fd756f59871863f237be",
+              "email": "bonspiel@hollywoodcurling.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fd756f59871863f237bf",
+              "email": "liza@hollywoodcurling.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fd756f59871863f237c1",
+              "email": "subs@hollywoodcurling.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fd756f59871863f237c3",
+              "email": "board@hollywoodcurling.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fd756f59871863f237c5",
+              "email": "info@hollywoodcurling.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3fd756f59871863f237c6",
+      "OrganizatinName": "Build A Better World Foundation",
+      "proposalName": "Build A Better World Foundation Concert",
+      "email": []
+  },
+  {
+      "_id": "5eb3fd786f59871863f237ef",
+      "OrganizatinName": "Boyle Heights Beat/Radio Pulso",
+      "proposalName": "Voices/Voces",
+      "email": []
+  },
+  {
+      "_id": "5eb3fd886f59871863f237f2",
+      "OrganizatinName": "New Horizons: Serving Individuals with Special Needs",
+      "proposalName": "Bold Futures through New Horizons",
+      "email": []
+  },
+  {
+      "_id": "5eb3fd886f59871863f237f6",
+      "OrganizatinName": "PLUS ME Project",
+      "proposalName": "Our Stories Matter: Empowering LA To Connect Through Storytelling",
+      "email": []
+  },
+  {
+      "_id": "5eb3fdcd6f59871863f237fb",
+      "OrganizatinName": "The Music Center",
+      "proposalName": "The Music Center’s Dance DTLA",
+      "email": []
+  },
+  {
+      "_id": "5eb3fdd26f59871863f23806",
+      "OrganizatinName": "Conscious Kids Project",
+      "proposalName": "Conscious Connections",
+      "email": [
+          {
+              "_id": "5eb3fdd26f59871863f23808",
+              "email": "micah@micahrich.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fdd26f59871863f23809",
+              "email": "consciouskidsproject@gmail.com",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3fe8f6f59871863f2380a",
+      "OrganizatinName": "826LA",
+      "proposalName": "Changing the Story: Connecting Los Angeles Communities Through Volunteering",
+      "email": [
+          {
+              "_id": "5eb3fe8f6f59871863f2380d",
+              "email": "TSarmina@826LA.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f2380e",
+              "email": "events@826la.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f23811",
+              "email": "IWantToHelp@826la.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f23813",
+              "email": "Wendy@826la.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f23815",
+              "email": "kenny@826la.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f23816",
+              "email": "TSarmina@826la.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f23818",
+              "email": "Angelica@826LA.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f2381a",
+              "email": "VolunteerTeam@826LA.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f2381b",
+              "email": "jobs@826la.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f2381c",
+              "email": "rachel@826la.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f2381d",
+              "email": "jennie@826la.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f2381e",
+              "email": "pedro@826la.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f2381f",
+              "email": "Beatriz@826LA.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f23821",
+              "email": "Cecilia@826la.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f23823",
+              "email": "hello@brit.co",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f23825",
+              "email": "Cheryl@826LA.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f23826",
+              "email": "cheryl@826LA.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f23827",
+              "email": "Rachel@826LA.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f23828",
+              "email": "Rebecca@826LA.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f23829",
+              "email": "Carinne@826LA.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f2382a",
+              "email": "cathy@826la.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f2382b",
+              "email": "Angelica@826la.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f2382c",
+              "email": "iwanttohelp@826la.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f2382f",
+              "email": "mariesakubasek@826la.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f23830",
+              "email": "Paula@826LA.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f23834",
+              "email": "Events@826LA.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f23835",
+              "email": "Tsarmina@826LA.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f23836",
+              "email": "carinne@826la.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f23838",
+              "email": "venicecocktails@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f23839",
+              "email": "Jennie@826LA.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f2383b",
+              "email": "Lauren@826LA.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f2383c",
+              "email": "carolyn@826la.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f2383e",
+              "email": "Mariesa@826LA.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f23841",
+              "email": "shawn@826la.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f23843",
+              "email": "Aldo@826LA.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f23845",
+              "email": "tsarmina@826la.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f23846",
+              "email": "Pedro@826la.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f2384a",
+              "email": "laurenhumphrey@826la.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f2384b",
+              "email": "maricruz@826la.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f2384d",
+              "email": "Cynthia@826LA.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f2384e",
+              "email": "iwanttohelp@826LA.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f2384f",
+              "email": "celene@la-libreria.net",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f23850",
+              "email": "Marisa@826LA.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f23852",
+              "email": "Tsarmina@826la.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f23853",
+              "email": "cynthia@826la.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f23854",
+              "email": "info@826LA.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f23855",
+              "email": "Joel@826LA.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f23857",
+              "email": "beatriz@826la.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f23858",
+              "email": "fieldtrips@826LA.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f23859",
+              "email": "mike@826la.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f2385a",
+              "email": "cynthia@826LA.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f2385c",
+              "email": "Isabella@826la.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f2385e",
+              "email": "Marisa@826la.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f23861",
+              "email": "Shawn@826LA.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f23862",
+              "email": "Carolyn@826LA.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f23863",
+              "email": "Pedro@826LA.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f23864",
+              "email": "Lauren@826la.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f23866",
+              "email": "smcmanis@sacbee.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f23868",
+              "email": "Cathy@826LA.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f23869",
+              "email": "LaTesha@826LA.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f2386d",
+              "email": "Cecilia@826LA.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f2386e",
+              "email": "info@826la.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f23871",
+              "email": "rebecca@826la.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f23872",
+              "email": "aldo@826la.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f23873",
+              "email": "Candice.Wynter@bm.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f23874",
+              "email": "volunteerteam@826la.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f23876",
+              "email": "Isabella@826LA.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f23877",
+              "email": "amy.pfister@turner.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f2387a",
+              "email": "shawn@826LA.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f2387d",
+              "email": "Mariesakubasek@826LA.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f2387e",
+              "email": "Wendy@826LA.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f2387f",
+              "email": "Carolyn@826la.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f23880",
+              "email": "joel@826la.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f23881",
+              "email": "Maricruz@826LA.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f23882",
+              "email": "cheryl@826la.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f23886",
+              "email": "marisa@826la.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f23887",
+              "email": "Mike@826LA.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f2388b",
+              "email": "events@826LA.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f2388d",
+              "email": "Paula@826la.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f2388e",
+              "email": "latesha@826la.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f2388f",
+              "email": "bookboundbooks@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f23890",
+              "email": "lauren@826la.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f23892",
+              "email": "mariesa@826la.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe8f6f59871863f23893",
+              "email": "donations@826la.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3fe936f59871863f23895",
+      "OrganizatinName": "LA Forward",
+      "proposalName": "The LA 101 Guide to Local Government and Civic Engagement",
+      "email": [
+          {
+              "_id": "5eb3fe936f59871863f23896",
+              "email": "info@actblue.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe936f59871863f23897",
+              "email": "press@actblue.com",
+              "status": true
+          },
+          {
+              "_id": "5eb3fe936f59871863f23899",
+              "email": "support@actblue.com",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3fe936f59871863f2389a",
+      "OrganizatinName": "Union Station Homeless Services",
+      "proposalName": "Union Station Homeless Services Community Allies Program",
+      "email": []
+  },
+  {
+      "_id": "5eb3fe936f59871863f238b8",
+      "OrganizatinName": "Indigenous Circle of Wellness So'oh Shinálí Sister Project",
+      "proposalName": "MatriArt: Heart of the Land and People",
+      "email": []
+  },
+  {
+      "_id": "5eb3fe936f59871863f238d4",
+      "OrganizatinName": "LASTing Impressions Center",
+      "proposalName": "The Art Can Save Lives",
+      "email": []
+  },
+  {
+      "_id": "5eb3fe9a6f59871863f238d9",
+      "OrganizatinName": "Korean American Family Services",
+      "proposalName": "Share Your Heart, Share Your Home",
+      "email": []
+  },
+  {
+      "_id": "5eb3fe9a6f59871863f238df",
+      "OrganizatinName": "SameSide Inc",
+      "proposalName": "SameSide: Empower Events for Social Impact",
+      "email": []
+  },
+  {
+      "_id": "5eb3fea76f59871863f238f4",
+      "OrganizatinName": "BREATHE California of Los Angeles County",
+      "proposalName": "Blue Sky LA",
+      "email": [
+          {
+              "_id": "5eb3fea76f59871863f238f7",
+              "email": "info@breathla.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3fea76f59871863f238f8",
+      "OrganizatinName": "Camp Lost Boys",
+      "proposalName": "Healing Masculinity",
+      "email": []
+  },
+  {
+      "_id": "5eb3feae6f59871863f238fd",
+      "OrganizatinName": "Civy, Inc.",
+      "proposalName": "Civy - Civic Engagement Platform",
+      "email": [
+          {
+              "_id": "5eb3feae6f59871863f238ff",
+              "email": "info@civy.com",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3fec96f59871863f23900",
+      "OrganizatinName": "Climate Resolve",
+      "proposalName": "One Day",
+      "email": [
+          {
+              "_id": "5eb3fec96f59871863f23901",
+              "email": "ajackson@climateresolve.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fec96f59871863f23902",
+              "email": "mestrada@climateresolve.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fec96f59871863f23903",
+              "email": "gvarela@climateresolve.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fec96f59871863f23904",
+              "email": "drosales@climateresolve.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fec96f59871863f23905",
+              "email": "wcovington@climateresolve.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fec96f59871863f23906",
+              "email": "blindblad@climateresolve.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fec96f59871863f23907",
+              "email": "keclarino@climateresolve.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fec96f59871863f23908",
+              "email": "info@climateresolve.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fec96f59871863f23909",
+              "email": "nhernandez@climateresolve.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fec96f59871863f2390a",
+              "email": "kvonhoffmann@climateresolve.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fec96f59871863f2390b",
+              "email": "jparfrey@climateresolve.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fec96f59871863f2390c",
+              "email": "sjacobson@climateresolve.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fec96f59871863f2390d",
+              "email": "mparada@climateresolve.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fec96f59871863f2390e",
+              "email": "tbriseno@climateresolve.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fec96f59871863f23910",
+              "email": "jwoods@climateresolve.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3fec96f59871863f23912",
+      "OrganizatinName": "Coalition for Humane Immigrant Rights (CHIRLA)",
+      "proposalName": "Immigrants Empowered = Lives Saved",
+      "email": []
+  },
+  {
+      "_id": "5eb3fecf6f59871863f23917",
+      "OrganizatinName": "Creative Healing for Youth in Pain",
+      "proposalName": "chyp's PhotoVoice",
+      "email": [
+          {
+              "_id": "5eb3fecf6f59871863f23918",
+              "email": "hannah.zelcer@mychyp.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fecf6f59871863f23919",
+              "email": "lonnie@mychyp.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fecf6f59871863f2391a",
+              "email": "georgia.weston@mychyp.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fecf6f59871863f2391b",
+              "email": "admin@mychyp.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3fed26f59871863f2391c",
+      "OrganizatinName": "EveryoneOn",
+      "proposalName": "Connected & Empowered Communities (CEC)",
+      "email": [
+          {
+              "_id": "5eb3fed26f59871863f2391d",
+              "email": "support@everyoneon.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fed26f59871863f23920",
+              "email": "development@everyoneon.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3feec6f59871863f23921",
+      "OrganizatinName": "Free Arts",
+      "proposalName": "Free Arts for Abused or At-Risk Children",
+      "email": [
+          {
+              "_id": "5eb3feec6f59871863f23922",
+              "email": "info@freearts.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3feec6f59871863f23923",
+              "email": "sara@freearts.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3feec6f59871863f23925",
+              "email": "bianca@freearts.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3feec6f59871863f23926",
+              "email": "info@togetherwerise.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3feec6f59871863f23927",
+              "email": "jocelyn@freearts.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3feec6f59871863f23928",
+              "email": "david@freearts.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3feec6f59871863f2392a",
+              "email": "phone@ifoster.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3fef66f59871863f2392b",
+      "OrganizatinName": "human-I-T",
+      "proposalName": "#include",
+      "email": [
+          {
+              "_id": "5eb3fef66f59871863f2392c",
+              "email": "donate@human-i-t.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fef66f59871863f2392d",
+              "email": "recruiting@human-i-t.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fef66f59871863f2392e",
+              "email": "fundraising@human-i-t.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fef66f59871863f2392f",
+              "email": "programs@smarthuman.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fef66f59871863f23931",
+              "email": "marketing@human-I-T.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3fef66f59871863f23932",
+              "email": "info@human-i-t.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3ff0d6f59871863f23933",
+      "OrganizatinName": "Inclusion Matters By Shane's Inspiration",
+      "proposalName": "Connect LA Families!",
+      "email": []
+  },
+  {
+      "_id": "5eb3ff0d6f59871863f2394e",
+      "OrganizatinName": "Investing in Place a Project of Community Partners",
+      "proposalName": "Whose Streets? Our Streets!",
+      "email": []
+  },
+  {
+      "_id": "5eb3ff296f59871863f23953",
+      "OrganizatinName": "Jewish Big Brothers Big Sisters of Los Angeles",
+      "proposalName": "Teen Talk",
+      "email": []
+  },
+  {
+      "_id": "5eb3ff296f59871863f23975",
+      "OrganizatinName": "Kid City Hope Place",
+      "proposalName": "A New LA Story",
+      "email": []
+  },
+  {
+      "_id": "5eb3ffea6f59871863f2397a",
+      "OrganizatinName": "L.A. Works",
+      "proposalName": "L.A. Works Take Action Initiative",
+      "email": [
+          {
+              "_id": "5eb3ffea6f59871863f23984",
+              "email": "sbarreiro@mednet.ucla.edu",
+              "status": true
+          },
+          {
+              "_id": "5eb3ffea6f59871863f2398a",
+              "email": "info@readingtokids.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3ffea6f59871863f23997",
+              "email": "mfavolunteer@foundanimals.org",
+              "status": true
+          },
+          {
+              "_id": "5eb3ffea6f59871863f239a0",
+              "email": "mmeinert@mednet.ucla.edu",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb3ffea6f59871863f239a4",
+      "OrganizatinName": "Mighty Companions",
+      "proposalName": "Making L.A. a Friendlier City",
+      "email": []
+  },
+  {
+      "_id": "5eb400096f59871863f239a9",
+      "OrganizatinName": "Neighborhood Music School",
+      "proposalName": "Neighborhood Music School Community Performance Series",
+      "email": []
+  },
+  {
+      "_id": "5eb4003e6f59871863f239b0",
+      "OrganizatinName": "Skirball Cultural Center",
+      "proposalName": "Skirball Puppet Festival",
+      "email": []
+  },
+  {
+      "_id": "5eb400486f59871863f239ba",
+      "OrganizatinName": "Students Run LA",
+      "proposalName": "#FutureVoters: Students' Next Finish Line",
+      "email": []
+  },
+  {
+      "_id": "5eb400616f59871863f239bf",
+      "OrganizatinName": "The Giving Spirit",
+      "proposalName": "LA Homeless Outreach",
+      "email": [
+          {
+              "_id": "5eb400616f59871863f239c0",
+              "email": "bree@thegivingspirit.org",
+              "status": true
+          },
+          {
+              "_id": "5eb400616f59871863f239c3",
+              "email": "james@thegivingspirit.org",
+              "status": true
+          },
+          {
+              "_id": "5eb400616f59871863f239c5",
+              "email": "clarence@thegivingspirit.org",
+              "status": true
+          },
+          {
+              "_id": "5eb400616f59871863f239c6",
+              "email": "tim@thegivingspirit.org",
+              "status": true
+          },
+          {
+              "_id": "5eb400616f59871863f239c8",
+              "email": "laura@thegivingspirit.org",
+              "status": true
+          },
+          {
+              "_id": "5eb400616f59871863f239c9",
+              "email": "info@thegivingspirit.org",
+              "status": true
+          },
+          {
+              "_id": "5eb400616f59871863f239cb",
+              "email": "mike@thegivingspirit.org",
+              "status": true
+          },
+          {
+              "_id": "5eb400616f59871863f239cc",
+              "email": "herb@thegivingspirit.org",
+              "status": true
+          },
+          {
+              "_id": "5eb400616f59871863f239cd",
+              "email": "tom@thegivingspirit.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb4008a6f59871863f239cf",
+      "OrganizatinName": "Tia Chucha's Centro Cultural & Bookstore",
+      "proposalName": "Indigenous In Us: Embracing Ancestral Knowledge and Sharing the Beauty of Practice",
+      "email": [
+          {
+              "_id": "5eb4008a6f59871863f239d0",
+              "email": "alegna@tiachucha.org",
+              "status": true
+          },
+          {
+              "_id": "5eb4008a6f59871863f239d1",
+              "email": "tcpress@tiachucha.org",
+              "status": true
+          },
+          {
+              "_id": "5eb4008a6f59871863f239d2",
+              "email": "Bookkeeper@tiachucha.org",
+              "status": true
+          },
+          {
+              "_id": "5eb4008a6f59871863f239d3",
+              "email": "danzatq@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb4008a6f59871863f239d5",
+              "email": "INFO@TIACHUCHA.ORG",
+              "status": true
+          },
+          {
+              "_id": "5eb4008a6f59871863f239d6",
+              "email": "michael@tiachucha.org",
+              "status": true
+          },
+          {
+              "_id": "5eb4008a6f59871863f239d7",
+              "email": "gloriabrill777@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb4008a6f59871863f239d8",
+              "email": "mayra@tiachucha.org",
+              "status": true
+          },
+          {
+              "_id": "5eb4008a6f59871863f239db",
+              "email": "andrea@tiachucha.org",
+              "status": true
+          },
+          {
+              "_id": "5eb4008a6f59871863f239dc",
+              "email": "mexihcayotl.tc@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb4008a6f59871863f239dd",
+              "email": "itwow.sfv@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb4008a6f59871863f239de",
+              "email": "youngwarriors@tiachucha.org",
+              "status": true
+          },
+          {
+              "_id": "5eb4008a6f59871863f239df",
+              "email": "celebratingwords@tiachucha.org",
+              "status": true
+          },
+          {
+              "_id": "5eb4008a6f59871863f239e0",
+              "email": "info@tiachucha.org",
+              "status": true
+          },
+          {
+              "_id": "5eb4008a6f59871863f239e1",
+              "email": "losangelespoetsociety@gmail.com",
+              "status": true
+          },
+          {
+              "_id": "5eb4008a6f59871863f239e3",
+              "email": "TCPress@tiachucha.org",
+              "status": true
+          },
+          {
+              "_id": "5eb4008a6f59871863f239e6",
+              "email": "melissa@tiachucha.org",
+              "status": true
+          },
+          {
+              "_id": "5eb4008a6f59871863f239e7",
+              "email": "rebecca@tiachucha.org",
+              "status": true
+          }
+      ]
+  },
+  {
+      "_id": "5eb400926f59871863f239e8",
+      "OrganizatinName": "Trauma Informed LA (TILA)",
+      "proposalName": "Our Stories Matter: Connecting Los Angeles through Stories of Healing",
+      "email": [
+          {
+              "_id": "5eb400926f59871863f239f2",
+              "email": "nposupport@gofundme.com",
+              "status": true
+          },
+          {
+              "_id": "5eb400926f59871863f239f4",
+              "email": "GFMlegal@gofundme.com",
+              "status": true
+          },
+          {
+              "_id": "5eb400926f59871863f239f5",
+              "email": "Legal@GoFundMe.com",
+              "status": true
+          },
+          {
+              "_id": "5eb400926f59871863f23a01",
+              "email": "legal@gofundme.com",
+              "status": true
+          }
+      ]
   }
 ]

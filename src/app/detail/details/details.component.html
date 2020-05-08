@@ -83,7 +83,7 @@
                         </ng-container>
 
 
-                        <div class="sidebar-card card-pricing card--pricing2" *ngIf="details?.type !== 'dream-job'">
+                        <div class="sidebar-card card-pricing card--pricing2" *ngIf="details?.type !== 'dream-job' && false">
 
                             <div class="purchase-button" *ngIf="details?.type === 'event'">
                                 <!-- <a href="#" class="btn btn--lg btn--round">Purchase Now</a> -->
@@ -116,7 +116,7 @@
 
                         </div>
 
-                        <div class="author-card sidebar-card " *ngIf="details?.type === 'event'">
+                        <div class="author-card sidebar-card " *ngIf="details?.type === 'event' && false">
                             <div class="card-title">
                                 <h4>Attendees: {{ details?.usersAttending?.length }}</h4>
                                 <br />

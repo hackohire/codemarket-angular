@@ -1,16 +1,20 @@
+<!-- <div *ngIf="readOnly && html" [ngStyle]="editorStyle" class="tox tox-tinymce">
+    <body [innerHTML]="html" class="mce-content-body my_class mce-content-readonly" data-id="post5eaa8bf30fec040008119e7c" spellcheck="false" style="overflow-y: hidden; padding-left: 1px; padding-right: 1px; min-height: 0px;" data-mce-style="overflow-y: hidden; padding-left: 1px; padding-right: 1px; min-height: 0px;" contenteditable="false"></body>
+</div> -->
+<div [ngStyle]="editorStyle">
+    <ckeditor #ckEditorRef [config]="{extraPlugins: [ myCustomUploadAdapterPlugin ]}" [disabled]="readOnly" [editor]="ckEditor" [(ngModel)]="html" (ready)="readOnly ? null : onReady($event)"></ckeditor>
+</div>
 
-<!-- {{html}} -->
-<!-- {{editorUI}} -->
-<editor class="readonly" [ngStyle]="editorStyle" *ngIf="(html || editorUI) && readOnly" [id]="id" [disabled]="true" [init]="{
-    body_class: 'my_class',
-    'min_height': '200px',
+
+<!-- 
+<editor [id]="id" class="readonly" [ngStyle]="editorStyle" *ngIf="html && readOnly" [disabled]="true" [init]="{
+    'min_height': '40px',
+    content_style: 'img { width:100%; height: auto; }',
     menubar: false, branding: false, statusbar: false, toolbar: false, readonly: true, autoresize: true,
- plugins: [ 'autoresize'] }" [apiKey]="tinyMCEApi" [ngModel]="html"></editor>
+ plugins: [ 'autoresize'] }" [apiKey]="tinyMCEApi" [ngModel]="html"></editor> -->
 
- <editor class="edit-mode" *ngIf="!readOnly" [id]="id" [disabled]="readOnly" [init]="{
-     'height': '500px',
-     'min_height': '500px',
-    menubar: true, branding: false, statusbar: true, toolbar: true, toolbar_sticky: true,
+ <editor *ngIf="!readOnly && false" [id]="id" [disabled]="readOnly" [init]="{
+    menubar: true, branding: false, statusbar: true, toolbar: true, autoresize: true,
     images_upload_base_path: s3FilesBucketURL,
                   file_picker_types: 'file image media',
                   file_picker_callback: authService.filePickerCallback,

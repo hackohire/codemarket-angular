@@ -4,27 +4,20 @@
   opacity: 0;
 }
 
-pre {
-  white-space: -moz-pre-wrap;
-  white-space: -pre-wrap;
-  white-space: -o-pre-wrap;
-  white-space: pre-wrap;
-  word-wrap: break-word;
+:host ::ng-deep {
+  .ck-editor__editable:not([contenteditable=false]) {
+    border: 1px solid #c4c4c4;
+    max-height: 73vh;
+  }
 }
 
-::ng-deep .edit-mode {
-  .tox-editor-header {
-    position: relative !important;
-    left: 0 !important;
-    top: 0px !important;
-    width: 1108px;
-  }
-
-  .tox-editor-container {
-    padding-top: 0 !important;
-  }
-
-}
+// pre {
+//   white-space: -moz-pre-wrap;
+//   white-space: -pre-wrap;
+//   white-space: -o-pre-wrap;
+//   white-space: pre-wrap;
+//   word-wrap: break-word;
+// }
 
 
 /**

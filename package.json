@@ -99,6 +99,8 @@
     "@angular/cli": "~8.3.20",
     "@angular/compiler-cli": "~8.2.14",
     "@angular/language-service": "~8.2.14",
+    "@ckeditor/ckeditor5-angular": "^1.2.3",
+    "@ckeditor/ckeditor5-build-decoupled-document": "^19.0.0",
     "@compodoc/compodoc": "^1.1.11",
     "@types/jasmine": "~3.3.8",
     "@types/jasminewd2": "~2.0.3",

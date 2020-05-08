@@ -97,6 +97,10 @@ export class AddPostComponent implements OnInit, AfterViewInit {
     //   plugins: [ 'lists codesample link image paste help wordcount autoresize autolink powerpaste preview' ],
     //   toolbar: 'preview | undo redo | image | formatselect | bold italic code codesample | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | help'
     // });
+    if (this.descriptionEditor && this.descriptionEditor.ckEditorRef) {
+      console.log(this.descriptionEditor.ckEditorRef.elementRef.nativeElement);
+      this.descriptionEditor.ckEditorRef.editorElement.style.minHeight = '73vh';
+    }
   }
 
   ngOnInit() {

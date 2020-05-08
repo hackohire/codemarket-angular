@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output, Input, OnDestroy, OnChanges, AfterViewInit, SimpleChanges, ViewChild, ElementRef, Inject, PLATFORM_ID, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input, OnDestroy, ViewChild, ElementRef, Inject, PLATFORM_ID, ViewEncapsulation } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { appConstants } from '../../constants/app_constants';
 import { FormGroup, FormControl } from '@angular/forms';
@@ -13,6 +13,8 @@ import { Subscription } from 'rxjs/internal/Subscription';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { of } from 'rxjs';
 import { map, share, tap } from 'rxjs/operators';
+import * as DocumentEditor from 'src/assets/js/ckeditor';
+import { CustomUploadAdapter } from './FileUploader';
 
 @Component({
   selector: 'app-editor',
@@ -20,9 +22,15 @@ import { map, share, tap } from 'rxjs/operators';
   styleUrls: ['./editor.component.scss'],
   // encapsulation: ViewEncapsulation.ShadowDom
 })
-export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit {
+export class EditorComponent implements OnInit, OnDestroy {
 
   isHandset: boolean;
+
+  public model = {
+    editorData: ''
+  };
+
+  public ckEditor = DocumentEditor;
 
   // fileExtensions = AttachesTool.EXTENSIONS;
 
@@ -37,7 +45,13 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
   @Input() userReferenceId: string;
   @Input() id: string;
   @Input() readOnly = false; /** read only mode */
-  @Input() html: string;
+  @Input()
+  set html(h) {
+    this.model.editorData = h;
+  }
+  get html() {
+    return this.model.editorData;
+  }
 
   _data: any[];
   @Input() data: any[];
@@ -47,6 +61,7 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
   @Output() output: EventEmitter<any> = new EventEmitter(); /** Emitting data with user interactions */
   @Input() importArticleSubscription = false;
   @ViewChild('editorRef', { static: false }) editorRef: ElementRef;
+  @ViewChild('ckEditorRef', { static: false }) ckEditorRef;
   @ViewChild('editorViewRef', { static: true }) editorViewRef: ElementRef;
 
   @Output() showComments: EventEmitter<{ block: any }> = new EventEmitter();
@@ -54,9 +69,9 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
   subscriptions$ = new Subscription();
 
   @Input() editorStyle = {
-    background: '#eff1f570',
-    'word-break': 'break-word',
-    padding: '15px',
+    // background: '#eff1f570',
+    // 'word-break': 'break-word',
+    // padding: '15px',
     // border: 'dotted #ececec'
   };
 
@@ -87,44 +102,32 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
 
     this.subscriptions$.add(
       this.breakpointObserver.observe(Breakpoints.Handset)
-      .pipe(
-        map(result => result.matches),
-        tap(result => this.isHandset = result),
-        share()
-      ).subscribe()
+        .pipe(
+          map(result => result.matches),
+          tap(result => this.isHandset = result),
+          share()
+        ).subscribe()
     );
   }
 
-  ngAfterViewInit(): void {
-    /** Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
-     * Add 'implements AfterViewInit' to the class.
-     */
-
-    if (!this.readOnly) {
-      // this.initiateEditor();
-    }
-
-    /** Get all the code elements from DOM and highlight them as code snippets using highlight.js */
-    if (this.editorViewRef && isPlatformBrowser(this._platformId) && this.editorViewRef.nativeElement) {
-      // this.editorViewRef.nativeElement.querySelectorAll('pre code').forEach((block: HTMLElement) => {
-      //   this._hljs.highlightBlock(block);
-      // });
-
-      /** Work Around For Old Editro */
-      // this.editorUI = this.html ? this.html : this.data && this.data.length ? this.editorViewRef.nativeElement.innerHTML : '';
-      // this.html = this.html ? this.html : this.data && this.data.length ? this.editorViewRef.nativeElement.innerHTML : '';
-    }
-    // this.zoomInZoomOutForImages();
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
+  myCustomUploadAdapterPlugin( editor ) {
+    editor.plugins.get( 'FileRepository' ).createUploadAdapter = ( loader ) => {
+        // Configure the URL to the upload script in your back-end here!
+        return new CustomUploadAdapter(loader);
+    };
   }
 
   ngOnDestroy() {
-    // if (this.editor && this.editor.clear) {
-    //   this.editor.destroy();
-    // }
     this.subscriptions$.unsubscribe();
+  }
+
+  public onReady(editor) {
+    editor.ui.getEditableElement().parentElement.insertBefore(
+      editor.ui.view.toolbar.element,
+      editor.ui.getEditableElement()
+    );
+
+    // editor.plugins.extraPlugins = [ this.myCustomUploadAdapterPlugin ];
   }
 
   initializeCommentForm(p) {

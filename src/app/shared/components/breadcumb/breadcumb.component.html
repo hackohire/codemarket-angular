@@ -51,10 +51,10 @@
 
                     </div>
                 </div>
-                <h1 contenteditable="true" class="page-title" id="test" (blur)="!fromAddPost ? myFunction() : doNothing()"
+                <h1 style="margin-bottom: 0" contenteditable="true" class="page-title" id="test" (blur)="!fromAddPost ? myFunction() : doNothing()"
                     (input)="onContentChange($event)">{{postForm?.get('name')?.value ? title : 'Untitled Document'}} </h1>
                 <p *ngIf="displaySave">Saving...</p>
-                <div style="color: white; padding-top: 8px">
+                <div style="color: white;">
                     <div>
                         <ul class="row infos">
                             <div class="col-md-6 col-sm-12">
@@ -122,39 +122,6 @@
                                             <a style="color: white;" [href]="'/' + 'post' + '/' + t?.slug"
                                                 target="_blank">{{t?.name}} {{last ? '' : ','}}</a>
                                         </span>
-                                    </p>
-                                </li>
-                                <!-- <li *ngIf="postDetails?.users">
-                                    <p class="data-label">Users</p>
-                                    <p class="info">
-                                        <a *ngFor="let t of postDetails?.users" target="_blank" [href]="'/'+ 'dashboard' + '/' + 'profile' + '/' + t?._id">
-                                            <span class="tag">
-                                                <img [src]="t?.avatar ? ((s3FilesBucketURL + t?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
-                                                alt="">{{t?.name}}</span>
-                                        </a>
-                                    </p>
-                                </li> -->
-
-                                <!-- <li *ngIf="postDetails?.users">
-                                    <p class="data-label">Users</p>
-                                    <p class="info">
-                                        <a *ngFor="let t of postDetails?.users" target="_blank" [href]="'/'+ 'dashboard' + '/' + 'profile' + '/' + t?._id">
-                                            <span class="tag">
-                                                <img [src]="t?.avatar ? ((s3FilesBucketURL + t?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
-                                                alt="">{{t?.name}}</span>
-                                        </a>
-                                    </p>
-                                </li> -->
-
-                                <li *ngIf="postDetails?.assignees && postDetails?.assignees?.length">
-                                    <p class="data-label">Assignee</p>
-                                    <p class="info">
-                                        <a *ngFor="let t of postDetails?.assignees" target="_blank"
-                                            [href]="'/'+ 'dashboard' + '/' + 'profile' + '/' + t?._id">
-                                            <span class="tag">
-                                                <img [src]="t?.avatar ? ((s3FilesBucketURL + t?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
-                                                    alt="">{{t?.name}}</span>
-                                        </a>
                                     </p>
                                 </li>
 

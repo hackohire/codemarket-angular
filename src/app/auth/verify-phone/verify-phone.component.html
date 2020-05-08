@@ -1,0 +1,15 @@
+<form [formGroup]="confirmForm">
+  <h2>Confirm your phone</h2>
+  <mat-form-field appearance="outline" class="field-full-width">
+    <mat-label>Phone</mat-label>
+    <input matInput placeholder="Phone" type="text" formControlName="phone">
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="field-full-width">
+    <mat-label>Enter the confirmation code that was texted to you</mat-label>
+    <input matInput placeholder="Confirmation Code" type="text" formControlName="code" autocomplete="false" required>
+    <!-- <mat-hint *ngIf="!codeInput.value">Enter the confirmation code that was emailed to you</mat-hint> -->
+  </mat-form-field>
+  <button mat-raised-button color="primary" [disabled]="confirmForm?.invalid" (click)="confirmCode()">Confirm</button> &nbsp;
+  <button mat-raised-button color="primary" (click)="confirmCode()">Get Code</button>
+  <span style="float: right;">Didn't receive a code? <a href="javascript:void(null)" (click)="authService?.resendCode(data.phone)">Send again</a></span>
+</form>

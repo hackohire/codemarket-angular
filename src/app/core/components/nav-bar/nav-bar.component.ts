@@ -10,7 +10,7 @@ import { selectCartListLength } from '../../store/selectors/cart.selectors';
 import { Router } from '@angular/router';
 import { MatDialog, MatAnchor } from '@angular/material';
 import { SearchComponent } from '../search/search.component';
-import { droEmails, emails } from '../../../emails';
+import { droEmails, emails, la2050Emails } from '../../../emails';
 import { Validators, FormControl } from '@angular/forms';
 import { PostType } from '../../../shared/models/post-types.enum';
 import { MessageService } from '../../../shared/services/message.service';
@@ -161,13 +161,13 @@ export class NavBarComponent implements OnInit, OnDestroy {
 
   sendEmails() {
     let count = 0;
-    emails.forEach((e, i) => {
+    la2050Emails.forEach((e, i) => {
       setTimeout(() => {
         e.email.forEach((email, j) => {
           setTimeout(() => {
-            if (!Validators.email(new FormControl(email))) {
+            if (!Validators.email(new FormControl(email.email))) {
               const emailObj = {
-                to: [email],
+                to: [email.email],
                 subject: e.proposalName,
                 companies: [{ _id: '5db1c84ec10c45224c4b95fd' }],
                 type: PostType.Email,

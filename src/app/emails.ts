@@ -19,7 +19,11 @@ export const emails = [
     "OrganizatinName": "Social and Environmental Entrepreneurs",
     "proposalName": "Bringing LA's Green New Deal to Our Neighborhoods",
     link: 'www.youtube.com',
-    "email": ['jaysojitra13@gmail.com']
+    "email": [
+      {
+        email: 'jaysojitra13@gmail.com',
+        status: true
+    }]
   },
   // {
   //   name: 'Sumi Devi',

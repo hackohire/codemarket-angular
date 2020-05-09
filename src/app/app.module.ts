@@ -52,6 +52,7 @@ import { FormioModule } from 'angular-formio';
 import {FormBuilderModule} from './form-builder/form-builder.module';
 import { ProgramlistComponent } from './programlist/programlist.component';
 import { DprComponent, FormDetailsDialog } from './dpr/dpr.component';
+import { LeadComponent } from './dpr/lead/lead.component';
 
 
 // import { SignInComponent } from './core/amplify/sign-in-component';
@@ -102,7 +103,8 @@ import { DprComponent, FormDetailsDialog } from './dpr/dpr.component';
     DialogOverviewExampleDialog,
     ProgramlistComponent,
     DprComponent,
-    FormDetailsDialog
+    FormDetailsDialog,
+    LeadComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

@@ -20,7 +20,7 @@ export class DprComponent implements OnInit {
 
   formName = '';
   connectedFormStructureId = '';
-  companyName = '';
+  companyId = '';
   connectedFormDataId = '';
 
   constructor(
@@ -28,7 +28,7 @@ export class DprComponent implements OnInit {
     private formBuilderService: FormBuilderService,
     private activatedRoute: ActivatedRoute,
     @Inject(PLATFORM_ID) private _platformId) {
-    this.companyName =  this.activatedRoute.snapshot.params['companyName'];
+    this.companyId =  this.activatedRoute.snapshot.params['companyId'];
     this.formName = 'Eligibility';
     this.connectedFormStructureId = '5eb3a8efa83c7d1778526205';
     }
@@ -37,7 +37,6 @@ export class DprComponent implements OnInit {
   
     public form1 = {components: []};
     formDetails: FormGroup;
-    bankFormDataRef: FormGroup;
 
     ngOnInit() {
       this.formJsonListSubscription = this.formBuilderService.fetchformJson().subscribe((formJsonlist) => {
@@ -45,7 +44,6 @@ export class DprComponent implements OnInit {
           this.form1 = formJsonlist.find(form => form._id === this.connectedFormStructureId).formStructureJSON;
         }
         this.formDetailsInitialization(null);
-        this.bankFormDataRefInitialization(null);
       });
     }
 
@@ -53,43 +51,25 @@ export class DprComponent implements OnInit {
       this.formDetails = new FormGroup({
         formname: new FormControl(i && i.formname ? i.formname : this.formName, Validators.required),
         formDataJson: new FormControl(i && i.jsonstring ? i.jsonstring : '', Validators.required),
-        connectedFormStructureId: new FormControl(i && i._id ? i._id : this.connectedFormStructureId)
-      });
-    }
-
-
-    bankFormDataRefInitialization(i: any) {
-      this.bankFormDataRef = new FormGroup({
-        formname: new FormControl(i && i.formname ? i.formname : this.formName, Validators.required),
         connectedFormStructureId: new FormControl(i && i._id ? i._id : this.connectedFormStructureId),
-        companyName: new FormControl(i && i._id ? i._id : this.companyName),
-        connectedFormDataId: new FormControl(i && i._id ? i._id : this.connectedFormDataId),
+        company: new FormControl(i && i._id ? i._id : this.companyId),
       });
     }
+
 
     onSubmitForm1(event) {
       console.log(event.data);
       this.formDetails.value.formDataJson = event.data;
-
+      
       this.formBuilderService.addformData(this.formDetails.value).pipe(
         catchError((e) => {
-          console.log(e);
+          Swal.fire('Name already exists!', '', 'error');
           return of(false);
         })
       ).subscribe((d: any) => {
         if (d) {
-          this.bankFormDataRef.value.connectedFormDataId = d._id;
-          this.formBuilderService.addBankFormDataRef(this.bankFormDataRef.value).pipe(
-            catchError((e) => {
-              console.log(e);
-              return of(false);
-            })
-          ).subscribe((d: any) => {
-            if (d) {
-              Swal.fire(`${d.formname} has been Added Successfully`, '', 'success').then(() => {
-                this.openDialog();
-              });
-            }
+          Swal.fire(`${d.formname} has been Added Successfully`, '', 'success').then(() => {
+            this.openDialog();
           });
         }
       });
@@ -99,7 +79,7 @@ export class DprComponent implements OnInit {
       const dialogConfig = new MatDialogConfig();
 
       dialogConfig.data = {
-        companyName: this.companyName
+        companyId: this.companyId
       };
 
       const dialogRef = this.dialog.open(FormDetailsDialog,dialogConfig);
@@ -124,7 +104,7 @@ export class FormDetailsDialog {
 
   getDetails= '';
   getDetilsConnectedFormStructureId = '';
-  companyName = '';
+  companyId = '';
   connectedFormDataId = '';
 
   formJsonListSubscription1: Subscription;
@@ -139,7 +119,7 @@ export class FormDetailsDialog {
      @Inject(PLATFORM_ID) private _platformId,
      @Inject(MAT_DIALOG_DATA) data,
      private router: Router,) {
-      this.companyName = data.companyName; 
+      this.companyId = data.companyId; 
       this.getDetails = 'Getdetails';
       this.getDetilsConnectedFormStructureId = '5eb409c53a429f353b3d8b0b';
       
@@ -153,18 +133,13 @@ export class FormDetailsDialog {
     this.formDetailsForm = new FormGroup({
       formname: new FormControl(i && i.formname ? i.formname : this.getDetails, Validators.required),
       formDataJson: new FormControl(i && i.jsonstring ? i.jsonstring : '', Validators.required),
-      connectedFormStructureId: new FormControl(i && i._id ? i._id : this.getDetilsConnectedFormStructureId)
+      connectedFormStructureId: new FormControl(i && i._id ? i._id : this.getDetilsConnectedFormStructureId),
+      company: new FormGroup({
+        _id : new FormControl(i && i._id ? i._id : this.companyId),
+      }) 
     });
   }
 
-  bankFormDataRefInitialization(i: any) {
-    this.bankFormDataRef = new FormGroup({
-      formname: new FormControl(i && i.formname ? i.formname : this.getDetails, Validators.required),
-      connectedFormStructureId: new FormControl(i && i._id ? i._id : this.getDetilsConnectedFormStructureId),
-      companyName: new FormControl(i && i._id ? i._id : this.companyName),
-      connectedFormDataId: new FormControl(i && i._id ? i._id : this.connectedFormDataId),
-    });
-  }
 
   ngOnInit() {
     this.formJsonListSubscription1 = this.formBuilderService.fetchformJson().subscribe((formJsonlist) => {
@@ -172,7 +147,6 @@ export class FormDetailsDialog {
         this.form2 = formJsonlist.find(form => form._id === this.getDetilsConnectedFormStructureId).formStructureJSON;
       }
       this.formDetailsInitializationDetailsForm(null);
-      this.bankFormDataRefInitialization(null);
     });
   }
 
@@ -182,26 +156,15 @@ export class FormDetailsDialog {
 
     this.formBuilderService.addformData(this.formDetailsForm.value).pipe(
       catchError((e) => {
-        console.log(e);
+        Swal.fire('Name already exists!', '', 'error');
         return of(false);
       })
     ).subscribe((d: any) => {
       if (d) {
-
-        this.bankFormDataRef.value.connectedFormDataId = d._id;
-          this.formBuilderService.addBankFormDataRef(this.bankFormDataRef.value).pipe(
-            catchError((e) => {
-              console.log(e);
-              return of(false);
-            })
-          ).subscribe((d: any) => {
-            if (d) {
-              Swal.fire(`Thanks ! Team Will Connect You Shourtly.`, '', 'success').then(() => {
-                //Need To send Mail To Bank with the details
-                this.dialogRef.close();
-                this.router.navigate(['/', 'dashboard']);
-              });
-            }
+        Swal.fire(`Thanks ! Team Will Connect You Shourtly.`, '', 'success').then(() => {
+          //Need To send Mail To Bank with the details
+          this.dialogRef.close();
+          this.router.navigate(['/', 'dashboard']);
         });
       }
     });
@@ -212,4 +175,3 @@ export class FormDetailsDialog {
   }
 
 }
-

@@ -24,5 +24,7 @@ export enum PostType {
   Note = 'note',
 
   Question = 'question',
-  Forms = 'forms'
+  Forms = 'forms',
+  Eligibility = "eligibility",
+  Person = "person"
 }

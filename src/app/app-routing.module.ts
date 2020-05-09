@@ -40,6 +40,7 @@ import { SuccessStoryComponent } from './success-story/success-story.component';
 import { BlogComponent } from './blog/blog.component';
 import { ProgramlistComponent } from './programlist/programlist.component';
 import { DprComponent } from './dpr/dpr.component';
+import { LeadComponent } from './dpr/lead/lead.component';
 // import { PostDataResolver } from './core/resolver';
 
 const routes: Routes = [
@@ -170,8 +171,12 @@ const routes: Routes = [
     loadChildren: () => import('./help-business-grow/help-business-grow.module').then(module => module.HelpBusinessGrowModule),
   },
   {
-    path: 'dpr/:companyName',
+    path: 'dpr/:companyId',
     component: DprComponent
+  },
+  {
+    path: 'lead/:companyId',
+    component: LeadComponent
   },
   {
     path: 'about-us',

@@ -71,9 +71,12 @@ export class FormBuilderService {
       mutation: gql`
         mutation addformData($formData: formDataInput) {
           addformData(formData: $formData) {
-            _id
             formname
             formDataJson
+            company{
+              _id
+            }
+            connectedFormStructureId
           }
         }
       `,
@@ -108,6 +111,25 @@ export class FormBuilderService {
 
   redirectToBack(companyId: string, view = 'home') {
     this.router.navigate(['/', 'dashboard']);
+  }
+
+  fetchformDataById(_id: string,connectedFormStructureId: string){
+    return this.apollo.query({
+      query: gql`
+        query fetchformDataById($_id: String,$connectedFormStructureId: String) {
+          fetchformDataById(_id: $_id,connectedFormStructureId: $connectedFormStructureId){
+            formname
+            formDataJson
+            connectedFormStructureId
+          }
+        }
+      `,
+      variables: {
+        _id
+      }
+    }).pipe(
+      map((q: any) => q.data.fetchformDataById)
+    );
   }
 
   fetchformData(formname: string): Observable<any> {

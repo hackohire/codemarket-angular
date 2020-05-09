@@ -11,7 +11,7 @@
         [showAddCollaborators]="details?.createdBy?._id === authService?.loggedInUser?._id ? true : false"
         [showShareButtons]="true" [showAddClients]="details?.createdBy?._id === authService?.loggedInUser?._id"
         [postDetails]="postDetails" [title]="details?.name" [path]="breadcumb?.path" [eventDate]="details?.dateRange"
-        [postDetails]="details" [postForm]="postForm">
+        [postDetails]="details" [postForm]="postForm" [inline]="true">
     </app-breadcumb>
 
     <!--================================

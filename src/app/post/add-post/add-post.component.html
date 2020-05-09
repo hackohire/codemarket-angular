@@ -1,5 +1,5 @@
 <app-breadcumb [path]="breadcumb?.path" [postDetails]="{ connectedPosts: editPostDetails ? editPostDetails?.connectedPosts : postFromRoute ? [postFromRoute] : [], tags: postForm?.get('tags')?.value, clients: postForm?.get('clients')?.value, collaborators: postForm?.get('collaborators')?.value, companies: postForm?.get('companies')?.value, name: postForm?.get('name')?.value}" [showImportButton]="true" [fromAddPost]="true"
-    [title]="postTitle" (addPostData)="recieveEvent($event)" [postForm]="postForm">
+    [title]="postTitle" (addPostData)="recieveEvent($event)" [postForm]="postForm" [inline]="true">
 </app-breadcumb>
 
 

@@ -51,8 +51,10 @@
 
                     </div>
                 </div>
-                <h1 style="margin-bottom: 0" contenteditable="true" class="page-title" id="test" (blur)="!fromAddPost ? myFunction() : doNothing()"
-                    (input)="onContentChange($event)">{{postForm?.get('name')?.value ? title : 'Untitled Document'}} </h1>
+                <h1 style="margin-bottom: 0" [contentEditable]="inline" class="page-title" id="test" (blur)="!fromAddPost ? myFunction() : doNothing()"
+                    (input)="onContentChange($event)">
+                    {{postForm?.get('name')?.value ? title : !inline ? title : 'Untitled Document'}}
+                </h1>
                 <p *ngIf="displaySave">Saving...</p>
                 <div style="color: white;">
                     <div>

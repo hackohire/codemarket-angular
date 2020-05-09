@@ -32,6 +32,7 @@ export class BreadcumbComponent implements OnInit {
   @Input() showAddClients: boolean;
   @Input() showShareButtons: boolean;
   @Input() fromAddPost = false;
+  @Input() inline = false;
   @Input() postForm: FormGroup;
 
   @Output() editPost = new EventEmitter();
@@ -63,6 +64,7 @@ export class BreadcumbComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log("Thisi is inline ==> ", this.inline);
   }
 
   import() {

@@ -19,7 +19,7 @@
     "build:ssr": "npm run build:client-and-server-bundles && npm run compile:server",
     "build:client-and-server-bundles": "yarn run build:only && ng run codemarket:server:production --bundleDependencies all",
     "build:browser:prod": "yarn run build:only",
-    "build:prod:deploy": "npm run build:prod && npm run build:server:prod && npm run deploy",
+    "build:prod:deploy": "npm run build:prod && npm run deploy",
     "build:prod": "npm run build:browser:prod && npm run build:server:prod",
     "build:server:prod": "ng run codemarket:server:production && webpack --config webpack.server.config.js --progress --colors",
     "server": "node local.js",

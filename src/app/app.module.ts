@@ -41,6 +41,10 @@ import { NewsletterComponent } from './newsletter/newsletter.component';
 import {VolunteerComponent} from './volunteer/volunteer.component';
 import {DonateComponent} from './donate/donate.component';
 import {MakemoneyonlineModule} from './makemoneyonline/makemoneyonline.module';
+import { FormioModule } from 'angular-formio';
+import {FormBuilderModule} from './form-builder/form-builder.module';
+import { registerSelecteDeselectComponent } from './shared/components/selecte-deselect/select-deselect.formio';
+import { SelecteDeselectComponent } from './shared/components/selecte-deselect/selecte-deselect.component';
 
 // import { SignInComponent } from './core/amplify/sign-in-component';
 
@@ -78,7 +82,8 @@ import {MakemoneyonlineModule} from './makemoneyonline/makemoneyonline.module';
     AdvocatesInfluencersComponent,
     NewsletterComponent,
     VolunteerComponent,
-    DonateComponent
+    DonateComponent,
+    SelecteDeselectComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -89,10 +94,16 @@ import {MakemoneyonlineModule} from './makemoneyonline/makemoneyonline.module';
     BrowserAnimationsModule,
     LayoutModule,
     AuthModule,
-    MakemoneyonlineModule
+    MakemoneyonlineModule,
+    FormioModule,
+    FormBuilderModule
   ],
   providers: [PostDataResolver],
   bootstrap: [AppComponent],
-  entryComponents: [LoaderComponent]
+  entryComponents: [LoaderComponent, SelecteDeselectComponent]
 })
-export class AppModule {}
+export class AppModule {
+  constructor(private injector: Injector) {
+    // registerSelecteDeselectComponent(this.injector);
+  }
+}

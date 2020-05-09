@@ -1,5 +1,5 @@
 <div *ngIf="commentForm">
-    <h4 *ngIf="showLabel">Live Chat</h4>
+    <h4 *ngIf="showLabel">Comments</h4>
     <!-- comment reply -->
     <div class="media comment-form">
         <div class="media-left">
@@ -9,7 +9,7 @@
                     alt="Commentator Avatar">
             </a>
         </div>
-        <div class="media-body">
+        <div class="media-body" style="width: -webkit-fill-available;">
             <div [formGroup]="commentForm" class="comment-reply-form">
                 
                 

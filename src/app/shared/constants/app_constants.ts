@@ -181,9 +181,6 @@ export const appConstants = {
       type
       categories
       referencePostUrl
-      description {
-        ...Description
-      }
       price
       status
       createdAt
@@ -222,9 +219,6 @@ export const appConstants = {
       }
       slug
       comments {
-        text {
-          ...Description
-        }
         _id
         type
         referenceId
@@ -314,7 +308,6 @@ export const appConstants = {
         message
       }
     }
-    ${description}
     ${comment}
     `,
 
@@ -338,5 +331,6 @@ export const appConstants = {
     { name: PostType.Requirement, label: 'Requirement' },
     { name: PostType.Service, label: 'Service' },
     { name: PostType.Testing, label: 'Testing' },
+    { name: PostType.Forms, label: 'Forms' }
   ],
 };

@@ -64,7 +64,7 @@ export class BriefPostComponent implements OnInit, OnDestroy {
       // const blocks =  await addCommentEditor.editor.save();
       // this.commentForm.get('text').setValue(blocks.blocks);
       this.commentForm.addControl('createdBy', new FormControl(this.authService.loggedInUser._id));
-      this.commentForm.get('textHTML').setValue(addCommentEditor.html ? addCommentEditor.html : addCommentEditor.editorUI);
+      this.commentForm.get('textHTML').setValue(addCommentEditor.html);
 
 
       this.subscription$.add(

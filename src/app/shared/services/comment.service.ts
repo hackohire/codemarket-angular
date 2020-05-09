@@ -19,9 +19,6 @@ export class CommentService {
 
   questionAndAnswerSchema = gql`
     fragment QuestionAndAnswer on QuestionAndAnswer {
-      text {
-        ...Description
-      }
       _id
       type
       referenceId
@@ -34,9 +31,6 @@ export class CommentService {
         avatar
       }
       answers {
-        text {
-          ...Description
-        }
         _id
         type
         referenceId
@@ -52,9 +46,6 @@ export class CommentService {
         }
       }
       questionId {
-        text {
-          ...Description
-        }
         _id
         type
         referenceId
@@ -67,7 +58,6 @@ export class CommentService {
         }
       }
     }
-    ${description}
   `;
 
   commentsQuery: QueryRef<any>;
@@ -409,13 +399,9 @@ export class CommentService {
         mutation: gql`
           mutation updateComment($commentId: String, $postId: String, $text: [InputdescriptionBlock], $textHTML: String) {
             updateComment(commentId: $commentId, postId: $postId, text: $text, textHTML: $textHTML) {
-                text {
-                  ...Description
-                }
                 textHTML
             }
           }
-          ${description}
         `,
         fetchPolicy: 'no-cache',
         variables: {
@@ -505,13 +491,8 @@ export class CommentService {
       {
         mutation: gql`
           mutation updateQuestionOrAnswer($questionOrAnswerId: String, $text: [InputdescriptionBlock]) {
-            updateQuestionOrAnswer(questionOrAnswerId: $questionOrAnswerId, text: $text) {
-                text {
-                  ...Description
-                }
-            }
+            updateQuestionOrAnswer(questionOrAnswerId: $questionOrAnswerId, text: $text)
           }
-          ${description}
         `,
         fetchPolicy: 'no-cache',
         variables: {

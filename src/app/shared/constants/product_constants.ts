@@ -22,9 +22,6 @@ export const productConstants = {
         }
         type
         categories
-        description {
-            ...Description
-        }
         price
         status
         createdAt
@@ -35,16 +32,10 @@ export const productConstants = {
         }
         support {
             time
-            description {
-                ...Description
-            }
         }
         likeCount
         slug
         comments {
-            text {
-              ...Description
-            }
             _id
             type
             referenceId
@@ -61,6 +52,5 @@ export const productConstants = {
             blockSpecificComment
         }
     }
-    ${description}
     `,
 };

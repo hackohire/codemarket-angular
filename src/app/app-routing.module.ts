@@ -67,7 +67,10 @@ const routes: Routes = [
     // outlet: 'main',
     canLoad: [AuthGuard]
   },
-
+  {
+    path: 'form-builder',
+    loadChildren: () => import('./form-builder/form-builder.module').then(module => module.FormBuilderModule),
+  },
   {
     path: 'user',
     loadChildren: () => import('./user/user.module').then(module => module.UserModule),
@@ -152,6 +155,10 @@ const routes: Routes = [
   {
     path: 'makemoneyonline',
     loadChildren: () => import('./makemoneyonline/makemoneyonline.module').then(module => module.MakemoneyonlineModule),
+  },
+  {
+    path: 'help-business-grow',
+    loadChildren: () => import('./help-business-grow/help-business-grow.module').then(module => module.HelpBusinessGrowModule),
   },
   {
     path: 'about-us',

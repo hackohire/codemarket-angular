@@ -399,11 +399,8 @@ export class PostService {
       {
         query: gql`
           query fetchFiles($blockType: String, $userId: String) {
-            fetchFiles(blockType: $blockType, userId: $userId) {
-              ...Description
-            }
+            fetchFiles(blockType: $blockType, userId: $userId)
           }
-          ${description}
         `,
         variables: {
           blockType,

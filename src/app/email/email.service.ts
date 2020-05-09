@@ -27,14 +27,10 @@ export class EmailService {
       cc
       bcc
       subject
-      description {
-        ...Description
-      }
       descriptionHTML
 
       slug
     }
-    ${description}
   `;
 
   constructor(

@@ -13,7 +13,6 @@ import { Subscription } from 'rxjs/internal/Subscription';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { of } from 'rxjs';
 import { map, share, tap } from 'rxjs/operators';
-import * as DocumentEditor from 'src/assets/js/ckeditor';
 import { CustomUploadAdapter } from './FileUploader';
 
 @Component({
@@ -30,7 +29,7 @@ export class EditorComponent implements OnInit, OnDestroy {
     editorData: ''
   };
 
-  public ckEditor = DocumentEditor;
+  public ckEditor = null;
 
   // fileExtensions = AttachesTool.EXTENSIONS;
 
@@ -93,6 +92,10 @@ export class EditorComponent implements OnInit, OnDestroy {
     private breakpointObserver: BreakpointObserver,
   ) {
     this.isPlatformBrowser = isPlatformBrowser(this._platformId);
+    if (this.isPlatformBrowser) {
+      const DocumentEditor = require('src/assets/js/ckeditor');
+      this.ckEditor = DocumentEditor;
+    }
   }
 
   ngOnInit() {
@@ -110,10 +113,10 @@ export class EditorComponent implements OnInit, OnDestroy {
     );
   }
 
-  myCustomUploadAdapterPlugin( editor ) {
-    editor.plugins.get( 'FileRepository' ).createUploadAdapter = ( loader ) => {
-        // Configure the URL to the upload script in your back-end here!
-        return new CustomUploadAdapter(loader);
+  myCustomUploadAdapterPlugin(editor) {
+    editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
+      // Configure the URL to the upload script in your back-end here!
+      return new CustomUploadAdapter(loader);
     };
   }
 

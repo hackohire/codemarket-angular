@@ -1,7 +1,7 @@
 <!-- <div *ngIf="readOnly && html" [ngStyle]="editorStyle" class="tox tox-tinymce">
     <body [innerHTML]="html" class="mce-content-body my_class mce-content-readonly" data-id="post5eaa8bf30fec040008119e7c" spellcheck="false" style="overflow-y: hidden; padding-left: 1px; padding-right: 1px; min-height: 0px;" data-mce-style="overflow-y: hidden; padding-left: 1px; padding-right: 1px; min-height: 0px;" contenteditable="false"></body>
 </div> -->
-<div [ngStyle]="editorStyle">
+<div [ngStyle]="editorStyle" *ngIf="isPlatformBrowser">
     <ckeditor #ckEditorRef [config]="{extraPlugins: [ myCustomUploadAdapterPlugin ]}" [disabled]="readOnly" [editor]="ckEditor" [(ngModel)]="html" (ready)="readOnly ? null : onReady($event)"></ckeditor>
 </div>
 

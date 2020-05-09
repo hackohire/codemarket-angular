@@ -76,7 +76,7 @@ export class AddCommentComponent implements OnInit {
 
       this.subscription$.add(
         this.commentService.addComment(this.commentForm.value).subscribe((c) => {
-          addCommentEditor.editor.clear();
+          addCommentEditor.html = '';
         })
       );
     } else {

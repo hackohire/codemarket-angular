@@ -54,6 +54,9 @@ import { ProgramlistComponent } from './programlist/programlist.component';
 import { DprComponent, FormDetailsDialog } from './dpr/dpr.component';
 import { LeadComponent } from './dpr/lead/lead.component';
 
+import { registerSelecteDeselectComponent } from './shared/components/selecte-deselect/select-deselect.formio';
+import { SelecteDeselectComponent } from './shared/components/selecte-deselect/selecte-deselect.component';
+
 
 // import { SignInComponent } from './core/amplify/sign-in-component';
 
@@ -104,7 +107,8 @@ import { LeadComponent } from './dpr/lead/lead.component';
     ProgramlistComponent,
     DprComponent,
     FormDetailsDialog,
-    LeadComponent
+    LeadComponent,
+    SelecteDeselectComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -121,6 +125,10 @@ import { LeadComponent } from './dpr/lead/lead.component';
   ],
   providers: [PostDataResolver],
   bootstrap: [AppComponent],
-  entryComponents: [LoaderComponent,DialogOverviewExampleDialog,FormDetailsDialog]
+  entryComponents: [LoaderComponent,DialogOverviewExampleDialog,FormDetailsDialog,SelecteDeselectComponent]
 })
-export class AppModule {}
+export class AppModule {
+  constructor(private injector: Injector) {
+    // registerSelecteDeselectComponent(this.injector);
+  }
+}

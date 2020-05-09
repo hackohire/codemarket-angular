@@ -40,7 +40,7 @@
                     <div class="controls" *ngIf="details?.createdBy?._id === authService?.loggedInUser?._id">
                         <a mat-button style="background-color: #ff00007a;" (click)="removeCover();"
                             class="save">Remove</a>
-                        <a mat-button style="background-color: #0674ec" *ngIf="!details?.cover" (click)="updateCover()"
+                        <a mat-button style="background-color: #00aeef" *ngIf="!details?.cover" (click)="updateCover()"
                             class="save">Upload
                             Cover</a>
                     </div>
@@ -61,7 +61,7 @@
             <div class="row">
                 <div class="col-lg-3">
                     <!-- start aside -->
-                    <app-add-post-menu style="color: #0674ec !important;"></app-add-post-menu>
+                    <app-add-post-menu style="color: #00aeef !important;"></app-add-post-menu>
 
                     <div class="docs-component-viewer-nav common-box-shadow"
                         style="margin-bottom: 20px; margin-top: 10px;">

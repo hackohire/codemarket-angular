@@ -4,13 +4,20 @@
   opacity: 0;
 }
 
-pre {
-  white-space: -moz-pre-wrap;
-  white-space: -pre-wrap;
-  white-space: -o-pre-wrap;
-  white-space: pre-wrap;
-  word-wrap: break-word;
+:host ::ng-deep {
+  .ck-editor__editable:not([contenteditable=false]) {
+    border: 1px solid #c4c4c4;
+    max-height: 73vh;
+  }
 }
+
+// pre {
+//   white-space: -moz-pre-wrap;
+//   white-space: -pre-wrap;
+//   white-space: -o-pre-wrap;
+//   white-space: pre-wrap;
+//   word-wrap: break-word;
+// }
 
 
 /**

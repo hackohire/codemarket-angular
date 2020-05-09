@@ -86,7 +86,7 @@
                             </mat-form-field>
                             <a class="btn btn--vsm btn--round menu"
                                 (click)="updateSocialMedia(fb.value, tw.value, li.value, ig.value, yelp.value, cw.value)"
-                                style="color: white; background: #0674ec !important;">Update
+                                style="color: white; background: #00aeef !important;">Update
                             </a>
                         </div>
                     </mde-popover>
@@ -101,7 +101,7 @@
                         <div class="controls" *ngIf="details?.createdBy?._id === authService?.loggedInUser?._id">
                             <a mat-button style="background-color: #ff00007a;" (click)="removeCover();"
                                 class="save">Remove</a>
-                            <a mat-button style="background-color: #0674ec" *ngIf="!details?.cover"
+                            <a mat-button style="background-color: #00aeef" *ngIf="!details?.cover"
                                 (click)="updateCover()" class="save">Upload
                                 Cover</a>
                         </div>
@@ -127,7 +127,7 @@
                         (postTypeClick)="selectMainCategory($event);">
                     </app-post-type-nav>
                     <!-- start aside -->
-                    <!-- <app-add-post-menu style="color: #0674ec !important; margin-left: auto;"></app-add-post-menu> -->
+                    <!-- <app-add-post-menu style="color: #00aeef !important; margin-left: auto;"></app-add-post-menu> -->
                     <!-- <div class="docs-component-viewer-nav common-box-shadow"
                         style="margin-bottom: 20px; margin-top: 10px;">
                         <div class="docs-component-viewer-nav-content">
@@ -191,14 +191,14 @@
                             <mat-icon style="vertical-align: middle;">add</mat-icon>
                         </a>
                         <a class="btn btn--sm btn--round menu"
-                            style="color: #0674ec !important; background: white; margin: 10px 30px;"
+                            style="color: #00aeef !important; background: white; margin: 10px 30px;"
                             [routerLink]="['./']" [routerLinkActive]="'active-item'" [queryParams]="{view: 'q&a'}"
                             [queryParamsHandling]="'merge'">Add Question <mat-icon style="vertical-align: middle;">add
                             </mat-icon>
                         </a>
                         <a class="btn btn--sm btn--round menu"
                             *ngIf="auth?.loggedInUser?._id === details?.createdBy?._id"
-                            style="color: #0674ec !important; background: white; margin: 10px 30px;"
+                            style="color: #00aeef !important; background: white; margin: 10px 30px;"
                             (click)="openDialog()">Add Event
                             <mat-icon style="vertical-align: middle;">add</mat-icon>
                         </a>

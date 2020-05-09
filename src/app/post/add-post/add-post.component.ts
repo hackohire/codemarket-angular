@@ -30,6 +30,7 @@ export class AddPostComponent implements OnInit, AfterViewInit {
   postForm: FormGroup;
 
   editPostDetails: Post;
+  postTitle;
 
   tinyMCEApi = environment.tiny_api;
 
@@ -96,6 +97,10 @@ export class AddPostComponent implements OnInit, AfterViewInit {
     //   plugins: [ 'lists codesample link image paste help wordcount autoresize autolink powerpaste preview' ],
     //   toolbar: 'preview | undo redo | image | formatselect | bold italic code codesample | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | help'
     // });
+    if (this.descriptionEditor && this.descriptionEditor.ckEditorRef) {
+      console.log(this.descriptionEditor.ckEditorRef.elementRef.nativeElement);
+      this.descriptionEditor.ckEditorRef.editorElement.style.minHeight = '73vh';
+    }
   }
 
   ngOnInit() {
@@ -103,6 +108,7 @@ export class AddPostComponent implements OnInit, AfterViewInit {
       this.subscription$.add(
         this.postService.getPostById(this.postId).subscribe((p) => {
           this.editPostDetails = p;
+          this.postTitle = p.name;
           this.postType = p.type;
           this.breadcumb.title = this.postType;
           this.breadcumb.path[0].name = this.postType;
@@ -186,5 +192,12 @@ export class AddPostComponent implements OnInit, AfterViewInit {
     console.log(a, b, c);
   }
 
+  recieveEvent(event) {
+    this.postForm.controls.tags.setValue(event.tags);
+    this.postForm.controls.companies.setValue(event.companies);
+    this.postForm.controls.clients.setValue(event.clients);
+    this.postForm.controls.collaborators.setValue(event.collaborators);
+    this.postForm.controls.name.setValue(event.name);
+  }
 
 }

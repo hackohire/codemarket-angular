@@ -104,6 +104,6 @@ import { SelecteDeselectComponent } from './shared/components/selecte-deselect/s
 })
 export class AppModule {
   constructor(private injector: Injector) {
-    registerSelecteDeselectComponent(this.injector);
+    // registerSelecteDeselectComponent(this.injector);
   }
 }

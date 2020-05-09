@@ -43,6 +43,7 @@ import { TinyEditorComponent } from './components/tiny-editor/tiny-editor.compon
 import { ChatService } from './services/chat.service';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { GetNamePipe } from './pipes/get-name.pipe';
+import { ChatFullUiComponent } from './components/chat-full-ui/chat-full-ui.component';
 
 export function hljsLanguages() {
   return [
@@ -74,6 +75,7 @@ export function hljsLanguages() {
     CommentSideNavComponent,
     TinyEditorComponent,
     GetNamePipe,
+    ChatFullUiComponent,
   ],
   imports: [
     CommonModule,
@@ -138,7 +140,7 @@ export function hljsLanguages() {
     NgSelectModule,
     MdePopoverModule,
     EditorModule,
-    
+    ChatFullUiComponent
   ],
   entryComponents: [
     AddJobComponent,

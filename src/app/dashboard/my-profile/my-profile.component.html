@@ -5,7 +5,6 @@
 	<section style="padding-top: 35px;" class="author-profile-area">
 		<div class="container" style="margin: auto;">
 			<div class="container" style="margin-top: 0; margin-bottom: 15px;">
-
 				<div class="row">
 					<div class="col-lg-2 col-md-2 col-sm-3 align-items-center justify-content-center"
 						style="margin: auto;">
@@ -64,7 +63,7 @@
 				</div>
 			</div>
 			<div class="row">
-
+				
 				<!-- start aside -->
 				<div class="col-md-2">
 					<!-- <app-add-post-menu style="color: #00aeef !important; margin-left: auto;">
@@ -114,9 +113,8 @@
 				</div>
 
 				<div class="col-lg-10 col-md-10">
-
-					<div class="row">
-						<!-- POST EDITOR STARTS HERE -->
+					<!-- POST EDITOR STARTS HERE -->
+					<!-- <div class="row">
 						<div class="col-md-12 comment-form-area" style="padding: 0 15px;">
 							<div class="media comment-form">
 								<div class="media-left">
@@ -142,152 +140,160 @@
 								</div>
 							</div>
 						</div>
-						<!-- POST EDITOR ENDS HERE -->
-					</div>
-					<div class="row">
-						<div [ngClass]="selectedBlock ? 'col-md-8 col-lg-8' : 'col-lg-10 col-md-10'">
-							<!-- {{profileView}} -->
-							<div *ngIf="profileView === navLinkName.buy">
-								<router-outlet></router-outlet>
-							</div>
-
-							<div *ngIf="profileView === 'files'">
-								<ng-container *ngTemplateOutlet="filesList; context: {details: selectedPost, files: files}">
-								</ng-container>
-							</div>
-
-							<div *ngIf="profileView === navLinkName.sell">
-								<router-outlet></router-outlet>
-							</div>
-
-							<div *ngIf="profileView === navLinkName.membership">
-								<router-outlet></router-outlet>
-							</div>
-
-							<div *ngIf="profileView === navLinkName.myrsvp">
-								<router-outlet></router-outlet>
-							</div>
-
-							<!-- Showing the list of posts for the posts tab, everytime user clicks on the "load more", we increase the page number and call
-							fetchAllOtherPosts method to fetch subsequent posts -->
-							<ng-container *ngIf="profileView === navLinkName.posts">
-								<div class="">
-									<app-brief-post style="width: 100%;" [p]="e"
-										*ngFor="let e of listOfAllOtherPosts?.posts"
-										(showComments)="showCommentsOnSide($event)" [readMore]="true"></app-brief-post>
-								</div>
-								<app-paginator [length]="totalOtherPosts"
-									(fetchData)="paginator = $event; fetchAllOtherPosts()">
-								</app-paginator>
-							</ng-container>
-
-							<!-- Show list of the posts based on post type -->
-							<ng-container *ngFor="let p of postTypesArray">
-								<ng-container *ngIf="profileView === p.name">
-									<div class="item-grid pen-grid item-grid-large">
-										<app-brief-post style="width: 100%;" [p]="e"
-											*ngFor="let e of listOfAllOtherPosts?.posts"
-											(showComments)="showCommentsOnSide($event)" [readMore]="true">
-										</app-brief-post>
+					</div> -->
+					<!-- POST EDITOR ENDS HERE -->
+					  <mat-tab-group  mat-align-tabs="center">
+					    <mat-tab label="Posts">
+					      <ng-template matTabContent>
+							<div class="row">
+								<div [ngClass]="selectedBlock ? 'col-md-8 col-lg-8' : 'col-lg-12 col-md-12'">
+									<!-- {{profileView}} -->
+									<div *ngIf="profileView === navLinkName.buy">
+										<router-outlet></router-outlet>
 									</div>
-
-									<app-paginator [length]="totalOtherPosts"
-										(fetchData)="paginator = $event; fetchAllOtherPosts(p.name)">
-									</app-paginator>
-								</ng-container>
-							</ng-container>
-
-							<div *ngIf="profileView === navLinkName?.info && (userData$) | async as user">
-								<div class="col-lg-12 col-md-12">
-									<aside class="common-box-shadow sidebar sidebar_author">
-										<div class="author-card sidebar-card">
-											<div class="author-infos">
-												<div class="author_avatar">
-													<img [src]="user?.avatar ? ((s3FilesBucketURL + user.avatar) | safe: 'resourceUrl') : anonymousAvatar"
-														alt="Presenting the broken author avatar :D">
-												</div>
-
-												<div class="author">
-													<h4>{{user?.name}}</h4>
-													<button
-														*ngIf="authorId && authService?.loggedInUser?._id && authService?.loggedInUser?._id !== authorId"
-														(click)="openDialog()" mat-mini-fab color="primary">
-														<mat-icon>video_call</mat-icon>
-													</button>
-													<p>On platform since {{user?.createdAt | date}}</p>
-												</div>
-												<!-- end /.author -->
-
-
-												<div class="social social--color--filled">
-													<ul>
-														<li style="margin: 5px; color: initial">
-															<a [href]="user?.linkedin_url">
-																<i style="font-size: 1.7rem !important;"
-																	class="fab fa-linkedin"></i>
-															</a>
-														</li>
-														<li style="margin: 5px">
-															<a [href]="user?.github_url">
-																<i style="font-size: 1.7rem !important;"
-																	class="fab fa-stack-overflow"></i>
-															</a>
-														</li>
-														<li style="margin: 5px">
-															<a [href]="user?.stackoverflow_url">
-																<i style="font-size: 1.7rem !important;"
-																	class="fab fa-github"></i>
-															</a>
-														</li>
-													</ul>
-												</div>
-
-
-
-												<ul class="infos">
-													<li>
-														<span class="data-label">Likes: </span>
-														<span class="info"
-															*ngIf="authService?.loggedInUser; else likeCount">
-															<app-like-dislike [data]="user" [type]="'user'"
-																[likeCount]="null">
-															</app-like-dislike>
-														</span>
-														<ng-template #likeCount>
-															<div class="info">
-																{{user?.likeCount}}
-															</div>
-														</ng-template>
-													</li>
-												</ul>
-												<!-- end /.social -->
-
-												<!-- <div class="author-btn">
-																				<a href="#" class="btn btn--md btn--round">Follow</a>
-																		</div> -->
-												<!-- end /.author-btn -->
-											</div>
-											<!-- end /.author-infos -->
+		
+									<div *ngIf="profileView === 'files'">
+										<ng-container *ngTemplateOutlet="filesList; context: {details: selectedPost, files: files}">
+										</ng-container>
+									</div>
+		
+									<div *ngIf="profileView === navLinkName.sell">
+										<router-outlet></router-outlet>
+									</div>
+		
+									<div *ngIf="profileView === navLinkName.membership">
+										<router-outlet></router-outlet>
+									</div>
+		
+									<div *ngIf="profileView === navLinkName.myrsvp">
+										<router-outlet></router-outlet>
+									</div>
+		
+									<!-- Showing the list of posts for the posts tab, everytime user clicks on the "load more", we increase the page number and call
+									fetchAllOtherPosts method to fetch subsequent posts -->
+									<ng-container *ngIf="profileView === navLinkName.posts">
+										<div class="">
+											<app-brief-post style="width: 100%;" [p]="e"
+												*ngFor="let e of listOfAllOtherPosts?.posts"
+												(showComments)="showCommentsOnSide($event)" [readMore]="true"></app-brief-post>
 										</div>
-										<!-- end /.author-card -->
-									</aside>
+										<app-paginator [length]="totalOtherPosts"
+											(fetchData)="paginator = $event; fetchAllOtherPosts()">
+										</app-paginator>
+									</ng-container>
+		
+									<!-- Show list of the posts based on post type -->
+									<ng-container *ngFor="let p of postTypesArray">
+										<ng-container *ngIf="profileView === p.name">
+											<div class="item-grid pen-grid item-grid-large">
+												<app-brief-post style="width: 100%;" [p]="e"
+													*ngFor="let e of listOfAllOtherPosts?.posts"
+													(showComments)="showCommentsOnSide($event)" [readMore]="true">
+												</app-brief-post>
+											</div>
+		
+											<app-paginator [length]="totalOtherPosts"
+												(fetchData)="paginator = $event; fetchAllOtherPosts(p.name)">
+											</app-paginator>
+										</ng-container>
+									</ng-container>
+		
+									<div *ngIf="profileView === navLinkName?.info && (userData$) | async as user">
+										<div class="col-lg-12 col-md-12">
+											<aside class="common-box-shadow sidebar sidebar_author">
+												<div class="author-card sidebar-card">
+													<div class="author-infos">
+														<div class="author_avatar">
+															<img [src]="user?.avatar ? ((s3FilesBucketURL + user.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+																alt="Presenting the broken author avatar :D">
+														</div>
+		
+														<div class="author">
+															<h4>{{user?.name}}</h4>
+															<button
+																*ngIf="authorId && authService?.loggedInUser?._id && authService?.loggedInUser?._id !== authorId"
+																(click)="openDialog()" mat-mini-fab color="primary">
+																<mat-icon>video_call</mat-icon>
+															</button>
+															<p>On platform since {{user?.createdAt | date}}</p>
+														</div>
+														<!-- end /.author -->
+		
+		
+														<div class="social social--color--filled">
+															<ul>
+																<li style="margin: 5px; color: initial">
+																	<a [href]="user?.linkedin_url">
+																		<i style="font-size: 1.7rem !important;"
+																			class="fab fa-linkedin"></i>
+																	</a>
+																</li>
+																<li style="margin: 5px">
+																	<a [href]="user?.github_url">
+																		<i style="font-size: 1.7rem !important;"
+																			class="fab fa-stack-overflow"></i>
+																	</a>
+																</li>
+																<li style="margin: 5px">
+																	<a [href]="user?.stackoverflow_url">
+																		<i style="font-size: 1.7rem !important;"
+																			class="fab fa-github"></i>
+																	</a>
+																</li>
+															</ul>
+														</div>
+		
+		
+		
+														<ul class="infos">
+															<li>
+																<span class="data-label">Likes: </span>
+																<span class="info"
+																	*ngIf="authService?.loggedInUser; else likeCount">
+																	<app-like-dislike [data]="user" [type]="'user'"
+																		[likeCount]="null">
+																	</app-like-dislike>
+																</span>
+																<ng-template #likeCount>
+																	<div class="info">
+																		{{user?.likeCount}}
+																	</div>
+																</ng-template>
+															</li>
+														</ul>
+														<!-- end /.social -->
+		
+														<!-- <div class="author-btn">
+																						<a href="#" class="btn btn--md btn--round">Follow</a>
+																				</div> -->
+														<!-- end /.author-btn -->
+													</div>
+													<!-- end /.author-infos -->
+												</div>
+												<!-- end /.author-card -->
+											</aside>
+										</div>
+									</div>
+		
 								</div>
+								<div [ngClass]="selectedBlock ? 'col-md-4 col-lg-4' : ''">
+									<ng-container
+										*ngTemplateOutlet="addBlockLevelCommentTemplate; context: {details: selectedPost, comments: selectedPostComments | async}">
+									</ng-container>
+								</div>
+		
 							</div>
-
-						</div>
-						<div [ngClass]="selectedBlock ? 'col-md-4 col-lg-4' : ''">
-							<ng-container
-								*ngTemplateOutlet="addBlockLevelCommentTemplate; context: {details: selectedPost, comments: selectedPostComments | async}">
-							</ng-container>
-						</div>
-
-					</div>
+					      </ng-template>
+					    </mat-tab>
+					    <mat-tab label="Chats">
+					      <ng-template matTabContent>
+					        <app-chat-full-ui></app-chat-full-ui>
+					      </ng-template>
+					    </mat-tab>
+					  </mat-tab-group>
 				</div>
 			</div>
-
-
 		</div>
-
 	</section>
 </div>
 

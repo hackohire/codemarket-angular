@@ -14969,7 +14969,7 @@
     footer.page_footer {
         display: block;
         margin: 0;
-        padding: 0 0 30px 0;
+        padding: 30px 0;
         background: #292828
     }
     
@@ -14982,15 +14982,13 @@
     .footer_nav {
         display: block;
         margin: 0;
-        padding: 44px 0 25px;
-        border-bottom: solid 1px #656464
+        padding: 20px 0 0;
     }
     
     .footer_nav .menu {
         display: inline-block;
-        margin: 0;
+        margin: 0 0 30px 0;
         padding: 13px 0;
-        float: left
     }
     
     .footer_nav .menu li {
@@ -15020,7 +15018,6 @@
         display: inline-block;
         margin: 0;
         padding: 0;
-        float: right
     }
     
     .footer_nav .social_icon li {
@@ -15034,7 +15031,7 @@
         display: inline-block;
         color: #fff;
         font-size: 18px;
-        line-height: 50px;
+        line-height: 47px;
         font-weight: 300;
         margin: 0;
         padding: 0;
@@ -15056,12 +15053,13 @@
     
     .footer_nav .social_icon li a:hover {
         text-decoration: none;
-        background: #144978
+        background: #8dc548;
+        border: solid 1px #8dc548;
     }
     
     .newsletter {
         width: 270px;
-        margin: 33px 0 0 auto
+        margin: 30px 0 0 auto
     }
     
     .newsletter h3 {
@@ -15084,7 +15082,7 @@
     
     .f_left {
         width: 90%;
-        margin: 100px 0 0 0
+        margin: 40px 0 0 0
     }
     
     .f_left p {
@@ -15200,7 +15198,8 @@
         color: #fff;
         font-size: 15px;
         line-height: 20px;
-        font-weight: 600;
+        font-weight: 400;
+        letter-spacing: 1px;
         background: #8dc548;
         text-align: center;
         text-transform: uppercase;
@@ -15659,3 +15658,68 @@
     }
     
     }
+
+/* FLIP EFFECT CSS */
+.flip-card {
+	background-color: transparent;
+	width: 270px;
+	height: 230px;
+	perspective: 1000px;
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner {
+    transform: rotateY(-180deg);
+}
+
+.flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.flip-card-front {
+    background-color: transparent;
+}
+
+.flip-card-front h3 {
+    margin: 0;
+    font-size: 20px;
+    padding: 0 30px !important;
+    font-weight: 100 !important;
+    line-height: inherit !important;
+}
+
+.flip-card-back {
+    color: white;
+    transform: rotateY(180deg);
+    display: table;
+}
+
+.tier_two_in .flip-card .flip-card-inner .flip-card-back > a {
+    display: table-cell;
+    vertical-align: middle;
+    margin: 0;
+    color: white;
+    font-weight: 100;
+    border-radius: 0;
+    padding: 20px;
+    width: auto;
+    display: table-cell;
+    border-width: 1px;
+    text-transform: none;
+    font-size: 30px;
+    line-height: inherit;    
+    background: #8dc548;
+    border: solid 1px #8dc548;
+}

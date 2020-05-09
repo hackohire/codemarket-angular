@@ -13015,7 +13015,7 @@ header nav ul li.current-menu-ancestor a,
 header nav ul li.current-menu-item a,
 header nav ul li.current-menu-parent a {
 	color: #20527e;
-	text-decoration: underline
+	text-decoration: none
 }
 
 .home .banner_in .info {
@@ -14969,7 +14969,7 @@ main>article:first-of-type {
 footer.page_footer {
 	display: block;
 	margin: 0;
-	padding: 0 0 30px 0;
+	padding: 30px 0;
 	background: #292828
 }
 
@@ -14982,15 +14982,13 @@ footer.page_footer {
 .footer_nav {
 	display: block;
 	margin: 0;
-	padding: 44px 0 25px;
-	border-bottom: solid 1px #656464
+	padding: 20px 0 0;
 }
 
 .footer_nav .menu {
 	display: inline-block;
-	margin: 0;
+	margin: 0 0 30px 0;
 	padding: 13px 0;
-	float: left
 }
 
 .footer_nav .menu li {
@@ -15020,7 +15018,6 @@ footer.page_footer {
 	display: inline-block;
 	margin: 0;
 	padding: 0;
-	float: right
 }
 
 .footer_nav .social_icon li {
@@ -15034,7 +15031,7 @@ footer.page_footer {
 	display: inline-block;
 	color: #fff;
 	font-size: 18px;
-	line-height: 50px;
+	line-height: 47px;
 	font-weight: 300;
 	margin: 0;
 	padding: 0;
@@ -15056,12 +15053,13 @@ footer.page_footer {
 
 .footer_nav .social_icon li a:hover {
 	text-decoration: none;
-	background: #144978
+	background: #8dc548;
+    border: solid 1px #8dc548;
 }
 
 .newsletter {
 	width: 270px;
-	margin: 33px 0 0 auto
+	margin: 30px 0 0 auto
 }
 
 .newsletter h3 {
@@ -15084,7 +15082,7 @@ footer.page_footer {
 
 .f_left {
 	width: 90%;
-	margin: 100px 0 0 0
+	margin: 40px 0 0 0
 }
 
 .f_left p {
@@ -15200,7 +15198,8 @@ footer.page_footer {
 	color: #fff;
 	font-size: 15px;
 	line-height: 20px;
-	font-weight: 600;
+	font-weight: 400;
+    letter-spacing: 1px;
 	background: #8dc548;
 	text-align: center;
 	text-transform: uppercase;

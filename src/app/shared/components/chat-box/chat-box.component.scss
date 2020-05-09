@@ -199,7 +199,6 @@
       margin: 15px 10px 5px 10px;
       border-radius: 5px 0px 5px 5px;
       max-width: 80%;
-
       &:after {
         content: "";
         position: absolute;
@@ -211,6 +210,11 @@
         border-right-color: #fff;
         border-left: 0;
         border-top: 0;
+      }
+
+      .auther-name {
+        font-size: 12px;
+        font-weight: 600;
       }
     }
 
@@ -236,6 +240,11 @@
         border-left-color: #0674eccc;
         border-right: 0;
         border-top: 0;
+      }
+
+      .auther-name {
+        font-size: 12px;
+        font-weight: 600;
       }
     }
 

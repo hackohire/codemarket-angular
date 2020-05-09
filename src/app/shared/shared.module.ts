@@ -42,6 +42,7 @@ import { EditorModule } from '@tinymce/tinymce-angular';
 import { TinyEditorComponent } from './components/tiny-editor/tiny-editor.component';
 import { ChatService } from './services/chat.service';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { GetNamePipe } from './pipes/get-name.pipe';
 
 export function hljsLanguages() {
   return [
@@ -72,6 +73,7 @@ export function hljsLanguages() {
     PostTypeNavComponent,
     CommentSideNavComponent,
     TinyEditorComponent,
+    GetNamePipe,
   ],
   imports: [
     CommonModule,

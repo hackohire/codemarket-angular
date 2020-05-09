@@ -8,10 +8,12 @@
       <div class="message-container">
         <div *ngFor="let msg of commentsList">
           <div class="right" id="messages" *ngIf="msg.author === username">
+            <div class="auther-name">{{msg.author | getName}}</div>
             <span>{{msg.body}}</span>
             <span class="float_r">{{getFormatedDate(msg.dateUpdated)}}</span>
           </div>
           <div class="left" id="messages" *ngIf="msg.author !== username">
+            <div class="auther-name">{{msg.author | getName}}</div>
             <span>{{msg.body}}</span>
             <span class="float_r">{{getFormatedDate(msg.dateUpdated)}}</span>
           </div>

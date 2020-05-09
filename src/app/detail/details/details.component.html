@@ -174,7 +174,7 @@
         <!-- end /.container -->
 
         <!-- Start of chat box code -->
-        <app-chat-box [loggedInUserId]="authService?.loggedInUser?._id" [postDetails]="postDetails"></app-chat-box>
+        <app-chat-box [loggedInUser]="authService?.loggedInUser" [postDetails]="postDetails"></app-chat-box>
         <!-- End of chat box code -->
     </section>
     <!--===========================================

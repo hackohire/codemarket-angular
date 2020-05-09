@@ -10,7 +10,7 @@ import moment from 'moment';
 })
 export class ChatBoxComponent implements OnInit {
 
-  @Input() loggedInUserId;
+  @Input() loggedInUser;
   @Input() postDetails;
   @ViewChild('scrollMe', { static: false }) private myScrollContainer: ElementRef;
 
@@ -29,9 +29,8 @@ export class ChatBoxComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.username = this.loggedInUserId;
+    this.username = `${this.loggedInUser.name}_${this.loggedInUser._id}`;
     this.channelName = this.postDetails._id;
-    console.log(this.postDetails._id);
     this.createTwilioToken();
   }
 
@@ -78,8 +77,6 @@ export class ChatBoxComponent implements OnInit {
         }
       });
     } else {
-      console.log('Joined channel as '
-        + '<span class="me">' + this.username + '</span>.', true);
       this.generalChannel.getMessages(30).then(page => {
         this.commentsList = page.items;
         if (this.commentsList.length > 0) {
@@ -94,7 +91,6 @@ export class ChatBoxComponent implements OnInit {
     this.generalChannel.on('messageAdded', message => {
       this.commentsList.push(message);
       if (this.commentsList.length > 0) {
-        console.log(this.commentsList);
         this.generalChannel.updateLastConsumedMessageIndex(this.commentsList[this.commentsList.length - 1].index).then((data) => {
         });
       }

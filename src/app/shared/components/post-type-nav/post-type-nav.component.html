@@ -3,8 +3,7 @@
         <div *ngFor="let p of customTabs.concat(postTypesArray); let last = last;">
             <button cdkAccordionItem class="docs-nav-content-btn"
                 [ngClass]="selectedPostType === p.name ? 'docs-component-viewer-sidenav-item-selected' : ''">
-                <span (click)="postTypeClick.emit(p)">{{p.label}} ({{p.count}})</span>
-                <mat-icon *ngIf="!p?.isCustom" (click)="plusButtonClick.emit(p?.name)">add</mat-icon>
+                <span (click)="postTypeClick.emit(p)">{{p.label}}</span>
             </button>
             <hr *ngIf="!last" />
         </div>

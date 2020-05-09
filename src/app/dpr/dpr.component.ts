@@ -52,7 +52,9 @@ export class DprComponent implements OnInit {
         formname: new FormControl(i && i.formname ? i.formname : this.formName, Validators.required),
         formDataJson: new FormControl(i && i.jsonstring ? i.jsonstring : '', Validators.required),
         connectedFormStructureId: new FormControl(i && i._id ? i._id : this.connectedFormStructureId),
-        company: new FormControl(i && i._id ? i._id : this.companyId),
+        company: new FormGroup({
+          _id : new FormControl(i && i._id ? i._id : this.companyId),
+        })
       });
     }
 

@@ -25,7 +25,7 @@ export class LeadComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     @Inject(PLATFORM_ID) private _platformId
   ) {
-    this.companyId =  this.companyId;
+    this.companyId =  this.activatedRoute.snapshot.params['companyId'];
    }
 
   ngOnInit() {

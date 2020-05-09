@@ -125,7 +125,8 @@ export class FormBuilderService {
         }
       `,
       variables: {
-        _id
+        _id,
+        connectedFormStructureId
       }
     }).pipe(
       map((q: any) => q.data.fetchformDataById)

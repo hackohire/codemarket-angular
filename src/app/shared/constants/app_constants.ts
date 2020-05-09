@@ -23,9 +23,7 @@ export const appConstants = {
     [PostType.Assignment]: 'sticky-note',
     [PostType.Question]: 'sticky-note',
     [PostType.Note]: 'sticky-note',
-    [PostType.Business]: 'sticky-note',
-    [PostType.Eligibility]: 'eligibility',
-    [PostType.Person]: 'person'
+    [PostType.Business]: 'sticky-note'
   },
 
   fileS3Bucket: 'dpa-files',
@@ -334,7 +332,5 @@ export const appConstants = {
     { name: PostType.Service, label: 'Service' },
     { name: PostType.Testing, label: 'Testing' },
     { name: PostType.Forms, label: 'Forms' },
-    { name: PostType.Eligibility, label: 'Eligibility Data' },
-    { name: PostType.Person, label: 'Person Data' }
   ],
 };

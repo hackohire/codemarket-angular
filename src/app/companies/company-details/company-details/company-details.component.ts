@@ -24,6 +24,9 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 import { EditorComponent } from '../../../shared/components/editor/editor.component';
 import { MdePopoverTrigger } from '@material-extended/mde';
 import { MatPaginator } from '@angular/material/paginator';
+import Swal from 'sweetalert2';
+import {FormBuilderService} from '../../../form-builder/form-builder.service'
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-company-details',
@@ -101,6 +104,15 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
   emailCount = 0;
   phoneCount = 0;
 
+  companyIdToBankList = '';
+
+  formDataListSubscription: Subscription;
+  valueList = [];
+  displayedColumns: string[];
+
+  selectedFormData = '';
+
+
   postDescription: [{
     type: string;
     data: any
@@ -145,6 +157,8 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
     private sweetAlertService: SweetalertService,
     public companyService: CompanyService,
     public auth: AuthService,
+    public formBuilderService: FormBuilderService,
+    private location: Location
   ) { }
 
   ngOnInit() {
@@ -152,7 +166,7 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
     this.commentId = this.activatedRoute.snapshot.queryParams['commentId'];
 
     const params = this.activatedRoute.snapshot.params;
-
+    this.companyIdToBankList =  params.companyId;
     this.companyView = this.activatedRoute.snapshot.queryParams['view'] ? this.activatedRoute.snapshot.queryParams['view'] : 'posts';
     this.postService.getCountOfAllPost('', params.companyId, '').subscribe((data) => {
       if (data.length) {
@@ -184,13 +198,13 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
         )
         .subscribe({
           next: (c: Company) => {
-            if (c && c._id) {
+            if(c.owners.find(cp => cp._id === this.authService.loggedInUser._id || c.createdBy._id === this.authService.loggedInUser._id)){
               this.companyDetails = c;
-              this.initializeCommentForm(c, 'post');
-              this.initializeQuestionAndAnswerForm(c, 'company');
-
-              this.selectMainCategory({name: this.companyView});
+              this.selectMainCategory(this.companyView)
+            }else{
+              Swal.fire("Unauthorized Access","","error").then(()=>{this.location.back()})
             }
+            
           }
         })
     );
@@ -419,6 +433,23 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
     if (!category.custom) {
       this.companyView = category.name;
       this.router.navigate(['./'], { relativeTo: this.activatedRoute, queryParams: { view: category.name }, queryParamsHandling: 'merge' });
+    }
+
+
+    if (category.name === 'eligibility') {
+
+      this.formDataListSubscription = this.formBuilderService.fetchformDataById(this.companyIdToBankList,'5eb3a8efa83c7d1778526205').subscribe((formDatalist) => {
+        console.log(formDatalist);
+        this.selectedFormData = formDatalist;
+      });
+    }
+
+    if (category.name === 'personData') {
+
+      this.formDataListSubscription = this.formBuilderService.fetchformDataById(this.companyIdToBankList,'5eb409c53a429f353b3d8b0b').subscribe((formDatalist) => {
+        console.log(formDatalist);
+        this.selectedFormData = formDatalist;
+      });
     }
 
     // if (category.name === 'campaigns') {

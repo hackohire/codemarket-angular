@@ -27,6 +27,10 @@ const contactRoutes: Routes = [
         component: ViewFormDataListComponent
       },
       {
+        path: 'edit-form-structure/:formname/:formId',
+        component: CreateFormTemplateComponent
+      },
+      {
         path: 'create-form-template',
         component: CreateFormTemplateComponent
       },
@@ -35,7 +39,7 @@ const contactRoutes: Routes = [
 ];
 
 @NgModule({
-  declarations: [FormBuilderComponent,CreateFormTemplateComponent, ViewFormDataListComponent],
+  declarations: [FormBuilderComponent, CreateFormTemplateComponent, ViewFormDataListComponent],
   imports: [
     CommonModule,
     SharedModule,

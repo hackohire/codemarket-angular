@@ -86,7 +86,7 @@
                             </mat-form-field>
                             <a class="btn btn--vsm btn--round menu"
                                 (click)="updateSocialMedia(fb.value, tw.value, li.value, ig.value, yelp.value, cw.value)"
-                                style="color: white; background: #0674ec !important;">Update
+                                style="color: white; background: #00aeef !important;">Update
                             </a>
                         </div>
                     </mde-popover>
@@ -101,7 +101,7 @@
                         <div class="controls" *ngIf="details?.createdBy?._id === authService?.loggedInUser?._id">
                             <a mat-button style="background-color: #ff00007a;" (click)="removeCover();"
                                 class="save">Remove</a>
-                            <a mat-button style="background-color: #0674ec" *ngIf="!details?.cover"
+                            <a mat-button style="background-color: #00aeef" *ngIf="!details?.cover"
                                 (click)="updateCover()" class="save">Upload
                                 Cover</a>
                         </div>
@@ -123,102 +123,24 @@
 
             <div class="row">
                 <div class="col-lg-2">
-                    <app-post-type-nav [selectedPostType]="companyView" [customTabs]="customTabs"
-                        (postTypeClick)="selectMainCategory($event);" (plusButtonClick)="redirectToAddPost($event)">
+                    <app-post-type-nav [selectedPostType]="companyView" [postTypesArray]="[{ name: 'eligibility', label: 'Eligibility Data' },
+                    { name: 'personData', label: 'Person Data' }]"
+                        (postTypeClick)="selectMainCategory($event);">
                     </app-post-type-nav>
-                    <!-- start aside -->
-                    <!-- <app-add-post-menu style="color: #0674ec !important; margin-left: auto;"></app-add-post-menu> -->
-                    <!-- <div class="docs-component-viewer-nav common-box-shadow"
-                        style="margin-bottom: 20px; margin-top: 10px;">
-                        <div class="docs-component-viewer-nav-content">
-                            <div *ngFor="let category of companyViewLinks; let last = last;">
-                                <button cdkAccordionItem #panel="cdkAccordionItem"
-                                    [expanded]="category?.types ? isExpanded(category) : false"
-                                    (click)="selectMainCategory(category, panel)" class="docs-nav-content-btn"
-                                    [ngClass]="companyView === category.view ? 'docs-component-viewer-sidenav-item-selected' : ''"
-                                    [attr.aria-controls]="'panel-' + category.view"
-                                    [attr.aria-expanded]="panel.expanded">
-                                    {{category.title}}
-
-                                    <mat-icon *ngIf="category?.types">
-                                        {{panel.expanded ? 'keyboard_arrow_up' :  'keyboard_arrow_down'}}
-                                    </mat-icon>
-                                </button>
-                                <mat-nav-list dense [@bodyExpansion]="panel.expanded ? 'expanded' : 'collapsed'"
-                                    id="panel-{{category.view}}" [attr.aria-label]="category.view">
-                                    <a mat-list-item *ngFor="let component of category?.types"
-                                        (click)="selectMainCategory(component, panel)"
-                                        [ngClass]="component.view === companyView ? 'docs-component-viewer-sidenav-item-selected': ''"
-                                        [attr.aria-current]="companyView === component.view ? 'page': 'false'">
-                                        {{component.title}}
-                                    </a>
-                                </mat-nav-list>
-                                <hr *ngIf="!last" />
-                            </div>
-
-                            <div *ngFor="let p of postTypesArray; let last = last;">
-                                <button cdkAccordionItem [routerLink]="[]" [queryParams]="{ view: p.name }"
-                                    [queryParamsHandling]="'merge'"
-                                    (click)="companyView = p.name; fetchAllCompanyRealtedePosts(p.name);"
-                                    class="docs-nav-content-btn"
-                                    [ngClass]="companyView === p.name ? 'docs-component-viewer-sidenav-item-selected' : ''">
-                                    {{p.label}}
-                                </button>
-                                <hr *ngIf="!last" />
-                            </div>
-                        </div>
-                    </div> -->
-
-
-
-                    <!-- <aside class="sidebar product--sidebar">
-                        <div class="sidebar-card card--category" style="background: transparent;">
-
-                            <div class="collapse show collapsible-content" id="collapse1">
-                                <ul class="card-content" style="list-style: none;">
-                                    <li>
-                                        <a *ngFor="let cView of companyViewLinks" [routerLink]="['./']"
-                                            [routerLinkActive]="'active-item'" [queryParams]="{view: cView?.view}"
-                                            [queryParamsHandling]="'merge'">
-                                            <span class="lnr lnr-chevron-right"></span>{{cView?.title}} </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <a [routerLink]="['/', 'company', 'add-company']" class="btn btn--sm btn--round menu"
-                            style="margin: 0 30px;">Add Company
-                            <mat-icon style="vertical-align: middle;">add</mat-icon>
-                        </a>
-                        <a class="btn btn--sm btn--round menu"
-                            style="color: #0674ec !important; background: white; margin: 10px 30px;"
-                            [routerLink]="['./']" [routerLinkActive]="'active-item'" [queryParams]="{view: 'q&a'}"
-                            [queryParamsHandling]="'merge'">Add Question <mat-icon style="vertical-align: middle;">add
-                            </mat-icon>
-                        </a>
-                        <a class="btn btn--sm btn--round menu"
-                            *ngIf="auth?.loggedInUser?._id === details?.createdBy?._id"
-                            style="color: #0674ec !important; background: white; margin: 10px 30px;"
-                            (click)="openDialog()">Add Event
-                            <mat-icon style="vertical-align: middle;">add</mat-icon>
-                        </a>
-                    </aside> -->
                 </div>
                 <div class="col-lg-9">
-                    <!-- <div style="height: 312px; width: 820px">
-                            <img [src]="avatar?.value ? ((s3FilesBucketURL + avatar.value) | safe: 'resourceUrl') : anonymousAvatar" />
-                    </div> -->
+                
                     <div class="row">
                         <div class="col-md-12 comment-form-area" style="padding: 0 15px;">
                             <div class="media comment-form">
-                                <div class="media-left">
+                                <!-- <div class="media-left">
                                     <a [routerLink]="['/', 'dashboard', 'profile', authService?.loggedInUser?._id ]">
                                         <img class="author_avatar_comment" style="height: 45px; width:45px;"
                                             [src]="authService?.loggedInUser?.avatar ? ((s3FilesBucketURL + authService?.loggedInUser?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
                                             alt="Commentator Avatar">
                                     </a>
-                                </div>
-                                <div class="media-body">
+                                </div> -->
+                                <!-- <div class="media-body">
                                     <div class="comment-reply-form">
                                         <app-add-post-menu #addPostMenu style="position: absolute; visibility: hidden;">
                                         </app-add-post-menu>
@@ -232,7 +154,7 @@
                                                 (click)="addPostMenu.openMenu();">Post</button>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
@@ -261,6 +183,14 @@
                                     </app-paginator>
                                 </div> -->
                             </div>
+
+                            <ng-container *ngIf="companyView == 'eligibility' || companyView == 'personData'">
+                                <div *ngFor="let f of selectedFormData">
+                                    <pre>
+                                        {{f?.formDataJson | json}}
+                                    </pre>
+                                </div>
+                            </ng-container> 
 
                             <ng-container *ngIf="companyView !== 'contact'">
                                 <ng-container *ngFor="let p of postTypesArray">

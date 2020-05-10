@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import {FormJson} from '../shared/models/FormJson.model';
 import {FormData} from '../shared/models/FormData.model';
+import {BankFormDataRef} from '../shared/models/bankFormDataRef.model';
+
 
 
 @Injectable({
@@ -69,9 +71,12 @@ export class FormBuilderService {
       mutation: gql`
         mutation addformData($formData: formDataInput) {
           addformData(formData: $formData) {
-            _id
             formname
             formDataJson
+            company{
+              _id
+            }
+            connectedFormStructureId
           }
         }
       `,
@@ -83,8 +88,49 @@ export class FormBuilderService {
     );
   }
 
+
+  addBankFormDataRef(bankFormDataRef: any): Observable<BankFormDataRef> {
+    return this.apollo.mutate({
+      mutation: gql`
+        mutation addBankFormDataRef($bankFormDataRef: bankFormDataRefInput) {
+          addBankFormDataRef(bankFormDataRef: $bankFormDataRef) {
+            formname
+            connectedFormStructureId
+            connectedFormDataId
+            companyName
+          }
+        }
+      `,
+      variables: {
+        bankFormDataRef
+      }
+    }).pipe(
+      map((q: any) => q.data.addBankFormDataRef)
+    );
+  }
+
   redirectToBack(companyId: string, view = 'home') {
     this.router.navigate(['/', 'dashboard']);
+  }
+
+  fetchformDataById(_id: string,connectedFormStructureId: string){
+    return this.apollo.query({
+      query: gql`
+        query fetchformDataById($_id: String,$connectedFormStructureId: String) {
+          fetchformDataById(_id: $_id,connectedFormStructureId: $connectedFormStructureId){
+            formname
+            formDataJson
+            connectedFormStructureId
+          }
+        }
+      `,
+      variables: {
+        _id,
+        connectedFormStructureId
+      }
+    }).pipe(
+      map((q: any) => q.data.fetchformDataById)
+    );
   }
 
   fetchformData(formname: string): Observable<any> {
@@ -106,5 +152,25 @@ export class FormBuilderService {
     );
   }
 
+  fetchFormStructureById(formId: string): Observable<any> {
+    return this.apollo.query({
+      query: gql`
+        query fetchFormStructureById($formId: String) {
+          fetchFormStructureById(formId: $formId){
+            _id
+            formname
+            formStructureJSON
+            createdAt
+            updatedAt
+          }
+        }
+      `,
+      variables: {
+        formId
+      }
+    }).pipe(
+      map((q: any) => q.data.fetchFormStructureById)
+    );
+  }
 
 }

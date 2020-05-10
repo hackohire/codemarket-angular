@@ -111,7 +111,7 @@
         <span *ngFor="let t of p?.tags"
             style="background: rgba(6, 116, 236, 0.1); display: inline-block;
                 padding: 0 15px; line-height: 32px;
-                color: #0674ec; margin-right: 10px;font-size: 15px;font-weight: 200;-webkit-border-radius: 100px;border-radius: 100px;">{{t?.name}}</span>
+                color: #00aeef; margin-right: 10px;font-size: 15px;font-weight: 200;-webkit-border-radius: 100px;border-radius: 100px;">{{t?.name}}</span>
     </div>
     
     <!-- Read More Button to Fetch comments and show full description-->
@@ -134,7 +134,7 @@
                 <span class="count"> {{p?.likeCount ? p?.likeCount : 0}}</span>
             </a>
             <a mat-button class="single-stat comments" (click)="readMore = false; fetchComments(p) ">
-                <mat-icon style="color: #0674ec;" class="vertical-align-middle">comment</mat-icon>
+                <mat-icon style="color: #00aeef;" class="vertical-align-middle">comment</mat-icon>
                 <span class="count"> {{(commentService.commentsList$ | async)?.length ? (commentService.commentsList$ | async)?.length : p?.commentCount}}</span>
             </a>
         </footer>

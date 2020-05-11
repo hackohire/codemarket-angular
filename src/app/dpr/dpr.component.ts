@@ -22,6 +22,7 @@ export class DprComponent implements OnInit {
   connectedFormStructureId = '';
   companyId = '';
   connectedFormDataId = '';
+  form1Data = '';
 
   constructor(
     public dialog: MatDialog,
@@ -58,6 +59,10 @@ export class DprComponent implements OnInit {
       });
     }
 
+    onChange(event) {
+      console.log(event.data)
+      this.form1Data = event.data;
+    }
 
     onSubmitForm1(event) {
       console.log(event.data);
@@ -81,7 +86,8 @@ export class DprComponent implements OnInit {
       const dialogConfig = new MatDialogConfig();
 
       dialogConfig.data = {
-        companyId: this.companyId
+        companyId: this.companyId,
+        form1Data: this.form1Data
       };
 
       const dialogRef = this.dialog.open(FormDetailsDialog,dialogConfig);
@@ -108,6 +114,7 @@ export class FormDetailsDialog {
   getDetilsConnectedFormStructureId = '';
   companyId = '';
   connectedFormDataId = '';
+  form1Data = {};
 
   formJsonListSubscription1: Subscription;
   public form2 = {components: []};
@@ -122,6 +129,7 @@ export class FormDetailsDialog {
      @Inject(MAT_DIALOG_DATA) data,
      private router: Router,) {
       this.companyId = data.companyId; 
+      this.form1Data = data.form1Data;
       this.getDetails = 'Getdetails';
       this.getDetilsConnectedFormStructureId = '5eb409c53a429f353b3d8b0b';
       
@@ -154,7 +162,7 @@ export class FormDetailsDialog {
 
   onSubmitForm(event) {
     console.log(event.data);
-    this.formDetailsForm.value.formDataJson = event.data;
+    this.formDetailsForm.value.formDataJson = {...event.data , ...this.form1Data}
 
     this.formBuilderService.addformData(this.formDetailsForm.value).pipe(
       catchError((e) => {

@@ -171,7 +171,7 @@ const routes: Routes = [
     loadChildren: () => import('./help-business-grow/help-business-grow.module').then(module => module.HelpBusinessGrowModule),
   },
   {
-    path: 'dpr/:companyId',
+    path: ':companyName/:companyId/eligibility-form',
     component: DprComponent
   },
   {

@@ -21,8 +21,6 @@ export class DownPaymentHelpComponent implements OnInit {
   formName = '';
   connectedFormStructureId = '';
 
-
-
   constructor(
     public dialog: MatDialog,
     private formBuilderService: FormBuilderService,

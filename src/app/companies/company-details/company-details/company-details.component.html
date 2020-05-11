@@ -123,8 +123,7 @@
 
             <div class="row">
                 <div class="col-lg-2">
-                    <app-post-type-nav [selectedPostType]="companyView" [postTypesArray]="[{ name: 'eligibility', label: 'Eligibility Data' },
-                    { name: 'personData', label: 'Person Data' }]"
+                    <app-post-type-nav [selectedPostType]="companyView" [postTypesArray]="[{ name: 'leads', label: 'Leads' }]"
                         (postTypeClick)="selectMainCategory($event);">
                     </app-post-type-nav>
                 </div>
@@ -184,7 +183,7 @@
                                 </div> -->
                             </div>
 
-                            <ng-container *ngIf="companyView == 'eligibility' || companyView == 'personData'">
+                            <ng-container *ngIf="companyView == 'leads'">
                                 <div *ngFor="let f of selectedFormData">
                                     <pre>
                                         {{f?.formDataJson | json}}

@@ -435,16 +435,7 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
       this.router.navigate(['./'], { relativeTo: this.activatedRoute, queryParams: { view: category.name }, queryParamsHandling: 'merge' });
     }
 
-
-    if (category.name === 'eligibility') {
-
-      this.formDataListSubscription = this.formBuilderService.fetchformDataById(this.companyIdToBankList,'5eb3a8efa83c7d1778526205').subscribe((formDatalist) => {
-        console.log(formDatalist);
-        this.selectedFormData = formDatalist;
-      });
-    }
-
-    if (category.name === 'personData') {
+    if (category.name === 'leads') {
 
       this.formDataListSubscription = this.formBuilderService.fetchformDataById(this.companyIdToBankList,'5eb409c53a429f353b3d8b0b').subscribe((formDatalist) => {
         console.log(formDatalist);

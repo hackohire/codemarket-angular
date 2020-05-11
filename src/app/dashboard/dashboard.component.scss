@@ -1,6 +1,11 @@
 @import '../../assets/css/_general.scss';
 @import '../../assets/css/_theme.scss';
 
+:host ::ng-deep .mat-dialog-container::before {
+	bottom: 100% !important;
+	border-bottom: 86.60px solid #64C7CC !important;
+}
+
 .blocks h6 {
 	font-size: 24px;
 }
@@ -13121,11 +13126,12 @@ header.header {
 }
 
 .logo h1 {
-	margin: 0; 
-	text-decoration: none !important; 
-	font-weight: 100; 
-	letter-spacing: 5px;
-	line-height: 1;
+    margin: 6px 0;
+    text-decoration: none !important;
+    font-weight: 400;
+    letter-spacing: 2px;
+    line-height: 1;
+    font-size: 36px;
 }
 
 header nav {
@@ -13264,20 +13270,21 @@ header nav ul li.current-menu-parent a {
 }
 
 .eligibility-form-heading {
-	margin: 0 0 30px
+	margin: 30px 0;
 }
 
 .eligibility-form-heading h1 {
-	font-size: 30px
+	font-size: 30px;
+	font-weight: 500;
 }
 
 .eligibility-form-heading p {
 	margin-top: 10px;
-	font-size: 18px;
-	line-height: 1.44;
-	color: #595957;
-	font-weight: 200;
-	padding: 0 1em
+    font-size: 20px;
+    line-height: 1.44;
+    color: #595957;
+    font-weight: 100;
+    padding: 0 1em;
 }
 
 #loc-group>p {
@@ -13633,7 +13640,7 @@ header nav ul li.current-menu-parent a {
 	font-size: 14px;
 	font-weight: 400;
 	padding-left: 20px;
-	background: url(https://downpaymentresource.com/wp-content/themes/dpr/dist/images/how-blue.png) no-repeat left;
+	background: url('https://downpaymentresource.com/wp-content/themes/dpr/dist/images/how-blue.png') no-repeat left;
 	cursor: pointer;
 	white-space: nowrap;
 	color: #428bca;
@@ -13786,21 +13793,20 @@ input[type=submit] {
 }
 
 .resultscontent {
-	background: #8dc548;
+	background: #1e69ac;
 	color: #fff;
-	padding: 5px;
+	padding: 20px;
 	text-align: center;
 	display: inline-block
 }
 
 .resultscontent h3 {
-	font-weight: 900;
-	font-size: 14px;
+	font-weight: 400;
+	font-size: 17px;
 	margin: 0
 }
 
 .resultscontent .preview {
-	display: inline-block;
 	width: 145px;
 	text-align: center
 }

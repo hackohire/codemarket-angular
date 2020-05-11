@@ -173,4 +173,25 @@ export class FormBuilderService {
     );
   }
 
+  fetchHomeBuyerProgram(location: string): Observable<any> {
+    return this.apollo.query({
+      query: gql`
+        query fetchHomeBuyerProgram($location: String) {
+          fetchHomeBuyerProgram(location: $location){
+            title
+            location
+            benefits
+            featuredLenderLink
+            websiteLink
+          }
+        }
+      `,
+      variables: {
+        location
+      }
+    }).pipe(
+      map((q: any) => q.data.fetchHomeBuyerProgram)
+    );
+  }
+
 }

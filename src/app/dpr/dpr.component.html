@@ -6,7 +6,7 @@
       </div>
 
       <div *ngIf="isBrowser()">
-        <formio [form]="form1" (submit)="onSubmitForm1($event)"></formio>
+        <formio [form]="form1" (change)="onChange($event)" (submit)="onSubmitForm1($event)"></formio>
       </div>
     </div><!-- /.col -->
 

@@ -12973,7 +12973,20 @@ header.header {
 .logo {
 	float: left;
 	margin: 0;
-	padding: 11px 0
+	padding: 12px 0;
+	color: #000000;
+	&:hover {
+    color: #00aeef;
+    text-decoration: none;
+	}
+}
+
+.logo h1 {
+	margin: 0; 
+	text-decoration: none !important; 
+	font-weight: 100; 
+	letter-spacing: 5px;
+	line-height: 1;
 }
 
 header nav {
@@ -13000,9 +13013,10 @@ header nav ul li {
 header nav ul li a {
 	display: block;
 	color: #23282d;
-	font-size: 14px;
+	font-size: 16px;
 	line-height: 14px;
-	font-weight: 700;
+	font-weight: 500;
+	line-height: 34px;
 	margin: 0;
 	padding: 0;
 	text-decoration: none;
@@ -13014,7 +13028,7 @@ header nav ul li.active a,
 header nav ul li.current-menu-ancestor a,
 header nav ul li.current-menu-item a,
 header nav ul li.current-menu-parent a {
-	color: #20527e;
+	color: #00aeef;
 	text-decoration: none
 }
 

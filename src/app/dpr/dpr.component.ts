@@ -23,6 +23,8 @@ export class DprComponent implements OnInit {
   companyId = '';
   connectedFormDataId = '';
   form1Data = '';
+  location = '';
+  programCount = '';
 
   constructor(
     public dialog: MatDialog,
@@ -35,6 +37,7 @@ export class DprComponent implements OnInit {
     }
 
     formJsonListSubscription: Subscription;
+    programListSubscription: Subscription;
   
     public form1 = {components: []};
     formDetails: FormGroup;
@@ -62,6 +65,13 @@ export class DprComponent implements OnInit {
     onChange(event) {
       console.log(event.data)
       this.form1Data = event.data;
+      if (typeof event.data != "undefined"){
+        if (event.data.inANeighborhoodCityOrCountyGeneralAreaStartTypingForAMenuOfOptions.value !== this.location){
+          this.programListSubscription = this.formBuilderService.fetchHomeBuyerProgram(event.data.inANeighborhoodCityOrCountyGeneralAreaStartTypingForAMenuOfOptions.value).subscribe((Programmlist) => {
+            this.programCount = Programmlist.length;
+          });
+        }
+      } 
     }
 
     onSubmitForm1(event) {

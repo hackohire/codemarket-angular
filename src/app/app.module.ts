@@ -57,6 +57,7 @@ import { LeadComponent } from './dpr/lead/lead.component';
 import { registerSelecteDeselectComponent } from './shared/components/selecte-deselect/select-deselect.formio';
 import { SelecteDeselectComponent } from './shared/components/selecte-deselect/selecte-deselect.component';
 import { DialogOverviewExample } from './dashboard/dashboard.component';
+import { BannerbankComponent } from './bannerbank/bannerbank.component';
 
 
 // import { SignInComponent } from './core/amplify/sign-in-component';
@@ -110,7 +111,8 @@ import { DialogOverviewExample } from './dashboard/dashboard.component';
     FormDetailsDialog,
     LeadComponent,
     SelecteDeselectComponent,
-    DialogOverviewExample
+    DialogOverviewExample,
+    BannerbankComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

@@ -41,6 +41,7 @@ import { BlogComponent } from './blog/blog.component';
 import { ProgramlistComponent } from './programlist/programlist.component';
 import { DprComponent } from './dpr/dpr.component';
 import { LeadComponent } from './dpr/lead/lead.component';
+import { BannerbankComponent } from './bannerbank/bannerbank.component';
 // import { PostDataResolver } from './core/resolver';
 
 const routes: Routes = [
@@ -328,6 +329,10 @@ const routes: Routes = [
   {
     path: 'program-list',
     component: ProgramlistComponent
+  },
+  {
+    path: 'bannerbank',
+    component: BannerbankComponent
   }
 
 

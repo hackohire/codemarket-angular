@@ -360,7 +360,7 @@ export class AuthService {
 
         Storage.vault.put(fileName, file, {
 
-          bucket: appConstants.fileS3Bucket,
+          bucket: environment.fileS3Bucket,
 
           level: 'public',
 

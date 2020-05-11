@@ -378,7 +378,7 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
       const fileName = fileNameSplitArray[0] + '-' + new Date().toISOString() + '.' + fileExt;
       await Storage.vault.put(fileName, this.selectedCoverPic, {
 
-        bucket: appConstants.fileS3Bucket,
+        bucket: environment.fileS3Bucket,
         path: 'cover',
         level: 'public',
         contentType: this.selectedCoverPic.type,

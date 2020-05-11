@@ -87,6 +87,30 @@
                   "maximumError": "15mb"
                 }
               ]
+            },
+            "la2050": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.la2050.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "5mb",
+                  "maximumError": "15mb"
+                }
+              ]
             }
           }
         },
@@ -102,6 +126,9 @@
             },
             "staging": {
               "browserTarget": "codemarket:build:staging"
+            },
+            "la2050": {
+              "browserTarget": "codemarket:build:la2050"
             }
           }
         },
@@ -154,6 +181,9 @@
             },
             "staging": {
               "devServerTarget": "codemarket:serve:staging"
+            },
+            "la2050": {
+              "devServerTarget": "codemarket:build:la2050"
             }
           }
         },
@@ -183,6 +213,19 @@
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.staging.ts"
+                }
+              ],
+              "sourceMap": false,
+              "optimization": {
+                "scripts": false,
+                "styles": true
+              }
+            },
+            "la2050": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.la2050.ts"
                 }
               ],
               "sourceMap": false,

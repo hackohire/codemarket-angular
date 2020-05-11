@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import {FormBuilderService} from '../form-builder.service';
 import { Subscription } from 'rxjs';
 import { BreadCumb } from '../../shared/models/bredcumb.model';
-import { MatTableDataSource, MatSort } from '@angular/material';
+import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({

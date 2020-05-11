@@ -3,7 +3,7 @@ import { FormGroup } from '@angular/forms';
 import {FormBuilderService} from './form-builder.service';
 import { Subscription } from 'rxjs';
 import { BreadCumb } from './../shared/models/bredcumb.model';
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-form-builder',

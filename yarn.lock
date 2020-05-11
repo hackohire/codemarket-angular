@@ -196,6 +196,11 @@
   resolved "https://registry.yarnpkg.com/@angular/core/-/core-9.1.6.tgz#810b4bb960cc2a933b89969c4d0f5ac53535c241"
   integrity sha512-iXgPh5DebLwkMzLtQ6WKiv/mo4hpwMOwYex3O4F2CKToR2tKPnXbV5WC/ADGm0XYXiocSKQPiyL4ZrUjVeKEqA==
 
+"@angular/elements@^9.1.6":
+  version "9.1.6"
+  resolved "https://registry.yarnpkg.com/@angular/elements/-/elements-9.1.6.tgz#d8ba5db32f44b6992178a2d2e936c4afafb91d0b"
+  integrity sha512-xby+X1eOF9VKuZ18RJqKiPvov82HgXstAjModOt4jLDpRr4jr5s/2RzVtPOevFUYabr+y85FuKe8aKnR6+9CkQ==
+
 "@angular/flex-layout@^9.0.0-beta.29":
   version "9.0.0-beta.29"
   resolved "https://registry.yarnpkg.com/@angular/flex-layout/-/flex-layout-9.0.0-beta.29.tgz#a334ffd15c272e2d48cdaef3879625aadcc13a54"

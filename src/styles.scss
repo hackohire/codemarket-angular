@@ -1,14 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
-<<<<<<< HEAD
-@import "~bootstrap/dist/css/bootstrap.min.css";
-@import "../node_modules/highlight.js/styles/rainbow.css";
 @import "~@danielmoncada/angular-datetime-picker/assets/style/picker.min.css";
-=======
+@import "~bootstrap/scss/bootstrap";
 
-
-@import "~~bootstrap/scss/bootstrap";
-@import "~ng-pick-datetime/assets/style/picker.min.css";
->>>>>>> staging
 @import url("assets/fonts/rectory/stylesheet.css");
 
 @import "~src/assets/css/general";

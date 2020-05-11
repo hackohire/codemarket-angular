@@ -176,9 +176,7 @@ export const description = gql`
 
 const CommentFragment = gql`
 fragment Comment on Comment {
-  text {
-    ...Description
-  }
+  textHTML
   _id
   type
   referenceId
@@ -213,7 +211,6 @@ fragment Comment on Comment {
     type
   }
 }
-${description}
 `;
 
 export const comment = gql`

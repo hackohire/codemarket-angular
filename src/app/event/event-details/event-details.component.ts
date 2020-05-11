@@ -11,8 +11,8 @@ import { ShareService } from '@ngx-share/core';
 import { PostService } from '../../shared/services/post.service';
 import { SweetalertService } from '../../shared/services/sweetalert.service';
 import { CompanyService } from '../../companies/company.service';
-import { MatDialog } from '@angular/material/dialog';
-import { BlockToolData } from '@editorjs/editorjs';
+import { MatDialog } from '@angular/material';
+
 import { BreadCumb } from '../../shared/models/bredcumb.model';
 import { environment } from '../../../environments/environment';
 import { Subscription } from 'rxjs';
@@ -45,8 +45,8 @@ export class EventDetailsComponent implements OnInit, OnDestroy {
   collaborators: string[];
   postTypes = PostType;
 
-  @ViewChild('coverPic') coverPic;
-  @ViewChild('cover') cover: ElementRef;
+  @ViewChild('coverPic', {static: true}) coverPic;
+  @ViewChild('cover', {static: true}) cover: ElementRef;
   selectedCoverPic: File;
   selectedCoverPicURL = '';
   uploadedCoverUrl = '';
@@ -70,7 +70,7 @@ export class EventDetailsComponent implements OnInit, OnDestroy {
 
   postDescription: [{
     type: string;
-    data: BlockToolData
+    data: any
   }];
 
   postsConnectedWithEvent: Post[];

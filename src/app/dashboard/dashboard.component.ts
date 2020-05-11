@@ -25,6 +25,8 @@ export class DashboardComponent implements OnInit {
   helpRequestList$: Observable<HelpQuery[]>;
   usersListAndTheirBugFixes$: Observable<[]>;
 
+  emailInput: string;
+
   displayedColumnsForHelpRequest: string[] = ['number', 'name', 'price', 'createdBy', 'createdAt'];
   dataSource = new MatTableDataSource();
   @ViewChild(MatSort) sort: MatSort;

@@ -138,19 +138,20 @@ export class PostService {
     );
   }
 
-  updatePost(post: Post): Observable<Post> {
+  updatePost(post: Post, updatedBy = null): Observable<Post> {
     return this.apollo.mutate(
       {
         mutation: gql`
-          mutation updatePost($post: PostInput) {
-            updatePost(post: $post) {
+          mutation updatePost($post: PostInput, $updatedBy: UserInput) {
+            updatePost(post: $post, updatedBy: $updatedBy) {
               ...Post
             }
           }
           ${this.postFields}
         `,
         variables: {
-          post
+          post,
+          updatedBy
         }
       }
     ).pipe(
@@ -158,16 +159,17 @@ export class PostService {
     );
   }
 
-  deletePost(postId: string): Observable<boolean> {
+  deletePost(postId: string, deletedBy = null): Observable<boolean> {
     return this.apollo.mutate(
       {
         mutation: gql`
-          mutation deletePost($postId: String) {
-            deletePost(postId: $postId)
+          mutation deletePost($postId: String, $deletedBy: UserInput) {
+            deletePost(postId: $postId, deletedBy: $deletedBy)
           }
         `,
         variables: {
-          postId
+          postId,
+          deletedBy
         }
       }
     ).pipe(
@@ -228,6 +230,29 @@ export class PostService {
     ).pipe(
       map((p: any) => {
         return p.data.getCountOfAllPost
+      }),
+    )
+  }
+
+  getEmailPhoneCountForContact(type: string): Observable<any> {
+    return this.apollo.query({
+      query : gql`
+        query getEmailPhoneCountForContact($type: String) {
+          getEmailPhoneCountForContact(type: $type) {
+            _id
+            emailCount
+            phoneCount
+          }
+        }
+      `,
+      variables: {
+        type: type ? type : 'contact'
+      },
+      fetchPolicy: 'no-cache'
+    }
+    ).pipe(
+      map((p: any) => {
+        return p.data.getEmailPhoneCountForContact
       }),
     )
   }
@@ -374,11 +399,8 @@ export class PostService {
       {
         query: gql`
           query fetchFiles($blockType: String, $userId: String) {
-            fetchFiles(blockType: $blockType, userId: $userId) {
-              ...Description
-            }
+            fetchFiles(blockType: $blockType, userId: $userId)
           }
-          ${description}
         `,
         variables: {
           blockType,

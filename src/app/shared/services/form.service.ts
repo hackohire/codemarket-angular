@@ -74,7 +74,7 @@ export class FormService {
     );
   }
 
-  addToCollection(keyWord: string, searchCollection: string, type = ''): Observable<Tag[]> {
+  addToCollection(keyWord: string, searchCollection: string, type = ''): Observable<Tag> {
     return this.apollo.mutate(
       {
         mutation: gql`

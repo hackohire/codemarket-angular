@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angu
 import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { PostService } from '../../services/post.service';
 import { MdePopoverTrigger } from '@material-extended/mde';
+import { AuthService } from '../../../core/services/auth.service';
 @Component({
   selector: 'app-add-collaborators',
   templateUrl: './add-collaborators.component.html',
@@ -20,6 +21,7 @@ export class AddCollaboratorsComponent implements OnInit {
 
   constructor(
     private postService: PostService,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
@@ -33,7 +35,10 @@ export class AddCollaboratorsComponent implements OnInit {
       _id: this.postDetails._id,
       ...this.addCollaboratorForm.value
     };
-    this.postService.updatePost(collaboratorsObj).subscribe((j) => {
+    this.postService.updatePost(
+      collaboratorsObj,
+      { name: this.authService.loggedInUser.name, _id: this.authService.loggedInUser._id }
+    ).subscribe((j) => {
       if (j) {
         this.postDetails.collaborators = j.collaborators;
         this.collaboratorsPopover.closePopover();

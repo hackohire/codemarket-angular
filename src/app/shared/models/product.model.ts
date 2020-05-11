@@ -1,6 +1,6 @@
 import { User } from './user.model';
 import { HighlightResult } from 'ngx-highlightjs';
-import { BlockToolData } from '@editorjs/editorjs';
+
 import { PostStatus } from './poststatus.enum';
 
 export interface PriceAndFiles {
@@ -18,7 +18,7 @@ interface Support {
     time: number;
     description: {
         type: string;
-        data: BlockToolData
+        data: any
     };
 }
 
@@ -28,7 +28,7 @@ export interface Product {
     name: string;
     description: [{
         type: string;
-        data: BlockToolData
+        data: any
     }];
     type?: string;
     shortDescription?: string;

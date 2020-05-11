@@ -2,13 +2,13 @@ import { plans } from '../app/shared/constants/plan_details';
 
 export const environment = {
   production: true,
-  COGNITO_AUTH_DOMAIN: 'https://platform.auth.us-east-1.amazoncognito.com',
+  tiny_api: '5fsqmw7kewxh0ljo1cfr46zhxre6demtcb67n0nzg736c1s4',
   serverless_url: 'https://codemarketapi-prod.codemarket.io/',
   graphql_url: 'https://codemarketapi-prod.codemarket.io/graphql',
   s3FilesBucketURL: 'https://codemarket-files.s3.amazonaws.com/public/',
   stripe_public_key: 'pk_live_EYCoYtpLszr802sOl89WeuW1',
   // stripe_public_key: 'pk_test_ighmL2U9UqAx0O4b8dKkSvdq',
-  webSocketURL: 'wss://rn9gdz7ty7.execute-api.us-east-1.amazonaws.com/prod',
+  webSocketURL: 'wss://314t92s90a.execute-api.us-east-1.amazonaws.com/prod',
   // planDetails: plans.prod,
   planDetails: plans.prod,
   oauth: {

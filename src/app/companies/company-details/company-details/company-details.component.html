@@ -86,7 +86,7 @@
                             </mat-form-field>
                             <a class="btn btn--vsm btn--round menu"
                                 (click)="updateSocialMedia(fb.value, tw.value, li.value, ig.value, yelp.value, cw.value)"
-                                style="color: white; background: #0674ec !important;">Update
+                                style="color: white; background: #00aeef !important;">Update
                             </a>
                         </div>
                     </mde-popover>
@@ -101,7 +101,7 @@
                         <div class="controls" *ngIf="details?.createdBy?._id === authService?.loggedInUser?._id">
                             <a mat-button style="background-color: #ff00007a;" (click)="removeCover();"
                                 class="save">Remove</a>
-                            <a mat-button style="background-color: #0674ec" *ngIf="!details?.cover"
+                            <a mat-button style="background-color: #00aeef" *ngIf="!details?.cover"
                                 (click)="updateCover()" class="save">Upload
                                 Cover</a>
                         </div>
@@ -127,7 +127,7 @@
                         (postTypeClick)="selectMainCategory($event);" (plusButtonClick)="redirectToAddPost($event)">
                     </app-post-type-nav>
                     <!-- start aside -->
-                    <!-- <app-add-post-menu style="color: #0674ec !important; margin-left: auto;"></app-add-post-menu> -->
+                    <!-- <app-add-post-menu style="color: #00aeef !important; margin-left: auto;"></app-add-post-menu> -->
                     <!-- <div class="docs-component-viewer-nav common-box-shadow"
                         style="margin-bottom: 20px; margin-top: 10px;">
                         <div class="docs-component-viewer-nav-content">
@@ -191,14 +191,14 @@
                             <mat-icon style="vertical-align: middle;">add</mat-icon>
                         </a>
                         <a class="btn btn--sm btn--round menu"
-                            style="color: #0674ec !important; background: white; margin: 10px 30px;"
+                            style="color: #00aeef !important; background: white; margin: 10px 30px;"
                             [routerLink]="['./']" [routerLinkActive]="'active-item'" [queryParams]="{view: 'q&a'}"
                             [queryParamsHandling]="'merge'">Add Question <mat-icon style="vertical-align: middle;">add
                             </mat-icon>
                         </a>
                         <a class="btn btn--sm btn--round menu"
                             *ngIf="auth?.loggedInUser?._id === details?.createdBy?._id"
-                            style="color: #0674ec !important; background: white; margin: 10px 30px;"
+                            style="color: #00aeef !important; background: white; margin: 10px 30px;"
                             (click)="openDialog()">Add Event
                             <mat-icon style="vertical-align: middle;">add</mat-icon>
                         </a>
@@ -236,6 +236,8 @@
                             </div>
                         </div>
                     </div>
+
+
                     <div class="row">
                         <div [ngClass]="selectedBlock ? 'col-md-8 col-lg-8' : 'col-lg-12 col-md-12'">
                             <!-- Showing the list of posts for the posts tab, everytime user clicks on the "load more", we increase the page number and call
@@ -251,21 +253,32 @@
                                 </app-paginator>
                             </ng-container>
 
-                            <ng-container *ngFor="let p of postTypesArray">
-                                <ng-container *ngIf="companyView === p.name">
-                                    <div class="item-grid pen-grid item-grid-large">
-                                        <app-brief-post style="width: 100%;" [p]="e"
-                                            *ngFor="let e of companyRelatedPosts?.posts" [readMore]="true"
-                                            (showComments)="showCommentsOnSide($event)"></app-brief-post>
-                                    </div>
-                                    <app-paginator [length]="totalcompanyRelatedPosts"
-                                        (fetchData)="paginator = $event; fetchAllCompanyRealtedePosts(p.name)">
+                            <div *ngIf="companyView === 'campaigns' && details?._id">
+                                <ng-container *ngTemplateOutlet="campaignsTemplate; context: {details: details}">
+                                    </ng-container>
+                                <!-- <div *ngFor="let c of campaignsList">
+                                    <app-paginator [length]="c.count" (fetchData)="paginator = $event; fetchAllCampaign('')">
                                     </app-paginator>
+                                </div> -->
+                            </div>
+
+                            <ng-container *ngIf="companyView !== 'contact'">
+                                <ng-container *ngFor="let p of postTypesArray">
+                                    <ng-container *ngIf="companyView === p.name">
+                                        <div class="item-grid pen-grid item-grid-large">
+                                            <app-brief-post style="width: 100%;" [p]="e"
+                                                *ngFor="let e of companyRelatedPosts?.posts" [readMore]="true"
+                                                (showComments)="showCommentsOnSide($event)"></app-brief-post>
+                                        </div>
+                                        <app-paginator [length]="totalcompanyRelatedPosts"
+                                            (fetchData)="paginator = $event; fetchAllCompanyRealtedePosts(p.name)">
+                                        </app-paginator>
+                                    </ng-container>
                                 </ng-container>
                             </ng-container>
 
-                            <div *ngIf="companyView === 'campaigns' && details?._id">
-                                <ng-container *ngTemplateOutlet="campaignsTemplate; context: {details: details}">
+                            <div *ngIf="companyView === 'comments'">
+                                <ng-container *ngTemplateOutlet="addCommentTemplate; context: details">
                                 </ng-container>
                             </div>
 
@@ -276,6 +289,13 @@
 
                             <div *ngIf="companyView === 'q&a'">
                                 <ng-container *ngTemplateOutlet="questionAnswersTemplate; context: details">
+                                </ng-container>
+                            </div>
+
+                            <!-- <div *ngIf="details?.createdBy?.name && companyView === 'creator'"
+                                class="author-card sidebar-card"> -->
+                            <div *ngIf="companyView === 'contact'">
+                                <ng-container *ngTemplateOutlet="contactTemplate; context: details">
                                 </ng-container>
                             </div>
 
@@ -601,40 +621,90 @@
 
 <ng-template #campaignsTemplate let-cDetails="details">
     <mat-accordion class="example-headers-align">
-        <mat-expansion-panel *ngFor="let c of campaignsList">
-            <mat-expansion-panel-header>
+        <mat-expansion-panel #ep *ngFor="let c of campaignsList; let i = index;">
+            <mat-expansion-panel-header (click)="fetchEmailsConnectedWithCampaign(c._id, i)">
                 <mat-panel-title>
                     {{c?.name}}
                 </mat-panel-title>
                 <mat-panel-description>
                     <!-- Type your name and age -->
-                   {{ '(' + c?.emailData?.length + ')'}} <mat-icon>email</mat-icon>
+                    {{ '(' + c?.count + ')'}} <mat-icon>email</mat-icon>
                 </mat-panel-description>
             </mat-expansion-panel-header>
 
             <div style="border: solid 1px black;" [innerHTML]="c?.descriptionHTML"></div>
 
             <mat-list>
-                <mat-list-item *ngFor="let e of c?.emailData; let i=index;">
-                        <div mat-list-icon style="padding-right: 12px;">
-                            <span style="padding-right: 5px; vertical-align: super; font-size: 16px;">{{(i + 1 + '.')}}</span>
-                            <mat-icon style="display: inline;">email</mat-icon>
-                        </div>
-                        
-                        <div mat-line style="font-weight: 500;">{{e?.to[0]}}</div>
-                        <div mat-line>Subject: {{e?.subject}} </div>
-                        <div mat-line>Sent: {{e?.createdAt | date: 'medium'}} </div>
-                        <div mat-line *ngIf="e?.tracking?.open?.timestamp">Read: {{e?.tracking?.open?.timestamp | date: 'medium'}} </div>
-                        <i *ngIf="e?.tracking" class="fas fa-check-double"></i>
-                        <i *ngIf="!e?.tracking" class="fal fa-check"></i>
-                        <!-- {{parser?.setUA(e?.tracking?.open?.userAgent)}}{{parser.getResult() | json}} -->
+                <mat-list-item *ngFor="let e of c?.emailData; let j=index;">
+                    <div mat-list-icon style="padding-right: 12px;">
+                        <span
+                            style="padding-right: 5px; vertical-align: super; font-size: 16px;">{{(j + 1 + '.')}}</span>
+                        <mat-icon style="display: inline;">email</mat-icon>
+                    </div>
+
+                    <div mat-line style="font-weight: 500;">{{e?.to[0]}}</div>
+                    <div mat-line>Subject: {{e?.subject}} </div>
+                    <div mat-line>Sent: {{e?.createdAt | date: 'medium'}} </div>
+                    <div mat-line *ngIf="e?.tracking?.open?.timestamp">Read:
+                        {{e?.tracking?.open?.timestamp | date: 'medium'}} </div>
+                    <i *ngIf="e?.tracking" class="fas fa-check-double"></i>
+                    <i *ngIf="!e?.tracking" class="fal fa-check"></i>
+                    <!-- {{parser?.setUA(e?.tracking?.open?.userAgent)}}{{parser.getResult() | json}} -->
                 </mat-list-item>
             </mat-list>
 
-
+           {{paginator?.pageIndex}}
+           {{ep?.expanded}}
+            <app-paginator [length]="c?.count" (fetchData)="paginator = $event; ep?.expanded ? fetchEmailsConnectedWithCampaign(c._id, i) : null">
+            </app-paginator>
         </mat-expansion-panel>
-
+        <!-- <div *ngFor="let c of campaignsList">
+        </div> -->
     </mat-accordion>
+</ng-template>
+<!-- Contact Template -->
+<ng-template #contactTemplate let-contacts="details">
+    <div style="background: white;">
+            <table class="table table-striped" >
+                <thead>
+                    <tr>
+                        <th>Name 
+                            <span *ngIf="nameAsc">
+                                <i class="fas fa-sort-up" (click)="changeOrder('name','asc','contact')"></i>
+                            </span>
+                            <span *ngIf="!nameAsc">
+                                <i class="fas fa-sort-down" (click)="changeOrder('name','desc','contact')"></i>
+                            </span>
+                        </th>
+                        <th>Email ({{emailCount}})
+                            <span *ngIf="emailAsc">
+                                <i class="fas fa-sort-up" (click)="changeOrder('email','asc','contact')"></i>
+                            </span>
+                            <span *ngIf="!emailAsc">
+                                <i class="fas fa-sort-down" (click)="changeOrder('email','desc','contact')"></i>
+                            </span>
+                        </th>
+                        <th>Phone ({{phoneCount}})
+                            <span *ngIf="phoneAsc">
+                                <i class="fas fa-sort-up" (click)="changeOrder('phone','asc','contact')"></i>
+                            </span>
+                            <span *ngIf="!phoneAsc">
+                                <i class="fas fa-sort-down" (click)="changeOrder('phone','desc','contact')"></i>
+                            </span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr  *ngFor="let e of companyRelatedPosts?.posts" [routerLink]="['/','post',e._id]">
+                        <td>{{e.name}}</td>
+                        <td>{{e.email}}</td>
+                        <td>{{e.phone}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <app-paginator [length]="totalcompanyRelatedPosts" (fetchData)="paginator = $event; fetchAllCompanyRealtedePosts('contact')">
+        </app-paginator>
 </ng-template>
 
 <ng-template #addBlockLevelCommentTemplate let-cDetails="details" let-comments="comments">

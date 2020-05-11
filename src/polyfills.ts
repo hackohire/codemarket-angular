@@ -57,6 +57,7 @@
  */
 import 'zone.js/dist/zone';  // Included with Angular CLI.
 import * as process from 'process';
+import '@webcomponents/custom-elements/custom-elements.min';
 window['process'] = process;
 // window['LOG_LEVEL'] = 'DEBUG';
 

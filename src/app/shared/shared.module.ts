@@ -38,6 +38,9 @@ import { ChatBoxComponent } from './components/chat-box/chat-box.component';
 import { PostTypeNavComponent } from './components/post-type-nav/post-type-nav.component';
 import { CommentSideNavComponent } from './components/comment-side-nav/comment-side-nav.component';
 import { AppInjector } from './services/app.injector.service';
+import { EditorModule } from '@tinymce/tinymce-angular';
+import { TinyEditorComponent } from './components/tiny-editor/tiny-editor.component';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 export function hljsLanguages() {
   return [
@@ -67,12 +70,14 @@ export function hljsLanguages() {
     ChatBoxComponent,
     PostTypeNavComponent,
     CommentSideNavComponent,
+    TinyEditorComponent,
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
+    EditorModule,
     SweetAlert2Module.forRoot({
       buttonsStyling: false,
       customClass: 'modal-content',
@@ -95,7 +100,8 @@ export function hljsLanguages() {
       enableHtml: true,
       timeOut: 30000,
       extendedTimeOut: 8000
-    })
+    }),
+    CKEditorModule
   ],
   exports: [
     BreadcumbComponent,
@@ -112,6 +118,7 @@ export function hljsLanguages() {
     PaginatorComponent,
     PostTypeNavComponent,
     CommentSideNavComponent,
+    TinyEditorComponent,
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
@@ -126,7 +133,9 @@ export function hljsLanguages() {
     SafePipe,
     // Ng5SliderModule,
     NgSelectModule,
-    MdePopoverModule
+    MdePopoverModule,
+    EditorModule,
+    
   ],
   entryComponents: [
     AddJobComponent,

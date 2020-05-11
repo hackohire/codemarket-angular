@@ -10,7 +10,14 @@
 <mat-menu #menu="matMenu" [yPosition]="'below'" [xPosition]="'after'" [overlapTrigger]="false">
 
   <ng-container *ngFor="let p of postTypesArray">
-    <button mat-menu-item [routerLink]="['/', 'post', 'add-post']" [queryParams]="{type: p.name}">
+
+    <button *ngIf="p.label=='Forms'" mat-menu-item [routerLink]="['/', 'form-builder']">
+      <i style="font-size: 1.7rem !important;"
+        [class]="'vertical-align-middle fal fa-' + icons[p.name] + ' fa-fw'"></i>
+      <span style="text-transform: capitalize;"> {{p.name}}</span>
+    </button>
+
+    <button *ngIf="p.label!='Forms'" mat-menu-item [routerLink]="['/', 'post', 'add-post']" [queryParams]="{type: p.name}">
       <i style="font-size: 1.7rem !important;"
         [class]="'vertical-align-middle fal fa-' + icons[p.name] + ' fa-fw'"></i>
       <span style="text-transform: capitalize;"> {{p.name}}</span>

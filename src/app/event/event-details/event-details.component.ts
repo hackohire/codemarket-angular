@@ -11,7 +11,7 @@ import { ShareService } from '@ngx-share/core';
 import { PostService } from '../../shared/services/post.service';
 import { SweetalertService } from '../../shared/services/sweetalert.service';
 import { CompanyService } from '../../companies/company.service';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material';
 
 import { BreadCumb } from '../../shared/models/bredcumb.model';
 import { environment } from '../../../environments/environment';

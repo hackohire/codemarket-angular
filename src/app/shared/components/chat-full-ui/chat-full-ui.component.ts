@@ -3,6 +3,7 @@ import { ChatService } from '../../services/chat.service';
 import * as Chat from 'twilio-chat';
 import moment from 'moment';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-chat-full-ui',
@@ -29,7 +30,7 @@ export class ChatFullUiComponent implements OnInit, AfterViewInit {
   public loadingMessage = "";
   public loginUser;
   scrolltop:number = null
-
+  s3FilesBucketURL = environment.s3FilesBucketURL;
   constructor(private _chatService: ChatService) { }
 
   ngOnInit() {

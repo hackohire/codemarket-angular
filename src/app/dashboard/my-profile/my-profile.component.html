@@ -287,7 +287,7 @@
 					    </mat-tab>
 					    <mat-tab label="Chats">
 					      <ng-template matTabContent>
-					        <app-chat-full-ui></app-chat-full-ui>
+					        <app-chat-full-ui [loggedInUser]="authService?.loggedInUser" [postList]="listOfAllOtherPosts?.posts"></app-chat-full-ui>
 					      </ng-template>
 					    </mat-tab>
 					  </mat-tab-group>

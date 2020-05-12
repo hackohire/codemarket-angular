@@ -12,7 +12,6 @@ export class ChatBoxComponent implements OnInit {
 
   @Input() loggedInUser;
   @Input() postDetails;
-  @ViewChild('scrollMe', { static: false }) private myScrollContainer: ElementRef;
 
   public commentsList = [];
   public username: string = '';
@@ -82,7 +81,6 @@ export class ChatBoxComponent implements OnInit {
         if (this.commentsList.length > 0) {
           this.generalChannel.updateLastConsumedMessageIndex(this.commentsList[this.commentsList.length - 1].index).then((data) => {
           });
-          this.scrollToBottom();
         }
       });
     }
@@ -104,7 +102,6 @@ export class ChatBoxComponent implements OnInit {
     if (this.msg !== '' && this.msg !== undefined && this.msg.trim() !== '') {
       this.generalChannel.sendMessage(this.msg);
       this.msg = '';
-      this.scrollToBottom();
     }
   }
 
@@ -114,11 +111,5 @@ export class ChatBoxComponent implements OnInit {
     } else {
       return moment(datetime).format('hh:mm A') + ' ' + moment(datetime).format('DD MMM YYYY');
     }
-  }
-
-  scrollToBottom() {
-    try {
-      this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
-    } catch (err) { }
   }
 }

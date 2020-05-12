@@ -11,21 +11,21 @@ export const emails = [
   //   name: 'Sumi',
   //   email: ['sumi@codemarket.io']
   // },
-  // {
-  //   name: 'Jay Sojitra',
-  //   firstName: 'Jay',
-  //   // companyName: 'Company Name',
-  //   // BNIName: 'BNI NAME',
-  //   "OrganizatinName": "Social and Environmental Entrepreneurs",
-  //   "proposalName": "Bringing LA's Green New Deal to Our Neighborhoods",
-  //   link: 'www.youtube.com',
-  //   companyName: 'Hubpsych',
-  //   "email": [
-  //     {
-  //       email: 'jaysojitra13@gmail.com',
-  //       status: true
-  //   }]
-  // },
+  {
+    name: 'Jay Sojitra',
+    firstName: 'Jay',
+    // companyName: 'Company Name',
+    // BNIName: 'BNI NAME',
+    "OrganizatinName": "Social and Environmental Entrepreneurs",
+    "proposalName": "Bringing LA's Green New Deal to Our Neighborhoods",
+    link: 'www.youtube.com',
+    companyName: "Burk's Custom Painting",
+    "email": [
+      {
+        email: 'jaysojitra13@gmail.com',
+        status: true
+    }]
+  },
   {
     name: 'Sumi Devi',
     firstName: 'Sumi',
@@ -34,7 +34,7 @@ export const emails = [
     "OrganizatinName": "Social and Environmental Entrepreneurs",
     "proposalName": "Bringing LA's Green New Deal to Our Neighborhoods",
     link: 'www.youtube.com',
-    companyName: 'Hubpsych',
+    companyName: "Burk's Custom Painting",
     email: [
       {
         email: 'sumi@codemarket.io',
@@ -42,21 +42,21 @@ export const emails = [
     }
     ]
   },
-  {
-    name: 'Sumit Vekariya',
-    firstName: 'Sumit',
-    // companyName: 'Company Name',
-    // BNIName: 'BNI NAME',
-    "OrganizatinName": "Social and Environmental Entrepreneurs",
-    "proposalName": "Bringing LA's Green New Deal to Our Neighborhoods",
-    link: 'www.youtube.com',
-    companyName: 'Hubpsych',
-    email: [
-      {
-        email: 'sumitvekariya7@gmail.com',
-        status: true
-    }]
-  },
+  // {
+  //   name: 'Sumit Vekariya',
+  //   firstName: 'Sumit',
+  //   // companyName: 'Company Name',
+  //   // BNIName: 'BNI NAME',
+  //   "OrganizatinName": "Social and Environmental Entrepreneurs",
+  //   "proposalName": "Bringing LA's Green New Deal to Our Neighborhoods",
+  //   link: 'www.youtube.com',
+  //   companyName: "Burk's Custom Painting",
+  //   email: [
+  //     {
+  //       email: 'sumitvekariya7@gmail.com',
+  //       status: true
+  //   }]
+  // },
   // {
   //   name: 'Mayur Vaghela',
   //   // companyName: 'Company Name',

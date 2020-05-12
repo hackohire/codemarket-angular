@@ -4,7 +4,7 @@
       <div class="chat-list-header">
         <div class="row">
           <div class="col-3">
-            <img [src]="loggedInUser.avatar?.value ? ((s3FilesBucketURL + avatar.value) | safe: 'resourceUrl') : anonymousAvatar" />
+            <img [src]="loggedInUser.avatar ? ((s3FilesBucketURL + loggedInUser.avatar) | safe: 'resourceUrl') : anonymousAvatar" />
           </div>
           <div class="col-9 vertical-align-center">
             <div class="font-weight-700">
@@ -26,7 +26,7 @@
         <div *ngFor="let post of postList let i=index;">
           <div class="row post-card" [ngClass]="{'active-chat': post.isActive === true}" (click)="openPostChat(i)">
             <div class="col-3" [ngClass]="{'p-1': post.isActive === true}">
-              <img [src]="post.createdBy.avatar?.value ? ((s3FilesBucketURL + avatar.value) | safe: 'resourceUrl') : anonymousAvatar" />
+              <img [src]="post.createdBy.avatar ? ((s3FilesBucketURL + loggedInUser.avatar) | safe: 'resourceUrl') : anonymousAvatar" />
             </div>
             <div class="col-9 vertical-align-center">
               <div class="post-name">

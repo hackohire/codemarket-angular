@@ -97,7 +97,8 @@ export class DprComponent implements OnInit {
 
       dialogConfig.data = {
         companyId: this.companyId,
-        form1Data: this.form1Data
+        form1Data: this.form1Data,
+        programCount: this.programCount
       };
 
       const dialogRef = this.dialog.open(FormDetailsDialog,dialogConfig);
@@ -125,6 +126,7 @@ export class FormDetailsDialog {
   companyId = '';
   connectedFormDataId = '';
   form1Data = {};
+  programCount = '';
 
   formJsonListSubscription1: Subscription;
   public form2 = {components: []};
@@ -140,6 +142,7 @@ export class FormDetailsDialog {
      private router: Router,) {
       this.companyId = data.companyId; 
       this.form1Data = data.form1Data;
+      this.programCount = data.programCount;
       this.getDetails = 'Getdetails';
       this.getDetilsConnectedFormStructureId = '5eb409c53a429f353b3d8b0b';
       

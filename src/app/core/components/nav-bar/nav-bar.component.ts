@@ -10,7 +10,8 @@ import { selectCartListLength } from '../../store/selectors/cart.selectors';
 import { Router } from '@angular/router';
 import { MatDialog, MatAnchor } from '@angular/material';
 import { SearchComponent } from '../search/search.component';
-import { droEmails, emails, la2050Emails } from '../../../emails';
+import { droEmails, emails, la2050Emails, therapistEmails } from '../../../emails';
+import { newBniEmails } from '../../../newEmails';
 import { Validators, FormControl } from '@angular/forms';
 import { PostType } from '../../../shared/models/post-types.enum';
 import { MessageService } from '../../../shared/services/message.service';
@@ -23,6 +24,8 @@ import { allBinEmailTemplate } from '../../../shared/all-bni-email-template';
 import { droEmailTemplate } from '../../../shared/dro-email-template';
 import { la2050 } from '../../../shared/la2050-template';
 import { newla2050 } from '../../../shared/new-la2050-template';
+import { thepaistTemplate } from '../../../shared/therapist-template';
+import { newBniTemplate } from '../../../shared/new-bni-template';
 
 @Component({
   selector: 'app-nav-bar',
@@ -161,20 +164,20 @@ export class NavBarComponent implements OnInit, OnDestroy {
 
   sendEmails() {
     let count = 0;
-    la2050Emails.forEach((e, i) => {
+    emails.forEach((e, i) => {
       setTimeout(() => {
         e.email.forEach((email, j) => {
           setTimeout(() => {
             if (!Validators.email(new FormControl(email.email))) {
               const emailObj = {
                 to: [email.email],
-                subject: e.proposalName,
+                subject: `${e.companyName}, Referral Partnership`,
                 companies: [{ _id: '5db1c84ec10c45224c4b95fd' }],
                 type: PostType.Email,
                 status: PostStatus.Published,
-                descriptionHTML: newla2050.replace('{proposalName}', e.proposalName),
+                descriptionHTML: newBniTemplate.replace('{companyName}', e.companyName).replace('{firstName}', e.firstName),
                 createdBy: '5d4c1cdf91e63a3fe84bb43a',
-                campaignId: '5eb01f437dbc34330797a131'
+                campaignId: '5eba2cd2611b9311e408500c'
               };
               this.emailService.sendEmail(emailObj).toPromise().then((o) => {
                 console.log(o, i);

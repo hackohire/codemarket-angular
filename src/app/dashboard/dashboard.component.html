@@ -7,13 +7,11 @@
                 <div class="container">
                   <div class="row">
                     <div class="header_in" style="width: 100%;">
-                      <a class="logo" title="Home" [routerLink]="['/', 'dashboard']">
-                        <h1>LEHVL</h1>
-                      </a>
+                      <img style="width: 14%; height: auto; padding: 7px 0;" [routerLink]="['/', 'dashboard']" src="../../assets/images/LEHVL-Logo.png" alt="Lehvl.Com" height="38">
                       <nav role="navigation">
                         <div class="navbar-header pt-0">
                           <a class="navbar-brand hidden-sm hidden-md hidden-lg py-0" title="Home" [routerLink]="['/', 'dashboard']" style="height: 38px;">
-                            <img src="../../assets/images/LEVEL.jpg" alt="Lehvl.Com" height="38">
+                            <img src="../../assets/images/LEHVL-Logo.png" alt="Lehvl.Com" height="38">
                           </a>
                           <button type="button" class="navbar-toggle" style="margin-right: 20px;" data-toggle="collapse" data-target="#main-navbar"> <span class="sr-only">Toggle navigation</span>
                             <span class="icon-bar"></span>
@@ -246,44 +244,8 @@
                 </div><!-- /.content -->
               </div><!-- /.wrap -->
 
-              <style>                             
-                .mat-dialog-container::before {
-                  bottom: 100%;
-                  border-bottom: 86.60px solid #64C7CC
-                }
-              </style>
-
               <div class="wrap container" role="document">
-                <div class="content">
-                  <main class="main" role="main">
-                    <section class="eligibility" id="eligibility-form-section">              
-                      <div class="container">
-                        <div class="row">
-                          <div class="col-md-9 col-xs-12">
-                            <div class="eligibility-form-heading">
-                              <h1 class="text-center">CHECK YOUR ELIGIBILITY NOW</h1>
-                              <p class="text-center">Please answer a few questions to learn how many programs may be available to you.</p>
-                            </div>
-                            <div *ngIf="isBrowser()">
-                              <formio [form]="form1" (submit)="onSubmitForm1($event)"></formio>
-                            </div>
-                          </div>                  
-                          <div class="sidebar-primary col-md-3 col-xs-12">
-                              <div class="resultscontent">
-                                <div class="preview">
-                                  <h3>Matched Programs</h3>
-                                </div>
-                                <div class="preview preview-results" role="status" aria-live="polite"><p>26<span class="sr-only"> matched programs. Press enter to show the results page.</span></p></div>
-                                <div class="preview preview-button">
-                                  <input class="btn btn-primary btn-block" tabindex="400" (click)="openDialog()" type="submit" name="commit" value="GET DETAILS" data-tracking-pixel="get-details">
-                                </div>
-                              </div>
-                          </div>
-                        </div>
-                      </div>
-                    </section>
-                  </main>
-                </div>
+                <app-dpr [companyId]="'5eba5d098bca082aa4b6ce8b'"></app-dpr>
               </div>
 
               <footer role="contentinfo" class="page_footer">

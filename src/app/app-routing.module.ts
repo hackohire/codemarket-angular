@@ -327,7 +327,7 @@ const routes: Routes = [
     component: BlogComponent
   },
   {
-    path: 'program-list',
+    path: 'program-list/:formId',
     component: ProgramlistComponent
   },
   {

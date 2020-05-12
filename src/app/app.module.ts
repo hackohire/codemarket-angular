@@ -38,9 +38,9 @@ import { LoaderComponent } from './auth/loader/loader.component';
 import { AuthModule } from './auth/auth.module';
 import { StressManagementComponent } from './stress-management/stress-management.component';
 import { NewsletterComponent } from './newsletter/newsletter.component';
-import {VolunteerComponent} from './volunteer/volunteer.component';
-import {DonateComponent} from './donate/donate.component';
-import {MakemoneyonlineModule} from './makemoneyonline/makemoneyonline.module';
+import { VolunteerComponent } from './volunteer/volunteer.component';
+import { DonateComponent } from './donate/donate.component';
+import { MakemoneyonlineModule } from './makemoneyonline/makemoneyonline.module';
 import { EducationComponent } from './education/education.component';
 import { Covid19Component } from './covid19/covid19.component';
 import { DownPaymentHelpComponent, DialogOverviewExampleDialog } from './down-payment-help/down-payment-help.component';
@@ -49,14 +49,13 @@ import { LoanOfficerSubscriberComponent } from './loan-officer-subscriber/loan-o
 import { SuccessStoryComponent } from './success-story/success-story.component';
 import { BlogComponent } from './blog/blog.component';
 import { FormioModule } from 'angular-formio';
-import {FormBuilderModule} from './form-builder/form-builder.module';
+import { FormBuilderModule } from './form-builder/form-builder.module';
 import { ProgramlistComponent } from './programlist/programlist.component';
-import { DprComponent, FormDetailsDialog } from './dpr/dpr.component';
+import { FormDetailsDialog } from './dpr/dpr.component';
 import { LeadComponent } from './dpr/lead/lead.component';
 
 import { registerSelecteDeselectComponent } from './shared/components/selecte-deselect/select-deselect.formio';
 import { SelecteDeselectComponent } from './shared/components/selecte-deselect/selecte-deselect.component';
-import { DialogOverviewExample } from './dashboard/dashboard.component';
 import { BannerbankComponent } from './bannerbank/bannerbank.component';
 
 
@@ -107,11 +106,9 @@ import { BannerbankComponent } from './bannerbank/bannerbank.component';
     BlogComponent,
     DialogOverviewExampleDialog,
     ProgramlistComponent,
-    DprComponent,
     FormDetailsDialog,
     LeadComponent,
     SelecteDeselectComponent,
-    DialogOverviewExample,
     BannerbankComponent
   ],
   imports: [
@@ -129,7 +126,7 @@ import { BannerbankComponent } from './bannerbank/bannerbank.component';
   ],
   providers: [PostDataResolver],
   bootstrap: [AppComponent],
-  entryComponents: [LoaderComponent,DialogOverviewExampleDialog,FormDetailsDialog,SelecteDeselectComponent,DialogOverviewExample]
+  entryComponents: [LoaderComponent, DialogOverviewExampleDialog, FormDetailsDialog, SelecteDeselectComponent]
 })
 export class AppModule {
   constructor(private injector: Injector) {

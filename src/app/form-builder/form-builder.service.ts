@@ -25,7 +25,7 @@ export class FormBuilderService {
     private router: Router,
   ) { }
 
-  addformJson(formJson : any): Observable<FormJson>{
+  addformJson(formJson: any): Observable<FormJson> {
     return this.apollo.mutate({
       mutation: gql`
         mutation addformJson($formJson: formJsonInput) {
@@ -71,6 +71,7 @@ export class FormBuilderService {
       mutation: gql`
         mutation addformData($formData: formDataInput) {
           addformData(formData: $formData) {
+            _id
             formname
             formDataJson
             company{
@@ -94,6 +95,7 @@ export class FormBuilderService {
       mutation: gql`
         mutation addBankFormDataRef($bankFormDataRef: bankFormDataRefInput) {
           addBankFormDataRef(bankFormDataRef: $bankFormDataRef) {
+            _id
             formname
             connectedFormStructureId
             connectedFormDataId
@@ -113,7 +115,7 @@ export class FormBuilderService {
     this.router.navigate(['/', 'dashboard']);
   }
 
-  fetchformDataById(_id: string,connectedFormStructureId: string){
+  fetchformDataById(_id: string, connectedFormStructureId: string) {
     return this.apollo.query({
       query: gql`
         query fetchformDataById($_id: String,$connectedFormStructureId: String) {
@@ -130,6 +132,27 @@ export class FormBuilderService {
       }
     }).pipe(
       map((q: any) => q.data.fetchformDataById)
+    );
+  }
+
+  fetchFormDataByFormId(formId: string, fetchPrograms = false) {
+    return this.apollo.query({
+      query: gql`
+        query fetchFormDataByFormId($formId: String, $fetchPrograms: Boolean) {
+          fetchFormDataByFormId(formId: $formId, fetchPrograms: $fetchPrograms){
+            _id
+            formname
+            formDataJson
+            connectedFormStructureId
+          }
+        }
+      `,
+      variables: {
+        formId,
+        fetchPrograms
+      }
+    }).pipe(
+      map((q: any) => q.data.fetchFormDataByFormId)
     );
   }
 

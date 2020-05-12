@@ -57,7 +57,7 @@ export const newBniTemplate = `<html>
                                                                                     </p>
 
                                                                                     <p>
-                                                                                    {companyName} have numerous referral partnership opportunities.
+                                                                                    {companyName} has numerous referral partnership opportunities.
                                                                                     </p>
 
                                                                                     <p>

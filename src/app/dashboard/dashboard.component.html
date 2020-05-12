@@ -7,13 +7,15 @@
                 <div class="container">
                   <div class="row">
                     <div class="header_in" style="width: 100%;">
-                      <img style="width: 14%; height: auto; padding: 7px 0;" [routerLink]="['/', 'dashboard']" src="../../assets/images/LEHVL-Logo.png" alt="Lehvl.Com" height="38">
+                      <a class="logo" title="Home" [routerLink]="['/', 'dashboard']">
+                        <img src="../../assets/images/LEHVL-Logo.svg" alt="Lehvl.Com" height="62" />
+                      </a>
                       <nav role="navigation">
                         <div class="navbar-header pt-0">
-                          <a class="navbar-brand hidden-sm hidden-md hidden-lg py-0" title="Home" [routerLink]="['/', 'dashboard']" style="height: 38px;">
-                            <img src="../../assets/images/LEHVL-Logo.png" alt="Lehvl.Com" height="38">
+                          <a class="navbar-brand hidden-sm hidden-md hidden-lg py-0" title="Home" [routerLink]="['/', 'dashboard']">
+                            <img src="../../assets/images/LEHVL-Logo.svg" alt="Lehvl.Com" height="62" />
                           </a>
-                          <button type="button" class="navbar-toggle" style="margin-right: 20px;" data-toggle="collapse" data-target="#main-navbar"> <span class="sr-only">Toggle navigation</span>
+                          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar"> <span class="sr-only">Toggle navigation</span>
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>

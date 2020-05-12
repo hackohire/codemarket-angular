@@ -9602,10 +9602,11 @@ tbody.collapse.in {
 
 .navbar-brand {
 	float: left;
-	padding: 15px 15px;
+	padding: 15px 15px 0 0;
 	font-size: 18px;
 	line-height: 20px;
-	height: 50px
+	height: auto;
+	margin-top: -5px;
 }
 
 .navbar-brand:focus,
@@ -13114,7 +13115,7 @@ header.header {
 .logo {
 	float: left;
 	margin: 0;
-	padding: 12px 0;
+	padding: 6px 0;
 	color: #000000;
 	&:hover {
     color: #00aeef;
@@ -15427,7 +15428,7 @@ footer.page_footer {
 	}
 	.navbar-toggle {
 		border: solid 1px #144978;
-		margin: 0 10px
+		margin: 12px 15px 0
 	}
 	.navbar-collapse {
 		padding: 0;

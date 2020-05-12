@@ -5,7 +5,7 @@
       <p class="text-center"><strong style="font-size:125%;">Please answer a few questions to learn how many programs
           may be available to you.</strong></p>
     </div>
-    {{dialog?.openDialogs?.length}}
+
     <div *ngIf="isBrowser()">
       <formio [form]="form1" (change)="!dialog?.openDialogs?.length ? onChange($event) : ''" (submit)="onSubmitForm1($event)"></formio>
     </div>

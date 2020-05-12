@@ -2,8 +2,7 @@
   integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
 <div
-  class="dpa page-template page-template-page-eligibility-request page-template-page-eligibility-request-php page page-id-46 page-parent are-you-eligible page-eligibility-request"
-  data-gr-c-s-loaded="true">
+  class="dpa page-template page-template-page-eligibility-request page-template-page-eligibility-request-php page page-id-46 page-parent are-you-eligible page-eligibility-request">
 
   <header class="header" role="banner">
     <div class="container">
@@ -73,12 +72,11 @@
         <section id="eligibility-results-section">
 
           <div class="row">
-            <div class="col-md-12 col-xs-12">
+            <div class="col-md-8 col-xs-8">
 
               <div class="summary-results">
 
                 <h2 class="program-type">Down Payment Programs</h2>
-                {{formData | json}}
                 <article *ngFor="let p of formData?.formDataJson?.programs; let i = index;" class="program" id="prog_9c6aeee03c5601329bda06b6145a7f4f">
                   <div class="program-nav">
                     <p class="program-index" id="title_1">({{i + 1}} of {{formData?.formDataJson?.programs?.length}})</p> 
@@ -105,7 +103,7 @@
 
 
                   <div class="call-to-action">
-                    <a class="btn btn-primary btn-lg btn-block" [href]="p?.websiteLink"
+                    <a class="btn btn-primary btn-lg btn-block" target="_blank" [href]="p?.websiteLink"
                       data-ga-report-click="learn-more">Learn
                       More</a>
                   </div>
@@ -117,17 +115,20 @@
               </div><!-- .summary-results -->
             </div><!-- /.col -->
 
-            <div class="sidebar-primary col-md-4 col-xs-12">
-              <section class="adspace-widget widget ad-for-SPFC" data-ga-impression="sidebar1-eHA"><a
-                  href="http://ehomeamerica.org/dpr.html" data-ga-report-click="@sidebar1-eHA" target="_blank"><img
-                    src="https://downpaymentresource.com/wp-content/uploads/2016/08/eHA-banner-300x250-animated-b.gif"
-                    alt="Sponsored by eHome America"></a></section>
-              <section class="adspace-widget widget ad-for-MWF" data-ga-impression="sidebar2-MWF"><a
-                  href="http://www.homeowners.mwfinc.com/landing/dpr/" data-ga-report-click="@sidebar2-MWF"
-                  target="_blank"><img
-                    src="https://downpaymentresource.com/wp-content/uploads/2016/08/MWF-banner-300x250-c.jpeg"
-                    alt="Mountain West Financial - Let us page your path to homeownership!"></a></section>
-            </div><!-- /.col -->
+            <div class="sidebar-primary col-md-3 col-xs-3">
+              <div class="resultscontent">
+                <div class="preview">
+                  <h3 style="font-size: 23px; margin: 15px;">PRE PURCHASE HOME BUYER EDUCATION</h3>
+                </div>
+                <!-- <div aria-live="polite" class="preview preview-results" role="status">
+                  <p>{{5}}<span class="sr-only"> matched programs. Press
+                      enter to show the results page.</span></p>
+                </div> -->
+                <a class="preview preview-button" target="_blank" [href]="'https://app.kajabi.com/admin/products/431075'"><input
+                    class="btn btn-primary btn-block" name="commit" tabindex="400" type="button"
+                    value="GET DETAILS"></a>
+              </div>
+            </div>
 
           </div><!-- /.row -->
 

@@ -115,11 +115,13 @@ export class FormBuilderService {
     this.router.navigate(['/', 'dashboard']);
   }
 
-  fetchformDataById(_id: string, connectedFormStructureId: string) {
+  forfetchformDataById(_id: string, connectedFormStructureId: string) {
     return this.apollo.query({
       query: gql`
-        query fetchformDataById($_id: String,$connectedFormStructureId: String) {
-          fetchformDataById(_id: $_id,connectedFormStructureId: $connectedFormStructureId){
+        query fetchformDataById($_id: String, $connectedFormStructureId: String) {
+          fetchformDataById(_id: $_id, connectedFormStructureId: $connectedFormStructureId){
+            createdAt
+            _id
             formname
             formDataJson
             connectedFormStructureId

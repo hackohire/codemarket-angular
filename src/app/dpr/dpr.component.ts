@@ -184,7 +184,7 @@ export class FormDetailsDialog {
       })
     ).subscribe((d: any) => {
       if (d) {
-        Swal.fire(`Thanks ! Team Will Connect You Shourtly.`, '', 'success').then(() => {
+        Swal.fire(`THANK YOU!`, '', 'success').then(() => {
           // Need To send Mail To Bank with the details
           this.dialogRef.close();
           this.router.navigate(['/', 'program-list', d._id]);

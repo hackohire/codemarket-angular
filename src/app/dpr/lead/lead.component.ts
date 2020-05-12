@@ -33,7 +33,7 @@ export class LeadComponent implements OnInit {
       title: 'Form Data List',
     };
 
-    this.formDataListSubscription = this.formBuilderService.fetchformDataById(this.companyId,'5eb409c53a429f353b3d8b0b').subscribe((formDatalist) => {
+    this.formDataListSubscription = this.formBuilderService.forfetchformDataById(this.companyId,'5eb409c53a429f353b3d8b0b').subscribe((formDatalist) => {
       console.log(formDatalist);
       for (let data of formDatalist) {
           this.valueList.push(data.formDataJson);

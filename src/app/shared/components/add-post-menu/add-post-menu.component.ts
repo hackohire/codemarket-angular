@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { appConstants } from '../../constants/app_constants';
-import { MatDialog } from '@angular/material/dialog';
 import { PostType } from '../../models/post-types.enum';
 import { MatMenuTrigger } from '@angular/material/menu';
 
@@ -10,7 +9,7 @@ import { MatMenuTrigger } from '@angular/material/menu';
   styleUrls: ['./add-post-menu.component.scss']
 })
 export class AddPostMenuComponent implements OnInit {
-  constructor(private dialog: MatDialog) { }
+  constructor() { }
 
   icons = appConstants.icons;
   postTypes = PostType;

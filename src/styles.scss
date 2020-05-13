@@ -28,6 +28,17 @@ span {
   font-weight: bold;
 }
 
+.resultscontent {
+  position: sticky;
+  top: 80px;
+  z-index: 9;
+  background: #1e69ac;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+  display: inline-block
+}
+
 form > * {
   // margin-bottom: 1.5em;
   // width: 100%;

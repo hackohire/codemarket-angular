@@ -13,7 +13,7 @@
     menubar: false, branding: false, statusbar: false, toolbar: false, readonly: true, autoresize: true,
  plugins: [ 'autoresize'] }" [apiKey]="tinyMCEApi" [ngModel]="html"></editor> -->
 
- <editor *ngIf="!readOnly && false" [id]="id" [disabled]="readOnly" [init]="{
+ <!-- <editor *ngIf="!readOnly && false" [id]="id" [disabled]="readOnly" [init]="{
     menubar: true, branding: false, statusbar: true, toolbar: true, autoresize: true,
     images_upload_base_path: s3FilesBucketURL,
                   file_picker_types: 'file image media',
@@ -23,7 +23,7 @@
                   media_live_embeds: true,
                   plugins: [ 'lists table advtable codesample pagebreak hr emoticons link image media help wordcount  autolink powerpaste preview' ],
                   toolbar: 'preview | undo redo | link image media table emoticons | formatselect pagebreak hr | bold italic code codesample | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | help'
-}" [apiKey]="tinyMCEApi" [(ngModel)]="html"></editor>
+}" [apiKey]="tinyMCEApi" [(ngModel)]="html"></editor> -->
 
 <div *ngIf="false" #editorViewRef [ngStyle]="editorStyle" [ngClass]="'visibility-hidden'">
     <div class="ce-block">

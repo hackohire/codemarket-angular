@@ -38,7 +38,6 @@ import { ChatBoxComponent } from './components/chat-box/chat-box.component';
 import { PostTypeNavComponent } from './components/post-type-nav/post-type-nav.component';
 import { CommentSideNavComponent } from './components/comment-side-nav/comment-side-nav.component';
 import { AppInjector } from './services/app.injector.service';
-import { EditorModule } from '@tinymce/tinymce-angular';
 import { TinyEditorComponent } from './components/tiny-editor/tiny-editor.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { DprComponent } from '../dpr/dpr.component';
@@ -80,7 +79,6 @@ export function hljsLanguages() {
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
-    EditorModule,
     SweetAlert2Module.forRoot({
       buttonsStyling: false,
       customClass: 'modal-content',
@@ -139,7 +137,6 @@ export function hljsLanguages() {
     // Ng5SliderModule,
     NgSelectModule,
     MdePopoverModule,
-    EditorModule,
     FormioModule,
   ],
   entryComponents: [

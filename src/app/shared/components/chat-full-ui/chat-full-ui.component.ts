@@ -10,13 +10,13 @@ import { environment } from '../../../../environments/environment';
   templateUrl: './chat-full-ui.component.html',
   styleUrls: ['./chat-full-ui.component.scss']
 })
-export class ChatFullUiComponent implements OnInit, AfterViewInit {
+export class ChatFullUiComponent implements OnInit {
 
   @Input() postList = [];
   @Input() loggedInUser;
   @ViewChild('deleteSwal', { static: false }) private deleteSwal: SwalComponent;
-  @ViewChild('scrollMe', { static: false}) scrollMe : ElementRef ;  
-  
+  @ViewChild('scrollMe', { static: false }) scrollMe: ElementRef;
+
   public commentsList = [];
   public selectedPost;
   public anonymousAvatar: string = '../../assets/images/anonymous-avatar.jpg';
@@ -29,44 +29,71 @@ export class ChatFullUiComponent implements OnInit, AfterViewInit {
   public msg: any;
   public loadingMessage = "";
   public loginUser;
-  scrolltop:number = null
+  scrolltop: number = null;
   s3FilesBucketURL = environment.s3FilesBucketURL;
   constructor(private _chatService: ChatService) { }
 
   ngOnInit() {
     this.username = `${this.loggedInUser.name}_${this.loggedInUser._id}`;
-    this.postList.map((post) => { post.isActive = false });
-  }
-
-  ngAfterViewInit() {
-    this.scrolltop = this.scrollMe.nativeElement.scrollHeight
+    this.postList.map((post, i) => { post.isActive = false, post.count = 0, post.indexAt = i, post.lastMessage = "", post.dateTime = new Date() });
+    this.createTwilioToken();
   }
 
   openPostChat(index: number) {
     if (!this.loadingMessage) {
       this.loadingMessage = "Please Wait ...";
       const findPost = this.postList.findIndex(x => x.isActive === true);
+
       if (findPost !== -1) {
         this.postList[findPost].isActive = false
       }
+
       this.postList[index].isActive = true;
       this.selectedPost = this.postList[index];
       this.channelName = this.selectedPost._id;
-      if (this.chatClient) {
-        this.chatClient.shutdown();
+
+      if (this.channelName === this.postList[index]._id) {
+        this.postList[index].count = 0;
+        this.postList[index].lastMessage = "";
       }
-      this.createTwilioToken();
+
+      // if (this.chatClient) {
+      //   this.chatClient.shutdown();
+      // }
+
+      if (this.channelName) {
+        this.chatClient.getSubscribedChannels().then(this.createOrJoinGeneralChannel(this.channelName));
+      }
     }
   }
 
   createTwilioToken() {
+    let self = this;
     this._chatService.createToken(this.username).subscribe(data => {
       this.chatToken = data['token'];
       this.username = data['identity'];
       Chat.Client.create(this.chatToken).then(client => {
         // Use client
         this.chatClient = client;
-        this.chatClient.getSubscribedChannels().then(this.createOrJoinGeneralChannel(this.channelName));
+        this.chatClient.getSubscribedChannels().then(function (paginator) {
+          console.log(paginator.items)
+        })
+
+        this.chatClient.on('messageAdded', function (message) {
+          self.postList.map((post) => {
+            if (post._id === message.channel.uniqueName
+              && message.author !== self.username
+              && self.channelName !== post._id) {
+              post.count = post.count + 1;
+              post.lastMessage = message.body;
+              post.dateTime = message.timestamp;
+              // this.sortData();
+            }
+          })
+          self.postList.sort((a, b) => {
+            return <any>new Date(b.dateTime) - <any>new Date(a.dateTime);
+          });
+        })
       });
     });
   }
@@ -134,7 +161,7 @@ export class ChatFullUiComponent implements OnInit, AfterViewInit {
     if (this.msg !== '' && this.msg !== undefined && this.msg.trim() !== '') {
       this.generalChannel.sendMessage(this.msg);
       this.msg = '';
-      
+
     }
   }
 

@@ -34,8 +34,8 @@
                   {{post?.name}}
                 </p>
                 <div class="">
-                  <span class="date-time">{{post?.type}}</span>
-                  <span class="float-right badge-pill badge-danger">4</span>
+                  <span class="date-time font-weight-700">{{post?.lastMessage ? post.lastMessage : post?.type}}</span>
+                  <span *ngIf="post?.count > 0" class="float-right badge-pill badge-danger">{{post?.count > 0 ? post?.count : ''}}</span>
                 </div>
               </div>
             </div>

@@ -26,6 +26,7 @@ export class SellingProductsService {
         name
         _id
         avatar
+        slug
       }
       slug
     }

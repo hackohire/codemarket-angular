@@ -18,6 +18,7 @@ export class CompanyService {
     name
     type
     cover
+    slug
     cities {
       name
       _id
@@ -25,6 +26,7 @@ export class CompanyService {
     owners {
       name
       avatar
+      slug
       _id
     }
     status
@@ -34,6 +36,7 @@ export class CompanyService {
       _id
       name
       avatar
+      slug
     }
     location {
       longitude
@@ -147,13 +150,13 @@ export class CompanyService {
     );
   }
 
-  getCompanyById(CompanyId: string): Observable<Company> {
+  getCompanyById(slug: string): Observable<Company> {
 
     this.companyQuery = this.apollo.watchQuery(
       {
         query: gql`
-          query getCompanyById($CompanyId: String) {
-            getCompanyById(companyId: $CompanyId) {
+          query getCompanyById($slug: String) {
+            getCompanyById(slug: $slug) {
               ...Company
             }
           }
@@ -161,7 +164,7 @@ export class CompanyService {
         `,
         fetchPolicy: 'no-cache',
         variables: {
-          CompanyId
+          slug
         }
       }
     );
@@ -268,6 +271,7 @@ export class CompanyService {
                 name
                 _id
                 avatar
+                slug
               }
               count
               emailData {
@@ -347,9 +351,9 @@ export class CompanyService {
     );
   }
 
-  redirectToCompanyDetails(companyId: string, view = 'posts') {
-    this.router.navigate(['/', `company`, companyId],
-      { queryParams: { view } }
+  redirectToCompanyDetails(companyId: string, slug: string, view = 'posts') {
+    this.router.navigate(['/', `company`, slug],
+      { queryParams: { view, id: companyId } }
     );
   }
 

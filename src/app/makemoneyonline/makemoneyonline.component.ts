@@ -61,7 +61,7 @@ export class MakemoneyonlineComponent implements OnInit {
     ).subscribe((d: any) => {
       if (d) {
         Swal.fire(`${d.firstName} has been Added Successfully`, '', 'success').then(() => {
-          this.makemoneyonlineService.redirectToCompanyDetails(d._id);
+          this.makemoneyonlineService.redirectToCompanyDetails(d._id, d.slug);
         });
       }
     });

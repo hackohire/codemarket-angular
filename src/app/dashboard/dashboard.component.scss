@@ -18,10 +18,21 @@ home-mid {
   height: 23px;
   width: 274px;
   position: absolute;
-  left: 3px;
-  top: 0px;
+  left: 0;
+  top: 0;
   display: block;
   background: #0c3f74;
+}
+.fulink > a {
+  display: block;
+  height: 190px;
+  overflow: hidden;
+  margin-top: 20px;
+}
+.fulink > a > img {
+  height: auto;
+  min-height: 210px;
+  margin-top: -20px;
 }
 
 .home_product h2 {
@@ -4222,7 +4233,7 @@ input[type=password] {
 
 
 
-  .home-mid { margin: 0 auto; max-width: 1175px; position: relative; z-index: 100;margin-left: -15px;}
+  .home-mid { margin: 0 auto; max-width: 1175px; position: relative; z-index: 9;margin-left: -15px;}
 
   .midbox { padding: 22px 0px 92px 0; }
   
@@ -4252,7 +4263,7 @@ input[type=password] {
   
   
   
-  .home_product .more_button a { text-decoration:none; width: 152px; height: 42px; line-height: 40px; text-align: center; font-size: 16px; text-transform: uppercase; font-family: 'PT Sans', sans-serif; color: #fff; border-radius: 8px; -webkit-border-radius: 8px; display: block; margin: 0 auto; -webkit-box-shadow: 0 3px 0 0 rgba(1,32,59,1); box-shadow: 0 3px 0 0 rgba(1,32,59,1); background: #0c3f74; -webkit-transition: all 0.3s; -moz-transition: all 0.3s; transition: all 0.3s; }
+  .home_product .more_button a { padding:10px; text-decoration:none; width: 90%; height: auto; line-height: 25px; text-align: center; font-size: 16px; text-transform: uppercase; font-family: 'PT Sans', sans-serif; color: #fff; border-radius: 8px; -webkit-border-radius: 8px; display: block; margin: 0 auto; -webkit-box-shadow: 0 3px 0 0 rgba(1,32,59,1); box-shadow: 0 3px 0 0 rgba(1,32,59,1); background: #0c3f74; -webkit-transition: all 0.3s; -moz-transition: all 0.3s; transition: all 0.3s; }
   
   .home_product .more_button a:after { content: ''; position: absolute; z-index: -1; -webkit-transition: all 0.3s; -moz-transition: all 0.3s; transition: all 0.3s; }
   

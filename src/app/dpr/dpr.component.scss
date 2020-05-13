@@ -8,6 +8,9 @@
 }
 
 .resultscontent {
+    position: sticky;
+    top: 80px;
+    z-index: 9;
 	background: #1e69ac;
 	color: #fff;
 	padding: 20px;

@@ -346,6 +346,7 @@ export class PostService {
                 name
                 _id
                 avatar
+                slug
               }
               dateRange
               type
@@ -376,6 +377,7 @@ export class PostService {
                 name
                 _id
                 avatar
+                slug
               }
               type
               slug

@@ -86,7 +86,7 @@
                     <!-- <div class="comment-form-area" style="padding: 0;">
                         <div class="media comment-form">
                             <div class="media-left">
-                                <a [routerLink]="['/', 'dashboard', 'profile', authService?.loggedInUser?._id ]">
+                                <a [routerLink]="['profile', authService?.loggedInUser?.slug ]">
                                     <img class="author_avatar_comment" style="height: 45px; width:45px;"
                                         [src]="authService?.loggedInUser?.avatar ? ((s3FilesBucketURL + authService?.loggedInUser?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
                                         alt="Commentator Avatar">
@@ -157,7 +157,7 @@
                             </div>
 
                             <div class="author">
-                                <a [routerLink]="['/', 'dashboard', 'profile', details?.createdBy?._id ]">
+                                <a [routerLink]="['profile', details?.createdBy?.slug ]">
                                     <h4>{{details?.createdBy?.name}}</h4>
                                 </a>
                                 <!-- <button
@@ -196,7 +196,7 @@
 
                             <div class="author-btn">
                                 <a (editPost)="postService?.editPost(details)"
-                                    [routerLink]="['/', 'dashboard', 'profile', details?.createdBy?._id ]"
+                                    [routerLink]="['profile', details?.createdBy?.slug ]"
                                     class="btn btn--sm btn--round">View Profile</a>
                                 <!-- <a href="#" class="btn btn--sm btn--round">Message</a> -->
                             </div>

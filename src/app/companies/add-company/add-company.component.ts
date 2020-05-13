@@ -158,7 +158,7 @@ export class AddCompanyComponent implements OnInit {
       ).subscribe((d: any) => {
         if (d) {
           Swal.fire(`${d.name} has been Created Successfully`, '', 'success').then(() => {
-            this.companyService.redirectToCompanyDetails(d._id);
+            this.companyService.redirectToCompanyDetails(d._id, d.slug);
           });
           this.companyFormInitialization(d);
         }
@@ -174,7 +174,7 @@ export class AddCompanyComponent implements OnInit {
         .subscribe((d: any) => {
           if (d) {
             Swal.fire(`${d.name} has been Updated Successfully`, '', 'success').then(() => {
-              this.companyService.redirectToCompanyDetails(d._id);
+              this.companyService.redirectToCompanyDetails(d._id, d.slug);
             });
             this.companyFormInitialization(d);
           }

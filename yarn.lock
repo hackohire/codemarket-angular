@@ -1523,13 +1523,6 @@
     request "^2.88.0"
     request-promise-native "^1.0.8"
 
-"@tinymce/tinymce-angular@^3.5.0":
-  version "3.5.1"
-  resolved "https://registry.yarnpkg.com/@tinymce/tinymce-angular/-/tinymce-angular-3.5.1.tgz#abbb41f1f10be5c8652bfa430c8664870bebd68c"
-  integrity sha512-NKt4aJdsIE2+Of53BIeFUXdLV2CIhCPgLkuE2fKd40ZnRgiVy0ykBJwL2TIHmYIhUuNsDFUTLQuMHH4WzrxRQw==
-  dependencies:
-    tslib "^1.9.0"
-
 "@types/color-name@^1.1.1":
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/@types/color-name/-/color-name-1.1.1.tgz#1c1261bbeaa10a8055bbc5d8ab84b7b2afc846a0"
@@ -1566,13 +1559,6 @@
   dependencies:
     "@types/jasmine" "*"
 
-"@types/jquery@*":
-  version "3.3.38"
-  resolved "https://registry.yarnpkg.com/@types/jquery/-/jquery-3.3.38.tgz#6385f1e1b30bd2bff55ae8ee75ea42a999cc3608"
-  integrity sha512-nkDvmx7x/6kDM5guu/YpXkGZ/Xj/IwGiLDdKM99YA5Vag7pjGyTJ8BNUh/6hxEn/sEu5DKtyRgnONJ7EmOoKrA==
-  dependencies:
-    "@types/sizzle" "*"
-
 "@types/lodash@^4.14.123", "@types/lodash@^4.14.136":
   version "4.14.150"
   resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.150.tgz#649fe44684c3f1fcb6164d943c5a61977e8cf0bd"
@@ -1608,11 +1594,6 @@
   resolved "https://registry.yarnpkg.com/@types/selenium-webdriver/-/selenium-webdriver-3.0.17.tgz#50bea0c3c2acc31c959c5b1e747798b3b3d06d4b"
   integrity sha512-tGomyEuzSC1H28y2zlW6XPCaDaXFaD6soTdb4GNdmte2qfHtrKqhy0ZFs4r/1hpazCfEZqeTSRLvSasmEx89uw==
 
-"@types/sizzle@*":
-  version "2.3.2"
-  resolved "https://registry.yarnpkg.com/@types/sizzle/-/sizzle-2.3.2.tgz#a811b8c18e2babab7d542b3365887ae2e4d9de47"
-  integrity sha512-7EJYyKTL7tFR8+gDbB6Wwz/arpGa0Mywk1TJbNzKzHtzbwVmY4HR9WqS5VV7dsBUKQmPNr192jHr/VpBluj/hg==
-
 "@types/source-list-map@*":
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/@types/source-list-map/-/source-list-map-0.1.2.tgz#0078836063ffaf17412349bba364087e0ac02ec9"
@@ -1624,13 +1605,6 @@
   integrity sha512-qMcM3ecF/4a0dtfMN2rm1w5TjSDzUqIIADI7BwXpkSUdXfekc4JjL2s7oAp9htB44nPsTYw5mxCCz9j1zTAXwA==
   dependencies:
     "@types/node" "*"
-
-"@types/tinymce@^4.5.24":
-  version "4.5.24"
-  resolved "https://registry.yarnpkg.com/@types/tinymce/-/tinymce-4.5.24.tgz#e225e3fa82f0c2ac2039ef7c3a2b00c80cbde343"
-  integrity sha512-g2aFp+/GHTD6P2ZI2tBwZGIDi+64oocoDleCHtAWLYlFOR9fjPO+pdvmGjpJG3C7XeMZvugFx2NhRBL+Jb/wbQ==
-  dependencies:
-    "@types/jquery" "*"
 
 "@types/webpack-sources@^0.1.5":
   version "0.1.7"

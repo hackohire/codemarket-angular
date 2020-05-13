@@ -47,7 +47,7 @@ export class MakemoneyonlineService {
     );
   }
 
-  redirectToCompanyDetails(companyId: string, view = 'home') {
+  redirectToCompanyDetails(companyId: string, slug: string, view = 'home') {
     this.router.navigate(['/', 'dashboard']);
   }
 

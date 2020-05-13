@@ -36,6 +36,11 @@ const routes: Routes = [
     loadChildren: () => import('./dashboard/dashboard.module').then(module => module.DashboardModule),
     // outlet: 'main'
   },
+  // Profile of LoggedIn User
+  {
+    path: 'profile/:slug',
+    loadChildren: () => import('./dashboard/my-profile/my-profile.module').then(module => module.MyProfileModule),
+  },
   {
     path: 'sell',
     loadChildren: () => import('./selling/selling.module').then(module => module.SellingModule),

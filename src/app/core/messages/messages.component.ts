@@ -60,7 +60,7 @@ export class MessagesComponent implements OnInit, OnDestroy {
     if (m.referencePost) {
       this.postService.redirectToPostDetails(m.referencePost, m._id);
     } else if (m.companyPost) {
-      this.companyService.redirectToCompanyDetails(m.companyPost._id);
+      this.companyService.redirectToCompanyDetails(m.companyPost._id, m.companyPost.slug);
     }
   }
 

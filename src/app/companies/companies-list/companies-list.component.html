@@ -47,7 +47,7 @@
                 <!-- Name Column -->
                 <ng-container matColumnDef="name">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
-                    <td (click)="companyService?.redirectToCompanyDetails(company._id)" mat-cell
+                    <td (click)="companyService?.redirectToCompanyDetails(company._id, company.slug)" mat-cell
                         *matCellDef="let company"> {{company?.name}} </td>
                 </ng-container>
 

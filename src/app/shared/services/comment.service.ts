@@ -29,6 +29,7 @@ export class CommentService {
         _id
         name
         avatar
+        slug
       }
       answers {
         _id
@@ -43,6 +44,7 @@ export class CommentService {
           _id
           name
           avatar
+          slug
         }
       }
       questionId {
@@ -54,6 +56,7 @@ export class CommentService {
         createdBy {
           _id
           name
+          slug
           avatar
         }
       }

@@ -14,7 +14,6 @@ import { AboutUsComponent } from './about-us/about-us.component';
 import { WebsiteComponent } from './website/website.component';
 import { EmailMarketingComponent } from './email-marketing/email-marketing.component';
 import { SocialMediaMarketingComponent } from './social-media-marketing/social-media-marketing.component';
-import { CrmComponent } from './crm/crm.component';
 import { LoaderComponent } from './auth/loader/loader.component';
 import { AuthModule } from './auth/auth.module';
 import {MakemoneyonlineModule} from './makemoneyonline/makemoneyonline.module';
@@ -36,7 +35,6 @@ import { SelecteDeselectComponent } from './shared/components/selecte-deselect/s
     WebsiteComponent,
     EmailMarketingComponent,
     SocialMediaMarketingComponent,
-    CrmComponent,
     SelecteDeselectComponent
   ],
   imports: [

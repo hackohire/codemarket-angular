@@ -27,7 +27,6 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { MdePopoverModule } from '@material-extended/mde';
 import { CommentService } from './services/comment.service';
 import { ToastrModule } from 'ngx-toastr';
-import { AddJobComponent } from '../job/add-job/add-job.component';
 import { BriefPostComponent } from './components/brief-post/brief-post.component';
 import { AutocompleteComponent } from './components/autocomplete/autocomplete.component';
 import { AddCollaboratorsComponent } from './components/add-collaborators/add-collaborators.component';
@@ -58,7 +57,6 @@ export function hljsLanguages() {
     VideoChatComponent,
     AddPostMenuComponent,
     CompaniesListComponent,
-    AddJobComponent,
     BriefPostComponent,
     AutocompleteComponent,
     AddCollaboratorsComponent,
@@ -131,7 +129,6 @@ export function hljsLanguages() {
     MdePopoverModule,
   ],
   entryComponents: [
-    AddJobComponent,
     VideoChatComponent
   ],
   providers: [CommentService]

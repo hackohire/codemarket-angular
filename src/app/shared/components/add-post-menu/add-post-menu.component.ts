@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { appConstants } from '../../constants/app_constants';
 import { MatDialog } from '@angular/material/dialog';
-import { AddJobComponent } from '../../../job/add-job/add-job.component';
 import { PostType } from '../../models/post-types.enum';
 import { MatMenuTrigger } from '@angular/material/menu';
 

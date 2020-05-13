@@ -107,14 +107,6 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'dream-job/:slug',
-    loadChildren: () => import('./dream-job/dream-job-details/dream-job-details.module').then(module => module.DreamJobDetailsModule),
-    resolve: { seo: PostDataResolver },
-    data: { noReuse: true, setPostMeta: true },
-    // outlet: 'main',
-    pathMatch: 'full'
-  },
-  {
     path: 'event/:slug',
     loadChildren: () => import('./event/event-details/event-details.module').then(module => module.EventDetailsModule),
     resolve: { seo: PostDataResolver },

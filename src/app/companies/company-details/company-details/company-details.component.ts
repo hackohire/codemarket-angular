@@ -27,6 +27,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import Swal from 'sweetalert2';
 import {FormBuilderService} from '../../../form-builder/form-builder.service'
 import { Location } from '@angular/common';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-company-details',
@@ -34,15 +35,16 @@ import { Location } from '@angular/common';
   styleUrls: ['./company-details.component.scss'],
   providers: [CompanyService, CommentService],
   animations: [
-    trigger('bodyExpansion', [
-      state('collapsed', style({ height: '0px', display: 'none' })),
-      state('expanded', style({ height: '*', display: 'block' })),
-      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4,0.0,0.2,1)')),
+    trigger('detailExpand', [
+      state('collapsed', style({height: '0px', minHeight: '0'})),
+      state('expanded', style({height: '*'})),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
     ]),
   ],
 })
 export class CompanyDetailsComponent implements OnInit, OnDestroy {
-
+  dataSource = new MatTableDataSource();
+  expandedElement = null;
   usersInterestedInCompany: User[];
   companyView: string;
   totalCampaign: number;
@@ -437,9 +439,11 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
 
     if (category.name === 'leads') {
 
-      this.formDataListSubscription = this.formBuilderService.fetchformDataById(this.companyIdToBankList,'5eb409c53a429f353b3d8b0b').subscribe((formDatalist) => {
+      this.formDataListSubscription = this.formBuilderService.forfetchformDataById(this.companyIdToBankList, '5eb409c53a429f353b3d8b0b').subscribe((formDatalist) => {
         console.log(formDatalist);
+        this.displayedColumns = ['number', 'date', 'firstName', 'lastName', 'email', 'action'];
         this.selectedFormData = formDatalist;
+        this.dataSource.data = formDatalist;
       });
     }
 

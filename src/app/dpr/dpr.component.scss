@@ -1,3 +1,65 @@
+.resultsbox {
+	width: 158px;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	z-index: 999!important;
+	position: absolute;
+	top: 0;
+	right: 0
+}
+
+.resultscontent {
+	background: #1e69ac;
+	color: #fff;
+	padding: 20px;
+	text-align: center;
+	display: inline-block
+}
+
+.resultscontent h3 {
+	font-weight: 400;
+	font-size: 17px;
+	margin: 0
+}
+
+.resultscontent .preview {
+	width: 145px;
+	text-align: center
+}
+
+.resultscontent .preview-results p {
+	font-size: 96px;
+	line-height: 1.1;
+	margin: 0;
+	font-weight: 400
+}
+
+.comment-form .resultscontent input[type=submit],
+.resultscontent .btn-primary,
+.resultscontent .comment-form input[type=submit] {
+	cursor: pointer;
+	color: #fff;
+	background: #23282d;
+	border-color: #23282d;
+	font-weight: 600
+}
+
+.comment-form .resultscontent input[type=submit]:hover,
+.resultscontent .btn-primary:hover,
+.resultscontent .comment-form input[type=submit]:hover {
+	color: #23282d;
+	background: #fff;
+	border-color: #fff
+}
+
+.comment-form .resultscontent input.disabled[type=submit],
+.comment-form .resultscontent input[disabled][type=submit],
+.resultscontent .btn-primary.disabled,
+.resultscontent .btn-primary[disabled],
+.resultscontent .comment-form input.disabled[type=submit],
+.resultscontent .comment-form input[disabled][type=submit] {
+	cursor: not-allowed
+}
+
 .dpa{
 
     .bootstrap-select {
@@ -12049,7 +12111,7 @@
         border: 1px solid #fff;
         border-radius: 10px;
         cursor: pointer;
-        background-color: #000\9;
+        background-color: #0009;
         background-color: transparent
     }
     

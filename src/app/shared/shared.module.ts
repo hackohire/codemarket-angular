@@ -41,6 +41,8 @@ import { AppInjector } from './services/app.injector.service';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { TinyEditorComponent } from './components/tiny-editor/tiny-editor.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { DprComponent } from '../dpr/dpr.component';
+import { FormioModule } from 'angular-formio';
 
 export function hljsLanguages() {
   return [
@@ -71,6 +73,7 @@ export function hljsLanguages() {
     PostTypeNavComponent,
     CommentSideNavComponent,
     TinyEditorComponent,
+    DprComponent
   ],
   imports: [
     CommonModule,
@@ -101,7 +104,8 @@ export function hljsLanguages() {
       timeOut: 30000,
       extendedTimeOut: 8000
     }),
-    CKEditorModule
+    CKEditorModule,
+    FormioModule,
   ],
   exports: [
     BreadcumbComponent,
@@ -119,6 +123,7 @@ export function hljsLanguages() {
     PostTypeNavComponent,
     CommentSideNavComponent,
     TinyEditorComponent,
+    DprComponent,
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
@@ -135,7 +140,7 @@ export function hljsLanguages() {
     NgSelectModule,
     MdePopoverModule,
     EditorModule,
-    
+    FormioModule,
   ],
   entryComponents: [
     AddJobComponent,

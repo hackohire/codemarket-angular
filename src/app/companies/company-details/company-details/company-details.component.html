@@ -123,12 +123,13 @@
 
             <div class="row">
                 <div class="col-lg-2">
-                    <app-post-type-nav [selectedPostType]="companyView" [postTypesArray]="[{ name: 'leads', label: 'Leads' }]"
+                    <app-post-type-nav [selectedPostType]="companyView"
+                        [postTypesArray]="[{ name: 'leads', label: 'Leads' }]"
                         (postTypeClick)="selectMainCategory($event);">
                     </app-post-type-nav>
                 </div>
                 <div class="col-lg-9">
-                
+
                     <div class="row">
                         <div class="col-md-12 comment-form-area" style="padding: 0 15px;">
                             <div class="media comment-form">
@@ -176,7 +177,7 @@
 
                             <div *ngIf="companyView === 'campaigns' && details?._id">
                                 <ng-container *ngTemplateOutlet="campaignsTemplate; context: {details: details}">
-                                    </ng-container>
+                                </ng-container>
                                 <!-- <div *ngFor="let c of campaignsList">
                                     <app-paginator [length]="c.count" (fetchData)="paginator = $event; fetchAllCampaign('')">
                                     </app-paginator>
@@ -184,12 +185,74 @@
                             </div>
 
                             <ng-container *ngIf="companyView == 'leads'">
-                                <div *ngFor="let f of selectedFormData">
+                                <table style="width: 100%;" mat-table multiTemplateDataRows [dataSource]="dataSource"
+                                    matSort class="mat-elevation-z8">
+                                    <!-- Position Column -->
+                                    <ng-container matColumnDef="number">
+                                        <th mat-header-cell *matHeaderCellDef> No. </th>
+                                        <td mat-cell *matCellDef="let form; let i = dataIndex;">{{i + 1}} </td>
+                                        <!-- <mat-cell *matCellDef="let company; let i = dataIndex;">{{i + 1}}</mat-cell> -->
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="date">
+                                        <th mat-header-cell *matHeaderCellDef> First Name </th>
+                                        <td mat-cell *matCellDef="let form"> {{form?.formDataJson?.firstName}} </td>
+                                    </ng-container>
+
+                                    <!-- Name Column -->
+                                    <ng-container matColumnDef="firstName">
+                                        <th mat-header-cell *matHeaderCellDef> Last Name </th>
+                                        <td mat-cell *matCellDef="let form"> {{form?.formDataJson?.lastName}} </td>
+                                    </ng-container>
+
+                                    <!-- type Column -->
+                                    <ng-container matColumnDef="lastName">
+                                        <th mat-header-cell *matHeaderCellDef> Email </th>
+                                        <td mat-cell *matCellDef="let form"> {{form?.formDataJson?.email}} </td>
+                                    </ng-container>
+
+
+
+                                    <ng-container matColumnDef="email">
+                                        <th mat-header-cell *matHeaderCellDef> Date </th>
+                                        <td mat-cell *matCellDef="let form"> {{form.createdAt | date}} </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="action">
+                                        <th mat-header-cell *matHeaderCellDef> Action </th>
+                                        <td mat-cell *matCellDef="let form">
+                                            <mat-icon>info</mat-icon>
+                                        </td>
+                                    </ng-container>
+
+                                    <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+                                    <ng-container matColumnDef="expandedDetail">
+                                        <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+                                            <div class="example-element-detail"
+                                                [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+
+                                                <pre style="text-align: left;">
+                                                    {{element?.formDataJson | json}}
+                                                </pre>
+                                            </div>
+                                        </td>
+                                    </ng-container>
+                                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                    <tr mat-row *matRowDef="let element; columns: displayedColumns;"
+                                        class="example-element-row"
+                                        [class.example-expanded-row]="expandedElement === element"
+                                        (click)="expandedElement = expandedElement === element ? null : element">
+                                    </tr>
+                                    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']"
+                                        class="example-detail-row"></tr>
+
+                                </table>
+                                <!-- <div *ngFor="let f of selectedFormData">
                                     <pre>
                                         {{f?.formDataJson | json}}
                                     </pre>
-                                </div>
-                            </ng-container> 
+                                </div> -->
+                            </ng-container>
 
                             <ng-container *ngIf="companyView !== 'contact'">
                                 <ng-container *ngFor="let p of postTypesArray">
@@ -582,9 +645,10 @@
                 </mat-list-item>
             </mat-list>
 
-           {{paginator?.pageIndex}}
-           {{ep?.expanded}}
-            <app-paginator [length]="c?.count" (fetchData)="paginator = $event; ep?.expanded ? fetchEmailsConnectedWithCampaign(c._id, i) : null">
+            {{paginator?.pageIndex}}
+            {{ep?.expanded}}
+            <app-paginator [length]="c?.count"
+                (fetchData)="paginator = $event; ep?.expanded ? fetchEmailsConnectedWithCampaign(c._id, i) : null">
             </app-paginator>
         </mat-expansion-panel>
         <!-- <div *ngFor="let c of campaignsList">
@@ -594,46 +658,47 @@
 <!-- Contact Template -->
 <ng-template #contactTemplate let-contacts="details">
     <div style="background: white;">
-            <table class="table table-striped" >
-                <thead>
-                    <tr>
-                        <th>Name 
-                            <span *ngIf="nameAsc">
-                                <i class="fas fa-sort-up" (click)="changeOrder('name','asc','contact')"></i>
-                            </span>
-                            <span *ngIf="!nameAsc">
-                                <i class="fas fa-sort-down" (click)="changeOrder('name','desc','contact')"></i>
-                            </span>
-                        </th>
-                        <th>Email ({{emailCount}})
-                            <span *ngIf="emailAsc">
-                                <i class="fas fa-sort-up" (click)="changeOrder('email','asc','contact')"></i>
-                            </span>
-                            <span *ngIf="!emailAsc">
-                                <i class="fas fa-sort-down" (click)="changeOrder('email','desc','contact')"></i>
-                            </span>
-                        </th>
-                        <th>Phone ({{phoneCount}})
-                            <span *ngIf="phoneAsc">
-                                <i class="fas fa-sort-up" (click)="changeOrder('phone','asc','contact')"></i>
-                            </span>
-                            <span *ngIf="!phoneAsc">
-                                <i class="fas fa-sort-down" (click)="changeOrder('phone','desc','contact')"></i>
-                            </span>
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr  *ngFor="let e of companyRelatedPosts?.posts" [routerLink]="['/','post',e._id]">
-                        <td>{{e.name}}</td>
-                        <td>{{e.email}}</td>
-                        <td>{{e.phone}}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <app-paginator [length]="totalcompanyRelatedPosts" (fetchData)="paginator = $event; fetchAllCompanyRealtedePosts('contact')">
-        </app-paginator>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Name
+                        <span *ngIf="nameAsc">
+                            <i class="fas fa-sort-up" (click)="changeOrder('name','asc','contact')"></i>
+                        </span>
+                        <span *ngIf="!nameAsc">
+                            <i class="fas fa-sort-down" (click)="changeOrder('name','desc','contact')"></i>
+                        </span>
+                    </th>
+                    <th>Email ({{emailCount}})
+                        <span *ngIf="emailAsc">
+                            <i class="fas fa-sort-up" (click)="changeOrder('email','asc','contact')"></i>
+                        </span>
+                        <span *ngIf="!emailAsc">
+                            <i class="fas fa-sort-down" (click)="changeOrder('email','desc','contact')"></i>
+                        </span>
+                    </th>
+                    <th>Phone ({{phoneCount}})
+                        <span *ngIf="phoneAsc">
+                            <i class="fas fa-sort-up" (click)="changeOrder('phone','asc','contact')"></i>
+                        </span>
+                        <span *ngIf="!phoneAsc">
+                            <i class="fas fa-sort-down" (click)="changeOrder('phone','desc','contact')"></i>
+                        </span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let e of companyRelatedPosts?.posts" [routerLink]="['/','post',e._id]">
+                    <td>{{e.name}}</td>
+                    <td>{{e.email}}</td>
+                    <td>{{e.phone}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <app-paginator [length]="totalcompanyRelatedPosts"
+        (fetchData)="paginator = $event; fetchAllCompanyRealtedePosts('contact')">
+    </app-paginator>
 </ng-template>
 
 <ng-template #addBlockLevelCommentTemplate let-cDetails="details" let-comments="comments">

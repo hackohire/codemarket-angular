@@ -33,8 +33,6 @@ export class EditorComponent implements OnInit, OnDestroy {
 
   // fileExtensions = AttachesTool.EXTENSIONS;
 
-  tinyMCEApi = environment.tiny_api;
-
   editor: any;
   of = of;
   selectedBlockIndex: number;

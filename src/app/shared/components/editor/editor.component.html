@@ -1,29 +1,7 @@
-<!-- <div *ngIf="readOnly && html" [ngStyle]="editorStyle" class="tox tox-tinymce">
-    <body [innerHTML]="html" class="mce-content-body my_class mce-content-readonly" data-id="post5eaa8bf30fec040008119e7c" spellcheck="false" style="overflow-y: hidden; padding-left: 1px; padding-right: 1px; min-height: 0px;" data-mce-style="overflow-y: hidden; padding-left: 1px; padding-right: 1px; min-height: 0px;" contenteditable="false"></body>
-</div> -->
 <div [ngStyle]="editorStyle" *ngIf="isPlatformBrowser">
     <ckeditor #ckEditorRef [config]="{extraPlugins: [ myCustomUploadAdapterPlugin ]}" [disabled]="readOnly" [editor]="ckEditor" [(ngModel)]="html" (ready)="readOnly ? null : onReady($event)"></ckeditor>
 </div>
 
-
-<!-- 
-<editor [id]="id" class="readonly" [ngStyle]="editorStyle" *ngIf="html && readOnly" [disabled]="true" [init]="{
-    'min_height': '40px',
-    content_style: 'img { width:100%; height: auto; }',
-    menubar: false, branding: false, statusbar: false, toolbar: false, readonly: true, autoresize: true,
- plugins: [ 'autoresize'] }" [apiKey]="tinyMCEApi" [ngModel]="html"></editor> -->
-
- <editor *ngIf="!readOnly && false" [id]="id" [disabled]="readOnly" [init]="{
-    menubar: true, branding: false, statusbar: true, toolbar: true, autoresize: true,
-    images_upload_base_path: s3FilesBucketURL,
-                  file_picker_types: 'file image media',
-                  file_picker_callback: authService.filePickerCallback,
-                  image_title: true,
-                  automatic_uploads: true,
-                  media_live_embeds: true,
-                  plugins: [ 'lists table advtable codesample pagebreak hr emoticons link image media help wordcount  autolink powerpaste preview' ],
-                  toolbar: 'preview | undo redo | link image media table emoticons | formatselect pagebreak hr | bold italic code codesample | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | help'
-}" [apiKey]="tinyMCEApi" [(ngModel)]="html"></editor>
 
 <div *ngIf="false" #editorViewRef [ngStyle]="editorStyle" [ngClass]="'visibility-hidden'">
     <div class="ce-block">

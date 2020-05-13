@@ -13,7 +13,6 @@ import { Post } from '../../shared/models/post.model';
 import { Location } from '@angular/common';
 import { PostService } from '../../shared/services/post.service';
 import { environment } from '../../../environments/environment';
-declare var tinymce;
 
 @Component({
   selector: 'app-add-post',
@@ -22,8 +21,6 @@ declare var tinymce;
 })
 export class AddPostComponent implements OnInit, AfterViewInit {
 
-  // @ViewChild('tinymce', {static: true})
-
   s3Bucket = environment.s3FilesBucketURL;
 
   breadcumb: BreadCumb;
@@ -31,8 +28,6 @@ export class AddPostComponent implements OnInit, AfterViewInit {
 
   editPostDetails: Post;
   postTitle;
-
-  tinyMCEApi = environment.tiny_api;
 
   /** When a user tries to tie a post with this post */
   postFromRoute: Post;
@@ -87,16 +82,6 @@ export class AddPostComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    // TINYMCE_SCRIPT_SRC.init({
-    //   selector: '#default',
-    //   images_upload_url: 'postAcceptor.php',
-    //   file_upload_handler: this.authService.uploadImage,
-    //   file_picker_types: 'file image media',
-    //   image_title: true,
-    //   automatic_uploads: false,
-    //   plugins: [ 'lists codesample link image paste help wordcount autoresize autolink powerpaste preview' ],
-    //   toolbar: 'preview | undo redo | image | formatselect | bold italic code codesample | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | help'
-    // });
     if (this.descriptionEditor && this.descriptionEditor.ckEditorRef) {
       console.log(this.descriptionEditor.ckEditorRef.elementRef.nativeElement);
       this.descriptionEditor.ckEditorRef.editorElement.style.minHeight = '73vh';

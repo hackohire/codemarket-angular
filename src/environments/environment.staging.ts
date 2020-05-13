@@ -2,7 +2,6 @@ import { plans } from '../app/shared/constants/plan_details';
 
 export const environment = {
   production: true,
-  tiny_api: '5fsqmw7kewxh0ljo1cfr46zhxre6demtcb67n0nzg736c1s4',
   serverless_url: 'https://codemarketapi-staging.codemarket.io/',
   graphql_url: 'https://codemarketapi-staging.codemarket.io/graphql',
   s3FilesBucketURL: 'https://codemarket-files.s3.amazonaws.com/public/',

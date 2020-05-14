@@ -103,6 +103,7 @@ export class AuthService {
               github_url
               stackoverflow_url
               location
+              slug
               currentJobDetails {
                 jobProfile {
                   name

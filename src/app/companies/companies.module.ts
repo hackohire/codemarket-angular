@@ -26,7 +26,7 @@ const companyRoutes: Routes = [
         canLoad: [AuthGuard]
       },
       {
-        path: ':companyId',
+        path: ':slug',
         component: CompanyDetailsComponent,
         // data: { noReuse: true }
       },

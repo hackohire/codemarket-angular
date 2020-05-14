@@ -1,11 +1,16 @@
 import { plans } from '../app/shared/constants/plan_details';
 
 export const environment = {
+  ckEditor: {
+    ckEditorEnvironMentId: 'ZK5UoNVFJG2R3Kh4SrIC',
+    ckEditorSecretKey: 'HP771KcTLlvStVbtvwAGz5d3LhLgDlY50uJqNQ6nkS18kVP43ZPB1zOSLseK',
+    ws: '71258.cke-cs.com/ws',
+    developmentTokenUrl: 'https://71258.cke-cs.com/token/dev/qhNbD6xUjkeVtrEc7aD2PcMhDkgmirUJHunqRWESilB0mTzZ0RHcJYk68P6D'
+  },
   production: true,
-  tiny_api: '5fsqmw7kewxh0ljo1cfr46zhxre6demtcb67n0nzg736c1s4',
-  serverless_url: 'https://manavapi.codemarket.io/',
-  graphql_url: 'https://manavapi.codemarket.io/graphql',
-  s3FilesBucketURL: 'https://manav-files.s3.amazonaws.com/public/',
+  serverless_url: 'https://codemarketapi-prod.codemarket.io/',
+  graphql_url: 'https://codemarketapi-prod.codemarket.io/graphql',
+  s3FilesBucketURL: 'https://codemarket-files.s3.amazonaws.com/public/',
   stripe_public_key: 'pk_live_EYCoYtpLszr802sOl89WeuW1',
   // stripe_public_key: 'pk_test_ighmL2U9UqAx0O4b8dKkSvdq',
   webSocketURL: 'wss://ng5xcjceck.execute-api.us-east-1.amazonaws.com/manav',

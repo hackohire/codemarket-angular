@@ -43,7 +43,7 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
   usersInterestedInCompany: User[];
   companyView: string;
   totalCampaign: number;
-
+  companyId: string;
   customTabs = [
     {
       name: 'campaigns',
@@ -151,19 +151,13 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
     this.type = this.activatedRoute.snapshot.queryParams.type;
     this.commentId = this.activatedRoute.snapshot.queryParams['commentId'];
 
+    this.companyId = this.activatedRoute.snapshot.queryParams.id;
+
     const params = this.activatedRoute.snapshot.params;
 
     this.companyView = this.activatedRoute.snapshot.queryParams['view'] ? this.activatedRoute.snapshot.queryParams['view'] : 'posts';
-    this.postService.getCountOfAllPost('', params.companyId, '').subscribe((data) => {
-      if (data.length) {
-        data = keyBy(data, '_id');
-        appConstants.postTypesArray.forEach((obj) => {
-          obj['count'] = data[obj.name] ? data[obj.name].count : 0
-        });
-      }
-    });
     this.subscription$.add(
-      this.companyService.getCompanyById(params.companyId)
+      this.companyService.getCompanyById(params.slug)
         .pipe(
           concatMap((company, index) => {
             return index === 0 ?
@@ -190,6 +184,16 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
               this.initializeQuestionAndAnswerForm(c, 'company');
 
               this.selectMainCategory({name: this.companyView});
+              if (this.companyId) {
+                 this.postService.getCountOfAllPost('', this.companyId, '').subscribe((data) => {
+                  if (data.length) {
+                    data = keyBy(data, '_id');
+                    appConstants.postTypesArray.forEach((obj) => {
+                      obj['count'] = data[obj.name] ? data[obj.name].count : 0
+                    });
+                  }
+                });
+              }
             }
           }
         })

@@ -128,7 +128,7 @@
                                                 alt="Presenting the broken author avatar :D">
                                         </div>
                                         <div class="autor__info">
-                                            <a [routerLink]="['/', 'dashboard', 'profile', attendee?._id ]">
+                                            <a [routerLink]="['profile', attendee?.slug ]">
                                                 <p class="name">
                                                     {{attendee?.name}}
                                                 </p>

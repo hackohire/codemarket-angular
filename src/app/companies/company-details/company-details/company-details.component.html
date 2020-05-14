@@ -51,11 +51,11 @@
                         {{details?.createdAt | date}}</p>
                     <p *ngIf="details?.createdBy" style="text-align: center; line-height: 18px;">Creator: <a
                             target="_blank"
-                            [href]="'/'+ 'dashboard' + '/' + 'profile' + '/' + details?.createdBy?._id">{{details?.createdBy?.name}}</a>
+                            [href]="'profile' + '/' + details?.createdBy?.slug">{{details?.createdBy?.name}}</a>
                     </p>
                     <p *ngIf="details?.owners?.length" style="text-align: center; line-height: 18px;">Owners: <a
                             *ngFor="let o of details?.owners; let last=last;" target="_blank"
-                            [href]="'/'+ 'dashboard' + '/' + 'profile' + '/' + o?._id">{{o?.name}}{{last ? '' : ', '}}</a>
+                            [href]="'profile' + '/' + o?.slug">{{o?.name}}{{last ? '' : ', '}}</a>
                     </p>
 
                     <mde-popover #socialMediaLinks="mdePopover" [mdePopoverOverlapTrigger]="false"
@@ -212,7 +212,7 @@
                         <div class="col-md-12 comment-form-area" style="padding: 0 15px;">
                             <div class="media comment-form">
                                 <div class="media-left">
-                                    <a [routerLink]="['/', 'dashboard', 'profile', authService?.loggedInUser?._id ]">
+                                    <a [routerLink]="['profile', authService?.loggedInUser?.slug ]">
                                         <img class="author_avatar_comment" style="height: 45px; width:45px;"
                                             [src]="authService?.loggedInUser?.avatar ? ((s3FilesBucketURL + authService?.loggedInUser?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
                                             alt="Commentator Avatar">
@@ -315,7 +315,7 @@
                                     </div>
 
                                     <div class="author">
-                                        <a [routerLink]="['/', 'dashboard', 'profile', details?.createdBy?._id ]">
+                                        <a [routerLink]="['profile', details?.createdBy?.slug ]">
                                             <h4>{{details?.createdBy?.name}}</h4>
                                         </a>
                                         <!-- <button
@@ -354,7 +354,7 @@
 
                                     <div class="author-btn">
                                         <a (editPost)="postService?.editPost(details)"
-                                            [routerLink]="['/', 'dashboard', 'profile', details?.createdBy?._id ]"
+                                            [routerLink]="['profile', details?.createdBy?.slug ]"
                                             class="btn btn--sm btn--round">View Profile</a>
                                         <!-- <a href="#" class="btn btn--sm btn--round">Message</a> -->
                                     </div>
@@ -421,7 +421,7 @@
                                                 </div>
                                                 <div class="autor__info">
                                                     <a
-                                                        [routerLink]="['/', 'dashboard', 'profile', userInterested?._id ]">
+                                                        [routerLink]="['profile', userInterested?.slug ]">
                                                         <p class="name">
                                                             {{userInterested?.name}}
                                                         </p>
@@ -538,7 +538,7 @@
                                         <div class="media">
                                             <div class="media-left">
 
-                                                <a [routerLink]="['/', 'dashboard', 'profile', a?.createdBy?._id ]">
+                                                <a [routerLink]="['profile', a?.createdBy?.slug ]">
                                                     <img class="author_avatar_comment"
                                                         [src]="a?.createdBy?.avatar ? ((s3FilesBucketURL + a.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar"
                                                         alt="Commentator Avatar">
@@ -548,7 +548,7 @@
                                                 <div>
                                                     <div class="media-heading">
                                                         <a
-                                                            [routerLink]="['/', 'dashboard', 'profile', a?.createdBy?._id ]">
+                                                            [routerLink]="['profile', a?.createdBy?.slug ]">
                                                             <h4>{{a?.createdBy?.name }}</h4>
                                                         </a>
                                                         <span>{{fromNow(a?.createdAt)}}</span>

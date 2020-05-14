@@ -193,8 +193,9 @@ export class MyProfileComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.authorId = this.activatedRoute.snapshot.params.authorId;
-
+    // this.authorId = this.activatedRoute.snapshot.params.authorId;
+    const params = this.activatedRoute.snapshot.params;
+    this.authorId = params && params.slug ? params.slug.split('-').pop() : '';
     this.profileView = this.activatedRoute.snapshot.queryParams['view'] ? this.activatedRoute.snapshot.queryParams['view'] : 'posts';
 
     // If user is visitng somebody else's profile

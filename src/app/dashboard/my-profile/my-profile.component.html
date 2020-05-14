@@ -118,7 +118,7 @@
 						<div class="col-md-12 comment-form-area" style="padding: 0 15px;">
 							<div class="media comment-form">
 								<div class="media-left">
-									<a [routerLink]="['/', 'dashboard', 'profile', authService?.loggedInUser?._id ]">
+									<a [routerLink]="['profile', authService?.loggedInUser?.slug ]">
 										<img class="author_avatar_comment" style="height: 45px; width:45px;"
 											[src]="authService?.loggedInUser?.avatar ? ((s3FilesBucketURL + authService?.loggedInUser?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
 											alt="Commentator Avatar">

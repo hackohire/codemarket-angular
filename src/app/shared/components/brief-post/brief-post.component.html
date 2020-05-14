@@ -12,7 +12,7 @@
 
         <!-- USER'S AVATAR & NAME -->
         <h3>
-            <a [href]="'/'+ 'dashboard' + '/' + 'profile' + '/' + p?.createdBy?._id" target="_blank">
+            <a [href]="'profile' + '/' + p?.createdBy?.slug" target="_blank">
                 <img class="creator" [src]="p?.createdBy?.avatar ? ((s3FilesBucketURL + p?.createdBy?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
                     alt="" />{{p?.createdBy?.name}}
             </a>
@@ -31,7 +31,7 @@
             <li *ngIf="p?.assignees && p?.assignees?.length">
                 <p class="data-label">Assignees</p>
                 <p class="info">
-                    <a *ngFor="let t of p?.assignees" target="_blank" [href]="'/'+ 'dashboard' + '/' + 'profile' + '/' + t?._id">
+                    <a *ngFor="let t of p?.assignees" target="_blank" [href]="'profile' + '/' + t?.slug">
                         <span class="tag">
                             <img class="avatar" [src]="t?.avatar ? ((s3FilesBucketURL + t?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
                             alt="">{{t?.name}}</span>
@@ -41,7 +41,7 @@
             <li *ngIf="p?.collaborators && p?.collaborators?.length">
                 <p class="data-label">Collaborators</p>
                 <p class="info">
-                    <a *ngFor="let t of p?.collaborators" target="_blank" [href]="'/'+ 'dashboard' + '/' + 'profile' + '/' + t?._id">
+                    <a *ngFor="let t of p?.collaborators" target="_blank" [href]="'profile' + '/' + t?.slug">
                         <span class="tag">
                             <img class="avatar" [src]="t?.avatar ? ((s3FilesBucketURL + t?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
                             alt="">{{t?.name}}</span>

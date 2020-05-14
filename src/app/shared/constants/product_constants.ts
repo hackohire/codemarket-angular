@@ -12,6 +12,7 @@ export const productConstants = {
             name
             avatar
             _id
+            slug
             currentJobDetails {
                 jobProfile {
                     name
@@ -47,6 +48,7 @@ export const productConstants = {
               _id
               name
               avatar
+              slug
             }
             blockId
             blockSpecificComment

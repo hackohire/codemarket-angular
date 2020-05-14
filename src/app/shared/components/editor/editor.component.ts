@@ -25,40 +25,6 @@ export class EditorComponent implements OnInit, OnDestroy {
 
   isHandset: boolean;
 
-  @Input() post: Post; /** post for view mode */
-
-  cloudServices = {
-    tokenUrl: environment.ckEditor.developmentTokenUrl,
-    webSocketUrl: environment.ckEditor.ws,
-    uploadUrl: 'https://71258.cke-cs.com/easyimage/upload/'
-  };
-
-  @Input() realTime = false;
-
-  collaboration = {
-    channelId: this.post ? this.post._id : ''
-  };
-
-  public get editorConfig() {
-    return {
-      cloudServices: this.cloudServices,
-      collaboration: this.collaboration,
-      sidebar: {
-        container: this.sidebar,
-      },
-      presenceList: {
-        container: this.presenceList,
-      },
-      extraPlugins: [ this.myCustomUploadAdapterPlugin ]
-    };
-  }
-
-  // Note that Angular refs can be used once the view is initialized so we need to create
-  // these containers and use in the above editor configuration to workaround this problem.
-  private sidebar = null;
-  private presenceList = null;
-
-
   public model = {
     editorData: ''
   };
@@ -71,6 +37,7 @@ export class EditorComponent implements OnInit, OnDestroy {
   of = of;
   selectedBlockIndex: number;
   isPlatformBrowser = false;
+  @Input() post: Post; /** post for view mode */
   @Input() companyPostId: string;
   @Input() userReferenceId: string;
   @Input() id: string;
@@ -90,12 +57,9 @@ export class EditorComponent implements OnInit, OnDestroy {
   @Input() commentType: string;
   @Output() output: EventEmitter<any> = new EventEmitter(); /** Emitting data with user interactions */
   @Input() importArticleSubscription = false;
-  // @ViewChild('editorRef', { static: false }) editorRef: ElementRef;
+  @ViewChild('editorRef', { static: false }) editorRef: ElementRef;
   @ViewChild('ckEditorRef', { static: false }) ckEditorRef;
   @ViewChild('editorViewRef', { static: true }) editorViewRef: ElementRef;
-
-  @ViewChild('sidebar', { static: true }) private sidebarContainer?: ElementRef<HTMLDivElement>;
-  @ViewChild('presenceList', { static: true }) private presenceListContainer?: ElementRef<HTMLDivElement>;
 
   @Output() showComments: EventEmitter<{ block: any }> = new EventEmitter();
 
@@ -137,9 +101,6 @@ export class EditorComponent implements OnInit, OnDestroy {
       this.initializeCommentForm(this.post);
     }
 
-    this.sidebar = this.isPlatformBrowser ? document.createElement('div') : null;
-    this.presenceList = this.isPlatformBrowser ? document.createElement('div') : null;
-
     this.subscriptions$.add(
       this.breakpointObserver.observe(Breakpoints.Handset)
         .pipe(
@@ -151,7 +112,6 @@ export class EditorComponent implements OnInit, OnDestroy {
   }
 
   myCustomUploadAdapterPlugin(editor) {
-    console.log(editor.plugins.get('EasyImage'));
     editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
       // Configure the URL to the upload script in your back-end here!
       return new CustomUploadAdapter(loader);
@@ -167,12 +127,6 @@ export class EditorComponent implements OnInit, OnDestroy {
       editor.ui.view.toolbar.element,
       editor.ui.getEditableElement()
     );
-
-    if (this.realTime) {
-
-    } else {
-
-    }
 
     // editor.plugins.extraPlugins = [ this.myCustomUploadAdapterPlugin ];
   }
@@ -231,29 +185,6 @@ export class EditorComponent implements OnInit, OnDestroy {
     const template = `<html><body><style type="text/css">.gist {overflow:auto;} .gist .gist-file .gist-data { max-height: 86vh; }</style><script src="gistSrc"></script></body></html>`;
     const replaced = template.replace('gistSrc', url + '.js');
     return replaced;
-  }
-
-  generateToken() {
-    return new Promise((resolve, reject) => {
-      const payload = {
-        aud: environment.ckEditor.ckEditorEnvironMentId,
-        sub: this.authService.loggedInUser._id,
-        user: {
-          email: this.authService.loggedInUser,
-          name: this.authService.loggedInUser.name,
-          avatar: this.authService.loggedInUser.avatar ? (this.s3FilesBucketURL + this.authService.loggedInUser.avatar) : this.anonymousAvatar
-        },
-        auth: {
-          collaboration: {
-            '*': {
-              role: 'writer'
-            }
-          }
-        }
-      };
-      // const result = jwt.sign( payload, environment.ckEditor.ckEditorSecretKey, { algorithm: 'HS256' } );
-      // return resolve( result );
-    });
   }
 
 }

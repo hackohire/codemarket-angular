@@ -1,17 +1,5 @@
-<div [ngStyle]="editorStyle" *ngIf="isPlatformBrowser && !realTime">
-    <ckeditor #ckEditorRef
-     [config]="{
-        extraPlugins: readOnly ? [] : [ myCustomUploadAdapterPlugin ],
-        removePlugins: [ 'RealTimeCollaborativeEditing', 'RealTimeCollaborativeComments', 'RealTimeCollaborativeTrackChanges' ]
-    }" [disabled]="readOnly" [editor]="ckEditor" [(ngModel)]="html" (ready)="readOnly ? null : onReady($event)"></ckeditor>
-</div>
-
-<div *ngIf="isPlatformBrowser && realTime && this?.post?._id">
-    <ckeditor #ckEditorRef
-    [config]="{
-       extraPlugins: [ myCustomUploadAdapterPlugin ], cloudServices: cloudServices, 
-       collaboration: { channelId: this.post._id }
-   }" [disabled]="readOnly" [editor]="ckEditor" [(ngModel)]="html" (ready)="readOnly ? null : onReady($event)"></ckeditor>
+<div [ngStyle]="editorStyle" *ngIf="isPlatformBrowser">
+    <ckeditor #ckEditorRef [config]="{extraPlugins: [ myCustomUploadAdapterPlugin ]}" [disabled]="readOnly" [editor]="ckEditor" [(ngModel)]="html" (ready)="readOnly ? null : onReady($event)"></ckeditor>
 </div>
 
 

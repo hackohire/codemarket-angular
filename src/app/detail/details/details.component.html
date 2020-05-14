@@ -52,7 +52,7 @@
                                 <article>
                                     <app-editor
                                         (showComments)="showCommentsOnSide($event)"
-                                        [realTime]="true"
+                                        [data]="details?.description"
                                         [commentsList]="commentService?.commentsList$ | async"
                                         [blockLevelComments]="false" [readOnly]="true"
                                         [id]="'details-editor'" [html]="details?.descriptionHTML" [post]="details" [commentType]="'post'">

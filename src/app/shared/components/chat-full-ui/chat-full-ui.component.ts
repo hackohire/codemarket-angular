@@ -19,15 +19,15 @@ export class ChatFullUiComponent implements OnInit {
 
   public commentsList = [];
   public selectedPost;
-  public anonymousAvatar: string = '../../assets/images/anonymous-avatar.jpg';
-  public username: string = '';
-  public chatToken: string = '';
-  public channelName: string = "";
-  public channelStatus: string = "";
+  public anonymousAvatar = '../../assets/images/anonymous-avatar.jpg';
+  public username = '';
+  public chatToken = '';
+  public channelName = '';
+  public channelStatus = '';
   public chatClient: any;
   public generalChannel: any;
   public msg: any;
-  public loadingMessage = "";
+  public loadingMessage = '';
   public loginUser;
   scrolltop: number = null;
   s3FilesBucketURL = environment.s3FilesBucketURL;
@@ -35,17 +35,17 @@ export class ChatFullUiComponent implements OnInit {
 
   ngOnInit() {
     this.username = `${this.loggedInUser.name}_${this.loggedInUser._id}`;
-    this.postList.map((post, i) => { post.isActive = false, post.count = 0, post.indexAt = i, post.lastMessage = "", post.dateTime = new Date() });
+    this.postList.map((post, i) => { post.isActive = false, post.count = 0, post.indexAt = i, post.lastMessage = '', post.dateTime = new Date(); });
     this.createTwilioToken();
   }
 
   openPostChat(index: number) {
     if (!this.loadingMessage) {
-      this.loadingMessage = "Please Wait ...";
+      this.loadingMessage = 'Please Wait ...';
       const findPost = this.postList.findIndex(x => x.isActive === true);
 
       if (findPost !== -1) {
-        this.postList[findPost].isActive = false
+        this.postList[findPost].isActive = false;
       }
 
       this.postList[index].isActive = true;
@@ -54,7 +54,7 @@ export class ChatFullUiComponent implements OnInit {
 
       if (this.channelName === this.postList[index]._id) {
         this.postList[index].count = 0;
-        this.postList[index].lastMessage = "";
+        this.postList[index].lastMessage = '';
       }
 
       // if (this.chatClient) {
@@ -68,18 +68,18 @@ export class ChatFullUiComponent implements OnInit {
   }
 
   createTwilioToken() {
-    let self = this;
+    const self = this;
     this._chatService.createToken(this.username).subscribe(data => {
-      this.chatToken = data['token'];
-      this.username = data['identity'];
+      this.chatToken = data.token;
+      this.username = data.identity;
       Chat.Client.create(this.chatToken).then(client => {
         // Use client
         this.chatClient = client;
-        this.chatClient.getSubscribedChannels().then(function (paginator) {
-          console.log(paginator.items)
-        })
+        this.chatClient.getSubscribedChannels().then((paginator) => {
+          console.log(paginator.items);
+        });
 
-        this.chatClient.on('messageAdded', function (message) {
+        this.chatClient.on('messageAdded', (message) => {
           self.postList.map((post) => {
             if (post._id === message.channel.uniqueName
               && message.author !== self.username
@@ -89,11 +89,11 @@ export class ChatFullUiComponent implements OnInit {
               post.dateTime = message.timestamp;
               // this.sortData();
             }
-          })
-          self.postList.sort((a, b) => {
-            return <any>new Date(b.dateTime) - <any>new Date(a.dateTime);
           });
-        })
+          self.postList.sort((a, b) => {
+            return  (new Date(b.dateTime) as any) -  (new Date(a.dateTime) as any);
+          });
+        });
       });
     });
   }
@@ -127,7 +127,7 @@ export class ChatFullUiComponent implements OnInit {
               this.generalChannel.updateLastConsumedMessageIndex(this.commentsList[this.commentsList.length - 1].index).then((data) => {
               });
             }
-            this.loadingMessage = "";
+            this.loadingMessage = '';
           });
         }
       });
@@ -139,7 +139,7 @@ export class ChatFullUiComponent implements OnInit {
           this.generalChannel.updateLastConsumedMessageIndex(this.commentsList[this.commentsList.length - 1].index).then((data) => {
           });
         }
-        this.loadingMessage = "";
+        this.loadingMessage = '';
       });
     }
 

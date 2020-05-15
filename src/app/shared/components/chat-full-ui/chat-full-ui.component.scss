@@ -23,18 +23,22 @@
     .post-list {
       border-right: 1px solid #eee;
       position: relative;
-      height: calc(100vh - 365px);
-      overflow: hidden;
+      height: calc(100vh - 282px);
+      overflow: auto;
       cursor: pointer;
 
       &:hover {
-        overflow: auto;
+        // overflow: auto;
       }
 
       .post-card {
         border-bottom: 1px solid #eee;
         margin: 0;
         padding: 15px 5px !important;
+        .chat-list-avatar {
+          width: 45px;
+          height: 45px;
+        }
       }
 
       .active-chat {
@@ -46,7 +50,7 @@
         p {
           margin: 0 !important;
           font-size: 14px;
-          width: 80%;
+          // width: 80%;
         }
 
         .date-time {

@@ -70,77 +70,12 @@
 					</app-add-post-menu> -->
 					<app-post-type-nav [customTabs]="authService?.loggedInUser && authService?.loggedInUser?._id == authorId ? customTabs : []" [selectedPostType]="profileView" (postTypeClick)="$event?.isCustom ? fetchBasedOnCustomTab($event) : selectMainCategory($event?.name);"
 						(plusButtonClick)="redirectToAddPost($event)"></app-post-type-nav>
-					<!-- <div class="docs-component-viewer-nav common-box-shadow"
-						style="margin-bottom: 20px; margin-top: 10px;">
-						<div class="docs-component-viewer-nav-content">
 
-							<div *ngFor="let category of profileViewLinks; let last = last;">
-								<button cdkAccordionItem #panel="cdkAccordionItem"
-									[expanded]="category?.types ? isExpanded(category) : false"
-									(click)="selectMainCategory(category, panel)" class="docs-nav-content-btn"
-									[ngClass]="profileView === category.view ? 'docs-component-viewer-sidenav-item-selected' : ''"
-									[attr.aria-controls]="'panel-' + category.view"
-									[attr.aria-expanded]="panel.expanded">
-									{{category.title}}
-									<mat-icon *ngIf="category?.types">
-										{{panel.expanded ? 'keyboard_arrow_up' :  'keyboard_arrow_down'}}
-									</mat-icon>
-								</button>
-								<mat-nav-list dense [@bodyExpansion]="panel.expanded ? 'expanded' : 'collapsed'"
-									id="panel-{{category.view}}" [attr.aria-label]="category.view">
-									<a mat-list-item *ngFor="let component of category?.types"
-										(click)="selectMainCategory(component, panel)"
-										[ngClass]="component.view === profileView ? 'docs-component-viewer-sidenav-item-selected': ''"
-										[attr.aria-current]="profileView === component.view ? 'page': 'false'">
-										{{component.title}}
-									</a>
-								</mat-nav-list>
-								<hr *ngIf="!last" />
-							</div>
-
-							<div *ngFor="let p of postTypesArray; let last = last;">
-								<button cdkAccordionItem [routerLink]="[]" [queryParams]="{ view: p.name }"
-									[queryParamsHandling]="'merge'"
-									(click)="profileView = p.name; fetchAllOtherPosts(p.name);"
-									class="docs-nav-content-btn"
-									[ngClass]="profileView === p.name ? 'docs-component-viewer-sidenav-item-selected' : ''">
-									{{p.name}}
-								</button>
-								<hr *ngIf="!last" />
-							</div>
-						</div>
-					</div> -->
 				</div>
 
 				<div class="col-lg-10 col-md-10">
 					<!-- POST EDITOR STARTS HERE -->
-					<!-- <div class="row">
-						<div class="col-md-12 comment-form-area" style="padding: 0 15px;">
-							<div class="media comment-form">
-								<div class="media-left">
-									<a [routerLink]="['profile', authService?.loggedInUser?.slug ]">
-										<img class="author_avatar_comment" style="height: 45px; width:45px;"
-											[src]="authService?.loggedInUser?.avatar ? ((s3FilesBucketURL + authService?.loggedInUser?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
-											alt="Commentator Avatar">
-									</a>
-								</div>
-								<div class="media-body">
-									<div class="comment-reply-form">
-										<app-add-post-menu #addPostMenu style="position: absolute; visibility: hidden;">
-										</app-add-post-menu>
-										<div (click)="addPostMenu.openMenu();" class="comment-reply-form">
-											<textarea placeholder="Add Post!"
-												style="background: white; height: 100px; padding: 20px 35px; width: 100%; min-height: 130px; border-radius: 6px;"></textarea>
 
-											<button style="float: right; margin-top: 10px; margin-bottom: 20px;"
-												type="button" class="btn btn--sm btn--round"
-												(click)="addPostMenu.openMenu();">Post</button>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div> -->
 					<!-- POST EDITOR ENDS HERE -->
 					  <mat-tab-group  mat-align-tabs="center">
 					    <mat-tab label="Posts">

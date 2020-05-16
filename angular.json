@@ -87,6 +87,30 @@
                   "maximumError": "15mb"
                 }
               ]
+            },
+            "vc": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.vc.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "5mb",
+                  "maximumError": "15mb"
+                }
+              ]
             }
           }
         },
@@ -102,6 +126,9 @@
             },
             "staging": {
               "browserTarget": "codemarket:build:staging"
+            },
+            "vc": {
+              "browserTarget": "codemarket:build:vc"
             }
           }
         },
@@ -154,6 +181,9 @@
             },
             "staging": {
               "devServerTarget": "codemarket:serve:staging"
+            },
+            "vc": {
+              "devServerTarget": "codemarket:serve:vc"
             }
           }
         },
@@ -183,6 +213,19 @@
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.staging.ts"
+                }
+              ],
+              "sourceMap": false,
+              "optimization": {
+                "scripts": false,
+                "styles": true
+              }
+            },
+            "vc": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.vc.ts"
                 }
               ],
               "sourceMap": false,

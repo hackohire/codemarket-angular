@@ -18,8 +18,6 @@ export class AddCommentComponent implements OnInit {
   @Input() showLabel: false;
   @Input() referenceId: string;
 
-  tinyMCEApi = environment.tiny_api;
-
 
   editorId = Math.random().toString();
   subscription$ = new Subscription();
@@ -76,7 +74,7 @@ export class AddCommentComponent implements OnInit {
 
       this.subscription$.add(
         this.commentService.addComment(this.commentForm.value).subscribe((c) => {
-          addCommentEditor.editor.clear();
+          addCommentEditor.html = '';
         })
       );
     } else {

@@ -27,7 +27,6 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { MdePopoverModule } from '@material-extended/mde';
 import { CommentService } from './services/comment.service';
 import { ToastrModule } from 'ngx-toastr';
-import { AddJobComponent } from '../job/add-job/add-job.component';
 import { BriefPostComponent } from './components/brief-post/brief-post.component';
 import { AutocompleteComponent } from './components/autocomplete/autocomplete.component';
 import { AddCollaboratorsComponent } from './components/add-collaborators/add-collaborators.component';
@@ -38,8 +37,10 @@ import { ChatBoxComponent } from './components/chat-box/chat-box.component';
 import { PostTypeNavComponent } from './components/post-type-nav/post-type-nav.component';
 import { CommentSideNavComponent } from './components/comment-side-nav/comment-side-nav.component';
 import { AppInjector } from './services/app.injector.service';
-import { EditorModule } from '@tinymce/tinymce-angular';
-import { TinyEditorComponent } from './components/tiny-editor/tiny-editor.component';
+import { ChatService } from './services/chat.service';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { GetNamePipe } from './pipes/get-name.pipe';
+import { ChatFullUiComponent } from './components/chat-full-ui/chat-full-ui.component';
 
 export function hljsLanguages() {
   return [
@@ -59,7 +60,6 @@ export function hljsLanguages() {
     VideoChatComponent,
     AddPostMenuComponent,
     CompaniesListComponent,
-    AddJobComponent,
     BriefPostComponent,
     AutocompleteComponent,
     AddCollaboratorsComponent,
@@ -69,14 +69,14 @@ export function hljsLanguages() {
     ChatBoxComponent,
     PostTypeNavComponent,
     CommentSideNavComponent,
-    TinyEditorComponent,
+    GetNamePipe,
+    ChatFullUiComponent,
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
-    EditorModule,
     SweetAlert2Module.forRoot({
       buttonsStyling: false,
       customClass: 'modal-content',
@@ -99,7 +99,8 @@ export function hljsLanguages() {
       enableHtml: true,
       timeOut: 30000,
       extendedTimeOut: 8000
-    })
+    }),
+    CKEditorModule
   ],
   exports: [
     BreadcumbComponent,
@@ -116,7 +117,6 @@ export function hljsLanguages() {
     PaginatorComponent,
     PostTypeNavComponent,
     CommentSideNavComponent,
-    TinyEditorComponent,
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
@@ -132,13 +132,12 @@ export function hljsLanguages() {
     // Ng5SliderModule,
     NgSelectModule,
     MdePopoverModule,
-    EditorModule
+    ChatFullUiComponent
   ],
   entryComponents: [
-    AddJobComponent,
     VideoChatComponent
   ],
-  providers: [CommentService]
+  providers: [CommentService, ChatService]
 })
 export class SharedModule {
   constructor(private injector: Injector) {

@@ -99,13 +99,13 @@
 .image-upload-wrap {
   // margin-top: 20px;
   height: 100%;
-  border: 2px dashed #0674ec;
+  border: 2px dashed #00aeef;
   position: relative;
 }
 
 .image-dropping,
 .image-upload-wrap:hover {
-  background-color: #0674ec52;
+  background-color: #00aeef52;
   border: 4px dashed #ffffff;
 }
 
@@ -117,7 +117,7 @@
 .drag-text h3 {
   font-weight: 100;
   text-transform: uppercase;
-  color: #0674ec;
+  color: #00aeef;
   padding: 60px 0;
 }
 
@@ -205,7 +205,7 @@
 // Social Media Icons
 
 .social i:hover {
-  color: #0674ec;
+  color: #00aeef;
 }
 
 // .social i:last-child {

@@ -114,7 +114,7 @@ export class AddCompanyComponent implements OnInit {
       name: new FormControl(i && i.name ? i.name : '', Validators.required),
       type: new FormControl(i && i.type ? i.type : ''),
       cities: new FormControl(i && i.cities && i.cities.length ? i.cities : []),
-      description: new FormControl(i && i.description ? i.description : ''),
+      // description: new FormControl(i && i.description ? i.description : ''),
       // ideas: new FormControl(i && i.ideas ? i.ideas : ''),
       // questions: new FormControl(i && i.questions ? i.questions : ''),
       createdBy: new FormControl(i && i.createdBy && i.createdBy._id ? i.createdBy._id : ''),
@@ -158,7 +158,7 @@ export class AddCompanyComponent implements OnInit {
       ).subscribe((d: any) => {
         if (d) {
           Swal.fire(`${d.name} has been Created Successfully`, '', 'success').then(() => {
-            this.companyService.redirectToCompanyDetails(d._id);
+            this.companyService.redirectToCompanyDetails(d._id, d.slug);
           });
           this.companyFormInitialization(d);
         }
@@ -174,7 +174,7 @@ export class AddCompanyComponent implements OnInit {
         .subscribe((d: any) => {
           if (d) {
             Swal.fire(`${d.name} has been Updated Successfully`, '', 'success').then(() => {
-              this.companyService.redirectToCompanyDetails(d._id);
+              this.companyService.redirectToCompanyDetails(d._id, d.slug);
             });
             this.companyFormInitialization(d);
           }

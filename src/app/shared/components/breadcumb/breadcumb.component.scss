@@ -12,7 +12,7 @@
 }
 
 .info {
-    width: 90%;
+    // width: 90%;
 }
 
 .tag {
@@ -39,7 +39,8 @@
 ul.infos li {
     overflow: hidden;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
+    // justify-content: space-between;
 }
 
 ul.infos li p {

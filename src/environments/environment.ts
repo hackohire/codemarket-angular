@@ -7,7 +7,6 @@ import { plans } from '../app/shared/constants/plan_details';
 export const environment = {
   production: false,
   COGNITO_AUTH_DOMAIN: 'https://platform.auth.us-east-1.amazoncognito.com',
-  tiny_api: '5fsqmw7kewxh0ljo1cfr46zhxre6demtcb67n0nzg736c1s4',
   serverless_url: 'http://localhost:3200/dev/',
   graphql_url: 'http://localhost:3200/dev/graphql',
   s3FilesBucketURL: 'https://cancer-files.s3.amazonaws.com/public/',

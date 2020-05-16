@@ -11,7 +11,7 @@
         [showAddCollaborators]="details?.createdBy?._id === authService?.loggedInUser?._id ? true : false"
         [showShareButtons]="true" [showAddClients]="details?.createdBy?._id === authService?.loggedInUser?._id"
         [postDetails]="postDetails" [title]="details?.name" [path]="breadcumb?.path" [eventDate]="details?.dateRange"
-        [postDetails]="details">
+        [postDetails]="details" [postForm]="postForm" [inline]="true">
     </app-breadcumb>
 
     <!--================================
@@ -83,7 +83,7 @@
                         </ng-container>
 
 
-                        <div class="sidebar-card card-pricing card--pricing2" *ngIf="details?.type !== 'dream-job'">
+                        <div class="sidebar-card card-pricing card--pricing2" *ngIf="details?.type !== 'dream-job' && false">
 
                             <div class="purchase-button" *ngIf="details?.type === 'event'">
                                 <!-- <a href="#" class="btn btn--lg btn--round">Purchase Now</a> -->
@@ -116,7 +116,7 @@
 
                         </div>
 
-                        <div class="author-card sidebar-card " *ngIf="details?.type === 'event'">
+                        <div class="author-card sidebar-card " *ngIf="details?.type === 'event' && false">
                             <div class="card-title">
                                 <h4>Attendees: {{ details?.usersAttending?.length }}</h4>
                                 <br />
@@ -128,7 +128,7 @@
                                                 alt="Presenting the broken author avatar :D">
                                         </div>
                                         <div class="autor__info">
-                                            <a [routerLink]="['/', 'dashboard', 'profile', attendee?._id ]">
+                                            <a [routerLink]="['profile', attendee?.slug ]">
                                                 <p class="name">
                                                     {{attendee?.name}}
                                                 </p>
@@ -174,22 +174,7 @@
         <!-- end /.container -->
 
         <!-- Start of chat box code -->
-
-        <!-- <section class="chat-window docked" #chatWindow>
-            <div class="chat-header" (click)="chatWindow.classList.toggle('docked')">
-              <p>Live Chat</p>
-              <span class="close"></span>
-            </div>
-            <div class="chat-body">
-              <div class="message-container">
-                <app-chat-box [comments]="commentService?.commentsList$ | async" [loggedInUserId]="authService?.loggedInUser?._id" [postDetails]="postDetails"></app-chat-box>
-              </div>
-            </div>
-            <div class="chat-footer">
-              <div class="form-area">
-              </div>
-            </div>
-        </section> -->
+        <app-chat-box [loggedInUser]="authService?.loggedInUser" [postDetails]="postDetails"></app-chat-box>
         <!-- End of chat box code -->
     </section>
     <!--===========================================

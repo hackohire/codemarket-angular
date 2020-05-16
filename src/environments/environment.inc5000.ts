@@ -8,8 +8,8 @@ export const environment = {
     developmentTokenUrl: 'https://71258.cke-cs.com/token/dev/qhNbD6xUjkeVtrEc7aD2PcMhDkgmirUJHunqRWESilB0mTzZ0RHcJYk68P6D'
   },
   production: true,
-  serverless_url: 'https://inc500api.codemarket.io/',
-  graphql_url: 'https://inc500api.codemarket.io/graphql',
+  serverless_url: 'https://inc5000api.codemarket.io/',
+  graphql_url: 'https://inc5000api.codemarket.io/graphql',
   s3FilesBucketURL: 'https://inc5000-files.s3.amazonaws.com/public/',
   stripe_public_key: 'pk_live_EYCoYtpLszr802sOl89WeuW1',
   // stripe_public_key: 'pk_test_ighmL2U9UqAx0O4b8dKkSvdq',

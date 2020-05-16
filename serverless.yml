@@ -10,6 +10,7 @@ provider:
   runtime: nodejs10.x
   memorySize: 192
   timeout: 10
+  versionFunctions: false
   stage: ${opt:stage, 'production'}
   region: us-east-1
 

@@ -97,7 +97,7 @@
                                 </li>
 
                                 <!-- <li *ngIf="postDetails?.tags && postDetails?.tags?.length || fromAddPost"> -->
-                                <li>
+                                <li *ngIf="fromAddPost">
                                     <p class="data-label">Tags</p>
                                     <p class="info">
                                         <span class="tag" *ngFor="let t of postDetails?.tags">{{t?.name}}</span>
@@ -129,7 +129,7 @@
                                 </li>
 
                                 <!-- <li *ngIf="postDetails?.collaborators && postDetails?.collaborators?.length || fromAddPost"> -->
-                                <li>
+                                <li *ngIf="fromAddPost">
                                     <p class="data-label">Collaborators</p>
                                     <p class="info">
                                         <a *ngFor="let t of postDetails?.collaborators; let i=index" target="_blank"
@@ -156,7 +156,7 @@
                                 </li>
 
                                 <!-- <li *ngIf="postDetails?.clients && postDetails?.clients?.length || fromAddPost"> -->
-                                <li>
+                                <li *ngIf="fromAddPost">
                                     <p class="data-label">Clients</p>
                                     <p class="info">
                                         <a *ngFor="let t of postDetails?.clients" target="_blank"
@@ -200,7 +200,7 @@
                                 </li>
 
                                 <!-- <li *ngIf="postDetails?.companies && postDetails?.companies?.length || fromAddPost"> -->
-                                <li>
+                                <li *ngIf="fromAddPost">
                                     <p class="data-label">Company</p>
                                     <p class="info" style="text-transform: capitalize; cursor: pointer;">
                                         <span *ngFor="let c of postDetails?.companies; let ei = index;"

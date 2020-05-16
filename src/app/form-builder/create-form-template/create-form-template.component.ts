@@ -7,6 +7,7 @@ import { of } from 'rxjs';
 import { isPlatformBrowser } from '@angular/common';
 import { BreadCumb } from '../../shared/models/bredcumb.model';
 import { ActivatedRoute } from '@angular/router';
+import { MyStorageProvider } from '../FileService';
 
 @Component({
   selector: 'app-create-form-template',
@@ -18,10 +19,29 @@ export class CreateFormTemplateComponent implements OnInit {
 
   formId = '';
 
+  customEditForm = {
+    type: 'select',
+    input: true,
+    key: 'storage',
+    label: 'Storage',
+    placeholder: 'Select your file storage provider',
+    weight: 0,
+    tooltip: 'Which storage to save the files in.',
+    valueProperty: 'value',
+    dataSrc: 'custom',
+    data: {
+      custom() {
+        return [{
+          label: 'Custom Uploader',
+          value: 'MyStorageProvider'
+        }];
+      }
+    }
+  };
+
   @ViewChild('json', { static: true }) jsonElement?: ElementRef;
   public form = { components: [] };
   breadcumb: BreadCumb;
-
 
   formStructureJSON = null;
   formDetails: FormGroup;
@@ -29,7 +49,8 @@ export class CreateFormTemplateComponent implements OnInit {
   constructor(
     private formBuilderService: FormBuilderService,
     @Inject(PLATFORM_ID) private _platformId,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    public customStorage: MyStorageProvider
   ) {
     this.formId = this.activatedRoute.snapshot.params['formId'];
 

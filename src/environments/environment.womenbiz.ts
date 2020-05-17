@@ -8,15 +8,15 @@ export const environment = {
     developmentTokenUrl: 'https://71258.cke-cs.com/token/dev/qhNbD6xUjkeVtrEc7aD2PcMhDkgmirUJHunqRWESilB0mTzZ0RHcJYk68P6D'
   },
   production: true,
-  serverless_url: 'https://bankapi.codemarket.io/',
-  graphql_url: 'https://bankapi.codemarket.io/graphql',
-  s3FilesBucketURL: 'https://bank-file.s3.amazonaws.com/public/',
+  serverless_url: 'https://womenbizapi.codemarket.io/',
+  graphql_url: 'https://womenbizapi.codemarket.io/graphql',
+  s3FilesBucketURL: 'https://womenbiz-files.s3.amazonaws.com/public/',
   stripe_public_key: 'pk_live_EYCoYtpLszr802sOl89WeuW1',
   // stripe_public_key: 'pk_test_ighmL2U9UqAx0O4b8dKkSvdq',
-  webSocketURL: 'wss://is2api0ei9.execute-api.us-east-1.amazonaws.com/bank',
+  webSocketURL: 'wss://ey8ubw467c.execute-api.us-east-1.amazonaws.com/womenbiz',
   // planDetails: plans.prod,
   planDetails: plans.prod,
-  fileS3Bucket: 'bank-file',
+  fileS3Bucket: 'womenbiz-files',
   oauth: {
     // Domain name
     domain: 'platform.auth.us-east-1.amazoncognito.com',

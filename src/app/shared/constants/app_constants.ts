@@ -26,7 +26,7 @@ export const appConstants = {
     [PostType.Business]: 'sticky-note'
   },
 
-  fileS3Bucket: 'bank-file',
+  fileS3Bucket: 'womenbiz-files',
 
   promoCodes: {
     FIRSTMONTHFREE: {

@@ -13,7 +13,7 @@ export const environment = {
   s3FilesBucketURL: 'https://manufacture-files.s3.amazonaws.com/public/',
   stripe_public_key: 'pk_live_EYCoYtpLszr802sOl89WeuW1',
   // stripe_public_key: 'pk_test_ighmL2U9UqAx0O4b8dKkSvdq',
-  webSocketURL: 'wss://vacf39zvdh.execute-api.us-east-1.amazonaws.com/inc500',
+  webSocketURL: 'wss://ttzu84nh1l.execute-api.us-east-1.amazonaws.com/manufacture',
   // planDetails: plans.prod,
   planDetails: plans.prod,
   fileS3Bucket: 'manufacture-files',

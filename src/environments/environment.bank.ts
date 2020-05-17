@@ -8,15 +8,15 @@ export const environment = {
     developmentTokenUrl: 'https://71258.cke-cs.com/token/dev/qhNbD6xUjkeVtrEc7aD2PcMhDkgmirUJHunqRWESilB0mTzZ0RHcJYk68P6D'
   },
   production: true,
-  serverless_url: 'https://manufactureapi.codemarket.io/',
-  graphql_url: 'https://manufactureapi.codemarket.io/graphql',
-  s3FilesBucketURL: 'https://manufacture-files.s3.amazonaws.com/public/',
+  serverless_url: 'https://bankapi.codemarket.io/',
+  graphql_url: 'https://bankapi.codemarket.io/graphql',
+  s3FilesBucketURL: 'https://bank-file.s3.amazonaws.com/public/',
   stripe_public_key: 'pk_live_EYCoYtpLszr802sOl89WeuW1',
   // stripe_public_key: 'pk_test_ighmL2U9UqAx0O4b8dKkSvdq',
-  webSocketURL: 'wss://ttzu84nh1l.execute-api.us-east-1.amazonaws.com/manufacture',
+  webSocketURL: 'wss://is2api0ei9.execute-api.us-east-1.amazonaws.com/bank',
   // planDetails: plans.prod,
   planDetails: plans.prod,
-  fileS3Bucket: 'manufacture-files',
+  fileS3Bucket: 'bank-file',
   oauth: {
     // Domain name
     domain: 'platform.auth.us-east-1.amazoncognito.com',

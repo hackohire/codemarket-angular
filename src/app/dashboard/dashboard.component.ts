@@ -69,8 +69,8 @@ export class DashboardComponent implements OnInit {
     },
     {
       name: 'heplRequired',
-      label: 'Did you lose your job?',
-      placeholder: '',
+      label: 'what help do you need for federal grant research funding?',
+      placeholder: 'what help do you need for federal grant research funding?',
       type: 'textarea',
       required: true,
     }

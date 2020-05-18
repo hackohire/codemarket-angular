@@ -69,8 +69,8 @@ export class DashboardComponent implements OnInit {
     },
     {
       name: 'heplRequired',
-      label: 'Did you lose your job?',
-      placeholder: '',
+      label: 'What help do you need to raise venture capital?',
+      placeholder: 'What help do you need to raise venture capital?',
       type: 'textarea',
       required: true,
     }

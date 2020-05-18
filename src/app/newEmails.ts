@@ -3325,4 +3325,2425 @@ export const newBniEmails = [
         ],
         "firstName": "Zachary"
     }
-  ]
+]
+
+export const womenBizEmails = [
+    {
+        "_id": "5ec2a0f8558aa11d5f1e214f",
+        "companyName": "Top Gun Tank Solutions",
+        "name": "Megan  Pileggi",
+        "email": [
+            {
+                "_id": "5ec2a0f8558aa11d5f1e2150",
+                "email": "TGSolutions20@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Megan"
+    },
+    {
+        "_id": "5ec2a0fa558aa11d5f1e2153",
+        "companyName": "FLYY Fitness Healing & the Arts",
+        "name": "Anyango Asantewaa-Battles",
+        "email": [
+            {
+                "_id": "5ec2a0fa558aa11d5f1e2154",
+                "email": "ffhealingarts@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Anyango"
+    },
+    {
+        "_id": "5ec2a105558aa11d5f1e2157",
+        "companyName": "Unearthed by Julianthology",
+        "name": "Julia Caldwell",
+        "email": [
+            {
+                "_id": "5ec2a105558aa11d5f1e2158",
+                "email": "jcaldwell@julianthology.com",
+                "status": true
+            }
+        ],
+        "firstName": "Julia"
+    },
+    {
+        "_id": "5ec2a108558aa11d5f1e2159",
+        "companyName": "MatchSource",
+        "name": "niki atherton",
+        "email": [
+            {
+                "_id": "5ec2a108558aa11d5f1e215a",
+                "email": "info@matchsource.com",
+                "status": true
+            }
+        ],
+        "firstName": "niki"
+    },
+    {
+        "_id": "5ec2a10a558aa11d5f1e215b",
+        "companyName": "VICTOR LAW CENTER PA",
+        "name": "Danie Victor Alexandre",
+        "email": [
+            {
+                "_id": "5ec2a10a558aa11d5f1e215c",
+                "email": "vlawcenter@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Danie"
+    },
+    {
+        "_id": "5ec2a10d558aa11d5f1e215d",
+        "companyName": "Employer Driven Insurance Services, Inc.",
+        "name": "Stacy Morris",
+        "email": [
+            {
+                "_id": "5ec2a10d558aa11d5f1e215e",
+                "email": "stacym@employerdriven.com",
+                "status": true
+            }
+        ],
+        "firstName": "Stacy"
+    },
+    {
+        "_id": "5ec2a10f558aa11d5f1e215f",
+        "companyName": "Tracey Sharp LLC dba Sharp Curbside Bistro",
+        "name": "Tracey  Strachan",
+        "email": [
+            {
+                "_id": "5ec2a10f558aa11d5f1e2160",
+                "email": "sharpkitchentogo@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Tracey"
+    },
+    {
+        "_id": "5ec2a111558aa11d5f1e2161",
+        "companyName": "Mama's Sweet Muffins & Treats",
+        "name": "Tiffany Schumacher",
+        "email": [
+            {
+                "_id": "5ec2a111558aa11d5f1e2162",
+                "email": "mamassweetmuffins@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Tiffany"
+    },
+    {
+        "_id": "5ec2a112558aa11d5f1e2163",
+        "companyName": "The Frayed Feather LLC",
+        "name": "Valerie Aguilera",
+        "email": [
+            {
+                "_id": "5ec2a112558aa11d5f1e2164",
+                "email": "thefrayedfeatheriowa@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Valerie"
+    },
+    {
+        "_id": "5ec2a114558aa11d5f1e2165",
+        "companyName": "RENEE HUGHES AVIATION GROUP LLC",
+        "name": "Sonja Gulley",
+        "email": [
+            {
+                "_id": "5ec2a114558aa11d5f1e2166",
+                "email": "Sonjagulley@reneehughesaviation.com",
+                "status": true
+            }
+        ],
+        "firstName": "Sonja"
+    },
+    {
+        "_id": "5ec2a11a558aa11d5f1e2167",
+        "companyName": "Bannon Digital Entertainment LLC",
+        "name": "Lori Bannon",
+        "email": [
+            {
+                "_id": "5ec2a11a558aa11d5f1e2168",
+                "email": "lori@bannondigital.com",
+                "status": true
+            }
+        ],
+        "firstName": "Lori"
+    },
+    {
+        "_id": "5ec2a11c558aa11d5f1e216b",
+        "companyName": "Yapp",
+        "name": "Omar Sefian",
+        "email": [
+            {
+                "_id": "5ec2a11c558aa11d5f1e216c",
+                "email": "omar@yapp.us",
+                "status": true
+            }
+        ],
+        "firstName": "Omar"
+    },
+    {
+        "_id": "5ec2a123558aa11d5f1e216d",
+        "companyName": "Vineyard Complementary Medicine",
+        "name": "Susan Sanford",
+        "email": [
+            {
+                "_id": "5ec2a123558aa11d5f1e216e",
+                "email": "susan@vcmpt.com",
+                "status": true
+            }
+        ],
+        "firstName": "Susan"
+    },
+    {
+        "_id": "5ec2a126558aa11d5f1e216f",
+        "companyName": "Travel With Louie",
+        "name": "LUIS TORRES",
+        "email": [
+            {
+                "_id": "5ec2a126558aa11d5f1e2170",
+                "email": "LUISGTORRES@GMX.COM",
+                "status": true
+            }
+        ],
+        "firstName": "LUIS"
+    },
+    {
+        "_id": "5ec2a128558aa11d5f1e2171",
+        "companyName": "ZM Universal",
+        "name": "Anam Malik",
+        "email": [
+            {
+                "_id": "5ec2a128558aa11d5f1e2172",
+                "email": "malik.anam1230@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Anam"
+    },
+    {
+        "_id": "5ec2a12a558aa11d5f1e2173",
+        "companyName": "Bella Donna by Lex",
+        "name": "Alexis Overing",
+        "email": [
+            {
+                "_id": "5ec2a12a558aa11d5f1e2174",
+                "email": "alexis.overing@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Alexis"
+    },
+    {
+        "_id": "5ec2a132558aa11d5f1e2179",
+        "companyName": "Carmelas Path LLC",
+        "name": "Carmela Demorest",
+        "email": [
+            {
+                "_id": "5ec2a132558aa11d5f1e217a",
+                "email": "carmelaspath@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Carmela"
+    },
+    {
+        "_id": "5ec2a134558aa11d5f1e217b",
+        "companyName": "Barefoot Dwelling",
+        "name": "Lisa Quina",
+        "email": [
+            {
+                "_id": "5ec2a134558aa11d5f1e217c",
+                "email": "lisa@barefootdwelling.com",
+                "status": true
+            }
+        ],
+        "firstName": "Lisa"
+    },
+    {
+        "_id": "5ec2a13d558aa11d5f1e217f",
+        "companyName": "Schmitz-n-Schmitz-Global, LLC.",
+        "name": "Ingrid Reynolds",
+        "email": [
+            {
+                "_id": "5ec2a13d558aa11d5f1e2180",
+                "email": "ingrid.schmitz@schmitz-n-schmitz-global.com",
+                "status": true
+            }
+        ],
+        "firstName": "Ingrid"
+    },
+    {
+        "_id": "5ec2a14c558aa11d5f1e2185",
+        "companyName": "Stade Forestry Works Plus Inc",
+        "name": "Susan Stade",
+        "email": [
+            {
+                "_id": "5ec2a14c558aa11d5f1e2186",
+                "email": "susanstade@stadeforestryworksplus.com",
+                "status": true
+            }
+        ],
+        "firstName": "Susan"
+    },
+    {
+        "_id": "5ec2a157558aa11d5f1e218f",
+        "companyName": "StrawberrySapphire, LLC",
+        "name": "Brandi Belton",
+        "email": [
+            {
+                "_id": "5ec2a157558aa11d5f1e2190",
+                "email": "strawberrysapphireco@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Brandi"
+    },
+    {
+        "_id": "5ec2a158558aa11d5f1e2191",
+        "companyName": "Baby A & Baby B LLC",
+        "name": "Heather Karpinsky",
+        "email": [
+            {
+                "_id": "5ec2a158558aa11d5f1e2192",
+                "email": "babyababybllc@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Heather"
+    },
+    {
+        "_id": "5ec2a15a558aa11d5f1e2193",
+        "companyName": "Comfy Pets of AZ",
+        "name": "Teri Ann Tate",
+        "email": [
+            {
+                "_id": "5ec2a15a558aa11d5f1e2194",
+                "email": "comfypetsofaz@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Teri"
+    },
+    {
+        "_id": "5ec2a15a558aa11d5f1e2195",
+        "companyName": "PHD Web Studio",
+        "name": "Earline Gloss",
+        "email": [
+            {
+                "_id": "5ec2a15a558aa11d5f1e2196",
+                "email": "info@phdwebstudio.com",
+                "status": true
+            }
+        ],
+        "firstName": "Earline"
+    },
+    {
+        "_id": "5ec2a169558aa11d5f1e219b",
+        "companyName": "J&J Collections",
+        "name": "Jamii Stock",
+        "email": [
+            {
+                "_id": "5ec2a169558aa11d5f1e219c",
+                "email": "jjcollections192@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Jamii"
+    },
+    {
+        "_id": "5ec2a16c558aa11d5f1e219d",
+        "companyName": "DermEffects",
+        "name": "Chassidy  Pazitny",
+        "email": [
+            {
+                "_id": "5ec2a16c558aa11d5f1e219e",
+                "email": "dermeffects1@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Chassidy"
+    },
+    {
+        "_id": "5ec2a16f558aa11d5f1e219f",
+        "companyName": "Genesis Venture Logistics",
+        "name": "Lorraine Hyde",
+        "email": [
+            {
+                "_id": "5ec2a16f558aa11d5f1e21a0",
+                "email": "lorraineh@gvlteam.com",
+                "status": true
+            }
+        ],
+        "firstName": "Lorraine"
+    },
+    {
+        "_id": "5ec2a170558aa11d5f1e21a1",
+        "companyName": "A-Town Coffee LLC",
+        "name": "micheal (michelle) tuttle",
+        "email": [
+            {
+                "_id": "5ec2a170558aa11d5f1e21a2",
+                "email": "micheal@atowncoffeeroasters.com",
+                "status": true
+            }
+        ],
+        "firstName": "micheal"
+    },
+    {
+        "_id": "5ec2a172558aa11d5f1e21a5",
+        "companyName": "Koach Cowd",
+        "name": "Leekeesha Duncan",
+        "email": [
+            {
+                "_id": "5ec2a172558aa11d5f1e21a6",
+                "email": "keesha.duncan2@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Leekeesha"
+    },
+    {
+        "_id": "5ec2a181558aa11d5f1e21b1",
+        "companyName": "Rhino Fitness, LLC",
+        "name": "Julie Keehn",
+        "email": [
+            {
+                "_id": "5ec2a181558aa11d5f1e21b2",
+                "email": "juliekeehn@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Julie"
+    },
+    {
+        "_id": "5ec2a18a558aa11d5f1e21b5",
+        "companyName": "Maddie Elise Nutrition",
+        "name": "Madison Devlin",
+        "email": [
+            {
+                "_id": "5ec2a18a558aa11d5f1e21b6",
+                "email": "MaddieElise@MaddieElise.com",
+                "status": true
+            }
+        ],
+        "firstName": "Madison"
+    },
+    {
+        "_id": "5ec2a18c558aa11d5f1e21b7",
+        "companyName": "SoNu Beauty Solutions LLC",
+        "name": "Lia Ogbazion",
+        "email": [
+            {
+                "_id": "5ec2a18c558aa11d5f1e21b8",
+                "email": "liaogbazion@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Lia"
+    },
+    {
+        "_id": "5ec2a18d558aa11d5f1e21b9",
+        "companyName": "Perspective Fitwear",
+        "name": "Stephanie Ertzberger",
+        "email": [
+            {
+                "_id": "5ec2a18d558aa11d5f1e21ba",
+                "email": "sertzberger@perspectivefitwear.com",
+                "status": true
+            }
+        ],
+        "firstName": "Stephanie"
+    },
+    {
+        "_id": "5ec2a18f558aa11d5f1e21bd",
+        "companyName": "Robby's Septic Tank Service Inc",
+        "name": "Beverly McLauchlin",
+        "email": [
+            {
+                "_id": "5ec2a18f558aa11d5f1e21be",
+                "email": "mclauchlinb@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Beverly"
+    },
+    {
+        "_id": "5ec2a198558aa11d5f1e21c3",
+        "companyName": "FunTanTattoo.com",
+        "name": "Annemarie Albate",
+        "email": [
+            {
+                "_id": "5ec2a198558aa11d5f1e21c4",
+                "email": "shapes@funtantattoo.com",
+                "status": true
+            }
+        ],
+        "firstName": "Annemarie"
+    },
+    {
+        "_id": "5ec2a1a6558aa11d5f1e21c9",
+        "companyName": "Century 21 Link Real Estate",
+        "name": "Robyn Link",
+        "email": [
+            {
+                "_id": "5ec2a1a6558aa11d5f1e21ca",
+                "email": "robyn@century21link.com",
+                "status": true
+            }
+        ],
+        "firstName": "Robyn"
+    },
+    {
+        "_id": "5ec2a1b1558aa11d5f1e21cd",
+        "companyName": "Karen Hernan, Insurance Agent",
+        "name": "Karen Hernan",
+        "email": [
+            {
+                "_id": "5ec2a1b1558aa11d5f1e21ce",
+                "email": "kahernan@bellsouth.net",
+                "status": true
+            }
+        ],
+        "firstName": "Karen"
+    },
+    {
+        "_id": "5ec2a1b3558aa11d5f1e21cf",
+        "companyName": "AllForYou",
+        "name": "Veronica Collins",
+        "email": [
+            {
+                "_id": "5ec2a1b3558aa11d5f1e21d0",
+                "email": "Allforyou1229@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Veronica"
+    },
+    {
+        "_id": "5ec2a1b5558aa11d5f1e21d1",
+        "companyName": "JESSICA'S NEW CONSTRUCTION AND MOVEOUT CLEANING",
+        "name": "jessica davis",
+        "email": [
+            {
+                "_id": "5ec2a1b5558aa11d5f1e21d2",
+                "email": "jessicadavis0102@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "jessica"
+    },
+    {
+        "_id": "5ec2a1c4558aa11d5f1e21d7",
+        "companyName": "Blooming Tots Preschool",
+        "name": "Jessica Leighton",
+        "email": [
+            {
+                "_id": "5ec2a1c4558aa11d5f1e21d8",
+                "email": "jessburlingame@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Jessica"
+    },
+    {
+        "_id": "5ec2a1c6558aa11d5f1e21d9",
+        "companyName": "Midnite Transports LLC",
+        "name": "Rita Domingues",
+        "email": [
+            {
+                "_id": "5ec2a1c6558aa11d5f1e21da",
+                "email": "midnite.transports.llc@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Rita"
+    },
+    {
+        "_id": "5ec2a1c8558aa11d5f1e21db",
+        "companyName": "JC Fiber Services, LLC",
+        "name": "Samantha Rachel",
+        "email": [
+            {
+                "_id": "5ec2a1c8558aa11d5f1e21dc",
+                "email": "smurrie048@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Samantha"
+    },
+    {
+        "_id": "5ec2a1ca558aa11d5f1e21dd",
+        "companyName": "Priaire Girl Wine Bar",
+        "name": "Jennifer Vander Meer",
+        "email": [
+            {
+                "_id": "5ec2a1ca558aa11d5f1e21de",
+                "email": "pgwinebar@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Jennifer"
+    },
+    {
+        "_id": "5ec2a1cb558aa11d5f1e21df",
+        "companyName": "Eden Microgreenss LLC",
+        "name": "Diana Shelton",
+        "email": [
+            {
+                "_id": "5ec2a1cb558aa11d5f1e21e0",
+                "email": "e.microgreens@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Diana"
+    },
+    {
+        "_id": "5ec2a1cd558aa11d5f1e21e3",
+        "companyName": "Total Solutions Alliance LLC",
+        "name": "Pilar Tobias",
+        "email": [
+            {
+                "_id": "5ec2a1cd558aa11d5f1e21e4",
+                "email": "PTobias@TotalSolutionsAlliance.com",
+                "status": true
+            }
+        ],
+        "firstName": "Pilar"
+    },
+    {
+        "_id": "5ec2a1cf558aa11d5f1e21e5",
+        "companyName": "Kat Eyes Private Investigations and Personal Security",
+        "name": "Patricia Smith",
+        "email": [
+            {
+                "_id": "5ec2a1cf558aa11d5f1e21e6",
+                "email": "kateyes.pi@satx.rr.com",
+                "status": true
+            }
+        ],
+        "firstName": "Patricia"
+    },
+    {
+        "_id": "5ec2a1d1558aa11d5f1e21e7",
+        "companyName": "Triple \"O\" Trucking & Transportation",
+        "name": "Jennifer Oates",
+        "email": [
+            {
+                "_id": "5ec2a1d1558aa11d5f1e21e8",
+                "email": "Jeni7874@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Jennifer"
+    },
+    {
+        "_id": "5ec2a1d2558aa11d5f1e21e9",
+        "companyName": "Infinium Bookkeeping Plus",
+        "name": "Marisela Vega",
+        "email": [
+            {
+                "_id": "5ec2a1d2558aa11d5f1e21ea",
+                "email": "vltwins2enterprisesllc@comcast.net",
+                "status": true
+            }
+        ],
+        "firstName": "Marisela"
+    },
+    {
+        "_id": "5ec2a1db558aa11d5f1e21ed",
+        "companyName": "Rocky Mountain Self Defense",
+        "name": "Bridgett Comer",
+        "email": [
+            {
+                "_id": "5ec2a1db558aa11d5f1e21ee",
+                "email": "bridgettcomer@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Bridgett"
+    },
+    {
+        "_id": "5ec2a1e3558aa11d5f1e21f1",
+        "companyName": "Rayter Corp",
+        "name": "Aislinn Carter",
+        "email": [
+            {
+                "_id": "5ec2a1e3558aa11d5f1e21f2",
+                "email": "raytercorp@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Aislinn"
+    },
+    {
+        "_id": "5ec2a1eb558aa11d5f1e21f5",
+        "companyName": "Rishi Salon & Spa",
+        "name": "Kathryn O'Leary",
+        "email": [
+            {
+                "_id": "5ec2a1eb558aa11d5f1e21f6",
+                "email": "katy@rishisalonandspa.com",
+                "status": true
+            }
+        ],
+        "firstName": "Kathryn"
+    },
+    {
+        "_id": "5ec2a1f4558aa11d5f1e21f9",
+        "companyName": "TouchPoint Press",
+        "name": "Sheri Williams",
+        "email": [
+            {
+                "_id": "5ec2a1f4558aa11d5f1e21fa",
+                "email": "info@touchpointpress.com",
+                "status": true
+            }
+        ],
+        "firstName": "Sheri"
+    },
+    {
+        "_id": "5ec2a1fd558aa11d5f1e21fd",
+        "companyName": "Helping Hands, LLC",
+        "name": "Kathleen Siewert",
+        "email": [
+            {
+                "_id": "5ec2a1fd558aa11d5f1e21fe",
+                "email": "info@helpinghandsllc.org",
+                "status": true
+            }
+        ],
+        "firstName": "Kathleen"
+    },
+    {
+        "_id": "5ec2a218558aa11d5f1e2205",
+        "companyName": "Space Coast intergen Center",
+        "name": "Judy Edwards",
+        "email": [
+            {
+                "_id": "5ec2a218558aa11d5f1e2206",
+                "email": "judyedwards05@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Judy"
+    },
+    {
+        "_id": "5ec2a221558aa11d5f1e2209",
+        "companyName": "Premier Realty Solutions",
+        "name": "Sally Cantrill",
+        "email": [
+            {
+                "_id": "5ec2a221558aa11d5f1e220a",
+                "email": "sallycan@paysonareaproperties.com",
+                "status": true
+            }
+        ],
+        "firstName": "Sally"
+    },
+    {
+        "_id": "5ec2a223558aa11d5f1e220b",
+        "companyName": "Resource House LLC",
+        "name": "Rosalind Lewis",
+        "email": [
+            {
+                "_id": "5ec2a223558aa11d5f1e220c",
+                "email": "Resourcehouse048@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Rosalind"
+    },
+    {
+        "_id": "5ec2a225558aa11d5f1e220d",
+        "companyName": "Children of Higher Expectations",
+        "name": "Gweniece Gibbs",
+        "email": [
+            {
+                "_id": "5ec2a225558aa11d5f1e220e",
+                "email": "gwencade@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Gweniece"
+    },
+    {
+        "_id": "5ec2a227558aa11d5f1e220f",
+        "companyName": "Trimm'n Fringes for Denver @ LoonaStyles Barber Shop",
+        "name": "April Parkison",
+        "email": [
+            {
+                "_id": "5ec2a227558aa11d5f1e2210",
+                "email": "aprilparkison@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "April"
+    },
+    {
+        "_id": "5ec2a228558aa11d5f1e2211",
+        "companyName": "Guiding Fitness",
+        "name": "Kacie Bryant",
+        "email": [
+            {
+                "_id": "5ec2a228558aa11d5f1e2212",
+                "email": "kacie@guidingfitness.com",
+                "status": true
+            }
+        ],
+        "firstName": "Kacie"
+    },
+    {
+        "_id": "5ec2a22b558aa11d5f1e2213",
+        "companyName": "Boo-Shaw Bakery Inc",
+        "name": "Loni Shaw",
+        "email": [
+            {
+                "_id": "5ec2a22b558aa11d5f1e2214",
+                "email": "loni@boo-shawbakery.com",
+                "status": true
+            }
+        ],
+        "firstName": "Loni"
+    },
+    {
+        "_id": "5ec2a22d558aa11d5f1e2215",
+        "companyName": "A Hope For Autism Foundation",
+        "name": "Robbin Sobotka-Soles",
+        "email": [
+            {
+                "_id": "5ec2a22d558aa11d5f1e2216",
+                "email": "robbin@ahopeforautism.net",
+                "status": true
+            }
+        ],
+        "firstName": "Robbin"
+    },
+    {
+        "_id": "5ec2a22f558aa11d5f1e2217",
+        "companyName": "Princess Beya Entertainment, LLC",
+        "name": "Michelle Sanchez",
+        "email": [
+            {
+                "_id": "5ec2a22f558aa11d5f1e2218",
+                "email": "princessbeyaent@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Michelle"
+    },
+    {
+        "_id": "5ec2a22f558aa11d5f1e2219",
+        "companyName": "Dark Horse Enterprise",
+        "name": "Jordan Zick",
+        "email": [
+            {
+                "_id": "5ec2a22f558aa11d5f1e221a",
+                "email": "jzick@darkhorseenterprise.com",
+                "status": true
+            }
+        ],
+        "firstName": "Jordan"
+    },
+    {
+        "_id": "5ec2a231558aa11d5f1e221b",
+        "companyName": "Loop Legal PLLC",
+        "name": "Kathleen Harrell-Latham",
+        "email": [
+            {
+                "_id": "5ec2a231558aa11d5f1e221c",
+                "email": "Kharrell-latham@looplegalpllc.com",
+                "status": true
+            }
+        ],
+        "firstName": "Kathleen"
+    },
+    {
+        "_id": "5ec2a248558aa11d5f1e2225",
+        "companyName": "Bang Bang Customs",
+        "name": "Kelly Starr",
+        "email": [
+            {
+                "_id": "5ec2a248558aa11d5f1e2226",
+                "email": "bangbangcustoms@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Kelly"
+    },
+    {
+        "_id": "5ec2a24a558aa11d5f1e2227",
+        "companyName": "Cargo Out Logistics, LLC",
+        "name": "Sandra Rodriguez",
+        "email": [
+            {
+                "_id": "5ec2a24a558aa11d5f1e2228",
+                "email": "cargooutlogistics@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Sandra"
+    },
+    {
+        "_id": "5ec2a24c558aa11d5f1e2229",
+        "companyName": "Whimsy Bee Designs",
+        "name": "Erica Rutherford",
+        "email": [
+            {
+                "_id": "5ec2a24c558aa11d5f1e222a",
+                "email": "ericajrutherford@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Erica"
+    },
+    {
+        "_id": "5ec2a24e558aa11d5f1e222b",
+        "companyName": "KINGS AUTOMOTIVE",
+        "name": "KIMBERLY KING",
+        "email": [
+            {
+                "_id": "5ec2a24e558aa11d5f1e222c",
+                "email": "KINGSAUTO82@GMAIL.COM",
+                "status": true
+            }
+        ],
+        "firstName": "KIMBERLY"
+    },
+    {
+        "_id": "5ec2a24f558aa11d5f1e222d",
+        "companyName": "Verde Valley Outdoor Power Equipment",
+        "name": "Rebecca Matthews",
+        "email": [
+            {
+                "_id": "5ec2a24f558aa11d5f1e222e",
+                "email": "rmatthews.lse@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Rebecca"
+    },
+    {
+        "_id": "5ec2a252558aa11d5f1e222f",
+        "companyName": "American Reflective",
+        "name": "Danielle George",
+        "email": [
+            {
+                "_id": "5ec2a252558aa11d5f1e2230",
+                "email": "americanreflective@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Danielle"
+    },
+    {
+        "_id": "5ec2a25c558aa11d5f1e2233",
+        "companyName": "CrossFit Crazy House",
+        "name": "Jennifer Wright",
+        "email": [
+            {
+                "_id": "5ec2a25c558aa11d5f1e2234",
+                "email": "jyarbro456@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Jennifer"
+    },
+    {
+        "_id": "5ec2a25e558aa11d5f1e2235",
+        "companyName": "Blue Spoon LLC",
+        "name": "Theresa Lamothe",
+        "email": [
+            {
+                "_id": "5ec2a25e558aa11d5f1e2236",
+                "email": "bluespooncompany@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Theresa"
+    },
+    {
+        "_id": "5ec2a268558aa11d5f1e2239",
+        "companyName": "Lifecycles Health Center and Services",
+        "name": "Tanya Wynder",
+        "email": [
+            {
+                "_id": "5ec2a268558aa11d5f1e223a",
+                "email": "Wyndertanya15@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Tanya"
+    },
+    {
+        "_id": "5ec2a26a558aa11d5f1e223d",
+        "companyName": "Happy Smiles For Kids",
+        "name": "Trenee Zweigle",
+        "email": [
+            {
+                "_id": "5ec2a26a558aa11d5f1e223e",
+                "email": "NurseTrenee@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Trenee"
+    },
+    {
+        "_id": "5ec2a270558aa11d5f1e223f",
+        "companyName": "House of Film, LLC",
+        "name": "Ava B",
+        "email": [
+            {
+                "_id": "5ec2a270558aa11d5f1e2240",
+                "email": "avab@houseoffilm.net",
+                "status": true
+            }
+        ],
+        "firstName": "Ava"
+    },
+    {
+        "_id": "5ec2a272558aa11d5f1e2241",
+        "companyName": "It's Art Time Studio and Art Gallery",
+        "name": "Teedgra Blackstock",
+        "email": [
+            {
+                "_id": "5ec2a272558aa11d5f1e2242",
+                "email": "teeblackstock@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Teedgra"
+    },
+    {
+        "_id": "5ec2a27b558aa11d5f1e2245",
+        "companyName": "Pamela Copeland DBA Light Warrior Vets",
+        "name": "Pamela Copeland",
+        "email": [
+            {
+                "_id": "5ec2a27b558aa11d5f1e2246",
+                "email": "Iolotus6715@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Pamela"
+    },
+    {
+        "_id": "5ec2a2c8558aa11d5f1e2249",
+        "companyName": "ALL THINGS SASSY",
+        "name": "RENA ROSS",
+        "email": [
+            {
+                "_id": "5ec2a2c8558aa11d5f1e224a",
+                "email": "allthingssassy.ross@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "RENA"
+    },
+    {
+        "_id": "5ec2a2cc558aa11d5f1e224d",
+        "companyName": "Just Mohs",
+        "name": "Renee Lightfeldt",
+        "email": [
+            {
+                "_id": "5ec2a2cc558aa11d5f1e224e",
+                "email": "renee@justmohs.com",
+                "status": true
+            }
+        ],
+        "firstName": "Renee"
+    },
+    {
+        "_id": "5ec2a2d4558aa11d5f1e2251",
+        "companyName": "The Red Room",
+        "name": "Jessica Teran",
+        "email": [
+            {
+                "_id": "5ec2a2d4558aa11d5f1e2252",
+                "email": "Jteran4120@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Jessica"
+    },
+    {
+        "_id": "5ec2a2ec558aa11d5f1e2257",
+        "companyName": "Arcadia Flowers & Gifts",
+        "name": "Michele LaPorte",
+        "email": [
+            {
+                "_id": "5ec2a2ec558aa11d5f1e2258",
+                "email": "michele@estarevents.com",
+                "status": true
+            }
+        ],
+        "firstName": "Michele"
+    },
+    {
+        "_id": "5ec2a2ed558aa11d5f1e2259",
+        "companyName": "New Pattern Productions LLC",
+        "name": "Michelle Pare",
+        "email": [
+            {
+                "_id": "5ec2a2ed558aa11d5f1e225a",
+                "email": "mmpare@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Michelle"
+    },
+    {
+        "_id": "5ec2a2ef558aa11d5f1e225b",
+        "companyName": "It Works!",
+        "name": "RIO DWYER",
+        "email": [
+            {
+                "_id": "5ec2a2ef558aa11d5f1e225c",
+                "email": "riodwer11@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "RIO"
+    },
+    {
+        "_id": "5ec2a2f7558aa11d5f1e225f",
+        "companyName": "Education Station & Preschool, LLC",
+        "name": "Kristin Birdsey",
+        "email": [
+            {
+                "_id": "5ec2a2f7558aa11d5f1e2260",
+                "email": "kristin@educationstationandpreschool.com",
+                "status": true
+            }
+        ],
+        "firstName": "Kristin"
+    },
+    {
+        "_id": "5ec2a2f9558aa11d5f1e2261",
+        "companyName": "\"Lets Bowl\":Rhonda's Entertainment Center ",
+        "name": "Rhonda Powell",
+        "email": [
+            {
+                "_id": "5ec2a2f9558aa11d5f1e2262",
+                "email": "powellrt@bellsouth.net",
+                "status": true
+            }
+        ],
+        "firstName": "Rhonda"
+    },
+    {
+        "_id": "5ec2a2fb558aa11d5f1e2263",
+        "companyName": "One Experience",
+        "name": "Sydney Prikryl",
+        "email": [
+            {
+                "_id": "5ec2a2fb558aa11d5f1e2264",
+                "email": "sydney@one-experience.com",
+                "status": true
+            }
+        ],
+        "firstName": "Sydney"
+    },
+    {
+        "_id": "5ec2a302558aa11d5f1e2267",
+        "companyName": "lone star k9 academy",
+        "name": "mary jankowski",
+        "email": [
+            {
+                "_id": "5ec2a302558aa11d5f1e2268",
+                "email": "maryjankowski54@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "mary"
+    },
+    {
+        "_id": "5ec2a303558aa11d5f1e2269",
+        "companyName": "Pristine Clean, LLC",
+        "name": "Melissa Crockett",
+        "email": [
+            {
+                "_id": "5ec2a303558aa11d5f1e226a",
+                "email": "Melissa.pristineclean@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Melissa"
+    },
+    {
+        "_id": "5ec2a30c558aa11d5f1e226d",
+        "companyName": "C & C Professional Virtual Assistants LLC",
+        "name": "Christina Baker",
+        "email": [
+            {
+                "_id": "5ec2a30c558aa11d5f1e226e",
+                "email": "Professionalvanh@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Christina"
+    },
+    {
+        "_id": "5ec2a313558aa11d5f1e2271",
+        "companyName": "JVA Appeals",
+        "name": "Tasharea Reid",
+        "email": [
+            {
+                "_id": "5ec2a313558aa11d5f1e2272",
+                "email": "jvaapparels@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Tasharea"
+    },
+    {
+        "_id": "5ec2a31a558aa11d5f1e2275",
+        "companyName": "Caseys-Edibles.com",
+        "name": "Sallie Gawron",
+        "email": [
+            {
+                "_id": "5ec2a31a558aa11d5f1e2276",
+                "email": "Salliegawron@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Sallie"
+    },
+    {
+        "_id": "5ec2a31d558aa11d5f1e2277",
+        "companyName": "Right Brain Left Brain LLC",
+        "name": "Stephanie Allison",
+        "email": [
+            {
+                "_id": "5ec2a31d558aa11d5f1e2278",
+                "email": "steph.allison1@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Stephanie"
+    },
+    {
+        "_id": "5ec2a320558aa11d5f1e227b",
+        "companyName": "BOHLUX",
+        "name": "Louise Comora",
+        "email": [
+            {
+                "_id": "5ec2a320558aa11d5f1e227c",
+                "email": "lulu@bohlux.com",
+                "status": true
+            }
+        ],
+        "firstName": "Louise"
+    },
+    {
+        "_id": "5ec2a327558aa11d5f1e227f",
+        "companyName": "Lotus Investigative Services & Bail Bond Agency",
+        "name": "JonAlexandra Lowe",
+        "email": [
+            {
+                "_id": "5ec2a327558aa11d5f1e2280",
+                "email": "lotusbonds@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "JonAlexandra"
+    },
+    {
+        "_id": "5ec2a329558aa11d5f1e2281",
+        "companyName": "Old School Cafe",
+        "name": "Denel Wardell",
+        "email": [
+            {
+                "_id": "5ec2a329558aa11d5f1e2282",
+                "email": "oldschoolcafe.al@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Denel"
+    },
+    {
+        "_id": "5ec2a330558aa11d5f1e2285",
+        "companyName": "Tiivra",
+        "name": "Priti Chandna",
+        "email": [
+            {
+                "_id": "5ec2a330558aa11d5f1e2286",
+                "email": "schandna@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Priti"
+    },
+    {
+        "_id": "5ec2a332558aa11d5f1e2287",
+        "companyName": "Eavy's Incredible Edibles",
+        "name": "Tammie Simein",
+        "email": [
+            {
+                "_id": "5ec2a332558aa11d5f1e2288",
+                "email": "eavysllc2@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Tammie"
+    },
+    {
+        "_id": "5ec2a33e558aa11d5f1e228f",
+        "companyName": "Living Foods To Go",
+        "name": "Tricia Dewar",
+        "email": [
+            {
+                "_id": "5ec2a33e558aa11d5f1e2290",
+                "email": "tdewar2@comcast.net",
+                "status": true
+            }
+        ],
+        "firstName": "Tricia"
+    },
+    {
+        "_id": "5ec2a346558aa11d5f1e2293",
+        "companyName": "yota yummy llc  d/b/a Yogurtown",
+        "name": "sheryl grupenhoff",
+        "email": [
+            {
+                "_id": "5ec2a346558aa11d5f1e2294",
+                "email": "sherylgrupenhoff@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "sheryl"
+    },
+    {
+        "_id": "5ec2a349558aa11d5f1e2295",
+        "companyName": "PandaBean Boutique",
+        "name": "ROsalina Hizon",
+        "email": [
+            {
+                "_id": "5ec2a349558aa11d5f1e2296",
+                "email": "kimikohizon@pandabeanboutique.com",
+                "status": true
+            }
+        ],
+        "firstName": "ROsalina"
+    },
+    {
+        "_id": "5ec2a34c558aa11d5f1e2297",
+        "companyName": "Soul Inspired Moments",
+        "name": "Laura Clark",
+        "email": [
+            {
+                "_id": "5ec2a34c558aa11d5f1e2298",
+                "email": "soulinspiredmoments@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Laura"
+    },
+    {
+        "_id": "5ec2a34f558aa11d5f1e2299",
+        "companyName": "Qeshet Capital Investments, LLC",
+        "name": "Elizabeth Bothi",
+        "email": [
+            {
+                "_id": "5ec2a34f558aa11d5f1e229a",
+                "email": "Qeshetcapital@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Elizabeth"
+    },
+    {
+        "_id": "5ec2a351558aa11d5f1e229b",
+        "companyName": "Classic Air of Central Florida, Inc",
+        "name": "maria vega",
+        "email": [
+            {
+                "_id": "5ec2a351558aa11d5f1e229c",
+                "email": "mevega19@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "maria"
+    },
+    {
+        "_id": "5ec2a354558aa11d5f1e229f",
+        "companyName": "Velvet Noir Studios",
+        "name": "Tammy Doyle",
+        "email": [
+            {
+                "_id": "5ec2a354558aa11d5f1e22a0",
+                "email": "tammy@velvetnoirstudios.com",
+                "status": true
+            }
+        ],
+        "firstName": "Tammy"
+    },
+    {
+        "_id": "5ec2a35c558aa11d5f1e22a3",
+        "companyName": "The Picnic Box",
+        "name": "Sierra Gauthe",
+        "email": [
+            {
+                "_id": "5ec2a35c558aa11d5f1e22a4",
+                "email": "sierrarosie9@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Sierra"
+    },
+    {
+        "_id": "5ec2a35e558aa11d5f1e22a5",
+        "companyName": "Lex and Broome",
+        "name": "Donna Huffman",
+        "email": [
+            {
+                "_id": "5ec2a35e558aa11d5f1e22a6",
+                "email": "DepDawg73@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Donna"
+    },
+    {
+        "_id": "5ec2a36d558aa11d5f1e22ab",
+        "companyName": "Jack Sprat Boy's Clothing",
+        "name": "Kristina Virtue",
+        "email": [
+            {
+                "_id": "5ec2a36d558aa11d5f1e22ac",
+                "email": "kristina@jackspratboys.com",
+                "status": true
+            }
+        ],
+        "firstName": "Kristina"
+    },
+    {
+        "_id": "5ec2a36f558aa11d5f1e22af",
+        "companyName": "KiO Storage LLC",
+        "name": "Constance Artigues",
+        "email": [
+            {
+                "_id": "5ec2a36f558aa11d5f1e22b0",
+                "email": "KioStorageSEO@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Constance"
+    },
+    {
+        "_id": "5ec2a37a558aa11d5f1e22b3",
+        "companyName": "Organize Dat LLC",
+        "name": "Melissa Groetsch",
+        "email": [
+            {
+                "_id": "5ec2a37a558aa11d5f1e22b4",
+                "email": "Melissa@organizedat.com",
+                "status": true
+            }
+        ],
+        "firstName": "Melissa"
+    },
+    {
+        "_id": "5ec2a382558aa11d5f1e22b7",
+        "companyName": "Immortal Casket Company",
+        "name": "Julie O'Kelly",
+        "email": [
+            {
+                "_id": "5ec2a382558aa11d5f1e22b8",
+                "email": "Immortalcasketco@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Julie"
+    },
+    {
+        "_id": "5ec2a384558aa11d5f1e22b9",
+        "companyName": "Elite Business Resources",
+        "name": "Krystal Yates",
+        "email": [
+            {
+                "_id": "5ec2a384558aa11d5f1e22ba",
+                "email": "krys1216@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Krystal"
+    },
+    {
+        "_id": "5ec2a38c558aa11d5f1e22bf",
+        "companyName": "The Rockin' SF Ranch & Transportation",
+        "name": "STEPHENIE MONTANYE",
+        "email": [
+            {
+                "_id": "5ec2a38c558aa11d5f1e22c0",
+                "email": "therockinsfranch@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "STEPHENIE"
+    },
+    {
+        "_id": "5ec2a38e558aa11d5f1e22c1",
+        "companyName": "Whispers Planning and Events, LLC",
+        "name": "Phyderica Holt",
+        "email": [
+            {
+                "_id": "5ec2a38e558aa11d5f1e22c2",
+                "email": "whispersplanningandevents@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Phyderica"
+    },
+    {
+        "_id": "5ec2a390558aa11d5f1e22c3",
+        "companyName": "Soaring Souls Studios",
+        "name": "Tykiecia Wilson",
+        "email": [
+            {
+                "_id": "5ec2a390558aa11d5f1e22c4",
+                "email": "soaringsoulsstudios@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Tykiecia"
+    },
+    {
+        "_id": "5ec2a392558aa11d5f1e22c5",
+        "companyName": "Signed-N-Sealed",
+        "name": "Juliana Brickley",
+        "email": [
+            {
+                "_id": "5ec2a392558aa11d5f1e22c6",
+                "email": "JLB@signednsealed.com",
+                "status": true
+            }
+        ],
+        "firstName": "Juliana"
+    },
+    {
+        "_id": "5ec2a394558aa11d5f1e22c7",
+        "companyName": "PRECISION CARE CHIROPRACTIC",
+        "name": "Betty Bampoe",
+        "email": [
+            {
+                "_id": "5ec2a394558aa11d5f1e22c8",
+                "email": "bbampoe@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Betty"
+    },
+    {
+        "_id": "5ec2a395558aa11d5f1e22c9",
+        "companyName": "YourGymGF Inc.",
+        "name": "Sarah Clifford",
+        "email": [
+            {
+                "_id": "5ec2a395558aa11d5f1e22ca",
+                "email": "yourgymgf@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Sarah"
+    },
+    {
+        "_id": "5ec2a398558aa11d5f1e22cb",
+        "companyName": "Pro-Home Renovators, Inc.",
+        "name": "Jacquelyn Vileikis",
+        "email": [
+            {
+                "_id": "5ec2a398558aa11d5f1e22cc",
+                "email": "jackie@prohomerenovators.com",
+                "status": true
+            }
+        ],
+        "firstName": "Jacquelyn"
+    },
+    {
+        "_id": "5ec2a39a558aa11d5f1e22cd",
+        "companyName": "Crunch Culture",
+        "name": "rachel kier",
+        "email": [
+            {
+                "_id": "5ec2a39a558aa11d5f1e22ce",
+                "email": "rekier712@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "rachel"
+    },
+    {
+        "_id": "5ec2a3a1558aa11d5f1e22d1",
+        "companyName": "Heritage Recovery & Towing",
+        "name": "Almina Anderson",
+        "email": [
+            {
+                "_id": "5ec2a3a1558aa11d5f1e22d2",
+                "email": "allieanderson1975@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Almina"
+    },
+    {
+        "_id": "5ec2a3a3558aa11d5f1e22d3",
+        "companyName": "Culture Club LLC",
+        "name": "Sheridan LaVigne",
+        "email": [
+            {
+                "_id": "5ec2a3a3558aa11d5f1e22d4",
+                "email": "sboberri@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Sheridan"
+    },
+    {
+        "_id": "5ec2a3a4558aa11d5f1e22d5",
+        "companyName": "Freedom Concrete, LLC",
+        "name": "Machelle Day",
+        "email": [
+            {
+                "_id": "5ec2a3a4558aa11d5f1e22d6",
+                "email": "freedomconcreteidaho@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Machelle"
+    },
+    {
+        "_id": "5ec2a3a6558aa11d5f1e22d7",
+        "companyName": "Glow it up Art",
+        "name": "alliy machit",
+        "email": [
+            {
+                "_id": "5ec2a3a6558aa11d5f1e22d8",
+                "email": "Glowitupart@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "alliy"
+    },
+    {
+        "_id": "5ec2a3bb558aa11d5f1e22df",
+        "companyName": "Lite Weights for Women",
+        "name": "Mary Simonson",
+        "email": [
+            {
+                "_id": "5ec2a3bb558aa11d5f1e22e0",
+                "email": "cranberrymary45@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Mary"
+    },
+    {
+        "_id": "5ec2a3bc558aa11d5f1e22e1",
+        "companyName": "Spring Clean Service LLC",
+        "name": "Sunny Sparks Martinez",
+        "email": [
+            {
+                "_id": "5ec2a3bc558aa11d5f1e22e2",
+                "email": "springcleanservice1@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Sunny"
+    },
+    {
+        "_id": "5ec2a3be558aa11d5f1e22e3",
+        "companyName": "Britelites LLC",
+        "name": "Sara Anderson",
+        "email": [
+            {
+                "_id": "5ec2a3be558aa11d5f1e22e4",
+                "email": "britelitescolor@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Sara"
+    },
+    {
+        "_id": "5ec2a3db558aa11d5f1e22f3",
+        "companyName": "American Heroes Supply",
+        "name": "Michelle Miller",
+        "email": [
+            {
+                "_id": "5ec2a3db558aa11d5f1e22f4",
+                "email": "info@heroessupply.com",
+                "status": true
+            }
+        ],
+        "firstName": "Michelle"
+    },
+    {
+        "_id": "5ec2a3de558aa11d5f1e22f5",
+        "companyName": "Lone Tree Legal Nurse Consulting, LLC",
+        "name": "Nancy Akers",
+        "email": [
+            {
+                "_id": "5ec2a3de558aa11d5f1e22f6",
+                "email": "NancyA.LoneTreeLNC@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Nancy"
+    },
+    {
+        "_id": "5ec2a3ee558aa11d5f1e22fb",
+        "companyName": "Acadia Yurts",
+        "name": "karen roper",
+        "email": [
+            {
+                "_id": "5ec2a3ee558aa11d5f1e22fc",
+                "email": "roperkarene@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "karen"
+    },
+    {
+        "_id": "5ec2a40d558aa11d5f1e2305",
+        "companyName": "The Brick",
+        "name": "Tavia Harrison",
+        "email": [
+            {
+                "_id": "5ec2a40d558aa11d5f1e2306",
+                "email": "taviaharrison@thebrickssi.com",
+                "status": true
+            }
+        ],
+        "firstName": "Tavia"
+    },
+    {
+        "_id": "5ec2a419558aa11d5f1e2309",
+        "companyName": "Premier Princess Parties",
+        "name": "Diane Thomas",
+        "email": [
+            {
+                "_id": "5ec2a419558aa11d5f1e230a",
+                "email": "diane@premierprincessparties.com",
+                "status": true
+            }
+        ],
+        "firstName": "Diane"
+    },
+    {
+        "_id": "5ec2a41a558aa11d5f1e230b",
+        "companyName": "Natural Living Mamma LLC DBA Natural Herbal Living",
+        "name": "Amanda Klenner",
+        "email": [
+            {
+                "_id": "5ec2a41a558aa11d5f1e230c",
+                "email": "naturallivingmamma@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Amanda"
+    },
+    {
+        "_id": "5ec2a42d558aa11d5f1e2315",
+        "companyName": "Space2Thrive TM",
+        "name": "Helena Liedtke",
+        "email": [
+            {
+                "_id": "5ec2a42d558aa11d5f1e2316",
+                "email": "helali@gmx.net",
+                "status": true
+            }
+        ],
+        "firstName": "Helena"
+    },
+    {
+        "_id": "5ec2a430558aa11d5f1e2317",
+        "companyName": "Hair Creations",
+        "name": "Jaysie Walts",
+        "email": [
+            {
+                "_id": "5ec2a430558aa11d5f1e2318",
+                "email": "jaysie@haircreationssalon.com",
+                "status": true
+            }
+        ],
+        "firstName": "Jaysie"
+    },
+    {
+        "_id": "5ec2a433558aa11d5f1e2319",
+        "companyName": "Absolute Mechanical LLC",
+        "name": "Robin Ricci",
+        "email": [
+            {
+                "_id": "5ec2a433558aa11d5f1e231a",
+                "email": "absolutemech@comcast.net",
+                "status": true
+            }
+        ],
+        "firstName": "Robin"
+    },
+    {
+        "_id": "5ec2a436558aa11d5f1e231b",
+        "companyName": "Nevill's Auto Salvage",
+        "name": "Becky Nevill",
+        "email": [
+            {
+                "_id": "5ec2a436558aa11d5f1e231c",
+                "email": "beckydee@sbcglobal.net",
+                "status": true
+            }
+        ],
+        "firstName": "Becky"
+    },
+    {
+        "_id": "5ec2a438558aa11d5f1e231d",
+        "companyName": "Sami's",
+        "name": "Jou-jou Saba",
+        "email": [
+            {
+                "_id": "5ec2a438558aa11d5f1e231e",
+                "email": "thejouj@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Jou-jou"
+    },
+    {
+        "_id": "5ec2a439558aa11d5f1e231f",
+        "companyName": "TANYA SHELBY AUTO SALES LLC DBA PAYLESS CAR SALES",
+        "name": "Tanya Shelby",
+        "email": [
+            {
+                "_id": "5ec2a439558aa11d5f1e2320",
+                "email": "Tanyashelbyautosalesllc@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Tanya"
+    },
+    {
+        "_id": "5ec2a441558aa11d5f1e2323",
+        "companyName": "Simply Social Consulting",
+        "name": "Crissy Hahn",
+        "email": [
+            {
+                "_id": "5ec2a441558aa11d5f1e2324",
+                "email": "crissyhahn@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Crissy"
+    },
+    {
+        "_id": "5ec2a442558aa11d5f1e2325",
+        "companyName": "Snarky and Spirited LLC",
+        "name": "Anne Hay",
+        "email": [
+            {
+                "_id": "5ec2a442558aa11d5f1e2326",
+                "email": "snarkywineninja@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Anne"
+    },
+    {
+        "_id": "5ec2a449558aa11d5f1e232b",
+        "companyName": "Whitehall Child Care Center",
+        "name": "Stacey Lisowski",
+        "email": [
+            {
+                "_id": "5ec2a449558aa11d5f1e232c",
+                "email": "whitehallchildcare@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Stacey"
+    },
+    {
+        "_id": "5ec2a44b558aa11d5f1e232d",
+        "companyName": "E. B. Howard Consulting",
+        "name": "Christine Howard",
+        "email": [
+            {
+                "_id": "5ec2a44b558aa11d5f1e232e",
+                "email": "christine@ebhoward.com",
+                "status": true
+            }
+        ],
+        "firstName": "Christine"
+    },
+    {
+        "_id": "5ec2a44d558aa11d5f1e2331",
+        "companyName": "Women4WomenClub.Guru",
+        "name": "Donna Slater",
+        "email": [
+            {
+                "_id": "5ec2a44d558aa11d5f1e2332",
+                "email": "women4womenclub@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Donna"
+    },
+    {
+        "_id": "5ec2a45c558aa11d5f1e2339",
+        "companyName": "Pamela Heugatter Management",
+        "name": "Pamela Heugatter",
+        "email": [
+            {
+                "_id": "5ec2a45c558aa11d5f1e233a",
+                "email": "Pamela.Heugatter@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Pamela"
+    },
+    {
+        "_id": "5ec2a45d558aa11d5f1e233d",
+        "companyName": "YummyTecture",
+        "name": "Titilayo Adelayo",
+        "email": [
+            {
+                "_id": "5ec2a45d558aa11d5f1e233e",
+                "email": "Yummytecture@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Titilayo"
+    },
+    {
+        "_id": "5ec2a45e558aa11d5f1e233f",
+        "companyName": "Teri Hesson-Farmers Insurance Agent",
+        "name": "Teri Hesson",
+        "email": [
+            {
+                "_id": "5ec2a45e558aa11d5f1e2340",
+                "email": "th36song@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Teri"
+    },
+    {
+        "_id": "5ec2a464558aa11d5f1e2345",
+        "companyName": "ART 4 ALL PEOPLE",
+        "name": "LISA RASMUSSEN",
+        "email": [
+            {
+                "_id": "5ec2a464558aa11d5f1e2346",
+                "email": "art4allpeople@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "LISA"
+    },
+    {
+        "_id": "5ec2a465558aa11d5f1e2347",
+        "companyName": "Tundra Athletics School of Wrestling",
+        "name": "Karla Jones",
+        "email": [
+            {
+                "_id": "5ec2a465558aa11d5f1e2348",
+                "email": "karla.jones1025@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Karla"
+    },
+    {
+        "_id": "5ec2a466558aa11d5f1e2349",
+        "companyName": "Creative Arts Youth Enrichment Corporation",
+        "name": "Jessica Moore",
+        "email": [
+            {
+                "_id": "5ec2a466558aa11d5f1e234a",
+                "email": "jessica@cayec.com",
+                "status": true
+            }
+        ],
+        "firstName": "Jessica"
+    },
+    {
+        "_id": "5ec2a46f558aa11d5f1e234f",
+        "companyName": "ART 4 ALL PEOPLE",
+        "name": "LISA RASMUSSEN",
+        "email": [
+            {
+                "_id": "5ec2a46f558aa11d5f1e2350",
+                "email": "art4allpeople@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "LISA"
+    },
+    {
+        "_id": "5ec2a470558aa11d5f1e2351",
+        "companyName": "Tundra Athletics School of Wrestling",
+        "name": "Karla Jones",
+        "email": [
+            {
+                "_id": "5ec2a470558aa11d5f1e2352",
+                "email": "karla.jones1025@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Karla"
+    },
+    {
+        "_id": "5ec2a470558aa11d5f1e2353",
+        "companyName": "Creative Arts Youth Enrichment Corporation",
+        "name": "Jessica Moore",
+        "email": [
+            {
+                "_id": "5ec2a470558aa11d5f1e2354",
+                "email": "jessica@cayec.com",
+                "status": true
+            }
+        ],
+        "firstName": "Jessica"
+    },
+    {
+        "_id": "5ec2a481558aa11d5f1e2359",
+        "companyName": "Old Soul Furniture Studio",
+        "name": "Erin Mihelic",
+        "email": [
+            {
+                "_id": "5ec2a481558aa11d5f1e235a",
+                "email": "oldsoulfurniturestudio@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Erin"
+    },
+    {
+        "_id": "5ec2a483558aa11d5f1e235b",
+        "companyName": "True Path Wellness",
+        "name": "Catherine King",
+        "email": [
+            {
+                "_id": "5ec2a483558aa11d5f1e235c",
+                "email": "cathie.king@comcast.net",
+                "status": true
+            }
+        ],
+        "firstName": "Catherine"
+    },
+    {
+        "_id": "5ec2a48b558aa11d5f1e235f",
+        "companyName": "Triflare",
+        "name": "Andrea Robertson",
+        "email": [
+            {
+                "_id": "5ec2a48b558aa11d5f1e2360",
+                "email": "andrea@triflare.com",
+                "status": true
+            }
+        ],
+        "firstName": "Andrea"
+    },
+    {
+        "_id": "5ec2a495558aa11d5f1e2363",
+        "companyName": "Feel Great Health & Fitness",
+        "name": "Sarah Andrews",
+        "email": [
+            {
+                "_id": "5ec2a495558aa11d5f1e2364",
+                "email": "info@fghealthandfitness.com",
+                "status": true
+            }
+        ],
+        "firstName": "Sarah"
+    },
+    {
+        "_id": "5ec2a496558aa11d5f1e2365",
+        "companyName": "girl vs. alligator productions",
+        "name": "shantel lindberg",
+        "email": [
+            {
+                "_id": "5ec2a496558aa11d5f1e2366",
+                "email": "shantellucy@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "shantel"
+    },
+    {
+        "_id": "5ec2a498558aa11d5f1e2367",
+        "companyName": "NE FL Property & Tree Services, LLC",
+        "name": "Robin Williams",
+        "email": [
+            {
+                "_id": "5ec2a498558aa11d5f1e2368",
+                "email": "nefltree@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Robin"
+    },
+    {
+        "_id": "5ec2a499558aa11d5f1e2369",
+        "companyName": "Lady Be Fit Express",
+        "name": "Dale Heffer",
+        "email": [
+            {
+                "_id": "5ec2a499558aa11d5f1e236a",
+                "email": "daleheffer@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Dale"
+    },
+    {
+        "_id": "5ec2a49b558aa11d5f1e236b",
+        "companyName": "Taos Clay Studio",
+        "name": "brandi jessup",
+        "email": [
+            {
+                "_id": "5ec2a49b558aa11d5f1e236c",
+                "email": "taosclay@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "brandi"
+    },
+    {
+        "_id": "5ec2a49d558aa11d5f1e236d",
+        "companyName": "Swank Baby Boutique",
+        "name": "Jamie de Grasse",
+        "email": [
+            {
+                "_id": "5ec2a49d558aa11d5f1e236e",
+                "email": "jamie1270@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Jamie"
+    },
+    {
+        "_id": "5ec2a4a4558aa11d5f1e2373",
+        "companyName": "ATS Advanced Technology Systems, LLC",
+        "name": "Jessica Chandler",
+        "email": [
+            {
+                "_id": "5ec2a4a4558aa11d5f1e2374",
+                "email": "atstechnology@windstream.net",
+                "status": true
+            }
+        ],
+        "firstName": "Jessica"
+    },
+    {
+        "_id": "5ec2a4ab558aa11d5f1e2377",
+        "companyName": "Coronado Soap",
+        "name": "Liz Serrano",
+        "email": [
+            {
+                "_id": "5ec2a4ab558aa11d5f1e2378",
+                "email": "Lizbaldi@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Liz"
+    },
+    {
+        "_id": "5ec2a4ad558aa11d5f1e2379",
+        "companyName": "der Punkt Creative Studio",
+        "name": "Alicia Sauer",
+        "email": [
+            {
+                "_id": "5ec2a4ad558aa11d5f1e237a",
+                "email": "alicia@derpunktstudio.com",
+                "status": true
+            }
+        ],
+        "firstName": "Alicia"
+    },
+    {
+        "_id": "5ec2a4af558aa11d5f1e237b",
+        "companyName": "AA Western Wear",
+        "name": "lori may",
+        "email": [
+            {
+                "_id": "5ec2a4af558aa11d5f1e237c",
+                "email": "aawesternwear@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "lori"
+    },
+    {
+        "_id": "5ec2a4bc558aa11d5f1e2381",
+        "companyName": "SHOEFREAK LLC",
+        "name": "KENYADA JOHNSON",
+        "email": [
+            {
+                "_id": "5ec2a4bc558aa11d5f1e2382",
+                "email": "KEJOHNSON487@GMAIL.COM",
+                "status": true
+            }
+        ],
+        "firstName": "KENYADA"
+    },
+    {
+        "_id": "5ec2a4c4558aa11d5f1e2385",
+        "companyName": "VIP Charlotte",
+        "name": "Kristin Maland",
+        "email": [
+            {
+                "_id": "5ec2a4c4558aa11d5f1e2386",
+                "email": "Kristinmaland@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Kristin"
+    },
+    {
+        "_id": "5ec2a4c5558aa11d5f1e2387",
+        "companyName": "Electric Beach Tanning",
+        "name": "Chrystal LaPointe",
+        "email": [
+            {
+                "_id": "5ec2a4c5558aa11d5f1e2388",
+                "email": "chrystal919@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Chrystal"
+    },
+    {
+        "_id": "5ec2a4d4558aa11d5f1e238d",
+        "companyName": "Dominate Designs",
+        "name": "Sharysse Boer",
+        "email": [
+            {
+                "_id": "5ec2a4d4558aa11d5f1e238e",
+                "email": "sharysse@dominatedesigns.com",
+                "status": true
+            }
+        ],
+        "firstName": "Sharysse"
+    },
+    {
+        "_id": "5ec2a4dd558aa11d5f1e2391",
+        "companyName": "Thompson Bookkeeping",
+        "name": "Shannon Thompson",
+        "email": [
+            {
+                "_id": "5ec2a4dd558aa11d5f1e2392",
+                "email": "sjthompson8@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Shannon"
+    },
+    {
+        "_id": "5ec2a4e5558aa11d5f1e2395",
+        "companyName": "LM Global Enterprize",
+        "name": "Linda Mitchell",
+        "email": [
+            {
+                "_id": "5ec2a4e5558aa11d5f1e2396",
+                "email": "lindamitchell42101@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Linda"
+    },
+    {
+        "_id": "5ec2a4f2558aa11d5f1e239b",
+        "companyName": "Imprinted Designs",
+        "name": "Jennifer Dupriest",
+        "email": [
+            {
+                "_id": "5ec2a4f2558aa11d5f1e239c",
+                "email": "jenniferdupriest@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Jennifer"
+    },
+    {
+        "_id": "5ec2a4f4558aa11d5f1e239d",
+        "companyName": "Leslie's Loops Yarn Shop",
+        "name": "Leslie Ginyard",
+        "email": [
+            {
+                "_id": "5ec2a4f4558aa11d5f1e239e",
+                "email": "lesng1129@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Leslie"
+    },
+    {
+        "_id": "5ec2a4fc558aa11d5f1e23a1",
+        "companyName": "Serenity Enchancement Center LLC",
+        "name": "Daphne Young",
+        "email": [
+            {
+                "_id": "5ec2a4fc558aa11d5f1e23a2",
+                "email": "serenityenhancementcenter@mail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Daphne"
+    },
+    {
+        "_id": "5ec2a503558aa11d5f1e23a7",
+        "companyName": "Delish Bistro",
+        "name": "Carol Hull",
+        "email": [
+            {
+                "_id": "5ec2a503558aa11d5f1e23a8",
+                "email": "chull@delishbistro.com",
+                "status": true
+            }
+        ],
+        "firstName": "Carol"
+    },
+    {
+        "_id": "5ec2a519558aa11d5f1e23af",
+        "companyName": "Get Connected",
+        "name": "Erin Moitoza-long",
+        "email": [
+            {
+                "_id": "5ec2a519558aa11d5f1e23b0",
+                "email": "Getconnected.assistant@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Erin"
+    },
+    {
+        "_id": "5ec2a51b558aa11d5f1e23b3",
+        "companyName": "Pine Hills Children Outreach Center",
+        "name": "kedar nolet",
+        "email": [
+            {
+                "_id": "5ec2a51b558aa11d5f1e23b4",
+                "email": "pinehillschildrenoc@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "kedar"
+    },
+    {
+        "_id": "5ec2a51c558aa11d5f1e23b5",
+        "companyName": "Saige Realty Group, LLC",
+        "name": "Bonita Telford",
+        "email": [
+            {
+                "_id": "5ec2a51c558aa11d5f1e23b6",
+                "email": "bonitat1@saigerealtygroup.com",
+                "status": true
+            }
+        ],
+        "firstName": "Bonita"
+    },
+    {
+        "_id": "5ec2a52d558aa11d5f1e23bb",
+        "companyName": "Wata Gashi Corporation",
+        "name": "Avari Lloyd",
+        "email": [
+            {
+                "_id": "5ec2a52d558aa11d5f1e23bc",
+                "email": "lamodeshoppe@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Avari"
+    },
+    {
+        "_id": "5ec2a52f558aa11d5f1e23bd",
+        "companyName": "1st Financial Business Solutions",
+        "name": "J Young",
+        "email": [
+            {
+                "_id": "5ec2a52f558aa11d5f1e23be",
+                "email": "1stfinancialbusinesssolutions@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "J"
+    },
+    {
+        "_id": "5ec2a530558aa11d5f1e23bf",
+        "companyName": "Emma Solution's",
+        "name": "Sheryl Pizarro",
+        "email": [
+            {
+                "_id": "5ec2a530558aa11d5f1e23c0",
+                "email": "SherylPizarro@DYHStaffing.com",
+                "status": true
+            }
+        ],
+        "firstName": "Sheryl"
+    },
+    {
+        "_id": "5ec2a532558aa11d5f1e23c1",
+        "companyName": "Maverick Web & Mobility Solutions",
+        "name": "Jillian Jaurigue",
+        "email": [
+            {
+                "_id": "5ec2a532558aa11d5f1e23c2",
+                "email": "jjaurigue@maverickwebmobility.com",
+                "status": true
+            }
+        ],
+        "firstName": "Jillian"
+    },
+    {
+        "_id": "5ec2a533558aa11d5f1e23c3",
+        "companyName": "Hart's Equine Transport LLC",
+        "name": "Elizabeth Ralston",
+        "email": [
+            {
+                "_id": "5ec2a533558aa11d5f1e23c4",
+                "email": "Hartsequinetransport@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Elizabeth"
+    },
+    {
+        "_id": "5ec2a535558aa11d5f1e23c5",
+        "companyName": "Exquisite Baskets R Us",
+        "name": "sarah monsegur",
+        "email": [
+            {
+                "_id": "5ec2a535558aa11d5f1e23c6",
+                "email": "exquisitebasketsrus@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "sarah"
+    },
+    {
+        "_id": "5ec2a537558aa11d5f1e23c7",
+        "companyName": "ProgressivEducation",
+        "name": "Corrine Turner-Jacob",
+        "email": [
+            {
+                "_id": "5ec2a537558aa11d5f1e23c8",
+                "email": "cmj14er@gmail.com",
+                "status": true
+            }
+        ],
+        "firstName": "Corrine"
+    },
+    {
+        "_id": "5ec2a538558aa11d5f1e23c9",
+        "companyName": "Coeur Sports",
+        "name": "Reginald Holden",
+        "email": [
+            {
+                "_id": "5ec2a538558aa11d5f1e23ca",
+                "email": "Reg@coeursports.com",
+                "status": true
+            }
+        ],
+        "firstName": "Reginald"
+    }
+]

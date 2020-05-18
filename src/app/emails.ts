@@ -19,7 +19,7 @@ export const emails = [
   //   "OrganizatinName": "Social and Environmental Entrepreneurs",
   //   "proposalName": "Bringing LA's Green New Deal to Our Neighborhoods",
   //   link: 'www.youtube.com',
-  //   companyName: "Burk's Custom Painting",
+  //   companyName: "Top Gun Tank Solutions",
   //   "email": [
   //     {
   //       email: 'jaysojitra13@gmail.com',
@@ -31,10 +31,10 @@ export const emails = [
     firstName: 'Sumi',
     // companyName: 'Company Name',
     // BNIName: 'BNI NAME',
-    "OrganizatinName": "Social and Environmental Entrepreneurs",
-    "proposalName": "Bringing LA's Green New Deal to Our Neighborhoods",
+    // "OrganizatinName": "Social and Environmental Entrepreneurs",
+    // "proposalName": "Bringing LA's Green New Deal to Our Neighborhoods",
     link: 'www.youtube.com',
-    companyName: "Burk's Custom Painting",
+    companyName: "Top Gun Tank Solutions",
     email: [
       {
         email: 'sumi@codemarket.io',

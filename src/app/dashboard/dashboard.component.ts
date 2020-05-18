@@ -28,37 +28,50 @@ export class DashboardComponent implements OnInit {
     {
       name: 'firstName',
       label: 'Enter your First Name*',
+      placeholder: 'Enter your First Name*',
       type: 'text',
       required: true,
     },
     {
       name: 'lastName',
       label: 'Enter your Last Name',
+      placeholder: 'Enter your Last Name',
       type: 'text',
       required: false,
     },
     {
       name: 'email',
       label: 'Enter your Email*',
+      placeholder: 'Enter your Email*',
       type: 'email',
       required: false,
     },
     {
       name: 'phone',
       label: 'Enter your Phone Number(10 Digits)*',
+      placeholder: 'Enter your Phone Number(10 Digits)*',
       type: 'number',
       required: true,
     },
     {
       name: 'businessName',
       label: 'Enter your Business Name*',
+      placeholder: 'Enter your Business Name*',
       type: 'text',
       required: true,
     },
     {
       name: 'address',
       label: 'Enter your Address*',
+      placeholder: 'Enter your Address*',
       type: 'text',
+      required: true,
+    },
+    {
+      name: 'heplRequired',
+      label: 'Did you lose your job?',
+      placeholder: '',
+      type: 'textarea',
       required: true,
     }
   ];
@@ -93,7 +106,8 @@ export class DashboardComponent implements OnInit {
       email: new FormControl('', [Validators.email, Validators.required]),
       phone: new FormControl('', [Validators.minLength(10), Validators.maxLength(10), Validators.required]),
       businessName: new FormControl('', Validators.required),
-      address: new FormControl('', Validators.required)
+      address: new FormControl('', Validators.required),
+      helpRequired: new FormControl('', Validators.required)
     });
   }
 
@@ -116,6 +130,10 @@ export class DashboardComponent implements OnInit {
         Swal.fire(`${d.formname} has been Added Successfully`, '', 'success').then(() => {
           this.questionnaire.reset();
           stepper.reset();
+          if (!this.authService.loggedInUser) {
+            this.authService.openAuthenticationPopover.next(true);
+            return;
+          }
           // this.formBuilderService.redirectToBack(d._id);
         });
       }

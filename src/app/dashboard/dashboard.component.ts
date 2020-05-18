@@ -127,7 +127,7 @@ export class DashboardComponent implements OnInit {
     }
     this.formBuilderService.addformData(body).subscribe((d: any) => {
       if (d) {
-        Swal.fire(`${d.formname} has been Added Successfully`, '', 'success').then(() => {
+        Swal.fire(`Thank You!`, '', 'success').then(() => {
           this.questionnaire.reset();
           stepper.reset();
           if (!this.authService.loggedInUser) {

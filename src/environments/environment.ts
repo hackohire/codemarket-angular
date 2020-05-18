@@ -9,7 +9,7 @@ export const environment = {
   COGNITO_AUTH_DOMAIN: 'https://platform.auth.us-east-1.amazoncognito.com',
   serverless_url: 'http://localhost:3200/dev/',
   graphql_url: 'http://localhost:3200/dev/graphql',
-  s3FilesBucketURL: 'https://jobsfiles.s3.amazonaws.com/public/',
+  s3FilesBucketURL: 'https://bankfiles.s3.amazonaws.com/public/',
   stripe_public_key: 'pk_test_ighmL2U9UqAx0O4b8dKkSvdq',
   webSocketURL: 'ws://localhost:3001',
   planDetails: plans.dev,

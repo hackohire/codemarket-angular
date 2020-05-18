@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from '../core/store/state/app.state';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Product } from '../shared/models/product.model';
 import { MatTableDataSource } from '@angular/material/table';
 import { HelpQuery } from '../shared/models/help-query.model';
@@ -12,6 +12,9 @@ import { AuthService } from '../core/services/auth.service';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { ActivatedRoute } from '@angular/router';
 import { MembershipService } from '../membership/membership.service';
+import { FormGroup, Validators, FormControl } from '@angular/forms';
+import Swal from 'sweetalert2';
+import { FormBuilderService } from '../form-builder/form-builder.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,6 +22,59 @@ import { MembershipService } from '../membership/membership.service';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+
+  questionnaire: FormGroup;
+  fields = [
+    {
+      name: 'firstName',
+      label: 'Enter your First Name*',
+      placeholder: 'Enter your First Name*',
+      type: 'text',
+      required: true,
+    },
+    {
+      name: 'lastName',
+      label: 'Enter your Last Name',
+      placeholder: 'Enter your Last Name',
+      type: 'text',
+      required: false,
+    },
+    {
+      name: 'email',
+      label: 'Enter your Email*',
+      placeholder: 'Enter your Email*',
+      type: 'email',
+      required: false,
+    },
+    {
+      name: 'phone',
+      label: 'Enter your Phone Number(10 Digits)*',
+      placeholder: 'Enter your Phone Number(10 Digits)*',
+      type: 'number',
+      required: true,
+    },
+    {
+      name: 'businessName',
+      label: 'Enter your Business Name*',
+      placeholder: 'Enter your Business Name*',
+      type: 'text',
+      required: true,
+    },
+    {
+      name: 'address',
+      label: 'Enter your Address*',
+      placeholder: 'Enter your Address*',
+      type: 'text',
+      required: true,
+    },
+    {
+      name: 'heplRequired',
+      label: 'Did you lose your job?',
+      placeholder: '',
+      type: 'textarea',
+      required: true,
+    }
+  ];
 
   @ViewChild('successInvitationAccept', { static: false }) successInvitationAccept: SwalComponent;
   productsList$: Observable<Product[]>;
@@ -29,34 +85,34 @@ export class DashboardComponent implements OnInit {
 
   displayedColumnsForHelpRequest: string[] = ['number', 'name', 'price', 'createdBy', 'createdAt'];
   dataSource = new MatTableDataSource();
-  @ViewChild(MatSort, {static: false}) sort: MatSort;
+  @ViewChild(MatSort, { static: false }) sort: MatSort;
 
   constructor(
     private userService: UserService,
     public postService: PostService,
     public authService: AuthService,
+    private formBuilderService: FormBuilderService,
     private membershipService: MembershipService,
-    private activatedRoute: ActivatedRoute
-  ) { }
+    private activatedRoute: ActivatedRoute,
+    private el: ElementRef,
+  ) {
+  }
 
   ngOnInit() {
-    console.log(this.activatedRoute.snapshot.queryParams);
 
-    const params = this.activatedRoute.snapshot.queryParams;
+    this.questionnaire = new FormGroup({
+      firstName: new FormControl('', Validators.required),
+      lastName: new FormControl(''),
+      email: new FormControl('', [Validators.email, Validators.required]),
+      phone: new FormControl('', [Validators.minLength(10), Validators.maxLength(10), Validators.required]),
+      businessName: new FormControl('', Validators.required),
+      address: new FormControl('', Validators.required),
+      helpRequired: new FormControl('', Validators.required)
+    });
+  }
 
-    if (params && params.subscriptionId && params.email) {
-      this.membershipService.acceptInvitation(params.subscriptionId, params.email).subscribe({
-        next: (sub) => {
-          if (sub && sub.subscriptionUsers && sub.subscriptionUsers.length) {
-            this.successInvitationAccept.show();
-          }
-        }
-      });
-    }
-    // this.store.dispatch(GetAllProducts());
-    // this.productsList$ = this.store.select(selectAllProductsList);
-    // this.helpRequestList$ = this.postService.getPostsByType(PostType.HelpRequest);
-    // this.usersListAndTheirBugFixes$ = this.userService.getUserListWithBugFixesCount();
+  convertObjectToArray(d) {
+    return Object.keys(d);
   }
 
   redirectToUserProfile(event) {
@@ -64,4 +120,23 @@ export class DashboardComponent implements OnInit {
     this.userService.redirectToUserProfile(event);
   }
 
+  submit(stepper) {
+    const body = {
+      formname: 'Landing Page Form',
+      formDataJson: this.questionnaire.value
+    }
+    this.formBuilderService.addformData(body).subscribe((d: any) => {
+      if (d) {
+        Swal.fire(`Thank You!`, '', 'success').then(() => {
+          this.questionnaire.reset();
+          stepper.reset();
+          if (!this.authService.loggedInUser) {
+            this.authService.openAuthenticationPopover.next(true);
+            return;
+          }
+          // this.formBuilderService.redirectToBack(d._id);
+        });
+      }
+    });
+  }
 }

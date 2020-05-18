@@ -404,7 +404,7 @@ export class MyProfileComponent implements OnInit {
 
       await Storage.vault.put(fileName, this.selectedProfilePic, {
 
-        bucket: appConstants.fileS3Bucket,
+        bucket: environment.fileS3Bucket,
         path: 'avatar',
         level: 'public',
         contentType: this.selectedProfilePic.type,
@@ -452,7 +452,7 @@ export class MyProfileComponent implements OnInit {
       const fileName = fileNameSplitArray[0] + '-' + new Date().toISOString() + '.' + fileExt;
       await Storage.vault.put(fileName, this.selectedCoverPic, {
 
-        bucket: appConstants.fileS3Bucket,
+        bucket: environment.fileS3Bucket,
         path: 'cover',
         level: 'public',
         contentType: this.selectedCoverPic.type,

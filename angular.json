@@ -88,11 +88,11 @@
                 }
               ]
             },
-            "research": {
+            "income": {
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.research.ts"
+                  "with": "src/environments/environment.income.ts"
                 }
               ],
               "optimization": true,
@@ -127,8 +127,8 @@
             "staging": {
               "browserTarget": "codemarket:build:staging"
             },
-            "research": {
-              "browserTarget": "codemarket:build:research"
+            "income": {
+              "browserTarget": "codemarket:build:income"
             }
           }
         },
@@ -182,8 +182,8 @@
             "staging": {
               "devServerTarget": "codemarket:serve:staging"
             },
-            "research": {
-              "devServerTarget": "codemarket:serve:research"
+            "income": {
+              "devServerTarget": "codemarket:serve:income"
             }
           }
         },
@@ -221,11 +221,11 @@
                 "styles": true
               }
             },
-            "research": {
+            "income": {
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.research.ts"
+                  "with": "src/environments/environment.income.ts"
                 }
               ],
               "sourceMap": false,

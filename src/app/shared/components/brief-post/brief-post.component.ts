@@ -46,7 +46,7 @@ export class BriefPostComponent implements OnInit, OnDestroy {
 
 
   deletePost(postId) {
-    this.postService.deletePost(postId).subscribe(d => {
+    this.postService.deletePost(postId, {name: this.authService.loggedInUser.name, _id: this.authService.loggedInUser.name}).subscribe(d => {
       if (d) {
         this.delete.emit(postId);
       }
@@ -61,13 +61,15 @@ export class BriefPostComponent implements OnInit, OnDestroy {
   /** Check if user is loggedin or not, if loggedin allow to comment, otherwise open the login popup UI */
   async addComment(addCommentEditor: EditorComponent) {
     if (this.authService.loggedInUser) {
-      const blocks =  await addCommentEditor.editor.save();
-      this.commentForm.get('text').setValue(blocks.blocks);
+      // const blocks =  await addCommentEditor.editor.save();
+      // this.commentForm.get('text').setValue(blocks.blocks);
       this.commentForm.addControl('createdBy', new FormControl(this.authService.loggedInUser._id));
+      this.commentForm.get('textHTML').setValue(addCommentEditor.html);
+
 
       this.subscription$.add(
         this.commentService.addComment(this.commentForm.value).subscribe((c) => {
-          addCommentEditor.editor.clear();
+          addCommentEditor.html = '';
         })
       );
     } else {
@@ -78,9 +80,10 @@ export class BriefPostComponent implements OnInit, OnDestroy {
   /** Comment form initialization for adding comment */
   initializeCommentForm(p, commentType?: string) {
     this.commentForm = new FormGroup({
-      text: new FormControl(''),
+      text: new FormControl([]),
       referenceId: new FormControl(p._id),
       type: new FormControl('post'),
+      textHTML: new FormControl('')
     });
 
   }

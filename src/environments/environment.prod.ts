@@ -1,8 +1,13 @@
 import { plans } from '../app/shared/constants/plan_details';
 
 export const environment = {
+  ckEditor: {
+    ckEditorEnvironMentId: 'ZK5UoNVFJG2R3Kh4SrIC',
+    ckEditorSecretKey: 'HP771KcTLlvStVbtvwAGz5d3LhLgDlY50uJqNQ6nkS18kVP43ZPB1zOSLseK',
+    ws: '71258.cke-cs.com/ws',
+    developmentTokenUrl: 'https://71258.cke-cs.com/token/dev/qhNbD6xUjkeVtrEc7aD2PcMhDkgmirUJHunqRWESilB0mTzZ0RHcJYk68P6D'
+  },
   production: true,
-  COGNITO_AUTH_DOMAIN: 'https://platform.auth.us-east-1.amazoncognito.com',
   serverless_url: 'https://jobsapi.codemarket.io/',
   graphql_url: 'https://jobsapi.codemarket.io/graphql',
   s3FilesBucketURL: 'https://jobsfiles.s3.amazonaws.com/public/',

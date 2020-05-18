@@ -63,8 +63,8 @@ export class PostEffects {
     @Effect()
     updatePost$ = this.actions$.pipe(
         ofType(UpdatePost),
-        map(action => action.post),
-        switchMap((post) => this.postService.updatePost(post)),
+        // map(action => action.post),
+        switchMap((action) => this.postService.updatePost(action.post, action.updatedBy)),
         tap(u => console.log(u)),
         map((post: Post) => {
             console.log(post);
@@ -78,14 +78,14 @@ export class PostEffects {
     @Effect()
     deletePost$ = this.actions$.pipe(
         ofType(DeletePost),
-        map(action => action.postId),
-        switchMap((postId: string) => {
-            return this.postService.deletePost(postId).pipe(
+        // map(action => action.postId),
+        switchMap((action) => {
+            return this.postService.deletePost(action.postId, action.deletedBy).pipe(
                 withLatestFrom(this.store.select(selectPostsByUserIdAndType)),
                 map(([isDeleted, posts]) => {
                     if (isDeleted && posts && posts.length) {
                         let deletedPostIndex = -1;
-                        deletedPostIndex = posts.findIndex((p) => p._id === postId);
+                        deletedPostIndex = posts.findIndex((p) => p._id === action.postId);
                         if (deletedPostIndex > -1) {
                             posts.splice(deletedPostIndex, 1);
                         }

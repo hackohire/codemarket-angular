@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, ChangeDetectorRef, AfterViewInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -12,18 +12,22 @@ import { EditorComponent } from '../../shared/components/editor/editor.component
 import { Post } from '../../shared/models/post.model';
 import { Location } from '@angular/common';
 import { PostService } from '../../shared/services/post.service';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-add-post',
   templateUrl: './add-post.component.html',
-  styleUrls: ['./add-post.component.scss']
+  styleUrls: ['./add-post.component.scss'],
 })
-export class AddPostComponent implements OnInit {
+export class AddPostComponent implements OnInit, AfterViewInit {
+
+  s3Bucket = environment.s3FilesBucketURL;
 
   breadcumb: BreadCumb;
   postForm: FormGroup;
 
   editPostDetails: Post;
+  postTitle;
 
   /** When a user tries to tie a post with this post */
   postFromRoute: Post;
@@ -53,15 +57,16 @@ export class AddPostComponent implements OnInit {
 
 
   constructor(
-    private authService: AuthService,
+    public authService: AuthService,
     private store: Store<AppState>,
     private activatedRoute: ActivatedRoute,
     private postService: PostService,
     private location: Location,
+    private changeDetector: ChangeDetectorRef
   ) {
 
-    this.postType = this.activatedRoute.snapshot.queryParams['type'];
-    this.postId = this.activatedRoute.snapshot.params['postId'];
+    this.postType = this.activatedRoute.snapshot.queryParams.type;
+    this.postId = this.activatedRoute.snapshot.params.postId;
 
     /** Make the Changes here while creating new post type */
     this.breadcumb = {
@@ -76,11 +81,19 @@ export class AddPostComponent implements OnInit {
     this.postFormInitialization(null);
   }
 
+  ngAfterViewInit(): void {
+    if (this.descriptionEditor && this.descriptionEditor.ckEditorRef) {
+      console.log(this.descriptionEditor.ckEditorRef.elementRef.nativeElement);
+      this.descriptionEditor.ckEditorRef.editorElement.style.minHeight = '73vh';
+    }
+  }
+
   ngOnInit() {
     if (this.postId) {
       this.subscription$.add(
         this.postService.getPostById(this.postId).subscribe((p) => {
           this.editPostDetails = p;
+          this.postTitle = p.name;
           this.postType = p.type;
           this.breadcumb.title = this.postType;
           this.breadcumb.path[0].name = this.postType;
@@ -94,9 +107,11 @@ export class AddPostComponent implements OnInit {
     this.postForm = new FormGroup({
       name: new FormControl(i && i.name ? i.name : '', Validators.required),
       description: new FormControl(i && i.description ? i.description : []),
+      descriptionHTML: new FormControl(i && i.descriptionHTML ? i.descriptionHTML : ''),
       tags: new FormControl(i && i.tags ? i.tags : []),
       companies: new FormControl(i && i.companies ? i.companies : []),
       assignees: new FormControl(i && i.assignees ? i.assignees : []),
+      clients: new FormControl(i && i.clients ? i.clients : []),
       collaborators: new FormControl(i && i.collaborators ? i.collaborators : []),
       createdBy: new FormControl(i && i.createdBy && i.createdBy._id ? i.createdBy._id : ''),
       status: new FormControl(i && i.status ? i.status : PostStatus.Drafted),
@@ -109,7 +124,7 @@ export class AddPostComponent implements OnInit {
 
 
     /** If somebody tries to tie a post with this post */
-    this.postFromRoute = this.location.getState()['post'];
+    this.postFromRoute = (this.location.getState() as any).post;
 
     if (this.postFromRoute) {
       this.postForm.get('tags').setValue(this.postFromRoute.tags);
@@ -119,32 +134,55 @@ export class AddPostComponent implements OnInit {
 
       this.postForm.addControl('connectedPosts', new FormControl([this.postFromRoute._id]));
     }
+
+    if (i && !i.descriptionHTML && i.description.length) {
+      // this.postForm.get('descriptionHTML').setValue(this.descriptionEditor.editorUI);
+    }
   }
 
 
-  async submit(status) {
+  async submit(status, descriptionEditor?: EditorComponent) {
 
     if (!this.authService.loggedInUser) {
       this.authService.checkIfUserIsLoggedIn(true);
       return;
     }
 
-    const blocks =  await this.descriptionEditor.editor.save();
-    this.descriptionFormControl.setValue(blocks.blocks);
+    // const blocks = await this.descriptionEditor.editor.save();
+    // this.descriptionFormControl.setValue(blocks.blocks);
+    this.postForm.get('descriptionHTML').setValue(this.descriptionEditor.html);
 
     if (this.authService.loggedInUser && !this.createdBy.value) {
       this.createdBy.setValue(this.authService.loggedInUser._id);
     }
 
-    const postFormValue = {...this.postForm.value};
-    postFormValue['status'] = status;
+    const postFormValue = { ...this.postForm.value };
+    postFormValue.status = status;
     // postFormValue.companies = postFormValue.companies.map(c => c._id);
 
     if (this.postId) {
-      this.store.dispatch(UpdatePost({post: postFormValue}));
+      this.store.dispatch(UpdatePost({
+        post: postFormValue, updatedBy: {name: this.authService.loggedInUser.name, _id: this.authService.loggedInUser._id},
+      }));
     } else {
-      this.store.dispatch(AddPost({post: postFormValue}));
+      this.store.dispatch(AddPost({ post: postFormValue }));
     }
+  }
+
+  cancelClicked() {
+    this.location.back();
+  }
+
+  uploadImage(a, b, c) {
+    console.log(a, b, c);
+  }
+
+  recieveEvent(event) {
+    this.postForm.controls.tags.setValue(event.tags);
+    this.postForm.controls.companies.setValue(event.companies);
+    this.postForm.controls.clients.setValue(event.clients);
+    this.postForm.controls.collaborators.setValue(event.collaborators);
+    this.postForm.controls.name.setValue(event.name);
   }
 
 }

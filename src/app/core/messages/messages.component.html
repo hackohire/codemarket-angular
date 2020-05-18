@@ -45,7 +45,7 @@
 
                                     <!-- User Avatar  -->
                                     <div class="info_avatar" style="vertical-align: top;">
-                                        <a [href]="'/'+ 'dashboard' + '/' + 'profile' + '/' + m?.createdBy?._id"
+                                        <a [href]="'profile' + '/' + m?.createdBy?.slug"
                                             target="_blank">
                                             <img [src]="m?.createdBy?.avatar ? ((s3FilesBucketURL + m.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar"
                                                 alt="">
@@ -53,7 +53,7 @@
                                     </div>
                                     <div class="info" style="max-width: 90%;">
                                         <p>
-                                            <span><a [href]="'/'+ 'dashboard' + '/' + 'profile' + '/' + m?.createdBy?._id"
+                                            <span><a [href]="'profile' + '/' + m?.createdBy?.slug"
                                                     target="_blank">{{m?.createdBy?.name}}</a></span>
                                             has added a {{m?.parentId ? 'reply to your comment' : 'comment'}} on
 

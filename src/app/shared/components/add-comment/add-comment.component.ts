@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
 import { AuthService } from '../../../core/services/auth.service';
 import { EditorComponent } from '../editor/editor.component';
 import { FormControl, FormGroup } from '@angular/forms';
@@ -27,26 +27,39 @@ export class AddCommentComponent implements OnInit {
 
   constructor(
     public authService: AuthService,
-    private commentService: CommentService
+    private commentService: CommentService,
+    private changeDetector: ChangeDetectorRef
   ) { }
 
   ngOnInit() {
     // if (!this.commentForm) {
-      this.commentForm = new FormGroup({
-        text: new FormControl(''),
-        type: new FormControl('post'),
-        blockId: new FormControl(null),
-        blockSpecificComment: new FormControl(false),
-        referenceId: new FormControl('')
-      });
+    this.commentForm = new FormGroup({
+      text: new FormControl([]),
+      type: new FormControl('post'),
+      blockId: new FormControl(null),
+      blockSpecificComment: new FormControl(false),
+      referenceId: new FormControl(''),
+      textHTML: new FormControl('')
+    });
     // }
   }
 
 
   async addComment(addCommentEditor: EditorComponent) {
     if (this.authService.loggedInUser) {
-      const blocks = await addCommentEditor.editor.save();
-      this.commentForm.get('text').setValue(blocks.blocks);
+      // const blocks = await addCommentEditor.editor.save();
+      // this.commentForm.get('text').setValue(blocks.blocks);
+
+      // /** Here we are asking to detectchanges again because when we fetch the blocks to save the description in formcontrol,
+      //   * we need the HTML also, so for that detectchanges will render the changes again with saved block and we can access the html again
+      //   */
+      // this.changeDetector.detectChanges();
+
+
+      // /** Fetch the html content also becuase when we send email, email only understands the html content so we need to store html
+      //  * content also
+      //  */
+      this.commentForm.get('textHTML').setValue(addCommentEditor.html);
 
       if (this.blockId) {
         this.commentForm.get('blockId').setValue(this.blockId);
@@ -61,7 +74,7 @@ export class AddCommentComponent implements OnInit {
 
       this.subscription$.add(
         this.commentService.addComment(this.commentForm.value).subscribe((c) => {
-          addCommentEditor.editor.clear();
+          addCommentEditor.html = '';
         })
       );
     } else {

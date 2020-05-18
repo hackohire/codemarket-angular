@@ -12,6 +12,7 @@ export const productConstants = {
             name
             avatar
             _id
+            slug
             currentJobDetails {
                 jobProfile {
                     name
@@ -22,9 +23,6 @@ export const productConstants = {
         }
         type
         categories
-        description {
-            ...Description
-        }
         price
         status
         createdAt
@@ -35,16 +33,10 @@ export const productConstants = {
         }
         support {
             time
-            description {
-                ...Description
-            }
         }
         likeCount
         slug
         comments {
-            text {
-              ...Description
-            }
             _id
             type
             referenceId
@@ -56,11 +48,11 @@ export const productConstants = {
               _id
               name
               avatar
+              slug
             }
             blockId
             blockSpecificComment
         }
     }
-    ${description}
     `,
 };

@@ -7,7 +7,7 @@ import { PostService } from '../../../shared/services/post.service';
 import { SweetalertService } from '../../../shared/services/sweetalert.service';
 import { CompanyService } from '../../company.service';
 import { Subscription, of, Observable } from 'rxjs';
-import { keyBy } from 'lodash';
+import { keyBy, orderBy } from 'lodash';
 import { Post } from '../../../shared/models/post.model';
 import { Company } from '../../../shared/models/company.model';
 import { User } from '../../../shared/models/user.model';
@@ -19,10 +19,8 @@ import { map } from 'rxjs/internal/operators/map';
 import { appConstants } from '../../../shared/constants/app_constants';
 import Storage from '@aws-amplify/storage';
 import moment from 'moment';
-import { MatDialog } from '@angular/material/dialog';
 import { concatMap } from 'rxjs/operators/concatMap';
 import { trigger, state, style, transition, animate } from '@angular/animations';
-import { BlockToolData } from '@editorjs/editorjs/types/tools';
 import { EditorComponent } from '../../../shared/components/editor/editor.component';
 import { MdePopoverTrigger } from '@material-extended/mde';
 import { MatPaginator } from '@angular/material/paginator';
@@ -44,6 +42,17 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
 
   usersInterestedInCompany: User[];
   companyView: string;
+  totalCampaign: number;
+  companyId: string;
+  customTabs = [
+    {
+      name: 'campaigns',
+      label: 'Campaigns',
+      isCustom: true
+    }
+  ];
+
+  campaignsList = [];
 
   postTypesArray = appConstants.postTypesArray;
 
@@ -83,9 +92,18 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
 
   commentId: string;
 
+  emailAsc = true;
+  nameAsc = true;
+  phoneAsc = true;
+  currentOrderValue = 'name';
+  currentOrder = '-1';
+
+  emailCount = 0;
+  phoneCount = 0;
+
   postDescription: [{
     type: string;
-    data: BlockToolData
+    data: any
   }];
 
   @ViewChild(MdePopoverTrigger, { static: false }) socialMediaPopover: MdePopoverTrigger;
@@ -125,45 +143,35 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
     public postService: PostService,
     private router: Router,
     private sweetAlertService: SweetalertService,
-    private companyService: CompanyService,
+    public companyService: CompanyService,
     public auth: AuthService,
-    private dialog: MatDialog
   ) { }
 
   ngOnInit() {
     this.type = this.activatedRoute.snapshot.queryParams.type;
     this.commentId = this.activatedRoute.snapshot.queryParams['commentId'];
 
+    this.companyId = this.activatedRoute.snapshot.queryParams.id;
+
     const params = this.activatedRoute.snapshot.params;
 
     this.companyView = this.activatedRoute.snapshot.queryParams['view'] ? this.activatedRoute.snapshot.queryParams['view'] : 'posts';
-
-
-    this.postService.getCountOfAllPost("", params.companyId, "").subscribe((data) => {
-      if (data.length) {
-        data = keyBy(data, '_id');
-        appConstants.postTypesArray.forEach((obj) => {
-          obj['count'] = data[obj.name] ? data[obj.name].count : 0
-        });
-      }
-    });
-
     this.subscription$.add(
-      this.companyService.getCompanyById(params.companyId)
+      this.companyService.getCompanyById(params.slug)
         .pipe(
           concatMap((company, index) => {
             return index === 0 ?
               of(company).pipe(
                 tap(() => {
                   /** Get the list of users in a company */
-                  this.subscription$.add(
-                    this.companyService.getListOfUsersInACompany(params.companyId).subscribe((u) => {
-                      // console.log(u);
-                      if (u) {
-                        this.usersInterestedInCompany = u;
-                      }
-                    })
-                  );
+                  // this.subscription$.add(
+                  //   this.companyService.getListOfUsersInACompany(params.companyId).subscribe((u) => {
+                  //     // console.log(u);
+                  //     if (u) {
+                  //       this.usersInterestedInCompany = u;
+                  //     }
+                  //   })
+                  // );
                 })
               ) : of(company);
           })
@@ -174,6 +182,18 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
               this.companyDetails = c;
               this.initializeCommentForm(c, 'post');
               this.initializeQuestionAndAnswerForm(c, 'company');
+
+              this.selectMainCategory({name: this.companyView});
+              if (this.companyId) {
+                 this.postService.getCountOfAllPost('', this.companyId, '').subscribe((data) => {
+                  if (data.length) {
+                    data = keyBy(data, '_id');
+                    appConstants.postTypesArray.forEach((obj) => {
+                      obj['count'] = data[obj.name] ? data[obj.name].count : 0
+                    });
+                  }
+                });
+              }
             }
           }
         })
@@ -243,23 +263,23 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
 
   /** Initializing Question & Answer Form */
   initializeQuestionAndAnswerForm(p, questionType?: string) {
-    this.questionOrAnswerForm = new FormGroup({
-      text: new FormControl(''),
-      referenceId: new FormControl(p._id),
-      type: new FormControl(questionType ? questionType : this.type),
-      isQuestion: new FormControl(),
-      isAnswer: new FormControl()
-    });
+    // this.questionOrAnswerForm = new FormGroup({
+    //   text: new FormControl(''),
+    //   referenceId: new FormControl(p._id),
+    //   type: new FormControl(questionType ? questionType : this.type),
+    //   isQuestion: new FormControl(),
+    //   isAnswer: new FormControl()
+    // });
 
-    this.subscription$.add(
-      this.commentService.getQuestionAndAnswersByReferenceId(p._id).pipe(
-        tap((d) => {
-          this.questionsList = d;
-        })
-      ).subscribe({
-        error: (e) => console.log(e)
-      })
-    );
+    // this.subscription$.add(
+    //   this.commentService.getQuestionAndAnswersByReferenceId(p._id).pipe(
+    //     tap((d) => {
+    //       this.questionsList = d;
+    //     })
+    //   ).subscribe({
+    //     error: (e) => console.log(e)
+    //   })
+    // );
   }
 
   /** Add Question Or Answer */
@@ -316,7 +336,7 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
   }
 
   deletePost(_id: string) {
-    this.postService.deletePost(_id).subscribe();
+    this.postService.deletePost(_id, {name: this.authService.loggedInUser.name, _id: this.authService.loggedInUser.name}).subscribe();
   }
 
   updateCompany(companyDetails) {
@@ -343,7 +363,7 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
             }
           }
         })
-      ).subscribe()
+      ).subscribe();
     });
   }
 
@@ -400,9 +420,39 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
   }
 
   selectMainCategory(category) {
-    if (!category.types) {
-      this.companyView = category;
-      this.router.navigate(['./'], { relativeTo: this.activatedRoute, queryParams: { view: category }, queryParamsHandling: 'merge' });
+    if (!category.custom) {
+      this.companyView = category.name;
+      this.router.navigate(['./'], { relativeTo: this.activatedRoute, queryParams: { view: category.name }, queryParamsHandling: 'merge' });
+    }
+
+    // if (category.name === 'campaigns') {
+    //   const paginationObj = {
+    //     pageNumber: this.paginator.pageIndex + 1, limit: this.paginator.pageSize ? this.paginator.pageSize : 10,
+    //     sort: {order: ''}};
+
+    //   this.subscription$.add(
+    //     this.companyService.getCampaignsWithTracking(paginationObj, this.companyDetails._id).subscribe(c => {
+    //       if (c && c.length) {
+    //         this.campaignsList = c;
+    //       }
+    //     })
+    //   );
+    // }
+
+    switch (category.name) {
+      case 'campaigns':
+        const paginationObj = {
+          pageNumber: 1, limit: 10,
+          sort: {order: ''}};
+
+        this.subscription$.add(
+          this.companyService.getCampaignsWithTracking(paginationObj, this.companyDetails._id).subscribe(c => {
+            if (c && c.length) {
+              this.campaignsList = c;
+            }
+          })
+        );
+        break;
     }
   }
 
@@ -427,7 +477,7 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
       });
   }
 
-  showCommentsOnSide(event: { block: any, comments, selectedPost}) {
+  showCommentsOnSide(event: { block: any, comments, selectedPost }) {
     console.log(event);
     this.selectedBlock = event.block;
     this.selectedPostComments = event.comments;
@@ -439,15 +489,98 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
     const paginationObj = {
       pageNumber: this.paginator.pageIndex + 1, limit: this.paginator.pageSize ? this.paginator.pageSize : 10,
       sort: {order: ''}};
+    
+    if (postType === 'contact') {
+      if (this.currentOrderValue) {
+        paginationObj.sort.order = this.currentOrder;
+        paginationObj.sort['field'] = this.currentOrderValue;
+      }
+    }
+
     this.postService.getAllPosts(
       paginationObj, postType, '', this.companyDetails._id).subscribe((u) => {
         this.companyRelatedPosts.posts = u.posts;
         this.totalcompanyRelatedPosts = u.total;
+        if (postType === 'contact') {
+          this.postService.getEmailPhoneCountForContact(postType).subscribe((b) => {
+            this.emailCount = b[0].emailCount ? b[0].emailCount : 0;
+            this.phoneCount = b[0].phoneCount ? b[0].phoneCount : 0;
+          })
+        }
+
       });
   }
 
-  redirectToAddPost(postType) {
-    this.router.navigate(['./post/add-post'], {state: {post: {companies: [{name: this.companyDetails.name, _id: this.companyDetails._id}]}}, queryParams: { type: postType } });
+  /** Fetch the list of posts connected with company based on the pagination */
+  fetchEmailsConnectedWithCampaign(campaignId, campaignIndex) {
+    const paginationObj = {
+      pageNumber: this.paginator.pageIndex + 1, limit: this.paginator.pageSize ? this.paginator.pageSize : 10,
+      sort: {order: ''}};
+    
+    // this.companyService.getCampaignsWithTracking(paginationObj, this.companyDetails._id).subscribe(c => {
+    //   if (c && c.length) {
+    //     this.campaignsList = c;
+    //   }
+    // })
+    this.companyService.getCampaignEmails(paginationObj, campaignId).subscribe(c => {
+      if (c && c.emails && c.emails.length) {
+        this.campaignsList[campaignIndex].emailData  = c.emails;
+      }
+    });
   }
 
+  redirectToAddPost(postType) {
+    this.router.navigate(['./post/add-post'], { state: { post: { companies: [{ name: this.companyDetails.name, _id: this.companyDetails._id }] } }, queryParams: { type: postType } });
+  }
+
+  changeOrder(value, order, postType) {
+
+    const paginationObj = {
+      pageNumber: this.paginator.pageIndex + 1, limit: this.paginator.pageSize ? this.paginator.pageSize : 10,
+      sort: {order: ''}};
+
+      paginationObj.sort['field'] = value;
+      paginationObj.sort['order'] = order === 'asc' ? '1' : '-1';
+      this.currentOrderValue = value;
+      this.currentOrder = order === 'asc' ? '1' : '-1';
+
+    this.postService.getAllPosts(
+      paginationObj, postType, '', this.companyDetails._id).subscribe((u) => {
+        this.companyRelatedPosts.posts = u.posts;
+        this.totalcompanyRelatedPosts = u.total;
+        if (order === 'asc') {
+          switch (value) {
+          case 'email':
+            this.emailAsc = false;
+            break;
+          case 'phone':
+            this.phoneAsc = false;
+            break;
+          case 'name':
+            this.nameAsc = false;
+            break;
+          default:
+            break;
+          }
+        }
+        if (order === 'desc') {
+          switch (value) {
+          case 'email':
+            this.emailAsc = true;
+            break;
+          case 'phone':
+            this.phoneAsc = true;
+            break;
+          case 'name':
+            this.nameAsc = true;
+            break;
+          default:
+            break;
+          }
+        }
+
+      });
+
+    // this.companyRelatedPosts.posts = orderBy(this.games, [value], order);
+  }
 }

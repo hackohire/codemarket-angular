@@ -1,110 +1,195 @@
 <!-- Header Section Starts HERE -->
 
 <!-- <section class="hero-area bgimage"> -->
-<div class="container">
-    <div class="row" style="height:80vh; align-items: center; align-self: right; margin-left: 0; margin-right: 0;">
-        <div class="col-md-7" style="align-self: right;"  class="col-md-7">
+
+    <section id="hero" style="padding: 40px 0;background: #ffffff;">
+        <div style="position: absolute; top: 51px; left: 44px; font-size: 20px; color: #000;letter-spacing: 0.9px;">coding + <span style="color: #00aeef;">marketing</span></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7 order-1 order-lg-2 hero-img aos-init aos-animate" data-aos="fade-left">
+                    <img src="./../assets/images/new-header2.png" class="img-fluid" alt="">
+                </div>
+                <div class="col-lg-5 pt-5 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center aos-init aos-animate" data-aos="fade-up">
+                    <div>
+                        <h1 style="font-size: 34px; line-height: normal; max-width: 100%; text-align: left;color:#000; text-transform: none;margin-bottom: 1rem;letter-spacing: 1px;">
+                            Supercharge your business with superhero tech and marketing teams
+                        </h1>
+                        <h2 style="font-size: 26px; line-height: normal; max-width: 100%; text-align: left;color:#999;margin-bottom: 1.5rem;font-weight: 100;">
+                            grow your business like a large corporation without the large overhead
+                        </h2>
+                        <!-- <h1 style="font-size: 1.9em; line-height: normal; margin: 20px 0 0 0; font-weight: 200; text-align: left; color:#00aeef">
+                            <a class="btn btn-primary btn-md" [routerLink]="['/', 'company', 'add-company']">JOIN TODAY</a>
+                        </h1> -->
+                    <form>
+                        <div id="append_location" class="individuals-signup-cta__form-group">
+                            <label class="individuals-signup-cta__label">Enter your email address</label>
+                            <input type="hidden" name="fyi_from_landing" value="true">
+                            <input [(ngModel)]="emailInput" id="email_input"
+                                class="individuals-signup-cta__email-input email_input" type="email" name="fyi_email">
+                            <button [disabled]="!emailInput" id="submitBtn" class="google-button special" type="button"
+                                [routerLink]="['../', 'help-business-grow']" [queryParams]="{email: emailInput}">
+                                <span class="button-flex-wrapper">
+                                    Start Today
+                                </span>
+                            </button>
+                        </div>
+                    </form>
+                    <div class="individuals-signup__underform">
+                        <span>Safe. Secure. Organized.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="hero" style="padding: 40px 0 0;background: #f2f9ff;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5 pt-5 pt-lg-0 order-1 order-lg-2 d-flex flex-column justify-content-center aos-init aos-animate"
+                data-aos="fade-up">
+                <div>
+                    <h1
+                        style="font-size: 40px; line-height: normal; max-width: 100%; text-align: left;color:#000; text-transform: none;margin-bottom: 1rem;letter-spacing: 1px;">
+                        Grow Your Sales
+                    </h1>
+                    <h2
+                        style="font-size: 26px; line-height: normal; max-width: 100%; text-align: left;color:#999;margin-bottom: 1.5rem;font-weight: 100;">
+                        Connect & manage all your data from one center
+                    </h2>
+                    <!-- <h1 style="font-size: 1.9em; line-height: normal; margin: 20px 0 0 0; font-weight: 200; text-align: left; color:#00aeef">
+                            <a class="btn btn-primary btn-md" [routerLink]="['/', 'company', 'add-company']">JOIN TODAY</a>
+                        </h1> -->
+                    <form>
+                        <div id="append_location" class="individuals-signup-cta__form-group">
+                            <label class="individuals-signup-cta__label">Enter your email address</label>
+                            <input type="hidden" name="fyi_from_landing" value="true">
+                            <input [(ngModel)]="emailInput" id="email_input"
+                                class="individuals-signup-cta__email-input email_input" type="email" name="fyi_email">
+                            <button [disabled]="!emailInput" id="submitBtn" class="google-button special" type="button"
+                                [routerLink]="['../', 'help-business-grow']" [queryParams]="{email: emailInput}">
+                                <span class="button-flex-wrapper">
+                                    Start Today
+                                </span>
+                            </button>
+                        </div>
+                    </form>
+                    <div class="individuals-signup__underform">
+                        <span>Safe. Secure. Organized.</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-7 order-2 order-lg-1 hero-img aos-init aos-animate" data-aos="fade-left">
+                <img src="./../assets/images/new-header.png" class="img-fluid" alt="">
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- <div class="container d-flex align-items-center" style="height: 92vh;">
+    <div class="row">
+        <div class="col-lg-6 pt-5 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
 
             <h1
-                style="font-size: 60px; max-width: 100%; font-weight: 200; text-align: left;font-family: 'Rectory Thin';color:#ff6640">
+                style="font-size: 60px; max-width: 100%; font-weight: 200; text-align: left;color:#ff6640">
                 Launch & Grow A Successful Digital Products Company<br />
             </h1>
 
             <h1
-                style="font-size: 60px; margin: 5px; font-weight: 200; text-align: left; font-family: 'Rectory Regular';color:#0674ec">
+                style="font-size: 60px; margin: 5px; font-weight: 200; text-align: left; color:#00aeef">
                 <a [routerLink]="['/', 'company', 'add-company']">JOIN TODAY</a></h1>
         </div>
-        <div style="text-align: right; align-self: right; width: 100%;" class="col-md-5">
+        <div class="col-lg-6 pt-5 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
             <img src="./../assets/images/prosperous2.png">
         </div>
     </div>
-</div>
+</div> -->
 
-<div style="background: #f1f1f1;">
+<div style="background: #00aeef; padding: 80px 0 60px 0;">
     <div class="container">
-        <div class="row" style="height:80vh; align-items: center; margin-left: 0; margin-right: 0;">
-            <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
                 <h1
-                    style="font-size: 55px; max-width: 100%; font-family: 'Rectory Regular'; text-align: center; color: #595959">
-                    Monetize Your Digital Products and  Generate Revenue 
+                    style="font-size: 2.3em; max-width: 100%; text-align: center; font-weight: 400; color: #ffffff">
+                    Monetize Your Digital Products and Generate Revenue
                 </h1>
-                <hr style="max-width: 60vw; padding: 2rem; margin-top: 2rem;">
-                <div class="col-md-12" style="align-self: left;">
-                   
-                </div>
-
+                <hr style="max-width: 60vw; margin-top: 2rem; border-color: white;">
                 <div class="mt-4 col-md-12">
-                    <h2 style="font-size: 55px; font-family: 'Rectory Semi';  margin: 10px; text-align: center;"><a
-                            [routerLink]="['/', 'post', 'add-dreamjob']">START TODAY</a></h2>
+                    <h2 style="font-size: 1.9em;   margin: 10px; text-align: center; font-weight: 100;"><a
+                            [routerLink]="['/', 'post', 'add-dreamjob']" style="color: white;">» START TODAY «</a></h2>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
 
+<div class="container-fluid" style="padding: 70px 0;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-md-12">
+                <h4
+                    style="font-size: 2.3em; margin: auto; max-width: 100%; text-align: center;; font-weight: 500; margin-bottom: 50px; font-weight: 400;">
+                    3 Steps to create a profitable digital products business
+                </h4>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12" style="text-align: center;">
+                <img src="https://codemarket-files.s3.amazonaws.com/public/step1-2020-03-30T19:37:44.350Z.png"
+                    style="width: 180px;">
+                <div>
+                    <h2 style="font-size: 1.5em;   margin: 10px 0; text-align: center; font-weight: 100; ">
+                        <a [routerLink]="['/', 'post', 'add-dreamjob']"> Digital Products</a></h2>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12" style="text-align: center;">
+                <img src="https://codemarket-files.s3.amazonaws.com/public/step2-2020-03-30T19:37:50.406Z.png"
+                    style="width: 180px;">
+                <div>
+                    <h2 style="font-size: 1.5em;   margin: 10px 0; text-align: center; font-weight: 100; ">
+                        <a [routerLink]="['/', 'post', 'add-dreamjob']"> Online Community </a></h2>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12" style="text-align: center;">
+                <img src="https://codemarket-files.s3.amazonaws.com/public/step3-2020-03-30T19:38:01.351Z.png"
+                    style="width: 180px;">
+                <div>
+                    <h2 style="font-size: 1.5em;   margin: 10px 0; text-align: center; font-weight: 100; ">
+                        <a [routerLink]="['/', 'post', 'add-dreamjob']">Sell & Monetize</a></h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div style="background: #00aeef; padding: 80px 0 60px 0;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <h1
+                    style="font-size: 2.3em; max-width: 100%;  text-align: center; font-weight: 400; color: #ffffff">
+                    Create Digital Products
+                </h1>
+                <hr style="max-width: 30vw; margin-top: 2rem; border-color: white;">
+                <div class="mt-4 col-md-12">
+                    <h2 style="font-size: 1.9em;   margin: 10px; text-align: center; font-weight: 100;"><a
+                            [routerLink]="['/', 'post', 'add-dreamjob']" style="color: white;">» START TODAY «</a></h2>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
 <div class="container">
-    <div class="row" style="height:60vh; align-items: center; margin-top: 40px; margin-left: 0; margin-right: 0;">
-        <div class="col-md-12 col-md-12">
-            <h4
-                style="font-size: 55px; margin: auto; max-width: 100%;  text-align: center; font-family: 'Rectory Thin'; color: #ff6640;">
-                3 Steps to create a profitable digital products business
-            </h4>
-        </div>
-
-        <div class="col-lg-4 col-md-4" style="text-align: center;">
-            <img src="https://codemarket-files.s3.amazonaws.com/public/step1-2020-03-30T19:37:44.350Z.png">
-            
-                <div >
-                    <h2 style="font-size: 55px; font-family: 'Rectory Semi';  margin: 10px; text-align: center;"><a
-                            [routerLink]="['/', 'post', 'add-dreamjob']"> Digital Products</a></h2>
-                </div>
-        </div>
-        <div class="col-lg-4 col-md-4" style="text-align: center;">
-            <img src="https://codemarket-files.s3.amazonaws.com/public/step2-2020-03-30T19:37:50.406Z.png">
-            <div >
-                <h2 style="font-size: 55px; font-family: 'Rectory Semi';  margin: 10px; text-align: center;"><a
-                        [routerLink]="['/', 'post', 'add-dreamjob']"> Online Community </a></h2>
-            </div>
-            
-        </div>
-        <div class="col-lg-4 col-md-4" style="text-align: center;">
-            <img src="https://codemarket-files.s3.amazonaws.com/public/step3-2020-03-30T19:38:01.351Z.png">
-            <h2 style="font-size: 55px; font-family: 'Rectory Semi';  margin: 10px; text-align: center;"><a
-                [routerLink]="['/', 'post', 'add-dreamjob']">Sell & Monetize</a></h2>
-            
-        </div>
-    </div>
-</div>
-<br>
-<br>
-<br>
-
-<div style="background: #f1f1f1;">
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-</div>
-<div class="container">
-    <div class="row" style="height:80vh; align-items: center; margin-left: 0; margin-right: 0;">
+    <div class="row" style="padding: 80px 0 20px; align-items: center; margin: 0;">
         <div class="col-md-12">
             <h1
-                style="font-size: 55px; max-width: 100%; font-family: 'Rectory Regular'; text-align: center; color: #0267d6">
+                style="font-size: 2.3em;max-width: 100%;text-align: center;color: #00aeef; font-weight: 400; ">
                 Digital Infrastructure Tailor-Made to Your Business Goals
             </h1>
-            <hr style="border-color: #ff6640; max-width: 60vw; padding: 1rem; margin-top: 2rem;">
+            <hr style="border-color: #ff6640; max-width: 62vw; margin-top: 2rem; padding-bottom: 10px;">
             <div class="col-md-12" style="align-self: left;">
                 <h6
-                    style="font-size: 55px; margin: auto; font-family: 'Rectory Thin'; color: #575757; text-align: center;">
+                    style="font-size: 1.9em; margin: auto;; text-align: center; font-weight: 100; ">
                     Do You Want To Add Additional Revenue Steams to Your Business?
                 </h6>
             </div>
@@ -112,77 +197,50 @@
     </div>
 </div>
 
-
-<div class="container business-communitites-label">
+<div class="container business-communitites-label" style="margin-bottom: 100px;">
     <div class="row mt-5 mb-5" style="margin-top: 10px; margin-bottom: 10px; text-align: center; ">
-        <div class="col-md-3" style="align-self: left;">
-            <img style="align-content: left" [src]="'../../assets/images/1.png'" alt="Sales Accelerator"><br />
-            <a style="font-family: 'Rectory Regular'; margin: 10px; font-size: 1.5em; color: #575757"
-                [routerLink]="['/', 'innovate']">Innovate</a>
-        </div>
-        <div class="col-md-3" style="align-self: left;">
-            <img style="align-content: left" [src]="'../../assets/images/2.png'" alt="Sales Accelerator"><br />
-            <a style="font-family: 'Rectory Regular'; margin: 10px; font-size: 1.5em; color: #575757"
-                [routerLink]="['/', 'affordable']">Affordable</a>
-        </div>
-        <div class="col-md-3" style="align-self: left;">
-            <img style="align-content: left" [src]="'../../assets/images/3.png'" alt="Sales Accelerator"><br />
-            <a style="font-family: 'Rectory Regular'; margin: 10px; font-size: 1.5em; color: #575757"
-                [routerLink]="['/', 'get-work-done']">Get Work
-                Done</a>
-        </div>
-        <div class="col-md-3" style="align-self: left;">
-            <img style="align-content: left" [src]="'../../assets/images/4.png'" alt="Sales Accelerator"><br />
-            <a style="font-family: 'Rectory Regular'; margin: 10px; font-size: 1.5em; color: #575757"
-                [routerLink]="['/', 'dedicated-team']">Dedicated Team</a>
-        </div>
-    </div>
-
-    <div class="row mt-5 mb-5" style="margin-top: 10px; margin-bottom: 10px; text-align: center;">
-        <div class="col-md-3" style="align-self: left;">
-            <img style="align-content: left" [src]="'../../assets/images/5.png'" alt="Sales Accelerator"><br />
-            <a style="font-family: 'Rectory Regular'; margin: 10px; font-size: 1.5em; color: #575757"
+        <div class="col-md-3">
+            <img [src]="'../../assets/images/website.svg'" class="mb-3 p-2" height="140px">
+            <a style="font-size: 1.5em; font-weight: 100;" class="d-block"
                 [routerLink]="['/', 'website']">Website</a>
         </div>
-        <div class="col-md-3" style="align-self: left;">
-            <img style="align-content: left" [src]="'../../assets/images/6.png'" alt="Sales Accelerator"><br />
-            <a style="font-family: 'Rectory Regular'; margin: 10px; font-size: 1.5em; color: #575757"
-                [routerLink]="['/', 'email-marketing']">Email
-                Marketing</a>
+        <div class="col-md-3">
+            <img [src]="'../../assets/images/facebook.svg'" class="mb-3 p-4" height="140px">
+            <a style="font-size: 1.5em; font-weight: 100;" class="d-block"
+                [routerLink]="['/', 'social-media-marketing']">facebook Marketing</a>
         </div>
-        <div class="col-md-3" style="align-self: left;">
-            <img style="align-content: left" [src]="'../../assets/images/7.png'" alt="Sales Accelerator"><br />
-            <a style="font-family: 'Rectory Regular'; margin: 10px; font-size: 1.5em; color: #575757"
-                [routerLink]="['/', 'social-media-marketing']">Social Media Marketing</a>
+        <div class="col-md-3">
+            <img [src]="'../../assets/images/twitter.svg'" class="mb-3 p-4" height="140px">
+            <a style="font-size: 1.5em; font-weight: 100;" class="d-block"
+                [routerLink]="['/', 'social-media-marketing']">twitter Marketing</a>
         </div>
-        <div class="col-md-3" style="align-self: left;">
-            <img style="align-content: left" [src]="'../../assets/images/8.png'" alt="Sales Accelerator"><br />
-            <a style="font-family: 'Rectory Regular'; margin: 10px; font-size: 1.5em; color: #575757"
-                [routerLink]="['/', 'crm']">CRM</a>
+        <div class="col-md-3">
+            <img [src]="'../../assets/images/meetup.svg'" class="mb-3 p-3" height="140px">
+            <a style="font-size: 1.5em; font-weight: 100;" class="d-block"
+                [routerLink]="['/', 'social-media-marketing']">meetup marketing</a>
         </div>
     </div>
+
     <div class="row mt-5 mb-5" style="margin-top: 10px; margin-bottom: 10px; text-align: center;">
-        <div class="col-md-3" style="align-self: left;">
-            <img style="align-content: left" [src]="'../../assets/images/9.png'" alt="Sales Accelerator"><br />
-            <a style="font-family: 'Rectory Regular'; margin: 10px; font-size: 1.5em; color: #575757"
-                [routerLink]="['/', 'referral-network']">Referral Network</a>
+        <div class="col-md-3">
+            <img [src]="'../../assets/images/wordpress.svg'" class="mb-3 p-2" height="140px">
+            <a style="font-size: 1.5em; font-weight: 100;" class="d-block"
+                [routerLink]="['/', 'website']">WordPress</a>
         </div>
-        <div class="col-md-3" style="align-self: left;">
-            <img style="align-content: left" [src]="'../../assets/images/10.png'" alt="Sales Accelerator"><br />
-            <a style="font-family: 'Rectory Regular'; margin: 10px; font-size: 1.5em; color: #575757"
-                [routerLink]="['/', 'sales-growth-strategy']">Sales Growth Strategy</a>
+        <div class="col-md-3">
+            <img [src]="'../../assets/images/instagram.svg'" class="mb-3 p-3" height="140px">
+            <a style="font-size: 1.5em; font-weight: 100;" class="d-block"
+                [routerLink]="['/', 'social-media-marketing']">Instagram</a>
         </div>
-        <div class="col-md-3" style="align-self: left;">
-            <img style="align-content: left" [src]="'../../assets/images/11.png'" alt="Sales Accelerator"><br />
-            <a style="font-family: 'Rectory Regular'; margin: 10px; font-size: 1.5em; color: #575757"
-                [routerLink]="['/', 'ai-strategy']">AI
-                Strategy</a>
+        <div class="col-md-3">
+            <img [src]="'../../assets/images/zoom.png'" class="mb-3" height="140px">
+            <a style="font-size: 1.5em; font-weight: 100;" class="d-block"
+                [routerLink]="['/', 'social-media-marketing']">zoom</a>
         </div>
-        <div class="col-md-3" style="align-self: left;">
-            <img style="align-content: left" [src]="'../../assets/images/12.png'" alt="Sales Accelerator"><br />
-            <a style="font-family: 'Rectory Regular'; margin: 10px; font-size: 1.5em; color: #575757"
-                [routerLink]="['/', 'exit-strategy']">Exit
-                Strategy</a>
+        <div class="col-md-3">
+            <img [src]="'../../assets/images/mailchimp.svg'" class="mb-3 p-3" height="140px">
+            <a style="font-size: 1.5em; font-weight: 100;" class="d-block"
+                [routerLink]="['/', 'email-marketing']">MailChimp</a>
         </div>
     </div>
 </div>
@@ -198,7 +256,7 @@
     <div class="row" style="margin-top: 10px; margin-bottom: 10px; text-align: center;">
         <div class="col-md-6" style="align-self: left;">
             <img style="align-content: left" [src]="'../../assets/images/career.png'"
-                alt="Sales Accelerator"><br />
+               ><br />
         </div>
         <div class="col-md-6" style="align-self: left;">
             <h6
@@ -252,25 +310,25 @@
             <a style="font-weight: 600; margin: 10px; font-size: 2.0em;"
                 [routerLink]="['/', 'training-from-experts']">Training from Experts</a>
             <img style="align-content: left" [src]="'../../assets/images/training3.png'"
-                alt="Sales Accelerator"><br />
+               ><br />
         </div>
         <div class="col-md-3" style="align-self: left;">
             <a style="font-weight: 600; margin: 10px; font-size: 2.0em;" [routerLink]="['/', 'real-projects']">Real
                 Projects</a>
             <img style="align-content: left" [src]="'../../assets/images/real_projects.png'"
-                alt="Sales Accelerator"><br />
+               ><br />
         </div>
         <div class="col-md-3" style="align-self: left;">
             <a style="font-weight: 600; margin: 10px; font-size: 2.0em;" [routerLink]="['/', 'mock-interviews']">Mock
                 Interviews</a>
             <img style="align-content: left" [src]="'../../assets/images/mock2.png'"
-                alt="Sales Accelerator"><br />
+               ><br />
         </div>
         <div class="col-md-3" style="align-self: left;">
             <a style="font-weight: 600; margin: 10px; font-size: 2.0em;" [routerLink]="['/', 'dream-job-mentors']">Dream
                 Job Mentors</a>
             <img style="align-content: left" [src]="'../../assets/images/career_mentor.png'"
-                alt="Sales Accelerator"><br />
+               ><br />
         </div>
     </div>
     <div class="row" style="margin-top: 10px; margin-bottom: 10px; text-align: center; ">
@@ -278,25 +336,25 @@
             <a style="font-weight: 600; margin: 10px; font-size: 2.0em;"
                 [routerLink]="['/', 'stress-management']">Stress Management</a>
             <img style="align-content: left" [src]="'../../assets/images/stress.png'"
-                alt="Sales Accelerator"><br />
+               ><br />
         </div>
         <div class="col-md-3" style="align-self: left;">
             <a style="font-weight: 600; margin: 10px; font-size: 2.0em;"
                 [routerLink]="['/', 'resume-gap-analysis']">Resume Gap Analysis</a>
             <img style="align-content: left" [src]="'../../assets/images/mock.png'"
-                alt="Sales Accelerator"><br />
+               ><br />
         </div>
         <div class="col-md-3" style="align-self: left;">
             <a style="font-weight: 600; margin: 10px; font-size: 2.0em;" [routerLink]="['/', 'peer-networking']">Peer
                 Networking</a>
             <img style="align-content: left" [src]="'../../assets/images/network.png'"
-                alt="Sales Accelerator"><br />
+               ><br />
         </div>
         <div class="col-md-3" style="align-self: left;">
             <a style="font-weight: 600; margin: 10px; font-size: 2.0em;"
                 [routerLink]="['/', 'leadership-training']">Leadership Training</a>
             <img style="align-content: left" [src]="'../../assets/images/leader.png'"
-                alt="Sales Accelerator"><br />
+               ><br />
         </div>
     </div>
 </div>
@@ -311,7 +369,7 @@
     <div class="row" style="margin-top: 10px; margin-bottom: 10px; text-align: center;">
         <div class="col-md-6" style="align-self: left;">
             <img style="align-content: left" [src]="'../../assets/images/impact.png'"
-                alt="Sales Accelerator"><br />
+               ><br />
         </div>
         <div class="col-md-6" style="align-self: left;">
             <h6
@@ -360,35 +418,30 @@
             <div class="col-md-3" style="align-self: left;">
                 <a style="font-weight: 600; margin: 10px; font-size: 2.0em;" [routerLink]="['/', 'sticky']">Sticky</a>
                 <img style="align-content: left" [src]="'../../assets/images/sticky.png'"
-                    alt="Sales Accelerator"><br />
+                   ><br />
             </div>
             <div class="col-md-3" style="align-self: left;">
                 <a style="font-weight: 600; margin: 10px; font-size: 2.0em;" [routerLink]="['/', 'viral']">Viral</a>
                 <img style="align-content: left" [src]="'../../assets/images/viral.png'"
-                    alt="Sales Accelerator"><br />
+                   ><br />
             </div>
             <div class="col-md-3" style="align-self: left;">
                 <a style="font-weight: 600; margin: 10px; font-size: 2.0em;"
                     [routerLink]="['/', 'community-impact-stories']">Community Impact Stories</a>
                 <img style="align-content: left" [src]="'../../assets/images/community2.png'"
-                    alt="Sales Accelerator"><br />
+                   ><br />
             </div>
             <div class="col-md-3" style="align-self: left;">
                 <a style="font-weight: 600; margin: 10px; font-size: 2.0em;"
                     [routerLink]="['/', 'advocates-influencers']">Advocates & Influencers</a>
                 <img style="align-content: left" [src]="'../../assets/images/influencer.png'"
-                    alt="Sales Accelerator"><br />
+                   ><br />
             </div>
         </div>
     </div>
 </div> -->
 
-
-
-
 <!-- start container -->
-
-
 
 <!--</section>-->
 

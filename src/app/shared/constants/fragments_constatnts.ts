@@ -56,6 +56,7 @@ export const attachesFragment = gql`
     title
     createdBy {
       name
+      slug
       _id
     }
     file {
@@ -176,9 +177,7 @@ export const description = gql`
 
 const CommentFragment = gql`
 fragment Comment on Comment {
-  text {
-    ...Description
-  }
+  textHTML
   _id
   type
   referenceId
@@ -190,6 +189,7 @@ fragment Comment on Comment {
     _id
     name
     avatar
+    slug
     currentJobDetails {
       jobProfile {
         name
@@ -213,7 +213,6 @@ fragment Comment on Comment {
     type
   }
 }
-${description}
 `;
 
 export const comment = gql`

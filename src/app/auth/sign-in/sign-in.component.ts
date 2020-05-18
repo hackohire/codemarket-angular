@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { CognitoUser } from '@aws-amplify/auth';
+import Auth, { CognitoUser } from '@aws-amplify/auth';
 // import { NotificationService } from 'src/app/services/notification.service';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
@@ -18,7 +18,7 @@ export class SignInComponent {
 
   signinForm: FormGroup = new FormGroup({
     email: new FormControl('', [ Validators.email, Validators.required ]),
-    password: new FormControl('', [ Validators.required, Validators.min(6) ])
+    password: new FormControl('', [ Validators.required, Validators.minLength(6) ])
   });
 
   hide = true;
@@ -40,6 +40,21 @@ export class SignInComponent {
     this.auth.signIn(this.emailInput.value, this.passwordInput.value)
       .then((user: CognitoUser|any) => {
         this._loader.hide();
+        if (user && user.challengeName === 'NEW_PASSWORD_REQUIRED') {
+          this._loader.show();
+          environment.confirm.email = this.emailInput.value;
+          environment.confirm.password = this.passwordInput.value;
+          Auth.completeNewPassword(user, environment.confirm.password, {
+            email: environment.confirm.email,
+          }).then(a => {
+            this._loader.hide();
+            console.log(a);
+          }).catch(e => {
+            console.log(e);
+            this._loader.hide();
+          });
+          // this.auth._authState.next({state: 'forgotPasswordRequest'});
+        }
       })
       .catch((error: any) => {
         this._loader.hide();

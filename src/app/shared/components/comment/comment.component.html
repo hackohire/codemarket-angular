@@ -1,19 +1,19 @@
-<div style="padding: 10px 0px 0px;" *ngIf="replyCommentForm?.value" [ngClass]="comment.createdBy._id === authService.loggedInUser._id && fromWhere === 'chat' ? isChildComment ? 'reply-comment' : '' : 'media'">
+<div style="padding: 10px 0px 0px;" *ngIf="replyCommentForm?.value" [ngClass]="comment?.createdBy?._id === authService?.loggedInUser?._id && fromWhere === 'chat' ? isChildComment ? 'reply-comment' : '' : 'media'">
 <!-- <div class="media"> -->
 
     <!-- <div class="media-left"> -->
-    <div [ngClass]="comment.createdBy._id === authService.loggedInUser._id && fromWhere === 'chat' ? 'chat-user-profile' : 'media-left'">
-        <a [routerLink]="['/', 'dashboard', 'profile', comment?.createdBy?._id ]">
+    <div [ngClass]="comment?.createdBy?._id === authService?.loggedInUser?._id && fromWhere === 'chat' ? 'chat-user-profile' : 'media-left'">
+        <a [routerLink]="['profile', comment?.createdBy?.slug ]">
             <img class="author_avatar_comment" style="width: 45px; height: 45px;"
                 [src]="comment?.createdBy?.avatar ? ((s3FilesBucketURL + comment.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar"
                 alt="Commentator Avatar">
         </a>
     </div>
     <!-- <div [ngClass]="comment.createdBy._id === authService.loggedInUser._id && fromWhere === 'chat' ? 'message-meta' : 'media-body'"> -->
-    <div class="media-body">
+    <div style="width: -webkit-fill-available;">
             <!-- <div class="media-heading"> -->
-            <div [ngClass]="comment.createdBy._id === authService.loggedInUser._id && fromWhere === 'chat' ? 'float-right' : 'media-heading'">
-                <a [routerLink]="['/', 'dashboard', 'profile', comment?.createdBy?._id ]"
+            <div [ngClass]="comment?.createdBy?._id === authService?.loggedInUser?._id && fromWhere === 'chat' ? 'float-right' : 'media-heading'">
+                <a [routerLink]="['profile', comment?.createdBy?.slug ]"
                     style="text-decoration: none;">
                     <h4 style="font-size: 16px; line-height: 14px; margin-bottom: 0;">{{comment?.createdBy?.name }}</h4>
                 </a>
@@ -27,7 +27,7 @@
         <div [ngClass]="comment.createdBy._id === authService.loggedInUser._id && fromWhere === 'chat' ? 'w-80 float-right' : ''">
             <app-editor 
                 [editorStyle]="{padding: '0 15px', 'border-radius': '19px', background: '#f2f3f5', border: 'solid 0.5px rgb(236, 236, 236)'}"
-                [readOnly]="edit ? false : true" #singleCommentEditor [data]="comment?.text"
+                [readOnly]="edit ? false : true" #singleCommentEditor [data]="comment?.text" [html]="comment?.textHTML"
                 [id]="'comment-' + comment._id"></app-editor>
         </div>
 
@@ -40,7 +40,7 @@
 
             <!-- On click Ask for deleting the comment -->
             <a style="min-width: 35px; padding: 0;" *ngIf="comment?.createdBy?._id === authService?.loggedInUser?._id"
-                mat-button (click)="deleteComment()">
+                mat-button (click)="deleteComment(singleCommentEditor)">
                 <!-- <i style="font-size: 1.5rem !important; font-style: normal;" class="fad fa-comment-minus fa-lg"></i> -->
                 Delete
             </a> {{comment?.createdBy?._id === authService?.loggedInUser?._id ? '|' : ''}}
@@ -89,8 +89,8 @@
         <div class="comment-reply-form">
             <!-- COMMENT REPLY EDITOR -->
             <app-editor #commentReplyEditor [placeholder]="'Add a Reply!'"
-                [editorStyle]="{padding: '0 15px', 'border-radius': '19px', background: '#f2f3f5', border: 'solid 0.5px rgb(236, 236, 236)'}"
-                [id]="'reply'+ comment?._id">
+                [editorStyle]="{'border-radius': '19px', background: '#f2f3f5', border: 'solid 0.5px rgb(236, 236, 236)'}"
+                [id]="'reply'+ comment?._id" [data]="replyCommentForm.get('text')?.value">
             </app-editor>
             <!-- <textarea class="bla" name="reply-comment" placeholder="Write your comment..."></textarea> -->
             <button type="button" style="float: right;" class="btn btn--vsm btn--round"

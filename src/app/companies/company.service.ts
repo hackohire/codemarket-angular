@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 import { CommentService } from '../shared/services/comment.service';
 import { appConstants } from '../shared/constants/app_constants';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class CompanyService {
 
   companyFileds = gql`
@@ -18,6 +18,7 @@ export class CompanyService {
     name
     type
     cover
+    slug
     cities {
       name
       _id
@@ -25,16 +26,8 @@ export class CompanyService {
     owners {
       name
       avatar
+      slug
       _id
-    }
-    description {
-      ...Description
-    }
-    ideas {
-      ...Description
-    }
-    questions {
-      ...Description
     }
     status
     createdAt
@@ -43,6 +36,7 @@ export class CompanyService {
       _id
       name
       avatar
+      slug
     }
     location {
       longitude
@@ -56,7 +50,6 @@ export class CompanyService {
     linkedinLink
     websiteLink
   }
-  ${description}
   `;
 
   companyQuery: QueryRef<any>;
@@ -130,7 +123,7 @@ export class CompanyService {
   }
 
 
-  getCompaniesByType(companyType: string, pageOptions = {pageNumber: 0, limit: 0}): Observable<any> {
+  getCompaniesByType(companyType: string, pageOptions = { pageNumber: 0, limit: 0 }): Observable<any> {
     return this.apollo.query(
       {
         query: gql`
@@ -157,13 +150,13 @@ export class CompanyService {
     );
   }
 
-  getCompanyById(CompanyId: string): Observable<Company> {
+  getCompanyById(slug: string): Observable<Company> {
 
     this.companyQuery = this.apollo.watchQuery(
       {
         query: gql`
-          query getCompanyById($CompanyId: String) {
-            getCompanyById(companyId: $CompanyId) {
+          query getCompanyById($slug: String) {
+            getCompanyById(slug: $slug) {
               ...Company
             }
           }
@@ -171,7 +164,7 @@ export class CompanyService {
         `,
         fetchPolicy: 'no-cache',
         variables: {
-          CompanyId
+          slug
         }
       }
     );
@@ -184,9 +177,9 @@ export class CompanyService {
         return index === 0 ?
           of(company).pipe(tap(() => {
             // this.onCompanyPostChanges(company);
-            this.commentService.onCommentAdded({company}, []);
-            this.commentService.onCommentUpdated({company}, []);
-            this.commentService.onCommentDeleted({company}, []);
+            this.commentService.onCommentAdded({ company }, []);
+            this.commentService.onCommentUpdated({ company }, []);
+            this.commentService.onCommentDeleted({ company }, []);
           })) :
           of(company);
       })
@@ -264,10 +257,104 @@ export class CompanyService {
     );
   }
 
-  redirectToCompanyDetails(companyId: string, view = 'posts') {
-    this.router.navigate(['/', `company`, companyId],
-      { queryParams: { view } }
-      );
+  getCampaignsWithTracking(pageOptions, companyId) {
+    return this.apollo.query(
+      {
+        query: gql`
+          query getCampaignsWithTracking($pageOptions: PageOptionsInput, $companyId: String) {
+            getCampaignsWithTracking(pageOptions: $pageOptions, companyId: $companyId) {
+              _id
+              name
+              label
+              descriptionHTML
+              createdBy {
+                name
+                _id
+                avatar
+                slug
+              }
+              count
+              emailData {
+                _id
+                to
+                createdAt
+                subject
+                descriptionHTML
+                tracking {
+                  eventType
+                  open {
+                    timestamp
+                    userAgent
+                    ipAddress
+                  }
+                  mail {
+                    timestamp
+                    source
+                    destination
+                  }
+                }
+              }
+            }
+          }
+        `,
+        variables: {
+          pageOptions,
+          companyId
+        },
+        fetchPolicy: 'no-cache'
+      }
+    ).pipe(
+      map((p: any) => {
+        return p.data.getCampaignsWithTracking;
+      }),
+    );
+  }
+
+  getCampaignEmails(pageOptions, campaignId) {
+    return this.apollo.query({
+      query: gql`
+        query getCampaignEmails($pageOptions: PageOptionsInput, $campaignId: String) {
+          getCampaignEmails(pageOptions: $pageOptions, campaignId: $campaignId) {
+            emails {
+              _id
+              to
+              createdAt
+              subject
+              descriptionHTML
+              tracking {
+                eventType
+                open {
+                  timestamp
+                  userAgent
+                  ipAddress
+                }
+                mail {
+                  timestamp
+                  source
+                  destination
+                }
+              }
+            }
+            total
+          }
+        }
+      `,
+      variables: {
+        pageOptions,
+        campaignId: campaignId
+      },
+      fetchPolicy: 'no-cache'
+    }).pipe(
+      map((p: any) => {
+        return p.data.getCampaignEmails;
+      }),
+    );
+  }
+
+  redirectToCompanyDetails(companyId: string, slug: string, view = 'posts') {
+    this.router.navigate(['/', `company`, slug],
+      { queryParams: { view, id: companyId } }
+    );
   }
 
   editCompany(company: Company) {

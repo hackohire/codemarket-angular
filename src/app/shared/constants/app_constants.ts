@@ -181,9 +181,6 @@ export const appConstants = {
       type
       categories
       referencePostUrl
-      description {
-        ...Description
-      }
       price
       status
       createdAt
@@ -205,6 +202,7 @@ export const appConstants = {
       createdBy {
         _id
         name
+        slug
         avatar
         currentJobDetails {
           jobProfile {
@@ -222,9 +220,6 @@ export const appConstants = {
       }
       slug
       comments {
-        text {
-          ...Description
-        }
         _id
         type
         referenceId
@@ -234,6 +229,7 @@ export const appConstants = {
           _id
           name
           avatar
+          slug
         }
         blockId
         blockSpecificComment
@@ -276,11 +272,19 @@ export const appConstants = {
         _id
         name
         avatar
+        slug
       }
 
       assignees {
         _id
         name
+        slug
+      }
+
+      clients {
+        _id
+        name
+        slug
       }
 
       jobProfile {
@@ -295,8 +299,20 @@ export const appConstants = {
       birthDate
       address
       website
+
+      descriptionHTML
+      activities {
+        action
+        activityDate
+        by {
+          _id
+          name
+        }
+        commentId
+        postId
+        message
+      }
     }
-    ${description}
     ${comment}
     `,
 
@@ -320,5 +336,6 @@ export const appConstants = {
     { name: PostType.Requirement, label: 'Requirement' },
     { name: PostType.Service, label: 'Service' },
     { name: PostType.Testing, label: 'Testing' },
+    { name: PostType.Forms, label: 'Forms' }
   ],
 };

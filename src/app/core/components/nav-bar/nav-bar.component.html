@@ -1,27 +1,27 @@
 <mat-sidenav-container class="sidenav-container">
-
-  <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+<!-- 
+  <mat-sidenav *ngIf="false" #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'main'" [opened]="(isHandset$ | async) === false">
-    <mat-toolbar>Menu</mat-toolbar>
+    <mat-toolbar style="height: 48px; font-size: 14px; font-weight: 400; letter-spacing: 4px; text-transform: uppercase; color: #999; background: #eee;">navigation</mat-toolbar>
 
-    <!-- Sidebar Navigation List Item -->
+    Sidebar Navigation List Item
     <mat-nav-list>
-      <!-- Dashboard -->
+      Dashboard
       <a mat-list-item [routerLink]="['/', 'dashboard']">Dashboard</a>
 
       <a mat-list-item [routerLink]="['/', 'user', 'edit-profile']">Edit Profile</a>
 
       <ng-container *ngFor="let p of postTypesArray">
-        <a mat-list-item [routerLink]="['/', 'post', 'post-list']" [queryParams]="{type: p.name, all: false}">My &nbsp;<span style="text-transform: capitalize;">{{p.name}}</span></a>
+        <a mat-list-item [routerLink]="['/', 'post', 'post-list']" [queryParams]="{type: p.name, all: false}"><span>My</span> &nbsp;<span style="text-transform: capitalize;">{{p.name}}</span></a>
       </ng-container>
 
       <a mat-list-item [routerLink]="['/', 'company', 'company-list']" [queryParams]="{all: false}">My Companies</a>
     </mat-nav-list>
-  </mat-sidenav>p
+  </mat-sidenav> -->
+
 
   <mat-sidenav-content>
-    <mat-toolbar style="padding: 10px 0; background-color: rgb(8, 8, 8);">
-
+    <mat-toolbar class="SearchLoginBox">
 
       <!-- <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'add-post-type']">
         <i style="font-size: 1.0rem !important; color: #ffff00;" class="vertical-align-middle fal fa-add fa-fw"></i>
@@ -29,7 +29,7 @@
       </a> -->
 
       <!-- Search -->
-      <a mat-button routerLinkActive="mat-primary" (click)="openSearchDialog()">
+      <a mat-button routerLinkActive="mat-primary" (click)="openSearchDialog()" style="line-height: 3;">
         <i style="font-size: 1.0rem !important; color: #ffff00;" class="vertical-align-middle fal fa-search fa-fw"></i>
         <span style="color: #ffffff;" class="line-height-initial"> Search</span>
       </a>
@@ -43,7 +43,7 @@
       <!-- Login -->
       <ng-template #logIn>
         <a #lr mat-button [mdePopoverTriggerFor]="authentication" [mdePopoverTargetAt]="lr"
-          mdePopoverTriggerOn="click">
+          mdePopoverTriggerOn="click" style="line-height: 3;">
           <i style="font-size: 1.0rem !important; color: #ffff00;"
             class="vertical-align-middle fal fa-user-circle fa-fw"></i>
           <span style="color: #ffffff;" class="line-height-initial"> Login/Register</span>
@@ -66,9 +66,6 @@
           </span>
         </a>
       </button>
-      <div style="float: right">
-
-      </div>
       <mat-menu #userMenu="matMenu" panelClass="menu-width">
         <div class="menu-width">
           <!-- Shopping Cart -->
@@ -88,10 +85,10 @@
 
     </mat-toolbar>
 
-    <mat-toolbar>
+    <mat-toolbar class="NavBarBox">
 
       <!-- Toggle Sidebar Button -->
-      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
+      <button *ngIf="false" type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
 
@@ -99,9 +96,9 @@
       <!-- <img (click)="redirect()" sizes="(max-width: 282px) 100vw, 282px"
         srcset="../../../../assets/images/logo_qugbvk_c_scalew_200.png 200w, ../../../../assets/images/logo_qugbvk_c_scalew_282.png 282w"
         src="../../../../assets/images/logo_qugbvk_c_scalew_282.png" alt=""> -->
-      <img (click)="redirect()" src="../../../../assets/images/logo.png">
+      <img (click)="redirect()" src="../../../../assets/images/CodemarketSVG.svg" class="brand-logo" >
       <!-- <h2 [routerLink]="['/']">Codemarket</h2> -->
-
+      
       <!-- End Items -->
       <div fxFlex></div>
 
@@ -117,21 +114,12 @@
           *ngIf="isUnread((messageService.messagesList$ | async)?.messages)"></span>
       </div> -->
 
-
-      <a mat-button routerLinkActive="mat-primary">
-        <!-- <i style="font-size: 1.0rem !important;" class="vertical-align-middle fal fa-building fa-fw"></i> -->
-
-        <!-- <div class="line-height-initial" > Create Goals </div> -->
-        <app-add-post-menu style="color: #0674ec !important; margin-left: auto;" [label]="'Create Goals'">
-        </app-add-post-menu>
-      </a>
+      <app-add-post-menu [label]="'Create'">
+      </app-add-post-menu>
 
       <!-- <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'company', 'add-company']">
         <div class="line-height-initial"> Sales Accelerator </div>
       </a>
-      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'post', 'add-dreamjob']">
-        <div class="line-height-initial"> Career Accelerator </div>
-      </a> -->
 
 
       <!-- <app-add-post-menu style="color: black;"></app-add-post-menu> -->
@@ -139,14 +127,12 @@
       <!-- <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'company', 'company-list']" [queryParams]="{all: true}">
         <div class="line-height-initial"> Businesses </div>
       </a> -->
-      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'about-us']" [queryParams]="{all: true}">
+      <!-- <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'about-us']" [queryParams]="{all: true}" style="margin-left:5px; padding: 8px 16px;">
         <div class="line-height-initial"> About </div>
       </a>
-      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'membership']" [queryParams]="{all: true}">
+      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'membership']" [queryParams]="{all: true}" style="margin-left:5px; padding: 8px 16px;">
         <div class="line-height-initial"> Membership </div>
-      </a>
-
-
+      </a> -->
 
     </mat-toolbar>
 
@@ -154,20 +140,20 @@
     <!-- Add Content Here -->
     <router-outlet></router-outlet>
 
-    <footer class="footer-area footer--light" style="margin-top: 4rem;">
-      <div class="mini-footer">
+    <footer class="footer-area footer--light" style="margin-top: 4rem; background: #eee;">
+      <div class="mini-footer" style="padding-bottom: 15px;">
         <div class="container">
 
           <div class="row text-center text-md-left mt-3 pb-3">
 
             <!-- Grid column -->
-            <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+            <div class="col-md-3 col-lg-3 col-xl-3">
               <h6 class="text-uppercase mb-4 font-weight-bold">Codemarket</h6>
               <p>Our mission is to bring innovation to every problem by teaching software development to everyone.</p>
             </div>
             <!-- Grid column -->
 
-            <hr class="w-100 clearfix d-md-none">
+            <hr class="w-100 clearfix d-md-none border-0">
 
             <!-- Grid column 
             <div class="col-md-2 col-lg-2 col-xl-2 mt-3">
@@ -207,10 +193,10 @@
             </div>-->
 
             <!-- Grid column -->
-            <hr class="w-100 clearfix d-md-none">
+            <hr class="w-100 clearfix d-md-none border-0">
 
             <!-- Grid column -->
-            <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+            <div class="col-md-4 col-lg-3 col-xl-3 mx-auto">
               <h6 class="text-uppercase mb-4 font-weight-bold">Contact</h6>
               <p>
                 <i class="fas fa-home mr-3"></i> Palo Alto, CA 94306, US</p>
@@ -235,9 +221,9 @@
             <div class="col-md-7 col-lg-8">
 
               <!--Copyright-->
-              <p class="text-center text-md-left">© 2019 Copyright:
+              <p class="text-center text-md-left">© 2020 Copyright
                 <a href="https://www.codemarket.io">
-                  <strong> codemarket.io</strong>
+                  codemarket.io
                 </a>
               </p>
 

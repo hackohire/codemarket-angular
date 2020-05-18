@@ -55,6 +55,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
   breadcumb: BreadCumb;
 
   commentForm: FormGroup;
+  postForm: FormGroup;
   commentsList: any[];
   collaborators: string[];
   peer: Peer;
@@ -98,6 +99,16 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     /** Read the type of the post  */
+    this.commentsList = [{
+      author: '123_1',
+      body: 'Hello, How are you ?'
+    }, {
+      author: '123_2',
+      body: 'Fine, How are you ?'
+    },{
+      author: '123_1',
+      body: 'Fine, Thanks!'
+    }];
     this.type = this.activatedRoute.snapshot.queryParams.type;
 
     this.commentId = this.activatedRoute.snapshot.queryParams['commentId'];
@@ -115,10 +126,10 @@ export class DetailsComponent implements OnInit, OnDestroy {
           this.postDetails = p;
           this.collaborators = this.postDetails.collaborators.map((cDetail) => {
             return cDetail._id;
-          })
+          });
           this.details$ = of(p);
           this.initializeCommentForm(p, 'post');
-
+          this.postFormInitialization(p);
           /** SHow company in breadcrumb */
           // if (p.companies && p.companies.length) {
           //   this.breadcumb.path.unshift({ name: p.type });
@@ -150,7 +161,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
             })
           );
 
-          this.postService.getCountOfAllPost('', '', 
+          this.postService.getCountOfAllPost('', '',
           {
             referencePostId: [this.postDetails._id],
             connectedPosts: this.postDetails.connectedPosts.map(p => p._id),
@@ -176,7 +187,6 @@ export class DetailsComponent implements OnInit, OnDestroy {
       })
     ).subscribe()
     );
-
   }
 
   async rsvpEvent(eventId) {
@@ -237,6 +247,16 @@ export class DetailsComponent implements OnInit, OnDestroy {
     }
     /** Unsubscribes from Comments Related Subscription */
     this.commentService.unsubscribe();
+  }
+
+  postFormInitialization(i: Post) {
+    this.postForm = new FormGroup({
+      name: new FormControl(i && i.name ? i.name : ''),
+      tags: new FormControl(i && i.tags ? i.tags : []),
+      companies: new FormControl(i && i.companies ? i.companies : []),
+      clients: new FormControl(i && i.clients ? i.clients : []),
+      collaborators: new FormControl(i && i.collaborators ? i.collaborators : []),
+    });
   }
 
   initializeCommentForm(p, commentType?: string) {

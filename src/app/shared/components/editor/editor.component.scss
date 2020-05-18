@@ -1,7 +1,12 @@
 .visibility-hidden {
-  display: none;
+  // visibility: none;
+  height: 0;
+  opacity: 0;
 }
 
-.ce-toolbox__button:hover {
-  fill: #0674ec;
+:host ::ng-deep {
+  .ck-editor__editable:not([contenteditable=false]) {
+    border: 1px solid #c4c4c4;
+    max-height: 73vh;
+  }
 }

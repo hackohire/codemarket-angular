@@ -88,11 +88,11 @@
                 }
               ]
             },
-            "patents": {
+            "research": {
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.patents.ts"
+                  "with": "src/environments/environment.research.ts"
                 }
               ],
               "optimization": true,
@@ -127,8 +127,8 @@
             "staging": {
               "browserTarget": "codemarket:build:staging"
             },
-            "patents": {
-              "browserTarget": "codemarket:build:patents"
+            "research": {
+              "browserTarget": "codemarket:build:research"
             }
           }
         },
@@ -182,8 +182,8 @@
             "staging": {
               "devServerTarget": "codemarket:serve:staging"
             },
-            "patents": {
-              "devServerTarget": "codemarket:serve:patents"
+            "research": {
+              "devServerTarget": "codemarket:serve:research"
             }
           }
         },
@@ -221,11 +221,11 @@
                 "styles": true
               }
             },
-            "patents": {
+            "research": {
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.patents.ts"
+                  "with": "src/environments/environment.research.ts"
                 }
               ],
               "sourceMap": false,

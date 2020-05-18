@@ -69,7 +69,7 @@ export class DashboardComponent implements OnInit {
     },
     {
       name: 'heplRequired',
-      label: 'Did you lose your job?',
+      label: 'What help do you need with patents?',
       placeholder: '',
       type: 'textarea',
       required: true,

@@ -11,37 +11,37 @@ export const emails = [
   //   name: 'Sumi',
   //   email: ['sumi@codemarket.io']
   // },
-  // {
-  //   name: 'Jay Sojitra',
-  //   firstName: 'Jay',
-  //   // companyName: 'Company Name',
-  //   // BNIName: 'BNI NAME',
-  //   "OrganizatinName": "Social and Environmental Entrepreneurs",
-  //   "proposalName": "Bringing LA's Green New Deal to Our Neighborhoods",
-  //   link: 'www.youtube.com',
-  //   companyName: "Top Gun Tank Solutions",
-  //   "email": [
-  //     {
-  //       email: 'jaysojitra13@gmail.com',
-  //       status: true
-  //   }]
-  // },
   {
-    name: 'Sumi Devi',
-    firstName: 'Sumi',
+    name: 'Jay Sojitra',
+    firstName: 'Jay',
     // companyName: 'Company Name',
     // BNIName: 'BNI NAME',
-    // "OrganizatinName": "Social and Environmental Entrepreneurs",
-    // "proposalName": "Bringing LA's Green New Deal to Our Neighborhoods",
+    "OrganizatinName": "Social and Environmental Entrepreneurs",
+    "proposalName": "Bringing LA's Green New Deal to Our Neighborhoods",
     link: 'www.youtube.com',
     companyName: "Top Gun Tank Solutions",
-    email: [
+    "email": [
       {
-        email: 'sumi@codemarket.io',
+        email: 'jaysojitra13@gmail.com',
         status: true
-    }
-    ]
+    }]
   },
+  // {
+  //   name: 'Sumi Devi',
+  //   firstName: 'Sumi',
+  //   // companyName: 'Company Name',
+  //   // BNIName: 'BNI NAME',
+  //   // "OrganizatinName": "Social and Environmental Entrepreneurs",
+  //   // "proposalName": "Bringing LA's Green New Deal to Our Neighborhoods",
+  //   link: 'www.youtube.com',
+  //   companyName: "Top Gun Tank Solutions",
+  //   email: [
+  //     {
+  //       email: 'sumi@codemarket.io',
+  //       status: true
+  //   }
+  //   ]
+  // },
   // {
   //   name: 'Sumit Vekariya',
   //   firstName: 'Sumit',

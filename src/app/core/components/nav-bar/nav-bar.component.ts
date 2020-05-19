@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 import { MatDialog, MatAnchor } from '@angular/material';
 import { SearchComponent } from '../search/search.component';
 import { droEmails, emails, la2050Emails, therapistEmails } from '../../../emails';
-import { newBniEmails, womenBizEmails } from '../../../newEmails';
+import { newBniEmails, womenBizEmails, cityEmails, cocSmEmail, linkedInEmails } from '../../../newEmails';
 import { Validators, FormControl } from '@angular/forms';
 import { PostType } from '../../../shared/models/post-types.enum';
 import { MessageService } from '../../../shared/services/message.service';
@@ -27,6 +27,9 @@ import { newla2050 } from '../../../shared/new-la2050-template';
 import { thepaistTemplate } from '../../../shared/therapist-template';
 import { newBniTemplate } from '../../../shared/new-bni-template';
 import { womenbizTemplate } from '../../../shared/womenbiz-template';
+import { linkedinTemplate } from '../../../shared/linkedin-template';
+import { cocSmTemplate } from '../../../shared/cocsam-template';
+import { cityTemplate } from '../../../shared/city-template';
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
@@ -164,20 +167,25 @@ export class NavBarComponent implements OnInit, OnDestroy {
 
   sendEmails() {
     let count = 0;
-    womenBizEmails.forEach((e, i) => {
+    emails.forEach((e, i) => {
       setTimeout(() => {
         e.email.forEach((email, j) => {
           setTimeout(() => {
             if (!Validators.email(new FormControl(email.email))) {
               const emailObj = {
                 to: [email.email],
-                subject: `${e.name}, Invitation to 100,000 Businesses Summit`,
+                subject: `Invitation to 100,0000 Businesses Summit`, // cocsm && city
+                // subject: `${e.name}, Invitation to 100,0000 Businesses Summit`, // LinkedIn
                 companies: [{ _id: '5db1c84ec10c45224c4b95fd' }],
                 type: PostType.Email,
                 status: PostStatus.Published,
-                descriptionHTML: womenbizTemplate.replace('{companyName}', e.companyName).replace('{firstName}', e.firstName),
+                descriptionHTML: linkedinTemplate.replace('{name}', e.name),
+                // descriptionHTML: cocSmTemplate.replace('{companyName}', e.companyName),
+                // descriptionHTML: cityTemplate,
                 createdBy: '5d4c1cdf91e63a3fe84bb43a',
-                campaignId: '5ec2b13d9cca356bf8822fc7'
+                // campaignId: '5ec3e8d0a1587b4ade4b1015' // city
+                 // campaignId: '5ec3db9ea1587b4ade4b1014' // cocsm
+                campaignId: '5ec3db9ea1587b4ade4b1013' // linkedin
               };
               this.emailService.sendEmail(emailObj).toPromise().then((o) => {
                 console.log(o, i);

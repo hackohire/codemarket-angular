@@ -1,20 +1,10 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { AppState } from '../core/store/state/app.state';
-import { Observable, of } from 'rxjs';
-import { Product } from '../shared/models/product.model';
-import { MatTableDataSource } from '@angular/material/table';
-import { HelpQuery } from '../shared/models/help-query.model';
-import { MatSort } from '@angular/material';
-import { UserService } from '../user/user.service';
-import { PostService } from '../shared/services/post.service';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../core/services/auth.service';
-import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
-import { ActivatedRoute } from '@angular/router';
-import { MembershipService } from '../membership/membership.service';
-import { FormGroup, Validators, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { FormBuilderService } from '../form-builder/form-builder.service';
+import { PostService } from '../shared/services/post.service';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-dashboard',
@@ -24,6 +14,7 @@ import { FormBuilderService } from '../form-builder/form-builder.service';
 export class DashboardComponent implements OnInit {
 
   questionnaire: FormGroup;
+  showAuth = false;
   fields = [
     {
       name: 'firstName',
@@ -76,30 +67,13 @@ export class DashboardComponent implements OnInit {
     }
   ];
 
-  @ViewChild('successInvitationAccept', { static: false }) successInvitationAccept: SwalComponent;
-  productsList$: Observable<Product[]>;
-  helpRequestList$: Observable<HelpQuery[]>;
-  usersListAndTheirBugFixes$: Observable<[]>;
-
-  emailInput: string;
-
-  displayedColumnsForHelpRequest: string[] = ['number', 'name', 'price', 'createdBy', 'createdAt'];
-  dataSource = new MatTableDataSource();
-  @ViewChild(MatSort, { static: false }) sort: MatSort;
-
   constructor(
-    private userService: UserService,
     public postService: PostService,
     public authService: AuthService,
-    private formBuilderService: FormBuilderService,
-    private membershipService: MembershipService,
-    private activatedRoute: ActivatedRoute,
-    private el: ElementRef,
-  ) {
-  }
+    private formBuilderService: FormBuilderService
+  ) { }
 
   ngOnInit() {
-
     this.questionnaire = new FormGroup({
       firstName: new FormControl('', Validators.required),
       lastName: new FormControl(''),
@@ -115,26 +89,31 @@ export class DashboardComponent implements OnInit {
     return Object.keys(d);
   }
 
-  redirectToUserProfile(event) {
-    console.log(event);
-    this.userService.redirectToUserProfile(event);
-  }
-
   submit(stepper) {
     const body = {
       formname: 'Landing Page Form',
       formDataJson: this.questionnaire.value
-    }
+    };
     this.formBuilderService.addformData(body).subscribe((d: any) => {
       if (d) {
-        Swal.fire(`Thank You!`, '', 'success').then(() => {
+        if (d.formDataJson && d.formDataJson.email && !this.authService.loggedInUser) {
+
+          /** Clearing the form & stepper */
           this.questionnaire.reset();
           stepper.reset();
+
+          this.showAuth = true;
+          environment.confirm.email = d.formDataJson.email;
+          environment.confirm.name = (d.formDataJson.firstName + ' ' + d.formDataJson.lastName).trim();
+          this.authService._authState.next({ state: 'signUp', user: { username: d.formDataJson.email, name: environment.confirm.name } });
+        }
+        Swal.fire(`Thank You!`, '', 'success').then(() => {
+          // this.questionnaire.reset();
+          // stepper.reset();
           if (!this.authService.loggedInUser) {
-            this.authService.openAuthenticationPopover.next(true);
+            // this.authService.openAuthenticationPopover.next(true);
             return;
           }
-          // this.formBuilderService.redirectToBack(d._id);
         });
       }
     });

@@ -57,13 +57,16 @@ export const linkedinTemplate = `<html>
                                                                                     </p>
 
                                                                                     <p>
-                                                                                    I would like to invite you to 100,0000 business summit.
+                                                                                    Do you know anyone who is looking for  job assistance in this difficult times?
                                                                                     </p>
 
                                                                                     <p>
-                                                                                    please let me know if you would be interested?
+                                                                                    We  have network of companies and mentors that are offering job training and job transition for those that need assistance.
                                                                                     </p>
                                                                                     
+                                                                                    <p>
+                                                                                    If you know anyone that can use help please let me know.
+                                                                                    </p>
                                                                                     <div style="line-height: 9px; padding-top: 10px;">
                                                                                     <p>Sumithra Devi</p>
                                                                                     <p><a href="https://www.codemarket.io">Codemarket</a></p>

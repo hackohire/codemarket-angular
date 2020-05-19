@@ -57,7 +57,7 @@ export const cityTemplate = `<html>
                                                                                     </p>
 
                                                                                     <p>
-                                                                                    I would like to invite you to 100,0000 business summit.
+                                                                                    I would like to invite you to 100,000 business summit.
                                                                                     </p>
 
                                                                                     <p>

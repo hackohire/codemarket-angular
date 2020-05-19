@@ -16,7 +16,7 @@ export class SignUpComponent implements OnInit {
   signupForm: FormGroup = new FormGroup({
     email: new FormControl(environment.confirm.email, [ Validators.email, Validators.required ]),
     password: new FormControl('', [ Validators.required ]),
-    name: new FormControl(environment.confirm.name, [ Validators.min(2) ]),
+    name: new FormControl(environment.confirm.name,  [Validators.minLength(2)]),
   });
 
   get emailInput() { return this.signupForm.get('email'); }

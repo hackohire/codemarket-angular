@@ -75,13 +75,13 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.questionnaire = new FormGroup({
-      firstName: new FormControl('Sumit', Validators.required),
-      lastName: new FormControl('Vekariya'),
-      email: new FormControl('sarkazein7@gmail.com', [Validators.email, Validators.required]),
-      phone: new FormControl('9727551757', [Validators.minLength(10), Validators.maxLength(10), Validators.required]),
-      businessName: new FormControl('Tech', Validators.required),
-      address: new FormControl('AAA', Validators.required),
-      helpRequired: new FormControl('AAA', Validators.required)
+      firstName: new FormControl('', Validators.required),
+      lastName: new FormControl(''),
+      email: new FormControl('', [Validators.email, Validators.required]),
+      phone: new FormControl('', [Validators.minLength(10), Validators.maxLength(10), Validators.required]),
+      businessName: new FormControl('', Validators.required),
+      address: new FormControl('', Validators.required),
+      helpRequired: new FormControl('', Validators.required)
     });
   }
 

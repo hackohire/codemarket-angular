@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "jobs": {
+    "codemarket": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -88,11 +88,11 @@
                 }
               ]
             },
-            "bank": {
+            "jobs": {
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.bank.ts"
+                  "with": "src/environments/environment.jobs.ts"
                 }
               ],
               "optimization": true,
@@ -118,24 +118,24 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
             "port": 4800,
-            "browserTarget": "jobs:build"
+            "browserTarget": "codemarket:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "jobs:build:production"
+              "browserTarget": "codemarket:build:production"
             },
             "staging": {
               "browserTarget": "codemarket:build:staging"
             },
-            "bank": {
-              "browserTarget": "codemarket:build:bank"
+            "jobs": {
+              "browserTarget": "codemarket:build:jobs"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "jobs:build"
+            "browserTarget": "codemarket:build"
           }
         },
         "test": {
@@ -173,17 +173,17 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "jobs:serve"
+            "devServerTarget": "codemarket:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "jobs:serve:production"
+              "devServerTarget": "codemarket:serve:production"
             },
             "staging": {
               "devServerTarget": "codemarket:serve:staging"
             },
-            "bank": {
-              "devServerTarget": "codemarket:serve:bank"
+            "jobs": {
+              "devServerTarget": "codemarket:serve:jobs"
             }
           }
         },
@@ -221,11 +221,11 @@
                 "styles": true
               }
             },
-            "bank": {
+            "jobs": {
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.bank.ts"
+                  "with": "src/environments/environment.jobs.ts"
                 }
               ],
               "sourceMap": false,
@@ -239,5 +239,5 @@
       }
     }
   },
-  "defaultProject": "jobs"
+  "defaultProject": "codemarket"
 }

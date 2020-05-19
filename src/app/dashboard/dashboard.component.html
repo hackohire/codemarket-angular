@@ -13,7 +13,7 @@
         </div>
         <div class="col-lg-5 pt-5 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center aos-init aos-animate"
             data-aos="fade-up">
-            <div *ngIf="!showAuth">
+            <div *ngIf="!showAuth || authService?.loggedInUser?._id; else authUI">
                 <h1
                     style="font-size: 34px; line-height: normal; max-width: 100%; text-align: left;color:#000; text-transform: none;margin-bottom: 1rem;letter-spacing: 1px;">
                     Supercharge your business with superhero tech and marketing teams
@@ -59,7 +59,9 @@
                     </mat-horizontal-stepper>
                 </form>
             </div>
-            <app-auth *ngIf="showAuth"></app-auth>
+            <ng-template #authUI>
+                <app-auth></app-auth>
+            </ng-template>
         </div>
     </div>
 </div>

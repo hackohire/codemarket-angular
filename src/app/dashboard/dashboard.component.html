@@ -2,48 +2,70 @@
 
 <!-- <section class="hero-area bgimage"> -->
 
-    <section id="hero" style="padding: 40px 0;background: #ffffff;">
-        <div style="position: absolute; top: 51px; left: 44px; font-size: 20px; color: #000;letter-spacing: 0.9px;">coding + <span style="color: #00aeef;">marketing</span></div>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-7 order-1 order-lg-2 hero-img aos-init aos-animate" data-aos="fade-left">
-                    <img src="./../assets/images/new-header2.png" class="img-fluid" alt="">
-                </div>
-                <div class="col-lg-5 pt-5 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center aos-init aos-animate" data-aos="fade-up">
-                    <div>
-                        <h1 style="font-size: 34px; line-height: normal; max-width: 100%; text-align: left;color:#000; text-transform: none;margin-bottom: 1rem;letter-spacing: 1px;">
-                            Supercharge your business with superhero tech and marketing teams
-                        </h1>
-                        <h2 style="font-size: 26px; line-height: normal; max-width: 100%; text-align: left;color:#999;margin-bottom: 1.5rem;font-weight: 100;">
-                            grow your business like a large corporation without the large overhead
-                        </h2>
-                        <!-- <h1 style="font-size: 1.9em; line-height: normal; margin: 20px 0 0 0; font-weight: 200; text-align: left; color:#00aeef">
+<!-- <div style="padding: 0px 0;background: #ffffff;"> -->
+    <!-- <div style="position: absolute; top: 51px; left: 44px; font-size: 20px; color: #000;letter-spacing: 0.9px;">coding +
+        <span style="color: #00aeef;">marketing</span></div> -->
+
+    <div class="row m-0">
+        <div style="height:100vh" class="col-lg-6 col-md-6 order-1 order-lg-1 d-flex justify-content-center hero-img aos-init aos-animate"
+            data-aos="fade-left">
+            <img style="max-height: 520px; top: -45px;" src="./../assets/images/new-header2.png" class="img-fluid" alt="">
+        </div>
+        <div style="height:100vh" class="col-lg-6 col-md-6 pt-lg-0 order-2 order-lg-2 d-flex flex-column justify-content-center aos-init aos-animate"
+            data-aos="fade-up">
+            <div *ngIf="!showAuth" class="p-3">
+                <h1
+                    style="font-size: 34px; line-height: normal; max-width: 100%; text-align: left;color:#000; text-transform: none;margin-bottom: 1rem;letter-spacing: 1px;">
+                    Supercharge your business with superhero tech and marketing teams
+                </h1>
+                <h2
+                    style="font-size: 26px; line-height: normal; max-width: 100%; text-align: left;color:#999;margin-bottom: 1.5rem;font-weight: 100;">
+                    grow your business like a large corporation without the large overhead
+                </h2>
+                <!-- <h1 style="font-size: 1.9em; line-height: normal; margin: 20px 0 0 0; font-weight: 200; text-align: left; color:#00aeef">
                             <a class="btn btn-primary btn-md" [routerLink]="['/', 'company', 'add-company']">JOIN TODAY</a>
                         </h1> -->
-                    <form>
-                        <div id="append_location" class="individuals-signup-cta__form-group">
-                            <label class="individuals-signup-cta__label">Enter your email address</label>
-                            <input type="hidden" name="fyi_from_landing" value="true">
-                            <input [(ngModel)]="emailInput" id="email_input"
-                                class="individuals-signup-cta__email-input email_input" type="email" name="fyi_email">
-                            <button [disabled]="!emailInput" id="submitBtn" class="google-button special" type="button"
-                                [routerLink]="['../', 'help-business-grow']" [queryParams]="{email: emailInput}">
-                                <span class="button-flex-wrapper">
-                                    Start Today
-                                </span>
-                            </button>
-                        </div>
-                    </form>
-                    <div class="individuals-signup__underform">
-                        <span>Safe. Secure. Organized.</span>
-                    </div>
-                </div>
+                <form *ngIf="questionnaire" [formGroup]="questionnaire">
+                    <mat-horizontal-stepper linear #stepper>
+                        <mat-step
+                            *ngFor="let formField of convertObjectToArray(questionnaire?.controls); let i = index; let l = last; let f = first;">
+                            <h3>{{fields[i]?.label}}</h3>
+                            <ng-container [ngSwitch]="fields[i]?.type">
+                                <mat-form-field *ngSwitchCase="'textarea'" class="field-full-width"
+                                    appearance="outline">
+                                    <mat-label>{{fields[i].label}}</mat-label>
+                                    <textarea matInput
+                                        (keyup.enter)="questionnaire?.get(formField)?.valid ? stepper.next() : ''"
+                                        [placeholder]="fields[i].label" [formControlName]="formField"></textarea>
+                                </mat-form-field>
+                                <mat-form-field *ngSwitchDefault class="field-full-width" appearance="outline">
+                                    <mat-label>{{fields[i].label}}</mat-label>
+                                    <input matInput
+                                        (keyup.enter)="questionnaire?.get(formField)?.valid ? stepper.next() : ''"
+                                        [placeholder]="fields[i].label" [type]="fields[i].type"
+                                        [formControlName]="formField">
+                                </mat-form-field>
+                            </ng-container>
+                            <div>
+                                <button style="margin-right: 10px;" *ngIf="!f" mat-raised-button matStepperPrevious
+                                    type="button">Back</button>
+                                <button #nextStep *ngIf="!l" color="primary"
+                                    [disabled]="questionnaire?.get(formField)?.invalid" mat-raised-button matStepperNext
+                                    type="button">Next</button>
+                                <button *ngIf="l" color="primary" [disabled]="questionnaire?.get(formField)?.invalid"
+                                    mat-raised-button type="button" (click)="submit(stepper)">Submit</button>
+                            </div>
+                        </mat-step>
+                    </mat-horizontal-stepper>
+                </form>
             </div>
+            <app-auth *ngIf="showAuth"></app-auth>
         </div>
-    </div>
-</section>
 
-<section id="hero" style="padding: 40px 0 0;background: #f2f9ff;">
+    </div>
+<!-- </div> -->
+
+<section *ngIf="false" id="hero" style="padding: 40px 0 0;background: #f2f9ff;">
     <div class="container">
         <div class="row">
             <div class="col-lg-5 pt-5 pt-lg-0 order-1 order-lg-2 d-flex flex-column justify-content-center aos-init aos-animate"
@@ -106,12 +128,11 @@
     </div>
 </div> -->
 
-<div style="background: #00aeef; padding: 80px 0 60px 0;">
+<div *ngIf="false" style="background: #00aeef; padding: 80px 0 60px 0;">
     <div class="container">
         <div class="row">
             <div class="col-md-12 col-sm-12">
-                <h1
-                    style="font-size: 2.3em; max-width: 100%; text-align: center; font-weight: 400; color: #ffffff">
+                <h1 style="font-size: 2.3em; max-width: 100%; text-align: center; font-weight: 400; color: #ffffff">
                     Monetize Your Digital Products and Generate Revenue
                 </h1>
                 <hr style="max-width: 60vw; margin-top: 2rem; border-color: white;">
@@ -124,7 +145,7 @@
     </div>
 </div>
 
-<div class="container-fluid" style="padding: 70px 0;">
+<div *ngIf="false" class="container-fluid" style="padding: 70px 0;">
     <div class="container">
         <div class="row">
             <div class="col-md-12 col-md-12">
@@ -161,12 +182,11 @@
     </div>
 </div>
 
-<div style="background: #00aeef; padding: 80px 0 60px 0;">
+<div *ngIf="false" style="background: #00aeef; padding: 80px 0 60px 0;">
     <div class="container">
         <div class="row">
             <div class="col-md-12 col-sm-12">
-                <h1
-                    style="font-size: 2.3em; max-width: 100%;  text-align: center; font-weight: 400; color: #ffffff">
+                <h1 style="font-size: 2.3em; max-width: 100%;  text-align: center; font-weight: 400; color: #ffffff">
                     Create Digital Products
                 </h1>
                 <hr style="max-width: 30vw; margin-top: 2rem; border-color: white;">
@@ -179,17 +199,15 @@
     </div>
 </div>
 
-<div class="container">
+<div *ngIf="false" class="container">
     <div class="row" style="padding: 80px 0 20px; align-items: center; margin: 0;">
         <div class="col-md-12">
-            <h1
-                style="font-size: 2.3em;max-width: 100%;text-align: center;color: #00aeef; font-weight: 400; ">
+            <h1 style="font-size: 2.3em;max-width: 100%;text-align: center;color: #00aeef; font-weight: 400; ">
                 Digital Infrastructure Tailor-Made to Your Business Goals
             </h1>
             <hr style="border-color: #ff6640; max-width: 62vw; margin-top: 2rem; padding-bottom: 10px;">
             <div class="col-md-12" style="align-self: left;">
-                <h6
-                    style="font-size: 1.9em; margin: auto;; text-align: center; font-weight: 100; ">
+                <h6 style="font-size: 1.9em; margin: auto;; text-align: center; font-weight: 100; ">
                     Do You Want To Add Additional Revenue Steams to Your Business?
                 </h6>
             </div>
@@ -197,12 +215,11 @@
     </div>
 </div>
 
-<div class="container business-communitites-label" style="margin-bottom: 100px;">
+<div *ngIf="false" class="container business-communitites-label" style="margin-bottom: 100px;">
     <div class="row mt-5 mb-5" style="margin-top: 10px; margin-bottom: 10px; text-align: center; ">
         <div class="col-md-3">
             <img [src]="'../../assets/images/website.svg'" class="mb-3 p-2" height="140px">
-            <a style="font-size: 1.5em; font-weight: 100;" class="d-block"
-                [routerLink]="['/', 'website']">Website</a>
+            <a style="font-size: 1.5em; font-weight: 100;" class="d-block" [routerLink]="['/', 'website']">Website</a>
         </div>
         <div class="col-md-3">
             <img [src]="'../../assets/images/facebook.svg'" class="mb-3 p-4" height="140px">
@@ -224,8 +241,7 @@
     <div class="row mt-5 mb-5" style="margin-top: 10px; margin-bottom: 10px; text-align: center;">
         <div class="col-md-3">
             <img [src]="'../../assets/images/wordpress.svg'" class="mb-3 p-2" height="140px">
-            <a style="font-size: 1.5em; font-weight: 100;" class="d-block"
-                [routerLink]="['/', 'website']">WordPress</a>
+            <a style="font-size: 1.5em; font-weight: 100;" class="d-block" [routerLink]="['/', 'website']">WordPress</a>
         </div>
         <div class="col-md-3">
             <img [src]="'../../assets/images/instagram.svg'" class="mb-3 p-3" height="140px">
@@ -444,12 +460,3 @@
 <!-- start container -->
 
 <!--</section>-->
-
-<swal #successInvitationAccept title="Congratulations!" type="success" [showConfirmButton]="false">
-    <div *swalPartial class="alert alert-info">
-        <h4>You have accepted Invitation Successfully</h4>
-        <p></p>
-        <a class="btn btn--sm btn--round" [routerLink]="['/', 'dashboard', 'post-list']"
-            [queryParams]="{type: 'event', all: true}">Events</a>
-    </div>
-</swal>

@@ -38,10 +38,11 @@ form > * {
 }
 
 .auth-box {
-  background-color: #ececec; 
+  // background-color: #ececec; 
+  background-color: white; 
   padding: 15px;
   max-width: 500px;
-  min-width: 500px;
+  // min-width: 500px;
   border-radius: 10px;
 }
 
@@ -118,7 +119,7 @@ textarea {
 }
 
 .mat-form-field-wrapper {
-  padding: 0;
+  // padding: 0;
 }
 
 mat-icon,

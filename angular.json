@@ -88,11 +88,11 @@
                 }
               ]
             },
-            "patents": {
+            "womenbiz": {
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.patents.ts"
+                  "with": "src/environments/environment.womenbiz.ts"
                 }
               ],
               "optimization": true,
@@ -127,8 +127,8 @@
             "staging": {
               "browserTarget": "codemarket:build:staging"
             },
-            "patents": {
-              "browserTarget": "codemarket:build:patents"
+            "womenbiz": {
+              "browserTarget": "codemarket:build:womenbiz"
             }
           }
         },
@@ -182,8 +182,8 @@
             "staging": {
               "devServerTarget": "codemarket:serve:staging"
             },
-            "patents": {
-              "devServerTarget": "codemarket:serve:patents"
+            "womenbiz": {
+              "devServerTarget": "codemarket:serve:womenbiz"
             }
           }
         },
@@ -221,11 +221,11 @@
                 "styles": true
               }
             },
-            "patents": {
+            "womenbiz": {
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.patents.ts"
+                  "with": "src/environments/environment.womenbiz.ts"
                 }
               ],
               "sourceMap": false,

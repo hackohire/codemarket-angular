@@ -8,7 +8,7 @@
 <div class="container-fluid">
     <div class="row" style="min-height: calc(100vh - 48px);">
         <div class="col-lg-6 order-1 order-lg-1 pt-3 pt-lg-0 pb-3 pb-lg-0 px-lg-5 hero-img d-flex flex-column justify-content-center aos-init aos-animate"  data-aos="fade-left" style="background-color: #333;">
-            <img src="./../assets/images/bank.png" class="img-fluid" alt="">
+            <img src="./../assets/images/bank.jpg" class="img-fluid" alt="">
         </div>
         <div class="col-lg-6 pt-5 pt-lg-0 pb-3 px-lg-5 order-2 order-lg-2 d-flex flex-column justify-content-center aos-init aos-animate"  data-aos="fade-up">
             <div *ngIf="!showAuth || authService?.loggedInUser?._id; else authUI">
@@ -27,7 +27,7 @@
                     <mat-horizontal-stepper linear #stepper>
                         <mat-step
                             *ngFor="let formField of convertObjectToArray(questionnaire?.controls); let i = index; let l = last; let f = first;">
-                            <!-- <h3>{{fields[i]?.label}}</h3> -->
+                            <h3>{{fields[i]?.label}}</h3>
                             <ng-container [ngSwitch]="fields[i]?.type">
                                 <mat-form-field *ngSwitchCase="'textarea'" class="field-full-width"
                                     appearance="outline">

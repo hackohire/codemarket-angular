@@ -16,6 +16,7 @@ export const environment = {
   webSocketURL: 'wss://314t92s90a.execute-api.us-east-1.amazonaws.com/prod',
   // planDetails: plans.prod,
   planDetails: plans.prod,
+  fileS3Bucket: 'codemarket-files',
   oauth: {
     // Domain name
     domain: 'platform.auth.us-east-1.amazoncognito.com',
@@ -37,6 +38,7 @@ export const environment = {
   baseHref: '/',
   confirm: {
     email: '',
-    password: ''
+    password: '',
+    name: ''
   }
 };

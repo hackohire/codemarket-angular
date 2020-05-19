@@ -2,13 +2,73 @@
 
 <!-- <section class="hero-area bgimage"> -->
 
-<section id="hero" style="padding: 0px 0;background: #ffffff; height: 100vh;">
-    <div style="height: 100%;">
-        <div class="row h-100" style="width: 100vw;">
-            <div style="display: flex; padding: 0;" class="col-lg-6 order-1 align-self-center h-100 order-md-2 order-lg-1 align-items-center justify-content-center hero-img aos-init aos-animate" data-aos="fade-left">
-                <img style="vertical-align: middle; width: 100%; height: 100%;" src="./../assets/images/vc.jpg" class="img-fluid" alt="">
+<!-- <div style="padding: 0px 0;background: #ffffff;"> -->
+    <!-- <div style="position: absolute; top: 51px; left: 44px; font-size: 20px; color: #000;letter-spacing: 0.9px;">coding +
+        <span style="color: #00aeef;">marketing</span></div> -->
+<div class="container-fluid">
+    <div class="row" style="min-height: calc(100vh - 48px);">
+        <div class="col-lg-6 order-1 order-lg-1 pt-3 pt-lg-0 pb-3 pb-lg-0 px-lg-5 hero-img d-flex flex-column justify-content-center aos-init aos-animate"  data-aos="fade-left" style="background-color: #333;">
+            <img src="./../assets/images/vc.jpg" class="img-fluid" alt="">
+        </div>
+        <div class="col-lg-6 pt-5 pt-lg-0 pb-3 px-lg-5 order-2 order-lg-2 d-flex flex-column justify-content-center aos-init aos-animate"  data-aos="fade-up">
+            <div *ngIf="!showAuth || authService?.loggedInUser?._id; else authUI">
+                <h1
+                    style="font-size: 34px; line-height: normal; max-width: 100%; text-align: left;color:#000; text-transform: none;margin-bottom: 1rem;letter-spacing: 1px;">
+                    Are you looking for Venture Capital? Apply
+                </h1>
+                <!-- <h2
+                    style="font-size: 26px; line-height: normal; max-width: 100%; text-align: left;color:#999;margin-bottom: 1.5rem;font-weight: 100;">
+                    grow your business like a large corporation without the large overhead
+                </h2> -->
+                <!-- <h1 style="font-size: 1.9em; line-height: normal; margin: 20px 0 0 0; font-weight: 200; text-align: left; color:#00aeef">
+                            <a class="btn btn-primary btn-md" [routerLink]="['/', 'company', 'add-company']">JOIN TODAY</a>
+                        </h1> -->
+                <form *ngIf="questionnaire" [formGroup]="questionnaire">
+                    <mat-horizontal-stepper linear #stepper>
+                        <mat-step
+                            *ngFor="let formField of convertObjectToArray(questionnaire?.controls); let i = index; let l = last; let f = first;">
+                            <!-- <h3>{{fields[i]?.label}}</h3> -->
+                            <ng-container [ngSwitch]="fields[i]?.type">
+                                <mat-form-field *ngSwitchCase="'textarea'" class="field-full-width"
+                                    appearance="outline">
+                                    <mat-label>{{fields[i].label}}</mat-label>
+                                    <textarea matInput
+                                        (keyup.enter)="questionnaire?.get(formField)?.valid ? stepper.next() : ''"
+                                        [placeholder]="fields[i].label" [formControlName]="formField"></textarea>
+                                </mat-form-field>
+                                <mat-form-field *ngSwitchDefault class="field-full-width" appearance="outline">
+                                    <mat-label>{{fields[i].label}}</mat-label>
+                                    <input matInput
+                                        (keyup.enter)="questionnaire?.get(formField)?.valid ? stepper.next() : ''"
+                                        [placeholder]="fields[i].label" [type]="fields[i].type"
+                                        [formControlName]="formField">
+                                </mat-form-field>
+                            </ng-container>
+                            <div>
+                                <button style="margin-right: 10px;box-shadow: none;background: #eee;" *ngIf="!f" mat-raised-button matStepperPrevious
+                                    type="button">Back</button>
+                                <button #nextStep *ngIf="!l" color="primary"
+                                    [disabled]="questionnaire?.get(formField)?.invalid" mat-raised-button matStepperNext
+                                    type="button">Next</button>
+                                <button *ngIf="l" color="primary" [disabled]="questionnaire?.get(formField)?.invalid"
+                                    mat-raised-button type="button" (click)="submit(stepper)">Submit</button>
+                            </div>
+                        </mat-step>
+                    </mat-horizontal-stepper>
+                </form>
             </div>
-            <div class="col-lg-6 align-self-center p-5 pt-5 h-100 pt-lg-0 order-md-1 order-2 order-lg-2 d-flex flex-column justify-content-center aos-init aos-animate"
+            <ng-template #authUI>
+                <app-auth></app-auth>
+            </ng-template>
+        </div>
+    </div>
+</div>
+<!-- </div> -->
+
+<section *ngIf="false" id="hero" style="padding: 40px 0 0;background: #f2f9ff;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5 pt-5 pt-lg-0 order-1 order-lg-2 d-flex flex-column justify-content-center aos-init aos-animate"
                 data-aos="fade-up">
                 <div>
                     <!-- <h1
@@ -41,7 +101,13 @@
                             </mat-step>
                         </mat-horizontal-stepper>
                     </form>
+                    <div class="individuals-signup__underform">
+                        <span>Safe. Secure. Organized.</span>
+                    </div>
                 </div>
+            </div>
+            <div class="col-lg-7 order-2 order-lg-1 hero-img aos-init aos-animate" data-aos="fade-left">
+                <img src="./../assets/images/new-header.png" class="img-fluid" alt="">
             </div>
         </div>
     </div>

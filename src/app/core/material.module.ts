@@ -22,7 +22,7 @@ import {
   MatSelectModule,
   MatSnackBarModule,
   MatProgressSpinnerModule,
-  MatStepperModule,
+  MatStepperModule
 } from '@angular/material';
 import {MatTableModule} from '@angular/material/table';
 import { CdkAccordionModule } from '@angular/cdk/accordion';

@@ -38,6 +38,7 @@ export const environment = {
   baseHref: '/',
   confirm: {
     email: '',
+    name: '',
     password: ''
   }
 };

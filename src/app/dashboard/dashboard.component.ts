@@ -69,8 +69,8 @@ export class DashboardComponent implements OnInit {
     },
     {
       name: 'heplRequired',
-      label: 'What help do you need with patents?',
-      placeholder: '',
+      label: 'What help do you need with therapists?',
+      placeholder: 'What help do you need with therapists?',
       type: 'textarea',
       required: true,
     }

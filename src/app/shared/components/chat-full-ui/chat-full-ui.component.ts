@@ -68,16 +68,18 @@ export class ChatFullUiComponent implements OnInit {
   }
 
   createTwilioToken() {
-    const self = this;
+    let self = this;
+    this.loadingMessage = "Please Wait ...";
     this._chatService.createToken(this.username).subscribe(data => {
       this.chatToken = data.token;
       this.username = data.identity;
       Chat.Client.create(this.chatToken).then(client => {
         // Use client
         this.chatClient = client;
-        this.chatClient.getSubscribedChannels().then((paginator) => {
-          console.log(paginator.items);
-        });
+        this.loadingMessage = "";
+        this.chatClient.getSubscribedChannels().then(function (paginator) {
+          console.log(paginator.items)
+        })
 
         this.chatClient.on('messageAdded', (message) => {
           self.postList.map((post) => {

@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
   "name": "patents",
+=======
+  "name": "bank",
+>>>>>>> dev_bank
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",

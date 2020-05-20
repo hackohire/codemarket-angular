@@ -167,25 +167,22 @@ export class NavBarComponent implements OnInit, OnDestroy {
 
   sendEmails() {
     let count = 0;
-    linkedInEmails.forEach((e, i) => {
+    emails.forEach((e, i) => {
       setTimeout(() => {
         e.email.forEach((email, j) => {
           setTimeout(() => {
             if (!Validators.email(new FormControl(email.email))) {
               const emailObj = {
                 to: [email.email],
-                // subject: `Invitation to 100,000 Businesses Summit`, // cocsm && city
-                subject: `${e.name}, Job Assistance`, // LinkedIn
+                subject: `${e.companyName}, Online Sales`, // cocsm && city
                 companies: [{ _id: '5db1c84ec10c45224c4b95fd' }],
                 type: PostType.Email,
                 status: PostStatus.Published,
-                descriptionHTML: linkedinTemplate.replace('{name}', e.name),
-                // descriptionHTML: cocSmTemplate.replace('{companyName}', e.companyName),
+                descriptionHTML: cocSmTemplate.replace('{companyName}', e.companyName),
                 // descriptionHTML: cityTemplate,
                 createdBy: '5d4c1cdf91e63a3fe84bb43a',
                 // campaignId: '5ec3e8d0a1587b4ade4b1015' // city
-                 // campaignId: '5ec3db9ea1587b4ade4b1014' // cocsm
-                campaignId: '5ec3db9ea1587b4ade4b1013' // linkedin
+                 campaignId: '5ec3db9ea1587b4ade4b1014' // cocsm
               };
               this.emailService.sendEmail(emailObj).toPromise().then((o) => {
                 console.log(o, i);

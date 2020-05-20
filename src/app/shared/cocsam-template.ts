@@ -57,13 +57,17 @@ export const cocSmTemplate = `<html>
                                                                                     </p>
 
                                                                                     <p>
-                                                                                    I would like to invite {companyName} to 100,000 business summit.
+                                                                                    How are you doing. 
                                                                                     </p>
 
                                                                                     <p>
-                                                                                    could you connect me to the contact?
+                                                                                    Do you need help to get online sales for {companyName} in 30 days?
                                                                                     </p>
                                                                                     
+                                                                                    <p>
+                                                                                    Do you know who would be a good person on your team to discuss about this?
+                                                                                    </p>
+
                                                                                     <div style="line-height: 9px; padding-top: 10px;">
                                                                                     <p>Sumithra Devi</p>
                                                                                     <p><a href="https://www.codemarket.io">Codemarket</a></p>

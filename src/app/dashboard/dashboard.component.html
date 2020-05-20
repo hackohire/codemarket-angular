@@ -8,23 +8,31 @@
 <div class="container-fluid">
     <div class="row" style="min-height: calc(100vh - 48px);">
         <div class="col-lg-6 order-1 order-lg-1 pt-3 pt-lg-0 pb-3 pb-lg-0 px-lg-5 hero-img d-flex flex-column justify-content-center aos-init aos-animate"  data-aos="fade-left" style="background-color: #333;">
-            <img src="./../assets/images/therapy.jpg" class="img-fluid" alt="">
+            <h1 *ngIf="rightTitle"
+                    style="font-size: 34px; line-height: normal; max-width: 100%; text-align: left;color:#fffdfd; text-transform: none;margin-bottom: 1rem;letter-spacing: 1px;">
+                    {{leftTitle}}
+                </h1>
+                <h2 *ngIf="rightSubTitle"
+                    style="font-size: 26px; line-height: normal; max-width: 100%; text-align: left;color:#fffdfd;margin-bottom: 1.5rem;font-weight: 100;">
+                    {{leftSubTitle}}
+                </h2>
+            <img [src]="currentImage" class="img-fluid" alt="">
         </div>
         <div class="col-lg-6 pt-5 pt-lg-0 pb-3 px-lg-5 order-2 order-lg-2 d-flex flex-column justify-content-center aos-init aos-animate"  data-aos="fade-up">
             <div *ngIf="!showAuth || authService?.loggedInUser?._id; else authUI">
-                <!-- <h1
+                <h1 *ngIf="rightTitle"
                     style="font-size: 34px; line-height: normal; max-width: 100%; text-align: left;color:#000; text-transform: none;margin-bottom: 1rem;letter-spacing: 1px;">
-                    Supercharge your business with superhero tech and marketing teams
+                    {{rightTitle}}
                 </h1>
-                <h2
+                <h2 *ngIf="rightSubTitle"
                     style="font-size: 26px; line-height: normal; max-width: 100%; text-align: left;color:#999;margin-bottom: 1.5rem;font-weight: 100;">
-                    grow your business like a large corporation without the large overhead
-                </h2> -->
+                    {{rightSubTitle.date}}  {{rightSubTitle.time}}  <a href="{{rightSubTitle.zoom}}" target="_blank">Zoom </a>
+                </h2>
                 <!-- <h1 style="font-size: 1.9em; line-height: normal; margin: 20px 0 0 0; font-weight: 200; text-align: left; color:#00aeef">
                             <a class="btn btn-primary btn-md" [routerLink]="['/', 'company', 'add-company']">JOIN TODAY</a>
                         </h1> -->
                 <form *ngIf="questionnaire" [formGroup]="questionnaire">
-                    <mat-horizontal-stepper linear #stepper>
+                    <mat-horizontal-stepper linear #stepper (selectionChange)="test($event)">
                         <mat-step
                             *ngFor="let formField of convertObjectToArray(questionnaire?.controls); let i = index; let l = last; let f = first;">
                             <!-- <h3>{{fields[i]?.label}}</h3> -->

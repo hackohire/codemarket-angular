@@ -20,7 +20,7 @@ export class DashboardComponent implements OnInit {
   rightSubTitle = {
     date: '06/15/2020',
     time: '2PM',
-    zoom: 'https://youtube.com'
+    zoom: 'https://us02web.zoom.us/j/3765532935'
   };
   leftTitle = 'Grow Online Sales For Your Therapy Practise in 30 Days';
   leftSubTitle = '';
@@ -37,7 +37,7 @@ export class DashboardComponent implements OnInit {
       rightSubTitle: {
         date: '06/15/2020',
         time: '2 PM',
-        zoom: 'https://youtube.com'
+        zoom: 'https://us02web.zoom.us/j/3765532935'
       },
       leftTitle: 'Grow Online Sales For Your Therapy Practise in 30 Days',
       leftSubTitle: '',
@@ -53,7 +53,7 @@ export class DashboardComponent implements OnInit {
       rightSubTitle: {
         date: '06/15/2020',
         time: '2 PM',
-        zoom: 'https://youtube.com'
+        zoom: 'https://us02web.zoom.us/j/3765532935'
       },
       leftTitle: 'Grow Online Sales For Your Therapy Practise in 30 Days',
       leftSubTitle: 'SALES AUTOMATION',
@@ -69,7 +69,7 @@ export class DashboardComponent implements OnInit {
       rightSubTitle: {
         date: '06/15/2020',
         time: '2 PM',
-        zoom: 'https://youtube.com'
+        zoom: 'https://us02web.zoom.us/j/3765532935'
       },
       leftTitle: 'Grow Online Sales For Your Therapy Practise in 30 Days',
       leftSubTitle: 'RESULTS DELIVERED',
@@ -85,7 +85,7 @@ export class DashboardComponent implements OnInit {
       rightSubTitle: {
         date: '06/15/2020',
         time: '2 PM',
-        zoom: 'https://youtube.com'
+        zoom: 'https://us02web.zoom.us/j/3765532935'
       },
       leftTitle: 'Grow Online Sales For Your Therapy Practise in 30 Days',
       leftSubTitle: 'DATA DRIVEN',
@@ -101,7 +101,7 @@ export class DashboardComponent implements OnInit {
       rightSubTitle: {
         date: '06/15/2020',
         time: '2 PM',
-        zoom: 'https://youtube.com'
+        zoom: 'https://us02web.zoom.us/j/3765532935'
       },
       leftTitle: 'Grow Online Sales For Your Therapy Practise in 30 Days',
       leftSubTitle: 'AI DRIVEN',

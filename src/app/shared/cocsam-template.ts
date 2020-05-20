@@ -57,7 +57,7 @@ export const cocSmTemplate = `<html>
                                                                                     </p>
 
                                                                                     <p>
-                                                                                    How are you doing. 
+                                                                                    How are you doing? 
                                                                                     </p>
 
                                                                                     <p>

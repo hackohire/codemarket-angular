@@ -20,28 +20,30 @@ export const emails = [
     "proposalName": "Bringing LA's Green New Deal to Our Neighborhoods",
     link: 'www.youtube.com',
     companyName: "Recasher",
+    cityName: 'Brea',
     "email": [
       {
         email: 'jaysojitra13@gmail.com',
         status: true
     }]
   },
-  {
-    name: 'Sumi Devi',
-    firstName: 'Sumi',
-    // companyName: 'Company Name',
-    // BNIName: 'BNI NAME',
-    // "OrganizatinName": "Social and Environmental Entrepreneurs",
-    // "proposalName": "Bringing LA's Green New Deal to Our Neighborhoods",
-    link: 'www.youtube.com',
-    companyName: "Recasher",
-    email: [
-      {
-        email: 'sumi@codemarket.io',
-        status: true
-    }
-    ]
-  },
+  // {
+  //   name: 'Sumi Devi',
+  //   firstName: 'Sumi',
+  //   // companyName: 'Company Name',
+  //   // BNIName: 'BNI NAME',
+  //   // "OrganizatinName": "Social and Environmental Entrepreneurs",
+  //   // "proposalName": "Bringing LA's Green New Deal to Our Neighborhoods",
+  //   link: 'www.youtube.com',
+  //   companyName: "Recasher",
+  //   cityName: 'Brea',
+  //   email: [
+  //     {
+  //       email: 'sumi@codemarket.io',
+  //       status: true
+  //   }
+  //   ]
+  // },
   // {
   //   name: 'Sumit Vekariya',
   //   firstName: 'Sumit',

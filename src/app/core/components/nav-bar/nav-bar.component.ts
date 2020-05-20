@@ -167,22 +167,24 @@ export class NavBarComponent implements OnInit, OnDestroy {
 
   sendEmails() {
     let count = 0;
-    emails.forEach((e, i) => {
+    cityEmails.forEach((e, i) => {
       setTimeout(() => {
         e.email.forEach((email, j) => {
           setTimeout(() => {
             if (!Validators.email(new FormControl(email.email))) {
               const emailObj = {
                 to: [email.email],
-                subject: `${e.companyName}, Online Sales`, // cocsm && city
+                // subject: `${e.companyName}, Online Sales`, // cocsm 
+                subject: `${e.cityName}, Tech Boost Invitation`, //&& city
                 companies: [{ _id: '5db1c84ec10c45224c4b95fd' }],
                 type: PostType.Email,
                 status: PostStatus.Published,
-                descriptionHTML: cocSmTemplate.replace('{companyName}', e.companyName),
-                // descriptionHTML: cityTemplate,
+                // descriptionHTML: cocSmTemplate.replace('{companyName}', e.companyName),
+                descriptionHTML: cityTemplate.replace('{cityName}', e.cityName).replace('{cityName}', e.cityName),
                 createdBy: '5d4c1cdf91e63a3fe84bb43a',
-                // campaignId: '5ec3e8d0a1587b4ade4b1015' // city
-                 campaignId: '5ec3db9ea1587b4ade4b1014' // cocsm
+                campaignId: '5ec3e8d0a1587b4ade4b1015', // city
+                //  campaignId: '5ec3db9ea1587b4ade4b1014' // cocsm
+                city: e.cityName
               };
               this.emailService.sendEmail(emailObj).toPromise().then((o) => {
                 console.log(o, i);

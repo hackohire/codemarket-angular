@@ -35420,6 +35420,7 @@ export const cocSmEmail = [
 export const cityEmails = [
     {
         "_id": "5eb6f40f9e15433858525cf5",
+        "cityName": "Azusa",
         "email": [
             {
                 "_id": "5eb6f40f9e15433858525cfc",
@@ -35505,6 +35506,7 @@ export const cityEmails = [
     },
     {
         "_id": "5eb6f4399e15433858525d6d",
+        "cityName": "Baldwin Park",
         "email": [
             {
                 "_id": "5eb6f4399e15433858525d6f",
@@ -35530,6 +35532,7 @@ export const cityEmails = [
     },
     {
         "_id": "5eb6f4469e15433858525d81",
+        "cityName": "Banning",
         "email": [
             {
                 "_id": "5eb6f4469e15433858525d82",
@@ -35565,6 +35568,7 @@ export const cityEmails = [
     },
     {
         "_id": "5eb6f4879e15433858525d8d",
+        "cityName": "Banning",
         "email": [
             {
                 "_id": "5eb6f4879e15433858525d93",
@@ -35600,6 +35604,7 @@ export const cityEmails = [
     },
     {
         "_id": "5eb6f4e29e15433858525dc9",
+        "cityName": "Bradbury",
         "email": [
             {
                 "_id": "5eb6f4e29e15433858525dce",
@@ -35625,6 +35630,7 @@ export const cityEmails = [
     },
     {
         "_id": "5eb6f5669e15433858525dda",
+        "cityName": "Brea",
         "email": [
             {
                 "_id": "5eb6f5669e15433858525e02",

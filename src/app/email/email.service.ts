@@ -17,7 +17,7 @@ export class EmailService {
       updatedAt
       type
       status
-
+      city
       createdBy {
         name
         _id

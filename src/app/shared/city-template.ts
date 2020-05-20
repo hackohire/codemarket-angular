@@ -57,13 +57,17 @@ export const cityTemplate = `<html>
                                                                                     </p>
 
                                                                                     <p>
-                                                                                    I would like to invite you to 100,000 business summit.
+                                                                                    Codemarket is running Tech Boost program for  businesses in City of {cityName}.
                                                                                     </p>
 
                                                                                     <p>
-                                                                                    please let me know if you would be interested?
+                                                                                    The Tech Boost program helps businesses to get online sales in 30 days.
                                                                                     </p>
                                                                                     
+                                                                                    <p>
+                                                                                    Do you know who would be a good person on your team to discuss about helping businesses in City of {cityName}?
+                                                                                    </p>
+
                                                                                     <div style="line-height: 9px; padding-top: 10px;">
                                                                                     <p>Sumithra Devi</p>
                                                                                     <p><a href="https://www.codemarket.io">Codemarket</a></p>

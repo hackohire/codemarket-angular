@@ -19,7 +19,7 @@ export class DashboardComponent implements OnInit {
   rightTitle = 'Therapy And Therapist In The Post Covid-19 Era';
   rightSubTitle = {
     date: '06/15/2020',
-    time: '2 PM',
+    time: '2PM',
     zoom: 'https://us02web.zoom.us/j/3765532935'
   };
   leftTitle = 'Grow Online Sales For Your Therapy Practise in 30 Days';
@@ -36,7 +36,7 @@ export class DashboardComponent implements OnInit {
       rightTitle: 'Therapy And Therapist In The Post Covid-19 Era',
       rightSubTitle: {
         date: '06/15/2020',
-        time: '2 PM',
+        time: '2PM',
         zoom: 'https://us02web.zoom.us/j/3765532935'
       },
       leftTitle: 'Grow Online Sales For Your Therapy Practise in 30 Days',
@@ -52,7 +52,7 @@ export class DashboardComponent implements OnInit {
       rightTitle: 'Therapy And Therapist In The Post Covid-19 Era',
       rightSubTitle: {
         date: '06/15/2020',
-        time: '2 PM',
+        time: '2PM',
         zoom: 'https://us02web.zoom.us/j/3765532935'
       },
       leftTitle: 'Grow Online Sales For Your Therapy Practise in 30 Days',
@@ -68,7 +68,7 @@ export class DashboardComponent implements OnInit {
       rightTitle: 'Therapy And Therapist In The Post Covid-19 Era',
       rightSubTitle: {
         date: '06/15/2020',
-        time: '2 PM',
+        time: '2PM',
         zoom: 'https://us02web.zoom.us/j/3765532935'
       },
       leftTitle: 'Grow Online Sales For Your Therapy Practise in 30 Days',
@@ -84,7 +84,7 @@ export class DashboardComponent implements OnInit {
       rightTitle: 'Therapy And Therapist In The Post Covid-19 Era',
       rightSubTitle: {
         date: '06/15/2020',
-        time: '2 PM',
+        time: '2PM',
         zoom: 'https://us02web.zoom.us/j/3765532935'
       },
       leftTitle: 'Grow Online Sales For Your Therapy Practise in 30 Days',
@@ -100,7 +100,7 @@ export class DashboardComponent implements OnInit {
       rightTitle: 'Therapy And Therapist In The Post Covid-19 Era',
       rightSubTitle: {
         date: '06/15/2020',
-        time: '2 PM',
+        time: '2PM',
         zoom: 'https://us02web.zoom.us/j/3765532935'
       },
       leftTitle: 'Grow Online Sales For Your Therapy Practise in 30 Days',

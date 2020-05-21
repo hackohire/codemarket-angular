@@ -14,7 +14,6 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { of } from 'rxjs';
 import { map, share, tap } from 'rxjs/operators';
 import { CustomUploadAdapter } from './FileUploader';
-import { CKEditorComponent } from '@ckeditor/ckeditor5-angular';
 
 @Component({
   selector: 'app-editor',
@@ -50,6 +49,7 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
 
   selectedBlockIndex: number;
   isPlatformBrowser = false;
+
   @Input() companyPostId: string;
   @Input() userReferenceId: string;
   @Input() id: string;
@@ -77,6 +77,8 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
     return this.model.editorData;
   }
 
+  of = of;
+
   _data: any[];
   @Input() data: any[];
 
@@ -85,12 +87,12 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
   @Output() output: EventEmitter<any> = new EventEmitter(); /** Emitting data with user interactions */
   @Input() importArticleSubscription = false;
 
+  @ViewChild('editorRef', { static: false }) editorRef: ElementRef;
   @ViewChild('ckEditorRef', { static: false }) ckEditorRef;
   @ViewChild('editorViewRef', { static: true }) editorViewRef: ElementRef;
 
   @ViewChild('sidebar', { static: true }) private sidebarContainer?: ElementRef<HTMLDivElement>;
   @ViewChild('presenceList', { static: true }) private presenceListContainer?: ElementRef<HTMLDivElement>;
-
   @Output() showComments: EventEmitter<{ block: any }> = new EventEmitter();
 
   subscriptions$ = new Subscription();
@@ -195,10 +197,6 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
       return new CustomUploadAdapter(loader);
     };
   }
-
-
-
-
 
   initializeCommentForm(p) {
     this.commentForm = new FormGroup({

@@ -15,7 +15,7 @@ export class CustomUploadAdapter {
         const fileExt = fileNameSplitArray.pop();
         const fileName = fileNameSplitArray[0] + '-' + new Date().toISOString() + '.' + fileExt;
         return Storage.vault.put(fileName, file, {
-            bucket: appConstants.fileS3Bucket,
+            bucket: environment.fileS3Bucket,
             level: 'public',
             contentType: file.type,
             progressCallback: (progress) => {

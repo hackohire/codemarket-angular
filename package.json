@@ -22,6 +22,9 @@
     "build:prod:deploy": "npm run build:prod && npm run deploy",
     "build:prod": "npm run build:browser:prod && npm run build:server:prod",
     "build:server:prod": "ng run codemarket:server:production && webpack --config webpack.server.config.js --progress --colors",
+    "build:staging:deploy": "npm run build:staging && serverless deploy --stage staging",
+    "build:staging": "node --max_old_space_size=8192 node_modules/@angular/cli/bin/ng build --configuration=staging && npm run build:server:staging",
+    "build:server:staging": "ng run codemarket:server:staging && webpack --config webpack.server.config.js --progress --colors",
     "server": "node local.js",
     "deploy": "serverless deploy",
     "build:deploy:environment": "npm run build:client:environment && npm run build:server:environment && npm run deploy:environment",
@@ -91,10 +94,11 @@
     "rxjs-compat": "^6.5.4",
     "sweetalert2": "^8.14.0",
     "tslib": "^1.9.0",
-    "zone.js": "~0.9.1"
+    "twilio-chat": "^3.3.7",
+    "zone.js": "~0.10.3"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.803.20",
+    "@angular-devkit/build-angular": "^0.803.20",
     "@angular/cli": "~8.3.20",
     "@angular/compiler-cli": "~8.2.14",
     "@angular/language-service": "~8.2.14",

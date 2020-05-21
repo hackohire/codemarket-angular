@@ -43,6 +43,7 @@
 
                 <app-editor *ngIf="(postId && editPostDetails) || !postId" #descriptionEditor [data]="descriptionFormControl?.value" [readOnly]="false" [html]="postForm?.get('descriptionHTML')?.value"
                   [post]="editPostDetails" [role]="'writer'"  [id]="'edit-post-editor'" [realTime]="postId ? true : false" [importArticleSubscription]="true" [placeholder]="postType + ' description'">
+                    [id]="'edit-post-editor'" [importArticleSubscription]="true" [placeholder]="postType + ' description'">
                 </app-editor>
 
                 <br />

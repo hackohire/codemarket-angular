@@ -99,6 +99,16 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     /** Read the type of the post  */
+    this.commentsList = [{
+      author: '123_1',
+      body: 'Hello, How are you ?'
+    }, {
+      author: '123_2',
+      body: 'Fine, How are you ?'
+    },{
+      author: '123_1',
+      body: 'Fine, Thanks!'
+    }];
     this.type = this.activatedRoute.snapshot.queryParams.type;
 
     this.commentId = this.activatedRoute.snapshot.queryParams['commentId'];
@@ -177,7 +187,6 @@ export class DetailsComponent implements OnInit, OnDestroy {
       })
     ).subscribe()
     );
-
   }
 
   ngOnDestroy(): void {

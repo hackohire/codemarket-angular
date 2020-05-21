@@ -52,7 +52,7 @@
                                 <article>
                                     <app-editor
                                         (showComments)="showCommentsOnSide($event)"
-                                        [realTime]="true"
+                                        [data]="details?.description"
                                         [commentsList]="commentService?.commentsList$ | async"
                                         [blockLevelComments]="false" [readOnly]="true"
                                         [id]="'details-editor'" [html]="details?.descriptionHTML" [post]="details" [commentType]="'post'">
@@ -174,22 +174,7 @@
         <!-- end /.container -->
 
         <!-- Start of chat box code -->
-
-        <!-- <section class="chat-window docked" #chatWindow>
-            <div class="chat-header" (click)="chatWindow.classList.toggle('docked')">
-              <p>Live Chat</p>
-              <span class="close"></span>
-            </div>
-            <div class="chat-body">
-              <div class="message-container">
-                <app-chat-box [comments]="commentService?.commentsList$ | async" [loggedInUserId]="authService?.loggedInUser?._id" [postDetails]="postDetails"></app-chat-box>
-              </div>
-            </div>
-            <div class="chat-footer">
-              <div class="form-area">
-              </div>
-            </div>
-        </section> -->
+        <app-chat-box [loggedInUser]="authService?.loggedInUser" [postDetails]="postDetails"></app-chat-box>
         <!-- End of chat box code -->
     </section>
     <!--===========================================

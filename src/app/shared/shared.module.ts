@@ -37,7 +37,10 @@ import { ChatBoxComponent } from './components/chat-box/chat-box.component';
 import { PostTypeNavComponent } from './components/post-type-nav/post-type-nav.component';
 import { CommentSideNavComponent } from './components/comment-side-nav/comment-side-nav.component';
 import { AppInjector } from './services/app.injector.service';
+import { ChatService } from './services/chat.service';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { GetNamePipe } from './pipes/get-name.pipe';
+import { ChatFullUiComponent } from './components/chat-full-ui/chat-full-ui.component';
 
 export function hljsLanguages() {
   return [
@@ -66,6 +69,8 @@ export function hljsLanguages() {
     ChatBoxComponent,
     PostTypeNavComponent,
     CommentSideNavComponent,
+    GetNamePipe,
+    ChatFullUiComponent,
   ],
   imports: [
     CommonModule,
@@ -127,11 +132,12 @@ export function hljsLanguages() {
     // Ng5SliderModule,
     NgSelectModule,
     MdePopoverModule,
+    ChatFullUiComponent
   ],
   entryComponents: [
     VideoChatComponent
   ],
-  providers: [CommentService]
+  providers: [CommentService, ChatService]
 })
 export class SharedModule {
   constructor(private injector: Injector) {

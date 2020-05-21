@@ -8587,3 +8587,3936 @@ export const realEstateEmail = [
     }
 ]
 
+export const juryEmails = [
+    {
+        "_id": "5ec39bd263e214635b09e44b",
+        "name": "Alicia Lara",
+        "email": [
+            {
+                "_id": "5ec39bd263e214635b09e44c",
+                "email": "alicia.lara@unitedway.org",
+                "status": true
+            }
+        ],
+        "firstName": "Alicia"
+    },
+    {
+        "_id": "5ec39be563e214635b09e451",
+        "name": "Teo Alfero",
+        "email": [
+            {
+                "_id": "5ec39be563e214635b09e452",
+                "email": "talfero@wolfconnection.org",
+                "status": true
+            }
+        ],
+        "firstName": "Teo"
+    },
+    {
+        "_id": "5ec39bf263e214635b09e455",
+        "name": "Brent Armitage",
+        "email": [
+            {
+                "_id": "5ec39bf263e214635b09e456",
+                "email": "barmitage@stubbsalderton.com",
+                "status": true
+            }
+        ],
+        "firstName": "Brent"
+    },
+    {
+        "_id": "5ec39bff63e214635b09e45b",
+        "name": "Michael Boardman",
+        "email": [
+            {
+                "_id": "5ec39bff63e214635b09e45c",
+                "email": "michael.boardman@hklaw.com",
+                "status": true
+            }
+        ],
+        "firstName": "Michael"
+    },
+    {
+        "_id": "5ec39c0063e214635b09e45d",
+        "name": "Ev Boyle",
+        "email": [
+            {
+                "_id": "5ec39c0063e214635b09e45e",
+                "email": "ev@socialventurepartners.org",
+                "status": true
+            }
+        ],
+        "firstName": "Ev"
+    },
+    {
+        "_id": "5ec39c0463e214635b09e45f",
+        "name": "E. Thomas Brewer",
+        "email": [
+            {
+                "_id": "5ec39c0463e214635b09e460",
+                "email": "brewer@rmpf.org",
+                "status": true
+            }
+        ],
+        "firstName": "E."
+    },
+    {
+        "_id": "5ec39c0963e214635b09e461",
+        "name": "George Bryson",
+        "email": [
+            {
+                "_id": "5ec39c0963e214635b09e462",
+                "email": "gbryson@wildpoppy.life",
+                "status": true
+            }
+        ],
+        "firstName": "George"
+    },
+    {
+        "_id": "5ec39c0c63e214635b09e463",
+        "name": "Steve Burns",
+        "email": [
+            {
+                "_id": "5ec39c0c63e214635b09e464",
+                "email": "burns@bqe.com",
+                "status": true
+            }
+        ],
+        "firstName": "Steve"
+    },
+    {
+        "_id": "5ec39c0f63e214635b09e465",
+        "name": "Way-Ting Chen",
+        "email": [
+            {
+                "_id": "5ec39c0f63e214635b09e466",
+                "email": "way-ting@bluegarnet.net",
+                "status": true
+            }
+        ],
+        "firstName": "Way-Ting"
+    },
+    {
+        "_id": "5ec39c1263e214635b09e467",
+        "name": "Ken Deemer",
+        "email": [
+            {
+                "_id": "5ec39c1263e214635b09e468",
+                "email": "ken_deemer@ecsonline.org",
+                "status": true
+            }
+        ],
+        "firstName": "Ken"
+    },
+    {
+        "_id": "5ec39c1663e214635b09e469",
+        "name": "Betsy Densmore",
+        "email": [
+            {
+                "_id": "5ec39c1663e214635b09e46a",
+                "email": "betsy@greatmexgrill.com",
+                "status": true
+            }
+        ],
+        "firstName": "Betsy"
+    },
+    {
+        "_id": "5ec39c1963e214635b09e46b",
+        "name": "Gil Elbaz",
+        "email": [
+            {
+                "_id": "5ec39c1963e214635b09e46c",
+                "email": "gil@factual.com",
+                "status": true
+            }
+        ],
+        "firstName": "Gil"
+    },
+    {
+        "_id": "5ec39c2363e214635b09e46f",
+        "name": "Don Fracchia",
+        "email": [
+            {
+                "_id": "5ec39c2363e214635b09e470",
+                "email": "don.fracchia@wellsfargo.com",
+                "status": true
+            }
+        ],
+        "firstName": "Don"
+    },
+    {
+        "_id": "5ec39c2d63e214635b09e473",
+        "name": "Alison Hurst",
+        "email": [
+            {
+                "_id": "5ec39c2d63e214635b09e474",
+                "email": "alisonh@safeplaceforyouth.org",
+                "status": true
+            }
+        ],
+        "firstName": "Alison"
+    },
+    {
+        "_id": "5ec39c3763e214635b09e477",
+        "name": "Jamie Kalenik",
+        "email": [
+            {
+                "_id": "5ec39c3763e214635b09e478",
+                "email": "jkalenik@first5la.org",
+                "status": true
+            }
+        ],
+        "firstName": "Jamie"
+    },
+    {
+        "_id": "5ec39c4863e214635b09e47d",
+        "name": "Hilary Moglen",
+        "email": [
+            {
+                "_id": "5ec39c4863e214635b09e47e",
+                "email": "hmoglen@wearerally.com",
+                "status": true
+            }
+        ],
+        "firstName": "Hilary"
+    },
+    {
+        "_id": "5ec39c4a63e214635b09e47f",
+        "name": "MK O'Connell",
+        "email": [
+            {
+                "_id": "5ec39c4a63e214635b09e480",
+                "email": "m.oconnell@msquaredo.com",
+                "status": true
+            }
+        ],
+        "firstName": "MK"
+    },
+    {
+        "_id": "5ec39c5c63e214635b09e485",
+        "name": "Carolyn Rojo",
+        "email": [
+            {
+                "_id": "5ec39c5c63e214635b09e486",
+                "email": "crojo@bankofamerica.com",
+                "status": true
+            }
+        ],
+        "firstName": "Carolyn"
+    },
+    {
+        "_id": "5ec39c7263e214635b09e48d",
+        "name": "Eileen Ung",
+        "email": [
+            {
+                "_id": "5ec39c7263e214635b09e48e",
+                "email": "eileenung@berkeley.edu",
+                "status": true
+            }
+        ],
+        "firstName": "Eileen"
+    },
+    {
+        "_id": "5ec39c7463e214635b09e48f",
+        "name": "Liz Vogel",
+        "email": [
+            {
+                "_id": "5ec39c7463e214635b09e490",
+                "email": "liz_vogel@facinghistory.org",
+                "status": true
+            }
+        ],
+        "firstName": "Liz"
+    }
+]
+
+export const accountEmails = [
+    {
+        "_id": "5ec4e67ba4500b629c1a4811",
+        "companyName": "Oren Hen EA",
+        "email": [
+            {
+                "_id": "5ec4e67ba4500b629c1a4813",
+                "email": "info@orenhenea.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4e67ba4500b629c1a4814",
+                "email": "Oren@OrenHenEA.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e67ea4500b629c1a4815",
+        "companyName": "Bancor Financial Services",
+        "email": [
+            {
+                "_id": "5ec4e67ea4500b629c1a4816",
+                "email": "info@bancor.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4e67ea4500b629c1a4817",
+                "email": "doug@bancor.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e688a4500b629c1a481a",
+        "companyName": "Pinnacle Tax Services",
+        "email": [
+            {
+                "_id": "5ec4e688a4500b629c1a481b",
+                "email": "info@pinnacletaxandaccounting.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e68da4500b629c1a481c",
+        "companyName": "UnTax",
+        "email": [
+            {
+                "_id": "5ec4e68da4500b629c1a481e",
+                "email": "info@untax.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e68ea4500b629c1a481f",
+        "companyName": "Robert Hall & Associates",
+        "email": [
+            {
+                "_id": "5ec4e68ea4500b629c1a4820",
+                "email": "roberthalltaxes@roberthalltaxes.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e690a4500b629c1a4821",
+        "companyName": "AMC CPAs & Consultants",
+        "email": [
+            {
+                "_id": "5ec4e690a4500b629c1a4822",
+                "email": "info@amccpas.co",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e692a4500b629c1a4825",
+        "companyName": "RGN Accountancy Group",
+        "email": [
+            {
+                "_id": "5ec4e692a4500b629c1a4826",
+                "email": "ryan@rgnaccountancygroup.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e695a4500b629c1a4827",
+        "companyName": "Robert Ricco, CPA",
+        "email": [
+            {
+                "_id": "5ec4e695a4500b629c1a4829",
+                "email": "rob@riccocpa.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e6a5a4500b629c1a482c",
+        "companyName": "Velin & Associates",
+        "email": [
+            {
+                "_id": "5ec4e6a5a4500b629c1a482e",
+                "email": "dmitriy@losangelescpa.org",
+                "status": true
+            },
+            {
+                "_id": "5ec4e6a5a4500b629c1a482f",
+                "email": "careers@LosAngelesCPA.org",
+                "status": true
+            },
+            {
+                "_id": "5ec4e6a5a4500b629c1a4830",
+                "email": "Dmitriy@losangelescpa.org",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e6a6a4500b629c1a4832",
+        "companyName": "LPW CPAs",
+        "email": [
+            {
+                "_id": "5ec4e6a6a4500b629c1a4833",
+                "email": "info@lpwcpas.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e6d8a4500b629c1a4836",
+        "companyName": "Liberty Tax",
+        "email": [
+            {
+                "_id": "5ec4e6d8a4500b629c1a4839",
+                "email": "support@efile.libertytax.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4e6d8a4500b629c1a483d",
+                "email": "name@email.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e6dca4500b629c1a483e",
+        "companyName": "Fast Tax Inc",
+        "email": [
+            {
+                "_id": "5ec4e6dca4500b629c1a483f",
+                "email": "tliu@fasttaxcpa.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4e6dca4500b629c1a4840",
+                "email": "info@fasttaxcpa.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e6e1a4500b629c1a4841",
+        "companyName": "9Financial",
+        "email": [
+            {
+                "_id": "5ec4e6e1a4500b629c1a4842",
+                "email": "kbien@9Financial.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4e6e1a4500b629c1a4844",
+                "email": "info@9financial.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4e6e1a4500b629c1a4845",
+                "email": "sbien@9Financial.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4e6e1a4500b629c1a4846",
+                "email": "info@9Financial.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e6e8a4500b629c1a4847",
+        "companyName": "TaxPlus",
+        "email": [
+            {
+                "_id": "5ec4e6e8a4500b629c1a4848",
+                "email": "20info@taxplus.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4e6e8a4500b629c1a4849",
+                "email": "Infosd@taxplus.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4e6e8a4500b629c1a484a",
+                "email": "20Infosd@taxplus.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4e6e8a4500b629c1a484c",
+                "email": "info@taxplus.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e6eaa4500b629c1a484d",
+        "companyName": "James M Cha, CPA",
+        "email": [
+            {
+                "_id": "5ec4e6eaa4500b629c1a484e",
+                "email": "Jamescha@CPA.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e6eda4500b629c1a484f",
+        "companyName": "Lawrence W Burns, CPA",
+        "email": [
+            {
+                "_id": "5ec4e6eda4500b629c1a4850",
+                "email": "info@lwbcpa.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e6eea4500b629c1a4851",
+        "companyName": "Lawrence Jeon & Company",
+        "email": [
+            {
+                "_id": "5ec4e6eea4500b629c1a4852",
+                "email": "hanna@jeoncpa.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e6f8a4500b629c1a4855",
+        "companyName": "Mooneem",
+        "email": [
+            {
+                "_id": "5ec4e6f8a4500b629c1a4856",
+                "email": "proxrum@mail.ru",
+                "status": true
+            },
+            {
+                "_id": "5ec4e6f8a4500b629c1a4857",
+                "email": "bi.nfo.r.dji.ba.ne.15.1.6@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e701a4500b629c1a485b",
+        "companyName": "Taxes by KD",
+        "email": [
+            {
+                "_id": "5ec4e701a4500b629c1a485c",
+                "email": "taxesbyKD@gmail.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4e701a4500b629c1a485d",
+                "email": "taxesbykd@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e703a4500b629c1a485e",
+        "companyName": "Financial Counseling Center",
+        "email": [
+            {
+                "_id": "5ec4e703a4500b629c1a485f",
+                "email": "madjr69@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e712a4500b629c1a4864",
+        "companyName": "LFC Accounting Services",
+        "email": [
+            {
+                "_id": "5ec4e712a4500b629c1a4865",
+                "email": "linn@lfcaccounting.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e740a4500b629c1a486a",
+        "companyName": "Liberty Tax",
+        "email": [
+            {
+                "_id": "5ec4e740a4500b629c1a486d",
+                "email": "support@efile.libertytax.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e793a4500b629c1a4881",
+        "companyName": "Sharp Accountancy",
+        "email": [
+            {
+                "_id": "5ec4e793a4500b629c1a4882",
+                "email": "info@sharpaccountancy.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e794a4500b629c1a4883",
+        "companyName": "Southeast Quality Tax",
+        "email": [
+            {
+                "_id": "5ec4e794a4500b629c1a4884",
+                "email": "8b4e078a51d04e0e9efdf470027f0ec1@sentry.wixpress.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4e794a4500b629c1a4886",
+                "email": "admin@seqtax.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e79ba4500b629c1a489a",
+        "companyName": "Freequote Insurance Services",
+        "email": [
+            {
+                "_id": "5ec4e79ba4500b629c1a489c",
+                "email": "impallari@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e79fa4500b629c1a489d",
+        "companyName": "Pinnacle Accountancy Group",
+        "email": [
+            {
+                "_id": "5ec4e79fa4500b629c1a489e",
+                "email": "Abet@pagbiz.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4e79fa4500b629c1a489f",
+                "email": "abet@pagbiz.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e7a1a4500b629c1a48a0",
+        "companyName": "Morris Financial Advisors",
+        "email": [
+            {
+                "_id": "5ec4e7a1a4500b629c1a48a1",
+                "email": "8b4e078a51d04e0e9efdf470027f0ec1@sentry.wixpress.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4e7a1a4500b629c1a48a6",
+                "email": "contact@morrisadvisor.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e7a1a4500b629c1a48b7",
+        "companyName": "Leading Tax Group",
+        "email": [
+            {
+                "_id": "5ec4e7a1a4500b629c1a48b8",
+                "email": "username@example.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e7a3a4500b629c1a48b9",
+        "companyName": "CPS Tax Professionals",
+        "email": [
+            {
+                "_id": "5ec4e7a3a4500b629c1a48ba",
+                "email": "8b4e078a51d04e0e9efdf470027f0ec1@sentry.wixpress.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4e7a3a4500b629c1a48bf",
+                "email": "Danny@cpstaxpros.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e7a7a4500b629c1a48d0",
+        "companyName": "Torossian, CPA, APC",
+        "email": [
+            {
+                "_id": "5ec4e7a7a4500b629c1a48d1",
+                "email": "serge@torossiancpaapc.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4e7a7a4500b629c1a48d2",
+                "email": "angelika@torossiancpaapc.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e7b6a4500b629c1a48d6",
+        "companyName": "TaxBox Refund",
+        "email": [
+            {
+                "_id": "5ec4e7b6a4500b629c1a48d8",
+                "email": "taxboxrefund@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e7bca4500b629c1a48d9",
+        "companyName": "Spatola CPA",
+        "email": [
+            {
+                "_id": "5ec4e7bca4500b629c1a48dc",
+                "email": "admin@spatolacpa.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4e7bca4500b629c1a48dd",
+                "email": "legal@clientwhys.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e7c2a4500b629c1a48de",
+        "companyName": "Collins Financial Services",
+        "email": [
+            {
+                "_id": "5ec4e7c2a4500b629c1a48df",
+                "email": "themgallo4@molinette.piemonte.it",
+                "status": true
+            },
+            {
+                "_id": "5ec4e7c2a4500b629c1a48e0",
+                "email": "collinstaxes@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e7d0a4500b629c1a48e5",
+        "companyName": "RSC Business Group",
+        "email": [
+            {
+                "_id": "5ec4e7d0a4500b629c1a48e7",
+                "email": "info@rscbusinessgroup.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4e7d0a4500b629c1a48e8",
+                "email": "Inquiry@rscbusinessgroup.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4e7d0a4500b629c1a48e9",
+                "email": "ionquiry@rscbusinessgroup.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4e7d0a4500b629c1a48ea",
+                "email": "inquiry@rscbusinessgroup.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4e7d0a4500b629c1a48eb",
+                "email": "rsc@rscbusinessgroup.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e7d2a4500b629c1a48ec",
+        "companyName": "Family Income Tax Services",
+        "email": [
+            {
+                "_id": "5ec4e7d2a4500b629c1a48ed",
+                "email": "FamilyIncomeTaxServices@gmail.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4e7d2a4500b629c1a48ee",
+                "email": "familyincometaxservices@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e7d4a4500b629c1a48f0",
+        "companyName": "CK Fidelity",
+        "email": [
+            {
+                "_id": "5ec4e7d4a4500b629c1a48f1",
+                "email": "info@ckfidelity.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e7d5a4500b629c1a48f2",
+        "companyName": "Jarrar & Associates CPAs",
+        "email": [
+            {
+                "_id": "5ec4e7d5a4500b629c1a48f3",
+                "email": "samcpa@jarrarcpa.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e7d8a4500b629c1a48f4",
+        "companyName": "S & S Tax Service",
+        "email": [
+            {
+                "_id": "5ec4e7d8a4500b629c1a48f5",
+                "email": "info@sandstaxes.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e7e0a4500b629c1a48f8",
+        "companyName": "Keyser Financial Services",
+        "email": [
+            {
+                "_id": "5ec4e7e0a4500b629c1a48f9",
+                "email": "info@keyseraccounting.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e7e2a4500b629c1a48fa",
+        "companyName": "CCS Inc",
+        "email": [
+            {
+                "_id": "5ec4e7e2a4500b629c1a48fb",
+                "email": "info@laconstructioncompliance.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e7eea4500b629c1a48fe",
+        "companyName": "CXG Accounting",
+        "email": [
+            {
+                "_id": "5ec4e7eea4500b629c1a48ff",
+                "email": "carolina@cxgaccounting.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4e7eea4500b629c1a4900",
+                "email": "info@cxgaccounting.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e7efa4500b629c1a4901",
+        "companyName": "Venice Tax & Accounting",
+        "email": [
+            {
+                "_id": "5ec4e7efa4500b629c1a4902",
+                "email": "ginny@venicetax.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e7f0a4500b629c1a4903",
+        "companyName": "Dennis Duncan & Covington",
+        "email": [
+            {
+                "_id": "5ec4e7f0a4500b629c1a4904",
+                "email": "info@dennisllp.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e7f3a4500b629c1a4906",
+        "companyName": "Empire Tax Company",
+        "email": [
+            {
+                "_id": "5ec4e7f3a4500b629c1a4907",
+                "email": "bobby@empiretaxcompany.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e7faa4500b629c1a490b",
+        "companyName": "Humphreys & Associates",
+        "email": [
+            {
+                "_id": "5ec4e7faa4500b629c1a490c",
+                "email": "Karen@HumphreysCPA.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e822a4500b629c1a4916",
+        "companyName": "Advise LLP",
+        "email": [
+            {
+                "_id": "5ec4e822a4500b629c1a4917",
+                "email": "peter@advisellp.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4e822a4500b629c1a4919",
+                "email": "peter@adviseinc.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e830a4500b629c1a491a",
+        "companyName": "Diamond Business Loans",
+        "email": [
+            {
+                "_id": "5ec4e830a4500b629c1a491b",
+                "email": "info@diamondbl.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e832a4500b629c1a491e",
+        "companyName": "1st Choice Tax & Accounting Services",
+        "email": [
+            {
+                "_id": "5ec4e832a4500b629c1a4921",
+                "email": "legal@clientwhys.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4e832a4500b629c1a4922",
+                "email": "info@1stchoice-tax.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e840a4500b629c1a4923",
+        "companyName": "Magidov CPA Firm",
+        "email": [
+            {
+                "_id": "5ec4e840a4500b629c1a4924",
+                "email": "bookkeeper@magidovcpafirm.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4e840a4500b629c1a4925",
+                "email": "ruslanm@magidovcpafirm.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4e840a4500b629c1a4926",
+                "email": "accountant@magidovcpafirm.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4e840a4500b629c1a4927",
+                "email": "tax2@magidovcpafirm.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4e840a4500b629c1a4928",
+                "email": "daved@magidovcpafirm.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4e840a4500b629c1a4929",
+                "email": "office@magidovcpafirm.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4e840a4500b629c1a492a",
+                "email": "tax@magidovcpafirm.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4e840a4500b629c1a492b",
+                "email": "support@sandismith.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e84ca4500b629c1a492c",
+        "companyName": "Jeff Huang, CPA",
+        "email": [
+            {
+                "_id": "5ec4e84ca4500b629c1a492d",
+                "email": "ivy@jhgroupcpa.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4e84ca4500b629c1a492e",
+                "email": "eric@jhgroupcpa.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4e84ca4500b629c1a492f",
+                "email": "info@jhgroupcpa.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4e84ca4500b629c1a4930",
+                "email": "info@JHGroupCPA.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4e84ca4500b629c1a4932",
+                "email": "jeff@jhgroupcpa.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4e84ca4500b629c1a4933",
+                "email": "crystal@jhgroupcpa.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4e84ca4500b629c1a4934",
+                "email": "tj@jhgroupcpa.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e854a4500b629c1a4937",
+        "companyName": "Pronto Income Tax",
+        "email": [
+            {
+                "_id": "5ec4e854a4500b629c1a4938",
+                "email": "Info@pronto4tax.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e882a4500b629c1a4939",
+        "companyName": "Skyh",
+        "email": [
+            {
+                "_id": "5ec4e882a4500b629c1a494b",
+                "email": "8b4e078a51d04e0e9efdf470027f0ec1@sentry.wixpress.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e89fa4500b629c1a495a",
+        "companyName": "Evans Tax & Business Services, Inc.",
+        "email": [
+            {
+                "_id": "5ec4e89fa4500b629c1a495c",
+                "email": "stephanie@evanstax.net",
+                "status": true
+            },
+            {
+                "_id": "5ec4e89fa4500b629c1a495d",
+                "email": "linda@evanstax.net",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e8a0a4500b629c1a495e",
+        "companyName": "Green Beans Bookkeeping",
+        "email": [
+            {
+                "_id": "5ec4e8a0a4500b629c1a4960",
+                "email": "info@greenbeansbookkeeping.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e8a6a4500b629c1a4961",
+        "companyName": "Haydel Biel & Associates",
+        "email": [
+            {
+                "_id": "5ec4e8a6a4500b629c1a4962",
+                "email": "info@hbawealth.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4e8a6a4500b629c1a4963",
+                "email": "ricky@hbawealth.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e8aca4500b629c1a4964",
+        "companyName": "Resume Advisor",
+        "email": [
+            {
+                "_id": "5ec4e8aca4500b629c1a4965",
+                "email": "Jsmith@gmail.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4e8aca4500b629c1a4967",
+                "email": "JohnSmith@gmail.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4e8aca4500b629c1a4968",
+                "email": "support@resumeadvisor.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4e8aca4500b629c1a4969",
+                "email": "Support@ResumeAdvisor.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e8b3a4500b629c1a496a",
+        "companyName": "HRL Tax Solutions",
+        "email": [
+            {
+                "_id": "5ec4e8b3a4500b629c1a496c",
+                "email": "henryliu@hrltax.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4e8b3a4500b629c1a496d",
+                "email": "Info@HRLTax.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4e8b3a4500b629c1a496e",
+                "email": "info@HRLTax.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4e8b3a4500b629c1a496f",
+                "email": "info@hrltax.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e8b5a4500b629c1a4970",
+        "companyName": "The Agency",
+        "email": [
+            {
+                "_id": "5ec4e8b5a4500b629c1a4972",
+                "email": "support@joinagencyla.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e8c9a4500b629c1a4973",
+        "companyName": "IRS Audit Group",
+        "email": [
+            {
+                "_id": "5ec4e8c9a4500b629c1a4976",
+                "email": "info@irsauditgroup.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e8caa4500b629c1a4978",
+        "companyName": "J & O Tax Bookkeeping",
+        "email": [
+            {
+                "_id": "5ec4e8caa4500b629c1a4979",
+                "email": "email@domain.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e8cca4500b629c1a497a",
+        "companyName": "Adams & Associates",
+        "email": [
+            {
+                "_id": "5ec4e8cca4500b629c1a497b",
+                "email": "adamsassociates2@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e8d4a4500b629c1a497c",
+        "companyName": "My Accounting Center",
+        "email": [
+            {
+                "_id": "5ec4e8d4a4500b629c1a497d",
+                "email": "alen@brillianttax.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4e8d4a4500b629c1a497e",
+                "email": "varoscpa@brillianttax.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e8d8a4500b629c1a497f",
+        "companyName": "Gerber & Co",
+        "email": [
+            {
+                "_id": "5ec4e8d8a4500b629c1a4980",
+                "email": "info@GerberCo.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e8dba4500b629c1a4981",
+        "companyName": "Barlin Business Solutions",
+        "email": [
+            {
+                "_id": "5ec4e8dba4500b629c1a4982",
+                "email": "wendy@aboutprofit.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e8e1a4500b629c1a4983",
+        "companyName": "Sanchez Services",
+        "email": [
+            {
+                "_id": "5ec4e8e1a4500b629c1a4984",
+                "email": "Taxservices@sanchezservices.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4e8e1a4500b629c1a4985",
+                "email": "HRservices@sanchezservices.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e905a4500b629c1a498f",
+        "companyName": "Mark W. Greenberg",
+        "email": [
+            {
+                "_id": "5ec4e905a4500b629c1a4990",
+                "email": "mark@mwgcpainc.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e90ca4500b629c1a4994",
+        "companyName": "The Tax Consultancy Group",
+        "email": [
+            {
+                "_id": "5ec4e90ca4500b629c1a4995",
+                "email": "info@taxconsultgroup.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e914a4500b629c1a4996",
+        "companyName": "Pamela Smith QuickBooks ProAdvisor",
+        "email": [
+            {
+                "_id": "5ec4e914a4500b629c1a4997",
+                "email": "Pam@BookkeepingHelp.Guru",
+                "status": true
+            },
+            {
+                "_id": "5ec4e914a4500b629c1a4998",
+                "email": "pam@bookkeepinghelp.guru",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e917a4500b629c1a4999",
+        "companyName": "The Law Office of Scot S. Fagerland",
+        "email": [
+            {
+                "_id": "5ec4e917a4500b629c1a499a",
+                "email": "scot.lawyer@gmail.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4e917a4500b629c1a499b",
+                "email": "info@FagerlandLaw.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e918a4500b629c1a499c",
+        "companyName": "Unchained Financial Services",
+        "email": [
+            {
+                "_id": "5ec4e918a4500b629c1a499d",
+                "email": "info@unchainedfs.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e91fa4500b629c1a499e",
+        "companyName": "Alpha & Omega, Income Tax & Accounting Services",
+        "email": [
+            {
+                "_id": "5ec4e91fa4500b629c1a499f",
+                "email": "info@victormmartinez.net",
+                "status": true
+            },
+            {
+                "_id": "5ec4e91fa4500b629c1a49a0",
+                "email": "vic@alphaomegataxesaccounting.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e925a4500b629c1a49a1",
+        "companyName": "Quintessential Tax Services",
+        "email": [
+            {
+                "_id": "5ec4e925a4500b629c1a49a2",
+                "email": "Info@qtaxservices.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4e925a4500b629c1a49a3",
+                "email": "Info@QTaxServices.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4e925a4500b629c1a49a4",
+                "email": "info@qtaxservices.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4e925a4500b629c1a49a5",
+                "email": "Info@Qtaxservices.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e932a4500b629c1a49a6",
+        "companyName": "Ambassador Tax Services",
+        "email": [
+            {
+                "_id": "5ec4e932a4500b629c1a49a7",
+                "email": "info@ambtaxes.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4e932a4500b629c1a49a8",
+                "email": "phishing@irs.gov",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e934a4500b629c1a49a9",
+        "companyName": "Joseph Latif, CPA",
+        "email": [
+            {
+                "_id": "5ec4e934a4500b629c1a49aa",
+                "email": "joseph@josephlatifcpa.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e937a4500b629c1a49ab",
+        "companyName": "VK Consulting",
+        "email": [
+            {
+                "_id": "5ec4e937a4500b629c1a49ac",
+                "email": "vkhusit@gmail.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4e937a4500b629c1a49ad",
+                "email": "info@vkconsultingllc.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e939a4500b629c1a49ae",
+        "companyName": "Eva Hughes Accounting and Business Consulting",
+        "email": [
+            {
+                "_id": "5ec4e939a4500b629c1a49b0",
+                "email": "eva@evahughesaccbiz.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e93ca4500b629c1a49b1",
+        "companyName": "Taxpayers Services",
+        "email": [
+            {
+                "_id": "5ec4e93ca4500b629c1a49b2",
+                "email": "admin@tpsla.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4e93ca4500b629c1a49b3",
+                "email": "kenny@tpsla.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e95ba4500b629c1a49bb",
+        "companyName": "One Source Services",
+        "email": [
+            {
+                "_id": "5ec4e95ba4500b629c1a49bc",
+                "email": "info@sourceoss.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4e95ba4500b629c1a49bd",
+                "email": "Anna@sourceoss.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e95da4500b629c1a49be",
+        "companyName": "Laurel Terrace Finance",
+        "email": [
+            {
+                "_id": "5ec4e95da4500b629c1a49bf",
+                "email": "Lysa@LaurelTerraceFinance.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e96ba4500b629c1a49c4",
+        "companyName": "SoCal Bookkeeping & Accounting",
+        "email": [
+            {
+                "_id": "5ec4e96ba4500b629c1a49cd",
+                "email": "INFO@SOCALBOOKKEEPING.COM",
+                "status": true
+            },
+            {
+                "_id": "5ec4e96ba4500b629c1a49d3",
+                "email": "8b4e078a51d04e0e9efdf470027f0ec1@sentry.wixpress.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e974a4500b629c1a49e1",
+        "companyName": "Imax Credit Repair Firm",
+        "email": [
+            {
+                "_id": "5ec4e974a4500b629c1a49e2",
+                "email": "HACKWEST@WRITEME.COM",
+                "status": true
+            },
+            {
+                "_id": "5ec4e974a4500b629c1a49e3",
+                "email": "760pluscreditscore@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e97ba4500b629c1a49e6",
+        "companyName": "Smaldino, Lutz, Curtis & Associates, An Accountancy Corporation",
+        "email": [
+            {
+                "_id": "5ec4e97ba4500b629c1a49e7",
+                "email": "info@citywidetax.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e97da4500b629c1a49e8",
+        "companyName": "Edwin Does Taxes",
+        "email": [
+            {
+                "_id": "5ec4e97da4500b629c1a49e9",
+                "email": "edwin@edwindoestaxes.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e993a4500b629c1a49ef",
+        "companyName": "Premier Financial Tax & Accounting Services",
+        "email": [
+            {
+                "_id": "5ec4e993a4500b629c1a49f0",
+                "email": "Contact@premierfinancials.net",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e994a4500b629c1a49f1",
+        "companyName": "Frank Paneno",
+        "email": [
+            {
+                "_id": "5ec4e994a4500b629c1a49f2",
+                "email": "frankpanenocpa@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e999a4500b629c1a49f3",
+        "companyName": "TSMA Consulting",
+        "email": [
+            {
+                "_id": "5ec4e999a4500b629c1a49f4",
+                "email": "hello@TSMAConsulting.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4e999a4500b629c1a49f5",
+                "email": "Rebecca@TSMAconsulting.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4e999a4500b629c1a49f6",
+                "email": "rebecca@tsmaconsulting.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e99ca4500b629c1a49fb",
+        "companyName": "SR Financial Services",
+        "email": [
+            {
+                "_id": "5ec4e99ca4500b629c1a49fc",
+                "email": "info@srfinancialservices.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4e99ca4500b629c1a49fd",
+                "email": "sam@srfinancialservices.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e9a4a4500b629c1a4a00",
+        "companyName": "Fix Your Credit Consulting",
+        "email": [
+            {
+                "_id": "5ec4e9a4a4500b629c1a4a01",
+                "email": "contact@fixyourcreditconsulting.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e9a9a4500b629c1a4a02",
+        "companyName": "MiklosCPA",
+        "email": [
+            {
+                "_id": "5ec4e9a9a4500b629c1a4a03",
+                "email": "urCPA@mikloscpa.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4e9a9a4500b629c1a4a04",
+                "email": "phishing@irs.gov",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e9ada4500b629c1a4a05",
+        "companyName": "ZNS, Inc.",
+        "email": [
+            {
+                "_id": "5ec4e9ada4500b629c1a4a06",
+                "email": "info@znstax.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4e9ada4500b629c1a4a07",
+                "email": "zabrina@znstax.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e9b4a4500b629c1a4a0b",
+        "companyName": "SVF Accounting",
+        "email": [
+            {
+                "_id": "5ec4e9b4a4500b629c1a4a0d",
+                "email": "info@example.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4e9b4a4500b629c1a4a0e",
+                "email": "info@svfaccounting.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e9b6a4500b629c1a4a0f",
+        "companyName": "Top Priority Financial Solutions",
+        "email": [
+            {
+                "_id": "5ec4e9b6a4500b629c1a4a11",
+                "email": "shawnta@tpfinancialsolutions.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e9bba4500b629c1a4a12",
+        "companyName": "Tax Alliance Consulting",
+        "email": [
+            {
+                "_id": "5ec4e9bba4500b629c1a4a13",
+                "email": "legal@clientwhys.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4e9bba4500b629c1a4a15",
+                "email": "info@taxallianceconsulting.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e9c8a4500b629c1a4a17",
+        "companyName": "Jones & Malhotra, CPA",
+        "email": [
+            {
+                "_id": "5ec4e9c8a4500b629c1a4a18",
+                "email": "maritza@jm-cpa.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4e9c8a4500b629c1a4a19",
+                "email": "theresa@jm-cpa.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4e9c8a4500b629c1a4a1a",
+                "email": "koko@jm-cpa.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4e9c8a4500b629c1a4a1b",
+                "email": "robert@jm-cpa.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4e9c8a4500b629c1a4a1c",
+                "email": "victor@jm-cpa.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4e9c8a4500b629c1a4a1d",
+                "email": "bobby@jm-cpa.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4e9c8a4500b629c1a4a1e",
+                "email": "nick@jm-cpa.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4e9c8a4500b629c1a4a1f",
+                "email": "sonia@jm-cpa.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e9c9a4500b629c1a4a20",
+        "companyName": "Bharmal and Associates",
+        "email": [
+            {
+                "_id": "5ec4e9c9a4500b629c1a4a21",
+                "email": "info@bharmalcpas.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e9cca4500b629c1a4a22",
+        "companyName": "Anderson Bradshaw Tax Consulting",
+        "email": [
+            {
+                "_id": "5ec4e9cca4500b629c1a4a23",
+                "email": "info@andersonbradshawtax.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4e9cca4500b629c1a4a24",
+                "email": "andersontaxcoservices@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e9cda4500b629c1a4a25",
+        "companyName": "ASL with Andrew",
+        "email": [
+            {
+                "_id": "5ec4e9cda4500b629c1a4a32",
+                "email": "8b4e078a51d04e0e9efdf470027f0ec1@sentry.wixpress.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e9f3a4500b629c1a4a42",
+        "companyName": "Wright Accounting Services",
+        "email": [
+            {
+                "_id": "5ec4e9f3a4500b629c1a4a44",
+                "email": "admin@abfinwright.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e9f7a4500b629c1a4a45",
+        "companyName": "Pasadena Professional Services",
+        "email": [
+            {
+                "_id": "5ec4e9f7a4500b629c1a4a46",
+                "email": "Mail@PasadenaPS.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4e9f7a4500b629c1a4a47",
+                "email": "Mail@pasadenaps.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4e9f7a4500b629c1a4a48",
+                "email": "mail@pasadenaps.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e9f9a4500b629c1a4a49",
+        "companyName": "Offer-In-Compromise",
+        "email": [
+            {
+                "_id": "5ec4e9f9a4500b629c1a4a4a",
+                "email": "info@offer-in-compromise.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4e9fba4500b629c1a4a4b",
+        "companyName": "The Income Department",
+        "email": [
+            {
+                "_id": "5ec4e9fba4500b629c1a4a4c",
+                "email": "ben@theincomedepartment.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4ea03a4500b629c1a4a4d",
+        "companyName": "Carol Thomas Tax Preparation",
+        "email": [
+            {
+                "_id": "5ec4ea03a4500b629c1a4a4f",
+                "email": "cgiadmin@yourhostingaccount.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4ea18a4500b629c1a4a55",
+        "companyName": "ATR Accounting",
+        "email": [
+            {
+                "_id": "5ec4ea18a4500b629c1a4a63",
+                "email": "8b4e078a51d04e0e9efdf470027f0ec1@sentry.wixpress.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4ea18a4500b629c1a4a69",
+                "email": "atr@atraccounting.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4ea1ba4500b629c1a4a6c",
+        "companyName": "Narinyan CPA, APC",
+        "email": [
+            {
+                "_id": "5ec4ea1ba4500b629c1a4a6d",
+                "email": "info@narinyan.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4ea25a4500b629c1a4a6e",
+        "companyName": "C & A Accounting and Tax Services",
+        "email": [
+            {
+                "_id": "5ec4ea25a4500b629c1a4a6f",
+                "email": "info@cnaaccounting.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4ea27a4500b629c1a4a71",
+        "companyName": "LA Business Connect",
+        "email": [
+            {
+                "_id": "5ec4ea27a4500b629c1a4a72",
+                "email": "info@labusinessconnect.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4ea35a4500b629c1a4a73",
+        "companyName": "Ebrahim Rad - Rad Financial & Insurance Solutions",
+        "email": [
+            {
+                "_id": "5ec4ea35a4500b629c1a4a74",
+                "email": "IFPapplications@blueshieldca.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4ea35a4500b629c1a4a75",
+                "email": "privacy@customercenter.net",
+                "status": true
+            },
+            {
+                "_id": "5ec4ea35a4500b629c1a4a76",
+                "email": "e@radfis.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4ea35a4500b629c1a4a77",
+                "email": "emrad@ft.newyorklife.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4ea3ea4500b629c1a4a7a",
+        "companyName": "Abraham Finberg, CPA",
+        "email": [
+            {
+                "_id": "5ec4ea3ea4500b629c1a4a7b",
+                "email": "afinberg@finbergcpa.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4ea47a4500b629c1a4a7e",
+        "companyName": "Piterak’s Accounting & Tax Services",
+        "email": [
+            {
+                "_id": "5ec4ea47a4500b629c1a4a7f",
+                "email": "piteraksaccountingservices@piteraks.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4ea4ea4500b629c1a4a83",
+        "companyName": "Benjamin Koo & Associates",
+        "email": [
+            {
+                "_id": "5ec4ea4ea4500b629c1a4a84",
+                "email": "wilshire@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4ea57a4500b629c1a4a85",
+        "companyName": "Hebeler Accountancy Corporation",
+        "email": [
+            {
+                "_id": "5ec4ea57a4500b629c1a4a86",
+                "email": "carl@cbhcpa.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4ea6ba4500b629c1a4a8d",
+        "companyName": "Alajian Group",
+        "email": [
+            {
+                "_id": "5ec4ea6ba4500b629c1a4a8e",
+                "email": "info@alajiangroup.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4ea6ba4500b629c1a4a8f",
+        "companyName": "3Is Tax Services",
+        "email": [
+            {
+                "_id": "5ec4ea6ba4500b629c1a4a90",
+                "email": "email@example.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4ea6da4500b629c1a4a91",
+        "companyName": "Prime Accounting Solutions",
+        "email": [
+            {
+                "_id": "5ec4ea6da4500b629c1a4a92",
+                "email": "PrimeAccSolutions@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4ea7ea4500b629c1a4ac9",
+        "companyName": "Noir Financial",
+        "email": [
+            {
+                "_id": "5ec4ea7ea4500b629c1a4aca",
+                "email": "saintjamesfoundation@gmail.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4ea7ea4500b629c1a4acb",
+                "email": "info@noirfinancial.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4eac1a4500b629c1a4acd",
+        "companyName": "Powered Books",
+        "email": [
+            {
+                "_id": "5ec4eac1a4500b629c1a4acf",
+                "email": "support@getjobber.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4eac1a4500b629c1a4ad0",
+                "email": "support@worketc.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4eac1a4500b629c1a4ad1",
+                "email": "info@PoweredBooks.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4eac1a4500b629c1a4ad2",
+                "email": "info@bodetree.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4eac1a4500b629c1a4ad3",
+                "email": "support@accountingimport.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4eac1a4500b629c1a4ad4",
+                "email": "support@bigtime.net",
+                "status": true
+            },
+            {
+                "_id": "5ec4eac1a4500b629c1a4ad8",
+                "email": "success@gusto.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4eac1a4500b629c1a4ad9",
+                "email": "support@bill.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4eac1a4500b629c1a4ada",
+                "email": "support@invoicesherpa.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4eac1a4500b629c1a4adc",
+                "email": "support@xpenditure.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4eac1a4500b629c1a4add",
+                "email": "support@fundinggates.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4eac1a4500b629c1a4ade",
+                "email": "help@expensify.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4eac1a4500b629c1a4adf",
+                "email": "support@webgility.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4eac1a4500b629c1a4ae0",
+                "email": "support@fundera.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4eac1a4500b629c1a4ae1",
+                "email": "help@liveplan.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4eac1a4500b629c1a4ae3",
+                "email": "support@boomr.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4eac1a4500b629c1a4ae4",
+                "email": "info@poweredbooks.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4eac1a4500b629c1a4ae5",
+                "email": "support@hubdoc.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4eac1a4500b629c1a4ae6",
+                "email": "support@bluevine.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4eac4a4500b629c1a4aed",
+        "companyName": "Fagan & Fagan",
+        "email": [
+            {
+                "_id": "5ec4eac4a4500b629c1a4aee",
+                "email": "legal@clientwhys.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4eac4a4500b629c1a4af0",
+                "email": "info@faganfagan.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4eac6a4500b629c1a4af2",
+        "companyName": "Smartt Accounting LLC",
+        "email": [
+            {
+                "_id": "5ec4eac6a4500b629c1a4af3",
+                "email": "anna@smarttaccounting.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4eac7a4500b629c1a4af4",
+        "companyName": "Ben Adler CPA",
+        "email": [
+            {
+                "_id": "5ec4eac7a4500b629c1a4af5",
+                "email": "ben@benadlercpa.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4eac9a4500b629c1a4af6",
+        "companyName": "MASH Accounting & Consulting LLP",
+        "email": [
+            {
+                "_id": "5ec4eac9a4500b629c1a4af7",
+                "email": "info@mashaccounting.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4eacca4500b629c1a4af8",
+        "companyName": "Stoller CPA",
+        "email": [
+            {
+                "_id": "5ec4eacca4500b629c1a4af9",
+                "email": "info@stollercpa.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4ead2a4500b629c1a4aff",
+        "companyName": "Vantage Public Adjusters",
+        "email": [
+            {
+                "_id": "5ec4ead2a4500b629c1a4b00",
+                "email": "info@vantagepublicadjusters.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4ead4a4500b629c1a4b01",
+        "companyName": "US Tax Guru",
+        "email": [
+            {
+                "_id": "5ec4ead4a4500b629c1a4b02",
+                "email": "legal@clientwhys.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4ead4a4500b629c1a4b03",
+                "email": "accounting@ustaxguru.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4ead6a4500b629c1a4b06",
+        "companyName": "Proby’s Tax & Accounting Service",
+        "email": [
+            {
+                "_id": "5ec4ead6a4500b629c1a4b07",
+                "email": "email@example.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4ead6a4500b629c1a4b08",
+                "email": "info@probystax.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4eaf8a4500b629c1a4b13",
+        "companyName": "Solidence",
+        "email": [
+            {
+                "_id": "5ec4eaf8a4500b629c1a4b14",
+                "email": "info@solidence.org",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4eafaa4500b629c1a4b15",
+        "companyName": "Kim R Coyle CPA & Associates",
+        "email": [
+            {
+                "_id": "5ec4eafaa4500b629c1a4b16",
+                "email": "office@coylecpa.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4eb00a4500b629c1a4b18",
+        "companyName": "THD Credit Consulting",
+        "email": [
+            {
+                "_id": "5ec4eb00a4500b629c1a4b19",
+                "email": "erik@thdcreditconsulting.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4eb00a4500b629c1a4b1a",
+                "email": "name@email.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4eb00a4500b629c1a4b1b",
+                "email": "jackie@sasomei.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4eb09a4500b629c1a4b1c",
+        "companyName": "Michael M Parto, CPA",
+        "email": [
+            {
+                "_id": "5ec4eb09a4500b629c1a4b1f",
+                "email": "info@partocpa.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4eb10a4500b629c1a4b20",
+        "companyName": "Antonious & Associates Tax Consulatants",
+        "email": [
+            {
+                "_id": "5ec4eb10a4500b629c1a4b2f",
+                "email": "8b4e078a51d04e0e9efdf470027f0ec1@sentry.wixpress.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4eb16a4500b629c1a4b37",
+        "companyName": "No Stress Accounting",
+        "email": [
+            {
+                "_id": "5ec4eb16a4500b629c1a4b38",
+                "email": "luke@starwars.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4eb16a4500b629c1a4b39",
+                "email": "nick@nostressaccounting.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4eb16a4500b629c1a4b3a",
+                "email": "billing@nostressaccounting.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4eb16a4500b629c1a4b3b",
+                "email": "support@nostressaccounting.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4eb3aa4500b629c1a4b40",
+        "companyName": "EY",
+        "email": [
+            {
+                "_id": "5ec4eb3aa4500b629c1a4b41",
+                "email": "general@gu.ey.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4eb3aa4500b629c1a4b42",
+                "email": "kyiv@ua.ey.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4eb3aa4500b629c1a4b43",
+                "email": "yerevan@am.ey.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4eb3aa4500b629c1a4b44",
+                "email": "ey@hr.ey.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4eb3aa4500b629c1a4b46",
+                "email": "eyhcmc@vn.ey.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4eb3aa4500b629c1a4b47",
+                "email": "gregory.debaere@be.ey.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4eb3aa4500b629c1a4b48",
+                "email": "ey.office@rs.ey.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4eb3aa4500b629c1a4b49",
+                "email": "tender@ru.ey.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4eb3da4500b629c1a4b4a",
+        "companyName": "Bruce Critchley Tax",
+        "email": [
+            {
+                "_id": "5ec4eb3da4500b629c1a4b4b",
+                "email": "brucecritchley@gmail.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4eb3da4500b629c1a4b4c",
+                "email": "704-3107brucecritchley@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4eb3fa4500b629c1a4b4d",
+        "companyName": "High Speed Tax",
+        "email": [
+            {
+                "_id": "5ec4eb3fa4500b629c1a4b4e",
+                "email": "johnsmith@example.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4eb3fa4500b629c1a4b4f",
+                "email": "info@example.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4eb3fa4500b629c1a4b50",
+                "email": "info@highspeedtax.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4eb4aa4500b629c1a4b54",
+        "companyName": "Teeter Louise CPA",
+        "email": [
+            {
+                "_id": "5ec4eb4aa4500b629c1a4b55",
+                "email": "lteeter@roadrunner.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4eb4fa4500b629c1a4b56",
+        "companyName": "Gotta Do My Taxes",
+        "email": [
+            {
+                "_id": "5ec4eb4fa4500b629c1a4b57",
+                "email": "Rod@GottaDoMyTaxes.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4eb4fa4500b629c1a4b58",
+                "email": "Rod@gottadomytaxes.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4eb4fa4500b629c1a4b59",
+                "email": "BenDover@gmail.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4eb4fa4500b629c1a4b5a",
+                "email": "Dover@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4eb56a4500b629c1a4b5b",
+        "companyName": "Settle 4 Less IRS",
+        "email": [
+            {
+                "_id": "5ec4eb56a4500b629c1a4b6b",
+                "email": "8b4e078a51d04e0e9efdf470027f0ec1@sentry.wixpress.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4eb9ba4500b629c1a4b81",
+        "companyName": "Hanh Dinh, CPA",
+        "email": [
+            {
+                "_id": "5ec4eb9ba4500b629c1a4b8f",
+                "email": "8b4e078a51d04e0e9efdf470027f0ec1@sentry.wixpress.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4eb9ba4500b629c1a4b97",
+                "email": "hanhdinhcpa@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4ebe3a4500b629c1a4b98",
+        "companyName": "Brian T Stoner, CPA",
+        "email": [
+            {
+                "_id": "5ec4ebe3a4500b629c1a4b99",
+                "email": "carson2525@me.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4ebe3a4500b629c1a4b9a",
+                "email": "bnovoa@paychex.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4ebe3a4500b629c1a4ba0",
+                "email": "pauline@casbonassociates.net",
+                "status": true
+            },
+            {
+                "_id": "5ec4ebe3a4500b629c1a4ba1",
+                "email": "mricharz@prospectmtg.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4ebe3a4500b629c1a4ba2",
+                "email": "ralph@californiasunsetteam.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4ebe3a4500b629c1a4ba5",
+                "email": "bill@elizabethstpainters.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4ebe3a4500b629c1a4ba6",
+                "email": "Steve@oakleylawgroup.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4ebe3a4500b629c1a4ba7",
+                "email": "thomas@thewestcoastagency.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4ebe3a4500b629c1a4ba8",
+                "email": "Garett@tvgconsulting.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4ebf3a4500b629c1a4ba9",
+        "companyName": "10X CPA",
+        "email": [
+            {
+                "_id": "5ec4ebf3a4500b629c1a4bac",
+                "email": "impallari@gmail.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4ebf3a4500b629c1a4bad",
+                "email": "hello@rfuenzalida.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4ec02a4500b629c1a4bba",
+        "companyName": "The Taxation Experts CPA & IRS Enrolled Agent",
+        "email": [
+            {
+                "_id": "5ec4ec02a4500b629c1a4bbb",
+                "email": "legal@clientwhys.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4ec02a4500b629c1a4bbd",
+                "email": "info@thetaxationexperts.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4ec14a4500b629c1a4bbf",
+        "companyName": "Kelly & Small Certified Public Accountants",
+        "email": [
+            {
+                "_id": "5ec4ec14a4500b629c1a4bc0",
+                "email": "vahe@kellysmallcpa.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4ec14a4500b629c1a4bc1",
+                "email": "dana@kellysmallcpa.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4ec14a4500b629c1a4bc2",
+                "email": "assembly@kellysmallcpa.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4ec14a4500b629c1a4bc3",
+                "email": "julie@kellysmallcpa.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4ec14a4500b629c1a4bc4",
+                "email": "linda@kellysmallcpa.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4ec14a4500b629c1a4bc5",
+                "email": "john@kellysmallcpa.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4ec14a4500b629c1a4bc6",
+                "email": "dawn@kellysmallcpa.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4ec14a4500b629c1a4bc7",
+                "email": "gabriela@kellysmallcpa.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4ec14a4500b629c1a4bc8",
+                "email": "camilo@kellysmallcpa.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4ec14a4500b629c1a4bc9",
+                "email": "mark@kellysmallcpa.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4ec14a4500b629c1a4bca",
+                "email": "david@kellysmallcpa.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4ec14a4500b629c1a4bcb",
+                "email": "brenda@kellysmallcpa.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4ec14a4500b629c1a4bcc",
+                "email": "cynthie@kellysmallcpa.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4ec14a4500b629c1a4bcd",
+                "email": "info@kellysmallcpa.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4ec14a4500b629c1a4bce",
+                "email": "alice@kellysmallcpa.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4ec14a4500b629c1a4bcf",
+                "email": "karissa@kellysmallcpa.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4ec1ca4500b629c1a4bd2",
+        "companyName": "Manor Ridge Wealth",
+        "email": [
+            {
+                "_id": "5ec4ec1ca4500b629c1a4be0",
+                "email": "8b4e078a51d04e0e9efdf470027f0ec1@sentry.wixpress.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4ec1ca4500b629c1a4be4",
+                "email": "info@ManorWealth.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4ec24a4500b629c1a4be9",
+        "companyName": "Deloitte & Touche LLP",
+        "email": [
+            {
+                "_id": "5ec4ec24a4500b629c1a4bea",
+                "email": "legal@deloitte.de",
+                "status": true
+            },
+            {
+                "_id": "5ec4ec24a4500b629c1a4beb",
+                "email": "reclutamientocsc@deloitte.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4ec27a4500b629c1a4bec",
+        "companyName": "Fortitude Financial Management",
+        "email": [
+            {
+                "_id": "5ec4ec27a4500b629c1a4bed",
+                "email": "Gina@FortitudeFM.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4ec27a4500b629c1a4bee",
+                "email": "info@FortitudeFM.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4ec33a4500b629c1a4bf2",
+        "companyName": "Bonnie J. Wallace, Acting Career Consultant",
+        "email": [
+            {
+                "_id": "5ec4ec33a4500b629c1a4bf3",
+                "email": "bonnie@bonniejwallace.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4ec38a4500b629c1a4bf4",
+        "companyName": "Fineman West & Company",
+        "email": [
+            {
+                "_id": "5ec4ec38a4500b629c1a4bf5",
+                "email": "info@fwllp.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4ec38a4500b629c1a4bf6",
+                "email": "INFO@FWLLP.COM",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4ec39a4500b629c1a4bf7",
+        "companyName": "Whole Life Solutions",
+        "email": [
+            {
+                "_id": "5ec4ec39a4500b629c1a4bf8",
+                "email": "Dawn@WholeLifeSolutions.biz",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4ec4ba4500b629c1a4bfc",
+        "companyName": "Sagaz Insurance & Tax Pros",
+        "email": [
+            {
+                "_id": "5ec4ec4ba4500b629c1a4bfd",
+                "email": "PAMELA@SAGAZINSURANCE.COM",
+                "status": true
+            },
+            {
+                "_id": "5ec4ec4ba4500b629c1a4bfe",
+                "email": "info@sagazinsurance.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4ec4ba4500b629c1a4bff",
+                "email": "nfo@sagazinsurance.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4ec4ba4500b629c1a4c00",
+                "email": "amela@sagazinsurance.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4ec4ca4500b629c1a4c01",
+        "companyName": "Allana Associates",
+        "email": [
+            {
+                "_id": "5ec4ec4ca4500b629c1a4c02",
+                "email": "info@allanaassociates.com",
+                "status": true
+            }
+        ]
+    }
+]
+
+export const dentistEmails = [
+    {
+        "_id": "5ec4d83054ad0e551cd7e538",
+        "companyName": "New Image Dental",
+        "email": [
+            {
+                "_id": "5ec4d83054ad0e551cd7e539",
+                "email": "newmenavsky@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d83254ad0e551cd7e53b",
+        "companyName": "Tarzana Smile Design",
+        "email": [
+            {
+                "_id": "5ec4d83254ad0e551cd7e53c",
+                "email": "tarzanasmile@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d83354ad0e551cd7e53d",
+        "companyName": "Greenwood Dental & Orthodontics",
+        "email": [
+            {
+                "_id": "5ec4d83354ad0e551cd7e53e",
+                "email": "greenwooddentalgroup@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d83654ad0e551cd7e53f",
+        "companyName": "Smile Recreation by Dr. Bernard Baseri",
+        "email": [
+            {
+                "_id": "5ec4d83654ad0e551cd7e540",
+                "email": "info@smilerecreation.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d83a54ad0e551cd7e541",
+        "companyName": "Marina Dental Care",
+        "email": [
+            {
+                "_id": "5ec4d83a54ad0e551cd7e542",
+                "email": "info@drmarinarios.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d83d54ad0e551cd7e543",
+        "companyName": "Nader Yermian, DDS - Vicente Dental",
+        "email": [
+            {
+                "_id": "5ec4d83d54ad0e551cd7e544",
+                "email": "hi@vicentedental.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d84c54ad0e551cd7e54b",
+        "companyName": "Dr. Michael Y. Jacobson - Robertson Dental Group",
+        "email": [
+            {
+                "_id": "5ec4d84c54ad0e551cd7e54c",
+                "email": "robertsondentalgroup@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d84f54ad0e551cd7e54d",
+        "companyName": "CV Dental Group",
+        "email": [
+            {
+                "_id": "5ec4d84f54ad0e551cd7e54e",
+                "email": "drhart@cvdental.net",
+                "status": true
+            },
+            {
+                "_id": "5ec4d84f54ad0e551cd7e54f",
+                "email": "office@cvdental.net",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d85154ad0e551cd7e550",
+        "companyName": "Birdseye Dentistry",
+        "email": [
+            {
+                "_id": "5ec4d85154ad0e551cd7e552",
+                "email": "contact@birdseyedentistry.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d85354ad0e551cd7e553",
+        "companyName": "LA Smiles Dental Spa",
+        "email": [
+            {
+                "_id": "5ec4d85354ad0e551cd7e554",
+                "email": "info@lasmiles.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d85454ad0e551cd7e555",
+        "companyName": "ZenDental-Alessandra Raschkovsky, DDS",
+        "email": [
+            {
+                "_id": "5ec4d85454ad0e551cd7e556",
+                "email": "appointments@zendental.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d85754ad0e551cd7e557",
+        "companyName": "The Tender Dentist",
+        "email": [
+            {
+                "_id": "5ec4d85754ad0e551cd7e558",
+                "email": "TenderDentist@gmail.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4d85754ad0e551cd7e559",
+                "email": "tenderdentist@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d86054ad0e551cd7e55c",
+        "companyName": "Miracle Mile Comprehensive Dental Center",
+        "email": [
+            {
+                "_id": "5ec4d86054ad0e551cd7e55d",
+                "email": "info@miraclemiledentalcenter.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d86954ad0e551cd7e55e",
+        "companyName": "Geller Dentistry",
+        "email": [
+            {
+                "_id": "5ec4d86954ad0e551cd7e55f",
+                "email": "john@smith.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4d86954ad0e551cd7e560",
+                "email": "bengellerdds@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d86b54ad0e551cd7e561",
+        "companyName": "River Dentistry",
+        "email": [
+            {
+                "_id": "5ec4d86b54ad0e551cd7e562",
+                "email": "info@riverdentistry.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d86d54ad0e551cd7e563",
+        "companyName": "Stephanie Yeung, DDS",
+        "email": [
+            {
+                "_id": "5ec4d86d54ad0e551cd7e564",
+                "email": "StephanieYeungDDS@gmail.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4d86d54ad0e551cd7e565",
+                "email": "stephanieyeungdds@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d86f54ad0e551cd7e566",
+        "companyName": "Claire Ho, DDS",
+        "email": [
+            {
+                "_id": "5ec4d86f54ad0e551cd7e567",
+                "email": "clairedds@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d87054ad0e551cd7e568",
+        "companyName": "LA Smiles Dentistry",
+        "email": [
+            {
+                "_id": "5ec4d87054ad0e551cd7e569",
+                "email": "emailus@lasmilesdentistry.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d87854ad0e551cd7e56a",
+        "companyName": "Smile LA Downtown Modern Dentistry",
+        "email": [
+            {
+                "_id": "5ec4d87854ad0e551cd7e56b",
+                "email": "fancysmilela@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d87f54ad0e551cd7e56d",
+        "companyName": "Shervin M. Louie, DDS",
+        "email": [
+            {
+                "_id": "5ec4d87f54ad0e551cd7e56f",
+                "email": "proactivela@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d88154ad0e551cd7e570",
+        "companyName": "Sanjay P Doshi, DDS - The Diamond Bar Dentist",
+        "email": [
+            {
+                "_id": "5ec4d88154ad0e551cd7e571",
+                "email": "dentistrybydrdoshi@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d88654ad0e551cd7e572",
+        "companyName": "Joeun Dental Group",
+        "email": [
+            {
+                "_id": "5ec4d88654ad0e551cd7e573",
+                "email": "adam@websitedevco.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d88854ad0e551cd7e574",
+        "companyName": "Genesis Dental Esthetics",
+        "email": [
+            {
+                "_id": "5ec4d88854ad0e551cd7e575",
+                "email": "Contact@GenesisDentalEsthetics.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d88a54ad0e551cd7e576",
+        "companyName": "Los Feliz Dental Center",
+        "email": [
+            {
+                "_id": "5ec4d88a54ad0e551cd7e577",
+                "email": "info@losfelizdentalcenter.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d88c54ad0e551cd7e578",
+        "companyName": "Beautiful New Smiles",
+        "email": [
+            {
+                "_id": "5ec4d88c54ad0e551cd7e579",
+                "email": "whentosz@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d88e54ad0e551cd7e57a",
+        "companyName": "Pasadena Childrens Dentistry & Orthodontics",
+        "email": [
+            {
+                "_id": "5ec4d88e54ad0e551cd7e57b",
+                "email": "info1@pasadenachildrensdentistry.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d89954ad0e551cd7e57c",
+        "companyName": "LA Specialist Dental",
+        "email": [
+            {
+                "_id": "5ec4d89954ad0e551cd7e57d",
+                "email": "micah@micahrich.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4d89954ad0e551cd7e57f",
+                "email": "Tim.souchiski@gmail.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4d89954ad0e551cd7e580",
+                "email": "info@ndiscovered.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d89b54ad0e551cd7e581",
+        "companyName": "Cute Smile Dental",
+        "email": [
+            {
+                "_id": "5ec4d89b54ad0e551cd7e582",
+                "email": "info@cutesmiledental.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d89d54ad0e551cd7e583",
+        "companyName": "Cal Dental Group",
+        "email": [
+            {
+                "_id": "5ec4d89d54ad0e551cd7e584",
+                "email": "info@caldentalgroup.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d89f54ad0e551cd7e585",
+        "companyName": "Healing Dental Care",
+        "email": [
+            {
+                "_id": "5ec4d89f54ad0e551cd7e586",
+                "email": "info@HealingDentalCareLA.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4d89f54ad0e551cd7e587",
+                "email": "8b4e078a51d04e0e9efdf470027f0ec1@sentry.wixpress.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d8a154ad0e551cd7e588",
+        "companyName": "Boyle Heights Dental Care",
+        "email": [
+            {
+                "_id": "5ec4d8a154ad0e551cd7e589",
+                "email": "boyleheightsdentalcare@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d8a554ad0e551cd7e58a",
+        "companyName": "Perfectly Bright Smiles",
+        "email": [
+            {
+                "_id": "5ec4d8a554ad0e551cd7e58b",
+                "email": "frontdesk@berkeleydentaloffice.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4d8a554ad0e551cd7e58c",
+                "email": "info@perfectlybrightsmiles.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d8c054ad0e551cd7e594",
+        "companyName": "LA Dental Clinic",
+        "email": [
+            {
+                "_id": "5ec4d8c054ad0e551cd7e595",
+                "email": "smile@ladentalclinic.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d8c754ad0e551cd7e596",
+        "companyName": "Vernon Family Dental",
+        "email": [
+            {
+                "_id": "5ec4d8c754ad0e551cd7e598",
+                "email": "8b4e078a51d04e0e9efdf470027f0ec1@sentry.wixpress.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d8c854ad0e551cd7e599",
+        "companyName": "Don Solooki, DDS - Calm Dental",
+        "email": [
+            {
+                "_id": "5ec4d8c854ad0e551cd7e59a",
+                "email": "email@email.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d8cc54ad0e551cd7e59b",
+        "companyName": "E-Dream Dental Group",
+        "email": [
+            {
+                "_id": "5ec4d8cc54ad0e551cd7e59c",
+                "email": "info@edreamdental.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4d8cc54ad0e551cd7e59d",
+                "email": "info@edreamdental.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4d8cc54ad0e551cd7e59e",
+                "email": "edreamdental@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d8db54ad0e551cd7e59f",
+        "companyName": "Kevin Truong, DDS APC",
+        "email": [
+            {
+                "_id": "5ec4d8db54ad0e551cd7e5a0",
+                "email": "frontdesk@venicecrossroadsdental.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4d8db54ad0e551cd7e5a1",
+                "email": "kevin@kevintruongdds.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4d8db54ad0e551cd7e5a2",
+                "email": "lisa@kevintruongdds.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4d8db54ad0e551cd7e5a3",
+                "email": "office@kevintruongdds.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d8e754ad0e551cd7e5a6",
+        "companyName": "Brighter Dental",
+        "email": [
+            {
+                "_id": "5ec4d8e754ad0e551cd7e5a7",
+                "email": "frontdesk@brighterdentalla.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d8eb54ad0e551cd7e5a8",
+        "companyName": "Vision Dental Mar Vista",
+        "email": [
+            {
+                "_id": "5ec4d8eb54ad0e551cd7e5a9",
+                "email": "info@visiondental.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4d8eb54ad0e551cd7e5aa",
+                "email": "marvista@visiondental.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d8f554ad0e551cd7e5ad",
+        "companyName": "Wilshire Smile Studio",
+        "email": [
+            {
+                "_id": "5ec4d8f554ad0e551cd7e5ae",
+                "email": "smiles@ladentist.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d8f754ad0e551cd7e5af",
+        "companyName": "Historic Core Dental Care",
+        "email": [
+            {
+                "_id": "5ec4d8f754ad0e551cd7e5b0",
+                "email": "historiccoredentalcare@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d8f854ad0e551cd7e5b1",
+        "companyName": "Sawtelle Family Dental",
+        "email": [
+            {
+                "_id": "5ec4d8f854ad0e551cd7e5b2",
+                "email": "sawtellefamilydental@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d90154ad0e551cd7e5b7",
+        "companyName": "City of Angels Dentistry",
+        "email": [
+            {
+                "_id": "5ec4d90154ad0e551cd7e5b8",
+                "email": "team@cofadentistry.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d90454ad0e551cd7e5b9",
+        "companyName": "Avenue Dental",
+        "email": [
+            {
+                "_id": "5ec4d90454ad0e551cd7e5ba",
+                "email": "hello@avenue.dental",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d91054ad0e551cd7e5bf",
+        "companyName": "Z Dental Group",
+        "email": [
+            {
+                "_id": "5ec4d91054ad0e551cd7e5c0",
+                "email": "info@zdentalgroup.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d91554ad0e551cd7e5c1",
+        "companyName": "Chester Yokoyama, DDS - Dental Healing",
+        "email": [
+            {
+                "_id": "5ec4d91554ad0e551cd7e5c2",
+                "email": "info@dentalhealing.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d91754ad0e551cd7e5c3",
+        "companyName": "Dr Valeria Valdez Family Dentistry",
+        "email": [
+            {
+                "_id": "5ec4d91754ad0e551cd7e5c4",
+                "email": "info@valdezdentistry.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d91854ad0e551cd7e5c5",
+        "companyName": "Rachel Marmor, DMD",
+        "email": [
+            {
+                "_id": "5ec4d91854ad0e551cd7e5c6",
+                "email": "rachelmarmordmd@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d91b54ad0e551cd7e5c7",
+        "companyName": "Downtown Dental",
+        "email": [
+            {
+                "_id": "5ec4d91b54ad0e551cd7e5c8",
+                "email": "office@downtowndentalLA.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4d91b54ad0e551cd7e5c9",
+                "email": "policy@pri-pol.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d91c54ad0e551cd7e5ca",
+        "companyName": "Kelly Smile Dentistry",
+        "email": [
+            {
+                "_id": "5ec4d91c54ad0e551cd7e5cb",
+                "email": "info@weomedia.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d92454ad0e551cd7e5cc",
+        "companyName": "Allaire Dental Care",
+        "email": [
+            {
+                "_id": "5ec4d92454ad0e551cd7e5cd",
+                "email": "office@allairedentalcare.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d92f54ad0e551cd7e5d0",
+        "companyName": "Exquisite Dentistry",
+        "email": [
+            {
+                "_id": "5ec4d92f54ad0e551cd7e5d1",
+                "email": "info@ExquisiteDentistryLA.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d93054ad0e551cd7e5d2",
+        "companyName": "Prero Orthodontics",
+        "email": [
+            {
+                "_id": "5ec4d93054ad0e551cd7e5d3",
+                "email": "info@drprero.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d93754ad0e551cd7e5d7",
+        "companyName": "Dental Oasis",
+        "email": [
+            {
+                "_id": "5ec4d93754ad0e551cd7e5d8",
+                "email": "dentaloasis.losangeles@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d94a54ad0e551cd7e5dd",
+        "companyName": "Pacific Dental Aesthetics",
+        "email": [
+            {
+                "_id": "5ec4d94a54ad0e551cd7e5de",
+                "email": "info@pacificdentalaesthetics.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d94b54ad0e551cd7e5df",
+        "companyName": "Avenue Dental",
+        "email": [
+            {
+                "_id": "5ec4d94b54ad0e551cd7e5e0",
+                "email": "jobs@avenue.dental",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d94d54ad0e551cd7e5e4",
+        "companyName": "U Smile Dental",
+        "email": [
+            {
+                "_id": "5ec4d94d54ad0e551cd7e5e5",
+                "email": "usmileanaheim@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d94e54ad0e551cd7e5e6",
+        "companyName": "NKM Prasad, DDS",
+        "email": [
+            {
+                "_id": "5ec4d94e54ad0e551cd7e5e7",
+                "email": "info@PrasadDental.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d96454ad0e551cd7e5ed",
+        "companyName": "William N Langstaff, DDS, FAGD, FACD",
+        "email": [
+            {
+                "_id": "5ec4d96454ad0e551cd7e5ee",
+                "email": "drlangstaff@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d96754ad0e551cd7e5ef",
+        "companyName": "Gentle Mobile Dental",
+        "email": [
+            {
+                "_id": "5ec4d96754ad0e551cd7e5f0",
+                "email": "drmandel@gentlemobiledental.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d96e54ad0e551cd7e5f3",
+        "companyName": "Smile Design Dental",
+        "email": [
+            {
+                "_id": "5ec4d96e54ad0e551cd7e5f4",
+                "email": "PicoLADental@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d97054ad0e551cd7e5f5",
+        "companyName": "Le Chic Dentist",
+        "email": [
+            {
+                "_id": "5ec4d97054ad0e551cd7e5f6",
+                "email": "lechicdentist@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d97254ad0e551cd7e5f7",
+        "companyName": "Bill Dorfman, DDS - Century City Aesthetic Dentistry",
+        "email": [
+            {
+                "_id": "5ec4d97254ad0e551cd7e5f8",
+                "email": "sennette@BillDorfmanDDS.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d97454ad0e551cd7e5f9",
+        "companyName": "Woodland Hills Dental Arts",
+        "email": [
+            {
+                "_id": "5ec4d97454ad0e551cd7e5fa",
+                "email": "woodlandhillsdentalarts@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d97c54ad0e551cd7e5fc",
+        "companyName": "Smiles LA",
+        "email": [
+            {
+                "_id": "5ec4d97c54ad0e551cd7e5fd",
+                "email": "info@weomedia.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4d97c54ad0e551cd7e5fe",
+                "email": "contact@smiles.la",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d97e54ad0e551cd7e5ff",
+        "companyName": "Sam S Markzar, DDS",
+        "email": [
+            {
+                "_id": "5ec4d97e54ad0e551cd7e600",
+                "email": "bhperiooffice@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d97f54ad0e551cd7e601",
+        "companyName": "Thomas An, D.D.S. Dentalcare",
+        "email": [
+            {
+                "_id": "5ec4d97f54ad0e551cd7e602",
+                "email": "thomasanddsdentalcare@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d98054ad0e551cd7e603",
+        "companyName": "Diamond Creek Dental",
+        "email": [
+            {
+                "_id": "5ec4d98054ad0e551cd7e604",
+                "email": "diamondcreekdental@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d98954ad0e551cd7e607",
+        "companyName": "Dentex Dental Studio",
+        "email": [
+            {
+                "_id": "5ec4d98954ad0e551cd7e608",
+                "email": "smile@dentexdentalstudio.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d98b54ad0e551cd7e609",
+        "companyName": "Yiwen Liu, DDS",
+        "email": [
+            {
+                "_id": "5ec4d98b54ad0e551cd7e60a",
+                "email": "yiwenliuddsapc@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d98f54ad0e551cd7e60b",
+        "companyName": "Borzoo Ahmadi, DDS",
+        "email": [
+            {
+                "_id": "5ec4d98f54ad0e551cd7e60c",
+                "email": "info@LABeverlyhillsdentist.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4d98f54ad0e551cd7e60d",
+                "email": "Info@labeverlyhillsdentist.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4d98f54ad0e551cd7e60e",
+                "email": "Info@LABeverlyhillsdentist.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d99954ad0e551cd7e613",
+        "companyName": "Leo Aghajanian, DDS - Precision Dental",
+        "email": [
+            {
+                "_id": "5ec4d99954ad0e551cd7e614",
+                "email": "contact@ddsglendale.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4d99954ad0e551cd7e615",
+                "email": "help@it49.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d99b54ad0e551cd7e61c",
+        "companyName": "San Marino Dentistry",
+        "email": [
+            {
+                "_id": "5ec4d99b54ad0e551cd7e61d",
+                "email": "sanmarinodentist@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d99c54ad0e551cd7e61e",
+        "companyName": "Cerritos Dental Implant Center",
+        "email": [
+            {
+                "_id": "5ec4d99c54ad0e551cd7e61f",
+                "email": "cerritosimplant@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d99e54ad0e551cd7e620",
+        "companyName": "Mark Aranbasich, DDS",
+        "email": [
+            {
+                "_id": "5ec4d99e54ad0e551cd7e621",
+                "email": "markadds@sbcglobal.net",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d9a054ad0e551cd7e622",
+        "companyName": "Chelsea Pinto, DDS",
+        "email": [
+            {
+                "_id": "5ec4d9a054ad0e551cd7e623",
+                "email": "admin@drchelseapinto.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d9a354ad0e551cd7e626",
+        "companyName": "K-Town Dentist",
+        "email": [
+            {
+                "_id": "5ec4d9a354ad0e551cd7e627",
+                "email": "agustinamingote@gmail.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4d9a354ad0e551cd7e628",
+                "email": "amkryukov@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d9a454ad0e551cd7e629",
+        "companyName": "Floss & Gloss Dental",
+        "email": [
+            {
+                "_id": "5ec4d9a454ad0e551cd7e62a",
+                "email": "contact@flossandgloss.net",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d9a654ad0e551cd7e62d",
+        "companyName": "Fred Chao, DDS",
+        "email": [
+            {
+                "_id": "5ec4d9a654ad0e551cd7e62e",
+                "email": "fredchaodds@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d9b554ad0e551cd7e62f",
+        "companyName": "UCLA Faculty Group Dental Practice",
+        "email": [
+            {
+                "_id": "5ec4d9b554ad0e551cd7e630",
+                "email": "fyounai@dentistry.ucla.edu",
+                "status": true
+            },
+            {
+                "_id": "5ec4d9b554ad0e551cd7e631",
+                "email": "ehewlett@dentistry.ucla.edu",
+                "status": true
+            },
+            {
+                "_id": "5ec4d9b554ad0e551cd7e632",
+                "email": "sporter@support.ucla.edu",
+                "status": true
+            },
+            {
+                "_id": "5ec4d9b554ad0e551cd7e633",
+                "email": "dgalley@dentistry.ucla.edu",
+                "status": true
+            },
+            {
+                "_id": "5ec4d9b554ad0e551cd7e634",
+                "email": "gdelgado@support.ucla.edu",
+                "status": true
+            },
+            {
+                "_id": "5ec4d9b554ad0e551cd7e635",
+                "email": "muribe@dentistry.ucla.edu",
+                "status": true
+            },
+            {
+                "_id": "5ec4d9b554ad0e551cd7e636",
+                "email": "mgompert@support.ucla.edu",
+                "status": true
+            },
+            {
+                "_id": "5ec4d9b554ad0e551cd7e637",
+                "email": "emartinez@support.ucla.edu",
+                "status": true
+            },
+            {
+                "_id": "5ec4d9b554ad0e551cd7e638",
+                "email": "alumni@dentistry.ucla.edu",
+                "status": true
+            },
+            {
+                "_id": "5ec4d9b554ad0e551cd7e639",
+                "email": "taghaloo@dentistry.ucla.edu",
+                "status": true
+            },
+            {
+                "_id": "5ec4d9b554ad0e551cd7e63a",
+                "email": "mdingman@dentistry.ucla.edu",
+                "status": true
+            },
+            {
+                "_id": "5ec4d9b554ad0e551cd7e63b",
+                "email": "cde@dentistry.ucla.edu",
+                "status": true
+            },
+            {
+                "_id": "5ec4d9b554ad0e551cd7e63c",
+                "email": "egarcia@support.ucla.edu",
+                "status": true
+            },
+            {
+                "_id": "5ec4d9b554ad0e551cd7e63d",
+                "email": "jsha@dentistry.ucla.edu",
+                "status": true
+            },
+            {
+                "_id": "5ec4d9b554ad0e551cd7e63e",
+                "email": "dwong@dentistry.ucla.edu",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d9ba54ad0e551cd7e63f",
+        "companyName": "Anthony Mobasser - Celebrity Dentist",
+        "email": [
+            {
+                "_id": "5ec4d9ba54ad0e551cd7e641",
+                "email": "info@best.celebritydentist.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4d9ba54ad0e551cd7e642",
+                "email": "anthony@celebritydentist.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4d9ba54ad0e551cd7e643",
+                "email": "Anthony@celebritydentist.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d9bb54ad0e551cd7e644",
+        "companyName": "Kaufman Dentistry",
+        "email": [
+            {
+                "_id": "5ec4d9bb54ad0e551cd7e645",
+                "email": "Kaufmandentistry@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d9bd54ad0e551cd7e646",
+        "companyName": "Orange County Dental Care",
+        "email": [
+            {
+                "_id": "5ec4d9bd54ad0e551cd7e647",
+                "email": "care@orangecounty-dentalcare.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d9be54ad0e551cd7e648",
+        "companyName": "Select Dental Group & Orthodontics",
+        "email": [
+            {
+                "_id": "5ec4d9be54ad0e551cd7e649",
+                "email": "selectdentalinfo@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d9c954ad0e551cd7e64c",
+        "companyName": "Esthetic Dentistry",
+        "email": [
+            {
+                "_id": "5ec4d9c954ad0e551cd7e64d",
+                "email": "Info@estheticdentistry.net",
+                "status": true
+            },
+            {
+                "_id": "5ec4d9c954ad0e551cd7e64e",
+                "email": "info@estheticdentistry.net",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d9ca54ad0e551cd7e64f",
+        "companyName": "Katz Dental Group",
+        "email": [
+            {
+                "_id": "5ec4d9ca54ad0e551cd7e650",
+                "email": "drkatz@katzdentalgroup.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d9d254ad0e551cd7e653",
+        "companyName": "ASK Dental Group - Campus Dental Center",
+        "email": [
+            {
+                "_id": "5ec4d9d254ad0e551cd7e654",
+                "email": "askdentalgroup@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d9d454ad0e551cd7e655",
+        "companyName": "Mee Dental Group - Young H Choi, DDS",
+        "email": [
+            {
+                "_id": "5ec4d9d454ad0e551cd7e656",
+                "email": "meedentalgroup@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d9d654ad0e551cd7e657",
+        "companyName": "Flossn LA Dental",
+        "email": [
+            {
+                "_id": "5ec4d9d654ad0e551cd7e658",
+                "email": "LALuxDental@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d9d654ad0e551cd7e659",
+        "companyName": "Dalia Nosrati Cohen, DDS - Happy Smiles Dental",
+        "email": [
+            {
+                "_id": "5ec4d9d654ad0e551cd7e65a",
+                "email": "dalia@doctor.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d9d954ad0e551cd7e65b",
+        "companyName": "Anthony Mobasser - Celebrity Dentist",
+        "email": [
+            {
+                "_id": "5ec4d9d954ad0e551cd7e65c",
+                "email": "info@best.celebritydentist.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4d9d954ad0e551cd7e65e",
+                "email": "anthony@celebritydentist.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4d9d954ad0e551cd7e65f",
+                "email": "Anthony@celebritydentist.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d9da54ad0e551cd7e660",
+        "companyName": "Vivian Banaria, DMD",
+        "email": [
+            {
+                "_id": "5ec4d9da54ad0e551cd7e661",
+                "email": "banariadental2@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d9e154ad0e551cd7e664",
+        "companyName": "San Dimas Family Dentistry",
+        "email": [
+            {
+                "_id": "5ec4d9e154ad0e551cd7e665",
+                "email": "sandimasfamilydentistry@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d9e354ad0e551cd7e666",
+        "companyName": "Smile Care Valencia - Robert P. Hedvat, DDS",
+        "email": [
+            {
+                "_id": "5ec4d9e354ad0e551cd7e667",
+                "email": "smilecarevalencia@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d9e554ad0e551cd7e668",
+        "companyName": "Sola Kids Dental",
+        "email": [
+            {
+                "_id": "5ec4d9e554ad0e551cd7e669",
+                "email": "Drlaura@solakidsdental.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec4d9ee54ad0e551cd7e66a",
+        "companyName": "Monterey Hills Dental",
+        "email": [
+            {
+                "_id": "5ec4d9ee54ad0e551cd7e66b",
+                "email": "anapbm@gmail.com",
+                "status": true
+            },
+            {
+                "_id": "5ec4d9ee54ad0e551cd7e66d",
+                "email": "info@ndiscovered.com",
+                "status": true
+            }
+        ]
+    }
+]

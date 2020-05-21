@@ -12,6 +12,7 @@ import { MatDialog, MatAnchor } from '@angular/material';
 import { SearchComponent } from '../search/search.component';
 import { droEmails, emails, la2050Emails, therapistEmails } from '../../../emails';
 import { newBniEmails, womenBizEmails, cityEmails, cocSmEmail, linkedInEmails } from '../../../newEmails';
+import { realEstateEmail, accountEmails, juryEmails, dentistEmails } from '../../../dentist-acc-realestate-emails';
 import { Validators, FormControl } from '@angular/forms';
 import { PostType } from '../../../shared/models/post-types.enum';
 import { MessageService } from '../../../shared/services/message.service';
@@ -30,6 +31,9 @@ import { womenbizTemplate } from '../../../shared/womenbiz-template';
 import { linkedinTemplate } from '../../../shared/linkedin-template';
 import { cocSmTemplate } from '../../../shared/cocsam-template';
 import { cityTemplate } from '../../../shared/city-template';
+import { dentistTemplate } from '../../../shared/dentis-template';
+import { accountantTemplate } from '../../../shared/accountant-template';
+import { realestateTemplate } from '../../../shared/realestate-template';
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
@@ -167,24 +171,27 @@ export class NavBarComponent implements OnInit, OnDestroy {
 
   sendEmails() {
     let count = 0;
-    cityEmails.forEach((e, i) => {
+    emails.forEach((e, i) => {
       setTimeout(() => {
         e.email.forEach((email, j) => {
           setTimeout(() => {
             if (!Validators.email(new FormControl(email.email))) {
               const emailObj = {
                 to: [email.email],
-                // subject: `${e.companyName}, Online Sales`, // cocsm 
-                subject: `${e.cityName}, Tech Boost Invitation`, //&& city
+                // subject: `${e.companyName}, Invitation to Dental Practice Summit.`, //Dentist
+                // subject: `${e.companyName}, Invitation to Accounting Practice Summit.`, // Accountant
+                subject: `${e.companyName}, Invitation to Real Estate Summit.`, // Real Estate
                 companies: [{ _id: '5db1c84ec10c45224c4b95fd' }],
                 type: PostType.Email,
                 status: PostStatus.Published,
-                // descriptionHTML: cocSmTemplate.replace('{companyName}', e.companyName),
-                descriptionHTML: cityTemplate.replace('{cityName}', e.cityName).replace('{cityName}', e.cityName),
+                // descriptionHTML: dentistTemplate.replace('{companyName}', e.companyName),
+                // descriptionHTML: accountantTemplate.replace('{companyName}', e.companyName),
+                descriptionHTML: realestateTemplate.replace('{companyName}', e.companyName),
                 createdBy: '5d4c1cdf91e63a3fe84bb43a',
-                campaignId: '5ec3e8d0a1587b4ade4b1015', // city
-                //  campaignId: '5ec3db9ea1587b4ade4b1014' // cocsm
-                city: e.cityName
+                // campaignId: '5ec5ed9001d818181b01ce97', // dentist
+                // campaignId: '5ec5f1a801d818181b01ce98' // accountant 
+                campaignId: '5ec5f34a01d818181b01ce99' // Real Estate
+                // city: e.cityName
               };
               this.emailService.sendEmail(emailObj).toPromise().then((o) => {
                 console.log(o, i);

@@ -19,7 +19,7 @@ export const emails = [
     "OrganizatinName": "Social and Environmental Entrepreneurs",
     "proposalName": "Bringing LA's Green New Deal to Our Neighborhoods",
     link: 'www.youtube.com',
-    companyName: "Recasher",
+    companyName: "Oren Hen EA",
     cityName: 'Brea',
     "email": [
       {
@@ -35,7 +35,7 @@ export const emails = [
   //   // "OrganizatinName": "Social and Environmental Entrepreneurs",
   //   // "proposalName": "Bringing LA's Green New Deal to Our Neighborhoods",
   //   link: 'www.youtube.com',
-  //   companyName: "Recasher",
+  //   companyName: "Oren Hen EA",
   //   cityName: 'Brea',
   //   email: [
   //     {

@@ -70,12 +70,6 @@ const routes: Routes = [
     // outlet: 'main',
   },
 
-  {
-    path: 'event',
-    loadChildren: () => import('./event/event.module').then(module => module.EventModule),
-    // outlet: 'main',
-  },
-
   // {
   //   path: 'team-skill',
   //   loadChildren: () => import('./team-skill/teamskill.module').then(module => module.TeamskillModule),
@@ -109,13 +103,6 @@ const routes: Routes = [
     resolve: { seo: PostDataResolver },
     data: { noReuse: true, setPostMeta: true },
     // outlet: 'main',
-    pathMatch: 'full'
-  },
-  {
-    path: 'event/:slug',
-    loadChildren: () => import('./event/event-details/event-details.module').then(module => module.EventDetailsModule),
-    resolve: { seo: PostDataResolver },
-    data: { noReuse: false, setPostMeta: true },
     pathMatch: 'full'
   },
   {

@@ -55,6 +55,7 @@
                                         [data]="details?.description"
                                         [commentsList]="commentService?.commentsList$ | async"
                                         [blockLevelComments]="false" [readOnly]="true"
+                                        [realTime]="true"
                                         [id]="'details-editor'" [html]="details?.descriptionHTML" [post]="details" [commentType]="'post'">
                                     </app-editor>
 

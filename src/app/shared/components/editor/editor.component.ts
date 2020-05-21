@@ -34,7 +34,7 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
   uploadUrl: 'https://71258.cke-cs.com/easyimage/upload/';
 
   @Input() realTime = false;
-  @Input() role = 'commentator';
+  @Input() role = 'writer';
 
   // Note that Angular refs can be used once the view is initialized so we need to create
   // these containers and use in the above editor configuration to workaround this problem.

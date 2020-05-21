@@ -2,6 +2,7 @@ import { Component, OnInit, Input, AfterViewChecked, EventEmitter, Output, ViewC
 import { ChatService } from '../../services/chat.service';
 import * as Chat from 'twilio-chat';
 import moment from 'moment';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-chat-box',
@@ -10,7 +11,7 @@ import moment from 'moment';
 })
 export class ChatBoxComponent implements OnInit {
 
-  @Input() loggedInUser;
+  public loggedInUser: any;
   @Input() postDetails;
 
   public commentsList = [];
@@ -24,7 +25,8 @@ export class ChatBoxComponent implements OnInit {
   generalChannel: any;
   public msg: any;
 
-  constructor(private _chatService: ChatService) {
+  constructor(private _chatService: ChatService, private _authService: AuthService) {
+    this.loggedInUser = this._authService.loggedInUser;
   }
 
   ngOnInit() {

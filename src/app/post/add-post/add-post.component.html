@@ -42,7 +42,7 @@
                   toolbar: 'preview | undo redo | image media emoticons | formatselect pagebreak hr | bold italic code codesample | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | help' }"></editor> -->
 
                 <app-editor *ngIf="(postId && editPostDetails) || !postId" #descriptionEditor [data]="descriptionFormControl?.value" [readOnly]="false" [html]="postForm?.get('descriptionHTML')?.value"
-                  [post]="editPostDetails"  [id]="'edit-post-editor'" [realTime]="postId ? true : false" [importArticleSubscription]="true" [placeholder]="postType + ' description'">
+                  [post]="editPostDetails" [role]="'writer'"  [id]="'edit-post-editor'" [realTime]="postId ? true : false" [importArticleSubscription]="true" [placeholder]="postType + ' description'">
                 </app-editor>
 
                 <br />

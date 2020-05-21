@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output, Input, OnDestroy, ViewChild, ElementRef, Inject, PLATFORM_ID, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input, OnDestroy, ViewChild, ElementRef, Inject, PLATFORM_ID, AfterViewInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { appConstants } from '../../constants/app_constants';
 import { FormGroup, FormControl } from '@angular/forms';
@@ -14,6 +14,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { of } from 'rxjs';
 import { map, share, tap } from 'rxjs/operators';
 import { CustomUploadAdapter } from './FileUploader';
+import { CKEditorComponent } from '@ckeditor/ckeditor5-angular';
 
 @Component({
   selector: 'app-editor',
@@ -21,43 +22,25 @@ import { CustomUploadAdapter } from './FileUploader';
   styleUrls: ['./editor.component.scss'],
   // encapsulation: ViewEncapsulation.ShadowDom
 })
-export class EditorComponent implements OnInit, OnDestroy {
+export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
 
   isHandset: boolean;
 
   @Input() post: Post; /** post for view mode */
 
-  cloudServices = {
-    tokenUrl: environment.ckEditor.developmentTokenUrl,
-    webSocketUrl: environment.ckEditor.ws,
-    uploadUrl: 'https://71258.cke-cs.com/easyimage/upload/'
-  };
+  editor: any
+
+  ckEditorUserToken: string;
+  webSocketUrl = environment.ckEditor.ws;
+  uploadUrl: 'https://71258.cke-cs.com/easyimage/upload/';
 
   @Input() realTime = false;
-
-  collaboration = {
-    channelId: this.post ? this.post._id : ''
-  };
-
-  public get editorConfig() {
-    return {
-      cloudServices: this.cloudServices,
-      collaboration: this.collaboration,
-      sidebar: {
-        container: this.sidebar,
-      },
-      presenceList: {
-        container: this.presenceList,
-      },
-      extraPlugins: [ this.myCustomUploadAdapterPlugin ]
-    };
-  }
+  @Input() role = 'commentator';
 
   // Note that Angular refs can be used once the view is initialized so we need to create
   // these containers and use in the above editor configuration to workaround this problem.
-  private sidebar = null;
-  private presenceList = null;
-
+  public sidebar = null;
+  public presenceList = null;
 
   public model = {
     editorData: ''
@@ -65,16 +48,27 @@ export class EditorComponent implements OnInit, OnDestroy {
 
   public ckEditor = null;
 
-  // fileExtensions = AttachesTool.EXTENSIONS;
-
-  editor: any;
-  of = of;
   selectedBlockIndex: number;
   isPlatformBrowser = false;
   @Input() companyPostId: string;
   @Input() userReferenceId: string;
   @Input() id: string;
-  @Input() readOnly = false; /** read only mode */
+
+  /** read only mode */
+  __readOnly = false;
+  @Input()
+  set readOnly(h) {
+    this.__readOnly = h;
+    /** If editting mode for comments set the toolbar */
+    if (!h && this.ckEditorRef && this.ckEditorRef.editorInstance) {
+      this.setToolbar(this.ckEditorRef.editorInstance);
+    }
+  }
+  get readOnly() {
+    return this.__readOnly;
+  }
+
+
   @Input()
   set html(h) {
     this.model.editorData = h;
@@ -90,7 +84,7 @@ export class EditorComponent implements OnInit, OnDestroy {
   @Input() commentType: string;
   @Output() output: EventEmitter<any> = new EventEmitter(); /** Emitting data with user interactions */
   @Input() importArticleSubscription = false;
-  // @ViewChild('editorRef', { static: false }) editorRef: ElementRef;
+
   @ViewChild('ckEditorRef', { static: false }) ckEditorRef;
   @ViewChild('editorViewRef', { static: true }) editorViewRef: ElementRef;
 
@@ -126,19 +120,21 @@ export class EditorComponent implements OnInit, OnDestroy {
     private breakpointObserver: BreakpointObserver,
   ) {
     this.isPlatformBrowser = isPlatformBrowser(this._platformId);
+
     if (this.isPlatformBrowser) {
       const DocumentEditor = require('src/assets/js/ckeditor');
       this.ckEditor = DocumentEditor;
     }
+
+    /** Side bar for comments & presenceList for online users */
+    this.sidebar = this.isPlatformBrowser && this.realTime ? document.createElement('div') : null;
+    this.presenceList = this.isPlatformBrowser && this.realTime ? document.createElement('div') : null;
   }
 
   ngOnInit() {
     if (this.post) {
       this.initializeCommentForm(this.post);
     }
-
-    this.sidebar = this.isPlatformBrowser ? document.createElement('div') : null;
-    this.presenceList = this.isPlatformBrowser ? document.createElement('div') : null;
 
     this.subscriptions$.add(
       this.breakpointObserver.observe(Breakpoints.Handset)
@@ -148,34 +144,61 @@ export class EditorComponent implements OnInit, OnDestroy {
           share()
         ).subscribe()
     );
+
+    this.subscriptions$.add(
+      this.authService.loggedInUser$.subscribe(async (u) => {
+        if (u && !this.ckEditorUserToken && this.realTime) {
+          this.authService.generateCkEditorToken({ name: u.name, _id: u._id, email: u.email, avatar: this.s3FilesBucketURL + u.avatar }, this.role).toPromise().then(t => {
+            this.ckEditorUserToken = t;
+            // this.ckEditor.update();
+          });
+        }
+      })
+    );
   }
 
-  myCustomUploadAdapterPlugin(editor) {
-    console.log(editor.plugins.get('EasyImage'));
-    editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
-      // Configure the URL to the upload script in your back-end here!
-      return new CustomUploadAdapter(loader);
-    };
+  public ngAfterViewInit() {
+    if (!this.sidebarContainer || !this.presenceListContainer) {
+      // throw new Error('Div containers for sidebar or presence list were not found');
+    }
+
+    if (this.realTime) {
+      if (this.sidebarContainer && this.sidebarContainer.nativeElement) {
+        this.sidebarContainer.nativeElement.appendChild(this.sidebar);
+      }
+      if (this.presenceListContainer && this.presenceListContainer.nativeElement) {
+        this.presenceListContainer.nativeElement.appendChild(this.presenceList);
+      }
+    }
   }
 
   ngOnDestroy() {
     this.subscriptions$.unsubscribe();
   }
 
+  /** When the editor is ready */
   public onReady(editor) {
+    this.setToolbar(editor);
+  }
+
+  setToolbar(editor) {
+    /** Show the toolbar */
     editor.ui.getEditableElement().parentElement.insertBefore(
       editor.ui.view.toolbar.element,
       editor.ui.getEditableElement()
     );
-
-    if (this.realTime) {
-
-    } else {
-
-    }
-
-    // editor.plugins.extraPlugins = [ this.myCustomUploadAdapterPlugin ];
   }
+
+  myCustomUploadAdapterPlugin(editor) {
+    editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
+      // Configure the URL to the upload script in your back-end here!
+      return new CustomUploadAdapter(loader);
+    };
+  }
+
+
+
+
 
   initializeCommentForm(p) {
     this.commentForm = new FormGroup({
@@ -185,12 +208,6 @@ export class EditorComponent implements OnInit, OnDestroy {
       blockSpecificComment: new FormControl(true),
       blockId: new FormControl(''),
     });
-    if (this.companyPostId) {
-      this.commentForm.addControl('companyReferenceId', new FormControl(this.companyPostId));
-    }
-    if (this.userReferenceId) {
-      this.commentForm.addControl('userReferenceId', new FormControl(this.userReferenceId));
-    }
   }
 
   async addComment(blockId: string, addCommentEditor: EditorComponent) {
@@ -227,33 +244,14 @@ export class EditorComponent implements OnInit, OnDestroy {
   //   // this.commentsList = this.commentsList.filter(c => c._id !== id);
   // }
 
-  gistFrame(url: string) {
-    const template = `<html><body><style type="text/css">.gist {overflow:auto;} .gist .gist-file .gist-data { max-height: 86vh; }</style><script src="gistSrc"></script></body></html>`;
-    const replaced = template.replace('gistSrc', url + '.js');
-    return replaced;
+  generateToken = () => {
+    return new Promise((res, rej) => {
+      return res(this.ckEditorUserToken);
+    });
   }
 
-  generateToken() {
-    return new Promise((resolve, reject) => {
-      const payload = {
-        aud: environment.ckEditor.ckEditorEnvironMentId,
-        sub: this.authService.loggedInUser._id,
-        user: {
-          email: this.authService.loggedInUser,
-          name: this.authService.loggedInUser.name,
-          avatar: this.authService.loggedInUser.avatar ? (this.s3FilesBucketURL + this.authService.loggedInUser.avatar) : this.anonymousAvatar
-        },
-        auth: {
-          collaboration: {
-            '*': {
-              role: 'writer'
-            }
-          }
-        }
-      };
-      // const result = jwt.sign( payload, environment.ckEditor.ckEditorSecretKey, { algorithm: 'HS256' } );
-      // return resolve( result );
-    });
+  autosave = (editor) => {
+    return this.postService.updatePostContent({descriptionHTML: editor.getData(), _id: this.post._id}).toPromise();
   }
 
 }

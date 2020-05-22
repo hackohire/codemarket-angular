@@ -12,7 +12,7 @@ import { MatDialog, MatAnchor } from '@angular/material';
 import { SearchComponent } from '../search/search.component';
 import { droEmails, emails, la2050Emails, therapistEmails } from '../../../emails';
 import { newBniEmails, womenBizEmails, cityEmails, cocSmEmail, linkedInEmails } from '../../../newEmails';
-import { realEstateEmail, accountEmails, juryEmails, dentistEmails, newTherapistEmail } from '../../../dentist-acc-realestate-emails';
+import { realEstateEmail, accountEmails, juryEmails, dentistEmails, newTherapistEmail, finalInstaEmails } from '../../../dentist-acc-realestate-emails';
 import { Validators, FormControl } from '@angular/forms';
 import { PostType } from '../../../shared/models/post-types.enum';
 import { MessageService } from '../../../shared/services/message.service';
@@ -34,6 +34,7 @@ import { cityTemplate } from '../../../shared/city-template';
 import { dentistTemplate } from '../../../shared/dentis-template';
 import { accountantTemplate } from '../../../shared/accountant-template';
 import { realestateTemplate } from '../../../shared/realestate-template';
+import { instagramTemplate } from '../../../shared/instagram-template';
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
@@ -171,22 +172,22 @@ export class NavBarComponent implements OnInit, OnDestroy {
 
   sendEmails() {
     let count = 0;
-    newTherapistEmail.forEach((e, i) => {
+    finalInstaEmails.forEach((e, i) => {
       setTimeout(() => {
         e.email.forEach((email, j) => {
           setTimeout(() => {
             if (!Validators.email(new FormControl(email.email))) {
               const emailObj = {
                 to: [email.email],
-                subject: `${e.companyName}, Invitation to Speak at Therapists Summit`, // Therapist
+                subject: `${e.instaProfileId} Monetize Your ${e.followers} Instagram Followers`, // Therapist
                 companies: [{ _id: '5db1c84ec10c45224c4b95fd' }],
                 type: PostType.Email,
                 status: PostStatus.Published,
                 // descriptionHTML: dentistTemplate.replace('{companyName}', e.companyName),
                 // descriptionHTML: accountantTemplate.replace('{companyName}', e.companyName),
-                descriptionHTML: thepaistTemplate.replace('{companyName}', e.companyName),
+                descriptionHTML: instagramTemplate.replace('{instaProfileId}', e.instaProfileId).replace('{followers}', e.followers),
                 createdBy: '5d4c1cdf91e63a3fe84bb43a',
-                campaignId: '5eb95a652b638810be5ee0f3', // therapist
+                campaignId: '5ec800f9870915348a37f30f', // instagram
                 // city: e.cityName
               };
               this.emailService.sendEmail(emailObj).toPromise().then((o) => {

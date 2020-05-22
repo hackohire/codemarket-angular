@@ -21,6 +21,8 @@ export const emails = [
     link: 'www.youtube.com',
     companyName: "Oren Hen EA",
     cityName: 'Brea',
+    instaProfileId: 'jaysoojitra12',
+    followers: "5K",
     "email": [
       {
         email: 'jaysojitra13@gmail.com',
@@ -38,6 +40,8 @@ export const emails = [
   //   link: 'www.youtube.com',
   //   companyName: "Oren Hen EA",
   //   cityName: 'Brea',
+  //   instaProfileId: 'sume_devi',
+  //   followers: "5K",
   //   email: [
   //     {
   //       email: 'sumi@codemarket.io',

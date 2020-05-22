@@ -12520,3 +12520,2257 @@ export const dentistEmails = [
         ]
     }
 ]
+
+export const newTherapistEmail = [
+    {
+        "_id": "5ec68b82b9fd622e7d17f647",
+        "companyName": "Jenny Bowen Storey, MFT",
+        "email": [
+            {
+                "_id": "5ec68b82b9fd622e7d17f648",
+                "email": "jennybowenstorey@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68b8ab9fd622e7d17f64c",
+        "companyName": "Hypnosis Beverly Hills",
+        "email": [
+            {
+                "_id": "5ec68b8ab9fd622e7d17f64d",
+                "email": "forpositivechanges@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68b97b9fd622e7d17f64e",
+        "companyName": "Centered Mind Therapy - Online / Virtual Therapy",
+        "email": [
+            {
+                "_id": "5ec68b97b9fd622e7d17f650",
+                "email": "impallari@gmail.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68b97b9fd622e7d17f651",
+                "email": "wweeiihhuuaanngg@gmail.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68b97b9fd622e7d17f652",
+                "email": "nfo@centeredmindtherapy.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68b97b9fd622e7d17f653",
+                "email": "info@centeredmindtherapy.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68b99b9fd622e7d17f654",
+        "companyName": "Integrative Energetics",
+        "email": [
+            {
+                "_id": "5ec68b99b9fd622e7d17f655",
+                "email": "hello@danapenenberg.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68b9db9fd622e7d17f656",
+        "companyName": "Healing Three",
+        "email": [
+            {
+                "_id": "5ec68b9db9fd622e7d17f657",
+                "email": "events@healingthree.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68b9db9fd622e7d17f658",
+                "email": "hello@healingthree.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68b9db9fd622e7d17f659",
+                "email": "alex@healingthree.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68bb5b9fd622e7d17f65f",
+        "companyName": "Real Moms Live: A Center for Behavioral Wellness",
+        "email": [
+            {
+                "_id": "5ec68bb5b9fd622e7d17f660",
+                "email": "support@schedulista.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68bb5b9fd622e7d17f661",
+                "email": "info@realmomslive.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68bccb9fd622e7d17f666",
+        "companyName": "Hengameh Mahgerefteh, PsyD",
+        "email": [
+            {
+                "_id": "5ec68bccb9fd622e7d17f667",
+                "email": "doctorH.psych@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68bcdb9fd622e7d17f668",
+        "companyName": "Ketamine Clinics -Los Angeles",
+        "email": [
+            {
+                "_id": "5ec68bcdb9fd622e7d17f669",
+                "email": "submissions@ketamineclinics.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68bd3b9fd622e7d17f66a",
+        "companyName": "Psychological Healing Center",
+        "email": [
+            {
+                "_id": "5ec68bd3b9fd622e7d17f66b",
+                "email": "test@mail.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68bd3b9fd622e7d17f66c",
+                "email": "info@psychologicalhealingcenter.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68bd3b9fd622e7d17f66d",
+                "email": "test@gmail.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68bd3b9fd622e7d17f66f",
+                "email": "chenowith52@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68bd5b9fd622e7d17f670",
+        "companyName": "Anna Maria Panici",
+        "email": [
+            {
+                "_id": "5ec68bd5b9fd622e7d17f671",
+                "email": "higherselfhealing333@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68bd9b9fd622e7d17f672",
+        "companyName": "Transforma Therapy",
+        "email": [
+            {
+                "_id": "5ec68bd9b9fd622e7d17f673",
+                "email": "OZ@TransformaTherapy.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68bd9b9fd622e7d17f674",
+                "email": "Oz@TransformaTherapy.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68bdbb9fd622e7d17f675",
+        "companyName": "Bita Nazarian,PsyD",
+        "email": [
+            {
+                "_id": "5ec68bdbb9fd622e7d17f676",
+                "email": "Bita@FamilyTherapyLA.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68be0b9fd622e7d17f677",
+        "companyName": "Biofeedback Institute of Los Angeles",
+        "email": [
+            {
+                "_id": "5ec68be0b9fd622e7d17f678",
+                "email": "bob@biocompresearch.org",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68bfdb9fd622e7d17f679",
+        "companyName": "Dee Dussault - Ganja Yoga & Sex Coaching",
+        "email": [
+            {
+                "_id": "5ec68bfdb9fd622e7d17f67b",
+                "email": "healthydoctorcoloradoganjayoga@gmail.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68bfdb9fd622e7d17f67d",
+                "email": "deedussault@gmail.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68bfdb9fd622e7d17f680",
+                "email": "coloradoganjayoga@gmail.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68bfdb9fd622e7d17f682",
+                "email": "the420priestess@gmail.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68bfdb9fd622e7d17f684",
+                "email": "baobiyoga@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68c03b9fd622e7d17f685",
+        "companyName": "Transcend Recovery Community",
+        "email": [
+            {
+                "_id": "5ec68c03b9fd622e7d17f686",
+                "email": "info@transcendrc.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68c03b9fd622e7d17f687",
+                "email": "Info@TranscendRC.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68c03b9fd622e7d17f688",
+                "email": "alumni@transcendrc.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68c04b9fd622e7d17f689",
+        "companyName": "Roger Kaufman, LMFT",
+        "email": [
+            {
+                "_id": "5ec68c04b9fd622e7d17f68a",
+                "email": "rogerkaufmanlmft@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68c0bb9fd622e7d17f68b",
+        "companyName": "Hallie G Therapy",
+        "email": [
+            {
+                "_id": "5ec68c0bb9fd622e7d17f68c",
+                "email": "info@jesspereztherapy.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68c0bb9fd622e7d17f68d",
+                "email": "halliegtherapy@gmail.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68c0bb9fd622e7d17f68e",
+                "email": "therapywithroxya@gmail.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68c0bb9fd622e7d17f68f",
+                "email": "sarah.iaccarino@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68c0db9fd622e7d17f690",
+        "companyName": "Stefani Reitter, LMFT",
+        "email": [
+            {
+                "_id": "5ec68c0db9fd622e7d17f691",
+                "email": "stefanimft@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68c11b9fd622e7d17f692",
+        "companyName": "Jordana Mansbacher, Psy.D",
+        "email": [
+            {
+                "_id": "5ec68c11b9fd622e7d17f693",
+                "email": "drj@drjmansbacher.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68c19b9fd622e7d17f696",
+        "companyName": "Bree Brittany Jenkins, LMFT",
+        "email": [
+            {
+                "_id": "5ec68c19b9fd622e7d17f697",
+                "email": "gatheredlife@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68c27b9fd622e7d17f69c",
+        "companyName": "Carol A. Kaye, MFT",
+        "email": [
+            {
+                "_id": "5ec68c27b9fd622e7d17f69d",
+                "email": "carol@carolkayemft.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68c28b9fd622e7d17f69e",
+        "companyName": "Daniel C Slavin PHD",
+        "email": [
+            {
+                "_id": "5ec68c28b9fd622e7d17f69f",
+                "email": "info@danielslavinphd.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68c51b9fd622e7d17f6aa",
+        "companyName": "B Hypnotized",
+        "email": [
+            {
+                "_id": "5ec68c51b9fd622e7d17f6ab",
+                "email": "begum@b-hypnotized.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68c66b9fd622e7d17f6ae",
+        "companyName": "Liza Camba - Soul Purpose Coaching",
+        "email": [
+            {
+                "_id": "5ec68c66b9fd622e7d17f6af",
+                "email": "LizaCambaService@Gmail.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68c66b9fd622e7d17f6b0",
+                "email": "izaCambaServices@gmail.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68c66b9fd622e7d17f6b1",
+                "email": "lizacambaservices@gmail.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68c66b9fd622e7d17f6b3",
+                "email": "LIZACAMBASERVICES@GMAIL.COM",
+                "status": true
+            },
+            {
+                "_id": "5ec68c66b9fd622e7d17f6b4",
+                "email": "nsmather@hermitslight.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68c66b9fd622e7d17f6b6",
+                "email": "Lizacambaservices@gmail.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68c66b9fd622e7d17f6b7",
+                "email": "LizaCambaServices@Gmail.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68c66b9fd622e7d17f6b8",
+                "email": "LizaCambaServices@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68c6ab9fd622e7d17f6b9",
+        "companyName": "Alexandre Cerf, LMFT",
+        "email": [
+            {
+                "_id": "5ec68c6ab9fd622e7d17f6ba",
+                "email": "alexandre@alexandrecerf.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68c6ab9fd622e7d17f6bb",
+                "email": "Alexandre@AlexandreCerf.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68c6bb9fd622e7d17f6bc",
+        "companyName": "Quincee Gideon",
+        "email": [
+            {
+                "_id": "5ec68c6bb9fd622e7d17f6bd",
+                "email": "anna@quinceegideon.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68c6fb9fd622e7d17f6be",
+        "companyName": "LKS & Associates",
+        "email": [
+            {
+                "_id": "5ec68c6fb9fd622e7d17f6bf",
+                "email": "admin@lisakleinspeech.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68c6fb9fd622e7d17f6c0",
+                "email": "admin@lksandassociates.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68c71b9fd622e7d17f6c2",
+        "companyName": "Virtual Visits Psychotherapy & Teletherapy",
+        "email": [
+            {
+                "_id": "5ec68c71b9fd622e7d17f6c3",
+                "email": "DoctorDevorah@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68c72b9fd622e7d17f6c4",
+        "companyName": "Michelle Otelsberg LMFT",
+        "email": [
+            {
+                "_id": "5ec68c72b9fd622e7d17f6c5",
+                "email": "info@anxietytherapyla.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68c7bb9fd622e7d17f6c8",
+        "companyName": "Lauren Goldstein, LCSW",
+        "email": [
+            {
+                "_id": "5ec68c7bb9fd622e7d17f6c9",
+                "email": "lg@lgtherapy.net",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68c7db9fd622e7d17f6ca",
+        "companyName": "Porter Ranch Counseling",
+        "email": [
+            {
+                "_id": "5ec68c7db9fd622e7d17f6cb",
+                "email": "drlaurelwiig@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68c7eb9fd622e7d17f6cc",
+        "companyName": "ADHD Collective",
+        "email": [
+            {
+                "_id": "5ec68c7eb9fd622e7d17f6cd",
+                "email": "adam@adhdcollective.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68c86b9fd622e7d17f6ce",
+        "companyName": "Jordyn Trockman, Psy.D.",
+        "email": [
+            {
+                "_id": "5ec68c86b9fd622e7d17f6cf",
+                "email": "DrJordyn@CaliforniaWomensTherapy.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68c88b9fd622e7d17f6d1",
+        "companyName": "Ketamine Specialists",
+        "email": [
+            {
+                "_id": "5ec68c88b9fd622e7d17f6d3",
+                "email": "info@ketaminespecialists.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68cb1b9fd622e7d17f6d4",
+        "companyName": "Kathleen Rosenblatt",
+        "email": [
+            {
+                "_id": "5ec68cb1b9fd622e7d17f6d5",
+                "email": "DrKathleenRosenblatt@gmail.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68cb1b9fd622e7d17f6d9",
+                "email": "prg@paradigmresearchgroup.org",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68cb4b9fd622e7d17f6dd",
+        "companyName": "Well Baby Center",
+        "email": [
+            {
+                "_id": "5ec68cb4b9fd622e7d17f6de",
+                "email": "services@wellbabycenter.org",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68cb6b9fd622e7d17f6df",
+        "companyName": "William Valdivia, PsyD",
+        "email": [
+            {
+                "_id": "5ec68cb6b9fd622e7d17f6e0",
+                "email": "william@healthypsychotherapy.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68cb8b9fd622e7d17f6e1",
+        "companyName": "Guided Soul-ution by Shiro Nobunaga",
+        "email": [
+            {
+                "_id": "5ec68cb8b9fd622e7d17f6e2",
+                "email": "guidedsoulution@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68cbbb9fd622e7d17f6e3",
+        "companyName": "Couples Empowerment Clinic",
+        "email": [
+            {
+                "_id": "5ec68cbbb9fd622e7d17f6e4",
+                "email": "info@couplesempowerment.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68cbfb9fd622e7d17f6e5",
+        "companyName": "Matthew J Dempsey",
+        "email": [
+            {
+                "_id": "5ec68cbfb9fd622e7d17f6e6",
+                "email": "email@address.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68cbfb9fd622e7d17f6e7",
+                "email": "matthewjdempsey@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68cc1b9fd622e7d17f6e8",
+        "companyName": "Shirin Peykar, LMFT & Associates",
+        "email": [
+            {
+                "_id": "5ec68cc1b9fd622e7d17f6e9",
+                "email": "Shirin@TalkwithShirin.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68cd6b9fd622e7d17f6ee",
+        "companyName": "Courtnay Meletta",
+        "email": [
+            {
+                "_id": "5ec68cd6b9fd622e7d17f6ef",
+                "email": "HELLO@COURTNAYMELETTA.COM",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68cd9b9fd622e7d17f6f0",
+        "companyName": "John McGrail, PhD",
+        "email": [
+            {
+                "_id": "5ec68cd9b9fd622e7d17f6f2",
+                "email": "DrJohnMcGrail@gmail.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68cd9b9fd622e7d17f6f3",
+                "email": "drjohnmcgrail@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68ce6b9fd622e7d17f6f4",
+        "companyName": "Airport Marina Counseling Service",
+        "email": [
+            {
+                "_id": "5ec68ce6b9fd622e7d17f6f5",
+                "email": "info@airportmarina.org",
+                "status": true
+            },
+            {
+                "_id": "5ec68ce6b9fd622e7d17f6f7",
+                "email": "sbrockschmidt@airportmarina.org",
+                "status": true
+            },
+            {
+                "_id": "5ec68ce6b9fd622e7d17f6f8",
+                "email": "ebalis@airportmarina.org",
+                "status": true
+            },
+            {
+                "_id": "5ec68ce6b9fd622e7d17f6f9",
+                "email": "amcsalumni@airportmarina.org",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68cecb9fd622e7d17f6fd",
+        "companyName": "Shani Nisimov Elhiani, LMFT",
+        "email": [
+            {
+                "_id": "5ec68cecb9fd622e7d17f6fe",
+                "email": "eben@eyebytes.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68cf8b9fd622e7d17f6ff",
+        "companyName": "Counseling and Trauma Therapy",
+        "email": [
+            {
+                "_id": "5ec68cf8b9fd622e7d17f701",
+                "email": "latinxtherapypodcast@gmail.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68cf8b9fd622e7d17f704",
+                "email": "adri.alejandre@gmail.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68cf8b9fd622e7d17f705",
+                "email": "adri@latinxtherapy.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68cf9b9fd622e7d17f706",
+        "companyName": "Pat Allen, PhD LMFT CAS",
+        "email": [
+            {
+                "_id": "5ec68cf9b9fd622e7d17f707",
+                "email": "name@email.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68cfbb9fd622e7d17f708",
+        "companyName": "Sara R. van Koningsveld",
+        "email": [
+            {
+                "_id": "5ec68cfbb9fd622e7d17f709",
+                "email": "saravDMT@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68d09b9fd622e7d17f70e",
+        "companyName": "Glow In Therapy",
+        "email": [
+            {
+                "_id": "5ec68d09b9fd622e7d17f70f",
+                "email": "contact@glowintherapy.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68d0cb9fd622e7d17f710",
+        "companyName": "California Center for Psychedelic Therapy",
+        "email": [
+            {
+                "_id": "5ec68d0cb9fd622e7d17f711",
+                "email": "admin@psychedelictherapyca.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68d0db9fd622e7d17f712",
+        "companyName": "Andra Brosh, PhD, BCHN - Psyche & Salt",
+        "email": [
+            {
+                "_id": "5ec68d0db9fd622e7d17f713",
+                "email": "drbrosh@psycheandsalt.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68d0fb9fd622e7d17f714",
+        "companyName": "Hye Wellness",
+        "email": [
+            {
+                "_id": "5ec68d0fb9fd622e7d17f715",
+                "email": "hyewellness@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68d14b9fd622e7d17f716",
+        "companyName": "Insight Choices",
+        "email": [
+            {
+                "_id": "5ec68d14b9fd622e7d17f718",
+                "email": "billing@insightchoices.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68d14b9fd622e7d17f719",
+                "email": "help@insightchoices.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68d14b9fd622e7d17f71a",
+                "email": "newpatient@insightchoices.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68d16b9fd622e7d17f71c",
+        "companyName": "Amy Margolis, LCSW",
+        "email": [
+            {
+                "_id": "5ec68d16b9fd622e7d17f71d",
+                "email": "amymargmsw@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68d27b9fd622e7d17f721",
+        "companyName": "C&C Speech Therapy",
+        "email": [
+            {
+                "_id": "5ec68d27b9fd622e7d17f722",
+                "email": "macias.alexis85@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68d33b9fd622e7d17f725",
+        "companyName": "Breathwork for Recovery",
+        "email": [
+            {
+                "_id": "5ec68d33b9fd622e7d17f726",
+                "email": "nathaniel@breathworkforrecovery.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68d33b9fd622e7d17f727",
+                "email": "breathworkforrecovery@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68d35b9fd622e7d17f728",
+        "companyName": "Addiction Recovery Place",
+        "email": [
+            {
+                "_id": "5ec68d35b9fd622e7d17f729",
+                "email": "addictionrecoveryplace@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68d37b9fd622e7d17f72a",
+        "companyName": "Inneractions - Encino",
+        "email": [
+            {
+                "_id": "5ec68d37b9fd622e7d17f72b",
+                "email": "inneractionsiop@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68d38b9fd622e7d17f72c",
+        "companyName": "Stairway Recovery Homes",
+        "email": [
+            {
+                "_id": "5ec68d38b9fd622e7d17f72d",
+                "email": "info@stairwayrecovery.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68d3eb9fd622e7d17f72e",
+        "companyName": "Advanced Research Center",
+        "email": [
+            {
+                "_id": "5ec68d3eb9fd622e7d17f72f",
+                "email": "csine@arctrials.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68d3eb9fd622e7d17f730",
+                "email": "arc_partners@arctrials.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68d3eb9fd622e7d17f731",
+                "email": "arc_patient_experience@arctrials.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68d3fb9fd622e7d17f732",
+        "companyName": "Minoo Saeedvafa, PsyD, MFT",
+        "email": [
+            {
+                "_id": "5ec68d3fb9fd622e7d17f733",
+                "email": "minoosv@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68d41b9fd622e7d17f734",
+        "companyName": "Yoffe Therapy",
+        "email": [
+            {
+                "_id": "5ec68d41b9fd622e7d17f735",
+                "email": "yoffepsychotherapy@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68d49b9fd622e7d17f738",
+        "companyName": "Penn Gary, PhD",
+        "email": [
+            {
+                "_id": "5ec68d49b9fd622e7d17f739",
+                "email": "gjpphd@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68d53b9fd622e7d17f73a",
+        "companyName": "Cypress Clinic",
+        "email": [
+            {
+                "_id": "5ec68d53b9fd622e7d17f73c",
+                "email": "debikim@cypressclinic.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68d53b9fd622e7d17f73d",
+                "email": "heasukbae@cypressclinic.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68d59b9fd622e7d17f73e",
+        "companyName": "Online Therapy and Counseling Until Midnight by Dr John Silver",
+        "email": [
+            {
+                "_id": "5ec68d59b9fd622e7d17f73f",
+                "email": "email@DrJohnSilver.Com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68d5cb9fd622e7d17f741",
+        "companyName": "Stacey Sherrell Therapy",
+        "email": [
+            {
+                "_id": "5ec68d5cb9fd622e7d17f742",
+                "email": "Staceyomft@gmail.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68d5cb9fd622e7d17f743",
+                "email": "StaceyoMFT@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68d63b9fd622e7d17f744",
+        "companyName": "Lily Sheen - Shamanic Practitioner, Spiritual Counseling, Reiki",
+        "email": [
+            {
+                "_id": "5ec68d63b9fd622e7d17f745",
+                "email": "sample@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68d69b9fd622e7d17f747",
+        "companyName": "Sensible Care",
+        "email": [
+            {
+                "_id": "5ec68d69b9fd622e7d17f748",
+                "email": "providers@sensiblecare.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68d69b9fd622e7d17f749",
+                "email": "contact@sensiblecare.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68d69b9fd622e7d17f74a",
+                "email": "press@sensiblecare.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68d6ab9fd622e7d17f74b",
+        "companyName": "LIFTtherapy",
+        "email": [
+            {
+                "_id": "5ec68d6ab9fd622e7d17f74c",
+                "email": "lifttherapycoach@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68d6eb9fd622e7d17f74d",
+        "companyName": "Rebecca Neubauer, LCSW",
+        "email": [
+            {
+                "_id": "5ec68d6eb9fd622e7d17f74e",
+                "email": "rebecca@rebeccaneubauer.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68d6eb9fd622e7d17f74f",
+                "email": "rebeccaneubauerlcsw@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68d6fb9fd622e7d17f750",
+        "companyName": "Feldenkrais West LA",
+        "email": [
+            {
+                "_id": "5ec68d6fb9fd622e7d17f751",
+                "email": "therapywithbridget@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68d72b9fd622e7d17f752",
+        "companyName": "Centered Individual & Family Counseling",
+        "email": [
+            {
+                "_id": "5ec68d72b9fd622e7d17f753",
+                "email": "intake@centeredlacounseling.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68d74b9fd622e7d17f754",
+        "companyName": "Marc Sadoff, MSW BCD",
+        "email": [
+            {
+                "_id": "5ec68d74b9fd622e7d17f755",
+                "email": "marc@realhope.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68d74b9fd622e7d17f756",
+                "email": "Marc@RealHope.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68d7cb9fd622e7d17f757",
+        "companyName": "Megan Atkinson, MA, OTR/L",
+        "email": [
+            {
+                "_id": "5ec68d7cb9fd622e7d17f758",
+                "email": "impallari@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68d7eb9fd622e7d17f75a",
+        "companyName": "Awakened Hypnotherapy & Life Coaching",
+        "email": [
+            {
+                "_id": "5ec68d7eb9fd622e7d17f75b",
+                "email": "awakenedhypnotherapy@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68d80b9fd622e7d17f75c",
+        "companyName": "Nogales Psychological Counseling",
+        "email": [
+            {
+                "_id": "5ec68d80b9fd622e7d17f75d",
+                "email": "eben@eyebytes.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68d81b9fd622e7d17f760",
+        "companyName": "Meridian Counseling",
+        "email": [
+            {
+                "_id": "5ec68d81b9fd622e7d17f761",
+                "email": "info@meridian-counseling.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68d87b9fd622e7d17f762",
+        "companyName": "BOND - Brotherhood Organization of a New Destiny",
+        "email": [
+            {
+                "_id": "5ec68d87b9fd622e7d17f763",
+                "email": "bond@bondinfo.org",
+                "status": true
+            },
+            {
+                "_id": "5ec68d87b9fd622e7d17f764",
+                "email": "info@rebuildingtheman.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68d87b9fd622e7d17f765",
+                "email": "press@rebuildingtheman.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68d88b9fd622e7d17f766",
+        "companyName": "Gellman Meryle H PHD Psyd",
+        "email": [
+            {
+                "_id": "5ec68d88b9fd622e7d17f767",
+                "email": "info@drmerylegellman.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68d8bb9fd622e7d17f768",
+        "companyName": "The Holistic Sanctuary",
+        "email": [
+            {
+                "_id": "5ec68d8bb9fd622e7d17f769",
+                "email": "Info@TheHolisticSanctuary.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68d8bb9fd622e7d17f76a",
+                "email": "info@theholisticsanctuary.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68d8db9fd622e7d17f76b",
+        "companyName": "Ariel Black, MS, AMFT",
+        "email": [
+            {
+                "_id": "5ec68d8db9fd622e7d17f76c",
+                "email": "arielblackmft@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68d8fb9fd622e7d17f76d",
+        "companyName": "Randi Levinson, MA,CCS",
+        "email": [
+            {
+                "_id": "5ec68d8fb9fd622e7d17f76e",
+                "email": "info@randilevinson.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68d91b9fd622e7d17f76f",
+        "companyName": "Raymond Nourmand, PhD",
+        "email": [
+            {
+                "_id": "5ec68d91b9fd622e7d17f770",
+                "email": "raymond@WestLaPsychologist.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68da2b9fd622e7d17f771",
+        "companyName": "Bradford Bancroft, MFT, RDT",
+        "email": [
+            {
+                "_id": "5ec68da2b9fd622e7d17f773",
+                "email": "lisa@lisawynnesalvatore.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68da4b9fd622e7d17f775",
+        "companyName": "Alexandra Shimer, MFT, PsyD",
+        "email": [
+            {
+                "_id": "5ec68da4b9fd622e7d17f776",
+                "email": "info@dralexshimer.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68da6b9fd622e7d17f777",
+        "companyName": "Sydell Weiner, PhD",
+        "email": [
+            {
+                "_id": "5ec68da6b9fd622e7d17f778",
+                "email": "sydellweiner@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68dacb9fd622e7d17f779",
+        "companyName": "APLA Health - Gleicher/Chen Health Center",
+        "email": [
+            {
+                "_id": "5ec68dacb9fd622e7d17f77a",
+                "email": "lszamraj@apla.org",
+                "status": true
+            },
+            {
+                "_id": "5ec68dacb9fd622e7d17f77b",
+                "email": "hello@apla.org",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68daeb9fd622e7d17f77c",
+        "companyName": "Helena Cerny, PhD, LMFT",
+        "email": [
+            {
+                "_id": "5ec68daeb9fd622e7d17f77d",
+                "email": "drhelenacerny@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68db9b9fd622e7d17f780",
+        "companyName": "Triune Therapy Group",
+        "email": [
+            {
+                "_id": "5ec68db9b9fd622e7d17f782",
+                "email": "info@triunetherapy.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68db9b9fd622e7d17f783",
+                "email": "Donna@PlazaTravel.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68dbfb9fd622e7d17f784",
+        "companyName": "DawnHypnotherapy",
+        "email": [
+            {
+                "_id": "5ec68dbfb9fd622e7d17f785",
+                "email": "Dawn@DawnHypnotherapy.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68dbfb9fd622e7d17f786",
+                "email": "dawn@dawnhypnotherapy.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68dc1b9fd622e7d17f787",
+        "companyName": "Pushing Beauty",
+        "email": [
+            {
+                "_id": "5ec68dc1b9fd622e7d17f789",
+                "email": "hello@pushingbeauty.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68dd2b9fd622e7d17f78c",
+        "companyName": "Judy Ho, Clinical Psychologist",
+        "email": [
+            {
+                "_id": "5ec68dd2b9fd622e7d17f78d",
+                "email": "jessica@shpny.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68dd9b9fd622e7d17f78e",
+        "companyName": "Christine Harrison Therapist",
+        "email": [
+            {
+                "_id": "5ec68dd9b9fd622e7d17f790",
+                "email": "cgiadmin@yourhostingaccount.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68de5b9fd622e7d17f791",
+        "companyName": "UCLA Counseling and Psychological Services",
+        "email": [
+            {
+                "_id": "5ec68de5b9fd622e7d17f792",
+                "email": "rsvp@caps.ucla.edu",
+                "status": true
+            },
+            {
+                "_id": "5ec68de5b9fd622e7d17f793",
+                "email": "RISE@caps.ucla.edu",
+                "status": true
+            },
+            {
+                "_id": "5ec68de5b9fd622e7d17f794",
+                "email": "feedback@caps.ucla.edu",
+                "status": true
+            },
+            {
+                "_id": "5ec68de5b9fd622e7d17f795",
+                "email": "billing@caps.ucla.edu",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68decb9fd622e7d17f799",
+        "companyName": "Susan Chakmakian, MA, MFT",
+        "email": [
+            {
+                "_id": "5ec68decb9fd622e7d17f79a",
+                "email": "feedingyoursoulnutrition@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68e0cb9fd622e7d17f79c",
+        "companyName": "Claris Health",
+        "email": [
+            {
+                "_id": "5ec68e0cb9fd622e7d17f79d",
+                "email": "jeannie@clarishealth.org",
+                "status": true
+            },
+            {
+                "_id": "5ec68e0cb9fd622e7d17f79e",
+                "email": "jessicachow@clarishealth.org",
+                "status": true
+            },
+            {
+                "_id": "5ec68e0cb9fd622e7d17f79f",
+                "email": "niki@clarishealth.org",
+                "status": true
+            },
+            {
+                "_id": "5ec68e0cb9fd622e7d17f7a0",
+                "email": "meghan@clarishealth.org",
+                "status": true
+            },
+            {
+                "_id": "5ec68e0cb9fd622e7d17f7a1",
+                "email": "staciew@clarishealth.org",
+                "status": true
+            },
+            {
+                "_id": "5ec68e0cb9fd622e7d17f7a2",
+                "email": "maryk@clarishealth.org",
+                "status": true
+            },
+            {
+                "_id": "5ec68e0cb9fd622e7d17f7a3",
+                "email": "miranda@clarishealth.org",
+                "status": true
+            },
+            {
+                "_id": "5ec68e0cb9fd622e7d17f7a4",
+                "email": "talitha@clarishealth.org",
+                "status": true
+            },
+            {
+                "_id": "5ec68e0cb9fd622e7d17f7a5",
+                "email": "cjanzen@clarishealth.org",
+                "status": true
+            },
+            {
+                "_id": "5ec68e0cb9fd622e7d17f7a6",
+                "email": "info@clarishealth.org",
+                "status": true
+            },
+            {
+                "_id": "5ec68e0cb9fd622e7d17f7a8",
+                "email": "ali@clarishealth.org",
+                "status": true
+            },
+            {
+                "_id": "5ec68e0cb9fd622e7d17f7a9",
+                "email": "nancy@clarishealth.org",
+                "status": true
+            },
+            {
+                "_id": "5ec68e0cb9fd622e7d17f7aa",
+                "email": "stacy@clarishealth.org",
+                "status": true
+            },
+            {
+                "_id": "5ec68e0cb9fd622e7d17f7ab",
+                "email": "frank@clarishealth.org",
+                "status": true
+            },
+            {
+                "_id": "5ec68e0cb9fd622e7d17f7ac",
+                "email": "monicam@clarishealth.org",
+                "status": true
+            },
+            {
+                "_id": "5ec68e0cb9fd622e7d17f7ad",
+                "email": "emily@clarishealth.org",
+                "status": true
+            },
+            {
+                "_id": "5ec68e0cb9fd622e7d17f7ae",
+                "email": "abby@clarishealth.org",
+                "status": true
+            },
+            {
+                "_id": "5ec68e0cb9fd622e7d17f7af",
+                "email": "summer@clarishealth.org",
+                "status": true
+            },
+            {
+                "_id": "5ec68e0cb9fd622e7d17f7b0",
+                "email": "grace@clarishealth.org",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68e0eb9fd622e7d17f7b1",
+        "companyName": "Oliver Drakeford Therapy",
+        "email": [
+            {
+                "_id": "5ec68e0eb9fd622e7d17f7b2",
+                "email": "Oliver@OliverDrakeford.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68e10b9fd622e7d17f7b3",
+        "companyName": "Life Adjustment Team",
+        "email": [
+            {
+                "_id": "5ec68e10b9fd622e7d17f7b4",
+                "email": "info@lifeadjustmentteam.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68e11b9fd622e7d17f7b5",
+        "companyName": "Sherry Nafeh, MA, LMFT",
+        "email": [
+            {
+                "_id": "5ec68e11b9fd622e7d17f7b6",
+                "email": "sherrynafehmft@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68e13b9fd622e7d17f7b7",
+        "companyName": "Carol Kochoff LCSW",
+        "email": [
+            {
+                "_id": "5ec68e13b9fd622e7d17f7b8",
+                "email": "DrKochoff@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68e15b9fd622e7d17f7b9",
+        "companyName": "Wright Institute Los Angeles",
+        "email": [
+            {
+                "_id": "5ec68e15b9fd622e7d17f7ba",
+                "email": "info@wila.org",
+                "status": true
+            },
+            {
+                "_id": "5ec68e15b9fd622e7d17f7bb",
+                "email": "safespace@wila.org",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68e1db9fd622e7d17f7be",
+        "companyName": "Rob Feiner",
+        "email": [
+            {
+                "_id": "5ec68e1db9fd622e7d17f7bf",
+                "email": "robertfeiner6@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68e25b9fd622e7d17f7c0",
+        "companyName": "Finding Life’s Compass",
+        "email": [
+            {
+                "_id": "5ec68e25b9fd622e7d17f7c2",
+                "email": "hi@fatcatapps.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68e28b9fd622e7d17f7c3",
+        "companyName": "Clinic Betterlife US",
+        "email": [
+            {
+                "_id": "5ec68e28b9fd622e7d17f7c4",
+                "email": "info@mysite.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68e2bb9fd622e7d17f7c5",
+        "companyName": "Goddess Code Academy",
+        "email": [
+            {
+                "_id": "5ec68e2bb9fd622e7d17f7c6",
+                "email": "goddesscodeacademy@gmail.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68e2bb9fd622e7d17f7c7",
+                "email": "GODDESSCODEACADEMY@GMAIL.COM",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68e2db9fd622e7d17f7c8",
+        "companyName": "Devorah Rader, PhD",
+        "email": [
+            {
+                "_id": "5ec68e2db9fd622e7d17f7c9",
+                "email": "DoctorDevorah@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68e46b9fd622e7d17f7cd",
+        "companyName": "Nancy B Irwin, PsyD, C.Ht",
+        "email": [
+            {
+                "_id": "5ec68e46b9fd622e7d17f7ce",
+                "email": "info@drnancyirwin.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68e46b9fd622e7d17f7d0",
+                "email": "wayne.l.woodard@boeing.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68e57b9fd622e7d17f7d4",
+        "companyName": "Key Transitions",
+        "email": [
+            {
+                "_id": "5ec68e57b9fd622e7d17f7d7",
+                "email": "info@keytransitions.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68e70b9fd622e7d17f7e1",
+        "companyName": "Aileen Nealie, LMFT DCEP",
+        "email": [
+            {
+                "_id": "5ec68e70b9fd622e7d17f7e2",
+                "email": "ANealie@AileenNEALIETherapies.COM",
+                "status": true
+            },
+            {
+                "_id": "5ec68e70b9fd622e7d17f7e4",
+                "email": "sample@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68e74b9fd622e7d17f7e5",
+        "companyName": "M Jay Fibus, PhD",
+        "email": [
+            {
+                "_id": "5ec68e74b9fd622e7d17f7e6",
+                "email": "info@drfibus.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68e74b9fd622e7d17f7e7",
+                "email": "drfibus@drfibus.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68e80b9fd622e7d17f7e8",
+        "companyName": "Terry Jordan, LCSW",
+        "email": [
+            {
+                "_id": "5ec68e80b9fd622e7d17f7e9",
+                "email": "nery@crescentmentalhealth.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68e80b9fd622e7d17f7ea",
+                "email": "8Bterry@psychotherapyinla.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68e80b9fd622e7d17f7eb",
+                "email": "karen@kntherapy.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68e80b9fd622e7d17f7ec",
+                "email": "terry@psychotherapyinla.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68e81b9fd622e7d17f7ed",
+        "companyName": "Mindful Heart Kids",
+        "email": [
+            {
+                "_id": "5ec68e81b9fd622e7d17f7ee",
+                "email": "info@mindfulheartkids.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68e83b9fd622e7d17f7ef",
+        "companyName": "Tina Dahlenburg",
+        "email": [
+            {
+                "_id": "5ec68e83b9fd622e7d17f7f0",
+                "email": "tina.dahlenburg@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68e84b9fd622e7d17f7f1",
+        "companyName": "Gunilla A David, MA, MFT",
+        "email": [
+            {
+                "_id": "5ec68e84b9fd622e7d17f7f2",
+                "email": "gunilladavid@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68ea2b9fd622e7d17f7f3",
+        "companyName": "Don L Price",
+        "email": [
+            {
+                "_id": "5ec68ea2b9fd622e7d17f7f5",
+                "email": "vpnirmar@gmail.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68ea2b9fd622e7d17f7f6",
+                "email": "donprice@donlprice.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68ea2b9fd622e7d17f7f7",
+                "email": "lyamtodqs@gmail.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68ea2b9fd622e7d17f7f8",
+                "email": "ernestine_banda@bigstring.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68ea2b9fd622e7d17f7f9",
+                "email": "PublicRelations@company-notifications-2019.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68ea2b9fd622e7d17f7fa",
+                "email": "sgulotnbo@gmail.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68ea2b9fd622e7d17f7fb",
+                "email": "mocsfk@gmail.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68ea2b9fd622e7d17f7fc",
+                "email": "yotzigphbbk@gmail.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68ea2b9fd622e7d17f7fe",
+                "email": "rpgutybiqf@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68ea3b9fd622e7d17f7ff",
+        "companyName": "Patrick Tully, LMFT",
+        "email": [
+            {
+                "_id": "5ec68ea3b9fd622e7d17f800",
+                "email": "patrick@patricktullytherapy.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68ea8b9fd622e7d17f801",
+        "companyName": "Julia Greco, LCSW",
+        "email": [
+            {
+                "_id": "5ec68ea8b9fd622e7d17f802",
+                "email": "juliagrecolcsw@gmail.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68ea8b9fd622e7d17f804",
+                "email": "JuliaGrecoLCSW@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68ea9b9fd622e7d17f805",
+        "companyName": "Devorah Rader, PhD",
+        "email": [
+            {
+                "_id": "5ec68ea9b9fd622e7d17f806",
+                "email": "DoctorDevorah@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68eb1b9fd622e7d17f807",
+        "companyName": "Walk and Talks",
+        "email": [
+            {
+                "_id": "5ec68eb1b9fd622e7d17f808",
+                "email": "info@walkandtalks.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68ebbb9fd622e7d17f80d",
+        "companyName": "Clear Focus Counseling",
+        "email": [
+            {
+                "_id": "5ec68ebbb9fd622e7d17f810",
+                "email": "8b4e078a51d04e0e9efdf470027f0ec1@sentry.wixpress.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68ebbb9fd622e7d17f814",
+                "email": "contact.clearfocuscounseling@gmail.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68ebbb9fd622e7d17f81e",
+                "email": "Danield2500@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68ebdb9fd622e7d17f823",
+        "companyName": "Dr Karin Schwartz",
+        "email": [
+            {
+                "_id": "5ec68ebdb9fd622e7d17f824",
+                "email": "Karin@DrKarinSchwartz.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68ebfb9fd622e7d17f826",
+        "companyName": "Katie Stone Wellness",
+        "email": [
+            {
+                "_id": "5ec68ebfb9fd622e7d17f827",
+                "email": "katiestonewellness@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68ecab9fd622e7d17f828",
+        "companyName": "To Help Everyone Health and Wellness Centers",
+        "email": [
+            {
+                "_id": "5ec68ecab9fd622e7d17f82a",
+                "email": "jsigaran@tohelpeveryone.org",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68ecdb9fd622e7d17f82b",
+        "companyName": "Christiane Soehnlein",
+        "email": [
+            {
+                "_id": "5ec68ecdb9fd622e7d17f82c",
+                "email": "info@csoehnleintherapy.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68ed5b9fd622e7d17f82d",
+        "companyName": "Wu 4 You - Life Coaching",
+        "email": [
+            {
+                "_id": "5ec68ed5b9fd622e7d17f82f",
+                "email": "wu.here4you@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68ed7b9fd622e7d17f830",
+        "companyName": "Play-n-Motion",
+        "email": [
+            {
+                "_id": "5ec68ed7b9fd622e7d17f831",
+                "email": "info@playnmotion.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68f0cb9fd622e7d17f840",
+        "companyName": "Abundance Therapy Center",
+        "email": [
+            {
+                "_id": "5ec68f0cb9fd622e7d17f841",
+                "email": "hello@abundancetherapycenter.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68f12b9fd622e7d17f842",
+        "companyName": "Open Paths Counseling Center",
+        "email": [
+            {
+                "_id": "5ec68f12b9fd622e7d17f843",
+                "email": "Sierra@openpaths.org",
+                "status": true
+            },
+            {
+                "_id": "5ec68f12b9fd622e7d17f844",
+                "email": "info@openpaths.org",
+                "status": true
+            },
+            {
+                "_id": "5ec68f12b9fd622e7d17f845",
+                "email": "Zari@openpaths.org",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68f15b9fd622e7d17f846",
+        "companyName": "Ketamine Healing Clinic of Los Angeles",
+        "email": [
+            {
+                "_id": "5ec68f15b9fd622e7d17f847",
+                "email": "DrDavidM@KetamineHealing.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68f15b9fd622e7d17f848",
+                "email": "drdavidm@ketaminehealing.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68f5bb9fd622e7d17f84b",
+        "companyName": "C G Jung Institute of Los Angeles",
+        "email": [
+            {
+                "_id": "5ec68f5bb9fd622e7d17f84f",
+                "email": "apcmemberships@gmail.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68f5bb9fd622e7d17f855",
+                "email": "spiritglo44@sbcglobal.net",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68f6fb9fd622e7d17f857",
+        "companyName": "My LA Therapy - Brentwood/West LA",
+        "email": [
+            {
+                "_id": "5ec68f6fb9fd622e7d17f858",
+                "email": "brooke@mylatherapy.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68f6fb9fd622e7d17f859",
+                "email": "brookesprowl@gmail.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68f6fb9fd622e7d17f85a",
+                "email": "alison@mylatherapy.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68f6fb9fd622e7d17f85b",
+                "email": "sean@mylatherapy.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68f6fb9fd622e7d17f85c",
+                "email": "samantha@mylatherapy.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68f6fb9fd622e7d17f85d",
+                "email": "katie@mylatherapy.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68f6fb9fd622e7d17f85e",
+                "email": "hi@mylatherapy.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68f6fb9fd622e7d17f860",
+                "email": "paula@mylatherapy.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68f6fb9fd622e7d17f861",
+                "email": "talya@mylatherapy.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68f6fb9fd622e7d17f862",
+                "email": "gina@mylatherapy.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68f71b9fd622e7d17f863",
+        "companyName": "DeMann Psychotherapy",
+        "email": [
+            {
+                "_id": "5ec68f71b9fd622e7d17f864",
+                "email": "neysademann@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68f79b9fd622e7d17f867",
+        "companyName": "Dr. Wendy O’Connor",
+        "email": [
+            {
+                "_id": "5ec68f79b9fd622e7d17f868",
+                "email": "Hillary@TherapyWithHillary.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68f79b9fd622e7d17f869",
+                "email": "JenniferJVWilson@gmail.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68f79b9fd622e7d17f86a",
+                "email": "sharon.b.uy@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68fcfb9fd622e7d17f86b",
+        "companyName": "Holistic Hypnosis & Hypnotherapy",
+        "email": [
+            {
+                "_id": "5ec68fcfb9fd622e7d17f86c",
+                "email": "soldbychuckd@earthlink.net",
+                "status": true
+            },
+            {
+                "_id": "5ec68fcfb9fd622e7d17f86d",
+                "email": "stefania@modernvintage.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68fcfb9fd622e7d17f86e",
+                "email": "peeblemj@menninger.edu",
+                "status": true
+            },
+            {
+                "_id": "5ec68fcfb9fd622e7d17f86f",
+                "email": "rxxxx@xxx.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68fcfb9fd622e7d17f870",
+                "email": "scoye0@xxx.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68fcfb9fd622e7d17f871",
+                "email": "markwaveman@gmail.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68fcfb9fd622e7d17f873",
+                "email": "narf1227@adelphia.net",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68fd3b9fd622e7d17f875",
+        "companyName": "Gennady Musher, M.D., Ph.D. TMS Neuro Institute",
+        "email": [
+            {
+                "_id": "5ec68fd3b9fd622e7d17f876",
+                "email": "info@tmsneuroinstitute.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68fdbb9fd622e7d17f879",
+        "companyName": "Andrea Rogers, LCSW",
+        "email": [
+            {
+                "_id": "5ec68fdbb9fd622e7d17f87a",
+                "email": "andrealcsw@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68fe9b9fd622e7d17f87e",
+        "companyName": "The Ness Counseling Center",
+        "email": [
+            {
+                "_id": "5ec68fe9b9fd622e7d17f87f",
+                "email": "info@thenesscenter.org",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68feab9fd622e7d17f880",
+        "companyName": "Nick Vetter Counseling, Therapy and Life Coaching",
+        "email": [
+            {
+                "_id": "5ec68feab9fd622e7d17f881",
+                "email": "nv4mft@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68fecb9fd622e7d17f882",
+        "companyName": "Karina Sergi, MFT",
+        "email": [
+            {
+                "_id": "5ec68fecb9fd622e7d17f883",
+                "email": "contact@karinasergi.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68feeb9fd622e7d17f884",
+        "companyName": "Menije Boduryan-Turner, Psy.D",
+        "email": [
+            {
+                "_id": "5ec68feeb9fd622e7d17f885",
+                "email": "drb@embracingyoutherapy.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68ff1b9fd622e7d17f886",
+        "companyName": "The Center Method",
+        "email": [
+            {
+                "_id": "5ec68ff1b9fd622e7d17f887",
+                "email": "nicole@thecentermethod.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68ff1b9fd622e7d17f888",
+                "email": "info@thecentermethod.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68ff5b9fd622e7d17f889",
+        "companyName": "Lisa Cefalu, CHt - The Center For Integrated Healing",
+        "email": [
+            {
+                "_id": "5ec68ff5b9fd622e7d17f88a",
+                "email": "info@email.com",
+                "status": true
+            },
+            {
+                "_id": "5ec68ff5b9fd622e7d17f88b",
+                "email": "lisacefalu1@att.net",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68ff7b9fd622e7d17f88c",
+        "companyName": "RE-MIND Revolution",
+        "email": [
+            {
+                "_id": "5ec68ff7b9fd622e7d17f88d",
+                "email": "remindrevolution@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec68ff9b9fd622e7d17f88e",
+        "companyName": "The View",
+        "email": [
+            {
+                "_id": "5ec68ff9b9fd622e7d17f88f",
+                "email": "info@theviewsc.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec69004b9fd622e7d17f890",
+        "companyName": "Jon B Pease, LMFT",
+        "email": [
+            {
+                "_id": "5ec69004b9fd622e7d17f891",
+                "email": "boss@smallbusiness.com",
+                "status": true
+            },
+            {
+                "_id": "5ec69004b9fd622e7d17f893",
+                "email": "jjon@accelcounseling.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec69006b9fd622e7d17f894",
+        "companyName": "Chase McKenna, CHt",
+        "email": [
+            {
+                "_id": "5ec69006b9fd622e7d17f895",
+                "email": "betterlivinginsight@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec6900db9fd622e7d17f899",
+        "companyName": "Roger Schwarz, JD LMFT",
+        "email": [
+            {
+                "_id": "5ec6900db9fd622e7d17f89a",
+                "email": "rogersmind@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec69011b9fd622e7d17f89b",
+        "companyName": "Nancy Hinman Therapy",
+        "email": [
+            {
+                "_id": "5ec69011b9fd622e7d17f89c",
+                "email": "nancy@nancyhinmantherapy.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec69018b9fd622e7d17f89d",
+        "companyName": "Carla Black, MA, MFT, ATR",
+        "email": [
+            {
+                "_id": "5ec69018b9fd622e7d17f89e",
+                "email": "carlajblack@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec6901ab9fd622e7d17f8a0",
+        "companyName": "Carol Rotko, PsyD - A Mindful Psychology",
+        "email": [
+            {
+                "_id": "5ec6901ab9fd622e7d17f8a1",
+                "email": "amindfulpsychology@gmail.com",
+                "status": true
+            }
+        ]
+    },
+    {
+        "_id": "5ec6901db9fd622e7d17f8a2",
+        "companyName": "Lauren Singer Compton, LCSW",
+        "email": [
+            {
+                "_id": "5ec6901db9fd622e7d17f8a3",
+                "email": "LaurenComptonLCSW@gmail.com",
+                "status": true
+            },
+            {
+                "_id": "5ec6901db9fd622e7d17f8a4",
+                "email": "laurencomptonlcsw@gmail.com",
+                "status": true
+            }
+        ]
+    }
+]

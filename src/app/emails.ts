@@ -25,7 +25,8 @@ export const emails = [
       {
         email: 'jaysojitra13@gmail.com',
         status: true
-    }]
+      }
+  ]
   },
   // {
   //   name: 'Sumi Devi',

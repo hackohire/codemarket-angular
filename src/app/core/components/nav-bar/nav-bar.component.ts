@@ -12,7 +12,7 @@ import { MatDialog, MatAnchor } from '@angular/material';
 import { SearchComponent } from '../search/search.component';
 import { droEmails, emails, la2050Emails, therapistEmails } from '../../../emails';
 import { newBniEmails, womenBizEmails, cityEmails, cocSmEmail, linkedInEmails } from '../../../newEmails';
-import { realEstateEmail, accountEmails, juryEmails, dentistEmails } from '../../../dentist-acc-realestate-emails';
+import { realEstateEmail, accountEmails, juryEmails, dentistEmails, newTherapistEmail } from '../../../dentist-acc-realestate-emails';
 import { Validators, FormControl } from '@angular/forms';
 import { PostType } from '../../../shared/models/post-types.enum';
 import { MessageService } from '../../../shared/services/message.service';
@@ -171,26 +171,22 @@ export class NavBarComponent implements OnInit, OnDestroy {
 
   sendEmails() {
     let count = 0;
-    emails.forEach((e, i) => {
+    newTherapistEmail.forEach((e, i) => {
       setTimeout(() => {
         e.email.forEach((email, j) => {
           setTimeout(() => {
             if (!Validators.email(new FormControl(email.email))) {
               const emailObj = {
                 to: [email.email],
-                // subject: `${e.companyName}, Invitation to Dental Practice Summit.`, //Dentist
-                // subject: `${e.companyName}, Invitation to Accounting Practice Summit.`, // Accountant
-                subject: `${e.companyName}, Invitation to Real Estate Summit.`, // Real Estate
+                subject: `${e.companyName}, Invitation to Speak at Therapists Summit`, // Therapist
                 companies: [{ _id: '5db1c84ec10c45224c4b95fd' }],
                 type: PostType.Email,
                 status: PostStatus.Published,
                 // descriptionHTML: dentistTemplate.replace('{companyName}', e.companyName),
                 // descriptionHTML: accountantTemplate.replace('{companyName}', e.companyName),
-                descriptionHTML: realestateTemplate.replace('{companyName}', e.companyName),
+                descriptionHTML: thepaistTemplate.replace('{companyName}', e.companyName),
                 createdBy: '5d4c1cdf91e63a3fe84bb43a',
-                // campaignId: '5ec5ed9001d818181b01ce97', // dentist
-                // campaignId: '5ec5f1a801d818181b01ce98' // accountant 
-                campaignId: '5ec5f34a01d818181b01ce99' // Real Estate
+                campaignId: '5eb95a652b638810be5ee0f3', // therapist
                 // city: e.cityName
               };
               this.emailService.sendEmail(emailObj).toPromise().then((o) => {

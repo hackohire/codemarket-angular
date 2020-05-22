@@ -34,7 +34,7 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
   uploadUrl: 'https://71258.cke-cs.com/easyimage/upload/';
 
   @Input() realTime = false;
-  @Input() role = 'writer';
+  @Input() role = 'coemmentator';
 
   // Note that Angular refs can be used once the view is initialized so we need to create
   // these containers and use in the above editor configuration to workaround this problem.
@@ -165,7 +165,7 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     if (this.realTime) {
-      if (this.sidebarContainer && this.sidebarContainer.nativeElement) {
+      if (this.sidebarContainer && this.sidebar.nativeElement) {
         this.sidebarContainer.nativeElement.appendChild(this.sidebar);
       }
       if (this.presenceListContainer && this.presenceListContainer.nativeElement) {
@@ -179,16 +179,46 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   /** When the editor is ready */
-  public onReady(editor) {
+  public onReady(editor, sidebar?) {
+    // if (!this.readOnly || this.role === 'commentator' || this.role === 'writer') {
     this.setToolbar(editor);
+    // }
+    this.refreshDisplayMode(editor, sidebar);
   }
 
   setToolbar(editor) {
     /** Show the toolbar */
+
     editor.ui.getEditableElement().parentElement.insertBefore(
       editor.ui.view.toolbar.element,
       editor.ui.getEditableElement()
     );
+  }
+
+  refreshDisplayMode = (editor, sidebar) => {
+    if (this.ckEditorUserToken) {
+      editor.config.set('toolbar', {items: ['comment']});
+      this.setToolbar(editor);
+      const annotations = editor.plugins.get('Annotations');
+      const sidebarElement = sidebar;
+      if (annotations) {
+        sidebarElement.classList.remove('hidden');
+        sidebarElement.classList.add('narrow');
+        annotations.switchTo('narrowSidebar');
+      }
+      // if (window.innerWidth < 1070) {
+      //   sidebarElement.classList.remove('narrow');
+      //   sidebarElement.classList.add('hidden');
+      //   annotations.switchTo('inline');
+      // } else if (window.innerWidth < 1300) {
+      //   sidebarElement.classList.remove('hidden');
+      //   sidebarElement.classList.add('narrow');
+      //   annotations.switchTo('narrowSidebar');
+      // } else {
+      //   sidebarElement.classList.remove('hidden', 'narrow');
+      //   annotations.switchTo('wideSidebar');
+      // }
+    }
   }
 
   myCustomUploadAdapterPlugin(editor) {
@@ -249,7 +279,7 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   autosave = (editor) => {
-    return this.postService.updatePostContent({descriptionHTML: editor.getData(), _id: this.post._id}).toPromise();
+    return this.postService.updatePostContent({ descriptionHTML: editor.getData(), _id: this.post._id }).toPromise();
   }
 
 }

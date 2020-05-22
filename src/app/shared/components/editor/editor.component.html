@@ -1,30 +1,34 @@
 <ng-container *ngIf="isPlatformBrowser">
     <div [ngStyle]="editorStyle" *ngIf="!realTime || !ckEditorUserToken">
-        <ckeditor #ckEditorRef
-         [config]="{
+        <ckeditor #ckEditorRef [config]="{
             extraPlugins: readOnly ? [] : [ myCustomUploadAdapterPlugin ],
             removePlugins: [ 'RealTimeCollaborativeEditing', 'RealTimeCollaborativeComments', 'RealTimeCollaborativeTrackChanges', 'PresenceList' ]
-        }" [disabled]="readOnly" [editor]="ckEditor" [(ngModel)]="html" (ready)="readOnly ? null : onReady($event)"></ckeditor>
+        }" [disabled]="readOnly" [editor]="ckEditor" [(ngModel)]="html" (ready)="readOnly ? null : onReady($event)">
+        </ckeditor>
     </div>
-    
+
     <div *ngIf="(realTime && this.post?._id) && ckEditorUserToken">
         <div class="sample-sidebar">
             <div class="row row-presence m-0">
                 <div #presenceList class='presence'></div>
             </div>
-            <div class="sidebar-holder">
-                <div #sidebar class="sidebar"></div>
-            </div>
         </div>
-        <ckeditor #ckEditorRef
-        [config]="{
-           extraPlugins: [ myCustomUploadAdapterPlugin ],
-           cloudServices: {uploadUrl: 'https://71258.cke-cs.com/easyimage/upload/', tokenUrl: generateToken, webSocketUrl: webSocketUrl },
-           sidebar: {container: sidebar},
-           presenceList: {container: presenceList},
-           collaboration: { channelId: this.post._id },
-           autosave: { save: realTime && !readOnly ? autosave : null}
-       }" [disabled]="readOnly" [editor]="ckEditor" [(ngModel)]="html" (ready)="readOnly ? null : onReady($event)"></ckeditor>
+        <div [id]="ckEditorUserToken ? 'container' : ''">
+            <div [id]="ckEditorUserToken ? 'editor' : ''">
+                <ckeditor  #ckEditorRef [config]="{
+                    extraPlugins: [ myCustomUploadAdapterPlugin ],
+                    cloudServices: {uploadUrl: 'https://71258.cke-cs.com/easyimage/upload/', tokenUrl: generateToken, webSocketUrl: webSocketUrl },
+                    sidebar: {container: sidebar},
+                    presenceList: {container: presenceList},
+                    collaboration: { channelId: this.post._id },
+                    autosave: { save: realTime && !readOnly ? autosave : null}
+                }" [disabled]="false" [editor]="ckEditor" [(ngModel)]="html" (ready)="readOnly ? refreshDisplayMode($event, sidebar) : onReady($event, sidebar)">
+                </ckeditor>
+            </div>
+
+            <div #sidebar [id]="ckEditorUserToken ? 'sidebar' : ''" class="sidebar"></div>
+        </div>
+
     </div>
 </ng-container>
 
@@ -35,7 +39,7 @@
             <ng-container [ngSwitch]="b?.type" *ngFor="let b of data; let i = index">
                 <div fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="start center"
                     [style.backgroundColor]="b?.__show && selectedBlockIndex > -1 ? 'beige' : ''">
-                        <!-- Paragraph -->
+                    <!-- Paragraph -->
 
                     <!-- Icon to view / collapse comments section -->
                     <div [fxFlex]="blockLevelComments ? '10' : '0'" style="text-align: right;">

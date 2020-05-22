@@ -24,9 +24,9 @@
     <section class="single-product-desc">
         <div class="container">
             <div class="row">
-                <div class="col-lg-2">
+                <div class="col-lg-0">
                     <!-- Based On the List Of Post Types -->
-                    <app-post-type-nav [selectedPostType]="selectedPostType"
+                    <app-post-type-nav *ngIf="false" [selectedPostType]="selectedPostType"
                      (postTypeClick)="selectedBlock = null; getConnectedPosts($event?.name); showConnectedPosts = true"
                      (plusButtonClick)="redirectToAddPost(details, $event)"
                      ></app-post-type-nav>
@@ -44,7 +44,7 @@
                         </div>
                     </div> -->
                 </div>
-                <div *ngIf="!showConnectedPosts" [ngClass]="selectedBlock ? 'col-lg-6 col-md-6' : 'col-lg-10 col-md-10'" style="padding: 0;">
+                <div *ngIf="!showConnectedPosts" [ngClass]="selectedBlock ? 'col-lg-6 col-md-6' : 'col-lg-12 col-md-12'" style="padding: 0;">
 
                     <div class="item-info">
                         <div>
@@ -56,6 +56,7 @@
                                         [commentsList]="commentService?.commentsList$ | async"
                                         [blockLevelComments]="false" [readOnly]="true"
                                         [realTime]="true"
+                                        [role]="'commentator'"
                                         [id]="'details-editor'" [html]="details?.descriptionHTML" [post]="details" [commentType]="'post'">
                                     </app-editor>
 
@@ -175,7 +176,7 @@
         <!-- end /.container -->
 
         <!-- Start of chat box code -->
-        <app-chat-box [loggedInUser]="authService?.loggedInUser" [postDetails]="postDetails"></app-chat-box>
+        <!-- <app-chat-box [loggedInUser]="authService?.loggedInUser" [postDetails]="postDetails"></app-chat-box> -->
         <!-- End of chat box code -->
     </section>
     <!--===========================================

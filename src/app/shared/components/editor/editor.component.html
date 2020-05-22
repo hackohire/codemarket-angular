@@ -21,6 +21,7 @@
                     sidebar: {container: sidebar},
                     presenceList: {container: presenceList},
                     collaboration: { channelId: this.post._id },
+                    commentsOnly: readOnly,
                     autosave: { save: realTime && !readOnly ? autosave : null}
                 }" [disabled]="false" [editor]="ckEditor" [(ngModel)]="html" (ready)="readOnly ? refreshDisplayMode($event, sidebar) : onReady($event, sidebar)">
                 </ckeditor>

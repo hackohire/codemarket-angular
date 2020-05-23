@@ -171,28 +171,28 @@ sup {
   border: 0;
   padding: 0; }
 
-.rupertspira button,
-input,
-select,
-textarea {
-  font-family: inherit;
-  font-size: 100%;
-  margin: 0; }
+// .rupertspira button,
+// input,
+// select,
+// textarea {
+//   font-family: inherit;
+//   font-size: 100%;
+//   margin: 0; }
 
-.rupertspira button,
-input {
-  line-height: normal; }
+// .rupertspira button,
+// input {
+//   line-height: normal; }
 
-.rupertspira button,
-select {
-  text-transform: none; }
+// .rupertspira button,
+// select {
+//   text-transform: none; }
 
-.rupertspira button,
-html input[type="button"],
-input[type="reset"],
-input[type="submit"] {
-  -webkit-appearance: button;
-  cursor: pointer; }
+// .rupertspira button,
+// html input[type="button"],
+// input[type="reset"],
+// input[type="submit"] {
+//   -webkit-appearance: button;
+//   cursor: pointer; }
 
 .rupertspira button[disabled],
 html input[disabled] {
@@ -1152,27 +1152,27 @@ html {
   font-size: 62.5%;
   -webkit-tap-highlight-color: transparent; }
 
-.rupertspira body {
-  background: #fbfbf7;
-  color: black;
-  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-  font-size: 13px;
-  line-height: 1.69;
-  -webkit-font-smoothing: antialiased; }
+// .rupertspira body {
+//   background: #fbfbf7;
+//   color: black;
+//   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+//   font-size: 13px;
+//   line-height: 1.69;
+//   -webkit-font-smoothing: antialiased; }
 
-.rupertspira input,
-button,
-select,
-textarea {
-  font-family: inherit;
-  font-size: inherit;
-  line-height: inherit; }
+// .rupertspira input,
+// button,
+// select,
+// textarea {
+//   font-family: inherit;
+//   font-size: inherit;
+//   line-height: inherit; }
 
-.rupertspira button,
-input,
-select[multiple],
-textarea {
-  background-image: none; }
+// .rupertspira button,
+// input,
+// select[multiple],
+// textarea {
+//   background-image: none; }
 
 .rupertspira abbr,
 acronym {
@@ -1229,11 +1229,10 @@ tt {
   -webkit-transition-delay: 0s;
   -webkit-transition: color 150ms ease-out 0s;
   transition: color 150ms ease-out 0s;
-  border-bottom: 1px solid #ccc;
   color: black;
   text-decoration: none; }
   a:hover, a:focus {
-    color: #d80000;
+    color: #ffffff;
     text-decoration: none; }
 
 /*** Columns ***/
@@ -1401,15 +1400,12 @@ input[type=password] {
   padding: 0 20px; }
 
 .rupertspira .container {
-  margin: 0 auto;
-  max-width: 940px;
-  width: 940px; }
+  margin: 0 auto; }
 
 .rupertspira .content {
   background: #efe9e5;
   min-width: 960px; }
   .rupertspira .content .container {
-    max-width: 940px;
     padding: 40px 0 20px; }
   .rupertspira .content h1 {
     margin-bottom: 22px; }

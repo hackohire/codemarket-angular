@@ -1,16 +1,3 @@
-<div >
-    video call component
-    <button (click)="closeVideocall()">X</button>
-</div>
-
-<!-- <div class="box">
-    <button *ngIf="!ongoingCallObj && !data?.isSomeoneCalling" mat-button #callButton (click)="call()" id="callButton">Call</button>
-    <button *ngIf="data?.isSomeoneCalling && !stream" mat-button color="primary" (click)="answer()" #answerButton id="answerButton">Answer</button>
-    <button mat-button color="primary" (click)="screenShare()">Screen Share</button>
-    <button mat-button color="primary" #rejectButton (click)="hangUp()" id="rejectButton">Reject</button>
-</div> -->
-
-
 <div class="row">
     <div class="col-md-4">
         <div id="controls">
@@ -23,5 +10,11 @@
         <div id="remote-media">
             <!-- <p>{{ start | minuteSeconds }}</p> -->
         </div>
+    </div>
+    <div class="box">
+        <!-- <button *ngIf="!ongoingCallObj && !data?.isSomeoneCalling" mat-button #callButton (click)="call()" id="callButton">Call</button>
+                                                        <button *ngIf="data?.isSomeoneCalling && !stream" mat-button color="primary" (click)="answer()" #answerButton id="answerButton">Answer</button>
+                                                        <button mat-button color="primary" (click)="screenShare()">Screen Share</button> -->
+        <button mat-button color="primary" #rejectButton (click)="hangUp()" id="rejectButton">Reject</button>
     </div>
 </div>

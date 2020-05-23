@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef, Inject, PLATFORM_ID, OnInit } from '@angular/core';
+import { Component, ViewChild, ElementRef, Inject, PLATFORM_ID, OnInit, ChangeDetectorRef } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef, MatButton } from '@angular/material';
 import { AuthService } from '../core/services/auth.service';
 import { ChatService } from '../shared/services/chat.service';
@@ -12,12 +12,12 @@ import * as Video from 'twilio-video';
 
 export class VideoChatComponent implements OnInit {
 
-    // @ViewChild('localVideo', { static: false }) localVideo: ElementRef<HTMLVideoElement>;
-    // @ViewChild('remoteVideo', { static: false }) remoteVideo: ElementRef<HTMLVideoElement>;
-    // @ViewChild('callButton', { static: false }) callButton: MatButton;
-    // @ViewChild('answerButton', { static: false }) answerButton: MatButton;
-    // @ViewChild('rejectButton', { static: false }) rejectButton: MatButton;
-  
+  // @ViewChild('localVideo', { static: false }) localVideo: ElementRef<HTMLVideoElement>;
+  // @ViewChild('remoteVideo', { static: false }) remoteVideo: ElementRef<HTMLVideoElement>;
+  // @ViewChild('callButton', { static: false }) callButton: MatButton;
+  // @ViewChild('answerButton', { static: false }) answerButton: MatButton;
+  // @ViewChild('rejectButton', { static: false }) rejectButton: MatButton;
+
 
   public videoToken: string = "";
   public identity: string = "";
@@ -39,6 +39,7 @@ export class VideoChatComponent implements OnInit {
     public dialogRef: MatDialogRef<VideoChatComponent>,
     private _chatService: ChatService,
     @Inject(MAT_DIALOG_DATA) public data: any,
+    private cd: ChangeDetectorRef
   ) {
     console.log(this.data);
   }
@@ -67,7 +68,7 @@ export class VideoChatComponent implements OnInit {
       }
       Video.connect(this.videoToken, this.connectOptions).then(res => {
         res.localParticipant.audioTracks.forEach(track => {
-          track.enable(true);
+          track.track.enable(true);
         });
         this.roomSID = res.sid;
         this.roomJoined(res);
@@ -85,43 +86,47 @@ export class VideoChatComponent implements OnInit {
 
   roomJoined(room) {
     this.activeRoom = room;
-    console.log('Joined as "' + this.identity + '"');
     // Draw local video, if not already previewing
     this.previewContainer = document.getElementById('local-media');
     if (!this.previewContainer.querySelector('video')) {
-      this.attachParticipantTracks(room.localParticipant, this.previewContainer);
+      // this.attachParticipantTracks(room.localParticipant, this.previewContainer); old line
+      this.attachTracks(this.getTracks(room.localParticipant), this.previewContainer);
       this.startCountDown(0);
     }
 
     room.participants.forEach(participant => {
-      this.previewContainer = document.getElementById('remote-media');
-      this.attachParticipantTracks(participant, this.previewContainer);
+      // console.log('Already in Room: "' + participant.identity + '"');
+      const participantArray = participant.identity.split('_');
+
+      if (!this.identity || this.identity !== participant.identity) {
+        this.previewContainer = document.getElementById('remote-media');
+      } else {
+        this.previewContainer = document.getElementById('local-media');
+      }
+      // this.attachParticipantTracks(participant, this.previewContainer); old line
+      this.participantConnected(participant, this.previewContainer);
     });
 
     // When a participant joins, draw their video on screen
     room.on('participantConnected', participant => {
-      const participantArray = participant.identity.split('_');
-    });
-
-    room.on('trackAdded', (track, participant) => {
       if (this.identity !== '' && participant.identity === this.identity) {
         this.previewContainer = document.getElementById('remote-media');
       } else {
         this.previewContainer = document.getElementById('local-media');
       }
-      this.attachTracks([track], this.previewContainer);
-    });
-
-    room.on('trackRemoved', (track, participant) => {
-      this.detachTracks([track]);
+      // this.attachTracks(this.getTracks(room.localParticipant), this.previewContainer);
+      this.participantConnected(participant, this.previewContainer);
     });
 
     // When a participant disconnects, note in log
     room.on('participantDisconnected', participant => {
-      if (this.identity !== '' && participant.identity === this.identity) {
+      if (this.identity !== '' && this.identity === participant.identity) {
+        // console.log('Participant "' + participant.identity + '" left the room');
         this.detachParticipantTracks(participant);
+        this.closeVideocall();
         this.activeRoom.disconnect();
       }
+      this.detachParticipantTracks(participant);
     });
 
     // When we are disconnected, stop capturing local video
@@ -129,10 +134,7 @@ export class VideoChatComponent implements OnInit {
     room.on('disconnected', () => {
       this.detachParticipantTracks(room.localParticipant);
       room.participants.forEach(participant => this.detachParticipantTracks(participant));
-      if (this.endCall === true) {
-        this.activeRoom = null;
-        this.closeVideocall();
-      }
+      this.activeRoom = null;
       this.closeVideocall();
     });
   }
@@ -154,23 +156,75 @@ export class VideoChatComponent implements OnInit {
     }, 1000);
   }
 
+  // Attach the Track to the DOM.
+  attachTrack(track, container) {
+    container.appendChild(track.attach());
+  }
+
+  // Attach array of Tracks to the DOM.
   attachTracks(tracks, container) {
-    tracks.forEach(track => {
-      container.appendChild(track.attach());
+    tracks.forEach((track) => {
+      this.attachTrack(track, container);
     });
   }
 
-  detachTracks(tracks) {
-    tracks.forEach(track => {
-      track.detach().forEach(detachedElement => {
-        detachedElement.remove();
-      });
+  // A new RemoteParticipant joined the Room
+  participantConnected(participant, container) {
+    let selfContainer = document.createElement('div');
+    selfContainer.id = `participantContainer-${participant.identity}`;
+    container.appendChild(selfContainer);
+
+    participant.tracks.forEach((publication) => {
+      this.trackPublished(publication, selfContainer);
+    });
+    participant.on('trackPublished', (publication) => {
+      this.trackPublished(publication, selfContainer);
+    });
+    participant.on('trackUnpublished', this.trackUnpublished);
+  }
+
+  // A new RemoteTrack was published to the Room.
+  trackPublished(publication, container) {
+    if (publication.isSubscribed) {
+      this.attachTrack(publication.track, container);
+    }
+    publication.on('subscribed', (track) => {
+      // log('Subscribed to ' + publication.kind + ' track');
+      this.attachTrack(track, container);
+    });
+    publication.on('unsubscribed', this.detachTrack);
+  }
+
+  // A RemoteTrack was unpublished from the Room.
+  trackUnpublished(publication) {
+    console.log(publication.kind + ' track was unpublished.');
+  }
+
+  // Get the Participant's Tracks.
+  getTracks(participant) {
+    return Array.from(participant.tracks.values()).filter((publication: any) => {
+      return publication.track;
+    }).map((publication: any) => {
+      return publication.track;
     });
   }
 
+  // Detach given track from the DOM.
+  detachTrack(track) {
+    track.detach().forEach((element) => {
+      element.remove();
+    });
+  }
+
+  // Detach the Participant's Tracks from the DOM.
   detachParticipantTracks(participant) {
-    this.tracks = Array.from(participant.tracks.values());
-    this.detachTracks(this.tracks);
+    var tracks = this.getTracks(participant);
+    tracks.forEach(this.detachTrack);
+  }
+
+  hangUp() {
+    this.activeRoom.disconnect();
+    this.closeVideocall();
   }
 
   closeVideocall() {

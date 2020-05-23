@@ -1,4 +1,4 @@
-import Storage from '@aws-amplify/storage';
+import {Storage} from '@aws-amplify/storage';
 import { appConstants } from '../../constants/app_constants';
 import { environment } from '../../../../environments/environment';
 
@@ -14,7 +14,7 @@ export class CustomUploadAdapter {
         const fileNameSplitArray = file.name.split('.');
         const fileExt = fileNameSplitArray.pop();
         const fileName = fileNameSplitArray[0] + '-' + new Date().toISOString() + '.' + fileExt;
-        return Storage.vault.put(fileName, file, {
+        return Storage.put(fileName, file, {
             bucket: environment.fileS3Bucket,
             level: 'public',
             contentType: file.type,

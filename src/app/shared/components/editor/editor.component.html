@@ -18,7 +18,7 @@
                 <ckeditor  #ckEditorRef [config]="{
                     removePlugins: [],
                     extraPlugins: [ myCustomUploadAdapterPlugin ],
-                    cloudServices: {uploadUrl: 'https://71258.cke-cs.com/easyimage/upload/', tokenUrl: generateToken, webSocketUrl: webSocketUrl },
+                    cloudServices: {tokenUrl: generateToken, webSocketUrl: webSocketUrl },
                     sidebar: {container: sidebar},
                     presenceList: {container: presenceList},
                     collaboration: { channelId: this.post._id },

@@ -8,8 +8,6 @@ import awsconfig from './aws-exports';
 
 import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
-
-import Storage from '@aws-amplify/storage';
 import Amplify from '@aws-amplify/core';
 
 if (environment.production) {

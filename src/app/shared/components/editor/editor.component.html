@@ -2,7 +2,7 @@
     <div [ngStyle]="editorStyle" *ngIf="!realTime || !ckEditorUserToken">
         <ckeditor #ckEditorRef [config]="{
             extraPlugins: readOnly ? [] : [ myCustomUploadAdapterPlugin ],
-            removePlugins: ['CloudServices', 'EasyImage', 'RealTimeCollaborativeEditing', 'RealTimeCollaborativeComments', 'RealTimeCollaborativeTrackChanges', 'PresenceList' ]
+            removePlugins: ['CloudServices', 'RealTimeCollaborativeEditing', 'RealTimeCollaborativeComments', 'RealTimeCollaborativeTrackChanges', 'PresenceList' ]
         }" [disabled]="readOnly" [editor]="ckEditor" [(ngModel)]="html" (ready)="readOnly ? null : onReady($event)">
         </ckeditor>
     </div>
@@ -16,7 +16,7 @@
         <div [id]="ckEditorUserToken ? 'container' : ''">
             <div [id]="ckEditorUserToken ? 'editor' : ''">
                 <ckeditor  #ckEditorRef [config]="{
-                    removePlugins: ['CloudServices', 'EasyImage'],
+                    removePlugins: ['CloudServices'],
                     extraPlugins: [ myCustomUploadAdapterPlugin ],
                     cloudServices: {uploadUrl: 'https://71258.cke-cs.com/easyimage/upload/', tokenUrl: generateToken, webSocketUrl: webSocketUrl },
                     sidebar: {container: sidebar},

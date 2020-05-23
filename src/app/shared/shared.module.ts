@@ -33,14 +33,12 @@ import { AddCollaboratorsComponent } from './components/add-collaborators/add-co
 import { AddAssigneeComponent } from './components/add-assignee/add-assignee.component';
 import { PaginatorComponent } from './components/paginator/paginator.component';
 import { AddCommentComponent } from './components/add-comment/add-comment.component';
-import { ChatBoxComponent } from './components/chat-box/chat-box.component';
 import { PostTypeNavComponent } from './components/post-type-nav/post-type-nav.component';
 import { CommentSideNavComponent } from './components/comment-side-nav/comment-side-nav.component';
 import { AppInjector } from './services/app.injector.service';
 import { ChatService } from './services/chat.service';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { GetNamePipe } from './pipes/get-name.pipe';
-import { ChatFullUiComponent } from './components/chat-full-ui/chat-full-ui.component';
 
 export function hljsLanguages() {
   return [
@@ -66,11 +64,9 @@ export function hljsLanguages() {
     AddAssigneeComponent,
     PaginatorComponent,
     AddCommentComponent,
-    ChatBoxComponent,
     PostTypeNavComponent,
     CommentSideNavComponent,
     GetNamePipe,
-    ChatFullUiComponent,
   ],
   imports: [
     CommonModule,
@@ -104,7 +100,6 @@ export function hljsLanguages() {
   ],
   exports: [
     BreadcumbComponent,
-    ChatBoxComponent,
     EditorComponent,
     CommentComponent,
     AddCommentComponent,
@@ -132,7 +127,6 @@ export function hljsLanguages() {
     // Ng5SliderModule,
     NgSelectModule,
     MdePopoverModule,
-    ChatFullUiComponent
   ],
   entryComponents: [
     VideoChatComponent

@@ -2,7 +2,7 @@
     <div [ngStyle]="editorStyle" *ngIf="!realTime || !ckEditorUserToken">
         <ckeditor #ckEditorRef [config]="{
             extraPlugins: readOnly ? [] : [ myCustomUploadAdapterPlugin ],
-            removePlugins: [ 'RealTimeCollaborativeEditing', 'RealTimeCollaborativeComments', 'RealTimeCollaborativeTrackChanges', 'PresenceList' ]
+            removePlugins: ['CloudServices', 'EasyImage', 'RealTimeCollaborativeEditing', 'RealTimeCollaborativeComments', 'RealTimeCollaborativeTrackChanges', 'PresenceList' ]
         }" [disabled]="readOnly" [editor]="ckEditor" [(ngModel)]="html" (ready)="readOnly ? null : onReady($event)">
         </ckeditor>
     </div>

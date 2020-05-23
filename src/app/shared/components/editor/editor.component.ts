@@ -222,7 +222,6 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   myCustomUploadAdapterPlugin(editor) {
-    console.log(editor.plugins.get('CloudServices'));
     editor.plugins.get('CKFinder').createUploadAdapter = (loader) => {
       // Configure the URL to the upload script in your back-end here!
       return new CustomUploadAdapter(loader);

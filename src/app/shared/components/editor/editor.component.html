@@ -16,7 +16,7 @@
         <div [id]="ckEditorUserToken ? 'container' : ''">
             <div [id]="ckEditorUserToken ? 'editor' : ''">
                 <ckeditor  #ckEditorRef [config]="{
-                    removePlugins: ['CloudServices'],
+                    removePlugins: ['CloudServices', 'EasyImage'],
                     extraPlugins: [ myCustomUploadAdapterPlugin ],
                     cloudServices: {uploadUrl: 'https://71258.cke-cs.com/easyimage/upload/', tokenUrl: generateToken, webSocketUrl: webSocketUrl },
                     sidebar: {container: sidebar},

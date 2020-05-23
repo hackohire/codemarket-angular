@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output, Input, OnDestroy, ViewChild, ElementRef, Inject, PLATFORM_ID, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input, OnDestroy, ViewChild, ElementRef, Inject, PLATFORM_ID, AfterViewInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { appConstants } from '../../constants/app_constants';
 import { FormGroup, FormControl } from '@angular/forms';
@@ -21,9 +21,25 @@ import { CustomUploadAdapter } from './FileUploader';
   styleUrls: ['./editor.component.scss'],
   // encapsulation: ViewEncapsulation.ShadowDom
 })
-export class EditorComponent implements OnInit, OnDestroy {
+export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
 
   isHandset: boolean;
+
+  @Input() post: Post; /** post for view mode */
+
+  editor: any
+
+  ckEditorUserToken: string;
+  webSocketUrl = environment.ckEditor.ws;
+  uploadUrl: 'https://71258.cke-cs.com/easyimage/upload/';
+
+  @Input() realTime = false;
+  @Input() role = 'coemmentator';
+
+  // Note that Angular refs can be used once the view is initialized so we need to create
+  // these containers and use in the above editor configuration to workaround this problem.
+  public sidebar = null;
+  public presenceList = null;
 
   public model = {
     editorData: ''
@@ -31,17 +47,28 @@ export class EditorComponent implements OnInit, OnDestroy {
 
   public ckEditor = null;
 
-  // fileExtensions = AttachesTool.EXTENSIONS;
-
-  editor: any;
-  of = of;
   selectedBlockIndex: number;
   isPlatformBrowser = false;
-  @Input() post: Post; /** post for view mode */
+
   @Input() companyPostId: string;
   @Input() userReferenceId: string;
   @Input() id: string;
-  @Input() readOnly = false; /** read only mode */
+
+  /** read only mode */
+  __readOnly = false;
+  @Input()
+  set readOnly(h) {
+    this.__readOnly = h;
+    /** If editting mode for comments set the toolbar */
+    if (!h && this.ckEditorRef && this.ckEditorRef.editorInstance) {
+      this.setToolbar(this.ckEditorRef.editorInstance);
+    }
+  }
+  get readOnly() {
+    return this.__readOnly;
+  }
+
+
   @Input()
   set html(h) {
     this.model.editorData = h;
@@ -50,6 +77,8 @@ export class EditorComponent implements OnInit, OnDestroy {
     return this.model.editorData;
   }
 
+  of = of;
+
   _data: any[];
   @Input() data: any[];
 
@@ -57,10 +86,13 @@ export class EditorComponent implements OnInit, OnDestroy {
   @Input() commentType: string;
   @Output() output: EventEmitter<any> = new EventEmitter(); /** Emitting data with user interactions */
   @Input() importArticleSubscription = false;
+
   @ViewChild('editorRef', { static: false }) editorRef: ElementRef;
   @ViewChild('ckEditorRef', { static: false }) ckEditorRef;
   @ViewChild('editorViewRef', { static: true }) editorViewRef: ElementRef;
 
+  @ViewChild('sidebar', { static: true }) private sidebarContainer?: ElementRef<HTMLDivElement>;
+  @ViewChild('presenceList', { static: true }) private presenceListContainer?: ElementRef<HTMLDivElement>;
   @Output() showComments: EventEmitter<{ block: any }> = new EventEmitter();
 
   subscriptions$ = new Subscription();
@@ -90,10 +122,15 @@ export class EditorComponent implements OnInit, OnDestroy {
     private breakpointObserver: BreakpointObserver,
   ) {
     this.isPlatformBrowser = isPlatformBrowser(this._platformId);
+
     if (this.isPlatformBrowser) {
       const DocumentEditor = require('src/assets/js/ckeditor');
       this.ckEditor = DocumentEditor;
     }
+
+    /** Side bar for comments & presenceList for online users */
+    this.sidebar = this.isPlatformBrowser && this.realTime ? document.createElement('div') : null;
+    this.presenceList = this.isPlatformBrowser && this.realTime ? document.createElement('div') : null;
   }
 
   ngOnInit() {
@@ -109,26 +146,91 @@ export class EditorComponent implements OnInit, OnDestroy {
           share()
         ).subscribe()
     );
+
+    this.subscriptions$.add(
+      this.authService.loggedInUser$.subscribe(async (u) => {
+        if (u && !this.ckEditorUserToken && this.realTime) {
+          this.authService.generateCkEditorToken({ name: u.name, _id: u._id, email: u.email, avatar: this.s3FilesBucketURL + u.avatar }, this.role).toPromise().then(t => {
+            this.ckEditorUserToken = t;
+            // this.ckEditor.update();
+          });
+        }
+      })
+    );
   }
 
-  myCustomUploadAdapterPlugin(editor) {
-    editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
-      // Configure the URL to the upload script in your back-end here!
-      return new CustomUploadAdapter(loader);
-    };
+  public ngAfterViewInit() {
+    if (!this.sidebarContainer || !this.presenceListContainer) {
+      // throw new Error('Div containers for sidebar or presence list were not found');
+    }
+
+    if (this.realTime) {
+      if (this.sidebarContainer && this.sidebar.nativeElement) {
+        this.sidebarContainer.nativeElement.appendChild(this.sidebar);
+      }
+      if (this.presenceListContainer && this.presenceListContainer.nativeElement) {
+        this.presenceListContainer.nativeElement.appendChild(this.presenceList);
+      }
+    }
   }
 
   ngOnDestroy() {
     this.subscriptions$.unsubscribe();
   }
 
-  public onReady(editor) {
+  /** When the editor is ready */
+  public onReady(editor, sidebar?) {
+    // if (!this.readOnly || this.role === 'commentator' || this.role === 'writer') {
+    this.setToolbar(editor);
+    // }
+    this.refreshDisplayMode(editor, sidebar);
+  }
+
+  setToolbar(editor) {
+    /** Show the toolbar */
+
     editor.ui.getEditableElement().parentElement.insertBefore(
       editor.ui.view.toolbar.element,
       editor.ui.getEditableElement()
     );
+  }
 
-    // editor.plugins.extraPlugins = [ this.myCustomUploadAdapterPlugin ];
+  refreshDisplayMode = (editor, sidebar) => {
+    if (this.ckEditorUserToken) {
+      editor.config.set('toolbar', {items: ['comment']});
+      this.setToolbar(editor);
+      const annotations = editor.plugins.get('Annotations');
+      const sidebarElement = sidebar;
+      if (annotations) {
+        sidebarElement.classList.remove('hidden');
+        sidebarElement.classList.add('narrow');
+        annotations.switchTo('narrowSidebar');
+      }
+      // if (window.innerWidth < 1070) {
+      //   sidebarElement.classList.remove('narrow');
+      //   sidebarElement.classList.add('hidden');
+      //   annotations.switchTo('inline');
+      // } else if (window.innerWidth < 1300) {
+      //   sidebarElement.classList.remove('hidden');
+      //   sidebarElement.classList.add('narrow');
+      //   annotations.switchTo('narrowSidebar');
+      // } else {
+      //   sidebarElement.classList.remove('hidden', 'narrow');
+      //   annotations.switchTo('wideSidebar');
+      // }
+    }
+  }
+
+  myCustomUploadAdapterPlugin(editor) {
+    console.log(editor.plugins.get('CloudServices'));
+    editor.plugins.get('CKFinder').createUploadAdapter = (loader) => {
+      // Configure the URL to the upload script in your back-end here!
+      return new CustomUploadAdapter(loader);
+    };
+    editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
+      // Configure the URL to the upload script in your back-end here!
+      return new CustomUploadAdapter(loader);
+    };
   }
 
   initializeCommentForm(p) {
@@ -139,12 +241,6 @@ export class EditorComponent implements OnInit, OnDestroy {
       blockSpecificComment: new FormControl(true),
       blockId: new FormControl(''),
     });
-    if (this.companyPostId) {
-      this.commentForm.addControl('companyReferenceId', new FormControl(this.companyPostId));
-    }
-    if (this.userReferenceId) {
-      this.commentForm.addControl('userReferenceId', new FormControl(this.userReferenceId));
-    }
   }
 
   async addComment(blockId: string, addCommentEditor: EditorComponent) {
@@ -181,10 +277,14 @@ export class EditorComponent implements OnInit, OnDestroy {
   //   // this.commentsList = this.commentsList.filter(c => c._id !== id);
   // }
 
-  gistFrame(url: string) {
-    const template = `<html><body><style type="text/css">.gist {overflow:auto;} .gist .gist-file .gist-data { max-height: 86vh; }</style><script src="gistSrc"></script></body></html>`;
-    const replaced = template.replace('gistSrc', url + '.js');
-    return replaced;
+  generateToken = () => {
+    return new Promise((res, rej) => {
+      return res(this.ckEditorUserToken);
+    });
+  }
+
+  autosave = (editor) => {
+    return this.postService.updatePostContent({ descriptionHTML: editor.getData(), _id: this.post._id }).toPromise();
   }
 
 }

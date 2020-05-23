@@ -179,57 +179,6 @@ export class DetailsComponent implements OnInit, OnDestroy {
     );
   }
 
-  async rsvpEvent(eventId) {
-    if (!this.authService.loggedInUser) {
-      /** calling this method to set current url as redirectURL after user is logged In */
-      await this.authService.checkIfUserIsLoggedIn(true);
-    } else {
-      /** Make the API call to set the user in the list of attendees */
-      this.subscription$.add(
-        this.postService.rsvpEvent(eventId).pipe(
-          tap(d => console.log(d))
-        ).subscribe({
-          next: (d) => {
-            console.log(d);
-            /** If user doesn't have subscription, rediret to membership page */
-            if (d && !d.validSubscription) {
-              this.router.navigate(['/', { outlets: { main: ['membership'] } }]);
-            }
-
-            /** Check i user is in the list of attendees */
-            if (d && d.usersAttending && d.usersAttending.length) {
-              this.isUserAttending = true;
-              this.postDetails.usersAttending = d.usersAttending;
-              this.store.dispatch(SetSelectedPost({ post: this.postDetails }));
-              const isLoggedInUserAttending = d.usersAttending.find((u) => u._id === this.authService.loggedInUser._id);
-              if (isLoggedInUserAttending) {
-                this.successfulRSVP.show();
-              }
-            }
-          },
-          error: (e) => console.log(e)
-        })
-      );
-    }
-  }
-
-  cancelRSVP(eventId: string) {
-    this.subscription$.add(
-      this.postService.cancelRSVP(eventId).subscribe((e) => {
-        console.log(e);
-        if (e && e.usersAttending && e.usersAttending) {
-          const isCustomerGoing = e.usersAttending.find(u => u._id === this.authService.loggedInUser._id);
-          if (!isCustomerGoing) {
-            this.isUserAttending = false;
-            this.postDetails.usersAttending = e.usersAttending;
-            this.store.dispatch(SetSelectedPost({ post: this.postDetails }));
-            this.sweetAlertService.success('Successful Cancel RSVP Request', '', 'success');
-          }
-        }
-      })
-    );
-  }
-
   ngOnDestroy(): void {
     if (this.subscription$) {
       this.subscription$.unsubscribe();

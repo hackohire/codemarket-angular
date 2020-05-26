@@ -57,3 +57,12 @@ p.data-label:after {
     content: ":";
     margin-left: 4px
 }
+
+:host ::ng-deep .social-media button {
+    width: 35px;
+    height: 35px;
+    .mat-button-wrapper {
+        padding: 12px 0;
+        line-height: 0px;
+    }
+}

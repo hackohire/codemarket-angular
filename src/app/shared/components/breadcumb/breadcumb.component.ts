@@ -47,7 +47,7 @@ export class BreadcumbComponent implements OnInit {
 
   public emptyPostForm: FormGroup;
 
-  public name; 
+  public name;
 
   @ViewChild(MdePopoverTrigger, {static: false}) addTagsPopover: MdePopoverTrigger;
   @ViewChild(MdePopoverTrigger, {static: false}) addCopmaniesPopover: MdePopoverTrigger;
@@ -167,5 +167,10 @@ export class BreadcumbComponent implements OnInit {
 
   doNothing() {
     console.log("Do nothing called  ");
+  }
+
+  allowUsersEdit = () => {
+    const loggedInUser = this.authService.loggedInUser;
+    return loggedInUser && loggedInUser._id && this.postDetails && this.postDetails._id && (loggedInUser._id === this.postDetails.createdBy._id || this.postDetails.collaborators.find(c => c._id === loggedInUser._id));
   }
 }

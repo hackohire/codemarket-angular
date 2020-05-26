@@ -12,16 +12,12 @@ import { AuthService } from 'src/app/core/services/auth.service';
 import { CommentService } from 'src/app/shared/services/comment.service';
 import { environment } from 'src/environments/environment';
 import { selectSelectedPost } from 'src/app/core/store/selectors/post.selectors';
-import { SetSelectedPost } from 'src/app/core/store/actions/post.actions';
 import { Post } from 'src/app/shared/models/post.model';
 import { MatDialog, MatPaginator } from '@angular/material';
 import { VideoChatComponent } from 'src/app/video-chat/video-chat.component';
-import Peer from 'peerjs';
 import { PostService } from '../../shared/services/post.service';
 import { SweetalertService } from '../../shared/services/sweetalert.service';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
-import { Company } from '../../shared/models/company.model';
-import { User } from '../../shared/models/user.model';
 import { appConstants } from '../../shared/constants/app_constants';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
@@ -58,7 +54,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
   postForm: FormGroup;
   commentsList: any[];
   collaborators: string[];
-  peer: Peer;
+  // peer: Peer;
 
   commentId: string;
   blockId: string;
@@ -98,17 +94,6 @@ export class DetailsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    /** Read the type of the post  */
-    this.commentsList = [{
-      author: '123_1',
-      body: 'Hello, How are you ?'
-    }, {
-      author: '123_2',
-      body: 'Fine, How are you ?'
-    },{
-      author: '123_1',
-      body: 'Fine, Thanks!'
-    }];
     this.type = this.activatedRoute.snapshot.queryParams.type;
 
     this.commentId = this.activatedRoute.snapshot.queryParams['commentId'];
@@ -130,14 +115,6 @@ export class DetailsComponent implements OnInit, OnDestroy {
           this.details$ = of(p);
           this.initializeCommentForm(p, 'post');
           this.postFormInitialization(p);
-          /** SHow company in breadcrumb */
-          // if (p.companies && p.companies.length) {
-          //   this.breadcumb.path.unshift({ name: p.type });
-          // }
-
-          /** Subscribe to loggedinuser, once loggedInUse is got, Check if the loggedInUder is
-           * in the list of attendess or not
-           **/
 
           this.breadcumb = {
             path: [
@@ -147,19 +124,6 @@ export class DetailsComponent implements OnInit, OnDestroy {
               }
             ]
           };
-
-          this.subscription$.add(
-            this.authService.loggedInUser$.subscribe((user) => {
-              if (this.postDetails
-                && this.postDetails.usersAttending
-                && this.postDetails.usersAttending.length
-                && this.postDetails.usersAttending.find((u: User) => u._id === user._id)) {
-                this.isUserAttending = true;
-              } else {
-                this.isUserAttending = false;
-              }
-            })
-          );
 
           this.postService.getCountOfAllPost('', '',
           {
@@ -175,13 +139,6 @@ export class DetailsComponent implements OnInit, OnDestroy {
             }
           });
 
-        } else if (this.postDetails && this.postDetails._id === postId) {
-          /** Comes inside this block, only when we are already in a post details page, and by using searh,
-           * we try to open any other post detials page
-           */
-        } else {
-          // this.store.dispatch(GetPostById({ postId }));
-          // this.details$ = this.store.select(selectSelectedPost);
         }
 
       })
@@ -228,9 +185,6 @@ export class DetailsComponent implements OnInit, OnDestroy {
     return moment(d).isValid() ? d : new Date(+d);
   }
 
-
-
-
   fromNow(date) {
     const d = moment(date).isValid() ? date : new Date(+date);
     return moment(d).fromNow();
@@ -239,7 +193,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
   openDialog(authorId?: string): void {
     this.dialog.open(VideoChatComponent, {
       width: '550px',
-      data: { authorId, peer: this.peer },
+      // data: { authorId, peer: this.peer },
       disableClose: true
     });
   }

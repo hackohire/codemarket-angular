@@ -202,6 +202,7 @@ export const appConstants = {
       createdBy {
         _id
         name
+        slug
         avatar
         currentJobDetails {
           jobProfile {
@@ -228,6 +229,7 @@ export const appConstants = {
           _id
           name
           avatar
+          slug
         }
         blockId
         blockSpecificComment
@@ -270,16 +272,19 @@ export const appConstants = {
         _id
         name
         avatar
+        slug
       }
 
       assignees {
         _id
         name
+        slug
       }
 
       clients {
         _id
         name
+        slug
       }
 
       jobProfile {
@@ -331,5 +336,6 @@ export const appConstants = {
     { name: PostType.Requirement, label: 'Requirement' },
     { name: PostType.Service, label: 'Service' },
     { name: PostType.Testing, label: 'Testing' },
+    { name: PostType.Forms, label: 'Forms' }
   ],
 };

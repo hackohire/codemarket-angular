@@ -22,6 +22,7 @@ export class EmailService {
         name
         _id
         avatar
+        slug
       }
       to
       cc

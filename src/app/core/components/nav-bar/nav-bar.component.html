@@ -1,13 +1,13 @@
 <mat-sidenav-container class="sidenav-container">
-<!--
-  <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+<!-- 
+  <mat-sidenav *ngIf="false" #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'main'" [opened]="(isHandset$ | async) === false">
     <mat-toolbar style="height: 48px; font-size: 14px; font-weight: 400; letter-spacing: 4px; text-transform: uppercase; color: #999; background: #eee;">navigation</mat-toolbar>
 
-    <!-- Sidebar Navigation List Item -->
-    <!--<mat-nav-list>
-      <!-- Dashboard -->
-      <!--<a mat-list-item [routerLink]="['/', 'dashboard']">Dashboard</a>
+    Sidebar Navigation List Item
+    <mat-nav-list>
+      Dashboard
+      <a mat-list-item [routerLink]="['/', 'dashboard']">Dashboard</a>
 
       <a mat-list-item [routerLink]="['/', 'user', 'edit-profile']">Edit Profile</a>
 
@@ -17,8 +17,8 @@
 
       <a mat-list-item [routerLink]="['/', 'company', 'company-list']" [queryParams]="{all: false}">My Companies</a>
     </mat-nav-list>
-  </mat-sidenav>
--->
+  </mat-sidenav> -->
+
 
   <mat-sidenav-content>
     <mat-toolbar class="SearchLoginBox">
@@ -96,7 +96,7 @@
       <!-- <img (click)="redirect()" sizes="(max-width: 282px) 100vw, 282px"
         srcset="../../../../assets/images/logo_qugbvk_c_scalew_200.png 200w, ../../../../assets/images/logo_qugbvk_c_scalew_282.png 282w"
         src="../../../../assets/images/logo_qugbvk_c_scalew_282.png" alt=""> -->
-      <img (click)="redirect()" src="../../../../assets/images/logo.png" height="48px" class="brand-logo" >
+      <img (click)="redirect()" src="../../../../assets/images/CodemarketSVG.svg" class="brand-logo" >
       <!-- <h2 [routerLink]="['/']">Codemarket</h2> -->
       
       <!-- End Items -->
@@ -114,15 +114,16 @@
           *ngIf="isUnread((messageService.messagesList$ | async)?.messages)"></span>
       </div> -->
 
+      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'video-chat']" style="margin-left:5px; padding: 8px 16px;">
+        <div class="line-height-initial"><mat-icon>video_call</mat-icon> </div>
+      </a>
+
       <app-add-post-menu [label]="'Create'">
       </app-add-post-menu>
 
       <!-- <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'company', 'add-company']">
         <div class="line-height-initial"> Sales Accelerator </div>
       </a>
-      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'post', 'add-dreamjob']">
-        <div class="line-height-initial"> Career Accelerator </div>
-      </a> -->
 
 
       <!-- <app-add-post-menu style="color: black;"></app-add-post-menu> -->
@@ -130,7 +131,7 @@
       <!-- <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'company', 'company-list']" [queryParams]="{all: true}">
         <div class="line-height-initial"> Businesses </div>
       </a> -->
-      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'about-us']" [queryParams]="{all: true}" style="margin-left:5px; padding: 8px 16px;">
+      <!-- <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'about-us']" [queryParams]="{all: true}" style="margin-left:5px; padding: 8px 16px;">
         <div class="line-height-initial"> About </div>
       </a>
       
@@ -144,7 +145,7 @@
       </a>
       <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'membership']" [queryParams]="{all: true}" style="margin-left:5px; padding: 8px 16px;">
         <div class="line-height-initial"> Membership </div>
-      </a>
+      </a> -->
 
     </mat-toolbar>
 
@@ -152,7 +153,7 @@
     <!-- Add Content Here -->
     <router-outlet></router-outlet>
 
-    <footer class="footer-area footer--light" style="margin-top: 4rem; background: #eee;">
+    <footer class="footer-area footer--light" style="background: #eee;">
       <div class="mini-footer" style="padding-bottom: 15px;">
         <div class="container">
 
@@ -233,9 +234,9 @@
             <div class="col-md-7 col-lg-8">
 
               <!--Copyright-->
-              <p class="text-center text-md-left">© 2019 Copyright:
+              <p class="text-center text-md-left">© 2020 Copyright
                 <a href="https://www.codemarket.io">
-                  <strong> codemarket.io</strong>
+                  codemarket.io
                 </a>
               </p>
 

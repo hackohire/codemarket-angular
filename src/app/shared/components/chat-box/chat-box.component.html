@@ -1,8 +1,31 @@
-<div class="main-container">
-    <div *ngFor="let c of comments">
-        <div [id]="c?._id" style="padding-left: 3px; padding-right: 3px;"
-        *ngIf="!c?.blockSpecificComment" class="single-thread">
-            <app-comment [fromWhere]="'chat'" [comment]="c" [referenceId]="cDetails?._id" ></app-comment>
-        </div>
+<section class="chat-window docked" #chatWindow>
+  <div class="main-container">
+    <div class="chat-header" (click)="chatWindow.classList.toggle('docked')">
+      <p>Live Chat</p>
+      <span class="close"></span>
     </div>
-    <app-add-comment [referenceId]="postDetails._id" ></app-add-comment>
+    <div class="chat-body">
+      <div class="message-container" #scrollMe [scrollTop]="scrollMe.scrollHeight">
+        <div *ngFor="let msg of commentsList">
+          <div class="right" id="messages" *ngIf="msg.author === username">
+            <div class="auther-name">{{msg.author | getName}}</div>
+            <span>{{msg.body}}</span>
+            <span class="float_r">{{getFormatedDate(msg.dateUpdated)}}</span>
+          </div>
+          <div class="left" id="messages" *ngIf="msg.author !== username">
+            <div class="auther-name">{{msg.author | getName}}</div>
+            <span>{{msg.body}}</span>
+            <span class="float_r">{{getFormatedDate(msg.dateUpdated)}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chat-footer">
+      <div class="chat-input">
+          <input type="text" [(ngModel)]="msg" (keyup.enter)="sendMsg()"
+            [ngModelOptions]="{standalone: true}" autofocus id="chat-input" placeholder="Send a message..." />
+          <button type="submit" class="chat-submit" id="chat-submit" (click)="sendMsg()"><i class="material-icons">send</i></button>
+      </div>
+    </div>
+  </div>
+</section>

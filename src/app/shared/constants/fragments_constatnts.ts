@@ -56,6 +56,7 @@ export const attachesFragment = gql`
     title
     createdBy {
       name
+      slug
       _id
     }
     file {
@@ -188,6 +189,7 @@ fragment Comment on Comment {
     _id
     name
     avatar
+    slug
     currentJobDetails {
       jobProfile {
         name

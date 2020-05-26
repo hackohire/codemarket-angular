@@ -193,8 +193,9 @@ export class MyProfileComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.authorId = this.activatedRoute.snapshot.params.authorId;
-
+    // this.authorId = this.activatedRoute.snapshot.params.authorId;
+    const params = this.activatedRoute.snapshot.params;
+    this.authorId = params && params.slug ? params.slug.split('-').pop() : '';
     this.profileView = this.activatedRoute.snapshot.queryParams['view'] ? this.activatedRoute.snapshot.queryParams['view'] : 'posts';
 
     // If user is visitng somebody else's profile
@@ -378,9 +379,6 @@ export class MyProfileComponent implements OnInit {
   }
 
   fetchFilesUploadedByUser() {
-    this.postService.fetchFiles('attaches', this.authService.loggedInUser._id).subscribe((f) => {
-      this.files = f;
-    });
   }
 
   addProfilePic() {
@@ -403,7 +401,7 @@ export class MyProfileComponent implements OnInit {
 
       await Storage.vault.put(fileName, this.selectedProfilePic, {
 
-        bucket: appConstants.fileS3Bucket,
+        bucket: environment.fileS3Bucket,
         path: 'avatar',
         level: 'public',
         contentType: this.selectedProfilePic.type,
@@ -451,7 +449,7 @@ export class MyProfileComponent implements OnInit {
       const fileName = fileNameSplitArray[0] + '-' + new Date().toISOString() + '.' + fileExt;
       await Storage.vault.put(fileName, this.selectedCoverPic, {
 
-        bucket: appConstants.fileS3Bucket,
+        bucket: environment.fileS3Bucket,
         path: 'cover',
         level: 'public',
         contentType: this.selectedCoverPic.type,

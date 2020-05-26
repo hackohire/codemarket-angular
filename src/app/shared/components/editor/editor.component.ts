@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output, Input, OnDestroy, OnChanges, AfterViewInit, SimpleChanges, ViewChild, ElementRef, Inject, PLATFORM_ID, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input, OnDestroy, ViewChild, ElementRef, Inject, PLATFORM_ID, AfterViewInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { appConstants } from '../../constants/app_constants';
 import { FormGroup, FormControl } from '@angular/forms';
@@ -13,6 +13,7 @@ import { Subscription } from 'rxjs/internal/Subscription';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { of } from 'rxjs';
 import { map, share, tap } from 'rxjs/operators';
+import { CustomUploadAdapter } from './FileUploader';
 
 @Component({
   selector: 'app-editor',
@@ -20,24 +21,63 @@ import { map, share, tap } from 'rxjs/operators';
   styleUrls: ['./editor.component.scss'],
   // encapsulation: ViewEncapsulation.ShadowDom
 })
-export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit {
+export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
 
   isHandset: boolean;
 
-  // fileExtensions = AttachesTool.EXTENSIONS;
+  @Input() post: Post; /** post for view mode */
 
-  tinyMCEApi = environment.tiny_api;
+  editor: any
 
-  editor: any;
-  of = of;
+  ckEditorUserToken: string;
+  webSocketUrl = environment.ckEditor.ws;
+  uploadUrl: 'https://71258.cke-cs.com/easyimage/upload/';
+
+  @Input() realTime = false;
+  @Input() role = 'coemmentator';
+
+  // Note that Angular refs can be used once the view is initialized so we need to create
+  // these containers and use in the above editor configuration to workaround this problem.
+  public sidebar = null;
+  public presenceList = null;
+
+  public model = {
+    editorData: ''
+  };
+
+  public ckEditor = null;
+
   selectedBlockIndex: number;
   isPlatformBrowser = false;
-  @Input() post: Post; /** post for view mode */
+
   @Input() companyPostId: string;
   @Input() userReferenceId: string;
   @Input() id: string;
-  @Input() readOnly = false; /** read only mode */
-  @Input() html: string;
+
+  /** read only mode */
+  __readOnly = false;
+  @Input()
+  set readOnly(h) {
+    this.__readOnly = h;
+    /** If editting mode for comments set the toolbar */
+    if (!h && this.ckEditorRef && this.ckEditorRef.editorInstance) {
+      this.setToolbar(this.ckEditorRef.editorInstance);
+    }
+  }
+  get readOnly() {
+    return this.__readOnly;
+  }
+
+
+  @Input()
+  set html(h) {
+    this.model.editorData = h;
+  }
+  get html() {
+    return this.model.editorData;
+  }
+
+  of = of;
 
   _data: any[];
   @Input() data: any[];
@@ -46,17 +86,21 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
   @Input() commentType: string;
   @Output() output: EventEmitter<any> = new EventEmitter(); /** Emitting data with user interactions */
   @Input() importArticleSubscription = false;
+
   @ViewChild('editorRef', { static: false }) editorRef: ElementRef;
+  @ViewChild('ckEditorRef', { static: false }) ckEditorRef;
   @ViewChild('editorViewRef', { static: true }) editorViewRef: ElementRef;
 
+  @ViewChild('sidebar', { static: true }) private sidebarContainer?: ElementRef<HTMLDivElement>;
+  @ViewChild('presenceList', { static: true }) private presenceListContainer?: ElementRef<HTMLDivElement>;
   @Output() showComments: EventEmitter<{ block: any }> = new EventEmitter();
 
   subscriptions$ = new Subscription();
 
   @Input() editorStyle = {
-    background: '#eff1f570',
-    'word-break': 'break-word',
-    padding: '15px',
+    // background: '#eff1f570',
+    // 'word-break': 'break-word',
+    // padding: '15px',
     // border: 'dotted #ececec'
   };
 
@@ -78,6 +122,15 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
     private breakpointObserver: BreakpointObserver,
   ) {
     this.isPlatformBrowser = isPlatformBrowser(this._platformId);
+
+    if (this.isPlatformBrowser) {
+      const DocumentEditor = require('src/assets/js/ckeditor');
+      this.ckEditor = DocumentEditor;
+    }
+
+    /** Side bar for comments & presenceList for online users */
+    this.sidebar = this.isPlatformBrowser && this.realTime ? document.createElement('div') : null;
+    this.presenceList = this.isPlatformBrowser && this.realTime ? document.createElement('div') : null;
   }
 
   ngOnInit() {
@@ -87,44 +140,93 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
 
     this.subscriptions$.add(
       this.breakpointObserver.observe(Breakpoints.Handset)
-      .pipe(
-        map(result => result.matches),
-        tap(result => this.isHandset = result),
-        share()
-      ).subscribe()
+        .pipe(
+          map(result => result.matches),
+          tap(result => this.isHandset = result),
+          share()
+        ).subscribe()
+    );
+
+    this.subscriptions$.add(
+      this.authService.loggedInUser$.subscribe(async (u) => {
+        if (u && !this.ckEditorUserToken && this.realTime) {
+          this.authService.generateCkEditorToken({ name: u.name, _id: u._id, email: u.email, avatar: this.s3FilesBucketURL + u.avatar }, this.role).toPromise().then(t => {
+            this.ckEditorUserToken = t;
+            // this.ckEditor.update();
+          });
+        }
+      })
     );
   }
 
-  ngAfterViewInit(): void {
-    /** Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
-     * Add 'implements AfterViewInit' to the class.
-     */
-
-    if (!this.readOnly) {
-      // this.initiateEditor();
+  public ngAfterViewInit() {
+    if (!this.sidebarContainer || !this.presenceListContainer) {
+      // throw new Error('Div containers for sidebar or presence list were not found');
     }
 
-    /** Get all the code elements from DOM and highlight them as code snippets using highlight.js */
-    if (this.editorViewRef && isPlatformBrowser(this._platformId) && this.editorViewRef.nativeElement) {
-      // this.editorViewRef.nativeElement.querySelectorAll('pre code').forEach((block: HTMLElement) => {
-      //   this._hljs.highlightBlock(block);
-      // });
-
-      /** Work Around For Old Editro */
-      // this.editorUI = this.html ? this.html : this.data && this.data.length ? this.editorViewRef.nativeElement.innerHTML : '';
-      // this.html = this.html ? this.html : this.data && this.data.length ? this.editorViewRef.nativeElement.innerHTML : '';
+    if (this.realTime) {
+      if (this.sidebarContainer && this.sidebar.nativeElement) {
+        this.sidebarContainer.nativeElement.appendChild(this.sidebar);
+      }
+      if (this.presenceListContainer && this.presenceListContainer.nativeElement) {
+        this.presenceListContainer.nativeElement.appendChild(this.presenceList);
+      }
     }
-    // this.zoomInZoomOutForImages();
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
   }
 
   ngOnDestroy() {
-    // if (this.editor && this.editor.clear) {
-    //   this.editor.destroy();
-    // }
     this.subscriptions$.unsubscribe();
+  }
+
+  /** When the editor is ready */
+  public onReady(editor, sidebar?) {
+    // if (!this.readOnly || this.role === 'commentator' || this.role === 'writer') {
+    this.setToolbar(editor);
+    // }
+    this.refreshDisplayMode(editor, sidebar);
+  }
+
+  setToolbar(editor) {
+    /** Show the toolbar */
+
+    editor.ui.getEditableElement().parentElement.insertBefore(
+      editor.ui.view.toolbar.element,
+      editor.ui.getEditableElement()
+    );
+  }
+
+  refreshDisplayMode = (editor, sidebar) => {
+    if (this.ckEditorUserToken) {
+      editor.config.set('toolbar', {items: ['comment']});
+      this.setToolbar(editor);
+      const annotations = editor.plugins.get('Annotations');
+      const sidebarElement = sidebar;
+      if (annotations) {
+        sidebarElement.classList.remove('hidden');
+        sidebarElement.classList.add('narrow');
+        annotations.switchTo('narrowSidebar');
+      }
+      // if (window.innerWidth < 1070) {
+      //   sidebarElement.classList.remove('narrow');
+      //   sidebarElement.classList.add('hidden');
+      //   annotations.switchTo('inline');
+      // } else if (window.innerWidth < 1300) {
+      //   sidebarElement.classList.remove('hidden');
+      //   sidebarElement.classList.add('narrow');
+      //   annotations.switchTo('narrowSidebar');
+      // } else {
+      //   sidebarElement.classList.remove('hidden', 'narrow');
+      //   annotations.switchTo('wideSidebar');
+      // }
+    }
+  }
+
+  myCustomUploadAdapterPlugin(editor) {
+    console.log(editor.plugins);
+    editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
+      // Configure the URL to the upload script in your back-end here!
+      return new CustomUploadAdapter(loader);
+    };
   }
 
   initializeCommentForm(p) {
@@ -135,12 +237,6 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
       blockSpecificComment: new FormControl(true),
       blockId: new FormControl(''),
     });
-    if (this.companyPostId) {
-      this.commentForm.addControl('companyReferenceId', new FormControl(this.companyPostId));
-    }
-    if (this.userReferenceId) {
-      this.commentForm.addControl('userReferenceId', new FormControl(this.userReferenceId));
-    }
   }
 
   async addComment(blockId: string, addCommentEditor: EditorComponent) {
@@ -177,10 +273,14 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges, AfterViewI
   //   // this.commentsList = this.commentsList.filter(c => c._id !== id);
   // }
 
-  gistFrame(url: string) {
-    const template = `<html><body><style type="text/css">.gist {overflow:auto;} .gist .gist-file .gist-data { max-height: 86vh; }</style><script src="gistSrc"></script></body></html>`;
-    const replaced = template.replace('gistSrc', url + '.js');
-    return replaced;
+  generateToken = () => {
+    return new Promise((res, rej) => {
+      return res(this.ckEditorUserToken);
+    });
+  }
+
+  autosave = (editor) => {
+    return this.postService.updatePostContent({ descriptionHTML: editor.getData(), _id: this.post._id }).toPromise();
   }
 
 }

@@ -24,7 +24,7 @@
 
 .mat-toolbar {
   position: sticky;
-  background: #f2f9ff;
+  background: #f5f5f5;
   color: black;
   top: 0;
   z-index: 10;
@@ -59,6 +59,15 @@
 //   margin-top: 7px;
 //   box-shadow: none;
 // }
+
+.brand-logo {
+  padding: 11px 0 12px;
+  max-width: 220px;
+}
+
+.btn {
+  box-shadow: none !important;
+}
 
 @media (min-width: 991px) {
   /* width */
@@ -99,15 +108,15 @@
     left: 0;
   }
   .NavBarBox {
-    padding: 5px 0 15px 0;
+    padding: 10px 0;
     border-bottom: 1px solid #ccc;
   }
   .NavBarBox > div:nth-of-type(1) {
     display: none !important;
   }
   .brand-logo {
-    margin: 0 15% 10px;
-    height: 56px;
+    max-width: 55%;
+    margin-right: 7%;
   }
 }
 

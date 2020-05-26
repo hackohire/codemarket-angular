@@ -51,11 +51,11 @@
                         {{details?.createdAt | date}}</p>
                     <p *ngIf="details?.createdBy" style="text-align: center; line-height: 18px;">Creator: <a
                             target="_blank"
-                            [href]="'/'+ 'dashboard' + '/' + 'profile' + '/' + details?.createdBy?._id">{{details?.createdBy?.name}}</a>
+                            [href]="'profile' + '/' + details?.createdBy?.slug">{{details?.createdBy?.name}}</a>
                     </p>
                     <p *ngIf="details?.owners?.length" style="text-align: center; line-height: 18px;">Owners: <a
                             *ngFor="let o of details?.owners; let last=last;" target="_blank"
-                            [href]="'/'+ 'dashboard' + '/' + 'profile' + '/' + o?._id">{{o?.name}}{{last ? '' : ', '}}</a>
+                            [href]="'profile' + '/' + o?.slug">{{o?.name}}{{last ? '' : ', '}}</a>
                     </p>
 
                     <mde-popover #socialMediaLinks="mdePopover" [mdePopoverOverlapTrigger]="false"
@@ -86,7 +86,7 @@
                             </mat-form-field>
                             <a class="btn btn--vsm btn--round menu"
                                 (click)="updateSocialMedia(fb.value, tw.value, li.value, ig.value, yelp.value, cw.value)"
-                                style="color: white; background: #0674ec !important;">Update
+                                style="color: white; background: #00aeef !important;">Update
                             </a>
                         </div>
                     </mde-popover>
@@ -101,7 +101,7 @@
                         <div class="controls" *ngIf="details?.createdBy?._id === authService?.loggedInUser?._id">
                             <a mat-button style="background-color: #ff00007a;" (click)="removeCover();"
                                 class="save">Remove</a>
-                            <a mat-button style="background-color: #0674ec" *ngIf="!details?.cover"
+                            <a mat-button style="background-color: #00aeef" *ngIf="!details?.cover"
                                 (click)="updateCover()" class="save">Upload
                                 Cover</a>
                         </div>
@@ -127,7 +127,7 @@
                         (postTypeClick)="selectMainCategory($event);" (plusButtonClick)="redirectToAddPost($event)">
                     </app-post-type-nav>
                     <!-- start aside -->
-                    <!-- <app-add-post-menu style="color: #0674ec !important; margin-left: auto;"></app-add-post-menu> -->
+                    <!-- <app-add-post-menu style="color: #00aeef !important; margin-left: auto;"></app-add-post-menu> -->
                     <!-- <div class="docs-component-viewer-nav common-box-shadow"
                         style="margin-bottom: 20px; margin-top: 10px;">
                         <div class="docs-component-viewer-nav-content">
@@ -191,14 +191,14 @@
                             <mat-icon style="vertical-align: middle;">add</mat-icon>
                         </a>
                         <a class="btn btn--sm btn--round menu"
-                            style="color: #0674ec !important; background: white; margin: 10px 30px;"
+                            style="color: #00aeef !important; background: white; margin: 10px 30px;"
                             [routerLink]="['./']" [routerLinkActive]="'active-item'" [queryParams]="{view: 'q&a'}"
                             [queryParamsHandling]="'merge'">Add Question <mat-icon style="vertical-align: middle;">add
                             </mat-icon>
                         </a>
                         <a class="btn btn--sm btn--round menu"
                             *ngIf="auth?.loggedInUser?._id === details?.createdBy?._id"
-                            style="color: #0674ec !important; background: white; margin: 10px 30px;"
+                            style="color: #00aeef !important; background: white; margin: 10px 30px;"
                             (click)="openDialog()">Add Event
                             <mat-icon style="vertical-align: middle;">add</mat-icon>
                         </a>
@@ -212,7 +212,7 @@
                         <div class="col-md-12 comment-form-area" style="padding: 0 15px;">
                             <div class="media comment-form">
                                 <div class="media-left">
-                                    <a [routerLink]="['/', 'dashboard', 'profile', authService?.loggedInUser?._id ]">
+                                    <a [routerLink]="['profile', authService?.loggedInUser?.slug ]">
                                         <img class="author_avatar_comment" style="height: 45px; width:45px;"
                                             [src]="authService?.loggedInUser?.avatar ? ((s3FilesBucketURL + authService?.loggedInUser?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
                                             alt="Commentator Avatar">
@@ -315,7 +315,7 @@
                                     </div>
 
                                     <div class="author">
-                                        <a [routerLink]="['/', 'dashboard', 'profile', details?.createdBy?._id ]">
+                                        <a [routerLink]="['profile', details?.createdBy?.slug ]">
                                             <h4>{{details?.createdBy?.name}}</h4>
                                         </a>
                                         <!-- <button
@@ -354,7 +354,7 @@
 
                                     <div class="author-btn">
                                         <a (editPost)="postService?.editPost(details)"
-                                            [routerLink]="['/', 'dashboard', 'profile', details?.createdBy?._id ]"
+                                            [routerLink]="['profile', details?.createdBy?.slug ]"
                                             class="btn btn--sm btn--round">View Profile</a>
                                         <!-- <a href="#" class="btn btn--sm btn--round">Message</a> -->
                                     </div>
@@ -421,7 +421,7 @@
                                                 </div>
                                                 <div class="autor__info">
                                                     <a
-                                                        [routerLink]="['/', 'dashboard', 'profile', userInterested?._id ]">
+                                                        [routerLink]="['profile', userInterested?.slug ]">
                                                         <p class="name">
                                                             {{userInterested?.name}}
                                                         </p>
@@ -538,7 +538,7 @@
                                         <div class="media">
                                             <div class="media-left">
 
-                                                <a [routerLink]="['/', 'dashboard', 'profile', a?.createdBy?._id ]">
+                                                <a [routerLink]="['profile', a?.createdBy?.slug ]">
                                                     <img class="author_avatar_comment"
                                                         [src]="a?.createdBy?.avatar ? ((s3FilesBucketURL + a.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar"
                                                         alt="Commentator Avatar">
@@ -548,7 +548,7 @@
                                                 <div>
                                                     <div class="media-heading">
                                                         <a
-                                                            [routerLink]="['/', 'dashboard', 'profile', a?.createdBy?._id ]">
+                                                            [routerLink]="['profile', a?.createdBy?.slug ]">
                                                             <h4>{{a?.createdBy?.name }}</h4>
                                                         </a>
                                                         <span>{{fromNow(a?.createdAt)}}</span>

@@ -144,7 +144,7 @@
     <!-- Add Content Here -->
     <router-outlet></router-outlet>
 
-    <footer class="footer-area footer--light" style="background: #eee;">
+    <footer *ngIf="!hideFooter" class="footer-area footer--light" style="background: #eee;">
       <div class="mini-footer" style="padding-bottom: 15px;">
         <div class="container">
 

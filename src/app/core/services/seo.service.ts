@@ -53,7 +53,7 @@ export class SeoService {
     this.setTwitterCard(appConstants.SEO.twitter_card_large);
     this.setTwitterSiteCreator(appConstants.SEO.title);
     if (seo) {
-      const description: any = seo.description && seo.description.length ? seo.description.find(d => d.type === 'header' || d.type === 'paragraph') : null;
+      const description: any = seo.descriptionHTML && seo.descriptionHTML ? seo.descriptionHTML : null;
 
       const jsonLd = this.getjsonDLObject('Website', {
         name: seo.name,
@@ -63,7 +63,7 @@ export class SeoService {
 
       const seoSocialShareData: SeoSocialShareData = {
         title: seo.name,
-        description: description && description.data.text ? description.data.text : seo.name,
+        description: seo.descriptionHTML && seo.descriptionHTML ? seo.descriptionHTML : seo.name,
         image: appConstants.SEO.logo_url,
         author: seo.createdBy.name,
         url: isPlatformBrowser(this.platformId) ? window.location.href : '',
@@ -90,7 +90,8 @@ export class SeoService {
 
     /** Set Meta Tags particulary for Post  */
     setMetaTagsForPost(p) {
-      const description: any = p.description && p.description.length ? p.description.find(d => d.type === 'header' || d.type === 'paragraph') : null;
+      const description: any = p.descriptionHTML && p.descriptionHTML ? p.descriptionHTML : null;
+
       const image: any = p.description && p.description.length ? p.description.find(d => d.type === 'image') : '';
       this.setTwitterCard(appConstants.SEO.twitter_card_large);
       this.setTwitterSiteCreator(appConstants.SEO.title);

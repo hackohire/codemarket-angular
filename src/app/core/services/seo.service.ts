@@ -105,7 +105,7 @@ export class SeoService {
           name: p.createdBy.name,
         }, undefined),
         headline: p.name,
-        description: description && description.data.text ? description.data.text : p.name,
+        description: description ? description : p.name,
         image: image && image.data.file.url ? image.data.file.url : appConstants.SEO.logo_url,
         // dateCreated: p.createdAt,
         // datePublished: p.createdAt,
@@ -114,7 +114,7 @@ export class SeoService {
       this.setJsonLDData(jsonLd);
       const seoData = {
         title: p.name,
-        description: description && description.data.text ? description.data.text : p.name,
+        description: description ? description : p.name,
         image: image && image.data.file.url ? image.data.file.url : appConstants.SEO.logo_url,
         url: isPlatformBrowser(this.platformId) ? window.location.href : '',
         type: 'article',

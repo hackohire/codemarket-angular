@@ -283,4 +283,9 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
     return this.postService.updatePostContent({ descriptionHTML: editor.getData(), _id: this.post._id }).toPromise();
   }
 
+  allowUsersEdit = () => {
+    const loggedInUser = this.authService.loggedInUser;
+    return loggedInUser && loggedInUser._id && this.post && this.post._id && (loggedInUser._id === this.post.createdBy._id || this.post.collaborators.find(c => c._id === loggedInUser._id));
+  }
+
 }

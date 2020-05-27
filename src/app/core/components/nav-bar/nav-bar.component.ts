@@ -14,6 +14,7 @@ import { PostType } from '../../../shared/models/post-types.enum';
 import { MessageService } from '../../../shared/services/message.service';
 import { PostService } from '../../../shared/services/post.service';
 import { appConstants } from '../../../shared/constants/app_constants';
+import { Post } from '../../../shared/models/post.model';
 
 @Component({
   selector: 'app-nav-bar',
@@ -22,12 +23,15 @@ import { appConstants } from '../../../shared/constants/app_constants';
 })
 export class NavBarComponent implements OnInit, OnDestroy {
 
-  @ViewChild('lr', {static: false}) lr: MatAnchor;
+  @ViewChild('lr', { static: false }) lr: MatAnchor;
   postTypes = PostType;
 
   postTypesArray = appConstants.postTypesArray;
 
   hideFooter = false;
+
+  listOfConnectedPosts: { posts: Post[], total?: number } = { posts: [] };
+  totalConnectedPosts: number;
 
   loggedInUser: User;
 
@@ -35,7 +39,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
     .pipe(
       map(result => result.matches),
       share()
-  );
+    );
 
   cartListLength: Observable<number>;
 
@@ -49,25 +53,27 @@ export class NavBarComponent implements OnInit, OnDestroy {
     private dialog: MatDialog,
     public messageService: MessageService,
     public postService: PostService
-    ) {
+  ) {
 
-      this.subscription.add(
-        this.router.events.pipe(
-          filter((e) => (e instanceof NavigationEnd)),
-          tap((r: NavigationEnd) => {
-            console.log(r.url.includes('post'));
-            this.hideFooter = r.url.includes('post');
-          }))
-          .subscribe()
-      );
+    this.subscription.add(
+      this.router.events.pipe(
+        filter((e) => (e instanceof NavigationEnd)),
+        tap((r: NavigationEnd) => {
+          console.log(r.url.includes('post'));
+          this.hideFooter = r.url.includes('post');
+        }))
+        .subscribe()
+    );
   }
 
   ngOnInit() {
     this.subscription.add(
-      this.authService.loggedInUser$.subscribe(u => {
+      this.authService.loggedInUser$
+      .subscribe(u => {
         if (u) {
           // this.ref.detach();
-          this.loggedInUser = {...u};
+          this.loggedInUser = { ...u };
+          this.getConnectedPosts(u);
           // this.ref.detectChanges();
         } else {
           this.loggedInUser = u;
@@ -85,14 +91,28 @@ export class NavBarComponent implements OnInit, OnDestroy {
   }
 
   login() {
-      // const dialogRef = this.dialog.open(AuthDialogComponent, {
-      //   // panelClass: 'no-padding',
-      // });
+    // const dialogRef = this.dialog.open(AuthDialogComponent, {
+    //   // panelClass: 'no-padding',
+    // });
 
-      // dialogRef.afterClosed().subscribe(result => {
-      //   console.log('The dialog was closed');
-      // });
+    // dialogRef.afterClosed().subscribe(result => {
+    //   console.log('The dialog was closed');
+    // });
     // this.authService.login();
+  }
+
+  getConnectedPosts(user) {
+    this.postService.getAllPosts(
+      {
+        pageNumber: 1, limit: 10,
+        sort: { order: '' }
+      }, '', '', '',
+      user._id
+    ).subscribe((u) => {
+      this.listOfConnectedPosts.posts = u.posts;
+      this.totalConnectedPosts = u.total;
+    });
+
   }
 
   logout() {

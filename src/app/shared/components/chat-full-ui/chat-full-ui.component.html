@@ -1,6 +1,6 @@
 <section id="chat-full-ui">
-  <div class="row chat-container">
-    <div class="col-md-4 col-lg-4 col-sm-12 pr-0">
+  <div class="row m-0 chat-container">
+    <div class="col-md-12 col-lg-12 col-sm-12 pr-0">
       <!-- <div class="chat-list-header">
         <div class="row">
           <div class="col-3">
@@ -15,16 +15,16 @@
         </div>
       </div> -->
       <div class="post-list">
-        <div class="card-header">
+        <!-- <div class="card-header">
           <div class="input-group">
             <input type="text" placeholder="Search..." name="" class="form-control search">
             <div class="input-group-prepend">
               <span class="input-group-text search_btn"><i class="float-right material-icons">search</i></span>
             </div>
           </div>
-        </div>
+        </div> -->
         <div *ngFor="let post of postList let i=index;">
-          <div class="row post-card" [ngClass]="{'active-chat': post.isActive === true}" (click)="openPostChat(i)">
+          <div class="row post-card" [ngClass]="{'active-chat': post.isActive === true}" (click)="postService.redirectToPostDetails(post)">
             <div class="col-3 p-0" [ngClass]="{'p-1': post.isActive === true}">
               <img class="chat-list-avatar" [src]="post.createdBy.avatar ? ((s3FilesBucketURL + post.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar" />
             </div>
@@ -43,7 +43,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-8 col-lg-8 col-sm-12 pl-0">
+    <div *ngIf="false" class="col-md-8 col-lg-8 col-sm-12 pl-0">
       <div *ngIf="loadingMessage || selectedPost" class="chat-list-header">
         <div class="row">
           <div class="col-11 pl-0 vertical-align-center">

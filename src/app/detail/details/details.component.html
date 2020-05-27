@@ -21,7 +21,7 @@
     <!--============================================
         START SINGLE POST DESCRIPTION AREA
     ==============================================-->
-    <section class="single-product-desc">
+    <section class="single-product-desc bg-white">
         <div class="container">
             <div class="row">
                 <div class="col-lg-0">
@@ -44,9 +44,9 @@
                         </div>
                     </div> -->
                 </div>
-                <div *ngIf="!showConnectedPosts" [ngClass]="selectedBlock ? 'col-lg-6 col-md-6' : 'col-lg-12 col-md-12'" style="padding: 0;">
+                <div *ngIf="!showConnectedPosts" [ngClass]="selectedBlock ? 'col-lg-6 col-md-6' : 'col-lg-12 col-md-12'">
 
-                    <div class="item-info">
+                    <div class="item-info" style="box-shadow: none; border-radius: 0;">
                         <div>
                             <div class="tab-pane fade show product-tab active" id="product-details">
                                 <article>
@@ -59,8 +59,6 @@
                                         [role]="'writer'"
                                         [id]="'details-editor'" [html]="details?.descriptionHTML" [post]="details" [commentType]="'post'">
                                     </app-editor>
-
-                                    <br />
 
                                     <ng-template #noDescription>
                                         <span>No Description</span>
@@ -192,7 +190,7 @@
 
 
 <ng-template #addCommentTemplate let-cDetails="details">
-    <div style="background: white;">
+    <div style="background: white;border: 1px solid #c4c4c4;">
         <div class="tab-pane fade show product-tab">
             <div class="thread">
                 <ul class="media-list thread-list" style="list-style: none;">

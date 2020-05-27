@@ -16,7 +16,7 @@
                 <app-editor [id]="editorId" #addCommentEditor
                     [data]="commentForm?.get('text')?.value"
                     [html]="commentForm?.get('text')?.value"
-                    [editorStyle]="{padding: '0 15px', 'border-radius': '19px', background: '#f2f3f5', border: 'solid 0.5px rgb(236, 236, 236)'}">
+                    [editorStyle]="{padding: '0', 'border-radius': '0', background: '#ffffff', border: 'solid 0.5px rgb(236, 236, 236)', width: 'calc(100% - 5px)'}">
                 </app-editor>
 
                 <button style="float: right; margin-top: 10px;" type="button" class="btn btn--vsm btn--round"

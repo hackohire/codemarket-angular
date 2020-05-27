@@ -9,7 +9,7 @@
 
     <div *ngIf="(realTime && this.post?._id) && ckEditorUserToken">
         <div class="sample-sidebar">
-            <div class="row row-presence m-0">
+            <div class="row row-presence m-0" style="padding: 10px;">
                 <div #presenceList class='presence'></div>
             </div>
         </div>
@@ -28,7 +28,7 @@
                 </ckeditor>
             </div>
 
-            <div #sidebar [id]="ckEditorUserToken ? 'sidebar' : ''" class="sidebar"></div>
+            <!-- <div #sidebar [id]="ckEditorUserToken ? 'sidebar' : ''" class="sidebar"></div> -->
         </div>
 
     </div>
@@ -105,8 +105,7 @@
             <div class="media-body">
                 <div [formGroup]="commentForm" class="comment-reply-form">
                     <app-editor #addCommentEditor
-                        [editorStyle]="{padding: '0 15px', 'border-radius': '19px', background: '#f2f3f5', border: 'solid 0.5px rgb(236, 236, 236)'}"
-                        [id]="blockId" [placeholder]="'Add Comment'">
+                        [editorStyle]="{padding: '0', 'border-radius': '0', background: '#ffffff', border: 'solid 0.5px rgb(236, 236, 236)', width: 'calc(100% - 5px)'}" [id]="blockId" [placeholder]="'Add Comment'">
                     </app-editor>
 
                     <button type="button" style="float: right;" class="btn btn--vsm btn--round"

@@ -3347,13 +3347,23 @@ a {
 
 .breadcrumb-area .breadcrumb ul li a {
   line-height: initial;
+  font-size: 16px;
+  font-weight: 500;
 }
 
 .breadcrumb-area .page-title {
-  color: #fff;
-  font-weight: 500;
+  color: #000;
+  font-weight: 400;
   font-size: 30px;
-  text-transform: capitalize;
+  text-transform: none;
+  background: rgba(255, 255, 255, 0.3);
+  padding: 10px 15px;
+  margin: 10px 0;
+  border-radius: 6px;
+}
+
+.breadcrumb-area .page-title:focus {
+  outline: none;
 }
 
 .breadcrumb-area .breadcrumb {
@@ -9512,7 +9522,7 @@ a {
 }
 
 .comment-form-area {
-  padding: 30px;
+  padding: 20px;
 }
 
 .comment-form-area h4 {
@@ -9520,6 +9530,7 @@ a {
   font-size: 20px;
   line-height: 26px;
   padding-bottom: 20px;
+  margin-bottom: 0;
 }
 
 .comment-form-area .comment-form .media-left {

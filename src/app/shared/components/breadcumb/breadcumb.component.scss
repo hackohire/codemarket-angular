@@ -21,11 +21,12 @@
     color: white;
     padding: 0 10px;
     line-height: 28px;
-    margin-right: 10px;
-    font-size: 13px;
-    font-weight: 200;
-    -webkit-border-radius: 100px;
+    margin-left: 5px;
+    font-size: 14px;
+    font-weight: 500;
     border-radius: 100px;
+    letter-spacing: .5px;
+    text-transform: capitalize;
 
     img {
         border-radius: 50%;
@@ -45,15 +46,17 @@ ul.infos li {
 
 ul.infos li p {
     display: inline-block;
-    vertical-align: middle;
-    margin-right: -3px;
     margin: 0;
-    font-size: 15px;
-    vertical-align: top;
+    font-size: 16px;
     line-height: 36px;
+    font-weight: 500;
 }
 
 p.data-label:after {
     content: ":";
     margin-left: 4px
+}
+
+span:focus {
+    outline: none;
 }

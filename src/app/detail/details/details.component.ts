@@ -94,6 +94,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    /** Read the type of the post  */
     this.type = this.activatedRoute.snapshot.queryParams.type;
 
     this.commentId = this.activatedRoute.snapshot.queryParams['commentId'];
@@ -243,5 +244,17 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
   onChatClicked() {
     this.displayChatBox = true;
+  }
+
+  openVideoModel() {
+    this.dialog.open(VideoChatComponent, {
+      width: '550px',
+      data: { 
+        isSomeoneCalling: true, 
+        identity: `${this.authService.loggedInUser.name}_${this.authService.loggedInUser._id}`, 
+        room: this.postDetails._id
+      },
+      disableClose: true
+    });
   }
 }

@@ -344,34 +344,26 @@ export class AuthService {
     });
   }
 
-
-  filePickerCallback(cb, value, meta) {
-    const input = document.createElement('input');
-    input.setAttribute('type', 'file');
-    // input.setAttribute('accept', 'image/*');
-    input.onchange = (f) => {
-      console.log(f);
-      const file = input.files[0];
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => {
-        const fileNameSplitArray = file.name.split('.');
-        const fileExt = fileNameSplitArray.pop();
-        const fileName = fileNameSplitArray[0] + '-' + new Date().toISOString() + '.' + fileExt;
-
-        Storage.vault.put(fileName, file, {
-
-          bucket: environment.fileS3Bucket,
-
-          level: 'public',
-
-          contentType: file.type,
-        }).then((uploaded: any) => {
-          console.log('uploaded', uploaded);
-          cb(environment.s3FilesBucketURL + uploaded.key, { title: file.name });
-        });
-      };
-    };
-    input.click();
+  /** CKEditor Token Required to set for the realtime collaboration */
+  generateCkEditorToken(user: User, role: string) {
+    return this.apollo.mutate(
+      {
+        mutation: gql`
+        mutation generateCkEditorToken($user: UserInput!, $role: String) {
+          generateCkEditorToken(user: $user, role: $role)
+        }
+        `,
+        variables: {
+          user,
+          role
+        },
+        fetchPolicy: 'no-cache'
+      }
+    ).pipe(
+      map((d: any) => {
+        return d.data.generateCkEditorToken;
+      })
+    );
   }
+
 }

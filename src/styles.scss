@@ -38,10 +38,11 @@ form > * {
 }
 
 .auth-box {
-  background-color: #ececec; 
+  // background-color: #ececec; 
+  background-color: white; 
   padding: 15px;
   max-width: 500px;
-  min-width: 500px;
+  // min-width: 500px;
   border-radius: 10px;
 }
 
@@ -118,7 +119,7 @@ textarea {
 }
 
 .mat-form-field-wrapper {
-  padding: 0;
+  // padding: 0;
 }
 
 mat-icon,
@@ -9277,7 +9278,7 @@ a {
 
 #product-details h1 + p,
 #product-details p:last-child {
-  margin-bottom: 62px;
+  // margin-bottom: 62px;
 }
 
 // #product-details img {
@@ -9312,7 +9313,7 @@ a {
 }
 
 #product-details ul {
-  padding-bottom: 55px;
+  // padding-bottom: 55px;
 }
 
 #product-details ul li:before {
@@ -9405,8 +9406,8 @@ a {
 }
 
 .thread .thread-list .single-thread .media-body p {
-  padding-top: 14px;
-  margin-bottom: 0;
+  // padding-top: 14px;
+  // margin-bottom: 0;
 }
 
 .thread .thread-list .single-thread .depth-2 {

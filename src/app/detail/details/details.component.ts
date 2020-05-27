@@ -12,16 +12,12 @@ import { AuthService } from 'src/app/core/services/auth.service';
 import { CommentService } from 'src/app/shared/services/comment.service';
 import { environment } from 'src/environments/environment';
 import { selectSelectedPost } from 'src/app/core/store/selectors/post.selectors';
-import { SetSelectedPost } from 'src/app/core/store/actions/post.actions';
 import { Post } from 'src/app/shared/models/post.model';
 import { MatDialog, MatPaginator } from '@angular/material';
 import { VideoChatComponent } from 'src/app/video-chat/video-chat.component';
-import Peer from 'peerjs';
 import { PostService } from '../../shared/services/post.service';
 import { SweetalertService } from '../../shared/services/sweetalert.service';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
-import { Company } from '../../shared/models/company.model';
-import { User } from '../../shared/models/user.model';
 import { appConstants } from '../../shared/constants/app_constants';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
@@ -58,7 +54,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
   postForm: FormGroup;
   commentsList: any[];
   collaborators: string[];
-  peer: Peer;
+  // peer: Peer;
 
   commentId: string;
   blockId: string;
@@ -98,17 +94,6 @@ export class DetailsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    /** Read the type of the post  */
-    this.commentsList = [{
-      author: '123_1',
-      body: 'Hello, How are you ?'
-    }, {
-      author: '123_2',
-      body: 'Fine, How are you ?'
-    },{
-      author: '123_1',
-      body: 'Fine, Thanks!'
-    }];
     this.type = this.activatedRoute.snapshot.queryParams.type;
 
     this.commentId = this.activatedRoute.snapshot.queryParams['commentId'];
@@ -130,14 +115,6 @@ export class DetailsComponent implements OnInit, OnDestroy {
           this.details$ = of(p);
           this.initializeCommentForm(p, 'post');
           this.postFormInitialization(p);
-          /** SHow company in breadcrumb */
-          // if (p.companies && p.companies.length) {
-          //   this.breadcumb.path.unshift({ name: p.type });
-          // }
-
-          /** Subscribe to loggedinuser, once loggedInUse is got, Check if the loggedInUder is
-           * in the list of attendess or not
-           **/
 
           this.breadcumb = {
             path: [
@@ -147,19 +124,6 @@ export class DetailsComponent implements OnInit, OnDestroy {
               }
             ]
           };
-
-          this.subscription$.add(
-            this.authService.loggedInUser$.subscribe((user) => {
-              if (this.postDetails
-                && this.postDetails.usersAttending
-                && this.postDetails.usersAttending.length
-                && this.postDetails.usersAttending.find((u: User) => u._id === user._id)) {
-                this.isUserAttending = true;
-              } else {
-                this.isUserAttending = false;
-              }
-            })
-          );
 
           this.postService.getCountOfAllPost('', '',
           {
@@ -175,68 +139,10 @@ export class DetailsComponent implements OnInit, OnDestroy {
             }
           });
 
-        } else if (this.postDetails && this.postDetails._id === postId) {
-          /** Comes inside this block, only when we are already in a post details page, and by using searh,
-           * we try to open any other post detials page
-           */
-        } else {
-          // this.store.dispatch(GetPostById({ postId }));
-          // this.details$ = this.store.select(selectSelectedPost);
         }
 
       })
     ).subscribe()
-    );
-  }
-
-  async rsvpEvent(eventId) {
-    if (!this.authService.loggedInUser) {
-      /** calling this method to set current url as redirectURL after user is logged In */
-      await this.authService.checkIfUserIsLoggedIn(true);
-    } else {
-      /** Make the API call to set the user in the list of attendees */
-      this.subscription$.add(
-        this.postService.rsvpEvent(eventId).pipe(
-          tap(d => console.log(d))
-        ).subscribe({
-          next: (d) => {
-            console.log(d);
-            /** If user doesn't have subscription, rediret to membership page */
-            if (d && !d.validSubscription) {
-              this.router.navigate(['/', { outlets: { main: ['membership'] } }]);
-            }
-
-            /** Check i user is in the list of attendees */
-            if (d && d.usersAttending && d.usersAttending.length) {
-              this.isUserAttending = true;
-              this.postDetails.usersAttending = d.usersAttending;
-              this.store.dispatch(SetSelectedPost({ post: this.postDetails }));
-              const isLoggedInUserAttending = d.usersAttending.find((u) => u._id === this.authService.loggedInUser._id);
-              if (isLoggedInUserAttending) {
-                this.successfulRSVP.show();
-              }
-            }
-          },
-          error: (e) => console.log(e)
-        })
-      );
-    }
-  }
-
-  cancelRSVP(eventId: string) {
-    this.subscription$.add(
-      this.postService.cancelRSVP(eventId).subscribe((e) => {
-        console.log(e);
-        if (e && e.usersAttending && e.usersAttending) {
-          const isCustomerGoing = e.usersAttending.find(u => u._id === this.authService.loggedInUser._id);
-          if (!isCustomerGoing) {
-            this.isUserAttending = false;
-            this.postDetails.usersAttending = e.usersAttending;
-            this.store.dispatch(SetSelectedPost({ post: this.postDetails }));
-            this.sweetAlertService.success('Successful Cancel RSVP Request', '', 'success');
-          }
-        }
-      })
     );
   }
 
@@ -279,9 +185,6 @@ export class DetailsComponent implements OnInit, OnDestroy {
     return moment(d).isValid() ? d : new Date(+d);
   }
 
-
-
-
   fromNow(date) {
     const d = moment(date).isValid() ? date : new Date(+date);
     return moment(d).fromNow();
@@ -290,7 +193,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
   openDialog(authorId?: string): void {
     this.dialog.open(VideoChatComponent, {
       width: '550px',
-      data: { authorId, peer: this.peer },
+      // data: { authorId, peer: this.peer },
       disableClose: true
     });
   }

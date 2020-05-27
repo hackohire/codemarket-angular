@@ -379,9 +379,6 @@ export class MyProfileComponent implements OnInit {
   }
 
   fetchFilesUploadedByUser() {
-    this.postService.fetchFiles('attaches', this.authService.loggedInUser._id).subscribe((f) => {
-      this.files = f;
-    });
   }
 
   addProfilePic() {

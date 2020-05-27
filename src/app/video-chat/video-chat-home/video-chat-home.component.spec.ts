@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddEventComponent } from './add-event.component';
+import { VideoChatHomeComponent } from './video-chat-home.component';
 
-describe('AddEventComponent', () => {
-  let component: AddEventComponent;
-  let fixture: ComponentFixture<AddEventComponent>;
+describe('VideoChatHomeComponent', () => {
+  let component: VideoChatHomeComponent;
+  let fixture: ComponentFixture<VideoChatHomeComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddEventComponent ]
+      declarations: [ VideoChatHomeComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AddEventComponent);
+    fixture = TestBed.createComponent(VideoChatHomeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

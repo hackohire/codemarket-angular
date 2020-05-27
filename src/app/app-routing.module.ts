@@ -6,6 +6,7 @@ import { AboutUsComponent } from './about-us/about-us.component';
 import { WebsiteComponent } from './website/website.component';
 import { EmailMarketingComponent } from './email-marketing/email-marketing.component';
 import { SocialMediaMarketingComponent } from './social-media-marketing/social-media-marketing.component';
+import { VideoChatHomeComponent } from './video-chat/video-chat-home/video-chat-home.component';
 // import { PostDataResolver } from './core/resolver';
 
 const routes: Routes = [
@@ -70,19 +71,6 @@ const routes: Routes = [
     // outlet: 'main',
   },
 
-  {
-    path: 'event',
-    loadChildren: () => import('./event/event.module').then(module => module.EventModule),
-    // outlet: 'main',
-  },
-
-  // {
-  //   path: 'team-skill',
-  //   loadChildren: () => import('./team-skill/teamskill.module').then(module => module.TeamskillModule),
-  //   outlet: 'main',
-  //   canLoad: [AuthGuard]
-  // },
-
 
   {
     path: 'membership',
@@ -112,13 +100,6 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'event/:slug',
-    loadChildren: () => import('./event/event-details/event-details.module').then(module => module.EventDetailsModule),
-    resolve: { seo: PostDataResolver },
-    data: { noReuse: false, setPostMeta: true },
-    pathMatch: 'full'
-  },
-  {
     path: 'company/:companyId',
     loadChildren: () => import('./companies/companies.module').then(module => module.CompaniesModule),
     data: { setPostMeta: true },
@@ -135,6 +116,11 @@ const routes: Routes = [
   {
     path: 'about-us',
     component: AboutUsComponent
+  },
+
+  {
+    path: 'video-chat',
+    component: VideoChatHomeComponent
   },
 
   {

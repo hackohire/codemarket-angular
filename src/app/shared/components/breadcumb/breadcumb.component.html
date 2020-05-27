@@ -14,73 +14,31 @@
                         </li>
                     </ul>
                     <div style="margin-left: auto;">
-
-                        <!-- <app-add-collaborators style="margin-right: 5px;" *ngIf="showAddCollaborators"
-                            [postDetails]="postDetails"></app-add-collaborators> -->
                         <app-add-assignee style="margin-right: 5px;" *ngIf="showAddAssignee"
                             [postDetails]="postDetails"></app-add-assignee>
 
-                        <a *ngIf="showImportButton" class="btn btn--vsm btn--round menu"
+                        <a *ngIf="false" class="btn btn--vsm btn--round menu"
                             style="color: #00aeef !important; background: white;" [mdePopoverTriggerFor]="importArticle"
                             mdePopoverTriggerOn="click">Import
                         </a>
-                        <!--
-                            <app-add-post-menu style="color: #00aeef !important; margin-left: auto;"></app-add-post-menu>
-                            -->
+
                         <a *ngIf="showEditPostDetails" class="btn btn--vsm btn--round menu"
                             style="color: #00aeef !important; background: white; margin-right: 5px;"
                             (click)="editPost.emit()">Edit <mat-icon style="vertical-align: middle;">edit</mat-icon>
                         </a>
-                        <!--
-                        <a *ngIf="postDetails?.type === 'event'" class="btn btn--sm btn--round menu"
-                            style="color: #00aeef !important; background: white;"
-                            [routerLink]="['/', 'event', 'add-event']">Add Event <mat-icon
-                                style="vertical-align: middle;">add</mat-icon>
-                        </a>
-                        <a *ngIf="companyDetails" class="btn btn--sm btn--round menu"
-                            style="color: #00aeef !important; background: white;"
-                            [state]="{companyDetails: companyDetails}" [routerLink]="['/', 'event', 'add-event']">Add
-                            Event <mat-icon style="vertical-align: middle;">add</mat-icon>
-                        </a>
-                        -->
-                        <!--
-                            <app-add-post-menu *ngIf="showMenu" [ngStyle]="{'color': color}" style="padding-left: 10px;"></app-add-post-menu>
-                        -->
-
-
 
                     </div>
                 </div>
-                <h1 style="margin-bottom: 0" [contentEditable]="inline" class="page-title" id="test" (blur)="!fromAddPost ? myFunction() : doNothing()"
+                <h1 style="margin-bottom: 0" [contentEditable]="allowUsersEdit() || inline" class="page-title" id="test" (blur)="!fromAddPost ? myFunction() : doNothing()"
                     (input)="onContentChange($event)">
                     {{postForm?.get('name')?.value ? title : !inline ? title : 'Untitled Document'}}
                 </h1>
+
                 <p *ngIf="displaySave">Saving...</p>
                 <div style="color: white;">
                     <div>
                         <ul class="row infos">
-                            <div class="col-md-6 col-sm-12">
-                                <li *ngIf="eventDate && eventDate?.length">
-                                    <p class="data-label">From</p>
-                                    <p class="info">
-                                        <mat-icon style="vertical-align: middle;">date_range</mat-icon>
-                                        {{eventDate[0] | date: 'EEEE, MMMM d, y, h:mm a' }}
-                                    </p>
-                                </li>
-                                <li *ngIf="eventDate && eventDate?.length">
-                                    <p class="data-label">To</p>
-                                    <p class="info">
-                                        <mat-icon style="vertical-align: middle;">date_range</mat-icon>
-                                        {{ eventDate[1] | date: 'EEEE, MMMM d, y, h:mm a'}}
-                                    </p>
-                                </li>
-
-                                <li *ngIf="postDetails?.location">
-                                    <p class="data-label">Location</p>
-                                    <p class="info" style="text-transform: capitalize;">
-                                        {{ postDetails?.location?.address }}
-                                    </p>
-                                </li>
+                            <div class="col-md-4 col-sm-12">
 
                                 <li *ngIf="postDetails?.email && postDetails?.emmail?.length">
                                     <p class="data-label">Email</p>
@@ -102,7 +60,7 @@
                                     <p class="info">
                                         <span class="tag" *ngFor="let t of postDetails?.tags">{{t?.name}}</span>
                                     </p>
-                                    <span style="margin: 7px 0 0 5px;" [mdePopoverTriggerFor]="addTagsPopover"
+                                    <span *ngIf="allowUsersEdit()" style="margin: 7px 0 0 5px;" [mdePopoverTriggerFor]="addTagsPopover"
                                         mdePopoverTriggerOn="click"><i class="fa fa-plus-square"
                                             aria-hidden="true"></i></span>
                                     <mde-popover #addTagsPopover="mdePopover" [mdePopoverOverlapTrigger]="false"
@@ -138,7 +96,7 @@
                                                 <img [src]="t?.avatar ? ((s3FilesBucketURL + t?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
                                                     alt="">{{t?.name}}</span>
                                         </a>
-                                        <span style="margin: 7px 0 0 5px;" [mdePopoverTriggerFor]="addCollaboratorsPopover"
+                                        <span *ngIf="allowUsersEdit()" style="margin: 7px 0 0 5px;" [mdePopoverTriggerFor]="addCollaboratorsPopover"
                                         mdePopoverTriggerOn="click"><i class="fa fa-plus-square"
                                             aria-hidden="true"></i></span>
 
@@ -166,7 +124,7 @@
                                                     alt="">{{t?.name}}</span>
                                         </a>
                                     </p>
-                                    <span style="margin: 7px 0 0 5px;" [mdePopoverTriggerFor]="addClientsPopover"
+                                    <span *ngIf="allowUsersEdit()" style="margin: 7px 0 0 5px;" [mdePopoverTriggerFor]="addClientsPopover"
                                         mdePopoverTriggerOn="click"><i class="fa fa-plus-square"
                                             aria-hidden="true"></i></span>
 
@@ -199,14 +157,35 @@
                                         {{ postDetails?.company?.name }}</p>
                                 </li>
 
-                                <!-- <li *ngIf="postDetails?.companies && postDetails?.companies?.length || fromAddPost"> -->
+                            </div>
+
+                            <div class="col-md-4 col-sm-12">
+                                <li *ngIf="postDetails?.createdBy">
+                                    <p class="data-label">Author</p>
+                                    <p class="info">
+                                        <a target="_blank"
+                                            [href]="'/' + 'profile' + '/' + postDetails?.createdBy?.slug">
+                                            <span class="tag">
+                                                <img [src]="postDetails?.createdBy?.avatar ? ((s3FilesBucketURL + postDetails?.createdBy?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                                                    alt="">{{postDetails?.createdBy?.name}}</span>
+                                        </a>
+                                    </p>
+                                </li>
+                                <li *ngIf="postDetails?.createdAt">
+                                    <p class="data-label">CreatedAt</p>
+                                    <p class="info">
+                                        <mat-icon style="vertical-align: middle;">date_range</mat-icon>
+                                        {{ postDetails?.createdAt | date: 'EEEE, MMMM d, y, h:mm a'}}
+                                    </p>
+                                </li>
+
                                 <li>
                                     <p class="data-label">Company</p>
                                     <p class="info" style="text-transform: capitalize; cursor: pointer;">
                                         <span *ngFor="let c of postDetails?.companies; let ei = index;"
                                             [routerLink]="['/', 'company', c?._id]">{{c?.name + (ei === postDetails?.companies?.length - 1 ? '' : ', ' )}}</span>
                                     </p>
-                                    <span style="margin: 7px 0 0 5px" [mdePopoverTriggerFor]="addCopmaniesPopover"
+                                    <span *ngIf="allowUsersEdit()" style="margin: 7px 0 0 5px" [mdePopoverTriggerFor]="addCopmaniesPopover"
                                         mdePopoverTriggerOn="click"><i class="fa fa-plus-square"
                                             aria-hidden="true"></i></span>
 
@@ -222,39 +201,9 @@
                                         </div>
                                     </mde-popover>
                                 </li>
+                            </div>
 
-                                <li *ngIf="postDetails?.cities && postDetails?.cities?.length">
-                                    <p class="data-label">Cities</p>
-                                    <p class="info"><span
-                                            *ngFor="let c of postDetails?.cities; let ei = index;">{{c?.name + (ei === postDetails?.cities?.length - 1 ? '' : ', ' )}}</span>
-                                    </p>
-                                </li>
-
-                                <li *ngIf="postDetails?.salaryRangeFrom">
-                                    <p class="data-label">Expected Salary</p>
-                                    <p class="info">
-                                        {{(postDetails?.salaryRangeFrom | currency: 'USD' : 'symbol' : '1.0-0') + 'k'}}
-                                        <!-- - -->
-                                        <!-- {{ (postDetails?.salaryRangeTo | currency: 'USD' : 'symbol' : '1.0-0') + 'k'}}</p> -->
-                                </li>
-                                <!-- <li *ngIf="postDetails?.createdAt">
-                                    <p class="data-label">CreatedAt</p>
-                                    <p class="info">
-                                        <a *ngFor="let t of postDetails?.collaborators" target="_blank"
-                                            [href]="'profile' + '/' + t?.slug">
-                                            <span class="tag">
-                                                <img [src]="t?.avatar ? ((s3FilesBucketURL + t?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
-                                                    alt="">{{t?.name}}</span>
-                                        </a>
-                                    </p>
-                                </li> -->
-                                <li *ngIf="postDetails?.createdAt">
-                                    <p class="data-label">CreatedAt</p>
-                                    <p class="info">
-                                        <mat-icon style="vertical-align: middle;">date_range</mat-icon>
-                                        {{ postDetails?.createdAt | date: 'EEEE, MMMM d, y, h:mm a'}}
-                                    </p>
-                                </li>
+                            <div class="col-md-4 col-sm-12">
                                 <li *ngIf="postDetails?.updatedAt">
                                     <p class="data-label">UpdatedAt</p>
                                     <p class="info">
@@ -262,24 +211,7 @@
                                         {{ postDetails?.updatedAt | date: 'EEEE, MMMM d, y, h:mm a'}}
                                     </p>
                                 </li>
-                            </div>
-
-                            <div class="col-md-6 col-sm-12">
-                                <li *ngIf="postDetails?.createdBy">
-                                    <p class="data-label">Author</p>
-                                    <p class="info">
-                                        <a target="_blank"
-                                            [href]="'/' + 'profile' + '/' + postDetails?.createdBy?.slug">
-                                            <span class="tag">
-                                                <img [src]="postDetails?.createdBy?.avatar ? ((s3FilesBucketURL + postDetails?.createdBy?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
-                                                    alt="">{{postDetails?.createdBy?.name}}</span>
-                                        </a>
-                                    </p>
-                                </li>
                                 <li *ngIf="showShareButtons">
-                                    <!-- <p class="data-label">Share</p> -->
-
-                                    <!-- <div class="social social--color--filled"> -->
                                     <ul class="social-media">
                                         <button mat-fab shareButton="facebook"
                                             [style.backgroundColor]="share?.prop?.facebook.color">
@@ -302,7 +234,10 @@
                                     </ul>
                                     <!-- </div> -->
                                 </li>
+                                
                             </div>
+
+
 
                         </ul>
 

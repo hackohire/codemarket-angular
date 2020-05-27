@@ -7,11 +7,10 @@
     =================================-->
 
     <app-breadcumb (editPost)="postService?.editPost(details)"
-        [showEditPostDetails]="(details?.createdBy?._id === authService?.loggedInUser?._id || collaborators.indexOf(authService?.loggedInUser?._id) >= 0) ? true : false"
         [showAddCollaborators]="details?.createdBy?._id === authService?.loggedInUser?._id ? true : false"
         [showShareButtons]="true" [showAddClients]="details?.createdBy?._id === authService?.loggedInUser?._id"
-        [postDetails]="postDetails" [title]="details?.name" [path]="breadcumb?.path" [eventDate]="details?.dateRange"
-        [postDetails]="details" [postForm]="postForm" [inline]="true">
+        [title]="details?.name" [path]="breadcumb?.path"
+        [postDetails]="details" [postForm]="postForm">
     </app-breadcumb>
 
     <!--================================
@@ -21,12 +20,12 @@
     <!--============================================
         START SINGLE POST DESCRIPTION AREA
     ==============================================-->
-    <section class="single-product-desc">
+    <section>
         <div class="container">
             <div class="row">
-                <div class="col-lg-2">
+                <div class="col-lg-0">
                     <!-- Based On the List Of Post Types -->
-                    <app-post-type-nav [selectedPostType]="selectedPostType"
+                    <app-post-type-nav *ngIf="false" [selectedPostType]="selectedPostType"
                      (postTypeClick)="selectedBlock = null; getConnectedPosts($event?.name); showConnectedPosts = true"
                      (plusButtonClick)="redirectToAddPost(details, $event)"
                      ></app-post-type-nav>
@@ -44,7 +43,10 @@
                         </div>
                     </div> -->
                 </div>
-                <div *ngIf="!showConnectedPosts" [ngClass]="selectedBlock ? 'col-lg-6 col-md-6' : 'col-lg-10 col-md-10'" style="padding: 0;">
+                <div class="col-lg-1">
+
+                </div>
+                <div *ngIf="!showConnectedPosts" [ngClass]="selectedBlock ? 'col-lg-6 col-md-6' : 'col-lg-10 col-md-10'">
 
                     <div class="item-info">
                         <div>
@@ -55,6 +57,8 @@
                                         [data]="details?.description"
                                         [commentsList]="commentService?.commentsList$ | async"
                                         [blockLevelComments]="false" [readOnly]="true"
+                                        [realTime]="true"
+                                        [role]="'writer'"
                                         [id]="'details-editor'" [html]="details?.descriptionHTML" [post]="details" [commentType]="'post'">
                                     </app-editor>
 
@@ -77,72 +81,9 @@
                 <!-- end /.col-md-8 -->
 
                 <div *ngIf="!showConnectedPosts" class="col-md-6 col-lg-4">
-                    <!-- <aside class="sidebar sidebar--single-product"> -->
-
                         <ng-container *ngTemplateOutlet="addBlockLevelCommentTemplate; context: {details: details, comments: (commentService?.commentsList$ | async)}">
                         </ng-container>
 
-
-                        <div class="sidebar-card card-pricing card--pricing2" *ngIf="details?.type !== 'dream-job' && false">
-
-                            <div class="purchase-button" *ngIf="details?.type === 'event'">
-                                <!-- <a href="#" class="btn btn--lg btn--round">Purchase Now</a> -->
-
-                                <h3 style="text-align: center;" *ngIf="isUserAttending; else eventRSVP"
-                                    (click)="cancelRSVP(details?._id)">
-                                    You are going
-                                    <button color="warn" mat-mini-fab
-                                        aria-label="Example icon-button with a heart icon">
-                                        <mat-icon>close</mat-icon>
-                                    </button></h3>
-                                <!-- <a
-                                    class="btn btn--lg btn--round cart-btn" style="padding: 12px;">
-                                    <h5>Cancel RSVP</h5>
-                                </a> -->
-                                <ng-template #eventRSVP>
-                                    <h3 style="text-align: center;" (click)="rsvpEvent(details?._id)">Are you going?
-                                        <button color="primary" mat-mini-fab
-                                            aria-label="Example icon-button with a heart icon">
-                                            <mat-icon>done</mat-icon>
-                                        </button></h3>
-
-                                    <!-- <mat-icon>yes</mat-icon> -->
-                                    <!-- <a (click)="rsvpEvent(details?._id)"
-                                        class="btn btn--lg btn--round cart-btn" style="padding: 12px;">
-                                        <h5></h5>
-                                    </a> -->
-                                </ng-template>
-                            </div>
-
-                        </div>
-
-                        <div class="author-card sidebar-card " *ngIf="details?.type === 'event' && false">
-                            <div class="card-title">
-                                <h4>Attendees: {{ details?.usersAttending?.length }}</h4>
-                                <br />
-
-                                <ng-container class="row" *ngFor="let attendee of details?.usersAttending">
-                                    <div class="col-md-12" style="margin-bottom: 10px;">
-                                        <div class="author_avatar_comment" style="vertical-align: middle;">
-                                            <img [src]="attendee?.avatar ? ((s3FilesBucketURL + attendee.avatar) | safe: 'resourceUrl') : anonymousAvatar"
-                                                alt="Presenting the broken author avatar :D">
-                                        </div>
-                                        <div class="autor__info">
-                                            <a [routerLink]="['profile', attendee?.slug ]">
-                                                <p class="name">
-                                                    {{attendee?.name}}
-                                                </p>
-                                            </a>
-                                            <!-- <p class="ammount">{{fromNow(pu?.createdAt)}}</p> -->
-                                        </div>
-                                    </div>
-
-                                </ng-container>
-                            </div>
-                        </div>
-
-                    <!-- </aside> -->
-                    <!-- end /.aside -->
                 </div>
                 <!-- end /.col-md-4 -->
 
@@ -174,7 +115,7 @@
         <!-- end /.container -->
 
         <!-- Start of chat box code -->
-        <!-- <app-chat-box [postDetails]="postDetails"></app-chat-box> -->
+        <!-- <app-chat-box [loggedInUser]="authService?.loggedInUser" [postDetails]="postDetails"></app-chat-box> -->
         <!-- End of chat box code -->
     </section>
     <!--===========================================
@@ -211,16 +152,6 @@
 
     </div>
 </ng-template>
-
-<swal #successfulRSVP title="RSVP Successful!" type="success" [showConfirmButton]="false">
-    <div *swalPartial class="alert alert-info">
-        <p>You have been successfully added in the list of Attendees</p>`
-        <p>You can visit the list of events you have RSVP for: By Clicking
-            <p></p>
-            <a class="btn btn--sm btn--round" [routerLink]="['/', 'dashboard', 'my-profile', 'my-rsvp']">My RSVP
-                Events</a>
-    </div>
-</swal>
 
 <ng-template #addBlockLevelCommentTemplate let-cDetails="details" let-comments="comments">
     <!-- {{selectedBlock | json}} -->

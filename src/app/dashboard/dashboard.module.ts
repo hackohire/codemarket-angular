@@ -4,6 +4,7 @@ import { DashboardComponent } from './dashboard.component';
 import { Routes, RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { CompaniesListComponent } from '../companies/companies-list/companies-list.component';
+import { AuthModule } from '../auth/auth.module';
 
 const dashboardRoutes: Routes = [
   {
@@ -64,6 +65,7 @@ const dashboardRoutes: Routes = [
   imports: [
     CommonModule,
     SharedModule,
+    AuthModule,
     // CompaniesModule,
     RouterModule.forChild(dashboardRoutes)
   ]

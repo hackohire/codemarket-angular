@@ -114,6 +114,10 @@
           *ngIf="isUnread((messageService.messagesList$ | async)?.messages)"></span>
       </div> -->
 
+      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'video-chat']" style="margin-left:5px; padding: 8px 16px;">
+        <div class="line-height-initial"><mat-icon>video_call</mat-icon> </div>
+      </a>
+
       <app-add-post-menu [label]="'Create'">
       </app-add-post-menu>
 
@@ -140,7 +144,7 @@
     <!-- Add Content Here -->
     <router-outlet></router-outlet>
 
-    <footer class="footer-area footer--light" style="margin-top: 4rem; background: #eee;">
+    <footer *ngIf="!hideFooter" class="footer-area footer--light" style="background: #eee;">
       <div class="mini-footer" style="padding-bottom: 15px;">
         <div class="container">
 

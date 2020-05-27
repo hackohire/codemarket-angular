@@ -29,6 +29,7 @@ import { CommunityImpactStoriesComponent } from './community-impact-stories/comm
 import { AdvocatesInfluencersComponent } from './advocates-influencers/advocates-influencers.component';
 import { WorkWithJoelComponent } from './work-with-joel/work-with-joel.component';
 import { ContactComponent } from './contact/contact.component';
+import { BlogComponent } from './blog/blog.component';
 // import { PostDataResolver } from './core/resolver';
 
 const routes: Routes = [
@@ -40,6 +41,10 @@ const routes: Routes = [
   {
     path: 'contact',
     component: ContactComponent
+  },
+  {
+    path: 'blog',
+    component: BlogComponent
   },
  /*  {
     path: '',

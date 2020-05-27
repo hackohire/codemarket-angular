@@ -39,17 +39,16 @@ import { WorkWithJoelComponent } from './work-with-joel/work-with-joel.component
 import { AuthModule } from './auth/auth.module';
 import { StressManagementComponent } from './stress-management/stress-management.component';
 import { NgxAudioPlayerModule } from 'ngx-audio-player';
-import {ContactModule} from './contact/contact.module';
-//import { ContactModule } from './contact/contact.module';
+import { ContactModule } from './contact/contact.module';
+import { BlogComponent } from './blog/blog.component';
 
+//import { ContactModule } from './contact/contact.module';
 // import { SignInComponent } from './core/amplify/sign-in-component';
 
 @NgModule({
   declarations: [
     AppComponent,
-
     LoaderComponent,
-
     NavBarComponent,
     AboutUsComponent,
     InnovateComponent,
@@ -76,7 +75,8 @@ import {ContactModule} from './contact/contact.module';
     StressManagementComponent,
     CommunityImpactStoriesComponent,
     AdvocatesInfluencersComponent,
-    WorkWithJoelComponent
+    WorkWithJoelComponent,
+    BlogComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

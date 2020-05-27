@@ -86,6 +86,12 @@ export class SendEmailComponent implements OnInit {
   }
 
   cleanFile() {
+    
+    if (!this.authService.loggedInUser) {
+      this.authService.checkIfUserIsLoggedIn(true);
+      return;
+    }
+    
     let fileReader = new FileReader();
     fileReader.onload = (e) => {
       // console.log(fileReader.result);

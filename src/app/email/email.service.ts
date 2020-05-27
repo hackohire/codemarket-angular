@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Email } from '../shared/models/email.model';
+import { Email, Batch } from '../shared/models/email.model';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { description } from '../shared/constants/fragments_constatnts';
 import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -95,4 +96,56 @@ export class EmailService {
       }),
     );
   }
+  
+  getCsvFileData(data: any): Observable<any> {
+    return this.apollo.mutate(
+      {
+        mutation: gql`
+          mutation getCsvFileData($data: [JSON]) {
+            getCsvFileData(data: $data) {
+              data
+            }
+          }
+        `,
+        variables: {
+          data
+        },
+        fetchPolicy: 'no-cache'
+      }
+    ).pipe(
+      map((p: any) => {
+        return p.data.getCsvFileData;
+      }),
+    );
+  }
+
+  getEmailData(batches: Batch, emailTemplate: String, subject: String): Observable<any> {
+    return this.apollo.mutate(
+      {
+        mutation: gql`
+          mutation getEmailData($batches: batchInput, $emailTemplate: String, $subject: String) {
+            getEmailData(batches: $batches, emailTemplate: $emailTemplate, subject: $subject) {
+              batches {
+                _id
+                name
+              }
+              emailTemplate
+              subject
+            }
+          }
+        `,
+        variables: {
+          batches,
+          emailTemplate,
+          subject
+        },
+        fetchPolicy: 'no-cache'
+      }
+    ).pipe(
+      map((p: any) => {
+        return p.data.getEmailData;
+      }),
+    );;
+  }
+  
 }

@@ -66,6 +66,10 @@ const routes: Routes = [
   },
 
   {
+    path: `send-email`,
+    loadChildren: () => import('../app/email/send-email/send-email.module').then(module => module.SendEmailModule),
+  },
+  {
     path: 'company',
     loadChildren: () => import('./companies/companies.module').then(module => module.CompaniesModule),
     // outlet: 'main',

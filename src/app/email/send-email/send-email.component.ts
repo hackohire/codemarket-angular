@@ -20,6 +20,9 @@ export class SendEmailComponent implements OnInit {
 
   breadcumb: BreadCumb;
   emailForm: FormGroup;
+  sendEmailForm: FormGroup;
+  file;
+  public formdata = new FormData();
 
   get createdBy() {
     return this.emailForm.get('createdBy');
@@ -70,21 +73,61 @@ export class SendEmailComponent implements OnInit {
 
   emailFormInitialization(i: Email) {
     this.emailForm = new FormGroup({
-      to: new FormControl([], Validators.required),
-      cc: new FormControl([]),
-      bcc: new FormControl([]),
-      company: new FormControl(),
-      dateRange: new FormControl([]),
-      subject: new FormControl('', Validators.required),
-      type: new FormControl(PostType.Email),
-      status: new FormControl(PostStatus.Published),
-      description: new FormControl([]),
+      to: new FormControl([]),
       descriptionHTML: new FormControl(),
-      createdBy: new FormControl(''),
-      // type: new FormControl(PostType.Assignment),
+      csvfile: new FormControl('', Validators.required)
     });
+
+    this.sendEmailForm = new FormGroup({
+      batches: new FormControl('', Validators.required),
+      emailTemplate: new FormControl(''),
+      subject: new FormControl('', Validators.required)
+    })
   }
 
+  cleanFile() {
+    let fileReader = new FileReader();
+    fileReader.onload = (e) => {
+      // console.log(fileReader.result);
+      this.csvToJSON(fileReader.result, (result) => {
+        console.log("This is result", result);
+        this.emailService.getCsvFileData(result).subscribe((data) => {
+         console.log("Response of the file read ==> " , data);
+        });
+      })
+    }
+    fileReader.readAsText(this.file);
+  }
+
+  uploadFile(event) {
+     this.file = event.target.files[0];
+     console.log(this.file);
+     if (this.file.name.split(".")[1] !== 'csv') {
+      Swal.fire(`Invalid File Type`, '', 'error').then(() => {
+        this.emailForm.get('csvfile').setValue('');
+        this.file = '';
+      });
+     }
+  }
+
+  csvToJSON(csv, callback) {
+    var lines = csv.split("\n");
+    var result = [];
+    var headers = lines[0].split(",");
+    for (var i = 1; i < lines.length; i++) {
+        var obj = {};
+        var currentline = lines[i].split(",");
+        for (var j = 0; j <= headers.length; j++) {
+            obj[headers[j]] = currentline[j];
+            obj['email'] = JSON.parse(currentline[headers.indexOf('email')])
+        }
+        result.push(obj);
+    }
+    if (callback && (typeof callback === 'function')) {
+        return callback(result);
+    }
+    return result;
+}
 
   async submit() {
 
@@ -93,40 +136,17 @@ export class SendEmailComponent implements OnInit {
       return;
     }
 
-    /** Fetch description blocks */
-    const blocks = await this.descriptionEditor.editor.save();
-
-    /** Set the updated description blocks */
-    this.descriptionFormControl.setValue(blocks.blocks);
-
-    /** Here we are asking to detectchanges again because when we fetch the blocks to save the description in formcontrol,
-     * we need the HTML also, so for that detectchanges will render the changes again with saved block and we can access the html again
-     */
     this.changeDetector.detectChanges();
 
-
-    /** Fetch the html content also becuase when we send email, email only understands the html content so we need to store html
-     * content also
-     */
-    this.descriptionHTMLFormControl.setValue(this.descriptionEditor.editorViewRef.nativeElement.innerHTML);
-
-    this.emailForm.get('to').setValue(this.emailForm.get('to').value.map(element => element.label ? element.label : element));
-    this.emailForm.get('cc').setValue(this.emailForm.get('cc').value.map(element => element.label ? element.label : element));
-    this.emailForm.get('bcc').setValue(this.emailForm.get('bcc').value.map(element => element.label ? element.label : element));
-
-    if (this.authService.loggedInUser && !this.createdBy.value) {
-      this.createdBy.setValue(this.authService.loggedInUser._id);
-    }
-
-    /** Send the email and redirect to actual email post */
-    this.emailService.sendEmail(this.emailForm.value).subscribe(e => {
-      if (e) {
-        Swal.fire(`Emai has been Send Successfully`, '', 'success').then(() => {
-          this.postService.redirectToPostDetails(e);
-        });
-      }
-    });
-
+    this.sendEmailForm.get('emailTemplate').setValue(this.descriptionEditor.html);
+   
+    console.log(this.sendEmailForm.value);
+    this.emailService.getEmailData(this.sendEmailForm.value.batches, this.sendEmailForm.value.emailTemplate, this.sendEmailForm.value.subject).subscribe((data) => {
+      console.log("Response of the email Data ==> " , data);
+     }, (err) => {
+      Swal.fire(`Invalid Data`, '', 'error').then(() => {
+      });
+     });
   }
 
 }

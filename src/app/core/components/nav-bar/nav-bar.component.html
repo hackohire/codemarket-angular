@@ -114,6 +114,9 @@
           *ngIf="isUnread((messageService.messagesList$ | async)?.messages)"></span>
       </div> -->
 
+      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'send-email']">
+        <div class="line-height-initial"> Send Email </div>
+      </a>
       <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'video-chat']" style="margin-left:5px; padding: 8px 16px;">
         <div class="line-height-initial"><mat-icon>video_call</mat-icon> </div>
       </a>

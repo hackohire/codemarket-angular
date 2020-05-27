@@ -20,3 +20,8 @@ export interface Email {
     updatedAt?: string;
     createdBy?: string;
 }
+
+export interface Batch {
+    _id: String;
+    name: String;
+}

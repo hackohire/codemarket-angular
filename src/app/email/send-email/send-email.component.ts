@@ -99,9 +99,6 @@ export class SendEmailComponent implements OnInit {
       this.csvToJSON(fileReader.result, (result) => {
         console.log("This is result", result);
         this.emailService.getCsvFileData(result, this.authService.loggedInUser._id, this.file.name, this.emailForm.value.label).subscribe((data) => {
-          this.emailForm.get('csvfile').setValue('');
-          this.file = '';
-          this.emailForm.get('label').setValue('');
          console.log("Response of the file read ==> " , data);
         });
       })

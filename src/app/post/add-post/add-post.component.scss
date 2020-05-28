@@ -17,6 +17,15 @@
         height: -webkit-fill-available;
         z-index: 20;
     }
+
+    /** For Safari */
+    app-breadcumb {
+        position: -webkit-sticky;
+        top: 45px;
+        z-index: 20;
+        display: block;
+    }
+    /** For Safari Ends Here */
 }
 
 .data-label {

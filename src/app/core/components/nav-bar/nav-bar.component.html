@@ -1,20 +1,16 @@
 <mat-sidenav-container class="sidenav-container" autosize>
 
-  <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+  <!-- <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'main'" [opened]="(isHandset$ | async) === false">
     <mat-toolbar style="height: 48px; font-size: 14px; font-weight: 400; letter-spacing: 4px; text-transform: uppercase; color: #999; background: #eee;">navigation</mat-toolbar>
 
 
     <mat-nav-list>
 
-      <!-- <a mat-list-item [routerLink]="['/', 'dashboard']">Dashboard</a>
-
-      <a mat-list-item [routerLink]="['/', 'user', 'edit-profile']">Edit Profile</a> -->
-
       <app-chat-full-ui [loggedInUser]="authService?.loggedInUser" [postList]="listOfConnectedPosts?.posts"></app-chat-full-ui>
 
     </mat-nav-list>
-  </mat-sidenav>
+  </mat-sidenav> -->
 
 
   <mat-sidenav-content>
@@ -85,7 +81,7 @@
     <mat-toolbar class="NavBarBox">
 
       <!-- Toggle Sidebar Button -->
-      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
+      <button *ngIf="false" type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
 
@@ -111,9 +107,9 @@
           *ngIf="isUnread((messageService.messagesList$ | async)?.messages)"></span>
       </div> -->
 
-      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'video-chat']" style="margin-left:5px; padding: 8px 16px;">
+      <!-- <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'video-chat']" style="margin-left:5px; padding: 8px 16px;">
         <div class="line-height-initial"><mat-icon>video_call</mat-icon> </div>
-      </a>
+      </a> -->
 
       <app-add-post-menu [label]="'Create'">
       </app-add-post-menu>

@@ -1,5 +1,11 @@
 :host ::ng-deep {
     .ck.ck-toolbar {
+        top: 135px !important;
+    }
+
+    .breadcrumb-area {
+        z-index: 20;
         top: 45px !important;
+        position: sticky;
     }
 }

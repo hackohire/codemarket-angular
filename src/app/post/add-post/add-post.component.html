@@ -1,5 +1,5 @@
 <app-breadcumb [path]="breadcumb?.path" [postDetails]="{ connectedPosts: editPostDetails ? editPostDetails?.connectedPosts : postFromRoute ? [postFromRoute] : [], tags: postForm?.get('tags')?.value, clients: postForm?.get('clients')?.value, collaborators: postForm?.get('collaborators')?.value, companies: postForm?.get('companies')?.value, name: postForm?.get('name')?.value}" [showImportButton]="true" [fromAddPost]="true"
-    [title]="postTitle" (addPostData)="recieveEvent($event)" [postForm]="postForm" [inline]="true">
+    [title]="postTitle" [postActions]="true" (saveOrSubmitPost)="submit($event)" (addPostData)="recieveEvent($event)" [postForm]="postForm" [inline]="true">
 </app-breadcumb>
 
 
@@ -52,11 +52,9 @@
                     [multiple]="true" [allowToAdd]="false"></app-autocomplete> -->
 
 
-                <div fxLayout="row" fxLayoutGap="10px">
-                    <button *ngIf="statusFormControl?.value !== 'Published'" type="button" (click)="submit('Drafted')"
-                        [disabled]="postForm?.invalid" mat-raised-button color="primary">Save</button>
-                    <button *ngIf="statusFormControl?.value === 'Published'" type="button"
-                        (click)="submit('Unpublished')" [disabled]="postForm?.invalid" mat-raised-button
+                <div *ngIf="false" fxLayout="row" fxLayoutGap="10px">
+                    <button type="button"
+                        (click)="submit('UnpubliDraftedhed')" [disabled]="postForm?.invalid" mat-raised-button
                         style="background-color: #28a745; color: white;">{{ 'Save' }}</button>
                     <button type="button" (click)="submit('Published', descriptionEditor)" [disabled]="postForm?.invalid" mat-raised-button
                         color="primary">{{ 'Publish' }}</button>
@@ -67,5 +65,11 @@
             </div>
 
         </div>
+
+        <!-- <div class="col-md-3">
+            <app-breadcumb [postDetails]="{ connectedPosts: editPostDetails ? editPostDetails?.connectedPosts : postFromRoute ? [postFromRoute] : [], tags: postForm?.get('tags')?.value, clients: postForm?.get('clients')?.value, collaborators: postForm?.get('collaborators')?.value, companies: postForm?.get('companies')?.value, name: postForm?.get('name')?.value}" [showImportButton]="true" [fromAddPost]="true"
+            (addPostData)="recieveEvent($event)" [postForm]="postForm" [inline]="false">
+        </app-breadcumb>
+        </div> -->
     </div>
 </div>

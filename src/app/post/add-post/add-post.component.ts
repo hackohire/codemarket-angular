@@ -105,7 +105,7 @@ export class AddPostComponent implements OnInit, AfterViewInit {
 
   postFormInitialization(i: Post) {
     this.postForm = new FormGroup({
-      name: new FormControl(i && i.name ? i.name : '', Validators.required),
+      name: new FormControl(i && i.name ? i.name : 'Untitled Document', Validators.required),
       description: new FormControl(i && i.description ? i.description : []),
       descriptionHTML: new FormControl(i && i.descriptionHTML ? i.descriptionHTML : ''),
       tags: new FormControl(i && i.tags ? i.tags : []),

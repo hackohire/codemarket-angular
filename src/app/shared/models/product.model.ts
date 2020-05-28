@@ -12,6 +12,7 @@ export interface PriceAndFiles {
 export interface Tag {
     name: string;
     _id?: string;
+    campaignId?: string;
 }
 
 interface Support {

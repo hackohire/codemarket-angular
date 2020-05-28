@@ -97,18 +97,22 @@ export class EmailService {
     );
   }
   
-  getCsvFileData(data: any): Observable<any> {
+  getCsvFileData(data: any, createdBy: String, fileName: String): Observable<any> {
     return this.apollo.mutate(
       {
         mutation: gql`
-          mutation getCsvFileData($data: [JSON]) {
-            getCsvFileData(data: $data) {
+          mutation getCsvFileData($data: [JSON], $createdBy: String, $fileName: String) {
+            getCsvFileData(data: $data, createdBy: $createdBy, fileName: $fileName) {
               data
+              createdBy
+              fileName
             }
           }
         `,
         variables: {
-          data
+          data,
+          createdBy,
+          fileName
         },
         fetchPolicy: 'no-cache'
       }
@@ -119,15 +123,16 @@ export class EmailService {
     );
   }
 
-  getEmailData(batches: Batch, emailTemplate: String, subject: String): Observable<any> {
+  getEmailData(batches: Batch, emailTemplate: String, subject: String, createdBy: String): Observable<any> {
     return this.apollo.mutate(
       {
         mutation: gql`
-          mutation getEmailData($batches: batchInput, $emailTemplate: String, $subject: String) {
-            getEmailData(batches: $batches, emailTemplate: $emailTemplate, subject: $subject) {
+          mutation getEmailData($batches: batchInput, $emailTemplate: String, $subject: String, $createdBy: String) {
+            getEmailData(batches: $batches, emailTemplate: $emailTemplate, subject: $subject, createdBy: $createdBy) {
               batches {
                 _id
                 name
+                campaignId
               }
               emailTemplate
               subject
@@ -137,7 +142,8 @@ export class EmailService {
         variables: {
           batches,
           emailTemplate,
-          subject
+          subject,
+          createdBy
         },
         fetchPolicy: 'no-cache'
       }

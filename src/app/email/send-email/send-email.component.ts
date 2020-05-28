@@ -97,7 +97,7 @@ export class SendEmailComponent implements OnInit {
       // console.log(fileReader.result);
       this.csvToJSON(fileReader.result, (result) => {
         console.log("This is result", result);
-        this.emailService.getCsvFileData(result).subscribe((data) => {
+        this.emailService.getCsvFileData(result, this.authService.loggedInUser._id, this.file.name).subscribe((data) => {
          console.log("Response of the file read ==> " , data);
         });
       })
@@ -147,7 +147,7 @@ export class SendEmailComponent implements OnInit {
     this.sendEmailForm.get('emailTemplate').setValue(this.descriptionEditor.html);
    
     console.log(this.sendEmailForm.value);
-    this.emailService.getEmailData(this.sendEmailForm.value.batches, this.sendEmailForm.value.emailTemplate, this.sendEmailForm.value.subject).subscribe((data) => {
+    this.emailService.getEmailData(this.sendEmailForm.value.batches, this.sendEmailForm.value.emailTemplate, this.sendEmailForm.value.subject, this.authService.loggedInUser._id).subscribe((data) => {
       console.log("Response of the email Data ==> " , data);
      }, (err) => {
       Swal.fire(`Invalid Data`, '', 'error').then(() => {

@@ -58,6 +58,7 @@ export class FormService {
             findFromCollection(keyWord: $keyWord, searchCollection: $searchCollection, type: $type) {
               _id
               name
+              campaignId
             }
           }
         `,

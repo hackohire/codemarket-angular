@@ -25,7 +25,7 @@
                     <input matInput placeholder="subject" type="text" formControlName="subject" autocomplete="false" required>
                   </mat-form-field>
 
-                <app-autocomplete class="field-full-width" [allowToAdd]="true" [autoComplete]="sendEmailForm?.get('batches')"
+                <app-autocomplete class="field-full-width" [allowToAdd]="false" [autoComplete]="sendEmailForm?.get('batches')"
                 [placeholder]="'Select Campaigns'" [collection]="'batch'" [type]="" [multiple]="false" matInput>
                 </app-autocomplete>
     

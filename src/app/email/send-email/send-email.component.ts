@@ -75,18 +75,19 @@ export class SendEmailComponent implements OnInit {
     this.emailForm = new FormGroup({
       to: new FormControl([]),
       descriptionHTML: new FormControl(),
-      csvfile: new FormControl('', Validators.required)
+      csvfile: new FormControl('', Validators.required),
+      label: new FormControl('', Validators.required)
     });
 
     this.sendEmailForm = new FormGroup({
       batches: new FormControl('', Validators.required),
       emailTemplate: new FormControl(''),
-      subject: new FormControl('', Validators.required)
+      subject: new FormControl('', Validators.required),
+      from: new FormControl('', Validators.required)
     })
   }
 
   cleanFile() {
-    
     if (!this.authService.loggedInUser) {
       this.authService.checkIfUserIsLoggedIn(true);
       return;
@@ -97,7 +98,10 @@ export class SendEmailComponent implements OnInit {
       // console.log(fileReader.result);
       this.csvToJSON(fileReader.result, (result) => {
         console.log("This is result", result);
-        this.emailService.getCsvFileData(result, this.authService.loggedInUser._id, this.file.name).subscribe((data) => {
+        this.emailService.getCsvFileData(result, this.authService.loggedInUser._id, this.file.name, this.emailForm.value.label).subscribe((data) => {
+          this.emailForm.get('csvfile').setValue('');
+          this.file = '';
+          this.emailForm.get('label').setValue('');
          console.log("Response of the file read ==> " , data);
         });
       })
@@ -147,7 +151,7 @@ export class SendEmailComponent implements OnInit {
     this.sendEmailForm.get('emailTemplate').setValue(this.descriptionEditor.html);
    
     console.log(this.sendEmailForm.value);
-    this.emailService.getEmailData(this.sendEmailForm.value.batches, this.sendEmailForm.value.emailTemplate, this.sendEmailForm.value.subject, this.authService.loggedInUser._id).subscribe((data) => {
+    this.emailService.getEmailData(this.sendEmailForm.value.batches, this.sendEmailForm.value.emailTemplate, this.sendEmailForm.value.subject, this.authService.loggedInUser._id, this.sendEmailForm.value.from).subscribe((data) => {
       console.log("Response of the email Data ==> " , data);
      }, (err) => {
       Swal.fire(`Invalid Data`, '', 'error').then(() => {

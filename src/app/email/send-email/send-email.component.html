@@ -5,15 +5,19 @@
 
                 <h2>Clean Emails</h2>
 
-                <div fxLayout="row" fxLayoutGap="10px">
-                    <mat-form-field>
-                        <ngx-mat-file-input #removableInput formControlName="csvfile" placeholder="Select the csv file" (change)="uploadFile($event)"></ngx-mat-file-input>
+                <!-- <div fxLayout="row" fxLayoutGap="10px"> -->
+                    <mat-form-field class="field-full-width">
+                        <ngx-mat-file-input #removableInput formControlName="csvfile" placeholder="Select csv file with emails" (change)="uploadFile($event)"></ngx-mat-file-input>
                         <button mat-icon-button matSuffix *ngIf="!removableInput.empty" (click)="removableInput.clear($event)">
                             <mat-icon>clear</mat-icon>
                         </button>
                     </mat-form-field>
-                    <button type="button" (click)="cleanFile()" [disabled]="emailForm?.invalid" mat-raised-button color="primary" style="margin: 12px; height: 35px;">{{ 'Clean File' }}</button>
-                </div>
+                    <mat-form-field appearance="outline" class="field-full-width">
+                        <mat-label>Mailing list Name</mat-label>
+                        <input matInput placeholder="Mailing list Name" type="text" formControlName="label" autocomplete="false" required>
+                    </mat-form-field>
+                <!-- </div> -->
+                <button type="button" (click)="cleanFile()" [disabled]="emailForm?.invalid" mat-raised-button color="primary" style="margin: 12px; height: 35px;">{{ 'Clean And Save Mailing List' }}</button>
                   <br>
                   
 
@@ -21,12 +25,17 @@
             <div [formGroup]="sendEmailForm" class="add-form-area common-box-shadow">
                 <h2>Send Emails</h2>
                 <mat-form-field appearance="outline" class="field-full-width">
+                    <mat-label>Enter FROM</mat-label>
+                    <input matInput placeholder="Enter FROM" type="text" formControlName="from" autocomplete="false" required>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="field-full-width">
                     <mat-label>Enter Subject</mat-label>
                     <input matInput placeholder="subject" type="text" formControlName="subject" autocomplete="false" required>
-                  </mat-form-field>
+                </mat-form-field>
 
                 <app-autocomplete class="field-full-width" [allowToAdd]="false" [autoComplete]="sendEmailForm?.get('batches')"
-                [placeholder]="'Select Campaigns'" [collection]="'batch'" [type]="" [multiple]="false" matInput>
+                [placeholder]="'Select Mailing List'" [collection]="'batches'" [type]="" [multiple]="false" matInput>
                 </app-autocomplete>
     
                 <p>Create Email template below</p>

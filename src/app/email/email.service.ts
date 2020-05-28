@@ -97,22 +97,24 @@ export class EmailService {
     );
   }
   
-  getCsvFileData(data: any, createdBy: String, fileName: String): Observable<any> {
+  getCsvFileData(data: any, createdBy: String, fileName: String, label: String): Observable<any> {
     return this.apollo.mutate(
       {
         mutation: gql`
-          mutation getCsvFileData($data: [JSON], $createdBy: String, $fileName: String) {
-            getCsvFileData(data: $data, createdBy: $createdBy, fileName: $fileName) {
+          mutation getCsvFileData($data: [JSON], $createdBy: String, $fileName: String, $label: String) {
+            getCsvFileData(data: $data, createdBy: $createdBy, fileName: $fileName, label: $label) {
               data
               createdBy
               fileName
+              label
             }
           }
         `,
         variables: {
           data,
           createdBy,
-          fileName
+          fileName,
+          label
         },
         fetchPolicy: 'no-cache'
       }
@@ -123,12 +125,12 @@ export class EmailService {
     );
   }
 
-  getEmailData(batches: Batch, emailTemplate: String, subject: String, createdBy: String): Observable<any> {
+  getEmailData(batches: Batch, emailTemplate: String, subject: String, createdBy: String, from: String): Observable<any> {
     return this.apollo.mutate(
       {
         mutation: gql`
-          mutation getEmailData($batches: batchInput, $emailTemplate: String, $subject: String, $createdBy: String) {
-            getEmailData(batches: $batches, emailTemplate: $emailTemplate, subject: $subject, createdBy: $createdBy) {
+          mutation getEmailData($batches: batchInput, $emailTemplate: String, $subject: String, $createdBy: String, $from: String) {
+            getEmailData(batches: $batches, emailTemplate: $emailTemplate, subject: $subject, createdBy: $createdBy, from: $from) {
               batches {
                 _id
                 name
@@ -136,6 +138,8 @@ export class EmailService {
               }
               emailTemplate
               subject
+              createdBy
+              from
             }
           }
         `,
@@ -143,7 +147,8 @@ export class EmailService {
           batches,
           emailTemplate,
           subject,
-          createdBy
+          createdBy,
+          from
         },
         fetchPolicy: 'no-cache'
       }

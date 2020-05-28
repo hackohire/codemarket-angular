@@ -19,14 +19,37 @@
     }
 
     /** For Safari */
-    app-breadcumb {
-        position: -webkit-sticky;
-        top: 45px;
-        z-index: 20;
-        display: block;
+
+    /* Safari 7.1+ */
+
+    _::-webkit-full-page-media, _:future, :root .safari_only {
+
+        app-breadcumb {
+            position: -webkit-sticky;
+            top: 45px;
+            z-index: 20;
+            display: block;
+        }
+
     }
-    /** For Safari Ends Here */
+    /* Safari 10.1+ */
+
+    @media not all and (min-resolution:.001dpcm) { 
+        @supports (-webkit-appearance:none) {
+
+    .safari_only { 
+
+        app-breadcumb {
+            position: -webkit-sticky;
+            top: 45px;
+            z-index: 20;
+            display: block;
+        }
+    }}
+
+    }
 }
+
 
 .data-label {
     // width: 10%;

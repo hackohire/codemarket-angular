@@ -97,16 +97,20 @@ export class EmailService {
     );
   }
   
-  getCsvFileData(data: any, createdBy: String, fileName: String, label: String): Observable<any> {
+  getCsvFileData(data: any, createdBy: String, fileName: String, label: String, companies: Batch): Observable<any> {
     return this.apollo.mutate(
       {
         mutation: gql`
-          mutation getCsvFileData($data: [JSON], $createdBy: String, $fileName: String, $label: String) {
-            getCsvFileData(data: $data, createdBy: $createdBy, fileName: $fileName, label: $label) {
+          mutation getCsvFileData($data: [JSON], $createdBy: String, $fileName: String, $label: String, $companies: batchInput) {
+            getCsvFileData(data: $data, createdBy: $createdBy, fileName: $fileName, label: $label, companies: $companies) {
               data
               createdBy
               fileName
               label
+              companies {
+                _id
+                name
+              }
             }
           }
         `,
@@ -114,7 +118,8 @@ export class EmailService {
           data,
           createdBy,
           fileName,
-          label
+          label,
+          companies
         },
         fetchPolicy: 'no-cache'
       }
@@ -125,12 +130,12 @@ export class EmailService {
     );
   }
 
-  getEmailData(batches: Batch, emailTemplate: String, subject: String, createdBy: String, from: String): Observable<any> {
+  getEmailData(batches: Batch, emailTemplate: String, subject: String, createdBy: String, from: String, companies: Batch): Observable<any> {
     return this.apollo.mutate(
       {
         mutation: gql`
-          mutation getEmailData($batches: batchInput, $emailTemplate: String, $subject: String, $createdBy: String, $from: String) {
-            getEmailData(batches: $batches, emailTemplate: $emailTemplate, subject: $subject, createdBy: $createdBy, from: $from) {
+          mutation getEmailData($batches: batchInput, $emailTemplate: String, $subject: String, $createdBy: String, $from: String, $companies: batchInput) {
+            getEmailData(batches: $batches, emailTemplate: $emailTemplate, subject: $subject, createdBy: $createdBy, from: $from, companies: $companies) {
               batches {
                 _id
                 name
@@ -140,6 +145,10 @@ export class EmailService {
               subject
               createdBy
               from
+              companies {
+                _id
+                name
+              }
             }
           }
         `,
@@ -148,7 +157,8 @@ export class EmailService {
           emailTemplate,
           subject,
           createdBy,
-          from
+          from,
+          companies
         },
         fetchPolicy: 'no-cache'
       }

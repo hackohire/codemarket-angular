@@ -5,7 +5,6 @@
 
                 <h2>Clean Emails</h2>
 
-                <!-- <div fxLayout="row" fxLayoutGap="10px"> -->
                     <mat-form-field class="field-full-width">
                         <ngx-mat-file-input #removableInput formControlName="csvfile" placeholder="Select csv file with emails" (change)="uploadFile($event)"></ngx-mat-file-input>
                         <button mat-icon-button matSuffix *ngIf="!removableInput.empty" (click)="removableInput.clear($event)">
@@ -16,7 +15,9 @@
                         <mat-label>Mailing list Name</mat-label>
                         <input matInput placeholder="Mailing list Name" type="text" formControlName="label" autocomplete="false" required>
                     </mat-form-field>
-                <!-- </div> -->
+                    <app-autocomplete class="field-full-width" [allowToAdd]="false" [autoComplete]="emailForm?.get('companies')"
+                    [placeholder]="'Select Company'" [collection]="'companies'" [type]="" [multiple]="false" matInput>
+                    </app-autocomplete>
                 <button type="button" (click)="cleanFile()" [disabled]="emailForm?.invalid" mat-raised-button color="primary" style="margin: 12px; height: 35px;">{{ 'Clean And Save Mailing List' }}</button>
                   <br>
                   
@@ -33,6 +34,10 @@
                     <mat-label>Enter Subject</mat-label>
                     <input matInput placeholder="subject" type="text" formControlName="subject" autocomplete="false" required>
                 </mat-form-field>
+
+                <app-autocomplete class="field-full-width" [allowToAdd]="false" [autoComplete]="sendEmailForm?.get('companies')"
+                [placeholder]="'Select Company'" [collection]="'companies'" [type]="" [multiple]="false" matInput>
+                </app-autocomplete>
 
                 <app-autocomplete class="field-full-width" [allowToAdd]="false" [autoComplete]="sendEmailForm?.get('batches')"
                 [placeholder]="'Select Mailing List'" [collection]="'batches'" [type]="" [multiple]="false" matInput>

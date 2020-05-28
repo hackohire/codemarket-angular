@@ -8,4 +8,83 @@
         top: 45px !important;
         position: sticky;
     }
+
+    .sidebar {
+        top: 135px !important;
+        position: -webkit-sticky;
+        position: sticky;
+        display: block;
+        height: -webkit-fill-available;
+        z-index: 20;
+    }
+}
+
+.data-label {
+    // width: 10%;
+    font-weight: 600;
+    // color: #333333;
+}
+
+.social-media {
+    margin-top: 15px;
+    button {
+        margin-right: 7px;
+    }
+}
+
+.info {
+    // width: 90%;
+}
+
+.tag {
+    background: #00000033;
+    display: inline-block;
+    color: white;
+    padding: 0 10px;
+    line-height: 28px;
+    margin-right: 10px;
+    font-size: 13px;
+    font-weight: 200;
+    -webkit-border-radius: 100px;
+    border-radius: 100px;
+
+    img {
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        margin-right: 5px;
+        vertical-align: middle;
+    }
+}
+
+ul.infos li {
+    overflow: hidden;
+    display: flex;
+    justify-content: flex-start;
+    width: -webkit-fill-available;
+    // justify-content: space-between;
+}
+
+ul.infos li p {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: -3px;
+    margin: 0;
+    font-size: 15px;
+    vertical-align: top;
+    line-height: 36px;
+}
+
+p.data-label:after {
+    content: ":";
+    margin-left: 4px
+}
+
+:host ::ng-deep .social-media button {
+    width: 35px;
+    height: 35px;
+    .mat-button-wrapper {
+        padding: 12px 0;
+        line-height: 0px;
+    }
 }

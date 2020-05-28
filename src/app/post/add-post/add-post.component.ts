@@ -55,6 +55,9 @@ export class AddPostComponent implements OnInit, AfterViewInit {
 
   subscription$ = new Subscription();
 
+  anonymousAvatar = '../../../../assets/images/anonymous-avatar.jpg';
+  s3FilesBucketURL = environment.s3FilesBucketURL;
+
 
   constructor(
     public authService: AuthService,

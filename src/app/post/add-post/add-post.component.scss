@@ -1,12 +1,13 @@
 :host ::ng-deep {
     .ck.ck-toolbar {
-        top: 128px !important;
+        top: 137px !important;
     }
 
     .breadcrumb-area {
         z-index: 20;
-        top: 45px !important;
+        top: 48px;
         position: sticky;
+        background: #fff;
 
         .page-title {
            color: #607D8B;
@@ -25,6 +26,36 @@
         height: -webkit-fill-available;
         z-index: 20;
     }
+
+    @media (max-width: 767px) {
+        .breadcrumb-area {
+            z-index: 18 !important;
+            top: 96px !important;
+            position: fixed !important;
+            width: 100% !important;
+            background: #fff !important;
+        }
+        .breadcrumb-area .page-title {
+            outline: none;
+            background: #fff;
+            font-size: 24px;
+            padding: 3.9px;
+            border-bottom: 1px solid #ccc;
+            margin-top: 10px !important;
+        }
+        .MobilePadding {
+            padding: 235px 15px 15px;
+        }
+        .ck.ck-toolbar {
+            position: fixed !important;
+            top: 196px !important;
+            width: calc(100% - 30px);
+        }
+        .ck.ck-toolbar.ck-toolbar_grouping>.ck-toolbar__items {
+            overflow-x: auto;
+        }
+    }
+
 }
 
 
@@ -46,16 +77,17 @@
 }
 
 .tag {
-    background: #00000033;
+    background: #666;
     display: inline-block;
     color: white;
     padding: 0 10px;
     line-height: 28px;
-    margin-right: 10px;
+    margin-left: 7px;
     font-size: 13px;
-    font-weight: 200;
+    font-weight: 400;
     -webkit-border-radius: 100px;
     border-radius: 100px;
+    text-transform: capitalize;
 
     img {
         border-radius: 50%;
@@ -71,6 +103,7 @@ ul.infos li {
     display: flex;
     justify-content: flex-start;
     width: -webkit-fill-available;
+    border-bottom: 1px solid #ddd;
     // justify-content: space-between;
 }
 

@@ -101,22 +101,26 @@
 }
 
 @media (max-width:767px) {
-  .SearchLoginBox {
-    width: 100%;
-    border-radius: 0;
-    position: relative;
-    left: 0;
-  }
-  .NavBarBox {
-    // padding: 10px 0;
-    border-bottom: 1px solid #ccc;
-  }
   .NavBarBox > div:nth-of-type(1) {
     display: none !important;
   }
   .brand-logo {
     max-width: 55%;
     margin-right: 7%;
+  }
+  .SearchLoginBox {
+      width: 100% !important;
+      position: fixed !important;
+      top: 0 !important;
+      z-index: 16 !important;
+      border-radius: 0;
+      left: 0;
+  }
+  .NavBarBox {
+      position: fixed !important;
+      top: 48px !important;
+      z-index: 17 !important;
+      border-bottom: 1px solid #ccc;
   }
 }
 

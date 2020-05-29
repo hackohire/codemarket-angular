@@ -3321,16 +3321,16 @@ a {
   height: 100%;
   width: 100%;
   position: absolute;
-  background: -webkit-gradient(
-    linear,
-    right top,
-    left top,
-    from(#7347c1),
-    to(#00aeef)
-  );
-  background: -webkit-linear-gradient(right, #7347c1, #00aeef);
-  background: -o-linear-gradient(right, #7347c1, #00aeef);
-  background: linear-gradient(to left, #7347c1, #00aeef);
+  // background: -webkit-gradient(
+  //   linear,
+  //   right top,
+  //   left top,
+  //   from(#7347c1),
+  //   to(#00aeef)
+  // );
+  // background: -webkit-linear-gradient(right, #7347c1, #00aeef);
+  // background: -o-linear-gradient(right, #7347c1, #00aeef);
+  // background: linear-gradient(to left, #7347c1, #00aeef);
   opacity: 1;
   top: 0;
   left: 0;
@@ -3342,18 +3342,28 @@ a {
   // padding-bottom: 25px;
 
   padding-top: 10px !important;
-  padding-bottom: 8px;
+  padding-bottom: 10px;
 }
 
 .breadcrumb-area .breadcrumb ul li a {
   line-height: initial;
+  text-transform: capitalize;
 }
 
 .breadcrumb-area .page-title {
-  color: #fff;
+  color: #00aeef !important;
   font-weight: 500;
   font-size: 30px;
   text-transform: capitalize;
+  border-bottom: 1px solid #fff;
+}
+
+.breadcrumb-area .page-title:focus {
+  outline: none;
+  background: #fff;
+  font-size: 24px;
+  padding: 3.9px;
+  border-bottom: 1px solid #ccc;
 }
 
 .breadcrumb-area .breadcrumb {
@@ -3428,7 +3438,7 @@ a {
 }
 
 .breadcrumb ul li.active a {
-  color: #bfcad7;
+  color: #666;
 }
 
 .breadcrumb ul {
@@ -17410,9 +17420,9 @@ a {
 // End of Chat box CSS
 /*# sourceMappingURL=src/map/style.css.map */
 
-
-
-
 .form-builder-group-header {
   padding: 0 !important;
 }
+
+
+

@@ -18,6 +18,26 @@
         background: white;
     }
 
+    .breadcrumb ul li.active a {
+        color: #666;
+    }
+    
+    .breadcrumb-area .page-title {
+        color: #00aeef !important;
+        font-weight: 500;
+        font-size: 30px;
+        text-transform: capitalize;
+        border-bottom: 1px solid #fff;
+    }
+    
+    .breadcrumb-area .page-title:focus {
+        outline: none;
+        background: #fff;
+        font-size: 24px;
+        padding: 3.9px;
+        border-bottom: 1px solid #ccc;
+    }
+
     .sidebar {
         top: 135px !important;
         position: -webkit-sticky;

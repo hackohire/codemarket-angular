@@ -65,7 +65,6 @@ export class AddPostComponent implements OnInit, AfterViewInit {
     private activatedRoute: ActivatedRoute,
     private postService: PostService,
     private location: Location,
-    private changeDetector: ChangeDetectorRef
   ) {
 
     this.postType = this.activatedRoute.snapshot.queryParams.type;
@@ -104,6 +103,14 @@ export class AddPostComponent implements OnInit, AfterViewInit {
         })
       );
     }
+
+    this.subscription$.add(
+      this.postService.saveOrSubmitPost.subscribe(s => {
+        if (s && this.postForm && this.postForm.valid) {
+          this.submit(s);
+        }
+      })
+    );
   }
 
   postFormInitialization(i: Post) {
@@ -165,7 +172,7 @@ export class AddPostComponent implements OnInit, AfterViewInit {
 
     if (this.postId) {
       this.store.dispatch(UpdatePost({
-        post: postFormValue, updatedBy: {name: this.authService.loggedInUser.name, _id: this.authService.loggedInUser._id},
+        post: postFormValue, updatedBy: { name: this.authService.loggedInUser.name, _id: this.authService.loggedInUser._id },
       }));
     } else {
       this.store.dispatch(AddPost({ post: postFormValue }));

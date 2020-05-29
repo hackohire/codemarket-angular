@@ -50,10 +50,10 @@ export class BreadcumbComponent implements OnInit {
 
   public name;
 
-  @ViewChild(MdePopoverTrigger, {static: false}) addTagsPopover: MdePopoverTrigger;
-  @ViewChild(MdePopoverTrigger, {static: false}) addCopmaniesPopover: MdePopoverTrigger;
-  @ViewChild(MdePopoverTrigger, {static: false}) addClientsPopover: MdePopoverTrigger;
-  @ViewChild(MdePopoverTrigger, {static: false}) addCollaboratorsPopover: MdePopoverTrigger;
+  @ViewChild(MdePopoverTrigger, { static: false }) addTagsPopover: MdePopoverTrigger;
+  @ViewChild(MdePopoverTrigger, { static: false }) addCopmaniesPopover: MdePopoverTrigger;
+  @ViewChild(MdePopoverTrigger, { static: false }) addClientsPopover: MdePopoverTrigger;
+  @ViewChild(MdePopoverTrigger, { static: false }) addCollaboratorsPopover: MdePopoverTrigger;
 
   anonymousAvatar = '../../../../assets/images/anonymous-avatar.jpg';
   s3FilesBucketURL = environment.s3FilesBucketURL;
@@ -80,18 +80,20 @@ export class BreadcumbComponent implements OnInit {
       });
   }
 
-  onContentChange(event:any) {
+  onContentChange(event: any) {
     let a = document.getElementById('test').innerHTML;
     this.postTitle = a;
     this.postForm.get('name').setValue(this.postTitle.replace(/\&nbsp;/g, ''));
   }
 
-  myFunction() {
+  myFunction(event) {
     const postObj = {
       _id: this.postDetails._id,
-      name: this.postTitle
+      name: event.target.innerText
     };
-    
+
+    this.postTitle = event.target.innerText;
+
     if (this.title !== this.postTitle.replace(/\&nbsp;/g, '') && this.postTitle.replace(/\&nbsp;/g, '') !== '') {
       this.displaySave = true;
       this.postService.updatePost(
@@ -167,8 +169,8 @@ export class BreadcumbComponent implements OnInit {
     this.addPostData.emit(this.postForm.value);
   }
 
-  doNothing() {
-    console.log("Do nothing called  ");
+  doNothing(event) {
+    console.log("Do nothing called,", event);
   }
 
   allowUsersEdit = () => {

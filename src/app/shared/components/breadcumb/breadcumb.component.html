@@ -28,20 +28,21 @@
                         </a>
 
                         <div *ngIf="postActions">
-                            <button type="button" (click)="saveOrSubmitPost.emit('Drafted')"
+                            <!-- <button type="button" (click)="saveOrSubmitPost.emit('Drafted')"
                                 [disabled]="postForm?.invalid" mat-raised-button
                                 style="background-color: #28a745; color: white;">{{ 'Save' }}</button>
                             <button type="button" (click)="saveOrSubmitPost.emit('Published')"
                                 [disabled]="postForm?.invalid" mat-raised-button
                                 color="primary">{{ 'Publish' }}</button>
                             <button type="button" (click)="cancelClicked()" mat-raised-button
-                                color="warn">{{ 'Cancel' }}</button>
+                                color="warn">{{ 'Cancel' }}</button> -->
                         </div>
 
                     </div>
                 </div>
-                <h1 tabindex="0" autofocus (keydown.enter)="$event.preventDefault()" style="margin-bottom: 0" [contentEditable]="allowUsersEdit() || inline" class="page-title" id="test"
-                    (blur)="!fromAddPost ? myFunction() : doNothing()" (input)="onContentChange($event)">
+                <h1 tabindex="0" autofocus (keydown.enter)="$event.preventDefault()" style="margin-bottom: 0"
+                    [contentEditable]="allowUsersEdit() || inline" class="page-title" id="test"
+                    (blur)="!fromAddPost ? myFunction($event) : postForm?.get('name')?.setValue($event.target.innerText)">
                     {{postForm?.get('name')?.value ? postForm?.get('name')?.value  : title}}
                 </h1>
 

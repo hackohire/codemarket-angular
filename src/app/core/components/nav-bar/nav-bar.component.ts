@@ -15,6 +15,7 @@ import { MessageService } from '../../../shared/services/message.service';
 import { PostService } from '../../../shared/services/post.service';
 import { appConstants } from '../../../shared/constants/app_constants';
 import { Post } from '../../../shared/models/post.model';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-nav-bar',
@@ -29,6 +30,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
   postTypesArray = appConstants.postTypesArray;
 
   hideFooter = false;
+  showPostActions = true;
 
   listOfConnectedPosts: { posts: Post[], total?: number } = { posts: [] };
   totalConnectedPosts: number;
@@ -52,7 +54,8 @@ export class NavBarComponent implements OnInit, OnDestroy {
     private router: Router,
     private dialog: MatDialog,
     public messageService: MessageService,
-    public postService: PostService
+    public postService: PostService,
+    public location: Location
   ) {
 
     this.subscription.add(
@@ -61,25 +64,27 @@ export class NavBarComponent implements OnInit, OnDestroy {
         tap((r: NavigationEnd) => {
           console.log(r.url.includes('post'));
           this.hideFooter = r.url.includes('post');
+          this.showPostActions = r.url.includes('add-post?type=');
         }))
-        .subscribe()
+        .subscribe(),
     );
+
   }
 
   ngOnInit() {
     this.subscription.add(
       this.authService.loggedInUser$
-      .subscribe(u => {
-        if (u) {
-          // this.ref.detach();
-          this.loggedInUser = { ...u };
-          this.getConnectedPosts(u);
-          // this.ref.detectChanges();
-        } else {
-          this.loggedInUser = u;
-        }
+        .subscribe(u => {
+          if (u) {
+            // this.ref.detach();
+            this.loggedInUser = { ...u };
+            this.getConnectedPosts(u);
+            // this.ref.detectChanges();
+          } else {
+            this.loggedInUser = u;
+          }
 
-      })
+        })
     );
 
     this.cartListLength = this.store.select(selectCartListLength);

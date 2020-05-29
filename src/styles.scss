@@ -3356,16 +3356,17 @@ a {
 }
 
 .breadcrumb-area .page-title {
-  color: #00aeef !important;
+  // color: #00aeef !important;
+  color: white !important;
   font-weight: 500;
   font-size: 30px;
   text-transform: capitalize;
-  border-bottom: 1px solid #fff;
+  // border-bottom: 1px solid #fff;
 }
 
 .breadcrumb-area .page-title:focus {
   outline: none;
-  background: #fff;
+  // background: #fff;
   font-size: 24px;
   padding: 3.9px;
   border-bottom: 1px solid #ccc;

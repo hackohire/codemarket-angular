@@ -23,7 +23,8 @@ export const appConstants = {
     [PostType.Assignment]: 'sticky-note',
     [PostType.Question]: 'sticky-note',
     [PostType.Note]: 'sticky-note',
-    [PostType.Business]: 'sticky-note'
+    [PostType.Business]: 'sticky-note',
+    [PostType.Blog]: 'blog'
   },
 
   fileS3Bucket: 'joelupload-files',
@@ -318,6 +319,7 @@ export const appConstants = {
 
   postTypesArray: [
     { name: PostType.Assignment, label: 'Assignment' },
+    { name: PostType.Blog, label: 'Blog' },
     { name: PostType.Bug, label: 'Bug' },
     { name: PostType.Business, label: 'Business' },
     { name: PostType.Challenge, label: 'Challenge' },

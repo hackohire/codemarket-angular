@@ -3326,16 +3326,16 @@ a {
   height: 100%;
   width: 100%;
   position: absolute;
-  // background: -webkit-gradient(
-  //   linear,
-  //   right top,
-  //   left top,
-  //   from(#7347c1),
-  //   to(#00aeef)
-  // );
-  // background: -webkit-linear-gradient(right, #7347c1, #00aeef);
-  // background: -o-linear-gradient(right, #7347c1, #00aeef);
-  // background: linear-gradient(to left, #7347c1, #00aeef);
+  background: -webkit-gradient(
+    linear,
+    right top,
+    left top,
+    from(#7347c1),
+    to(#00aeef)
+  );
+  background: -webkit-linear-gradient(right, #7347c1, #00aeef);
+  background: -o-linear-gradient(right, #7347c1, #00aeef);
+  background: linear-gradient(to left, #7347c1, #00aeef);
   opacity: 1;
   top: 0;
   left: 0;

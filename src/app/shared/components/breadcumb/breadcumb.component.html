@@ -28,14 +28,14 @@
                         </a>
 
                         <div *ngIf="postActions">
-                            <!-- <button type="button" (click)="saveOrSubmitPost.emit('Drafted')"
+                            <button type="button" (click)="saveOrSubmitPost.emit('Drafted')"
                                 [disabled]="postForm?.invalid" mat-raised-button
                                 style="background-color: #28a745; color: white;">{{ 'Save' }}</button>
                             <button type="button" (click)="saveOrSubmitPost.emit('Published')"
                                 [disabled]="postForm?.invalid" mat-raised-button
-                                color="primary">{{ 'Publish' }}</button>
+                                color="primary" style="margin: 0 5px;">{{ 'Publish' }}</button>
                             <button type="button" (click)="cancelClicked()" mat-raised-button
-                                color="warn">{{ 'Cancel' }}</button> -->
+                                color="warn">{{ 'Cancel' }}</button>
                         </div>
 
                     </div>

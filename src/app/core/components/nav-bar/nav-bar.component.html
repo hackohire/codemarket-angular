@@ -104,6 +104,27 @@
         <span *ngIf="isUnread((messageService.messagesList$ | async)?.messages)" class="notification_count noti"
           style="height: 5px; min-width: 5px;"></span>
       </a>
+        <span *ngIf="isUnread((messageService.messagesList$ | async)?.messages)" class="notification_count noti" style="height: 5px; min-width: 5px;"></span>
+      </a> -->
+
+      <!-- <div class="icon_wrap" routerLinkActive="mat-primary" [routerLink]="['/', 'messages']">
+        <span style="font-size: 1.5rem !important;" class="vertical-align-middle far fa-bell"></span>
+        <span class="notification_count noti" style="height: 7px; min-width: 7px;"
+          *ngIf="isUnread((messageService.messagesList$ | async)?.messages)"></span>
+      </div> -->
+
+      <!-- <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'video-chat']" style="margin-left:5px; padding: 8px 16px;">
+        <div class="line-height-initial"><mat-icon>video_call</mat-icon> </div>
+      </a> -->
+      <!-- <ng-container *ngIf="showPostActions">
+        <a type="button" class="btn btn--vsm btn--round menu" (click)="postService?.saveOrSubmitPost.next('Drafted')"
+          style="background-color: #28a745; color: white;">{{ 'Save' }}</a>
+        <a type="button" class="btn btn--vsm btn--round menu" (click)="postService?.saveOrSubmitPost.next('Published')"
+          style="background-color: blue;">{{ 'Publish' }}</a>
+        <a type="button" class="btn btn--vsm btn--round menu" style="background-color: red;" (click)="location.back()"
+          color="warn">{{ 'Cancel' }}</a>
+      </ng-container> -->
+
 
 
 

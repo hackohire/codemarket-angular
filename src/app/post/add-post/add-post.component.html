@@ -5,7 +5,7 @@
 </app-breadcumb>
 
 
-<div class="container">
+<div class="container MobilePadding">
     <div class="row">
         <div class="col-md-8">
             <div [formGroup]="postForm" class="">
@@ -60,7 +60,7 @@
 
                 <div *ngIf="false" fxLayout="row" fxLayoutGap="10px">
                     <button type="button" (click)="submit('UnpubliDraftedhed')" [disabled]="postForm?.invalid"
-                        mat-raised-button style="background-color: #28a745; color: white;">{{ 'Save' }}</button>
+                        mat-raised-button style="background-color: #28a745; color: white; margin-right: 5px;">{{ 'Save' }}</button>
                     <button type="button" (click)="submit('Published', descriptionEditor)"
                         [disabled]="postForm?.invalid" mat-raised-button color="primary">{{ 'Publish' }}</button>
                     <button type="button" (click)="cancelClicked()" mat-raised-button
@@ -84,7 +84,7 @@
                         <mde-popover #addTagsPopover="mdePopover" [mdePopoverOverlapTrigger]="false"
                             [mdePopoverCloseOnClick]="false" [mdePopoverArrowOffsetX]="8"
                             mdePopoverArrowColor="#FFFFFF">
-                            <div style="background: #f8f9fb; padding: 10px;">
+                            <div style="background: #fff; padding: 10px;border: 1px solid #ccc;margin-top: -10px;box-shadow: 0 0 10px 0 #aaa;">
                                 <app-autocomplete [autoComplete]="postForm?.get('tags')" [collection]="'tags'"
                                     [multiple]="true" [placeholder]="'Tags'" [type]="'tag'"></app-autocomplete>
                                 <mat-icon>send</mat-icon>
@@ -108,7 +108,7 @@
                             <mde-popover #addCollaboratorsPopover="mdePopover" [mdePopoverOverlapTrigger]="false"
                                 [mdePopoverCloseOnClick]="false" [mdePopoverArrowOffsetX]="8"
                                 mdePopoverArrowColor="#FFFFFF">
-                                <div style="background: #f8f9fb; padding: 10px;">
+                                <div style="background: #fff; padding: 10px;border: 1px solid #ccc;margin-top: 0px;box-shadow: 0 0 10px 0 #aaa;">
                                     <app-autocomplete class="field-full-width" [allowToAdd]="false"
                                         [autoComplete]="postForm?.get('collaborators')"
                                         [placeholder]="'Select Collaborators'" [collection]="'users'" [type]=""
@@ -137,7 +137,7 @@
                         <mde-popover #addClientsPopover="mdePopover" [mdePopoverOverlapTrigger]="false"
                             [mdePopoverCloseOnClick]="false" [mdePopoverArrowOffsetX]="8"
                             mdePopoverArrowColor="#FFFFFF">
-                            <div style="background: #f8f9fb; padding: 10px;">
+                            <div style="background: #fff; padding: 10px;border: 1px solid #ccc;margin-top: -10px;box-shadow: 0 0 10px 0 #aaa;">
                                 <app-autocomplete class="field-full-width" [allowToAdd]="false"
                                     [autoComplete]="postForm?.get('clients')" [placeholder]="'Select Clients'"
                                     [collection]="'users'" [type]="" [multiple]="true" matInput>
@@ -148,7 +148,7 @@
                     </li>
                     <li *ngIf="true">
                         <p class="data-label">Company</p>
-                        <p class="info" style="text-transform: capitalize; cursor: pointer;">
+                        <p class="info" style="text-transform: capitalize; cursor: pointer;padding-left: 7px;">
                             <span *ngFor="let c of postForm?.get('companies')?.value; let ei = index;"
                                 [routerLink]="['/', 'company', c?._id]">{{c?.name + (ei === postForm?.get('companies')?.value?.length - 1 ? '' : ', ' )}}</span>
                         </p>
@@ -158,10 +158,9 @@
                         <mde-popover #addCopmaniesPopover="mdePopover" [mdePopoverOverlapTrigger]="false"
                             [mdePopoverCloseOnClick]="false" [mdePopoverArrowOffsetX]="8"
                             mdePopoverArrowColor="#FFFFFF">
-                            <div style="background: #f8f9fb; padding: 10px;">
+                            <div style="background: #fff; padding: 10px;border: 1px solid #ccc;margin-top: -10px;box-shadow: 0 0 10px 0 #aaa;">
                                 <app-autocomplete [autoComplete]="postForm?.get('companies')" [collection]="'companies'"
-                                    [forCompany]="true" [multiple]="true" [placeholder]="'Select Company'" [type]=""
-                                    class="col-md-6">
+                                    [forCompany]="true" [multiple]="true" [placeholder]="'Select Company'" [type]="">
                                 </app-autocomplete>
                                 <mat-icon>send</mat-icon>
                             </div>

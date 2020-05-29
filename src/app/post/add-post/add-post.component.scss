@@ -54,8 +54,10 @@
         .ck.ck-toolbar.ck-toolbar_grouping>.ck-toolbar__items {
             overflow-x: auto;
         }
+        .ck.ck-editor__editable:not(.ck-editor__nested-editable).ck-rounded-corners {
+            min-height: 310px !important;
+        }
     }
-
 }
 
 

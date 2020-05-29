@@ -86,7 +86,7 @@ export class AddPostComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     if (this.descriptionEditor && this.descriptionEditor.ckEditorRef) {
       console.log(this.descriptionEditor.ckEditorRef.elementRef.nativeElement);
-      this.descriptionEditor.ckEditorRef.editorElement.style.minHeight = 'calc(100vh - 422px)';
+      this.descriptionEditor.ckEditorRef.editorElement.style.minHeight = '73vh';
     }
   }
 

@@ -2,7 +2,7 @@ import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { Hub } from '@aws-amplify/core';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
-import { map, catchError, tap, take } from 'rxjs/operators';
+import { map, catchError, tap } from 'rxjs/operators';
 import { of } from 'rxjs/internal/observable/of';
 import { CognitoUser, CognitoUserSession } from 'amazon-cognito-identity-js';
 import Auth from '@aws-amplify/auth';
@@ -11,7 +11,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../store/state/app.state';
 import { Authorise, SetLoggedInUser } from '../store/actions/user.actions';
 import { selectLoggedInUser } from '../store/selectors/user.selector';
-import { Observable, BehaviorSubject, Subscription, Subject } from 'rxjs';
+import { Observable, BehaviorSubject, Subscription } from 'rxjs';
 import { User } from '../../shared/models/user.model';
 import { Router } from '@angular/router';
 import { isPlatformBrowser, DOCUMENT, isPlatformServer } from '@angular/common';
@@ -22,6 +22,7 @@ import { ToastrService } from 'ngx-toastr';
 import { TransferState, makeStateKey } from '@angular/platform-browser';
 import { MessageService } from '../../shared/services/message.service';
 import { NotificationService } from '../../auth/notification.service';
+import Storage from '@aws-amplify/storage';
 
 export interface NewUser {
   email: string;
@@ -56,6 +57,7 @@ export class AuthService {
     private _notification: NotificationService
     // private commentService: CommentService
   ) {
+
     this.loggedInUser$ = this.store.select(selectLoggedInUser);
     this.loggedInUser$.subscribe((u) => this.loggedInUser = u);
 
@@ -70,7 +72,7 @@ export class AuthService {
 
         if (payload.event === 'signIn') {
           this.checkIfUserIsLoggedIn();
-          this.router.navigate(['/', 'dashboard', 'bugfixes-all']);
+          this.router.navigate(['/', 'dashboard', 'my-profile']);
         } else if (payload.event === 'oAuthSignOut') {
           this.store.dispatch(SetLoggedInUser({ payload: null }));
         }
@@ -84,7 +86,9 @@ export class AuthService {
     if (this.transferState.hasKey(key)) {
       const user = this.transferState.get(key, null);
       this.transferState.remove(key);
-      this.setUserOnline(user);
+      if (user) {
+        // this.setUserOnline(user);
+      }
       return of(user);
     }
     return this.apollo.mutate(
@@ -99,6 +103,7 @@ export class AuthService {
               github_url
               stackoverflow_url
               location
+              slug
               currentJobDetails {
                 jobProfile {
                   name
@@ -142,7 +147,9 @@ export class AuthService {
         if (isPlatformServer(this._platformId)) {
           this.transferState.set(key, d.data.authorize);
         }
-        this.setUserOnline(d.data.authorize);
+        if (d && d.data && d.data.authorize) {
+          // this.setUserOnline(d.data.authorize);
+        }
         return d.data.authorize;
       }),
       catchError(e => of(e)),
@@ -272,15 +279,6 @@ export class AuthService {
     }
   }
 
-  login(): void {
-    // const config = Amplify.Auth._config;
-    // const oauth = Amplify.Auth._config.oauth;
-    // const url = `${environment.COGNITO_AUTH_DOMAIN}/login?response_type=${oauth.responseType}&client_id=${config.aws_user_pools_web_client_id}&redirect_uri=${oauth.redirectSignIn}`;
-    // console.log(Amplify.Auth._config);
-    // window.location.assign(url);
-    Auth.federatedSignIn();
-  }
-
   logout(): void {
     Auth.signOut().then(d => {
       console.log('user has been signed out');
@@ -345,4 +343,27 @@ export class AuthService {
       });
     });
   }
+
+  /** CKEditor Token Required to set for the realtime collaboration */
+  generateCkEditorToken(user: User, role: string) {
+    return this.apollo.mutate(
+      {
+        mutation: gql`
+        mutation generateCkEditorToken($user: UserInput!, $role: String) {
+          generateCkEditorToken(user: $user, role: $role)
+        }
+        `,
+        variables: {
+          user,
+          role
+        },
+        fetchPolicy: 'no-cache'
+      }
+    ).pipe(
+      map((d: any) => {
+        return d.data.generateCkEditorToken;
+      })
+    );
+  }
+
 }

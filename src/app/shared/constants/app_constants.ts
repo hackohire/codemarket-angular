@@ -20,7 +20,10 @@ export const appConstants = {
     [PostType.Class]: 'briefcase',
     [PostType.Service]: 'briefcase',
     [PostType.CompetitiveAdvantage]: 'briefcase',
-    [PostType.Assignment]: 'sticky-note'
+    [PostType.Assignment]: 'sticky-note',
+    [PostType.Question]: 'sticky-note',
+    [PostType.Note]: 'sticky-note',
+    [PostType.Business]: 'sticky-note'
   },
 
   fileS3Bucket: 'joelupload-files',
@@ -178,9 +181,6 @@ export const appConstants = {
       type
       categories
       referencePostUrl
-      description {
-        ...Description
-      }
       price
       status
       createdAt
@@ -192,6 +192,7 @@ export const appConstants = {
       comments {
         ...Comments
       }
+      commentCount
       likeCount
       users {
         _id
@@ -201,6 +202,7 @@ export const appConstants = {
       createdBy {
         _id
         name
+        slug
         avatar
         currentJobDetails {
           jobProfile {
@@ -218,9 +220,6 @@ export const appConstants = {
       }
       slug
       comments {
-        text {
-          ...Description
-        }
         _id
         type
         referenceId
@@ -230,6 +229,7 @@ export const appConstants = {
           _id
           name
           avatar
+          slug
         }
         blockId
         blockSpecificComment
@@ -262,14 +262,29 @@ export const appConstants = {
         _id
       }
 
+      connectedPosts {
+        name
+        slug
+        _id
+      }
+
       collaborators {
         _id
         name
+        avatar
+        slug
       }
 
       assignees {
         _id
         name
+        slug
+      }
+
+      clients {
+        _id
+        name
+        slug
       }
 
       jobProfile {
@@ -284,14 +299,27 @@ export const appConstants = {
       birthDate
       address
       website
+
+      descriptionHTML
+      activities {
+        action
+        activityDate
+        by {
+          _id
+          name
+        }
+        commentId
+        postId
+        message
+      }
     }
-    ${description}
     ${comment}
     `,
 
   postTypesArray: [
     { name: PostType.Assignment, label: 'Assignment' },
     { name: PostType.Bug, label: 'Bug' },
+    { name: PostType.Business, label: 'Business' },
     { name: PostType.Challenge, label: 'Challenge' },
     { name: PostType.Class, label: 'Class' },
     { name: PostType.CompetitiveAdvantage, label: 'Competitive Advantage' },
@@ -302,9 +330,12 @@ export const appConstants = {
     { name: PostType.Howtodoc, label: 'How-To-Doc' },
     { name: PostType.Interview, label: 'Interview' },
     { name: PostType.Job, label: 'Job' },
+    { name: PostType.Note, label: 'Notes' },
     { name: PostType.Product, label: 'Product' },
+    { name: PostType.Question, label: 'Questions' },
     { name: PostType.Requirement, label: 'Requirement' },
     { name: PostType.Service, label: 'Service' },
-    { name: PostType.Testing, label: 'Testing' }
+    { name: PostType.Testing, label: 'Testing' },
+    { name: PostType.Forms, label: 'Forms' }
   ],
 };

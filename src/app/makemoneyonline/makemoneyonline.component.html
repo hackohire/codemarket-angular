@@ -1,0 +1,64 @@
+<app-breadcumb [title]="breadcumb?.title"></app-breadcumb>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div [formGroup]="makeMoneyOnlineForm" class="add-form-area common-box-shadow">
+                <mat-form-field class="field-full-width">
+                    <input type="text" matInput formControlName="firstName" placeholder="First Name">
+                </mat-form-field>
+
+                <br />
+
+                <mat-form-field class="field-full-width">
+                    <input type="text" matInput formControlName="lastName" placeholder="Last Name">
+                </mat-form-field>
+
+
+                <br />
+                
+                <mat-form-field class="field-full-width">
+                    <input type="text" matInput formControlName="email" placeholder="Email Address">
+                </mat-form-field>
+                <br />
+    
+
+                <mat-form-field class="field-full-width">
+                    <input type="text" matInput formControlName="phone" placeholder="Phone Number">
+                </mat-form-field>
+                <br />
+                <label fxFlex="80" style="margin-bottom: 0 !important; padding-right: 16px;">Do you have a business?</label>
+                <mat-radio-group formControlName="haveBusiness" aria-label="Do you have a business?">
+                    <mat-radio-button (change)="radioChange($event)" value="Yes">Yes</mat-radio-button>
+                    <mat-radio-button (change)="radioChange($event)" value="No">No</mat-radio-button>
+                </mat-radio-group>
+
+                <br />
+
+                <mat-form-field *ngIf="selectedRadio === 'Yes'" class="field-full-width">
+                    <textarea type="text" matInput formControlName="describeBusiness" placeholder="Describe your business."></textarea>
+                </mat-form-field>
+
+                <br />
+
+                <mat-form-field *ngIf="selectedRadio === 'Yes'" class="field-full-width">
+                    <input type="text" matInput formControlName="WebsiteLink" placeholder="Website link">
+                </mat-form-field>
+
+                <br />
+
+                <mat-form-field *ngIf="selectedRadio === 'Yes'" class="field-full-width">
+                    <textarea type="text" matInput formControlName="businessAddress" placeholder="Business Address"></textarea>
+                </mat-form-field>
+
+                <br />
+
+                <div fxLayout="row" fxLayoutGap="10px">
+                    <button type="button" (click)="submit()" mat-raised-button color="primary">Submit</button>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -81,6 +81,9 @@ export class AutocompleteComponent implements OnInit, OnDestroy {
   }
 
   addCompany = (name: string) => {
+    if (!this.authService.checkIfUserIsLoggedIn(true)) {
+      return;
+    }
     return this.companyService.addCompany({name, createdBy: this.authService.loggedInUser._id}).toPromise();
   }
 

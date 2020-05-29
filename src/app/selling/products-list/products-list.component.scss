@@ -1,6 +1,29 @@
 @import '../../../assets/css/theme';
 
 
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1335px !important;
+  }
+}
+
+ aside.sidebar {
+  width: max-content;
+  position: sticky;
+  max-height: 85vh;
+  top: 55px;
+  // overflow: auto;
+
+  // &::-webkit-scrollbar-thumb {
+  //   background: rgba(0, 0, 0, .26);
+  // }
+
+  // &::-webkit-scrollbar {
+  //   height: 4px;
+  //   width: 4px;
+  // }
+}
+
 .item-grid {
   grid-column-start: 1;
   grid-column-end: 3;

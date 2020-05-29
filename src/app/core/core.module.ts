@@ -143,6 +143,7 @@ export class CoreModule {
     /** Codemarket Apollo Client */
     apollo.create({
       link,
+      connectToDevTools: true,
       cache: new InMemoryCache({
         dataIdFromObject: (o: any) => {
           return o._id;
@@ -153,30 +154,31 @@ export class CoreModule {
           Whenever Schema gets changed for Product, Help, Interview and Requirements => "description" field
           Resolver also has to be changed accordingly
         */
-        fragmentMatcher: new IntrospectionFragmentMatcher({
-          introspectionQueryResultData: {
-            __schema: {
-              types: [
-                {
-                  kind: 'UNION',
-                  name: 'descriptionBlocks',
-                  possibleTypes: [
-                    { name: 'HeaderBlock' },
-                    { name: 'ParagraphBlock' },
-                    { name: 'CodeBlock' },
-                    { name: 'ImageBlock' },
-                    { name: 'ListBlock' },
-                    { name: 'QuoteBlock' },
-                    { name: 'TableBlock' },
-                    { name: 'WarningBlock' },
-                    { name: 'EmbedBlock' },
-                    { name: 'LinkToolBlock' },
-                  ],
-                },
-              ],
-            },
-          },
-        })
+        // fragmentMatcher: new IntrospectionFragmentMatcher({
+        //   introspectionQueryResultData: {
+        //     __schema: {
+        //       types: [
+        //         {
+        //           kind: 'UNION',
+        //           name: 'descriptionBlocks',
+        //           possibleTypes: [
+        //             { name: 'HeaderBlock' },
+        //             { name: 'ParagraphBlock' },
+        //             { name: 'CodeBlock' },
+        //             { name: 'ImageBlock' },
+        //             { name: 'ListBlock' },
+        //             { name: 'QuoteBlock' },
+        //             { name: 'TableBlock' },
+        //             { name: 'WarningBlock' },
+        //             { name: 'EmbedBlock' },
+        //             { name: 'LinkToolBlock' },
+        //             { name: 'AttachesBlock' }
+        //           ],
+        //         },
+        //       ],
+        //     },
+        //   },
+        // })
       }),
 
     });

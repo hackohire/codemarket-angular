@@ -3,6 +3,7 @@ import { BreadCumb } from '../../shared/models/bredcumb.model';
 import { AuthService } from '../../core/services/auth.service';
 import { environment } from '../../../environments/environment';
 import { ActivatedRoute, Router } from '@angular/router';
+import { keyBy } from 'lodash';
 import { UserService } from '../../user/user.service';
 import { User } from '../../shared/models/user.model';
 import { Observable, Subscription, of } from 'rxjs';
@@ -47,7 +48,7 @@ enum navLinkName {
   /** Creating Separate Instance for User Service & Comment Service is very important, Because we are creating the instances of
    * User's posts and then mutating it, for realtime post & comment => add / edit / delete
    */
-  providers: [UserService],
+  providers: [],
   animations: [
     trigger('bodyExpansion', [
       state('collapsed', style({ height: '0px', display: 'none' })),
@@ -66,6 +67,8 @@ export class MyProfileComponent implements OnInit {
 
   userData$: Observable<User>;
 
+  files = [];
+
   postTypesArray = appConstants.postTypesArray;
   postTypes = PostType;
 
@@ -81,6 +84,11 @@ export class MyProfileComponent implements OnInit {
   totalOtherPosts: number;
   paginator: MatPaginator;
 
+  selectedBlock = null;
+
+  selectedPost: Post;
+  selectedPostComments: Observable<Comment[]>;
+
   commentForm: FormGroup;
 
   @ViewChild('coverPic', { static: false }) coverPic;
@@ -92,6 +100,17 @@ export class MyProfileComponent implements OnInit {
   @ViewChild('profilePic', { static: false }) profilePic;
   selectedProfilePic: File;
   selectedProfilePicURL = '';
+
+  postTypeCounts;
+
+  customTabs = [
+    // {
+    //   name: 'files',
+    //   label: 'Files',
+    //   isCustom: true,
+    //   count: 0
+    // }
+  ];
 
   profileViewLinks = [
     // {
@@ -129,28 +148,6 @@ export class MyProfileComponent implements OnInit {
     //   view: navLinkName.dreamjobs,
     //   title: 'Dream Jobs'
     // },
-    // {
-    //   view: navLinkName.socialimpactgoal,
-    //   title: 'Social Impact Goals'
-    // },
-    // {
-    //   view: 'challenges',
-    //   title: 'Challenges',
-    //   types: [
-    //     {
-    //       view: navLinkName.leadershipchallenge,
-    //       title: 'Leadership Challenges'
-    //     },
-    //     {
-    //       view: navLinkName.technicalchallenge,
-    //       title: 'Technical Challenges'
-    //     },
-    //     {
-    //       view: navLinkName.businesschallenge,
-    //       title: 'Business Challenges'
-    //     }
-    //   ]
-    // },
     {
       view: navLinkName.posts,
       title: 'Posts'
@@ -182,7 +179,7 @@ export class MyProfileComponent implements OnInit {
 
     /** Peer Subscription for Video Call */
     // this.subscription.add(
-    //   this.userService.peer.subscribe((p) => {
+    //   this.userService.peer.asObservable().subscribe((p) => {
     //     if (p) {
     //       console.log(p);
     //       this.peer = p;
@@ -192,19 +189,13 @@ export class MyProfileComponent implements OnInit {
   }
 
   deletePost(_id: string) {
-    this.postService.deletePost(_id).subscribe();
-  }
-
-  isExpanded(category) {
-    if (category && category.types) {
-      return category.types.indexOf(c => c.view === this.profileView) > 0;
-    }
-    return false;
+    this.postService.deletePost(_id, {name: this.authService.loggedInUser.name, _id: this.authService.loggedInUser.name}).subscribe();
   }
 
   ngOnInit() {
-    this.authorId = this.activatedRoute.snapshot.params.authorId;
-
+    // this.authorId = this.activatedRoute.snapshot.params.authorId;
+    const params = this.activatedRoute.snapshot.params;
+    this.authorId = params && params.slug ? params.slug.split('-').pop() : '';
     this.profileView = this.activatedRoute.snapshot.queryParams['view'] ? this.activatedRoute.snapshot.queryParams['view'] : 'posts';
 
     // If user is visitng somebody else's profile
@@ -212,7 +203,7 @@ export class MyProfileComponent implements OnInit {
       // this.navLinks = this.navLinks.filter(n => !n.showOnlyToLoggedInUser);
       this.userData$ = this.userService.getUserById(this.authorId);
       // this.fetchPostsConnectedWithUser(this.authorId);
-
+      this.fetchCounts(this.authorId);
       // this.userService.onUsersPostChanges(this.authorId);
       // this.commentService.onCommentAdded({ user: { _id: this.authorId } }, []);
       // this.commentService.onCommentUpdated({ user: { _id: this.authorId } }, []);
@@ -227,6 +218,8 @@ export class MyProfileComponent implements OnInit {
         this.authService.loggedInUser$.pipe(
           map((user) => {
             if (user) {
+              this.authorId = user._id;
+              this.fetchCounts(user._id);
               // this.fetchPostsConnectedWithUser(user._id);
               // this.userService.onUsersPostChanges(user._id);
               // this.commentService.onCommentAdded({ user }, []);
@@ -238,13 +231,25 @@ export class MyProfileComponent implements OnInit {
         ).subscribe()
       );
     }
+    
+    this.userService.peer.asObservable().subscribe((p) => {
+      if (p) {
+        console.log(p);
+        this.peer = p;
+      }
+    });
+  }
 
-    // this.userService.peer.subscribe((p) => {
-    //   if (p) {
-    //     console.log(p);
-    //     this.peer = p;
-    //   }
-    // });
+  fetchCounts(userId) {
+    this.postService.getCountOfAllPost(userId, '', "").subscribe((data) => {
+      if (data.length) {
+        data = keyBy(data, '_id');
+        appConstants.postTypesArray.forEach((obj) => {
+          obj['count'] = data[obj.name] ? data[obj.name].count : 0
+        });
+        // this.customTabs[0].count = data['files'] ? data['files'].count: 0;
+      }
+    });
   }
 
   createTabs() {
@@ -295,7 +300,7 @@ export class MyProfileComponent implements OnInit {
   openDialog(): void {
     this.dialog.open(VideoChatComponent, {
       width: '550px',
-      data: { authorId: this.authorId, peer: this.peer },
+      data: { authorId: this.authorId, peer: this.userService.peer.value },
       disableClose: true
     });
   }
@@ -329,17 +334,26 @@ export class MyProfileComponent implements OnInit {
     }
   }
 
-  selectMainCategory(category, panel) {
+  selectMainCategory(category) {
     if (!category.types) {
-      this.profileView = category.view;
-      this.router.navigate([category && category.path ? category.path : './'],
+      this.profileView = category;
+      this.router.navigate(['./'],
         {
           relativeTo: this.activatedRoute,
-          queryParams: { view: category.view }, queryParamsHandling: 'merge'
+          queryParams: { view: category }, queryParamsHandling: 'merge'
         });
-    } else {
-      panel.toggle();
     }
+  }
+
+  showCommentsOnSide(event: { block: any, comments, selectedPost}) {
+    console.log(event);
+    this.selectedBlock = event.block;
+    this.selectedPostComments = event.comments;
+    this.selectedPost = event.selectedPost;
+  }
+
+  redirectToAddPost(postType) {
+    this.router.navigate(['./post/add-post'], { queryParams: { type: postType } });
   }
 
   /** Fetch the list of posts for the posts tab based on the pagination */
@@ -352,6 +366,19 @@ export class MyProfileComponent implements OnInit {
       this.listOfAllOtherPosts.posts = u.posts;
       this.totalOtherPosts = u.total;
     });
+  }
+
+  fetchBasedOnCustomTab(tab) {
+    switch (tab.name) {
+      case 'files':
+        this.profileView = tab.name;
+        this.selectedBlock = null;
+        this.fetchFilesUploadedByUser();
+        break;
+    }
+  }
+
+  fetchFilesUploadedByUser() {
   }
 
   addProfilePic() {
@@ -374,7 +401,7 @@ export class MyProfileComponent implements OnInit {
 
       await Storage.vault.put(fileName, this.selectedProfilePic, {
 
-        bucket: appConstants.fileS3Bucket,
+        bucket: environment.fileS3Bucket,
         path: 'avatar',
         level: 'public',
         contentType: this.selectedProfilePic.type,
@@ -422,7 +449,7 @@ export class MyProfileComponent implements OnInit {
       const fileName = fileNameSplitArray[0] + '-' + new Date().toISOString() + '.' + fileExt;
       await Storage.vault.put(fileName, this.selectedCoverPic, {
 
-        bucket: appConstants.fileS3Bucket,
+        bucket: environment.fileS3Bucket,
         path: 'cover',
         level: 'public',
         contentType: this.selectedCoverPic.type,

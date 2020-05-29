@@ -1,4 +1,4 @@
-<mat-sidenav-container class="sidenav-container">
+<mat-sidenav-container class="sidenav-container" autosize>
 
   <!-- <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'main'" [opened]="(isHandset$ | async) === false">
@@ -6,20 +6,19 @@
     <mat-nav-list>
       <a mat-list-item [routerLink]="['/', 'dashboard']">Dashboard</a>
 
-      <a mat-list-item [routerLink]="['/', 'user', 'edit-profile']">Edit Profile</a>
+    <mat-nav-list>
 
       <ng-container *ngFor="let p of postTypesArray">
         <a mat-list-item [routerLink]="['/', 'post', 'post-list']" [queryParams]="{type: p.name, all: false}">My
           &nbsp;<span style="text-transform: capitalize;">{{p.name}}</span></a>
       </ng-container>
 
-      <a mat-list-item [routerLink]="['/', 'company', 'company-list']" [queryParams]="{all: false}">My Companies</a>
     </mat-nav-list>
   </mat-sidenav> -->
 
-  <mat-sidenav-content>
-    <mat-toolbar style="padding: 10px 0; background-color: rgb(8, 8, 8);">
 
+  <mat-sidenav-content>
+    <mat-toolbar class="SearchLoginBox">
 
       <!-- <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'add-post-type']">
         <i style="font-size: 1.0rem !important; color: #ffff00;" class="vertical-align-middle fal fa-add fa-fw"></i>
@@ -27,7 +26,7 @@
       </a> -->
 
       <!-- Search -->
-      <a mat-button routerLinkActive="mat-primary" (click)="openSearchDialog()">
+      <a mat-button routerLinkActive="mat-primary" (click)="openSearchDialog()" style="line-height: 3;">
         <i style="font-size: 1.0rem !important; color: #ffff00;" class="vertical-align-middle fal fa-search fa-fw"></i>
         <span style="color: #ffffff;" class="line-height-initial"> Search</span>
       </a>
@@ -63,9 +62,6 @@
           </span>
         </a>
       </button>
-      <div style="float: right">
-
-      </div>
       <mat-menu #userMenu="matMenu" panelClass="menu-width">
         <div class="menu-width">
           <!-- Shopping Cart -->
@@ -88,7 +84,7 @@
     <mat-toolbar *ngIf="false">
 
       <!-- Toggle Sidebar Button -->
-      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
+      <button *ngIf="false" type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
 
@@ -96,14 +92,14 @@
       <!-- <img (click)="redirect()" sizes="(max-width: 282px) 100vw, 282px"
         srcset="../../../../assets/images/logo_qugbvk_c_scalew_200.png 200w, ../../../../assets/images/logo_qugbvk_c_scalew_282.png 282w"
         src="../../../../assets/images/logo_qugbvk_c_scalew_282.png" alt=""> -->
-      <img (click)="redirect()" src="../../../../assets/images/logo.png">
+      <img (click)="redirect()" src="../../../../assets/images/CodemarketSVG.svg" class="brand-logo">
       <!-- <h2 [routerLink]="['/']">Codemarket</h2> -->
 
       <!-- End Items -->
       <div fxFlex></div>
 
       <!-- Message Alert Area -->
-      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'messages']">
+      <!-- <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'messages']">
         <span style="font-size: 1.3rem !important;" class="vertical-align-middle far fa-bell"></span>
         <span *ngIf="isUnread((messageService.messagesList$ | async)?.messages)" class="notification_count noti"
           style="height: 5px; min-width: 5px;"></span>
@@ -114,19 +110,20 @@
 
       <!-- <app-add-post-menu style="color: black;"></app-add-post-menu> -->
       <!-- <app-software-dev-menu style="color: black;"></app-software-dev-menu> -->
-      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'about-us']" [queryParams]="{all: true}">
+      <!-- <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'company', 'company-list']" [queryParams]="{all: true}">
+        <div class="line-height-initial"> Businesses </div>
+      </a> -->
+      <!-- <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'about-us']" [queryParams]="{all: true}" style="margin-left:5px; padding: 8px 16px;">
         <div class="line-height-initial"> About </div>
       </a>
-      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'membership']" [queryParams]="{all: true}">
+      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'membership']" [queryParams]="{all: true}" style="margin-left:5px; padding: 8px 16px;">
         <div class="line-height-initial"> Membership </div>
-      </a>
+      </a> -->
 
+    </mat-toolbar>
 
+    <div class="rupertspira">
 
-    </mat-toolbar> 
-
-    <div class="rupertspira">     
-    
       <div class="container">
 
         <div id="top_hdr">
@@ -272,7 +269,8 @@
           <div class="row text-center text-md-left mt-3 pb-3">
             <div class="col-md-3 col-lg-3 col-xl-3">
               <h6 class="text-uppercase mb-4 font-weight-bold">Codemarket</h6>
-              <p class="text-left">Our mission is to bring innovation to every problem by teaching software development to everyone.</p>
+              <p class="text-left">Our mission is to bring innovation to every problem by teaching software development
+                to everyone.</p>
             </div>
             <hr class="w-100 clearfix d-md-none border-0">
             <hr class="w-100 clearfix d-md-none">
@@ -287,7 +285,8 @@
           <hr>
           <div class="row d-flex align-items-center">
             <div class="col-md-7 col-lg-8">
-              <p class="text-center text-md-left">© 2020 Copyright <a href="https://www.codemarket.io"> codemarket.io </a></p>
+              <p class="text-center text-md-left">© 2020 Copyright <a href="https://www.codemarket.io"> codemarket.io
+                </a></p>
             </div>
             <div class="col-md-5 col-lg-4 ml-lg-0">
               <div class="text-center text-md-right">

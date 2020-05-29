@@ -7,11 +7,10 @@
     =================================-->
 
     <app-breadcumb (editPost)="postService?.editPost(details)"
-        [showEditPostDetails]="(details?.createdBy?._id === authService?.loggedInUser?._id || collaborators.indexOf(authService?.loggedInUser?._id) >= 0) ? true : false"
         [showAddCollaborators]="details?.createdBy?._id === authService?.loggedInUser?._id ? true : false"
-        [showAddAssignee]="details?.createdBy?._id === authService?.loggedInUser?._id"
-        [postDetails]="postDetails"
-        [title]="details?.name" [path]="breadcumb?.path" [eventDate]="details?.dateRange" [postDetails]="details">
+        [showShareButtons]="true" [showAddClients]="details?.createdBy?._id === authService?.loggedInUser?._id"
+        [title]="details?.name" [path]="breadcumb?.path"
+        [postDetails]="details" [postForm]="postForm">
     </app-breadcumb>
 
     <!--================================
@@ -21,20 +20,46 @@
     <!--============================================
         START SINGLE POST DESCRIPTION AREA
     ==============================================-->
-    <section class="single-product-desc">
+    <section>
         <div class="container">
             <div class="row">
-                <div class="col-lg-8">
+                <div class="col-lg-0">
+                    <!-- Based On the List Of Post Types -->
+                    <app-post-type-nav *ngIf="false" [selectedPostType]="selectedPostType"
+                     (postTypeClick)="selectedBlock = null; getConnectedPosts($event?.name); showConnectedPosts = true"
+                     (plusButtonClick)="redirectToAddPost(details, $event)"
+                     ></app-post-type-nav>
+                    <!-- <div class="docs-component-viewer-nav common-box-shadow" style="margin-bottom: 20px;">
+                        <div class="docs-component-viewer-nav-content">
+                            <div *ngFor="let p of postTypesArray; let last = last;">
+                                <button cdkAccordionItem class="docs-nav-content-btn"
+                                    [ngClass]="selectedPostType === p.name ? 'docs-component-viewer-sidenav-item-selected' : ''">
+                                    <span
+                                        (postTypeClick)="getConnectedPosts($event); showConnectedPosts = true">{{p.label}}</span>
+                                    <mat-icon (plusButtonClick)="redirectToAddPost(details, $event)">add</mat-icon>
+                                </button>
+                                <hr *ngIf="!last" />
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+                <div class="col-lg-1">
+
+                </div>
+                <div *ngIf="!showConnectedPosts" [ngClass]="selectedBlock ? 'col-lg-6 col-md-6' : 'col-lg-10 col-md-10'">
 
                     <div class="item-info">
                         <div>
                             <div class="tab-pane fade show product-tab active" id="product-details">
                                 <article>
-
-                                    <app-editor *ngIf="details?.description && details?.description?.length"
+                                    <app-editor
+                                        (showComments)="showCommentsOnSide($event)"
+                                        [data]="details?.description"
                                         [commentsList]="commentService?.commentsList$ | async"
-                                        [blockLevelComments]="true" [readOnly]="true" [data]="details?.description"
-                                        [id]="'details-editor'" [post]="details" [commentType]="'post'">
+                                        [blockLevelComments]="false" [readOnly]="true"
+                                        [realTime]="true"
+                                        [role]="'writer'"
+                                        [id]="'details-editor'" [html]="details?.descriptionHTML" [post]="details" [commentType]="'post'">
                                     </app-editor>
 
                                     <br />
@@ -44,261 +69,54 @@
                                     </ng-template>
                                 </article>
                             </div>
+
+                            <ng-container *ngTemplateOutlet="addCommentTemplate; context: {details: details}">
+                            </ng-container>
                         </div>
-                    
-                        <ng-container *ngTemplateOutlet="locationTemplate; context: {location: details?.location}">
-                        </ng-container>
-                        <ng-container *ngTemplateOutlet="addCommentTemplate; context: details"></ng-container>
+
                     </div>
 
                     <!-- end /.item-info -->
                 </div>
                 <!-- end /.col-md-8 -->
 
-                <div class="col-lg-4">
-                    <aside class="sidebar sidebar--single-product">
+                <div *ngIf="!showConnectedPosts" class="col-md-6 col-lg-4">
+                        <ng-container *ngTemplateOutlet="addBlockLevelCommentTemplate; context: {details: details, comments: (commentService?.commentsList$ | async)}">
+                        </ng-container>
 
-
-                        <div class="author-card sidebar-card " *ngIf="details?.createdBy?.name">
-                            <div class="card-title">
-                                <h4>Author Information</h4>
-                            </div>
-
-                            <div class="author-infos">
-                                <div class="author_avatar">
-                                    <img [src]="details?.createdBy?.avatar ? ((s3FilesBucketURL + details.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar"
-                                        alt="Presenting the broken author avatar :D">
-                                </div>
-
-                                <div class="author">
-                                    <a [routerLink]="['/', 'dashboard', 'profile', details?.createdBy?._id ]">
-                                        <h4>{{details?.createdBy?.name}}</h4>
-                                    </a>
-                                    <button
-                                        *ngIf="details?.createdBy?._id && authService?.loggedInUser?._id && authService?.loggedInUser?._id !== details?.createdBy?._id"
-                                        (click)="openDialog(details?.createdBy?._id)" mat-mini-fab color="primary">
-                                        <mat-icon>video_call</mat-icon>
-                                    </button>
-                                    <!-- <p>Signed Up: 08 April 2016</p> -->
-                                </div>
-                                <!-- end /.author -->
-
-                                <div class="social social--color--filled">
-                                    <ul>
-                                        <li>
-                                            <a href="#">
-                                                <span class="fab fa-facebook fa-lg"></span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <span class="fab fa-github fa-lg"></span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <span class="fab fa-linkedin fa-lg"></span>
-                                            </a>
-                                        <li>
-                                            <a href="#">
-                                                <i class="fab fa-stack-overflow"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <!-- end /.social -->
-
-                                <div class="author-btn">
-                                    <a (editPost)="postService?.editPost(details)"
-                                        [routerLink]="['/', 'dashboard', 'profile', details?.createdBy?._id ]"
-                                        class="btn btn--sm btn--round">View Profile</a>
-                                    <!-- <a href="#" class="btn btn--sm btn--round">Message</a> -->
-                                </div>
-                            </div>
-                            <!-- end /.author-infos -->
-
-
-                        </div>
-                        <!-- end /.author-card -->
-
-
-                        <div class="sidebar-card card-pricing card--pricing2" *ngIf="details?.type !== 'dream-job'">
-                            <div class="price">
-                                <h1>
-                                    <span>{{details?.price | currency}}</span>
-                                    <!-- <sup>$</sup> -->
-                                </h1>
-                            </div>
-
-                            <div class="purchase-button" *ngIf="details?.type === 'event'">
-                                <!-- <a href="#" class="btn btn--lg btn--round">Purchase Now</a> -->
-
-                                <h3 style="text-align: center;" *ngIf="isUserAttending; else eventRSVP"
-                                    (click)="cancelRSVP(details?._id)">
-                                    You are going
-                                    <button color="warn" mat-mini-fab
-                                        aria-label="Example icon-button with a heart icon">
-                                        <mat-icon>close</mat-icon>
-                                    </button></h3>
-                                <!-- <a 
-                                    class="btn btn--lg btn--round cart-btn" style="padding: 12px;">
-                                    <h5>Cancel RSVP</h5>
-                                </a> -->
-
-
-
-                                <ng-template #eventRSVP>
-                                    <h3 style="text-align: center;" (click)="rsvpEvent(details?._id)">Are you going?
-                                        <button color="primary" mat-mini-fab
-                                            aria-label="Example icon-button with a heart icon">
-                                            <mat-icon>done</mat-icon>
-                                        </button></h3>
-
-                                    <!-- <mat-icon>yes</mat-icon> -->
-                                    <!-- <a (click)="rsvpEvent(details?._id)"
-                                        class="btn btn--lg btn--round cart-btn" style="padding: 12px;">
-                                        <h5></h5>
-                                    </a> -->
-                                </ng-template>
-                            </div>
-
-                        </div>
-
-
-
-                        <div class="sidebar-card card--product-infos">
-                            <div class="card-title">
-                                <h4>Information</h4>
-                            </div>
-
-                            <ul class="infos">
-                                <li>
-                                    <p class="data-label">Likes</p>
-                                    <p class="info" *ngIf="authService?.loggedInUser; else likeCount">
-                                        <app-like-dislike [data]="details" [type]="type" [likeCount]="null">
-                                        </app-like-dislike>
-                                    </p>
-                                    <ng-template #likeCount>
-                                        <p class="info">
-                                            {{details?.likeCount}}
-                                        </p>
-                                    </ng-template>
-                                </li>
-                                <li *ngIf="details?.createdAt">
-                                    <p class="data-label">Created</p>
-                                    <p class="info">{{getDate(details?.createdAt) | date: 'dd/MM/yyyy'}}</p>
-                                </li>
-                                <li *ngIf="details?.updatedAt">
-                                    <p class="data-label">Updated</p>
-                                    <p class="info">{{getDate(details?.updatedAt) | date: 'dd/MM/yyyy'}}</p>
-                                </li>
-                                <li *ngIf="details?.dateRange && details?.dateRange?.length">
-                                    <p class="data-label">Event Dates</p>
-                                    <p class="info">{{details?.dateRange[0] | date: 'dd/MM/yyyy hh:ss'}} -
-                                        {{details?.dateRange[1] | date: 'dd/MM/yyyy hh:ss'}}</p>
-                                </li>
-                                <li *ngIf="details?.address">
-                                    <p class="data-label">Address</p>
-                                    <p class="info">{{details?.address}}</p>
-                                </li>
-                                <li *ngIf="details?.cities && details?.cities?.length">
-                                    <p class="data-label">Cities</p>
-                                    <p class="info"><span
-                                            *ngFor="let c of details?.cities; let ei = index;">{{c?.name + (ei === details?.cities?.length - 1 ? '' : ', ' )}}</span>
-                                    </p>
-                                </li>
-                                <!-- <li>
-                                    <p class="data-label">Version</p>
-                                    <p class="info">{{details?.version}}{{'-'}}</p>
-                                </li> -->
-                                <li>
-                                    <p class="data-label">Category</p>
-                                    <p class="info" *ngFor="let t of details?.tags">{{t?.name + ','}}</p>
-                                </li>
-                                <li *ngIf="details?.support">
-                                    <p class="data-label">Support</p>
-                                    <p class="info">{{details?.support?.time}} {{ 'Minutes'}}</p>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- end /.aside -->
-
-                        <div class="author-card sidebar-card ">
-                            <div class="card-title">
-                                <h4>Share:</h4>
-                                <br />
-                                <div class="social social--color--filled">
-                                    <ul>
-                                        <li>
-                                            <button mat-fab shareButton="facebook"
-                                                [style.backgroundColor]="share?.prop?.facebook.color">
-                                                <!-- <fa-icon [icon]="share?.prop?.facebook.icon" size="lg"></fa-icon> -->
-
-                                                <i class="fab fa-facebook-f"></i>
-                                            </button>
-                                        </li>
-                                        <li>
-                                            <button mat-fab shareButton="twitter"
-                                                [style.backgroundColor]="share?.prop?.twitter.color">
-                                                <!-- <fa-icon [icon]="share?.prop?.twitter.icon" size="lg"></fa-icon> -->
-
-                                                <i class="fab fa-twitter"></i>
-                                            </button>
-                                        </li>
-                                        <li>
-                                            <button mat-fab shareButton="linkedin"
-                                                [style.backgroundColor]="share?.prop?.linkedin.color">
-                                                <!-- <fa-icon [icon]="share?.prop?.linkedin.icon" size="lg"></fa-icon> -->
-
-                                                <i class="fab fa-linkedin"></i>
-                                            </button>
-                                        <li>
-                                            <button mat-fab shareButton="whatsapp"
-                                                [style.backgroundColor]="share?.prop?.whatsapp.color">
-                                                <!-- <fa-icon [icon]="share?.prop?.whatsapp.icon" size="lg"></fa-icon> -->
-
-                                                <i class="fab fa-whatsapp"></i>
-                                            </button>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="author-card sidebar-card " *ngIf="details?.type === 'event'">
-                            <div class="card-title">
-                                <h4>Attendees: {{ details?.usersAttending?.length }}</h4>
-                                <br />
-
-                                <ng-container class="row" *ngFor="let attendee of details?.usersAttending">
-                                    <div class="col-md-12" style="margin-bottom: 10px;">
-                                        <div class="author_avatar_comment" style="vertical-align: middle;">
-                                            <img [src]="attendee?.avatar ? ((s3FilesBucketURL + attendee.avatar) | safe: 'resourceUrl') : anonymousAvatar"
-                                                alt="Presenting the broken author avatar :D">
-                                        </div>
-                                        <div class="autor__info">
-                                            <a [routerLink]="['/', 'dashboard', 'profile', attendee?._id ]">
-                                                <p class="name">
-                                                    {{attendee?.name}}
-                                                </p>
-                                            </a>
-                                            <!-- <p class="ammount">{{fromNow(pu?.createdAt)}}</p> -->
-                                        </div>
-                                    </div>
-
-                                </ng-container>
-                            </div>
-                        </div>
-
-                    </aside>
-                    <!-- end /.aside -->
                 </div>
                 <!-- end /.col-md-4 -->
+
+                <div class="col-md-10 col-lg-10" *ngIf="showConnectedPosts">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <a mat-stroked-button color="primary" style="margin-bottom: 10px;" (click)="selectedBlock = null; showConnectedPosts = false; selectedPostType = ''">
+                                <mat-icon>keyboard_arrow_left</mat-icon>Back
+                            </a>
+                            <div class="item-grid pen-grid item-grid-large">
+                                <app-brief-post style="width: 100%;" [p]="e" *ngFor="let e of listOfConnectedPosts?.posts"
+                                    [readMore]="true" (showComments)="showCommentsOnSide($event)"></app-brief-post>
+                            </div>
+                            <app-paginator [length]="totalOtherPosts"
+                                (fetchData)="paginator = $event; getConnectedPosts(selectedPostType)">
+                            </app-paginator>
+                        </div>
+
+                        <div class="col-md-4">
+                            <ng-container *ngTemplateOutlet="addBlockLevelCommentTemplate; context: {details: selectedPost, comments: selectedPostComments | async}">
+                            </ng-container>
+                        </div>
+
+                    </div>
+                </div>
             </div>
             <!-- end /.row -->
         </div>
         <!-- end /.container -->
+
+        <!-- Start of chat box code -->
+        <!-- <app-chat-box [loggedInUser]="authService?.loggedInUser" [postDetails]="postDetails"></app-chat-box> -->
+        <!-- End of chat box code -->
     </section>
     <!--===========================================
             END SINGLE PRODUCT DESCRIPTION AREA
@@ -312,24 +130,15 @@
     ==============================================-->
 
 
-<ng-template #locationTemplate let-location="location">
-    <div *ngIf="location?.latitude || location?.longitude">
-        <h4 class="tab-content-wrapper">Location:</h4>
-        <agm-map [latitude]="location?.latitude" [longitude]="location?.longitude" [zoom]="15">
-            <agm-marker [latitude]="location?.latitude" [longitude]="location?.longitude"></agm-marker>
-        </agm-map>
-    </div>
-
-</ng-template>
-
 <ng-template #addCommentTemplate let-cDetails="details">
     <div style="background: white;">
         <div class="tab-pane fade show product-tab">
             <div class="thread">
                 <ul class="media-list thread-list" style="list-style: none;">
-                    <h4 class="tab-content-wrapper">Comments:</h4>
+                    <!-- <h4 class="tab-content-wrapper">Comments:</h4> -->
                     <div *ngFor="let c of commentService?.commentsList$ | async; trackBy: trackByFn">
-                        <li [id]="c?._id" style="padding-left: 30px; padding-right: 30px;" *ngIf="!c?.blockSpecificComment" class="single-thread">
+                        <li [id]="c?._id" style="padding-left: 30px; padding-right: 30px;"
+                            *ngIf="!c?.blockSpecificComment || true" class="single-thread">
                             <app-comment [comment]="c" [referenceId]="cDetails?._id"></app-comment>
                         </li>
                     </div>
@@ -338,18 +147,37 @@
         </div>
 
         <div class="comment-form-area">
-            <app-add-comment *ngIf="commentForm" [commentForm]="commentForm" [showLabel]="true"></app-add-comment>
+            <app-add-comment *ngIf="commentForm" [showLabel]="true" [referenceId]="cDetails?._id"></app-add-comment>
         </div>
 
     </div>
 </ng-template>
 
-<swal #successfulRSVP title="RSVP Successful!" type="success" [showConfirmButton]="false">
-    <div *swalPartial class="alert alert-info">
-        <p>You have been successfully added in the list of Attendees</p>`
-        <p>You can visit the list of events you have RSVP for: By Clicking
-            <p></p>
-            <a class="btn btn--sm btn--round" [routerLink]="['/', 'dashboard', 'my-profile', 'my-rsvp']">My RSVP
-                Events</a>
-    </div>
-</swal>
+<ng-template #addBlockLevelCommentTemplate let-cDetails="details" let-comments="comments">
+    <!-- {{selectedBlock | json}} -->
+    <aside class="sidebar" *ngIf="!(isHandset$ | async)">
+        <app-comment-side-nav (closeCommentSideBar)="selectedBlock = null" [selectedBlock]="selectedBlock" [selectedPost]="cDetails" [comments]="comments"></app-comment-side-nav>
+    </aside>
+    <!-- <ng-container *ngIf="selectedBlock && (isHandset$ | async)">
+        <mat-icon (click)="selectedBlock['__show'] = null; selectedBlock = null">close</mat-icon>
+        <div class="sidebar-card" style="padding: 10px; width: fit-content;">
+            <div class="tab-pane fade show product-tab">
+                <div class="thread">
+                    <ul class="media-list thread-list" style="list-style: none; padding-bottom: 0;">
+                        <div *ngFor="let c of comments">
+                            <li [id]="c?._id" *ngIf="c?.blockSpecificComment && c?.blockId === selectedBlock?._id"
+                                class="single-thread">
+                                <app-comment [comment]="c" [referenceId]="cDetails?._id"></app-comment>
+                            </li>
+                        </div>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="comment-form-area" style="padding-left: 0; padding-right: 0;">
+                <app-add-comment [referenceId]="cDetails?._id" [blockId]="selectedBlock?._id"
+                    [showLabel]="true"></app-add-comment>
+            </div>
+        </div>
+    </ng-container> -->
+</ng-template>

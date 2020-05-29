@@ -22,19 +22,16 @@ export class EmailService {
         name
         _id
         avatar
+        slug
       }
       to
       cc
       bcc
       subject
-      description {
-        ...Description
-      }
       descriptionHTML
 
       slug
     }
-    ${description}
   `;
 
   constructor(

@@ -87,7 +87,13 @@ export class NavBarComponent implements OnInit, OnDestroy {
         })
     );
 
-    this.cartListLength = this.store.select(selectCartListLength);
+    this.subscription.add(
+      this.authService.openAuthenticationPopover.subscribe(open => {
+        if (open) {
+          this.lr._elementRef.nativeElement.click();
+        }
+      })
+    );
 
   }
 

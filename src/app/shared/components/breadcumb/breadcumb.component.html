@@ -42,7 +42,7 @@
                 </div>
                 <h1 tabindex="0" autofocus (keydown.enter)="$event.preventDefault()" style="margin-bottom: 0"
                     [contentEditable]="allowUsersEdit() || inline" class="page-title" id="test"
-                    (blur)="!fromAddPost ? myFunction($event) : postForm?.get('name')?.setValue($event.target.innerText)">
+                    (blur)="!fromAddPost && allowUsersEdit() ? myFunction($event) : postForm?.get('name')?.setValue($event.target.innerText)">
                     {{postForm?.get('name')?.value ? postForm?.get('name')?.value  : title}}
                 </h1>
 

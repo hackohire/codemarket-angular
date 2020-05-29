@@ -20,7 +20,7 @@ body {
 }
 
 
-:not(i) { 
+:not(i):not(mat-icon) { 
   font-family: IowanOldStyleW01-Roman !important; 
 }
 

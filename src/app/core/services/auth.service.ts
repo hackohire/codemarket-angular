@@ -37,8 +37,8 @@ export interface NewUser {
 export class AuthService {
 
   /** Authentication Related Variables */
-  _authState: BehaviorSubject<CognitoUser|any> = new BehaviorSubject<CognitoUser|any>(null);
-  authState: Observable<CognitoUser|any> = this._authState.asObservable();
+  _authState: BehaviorSubject<CognitoUser | any> = new BehaviorSubject<CognitoUser | any>(null);
+  authState: Observable<CognitoUser | any> = this._authState.asObservable();
 
   loggedInUser$: Observable<User>;
   loggedInUser: User;
@@ -72,7 +72,7 @@ export class AuthService {
 
         if (payload.event === 'signIn') {
           this.checkIfUserIsLoggedIn();
-          this.router.navigate(['/', 'dashboard', 'my-profile']);
+          // this.router.navigate(['/', 'dashboard', 'my-profile']);
         } else if (payload.event === 'oAuthSignOut') {
           this.store.dispatch(SetLoggedInUser({ payload: null }));
         }
@@ -158,7 +158,7 @@ export class AuthService {
 
   /** Authentication Related Methods Starts here */
 
-  signUp(user: NewUser): Promise<CognitoUser|any> {
+  signUp(user: NewUser): Promise<CognitoUser | any> {
     return Auth.signUp({
       username: user.email,
       password: user.password,
@@ -169,12 +169,12 @@ export class AuthService {
     });
   }
 
-  signIn(username: string, password: string): Promise<CognitoUser|any> {
+  signIn(username: string, password: string): Promise<CognitoUser | any> {
     return new Promise((resolve, reject) => {
       Auth.signIn(username, password)
-      .then((user: CognitoUser|any) => {
-        resolve(user);
-      }).catch((error: any) => reject(error));
+        .then((user: CognitoUser | any) => {
+          resolve(user);
+        }).catch((error: any) => reject(error));
     });
   }
 

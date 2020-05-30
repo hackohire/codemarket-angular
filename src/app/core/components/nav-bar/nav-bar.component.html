@@ -23,9 +23,11 @@
         <i style="font-size: 1.0rem !important; color: #ffff00;" class="vertical-align-middle fal fa-add fa-fw"></i>
         <span style="color: #ffffff;" class="line-height-initial"> Add Post Type </span>
       </a> -->
+      
+      <app-add-post-menu [label]="'Create'"></app-add-post-menu>
 
       <!-- Search -->
-      <a mat-button routerLinkActive="mat-primary" (click)="openSearchDialog()" style="line-height: 3;">
+      <a mat-button routerLinkActive="mat-primary" (click)="openSearchDialog()" style="line-height: 3; padding: 0 5px 0 10px;">
         <i style="font-size: 1.0rem !important; color: #ffff00;" class="vertical-align-middle fal fa-search fa-fw"></i>
         <span style="color: #ffffff;" class="line-height-initial"> Search</span>
       </a>
@@ -38,11 +40,11 @@
       </a> -->
       <!-- Login -->
       <ng-template #logIn>
-        <a #lr mat-button [mdePopoverTriggerFor]="authentication" [mdePopoverTargetAt]="lr" mdePopoverTriggerOn="click">
+        <a #lr mat-button [mdePopoverTriggerFor]="authentication" [mdePopoverTargetAt]="lr" mdePopoverTriggerOn="click" style="line-height: 3; padding: 0 5px 0 10px;">
           <i style="font-size: 1.0rem !important; color: #ffff00;"
             class="vertical-align-middle fal fa-user-circle fa-fw"></i>
           <span style="color: #ffffff;" class="line-height-initial"> Login/Register</span>
-        </a>
+        </a>      
       </ng-template>
 
       <mde-popover #authentication="mdePopover" [mdePopoverOverlapTrigger]="false" [mdePopoverCloseOnClick]="false"
@@ -145,7 +147,7 @@
     <div class="rupertspira">
 
       <div class="container">
-        <div class="bg-white" style="padding: 0 15px 15px;">
+        <div class="bg-white" style="padding: 15px;">
 
           <div id="top_hdr">
             <ul>

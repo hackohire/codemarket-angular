@@ -10,6 +10,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/internal/operators/map';
 import { Post } from '../../models/post.model';
 import { throttleTime, mergeMap, scan, tap } from 'rxjs/operators';
+import { MatDrawer } from '@angular/material';
 
 @Component({
   selector: 'app-chat-full-ui',
@@ -27,13 +28,8 @@ export class ChatFullUiComponent implements OnInit {
   offset = new BehaviorSubject(null);
   infinite: Observable<any[]>;
 
-  listOfConnectedPosts: { posts: Post[], total?: number } = { posts: [] };
-  totalConnectedPosts: number;
-
-
-  @Input() postList = [];
   @Input() loggedInUser;
-  @ViewChild('scrollMe', { static: false }) scrollMe: ElementRef;
+  @Input() drawer: MatDrawer;
 
   public commentsList = [];
   public selectedPost;
@@ -58,19 +54,18 @@ export class ChatFullUiComponent implements OnInit {
       mergeMap((n) => this.getBatch(n)),
       scan((acc, batch: any) => {
         return { ...acc, ...batch };
-      }, {})
+      }, {}),
+      tap(() => this.drawer.open()),
     );
 
     this.infinite = batchMap.pipe(map(v => Object.values(v)));
   }
 
   ngOnInit() {
-    // this.username = `${this.loggedInUser.name}_${this.loggedInUser._id}`;
-    this.postList.map((post, i) => { post.isActive = false, post.count = 0, post.indexAt = i, post.lastMessage = '', post.dateTime = new Date(); });
-    // this.createTwilioToken();
   }
 
 
+  /** Fetch the list of posts based on the scroll */
   getBatch(offset) {
     console.log(offset);
     return this.postService.getAllPosts(
@@ -91,6 +86,7 @@ export class ChatFullUiComponent implements OnInit {
     );
   }
 
+  /** If at end, stop, otherwise, end === total, fetch next batch */
   nextBatch(e, offset) {
     if (this.theEnd) {
       return;
@@ -98,7 +94,7 @@ export class ChatFullUiComponent implements OnInit {
 
     const end = this.viewport.getRenderedRange().end;
     const total = this.viewport.getDataLength();
-    console.log(`${end}, '>=', ${total}`);
+    // console.log(`${end}, '>=', ${total}`);
     if (end === total) {
       this.offset.next(offset);
     }

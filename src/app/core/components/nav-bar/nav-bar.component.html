@@ -17,7 +17,7 @@
 
 
   <mat-sidenav-content>
-    <mat-toolbar class="SearchLoginBox" style="display: none;">
+    <mat-toolbar class="SearchLoginBox">
 
       <!-- <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'add-post-type']">
         <i style="font-size: 1.0rem !important; color: #ffff00;" class="vertical-align-middle fal fa-add fa-fw"></i>
@@ -25,10 +25,10 @@
       </a> -->
 
       <!-- Search -->
-      <!-- <a mat-button routerLinkActive="mat-primary" (click)="openSearchDialog()" style="line-height: 3;">
+      <a mat-button routerLinkActive="mat-primary" (click)="openSearchDialog()" style="line-height: 3;">
         <i style="font-size: 1.0rem !important; color: #ffff00;" class="vertical-align-middle fal fa-search fa-fw"></i>
         <span style="color: #ffffff;" class="line-height-initial"> Search</span>
-      </a> -->
+      </a>
 
       <!-- membership -->
       <!--  <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'membership']">
@@ -37,13 +37,13 @@
         <span style="color: #ffffff;" class="line-height-initial" > Membership</span>
       </a> -->
       <!-- Login -->
-      <!-- <ng-template #logIn>
+      <ng-template #logIn>
         <a #lr mat-button [mdePopoverTriggerFor]="authentication" [mdePopoverTargetAt]="lr" mdePopoverTriggerOn="click">
           <i style="font-size: 1.0rem !important; color: #ffff00;"
             class="vertical-align-middle fal fa-user-circle fa-fw"></i>
           <span style="color: #ffffff;" class="line-height-initial"> Login/Register</span>
         </a>
-      </ng-template> -->
+      </ng-template>
 
       <mde-popover #authentication="mdePopover" [mdePopoverOverlapTrigger]="false" [mdePopoverCloseOnClick]="false"
         [mdePopoverArrowOffsetX]="58" mdePopoverArrowColor="#FFFFFF">

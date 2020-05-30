@@ -12,8 +12,7 @@
         <div class="col-md-2 order-3 order-lg-1">
             <!-- <app-add-post-menu style="color: #00aeef !important; margin-left: auto;">
             </app-add-post-menu> -->
-            <app-post-type-nav [customTabs]="authService?.loggedInUser && authService?.loggedInUser?._id == authorId ? customTabs : []" [selectedPostType]="profileView" (postTypeClick)="$event?.isCustom ? fetchBasedOnCustomTab($event) : selectMainCategory($event?.name);"
-                (plusButtonClick)="redirectToAddPost($event)"></app-post-type-nav>
+            <app-post-type-nav (plusButtonClick)="redirectToAddPost($event)"></app-post-type-nav>
 
         </div>
         

@@ -1,15 +1,17 @@
 <mat-sidenav-container class="sidenav-container" autosize>
 
   <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-    [mode]="(isHandset$ | async) ? 'over' : 'main'" [opened]="(isHandset$ | async) === false">
+    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
     <mat-toolbar
       style="height: 48px; font-size: 14px; font-weight: 400; letter-spacing: 4px; text-transform: uppercase; color: #999; background: #eee;">
-      navigation</mat-toolbar>
+      navigation <mat-icon (click)="drawer.toggle()">clear</mat-icon>
+    </mat-toolbar>
 
 
-    <mat-nav-list>
+    <mat-nav-list class="pt-0">
 
-      <app-chat-full-ui [loggedInUser]="authService?.loggedInUser" [postList]="listOfConnectedPosts?.posts">
+      <app-chat-full-ui *ngIf="loggedInUser" [loggedInUser]="authService?.loggedInUser"
+        [postList]="listOfConnectedPosts?.posts">
       </app-chat-full-ui>
 
     </mat-nav-list>

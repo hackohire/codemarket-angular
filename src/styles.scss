@@ -84,8 +84,8 @@ textarea {
   overflow: hidden !important;
 }
 
-:not(.ck-media__placeholder) {
-  pointer-events: all;
+.ck-editor__editable:not(.ck-read-only) .ck-media__wrapper>:not(.ck-media__placeholder) {
+  pointer-events: auto !important;
 }
 
 .page-title {

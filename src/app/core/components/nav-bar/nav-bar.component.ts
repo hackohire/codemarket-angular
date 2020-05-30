@@ -107,16 +107,16 @@ export class NavBarComponent implements OnInit, OnDestroy {
   }
 
   getConnectedPosts(user) {
-    this.postService.getAllPosts(
-      {
-        pageNumber: 1, limit: 10,
-        sort: { order: '' }
-      }, '', '', '',
-      user._id
-    ).subscribe((u) => {
-      this.listOfConnectedPosts.posts = u.posts;
-      this.totalConnectedPosts = u.total;
-    });
+    // this.postService.getAllPosts(
+    //   {
+    //     pageNumber: 1, limit: 10,
+    //     sort: { order: '' }
+    //   }, '', '', '',
+    //   user._id
+    // ).subscribe((u) => {
+    //   this.listOfConnectedPosts.posts = u.posts;
+    //   this.totalConnectedPosts = u.total;
+    // });
 
   }
 

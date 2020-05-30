@@ -5,6 +5,12 @@ import moment from 'moment';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { environment } from '../../../../environments/environment';
 import { PostService } from '../../services/post.service';
+import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { map } from 'rxjs/internal/operators/map';
+import { Post } from '../../models/post.model';
+import { throttleTime, mergeMap, scan, tap } from 'rxjs/operators';
+import { MatDrawer } from '@angular/material';
 
 @Component({
   selector: 'app-chat-full-ui',
@@ -13,10 +19,17 @@ import { PostService } from '../../services/post.service';
 })
 export class ChatFullUiComponent implements OnInit {
 
-  @Input() postList = [];
+  @ViewChild(CdkVirtualScrollViewport, { static: false })
+  viewport: CdkVirtualScrollViewport;
+
+  batch = 20;
+  theEnd = false;
+
+  offset = new BehaviorSubject(null);
+  infinite: Observable<any[]>;
+
   @Input() loggedInUser;
-  @ViewChild('deleteSwal', { static: false }) private deleteSwal: SwalComponent;
-  @ViewChild('scrollMe', { static: false }) scrollMe: ElementRef;
+  @Input() drawer: MatDrawer;
 
   public commentsList = [];
   public selectedPost;
@@ -35,133 +48,72 @@ export class ChatFullUiComponent implements OnInit {
   constructor(
     private _chatService: ChatService,
     public postService: PostService
-  ) { }
+  ) {
+    const batchMap = this.offset.pipe(
+      throttleTime(500),
+      mergeMap((n) => this.getBatch(n)),
+      scan((acc, batch: any) => {
+        return { ...acc, ...batch };
+      }, {}),
+      tap(() => this.drawer.open()),
+    );
+
+    this.infinite = batchMap.pipe(map(v => Object.values(v)));
+  }
 
   ngOnInit() {
-    // this.username = `${this.loggedInUser.name}_${this.loggedInUser._id}`;
-    this.postList.map((post, i) => { post.isActive = false, post.count = 0, post.indexAt = i, post.lastMessage = '', post.dateTime = new Date(); });
-    // this.createTwilioToken();
+  }
+
+
+  /** Fetch the list of posts based on the scroll */
+  getBatch(offset) {
+    console.log(offset);
+    return this.postService.getAllPosts(
+      {
+        pageNumber: offset + 1, limit: 10,
+        sort: { order: '' }
+      }, '', '', '',
+      this.loggedInUser._id
+    ).pipe(
+      tap((arr) => (arr.posts.length ? null : (this.theEnd = true))),
+      map(arr => {
+        return arr.posts.reduce((acc, cur) => {
+          const id = cur._id;
+          const data = cur;
+          return { ...acc, [id]: data };
+        }, {});
+      })
+    );
+  }
+
+  /** If at end, stop, otherwise, end === total, fetch next batch */
+  nextBatch(e, offset) {
+    if (this.theEnd) {
+      return;
+    }
+
+    const end = this.viewport.getRenderedRange().end;
+    const total = this.viewport.getDataLength();
+    // console.log(`${end}, '>=', ${total}`);
+    if (end === total) {
+      this.offset.next(offset);
+    }
   }
 
   openPostChat(index: number) {
-    // if (!this.loadingMessage) {
-    //   this.loadingMessage = 'Please Wait ...';
-    //   const findPost = this.postList.findIndex(x => x.isActive === true);
-
-    //   if (findPost !== -1) {
-    //     this.postList[findPost].isActive = false;
-    //   }
-
-    //   this.postList[index].isActive = true;
-    //   this.selectedPost = this.postList[index];
-    //   this.channelName = this.selectedPost._id;
-
-    //   if (this.channelName === this.postList[index]._id) {
-    //     this.postList[index].count = 0;
-    //     this.postList[index].lastMessage = '';
-    //   }
-
-    //   if (this.channelName) {
-    //     this.chatClient.getSubscribedChannels().then(this.createOrJoinGeneralChannel(this.channelName));
-    //   }
-    // }
   }
 
   createTwilioToken() {
-    // const self = this;
-    // this._chatService.createToken(this.username).subscribe(data => {
-    //   this.chatToken = data.token;
-    //   this.username = data.identity;
-    //   Chat.Client.create(this.chatToken).then(client => {
-    //     // Use client
-    //     this.chatClient = client;
-    //     this.chatClient.getSubscribedChannels().then((paginator) => {
-    //       console.log(paginator.items);
-    //     });
 
-    //     this.chatClient.on('messageAdded', (message) => {
-    //       self.postList.map((post) => {
-    //         if (post._id === message.channel.uniqueName
-    //           && message.author !== self.username
-    //           && self.channelName !== post._id) {
-    //           post.count = post.count + 1;
-    //           post.lastMessage = message.body;
-    //           post.dateTime = message.timestamp;
-    //         }
-    //       });
-    //       self.postList.sort((a, b) => {
-    //         return  (new Date(b.dateTime) as any) -  (new Date(a.dateTime) as any);
-    //       });
-    //     });
-    //   });
-    // });
   }
 
   createOrJoinGeneralChannel(channel_id) {
-    // this.chatClient.getChannelByUniqueName(channel_id).then(channel => {
-    //   this.generalChannel = channel;
-    //   this.channelStatus = this.generalChannel.state.status;
-    //   this.setupChannel();
-    // }).catch(() => {
-    //   this.chatClient.createChannel({
-    //     uniqueName: channel_id,
-    //     friendlyName: channel_id
-    //   }).then(channel => {
-    //     this.generalChannel = channel;
-    //     this.channelStatus = this.generalChannel.state.status;
-    //     this.setupChannel();
-    //   }).catch(channel => {
-    //   });
-    // });
   }
 
   setupChannel() {
-    // if (this.channelStatus !== 'joined') {
-    //   this.generalChannel.join().then(channel => {
-    //     if (channel.state.status === 'joined') {
-    //       this.generalChannel.getMessages(30).then(page => {
-    //         this.commentsList = page.items;
-    //         this.scrolltop = this.scrollMe.nativeElement.scrollHeight;
-    //         if (this.commentsList.length > 0) {
-    //           this.generalChannel.updateLastConsumedMessageIndex(this.commentsList[this.commentsList.length - 1].index).then((data) => {
-    //           });
-    //         }
-    //         this.loadingMessage = '';
-    //       });
-    //     }
-    //   });
-    // } else {
-    //   this.generalChannel.getMessages(30).then(page => {
-    //     this.commentsList = page.items;
-    //     this.scrolltop = this.scrollMe.nativeElement.scrollHeight;
-    //     if (this.commentsList.length > 0) {
-    //       this.generalChannel.updateLastConsumedMessageIndex(this.commentsList[this.commentsList.length - 1].index).then((data) => {
-    //       });
-    //     }
-    //     this.loadingMessage = '';
-    //   });
-    // }
-
-    // // Listen for new messages sent to the channel
-    // this.generalChannel.on('messageAdded', message => {
-    //   this.commentsList.push(message);
-    //   // this.scrolltop = this.comment.nativeElement.scrollHeight;
-    //   if (this.commentsList.length > 0) {
-    //     this.generalChannel.updateLastConsumedMessageIndex(this.commentsList[this.commentsList.length - 1].index).then((data) => {
-    //     });
-    //   }
-    // });
   }
 
   sendMsg() {
-    // if (this.generalChannel.members.size === 1) {
-    //   // Send Notification
-    // }
-    // if (this.msg !== '' && this.msg !== undefined && this.msg.trim() !== '') {
-    //   this.generalChannel.sendMessage(this.msg);
-    //   this.msg = '';
-
-    // }
   }
 
   getFormatedDate(datetime) {
@@ -172,17 +124,8 @@ export class ChatFullUiComponent implements OnInit {
     }
   }
 
-  removeChannel() {
-    // if (this.generalChannel) {
-    //   this.generalChannel.delete().then(channel => {
-    //     const findPost = this.postList.findIndex((post) => post._id === this.selectedPost._id);
-    //     if (findPost !== -1) {
-    //       this.postList[findPost].isActive = false;
-    //       this.selectedPost = {};
-    //       this.commentsList = [];
-    //     }
-    //   });
-    // }
+  trackByIdx(i) {
+    return i;
   }
 
 }

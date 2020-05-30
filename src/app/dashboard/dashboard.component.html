@@ -3,23 +3,28 @@
 <!-- <section class="hero-area bgimage"> -->
 
 <!-- <div style="padding: 0px 0;background: #ffffff;"> -->
-    <!-- <div style="position: absolute; top: 51px; left: 44px; font-size: 20px; color: #000;letter-spacing: 0.9px;">coding +
+<!-- <div style="position: absolute; top: 51px; left: 44px; font-size: 20px; color: #000;letter-spacing: 0.9px;">coding +
         <span style="color: #00aeef;">marketing</span></div> -->
 <div class="container-fluid">
     <div class="row" style="min-height: calc(70vh - 48px);">
-        <div class="col-lg-6 order-1 order-lg-1 pt-3 pt-lg-0 pb-3 pb-lg-0 px-lg-5 hero-img d-flex flex-column justify-content-center aos-init aos-animate"  data-aos="fade-left" style="background-color: #FCCA0E;">
+        <div class="col-lg-6 order-1 order-lg-1 pt-3 pt-lg-0 pb-3 pb-lg-0 px-lg-5 hero-img d-flex flex-column justify-content-center aos-init aos-animate"
+            data-aos="fade-left" style="background-color: #FCCA0E;">
             <!-- <img src="../../assets/images/new-header2.png" class="img-fluid" alt=""> -->
             <!-- <video loop controls autoplay>
                 <source src="../../assets/images/video-graphics/video-header.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video> -->
-            <iframe class="VideoHeader" width="100%" height="375" src="https://www.youtube.com/embed/OzQrxIE0TK8?controls=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" autoplay loop allowfullscreen></iframe>
+            <iframe class="VideoHeader" width="100%" height="375"
+                src="https://www.youtube.com/embed/OzQrxIE0TK8?controls=0" frameborder="0"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" autoplay loop
+                allowfullscreen></iframe>
         </div>
-        <div class="col-lg-6 pt-5 pt-lg-0 pb-3 px-lg-5 order-2 order-lg-2 d-flex flex-column justify-content-center aos-init aos-animate"  data-aos="fade-up">
+        <div class="col-lg-6 pt-5 pt-lg-0 pb-3 px-lg-5 order-2 order-lg-2 d-flex flex-column justify-content-center aos-init aos-animate"
+            data-aos="fade-up">
             <div *ngIf="!showAuth || authService?.loggedInUser?._id; else authUI">
                 <h1
                     style="font-size: 34px; line-height: normal; max-width: 100%; text-align: left;color:#000; text-transform: none;margin-bottom: 1rem;letter-spacing: 1px;">
-                    Supercharge your business with superhero tech and marketing teams
+                    Supercharge Your Business with Superhero Tech and Marketing Teams
                 </h1>
                 <h2
                     style="font-size: 26px; line-height: normal; max-width: 100%; text-align: left;color:#999;margin-bottom: 1.5rem;font-weight: 100;">
@@ -50,8 +55,8 @@
                                 </mat-form-field>
                             </ng-container>
                             <div>
-                                <button style="margin-right: 10px;box-shadow: none;background: #eee;" *ngIf="!f" mat-raised-button matStepperPrevious
-                                    type="button">Back</button>
+                                <button style="margin-right: 10px;box-shadow: none;background: #eee;" *ngIf="!f"
+                                    mat-raised-button matStepperPrevious type="button">Back</button>
                                 <button #nextStep *ngIf="!l" color="primary"
                                     [disabled]="questionnaire?.get(formField)?.invalid" mat-raised-button matStepperNext
                                     type="button">Next</button>
@@ -70,48 +75,6 @@
 </div>
 <!-- </div> -->
 
-<section *ngIf="false" id="hero" style="padding: 40px 0 0;background: #f2f9ff;">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-5 pt-5 pt-lg-0 order-1 order-lg-2 d-flex flex-column justify-content-center aos-init aos-animate"
-                data-aos="fade-up">
-                <div>
-                    <h1
-                        style="font-size: 40px; line-height: normal; max-width: 100%; text-align: left;color:#000; text-transform: none;margin-bottom: 1rem;letter-spacing: 1px;">
-                        Grow Your Sales
-                    </h1>
-                    <h2
-                        style="font-size: 26px; line-height: normal; max-width: 100%; text-align: left;color:#999;margin-bottom: 1.5rem;font-weight: 100;">
-                        Connect & manage all your data from one center
-                    </h2>
-                    <!-- <h1 style="font-size: 1.9em; line-height: normal; margin: 20px 0 0 0; font-weight: 200; text-align: left; color:#00aeef">
-                            <a class="btn btn-primary btn-md" [routerLink]="['/', 'company', 'add-company']">JOIN TODAY</a>
-                        </h1> -->
-                    <form>
-                        <div id="append_location" class="individuals-signup-cta__form-group">
-                            <label class="individuals-signup-cta__label">Enter your email address</label>
-                            <input type="hidden" name="fyi_from_landing" value="true">
-                            <input [(ngModel)]="emailInput" id="email_input"
-                                class="individuals-signup-cta__email-input email_input" type="email" name="fyi_email">
-                            <button [disabled]="!emailInput" id="submitBtn" class="google-button special" type="button"
-                                [routerLink]="['../', 'help-business-grow']" [queryParams]="{email: emailInput}">
-                                <span class="button-flex-wrapper">
-                                    Start Today
-                                </span>
-                            </button>
-                        </div>
-                    </form>
-                    <div class="individuals-signup__underform">
-                        <span>Safe. Secure. Organized.</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-7 order-2 order-lg-1 hero-img aos-init aos-animate" data-aos="fade-left">
-                <img src="../../assets/images/new-header.png" class="img-fluid" alt="">
-            </div>
-        </div>
-    </div>
-</section>
 
 
 
@@ -258,7 +221,8 @@
 
     <div class="row p-5 bg-light">
         <div class="col-md-12 text-center">
-            <h1 class="m-5 text-primary">If You Are Looking to Grow Your Business, We Leverage Software, Data Sceince, ML/AI, Online Communities & Story Telling to Grow Your Business.</h1>
+            <h1 class="m-5 text-primary">Leverage Software, Data Sceince, ML/AI, Online Communities & Story Telling to
+                Grow Your Business.</h1>
         </div>
     </div>
 
@@ -266,8 +230,9 @@
         <div class="col-lg-6 order-1 order-lg-2 pt-3 pt-lg-0 pb-3 pb-lg-0 px-lg-5 d-flex flex-column justify-content-center aos-init aos-animate"  data-aos="fade-left" style="background-color: #FCCA0E;">
             <img src="../../assets/images/video-graphics/01.png" style="max-width: min-content;margin: 0 auto;">
         </div>
-        <div class="col-lg-6 pt-5 pt-lg-0 pb-3 px-lg-5 order-2 order-lg-1 d-flex flex-column justify-content-center aos-init aos-animate"  data-aos="fade-up">
-            <h1>We Build & Launch Online Campaigns for Your Business that Deliver Results Always</h1>
+        <div class="col-lg-6 pt-5 pt-lg-0 pb-3 px-lg-5 order-2 order-lg-1 d-flex flex-column justify-content-center aos-init aos-animate"
+            data-aos="fade-up">
+            <h1>Online Campaigns that Deliver Results</h1>
             <h3 class="text-secondary"> <a href="">Build Your Campaign</a></h3>
             <form *ngIf="questionnaire" [formGroup]="questionnaire">
                 <mat-horizontal-stepper linear #stepper>
@@ -275,8 +240,7 @@
                         *ngFor="let formField of convertObjectToArray(questionnaire?.controls); let i = index; let l = last; let f = first;">
                         <!-- <h3>{{fields[i]?.label}}</h3> -->
                         <ng-container [ngSwitch]="fields[i]?.type">
-                            <mat-form-field *ngSwitchCase="'textarea'" class="field-full-width"
-                                appearance="outline">
+                            <mat-form-field *ngSwitchCase="'textarea'" class="field-full-width" appearance="outline">
                                 <mat-label>{{fields[i].label}}</mat-label>
                                 <textarea matInput
                                     (keyup.enter)="questionnaire?.get(formField)?.valid ? stepper.next() : ''"
@@ -291,8 +255,8 @@
                             </mat-form-field>
                         </ng-container>
                         <div>
-                            <button style="margin-right: 10px;box-shadow: none;background: #eee;" *ngIf="!f" mat-raised-button matStepperPrevious
-                                type="button">Back</button>
+                            <button style="margin-right: 10px;box-shadow: none;background: #eee;" *ngIf="!f"
+                                mat-raised-button matStepperPrevious type="button">Back</button>
                             <button #nextStep *ngIf="!l" color="primary"
                                 [disabled]="questionnaire?.get(formField)?.invalid" mat-raised-button matStepperNext
                                 type="button">Next</button>
@@ -307,7 +271,7 @@
 
     <div class="row p-5 bg-light">
         <div class="col-md-12 text-center">
-            <h1 class="m-5 text-primary">To Grow Your Business You Need Sales Funnel Automation. Our Expert Technical Team and Marketing Team Can Help You.</h1>
+            <h1 class="m-5 text-primary">Automation of Sales Funnels for Consistent Growth</h1>
         </div>
     </div>
 
@@ -315,7 +279,8 @@
         <div class="col-lg-6 order-1 order-lg-1 pt-3 pt-lg-0 pb-3 pb-lg-0 px-lg-5 hero-img d-flex flex-column justify-content-center aos-init aos-animate"  data-aos="fade-left" style="background-color: #FCCA0E;">
             <img src="../../assets/images/video-graphics/02.png" style="max-width: min-content;margin: 0 auto;">
         </div>
-        <div class="col-lg-6 pt-5 pt-lg-0 pb-3 px-lg-5 order-2 order-lg-2 d-flex flex-column justify-content-center aos-init aos-animate"  data-aos="fade-up">
+        <div class="col-lg-6 pt-5 pt-lg-0 pb-3 px-lg-5 order-2 order-lg-2 d-flex flex-column justify-content-center aos-init aos-animate"
+            data-aos="fade-up">
             <h1>Automate Your Sales Funnel Now</h1>
             <form *ngIf="questionnaire" [formGroup]="questionnaire">
                 <mat-horizontal-stepper linear #stepper>
@@ -323,8 +288,7 @@
                         *ngFor="let formField of convertObjectToArray(questionnaire?.controls); let i = index; let l = last; let f = first;">
                         <!-- <h3>{{fields[i]?.label}}</h3> -->
                         <ng-container [ngSwitch]="fields[i]?.type">
-                            <mat-form-field *ngSwitchCase="'textarea'" class="field-full-width"
-                                appearance="outline">
+                            <mat-form-field *ngSwitchCase="'textarea'" class="field-full-width" appearance="outline">
                                 <mat-label>{{fields[i].label}}</mat-label>
                                 <textarea matInput
                                     (keyup.enter)="questionnaire?.get(formField)?.valid ? stepper.next() : ''"
@@ -339,8 +303,8 @@
                             </mat-form-field>
                         </ng-container>
                         <div>
-                            <button style="margin-right: 10px;box-shadow: none;background: #eee;" *ngIf="!f" mat-raised-button matStepperPrevious
-                                type="button">Back</button>
+                            <button style="margin-right: 10px;box-shadow: none;background: #eee;" *ngIf="!f"
+                                mat-raised-button matStepperPrevious type="button">Back</button>
                             <button #nextStep *ngIf="!l" color="primary"
                                 [disabled]="questionnaire?.get(formField)?.invalid" mat-raised-button matStepperNext
                                 type="button">Next</button>
@@ -364,7 +328,8 @@
         <div class="col-lg-6 order-1 order-lg-2 pt-3 pt-lg-0 pb-3 pb-lg-0 px-lg-5 hero-img d-flex flex-column justify-content-center aos-init aos-animate"  data-aos="fade-left" style="background-color: #FCCA0E;">
             <img src="../../assets/images/video-graphics/03.png" style="max-width: min-content;margin: 0 auto;">
         </div>
-        <div class="col-lg-6 pt-5 pt-lg-0 pb-3 px-lg-5 order-2 order-lg-1 d-flex flex-column justify-content-center aos-init aos-animate"  data-aos="fade-up">
+        <div class="col-lg-6 pt-5 pt-lg-0 pb-3 px-lg-5 order-2 order-lg-1 d-flex flex-column justify-content-center aos-init aos-animate"
+            data-aos="fade-up">
             <h2>Software Developers</h2>
             <h2>Data Scientists</h2>
             <h2>AI Experts</h2>
@@ -376,7 +341,8 @@
 
     <div class="row p-5 bg-light">
         <div class="col-md-12 text-center">
-            <h1 class="m-5 text-primary">To Engage with Your Leads, You Need Content that is Personalized to Each and Every Lead.</h1>
+            <h1 class="m-5 text-primary">To Engage with Your Leads, You Need Content that is Personalized to Each and
+                Every Lead.</h1>
         </div>
     </div>
 
@@ -384,7 +350,8 @@
         <div class="col-lg-6 order-1 order-lg-1 pt-3 pt-lg-0 pb-3 pb-lg-0 px-lg-5 hero-img d-flex flex-column justify-content-center aos-init aos-animate"  data-aos="fade-left" style="background-color: #FCCA0E;">
             <img src="../../assets/images/video-graphics/04.png" style="max-width: min-content;margin: 0 auto;">
         </div>
-        <div class="col-lg-6 pt-5 pt-lg-0 pb-3 px-lg-5 order-2 order-lg-2 d-flex flex-column justify-content-center aos-init aos-animate"  data-aos="fade-up">
+        <div class="col-lg-6 pt-5 pt-lg-0 pb-3 px-lg-5 order-2 order-lg-2 d-flex flex-column justify-content-center aos-init aos-animate"
+            data-aos="fade-up">
             <h1>Create Personalized Content</h1>
             <h3 class="text-danger"></h3>
             <form *ngIf="questionnaire" [formGroup]="questionnaire">
@@ -393,8 +360,7 @@
                         *ngFor="let formField of convertObjectToArray(questionnaire?.controls); let i = index; let l = last; let f = first;">
                         <!-- <h3>{{fields[i]?.label}}</h3> -->
                         <ng-container [ngSwitch]="fields[i]?.type">
-                            <mat-form-field *ngSwitchCase="'textarea'" class="field-full-width"
-                                appearance="outline">
+                            <mat-form-field *ngSwitchCase="'textarea'" class="field-full-width" appearance="outline">
                                 <mat-label>{{fields[i].label}}</mat-label>
                                 <textarea matInput
                                     (keyup.enter)="questionnaire?.get(formField)?.valid ? stepper.next() : ''"
@@ -409,8 +375,8 @@
                             </mat-form-field>
                         </ng-container>
                         <div>
-                            <button style="margin-right: 10px;box-shadow: none;background: #eee;" *ngIf="!f" mat-raised-button matStepperPrevious
-                                type="button">Back</button>
+                            <button style="margin-right: 10px;box-shadow: none;background: #eee;" *ngIf="!f"
+                                mat-raised-button matStepperPrevious type="button">Back</button>
                             <button #nextStep *ngIf="!l" color="primary"
                                 [disabled]="questionnaire?.get(formField)?.invalid" mat-raised-button matStepperNext
                                 type="button">Next</button>
@@ -431,10 +397,12 @@
     </div>
 
     <div class="row" style="min-height: 70vh;">
-        <div class="col-lg-6 order-1 order-lg-2 pt-3 pt-lg-0 pb-3 pb-lg-0 px-lg-5 hero-img d-flex flex-column justify-content-center aos-init aos-animate"  data-aos="fade-left" style="background-color: #FCCA0E;">
+        <div class="col-lg-6 order-1 order-lg-2 pt-3 pt-lg-0 pb-3 pb-lg-0 px-lg-5 hero-img d-flex flex-column justify-content-center aos-init aos-animate"
+            data-aos="fade-left" style="background-color: #FCCA0E;">
             <img src="../../assets/images/video-graphics/05.png" style="max-width: min-content;margin: 0 auto;">
         </div>
-        <div class="col-lg-6 pt-5 pt-lg-0 pb-3 px-lg-5 order-2 order-lg-1 d-flex flex-column justify-content-center aos-init aos-animate"  data-aos="fade-up">
+        <div class="col-lg-6 pt-5 pt-lg-0 pb-3 px-lg-5 order-2 order-lg-1 d-flex flex-column justify-content-center aos-init aos-animate"
+            data-aos="fade-up">
             <h1>Real Leads</h1>
             <h3 class="text-danger">Not Stale Leads</h3>
         </div>
@@ -450,7 +418,8 @@
         <div class="col-lg-6 order-1 order-lg-1 pt-3 pt-lg-0 pb-3 pb-lg-0 px-lg-5 hero-img d-flex flex-column justify-content-center aos-init aos-animate"  data-aos="fade-left" style="background-color: #FCCA0E;">
             <img src="../../assets/images/video-graphics/06.png" style="max-width: min-content;margin: 0 auto;">
         </div>
-        <div class="col-lg-6 pt-5 pt-lg-0 pb-3 px-lg-5 order-2 order-lg-2 d-flex flex-column justify-content-center aos-init aos-animate"  data-aos="fade-up">
+        <div class="col-lg-6 pt-5 pt-lg-0 pb-3 px-lg-5 order-2 order-lg-2 d-flex flex-column justify-content-center aos-init aos-animate"
+            data-aos="fade-up">
             <h1>You Need A Community Driven Website</h1>
             <h3 class="text-secondary">And Tailormade To Your Leads</h3>
         </div>

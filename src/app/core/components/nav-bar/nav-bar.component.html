@@ -1,20 +1,19 @@
 <mat-sidenav-container class="sidenav-container" autosize>
 
-  <!-- <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+  <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'main'" [opened]="(isHandset$ | async) === false">
-    <mat-toolbar>Menu</mat-toolbar>
-    <mat-nav-list>
-      <a mat-list-item [routerLink]="['/', 'dashboard']">Dashboard</a>
+    <mat-toolbar
+      style="height: 48px; font-size: 14px; font-weight: 400; letter-spacing: 4px; text-transform: uppercase; color: #999; background: #eee;">
+      navigation</mat-toolbar>
+
 
     <mat-nav-list>
 
-      <ng-container *ngFor="let p of postTypesArray">
-        <a mat-list-item [routerLink]="['/', 'post', 'post-list']" [queryParams]="{type: p.name, all: false}">My
-          &nbsp;<span style="text-transform: capitalize;">{{p.name}}</span></a>
-      </ng-container>
+      <app-chat-full-ui [loggedInUser]="authService?.loggedInUser" [postList]="listOfConnectedPosts?.posts">
+      </app-chat-full-ui>
 
     </mat-nav-list>
-  </mat-sidenav> -->
+  </mat-sidenav>
 
 
   <mat-sidenav-content>
@@ -84,7 +83,7 @@
     <mat-toolbar *ngIf="false">
 
       <!-- Toggle Sidebar Button -->
-      <button *ngIf="false" type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
+      <button *ngIf="true" type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
 
@@ -148,136 +147,137 @@
       <div class="container">
         <div class="bg-white" style="padding: 0 15px 15px;">
 
-        <div id="top_hdr">
-          <ul>
+          <div id="top_hdr">
+            <ul>
 
-            <li style="display:none;" class="basket">
-              <a href="/basket" class="basket"><img src="https://non-duality.rupertspira.com/assets/app/img/basket.png"
-                  align="top" style="float:left;margin-top:2px;margin-right:5px;"> Your Basket (<span
-                  class="js_basket_qty" style="display:none;">0</span><span class="js_basket_size">0 items</span>)</a>
-            </li>
-
-
-            <li>
-              <a href="/auth/login?return_to=home" class="login tipsy-n" rel="tooltip"
-                original-title="If you receive regular e-mails from Rupert or have made a purchase in the past, you may login to access content you have purchased and update your account details using your e-mail address">Log
-                in</a>
-              <span> &nbsp; | &nbsp; </span>
-              <a href="/subscribe" class="login tipsy-n" rel="tooltip"
-                original-title="Subscribe and sign up to receive Rupert's free e-mail newsletter.">Sign Up for Free
-                E-Mail Newsletter</a>
-              <span> &nbsp; |</span>
-            </li>
-
-
-
-
-            <li class="language_drop dd_nav">
-              <div class="dd_btn">
-                <a class="dd_tab dd" href="#">Language</a>
-                <div class="menu_dd">
-                  <a href="/feeds/en/#video">
-                    <span class="flag flag-gb"
-                      style="width:16px !important;height:11px !important;display:block;float:left;margin:5px 7px 0 5px"></span>
-                    English </a>
-                  <a href="/feeds/fr/#video">
-                    <span class="flag flag-fr"
-                      style="width:16px !important;height:11px !important;display:block;float:left;margin:5px 7px 0 5px"></span>
-                    French </a>
-                  <a href="/feeds/nl/#video">
-                    <span class="flag flag-nl"
-                      style="width:16px !important;height:11px !important;display:block;float:left;margin:5px 7px 0 5px"></span>
-                    Dutch </a>
-                  <a href="/feeds/es/#video">
-                    <span class="flag flag-es"
-                      style="width:16px !important;height:11px !important;display:block;float:left;margin:5px 7px 0 5px"></span>
-                    Spanish </a>
-                  <a href="/feeds/it/#video">
-                    <span class="flag flag-it"
-                      style="width:16px !important;height:11px !important;display:block;float:left;margin:5px 7px 0 5px"></span>
-                    Italian </a>
-                  <a href="/feeds/de/#video">
-                    <span class="flag flag-de"
-                      style="width:16px !important;height:11px !important;display:block;float:left;margin:5px 7px 0 5px"></span>
-                    German </a>
-                  <a href="/feeds/jp/#video">
-                    <span class="flag flag-jp"
-                      style="width:16px !important;height:11px !important;display:block;float:left;margin:5px 7px 0 5px"></span>
-                    Japanese </a>
-                  <a href="/feeds/ru/#video">
-                    <span class="flag flag-ru"
-                      style="width:16px !important;height:11px !important;display:block;float:left;margin:5px 7px 0 5px"></span>
-                    Russian </a>
-                  <a href="/feeds/ro/#video">
-                    <span class="flag flag-ro"
-                      style="width:16px !important;height:11px !important;display:block;float:left;margin:5px 7px 0 5px"></span>
-                    Romanian </a>
-                  <a href="/feeds/cz/#video">
-                    <span class="flag flag-cz"
-                      style="width:16px !important;height:11px !important;display:block;float:left;margin:5px 7px 0 5px"></span>
-                    Czech Republic </a>
-                </div><!-- / .menu_dd -->
-              </div><!-- / .dd_btn -->
-            </li>
-          </ul>
-        </div><!-- / #top_hdr -->
-
-        <header id="mn_hdr">
-          <div class="logo float-left">
-            <a href="/dashboard" title="Joel Drazner"><img src="../../../../assets/images/Joel-Drazner-Logo.png"></a>
-          </div>
-
-          <nav id="mn_nav" class="float-right">
-            <ul class="dd_nav">
-              <li class="dd_btn">
-                <a class="dd_tab" title="Rupert Spira | Non-duality Teachings" href="/dashboard">
-                  Home
-                </a>
-              </li>
-
-              <li class="dd_btn">
-                <a class="dd_tab" href="/dashboard">
-                  Media Apperarances
-                </a>
-              </li>
-
-              <li class="dd_btn">
-                <a class="dd_tab" href="/dashboard">
-                  Events
-                </a>
-              </li>
-
-              <li class="dd_btn">
-                <a class="dd_tab" href="/dashboard">
-                  What They're Saying
-                </a>
-              </li>
-
-              <li class="dd_btn">
-                <a class="dd_tab" [routerLink]="['/', 'work-with-joel']">
-                  Work With Joel
-                </a>
-              </li>
-
-              <li class="dd_btn">
-                <a class="dd_tab" [routerLink]="['/', 'contact']">
-                  Contact
-                </a>
-              </li>
-
-              <li class="dd_btn">
-                <a class="dd_tab" href="/blog">
-                  Blog
-                </a>
+              <li style="display:none;" class="basket">
+                <a href="/basket" class="basket"><img
+                    src="https://non-duality.rupertspira.com/assets/app/img/basket.png" align="top"
+                    style="float:left;margin-top:2px;margin-right:5px;"> Your Basket (<span class="js_basket_qty"
+                    style="display:none;">0</span><span class="js_basket_size">0 items</span>)</a>
               </li>
 
 
-            </ul><!-- / .dd_nav -->
-          </nav><!-- / #mn_nav -->
-          <div class="clearfix"></div>
-        </header><!-- / #mn_hdr -->
+              <li>
+                <a href="/auth/login?return_to=home" class="login tipsy-n" rel="tooltip"
+                  original-title="If you receive regular e-mails from Rupert or have made a purchase in the past, you may login to access content you have purchased and update your account details using your e-mail address">Log
+                  in</a>
+                <span> &nbsp; | &nbsp; </span>
+                <a href="/subscribe" class="login tipsy-n" rel="tooltip"
+                  original-title="Subscribe and sign up to receive Rupert's free e-mail newsletter.">Sign Up for Free
+                  E-Mail Newsletter</a>
+                <span> &nbsp; |</span>
+              </li>
+
+
+
+
+              <li class="language_drop dd_nav">
+                <div class="dd_btn">
+                  <a class="dd_tab dd" href="#">Language</a>
+                  <div class="menu_dd">
+                    <a href="/feeds/en/#video">
+                      <span class="flag flag-gb"
+                        style="width:16px !important;height:11px !important;display:block;float:left;margin:5px 7px 0 5px"></span>
+                      English </a>
+                    <a href="/feeds/fr/#video">
+                      <span class="flag flag-fr"
+                        style="width:16px !important;height:11px !important;display:block;float:left;margin:5px 7px 0 5px"></span>
+                      French </a>
+                    <a href="/feeds/nl/#video">
+                      <span class="flag flag-nl"
+                        style="width:16px !important;height:11px !important;display:block;float:left;margin:5px 7px 0 5px"></span>
+                      Dutch </a>
+                    <a href="/feeds/es/#video">
+                      <span class="flag flag-es"
+                        style="width:16px !important;height:11px !important;display:block;float:left;margin:5px 7px 0 5px"></span>
+                      Spanish </a>
+                    <a href="/feeds/it/#video">
+                      <span class="flag flag-it"
+                        style="width:16px !important;height:11px !important;display:block;float:left;margin:5px 7px 0 5px"></span>
+                      Italian </a>
+                    <a href="/feeds/de/#video">
+                      <span class="flag flag-de"
+                        style="width:16px !important;height:11px !important;display:block;float:left;margin:5px 7px 0 5px"></span>
+                      German </a>
+                    <a href="/feeds/jp/#video">
+                      <span class="flag flag-jp"
+                        style="width:16px !important;height:11px !important;display:block;float:left;margin:5px 7px 0 5px"></span>
+                      Japanese </a>
+                    <a href="/feeds/ru/#video">
+                      <span class="flag flag-ru"
+                        style="width:16px !important;height:11px !important;display:block;float:left;margin:5px 7px 0 5px"></span>
+                      Russian </a>
+                    <a href="/feeds/ro/#video">
+                      <span class="flag flag-ro"
+                        style="width:16px !important;height:11px !important;display:block;float:left;margin:5px 7px 0 5px"></span>
+                      Romanian </a>
+                    <a href="/feeds/cz/#video">
+                      <span class="flag flag-cz"
+                        style="width:16px !important;height:11px !important;display:block;float:left;margin:5px 7px 0 5px"></span>
+                      Czech Republic </a>
+                  </div><!-- / .menu_dd -->
+                </div><!-- / .dd_btn -->
+              </li>
+            </ul>
+          </div><!-- / #top_hdr -->
+
+          <header id="mn_hdr">
+            <div class="logo float-left">
+              <a href="/dashboard" title="Joel Drazner"><img src="../../../../assets/images/Joel-Drazner-Logo.png"></a>
+            </div>
+
+            <nav id="mn_nav" class="float-right">
+              <ul class="dd_nav">
+                <li class="dd_btn">
+                  <a class="dd_tab" title="Rupert Spira | Non-duality Teachings" href="/dashboard">
+                    Home
+                  </a>
+                </li>
+
+                <li class="dd_btn">
+                  <a class="dd_tab" href="/dashboard">
+                    Media Apperarances
+                  </a>
+                </li>
+
+                <li class="dd_btn">
+                  <a class="dd_tab" href="/dashboard">
+                    Events
+                  </a>
+                </li>
+
+                <li class="dd_btn">
+                  <a class="dd_tab" href="/dashboard">
+                    What They're Saying
+                  </a>
+                </li>
+
+                <li class="dd_btn">
+                  <a class="dd_tab" [routerLink]="['/', 'work-with-joel']">
+                    Work With Joel
+                  </a>
+                </li>
+
+                <li class="dd_btn">
+                  <a class="dd_tab" [routerLink]="['/', 'contact']">
+                    Contact
+                  </a>
+                </li>
+
+                <li class="dd_btn">
+                  <a class="dd_tab" href="/blog">
+                    Blog
+                  </a>
+                </li>
+
+
+              </ul><!-- / .dd_nav -->
+            </nav><!-- / #mn_nav -->
+            <div class="clearfix"></div>
+          </header><!-- / #mn_hdr -->
+        </div>
       </div>
-    </div>
     </div>
 
     <!-- {{loggedInUser | json}} -->

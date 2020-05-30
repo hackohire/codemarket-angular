@@ -84,8 +84,8 @@ textarea {
   overflow: hidden !important;
 }
 
-.amplify-form-button {
-  background-color: #00aeef !important;
+:not(.ck-media__placeholder) {
+  pointer-events: all;
 }
 
 .page-title {

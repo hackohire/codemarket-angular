@@ -27,11 +27,23 @@
                             (click)="editPost.emit()">Edit <mat-icon style="vertical-align: middle;">edit</mat-icon>
                         </a>
 
+                        <div *ngIf="postActions">
+                            <button type="button" (click)="saveOrSubmitPost.emit('Drafted')"
+                                [disabled]="postForm?.invalid" mat-raised-button
+                                style="background-color: #28a745; color: white;">{{ 'Save' }}</button>
+                            <button type="button" (click)="saveOrSubmitPost.emit('Published')"
+                                [disabled]="postForm?.invalid" mat-raised-button
+                                color="primary" style="margin: 0 5px;">{{ 'Publish' }}</button>
+                            <button type="button" (click)="cancelClicked()" mat-raised-button
+                                color="warn">{{ 'Cancel' }}</button>
+                        </div>
+
                     </div>
                 </div>
-                <h1 style="margin-bottom: 0" [contentEditable]="allowUsersEdit() || inline" class="page-title" id="test" (blur)="!fromAddPost ? myFunction() : doNothing()"
-                    (input)="onContentChange($event)">
-                    {{postForm?.get('name')?.value ? title : !inline ? title : 'Untitled Document'}}
+                <h1 tabindex="0" autofocus (keydown.enter)="$event.preventDefault()" style="margin-bottom: 0"
+                    [contentEditable]="allowUsersEdit() || inline" class="page-title" id="test"
+                    (blur)="!fromAddPost ? myFunction($event) : postForm?.get('name')?.setValue($event.target.innerText)">
+                    {{postForm?.get('name')?.value ? postForm?.get('name')?.value  : title}}
                 </h1>
 
                 <p *ngIf="displaySave">Saving...</p>
@@ -55,12 +67,12 @@
                                 </li>
 
                                 <!-- <li *ngIf="postDetails?.tags && postDetails?.tags?.length || fromAddPost"> -->
-                                <li>
+                                <li *ngIf="allowUsersEdit()">
                                     <p class="data-label">Tags</p>
                                     <p class="info">
                                         <span class="tag" *ngFor="let t of postDetails?.tags">{{t?.name}}</span>
                                     </p>
-                                    <span *ngIf="allowUsersEdit()" style="margin: 7px 0 0 5px;" [mdePopoverTriggerFor]="addTagsPopover"
+                                    <span style="margin: 7px 0 0 5px;" [mdePopoverTriggerFor]="addTagsPopover"
                                         mdePopoverTriggerOn="click"><i class="fa fa-plus-square"
                                             aria-hidden="true"></i></span>
                                     <mde-popover #addTagsPopover="mdePopover" [mdePopoverOverlapTrigger]="false"
@@ -70,7 +82,9 @@
                                             <app-autocomplete [autoComplete]="postForm?.get('tags')"
                                                 [collection]="'tags'" [multiple]="true" [placeholder]="'Tags'"
                                                 [type]="'tag'"></app-autocomplete>
-                                            <mat-icon (click)=" !fromAddPost ? addDataOfPost('tags') : displayData('tags')">send</mat-icon>
+                                            <mat-icon
+                                                (click)=" !fromAddPost ? addDataOfPost('tags') : displayData('tags')">
+                                                send</mat-icon>
                                         </div>
                                     </mde-popover>
                                 </li>
@@ -87,7 +101,7 @@
                                 </li>
 
                                 <!-- <li *ngIf="postDetails?.collaborators && postDetails?.collaborators?.length || fromAddPost"> -->
-                                <li>
+                                <li *ngIf="allowUsersEdit()">
                                     <p class="data-label">Collaborators</p>
                                     <p class="info">
                                         <a *ngFor="let t of postDetails?.collaborators; let i=index" target="_blank"
@@ -96,25 +110,30 @@
                                                 <img [src]="t?.avatar ? ((s3FilesBucketURL + t?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
                                                     alt="">{{t?.name}}</span>
                                         </a>
-                                        <span *ngIf="allowUsersEdit()" style="margin: 7px 0 0 5px;" [mdePopoverTriggerFor]="addCollaboratorsPopover"
-                                        mdePopoverTriggerOn="click"><i class="fa fa-plus-square"
-                                            aria-hidden="true"></i></span>
+                                        <span style="margin: 7px 0 0 5px;"
+                                            [mdePopoverTriggerFor]="addCollaboratorsPopover"
+                                            mdePopoverTriggerOn="click"><i class="fa fa-plus-square"
+                                                aria-hidden="true"></i></span>
 
-                                        <mde-popover #addCollaboratorsPopover="mdePopover" [mdePopoverOverlapTrigger]="false"
-                                            [mdePopoverCloseOnClick]="false" [mdePopoverArrowOffsetX]="8"
-                                            mdePopoverArrowColor="#FFFFFF">
+                                        <mde-popover #addCollaboratorsPopover="mdePopover"
+                                            [mdePopoverOverlapTrigger]="false" [mdePopoverCloseOnClick]="false"
+                                            [mdePopoverArrowOffsetX]="8" mdePopoverArrowColor="#FFFFFF">
                                             <div style="background: #f8f9fb; padding: 10px;">
-                                                <app-autocomplete class="field-full-width" [allowToAdd]="false" [autoComplete]="postForm?.get('collaborators')"
-                                                    [placeholder]="'Select Collaborators'" [collection]="'users'" [type]="" [multiple]="true" matInput>
+                                                <app-autocomplete class="field-full-width" [allowToAdd]="false"
+                                                    [autoComplete]="postForm?.get('collaborators')"
+                                                    [placeholder]="'Select Collaborators'" [collection]="'users'"
+                                                    [type]="" [multiple]="true" matInput>
                                                 </app-autocomplete>
-                                                <mat-icon (click)=" !fromAddPost ? addDataOfPost('collaborators') : displayData('collaborators')">send</mat-icon>
+                                                <mat-icon
+                                                    (click)=" !fromAddPost ? addDataOfPost('collaborators') : displayData('collaborators')">
+                                                    send</mat-icon>
                                             </div>
                                         </mde-popover>
                                     </p>
                                 </li>
 
                                 <!-- <li *ngIf="postDetails?.clients && postDetails?.clients?.length || fromAddPost"> -->
-                                <li>
+                                <li *ngIf="allowUsersEdit()">
                                     <p class="data-label">Clients</p>
                                     <p class="info">
                                         <a *ngFor="let t of postDetails?.clients" target="_blank"
@@ -124,7 +143,7 @@
                                                     alt="">{{t?.name}}</span>
                                         </a>
                                     </p>
-                                    <span *ngIf="allowUsersEdit()" style="margin: 7px 0 0 5px;" [mdePopoverTriggerFor]="addClientsPopover"
+                                    <span style="margin: 7px 0 0 5px;" [mdePopoverTriggerFor]="addClientsPopover"
                                         mdePopoverTriggerOn="click"><i class="fa fa-plus-square"
                                             aria-hidden="true"></i></span>
 
@@ -137,7 +156,9 @@
                                                 [placeholder]="'Select Clients'" [collection]="'users'" [type]=""
                                                 [multiple]="true" matInput>
                                             </app-autocomplete>
-                                            <mat-icon (click)=" !fromAddPost ? addDataOfPost('clients') : displayData('clients')">send</mat-icon>
+                                            <mat-icon
+                                                (click)=" !fromAddPost ? addDataOfPost('clients') : displayData('clients')">
+                                                send</mat-icon>
                                         </div>
                                     </mde-popover>
                                 </li>
@@ -179,13 +200,13 @@
                                     </p>
                                 </li>
 
-                                <li>
+                                <li *ngIf="allowUsersEdit()">
                                     <p class="data-label">Company</p>
                                     <p class="info" style="text-transform: capitalize; cursor: pointer;">
                                         <span *ngFor="let c of postDetails?.companies; let ei = index;"
                                             [routerLink]="['/', 'company', c?._id]">{{c?.name + (ei === postDetails?.companies?.length - 1 ? '' : ', ' )}}</span>
                                     </p>
-                                    <span *ngIf="allowUsersEdit()" style="margin: 7px 0 0 5px" [mdePopoverTriggerFor]="addCopmaniesPopover"
+                                    <span style="margin: 7px 0 0 5px" [mdePopoverTriggerFor]="addCopmaniesPopover"
                                         mdePopoverTriggerOn="click"><i class="fa fa-plus-square"
                                             aria-hidden="true"></i></span>
 
@@ -197,7 +218,9 @@
                                                 [collection]="'companies'" [forCompany]="true" [multiple]="true"
                                                 [placeholder]="'Select Company'" [type]="" class="col-md-6">
                                             </app-autocomplete>
-                                            <mat-icon (click)=" !fromAddPost ? addDataOfPost('companies') : displayData('companies')">send</mat-icon>
+                                            <mat-icon
+                                                (click)=" !fromAddPost ? addDataOfPost('companies') : displayData('companies')">
+                                                send</mat-icon>
                                         </div>
                                     </mde-popover>
                                 </li>
@@ -234,7 +257,7 @@
                                     </ul>
                                     <!-- </div> -->
                                 </li>
-                                
+
                             </div>
 
 

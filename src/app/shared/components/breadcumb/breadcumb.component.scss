@@ -53,6 +53,12 @@ ul.infos li p {
     line-height: 36px;
 }
 
+.mat-raised-button {
+    line-height: 32px;
+    padding: 0 10px;
+    min-width: 58px;
+}
+
 p.data-label:after {
     content: ":";
     margin-left: 4px

@@ -55,6 +55,9 @@ export class AddPostComponent implements OnInit, AfterViewInit {
 
   subscription$ = new Subscription();
 
+  anonymousAvatar = '../../../../assets/images/anonymous-avatar.jpg';
+  s3FilesBucketURL = environment.s3FilesBucketURL;
+
 
   constructor(
     public authService: AuthService,
@@ -62,7 +65,6 @@ export class AddPostComponent implements OnInit, AfterViewInit {
     private activatedRoute: ActivatedRoute,
     private postService: PostService,
     private location: Location,
-    private changeDetector: ChangeDetectorRef
   ) {
 
     this.postType = this.activatedRoute.snapshot.queryParams.type;
@@ -101,11 +103,19 @@ export class AddPostComponent implements OnInit, AfterViewInit {
         })
       );
     }
+
+    this.subscription$.add(
+      this.postService.saveOrSubmitPost.subscribe(s => {
+        if (s && this.postForm && this.postForm.valid) {
+          this.submit(s);
+        }
+      })
+    );
   }
 
   postFormInitialization(i: Post) {
     this.postForm = new FormGroup({
-      name: new FormControl(i && i.name ? i.name : '', Validators.required),
+      name: new FormControl(i && i.name ? i.name : 'Untitled Document', Validators.required),
       description: new FormControl(i && i.description ? i.description : []),
       descriptionHTML: new FormControl(i && i.descriptionHTML ? i.descriptionHTML : ''),
       tags: new FormControl(i && i.tags ? i.tags : []),
@@ -162,7 +172,7 @@ export class AddPostComponent implements OnInit, AfterViewInit {
 
     if (this.postId) {
       this.store.dispatch(UpdatePost({
-        post: postFormValue, updatedBy: {name: this.authService.loggedInUser.name, _id: this.authService.loggedInUser._id},
+        post: postFormValue, updatedBy: { name: this.authService.loggedInUser.name, _id: this.authService.loggedInUser._id },
       }));
     } else {
       this.store.dispatch(AddPost({ post: postFormValue }));

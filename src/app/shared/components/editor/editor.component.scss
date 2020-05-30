@@ -220,4 +220,7 @@ footer {
     top: 105px;
     z-index: 15;
   }
+  .ck-focused {
+    border: 1px solid lightgray !important;
+  }
 }

@@ -2,7 +2,7 @@
 
 @media (min-width: 1200px) {
   .container {
-    max-width: 1335px !important;
+    // max-width: 1335px !important;
   }
 }
 
@@ -19,5 +19,8 @@
   //   height: 4px;
   //   width: 4px;
   // }
+
+}
+:host ::ng-deep {
 
 }

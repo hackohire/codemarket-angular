@@ -19,7 +19,7 @@
 }
 
 #container #editor {
-  width: 90%;
+  width: 100%;
   // max-width: 700px;
 }
 
@@ -32,8 +32,9 @@
 
 #sidebar.narrow {
   // min-width: 65px;
-  width: 10% !important;
+  //width: 10% !important;
   // overflow-y: scroll;
+  display: none;
 }
 
 #sidebar.hidden {

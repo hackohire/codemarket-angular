@@ -7,7 +7,17 @@
 
 <div class="container MobilePadding">
     <div class="row">
-        <div class="col-md-8">
+				
+        <!-- start aside -->
+        <div class="col-md-2 order-3 order-lg-1">
+            <!-- <app-add-post-menu style="color: #00aeef !important; margin-left: auto;">
+            </app-add-post-menu> -->
+            <app-post-type-nav [customTabs]="authService?.loggedInUser && authService?.loggedInUser?._id == authorId ? customTabs : []" [selectedPostType]="profileView" (postTypeClick)="$event?.isCustom ? fetchBasedOnCustomTab($event) : selectMainCategory($event?.name);"
+                (plusButtonClick)="redirectToAddPost($event)"></app-post-type-nav>
+
+        </div>
+        
+        <div class="col-md-6 order-1 order-lg-2">
             <div [formGroup]="postForm" class="">
                 <!-- <mat-form-field class="field-full-width">
                     <input formControlName="name" matInput placeholder="Title" type="text">
@@ -71,7 +81,7 @@
 
         </div>
 
-        <div class="col-md-4 sidebar">
+        <div class="col-md-4 sidebar order-2 order-lg-3">
             <div class="col-md-12 col-sm-12">
                 <ul class="row infos">
                     <li *ngIf="true">

@@ -1,12 +1,35 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
+            <div [formGroup]="saveEmailForm" class="add-form-area common-box-shadow">
+
+                <h2>Save Emails</h2>
+
+                    <mat-form-field class="field-full-width">
+                        <ngx-mat-file-input #removableInput1 formControlName="csvfile" placeholder="Select csv file with emails" (change)="uploadFile($event, 'save')"></ngx-mat-file-input>
+                        <button mat-icon-button matSuffix *ngIf="!removableInput1.empty" (click)="removableInput1.clear($event)">
+                            <mat-icon>clear</mat-icon>
+                        </button>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="field-full-width">
+                        <mat-label>Mailing list Name</mat-label>
+                        <input matInput placeholder="Mailing list Name" type="text" formControlName="label" autocomplete="false" required>
+                    </mat-form-field>
+                    <app-autocomplete class="field-full-width" [allowToAdd]="false" [autoComplete]="saveEmailForm?.get('companies')"
+                    [placeholder]="'Select Company'" [collection]="'companies'" [type]="" [multiple]="false" matInput>
+                    </app-autocomplete>
+                <button type="button" (click)="saveFile()" [disabled]="saveEmailForm?.invalid" mat-raised-button color="primary" style="margin: 12px; height: 35px;">{{ 'Save Mailing List' }}</button>
+                  <br>
+                  
+
+            </div>
+
             <div [formGroup]="emailForm" class="add-form-area common-box-shadow">
 
                 <h2>Clean Emails</h2>
 
                     <mat-form-field class="field-full-width">
-                        <ngx-mat-file-input #removableInput formControlName="csvfile" placeholder="Select csv file with emails" (change)="uploadFile($event)"></ngx-mat-file-input>
+                        <ngx-mat-file-input #removableInput formControlName="csvfile" placeholder="Select csv file with emails" (change)="uploadFile($event, 'saveClean')"></ngx-mat-file-input>
                         <button mat-icon-button matSuffix *ngIf="!removableInput.empty" (click)="removableInput.clear($event)">
                             <mat-icon>clear</mat-icon>
                         </button>

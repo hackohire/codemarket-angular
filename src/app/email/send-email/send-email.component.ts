@@ -21,7 +21,10 @@ export class SendEmailComponent implements OnInit {
   breadcumb: BreadCumb;
   emailForm: FormGroup;
   sendEmailForm: FormGroup;
+  saveEmailForm: FormGroup;
+
   file;
+  onlySaveFile;
   public formdata = new FormData();
 
   get createdBy() {
@@ -72,9 +75,13 @@ export class SendEmailComponent implements OnInit {
   }
 
   emailFormInitialization(i: Email) {
+    this.saveEmailForm = new FormGroup({
+      csvfile: new FormControl('', Validators.required),
+      label: new FormControl('', Validators.required),
+      companies: new FormControl('', Validators.required),
+    });
+
     this.emailForm = new FormGroup({
-      to: new FormControl([]),
-      descriptionHTML: new FormControl(),
       csvfile: new FormControl('', Validators.required),
       label: new FormControl('', Validators.required),
       companies: new FormControl('', Validators.required),
@@ -89,6 +96,25 @@ export class SendEmailComponent implements OnInit {
     })
   }
 
+  saveFile() {
+    if (!this.authService.loggedInUser) {
+      this.authService.checkIfUserIsLoggedIn(true);
+      return;
+    }
+    
+    let fileReader = new FileReader();
+    fileReader.onload = (e) => {
+      // console.log(fileReader.result);
+      this.csvToJSON(fileReader.result, 'save', (result) => {
+        console.log("This is result", result);
+        this.emailService.saveCsvFileData(result, this.authService.loggedInUser._id, this.onlySaveFile.name, this.saveEmailForm.value.label, this.saveEmailForm.value.companies).subscribe((data) => {
+         console.log("Response of the file read ==> " , data);
+        });
+      })
+    }
+    fileReader.readAsText(this.onlySaveFile);
+  }
+
   cleanFile() {
     if (!this.authService.loggedInUser) {
       this.authService.checkIfUserIsLoggedIn(true);
@@ -98,7 +124,7 @@ export class SendEmailComponent implements OnInit {
     let fileReader = new FileReader();
     fileReader.onload = (e) => {
       // console.log(fileReader.result);
-      this.csvToJSON(fileReader.result, (result) => {
+      this.csvToJSON(fileReader.result, 'saveClean', (result) => {
         console.log("This is result", result);
         this.emailService.getCsvFileData(result, this.authService.loggedInUser._id, this.file.name, this.emailForm.value.label, this.emailForm.value.companies).subscribe((data) => {
          console.log("Response of the file read ==> " , data);
@@ -108,18 +134,29 @@ export class SendEmailComponent implements OnInit {
     fileReader.readAsText(this.file);
   }
 
-  uploadFile(event) {
-     this.file = event.target.files[0];
-     console.log(this.file);
-     if (this.file.name.split(".")[1] !== 'csv') {
-      Swal.fire(`Invalid File Type`, '', 'error').then(() => {
-        this.emailForm.get('csvfile').setValue('');
-        this.file = '';
-      });
-     }
+  uploadFile(event, action) {
+    if (action === 'save') {
+      this.onlySaveFile = event.target.files[0];
+      console.log(this.onlySaveFile);
+      if (this.onlySaveFile.name.split(".")[1] !== 'csv') {
+        Swal.fire(`Invalid File Type`, '', 'error').then(() => {
+          this.emailForm.get('csvfile').setValue('');
+          this.file = '';
+        });
+       }
+    } else {
+      this.file = event.target.files[0];
+      console.log(this.file);
+      if (this.file.name.split(".")[1] !== 'csv') {
+       Swal.fire(`Invalid File Type`, '', 'error').then(() => {
+         this.emailForm.get('csvfile').setValue('');
+         this.file = '';
+       });
+      }
+    }
   }
 
-  csvToJSON(csv, callback) {
+  csvToJSON(csv, action, callback) {
     var lines = csv.split("\n");
     var result = [];
     var headers = lines[0].split(",");
@@ -128,7 +165,9 @@ export class SendEmailComponent implements OnInit {
         var currentline = lines[i].split(",");
         for (var j = 0; j <= headers.length; j++) {
             obj[headers[j]] = currentline[j];
-            obj['email'] = JSON.parse(currentline[headers.indexOf('email')])
+            if (action === 'saveClean') {
+              obj['email'] = JSON.parse(currentline[headers.indexOf('email')])
+            }
         }
         result.push(obj);
     }

@@ -169,4 +169,36 @@ export class EmailService {
     );;
   }
   
+  saveCsvFileData(data: any, createdBy: String, fileName: String, label: String, companies: Batch): Observable<any> {
+    return this.apollo.mutate(
+      {
+        mutation: gql`
+          mutation saveCsvFileData($data: [JSON], $createdBy: String, $fileName: String, $label: String, $companies: batchInput) {
+            saveCsvFileData(data: $data, createdBy: $createdBy, fileName: $fileName, label: $label, companies: $companies) {
+              data
+              createdBy
+              fileName
+              label
+              companies {
+                _id
+                name
+              }
+            }
+          }
+        `,
+        variables: {
+          data,
+          createdBy,
+          fileName,
+          label,
+          companies
+        },
+        fetchPolicy: 'no-cache'
+      }
+    ).pipe(
+      map((p: any) => {
+        return p.data.getCsvFileData;
+      }),
+    );
+  }
 }

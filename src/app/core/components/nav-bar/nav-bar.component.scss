@@ -77,17 +77,17 @@
 
   /* Track */
   ::-webkit-scrollbar-track {
-    background: #f1f1f1; 
+    background: #ddd; 
   }
   
   /* Handle */
   ::-webkit-scrollbar-thumb {
-    background: #888; 
+    background: #6f42c1; 
   }
 
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
-    background: #555; 
+    background: darkorchid; 
   }
 }
 
@@ -1521,7 +1521,7 @@ input[type=password] {
   /*** Logo ***/ }
   .rupertspira #mn_hdr .logo {
     height: auto;
-    width: 200px; }
+    width: 250px; }
     .rupertspira #mn_hdr .logo h1 {
       line-height: 1; }
       .rupertspira #mn_hdr .logo h1 a {

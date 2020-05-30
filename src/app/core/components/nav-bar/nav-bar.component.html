@@ -18,7 +18,7 @@
 
 
   <mat-sidenav-content>
-    <mat-toolbar class="SearchLoginBox">
+    <mat-toolbar class="SearchLoginBox" style="display: none;">
 
       <!-- <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'add-post-type']">
         <i style="font-size: 1.0rem !important; color: #ffff00;" class="vertical-align-middle fal fa-add fa-fw"></i>
@@ -26,10 +26,10 @@
       </a> -->
 
       <!-- Search -->
-      <a mat-button routerLinkActive="mat-primary" (click)="openSearchDialog()" style="line-height: 3;">
+      <!-- <a mat-button routerLinkActive="mat-primary" (click)="openSearchDialog()" style="line-height: 3;">
         <i style="font-size: 1.0rem !important; color: #ffff00;" class="vertical-align-middle fal fa-search fa-fw"></i>
         <span style="color: #ffffff;" class="line-height-initial"> Search</span>
-      </a>
+      </a> -->
 
       <!-- membership -->
       <!--  <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'membership']">
@@ -38,13 +38,13 @@
         <span style="color: #ffffff;" class="line-height-initial" > Membership</span>
       </a> -->
       <!-- Login -->
-      <ng-template #logIn>
+      <!-- <ng-template #logIn>
         <a #lr mat-button [mdePopoverTriggerFor]="authentication" [mdePopoverTargetAt]="lr" mdePopoverTriggerOn="click">
           <i style="font-size: 1.0rem !important; color: #ffff00;"
             class="vertical-align-middle fal fa-user-circle fa-fw"></i>
           <span style="color: #ffffff;" class="line-height-initial"> Login/Register</span>
         </a>
-      </ng-template>
+      </ng-template> -->
 
       <mde-popover #authentication="mdePopover" [mdePopoverOverlapTrigger]="false" [mdePopoverCloseOnClick]="false"
         [mdePopoverArrowOffsetX]="58" mdePopoverArrowColor="#FFFFFF">
@@ -146,11 +146,10 @@
     <div class="rupertspira">
 
       <div class="container">
+        <div class="bg-white" style="padding: 0 15px 15px;">
 
         <div id="top_hdr">
           <ul>
-
-
 
             <li style="display:none;" class="basket">
               <a href="/basket" class="basket"><img src="https://non-duality.rupertspira.com/assets/app/img/basket.png"
@@ -224,12 +223,11 @@
         </div><!-- / #top_hdr -->
 
         <header id="mn_hdr">
-          <div class="logo">
-            <h1><a href="/dashboard" title="Rupert Spira">Joel Drazner</a></h1>
-            <h2>Resilience Coach</h2>
+          <div class="logo float-left">
+            <a href="/dashboard" title="Joel Drazner"><img src="../../../../assets/images/Joel-Drazner-Logo.png"></a>
           </div>
 
-          <nav id="mn_nav">
+          <nav id="mn_nav" class="float-right">
             <ul class="dd_nav">
               <li class="dd_btn">
                 <a class="dd_tab" title="Rupert Spira | Non-duality Teachings" href="/dashboard">
@@ -276,8 +274,10 @@
 
             </ul><!-- / .dd_nav -->
           </nav><!-- / #mn_nav -->
+          <div class="clearfix"></div>
         </header><!-- / #mn_hdr -->
       </div>
+    </div>
     </div>
 
     <!-- {{loggedInUser | json}} -->

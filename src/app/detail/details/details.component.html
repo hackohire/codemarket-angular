@@ -43,10 +43,16 @@
                         </div>
                     </div> -->
                 </div>
-                <div class="col-lg-1">
 
+                <!-- start aside -->
+                <div class="col-md-2">
+                    <!-- <app-add-post-menu style="color: #00aeef !important; margin-left: auto;">
+                    </app-add-post-menu> -->
+                    <app-post-type-nav [customTabs]="authService?.loggedInUser && authService?.loggedInUser?._id == authorId ? customTabs : []" [selectedPostType]="profileView" (postTypeClick)="$event?.isCustom ? fetchBasedOnCustomTab($event) : selectMainCategory($event?.name);"
+                        (plusButtonClick)="redirectToAddPost($event)"></app-post-type-nav>
                 </div>
-                <div *ngIf="!showConnectedPosts" [ngClass]="selectedBlock ? 'col-lg-6 col-md-6' : 'col-lg-10 col-md-10'">
+
+                <div *ngIf="!showConnectedPosts" [ngClass]="selectedBlock ? 'col-lg-7 col-md-7' : 'col-lg-7 col-md-7'">
 
                     <div class="item-info">
                         <div>
@@ -80,14 +86,13 @@
                 </div>
                 <!-- end /.col-md-8 -->
 
-                <div *ngIf="!showConnectedPosts" class="col-md-6 col-lg-4">
-                        <ng-container *ngTemplateOutlet="addBlockLevelCommentTemplate; context: {details: details, comments: (commentService?.commentsList$ | async)}">
-                        </ng-container>
-
-                </div>
+                <!-- <div *ngIf="!showConnectedPosts" class="col-md-6 col-lg-4">
+                    <ng-container *ngTemplateOutlet="addBlockLevelCommentTemplate; context: {details: details, comments: (commentService?.commentsList$ | async)}">
+                    </ng-container>
+                </div> -->
                 <!-- end /.col-md-4 -->
 
-                <div class="col-md-10 col-lg-10" *ngIf="showConnectedPosts">
+                <div class="col-md-7 col-lg-7" *ngIf="showConnectedPosts">
                     <div class="row">
                         <div class="col-md-8">
                             <a mat-stroked-button color="primary" style="margin-bottom: 10px;" (click)="selectedBlock = null; showConnectedPosts = false; selectedPostType = ''">
@@ -109,6 +114,7 @@
 
                     </div>
                 </div>
+                
             </div>
             <!-- end /.row -->
         </div>

@@ -123,7 +123,7 @@
 
             <div class="row">
                 <div class="col-lg-2">
-                    <app-post-type-nav [selectedPostType]="companyView" [customTabs]="customTabs"
+                    <app-post-type-nav *ngIf="false" [selectedPostType]="companyView" [customTabs]="customTabs"
                         (postTypeClick)="selectMainCategory($event);" (plusButtonClick)="redirectToAddPost($event)">
                     </app-post-type-nav>
                     <!-- start aside -->
@@ -255,7 +255,7 @@
 
                             <div *ngIf="companyView === 'campaigns' && details?._id">
                                 <ng-container *ngTemplateOutlet="campaignsTemplate; context: {details: details}">
-                                    </ng-container>
+                                </ng-container>
                                 <!-- <div *ngFor="let c of campaignsList">
                                     <app-paginator [length]="c.count" (fetchData)="paginator = $event; fetchAllCampaign('')">
                                     </app-paginator>
@@ -420,8 +420,7 @@
                                                         alt="Presenting the broken author avatar :D">
                                                 </div>
                                                 <div class="autor__info">
-                                                    <a
-                                                        [routerLink]="['profile', userInterested?.slug ]">
+                                                    <a [routerLink]="['profile', userInterested?.slug ]">
                                                         <p class="name">
                                                             {{userInterested?.name}}
                                                         </p>
@@ -547,8 +546,7 @@
                                             <div class="media-body">
                                                 <div>
                                                     <div class="media-heading">
-                                                        <a
-                                                            [routerLink]="['profile', a?.createdBy?.slug ]">
+                                                        <a [routerLink]="['profile', a?.createdBy?.slug ]">
                                                             <h4>{{a?.createdBy?.name }}</h4>
                                                         </a>
                                                         <span>{{fromNow(a?.createdAt)}}</span>
@@ -653,9 +651,10 @@
                 </mat-list-item>
             </mat-list>
 
-           {{paginator?.pageIndex}}
-           {{ep?.expanded}}
-            <app-paginator [length]="c?.count" (fetchData)="paginator = $event; ep?.expanded ? fetchEmailsConnectedWithCampaign(c._id, i) : null">
+            {{paginator?.pageIndex}}
+            {{ep?.expanded}}
+            <app-paginator [length]="c?.count"
+                (fetchData)="paginator = $event; ep?.expanded ? fetchEmailsConnectedWithCampaign(c._id, i) : null">
             </app-paginator>
         </mat-expansion-panel>
         <!-- <div *ngFor="let c of campaignsList">
@@ -665,46 +664,47 @@
 <!-- Contact Template -->
 <ng-template #contactTemplate let-contacts="details">
     <div style="background: white;">
-            <table class="table table-striped" >
-                <thead>
-                    <tr>
-                        <th>Name 
-                            <span *ngIf="nameAsc">
-                                <i class="fas fa-sort-up" (click)="changeOrder('name','asc','contact')"></i>
-                            </span>
-                            <span *ngIf="!nameAsc">
-                                <i class="fas fa-sort-down" (click)="changeOrder('name','desc','contact')"></i>
-                            </span>
-                        </th>
-                        <th>Email ({{emailCount}})
-                            <span *ngIf="emailAsc">
-                                <i class="fas fa-sort-up" (click)="changeOrder('email','asc','contact')"></i>
-                            </span>
-                            <span *ngIf="!emailAsc">
-                                <i class="fas fa-sort-down" (click)="changeOrder('email','desc','contact')"></i>
-                            </span>
-                        </th>
-                        <th>Phone ({{phoneCount}})
-                            <span *ngIf="phoneAsc">
-                                <i class="fas fa-sort-up" (click)="changeOrder('phone','asc','contact')"></i>
-                            </span>
-                            <span *ngIf="!phoneAsc">
-                                <i class="fas fa-sort-down" (click)="changeOrder('phone','desc','contact')"></i>
-                            </span>
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr  *ngFor="let e of companyRelatedPosts?.posts" [routerLink]="['/','post',e._id]">
-                        <td>{{e.name}}</td>
-                        <td>{{e.email}}</td>
-                        <td>{{e.phone}}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <app-paginator [length]="totalcompanyRelatedPosts" (fetchData)="paginator = $event; fetchAllCompanyRealtedePosts('contact')">
-        </app-paginator>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Name
+                        <span *ngIf="nameAsc">
+                            <i class="fas fa-sort-up" (click)="changeOrder('name','asc','contact')"></i>
+                        </span>
+                        <span *ngIf="!nameAsc">
+                            <i class="fas fa-sort-down" (click)="changeOrder('name','desc','contact')"></i>
+                        </span>
+                    </th>
+                    <th>Email ({{emailCount}})
+                        <span *ngIf="emailAsc">
+                            <i class="fas fa-sort-up" (click)="changeOrder('email','asc','contact')"></i>
+                        </span>
+                        <span *ngIf="!emailAsc">
+                            <i class="fas fa-sort-down" (click)="changeOrder('email','desc','contact')"></i>
+                        </span>
+                    </th>
+                    <th>Phone ({{phoneCount}})
+                        <span *ngIf="phoneAsc">
+                            <i class="fas fa-sort-up" (click)="changeOrder('phone','asc','contact')"></i>
+                        </span>
+                        <span *ngIf="!phoneAsc">
+                            <i class="fas fa-sort-down" (click)="changeOrder('phone','desc','contact')"></i>
+                        </span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let e of companyRelatedPosts?.posts" [routerLink]="['/','post',e._id]">
+                    <td>{{e.name}}</td>
+                    <td>{{e.email}}</td>
+                    <td>{{e.phone}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <app-paginator [length]="totalcompanyRelatedPosts"
+        (fetchData)="paginator = $event; fetchAllCompanyRealtedePosts('contact')">
+    </app-paginator>
 </ng-template>
 
 <ng-template #addBlockLevelCommentTemplate let-cDetails="details" let-comments="comments">

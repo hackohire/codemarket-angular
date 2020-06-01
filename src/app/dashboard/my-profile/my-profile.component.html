@@ -32,9 +32,11 @@
 								(click)="updateProfilePicture(user?._id)">Update</button>
 						</div>
 						<h4 style="text-align: center; padding-top: 10px;">{{user?.name}}</h4>
-						<button *ngIf="authService?.loggedInUser && authorId && authService?.loggedInUser?._id !== authorId" (click)="openDialog()" mat-mini-fab color="primary">
-                                        <mat-icon>video_call</mat-icon>
-                                    </button>
+						<button
+							*ngIf="authService?.loggedInUser && authorId && authService?.loggedInUser?._id !== authorId"
+							(click)="openDialog()" mat-mini-fab color="primary">
+							<mat-icon>video_call</mat-icon>
+						</button>
 					</div>
 					<div class="col-lg-10 col-md-10 col-sm-9" style="padding: 0;">
 						<div class="picture-container" *ngIf="selectedCoverPic?.name || user?.cover">
@@ -63,20 +65,20 @@
 				</div>
 			</div>
 			<div class="row">
-				
+
 				<!-- start aside -->
 				<div class="col-md-2">
 					<!-- <app-add-post-menu style="color: #00aeef !important; margin-left: auto;">
 					</app-add-post-menu> -->
-					<app-post-type-nav [customTabs]="authService?.loggedInUser && authService?.loggedInUser?._id == authorId ? customTabs : []" [selectedPostType]="profileView" (postTypeClick)="$event?.isCustom ? fetchBasedOnCustomTab($event) : selectMainCategory($event?.name);"
+					<app-post-type-nav *ngIf="false"
+						[customTabs]="authService?.loggedInUser && authService?.loggedInUser?._id == authorId ? customTabs : []"
+						[selectedPostType]="profileView"
+						(postTypeClick)="$event?.isCustom ? fetchBasedOnCustomTab($event) : selectMainCategory($event?.name);"
 						(plusButtonClick)="redirectToAddPost($event)"></app-post-type-nav>
 
 				</div>
 
 				<div class="col-lg-10 col-md-10">
-					<!-- POST EDITOR STARTS HERE -->
-
-					<!-- POST EDITOR ENDS HERE -->
 					<div class="row">
 						<div [ngClass]="selectedBlock ? 'col-md-8 col-lg-8' : 'col-lg-12 col-md-12'">
 							<!-- {{profileView}} -->
@@ -85,7 +87,8 @@
 							</div>
 
 							<div *ngIf="profileView === 'files'">
-								<ng-container *ngTemplateOutlet="filesList; context: {details: selectedPost, files: files}">
+								<ng-container
+									*ngTemplateOutlet="filesList; context: {details: selectedPost, files: files}">
 								</ng-container>
 							</div>
 
@@ -102,12 +105,13 @@
 							</div>
 
 							<!-- Showing the list of posts for the posts tab, everytime user clicks on the "load more", we increase the page number and call
-							fetchAllOtherPosts method to fetch subsequent posts -->
+														fetchAllOtherPosts method to fetch subsequent posts -->
 							<ng-container *ngIf="profileView === navLinkName.posts">
 								<div class="">
 									<app-brief-post style="width: 100%;" [p]="e"
 										*ngFor="let e of listOfAllOtherPosts?.posts"
-										(showComments)="showCommentsOnSide($event)" [readMore]="true"></app-brief-post>
+										(showComments)="showCommentsOnSide($event)" [readMore]="true">
+									</app-brief-post>
 								</div>
 								<app-paginator [length]="totalOtherPosts"
 									(fetchData)="paginator = $event; fetchAllOtherPosts()">
@@ -196,8 +200,8 @@
 												<!-- end /.social -->
 
 												<!-- <div class="author-btn">
-																				<a href="#" class="btn btn--md btn--round">Follow</a>
-																		</div> -->
+																											<a href="#" class="btn btn--md btn--round">Follow</a>
+																									</div> -->
 												<!-- end /.author-btn -->
 											</div>
 											<!-- end /.author-infos -->
@@ -215,17 +219,19 @@
 						</div>
 
 					</div>
-					<!-- <ng-template matTabContent>
-					</ng-template> -->
-					  <!-- <mat-tab-group  mat-align-tabs="center">
-					    <mat-tab label="Posts">
-					    </mat-tab>
-					     <mat-tab label="Chats">
+					<!-- POST EDITOR STARTS HERE -->
+
+					<!-- POST EDITOR ENDS HERE -->
+					<!-- <mat-tab-group mat-align-tabs="center"> -->
+					<!-- <mat-tab label="Posts">
+							
+						</mat-tab> -->
+					<!-- <mat-tab label="Chats">
 					      <ng-template matTabContent>
 					        <app-chat-full-ui [loggedInUser]="authService?.loggedInUser" [postList]="listOfAllOtherPosts?.posts"></app-chat-full-ui>
 					      </ng-template>
-					    </mat-tab>
-					  </mat-tab-group> -->
+					    </mat-tab> -->
+					<!-- </mat-tab-group> -->
 				</div>
 			</div>
 		</div>

@@ -110,15 +110,15 @@
   }
   .SearchLoginBox {
       width: 100% !important;
-      position: fixed !important;
+      position: relative !important;
       top: 0 !important;
       z-index: 16 !important;
       border-radius: 0;
       left: 0;
   }
   .NavBarBox {
-      position: fixed !important;
-      top: 48px !important;
+      position: relative !important;
+      top: 0 !important;
       z-index: 17 !important;
       border-bottom: 1px solid #ccc;
   }

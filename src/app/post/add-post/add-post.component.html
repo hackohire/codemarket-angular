@@ -17,6 +17,13 @@
         </div>
 
         <div class="col-md-8 order-1 order-lg-2">
+            <div *ngIf="postType === 'appointment'">
+              <app-calender></app-calender>
+            </div>
+            <div class="alert alert-info text-center" *ngIf="postType === 'appointment' && slotDateTime">
+              Confirm Your Apointment
+              <strong>: {{ displayDate | date:'yyyy-MM-dd hh:mm a'}}</strong>
+            </div>
             <div [formGroup]="postForm" class="">
                 <!-- <mat-form-field class="field-full-width">
                     <input formControlName="name" matInput placeholder="Title" type="text">
@@ -183,6 +190,17 @@
                     </li>
                 </ul>
             </div>
+            <div class="col-xs-12 col-sm-12 time-slot-wrapper" *ngIf="postType === 'appointment'">
+                <div *ngIf="slotList.length > 0">
+                  <div class="col-6 slot-btn" [ngClass]="{ 'slot-select-box': ((slotDateTime) && slot === slotDateTime) }" 
+                    (click)="selectedSlot(slot)" *ngFor="let slot of slotList">
+                    {{slot}}
+                  </div>
+                </div>
+                <!-- <ng-template class="no-slot" #noSlotSelected>
+                  <span>Please Select Date</span>
+                </ng-template> -->
+              </div>
         </div>
     </div>
 </div>

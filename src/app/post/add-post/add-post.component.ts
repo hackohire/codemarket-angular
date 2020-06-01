@@ -92,6 +92,14 @@ export class AddPostComponent implements OnInit, AfterViewInit {
     };
 
     this.postFormInitialization(null);
+    // Subscribing calendar event
+    if (this._appointmentService.subsVar == undefined) {
+      this._appointmentService.subsVar = this._appointmentService.
+        invokeAppointmentDateTime.subscribe((date: any) => {
+          this.selectedDate = date;
+          this.intervals();
+        });
+    }
   }
 
   ngAfterViewInit(): void {
@@ -122,15 +130,6 @@ export class AddPostComponent implements OnInit, AfterViewInit {
         }
       })
     );
-
-    // Subscribing calendar event
-    if (this._appointmentService.subsVar == undefined) {
-      this._appointmentService.subsVar = this._appointmentService.
-        invokeAppointmentDateTime.subscribe((date: any) => {
-          this.selectedDate = date;
-          this.intervals();
-        });
-    }
   }
 
   redirectToAddPost(postType) {

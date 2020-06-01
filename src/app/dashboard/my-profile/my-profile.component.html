@@ -32,9 +32,11 @@
 								(click)="updateProfilePicture(user?._id)">Update</button>
 						</div>
 						<h4 style="text-align: center; padding-top: 10px;">{{user?.name}}</h4>
-						<button *ngIf="authService?.loggedInUser && authorId && authService?.loggedInUser?._id !== authorId" (click)="openDialog()" mat-mini-fab color="primary">
-                                        <mat-icon>video_call</mat-icon>
-                                    </button>
+						<button
+							*ngIf="authService?.loggedInUser && authorId && authService?.loggedInUser?._id !== authorId"
+							(click)="openDialog()" mat-mini-fab color="primary">
+							<mat-icon>video_call</mat-icon>
+						</button>
 					</div>
 					<div class="col-lg-10 col-md-10 col-sm-9" style="padding: 0;">
 						<div class="picture-container" *ngIf="selectedCoverPic?.name || user?.cover">
@@ -63,60 +65,67 @@
 				</div>
 			</div>
 			<div class="row">
-				
+
 				<!-- start aside -->
 				<div class="col-md-2">
 					<!-- <app-add-post-menu style="color: #00aeef !important; margin-left: auto;">
 					</app-add-post-menu> -->
-					<app-post-type-nav [customTabs]="authService?.loggedInUser && authService?.loggedInUser?._id == authorId ? customTabs : []" [selectedPostType]="profileView" (postTypeClick)="$event?.isCustom ? fetchBasedOnCustomTab($event) : selectMainCategory($event?.name);"
+					<app-post-type-nav *ngIf="false"
+						[customTabs]="authService?.loggedInUser && authService?.loggedInUser?._id == authorId ? customTabs : []"
+						[selectedPostType]="profileView"
+						(postTypeClick)="$event?.isCustom ? fetchBasedOnCustomTab($event) : selectMainCategory($event?.name);"
 						(plusButtonClick)="redirectToAddPost($event)"></app-post-type-nav>
 
 				</div>
 
 				<div class="col-lg-10 col-md-10">
-					<!-- POST EDITOR STARTS HERE -->
+					<div class="row">
+						<div [ngClass]="selectedBlock ? 'col-md-8 col-lg-8' : 'col-lg-12 col-md-12'">
+							<!-- {{profileView}} -->
+							<div *ngIf="profileView === navLinkName.buy">
+								<router-outlet></router-outlet>
+							</div>
 
-					<!-- POST EDITOR ENDS HERE -->
-					  <mat-tab-group  mat-align-tabs="center">
-					    <mat-tab label="Posts">
-					      <ng-template matTabContent>
+							<!-- POST EDITOR ENDS HERE -->
 							<div class="row">
 								<div [ngClass]="selectedBlock ? 'col-md-8 col-lg-8' : 'col-lg-12 col-md-12'">
 									<!-- {{profileView}} -->
 									<div *ngIf="profileView === navLinkName.buy">
 										<router-outlet></router-outlet>
 									</div>
-		
+
 									<div *ngIf="profileView === 'files'">
-										<ng-container *ngTemplateOutlet="filesList; context: {details: selectedPost, files: files}">
+										<ng-container
+											*ngTemplateOutlet="filesList; context: {details: selectedPost, files: files}">
 										</ng-container>
 									</div>
-		
+
 									<div *ngIf="profileView === navLinkName.sell">
 										<router-outlet></router-outlet>
 									</div>
-		
+
 									<div *ngIf="profileView === navLinkName.membership">
 										<router-outlet></router-outlet>
 									</div>
-		
+
 									<div *ngIf="profileView === navLinkName.myrsvp">
 										<router-outlet></router-outlet>
 									</div>
-		
+
 									<!-- Showing the list of posts for the posts tab, everytime user clicks on the "load more", we increase the page number and call
-									fetchAllOtherPosts method to fetch subsequent posts -->
+														fetchAllOtherPosts method to fetch subsequent posts -->
 									<ng-container *ngIf="profileView === navLinkName.posts">
 										<div class="">
 											<app-brief-post style="width: 100%;" [p]="e"
 												*ngFor="let e of listOfAllOtherPosts?.posts"
-												(showComments)="showCommentsOnSide($event)" [readMore]="true"></app-brief-post>
+												(showComments)="showCommentsOnSide($event)" [readMore]="true">
+											</app-brief-post>
 										</div>
 										<app-paginator [length]="totalOtherPosts"
 											(fetchData)="paginator = $event; fetchAllOtherPosts()">
 										</app-paginator>
 									</ng-container>
-		
+
 									<!-- Show list of the posts based on post type -->
 									<ng-container *ngFor="let p of postTypesArray">
 										<ng-container *ngIf="profileView === p.name">
@@ -126,13 +135,13 @@
 													(showComments)="showCommentsOnSide($event)" [readMore]="true">
 												</app-brief-post>
 											</div>
-		
+
 											<app-paginator [length]="totalOtherPosts"
 												(fetchData)="paginator = $event; fetchAllOtherPosts(p.name)">
 											</app-paginator>
 										</ng-container>
 									</ng-container>
-		
+
 									<div *ngIf="profileView === navLinkName?.info && (userData$) | async as user">
 										<div class="col-lg-12 col-md-12">
 											<aside class="common-box-shadow sidebar sidebar_author">
@@ -142,7 +151,7 @@
 															<img [src]="user?.avatar ? ((s3FilesBucketURL + user.avatar) | safe: 'resourceUrl') : anonymousAvatar"
 																alt="Presenting the broken author avatar :D">
 														</div>
-		
+
 														<div class="author">
 															<h4>{{user?.name}}</h4>
 															<button
@@ -153,8 +162,8 @@
 															<p>On platform since {{user?.createdAt | date}}</p>
 														</div>
 														<!-- end /.author -->
-		
-		
+
+
 														<div class="social social--color--filled">
 															<ul>
 																<li style="margin: 5px; color: initial">
@@ -177,9 +186,9 @@
 																</li>
 															</ul>
 														</div>
-		
-		
-		
+
+
+
 														<ul class="infos">
 															<li>
 																<span class="data-label">Likes: </span>
@@ -197,10 +206,10 @@
 															</li>
 														</ul>
 														<!-- end /.social -->
-		
+
 														<!-- <div class="author-btn">
-																						<a href="#" class="btn btn--md btn--round">Follow</a>
-																				</div> -->
+																											<a href="#" class="btn btn--md btn--round">Follow</a>
+																									</div> -->
 														<!-- end /.author-btn -->
 													</div>
 													<!-- end /.author-infos -->
@@ -209,37 +218,43 @@
 											</aside>
 										</div>
 									</div>
-		
+
 								</div>
 								<div [ngClass]="selectedBlock ? 'col-md-4 col-lg-4' : ''">
 									<ng-container
 										*ngTemplateOutlet="addBlockLevelCommentTemplate; context: {details: selectedPost, comments: selectedPostComments | async}">
 									</ng-container>
 								</div>
-		
+
 							</div>
-					      </ng-template>
-					    </mat-tab>
-					    <mat-tab label="Chats">
+							<!-- POST EDITOR STARTS HERE -->
+
+							<!-- POST EDITOR ENDS HERE -->
+							<!-- <mat-tab-group mat-align-tabs="center"> -->
+							<!-- <mat-tab label="Posts">
+							
+						</mat-tab> -->
+							<!-- <mat-tab label="Chats">
 					      <ng-template matTabContent>
 					        <app-chat-full-ui [loggedInUser]="authService?.loggedInUser" [postList]="listOfAllOtherPosts?.posts"></app-chat-full-ui>
 					      </ng-template>
-					    </mat-tab>
-					  </mat-tab-group>
+					    </mat-tab> -->
+							<!-- </mat-tab-group> -->
+						</div>
+					</div>
 				</div>
+				<!-- </section> -->
 			</div>
-		</div>
-	</section>
-</div>
 
-<ng-template #addBlockLevelCommentTemplate let-cDetails="details" let-comments="comments">
-	<aside class="sidebar">
-		<app-comment-side-nav *ngIf="selectedBlock"
-			(closeCommentSideBar)="selectedBlock['__show'] = null; selectedBlock = null" [selectedBlock]="selectedBlock"
-			[selectedPost]="cDetails" [comments]="comments"></app-comment-side-nav>
-	</aside>
-</ng-template>
+			<ng-template #addBlockLevelCommentTemplate let-cDetails="details" let-comments="comments">
+				<aside class="sidebar">
+					<app-comment-side-nav *ngIf="selectedBlock"
+						(closeCommentSideBar)="selectedBlock['__show'] = null; selectedBlock = null"
+						[selectedBlock]="selectedBlock" [selectedPost]="cDetails" [comments]="comments">
+					</app-comment-side-nav>
+				</aside>
+			</ng-template>
 
-<ng-template #filesList let-cDetails="details" let-comments="files">
-	<app-editor [id]="f?._id" *ngFor="let f of files" [data]="[f]" [readOnly]="true"></app-editor>
-</ng-template>
+			<ng-template #filesList let-cDetails="details" let-comments="files">
+				<app-editor [id]="f?._id" *ngFor="let f of files" [data]="[f]" [readOnly]="true"></app-editor>
+			</ng-template>

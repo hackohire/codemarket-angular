@@ -12,18 +12,16 @@ import { AuthService } from 'src/app/core/services/auth.service';
 import { CommentService } from 'src/app/shared/services/comment.service';
 import { environment } from 'src/environments/environment';
 import { selectSelectedPost } from 'src/app/core/store/selectors/post.selectors';
-import { SetSelectedPost } from 'src/app/core/store/actions/post.actions';
 import { Post } from 'src/app/shared/models/post.model';
 import { MatDialog, MatPaginator } from '@angular/material';
 import { VideoChatComponent } from 'src/app/video-chat/video-chat.component';
-import Peer from 'peerjs';
 import { PostService } from '../../shared/services/post.service';
 import { SweetalertService } from '../../shared/services/sweetalert.service';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
-import { Company } from '../../shared/models/company.model';
-import { User } from '../../shared/models/user.model';
 import { appConstants } from '../../shared/constants/app_constants';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { MdePopoverTrigger } from '@material-extended/mde';
+import { ShareService } from '@ngx-share/core';
 
 @Component({
   selector: 'app-details',
@@ -45,10 +43,8 @@ export class DetailsComponent implements OnInit, OnDestroy {
   postTypesArray = appConstants.postTypesArray;
 
   postDetails: Post;
-  isUserAttending: boolean; /** Only for the event */
   subscription$: Subscription = new Subscription();
   type: string; // product | help-request | interview | requirement | Testing | Howtodoc
-  likeCount: number;
   anonymousAvatar = '../../../assets/images/anonymous-avatar.jpg';
   s3FilesBucketURL = environment.s3FilesBucketURL;
 
@@ -58,7 +54,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
   postForm: FormGroup;
   commentsList: any[];
   collaborators: string[];
-  peer: Peer;
+  // peer: Peer;
 
   commentId: string;
   blockId: string;
@@ -77,6 +73,11 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
   displayChatBox = false;
 
+  @ViewChild(MdePopoverTrigger, { static: false }) addTagsPopover: MdePopoverTrigger;
+  @ViewChild(MdePopoverTrigger, { static: false }) addCopmaniesPopover: MdePopoverTrigger;
+  @ViewChild(MdePopoverTrigger, { static: false }) addClientsPopover: MdePopoverTrigger;
+  @ViewChild(MdePopoverTrigger, { static: false }) addCollaboratorsPopover: MdePopoverTrigger;
+
   constructor(
     private store: Store<AppState>,
     private activatedRoute: ActivatedRoute,
@@ -85,7 +86,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
     private dialog: MatDialog,
     public postService: PostService,
     private router: Router,
-    private sweetAlertService: SweetalertService,
+    public shareSocial: ShareService,
     private breakpointObserver: BreakpointObserver,
   ) {
     /** Peer Subscription for Video Call */
@@ -99,16 +100,6 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     /** Read the type of the post  */
-    this.commentsList = [{
-      author: '123_1',
-      body: 'Hello, How are you ?'
-    }, {
-      author: '123_2',
-      body: 'Fine, How are you ?'
-    },{
-      author: '123_1',
-      body: 'Fine, Thanks!'
-    }];
     this.type = this.activatedRoute.snapshot.queryParams.type;
 
     this.commentId = this.activatedRoute.snapshot.queryParams['commentId'];
@@ -130,14 +121,6 @@ export class DetailsComponent implements OnInit, OnDestroy {
           this.details$ = of(p);
           this.initializeCommentForm(p, 'post');
           this.postFormInitialization(p);
-          /** SHow company in breadcrumb */
-          // if (p.companies && p.companies.length) {
-          //   this.breadcumb.path.unshift({ name: p.type });
-          // }
-
-          /** Subscribe to loggedinuser, once loggedInUse is got, Check if the loggedInUder is
-           * in the list of attendess or not
-           **/
 
           this.breadcumb = {
             path: [
@@ -148,40 +131,20 @@ export class DetailsComponent implements OnInit, OnDestroy {
             ]
           };
 
-          this.subscription$.add(
-            this.authService.loggedInUser$.subscribe((user) => {
-              if (this.postDetails
-                && this.postDetails.usersAttending
-                && this.postDetails.usersAttending.length
-                && this.postDetails.usersAttending.find((u: User) => u._id === user._id)) {
-                this.isUserAttending = true;
-              } else {
-                this.isUserAttending = false;
-              }
-            })
-          );
-
           this.postService.getCountOfAllPost('', '',
-          {
-            referencePostId: [this.postDetails._id],
-            connectedPosts: this.postDetails.connectedPosts.map(p => p._id),
-            postType: null
-          }).subscribe((data) => {
-            if (data.length) {
-              data = keyBy(data, '_id');
-              appConstants.postTypesArray.forEach((obj) => {
-                obj['count'] = data[obj.name] ? data[obj.name].count : 0
-              });
-            }
-          });
+            {
+              referencePostId: [this.postDetails._id],
+              connectedPosts: this.postDetails.connectedPosts.map(p => p._id),
+              postType: null
+            }).subscribe((data) => {
+              if (data.length) {
+                data = keyBy(data, '_id');
+                appConstants.postTypesArray.forEach((obj) => {
+                  obj['count'] = data[obj.name] ? data[obj.name].count : 0
+                });
+              }
+            });
 
-        } else if (this.postDetails && this.postDetails._id === postId) {
-          /** Comes inside this block, only when we are already in a post details page, and by using searh,
-           * we try to open any other post detials page
-           */
-        } else {
-          // this.store.dispatch(GetPostById({ postId }));
-          // this.details$ = this.store.select(selectSelectedPost);
         }
 
       })
@@ -228,9 +191,6 @@ export class DetailsComponent implements OnInit, OnDestroy {
     return moment(d).isValid() ? d : new Date(+d);
   }
 
-
-
-
   fromNow(date) {
     const d = moment(date).isValid() ? date : new Date(+date);
     return moment(d).fromNow();
@@ -239,7 +199,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
   openDialog(authorId?: string): void {
     this.dialog.open(VideoChatComponent, {
       width: '550px',
-      data: { authorId, peer: this.peer },
+      // data: { authorId, peer: this.peer },
       disableClose: true
     });
   }
@@ -256,7 +216,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
     this.router.navigate(['../add-post'], { relativeTo: this.activatedRoute, state: { post: p }, queryParams: { type: postType } });
   }
 
-  showCommentsOnSide(event: { block: any, comments, selectedPost}) {
+  showCommentsOnSide(event: { block: any, comments, selectedPost }) {
     console.log(event);
     this.selectedBlock = event.block;
     this.selectedPostComments = event.comments;
@@ -289,5 +249,67 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
   onChatClicked() {
     this.displayChatBox = true;
+  }
+
+  allowUsersEdit = () => {
+    const loggedInUser = this.authService.loggedInUser;
+    return loggedInUser && loggedInUser._id && this.postDetails && this.postDetails._id && (loggedInUser._id === this.postDetails.createdBy._id || this.postDetails.collaborators.find(c => c._id === loggedInUser._id));
+  }
+
+  addDataOfPost(data) {
+    const postObj = {
+      _id: this.postDetails._id,
+    };
+    if (data === 'tags') {
+      postObj['tags'] = this.postForm.controls.tags.value;
+      this.postService.updatePost(
+        postObj,
+        { name: this.authService.loggedInUser.name, _id: this.authService.loggedInUser._id }
+      ).subscribe((j) => {
+        if (j && j.tags) {
+          this.postDetails.tags = j.tags;
+          this.addTagsPopover.closePopover();
+        }
+      });
+    }
+
+    if (data === 'companies') {
+      postObj['companies'] = this.postForm.controls.companies.value;
+      this.postService.updatePost(
+        postObj,
+        { name: this.authService.loggedInUser.name, _id: this.authService.loggedInUser._id }
+      ).subscribe((j) => {
+        if (j && j.companies) {
+          this.postDetails.companies = j.companies;
+          this.addCopmaniesPopover.closePopover();
+        }
+      });
+    }
+
+    if (data === 'clients') {
+      postObj['clients'] = this.postForm.controls.clients.value;
+      this.postService.updatePost(
+        postObj,
+        { name: this.authService.loggedInUser.name, _id: this.authService.loggedInUser._id }
+      ).subscribe((j) => {
+        if (j && j.clients) {
+          this.postDetails.clients = j.clients;
+          this.addClientsPopover.closePopover();
+        }
+      });
+    }
+
+    if (data === 'collaborators') {
+      postObj['collaborators'] = this.postForm.controls.collaborators.value;
+      this.postService.updatePost(
+        postObj,
+        { name: this.authService.loggedInUser.name, _id: this.authService.loggedInUser._id }
+      ).subscribe((j) => {
+        if (j && j.collaborators) {
+          this.postDetails.collaborators = j.collaborators;
+          this.addCollaboratorsPopover.closePopover();
+        }
+      });
+    }
   }
 }

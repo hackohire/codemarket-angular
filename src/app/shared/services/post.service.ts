@@ -25,6 +25,7 @@ export class PostService {
 
   postFields = appConstants.postQuery;
   contentFromAnotherArticle = new BehaviorSubject(null);
+  public saveOrSubmitPost = new BehaviorSubject(null);
   constructor(
     private apollo: Apollo,
     private store: Store<AppState>,
@@ -233,7 +234,7 @@ export class PostService {
 
   getCountOfAllPost(userId: string, companyId: string, reference: any): Observable<any> {
     return this.apollo.query({
-      query : gql`
+      query: gql`
         query getCountOfAllPost($userId: String, $companyId: String, $reference: ReferenceObject) {
           getCountOfAllPost(userId: $userId, companyId: $companyId, reference: $reference) {
             _id
@@ -257,7 +258,7 @@ export class PostService {
 
   getEmailPhoneCountForContact(type: string): Observable<any> {
     return this.apollo.query({
-      query : gql`
+      query: gql`
         query getEmailPhoneCountForContact($type: String) {
           getEmailPhoneCountForContact(type: $type) {
             _id
@@ -286,7 +287,7 @@ export class PostService {
 
 
   editPost(post): void {
-    this.router.navigate(['/post', 'edit-post', post._id], {queryParams: {type: post.type}});
+    this.router.navigate(['/post', 'edit-post', post._id], { queryParams: { type: post.type } });
   }
 
   searchPosts(searchString: string): Observable<Post[]> {

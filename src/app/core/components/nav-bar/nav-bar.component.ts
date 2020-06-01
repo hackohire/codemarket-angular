@@ -1,14 +1,14 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable, Subscription } from 'rxjs';
-import { map, share } from 'rxjs/operators';
+import { map, share, filter, tap } from 'rxjs/operators';
 import { User } from 'src/app/shared/models/user.model';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../store/state/app.state';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { selectCartListLength } from '../../store/selectors/cart.selectors';
-import { Router } from '@angular/router';
-import { MatDialog, MatAnchor } from '@angular/material';
+import { Router, Event, ActivationEnd, RouterStateSnapshot, NavigationEnd } from '@angular/router';
+import { MatDialog, MatAnchor, MatDrawer } from '@angular/material';
 import { SearchComponent } from '../search/search.component';
 import { droEmails, emails, la2050Emails, therapistEmails } from '../../../emails';
 import { newBniEmails, womenBizEmails, cityEmails, cocSmEmail, linkedInEmails } from '../../../newEmails';
@@ -35,6 +35,9 @@ import { dentistTemplate } from '../../../shared/dentis-template';
 import { accountantTemplate } from '../../../shared/accountant-template';
 import { realestateTemplate } from '../../../shared/realestate-template';
 import { instagramTemplate } from '../../../shared/instagram-template';
+import { Post } from '../../../shared/models/post.model';
+import { Location } from '@angular/common';
+
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
@@ -43,37 +46,17 @@ import { instagramTemplate } from '../../../shared/instagram-template';
 export class NavBarComponent implements OnInit, OnDestroy {
 
   @ViewChild('lr', { static: false }) lr: MatAnchor;
+  @ViewChild('drawer', { static: false }) drawer: MatDrawer;
   postTypes = PostType;
 
   postTypesArray = appConstants.postTypesArray;
 
-  signUpConfig = {
-    // header: 'My Customized Sign Up',
-    hideAllDefaults: true,
-    signUpFields: [
-      {
-        label: 'Name',
-        key: 'name',
-        required: true,
-        displayOrder: 1,
-        type: 'string'
-      },
-      {
-        label: 'Email',
-        key: 'email',
-        required: true,
-        displayOrder: 2,
-        type: 'string',
-      },
-      {
-        label: 'Password',
-        key: 'password',
-        required: true,
-        displayOrder: 3,
-        type: 'password'
-      },
-    ]
-  };
+  hideFooter = false;
+  showPostActions = true;
+
+  listOfConnectedPosts: { posts: Post[], total?: number } = { posts: [] };
+  totalConnectedPosts: number;
+
   loggedInUser: User;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
@@ -92,44 +75,38 @@ export class NavBarComponent implements OnInit, OnDestroy {
     public authService: AuthService,
     private router: Router,
     private dialog: MatDialog,
-    private postService: PostService,
     public messageService: MessageService,
-    private emailService: EmailService
+    public postService: PostService,
+    public location: Location,
   ) {
-  }
-
-  /** Load the Login/ Register popover on the page automatically if user is not loggedin */
-  async ngAfterViewInit() {
 
     this.subscription.add(
-      this.authService.openAuthenticationPopover.subscribe(open => {
-        if (open) {
-          this.lr._elementRef.nativeElement.click();
-        }
-      })
+      this.router.events.pipe(
+        filter((e) => (e instanceof NavigationEnd)),
+        tap((r: NavigationEnd) => {
+          console.log(r.url.includes('post'));
+          this.hideFooter = r.url.includes('post');
+          this.showPostActions = r.url.includes('add-post?type=');
+        }))
+        .subscribe(),
     );
 
-    // if (await this.authService.checkIfUserIsLoggedIn()) {
-
-    // } else {
-    //   setTimeout(() => {
-    //     this.lr._elementRef.nativeElement.click();
-    //   }, 2000);
-    // }
   }
 
   ngOnInit() {
     this.subscription.add(
-      this.authService.loggedInUser$.subscribe(u => {
-        if (u) {
-          // this.ref.detach();
-          this.loggedInUser = { ...u };
-          // this.ref.detectChanges();
-        } else {
-          this.loggedInUser = u;
-        }
+      this.authService.loggedInUser$
+        .subscribe(u => {
+          if (u) {
+            // this.ref.detach();
+            this.loggedInUser = { ...u };
+            this.getConnectedPosts(u);
+            // this.ref.detectChanges();
+          } else {
+            this.loggedInUser = u;
+          }
 
-      })
+        })
     );
 
     this.cartListLength = this.store.select(selectCartListLength);
@@ -151,6 +128,20 @@ export class NavBarComponent implements OnInit, OnDestroy {
     // this.authService.login();
   }
 
+  getConnectedPosts(user) {
+    // this.postService.getAllPosts(
+    //   {
+    //     pageNumber: 1, limit: 10,
+    //     sort: { order: '' }
+    //   }, '', '', '',
+    //   user._id
+    // ).subscribe((u) => {
+    //   this.listOfConnectedPosts.posts = u.posts;
+    //   this.totalConnectedPosts = u.total;
+    // });
+
+  }
+
   logout() {
     this.authService.logout();
   }
@@ -170,49 +161,53 @@ export class NavBarComponent implements OnInit, OnDestroy {
     });
   }
 
-  sendEmails() {
-    let count = 0;
-    finalInstaEmails.forEach((e, i) => {
-      setTimeout(() => {
-        e.email.forEach((email, j) => {
-          setTimeout(() => {
-            if (!Validators.email(new FormControl(email.email))) {
-              const emailObj = {
-                to: [email.email],
-                subject: `${e.instaProfileId} Monetize Your ${e.followers} Instagram Followers`, // Therapist
-                companies: [{ _id: '5db1c84ec10c45224c4b95fd' }],
-                type: PostType.Email,
-                status: PostStatus.Published,
-                // descriptionHTML: dentistTemplate.replace('{companyName}', e.companyName),
-                // descriptionHTML: accountantTemplate.replace('{companyName}', e.companyName),
-                descriptionHTML: instagramTemplate.replace('{instaProfileId}', e.instaProfileId).replace('{followers}', e.followers),
-                createdBy: '5d4c1cdf91e63a3fe84bb43a',
-                campaignId: '5ec800f9870915348a37f30f', // instagram
-                // city: e.cityName
-              };
-              this.emailService.sendEmail(emailObj).toPromise().then((o) => {
-                console.log(o, i);
-                if (o) {
-                  count += 1;
-                  // dummyEmails[i]['sent'] = true;
-                }
-              }).catch((e) => {
-                console.log(e);
-              });
-              // this.postService.sendEmailWithStaticContent(email, e.name, e.companyName, e.image).toPromise().then((o) => {
-              //   console.log(o, i);
-              //   if (o) {
-              //     count += 1;
-              //     // dummyEmails[i]['sent'] = true;
-              //   }
-              // }).catch((e) => {
-              //   console.log(e);
-              // });
-            }
-          }, j * 1500);
-        });
-        console.log(count);
-      }, i * 1000);
-    });
+  // sendEmails() {
+  //   let count = 0;
+  //   finalInstaEmails.forEach((e, i) => {
+  //     setTimeout(() => {
+  //       e.email.forEach((email, j) => {
+  //         setTimeout(() => {
+  //           if (!Validators.email(new FormControl(email.email))) {
+  //             const emailObj = {
+  //               to: [email.email],
+  //               subject: `${e.instaProfileId} Monetize Your ${e.followers} Instagram Followers`, // Therapist
+  //               companies: [{ _id: '5db1c84ec10c45224c4b95fd' }],
+  //               type: PostType.Email,
+  //               status: PostStatus.Published,
+  //               // descriptionHTML: dentistTemplate.replace('{companyName}', e.companyName),
+  //               // descriptionHTML: accountantTemplate.replace('{companyName}', e.companyName),
+  //               descriptionHTML: instagramTemplate.replace('{instaProfileId}', e.instaProfileId).replace('{followers}', e.followers),
+  //               createdBy: '5d4c1cdf91e63a3fe84bb43a',
+  //               campaignId: '5ec800f9870915348a37f30f', // instagram
+  //               // city: e.cityName
+  //             };
+  //             this.emailService.sendEmail(emailObj).toPromise().then((o) => {
+  //               console.log(o, i);
+  //               if (o) {
+  //                 count += 1;
+  //                 // dummyEmails[i]['sent'] = true;
+  //               }
+  //             }).catch((e) => {
+  //               console.log(e);
+  //             });
+  //             // this.postService.sendEmailWithStaticContent(email, e.name, e.companyName, e.image).toPromise().then((o) => {
+  //             //   console.log(o, i);
+  //             //   if (o) {
+  //             //     count += 1;
+  //             //     // dummyEmails[i]['sent'] = true;
+  //             //   }
+  //             // }).catch((e) => {
+  //             //   console.log(e);
+  //             // });
+  //           }
+  //         }, j * 1500);
+  //       });
+  //       console.log(count);
+  //     }, i * 1000);
+  //   });
+  // }
+
+  toggleNavbar() {
+    this.drawer.toggle();
   }
 }

@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild, Input, ChangeDetectorRef, AfterViewInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
+import moment from 'moment';
 import { AuthService } from '../../core/services/auth.service';
 import { AddPost, UpdatePost } from '../../core/store/actions/post.actions';
 import { AppState } from '../../core/store/state/app.state';
@@ -13,7 +14,8 @@ import { Post } from '../../shared/models/post.model';
 import { Location } from '@angular/common';
 import { PostService } from '../../shared/services/post.service';
 import { environment } from '../../../environments/environment';
-
+import { AppointmentService } from 'src/app/shared/services/appointment.service';
+import {PostType} from '../../shared/models/post-types.enum';
 @Component({
   selector: 'app-add-post',
   templateUrl: './add-post.component.html',
@@ -28,6 +30,13 @@ export class AddPostComponent implements OnInit, AfterViewInit {
 
   editPostDetails: Post;
   postTitle;
+
+  // Appointment
+  public slotList = [];
+  public slotDateTime: any;
+  public appointmentForm: FormGroup;
+  public selectedDate: string;
+  public displayDate: string = "";
 
   /** When a user tries to tie a post with this post */
   postFromRoute: Post;
@@ -55,6 +64,9 @@ export class AddPostComponent implements OnInit, AfterViewInit {
 
   subscription$ = new Subscription();
 
+  anonymousAvatar = '../../../../assets/images/anonymous-avatar.jpg';
+  s3FilesBucketURL = environment.s3FilesBucketURL;
+
 
   constructor(
     public authService: AuthService,
@@ -62,7 +74,8 @@ export class AddPostComponent implements OnInit, AfterViewInit {
     private activatedRoute: ActivatedRoute,
     private postService: PostService,
     private location: Location,
-    private changeDetector: ChangeDetectorRef
+    private _appointmentService: AppointmentService, 
+    private router: Router,
   ) {
 
     this.postType = this.activatedRoute.snapshot.queryParams.type;
@@ -79,12 +92,20 @@ export class AddPostComponent implements OnInit, AfterViewInit {
     };
 
     this.postFormInitialization(null);
+    // Subscribing calendar event
+    if (this._appointmentService.subsVar == undefined) {
+      this._appointmentService.subsVar = this._appointmentService.
+        invokeAppointmentDateTime.subscribe((date: any) => {
+          this.selectedDate = date;
+          this.intervals();
+        });
+    }
   }
 
   ngAfterViewInit(): void {
     if (this.descriptionEditor && this.descriptionEditor.ckEditorRef) {
       console.log(this.descriptionEditor.ckEditorRef.elementRef.nativeElement);
-      this.descriptionEditor.ckEditorRef.editorElement.style.minHeight = '73vh';
+      this.descriptionEditor.ckEditorRef.editorElement.style.minHeight = '70vh';
     }
   }
 
@@ -101,11 +122,23 @@ export class AddPostComponent implements OnInit, AfterViewInit {
         })
       );
     }
+
+    this.subscription$.add(
+      this.postService.saveOrSubmitPost.subscribe(s => {
+        if (s && this.postForm && this.postForm.valid) {
+          this.submit(s);
+        }
+      })
+    );
+  }
+
+  redirectToAddPost(postType) {
+    this.router.navigate(['./post/add-post'], { queryParams: { type: postType } });
   }
 
   postFormInitialization(i: Post) {
     this.postForm = new FormGroup({
-      name: new FormControl(i && i.name ? i.name : '', Validators.required),
+      name: new FormControl(i && i.name ? i.name : 'Untitled Document', Validators.required),
       description: new FormControl(i && i.description ? i.description : []),
       descriptionHTML: new FormControl(i && i.descriptionHTML ? i.descriptionHTML : ''),
       tags: new FormControl(i && i.tags ? i.tags : []),
@@ -120,6 +153,10 @@ export class AddPostComponent implements OnInit, AfterViewInit {
 
     if (this.postId || (i && i._id)) {
       this.postForm.addControl('_id', new FormControl(i && i._id ? i._id : ''));
+    }
+
+    if (this.postType === PostType.Appointment) {
+      this.postForm.addControl('cancelReason', new FormControl(i && i.cancelReason ? i.cancelReason : ''));
     }
 
 
@@ -156,13 +193,17 @@ export class AddPostComponent implements OnInit, AfterViewInit {
       this.createdBy.setValue(this.authService.loggedInUser._id);
     }
 
+    
     const postFormValue = { ...this.postForm.value };
     postFormValue.status = status;
     // postFormValue.companies = postFormValue.companies.map(c => c._id);
+    if (this.postType === PostType.Appointment) { 
+      postFormValue.appointment_date = this.displayDate;
+    }
 
     if (this.postId) {
       this.store.dispatch(UpdatePost({
-        post: postFormValue, updatedBy: {name: this.authService.loggedInUser.name, _id: this.authService.loggedInUser._id},
+        post: postFormValue, updatedBy: { name: this.authService.loggedInUser.name, _id: this.authService.loggedInUser._id },
       }));
     } else {
       this.store.dispatch(AddPost({ post: postFormValue }));
@@ -183,6 +224,31 @@ export class AddPostComponent implements OnInit, AfterViewInit {
     this.postForm.controls.clients.setValue(event.clients);
     this.postForm.controls.collaborators.setValue(event.collaborators);
     this.postForm.controls.name.setValue(event.name);
+  }
+
+  intervals() {
+    const start = moment('00:00', 'hh:mm a');
+    const end = moment('23:45', 'hh:mm a');
+    start.minutes(Math.ceil(start.minutes() / 30) * 30);
+    const result = [];
+    const current = moment(start);
+    while (current <= end) {
+      result.push(current.format('HH:mm'));
+      current.add(15, 'minutes');
+    }
+    this.slotList = result;
+  }
+
+  selectedSlot(slot: string) {
+    this.slotDateTime = slot;
+    const addTime = this.selectedDate.split('T');
+    this.displayDate = moment(addTime[0] + ' ' + this.slotDateTime).format('YYYY-MM-DD HH:mm:ss');
+  }
+
+  confirmAppointment() {
+    console.log(this.appointmentForm.value);
+    console.log(this.selectedDate);
+    console.log(this.slotDateTime);
   }
 
 }

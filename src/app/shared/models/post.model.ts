@@ -64,4 +64,6 @@ export interface Post {
     website?: string;
     descriptionHTML? : string;
     activities?: any[];
+    appointment_date?:[string];
+    cancelReason?: [string];
 }

@@ -146,6 +146,11 @@ const routes: Routes = [
     component: SocialMediaMarketingComponent
   },
 
+  {
+    path: 'appointment-booking',
+    loadChildren: () => import('./appointment/appointment.module').then(module => module.AppointmentModule)
+  }
+
   /** Static routes ends here */
 ];
 

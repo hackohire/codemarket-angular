@@ -1,0 +1,29 @@
+<section id="appointment" class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+      <app-calender></app-calender>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 time-slot-wrapper">
+      <div *ngIf="slotList.length > 0; else noSlotSelected;">
+        <div class="col-6 slot-btn" (click)="selectedSlot(slot)" *ngFor="let slot of slotList">
+          {{slot}}
+        </div>
+      </div>
+      <ng-template class="no-slot" #noSlotSelected>
+        <span>Please Select Date</span>
+      </ng-template>
+    </div>
+  </div>
+  <div class="text-center m-2" *ngIf="slotDateTime" [formGroup]="appointmentForm">
+    <div class="alert alert-info">
+      Confirm Your Apointment 
+        <strong>: {{ displayDate | date:'yyyy-MM-dd hh:mm'}}</strong>
+    </div>
+    <mat-form-field class="field-full-width">
+      <textarea type="text" matInput formControlName="description" placeholder="Description"></textarea>
+    </mat-form-field>
+    <div class="m-2">
+      <button mat-raised-button color="primary">Confirm</button>
+    </div>
+  </div>
+</section>

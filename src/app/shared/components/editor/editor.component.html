@@ -8,11 +8,11 @@
     </div>
 
     <div *ngIf="(realTime && this.post?._id) && ckEditorUserToken">
-        <div class="sample-sidebar">
-            <div class="row row-presence m-0">
-                <div #presenceList class='presence'></div>
-            </div>
+
+        <div class="row row-presence m-0">
+            <div #presenceList class='presence'></div>
         </div>
+
         <div [id]="ckEditorUserToken ? 'container' : ''">
             <div [id]="ckEditorUserToken ? 'editor' : ''">
                 <ckeditor  #ckEditorRef [config]="{
@@ -22,8 +22,8 @@
                     sidebar: {container: sidebar},
                     presenceList: {container: presenceList},
                     collaboration: { channelId: this.post._id },
-                    commentsOnly: readOnly,
-                    autosave: { save: realTime && !readOnly ? autosave : null}
+                    commentsOnly: !allowUsersEdit(),
+                    autosave: { save: realTime && allowUsersEdit() ? autosave : null}
                 }" [disabled]="false" [editor]="ckEditor" [(ngModel)]="html" (ready)="readOnly ? refreshDisplayMode($event, sidebar) : onReady($event, sidebar)">
                 </ckeditor>
             </div>

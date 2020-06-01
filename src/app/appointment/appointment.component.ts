@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import moment from 'moment';
 import { ChatService } from '../shared/services/chat.service';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
+import { AppointmentService } from '../shared/services/appointment.service';
 
 @Component({
   selector: 'app-appointment',
@@ -17,7 +18,7 @@ export class AppointmentComponent implements OnInit {
   public displayDate: string = "";
 
   constructor(
-    private _chatService: ChatService
+    private _appointmentService: AppointmentService
   ) { }
 
   ngOnInit() {
@@ -27,8 +28,8 @@ export class AppointmentComponent implements OnInit {
     });
 
     // Subscribing calendar event
-    if (this._chatService.subsVar == undefined) {
-      this._chatService.subsVar = this._chatService.
+    if (this._appointmentService.subsVar == undefined) {
+      this._appointmentService.subsVar = this._appointmentService.
         invokeAppointmentDateTime.subscribe((date: any) => {
           this.selectedDate = date;
           this.intervals();

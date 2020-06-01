@@ -8,7 +8,7 @@ import { AppState } from '../../store/state/app.state';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { selectCartListLength } from '../../store/selectors/cart.selectors';
 import { Router, Event, ActivationEnd, RouterStateSnapshot, NavigationEnd } from '@angular/router';
-import { MatDialog, MatAnchor } from '@angular/material';
+import { MatDialog, MatAnchor, MatDrawer } from '@angular/material';
 import { SearchComponent } from '../search/search.component';
 import { PostType } from '../../../shared/models/post-types.enum';
 import { MessageService } from '../../../shared/services/message.service';
@@ -25,6 +25,7 @@ import { Location } from '@angular/common';
 export class NavBarComponent implements OnInit, OnDestroy {
 
   @ViewChild('lr', { static: false }) lr: MatAnchor;
+  @ViewChild('drawer', { static: false }) drawer: MatDrawer;
   postTypes = PostType;
 
   postTypesArray = appConstants.postTypesArray;
@@ -107,16 +108,16 @@ export class NavBarComponent implements OnInit, OnDestroy {
   }
 
   getConnectedPosts(user) {
-    this.postService.getAllPosts(
-      {
-        pageNumber: 1, limit: 10,
-        sort: { order: '' }
-      }, '', '', '',
-      user._id
-    ).subscribe((u) => {
-      this.listOfConnectedPosts.posts = u.posts;
-      this.totalConnectedPosts = u.total;
-    });
+    // this.postService.getAllPosts(
+    //   {
+    //     pageNumber: 1, limit: 10,
+    //     sort: { order: '' }
+    //   }, '', '', '',
+    //   user._id
+    // ).subscribe((u) => {
+    //   this.listOfConnectedPosts.posts = u.posts;
+    //   this.totalConnectedPosts = u.total;
+    // });
 
   }
 
@@ -137,5 +138,9 @@ export class NavBarComponent implements OnInit, OnDestroy {
       panelClass: 'no-padding',
       disableClose: false
     });
+  }
+
+  toggleNavbar() {
+    this.drawer.toggle();
   }
 }

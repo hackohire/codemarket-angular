@@ -84,8 +84,8 @@ textarea {
   overflow: hidden !important;
 }
 
-:not(.ck-media__placeholder) {
-  pointer-events: all;
+.ck-editor__editable:not(.ck-read-only) .ck-media__wrapper>:not(.ck-media__placeholder) {
+  pointer-events: auto !important;
 }
 
 .page-title {
@@ -3321,16 +3321,17 @@ a {
   height: 100%;
   width: 100%;
   position: absolute;
-  background: -webkit-gradient(
-    linear,
-    right top,
-    left top,
-    from(#7347c1),
-    to(#00aeef)
-  );
-  background: -webkit-linear-gradient(right, #7347c1, #00aeef);
-  background: -o-linear-gradient(right, #7347c1, #00aeef);
-  background: linear-gradient(to left, #7347c1, #00aeef);
+  // background: -webkit-gradient(
+  //   linear,
+  //   right top,
+  //   left top,
+  //   from(#7347c1),
+  //   to(#00aeef)
+  // );
+  // background: -webkit-linear-gradient(right, #7347c1, #00aeef);
+  // background: -o-linear-gradient(right, #7347c1, #00aeef);
+  // background: linear-gradient(to left, #7347c1, #00aeef);
+  background: white;
   opacity: 1;
   top: 0;
   left: 0;
@@ -3342,7 +3343,7 @@ a {
   // padding-bottom: 25px;
 
   padding-top: 10px !important;
-  padding-bottom: 10px;
+  padding-bottom: 16px;
 }
 
 .breadcrumb-area .breadcrumb ul li a {
@@ -3351,10 +3352,19 @@ a {
 }
 
 .breadcrumb-area .page-title {
-  color: #fff !important;
+  color: #00aeef !important;
   font-weight: 500;
   font-size: 30px;
   text-transform: capitalize;
+  border-bottom: 1px solid #fff;
+}
+    
+.breadcrumb-area .page-title:focus {
+    outline: none;
+    background: #fff;
+    font-size: 24px;
+    padding: 3.9px;
+    border-bottom: 1px solid #ccc;
 }
 
 .breadcrumb-area .breadcrumb {
@@ -3429,7 +3439,7 @@ a {
 }
 
 .breadcrumb ul li.active a {
-  color: #fff;
+  color: #666;
 }
 
 .breadcrumb ul {

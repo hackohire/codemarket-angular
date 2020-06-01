@@ -9,7 +9,6 @@
     <app-breadcumb (editPost)="postService?.editPost(product)"
         [showEditPostDetails]="(product?.createdBy?._id === authService?.loggedInUser?._id || collaborators.indexOf(authService?.loggedInUser?._id) >= 0) ? true : false"
         [title]="product?.name" [path]="breadcumb?.path"
-        [showAddCollaborators]="product?.createdBy?._id === authService?.loggedInUser?._id ? true : false"
         [postDetails]="productDetails"
         >
     </app-breadcumb>

@@ -1,16 +1,18 @@
 <mat-sidenav-container class="sidenav-container" autosize>
 
-  <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-    [mode]="(isHandset$ | async) ? 'over' : 'main'" [opened]="(isHandset$ | async) === false">
+  <mat-sidenav *ngIf="loggedInUser" #drawer class="sidenav" fixedInViewport
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="(isHandset$ | async) === false">
     <mat-toolbar
       style="height: 48px; font-size: 14px; font-weight: 400; letter-spacing: 4px; text-transform: uppercase; color: #999; background: #eee;">
-      navigation</mat-toolbar>
+      navigation <mat-icon (click)="drawer.toggle()">clear</mat-icon>
+    </mat-toolbar>
 
 
-    <mat-nav-list>
+    <mat-nav-list class="pt-0">
 
-      <!-- <app-chat-full-ui [loggedInUser]="authService?.loggedInUser" [postList]="listOfConnectedPosts?.posts">
-      </app-chat-full-ui> -->
+      <app-chat-full-ui [drawer]="drawer" [loggedInUser]="authService?.loggedInUser">
+      </app-chat-full-ui>
 
     </mat-nav-list>
   </mat-sidenav>
@@ -84,7 +86,7 @@
     <mat-toolbar class="NavBarBox">
 
       <!-- Toggle Sidebar Button -->
-      <button *ngIf="true" type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
+      <button *ngIf="true" type="button" aria-label="Toggle sidenav" mat-icon-button (click)="toggleNavbar()">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
 
@@ -163,7 +165,7 @@
             <!-- Grid column -->
             <div class="col-md-3 col-lg-3 col-xl-3">
               <h6 class="text-uppercase mb-4 font-weight-bold">Codemarket</h6>
-              <p>Our mission is to bring innovation to every problem by teaching software development to everyone.</p>
+              <p>Our mission is to bring innovation to every.</p>
             </div>
             <!-- Grid column -->
 
@@ -213,7 +215,7 @@
             <div class="col-md-4 col-lg-3 col-xl-3 mx-auto">
               <h6 class="text-uppercase mb-4 font-weight-bold">Contact</h6>
               <p>
-                <i class="fas fa-home mr-3"></i> Palo Alto, CA 94306, US</p>
+                <i class="fas fa-home mr-3"></i> Manhattan Beach, CA 90266, US</p>
               <p>
                 <i class="fas fa-envelope mr-3"></i> sumi@codemarket.io</p>
               <p>

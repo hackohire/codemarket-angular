@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, Input, ChangeDetectorRef, AfterViewInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import moment from 'moment';
@@ -75,6 +75,7 @@ export class AddPostComponent implements OnInit, AfterViewInit {
     private postService: PostService,
     private location: Location,
     private _appointmentService: AppointmentService, 
+    private router: Router,
   ) {
 
     this.postType = this.activatedRoute.snapshot.queryParams.type;
@@ -96,7 +97,7 @@ export class AddPostComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     if (this.descriptionEditor && this.descriptionEditor.ckEditorRef) {
       console.log(this.descriptionEditor.ckEditorRef.elementRef.nativeElement);
-      this.descriptionEditor.ckEditorRef.editorElement.style.minHeight = '73vh';
+      this.descriptionEditor.ckEditorRef.editorElement.style.minHeight = '70vh';
     }
   }
 
@@ -130,6 +131,10 @@ export class AddPostComponent implements OnInit, AfterViewInit {
           this.intervals();
         });
     }
+  }
+
+  redirectToAddPost(postType) {
+    this.router.navigate(['./post/add-post'], { queryParams: { type: postType } });
   }
 
   postFormInitialization(i: Post) {

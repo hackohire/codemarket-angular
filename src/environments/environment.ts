@@ -13,8 +13,8 @@ export const environment = {
     developmentTokenUrl: 'https://71258.cke-cs.com/token/dev/qhNbD6xUjkeVtrEc7aD2PcMhDkgmirUJHunqRWESilB0mTzZ0RHcJYk68P6D'
   },
   COGNITO_AUTH_DOMAIN: 'https://platform.auth.us-east-1.amazoncognito.com',
-  serverless_url: 'https://codemarketapi-prod.codemarket.io/',
-  graphql_url: 'https://codemarketapi-prod.codemarket.io/graphql',
+  serverless_url: 'http://localhost:3200/dev/',
+  graphql_url: 'http://localhost:3200/dev/graphql',
   s3FilesBucketURL: 'https://codemarket-files.s3.amazonaws.com/public/',
   stripe_public_key: 'pk_live_EYCoYtpLszr802sOl89WeuW1',
   // stripe_public_key: 'pk_test_ighmL2U9UqAx0O4b8dKkSvdq',

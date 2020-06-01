@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
+import moment from 'moment';
 import { AuthService } from '../../core/services/auth.service';
 import { AddPost, UpdatePost } from '../../core/store/actions/post.actions';
 import { AppState } from '../../core/store/state/app.state';
@@ -13,7 +14,8 @@ import { Post } from '../../shared/models/post.model';
 import { Location } from '@angular/common';
 import { PostService } from '../../shared/services/post.service';
 import { environment } from '../../../environments/environment';
-
+import { AppointmentService } from 'src/app/shared/services/appointment.service';
+import {PostType} from '../../shared/models/post-types.enum';
 @Component({
   selector: 'app-add-post',
   templateUrl: './add-post.component.html',
@@ -28,6 +30,13 @@ export class AddPostComponent implements OnInit, AfterViewInit {
 
   editPostDetails: Post;
   postTitle;
+
+  // Appointment
+  public slotList = [];
+  public slotDateTime: any;
+  public appointmentForm: FormGroup;
+  public selectedDate: string;
+  public displayDate: string = "";
 
   /** When a user tries to tie a post with this post */
   postFromRoute: Post;
@@ -65,6 +74,7 @@ export class AddPostComponent implements OnInit, AfterViewInit {
     private activatedRoute: ActivatedRoute,
     private postService: PostService,
     private location: Location,
+    private _appointmentService: AppointmentService, 
   ) {
 
     this.postType = this.activatedRoute.snapshot.queryParams.type;
@@ -111,6 +121,15 @@ export class AddPostComponent implements OnInit, AfterViewInit {
         }
       })
     );
+
+    // Subscribing calendar event
+    if (this._appointmentService.subsVar == undefined) {
+      this._appointmentService.subsVar = this._appointmentService.
+        invokeAppointmentDateTime.subscribe((date: any) => {
+          this.selectedDate = date;
+          this.intervals();
+        });
+    }
   }
 
   postFormInitialization(i: Post) {
@@ -130,6 +149,10 @@ export class AddPostComponent implements OnInit, AfterViewInit {
 
     if (this.postId || (i && i._id)) {
       this.postForm.addControl('_id', new FormControl(i && i._id ? i._id : ''));
+    }
+
+    if (this.postType === PostType.Appointment) {
+      this.postForm.addControl('cancelReason', new FormControl(i && i.cancelReason ? i.cancelReason : ''));
     }
 
 
@@ -166,9 +189,13 @@ export class AddPostComponent implements OnInit, AfterViewInit {
       this.createdBy.setValue(this.authService.loggedInUser._id);
     }
 
+    
     const postFormValue = { ...this.postForm.value };
     postFormValue.status = status;
     // postFormValue.companies = postFormValue.companies.map(c => c._id);
+    if (this.postType === PostType.Appointment) { 
+      postFormValue.appointment_date = this.displayDate;
+    }
 
     if (this.postId) {
       this.store.dispatch(UpdatePost({
@@ -193,6 +220,31 @@ export class AddPostComponent implements OnInit, AfterViewInit {
     this.postForm.controls.clients.setValue(event.clients);
     this.postForm.controls.collaborators.setValue(event.collaborators);
     this.postForm.controls.name.setValue(event.name);
+  }
+
+  intervals() {
+    const start = moment('00:00', 'hh:mm a');
+    const end = moment('23:45', 'hh:mm a');
+    start.minutes(Math.ceil(start.minutes() / 30) * 30);
+    const result = [];
+    const current = moment(start);
+    while (current <= end) {
+      result.push(current.format('HH:mm'));
+      current.add(15, 'minutes');
+    }
+    this.slotList = result;
+  }
+
+  selectedSlot(slot: string) {
+    this.slotDateTime = slot;
+    const addTime = this.selectedDate.split('T');
+    this.displayDate = moment(addTime[0] + ' ' + this.slotDateTime).format('YYYY-MM-DD HH:mm:ss');
+  }
+
+  confirmAppointment() {
+    console.log(this.appointmentForm.value);
+    console.log(this.selectedDate);
+    console.log(this.slotDateTime);
   }
 
 }

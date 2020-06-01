@@ -9,8 +9,8 @@
 
     <mat-nav-list>
 
-      <app-chat-full-ui [loggedInUser]="authService?.loggedInUser" [postList]="listOfConnectedPosts?.posts">
-      </app-chat-full-ui>
+      <!-- <app-chat-full-ui [loggedInUser]="authService?.loggedInUser" [postList]="listOfConnectedPosts?.posts">
+      </app-chat-full-ui> -->
 
     </mat-nav-list>
   </mat-sidenav>
@@ -122,6 +122,11 @@
           color="warn">{{ 'Cancel' }}</a>
       </ng-container> -->
 
+
+      <a mat-button routerLinkActive="mat-primary" *ngIf="authService.loggedInUser" [routerLink]="['/appointment-booking']" 
+      style="margin-left:5px; padding: 8px 16px 8px 0;">
+        <div class="line-height-initial">Appointment</div>
+      </a>
 
       <app-add-post-menu [label]="'Create'">
       </app-add-post-menu>

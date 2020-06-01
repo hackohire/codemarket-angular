@@ -2,6 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { CalendarEvent, CalendarView, CalendarMonthViewDay } from 'angular-calendar';
 import { ChatService } from '../../services/chat.service';
 import moment from 'moment';
+import { AppointmentService } from '../../services/appointment.service';
 
 @Component({
   selector: 'app-calender',
@@ -17,14 +18,14 @@ export class CalenderComponent implements OnInit {
   minDate: Date = new Date();
 
   constructor(
-    private _chatService: ChatService
+    private _appointmentService: AppointmentService
   ) { }
   
   ngOnInit() {
   }
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
-    this._chatService.onCalanderDateSelectClick(moment(date).format('YYYY-MM-DDTHH:mm:ss'));
+    this._appointmentService.onCalanderDateSelectClick(moment(date).format('YYYY-MM-DDTHH:mm:ss'));
   }
 
   dateIsValid(date: Date): boolean {

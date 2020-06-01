@@ -54,7 +54,7 @@ export class AppointmentComponent implements OnInit {
     console.log(slot);
     this.slotDateTime = slot;
     const addTime = this.selectedDate.split('T');
-    this.displayDate = moment(addTime[0] + ' ' + this.slotDateTime).format('YYYY-MM-DD h:mm:ss');
+    this.displayDate = moment(addTime[0] + ' ' + this.slotDateTime).format('YYYY-MM-DD HH:MM:ss');
     console.log(this.selectedDate);
   }
 

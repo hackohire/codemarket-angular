@@ -39,7 +39,10 @@ import { AppInjector } from './services/app.injector.service';
 import { ChatService } from './services/chat.service';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { GetNamePipe } from './pipes/get-name.pipe';
-
+import { CalenderComponent } from './components/calender/calender.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { AppointmentService } from './services/appointment.service';
 export function hljsLanguages() {
   return [
     {name: 'typescript', func: typescript},
@@ -67,6 +70,7 @@ export function hljsLanguages() {
     PostTypeNavComponent,
     CommentSideNavComponent,
     GetNamePipe,
+    CalenderComponent,
   ],
   imports: [
     CommonModule,
@@ -96,7 +100,11 @@ export function hljsLanguages() {
       timeOut: 30000,
       extendedTimeOut: 8000
     }),
-    CKEditorModule
+    CKEditorModule,
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,
+    }),
   ],
   exports: [
     BreadcumbComponent,
@@ -127,11 +135,12 @@ export function hljsLanguages() {
     // Ng5SliderModule,
     NgSelectModule,
     MdePopoverModule,
+    CalenderComponent,
   ],
   entryComponents: [
     VideoChatComponent
   ],
-  providers: [CommentService, ChatService]
+  providers: [CommentService, ChatService, AppointmentService]
 })
 export class SharedModule {
   constructor(private injector: Injector) {

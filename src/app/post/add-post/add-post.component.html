@@ -7,16 +7,16 @@
 
 <div class="container MobilePadding">
     <div class="row">
-				
+
         <!-- start aside -->
-        <div class="col-md-2 order-3 order-lg-1">
+        <div *ngIf="false" class="col-md-2 order-3 order-lg-1">
             <!-- <app-add-post-menu style="color: #00aeef !important; margin-left: auto;">
             </app-add-post-menu> -->
             <app-post-type-nav (plusButtonClick)="redirectToAddPost($event)"></app-post-type-nav>
 
         </div>
-        
-        <div class="col-md-6 order-1 order-lg-2">
+
+        <div class="col-md-8 order-1 order-lg-2">
             <div [formGroup]="postForm" class="">
                 <!-- <mat-form-field class="field-full-width">
                     <input formControlName="name" matInput placeholder="Title" type="text">
@@ -69,7 +69,8 @@
 
                 <div *ngIf="false" fxLayout="row" fxLayoutGap="10px">
                     <button type="button" (click)="submit('UnpubliDraftedhed')" [disabled]="postForm?.invalid"
-                        mat-raised-button style="background-color: #28a745; color: white; margin-right: 5px;">{{ 'Save' }}</button>
+                        mat-raised-button
+                        style="background-color: #28a745; color: white; margin-right: 5px;">{{ 'Save' }}</button>
                     <button type="button" (click)="submit('Published', descriptionEditor)"
                         [disabled]="postForm?.invalid" mat-raised-button color="primary">{{ 'Publish' }}</button>
                     <button type="button" (click)="cancelClicked()" mat-raised-button
@@ -93,7 +94,8 @@
                         <mde-popover #addTagsPopover="mdePopover" [mdePopoverOverlapTrigger]="false"
                             [mdePopoverCloseOnClick]="false" [mdePopoverArrowOffsetX]="8"
                             mdePopoverArrowColor="#FFFFFF">
-                            <div style="background: #fff; padding: 10px;border: 1px solid #ccc;margin-top: -10px;box-shadow: 0 0 10px 0 #aaa;">
+                            <div
+                                style="background: #fff; padding: 10px;border: 1px solid #ccc;margin-top: -10px;box-shadow: 0 0 10px 0 #aaa;">
                                 <app-autocomplete [autoComplete]="postForm?.get('tags')" [collection]="'tags'"
                                     [multiple]="true" [placeholder]="'Tags'" [type]="'tag'"></app-autocomplete>
                                 <mat-icon>send</mat-icon>
@@ -111,13 +113,15 @@
                                     <img [src]="t?.avatar ? ((s3FilesBucketURL + t?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
                                         alt="">{{t?.name}}</span>
                             </a>
-                            <span style="margin: 7px 0 0 5px; color: black;" [mdePopoverTriggerFor]="addCollaboratorsPopover"
-                                mdePopoverTriggerOn="click"><i class="fa fa-plus-square" aria-hidden="true"></i></span>
+                            <span style="margin: 7px 0 0 5px; color: black;"
+                                [mdePopoverTriggerFor]="addCollaboratorsPopover" mdePopoverTriggerOn="click"><i
+                                    class="fa fa-plus-square" aria-hidden="true"></i></span>
 
                             <mde-popover #addCollaboratorsPopover="mdePopover" [mdePopoverOverlapTrigger]="false"
                                 [mdePopoverCloseOnClick]="false" [mdePopoverArrowOffsetX]="8"
                                 mdePopoverArrowColor="#FFFFFF">
-                                <div style="background: #fff; padding: 10px;border: 1px solid #ccc;margin-top: 0px;box-shadow: 0 0 10px 0 #aaa;">
+                                <div
+                                    style="background: #fff; padding: 10px;border: 1px solid #ccc;margin-top: 0px;box-shadow: 0 0 10px 0 #aaa;">
                                     <app-autocomplete class="field-full-width" [allowToAdd]="false"
                                         [autoComplete]="postForm?.get('collaborators')"
                                         [placeholder]="'Select Collaborators'" [collection]="'users'" [type]=""
@@ -146,7 +150,8 @@
                         <mde-popover #addClientsPopover="mdePopover" [mdePopoverOverlapTrigger]="false"
                             [mdePopoverCloseOnClick]="false" [mdePopoverArrowOffsetX]="8"
                             mdePopoverArrowColor="#FFFFFF">
-                            <div style="background: #fff; padding: 10px;border: 1px solid #ccc;margin-top: -10px;box-shadow: 0 0 10px 0 #aaa;">
+                            <div
+                                style="background: #fff; padding: 10px;border: 1px solid #ccc;margin-top: -10px;box-shadow: 0 0 10px 0 #aaa;">
                                 <app-autocomplete class="field-full-width" [allowToAdd]="false"
                                     [autoComplete]="postForm?.get('clients')" [placeholder]="'Select Clients'"
                                     [collection]="'users'" [type]="" [multiple]="true" matInput>
@@ -167,7 +172,8 @@
                         <mde-popover #addCopmaniesPopover="mdePopover" [mdePopoverOverlapTrigger]="false"
                             [mdePopoverCloseOnClick]="false" [mdePopoverArrowOffsetX]="8"
                             mdePopoverArrowColor="#FFFFFF">
-                            <div style="background: #fff; padding: 10px;border: 1px solid #ccc;margin-top: -10px;box-shadow: 0 0 10px 0 #aaa;">
+                            <div
+                                style="background: #fff; padding: 10px;border: 1px solid #ccc;margin-top: -10px;box-shadow: 0 0 10px 0 #aaa;">
                                 <app-autocomplete [autoComplete]="postForm?.get('companies')" [collection]="'companies'"
                                     [forCompany]="true" [multiple]="true" [placeholder]="'Select Company'" [type]="">
                                 </app-autocomplete>

@@ -9,8 +9,7 @@
     <app-breadcumb (editPost)="postService?.editPost(details)"
         [showAddCollaborators]="details?.createdBy?._id === authService?.loggedInUser?._id ? true : false"
         [showShareButtons]="true" [showAddClients]="details?.createdBy?._id === authService?.loggedInUser?._id"
-        [title]="details?.name" [path]="breadcumb?.path"
-        [postDetails]="details" [postForm]="postForm">
+        [title]="details?.name" [path]="breadcumb?.path" [postDetails]="details" [postForm]="postForm">
     </app-breadcumb>
 
     <!--================================
@@ -26,9 +25,8 @@
                 <div class="col-lg-0">
                     <!-- Based On the List Of Post Types -->
                     <app-post-type-nav *ngIf="false" [selectedPostType]="selectedPostType"
-                     (postTypeClick)="selectedBlock = null; getConnectedPosts($event?.name); showConnectedPosts = true"
-                     (plusButtonClick)="redirectToAddPost(details, $event)"
-                     ></app-post-type-nav>
+                        (postTypeClick)="selectedBlock = null; getConnectedPosts($event?.name); showConnectedPosts = true"
+                        (plusButtonClick)="redirectToAddPost(details, $event)"></app-post-type-nav>
                     <!-- <div class="docs-component-viewer-nav common-box-shadow" style="margin-bottom: 20px;">
                         <div class="docs-component-viewer-nav-content">
                             <div *ngFor="let p of postTypesArray; let last = last;">
@@ -45,27 +43,29 @@
                 </div>
 
                 <!-- start aside -->
-                <div class="col-md-2">
+                <div class="col-md-2" *ngIf="false">
                     <!-- <app-add-post-menu style="color: #00aeef !important; margin-left: auto;">
                     </app-add-post-menu> -->
-                    <app-post-type-nav [customTabs]="authService?.loggedInUser && authService?.loggedInUser?._id == authorId ? customTabs : []" [selectedPostType]="profileView" (postTypeClick)="$event?.isCustom ? fetchBasedOnCustomTab($event) : selectMainCategory($event?.name);"
+                    <app-post-type-nav
+                        [customTabs]="authService?.loggedInUser && authService?.loggedInUser?._id == authorId ? customTabs : []"
+                        [selectedPostType]="profileView"
+                        (postTypeClick)="$event?.isCustom ? fetchBasedOnCustomTab($event) : selectMainCategory($event?.name);"
                         (plusButtonClick)="redirectToAddPost($event)"></app-post-type-nav>
                 </div>
 
-                <div *ngIf="!showConnectedPosts" [ngClass]="selectedBlock ? 'col-lg-7 col-md-7' : 'col-lg-7 col-md-7'">
+                <div *ngIf="!showConnectedPosts"
+                    [ngClass]="selectedBlock ? 'col-lg-7 col-md-7' : 'col-lg-12 col-md-12'">
 
                     <div class="item-info">
                         <div>
                             <div class="tab-pane fade show product-tab active" id="product-details">
                                 <article>
-                                    <app-editor
-                                        (showComments)="showCommentsOnSide($event)"
+                                    <app-editor (showComments)="showCommentsOnSide($event)"
                                         [data]="details?.description"
                                         [commentsList]="commentService?.commentsList$ | async"
-                                        [blockLevelComments]="false" [readOnly]="true"
-                                        [realTime]="true"
-                                        [role]="'writer'"
-                                        [id]="'details-editor'" [html]="details?.descriptionHTML" [post]="details" [commentType]="'post'">
+                                        [blockLevelComments]="false" [readOnly]="true" [realTime]="true"
+                                        [role]="'writer'" [id]="'details-editor'" [html]="details?.descriptionHTML"
+                                        [post]="details" [commentType]="'post'">
                                     </app-editor>
 
                                     <br />
@@ -92,15 +92,17 @@
                 </div> -->
                 <!-- end /.col-md-4 -->
 
-                <div class="col-md-7 col-lg-7" *ngIf="showConnectedPosts">
+                <div class="col-md-12 col-lg-12" *ngIf="showConnectedPosts">
                     <div class="row">
                         <div class="col-md-8">
-                            <a mat-stroked-button color="primary" style="margin-bottom: 10px;" (click)="selectedBlock = null; showConnectedPosts = false; selectedPostType = ''">
+                            <a mat-stroked-button color="primary" style="margin-bottom: 10px;"
+                                (click)="selectedBlock = null; showConnectedPosts = false; selectedPostType = ''">
                                 <mat-icon>keyboard_arrow_left</mat-icon>Back
                             </a>
                             <div class="item-grid pen-grid item-grid-large">
-                                <app-brief-post style="width: 100%;" [p]="e" *ngFor="let e of listOfConnectedPosts?.posts"
-                                    [readMore]="true" (showComments)="showCommentsOnSide($event)"></app-brief-post>
+                                <app-brief-post style="width: 100%;" [p]="e"
+                                    *ngFor="let e of listOfConnectedPosts?.posts" [readMore]="true"
+                                    (showComments)="showCommentsOnSide($event)"></app-brief-post>
                             </div>
                             <app-paginator [length]="totalOtherPosts"
                                 (fetchData)="paginator = $event; getConnectedPosts(selectedPostType)">
@@ -108,13 +110,14 @@
                         </div>
 
                         <div class="col-md-4">
-                            <ng-container *ngTemplateOutlet="addBlockLevelCommentTemplate; context: {details: selectedPost, comments: selectedPostComments | async}">
+                            <ng-container
+                                *ngTemplateOutlet="addBlockLevelCommentTemplate; context: {details: selectedPost, comments: selectedPostComments | async}">
                             </ng-container>
                         </div>
 
                     </div>
                 </div>
-                
+
             </div>
             <!-- end /.row -->
         </div>
@@ -162,7 +165,8 @@
 <ng-template #addBlockLevelCommentTemplate let-cDetails="details" let-comments="comments">
     <!-- {{selectedBlock | json}} -->
     <aside class="sidebar" *ngIf="!(isHandset$ | async)">
-        <app-comment-side-nav (closeCommentSideBar)="selectedBlock = null" [selectedBlock]="selectedBlock" [selectedPost]="cDetails" [comments]="comments"></app-comment-side-nav>
+        <app-comment-side-nav (closeCommentSideBar)="selectedBlock = null" [selectedBlock]="selectedBlock"
+            [selectedPost]="cDetails" [comments]="comments"></app-comment-side-nav>
     </aside>
     <!-- <ng-container *ngIf="selectedBlock && (isHandset$ | async)">
         <mat-icon (click)="selectedBlock['__show'] = null; selectedBlock = null">close</mat-icon>

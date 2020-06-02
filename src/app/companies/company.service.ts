@@ -257,12 +257,12 @@ export class CompanyService {
     );
   }
 
-  getCampaignsWithTracking(pageOptions, companyId) {
+  getCampaignsWithTracking(pageOptions, companyId, batchId = '') {
     return this.apollo.query(
       {
         query: gql`
-          query getCampaignsWithTracking($pageOptions: PageOptionsInput, $companyId: String) {
-            getCampaignsWithTracking(pageOptions: $pageOptions, companyId: $companyId) {
+          query getCampaignsWithTracking($pageOptions: PageOptionsInput, $companyId: String, $batchId: String) {
+            getCampaignsWithTracking(pageOptions: $pageOptions, companyId: $companyId, batchId: $batchId) {
               _id
               name
               label
@@ -299,7 +299,8 @@ export class CompanyService {
         `,
         variables: {
           pageOptions,
-          companyId
+          companyId,
+          batchId
         },
         fetchPolicy: 'no-cache'
       }

@@ -10,6 +10,8 @@ import { PostStatus } from '../../shared/models/poststatus.enum';
 import { PostType } from '../../shared/models/post-types.enum';
 import Swal from 'sweetalert2';
 import { PostService } from '../../shared/services/post.service';
+import { CompanyService } from 'src/app/companies/company.service';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-send-email',
@@ -22,7 +24,10 @@ export class SendEmailComponent implements OnInit {
   emailForm: FormGroup;
   sendEmailForm: FormGroup;
   saveEmailForm: FormGroup;
-
+  trackEmailForm: FormGroup;
+  paginator: MatPaginator;
+  campaignsList = [];
+  displayCampaignList = false;
   file;
   onlySaveFile;
   public formdata = new FormData();
@@ -51,7 +56,8 @@ export class SendEmailComponent implements OnInit {
     private authService: AuthService,
     private emailService: EmailService,
     private changeDetector: ChangeDetectorRef,
-    private postService: PostService
+    private postService: PostService,
+    private companyService: CompanyService
   ) {
 
     /** Make the Changes here while creating new post type */
@@ -78,6 +84,11 @@ export class SendEmailComponent implements OnInit {
     this.saveEmailForm = new FormGroup({
       csvfile: new FormControl('', Validators.required),
       label: new FormControl('', Validators.required),
+      companies: new FormControl('', Validators.required),
+    });
+
+    this.trackEmailForm = new FormGroup({
+      batches: new FormControl('', Validators.required),
       companies: new FormControl('', Validators.required),
     });
 
@@ -197,4 +208,32 @@ export class SendEmailComponent implements OnInit {
      });
   }
 
+  getCampaignData() {
+    console.log('EMail Data is called')
+    const paginationObj = {
+      pageNumber: 1, limit: 10,
+      sort: {order: ''}};
+
+      this.companyService.getCampaignsWithTracking(paginationObj, this.trackEmailForm.value.companies._id, this.trackEmailForm.value.batches._id).subscribe(c => {
+        if (c && c.length) {
+          this.displayCampaignList = true;
+          // this.fetchEmailsConnectedWithCampaign();
+          this.campaignsList = c;
+        }
+      })
+  }
+
+  fetchEmailsConnectedWithCampaign() {
+    console.log('fetchEmailsConnectedWithCampaign Data is called')
+    
+    const paginationObj = {
+      pageNumber: this.paginator.pageIndex + 1, limit: this.paginator.pageSize ? this.paginator.pageSize : 10,
+      sort: {order: ''}};
+   
+      this.companyService.getCampaignsWithTracking(paginationObj, this.trackEmailForm.value.companies._id, this.trackEmailForm.value.batches._id).subscribe(c => {
+        if (c && c.length) {
+          this.campaignsList = c;
+        }
+      })
+  }
 }

@@ -20,7 +20,6 @@
             <div *ngIf="postType === 'appointment'">
               <app-calender></app-calender>
             </div>
-            <br>
             <div class="alert alert-info text-center" *ngIf="postType === 'appointment' && slotDateTime">
               Confirm Your Apointment
               <strong>: {{ displayDate | date:'yyyy-MM-dd hh:mm a'}}</strong>

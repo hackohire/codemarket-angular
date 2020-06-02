@@ -63,7 +63,7 @@
             z-index: 0;
         }
         .breadcrumb-area {
-            z-index: 18 !important;
+            // z-index: 18 !important;
             top: 0 !important;
             position: relative !important;
             width: 100% !important;
@@ -78,8 +78,8 @@
             margin-top: 10px !important;
         }
         .ck.ck-toolbar {
-            position: relative !important;
-            top: 0 !important;
+            position: sticky !important;
+            top: 45px !important;
             z-index: 20;
         }
         .ck.ck-toolbar.ck-toolbar_grouping>.ck-toolbar__items {

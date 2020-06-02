@@ -23,6 +23,7 @@ export class PostService {
 
   postFields = appConstants.postQuery;
   contentFromAnotherArticle = new BehaviorSubject(null);
+  public saveOrSubmitPost = new BehaviorSubject(null);
   constructor(
     private apollo: Apollo,
     private store: Store<AppState>,
@@ -159,6 +160,24 @@ export class PostService {
     );
   }
 
+  updatePostContent(post: Post, updatedBy = null): Observable<Post> {
+    return this.apollo.mutate(
+      {
+        mutation: gql`
+          mutation updatePostContent($post: PostInput, $updatedBy: UserInput) {
+            updatePostContent(post: $post, updatedBy: $updatedBy)
+          }
+        `,
+        variables: {
+          post,
+          updatedBy
+        }
+      }
+    ).pipe(
+      map((p: any) => p.data.updatePostContent),
+    );
+  }
+
   deletePost(postId: string, deletedBy = null): Observable<boolean> {
     return this.apollo.mutate(
       {
@@ -212,7 +231,7 @@ export class PostService {
 
   getCountOfAllPost(userId: string, companyId: string, reference: any): Observable<any> {
     return this.apollo.query({
-      query : gql`
+      query: gql`
         query getCountOfAllPost($userId: String, $companyId: String, $reference: ReferenceObject) {
           getCountOfAllPost(userId: $userId, companyId: $companyId, reference: $reference) {
             _id
@@ -223,20 +242,20 @@ export class PostService {
       variables: {
         userId: userId ? userId : null,
         companyId: companyId ? companyId : null,
-        reference: reference? reference : null
+        reference: reference ? reference : null
       },
       fetchPolicy: 'no-cache'
     }
     ).pipe(
       map((p: any) => {
-        return p.data.getCountOfAllPost
+        return p.data.getCountOfAllPost;
       }),
     )
   }
 
   getEmailPhoneCountForContact(type: string): Observable<any> {
     return this.apollo.query({
-      query : gql`
+      query: gql`
         query getEmailPhoneCountForContact($type: String) {
           getEmailPhoneCountForContact(type: $type) {
             _id
@@ -252,117 +271,20 @@ export class PostService {
     }
     ).pipe(
       map((p: any) => {
-        return p.data.getEmailPhoneCountForContact
+        return p.data.getEmailPhoneCountForContact;
       }),
     )
   }
 
   redirectToPostDetails(post, commentId = ''): void {
-    // this.store.dispatch(SetSelectedPost({ post: null }));
-
-    // if (post.type === PostType.Dreamjob) {
-    //   this.redirectToDreamJobDetails(post, commentId);
-    // } else if (post.type === PostType.Event) {
-    //   this.redirectToEventDetails(post, commentId);
-    // } else {
-    // }
-    this.router.navigate(['/','post',post.slug ? post.slug : ''],
+    this.router.navigate(['/', 'post', post.slug ? post.slug : ''],
       { queryParams: commentId ? { commentId } : null }
     );
   }
 
-  redirectToDreamJobDetails(dreamJob, commentId = ''): void {
-    this.router.navigate(['/', PostType.Dreamjob, dreamJob.slug], { queryParams: commentId ? { commentId } : null });
-  }
-
-  redirectToEventDetails(event, commentId = ''): void {
-    this.router.navigate(['/', PostType.Event, event.slug], { queryParams: commentId ? { commentId } : null });
-  }
 
   editPost(post): void {
-    this.router.navigate(['/post', 'edit-post', post._id], {queryParams: {type: post.type}});
-  }
-
-  rsvpEvent(eventId: string): Observable<any> {
-    return this.apollo.mutate(
-      {
-        mutation: gql`
-          mutation rsvpEvent($userId: String, $eventId: String) {
-            rsvpEvent(userId: $userId, eventId: $eventId) {
-              validSubscription
-              usersAttending {
-                name
-                _id
-                avatar
-              }
-            }
-          }
-        `,
-        variables: {
-          userId: this.authService.loggedInUser._id,
-          eventId,
-        }
-      }
-    ).pipe(
-      map((p: any) => p.data.rsvpEvent),
-      catchError(e => of(e))
-    );
-  }
-
-  cancelRSVP(eventId: string): Observable<any> {
-    return this.apollo.mutate(
-      {
-        mutation: gql`
-          mutation cancelRSVP($userId: String, $eventId: String) {
-            cancelRSVP(userId: $userId, eventId: $eventId) {
-              usersAttending {
-                name
-                _id
-                avatar
-              }
-            }
-          }
-        `,
-        variables: {
-          userId: this.authService.loggedInUser._id,
-          eventId,
-        }
-      }
-    ).pipe(
-      map((p: any) => p.data.cancelRSVP),
-      catchError(e => of(e))
-    );
-  }
-
-  myRSVP(userId: string) {
-    return this.apollo.query(
-      {
-        query: gql`
-          query myRSVP($userId: String) {
-            myRSVP(userId: $userId){
-              name
-              _id
-              createdBy {
-                name
-                _id
-                avatar
-                slug
-              }
-              dateRange
-              type
-            }
-          }
-        `,
-        variables: {
-          userId
-        },
-        fetchPolicy: 'no-cache'
-      }
-    ).pipe(
-      map((p: any) => {
-        return p.data.myRSVP;
-      }),
-    );
+    this.router.navigate(['/post', 'edit-post', post._id], { queryParams: { type: post.type } });
   }
 
   searchPosts(searchString: string): Observable<Post[]> {
@@ -392,27 +314,6 @@ export class PostService {
     ).pipe(
       map((p: any) => {
         return p.data.fullSearch;
-      }),
-    );
-  }
-
-  fetchFiles(blockType: string, userId: string) {
-    return this.apollo.query(
-      {
-        query: gql`
-          query fetchFiles($blockType: String, $userId: String) {
-            fetchFiles(blockType: $blockType, userId: $userId)
-          }
-        `,
-        variables: {
-          blockType,
-          userId
-        },
-        fetchPolicy: 'no-cache'
-      }
-    ).pipe(
-      map((p: any) => {
-        return p.data.fetchFiles;
       }),
     );
   }

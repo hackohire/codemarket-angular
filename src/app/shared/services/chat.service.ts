@@ -36,4 +36,29 @@ export class ChatService {
       }),
     );
   }
+
+  createVideoToken(identity: string): Observable<any> {
+    return this.apollo.query(
+      {
+        query: gql`
+          query createVideoToken($identity: String) {
+            createVideoToken(identity: $identity) {
+              token,
+              identity
+            }
+          }
+        `,
+        variables: {
+          identity
+        },
+        fetchPolicy: 'no-cache'
+      }
+    ).pipe(
+      map((p: any) => {
+        return p.data.createVideoToken;
+      }),
+    );
+  }
+
+  
 }

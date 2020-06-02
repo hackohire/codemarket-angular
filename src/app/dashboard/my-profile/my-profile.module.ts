@@ -25,10 +25,6 @@ const myProfileRoutes: Routes = [
         path: 'membership-list',
         loadChildren: () => import('../../membership/membership-list/membership-list.module').then(module => module.MembershipListModule)
       },
-      {
-        path: 'my-rsvp',
-        loadChildren: () => import('../../event/my-rsvp/my-rsvp.module').then(module => module.MyRsvpModule)
-      },
     ]
   }
 ];

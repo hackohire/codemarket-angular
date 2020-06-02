@@ -6,6 +6,12 @@ import { plans } from '../app/shared/constants/plan_details';
 
 export const environment = {
   production: false,
+  ckEditor: {
+    ckEditorEnvironMentId: 'ZK5UoNVFJG2R3Kh4SrIC',
+    ckEditorSecretKey: 'HP771KcTLlvStVbtvwAGz5d3LhLgDlY50uJqNQ6nkS18kVP43ZPB1zOSLseK',
+    ws: '71258.cke-cs.com/ws',
+    developmentTokenUrl: 'https://71258.cke-cs.com/token/dev/qhNbD6xUjkeVtrEc7aD2PcMhDkgmirUJHunqRWESilB0mTzZ0RHcJYk68P6D'
+  },
   COGNITO_AUTH_DOMAIN: 'https://platform.auth.us-east-1.amazoncognito.com',
   serverless_url: 'http://localhost:3200/dev/',
   graphql_url: 'http://localhost:3200/dev/graphql',
@@ -13,6 +19,7 @@ export const environment = {
   stripe_public_key: 'pk_test_ighmL2U9UqAx0O4b8dKkSvdq',
   webSocketURL: 'ws://localhost:3001',
   planDetails: plans.dev,
+  fileS3Bucket: 'manav-files',
   oauth: {
     // Domain name
     domain: 'platform.auth.us-east-1.amazoncognito.com',
@@ -40,7 +47,8 @@ export const environment = {
   baseHref: '/',
   confirm: {
     email: '',
-    password: ''
+    password: '',
+    name: ''
   }
 };
 

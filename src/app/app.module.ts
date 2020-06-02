@@ -21,6 +21,12 @@ import { FormioModule } from 'angular-formio';
 import {FormBuilderModule} from './form-builder/form-builder.module';
 import { registerSelecteDeselectComponent } from './shared/components/selecte-deselect/select-deselect.formio';
 import { SelecteDeselectComponent } from './shared/components/selecte-deselect/selecte-deselect.component';
+import { VideoChatHomeComponent } from './video-chat/video-chat-home/video-chat-home.component';
+import { CameraComponent } from './video-chat/camera/camera.component';
+import { RoomsComponent } from './video-chat/rooms/rooms.component';
+import { ParticipantsComponent } from './video-chat/participants/participants.component';
+import { DeviceSelectComponent } from './video-chat/settings/device-select/device-select.component';
+import { SettingsComponent } from './video-chat/settings/settings.component';
 
 // import { SignInComponent } from './core/amplify/sign-in-component';
 
@@ -35,7 +41,14 @@ import { SelecteDeselectComponent } from './shared/components/selecte-deselect/s
     WebsiteComponent,
     EmailMarketingComponent,
     SocialMediaMarketingComponent,
-    SelecteDeselectComponent
+    SelecteDeselectComponent,
+
+    VideoChatHomeComponent,
+    CameraComponent,
+    RoomsComponent,
+    ParticipantsComponent,
+    SettingsComponent,
+    DeviceSelectComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

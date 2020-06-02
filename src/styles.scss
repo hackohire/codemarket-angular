@@ -3,7 +3,6 @@
 
 @import "~~bootstrap/scss/bootstrap";
 @import "~ng-pick-datetime/assets/style/picker.min.css";
-@import url("assets/fonts/rectory/stylesheet.css");
 
 @import "~src/assets/css/general";
 @import "~src/assets/css/theme";
@@ -35,14 +34,15 @@ form > * {
 
 .fa-plus-square:before {
   content: "\f0fe" !important;
-  color: white !important;
+  color: inherit;
 }
 
 .auth-box {
-  background-color: #ececec; 
+  // background-color: #ececec; 
+  background-color: white; 
   padding: 15px;
   max-width: 500px;
-  min-width: 500px;
+  // min-width: 500px;
   border-radius: 10px;
 }
 
@@ -84,8 +84,8 @@ textarea {
   overflow: hidden !important;
 }
 
-.amplify-form-button {
-  background-color: #00aeef !important;
+.ck-editor__editable:not(.ck-read-only) .ck-media__wrapper>:not(.ck-media__placeholder) {
+  pointer-events: auto !important;
 }
 
 .page-title {
@@ -119,7 +119,7 @@ textarea {
 }
 
 .mat-form-field-wrapper {
-  padding: 0;
+  // padding: 0;
 }
 
 mat-icon,
@@ -3321,17 +3321,18 @@ a {
   height: 100%;
   width: 100%;
   position: absolute;
-  background: -webkit-gradient(
-    linear,
-    right top,
-    left top,
-    from(#7347c1),
-    to(#00aeef)
-  );
-  background: -webkit-linear-gradient(right, #7347c1, #00aeef);
-  background: -o-linear-gradient(right, #7347c1, #00aeef);
-  background: linear-gradient(to left, #7347c1, #00aeef);
-  opacity: 0.91;
+  // background: -webkit-gradient(
+  //   linear,
+  //   right top,
+  //   left top,
+  //   from(#7347c1),
+  //   to(#00aeef)
+  // );
+  // background: -webkit-linear-gradient(right, #7347c1, #00aeef);
+  // background: -o-linear-gradient(right, #7347c1, #00aeef);
+  // background: linear-gradient(to left, #7347c1, #00aeef);
+  background: white;
+  opacity: 1;
   top: 0;
   left: 0;
 }
@@ -3342,18 +3343,28 @@ a {
   // padding-bottom: 25px;
 
   padding-top: 10px !important;
-  padding-bottom: 8px;
+  padding-bottom: 16px;
 }
 
 .breadcrumb-area .breadcrumb ul li a {
   line-height: initial;
+  text-transform: capitalize;
 }
 
 .breadcrumb-area .page-title {
-  color: #fff;
+  color: #00aeef !important;
   font-weight: 500;
   font-size: 30px;
   text-transform: capitalize;
+  border-bottom: 1px solid #fff;
+}
+    
+.breadcrumb-area .page-title:focus {
+    outline: none;
+    background: #fff;
+    font-size: 24px;
+    padding: 3.9px;
+    border-bottom: 1px solid #ccc;
 }
 
 .breadcrumb-area .breadcrumb {
@@ -3428,7 +3439,7 @@ a {
 }
 
 .breadcrumb ul li.active a {
-  color: #bfcad7;
+  color: #666;
 }
 
 .breadcrumb ul {
@@ -9278,7 +9289,7 @@ a {
 
 #product-details h1 + p,
 #product-details p:last-child {
-  margin-bottom: 62px;
+  // margin-bottom: 62px;
 }
 
 // #product-details img {
@@ -9313,7 +9324,7 @@ a {
 }
 
 #product-details ul {
-  padding-bottom: 55px;
+  // padding-bottom: 55px;
 }
 
 #product-details ul li:before {
@@ -9406,8 +9417,8 @@ a {
 }
 
 .thread .thread-list .single-thread .media-body p {
-  padding-top: 14px;
-  margin-bottom: 0;
+  // padding-top: 14px;
+  // margin-bottom: 0;
 }
 
 .thread .thread-list .single-thread .depth-2 {
@@ -17410,9 +17421,14 @@ a {
 // End of Chat box CSS
 /*# sourceMappingURL=src/map/style.css.map */
 
-
-
-
 .form-builder-group-header {
   padding: 0 !important;
 }
+
+
+
+// @media (max-width: 767px) {
+//   body {
+//       padding-top: 93px;
+//   }
+// }

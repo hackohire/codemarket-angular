@@ -1,6 +1,6 @@
 <section id="chat-full-ui">
   <div class="row m-0 chat-container">
-    <div class="col-md-12 col-lg-12 col-sm-12 pr-0">
+    <div class="col-md-12 col-lg-12 col-sm-12 pr-0 pl-0">
       <!-- <div class="chat-list-header">
         <div class="row">
           <div class="col-3">
@@ -24,21 +24,22 @@
           </div>
         </div> -->
 
-        <ng-container *ngIf="infinite | async as posts">
+        <ng-container *ngIf="authService?.navigationPostList$ | async as posts">
 
           <!-- {{posts | json}} -->
           <cdk-virtual-scroll-viewport itemSize="76" (scrolledIndexChange)="nextBatch($event, (posts.length / 10))">
 
             <div *cdkVirtualFor="let post of posts; let i = index; trackBy: trackByIdx" class="row post-card"
-              [ngClass]="{'active-chat': post.isActive === true}" (click)="postService.redirectToPostDetails(post)">
+              [ngClass]="[post.isLatest === true ? 'updated-post' : '', post._id === authService?.selectedPostId ? 'selected-post': '']"
+              (click)="onClickPost(post)">
 
-              <div class="col-3 p-0" [ngClass]="{'p-1': post.isActive === true}">
+              <div class="col-2 p-0 pl-2">
                 <img class="chat-list-avatar"
                   [src]="post.createdBy.avatar ? ((s3FilesBucketURL + post.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar" />
               </div>
 
-              <div class="col-9 p-0 vertical-align-center">
-                <div class="post-name">
+              <div class="col-10 p-0 vertical-align-center">
+                <div class="post-name pl-4">
 
                   <p class="font-weight-500 overflow-text" data-toggle="tooltip" [title]="post?.name">
                     {{post?.name}}
@@ -59,45 +60,6 @@
           </cdk-virtual-scroll-viewport>
 
         </ng-container>
-      </div>
-    </div>
-    <div *ngIf="false" class="col-md-8 col-lg-8 col-sm-12 pl-0">
-      <div *ngIf="loadingMessage || selectedPost" class="chat-list-header">
-        <div class="row">
-          <div class="col-11 pl-0 vertical-align-center">
-            <div class="font-weight-700 pl-3">
-              {{loadingMessage ? loadingMessage : selectedPost?.name ? selectedPost?.name : 'Welcome to Codemarket'}}
-            </div>
-          </div>
-          <div class="col-1 delete">
-            <i [hidden]="!selectedPost?.isActive && selectedPost?.createdBy?._id !== loggedInUser?._id"
-              class="float-right p-2 material-icons" [swal]="deleteSwal">delete</i>
-          </div>
-        </div>
-      </div>
-      <div class="chat-body">
-        <div class="message-container" #scrollMe [scrollTop]="scrollMe.scrollHeight">
-          <div [hidden]="!selectedPost?.isActive && loadingMessage" *ngFor="let msg of commentsList">
-            <div class="right" id="messages" *ngIf="msg.author === username">
-              <div class="auther-name">{{msg.author | getName}}</div>
-              <span>{{msg.body}}</span>
-              <span class="float_r">{{getFormatedDate(msg.dateUpdated)}}</span>
-            </div>
-            <div class="left" id="messages" *ngIf="msg.author !== username">
-              <div class="auther-name">{{msg.author | getName}}</div>
-              <span>{{msg.body}}</span>
-              <span class="float_r">{{getFormatedDate(msg.dateUpdated)}}</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div [hidden]="!selectedPost" class="row chat-footer">
-        <div class="col-9 ">
-          <input class="message mb-0" [(ngModel)]="msg" (keyup.enter)="sendMsg()" placeholder="Send a message...">
-        </div>
-        <div class="col-3 text-center">
-          <button type="submit" class="btn waves-effect waves-light send" (click)="sendMsg()">Send</button>
-        </div>
       </div>
     </div>
   </div>

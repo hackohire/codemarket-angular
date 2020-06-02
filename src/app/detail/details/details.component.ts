@@ -111,6 +111,8 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
     const postId = params && params.slug ? params.slug.split('-').pop() : '';
 
+    this.authService.selectedPostId = postId;
+
     this.subscription$.add(this.store.select(selectSelectedPost).pipe(
       tap((p: Post) => {
         if (p) {

@@ -1,17 +1,19 @@
 <mat-sidenav-container class="sidenav-container" autosize>
 
-  <mat-sidenav *ngIf="loggedInUser" #drawer class="sidenav" fixedInViewport
+  {{authService?.loggedInUser | json}}
+  <mat-sidenav *ngIf="authService?.loggedInUser" #drawer class="sidenav" fixedInViewport
     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'"
     [opened]="(isHandset$ | async) === false">
     <mat-toolbar
       style="height: 48px; font-size: 14px; font-weight: 400; letter-spacing: 4px; text-transform: uppercase; color: #999; background: #eee;">
-      navigation <mat-icon (click)="drawer.toggle()" style="margin-left: auto;">clear</mat-icon>
+      navigation {{'(' + authService.postUpdateCount + ')'}} <mat-icon (click)="drawer.toggle()"
+        style="margin-left: auto;">clear</mat-icon>
     </mat-toolbar>
 
 
     <mat-nav-list class="pt-0">
 
-      <app-chat-full-ui [drawer]="drawer" [loggedInUser]="authService?.loggedInUser">
+      <app-chat-full-ui *ngIf="authService?.loggedInUser" [drawer]="drawer" [loggedInUser]="authService?.loggedInUser">
       </app-chat-full-ui>
 
     </mat-nav-list>

@@ -6,7 +6,6 @@ import { map, catchError, tap } from 'rxjs/operators';
 import { of } from 'rxjs/internal/observable/of';
 import { CognitoUser, CognitoUserSession } from 'amazon-cognito-identity-js';
 import Auth from '@aws-amplify/auth';
-import { environment } from 'src/environments/environment';
 import { Store } from '@ngrx/store';
 import { AppState } from '../store/state/app.state';
 import { Authorise, SetLoggedInUser } from '../store/actions/user.actions';
@@ -15,7 +14,6 @@ import { Observable, BehaviorSubject, Subscription } from 'rxjs';
 import { User } from '../../shared/models/user.model';
 import { Router } from '@angular/router';
 import { isPlatformBrowser, DOCUMENT, isPlatformServer } from '@angular/common';
-import { comment } from '../../shared/constants/fragments_constatnts';
 import { appConstants } from '../../shared/constants/app_constants';
 import { ToastrService } from 'ngx-toastr';
 import { TransferState, makeStateKey } from '@angular/platform-browser';
@@ -42,6 +40,12 @@ export class AuthService {
   loggedInUser: User;
   openAuthenticationPopover = new BehaviorSubject<boolean>(false);
   subscriptions$ = new Subscription();
+
+  navigationPostList$ = new BehaviorSubject(null);
+  postUpdateCount = 0;
+  selectedPostId = '';
+
+  navigationPostListObservable: Observable<any[]>;
 
   constructor(
     private apollo: Apollo,
@@ -192,12 +196,14 @@ export class AuthService {
     const USER_SUBSCRIPTION = gql`
     subscription onUserOnline($user: UserInput) {
       onUserOnline(user: $user){
-        onCommentAdded {
-          ...Comments
+        postUpdated {
+          post {
+            ...Post
+          }
         }
       }
     }
-    ${comment}
+    ${appConstants.postQuery}
     `;
     this.apollo.subscribe({
       query: USER_SUBSCRIPTION,
@@ -211,13 +217,21 @@ export class AuthService {
     }).pipe(
       map((u: any) => u.data.onUserOnline),
       tap((u) => {
-        if (u.onCommentAdded) {
-
+        if (u.postUpdated && u.postUpdated.post) {
           /** Audio Notification */
           // var audio = new Audio(appConstants.Notification);
           // audio.play();
           // this.messageService.addNewMessage(u.onCommentAdded);
           // this.openToastrNotification(u.post, u.onCommentAdded, true);
+          u.postUpdated.post['isLatest'] = this.selectedPostId !== u.postUpdated.post._id;
+          const i = this.navigationPostList$.value.findIndex(p => p._id === u.postUpdated.post._id);
+
+          if (i > -1) {
+            this.navigationPostList$.value.splice(i, 1);
+          }
+          this.navigationPostList$.next([u.postUpdated.post, ...this.navigationPostList$.value]);
+
+          this.postUpdateCount = this.navigationPostList$.value.filter(p => p['isLatest']).length;
         }
       })
     )

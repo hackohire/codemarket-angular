@@ -100,9 +100,16 @@
   }
 }
 
+.hidden-lg {
+  display: none;
+}
+
 @media (max-width:767px) {
   .NavBarBox > div:nth-of-type(1) {
     display: none !important;
+  }
+  .hidden-lg {
+    display: block !important;
   }
   .brand-logo {
     max-width: 55%;
@@ -117,10 +124,11 @@
       left: 0;
   }
   .NavBarBox {
-      position: relative !important;
-      top: 0 !important;
-      z-index: 17 !important;
+      // position: relative !important;
+      // top: 0 !important;
+      z-index: 21 !important;
       border-bottom: 1px solid #ccc;
+      padding-left: 0;
   }
 }
 

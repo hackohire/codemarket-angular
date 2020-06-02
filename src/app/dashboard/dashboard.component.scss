@@ -282,7 +282,7 @@
 }
 .individuals-signup-cta__label {
 	position: absolute;
-	top: 24%;
+	top: 30px;
 	left: 15px;
 	transform: translateY(-50%);
 	color: #888da1;
@@ -419,6 +419,11 @@
 	box-shadow: inset #1d5bc5 0 -5px 0;
 	cursor: not-allowed;
 }
+.google-button.special > span.button-flex-wrapper {
+    display: block;
+    line-height: 22px;
+    font-weight: 400;
+}
 @media (min-width: 48em) {
 	.google-button.special {
 		font-size: 18px
@@ -498,5 +503,15 @@
 		left: unset;
 		height: auto;
 		margin-right: 20px
+	}
+}
+@media (max-width: 767px) {
+	.individuals-signup-cta__form-group {
+		border-radius: 5px 5px 0 0;
+	}
+	.google-button.special {
+		margin-top: -10px;
+		border-radius: 0 0 5px 5px;
+		height: 50px;
 	}
 }

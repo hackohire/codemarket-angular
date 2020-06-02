@@ -1,33 +1,14 @@
 #appointment {
   margin: 20px auto;
-    .time-slot-wrapper {
-        height: calc(100vh - 36vh);
-        overflow: auto;
-        margin-top: 90px;
-        text-align: center;
-        cursor: pointer;
-
-        .slot-btn {
-          width: 40%;
-          text-align: center;
-          color: var(--primary-color, #00a2ff);
-          border: 1px solid var(--primary-color-level2, rgba(0, 162, 255, 0.5));
-          position: relative;
-          display: inline-block;
-          padding: 10px 7px;
-          margin: 5px 7px;
-          font-weight: 600;
-          vertical-align: top;
-          border-radius: 4px;
-          &:hover {
-            border-color: var(--primary-color, rgb(0, 162, 255));
-            border-width: 1px;
-          }
-        }
-
-        span {
-            font-size: 22px;
-            color: #00a2ff;
-        }
+  table {
+    width: 100%;
+    img {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14),
+        0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+      margin: 10px;
     }
+  }
 }

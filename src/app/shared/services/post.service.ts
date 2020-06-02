@@ -317,4 +317,31 @@ export class PostService {
       }),
     );
   }
+
+  getPostByPostType(postType: string, pageOptions = { pageNumber: 0, limit: 0 }): Observable<{ posts: Post[], total: number }> {
+    return this.apollo.query(
+      {
+        query: gql`
+          query getPostByPostType($postType: String, $pageOptions: PageOptionsInput) {
+            getPostByPostType(postType: $postType, pageOptions: $pageOptions) {
+              posts {
+                ...Post
+              }
+              total
+            }
+          }
+          ${this.postFields}
+        `,
+        variables: {
+          postType,
+          pageOptions
+        },
+        fetchPolicy: 'no-cache'
+      }
+    ).pipe(
+      map((p: any) => {
+        return p.data.getPostByPostType;
+      }),
+    );
+  }
 }

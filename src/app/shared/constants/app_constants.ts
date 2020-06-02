@@ -302,6 +302,8 @@ export const appConstants = {
       website
 
       descriptionHTML
+      appointment_date
+      cancelReason
       activities {
         action
         activityDate

@@ -317,4 +317,10 @@ export class PostService {
       }),
     );
   }
+
+  closeNavigationIfMobile(drawer) {
+    if (drawer && window.innerWidth < 768) {
+      drawer.toggle();
+    }
+  }
 }

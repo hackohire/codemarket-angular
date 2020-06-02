@@ -128,19 +128,13 @@ export class ChatFullUiComponent implements OnInit {
     return i;
   }
 
-  closeNavigationIfMobile() {
-    if (window.innerWidth < 768) {
-      this.drawer.toggle();
-    }
-  }
-
   onClickPost(post) {
     this.postService.redirectToPostDetails(post);
     if (post['isLatest']) {
       this.authService.postUpdateCount--;
     }
     post['isLatest'] = false;
-    this.closeNavigationIfMobile();
+    this.postService.closeNavigationIfMobile(this.drawer);
   }
 
 }

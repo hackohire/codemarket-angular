@@ -112,21 +112,6 @@
 										<router-outlet></router-outlet>
 									</div>
 
-<<<<<<< HEAD
-							<!-- Showing the list of posts for the posts tab, everytime user clicks on the "load more", we increase the page number and call
-														fetchAllOtherPosts method to fetch subsequent posts -->
-							<ng-container *ngIf="profileView === navLinkName.posts">
-								<div class="">
-									<app-brief-post style="width: 100%;" [p]="e"
-										*ngFor="let e of listOfAllOtherPosts?.posts"
-										(showComments)="showCommentsOnSide($event)" [readMore]="true">
-									</app-brief-post>
-								</div>
-								<app-paginator [length]="totalOtherPosts"
-									(fetchData)="paginator = $event; fetchAllOtherPosts()">
-								</app-paginator>
-							</ng-container>
-=======
 									<!-- Showing the list of posts for the posts tab, everytime user clicks on the "load more", we increase the page number and call
 														fetchAllOtherPosts method to fetch subsequent posts -->
 									<ng-container *ngIf="profileView === navLinkName.posts">
@@ -140,7 +125,6 @@
 											(fetchData)="paginator = $event; fetchAllOtherPosts()">
 										</app-paginator>
 									</ng-container>
->>>>>>> 345937bb8b4542e1fa25846426281a9fccb72c05
 
 									<!-- Show list of the posts based on post type -->
 									<ng-container *ngFor="let p of postTypesArray">
@@ -223,14 +207,6 @@
 														</ul>
 														<!-- end /.social -->
 
-<<<<<<< HEAD
-												<!-- <div class="author-btn">
-																											<a href="#" class="btn btn--md btn--round">Follow</a>
-																									</div> -->
-												<!-- end /.author-btn -->
-											</div>
-											<!-- end /.author-infos -->
-=======
 														<!-- <div class="author-btn">
 																											<a href="#" class="btn btn--md btn--round">Follow</a>
 																									</div> -->
@@ -240,7 +216,6 @@
 												</div>
 												<!-- end /.author-card -->
 											</aside>
->>>>>>> 345937bb8b4542e1fa25846426281a9fccb72c05
 										</div>
 									</div>
 
@@ -251,13 +226,8 @@
 									</ng-container>
 								</div>
 
-<<<<<<< HEAD
-					</div>
-					<!-- POST EDITOR STARTS HERE -->
-=======
 							</div>
 							<!-- POST EDITOR STARTS HERE -->
->>>>>>> 345937bb8b4542e1fa25846426281a9fccb72c05
 
 							<!-- POST EDITOR ENDS HERE -->
 							<!-- <mat-tab-group mat-align-tabs="center"> -->
@@ -269,13 +239,9 @@
 					        <app-chat-full-ui [loggedInUser]="authService?.loggedInUser" [postList]="listOfAllOtherPosts?.posts"></app-chat-full-ui>
 					      </ng-template>
 					    </mat-tab> -->
-<<<<<<< HEAD
-					<!-- </mat-tab-group> -->
-=======
 							<!-- </mat-tab-group> -->
 						</div>
 					</div>
->>>>>>> 345937bb8b4542e1fa25846426281a9fccb72c05
 				</div>
 				<!-- </section> -->
 			</div>

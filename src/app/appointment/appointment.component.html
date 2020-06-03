@@ -51,6 +51,7 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
 
-    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    <app-paginator [length]="totalAppointmentCount" (fetchData)="paginator = $event; getPostByPostType()">
+    </app-paginator>
   </div>
 </section>

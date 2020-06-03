@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input, ChangeDetectorRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, ChangeDetectorRef, AfterViewInit, NgZone } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -76,6 +76,7 @@ export class AddPostComponent implements OnInit, AfterViewInit {
     private location: Location,
     private _appointmentService: AppointmentService, 
     private router: Router,
+    private ngZone: NgZone
   ) {
 
     this.postType = this.activatedRoute.snapshot.queryParams.type;
@@ -197,7 +198,7 @@ export class AddPostComponent implements OnInit, AfterViewInit {
     postFormValue.status = status;
     // postFormValue.companies = postFormValue.companies.map(c => c._id);
     if (this.postType === PostType.Appointment) { 
-      postFormValue.appointment_date = this.displayDate;
+      postFormValue.appointment_date = moment.utc(this.displayDate).format('YYYY-MM-DD HH:mm:ss');
     }
 
     if (this.postId) {
@@ -235,7 +236,27 @@ export class AddPostComponent implements OnInit, AfterViewInit {
       result.push(current.format('HH:mm'));
       current.add(15, 'minutes');
     }
-    this.slotList = result;
+    
+    if (moment(this.selectedDate).format('YYYY-MM-DD') === moment().format('YYYY-MM-DD')) {
+      const currentHour = moment().add('minutes', 0).format('HH');
+      const currentMinute = moment().add('minutes', 0).format('mm');
+      const filteredSlots = [];
+      for (let i = 0; i < result.length; i++) {
+        if (result[i].split(':')[0] > currentHour) {
+          filteredSlots.push(result[i]);
+        } else if (result[i].split(':')[0] === currentHour && result[i].split(':')[1] > currentMinute) {
+          filteredSlots.push(result[i]);
+        }
+      }
+      
+      this.ngZone.run( () => {
+        this.slotList = filteredSlots
+     });
+    } else {
+      this.ngZone.run( () => {
+        this.slotList = result
+     });
+    } 
   }
 
   selectedSlot(slot: string) {

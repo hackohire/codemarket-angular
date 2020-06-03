@@ -89,6 +89,30 @@
                 }
               ]
             },
+            "technothate": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.technothate.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "5mb",
+                  "maximumError": "15mb"
+                }
+              ]
+            },
             "manav": {
               "fileReplacements": [
                 {
@@ -127,6 +151,9 @@
             },
             "staging": {
               "browserTarget": "codemarket:build:staging"
+            },
+            "technothate": {
+              "browserTarget": "codemarket:build:technothate"
             },
             "manav": {
               "browserTarget": "codemarket:build:manav"
@@ -183,6 +210,9 @@
             "staging": {
               "devServerTarget": "codemarket:serve:staging"
             },
+            "technothate": {
+              "devServerTarget": "codemarket:serve:technothate"
+            },
             "manav": {
               "devServerTarget": "codemarket:serve:manav"
             }
@@ -214,6 +244,19 @@
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.staging.ts"
+                }
+              ],
+              "sourceMap": false,
+              "optimization": {
+                "scripts": false,
+                "styles": true
+              }
+            },
+            "technothate": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.technothate.ts"
                 }
               ],
               "sourceMap": false,

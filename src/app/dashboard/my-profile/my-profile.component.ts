@@ -201,6 +201,7 @@ export class MyProfileComponent implements OnInit {
     this.profileView = this.activatedRoute.snapshot.queryParams['view'] ? this.activatedRoute.snapshot.queryParams['view'] : 'posts';
     if (this.profileView === 'appointment') {
       this.dataSource.paginator = this.paginator;
+      // this.dataSource.paginator = this.paginator;
       this.getPostByPostType();
     }
     // If user is visitng somebody else's profile
@@ -308,7 +309,7 @@ export class MyProfileComponent implements OnInit {
           queryParams: { view: category }, queryParamsHandling: 'merge'
         });
       if (this.profileView === 'appointment') {
-        this.dataSource.paginator = this.paginator;
+        // this.dataSource.paginator = this.paginator;
         this.getPostByPostType();
       }
     }
@@ -452,9 +453,16 @@ export class MyProfileComponent implements OnInit {
   }
 
   getPostByPostType() {
-    const paginationObj = {
-      pageNumber: this.paginator.pageIndex + 1, limit: this.paginator.pageSize ? this.paginator.pageSize : 10,
-      sort: {order: ''}};
+    let paginationObj = {};
+    if (this.paginator) {
+      paginationObj = {
+        pageNumber: this.paginator ? this.paginator.pageIndex + 1 : 1, limit: this.paginator ? this.paginator.pageSize : 10,
+        sort: {order: ''}};
+    } else {
+      paginationObj = {
+        pageNumber: 1, limit: 10,
+        sort: {order: ''}};
+    }
 
     this.postService.getPostByPostType('appointment', this.authService.loggedInUser._id, paginationObj).subscribe((data) => {
       this.dataSource.data = data.posts;

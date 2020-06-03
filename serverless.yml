@@ -32,7 +32,7 @@ custom:
     types:
       - '*/*'
   customDomain:
-    domainName: ${self:service}.codemarket.io
+    domainName: ${self:provider:stage}.codemarket.io
     basePath: ''
     certificateName: 'codemarket.io'
     createRoute53Record:	false

@@ -5,15 +5,9 @@ import { PostService } from '../../services/post.service';
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/internal/operators/map';
-<<<<<<< HEAD
-import { Post } from '../../models/post.model';
-import { throttleTime, mergeMap, scan, tap } from 'rxjs/operators';
-import { MatDrawer } from '@angular/material';
-=======
 import { throttleTime, mergeMap, scan, tap, first } from 'rxjs/operators';
 import { MatDrawer } from '@angular/material';
 import { AuthService } from '../../../core/services/auth.service';
->>>>>>> 345937bb8b4542e1fa25846426281a9fccb72c05
 
 @Component({
   selector: 'app-chat-full-ui',

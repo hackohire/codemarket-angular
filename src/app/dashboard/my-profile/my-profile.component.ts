@@ -252,46 +252,6 @@ export class MyProfileComponent implements OnInit {
     });
   }
 
-  createTabs() {
-    // this.navLinks = [ ];
-
-    // If user is visiting somebody else's profile don't show what other user has bought
-    if (!this.authorId) {
-      this.navLinks.push(
-        {
-          path: 'purchased-items-list',
-          label: 'Buy'
-        },
-        {
-          path: 'products-list',
-          label: 'Sell'
-        },
-        {
-          path: 'membership-list',
-          label: 'Membership'
-        },
-        {
-          path: 'my-rsvp',
-          label: 'My RSVP'
-        }
-      );
-      // this.router.navigate(['purchased-items-list'], { relativeTo: this.activatedRoute });
-    } else {
-      this.navLinks.push(
-        {
-          path: 'products-list',
-          label: 'Sell'
-        },
-        {
-          path: 'post-list',
-          label: 'Request Help',
-          queryParams: { type: PostType.HelpRequest, all: false }
-        },
-      );
-      // this.router.navigate(['products-list'], { relativeTo: this.activatedRoute });
-    }
-  }
-
   fromNow(date) {
     const d = moment(date).isValid() ? date : new Date(+date);
     return moment(d).fromNow();

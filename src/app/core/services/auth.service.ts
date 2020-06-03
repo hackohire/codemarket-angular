@@ -19,6 +19,7 @@ import { ToastrService } from 'ngx-toastr';
 import { TransferState, makeStateKey } from '@angular/platform-browser';
 import { MessageService } from '../../shared/services/message.service';
 import { NotificationService } from '../../auth/notification.service';
+import moment from 'moment';
 
 export interface NewUser {
   email: string;
@@ -41,7 +42,7 @@ export class AuthService {
   openAuthenticationPopover = new BehaviorSubject<boolean>(false);
   subscriptions$ = new Subscription();
 
-  navigationPostList$ = new BehaviorSubject(null);
+  navigationPostList$ = new BehaviorSubject([]);
   postUpdateCount = 0;
   selectedPostId = '';
 
@@ -223,7 +224,7 @@ export class AuthService {
           // audio.play();
           // this.messageService.addNewMessage(u.onCommentAdded);
           // this.openToastrNotification(u.post, u.onCommentAdded, true);
-          u.postUpdated.post['isLatest'] = this.selectedPostId !== u.postUpdated.post._id;
+          u.postUpdated.post['isLatest'] = true;
           const i = this.navigationPostList$.value.findIndex(p => p._id === u.postUpdated.post._id);
 
           if (i > -1) {
@@ -376,6 +377,20 @@ export class AuthService {
         return d.data.generateCkEditorToken;
       })
     );
+  }
+
+  getDate(d: string) {
+    return moment(d).isValid() ? d : new Date(+d);
+  }
+
+  fromNow(date) {
+    const d = moment(date).isValid() ? date : new Date(+date);
+    return moment(d).fromNow();
+  }
+
+  timeDifference(date) {
+    const a = moment(date).isValid() ? date : new Date(+date);
+    return moment(a).calendar();
   }
 
 }

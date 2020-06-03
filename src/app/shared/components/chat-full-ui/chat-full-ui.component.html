@@ -15,14 +15,16 @@
         </div>
       </div> -->
       <div class="post-list">
-        <!-- <div class="card-header">
+        <div class="card-header">
           <div class="input-group">
-            <input type="text" placeholder="Search..." name="" class="form-control search">
-            <div class="input-group-prepend">
-              <span class="input-group-text search_btn"><i class="float-right material-icons">search</i></span>
-            </div>
+            <input [(ngModel)]="searchString" type="text" placeholder="Search..." name="" class="form-control search"
+              #searchInput>
+            <!-- <div class="input-group-prepend">
+              <span class="input-group-text search_btn" (click)="loadBatch(0)"><i
+                  class="float-right material-icons">search</i></span>
+            </div> -->
           </div>
-        </div> -->
+        </div>
 
         <ng-container *ngIf="authService?.navigationPostList$ | async as posts">
 
@@ -39,14 +41,15 @@
               </div>
 
               <div class="col-10 p-0 vertical-align-center">
-                <div class="post-name pl-4">
+                <div class="post-name pl-3 pr-3">
 
                   <p class="font-weight-500 overflow-text" data-toggle="tooltip" [title]="post?.name">
                     {{post?.name}}
                   </p>
 
                   <div class="">
-                    <span class="date-time font-weight-500">{{post?.lastMessage ? post.lastMessage : post?.type}}</span>
+                    <span class="date-time font-weight-500">{{post?.lastMessage ? post.lastMessage : post?.type}} |
+                      <span>{{authService.timeDifference(post?.updatedAt)}}</span></span>
                     <span *ngIf="post?.count > 0"
                       class="float-right badge-pill badge-danger">{{post?.count > 0 ? post?.count : ''}}</span>
                   </div>

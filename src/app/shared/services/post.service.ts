@@ -198,12 +198,12 @@ export class PostService {
     );
   }
 
-  getAllPosts(pageOptions, type, reference = null, companyId = '', connectedWithUser = '', createdBy = ''): Observable<{ posts: Post[], total: number }> {
+  getAllPosts(pageOptions, type, reference = null, companyId = '', connectedWithUser = '', createdBy = '', searchString = ""): Observable<{ posts: Post[], total: number }> {
     return this.apollo.query(
       {
         query: gql`
-          query getAllPosts($pageOptions: PageOptionsInput, $type: String, $reference: ReferenceObject, $companyId: String, $connectedWithUser: String, $createdBy: String) {
-            getAllPosts(pageOptions: $pageOptions, type: $type, reference: $reference, companyId: $companyId, connectedWithUser: $connectedWithUser, createdBy: $createdBy) {
+          query getAllPosts($pageOptions: PageOptionsInput, $type: String, $reference: ReferenceObject, $companyId: String, $connectedWithUser: String, $createdBy: String, $searchString: String) {
+            getAllPosts(pageOptions: $pageOptions, type: $type, reference: $reference, companyId: $companyId, connectedWithUser: $connectedWithUser, createdBy: $createdBy, searchString: $searchString) {
               posts {
                 ...Post
               }
@@ -218,7 +218,8 @@ export class PostService {
           reference: reference ? reference : null,
           companyId,
           connectedWithUser,
-          createdBy
+          createdBy,
+          searchString
         },
         fetchPolicy: 'no-cache'
       }
@@ -344,7 +345,7 @@ export class PostService {
       }),
     );
   }
-  
+
   closeNavigationIfMobile(drawer) {
     if (drawer && window.innerWidth < 768) {
       drawer.toggle();

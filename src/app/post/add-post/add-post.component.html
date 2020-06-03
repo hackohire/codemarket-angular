@@ -5,9 +5,26 @@
 </app-breadcumb>
 
 
-<div class="container MobilePadding">
+<div class="container">
     <div class="row">
-        <div class="col-md-8">
+
+        <!-- start aside -->
+        <div *ngIf="false" class="col-md-2 order-3 order-lg-1">
+            <!-- <app-add-post-menu style="color: #00aeef !important; margin-left: auto;">
+            </app-add-post-menu> -->
+            <app-post-type-nav (plusButtonClick)="redirectToAddPost($event)"></app-post-type-nav>
+
+        </div>
+
+        <div class="col-md-8 order-1 order-lg-2">
+            <div *ngIf="postType === 'appointment'">
+              <app-calender></app-calender>
+            </div>
+            <br>
+            <div class="alert alert-info text-center" *ngIf="postType === 'appointment' && slotDateTime">
+              Confirm Your Apointment
+              <strong>: {{ displayDate | date:'yyyy-MM-dd hh:mm a'}}</strong>
+            </div>
             <div [formGroup]="postForm" class="">
                 <!-- <mat-form-field class="field-full-width">
                     <input formControlName="name" matInput placeholder="Title" type="text">
@@ -19,16 +36,13 @@
                     [collection]="'users'" [multiple]="true"
                     [placeholder]="'Select Collaborators'" [type]="" class="field-full-width" matInput>
                 </app-autocomplete>
-
                 <app-autocomplete [autoComplete]="postForm?.get('companies')" [collection]="'companies'" [forCompany]="true"
                     [multiple]="true" [placeholder]="'Select Company'" [type]="" class="col-md-6">
                 </app-autocomplete>
-
                 <app-autocomplete class="field-full-width" [allowToAdd]="false"
                     [autoComplete]="postForm.get('clients')" [placeholder]="'Select Clients'" [collection]="'users'"
                     [type]="" [multiple]="true" matInput>
                 </app-autocomplete>
-
                 <app-autocomplete [autoComplete]="postForm?.get('tags')" [collection]="'tags'" [multiple]="true"
                 [placeholder]="'Tags'" [type]="'tag'"></app-autocomplete> -->
 
@@ -60,7 +74,8 @@
 
                 <div *ngIf="false" fxLayout="row" fxLayoutGap="10px">
                     <button type="button" (click)="submit('UnpubliDraftedhed')" [disabled]="postForm?.invalid"
-                        mat-raised-button style="background-color: #28a745; color: white; margin-right: 5px;">{{ 'Save' }}</button>
+                        mat-raised-button
+                        style="background-color: #28a745; color: white; margin-right: 5px;">{{ 'Save' }}</button>
                     <button type="button" (click)="submit('Published', descriptionEditor)"
                         [disabled]="postForm?.invalid" mat-raised-button color="primary">{{ 'Publish' }}</button>
                     <button type="button" (click)="cancelClicked()" mat-raised-button
@@ -68,10 +83,9 @@
                 </div>
 
             </div>
-
         </div>
 
-        <div class="col-md-4 sidebar">
+        <div class="col-md-4 sidebar order-2 order-lg-3">
             <div class="col-md-12 col-sm-12">
                 <ul class="row infos">
                     <li *ngIf="true">
@@ -84,7 +98,8 @@
                         <mde-popover #addTagsPopover="mdePopover" [mdePopoverOverlapTrigger]="false"
                             [mdePopoverCloseOnClick]="false" [mdePopoverArrowOffsetX]="8"
                             mdePopoverArrowColor="#FFFFFF">
-                            <div style="background: #fff; padding: 10px;border: 1px solid #ccc;margin-top: -10px;box-shadow: 0 0 10px 0 #aaa;">
+                            <div
+                                style="background: #fff; padding: 10px;border: 1px solid #ccc;margin-top: -10px;box-shadow: 0 0 10px 0 #aaa;">
                                 <app-autocomplete [autoComplete]="postForm?.get('tags')" [collection]="'tags'"
                                     [multiple]="true" [placeholder]="'Tags'" [type]="'tag'"></app-autocomplete>
                                 <mat-icon>send</mat-icon>
@@ -102,13 +117,15 @@
                                     <img [src]="t?.avatar ? ((s3FilesBucketURL + t?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
                                         alt="">{{t?.name}}</span>
                             </a>
-                            <span style="margin: 7px 0 0 5px; color: black;" [mdePopoverTriggerFor]="addCollaboratorsPopover"
-                                mdePopoverTriggerOn="click"><i class="fa fa-plus-square" aria-hidden="true"></i></span>
+                            <span style="margin: 7px 0 0 5px; color: black;"
+                                [mdePopoverTriggerFor]="addCollaboratorsPopover" mdePopoverTriggerOn="click"><i
+                                    class="fa fa-plus-square" aria-hidden="true"></i></span>
 
                             <mde-popover #addCollaboratorsPopover="mdePopover" [mdePopoverOverlapTrigger]="false"
                                 [mdePopoverCloseOnClick]="false" [mdePopoverArrowOffsetX]="8"
                                 mdePopoverArrowColor="#FFFFFF">
-                                <div style="background: #fff; padding: 10px;border: 1px solid #ccc;margin-top: 0px;box-shadow: 0 0 10px 0 #aaa;">
+                                <div
+                                    style="background: #fff; padding: 10px;border: 1px solid #ccc;margin-top: 0px;box-shadow: 0 0 10px 0 #aaa;">
                                     <app-autocomplete class="field-full-width" [allowToAdd]="false"
                                         [autoComplete]="postForm?.get('collaborators')"
                                         [placeholder]="'Select Collaborators'" [collection]="'users'" [type]=""
@@ -137,7 +154,8 @@
                         <mde-popover #addClientsPopover="mdePopover" [mdePopoverOverlapTrigger]="false"
                             [mdePopoverCloseOnClick]="false" [mdePopoverArrowOffsetX]="8"
                             mdePopoverArrowColor="#FFFFFF">
-                            <div style="background: #fff; padding: 10px;border: 1px solid #ccc;margin-top: -10px;box-shadow: 0 0 10px 0 #aaa;">
+                            <div
+                                style="background: #fff; padding: 10px;border: 1px solid #ccc;margin-top: -10px;box-shadow: 0 0 10px 0 #aaa;">
                                 <app-autocomplete class="field-full-width" [allowToAdd]="false"
                                     [autoComplete]="postForm?.get('clients')" [placeholder]="'Select Clients'"
                                     [collection]="'users'" [type]="" [multiple]="true" matInput>
@@ -158,7 +176,8 @@
                         <mde-popover #addCopmaniesPopover="mdePopover" [mdePopoverOverlapTrigger]="false"
                             [mdePopoverCloseOnClick]="false" [mdePopoverArrowOffsetX]="8"
                             mdePopoverArrowColor="#FFFFFF">
-                            <div style="background: #fff; padding: 10px;border: 1px solid #ccc;margin-top: -10px;box-shadow: 0 0 10px 0 #aaa;">
+                            <div
+                                style="background: #fff; padding: 10px;border: 1px solid #ccc;margin-top: -10px;box-shadow: 0 0 10px 0 #aaa;">
                                 <app-autocomplete [autoComplete]="postForm?.get('companies')" [collection]="'companies'"
                                     [forCompany]="true" [multiple]="true" [placeholder]="'Select Company'" [type]="">
                                 </app-autocomplete>
@@ -168,6 +187,17 @@
                     </li>
                 </ul>
             </div>
+            <div class="col-xs-12 col-sm-12 time-slot-wrapper" *ngIf="postType === 'appointment'">
+                <div *ngIf="slotList.length > 0; else noSlotSelected;">
+                  <div class="col-6 slot-btn" [ngClass]="{ 'slot-select-box': ((slotDateTime) && slot === slotDateTime) }" 
+                    (click)="selectedSlot(slot)" *ngFor="let slot of slotList">
+                    {{slot}}
+                  </div>
+                </div>
+                <ng-template class="no-slot" #noSlotSelected>
+                  <span>Please Select Date</span>
+                </ng-template>
+              </div>
         </div>
     </div>
 </div>

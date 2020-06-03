@@ -1,8 +1,31 @@
+cdk-virtual-scroll-viewport {
+  height: 84vh;
+
+  .post-card {
+    height: 76px;
+  }
+
+  // // Bonus points
+  // &::-webkit-scrollbar {
+  //   width: 1em;
+  // }
+
+  // &::-webkit-scrollbar-track {
+  //   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  // }
+
+  // &::-webkit-scrollbar-thumb {
+  //   background-color: rgb(238, 169, 79);
+  // }
+}
+
+
+
 #chat-full-ui {
   background-color: #fff;
   border-radius: 10px;
   border: none;
-  margin-top: 10px;
+  // margin-top: 10px;
 
   .chat-container {
     .chat-list-header {
@@ -41,9 +64,12 @@
         }
       }
 
-      .active-chat {
+      .updated-post {
         border-right: 3px solid #212121;
         background-color: #eceff1;
+      }
+      .selected-post {
+        background-color: #9e9e9e99;
       }
       .post-name {
         display: grid;

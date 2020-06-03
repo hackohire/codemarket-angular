@@ -17,13 +17,10 @@ export enum PostType {
   Contact = 'contact',
   Business = 'business',
   Blog = 'blog',
-
   Assignment = 'assignment',
-
   Email = 'email',
-
   Note = 'note',
-
   Question = 'question',
-  Forms = 'forms'
+  Forms = 'forms',
+  Appointment = 'appointment'
 }

@@ -1,6 +1,15 @@
 :host ::ng-deep {
     .ck.ck-toolbar {
-        top: 137px !important;
+        top: 145px !important;
+    }
+
+    .docs-component-viewer-nav.common-box-shadow {
+        margin-top: 1px;
+        top: 145px;
+    }
+
+    .docs-component-viewer-nav-content {
+        max-height: 70vh;
     }
 
     .breadcrumb-area {
@@ -39,8 +48,7 @@
     }
 
     .sidebar {
-        top: 135px !important;
-        position: -webkit-sticky;
+        top: 145px !important;
         position: sticky;
         display: block;
         height: -webkit-fill-available;
@@ -48,10 +56,16 @@
     }
 
     @media (max-width: 767px) {
+        .sidebar {
+            top: 0 !important;
+            position: relative;
+            margin-bottom: 50px;
+            z-index: 0;
+        }
         .breadcrumb-area {
-            z-index: 18 !important;
-            top: 96px !important;
-            position: fixed !important;
+            // z-index: 18 !important;
+            top: 0 !important;
+            position: relative !important;
             width: 100% !important;
             background: #fff !important;
         }
@@ -63,13 +77,10 @@
             border-bottom: 1px solid #ccc;
             margin-top: 10px !important;
         }
-        .MobilePadding {
-            padding: 142px 15px 15px;
-        }
         .ck.ck-toolbar {
-            position: fixed !important;
-            top: 196px !important;
-            width: calc(100% - 30px);
+            position: sticky !important;
+            top: 45px !important;
+            z-index: 20;
         }
         .ck.ck-toolbar.ck-toolbar_grouping>.ck-toolbar__items {
             overflow-x: auto;
@@ -117,6 +128,41 @@
         height: 20px;
         margin-right: 5px;
         vertical-align: middle;
+    }
+}
+
+.time-slot-wrapper {
+    height: calc(100vh - 50vh);
+    overflow: auto;
+    margin-top: 30px;
+    text-align: center;
+    cursor: pointer;
+
+    .slot-btn {
+      width: 40%;
+      text-align: center;
+      color: var(--primary-color, #00a2ff);
+      border: 1px solid var(--primary-color-level2, rgba(0, 162, 255, 0.5));
+      position: relative;
+      display: inline-block;
+      padding: 10px 7px;
+      margin: 5px 7px;
+      font-weight: 600;
+      vertical-align: top;
+      border-radius: 4px;
+      &:hover {
+        border-color: var(--primary-color, rgb(0, 162, 255));
+        border-width: 1px;
+      }
+    }
+
+    .slot-select-box {
+        border-color: #23417b !important;
+      }
+
+    span {
+        font-size: 22px;
+        color: #00a2ff;
     }
 }
 

@@ -17,17 +17,12 @@ export class BreadcumbComponent implements OnInit {
 
   @Input() title: string;
   @Input() path: [];
-  @Input() eventDate: [];
   @Input() postDetails;
   @Input() companyDetails: Company;
   @Input() color = 'white';
   @Input() showMenu = true;
   @Input() showImportButton = false;
   @Input() showEditPostDetails: boolean;
-  @Input() showAddCollaborators: boolean;
-  @Input() showAddAssignee: boolean;
-  @Input() showAddClients: boolean;
-  @Input() showShareButtons: boolean;
   @Input() fromAddPost = false;
   @Input() inline = false;
   @Input() postForm: FormGroup;
@@ -35,8 +30,6 @@ export class BreadcumbComponent implements OnInit {
   @Input() postActions = false;
 
   @Output() editPost = new EventEmitter();
-
-  @Output() addPostData = new EventEmitter();
 
   @Output() saveOrSubmitPost = new EventEmitter();
 
@@ -46,14 +39,8 @@ export class BreadcumbComponent implements OnInit {
 
   displaySave = false;
 
-  public emptyPostForm: FormGroup;
-
   public name;
 
-  @ViewChild(MdePopoverTrigger, { static: false }) addTagsPopover: MdePopoverTrigger;
-  @ViewChild(MdePopoverTrigger, { static: false }) addCopmaniesPopover: MdePopoverTrigger;
-  @ViewChild(MdePopoverTrigger, { static: false }) addClientsPopover: MdePopoverTrigger;
-  @ViewChild(MdePopoverTrigger, { static: false }) addCollaboratorsPopover: MdePopoverTrigger;
 
   anonymousAvatar = '../../../../assets/images/anonymous-avatar.jpg';
   s3FilesBucketURL = environment.s3FilesBucketURL;
@@ -66,7 +53,6 @@ export class BreadcumbComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log("Thisi is inline ==> ", this.inline);
   }
 
   import() {
@@ -78,12 +64,6 @@ export class BreadcumbComponent implements OnInit {
         h.contentHtml += `<b>Source: </b><a target="_blank" href="${this.articleLink.value}">${this.articleLink.value}</a>`
         this.postService.contentFromAnotherArticle.next(h.contentHtml);
       });
-  }
-
-  onContentChange(event: any) {
-    let a = document.getElementById('test').innerHTML;
-    this.postTitle = a;
-    this.postForm.get('name').setValue(this.postTitle.replace(/\&nbsp;/g, ''));
   }
 
   myFunction(event) {
@@ -106,71 +86,6 @@ export class BreadcumbComponent implements OnInit {
         }
       });
     }
-  }
-
-  addDataOfPost(data) {
-    const postObj = {
-      _id: this.postDetails._id,
-    };
-    if (data === 'tags') {
-      postObj['tags'] = this.postForm.controls.tags.value;
-      this.postService.updatePost(
-        postObj,
-        { name: this.authService.loggedInUser.name, _id: this.authService.loggedInUser._id }
-      ).subscribe((j) => {
-        if (j) {
-          this.postDetails.tags = j.tags;
-          this.addTagsPopover.closePopover();
-        }
-      });
-    }
-
-    if (data === 'companies') {
-      postObj['companies'] = this.postForm.controls.companies.value;
-      this.postService.updatePost(
-        postObj,
-        { name: this.authService.loggedInUser.name, _id: this.authService.loggedInUser._id }
-      ).subscribe((j) => {
-        if (j) {
-          this.postDetails.companies = j.companies;
-          this.addCopmaniesPopover.closePopover();
-        }
-      });
-    }
-
-    if (data === 'clients') {
-      postObj['clients'] = this.postForm.controls.clients.value;
-      this.postService.updatePost(
-        postObj,
-        { name: this.authService.loggedInUser.name, _id: this.authService.loggedInUser._id }
-      ).subscribe((j) => {
-        if (j) {
-          this.postDetails.clients = j.clients;
-          this.addClientsPopover.closePopover();
-        }
-      });
-    }
-
-    if (data === 'collaborators') {
-      postObj['collaborators'] = this.postForm.controls.collaborators.value;
-      this.postService.updatePost(
-        postObj,
-        { name: this.authService.loggedInUser.name, _id: this.authService.loggedInUser._id }
-      ).subscribe((j) => {
-        if (j) {
-          this.postDetails.collaborators = j.collaborators;
-          this.addCollaboratorsPopover.closePopover();
-        }
-      });
-    }
-  }
-
-  displayData(data) {
-    this.addPostData.emit(this.postForm.value);
-  }
-
-  doNothing(event) {
-    console.log("Do nothing called,", event);
   }
 
   allowUsersEdit = () => {

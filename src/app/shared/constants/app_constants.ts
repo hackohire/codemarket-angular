@@ -302,6 +302,8 @@ export const appConstants = {
       website
 
       descriptionHTML
+      appointment_date
+      cancelReason
       activities {
         action
         activityDate
@@ -319,6 +321,7 @@ export const appConstants = {
 
   postTypesArray: [
     { name: PostType.Assignment, label: 'Assignment' },
+    { name: PostType.Appointment, label: 'Appointment' },
     { name: PostType.Blog, label: 'Blog' },
     { name: PostType.Bug, label: 'Bug' },
     { name: PostType.Business, label: 'Business' },
@@ -338,6 +341,6 @@ export const appConstants = {
     { name: PostType.Requirement, label: 'Requirement' },
     { name: PostType.Service, label: 'Service' },
     { name: PostType.Testing, label: 'Testing' },
-    { name: PostType.Forms, label: 'Forms' }
+    { name: PostType.Forms, label: 'Forms' },
   ],
 };

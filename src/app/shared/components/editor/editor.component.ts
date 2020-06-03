@@ -1,13 +1,11 @@
 import { Component, OnInit, EventEmitter, Output, Input, OnDestroy, ViewChild, ElementRef, Inject, PLATFORM_ID, AfterViewInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { appConstants } from '../../constants/app_constants';
 import { FormGroup, FormControl } from '@angular/forms';
 import { AuthService } from '../../../core/services/auth.service';
 import { CommentService } from '../../services/comment.service';
 import { Post } from '../../models/post.model';
 import { Comment } from '../../models/comment.model';
 import { isPlatformBrowser } from '@angular/common';
-const path = require('path');
 import { PostService } from '../../services/post.service';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
@@ -112,7 +110,7 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
 
   commentForm: FormGroup;
 
-  extensions = new Set(appConstants.imageExtenstions);
+  isFirstTime = true;
 
   constructor(
     public authService: AuthService,
@@ -197,7 +195,7 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
 
   refreshDisplayMode = (editor, sidebar) => {
     if (this.ckEditorUserToken) {
-      editor.config.set('toolbar', {items: ['comment']});
+      editor.config.set('toolbar', { items: ['comment'] });
       this.setToolbar(editor);
       const annotations = editor.plugins.get('Annotations');
       const sidebarElement = sidebar;
@@ -222,7 +220,6 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   myCustomUploadAdapterPlugin(editor) {
-    console.log(editor.plugins);
     editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
       // Configure the URL to the upload script in your back-end here!
       return new CustomUploadAdapter(loader);
@@ -240,7 +237,6 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   async addComment(blockId: string, addCommentEditor: EditorComponent) {
-    console.log(this.commentForm.value);
     if (this.authService.loggedInUser) {
       const blocks = await addCommentEditor.editor.save();
       this.commentForm.get('text').setValue(blocks.blocks);
@@ -260,7 +256,7 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
 
   /** Check if media is image */
   isImage(filePath: string) {
-    return filePath && this.extensions.has(path.extname(filePath).slice(1).toLowerCase());
+    // return filePath && this.extensions.has(path.extname(filePath).slice(1).toLowerCase());
   }
 
   /** Return Number of comments for that block */
@@ -280,7 +276,12 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   autosave = (editor) => {
-    return this.postService.updatePostContent({ descriptionHTML: editor.getData(), _id: this.post._id }).toPromise();
+    if (this.isFirstTime) {
+      this.isFirstTime = false
+      return Promise.resolve(true);
+    } else {
+      return this.postService.updatePostContent({ descriptionHTML: editor.getData(), _id: this.post._id }).toPromise();
+    }
   }
 
   allowUsersEdit = () => {

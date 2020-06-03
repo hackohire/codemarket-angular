@@ -1,10 +1,19 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../core/services/auth.service';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import Swal from 'sweetalert2';
-import { FormBuilderService } from '../form-builder/form-builder.service';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { AppState } from '../core/store/state/app.state';
+import { Observable } from 'rxjs';
+import { Product } from '../shared/models/product.model';
+import { MatTableDataSource } from '@angular/material/table';
+import { HelpQuery } from '../shared/models/help-query.model';
+import { MatSort } from '@angular/material';
+import { UserService } from '../user/user.service';
 import { PostService } from '../shared/services/post.service';
-import { environment } from '../../environments/environment';
+import { AuthService } from '../core/services/auth.service';
+import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
+import { ActivatedRoute } from '@angular/router';
+import { MembershipService } from '../membership/membership.service';
+import { Email } from '../shared/models/email.model';
+import { EmailValidator } from '@angular/forms';
 
 @Component({
   selector: 'app-dashboard',
@@ -20,16 +29,16 @@ export class DashboardComponent implements OnInit {
   msbapDisplayVolumeControls = true;
 
   constructor(
+    private userService: UserService,
     public postService: PostService,
     public authService: AuthService,
-    private formBuilderService: FormBuilderService
+    private membershipService: MembershipService,
+    private activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit() {
   }
 
-  convertObjectToArray(d) {
-    return Object.keys(d);
-  }
+  // const params = this.activatedRoute.snapshot.queryParams;
 
 }

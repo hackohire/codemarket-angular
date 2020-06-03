@@ -280,6 +280,8 @@ export class CompanyService {
                 createdAt
                 subject
                 descriptionHTML
+                isReplied
+                repliedHTML
                 tracking {
                   eventType
                   open {

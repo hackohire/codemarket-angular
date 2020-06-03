@@ -86,24 +86,33 @@
 								<router-outlet></router-outlet>
 							</div>
 
-							<div *ngIf="profileView === 'files'">
-								<ng-container
-									*ngTemplateOutlet="filesList; context: {details: selectedPost, files: files}">
-								</ng-container>
-							</div>
+							<!-- POST EDITOR ENDS HERE -->
+							<div class="row">
+								<div [ngClass]="selectedBlock ? 'col-md-8 col-lg-8' : 'col-lg-12 col-md-12'">
+									<!-- {{profileView}} -->
+									<div *ngIf="profileView === navLinkName.buy">
+										<router-outlet></router-outlet>
+									</div>
 
-							<div *ngIf="profileView === navLinkName.sell">
-								<router-outlet></router-outlet>
-							</div>
+									<div *ngIf="profileView === 'files'">
+										<ng-container
+											*ngTemplateOutlet="filesList; context: {details: selectedPost, files: files}">
+										</ng-container>
+									</div>
 
-							<div *ngIf="profileView === navLinkName.membership">
-								<router-outlet></router-outlet>
-							</div>
+									<div *ngIf="profileView === navLinkName.sell">
+										<router-outlet></router-outlet>
+									</div>
 
-							<div *ngIf="profileView === navLinkName.myrsvp">
-								<router-outlet></router-outlet>
-							</div>
+									<div *ngIf="profileView === navLinkName.membership">
+										<router-outlet></router-outlet>
+									</div>
 
+									<div *ngIf="profileView === navLinkName.myrsvp">
+										<router-outlet></router-outlet>
+									</div>
+
+<<<<<<< HEAD
 							<!-- Showing the list of posts for the posts tab, everytime user clicks on the "load more", we increase the page number and call
 														fetchAllOtherPosts method to fetch subsequent posts -->
 							<ng-container *ngIf="profileView === navLinkName.posts">
@@ -117,135 +126,169 @@
 									(fetchData)="paginator = $event; fetchAllOtherPosts()">
 								</app-paginator>
 							</ng-container>
+=======
+									<!-- Showing the list of posts for the posts tab, everytime user clicks on the "load more", we increase the page number and call
+														fetchAllOtherPosts method to fetch subsequent posts -->
+									<ng-container *ngIf="profileView === navLinkName.posts">
+										<div class="">
+											<app-brief-post style="width: 100%;" [p]="e"
+												*ngFor="let e of listOfAllOtherPosts?.posts"
+												(showComments)="showCommentsOnSide($event)" [readMore]="true">
+											</app-brief-post>
+										</div>
+										<app-paginator [length]="totalOtherPosts"
+											(fetchData)="paginator = $event; fetchAllOtherPosts()">
+										</app-paginator>
+									</ng-container>
+>>>>>>> 345937bb8b4542e1fa25846426281a9fccb72c05
 
-							<!-- Show list of the posts based on post type -->
-							<ng-container *ngFor="let p of postTypesArray">
-								<ng-container *ngIf="profileView === p.name">
-									<div class="item-grid pen-grid item-grid-large">
-										<app-brief-post style="width: 100%;" [p]="e"
-											*ngFor="let e of listOfAllOtherPosts?.posts"
-											(showComments)="showCommentsOnSide($event)" [readMore]="true">
-										</app-brief-post>
-									</div>
+									<!-- Show list of the posts based on post type -->
+									<ng-container *ngFor="let p of postTypesArray">
+										<ng-container *ngIf="profileView === p.name">
+											<div class="item-grid pen-grid item-grid-large">
+												<app-brief-post style="width: 100%;" [p]="e"
+													*ngFor="let e of listOfAllOtherPosts?.posts"
+													(showComments)="showCommentsOnSide($event)" [readMore]="true">
+												</app-brief-post>
+											</div>
 
-									<app-paginator [length]="totalOtherPosts"
-										(fetchData)="paginator = $event; fetchAllOtherPosts(p.name)">
-									</app-paginator>
-								</ng-container>
-							</ng-container>
+											<app-paginator [length]="totalOtherPosts"
+												(fetchData)="paginator = $event; fetchAllOtherPosts(p.name)">
+											</app-paginator>
+										</ng-container>
+									</ng-container>
 
-							<div *ngIf="profileView === navLinkName?.info && (userData$) | async as user">
-								<div class="col-lg-12 col-md-12">
-									<aside class="common-box-shadow sidebar sidebar_author">
-										<div class="author-card sidebar-card">
-											<div class="author-infos">
-												<div class="author_avatar">
-													<img [src]="user?.avatar ? ((s3FilesBucketURL + user.avatar) | safe: 'resourceUrl') : anonymousAvatar"
-														alt="Presenting the broken author avatar :D">
-												</div>
+									<div *ngIf="profileView === navLinkName?.info && (userData$) | async as user">
+										<div class="col-lg-12 col-md-12">
+											<aside class="common-box-shadow sidebar sidebar_author">
+												<div class="author-card sidebar-card">
+													<div class="author-infos">
+														<div class="author_avatar">
+															<img [src]="user?.avatar ? ((s3FilesBucketURL + user.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+																alt="Presenting the broken author avatar :D">
+														</div>
 
-												<div class="author">
-													<h4>{{user?.name}}</h4>
-													<button
-														*ngIf="authorId && authService?.loggedInUser?._id && authService?.loggedInUser?._id !== authorId"
-														(click)="openDialog()" mat-mini-fab color="primary">
-														<mat-icon>video_call</mat-icon>
-													</button>
-													<p>On platform since {{user?.createdAt | date}}</p>
-												</div>
-												<!-- end /.author -->
-
-
-												<div class="social social--color--filled">
-													<ul>
-														<li style="margin: 5px; color: initial">
-															<a [href]="user?.linkedin_url">
-																<i style="font-size: 1.7rem !important;"
-																	class="fab fa-linkedin"></i>
-															</a>
-														</li>
-														<li style="margin: 5px">
-															<a [href]="user?.github_url">
-																<i style="font-size: 1.7rem !important;"
-																	class="fab fa-stack-overflow"></i>
-															</a>
-														</li>
-														<li style="margin: 5px">
-															<a [href]="user?.stackoverflow_url">
-																<i style="font-size: 1.7rem !important;"
-																	class="fab fa-github"></i>
-															</a>
-														</li>
-													</ul>
-												</div>
+														<div class="author">
+															<h4>{{user?.name}}</h4>
+															<button
+																*ngIf="authorId && authService?.loggedInUser?._id && authService?.loggedInUser?._id !== authorId"
+																(click)="openDialog()" mat-mini-fab color="primary">
+																<mat-icon>video_call</mat-icon>
+															</button>
+															<p>On platform since {{user?.createdAt | date}}</p>
+														</div>
+														<!-- end /.author -->
 
 
+														<div class="social social--color--filled">
+															<ul>
+																<li style="margin: 5px; color: initial">
+																	<a [href]="user?.linkedin_url">
+																		<i style="font-size: 1.7rem !important;"
+																			class="fab fa-linkedin"></i>
+																	</a>
+																</li>
+																<li style="margin: 5px">
+																	<a [href]="user?.github_url">
+																		<i style="font-size: 1.7rem !important;"
+																			class="fab fa-stack-overflow"></i>
+																	</a>
+																</li>
+																<li style="margin: 5px">
+																	<a [href]="user?.stackoverflow_url">
+																		<i style="font-size: 1.7rem !important;"
+																			class="fab fa-github"></i>
+																	</a>
+																</li>
+															</ul>
+														</div>
 
-												<ul class="infos">
-													<li>
-														<span class="data-label">Likes: </span>
-														<span class="info"
-															*ngIf="authService?.loggedInUser; else likeCount">
-															<app-like-dislike [data]="user" [type]="'user'"
-																[likeCount]="null">
-															</app-like-dislike>
-														</span>
-														<ng-template #likeCount>
-															<div class="info">
-																{{user?.likeCount}}
-															</div>
-														</ng-template>
-													</li>
-												</ul>
-												<!-- end /.social -->
 
+
+														<ul class="infos">
+															<li>
+																<span class="data-label">Likes: </span>
+																<span class="info"
+																	*ngIf="authService?.loggedInUser; else likeCount">
+																	<app-like-dislike [data]="user" [type]="'user'"
+																		[likeCount]="null">
+																	</app-like-dislike>
+																</span>
+																<ng-template #likeCount>
+																	<div class="info">
+																		{{user?.likeCount}}
+																	</div>
+																</ng-template>
+															</li>
+														</ul>
+														<!-- end /.social -->
+
+<<<<<<< HEAD
 												<!-- <div class="author-btn">
 																											<a href="#" class="btn btn--md btn--round">Follow</a>
 																									</div> -->
 												<!-- end /.author-btn -->
 											</div>
 											<!-- end /.author-infos -->
+=======
+														<!-- <div class="author-btn">
+																											<a href="#" class="btn btn--md btn--round">Follow</a>
+																									</div> -->
+														<!-- end /.author-btn -->
+													</div>
+													<!-- end /.author-infos -->
+												</div>
+												<!-- end /.author-card -->
+											</aside>
+>>>>>>> 345937bb8b4542e1fa25846426281a9fccb72c05
 										</div>
-										<!-- end /.author-card -->
-									</aside>
+									</div>
+
 								</div>
-							</div>
+								<div [ngClass]="selectedBlock ? 'col-md-4 col-lg-4' : ''">
+									<ng-container
+										*ngTemplateOutlet="addBlockLevelCommentTemplate; context: {details: selectedPost, comments: selectedPostComments | async}">
+									</ng-container>
+								</div>
 
-						</div>
-						<div [ngClass]="selectedBlock ? 'col-md-4 col-lg-4' : ''">
-							<ng-container
-								*ngTemplateOutlet="addBlockLevelCommentTemplate; context: {details: selectedPost, comments: selectedPostComments | async}">
-							</ng-container>
-						</div>
-
+<<<<<<< HEAD
 					</div>
 					<!-- POST EDITOR STARTS HERE -->
+=======
+							</div>
+							<!-- POST EDITOR STARTS HERE -->
+>>>>>>> 345937bb8b4542e1fa25846426281a9fccb72c05
 
-					<!-- POST EDITOR ENDS HERE -->
-					<!-- <mat-tab-group mat-align-tabs="center"> -->
-					<!-- <mat-tab label="Posts">
+							<!-- POST EDITOR ENDS HERE -->
+							<!-- <mat-tab-group mat-align-tabs="center"> -->
+							<!-- <mat-tab label="Posts">
 							
 						</mat-tab> -->
-					<!-- <mat-tab label="Chats">
+							<!-- <mat-tab label="Chats">
 					      <ng-template matTabContent>
 					        <app-chat-full-ui [loggedInUser]="authService?.loggedInUser" [postList]="listOfAllOtherPosts?.posts"></app-chat-full-ui>
 					      </ng-template>
 					    </mat-tab> -->
+<<<<<<< HEAD
 					<!-- </mat-tab-group> -->
+=======
+							<!-- </mat-tab-group> -->
+						</div>
+					</div>
+>>>>>>> 345937bb8b4542e1fa25846426281a9fccb72c05
 				</div>
+				<!-- </section> -->
 			</div>
-		</div>
-	</section>
-</div>
 
-<ng-template #addBlockLevelCommentTemplate let-cDetails="details" let-comments="comments">
-	<aside class="sidebar">
-		<app-comment-side-nav *ngIf="selectedBlock"
-			(closeCommentSideBar)="selectedBlock['__show'] = null; selectedBlock = null" [selectedBlock]="selectedBlock"
-			[selectedPost]="cDetails" [comments]="comments"></app-comment-side-nav>
-	</aside>
-</ng-template>
+			<ng-template #addBlockLevelCommentTemplate let-cDetails="details" let-comments="comments">
+				<aside class="sidebar">
+					<app-comment-side-nav *ngIf="selectedBlock"
+						(closeCommentSideBar)="selectedBlock['__show'] = null; selectedBlock = null"
+						[selectedBlock]="selectedBlock" [selectedPost]="cDetails" [comments]="comments">
+					</app-comment-side-nav>
+				</aside>
+			</ng-template>
 
-<ng-template #filesList let-cDetails="details" let-comments="files">
-	<app-editor [id]="f?._id" *ngFor="let f of files" [data]="[f]" [readOnly]="true"></app-editor>
-</ng-template>
+			<ng-template #filesList let-cDetails="details" let-comments="files">
+				<app-editor [id]="f?._id" *ngFor="let f of files" [data]="[f]" [readOnly]="true"></app-editor>
+			</ng-template>

@@ -6,7 +6,6 @@ import { map, catchError, tap } from 'rxjs/operators';
 import { of } from 'rxjs/internal/observable/of';
 import { CognitoUser, CognitoUserSession } from 'amazon-cognito-identity-js';
 import Auth from '@aws-amplify/auth';
-import { environment } from 'src/environments/environment';
 import { Store } from '@ngrx/store';
 import { AppState } from '../store/state/app.state';
 import { Authorise, SetLoggedInUser } from '../store/actions/user.actions';
@@ -15,14 +14,11 @@ import { Observable, BehaviorSubject, Subscription } from 'rxjs';
 import { User } from '../../shared/models/user.model';
 import { Router } from '@angular/router';
 import { isPlatformBrowser, DOCUMENT, isPlatformServer } from '@angular/common';
-import { comment } from '../../shared/constants/fragments_constatnts';
 import { appConstants } from '../../shared/constants/app_constants';
-import { Comment } from '../../shared/models/comment.model';
 import { ToastrService } from 'ngx-toastr';
 import { TransferState, makeStateKey } from '@angular/platform-browser';
 import { MessageService } from '../../shared/services/message.service';
 import { NotificationService } from '../../auth/notification.service';
-import Storage from '@aws-amplify/storage';
 
 export interface NewUser {
   email: string;
@@ -37,13 +33,19 @@ export interface NewUser {
 export class AuthService {
 
   /** Authentication Related Variables */
-  _authState: BehaviorSubject<CognitoUser|any> = new BehaviorSubject<CognitoUser|any>(null);
-  authState: Observable<CognitoUser|any> = this._authState.asObservable();
+  _authState: BehaviorSubject<CognitoUser | any> = new BehaviorSubject<CognitoUser | any>(null);
+  authState: Observable<CognitoUser | any> = this._authState.asObservable();
 
   loggedInUser$: Observable<User>;
   loggedInUser: User;
   openAuthenticationPopover = new BehaviorSubject<boolean>(false);
   subscriptions$ = new Subscription();
+
+  navigationPostList$ = new BehaviorSubject(null);
+  postUpdateCount = 0;
+  selectedPostId = '';
+
+  navigationPostListObservable: Observable<any[]>;
 
   constructor(
     private apollo: Apollo,
@@ -87,7 +89,7 @@ export class AuthService {
       const user = this.transferState.get(key, null);
       this.transferState.remove(key);
       if (user) {
-        // this.setUserOnline(user);
+        this.setUserOnline(user);
       }
       return of(user);
     }
@@ -148,7 +150,7 @@ export class AuthService {
           this.transferState.set(key, d.data.authorize);
         }
         if (d && d.data && d.data.authorize) {
-          // this.setUserOnline(d.data.authorize);
+          this.setUserOnline(d.data.authorize);
         }
         return d.data.authorize;
       }),
@@ -158,7 +160,7 @@ export class AuthService {
 
   /** Authentication Related Methods Starts here */
 
-  signUp(user: NewUser): Promise<CognitoUser|any> {
+  signUp(user: NewUser): Promise<CognitoUser | any> {
     return Auth.signUp({
       username: user.email,
       password: user.password,
@@ -169,12 +171,12 @@ export class AuthService {
     });
   }
 
-  signIn(username: string, password: string): Promise<CognitoUser|any> {
+  signIn(username: string, password: string): Promise<CognitoUser | any> {
     return new Promise((resolve, reject) => {
       Auth.signIn(username, password)
-      .then((user: CognitoUser|any) => {
-        resolve(user);
-      }).catch((error: any) => reject(error));
+        .then((user: CognitoUser | any) => {
+          resolve(user);
+        }).catch((error: any) => reject(error));
     });
   }
 
@@ -194,12 +196,14 @@ export class AuthService {
     const USER_SUBSCRIPTION = gql`
     subscription onUserOnline($user: UserInput) {
       onUserOnline(user: $user){
-        onCommentAdded {
-          ...Comments
+        postUpdated {
+          post {
+            ...Post
+          }
         }
       }
     }
-    ${comment}
+    ${appConstants.postQuery}
     `;
     this.apollo.subscribe({
       query: USER_SUBSCRIPTION,
@@ -213,13 +217,21 @@ export class AuthService {
     }).pipe(
       map((u: any) => u.data.onUserOnline),
       tap((u) => {
-        if (u.onCommentAdded) {
-
+        if (u.postUpdated && u.postUpdated.post) {
           /** Audio Notification */
-          var audio = new Audio(appConstants.Notification);
-          audio.play();
-          this.messageService.addNewMessage(u.onCommentAdded);
+          // var audio = new Audio(appConstants.Notification);
+          // audio.play();
+          // this.messageService.addNewMessage(u.onCommentAdded);
           // this.openToastrNotification(u.post, u.onCommentAdded, true);
+          u.postUpdated.post['isLatest'] = this.selectedPostId !== u.postUpdated.post._id;
+          const i = this.navigationPostList$.value.findIndex(p => p._id === u.postUpdated.post._id);
+
+          if (i > -1) {
+            this.navigationPostList$.value.splice(i, 1);
+          }
+          this.navigationPostList$.next([u.postUpdated.post, ...this.navigationPostList$.value]);
+
+          this.postUpdateCount = this.navigationPostList$.value.filter(p => p['isLatest']).length;
         }
       })
     )

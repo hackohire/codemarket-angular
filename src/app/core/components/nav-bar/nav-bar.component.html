@@ -1,17 +1,21 @@
 <mat-sidenav-container class="sidenav-container" autosize>
 
-  <mat-sidenav *ngIf="loggedInUser" #drawer class="sidenav" fixedInViewport
+  {{authService?.loggedInUser | json}}
+  <mat-sidenav *ngIf="authService?.loggedInUser" #drawer class="sidenav" fixedInViewport
     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'"
     [opened]="(isHandset$ | async) === false">
     <mat-toolbar
-      style="height: 48px; font-size: 14px; font-weight: 400; letter-spacing: 4px; text-transform: uppercase; color: #999; background: #eee;">
-      navigation <mat-icon (click)="drawer.toggle()">clear</mat-icon>
+      style="height: 48px; font-size: 14px; font-weight: 400; letter-spacing: 4px; text-transform: uppercase; color: #999; background: #eee;padding-right: 110px;place-content: inherit;">
+      <mat-icon (click)="drawer.toggle()" style="margin-right: 15px;">clear</mat-icon> navigation
+      {{'(' + authService.postUpdateCount + ')'}}
     </mat-toolbar>
+    <app-add-post-menu [label]="'Create'" style="position: absolute; top: 4px; right: 6px; z-index: 99;"
+      class="hidden-lg" [drawer]="drawer"></app-add-post-menu>
 
 
     <mat-nav-list class="pt-0">
 
-      <app-chat-full-ui [drawer]="drawer" [loggedInUser]="authService?.loggedInUser">
+      <app-chat-full-ui *ngIf="authService?.loggedInUser" [drawer]="drawer" [loggedInUser]="authService?.loggedInUser">
       </app-chat-full-ui>
 
     </mat-nav-list>
@@ -83,10 +87,11 @@
 
     </mat-toolbar>
 
-    <mat-toolbar class="NavBarBox">
+    <mat-toolbar class="NavBarBox" style="place-content: flex-start; padding-left: 5px;">
 
       <!-- Toggle Sidebar Button -->
-      <button *ngIf="true" type="button" aria-label="Toggle sidenav" mat-icon-button (click)="toggleNavbar()">
+      <button *ngIf="true" type="button" aria-label="Toggle sidenav" mat-icon-button (click)="toggleNavbar()"
+        style="margin-right: 5px;">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
 
@@ -130,8 +135,7 @@
         <div class="line-height-initial">Appointment</div>
       </a>
 
-      <app-add-post-menu [label]="'Create'">
-      </app-add-post-menu>
+      <app-add-post-menu [label]="'Create'" style="position: absolute; right: 7px; top: 2px;"></app-add-post-menu>
 
       <!-- <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'company', 'add-company']">
         <div class="line-height-initial"> Sales Accelerator </div>

@@ -189,7 +189,7 @@ export class MyProfileComponent implements OnInit {
   }
 
   deletePost(_id: string) {
-    this.postService.deletePost(_id, {name: this.authService.loggedInUser.name, _id: this.authService.loggedInUser.name}).subscribe();
+    this.postService.deletePost(_id, { name: this.authService.loggedInUser.name, _id: this.authService.loggedInUser.name }).subscribe();
   }
 
   ngOnInit() {
@@ -231,7 +231,7 @@ export class MyProfileComponent implements OnInit {
         ).subscribe()
       );
     }
-    
+
     this.userService.peer.asObservable().subscribe((p) => {
       if (p) {
         console.log(p);
@@ -345,7 +345,7 @@ export class MyProfileComponent implements OnInit {
     }
   }
 
-  showCommentsOnSide(event: { block: any, comments, selectedPost}) {
+  showCommentsOnSide(event: { block: any, comments, selectedPost }) {
     console.log(event);
     this.selectedBlock = event.block;
     this.selectedPostComments = event.comments;
@@ -361,7 +361,8 @@ export class MyProfileComponent implements OnInit {
     const userId = this.authorId ? this.authorId : this.authService.loggedInUser._id;
     const paginationObj = {
       pageNumber: this.paginator.pageIndex + 1, limit: this.paginator.pageSize ? this.paginator.pageSize : 10,
-      sort: {order: ''}};
+      sort: { order: '' }
+    };
     this.postService.getAllPosts(paginationObj, postType, '', '', userId, userId).subscribe((u) => {
       this.listOfAllOtherPosts.posts = u.posts;
       this.totalOtherPosts = u.total;
@@ -373,13 +374,10 @@ export class MyProfileComponent implements OnInit {
       case 'files':
         this.profileView = tab.name;
         this.selectedBlock = null;
-        this.fetchFilesUploadedByUser();
         break;
     }
   }
 
-  fetchFilesUploadedByUser() {
-  }
 
   addProfilePic() {
     this.profilePic.nativeElement.click();

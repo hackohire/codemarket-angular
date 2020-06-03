@@ -16,9 +16,8 @@ export const environment = {
   serverless_url: 'http://localhost:3200/dev/',
   graphql_url: 'http://localhost:3200/dev/graphql',
   s3FilesBucketURL: 'https://codemarket-files.s3.amazonaws.com/public/',
-  stripe_public_key: 'pk_live_EYCoYtpLszr802sOl89WeuW1',
-  // stripe_public_key: 'pk_test_ighmL2U9UqAx0O4b8dKkSvdq',
-  webSocketURL: 'wss://314t92s90a.execute-api.us-east-1.amazonaws.com/prod',
+  stripe_public_key: 'pk_test_ighmL2U9UqAx0O4b8dKkSvdq',
+  webSocketURL: 'ws://localhost:3001',
   planDetails: plans.dev,
   fileS3Bucket: 'manav-files',
   oauth: {

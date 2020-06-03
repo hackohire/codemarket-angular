@@ -12,6 +12,8 @@ import { AuthService } from '../core/services/auth.service';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { ActivatedRoute } from '@angular/router';
 import { MembershipService } from '../membership/membership.service';
+import { Email } from '../shared/models/email.model';
+import { EmailValidator } from '@angular/forms';
 
 @Component({
   selector: 'app-dashboard',
@@ -25,7 +27,20 @@ export class DashboardComponent implements OnInit {
   helpRequestList$: Observable<HelpQuery[]>;
   usersListAndTheirBugFixes$: Observable<[]>;
 
-  emailInput: string;
+  salesemailInput: string;
+  growsalesemailInput: string;
+  step1emailInput: string;
+  step2emailInput: string;
+  step3emailInput: string;
+  TwitteremailInput: string;
+  FacebookemailInput: string;
+  InstagramemailInput: string;
+  LinkedinemailInput: string;
+  YoutubeemailInput: string;
+  SnapchatemailInput: string;
+  PinterestemailInput: string;
+  MarketingemailInput: string;
+
 
   displayedColumnsForHelpRequest: string[] = ['number', 'name', 'price', 'createdBy', 'createdAt'];
   dataSource = new MatTableDataSource();

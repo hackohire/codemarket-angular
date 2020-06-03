@@ -129,9 +129,6 @@ export class AddPostComponent implements OnInit, AfterViewInit {
         }
       })
     );
-
-    // Subscribing calendar event
-    
   }
 
   redirectToAddPost(postType) {

@@ -1,16 +1,19 @@
-import { Component, OnInit, Input, ViewChild, ElementRef, AfterViewInit, HostListener } from '@angular/core';
-import { ChatService } from '../../services/chat.service';
-import * as Chat from 'twilio-chat';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import moment from 'moment';
-import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { environment } from '../../../../environments/environment';
 import { PostService } from '../../services/post.service';
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/internal/operators/map';
+<<<<<<< HEAD
 import { Post } from '../../models/post.model';
 import { throttleTime, mergeMap, scan, tap } from 'rxjs/operators';
 import { MatDrawer } from '@angular/material';
+=======
+import { throttleTime, mergeMap, scan, tap, first } from 'rxjs/operators';
+import { MatDrawer } from '@angular/material';
+import { AuthService } from '../../../core/services/auth.service';
+>>>>>>> 345937bb8b4542e1fa25846426281a9fccb72c05
 
 @Component({
   selector: 'app-chat-full-ui',
@@ -46,22 +49,25 @@ export class ChatFullUiComponent implements OnInit {
   scrolltop: number = null;
   s3FilesBucketURL = environment.s3FilesBucketURL;
   constructor(
-    private _chatService: ChatService,
-    public postService: PostService
+    public postService: PostService,
+    public authService: AuthService
   ) {
-    const batchMap = this.offset.pipe(
+  }
+
+  ngOnInit() {
+    this.offset.pipe(
       throttleTime(500),
       mergeMap((n) => this.getBatch(n)),
       scan((acc, batch: any) => {
         return { ...acc, ...batch };
       }, {}),
-      tap(() => this.drawer.open()),
-    );
-
-    this.infinite = batchMap.pipe(map(v => Object.values(v)));
-  }
-
-  ngOnInit() {
+      map(v => Object.values(v)),
+      tap(list => {
+        console.log(list);
+        this.drawer.open();
+        this.authService.navigationPostList$.next(list);
+      }),
+    ).subscribe();
   }
 
 
@@ -126,6 +132,15 @@ export class ChatFullUiComponent implements OnInit {
 
   trackByIdx(i) {
     return i;
+  }
+
+  onClickPost(post) {
+    this.postService.redirectToPostDetails(post);
+    if (post['isLatest']) {
+      this.authService.postUpdateCount--;
+    }
+    post['isLatest'] = false;
+    this.postService.closeNavigationIfMobile(this.drawer);
   }
 
 }

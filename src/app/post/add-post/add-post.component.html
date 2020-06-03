@@ -36,16 +36,13 @@
                     [collection]="'users'" [multiple]="true"
                     [placeholder]="'Select Collaborators'" [type]="" class="field-full-width" matInput>
                 </app-autocomplete>
-
                 <app-autocomplete [autoComplete]="postForm?.get('companies')" [collection]="'companies'" [forCompany]="true"
                     [multiple]="true" [placeholder]="'Select Company'" [type]="" class="col-md-6">
                 </app-autocomplete>
-
                 <app-autocomplete class="field-full-width" [allowToAdd]="false"
                     [autoComplete]="postForm.get('clients')" [placeholder]="'Select Clients'" [collection]="'users'"
                     [type]="" [multiple]="true" matInput>
                 </app-autocomplete>
-
                 <app-autocomplete [autoComplete]="postForm?.get('tags')" [collection]="'tags'" [multiple]="true"
                 [placeholder]="'Tags'" [type]="'tag'"></app-autocomplete> -->
 

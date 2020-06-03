@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, Input, ChangeDetectorRef, AfterViewInit, 
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Subscription } from 'rxjs';
+import { Subscription, BehaviorSubject } from 'rxjs';
 import moment from 'moment';
 import { AuthService } from '../../core/services/auth.service';
 import { AddPost, UpdatePost } from '../../core/store/actions/post.actions';
@@ -93,6 +93,7 @@ export class AddPostComponent implements OnInit, AfterViewInit {
     };
 
     this.postFormInitialization(null);
+
     if (this._appointmentService.subsVar == undefined) {
       this._appointmentService.subsVar = this._appointmentService.
         invokeAppointmentDateTime.subscribe((date: any) => {
@@ -198,7 +199,7 @@ export class AddPostComponent implements OnInit, AfterViewInit {
     postFormValue.status = status;
     // postFormValue.companies = postFormValue.companies.map(c => c._id);
     if (this.postType === PostType.Appointment) { 
-      postFormValue.appointment_date = moment.utc(this.displayDate).format('YYYY-MM-DD HH:mm:ss');
+      postFormValue.appointment_date = moment(this.displayDate).format('YYYY-MM-DD HH:mm:ss');
     }
 
     if (this.postId) {
@@ -249,13 +250,17 @@ export class AddPostComponent implements OnInit, AfterViewInit {
         }
       }
       
-      this.ngZone.run( () => {
+      // this.ngZone.run( () => {
         this.slotList = filteredSlots
-     });
+        console.log(this.slotList);
+        // this.testEmitter$.next(this.slotList);
+    //  });
     } else {
-      this.ngZone.run( () => {
+      // this.ngZone.run( () => {
         this.slotList = result
-     });
+        console.log(this.slotList);
+        // this.testEmitter$.next(this.slotList);
+    //  });
     } 
   }
 

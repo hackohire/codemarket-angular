@@ -188,6 +188,7 @@
                 </ul>
             </div>
             <div class="col-xs-12 col-sm-12 time-slot-wrapper" *ngIf="postType === 'appointment'">
+                <!-- {{slotList | json}} {{postType}} -->
                 <div *ngIf="slotList.length > 0; else noSlotSelected;">
                   <div class="col-6 slot-btn" [ngClass]="{ 'slot-select-box': ((slotDateTime) && slot === slotDateTime) }" 
                     (click)="selectedSlot(slot)" *ngFor="let slot of slotList">

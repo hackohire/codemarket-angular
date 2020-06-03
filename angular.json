@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "cancer": {
+    "codemarket": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -89,11 +89,11 @@
                 }
               ]
             },
-            "manav": {
+            "cancer": {
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.manav.ts"
+                  "with": "src/environments/environment.cancer.ts"
                 }
               ],
               "optimization": true,
@@ -119,21 +119,24 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
             "port": 4800,
-            "browserTarget": "cancer:build"
+            "browserTarget": "codemarket:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "cancer:build:production"
+              "browserTarget": "codemarket:build:production"
             },
             "staging": {
-              "browserTarget": "cancer:build:staging"
+              "browserTarget": "codemarket:build:staging"
+            },
+            "cancer": {
+              "browserTarget": "codemarket:build:cancer"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "cancer:build"
+            "browserTarget": "codemarket:build"
           }
         },
         "test": {
@@ -171,14 +174,17 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "cancer:serve"
+            "devServerTarget": "codemarket:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "cancer:serve:production"
+              "devServerTarget": "codemarket:serve:production"
             },
             "staging": {
-              "devServerTarget": "cancer:serve:staging"
+              "devServerTarget": "codemarket:serve:staging"
+            },
+            "cancer": {
+              "devServerTarget": "codemarket:serve:cancer"
             }
           }
         },
@@ -216,11 +222,11 @@
                 "styles": true
               }
             },
-            "manav": {
+            "cancer": {
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.manav.ts"
+                  "with": "src/environments/environment.cancer.ts"
                 }
               ],
               "sourceMap": false,
@@ -234,5 +240,5 @@
       }
     }
   },
-  "defaultProject": "cancer"
+  "defaultProject": "codemarket"
 }

@@ -16,7 +16,7 @@ export const environment = {
   webSocketURL: 'wss://elncp90rvf.execute-api.us-east-1.amazonaws.com/cancer',
   // planDetails: plans.prod,
   planDetails: plans.prod,
-  fileS3Bucket: 'codemarket-files',
+  fileS3Bucket: 'cancer-files',
   oauth: {
     // Domain name
     domain: 'platform.auth.us-east-1.amazoncognito.com',

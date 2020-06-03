@@ -2,21 +2,21 @@ import { plans } from '../app/shared/constants/plan_details';
 
 export const environment = {
   ckEditor: {
-    ckEditorEnvironMentId: 'ZK5UoNVFJG2R3Kh4SrIC',
-    ckEditorSecretKey: 'HP771KcTLlvStVbtvwAGz5d3LhLgDlY50uJqNQ6nkS18kVP43ZPB1zOSLseK',
+    ckEditorEnvironMentId: 'qWCSnjZdhKZIm2BDeR6e',
+    ckEditorSecretKey: 'vOhUDQFlGWDTaOpVQmaPPm47RA9zFQ00tB6dQRdIa6Dqtxn7Uf8iGEc8oCMb',
     ws: '71258.cke-cs.com/ws',
     developmentTokenUrl: 'https://71258.cke-cs.com/token/dev/qhNbD6xUjkeVtrEc7aD2PcMhDkgmirUJHunqRWESilB0mTzZ0RHcJYk68P6D'
   },
   production: true,
-  serverless_url: 'https://manavapi.codemarket.io/',
-  graphql_url: 'https://manavapi.codemarket.io/graphql',
-  s3FilesBucketURL: 'https://codemarket-files.s3.amazonaws.com/public/',
+  serverless_url: 'https://cancerapi.codemarket.io/',
+  graphql_url: 'https://cancerapi.codemarket.io/graphql',
+  s3FilesBucketURL: 'https://cancer-files.s3.amazonaws.com/public/',
   stripe_public_key: 'pk_live_EYCoYtpLszr802sOl89WeuW1',
   // stripe_public_key: 'pk_test_ighmL2U9UqAx0O4b8dKkSvdq',
-  webSocketURL: 'wss://314t92s90a.execute-api.us-east-1.amazonaws.com/prod',
+  webSocketURL: 'wss://elncp90rvf.execute-api.us-east-1.amazonaws.com/cancer',
   // planDetails: plans.prod,
   planDetails: plans.prod,
-  fileS3Bucket: 'manav-files',
+  fileS3Bucket: 'cancer-files',
   oauth: {
     // Domain name
     domain: 'platform.auth.us-east-1.amazoncognito.com',
@@ -38,6 +38,7 @@ export const environment = {
   baseHref: '/',
   confirm: {
     email: '',
-    password: ''
+    password: '',
+    name: ''
   }
 };

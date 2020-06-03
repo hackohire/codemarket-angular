@@ -19,7 +19,7 @@ export const environment = {
   stripe_public_key: 'pk_test_ighmL2U9UqAx0O4b8dKkSvdq',
   webSocketURL: 'ws://localhost:3001',
   planDetails: plans.dev,
-  fileS3Bucket: 'manav-files',
+  fileS3Bucket: 'common-local-files',
   oauth: {
     // Domain name
     domain: 'platform.auth.us-east-1.amazoncognito.com',

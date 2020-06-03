@@ -11,13 +11,13 @@ import { environment } from 'src/environments/environment';
 })
 export class AppointmentComponent implements OnInit {
 
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-
   public appointmentList = [];
   public anonymousAvatar = '../../assets/images/anonymous-avatar.jpg';
   public s3FilesBucketURL = environment.s3FilesBucketURL;
   displayedColumns: string[] = ['profileImg', 'fullName', 'name', 'descriptionHTML', 'appointment_date', 'status', 'edit'];
   dataSource = new MatTableDataSource();
+  totalAppointmentCount = 0;
+  paginator: MatPaginator;
 
   constructor(
     private _postService: PostService
@@ -29,9 +29,12 @@ export class AppointmentComponent implements OnInit {
   }
 
   getPostByPostType() {
-    this._postService.getPostByPostType('appointment').subscribe((data) => {
-      console.log(data);
+    const paginationObj = {
+      pageNumber: this.paginator.pageIndex + 1, limit: this.paginator.pageSize ? this.paginator.pageSize : 10,
+      sort: {order: ''}};
+    this._postService.getPostByPostType('appointment', '', paginationObj).subscribe((data) => {
       this.dataSource.data = data.posts;
+      this.totalAppointmentCount = data.total;
     });
   }
 }

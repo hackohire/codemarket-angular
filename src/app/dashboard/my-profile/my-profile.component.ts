@@ -8,7 +8,7 @@ import { UserService } from '../../user/user.service';
 import { User } from '../../shared/models/user.model';
 import { Observable, Subscription, of } from 'rxjs';
 import { VideoChatComponent } from '../../video-chat/video-chat.component';
-import { MatDialog, MatPaginator } from '@angular/material';
+import { MatDialog, MatPaginator, MatTableDataSource } from '@angular/material';
 import Peer from 'peerjs';
 import { PostType } from '../../shared/models/post-types.enum';
 import { map } from 'rxjs/operators';
@@ -102,7 +102,9 @@ export class MyProfileComponent implements OnInit {
   selectedProfilePicURL = '';
 
   postTypeCounts;
-
+  displayedColumns: string[] = ['profileImg', 'fullName', 'name', 'descriptionHTML', 'appointment_date', 'status', 'edit'];
+  dataSource = new MatTableDataSource();
+  totalAppointmentCount = 0;
   customTabs = [
     // {
     //   name: 'files',
@@ -197,7 +199,10 @@ export class MyProfileComponent implements OnInit {
     const params = this.activatedRoute.snapshot.params;
     this.authorId = params && params.slug ? params.slug.split('-').pop() : '';
     this.profileView = this.activatedRoute.snapshot.queryParams['view'] ? this.activatedRoute.snapshot.queryParams['view'] : 'posts';
-
+    if (this.profileView === 'appointment') {
+      this.dataSource.paginator = this.paginator;
+      this.getPostByPostType();
+    }
     // If user is visitng somebody else's profile
     if (this.authorId) {
       // this.navLinks = this.navLinks.filter(n => !n.showOnlyToLoggedInUser);
@@ -342,6 +347,10 @@ export class MyProfileComponent implements OnInit {
           relativeTo: this.activatedRoute,
           queryParams: { view: category }, queryParamsHandling: 'merge'
         });
+      if (this.profileView === 'appointment') {
+        this.dataSource.paginator = this.paginator;
+        this.getPostByPostType();
+      }
     }
   }
 
@@ -480,6 +489,17 @@ export class MyProfileComponent implements OnInit {
     }
     this.uploadedCoverUrl = null;
     this.updateCover(userId);
+  }
+
+  getPostByPostType() {
+    const paginationObj = {
+      pageNumber: this.paginator.pageIndex + 1, limit: this.paginator.pageSize ? this.paginator.pageSize : 10,
+      sort: {order: ''}};
+
+    this.postService.getPostByPostType('appointment', this.authService.loggedInUser._id, paginationObj).subscribe((data) => {
+      this.dataSource.data = data.posts;
+      this.totalAppointmentCount = data.total;
+    });
   }
 
 }

@@ -1,29 +1,26 @@
-<mat-toolbar class="SearchLoginBox">
+<mat-toolbar class="NavBarBox" style="place-content: flex-start; padding-left: 5px;">
 
-  <!-- <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'add-post-type']">
-        <i style="font-size: 1.0rem !important; color: #ffff00;" class="vertical-align-middle fal fa-add fa-fw"></i>
-        <span style="color: #ffffff;" class="line-height-initial"> Add Post Type </span>
-      </a> -->
+  <!-- Toggle Sidebar Button -->
+  <button *ngIf="true" type="button" aria-label="Toggle sidenav" mat-icon-button (click)="toggleNavbar()"
+    style="margin-right: 5px;">
+    <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+  </button>
 
-  <!-- Search -->
-  <a mat-button routerLinkActive="mat-primary" (click)="openSearchDialog()" style="line-height: 3;">
-    <i style="font-size: 1.0rem !important; color: #ffff00;" class="vertical-align-middle fal fa-search fa-fw"></i>
-    <span style="color: #ffffff;" class="line-height-initial"> Search</span>
-  </a>
+  <!-- Logo or Application Name -->
+  <!-- <img (click)="redirect()" sizes="(max-width: 282px) 100vw, 282px"
+        srcset="../../../../assets/images/logo_qugbvk_c_scalew_200.png 200w, ../../../../assets/images/logo_qugbvk_c_scalew_282.png 282w"
+        src="../../../../assets/images/logo_qugbvk_c_scalew_282.png" alt=""> -->
+  <img (click)="redirect()" src="../../../../assets/images/CodemarketSVG.svg" class="brand-logo">
+  <!-- <h2 [routerLink]="['/']">Codemarket</h2> -->
 
-  <!-- membership -->
-  <!--  <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'membership']">
-        <i style="font-size: 1.0rem !important; color: #ffff00;"
-          class="vertical-align-middle fal fa-id-card-alt fa-fw"></i>
-        <span style="color: #ffffff;" class="line-height-initial" > Membership</span>
-      </a> -->
-  <!-- Login -->
+  <!-- End Items -->
+  <div fxFlex></div>
+
   <ng-template #logIn>
     <a #lr mat-button [mdePopoverTriggerFor]="authentication" [mdePopoverTargetAt]="lr" mdePopoverTriggerOn="click"
       style="line-height: 3;">
-      <i style="font-size: 1.0rem !important; color: #ffff00;"
-        class="vertical-align-middle fal fa-user-circle fa-fw"></i>
-      <span style="color: #ffffff;" class="line-height-initial"> Login/Register</span>
+      <i style="font-size: 1.0rem !important;" class="vertical-align-middle fal fa-user-circle fa-fw"></i>
+      <span class="line-height-initial"> Login/Register</span>
     </a>
   </ng-template>
 
@@ -36,10 +33,9 @@
   <button mat-button [matMenuTriggerFor]="userMenu" *ngIf="authService.loggedInUser; else logIn">
     <a style="padding: 0;" mat-button routerLinkActive="mat-primary" *ngIf="loggedInUser;"
       [routerLink]="['/', 'dashboard', 'my-profile']">
-      <i style="font-size: 1.0rem !important; color: #ffff00;"
-        class="vertical-align-middle fal fa-user-circle fa-fw"></i>
-      <span style="color: #ffffff;" class="line-height-initial"> My Profile <mat-icon
-          style="vertical-align: middle; height: 28px;">keyboard_arrow_down</mat-icon>
+      <i style="font-size: 1.0rem !important;" class="vertical-align-middle fal fa-user-circle fa-fw"></i>
+      <span class="line-height-initial"> My Profile <mat-icon style="vertical-align: middle; height: 28px;">
+          keyboard_arrow_down</mat-icon>
       </span>
     </a>
   </button>
@@ -59,26 +55,6 @@
       </a>
     </div>
   </mat-menu>
-
-</mat-toolbar>
-
-<mat-toolbar class="NavBarBox" style="place-content: flex-start; padding-left: 5px;">
-
-  <!-- Toggle Sidebar Button -->
-  <button *ngIf="true" type="button" aria-label="Toggle sidenav" mat-icon-button (click)="toggleNavbar()"
-    style="margin-right: 5px;">
-    <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-  </button>
-
-  <!-- Logo or Application Name -->
-  <!-- <img (click)="redirect()" sizes="(max-width: 282px) 100vw, 282px"
-        srcset="../../../../assets/images/logo_qugbvk_c_scalew_200.png 200w, ../../../../assets/images/logo_qugbvk_c_scalew_282.png 282w"
-        src="../../../../assets/images/logo_qugbvk_c_scalew_282.png" alt=""> -->
-  <img (click)="redirect()" src="../../../../assets/images/CodemarketSVG.svg" class="brand-logo">
-  <!-- <h2 [routerLink]="['/']">Codemarket</h2> -->
-
-  <!-- End Items -->
-  <div fxFlex></div>
 
   <!-- Message Alert Area -->
   <!-- <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'messages']">
@@ -110,7 +86,7 @@
         <div class="line-height-initial">Appointment</div>
       </a> -->
 
-  <app-add-post-menu [label]="'Create'" style="position: absolute; right: 7px; top: 2px;"></app-add-post-menu>
+  <app-add-post-menu [label]="'Create'" style="right: 7px; top: 2px;"></app-add-post-menu>
 
   <!-- <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'company', 'add-company']">
         <div class="line-height-initial"> Sales Accelerator </div>
@@ -146,7 +122,7 @@
       class="hidden-lg" [drawer]="drawer"></app-add-post-menu>
 
 
-    <mat-nav-list class="pt-0">
+    <mat-nav-list class="pt-0" [ngStyle.lt-sm]="{'margin-top': '40px'}">
 
       <app-chat-full-ui *ngIf="authService?.loggedInUser" [drawer]="drawer" [loggedInUser]="authService?.loggedInUser">
       </app-chat-full-ui>

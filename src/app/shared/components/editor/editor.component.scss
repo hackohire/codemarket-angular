@@ -213,11 +213,12 @@ footer {
 
   .row-presence {
     position: sticky;
-    top: 48px;
+    // top: 48px;
+    top: 0px;
   }
   .ck.ck-toolbar {
     position: sticky;
-    top: 105px;
+    top: 56px;
     z-index: 15;
   }
   .ck-focused {

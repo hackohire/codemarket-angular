@@ -553,7 +553,8 @@
                                                         <div mat-line *ngIf="e?.tracking?.open?.timestamp">Read:
                                                             {{e?.tracking?.open?.timestamp | date: 'medium'}} </div>
                                                             
-                                                        <i *ngIf="e?.isReplied" matTooltip={{e?.repliedHTML}} matTooltipPosition="left" class="fas fa-reply"></i>
+                                                        <!-- <i *ngIf="e?.isReplied" matTooltip={{e?.repliedHTML}} matTooltipPosition="left" class="fas fa-reply"></i> -->
+                                                        <i *ngIf="e?.isReplied" (click)="openDialog(e?.repliedHTML, e?.to[0])" class="fas fa-reply"></i>
                                                         <i *ngIf="e?.tracking?.length > 0 && !e?.isReplied" class="fas fa-check-double"></i>
                                                         <i *ngIf="!e?.tracking || e?.tracking.length === 0" class="fal fa-check"></i>
                                                     </mat-list-item>

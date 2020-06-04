@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, AfterViewInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable, Subscription } from 'rxjs';
 import { map, share, filter, tap } from 'rxjs/operators';
@@ -43,7 +43,7 @@ import { Location } from '@angular/common';
   templateUrl: './nav-bar.component.html',
   styleUrls: ['./nav-bar.component.scss'],
 })
-export class NavBarComponent implements OnInit, OnDestroy {
+export class NavBarComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @ViewChild('lr', { static: false }) lr: MatAnchor;
   @ViewChild('drawer', { static: false }) drawer: MatDrawer;
@@ -100,7 +100,6 @@ export class NavBarComponent implements OnInit, OnDestroy {
           if (u) {
             // this.ref.detach();
             this.loggedInUser = { ...u };
-            this.getConnectedPosts(u);
             // this.ref.detectChanges();
           } else {
             this.loggedInUser = u;
@@ -111,6 +110,16 @@ export class NavBarComponent implements OnInit, OnDestroy {
 
     this.cartListLength = this.store.select(selectCartListLength);
 
+  }
+
+  ngAfterViewInit() {
+    this.subscription.add(
+      this.authService.openAuthenticationPopover.subscribe(open => {
+        if (open) {
+          this.lr._elementRef.nativeElement.click();
+        }
+      })
+    );
   }
 
   ngOnDestroy() {

@@ -19,8 +19,8 @@
   <ng-template #logIn>
     <a #lr mat-button [mdePopoverTriggerFor]="authentication" [mdePopoverTargetAt]="lr" mdePopoverTriggerOn="click"
       class="LoginRegisterButton">
-      <i style="font-size: 1.0rem !important;" class="vertical-align-middle fal fa-user-circle fa-fw"></i>
-      <span class="line-height-initial"> Login/Register</span>
+      <i style="font-size: 1.0rem !important;" class="vertical-align-middle fal fa-user-circle fa-fw" style="color: black;"></i>
+      <span class="line-height-initial" style="color: black;"> Login/Register</span>
     </a>
   </ng-template>
 
@@ -33,8 +33,8 @@
   <button mat-button [matMenuTriggerFor]="userMenu" *ngIf="authService.loggedInUser; else logIn">
     <a style="padding: 0;" mat-button routerLinkActive="mat-primary" *ngIf="loggedInUser;"
       [routerLink]="['/', 'dashboard', 'my-profile']">
-      <i style="font-size: 1.0rem !important;" class="vertical-align-middle fal fa-user-circle fa-fw"></i>
-      <span class="line-height-initial"> My Profile <mat-icon style="vertical-align: middle; height: 28px;">
+      <i style="font-size: 1.0rem !important;" class="vertical-align-middle fal fa-user-circle fa-fw" style="color: black;"></i>
+      <span class="line-height-initial" style="color: black;"> My Profile <mat-icon style="vertical-align: middle; height: 28px;">
           keyboard_arrow_down</mat-icon>
       </span>
     </a>

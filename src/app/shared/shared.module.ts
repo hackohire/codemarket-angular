@@ -17,7 +17,6 @@ import { ShareButtonsModule } from '@ngx-share/buttons';
 import { ShareModule } from '@ngx-share/core';
 import { SafePipe } from './pipes/safe.pipe';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { LikeDislikeComponent } from './components/like-dislike/like-dislike.component';
 import { VideoChatComponent } from '../video-chat/video-chat.component';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { AddPostMenuComponent } from './components/add-post-menu/add-post-menu.component';
@@ -30,7 +29,6 @@ import { ToastrModule } from 'ngx-toastr';
 import { BriefPostComponent } from './components/brief-post/brief-post.component';
 import { AutocompleteComponent } from './components/autocomplete/autocomplete.component';
 import { AddCollaboratorsComponent } from './components/add-collaborators/add-collaborators.component';
-import { AddAssigneeComponent } from './components/add-assignee/add-assignee.component';
 import { PaginatorComponent } from './components/paginator/paginator.component';
 import { AddCommentComponent } from './components/add-comment/add-comment.component';
 import { PostTypeNavComponent } from './components/post-type-nav/post-type-nav.component';
@@ -46,9 +44,9 @@ import { AppointmentService } from './services/appointment.service';
 import { ChatFullUiComponent } from './components/chat-full-ui/chat-full-ui.component';
 export function hljsLanguages() {
   return [
-    {name: 'typescript', func: typescript},
-    {name: 'javascript', func: javascript},
-    {name: 'scss', func: scss}
+    { name: 'typescript', func: typescript },
+    { name: 'javascript', func: javascript },
+    { name: 'scss', func: scss }
   ];
 }
 @NgModule({
@@ -58,14 +56,12 @@ export function hljsLanguages() {
     CommentComponent,
     DatatableComponent,
     SafePipe,
-    LikeDislikeComponent,
     VideoChatComponent,
     AddPostMenuComponent,
     CompaniesListComponent,
     BriefPostComponent,
     AutocompleteComponent,
     AddCollaboratorsComponent,
-    AddAssigneeComponent,
     PaginatorComponent,
     AddCommentComponent,
     PostTypeNavComponent,
@@ -85,7 +81,7 @@ export function hljsLanguages() {
       confirmButtonClass: 'btn btn-primary',
       cancelButtonClass: 'btn'
     }),
-    HighlightModule.forRoot({languages: hljsLanguages}),
+    HighlightModule.forRoot({ languages: hljsLanguages }),
     FlexLayoutModule,
     RouterModule,
     ShareButtonsModule,
@@ -114,7 +110,6 @@ export function hljsLanguages() {
     CommentComponent,
     AddCommentComponent,
     DatatableComponent,
-    LikeDislikeComponent,
     VideoChatComponent,
     AddPostMenuComponent,
     BriefPostComponent,

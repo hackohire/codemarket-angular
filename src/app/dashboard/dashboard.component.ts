@@ -2,9 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from '../core/store/state/app.state';
 import { Observable } from 'rxjs';
-import { Product } from '../shared/models/product.model';
 import { MatTableDataSource } from '@angular/material/table';
-import { HelpQuery } from '../shared/models/help-query.model';
 import { MatSort } from '@angular/material';
 import { UserService } from '../user/user.service';
 import { PostService } from '../shared/services/post.service';
@@ -23,9 +21,6 @@ import { EmailValidator } from '@angular/forms';
 export class DashboardComponent implements OnInit {
 
   @ViewChild('successInvitationAccept', { static: false }) successInvitationAccept: SwalComponent;
-  productsList$: Observable<Product[]>;
-  helpRequestList$: Observable<HelpQuery[]>;
-  usersListAndTheirBugFixes$: Observable<[]>;
 
   salesemailInput: string;
   growsalesemailInput: string;
@@ -44,7 +39,7 @@ export class DashboardComponent implements OnInit {
 
   displayedColumnsForHelpRequest: string[] = ['number', 'name', 'price', 'createdBy', 'createdAt'];
   dataSource = new MatTableDataSource();
-  @ViewChild(MatSort, {static: false}) sort: MatSort;
+  @ViewChild(MatSort, { static: false }) sort: MatSort;
 
   constructor(
     private userService: UserService,

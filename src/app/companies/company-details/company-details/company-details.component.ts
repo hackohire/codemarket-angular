@@ -68,7 +68,6 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
   isUserAttending: boolean; /** Only for the event */
   subscription$: Subscription = new Subscription();
   type: string; // product | help-request | interview | requirement | Testing | Howtodoc
-  likeCount: number;
   anonymousAvatar = '../../../assets/images/anonymous-avatar.jpg';
   s3FilesBucketURL = environment.s3FilesBucketURL;
 
@@ -170,7 +169,7 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
     const params = this.activatedRoute.snapshot.params;
 
     this.companyView = this.activatedRoute.snapshot.queryParams['view'] ? this.activatedRoute.snapshot.queryParams['view'] : 'posts';
-    
+
     this.initializeEmailForms();
     this.subscription$.add(
       this.companyService.getCompanyById(params.slug)
@@ -199,9 +198,9 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
               this.initializeCommentForm(c, 'post');
               this.initializeQuestionAndAnswerForm(c, 'company');
 
-              this.selectMainCategory({name: this.companyView});
+              this.selectMainCategory({ name: this.companyView });
               if (this.companyId) {
-                 this.postService.getCountOfAllPost('', this.companyId, '').subscribe((data) => {
+                this.postService.getCountOfAllPost('', this.companyId, '').subscribe((data) => {
                   if (data.length) {
                     data = keyBy(data, '_id');
                     appConstants.postTypesArray.forEach((obj) => {
@@ -248,7 +247,6 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
 
   initializeCommentForm(p, commentType?: string) {
     this.commentForm = new FormGroup({
-      text: new FormControl(''),
       referenceId: new FormControl(),
       companyReferenceId: new FormControl(p._id),
       type: new FormControl(commentType ? commentType : this.type),
@@ -268,8 +266,6 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
   async addComment(postId = '', commentEditor: EditorComponent) {
     console.log(this.commentForm.value);
     if (this.authService.loggedInUser) {
-      const blocks = await commentEditor.editor.save();
-      this.commentForm.get('text').setValue(blocks.blocks);
       this.commentForm.addControl('createdBy', new FormControl(this.authService.loggedInUser._id));
       this.commentForm.patchValue({ referenceId: postId });
       this.subscription$.add(
@@ -373,7 +369,7 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
   }
 
   deletePost(_id: string) {
-    this.postService.deletePost(_id, {name: this.authService.loggedInUser.name, _id: this.authService.loggedInUser.name}).subscribe();
+    this.postService.deletePost(_id, { name: this.authService.loggedInUser.name, _id: this.authService.loggedInUser.name }).subscribe();
   }
 
   updateCompany(companyDetails) {
@@ -393,36 +389,36 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
           this.saveEmailForm.get('csvfile').setValue('');
           this.file = '';
         });
-       }
+      }
     } else {
       this.file = event.target.files[0];
       console.log(this.file);
       if (this.file.name.split(".")[1] !== 'csv') {
-       Swal.fire(`Invalid File Type`, '', 'error').then(() => {
-         this.saveEmailForm.get('csvfile').setValue('');
-         this.file = '';
-       });
+        Swal.fire(`Invalid File Type`, '', 'error').then(() => {
+          this.saveEmailForm.get('csvfile').setValue('');
+          this.file = '';
+        });
       }
     }
   }
-  
+
   csvToJSON(csv, action, callback) {
     var lines = csv.split("\n");
     var result = [];
     var headers = lines[0].split(",");
     for (var i = 1; i < lines.length; i++) {
-        var obj = {};
-        var currentline = lines[i].split(",");
-        for (var j = 0; j <= headers.length; j++) {
-            obj[headers[j]] = currentline[j];
-            if (action === 'saveClean') {
-              obj['email'] = JSON.parse(currentline[headers.indexOf('email')])
-            }
+      var obj = {};
+      var currentline = lines[i].split(",");
+      for (var j = 0; j <= headers.length; j++) {
+        obj[headers[j]] = currentline[j];
+        if (action === 'saveClean') {
+          obj['email'] = JSON.parse(currentline[headers.indexOf('email')])
         }
-        result.push(obj);
+      }
+      result.push(obj);
     }
     if (callback && (typeof callback === 'function')) {
-        return callback(result);
+      return callback(result);
     }
     return result;
   }
@@ -432,14 +428,14 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
       this.authService.checkIfUserIsLoggedIn(true);
       return;
     }
-    
+
     let fileReader = new FileReader();
     fileReader.onload = (e) => {
       // console.log(fileReader.result);
       this.csvToJSON(fileReader.result, 'save', (result) => {
         console.log("This is result", result);
         this.emailService.saveCsvFileData(result, this.authService.loggedInUser._id, this.onlySaveFile.name, this.saveEmailForm.value.label, this.saveEmailForm.value.companies).subscribe((data) => {
-        console.log("Response of the file read ==> " , data);
+          console.log("Response of the file read ==> ", data);
         });
       })
     }
@@ -456,10 +452,10 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
     this.changeDetector.detectChanges();
 
     this.sendEmailForm.get('emailTemplate').setValue(this.descriptionEditor.html);
-  
+
     console.log(this.sendEmailForm.value);
     this.emailService.getEmailData(this.sendEmailForm.value.batches, this.sendEmailForm.value.emailTemplate, this.sendEmailForm.value.subject, this.authService.loggedInUser._id, this.sendEmailForm.value.from, this.sendEmailForm.value.companies).subscribe((data) => {
-      console.log("Response of the email Data ==> " , data);
+      console.log("Response of the email Data ==> ", data);
     }, (err) => {
       Swal.fire(`Invalid Data`, '', 'error').then(() => {
       });
@@ -470,29 +466,31 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
     console.log('EMail Data is called')
     const paginationObj = {
       pageNumber: 1, limit: 10,
-      sort: {order: ''}};
+      sort: { order: '' }
+    };
 
-      this.companyService.getCampaignsWithTracking(paginationObj, this.trackEmailForm.value.companies._id, this.trackEmailForm.value.batches._id).subscribe(c => {
-        if (c && c.length) {
-          this.displayCampaignList = true;
-          // this.fetchEmailsConnectedWithCampaign();
-          this.campaignsList = c;
-        }
-      })
+    this.companyService.getCampaignsWithTracking(paginationObj, this.trackEmailForm.value.companies._id, this.trackEmailForm.value.batches._id).subscribe(c => {
+      if (c && c.length) {
+        this.displayCampaignList = true;
+        // this.fetchEmailsConnectedWithCampaign();
+        this.campaignsList = c;
+      }
+    })
   }
 
   fetchEmailsOfCampaign() {
     console.log('fetchEmailsConnectedWithCampaign Data is called')
-    
+
     const paginationObj = {
       pageNumber: this.paginator.pageIndex + 1, limit: this.paginator.pageSize ? this.paginator.pageSize : 10,
-      sort: {order: ''}};
-  
-      this.companyService.getCampaignsWithTracking(paginationObj, this.trackEmailForm.value.companies._id, this.trackEmailForm.value.batches._id).subscribe(c => {
-        if (c && c.length) {
-          this.campaignsList = c;
-        }
-      })
+      sort: { order: '' }
+    };
+
+    this.companyService.getCampaignsWithTracking(paginationObj, this.trackEmailForm.value.companies._id, this.trackEmailForm.value.batches._id).subscribe(c => {
+      if (c && c.length) {
+        this.campaignsList = c;
+      }
+    })
   }
 
   /** Delete Question Or Answer */
@@ -591,7 +589,8 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
       case 'campaigns':
         const paginationObj = {
           pageNumber: 1, limit: 10,
-          sort: {order: ''}};
+          sort: { order: '' }
+        };
 
         this.subscription$.add(
           this.companyService.getCampaignsWithTracking(paginationObj, this.companyDetails._id).subscribe(c => {
@@ -636,8 +635,9 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
   fetchAllCompanyRealtedePosts(postType = '') {
     const paginationObj = {
       pageNumber: this.paginator.pageIndex + 1, limit: this.paginator.pageSize ? this.paginator.pageSize : 10,
-      sort: {order: ''}};
-    
+      sort: { order: '' }
+    };
+
     if (postType === 'contact') {
       if (this.currentOrderValue) {
         paginationObj.sort.order = this.currentOrder;
@@ -663,8 +663,9 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
   fetchEmailsConnectedWithCampaign(campaignId, campaignIndex) {
     const paginationObj = {
       pageNumber: this.paginator.pageIndex + 1, limit: this.paginator.pageSize ? this.paginator.pageSize : 10,
-      sort: {order: ''}};
-    
+      sort: { order: '' }
+    };
+
     // this.companyService.getCampaignsWithTracking(paginationObj, this.companyDetails._id).subscribe(c => {
     //   if (c && c.length) {
     //     this.campaignsList = c;
@@ -672,7 +673,7 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
     // })
     this.companyService.getCampaignEmails(paginationObj, campaignId).subscribe(c => {
       if (c && c.emails && c.emails.length) {
-        this.campaignsList[campaignIndex].emailData  = c.emails;
+        this.campaignsList[campaignIndex].emailData = c.emails;
       }
     });
   }
@@ -685,12 +686,13 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
 
     const paginationObj = {
       pageNumber: this.paginator.pageIndex + 1, limit: this.paginator.pageSize ? this.paginator.pageSize : 10,
-      sort: {order: ''}};
+      sort: { order: '' }
+    };
 
-      paginationObj.sort['field'] = value;
-      paginationObj.sort['order'] = order === 'asc' ? '1' : '-1';
-      this.currentOrderValue = value;
-      this.currentOrder = order === 'asc' ? '1' : '-1';
+    paginationObj.sort['field'] = value;
+    paginationObj.sort['order'] = order === 'asc' ? '1' : '-1';
+    this.currentOrderValue = value;
+    this.currentOrder = order === 'asc' ? '1' : '-1';
 
     this.postService.getAllPosts(
       paginationObj, postType, '', this.companyDetails._id).subscribe((u) => {
@@ -698,32 +700,32 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
         this.totalcompanyRelatedPosts = u.total;
         if (order === 'asc') {
           switch (value) {
-          case 'email':
-            this.emailAsc = false;
-            break;
-          case 'phone':
-            this.phoneAsc = false;
-            break;
-          case 'name':
-            this.nameAsc = false;
-            break;
-          default:
-            break;
+            case 'email':
+              this.emailAsc = false;
+              break;
+            case 'phone':
+              this.phoneAsc = false;
+              break;
+            case 'name':
+              this.nameAsc = false;
+              break;
+            default:
+              break;
           }
         }
         if (order === 'desc') {
           switch (value) {
-          case 'email':
-            this.emailAsc = true;
-            break;
-          case 'phone':
-            this.phoneAsc = true;
-            break;
-          case 'name':
-            this.nameAsc = true;
-            break;
-          default:
-            break;
+            case 'email':
+              this.emailAsc = true;
+              break;
+            case 'phone':
+              this.phoneAsc = true;
+              break;
+            case 'name':
+              this.nameAsc = true;
+              break;
+            default:
+              break;
           }
         }
 

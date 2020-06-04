@@ -166,14 +166,6 @@
                             </mde-popover>
                         </li>
 
-                        <li *ngIf="postDetails?.jobProfile && postDetails?.jobProfile?.length">
-                            <p class="data-label">Position</p>
-                            <p class="info" style="text-transform: capitalize;">
-                                <span
-                                    *ngFor="let c of postDetails?.jobProfile; let ei = index;">{{c?.name + (ei === postDetails?.jobProfile?.length - 1 ? '' : ', ' )}}</span>
-                            </p>
-                        </li>
-
                         <li *ngIf="postDetails?.createdBy">
                             <p class="data-label">Author</p>
                             <p class="info">

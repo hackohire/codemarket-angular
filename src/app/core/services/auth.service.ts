@@ -134,7 +134,6 @@ export class AuthService {
               avatar
               cover
               roles
-              likeCount
               createdAt
               stripeId
             }

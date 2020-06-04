@@ -120,12 +120,6 @@ export class MyProfileComponent implements OnInit {
     //   title: 'Home',
     // },
     {
-      view: navLinkName.buy,
-      title: 'Buy',
-      path: 'purchased-items-list',
-      showOnlyToLoggedInUser: true
-    },
-    {
       view: navLinkName.sell,
       title: 'Sell',
       path: 'products-list',
@@ -273,7 +267,6 @@ export class MyProfileComponent implements OnInit {
 
   initializeCommentForm(userId, commentType?: string) {
     this.commentForm = new FormGroup({
-      text: new FormControl(''),
       referenceId: new FormControl(),
       userReferenceId: new FormControl(userId),
       type: new FormControl(commentType),
@@ -283,9 +276,6 @@ export class MyProfileComponent implements OnInit {
   async addComment(postId = '', addCommentEditor: EditorComponent) {
     console.log(this.commentForm.value);
     if (this.authService.loggedInUser) {
-      const blocks = await addCommentEditor.editor.save();
-      this.commentForm.get('text').setValue(blocks.blocks);
-
       this.commentForm.addControl('createdBy', new FormControl(this.authService.loggedInUser._id));
       this.commentForm.patchValue({ referenceId: postId });
       this.subscription.add(
@@ -457,11 +447,13 @@ export class MyProfileComponent implements OnInit {
     if (this.paginator) {
       paginationObj = {
         pageNumber: this.paginator ? this.paginator.pageIndex + 1 : 1, limit: this.paginator ? this.paginator.pageSize : 10,
-        sort: {order: ''}};
+        sort: { order: '' }
+      };
     } else {
       paginationObj = {
         pageNumber: 1, limit: 10,
-        sort: {order: ''}};
+        sort: { order: '' }
+      };
     }
 
     this.postService.getPostByPostType('appointment', this.authService.loggedInUser._id, paginationObj).subscribe((data) => {

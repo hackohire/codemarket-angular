@@ -180,12 +180,12 @@ export const appConstants = {
       _id
       name
       type
-      categories
       referencePostUrl
       price
       status
       createdAt
       updatedAt
+      descriptionHTML
       tags {
         name
         _id
@@ -194,7 +194,6 @@ export const appConstants = {
         ...Comments
       }
       commentCount
-      likeCount
       users {
         _id
         name
@@ -213,12 +212,6 @@ export const appConstants = {
           }
         }
       }
-      purchasedBy {
-        name
-        _id
-        createdAt
-        avatar
-      }
       slug
       comments {
         _id
@@ -235,29 +228,11 @@ export const appConstants = {
         blockId
         blockSpecificComment
       }
-
-      dateRange
-      address
-      eventType
       cover
-      usersAttending {
-        name
-        _id
-        avatar
-      }
-      location {
-        longitude
-        latitude
-        address
-      }
       companies {
         name
         _id
       }
-
-      salaryCurrency
-      salaryRangeFrom
-      salaryRangeTo
       cities {
         name
         _id
@@ -276,24 +251,11 @@ export const appConstants = {
         slug
       }
 
-      assignees {
-        _id
-        name
-        slug
-      }
-
       clients {
         _id
         name
         slug
       }
-
-      jobProfile {
-        _id
-        name
-        type
-      }
-      timeline
 
       phone
       email
@@ -301,7 +263,6 @@ export const appConstants = {
       address
       website
 
-      descriptionHTML
       appointment_date
       cancelReason
       activities {

@@ -6,7 +6,6 @@ import { User } from 'src/app/shared/models/user.model';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../store/state/app.state';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { selectCartListLength } from '../../store/selectors/cart.selectors';
 import { Router, Event, ActivationEnd, RouterStateSnapshot, NavigationEnd } from '@angular/router';
 import { MatDialog, MatAnchor, MatDrawer } from '@angular/material';
 import { SearchComponent } from '../search/search.component';
@@ -107,9 +106,6 @@ export class NavBarComponent implements OnInit, AfterViewInit, OnDestroy {
 
         })
     );
-
-    this.cartListLength = this.store.select(selectCartListLength);
-
   }
 
   ngAfterViewInit() {

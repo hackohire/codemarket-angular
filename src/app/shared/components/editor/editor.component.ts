@@ -228,7 +228,6 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
 
   initializeCommentForm(p) {
     this.commentForm = new FormGroup({
-      text: new FormControl([]),
       referenceId: new FormControl(p._id),
       type: new FormControl(this.commentType ? this.commentType : p.type),
       blockSpecificComment: new FormControl(true),
@@ -238,8 +237,6 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
 
   async addComment(blockId: string, addCommentEditor: EditorComponent) {
     if (this.authService.loggedInUser) {
-      const blocks = await addCommentEditor.editor.save();
-      this.commentForm.get('text').setValue(blocks.blocks);
       this.commentForm.addControl('createdBy', new FormControl(this.authService.loggedInUser._id));
       this.commentForm.get('blockId').setValue(blockId),
         this.subscriptions$.add(

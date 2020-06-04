@@ -253,16 +253,17 @@
                                             (fetchData)="paginator = $event; fetchAllCompanyRealtedePosts()">
                                         </app-paginator>
                                     </ng-container>
-        
+
                                     <div *ngIf="companyView === 'campaigns' && details?._id">
-                                        <ng-container *ngTemplateOutlet="campaignsTemplate; context: {details: details}">
+                                        <ng-container
+                                            *ngTemplateOutlet="campaignsTemplate; context: {details: details}">
                                         </ng-container>
                                         <!-- <div *ngFor="let c of campaignsList">
                                             <app-paginator [length]="c.count" (fetchData)="paginator = $event; fetchAllCampaign('')">
                                             </app-paginator>
                                         </div> -->
                                     </div>
-        
+
                                     <ng-container *ngIf="companyView !== 'contact'">
                                         <ng-container *ngFor="let p of postTypesArray">
                                             <ng-container *ngIf="companyView === p.name">
@@ -277,29 +278,29 @@
                                             </ng-container>
                                         </ng-container>
                                     </ng-container>
-        
+
                                     <div *ngIf="companyView === 'comments'">
                                         <ng-container *ngTemplateOutlet="addCommentTemplate; context: details">
                                         </ng-container>
                                     </div>
-        
+
                                     <!-- <div *ngIf="companyView === 'comments'">
                                         <ng-container *ngTemplateOutlet="addCommentTemplate; context: details">
                                         </ng-container>
                                     </div> -->
-        
+
                                     <div *ngIf="companyView === 'q&a'">
                                         <ng-container *ngTemplateOutlet="questionAnswersTemplate; context: details">
                                         </ng-container>
                                     </div>
-        
+
                                     <!-- <div *ngIf="details?.createdBy?.name && companyView === 'creator'"
                                         class="author-card sidebar-card"> -->
                                     <div *ngIf="companyView === 'contact'">
                                         <ng-container *ngTemplateOutlet="contactTemplate; context: details">
                                         </ng-container>
                                     </div>
-        
+
                                     <div *ngIf="details?.createdBy?.name && companyView === 'creator'"
                                         class="author-card sidebar-card">
                                         <!-- <ng-container
@@ -308,13 +309,13 @@
                                         <div class="card-title">
                                             <h4>Author Information</h4>
                                         </div>
-        
+
                                         <div class="author-infos">
                                             <div class="author_avatar">
                                                 <img [src]="details?.createdBy?.avatar ? ((s3FilesBucketURL + details.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar"
                                                     alt="Presenting the broken author avatar :D">
                                             </div>
-        
+
                                             <div class="author">
                                                 <a [routerLink]="['profile', details?.createdBy?.slug ]">
                                                     <h4>{{details?.createdBy?.name}}</h4>
@@ -327,7 +328,7 @@
                                                 <!-- <p>Signed Up: 08 April 2016</p> -->
                                             </div>
                                             <!-- end /.author -->
-        
+
                                             <div class="social social--color--filled">
                                                 <ul>
                                                     <li>
@@ -352,7 +353,7 @@
                                                 </ul>
                                             </div>
                                             <!-- end /.social -->
-        
+
                                             <div class="author-btn">
                                                 <a (editPost)="postService?.editPost(details)"
                                                     [routerLink]="['profile', details?.createdBy?.slug ]"
@@ -361,11 +362,11 @@
                                             </div>
                                         </div>
                                         <!-- end /.author-infos -->
-        
-        
+
+
                                     </div>
                                     <!-- end /.author-card -->
-        
+
                                     <aside *ngIf="companyView === 'info'" class="sidebar sidebar--single-product">
                                         <!-- <ng-container
                                             *ngTemplateOutlet="addCompanypostTemplate; context: { details: details, postType: 'company-post'}">
@@ -374,7 +375,7 @@
                                             <div class="card-title">
                                                 <h4>Information</h4>
                                             </div>
-        
+
                                             <ul class="infos">
                                                 <li *ngIf="details?.createdAt">
                                                     <p class="data-label">Created</p>
@@ -397,46 +398,12 @@
                                                     </p>
                                                 </li>
                                             </ul>
-        
+
                                             <!-- <ng-container *ngTemplateOutlet="locationTemplate; context: {location: details?.location}">
                                             </ng-container> -->
                                         </div>
                                     </aside>
                                     <!-- end /.aside -->
-                                    <div *ngIf="companyView === 'interested-people'">
-                                        <!-- <ng-container
-                                            *ngTemplateOutlet="addCompanypostTemplate; context: { details: details, postType: 'company-post'}">
-                                        </ng-container> -->
-                                        <div class="author-card sidebar-card">
-                                            <div class="card-title">
-                                                <h4>Interested Professionals:
-                                                    {{ details?.usersInterestedInCompany?.length }}</h4>
-                                                <br />
-        
-                                                <ng-container class="row"
-                                                    *ngFor="let userInterested of usersInterestedInCompany">
-                                                    <div class="col-md-12" style="margin-bottom: 10px;">
-                                                        <div class="author_avatar_comment" style="vertical-align: middle;">
-                                                            <img [src]="userInterested?.avatar ? ((s3FilesBucketURL + userInterested.avatar) | safe: 'resourceUrl') : anonymousAvatar"
-                                                                alt="Presenting the broken author avatar :D">
-                                                        </div>
-                                                        <div class="autor__info">
-                                                            <a [routerLink]="['profile', userInterested?.slug ]">
-                                                                <p class="name">
-                                                                    {{userInterested?.name}}
-                                                                </p>
-                                                                <p style="color: lightgray;">
-                                                                    {{userInterested?.currentJobDetails?.jobProfile ? userInterested?.currentJobDetails?.jobProfile : '-'}}
-                                                                </p>
-                                                            </a>
-                                                            <!-- <p class="ammount">{{fromNow(pu?.createdAt)}}</p> -->
-                                                        </div>
-                                                    </div>
-        
-                                                </ng-container>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                                 <div [ngClass]="selectedBlock ? 'col-md-4 col-lg-4' : ''">
                                     <ng-container
@@ -445,7 +412,7 @@
                                 </div>
                             </div>
                         </mat-tab>
-    
+
                         <!-- Save and Send emails tab -->
                         <mat-tab label="Save And Send Emails">
                             <div class="row">
@@ -453,21 +420,29 @@
                                     <!-- Save Emails -->
                                     <div [formGroup]="saveEmailForm" class="add-form-area common-box-shadow">
                                         <h2>Save Emails</h2>
-                                            <mat-form-field class="field-full-width">
-                                                <ngx-mat-file-input #removableInput1 formControlName="csvfile" placeholder="Select csv file with emails" (change)="uploadFile($event, 'save')"></ngx-mat-file-input>
-                                                <button mat-icon-button matSuffix *ngIf="!removableInput1.empty" (click)="removableInput1.clear($event)">
-                                                    <mat-icon>clear</mat-icon>
-                                                </button>
-                                            </mat-form-field>
-                                            <mat-form-field appearance="outline" class="field-full-width">
-                                                <mat-label>Mailing list Name</mat-label>
-                                                <input matInput placeholder="Mailing list Name" type="text" formControlName="label" autocomplete="false" required>
-                                            </mat-form-field>
-                                            <app-autocomplete class="field-full-width" [allowToAdd]="false" [autoComplete]="saveEmailForm?.get('companies')"
-                                            [placeholder]="'Select Company'" [collection]="'companies'" [type]="" [multiple]="false" matInput>
-                                            </app-autocomplete>
-                                        <button type="button" (click)="saveFile()" [disabled]="saveEmailForm?.invalid" mat-raised-button color="primary" style="margin: 12px; height: 35px;">{{ 'Save Mailing List' }}</button>
-                                          <br>
+                                        <mat-form-field class="field-full-width">
+                                            <ngx-mat-file-input #removableInput1 formControlName="csvfile"
+                                                placeholder="Select csv file with emails"
+                                                (change)="uploadFile($event, 'save')"></ngx-mat-file-input>
+                                            <button mat-icon-button matSuffix *ngIf="!removableInput1.empty"
+                                                (click)="removableInput1.clear($event)">
+                                                <mat-icon>clear</mat-icon>
+                                            </button>
+                                        </mat-form-field>
+                                        <mat-form-field appearance="outline" class="field-full-width">
+                                            <mat-label>Mailing list Name</mat-label>
+                                            <input matInput placeholder="Mailing list Name" type="text"
+                                                formControlName="label" autocomplete="false" required>
+                                        </mat-form-field>
+                                        <app-autocomplete class="field-full-width" [allowToAdd]="false"
+                                            [autoComplete]="saveEmailForm?.get('companies')"
+                                            [placeholder]="'Select Company'" [collection]="'companies'" [type]=""
+                                            [multiple]="false" matInput>
+                                        </app-autocomplete>
+                                        <button type="button" (click)="saveFile()" [disabled]="saveEmailForm?.invalid"
+                                            mat-raised-button color="primary"
+                                            style="margin: 12px; height: 35px;">{{ 'Save Mailing List' }}</button>
+                                        <br>
                                     </div>
 
                                     <!-- Send Emails -->
@@ -475,54 +450,67 @@
                                         <h2>Send Emails</h2>
                                         <mat-form-field appearance="outline" class="field-full-width">
                                             <mat-label>Enter FROM</mat-label>
-                                            <input matInput placeholder="Enter FROM" type="text" formControlName="from" autocomplete="false" required>
+                                            <input matInput placeholder="Enter FROM" type="text" formControlName="from"
+                                                autocomplete="false" required>
                                         </mat-form-field>
-                        
+
                                         <mat-form-field appearance="outline" class="field-full-width">
                                             <mat-label>Enter Subject</mat-label>
-                                            <input matInput placeholder="subject" type="text" formControlName="subject" autocomplete="false" required>
+                                            <input matInput placeholder="subject" type="text" formControlName="subject"
+                                                autocomplete="false" required>
                                         </mat-form-field>
-                        
-                                        <app-autocomplete class="field-full-width" [allowToAdd]="false" [autoComplete]="sendEmailForm?.get('companies')"
-                                        [placeholder]="'Select Company'" [collection]="'companies'" [type]="" [multiple]="false" matInput>
+
+                                        <app-autocomplete class="field-full-width" [allowToAdd]="false"
+                                            [autoComplete]="sendEmailForm?.get('companies')"
+                                            [placeholder]="'Select Company'" [collection]="'companies'" [type]=""
+                                            [multiple]="false" matInput>
                                         </app-autocomplete>
-                        
-                                        <app-autocomplete class="field-full-width" [allowToAdd]="false" [autoComplete]="sendEmailForm?.get('batches')"
-                                        [placeholder]="'Select Mailing List'" [collection]="'batches'" [type]="" [multiple]="false" matInput>
+
+                                        <app-autocomplete class="field-full-width" [allowToAdd]="false"
+                                            [autoComplete]="sendEmailForm?.get('batches')"
+                                            [placeholder]="'Select Mailing List'" [collection]="'batches'" [type]=""
+                                            [multiple]="false" matInput>
                                         </app-autocomplete>
-                            
+
                                         <p>Create Email template below</p>
                                         <app-editor #descriptionEditor [placeholder]="'Email Template'"
                                             [data]="descriptionFormControl?.value" [id]="'edit-post-editor'">
                                         </app-editor>
-                            
+
                                         <br />
-                            
+
                                         <div fxLayout="row" fxLayoutGap="10px">
-                                            <button type="button" (click)="submit()" [disabled]="sendEmailForm?.invalid" mat-raised-button color="primary">{{ 'Send Email' }}</button>
+                                            <button type="button" (click)="submit()" [disabled]="sendEmailForm?.invalid"
+                                                mat-raised-button color="primary">{{ 'Send Email' }}</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </mat-tab>
-    
+
                         <!-- Track emails tab -->
                         <mat-tab label="Track Emails">
                             <div class="row">
                                 <div class="col-md-12">
                                     <div [formGroup]="trackEmailForm" class="add-form-area common-box-shadow">
                                         <h2>Track Emails</h2>
-                
-                                        <app-autocomplete class="field-full-width" [allowToAdd]="false" [autoComplete]="trackEmailForm?.get('companies')"
-                                        [placeholder]="'Select Company'" [collection]="'companies'" [type]="" [multiple]="false" matInput>
+
+                                        <app-autocomplete class="field-full-width" [allowToAdd]="false"
+                                            [autoComplete]="trackEmailForm?.get('companies')"
+                                            [placeholder]="'Select Company'" [collection]="'companies'" [type]=""
+                                            [multiple]="false" matInput>
                                         </app-autocomplete>
-                        
-                                        <app-autocomplete class="field-full-width" [allowToAdd]="false" [autoComplete]="trackEmailForm?.get('batches')"
-                                        [placeholder]="'Select Mailing List'" [collection]="'batches'" [type]="" [multiple]="false" matInput>
+
+                                        <app-autocomplete class="field-full-width" [allowToAdd]="false"
+                                            [autoComplete]="trackEmailForm?.get('batches')"
+                                            [placeholder]="'Select Mailing List'" [collection]="'batches'" [type]=""
+                                            [multiple]="false" matInput>
                                         </app-autocomplete>
-                                         <button type="button" (click)="getCampaignData()" [disabled]="trackEmailForm?.invalid" mat-raised-button color="primary" style="margin: 12px; height: 35px;">{{ 'Get Email Data' }}</button>
+                                        <button type="button" (click)="getCampaignData()"
+                                            [disabled]="trackEmailForm?.invalid" mat-raised-button color="primary"
+                                            style="margin: 12px; height: 35px;">{{ 'Get Email Data' }}</button>
                                     </div>
-                
+
                                     <!-- <ng-container *ngIf="campaignsList" *ngTemplateOutlet="campaignsTemplate">
                                     </ng-container> -->
                                     <ng-template #campaignsTemplate [ngIf]="displayCampaignList">
@@ -536,9 +524,10 @@
                                                         {{ '(' + c?.count + ')'}} <mat-icon>email</mat-icon>
                                                     </mat-panel-description>
                                                 </mat-expansion-panel-header> -->
-                                    
-                                                <div style="border: solid 1px black;" [innerHTML]="c?.descriptionHTML"></div>
-                                    
+
+                                                <div style="border: solid 1px black;" [innerHTML]="c?.descriptionHTML">
+                                                </div>
+
                                                 <mat-list>
                                                     <mat-list-item *ngFor="let e of c?.emailData; let j=index;">
                                                         <div mat-list-icon style="padding-right: 12px;">
@@ -546,19 +535,22 @@
                                                                 style="padding-right: 5px; vertical-align: super; font-size: 16px;">{{(j + 1 + '.')}}</span>
                                                             <mat-icon style="display: inline;">email</mat-icon>
                                                         </div>
-                                    
+
                                                         <div mat-line style="font-weight: 500;">{{e?.to[0]}}</div>
                                                         <div mat-line>Subject: {{e?.subject}} </div>
                                                         <div mat-line>Sent: {{e?.createdAt | date: 'medium'}} </div>
                                                         <div mat-line *ngIf="e?.tracking?.open?.timestamp">Read:
                                                             {{e?.tracking?.open?.timestamp | date: 'medium'}} </div>
-                                                            
-                                                        <i *ngIf="e?.isReplied" matTooltip={{e?.repliedHTML}} matTooltipPosition="left" class="fas fa-reply"></i>
-                                                        <i *ngIf="e?.tracking?.length > 0 && !e?.isReplied" class="fas fa-check-double"></i>
-                                                        <i *ngIf="!e?.tracking || e?.tracking.length === 0" class="fal fa-check"></i>
+
+                                                        <i *ngIf="e?.isReplied" matTooltip={{e?.repliedHTML}}
+                                                            matTooltipPosition="left" class="fas fa-reply"></i>
+                                                        <i *ngIf="e?.tracking?.length > 0 && !e?.isReplied"
+                                                            class="fas fa-check-double"></i>
+                                                        <i *ngIf="!e?.tracking || e?.tracking.length === 0"
+                                                            class="fal fa-check"></i>
                                                     </mat-list-item>
                                                 </mat-list>
-                                    
+
                                             </div>
                                             <app-paginator [length]="campaignsList[0]?.count"
                                                 (fetchData)="paginator = $event; fetchEmailsOfCampaign()">
@@ -568,9 +560,9 @@
                                 </div>
                             </div>
                         </mat-tab>
-                        
+
                     </mat-tab-group>
-                    
+
 
                 </div>
                 <!-- end /.col-md-8 -->

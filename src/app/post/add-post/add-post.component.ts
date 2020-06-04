@@ -142,11 +142,9 @@ export class AddPostComponent implements OnInit, AfterViewInit {
   postFormInitialization(i: Post) {
     this.postForm = new FormGroup({
       name: new FormControl(i && i.name ? i.name : 'Untitled Document', Validators.required),
-      description: new FormControl(i && i.description ? i.description : []),
       descriptionHTML: new FormControl(i && i.descriptionHTML ? i.descriptionHTML : ''),
       tags: new FormControl(i && i.tags ? i.tags : []),
       companies: new FormControl(i && i.companies ? i.companies : []),
-      assignees: new FormControl(i && i.assignees ? i.assignees : []),
       clients: new FormControl(i && i.clients ? i.clients : []),
       collaborators: new FormControl(i && i.collaborators ? i.collaborators : []),
       createdBy: new FormControl(i && i.createdBy && i.createdBy._id ? i.createdBy._id : ''),
@@ -168,7 +166,6 @@ export class AddPostComponent implements OnInit, AfterViewInit {
 
     if (this.postFromRoute) {
       this.postForm.get('tags').setValue(this.postFromRoute.tags);
-      this.postForm.get('assignees').setValue(this.postFromRoute.assignees);
       this.postForm.get('collaborators').setValue(this.postFromRoute.collaborators);
       this.postForm.get('companies').setValue(this.postFromRoute.companies);
 
@@ -188,8 +185,6 @@ export class AddPostComponent implements OnInit, AfterViewInit {
       return;
     }
 
-    // const blocks = await this.descriptionEditor.editor.save();
-    // this.descriptionFormControl.setValue(blocks.blocks);
     this.postForm.get('descriptionHTML').setValue(this.descriptionEditor.html);
 
     if (this.authService.loggedInUser && !this.createdBy.value) {

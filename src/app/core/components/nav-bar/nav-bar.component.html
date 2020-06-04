@@ -41,12 +41,6 @@
   </button>
   <mat-menu #userMenu="matMenu" panelClass="menu-width">
     <div class="menu-width">
-      <!-- Shopping Cart -->
-      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'cart']">
-        <mat-icon>shopping_cart
-        </mat-icon> Cart({{cartListLength | async}})
-      </a>
-
       <!-- Logout -->
       <a mat-button (click)="authService?.logout()">
         <mat-icon>power_settings_new
@@ -67,7 +61,7 @@
         <span class="notification_count noti" style="height: 7px; min-width: 7px;"
           *ngIf="isUnread((messageService.messagesList$ | async)?.messages)"></span>
       </div> -->
-      <!-- <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'send-email']">
+  <!-- <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'send-email']">
         <div class="line-height-initial"> Send Email </div>
       </a> -->
   <!-- <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'video-chat']" style="margin-left:5px; padding: 8px 16px;">

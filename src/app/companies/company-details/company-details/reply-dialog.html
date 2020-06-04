@@ -1,0 +1,9 @@
+<h1 mat-dialog-title>Reply From {{data.fromEmail}}</h1>
+<div mat-dialog-content>
+    <p style="white-space:pre-wrap;" [innerHtml]="data.repliedHTML">
+    </p>
+</div>
+<br>
+<div mat-dialog-actions>
+    <button mat-button (click)="onOkClick()" cdkFocusInitial style="flex: auto;">Ok</button>
+  </div>

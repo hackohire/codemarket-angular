@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy, ChangeDetectorRef, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommentService } from '../../../shared/services/comment.service';
 import { AuthService } from '../../../core/services/auth.service';
@@ -26,6 +26,21 @@ import { MdePopoverTrigger } from '@material-extended/mde';
 import { MatPaginator } from '@angular/material/paginator';
 import Swal from 'sweetalert2';
 import { EmailService } from 'src/app/email/email.service';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+
+@Component({
+  selector: 'reply-dialog',
+  templateUrl: 'reply-dialog.html',
+})
+export class ReplyDialogComponent {
+  constructor(
+    public dialogRef: MatDialogRef<ReplyDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any) {}
+
+  onOkClick() {
+    this.dialogRef.close();
+  }
+}
 
 @Component({
   selector: 'app-company-details',
@@ -40,6 +55,7 @@ import { EmailService } from 'src/app/email/email.service';
     ]),
   ],
 })
+
 export class CompanyDetailsComponent implements OnInit, OnDestroy {
 
   usersInterestedInCompany: User[];
@@ -156,8 +172,8 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
     public companyService: CompanyService,
     public auth: AuthService,
     private emailService: EmailService,
-    private changeDetector: ChangeDetectorRef
-
+    private changeDetector: ChangeDetectorRef,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -493,6 +509,14 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
     })
   }
 
+  openDialog(repliedHTML, fromEmail) {
+    this.dialog.open(ReplyDialogComponent, {
+      data: {
+        repliedHTML: repliedHTML,
+        fromEmail: fromEmail
+      }
+    });
+  }
   /** Delete Question Or Answer */
   deleteQuestionOrAnswer(answerOrQuestion) {
     this.sweetAlertService.confirmDelete(() => {

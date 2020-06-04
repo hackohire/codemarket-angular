@@ -16,16 +16,16 @@
 
         </div>
 
-        <div class="col-md-8 order-1 order-lg-2">
+        <div class="col-md-8 order-1 order-md-2 order-lg-2">
             <div *ngIf="postType === 'appointment'">
-              <app-calender></app-calender>
+                <app-calender></app-calender>
+                <br>
             </div>
-            <br>
             <div class="alert alert-info text-center" *ngIf="postType === 'appointment' && slotDateTime">
-              Confirm Your Apointment
-              <strong>: {{ displayDate | date:'yyyy-MM-dd hh:mm a'}}</strong>
+                Confirm Your Apointment
+                <strong>: {{ displayDate | date:'yyyy-MM-dd hh:mm a'}}</strong>
             </div>
-            <div [formGroup]="postForm" class="">
+            <div [formGroup]="postForm" class="ckEditor">
                 <!-- <mat-form-field class="field-full-width">
                     <input formControlName="name" matInput placeholder="Title" type="text">
                 </mat-form-field> -->
@@ -72,20 +72,19 @@
                     [multiple]="true" [allowToAdd]="false"></app-autocomplete> -->
 
 
-                <div *ngIf="false" fxLayout="row" fxLayoutGap="10px">
-                    <button type="button" (click)="submit('UnpubliDraftedhed')" [disabled]="postForm?.invalid"
-                        mat-raised-button
+                <!-- <div *ngIf="false" fxLayout="row" fxLayoutGap="10px">
+                    <button type="button" (click)="submit('Drafted')" [disabled]="postForm?.invalid" mat-raised-button
                         style="background-color: #28a745; color: white; margin-right: 5px;">{{ 'Save' }}</button>
                     <button type="button" (click)="submit('Published', descriptionEditor)"
                         [disabled]="postForm?.invalid" mat-raised-button color="primary">{{ 'Publish' }}</button>
                     <button type="button" (click)="cancelClicked()" mat-raised-button
                         color="warn">{{ 'Cancel' }}</button>
-                </div>
+                </div> -->
 
             </div>
         </div>
 
-        <div class="col-md-4 sidebar order-2 order-lg-3">
+        <div class="col-md-4 sidebar order-2 order-md-3 order-lg-3">
             <div class="col-md-12 col-sm-12">
                 <ul class="row infos">
                     <li *ngIf="true">
@@ -190,15 +189,16 @@
             <div class="col-xs-12 col-sm-12 time-slot-wrapper" *ngIf="postType === 'appointment'">
                 <!-- {{slotList | json}} {{postType}} -->
                 <div *ngIf="slotList.length > 0; else noSlotSelected;">
-                  <div class="col-6 slot-btn" [ngClass]="{ 'slot-select-box': ((slotDateTime) && slot === slotDateTime) }" 
-                    (click)="selectedSlot(slot)" *ngFor="let slot of slotList">
-                    {{slot}}
-                  </div>
+                    <div class="col-6 slot-btn"
+                        [ngClass]="{ 'slot-select-box': ((slotDateTime) && slot === slotDateTime) }"
+                        (click)="selectedSlot(slot)" *ngFor="let slot of slotList">
+                        {{slot}}
+                    </div>
                 </div>
                 <ng-template class="no-slot" #noSlotSelected>
-                  <span>Please Select Date</span>
+                    <span>Please Select Date</span>
                 </ng-template>
-              </div>
+            </div>
         </div>
     </div>
 </div>

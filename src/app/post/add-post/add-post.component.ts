@@ -15,7 +15,7 @@ import { Location } from '@angular/common';
 import { PostService } from '../../shared/services/post.service';
 import { environment } from '../../../environments/environment';
 import { AppointmentService } from 'src/app/shared/services/appointment.service';
-import {PostType} from '../../shared/models/post-types.enum';
+import { PostType } from '../../shared/models/post-types.enum';
 @Component({
   selector: 'app-add-post',
   templateUrl: './add-post.component.html',
@@ -74,7 +74,7 @@ export class AddPostComponent implements OnInit, AfterViewInit {
     private activatedRoute: ActivatedRoute,
     private postService: PostService,
     private location: Location,
-    private _appointmentService: AppointmentService, 
+    private _appointmentService: AppointmentService,
     private router: Router,
     private ngZone: NgZone
   ) {
@@ -105,8 +105,10 @@ export class AddPostComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     if (this.descriptionEditor && this.descriptionEditor.ckEditorRef) {
-      console.log(this.descriptionEditor.ckEditorRef.elementRef.nativeElement);
-      this.descriptionEditor.ckEditorRef.editorElement.style.minHeight = '70vh';
+      // console.log(this.descriptionEditor.ckEditorRef.elementRef.nativeElement);
+      // this.descriptionEditor.ckEditorRef.editorElement.style.minHeight = '50vh';
+      // this.descriptionEditor.ckEditorRef.editorElement.style.maxHeight = '50vh';
+      // this.des
     }
   }
 
@@ -194,11 +196,11 @@ export class AddPostComponent implements OnInit, AfterViewInit {
       this.createdBy.setValue(this.authService.loggedInUser._id);
     }
 
-    
+
     const postFormValue = { ...this.postForm.value };
     postFormValue.status = status;
     // postFormValue.companies = postFormValue.companies.map(c => c._id);
-    if (this.postType === PostType.Appointment) { 
+    if (this.postType === PostType.Appointment) {
       postFormValue.appointment_date = moment(this.displayDate).format('YYYY-MM-DD HH:mm:ss');
     }
 
@@ -237,7 +239,7 @@ export class AddPostComponent implements OnInit, AfterViewInit {
       result.push(current.format('HH:mm'));
       current.add(15, 'minutes');
     }
-    
+
     if (moment(this.selectedDate).format('YYYY-MM-DD') === moment().format('YYYY-MM-DD')) {
       const currentHour = moment().add('minutes', 0).format('HH');
       const currentMinute = moment().add('minutes', 0).format('mm');
@@ -249,19 +251,19 @@ export class AddPostComponent implements OnInit, AfterViewInit {
           filteredSlots.push(result[i]);
         }
       }
-      
+
       // this.ngZone.run( () => {
-        this.slotList = filteredSlots
-        console.log(this.slotList);
-        // this.testEmitter$.next(this.slotList);
-    //  });
+      this.slotList = filteredSlots
+      console.log(this.slotList);
+      // this.testEmitter$.next(this.slotList);
+      //  });
     } else {
       // this.ngZone.run( () => {
-        this.slotList = result
-        console.log(this.slotList);
-        // this.testEmitter$.next(this.slotList);
-    //  });
-    } 
+      this.slotList = result
+      console.log(this.slotList);
+      // this.testEmitter$.next(this.slotList);
+      //  });
+    }
   }
 
   selectedSlot(slot: string) {

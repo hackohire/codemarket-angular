@@ -74,13 +74,13 @@
         <div class="line-height-initial"><mat-icon>video_call</mat-icon> </div>
       </a> -->
   <!-- <ng-container *ngIf="showPostActions">
-        <a type="button" class="btn btn--vsm btn--round menu" (click)="postService?.saveOrSubmitPost.next('Drafted')"
-          style="background-color: #28a745; color: white;">{{ 'Save' }}</a>
-        <a type="button" class="btn btn--vsm btn--round menu" (click)="postService?.saveOrSubmitPost.next('Published')"
-          style="background-color: blue;">{{ 'Publish' }}</a>
-        <a type="button" class="btn btn--vsm btn--round menu" style="background-color: red;" (click)="location.back()"
-          color="warn">{{ 'Cancel' }}</a>
-      </ng-container> -->
+      <a type="button" class="btn btn--vsm btn--round menu" (click)="postService?.saveOrSubmitPost.next('Drafted')"
+        style="background-color: #28a745; color: white;">{{ 'Save' }}</a>
+      <a type="button" class="btn btn--vsm btn--round menu" (click)="postService?.saveOrSubmitPost.next('Published')"
+        style="background-color: blue;">{{ 'Publish' }}</a>
+      <a type="button" class="btn btn--vsm btn--round menu" style="background-color: red;" (click)="location.back()"
+        color="warn">{{ 'Cancel' }}</a>
+  </ng-container> -->
 
 
   <!-- <a mat-button routerLinkActive="mat-primary" *ngIf="authService.loggedInUser?.roles[0] === 'Admin'" [routerLink]="['/appointment-booking']" 
@@ -88,7 +88,7 @@
         <div class="line-height-initial">Appointment</div>
       </a> -->
 
-  <app-add-post-menu [label]="'Create'" style="right: 7px; top: 2px;"></app-add-post-menu>
+  <app-add-post-menu [label]="'Create'" [drawer]="drawer" style="right: 7px; top: 2px;"></app-add-post-menu>
 
   <!-- <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'company', 'add-company']">
         <div class="line-height-initial"> Sales Accelerator </div>
@@ -123,7 +123,7 @@
   {{authService?.loggedInUser | json}}
   <mat-sidenav *ngIf="authService?.loggedInUser" #drawer class="sidenav" fixedInViewport
     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'"
-    [opened]="(isHandset$ | async) === false">
+    [opened]="(isHandset$ | async) === false" [ngStyle.lt-sm]="{'width.px': '375'}">
     <mat-toolbar
       style="height: 48px; font-size: 14px; font-weight: 400; letter-spacing: 4px; text-transform: uppercase; color: #999; background: #eee;padding-right: 110px;place-content: inherit;">
       <mat-icon (click)="drawer.toggle()" style="margin-right: 15px;">clear</mat-icon> navigation

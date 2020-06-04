@@ -23,7 +23,7 @@
 
 
   <mat-sidenav-content>
-    <mat-toolbar class="SearchLoginBox">
+    <mat-toolbar *ngIf="false" class="SearchLoginBox">
 
       <!-- <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'add-post-type']">
         <i style="font-size: 1.0rem !important; color: #ffff00;" class="vertical-align-middle fal fa-add fa-fw"></i>
@@ -134,8 +134,52 @@
       style="margin-left:5px; padding: 8px 90px 8px 0;">
         <div class="line-height-initial">Appointment</div>
       </a>
+      
 
-      <app-add-post-menu [label]="'Create'" style="position: absolute; right: 7px; top: 2px;"></app-add-post-menu>
+      <!-- Login -->
+      <ng-template #logIn>
+        <a #lr mat-button [mdePopoverTriggerFor]="authentication" [mdePopoverTargetAt]="lr" mdePopoverTriggerOn="click"
+          class="LoginRegisterButton">
+          <i style="font-size: 1.0rem !important; color: #000;"
+            class="vertical-align-middle fal fa-user-circle fa-fw"></i>
+          <span style="color: #000;" class="line-height-initial"> Login/Register</span>
+        </a>
+      </ng-template>
+
+      <mde-popover #authentication="mdePopover" [mdePopoverOverlapTrigger]="false" [mdePopoverCloseOnClick]="false"
+        [mdePopoverArrowOffsetX]="58" mdePopoverArrowColor="#000">
+        <app-auth></app-auth>
+      </mde-popover>
+
+      <!-- My Profile -->
+      <button mat-button [matMenuTriggerFor]="userMenu" *ngIf="authService.loggedInUser; else logIn">
+        <a style="padding: 0;" mat-button routerLinkActive="mat-primary" *ngIf="loggedInUser;"
+          [routerLink]="['/', 'dashboard', 'my-profile']">
+          <i style="font-size: 1.0rem !important; color: #000;"
+            class="vertical-align-middle fal fa-user-circle fa-fw"></i>
+          <span style="color: #000;" class="line-height-initial"> My Profile <mat-icon
+              style="vertical-align: middle; height: 28px;">keyboard_arrow_down</mat-icon>
+          </span>
+        </a>
+      </button>
+      <mat-menu #userMenu="matMenu" panelClass="menu-width">
+        <div class="menu-width">
+          <!-- Shopping Cart -->
+          <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'cart']">
+            <mat-icon>shopping_cart
+            </mat-icon> Cart({{cartListLength | async}})
+          </a>
+
+          <!-- Logout -->
+          <a mat-button (click)="authService?.logout()">
+            <mat-icon>power_settings_new
+            </mat-icon>
+            Logout
+          </a>
+        </div>
+      </mat-menu>
+
+      <app-add-post-menu [label]="'Create'" class="CreateButton"></app-add-post-menu>
 
       <!-- <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'company', 'add-company']">
         <div class="line-height-initial"> Sales Accelerator </div>

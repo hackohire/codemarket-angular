@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommentService } from '../../../shared/services/comment.service';
 import { AuthService } from '../../../core/services/auth.service';
@@ -13,7 +13,7 @@ import { Company } from '../../../shared/models/company.model';
 import { User } from '../../../shared/models/user.model';
 import { environment } from '../../../../environments/environment';
 import { BreadCumb } from '../../../shared/models/bredcumb.model';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { tap } from 'rxjs/internal/operators/tap';
 import { map } from 'rxjs/internal/operators/map';
 import { appConstants } from '../../../shared/constants/app_constants';
@@ -24,6 +24,8 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 import { EditorComponent } from '../../../shared/components/editor/editor.component';
 import { MdePopoverTrigger } from '@material-extended/mde';
 import { MatPaginator } from '@angular/material/paginator';
+import Swal from 'sweetalert2';
+import { EmailService } from 'src/app/email/email.service';
 
 @Component({
   selector: 'app-company-details',
@@ -106,6 +108,15 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
     data: any
   }];
 
+  sendEmailForm: FormGroup;
+  saveEmailForm: FormGroup;
+  trackEmailForm: FormGroup;
+  displayCampaignList = false;
+  file;
+  onlySaveFile;
+
+  @ViewChild('descriptionEditor', { static: false }) descriptionEditor: EditorComponent;
+
   @ViewChild(MdePopoverTrigger, { static: false }) socialMediaPopover: MdePopoverTrigger;
 
   companyViewLinks = [
@@ -145,6 +156,9 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
     private sweetAlertService: SweetalertService,
     public companyService: CompanyService,
     public auth: AuthService,
+    private emailService: EmailService,
+    private changeDetector: ChangeDetectorRef
+
   ) { }
 
   ngOnInit() {
@@ -156,6 +170,8 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
     const params = this.activatedRoute.snapshot.params;
 
     this.companyView = this.activatedRoute.snapshot.queryParams['view'] ? this.activatedRoute.snapshot.queryParams['view'] : 'posts';
+    
+    this.initializeEmailForms();
     this.subscription$.add(
       this.companyService.getCompanyById(params.slug)
         .pipe(
@@ -207,6 +223,27 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
     }
     /** Unsubscribes from Comments Related Subscription */
     this.commentService.unsubscribe();
+  }
+
+  initializeEmailForms() {
+    this.saveEmailForm = new FormGroup({
+      csvfile: new FormControl('', Validators.required),
+      label: new FormControl('', Validators.required),
+      companies: new FormControl('', Validators.required),
+    });
+
+    this.trackEmailForm = new FormGroup({
+      batches: new FormControl('', Validators.required),
+      companies: new FormControl('', Validators.required),
+    });
+
+    this.sendEmailForm = new FormGroup({
+      batches: new FormControl('', Validators.required),
+      companies: new FormControl('', Validators.required),
+      emailTemplate: new FormControl(''),
+      subject: new FormControl('', Validators.required),
+      from: new FormControl('', Validators.required)
+    })
   }
 
   initializeCommentForm(p, commentType?: string) {
@@ -346,6 +383,117 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
       .subscribe();
   }
 
+  /** Send and save email functions */
+  uploadFile(event, action) {
+    if (action === 'save') {
+      this.onlySaveFile = event.target.files[0];
+      console.log(this.onlySaveFile);
+      if (this.onlySaveFile.name.split(".")[1] !== 'csv') {
+        Swal.fire(`Invalid File Type`, '', 'error').then(() => {
+          this.saveEmailForm.get('csvfile').setValue('');
+          this.file = '';
+        });
+       }
+    } else {
+      this.file = event.target.files[0];
+      console.log(this.file);
+      if (this.file.name.split(".")[1] !== 'csv') {
+       Swal.fire(`Invalid File Type`, '', 'error').then(() => {
+         this.saveEmailForm.get('csvfile').setValue('');
+         this.file = '';
+       });
+      }
+    }
+  }
+  
+  csvToJSON(csv, action, callback) {
+    var lines = csv.split("\n");
+    var result = [];
+    var headers = lines[0].split(",");
+    for (var i = 1; i < lines.length; i++) {
+        var obj = {};
+        var currentline = lines[i].split(",");
+        for (var j = 0; j <= headers.length; j++) {
+            obj[headers[j]] = currentline[j];
+            if (action === 'saveClean') {
+              obj['email'] = JSON.parse(currentline[headers.indexOf('email')])
+            }
+        }
+        result.push(obj);
+    }
+    if (callback && (typeof callback === 'function')) {
+        return callback(result);
+    }
+    return result;
+  }
+
+  saveFile() {
+    if (!this.authService.loggedInUser) {
+      this.authService.checkIfUserIsLoggedIn(true);
+      return;
+    }
+    
+    let fileReader = new FileReader();
+    fileReader.onload = (e) => {
+      // console.log(fileReader.result);
+      this.csvToJSON(fileReader.result, 'save', (result) => {
+        console.log("This is result", result);
+        this.emailService.saveCsvFileData(result, this.authService.loggedInUser._id, this.onlySaveFile.name, this.saveEmailForm.value.label, this.saveEmailForm.value.companies).subscribe((data) => {
+        console.log("Response of the file read ==> " , data);
+        });
+      })
+    }
+    fileReader.readAsText(this.onlySaveFile);
+  }
+
+  async submit() {
+
+    if (!this.authService.loggedInUser) {
+      this.authService.checkIfUserIsLoggedIn(true);
+      return;
+    }
+
+    this.changeDetector.detectChanges();
+
+    this.sendEmailForm.get('emailTemplate').setValue(this.descriptionEditor.html);
+  
+    console.log(this.sendEmailForm.value);
+    this.emailService.getEmailData(this.sendEmailForm.value.batches, this.sendEmailForm.value.emailTemplate, this.sendEmailForm.value.subject, this.authService.loggedInUser._id, this.sendEmailForm.value.from, this.sendEmailForm.value.companies).subscribe((data) => {
+      console.log("Response of the email Data ==> " , data);
+    }, (err) => {
+      Swal.fire(`Invalid Data`, '', 'error').then(() => {
+      });
+    });
+  }
+
+  getCampaignData() {
+    console.log('EMail Data is called')
+    const paginationObj = {
+      pageNumber: 1, limit: 10,
+      sort: {order: ''}};
+
+      this.companyService.getCampaignsWithTracking(paginationObj, this.trackEmailForm.value.companies._id, this.trackEmailForm.value.batches._id).subscribe(c => {
+        if (c && c.length) {
+          this.displayCampaignList = true;
+          // this.fetchEmailsConnectedWithCampaign();
+          this.campaignsList = c;
+        }
+      })
+  }
+
+  fetchEmailsOfCampaign() {
+    console.log('fetchEmailsConnectedWithCampaign Data is called')
+    
+    const paginationObj = {
+      pageNumber: this.paginator.pageIndex + 1, limit: this.paginator.pageSize ? this.paginator.pageSize : 10,
+      sort: {order: ''}};
+  
+      this.companyService.getCampaignsWithTracking(paginationObj, this.trackEmailForm.value.companies._id, this.trackEmailForm.value.batches._id).subscribe(c => {
+        if (c && c.length) {
+          this.campaignsList = c;
+        }
+      })
+  }
 
   /** Delete Question Or Answer */
   deleteQuestionOrAnswer(answerOrQuestion) {

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { SendEmailComponent } from './send-email.component';
 import { Routes, RouterModule } from '@angular/router';
 import { SharedModule } from '../../shared/shared.module';
-import { MaterialFileInputModule } from 'ngx-material-file-input';
+// import { MaterialFileInputModule } from 'ngx-material-file-input';
 
 const emailRoutes: Routes = [
   {
@@ -17,7 +17,7 @@ const emailRoutes: Routes = [
   imports: [
     CommonModule,
     SharedModule,
-    MaterialFileInputModule,
+    // MaterialFileInputModule,
     RouterModule.forChild(emailRoutes)
   ]
 })

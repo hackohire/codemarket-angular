@@ -18,7 +18,7 @@
 
   <ng-template #logIn>
     <a #lr mat-button [mdePopoverTriggerFor]="authentication" [mdePopoverTargetAt]="lr" mdePopoverTriggerOn="click"
-      style="line-height: 3;">
+      class="LoginRegisterButton">
       <i style="font-size: 1.0rem !important;" class="vertical-align-middle fal fa-user-circle fa-fw"></i>
       <span class="line-height-initial"> Login/Register</span>
     </a>
@@ -83,13 +83,12 @@
           color="warn">{{ 'Cancel' }}</a>
       </ng-container> -->
 
-
   <!-- <a mat-button routerLinkActive="mat-primary" *ngIf="authService.loggedInUser?.roles[0] === 'Admin'" [routerLink]="['/appointment-booking']" 
       style="margin-left:5px; padding: 8px 90px 8px 0;">
         <div class="line-height-initial">Appointment</div>
       </a> -->
 
-  <app-add-post-menu [label]="'Create'" style="right: 7px; top: 2px;"></app-add-post-menu>
+  <app-add-post-menu [label]="'Create'" class="CreateButton"></app-add-post-menu>
 
   <!-- <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'company', 'add-company']">
         <div class="line-height-initial"> Sales Accelerator </div>
@@ -139,7 +138,7 @@
     <div class="rupertspira">
 
       <div class="container">
-        <div class="bg-white" style="padding: 48px 15px 0;">
+        <div class="bg-white" style="padding: 60px 15px 0;">
 
           <!-- <div id="top_hdr">
             <ul>

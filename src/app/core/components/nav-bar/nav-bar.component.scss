@@ -23,7 +23,7 @@
 }
 
 .mat-toolbar {
-  position: sticky;
+  position: fixed;
   background: #f5f5f5;
   color: black;
   top: 0;
@@ -32,6 +32,7 @@
   // padding-bottom: 20px;
   height: fit-content;
   place-content: center;
+  width: calc(100% - 10px);
 }
 
 .mat-drawer-inner-container {
@@ -104,12 +105,29 @@
   display: none;
 }
 
+.CreateButton {
+  position: absolute; 
+  right: calc(50% - 43px); 
+  top: 2px;
+}
+
+.LoginRegisterButton {
+  line-height: 0; 
+  padding: 10px; 
+}
+
 @media (max-width:767px) {
-  .NavBarBox > div:nth-of-type(1) {
-    display: none !important;
+  // .NavBarBox > div:nth-of-type(1) {
+  //   display: none !important;
+  // }
+  .LoginRegisterButton {
+    margin-bottom: 5px;
   }
   .hidden-lg {
     display: block !important;
+  }
+  .CreateButton {
+    right: 5px; 
   }
   .brand-logo {
     max-width: 55%;
@@ -129,6 +147,12 @@
       z-index: 21 !important;
       border-bottom: 1px solid #ccc;
       padding-left: 0;
+      width: 100%;
+  }
+  .rupertspira .logo {
+    float: none !important;
+    margin: 0 auto;
+    margin-top: 40px;
   }
 }
 
@@ -1330,8 +1354,9 @@ tt {
   color: black;
   text-decoration: none; }
   a:hover, a:focus {
-    color: #ffffff;
-    text-decoration: none; }
+    color: #fff;
+    text-decoration: none;
+    background: mediumpurple; }
 
 /*** Columns ***/
 .rupertspira .css3-columns-2 {

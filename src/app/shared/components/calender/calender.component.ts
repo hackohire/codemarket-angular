@@ -20,7 +20,7 @@ export class CalenderComponent implements OnInit {
   constructor(
     private _appointmentService: AppointmentService
   ) { }
-  
+
   ngOnInit() {
     this._appointmentService.onCalanderDateSelectClick(moment().format('YYYY-MM-DDTHH:mm:ss'));
   }

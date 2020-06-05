@@ -6,12 +6,12 @@ import { Subscription } from 'rxjs';
 })
 export class AppointmentService {
 
-  invokeAppointmentDateTime = new EventEmitter();   
-  subsVar: Subscription; 
+  invokeAppointmentDateTime = new EventEmitter();
+  subsVar: Subscription;
 
   constructor() { }
 
-  onCalanderDateSelectClick(date: any) {    
-    this.invokeAppointmentDateTime.emit(date);    
+  onCalanderDateSelectClick(date: any) {
+    this.invokeAppointmentDateTime.emit(date);
   }
 }

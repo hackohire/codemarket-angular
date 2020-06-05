@@ -24,7 +24,8 @@ export const appConstants = {
     [PostType.Question]: 'sticky-note',
     [PostType.Note]: 'sticky-note',
     [PostType.Business]: 'sticky-note',
-    [PostType.Blog]: 'blog'
+    [PostType.Blog]: 'blog',
+    [PostType.Mentor]: 'briefcase',
   },
 
   fileS3Bucket: 'manav-files',
@@ -263,8 +264,6 @@ export const appConstants = {
       address
       website
 
-      appointment_date
-      cancelReason
       activities {
         action
         activityDate
@@ -276,6 +275,12 @@ export const appConstants = {
         postId
         message
       }
+
+      appointment_date
+      cancelReason
+
+      job
+      mentor
     }
     ${comment}
     `,
@@ -296,6 +301,7 @@ export const appConstants = {
     { name: PostType.Howtodoc, label: 'How-To-Doc' },
     { name: PostType.Interview, label: 'Interview' },
     { name: PostType.Job, label: 'Job' },
+    { name: PostType.Mentor, label: 'Mentor' },
     { name: PostType.Note, label: 'Notes' },
     { name: PostType.Product, label: 'Product' },
     { name: PostType.Question, label: 'Questions' },

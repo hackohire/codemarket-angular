@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, Input, ChangeDetectorRef, AfterViewInit, 
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Subscription, BehaviorSubject } from 'rxjs';
+import { Subscription } from 'rxjs';
 import moment from 'moment';
 import { AuthService } from '../../core/services/auth.service';
 import { AddPost, UpdatePost } from '../../core/store/actions/post.actions';
@@ -20,6 +20,7 @@ import { PostType } from '../../shared/models/post-types.enum';
   selector: 'app-add-post',
   templateUrl: './add-post.component.html',
   styleUrls: ['./add-post.component.scss'],
+  providers: [AppointmentService]
 })
 export class AddPostComponent implements OnInit, AfterViewInit {
 
@@ -31,12 +32,13 @@ export class AddPostComponent implements OnInit, AfterViewInit {
   editPostDetails: Post;
   postTitle;
 
+  postTypeEnum = PostType;
+
   // Appointment
   public slotList = [];
   public slotDateTime: any;
-  public appointmentForm: FormGroup;
   public selectedDate: string;
-  public displayDate: string = "";
+  public displayDate = '';
 
   /** When a user tries to tie a post with this post */
   postFromRoute: Post;
@@ -76,7 +78,6 @@ export class AddPostComponent implements OnInit, AfterViewInit {
     private location: Location,
     private _appointmentService: AppointmentService,
     private router: Router,
-    private ngZone: NgZone
   ) {
 
     this.postType = this.activatedRoute.snapshot.queryParams.type;
@@ -94,7 +95,7 @@ export class AddPostComponent implements OnInit, AfterViewInit {
 
     this.postFormInitialization(null);
 
-    if (this._appointmentService.subsVar == undefined) {
+    if (!this._appointmentService.subsVar) {
       this._appointmentService.subsVar = this._appointmentService.
         invokeAppointmentDateTime.subscribe((date: any) => {
           this.selectedDate = date;
@@ -105,10 +106,8 @@ export class AddPostComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     if (this.descriptionEditor && this.descriptionEditor.ckEditorRef) {
-      // console.log(this.descriptionEditor.ckEditorRef.elementRef.nativeElement);
       // this.descriptionEditor.ckEditorRef.editorElement.style.minHeight = '50vh';
       // this.descriptionEditor.ckEditorRef.editorElement.style.maxHeight = '50vh';
-      // this.des
     }
   }
 
@@ -156,8 +155,25 @@ export class AddPostComponent implements OnInit, AfterViewInit {
       this.postForm.addControl('_id', new FormControl(i && i._id ? i._id : ''));
     }
 
-    if (this.postType === PostType.Appointment) {
-      this.postForm.addControl('cancelReason', new FormControl(i && i.cancelReason ? i.cancelReason : ''));
+    /** Add FormControls(Fields) specific to the post types */
+    switch (this.postType) {
+
+      case PostType.Appointment:
+        this.postForm.addControl('cancelReason', new FormControl(i && i.cancelReason ? i.cancelReason : ''));
+        break;
+
+      case PostType.Mentor:
+        this.postForm.addControl('mentor', new FormGroup({
+          topics: new FormControl(i && i.mentor && i.mentor.topics ? i.mentor.topics : []),
+          availabilityDate: new FormControl(i && i.mentor && i.mentor.availabilityDate ? i.mentor.availabilityDate : [])
+        }));
+        break;
+
+      case PostType.Job:
+        this.postForm.addControl('job', new FormGroup({
+          jobProfile: new FormControl(i && i.job && i.job.jobProfile ? i.job.jobProfile : [])
+        }));
+        break;
     }
 
 
@@ -170,10 +186,6 @@ export class AddPostComponent implements OnInit, AfterViewInit {
       this.postForm.get('companies').setValue(this.postFromRoute.companies);
 
       this.postForm.addControl('connectedPosts', new FormControl([this.postFromRoute._id]));
-    }
-
-    if (i && !i.descriptionHTML && i.description.length) {
-      // this.postForm.get('descriptionHTML').setValue(this.descriptionEditor.editorUI);
     }
   }
 
@@ -194,10 +206,9 @@ export class AddPostComponent implements OnInit, AfterViewInit {
 
     const postFormValue = { ...this.postForm.value };
     postFormValue.status = status;
-    // postFormValue.companies = postFormValue.companies.map(c => c._id);
-    if (this.postType === PostType.Appointment) {
-      postFormValue.appointment_date = moment(this.displayDate).format('YYYY-MM-DD HH:mm:ss');
-    }
+
+    /** Set Values Based On the Post Type Before Submitting the Post */
+    this.setValuesBeforeSubmit(postFormValue);
 
     if (this.postId) {
       this.store.dispatch(UpdatePost({
@@ -208,12 +219,21 @@ export class AddPostComponent implements OnInit, AfterViewInit {
     }
   }
 
-  cancelClicked() {
-    this.location.back();
+  /** Set Values Based On the Post Type Before Adding Post */
+  setValuesBeforeSubmit(postFormValue) {
+    switch (this.postType) {
+      case PostType.Appointment:
+        postFormValue.appointment_date = moment(this.displayDate).format('YYYY-MM-DD HH:mm:ss');
+        break;
+
+      case PostType.Mentor:
+        postFormValue.mentor.availabilityDate = moment(this.displayDate).format('YYYY-MM-DD HH:mm:ss');
+        break;
+    }
   }
 
-  uploadImage(a, b, c) {
-    console.log(a, b, c);
+  cancelClicked() {
+    this.location.back();
   }
 
   recieveEvent(event) {
@@ -239,25 +259,19 @@ export class AddPostComponent implements OnInit, AfterViewInit {
       const currentHour = moment().add('minutes', 0).format('HH');
       const currentMinute = moment().add('minutes', 0).format('mm');
       const filteredSlots = [];
-      for (let i = 0; i < result.length; i++) {
-        if (result[i].split(':')[0] > currentHour) {
-          filteredSlots.push(result[i]);
-        } else if (result[i].split(':')[0] === currentHour && result[i].split(':')[1] > currentMinute) {
-          filteredSlots.push(result[i]);
+      for (const i of result) {
+        if (i.split(':')[0] > currentHour) {
+          filteredSlots.push(i);
+        } else if (i.split(':')[0] === currentHour && i.split(':')[1] > currentMinute) {
+          filteredSlots.push(i);
         }
       }
 
-      // this.ngZone.run( () => {
-      this.slotList = filteredSlots
-      console.log(this.slotList);
-      // this.testEmitter$.next(this.slotList);
-      //  });
+      this.slotList = filteredSlots;
+      // console.log(this.slotList);
     } else {
-      // this.ngZone.run( () => {
-      this.slotList = result
-      console.log(this.slotList);
-      // this.testEmitter$.next(this.slotList);
-      //  });
+      this.slotList = result;
+      // console.log(this.slotList);
     }
   }
 
@@ -265,12 +279,6 @@ export class AddPostComponent implements OnInit, AfterViewInit {
     this.slotDateTime = slot;
     const addTime = this.selectedDate.split('T');
     this.displayDate = moment(addTime[0] + ' ' + this.slotDateTime).format('YYYY-MM-DD HH:mm:ss');
-  }
-
-  confirmAppointment() {
-    console.log(this.appointmentForm.value);
-    console.log(this.selectedDate);
-    console.log(this.slotDateTime);
   }
 
 }

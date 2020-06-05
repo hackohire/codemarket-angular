@@ -10,6 +10,15 @@ export interface Tag {
     campaignId?: string;
 }
 
+export interface Mentor {
+    topics?: Tag[];
+    availabilityDate?: [string];
+}
+
+export interface Job {
+    jobProfile?: Tag[];
+}
+
 export interface Post {
     name?: string;
     description?: [{
@@ -53,4 +62,7 @@ export interface Post {
 
     appointment_date?: [string];
     cancelReason?: [string];
+
+    mentor?: Mentor;
+    job?: Job;
 }

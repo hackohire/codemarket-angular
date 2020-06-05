@@ -1,5 +1,5 @@
 <mat-sidenav-container class="sidenav-container">
-<!-- 
+
   <mat-sidenav *ngIf="false" #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'main'" [opened]="(isHandset$ | async) === false">
     <mat-toolbar style="height: 48px; font-size: 14px; font-weight: 400; letter-spacing: 4px; text-transform: uppercase; color: #999; background: #eee;">navigation</mat-toolbar>
@@ -17,11 +17,11 @@
 
       <a mat-list-item [routerLink]="['/', 'company', 'company-list']" [queryParams]="{all: false}">My Companies</a>
     </mat-nav-list>
-  </mat-sidenav> -->
+  </mat-sidenav>
 
 
   <mat-sidenav-content>
-    <mat-toolbar class="SearchLoginBox">
+    <mat-toolbar *ngIf="false" class="SearchLoginBox">
 
       <!-- <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'add-post-type']">
         <i style="font-size: 1.0rem !important; color: #ffff00;" class="vertical-align-middle fal fa-add fa-fw"></i>
@@ -42,8 +42,8 @@
       </a> -->
       <!-- Login -->
       <ng-template #logIn>
-        <a #lr mat-button [mdePopoverTriggerFor]="authentication" [mdePopoverTargetAt]="lr"
-          mdePopoverTriggerOn="click" style="line-height: 3;">
+        <a #lr mat-button [mdePopoverTriggerFor]="authentication" [mdePopoverTargetAt]="lr" mdePopoverTriggerOn="click"
+          style="line-height: 3;">
           <i style="font-size: 1.0rem !important; color: #ffff00;"
             class="vertical-align-middle fal fa-user-circle fa-fw"></i>
           <span style="color: #ffffff;" class="line-height-initial"> Login/Register</span>
@@ -85,10 +85,10 @@
 
     </mat-toolbar>
 
-    <mat-toolbar class="NavBarBox">
+    <mat-toolbar class="NavBarBox" style="place-content: flex-start; padding-left: 5px; flex-direction: row; box-sizing: border-box; display: flex;">
 
       <!-- Toggle Sidebar Button -->
-      <button *ngIf="false" type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
 
@@ -96,7 +96,7 @@
       <!-- <img (click)="redirect()" sizes="(max-width: 282px) 100vw, 282px"
         srcset="../../../../assets/images/logo_qugbvk_c_scalew_200.png 200w, ../../../../assets/images/logo_qugbvk_c_scalew_282.png 282w"
         src="../../../../assets/images/logo_qugbvk_c_scalew_282.png" alt=""> -->
-      <img (click)="redirect()" src="../../../../assets/images/CodemarketSVG.svg" class="brand-logo" >
+      <img (click)="redirect()" src="../../../../assets/images/JobsLogo.svg" class="brand-logo" style="max-width: 110px;padding: 12px 0; max-height: 48px;">
       <!-- <h2 [routerLink]="['/']">Codemarket</h2> -->
       
       <!-- End Items -->
@@ -114,12 +114,11 @@
           *ngIf="isUnread((messageService.messagesList$ | async)?.messages)"></span>
       </div> -->
 
-      <app-add-post-menu [label]="'Create'">
-      </app-add-post-menu>
+      <app-add-post-menu [label]="'Create'" class="CreateButton"></app-add-post-menu>
 
       <!-- <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'company', 'add-company']">
         <div class="line-height-initial"> Sales Accelerator </div>
-      </a>
+      </a> -->
 
 
       <!-- <app-add-post-menu style="color: black;"></app-add-post-menu> -->
@@ -132,6 +131,60 @@
       </a>
       <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'membership']" [queryParams]="{all: true}" style="margin-left:5px; padding: 8px 16px;">
         <div class="line-height-initial"> Membership </div>
+      </a> -->
+      <a mat-button routerLinkActive="mat-primary" *ngIf="authService.loggedInUser?.roles[0] === 'Admin'" [routerLink]="['/appointment-booking']" 
+      style="margin-left:5px; padding: 8px 90px 8px 0;">
+        <div class="line-height-initial">Appointment</div>
+      </a>
+      
+
+      <!-- Login -->
+      <ng-template #logIn>
+        <a #lr mat-button [mdePopoverTriggerFor]="authentication" [mdePopoverTargetAt]="lr" mdePopoverTriggerOn="click"
+          class="LoginRegisterButton">
+          <i style="font-size: 1.0rem !important; color: #000;"
+            class="vertical-align-middle fal fa-user-circle fa-fw"></i>
+          <span style="color: #000;" class="line-height-initial"> Login/Register</span>
+        </a>
+      </ng-template>
+
+      <mde-popover #authentication="mdePopover" [mdePopoverOverlapTrigger]="false" [mdePopoverCloseOnClick]="false"
+        [mdePopoverArrowOffsetX]="58" mdePopoverArrowColor="#000">
+        <app-auth></app-auth>
+      </mde-popover>
+
+      <!-- My Profile -->
+      <button mat-button [matMenuTriggerFor]="userMenu" *ngIf="authService.loggedInUser; else logIn">
+        <a style="padding: 0;" mat-button routerLinkActive="mat-primary" *ngIf="loggedInUser;"
+          [routerLink]="['/', 'dashboard', 'my-profile']">
+          <i style="font-size: 1.0rem !important; color: #000;"
+            class="vertical-align-middle fal fa-user-circle fa-fw"></i>
+          <span style="color: #000;" class="line-height-initial"> My Profile <mat-icon
+              style="vertical-align: middle; height: 28px;">keyboard_arrow_down</mat-icon>
+          </span>
+        </a>
+      </button>
+      <mat-menu #userMenu="matMenu" panelClass="menu-width">
+        <div class="menu-width">
+          <!-- Shopping Cart -->
+          <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'cart']">
+            <mat-icon>shopping_cart
+            </mat-icon> Cart({{cartListLength | async}})
+          </a>
+
+          <!-- Logout -->
+          <a mat-button (click)="authService?.logout()">
+            <mat-icon>power_settings_new
+            </mat-icon>
+            Logout
+          </a>
+        </div>
+      </mat-menu>
+
+      <app-add-post-menu [label]="'Create'" class="CreateButton"></app-add-post-menu>
+
+      <!-- <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'company', 'add-company']">
+        <div class="line-height-initial"> Sales Accelerator </div>
       </a> -->
 
     </mat-toolbar>

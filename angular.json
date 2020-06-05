@@ -89,6 +89,30 @@
                 }
               ]
             },
+            "uiux": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.uiux.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "5mb",
+                  "maximumError": "15mb"
+                }
+              ]
+            },
             "sendemail": {
               "fileReplacements": [
                 {
@@ -127,6 +151,9 @@
             },
             "staging": {
               "browserTarget": "codemarket:build:staging"
+            },
+            "uiux": {
+              "browserTarget": "codemarket:build:uiux"
             },
             "sendemail": {
               "browserTarget": "codemarket:build:sendemail"
@@ -183,6 +210,9 @@
             "staging": {
               "devServerTarget": "codemarket:serve:staging"
             },
+            "uiux": {
+              "devServerTarget": "codemarket:serve:uiux"
+            },
             "sendemail": {
               "devServerTarget": "codemarket:serve:sendemail"
             }
@@ -214,6 +244,19 @@
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.staging.ts"
+                }
+              ],
+              "sourceMap": false,
+              "optimization": {
+                "scripts": false,
+                "styles": true
+              }
+            },
+            "uiux": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.uiux.ts"
                 }
               ],
               "sourceMap": false,

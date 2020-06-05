@@ -8,7 +8,7 @@ import { AppState } from '../../store/state/app.state';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { selectCartListLength } from '../../store/selectors/cart.selectors';
 import { Router } from '@angular/router';
-import { MatDialog, MatAnchor } from '@angular/material';
+import { MatDialog, MatAnchor, MatDrawer } from '@angular/material';
 import { SearchComponent } from '../search/search.component';
 import { PostType } from '../../../shared/models/post-types.enum';
 import { MessageService } from '../../../shared/services/message.service';
@@ -23,6 +23,7 @@ import { appConstants } from '../../../shared/constants/app_constants';
 export class NavBarComponent implements OnInit, OnDestroy {
 
   @ViewChild('lr', {static: false}) lr: MatAnchor;
+  @ViewChild('drawer', { static: false }) drawer: MatDrawer;
   postTypes = PostType;
 
   postTypesArray = appConstants.postTypesArray;
@@ -147,5 +148,9 @@ export class NavBarComponent implements OnInit, OnDestroy {
       panelClass: 'no-padding',
       disableClose: false
     });
+  }
+
+  toggleNavbar() {
+    this.drawer.toggle();
   }
 }

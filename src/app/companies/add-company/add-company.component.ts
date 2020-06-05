@@ -8,7 +8,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FormService } from '../../shared/services/form.service';
 import { catchError, } from 'rxjs/operators';
 import { Subscription, of } from 'rxjs';
-import { Tag } from '../../shared/models/product.model';
+import { Tag } from '../../shared/models/post.model';
 import { CompanyService } from '../company.service';
 import { CompanyTypes, Company } from '../../shared/models/company.model';
 import Swal from 'sweetalert2';
@@ -183,7 +183,7 @@ export class AddCompanyComponent implements OnInit {
   }
 
   fetchCompanies(pageNumber) {
-    this.companyService.getCompaniesByType('', {pageNumber, limit: 3}).subscribe((dj: any) => {
+    this.companyService.getCompaniesByType('', { pageNumber, limit: 3 }).subscribe((dj: any) => {
       if (dj && dj.companies) {
         this.listOfCompanies = this.listOfCompanies.concat(dj.companies);
         this.totalCompanies = dj.total;

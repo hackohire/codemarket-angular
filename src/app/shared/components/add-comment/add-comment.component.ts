@@ -34,7 +34,6 @@ export class AddCommentComponent implements OnInit {
   ngOnInit() {
     // if (!this.commentForm) {
     this.commentForm = new FormGroup({
-      text: new FormControl([]),
       type: new FormControl('post'),
       blockId: new FormControl(null),
       blockSpecificComment: new FormControl(false),

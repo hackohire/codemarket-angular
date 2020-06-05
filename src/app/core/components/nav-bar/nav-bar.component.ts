@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, AfterViewInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable, Subscription } from 'rxjs';
 import { map, share, filter, tap } from 'rxjs/operators';
@@ -6,14 +6,34 @@ import { User } from 'src/app/shared/models/user.model';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../store/state/app.state';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { selectCartListLength } from '../../store/selectors/cart.selectors';
 import { Router, Event, ActivationEnd, RouterStateSnapshot, NavigationEnd } from '@angular/router';
 import { MatDialog, MatAnchor, MatDrawer } from '@angular/material';
 import { SearchComponent } from '../search/search.component';
+import { droEmails, emails, la2050Emails, therapistEmails } from '../../../emails';
+import { newBniEmails, womenBizEmails, cityEmails, cocSmEmail, linkedInEmails } from '../../../newEmails';
+import { realEstateEmail, accountEmails, juryEmails, dentistEmails, newTherapistEmail, finalInstaEmails } from '../../../dentist-acc-realestate-emails';
+import { Validators, FormControl } from '@angular/forms';
 import { PostType } from '../../../shared/models/post-types.enum';
 import { MessageService } from '../../../shared/services/message.service';
 import { PostService } from '../../../shared/services/post.service';
 import { appConstants } from '../../../shared/constants/app_constants';
+import { EmailService } from '../../../email/email.service';
+import { PostStatus } from '../../../shared/models/poststatus.enum';
+import { emailTemplate } from '../../../shared/email-template';
+import { allBinEmailTemplate } from '../../../shared/all-bni-email-template';
+import { droEmailTemplate } from '../../../shared/dro-email-template';
+import { la2050 } from '../../../shared/la2050-template';
+import { newla2050 } from '../../../shared/new-la2050-template';
+import { thepaistTemplate } from '../../../shared/therapist-template';
+import { newBniTemplate } from '../../../shared/new-bni-template';
+import { womenbizTemplate } from '../../../shared/womenbiz-template';
+import { linkedinTemplate } from '../../../shared/linkedin-template';
+import { cocSmTemplate } from '../../../shared/cocsam-template';
+import { cityTemplate } from '../../../shared/city-template';
+import { dentistTemplate } from '../../../shared/dentis-template';
+import { accountantTemplate } from '../../../shared/accountant-template';
+import { realestateTemplate } from '../../../shared/realestate-template';
+import { instagramTemplate } from '../../../shared/instagram-template';
 import { Post } from '../../../shared/models/post.model';
 import { Location } from '@angular/common';
 
@@ -22,7 +42,7 @@ import { Location } from '@angular/common';
   templateUrl: './nav-bar.component.html',
   styleUrls: ['./nav-bar.component.scss'],
 })
-export class NavBarComponent implements OnInit, OnDestroy {
+export class NavBarComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @ViewChild('lr', { static: false }) lr: MatAnchor;
   @ViewChild('drawer', { static: false }) drawer: MatDrawer;
@@ -56,7 +76,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
     private dialog: MatDialog,
     public messageService: MessageService,
     public postService: PostService,
-    public location: Location
+    public location: Location,
   ) {
 
     this.subscription.add(
@@ -79,7 +99,6 @@ export class NavBarComponent implements OnInit, OnDestroy {
           if (u) {
             // this.ref.detach();
             this.loggedInUser = { ...u };
-            this.getConnectedPosts(u);
             // this.ref.detectChanges();
           } else {
             this.loggedInUser = u;
@@ -87,9 +106,16 @@ export class NavBarComponent implements OnInit, OnDestroy {
 
         })
     );
+  }
 
-    this.cartListLength = this.store.select(selectCartListLength);
-
+  ngAfterViewInit() {
+    this.subscription.add(
+      this.authService.openAuthenticationPopover.subscribe(open => {
+        if (open) {
+          this.lr._elementRef.nativeElement.click();
+        }
+      })
+    );
   }
 
   ngOnDestroy() {
@@ -139,6 +165,52 @@ export class NavBarComponent implements OnInit, OnDestroy {
       disableClose: false
     });
   }
+
+  // sendEmails() {
+  //   let count = 0;
+  //   finalInstaEmails.forEach((e, i) => {
+  //     setTimeout(() => {
+  //       e.email.forEach((email, j) => {
+  //         setTimeout(() => {
+  //           if (!Validators.email(new FormControl(email.email))) {
+  //             const emailObj = {
+  //               to: [email.email],
+  //               subject: `${e.instaProfileId} Monetize Your ${e.followers} Instagram Followers`, // Therapist
+  //               companies: [{ _id: '5db1c84ec10c45224c4b95fd' }],
+  //               type: PostType.Email,
+  //               status: PostStatus.Published,
+  //               // descriptionHTML: dentistTemplate.replace('{companyName}', e.companyName),
+  //               // descriptionHTML: accountantTemplate.replace('{companyName}', e.companyName),
+  //               descriptionHTML: instagramTemplate.replace('{instaProfileId}', e.instaProfileId).replace('{followers}', e.followers),
+  //               createdBy: '5d4c1cdf91e63a3fe84bb43a',
+  //               campaignId: '5ec800f9870915348a37f30f', // instagram
+  //               // city: e.cityName
+  //             };
+  //             this.emailService.sendEmail(emailObj).toPromise().then((o) => {
+  //               console.log(o, i);
+  //               if (o) {
+  //                 count += 1;
+  //                 // dummyEmails[i]['sent'] = true;
+  //               }
+  //             }).catch((e) => {
+  //               console.log(e);
+  //             });
+  //             // this.postService.sendEmailWithStaticContent(email, e.name, e.companyName, e.image).toPromise().then((o) => {
+  //             //   console.log(o, i);
+  //             //   if (o) {
+  //             //     count += 1;
+  //             //     // dummyEmails[i]['sent'] = true;
+  //             //   }
+  //             // }).catch((e) => {
+  //             //   console.log(e);
+  //             // });
+  //           }
+  //         }, j * 1500);
+  //       });
+  //       console.log(count);
+  //     }, i * 1000);
+  //   });
+  // }
 
   toggleNavbar() {
     this.drawer.toggle();

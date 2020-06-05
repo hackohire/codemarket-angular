@@ -39,7 +39,6 @@ export class UserService {
     cover
     roles
     createdAt
-    likeCount
     stripeId
     subscription {
       plan {

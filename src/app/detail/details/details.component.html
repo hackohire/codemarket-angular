@@ -77,35 +77,14 @@
                         </li>
 
                         <!-- <li *ngIf="postDetails?.tags && postDetails?.tags?.length || fromAddPost"> -->
-                        <li *ngIf="allowUsersEdit()">
+                        <li *ngIf="allowUsersEdit() && postTypeEnum.Job !== postDetails?.type">
                             <p class="data-label">Tags</p>
                             <p class="info">
                                 <span class="tag" *ngFor="let t of postDetails?.tags">{{t?.name}}</span>
                             </p>
-                            <span style="margin: 7px 0 0 5px;" [mdePopoverTriggerFor]="addTagsPopover"
-                                mdePopoverTriggerOn="click"><i class="fa fa-plus-square" aria-hidden="true"></i></span>
-                            <mde-popover #addTagsPopover="mdePopover" [mdePopoverOverlapTrigger]="false"
-                                [mdePopoverCloseOnClick]="false" [mdePopoverArrowOffsetX]="8"
-                                mdePopoverArrowColor="#FFFFFF">
-                                <div style="background: #f8f9fb; padding: 10px;">
-                                    <app-autocomplete [autoComplete]="postForm?.get('tags')" [collection]="'tags'"
-                                        [multiple]="true" [placeholder]="'Tags'" [type]="'tag'"></app-autocomplete>
-                                    <mat-icon (click)="addDataOfPost('tags')">
-                                        send</mat-icon>
-                                </div>
-                            </mde-popover>
-                        </li>
-
-                        <li *ngIf="postDetails?.connectedPosts && postDetails?.connectedPosts?.length">
-                            <p class="data-label">Reference Posts</p>
-                            <p class="info">
-                                <span style="text-decoration: underline;"
-                                    *ngFor="let t of postDetails?.connectedPosts; let last=last;">
-                                    <a style="color: white;" [href]="'/' + 'post' + '/' + t?.slug"
-                                        target="_blank">{{t?.name}}
-                                        {{last ? '' : ','}}</a>
-                                </span>
-                            </p>
+                            <ng-container
+                                *ngTemplateOutlet="autoComplete; context: { type: 'tag', fieldName: 'tags', collection: 'tags', placeholder: 'Tags' }">
+                            </ng-container>
                         </li>
 
                         <!-- <li *ngIf="postDetails?.collaborators && postDetails?.collaborators?.length || fromAddPost"> -->
@@ -118,23 +97,9 @@
                                         <img [src]="t?.avatar ? ((s3FilesBucketURL + t?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
                                             alt="">{{t?.name}}</span>
                                 </a>
-                                <span style="margin: 7px 0 0 5px;" [mdePopoverTriggerFor]="addCollaboratorsPopover"
-                                    mdePopoverTriggerOn="click"><i class="fa fa-plus-square"
-                                        aria-hidden="true"></i></span>
-
-                                <mde-popover #addCollaboratorsPopover="mdePopover" [mdePopoverOverlapTrigger]="false"
-                                    [mdePopoverCloseOnClick]="false" [mdePopoverArrowOffsetX]="8"
-                                    mdePopoverArrowColor="#FFFFFF">
-                                    <div style="background: #f8f9fb; padding: 10px;">
-                                        <app-autocomplete class="field-full-width" [allowToAdd]="false"
-                                            [autoComplete]="postForm?.get('collaborators')"
-                                            [placeholder]="'Select Collaborators'" [collection]="'users'" [type]=""
-                                            [multiple]="true" matInput>
-                                        </app-autocomplete>
-                                        <mat-icon (click)="addDataOfPost('collaborators')">
-                                            send</mat-icon>
-                                    </div>
-                                </mde-popover>
+                                <ng-container
+                                    *ngTemplateOutlet="autoComplete; context: { type: '', fieldName: 'collaborators', collection: 'users', placeholder: 'Select Collaborators' }">
+                                </ng-container>
                             </p>
                         </li>
 
@@ -149,28 +114,53 @@
                                             alt="">{{t?.name}}</span>
                                 </a>
                             </p>
-                            <span style="margin: 7px 0 0 5px;" [mdePopoverTriggerFor]="addClientsPopover"
-                                mdePopoverTriggerOn="click"><i class="fa fa-plus-square" aria-hidden="true"></i></span>
-
-                            <mde-popover #addClientsPopover="mdePopover" [mdePopoverOverlapTrigger]="false"
-                                [mdePopoverCloseOnClick]="false" [mdePopoverArrowOffsetX]="8"
-                                mdePopoverArrowColor="#FFFFFF">
-                                <div style="background: #f8f9fb; padding: 10px;">
-                                    <app-autocomplete class="field-full-width" [allowToAdd]="false"
-                                        [autoComplete]="postForm?.get('clients')" [placeholder]="'Select Clients'"
-                                        [collection]="'users'" [type]="" [multiple]="true" matInput>
-                                    </app-autocomplete>
-                                    <mat-icon (click)="addDataOfPost('clients')">
-                                        send</mat-icon>
-                                </div>
-                            </mde-popover>
+                            <ng-container
+                                *ngTemplateOutlet="autoComplete; context: { type: '', fieldName: 'clients', collection: 'users', placeholder: 'Select Clients' }">
+                            </ng-container>
                         </li>
 
-                        <li *ngIf="postDetails?.jobProfile && postDetails?.jobProfile?.length">
-                            <p class="data-label">Position</p>
-                            <p class="info" style="text-transform: capitalize;">
-                                <span
-                                    *ngFor="let c of postDetails?.jobProfile; let ei = index;">{{c?.name + (ei === postDetails?.jobProfile?.length - 1 ? '' : ', ' )}}</span>
+                        <li *ngIf="allowUsersEdit()">
+                            <p class="data-label">Company</p>
+                            <p class="info" style="text-transform: capitalize; cursor: pointer;">
+                                <span *ngFor="let c of postDetails?.companies; let ei = index;"
+                                    [routerLink]="['/', 'company', c?._id]">{{c?.name + (ei === postDetails?.companies?.length - 1 ? '' : ', ' )}}</span>
+                            </p>
+                            <ng-container
+                                *ngTemplateOutlet="autoComplete; context: { type: '', fieldName: 'companies', collection: 'companies', placeholder: 'Select Company', forCompany: true }">
+                            </ng-container>
+                        </li>
+
+                        <li *ngIf="allowUsersEdit() && postTypeEnum.Job === postDetails?.type">
+                            <p class="data-label">Job Profile</p>
+                            <p class="info">
+                                <span class="tag" *ngFor="let t of postDetails?.job?.jobProfile">{{t?.name}}</span>
+                            </p>
+                            <ng-container
+                                *ngTemplateOutlet="autoComplete; context: { type: 'role', fieldName: 'job.jobProfile', collection: 'tags', placeholder: 'Select Job Profiles' }">
+                            </ng-container>
+                        </li>
+
+                        <!-- Topics -->
+                        <li *ngIf="allowUsersEdit() && postTypeEnum.Mentor === postDetails?.type">
+                            <p class="data-label">Topics</p>
+                            <p class="info">
+                                <span class="tag"
+                                    *ngFor="let t of postForm?.get('mentor.topics')?.value">{{t?.name}}</span>
+                            </p>
+                            <ng-container
+                                *ngTemplateOutlet="autoComplete; context: { type: 'tag', fieldName: 'mentor.topics', collection: 'tags', placeholder: 'Enter Topics' }">
+                            </ng-container>
+                        </li>
+
+                        <li *ngIf="postDetails?.connectedPosts && postDetails?.connectedPosts?.length">
+                            <p class="data-label">Reference Posts</p>
+                            <p class="info">
+                                <span style="text-decoration: underline;"
+                                    *ngFor="let t of postDetails?.connectedPosts; let last=last;">
+                                    <a style="color: white;" [href]="'/' + 'post' + '/' + t?.slug"
+                                        target="_blank">{{t?.name}}
+                                        {{last ? '' : ','}}</a>
+                                </span>
                             </p>
                         </li>
 
@@ -184,6 +174,15 @@
                                 </a>
                             </p>
                         </li>
+
+                        <li *ngIf="postDetails?.mentor?.availabilityDate">
+                            <p class="data-label">Availability</p>
+                            <p class="info">
+                                <mat-icon style="vertical-align: middle;">date_range</mat-icon>
+                                {{ postDetails?.mentor?.availabilityDate | date: 'EEEE, MMMM d, y, h:mm a'}}
+                            </p>
+                        </li>
+
                         <li *ngIf="postDetails?.createdAt">
                             <p class="data-label">CreatedAt</p>
                             <p class="info">
@@ -198,29 +197,6 @@
                                 <mat-icon style="vertical-align: middle;">date_range</mat-icon>
                                 {{ postDetails?.updatedAt | date: 'EEEE, MMMM d, y, h:mm a'}}
                             </p>
-                        </li>
-
-                        <li *ngIf="allowUsersEdit()">
-                            <p class="data-label">Company</p>
-                            <p class="info" style="text-transform: capitalize; cursor: pointer;">
-                                <span *ngFor="let c of postDetails?.companies; let ei = index;"
-                                    [routerLink]="['/', 'company', c?._id]">{{c?.name + (ei === postDetails?.companies?.length - 1 ? '' : ', ' )}}</span>
-                            </p>
-                            <span style="margin: 7px 0 0 5px" [mdePopoverTriggerFor]="addCopmaniesPopover"
-                                mdePopoverTriggerOn="click"><i class="fa fa-plus-square" aria-hidden="true"></i></span>
-
-                            <mde-popover #addCopmaniesPopover="mdePopover" [mdePopoverOverlapTrigger]="false"
-                                [mdePopoverCloseOnClick]="false" [mdePopoverArrowOffsetX]="8"
-                                mdePopoverArrowColor="#FFFFFF">
-                                <div style="background: #f8f9fb; padding: 10px;">
-                                    <app-autocomplete [autoComplete]="postForm?.get('companies')"
-                                        [collection]="'companies'" [forCompany]="true" [multiple]="true"
-                                        [placeholder]="'Select Company'" [type]="" class="col-md-6">
-                                    </app-autocomplete>
-                                    <mat-icon (click)="addDataOfPost('companies')">
-                                        send</mat-icon>
-                                </div>
-                            </mde-popover>
                         </li>
 
                         <li>
@@ -298,9 +274,22 @@
 </ng-container>
 
 
-<!--============================================
-        START COMPANY DETAILS
-    ==============================================-->
+
+<!-- AUTO COMPLETE POPOVER TEMPLATE -->
+<ng-template #autoComplete let-type="type" let-collection="collection" let-fieldName="fieldName"
+    let-placeholder="placeholder" let-forCompany="forCompany">
+    <span style="margin: 7px 0 0 5px;" [mdePopoverTriggerFor]="addTagsPopover" mdePopoverTriggerOn="click"><i
+            class="fa fa-plus-square" aria-hidden="true"></i></span>
+    <mde-popover #addTagsPopover="mdePopover" [mdePopoverOverlapTrigger]="false" [mdePopoverCloseOnClick]="false"
+        [mdePopoverArrowOffsetX]="8" mdePopoverArrowColor="#FFFFFF">
+        <div
+            style="background: #fff; padding: 10px;border: 1px solid #ccc;margin-top: -10px;box-shadow: 0 0 10px 0 #aaa;">
+            <app-autocomplete [autoComplete]="postForm?.get(fieldName)" [collection]="collection" [multiple]="true"
+                [placeholder]="placeholder" [type]="type" [forCompany]="forCompany"></app-autocomplete>
+            <mat-icon (click)="addDataOfPost(fieldName, addTagsPopover)">send</mat-icon>
+        </div>
+    </mde-popover>
+</ng-template>
 
 
 <ng-template #addCommentTemplate let-cDetails="details">

@@ -117,7 +117,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.manav.ts"
+                  "with": "src/environments/environment.sendemail.ts"
                 }
               ],
               "optimization": true,
@@ -269,7 +269,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.manav.ts"
+                  "with": "src/environments/environment.sendemail.ts"
                 }
               ],
               "sourceMap": false,

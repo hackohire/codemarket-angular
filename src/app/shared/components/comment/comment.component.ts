@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnChanges, ViewChild, ChangeDetectorRef} from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { tap } from 'rxjs/operators';
 import moment from 'moment';
@@ -29,7 +29,7 @@ export class CommentComponent implements OnInit {
   edit: boolean;
   replyEditorId: string;
 
-  @ViewChild('commentReplyEditor', {static: false}) commentReplyEditor: EditorComponent;
+  @ViewChild('commentReplyEditor', { static: false }) commentReplyEditor: EditorComponent;
 
   anonymousAvatar = '../../../../assets/images/anonymous-avatar.jpg';
   s3FilesBucketURL = environment.s3FilesBucketURL;
@@ -38,7 +38,6 @@ export class CommentComponent implements OnInit {
     public authService: AuthService,
     private commentService: CommentService,
     private sweetAlertService: SweetalertService,
-    private changeDetector: ChangeDetectorRef
   ) { }
 
   ngOnInit() {
@@ -48,7 +47,6 @@ export class CommentComponent implements OnInit {
 
   initializeReplyForm() {
     this.replyCommentForm = new FormGroup({
-      text: new FormControl([]),
       // createdBy: new FormControl(this.authService.loggedInUser._id),
       referenceId: new FormControl(this.comment.referenceId),
       companyReferenceId: new FormControl(this.companyReferenceId ? this.companyReferenceId : this.comment.companyReferenceId),
@@ -110,13 +108,13 @@ export class CommentComponent implements OnInit {
 
   deleteComment(singleCommentEditor: EditorComponent) {
     this.sweetAlertService.confirmDelete(() => {
-    this.commentService.deleteComment(this.comment._id, this.comment.referenceId, singleCommentEditor.html).pipe(
-      tap((d) => {
-        // this.commentDeleted.emit(this.comment._id);
-        // this.comment = null;
-        this.replyCommentForm = null;
-      })
-    ).subscribe();
+      this.commentService.deleteComment(this.comment._id, this.comment.referenceId, singleCommentEditor.html).pipe(
+        tap((d) => {
+          // this.commentDeleted.emit(this.comment._id);
+          // this.comment = null;
+          this.replyCommentForm = null;
+        })
+      ).subscribe();
     });
   }
 
@@ -129,7 +127,6 @@ export class CommentComponent implements OnInit {
     await this.commentService.updateComment(
       this.comment._id,
       this.comment.referenceId,
-      this.comment.text,
       singleCommentEditor.html
       // singleCommentEditor.editorViewRef.nativeElement.innerHTML
     ).pipe(

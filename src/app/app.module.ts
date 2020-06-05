@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
+// import { MaterialFileInputModule } from 'ngx-material-file-input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavBarComponent } from './core/components/nav-bar/nav-bar.component';
 import { LayoutModule } from '@angular/cdk/layout';
@@ -61,7 +62,8 @@ import { SettingsComponent } from './video-chat/settings/settings.component';
     AuthModule,
     MakemoneyonlineModule,
     FormioModule,
-    FormBuilderModule
+    FormBuilderModule,
+    // MaterialFileInputModule
   ],
   providers: [PostDataResolver],
   bootstrap: [AppComponent],

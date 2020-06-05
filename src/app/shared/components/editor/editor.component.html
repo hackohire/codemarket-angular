@@ -15,7 +15,7 @@
 
         <div [id]="ckEditorUserToken ? 'container' : ''">
             <div [id]="ckEditorUserToken ? 'editor' : ''">
-                <ckeditor  #ckEditorRef [config]="{
+                <ckeditor #ckEditorRef [config]="{
                     removePlugins: [],
                     extraPlugins: [ myCustomUploadAdapterPlugin ],
                     cloudServices: {tokenUrl: generateToken, webSocketUrl: webSocketUrl },
@@ -24,7 +24,8 @@
                     collaboration: { channelId: this.post._id },
                     commentsOnly: !allowUsersEdit(),
                     autosave: { save: realTime && allowUsersEdit() ? autosave : null}
-                }" [disabled]="false" [editor]="ckEditor" [(ngModel)]="html" (ready)="readOnly ? refreshDisplayMode($event, sidebar) : onReady($event, sidebar)">
+                }" [disabled]="false" [editor]="ckEditor" [(ngModel)]="html"
+                    (ready)="readOnly ? refreshDisplayMode($event, sidebar) : onReady($event, sidebar)">
                 </ckeditor>
             </div>
 

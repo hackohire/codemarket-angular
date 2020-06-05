@@ -12,7 +12,7 @@ import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { PostService } from './post.service';
 import { Post } from '../models/post.model';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class CommentService {
 
   commentSchema = comment;
@@ -146,20 +146,20 @@ export class CommentService {
           //     p.comments.push(c);
           //   }
           // } else {
-            if (c.parentId) {
-              const commentIndex = comments.slice().findIndex(com => com._id === c.parentId);
-              comments[commentIndex]['children'].push(c);
-            } else {
-              comments.push(c);
-            }
-            /** Audio Notification */
-            // var audio = new Audio(appConstants.Notification);
-            // audio.play();
+          if (c.parentId) {
+            const commentIndex = comments.slice().findIndex(com => com._id === c.parentId);
+            comments[commentIndex]['children'].push(c);
+          } else {
+            comments.push(c);
+          }
+          /** Audio Notification */
+          // var audio = new Audio(appConstants.Notification);
+          // audio.play();
 
-            /** Tostr Notification */
-            // this.openToastrNotification(post, c)
+          /** Tostr Notification */
+          // this.openToastrNotification(post, c)
 
-            this.commentsList$.next(comments);
+          this.commentsList$.next(comments);
           // }
         })
       ).subscribe()
@@ -175,13 +175,13 @@ export class CommentService {
         <u>View</u>
         `
       ).onTap
-      .pipe(take(1))
-      .subscribe(() => {
-        if (rediect) {
-          this.postService.redirectToPostDetails(post);
-        }
-        this.scrollToComment(post.description, c);
-      })
+        .pipe(take(1))
+        .subscribe(() => {
+          if (rediect) {
+            this.postService.redirectToPostDetails(post);
+          }
+          this.scrollToComment(post.description, c);
+        })
     );
   }
 
@@ -196,7 +196,7 @@ export class CommentService {
     if (isPlatformBrowser(this.platformId)) {
       setTimeout(() => {
         let el = this.document.getElementById(`${c._id}`);
-        el.scrollIntoView({block: 'center', behavior: 'smooth', inline: 'center'}); /** scroll to the element upto the center */
+        el.scrollIntoView({ block: 'center', behavior: 'smooth', inline: 'center' }); /** scroll to the element upto the center */
         el.style.border = '2px solid #00aeef'; /** Highlighting the element */
       }, c.blockSpecificComment ? 1000 : 0);
     }
@@ -223,9 +223,9 @@ export class CommentService {
         tap((p: any) => {
           const comments = p.data.getCommentsByReferenceId;
           this.commentsList$.next(comments);
-          this.onCommentAdded({post}, comments);
-          this.onCommentUpdated({post}, comments);
-          this.onCommentDeleted({post}, comments);
+          this.onCommentAdded({ post }, comments);
+          this.onCommentUpdated({ post }, comments);
+          this.onCommentDeleted({ post }, comments);
 
           /** If comment Id is passed scroll down to the comment */
           if (comments && comments.length && commentId) {
@@ -263,7 +263,7 @@ export class CommentService {
           return c.data.onCommentDeleted;
         }),
         tap((c: Comment) => {
-           /** If comment is related to the post of a company */
+          /** If comment is related to the post of a company */
           if (c.companyReferenceId) {
             const p = this.companyPostsList.find(p => p._id === c.referenceId);
 
@@ -348,7 +348,7 @@ export class CommentService {
           return c.data.onCommentUpdated;
         }),
         tap((c: Comment) => {
-           /** If comment is related to the post of a company */
+          /** If comment is related to the post of a company */
           // if (c.companyReferenceId) {
 
           //   const p = this.companyPostsList.find(p => p._id === c.referenceId);
@@ -378,17 +378,17 @@ export class CommentService {
 
           // } else {
 
-            if (c.parentId) {
-              const parentCommentIndex = comments.findIndex(com => com._id === c.parentId);
-              const deletedChildCommentIndex = comments[parentCommentIndex]['children'].findIndex(com => com._id === c._id);
-              comments[parentCommentIndex]['children'][deletedChildCommentIndex]['text'] = c.text;
-              comments[parentCommentIndex]['children'][deletedChildCommentIndex]['textHTML'] = c.textHTML;
-            } else {
-              const commentIndex = comments.slice().findIndex(com => com._id === c._id);
-              comments[commentIndex]['text'] = c.text;
-              comments[commentIndex]['textHTML'] = c.textHTML;
-            }
-            this.commentsList$.next(comments);
+          if (c.parentId) {
+            const parentCommentIndex = comments.findIndex(com => com._id === c.parentId);
+            const deletedChildCommentIndex = comments[parentCommentIndex]['children'].findIndex(com => com._id === c._id);
+            comments[parentCommentIndex]['children'][deletedChildCommentIndex]['text'] = c.text;
+            comments[parentCommentIndex]['children'][deletedChildCommentIndex]['textHTML'] = c.textHTML;
+          } else {
+            const commentIndex = comments.slice().findIndex(com => com._id === c._id);
+            comments[commentIndex]['text'] = c.text;
+            comments[commentIndex]['textHTML'] = c.textHTML;
+          }
+          this.commentsList$.next(comments);
 
           // }
         })
@@ -396,12 +396,12 @@ export class CommentService {
     );
   }
 
-  updateComment(commentId, postId, text, textHTML: string): Observable<any> {
+  updateComment(commentId, postId, textHTML: string): Observable<any> {
     return this.apollo.mutate(
       {
         mutation: gql`
-          mutation updateComment($commentId: String, $postId: String, $text: [InputdescriptionBlock], $textHTML: String) {
-            updateComment(commentId: $commentId, postId: $postId, text: $text, textHTML: $textHTML) {
+          mutation updateComment($commentId: String, $postId: String, $textHTML: String) {
+            updateComment(commentId: $commentId, postId: $postId, textHTML: $textHTML) {
                 textHTML
             }
           }
@@ -410,7 +410,6 @@ export class CommentService {
         variables: {
           commentId,
           postId,
-          text,
           textHTML
         }
       }

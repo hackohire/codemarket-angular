@@ -6,7 +6,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { AddCompanyComponent } from './add-company/add-company.component';
 import { CompaniesListComponent } from './companies-list/companies-list.component';
 import { AuthGuard } from '../shared/guards/auth.guard';
-import { CompanyDetailsComponent } from './company-details/company-details/company-details.component';
+import { CompanyDetailsComponent, ReplyDialogComponent } from './company-details/company-details/company-details.component';
+import { MaterialFileInputModule } from 'ngx-material-file-input';
 
 const companyRoutes: Routes = [
   {
@@ -38,10 +39,14 @@ const companyRoutes: Routes = [
 ];
 
 @NgModule({
-  declarations: [CompaniesComponent, CompanyDetailsComponent, AddCompanyComponent],
+  declarations: [CompaniesComponent, CompanyDetailsComponent, AddCompanyComponent, ReplyDialogComponent],
+  entryComponents: [
+    ReplyDialogComponent
+  ],
   imports: [
     CommonModule,
     SharedModule,
+    MaterialFileInputModule,
     RouterModule.forChild(companyRoutes)
   ],
 })

@@ -90,6 +90,7 @@
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
     "ngx-highlightjs": "^3.0.2",
+    "ngx-material-file-input": "^2.1.1",
     "ngx-toastr": "^11.2.1",
     "peerjs": "^1.1.0",
     "rxjs": "6.5.2",

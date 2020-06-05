@@ -4,62 +4,60 @@
 
 	<section style="padding-top: 35px;" class="author-profile-area">
 		<div class="container" style="margin: auto;">
-			<div class="container" style="margin-top: 0; margin-bottom: 15px;">
-				<div class="row">
-					<div class="col-lg-2 col-md-2 col-sm-3 align-items-center justify-content-center"
-						style="margin: auto;">
-						<div class="profile-picture">
-							<div class="user-info">
-								<div class="profile-pic">
-									<img
-										[src]="selectedProfilePicURL ? (selectedProfilePicURL | safe: 'resourceUrl') : user?.avatar ? ((s3FilesBucketURL + user?.avatar) | safe: 'resourceUrl') : anonymousAvatar" />
-									<div class="layer">
-										<div class="loader"></div>
-									</div>
-									<a class="image-wrapper">
-										<mat-icon class="edit glyphicon glyphicon-pencil" (click)="addProfilePic()">edit
-										</mat-icon>
-										<mat-icon class="edit glyphicon glyphicon-pencil"
-											(click)="removeProfilePic(user?._id)">delete</mat-icon>
-									</a>
+			<div class="row" style="margin-top: 0; margin-bottom: 15px;">
+				<div class="col-lg-2 col-md-2 col-sm-3 align-items-center justify-content-center"
+					style="margin: auto;">
+					<div class="profile-picture">
+						<div class="user-info">
+							<div class="profile-pic">
+								<img
+									[src]="selectedProfilePicURL ? (selectedProfilePicURL | safe: 'resourceUrl') : user?.avatar ? ((s3FilesBucketURL + user?.avatar) | safe: 'resourceUrl') : anonymousAvatar" />
+								<div class="layer">
+									<div class="loader"></div>
 								</div>
+								<a class="image-wrapper">
+									<mat-icon class="edit glyphicon glyphicon-pencil" (click)="addProfilePic()">edit
+									</mat-icon>
+									<mat-icon class="edit glyphicon glyphicon-pencil"
+										(click)="removeProfilePic(user?._id)">delete</mat-icon>
+								</a>
 							</div>
-							<input type="file" #profilePic style="display: none" (change)="onProfilePicAdded()" />
 						</div>
-						<div style="display: flex;">
-							<button *ngIf="selectedProfilePic" style="margin: auto;" type="button"
-								class="btn btn--vsm btn--round"
-								(click)="updateProfilePicture(user?._id)">Update</button>
-						</div>
-						<h4 style="text-align: center; padding-top: 10px;">{{user?.name}}</h4>
-						<button
-							*ngIf="authService?.loggedInUser && authorId && authService?.loggedInUser?._id !== authorId"
-							(click)="openDialog()" mat-mini-fab color="primary">
-							<mat-icon>video_call</mat-icon>
-						</button>
+						<input type="file" #profilePic style="display: none" (change)="onProfilePicAdded()" />
 					</div>
-					<div class="col-lg-10 col-md-10 col-sm-9" style="padding: 0;">
-						<div class="picture-container" *ngIf="selectedCoverPic?.name || user?.cover">
+					<div style="display: flex;">
+						<button *ngIf="selectedProfilePic" style="margin: auto;" type="button"
+							class="btn btn--vsm btn--round"
+							(click)="updateProfilePicture(user?._id)">Update</button>
+					</div>
+					<h4 style="text-align: center; padding-top: 10px;">{{user?.name}}</h4>
+					<button
+						*ngIf="authService?.loggedInUser && authorId && authService?.loggedInUser?._id !== authorId"
+						(click)="openDialog()" mat-mini-fab color="primary">
+						<mat-icon>video_call</mat-icon>
+					</button>
+				</div>
+				<div class="col-lg-10 col-md-10 col-sm-9">
+					<div class="picture-container" *ngIf="selectedCoverPic?.name || user?.cover">
 
-							<img #cover
-								[src]="selectedCoverPic ? (selectedCoverPicURL | safe: 'resourceUrl') : ((s3FilesBucketURL + user?.cover) | safe: 'resourceUrl')">
+						<img #cover
+							[src]="selectedCoverPic ? (selectedCoverPicURL | safe: 'resourceUrl') : ((s3FilesBucketURL + user?.cover) | safe: 'resourceUrl')">
 
-							<div class="controls" *ngIf="user?._id === authService?.loggedInUser?._id">
-								<a mat-button style="background-color: #ff00007a;" (click)="removeCover(user?._id);"
-									class="save">Remove</a>
-								<a mat-button style="background-color: #00aeef" *ngIf="!user?.cover"
-									(click)="updateCover(user?._id)" class="save">Upload
-									Cover</a>
-							</div>
-
+						<div class="controls" *ngIf="user?._id === authService?.loggedInUser?._id">
+							<a mat-button style="background-color: #ff00007a;" (click)="removeCover(user?._id);"
+								class="save">Remove</a>
+							<a mat-button style="background-color: #00aeef" *ngIf="!user?.cover"
+								(click)="updateCover(user?._id)" class="save">Upload
+								Cover</a>
 						</div>
-						<div class="image-upload-wrap" style="height: 300px;"
-							*ngIf="user?._id === authService?.loggedInUser?._id && !selectedCoverPic && !user?.cover">
-							<input #coverPic class="file-upload-input" type='file' (change)="onFilesAdded()"
-								accept="image/*" />
-							<div class="drag-text">
-								<h3>Drag and drop a file or select add Image 685w x 300h</h3>
-							</div>
+
+					</div>
+					<div class="image-upload-wrap" style="height: 300px;"
+						*ngIf="user?._id === authService?.loggedInUser?._id && !selectedCoverPic && !user?.cover">
+						<input #coverPic class="file-upload-input" type='file' (change)="onFilesAdded()"
+							accept="image/*" />
+						<div class="drag-text">
+							<h3>Drag and drop a file or select add Image 685w x 300h</h3>
 						</div>
 					</div>
 				</div>
@@ -127,97 +125,24 @@
 									</ng-container>
 
 									<!-- Show list of the posts based on post type -->
-									<ng-container *ngFor="let p of postTypesArray">
-										<ng-container *ngIf="profileView === p.name">
-											<div class="item-grid pen-grid item-grid-large">
-												<app-brief-post style="width: 100%;" [p]="e"
-													*ngFor="let e of listOfAllOtherPosts?.posts"
-													(showComments)="showCommentsOnSide($event)" [readMore]="true">
-												</app-brief-post>
-											</div>
-
-											<app-paginator [length]="totalOtherPosts"
-												(fetchData)="paginator = $event; fetchAllOtherPosts(p.name)">
-											</app-paginator>
-										</ng-container>
-									</ng-container>
-
-									<div *ngIf="profileView === navLinkName?.info && (userData$) | async as user">
-										<div class="col-lg-12 col-md-12">
-											<aside class="common-box-shadow sidebar sidebar_author">
-												<div class="author-card sidebar-card">
-													<div class="author-infos">
-														<div class="author_avatar">
-															<img [src]="user?.avatar ? ((s3FilesBucketURL + user.avatar) | safe: 'resourceUrl') : anonymousAvatar"
-																alt="Presenting the broken author avatar :D">
-														</div>
-
-														<div class="author">
-															<h4>{{user?.name}}</h4>
-															<button
-																*ngIf="authorId && authService?.loggedInUser?._id && authService?.loggedInUser?._id !== authorId"
-																(click)="openDialog()" mat-mini-fab color="primary">
-																<mat-icon>video_call</mat-icon>
-															</button>
-															<p>On platform since {{user?.createdAt | date}}</p>
-														</div>
-														<!-- end /.author -->
-
-
-														<div class="social social--color--filled">
-															<ul>
-																<li style="margin: 5px; color: initial">
-																	<a [href]="user?.linkedin_url">
-																		<i style="font-size: 1.7rem !important;"
-																			class="fab fa-linkedin"></i>
-																	</a>
-																</li>
-																<li style="margin: 5px">
-																	<a [href]="user?.github_url">
-																		<i style="font-size: 1.7rem !important;"
-																			class="fab fa-stack-overflow"></i>
-																	</a>
-																</li>
-																<li style="margin: 5px">
-																	<a [href]="user?.stackoverflow_url">
-																		<i style="font-size: 1.7rem !important;"
-																			class="fab fa-github"></i>
-																	</a>
-																</li>
-															</ul>
-														</div>
-
-
-
-														<ul class="infos">
-															<li>
-																<span class="data-label">Likes: </span>
-																<span class="info"
-																	*ngIf="authService?.loggedInUser; else likeCount">
-																	<app-like-dislike [data]="user" [type]="'user'"
-																		[likeCount]="null">
-																	</app-like-dislike>
-																</span>
-																<ng-template #likeCount>
-																	<div class="info">
-																		{{user?.likeCount}}
-																	</div>
-																</ng-template>
-															</li>
-														</ul>
-														<!-- end /.social -->
-
-														<!-- <div class="author-btn">
-																											<a href="#" class="btn btn--md btn--round">Follow</a>
-																									</div> -->
-														<!-- end /.author-btn -->
-													</div>
-													<!-- end /.author-infos -->
-												</div>
-												<!-- end /.author-card -->
-											</aside>
-										</div>
+									<div *ngIf="profileView !== 'appointment'">
+									  <ng-container *ngFor="let p of postTypesArray">
+									    <ng-container *ngIf="profileView === p.name && p.name !== 'appointment'">
+									      <div class="item-grid pen-grid item-grid-large">
+									        <app-brief-post style="width: 100%;" [p]="e" *ngFor="let e of listOfAllOtherPosts?.posts"
+									          (showComments)="showCommentsOnSide($event)" [readMore]="true">
+									        </app-brief-post>
+									      </div>
+									      <app-paginator [length]="totalOtherPosts" (fetchData)="paginator = $event; fetchAllOtherPosts(p.name)">
+									      </app-paginator>
+									    </ng-container>
+									    <!-- {{p.name}} {{profileView}} -->
+									  </ng-container>
 									</div>
+									<ng-container *ngIf="profileView === 'appointment'">
+									  <ng-container *ngTemplateOutlet="appointmentTemplate; context: details">
+									  </ng-container>
+									</ng-container>
 
 								</div>
 								<div [ngClass]="selectedBlock ? 'col-md-4 col-lg-4' : ''">
@@ -258,3 +183,65 @@
 			<ng-template #filesList let-cDetails="details" let-comments="files">
 				<app-editor [id]="f?._id" *ngFor="let f of files" [data]="[f]" [readOnly]="true"></app-editor>
 			</ng-template>
+
+<!-- Appointment Template -->
+<ng-template #appointmentTemplate let-contacts="details">
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource">
+
+      <ng-container matColumnDef="profileImg">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element">
+          <img class="chat-list-avatar"
+            [src]="element.createdBy.avatar ? ((s3FilesBucketURL + element.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar" />
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="fullName">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.createdBy.name}} </td>
+      </ng-container>
+
+      <!-- Position Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Title </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="appointment_date">
+        <th mat-header-cell *matHeaderCellDef> Appointment Date</th>
+        <td mat-cell *matCellDef="let element"> {{element.appointment_date | date:'dd-MM-yyyy h:mm a'}} </td>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="descriptionHTML">
+        <th mat-header-cell *matHeaderCellDef> Description </th>
+        <td mat-cell *matCellDef="let element">
+          <div [innerHTML]="element.descriptionHTML"></div>
+        </td>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef> Status </th>
+        <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="edit">
+        <th mat-header-cell *matHeaderCellDef>Action</th>
+        <td mat-cell *matCellDef="let element">
+          <a mat-button color="primary" [href]="'/post' + '/' + (element?.slug ? element.slug : element._id)"
+            target="_blank">Edit</a>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <app-paginator [length]="totalAppointmentCount" (fetchData)="paginator = $event; getPostByPostType()">
+    </app-paginator>
+  </div>
+</ng-template>

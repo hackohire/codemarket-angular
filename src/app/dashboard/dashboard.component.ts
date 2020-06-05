@@ -15,7 +15,8 @@ import { environment } from '../../environments/environment';
 export class DashboardComponent implements OnInit {
 
   salesemailInput: string;
-  growsalesemailInput: string;
+  pledgeemailInput: string;
+  providejobemailInput: string;
   step1emailInput: string;
   step2emailInput: string;
   step3emailInput: string;

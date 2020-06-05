@@ -18,9 +18,9 @@
 
   <ng-template #logIn>
     <a #lr mat-button [mdePopoverTriggerFor]="authentication" [mdePopoverTargetAt]="lr" mdePopoverTriggerOn="click"
-      style="line-height: 3;">
+      class="LoginRegisterButton">
       <i style="font-size: 1.0rem !important;" class="vertical-align-middle fal fa-user-circle fa-fw"></i>
-      <span class="line-height-initial"> Login/Register</span>
+      <span class="line-height-initial" style="color: black;"> Login/Register</span>
     </a>
   </ng-template>
 
@@ -30,11 +30,11 @@
   </mde-popover>
 
   <!-- My Profile -->
-  <button mat-button [matMenuTriggerFor]="userMenu" *ngIf="authService.loggedInUser; else logIn">
-    <a style="padding: 0;" mat-button routerLinkActive="mat-primary" *ngIf="loggedInUser;"
-      [routerLink]="['/', 'dashboard', 'my-profile']">
-      <i style="font-size: 1.0rem !important;" class="vertical-align-middle fal fa-user-circle fa-fw"></i>
-      <span class="line-height-initial"> My Profile <mat-icon style="vertical-align: middle; height: 28px;">
+  <button mat-button [matMenuTriggerFor]="userMenu" *ngIf="authService.loggedInUser; else logIn" style="padding: 0;">
+    <a mat-button routerLinkActive="mat-primary" *ngIf="loggedInUser;"
+      [routerLink]="['/', 'dashboard', 'my-profile']" style="padding: 5px 10px; line-height: 0;">
+      <i style="font-size: 1.0rem !important; color: black;" class="vertical-align-middle fal fa-user-circle fa-fw"></i>
+      <span class="line-height-initial" style="color: black;"> My Profile <mat-icon style="vertical-align: middle; height: 28px;color: black;">
           keyboard_arrow_down</mat-icon>
       </span>
     </a>
@@ -82,7 +82,7 @@
         <div class="line-height-initial">Appointment</div>
       </a> -->
 
-  <app-add-post-menu [label]="'Create'" [drawer]="drawer" style="right: 7px; top: 2px;"></app-add-post-menu>
+  <app-add-post-menu [label]="'Create'" [drawer]="drawer" class="CreateButton"></app-add-post-menu>
 
   <!-- <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'company', 'add-company']">
         <div class="line-height-initial"> Sales Accelerator </div>
@@ -123,6 +123,7 @@
       <mat-icon (click)="drawer.toggle()" style="margin-right: 15px;">clear</mat-icon> navigation
       {{'(' + authService.postUpdateCount + ')'}}
     </mat-toolbar>
+
     <app-add-post-menu [label]="'Create'" style="position: absolute; top: 4px; right: 6px; z-index: 99;"
       class="hidden-lg" [drawer]="drawer"></app-add-post-menu>
 

@@ -1,129 +1,40 @@
-<mat-sidenav-container class="sidenav-container" autosize>
+<mat-toolbar class="NavBarBox" style="place-content: flex-start; padding-left: 5px;">
 
-  {{authService?.loggedInUser | json}}
-  <mat-sidenav *ngIf="authService?.loggedInUser" #drawer class="sidenav" fixedInViewport
-    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'"
-    [opened]="(isHandset$ | async) === false">
-    <mat-toolbar
-      style="height: 48px; font-size: 14px; font-weight: 400; letter-spacing: 4px; text-transform: uppercase; color: #999; background: #eee;padding-right: 110px;place-content: inherit;">
-      <mat-icon (click)="drawer.toggle()" style="margin-right: 15px;">clear</mat-icon> navigation
-      {{'(' + authService.postUpdateCount + ')'}}
-    </mat-toolbar>
-    <app-add-post-menu [label]="'Create'" style="position: absolute; top: 4px; right: 6px; z-index: 99;"
-      class="hidden-lg" [drawer]="drawer"></app-add-post-menu>
+  <!-- Toggle Sidebar Button -->
+  <button *ngIf="true" type="button" aria-label="Toggle sidenav" mat-icon-button (click)="toggleNavbar()"
+    style="margin-right: 5px;">
+    <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+  </button>
 
-
-    <mat-nav-list class="pt-0">
-
-      <app-chat-full-ui *ngIf="authService?.loggedInUser" [drawer]="drawer" [loggedInUser]="authService?.loggedInUser">
-      </app-chat-full-ui>
-
-    </mat-nav-list>
-  </mat-sidenav>
-
-
-  <mat-sidenav-content>
-    <mat-toolbar *ngIf="false" class="SearchLoginBox">
-
-      <!-- <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'add-post-type']">
-        <i style="font-size: 1.0rem !important; color: #ffff00;" class="vertical-align-middle fal fa-add fa-fw"></i>
-        <span style="color: #ffffff;" class="line-height-initial"> Add Post Type </span>
-      </a> -->
-
-      <!-- Search -->
-      <a mat-button routerLinkActive="mat-primary" (click)="openSearchDialog()" style="line-height: 3;">
-        <i style="font-size: 1.0rem !important; color: #ffff00;" class="vertical-align-middle fal fa-search fa-fw"></i>
-        <span style="color: #ffffff;" class="line-height-initial"> Search</span>
-      </a>
-
-      <!-- membership -->
-      <!--  <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'membership']">
-        <i style="font-size: 1.0rem !important; color: #ffff00;"
-          class="vertical-align-middle fal fa-id-card-alt fa-fw"></i>
-        <span style="color: #ffffff;" class="line-height-initial" > Membership</span>
-      </a> -->
-      <!-- Login -->
-      <ng-template #logIn>
-        <a #lr mat-button [mdePopoverTriggerFor]="authentication" [mdePopoverTargetAt]="lr" mdePopoverTriggerOn="click"
-          style="line-height: 3;">
-          <i style="font-size: 1.0rem !important; color: #ffff00;"
-            class="vertical-align-middle fal fa-user-circle fa-fw"></i>
-          <span style="color: #ffffff;" class="line-height-initial"> Login/Register</span>
-        </a>
-      </ng-template>
-
-      <mde-popover #authentication="mdePopover" [mdePopoverOverlapTrigger]="false" [mdePopoverCloseOnClick]="false"
-        [mdePopoverArrowOffsetX]="58" mdePopoverArrowColor="#FFFFFF">
-        <app-auth></app-auth>
-      </mde-popover>
-
-      <!-- My Profile -->
-      <button mat-button [matMenuTriggerFor]="userMenu" *ngIf="authService.loggedInUser; else logIn">
-        <a style="padding: 0;" mat-button routerLinkActive="mat-primary" *ngIf="loggedInUser;"
-          [routerLink]="['/', 'dashboard', 'my-profile']">
-          <i style="font-size: 1.0rem !important; color: #ffff00;"
-            class="vertical-align-middle fal fa-user-circle fa-fw"></i>
-          <span style="color: #ffffff;" class="line-height-initial"> My Profile <mat-icon
-              style="vertical-align: middle; height: 28px;">keyboard_arrow_down</mat-icon>
-          </span>
-        </a>
-      </button>
-      <mat-menu #userMenu="matMenu" panelClass="menu-width">
-        <div class="menu-width">
-          <!-- Shopping Cart -->
-          <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'cart']">
-            <mat-icon>shopping_cart
-            </mat-icon> Cart({{cartListLength | async}})
-          </a>
-
-          <!-- Logout -->
-          <a mat-button (click)="authService?.logout()">
-            <mat-icon>power_settings_new
-            </mat-icon>
-            Logout
-          </a>
-        </div>
-      </mat-menu>
-
-    </mat-toolbar>
-
-    <mat-toolbar class="NavBarBox" style="place-content: flex-start; padding-left: 5px;">
-
-      <!-- Toggle Sidebar Button -->
-      <button *ngIf="true" type="button" aria-label="Toggle sidenav" mat-icon-button (click)="toggleNavbar()"
-        style="margin-right: 5px;">
-        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-      </button>
-
-      <!-- Logo or Application Name -->
-      <!-- <img (click)="redirect()" sizes="(max-width: 282px) 100vw, 282px"
+  <!-- Logo or Application Name -->
+  <!-- <img (click)="redirect()" sizes="(max-width: 282px) 100vw, 282px"
         srcset="../../../../assets/images/logo_qugbvk_c_scalew_200.png 200w, ../../../../assets/images/logo_qugbvk_c_scalew_282.png 282w"
         src="../../../../assets/images/logo_qugbvk_c_scalew_282.png" alt=""> -->
-      <img (click)="redirect()" src="../../../../assets/images/Technothate-Logo.svg" class="brand-logo"
-        style="padding: 14px 0;">
-      <!-- <h2 [routerLink]="['/']">Codemarket</h2> -->
+  <img (click)="redirect()" src="../../../../assets/images/Technothate-Logo.svg" class="brand-logo"
+    style="padding: 14px 0;">
+  <!-- <h2 [routerLink]="['/']">Codemarket</h2> -->
 
-      <!-- End Items -->
-      <div fxFlex></div>
+  <!-- End Items -->
+  <div fxFlex></div>
 
-      <!-- Message Alert Area -->
-      <!-- <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'messages']">
+  <!-- Message Alert Area -->
+  <!-- <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'messages']">
         <span style="font-size: 1.3rem !important;" class="vertical-align-middle far fa-bell"></span>
         <span *ngIf="isUnread((messageService.messagesList$ | async)?.messages)" class="notification_count noti" style="height: 5px; min-width: 5px;"></span>
       </a> -->
 
-      <!-- <div class="icon_wrap" routerLinkActive="mat-primary" [routerLink]="['/', 'messages']">
+  <!-- <div class="icon_wrap" routerLinkActive="mat-primary" [routerLink]="['/', 'messages']">
         <span style="font-size: 1.5rem !important;" class="vertical-align-middle far fa-bell"></span>
         <span class="notification_count noti" style="height: 7px; min-width: 7px;"
           *ngIf="isUnread((messageService.messagesList$ | async)?.messages)"></span>
       </div> -->
-      <!-- <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'send-email']">
+  <!-- <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'send-email']">
         <div class="line-height-initial"> Send Email </div>
       </a> -->
-      <!-- <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'video-chat']" style="margin-left:5px; padding: 8px 16px;">
+  <!-- <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'video-chat']" style="margin-left:5px; padding: 8px 16px;">
         <div class="line-height-initial"><mat-icon>video_call</mat-icon> </div>
       </a> -->
-      <!-- <ng-container *ngIf="showPostActions">
+  <!-- <ng-container *ngIf="showPostActions">
       <a type="button" class="btn btn--vsm btn--round menu" (click)="postService?.saveOrSubmitPost.next('Drafted')"
         style="background-color: #28a745; color: white;">{{ 'Save' }}</a>
       <a type="button" class="btn btn--vsm btn--round menu" (click)="postService?.saveOrSubmitPost.next('Published')"
@@ -133,68 +44,66 @@
   </ng-container> -->
 
 
-      <!-- <a mat-button routerLinkActive="mat-primary" *ngIf="authService.loggedInUser?.roles[0] === 'Admin'" [routerLink]="['/appointment-booking']" 
+  <!-- <a mat-button routerLinkActive="mat-primary" *ngIf="authService.loggedInUser?.roles[0] === 'Admin'" [routerLink]="['/appointment-booking']" 
       style="margin-left:5px; padding: 8px 90px 8px 0;">
         <div class="line-height-initial">Appointment</div>
       </a>
       
 
       <!-- Login -->
-      <ng-template #logIn>
-        <a #lr mat-button [mdePopoverTriggerFor]="authentication" [mdePopoverTargetAt]="lr" mdePopoverTriggerOn="click"
-          class="LoginRegisterButton">
-          <i style="font-size: 1.0rem !important; color: #000;"
-            class="vertical-align-middle fal fa-user-circle fa-fw"></i>
-          <span style="color: #000;" class="line-height-initial"> Login/Register</span>
-        </a>
-      </ng-template>
+  <ng-template #logIn>
+    <a #lr mat-button [mdePopoverTriggerFor]="authentication" [mdePopoverTargetAt]="lr" mdePopoverTriggerOn="click"
+      class="LoginRegisterButton">
+      <i style="font-size: 1.0rem !important; color: #000;" class="vertical-align-middle fal fa-user-circle fa-fw"></i>
+      <span style="color: #000;" class="line-height-initial"> Login/Register</span>
+    </a>
+  </ng-template>
 
-      <mde-popover #authentication="mdePopover" [mdePopoverOverlapTrigger]="false" [mdePopoverCloseOnClick]="false"
-        [mdePopoverArrowOffsetX]="58" mdePopoverArrowColor="#000">
-        <app-auth></app-auth>
-      </mde-popover>
+  <mde-popover #authentication="mdePopover" [mdePopoverOverlapTrigger]="false" [mdePopoverCloseOnClick]="false"
+    [mdePopoverArrowOffsetX]="58" mdePopoverArrowColor="#000">
+    <app-auth></app-auth>
+  </mde-popover>
 
-      <!-- My Profile -->
-      <button mat-button [matMenuTriggerFor]="userMenu" *ngIf="authService.loggedInUser; else logIn">
-        <a style="padding: 0;" mat-button routerLinkActive="mat-primary" *ngIf="loggedInUser;"
-          [routerLink]="['/', 'dashboard', 'my-profile']">
-          <i style="font-size: 1.0rem !important; color: #000;"
-            class="vertical-align-middle fal fa-user-circle fa-fw"></i>
-          <span style="color: #000;" class="line-height-initial"> My Profile <mat-icon
-              style="vertical-align: middle; height: 28px;">keyboard_arrow_down</mat-icon>
-          </span>
-        </a>
-      </button>
-      <mat-menu #userMenu="matMenu" panelClass="menu-width">
-        <div class="menu-width">
-          <!-- Shopping Cart -->
-          <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'cart']">
-            <mat-icon>shopping_cart
-            </mat-icon> Cart({{cartListLength | async}})
-          </a>
+  <!-- My Profile -->
+  <button mat-button [matMenuTriggerFor]="userMenu" *ngIf="authService.loggedInUser; else logIn">
+    <a style="padding: 0;" mat-button routerLinkActive="mat-primary" *ngIf="loggedInUser;"
+      [routerLink]="['/', 'dashboard', 'my-profile']">
+      <i style="font-size: 1.0rem !important; color: #000;" class="vertical-align-middle fal fa-user-circle fa-fw"></i>
+      <span style="color: #000;" class="line-height-initial"> My Profile <mat-icon
+          style="vertical-align: middle; height: 28px;">keyboard_arrow_down</mat-icon>
+      </span>
+    </a>
+  </button>
+  <mat-menu #userMenu="matMenu" panelClass="menu-width">
+    <div class="menu-width">
+      <!-- Shopping Cart -->
+      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'cart']">
+        <mat-icon>shopping_cart
+        </mat-icon> Cart({{cartListLength | async}})
+      </a>
 
-          <!-- Logout -->
-          <a mat-button (click)="authService?.logout()">
-            <mat-icon>power_settings_new
-            </mat-icon>
-            Logout
-          </a>
-        </div>
-      </mat-menu>
+      <!-- Logout -->
+      <a mat-button (click)="authService?.logout()">
+        <mat-icon>power_settings_new
+        </mat-icon>
+        Logout
+      </a>
+    </div>
+  </mat-menu>
 
-      <app-add-post-menu [label]="'Create'" class="CreateButton"></app-add-post-menu>
+  <app-add-post-menu [label]="'Create'" class="CreateButton"></app-add-post-menu>
 
-      <!-- <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'company', 'add-company']">
+  <!-- <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'company', 'add-company']">
         <div class="line-height-initial"> Sales Accelerator </div>
       </a> -->
 
 
-      <!-- <app-add-post-menu style="color: black;"></app-add-post-menu> -->
-      <!-- <app-software-dev-menu style="color: black;"></app-software-dev-menu> -->
-      <!-- <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'company', 'company-list']" [queryParams]="{all: true}">
+  <!-- <app-add-post-menu style="color: black;"></app-add-post-menu> -->
+  <!-- <app-software-dev-menu style="color: black;"></app-software-dev-menu> -->
+  <!-- <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'company', 'company-list']" [queryParams]="{all: true}">
         <div class="line-height-initial"> Businesses </div>
       </a> -->
-      <!-- <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'about-us']" [queryParams]="{all: true}" style="margin-left:5px; padding: 8px 16px;">
+  <!-- <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'about-us']" [queryParams]="{all: true}" style="margin-left:5px; padding: 8px 16px;">
         <div class="line-height-initial"> About </div>
       </a>
       
@@ -210,56 +119,55 @@
         <div class="line-height-initial"> Membership </div>
       </a> -->
 
+</mat-toolbar>
+
+<mat-sidenav-container class="sidenav-container" autosize>
+
+  {{authService?.loggedInUser | json}}
+  <mat-sidenav *ngIf="authService?.loggedInUser" #drawer class="sidenav" fixedInViewport
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="(isHandset$ | async) === false" [ngStyle.lt-sm]="{'width.px': '375'}">
+    <mat-toolbar
+      style="height: 48px; font-size: 14px; font-weight: 400; letter-spacing: 4px; text-transform: uppercase; color: #999; background: #eee;padding-right: 110px;place-content: inherit;">
+      <mat-icon (click)="drawer.toggle()" style="margin-right: 15px;">clear</mat-icon> navigation
+      {{'(' + authService.postUpdateCount + ')'}}
     </mat-toolbar>
 
-    <mat-sidenav-container class="sidenav-container" autosize>
-
-      {{authService?.loggedInUser | json}}
-      <mat-sidenav *ngIf="authService?.loggedInUser" #drawer class="sidenav" fixedInViewport
-        [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'"
-        [opened]="(isHandset$ | async) === false" [ngStyle.lt-sm]="{'width.px': '375'}">
-        <mat-toolbar
-          style="height: 48px; font-size: 14px; font-weight: 400; letter-spacing: 4px; text-transform: uppercase; color: #999; background: #eee;padding-right: 110px;place-content: inherit;">
-          <mat-icon (click)="drawer.toggle()" style="margin-right: 15px;">clear</mat-icon> navigation
-          {{'(' + authService.postUpdateCount + ')'}}
-        </mat-toolbar>
-
-        <app-add-post-menu [label]="'Create'" style="position: absolute; top: 4px; right: 6px; z-index: 99;"
-          class="hidden-lg" [drawer]="drawer"></app-add-post-menu>
+    <app-add-post-menu [label]="'Create'" style="position: absolute; top: 4px; right: 6px; z-index: 99;"
+      class="hidden-lg" [drawer]="drawer"></app-add-post-menu>
 
 
-        <mat-nav-list class="pt-0" [ngStyle.lt-sm]="{'margin-top': '40px'}">
+    <mat-nav-list class="pt-0" [ngStyle.lt-sm]="{'margin-top': '40px'}">
 
-          <app-chat-full-ui *ngIf="authService?.loggedInUser" [drawer]="drawer"
-            [loggedInUser]="authService?.loggedInUser">
-          </app-chat-full-ui>
+      <app-chat-full-ui *ngIf="authService?.loggedInUser" [drawer]="drawer" [loggedInUser]="authService?.loggedInUser">
+      </app-chat-full-ui>
 
-        </mat-nav-list>
-      </mat-sidenav>
+    </mat-nav-list>
+  </mat-sidenav>
 
 
-      <mat-sidenav-content>
+  <mat-sidenav-content>
 
-        <!-- {{loggedInUser | json}} -->
-        <!-- Add Content Here -->
-        <router-outlet></router-outlet>
+    <!-- {{loggedInUser | json}} -->
+    <!-- Add Content Here -->
+    <router-outlet></router-outlet>
 
-        <footer *ngIf="!hideFooter" class="footer-area footer--light" style="background: #eee;">
-          <div class="mini-footer" style="padding-bottom: 15px;">
-            <div class="container">
+    <footer *ngIf="!hideFooter" class="footer-area footer--light" style="background: #eee;">
+      <div class="mini-footer" style="padding-bottom: 15px;">
+        <div class="container">
 
-              <div class="row text-center text-md-left mt-3 pb-3">
+          <div class="row text-center text-md-left mt-3 pb-3">
 
-                <!-- Grid column -->
-                <div class="col-md-3 col-lg-3 col-xl-3">
-                  <h6 class="text-uppercase mb-4 font-weight-bold">Codemarket</h6>
-                  <p>Our mission is to bring innovation to every.</p>
-                </div>
-                <!-- Grid column -->
+            <!-- Grid column -->
+            <div class="col-md-3 col-lg-3 col-xl-3">
+              <h6 class="text-uppercase mb-4 font-weight-bold">Codemarket</h6>
+              <p>Our mission is to bring innovation to every.</p>
+            </div>
+            <!-- Grid column -->
 
-                <hr class="w-100 clearfix d-md-none border-0">
+            <hr class="w-100 clearfix d-md-none border-0">
 
-                <!-- Grid column 
+            <!-- Grid column 
             <div class="col-md-2 col-lg-2 col-xl-2 mt-3">
               <h6 class="text-uppercase mb-4 font-weight-bold">Products</h6>
               <p>
@@ -275,11 +183,11 @@
                 <a href="#!">Skills Upgrade</a>
               </p>
             </div>-->
-                <!-- Grid column -->
+            <!-- Grid column -->
 
-                <hr class="w-100 clearfix d-md-none">
+            <hr class="w-100 clearfix d-md-none">
 
-                <!-- Grid column 
+            <!-- Grid column 
             <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
               <h6 class="text-uppercase mb-4 font-weight-bold">Useful links</h6>
               <p>
@@ -296,82 +204,82 @@
               </p>
             </div>-->
 
-                <!-- Grid column -->
-                <hr class="w-100 clearfix d-md-none border-0">
+            <!-- Grid column -->
+            <hr class="w-100 clearfix d-md-none border-0">
 
-                <!-- Grid column -->
-                <div class="col-md-4 col-lg-3 col-xl-3 mx-auto">
-                  <h6 class="text-uppercase mb-4 font-weight-bold">Contact</h6>
-                  <p>
-                    <i class="fas fa-home mr-3"></i> Manhattan Beach, CA 90266, US</p>
-                  <p>
-                    <i class="fas fa-envelope mr-3"></i> sumi@codemarket.io</p>
-                  <p>
-                    <i class="fas fa-phone mr-3"></i> + 01 805 300 7217</p>
+            <!-- Grid column -->
+            <div class="col-md-4 col-lg-3 col-xl-3 mx-auto">
+              <h6 class="text-uppercase mb-4 font-weight-bold">Contact</h6>
+              <p>
+                <i class="fas fa-home mr-3"></i> Manhattan Beach, CA 90266, US</p>
+              <p>
+                <i class="fas fa-envelope mr-3"></i> sumi@codemarket.io</p>
+              <p>
+                <i class="fas fa-phone mr-3"></i> + 01 805 300 7217</p>
 
-                </div>
-                <!-- Grid column -->
+            </div>
+            <!-- Grid column -->
 
-              </div>
-              <!-- Footer links -->
+          </div>
+          <!-- Footer links -->
 
-              <hr>
+          <hr>
 
 
-              <!-- Grid row -->
-              <div class="row d-flex align-items-center">
+          <!-- Grid row -->
+          <div class="row d-flex align-items-center">
 
-                <!-- Grid column -->
-                <div class="col-md-7 col-lg-8">
+            <!-- Grid column -->
+            <div class="col-md-7 col-lg-8">
 
-                  <!--Copyright-->
-                  <p class="text-center text-md-left">© 2020 Copyright
-                    <a href="https://www.codemarket.io">
-                      codemarket.io
+              <!--Copyright-->
+              <p class="text-center text-md-left">© 2020 Copyright
+                <a href="https://www.codemarket.io">
+                  codemarket.io
+                </a>
+              </p>
+
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-md-5 col-lg-4 ml-lg-0">
+
+              <!-- Social buttons -->
+              <div class="text-center text-md-right">
+                <ul class="list-unstyled list-inline">
+                  <li class="list-inline-item">
+                    <a class="btn-floating btn-sm rgba-white-slight mx-1">
+                      <i class="fab fa-facebook-f"></i>
                     </a>
-                  </p>
-
-                </div>
-                <!-- Grid column -->
-
-                <!-- Grid column -->
-                <div class="col-md-5 col-lg-4 ml-lg-0">
-
-                  <!-- Social buttons -->
-                  <div class="text-center text-md-right">
-                    <ul class="list-unstyled list-inline">
-                      <li class="list-inline-item">
-                        <a class="btn-floating btn-sm rgba-white-slight mx-1">
-                          <i class="fab fa-facebook-f"></i>
-                        </a>
-                      </li>
-                      <li class="list-inline-item">
-                        <a class="btn-floating btn-sm rgba-white-slight mx-1">
-                          <i class="fab fa-twitter"></i>
-                        </a>
-                      </li>
-                      <!-- <li class="list-inline-item">
+                  </li>
+                  <li class="list-inline-item">
+                    <a class="btn-floating btn-sm rgba-white-slight mx-1">
+                      <i class="fab fa-twitter"></i>
+                    </a>
+                  </li>
+                  <!-- <li class="list-inline-item">
                     <a class="btn-floating btn-sm rgba-white-slight mx-1">
                       <i class="fab fa-google-plus-g"></i>
                     </a>
                   </li>-->
-                      <li class="list-inline-item">
-                        <a class="btn-floating btn-sm rgba-white-slight mx-1">
-                          <i class="fab fa-linkedin-in"></i>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-
-                </div>
-                <!-- Grid column -->
-
+                  <li class="list-inline-item">
+                    <a class="btn-floating btn-sm rgba-white-slight mx-1">
+                      <i class="fab fa-linkedin-in"></i>
+                    </a>
+                  </li>
+                </ul>
               </div>
-              <!-- Grid row -->
 
             </div>
-          </div>
-        </footer>
+            <!-- Grid column -->
 
-      </mat-sidenav-content>
-    </mat-sidenav-container>
+          </div>
+          <!-- Grid row -->
+
+        </div>
+      </div>
+    </footer>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>

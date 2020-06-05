@@ -107,7 +107,11 @@
 .CreateButton {
   position: absolute;
   right: calc(50% - 43px);
-  top: 2px;
+  top: 2px; 
+}
+
+.CreateButton > a {
+  background-color: #d67086 !important;
 }
 
 .LoginRegisterButton {

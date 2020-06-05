@@ -387,24 +387,24 @@
 		grid-template-columns: 1fr auto;
 	}
 }
-.google-button {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 6px 22px 6px 6px;
-    width: auto;
-    max-width: 232px;
-    height: 50px;
-    color: #34384f;
-    font-size: 16px;
-    font-weight: 500;
-    border: 0;
-    border-radius: 5px;
-    background-color: #fff;
-    text-decoration: none;
-    transition: background .3s linear;
-}
+// .google-button {
+//     position: relative;
+//     display: inline-flex;
+//     align-items: center;
+//     justify-content: flex-start;
+//     padding: 6px 22px 6px 6px;
+//     width: auto;
+//     max-width: 232px;
+//     height: 50px;
+//     color: #34384f;
+//     font-size: 16px;
+//     font-weight: 500;
+//     border: 0;
+//     border-radius: 5px;
+//     background-color: #fff;
+//     text-decoration: none;
+//     transition: background .3s linear;
+// }
 .google-button.special {
 	border: 0;
     border-radius: 5px;
@@ -415,8 +415,8 @@
 	height: 60px;
 	color: #fff;
 	font-size: 15px;
-	background: linear-gradient(to top, #2d94ff, #3e82f7);
-	box-shadow: inset #1d5bc5 0 -5px 0;
+	background: linear-gradient(to top, #d67086, #d67086);
+	box-shadow: inset #ab354f 0 -5px 0;
 	cursor: not-allowed;
 }
 .google-button.special > span.button-flex-wrapper {

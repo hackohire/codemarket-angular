@@ -452,6 +452,9 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
         console.log("This is result", result);
         this.emailService.saveCsvFileData(result, this.authService.loggedInUser._id, this.onlySaveFile.name, this.saveEmailForm.value.label, this.saveEmailForm.value.companies).subscribe((data) => {
           console.log("Response of the file read ==> ", data);
+          Swal.fire('Contacts have been saved successfully.', '', 'success');
+        }, (err) => {
+          Swal.fire('Error while saving emails into the database.', '', 'error');
         });
       })
     }
@@ -472,6 +475,7 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
     console.log(this.sendEmailForm.value);
     this.emailService.getEmailData(this.sendEmailForm.value.batches, this.sendEmailForm.value.emailTemplate, this.sendEmailForm.value.subject, this.authService.loggedInUser._id, this.sendEmailForm.value.from, this.sendEmailForm.value.companies).subscribe((data) => {
       console.log("Response of the email Data ==> ", data);
+      Swal.fire('Emails have been sent successfully.', '', 'success');
     }, (err) => {
       Swal.fire(`Invalid Data`, '', 'error').then(() => {
       });

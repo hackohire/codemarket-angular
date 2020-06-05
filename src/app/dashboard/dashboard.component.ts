@@ -11,7 +11,22 @@ import { environment } from '../../environments/environment';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
+
 export class DashboardComponent implements OnInit {
+
+  salesemailInput: string;
+  growsalesemailInput: string;
+  step1emailInput: string;
+  step2emailInput: string;
+  step3emailInput: string;
+  TwitteremailInput: string;
+  FacebookemailInput: string;
+  InstagramemailInput: string;
+  LinkedinemailInput: string;
+  YoutubeemailInput: string;
+  SnapchatemailInput: string;
+  PinterestemailInput: string;
+  MarketingemailInput: string;
 
   questionnaire: FormGroup;
   showAuth = false;

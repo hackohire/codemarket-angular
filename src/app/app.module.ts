@@ -28,6 +28,7 @@ import { RoomsComponent } from './video-chat/rooms/rooms.component';
 import { ParticipantsComponent } from './video-chat/participants/participants.component';
 import { DeviceSelectComponent } from './video-chat/settings/device-select/device-select.component';
 import { SettingsComponent } from './video-chat/settings/settings.component';
+import { DonateComponent } from './donate/donate.component';
 
 // import { SignInComponent } from './core/amplify/sign-in-component';
 
@@ -49,7 +50,8 @@ import { SettingsComponent } from './video-chat/settings/settings.component';
     RoomsComponent,
     ParticipantsComponent,
     SettingsComponent,
-    DeviceSelectComponent
+    DeviceSelectComponent,
+    DonateComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

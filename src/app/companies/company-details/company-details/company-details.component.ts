@@ -108,6 +108,7 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
   questionData: [];
 
   commentId: string;
+  mailingList: any[];
 
   emailAsc = true;
   nameAsc = true;
@@ -187,6 +188,7 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
     this.companyView = this.activatedRoute.snapshot.queryParams['view'] ? this.activatedRoute.snapshot.queryParams['view'] : 'posts';
 
     this.initializeEmailForms();
+
     this.subscription$.add(
       this.companyService.getCompanyById(params.slug)
         .pipe(
@@ -223,6 +225,10 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
                       obj['count'] = data[obj.name] ? data[obj.name].count : 0
                     });
                   }
+                });
+                this.emailService.getMailingList(this.companyId).subscribe((res) => {
+                  console.log("This is MailingList ==> ", res);
+                  this.mailingList = res;
                 });
               }
             }
@@ -452,6 +458,7 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
         console.log("This is result", result);
         this.emailService.saveCsvFileData(result, this.authService.loggedInUser._id, this.onlySaveFile.name, this.saveEmailForm.value.label, this.saveEmailForm.value.companies).subscribe((data) => {
           console.log("Response of the file read ==> ", data);
+          this.mailingList.push({name: this.saveEmailForm.value.label});
           Swal.fire('Contacts have been saved successfully.', '', 'success');
         }, (err) => {
           Swal.fire('Error while saving emails into the database.', '', 'error');

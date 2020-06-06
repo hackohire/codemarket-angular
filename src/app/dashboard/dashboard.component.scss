@@ -5,10 +5,10 @@
 	font-size: 24px;
 }
 
-// .business-communitites-label a:hover {
-// 	text-decoration: underline;
-// 	color: #ff6640;
-// }
+.business-communitites-label a:hover {
+	text-decoration: underline;
+	color: #ff6640;
+}
 
 .block-row p {
 	font-size: 18px;
@@ -282,7 +282,7 @@
 }
 .individuals-signup-cta__label {
 	position: absolute;
-	top: 24%;
+	top: 30px;
 	left: 15px;
 	transform: translateY(-50%);
 	color: #888da1;
@@ -387,24 +387,24 @@
 		grid-template-columns: 1fr auto;
 	}
 }
-.google-button {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 6px 22px 6px 6px;
-    width: auto;
-    max-width: 232px;
-    height: 50px;
-    color: #34384f;
-    font-size: 16px;
-    font-weight: 500;
-    border: 0;
-    border-radius: 5px;
-    background-color: #fff;
-    text-decoration: none;
-    transition: background .3s linear;
-}
+// .google-button {
+//     position: relative;
+//     display: inline-flex;
+//     align-items: center;
+//     justify-content: flex-start;
+//     padding: 6px 22px 6px 6px;
+//     width: auto;
+//     max-width: 232px;
+//     height: 50px;
+//     color: #34384f;
+//     font-size: 16px;
+//     font-weight: 500;
+//     border: 0;
+//     border-radius: 5px;
+//     background-color: #fff;
+//     text-decoration: none;
+//     transition: background .3s linear;
+// }
 .google-button.special {
 	border: 0;
     border-radius: 5px;
@@ -415,9 +415,14 @@
 	height: 60px;
 	color: #fff;
 	font-size: 15px;
-	background: linear-gradient(to top, #2d94ff, #3e82f7);
-	box-shadow: inset #1d5bc5 0 -5px 0;
+	background: linear-gradient(to top, #d67086, #d67086);
+	box-shadow: inset #ab354f 0 -5px 0;
 	cursor: not-allowed;
+}
+.google-button.special > span.button-flex-wrapper {
+    display: block;
+    line-height: 22px;
+    font-weight: 400;
 }
 @media (min-width: 48em) {
 	.google-button.special {
@@ -498,5 +503,15 @@
 		left: unset;
 		height: auto;
 		margin-right: 20px
+	}
+}
+@media (max-width: 767px) {
+	.individuals-signup-cta__form-group {
+		border-radius: 5px 5px 0 0;
+	}
+	.google-button.special {
+		margin-top: -10px;
+		border-radius: 0 0 5px 5px;
+		height: 50px;
 	}
 }

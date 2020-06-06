@@ -60,11 +60,6 @@
 //   box-shadow: none;
 // }
 
-.brand-logo {
-  padding: 11px 0 12px;
-  max-width: 220px;
-}
-
 .btn {
   box-shadow: none !important;
 }
@@ -100,23 +95,55 @@
   }
 }
 
+.brand-logo {
+  padding: 13px 0;
+  max-width: 220px;
+  max-height: 48.88px;
+}
+
+.CreateButton {
+  position: absolute;
+  right: calc(50% - 43px);
+  top: 2px; 
+}
+
+.CreateButton > a {
+  background-color: #d67086 !important;
+}
+
+.LoginRegisterButton {
+  line-height: 0;
+  padding: 10px;
+}
+
 @media (max-width:767px) {
-  .SearchLoginBox {
-    width: 100%;
-    border-radius: 0;
-    position: relative;
-    left: 0;
+  .hidden-lg {
+    display: block !important;
   }
-  .NavBarBox {
-    padding: 10px 0;
-    border-bottom: 1px solid #ccc;
+  .CreateButton {
+    right: 5px;
   }
-  .NavBarBox > div:nth-of-type(1) {
-    display: none !important;
+  .LoginRegisterButton {
+    margin-bottom: 5px;
   }
   .brand-logo {
     max-width: 55%;
-    margin-right: 7%;
+    margin-right: 15%;
+  }
+  .SearchLoginBox {
+      width: 100% !important;
+      position: relative !important;
+      top: 0 !important;
+      z-index: 16 !important;
+      border-radius: 0;
+      left: 0;
+  }
+  .NavBarBox {
+      // position: relative !important;
+      // top: 0 !important;
+      z-index: 21 !important;
+      border-bottom: 1px solid #ccc;
+      padding-left: 0;
   }
 }
 

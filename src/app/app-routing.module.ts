@@ -7,6 +7,7 @@ import { WebsiteComponent } from './website/website.component';
 import { EmailMarketingComponent } from './email-marketing/email-marketing.component';
 import { SocialMediaMarketingComponent } from './social-media-marketing/social-media-marketing.component';
 import { VideoChatHomeComponent } from './video-chat/video-chat-home/video-chat-home.component';
+import { DonateComponent } from './donate/donate.component';
 // import { PostDataResolver } from './core/resolver';
 
 const routes: Routes = [
@@ -14,6 +15,10 @@ const routes: Routes = [
     path: '',
     redirectTo: '/dashboard',
     pathMatch: 'full'
+  },
+  {
+    path: 'donate',
+    component: DonateComponent
   },
   /*  {
      path: '',

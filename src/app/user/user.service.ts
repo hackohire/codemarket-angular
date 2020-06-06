@@ -90,6 +90,25 @@ export class UserService {
     );
   }
 
+  createBraintreeTransaction(data): Observable<any> {
+    return this.apollo.mutate(
+      {
+        mutation: gql`
+        mutation createBraintreeTransaction($data: JSON) {
+          createBraintreeTransaction(data: $data)
+        }
+        `,
+        variables: {
+          data
+        }
+      }
+    ).pipe(
+      map((d: any) => {
+        return d.data.createBraintreeTransaction;
+      })
+    );
+  }
+
   updateUser(u: User) {
     console.log(u);
 

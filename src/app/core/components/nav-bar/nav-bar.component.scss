@@ -61,8 +61,9 @@
 // }
 
 .brand-logo {
-  padding: 11px 0 12px;
-  max-width: 220px;
+  max-height: 48.88px;
+  padding: 14px 0;
+  max-width: 160px;
 }
 
 .btn {
@@ -100,6 +101,17 @@
   }
 }
 
+.CreateButton {
+  position: absolute;
+  right: calc(50% - 43px);
+  top: 2px;
+}
+
+.LoginRegisterButton {
+  line-height: 0;
+  padding: 10px;
+}
+
 @media (max-width:767px) {
   .SearchLoginBox {
     width: 100%;
@@ -107,16 +119,21 @@
     position: relative;
     left: 0;
   }
+  .CreateButton {
+    right: 5px;
+  }
+  .LoginRegisterButton {
+    margin-bottom: 5px;
+  } 
   .NavBarBox {
-    padding: 10px 0;
+    padding: 0;
     border-bottom: 1px solid #ccc;
   }
   .NavBarBox > div:nth-of-type(1) {
     display: none !important;
   }
   .brand-logo {
-    max-width: 55%;
-    margin-right: 7%;
+    margin-right: 20%;
   }
 }
 

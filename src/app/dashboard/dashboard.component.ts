@@ -13,6 +13,21 @@ import { environment } from '../../environments/environment';
 })
 export class DashboardComponent implements OnInit {
 
+  salesemailInput: string;
+  pledgeemailInput: string;
+  providejobemailInput: string;
+  step1emailInput: string;
+  step2emailInput: string;
+  step3emailInput: string;
+  TwitteremailInput: string;
+  FacebookemailInput: string;
+  InstagramemailInput: string;
+  LinkedinemailInput: string;
+  YoutubeemailInput: string;
+  SnapchatemailInput: string;
+  PinterestemailInput: string;
+  MarketingemailInput: string;
+
   questionnaire: FormGroup;
   showAuth = false;
   currentImage = './../assets/images/therapy0.png';

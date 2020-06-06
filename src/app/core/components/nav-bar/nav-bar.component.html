@@ -47,10 +47,17 @@
   <!-- <a mat-button routerLinkActive="mat-primary" *ngIf="authService.loggedInUser?.roles[0] === 'Admin'" [routerLink]="['/appointment-booking']" 
       style="margin-left:5px; padding: 8px 90px 8px 0;">
         <div class="line-height-initial">Appointment</div>
-      </a>
-      
+      </a> -->
 
-      <!-- Login -->
+  <a mat-button class="LoginRegisterButton" [routerLink]="['/', 'donate']">
+    <i style="font-size: 1.0rem !important; color: #000;" class="vertical-align-middle fal fa-donate fa-fw"></i>
+    <span style="color: #000;" class="line-height-initial"> Donate</span>
+  </a>
+
+
+
+  <!-- Login -->
+
   <ng-template #logIn>
     <a #lr mat-button [mdePopoverTriggerFor]="authentication" [mdePopoverTargetAt]="lr" mdePopoverTriggerOn="click"
       class="LoginRegisterButton">

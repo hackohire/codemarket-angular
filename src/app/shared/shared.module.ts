@@ -42,6 +42,7 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { AppointmentService } from './services/appointment.service';
 import { ChatFullUiComponent } from './components/chat-full-ui/chat-full-ui.component';
+import { TimeSlotsComponent } from './components/time-slots/time-slots.component';
 export function hljsLanguages() {
   return [
     { name: 'typescript', func: typescript },
@@ -68,7 +69,8 @@ export function hljsLanguages() {
     CommentSideNavComponent,
     GetNamePipe,
     CalenderComponent,
-    ChatFullUiComponent
+    ChatFullUiComponent,
+    TimeSlotsComponent
   ],
   imports: [
     CommonModule,
@@ -133,7 +135,8 @@ export function hljsLanguages() {
     NgSelectModule,
     MdePopoverModule,
     CalenderComponent,
-    ChatFullUiComponent
+    ChatFullUiComponent,
+    TimeSlotsComponent
   ],
   entryComponents: [
     VideoChatComponent, ChatFullUiComponent

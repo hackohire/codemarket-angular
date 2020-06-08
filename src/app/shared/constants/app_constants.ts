@@ -278,7 +278,7 @@ export const appConstants = {
 
       appointment_date
       cancelReason
-
+      duration
       job
       mentor
     }

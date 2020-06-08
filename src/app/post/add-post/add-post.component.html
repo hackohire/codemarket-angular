@@ -139,9 +139,8 @@
             <!-- SLOTS -->
             <div class="col-xs-12 col-sm-12 time-slot-wrapper"
                 *ngIf="postType === postTypeEnum.Appointment || postType === postTypeEnum.Mentor">
-                <!-- {{slotList | json}} {{postType}} -->
-                <!-- <div *ngIf="slotList.length > 0; else noSlotSelected;">
-                  <div class="col-6 slot-btn" [ngClass]="{ 'slot-select-box': ((slotDateTime) && slot === slotDateTime) }" 
+                <div *ngIf="slotList.length > 0; else noSlotSelected;">
+                  <div class="col-6 slot-btn" [ngClass]="{ 'slot-select-box': ((slotDateTime) && (slot === slotDateTime[0]) || (slot === slotDateTime[1])) }" 
                     (click)="selectedSlot(slot)" *ngFor="let slot of slotList">
                     {{slot}}
                   </div>
@@ -149,8 +148,8 @@
                 <ng-template class="no-slot" #noSlotSelected>
                     <span>Please Select Date</span>
                 </ng-template>
-              </div> -->
-              <app-time-slots [slots]="slotList"></app-time-slots>
+              </div>
+              <!-- <app-time-slots [slots]="slotList"></app-time-slots> -->
         </div>
     </div>
 </div>
@@ -161,9 +160,9 @@
         <app-calender></app-calender>
         <br>
     </div>
-    <div class="alert alert-info text-center" *ngIf="slotDateTime">
+    <div class="alert alert-info text-center" *ngIf="slotDateTime.length === 2">
         Confirm Your Apointment
-        <strong>: {{ displayDate | date:'yyyy-MM-dd hh:mm a'}}</strong>
+        <strong>: {{ displayDate}}</strong>
     </div>
 </ng-template>
 

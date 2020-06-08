@@ -16,6 +16,7 @@ import { PostService } from '../../shared/services/post.service';
 import { environment } from '../../../environments/environment';
 import { AppointmentService } from 'src/app/shared/services/appointment.service';
 import { PostType } from '../../shared/models/post-types.enum';
+import { async } from '@angular/core/testing';
 @Component({
   selector: 'app-add-post',
   templateUrl: './add-post.component.html',
@@ -36,9 +37,10 @@ export class AddPostComponent implements OnInit, AfterViewInit {
 
   // Appointment
   public slotList = [];
-  public slotDateTime: any;
+  public slotDateTime = [];
   public selectedDate: string;
   public displayDate = '';
+  public alreadyBookedSlots = []
 
   /** When a user tries to tie a post with this post */
   postFromRoute: Post;
@@ -97,9 +99,9 @@ export class AddPostComponent implements OnInit, AfterViewInit {
 
     if (!this._appointmentService.subsVar) {
       this._appointmentService.subsVar = this._appointmentService.
-        invokeAppointmentDateTime.subscribe((date: any) => {
+        invokeAppointmentDateTime.subscribe(async (date: any) => {
           this.selectedDate = date;
-          this.intervals();
+          await this.getAlreadyBookedSlots(moment(this.selectedDate).format('YYYY-MM-DD'));
         });
     }
   }
@@ -223,7 +225,8 @@ export class AddPostComponent implements OnInit, AfterViewInit {
   setValuesBeforeSubmit(postFormValue) {
     switch (this.postType) {
       case PostType.Appointment:
-        postFormValue.appointment_date = moment(this.displayDate).format('YYYY-MM-DD HH:mm:ss');
+        postFormValue.appointment_date = moment(this.selectedDate).format('YYYY-MM-DD');
+        postFormValue.duration = this.slotDateTime;
         break;
 
       case PostType.Mentor:
@@ -267,18 +270,64 @@ export class AddPostComponent implements OnInit, AfterViewInit {
         }
       }
 
-      this.slotList = filteredSlots;
-      // console.log(this.slotList);
+      this.slotList = [...filteredSlots];
     } else {
-      this.slotList = result;
-      // console.log(this.slotList);
+      this.slotList = [...result];
     }
   }
 
   selectedSlot(slot: string) {
-    this.slotDateTime = slot;
-    const addTime = this.selectedDate.split('T');
-    this.displayDate = moment(addTime[0] + ' ' + this.slotDateTime).format('YYYY-MM-DD HH:mm:ss');
+    if (this.slotDateTime.length < 2) {
+      this.slotDateTime.push(slot);
+      const addDate = this.selectedDate.split('T');
+      this.formateDateTime(addDate[0], this.slotDateTime)
+    } else {
+      this.slotDateTime = [];
+      this.slotDateTime.push(slot);
+    }
+  }
+
+  formateDateTime(date: string, timeSlots) { 
+    if (timeSlots.length === 2) {
+      if (moment(date +' '+timeSlots[0]) < moment(date +' '+timeSlots[1])) {
+        this.displayDate = date + ' ' + moment(date +' '+timeSlots[0]).format('hh:mm A') + ' - ' + moment(date +' '+timeSlots[1]).format('hh:mm A')
+      } else {
+        this.slotDateTime = [];
+        alert("FROM time can not greater than TO time slot. Please select again");
+      }
+    }
+  }
+
+  getAlreadyBookedSlots(date: string) {
+    this.intervals();
+    this.postService.getAlreadyBookedSlots(date).subscribe((data) => {
+      this.alreadyBookedSlots = [];
+      if (data.appointment.length > 0) {
+        data.appointment.map((slot) => {
+          this.getBookedSlot(slot.duration[0], slot.duration[1]);
+        })
+        console.log(this.alreadyBookedSlots);
+        this.slotList = this.slotList.filter((slot) => !this.alreadyBookedSlots.includes(slot));
+        console.log(this.slotList);
+      }
+    });
+  }
+
+  getBookedSlot(from: string, to: string) {
+    const start = moment(from, 'hh:mm a');
+    const end = moment(to, 'hh:mm a');
+    start.minutes(Math.ceil(start.minutes() / 30) * 30);
+    const result = [];
+    const current = moment(start);
+    while (current <= end) {
+      result.push(current.format('HH:mm'));
+      current.add(15, 'minutes');
+    }
+    if (this.alreadyBookedSlots.length === 0) {
+      this.alreadyBookedSlots = result
+    } else {
+      this.alreadyBookedSlots = [...this.alreadyBookedSlots, ...result];
+    }
   }
 
 }

@@ -80,6 +80,8 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
   selectedCoverPicURL = '';
   uploadedCoverUrl = '';
 
+  hideTabs = false;
+  currentMailingList = '';
   companyDetails: Post | Company | any;
   isUserAttending: boolean; /** Only for the event */
   subscription$: Subscription = new Subscription();
@@ -767,5 +769,22 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
       });
 
     // this.companyRelatedPosts.posts = orderBy(this.games, [value], order);
+  }
+
+  // Get Contacts of Particular Mailing List
+  reDirectToMailingList(batchId, batchName) {
+    console.log(batchId);
+    this.companyView = 'contact1';
+    this.hideTabs = true;
+    this.currentMailingList = batchId;
+    const paginationObj = {
+      pageNumber: 1, limit: 10,
+      sort: { order: '' }
+    };
+
+    this.emailService.getMailingListContacts(paginationObj, batchId).subscribe((res) => {
+      console.log("This are contacts ==> ", res);
+    });
+
   }
 }

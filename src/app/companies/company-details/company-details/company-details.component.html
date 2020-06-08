@@ -123,6 +123,17 @@
 
             <div class="row">
                 <div class="col-lg-2">
+                    <!-- Mainling List -->
+                    <div class="add-form-area common-box-shadow">
+                        <h4>Mailing List</h4>
+                            <!-- <div style="border: 1px solid; margin-top: 5px;" *ngFor="let m of mailingList; let i = index;">
+                                <h5>{{m?.name}}</h5>
+                            </div> -->
+                            <button type="button" (click)="reDirectToMailingList(m?._id, m?.name)" *ngFor="let m of mailingList; let i = index;"
+                            mat-raised-button color="primary" [ngClass]="currentMailingList === m?._id ? 'selected-mailing-list' : ''"
+                            style="width: 100%; height: 35px; margin-top: 5px;">{{m?.name}}</button>
+                    </div>
+                    
                     <app-post-type-nav *ngIf="false" [selectedPostType]="companyView" [customTabs]="customTabs"
                         (postTypeClick)="selectMainCategory($event);" (plusButtonClick)="redirectToAddPost($event)">
                     </app-post-type-nav>
@@ -237,7 +248,12 @@
                         </div>
                     </div>
 
-                    <mat-tab-group mat-align-tabs="center">
+                    <div *ngIf="companyView === 'contact1'">
+                        <ng-container *ngTemplateOutlet="contactTemplate1; context: details">
+                        </ng-container>
+                    </div>
+
+                    <mat-tab-group mat-align-tabs="center" *ngIf="!hideTabs">
                         <mat-tab label="Posts">
                             <div class="row">
                                 <div [ngClass]="selectedBlock ? 'col-md-8 col-lg-8' : 'col-lg-12 col-md-12'">
@@ -300,6 +316,8 @@
                                         <ng-container *ngTemplateOutlet="contactTemplate; context: details">
                                         </ng-container>
                                     </div>
+
+                                   
 
                                     <div *ngIf="details?.createdBy?.name && companyView === 'creator'"
                                         class="author-card sidebar-card">
@@ -419,7 +437,7 @@
                                 <div class="col-md-12">
 
                                     <!-- Mainling List -->
-                                    <div class="add-form-area common-box-shadow">
+                                    <!-- <div class="add-form-area common-box-shadow">
                                         <h2>Mailing List</h2>
                                         <br>
                                         <div class="row">
@@ -427,7 +445,7 @@
                                                 <h5>{{m?.name}}</h5>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <!-- Save Emails -->
                                     <div [formGroup]="saveEmailForm" class="add-form-area common-box-shadow">
                                         <h2>Save Emails</h2>
@@ -838,6 +856,12 @@
     <app-paginator [length]="totalcompanyRelatedPosts"
         (fetchData)="paginator = $event; fetchAllCompanyRealtedePosts('contact')">
     </app-paginator>
+</ng-template>
+
+<ng-template #contactTemplate1 let-contacts="details">
+    <div style="background: white;">
+        <h2>It Works!!!</h2>
+    </div>
 </ng-template>
 
 <ng-template #addBlockLevelCommentTemplate let-cDetails="details" let-comments="comments">

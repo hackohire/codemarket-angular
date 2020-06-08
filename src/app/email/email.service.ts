@@ -227,4 +227,30 @@ export class EmailService {
       }),
     );
   }
+
+  getMailingListContacts(pageOptions, batchId: string): Observable<any> {
+    return this.apollo.query(
+      {
+        query: gql`
+          query getMailingListContacts($pageOptions: PageOptionsInput, $batchId: String) {
+            getMailingListContacts(pageOptions: $pageOptions, batchId: $batchId) {
+              total
+              contacts {
+                _id
+                name
+              }
+            }
+          }
+        `,
+        variables: {
+          pageOptions,
+          batchId
+        }
+      }
+    ).pipe(
+      map((p: any) => {
+        return p.data.getMailingListContacts;
+      }),
+    );
+  }
 }

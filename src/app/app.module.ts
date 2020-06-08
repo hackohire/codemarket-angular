@@ -17,9 +17,9 @@ import { EmailMarketingComponent } from './email-marketing/email-marketing.compo
 import { SocialMediaMarketingComponent } from './social-media-marketing/social-media-marketing.component';
 import { LoaderComponent } from './auth/loader/loader.component';
 import { AuthModule } from './auth/auth.module';
-import {MakemoneyonlineModule} from './makemoneyonline/makemoneyonline.module';
+import { MakemoneyonlineModule } from './makemoneyonline/makemoneyonline.module';
 import { FormioModule } from 'angular-formio';
-import {FormBuilderModule} from './form-builder/form-builder.module';
+import { FormBuilderModule } from './form-builder/form-builder.module';
 import { registerSelecteDeselectComponent } from './shared/components/selecte-deselect/select-deselect.formio';
 import { SelecteDeselectComponent } from './shared/components/selecte-deselect/selecte-deselect.component';
 import { VideoChatHomeComponent } from './video-chat/video-chat-home/video-chat-home.component';
@@ -29,6 +29,8 @@ import { ParticipantsComponent } from './video-chat/participants/participants.co
 import { DeviceSelectComponent } from './video-chat/settings/device-select/device-select.component';
 import { SettingsComponent } from './video-chat/settings/settings.component';
 import { DonateComponent } from './donate/donate.component';
+import { PayPalModule } from './core/paypal';
+import { environment } from '../environments/environment';
 
 // import { SignInComponent } from './core/amplify/sign-in-component';
 
@@ -65,6 +67,13 @@ import { DonateComponent } from './donate/donate.component';
     MakemoneyonlineModule,
     FormioModule,
     FormBuilderModule,
+    PayPalModule.init({
+      clientId: environment.paypal_client, // Using sandbox for testing purposes only
+      currency: 'USD',
+      commit: true,
+      //vault: true,
+      //disableFunding: 'credit,card'
+    })
     // MaterialFileInputModule
   ],
   providers: [PostDataResolver],

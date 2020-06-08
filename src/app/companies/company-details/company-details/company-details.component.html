@@ -417,6 +417,17 @@
                         <mat-tab label="Save And Send Emails">
                             <div class="row">
                                 <div class="col-md-12">
+
+                                    <!-- Mainling List -->
+                                    <div class="add-form-area common-box-shadow">
+                                        <h2>Mailing List</h2>
+                                        <br>
+                                        <div class="row">
+                                            <div class="col-md-3" style="border: 1px solid; margin-top: 5px;" *ngFor="let m of mailingList; let i = index;">
+                                                <h5>{{m?.name}}</h5>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <!-- Save Emails -->
                                     <div [formGroup]="saveEmailForm" class="add-form-area common-box-shadow">
                                         <h2>Save Emails</h2>

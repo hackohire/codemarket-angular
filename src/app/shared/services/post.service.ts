@@ -350,6 +350,33 @@ export class PostService {
     );
   }
 
+  getAlreadyBookedSlots(date: string): Observable<any> {
+    return this.apollo.query(
+      {
+        query: gql`
+          query getAlreadyBookedSlots($date: String) {
+            getAlreadyBookedSlots(date: $date) {
+              appointment {
+                ...Post
+              }
+            }
+          }
+          fragment Post on Post {
+            duration
+          }
+      `,
+        variables: {
+          date
+        },
+        fetchPolicy: 'no-cache'
+      }
+    ).pipe(
+      map((p: any) => {
+        return p.data.getAlreadyBookedSlots;
+      }),
+    );
+  }
+
   closeNavigationIfMobile(drawer) {
     if (drawer && window.innerWidth < 768) {
       drawer.toggle();

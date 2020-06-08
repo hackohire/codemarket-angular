@@ -201,4 +201,30 @@ export class EmailService {
       }),
     );
   }
+
+  getMailingList(companyId: string): Observable<any> {
+    return this.apollo.query(
+      {
+        query: gql`
+          query getMailingList($companyId: String) {
+            getMailingList(companyId: $companyId) {
+              _id
+              name
+              createdBy {
+                _id
+                name
+              }
+            }
+          }
+        `,
+        variables: {
+          companyId
+        }
+      }
+    ).pipe(
+      map((p: any) => {
+        return p.data.getMailingList;
+      }),
+    );
+  }
 }

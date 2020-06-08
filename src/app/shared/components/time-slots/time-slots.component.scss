@@ -1,0 +1,35 @@
+.time-slot-wrapper {
+    height: calc(100vh - 50vh);
+    overflow: auto;
+    margin-top: 30px;
+    text-align: center;
+    cursor: pointer;
+
+    .slot-btn {
+      width: 40%;
+      text-align: center;
+      color: var(--primary-color, #00a2ff);
+      border: 1px solid var(--primary-color-level2, rgba(0, 162, 255, 0.5));
+      position: relative;
+      display: inline-block;
+      padding: 10px 7px;
+      margin: 5px 7px;
+      font-weight: 600;
+      vertical-align: top;
+      border-radius: 4px;
+      &:hover {
+        border-color: var(--primary-color, rgb(0, 162, 255));
+        border-width: 1px;
+      }
+    }
+
+    .slot-select-box {
+        border-color: #23417b !important;
+        color: #23417b;
+      }
+
+    span {
+        font-size: 22px;
+        color: #00a2ff;
+    }
+}

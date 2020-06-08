@@ -90,12 +90,12 @@ export class UserService {
     );
   }
 
-  createBraintreeTransaction(data): Observable<any> {
+  createTransaction(data): Observable<any> {
     return this.apollo.mutate(
       {
         mutation: gql`
-        mutation createBraintreeTransaction($data: JSON) {
-          createBraintreeTransaction(data: $data)
+        mutation createTransaction($data: JSON) {
+          createTransaction(data: $data)
         }
         `,
         variables: {
@@ -104,7 +104,7 @@ export class UserService {
       }
     ).pipe(
       map((d: any) => {
-        return d.data.createBraintreeTransaction;
+        return d.data.createTransaction;
       })
     );
   }

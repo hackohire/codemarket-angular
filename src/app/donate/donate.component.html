@@ -68,15 +68,22 @@
                         [placeholder]="'Email'" [type]="'email'" [formControlName]="'email'">
                 </mat-form-field>
 
-                <div #dropinContainer id="dropin-container"></div>
+                <!-- <div id="paypal-button-container"></div> -->
+
+                <wm-paypal *ngIf="order" [style.width.px]="width" [height]="height" [layout]="layout" [shape]="shape"
+                    [color]="color" [label]="label" [tagline]="" [disabled]="false" [request]="order"
+                    (cancel)="onCancel($event)" (error)="onError($event)" #paypal>
+                </wm-paypal>
+
+                <!-- <div #dropinContainer id="dropin-container"></div> -->
 
                 <div>
                     <button style="margin-right: 10px;box-shadow: none;background: #eee;"
                         *ngIf="stepper.selectedIndex !== 0" mat-raised-button matStepperPrevious type="button">Change
                         Amount {{'($' + donationAmount + ')'}}</button>
-                    <button #donatButton id="submit-button" color="primary"
+                    <!-- <button #donatButton id="submit-button" color="primary"
                         [disabled]="userForm?.invalid || !donationInsatance" mat-raised-button type="button"
-                        (click)="donate(stepper)">Donate</button>
+                        (click)="donate(stepper)">Donate</button> -->
                 </div>
             </mat-step>
         </mat-horizontal-stepper>

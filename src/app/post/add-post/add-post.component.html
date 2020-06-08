@@ -140,17 +140,17 @@
             <div class="col-xs-12 col-sm-12 time-slot-wrapper"
                 *ngIf="postType === postTypeEnum.Appointment || postType === postTypeEnum.Mentor">
                 <!-- {{slotList | json}} {{postType}} -->
-                <div *ngIf="slotList.length > 0; else noSlotSelected;">
-                    <div class="col-6 slot-btn"
-                        [ngClass]="{ 'slot-select-box': ((slotDateTime) && slot === slotDateTime) }"
-                        (click)="selectedSlot(slot)" *ngFor="let slot of slotList">
-                        {{slot}}
-                    </div>
+                <!-- <div *ngIf="slotList.length > 0; else noSlotSelected;">
+                  <div class="col-6 slot-btn" [ngClass]="{ 'slot-select-box': ((slotDateTime) && slot === slotDateTime) }" 
+                    (click)="selectedSlot(slot)" *ngFor="let slot of slotList">
+                    {{slot}}
+                  </div>
                 </div>
                 <ng-template class="no-slot" #noSlotSelected>
                     <span>Please Select Date</span>
                 </ng-template>
-            </div>
+              </div> -->
+              <app-time-slots [slots]="slotList"></app-time-slots>
         </div>
     </div>
 </div>

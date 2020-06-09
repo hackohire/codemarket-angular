@@ -9,25 +9,27 @@ export function getPayPal(): PayPal {
 }
 
 /** PayPal JavaScript SDK loader  */
-export const loadPayPalSdk = (config: PayPalConfig) => (): Promise<PayPal> => {
+export function loadPayPalSdk(config: PayPalConfig) {
   // Verifies whenever PayPal has already being loaded
   const payPal = getPayPal();
   // Returns the existing instance or load the script
-  return payPal ? Promise.resolve(payPal) : new Promise((resolve, reject) => {
+  return (): Promise<PayPal> => {
+    return payPal ? Promise.resolve(payPal) : new Promise((resolve, reject) => {
 
-    const script = document.createElement('script');
+      const script = document.createElement('script');
 
-    script.src = payPalSdkUrl(config);
-    script.type = 'text/javascript';
-    script.defer = true;
-    script.async = true;
+      script.src = payPalSdkUrl(config);
+      script.type = 'text/javascript';
+      script.defer = true;
+      script.async = true;
 
-    script.onerror = () => reject(new Error('Unable to load PayPal'));
-    script.onload = () => resolve(getPayPal());
+      script.onerror = () => reject(new Error("Unable to load PayPal"));
+      script.onload = () => resolve(getPayPal());
 
-    document.head.appendChild(script);
-  });
-};
+      document.head.appendChild(script);
+    });
+  }
+}
 
 /** Builds the PayPal SDK url according to the PayPalConfig */
 export function payPalSdkUrl(config: PayPalConfig): string {
@@ -36,7 +38,7 @@ export function payPalSdkUrl(config: PayPalConfig): string {
     return camel.replace(/([A-Z])/g, $1 => {
       return '-' + $1.toLowerCase();
     });
-  };
+  }
 
   return Object.keys(config).reduce((url, token, idx) => {
     return url + (idx && '&' || '') + hyphenize(token) + '=' + config[token];

@@ -179,7 +179,9 @@
                             <p class="data-label">Availability</p>
                             <p class="info">
                                 <mat-icon style="vertical-align: middle;">date_range</mat-icon>
-                                {{ postDetails?.mentor?.availabilityDate | date: 'EEEE, MMMM d, y, h:mm a'}}
+                                {{ postDetails?.mentor?.availabilityDate | date }}
+                                {{postDetails?.mentor?.duration[0] ? ' From:' + postDetails?.mentor?.duration[0] : ''}}
+                                {{postDetails?.mentor?.duration[0] ? ' To:' + postDetails?.mentor?.duration[1] : ''}}
                             </p>
                         </li>
 

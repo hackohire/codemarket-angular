@@ -83,6 +83,8 @@ export class DetailsComponent implements OnInit, OnDestroy {
   @ViewChild(MdePopoverTrigger, { static: false }) addClientsPopover: MdePopoverTrigger;
   @ViewChild(MdePopoverTrigger, { static: false }) addCollaboratorsPopover: MdePopoverTrigger;
 
+  selectedPostTypeDetails = null;
+
   constructor(
     private store: Store<AppState>,
     private activatedRoute: ActivatedRoute,
@@ -127,6 +129,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
           });
           this.details$ = of(p);
           this.initializeCommentForm(p, 'post');
+          this.selectedPostTypeDetails = appConstants.postTypesArray.find((pType) => p.type === pType.name);
           this.postFormInitialization(p);
 
           this.breadcumb = {

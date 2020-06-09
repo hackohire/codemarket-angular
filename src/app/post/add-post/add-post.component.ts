@@ -17,6 +17,7 @@ import { environment } from '../../../environments/environment';
 import { AppointmentService } from 'src/app/shared/services/appointment.service';
 import { PostType } from '../../shared/models/post-types.enum';
 import { async } from '@angular/core/testing';
+import { appConstants } from '../../shared/constants/app_constants';
 @Component({
   selector: 'app-add-post',
   templateUrl: './add-post.component.html',
@@ -71,6 +72,12 @@ export class AddPostComponent implements OnInit, AfterViewInit {
   anonymousAvatar = '../../../../assets/images/anonymous-avatar.jpg';
   s3FilesBucketURL = environment.s3FilesBucketURL;
 
+  booked = false;
+
+  /** Feature Variables */
+  useCalendar: boolean;
+
+  selectedPostTypeDetails = null;
 
   constructor(
     public authService: AuthService,
@@ -83,6 +90,11 @@ export class AddPostComponent implements OnInit, AfterViewInit {
   ) {
 
     this.postType = this.activatedRoute.snapshot.queryParams.type;
+
+    if (this.postType) {
+      this.selectedPostTypeDetails = appConstants.postTypesArray.find((p) => this.postType === p.name);
+    }
+
     this.postId = this.activatedRoute.snapshot.params.postId;
 
     /** Make the Changes here while creating new post type */
@@ -101,6 +113,8 @@ export class AddPostComponent implements OnInit, AfterViewInit {
       this._appointmentService.subsVar = this._appointmentService.
         invokeAppointmentDateTime.subscribe(async (date: any) => {
           this.selectedDate = date;
+          this.displayDate = moment(this.selectedDate).format('YYYY-MM-DD');
+          this.slotDateTime = [];
           await this.getAlreadyBookedSlots(moment(this.selectedDate).format('YYYY-MM-DD'));
         });
     }
@@ -120,6 +134,7 @@ export class AddPostComponent implements OnInit, AfterViewInit {
           this.editPostDetails = p;
           this.postTitle = p.name;
           this.postType = p.type;
+          this.selectedPostTypeDetails = appConstants.postTypesArray.find((p) => this.postType === p.name);
           this.breadcumb.title = this.postType;
           this.breadcumb.path[0].name = this.postType;
           this.postFormInitialization(p);
@@ -161,12 +176,13 @@ export class AddPostComponent implements OnInit, AfterViewInit {
     switch (this.postType) {
 
       case PostType.Appointment:
+        this.useCalendar = true;
         this.postForm.addControl('cancelReason', new FormControl(i && i.cancelReason ? i.cancelReason : ''));
         break;
 
       case PostType.Mentor:
+        this.useCalendar = true;
         this.postForm.addControl('mentor', new FormGroup({
-          topics: new FormControl(i && i.mentor && i.mentor.topics ? i.mentor.topics : []),
           availabilityDate: new FormControl(i && i.mentor && i.mentor.availabilityDate ? i.mentor.availabilityDate : [])
         }));
         break;
@@ -230,7 +246,8 @@ export class AddPostComponent implements OnInit, AfterViewInit {
         break;
 
       case PostType.Mentor:
-        postFormValue.mentor.availabilityDate = moment(this.displayDate).format('YYYY-MM-DD HH:mm:ss');
+        postFormValue.mentor.availabilityDate = moment(this.selectedDate).format('YYYY-MM-DD');
+        postFormValue.mentor.duration = this.slotDateTime;
         break;
     }
   }
@@ -280,20 +297,21 @@ export class AddPostComponent implements OnInit, AfterViewInit {
     if (this.slotDateTime.length < 2) {
       this.slotDateTime.push(slot);
       const addDate = this.selectedDate.split('T');
-      this.formateDateTime(addDate[0], this.slotDateTime)
+      this.formateDateTime(addDate[0], this.slotDateTime);
     } else {
       this.slotDateTime = [];
       this.slotDateTime.push(slot);
     }
   }
 
-  formateDateTime(date: string, timeSlots) { 
+  formateDateTime(date: string, timeSlots) {
+    this.displayDate = date;
     if (timeSlots.length === 2) {
-      if (moment(date +' '+timeSlots[0]) < moment(date +' '+timeSlots[1])) {
-        this.displayDate = date + ' ' + moment(date +' '+timeSlots[0]).format('hh:mm A') + ' - ' + moment(date +' '+timeSlots[1]).format('hh:mm A')
+      if (moment(date + ' ' + timeSlots[0]) < moment(date + ' ' + timeSlots[1])) {
+        this.displayDate = date + ' ' + moment(date + ' ' + timeSlots[0]).format('hh:mm A') + ' - ' + moment(date + ' ' + timeSlots[1]).format('hh:mm A')
       } else {
         this.slotDateTime = [];
-        alert("FROM time can not greater than TO time slot. Please select again");
+        alert('FROM time can not greater than TO time slot. Please select again');
       }
     }
   }
@@ -324,7 +342,7 @@ export class AddPostComponent implements OnInit, AfterViewInit {
       current.add(15, 'minutes');
     }
     if (this.alreadyBookedSlots.length === 0) {
-      this.alreadyBookedSlots = result
+      this.alreadyBookedSlots = result;
     } else {
       this.alreadyBookedSlots = [...this.alreadyBookedSlots, ...result];
     }

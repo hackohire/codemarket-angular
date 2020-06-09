@@ -1,9 +1,9 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { appConstants } from '../../constants/app_constants';
-import { MatDialog } from '@angular/material/dialog';
-import { AddJobComponent } from '../../../job/add-job/add-job.component';
 import { PostType } from '../../models/post-types.enum';
 import { MatMenuTrigger } from '@angular/material/menu';
+import { PostService } from '../../services/post.service';
+import { MatDrawer } from '@angular/material';
 
 @Component({
   selector: 'app-add-post-menu',
@@ -11,7 +11,9 @@ import { MatMenuTrigger } from '@angular/material/menu';
   styleUrls: ['./add-post-menu.component.scss']
 })
 export class AddPostMenuComponent implements OnInit {
-  constructor(private dialog: MatDialog) { }
+  constructor(
+    public postService: PostService
+  ) { }
 
   icons = appConstants.icons;
   postTypes = PostType;
@@ -19,7 +21,9 @@ export class AddPostMenuComponent implements OnInit {
 
   @Input() label = 'Add';
 
-  @ViewChild('addPostMenu', {static: false}) addPostMenu: MatMenuTrigger;
+  @Input() drawer: MatDrawer;
+
+  @ViewChild('addPostMenu', { static: false }) addPostMenu: MatMenuTrigger;
 
   ngOnInit() {
   }

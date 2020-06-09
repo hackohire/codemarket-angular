@@ -1,6 +1,14 @@
 import { plans } from '../app/shared/constants/plan_details';
 
 export const environment = {
+  braintree_client: 'sandbox_x6kwrbkb_hnwczpyytcggqqth',
+  paypal_client: 'AWyqKpeiqQS6vUI7k7u2LpwhSZr0ikUzcbYLM50aBLmwo2fAtIsVkZrSn5tWZ_bElFtV34Lj5Q3ukeqA',
+  ckEditor: {
+    ckEditorEnvironMentId: 'qWCSnjZdhKZIm2BDeR6e',
+    ckEditorSecretKey: 'vOhUDQFlGWDTaOpVQmaPPm47RA9zFQ00tB6dQRdIa6Dqtxn7Uf8iGEc8oCMb',
+    ws: '71258.cke-cs.com/ws',
+    developmentTokenUrl: 'https://71258.cke-cs.com/token/dev/qhNbD6xUjkeVtrEc7aD2PcMhDkgmirUJHunqRWESilB0mTzZ0RHcJYk68P6D'
+  },
   production: true,
   COGNITO_AUTH_DOMAIN: 'https://platform.auth.us-east-1.amazoncognito.com',
   serverless_url: 'https://cityapi.codemarket.io/',
@@ -11,6 +19,7 @@ export const environment = {
   webSocketURL: 'wss://m99tldgnmg.execute-api.us-east-1.amazonaws.com/cit',
   // planDetails: plans.prod,
   planDetails: plans.prod,
+  fileS3Bucket: 'codemarket-files',
   oauth: {
     // Domain name
     domain: 'platform.auth.us-east-1.amazoncognito.com',
@@ -32,6 +41,7 @@ export const environment = {
   baseHref: '/',
   confirm: {
     email: '',
-    password: ''
+    password: '',
+    name: ''
   }
 };

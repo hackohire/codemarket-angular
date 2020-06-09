@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { FormArray, FormControl } from '@angular/forms';
 import { MatChipInputEvent } from '@angular/material';
 import { Observable } from 'rxjs';
-import { Tag } from '../models/product.model';
+import { Tag } from '../models/post.model';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { map } from 'rxjs/internal/operators/map';
@@ -74,7 +74,7 @@ export class FormService {
     );
   }
 
-  addToCollection(keyWord: string, searchCollection: string, type = ''): Observable<Tag[]> {
+  addToCollection(keyWord: string, searchCollection: string, type = ''): Observable<Tag> {
     return this.apollo.mutate(
       {
         mutation: gql`

@@ -10,17 +10,26 @@
 <mat-menu #menu="matMenu" [yPosition]="'below'" [xPosition]="'after'" [overlapTrigger]="false">
 
   <ng-container *ngFor="let p of postTypesArray">
-    <button mat-menu-item [routerLink]="['/', 'post', 'add-post']" [queryParams]="{type: p.name}">
-      <i style="font-size: 1.7rem !important;"
-        [class]="'vertical-align-middle fal fa-' + icons[p.name] + ' fa-fw'"></i>
+
+    <button (click)="postService.closeNavigationIfMobile(drawer)" *ngIf="p.label=='Forms'" mat-menu-item
+      [routerLink]="['/', 'form-builder']">
+      <i style="font-size: 1.7rem !important;" [class]="'vertical-align-middle fal fa-' + icons[p.name] + ' fa-fw'"></i>
+      <span style="text-transform: capitalize;"> {{p.name}}</span>
+    </button>
+
+    <button (click)="postService.closeNavigationIfMobile(drawer)" *ngIf="p.label!='Forms'" mat-menu-item
+      [routerLink]="['/', 'post', 'add-post']" [queryParams]="{type: p.name}">
+      <i style="font-size: 1.7rem !important;" [class]="'vertical-align-middle fal fa-' + icons[p.name] + ' fa-fw'"></i>
       <span style="text-transform: capitalize;"> {{p.name}}</span>
     </button>
   </ng-container>
 
 
   <!-- SEND EMAIL -->
-  <button mat-menu-item [routerLink]="['/', 'post', 'send-' + postTypes.Email]">
-    <i style="font-size: 1.7rem !important;" [class]="'vertical-align-middle fal fa-' + icons['dream-job'] + ' fa-fw'"></i>
+  <button (click)="postService.closeNavigationIfMobile(drawer)" mat-menu-item
+    [routerLink]="['/', 'post', 'send-' + postTypes.Email]">
+    <i style="font-size: 1.7rem !important;"
+      [class]="'vertical-align-middle fal fa-' + icons['dream-job'] + ' fa-fw'"></i>
     <span> Email</span>
   </button>
 

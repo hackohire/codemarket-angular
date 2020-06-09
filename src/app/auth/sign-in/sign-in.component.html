@@ -17,8 +17,8 @@
   <button mat-raised-button color="primary" (click)="signIn()" [disabled]="!signinForm.valid">Sign In</button>
 
   <!-- Redirect to sigin page -->
-  <p style="margin: 5px 0 5px 0;">Don't have an account? <a style="color: #0674ec;" (click)="auth?._authState.next({ state: 'signUp', user: {username: emailInput?.value} })">Sign up</a></p>
+  <p style="margin: 5px 0 5px 0;">Don't have an account? <a style="color: #00aeef;" (click)="auth?._authState.next({ state: 'signUp', user: {username: emailInput?.value} })">Sign up</a></p>
 
   <!-- Redirect to Forgot Password Page -->
-  <p style="margin: 5px 0 5px 0;">Forgot Password? <a style="color: #0674ec;" (click)="auth?._authState.next({ state: 'forgotPasswordRequest', user: {username: emailInput?.value} })">Reset Password</a></p>
+  <p style="margin: 5px 0 5px 0;">Forgot Password? <a style="color: #00aeef;" (click)="auth?._authState.next({ state: 'forgotPasswordRequest', user: {username: emailInput?.value} })">Reset Password</a></p>
 </form>

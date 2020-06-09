@@ -8,7 +8,7 @@ import { UserService } from '../../user/user.service';
 import { User } from '../../shared/models/user.model';
 import { Observable, Subscription, of } from 'rxjs';
 import { VideoChatComponent } from '../../video-chat/video-chat.component';
-import { MatDialog, MatPaginator } from '@angular/material';
+import { MatDialog, MatPaginator, MatTableDataSource } from '@angular/material';
 import Peer from 'peerjs';
 import { PostType } from '../../shared/models/post-types.enum';
 import { map } from 'rxjs/operators';
@@ -102,14 +102,16 @@ export class MyProfileComponent implements OnInit {
   selectedProfilePicURL = '';
 
   postTypeCounts;
-
+  displayedColumns: string[] = ['profileImg', 'fullName', 'name', 'descriptionHTML', 'appointment_date', 'status', 'edit'];
+  dataSource = new MatTableDataSource();
+  totalAppointmentCount = 0;
   customTabs = [
-    {
-      name: 'files',
-      label: 'Files',
-      isCustom: true,
-      count: 0
-    }
+    // {
+    //   name: 'files',
+    //   label: 'Files',
+    //   isCustom: true,
+    //   count: 0
+    // }
   ];
 
   profileViewLinks = [
@@ -117,12 +119,6 @@ export class MyProfileComponent implements OnInit {
     //   view: navLinkName.home,
     //   title: 'Home',
     // },
-    {
-      view: navLinkName.buy,
-      title: 'Buy',
-      path: 'purchased-items-list',
-      showOnlyToLoggedInUser: true
-    },
     {
       view: navLinkName.sell,
       title: 'Sell',
@@ -189,14 +185,19 @@ export class MyProfileComponent implements OnInit {
   }
 
   deletePost(_id: string) {
-    this.postService.deletePost(_id, {name: this.authService.loggedInUser.name, _id: this.authService.loggedInUser.name}).subscribe();
+    this.postService.deletePost(_id, { name: this.authService.loggedInUser.name, _id: this.authService.loggedInUser.name }).subscribe();
   }
 
   ngOnInit() {
-    this.authorId = this.activatedRoute.snapshot.params.authorId;
-
+    // this.authorId = this.activatedRoute.snapshot.params.authorId;
+    const params = this.activatedRoute.snapshot.params;
+    this.authorId = params && params.slug ? params.slug.split('-').pop() : '';
     this.profileView = this.activatedRoute.snapshot.queryParams['view'] ? this.activatedRoute.snapshot.queryParams['view'] : 'posts';
-
+    if (this.profileView === 'appointment') {
+      this.dataSource.paginator = this.paginator;
+      // this.dataSource.paginator = this.paginator;
+      this.getPostByPostType();
+    }
     // If user is visitng somebody else's profile
     if (this.authorId) {
       // this.navLinks = this.navLinks.filter(n => !n.showOnlyToLoggedInUser);
@@ -230,7 +231,7 @@ export class MyProfileComponent implements OnInit {
         ).subscribe()
       );
     }
-    
+
     this.userService.peer.asObservable().subscribe((p) => {
       if (p) {
         console.log(p);
@@ -246,49 +247,9 @@ export class MyProfileComponent implements OnInit {
         appConstants.postTypesArray.forEach((obj) => {
           obj['count'] = data[obj.name] ? data[obj.name].count : 0
         });
-        this.customTabs[0].count = data['files'] ? data['files'].count: 0;
+        // this.customTabs[0].count = data['files'] ? data['files'].count: 0;
       }
     });
-  }
-
-  createTabs() {
-    // this.navLinks = [ ];
-
-    // If user is visiting somebody else's profile don't show what other user has bought
-    if (!this.authorId) {
-      this.navLinks.push(
-        {
-          path: 'purchased-items-list',
-          label: 'Buy'
-        },
-        {
-          path: 'products-list',
-          label: 'Sell'
-        },
-        {
-          path: 'membership-list',
-          label: 'Membership'
-        },
-        {
-          path: 'my-rsvp',
-          label: 'My RSVP'
-        }
-      );
-      // this.router.navigate(['purchased-items-list'], { relativeTo: this.activatedRoute });
-    } else {
-      this.navLinks.push(
-        {
-          path: 'products-list',
-          label: 'Sell'
-        },
-        {
-          path: 'post-list',
-          label: 'Request Help',
-          queryParams: { type: PostType.HelpRequest, all: false }
-        },
-      );
-      // this.router.navigate(['products-list'], { relativeTo: this.activatedRoute });
-    }
   }
 
   fromNow(date) {
@@ -306,7 +267,6 @@ export class MyProfileComponent implements OnInit {
 
   initializeCommentForm(userId, commentType?: string) {
     this.commentForm = new FormGroup({
-      text: new FormControl(''),
       referenceId: new FormControl(),
       userReferenceId: new FormControl(userId),
       type: new FormControl(commentType),
@@ -316,9 +276,6 @@ export class MyProfileComponent implements OnInit {
   async addComment(postId = '', addCommentEditor: EditorComponent) {
     console.log(this.commentForm.value);
     if (this.authService.loggedInUser) {
-      const blocks = await addCommentEditor.editor.save();
-      this.commentForm.get('text').setValue(blocks.blocks);
-
       this.commentForm.addControl('createdBy', new FormControl(this.authService.loggedInUser._id));
       this.commentForm.patchValue({ referenceId: postId });
       this.subscription.add(
@@ -341,10 +298,14 @@ export class MyProfileComponent implements OnInit {
           relativeTo: this.activatedRoute,
           queryParams: { view: category }, queryParamsHandling: 'merge'
         });
+      if (this.profileView === 'appointment') {
+        // this.dataSource.paginator = this.paginator;
+        this.getPostByPostType();
+      }
     }
   }
 
-  showCommentsOnSide(event: { block: any, comments, selectedPost}) {
+  showCommentsOnSide(event: { block: any, comments, selectedPost }) {
     console.log(event);
     this.selectedBlock = event.block;
     this.selectedPostComments = event.comments;
@@ -360,7 +321,8 @@ export class MyProfileComponent implements OnInit {
     const userId = this.authorId ? this.authorId : this.authService.loggedInUser._id;
     const paginationObj = {
       pageNumber: this.paginator.pageIndex + 1, limit: this.paginator.pageSize ? this.paginator.pageSize : 10,
-      sort: {order: ''}};
+      sort: { order: '' }
+    };
     this.postService.getAllPosts(paginationObj, postType, '', '', userId, userId).subscribe((u) => {
       this.listOfAllOtherPosts.posts = u.posts;
       this.totalOtherPosts = u.total;
@@ -372,16 +334,10 @@ export class MyProfileComponent implements OnInit {
       case 'files':
         this.profileView = tab.name;
         this.selectedBlock = null;
-        this.fetchFilesUploadedByUser();
         break;
     }
   }
 
-  fetchFilesUploadedByUser() {
-    this.postService.fetchFiles('attaches', this.authService.loggedInUser._id).subscribe((f) => {
-      this.files = f;
-    });
-  }
 
   addProfilePic() {
     this.profilePic.nativeElement.click();
@@ -403,7 +359,7 @@ export class MyProfileComponent implements OnInit {
 
       await Storage.vault.put(fileName, this.selectedProfilePic, {
 
-        bucket: appConstants.fileS3Bucket,
+        bucket: environment.fileS3Bucket,
         path: 'avatar',
         level: 'public',
         contentType: this.selectedProfilePic.type,
@@ -451,7 +407,7 @@ export class MyProfileComponent implements OnInit {
       const fileName = fileNameSplitArray[0] + '-' + new Date().toISOString() + '.' + fileExt;
       await Storage.vault.put(fileName, this.selectedCoverPic, {
 
-        bucket: appConstants.fileS3Bucket,
+        bucket: environment.fileS3Bucket,
         path: 'cover',
         level: 'public',
         contentType: this.selectedCoverPic.type,
@@ -484,6 +440,26 @@ export class MyProfileComponent implements OnInit {
     }
     this.uploadedCoverUrl = null;
     this.updateCover(userId);
+  }
+
+  getPostByPostType() {
+    let paginationObj = {};
+    if (this.paginator) {
+      paginationObj = {
+        pageNumber: this.paginator ? this.paginator.pageIndex + 1 : 1, limit: this.paginator ? this.paginator.pageSize : 10,
+        sort: { order: '' }
+      };
+    } else {
+      paginationObj = {
+        pageNumber: 1, limit: 10,
+        sort: { order: '' }
+      };
+    }
+
+    this.postService.getPostByPostType('appointment', this.authService.loggedInUser._id, paginationObj).subscribe((data) => {
+      this.dataSource.data = data.posts;
+      this.totalAppointmentCount = data.total;
+    });
   }
 
 }

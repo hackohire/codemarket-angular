@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnChanges, ViewChild, ChangeDetectorRef} from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { tap } from 'rxjs/operators';
 import moment from 'moment';
@@ -29,7 +29,7 @@ export class CommentComponent implements OnInit {
   edit: boolean;
   replyEditorId: string;
 
-  @ViewChild('commentReplyEditor', {static: false}) commentReplyEditor: EditorComponent;
+  @ViewChild('commentReplyEditor', { static: false }) commentReplyEditor: EditorComponent;
 
   anonymousAvatar = '../../../../assets/images/anonymous-avatar.jpg';
   s3FilesBucketURL = environment.s3FilesBucketURL;
@@ -38,7 +38,6 @@ export class CommentComponent implements OnInit {
     public authService: AuthService,
     private commentService: CommentService,
     private sweetAlertService: SweetalertService,
-    private changeDetector: ChangeDetectorRef
   ) { }
 
   ngOnInit() {
@@ -48,7 +47,6 @@ export class CommentComponent implements OnInit {
 
   initializeReplyForm() {
     this.replyCommentForm = new FormGroup({
-      text: new FormControl([]),
       // createdBy: new FormControl(this.authService.loggedInUser._id),
       referenceId: new FormControl(this.comment.referenceId),
       companyReferenceId: new FormControl(this.companyReferenceId ? this.companyReferenceId : this.comment.companyReferenceId),
@@ -79,17 +77,17 @@ export class CommentComponent implements OnInit {
 
   async addReply(commentReplyEditor: EditorComponent) {
     if (this.authService.loggedInUser) {
-      const blocks =  await commentReplyEditor.editor.save();
+      // const blocks =  await commentReplyEditor.editor.save();
 
-      this.replyCommentForm.get('text').setValue(blocks.blocks);
+      // this.replyCommentForm.get('text').setValue(blocks.blocks);
 
-      this.changeDetector.detectChanges();
+      // this.changeDetector.detectChanges();
 
 
       /** Fetch the html content also becuase when we send email, email only understands the html content so we need to store html
        * content also
        */
-      this.replyCommentForm.get('textHTML').setValue(commentReplyEditor.editorViewRef.nativeElement.innerHTML);
+      this.replyCommentForm.get('textHTML').setValue(commentReplyEditor.html);
 
 
       this.replyCommentForm.addControl('createdBy', new FormControl(this.authService.loggedInUser._id));
@@ -97,8 +95,9 @@ export class CommentComponent implements OnInit {
         tap((child) => {
           if (child && this.comment.children) {
             // this.comment.children.push(child);
-            this.reply = this.fromWhere === 'chat' ? false: true;
-            commentReplyEditor.editor.blocks.clear();
+            commentReplyEditor.html = '';
+            this.reply = this.fromWhere === 'chat' ? false : true;
+            // commentReplyEditor.editor.blocks.clear();
           }
         })
       ).subscribe();
@@ -107,29 +106,29 @@ export class CommentComponent implements OnInit {
     }
   }
 
-  deleteComment() {
+  deleteComment(singleCommentEditor: EditorComponent) {
     this.sweetAlertService.confirmDelete(() => {
-    this.commentService.deleteComment(this.comment._id, this.comment.referenceId).pipe(
-      tap((d) => {
-        // this.commentDeleted.emit(this.comment._id);
-        // this.comment = null;
-        this.replyCommentForm = null;
-      })
-    ).subscribe();
+      this.commentService.deleteComment(this.comment._id, this.comment.referenceId, singleCommentEditor.html).pipe(
+        tap((d) => {
+          // this.commentDeleted.emit(this.comment._id);
+          // this.comment = null;
+          this.replyCommentForm = null;
+        })
+      ).subscribe();
     });
   }
 
   async updateComment(singleCommentEditor: EditorComponent) {
-    const blocks =  await singleCommentEditor.editor.save();
-    this.comment.text = blocks.blocks;
+    // const blocks =  await singleCommentEditor.editor.save();
+    // this.comment.text = blocks.blocks;
 
-    this.changeDetector.detectChanges();
+    // this.changeDetector.detectChanges();
 
     await this.commentService.updateComment(
       this.comment._id,
       this.comment.referenceId,
-      this.comment.text,
-      singleCommentEditor.editorViewRef.nativeElement.innerHTML
+      singleCommentEditor.html
+      // singleCommentEditor.editorViewRef.nativeElement.innerHTML
     ).pipe(
       tap((d) => {
         if (d) {

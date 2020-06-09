@@ -89,11 +89,11 @@
                 }
               ]
             },
-            "startups": {
+            "yoga": {
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.startups.ts"
+                  "with": "src/environments/environment.yoga.ts"
                 }
               ],
               "optimization": true,
@@ -151,6 +151,9 @@
             },
             "staging": {
               "browserTarget": "yoga:build:staging"
+            },
+            "yoga": {
+              "browserTarget": "yoga:build:yoga"
             }
           }
         },
@@ -203,6 +206,9 @@
             },
             "staging": {
               "devServerTarget": "yoga:serve:staging"
+            },
+            "yoga": {
+              "devServerTarget": "yoga:serve:yoga"
             }
           }
         },
@@ -240,11 +246,11 @@
                 "styles": true
               }
             },
-            "startups": {
+            "yoga": {
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.startups.ts"
+                  "with": "src/environments/environment.yoga.ts"
                 }
               ],
               "sourceMap": false,

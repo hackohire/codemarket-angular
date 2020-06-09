@@ -238,6 +238,30 @@ export class EmailService {
               contacts {
                 _id
                 name
+                email {
+                  email
+                  status
+                }
+                proposalName
+                OrganizationName
+                birthDate
+                address
+                website
+                companyName
+                url
+                firstName
+                lastName
+                cityName
+                name
+                followers
+                following
+                posts
+                instaProfileId
+                batch
+                descriptionHTML
+                companyContactEmail
+                conpanyContactPerson
+                ownerName
               }
             }
           }

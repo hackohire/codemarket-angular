@@ -81,13 +81,14 @@ export class DonateComponent implements OnInit {
   }
 
   private loadPaypal() {
-    this.loadExternalScript(`https://www.paypal.com/sdk/js?client-id=${environment.paypal_client}&currency=USD`).then(() => {
+    this.loadExternalScript(`https://www.paypal.com/sdk/js?client-id=${environment.paypal_client}&currency=USD&commit=true`).then(() => {
       paypal.Buttons({
         style: {
           shape: 'rect',
           color: 'gold',
           layout: 'vertical',
           label: 'paypal',
+          size: 'responsive'
         },
         createOrder: (data, actions) => {
           return actions.order.create({

@@ -12,7 +12,8 @@ export interface Tag {
 
 export interface Mentor {
     topics?: Tag[];
-    availabilityDate?: [string];
+    availabilityDate?: string;
+    duration?: [];
 }
 
 export interface Job {

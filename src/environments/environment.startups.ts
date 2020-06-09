@@ -2,6 +2,7 @@ import { plans } from '../app/shared/constants/plan_details';
 
 export const environment = {
   braintree_client: 'sandbox_x6kwrbkb_hnwczpyytcggqqth',
+  paypal_client: 'AWyqKpeiqQS6vUI7k7u2LpwhSZr0ikUzcbYLM50aBLmwo2fAtIsVkZrSn5tWZ_bElFtV34Lj5Q3ukeqA',
   ckEditor: {
     ckEditorEnvironMentId: 'qWCSnjZdhKZIm2BDeR6e',
     ckEditorSecretKey: 'vOhUDQFlGWDTaOpVQmaPPm47RA9zFQ00tB6dQRdIa6Dqtxn7Uf8iGEc8oCMb',

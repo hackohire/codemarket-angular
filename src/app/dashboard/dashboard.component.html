@@ -2,7 +2,72 @@
 
 <!-- <section class="hero-area bgimage"> -->
 
-
+<div class="container-fluid">
+    <div class="row" style="min-height: calc(100vh - 48px);">
+        <div class="col-lg-6 order-1 order-lg-1 pt-3 pt-lg-0 pb-3 pb-lg-0 px-lg-5 hero-img d-flex flex-column justify-content-center aos-init aos-animate"  data-aos="fade-left" style="background-color: #333;">
+            <h1 *ngIf="leftTitle"
+                    style="font-size: 34px; line-height: normal; max-width: 100%; text-align: left; color:#fff; text-transform: none; margin-bottom: 0; background: black; padding: 20px; border-radius: 10px 10px 0 0;">
+                    {{leftTitle}}
+                </h1>
+                <h2 *ngIf="leftSubTitle"
+                    style="font-size: 22px; line-height: normal; max-width: 100%; text-align: left; color:#000; margin-bottom: -47px; z-index: 9; background: transparent; padding: 20px 20px 0; letter-spacing: 1px;">
+                    {{leftSubTitle}}
+                </h2>
+            <img [src]="currentImage" class="img-fluid" style="background: #fff; padding: 20px; border-radius: 0 0 10px 10px;">
+        </div>
+        <div class="col-lg-6 pt-3 pt-lg-0 pb-3 px-lg-5 order-2 order-lg-2 d-flex flex-column justify-content-center aos-init aos-animate"  data-aos="fade-up">
+            <div *ngIf="!showAuth || authService?.loggedInUser?._id; else authUI">
+                <h1 *ngIf="rightTitle"
+                    style="font-size: 34px; line-height: normal; max-width: 100%; text-align: left;color:#000; text-transform: none;margin-bottom: 1rem;letter-spacing: 1px;">
+                    {{rightTitle}}
+                </h1>
+                <h2 *ngIf="rightSubTitle"
+                    style="font-size: 26px; line-height: normal; max-width: 100%; text-align: left;color:#999;margin-bottom: 1.5rem;font-weight: 100;">
+                    {{rightSubTitle.date}}  {{rightSubTitle.time}}  <a href="{{rightSubTitle.zoom}}" target="_blank">Zoom </a>
+                </h2>
+                <!-- <h1 style="font-size: 1.9em; line-height: normal; margin: 20px 0 0 0; font-weight: 200; text-align: left; color:#00aeef">
+                            <a class="btn btn-primary btn-md" [routerLink]="['/', 'company', 'add-company']">JOIN TODAY</a>
+                        </h1> -->
+                <form *ngIf="questionnaire" [formGroup]="questionnaire">
+                    <mat-horizontal-stepper linear #stepper (selectionChange)="test($event)">
+                        <mat-step
+                            *ngFor="let formField of convertObjectToArray(questionnaire?.controls); let i = index; let l = last; let f = first;">
+                            <!-- <h3>{{fields[i]?.label}}</h3> -->
+                            <ng-container [ngSwitch]="fields[i]?.type">
+                                <mat-form-field *ngSwitchCase="'textarea'" class="field-full-width"
+                                    appearance="outline">
+                                    <mat-label>{{fields[i].label}}</mat-label>
+                                    <textarea matInput
+                                        (keyup.enter)="questionnaire?.get(formField)?.valid ? stepper.next() : ''"
+                                        [placeholder]="fields[i].label" [formControlName]="formField"></textarea>
+                                </mat-form-field>
+                                <mat-form-field *ngSwitchDefault class="field-full-width" appearance="outline">
+                                    <mat-label>{{fields[i].label}}</mat-label>
+                                    <input matInput
+                                        (keyup.enter)="questionnaire?.get(formField)?.valid ? stepper.next() : ''"
+                                        [placeholder]="fields[i].label" [type]="fields[i].type"
+                                        [formControlName]="formField">
+                                </mat-form-field>
+                            </ng-container>
+                            <div>
+                                <button style="margin-right: 10px;box-shadow: none;background: #eee;" *ngIf="!f" mat-raised-button matStepperPrevious
+                                    type="button">Back</button>
+                                <button #nextStep *ngIf="!l" color="primary"
+                                    [disabled]="questionnaire?.get(formField)?.invalid" mat-raised-button matStepperNext
+                                    type="button">Next</button>
+                                <button *ngIf="l" color="primary" [disabled]="questionnaire?.get(formField)?.invalid"
+                                    mat-raised-button type="button" (click)="submit(stepper)">Submit</button>
+                            </div>
+                        </mat-step>
+                    </mat-horizontal-stepper>
+                </form>
+            </div>
+            <!-- <ng-template #authUI>
+                <app-auth></app-auth>
+            </ng-template> -->
+        </div>
+    </div>
+</div>
 
 <section id="hero" style="padding: 40px 0;background: #ffffff;">
     <!-- <div style="position: absolute; top: 51px; left: 82px; font-size: 20px; color: #000;">

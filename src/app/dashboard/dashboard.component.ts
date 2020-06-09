@@ -43,7 +43,7 @@ export class DashboardComponent implements OnInit {
 
   questionnaire: FormGroup;
   showAuth = false;
-  currentImage = './../assets/images/therapy0.png';
+  currentImage = '../../assets/images/therapy0.png';
   rightTitle = 'Therapy And Therapist In The Post Covid-19 Era';
   rightSubTitle = {
     date: '06/15/2020',
@@ -60,7 +60,7 @@ export class DashboardComponent implements OnInit {
       label: 'Enter your First Name*',
       placeholder: 'Enter your First Name*',
       type: 'text',
-      bannerUrl: './../assets/images/therapy0.png',
+      bannerUrl: '../../assets/images/therapy0.png',
       rightTitle: 'Therapy And Therapist In The Post Covid-19 Era',
       rightSubTitle: {
         date: '06/15/2020',
@@ -76,7 +76,7 @@ export class DashboardComponent implements OnInit {
       label: 'Enter your Last Name',
       placeholder: 'Enter your Last Name',
       type: 'text',
-      bannerUrl: './../assets/images/therapy1.png',
+      bannerUrl: '../../assets/images/therapy1.png',
       rightTitle: 'Therapy And Therapist In The Post Covid-19 Era',
       rightSubTitle: {
         date: '06/15/2020',
@@ -92,7 +92,7 @@ export class DashboardComponent implements OnInit {
       label: 'Enter your Email*',
       placeholder: 'Enter your Email*',
       type: 'email',
-      bannerUrl: './../assets/images/therapy2.png',
+      bannerUrl: '../../assets/images/therapy2.png',
       rightTitle: 'Therapy And Therapist In The Post Covid-19 Era',
       rightSubTitle: {
         date: '06/15/2020',
@@ -108,7 +108,7 @@ export class DashboardComponent implements OnInit {
       label: 'Enter your Phone Number(10 Digits)*',
       placeholder: 'Enter your Phone Number(10 Digits)*',
       type: 'number',
-      bannerUrl: './../assets/images/therapy3.png',
+      bannerUrl: '../../assets/images/therapy3.png',
       rightTitle: 'Therapy And Therapist In The Post Covid-19 Era',
       rightSubTitle: {
         date: '06/15/2020',
@@ -124,7 +124,7 @@ export class DashboardComponent implements OnInit {
       label: 'Enter your Business Name*',
       placeholder: 'Enter your Business Name*',
       type: 'text',
-      bannerUrl: './../assets/images/therapy4.png',
+      bannerUrl: '../../assets/images/therapy4.png',
       rightTitle: 'Therapy And Therapist In The Post Covid-19 Era',
       rightSubTitle: {
         date: '06/15/2020',
@@ -140,7 +140,7 @@ export class DashboardComponent implements OnInit {
       label: 'Enter your Address*',
       placeholder: 'Enter your Address*',
       type: 'text',
-      bannerUrl: './../assets/images/therapy4.png',
+      bannerUrl: '../../assets/images/therapy4.png',
       required: true,
     },
     {
@@ -148,7 +148,7 @@ export class DashboardComponent implements OnInit {
       label: 'What help do you need with therapists?',
       placeholder: 'What help do you need with therapists?',
       type: 'textarea',
-      bannerUrl: './../assets/images/therapy4.png',
+      bannerUrl: '../../assets/images/therapy4.png',
       required: true,
     }
   ];

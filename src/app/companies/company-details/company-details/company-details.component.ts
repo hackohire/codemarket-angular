@@ -83,8 +83,11 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
   hideTabs = true;
   batchId = '';
   contactList: any[];
-  campaignList: any[];
+  campaignData: any[];
   totalContactCount = 0;
+  emailTrackObj = {
+    batchId: ''
+  };
 
   companyDetails: Post | Company | any;
   isUserAttending: boolean; /** Only for the event */
@@ -502,14 +505,15 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
     });
   }
 
-  getCampaignData() {
-    console.log('EMail Data is called')
+  getCampaignData(batchId) {
     const paginationObj = {
       pageNumber: 1, limit: 10,
       sort: { order: '' }
     };
 
-    this.companyService.getCampaignsWithTracking(paginationObj, this.trackEmailForm.value.companies._id, this.trackEmailForm.value.batches._id).subscribe(c => {
+    // console.log(typeof this.companyId,typeof batchId);
+    this.emailTrackObj.batchId = batchId; 
+    this.companyService.getCampaignsWithTracking(paginationObj, this.companyId, batchId).subscribe(c => {
       if (c && c.length) {
         this.displayCampaignList = true;
         // this.fetchEmailsConnectedWithCampaign();
@@ -519,14 +523,13 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
   }
 
   fetchEmailsOfCampaign() {
-    console.log('fetchEmailsConnectedWithCampaign Data is called')
 
     const paginationObj = {
       pageNumber: this.paginator.pageIndex + 1, limit: this.paginator.pageSize ? this.paginator.pageSize : 10,
       sort: { order: '' }
     };
 
-    this.companyService.getCampaignsWithTracking(paginationObj, this.trackEmailForm.value.companies._id, this.trackEmailForm.value.batches._id).subscribe(c => {
+    this.companyService.getCampaignsWithTracking(paginationObj, this.companyId, this.emailTrackObj.batchId).subscribe(c => {
       if (c && c.length) {
         this.campaignsList = c;
       }
@@ -640,13 +643,13 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
           sort: { order: '' }
         };
 
-        this.subscription$.add(
-          this.companyService.getCampaignsWithTracking(paginationObj, this.companyDetails._id).subscribe(c => {
-            if (c && c.length) {
-              this.campaignsList = c;
-            }
-          })
-        );
+        // this.subscription$.add(
+        //   this.companyService.getCampaignsWithTracking(paginationObj, this.companyDetails._id).subscribe(c => {
+        //     if (c && c.length) {
+        //       this.campaignsList = c;
+        //     }
+        //   })
+        // );
         break;
     }
   }
@@ -809,7 +812,6 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
 
   // Get Contacts of Particular Mailing List
   reDirectToMailingList(batchId) {
-    console.log(batchId);
     this.companyView = 'contact';
     // this.firstTabLabel = 'Contacts';
     // this.hideTabs = false;
@@ -848,7 +850,6 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
     // if (event === 0) {
     //   this.hideTabs = true;
     // }
-    console.log("event ==> ", event)
     if (event === 2) {
       const paginationObj = {
         pageNumber: 1, limit: 50,
@@ -856,8 +857,7 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
       };
 
       this.emailService.getCampaignData(paginationObj, this.companyId).subscribe((res) => {
-        console.log("This is campaignData ==> ",res);
-        this.campaignList = res.campaigns;
+        this.campaignData = res.campaigns;
       })
     }
   }

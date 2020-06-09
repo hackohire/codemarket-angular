@@ -524,24 +524,34 @@
                         <mat-tab label="Campaigns" *ngIf="!hideTabs">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div [formGroup]="trackEmailForm" class="add-form-area common-box-shadow">
-                                        <h2>Track Emails</h2>
+                                    <div class="row">
+                                        <div [formGroup]="trackEmailForm" class="add-form-area common-box-shadow">
+                                            <h2>Campaigns</h2>
+                                            
+                                            <div class="row">
+                                                <div class="col-md-4" *ngFor="let c of campaignData;let i=index">
+                                                    <button type="button" (click)="getCampaignData(c?.batchId)"
+                                                    mat-raised-button color="primary"
+                                                    style="width: 100%; height: auto; margin-top: 5px; white-space: normal; white-space: normal;
+                                                    word-wrap: break-word;">{{c?.name}}</button>
+                                                </div>
 
-                                        <!-- <div class="col-md-4"></div> -->
-                                        <app-autocomplete class="field-full-width" [allowToAdd]="false"
-                                            [autoComplete]="trackEmailForm?.get('companies')"
-                                            [placeholder]="'Select Company'" [collection]="'companies'" [type]=""
-                                            [multiple]="false" matInput>
-                                        </app-autocomplete>
-
-                                        <app-autocomplete class="field-full-width" [allowToAdd]="false"
-                                            [autoComplete]="trackEmailForm?.get('batches')"
-                                            [placeholder]="'Select Mailing List'" [collection]="'batches'" [type]=""
-                                            [multiple]="false" matInput>
-                                        </app-autocomplete>
-                                        <button type="button" (click)="getCampaignData()"
-                                            [disabled]="trackEmailForm?.invalid" mat-raised-button color="primary"
-                                            style="margin: 12px; height: 35px;">{{ 'Get Email Data' }}</button>
+                                            </div>
+                                            <!-- <app-autocomplete class="field-full-width" [allowToAdd]="false"
+                                                [autoComplete]="trackEmailForm?.get('companies')"
+                                                [placeholder]="'Select Company'" [collection]="'companies'" [type]=""
+                                                [multiple]="false" matInput>
+                                            </app-autocomplete>
+    
+                                            <app-autocomplete class="field-full-width" [allowToAdd]="false"
+                                                [autoComplete]="trackEmailForm?.get('batches')"
+                                                [placeholder]="'Select Mailing List'" [collection]="'batches'" [type]=""
+                                                [multiple]="false" matInput>
+                                            </app-autocomplete>
+                                            <button type="button" (click)="getCampaignData()"
+                                                [disabled]="trackEmailForm?.invalid" mat-raised-button color="primary"
+                                                style="margin: 12px; height: 35px;">{{ 'Get Email Data' }}</button> -->
+                                        </div>
                                     </div>
 
                                     <!-- <ng-container *ngIf="campaignsList" *ngTemplateOutlet="campaignsTemplate">
@@ -557,7 +567,10 @@
                                                         {{ '(' + c?.count + ')'}} <mat-icon>email</mat-icon>
                                                     </mat-panel-description>
                                                 </mat-expansion-panel-header> -->
-
+                                                <div><strong> Campaign: </strong> {{c?.name}}</div>
+                                                <div><strong>FROM: </strong>{{c?.from}}</div>
+                                                <div><strong>SUBJECT: </strong>{{c?.subject}}</div>
+                                                <div><strong>HTML Template:</strong></div>
                                                 <div style="border: solid 1px black;" [innerHTML]="c?.descriptionHTML">
                                                 </div>
 

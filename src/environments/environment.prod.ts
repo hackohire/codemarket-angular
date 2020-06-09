@@ -16,10 +16,10 @@ export const environment = {
   s3FilesBucketURL: 'https://cityfiles.s3.amazonaws.com/public/',
   stripe_public_key: 'pk_live_EYCoYtpLszr802sOl89WeuW1',
   // stripe_public_key: 'pk_test_ighmL2U9UqAx0O4b8dKkSvdq',
-  webSocketURL: 'wss://m99tldgnmg.execute-api.us-east-1.amazonaws.com/cit',
+  webSocketURL: 'wss://m99tldgnmg.execute-api.us-east-1.amazonaws.com/city',
   // planDetails: plans.prod,
   planDetails: plans.prod,
-  fileS3Bucket: 'codemarket-files',
+  fileS3Bucket: 'cityfiles',
   oauth: {
     // Domain name
     domain: 'platform.auth.us-east-1.amazoncognito.com',

@@ -126,3 +126,392 @@
   .hero-area+section{
 	// padding-top: 187px;
   }
+
+
+// SIGNUP FORM //
+.individuals-signup-cta__form {
+	position: relative
+}
+.individuals-signup-cta__form-group {
+	position: relative;
+	display: grid;
+	grid-gap: 10px 20px;
+	border: 1px solid #ddd;
+	width: 100%
+}
+@media (min-width: 990px) {
+	.individuals-signup-cta__form-group {
+		grid-template-columns: 1fr auto;
+		padding: 8px 8px 8px 20px;
+		max-width: 540px;
+		height: 81px;
+		border-radius: 5px;
+		background: #fff;
+		box-shadow: rgba(62, 130, 247, 0) 0 0 0 3px, rgba(40, 85, 122, .08) 0 6px 20px 0;
+		transition: box-shadow .15s cubic-bezier(.645, .045, .355, 1)
+	}
+}
+@media (min-width: 1050px) {
+	.individuals-signup-cta__form-group {
+		grid-template-columns: initial;
+		padding: 0;
+		height: unset;
+		background: 0 0;
+		border-radius: 0;
+		box-shadow: none
+	}
+}
+@media (min-width: 1260px) {
+	.individuals-signup-cta__form-group {
+		grid-template-columns: 1fr auto;
+		padding: 8px 8px 8px 20px;
+		max-width: 540px;
+		height: 81px;
+		border-radius: 5px;
+		background: #fff;
+		box-shadow: rgba(62, 130, 247, 0) 0 0 0 3px, rgba(40, 85, 122, .08) 0 6px 20px 0;
+		transition: box-shadow .15s cubic-bezier(.645, .045, .355, 1)
+	}
+}
+@media (min-width: 990px) {
+	.individuals-signup-cta__form-group.hasValue,
+	.individuals-signup-cta__form-group:focus-within {
+		box-shadow: #3e82f7 0 0 0 3px, rgba(40, 85, 122, .08) 0 6px 20px 0
+	}
+}
+@media (min-width: 1050px) {
+	.individuals-signup-cta__form-group.hasValue,
+	.individuals-signup-cta__form-group:focus-within {
+		box-shadow: none
+	}
+}
+@media (min-width: 1260px) {
+	.individuals-signup-cta__form-group.hasValue,
+	.individuals-signup-cta__form-group:focus-within {
+		box-shadow: #3e82f7 0 0 0 3px, rgba(40, 85, 122, .08) 0 6px 20px 0
+	}
+}
+.individuals-signup-cta__form-group.hasValue .individuals-signup-cta__label,
+.individuals-signup-cta__form-group:focus-within .individuals-signup-cta__label {
+	top: 13px;
+	color: #3e82f7;
+	font-size: 13px
+}
+@media (min-width: 990px) {
+	.individuals-signup-cta__form-group.hasValue .individuals-signup-cta__label,
+	.individuals-signup-cta__form-group:focus-within .individuals-signup-cta__label {
+		top: 15px;
+		font-size: 14px
+	}
+}
+@media (min-width: 1050px) {
+	.individuals-signup-cta__form-group.hasValue .individuals-signup-cta__label,
+	.individuals-signup-cta__form-group:focus-within .individuals-signup-cta__label {
+		top: 13px;
+		font-size: 13px
+	}
+}
+@media (min-width: 1260px) {
+	.individuals-signup-cta__form-group.hasValue .individuals-signup-cta__label,
+	.individuals-signup-cta__form-group:focus-within .individuals-signup-cta__label {
+		top: 15px;
+		font-size: 14px
+	}
+}
+.individuals-signup-cta__form-group.hasValue .individuals-signup-cta__email-input,
+.individuals-signup-cta__form-group:focus-within .individuals-signup-cta__email-input {
+	box-shadow: #3e82f7 0 0 0 3px, rgba(40, 85, 122, .08) 0 6px 20px 0
+}
+@media (min-width: 990px) {
+	.individuals-signup-cta__form-group.hasValue .individuals-signup-cta__email-input,
+	.individuals-signup-cta__form-group:focus-within .individuals-signup-cta__email-input {
+		box-shadow: none
+	}
+}
+@media (min-width: 1050px) {
+	.individuals-signup-cta__form-group.hasValue .individuals-signup-cta__email-input,
+	.individuals-signup-cta__form-group:focus-within .individuals-signup-cta__email-input {
+		box-shadow: #3e82f7 0 0 0 3px, rgba(40, 85, 122, .08) 0 6px 20px 0
+	}
+}
+@media (min-width: 1260px) {
+	.individuals-signup-cta__form-group.hasValue .individuals-signup-cta__email-input,
+	.individuals-signup-cta__form-group:focus-within .individuals-signup-cta__email-input {
+		box-shadow: none
+	}
+}
+@media (min-width: 990px) {
+	.individuals-signup-cta__form-group.isInvalid {
+		box-shadow: #de3729 0 0 0 3px, rgba(40, 85, 122, .08) 0 6px 20px 0
+	}
+}
+@media (min-width: 1050px) {
+	.individuals-signup-cta__form-group.isInvalid {
+		box-shadow: none
+	}
+}
+@media (min-width: 1260px) {
+	.individuals-signup-cta__form-group.isInvalid {
+		box-shadow: #de3729 0 0 0 3px, rgba(40, 85, 122, .08) 0 6px 20px 0
+	}
+}
+.individuals-signup-cta__form-group.isInvalid .individuals-signup-cta__label {
+	color: #de3729
+}
+.individuals-signup-cta__form-group.isInvalid .individuals-signup-cta__email-input {
+	margin-bottom: 42px;
+	box-shadow: #de3729 0 0 0 3px, rgba(40, 85, 122, .08) 0 6px 20px 0
+}
+@media (min-width: 990px) {
+	.individuals-signup-cta__form-group.isInvalid .individuals-signup-cta__email-input {
+		margin: 0;
+		box-shadow: none
+	}
+}
+@media (min-width: 1050px) {
+	.individuals-signup-cta__form-group.isInvalid .individuals-signup-cta__email-input {
+		margin-bottom: 42px;
+		box-shadow: #de3729 0 0 0 3px, rgba(40, 85, 122, .08) 0 6px 20px 0
+	}
+}
+@media (min-width: 1260px) {
+	.individuals-signup-cta__form-group.isInvalid .individuals-signup-cta__email-input {
+		margin: 0;
+		box-shadow: none
+	}
+}
+.individuals-signup-cta__label {
+	position: absolute;
+	top: 30px;
+	left: 15px;
+	transform: translateY(-50%);
+	color: #888da1;
+	font-size: 15px;
+	line-height: 1;
+	transition: all .15s cubic-bezier(.645, .045, .355, 1);
+	pointer-events: none
+}
+@media (min-width: 990px) {
+	.individuals-signup-cta__label {
+		top: 50%;
+		left: 20px
+	}
+}
+@media (min-width: 1050px) {
+	.individuals-signup-cta__label {
+		top: 24%;
+		left: 15px
+	}
+}
+@media (min-width: 1200px) {
+	.individuals-signup-cta__label {
+		font-size: 18px
+	}
+}
+@media (min-width: 1260px) {
+	.individuals-signup-cta__label {
+		top: 50%;
+		left: 20px
+	}
+}
+.individuals-signup-cta__email-input {
+	padding: 12px 15px 0;
+	height: 60px;
+	color: #000;
+	font-size: 15px;
+	border: 0;
+	border-radius: 4px;
+	background: #fff;
+	box-shadow: rgba(62, 130, 247, 0) 0 0 0 3px, rgba(40, 85, 122, .08) 0 6px 20px 0;
+	transition: box-shadow .15s cubic-bezier(.645, .045, .355, 1);
+	-webkit-appearance: none
+}
+@media (min-width: 990px) {
+	.individuals-signup-cta__email-input {
+		padding: 12px 0 0;
+		height: auto;
+		background: 0 0;
+		box-shadow: none;
+		border-radius: 0
+	}
+}
+@media (min-width: 1050px) {
+	.individuals-signup-cta__email-input {
+		padding: 12px 15px 0;
+		height: 60px;
+		border-radius: 4px;
+		background: #fff;
+		box-shadow: rgba(62, 130, 247, 0) 0 0 0 3px, rgba(40, 85, 122, .08) 0 6px 20px 0
+	}
+}
+@media (min-width: 1200px) {
+	.individuals-signup-cta__email-input {
+		font-size: 18px
+	}
+}
+@media (min-width: 1260px) {
+	.individuals-signup-cta__email-input {
+		padding: 12px 0 0;
+		height: auto;
+		background: 0 0;
+		box-shadow: none;
+		border-radius: 0
+	}
+}
+.individuals-signup-cta__email-input:focus {
+	outline: 0
+}
+.individuals-signup__underform {
+	display: grid;
+	text-align: right;
+	padding: 15px 0 0 0;
+	color: #8089a0;
+	font-size: 16px;
+	line-height: 19px
+}
+@media (min-width: 990px) {
+	.individuals-signup__underform {
+		padding: 14px 26px 0 0;
+		grid-template-columns: 1fr auto;
+	}
+}
+@media (min-width: 1050px) {
+	.individuals-signup__underform {
+		padding: 15px 0 0;
+		grid-template-columns: 1fr;
+	}
+}
+@media (min-width: 1260px) {
+	.individuals-signup__underform {
+		padding: 14px 10px 0 0;
+		grid-template-columns: 1fr auto;
+	}
+}
+.google-button {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 6px 22px 6px 6px;
+    width: auto;
+    max-width: 232px;
+    height: 50px;
+    color: #34384f;
+    font-size: 16px;
+    font-weight: 500;
+    border: 0;
+    border-radius: 5px;
+    background-color: #fff;
+    text-decoration: none;
+    transition: background .3s linear;
+}
+.google-button.special {
+	border: 0;
+    border-radius: 5px;
+	display: inline-block;
+	padding: 10px 10px 12px;
+	width: 100%;
+	max-width: 100%;
+	height: 60px;
+	color: #fff;
+	font-size: 15px;
+	background: linear-gradient(to top, #2d94ff, #3e82f7);
+	box-shadow: inset #1d5bc5 0 -5px 0;
+	cursor: not-allowed;
+}
+.google-button.special > span.button-flex-wrapper {
+    display: block;
+    line-height: 22px;
+    font-weight: 400;
+}
+@media (min-width: 48em) {
+	.google-button.special {
+		font-size: 18px
+	}
+}
+@media (min-width: 990px) {
+	.google-button.special {
+		padding: 10px 15px 15px 15px;
+		height: 65px
+	}
+}
+@media (min-width: 1050px) {
+	.google-button.special {
+		padding: 10px 15px 12px;
+		height: 60px
+	}
+}
+@media (min-width: 1200px) {
+	.google-button.special {
+		min-width: auto
+	}
+}
+@media (min-width: 1260px) {
+	.google-button.special {
+		padding: 10px 15px 15px 15px;
+		height: 65px
+	}
+}
+.google-button.special:active {
+	top: 0
+}
+.google-button.special:not([disabled]) {
+	cursor: pointer;
+	outline: 0
+}
+.google-button.special:not([disabled]):active {
+	top: 5px;
+	padding-bottom: 10px;
+	height: 60px;
+	box-shadow: none
+}
+.google-button.special .icon__box {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	background: #fff
+}
+@media (min-width: 900px) {
+	.google-button.special .icon__box {
+		width: 40px;
+		border-radius: 3px
+	}
+}
+@media (min-width: 990px) {
+	.google-button.special .icon__box {
+		position: static;
+		top: unset;
+		left: unset;
+		height: auto;
+		margin-right: 20px
+	}
+}
+@media (min-width: 1050px) {
+	.google-button.special .icon__box {
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 100%;
+		margin: 0
+	}
+}
+@media (min-width: 1260px) {
+	.google-button.special .icon__box {
+		position: static;
+		top: unset;
+		left: unset;
+		height: auto;
+		margin-right: 20px
+	}
+}
+@media (max-width: 767px) {
+	.individuals-signup-cta__form-group {
+		border-radius: 5px 5px 0 0;
+	}
+	.google-button.special {
+		margin-top: -10px;
+		border-radius: 0 0 5px 5px;
+		height: 50px;
+	}
+}

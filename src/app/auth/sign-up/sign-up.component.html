@@ -23,5 +23,5 @@
   <button mat-raised-button color="primary" (click)="signUp()" [disabled]="signupForm?.invalid">Sign up</button>
 
   <!-- Redirect to login page -->
-  <span style="float: right;">Already have an account? <a style="color: #0674ec;" (click)="authService?._authState.next({ state: 'signIn', user: null });">Sign In</a></span>
+  <span style="float: right;">Already have an account? <a style="color: #00aeef;" (click)="authService?._authState.next({ state: 'signIn', user: null });">Sign In</a></span>
 </form>

@@ -21,6 +21,7 @@ export class UserService {
     github_url
     stackoverflow_url
     location
+    slug
     currentJobDetails {
       jobProfile {
         name
@@ -38,7 +39,6 @@ export class UserService {
     cover
     roles
     createdAt
-    likeCount
     stripeId
     subscription {
       plan {
@@ -86,6 +86,25 @@ export class UserService {
     ).pipe(
       map((d: any) => {
         return d.data.createUser;
+      })
+    );
+  }
+
+  createTransaction(data): Observable<any> {
+    return this.apollo.mutate(
+      {
+        mutation: gql`
+        mutation createTransaction($data: JSON) {
+          createTransaction(data: $data)
+        }
+        `,
+        variables: {
+          data
+        }
+      }
+    ).pipe(
+      map((d: any) => {
+        return d.data.createTransaction;
       })
     );
   }

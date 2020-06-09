@@ -2,30 +2,209 @@
 
 <!-- <section class="hero-area bgimage"> -->
 
-<section id="hero" style="padding: 100px 0;">
+<div class="container-fluid">
+    <div class="row" style="min-height: calc(100vh - 48px);">
+        <div class="col-lg-6 order-1 order-lg-1 pt-3 pt-lg-0 pb-3 pb-lg-0 px-lg-5 hero-img d-flex flex-column justify-content-center aos-init aos-animate"  data-aos="fade-left" style="background-color: #333;">
+            <h1 *ngIf="leftTitle"
+                    style="font-size: 34px; line-height: normal; max-width: 100%; text-align: left; color:#fff; text-transform: none; margin-bottom: 0; background: black; padding: 20px; border-radius: 10px 10px 0 0;">
+                    {{leftTitle}}
+                </h1>
+                <h2 *ngIf="leftSubTitle"
+                    style="font-size: 22px; line-height: normal; max-width: 100%; text-align: left; color:#000; margin-bottom: -47px; z-index: 9; background: transparent; padding: 20px 20px 0; letter-spacing: 1px;">
+                    {{leftSubTitle}}
+                </h2>
+            <img [src]="currentImage" class="img-fluid" style="background: #fff; padding: 20px; border-radius: 0 0 10px 10px;">
+        </div>
+        <div class="col-lg-6 pt-3 pt-lg-0 pb-3 px-lg-5 order-2 order-lg-2 d-flex flex-column justify-content-center aos-init aos-animate"  data-aos="fade-up">
+            <div *ngIf="!showAuth || authService?.loggedInUser?._id;">
+                <h1 *ngIf="rightTitle"
+                    style="font-size: 34px; line-height: normal; max-width: 100%; text-align: left;color:#000; text-transform: none;margin-bottom: 1rem;letter-spacing: 1px;">
+                    {{rightTitle}}
+                </h1>
+                <h2 *ngIf="rightSubTitle"
+                    style="font-size: 26px; line-height: normal; max-width: 100%; text-align: left;color:#999;margin-bottom: 1.5rem;font-weight: 100;">
+                    {{rightSubTitle.date}}  {{rightSubTitle.time}}  <a href="{{rightSubTitle.zoom}}" target="_blank">Zoom </a>
+                </h2>
+                <!-- <h1 style="font-size: 1.9em; line-height: normal; margin: 20px 0 0 0; font-weight: 200; text-align: left; color:#00aeef">
+                            <a class="btn btn-primary btn-md" [routerLink]="['/', 'company', 'add-company']">JOIN TODAY</a>
+                        </h1> -->
+                <form *ngIf="questionnaire" [formGroup]="questionnaire">
+                    <mat-horizontal-stepper linear #stepper (selectionChange)="test($event)">
+                        <mat-step
+                            *ngFor="let formField of convertObjectToArray(questionnaire?.controls); let i = index; let l = last; let f = first;">
+                            <!-- <h3>{{fields[i]?.label}}</h3> -->
+                            <ng-container [ngSwitch]="fields[i]?.type">
+                                <mat-form-field *ngSwitchCase="'textarea'" class="field-full-width"
+                                    appearance="outline">
+                                    <mat-label>{{fields[i].label}}</mat-label>
+                                    <textarea matInput
+                                        (keyup.enter)="questionnaire?.get(formField)?.valid ? stepper.next() : ''"
+                                        [placeholder]="fields[i].label" [formControlName]="formField"></textarea>
+                                </mat-form-field>
+                                <mat-form-field *ngSwitchDefault class="field-full-width" appearance="outline">
+                                    <mat-label>{{fields[i].label}}</mat-label>
+                                    <input matInput
+                                        (keyup.enter)="questionnaire?.get(formField)?.valid ? stepper.next() : ''"
+                                        [placeholder]="fields[i].label" [type]="fields[i].type"
+                                        [formControlName]="formField">
+                                </mat-form-field>
+                            </ng-container>
+                            <div>
+                                <button style="margin-right: 10px;box-shadow: none;background: #eee;" *ngIf="!f" mat-raised-button matStepperPrevious
+                                    type="button">Back</button>
+                                <button #nextStep *ngIf="!l" color="primary"
+                                    [disabled]="questionnaire?.get(formField)?.invalid" mat-raised-button matStepperNext
+                                    type="button">Next</button>
+                                <button *ngIf="l" color="primary" [disabled]="questionnaire?.get(formField)?.invalid"
+                                    mat-raised-button type="button" (click)="submit(stepper)">Submit</button>
+                            </div>
+                        </mat-step>
+                    </mat-horizontal-stepper>
+                </form>
+            </div>
+            <!-- <ng-template #authUI>
+                <app-auth></app-auth>
+            </ng-template> -->
+        </div>
+    </div>
+</div>
+
+<section id="hero" style="padding: 40px 0;background: #ffffff;">
+    <!-- <div style="position: absolute; top: 51px; left: 82px; font-size: 20px; color: #000;">
+        Grow Your <span style="color: #00aeef;">Business</span></div> -->
     <div class="container">
         <div class="row">
-            <div class="col-lg-7 pt-5 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center aos-init aos-animate"
-                data-aos="fade-up">
-                <div>
-                    <h1
-                        style="font-size: 60px; max-width: 100%; font-weight: 200; text-align: left;font-family: 'Rectory Thin';color:#ff6640">
-                        Launch & Grow A Successful Digital Products Company<br />
-                    </h1>
-
-                    <h1
-                        style="font-size: 60px; margin: 5px; font-weight: 200; text-align: left; font-family: 'Rectory Regular';color:#0674ec">
-                        <a [routerLink]="['/', 'company', 'add-company']">JOIN TODAY</a></h1>
-                </div>
+            <div class="col-lg-5 hero-img aos-init aos-animate" data-aos="fade-left">
+                <img src="../../assets/images/HateFree.png" class="img-fluid" alt="" style="max-height: 320px;">
             </div>
-            <div class="col-lg-5 order-1 order-lg-2 hero-img aos-init aos-animate" data-aos="fade-left">
-                <img src="./../assets/images/prosperous2.png" class="img-fluid" alt="">
+            <div class="col-lg-7 pt-5 pt-lg-0 d-flex flex-column justify-content-center aos-init aos-animate"
+                data-aos="fade-up">
+                <h1
+                    style="font-size: 36px; line-height: normal; max-width: 100%; text-align: left; color:#00aeef; text-transform: none; margin-top: 1rem; letter-spacing: 1px; font-weight: 400;">
+                    TAKE ACTION IN BUILDING A UNITED HATE-FREE WORLD
+                </h1>
+                <!-- <h2
+                    style="font-size: 24px; line-height: normal; max-width: 100%; text-align: left;color:#999;margin-bottom: 1.5rem;font-weight: 100;">
+                    <i>Data.AI/ML.Software.</i>
+                </h2> -->
+                <!-- <h1 style="font-size: 32px; line-height: normal; margin: 20px 0 0 0; font-weight: 200; text-align: left; font-family: 'Rectory Regular';color:#0674ec">
+                        <a class="btn btn-primary btn-md" [routerLink]="['/', 'company', 'add-company']">JOIN TODAY</a>
+                    </h1> -->
+                <!-- <form>
+                    <div id="append_location" class="individuals-signup-cta__form-group">
+                        <label class="individuals-signup-cta__label">Enter your email address</label>
+                        <input type="hidden" name="fyi_from_landing" value="true">
+                        <input [(ngModel)]="salesemailInput" id="email_input"
+                            class="individuals-signup-cta__email-input email_input" type="email" name="fyi_email">
+                        <button [disabled]="!salesemailInput" id="submitBtn" class="google-button special" type="button"
+                            [routerLink]="['../', 'help-business-grow']" [queryParams]="{email: salesemailInput}">
+                            <span class="button-flex-wrapper">
+                                Start Today
+                            </span>
+                        </button>
+                    </div>
+                </form>
+                <div class="individuals-signup__underform">
+                    <span>Safe. Secure. Organized.</span>
+                </div> -->
             </div>
         </div>
     </div>
-
 </section>
 
+<section style="padding: 60px 0;background: #f2f9ff;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 order-1 order-lg-1 d-flex flex-column justify-content-center aos-init aos-animate"
+                data-aos="fade-up">
+                <div>
+                    <h1
+                        style="font-size: 36px; font-weight: 100; line-height: normal; max-width: 100%; text-align: left;color:#000; text-transform: none;margin: 20px 0;">
+                        Pledge to be part of the solution to end hate in our community by donating 1 hr/month of your
+                        time to mentor & teach.
+                    </h1>
+                    <!-- <h1 style="font-size: 36px; font-weight: 100; line-height: normal; max-width: 100%; text-align: left;color:#000; text-transform: none;margin: 20px 0;">
+                        Pledge to be part of the solution to end hate in our community by donating 1 hr/month of your time to mentor & teach.
+                    </h1> -->
+                    <!-- <h2 style="font-size: 24px; line-height: normal; max-width: 100%; text-align: left;color:#999;margin-bottom: 1.5rem;font-weight: 100;">
+                        CONNECT & MANAGE ALL YOUR DATA FROM ONE CENTER
+                    </h2> -->
+                    <!-- <h1 style="font-size: 32px; line-height: normal; margin: 20px 0 0 0; font-weight: 200; text-align: left; font-family: 'Rectory Regular';color:#0674ec">
+                            <a class="btn btn-primary btn-md" [routerLink]="['/', 'company', 'add-company']">JOIN TODAY</a>
+                        </h1> -->
+                </div>
+            </div>
+            <div class="col-lg-6 order-2 order-lg-2 pt-5 pt-lg-0 d-flex flex-column justify-content-center aos-init aos-animate"
+                data-aos="fade-left">
+                <form>
+                    <div id="append_location" class="individuals-signup-cta__form-group">
+                        <label class="individuals-signup-cta__label">Enter your email address</label>
+                        <input type="hidden" name="fyi_from_landing" value="true">
+                        <input [(ngModel)]="pledgeemailInput" id="email_input"
+                            class="individuals-signup-cta__email-input email_input" type="email" name="fyi_email">
+                        <button [disabled]="!pledgeemailInput" id="submitBtn" class="google-button special"
+                            type="button" [routerLink]="['../', 'help-business-grow']"
+                            [queryParams]="{email: pledgeemailInput}">
+                            <span class="button-flex-wrapper">
+                                Start Today
+                            </span>
+                        </button>
+                    </div>
+                </form>
+                <div class="individuals-signup__underform">
+                    <span>Safe. Secure. Organized.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section style="padding: 60px 0;background: #00aeef;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 order-2 order-lg-1 pt-5 pt-lg-0 d-flex flex-column justify-content-center aos-init aos-animate"
+                data-aos="fade-up">
+                <div>
+                    <!-- <h1 style="font-size: 36px; font-weight: 100; line-height: normal; max-width: 100%; text-align: left;color:#000; text-transform: none;margin: 20px 0;">
+                        If you are a company, pledge to provide job opportunities to those that take action to build hate-free communities.
+                    </h1> -->
+                    <!-- <h2 style="font-size: 24px; line-height: normal; max-width: 100%; text-align: left;color:#999;margin-bottom: 1.5rem;font-weight: 100;">
+                        CONNECT & MANAGE ALL YOUR DATA FROM ONE CENTER
+                    </h2> -->
+                    <!-- <h1 style="font-size: 32px; line-height: normal; margin: 20px 0 0 0; font-weight: 200; text-align: left; font-family: 'Rectory Regular';color:#0674ec">
+                            <a class="btn btn-primary btn-md" [routerLink]="['/', 'company', 'add-company']">JOIN TODAY</a>
+                        </h1> -->
+                    <form>
+                        <div id="append_location" class="individuals-signup-cta__form-group" style="border: 0;">
+                            <label class="individuals-signup-cta__label">Enter your email address</label>
+                            <input type="hidden" name="fyi_from_landing" value="true">
+                            <input [(ngModel)]="providejobemailInput" id="email_input"
+                                class="individuals-signup-cta__email-input email_input" type="email" name="fyi_email">
+                            <button [disabled]="!providejobemailInput" id="submitBtn" class="google-button special"
+                                type="button" [routerLink]="['../', 'help-business-grow']"
+                                [queryParams]="{email: providejobemailInput}">
+                                <span class="button-flex-wrapper">
+                                    Start Today
+                                </span>
+                            </button>
+                        </div>
+                    </form>
+                    <div class="individuals-signup__underform" style="color:#fff;">
+                        <span>Safe. Secure. Organized.</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 order-1 order-lg-2 d-flex flex-column justify-content-center aos-init aos-animate"
+                data-aos="fade-left">
+                <h1
+                    style="font-size: 36px; font-weight: 100; line-height: normal; max-width: 100%; text-align: left;color:#fff; text-transform: none;margin: 20px 0;">
+                    If you are a company, pledge to provide job opportunities to those that take action to build
+                    hate-free communities.
+                </h1>
+            </div>
+        </div>
+    </div>
+</section>
 
 <!-- <div class="container d-flex align-items-center" style="height: 92vh;">
     <div class="row">
@@ -46,171 +225,340 @@
     </div>
 </div> -->
 
-<div style="background: #f1f1f1; padding: 50px 0;">
-    <div class="container d-flex align-items-center">
-        <div class="row" style="align-items: center; margin-left: 0; margin-right: 0;">
+<!-- <div style="background: #00aeef; padding: 80px 0 60px 0;">
+    <div class="container">
+        <div class="row">
             <div class="col-md-12 col-sm-12">
                 <h1
-                    style="font-size: 55px; max-width: 100%; font-family: 'Rectory Regular'; text-align: center; color: #595959">
-                    Monetize Your Digital Products and Generate Revenue
+                    style="font-size: 42px; max-width: 100%; font-family: 'Rectory Regular'; text-align: center; color: #ffffff">
+                    Automate Sales Funnels to Monetize Your Digital Products
                 </h1>
-                <hr style="max-width: 60vw; padding: 2rem; margin-top: 2rem;">
-                <div class="col-md-12 col-sm-12" style="align-self: left;">
-
-                </div>
-
+                <hr style="max-width: 60vw; margin-top: 2rem; border-color: white;">
                 <div class="mt-4 col-md-12">
-                    <h2 style="font-size: 55px; font-family: 'Rectory Semi';  margin: 10px; text-align: center;"><a
-                            [routerLink]="['/', 'post', 'add-dreamjob']">START TODAY</a></h2>
+                    <h2 style="font-size: 32px; font-family: 'Rectory Semi';  margin: 10px; text-align: center;"><a
+                            [routerLink]="['/', 'post', 'add-dreamjob']" style="color: white;">» START TODAY «</a></h2>
                 </div>
+            </div>
+        </div>
+    </div>
+</div> -->
 
+<div class="container-fluid" style="padding: 70px 0 20px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-md-12">
+                <h4
+                    style="font-size: 42px; margin: auto; max-width: 100%; text-align: center; font-family: 'Rectory Thin'; color: #575757; font-weight: 500; margin-bottom: 50px;">
+                    How does it work?
+                </h4>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12 mb-5 text-center">
+                <img src="https://codemarket-files.s3.amazonaws.com/public/step1-2020-03-30T19:37:44.350Z.png"
+                    style="width: 180px;">
+                <div>
+                    <h2 style="font-size: 32px; font-family: 'Rectory Semi';  margin: 10px 0 20px; text-align: center;">
+                        <a [routerLink]="['/', 'post', 'add-dreamjob']"> Learn Coding</a></h2>
+                    <form>
+                        <div id="append_location" class="individuals-signup-cta__form-group"
+                            style="border-radius: 5px 5px 0 0;height: 70px; padding-bottom: 0;border-bottom: 0;">
+                            <label class="individuals-signup-cta__label">Enter your email address</label>
+                            <input type="hidden" name="fyi_from_landing" value="true">
+                            <input [(ngModel)]="step1emailInput" id="email_input"
+                                class="individuals-signup-cta__email-input email_input" type="email" name="fyi_email">
+                        </div>
+                        <button [disabled]="!step1emailInput" id="submitBtn" class="google-button special" type="button"
+                            [routerLink]="['../', 'help-business-grow']" [queryParams]="{email: step1emailInput}"
+                            style="border-radius: 0 0 5px 5px; height: 50px;">
+                            <span class="button-flex-wrapper">
+                                Start Today
+                            </span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12 mb-5 text-center">
+                <img src="https://codemarket-files.s3.amazonaws.com/public/step2-2020-03-30T19:37:50.406Z.png"
+                    style="width: 180px;">
+                <div>
+                    <h2 style="font-size: 32px; font-family: 'Rectory Semi';  margin: 10px 0 20px; text-align: center;">
+                        <a [routerLink]="['/', 'post', 'add-dreamjob']"> Connect With Mentors </a></h2>
+                    <form>
+                        <div id="append_location" class="individuals-signup-cta__form-group"
+                            style="border-radius: 5px 5px 0 0;height: 70px; padding-bottom: 0;border-bottom: 0;">
+                            <label class="individuals-signup-cta__label">Enter your email address</label>
+                            <input type="hidden" name="fyi_from_landing" value="true">
+                            <input [(ngModel)]="step2emailInput" id="email_input"
+                                class="individuals-signup-cta__email-input email_input" type="email" name="fyi_email">
+                        </div>
+                        <button [disabled]="!step2emailInput" id="submitBtn" class="google-button special" type="button"
+                            [routerLink]="['../', 'help-business-grow']" [queryParams]="{email: step2emailInput}"
+                            style="border-radius: 0 0 5px 5px; height: 50px;">
+                            <span class="button-flex-wrapper">
+                                Start Today
+                            </span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12 mb-5 text-center">
+                <img src="https://codemarket-files.s3.amazonaws.com/public/step3-2020-03-30T19:38:01.351Z.png"
+                    style="width: 180px;">
+                <div>
+                    <h2 style="font-size: 32px; font-family: 'Rectory Semi';  margin: 10px 0 20px; text-align: center;">
+                        <a [routerLink]="['/', 'post', 'add-dreamjob']">Get Jobs</a></h2>
+                    <form>
+                        <div id="append_location" class="individuals-signup-cta__form-group"
+                            style="border-radius: 5px 5px 0 0;height: 70px; padding-bottom: 0;border-bottom: 0;">
+                            <label class="individuals-signup-cta__label">Enter your email address</label>
+                            <input type="hidden" name="fyi_from_landing" value="true">
+                            <input [(ngModel)]="step3emailInput" id="email_input"
+                                class="individuals-signup-cta__email-input email_input" type="email" name="fyi_email">
+                        </div>
+                        <button [disabled]="!step3emailInput" id="submitBtn" class="google-button special" type="button"
+                            [routerLink]="['../', 'help-business-grow']" [queryParams]="{email: step3emailInput}"
+                            style="border-radius: 0 0 5px 5px; height: 50px;">
+                            <span class="button-flex-wrapper">
+                                Start Today
+                            </span>
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-<div class="container">
-    <div class="row" style="align-items: center; margin-top: 40px; margin-left: 0; margin-right: 0;">
-        <div class="col-md-12 col-md-12">
-            <h4
-                style="font-size: 55px; margin: auto; max-width: 100%;  text-align: center; font-family: 'Rectory Thin'; color: #ff6640;">
-                3 Steps to create a profitable digital products business
-            </h4>
-        </div>
-
-        <div class="col-lg-4 col-md-4 col-sm-12" style="text-align: center;">
-            <img src="https://codemarket-files.s3.amazonaws.com/public/step1-2020-03-30T19:37:44.350Z.png">
-
-            <div>
-                <h2 style="font-size: 55px; font-family: 'Rectory Semi';  margin: 10px; text-align: center;"><a
-                        [routerLink]="['/', 'post', 'add-dreamjob']"> Digital Products</a></h2>
+<div *ngIf="false" style="background: #00aeef; padding: 80px 0 60px 0;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <h1
+                    style="font-size: 42px; max-width: 100%; font-family: 'Rectory Regular'; text-align: center; color: #ffffff">
+                    Create Digital Products
+                </h1>
+                <hr style="max-width: 30vw; margin-top: 2rem; border-color: white;">
+                <div class="mt-4 col-md-12">
+                    <h2 style="font-size: 32px; font-family: 'Rectory Semi';  margin: 10px; text-align: center;"><a
+                            [routerLink]="['/', 'post', 'add-dreamjob']" style="color: white;">» START TODAY «</a></h2>
+                </div>
             </div>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-12" style="text-align: center;">
-            <img src="https://codemarket-files.s3.amazonaws.com/public/step2-2020-03-30T19:37:50.406Z.png">
-            <div>
-                <h2 style="font-size: 55px; font-family: 'Rectory Semi';  margin: 10px; text-align: center;"><a
-                        [routerLink]="['/', 'post', 'add-dreamjob']"> Online Community </a></h2>
-            </div>
-
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-12" style="text-align: center;">
-            <img src="https://codemarket-files.s3.amazonaws.com/public/step3-2020-03-30T19:38:01.351Z.png">
-            <h2 style="font-size: 55px; font-family: 'Rectory Semi';  margin: 10px; text-align: center;"><a
-                    [routerLink]="['/', 'post', 'add-dreamjob']">Sell & Monetize</a></h2>
-
         </div>
     </div>
 </div>
-<br>
-<br>
-<br>
 
-<div style="background: #f1f1f1;">
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-</div>
-<div class="container">
-    <div class="row" style="padding: 50px 0; align-items: center; margin-left: 0; margin-right: 0;">
+<div *ngIf="false" class="container">
+    <div class="row" style="padding: 80px 0 20px; align-items: center; margin: 0;">
         <div class="col-md-12">
             <h1
-                style="font-size: 55px; max-width: 100%; font-family: 'Rectory Regular'; text-align: center; color: #0267d6">
+                style="font-size: 42px;max-width: 100%;font-family: 'Rectory Regular';text-align: center;color: #00aeef;">
                 Digital Infrastructure Tailor-Made to Your Business Goals
             </h1>
-            <hr style="border-color: #ff6640; max-width: 60vw; padding: 1rem; margin-top: 2rem;">
-            <div class="col-md-12" style="align-self: left;">
+            <hr style="border-color: #ff6640; max-width: 62vw; margin-top: 2rem; padding-bottom: 10px;">
+            <div class="col-md-12">
                 <h6
-                    style="font-size: 55px; margin: auto; font-family: 'Rectory Thin'; color: #575757; text-align: center;">
-                    Do You Want To Add Additional Revenue Steams to Your Business?
+                    style="font-size: 32px; margin: auto; font-family: 'Rectory Thin'; color: #575757; text-align: center;">
+                    Data Driven Automation of All Channels
                 </h6>
             </div>
         </div>
     </div>
 </div>
 
-
-<div class="container business-communitites-label">
-    <div class="row mt-5 mb-5" style="margin-top: 10px; margin-bottom: 10px; text-align: center; ">
-        <div class="col-md-3" style="align-self: left;">
-            <img style="align-content: left" [src]="'../../assets/images/1.png'" alt="Sales Accelerator"><br />
-            <a style="font-family: 'Rectory Regular'; margin: 10px; font-size: 1.5em; color: #575757"
-                [routerLink]="['/', 'innovate']">Innovate</a>
+<div *ngIf="false" class="container business-communitites-label" style="margin-bottom: 40px;">
+    <div class="row mt-5" style="margin-top: 10px; margin-bottom: 10px; text-align: center; ">
+        <div class="col-md-3 mb-5">
+            <img height="73px" [src]="'../../assets/images/twitter.png'" alt="Sales Accelerator">
+            <a style="font-family: 'Rectory Regular'; margin: 10px 0; display: block; font-size: 1.5em; color: #575757"
+                [routerLink]="['/', 'innovate']">Twitter</a>
+            <form>
+                <div id="append_location" class="individuals-signup-cta__form-group"
+                    style="border-radius: 5px 5px 0 0;height: 70px; padding-bottom: 0;">
+                    <label class="individuals-signup-cta__label">Enter your email address</label>
+                    <input type="hidden" name="fyi_from_landing" value="true">
+                    <input [(ngModel)]="TwitteremailInput" id="email_input"
+                        class="individuals-signup-cta__email-input email_input" type="email" name="fyi_email">
+                </div>
+                <button [disabled]="!TwitteremailInput" id="submitBtn" class="google-button special" type="button"
+                    [routerLink]="['../', 'help-business-grow']" [queryParams]="{email: TwitteremailInput}"
+                    style="border-radius: 0 0 5px 5px; height: 50px;">
+                    <span class="button-flex-wrapper">
+                        Start Today
+                    </span>
+                </button>
+            </form>
         </div>
-        <div class="col-md-3" style="align-self: left;">
-            <img style="align-content: left" [src]="'../../assets/images/2.png'" alt="Sales Accelerator"><br />
-            <a style="font-family: 'Rectory Regular'; margin: 10px; font-size: 1.5em; color: #575757"
-                [routerLink]="['/', 'affordable']">Affordable</a>
+        <div class="col-md-3 mb-5">
+            <img height="73px" [src]="'../../assets/images/facebook.png'" alt="Sales Accelerator">
+            <a style="font-family: 'Rectory Regular'; margin: 10px 0; display: block; font-size: 1.5em; color: #575757"
+                [routerLink]="['/', 'affordable']">Facebook</a>
+            <form>
+                <div id="append_location" class="individuals-signup-cta__form-group"
+                    style="border-radius: 5px 5px 0 0;height: 70px; padding-bottom: 0;">
+                    <label class="individuals-signup-cta__label">Enter your email address</label>
+                    <input type="hidden" name="fyi_from_landing" value="true">
+                    <input [(ngModel)]="FacebookemailInput" id="email_input"
+                        class="individuals-signup-cta__email-input email_input" type="email" name="fyi_email">
+                </div>
+                <button [disabled]="!FacebookemailInput" id="submitBtn" class="google-button special" type="button"
+                    [routerLink]="['../', 'help-business-grow']" [queryParams]="{email: FacebookemailInput}"
+                    style="border-radius: 0 0 5px 5px; height: 50px;">
+                    <span class="button-flex-wrapper">
+                        Start Today
+                    </span>
+                </button>
+            </form>
         </div>
-        <div class="col-md-3" style="align-self: left;">
-            <img style="align-content: left" [src]="'../../assets/images/3.png'" alt="Sales Accelerator"><br />
-            <a style="font-family: 'Rectory Regular'; margin: 10px; font-size: 1.5em; color: #575757"
-                [routerLink]="['/', 'get-work-done']">Get Work
-                Done</a>
+        <div class="col-md-3 mb-5">
+            <img height="73px" [src]="'../../assets/images/instagram.png'" alt="Sales Accelerator">
+            <a style="font-family: 'Rectory Regular'; margin: 10px 0; display: block; font-size: 1.5em; color: #575757"
+                [routerLink]="['/', 'get-work-done']">Instagram</a>
+            <form>
+                <div id="append_location" class="individuals-signup-cta__form-group"
+                    style="border-radius: 5px 5px 0 0;height: 70px; padding-bottom: 0;">
+                    <label class="individuals-signup-cta__label">Enter your email address</label>
+                    <input type="hidden" name="fyi_from_landing" value="true">
+                    <input [(ngModel)]="InstagramemailInput" id="email_input"
+                        class="individuals-signup-cta__email-input email_input" type="email" name="fyi_email">
+                </div>
+                <button [disabled]="!InstagramemailInput" id="submitBtn" class="google-button special" type="button"
+                    [routerLink]="['../', 'help-business-grow']" [queryParams]="{email: InstagramemailInput}"
+                    style="border-radius: 0 0 5px 5px; height: 50px;">
+                    <span class="button-flex-wrapper">
+                        Start Today
+                    </span>
+                </button>
+            </form>
         </div>
-        <div class="col-md-3" style="align-self: left;">
-            <img style="align-content: left" [src]="'../../assets/images/4.png'" alt="Sales Accelerator"><br />
-            <a style="font-family: 'Rectory Regular'; margin: 10px; font-size: 1.5em; color: #575757"
-                [routerLink]="['/', 'dedicated-team']">Dedicated Team</a>
+        <div class="col-md-3 mb-5">
+            <img height="73px" [src]="'../../assets/images/linkedin.png'" alt="Sales Accelerator">
+            <a style="font-family: 'Rectory Regular'; margin: 10px 0; display: block; font-size: 1.5em; color: #575757"
+                [routerLink]="['/', 'dedicated-team']">Linkedin</a>
+            <form>
+                <div id="append_location" class="individuals-signup-cta__form-group"
+                    style="border-radius: 5px 5px 0 0;height: 70px; padding-bottom: 0;">
+                    <label class="individuals-signup-cta__label">Enter your email address</label>
+                    <input type="hidden" name="fyi_from_landing" value="true">
+                    <input [(ngModel)]="LinkedinemailInput" id="email_input"
+                        class="individuals-signup-cta__email-input email_input" type="email" name="fyi_email">
+                </div>
+                <button [disabled]="!LinkedinemailInput" id="submitBtn" class="google-button special" type="button"
+                    [routerLink]="['../', 'help-business-grow']" [queryParams]="{email: LinkedinemailInput}"
+                    style="border-radius: 0 0 5px 5px; height: 50px;">
+                    <span class="button-flex-wrapper">
+                        Start Today
+                    </span>
+                </button>
+            </form>
+        </div>
+        <div class="col-md-3 mb-5">
+            <img height="73px" [src]="'../../assets/images/youtube.png'" alt="Youtube">
+            <a style="font-family: 'Rectory Regular'; margin: 10px 0; display: block; font-size: 1.5em; color: #575757"
+                [routerLink]="['/', 'website']">Youtube</a>
+            <form>
+                <div id="append_location" class="individuals-signup-cta__form-group"
+                    style="border-radius: 5px 5px 0 0;height: 70px; padding-bottom: 0;">
+                    <label class="individuals-signup-cta__label">Enter your email address</label>
+                    <input type="hidden" name="fyi_from_landing" value="true">
+                    <input [(ngModel)]="YoutubeemailInput" id="email_input"
+                        class="individuals-signup-cta__email-input email_input" type="email" name="fyi_email">
+                </div>
+                <button [disabled]="!YoutubeemailInput" id="submitBtn" class="google-button special" type="button"
+                    [routerLink]="['../', 'help-business-grow']" [queryParams]="{email: YoutubeemailInput}"
+                    style="border-radius: 0 0 5px 5px; height: 50px;">
+                    <span class="button-flex-wrapper">
+                        Start Today
+                    </span>
+                </button>
+            </form>
+        </div>
+        <div class="col-md-3 mb-5">
+            <img height="73px" [src]="'../../assets/images/snapchat.png'" alt="Sales Accelerator">
+            <a style="font-family: 'Rectory Regular'; margin: 10px 0; display: block; font-size: 1.5em; color: #575757"
+                [routerLink]="['/', 'email-marketing']">Snapchat</a>
+            <form>
+                <div id="append_location" class="individuals-signup-cta__form-group"
+                    style="border-radius: 5px 5px 0 0;height: 70px; padding-bottom: 0;">
+                    <label class="individuals-signup-cta__label">Enter your email address</label>
+                    <input type="hidden" name="fyi_from_landing" value="true">
+                    <input [(ngModel)]="SnapchatemailInput" id="email_input"
+                        class="individuals-signup-cta__email-input email_input" type="email" name="fyi_email">
+                </div>
+                <button [disabled]="!SnapchatemailInput" id="submitBtn" class="google-button special" type="button"
+                    [routerLink]="['../', 'help-business-grow']" [queryParams]="{email: SnapchatemailInput}"
+                    style="border-radius: 0 0 5px 5px; height: 50px;">
+                    <span class="button-flex-wrapper">
+                        Start Today
+                    </span>
+                </button>
+            </form>
+        </div>
+        <div class="col-md-3 mb-5">
+            <img height="73px" [src]="'../../assets/images/pinterest.png'" alt="Sales Accelerator">
+            <a style="font-family: 'Rectory Regular'; margin: 10px 0; display: block; font-size: 1.5em; color: #575757"
+                [routerLink]="['/', 'social-media-marketing']">Pinterest</a>
+            <form>
+                <div id="append_location" class="individuals-signup-cta__form-group"
+                    style="border-radius: 5px 5px 0 0;height: 70px; padding-bottom: 0;">
+                    <label class="individuals-signup-cta__label">Enter your email address</label>
+                    <input type="hidden" name="fyi_from_landing" value="true">
+                    <input [(ngModel)]="PinterestemailInput" id="email_input"
+                        class="individuals-signup-cta__email-input email_input" type="email" name="fyi_email">
+                </div>
+                <button [disabled]="!PinterestemailInput" id="submitBtn" class="google-button special" type="button"
+                    [routerLink]="['../', 'help-business-grow']" [queryParams]="{email: PinterestemailInput}"
+                    style="border-radius: 0 0 5px 5px; height: 50px;">
+                    <span class="button-flex-wrapper">
+                        Start Today
+                    </span>
+                </button>
+            </form>
+        </div>
+        <div class="col-md-3 mb-5">
+            <img height="73px" [src]="'../../assets/images/email.png'" height="73px" alt="Sales Accelerator">
+            <a style="font-family: 'Rectory Regular'; margin: 10px 0; display: block; font-size: 1.5em; color: #575757"
+                [routerLink]="['/', 'crm']">Email Marketing</a>
+            <form>
+                <div id="append_location" class="individuals-signup-cta__form-group"
+                    style="border-radius: 5px 5px 0 0;height: 70px; padding-bottom: 0;">
+                    <label class="individuals-signup-cta__label">Enter your email address</label>
+                    <input type="hidden" name="fyi_from_landing" value="true">
+                    <input [(ngModel)]="MarketingemailInput" id="email_input"
+                        class="individuals-signup-cta__email-input email_input" type="email" name="fyi_email">
+                </div>
+                <button [disabled]="!MarketingemailInput" id="submitBtn" class="google-button special" type="button"
+                    [routerLink]="['../', 'help-business-grow']" [queryParams]="{email: MarketingemailInput}"
+                    style="border-radius: 0 0 5px 5px; height: 50px;">
+                    <span class="button-flex-wrapper">
+                        Start Today
+                    </span>
+                </button>
+            </form>
         </div>
     </div>
-
-    <div class="row mt-5 mb-5" style="margin-top: 10px; margin-bottom: 10px; text-align: center;">
-        <div class="col-md-3" style="align-self: left;">
-            <img style="align-content: left" [src]="'../../assets/images/5.png'" alt="Sales Accelerator"><br />
-            <a style="font-family: 'Rectory Regular'; margin: 10px; font-size: 1.5em; color: #575757"
-                [routerLink]="['/', 'website']">Website</a>
-        </div>
-        <div class="col-md-3" style="align-self: left;">
-            <img style="align-content: left" [src]="'../../assets/images/6.png'" alt="Sales Accelerator"><br />
-            <a style="font-family: 'Rectory Regular'; margin: 10px; font-size: 1.5em; color: #575757"
-                [routerLink]="['/', 'email-marketing']">Email
-                Marketing</a>
-        </div>
-        <div class="col-md-3" style="align-self: left;">
-            <img style="align-content: left" [src]="'../../assets/images/7.png'" alt="Sales Accelerator"><br />
-            <a style="font-family: 'Rectory Regular'; margin: 10px; font-size: 1.5em; color: #575757"
-                [routerLink]="['/', 'social-media-marketing']">Social Media Marketing</a>
-        </div>
-        <div class="col-md-3" style="align-self: left;">
-            <img style="align-content: left" [src]="'../../assets/images/8.png'" alt="Sales Accelerator"><br />
-            <a style="font-family: 'Rectory Regular'; margin: 10px; font-size: 1.5em; color: #575757"
-                [routerLink]="['/', 'crm']">CRM</a>
-        </div>
-    </div>
-    <div class="row mt-5 mb-5" style="margin-top: 10px; margin-bottom: 10px; text-align: center;">
-        <div class="col-md-3" style="align-self: left;">
+    <!--  <div class="row mt-5 mb-5" style="margin-top: 10px; margin-bottom: 10px; text-align: center;">
+        <div class="col-md-3">
             <img style="align-content: left" [src]="'../../assets/images/9.png'" alt="Sales Accelerator"><br />
             <a style="font-family: 'Rectory Regular'; margin: 10px; font-size: 1.5em; color: #575757"
                 [routerLink]="['/', 'referral-network']">Referral Network</a>
         </div>
-        <div class="col-md-3" style="align-self: left;">
+        <div class="col-md-3">
             <img style="align-content: left" [src]="'../../assets/images/10.png'" alt="Sales Accelerator"><br />
             <a style="font-family: 'Rectory Regular'; margin: 10px; font-size: 1.5em; color: #575757"
                 [routerLink]="['/', 'sales-growth-strategy']">Sales Growth Strategy</a>
         </div>
-        <div class="col-md-3" style="align-self: left;">
+        <div class="col-md-3">
             <img style="align-content: left" [src]="'../../assets/images/11.png'" alt="Sales Accelerator"><br />
             <a style="font-family: 'Rectory Regular'; margin: 10px; font-size: 1.5em; color: #575757"
                 [routerLink]="['/', 'ai-strategy']">AI
                 Strategy</a>
         </div>
-        <div class="col-md-3" style="align-self: left;">
+        <div class="col-md-3">
             <img style="align-content: left" [src]="'../../assets/images/12.png'" alt="Sales Accelerator"><br />
             <a style="font-family: 'Rectory Regular'; margin: 10px; font-size: 1.5em; color: #575757"
                 [routerLink]="['/', 'exit-strategy']">Exit
                 Strategy</a>
         </div>
-    </div>
+    </div> -->
 </div>
 
 <!-- <div class="container">
@@ -222,11 +570,11 @@
     </div>
     <br />
     <div class="row" style="margin-top: 10px; margin-bottom: 10px; text-align: center;">
-        <div class="col-md-6" style="align-self: left;">
+        <div class="col-md-6">
             <img style="align-content: left" [src]="'../../assets/images/career.png'"
                 alt="Sales Accelerator"><br />
         </div>
-        <div class="col-md-6" style="align-self: left;">
+        <div class="col-md-6">
             <h6
                 style="font-size: 40px; margin: 50px 10px 10px 10px; max-width: 100%; font-weight: 200; text-align: center;">
                 Take Control of Your Career and Future.
@@ -274,25 +622,25 @@
 </div>
 <div class="container">
     <div class="row" style="margin-top: 10px; margin-bottom: 10px; text-align: center; ">
-        <div class="col-md-3" style="align-self: left;">
+        <div class="col-md-3">
             <a style="font-weight: 600; margin: 10px; font-size: 2.0em;"
                 [routerLink]="['/', 'training-from-experts']">Training from Experts</a>
             <img style="align-content: left" [src]="'../../assets/images/training3.png'"
                 alt="Sales Accelerator"><br />
         </div>
-        <div class="col-md-3" style="align-self: left;">
+        <div class="col-md-3">
             <a style="font-weight: 600; margin: 10px; font-size: 2.0em;" [routerLink]="['/', 'real-projects']">Real
                 Projects</a>
             <img style="align-content: left" [src]="'../../assets/images/real_projects.png'"
                 alt="Sales Accelerator"><br />
         </div>
-        <div class="col-md-3" style="align-self: left;">
+        <div class="col-md-3">
             <a style="font-weight: 600; margin: 10px; font-size: 2.0em;" [routerLink]="['/', 'mock-interviews']">Mock
                 Interviews</a>
             <img style="align-content: left" [src]="'../../assets/images/mock2.png'"
                 alt="Sales Accelerator"><br />
         </div>
-        <div class="col-md-3" style="align-self: left;">
+        <div class="col-md-3">
             <a style="font-weight: 600; margin: 10px; font-size: 2.0em;" [routerLink]="['/', 'dream-job-mentors']">Dream
                 Job Mentors</a>
             <img style="align-content: left" [src]="'../../assets/images/career_mentor.png'"
@@ -300,25 +648,25 @@
         </div>
     </div>
     <div class="row" style="margin-top: 10px; margin-bottom: 10px; text-align: center; ">
-        <div class="col-md-3" style="align-self: left;">
+        <div class="col-md-3">
             <a style="font-weight: 600; margin: 10px; font-size: 2.0em;"
                 [routerLink]="['/', 'stress-management']">Stress Management</a>
             <img style="align-content: left" [src]="'../../assets/images/stress.png'"
                 alt="Sales Accelerator"><br />
         </div>
-        <div class="col-md-3" style="align-self: left;">
+        <div class="col-md-3">
             <a style="font-weight: 600; margin: 10px; font-size: 2.0em;"
                 [routerLink]="['/', 'resume-gap-analysis']">Resume Gap Analysis</a>
             <img style="align-content: left" [src]="'../../assets/images/mock.png'"
                 alt="Sales Accelerator"><br />
         </div>
-        <div class="col-md-3" style="align-self: left;">
+        <div class="col-md-3">
             <a style="font-weight: 600; margin: 10px; font-size: 2.0em;" [routerLink]="['/', 'peer-networking']">Peer
                 Networking</a>
             <img style="align-content: left" [src]="'../../assets/images/network.png'"
                 alt="Sales Accelerator"><br />
         </div>
-        <div class="col-md-3" style="align-self: left;">
+        <div class="col-md-3">
             <a style="font-weight: 600; margin: 10px; font-size: 2.0em;"
                 [routerLink]="['/', 'leadership-training']">Leadership Training</a>
             <img style="align-content: left" [src]="'../../assets/images/leader.png'"
@@ -335,11 +683,11 @@
     </div>
     <br />
     <div class="row" style="margin-top: 10px; margin-bottom: 10px; text-align: center;">
-        <div class="col-md-6" style="align-self: left;">
+        <div class="col-md-6">
             <img style="align-content: left" [src]="'../../assets/images/impact.png'"
                 alt="Sales Accelerator"><br />
         </div>
-        <div class="col-md-6" style="align-self: left;">
+        <div class="col-md-6">
             <h6
                 style="font-size: 40px; margin: 50px 10px 10px 10px; max-width: 100%; font-weight: 200; text-align: center;">
                 Create deep engagement of your products and services with local businesses and local professionals.
@@ -383,23 +731,23 @@
 
         </div>
         <div class="row" style="margin-top: 10px; margin-bottom: 10px; text-align: center; ">
-            <div class="col-md-3" style="align-self: left;">
+            <div class="col-md-3">
                 <a style="font-weight: 600; margin: 10px; font-size: 2.0em;" [routerLink]="['/', 'sticky']">Sticky</a>
                 <img style="align-content: left" [src]="'../../assets/images/sticky.png'"
                     alt="Sales Accelerator"><br />
             </div>
-            <div class="col-md-3" style="align-self: left;">
+            <div class="col-md-3">
                 <a style="font-weight: 600; margin: 10px; font-size: 2.0em;" [routerLink]="['/', 'viral']">Viral</a>
                 <img style="align-content: left" [src]="'../../assets/images/viral.png'"
                     alt="Sales Accelerator"><br />
             </div>
-            <div class="col-md-3" style="align-self: left;">
+            <div class="col-md-3">
                 <a style="font-weight: 600; margin: 10px; font-size: 2.0em;"
                     [routerLink]="['/', 'community-impact-stories']">Community Impact Stories</a>
                 <img style="align-content: left" [src]="'../../assets/images/community2.png'"
                     alt="Sales Accelerator"><br />
             </div>
-            <div class="col-md-3" style="align-self: left;">
+            <div class="col-md-3">
                 <a style="font-weight: 600; margin: 10px; font-size: 2.0em;"
                     [routerLink]="['/', 'advocates-influencers']">Advocates & Influencers</a>
                 <img style="align-content: left" [src]="'../../assets/images/influencer.png'"
@@ -409,12 +757,7 @@
     </div>
 </div> -->
 
-
-
-
 <!-- start container -->
-
-
 
 <!--</section>-->
 

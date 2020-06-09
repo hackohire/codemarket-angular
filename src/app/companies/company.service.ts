@@ -18,6 +18,7 @@ export class CompanyService {
     name
     type
     cover
+    slug
     cities {
       name
       _id
@@ -25,16 +26,8 @@ export class CompanyService {
     owners {
       name
       avatar
+      slug
       _id
-    }
-    description {
-      ...Description
-    }
-    ideas {
-      ...Description
-    }
-    questions {
-      ...Description
     }
     status
     createdAt
@@ -43,6 +36,7 @@ export class CompanyService {
       _id
       name
       avatar
+      slug
     }
     location {
       longitude
@@ -56,7 +50,6 @@ export class CompanyService {
     linkedinLink
     websiteLink
   }
-  ${description}
   `;
 
   companyQuery: QueryRef<any>;
@@ -157,13 +150,13 @@ export class CompanyService {
     );
   }
 
-  getCompanyById(CompanyId: string): Observable<Company> {
+  getCompanyById(slug: string): Observable<Company> {
 
     this.companyQuery = this.apollo.watchQuery(
       {
         query: gql`
-          query getCompanyById($CompanyId: String) {
-            getCompanyById(companyId: $CompanyId) {
+          query getCompanyById($slug: String) {
+            getCompanyById(slug: $slug) {
               ...Company
             }
           }
@@ -171,7 +164,7 @@ export class CompanyService {
         `,
         fetchPolicy: 'no-cache',
         variables: {
-          CompanyId
+          slug
         }
       }
     );
@@ -264,12 +257,13 @@ export class CompanyService {
     );
   }
 
-  getCampaignsWithTracking(companyId) {
+  getCampaignsWithTracking(pageOptions, companyId, batchId = '') {
     return this.apollo.query(
       {
         query: gql`
-          query getCampaignsWithTracking($companyId: String) {
-            getCampaignsWithTracking(companyId: $companyId) {
+          query getCampaignsWithTracking($pageOptions: PageOptionsInput, $companyId: String, $batchId: String) {
+            getCampaignsWithTracking(pageOptions: $pageOptions, companyId: $companyId, batchId: $batchId) {
+              _id
               name
               label
               descriptionHTML
@@ -277,13 +271,17 @@ export class CompanyService {
                 name
                 _id
                 avatar
+                slug
               }
+              count
               emailData {
                 _id
                 to
                 createdAt
                 subject
                 descriptionHTML
+                isReplied
+                repliedHTML
                 tracking {
                   eventType
                   open {
@@ -302,7 +300,9 @@ export class CompanyService {
           }
         `,
         variables: {
-          companyId
+          pageOptions,
+          companyId,
+          batchId
         },
         fetchPolicy: 'no-cache'
       }
@@ -313,9 +313,50 @@ export class CompanyService {
     );
   }
 
-  redirectToCompanyDetails(companyId: string, view = 'posts') {
-    this.router.navigate(['/', `company`, companyId],
-      { queryParams: { view } }
+  getCampaignEmails(pageOptions, campaignId) {
+    return this.apollo.query({
+      query: gql`
+        query getCampaignEmails($pageOptions: PageOptionsInput, $campaignId: String) {
+          getCampaignEmails(pageOptions: $pageOptions, campaignId: $campaignId) {
+            emails {
+              _id
+              to
+              createdAt
+              subject
+              descriptionHTML
+              tracking {
+                eventType
+                open {
+                  timestamp
+                  userAgent
+                  ipAddress
+                }
+                mail {
+                  timestamp
+                  source
+                  destination
+                }
+              }
+            }
+            total
+          }
+        }
+      `,
+      variables: {
+        pageOptions,
+        campaignId: campaignId
+      },
+      fetchPolicy: 'no-cache'
+    }).pipe(
+      map((p: any) => {
+        return p.data.getCampaignEmails;
+      }),
+    );
+  }
+
+  redirectToCompanyDetails(companyId: string, slug: string, view = 'posts') {
+    this.router.navigate(['/', `company`, slug],
+      { queryParams: { view, id: companyId } }
     );
   }
 

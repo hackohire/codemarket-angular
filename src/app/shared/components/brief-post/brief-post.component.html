@@ -2,17 +2,24 @@
 <div class="box image common-box-shadow">
     <div class="box-header">
         <!-- Post Title -->
+        <div *ngIf="p?.activities?.length > 0 && false">
+            {{p?.activities[0]?.message}} at {{p?.activities[0]?.activityDate | date: 'MMMM d, y, h:mm a'}}.
+        </div>
+        <!-- <hr/> -->
         <h2 class="post-title" *ngIf="p?.name">
-            <a style="display: inline-block;" [href]="'/post' + '/' + (p?.slug ? p.slug : p._id)" target="_blank">{{p?.name}}</a>
+            <a style="display: inline-block;" [href]="'/post' + '/' + (p?.slug ? p.slug : p._id)"
+                target="_blank">{{p?.name}}</a>
         </h2>
 
         <!-- USER'S AVATAR & NAME -->
         <h3>
-            <a [href]="'/'+ 'dashboard' + '/' + 'profile' + '/' + p?.createdBy?._id" target="_blank">
-                <img class="creator" [src]="p?.createdBy?.avatar ? ((s3FilesBucketURL + p?.createdBy?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+            <a [href]="'profile' + '/' + p?.createdBy?.slug" target="_blank">
+                <img class="creator"
+                    [src]="p?.createdBy?.avatar ? ((s3FilesBucketURL + p?.createdBy?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
                     alt="" />{{p?.createdBy?.name}}
             </a>
-            <span>{{fromNow(p?.createdAt)}} {{' • '}} {{p?.createdAt | date: 'medium'}} <i class="fa fa-globe"></i></span>
+            <span>{{fromNow(p?.createdAt)}} {{' • '}} {{p?.createdAt | date: 'medium'}} <i
+                    class="fa fa-globe"></i></span>
         </h3>
 
         <ul class="infos">
@@ -24,23 +31,14 @@
                     </a>
                 </p>
             </li>
-            <li *ngIf="p?.assignees && p?.assignees?.length">
-                <p class="data-label">Assignees</p>
-                <p class="info">
-                    <a *ngFor="let t of p?.assignees" target="_blank" [href]="'/'+ 'dashboard' + '/' + 'profile' + '/' + t?._id">
-                        <span class="tag">
-                            <img class="avatar" [src]="t?.avatar ? ((s3FilesBucketURL + t?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
-                            alt="">{{t?.name}}</span>
-                    </a>
-                </p>
-            </li>
             <li *ngIf="p?.collaborators && p?.collaborators?.length">
                 <p class="data-label">Collaborators</p>
                 <p class="info">
-                    <a *ngFor="let t of p?.collaborators" target="_blank" [href]="'/'+ 'dashboard' + '/' + 'profile' + '/' + t?._id">
+                    <a *ngFor="let t of p?.collaborators" target="_blank" [href]="'profile' + '/' + t?.slug">
                         <span class="tag">
-                            <img class="avatar" [src]="t?.avatar ? ((s3FilesBucketURL + t?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
-                            alt="">{{t?.name}}</span>
+                            <img class="avatar"
+                                [src]="t?.avatar ? ((s3FilesBucketURL + t?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                                alt="">{{t?.name}}</span>
                     </a>
                 </p>
             </li>
@@ -93,8 +91,10 @@
         <div class="bottom">
             <p [ngClass]="readMore ? 'readMore' : ''">
                 <!---------------- SINGLE POST EDITOR --------------->
-                <app-editor #singlePostEditor (showComments)="showComments.emit({block : $event.block, selectedPost: p, comments: commentService.commentsList$})" [editorStyle]="{background: 'white'}" [data]="p?.description"
-                    [id]="'post' + p?._id" [readOnly]="!p['__edit']" [blockLevelComments]="!readMore"
+                <app-editor #singlePostEditor
+                    (showComments)="showComments.emit({block : $event.block, selectedPost: p, comments: commentService.commentsList$})"
+                    [editorStyle]="{background: 'white'}" [data]="p?.description" [id]="'post' + p?._id"
+                    [readOnly]="!p['__edit']" [blockLevelComments]="!readMore" [html]="p?.descriptionHTML"
                     [commentType]="'post'" [post]="p" [commentsList]="(commentService.commentsList$ | async)">
                 </app-editor>
             </p>
@@ -107,9 +107,9 @@
         <span *ngFor="let t of p?.tags"
             style="background: rgba(6, 116, 236, 0.1); display: inline-block;
                 padding: 0 15px; line-height: 32px;
-                color: #0674ec; margin-right: 10px;font-size: 15px;font-weight: 200;-webkit-border-radius: 100px;border-radius: 100px;">{{t?.name}}</span>
+                color: #00aeef; margin-right: 10px;font-size: 15px;font-weight: 200;-webkit-border-radius: 100px;border-radius: 100px;">{{t?.name}}</span>
     </div>
-    
+
     <!-- Read More Button to Fetch comments and show full description-->
     <div class="ce-block" *ngIf="readMore" style="padding: 10px 0 0 30px;" (click)="readMore = false; fetchComments(p)">
         <a>Read More...</a></div>
@@ -125,13 +125,10 @@
 
         <!-- Show Number of Likes & Comments -->
         <footer style="float: left; margin-left: -18px;">
-            <a mat-button class="single-stat invisible-button loves loves heart-button loved-0">
-                <mat-icon style="color: crimson;" class="vertical-align-middle">favorite</mat-icon>
-                <span class="count"> {{p?.likeCount ? p?.likeCount : 0}}</span>
-            </a>
             <a mat-button class="single-stat comments" (click)="readMore = false; fetchComments(p) ">
-                <mat-icon style="color: #0674ec;" class="vertical-align-middle">comment</mat-icon>
-                <span class="count"> {{(commentService.commentsList$ | async)?.length ? (commentService.commentsList$ | async)?.length : p?.commentCount}}</span>
+                <mat-icon style="color: #00aeef;" class="vertical-align-middle">comment</mat-icon>
+                <span class="count">
+                    {{(commentService.commentsList$ | async)?.length ? (commentService.commentsList$ | async)?.length : p?.commentCount}}</span>
             </a>
         </footer>
         <!-- <div class="post-row" style="padding: 0; border: none;">
@@ -152,7 +149,7 @@
         <div class="thread">
             <ul class="media-list thread-list" style="padding: 10px 0px 0px 0px; list-style: none;">
                 <div *ngFor="let com of (commentService.commentsList$ | async)">
-                    <li *ngIf="!com?.blockSpecificComment" class="single-thread">
+                    <li *ngIf="!com?.blockSpecificComment || true" class="single-thread">
                         <app-comment [comment]="com"></app-comment>
                     </li>
                 </div>

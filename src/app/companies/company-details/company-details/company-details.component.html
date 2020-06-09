@@ -249,12 +249,11 @@
                         </div>
                     </div>
 
-                    <div *ngIf="companyView === 'contact1'">
-                        <ng-container *ngTemplateOutlet="contactTemplate1; context: details">
-                        </ng-container>
-                    </div>
+                    
 
-                    <mat-tab-group mat-align-tabs="center" *ngIf="!hideTabs">
+                    <!--  *ngIf="!hideTabs" -->
+                    <mat-tab-group mat-align-tabs="center" [selectedIndex]="tabIndex" (selectedIndexChange)="informChange($event)">
+                        <!-- [label]="!hideTabs ? 'Posts' : 'Contacts'" -->
                         <mat-tab label="Posts">
                             <div class="row">
                                 <div [ngClass]="selectedBlock ? 'col-md-8 col-lg-8' : 'col-lg-12 col-md-12'">
@@ -431,9 +430,11 @@
                                 </div>
                             </div>
                         </mat-tab>
+                    <!-- </mat-tab-group> -->
 
+                    <!-- <mat-tab-group mat-align-tabs="center"> -->
                         <!-- Save and Send emails tab -->
-                        <mat-tab label="Save And Send Emails">
+                        <mat-tab label="Mailing List">
                             <div class="row">
                                 <div class="col-md-12">
 
@@ -464,11 +465,11 @@
                                             <input matInput placeholder="Mailing list Name" type="text"
                                                 formControlName="label" autocomplete="false" required>
                                         </mat-form-field>
-                                        <app-autocomplete class="field-full-width" [allowToAdd]="false"
+                                        <!-- <app-autocomplete class="field-full-width" [allowToAdd]="false"
                                             [autoComplete]="saveEmailForm?.get('companies')"
                                             [placeholder]="'Select Company'" [collection]="'companies'" [type]=""
                                             [multiple]="false" matInput>
-                                        </app-autocomplete>
+                                        </app-autocomplete> -->
                                         <button type="button" (click)="saveFile()" [disabled]="saveEmailForm?.invalid"
                                             mat-raised-button color="primary"
                                             style="margin: 12px; height: 35px;">{{ 'Save Mailing List' }}</button>
@@ -490,11 +491,11 @@
                                                 autocomplete="false" required>
                                         </mat-form-field>
 
-                                        <app-autocomplete class="field-full-width" [allowToAdd]="false"
+                                        <!-- <app-autocomplete class="field-full-width" [allowToAdd]="false"
                                             [autoComplete]="sendEmailForm?.get('companies')"
                                             [placeholder]="'Select Company'" [collection]="'companies'" [type]=""
                                             [multiple]="false" matInput>
-                                        </app-autocomplete>
+                                        </app-autocomplete> -->
 
                                         <app-autocomplete class="field-full-width" [allowToAdd]="false"
                                             [autoComplete]="sendEmailForm?.get('batches')"
@@ -517,28 +518,40 @@
                                 </div>
                             </div>
                         </mat-tab>
-
+                    <!-- </mat-tab-group> -->
+                    <!-- <mat-tab-group mat-align-tabs="center"> -->
                         <!-- Track emails tab -->
-                        <mat-tab label="Track Emails">
+                        <mat-tab label="Campaigns" *ngIf="!hideTabs">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div [formGroup]="trackEmailForm" class="add-form-area common-box-shadow">
-                                        <h2>Track Emails</h2>
+                                    <div class="row">
+                                        <div [formGroup]="trackEmailForm" class="add-form-area common-box-shadow">
+                                            <h2>Campaigns</h2>
+                                            
+                                            <div class="row">
+                                                <div class="col-md-4" *ngFor="let c of campaignData;let i=index">
+                                                    <button type="button" (click)="getCampaignData(c?.batchId)"
+                                                    mat-raised-button color="primary"
+                                                    style="width: 100%; height: auto; margin-top: 5px; white-space: normal; white-space: normal;
+                                                    word-wrap: break-word;">{{c?.name}}</button>
+                                                </div>
 
-                                        <app-autocomplete class="field-full-width" [allowToAdd]="false"
-                                            [autoComplete]="trackEmailForm?.get('companies')"
-                                            [placeholder]="'Select Company'" [collection]="'companies'" [type]=""
-                                            [multiple]="false" matInput>
-                                        </app-autocomplete>
-
-                                        <app-autocomplete class="field-full-width" [allowToAdd]="false"
-                                            [autoComplete]="trackEmailForm?.get('batches')"
-                                            [placeholder]="'Select Mailing List'" [collection]="'batches'" [type]=""
-                                            [multiple]="false" matInput>
-                                        </app-autocomplete>
-                                        <button type="button" (click)="getCampaignData()"
-                                            [disabled]="trackEmailForm?.invalid" mat-raised-button color="primary"
-                                            style="margin: 12px; height: 35px;">{{ 'Get Email Data' }}</button>
+                                            </div>
+                                            <!-- <app-autocomplete class="field-full-width" [allowToAdd]="false"
+                                                [autoComplete]="trackEmailForm?.get('companies')"
+                                                [placeholder]="'Select Company'" [collection]="'companies'" [type]=""
+                                                [multiple]="false" matInput>
+                                            </app-autocomplete>
+    
+                                            <app-autocomplete class="field-full-width" [allowToAdd]="false"
+                                                [autoComplete]="trackEmailForm?.get('batches')"
+                                                [placeholder]="'Select Mailing List'" [collection]="'batches'" [type]=""
+                                                [multiple]="false" matInput>
+                                            </app-autocomplete>
+                                            <button type="button" (click)="getCampaignData()"
+                                                [disabled]="trackEmailForm?.invalid" mat-raised-button color="primary"
+                                                style="margin: 12px; height: 35px;">{{ 'Get Email Data' }}</button> -->
+                                        </div>
                                     </div>
 
                                     <!-- <ng-container *ngIf="campaignsList" *ngTemplateOutlet="campaignsTemplate">
@@ -554,7 +567,10 @@
                                                         {{ '(' + c?.count + ')'}} <mat-icon>email</mat-icon>
                                                     </mat-panel-description>
                                                 </mat-expansion-panel-header> -->
-
+                                                <div><strong> Campaign: </strong> {{c?.name}}</div>
+                                                <div><strong>FROM: </strong>{{c?.from}}</div>
+                                                <div><strong>SUBJECT: </strong>{{c?.subject}}</div>
+                                                <div><strong>HTML Template:</strong></div>
                                                 <div style="border: solid 1px black;" [innerHTML]="c?.descriptionHTML">
                                                 </div>
 
@@ -592,7 +608,11 @@
                                 </div>
                             </div>
                         </mat-tab>
-
+                        
+                        <div *ngIf="companyView === 'contact'">
+                            <ng-container *ngTemplateOutlet="contactTemplate; context: details">
+                            </ng-container>
+                        </div>
                     </mat-tab-group>
 
 
@@ -815,52 +835,11 @@
 </ng-template>
 <!-- Contact Template -->
 <ng-template #contactTemplate let-contacts="details">
-    <div style="background: white;">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Name
-                        <span *ngIf="nameAsc">
-                            <i class="fas fa-sort-up" (click)="changeOrder('name','asc','contact')"></i>
-                        </span>
-                        <span *ngIf="!nameAsc">
-                            <i class="fas fa-sort-down" (click)="changeOrder('name','desc','contact')"></i>
-                        </span>
-                    </th>
-                    <th>Email ({{emailCount}})
-                        <span *ngIf="emailAsc">
-                            <i class="fas fa-sort-up" (click)="changeOrder('email','asc','contact')"></i>
-                        </span>
-                        <span *ngIf="!emailAsc">
-                            <i class="fas fa-sort-down" (click)="changeOrder('email','desc','contact')"></i>
-                        </span>
-                    </th>
-                    <th>Phone ({{phoneCount}})
-                        <span *ngIf="phoneAsc">
-                            <i class="fas fa-sort-up" (click)="changeOrder('phone','asc','contact')"></i>
-                        </span>
-                        <span *ngIf="!phoneAsc">
-                            <i class="fas fa-sort-down" (click)="changeOrder('phone','desc','contact')"></i>
-                        </span>
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let e of companyRelatedPosts?.posts" [routerLink]="['/','post',e._id]">
-                    <td>{{e.name}}</td>
-                    <td>{{e.email}}</td>
-                    <td>{{e.phone}}</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <app-paginator [length]="totalcompanyRelatedPosts"
-        (fetchData)="paginator = $event; fetchAllCompanyRealtedePosts('contact')">
-    </app-paginator>
-</ng-template>
-
-<ng-template #contactTemplate1 let-contacts="details">
-    <div style="background: white;">
+    <div style="background: white;" fxLayout="column" fxLayoutGap="10px">
+        <div>
+            <button type="button" mat-raised-button color="primary" (click)="moveToSaveEmailTab()"
+                style="width: auto; height: auto;margin: 10px;">{{ 'Add Mailing List' }}</button>
+        </div>
         <table class="table table-striped">
             <thead>
                 <tr>

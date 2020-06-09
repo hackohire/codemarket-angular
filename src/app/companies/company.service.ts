@@ -266,6 +266,8 @@ export class CompanyService {
               _id
               name
               label
+              from
+              subject
               descriptionHTML
               createdBy {
                 name
@@ -281,6 +283,7 @@ export class CompanyService {
                 subject
                 descriptionHTML
                 isReplied
+                from
                 repliedHTML
                 tracking {
                   eventType

@@ -227,4 +227,54 @@ export class EmailService {
       }),
     );
   }
+
+  getMailingListContacts(pageOptions, batchId: string): Observable<any> {
+    return this.apollo.query(
+      {
+        query: gql`
+          query getMailingListContacts($pageOptions: PageOptionsInput, $batchId: String) {
+            getMailingListContacts(pageOptions: $pageOptions, batchId: $batchId) {
+              total
+              contacts {
+                _id
+                name
+                email {
+                  email
+                  status
+                }
+                proposalName
+                OrganizationName
+                birthDate
+                address
+                website
+                companyName
+                url
+                firstName
+                lastName
+                cityName
+                name
+                followers
+                following
+                posts
+                instaProfileId
+                batch
+                descriptionHTML
+                companyContactEmail
+                conpanyContactPerson
+                ownerName
+              }
+            }
+          }
+        `,
+        variables: {
+          pageOptions,
+          batchId
+        }
+      }
+    ).pipe(
+      map((p: any) => {
+        return p.data.getMailingListContacts;
+      }),
+    );
+  }
 }

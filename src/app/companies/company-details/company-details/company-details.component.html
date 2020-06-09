@@ -123,6 +123,18 @@
 
             <div class="row">
                 <div class="col-lg-2">
+                    <!-- Mainling List -->
+                    <div class="add-form-area common-box-shadow" *ngIf="mailingList?.length > 0">
+                        <h4>Mailing List</h4>
+                            <!-- <div style="border: 1px solid; margin-top: 5px;" *ngFor="let m of mailingList; let i = index;">
+                                <h5>{{m?.name}}</h5>
+                            </div> -->
+                            <button type="button" (click)="reDirectToMailingList(m?._id)" *ngFor="let m of mailingList; let i = index;"
+                            mat-raised-button color="primary" [ngClass]="batchId === m?._id ? 'selected-mailing-list' : ''"
+                            style="width: 100%; height: auto; margin-top: 5px; white-space: normal; white-space: normal;
+                            word-wrap: break-word;">{{m?.name}}</button>
+                    </div>
+                    
                     <app-post-type-nav *ngIf="false" [selectedPostType]="companyView" [customTabs]="customTabs"
                         (postTypeClick)="selectMainCategory($event);" (plusButtonClick)="redirectToAddPost($event)">
                     </app-post-type-nav>
@@ -237,7 +249,12 @@
                         </div>
                     </div>
 
-                    <mat-tab-group mat-align-tabs="center">
+                    <div *ngIf="companyView === 'contact1'">
+                        <ng-container *ngTemplateOutlet="contactTemplate1; context: details">
+                        </ng-container>
+                    </div>
+
+                    <mat-tab-group mat-align-tabs="center" *ngIf="!hideTabs">
                         <mat-tab label="Posts">
                             <div class="row">
                                 <div [ngClass]="selectedBlock ? 'col-md-8 col-lg-8' : 'col-lg-12 col-md-12'">
@@ -300,6 +317,8 @@
                                         <ng-container *ngTemplateOutlet="contactTemplate; context: details">
                                         </ng-container>
                                     </div>
+
+                                   
 
                                     <div *ngIf="details?.createdBy?.name && companyView === 'creator'"
                                         class="author-card sidebar-card">
@@ -419,7 +438,7 @@
                                 <div class="col-md-12">
 
                                     <!-- Mainling List -->
-                                    <div class="add-form-area common-box-shadow">
+                                    <!-- <div class="add-form-area common-box-shadow">
                                         <h2>Mailing List</h2>
                                         <br>
                                         <div class="row">
@@ -427,7 +446,7 @@
                                                 <h5>{{m?.name}}</h5>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <!-- Save Emails -->
                                     <div [formGroup]="saveEmailForm" class="add-form-area common-box-shadow">
                                         <h2>Save Emails</h2>
@@ -837,6 +856,80 @@
     </div>
     <app-paginator [length]="totalcompanyRelatedPosts"
         (fetchData)="paginator = $event; fetchAllCompanyRealtedePosts('contact')">
+    </app-paginator>
+</ng-template>
+
+<ng-template #contactTemplate1 let-contacts="details">
+    <div style="background: white;">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Name
+                        <span *ngIf="nameAsc">
+                            <i class="fas fa-sort-up" (click)="changeOrder('name','asc','contact')"></i>
+                        </span>
+                        <span *ngIf="!nameAsc">
+                            <i class="fas fa-sort-down" (click)="changeOrder('name','desc','contact')"></i>
+                        </span>
+                    </th>
+                    <th>First Name
+                        <span *ngIf="firstNameAsc">
+                            <i class="fas fa-sort-up" (click)="changeOrder('firstName','asc','contact')"></i>
+                        </span>
+                        <span *ngIf="!firstNameAsc">
+                            <i class="fas fa-sort-down" (click)="changeOrder('firstName','desc','contact')"></i>
+                        </span>
+                    </th>
+                    <th>Last Name
+                        <span *ngIf="lastNameAsc">
+                            <i class="fas fa-sort-up" (click)="changeOrder('lastName','asc','contact')"></i>
+                        </span>
+                        <span *ngIf="!lastNameAsc">
+                            <i class="fas fa-sort-down" (click)="changeOrder('lastName','desc','contact')"></i>
+                        </span>
+                    </th>
+                    <th>Email
+                        <span *ngIf="emailAsc">
+                            <i class="fas fa-sort-up" (click)="changeOrder('email','asc','contact')"></i>
+                        </span>
+                        <span *ngIf="!emailAsc">
+                            <i class="fas fa-sort-down" (click)="changeOrder('email','desc','contact')"></i>
+                        </span>
+                    </th>
+                    <th>Company Name
+                        <span *ngIf="companyName">
+                            <i class="fas fa-sort-up" (click)="changeOrder('companyName','asc','contact')"></i>
+                        </span>
+                        <span *ngIf="!companyName">
+                            <i class="fas fa-sort-down" (click)="changeOrder('companyName','desc','contact')"></i>
+                        </span>
+                    </th>
+                    <th>Status
+                        <span *ngIf="statusAsc">
+                            <i class="fas fa-sort-up" (click)="changeOrder('status','asc','contact')"></i>
+                        </span>
+                        <span *ngIf="!statusAsc">
+                            <i class="fas fa-sort-down" (click)="changeOrder('status','desc','contact')"></i>
+                        </span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let e of contactList;let i=index">
+                    <td>{{i+1}}</td>
+                    <td>{{e?.name}}</td>
+                    <td>{{e?.firstName}}</td>
+                    <td>{{e?.lastName}}</td>
+                    <td>{{e?.email[0]?.email}}</td>
+                    <td>{{e?.companyName}}</td>
+                    <td>{{e?.email[0]?.status}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <app-paginator [length]="totalContactCount"
+        (fetchData)="paginator = $event; fetchContactsRelatedtoMailingList()">
     </app-paginator>
 </ng-template>
 

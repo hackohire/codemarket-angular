@@ -80,6 +80,11 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
   selectedCoverPicURL = '';
   uploadedCoverUrl = '';
 
+  hideTabs = false;
+  batchId = '';
+  contactList: any[];
+  totalContactCount = 0;
+
   companyDetails: Post | Company | any;
   isUserAttending: boolean; /** Only for the event */
   subscription$: Subscription = new Subscription();
@@ -113,6 +118,11 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
   emailAsc = true;
   nameAsc = true;
   phoneAsc = true;
+  firstNameAsc = true;
+  lastNameAsc = true;
+  companyNameAsc = true;
+  statusAsc = true;
+
   currentOrderValue = 'name';
   currentOrder = '-1';
 
@@ -729,10 +739,10 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
     this.currentOrderValue = value;
     this.currentOrder = order === 'asc' ? '1' : '-1';
 
-    this.postService.getAllPosts(
-      paginationObj, postType, '', this.companyDetails._id).subscribe((u) => {
-        this.companyRelatedPosts.posts = u.posts;
-        this.totalcompanyRelatedPosts = u.total;
+    this.emailService.getMailingListContacts(
+      paginationObj, this.batchId).subscribe((u) => {
+        this.contactList = u.contacts;
+        this.totalContactCount = u.total;
         if (order === 'asc') {
           switch (value) {
             case 'email':
@@ -744,6 +754,19 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
             case 'name':
               this.nameAsc = false;
               break;
+            case 'firstName':
+              this.firstNameAsc = false;
+              break;
+            case 'lastName':
+              this.lastNameAsc = false;
+              break;
+            case 'companyName':
+              this.companyNameAsc = false;
+              break;
+            case 'status':
+              this.statusAsc = false;
+              break;
+
             default:
               break;
           }
@@ -759,6 +782,18 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
             case 'name':
               this.nameAsc = true;
               break;
+            case 'firstName':
+              this.firstNameAsc = true;
+              break;
+            case 'lastName':
+              this.lastNameAsc = true;
+              break;
+            case 'companyName':
+              this.companyNameAsc = true;
+              break;
+            case 'status':
+              this.statusAsc = true;
+              break;
             default:
               break;
           }
@@ -767,5 +802,34 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
       });
 
     // this.companyRelatedPosts.posts = orderBy(this.games, [value], order);
+  }
+
+  // Get Contacts of Particular Mailing List
+  reDirectToMailingList(batchId) {
+    console.log(batchId);
+    this.companyView = 'contact1';
+    this.hideTabs = true;
+    this.batchId = batchId;
+    const paginationObj = {
+      pageNumber: 1, limit: 10,
+      sort: { order: '' }
+    };
+
+    this.emailService.getMailingListContacts(paginationObj, batchId).subscribe((res) => {
+      this.contactList = res.contacts;
+      this.totalContactCount = res.total;
+    });
+
+  }
+
+  fetchContactsRelatedtoMailingList() {
+    const paginationObj = {
+      pageNumber: this.paginator.pageIndex + 1, limit: this.paginator.pageSize ? this.paginator.pageSize : 10,
+      sort: {order: ''}};
+   
+      this.emailService.getMailingListContacts(paginationObj, this.batchId).subscribe((res) => {
+          this.contactList = res.contacts;
+          this.totalContactCount = res.total;
+      })
   }
 }

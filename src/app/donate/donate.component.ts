@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { UserService } from '../user/user.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
@@ -13,14 +13,14 @@ declare let paypal: any;
   templateUrl: './donate.component.html',
   styleUrls: ['./donate.component.scss'],
 })
-export class DonateComponent implements OnInit {
+export class DonateComponent implements OnInit, AfterViewInit {
 
   width = 220;
   height = 35;
   shape = 'rect';
   color = 'gold';
   label = 'paypal';
-  layout = 'vertical';
+  layout = 'horizontal';
 
 
 
@@ -55,6 +55,10 @@ export class DonateComponent implements OnInit {
     });
   }
 
+  ngAfterViewInit() {
+    this.loadPaypal();
+  }
+
   stepIndexChanged(event) {
     console.log(event);
     if (event.selectedIndex === 1) {
@@ -84,11 +88,12 @@ export class DonateComponent implements OnInit {
     this.loadExternalScript(`https://www.paypal.com/sdk/js?client-id=${environment.paypal_client}&currency=USD&commit=true`).then(() => {
       paypal.Buttons({
         style: {
-          shape: 'rect',
-          color: 'gold',
-          layout: 'vertical',
+          shape: 'pill',
+          color: 'blue',
+          layout: 'horizontal',
           label: 'paypal',
-          size: 'responsive'
+          size: 'responsive',
+          tagline: false
         },
         createOrder: (data, actions) => {
           return actions.order.create({

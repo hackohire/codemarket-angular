@@ -29,8 +29,6 @@ import { ParticipantsComponent } from './video-chat/participants/participants.co
 import { DeviceSelectComponent } from './video-chat/settings/device-select/device-select.component';
 import { SettingsComponent } from './video-chat/settings/settings.component';
 import { DonateComponent } from './donate/donate.component';
-import { PayPalModule } from './core/paypal';
-import { environment } from '../environments/environment';
 
 // import { SignInComponent } from './core/amplify/sign-in-component';
 
@@ -67,13 +65,6 @@ import { environment } from '../environments/environment';
     MakemoneyonlineModule,
     FormioModule,
     FormBuilderModule,
-    PayPalModule.init({
-      clientId: environment.paypal_client, // Using sandbox for testing purposes only
-      currency: 'USD',
-      commit: true,
-      //vault: true,
-      //disableFunding: 'credit,card'
-    })
     // MaterialFileInputModule
   ],
   providers: [PostDataResolver],

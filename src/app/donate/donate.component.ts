@@ -1,23 +1,19 @@
-import { Component, OnInit, ViewChild, ElementRef, forwardRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user/user.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { MatStepper } from '@angular/material';
 import { AuthService } from '../core/services/auth.service';
-import { OnApproveData, OnApproveActions, OnCancelData, OnErrorData } from '../core/paypal/types/buttons';
-import { OnApprove, PayPalProcessor } from '../core/paypal/paypal.component';
 import { Router } from '@angular/router';
+import { environment } from '../../environments/environment';
+declare let paypal: any;
 
 @Component({
   selector: 'app-donate',
   templateUrl: './donate.component.html',
   styleUrls: ['./donate.component.scss'],
-  providers: [{ provide: PayPalProcessor, useExisting: forwardRef(() => DonateComponent) }]
 })
-export class DonateComponent implements OnInit, OnApprove {
-
-  @ViewChild('dropinContainer', { static: true }) dropinContainer: ElementRef;
-  @ViewChild('button', { static: true }) button: ElementRef;
+export class DonateComponent implements OnInit {
 
   width = 220;
   height = 35;
@@ -26,7 +22,7 @@ export class DonateComponent implements OnInit, OnApprove {
   label = 'paypal';
   layout = 'vertical';
 
-  order = null;
+
 
   userForm = new FormGroup({
     name: new FormControl('', Validators.required),
@@ -62,35 +58,8 @@ export class DonateComponent implements OnInit, OnApprove {
   stepIndexChanged(event) {
     console.log(event);
     if (event.selectedIndex === 1) {
-      // dropin.create({
-      //   authorization: environment.braintree_client,
-      //   container: '#dropin-container',
-      //   card: {
-      //     cardholderName: {
-      //       required: true
-      //     }
-      //   },
-      //   paypal: {
-      //     flow: 'checkout',
-      //     amount: this.donationAmount.toFixed(2),
-      //     currency: 'USD'
-      //   }
-      // }, (createErr, instance) => {
-      //   if (instance) {
-      //     this.donationInsatance = instance;
-      //   }
-      // });
-
-      this.order = {
-        purchase_units: [{
-          amount: {
-            currency_code: 'USD',
-            value: this.donationAmount.toFixed(2)
-          }
-        }]
-      };
+      this.loadPaypal();
     } else {
-      this.order = null;
     }
   }
 
@@ -111,39 +80,89 @@ export class DonateComponent implements OnInit, OnApprove {
     });
   }
 
-  onApprove(data: OnApproveData, actions: OnApproveActions) {
-
-    console.log('Transaction Approved:', data);
-
-    console.log(actions);
-    // Captures the trasnaction
-    return actions.order.capture().then(details => {
-
-      this.userService.createTransaction({
-        donorName: this.userForm.get('name').value,
-        donorEmail: this.userForm.get('email').value,
-        transaction: details,
-      }).toPromise().then((u: any) => {
-        console.log(u);
-        if (u) {
-          Swal.fire('Thank You!', '', 'success');
-          this.router.navigate(['/']);
-          Promise.resolve(u);
-        } else {
-          return Promise.reject('Transaction aborted by the server');
+  private loadPaypal() {
+    this.loadExternalScript(`https://www.paypal.com/sdk/js?client-id=${environment.paypal_client}&currency=USD`).then(() => {
+      paypal.Buttons({
+        style: {
+          shape: 'rect',
+          color: 'gold',
+          layout: 'vertical',
+          label: 'paypal',
+        },
+        createOrder: (data, actions) => {
+          return actions.order.create({
+            purchase_units: [{
+              amount: {
+                value: this.donationAmount.toFixed(0)
+              }
+            }]
+          });
+        },
+        onApprove: (data, actions) => {
+          return actions.order.capture().then((details) => {
+            console.log('Transaction completed by ' + details.payer.name.given_name + '!');
+            this.userService.createTransaction({
+              donorName: this.userForm.get('name').value,
+              donorEmail: this.userForm.get('email').value,
+              transaction: details,
+            }).toPromise().then((u: any) => {
+              console.log(u);
+              if (u) {
+                Swal.fire('Thank You!', '', 'success');
+                this.router.navigate(['/']);
+                Promise.resolve(u);
+              } else {
+                return Promise.reject('Transaction aborted by the server');
+              }
+            });
+          });
         }
-      });
+      }).render('#paypal-button-container');
     });
   }
 
-  onCancel(data: OnCancelData) {
-
-    console.log('Transaction Cancelled:', data);
+  private loadExternalScript(scriptUrl: string) {
+    return new Promise((resolve, reject) => {
+      const scriptElement = document.createElement('script');
+      scriptElement.src = scriptUrl;
+      scriptElement.onload = resolve;
+      document.body.appendChild(scriptElement);
+    });
   }
 
-  onError(data: OnErrorData) {
+  // onApprove(data: OnApproveData, actions: OnApproveActions) {
 
-    console.log('Transaction Error:', data);
-  }
+  //   console.log('Transaction Approved:', data);
+
+  //   console.log(actions);
+  //   // Captures the trasnaction
+  //   return actions.order.capture().then(details => {
+
+  //     this.userService.createTransaction({
+  //       donorName: this.userForm.get('name').value,
+  //       donorEmail: this.userForm.get('email').value,
+  //       transaction: details,
+  //     }).toPromise().then((u: any) => {
+  //       console.log(u);
+  //       if (u) {
+  //         Swal.fire('Thank You!', '', 'success');
+  //         this.router.navigate(['/']);
+  //         Promise.resolve(u);
+  //       } else {
+  //         return Promise.reject('Transaction aborted by the server');
+  //       }
+  //     });
+  //   });
+  // }
+
+  // onCancel(data: OnCancelData) {
+
+  //   console.log('Transaction Cancelled:', data);
+  // }
+
+  // onError(data: OnErrorData) {
+
+  //   console.log('Transaction Error:', data);
+  // }
 
 }

@@ -266,17 +266,17 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
     this.saveEmailForm = new FormGroup({
       csvfile: new FormControl('', Validators.required),
       label: new FormControl('', Validators.required),
-      companies: new FormControl('', Validators.required),
+      companies: new FormControl(''),
     });
 
     this.trackEmailForm = new FormGroup({
       batches: new FormControl('', Validators.required),
-      companies: new FormControl('', Validators.required),
+      companies: new FormControl(''),
     });
 
     this.sendEmailForm = new FormGroup({
       batches: new FormControl('', Validators.required),
-      companies: new FormControl('', Validators.required),
+      companies: new FormControl(''),
       emailTemplate: new FormControl(''),
       subject: new FormControl('', Validators.required),
       from: new FormControl('', Validators.required)
@@ -471,10 +471,9 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
     fileReader.onload = (e) => {
       // console.log(fileReader.result);
       this.csvToJSON(fileReader.result, 'save', (result) => {
-        console.log("This is result", result);
-        this.emailService.saveCsvFileData(result, this.authService.loggedInUser._id, this.onlySaveFile.name, this.saveEmailForm.value.label, this.saveEmailForm.value.companies).subscribe((data) => {
-          console.log("Response of the file read ==> ", data);
-          this.mailingList.push({name: this.saveEmailForm.value.label});
+        this.emailService.saveCsvFileData(result, this.authService.loggedInUser._id, this.onlySaveFile.name, this.saveEmailForm.value.label, this.companyId).subscribe((res) => {
+          console.log("Response of the file read ==> ", res);
+          this.mailingList.push({name: this.saveEmailForm.value.label, _id: res.batchId});
           Swal.fire('Contacts have been saved successfully.', '', 'success');
         }, (err) => {
           Swal.fire('Error while saving emails into the database.', '', 'error');
@@ -496,7 +495,7 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
     this.sendEmailForm.get('emailTemplate').setValue(this.descriptionEditor.html);
 
     console.log(this.sendEmailForm.value);
-    this.emailService.getEmailData(this.sendEmailForm.value.batches, this.sendEmailForm.value.emailTemplate, this.sendEmailForm.value.subject, this.authService.loggedInUser._id, this.sendEmailForm.value.from, this.sendEmailForm.value.companies).subscribe((data) => {
+    this.emailService.getEmailData(this.sendEmailForm.value.batches, this.sendEmailForm.value.emailTemplate, this.sendEmailForm.value.subject, this.authService.loggedInUser._id, this.sendEmailForm.value.from, this.companyId).subscribe((data) => {
       console.log("Response of the email Data ==> ", data);
       Swal.fire('Emails have been sent successfully.', '', 'success');
     }, (err) => {

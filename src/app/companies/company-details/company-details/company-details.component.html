@@ -434,7 +434,7 @@
 
                     <!-- <mat-tab-group mat-align-tabs="center"> -->
                         <!-- Save and Send emails tab -->
-                        <mat-tab label="Mailing List" *ngIf="!hideTabs">
+                        <mat-tab label="Mailing List">
                             <div class="row">
                                 <div class="col-md-12">
 
@@ -465,11 +465,11 @@
                                             <input matInput placeholder="Mailing list Name" type="text"
                                                 formControlName="label" autocomplete="false" required>
                                         </mat-form-field>
-                                        <app-autocomplete class="field-full-width" [allowToAdd]="false"
+                                        <!-- <app-autocomplete class="field-full-width" [allowToAdd]="false"
                                             [autoComplete]="saveEmailForm?.get('companies')"
                                             [placeholder]="'Select Company'" [collection]="'companies'" [type]=""
                                             [multiple]="false" matInput>
-                                        </app-autocomplete>
+                                        </app-autocomplete> -->
                                         <button type="button" (click)="saveFile()" [disabled]="saveEmailForm?.invalid"
                                             mat-raised-button color="primary"
                                             style="margin: 12px; height: 35px;">{{ 'Save Mailing List' }}</button>
@@ -491,11 +491,11 @@
                                                 autocomplete="false" required>
                                         </mat-form-field>
 
-                                        <app-autocomplete class="field-full-width" [allowToAdd]="false"
+                                        <!-- <app-autocomplete class="field-full-width" [allowToAdd]="false"
                                             [autoComplete]="sendEmailForm?.get('companies')"
                                             [placeholder]="'Select Company'" [collection]="'companies'" [type]=""
                                             [multiple]="false" matInput>
-                                        </app-autocomplete>
+                                        </app-autocomplete> -->
 
                                         <app-autocomplete class="field-full-width" [allowToAdd]="false"
                                             [autoComplete]="sendEmailForm?.get('batches')"

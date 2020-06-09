@@ -130,12 +130,12 @@ export class EmailService {
     );
   }
 
-  getEmailData(batches: Batch, emailTemplate: String, subject: String, createdBy: String, from: String, companies: Batch): Observable<any> {
+  getEmailData(batches: Batch, emailTemplate: String, subject: String, createdBy: String, from: String, companyId: String): Observable<any> {
     return this.apollo.mutate(
       {
         mutation: gql`
-          mutation getEmailData($batches: batchInput, $emailTemplate: String, $subject: String, $createdBy: String, $from: String, $companies: batchInput) {
-            getEmailData(batches: $batches, emailTemplate: $emailTemplate, subject: $subject, createdBy: $createdBy, from: $from, companies: $companies) {
+          mutation getEmailData($batches: batchInput, $emailTemplate: String, $subject: String, $createdBy: String, $from: String, $companyId: String) {
+            getEmailData(batches: $batches, emailTemplate: $emailTemplate, subject: $subject, createdBy: $createdBy, from: $from, companyId: $companyId) {
               batches {
                 _id
                 name
@@ -145,10 +145,6 @@ export class EmailService {
               subject
               createdBy
               from
-              companies {
-                _id
-                name
-              }
             }
           }
         `,
@@ -158,7 +154,7 @@ export class EmailService {
           subject,
           createdBy,
           from,
-          companies
+          companyId
         },
         fetchPolicy: 'no-cache'
       }
@@ -169,20 +165,17 @@ export class EmailService {
     );;
   }
   
-  saveCsvFileData(data: any, createdBy: String, fileName: String, label: String, companies: Batch): Observable<any> {
+  saveCsvFileData(data: any, createdBy: String, fileName: String, label: String, companyId: String): Observable<any> {
     return this.apollo.mutate(
       {
         mutation: gql`
-          mutation saveCsvFileData($data: [JSON], $createdBy: String, $fileName: String, $label: String, $companies: batchInput) {
-            saveCsvFileData(data: $data, createdBy: $createdBy, fileName: $fileName, label: $label, companies: $companies) {
+          mutation saveCsvFileData($data: [JSON], $createdBy: String, $fileName: String, $label: String, $companyId: String) {
+            saveCsvFileData(data: $data, createdBy: $createdBy, fileName: $fileName, label: $label, companyId: $companyId) {
               data
               createdBy
               fileName
               label
-              companies {
-                _id
-                name
-              }
+              batchId
             }
           }
         `,
@@ -191,13 +184,13 @@ export class EmailService {
           createdBy,
           fileName,
           label,
-          companies
+          companyId
         },
         fetchPolicy: 'no-cache'
       }
     ).pipe(
       map((p: any) => {
-        return p.data.getCsvFileData;
+        return p.data.saveCsvFileData;
       }),
     );
   }

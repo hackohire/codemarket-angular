@@ -16,7 +16,7 @@
             <img [src]="currentImage" class="img-fluid" style="background: #fff; padding: 20px; border-radius: 0 0 10px 10px;">
         </div>
         <div class="col-lg-6 pt-3 pt-lg-0 pb-3 px-lg-5 order-2 order-lg-2 d-flex flex-column justify-content-center aos-init aos-animate"  data-aos="fade-up">
-            <div *ngIf="!showAuth || authService?.loggedInUser?._id; else authUI">
+            <div *ngIf="!showAuth || authService?.loggedInUser?._id;">
                 <h1 *ngIf="rightTitle"
                     style="font-size: 34px; line-height: normal; max-width: 100%; text-align: left;color:#000; text-transform: none;margin-bottom: 1rem;letter-spacing: 1px;">
                     {{rightTitle}}

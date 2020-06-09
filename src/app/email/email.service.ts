@@ -262,7 +262,8 @@ export class EmailService {
         variables: {
           pageOptions,
           batchId
-        }
+        },
+        fetchPolicy: 'no-cache'
       }
     ).pipe(
       map((p: any) => {

@@ -80,9 +80,10 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
   selectedCoverPicURL = '';
   uploadedCoverUrl = '';
 
-  hideTabs = false;
+  hideTabs = true;
   batchId = '';
   contactList: any[];
+  campaignList: any[];
   totalContactCount = 0;
 
   companyDetails: Post | Company | any;
@@ -123,6 +124,8 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
   companyNameAsc = true;
   statusAsc = true;
 
+  tabIndex = 0;
+  firstTabLabel = '';
   currentOrderValue = 'name';
   currentOrder = '-1';
 
@@ -807,8 +810,9 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
   // Get Contacts of Particular Mailing List
   reDirectToMailingList(batchId) {
     console.log(batchId);
-    this.companyView = 'contact1';
-    this.hideTabs = true;
+    this.companyView = 'contact';
+    // this.firstTabLabel = 'Contacts';
+    // this.hideTabs = false;
     this.batchId = batchId;
     const paginationObj = {
       pageNumber: 1, limit: 10,
@@ -831,5 +835,30 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
           this.contactList = res.contacts;
           this.totalContactCount = res.total;
       })
+  }
+
+  moveToSaveEmailTab() {
+    this.hideTabs = false;
+    this.tabIndex = 1;
+    console.log(this.tabIndex);
+  }
+
+  informChange(event) {
+    this.tabIndex = event;
+    // if (event === 0) {
+    //   this.hideTabs = true;
+    // }
+    console.log("event ==> ", event)
+    if (event === 2) {
+      const paginationObj = {
+        pageNumber: 1, limit: 50,
+        sort: { order: '' }
+      };
+
+      this.emailService.getCampaignData(paginationObj, this.companyId).subscribe((res) => {
+        console.log("This is campaignData ==> ",res);
+        this.campaignList = res.campaigns;
+      })
+    }
   }
 }

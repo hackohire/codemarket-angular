@@ -277,4 +277,35 @@ export class EmailService {
       }),
     );
   }
+
+  getCampaignData(pageOptions, companyId: string): Observable<any> {
+    return this.apollo.query(
+      {
+        query: gql`
+          query getCampaignData($pageOptions: PageOptionsInput, $companyId: String) {
+            getCampaignData(pageOptions: $pageOptions, companyId: $companyId) {
+              total
+              campaigns {
+                _id
+                name
+                batchId
+                label
+                createdAt
+                updatedAt
+              }
+            }
+          }
+        `,
+        variables: {
+          pageOptions,
+          companyId
+        },
+        fetchPolicy: 'no-cache'
+      }
+    ).pipe(
+      map((p: any) => {
+        return p.data.getCampaignData;
+      }),
+    );
+  }
 }

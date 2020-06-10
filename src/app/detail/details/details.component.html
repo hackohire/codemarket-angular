@@ -6,12 +6,8 @@
         START BREADCRUMB AREA
     =================================-->
 
-    <app-breadcumb (editPost)="postService?.editPost(details)"
-        [showEditPostDetails]="(details?.createdBy?._id === authService?.loggedInUser?._id || collaborators.indexOf(authService?.loggedInUser?._id) >= 0) ? true : false"
-        [showAddCollaborators]="details?.createdBy?._id === authService?.loggedInUser?._id ? true : false"
-        [showShareButtons]="true"
-        [postDetails]="postDetails" [title]="details?.name" [path]="breadcumb?.path" [eventDate]="details?.dateRange"
-        [postDetails]="details">
+    <app-breadcumb (editPost)="postService?.editPost(details)" [title]="details?.name" [path]="breadcumb?.path"
+        [postDetails]="details" [postForm]="postForm">
     </app-breadcumb>
 
     <!--================================
@@ -21,40 +17,28 @@
     <!--============================================
         START SINGLE POST DESCRIPTION AREA
     ==============================================-->
-    <section class="single-product-desc">
+    <section>
         <div class="container">
             <div class="row">
-                <div class="col-lg-2">
+                <div class="col-lg-0">
                     <!-- Based On the List Of Post Types -->
-                    <app-post-type-nav [selectedPostType]="selectedPostType" 
-                     (postTypeClick)="selectedBlock = null; getConnectedPosts($event?.name); showConnectedPosts = true"
-                     (plusButtonClick)="redirectToAddPost(details, $event)"
-                     ></app-post-type-nav>
-                    <!-- <div class="docs-component-viewer-nav common-box-shadow" style="margin-bottom: 20px;">
-                        <div class="docs-component-viewer-nav-content">
-                            <div *ngFor="let p of postTypesArray; let last = last;">
-                                <button cdkAccordionItem class="docs-nav-content-btn"
-                                    [ngClass]="selectedPostType === p.name ? 'docs-component-viewer-sidenav-item-selected' : ''">
-                                    <span
-                                        (postTypeClick)="getConnectedPosts($event); showConnectedPosts = true">{{p.label}}</span>
-                                    <mat-icon (plusButtonClick)="redirectToAddPost(details, $event)">add</mat-icon>
-                                </button>
-                                <hr *ngIf="!last" />
-                            </div>
-                        </div>
-                    </div> -->
+                    <app-post-type-nav *ngIf="false" [selectedPostType]="selectedPostType"
+                        (postTypeClick)="selectedBlock = null; getConnectedPosts($event?.name); showConnectedPosts = true"
+                        (plusButtonClick)="redirectToAddPost(details, $event)"></app-post-type-nav>
                 </div>
-                <div *ngIf="!showConnectedPosts" [ngClass]="selectedBlock ? 'col-lg-6 col-md-6' : 'col-lg-10 col-md-10'" style="padding: 0;">
+
+                <div *ngIf="!showConnectedPosts" [ngClass]="selectedBlock ? 'col-lg-7 col-md-7' : 'col-lg-8 col-md-8'">
 
                     <div class="item-info">
                         <div>
                             <div class="tab-pane fade show product-tab active" id="product-details">
                                 <article>
-                                    <app-editor *ngIf="details?.description && details?.description?.length"
-                                        (showComments)="showCommentsOnSide($event)"
+                                    <app-editor (showComments)="showCommentsOnSide($event)"
+                                        [data]="details?.description"
                                         [commentsList]="commentService?.commentsList$ | async"
-                                        [blockLevelComments]="true" [readOnly]="true" [data]="details?.description"
-                                        [id]="'details-editor'" [post]="details" [commentType]="'post'">
+                                        [blockLevelComments]="false" [readOnly]="true" [realTime]="true"
+                                        [role]="'writer'" [id]="'details-editor'" [html]="details?.descriptionHTML"
+                                        [post]="details" [commentType]="'post'">
                                     </app-editor>
 
                                     <br />
@@ -73,87 +57,192 @@
 
                     <!-- end /.item-info -->
                 </div>
+
+                <div class="col-md-4 col-sm-12">
+                    <ul class="row infos">
+
+
+                        <li *ngIf="postDetails?.email && postDetails?.email?.length">
+                            <p class="data-label">Email</p>
+                            <p class="info">
+                                <span class="tag" *ngFor="let t of postDetails?.email">{{t}}</span>
+                            </p>
+                        </li>
+
+                        <li *ngIf="postDetails?.phone && postDetails?.phone?.length">
+                            <p class="data-label">Phone</p>
+                            <p class="info">
+                                <span class="tag" *ngFor="let t of postDetails?.phone">{{t}}</span>
+                            </p>
+                        </li>
+
+                        <!-- <li *ngIf="postDetails?.tags && postDetails?.tags?.length || fromAddPost"> -->
+                        <li *ngIf="allowUsersEdit() && postTypeEnum.Job !== postDetails?.type">
+                            <p class="data-label">Tags</p>
+                            <p class="info">
+                                <span class="tag" *ngFor="let t of postDetails?.tags">{{t?.name}}</span>
+                            </p>
+                            <ng-container
+                                *ngTemplateOutlet="autoComplete; context: { type: 'tag', fieldName: 'tags', collection: 'tags', placeholder: 'Tags' }">
+                            </ng-container>
+                        </li>
+
+                        <!-- <li *ngIf="postDetails?.collaborators && postDetails?.collaborators?.length || fromAddPost"> -->
+                        <li *ngIf="allowUsersEdit()">
+                            <p class="data-label">Collaborators</p>
+                            <p class="info">
+                                <a *ngFor="let t of postDetails?.collaborators; let i=index" target="_blank"
+                                    [href]="'profile' + '/' + t?.slug">
+                                    <span class="tag">
+                                        <img [src]="t?.avatar ? ((s3FilesBucketURL + t?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                                            alt="">{{t?.name}}</span>
+                                </a>
+                                <ng-container
+                                    *ngTemplateOutlet="autoComplete; context: { type: '', fieldName: 'collaborators', collection: 'users', placeholder: 'Select Collaborators' }">
+                                </ng-container>
+                            </p>
+                        </li>
+
+                        <!-- <li *ngIf="postDetails?.clients && postDetails?.clients?.length || fromAddPost"> -->
+                        <li *ngIf="allowUsersEdit()">
+                            <p class="data-label">Clients</p>
+                            <p class="info">
+                                <a *ngFor="let t of postDetails?.clients" target="_blank"
+                                    [href]="'profile' + '/' + t?.slug">
+                                    <span class="tag">
+                                        <img [src]="t?.avatar ? ((s3FilesBucketURL + t?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                                            alt="">{{t?.name}}</span>
+                                </a>
+                            </p>
+                            <ng-container
+                                *ngTemplateOutlet="autoComplete; context: { type: '', fieldName: 'clients', collection: 'users', placeholder: 'Select Clients' }">
+                            </ng-container>
+                        </li>
+
+                        <li *ngIf="allowUsersEdit()">
+                            <p class="data-label">Company</p>
+                            <p class="info" style="text-transform: capitalize; cursor: pointer;">
+                                <span *ngFor="let c of postDetails?.companies; let ei = index;"
+                                    [routerLink]="['/', 'company', c?._id]">{{c?.name + (ei === postDetails?.companies?.length - 1 ? '' : ', ' )}}</span>
+                            </p>
+                            <ng-container
+                                *ngTemplateOutlet="autoComplete; context: { type: '', fieldName: 'companies', collection: 'companies', placeholder: 'Select Company', forCompany: true }">
+                            </ng-container>
+                        </li>
+
+                        <li *ngIf="allowUsersEdit() && postTypeEnum.Job === postDetails?.type">
+                            <p class="data-label">Job Profile</p>
+                            <p class="info">
+                                <span class="tag" *ngFor="let t of postDetails?.job?.jobProfile">{{t?.name}}</span>
+                            </p>
+                            <ng-container
+                                *ngTemplateOutlet="autoComplete; context: { type: 'role', fieldName: 'job.jobProfile', collection: 'tags', placeholder: 'Select Job Profiles' }">
+                            </ng-container>
+                        </li>
+
+                        <!-- Topics -->
+                        <li *ngIf="allowUsersEdit() && postTypeEnum.Mentor === postDetails?.type">
+                            <p class="data-label">Topics</p>
+                            <p class="info">
+                                <span class="tag"
+                                    *ngFor="let t of postForm?.get('mentor.topics')?.value">{{t?.name}}</span>
+                            </p>
+                            <ng-container
+                                *ngTemplateOutlet="autoComplete; context: { type: 'tag', fieldName: 'mentor.topics', collection: 'tags', placeholder: 'Enter Topics' }">
+                            </ng-container>
+                        </li>
+
+                        <li *ngIf="postDetails?.connectedPosts && postDetails?.connectedPosts?.length">
+                            <p class="data-label">Reference Posts</p>
+                            <p class="info">
+                                <span style="text-decoration: underline;"
+                                    *ngFor="let t of postDetails?.connectedPosts; let last=last;">
+                                    <a style="color: white;" [href]="'/' + 'post' + '/' + t?.slug"
+                                        target="_blank">{{t?.name}}
+                                        {{last ? '' : ','}}</a>
+                                </span>
+                            </p>
+                        </li>
+
+                        <li *ngIf="postDetails?.createdBy">
+                            <p class="data-label">Author</p>
+                            <p class="info">
+                                <a target="_blank" [href]="'/' + 'profile' + '/' + postDetails?.createdBy?.slug">
+                                    <span class="tag">
+                                        <img [src]="postDetails?.createdBy?.avatar ? ((s3FilesBucketURL + postDetails?.createdBy?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                                            alt="">{{postDetails?.createdBy?.name}}</span>
+                                </a>
+                            </p>
+                        </li>
+
+                        <li *ngIf="postDetails?.mentor?.availabilityDate">
+                            <p class="data-label">Availability</p>
+                            <p class="info">
+                                <mat-icon style="vertical-align: middle;">date_range</mat-icon>
+                                {{ postDetails?.mentor?.availabilityDate | date: 'EEEE, MMMM d, y, h:mm a'}}
+                            </p>
+                        </li>
+
+                        <li *ngIf="postDetails?.createdAt">
+                            <p class="data-label">CreatedAt</p>
+                            <p class="info">
+                                <mat-icon style="vertical-align: middle;">date_range</mat-icon>
+                                {{ postDetails?.createdAt | date: 'EEEE, MMMM d, y, h:mm a'}}
+                            </p>
+                        </li>
+
+                        <li *ngIf="postDetails?.updatedAt">
+                            <p class="data-label">UpdatedAt</p>
+                            <p class="info">
+                                <mat-icon style="vertical-align: middle;">date_range</mat-icon>
+                                {{ postDetails?.updatedAt | date: 'EEEE, MMMM d, y, h:mm a'}}
+                            </p>
+                        </li>
+
+                        <li>
+                            <ul class="social-media">
+                                <button mat-fab shareButton="facebook"
+                                    [style.backgroundColor]="shareSocial?.prop?.facebook.color">
+                                    <i class="fab fa-facebook-f"></i>
+                                </button>
+                                <button mat-fab shareButton="twitter"
+                                    [style.backgroundColor]="shareSocial?.prop?.twitter.color">
+                                    <i class="fab fa-twitter"></i>
+                                </button>
+                                <button mat-fab shareButton="linkedin"
+                                    [style.backgroundColor]="shareSocial?.prop?.linkedin.color">
+                                    <i class="fab fa-linkedin"></i>
+                                </button>
+
+                                <button mat-fab shareButton="whatsapp"
+                                    [style.backgroundColor]="shareSocial?.prop?.whatsapp.color">
+                                    <i class="fab fa-whatsapp"></i>
+                                </button>
+
+                            </ul>
+                            <!-- </div> -->
+                        </li>
+                    </ul>
+                </div>
                 <!-- end /.col-md-8 -->
 
-                <div *ngIf="!showConnectedPosts" class="col-md-6 col-lg-4">
-                    <!-- <aside class="sidebar sidebar--single-product"> -->
-
-                        <ng-container *ngTemplateOutlet="addBlockLevelCommentTemplate; context: {details: details, comments: (commentService?.commentsList$ | async)}">
-                        </ng-container>
-
-
-                        <div class="sidebar-card card-pricing card--pricing2" *ngIf="details?.type !== 'dream-job'">
-
-                            <div class="purchase-button" *ngIf="details?.type === 'event'">
-                                <!-- <a href="#" class="btn btn--lg btn--round">Purchase Now</a> -->
-
-                                <h3 style="text-align: center;" *ngIf="isUserAttending; else eventRSVP"
-                                    (click)="cancelRSVP(details?._id)">
-                                    You are going
-                                    <button color="warn" mat-mini-fab
-                                        aria-label="Example icon-button with a heart icon">
-                                        <mat-icon>close</mat-icon>
-                                    </button></h3>
-                                <!-- <a 
-                                    class="btn btn--lg btn--round cart-btn" style="padding: 12px;">
-                                    <h5>Cancel RSVP</h5>
-                                </a> -->
-                                <ng-template #eventRSVP>
-                                    <h3 style="text-align: center;" (click)="rsvpEvent(details?._id)">Are you going?
-                                        <button color="primary" mat-mini-fab
-                                            aria-label="Example icon-button with a heart icon">
-                                            <mat-icon>done</mat-icon>
-                                        </button></h3>
-
-                                    <!-- <mat-icon>yes</mat-icon> -->
-                                    <!-- <a (click)="rsvpEvent(details?._id)"
-                                        class="btn btn--lg btn--round cart-btn" style="padding: 12px;">
-                                        <h5></h5>
-                                    </a> -->
-                                </ng-template>
-                            </div>
-
-                        </div>
-
-                        <div class="author-card sidebar-card " *ngIf="details?.type === 'event'">
-                            <div class="card-title">
-                                <h4>Attendees: {{ details?.usersAttending?.length }}</h4>
-                                <br />
-
-                                <ng-container class="row" *ngFor="let attendee of details?.usersAttending">
-                                    <div class="col-md-12" style="margin-bottom: 10px;">
-                                        <div class="author_avatar_comment" style="vertical-align: middle;">
-                                            <img [src]="attendee?.avatar ? ((s3FilesBucketURL + attendee.avatar) | safe: 'resourceUrl') : anonymousAvatar"
-                                                alt="Presenting the broken author avatar :D">
-                                        </div>
-                                        <div class="autor__info">
-                                            <a [routerLink]="['/', 'dashboard', 'profile', attendee?._id ]">
-                                                <p class="name">
-                                                    {{attendee?.name}}
-                                                </p>
-                                            </a>
-                                            <!-- <p class="ammount">{{fromNow(pu?.createdAt)}}</p> -->
-                                        </div>
-                                    </div>
-
-                                </ng-container>
-                            </div>
-                        </div>
-
-                    <!-- </aside> -->
-                    <!-- end /.aside -->
-                </div>
+                <!-- <div *ngIf="!showConnectedPosts" class="col-md-6 col-lg-4">
+                    <ng-container *ngTemplateOutlet="addBlockLevelCommentTemplate; context: {details: details, comments: (commentService?.commentsList$ | async)}">
+                    </ng-container>
+                </div> -->
                 <!-- end /.col-md-4 -->
 
-                <div class="col-md-10 col-lg-10" *ngIf="showConnectedPosts">
+                <div class="col-md-12 col-lg-12" *ngIf="showConnectedPosts">
                     <div class="row">
                         <div class="col-md-8">
-                            <a mat-stroked-button color="primary" style="margin-bottom: 10px;" (click)="selectedBlock = null; showConnectedPosts = false; selectedPostType = ''">
+                            <a mat-stroked-button color="primary" style="margin-bottom: 10px;"
+                                (click)="selectedBlock = null; showConnectedPosts = false; selectedPostType = ''">
                                 <mat-icon>keyboard_arrow_left</mat-icon>Back
                             </a>
                             <div class="item-grid pen-grid item-grid-large">
-                                <app-brief-post style="width: 100%;" [p]="e" *ngFor="let e of listOfConnectedPosts?.posts"
-                                    [readMore]="true" (showComments)="showCommentsOnSide($event)"></app-brief-post>
+                                <app-brief-post style="width: 100%;" [p]="e"
+                                    *ngFor="let e of listOfConnectedPosts?.posts" [readMore]="true"
+                                    (showComments)="showCommentsOnSide($event)"></app-brief-post>
                             </div>
                             <app-paginator [length]="totalOtherPosts"
                                 (fetchData)="paginator = $event; getConnectedPosts(selectedPostType)">
@@ -161,34 +250,21 @@
                         </div>
 
                         <div class="col-md-4">
-                            <ng-container *ngTemplateOutlet="addBlockLevelCommentTemplate; context: {details: selectedPost, comments: selectedPostComments | async}">
+                            <ng-container
+                                *ngTemplateOutlet="addBlockLevelCommentTemplate; context: {details: selectedPost, comments: selectedPostComments | async}">
                             </ng-container>
                         </div>
 
                     </div>
                 </div>
+
             </div>
             <!-- end /.row -->
         </div>
         <!-- end /.container -->
 
         <!-- Start of chat box code -->
-
-        <!-- <section class="chat-window docked" #chatWindow>
-            <div class="chat-header" (click)="chatWindow.classList.toggle('docked')">
-              <p>Live Chat</p>
-              <span class="close"></span>
-            </div>
-            <div class="chat-body">
-              <div class="message-container">
-                <app-chat-box [comments]="commentService?.commentsList$ | async" [loggedInUserId]="authService?.loggedInUser?._id" [postDetails]="postDetails"></app-chat-box>
-              </div>
-            </div>
-            <div class="chat-footer">
-              <div class="form-area">
-              </div>
-            </div>
-        </section> -->
+        <!-- <app-chat-box [postDetails]="postDetails"></app-chat-box> -->
         <!-- End of chat box code -->
     </section>
     <!--===========================================
@@ -198,9 +274,22 @@
 </ng-container>
 
 
-<!--============================================
-        START COMPANY DETAILS
-    ==============================================-->
+
+<!-- AUTO COMPLETE POPOVER TEMPLATE -->
+<ng-template #autoComplete let-type="type" let-collection="collection" let-fieldName="fieldName"
+    let-placeholder="placeholder" let-forCompany="forCompany">
+    <span style="margin: 7px 0 0 5px;" [mdePopoverTriggerFor]="addTagsPopover" mdePopoverTriggerOn="click"><i
+            class="fa fa-plus-square" aria-hidden="true"></i></span>
+    <mde-popover #addTagsPopover="mdePopover" [mdePopoverOverlapTrigger]="false" [mdePopoverCloseOnClick]="false"
+        [mdePopoverArrowOffsetX]="8" mdePopoverArrowColor="#FFFFFF">
+        <div
+            style="background: #fff; padding: 10px;border: 1px solid #ccc;margin-top: -10px;box-shadow: 0 0 10px 0 #aaa;">
+            <app-autocomplete [autoComplete]="postForm?.get(fieldName)" [collection]="collection" [multiple]="true"
+                [placeholder]="placeholder" [type]="type" [forCompany]="forCompany"></app-autocomplete>
+            <mat-icon (click)="addDataOfPost(fieldName, addTagsPopover)">send</mat-icon>
+        </div>
+    </mde-popover>
+</ng-template>
 
 
 <ng-template #addCommentTemplate let-cDetails="details">
@@ -211,7 +300,7 @@
                     <!-- <h4 class="tab-content-wrapper">Comments:</h4> -->
                     <div *ngFor="let c of commentService?.commentsList$ | async; trackBy: trackByFn">
                         <li [id]="c?._id" style="padding-left: 30px; padding-right: 30px;"
-                            *ngIf="!c?.blockSpecificComment" class="single-thread">
+                            *ngIf="!c?.blockSpecificComment || true" class="single-thread">
                             <app-comment [comment]="c" [referenceId]="cDetails?._id"></app-comment>
                         </li>
                     </div>
@@ -226,20 +315,11 @@
     </div>
 </ng-template>
 
-<swal #successfulRSVP title="RSVP Successful!" type="success" [showConfirmButton]="false">
-    <div *swalPartial class="alert alert-info">
-        <p>You have been successfully added in the list of Attendees</p>`
-        <p>You can visit the list of events you have RSVP for: By Clicking
-            <p></p>
-            <a class="btn btn--sm btn--round" [routerLink]="['/', 'dashboard', 'my-profile', 'my-rsvp']">My RSVP
-                Events</a>
-    </div>
-</swal>
-
 <ng-template #addBlockLevelCommentTemplate let-cDetails="details" let-comments="comments">
     <!-- {{selectedBlock | json}} -->
     <aside class="sidebar" *ngIf="!(isHandset$ | async)">
-        <app-comment-side-nav (closeCommentSideBar)="selectedBlock = null" [selectedBlock]="selectedBlock" [selectedPost]="cDetails" [comments]="comments"></app-comment-side-nav>
+        <app-comment-side-nav (closeCommentSideBar)="selectedBlock = null" [selectedBlock]="selectedBlock"
+            [selectedPost]="cDetails" [comments]="comments"></app-comment-side-nav>
     </aside>
     <!-- <ng-container *ngIf="selectedBlock && (isHandset$ | async)">
         <mat-icon (click)="selectedBlock['__show'] = null; selectedBlock = null">close</mat-icon>
@@ -256,7 +336,7 @@
                     </ul>
                 </div>
             </div>
-    
+
             <div class="comment-form-area" style="padding-left: 0; padding-right: 0;">
                 <app-add-comment [referenceId]="cDetails?._id" [blockId]="selectedBlock?._id"
                     [showLabel]="true"></app-add-comment>

@@ -18,6 +18,7 @@ export class BookingService {
       createdBy {
         name
         avatar
+        slug
         _id
       }
     }
@@ -31,6 +32,7 @@ export class BookingService {
     createdBy {
       name
       avatar
+      alug
       _id
     }
     status

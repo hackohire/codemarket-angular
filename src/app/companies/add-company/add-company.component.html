@@ -34,13 +34,13 @@
                     [collection]="'cities'" [type]="" [multiple]="true"></app-autocomplete>
 
                 <br />
-                <h6>Description</h6>
-                <br />
+                <!-- <h6>Description</h6>
+                <br /> -->
 
-                <app-editor #descriptionEditor [data]="descriptionFormControl?.value" [id]="'edit-company-editor'">
-                </app-editor>
+                <!-- <app-editor #descriptionEditor [data]="descriptionFormControl?.value" [id]="'edit-company-editor'">
+                </app-editor> -->
 
-                <br />
+                <!-- <br /> -->
 
                 <div fxLayout="row" fxLayoutGap="10px">
                     <button type="button" (click)="submit('Published')" [disabled]="companyForm?.invalid"
@@ -59,7 +59,7 @@
                     <!-- <mat-icon mat-list-icon>folder</mat-icon> -->
                     <img height="35px" width="35px" style="border-radius: 50%;"
                         [src]="cc?.createdBy?.avatar ? ((s3FilesBucketURL + cc.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar">
-                    <h4 mat-line (click)="companyService?.redirectToCompanyDetails(cc?._id)"><a>{{cc?.name}}</a></h4>
+                    <h4 mat-line (click)="companyService?.redirectToCompanyDetails(cc?._id, cc?.slug)"><a>{{cc?.name}}</a></h4>
                     <p mat-line> {{cc?.createdAt | date}} </p>
                 </mat-list-item>
                 <div class="pagination-area" *ngIf="listOfCompanies?.length < totalCompanies">

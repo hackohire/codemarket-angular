@@ -1,44 +1,151 @@
-<app-breadcumb [title]="breadcumb?.title" [path]="breadcumb?.path" [showImportButton]="true"></app-breadcumb>
-
-
 <div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <div [formGroup]="emailForm" class="add-form-area common-box-shadow">
-                <ng-select [addTag]="true" [placeholder]="'To'" formControlName="to" [hideSelected]="true" [multiple]="true">
-                </ng-select>
-
-                <ng-select [addTag]="true" [placeholder]="'CC'" formControlName="cc" [hideSelected]="true" [multiple]="true">
-                </ng-select>
-
-                <ng-select [addTag]="true" [placeholder]="'BCC'" formControlName="bcc" [hideSelected]="true" [multiple]="true">
-                </ng-select>
-
-                <app-autocomplete class="col-md-6" [autoComplete]="emailForm?.get('company')" [placeholder]="'Select Company'" [collection]="'companies'" [type]="" [multiple]="false" [forCompany]="true"></app-autocomplete>
-
-                <mat-form-field class="field-full-width">
-                    <input (click)="dt2.open()" formControlName="dateRange" matInput [owlDateTime]="dt2"
-                        [selectMode]="'range'" placeholder="Appointment Date & Time">
-                    <mat-icon matSuffix [owlDateTimeTrigger]="dt2">date_range</mat-icon>
-                    <owl-date-time #dt2 [pickerType]="'both'"></owl-date-time>
-                </mat-form-field>
-                
-                <mat-form-field class="field-full-width">
-                    <input type="text" matInput formControlName="subject" placeholder="Subject">
-                </mat-form-field>
-
-                <app-editor #descriptionEditor [placeholder]="'Email Description'"
-                    [data]="descriptionFormControl?.value" [id]="'edit-post-editor'">
-                </app-editor>
-
-                <br />
-
-                <div fxLayout="row" fxLayoutGap="10px">
-                    <button type="button" (click)="submit()" [disabled]="emailForm?.invalid" mat-raised-button color="primary">{{ 'Send Email' }}</button>
+    <mat-tab-group mat-align-tabs="center">
+        <mat-tab label="Save And Clean Emails">
+            <div class="row">
+                <div class="col-md-12">
+                    <div [formGroup]="saveEmailForm" class="add-form-area common-box-shadow">
+        
+                        <h2>Save Emails</h2>
+        
+                            <mat-form-field class="field-full-width">
+                                <ngx-mat-file-input #removableInput1 formControlName="csvfile" placeholder="Select csv file with emails" (change)="uploadFile($event, 'save')"></ngx-mat-file-input>
+                                <button mat-icon-button matSuffix *ngIf="!removableInput1.empty" (click)="removableInput1.clear($event)">
+                                    <mat-icon>clear</mat-icon>
+                                </button>
+                            </mat-form-field>
+                            <mat-form-field appearance="outline" class="field-full-width">
+                                <mat-label>Mailing list Name</mat-label>
+                                <input matInput placeholder="Mailing list Name" type="text" formControlName="label" autocomplete="false" required>
+                            </mat-form-field>
+                            <app-autocomplete class="field-full-width" [allowToAdd]="false" [autoComplete]="saveEmailForm?.get('companies')"
+                            [placeholder]="'Select Company'" [collection]="'companies'" [type]="" [multiple]="false" matInput>
+                            </app-autocomplete>
+                        <button type="button" (click)="saveFile()" [disabled]="saveEmailForm?.invalid" mat-raised-button color="primary" style="margin: 12px; height: 35px;">{{ 'Save Mailing List' }}</button>
+                          <br>
+                          
+        
+                    </div>
+        
+                    <!-- <div [formGroup]="emailForm" class="add-form-area common-box-shadow">
+        
+                        <h2>Clean Emails</h2>
+        
+                            <mat-form-field class="field-full-width">
+                                <ngx-mat-file-input #removableInput formControlName="csvfile" placeholder="Select csv file with emails" (change)="uploadFile($event, 'saveClean')"></ngx-mat-file-input>
+                                <button mat-icon-button matSuffix *ngIf="!removableInput.empty" (click)="removableInput.clear($event)">
+                                    <mat-icon>clear</mat-icon>
+                                </button>
+                            </mat-form-field>
+                            <mat-form-field appearance="outline" class="field-full-width">
+                                <mat-label>Mailing list Name</mat-label>
+                                <input matInput placeholder="Mailing list Name" type="text" formControlName="label" autocomplete="false" required>
+                            </mat-form-field>
+                            <app-autocomplete class="field-full-width" [allowToAdd]="false" [autoComplete]="emailForm?.get('companies')"
+                            [placeholder]="'Select Company'" [collection]="'companies'" [type]="" [multiple]="false" matInput>
+                            </app-autocomplete>
+                        <button type="button" (click)="cleanFile()" [disabled]="emailForm?.invalid" mat-raised-button color="primary" style="margin: 12px; height: 35px;">{{ 'Clean And Save Mailing List' }}</button>
+                          <br>
+                          
+        
+                    </div> -->
+                    <div [formGroup]="sendEmailForm" class="add-form-area common-box-shadow">
+                        <h2>Send Emails</h2>
+                        <mat-form-field appearance="outline" class="field-full-width">
+                            <mat-label>Enter FROM</mat-label>
+                            <input matInput placeholder="Enter FROM" type="text" formControlName="from" autocomplete="false" required>
+                        </mat-form-field>
+        
+                        <mat-form-field appearance="outline" class="field-full-width">
+                            <mat-label>Enter Subject</mat-label>
+                            <input matInput placeholder="subject" type="text" formControlName="subject" autocomplete="false" required>
+                        </mat-form-field>
+        
+                        <app-autocomplete class="field-full-width" [allowToAdd]="false" [autoComplete]="sendEmailForm?.get('companies')"
+                        [placeholder]="'Select Company'" [collection]="'companies'" [type]="" [multiple]="false" matInput>
+                        </app-autocomplete>
+        
+                        <app-autocomplete class="field-full-width" [allowToAdd]="false" [autoComplete]="sendEmailForm?.get('batches')"
+                        [placeholder]="'Select Mailing List'" [collection]="'batches'" [type]="" [multiple]="false" matInput>
+                        </app-autocomplete>
+            
+                        <p>Create Email template below</p>
+                        <app-editor #descriptionEditor [placeholder]="'Email Template'"
+                            [data]="descriptionFormControl?.value" [id]="'edit-post-editor'">
+                        </app-editor>
+            
+                        <br />
+            
+                        <div fxLayout="row" fxLayoutGap="10px">
+                            <button type="button" (click)="submit()" [disabled]="sendEmailForm?.invalid" mat-raised-button color="primary">{{ 'Send Email' }}</button>
+                        </div>
+                    </div>
                 </div>
-
             </div>
+        </mat-tab>
+        <mat-tab label="Track Emails">
+            <div class="row">
+                <div class="col-md-12">
+                    <div [formGroup]="trackEmailForm" class="add-form-area common-box-shadow">
+                        <h2>Track Emails</h2>
 
-        </div>
-    </div>
+                        <app-autocomplete class="field-full-width" [allowToAdd]="false" [autoComplete]="trackEmailForm?.get('companies')"
+                        [placeholder]="'Select Company'" [collection]="'companies'" [type]="" [multiple]="false" matInput>
+                        </app-autocomplete>
+        
+                        <app-autocomplete class="field-full-width" [allowToAdd]="false" [autoComplete]="trackEmailForm?.get('batches')"
+                        [placeholder]="'Select Mailing List'" [collection]="'batches'" [type]="" [multiple]="false" matInput>
+                        </app-autocomplete>
+                         <button type="button" (click)="getCampaignData()" [disabled]="trackEmailForm?.invalid" mat-raised-button color="primary" style="margin: 12px; height: 35px;">{{ 'Get Email Data' }}</button>
+                    </div>
+
+                    <!-- <ng-container *ngIf="campaignsList" *ngTemplateOutlet="campaignsTemplate">
+                    </ng-container> -->
+                    <ng-template #campaignsTemplate [ngIf]="displayCampaignList">
+                        <mat-accordion class="example-headers-align">
+                            <div *ngFor="let c of campaignsList; let i = index;">
+                                <!-- <mat-expansion-panel-header>
+                                    <mat-panel-title>
+                                        {{c?.name}}
+                                    </mat-panel-title>
+                                    <mat-panel-description>
+                                        {{ '(' + c?.count + ')'}} <mat-icon>email</mat-icon>
+                                    </mat-panel-description>
+                                </mat-expansion-panel-header> -->
+                    
+                                <div style="border: solid 1px black;" [innerHTML]="c?.descriptionHTML"></div>
+                    
+                                <mat-list>
+                                    <mat-list-item *ngFor="let e of c?.emailData; let j=index;">
+                                        <div mat-list-icon style="padding-right: 12px;">
+                                            <span
+                                                style="padding-right: 5px; vertical-align: super; font-size: 16px;">{{(j + 1 + '.')}}</span>
+                                            <mat-icon style="display: inline;">email</mat-icon>
+                                        </div>
+                    
+                                        <div mat-line style="font-weight: 500;">{{e?.to[0]}}</div>
+                                        <div mat-line>Subject: {{e?.subject}} </div>
+                                        <div mat-line>Sent: {{e?.createdAt | date: 'medium'}} </div>
+                                        <div mat-line *ngIf="e?.tracking?.open?.timestamp">Read:
+                                            {{e?.tracking?.open?.timestamp | date: 'medium'}} </div>
+                                            
+                                        <i *ngIf="e?.isReplied" matTooltip={{e?.repliedHTML}} matTooltipPosition="left" class="fas fa-reply"></i>
+                                        <i *ngIf="e?.tracking?.length > 0 && !e?.isReplied" class="fas fa-check-double"></i>
+                                        <i *ngIf="!e?.tracking || e?.tracking.length === 0" class="fal fa-check"></i>
+                                        <!-- {{parser?.setUA(e?.tracking?.open?.userAgent)}}{{parser.getResult() | json}} -->
+                                    </mat-list-item>
+                                </mat-list>
+                    
+                            </div>
+                            <app-paginator [length]="campaignsList[0]?.count"
+                                (fetchData)="paginator = $event; fetchEmailsConnectedWithCampaign()">
+                            </app-paginator>
+                            <!-- <div *ngFor="let c of campaignsList">
+                            </div> -->
+                        </mat-accordion>
+                    </ng-template>
+                </div>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+   
 </div>

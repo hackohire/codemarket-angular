@@ -15,7 +15,7 @@
 }
 
 .sidenav {
-  width: 200px;
+  width: 350px;
 }
 
 .sidenav .mat-toolbar {
@@ -24,7 +24,7 @@
 
 .mat-toolbar {
   position: sticky;
-  background: whitesmoke;
+  background: #f5f5f5;
   color: black;
   top: 0;
   z-index: 10;
@@ -32,6 +32,121 @@
   // padding-bottom: 20px;
   height: fit-content;
   place-content: center;
+}
+
+.mat-drawer-inner-container {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.SearchLoginBox {
+  background-color: #555;
+  width: 250px;
+  border-radius: 0 0 10px 10px;
+  height: 48px;
+  position: fixed;
+  z-index: 12;
+  left: calc(50% - 125px);
+  padding: 0;
+}
+
+// a.btn {
+//   line-height: 32px;
+//   padding: 0 5px 0 10px;
+//   vertical-align: super;
+//   margin-top: 7px;
+//   box-shadow: none;
+// }
+
+.brand-logo {
+  padding: 14px 0;
+  max-width: 160px;
+  max-height: 48.88px;
+}
+
+.btn {
+  box-shadow: none !important;
+}
+
+@media (min-width: 991px) {
+  /* width */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888; 
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
+}
+
+@media (max-width:990px) {
+  .SearchLoginBox {
+    width: 100%;
+    border-radius: 0;
+    position: relative;
+    left: 0;
+  }
+}
+
+.hidden-lg {
+  display: none;
+}
+
+.CreateButton {
+  position: absolute;
+  right: calc(50% - 43px);
+  top: 2px;
+}
+
+.LoginRegisterButton {
+  line-height: 0;
+  padding: 10px;
+}
+
+@media (max-width:767px) {
+  .NavBarBox > div:nth-of-type(1) {
+    display: none !important;
+  }
+  .hidden-lg {
+    display: block !important;
+  }
+  .CreateButton {
+    right: 5px;
+  }
+  .LoginRegisterButton {
+    margin-bottom: 5px;
+  }
+  .brand-logo {
+    margin-right: 20%;
+  }
+  .SearchLoginBox {
+      width: 100% !important;
+      position: relative !important;
+      top: 0 !important;
+      z-index: 16 !important;
+      border-radius: 0;
+      left: 0;
+  }
+  .NavBarBox {
+      // position: relative !important;
+      // top: 0 !important;
+      z-index: 21 !important;
+      border-bottom: 1px solid #ccc;
+      padding-left: 0;
+  }
 }
 
 .menu-width {

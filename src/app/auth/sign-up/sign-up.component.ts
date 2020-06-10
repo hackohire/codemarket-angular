@@ -14,9 +14,9 @@ import { LoaderService } from '../loader/loader.service';
 export class SignUpComponent implements OnInit {
   hide = true;
   signupForm: FormGroup = new FormGroup({
-    email: new FormControl('', [ Validators.email, Validators.required ]),
+    email: new FormControl(environment.confirm.email, [ Validators.email, Validators.required ]),
     password: new FormControl('', [ Validators.required ]),
-    name: new FormControl('', [ Validators.min(2) ]),
+    name: new FormControl(environment.confirm.name, [ Validators.min(2) ]),
   });
 
   get emailInput() { return this.signupForm.get('email'); }

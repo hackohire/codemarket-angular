@@ -74,13 +74,13 @@
 .image-upload-wrap {
   // margin-top: 20px;
   height: 100%;
-  border: 2px dashed #0674ec;
+  border: 2px dashed #00aeef;
   position: relative;
 }
 
 .image-dropping,
 .image-upload-wrap:hover {
-  background-color: #0674ec52;
+  background-color: #00aeef52;
   border: 4px dashed #ffffff;
 }
 
@@ -92,7 +92,7 @@
 .drag-text h3 {
   font-weight: 100;
   text-transform: uppercase;
-  color: #0674ec;
+  color: #00aeef;
   padding: 60px 0;
 }
 
@@ -468,4 +468,16 @@ body {
 }
 .layer.visible {
   display: block;
+}
+
+table {
+  width: 100%;
+  img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14),
+      0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+    margin: 10px;
+  }
 }

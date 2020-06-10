@@ -10,6 +10,8 @@ import { PostStatus } from '../../shared/models/poststatus.enum';
 import { PostType } from '../../shared/models/post-types.enum';
 import Swal from 'sweetalert2';
 import { PostService } from '../../shared/services/post.service';
+import { CompanyService } from 'src/app/companies/company.service';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-send-email',
@@ -20,6 +22,15 @@ export class SendEmailComponent implements OnInit {
 
   breadcumb: BreadCumb;
   emailForm: FormGroup;
+  sendEmailForm: FormGroup;
+  saveEmailForm: FormGroup;
+  trackEmailForm: FormGroup;
+  paginator: MatPaginator;
+  campaignsList = [];
+  displayCampaignList = false;
+  file;
+  onlySaveFile;
+  public formdata = new FormData();
 
   get createdBy() {
     return this.emailForm.get('createdBy');
@@ -45,7 +56,8 @@ export class SendEmailComponent implements OnInit {
     private authService: AuthService,
     private emailService: EmailService,
     private changeDetector: ChangeDetectorRef,
-    private postService: PostService
+    private postService: PostService,
+    private companyService: CompanyService
   ) {
 
     /** Make the Changes here while creating new post type */
@@ -61,25 +73,120 @@ export class SendEmailComponent implements OnInit {
 
   ngOnInit() {
     this.emailFormInitialization(null);
+
+    this.emailService.getPostsByType("contact").subscribe(e => {
+      console.log(e)
+    });
+
   }
 
   emailFormInitialization(i: Email) {
-    this.emailForm = new FormGroup({
-      to: new FormControl([], Validators.required),
-      cc: new FormControl([]),
-      bcc: new FormControl([]),
-      company: new FormControl(),
-      dateRange: new FormControl([]),
-      subject: new FormControl('', Validators.required),
-      type: new FormControl(PostType.Email),
-      status: new FormControl(PostStatus.Published),
-      description: new FormControl([]),
-      descriptionHTML: new FormControl(),
-      createdBy: new FormControl(''),
-      // type: new FormControl(PostType.Assignment),
+    this.saveEmailForm = new FormGroup({
+      csvfile: new FormControl('', Validators.required),
+      label: new FormControl('', Validators.required),
+      companies: new FormControl('', Validators.required),
     });
+
+    this.trackEmailForm = new FormGroup({
+      batches: new FormControl('', Validators.required),
+      companies: new FormControl('', Validators.required),
+    });
+
+    this.emailForm = new FormGroup({
+      csvfile: new FormControl('', Validators.required),
+      label: new FormControl('', Validators.required),
+      companies: new FormControl('', Validators.required),
+    });
+
+    this.sendEmailForm = new FormGroup({
+      batches: new FormControl('', Validators.required),
+      companies: new FormControl('', Validators.required),
+      emailTemplate: new FormControl(''),
+      subject: new FormControl('', Validators.required),
+      from: new FormControl('', Validators.required)
+    })
   }
 
+  saveFile() {
+    if (!this.authService.loggedInUser) {
+      this.authService.checkIfUserIsLoggedIn(true);
+      return;
+    }
+    
+    let fileReader = new FileReader();
+    fileReader.onload = (e) => {
+      // console.log(fileReader.result);
+      this.csvToJSON(fileReader.result, 'save', (result) => {
+        console.log("This is result", result);
+        this.emailService.saveCsvFileData(result, this.authService.loggedInUser._id, this.onlySaveFile.name, this.saveEmailForm.value.label, this.saveEmailForm.value.companies).subscribe((data) => {
+         console.log("Response of the file read ==> " , data);
+        });
+      })
+    }
+    fileReader.readAsText(this.onlySaveFile);
+  }
+
+  cleanFile() {
+    if (!this.authService.loggedInUser) {
+      this.authService.checkIfUserIsLoggedIn(true);
+      return;
+    }
+    
+    let fileReader = new FileReader();
+    fileReader.onload = (e) => {
+      // console.log(fileReader.result);
+      this.csvToJSON(fileReader.result, 'saveClean', (result) => {
+        console.log("This is result", result);
+        this.emailService.getCsvFileData(result, this.authService.loggedInUser._id, this.file.name, this.emailForm.value.label, this.emailForm.value.companies).subscribe((data) => {
+         console.log("Response of the file read ==> " , data);
+        });
+      })
+    }
+    fileReader.readAsText(this.file);
+  }
+
+  uploadFile(event, action) {
+    if (action === 'save') {
+      this.onlySaveFile = event.target.files[0];
+      console.log(this.onlySaveFile);
+      if (this.onlySaveFile.name.split(".")[1] !== 'csv') {
+        Swal.fire(`Invalid File Type`, '', 'error').then(() => {
+          this.emailForm.get('csvfile').setValue('');
+          this.file = '';
+        });
+       }
+    } else {
+      this.file = event.target.files[0];
+      console.log(this.file);
+      if (this.file.name.split(".")[1] !== 'csv') {
+       Swal.fire(`Invalid File Type`, '', 'error').then(() => {
+         this.emailForm.get('csvfile').setValue('');
+         this.file = '';
+       });
+      }
+    }
+  }
+
+  csvToJSON(csv, action, callback) {
+    var lines = csv.split("\n");
+    var result = [];
+    var headers = lines[0].split(",");
+    for (var i = 1; i < lines.length; i++) {
+        var obj = {};
+        var currentline = lines[i].split(",");
+        for (var j = 0; j <= headers.length; j++) {
+            obj[headers[j]] = currentline[j];
+            if (action === 'saveClean') {
+              obj['email'] = JSON.parse(currentline[headers.indexOf('email')])
+            }
+        }
+        result.push(obj);
+    }
+    if (callback && (typeof callback === 'function')) {
+        return callback(result);
+    }
+    return result;
+}
 
   async submit() {
 
@@ -88,40 +195,45 @@ export class SendEmailComponent implements OnInit {
       return;
     }
 
-    /** Fetch description blocks */
-    const blocks = await this.descriptionEditor.editor.save();
-
-    /** Set the updated description blocks */
-    this.descriptionFormControl.setValue(blocks.blocks);
-
-    /** Here we are asking to detectchanges again because when we fetch the blocks to save the description in formcontrol,
-     * we need the HTML also, so for that detectchanges will render the changes again with saved block and we can access the html again
-     */
     this.changeDetector.detectChanges();
 
-
-    /** Fetch the html content also becuase when we send email, email only understands the html content so we need to store html
-     * content also
-     */
-    this.descriptionHTMLFormControl.setValue(this.descriptionEditor.editorViewRef.nativeElement.innerHTML);
-
-    this.emailForm.get('to').setValue(this.emailForm.get('to').value.map(element => element.label ? element.label : element));
-    this.emailForm.get('cc').setValue(this.emailForm.get('cc').value.map(element => element.label ? element.label : element));
-    this.emailForm.get('bcc').setValue(this.emailForm.get('bcc').value.map(element => element.label ? element.label : element));
-
-    if (this.authService.loggedInUser && !this.createdBy.value) {
-      this.createdBy.setValue(this.authService.loggedInUser._id);
-    }
-
-    /** Send the email and redirect to actual email post */
-    this.emailService.sendEmail(this.emailForm.value).subscribe(e => {
-      if (e) {
-        Swal.fire(`Emai has been Send Successfully`, '', 'success').then(() => {
-          this.postService.redirectToPostDetails(e);
-        });
-      }
-    });
-
+    this.sendEmailForm.get('emailTemplate').setValue(this.descriptionEditor.html);
+   
+    console.log(this.sendEmailForm.value);
+    this.emailService.getEmailData(this.sendEmailForm.value.batches, this.sendEmailForm.value.emailTemplate, this.sendEmailForm.value.subject, this.authService.loggedInUser._id, this.sendEmailForm.value.from, this.sendEmailForm.value.companies).subscribe((data) => {
+      console.log("Response of the email Data ==> " , data);
+     }, (err) => {
+      Swal.fire(`Invalid Data`, '', 'error').then(() => {
+      });
+     });
   }
 
+  getCampaignData() {
+    console.log('EMail Data is called')
+    const paginationObj = {
+      pageNumber: 1, limit: 10,
+      sort: {order: ''}};
+
+      this.companyService.getCampaignsWithTracking(paginationObj, this.trackEmailForm.value.companies._id, this.trackEmailForm.value.batches._id).subscribe(c => {
+        if (c && c.length) {
+          this.displayCampaignList = true;
+          // this.fetchEmailsConnectedWithCampaign();
+          this.campaignsList = c;
+        }
+      })
+  }
+
+  fetchEmailsConnectedWithCampaign() {
+    console.log('fetchEmailsConnectedWithCampaign Data is called')
+    
+    const paginationObj = {
+      pageNumber: this.paginator.pageIndex + 1, limit: this.paginator.pageSize ? this.paginator.pageSize : 10,
+      sort: {order: ''}};
+   
+      this.companyService.getCampaignsWithTracking(paginationObj, this.trackEmailForm.value.companies._id, this.trackEmailForm.value.batches._id).subscribe(c => {
+        if (c && c.length) {
+          this.campaignsList = c;
+        }
+      })
+  }
 }

@@ -136,6 +136,7 @@
 	position: relative;
 	display: grid;
 	grid-gap: 10px 20px;
+	border: 1px solid #ddd;
 	width: 100%
 }
 @media (min-width: 990px) {
@@ -281,7 +282,7 @@
 }
 .individuals-signup-cta__label {
 	position: absolute;
-	top: 24%;
+	top: 30px;
 	left: 15px;
 	transform: translateY(-50%);
 	color: #888da1;
@@ -386,6 +387,24 @@
 		grid-template-columns: 1fr auto;
 	}
 }
+.google-button {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 6px 22px 6px 6px;
+    width: auto;
+    max-width: 232px;
+    height: 50px;
+    color: #34384f;
+    font-size: 16px;
+    font-weight: 500;
+    border: 0;
+    border-radius: 5px;
+    background-color: #fff;
+    text-decoration: none;
+    transition: background .3s linear;
+}
 .google-button.special {
 	border: 0;
     border-radius: 5px;
@@ -397,8 +416,13 @@
 	color: #fff;
 	font-size: 15px;
 	background: linear-gradient(to top, #2d94ff, #3e82f7);
-	box-shadow: inset #1d5bc5 0 -5px 0, rgba(0, 0, 0, .11) 0 2px 4px;
-	cursor: not-allowed
+	box-shadow: inset #1d5bc5 0 -5px 0;
+	cursor: not-allowed;
+}
+.google-button.special > span.button-flex-wrapper {
+    display: block;
+    line-height: 22px;
+    font-weight: 400;
 }
 @media (min-width: 48em) {
 	.google-button.special {
@@ -479,5 +503,15 @@
 		left: unset;
 		height: auto;
 		margin-right: 20px
+	}
+}
+@media (max-width: 767px) {
+	.individuals-signup-cta__form-group {
+		border-radius: 5px 5px 0 0;
+	}
+	.google-button.special {
+		margin-top: -10px;
+		border-radius: 0 0 5px 5px;
+		height: 50px;
 	}
 }

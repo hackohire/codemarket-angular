@@ -6,73 +6,66 @@
     <div class="row">
         <div class="col-md-12">
             <div [formGroup]="postForm" class="add-form-area common-box-shadow">
-                <mat-form-field appearance="outline" class="field-full-width">
-                    <input formControlName="businessName" matInput placeholder="Business Name" type="text">
-                </mat-form-field>
-
-                <mat-form-field appearance="outline" class="field-full-width">
-                    <input formControlName="website" matInput placeholder="Website" type="text">
-                </mat-form-field>
-
                 <div class="row">
-                    <mat-form-field appearance="outline" class="field-full-width col-md-6 col-sm-12">
-                        <input formControlName="firstName" matInput placeholder="First Name" type="text">
-                    </mat-form-field>
-                    <mat-form-field appearance="outline" class="field-full-width col-md-6 col-sm-12">
-                        <input formControlName="lastName" matInput placeholder="Last Name" type="text">
-                    </mat-form-field>
+                    <div class="form-group col-md-6">
+                        <label>First Name*</label>
+                        <input formControlName="firstName" type="email" class="form-control" aria-describedby="firstName" placeholder="First Name*">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Last Name</label>
+                        <input formControlName="lastName" type="text" class="form-control" aria-describedby="lastName" placeholder="Last Name">    
+                    </div>
+                </div>
+ 
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label>Business Name*</label>
+                        <input formControlName="businessName" type="text" class="form-control" aria-describedby="businessName" placeholder="Business Name*">                  
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Mobile Number*</label>
+                        <input formControlName="mobileNumber" type="number" class="form-control" aria-describedby="Mobile" placeholder="Mobile Number*">
+                        <small id="emailHelp" class="form-text text-muted">We'll never share your mobile number with anyone else.</small>
+                    </div>
                 </div>
 
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label>Website</label>
+                        <input formControlName="website" type="text" class="form-control" aria-describedby="website" placeholder="Website">                        
+                    </div>
 
-                <mat-form-field appearance="outline" class="field-full-width">
-                    <input formControlName="mobileNumber" matInput placeholder="Mobile Number" type="number">
-                </mat-form-field>
-
+                    <div class="form-group col-md-6">
+                        <label>City</label>
+                        <input formControlName="city" type="text" class="form-control" aria-describedby="city" placeholder="City">  
+                    </div>
+    
+                </div>
+                
 
                 <br />
 
-                <!-- <app-autocomplete [allowToAdd]="false" [autoComplete]="postForm?.get('collaborators')"
-                    [collection]="'users'" [multiple]="true"
-                    [placeholder]="'Select Collaborators'" [type]="" class="field-full-width" matInput>
-                </app-autocomplete> -->
-
                 <div class="wrap">
                     <h2>Select Business Areas You need help with your sales:</h2>
+                    <mat-chip-list style="display: block; padding-bottom: 20px;">
+                        <mat-chip *ngFor="let ba of selectedBusinessAreas" [removable]="true"
+                            (removed)="removeSelectedBusinessAreas(ba)">
+                            {{ba.name}}
+                            <mat-icon matChipRemove>cancel</mat-icon>
+                        </mat-chip>
+                    </mat-chip-list>
                     <!-- <p></p> -->
 
                     <div class="line">
                         <a class="area-btn" #area
-                            (click)="addOrRemoveSelectedBusinessAreas(b); area.classList.toggle('active'); check.classList.toggle('far');  check.classList.toggle('fa-check-circle')"
+                            (click)="addSelectedBusinessAreas(b); area.classList.toggle('active'); check.classList.toggle('far');  check.classList.toggle('fa-check-circle')"
                             *ngFor="let b of businessAreas">
                             <span><i #check style="margin-right: 5px;"></i>{{b?.name}}</span>
                         </a>
-                        <a contenteditable="false" class="area-btn" #add (click)="editMode = true;">
-                            <!-- {{addSpan | json}} -->
-                            <mat-form-field *ngIf="editMode" style="width: -webkit-fill-available;">
-                                <input [(ngModel)]="addBusinessAreaString"  [ngModelOptions]="{standalone: true}" matInput placeholder="Add Business Area">
-                            </mat-form-field>
-                            <button *ngIf="editMode" [disabled]="!addBusinessAreaString" mat-raised-button style="margin-top: -17px;" color="primary" (click)="addNewBusinessArea()">Add</button>
-                            <span #addSpan *ngIf="!editMode">Add <mat-icon style="vertical-align: middle;">add</mat-icon></span>
-                        </a>
                     </div>
-                    <!-- <div class="line">
-                    <a class="btn"><i class="fa fa-square-o" ></i>Ruby</a>
-                    <a class="btn"><i class="fa fa-square-o" ></i>Wordpress</a>
-                    <a class="btn"><i class="fa fa-square-o" ></i>Filter</a>
-                    <a class="btn"><i class="fa fa-square-o" ></i>MySQL</a>
-                    <a class="btn"><i class="fa fa-square-o" ></i>C#</a>
-                    <a class="btn"><i class="fa fa-square-o" ></i>ReactJS</a>
-                    </div> -->
                 </div>
 
-                <!-- <app-autocomplete [autoComplete]="postForm?.get('tags')" [collection]="'tags'" [multiple]="true"
-                [placeholder]="'Tags'" [type]="'tag'"></app-autocomplete> -->
-
                 <br />
-
-                <!-- <app-autocomplete [autoComplete]="postForm?.get('users')" [placeholder]="'Users'" [collection]="'users'"
-                    [multiple]="true" [allowToAdd]="false"></app-autocomplete> -->
-
 
                 <div fxLayout="row" fxLayoutGap="10px">
                     <button type="button" (click)="submit()" [disabled]="postForm?.invalid" mat-raised-button

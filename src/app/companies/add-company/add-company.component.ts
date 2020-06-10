@@ -8,7 +8,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FormService } from '../../shared/services/form.service';
 import { catchError, } from 'rxjs/operators';
 import { Subscription, of } from 'rxjs';
-import { Tag } from '../../shared/models/product.model';
+import { Tag } from '../../shared/models/post.model';
 import { CompanyService } from '../company.service';
 import { CompanyTypes, Company } from '../../shared/models/company.model';
 import Swal from 'sweetalert2';
@@ -114,7 +114,7 @@ export class AddCompanyComponent implements OnInit {
       name: new FormControl(i && i.name ? i.name : '', Validators.required),
       type: new FormControl(i && i.type ? i.type : ''),
       cities: new FormControl(i && i.cities && i.cities.length ? i.cities : []),
-      description: new FormControl(i && i.description ? i.description : ''),
+      // description: new FormControl(i && i.description ? i.description : ''),
       // ideas: new FormControl(i && i.ideas ? i.ideas : ''),
       // questions: new FormControl(i && i.questions ? i.questions : ''),
       createdBy: new FormControl(i && i.createdBy && i.createdBy._id ? i.createdBy._id : ''),
@@ -158,7 +158,7 @@ export class AddCompanyComponent implements OnInit {
       ).subscribe((d: any) => {
         if (d) {
           Swal.fire(`${d.name} has been Created Successfully`, '', 'success').then(() => {
-            this.companyService.redirectToCompanyDetails(d._id);
+            this.companyService.redirectToCompanyDetails(d._id, d.slug);
           });
           this.companyFormInitialization(d);
         }
@@ -174,7 +174,7 @@ export class AddCompanyComponent implements OnInit {
         .subscribe((d: any) => {
           if (d) {
             Swal.fire(`${d.name} has been Updated Successfully`, '', 'success').then(() => {
-              this.companyService.redirectToCompanyDetails(d._id);
+              this.companyService.redirectToCompanyDetails(d._id, d.slug);
             });
             this.companyFormInitialization(d);
           }
@@ -183,7 +183,7 @@ export class AddCompanyComponent implements OnInit {
   }
 
   fetchCompanies(pageNumber) {
-    this.companyService.getCompaniesByType('', {pageNumber, limit: 3}).subscribe((dj: any) => {
+    this.companyService.getCompaniesByType('', { pageNumber, limit: 3 }).subscribe((dj: any) => {
       if (dj && dj.companies) {
         this.listOfCompanies = this.listOfCompanies.concat(dj.companies);
         this.totalCompanies = dj.total;

@@ -23,7 +23,9 @@ export const appConstants = {
     [PostType.Assignment]: 'sticky-note',
     [PostType.Question]: 'sticky-note',
     [PostType.Note]: 'sticky-note',
-    [PostType.Business]: 'sticky-note'
+    [PostType.Business]: 'sticky-note',
+    [PostType.Blog]: 'blog',
+    [PostType.Mentor]: 'briefcase',
   },
 
   fileS3Bucket: 'saasfiles',
@@ -179,12 +181,12 @@ export const appConstants = {
       _id
       name
       type
-      categories
       referencePostUrl
       price
       status
       createdAt
       updatedAt
+      descriptionHTML
       tags {
         name
         _id
@@ -193,7 +195,6 @@ export const appConstants = {
         ...Comments
       }
       commentCount
-      likeCount
       users {
         _id
         name
@@ -202,6 +203,7 @@ export const appConstants = {
       createdBy {
         _id
         name
+        slug
         avatar
         currentJobDetails {
           jobProfile {
@@ -210,12 +212,6 @@ export const appConstants = {
             type
           }
         }
-      }
-      purchasedBy {
-        name
-        _id
-        createdAt
-        avatar
       }
       slug
       comments {
@@ -228,33 +224,16 @@ export const appConstants = {
           _id
           name
           avatar
+          slug
         }
         blockId
         blockSpecificComment
       }
-
-      dateRange
-      address
-      eventType
       cover
-      usersAttending {
-        name
-        _id
-        avatar
-      }
-      location {
-        longitude
-        latitude
-        address
-      }
       companies {
         name
         _id
       }
-
-      salaryCurrency
-      salaryRangeFrom
-      salaryRangeTo
       cities {
         name
         _id
@@ -270,24 +249,14 @@ export const appConstants = {
         _id
         name
         avatar
-      }
-
-      assignees {
-        _id
-        name
+        slug
       }
 
       clients {
         _id
         name
+        slug
       }
-
-      jobProfile {
-        _id
-        name
-        type
-      }
-      timeline
 
       phone
       email
@@ -295,7 +264,6 @@ export const appConstants = {
       address
       website
 
-      descriptionHTML
       activities {
         action
         activityDate
@@ -307,12 +275,20 @@ export const appConstants = {
         postId
         message
       }
+
+      appointment_date
+      cancelReason
+      duration
+      job
+      mentor
     }
     ${comment}
     `,
 
   postTypesArray: [
     { name: PostType.Assignment, label: 'Assignment' },
+    { name: PostType.Appointment, label: 'Appointment' },
+    { name: PostType.Blog, label: 'Blog' },
     { name: PostType.Bug, label: 'Bug' },
     { name: PostType.Business, label: 'Business' },
     { name: PostType.Challenge, label: 'Challenge' },
@@ -325,11 +301,13 @@ export const appConstants = {
     { name: PostType.Howtodoc, label: 'How-To-Doc' },
     { name: PostType.Interview, label: 'Interview' },
     { name: PostType.Job, label: 'Job' },
+    { name: PostType.Mentor, label: 'Mentor' },
     { name: PostType.Note, label: 'Notes' },
     { name: PostType.Product, label: 'Product' },
     { name: PostType.Question, label: 'Questions' },
     { name: PostType.Requirement, label: 'Requirement' },
     { name: PostType.Service, label: 'Service' },
     { name: PostType.Testing, label: 'Testing' },
+    { name: PostType.Forms, label: 'Forms' },
   ],
 };

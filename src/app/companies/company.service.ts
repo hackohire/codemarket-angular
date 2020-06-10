@@ -18,6 +18,7 @@ export class CompanyService {
     name
     type
     cover
+    slug
     cities {
       name
       _id
@@ -25,6 +26,7 @@ export class CompanyService {
     owners {
       name
       avatar
+      slug
       _id
     }
     status
@@ -34,6 +36,7 @@ export class CompanyService {
       _id
       name
       avatar
+      slug
     }
     location {
       longitude
@@ -147,13 +150,13 @@ export class CompanyService {
     );
   }
 
-  getCompanyById(CompanyId: string): Observable<Company> {
+  getCompanyById(slug: string): Observable<Company> {
 
     this.companyQuery = this.apollo.watchQuery(
       {
         query: gql`
-          query getCompanyById($CompanyId: String) {
-            getCompanyById(companyId: $CompanyId) {
+          query getCompanyById($slug: String) {
+            getCompanyById(slug: $slug) {
               ...Company
             }
           }
@@ -161,7 +164,7 @@ export class CompanyService {
         `,
         fetchPolicy: 'no-cache',
         variables: {
-          CompanyId
+          slug
         }
       }
     );
@@ -254,12 +257,12 @@ export class CompanyService {
     );
   }
 
-  getCampaignsWithTracking(pageOptions, companyId) {
+  getCampaignsWithTracking(pageOptions, companyId, batchId = '') {
     return this.apollo.query(
       {
         query: gql`
-          query getCampaignsWithTracking($pageOptions: PageOptionsInput, $companyId: String) {
-            getCampaignsWithTracking(pageOptions: $pageOptions, companyId: $companyId) {
+          query getCampaignsWithTracking($pageOptions: PageOptionsInput, $companyId: String, $batchId: String) {
+            getCampaignsWithTracking(pageOptions: $pageOptions, companyId: $companyId, batchId: $batchId) {
               _id
               name
               label
@@ -268,6 +271,7 @@ export class CompanyService {
                 name
                 _id
                 avatar
+                slug
               }
               count
               emailData {
@@ -276,6 +280,8 @@ export class CompanyService {
                 createdAt
                 subject
                 descriptionHTML
+                isReplied
+                repliedHTML
                 tracking {
                   eventType
                   open {
@@ -295,7 +301,8 @@ export class CompanyService {
         `,
         variables: {
           pageOptions,
-          companyId
+          companyId,
+          batchId
         },
         fetchPolicy: 'no-cache'
       }
@@ -347,9 +354,9 @@ export class CompanyService {
     );
   }
 
-  redirectToCompanyDetails(companyId: string, view = 'posts') {
-    this.router.navigate(['/', `company`, companyId],
-      { queryParams: { view } }
+  redirectToCompanyDetails(companyId: string, slug: string, view = 'posts') {
+    this.router.navigate(['/', `company`, slug],
+      { queryParams: { view, id: companyId } }
     );
   }
 

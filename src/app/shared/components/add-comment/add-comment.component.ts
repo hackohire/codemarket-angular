@@ -18,8 +18,6 @@ export class AddCommentComponent implements OnInit {
   @Input() showLabel: false;
   @Input() referenceId: string;
 
-  tinyMCEApi = environment.tiny_api;
-
 
   editorId = Math.random().toString();
   subscription$ = new Subscription();
@@ -36,7 +34,6 @@ export class AddCommentComponent implements OnInit {
   ngOnInit() {
     // if (!this.commentForm) {
     this.commentForm = new FormGroup({
-      text: new FormControl([]),
       type: new FormControl('post'),
       blockId: new FormControl(null),
       blockSpecificComment: new FormControl(false),
@@ -76,7 +73,7 @@ export class AddCommentComponent implements OnInit {
 
       this.subscription$.add(
         this.commentService.addComment(this.commentForm.value).subscribe((c) => {
-          addCommentEditor.editor.clear();
+          addCommentEditor.html = '';
         })
       );
     } else {

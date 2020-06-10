@@ -1,70 +1,184 @@
-<app-breadcumb [path]="breadcumb?.path" [postDetails]="{ connectedPosts: editPostDetails ? editPostDetails?.connectedPosts : postFromRoute ? [postFromRoute] : []}" [showImportButton]="true"
-    [title]="breadcumb?.title">
+<app-breadcumb [path]="breadcumb?.path"
+    [postDetails]="{ connectedPosts: editPostDetails ? editPostDetails?.connectedPosts : postFromRoute ? [postFromRoute] : [], tags: postForm?.get('tags')?.value, clients: postForm?.get('clients')?.value, collaborators: postForm?.get('collaborators')?.value, companies: postForm?.get('companies')?.value, name: postForm?.get('name')?.value}"
+    [showImportButton]="true" [fromAddPost]="true" [title]="postTitle" [postActions]="true"
+    (saveOrSubmitPost)="submit($event)" (addPostData)="recieveEvent($event)" [postForm]="postForm" [inline]="true">
 </app-breadcumb>
 
 
 <div class="container">
     <div class="row">
-        <div class="col-md-12">
-            <div [formGroup]="postForm" class="add-form-area common-box-shadow">
-                <mat-form-field class="field-full-width">
-                    <input formControlName="name" matInput placeholder="Title" type="text">
-                </mat-form-field>
 
-                <br />
+        <!-- start aside -->
+        <div *ngIf="false" class="col-md-2 order-3 order-lg-1">
+            <!-- <app-add-post-menu style="color: #00aeef !important; margin-left: auto;">
+            </app-add-post-menu> -->
+            <app-post-type-nav (plusButtonClick)="redirectToAddPost($event)"></app-post-type-nav>
 
-                <app-autocomplete [allowToAdd]="false" [autoComplete]="postForm?.get('collaborators')"
-                    [collection]="'users'" [multiple]="true"
-                    [placeholder]="'Select Collaborators'" [type]="" class="field-full-width" matInput>
-                </app-autocomplete>
+        </div>
 
-                <app-autocomplete [autoComplete]="postForm?.get('companies')" [collection]="'companies'" [forCompany]="true"
-                    [multiple]="true" [placeholder]="'Select Company'" [type]="" class="col-md-6">
-                </app-autocomplete>
+        <div class="col-md-8 order-1 order-md-2 order-lg-2">
+            <ng-container [ngSwitch]="postType">
+                <ng-container *ngSwitchCase="postTypeEnum.Appointment">
+                    <ng-container *ngTemplateOutlet="calendar"></ng-container>
+                </ng-container>
 
-                <app-autocomplete class="field-full-width" [allowToAdd]="false"
-                    [autoComplete]="postForm.get('clients')" [placeholder]="'Select Clients'" [collection]="'users'"
-                    [type]="" [multiple]="true" matInput>
-                </app-autocomplete>
+                <ng-container *ngSwitchCase="postTypeEnum.Mentor">
+                    <ng-container *ngTemplateOutlet="calendar"></ng-container>
+                </ng-container>
+            </ng-container>
 
-                <app-autocomplete [autoComplete]="postForm?.get('tags')" [collection]="'tags'" [multiple]="true"
-                [placeholder]="'Tags'" [type]="'tag'"></app-autocomplete>
-                
-                <!-- <editor [formControlName]="'descriptionHTML'" [apiKey]="tinyMCEApi" [id]="'edit-post-editor'" [init]="{
-                  branding: false,
-                  images_upload_base_path: s3Bucket,
-                  file_picker_types: 'file image media',
-                  file_picker_callback: authService.filePickerCallback,
-                  image_title: true,
-                  automatic_uploads: true,
-                  media_live_embeds: true,
-                  plugins: [ 'lists codesample pagebreak hr emoticons link image media help wordcount autoresize autolink powerpaste preview' ],
-                  toolbar: 'preview | undo redo | image media emoticons | formatselect pagebreak hr | bold italic code codesample | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | help' }"></editor> -->
+            <div [formGroup]="postForm" class="ckEditor">
 
-                <app-editor *ngIf="(postId && editPostDetails) || !postId" #descriptionEditor [data]="descriptionFormControl?.value" [readOnly]="false" [html]="postForm?.get('descriptionHTML')?.value"
-                    [id]="'edit-post-editor'" [importArticleSubscription]="true" [placeholder]="postType + ' description'">
+                <app-editor *ngIf="(postId && editPostDetails) || !postId" #descriptionEditor
+                    [data]="descriptionFormControl?.value" [readOnly]="false"
+                    [html]="postForm?.get('descriptionHTML')?.value" [post]="editPostDetails" [role]="'writer'"
+                    [id]="'edit-post-editor'" [realTime]="postId ? true : false" [importArticleSubscription]="true"
+                    [placeholder]="postType + ' description'">
+                    [id]="'edit-post-editor'" [importArticleSubscription]="true" [placeholder]="postType + '
+                    description'">
                 </app-editor>
 
                 <br />
 
-                <!-- <app-autocomplete [autoComplete]="postForm?.get('users')" [placeholder]="'Users'" [collection]="'users'"
-                    [multiple]="true" [allowToAdd]="false"></app-autocomplete> -->
-
-
-                <div fxLayout="row" fxLayoutGap="10px">
-                    <button *ngIf="statusFormControl?.value !== 'Published'" type="button" (click)="submit('Drafted')"
-                        [disabled]="postForm?.invalid" mat-raised-button color="primary">Save</button>
-                    <button *ngIf="statusFormControl?.value === 'Published'" type="button"
-                        (click)="submit('Unpublished')" [disabled]="postForm?.invalid" mat-raised-button
-                        style="background-color: #28a745; color: white;">{{ 'Save' }}</button>
-                    <button type="button" (click)="submit('Published', descriptionEditor)" [disabled]="postForm?.invalid" mat-raised-button
-                        color="primary">{{ 'Publish' }}</button>
-                        <button type="button" (click)="cancelClicked()" mat-raised-button
+                <!-- <div *ngIf="false" fxLayout="row" fxLayoutGap="10px">
+                    <button type="button" (click)="submit('Drafted')" [disabled]="postForm?.invalid" mat-raised-button
+                        style="background-color: #28a745; color: white; margin-right: 5px;">{{ 'Save' }}</button>
+                    <button type="button" (click)="submit('Published', descriptionEditor)"
+                        [disabled]="postForm?.invalid" mat-raised-button color="primary">{{ 'Publish' }}</button>
+                    <button type="button" (click)="cancelClicked()" mat-raised-button
                         color="warn">{{ 'Cancel' }}</button>
-                </div>
+                </div> -->
 
             </div>
+        </div>
 
+        <div class="col-md-4 sidebar order-2 order-md-3 order-lg-3">
+            <div class="col-md-12 col-sm-12">
+                <ul class="row infos">
+
+                    <!-- TAGS -->
+                    <li *ngIf="postType !== postTypeEnum.Job && postType !== postTypeEnum.Mentor">
+                        <p class="data-label">Tags</p>
+                        <p class="info">
+                            <span class="tag" *ngFor="let t of postForm?.get('tags')?.value">{{t?.name}}</span>
+                        </p>
+                        <ng-container
+                            *ngTemplateOutlet="autoComplete; context: { type: 'tag', fieldName: 'tags', collection: 'tags', placeholder: 'Tags' }">
+                        </ng-container>
+                    </li>
+
+                    <!-- JobProfiles -->
+                    <li *ngIf="postType === postTypeEnum.Job">
+                        <p class="data-label">Job Profile</p>
+                        <p class="info">
+                            <span class="tag"
+                                *ngFor="let t of postForm?.get('job.jobProfile')?.value">{{t?.name}}</span>
+                        </p>
+                        <ng-container
+                            *ngTemplateOutlet="autoComplete; context: { type: 'tag', fieldName: 'job.jobProfile', collection: 'tags', placeholder: 'Enter Job Profiles' }">
+                        </ng-container>
+                    </li>
+
+                    <!-- Topics -->
+                    <li *ngIf="postType === postTypeEnum.Mentor">
+                        <p class="data-label">Topics</p>
+                        <p class="info">
+                            <span class="tag" *ngFor="let t of postForm?.get('mentor.topics')?.value">{{t?.name}}</span>
+                        </p>
+                        <ng-container
+                            *ngTemplateOutlet="autoComplete; context: { type: 'tag', fieldName: 'mentor.topics', collection: 'tags', placeholder: 'Enter Topics' }">
+                        </ng-container>
+                    </li>
+
+                    <!-- COLLABORATORS -->
+                    <li *ngIf="true">
+                        <p class="data-label">Collaborators</p>
+                        <p class="info">
+                            <a *ngFor="let t of postForm?.get('collaborators')?.value; let i=index" target="_blank"
+                                [href]="'profile' + '/' + t?.slug">
+                                <span class="tag">
+                                    <img [src]="t?.avatar ? ((s3FilesBucketURL + t?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                                        alt="">{{t?.name}}</span>
+                            </a>
+                            <ng-container
+                                *ngTemplateOutlet="autoComplete; context: { type: '', fieldName: 'collaborators', collection: 'users', placeholder: 'Select Collaborators' }">
+                            </ng-container>
+                        </p>
+                    </li>
+
+                    <!-- CLIENTS -->
+                    <li *ngIf="true">
+                        <p class="data-label">Clients</p>
+                        <p class="info">
+                            <a *ngFor="let t of postForm?.get('clients')?.value" target="_blank"
+                                [href]="'profile' + '/' + t?.slug">
+                                <span class="tag">
+                                    <img [src]="t?.avatar ? ((s3FilesBucketURL + t?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                                        alt="">{{t?.name}}</span>
+                            </a>
+                        </p>
+                        <ng-container
+                            *ngTemplateOutlet="autoComplete; context: { type: '', fieldName: 'clients', collection: 'users', placeholder: 'Select Clients' }">
+                        </ng-container>
+                    </li>
+
+                    <!-- COMPAINES -->
+                    <li *ngIf="true">
+                        <p class="data-label">Company</p>
+                        <p class="info" style="text-transform: capitalize; cursor: pointer;padding-left: 7px;">
+                            <span *ngFor="let c of postForm?.get('companies')?.value; let ei = index;"
+                                [routerLink]="['/', 'company', c?._id]">{{c?.name + (ei === postForm?.get('companies')?.value?.length - 1 ? '' : ', ' )}}</span>
+                        </p>
+                        <ng-container
+                            *ngTemplateOutlet="autoComplete; context: { type: '', fieldName: 'companies', collection: 'companies', placeholder: 'Select Company', forCompany: true }">
+                        </ng-container>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- SLOTS -->
+            <div class="col-xs-12 col-sm-12 time-slot-wrapper"
+                *ngIf="postType === postTypeEnum.Appointment || postType === postTypeEnum.Mentor">
+                <div *ngIf="slotList.length > 0; else noSlotSelected;">
+                  <div class="col-6 slot-btn" [ngClass]="{ 'slot-select-box': ((slotDateTime) && (slot === slotDateTime[0]) || (slot === slotDateTime[1])) }" 
+                    (click)="selectedSlot(slot)" *ngFor="let slot of slotList">
+                    {{slot}}
+                  </div>
+                </div>
+                <ng-template class="no-slot" #noSlotSelected>
+                    <span>Please Select Date</span>
+                </ng-template>
+              </div>
+              <!-- <app-time-slots [slots]="slotList"></app-time-slots> -->
         </div>
     </div>
 </div>
+
+<!-- CALENDAR TEMPLATE -->
+<ng-template #calendar>
+    <div>
+        <app-calender></app-calender>
+        <br>
+    </div>
+    <div class="alert alert-info text-center" *ngIf="slotDateTime.length === 2">
+        Confirm Your Apointment
+        <strong>: {{ displayDate}}</strong>
+    </div>
+</ng-template>
+
+
+<!-- AUTO COMPLETE POPOVER TEMPLATE -->
+<ng-template #autoComplete let-type="type" let-collection="collection" let-fieldName="fieldName"
+    let-placeholder="placeholder" let-forCompany="forCompany">
+    <span style="margin: 7px 0 0 5px;" [mdePopoverTriggerFor]="addTagsPopover" mdePopoverTriggerOn="click"><i
+            class="fa fa-plus-square" aria-hidden="true"></i></span>
+    <mde-popover #addTagsPopover="mdePopover" [mdePopoverOverlapTrigger]="false" [mdePopoverCloseOnClick]="false"
+        [mdePopoverArrowOffsetX]="8" mdePopoverArrowColor="#FFFFFF">
+        <div
+            style="background: #fff; padding: 10px;border: 1px solid #ccc;margin-top: -10px;box-shadow: 0 0 10px 0 #aaa;">
+            <app-autocomplete [autoComplete]="postForm?.get(fieldName)" [collection]="collection" [multiple]="true"
+                [placeholder]="placeholder" [type]="type" [forCompany]="forCompany"></app-autocomplete>
+            <mat-icon (click)="addTagsPopover._emitCloseEvent()">send</mat-icon>
+        </div>
+    </mde-popover>
+</ng-template>

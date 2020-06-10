@@ -1,0 +1,212 @@
+:host ::ng-deep {
+    .ck.ck-toolbar {
+        // top: 145px !important;
+        top: 0 !important;
+    }
+
+    .docs-component-viewer-nav.common-box-shadow {
+        margin-top: 1px;
+        top: 145px;
+    }
+
+    .docs-component-viewer-nav-content {
+        max-height: 70vh;
+    }
+
+    .ck-content {
+        max-height: 73vh !important;
+        min-height: 73vh !important;
+    }
+
+    .breadcrumb-area {
+        z-index: 20;
+        // top: 48px;
+        position: sticky;
+        background: #fff;
+
+        .page-title {
+           color: #607D8B;
+        }
+    }
+
+    .breadcrumb-area::before {
+        background: white;
+    }
+
+    .breadcrumb ul li.active a {
+        color: #666;
+    }
+    
+    .breadcrumb-area .page-title {
+        color: #00aeef !important;
+        font-weight: 500;
+        font-size: 30px;
+        text-transform: capitalize;
+        border-bottom: 1px solid #fff;
+    }
+    
+    .breadcrumb-area .page-title:focus {
+        outline: none;
+        background: #fff;
+        font-size: 24px;
+        padding: 3.9px;
+        border-bottom: 1px solid #ccc;
+    }
+
+    .sidebar {
+        // top: 145px !important;
+        // position: sticky;
+        display: block;
+        height: -webkit-fill-available;
+        z-index: 20;
+    }
+
+    @media (max-width: 767px) {
+        .sidebar {
+            top: 0 !important;
+            position: relative;
+            margin-bottom: 50px;
+            z-index: 0;
+        }
+        .ck-content {
+            max-height: 45vh !important;
+            min-height: 40vh !important;
+        }
+        .breadcrumb-area {
+            // z-index: 18 !important;
+            top: 0 !important;
+            position: relative !important;
+            width: 100% !important;
+            background: #fff !important;
+        }
+        .breadcrumb-area .page-title {
+            outline: none;
+            background: #fff;
+            font-size: 24px;
+            padding: 3.9px;
+            border-bottom: 1px solid #ccc;
+            margin-top: 10px !important;
+        }
+        .ck.ck-toolbar {
+            // position: sticky !important;
+            // top: 0 !important;
+            z-index: 20;
+        }
+        .ck.ck-toolbar.ck-toolbar_grouping>.ck-toolbar__items {
+            overflow-x: auto;
+            // flex-wrap: wrap;
+        }
+        .ck.ck-editor__editable:not(.ck-editor__nested-editable).ck-rounded-corners {
+            // min-height: 110px !important;
+        }
+    }
+}
+
+
+.data-label {
+    // width: 10%;
+    font-weight: 600;
+    // color: #333333;
+}
+
+.social-media {
+    margin-top: 15px;
+    button {
+        margin-right: 7px;
+    }
+}
+
+.info {
+    // width: 90%;
+}
+
+.tag {
+    background: #666;
+    display: inline-block;
+    color: white;
+    padding: 0 10px;
+    line-height: 28px;
+    margin-left: 7px;
+    font-size: 13px;
+    font-weight: 400;
+    -webkit-border-radius: 100px;
+    border-radius: 100px;
+    text-transform: capitalize;
+
+    img {
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        margin-right: 5px;
+        vertical-align: middle;
+    }
+}
+
+.time-slot-wrapper {
+    height: calc(100vh - 50vh);
+    overflow: auto;
+    margin-top: 30px;
+    text-align: center;
+    cursor: pointer;
+
+    .slot-btn {
+      width: 40%;
+      text-align: center;
+      color: var(--primary-color, #00a2ff);
+      border: 1px solid var(--primary-color-level2, rgba(0, 162, 255, 0.5));
+      position: relative;
+      display: inline-block;
+      padding: 10px 7px;
+      margin: 5px 7px;
+      font-weight: 600;
+      vertical-align: top;
+      border-radius: 4px;
+      &:hover {
+        border-color: var(--primary-color, rgb(0, 162, 255));
+        border-width: 1px;
+      }
+    }
+
+    .slot-select-box {
+        border-color: #23417b !important;
+        color: #23417b;
+      }
+
+    span {
+        font-size: 22px;
+        color: #00a2ff;
+    }
+}
+
+ul.infos li {
+    overflow: hidden;
+    display: flex;
+    justify-content: flex-start;
+    width: -webkit-fill-available;
+    border-bottom: 1px solid #ddd;
+    // justify-content: space-between;
+}
+
+ul.infos li p {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: -3px;
+    margin: 0;
+    font-size: 15px;
+    vertical-align: top;
+    line-height: 36px;
+}
+
+p.data-label:after {
+    content: ":";
+    margin-left: 4px
+}
+
+:host ::ng-deep .social-media button {
+    width: 35px;
+    height: 35px;
+    .mat-button-wrapper {
+        padding: 12px 0;
+        line-height: 0px;
+    }
+}

@@ -1,23 +1,40 @@
-<!-- <div *ngIf="readOnly && html" [ngStyle]="editorStyle" class="tox tox-tinymce">
-    <body [innerHTML]="html" class="mce-content-body my_class mce-content-readonly" data-id="post5eaa8bf30fec040008119e7c" spellcheck="false" style="overflow-y: hidden; padding-left: 1px; padding-right: 1px; min-height: 0px;" data-mce-style="overflow-y: hidden; padding-left: 1px; padding-right: 1px; min-height: 0px;" contenteditable="false"></body>
-</div> -->
-<editor [id]="id" class="readonly" [ngStyle]="editorStyle" *ngIf="html && readOnly" [disabled]="true" [init]="{
-    'min_height': '40px',
-    content_style: 'img { width:100%; height: auto; }',
-    menubar: false, branding: false, statusbar: false, toolbar: false, readonly: true, autoresize: true,
- plugins: [ 'autoresize'] }" [apiKey]="tinyMCEApi" [ngModel]="html"></editor>
+<ng-container *ngIf="isPlatformBrowser">
+    <div [ngStyle]="editorStyle" *ngIf="!realTime || !ckEditorUserToken">
+        <ckeditor #ckEditorRef [config]="{
+            extraPlugins: readOnly ? [] : [ myCustomUploadAdapterPlugin ],
+            removePlugins: ['RealTimeCollaborativeEditing', 'RealTimeCollaborativeComments', 'RealTimeCollaborativeTrackChanges', 'PresenceList' ]
+        }" [disabled]="readOnly" [editor]="ckEditor" [(ngModel)]="html" (ready)="readOnly ? null : onReady($event)">
+        </ckeditor>
+    </div>
 
- <editor *ngIf="!readOnly" [id]="id" [disabled]="readOnly" [init]="{
-    menubar: true, branding: false, statusbar: true, toolbar: true, autoresize: true,
-    images_upload_base_path: s3FilesBucketURL,
-                  file_picker_types: 'file image media',
-                  file_picker_callback: authService.filePickerCallback,
-                  image_title: true,
-                  automatic_uploads: true,
-                  media_live_embeds: true,
-                  plugins: [ 'lists table advtable codesample pagebreak hr emoticons link image media help wordcount autoresize autolink powerpaste preview' ],
-                  toolbar: 'preview | undo redo | link image media table emoticons | formatselect pagebreak hr | bold italic code codesample | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | help'
-}" [apiKey]="tinyMCEApi" [(ngModel)]="html"></editor>
+    <div *ngIf="(realTime && this.post?._id) && ckEditorUserToken">
+
+        <div class="row row-presence m-0">
+            <div #presenceList class='presence'></div>
+        </div>
+
+        <div [id]="ckEditorUserToken ? 'container' : ''">
+            <div [id]="ckEditorUserToken ? 'editor' : ''">
+                <ckeditor #ckEditorRef [config]="{
+                    removePlugins: [],
+                    extraPlugins: [ myCustomUploadAdapterPlugin ],
+                    cloudServices: {tokenUrl: generateToken, webSocketUrl: webSocketUrl },
+                    sidebar: {container: sidebar},
+                    presenceList: {container: presenceList},
+                    collaboration: { channelId: this.post._id },
+                    commentsOnly: !allowUsersEdit(),
+                    autosave: { save: realTime && allowUsersEdit() ? autosave : null}
+                }" [disabled]="false" [editor]="ckEditor" [(ngModel)]="html"
+                    (ready)="readOnly ? refreshDisplayMode($event, sidebar) : onReady($event, sidebar)">
+                </ckeditor>
+            </div>
+
+            <div #sidebar [id]="ckEditorUserToken ? 'sidebar' : ''" class="sidebar"></div>
+        </div>
+
+    </div>
+</ng-container>
+
 
 <div *ngIf="false" #editorViewRef [ngStyle]="editorStyle" [ngClass]="'visibility-hidden'">
     <div class="ce-block">
@@ -25,131 +42,7 @@
             <ng-container [ngSwitch]="b?.type" *ngFor="let b of data; let i = index">
                 <div fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="start center"
                     [style.backgroundColor]="b?.__show && selectedBlockIndex > -1 ? 'beige' : ''">
-                    <div [fxFlex]="blockLevelComments ? '90' : '100'">
-                        <!-- Paragraph -->
-                        <div *ngSwitchCase="'paragraph'">
-                            <div class="ce-paragraph cdx-block" [innerHTML]="b?.data?.text">
-                            </div>
-                        </div>
-
-                        <!-- List -->
-                        <div *ngSwitchCase="'list'">
-                            <ul [ngClass]="['cdx-block', 'cdx-list', 'cdx-list--' + b?.data?.style]">
-                                <li class="cdx-list__item" *ngFor="let i of b?.data?.items" [innerHTML]="i"></li>
-                            </ul>
-                        </div>
-
-                        <!-- Header -->
-                        <div style="height: fit-content;" *ngSwitchCase="'header'"
-                            innerHTML="{{'<h' + b?.data?.level + ' class=ce-header' + '>' + b?.data?.text + '</h' + b?.data?.level + '>'}}">
-                            <!-- <div>
-                            </div> -->
-                        </div>
-
-                        <!-- Image / Video -->
-                        <div *ngSwitchCase="'image'">
-                            <div class="cdx-block image-tool image-tool--filled" *ngIf="b?.data?.file?.url">
-                                <div class="image-tool__image">
-                                    <ng-container *ngIf="isImage(b?.data?.file?.url); else elseTemplate">
-                                        <img class="image-tool__image-picture"
-                                            [src]="b?.data?.file?.url | safe: 'url'">
-                                        <div style="text-align: center; margin-top: 5px;"
-                                            [innerHTML]="b?.data?.caption"></div>
-                                    </ng-container>
-
-                                    <ng-template #elseTemplate>
-                                        <video class="image-tool__image-picture" loop controls
-                                            [src]="b?.data?.file?.url | safe: 'url'"></video>
-                                        <div style="text-align: center; margin-top: 5px;"
-                                            [innerHTML]="b?.data?.caption"></div>
-                                    </ng-template>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Embed -->
-                        <div *ngSwitchCase="'embed'">
-                            <div class="cdx-block embed-tool">
-                                <iframe *ngIf="b?.data?.service !== 'github'; else gistTemplate" scrolling="no"
-                                    class="embed-tool__content" style="width:100%;" frameborder="0" height="400px"
-                                    allowfullscreen [src]="b?.data?.embed | safe : 'resourceUrl'"></iframe>
-                                <!-- When there is Gist -->
-                                <ng-template #gistTemplate>
-                                    <iframe scrolling="no" width="100%" frameborder="0" height="350px" allowfullscreen
-                                        [srcdoc]="gistFrame(b?.data?.embed) | safe: 'html'">
-                                    </iframe>
-                                </ng-template>
-                                <div style="text-align: center; margin-top: 5px;" [innerHTML]="b?.data?.caption"></div>
-                            </div>
-                        </div>
-
-                        <div *ngSwitchCase="'linkTool'" class="link-tool">
-                            <a class="link-tool__content link-tool__content--rendered" target="_blank"
-                                rel="nofollow noindex noreferrer" [href]="b?.data?.link">
-                                <div *ngIf="b?.data?.meta?.image?.url" class="link-tool__image"
-                                    [ngStyle]="{'background-image': 'url(' + b?.data?.meta?.image?.url + ')', 'display': 'block'}">
-                                </div>
-                                <div class="link-tool__title">{{b?.data?.meta?.title}}</div>
-                                <p class="link-tool__description">
-                                    {{b?.data?.meta?.title}}
-                                </p><span class="link-tool__anchor">{{b?.data?.meta?.domain}}</span>
-                            </a></div>
-
-                        <!-- Code -->
-                        <div *ngSwitchCase="'code'">
-                            <div class="cdx-block ce-code"><span
-                                    style="text-align: right; margin-bottom: 5px;">{{b?.data?.language}}</span>
-                                <pre><code [innerText]="b?.data?.code"></code></pre>
-                            </div>
-                        </div>
-
-                        <!-- Table -->
-                        <div *ngSwitchCase="'table'">
-                            <div class="tc-editor cdx-block">
-                                <div class="tc-table__wrap">
-                                    <table class="tc-table">
-                                        <tbody>
-                                            <tr *ngFor="let r of b?.data?.content; let ri = index;">
-                                                <td class="tc-table__cell" *ngFor="let c of r; let ci = index;">
-                                                    <div class="tc-table__area">
-                                                        <div class="tc-table__inp" contenteditable="false"
-                                                            [innerHTML]="b?.data?.content[ri][ci]"></div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div *ngSwitchCase="'delimiter'">
-                            <div class="ce-delimiter cdx-block"></div>
-                        </div>
-
-                        <div *ngSwitchCase="'attaches'" class="cdx-attaches cdx-attaches--with-file">
-                            <div class="cdx-attaches__file-icon" [attr.data-extension]="b?.data?.file?.extension">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="40">
-                                    <path
-                                        d="M17 0l15 14V3v34a3 3 0 0 1-3 3H3a3 3 0 0 1-3-3V3a3 3 0 0 1 3-3h20-6zm0 2H3a1 1 0 0 0-1 1v34a1 1 0 0 0 1 1h26a1 1 0 0 0 1-1V14H17V2zm2 10h7.926L19 4.602V12z">
-                                    </path>
-                                </svg></div>
-                            <div class="cdx-attaches__file-info">
-                                <div class="cdx-attaches__title">{{b?.data?.file?.name}}</div>
-                                <div class="cdx-attaches__size" data-size="KiB">{{b?.data?.file?.size}}</div>
-                            </div><a class="cdx-attaches__download-button" [href]="b?.data?.file?.url" target="_blank"
-                                rel="nofollow noindex noreferrer"><svg xmlns="http://www.w3.org/2000/svg" width="17pt"
-                                    height="17pt" viewBox="0 0 17 17">
-                                    <path
-                                        d="M9.457 8.945V2.848A.959.959 0 0 0 8.5 1.89a.959.959 0 0 0-.957.957v6.097L4.488 5.891a.952.952 0 0 0-1.351 0 .952.952 0 0 0 0 1.351l4.687 4.688a.955.955 0 0 0 1.352 0l4.687-4.688a.952.952 0 0 0 0-1.351.952.952 0 0 0-1.351 0zM3.59 14.937h9.82a.953.953 0 0 0 .953-.957.952.952 0 0 0-.953-.953H3.59a.952.952 0 0 0-.953.953c0 .532.425.957.953.957zm0 0"
-                                        fill-rule="evenodd"></path>
-                                </svg></a>
-                        </div>
-
-
-                    </div>
-
+                    <!-- Paragraph -->
 
                     <!-- Icon to view / collapse comments section -->
                     <div [fxFlex]="blockLevelComments ? '10' : '0'" style="text-align: right;">
@@ -157,7 +50,7 @@
                             <a style="text-align: right; padding: 0 8px; text-decoration: none;" *ngIf="!b?.__show;"
                                 mat-button
                                 (click)="b['__show'] = true; showComments.emit({block: b, comments: of(commentsList)}); selectedBlockIndex > -1 ? data[selectedBlockIndex]['__show'] = false : null; selectedBlockIndex = i">
-                                <i [style.color]=" commentsList && commentsList?.length && numberOfComments(b?._id) > 0 ? '#0674ec' : ''"
+                                <i [style.color]=" commentsList && commentsList?.length && numberOfComments(b?._id) > 0 ? '#00aeef' : ''"
                                     style="font-size: 1.3rem !important; font-style: normal;"
                                     [ngClass]="'fad fa-comments-alt fa-lg'"></i>
                                 <span>{{' ('}} {{ commentsList && commentsList?.length ? numberOfComments(b?._id) : 0}}
@@ -165,7 +58,7 @@
                             </a>
                             <a style="padding: 0 8px; text-decoration: none;" *ngIf="b?.__show" mat-button
                                 (click)="b.__show = false; showComments.emit({block: null, comments: null});">
-                                <i [style.color]="commentsList && commentsList?.length && numberOfComments(b?._id) > 0 ? '#0674ec' : ''"
+                                <i [style.color]="commentsList && commentsList?.length && numberOfComments(b?._id) > 0 ? '#00aeef' : ''"
                                     style="font-size: 1.3rem !important; font-style: normal;"
                                     [ngClass]="'fad fa-chevron-circle-' + ((isHandset) ? 'up' : 'right') + ' fa-lg'"></i>
                                 <span>{{' ('}} {{ commentsList && commentsList?.length ? numberOfComments(b?._id) : 0}}

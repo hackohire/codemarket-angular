@@ -46,7 +46,7 @@ export class BriefPostComponent implements OnInit, OnDestroy {
 
 
   deletePost(postId) {
-    this.postService.deletePost(postId, {name: this.authService.loggedInUser.name, _id: this.authService.loggedInUser.name}).subscribe(d => {
+    this.postService.deletePost(postId, { name: this.authService.loggedInUser.name, _id: this.authService.loggedInUser.name }).subscribe(d => {
       if (d) {
         this.delete.emit(postId);
       }
@@ -80,7 +80,6 @@ export class BriefPostComponent implements OnInit, OnDestroy {
   /** Comment form initialization for adding comment */
   initializeCommentForm(p, commentType?: string) {
     this.commentForm = new FormGroup({
-      text: new FormControl([]),
       referenceId: new FormControl(p._id),
       type: new FormControl('post'),
       textHTML: new FormControl('')

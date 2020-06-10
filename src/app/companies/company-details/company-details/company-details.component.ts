@@ -151,6 +151,9 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
 
   @ViewChild(MdePopoverTrigger, { static: false }) socialMediaPopover: MdePopoverTrigger;
 
+  companyName = new FormControl('');
+  status = new FormControl('');
+
   companyViewLinks = [
     {
       view: 'home',
@@ -204,6 +207,18 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
     this.companyView = this.activatedRoute.snapshot.queryParams['view'] ? this.activatedRoute.snapshot.queryParams['view'] : 'posts';
 
     this.initializeEmailForms();
+
+    this.companyName.valueChanges.subscribe((value) => {
+      if (value === '' && this.status.value === '') {
+        this.fetchContactsAfterValueChanges();
+      }
+    });
+
+    this.status.valueChanges.subscribe((value) => {
+      if (value === '' && this.companyName.value === '') {
+        this.fetchContactsAfterValueChanges();
+      }
+    });
 
     this.subscription$.add(
       this.companyService.getCompanyById(params.slug)
@@ -815,6 +830,7 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
     // this.firstTabLabel = 'Contacts';
     // this.hideTabs = false;
     this.batchId = batchId;
+    this.tabIndex = 0;
     const paginationObj = {
       pageNumber: 1, limit: 10,
       sort: { order: '' }
@@ -859,5 +875,33 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
         this.campaignData = res.campaigns;
       })
     }
+  }
+
+  fetchContactsAfterValueChanges() {
+    const paginationObj = {
+      pageNumber: this.paginator.pageIndex + 1, limit: this.paginator.pageSize ? this.paginator.pageSize : 10,
+      sort: {order: ''}};
+
+      this.emailService.getMailingListContacts(paginationObj, this.batchId).subscribe((res) => {
+        this.contactList = res.contacts;
+        this.totalContactCount = res.total;
+      });
+  }
+
+  searchClick() {
+    console.log(this.companyName.value, this.status.value, this.batchId);
+    const paginationObj = {
+      pageNumber: 1, limit: 10,
+      sort: {order: ''}};
+
+    const searchObj = {
+      companyName: this.companyName.value,
+      status: this.status.value
+    };
+    
+    this.emailService.getMailingListContacts(paginationObj, this.batchId, searchObj).subscribe((res) => {
+      this.contactList = res.contacts;
+      this.totalContactCount = res.total;
+    });
   }
 }

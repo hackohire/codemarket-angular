@@ -221,12 +221,12 @@ export class EmailService {
     );
   }
 
-  getMailingListContacts(pageOptions, batchId: string): Observable<any> {
+  getMailingListContacts(pageOptions, batchId: string, searchObj={companyName: '', status: ''}): Observable<any> {
     return this.apollo.query(
       {
         query: gql`
-          query getMailingListContacts($pageOptions: PageOptionsInput, $batchId: String) {
-            getMailingListContacts(pageOptions: $pageOptions, batchId: $batchId) {
+          query getMailingListContacts($pageOptions: PageOptionsInput, $batchId: String, $searchObj: searchInput) {
+            getMailingListContacts(pageOptions: $pageOptions, batchId: $batchId, searchObj: $searchObj) {
               total
               contacts {
                 _id
@@ -261,7 +261,8 @@ export class EmailService {
         `,
         variables: {
           pageOptions,
-          batchId
+          batchId,
+          searchObj
         },
         fetchPolicy: 'no-cache'
       }

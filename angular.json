@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "yoga": {
+    "codemarket": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -143,24 +143,24 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
             "port": 4800,
-            "browserTarget": "yoga:build"
+            "browserTarget": "codemarket:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "yoga:build:production"
+              "browserTarget": "codemarket:build:production"
             },
             "staging": {
-              "browserTarget": "yoga:build:staging"
+              "browserTarget": "codemarket:build:staging"
             },
             "yoga": {
-              "browserTarget": "yoga:build:yoga"
+              "browserTarget": "codemarket:build:yoga"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "yoga:build"
+            "browserTarget": "codemarket:build"
           }
         },
         "test": {
@@ -198,17 +198,17 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "yoga:serve"
+            "devServerTarget": "codemarket:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "yoga:serve:production"
+              "devServerTarget": "codemarket:serve:production"
             },
             "staging": {
-              "devServerTarget": "yoga:serve:staging"
+              "devServerTarget": "codemarket:serve:staging"
             },
             "yoga": {
-              "devServerTarget": "yoga:serve:yoga"
+              "devServerTarget": "codemarket:serve:yoga"
             }
           }
         },
@@ -277,5 +277,5 @@
       }
     }
   },
-  "defaultProject": "yoga"
+  "defaultProject": "codemarket"
 }

@@ -836,9 +836,21 @@
 <!-- Contact Template -->
 <ng-template #contactTemplate let-contacts="details">
     <div style="background: white;" fxLayout="column" fxLayoutGap="10px">
-        <div>
+        <div style="display: inline-flex;">
             <button type="button" mat-raised-button color="primary" (click)="moveToSaveEmailTab()"
                 style="width: auto; height: auto;margin: 10px;">{{ 'Add Mailing List' }}</button>
+            <mat-form-field style="margin-left: 10px;">
+                <mat-label>Company Name</mat-label>
+                <input matInput [formControl]="companyName"
+                        placeholder="Company Name">
+            </mat-form-field>
+            <mat-form-field style="margin-left: 10px;">
+                <mat-label>Status</mat-label>
+                <input matInput [formControl]="status"
+                        placeholder="Status">
+            </mat-form-field>
+            <button type="button" mat-raised-button color="primary" (click)="searchClick()"
+                style="width: auto; height: auto; margin: 10px;">{{ 'Search' }}</button>
         </div>
         <table class="table table-striped">
             <thead>

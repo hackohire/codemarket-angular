@@ -4,8 +4,8 @@ export const environment = {
   braintree_client: 'sandbox_x6kwrbkb_hnwczpyytcggqqth',
   paypal_client: 'AWyqKpeiqQS6vUI7k7u2LpwhSZr0ikUzcbYLM50aBLmwo2fAtIsVkZrSn5tWZ_bElFtV34Lj5Q3ukeqA',
   ckEditor: {
-    ckEditorEnvironMentId: 'qWCSnjZdhKZIm2BDeR6e',
-    ckEditorSecretKey: 'P5a0hCXZQn1yZFR2dHPM7FEiIdOi3lbCTQ3143cuCO6wHy8BdIwzja6CU5FR',
+    ckEditorEnvironMentId: 'lNhfJLReKhOcAuS6DETA',
+    ckEditorSecretKey: 'gRwAnkuYa1MoujVHAS9cEybuLh21BusIiUqz3DudMoH4PMgOhVI9ahNZ5WcG',
     ws: '71258.cke-cs.com/ws',
     developmentTokenUrl: 'https://71258.cke-cs.com/token/dev/qhNbD6xUjkeVtrEc7aD2PcMhDkgmirUJHunqRWESilB0mTzZ0RHcJYk68P6D'
   },

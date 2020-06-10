@@ -9,8 +9,8 @@ export const environment = {
   braintree_client: 'sandbox_x6kwrbkb_hnwczpyytcggqqth',
   paypal_client: 'ARaebJGRDl8q7x0IP1ZADKo4xUxYTq5WrU521uyMilOn4ylP3uTJv4UGkO4Q2uSdkcRsxnRP8vNQF1jW',
   ckEditor: {
-    ckEditorEnvironMentId: 'ZK5UoNVFJG2R3Kh4SrIC',
-    ckEditorSecretKey: 'HP771KcTLlvStVbtvwAGz5d3LhLgDlY50uJqNQ6nkS18kVP43ZPB1zOSLseK',
+    ckEditorEnvironMentId: 'I8Uqd2X3b4fDZjeaCgZd',
+    ckEditorSecretKey: 'q0jmffroHkmTpyVhVZAnstv5QTWZYjkVhaM5vgKwTKXy69fe3yD1P8DkZ3gt',
     ws: '71258.cke-cs.com/ws',
     developmentTokenUrl: 'https://71258.cke-cs.com/token/dev/qhNbD6xUjkeVtrEc7aD2PcMhDkgmirUJHunqRWESilB0mTzZ0RHcJYk68P6D'
   },

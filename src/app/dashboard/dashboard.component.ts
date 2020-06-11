@@ -27,21 +27,12 @@ export class DashboardComponent implements OnInit {
 
   @ViewChild('successInvitationAccept', { static: false }) successInvitationAccept: SwalComponent;
 
-  salesemailInput: string;
-  growsalesemailInput: string;
+  AllergyemailInput: string;
   pledgeemailInput: string;
   providejobemailInput: string;
   step1emailInput: string;
   step2emailInput: string;
   step3emailInput: string;
-  TwitteremailInput: string;
-  FacebookemailInput: string;
-  InstagramemailInput: string;
-  LinkedinemailInput: string;
-  YoutubeemailInput: string;
-  SnapchatemailInput: string;
-  PinterestemailInput: string;
-  MarketingemailInput: string;
 
   questionnaire: FormGroup;
   showAuth = false;

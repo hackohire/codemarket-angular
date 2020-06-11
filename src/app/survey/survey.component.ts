@@ -44,7 +44,7 @@ export class SurveyComponent implements OnInit {
     });
 
 
-    this.id = this.activatedRoute.snapshot.queryParams.id;
+    this.id = this.activatedRoute.snapshot.queryParams.id || '';
     if(this.id !== '') {
       console.log("Id ==> ", this.id);
       this.formBuilderService.fetchformDataById(this.id).subscribe((res) => {

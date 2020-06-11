@@ -55,7 +55,11 @@
         [mdePopoverArrowOffsetX]="58" mdePopoverArrowColor="#FFFFFF">
         <app-auth></app-auth>
       </mde-popover>
-    
+      
+      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'survey']">
+        <div class="line-height-initial"> Survey </div>
+      </a>
+      
       <!-- My Profile -->
       <button mat-button [matMenuTriggerFor]="userMenu" *ngIf="authService.loggedInUser; else logIn" style="padding: 0;">
         <a mat-button routerLinkActive="mat-primary" *ngIf="loggedInUser;"
@@ -88,6 +92,7 @@
             <span class="notification_count noti" style="height: 7px; min-width: 7px;"
               *ngIf="isUnread((messageService.messagesList$ | async)?.messages)"></span>
           </div> -->
+     
       <!-- <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'send-email']">
             <div class="line-height-initial"> Send Email </div>
           </a> -->

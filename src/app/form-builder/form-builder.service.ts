@@ -127,4 +127,52 @@ export class FormBuilderService {
     );
   }
 
+  fetchformDataById(formDataId: String): Observable<any> {
+    return this.apollo.query({
+      query: gql`
+        query fetchformDataById($formDataId: String) {
+          fetchformDataById(formDataId: $formDataId){
+            _id
+            formname
+            formDataJson
+            connectedFormStructureId
+            createdAt
+            updatedAt
+          }
+        }
+      `,
+      variables: {
+        formDataId
+      }
+    }).pipe(
+      map((q: any) => q.data.fetchformDataById)
+    );
+  }
+
+  fetchSavedDataByFormStructure(pageOptions, formStructureId: string): Observable<any> {
+    return this.apollo.query({
+      query: gql`
+        query fetchSavedDataByFormStructure($pageOptions: PageOptionsInput, $formStructureId: String) {
+          fetchSavedDataByFormStructure(pageOptions: $pageOptions, formStructureId: $formStructureId){
+            total
+            data {
+              _id
+              formname
+              formDataJson
+              createdBy {
+                _id
+                name
+              }
+            }
+          }
+        }
+      `,
+      variables: {
+        pageOptions,
+        formStructureId
+      }
+    }).pipe(
+      map((q: any) => q.data.fetchSavedDataByFormStructure)
+    );
+  }
 }

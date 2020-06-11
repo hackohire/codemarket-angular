@@ -17458,3 +17458,16 @@ input.mat-input-element {
 .field-full-width {
   margin: 0;
 }
+
+.resultscontent {
+  position: sticky !important;
+  top: 60px;
+  margin-left: 40px;
+  z-index: 9;
+  background: #1e69ac;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+  display: inline-block;
+  height: 10%;
+}

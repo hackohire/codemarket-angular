@@ -8,6 +8,7 @@ import { EmailMarketingComponent } from './email-marketing/email-marketing.compo
 import { SocialMediaMarketingComponent } from './social-media-marketing/social-media-marketing.component';
 import { VideoChatHomeComponent } from './video-chat/video-chat-home/video-chat-home.component';
 import { DonateComponent } from './donate/donate.component';
+import { SurveyComponent } from './survey/survey.component';
 // import { PostDataResolver } from './core/resolver';
 
 const routes: Routes = [
@@ -70,6 +71,14 @@ const routes: Routes = [
   {
     path: `send-email`,
     loadChildren: () => import('../app/email/send-email/send-email.module').then(module => module.SendEmailModule),
+  },
+  {
+    path: `survey`,
+    loadChildren: () => import('../app/survey/survey.module').then(module => module.SurveyModule),
+  },
+  {
+    path: `form-data`,
+    loadChildren: () => import('../app/form-data/form-data.module').then(module => module.FormDataModule),
   },
   {
     path: 'company',

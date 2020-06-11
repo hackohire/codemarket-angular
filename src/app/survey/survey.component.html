@@ -1,0 +1,26 @@
+<div class="container">
+    <div style="display: inline-flex;">
+        <div *ngIf="fillForm">
+            <formio [form]="form1" (change)="valueChangeFun($event)" (submit)="onSubmitForm($event)"></formio>
+        </div>
+        <div *ngIf="!fillForm">
+            <div *ngFor="let data of individualPoints;let i = index">
+                <div>
+                    <h4>{{data.label}}</h4>
+                    <div style="display: inline-flex; margin: 10px">
+                        <h6>Points => </h6>
+                        <h6 class="point">{{data.value}}</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="resultscontent">
+            <div class="preview">
+              <h3>Total Points</h3>
+            </div>
+            <div aria-live="polite" class="preview preview-results" role="status">
+              <h5>{{totalPoints}}</h5>
+            </div>
+          </div>
+    </div>
+</div>

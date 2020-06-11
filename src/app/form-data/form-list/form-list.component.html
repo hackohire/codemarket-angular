@@ -1,0 +1,57 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="add-form-area common-box-shadow" *ngIf="formList.length > 0; else noDataTemplate">
+                <h2>List Of Forms</h2>
+
+                <div class="row">
+                    <div class="col-md-3" *ngFor="let form of formList; let i=index">
+                        <button type="button" (click)="formButtonClick(form?._id)"
+                            mat-raised-button color="primary"
+                            style="margin: 12px; height: 35px;">{{ form?.formname }}</button>
+                    </div>
+                </div>
+            </div>
+
+            <ng-template #noDataTemplate>
+                <span>No Data Available</span>
+            </ng-template>
+
+            <ng-template #campaignsTemplate [ngIf]="savedFormData?.length">
+                <div style="background: white;">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Name
+                                    <!-- <span *ngIf="nameAsc">
+                                        <i class="fas fa-sort-up" (click)="changeOrder('name','asc','contact')"></i>
+                                    </span>
+                                    <span *ngIf="!nameAsc">
+                                        <i class="fas fa-sort-down" (click)="changeOrder('name','desc','contact')"></i>
+                                    </span> -->
+                                </th>
+                                <th>Total Points
+                                    <!-- <span *ngIf="emailAsc">
+                                        <i class="fas fa-sort-up" (click)="changeOrder('email','asc','contact')"></i>
+                                    </span>
+                                    <span *ngIf="!emailAsc">
+                                        <i class="fas fa-sort-down" (click)="changeOrder('email','desc','contact')"></i>
+                                    </span> -->
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let e of savedFormData">
+                                <td>{{e?.createdBy?.name}}</td>
+                                <td>{{e?.totalPoints}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- <app-paginator [length]="campaignsList[0]?.count"
+                    (fetchData)="paginator = $event; fetchEmailsOfCampaign()">
+                </app-paginator> -->
+            </ng-template>
+        </div>
+    </div>
+</div>

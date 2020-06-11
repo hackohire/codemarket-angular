@@ -16,7 +16,7 @@ export interface User {
     programming_languages?: string[];
     avatar?: string;
     cover?: string;
-    roles?: Roles[];
+    roles?: any[];
     stripeId?: string;
     createdAt?: string;
     slug?: string;

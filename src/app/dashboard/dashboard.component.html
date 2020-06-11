@@ -1,7 +1,7 @@
 <!-- Header Section Starts HERE -->
 
 <!-- <section class="hero-area bgimage"> -->
-
+<!-- 
 <div class="container-fluid">
     <div class="row" style="min-height: calc(100vh - 48px);">
         <div class="col-lg-6 order-1 order-lg-1 pt-3 pt-lg-0 pb-3 pb-lg-0 px-lg-5 hero-img d-flex flex-column justify-content-center aos-init aos-animate"  data-aos="fade-left" style="background-color: #333;">
@@ -25,14 +25,10 @@
                     style="font-size: 26px; line-height: normal; max-width: 100%; text-align: left;color:#999;margin-bottom: 1.5rem;font-weight: 100;">
                     {{rightSubTitle.date}}  {{rightSubTitle.time}}  <a href="{{rightSubTitle.zoom}}" target="_blank">Zoom </a>
                 </h2>
-                <!-- <h1 style="font-size: 1.9em; line-height: normal; margin: 20px 0 0 0; font-weight: 200; text-align: left; color:#00aeef">
-                            <a class="btn btn-primary btn-md" [routerLink]="['/', 'company', 'add-company']">JOIN TODAY</a>
-                        </h1> -->
                 <form *ngIf="questionnaire" [formGroup]="questionnaire">
                     <mat-horizontal-stepper linear #stepper (selectionChange)="test($event)">
                         <mat-step
                             *ngFor="let formField of convertObjectToArray(questionnaire?.controls); let i = index; let l = last; let f = first;">
-                            <!-- <h3>{{fields[i]?.label}}</h3> -->
                             <ng-container [ngSwitch]="fields[i]?.type">
                                 <mat-form-field *ngSwitchCase="'textarea'" class="field-full-width"
                                     appearance="outline">
@@ -62,51 +58,39 @@
                     </mat-horizontal-stepper>
                 </form>
             </div>
-            <!-- <ng-template #authUI>
-                <app-auth></app-auth>
-            </ng-template> -->
         </div>
     </div>
-</div>
+</div> 
+-->
 
-<section id="hero" style="padding: 40px 0;background: #ffffff;">
+<section id="hero" style="background: #ffffff;">
     <!-- <div style="position: absolute; top: 51px; left: 82px; font-size: 20px; color: #000;">
         Grow Your <span style="color: #00aeef;">Business</span></div> -->
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-5 hero-img aos-init aos-animate" data-aos="fade-left">
-                <img src="../../assets/images/HateFree.png" class="img-fluid" alt="" style="max-height: 320px;">
+            <div class="col-lg-6 py-4 hero-img aos-init aos-animate text-center" style="background-color: #333;" data-aos="fade-left">
+                <img src="../../assets/images/Header.svg" class="img-fluid" alt="" style="max-height: 400px;">
             </div>
-            <div class="col-lg-7 pt-5 pt-lg-0 d-flex flex-column justify-content-center aos-init aos-animate"
+            <div class="col-lg-6 py-5 py-lg-0 px-0 px-lg-5 d-flex flex-column justify-content-center aos-init aos-animate"
                 data-aos="fade-up">
-                <h1
-                    style="font-size: 36px; line-height: normal; max-width: 100%; text-align: left; color:#00aeef; text-transform: none; margin-top: 1rem; letter-spacing: 1px; font-weight: 400;">
-                    TAKE ACTION IN BUILDING A UNITED HATE-FREE WORLD
+                <h1 style="font-size: 36px; line-height: normal; max-width: 100%; color:#00aeef; text-transform: none; margin: 0 0 1rem 0; letter-spacing: 1px; font-weight: 400;">
+                    ALLERGY FREE TODAY
                 </h1>
-                <!-- <h2
-                    style="font-size: 24px; line-height: normal; max-width: 100%; text-align: left;color:#999;margin-bottom: 1.5rem;font-weight: 100;">
-                    <i>Data.AI/ML.Software.</i>
-                </h2> -->
-                <!-- <h1 style="font-size: 32px; line-height: normal; margin: 20px 0 0 0; font-weight: 200; text-align: left; font-family: 'Rectory Regular';color:#0674ec">
-                        <a class="btn btn-primary btn-md" [routerLink]="['/', 'company', 'add-company']">JOIN TODAY</a>
-                    </h1> -->
-                <!-- <form>
+                <form>
                     <div id="append_location" class="individuals-signup-cta__form-group">
                         <label class="individuals-signup-cta__label">Enter your email address</label>
                         <input type="hidden" name="fyi_from_landing" value="true">
-                        <input [(ngModel)]="salesemailInput" id="email_input"
+                        <input [(ngModel)]="AllergyemailInput" id="email_input"
                             class="individuals-signup-cta__email-input email_input" type="email" name="fyi_email">
-                        <button [disabled]="!salesemailInput" id="submitBtn" class="google-button special" type="button"
-                            [routerLink]="['../', 'help-business-grow']" [queryParams]="{email: salesemailInput}">
+                        <button [disabled]="!AllergyemailInput" id="submitBtn" class="google-button special"
+                            type="button" [routerLink]="['../', 'help-business-grow']"
+                            [queryParams]="{email: AllergyemailInput}">
                             <span class="button-flex-wrapper">
                                 Start Today
                             </span>
                         </button>
                     </div>
                 </form>
-                <div class="individuals-signup__underform">
-                    <span>Safe. Secure. Organized.</span>
-                </div> -->
             </div>
         </div>
     </div>
@@ -115,26 +99,7 @@
 <section style="padding: 60px 0;background: #f2f9ff;">
     <div class="container">
         <div class="row">
-            <div class="col-lg-6 order-1 order-lg-1 d-flex flex-column justify-content-center aos-init aos-animate"
-                data-aos="fade-up">
-                <div>
-                    <h1
-                        style="font-size: 36px; font-weight: 100; line-height: normal; max-width: 100%; text-align: left;color:#000; text-transform: none;margin: 20px 0;">
-                        Pledge to be part of the solution to end hate in our community by donating 1 hr/month of your
-                        time to mentor & teach.
-                    </h1>
-                    <!-- <h1 style="font-size: 36px; font-weight: 100; line-height: normal; max-width: 100%; text-align: left;color:#000; text-transform: none;margin: 20px 0;">
-                        Pledge to be part of the solution to end hate in our community by donating 1 hr/month of your time to mentor & teach.
-                    </h1> -->
-                    <!-- <h2 style="font-size: 24px; line-height: normal; max-width: 100%; text-align: left;color:#999;margin-bottom: 1.5rem;font-weight: 100;">
-                        CONNECT & MANAGE ALL YOUR DATA FROM ONE CENTER
-                    </h2> -->
-                    <!-- <h1 style="font-size: 32px; line-height: normal; margin: 20px 0 0 0; font-weight: 200; text-align: left; font-family: 'Rectory Regular';color:#0674ec">
-                            <a class="btn btn-primary btn-md" [routerLink]="['/', 'company', 'add-company']">JOIN TODAY</a>
-                        </h1> -->
-                </div>
-            </div>
-            <div class="col-lg-6 order-2 order-lg-2 pt-5 pt-lg-0 d-flex flex-column justify-content-center aos-init aos-animate"
+            <div class="col-lg-6 order-2 order-lg-1 pt-5 pt-lg-0 d-flex flex-column justify-content-center aos-init aos-animate"
                 data-aos="fade-left">
                 <form>
                     <div id="append_location" class="individuals-signup-cta__form-group">
@@ -155,6 +120,16 @@
                     <span>Safe. Secure. Organized.</span>
                 </div>
             </div>
+            <div class="col-lg-6 order-1 order-lg-2 d-flex flex-column justify-content-center aos-init aos-animate"
+                data-aos="fade-up">
+                <div>
+                    <h1
+                        style="font-size: 36px; font-weight: 100; line-height: normal; max-width: 100%; text-align: left;color:#000; text-transform: none;margin: 20px 0;">
+                        Pledge to be part of the solution to end hate in our community by donating 1 hr/month of your
+                        time to mentor & teach.
+                    </h1>
+                </div>
+            </div>
         </div>
     </div>
 </section>
@@ -162,45 +137,34 @@
 <section style="padding: 60px 0;background: #00aeef;">
     <div class="container">
         <div class="row">
-            <div class="col-lg-6 order-2 order-lg-1 pt-5 pt-lg-0 d-flex flex-column justify-content-center aos-init aos-animate"
-                data-aos="fade-up">
-                <div>
-                    <!-- <h1 style="font-size: 36px; font-weight: 100; line-height: normal; max-width: 100%; text-align: left;color:#000; text-transform: none;margin: 20px 0;">
-                        If you are a company, pledge to provide job opportunities to those that take action to build hate-free communities.
-                    </h1> -->
-                    <!-- <h2 style="font-size: 24px; line-height: normal; max-width: 100%; text-align: left;color:#999;margin-bottom: 1.5rem;font-weight: 100;">
-                        CONNECT & MANAGE ALL YOUR DATA FROM ONE CENTER
-                    </h2> -->
-                    <!-- <h1 style="font-size: 32px; line-height: normal; margin: 20px 0 0 0; font-weight: 200; text-align: left; font-family: 'Rectory Regular';color:#0674ec">
-                            <a class="btn btn-primary btn-md" [routerLink]="['/', 'company', 'add-company']">JOIN TODAY</a>
-                        </h1> -->
-                    <form>
-                        <div id="append_location" class="individuals-signup-cta__form-group" style="border: 0;">
-                            <label class="individuals-signup-cta__label">Enter your email address</label>
-                            <input type="hidden" name="fyi_from_landing" value="true">
-                            <input [(ngModel)]="providejobemailInput" id="email_input"
-                                class="individuals-signup-cta__email-input email_input" type="email" name="fyi_email">
-                            <button [disabled]="!providejobemailInput" id="submitBtn" class="google-button special"
-                                type="button" [routerLink]="['../', 'help-business-grow']"
-                                [queryParams]="{email: providejobemailInput}">
-                                <span class="button-flex-wrapper">
-                                    Start Today
-                                </span>
-                            </button>
-                        </div>
-                    </form>
-                    <div class="individuals-signup__underform" style="color:#fff;">
-                        <span>Safe. Secure. Organized.</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 order-1 order-lg-2 d-flex flex-column justify-content-center aos-init aos-animate"
+            <div class="col-lg-6 order-1 order-lg-1 d-flex flex-column justify-content-center aos-init aos-animate"
                 data-aos="fade-left">
                 <h1
                     style="font-size: 36px; font-weight: 100; line-height: normal; max-width: 100%; text-align: left;color:#fff; text-transform: none;margin: 20px 0;">
                     If you are a company, pledge to provide job opportunities to those that take action to build
                     hate-free communities.
                 </h1>
+            </div>
+            <div class="col-lg-6 order-2 order-lg-2 pt-5 pt-lg-0 d-flex flex-column justify-content-center aos-init aos-animate"
+                data-aos="fade-up">
+                <form>
+                    <div id="append_location" class="individuals-signup-cta__form-group" style="border: 0;">
+                        <label class="individuals-signup-cta__label">Enter your email address</label>
+                        <input type="hidden" name="fyi_from_landing" value="true">
+                        <input [(ngModel)]="providejobemailInput" id="email_input"
+                            class="individuals-signup-cta__email-input email_input" type="email" name="fyi_email">
+                        <button [disabled]="!providejobemailInput" id="submitBtn" class="google-button special"
+                            type="button" [routerLink]="['../', 'help-business-grow']"
+                            [queryParams]="{email: providejobemailInput}">
+                            <span class="button-flex-wrapper">
+                                Start Today
+                            </span>
+                        </button>
+                    </div>
+                </form>
+                <div class="individuals-signup__underform" style="color:#fff;">
+                    <span>Safe. Secure. Organized.</span>
+                </div>
             </div>
         </div>
     </div>

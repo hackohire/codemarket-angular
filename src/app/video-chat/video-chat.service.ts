@@ -1,7 +1,7 @@
 import { connect, ConnectOptions, LocalTrack, Room } from 'twilio-video';
 import { Injectable } from '@angular/core';
 import gql from 'graphql-tag';
-import { ReplaySubject, Observable } from 'rxjs';
+import { ReplaySubject, Observable, BehaviorSubject } from 'rxjs';
 import { Apollo } from 'apollo-angular';
 import { map } from 'rxjs/operators';
 import { AuthService } from '../core/services/auth.service';
@@ -25,8 +25,11 @@ export type Rooms = NamedRoom[];
 })
 export class VideoChatService {
     $roomsUpdated: Observable<boolean>;
+    $localStreamUpdated: Observable<any>;
 
     private roomBroadcast = new ReplaySubject<boolean>();
+
+    streamUpdate = new BehaviorSubject(null);
 
     constructor(
         private apollo: Apollo,
@@ -34,6 +37,7 @@ export class VideoChatService {
         private http: HttpClient
     ) {
         this.$roomsUpdated = this.roomBroadcast.asObservable();
+        this.$localStreamUpdated = this.streamUpdate.asObservable();
     }
 
     private async getAuthToken() {

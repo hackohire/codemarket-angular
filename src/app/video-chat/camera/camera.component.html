@@ -1,3 +1,12 @@
 <div id="preview" #preview>
     <div *ngIf="isInitializing">Loading preview... Please wait.</div>
 </div>
+
+<video style="width:100%;" #myVideo playsinline controls autoplay></video>
+
+<button mat-raised-button color="primary" *ngIf="allowScreenShare && !isScreenSharing" (click)="screenShare()">
+    <mat-icon>screen_share</mat-icon>
+</button>
+<!-- <button mat-raised-button color="primary" *ngIf="isScreenSharing" (click)="stopScreenShare()">
+    <mat-icon>stop_screen_share</mat-icon>
+</button> -->

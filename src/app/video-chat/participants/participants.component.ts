@@ -8,6 +8,7 @@ import { Participant, RemoteTrack, RemoteAudioTrack, RemoteVideoTrack, RemotePar
 })
 export class ParticipantsComponent {
   @ViewChild('list', { static: false }) listRef: ElementRef;
+  @ViewChild('remoteVideo', { static: false }) remoteVideo: ElementRef;
   @Output() participantsChanged = new EventEmitter<boolean>();
   @Output() leaveRoom = new EventEmitter<boolean>();
   @Input() activeRoomName: string;
@@ -85,7 +86,7 @@ export class ParticipantsComponent {
       this.renderer.data.id = track.sid;
       this.renderer.setStyle(element, 'width', '95%');
       this.renderer.setStyle(element, 'margin-left', '2.5%');
-      this.renderer.appendChild(this.listRef.nativeElement, element);
+      this.renderer.setProperty(this.remoteVideo.nativeElement, 'srcObject', element.srcObject);
       this.participantsChanged.emit(true);
     }
   }

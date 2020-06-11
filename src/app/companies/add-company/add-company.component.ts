@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { BreadCumb } from '../../shared/models/bredcumb.model';
 import { FormGroup, FormArray, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { MatAutocomplete } from '@angular/material';
@@ -8,11 +8,10 @@ import { ActivatedRoute } from '@angular/router';
 import { FormService } from '../../shared/services/form.service';
 import { catchError, } from 'rxjs/operators';
 import { Subscription, of } from 'rxjs';
-import { Tag } from '../../shared/models/product.model';
+import { Tag } from '../../shared/models/post.model';
 import { CompanyService } from '../company.service';
 import { CompanyTypes, Company } from '../../shared/models/company.model';
 import Swal from 'sweetalert2';
-import { LocationService } from '../../shared/services/location.service';
 import { environment } from '../../../environments/environment';
 import { PostService } from '../../shared/services/post.service';
 import { PostType } from '../../shared/models/post-types.enum';
@@ -60,16 +59,9 @@ export class AddCompanyComponent implements OnInit {
     return this.companyForm.get('location');
   }
 
-  visible = true;
-  selectable = true;
-  removable = true;
-  addOnBlur = true;
-
   listOfCompanies: any[] = [];
   companiesPageNumber = 1;
   totalCompanies: number;
-
-  listOfBusinessChallenges: any[] = [];
 
   subscription$: Subscription;
 
@@ -78,22 +70,13 @@ export class AddCompanyComponent implements OnInit {
 
   allCities: Tag[];
 
-  /** Location Variables */
-  zoom: number = 15;
-  @ViewChild('searchLocation', { static: true }) public searchLocation: ElementRef;
-
-  @ViewChild('searchInput', { static: false }) searchInput: ElementRef<HTMLInputElement>;
-  @ViewChild('auto', { static: false }) matAutocomplete: MatAutocomplete;
-
   @ViewChild('descriptionEditor', { static: false }) descriptionEditor: EditorComponent;
 
   constructor(
     private authService: AuthService,
-    private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
     public formService: FormService,
     public companyService: CompanyService,
-    public locationService: LocationService,
     public postService: PostService
     // @Inject(MAT_DIALOG_DATA) public data: any,
     // public dialogRef: MatDialogRef<AddCompanyComponent>
@@ -103,11 +86,10 @@ export class AddCompanyComponent implements OnInit {
     const params: any = this.activatedRoute.snapshot.params;
 
     this.breadcumb = {
-      title: 'Add Business',
+      title: 'Add Company',
       path: [
-
         {
-          name: 'Add Business'
+          name: 'Add Company'
         }
       ]
     };
@@ -125,7 +107,6 @@ export class AddCompanyComponent implements OnInit {
 
   ngOnInit() {
     this.fetchCompanies(1);
-    this.fetchBusinessChallenges();
   }
 
   async companyFormInitialization(i: Company) {
@@ -133,20 +114,17 @@ export class AddCompanyComponent implements OnInit {
       name: new FormControl(i && i.name ? i.name : '', Validators.required),
       type: new FormControl(i && i.type ? i.type : ''),
       cities: new FormControl(i && i.cities && i.cities.length ? i.cities : []),
-      description: new FormControl(i && i.description ? i.description : ''),
+      // description: new FormControl(i && i.description ? i.description : ''),
       // ideas: new FormControl(i && i.ideas ? i.ideas : ''),
       // questions: new FormControl(i && i.questions ? i.questions : ''),
       createdBy: new FormControl(i && i.createdBy && i.createdBy._id ? i.createdBy._id : ''),
+      owners: new FormControl(i && i.owners ? i.owners : []),
       status: new FormControl(i && i.status ? i.status : 'Created'),
       _id: new FormControl(i && i._id ? i._id : ''),
       location: new FormGroup({
-        latitude: new FormControl(i && i.location ? i.location.latitude : 0),
-        longitude: new FormControl(i && i.location ? i.location.longitude : 0),
         address: new FormControl(i && i.location ? i.location.address : ''),
       }),
     });
-
-    await this.locationService.setLocaionSearhAutoComplete(this.searchLocation, this.locationFormGroup);
 
     this.formService.findFromCollection('', 'cities').subscribe((cities) => {
       this.allCities = cities;
@@ -162,8 +140,8 @@ export class AddCompanyComponent implements OnInit {
     }
     // this.statusFormControl.setValue(status);
 
-    const blocks =  await this.descriptionEditor.editor.save();
-    this.descriptionFormControl.setValue(blocks.blocks);
+    // const blocks =  await this.descriptionEditor.editor.save();
+    // this.descriptionFormControl.setValue(blocks.blocks);
 
     if (this.authService.loggedInUser && !this.createdBy.value) {
       this.createdBy.setValue(this.authService.loggedInUser._id);
@@ -180,7 +158,7 @@ export class AddCompanyComponent implements OnInit {
       ).subscribe((d: any) => {
         if (d) {
           Swal.fire(`${d.name} has been Created Successfully`, '', 'success').then(() => {
-            this.companyService.redirectToCompanyDetails(d._id);
+            this.companyService.redirectToCompanyDetails(d._id, d.slug);
           });
           this.companyFormInitialization(d);
         }
@@ -196,7 +174,7 @@ export class AddCompanyComponent implements OnInit {
         .subscribe((d: any) => {
           if (d) {
             Swal.fire(`${d.name} has been Updated Successfully`, '', 'success').then(() => {
-              this.companyService.redirectToCompanyDetails(d._id);
+              this.companyService.redirectToCompanyDetails(d._id, d.slug);
             });
             this.companyFormInitialization(d);
           }
@@ -205,18 +183,10 @@ export class AddCompanyComponent implements OnInit {
   }
 
   fetchCompanies(pageNumber) {
-    this.companyService.getCompaniesByType('', {pageNumber, limit: 3}).subscribe((dj: any) => {
+    this.companyService.getCompaniesByType('', { pageNumber, limit: 3 }).subscribe((dj: any) => {
       if (dj && dj.companies) {
         this.listOfCompanies = this.listOfCompanies.concat(dj.companies);
         this.totalCompanies = dj.total;
-      }
-    });
-  }
-
-  fetchBusinessChallenges() {
-    this.postService.getAllPosts({pageNumber: 1, limit: 3}, 'business-challenge').subscribe((dj: any) => {
-      if (dj && dj.posts) {
-        this.listOfBusinessChallenges = dj.posts;
       }
     });
   }

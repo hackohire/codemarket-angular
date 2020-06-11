@@ -3,12 +3,11 @@ import { AuthService } from './core/services/auth.service';
 import { Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from './core/store/state/app.state';
-import { GetCartProductsList } from './core/store/actions/cart.actions';
 import { tap } from 'rxjs/operators';
 import { MatDialog } from '@angular/material';
 import { VideoChatComponent } from './video-chat/video-chat.component';
-// import { UserService } from './user/user.service';
-// import Peer from 'peerjs';
+import { UserService } from './user/user.service';
+import Peer from 'peerjs';
 import { environment } from '../environments/environment';
 import { isPlatformBrowser, DOCUMENT } from '@angular/common';
 import { RouteHelperService } from './core/services/route-helper.service';
@@ -29,7 +28,8 @@ export class AppComponent implements OnInit, OnDestroy {
     public dialog: MatDialog,
     // private userService: UserService,
     private routeHelper: RouteHelperService,
-    private seoService: SeoService
+    private seoService: SeoService,
+    private userService: UserService
   ) {
 
     this.seoService.setTwitterSiteCreator(appConstants.SEO.title);
@@ -51,25 +51,24 @@ export class AppComponent implements OnInit, OnDestroy {
         tap((u) => {
           if (u) {
 
-            // const peer = new Peer(u._id);
+            const peer = new Peer(u._id);
 
-            // peer.on('open', (id) => {
-            //   console.log('My peer ID is: ' + id);
-            //   if (id) {
-            //     this.userService.peer.next(peer);
-            //   }
-            // });
+            peer.on('open', (id) => {
+              console.log('My peer ID is: ' + id);
+              if (id) {
+                this.userService.peer.next(peer);
+              }
+            });
 
-            // peer.on('call', (call) => {
-            //   console.log(call);
-            //   this.openDialog(call, peer);
-            // });
-            this.store.dispatch(GetCartProductsList());
+            peer.on('call', (call) => {
+              console.log(call);
+              // this.openDialog(call, peer);
+            });
+            // this.store.dispatch(GetCartProductsList());
           }
         })
       ).subscribe()
     );
-
   }
 
   public ngOnInit(): void {
@@ -86,10 +85,10 @@ export class AppComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  openDialog(call, peer): void {
+  openDialog(): void {
     this.dialog.open(VideoChatComponent, {
       width: '550px',
-      data: { isSomeoneCalling: true, call, peer },
+      data: { isSomeoneCalling: true },
       disableClose: true
     });
   }

@@ -2,26 +2,24 @@ import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { Hub } from '@aws-amplify/core';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
-import { map, catchError, tap, take } from 'rxjs/operators';
+import { map, catchError, tap } from 'rxjs/operators';
 import { of } from 'rxjs/internal/observable/of';
 import { CognitoUser, CognitoUserSession } from 'amazon-cognito-identity-js';
 import Auth from '@aws-amplify/auth';
-import { environment } from 'src/environments/environment';
 import { Store } from '@ngrx/store';
 import { AppState } from '../store/state/app.state';
 import { Authorise, SetLoggedInUser } from '../store/actions/user.actions';
 import { selectLoggedInUser } from '../store/selectors/user.selector';
-import { Observable, BehaviorSubject, Subscription, Subject } from 'rxjs';
+import { Observable, BehaviorSubject, Subscription } from 'rxjs';
 import { User } from '../../shared/models/user.model';
 import { Router } from '@angular/router';
 import { isPlatformBrowser, DOCUMENT, isPlatformServer } from '@angular/common';
-import { comment } from '../../shared/constants/fragments_constatnts';
 import { appConstants } from '../../shared/constants/app_constants';
-import { Comment } from '../../shared/models/comment.model';
 import { ToastrService } from 'ngx-toastr';
 import { TransferState, makeStateKey } from '@angular/platform-browser';
 import { MessageService } from '../../shared/services/message.service';
 import { NotificationService } from '../../auth/notification.service';
+import moment from 'moment';
 
 export interface NewUser {
   email: string;
@@ -36,13 +34,19 @@ export interface NewUser {
 export class AuthService {
 
   /** Authentication Related Variables */
-  _authState: BehaviorSubject<CognitoUser|any> = new BehaviorSubject<CognitoUser|any>(null);
-  authState: Observable<CognitoUser|any> = this._authState.asObservable();
+  _authState: BehaviorSubject<CognitoUser | any> = new BehaviorSubject<CognitoUser | any>(null);
+  authState: Observable<CognitoUser | any> = this._authState.asObservable();
 
   loggedInUser$: Observable<User>;
   loggedInUser: User;
   openAuthenticationPopover = new BehaviorSubject<boolean>(false);
   subscriptions$ = new Subscription();
+
+  navigationPostList$ = new BehaviorSubject([]);
+  postUpdateCount = 0;
+  selectedPostId = '';
+
+  navigationPostListObservable: Observable<any[]>;
 
   constructor(
     private apollo: Apollo,
@@ -56,6 +60,7 @@ export class AuthService {
     private _notification: NotificationService
     // private commentService: CommentService
   ) {
+
     this.loggedInUser$ = this.store.select(selectLoggedInUser);
     this.loggedInUser$.subscribe((u) => this.loggedInUser = u);
 
@@ -70,7 +75,7 @@ export class AuthService {
 
         if (payload.event === 'signIn') {
           this.checkIfUserIsLoggedIn();
-          this.router.navigate(['/', 'dashboard', 'bugfixes-all']);
+          this.router.navigate(['/', 'dashboard', 'my-profile']);
         } else if (payload.event === 'oAuthSignOut') {
           this.store.dispatch(SetLoggedInUser({ payload: null }));
         }
@@ -84,7 +89,9 @@ export class AuthService {
     if (this.transferState.hasKey(key)) {
       const user = this.transferState.get(key, null);
       this.transferState.remove(key);
-      this.setUserOnline(user);
+      if (user) {
+        this.setUserOnline(user);
+      }
       return of(user);
     }
     return this.apollo.mutate(
@@ -99,6 +106,7 @@ export class AuthService {
               github_url
               stackoverflow_url
               location
+              slug
               currentJobDetails {
                 jobProfile {
                   name
@@ -126,7 +134,6 @@ export class AuthService {
               avatar
               cover
               roles
-              likeCount
               createdAt
               stripeId
             }
@@ -142,7 +149,9 @@ export class AuthService {
         if (isPlatformServer(this._platformId)) {
           this.transferState.set(key, d.data.authorize);
         }
-        this.setUserOnline(d.data.authorize);
+        if (d && d.data && d.data.authorize) {
+          this.setUserOnline(d.data.authorize);
+        }
         return d.data.authorize;
       }),
       catchError(e => of(e)),
@@ -151,7 +160,7 @@ export class AuthService {
 
   /** Authentication Related Methods Starts here */
 
-  signUp(user: NewUser): Promise<CognitoUser|any> {
+  signUp(user: NewUser): Promise<CognitoUser | any> {
     return Auth.signUp({
       username: user.email,
       password: user.password,
@@ -162,12 +171,12 @@ export class AuthService {
     });
   }
 
-  signIn(username: string, password: string): Promise<CognitoUser|any> {
+  signIn(username: string, password: string): Promise<CognitoUser | any> {
     return new Promise((resolve, reject) => {
       Auth.signIn(username, password)
-      .then((user: CognitoUser|any) => {
-        resolve(user);
-      }).catch((error: any) => reject(error));
+        .then((user: CognitoUser | any) => {
+          resolve(user);
+        }).catch((error: any) => reject(error));
     });
   }
 
@@ -187,12 +196,14 @@ export class AuthService {
     const USER_SUBSCRIPTION = gql`
     subscription onUserOnline($user: UserInput) {
       onUserOnline(user: $user){
-        onCommentAdded {
-          ...Comments
+        postUpdated {
+          post {
+            ...Post
+          }
         }
       }
     }
-    ${comment}
+    ${appConstants.postQuery}
     `;
     this.apollo.subscribe({
       query: USER_SUBSCRIPTION,
@@ -206,13 +217,21 @@ export class AuthService {
     }).pipe(
       map((u: any) => u.data.onUserOnline),
       tap((u) => {
-        if (u.onCommentAdded) {
-
+        if (u.postUpdated && u.postUpdated.post) {
           /** Audio Notification */
-          var audio = new Audio(appConstants.Notification);
-          audio.play();
-          this.messageService.addNewMessage(u.onCommentAdded);
+          // var audio = new Audio(appConstants.Notification);
+          // audio.play();
+          // this.messageService.addNewMessage(u.onCommentAdded);
           // this.openToastrNotification(u.post, u.onCommentAdded, true);
+          u.postUpdated.post['isLatest'] = true;
+          const i = this.navigationPostList$.value.findIndex(p => p._id === u.postUpdated.post._id);
+
+          if (i > -1) {
+            this.navigationPostList$.value.splice(i, 1);
+          }
+          this.navigationPostList$.next([u.postUpdated.post, ...this.navigationPostList$.value]);
+
+          this.postUpdateCount = this.navigationPostList$.value.filter(p => p['isLatest']).length;
         }
       })
     )
@@ -270,15 +289,6 @@ export class AuthService {
     if (isPlatformBrowser(this._platformId)) {
       localStorage.setItem('idToken', idToken);
     }
-  }
-
-  login(): void {
-    // const config = Amplify.Auth._config;
-    // const oauth = Amplify.Auth._config.oauth;
-    // const url = `${environment.COGNITO_AUTH_DOMAIN}/login?response_type=${oauth.responseType}&client_id=${config.aws_user_pools_web_client_id}&redirect_uri=${oauth.redirectSignIn}`;
-    // console.log(Amplify.Auth._config);
-    // window.location.assign(url);
-    Auth.federatedSignIn();
   }
 
   logout(): void {
@@ -345,4 +355,41 @@ export class AuthService {
       });
     });
   }
+
+  /** CKEditor Token Required to set for the realtime collaboration */
+  generateCkEditorToken(user: User, role: string) {
+    return this.apollo.mutate(
+      {
+        mutation: gql`
+        mutation generateCkEditorToken($user: UserInput!, $role: String) {
+          generateCkEditorToken(user: $user, role: $role)
+        }
+        `,
+        variables: {
+          user,
+          role
+        },
+        fetchPolicy: 'no-cache'
+      }
+    ).pipe(
+      map((d: any) => {
+        return d.data.generateCkEditorToken;
+      })
+    );
+  }
+
+  getDate(d: string) {
+    return moment(d).isValid() ? d : new Date(+d);
+  }
+
+  fromNow(date) {
+    const d = moment(date).isValid() ? date : new Date(+date);
+    return moment(d).fromNow();
+  }
+
+  timeDifference(date) {
+    const a = moment(date).isValid() ? date : new Date(+date);
+    return moment(a).calendar();
+  }
+
 }

@@ -1,0 +1,19 @@
+<p>AAAAAAAAAAAAAA</p>
+<div class="wrap">
+    <mat-chip-list style="display: block; padding-bottom: 20px;">
+        <mat-chip *ngFor="let ba of selectedBusinessAreas" [removable]="true"
+            (removed)="removeSelectedBusinessAreas(ba)">
+            {{ba.name}}
+            <mat-icon matChipRemove>cancel</mat-icon>
+        </mat-chip>
+    </mat-chip-list>
+    <!-- <p></p> -->
+    
+    <div class="line">
+        <a class="area-btn" #area
+            (click)="addSelectedBusinessAreas(b); area.classList.toggle('active'); check.classList.toggle('far');  check.classList.toggle('fa-check-circle')"
+            *ngFor="let b of businessAreas">
+            <span><i #check style="margin-right: 5px;"></i>{{b?.name}}</span>
+        </a>
+    </div>
+</div>

@@ -4,5 +4,15 @@
 }
 
 .comment-actions {
-    width: 112%;
+    // width: 112%;
+}
+
+.c-message__reply_bar_description {
+    position: relative;
+    margin-left: 8px;
+    color: rgba(var(--sk_foreground_max_solid,97,96,97),1);
+    flex: 1;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }

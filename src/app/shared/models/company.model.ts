@@ -1,5 +1,5 @@
 import { User } from './user.model';
-import { BlockToolData } from '@editorjs/editorjs';
+
 import { City } from './city.model';
 import { PostStatus } from './poststatus.enum';
 import { Comment } from './comment.model';
@@ -17,15 +17,16 @@ export interface Company {
     type?: CompanyTypes;
     description?: [{
         type: string;
-        data: BlockToolData
+        data: any
     }];
     ideas?: [{
         type: string;
-        data: BlockToolData
+        data: any
     }];
     _id?: string;
     status?: PostStatus;
     createdBy?: User;
+    owners?: User[];
     createdAt?: string;
     updatedAt?: string;
     cities?: City[];

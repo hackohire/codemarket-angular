@@ -2,11 +2,6 @@ import { Component, OnInit, ViewChild, Input, Output, EventEmitter, OnChanges, S
 import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
 import { AuthService } from '../../../core/services/auth.service';
 import { PostService } from '../../services/post.service';
-import { DeletePost } from '../../../core/store/actions/post.actions';
-import { Store } from '@ngrx/store';
-import { AppState } from '../../../core/store/state/app.state';
-import { PostType } from '../../models/post-types.enum';
-import { ProductService } from '../../../core/services/product.service';
 import { merge, of } from 'rxjs';
 import { startWith, switchMap, map, catchError, mapTo } from 'rxjs/operators';
 import { SweetalertService } from '../../services/sweetalert.service';
@@ -33,7 +28,6 @@ export class DatatableComponent implements OnInit, OnChanges, AfterViewInit {
   constructor(
     public authService: AuthService,
     public postService: PostService,
-    private productService: ProductService,
     private sweetAlertService: SweetalertService
   ) { }
 
@@ -82,7 +76,7 @@ export class DatatableComponent implements OnInit, OnChanges, AfterViewInit {
   deletePost(post, i: number) {
 
     this.sweetAlertService.confirmDelete(() => {
-      this.dataSource._renderChangesSubscription = this.postService.deletePost(post._id).subscribe((d) => {
+      this.dataSource._renderChangesSubscription = this.postService.deletePost(post._id, { name: this.authService.loggedInUser.name, _id: this.authService.loggedInUser.name }).subscribe((d) => {
         if (d) {
           this.dataSource.data = this.dataSource.data.filter((d: any) => d._id !== post._id);
           this.length = this.length - 1;

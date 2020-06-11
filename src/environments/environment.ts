@@ -6,15 +6,22 @@ import { plans } from '../app/shared/constants/plan_details';
 
 export const environment = {
   production: false,
+  braintree_client: 'sandbox_x6kwrbkb_hnwczpyytcggqqth',
+  paypal_client: 'ARaebJGRDl8q7x0IP1ZADKo4xUxYTq5WrU521uyMilOn4ylP3uTJv4UGkO4Q2uSdkcRsxnRP8vNQF1jW',
+  ckEditor: {
+    ckEditorEnvironMentId: 'ZK5UoNVFJG2R3Kh4SrIC',
+    ckEditorSecretKey: 'HP771KcTLlvStVbtvwAGz5d3LhLgDlY50uJqNQ6nkS18kVP43ZPB1zOSLseK',
+    ws: '71258.cke-cs.com/ws',
+    developmentTokenUrl: 'https://71258.cke-cs.com/token/dev/qhNbD6xUjkeVtrEc7aD2PcMhDkgmirUJHunqRWESilB0mTzZ0RHcJYk68P6D'
+  },
   COGNITO_AUTH_DOMAIN: 'https://platform.auth.us-east-1.amazoncognito.com',
-  serverless_url: 'http://localhost:3200/',
+  serverless_url: 'http://localhost:3200/dev/',
   graphql_url: 'http://localhost:3200/dev/graphql',
-  applicationId: '5d2ef428bbfa6576b357d5d4',
-  s3FilesBucketURL: 'https://dro-files.s3.amazonaws.com/public/',
+  s3FilesBucketURL: 'https://codemarket-files.s3.amazonaws.com/public/',
   stripe_public_key: 'pk_test_ighmL2U9UqAx0O4b8dKkSvdq',
   webSocketURL: 'ws://localhost:3001',
-  googleAPIKey: 'AIzaSyAOpIXHUPA5bMssoAW3NDUGHveOf0N_tsY',
   planDetails: plans.dev,
+  fileS3Bucket: 'manav-files',
   oauth: {
     // Domain name
     domain: 'platform.auth.us-east-1.amazoncognito.com',
@@ -42,7 +49,8 @@ export const environment = {
   baseHref: '/',
   confirm: {
     email: '',
-    password: ''
+    password: '',
+    name: ''
   }
 };
 

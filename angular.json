@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "dro": {
+    "codemarket": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -30,18 +30,14 @@
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "./node_modules/ngx-toastr/toastr.css",
-              "src/styles.scss",
-              "src/assets/css/_general.scss",
-              "src/assets/css/_theme.scss",
-              "src/assets/css/_product.scss",
-              "src/assets/css/_responsive.scss",
-              "src/assets/css/_btn.scss"
+              "./node_modules/angular-calendar/css/angular-calendar.css",
+              "src/styles.scss"
             ],
             "scripts": [
+              "./node_modules/@webcomponents/custom-elements/src/native-shim.js",
               "./node_modules/jquery/dist/jquery.min.js",
               "./node_modules/bootstrap/dist/js/bootstrap.min.js",
-              "./node_modules/peerjs/dist/peerjs.min.js",
-              "./src/app/editor-js/dist/editor.js"
+              "./node_modules/peerjs/dist/peerjs.min.js"
             ]
           },
           "configurations": {
@@ -92,6 +88,54 @@
                   "maximumError": "15mb"
                 }
               ]
+            },
+            "dro": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.dro.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "5mb",
+                  "maximumError": "15mb"
+                }
+              ]
+            },
+            "sendemail": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.sendemail.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "5mb",
+                  "maximumError": "15mb"
+                }
+              ]
             }
           }
         },
@@ -99,21 +143,27 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
             "port": 4800,
-            "browserTarget": "dro:build"
+            "browserTarget": "codemarket:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "dro:build:production"
+              "browserTarget": "codemarket:build:production"
             },
             "staging": {
-              "browserTarget": "dro:build:staging"
+              "browserTarget": "codemarket:build:staging"
+            },
+            "dro": {
+              "browserTarget": "codemarket:build:dro"
+            },
+            "sendemail": {
+              "browserTarget": "codemarket:build:sendemail"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "dro:build"
+            "browserTarget": "codemarket:build"
           }
         },
         "test": {
@@ -151,14 +201,20 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "dro:serve"
+            "devServerTarget": "codemarket:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "dro:serve:production"
+              "devServerTarget": "codemarket:serve:production"
             },
             "staging": {
-              "devServerTarget": "dro:serve:staging"
+              "devServerTarget": "codemarket:serve:staging"
+            },
+            "dro": {
+              "devServerTarget": "codemarket:serve:dro"
+            },
+            "sendemail": {
+              "devServerTarget": "codemarket:serve:sendemail"
             }
           }
         },
@@ -195,11 +251,37 @@
                 "scripts": false,
                 "styles": true
               }
+            },
+            "dro": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.dro.ts"
+                }
+              ],
+              "sourceMap": false,
+              "optimization": {
+                "scripts": false,
+                "styles": true
+              }
+            },
+            "sendemail": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.sendemail.ts"
+                }
+              ],
+              "sourceMap": false,
+              "optimization": {
+                "scripts": false,
+                "styles": true
+              }
             }
           }
         }
       }
     }
   },
-  "defaultProject": "dro"
+  "defaultProject": "codemarket"
 }

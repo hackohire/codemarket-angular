@@ -126,7 +126,7 @@ export class EditUserProfileComponent implements OnInit {
 
     Storage.vault.put(fileName, pic, {
 
-      bucket: appConstants.fileS3Bucket,
+      bucket: environment.fileS3Bucket,
       path: 'avatar',
       level: 'public',
 

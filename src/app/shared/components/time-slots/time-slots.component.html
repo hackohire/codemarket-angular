@@ -1,0 +1,12 @@
+<div class="time-slot-wrapper">
+    <div *ngIf="slotList.length > 0; else noSlotSelected;">
+      <div class="col-6 slot-btn" [ngClass]="{ 'slot-select-box': ((slotDateTime) && slot === slotDateTime) }"
+        (click)="selectedSlot(slot)" *ngFor="let slot of slotList">
+        {{slot}}
+      </div>
+    </div>
+    <ng-template class="no-slot" #noSlotSelected>
+      <span>Please Select Date</span>
+    </ng-template>
+</div>
+

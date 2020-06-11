@@ -1,0 +1,93 @@
+<div class="container pt-3 pb-5" style="width: 60vw;">
+    <form>
+        <mat-horizontal-stepper linear #stepper (selectionChange)="stepIndexChanged($event)">
+            <mat-step>
+                <div class="donate-form__fields" id="js-donate-form-single" role="radiogroup">
+
+                    <div class="donation-amount" (click)="donationAmount = 20">
+                        <input type="radio" class="donation-amount__radio" name="amount" value="20"
+                            id="one-time-amount-0" autocomplete="off">
+                        <label for="one-time-amount-0" class="donation-amount__label">
+                            $20
+                        </label>
+                    </div>
+
+                    <div class="donation-amount" (click)="donationAmount = 10">
+                        <input type="radio" class="donation-amount__radio" name="amount" value="10"
+                            id="one-time-amount-1" autocomplete="off">
+                        <label for="one-time-amount-1" class="donation-amount__label">
+                            $10
+                        </label>
+                    </div>
+
+                    <div class="donation-amount" (click)="donationAmount = 5">
+                        <input type="radio" class="donation-amount__radio" name="amount" value="5"
+                            id="one-time-amount-2" autocomplete="off" checked="checked">
+                        <label for="one-time-amount-2" class="donation-amount__label">
+                            $5
+                        </label>
+                    </div>
+
+                    <div class="donation-amount" (click)="donationAmount = 3">
+                        <input type="radio" class="donation-amount__radio" name="amount" value="3"
+                            id="one-time-amount-3" autocomplete="off">
+                        <label for="one-time-amount-3" class="donation-amount__label">
+                            $3
+                        </label>
+                    </div>
+
+
+                    <div class="donation-amount donation-amount--two-col donation-amount--other">
+                        <input type="radio" class="donation-amount__radio" name="amount" value=""
+                            id="one-time-amount-other" autocomplete="off" data-other-amount-radio="">
+                        <label for="one-time-amount-other" class="donation-amount__label donation-amount-other__label"
+                            data-currency="">$</label>
+                        <input [(ngModel)]="donationAmount" [ngModelOptions]="{standalone: true}" type="number"
+                            class="donation-amount__input" id="one-time-amount-other-input" placeholder="Other amount"
+                            min="2" max="10000000" data-other-amount="">
+                    </div>
+                </div>
+                <div>
+                    <button #nextStep color="primary" mat-raised-button matStepperNext [disabled]="donationAmount < 1"
+                        type="button">Next</button>
+                    <!-- <button *ngIf="l" color="primary" [disabled]="questionnaire?.get(formField)?.invalid"
+                                        mat-raised-button type="button" (click)="submit(stepper)">Submit</button> -->
+                </div>
+            </mat-step>
+
+            <mat-step [formGroup]="userForm">
+
+                <mat-form-field class="field-full-width" appearance="outline">
+                    <mat-label>Name</mat-label>
+                    <input matInput [placeholder]="'Name'" [type]="'text'" [formControlName]="'name'">
+                </mat-form-field>
+
+                <mat-form-field class="field-full-width" appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input matInput (keyup.enter)="stepper.selectedIndex === 0 ? stepper.next() : ''"
+                        [placeholder]="'Email'" [type]="'email'" [formControlName]="'email'">
+                </mat-form-field>
+
+                <!-- <div id="paypal-button-container"></div> -->
+
+                <div id="paypal-button-container"></div>
+
+                <!-- <wm-paypal *ngIf="order" [style.width.px]="width" [height]="height" [layout]="layout" [shape]="shape"
+                    [color]="color" [label]="label" [tagline]="" [disabled]="false" [request]="order"
+                    (cancel)="onCancel($event)" (error)="onError($event)" #paypal>
+                </wm-paypal> -->
+
+                <!-- <div #dropinContainer id="dropin-container"></div> -->
+
+                <div>
+                    <button style="margin-right: 10px;box-shadow: none;background: #eee;"
+                        *ngIf="stepper.selectedIndex !== 0" mat-raised-button matStepperPrevious type="button">Change
+                        Amount {{'($' + donationAmount + ')'}}</button>
+                    <!-- <button #donatButton id="submit-button" color="primary"
+                        [disabled]="userForm?.invalid || !donationInsatance" mat-raised-button type="button"
+                        (click)="donate(stepper)">Donate</button> -->
+                </div>
+            </mat-step>
+        </mat-horizontal-stepper>
+    </form>
+</div>

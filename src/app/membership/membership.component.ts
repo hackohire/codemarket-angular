@@ -5,11 +5,9 @@ import { AuthService } from '../core/services/auth.service';
 import { environment } from '../../environments/environment';
 import { ActivatedRoute } from '@angular/router';
 import { first } from 'rxjs/internal/operators/first';
-import { HttpClient } from '@angular/common/http';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { MatDialog } from '@angular/material';
 import { SubscriptionDialogComponent } from './subscription-dialog/subscription-dialog.component';
-import { SellingProductsService } from '../selling/selling-products.service';
 import { tap } from 'rxjs/operators';
 import Swal from 'sweetalert2';
 import { FormControl } from '@angular/forms';
@@ -43,7 +41,6 @@ export class MembershipComponent implements OnInit {
     public membershipService: MembershipService,
     public authService: AuthService,
     public activatedRoute: ActivatedRoute,
-    private sellingService: SellingProductsService,
     @Inject(PLATFORM_ID) private _platformId: Object,
     private dialog: MatDialog
   ) {
@@ -90,61 +87,42 @@ export class MembershipComponent implements OnInit {
       } else {
         this.openDialog(plan, planType);
       }
-        // /** Creating Session Object */
-        // /** See @see https://stripe.com/docs/api/checkout/sessions/retrieve for the reference of the fields */
-        // const session = {
-        //   payment_method_types: ['card'],
-        //   subscription_data: {
-        //     items: [{ plan: plan.id, quantity: 1 }],
-        //     trial_period_days: 30
-        //   },
-        //   mode: 'subscription',
-        //   success_url: this.DOMAIN + "?session_id={CHECKOUT_SESSION_ID}",
-        //   cancel_url: this.DOMAIN,
-        //   customer_email: this.authService.loggedInUser.email,
-        //   client_reference_id: this.authService.loggedInUser._id
-        // };
+      // /** Creating Session Object */
+      // /** See @see https://stripe.com/docs/api/checkout/sessions/retrieve for the reference of the fields */
+      // const session = {
+      //   payment_method_types: ['card'],
+      //   subscription_data: {
+      //     items: [{ plan: plan.id, quantity: 1 }],
+      //     trial_period_days: 30
+      //   },
+      //   mode: 'subscription',
+      //   success_url: this.DOMAIN + "?session_id={CHECKOUT_SESSION_ID}",
+      //   cancel_url: this.DOMAIN,
+      //   customer_email: this.authService.loggedInUser.email,
+      //   client_reference_id: this.authService.loggedInUser._id
+      // };
 
-        // /** Making API call in Backend to Create Session */
-        // this.http.post(environment.serverless_url + 'createCheckoutSession', session).toPromise().then((d: any) => {
-        //   console.log(d);
+      // /** Making API call in Backend to Create Session */
+      // this.http.post(environment.serverless_url + 'createCheckoutSession', session).toPromise().then((d: any) => {
+      //   console.log(d);
 
-        //   /** Once we get the session ID, User will get redirected to the payment page */
-        //   this.stripe.redirectToCheckout({
-        //     /** Make the id field from the Checkout Session creation API response */
-        //     sessionId: d.session.id
-        //   }).then((result) => {
-        //     console.log(result);
-        //     /** If `redirectToCheckout` fails due to a browser or network */
-        //     /** error, display the localized error message to your customer */
-        //     /** using `result.error.message`. */
-        //   });
-        // });
+      //   /** Once we get the session ID, User will get redirected to the payment page */
+      //   this.stripe.redirectToCheckout({
+      //     /** Make the id field from the Checkout Session creation API response */
+      //     sessionId: d.session.id
+      //   }).then((result) => {
+      //     console.log(result);
+      //     /** If `redirectToCheckout` fails due to a browser or network */
+      //     /** error, display the localized error message to your customer */
+      //     /** using `result.error.message`. */
+      //   });
+      // });
     } else {
       await this.authService.checkIfUserIsLoggedIn(true);
     }
   }
 
   addTrnsaction() {
-    if (isPlatformBrowser(this._platformId)) {
-    const transaction = JSON.parse(localStorage.getItem('subscription'));
-
-    if (transaction) {
-      transaction.sessionId = this.sessionId;
-      this.sellingService.addTransaction(transaction).pipe(
-        tap((d) => {
-          if (d) {
-            localStorage.removeItem('subscription');
-            console.log(d);
-            this.successfulPurchasedSubscription = d.subscription;
-            this.successfulPayment.type = 'success';
-            // this.store.dispatch(GetCartProductsList());
-            this.successfulPayment.show();
-          }
-        })
-      ).subscribe();
-    }
-    }
   }
 
   openDialog(plan, planType): void {
@@ -153,7 +131,7 @@ export class MembershipComponent implements OnInit {
       height: '550px',
       maxHeight: '700px',
       panelClass: 'no-padding',
-      data: {plan, planType},
+      data: { plan, planType },
       disableClose: true
     });
 

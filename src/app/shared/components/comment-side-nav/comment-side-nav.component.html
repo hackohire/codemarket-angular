@@ -1,0 +1,29 @@
+<ng-container *ngIf="selectedBlock && !(isHandset$ | async)">
+    <a mat-stroked-button color="primary" style="margin-bottom: 10px;" (click)="closeCommentSideBar.emit();">
+        <mat-icon>close</mat-icon>Close
+    </a>
+    
+    <div class="comment-ui">
+        <div class="sidebar-card" style="padding: 10px; width: fit-content; overflow: hidden; margin-bottom: 0;">
+            <div class="tab-pane fade show product-tab">
+                <div class="thread">
+                    <ul class="media-list thread-list" style="list-style: none; padding-bottom: 0;">
+                        <!-- <h4 class="tab-content-wrapper">Comments:</h4> -->
+                        <div *ngFor="let c of comments">
+                            <li [id]="c?._id" *ngIf="c?.blockSpecificComment && c?.blockId === selectedBlock?._id"
+                                class="single-thread">
+                                <app-comment [comment]="c" [referenceId]="selectedPost?._id"></app-comment>
+                            </li>
+                        </div>
+                    </ul>
+                </div>
+            </div>
+    
+            <div class="comment-form-area" style="padding-left: 0; padding-right: 0;">
+                <!-- <app-add-comment [commentForm]="commentForm"></app-add-comment> -->
+                <app-add-comment [referenceId]="selectedPost?._id" [blockId]="selectedBlock?._id"
+                    [showLabel]="true"></app-add-comment>
+            </div>
+        </div>
+    </div>
+</ng-container>

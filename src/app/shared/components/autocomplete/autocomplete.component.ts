@@ -75,12 +75,15 @@ export class AutocompleteComponent implements OnInit, OnDestroy {
       if (new FormControl(name, Validators.email).valid) {
         return this.userService.createUser({name, email: name}).toPromise();
       } else {
-        Swal.fire('If User is not found, You can add the user by adding a valid email', '', 'info');
+        Swal.fire('You can not add new item', '', 'info');
       }
     }
   }
 
   addCompany = (name: string) => {
+    if (!this.authService.checkIfUserIsLoggedIn(true)) {
+      return;
+    }
     return this.companyService.addCompany({name, createdBy: this.authService.loggedInUser._id}).toPromise();
   }
 

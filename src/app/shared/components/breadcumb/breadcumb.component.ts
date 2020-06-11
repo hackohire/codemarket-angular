@@ -1,11 +1,12 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
-import { Post } from '../../models/post.model';
 import { Company } from '../../models/company.model';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { environment } from '../../../../environments/environment';
 import { PostService } from '../../services/post.service';
-import { SearchComponent } from 'src/app/core/components/search/search.component';
 import { MdePopoverTrigger } from '@material-extended/mde';
+import { ShareService } from '@ngx-share/core';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-breadcumb',
@@ -16,25 +17,39 @@ export class BreadcumbComponent implements OnInit {
 
   @Input() title: string;
   @Input() path: [];
-  @Input() eventDate: [];
   @Input() postDetails;
   @Input() companyDetails: Company;
   @Input() color = 'white';
   @Input() showMenu = true;
   @Input() showImportButton = false;
   @Input() showEditPostDetails: boolean;
-  @Input() showAddCollaborators: boolean;
-  @Input() showAddAssignee: boolean;
+  @Input() fromAddPost = false;
+  @Input() inline = false;
+  @Input() postForm: FormGroup;
+
+  @Input() postActions = false;
 
   @Output() editPost = new EventEmitter();
 
+  @Output() saveOrSubmitPost = new EventEmitter();
+
   articleLink = new FormControl('', Validators.required);
+
+  postTitle = '';
+
+  displaySave = false;
+
+  public name;
+
 
   anonymousAvatar = '../../../../assets/images/anonymous-avatar.jpg';
   s3FilesBucketURL = environment.s3FilesBucketURL;
 
   constructor(
-    private postService: PostService
+    private postService: PostService,
+    public share: ShareService,
+    public authService: AuthService,
+    private location: Location
   ) { }
 
   ngOnInit() {
@@ -51,4 +66,34 @@ export class BreadcumbComponent implements OnInit {
       });
   }
 
+  myFunction(event) {
+    const postObj = {
+      _id: this.postDetails._id,
+      name: event.target.innerText
+    };
+
+    this.postTitle = event.target.innerText;
+
+    if (this.title !== this.postTitle.replace(/\&nbsp;/g, '') && this.postTitle.replace(/\&nbsp;/g, '') !== '') {
+      this.displaySave = true;
+      this.postService.updatePost(
+        postObj,
+        { name: this.authService.loggedInUser.name, _id: this.authService.loggedInUser._id }
+      ).subscribe((j) => {
+        if (j) {
+          this.title = this.postTitle.replace(/\&nbsp;/g, '');
+          this.displaySave = false;
+        }
+      });
+    }
+  }
+
+  allowUsersEdit = () => {
+    const loggedInUser = this.authService.loggedInUser;
+    return loggedInUser && loggedInUser._id && this.postDetails && this.postDetails._id && (loggedInUser._id === this.postDetails.createdBy._id || this.postDetails.collaborators.find(c => c._id === loggedInUser._id));
+  }
+
+  cancelClicked() {
+    this.location.back();
+  }
 }

@@ -12,8 +12,6 @@ import { UserEffects } from './store/effects/user.effects';
 // import { StoreRouterConnectingModule } from '@ngrx/router-store';
 // import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EPlatformActions } from './store/actions/app.actions';
-import { ProductEffects } from './store/effects/product.effects';
-import { CartEffects } from './store/effects/cart.effects';
 import { AppState } from './store/state/app.state';
 import { PostEffects } from './store/effects/post.effects';
 import { appReducesrs } from './store/reducers/app.reducers';
@@ -53,8 +51,6 @@ export function clearState(reducer) {
     EffectsModule.forRoot(
       [
         UserEffects,
-        ProductEffects,
-        CartEffects,
         PostEffects
       ]),
     // StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
@@ -100,12 +96,9 @@ export class CoreModule {
            */
           if (key === '__typename' || (key === '_id' && !value) || key === '__show') {
             return undefined;
-          } 
-          // else if (key === 'company') {
-          //   return value && value._id ? value._id : undefined;
-          // }
+          }
           return value;
-        }
+        };
         operation.variables = JSON.parse(JSON.stringify(operation.variables), omitTypename);
       }
       return forward(operation).map((data) => {
@@ -131,7 +124,7 @@ export class CoreModule {
       return forward(operation);
     });
 
-        /** using the ability to split links, you can send data to each link */
+    /** using the ability to split links, you can send data to each link */
     /** depending on what kind of operation is being sent */
     const link = isPlatformBrowser(this._platformId) ? split(
       // split based on operation type
@@ -146,9 +139,10 @@ export class CoreModule {
     /** Codemarket Apollo Client */
     apollo.create({
       link,
+      connectToDevTools: true,
       cache: new InMemoryCache({
         dataIdFromObject: (o: any) => {
-          return o._id
+          return o._id;
         },
         addTypename: true,
 
@@ -156,30 +150,31 @@ export class CoreModule {
           Whenever Schema gets changed for Product, Help, Interview and Requirements => "description" field
           Resolver also has to be changed accordingly
         */
-        fragmentMatcher: new IntrospectionFragmentMatcher({
-          introspectionQueryResultData: {
-            __schema: {
-              types: [
-                {
-                  kind: 'UNION',
-                  name: 'descriptionBlocks',
-                  possibleTypes: [
-                    { name: 'HeaderBlock' },
-                    { name: 'ParagraphBlock' },
-                    { name: 'CodeBlock' },
-                    { name: 'ImageBlock' },
-                    { name: 'ListBlock' },
-                    { name: 'QuoteBlock' },
-                    { name: 'TableBlock' },
-                    { name: 'WarningBlock' },
-                    { name: 'EmbedBlock' },
-                    { name: 'LinkToolBlock' }
-                  ],
-                },
-              ],
-            },
-          },
-        })
+        // fragmentMatcher: new IntrospectionFragmentMatcher({
+        //   introspectionQueryResultData: {
+        //     __schema: {
+        //       types: [
+        //         {
+        //           kind: 'UNION',
+        //           name: 'descriptionBlocks',
+        //           possibleTypes: [
+        //             { name: 'HeaderBlock' },
+        //             { name: 'ParagraphBlock' },
+        //             { name: 'CodeBlock' },
+        //             { name: 'ImageBlock' },
+        //             { name: 'ListBlock' },
+        //             { name: 'QuoteBlock' },
+        //             { name: 'TableBlock' },
+        //             { name: 'WarningBlock' },
+        //             { name: 'EmbedBlock' },
+        //             { name: 'LinkToolBlock' },
+        //             { name: 'AttachesBlock' }
+        //           ],
+        //         },
+        //       ],
+        //     },
+        //   },
+        // })
       }),
 
     });

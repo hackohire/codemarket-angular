@@ -1,5 +1,5 @@
-import { Tag } from './product.model';
 import { Company } from './company.model';
+import { Tag } from './post.model';
 
 export interface User {
     _id?: string;
@@ -20,7 +20,6 @@ export interface User {
     stripeId?: string;
     createdAt?: string;
     slug?: string;
-    likeCount?: number;
     subscription?: Subscription[];
 }
 
@@ -48,7 +47,7 @@ enum Roles {
 }
 
 interface CurrentJobDetails {
-    jobProfile?: Tag [];
+    jobProfile?: Tag[];
     company?: Company;
     // companyLocation?: string;
 }

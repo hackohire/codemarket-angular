@@ -38,11 +38,13 @@
 
                     </div>
                 </div>
-                <h1 tabindex="0" autofocus (keydown.enter)="$event.preventDefault()" style="margin-bottom: 0"
-                    [contentEditable]="allowUsersEdit() || inline" class="page-title" id="test"
+
+                <h3 style="font-size: 1rem;">{{titlePlaceholder}}</h3>
+                <h2 tabindex="0" autofocus="true" (keydown.enter)="$event.preventDefault()" style="margin-bottom: 0"
+                    [contentEditable]="allowUsersEdit() || inline ? true : false" class="page-title" id="test"
                     (blur)="!fromAddPost ? myFunction($event) : postForm?.get('name')?.setValue($event.target.innerText)">
                     {{postForm?.get('name')?.value ? postForm?.get('name')?.value  : title}}
-                </h1>
+                </h2>
 
                 <p *ngIf="displaySave">Saving...</p>
             </div>

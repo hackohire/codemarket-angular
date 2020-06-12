@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
+// import { MaterialFileInputModule } from 'ngx-material-file-input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavBarComponent } from './core/components/nav-bar/nav-bar.component';
 import { LayoutModule } from '@angular/cdk/layout';
@@ -16,9 +17,9 @@ import { EmailMarketingComponent } from './email-marketing/email-marketing.compo
 import { SocialMediaMarketingComponent } from './social-media-marketing/social-media-marketing.component';
 import { LoaderComponent } from './auth/loader/loader.component';
 import { AuthModule } from './auth/auth.module';
-import {MakemoneyonlineModule} from './makemoneyonline/makemoneyonline.module';
+import { MakemoneyonlineModule } from './makemoneyonline/makemoneyonline.module';
 import { FormioModule } from 'angular-formio';
-import {FormBuilderModule} from './form-builder/form-builder.module';
+import { FormBuilderModule } from './form-builder/form-builder.module';
 import { registerSelecteDeselectComponent } from './shared/components/selecte-deselect/select-deselect.formio';
 import { SelecteDeselectComponent } from './shared/components/selecte-deselect/selecte-deselect.component';
 import { VideoChatHomeComponent } from './video-chat/video-chat-home/video-chat-home.component';
@@ -27,6 +28,7 @@ import { RoomsComponent } from './video-chat/rooms/rooms.component';
 import { ParticipantsComponent } from './video-chat/participants/participants.component';
 import { DeviceSelectComponent } from './video-chat/settings/device-select/device-select.component';
 import { SettingsComponent } from './video-chat/settings/settings.component';
+import { DonateComponent } from './donate/donate.component';
 
 // import { SignInComponent } from './core/amplify/sign-in-component';
 
@@ -48,7 +50,8 @@ import { SettingsComponent } from './video-chat/settings/settings.component';
     RoomsComponent,
     ParticipantsComponent,
     SettingsComponent,
-    DeviceSelectComponent
+    DeviceSelectComponent,
+    DonateComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -61,7 +64,8 @@ import { SettingsComponent } from './video-chat/settings/settings.component';
     AuthModule,
     MakemoneyonlineModule,
     FormioModule,
-    FormBuilderModule
+    FormBuilderModule,
+    // MaterialFileInputModule
   ],
   providers: [PostDataResolver],
   bootstrap: [AppComponent],

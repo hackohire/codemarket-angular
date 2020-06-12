@@ -7,6 +7,7 @@ import { WebsiteComponent } from './website/website.component';
 import { EmailMarketingComponent } from './email-marketing/email-marketing.component';
 import { SocialMediaMarketingComponent } from './social-media-marketing/social-media-marketing.component';
 import { VideoChatHomeComponent } from './video-chat/video-chat-home/video-chat-home.component';
+import { DonateComponent } from './donate/donate.component';
 // import { PostDataResolver } from './core/resolver';
 
 const routes: Routes = [
@@ -15,11 +16,15 @@ const routes: Routes = [
     redirectTo: '/dashboard',
     pathMatch: 'full'
   },
- /*  {
-    path: '',
-    redirectTo: '/dashboard/bugfixes-all',
-    pathMatch: 'full'
-  }, */
+  {
+    path: 'donate',
+    component: DonateComponent
+  },
+  /*  {
+     path: '',
+     redirectTo: '/dashboard/bugfixes-all',
+     pathMatch: 'full'
+   }, */
   {
     path: 'id_token',
     redirectTo: '/dashboard',
@@ -43,12 +48,6 @@ const routes: Routes = [
     loadChildren: () => import('./dashboard/my-profile/my-profile.module').then(module => module.MyProfileModule),
   },
   {
-    path: 'sell',
-    loadChildren: () => import('./selling/selling.module').then(module => module.SellingModule),
-    // outlet: 'main',
-    canLoad: [AuthGuard]
-  },
-  {
     path: 'form-builder',
     loadChildren: () => import('./form-builder/form-builder.module').then(module => module.FormBuilderModule),
   },
@@ -66,6 +65,10 @@ const routes: Routes = [
   },
 
   {
+    path: `send-email`,
+    loadChildren: () => import('../app/email/send-email/send-email.module').then(module => module.SendEmailModule),
+  },
+  {
     path: 'company',
     loadChildren: () => import('./companies/companies.module').then(module => module.CompaniesModule),
     // outlet: 'main',
@@ -76,20 +79,6 @@ const routes: Routes = [
     path: 'membership',
     loadChildren: () => import('./membership/membership.module').then(module => module.MembershipModule),
     // outlet: 'main',
-  },
-
-  {
-    path: 'cart',
-    loadChildren: () => import('./cart/cart.module').then(module => module.CartModule),
-    // outlet: 'main'
-  },
-  {
-    path: 'product/:slug',
-    loadChildren: () => import('./dashboard/product-details/product-details.module').then(module => module.ProductDetailsModule),
-    resolve: { seo: PostDataResolver },
-    data: { noReuse: true, setPostMeta: true },
-    // outlet: 'main',
-    pathMatch: 'full'
   },
   {
     path: 'post/:slug',

@@ -1,0 +1,131 @@
+// DONATION CSS
+
+:host ::ng-deep {
+    .mat-form-field-wrapper {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    .mat-horizontal-stepper-header-container {
+        display: none;
+    }
+    .braintree-toggle {
+        margin-bottom: 15px !important;
+    }
+}
+
+.heading--primary {
+    font-size: 28px;
+    font-size: 1.75rem;
+    line-height: 1.1;
+    font-weight: 300;
+    font-family: "Zilla Slab","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-style: inherit;
+    font-weight: inherit;
+    margin-bottom: 2rem;
+    // margin-top: 0;
+}
+
+.heading--secondary {
+    font-size: 22px;
+    font-size: 1.375rem;
+    font-weight: 400;
+}
+
+
+.donate-form__fields {
+    display: grid;
+    grid-gap: 8px;
+    grid-template-columns: 1fr 1fr;
+    margin-bottom: 16px;
+}
+
+@media only screen and (min-width: 768px) {
+	.donate-form__fields {
+		grid-template-columns: 1fr 1fr 1fr;
+		grid-gap: 16px;
+	}
+}
+
+
+.donate-form__fields {
+	label {
+		margin-bottom: 0;
+	}
+}
+
+.donation-amount--other {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+}
+
+.donation-amount--two-col {
+    grid-column: span 2;
+}
+
+.donation-amount__radio {
+	visibility: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.donation-amount__radio:checked+.donation-amount__label, .donation-amount__radio:focus+.donation-amount__label {
+    background-color: #0070ba;
+    border-color: #0070ba;
+    color: #fff;
+}
+
+.donation-amount--other .donation-amount__label {
+    -ms-flex-preferred-size: 55px;
+    flex-basis: 55px;
+    min-width: 55px;
+    max-width: 55px;
+}
+
+.donation-amount--other {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+}
+
+.donation-amount--two-col {
+    grid-column: span 2;
+}
+
+.donation-amount__label {
+    position: relative;
+    z-index: 1;
+    display: block;
+    border: 1px solid #ccc;
+    padding: 20px 5px;
+    text-align: center;
+    cursor: pointer;
+    -webkit-transition: color 0.25s ease-out 0s,border-color 0.25s ease-out 0s,background-color 0.25s ease-out 0s;
+    transition: color 0.25s ease-out 0s,border-color 0.25s ease-out 0s,background-color 0.25s ease-out 0s;
+}
+
+.donation-amount--other .donation-amount__input:not([type="checkbox"]):not([type="radio"]) {
+    -webkit-box-flex: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    padding-left: 12px;
+    border: 1px solid #ccc;
+    border-left: 0;
+    -moz-appearance: textfield;
+}
+
+input.donation-amount__input:not([type="checkbox"]):not([type="radio"]) {
+    font-family: inherit;
+    -webkit-appearance: none;
+    border-radius: 0;
+}
+
+// DONATION CSS ENDS HERE

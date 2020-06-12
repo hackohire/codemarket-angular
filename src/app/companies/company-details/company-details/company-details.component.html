@@ -123,6 +123,18 @@
 
             <div class="row">
                 <div class="col-lg-2">
+                    <!-- Mainling List -->
+                    <div class="add-form-area common-box-shadow" *ngIf="mailingList?.length > 0">
+                        <h4>Mailing List</h4>
+                            <!-- <div style="border: 1px solid; margin-top: 5px;" *ngFor="let m of mailingList; let i = index;">
+                                <h5>{{m?.name}}</h5>
+                            </div> -->
+                            <button type="button" (click)="reDirectToMailingList(m?._id)" *ngFor="let m of mailingList; let i = index;"
+                            mat-raised-button color="primary" [ngClass]="batchId === m?._id ? 'selected-mailing-list' : ''"
+                            style="width: 100%; height: auto; margin-top: 5px; white-space: normal; white-space: normal;
+                            word-wrap: break-word;">{{m?.name}}</button>
+                    </div>
+                    
                     <app-post-type-nav *ngIf="false" [selectedPostType]="companyView" [customTabs]="customTabs"
                         (postTypeClick)="selectMainCategory($event);" (plusButtonClick)="redirectToAddPost($event)">
                     </app-post-type-nav>
@@ -237,212 +249,372 @@
                         </div>
                     </div>
 
+                    
 
-                    <div class="row">
-                        <div [ngClass]="selectedBlock ? 'col-md-8 col-lg-8' : 'col-lg-12 col-md-12'">
-                            <!-- Showing the list of posts for the posts tab, everytime user clicks on the "load more", we increase the page number and call
-							fetchAllOtherPosts method to fetch subsequent posts -->
-                            <ng-container *ngIf="companyView === 'posts'">
-                                <div class="item-grid pen-grid item-grid-large">
-                                    <app-brief-post style="width: 100%;" [p]="e"
-                                        *ngFor="let e of companyRelatedPosts?.posts" [readMore]="true"
-                                        (showComments)="showCommentsOnSide($event)"></app-brief-post>
-                                </div>
-                                <app-paginator [length]="totalcompanyRelatedPosts"
-                                    (fetchData)="paginator = $event; fetchAllCompanyRealtedePosts()">
-                                </app-paginator>
-                            </ng-container>
-
-                            <div *ngIf="companyView === 'campaigns' && details?._id">
-                                <ng-container *ngTemplateOutlet="campaignsTemplate; context: {details: details}">
-                                </ng-container>
-                                <!-- <div *ngFor="let c of campaignsList">
-                                    <app-paginator [length]="c.count" (fetchData)="paginator = $event; fetchAllCampaign('')">
-                                    </app-paginator>
-                                </div> -->
-                            </div>
-
-                            <ng-container *ngIf="companyView !== 'contact'">
-                                <ng-container *ngFor="let p of postTypesArray">
-                                    <ng-container *ngIf="companyView === p.name">
+                    <!--  *ngIf="!hideTabs" -->
+                    <mat-tab-group mat-align-tabs="center" [selectedIndex]="tabIndex" (selectedIndexChange)="informChange($event)">
+                        <!-- [label]="!hideTabs ? 'Posts' : 'Contacts'" -->
+                        <mat-tab label="Posts">
+                            <div class="row">
+                                <div [ngClass]="selectedBlock ? 'col-md-8 col-lg-8' : 'col-lg-12 col-md-12'">
+                                    <!-- Showing the list of posts for the posts tab, everytime user clicks on the "load more", we increase the page number and call
+                                    fetchAllOtherPosts method to fetch subsequent posts -->
+                                    <ng-container *ngIf="companyView === 'posts'">
                                         <div class="item-grid pen-grid item-grid-large">
                                             <app-brief-post style="width: 100%;" [p]="e"
                                                 *ngFor="let e of companyRelatedPosts?.posts" [readMore]="true"
                                                 (showComments)="showCommentsOnSide($event)"></app-brief-post>
                                         </div>
                                         <app-paginator [length]="totalcompanyRelatedPosts"
-                                            (fetchData)="paginator = $event; fetchAllCompanyRealtedePosts(p.name)">
+                                            (fetchData)="paginator = $event; fetchAllCompanyRealtedePosts()">
                                         </app-paginator>
                                     </ng-container>
-                                </ng-container>
-                            </ng-container>
 
-                            <div *ngIf="companyView === 'comments'">
-                                <ng-container *ngTemplateOutlet="addCommentTemplate; context: details">
-                                </ng-container>
-                            </div>
-
-                            <!-- <div *ngIf="companyView === 'comments'">
-                                <ng-container *ngTemplateOutlet="addCommentTemplate; context: details">
-                                </ng-container>
-                            </div> -->
-
-                            <div *ngIf="companyView === 'q&a'">
-                                <ng-container *ngTemplateOutlet="questionAnswersTemplate; context: details">
-                                </ng-container>
-                            </div>
-
-                            <!-- <div *ngIf="details?.createdBy?.name && companyView === 'creator'"
-                                class="author-card sidebar-card"> -->
-                            <div *ngIf="companyView === 'contact'">
-                                <ng-container *ngTemplateOutlet="contactTemplate; context: details">
-                                </ng-container>
-                            </div>
-
-                            <div *ngIf="details?.createdBy?.name && companyView === 'creator'"
-                                class="author-card sidebar-card">
-                                <!-- <ng-container
-                                    *ngTemplateOutlet="addCompanypostTemplate; context: { details: details, postType: 'company-post'}">
-                                </ng-container> -->
-                                <div class="card-title">
-                                    <h4>Author Information</h4>
-                                </div>
-
-                                <div class="author-infos">
-                                    <div class="author_avatar">
-                                        <img [src]="details?.createdBy?.avatar ? ((s3FilesBucketURL + details.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar"
-                                            alt="Presenting the broken author avatar :D">
+                                    <div *ngIf="companyView === 'campaigns' && details?._id">
+                                        <ng-container
+                                            *ngTemplateOutlet="campaignsTemplate; context: {details: details}">
+                                        </ng-container>
+                                        <!-- <div *ngFor="let c of campaignsList">
+                                            <app-paginator [length]="c.count" (fetchData)="paginator = $event; fetchAllCampaign('')">
+                                            </app-paginator>
+                                        </div> -->
                                     </div>
 
-                                    <div class="author">
-                                        <a [routerLink]="['profile', details?.createdBy?.slug ]">
-                                            <h4>{{details?.createdBy?.name}}</h4>
-                                        </a>
-                                        <!-- <button
-                                            *ngIf="details?.createdBy?._id && authService?.loggedInUser?._id && authService?.loggedInUser?._id !== details?.createdBy?._id"
-                                            (click)="openDialog(details?.createdBy?._id)" mat-mini-fab color="primary">
-                                            <mat-icon>video_call</mat-icon>
-                                        </button> -->
-                                        <!-- <p>Signed Up: 08 April 2016</p> -->
-                                    </div>
-                                    <!-- end /.author -->
-
-                                    <div class="social social--color--filled">
-                                        <ul>
-                                            <li>
-                                                <a href="#">
-                                                    <span class="fab fa-facebook fa-lg"></span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    <span class="fab fa-github fa-lg"></span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    <span class="fab fa-linkedin fa-lg"></span>
-                                                </a>
-                                            <li>
-                                                <a href="#">
-                                                    <i class="fab fa-stack-overflow"></i>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <!-- end /.social -->
-
-                                    <div class="author-btn">
-                                        <a (editPost)="postService?.editPost(details)"
-                                            [routerLink]="['profile', details?.createdBy?.slug ]"
-                                            class="btn btn--sm btn--round">View Profile</a>
-                                        <!-- <a href="#" class="btn btn--sm btn--round">Message</a> -->
-                                    </div>
-                                </div>
-                                <!-- end /.author-infos -->
-
-
-                            </div>
-                            <!-- end /.author-card -->
-
-                            <aside *ngIf="companyView === 'info'" class="sidebar sidebar--single-product">
-                                <!-- <ng-container
-                                    *ngTemplateOutlet="addCompanypostTemplate; context: { details: details, postType: 'company-post'}">
-                                </ng-container> -->
-                                <div class="sidebar-card card--product-infos">
-                                    <div class="card-title">
-                                        <h4>Information</h4>
-                                    </div>
-
-                                    <ul class="infos">
-                                        <li *ngIf="details?.createdAt">
-                                            <p class="data-label">Created</p>
-                                            <p class="info">{{getDate(details?.createdAt) | date: 'dd/MM/yyyy'}}
-                                            </p>
-                                        </li>
-                                        <li *ngIf="details?.updatedAt">
-                                            <p class="data-label">Updated</p>
-                                            <p class="info">{{getDate(details?.updatedAt) | date: 'dd/MM/yyyy'}}
-                                            </p>
-                                        </li>
-                                        <li>
-                                            <p class="data-label">Cities</p>
-                                            <p class="info" *ngFor="let t of details?.cities">{{t?.name + ','}}
-                                            </p>
-                                        </li>
-                                        <li>
-                                            <p class="data-label">Address</p>
-                                            <p class="info">{{details?.location?.address}}
-                                            </p>
-                                        </li>
-                                    </ul>
-
-                                    <!-- <ng-container *ngTemplateOutlet="locationTemplate; context: {location: details?.location}">
-                                    </ng-container> -->
-                                </div>
-                            </aside>
-                            <!-- end /.aside -->
-                            <div *ngIf="companyView === 'interested-people'">
-                                <!-- <ng-container
-                                    *ngTemplateOutlet="addCompanypostTemplate; context: { details: details, postType: 'company-post'}">
-                                </ng-container> -->
-                                <div class="author-card sidebar-card">
-                                    <div class="card-title">
-                                        <h4>Interested Professionals:
-                                            {{ details?.usersInterestedInCompany?.length }}</h4>
-                                        <br />
-
-                                        <ng-container class="row"
-                                            *ngFor="let userInterested of usersInterestedInCompany">
-                                            <div class="col-md-12" style="margin-bottom: 10px;">
-                                                <div class="author_avatar_comment" style="vertical-align: middle;">
-                                                    <img [src]="userInterested?.avatar ? ((s3FilesBucketURL + userInterested.avatar) | safe: 'resourceUrl') : anonymousAvatar"
-                                                        alt="Presenting the broken author avatar :D">
+                                    <ng-container *ngIf="companyView !== 'contact'">
+                                        <ng-container *ngFor="let p of postTypesArray">
+                                            <ng-container *ngIf="companyView === p.name">
+                                                <div class="item-grid pen-grid item-grid-large">
+                                                    <app-brief-post style="width: 100%;" [p]="e"
+                                                        *ngFor="let e of companyRelatedPosts?.posts" [readMore]="true"
+                                                        (showComments)="showCommentsOnSide($event)"></app-brief-post>
                                                 </div>
-                                                <div class="autor__info">
-                                                    <a [routerLink]="['profile', userInterested?.slug ]">
-                                                        <p class="name">
-                                                            {{userInterested?.name}}
-                                                        </p>
-                                                        <p style="color: lightgray;">
-                                                            {{userInterested?.currentJobDetails?.jobProfile ? userInterested?.currentJobDetails?.jobProfile : '-'}}
-                                                        </p>
-                                                    </a>
-                                                    <!-- <p class="ammount">{{fromNow(pu?.createdAt)}}</p> -->
-                                                </div>
-                                            </div>
+                                                <app-paginator [length]="totalcompanyRelatedPosts"
+                                                    (fetchData)="paginator = $event; fetchAllCompanyRealtedePosts(p.name)">
+                                                </app-paginator>
+                                            </ng-container>
+                                        </ng-container>
+                                    </ng-container>
 
+                                    <div *ngIf="companyView === 'comments'">
+                                        <ng-container *ngTemplateOutlet="addCommentTemplate; context: details">
                                         </ng-container>
                                     </div>
+
+                                    <!-- <div *ngIf="companyView === 'comments'">
+                                        <ng-container *ngTemplateOutlet="addCommentTemplate; context: details">
+                                        </ng-container>
+                                    </div> -->
+
+                                    <div *ngIf="companyView === 'q&a'">
+                                        <ng-container *ngTemplateOutlet="questionAnswersTemplate; context: details">
+                                        </ng-container>
+                                    </div>
+
+                                    <!-- <div *ngIf="details?.createdBy?.name && companyView === 'creator'"
+                                        class="author-card sidebar-card"> -->
+                                    <div *ngIf="companyView === 'contact'">
+                                        <ng-container *ngTemplateOutlet="contactTemplate; context: details">
+                                        </ng-container>
+                                    </div>
+
+                                   
+
+                                    <div *ngIf="details?.createdBy?.name && companyView === 'creator'"
+                                        class="author-card sidebar-card">
+                                        <!-- <ng-container
+                                            *ngTemplateOutlet="addCompanypostTemplate; context: { details: details, postType: 'company-post'}">
+                                        </ng-container> -->
+                                        <div class="card-title">
+                                            <h4>Author Information</h4>
+                                        </div>
+
+                                        <div class="author-infos">
+                                            <div class="author_avatar">
+                                                <img [src]="details?.createdBy?.avatar ? ((s3FilesBucketURL + details.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                                                    alt="Presenting the broken author avatar :D">
+                                            </div>
+
+                                            <div class="author">
+                                                <a [routerLink]="['profile', details?.createdBy?.slug ]">
+                                                    <h4>{{details?.createdBy?.name}}</h4>
+                                                </a>
+                                                <!-- <button
+                                                    *ngIf="details?.createdBy?._id && authService?.loggedInUser?._id && authService?.loggedInUser?._id !== details?.createdBy?._id"
+                                                    (click)="openDialog(details?.createdBy?._id)" mat-mini-fab color="primary">
+                                                    <mat-icon>video_call</mat-icon>
+                                                </button> -->
+                                                <!-- <p>Signed Up: 08 April 2016</p> -->
+                                            </div>
+                                            <!-- end /.author -->
+
+                                            <div class="social social--color--filled">
+                                                <ul>
+                                                    <li>
+                                                        <a href="#">
+                                                            <span class="fab fa-facebook fa-lg"></span>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">
+                                                            <span class="fab fa-github fa-lg"></span>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">
+                                                            <span class="fab fa-linkedin fa-lg"></span>
+                                                        </a>
+                                                    <li>
+                                                        <a href="#">
+                                                            <i class="fab fa-stack-overflow"></i>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <!-- end /.social -->
+
+                                            <div class="author-btn">
+                                                <a (editPost)="postService?.editPost(details)"
+                                                    [routerLink]="['profile', details?.createdBy?.slug ]"
+                                                    class="btn btn--sm btn--round">View Profile</a>
+                                                <!-- <a href="#" class="btn btn--sm btn--round">Message</a> -->
+                                            </div>
+                                        </div>
+                                        <!-- end /.author-infos -->
+
+
+                                    </div>
+                                    <!-- end /.author-card -->
+
+                                    <aside *ngIf="companyView === 'info'" class="sidebar sidebar--single-product">
+                                        <!-- <ng-container
+                                            *ngTemplateOutlet="addCompanypostTemplate; context: { details: details, postType: 'company-post'}">
+                                        </ng-container> -->
+                                        <div class="sidebar-card card--product-infos">
+                                            <div class="card-title">
+                                                <h4>Information</h4>
+                                            </div>
+
+                                            <ul class="infos">
+                                                <li *ngIf="details?.createdAt">
+                                                    <p class="data-label">Created</p>
+                                                    <p class="info">{{getDate(details?.createdAt) | date: 'dd/MM/yyyy'}}
+                                                    </p>
+                                                </li>
+                                                <li *ngIf="details?.updatedAt">
+                                                    <p class="data-label">Updated</p>
+                                                    <p class="info">{{getDate(details?.updatedAt) | date: 'dd/MM/yyyy'}}
+                                                    </p>
+                                                </li>
+                                                <li>
+                                                    <p class="data-label">Cities</p>
+                                                    <p class="info" *ngFor="let t of details?.cities">{{t?.name + ','}}
+                                                    </p>
+                                                </li>
+                                                <li>
+                                                    <p class="data-label">Address</p>
+                                                    <p class="info">{{details?.location?.address}}
+                                                    </p>
+                                                </li>
+                                            </ul>
+
+                                            <!-- <ng-container *ngTemplateOutlet="locationTemplate; context: {location: details?.location}">
+                                            </ng-container> -->
+                                        </div>
+                                    </aside>
+                                    <!-- end /.aside -->
+                                </div>
+                                <div [ngClass]="selectedBlock ? 'col-md-4 col-lg-4' : ''">
+                                    <ng-container
+                                        *ngTemplateOutlet="addBlockLevelCommentTemplate; context: {details: selectedPost, comments: selectedPostComments | async}">
+                                    </ng-container>
                                 </div>
                             </div>
-                        </div>
-                        <div [ngClass]="selectedBlock ? 'col-md-4 col-lg-4' : ''">
-                            <ng-container
-                                *ngTemplateOutlet="addBlockLevelCommentTemplate; context: {details: selectedPost, comments: selectedPostComments | async}">
+                        </mat-tab>
+                    <!-- </mat-tab-group> -->
+
+                    <!-- <mat-tab-group mat-align-tabs="center"> -->
+                        <!-- Save and Send emails tab -->
+                        <mat-tab label="Mailing List" *ngIf="!hideTabs">
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                    <!-- Mainling List -->
+                                    <!-- <div class="add-form-area common-box-shadow">
+                                        <h2>Mailing List</h2>
+                                        <br>
+                                        <div class="row">
+                                            <div class="col-md-3" style="border: 1px solid; margin-top: 5px;" *ngFor="let m of mailingList; let i = index;">
+                                                <h5>{{m?.name}}</h5>
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                    <!-- Save Emails -->
+                                    <div [formGroup]="saveEmailForm" class="add-form-area common-box-shadow">
+                                        <h2>Save Emails</h2>
+                                        <mat-form-field class="field-full-width">
+                                            <ngx-mat-file-input #removableInput1 formControlName="csvfile"
+                                                placeholder="Select csv file with emails"
+                                                (change)="uploadFile($event, 'save')"></ngx-mat-file-input>
+                                            <button mat-icon-button matSuffix *ngIf="!removableInput1.empty"
+                                                (click)="removableInput1.clear($event)">
+                                                <mat-icon>clear</mat-icon>
+                                            </button>
+                                        </mat-form-field>
+                                        <mat-form-field appearance="outline" class="field-full-width">
+                                            <mat-label>Mailing list Name</mat-label>
+                                            <input matInput placeholder="Mailing list Name" type="text"
+                                                formControlName="label" autocomplete="false" required>
+                                        </mat-form-field>
+                                        <!-- <app-autocomplete class="field-full-width" [allowToAdd]="false"
+                                            [autoComplete]="saveEmailForm?.get('companies')"
+                                            [placeholder]="'Select Company'" [collection]="'companies'" [type]=""
+                                            [multiple]="false" matInput>
+                                        </app-autocomplete> -->
+                                        <button type="button" (click)="saveFile()" [disabled]="saveEmailForm?.invalid"
+                                            mat-raised-button color="primary"
+                                            style="margin: 12px; height: 35px;">{{ 'Save Mailing List' }}</button>
+                                        <br>
+                                    </div>
+
+                                    <!-- Send Emails -->
+                                    <div [formGroup]="sendEmailForm" class="add-form-area common-box-shadow">
+                                        <h2>Send Emails</h2>
+                                        <mat-form-field appearance="outline" class="field-full-width">
+                                            <mat-label>Enter FROM</mat-label>
+                                            <input matInput placeholder="Enter FROM" type="text" formControlName="from"
+                                                autocomplete="false" required>
+                                        </mat-form-field>
+
+                                        <mat-form-field appearance="outline" class="field-full-width">
+                                            <mat-label>Enter Subject</mat-label>
+                                            <input matInput placeholder="subject" type="text" formControlName="subject"
+                                                autocomplete="false" required>
+                                        </mat-form-field>
+
+                                        <!-- <app-autocomplete class="field-full-width" [allowToAdd]="false"
+                                            [autoComplete]="sendEmailForm?.get('companies')"
+                                            [placeholder]="'Select Company'" [collection]="'companies'" [type]=""
+                                            [multiple]="false" matInput>
+                                        </app-autocomplete> -->
+
+                                        <app-autocomplete class="field-full-width" [allowToAdd]="false"
+                                            [autoComplete]="sendEmailForm?.get('batches')"
+                                            [placeholder]="'Select Mailing List'" [collection]="'batches'" [type]=""
+                                            [multiple]="false" matInput>
+                                        </app-autocomplete>
+
+                                        <p>Create Email template below</p>
+                                        <app-editor #descriptionEditor [placeholder]="'Email Template'"
+                                            [data]="descriptionFormControl?.value" [id]="'edit-post-editor'">
+                                        </app-editor>
+
+                                        <br />
+
+                                        <div fxLayout="row" fxLayoutGap="10px">
+                                            <button type="button" (click)="submit()" [disabled]="sendEmailForm?.invalid"
+                                                mat-raised-button color="primary">{{ 'Send Email' }}</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </mat-tab>
+                    <!-- </mat-tab-group> -->
+                    <!-- <mat-tab-group mat-align-tabs="center"> -->
+                        <!-- Track emails tab -->
+                        <mat-tab label="Campaigns" *ngIf="!hideTabs">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div [formGroup]="trackEmailForm" class="add-form-area common-box-shadow">
+                                            <h2>Campaigns</h2>
+                                            
+                                            <div class="row">
+                                                <div class="col-md-4" *ngFor="let c of campaignData;let i=index">
+                                                    <button type="button" (click)="getCampaignData(c?.batchId)"
+                                                    mat-raised-button color="primary"
+                                                    style="width: 100%; height: auto; margin-top: 5px; white-space: normal; white-space: normal;
+                                                    word-wrap: break-word;">{{c?.name}}</button>
+                                                </div>
+
+                                            </div>
+                                            <!-- <app-autocomplete class="field-full-width" [allowToAdd]="false"
+                                                [autoComplete]="trackEmailForm?.get('companies')"
+                                                [placeholder]="'Select Company'" [collection]="'companies'" [type]=""
+                                                [multiple]="false" matInput>
+                                            </app-autocomplete>
+    
+                                            <app-autocomplete class="field-full-width" [allowToAdd]="false"
+                                                [autoComplete]="trackEmailForm?.get('batches')"
+                                                [placeholder]="'Select Mailing List'" [collection]="'batches'" [type]=""
+                                                [multiple]="false" matInput>
+                                            </app-autocomplete>
+                                            <button type="button" (click)="getCampaignData()"
+                                                [disabled]="trackEmailForm?.invalid" mat-raised-button color="primary"
+                                                style="margin: 12px; height: 35px;">{{ 'Get Email Data' }}</button> -->
+                                        </div>
+                                    </div>
+
+                                    <!-- <ng-container *ngIf="campaignsList" *ngTemplateOutlet="campaignsTemplate">
+                                    </ng-container> -->
+                                    <ng-template #campaignsTemplate [ngIf]="displayCampaignList">
+                                        <mat-accordion class="example-headers-align">
+                                            <div *ngFor="let c of campaignsList; let i = index;">
+                                                <!-- <mat-expansion-panel-header>
+                                                    <mat-panel-title>
+                                                        {{c?.name}}
+                                                    </mat-panel-title>
+                                                    <mat-panel-description>
+                                                        {{ '(' + c?.count + ')'}} <mat-icon>email</mat-icon>
+                                                    </mat-panel-description>
+                                                </mat-expansion-panel-header> -->
+                                                <div><strong> Campaign: </strong> {{c?.name}}</div>
+                                                <div><strong>FROM: </strong>{{c?.from}}</div>
+                                                <div><strong>SUBJECT: </strong>{{c?.subject}}</div>
+                                                <div><strong>HTML Template:</strong></div>
+                                                <div style="border: solid 1px black;" [innerHTML]="c?.descriptionHTML">
+                                                </div>
+
+                                                <mat-list>
+                                                    <mat-list-item *ngFor="let e of c?.emailData; let j=index;">
+                                                        <div mat-list-icon style="padding-right: 12px;">
+                                                            <span
+                                                                style="padding-right: 5px; vertical-align: super; font-size: 16px;">{{(j + 1 + '.')}}</span>
+                                                            <mat-icon style="display: inline;">email</mat-icon>
+                                                        </div>
+
+                                                        <div mat-line style="font-weight: 500;">{{e?.to[0]}}</div>
+                                                        <div mat-line>Subject: {{e?.subject}} </div>
+                                                        <div mat-line>Sent: {{e?.createdAt | date: 'medium'}} </div>
+                                                        <div mat-line *ngIf="e?.tracking?.open?.timestamp">Read:
+                                                            {{e?.tracking?.open?.timestamp | date: 'medium'}} </div>
+
+                                                        <!-- <i *ngIf="e?.isReplied" matTooltip={{e?.repliedHTML}} matTooltipPosition="left" class="fas fa-reply"></i> -->
+                                                        <i *ngIf="e?.isReplied"
+                                                            (click)="openDialog(e?.repliedHTML, e?.to[0])"
+                                                            class="fas fa-reply"></i>
+                                                        <i *ngIf="e?.tracking?.length > 0 && !e?.isReplied"
+                                                            class="fas fa-check-double"></i>
+                                                        <i *ngIf="!e?.tracking || e?.tracking.length === 0"
+                                                            class="fal fa-check"></i>
+                                                    </mat-list-item>
+                                                </mat-list>
+
+                                            </div>
+                                            <app-paginator [length]="campaignsList[0]?.count"
+                                                (fetchData)="paginator = $event; fetchEmailsOfCampaign()">
+                                            </app-paginator>
+                                        </mat-accordion>
+                                    </ng-template>
+                                </div>
+                            </div>
+                        </mat-tab>
+                        
+                        <div *ngIf="companyView === 'contact'">
+                            <ng-container *ngTemplateOutlet="contactTemplate; context: details">
                             </ng-container>
                         </div>
-                    </div>
+                    </mat-tab-group>
+
 
                 </div>
                 <!-- end /.col-md-8 -->
@@ -663,10 +835,27 @@
 </ng-template>
 <!-- Contact Template -->
 <ng-template #contactTemplate let-contacts="details">
-    <div style="background: white;">
+    <div style="background: white;" fxLayout="column" fxLayoutGap="10px">
+        <div style="display: inline-flex;">
+            <button type="button" mat-raised-button color="primary" (click)="moveToSaveEmailTab()"
+                style="width: auto; height: auto;margin: 10px;">{{ 'Add Mailing List' }}</button>
+            <mat-form-field style="margin-left: 10px;">
+                <mat-label>Company Name</mat-label>
+                <input matInput [formControl]="companyName"
+                        placeholder="Company Name">
+            </mat-form-field>
+            <mat-form-field style="margin-left: 10px;">
+                <mat-label>Status</mat-label>
+                <input matInput [formControl]="status"
+                        placeholder="Status">
+            </mat-form-field>
+            <button type="button" mat-raised-button color="primary" (click)="searchClick()"
+                style="width: auto; height: auto; margin: 10px;">{{ 'Search' }}</button>
+        </div>
         <table class="table table-striped">
             <thead>
                 <tr>
+                    <th>No.</th>
                     <th>Name
                         <span *ngIf="nameAsc">
                             <i class="fas fa-sort-up" (click)="changeOrder('name','asc','contact')"></i>
@@ -675,7 +864,23 @@
                             <i class="fas fa-sort-down" (click)="changeOrder('name','desc','contact')"></i>
                         </span>
                     </th>
-                    <th>Email ({{emailCount}})
+                    <th>First Name
+                        <span *ngIf="firstNameAsc">
+                            <i class="fas fa-sort-up" (click)="changeOrder('firstName','asc','contact')"></i>
+                        </span>
+                        <span *ngIf="!firstNameAsc">
+                            <i class="fas fa-sort-down" (click)="changeOrder('firstName','desc','contact')"></i>
+                        </span>
+                    </th>
+                    <th>Last Name
+                        <span *ngIf="lastNameAsc">
+                            <i class="fas fa-sort-up" (click)="changeOrder('lastName','asc','contact')"></i>
+                        </span>
+                        <span *ngIf="!lastNameAsc">
+                            <i class="fas fa-sort-down" (click)="changeOrder('lastName','desc','contact')"></i>
+                        </span>
+                    </th>
+                    <th>Email
                         <span *ngIf="emailAsc">
                             <i class="fas fa-sort-up" (click)="changeOrder('email','asc','contact')"></i>
                         </span>
@@ -683,27 +888,39 @@
                             <i class="fas fa-sort-down" (click)="changeOrder('email','desc','contact')"></i>
                         </span>
                     </th>
-                    <th>Phone ({{phoneCount}})
-                        <span *ngIf="phoneAsc">
-                            <i class="fas fa-sort-up" (click)="changeOrder('phone','asc','contact')"></i>
+                    <th>Company Name
+                        <span *ngIf="companyName">
+                            <i class="fas fa-sort-up" (click)="changeOrder('companyName','asc','contact')"></i>
                         </span>
-                        <span *ngIf="!phoneAsc">
-                            <i class="fas fa-sort-down" (click)="changeOrder('phone','desc','contact')"></i>
+                        <span *ngIf="!companyName">
+                            <i class="fas fa-sort-down" (click)="changeOrder('companyName','desc','contact')"></i>
+                        </span>
+                    </th>
+                    <th>Status
+                        <span *ngIf="statusAsc">
+                            <i class="fas fa-sort-up" (click)="changeOrder('status','asc','contact')"></i>
+                        </span>
+                        <span *ngIf="!statusAsc">
+                            <i class="fas fa-sort-down" (click)="changeOrder('status','desc','contact')"></i>
                         </span>
                     </th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let e of companyRelatedPosts?.posts" [routerLink]="['/','post',e._id]">
-                    <td>{{e.name}}</td>
-                    <td>{{e.email}}</td>
-                    <td>{{e.phone}}</td>
+                <tr *ngFor="let e of contactList;let i=index">
+                    <td>{{i+1}}</td>
+                    <td>{{e?.name}}</td>
+                    <td>{{e?.firstName}}</td>
+                    <td>{{e?.lastName}}</td>
+                    <td>{{e?.email[0]?.email}}</td>
+                    <td>{{e?.companyName}}</td>
+                    <td>{{e?.email[0]?.status}}</td>
                 </tr>
             </tbody>
         </table>
     </div>
-    <app-paginator [length]="totalcompanyRelatedPosts"
-        (fetchData)="paginator = $event; fetchAllCompanyRealtedePosts('contact')">
+    <app-paginator [length]="totalContactCount"
+        (fetchData)="paginator = $event; fetchContactsRelatedtoMailingList()">
     </app-paginator>
 </ng-template>
 

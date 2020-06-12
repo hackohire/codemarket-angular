@@ -26,6 +26,7 @@ export class BreadcumbComponent implements OnInit {
   @Input() fromAddPost = false;
   @Input() inline = false;
   @Input() postForm: FormGroup;
+  @Input() titlePlaceholder: string;
 
   @Input() postActions = false;
 

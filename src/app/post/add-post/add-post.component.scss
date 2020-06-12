@@ -1,6 +1,7 @@
 :host ::ng-deep {
     .ck.ck-toolbar {
-        top: 145px !important;
+        // top: 145px !important;
+        top: 0 !important;
     }
 
     .docs-component-viewer-nav.common-box-shadow {
@@ -12,9 +13,14 @@
         max-height: 70vh;
     }
 
+    .ck-content {
+        max-height: 73vh !important;
+        min-height: 73vh !important;
+    }
+
     .breadcrumb-area {
         z-index: 20;
-        top: 48px;
+        // top: 48px;
         position: sticky;
         background: #fff;
 
@@ -48,8 +54,8 @@
     }
 
     .sidebar {
-        top: 145px !important;
-        position: sticky;
+        // top: 145px !important;
+        // position: sticky;
         display: block;
         height: -webkit-fill-available;
         z-index: 20;
@@ -62,8 +68,12 @@
             margin-bottom: 50px;
             z-index: 0;
         }
+        .ck-content {
+            max-height: 45vh !important;
+            min-height: 40vh !important;
+        }
         .breadcrumb-area {
-            z-index: 18 !important;
+            // z-index: 18 !important;
             top: 0 !important;
             position: relative !important;
             width: 100% !important;
@@ -78,15 +88,16 @@
             margin-top: 10px !important;
         }
         .ck.ck-toolbar {
-            position: relative !important;
-            top: 0 !important;
+            // position: sticky !important;
+            // top: 0 !important;
             z-index: 20;
         }
         .ck.ck-toolbar.ck-toolbar_grouping>.ck-toolbar__items {
             overflow-x: auto;
+            // flex-wrap: wrap;
         }
         .ck.ck-editor__editable:not(.ck-editor__nested-editable).ck-rounded-corners {
-            min-height: 310px !important;
+            // min-height: 110px !important;
         }
     }
 }
@@ -158,6 +169,7 @@
 
     .slot-select-box {
         border-color: #23417b !important;
+        color: #23417b;
       }
 
     span {

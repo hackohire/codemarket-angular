@@ -25,10 +25,10 @@ const postRoutes: Routes = [
   },
 
   /** SEND EMAIL */
-  {
-    path: `send-${PostType.Email}`,
-    loadChildren: () => import('../email/send-email/send-email.module').then(module => module.SendEmailModule),
-  },
+  // {
+  //   path: `send-${PostType.Email}`,
+  //   loadChildren: () => import('../email/send-email/send-email.module').then(module => module.SendEmailModule),
+  // },
 ];
 
 

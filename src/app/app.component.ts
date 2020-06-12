@@ -3,7 +3,6 @@ import { AuthService } from './core/services/auth.service';
 import { Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from './core/store/state/app.state';
-import { GetCartProductsList } from './core/store/actions/cart.actions';
 import { tap } from 'rxjs/operators';
 import { MatDialog } from '@angular/material';
 import { VideoChatComponent } from './video-chat/video-chat.component';

@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import moment from 'moment';
-import { ChatService } from '../shared/services/chat.service';
-import { FormGroup, Validators, FormControl } from '@angular/forms';
-import { AppointmentService } from '../shared/services/appointment.service';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { PostService } from '../shared/services/post.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-appointment',
@@ -11,57 +11,30 @@ import { AppointmentService } from '../shared/services/appointment.service';
 })
 export class AppointmentComponent implements OnInit {
 
-  public slotList = [];
-  public slotDateTime: any;
-  public appointmentForm: FormGroup;
-  public selectedDate: string;
-  public displayDate: string = "";
+  public appointmentList = [];
+  public anonymousAvatar = '../../assets/images/anonymous-avatar.jpg';
+  public s3FilesBucketURL = environment.s3FilesBucketURL;
+  displayedColumns: string[] = ['profileImg', 'fullName', 'name', 'descriptionHTML', 'appointment_date', 'status', 'edit'];
+  dataSource = new MatTableDataSource();
+  totalAppointmentCount = 0;
+  paginator: MatPaginator;
 
   constructor(
-    private _appointmentService: AppointmentService
+    private _postService: PostService
   ) { }
 
   ngOnInit() {
-    //  Initialize appointment form
-    this.appointmentForm = new FormGroup({
-      description: new FormControl('', Validators.required),
+    this.dataSource.paginator = this.paginator;
+    this.getPostByPostType();
+  }
+
+  getPostByPostType() {
+    const paginationObj = {
+      pageNumber: this.paginator.pageIndex + 1, limit: this.paginator.pageSize ? this.paginator.pageSize : 10,
+      sort: {order: ''}};
+    this._postService.getPostByPostType('appointment', '', paginationObj).subscribe((data) => {
+      this.dataSource.data = data.posts;
+      this.totalAppointmentCount = data.total;
     });
-
-    // Subscribing calendar event
-    if (this._appointmentService.subsVar == undefined) {
-      this._appointmentService.subsVar = this._appointmentService.
-        invokeAppointmentDateTime.subscribe((date: any) => {
-          this.selectedDate = date;
-          this.intervals();
-        });
-    }
-  }
-
-  intervals() {
-    const start = moment('00:00', 'hh:mm a');
-    const end = moment('23:45', 'hh:mm a');
-    start.minutes(Math.ceil(start.minutes() / 30) * 30);
-    const result = [];
-    const current = moment(start);
-    while (current <= end) {
-      result.push(current.format('HH:mm'));
-      current.add(15, 'minutes');
-    }
-    console.log(result);
-    this.slotList = result;
-  }
-
-  selectedSlot(slot: string) {
-    console.log(slot);
-    this.slotDateTime = slot;
-    const addTime = this.selectedDate.split('T');
-    this.displayDate = moment(addTime[0] + ' ' + this.slotDateTime).format('YYYY-MM-DD HH:MM:ss');
-    console.log(this.selectedDate);
-  }
-
-  confirmAppointment() {
-    console.log(this.appointmentForm.value);
-    console.log(this.selectedDate);
-    console.log(this.slotDateTime);
   }
 }

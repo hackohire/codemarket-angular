@@ -24,7 +24,8 @@ export const appConstants = {
     [PostType.Question]: 'sticky-note',
     [PostType.Note]: 'sticky-note',
     [PostType.Business]: 'sticky-note',
-    [PostType.Blog]: 'blog'
+    [PostType.Blog]: 'blog',
+    [PostType.Mentor]: 'briefcase',
   },
 
   fileS3Bucket: 'cancer-files',
@@ -180,12 +181,12 @@ export const appConstants = {
       _id
       name
       type
-      categories
       referencePostUrl
       price
       status
       createdAt
       updatedAt
+      descriptionHTML
       tags {
         name
         _id
@@ -194,7 +195,6 @@ export const appConstants = {
         ...Comments
       }
       commentCount
-      likeCount
       users {
         _id
         name
@@ -213,12 +213,6 @@ export const appConstants = {
           }
         }
       }
-      purchasedBy {
-        name
-        _id
-        createdAt
-        avatar
-      }
       slug
       comments {
         _id
@@ -235,29 +229,11 @@ export const appConstants = {
         blockId
         blockSpecificComment
       }
-
-      dateRange
-      address
-      eventType
       cover
-      usersAttending {
-        name
-        _id
-        avatar
-      }
-      location {
-        longitude
-        latitude
-        address
-      }
       companies {
         name
         _id
       }
-
-      salaryCurrency
-      salaryRangeFrom
-      salaryRangeTo
       cities {
         name
         _id
@@ -276,24 +252,11 @@ export const appConstants = {
         slug
       }
 
-      assignees {
-        _id
-        name
-        slug
-      }
-
       clients {
         _id
         name
         slug
       }
-
-      jobProfile {
-        _id
-        name
-        type
-      }
-      timeline
 
       phone
       email
@@ -301,7 +264,6 @@ export const appConstants = {
       address
       website
 
-      descriptionHTML
       activities {
         action
         activityDate
@@ -313,6 +275,12 @@ export const appConstants = {
         postId
         message
       }
+
+      appointment_date
+      cancelReason
+      duration
+      job
+      mentor
     }
     ${comment}
     `,
@@ -332,7 +300,8 @@ export const appConstants = {
     { name: PostType.Goal, label: 'Goal' },
     { name: PostType.Howtodoc, label: 'How-To-Doc' },
     { name: PostType.Interview, label: 'Interview' },
-    { name: PostType.Job, label: 'Job' },
+    { name: PostType.Job, label: 'Job', titlePlaceholder: 'Enter Job Title', descriptionPlaceholder: 'Enter Job Description', showCollaborators: false, showClients: false },
+    { name: PostType.Mentor, label: 'Mentor', titlePlaceholder: 'Enter Mentorship Title', descriptionPlaceholder: 'Enter Details about your mentorship session', showCollaborators: false, showClients: false },
     { name: PostType.Note, label: 'Notes' },
     { name: PostType.Product, label: 'Product' },
     { name: PostType.Question, label: 'Questions' },

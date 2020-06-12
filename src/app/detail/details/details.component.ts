@@ -22,6 +22,9 @@ import { appConstants } from '../../shared/constants/app_constants';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { MdePopoverTrigger } from '@material-extended/mde';
 import { ShareService } from '@ngx-share/core';
+import { set } from 'lodash';
+import { get } from 'lodash';
+import { PostType } from '../../shared/models/post-types.enum';
 
 @Component({
   selector: 'app-details',
@@ -33,6 +36,8 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
   @ViewChild('successfulRSVP', { static: false }) successfulRSVP: SwalComponent;
   details$: Observable<Post>;
+
+  postTypeEnum = PostType;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -78,6 +83,8 @@ export class DetailsComponent implements OnInit, OnDestroy {
   @ViewChild(MdePopoverTrigger, { static: false }) addClientsPopover: MdePopoverTrigger;
   @ViewChild(MdePopoverTrigger, { static: false }) addCollaboratorsPopover: MdePopoverTrigger;
 
+  selectedPostTypeDetails = null;
+
   constructor(
     private store: Store<AppState>,
     private activatedRoute: ActivatedRoute,
@@ -111,6 +118,8 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
     const postId = params && params.slug ? params.slug.split('-').pop() : '';
 
+    this.authService.selectedPostId = postId;
+
     this.subscription$.add(this.store.select(selectSelectedPost).pipe(
       tap((p: Post) => {
         if (p) {
@@ -120,6 +129,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
           });
           this.details$ = of(p);
           this.initializeCommentForm(p, 'post');
+          this.selectedPostTypeDetails = appConstants.postTypesArray.find((pType) => p.type === pType.name);
           this.postFormInitialization(p);
 
           this.breadcumb = {
@@ -169,6 +179,28 @@ export class DetailsComponent implements OnInit, OnDestroy {
       clients: new FormControl(i && i.clients ? i.clients : []),
       collaborators: new FormControl(i && i.collaborators ? i.collaborators : []),
     });
+
+    /** Add FormControls(Fields) specific to the post types */
+    switch (i.type) {
+
+      case PostType.Appointment:
+        this.postForm.addControl('cancelReason', new FormControl(i && i.cancelReason ? i.cancelReason : ''));
+        break;
+
+      case PostType.Mentor:
+        this.postForm.addControl('mentor', new FormGroup({
+          topics: new FormControl(i && i.mentor && i.mentor.topics ? i.mentor.topics : []),
+          availabilityDate: new FormControl(i && i.mentor && i.mentor.availabilityDate ? i.mentor.availabilityDate : [])
+        }));
+        break;
+
+      case PostType.Job:
+        this.postForm.addControl('job', new FormGroup({
+          jobProfile: new FormControl(i && i.job && i.job.jobProfile ? i.job.jobProfile : [])
+        }));
+        break;
+    }
+
   }
 
   initializeCommentForm(p, commentType?: string) {
@@ -256,60 +288,21 @@ export class DetailsComponent implements OnInit, OnDestroy {
     return loggedInUser && loggedInUser._id && this.postDetails && this.postDetails._id && (loggedInUser._id === this.postDetails.createdBy._id || this.postDetails.collaborators.find(c => c._id === loggedInUser._id));
   }
 
-  addDataOfPost(data) {
+  addDataOfPost(data, popover) {
     const postObj = {
       _id: this.postDetails._id,
     };
-    if (data === 'tags') {
-      postObj['tags'] = this.postForm.controls.tags.value;
-      this.postService.updatePost(
-        postObj,
-        { name: this.authService.loggedInUser.name, _id: this.authService.loggedInUser._id }
-      ).subscribe((j) => {
-        if (j && j.tags) {
-          this.postDetails.tags = j.tags;
-          this.addTagsPopover.closePopover();
-        }
-      });
-    }
 
-    if (data === 'companies') {
-      postObj['companies'] = this.postForm.controls.companies.value;
-      this.postService.updatePost(
-        postObj,
-        { name: this.authService.loggedInUser.name, _id: this.authService.loggedInUser._id }
-      ).subscribe((j) => {
-        if (j && j.companies) {
-          this.postDetails.companies = j.companies;
-          this.addCopmaniesPopover.closePopover();
-        }
-      });
-    }
+    set(postObj, data, this.postForm.get(data).value);
 
-    if (data === 'clients') {
-      postObj['clients'] = this.postForm.controls.clients.value;
-      this.postService.updatePost(
-        postObj,
-        { name: this.authService.loggedInUser.name, _id: this.authService.loggedInUser._id }
-      ).subscribe((j) => {
-        if (j && j.clients) {
-          this.postDetails.clients = j.clients;
-          this.addClientsPopover.closePopover();
-        }
-      });
-    }
-
-    if (data === 'collaborators') {
-      postObj['collaborators'] = this.postForm.controls.collaborators.value;
-      this.postService.updatePost(
-        postObj,
-        { name: this.authService.loggedInUser.name, _id: this.authService.loggedInUser._id }
-      ).subscribe((j) => {
-        if (j && j.collaborators) {
-          this.postDetails.collaborators = j.collaborators;
-          this.addCollaboratorsPopover.closePopover();
-        }
-      });
-    }
+    this.postService.updatePost(
+      postObj,
+      { name: this.authService.loggedInUser.name, _id: this.authService.loggedInUser._id }
+    ).subscribe((j) => {
+      if (j && get(j, data)) {
+        set(this.postDetails, data, get(j, data));
+        popover._emitCloseEvent();
+      }
+    });
   }
 }

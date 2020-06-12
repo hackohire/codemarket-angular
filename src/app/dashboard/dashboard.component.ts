@@ -33,6 +33,14 @@ export class DashboardComponent implements OnInit {
   step1emailInput: string;
   step2emailInput: string;
   step3emailInput: string;
+  ShellfishmailInput: string;
+  FishemailInput: string;
+  SoybeansemailInput: string;
+  WheatemailInput: string;
+  PeanutsemailInput: string;
+  NutsemailInput: string;
+  EggemailInput: string;
+  MilkemailInput: string;
 
   questionnaire: FormGroup;
   showAuth = false;

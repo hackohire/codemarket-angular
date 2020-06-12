@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <div class="add-form-area common-box-shadow" *ngIf="formList.length > 0; else noDataTemplate">
+            <div class="add-form-area common-box-shadow" *ngIf="formList?.length > 0; else noDataTemplate">
                 <h2>List Of Forms</h2>
 
                 <div class="row">
@@ -48,9 +48,9 @@
                         </tbody>
                     </table>
                 </div>
-                <!-- <app-paginator [length]="campaignsList[0]?.count"
-                    (fetchData)="paginator = $event; fetchEmailsOfCampaign()">
-                </app-paginator> -->
+                <app-paginator [length]="totalCount"
+                    (fetchData)="paginator = $event; fetchFormData()">
+                </app-paginator>
             </ng-template>
         </div>
     </div>

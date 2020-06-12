@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilderService } from 'src/app/form-builder/form-builder.service';
 import { String } from 'lodash';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-form-list',
@@ -12,6 +13,10 @@ export class FormListComponent implements OnInit {
 
   formJsonListSubscription;
   formList;
+  totalCount = 0;
+
+  paginator: MatPaginator;
+  formStrucureId;
 
   savedFormData = [];
   constructor(
@@ -21,16 +26,17 @@ export class FormListComponent implements OnInit {
 
   ngOnInit() {
     this.formJsonListSubscription = this.formBuilderService.fetchformJson().subscribe((formJsonlist) => {
-      // console.log("123 ==> ", this.authService.loggedInUser)
-      // if (this.authService.loggedInUser.roles[0] === "Admin") {
-      //   console.log("helo")
-      // }
-      this.formList = formJsonlist;
+      if (this.authService.loggedInUser.roles.indexOf("Admin") >= 0) {
+        this.formList = formJsonlist;
+      } else {
+        this.formList = [];
+      }
     });
   }
 
   formButtonClick(formStrucureId: string) {
-    console.log("Form structure Id ==> ", formStrucureId);
+    this.formStrucureId = formStrucureId;
+
     const paginationObj = {
       pageNumber: 1, limit: 10,
       sort: { order: '' }
@@ -38,10 +44,11 @@ export class FormListComponent implements OnInit {
 
     this.formBuilderService.fetchSavedDataByFormStructure(paginationObj, formStrucureId).subscribe((res) => {
       this.savedFormData = res.data;
+      this.totalCount = res.total;
+
       this.savedFormData.forEach((data) => {
         data['totalPoints'] = this.calculateTotalPoints(data.formDataJson);
       })
-      console.log("Rest ==> ", this.savedFormData);
     });
   }
 
@@ -55,5 +62,20 @@ export class FormListComponent implements OnInit {
       });
     
     return totalPoint;
+  }
+
+  fetchFormData() {
+    const paginationObj = {
+      pageNumber: this.paginator.pageIndex + 1, limit: this.paginator.pageSize ? this.paginator.pageSize : 10,
+      sort: { order: '' }
+    };
+
+    this.formBuilderService.fetchSavedDataByFormStructure(paginationObj, this.formStrucureId).subscribe((res) => {
+      this.savedFormData = res.data;
+      this.savedFormData.forEach((data) => {
+        data['totalPoints'] = this.calculateTotalPoints(data.formDataJson);
+      })
+    });
+
   }
 }

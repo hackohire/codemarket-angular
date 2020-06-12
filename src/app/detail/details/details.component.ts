@@ -78,11 +78,6 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
   displayChatBox = false;
 
-  @ViewChild(MdePopoverTrigger, { static: false }) addTagsPopover: MdePopoverTrigger;
-  @ViewChild(MdePopoverTrigger, { static: false }) addCopmaniesPopover: MdePopoverTrigger;
-  @ViewChild(MdePopoverTrigger, { static: false }) addClientsPopover: MdePopoverTrigger;
-  @ViewChild(MdePopoverTrigger, { static: false }) addCollaboratorsPopover: MdePopoverTrigger;
-
   selectedPostTypeDetails = null;
 
   constructor(
@@ -141,19 +136,30 @@ export class DetailsComponent implements OnInit, OnDestroy {
             ]
           };
 
-          this.postService.getCountOfAllPost('', '',
-            {
-              referencePostId: [this.postDetails._id],
-              connectedPosts: this.postDetails.connectedPosts.map(p => p._id),
-              postType: null
-            }).subscribe((data) => {
-              if (data.length) {
-                data = keyBy(data, '_id');
-                appConstants.postTypesArray.forEach((obj) => {
-                  obj['count'] = data[obj.name] ? data[obj.name].count : 0
-                });
+          this.checkIfVideoChat();
+
+          this.subscription$.add(
+            this.authService.loggedInUser$.subscribe((u) => {
+              if (u) {
+                this.checkIfVideoChat();
               }
-            });
+            })
+          );
+
+
+          // this.postService.getCountOfAllPost('', '',
+          //   {
+          //     referencePostId: [this.postDetails._id],
+          //     connectedPosts: this.postDetails.connectedPosts.map(p => p._id),
+          //     postType: null
+          //   }).subscribe((data) => {
+          //     if (data.length) {
+          //       data = keyBy(data, '_id');
+          //       appConstants.postTypesArray.forEach((obj) => {
+          //         obj['count'] = data[obj.name] ? data[obj.name].count : 0
+          //       });
+          //     }
+          //   });
 
         }
 
@@ -228,14 +234,6 @@ export class DetailsComponent implements OnInit, OnDestroy {
     return moment(d).fromNow();
   }
 
-  openDialog(authorId?: string): void {
-    this.dialog.open(VideoChatComponent, {
-      width: '550px',
-      // data: { authorId, peer: this.peer },
-      disableClose: true
-    });
-  }
-
   edit(details) {
     this.postService.editPost(details);
   }
@@ -303,6 +301,25 @@ export class DetailsComponent implements OnInit, OnDestroy {
         set(this.postDetails, data, get(j, data));
         popover._emitCloseEvent();
       }
+    });
+  }
+
+  checkIfVideoChat() {
+    if (this.activatedRoute.snapshot.queryParams['video_chat']) {
+      if (!this.authService.loggedInUser) {
+        this.authService.checkIfUserIsLoggedIn(true);
+        return;
+      }
+      this.openVideoRoom();
+    }
+  }
+
+  openVideoRoom(): void {
+    this.dialog.open(VideoChatComponent, {
+      minWidth: '100vw',
+      height: '100vh',
+      data: { post: this.postDetails },
+      disableClose: true
     });
   }
 }

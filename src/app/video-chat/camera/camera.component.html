@@ -4,8 +4,17 @@
 
 <video style="width:100%;" #myVideo playsinline controls autoplay></video>
 
-<button mat-raised-button color="primary" *ngIf="allowScreenShare && !isScreenSharing" (click)="screenShare()">
+<button mat-mini-fab color="primary" data-toggle="tooltip" [title]="'Share Screen'"
+    *ngIf="allowScreenShare && !isScreenSharing" (click)="screenShare()">
     <mat-icon>screen_share</mat-icon>
+</button>
+<button mat-mini-fab color="primary" data-toggle="tooltip" [title]="'Start Recording'"
+    *ngIf="allowScreenShare && !isBeingRecorded" (click)="recordScreen()">
+    <mat-icon>fiber_manual_record</mat-icon>
+</button>
+<button mat-mini-fab color="primary" data-toggle="tooltip" [title]="'Stop Recording'"
+    *ngIf="allowScreenShare && isBeingRecorded" (click)="stopRecording()">
+    <mat-icon>stop</mat-icon>
 </button>
 <!-- <button mat-raised-button color="primary" *ngIf="isScreenSharing" (click)="stopScreenShare()">
     <mat-icon>stop_screen_share</mat-icon>

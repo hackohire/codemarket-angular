@@ -5,8 +5,7 @@
 	<section style="padding-top: 35px;" class="author-profile-area">
 		<div class="container" style="margin: auto;">
 			<div class="row" style="margin-top: 0; margin-bottom: 15px;">
-				<div class="col-lg-2 col-md-2 col-sm-3 align-items-center justify-content-center"
-					style="margin: auto;">
+				<div class="col-lg-2 col-md-2 col-sm-3 align-items-center justify-content-center" style="margin: auto;">
 					<div class="profile-picture">
 						<div class="user-info">
 							<div class="profile-pic">
@@ -27,15 +26,9 @@
 					</div>
 					<div style="display: flex;">
 						<button *ngIf="selectedProfilePic" style="margin: auto;" type="button"
-							class="btn btn--vsm btn--round"
-							(click)="updateProfilePicture(user?._id)">Update</button>
+							class="btn btn--vsm btn--round" (click)="updateProfilePicture(user?._id)">Update</button>
 					</div>
 					<h4 style="text-align: center; padding-top: 10px;">{{user?.name}}</h4>
-					<button
-						*ngIf="authService?.loggedInUser && authorId && authService?.loggedInUser?._id !== authorId"
-						(click)="openDialog()" mat-mini-fab color="primary">
-						<mat-icon>video_call</mat-icon>
-					</button>
 				</div>
 				<div class="col-lg-10 col-md-10 col-sm-9">
 					<div class="picture-container" *ngIf="selectedCoverPic?.name || user?.cover">
@@ -126,22 +119,24 @@
 
 									<!-- Show list of the posts based on post type -->
 									<div *ngIf="profileView !== 'appointment'">
-									  <ng-container *ngFor="let p of postTypesArray">
-									    <ng-container *ngIf="profileView === p.name && p.name !== 'appointment'">
-									      <div class="item-grid pen-grid item-grid-large">
-									        <app-brief-post style="width: 100%;" [p]="e" *ngFor="let e of listOfAllOtherPosts?.posts"
-									          (showComments)="showCommentsOnSide($event)" [readMore]="true">
-									        </app-brief-post>
-									      </div>
-									      <app-paginator [length]="totalOtherPosts" (fetchData)="paginator = $event; fetchAllOtherPosts(p.name)">
-									      </app-paginator>
-									    </ng-container>
-									    <!-- {{p.name}} {{profileView}} -->
-									  </ng-container>
+										<ng-container *ngFor="let p of postTypesArray">
+											<ng-container *ngIf="profileView === p.name && p.name !== 'appointment'">
+												<div class="item-grid pen-grid item-grid-large">
+													<app-brief-post style="width: 100%;" [p]="e"
+														*ngFor="let e of listOfAllOtherPosts?.posts"
+														(showComments)="showCommentsOnSide($event)" [readMore]="true">
+													</app-brief-post>
+												</div>
+												<app-paginator [length]="totalOtherPosts"
+													(fetchData)="paginator = $event; fetchAllOtherPosts(p.name)">
+												</app-paginator>
+											</ng-container>
+											<!-- {{p.name}} {{profileView}} -->
+										</ng-container>
 									</div>
 									<ng-container *ngIf="profileView === 'appointment'">
-									  <ng-container *ngTemplateOutlet="appointmentTemplate; context: details">
-									  </ng-container>
+										<ng-container *ngTemplateOutlet="appointmentTemplate; context: details">
+										</ng-container>
 									</ng-container>
 
 								</div>
@@ -184,64 +179,67 @@
 				<app-editor [id]="f?._id" *ngFor="let f of files" [data]="[f]" [readOnly]="true"></app-editor>
 			</ng-template>
 
-<!-- Appointment Template -->
-<ng-template #appointmentTemplate let-contacts="details">
-  <div class="mat-elevation-z8">
-    <table mat-table [dataSource]="dataSource">
+			<!-- Appointment Template -->
+			<ng-template #appointmentTemplate let-contacts="details">
+				<div class="mat-elevation-z8">
+					<table mat-table [dataSource]="dataSource">
 
-      <ng-container matColumnDef="profileImg">
-        <th mat-header-cell *matHeaderCellDef></th>
-        <td mat-cell *matCellDef="let element">
-          <img class="chat-list-avatar"
-            [src]="element.createdBy.avatar ? ((s3FilesBucketURL + element.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar" />
-        </td>
-      </ng-container>
+						<ng-container matColumnDef="profileImg">
+							<th mat-header-cell *matHeaderCellDef></th>
+							<td mat-cell *matCellDef="let element">
+								<img class="chat-list-avatar"
+									[src]="element.createdBy.avatar ? ((s3FilesBucketURL + element.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar" />
+							</td>
+						</ng-container>
 
-      <ng-container matColumnDef="fullName">
-        <th mat-header-cell *matHeaderCellDef> Name </th>
-        <td mat-cell *matCellDef="let element"> {{element.createdBy.name}} </td>
-      </ng-container>
+						<ng-container matColumnDef="fullName">
+							<th mat-header-cell *matHeaderCellDef> Name </th>
+							<td mat-cell *matCellDef="let element"> {{element.createdBy.name}} </td>
+						</ng-container>
 
-      <!-- Position Column -->
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef> Title </th>
-        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-      </ng-container>
+						<!-- Position Column -->
+						<ng-container matColumnDef="name">
+							<th mat-header-cell *matHeaderCellDef> Title </th>
+							<td mat-cell *matCellDef="let element"> {{element.name}} </td>
+						</ng-container>
 
-      <!-- Name Column -->
-      <ng-container matColumnDef="appointment_date">
-        <th mat-header-cell *matHeaderCellDef> Appointment Date</th>
-        <td mat-cell *matCellDef="let element"> {{element.appointment_date | date:'dd-MM-yyyy h:mm a'}} </td>
-      </ng-container>
+						<!-- Name Column -->
+						<ng-container matColumnDef="appointment_date">
+							<th mat-header-cell *matHeaderCellDef> Appointment Date</th>
+							<td mat-cell *matCellDef="let element">
+								{{element.appointment_date | date:'dd-MM-yyyy h:mm a'}} </td>
+						</ng-container>
 
-      <!-- Weight Column -->
-      <ng-container matColumnDef="descriptionHTML">
-        <th mat-header-cell *matHeaderCellDef> Description </th>
-        <td mat-cell *matCellDef="let element">
-          <div [innerHTML]="element.descriptionHTML"></div>
-        </td>
-      </ng-container>
+						<!-- Weight Column -->
+						<ng-container matColumnDef="descriptionHTML">
+							<th mat-header-cell *matHeaderCellDef> Description </th>
+							<td mat-cell *matCellDef="let element">
+								<div [innerHTML]="element.descriptionHTML"></div>
+							</td>
+						</ng-container>
 
-      <!-- Weight Column -->
-      <ng-container matColumnDef="status">
-        <th mat-header-cell *matHeaderCellDef> Status </th>
-        <td mat-cell *matCellDef="let element"> {{element.status}} </td>
-      </ng-container>
+						<!-- Weight Column -->
+						<ng-container matColumnDef="status">
+							<th mat-header-cell *matHeaderCellDef> Status </th>
+							<td mat-cell *matCellDef="let element"> {{element.status}} </td>
+						</ng-container>
 
-      <!-- Weight Column -->
-      <ng-container matColumnDef="edit">
-        <th mat-header-cell *matHeaderCellDef>Action</th>
-        <td mat-cell *matCellDef="let element">
-          <a mat-button color="primary" [href]="'/post' + '/' + (element?.slug ? element.slug : element._id)"
-            target="_blank">Edit</a>
-        </td>
-      </ng-container>
+						<!-- Weight Column -->
+						<ng-container matColumnDef="edit">
+							<th mat-header-cell *matHeaderCellDef>Action</th>
+							<td mat-cell *matCellDef="let element">
+								<a mat-button color="primary"
+									[href]="'/post' + '/' + (element?.slug ? element.slug : element._id)"
+									target="_blank">Edit</a>
+							</td>
+						</ng-container>
 
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
+						<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+						<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+					</table>
 
-    <app-paginator [length]="totalAppointmentCount" (fetchData)="paginator = $event; getPostByPostType()">
-    </app-paginator>
-  </div>
-</ng-template>
+					<app-paginator [length]="totalAppointmentCount"
+						(fetchData)="paginator = $event; getPostByPostType()">
+					</app-paginator>
+				</div>
+			</ng-template>

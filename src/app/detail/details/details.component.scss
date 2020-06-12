@@ -6,6 +6,12 @@
   }
 }
 
+:host ::ng-deep {
+    .mat-dialog-container {
+        padding: 12px;
+    }
+}
+
  aside.sidebar {
   position: sticky;
   // max-height: 85vh;

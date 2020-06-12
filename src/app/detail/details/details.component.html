@@ -60,7 +60,11 @@
 
                 <div class="col-md-4 col-sm-12">
                     <ul class="row infos">
-
+                        <li>
+                            <button mat-mini-fab color="primary">
+                                <mat-icon (click)="openVideoRoom()">video_call</mat-icon>
+                            </button>
+                        </li>
 
                         <li *ngIf="postDetails?.email && postDetails?.email?.length">
                             <p class="data-label">Email</p>

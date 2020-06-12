@@ -7,7 +7,6 @@ import { keyBy } from 'lodash';
 import { UserService } from '../../user/user.service';
 import { User } from '../../shared/models/user.model';
 import { Observable, Subscription, of } from 'rxjs';
-import { VideoChatComponent } from '../../video-chat/video-chat.component';
 import { MatDialog, MatPaginator, MatTableDataSource } from '@angular/material';
 import Peer from 'peerjs';
 import { PostType } from '../../shared/models/post-types.enum';
@@ -255,14 +254,6 @@ export class MyProfileComponent implements OnInit {
   fromNow(date) {
     const d = moment(date).isValid() ? date : new Date(+date);
     return moment(d).fromNow();
-  }
-
-  openDialog(): void {
-    this.dialog.open(VideoChatComponent, {
-      width: '550px',
-      data: { authorId: this.authorId, peer: this.userService.peer.value },
-      disableClose: true
-    });
   }
 
   initializeCommentForm(userId, commentType?: string) {

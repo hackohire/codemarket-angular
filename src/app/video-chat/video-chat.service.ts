@@ -86,7 +86,7 @@ export class VideoChatService {
                     {
                         name,
                         tracks,
-                        RecordParticipantsOnConnect: true,
+                        // RecordParticipantsOnConnect: true,
                         dominantSpeaker: true
                     } as ConnectOptions);
         } catch (error) {

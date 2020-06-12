@@ -29,6 +29,7 @@ import { ParticipantsComponent } from './video-chat/participants/participants.co
 import { DeviceSelectComponent } from './video-chat/settings/device-select/device-select.component';
 import { SettingsComponent } from './video-chat/settings/settings.component';
 import { DonateComponent } from './donate/donate.component';
+import { VideoChatComponent } from './video-chat/video-chat.component';
 
 // import { SignInComponent } from './core/amplify/sign-in-component';
 
@@ -46,6 +47,7 @@ import { DonateComponent } from './donate/donate.component';
     SelecteDeselectComponent,
 
     VideoChatHomeComponent,
+    VideoChatComponent,
     CameraComponent,
     RoomsComponent,
     ParticipantsComponent,
@@ -69,7 +71,7 @@ import { DonateComponent } from './donate/donate.component';
   ],
   providers: [PostDataResolver],
   bootstrap: [AppComponent],
-  entryComponents: [LoaderComponent, SelecteDeselectComponent]
+  entryComponents: [LoaderComponent, SelecteDeselectComponent, VideoChatComponent]
 })
 export class AppModule {
   constructor(private injector: Injector) {

@@ -73,6 +73,7 @@ export class VideoChatComponent implements OnInit, AfterViewInit {
     if (this.activeRoom) {
       this.activeRoom.disconnect();
       this.activeRoom = null;
+      this.joined = false;
     }
 
     this.camera.finalizePreview();
@@ -85,6 +86,7 @@ export class VideoChatComponent implements OnInit, AfterViewInit {
   async onRoomChanged(roomName: string) {
     if (roomName) {
       if (this.activeRoom) {
+        this.joined = false;
         this.activeRoom.disconnect();
       }
 

@@ -2,7 +2,7 @@ import { plans } from '../app/shared/constants/plan_details';
 
 export const environment = {
   braintree_client: 'sandbox_x6kwrbkb_hnwczpyytcggqqth',
-  paypal_client: 'AWyqKpeiqQS6vUI7k7u2LpwhSZr0ikUzcbYLM50aBLmwo2fAtIsVkZrSn5tWZ_bElFtV34Lj5Q3ukeqA',
+  paypal_client: 'ARaebJGRDl8q7x0IP1ZADKo4xUxYTq5WrU521uyMilOn4ylP3uTJv4UGkO4Q2uSdkcRsxnRP8vNQF1jW',
   ckEditor: {
     CKEDITOR_ENVIRONMENT_ID: "5OgsvqWDG6xC3VXY17lL",
     CKEDITOR_SECRET_KEY: 'nrKe5ANkb47Dcsxo8TwMNUwJXVrK1TSH2auQZhIcR7ZFrLyhrSPyQDYvcQSW',

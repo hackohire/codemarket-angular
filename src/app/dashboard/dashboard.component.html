@@ -71,7 +71,7 @@
             <div class="col-lg-6 p-5 hero-img aos-init aos-animate text-center" style="background-color: #333;" data-aos="fade-left">
                 <img src="../../assets/images/Header.svg" class="img-fluid" alt="">
             </div>
-            <div class="col-lg-6 py-5 py-lg-0 px-0 px-lg-5 d-flex flex-column justify-content-center aos-init aos-animate"
+            <div class="col-lg-6 py-5 py-lg-0 px-3 px-lg-5 d-flex flex-column justify-content-center aos-init aos-animate"
                 data-aos="fade-up">
                 <h1 style="font-size: 36px; line-height: normal; max-width: 100%; color:#00aeef; text-transform: none; margin: 0 0 1rem 0; letter-spacing: 1px; font-weight: 400;">
                     ALLERGY FREE TODAY
@@ -96,13 +96,13 @@
     </div>
 </section>
 
-<section style="padding: 60px 0;background: #f2f9ff;">
-    <div class="container">
+<section style="background: #fff;">
+    <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-6 order-2 order-lg-1 pt-5 pt-lg-0 d-flex flex-column justify-content-center aos-init aos-animate"
+            <div class="col-lg-6 order-2 order-lg-1 py-5 pt-lg-0 px-lg-5 d-flex flex-column justify-content-center aos-init aos-animate"
                 data-aos="fade-left">
                 <form>
-                    <div id="append_location" class="individuals-signup-cta__form-group">
+                    <div id="append_location" class="individuals-signup-cta__form-group" style="margin-left: auto;">
                         <label class="individuals-signup-cta__label">Enter your email address</label>
                         <input type="hidden" name="fyi_from_landing" value="true">
                         <input [(ngModel)]="pledgeemailInput" id="email_input"
@@ -120,15 +120,9 @@
                     <span>Safe. Secure. Organized.</span>
                 </div>
             </div>
-            <div class="col-lg-6 order-1 order-lg-2 d-flex flex-column justify-content-center aos-init aos-animate"
+            <div class="col-lg-6 order-1 order-lg-2 d-flex flex-column justify-content-center aos-init aos-animate" style="padding: 0;"
                 data-aos="fade-up">
-                <div>
-                    <h1
-                        style="font-size: 36px; font-weight: 100; line-height: normal; max-width: 100%; text-align: left;color:#000; text-transform: none;margin: 20px 0;">
-                        Pledge to be part of the solution to end hate in our community by donating 1 hr/month of your
-                        time to mentor & teach.
-                    </h1>
-                </div>
+                <img src="../../assets/images/3-eggs.png" class="img-fluid" alt="">
             </div>
         </div>
     </div>
@@ -336,7 +330,7 @@
             </h1>
         </div>
         <div class="col-md-3 mb-5">
-            <img height="100px" [src]="'../../assets/images/Allergy-Milk.svg'">
+            <img height="100px" [src]="'../../assets/images/no milk.svg'">
             <a style="font-family: 'Rectory Regular'; margin: 10px 0; display: block; font-size: 1.5em; color: #575757"
                 [routerLink]="['/', 'innovate']">Milk Allergy</a>
             <form>
@@ -357,7 +351,7 @@
             </form>
         </div>
         <div class="col-md-3 mb-5">
-            <img height="100px" [src]="'../../assets/images/Allergy-Egg.svg'">
+            <img height="100px" [src]="'../../assets/images/no eggs.svg'">
             <a style="font-family: 'Rectory Regular'; margin: 10px 0; display: block; font-size: 1.5em; color: #575757"
                 [routerLink]="['/', 'innovate']">Egg Allergy</a>
             <form>
@@ -378,7 +372,7 @@
             </form>
         </div>
         <div class="col-md-3 mb-5">
-            <img height="100px" [src]="'../../assets/images/Allergy-Nuts.svg'">
+            <img height="100px" [src]="'../../assets/images/no nuts.svg'">
             <a style="font-family: 'Rectory Regular'; margin: 10px 0; display: block; font-size: 1.5em; color: #575757"
                 [routerLink]="['/', 'innovate']">Nuts Allergy</a>
             <form>
@@ -399,7 +393,7 @@
             </form>
         </div>
         <div class="col-md-3 mb-5">
-            <img height="100px" [src]="'../../assets/images/Allergy-Peanuts.svg'">
+            <img height="100px" [src]="'../../assets/images/no peanut.svg'">
             <a style="font-family: 'Rectory Regular'; margin: 10px 0; display: block; font-size: 1.5em; color: #575757"
                 [routerLink]="['/', 'innovate']">Peanuts Allergy</a>
             <form>
@@ -420,7 +414,7 @@
             </form>
         </div>
         <div class="col-md-3 mb-5">
-            <img height="100px" [src]="'../../assets/images/Allergy-Wheat.svg'">
+            <img height="100px" [src]="'../../assets/images/no wheat.svg'">
             <a style="font-family: 'Rectory Regular'; margin: 10px 0; display: block; font-size: 1.5em; color: #575757"
                 [routerLink]="['/', 'innovate']">Wheat Allergy</a>
             <form>
@@ -441,7 +435,7 @@
             </form>
         </div>
         <div class="col-md-3 mb-5">
-            <img height="100px" [src]="'../../assets/images/Allergy-Soybeans.svg'">
+            <img height="100px" [src]="'../../assets/images/no soybeans.svg'">
             <a style="font-family: 'Rectory Regular'; margin: 10px 0; display: block; font-size: 1.5em; color: #575757"
                 [routerLink]="['/', 'innovate']">Soybeans Allergy</a>
             <form>
@@ -462,7 +456,7 @@
             </form>
         </div>
         <div class="col-md-3 mb-5">
-            <img height="100px" [src]="'../../assets/images/Allergy-Fish.svg'">
+            <img height="100px" [src]="'../../assets/images/no fish.svg'">
             <a style="font-family: 'Rectory Regular'; margin: 10px 0; display: block; font-size: 1.5em; color: #575757"
                 [routerLink]="['/', 'innovate']">Fish Allergy</a>
             <form>
@@ -483,7 +477,7 @@
             </form>
         </div>
         <div class="col-md-3 mb-5">
-            <img height="100px" [src]="'../../assets/images/Allergy-Shellfish.svg'">
+            <img height="100px" [src]="'../../assets/images/no crabs.svg'">
             <a style="font-family: 'Rectory Regular'; margin: 10px 0; display: block; font-size: 1.5em; color: #575757"
                 [routerLink]="['/', 'innovate']">Shellfish Allergy</a>
             <form>

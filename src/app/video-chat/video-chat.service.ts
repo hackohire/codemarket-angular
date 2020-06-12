@@ -82,9 +82,11 @@ export class VideoChatService {
             const token = await this.getAuthToken();
             room =
                 await connect(
-                    token, {
+                    token,
+                    {
                         name,
                         tracks,
+                        RecordParticipantsOnConnect: true,
                         dominantSpeaker: true
                     } as ConnectOptions);
         } catch (error) {

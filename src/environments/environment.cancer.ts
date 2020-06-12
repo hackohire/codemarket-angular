@@ -2,8 +2,8 @@ import { plans } from '../app/shared/constants/plan_details';
 
 export const environment = {
   ckEditor: {
-    ckEditorEnvironMentId: 'qWCSnjZdhKZIm2BDeR6e',
-    ckEditorSecretKey: 'vOhUDQFlGWDTaOpVQmaPPm47RA9zFQ00tB6dQRdIa6Dqtxn7Uf8iGEc8oCMb',
+    CKEDITOR_ENVIRONMENT_ID: "5OgsvqWDG6xC3VXY17lL",
+    CKEDITOR_SECRET_KEY: 'nrKe5ANkb47Dcsxo8TwMNUwJXVrK1TSH2auQZhIcR7ZFrLyhrSPyQDYvcQSW',
     ws: '71258.cke-cs.com/ws',
     developmentTokenUrl: 'https://71258.cke-cs.com/token/dev/qhNbD6xUjkeVtrEc7aD2PcMhDkgmirUJHunqRWESilB0mTzZ0RHcJYk68P6D'
   },

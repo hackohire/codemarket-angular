@@ -20,6 +20,9 @@ export interface Job {
     jobProfile?: Tag[];
 }
 
+export interface FormJson {
+    components?: any[];
+}
 export interface Post {
     name?: string;
     description?: [{
@@ -66,4 +69,5 @@ export interface Post {
 
     mentor?: Mentor;
     job?: Job;
+    formStrucutreJSON?: FormJson
 }

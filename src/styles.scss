@@ -17433,3 +17433,16 @@ a {
 //       padding-top: 93px;
 //   }
 // }
+
+.resultscontent {
+  position: sticky;
+  top: 80px;
+  z-index: 9;
+  background: #1e69ac;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+  display: inline-block;
+  height: 30%;
+  margin-left: 300px;
+}

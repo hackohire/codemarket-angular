@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input, ChangeDetectorRef, AfterViewInit, NgZone } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, ChangeDetectorRef, AfterViewInit, NgZone, Inject, PLATFORM_ID } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -11,7 +11,7 @@ import { BreadCumb } from '../../shared/models/bredcumb.model';
 import { PostStatus } from '../../shared/models/poststatus.enum';
 import { EditorComponent } from '../../shared/components/editor/editor.component';
 import { Post } from '../../shared/models/post.model';
-import { Location } from '@angular/common';
+import { Location, isPlatformBrowser } from '@angular/common';
 import { PostService } from '../../shared/services/post.service';
 import { environment } from '../../../environments/environment';
 import { AppointmentService } from 'src/app/shared/services/appointment.service';
@@ -76,9 +76,12 @@ export class AddPostComponent implements OnInit, AfterViewInit {
 
   /** Feature Variables */
   useCalendar: boolean;
-
+  useFormIo: boolean;
+  formDetails: FormGroup;
   selectedPostTypeDetails = null;
-
+  public form = { components: [] };
+  formStructureJSON = null;
+  
   constructor(
     public authService: AuthService,
     private store: Store<AppState>,
@@ -87,6 +90,7 @@ export class AddPostComponent implements OnInit, AfterViewInit {
     private location: Location,
     private _appointmentService: AppointmentService,
     private router: Router,
+    @Inject(PLATFORM_ID) private _platformId,
   ) {
 
     this.postType = this.activatedRoute.snapshot.queryParams.type;
@@ -180,6 +184,11 @@ export class AddPostComponent implements OnInit, AfterViewInit {
         this.postForm.addControl('cancelReason', new FormControl(i && i.cancelReason ? i.cancelReason : ''));
         break;
 
+      case PostType.Survey:
+        this.useFormIo = true;
+        this.postForm.addControl('formStrucutreJSON', new FormControl(i && i.formStrucutreJSON ? i.formStrucutreJSON : ''));
+        break;
+
       case PostType.Mentor:
         this.useCalendar = true;
         this.postForm.addControl('mentor', new FormGroup({
@@ -221,12 +230,15 @@ export class AddPostComponent implements OnInit, AfterViewInit {
       this.createdBy.setValue(this.authService.loggedInUser._id);
     }
 
+    /** Set value of fromJsonStructure */
+    this.postForm.get('formStrucutreJSON').setValue(this.formStructureJSON);
 
     const postFormValue = { ...this.postForm.value };
     postFormValue.status = status;
 
     /** Set Values Based On the Post Type Before Submitting the Post */
     this.setValuesBeforeSubmit(postFormValue);
+    
 
     if (this.postId) {
       this.store.dispatch(UpdatePost({
@@ -348,4 +360,11 @@ export class AddPostComponent implements OnInit, AfterViewInit {
     }
   }
 
+  isBrowser() {
+    return isPlatformBrowser(this._platformId);
+  }
+
+  onChange(event) {
+    this.formStructureJSON = event.form;
+  }
 }

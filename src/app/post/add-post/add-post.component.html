@@ -32,6 +32,10 @@
                 <ng-container *ngTemplateOutlet="calendar"></ng-container>
             </div>
 
+            <div *ngIf="useFormIo">
+                <ng-container *ngTemplateOutlet="survey"></ng-container>
+            </div>
+
             <div [formGroup]="postForm" class="ckEditor" [style.order]="booked ? 1 : 2">
                 <h3 style="font-size: 1rem;">
                     {{selectedPostTypeDetails?.descriptionPlaceholder ? selectedPostTypeDetails?.descriptionPlaceholder : ('Enter ' + postType + ' description:' )}}
@@ -169,6 +173,12 @@
     </div>
 </ng-template>
 
+<!-- Survey Template -->
+<ng-template #survey>
+    <div>
+        <form-builder *ngIf="isBrowser()" [form]="form" (change)="onChange($event)"></form-builder>
+    </div>
+</ng-template>
 
 <!-- AUTO COMPLETE POPOVER TEMPLATE -->
 <ng-template #autoComplete let-type="type" let-collection="collection" let-fieldName="fieldName"

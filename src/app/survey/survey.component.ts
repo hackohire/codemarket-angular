@@ -19,7 +19,7 @@ export class SurveyComponent implements OnInit {
   connectedFormDataId = '';
   formJsonListSubscription: Subscription;
   formDetails: FormGroup;
-  public form1 = { components: [] };
+  public form1 = { components: [], image: '' };
   totalPoints = 0;
   id;
 

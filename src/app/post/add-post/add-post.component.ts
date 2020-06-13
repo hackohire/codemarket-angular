@@ -231,7 +231,9 @@ export class AddPostComponent implements OnInit, AfterViewInit {
     }
 
     /** Set value of fromJsonStructure */
-    this.postForm.get('formStrucutreJSON').setValue(this.formStructureJSON);
+    if (this.postType ===  'survey') {
+      this.postForm.get('formStrucutreJSON').setValue(this.formStructureJSON);
+    }
 
     const postFormValue = { ...this.postForm.value };
     postFormValue.status = status;

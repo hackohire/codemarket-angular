@@ -29,7 +29,18 @@
 
                 <div *ngIf="!showConnectedPosts" [ngClass]="selectedBlock ? 'col-lg-7 col-md-7' : 'col-lg-8 col-md-8'">
 
-                    <div class="item-info">
+                    <div *ngIf="postDetails?.formStrucutreJSON" style="display: inline-flex;"> 
+                        <formio [form]="postDetails?.formStrucutreJSON" (change)="valueChangeFun($event)" (submit)="onSubmitSurveyForm($event)"></formio>
+                        <div class="resultscontent">
+                            <div class="preview">
+                              <h3>Total Points</h3>
+                            </div>
+                            <div aria-live="polite" class="preview preview-results" role="status">
+                              <p>{{totalPoints}}</p>
+                            </div>
+                          </div>
+                    </div>
+                    <div class="item-info" *ngIf="!postDetails?.formStrucutreJSON">
                         <div>
                             <div class="tab-pane fade show product-tab active" id="product-details">
                                 <article>

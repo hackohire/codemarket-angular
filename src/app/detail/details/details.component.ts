@@ -25,6 +25,8 @@ import { ShareService } from '@ngx-share/core';
 import { set } from 'lodash';
 import { get } from 'lodash';
 import { PostType } from '../../shared/models/post-types.enum';
+import { FormBuilderService } from 'src/app/form-builder/form-builder.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-details',
@@ -79,6 +81,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
   displayChatBox = false;
 
   selectedPostTypeDetails = null;
+  totalPoints = 0;
 
   constructor(
     private store: Store<AppState>,
@@ -90,6 +93,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
     private router: Router,
     public shareSocial: ShareService,
     private breakpointObserver: BreakpointObserver,
+    private formBuilderService: FormBuilderService
   ) {
     /** Peer Subscription for Video Call */
     // this.userService.peer.subscribe((p) => {
@@ -119,6 +123,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
       tap((p: Post) => {
         if (p) {
           this.postDetails = p;
+          console.log("123 ==> ", this.postDetails)
           this.collaborators = this.postDetails.collaborators.map((cDetail) => {
             return cDetail._id;
           });
@@ -321,5 +326,56 @@ export class DetailsComponent implements OnInit, OnDestroy {
       data: { post: this.postDetails },
       disableClose: true
     });
+  }
+
+  onSubmitSurveyForm(event) {
+    if (!this.authService.loggedInUser) {
+      this.authService.checkIfUserIsLoggedIn(true);
+      return;
+    }
+    
+    const formObjToSave = {
+      formname: this.postDetails.name,
+      formDataJson: event.data,
+      connectedFormStructureId: this.postDetails._id,
+      createdBy: this.authService.loggedInUser._id
+    };
+
+    console.log("Form Data save Obj ==> ", formObjToSave);
+
+    this.formBuilderService.addformData(formObjToSave).subscribe((d: any) => {
+      if (d) {
+        Swal.fire(`Your data for ${formObjToSave.formname} has been Added Successfully`, '', 'success').then(() => {
+          this.router.navigate(['/dashboard']);
+        });
+      }
+    });
+  }
+
+  valueChangeFun(event) {
+    if (event.data) {
+      const values : any= Object.values(event.data);
+      this.totalPoints = 0;
+      values.forEach((i: any) => {
+        if (parseInt(i)) {
+          this.totalPoints += i;
+        }
+      });
+
+      // this.formArray[this.currentFormIndex].value = values[0] !== "" ? values[0] : 0;
+      // this.totalPoints = sumBy(this.formArray, 'value') || 0;
+      // this.formDataJsonToSave[this.currentFormIndex][this.formArray[this.currentFormIndex].form1.components[0].key] = values[0] || 0;
+      // this.formDataJsonToSave[this.currentFormIndex].selected = values[0] !== "" ? true : false;
+      // const allSelected = this.formDataJsonToSave.map((d) => {
+      //   return d.selected
+      // });
+      
+      // if (allSelected.indexOf(false) === -1) {
+      //   this.enableSubmitButton = true;
+      // } else {
+      //   this.enableSubmitButton = false;
+      // }
+
+    }
   }
 }

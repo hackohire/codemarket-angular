@@ -26,6 +26,7 @@ export const appConstants = {
     [PostType.Business]: 'sticky-note',
     [PostType.Blog]: 'blog',
     [PostType.Mentor]: 'briefcase',
+    [PostType.Survey]: 'briefcase',
   },
 
   fileS3Bucket: 'manav-files',
@@ -281,6 +282,7 @@ export const appConstants = {
       duration
       job
       mentor
+      formStrucutreJSON
     }
     ${comment}
     `,
@@ -309,5 +311,6 @@ export const appConstants = {
     { name: PostType.Service, label: 'Service' },
     { name: PostType.Testing, label: 'Testing' },
     { name: PostType.Forms, label: 'Forms' },
+    { name: PostType.Survey, label: 'Survey' },
   ],
 };

@@ -150,6 +150,15 @@ input[type="number"]::-webkit-outer-spin-button {
   background-color: white;
 }
 
+.mat-drawer.mat-drawer-side {
+  z-index: 2;
+  box-shadow: 0 0 10px 0 #666;
+}
+
+mat-sidenav-content.mat-drawer-content.mat-sidenav-content {
+  margin-left: 0 !important;
+}
+
 tr.mat-header-row {
   background-color: #f9f9f9;
   color: #616161;

@@ -198,30 +198,30 @@ footer {
 	}
 }
 
-
-
-
-
-
-
-
 :host ::ng-deep {
   .ck-editor__editable:not([contenteditable=false]) {
     border: 1px solid #c4c4c4;
     // max-height: 73vh;
   }
-
   .row-presence {
     position: sticky;
-    // top: 48px;
-    top: 0px;
+    top: 48px;
+    //top: 0px;
   }
   .ck.ck-toolbar {
     position: sticky;
-    top: 56px;
+    top: 104px;
     z-index: 15;
   }
   .ck-focused {
     border: 1px solid lightgray !important;
+  }
+  @media screen and ( max-width: 800px ) {
+    .row-presence {
+      top: 86px;
+    }
+    .ck.ck-toolbar {
+      top: 143px;
+    }
   }
 }

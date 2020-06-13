@@ -42,6 +42,16 @@ export class SurveyComponent implements OnInit {
     ) { 
       this.connectedFormStructureId = '5ee1fad4be0ca353ff5caa45';
     }
+    images = [
+      '../../assets/images/sleep-icons/bedtime.svg',     
+      '../../assets/images/sleep-icons/energy.svg',
+      '../../assets/images/sleep-icons/sleep.svg',
+      '../../assets/images/sleep-icons/restroom.svg',
+      '../../assets/images/sleep-icons/low-battery.svg',
+      '../../assets/images/sleep-icons/coffee.svg',
+      '../../assets/images/sleep-icons/wifi.svg',
+      '../../assets/images/sleep-icons/lights.svg'
+    ];
 
   ngOnInit() {
     this.formJsonListSubscription = this.formBuilderService.fetchFormStructureById(this.connectedFormStructureId).subscribe((formJson) => {
@@ -52,7 +62,8 @@ export class SurveyComponent implements OnInit {
             this.formArray.push({
               form1: {
                 components: [c],
-                value: this.totalPoints
+                value: this.totalPoints,
+                image: this.images[i]
               }
             });
   

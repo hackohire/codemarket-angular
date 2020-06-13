@@ -29,9 +29,9 @@
 
     <div class="container-fluid">
         <div class="row" style="min-height: calc(100vh - 48px);">
-            <div class="col-lg-6 order-1 order-lg-1 pt-3 pt-lg-0 pb-3 pb-lg-0 px-lg-5 hero-img d-flex flex-column justify-content-center aos-init aos-animate"  data-aos="fade-left" style="background-color: blue;align-items: center;">
+            <div class="col-lg-6 order-1 order-lg-1 pt-3 pt-lg-0 pb-3 pb-lg-0 px-lg-5 hero-img d-flex flex-column justify-content-center aos-init aos-animate"  data-aos="fade-left" style="background-color: #00aeef;align-items: center;">
                 <div>
-                    <h2 style="font-size: 80px;color: white;">Total Points</h2>
+                    <h2 style="font-size: 40px;color: white;text-transform: uppercase;letter-spacing: 1px;">Total Points</h2>
                   </div>
                   <div aria-live="polite" role="status">
                     <h3 style="font-size: 100px;color: white;">{{totalPoints}}</h3>
@@ -43,30 +43,35 @@
                         <mat-step>
                             <ng-container>
                                 <div><h3>Find Your Sleep Quality:</h3></div>
-                                <div>
-                                    <div *ngIf="fillForm">
-                                        <formio [form]="form1" (change)="valueChangeFun($event)" (submit)="onSubmitForm($event)"></formio>
+                                <div class="row" style="margin: 20px -15px;">
+                                    <div class="col-md-3">
+                                        <img src="{{form1.image}}" style="margin-top: 7px;">
                                     </div>
-                                    <div *ngIf="!fillForm">
-                                        <div *ngFor="let data of individualPoints;let i = index">
-                                            <div>
-                                                <h4>{{data.label}}</h4>
-                                                <div style="display: inline-flex; margin: 10px">
-                                                    <h6>Points => </h6>
-                                                    <h6 class="point">{{data.value}}</h6>
+                                    <div class="col-md-9">
+                                        <div *ngIf="fillForm">
+                                            <formio [form]="form1" (change)="valueChangeFun($event)" (submit)="onSubmitForm($event)"></formio>
+                                        </div>
+                                        <div *ngIf="!fillForm">
+                                            <div *ngFor="let data of individualPoints;let i = index">
+                                                <div>
+                                                    <h4>{{data.label}}</h4>
+                                                    <div style="display: inline-flex; margin: 10px">
+                                                        <h6>Points => </h6>
+                                                        <h6 class="point">{{data.value}}</h6>
+                                                    </div>
                                                 </div>
                                             </div>
+                                        </div>
+                                        <div>
+                                            <button *ngIf="lastFormIndex !== -1" style="margin-right: 10px;box-shadow: none;background: #eee;" mat-raised-button type="button" (click)="onBackClick()" [disabled]="hideAllButton">Back</button>
+                                            <button color="primary" *ngIf="currentFormIndex<(formArray?.length-1)" style="margin-right: 10px"
+                                                mat-raised-button matStepperNext type="button" (click)="onNextClick()" [disabled]="hideAllButton">Next</button>
+                                            <button *ngIf="currentFormIndex === (formArray?.length-1)" color="primary" [disabled]="!enableSubmitButton || hideAllButton"
+                                                mat-raised-button type="button" (click)="onSubmitForm($event)">Submit</button>
                                         </div>
                                     </div>
                                 </div>
                             </ng-container>
-                            <div>
-                                <button *ngIf="lastFormIndex !== -1" style="margin-right: 10px;box-shadow: none;background: #eee;" mat-raised-button type="button" (click)="onBackClick()" [disabled]="hideAllButton">Back</button>
-                                <button color="primary" *ngIf="currentFormIndex<(formArray?.length-1)" style="margin-right: 10px"
-                                    mat-raised-button matStepperNext type="button" (click)="onNextClick()" [disabled]="hideAllButton">Next</button>
-                                <button *ngIf="currentFormIndex === (formArray?.length-1)" color="primary" [disabled]="!enableSubmitButton || hideAllButton"
-                                    mat-raised-button type="button" (click)="onSubmitForm($event)">Submit</button>
-                            </div>
                         </mat-step>
                     </mat-horizontal-stepper>
                 </div>

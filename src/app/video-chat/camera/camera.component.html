@@ -2,7 +2,7 @@
     <div *ngIf="isInitializing">Loading preview... Please wait.</div>
 </div>
 
-<video style="width:100%;" #myVideo playsinline controls autoplay></video>
+<video style="width:100%;" #myVideo controls autoplay></video>
 
 <button mat-mini-fab color="primary" data-toggle="tooltip" [title]="'Share Screen'"
     *ngIf="allowScreenShare && !isScreenSharing" (click)="screenShare()">

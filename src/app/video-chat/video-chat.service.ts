@@ -6,6 +6,7 @@ import { Apollo } from 'apollo-angular';
 import { map } from 'rxjs/operators';
 import { AuthService } from '../core/services/auth.service';
 import { HttpClient } from '@angular/common/http';
+import { Participant, RemoteParticipant } from 'twilio-video';
 
 interface AuthToken {
     token: string;
@@ -26,10 +27,15 @@ export type Rooms = NamedRoom[];
 export class VideoChatService {
     $roomsUpdated: Observable<boolean>;
     $localStreamUpdated: Observable<any>;
+    $newParticipantAdded: Observable<any>;
 
     private roomBroadcast = new ReplaySubject<boolean>();
 
     streamUpdate = new BehaviorSubject(null);
+    newParticipantAdded = new BehaviorSubject(null);
+
+    /** List Of Participants In the Room */
+    participants: Map<Participant.SID, RemoteParticipant>;
 
     constructor(
         private apollo: Apollo,
@@ -38,6 +44,7 @@ export class VideoChatService {
     ) {
         this.$roomsUpdated = this.roomBroadcast.asObservable();
         this.$localStreamUpdated = this.streamUpdate.asObservable();
+        this.$newParticipantAdded = this.newParticipantAdded.asObservable();
     }
 
     private async getAuthToken() {

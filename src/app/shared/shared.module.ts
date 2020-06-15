@@ -17,8 +17,6 @@ import { ShareButtonsModule } from '@ngx-share/buttons';
 import { ShareModule } from '@ngx-share/core';
 import { SafePipe } from './pipes/safe.pipe';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { LikeDislikeComponent } from './components/like-dislike/like-dislike.component';
-import { VideoChatComponent } from '../video-chat/video-chat.component';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { AddPostMenuComponent } from './components/add-post-menu/add-post-menu.component';
 import { CompaniesListComponent } from '../companies/companies-list/companies-list.component';
@@ -30,23 +28,25 @@ import { ToastrModule } from 'ngx-toastr';
 import { BriefPostComponent } from './components/brief-post/brief-post.component';
 import { AutocompleteComponent } from './components/autocomplete/autocomplete.component';
 import { AddCollaboratorsComponent } from './components/add-collaborators/add-collaborators.component';
-import { AddAssigneeComponent } from './components/add-assignee/add-assignee.component';
 import { PaginatorComponent } from './components/paginator/paginator.component';
 import { AddCommentComponent } from './components/add-comment/add-comment.component';
-import { ChatBoxComponent } from './components/chat-box/chat-box.component';
 import { PostTypeNavComponent } from './components/post-type-nav/post-type-nav.component';
 import { CommentSideNavComponent } from './components/comment-side-nav/comment-side-nav.component';
 import { AppInjector } from './services/app.injector.service';
 import { ChatService } from './services/chat.service';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { GetNamePipe } from './pipes/get-name.pipe';
+import { CalenderComponent } from './components/calender/calender.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { AppointmentService } from './services/appointment.service';
 import { ChatFullUiComponent } from './components/chat-full-ui/chat-full-ui.component';
-
+import { TimeSlotsComponent } from './components/time-slots/time-slots.component';
 export function hljsLanguages() {
   return [
-    {name: 'typescript', func: typescript},
-    {name: 'javascript', func: javascript},
-    {name: 'scss', func: scss}
+    { name: 'typescript', func: typescript },
+    { name: 'javascript', func: javascript },
+    { name: 'scss', func: scss }
   ];
 }
 @NgModule({
@@ -56,21 +56,19 @@ export function hljsLanguages() {
     CommentComponent,
     DatatableComponent,
     SafePipe,
-    LikeDislikeComponent,
-    VideoChatComponent,
     AddPostMenuComponent,
     CompaniesListComponent,
     BriefPostComponent,
     AutocompleteComponent,
     AddCollaboratorsComponent,
-    AddAssigneeComponent,
     PaginatorComponent,
     AddCommentComponent,
-    ChatBoxComponent,
     PostTypeNavComponent,
     CommentSideNavComponent,
     GetNamePipe,
+    CalenderComponent,
     ChatFullUiComponent,
+    TimeSlotsComponent
   ],
   imports: [
     CommonModule,
@@ -83,7 +81,7 @@ export function hljsLanguages() {
       confirmButtonClass: 'btn btn-primary',
       cancelButtonClass: 'btn'
     }),
-    HighlightModule.forRoot({languages: hljsLanguages}),
+    HighlightModule.forRoot({ languages: hljsLanguages }),
     FlexLayoutModule,
     RouterModule,
     ShareButtonsModule,
@@ -100,17 +98,18 @@ export function hljsLanguages() {
       timeOut: 30000,
       extendedTimeOut: 8000
     }),
-    CKEditorModule
+    CKEditorModule,
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,
+    }),
   ],
   exports: [
     BreadcumbComponent,
-    ChatBoxComponent,
     EditorComponent,
     CommentComponent,
     AddCommentComponent,
     DatatableComponent,
-    LikeDislikeComponent,
-    VideoChatComponent,
     AddPostMenuComponent,
     BriefPostComponent,
     AutocompleteComponent,
@@ -132,12 +131,14 @@ export function hljsLanguages() {
     // Ng5SliderModule,
     NgSelectModule,
     MdePopoverModule,
-    ChatFullUiComponent
+    CalenderComponent,
+    ChatFullUiComponent,
+    TimeSlotsComponent
   ],
   entryComponents: [
-    VideoChatComponent
+    ChatFullUiComponent
   ],
-  providers: [CommentService, ChatService]
+  providers: [CommentService, ChatService, AppointmentService]
 })
 export class SharedModule {
   constructor(private injector: Injector) {

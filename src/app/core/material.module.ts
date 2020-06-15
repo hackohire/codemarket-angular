@@ -24,8 +24,10 @@ import {
   MatProgressSpinnerModule,
   MatStepperModule
 } from '@angular/material';
-import {MatTableModule} from '@angular/material/table';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import { MatTableModule } from '@angular/material/table';
 import { CdkAccordionModule } from '@angular/cdk/accordion';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 
 @NgModule({
@@ -55,7 +57,9 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
     CdkAccordionModule,
     MatSnackBarModule,
     MatProgressSpinnerModule,
-    MatStepperModule
+    MatStepperModule,
+    ScrollingModule,
+    MatTooltipModule
   ],
   exports: [
     MatFormFieldModule,
@@ -82,7 +86,9 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
     CdkAccordionModule,
     MatSnackBarModule,
     MatProgressSpinnerModule,
-    MatStepperModule
+    MatStepperModule,
+    ScrollingModule,
+    MatTooltipModule
   ]
 })
-export class MaterialModule {}
+export class MaterialModule { }

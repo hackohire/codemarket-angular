@@ -3,12 +3,12 @@ import { User } from './user.model';
 import { Company } from './company.model';
 
 export interface Email {
-    to?: [string];
-    cc?: [string];
-    bcc?: [string];
+    to?: string[];
+    cc?: string[];
+    bcc?: string[];
     subject?: string;
     company?: Company;
-    dateRange?: [string];
+    dateRange?: string[];
     description?: [{
         type?: string;
         data?: any
@@ -19,4 +19,9 @@ export interface Email {
     createdAt?: string;
     updatedAt?: string;
     createdBy?: string;
+}
+
+export interface Batch {
+    _id: String;
+    name: String;
 }

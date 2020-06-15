@@ -1,189 +1,166 @@
-import { Component, OnInit, Input, ViewChild, ElementRef, AfterViewInit, HostListener } from '@angular/core';
-import { ChatService } from '../../services/chat.service';
-import * as Chat from 'twilio-chat';
-import moment from 'moment';
-import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
+import { Component, OnInit, Input, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { environment } from '../../../../environments/environment';
+import { PostService } from '../../services/post.service';
+import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { map } from 'rxjs/internal/operators/map';
+import { throttleTime, tap, switchMap, debounceTime, distinctUntilChanged, mapTo, findIndex } from 'rxjs/operators';
+import { MatDrawer } from '@angular/material';
+import { AuthService } from '../../../core/services/auth.service';
+import { fromEvent } from 'rxjs/observable/fromEvent';
 
 @Component({
   selector: 'app-chat-full-ui',
   templateUrl: './chat-full-ui.component.html',
   styleUrls: ['./chat-full-ui.component.scss']
 })
-export class ChatFullUiComponent implements OnInit {
+export class ChatFullUiComponent implements OnInit, AfterViewInit {
 
-  @Input() postList = [];
+  @ViewChild(CdkVirtualScrollViewport, { static: false })
+  viewport: CdkVirtualScrollViewport;
+
+  batch = 20;
+  theEnd = false;
+
+  offset = new BehaviorSubject(null);
+  infinite: Observable<any[]>;
+
+  searchString: string;
+
+  tempPosts = [];
+  searchSubject = new BehaviorSubject(null);
+
   @Input() loggedInUser;
-  @ViewChild('deleteSwal', { static: false }) private deleteSwal: SwalComponent;
-  @ViewChild('scrollMe', { static: false }) scrollMe: ElementRef;
+  @Input() drawer: MatDrawer;
 
   public commentsList = [];
   public selectedPost;
   public anonymousAvatar = '../../assets/images/anonymous-avatar.jpg';
-  public username = '';
-  public chatToken = '';
-  public channelName = '';
-  public channelStatus = '';
-  public chatClient: any;
-  public generalChannel: any;
-  public msg: any;
-  public loadingMessage = '';
+
   public loginUser;
   scrolltop: number = null;
   s3FilesBucketURL = environment.s3FilesBucketURL;
-  constructor(private _chatService: ChatService) { }
+
+  @ViewChild('searchInput', { static: true }) input: ElementRef;
+
+  constructor(
+    public postService: PostService,
+    public authService: AuthService
+  ) {
+  }
 
   ngOnInit() {
-    this.username = `${this.loggedInUser.name}_${this.loggedInUser._id}`;
-    this.postList.map((post, i) => { post.isActive = false, post.count = 0, post.indexAt = i, post.lastMessage = '', post.dateTime = new Date(); });
-    this.createTwilioToken();
+    this.offset.pipe(
+      throttleTime(500),
+      switchMap((n) => this.getBatch(n)),
+      // scan((acc, batch: any) => {
+      //   return { ...acc, ...batch };
+      // }, {}),
+      // map(v => Object.values(v)),
+      tap(list => {
+        console.log(list);
+        this.drawer.open();
+        this.authService.navigationPostList$.next(this.authService.navigationPostList$.value.concat(list));
+      }),
+    ).subscribe();
+
+    // this.infinite.subscribe();
+
   }
 
-  openPostChat(index: number) {
-    if (!this.loadingMessage) {
-      this.loadingMessage = 'Please Wait ...';
-      const findPost = this.postList.findIndex(x => x.isActive === true);
+  ngAfterViewInit() {
 
-      if (findPost !== -1) {
-        this.postList[findPost].isActive = false;
-      }
+    /** Listen to the search event */
+    fromEvent<any>(this.input.nativeElement, 'keyup')
+      .pipe(
+        map(event => event.target.value),
+        debounceTime(400),
+        distinctUntilChanged(),
+        tap((v) => {
+          if (true) {
+            /** If search value, make the API call to fetch the data based on the search string */
+            this.offset.next(0);
+          } else {
+            /** If no value, set the initial value */
+            // this.authService.navigationPostList$.next(this.tempPosts);
+          }
+        }),
+        findIndex((v, i) => {
+          if (i === 0) {
+            /** If first time event, store the list of posts */
+            // this.tempPosts = this.authService.navigationPostList$.value;
+          }
+          if (v) {
+            /** If search value */
+            this.authService.navigationPostList$.next([]);
+          }
+          return false;
+        }),
+      ).subscribe();
+  }
 
-      this.postList[index].isActive = true;
-      this.selectedPost = this.postList[index];
-      this.channelName = this.selectedPost._id;
 
-      if (this.channelName === this.postList[index]._id) {
-        this.postList[index].count = 0;
-        this.postList[index].lastMessage = '';
-      }
+  /** Fetch the list of posts based on the scroll */
+  getBatch(offset) {
+    console.log(offset);
+    return this.postService.getAllPosts(
+      {
+        pageNumber: offset + 1, limit: 10,
+        sort: { order: '' }
+      }, '', '', '',
+      this.loggedInUser._id, '', this.searchString
+    ).pipe(
+      tap((arr) => (arr.posts.length ? null : (this.theEnd = true))),
+      map(arr => {
+        return arr.posts;
+      })
+    );
+  }
 
-      // if (this.chatClient) {
-      //   this.chatClient.shutdown();
-      // }
+  /** If at end, stop, otherwise, end === total, fetch next batch */
+  nextBatch(e, offset) {
+    if (this.theEnd) {
+      return;
+    }
 
-      if (this.channelName) {
-        this.chatClient.getSubscribedChannels().then(this.createOrJoinGeneralChannel(this.channelName));
-      }
+    const end = this.viewport.getRenderedRange().end;
+    const total = this.viewport.getDataLength();
+    // console.log(`${end}, '>=', ${total}`);
+    if (end === total && Number.isInteger(offset)) {
+      this.loadBatch(offset);
     }
   }
 
-  createTwilioToken() {
-    const self = this;
-    this._chatService.createToken(this.username).subscribe(data => {
-      this.chatToken = data.token;
-      this.username = data.identity;
-      Chat.Client.create(this.chatToken).then(client => {
-        // Use client
-        this.chatClient = client;
-        this.chatClient.getSubscribedChannels().then((paginator) => {
-          console.log(paginator.items);
-        });
-
-        this.chatClient.on('messageAdded', (message) => {
-          self.postList.map((post) => {
-            if (post._id === message.channel.uniqueName
-              && message.author !== self.username
-              && self.channelName !== post._id) {
-              post.count = post.count + 1;
-              post.lastMessage = message.body;
-              post.dateTime = message.timestamp;
-              // this.sortData();
-            }
-          });
-          self.postList.sort((a, b) => {
-            return  (new Date(b.dateTime) as any) -  (new Date(a.dateTime) as any);
-          });
-        });
-      });
-    });
+  loadBatch(offset) {
+    this.offset.next(offset);
   }
 
-  createOrJoinGeneralChannel(channel_id) {
-    this.chatClient.getChannelByUniqueName(channel_id).then(channel => {
-      this.generalChannel = channel;
-      this.channelStatus = this.generalChannel.state.status;
-      this.setupChannel();
-    }).catch(() => {
-      this.chatClient.createChannel({
-        uniqueName: channel_id,
-        friendlyName: channel_id
-      }).then(channel => {
-        this.generalChannel = channel;
-        this.channelStatus = this.generalChannel.state.status;
-        this.setupChannel();
-      }).catch(channel => {
-      });
-    });
-  }
-
-  setupChannel() {
-    if (this.channelStatus !== 'joined') {
-      this.generalChannel.join().then(channel => {
-        if (channel.state.status === 'joined') {
-          this.generalChannel.getMessages(30).then(page => {
-            this.commentsList = page.items;
-            this.scrolltop = this.scrollMe.nativeElement.scrollHeight;
-            if (this.commentsList.length > 0) {
-              this.generalChannel.updateLastConsumedMessageIndex(this.commentsList[this.commentsList.length - 1].index).then((data) => {
-              });
-            }
-            this.loadingMessage = '';
-          });
+  searchAndLoad(val) {
+    this.searchSubject.pipe(
+      debounceTime(250),
+      distinctUntilChanged(),
+      findIndex((v, i) => {
+        if (i === 0) {
+          this.tempPosts = this.authService.navigationPostList$.value;
         }
-      });
-    } else {
-      this.generalChannel.getMessages(30).then(page => {
-        this.commentsList = page.items;
-        this.scrolltop = this.scrollMe.nativeElement.scrollHeight;
-        if (this.commentsList.length > 0) {
-          this.generalChannel.updateLastConsumedMessageIndex(this.commentsList[this.commentsList.length - 1].index).then((data) => {
-          });
-        }
-        this.loadingMessage = '';
-      });
-    }
-
-    // Listen for new messages sent to the channel
-    this.generalChannel.on('messageAdded', message => {
-      this.commentsList.push(message);
-      // this.scrolltop = this.comment.nativeElement.scrollHeight;
-      if (this.commentsList.length > 0) {
-        this.generalChannel.updateLastConsumedMessageIndex(this.commentsList[this.commentsList.length - 1].index).then((data) => {
-        });
-      }
-    });
+        this.authService.navigationPostList$.next([]);
+        return v;
+      }),
+      mapTo(this.offset.next(0)),
+    ).subscribe();
   }
 
-  sendMsg() {
-    if (this.generalChannel.members.size === 1) {
-      // Send Notification
-    }
-    if (this.msg !== '' && this.msg !== undefined && this.msg.trim() !== '') {
-      this.generalChannel.sendMessage(this.msg);
-      this.msg = '';
-
-    }
+  trackByIdx(i) {
+    return i;
   }
 
-  getFormatedDate(datetime) {
-    if (moment().format('DD MMM YYYY') === moment(datetime).format('DD MMM YYYY')) {
-      return moment(datetime).format('hh:mm A');
-    } else {
-      return moment(datetime).format('hh:mm A') + ' ' + moment(datetime).format('DD MMM YYYY');
+  onClickPost(post) {
+    this.postService.redirectToPostDetails(post);
+    if (post['isLatest']) {
+      this.authService.postUpdateCount--;
     }
-  }
-
-  removeChannel() {
-    if (this.generalChannel) {
-      this.generalChannel.delete().then(channel => {
-        const findPost = this.postList.findIndex((post) => post._id === this.selectedPost._id);
-        if (findPost !== -1) {
-          this.postList[findPost].isActive = false;
-          this.selectedPost = {};
-          this.commentsList = [];
-        }
-      });
-    }
+    post['isLatest'] = false;
+    this.postService.closeNavigationIfMobile(this.drawer);
   }
 
 }

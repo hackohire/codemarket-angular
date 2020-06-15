@@ -30,6 +30,7 @@
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "./node_modules/ngx-toastr/toastr.css",
+              "./node_modules/angular-calendar/css/angular-calendar.css",
               "src/styles.scss"
             ],
             "scripts": [
@@ -87,6 +88,30 @@
                   "maximumError": "15mb"
                 }
               ]
+            },
+            "sendemail": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.sendemail.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "5mb",
+                  "maximumError": "15mb"
+                }
+              ]
             }
           }
         },
@@ -102,6 +127,9 @@
             },
             "staging": {
               "browserTarget": "codemarket:build:staging"
+            },
+            "sendemail": {
+              "browserTarget": "codemarket:build:sendemail"
             }
           }
         },
@@ -154,6 +182,9 @@
             },
             "staging": {
               "devServerTarget": "codemarket:serve:staging"
+            },
+            "sendemail": {
+              "devServerTarget": "codemarket:serve:sendemail"
             }
           }
         },
@@ -183,6 +214,19 @@
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.staging.ts"
+                }
+              ],
+              "sourceMap": false,
+              "optimization": {
+                "scripts": false,
+                "styles": true
+              }
+            },
+            "sendemail": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.sendemail.ts"
                 }
               ],
               "sourceMap": false,

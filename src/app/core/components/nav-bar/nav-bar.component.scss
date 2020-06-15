@@ -15,7 +15,7 @@
 }
 
 .sidenav {
-  width: 250px;
+  width: 350px;
 }
 
 .sidenav .mat-toolbar {
@@ -100,23 +100,52 @@
   }
 }
 
+.hidden-lg {
+  display: none;
+}
+
+.CreateButton {
+  position: absolute;
+  right: calc(50% - 43px);
+  top: 2px;
+}
+
+.LoginRegisterButton {
+  line-height: 0;
+  padding: 10px;
+}
+
 @media (max-width:767px) {
-  .SearchLoginBox {
-    width: 100%;
-    border-radius: 0;
-    position: relative;
-    left: 0;
-  }
-  .NavBarBox {
-    padding: 10px 0;
-    border-bottom: 1px solid #ccc;
-  }
   .NavBarBox > div:nth-of-type(1) {
     display: none !important;
+  }
+  .hidden-lg {
+    display: block !important;
+  }
+  .CreateButton {
+    right: 5px;
+  }
+  .LoginRegisterButton {
+    margin-bottom: 5px;
   }
   .brand-logo {
     max-width: 55%;
     margin-right: 7%;
+  }
+  .SearchLoginBox {
+      width: 100% !important;
+      position: relative !important;
+      top: 0 !important;
+      z-index: 16 !important;
+      border-radius: 0;
+      left: 0;
+  }
+  .NavBarBox {
+      // position: relative !important;
+      // top: 0 !important;
+      z-index: 21 !important;
+      border-bottom: 1px solid #ccc;
+      padding-left: 0;
   }
 }
 

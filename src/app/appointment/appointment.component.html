@@ -1,0 +1,57 @@
+<section id="appointment" class="container">
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource">
+
+      <ng-container matColumnDef="profileImg">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element"> 
+            <img class="chat-list-avatar"
+          [src]="element.createdBy.avatar ? ((s3FilesBucketURL + element.createdBy.avatar) | safe: 'resourceUrl') : anonymousAvatar" />
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="fullName">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.createdBy.name}} </td>
+      </ng-container>
+
+      <!-- Position Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Title </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="appointment_date">
+        <th mat-header-cell *matHeaderCellDef> Appointment Date</th>
+        <td mat-cell *matCellDef="let element"> {{element.appointment_date | date:'DD-MM-YYYY h:mm a'}} </td>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="descriptionHTML">
+        <th mat-header-cell *matHeaderCellDef> Description </th>
+        <td mat-cell *matCellDef="let element"> <div [innerHTML]="element.descriptionHTML"></div></td>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef> Status </th>
+        <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+      </ng-container>
+      
+      <!-- Weight Column -->
+      <ng-container matColumnDef="edit">
+        <th mat-header-cell *matHeaderCellDef>Action</th>
+        <td mat-cell *matCellDef="let element"> 
+          <a mat-button color="primary" [href]="'/post' + '/' + (element?.slug ? element.slug : element._id)" target="_blank">Edit</a>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <app-paginator [length]="totalAppointmentCount" (fetchData)="paginator = $event; getPostByPostType()">
+    </app-paginator>
+  </div>
+</section>

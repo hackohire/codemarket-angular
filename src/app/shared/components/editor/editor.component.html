@@ -2,29 +2,30 @@
     <div [ngStyle]="editorStyle" *ngIf="!realTime || !ckEditorUserToken">
         <ckeditor #ckEditorRef [config]="{
             extraPlugins: readOnly ? [] : [ myCustomUploadAdapterPlugin ],
-            removePlugins: [ 'RealTimeCollaborativeEditing', 'RealTimeCollaborativeComments', 'RealTimeCollaborativeTrackChanges', 'PresenceList' ]
+            removePlugins: ['RealTimeCollaborativeEditing', 'RealTimeCollaborativeComments', 'RealTimeCollaborativeTrackChanges', 'PresenceList' ]
         }" [disabled]="readOnly" [editor]="ckEditor" [(ngModel)]="html" (ready)="readOnly ? null : onReady($event)">
         </ckeditor>
     </div>
 
     <div *ngIf="(realTime && this.post?._id) && ckEditorUserToken">
-        <div class="sample-sidebar">
-            <div class="row row-presence m-0" style="padding: 10px;">
-                <div #presenceList class='presence'></div>
-            </div>
+
+        <div class="row row-presence m-0">
+            <div #presenceList class='presence'></div>
         </div>
+
         <div [id]="ckEditorUserToken ? 'container' : ''">
             <div [id]="ckEditorUserToken ? 'editor' : ''">
-                <ckeditor  #ckEditorRef [config]="{
-                    removePlugins: ['CloudServices', 'EasyImage'],
+                <ckeditor #ckEditorRef [config]="{
+                    removePlugins: [],
                     extraPlugins: [ myCustomUploadAdapterPlugin ],
-                    cloudServices: {uploadUrl: 'https://71258.cke-cs.com/easyimage/upload/', tokenUrl: generateToken, webSocketUrl: webSocketUrl },
+                    cloudServices: {tokenUrl: generateToken, webSocketUrl: webSocketUrl },
                     sidebar: {container: sidebar},
                     presenceList: {container: presenceList},
                     collaboration: { channelId: this.post._id },
-                    commentsOnly: readOnly,
-                    autosave: { save: realTime && !readOnly ? autosave : null}
-                }" [disabled]="false" [editor]="ckEditor" [(ngModel)]="html" (ready)="readOnly ? refreshDisplayMode($event, sidebar) : onReady($event, sidebar)">
+                    commentsOnly: !allowUsersEdit(),
+                    autosave: { save: realTime && allowUsersEdit() ? autosave : null}
+                }" [disabled]="false" [editor]="ckEditor" [(ngModel)]="html"
+                    (ready)="readOnly ? refreshDisplayMode($event, sidebar) : onReady($event, sidebar)">
                 </ckeditor>
             </div>
 

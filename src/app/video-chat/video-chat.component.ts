@@ -1,9 +1,12 @@
-import { Component, ViewChild, ElementRef, Inject, PLATFORM_ID } from '@angular/core';
-import { MatButton, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { BreadCumb } from '../shared/models/bredcumb.model';
-import { environment } from 'src/environments/environment';
-import { AuthService } from '../core/services/auth.service';
-import { isPlatformBrowser } from '@angular/common';
+import { Component, OnInit, ViewChild, Inject, AfterViewInit } from '@angular/core';
+import { RoomsComponent } from './rooms/rooms.component';
+import { CameraComponent } from './camera/camera.component';
+import { SettingsComponent } from './settings/settings.component';
+import { ParticipantsComponent } from './participants/participants.component';
+import { VideoChatService } from './video-chat.service';
+import { Room, LocalTrack, LocalVideoTrack, LocalAudioTrack, RemoteParticipant } from 'twilio-video';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { Post } from '../shared/models/post.model';
 
 @Component({
   selector: 'app-video-chat',
@@ -11,179 +14,128 @@ import { isPlatformBrowser } from '@angular/common';
   styleUrls: ['./video-chat.component.scss']
 })
 
-export class VideoChatComponent {
-  // @ViewChild('localVideo', { static: false }) localVideo: ElementRef<HTMLVideoElement>;
-  @ViewChild('remoteVideo', { static: false }) remoteVideo: ElementRef<HTMLVideoElement>;
-  @ViewChild('callButton', { static: false }) callButton: MatButton;
-  @ViewChild('answerButton', { static: false }) answerButton: MatButton;
-  @ViewChild('rejectButton', { static: false }) rejectButton: MatButton;
+export class VideoChatComponent implements OnInit, AfterViewInit {
 
-  breadcumb: BreadCumb;
-  navLinks = [];
-  anonymousAvatar = '../../assets/images/anonymous-avatar.jpg';
-  s3FilesBucketURL = environment.s3FilesBucketURL;
+  @ViewChild('rooms', { static: false }) rooms: RoomsComponent;
+  @ViewChild('camera', { static: false }) camera: CameraComponent;
+  @ViewChild('settings', { static: false }) settings: SettingsComponent;
+  @ViewChild('participants', { static: false }) participants: ParticipantsComponent;
 
-  constraints;
-  stream: MediaStream;
-  ongoingCallObj: any;
+  activeRoom: Room;
+  sharableLink: string;
+  joined: boolean;
 
-  offerOptions = {
-    offerToReceiveAudio: true,
-    offerToReceiveVideo: true
-  };
+  // private notificationHub: HubConnection;
 
   constructor(
-    public authService: AuthService,
-    public dialogRef: MatDialogRef<VideoChatComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    @Inject(PLATFORM_ID) private platformId: Object,
-  ) {
+    private readonly videoChatService: VideoChatService,
+    public matDialogRef: MatDialogRef<VideoChatComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: { post: Post },
+  ) { }
 
-    console.log(this.data);
+  async ngOnInit() {
+    // const builder =
+    //     new HubConnectionBuilder()
+    //         .configureLogging(LogLevel.Information)
+    //         .withUrl(`${location.origin}/notificationHub`);
 
-    if (this.data.call) {
-      // this.remoteVideo.nativeElement.srcObject = this.data.call.stream;
-    }
-
-    if (this.data.authorId) {
-    }
-
-    if (this.data.peer) {
-      this.data.peer.on('disconnected', () => {
-        this.removeAllMediaStreams();
-      });
-      // this.remoteVideo.nativeElement.srcObject = this.data.mediaStream;
-    }
-
-    this.breadcumb = {
-      title: 'Profile',
-      path: [
-
-        {
-          name: 'My Profile'
-        }
-      ]
-    };
-
-
-    this.constraints = { audio: true, video: true };
-  }
-
-  async call() {
-
-    if (isPlatformBrowser(this.platformId)) {
-      this.stream = await navigator.mediaDevices.getUserMedia(this.constraints);
-      // this.remoteVideo.nativeElement.srcObject = this.stream;
-      this.ongoingCallObj = this.data.peer.call(this.data.authorId, this.stream);
-
-      this.ongoingCallObj.on('stream', (stream) => {
-        // this.stream = stream;
-        this.remoteVideo.nativeElement.srcObject = stream;
-        console.log(stream);
-      });
-
-      this.ongoingCallObj.on('close', () => {
-        this.hangUp();
-      });
-    }
-  }
-
-  async answer() {
-
-    if (isPlatformBrowser(this.platformId)) {
-
-      this.stream = await navigator.mediaDevices.getUserMedia(this.constraints);
-
-      this.data.call.answer(this.stream);
-
-      this.data.call.on('stream', (stream) => {
-        // Display the stream of the other user in the peer-camera video element !
-        // this.stream = stream;
-        this.remoteVideo.nativeElement.srcObject = stream;
-      });
-
-      // Handle when the call finishes
-      this.data.call.on('close', () => {
-        alert('The videocall has finished');
-        this.hangUp();
-        // this.hangUp();
-      });
-
-    }
-
-  }
-
-  async hangUp() {
-    console.log('Ending call');
-    // if (this.pc) {
-    //   this.pc.close();
-    //   this.pc = null;
-    // }
-
-    if (this.data.call) {
-      this.data.call.close();
-    }
-
-    if (this.ongoingCallObj) {
-      this.ongoingCallObj.close();
-    }
-
-    this.removeAllMediaStreams();
-  }
-
-
-  removeAllMediaStreams() {
-    if (this.stream) {
-      this.stream.getTracks().forEach((track) => {
-        track.stop();
-        console.log(track);
-      });
-    }
-
-    this.stream = null;
-
-    if (this.remoteVideo && this.remoteVideo.nativeElement.srcObject) {
-      this.remoteVideo.nativeElement.srcObject = null;
-    }
-
-    this.dialogRef.close();
-  }
-
-  async screenShare() {
-
-    if (isPlatformBrowser(this.platformId)) {
-      const videoTrack = this.stream.getVideoTracks()[0];
-
-      // @ts-ignore
-      navigator.mediaDevices.getDisplayMedia({ video: true }).then((screenStream: MediaStream) => {
-
-        const screen = screenStream.getVideoTracks()[0];
-        // this.remoteVideo.nativeElement.srcObject = a;
-
-        if (this.data.call) {
-          console.log(this.data.call.peerConnection.getSenders());
-          const sender = this.data.call.peerConnection.getSenders().find((s) => {
-            return s.track.kind === videoTrack.kind;
-          });
-          sender.replaceTrack(screen);
-        } else {
-          console.log(this.data.peer.connections[this.data.authorId][0].peerConnection.getSenders());
-          const sender = this.data.peer.connections[this.data.authorId][0].peerConnection.getSenders().find((s) => {
-            return s.track.kind === videoTrack.kind;
-          });
-          sender.replaceTrack(screen);
-        }
-      });
-    }
-    // this.stream = a;
-    // this.data.call.answer(this.stream);
-    // console.log(a);
-    // adapter.browserShim.shimGetDisplayMedia(this.constraints).then((d) => {
-    //   console.log(d);
+    // this.notificationHub = builder.build();
+    // this.notificationHub.on('RoomsUpdated', async updated => {
+    //     if (updated) {
+    //         await this.rooms.updateRooms();
+    //     }
     // });
+    // await this.notificationHub.start();
+
+    this.sharableLink = window.location.href + '?video_chat=true';
+
+    /** Whenever localparticipant's stream is changed / updated
+     * Notify all the users with updated stream
+     */
+    this.videoChatService.$localStreamUpdated.subscribe((s) => {
+      if (s && this.activeRoom) {
+        console.log(this.activeRoom.localParticipant);
+        this.activeRoom.localParticipant.publishTrack(s);
+      }
+      console.log(s);
+    });
   }
 
+  ngAfterViewInit() {
 
+  }
 
+  async onSettingsChanged(deviceInfo: MediaDeviceInfo) {
+    await this.camera.initializePreview(deviceInfo);
+  }
+
+  async onLeaveRoom(_: boolean) {
+    if (this.activeRoom) {
+      this.activeRoom.disconnect();
+      this.activeRoom = null;
+      this.joined = false;
+    }
+
+    this.camera.finalizePreview();
+    const videoDevice = this.settings.hidePreviewCamera();
+    this.camera.initializePreview(videoDevice);
+
+    this.participants.clear();
+  }
+
+  async onRoomChanged(roomName: string) {
+    if (roomName) {
+      if (this.activeRoom) {
+        this.joined = false;
+        this.activeRoom.disconnect();
+      }
+
+      this.camera.finalizePreview();
+      const tracks = await this.settings.showPreviewCamera();
+
+      this.activeRoom = await this.videoChatService.joinOrCreateRoom(roomName, tracks);
+
+      this.participants.initialize(this.activeRoom.participants);
+      this.registerRoomEvents();
+
+      if (this.activeRoom) {
+        this.joined = true;
+      }
+
+      // this.notificationHub.send('RoomsUpdated', true);
+    }
+  }
+
+  onParticipantsChanged(_: boolean) {
+    this.videoChatService.nudge();
+  }
+
+  private registerRoomEvents() {
+    this.activeRoom
+      .on('disconnected',
+        (room: Room) => room.localParticipant.tracks.forEach(publication => this.detachLocalTrack(publication.track)))
+      .on('participantConnected',
+        (participant: RemoteParticipant) => this.participants.add(participant))
+      .on('participantDisconnected',
+        (participant: RemoteParticipant) => this.participants.remove(participant))
+      .on('dominantSpeakerChanged',
+        (dominantSpeaker: RemoteParticipant) => this.participants.loudest(dominantSpeaker));
+  }
+
+  private detachLocalTrack(track: LocalTrack) {
+    if (this.isDetachable(track)) {
+      track.detach().forEach(el => el.remove());
+    }
+  }
+
+  private isDetachable(track: LocalTrack): track is LocalAudioTrack | LocalVideoTrack {
+    return !!track
+      && ((track as LocalAudioTrack).detach !== undefined
+        || (track as LocalVideoTrack).detach !== undefined);
+  }
+
+  close() {
+    this.matDialogRef.close();
+  }
 
 }

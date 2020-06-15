@@ -12,18 +12,21 @@ import { AuthService } from 'src/app/core/services/auth.service';
 import { CommentService } from 'src/app/shared/services/comment.service';
 import { environment } from 'src/environments/environment';
 import { selectSelectedPost } from 'src/app/core/store/selectors/post.selectors';
-import { SetSelectedPost } from 'src/app/core/store/actions/post.actions';
 import { Post } from 'src/app/shared/models/post.model';
 import { MatDialog, MatPaginator } from '@angular/material';
 import { VideoChatComponent } from 'src/app/video-chat/video-chat.component';
-import Peer from 'peerjs';
 import { PostService } from '../../shared/services/post.service';
 import { SweetalertService } from '../../shared/services/sweetalert.service';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
-import { Company } from '../../shared/models/company.model';
-import { User } from '../../shared/models/user.model';
 import { appConstants } from '../../shared/constants/app_constants';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { MdePopoverTrigger } from '@material-extended/mde';
+import { ShareService } from '@ngx-share/core';
+import { set } from 'lodash';
+import { get } from 'lodash';
+import { PostType } from '../../shared/models/post-types.enum';
+import { FormBuilderService } from 'src/app/form-builder/form-builder.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-details',
@@ -36,6 +39,8 @@ export class DetailsComponent implements OnInit, OnDestroy {
   @ViewChild('successfulRSVP', { static: false }) successfulRSVP: SwalComponent;
   details$: Observable<Post>;
 
+  postTypeEnum = PostType;
+
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches),
@@ -45,10 +50,8 @@ export class DetailsComponent implements OnInit, OnDestroy {
   postTypesArray = appConstants.postTypesArray;
 
   postDetails: Post;
-  isUserAttending: boolean; /** Only for the event */
   subscription$: Subscription = new Subscription();
   type: string; // product | help-request | interview | requirement | Testing | Howtodoc
-  likeCount: number;
   anonymousAvatar = '../../../assets/images/anonymous-avatar.jpg';
   s3FilesBucketURL = environment.s3FilesBucketURL;
 
@@ -58,7 +61,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
   postForm: FormGroup;
   commentsList: any[];
   collaborators: string[];
-  peer: Peer;
+  // peer: Peer;
 
   commentId: string;
   blockId: string;
@@ -77,6 +80,9 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
   displayChatBox = false;
 
+  selectedPostTypeDetails = null;
+  totalPoints = 0;
+
   constructor(
     private store: Store<AppState>,
     private activatedRoute: ActivatedRoute,
@@ -85,8 +91,9 @@ export class DetailsComponent implements OnInit, OnDestroy {
     private dialog: MatDialog,
     public postService: PostService,
     private router: Router,
-    private sweetAlertService: SweetalertService,
+    public shareSocial: ShareService,
     private breakpointObserver: BreakpointObserver,
+    private formBuilderService: FormBuilderService
   ) {
     /** Peer Subscription for Video Call */
     // this.userService.peer.subscribe((p) => {
@@ -99,16 +106,6 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     /** Read the type of the post  */
-    this.commentsList = [{
-      author: '123_1',
-      body: 'Hello, How are you ?'
-    }, {
-      author: '123_2',
-      body: 'Fine, How are you ?'
-    },{
-      author: '123_1',
-      body: 'Fine, Thanks!'
-    }];
     this.type = this.activatedRoute.snapshot.queryParams.type;
 
     this.commentId = this.activatedRoute.snapshot.queryParams['commentId'];
@@ -120,24 +117,20 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
     const postId = params && params.slug ? params.slug.split('-').pop() : '';
 
+    this.authService.selectedPostId = postId;
+
     this.subscription$.add(this.store.select(selectSelectedPost).pipe(
       tap((p: Post) => {
         if (p) {
           this.postDetails = p;
+          console.log("123 ==> ", this.postDetails)
           this.collaborators = this.postDetails.collaborators.map((cDetail) => {
             return cDetail._id;
           });
           this.details$ = of(p);
           this.initializeCommentForm(p, 'post');
+          this.selectedPostTypeDetails = appConstants.postTypesArray.find((pType) => p.type === pType.name);
           this.postFormInitialization(p);
-          /** SHow company in breadcrumb */
-          // if (p.companies && p.companies.length) {
-          //   this.breadcumb.path.unshift({ name: p.type });
-          // }
-
-          /** Subscribe to loggedinuser, once loggedInUse is got, Check if the loggedInUder is
-           * in the list of attendess or not
-           **/
 
           this.breadcumb = {
             path: [
@@ -148,40 +141,31 @@ export class DetailsComponent implements OnInit, OnDestroy {
             ]
           };
 
+          this.checkIfVideoChat();
+
           this.subscription$.add(
-            this.authService.loggedInUser$.subscribe((user) => {
-              if (this.postDetails
-                && this.postDetails.usersAttending
-                && this.postDetails.usersAttending.length
-                && this.postDetails.usersAttending.find((u: User) => u._id === user._id)) {
-                this.isUserAttending = true;
-              } else {
-                this.isUserAttending = false;
+            this.authService.loggedInUser$.subscribe((u) => {
+              if (u) {
+                this.checkIfVideoChat();
               }
             })
           );
 
-          this.postService.getCountOfAllPost('', '',
-          {
-            referencePostId: [this.postDetails._id],
-            connectedPosts: this.postDetails.connectedPosts.map(p => p._id),
-            postType: null
-          }).subscribe((data) => {
-            if (data.length) {
-              data = keyBy(data, '_id');
-              appConstants.postTypesArray.forEach((obj) => {
-                obj['count'] = data[obj.name] ? data[obj.name].count : 0
-              });
-            }
-          });
 
-        } else if (this.postDetails && this.postDetails._id === postId) {
-          /** Comes inside this block, only when we are already in a post details page, and by using searh,
-           * we try to open any other post detials page
-           */
-        } else {
-          // this.store.dispatch(GetPostById({ postId }));
-          // this.details$ = this.store.select(selectSelectedPost);
+          // this.postService.getCountOfAllPost('', '',
+          //   {
+          //     referencePostId: [this.postDetails._id],
+          //     connectedPosts: this.postDetails.connectedPosts.map(p => p._id),
+          //     postType: null
+          //   }).subscribe((data) => {
+          //     if (data.length) {
+          //       data = keyBy(data, '_id');
+          //       appConstants.postTypesArray.forEach((obj) => {
+          //         obj['count'] = data[obj.name] ? data[obj.name].count : 0
+          //       });
+          //     }
+          //   });
+
         }
 
       })
@@ -206,6 +190,28 @@ export class DetailsComponent implements OnInit, OnDestroy {
       clients: new FormControl(i && i.clients ? i.clients : []),
       collaborators: new FormControl(i && i.collaborators ? i.collaborators : []),
     });
+
+    /** Add FormControls(Fields) specific to the post types */
+    switch (i.type) {
+
+      case PostType.Appointment:
+        this.postForm.addControl('cancelReason', new FormControl(i && i.cancelReason ? i.cancelReason : ''));
+        break;
+
+      case PostType.Mentor:
+        this.postForm.addControl('mentor', new FormGroup({
+          topics: new FormControl(i && i.mentor && i.mentor.topics ? i.mentor.topics : []),
+          availabilityDate: new FormControl(i && i.mentor && i.mentor.availabilityDate ? i.mentor.availabilityDate : [])
+        }));
+        break;
+
+      case PostType.Job:
+        this.postForm.addControl('job', new FormGroup({
+          jobProfile: new FormControl(i && i.job && i.job.jobProfile ? i.job.jobProfile : [])
+        }));
+        break;
+    }
+
   }
 
   initializeCommentForm(p, commentType?: string) {
@@ -228,20 +234,9 @@ export class DetailsComponent implements OnInit, OnDestroy {
     return moment(d).isValid() ? d : new Date(+d);
   }
 
-
-
-
   fromNow(date) {
     const d = moment(date).isValid() ? date : new Date(+date);
     return moment(d).fromNow();
-  }
-
-  openDialog(authorId?: string): void {
-    this.dialog.open(VideoChatComponent, {
-      width: '550px',
-      data: { authorId, peer: this.peer },
-      disableClose: true
-    });
   }
 
   edit(details) {
@@ -256,7 +251,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
     this.router.navigate(['../add-post'], { relativeTo: this.activatedRoute, state: { post: p }, queryParams: { type: postType } });
   }
 
-  showCommentsOnSide(event: { block: any, comments, selectedPost}) {
+  showCommentsOnSide(event: { block: any, comments, selectedPost }) {
     console.log(event);
     this.selectedBlock = event.block;
     this.selectedPostComments = event.comments;
@@ -289,5 +284,98 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
   onChatClicked() {
     this.displayChatBox = true;
+  }
+
+  allowUsersEdit = () => {
+    const loggedInUser = this.authService.loggedInUser;
+    return loggedInUser && loggedInUser._id && this.postDetails && this.postDetails._id && (loggedInUser._id === this.postDetails.createdBy._id || this.postDetails.collaborators.find(c => c._id === loggedInUser._id));
+  }
+
+  addDataOfPost(data, popover) {
+    const postObj = {
+      _id: this.postDetails._id,
+    };
+
+    set(postObj, data, this.postForm.get(data).value);
+
+    this.postService.updatePost(
+      postObj,
+      { name: this.authService.loggedInUser.name, _id: this.authService.loggedInUser._id }
+    ).subscribe((j) => {
+      if (j && get(j, data)) {
+        set(this.postDetails, data, get(j, data));
+        popover._emitCloseEvent();
+      }
+    });
+  }
+
+  checkIfVideoChat() {
+    if (this.activatedRoute.snapshot.queryParams['video_chat']) {
+      if (!this.authService.loggedInUser) {
+        this.authService.checkIfUserIsLoggedIn(true);
+        return;
+      }
+      this.openVideoRoom();
+    }
+  }
+
+  openVideoRoom(): void {
+    this.dialog.open(VideoChatComponent, {
+      minWidth: '100vw',
+      height: '100vh',
+      data: { post: this.postDetails },
+      disableClose: true
+    });
+  }
+
+  onSubmitSurveyForm(event) {
+    if (!this.authService.loggedInUser) {
+      this.authService.checkIfUserIsLoggedIn(true);
+      return;
+    }
+    
+    const formObjToSave = {
+      formname: this.postDetails.name,
+      formDataJson: event.data,
+      connectedFormStructureId: this.postDetails._id,
+      createdBy: this.authService.loggedInUser._id
+    };
+
+    console.log("Form Data save Obj ==> ", formObjToSave);
+
+    this.formBuilderService.addformData(formObjToSave).subscribe((d: any) => {
+      if (d) {
+        Swal.fire(`Your data for ${formObjToSave.formname} has been Added Successfully`, '', 'success').then(() => {
+          this.router.navigate(['/dashboard']);
+        });
+      }
+    });
+  }
+
+  valueChangeFun(event) {
+    if (event.data) {
+      const values : any= Object.values(event.data);
+      this.totalPoints = 0;
+      values.forEach((i: any) => {
+        if (parseInt(i)) {
+          this.totalPoints += i;
+        }
+      });
+
+      // this.formArray[this.currentFormIndex].value = values[0] !== "" ? values[0] : 0;
+      // this.totalPoints = sumBy(this.formArray, 'value') || 0;
+      // this.formDataJsonToSave[this.currentFormIndex][this.formArray[this.currentFormIndex].form1.components[0].key] = values[0] || 0;
+      // this.formDataJsonToSave[this.currentFormIndex].selected = values[0] !== "" ? true : false;
+      // const allSelected = this.formDataJsonToSave.map((d) => {
+      //   return d.selected
+      // });
+      
+      // if (allSelected.indexOf(false) === -1) {
+      //   this.enableSubmitButton = true;
+      // } else {
+      //   this.enableSubmitButton = false;
+      // }
+
+    }
   }
 }

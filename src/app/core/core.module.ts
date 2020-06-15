@@ -12,8 +12,6 @@ import { UserEffects } from './store/effects/user.effects';
 // import { StoreRouterConnectingModule } from '@ngrx/router-store';
 // import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EPlatformActions } from './store/actions/app.actions';
-import { ProductEffects } from './store/effects/product.effects';
-import { CartEffects } from './store/effects/cart.effects';
 import { AppState } from './store/state/app.state';
 import { PostEffects } from './store/effects/post.effects';
 import { appReducesrs } from './store/reducers/app.reducers';
@@ -53,8 +51,6 @@ export function clearState(reducer) {
     EffectsModule.forRoot(
       [
         UserEffects,
-        ProductEffects,
-        CartEffects,
         PostEffects
       ]),
     // StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
@@ -128,7 +124,7 @@ export class CoreModule {
       return forward(operation);
     });
 
-        /** using the ability to split links, you can send data to each link */
+    /** using the ability to split links, you can send data to each link */
     /** depending on what kind of operation is being sent */
     const link = isPlatformBrowser(this._platformId) ? split(
       // split based on operation type

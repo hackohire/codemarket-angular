@@ -14,7 +14,9 @@ import { appConstants } from '../constants/app_constants';
 import { makeStateKey, TransferState } from '@angular/platform-browser';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { isPlatformServer } from '@angular/common';
-import { comment, description } from '../constants/fragments_constatnts';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
+import { description } from '../constants/fragments_constatnts';
 
 @Injectable({
   providedIn: 'root'
@@ -23,13 +25,15 @@ export class PostService {
 
   postFields = appConstants.postQuery;
   contentFromAnotherArticle = new BehaviorSubject(null);
+  public saveOrSubmitPost = new BehaviorSubject(null);
   constructor(
     private apollo: Apollo,
     private store: Store<AppState>,
     @Inject(PLATFORM_ID) private platformId,
     private router: Router,
     private authService: AuthService,
-    private readonly transferState: TransferState
+    private readonly transferState: TransferState,
+    private http: HttpClient
   ) { }
 
 
@@ -197,12 +201,12 @@ export class PostService {
     );
   }
 
-  getAllPosts(pageOptions, type, reference = null, companyId = '', connectedWithUser = '', createdBy = ''): Observable<{ posts: Post[], total: number }> {
+  getAllPosts(pageOptions, type, reference = null, companyId = '', connectedWithUser = '', createdBy = '', searchString = ""): Observable<{ posts: Post[], total: number }> {
     return this.apollo.query(
       {
         query: gql`
-          query getAllPosts($pageOptions: PageOptionsInput, $type: String, $reference: ReferenceObject, $companyId: String, $connectedWithUser: String, $createdBy: String) {
-            getAllPosts(pageOptions: $pageOptions, type: $type, reference: $reference, companyId: $companyId, connectedWithUser: $connectedWithUser, createdBy: $createdBy) {
+          query getAllPosts($pageOptions: PageOptionsInput, $type: String, $reference: ReferenceObject, $companyId: String, $connectedWithUser: String, $createdBy: String, $searchString: String) {
+            getAllPosts(pageOptions: $pageOptions, type: $type, reference: $reference, companyId: $companyId, connectedWithUser: $connectedWithUser, createdBy: $createdBy, searchString: $searchString) {
               posts {
                 ...Post
               }
@@ -217,7 +221,8 @@ export class PostService {
           reference: reference ? reference : null,
           companyId,
           connectedWithUser,
-          createdBy
+          createdBy,
+          searchString
         },
         fetchPolicy: 'no-cache'
       }
@@ -230,7 +235,7 @@ export class PostService {
 
   getCountOfAllPost(userId: string, companyId: string, reference: any): Observable<any> {
     return this.apollo.query({
-      query : gql`
+      query: gql`
         query getCountOfAllPost($userId: String, $companyId: String, $reference: ReferenceObject) {
           getCountOfAllPost(userId: $userId, companyId: $companyId, reference: $reference) {
             _id
@@ -254,7 +259,7 @@ export class PostService {
 
   getEmailPhoneCountForContact(type: string): Observable<any> {
     return this.apollo.query({
-      query : gql`
+      query: gql`
         query getEmailPhoneCountForContact($type: String) {
           getEmailPhoneCountForContact(type: $type) {
             _id
@@ -283,7 +288,7 @@ export class PostService {
 
 
   editPost(post): void {
-    this.router.navigate(['/post', 'edit-post', post._id], {queryParams: {type: post.type}});
+    this.router.navigate(['/post', 'edit-post', post._id], { queryParams: { type: post.type } });
   }
 
   searchPosts(searchString: string): Observable<Post[]> {
@@ -315,5 +320,66 @@ export class PostService {
         return p.data.fullSearch;
       }),
     );
+  }
+
+  getPostByPostType(postType: string, userId:string, pageOptions ): Observable<{ posts: Post[], total: number }> {
+    return this.apollo.query(
+      {
+        query: gql`
+          query getPostByPostType($postType: String, $userId: String, $pageOptions: PageOptionsInput) {
+            getPostByPostType(postType: $postType, userId: $userId, pageOptions: $pageOptions) {
+              posts {
+                ...Post
+              }
+              total
+            }
+          }
+          ${this.postFields}
+        `,
+        variables: {
+          postType,
+          userId,
+          pageOptions
+        },
+        fetchPolicy: 'no-cache'
+      }
+    ).pipe(
+      map((p: any) => {
+        return p.data.getPostByPostType;
+      }),
+    );
+  }
+
+  getAlreadyBookedSlots(date: string): Observable<any> {
+    return this.apollo.query(
+      {
+        query: gql`
+          query getAlreadyBookedSlots($date: String) {
+            getAlreadyBookedSlots(date: $date) {
+              appointment {
+                ...Post
+              }
+            }
+          }
+          fragment Post on Post {
+            duration
+          }
+      `,
+        variables: {
+          date
+        },
+        fetchPolicy: 'no-cache'
+      }
+    ).pipe(
+      map((p: any) => {
+        return p.data.getAlreadyBookedSlots;
+      }),
+    );
+  }
+
+  closeNavigationIfMobile(drawer) {
+    if (drawer && window.innerWidth < 768) {
+      drawer.toggle();
+    }
   }
 }

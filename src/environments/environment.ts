@@ -6,9 +6,11 @@ import { plans } from '../app/shared/constants/plan_details';
 
 export const environment = {
   production: false,
+  braintree_client: 'sandbox_x6kwrbkb_hnwczpyytcggqqth',
+  paypal_client: 'ARaebJGRDl8q7x0IP1ZADKo4xUxYTq5WrU521uyMilOn4ylP3uTJv4UGkO4Q2uSdkcRsxnRP8vNQF1jW',
   ckEditor: {
-    ckEditorEnvironMentId: 'ZK5UoNVFJG2R3Kh4SrIC',
-    ckEditorSecretKey: 'HP771KcTLlvStVbtvwAGz5d3LhLgDlY50uJqNQ6nkS18kVP43ZPB1zOSLseK',
+    ckEditorEnvironMentId: 'TIXnf5AG8rHb5jIPUdIs',
+    ckEditorSecretKey: 'sToGgx5KJIqLz6I865474QPyZFS7zG2iBn19oyvsnlU7mdbUxifm6hoof6iX',
     ws: '71258.cke-cs.com/ws',
     developmentTokenUrl: 'https://71258.cke-cs.com/token/dev/qhNbD6xUjkeVtrEc7aD2PcMhDkgmirUJHunqRWESilB0mTzZ0RHcJYk68P6D'
   },
@@ -19,7 +21,7 @@ export const environment = {
   stripe_public_key: 'pk_test_ighmL2U9UqAx0O4b8dKkSvdq',
   webSocketURL: 'ws://localhost:3001',
   planDetails: plans.dev,
-  fileS3Bucket: 'codemarket-files',
+  fileS3Bucket: 'common-local-files',
   oauth: {
     // Domain name
     domain: 'platform.auth.us-east-1.amazoncognito.com',

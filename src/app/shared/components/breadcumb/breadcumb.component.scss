@@ -16,16 +16,15 @@
 }
 
 .tag {
-    background: #00000033;
+    background: #666;
     display: inline-block;
     color: white;
     padding: 0 10px;
     line-height: 28px;
-    margin-left: 5px;
-    font-size: 14px;
-    font-weight: 500;
+    margin-left: 7px;
+    font-size: 13px;
+    font-weight: 400;
     border-radius: 100px;
-    letter-spacing: .5px;
     text-transform: capitalize;
 
     img {
@@ -52,11 +51,22 @@ ul.infos li p {
     font-weight: 500;
 }
 
+.mat-raised-button {
+    line-height: 32px;
+    padding: 0 10px;
+    min-width: 58px;
+}
+
 p.data-label:after {
     content: ":";
     margin-left: 4px
 }
 
-span:focus {
-    outline: none;
+:host ::ng-deep .social-media button {
+    width: 35px;
+    height: 35px;
+    .mat-button-wrapper {
+        padding: 12px 0;
+        line-height: 0px;
+    }
 }

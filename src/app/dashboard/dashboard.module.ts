@@ -4,7 +4,6 @@ import { DashboardComponent } from './dashboard.component';
 import { Routes, RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { CompaniesListComponent } from '../companies/companies-list/companies-list.component';
-import { AuthModule } from '../auth/auth.module';
 
 const dashboardRoutes: Routes = [
   {
@@ -22,10 +21,6 @@ const dashboardRoutes: Routes = [
     component: CompaniesListComponent,
     data: { noReuse: true }
   },
-  {
-    path: 'bugfixes-all',
-    loadChildren: () => import('../selling/products-list/products-list.module').then(module => module.ProductsListModule),
-  },
   // {
   //   path: 'help-requests-all',
   //   loadChildren: () => import('../help/help-request-list/help-request-list.module').then(module => module.HelpRequestListModule),
@@ -38,16 +33,9 @@ const dashboardRoutes: Routes = [
   },
 
   // Profile of Other User
-  // {
-  //   path: 'profile/:authorId',
-  //   loadChildren: () => import('./my-profile/my-profile.module').then(module => module.MyProfileModule),
-  // },
   {
-    path: 'product/:slug',
-    loadChildren: () => import('./product-details/product-details.module').then(module => module.ProductDetailsModule),
-    data: { noReuse: true, setPostMeta: true },
-    // outlet: 'main',
-    pathMatch: 'full'
+    path: 'profile/:authorId',
+    loadChildren: () => import('./my-profile/my-profile.module').then(module => module.MyProfileModule),
   },
   {
     path: 'post/:slug',
@@ -65,7 +53,6 @@ const dashboardRoutes: Routes = [
   imports: [
     CommonModule,
     SharedModule,
-    AuthModule,
     // CompaniesModule,
     RouterModule.forChild(dashboardRoutes)
   ]

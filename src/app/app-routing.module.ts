@@ -8,6 +8,8 @@ import { EmailMarketingComponent } from './email-marketing/email-marketing.compo
 import { SocialMediaMarketingComponent } from './social-media-marketing/social-media-marketing.component';
 import { VideoChatHomeComponent } from './video-chat/video-chat-home/video-chat-home.component';
 import { DonateComponent } from './donate/donate.component';
+import { PrivacyComponent } from './privacy/privacy.component';
+import { TermsComponent } from './terms/terms.component';
 // import { PostDataResolver } from './core/resolver';
 
 const routes: Routes = [
@@ -134,8 +136,17 @@ const routes: Routes = [
   {
     path: 'appointment-booking',
     loadChildren: () => import('./appointment/appointment.module').then(module => module.AppointmentModule)
-  }
+  },
 
+  {
+    path: 'privacy-policy',
+    component: PrivacyComponent
+  },
+  
+  {
+    path: 'terms-of-service',
+    component: TermsComponent
+  },
   /** Static routes ends here */
 ];
 

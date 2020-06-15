@@ -69,5 +69,5 @@ export interface Post {
 
     mentor?: Mentor;
     job?: Job;
-    formStrucutreJSON?: FormJson
+    formStructureJSON?: FormJson
 }

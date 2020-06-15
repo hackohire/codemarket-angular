@@ -282,7 +282,7 @@ export const appConstants = {
       duration
       job
       mentor
-      formStrucutreJSON
+      formStructureJSON
     }
     ${comment}
     `,

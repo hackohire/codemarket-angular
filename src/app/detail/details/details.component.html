@@ -27,10 +27,25 @@
                         (plusButtonClick)="redirectToAddPost(details, $event)"></app-post-type-nav>
                 </div>
 
+                <div class="col-lg-12 col-md-12" *ngIf="postDetails?.formStructureJSON"> 
+                    <ng-container *ngTemplateOutlet="formTemplate;">
+                    </ng-container>
+                    
+                </div>
+
                 <div *ngIf="!showConnectedPosts" [ngClass]="selectedBlock ? 'col-lg-7 col-md-7' : 'col-lg-8 col-md-8'">
 
-                    <div *ngIf="postDetails?.formStrucutreJSON" style="display: inline-flex;"> 
-                        <formio [form]="postDetails?.formStrucutreJSON" (change)="valueChangeFun($event)" (submit)="onSubmitSurveyForm($event)"></formio>
+                    <!-- <div *ngIf="postDetails?.formStructureJSON" class="col-md-12 justify-content-center" style="background-color: blue;min-height: calc(100vh - 150px);align-items: center;padding-top: 130px;">  -->
+                        
+                        <!-- <div class="d-flex flex-column justify-content-center aos-init aos-animate"  data-aos="fade-left" style="align-items: center;"> -->
+                            <!-- <div> -->
+                                <!-- <h2 style="font-size: 50px;color: white;text-align: center;">Total Points</h2> -->
+                            <!-- </div> -->
+                            <!-- <div aria-live="polite" role="status"> -->
+                                <!-- <h3 style="font-size: 100px;color: white;text-align: center;">{{totalPoints}}</h3> -->
+                            <!-- </div> -->
+                        <!-- </div> -->
+                        <!-- <formio [form]="postDetails?.formStructureJSON" (change)="valueChangeFun($event)" (submit)="onSubmitSurveyForm($event)"></formio>
                         <div class="resultscontent">
                             <div class="preview">
                               <h3>Total Points</h3>
@@ -38,9 +53,9 @@
                             <div aria-live="polite" class="preview preview-results" role="status">
                               <p>{{totalPoints}}</p>
                             </div>
-                          </div>
-                    </div>
-                    <div class="item-info" *ngIf="!postDetails?.formStrucutreJSON">
+                          </div> -->
+                    <!-- </div> -->
+                    <div class="item-info" *ngIf="!postDetails?.formStructureJSON">
                         <div>
                             <div class="tab-pane fade show product-tab active" id="product-details">
                                 <article>
@@ -69,7 +84,7 @@
                     <!-- end /.item-info -->
                 </div>
 
-                <div class="col-md-4 col-sm-12">
+                <div class="col-md-4 col-sm-12" *ngIf="!postDetails?.formStructureJSON">
                     <ul class="row infos">
                         <li>
                             <button mat-mini-fab color="primary">
@@ -360,4 +375,40 @@
             </div>
         </div>
     </ng-container> -->
+</ng-template>
+
+<!-- Survey Form Template -->
+<ng-template #formTemplate>
+    <div style="background: white;">
+        <div class="row" style="min-height: calc(100vh - 160px);">
+            <div class="col-lg-6 justify-content-center"  data-aos="fade-left" style="background-color: blue;align-items: center;">
+                <div>
+                    <h2 style="font-size: 50px;color: white;text-align: center;padding-top: 30%;">Total Points</h2>
+                    </div>
+                    <div aria-live="polite" role="status">
+                    <h3 style="font-size: 50px;color: white;text-align: center;">{{totalPoints}}</h3>
+                    </div>
+            </div>
+            
+            <div class="col-lg-6 justify-content-center"  data-aos="fade-up">
+                <div style="margin:10%;">
+                    <!-- <mat-horizontal-stepper>
+                        <mat-step> -->
+                            <div>
+                                <formio [form]="form1" (change)="valueChangeFun($event)" ></formio>
+                            </div>
+                            <div>
+                                <button *ngIf="lastFormIndex !== -1" style="margin-right: 10px;box-shadow: none;background: #eee;" mat-raised-button type="button" (click)="onBackClick()">Back</button>
+                                <button color="primary" *ngIf="currentFormIndex<(formArray?.length-1)" style="margin-right: 10px"
+                                    mat-raised-button type="button" (click)="onNextClick()">Next</button>
+                                <button *ngIf="currentFormIndex === (formArray?.length-1)" color="primary" [disabled]="!enableSubmitButton"
+                                    mat-raised-button type="button" (click)="onSubmitSurveyForm($event)">Submit</button>
+                            </div>
+                        <!-- </mat-step>
+                    </mat-horizontal-stepper> -->
+                </div>
+            </div>
+        </div>
+
+    </div>
 </ng-template>

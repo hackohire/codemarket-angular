@@ -6,3 +6,36 @@
     color: white;
     border-radius: 8px;
 }
+
+/* UI ENHANCEMENT - DHAWAL PATEL */
+:host ::ng-deep {
+    .form-check {
+        position: relative;
+        display: inline-block;
+        padding-left: 1.25rem;
+        margin-right: 20px;
+    }
+    .form-check-input {
+        position: absolute;
+        margin-top: .45rem;
+        margin-left: -1.25rem;
+    }
+    .form-box {
+        height: 200px;
+        overflow: hidden;
+    }
+    .form-box-container {
+        padding-top: 90px;
+    }
+    @media (max-width: 767px) {        
+        .form-box {
+            height: auto;
+            overflow: visible;
+            margin-top: 30px;
+        }
+        .form-box-container {
+            padding-top: 0;
+            padding-bottom: 0 !important;
+        }
+    }
+}

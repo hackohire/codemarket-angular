@@ -29,25 +29,25 @@
 
     <div class="container-fluid">
         <div class="row" style="min-height: calc(100vh - 48px);">
-            <div class="col-lg-6 order-1 order-lg-1 pt-3 pt-lg-0 pb-3 pb-lg-0 px-lg-5 hero-img d-flex flex-column justify-content-center aos-init aos-animate"  data-aos="fade-left" style="background-color: #00aeef;align-items: center;">
+            <div class="col-lg-6 order-1 order-lg-1 pt-3 pt-lg-0 px-lg-5 hero-img d-flex flex-column justify-content-center aos-init aos-animate"  data-aos="fade-left" style="background-color: #00aeef;align-items: center;">
                 <div>
                     <h2 style="font-size: 40px;color: white;text-transform: uppercase;letter-spacing: 1px;">Total Points</h2>
-                  </div>
-                  <div aria-live="polite" role="status">
-                    <h3 style="font-size: 100px;color: white;">{{totalPoints}}</h3>
-                  </div>
+                </div>
+                <div aria-live="polite" role="status">
+                    <h3 class="mb-0" style="font-size: 100px;color: white;">{{totalPoints}}</h3>
+                </div>
             </div>
-            <div class="col-lg-6 pt-3 pt-lg-0 pb-3 px-lg-5 order-2 order-lg-2 d-flex flex-column justify-content-center aos-init aos-animate"  data-aos="fade-up">
+            <div class="col-lg-6 pb-3 px-lg-5 order-2 order-lg-2 d-flex flex-column justify-content-center aos-init aos-animate form-box-container"  data-aos="fade-up">
                 <div>
                     <mat-horizontal-stepper linear #stepper>
                         <mat-step>
                             <ng-container>
                                 <div><h3>Find Your Sleep Quality:</h3></div>
                                 <div class="row" style="margin: 20px -15px;">
-                                    <div class="col-md-2">
+                                    <div class="col-md-2 col-4">
                                         <img src="{{form1?.image}}" style="margin-top: 15px;">
                                     </div>
-                                    <div class="col-md-10">
+                                    <div class="col-md-10 col-12 form-box">
                                         <div *ngIf="fillForm">
                                             <formio [form]="form1" (change)="valueChangeFun($event)" (submit)="onSubmitForm($event)"></formio>
                                         </div>

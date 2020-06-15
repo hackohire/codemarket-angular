@@ -130,7 +130,7 @@
     margin-bottom: 5px;
   }
   .brand-logo {
-    margin-right: 20%;
+    margin-right: 40%;
   }
   .SearchLoginBox {
       width: 100% !important;
@@ -146,6 +146,12 @@
       z-index: 21 !important;
       border-bottom: 1px solid #ccc;
       padding-left: 0;
+  }
+}
+
+@media (max-width:400px) {
+  .brand-logo {
+    margin-right: 30%;
   }
 }
 

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { MaterialFileInputModule } from 'ngx-material-file-input';
-import { SurveyComponent } from './survey.component';
+import { SurveyComponent, SurveyDialogComponent } from './survey.component';
 import { FormioModule } from 'angular-formio';
 
 const emailRoutes: Routes = [
@@ -14,7 +14,8 @@ const emailRoutes: Routes = [
 ]
 
 @NgModule({
-  declarations: [SurveyComponent],
+  declarations: [SurveyComponent, SurveyDialogComponent],
+  entryComponents: [SurveyDialogComponent],
   imports: [
     CommonModule,
     SharedModule,

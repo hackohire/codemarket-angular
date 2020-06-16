@@ -1,0 +1,23 @@
+<div mat-dialog-content>
+    <div [formGroup]="surveyUserFrom">
+        <mat-form-field appearance="outline" class="field-full-width">
+            <mat-label>First Name</mat-label>
+            <input matInput placeholder="First Name" type="text" formControlName="firstName" autocomplete="false" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="field-full-width">
+            <mat-label>Last Name</mat-label>
+            <input matInput placeholder="Last Name" type="text" formControlName="lastName" autocomplete="false" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="field-full-width">
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="Email" type="text" formControlName="email" autocomplete="false" required>
+        </mat-form-field>
+    </div>
+</div>
+<br>
+<div mat-dialog-actions>
+    <button type="button" mat-raised-button color="warn" (ckick)="onCancelClick()" style="flex: auto;">Cancel</button>
+    <button type="button" mat-raised-button color="primary" (ckick)="onSubmitClick()" style="flex: auto;">Submit</button>
+</div>

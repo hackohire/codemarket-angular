@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilderService } from '../form-builder/form-builder.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -6,6 +6,38 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { AuthService } from '../core/services/auth.service';
 import { keyBy, sumBy } from 'lodash';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+
+
+@Component({
+  selector: 'survey-dialog',
+  templateUrl: 'survey-user-dialog.html',
+})
+export class SurveyDialogComponent implements OnInit {
+  surveyUserFrom: FormGroup;
+
+  constructor(
+    public dialogRef: MatDialogRef<SurveyDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any) {}
+
+  ngOnInit() {
+    this.surveyUserFrom = new FormGroup({
+      firstName: new FormControl('', Validators.required),
+      lastName: new FormControl('', Validators.required),
+      email: new FormControl('', [Validators.required])
+    });
+  }
+
+  onCancelClick() {
+    this.dialogRef.close();
+  }
+
+  onSubmitClick() {
+    console.log(this.surveyUserFrom.value);
+    this.dialogRef.close();
+  }
+}
+
 
 @Component({
   selector: 'app-survey',
@@ -39,6 +71,7 @@ export class SurveyComponent implements OnInit {
     private authService: AuthService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
+    public dialog: MatDialog
     ) { 
       this.connectedFormStructureId = '5ee1fad4be0ca353ff5caa45';
     }
@@ -84,6 +117,7 @@ export class SurveyComponent implements OnInit {
     if(this.id !== '') {
       console.log("Id ==> ", this.id);
       this.formBuilderService.fetchformDataById(this.id).subscribe((res) => {
+        this.hideAllButton = true;
         const values = Object.values(res[0].formDataJson);
         values.forEach((v: any) => {
           if (parseInt(v)) {
@@ -100,7 +134,7 @@ export class SurveyComponent implements OnInit {
       formname: new FormControl(i && i.formname ? i.formname : this.formName, Validators.required),
       formDataJson: new FormControl(i && i.jsonstring ? i.jsonstring : '', Validators.required),
       connectedFormStructureId: new FormControl(i && i._id ? i._id : this.connectedFormStructureId),
-      createdBy: new FormControl(this.authService.loggedInUser._id)
+      createdBy: new FormControl(this.authService.loggedInUser ? this.authService.loggedInUser._id: '')
     });
   }
 
@@ -132,15 +166,8 @@ export class SurveyComponent implements OnInit {
   }
 
   onSubmitForm(event) {
-    if (!this.authService.loggedInUser) {
-      this.authService.checkIfUserIsLoggedIn(true);
-      return;
-    }
-    // console.log("234", event);
-    // this.formDetails.value.formDataJson = event.data;
-
     let exclude = ["selected"];
-
+  
     let result = this.formDataJsonToSave.reduce((acc, curr) => {
       Object.entries(curr).forEach(([k, v]) => {
         if (!exclude.includes(k)) acc[`${k}`] = v;
@@ -148,17 +175,52 @@ export class SurveyComponent implements OnInit {
       return acc;
     }, {});
 
-    this.formDetails.value.formDataJson = result;
 
-    this.formBuilderService.addformData(this.formDetails.value).subscribe((d: any) => {
-      if (d) {
-        Swal.fire(`${d.formname} has been Added Successfully` , '', 'success').then(() => {
-          this.router.navigate(['/survey'], { queryParams: { id: d._id } });
-          this.hideAllButton = true;
-          this.mapValueWithLabel(d);    
-        });
+    if (!this.authService.loggedInUser) {
+
+      
+
+      const obj = {
+        email: "jaysojitra13@gmail.com",
+        firstName: "jay",
+        lastName: "patel"
       }
-    });
+      this.dialog.open(SurveyDialogComponent);
+
+      // this.formBuilderService.addSurveyUser(obj).subscribe((res) => {
+      //   console.log("This is helpgrowBusiness ==> ", res);
+
+      //   this.formDetails.value.formDataJson = result;
+      //   this.formDetails.value.createdBy = res._id;
+
+      //   console.log(this.formDetails.value);
+
+      // this.formBuilderService.addformData(this.formDetails.value).subscribe((d: any) => {
+      //   if (d) {
+      //     Swal.fire(`${d.formname} has been Added Successfully` , '', 'success').then(() => {
+      //       this.router.navigate(['/survey'], { queryParams: { id: d._id } });
+      //       this.hideAllButton = true;
+      //       this.mapValueWithLabel(d);    
+      //     });
+      //   }
+      // });
+
+      // });
+    } else {
+
+      this.formDetails.value.formDataJson = result;
+  
+      this.formBuilderService.addformData(this.formDetails.value).subscribe((d: any) => {
+        if (d) {
+          Swal.fire(`${d.formname} has been Added Successfully` , '', 'success').then(() => {
+            this.router.navigate(['/survey'], { queryParams: { id: d._id } });
+            this.hideAllButton = true;
+            this.mapValueWithLabel(d);    
+          });
+        }
+      });
+    }
+
   }
 
   mapValueWithLabel(d: any) {

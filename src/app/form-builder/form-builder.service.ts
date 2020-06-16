@@ -170,9 +170,30 @@ export class FormBuilderService {
       variables: {
         pageOptions,
         formStructureId
-      }
+      },
+      fetchPolicy: 'no-cache'
     }).pipe(
       map((q: any) => q.data.fetchSavedDataByFormStructure)
+    );
+  }
+
+  addSurveyUser(addSurveyUserObj: any): Observable<any> {
+    return this.apollo.mutate({
+      mutation: gql`
+      mutation addSurveyUser($addSurveyUserObj: AddSurveyUserInput) {
+        addSurveyUser(addSurveyUserObj: $addSurveyUserObj) {
+          _id
+          email
+          firstName
+          lastName
+        }
+      }
+      `,
+      variables: {
+        addSurveyUserObj
+      }
+    }).pipe(
+      map((q: any) => q.data.addSurveyUser)
     );
   }
 }

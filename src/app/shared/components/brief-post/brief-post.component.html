@@ -158,17 +158,17 @@
     </div>
 
     <!-- Show List of Comments + Add Comment UI only when user clicks on read more or comment icon -->
-    <div class="box-new-comment" *ngIf="readMore === false">
+    <div class="box-new-comment bg-white" style="padding: 20px 30px 0;" *ngIf="readMore === false">
         <img [src]="authService?.loggedInUser?.avatar ? ((s3FilesBucketURL + authService?.loggedInUser?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
             alt="" />
-        <div class="content">
+        <div class="content bg-white">
             <!-- <div class="post-row"> -->
             <!---------------- ADD COMMENT EDITOR --------------->
             <app-editor #addCommentEditor [placeholder]="'Write a comment'"
-                [editorStyle]="{ width: '84%', background: 'white', padding: '0 12px 0 12px', 'border-radius': '20px'}"
+                [editorStyle]="{ width: '100%', background: 'white', padding: '0', 'border-radius': '0'}"
                 [id]="'comment' + p?._id"></app-editor>
             <!-- </div> -->
-            <div class="post-row">
+            <div class="post-row" style="margin-top: 15px;">
                 <button style="float: right;" type="button" class="btn btn--sm btn--round"
                     (click)="addComment(addCommentEditor)">Post</button>
             </div>

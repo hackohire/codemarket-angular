@@ -9,8 +9,8 @@
             [activeRoomName]="!!activeRoom ? activeRoom.name : null"></app-rooms>
     </div> -->
     <div class="col-md-9 pl-0">
-        <app-camera #camera [style.display]="!!activeRoom ? 'none' : 'block'">
-        </app-camera>
+        <!-- <app-camera #camera [style.display]="!!activeRoom ? 'none' : 'block'">
+        </app-camera> -->
         <app-participants #participants (leaveRoom)="onLeaveRoom($event)"
             (participantsChanged)="onParticipantsChanged($event)" [style.display]="!!activeRoom ? 'block' : 'none'"
             [activeRoomName]="!!activeRoom ? activeRoom.name : null"></app-participants>

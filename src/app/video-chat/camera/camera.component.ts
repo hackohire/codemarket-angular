@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, Renderer2, AfterViewInit, EventEmitter, Output, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Renderer2, AfterViewInit, EventEmitter, Output, Input, OnDestroy } from '@angular/core';
 import { createLocalTracks, LocalTrack, LocalVideoTrack } from 'twilio-video';
 import { VideoChatService } from '../video-chat.service';
 
@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs';
     templateUrl: './camera.component.html',
     styleUrls: ['./camera.component.scss']
 })
-export class CameraComponent implements AfterViewInit {
+export class CameraComponent implements AfterViewInit, OnDestroy {
 
     isScreenSharing: boolean;
     isInitializing = true;
@@ -40,6 +40,16 @@ export class CameraComponent implements AfterViewInit {
         private readonly renderer: Renderer2,
         private videoChatService: VideoChatService
     ) { }
+
+    /** Stop All the media streams on cameray destroy */
+    ngOnDestroy() {
+        this.localTracks.forEach((t) => {
+            if (t && t.mediaStreamTrack) {
+                t.stop();
+                // t.mediaStreamTrack.stop();
+            }
+        });
+    }
 
     async ngAfterViewInit() {
         if (this.previewElement && this.previewElement.nativeElement) {
@@ -125,7 +135,7 @@ export class CameraComponent implements AfterViewInit {
             this.videoTrack = new LocalVideoTrack(screenTrack);
             const videoElement = this.videoTrack.attach();
 
-            this.videoChatService.streamUpdate.next(screenTrack);
+            this.videoChatService.streamUpdate.next({ track: screenTrack, name: 'screen' });
 
             this.renderer.setStyle(videoElement, 'height', '100%');
             this.renderer.setStyle(videoElement, 'width', '100%');
@@ -148,7 +158,7 @@ export class CameraComponent implements AfterViewInit {
         const videoElement = this.videoTrack.attach();
         this.renderer.setProperty(this.myVideo.nativeElement, 'srcObject', videoElement.srcObject);
 
-        this.videoChatService.streamUpdate.next(this.videoTrack.mediaStreamTrack);
+        this.videoChatService.streamUpdate.next({ track: this.videoTrack.mediaStreamTrack, name: '' });
     }
 
     invokeGetDisplayMedia(success, error) {

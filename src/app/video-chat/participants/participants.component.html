@@ -18,6 +18,11 @@
                 </li>
             </ul>
         </nav>
+        <!-- <div *ngFor="let p of (videoChatService.participants ? getKeys(videoChatService.participants) : [])">
+            <ng-container *ngFor="let v of p.videoTracks">
+                <video [srcDoc]="p?."></video>
+            </ng-container>
+        </div> -->
         <div #list></div>
         <!-- <video style="width:100%;" #remoteVideo playsinline controls autoplay></video> -->
     </div>

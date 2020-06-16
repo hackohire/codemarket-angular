@@ -8,7 +8,7 @@ import { VideoChatService } from '../video-chat.service';
   styleUrls: ['./participants.component.scss']
 })
 export class ParticipantsComponent {
-  @ViewChild('list', { static: false }) listRef: ElementRef;
+  @ViewChild('list', { static: false }) listRef: ElementRef<HTMLDivElement>;
   @ViewChild('remoteVideo', { static: false }) remoteVideo: ElementRef;
   @Output() participantsChanged = new EventEmitter<boolean>();
   @Output() leaveRoom = new EventEmitter<boolean>();
@@ -27,7 +27,7 @@ export class ParticipantsComponent {
 
   constructor(
     private readonly renderer: Renderer2,
-    private videoChatService: VideoChatService
+    public videoChatService: VideoChatService
   ) { }
 
   clear() {
@@ -86,16 +86,36 @@ export class ParticipantsComponent {
 
   private attachRemoteTrack(track: RemoteTrack, participant) {
     if (this.isAttachable(track)) {
-      const element: HTMLElement = track.attach();
+      const element = track.attach();
       this.renderer.data.id = track.sid;
 
-      if (track.kind === 'video') {
-        this.renderer.setStyle(element, 'width', '100%');
-        element.setAttribute('participantsid', participant.sid);
-      }
-      this.renderer.appendChild(this.listRef.nativeElement, element);
-      // this.renderer.setProperty(this.remoteVideo.nativeElement, 'srcObject', element.srcObject);
+      element.setAttribute('participantsid', participant.sid);
+      element.setAttribute('id', track.sid);
+      this.renderer.setStyle(element, 'width', '100%');
 
+      // const videoTrack = [...participant.videoTracks.values()].find((t) => t.trackName !== 'screen');
+      // const screenTrack = [...participant.videoTracks.values()].find((t) => t.trackName === 'screen');
+
+      // if (track.name === 'screen' && videoTrack && videoTrack.trackSid) {
+      //   const video = document.getElementById(videoTrack.trackSid);
+      //   if (video) {
+      //     this.renderer.removeChild(this.listRef.nativeElement, video);
+      //     this.renderer.appendChild(this.listRef.nativeElement, element);
+      //   }
+
+      // } else if (track.kind === 'video' && screenTrack && screenTrack.trackSid) {
+      //   const screen = document.getElementById(screenTrack.sid);
+      //   if (screen) {
+      //     this.renderer.removeChild(this.listRef.nativeElement, screen);
+      //     this.renderer.appendChild(this.listRef.nativeElement, element);
+      //     // screen.setAttribute('srcObject', element.srcObject);
+      //   }
+
+      // } else {
+      //   this.renderer.appendChild(this.listRef.nativeElement, element);
+      //   // this.renderer.setProperty(this.remoteVideo.nativeElement, 'srcObject', element.srcObject);
+      // }
+      this.renderer.appendChild(this.listRef.nativeElement, element);
       this.participantsChanged.emit(true);
 
       /** Whenever a new participant is added publish its audio track */

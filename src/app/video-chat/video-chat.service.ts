@@ -26,12 +26,12 @@ export type Rooms = NamedRoom[];
 })
 export class VideoChatService {
     $roomsUpdated: Observable<boolean>;
-    $localStreamUpdated: Observable<any>;
+    $localStreamUpdated: Observable<{ track: MediaStreamTrack, name?: string }>;
     $newParticipantAdded: Observable<any>;
 
     private roomBroadcast = new ReplaySubject<boolean>();
 
-    streamUpdate = new BehaviorSubject(null);
+    streamUpdate = new BehaviorSubject<{ track: MediaStreamTrack, name?: string }>(null);
     newParticipantAdded = new BehaviorSubject(null);
 
     /** List Of Participants In the Room */
@@ -101,6 +101,7 @@ export class VideoChatService {
         } finally {
             if (room) {
                 this.roomBroadcast.next(true);
+                room.localParticipant.tracks.forEach(this.trackPublished);
             }
         }
 
@@ -109,5 +110,9 @@ export class VideoChatService {
 
     nudge() {
         this.roomBroadcast.next(true);
+    }
+
+    trackPublished = (publication) => {
+        console.log(`Published LocalTrack: ${publication.track}`);
     }
 }

@@ -25,6 +25,9 @@ export class VideoChatComponent implements OnInit, AfterViewInit {
   sharableLink: string;
   joined: boolean;
 
+  publishedVideoTrack = null;
+  publishedScreenTrack = null;
+
   // private notificationHub: HubConnection;
 
   constructor(
@@ -52,13 +55,30 @@ export class VideoChatComponent implements OnInit, AfterViewInit {
     /** Whenever localparticipant's stream is changed / updated
      * Notify all the users with updated stream
      */
-    this.videoChatService.$localStreamUpdated.subscribe((s) => {
-      if (s && this.activeRoom) {
+    this.videoChatService.$localStreamUpdated.subscribe(async (s) => {
+      if (s && s.name === 'screen' && this.activeRoom) {
         console.log(this.activeRoom.localParticipant);
-        this.activeRoom.localParticipant.publishTrack(s);
+        this.activeRoom.localParticipant.tracks.forEach(async (trackPublished) => {
+          if (trackPublished.kind === 'video') {
+            this.activeRoom.localParticipant.unpublishTrack(trackPublished.track);
+          }
+          this.publishedScreenTrack = await this.activeRoom.localParticipant.publishTrack(s.track, { name: s.name ? s.name : '' });
+        });
+      } else if (s && s.name !== 'screen' && this.activeRoom) {
+        // Access the already published LocalTracks.
+        this.activeRoom.localParticipant.tracks.forEach(async (trackPublished) => {
+          if (trackPublished.name === 'screen' || trackPublished.trackName === 'screen') {
+            this.activeRoom.localParticipant.unpublishTrack(trackPublished.track);
+          }
+          this.publishedScreenTrack = await this.activeRoom.localParticipant.publishTrack(s.track);
+        });
       }
       console.log(s);
     });
+  }
+
+  trackPublished(publication) {
+    console.log(`Published LocalTrack: ${publication.track}`);
   }
 
   ngAfterViewInit() {
@@ -66,21 +86,26 @@ export class VideoChatComponent implements OnInit, AfterViewInit {
   }
 
   async onSettingsChanged(deviceInfo: MediaDeviceInfo) {
-    await this.camera.initializePreview(deviceInfo);
+    // await this.camera.initializePreview(deviceInfo);
   }
 
   async onLeaveRoom(_: boolean) {
+
+    this.closeRoom();
+
+    this.camera.finalizePreview();
+    // const videoDevice = this.settings.hidePreviewCamera();
+    // this.camera.initializePreview(videoDevice);
+
+    this.participants.clear();
+  }
+
+  closeRoom() {
     if (this.activeRoom) {
       this.activeRoom.disconnect();
       this.activeRoom = null;
       this.joined = false;
     }
-
-    this.camera.finalizePreview();
-    const videoDevice = this.settings.hidePreviewCamera();
-    this.camera.initializePreview(videoDevice);
-
-    this.participants.clear();
   }
 
   async onRoomChanged(roomName: string) {
@@ -90,7 +115,7 @@ export class VideoChatComponent implements OnInit, AfterViewInit {
         this.activeRoom.disconnect();
       }
 
-      this.camera.finalizePreview();
+      // this.camera.finalizePreview();
       const tracks = await this.settings.showPreviewCamera();
 
       this.activeRoom = await this.videoChatService.joinOrCreateRoom(roomName, tracks);
@@ -135,6 +160,7 @@ export class VideoChatComponent implements OnInit, AfterViewInit {
   }
 
   close() {
+    this.closeRoom();
     this.matDialogRef.close();
   }
 

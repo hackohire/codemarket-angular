@@ -14,7 +14,7 @@
                 (settingsChanged)="onSettingsChanged($event)"></app-device-select>
         </div>
     </form>
-    <div [style.display]="isPreviewing ? 'block' : 'none'">
+    <div>
         <app-camera #camera [allowScreenShare]="true"></app-camera>
     </div>
 </div>

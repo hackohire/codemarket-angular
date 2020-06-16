@@ -87,13 +87,14 @@
   }
   .edit {
     position: relative;
-    left: 50%;
+    left: 33%;
     -webkit-transform: translateX(-50%);
             transform: translateX(-50%);
     color: white;
     cursor: pointer;
     font-size: 22px;
     top: 10px;
+    margin: 0 10px;
   }
   .cover {
     height: 300px;
@@ -127,7 +128,8 @@
     -webkit-transform: translateX(-50%);
             transform: translateX(-50%);
     border-radius: 50%;
-    border: 4px solid white;
+    border: 0;
+    box-shadow: 0 0 0 6px #ddd;
     height: 210px;
     overflow: hidden;
     // -webkit-transform: translateX(-50%) translateY(-50%);

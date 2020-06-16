@@ -81,6 +81,7 @@ export class AddPostComponent implements OnInit, AfterViewInit {
   selectedPostTypeDetails = null;
   public form = { components: [] };
   formStructureJSON = null;
+  formPostType = ['survey'];
   
   constructor(
     public authService: AuthService,
@@ -186,7 +187,7 @@ export class AddPostComponent implements OnInit, AfterViewInit {
 
       case PostType.Survey:
         this.useFormIo = true;
-        this.postForm.addControl('formStrucutreJSON', new FormControl(i && i.formStrucutreJSON ? i.formStrucutreJSON : ''));
+        this.postForm.addControl('formStructureJSON', new FormControl(i && i.formStructureJSON ? i.formStructureJSON : ''));
         break;
 
       case PostType.Mentor:
@@ -232,7 +233,7 @@ export class AddPostComponent implements OnInit, AfterViewInit {
 
     /** Set value of fromJsonStructure */
     if (this.postType ===  'survey') {
-      this.postForm.get('formStrucutreJSON').setValue(this.formStructureJSON);
+      this.postForm.get('formStructureJSON').setValue(this.formStructureJSON);
     }
 
     const postFormValue = { ...this.postForm.value };

@@ -2,7 +2,7 @@
 
 // Side Navbar CSS Starts here
 .docs-component-viewer-nav-content {
-    background: rgba(0, 0, 0, 0.03);
+  background: #fff;
   
     &::-webkit-scrollbar-thumb {
       background: rgba(0, 0, 0, .26);
@@ -42,7 +42,9 @@
   
   .docs-component-viewer-nav {
     position: sticky;
-    top: 25px;
+    top: 48px;
+    box-shadow: none !important;
+    border: 1px solid #ccc;
   
     .docs-component-viewer-nav-content {
       // margin: 25px;
@@ -56,8 +58,8 @@
       }
   
       button {
-        padding: 10px 15px;
-        font-weight: 700;
+        padding: 10px 15px 10px 10px;
+        font-weight: 500;
         line-height: 16px;
         margin: 0;
         font-size: 13px;
@@ -68,6 +70,7 @@
         text-align: left;
         background: none;
         border: none;
+        color: #000;
   
         &:focus {
           outline: none;
@@ -75,7 +78,7 @@
   
         .mat-icon {
           position: absolute;
-          right: 5px;
+          right: 0;
           font-size: 18px;
         }
   

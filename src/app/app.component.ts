@@ -10,6 +10,7 @@ import { isPlatformBrowser, DOCUMENT } from '@angular/common';
 import { RouteHelperService } from './core/services/route-helper.service';
 import { SeoService } from './core/services/seo.service';
 import { appConstants } from './shared/constants/app_constants';
+import { VideoChatComponent } from './video-chat/video-chat.component';
 
 @Component({
   selector: 'app-root',
@@ -42,6 +43,19 @@ export class AppComponent implements OnInit, OnDestroy {
     // );
 
     this.authService.checkIfUserIsLoggedIn();
+
+    /** Listen to the video call event */
+    this.authService.videoChatActivityObservable$.subscribe(a => {
+      if (a) {
+        /** If user receives the call open video chat dialog */
+        const videoDialog = this.dialog.open(VideoChatComponent, {
+          minWidth: '100vw',
+          height: '100vh',
+          data: { post: a.post, loggedInUser: this.authService.loggedInUser, caller: a.caller, isCallReceiving: true },
+          disableClose: true
+        });
+      }
+    });
   }
 
   public ngOnInit(): void {

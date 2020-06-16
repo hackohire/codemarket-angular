@@ -7,6 +7,7 @@ import { VideoChatService } from './video-chat.service';
 import { Room, LocalTrack, LocalVideoTrack, LocalAudioTrack, RemoteParticipant } from 'twilio-video';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Post } from '../shared/models/post.model';
+import { User } from '../shared/models/user.model';
 
 @Component({
   selector: 'app-video-chat',
@@ -33,8 +34,20 @@ export class VideoChatComponent implements OnInit, AfterViewInit {
   constructor(
     private readonly videoChatService: VideoChatService,
     public matDialogRef: MatDialogRef<VideoChatComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { post: Post },
-  ) { }
+    @Inject(MAT_DIALOG_DATA) public data: { post: Post, loggedInUser: User, caller?: User, isCallReceiving?: boolean },
+  ) {
+
+    /** When user receives the call, if user doesn't press the join,
+     * Stop the call within 15 seconds
+     */
+    if (this.data.isCallReceiving) {
+      setTimeout(() => {
+        if (!this.videoChatService.participants || this.videoChatService.participants.size > 0) {
+          this.close();
+        }
+      }, 15000);
+    }
+  }
 
   async ngOnInit() {
     // const builder =
@@ -50,28 +63,30 @@ export class VideoChatComponent implements OnInit, AfterViewInit {
     // });
     // await this.notificationHub.start();
 
-    this.sharableLink = window.location.href + '?video_chat=true';
+    this.sharableLink = window.location.origin + '/post/' + this.data.post.slug + '?video_chat=true';
 
-    /** Whenever localparticipant's stream is changed / updated
-     * Notify all the users with updated stream
+    /** Whenever localparticipant's tries to share the screen it will publish the track and unpublish the video track
+     * And when user switch back to the
      */
     this.videoChatService.$localStreamUpdated.subscribe(async (s) => {
       if (s && s.name === 'screen' && this.activeRoom) {
-        console.log(this.activeRoom.localParticipant);
+        /** Unpublish Video Track */
         this.activeRoom.localParticipant.tracks.forEach(async (trackPublished) => {
           if (trackPublished.kind === 'video') {
             this.activeRoom.localParticipant.unpublishTrack(trackPublished.track);
           }
-          this.publishedScreenTrack = await this.activeRoom.localParticipant.publishTrack(s.track, { name: s.name ? s.name : '' });
         });
+        /** Publish Screen Track  */
+        this.publishedScreenTrack = await this.activeRoom.localParticipant.publishTrack(s.track, { name: s.name ? s.name : '' });
       } else if (s && s.name !== 'screen' && this.activeRoom) {
-        // Access the already published LocalTracks.
+        /** Unpublish Screen Track */
         this.activeRoom.localParticipant.tracks.forEach(async (trackPublished) => {
           if (trackPublished.name === 'screen' || trackPublished.trackName === 'screen') {
             this.activeRoom.localParticipant.unpublishTrack(trackPublished.track);
           }
-          this.publishedScreenTrack = await this.activeRoom.localParticipant.publishTrack(s.track);
         });
+        /** Publish Video Track  */
+        this.publishedScreenTrack = await this.activeRoom.localParticipant.publishTrack(s.track);
       }
       console.log(s);
     });
@@ -93,11 +108,12 @@ export class VideoChatComponent implements OnInit, AfterViewInit {
 
     this.closeRoom();
 
-    this.camera.finalizePreview();
+    // this.camera.finalizePreview();
     // const videoDevice = this.settings.hidePreviewCamera();
     // this.camera.initializePreview(videoDevice);
 
     this.participants.clear();
+    this.close();
   }
 
   closeRoom() {
@@ -157,6 +173,37 @@ export class VideoChatComponent implements OnInit, AfterViewInit {
     return !!track
       && ((track as LocalAudioTrack).detach !== undefined
         || (track as LocalVideoTrack).detach !== undefined);
+  }
+
+  /** When user tries to make a call to the post author */
+  call() {
+    const caller = {
+      _id: this.data.loggedInUser._id,
+      avatar: this.data.loggedInUser.avatar,
+      name: this.data.loggedInUser.name,
+      slug: this.data.loggedInUser.slug
+    };
+    const post = {
+      _id: this.data.post._id,
+      name: this.data.post.name,
+      slug: this.data.post.slug,
+      createdBy: this.data.post.createdBy._id
+    };
+    this.videoChatService.call(post, caller).subscribe(a => {
+      if (a && !this.activeRoom) {
+        /** Create room */
+        this.onRoomChanged(this.data.post.slug);
+
+        /** When user receives the call, if user doesn't press the join,
+         * Stop the call within 15 seconds
+         */
+        setTimeout(() => {
+          if (!this.videoChatService.participants.size) {
+            this.close();
+          }
+        }, 18000);
+      }
+    });
   }
 
   close() {

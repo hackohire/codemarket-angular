@@ -88,7 +88,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
   currentFormIndex = 0;
   lastFormIndex = -1;
 
-  individualPoints =[];
+  individualPoints = [];
   formArray = [];
   enableSubmitButton = false;
 
@@ -337,7 +337,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
     this.dialog.open(VideoChatComponent, {
       minWidth: '100vw',
       height: '100vh',
-      data: { post: this.postDetails },
+      data: { post: this.postDetails, loggedInUser: this.authService.loggedInUser },
       disableClose: true
     });
   }
@@ -348,16 +348,16 @@ export class DetailsComponent implements OnInit, OnDestroy {
       return;
     }
 
-    let exclude = ["selected"];
+    let exclude = ['selected'];
 
-    
+
     let result = this.formDataJsonToSave.reduce((acc, curr) => {
       Object.entries(curr).forEach(([k, v]) => {
         if (!exclude.includes(k)) acc[`${k}`] = v;
       });
       return acc;
     }, {});
-    
+
 
     const formObjToSave = {
       formname: this.postDetails.name,
@@ -366,7 +366,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
       createdBy: this.authService.loggedInUser._id
     };
 
-    console.log("Form Data save Obj ==> ", formObjToSave);
+    console.log('Form Data save Obj ==> ', formObjToSave);
 
     this.formBuilderService.addformData(formObjToSave).subscribe((d: any) => {
       if (d) {
@@ -379,7 +379,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
   valueChangeFun(event) {
     if (event.data) {
-      const values : any= Object.values(event.data);
+      const values: any = Object.values(event.data);
       this.totalPoints = 0;
       // values.forEach((i: any) => {
       //   if (parseInt(i)) {
@@ -387,14 +387,14 @@ export class DetailsComponent implements OnInit, OnDestroy {
       //   }
       // });
 
-      this.formArray[this.currentFormIndex].value = values[0] !== "" ? values[0] : 0;
+      this.formArray[this.currentFormIndex].value = values[0] !== '' ? values[0] : 0;
       this.totalPoints = sumBy(this.formArray, 'value') || 0;
       this.formDataJsonToSave[this.currentFormIndex][this.formArray[this.currentFormIndex].form1.components[0].key] = values[0] || 0;
-      this.formDataJsonToSave[this.currentFormIndex].selected = values[0] !== "" ? true : false;
+      this.formDataJsonToSave[this.currentFormIndex].selected = values[0] !== '' ? true : false;
       const allSelected = this.formDataJsonToSave.map((d) => {
         return d.selected
       });
-      
+
       if (allSelected.indexOf(false) === -1) {
         this.enableSubmitButton = true;
       } else {
@@ -405,8 +405,8 @@ export class DetailsComponent implements OnInit, OnDestroy {
   }
 
   createIndividualForm(formStructureJSON: any) {
-    formStructureJSON.components.forEach((c, i) =>{
-      if (i < formStructureJSON.components.length-1) {
+    formStructureJSON.components.forEach((c, i) => {
+      if (i < formStructureJSON.components.length - 1) {
         this.formArray.push({
           form1: {
             components: [c],
@@ -434,8 +434,8 @@ export class DetailsComponent implements OnInit, OnDestroy {
   }
 
   onBackClick() {
-    this.formArray[this.currentFormIndex].value =  0;
-    this.formDataJsonToSave[this.currentFormIndex][this.formArray[this.currentFormIndex].form1.components[0].key] =  0;
+    this.formArray[this.currentFormIndex].value = 0;
+    this.formDataJsonToSave[this.currentFormIndex][this.formArray[this.currentFormIndex].form1.components[0].key] = 0;
     this.currentFormIndex -= 1;
     this.lastFormIndex -= 1;
     this.form1 = this.formArray[this.currentFormIndex].form1;

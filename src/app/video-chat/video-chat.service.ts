@@ -115,4 +115,22 @@ export class VideoChatService {
     trackPublished = (publication) => {
         console.log(`Published LocalTrack: ${publication.track}`);
     }
+
+    call(post, caller) {
+        return this.apollo.mutate(
+            {
+                mutation: gql`
+                mutation call($post: PostInput, $caller: UserInput) {
+                    call(post: $post, caller: $caller)
+        }`,
+                variables: {
+                    post,
+                    caller
+                }
+            }
+        ).pipe(
+            map((p: any) => p.data.call),
+        );
+    }
+
 }

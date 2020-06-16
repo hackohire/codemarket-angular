@@ -192,7 +192,8 @@ ul {
       // margin: 25px;
       // width: $sidenav-width;
       max-height: 75vh;
-      overflow: auto;
+      overflow-y: auto;
+      overflow-x: hidden;
   
       &::-webkit-scrollbar {
         height: 4px;
@@ -219,7 +220,7 @@ ul {
   
         .mat-icon {
           position: absolute;
-          right: 5px;
+          right: -4px;
           font-size: 18px;
         }
   

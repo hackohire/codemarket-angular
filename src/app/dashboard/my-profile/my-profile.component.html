@@ -103,8 +103,7 @@
 										<router-outlet></router-outlet>
 									</div>
 
-									<!-- Showing the list of posts for the posts tab, everytime user clicks on the "load more", we increase the page number and call
-														fetchAllOtherPosts method to fetch subsequent posts -->
+									<!-- Showing the list of posts for the posts tab, everytime user clicks on the "load more", we increase the page number and call fetchAllOtherPosts method to fetch subsequent posts -->
 									<ng-container *ngIf="profileView === navLinkName.posts">
 										<div class="">
 											<app-brief-post style="width: 100%;" [p]="e"

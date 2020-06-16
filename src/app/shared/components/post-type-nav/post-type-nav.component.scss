@@ -50,7 +50,8 @@
       // margin: 25px;
       // width: $sidenav-width;
       max-height: 75vh;
-      overflow: auto;
+      overflow-y: auto;
+      overflow-x: hidden;
   
       &::-webkit-scrollbar {
         height: 4px;
@@ -76,17 +77,23 @@
           outline: none;
         }
   
+        &:hover span, 
+        &:hover .mat-icon {
+          outline: none;
+          color: $pcolor;
+        }
+  
         .mat-icon {
           position: absolute;
-          right: 0;
+          right: -4px;
           font-size: 18px;
         }
   
-        &.docs-component-viewer-sidenav-item-selected,
-        span:hover,
-        .mat-icon:hover {
-          color: $pcolor;
-        }
+        // &.docs-component-viewer-sidenav-item-selected,
+        // span:hover,
+        // .mat-icon:hover {
+        //   color: $pcolor;
+        // }
       }
   
       hr {

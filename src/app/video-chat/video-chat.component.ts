@@ -63,7 +63,7 @@ export class VideoChatComponent implements OnInit, AfterViewInit {
 
         this.data.isCallReceiving = false;
 
-        if ((!this.videoChatService.participants || this.videoChatService.participants.size < 1)) {
+        if (!this.videoChatService.participants || Array.from(this.videoChatService.participants).length < 1) {
           this.close();
         }
       }, appConstants.videoChat.receiverTimout);
@@ -138,6 +138,12 @@ export class VideoChatComponent implements OnInit, AfterViewInit {
     }
   }
 
+  clearRingInterval() {
+    if (this.ringIntervalFn) {
+      clearTimeout(this.ringIntervalFn);
+    }
+  }
+
   async onRoomChanged(roomName: string) {
 
     if (this.data.isCallReceiving) {
@@ -154,6 +160,10 @@ export class VideoChatComponent implements OnInit, AfterViewInit {
       const tracks = await this.settings.showPreviewCamera();
 
       this.activeRoom = await this.videoChatService.joinOrCreateRoom(roomName, tracks);
+
+      if (this.activeRoom.participants && this.activeRoom.participants.size) {
+        this.clearRingInterval();
+      }
 
       this.participants.initialize(this.activeRoom.participants);
       this.registerRoomEvents();
@@ -258,9 +268,7 @@ export class VideoChatComponent implements OnInit, AfterViewInit {
   }
 
   close() {
-    if (this.ringIntervalFn) {
-      clearTimeout(this.ringIntervalFn);
-    }
+    this.clearRingInterval();
     this.closeRoom();
     this.matDialogRef.close();
   }

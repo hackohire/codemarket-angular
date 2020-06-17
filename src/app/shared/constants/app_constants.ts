@@ -53,8 +53,8 @@ export const appConstants = {
   },
 
   videoChat: {
-    callerTimeout: 18000,
-    receiverTimout: 15000,
+    callerTimeout: 25000,
+    receiverTimout: 27000,
     callingTune: 'https://notificationsounds.com/soundfiles/f0e52b27a7a5d6a1a87373dffa53dbe5/file-sounds-1121-overzealous.wav'
   },
 

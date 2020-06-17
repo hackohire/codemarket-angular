@@ -161,14 +161,11 @@ export class VideoChatComponent implements OnInit, AfterViewInit {
 
       this.activeRoom = await this.videoChatService.joinOrCreateRoom(roomName, tracks);
 
-      if (this.activeRoom.participants && this.activeRoom.participants.size) {
-        this.clearRingInterval();
-      }
-
       this.participants.initialize(this.activeRoom.participants);
       this.registerRoomEvents();
 
       if (this.activeRoom) {
+        this.clearRingInterval();
         this.joined = true;
       }
 
@@ -177,6 +174,7 @@ export class VideoChatComponent implements OnInit, AfterViewInit {
   }
 
   onParticipantsChanged(_: boolean) {
+    this.clearRingInterval();
     this.videoChatService.nudge();
   }
 
@@ -238,11 +236,11 @@ export class VideoChatComponent implements OnInit, AfterViewInit {
         setTimeout(() => {
 
           this.isUsercalling = false; /** Set the isUserCalling flag to false */
-          if (!this.videoChatService.participants || Array.from(this.videoChatService.participants).length < 1) {
+          /** Stop Playing Ringtone Interval */
+          clearTimeout(this.ringIntervalFn);
+          ring.remove();
 
-            /** Stop Playing Ringtone Interval */
-            clearTimeout(this.ringIntervalFn);
-            ring.remove();
+          if (!this.videoChatService.participants || Array.from(this.videoChatService.participants).length < 1) {
 
             /** Send the Post Author an email notification, about the user tried to reach out to him */
             const emailBody: Email = {

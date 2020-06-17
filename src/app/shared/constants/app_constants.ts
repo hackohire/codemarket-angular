@@ -52,6 +52,12 @@ export const appConstants = {
     gif_url: 'https://www.codemarket.io/assets/images/cm.gif'
   },
 
+  videoChat: {
+    callerTimeout: 18000,
+    receiverTimout: 15000,
+    callingTune: 'https://notificationsounds.com/soundfiles/f0e52b27a7a5d6a1a87373dffa53dbe5/file-sounds-1121-overzealous.wav'
+  },
+
   Notification: 'https://notificationsounds.com/soundfiles/4e4b5fbbbb602b6d35bea8460aa8f8e5/file-sounds-1096-light.wav',
 
   imageExtenstions: [
@@ -205,6 +211,7 @@ export const appConstants = {
         _id
         name
         slug
+        email
         avatar
         currentJobDetails {
           jobProfile {

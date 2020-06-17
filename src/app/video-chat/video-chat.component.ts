@@ -8,6 +8,11 @@ import { Room, LocalTrack, LocalVideoTrack, LocalAudioTrack, RemoteParticipant }
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Post } from '../shared/models/post.model';
 import { User } from '../shared/models/user.model';
+import { EmailService } from '../email/email.service';
+import { Email } from '../shared/models/email.model';
+import { description } from '../shared/constants/fragments_constatnts';
+import { appConstants } from '../shared/constants/app_constants';
+import { runInDebugContext } from 'vm';
 
 @Component({
   selector: 'app-video-chat',
@@ -29,39 +34,43 @@ export class VideoChatComponent implements OnInit, AfterViewInit {
   publishedVideoTrack = null;
   publishedScreenTrack = null;
 
+  ringIntervalFn = null;
+
   // private notificationHub: HubConnection;
+  isUsercalling: boolean;
 
   constructor(
     private readonly videoChatService: VideoChatService,
     public matDialogRef: MatDialogRef<VideoChatComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { post: Post, loggedInUser: User, caller?: User, isCallReceiving?: boolean },
+    private emailService: EmailService
   ) {
 
     /** When user receives the call, if user doesn't press the join,
      * Stop the call within 15 seconds
      */
     if (this.data.isCallReceiving) {
+
+      /** Play Ringtone Every interval of 2 seconds */
+      const ring = new Audio(appConstants.videoChat.callingTune);
+      this.ringIntervalFn = setInterval(() => {
+        ring.play();
+      }, 2000);
+
       setTimeout(() => {
-        if (!this.videoChatService.participants || this.videoChatService.participants.size > 0) {
+        /** Stop Playing Ringtone Interval */
+        clearTimeout(this.ringIntervalFn);
+
+        this.data.isCallReceiving = false;
+
+        if ((!this.videoChatService.participants || this.videoChatService.participants.size < 1)) {
           this.close();
         }
-      }, 15000);
+      }, appConstants.videoChat.receiverTimout);
     }
   }
 
   async ngOnInit() {
-    // const builder =
-    //     new HubConnectionBuilder()
-    //         .configureLogging(LogLevel.Information)
-    //         .withUrl(`${location.origin}/notificationHub`);
-
-    // this.notificationHub = builder.build();
-    // this.notificationHub.on('RoomsUpdated', async updated => {
-    //     if (updated) {
-    //         await this.rooms.updateRooms();
-    //     }
-    // });
-    // await this.notificationHub.start();
 
     this.sharableLink = window.location.origin + '/post/' + this.data.post.slug + '?video_chat=true';
 
@@ -70,25 +79,30 @@ export class VideoChatComponent implements OnInit, AfterViewInit {
      */
     this.videoChatService.$localStreamUpdated.subscribe(async (s) => {
       if (s && s.name === 'screen' && this.activeRoom) {
+
         /** Unpublish Video Track */
         this.activeRoom.localParticipant.tracks.forEach(async (trackPublished) => {
           if (trackPublished.kind === 'video') {
             this.activeRoom.localParticipant.unpublishTrack(trackPublished.track);
           }
         });
+
         /** Publish Screen Track  */
         this.publishedScreenTrack = await this.activeRoom.localParticipant.publishTrack(s.track, { name: s.name ? s.name : '' });
+
       } else if (s && s.name !== 'screen' && this.activeRoom) {
+
         /** Unpublish Screen Track */
         this.activeRoom.localParticipant.tracks.forEach(async (trackPublished) => {
           if (trackPublished.name === 'screen' || trackPublished.trackName === 'screen') {
             this.activeRoom.localParticipant.unpublishTrack(trackPublished.track);
           }
         });
+
         /** Publish Video Track  */
         this.publishedScreenTrack = await this.activeRoom.localParticipant.publishTrack(s.track);
       }
-      console.log(s);
+
     });
   }
 
@@ -125,6 +139,11 @@ export class VideoChatComponent implements OnInit, AfterViewInit {
   }
 
   async onRoomChanged(roomName: string) {
+
+    if (this.data.isCallReceiving) {
+      this.data.isCallReceiving = false;
+    }
+
     if (roomName) {
       if (this.activeRoom) {
         this.joined = false;
@@ -189,24 +208,59 @@ export class VideoChatComponent implements OnInit, AfterViewInit {
       slug: this.data.post.slug,
       createdBy: this.data.post.createdBy._id
     };
+    this.isUsercalling = true;
+
+    const ring = new Audio(appConstants.videoChat.callingTune);
+
     this.videoChatService.call(post, caller).subscribe(a => {
       if (a && !this.activeRoom) {
         /** Create room */
         this.onRoomChanged(this.data.post.slug);
 
+        /** Play Ringtone Every interval of 2 seconds */
+        this.ringIntervalFn = setInterval(() => {
+          ring.play();
+        }, 2000);
+
         /** When user receives the call, if user doesn't press the join,
          * Stop the call within 15 seconds
          */
         setTimeout(() => {
-          if (!this.videoChatService.participants.size) {
+
+          this.isUsercalling = false; /** Set the isUserCalling flag to false */
+          if (!this.videoChatService.participants || Array.from(this.videoChatService.participants).length < 1) {
+
+            /** Stop Playing Ringtone Interval */
+            clearTimeout(this.ringIntervalFn);
+            ring.remove();
+
+            /** Send the Post Author an email notification, about the user tried to reach out to him */
+            const emailBody: Email = {
+              to: [this.data.post.createdBy.email],
+              subject: `${this.data.loggedInUser.name} tried calling you`,
+              descriptionHTML:
+                `<div>
+                  <p>${'Dear ' + this.data.post.createdBy.name}</p>
+                  <p>${this.data.loggedInUser.name}, Tried to reach out to you to discuss regarding “<a href=${this.sharableLink}><strong>${this.data.post.name}</strong></a>”</p>
+                </div>`,
+              createdBy: this.data.loggedInUser._id
+            };
+
+            this.emailService.sendEmailFromFrontend(emailBody).subscribe(a => {
+              console.log(a);
+            });
+
             this.close();
           }
-        }, 18000);
+        }, appConstants.videoChat.callerTimeout);
       }
     });
   }
 
   close() {
+    if (this.ringIntervalFn) {
+      clearTimeout(this.ringIntervalFn);
+    }
     this.closeRoom();
     this.matDialogRef.close();
   }

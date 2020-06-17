@@ -1,13 +1,25 @@
+<!-- Show when user is getting the call -->
 <h3 style="display: inline; vertical-align: middle;" class="mr-2" *ngIf="data?.caller && !joined">
     {{(data?.caller?.name) + ' is calling...'}} <mat-icon class="blinking">call</mat-icon>
 </h3>
+<!-- Show when user is getting the call ends here -->
 
-<button class="mr-2" mat-raised-button color="primary" *ngIf="!joined"
+<button class="mr-2" mat-raised-button color="primary" [disabled]="isUsercalling" *ngIf="!joined"
     (click)="onRoomChanged(data.post.slug)">Join</button>
 
-<button mat-raised-button color="primary"
+<button mat-raised-button color="primary" class="mr-2"
     *ngIf="!joined && data?.post?.createdBy?._id && data?.loggedInUser?._id !== data?.post?.createdBy?._id"
     (click)="call()">Call</button>
+
+<button class="mr-2" mat-raised-button color="warn" (click)="close()">Cancel</button>
+
+
+<!-- Show when user is calling -->
+<h3 style="display: inline; vertical-align: middle;" class="mr-2" *ngIf="isUsercalling">
+    {{'Calling...'}} <mat-icon class="blinking">call</mat-icon>
+</h3>
+<!-- Show when user is calling ends here -->
+
 <mat-card class="mb-3"><strong>Sharable Link: </strong><a [href]="sharableLink">{{sharableLink}}</a>
     <mat-icon (click)="close()" style="float: right;">close</mat-icon>
 </mat-card>
@@ -28,3 +40,8 @@
         <app-settings #settings (settingsChanged)="onSettingsChanged($event)"></app-settings>
     </div>
 </div>
+
+<!-- <div>
+    <p>{{data?.post?.createdBy?.name}}</p>
+    <p>{{'Dear ' + data?.loggedInUser?.name}}, Tried to reach out to you to discuss regarding “<a [href]="sharableLink"><strong>{{data?.post?.name}}</strong></a>”</p>
+</div> -->

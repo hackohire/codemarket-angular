@@ -18,13 +18,14 @@ export class SurveyDialogComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<SurveyDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) {}
+    @Inject(MAT_DIALOG_DATA) public data: any
+    ) {}
 
   ngOnInit() {
     this.surveyUserFrom = new FormGroup({
       firstName: new FormControl('', Validators.required),
       lastName: new FormControl('', Validators.required),
-      email: new FormControl('', [Validators.required])
+      email: new FormControl('', [Validators.required, Validators.email])
     });
   }
 
@@ -33,8 +34,7 @@ export class SurveyDialogComponent implements OnInit {
   }
 
   onSubmitClick() {
-    console.log(this.surveyUserFrom.value);
-    this.dialogRef.close();
+    this.dialogRef.close(this.surveyUserFrom.value);
   }
 }
 
@@ -177,35 +177,39 @@ export class SurveyComponent implements OnInit {
 
 
     if (!this.authService.loggedInUser) {
+      const dialogRef = this.dialog.open(SurveyDialogComponent, {
+        data : {
+          formDataJson: result,
+          formDetails: this.formDetails,
+        }
+      });
 
-      
-
-      const obj = {
-        email: "jaysojitra13@gmail.com",
-        firstName: "jay",
-        lastName: "patel"
-      }
-      this.dialog.open(SurveyDialogComponent);
-
-      // this.formBuilderService.addSurveyUser(obj).subscribe((res) => {
-      //   console.log("This is helpgrowBusiness ==> ", res);
-
-      //   this.formDetails.value.formDataJson = result;
-      //   this.formDetails.value.createdBy = res._id;
-
-      //   console.log(this.formDetails.value);
-
-      // this.formBuilderService.addformData(this.formDetails.value).subscribe((d: any) => {
-      //   if (d) {
-      //     Swal.fire(`${d.formname} has been Added Successfully` , '', 'success').then(() => {
-      //       this.router.navigate(['/survey'], { queryParams: { id: d._id } });
-      //       this.hideAllButton = true;
-      //       this.mapValueWithLabel(d);    
-      //     });
-      //   }
-      // });
-
-      // });
+      dialogRef.afterClosed().subscribe(formObj => {
+        this.formBuilderService.addSurveyUser(formObj).subscribe((res) => {
+          console.log("This is addSurveyUser ==> ", res);
+          
+          if (res.alreadyExist) {
+            Swal.fire(`Email already Exist` , '', 'error');
+          } else {
+            this.formDetails.value.formDataJson = result;
+            this.formDetails.value.createdBy = res._id;
+    
+    
+          this.formBuilderService.addformData(this.formDetails.value).subscribe((d: any) => {
+            if (d) {
+              Swal.fire(`${d.formname} has been Added Successfully` , '', 'success').then(() => {
+                this.router.navigate(['/survey'], { queryParams: { id: d._id } });
+                this.hideAllButton = true;
+                this.mapValueWithLabel(d);    
+              });
+            }
+          });
+          }
+  
+        }, (err) => {
+          console.log("Err ==> ", err);
+        });
+      });
     } else {
 
       this.formDetails.value.formDataJson = result;

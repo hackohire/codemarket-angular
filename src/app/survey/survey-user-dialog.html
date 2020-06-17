@@ -18,6 +18,6 @@
 </div>
 <br>
 <div mat-dialog-actions>
-    <button type="button" mat-raised-button color="warn" (ckick)="onCancelClick()" style="flex: auto;">Cancel</button>
-    <button type="button" mat-raised-button color="primary" (ckick)="onSubmitClick()" style="flex: auto;">Submit</button>
+    <button type="button" mat-raised-button color="warn" (click)="onCancelClick()" style="flex: auto;">Cancel</button>
+    <button type="button" mat-raised-button color="primary" (click)="onSubmitClick()" style="flex: auto;" [disabled]="surveyUserFrom.invalid">Submit</button>
 </div>

@@ -186,6 +186,7 @@ export class FormBuilderService {
           email
           firstName
           lastName
+          alreadyExist
         }
       }
       `,

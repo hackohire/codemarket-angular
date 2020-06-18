@@ -1,6 +1,6 @@
 :host ::ng-deep {
     .ck.ck-toolbar {
-        top: 145px !important;
+        top: 145px;
     }
 
     .docs-component-viewer-nav.common-box-shadow {
@@ -73,8 +73,8 @@
         }
         .breadcrumb-area {
             // z-index: 18 !important;
-            top: 0 !important;
-            position: relative !important;
+            top: 90px;
+            // position: relative !important;
             width: 100% !important;
             background: #fff !important;
         }
@@ -88,8 +88,8 @@
         }
         .ck.ck-toolbar {
             // position: sticky !important;
-            // top: 0 !important;
-            z-index: 20;
+            top: 200px !important;
+            z-index: 8 !important;
         }
         .ck.ck-toolbar.ck-toolbar_grouping>.ck-toolbar__items {
             overflow-x: auto;

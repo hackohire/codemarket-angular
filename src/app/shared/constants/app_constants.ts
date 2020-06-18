@@ -26,6 +26,7 @@ export const appConstants = {
     [PostType.Business]: 'sticky-note',
     [PostType.Blog]: 'blog',
     [PostType.Mentor]: 'briefcase',
+    [PostType.Survey]: 'briefcase',
   },
 
   fileS3Bucket: 'manav-files',
@@ -49,6 +50,12 @@ export const appConstants = {
     twitter_card_large: 'summary_large_image',
     logo_url: 'https://www.codemarket.io/assets/images/logo_qugbvk_c_scalew_282.png',
     gif_url: 'https://www.codemarket.io/assets/images/cm.gif'
+  },
+
+  videoChat: {
+    callerTimeout: 25000,
+    receiverTimout: 27000,
+    callingTune: 'https://notificationsounds.com/soundfiles/f0e52b27a7a5d6a1a87373dffa53dbe5/file-sounds-1121-overzealous.wav'
   },
 
   Notification: 'https://notificationsounds.com/soundfiles/4e4b5fbbbb602b6d35bea8460aa8f8e5/file-sounds-1096-light.wav',
@@ -204,6 +211,7 @@ export const appConstants = {
         _id
         name
         slug
+        email
         avatar
         currentJobDetails {
           jobProfile {
@@ -281,6 +289,7 @@ export const appConstants = {
       duration
       job
       mentor
+      formStructureJSON
     }
     ${comment}
     `,
@@ -300,8 +309,27 @@ export const appConstants = {
     // { name: PostType.Goal, label: 'Goal' },
     // { name: PostType.Howtodoc, label: 'How-To-Doc' },
     // { name: PostType.Interview, label: 'Interview' },
-    { name: PostType.Job, label: 'Job', titlePlaceholder: 'Enter Job Title', descriptionPlaceholder: 'Enter Job Description', showCollaborators: false, showClients: false },
-    { name: PostType.Mentor, label: 'Mentor', titlePlaceholder: 'Enter Mentorship Title', descriptionPlaceholder: 'Enter Details about your mentorship session', showCollaborators: false, showClients: false },
+    {
+      name: PostType.Job,
+      label: 'Job',
+      titlePlaceholder: 'Enter Job Title',
+      descriptionPlaceholder: 'Enter Job Description',
+      hideCollaborators: true,
+      hideClients: true,
+      hideCompany: true,
+      showJobProfile: true,
+      hideTags: true
+    },
+    {
+      name: PostType.Mentor,
+      label: 'Mentor',
+      titlePlaceholder: 'Enter Mentorship Title',
+      descriptionPlaceholder: 'Enter Details about your mentorship session',
+      hideCollaborators: true,
+      hideCompany: true,
+      hideClients: true,
+      hideTags: true
+    },
     // { name: PostType.Note, label: 'Notes' },
     // { name: PostType.Product, label: 'Product' },
     // { name: PostType.Question, label: 'Questions' },
@@ -309,5 +337,6 @@ export const appConstants = {
     // { name: PostType.Service, label: 'Service' },
     // { name: PostType.Testing, label: 'Testing' },
     // { name: PostType.Forms, label: 'Forms' },
+    // { name: PostType.Survey, label: 'Survey' },
   ],
 };

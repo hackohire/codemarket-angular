@@ -150,6 +150,15 @@ input[type="number"]::-webkit-outer-spin-button {
   background-color: white;
 }
 
+.mat-drawer.mat-drawer-side {
+  z-index: 2;
+  box-shadow: 0 0 10px 0 #666;
+}
+
+mat-sidenav-content.mat-drawer-content.mat-sidenav-content {
+  margin-left: 0 !important;
+}
+
 tr.mat-header-row {
   background-color: #f9f9f9;
   color: #616161;
@@ -6707,7 +6716,7 @@ a {
 	-- THEME
 *****************************/
 .alert {
-  padding: 18px 30px;
+  padding: 10px 15px;
   -webkit-border-radius: 3px;
   border-radius: 3px;
   font-size: 16px;
@@ -9621,7 +9630,7 @@ a {
 	START AUTHOR AREA
 ****************************************/
 .author-profile-area {
-  background: #eff1f5;
+  background: #fff;
   padding: 70px 0;
 }
 
@@ -17433,3 +17442,16 @@ a {
 //       padding-top: 93px;
 //   }
 // }
+
+.resultscontent {
+  position: sticky;
+  top: 80px;
+  z-index: 9;
+  background: #1e69ac;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+  display: inline-block;
+  height: 30%;
+  margin-left: 300px;
+}

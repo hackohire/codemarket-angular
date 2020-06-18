@@ -31,6 +31,10 @@ export class FormBuilderService {
             _id
             formname
             formStructureJSON
+            connectedDB {
+              _id
+              name
+            }
           }
         }
       `,
@@ -114,6 +118,10 @@ export class FormBuilderService {
             _id
             formname
             formStructureJSON
+            connectedDB {
+              _id
+              name
+            }
             createdAt
             updatedAt
           }
@@ -127,4 +135,23 @@ export class FormBuilderService {
     );
   }
 
+  addIntoAnotherDB(formJson: any, collection: String): Observable<any> {
+    return this.apollo.mutate({
+      mutation: gql`
+        mutation addIntoAnotherDB($formJson: formJsonInput, $collection: String) {
+          addIntoAnotherDB(formJson: $formJson, collection: $collection) {
+            _id
+            formname
+            formStructureJSON
+          }
+        }
+      `,
+      variables: {
+        formJson,
+        collection
+      }
+    }).pipe(
+      map((q: any) => q.data.addIntoAnotherDB)
+    );
+  }
 }

@@ -17,7 +17,6 @@ import { ShareButtonsModule } from '@ngx-share/buttons';
 import { ShareModule } from '@ngx-share/core';
 import { SafePipe } from './pipes/safe.pipe';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { VideoChatComponent } from '../video-chat/video-chat.component';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { AddPostMenuComponent } from './components/add-post-menu/add-post-menu.component';
 import { CompaniesListComponent } from '../companies/companies-list/companies-list.component';
@@ -57,7 +56,6 @@ export function hljsLanguages() {
     CommentComponent,
     DatatableComponent,
     SafePipe,
-    VideoChatComponent,
     AddPostMenuComponent,
     CompaniesListComponent,
     BriefPostComponent,
@@ -112,7 +110,6 @@ export function hljsLanguages() {
     CommentComponent,
     AddCommentComponent,
     DatatableComponent,
-    VideoChatComponent,
     AddPostMenuComponent,
     BriefPostComponent,
     AutocompleteComponent,
@@ -139,7 +136,7 @@ export function hljsLanguages() {
     TimeSlotsComponent
   ],
   entryComponents: [
-    VideoChatComponent, ChatFullUiComponent
+    ChatFullUiComponent
   ],
   providers: [CommentService, ChatService, AppointmentService]
 })

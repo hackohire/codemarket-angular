@@ -1,20 +1,47 @@
-<div class="row">
-    <div class="col-md-4">
-        <div id="controls">
-            <div id="preview">
-                <div id="local-media"></div>
-            </div>
-        </div>
+<!-- Show when user is getting the call -->
+<h3 style="display: inline; vertical-align: middle;" class="mr-2" *ngIf="data?.caller && !joined">
+    {{(data?.caller?.name) + ' is calling...'}} <mat-icon class="blinking">call</mat-icon>
+</h3>
+<!-- Show when user is getting the call ends here -->
+
+<button class="mr-2" mat-raised-button color="primary" [disabled]="isUsercalling" *ngIf="!joined"
+    (click)="onRoomChanged(data.post.slug)">Join</button>
+
+<button mat-raised-button color="primary" class="mr-2"
+    *ngIf="!joined && data?.post?.createdBy?._id && data?.loggedInUser?._id !== data?.post?.createdBy?._id"
+    (click)="call()">Call</button>
+
+<button class="mr-2" mat-raised-button color="warn" (click)="close()">Cancel</button>
+
+
+<!-- Show when user is calling -->
+<h3 style="display: inline; vertical-align: middle;" class="mr-2" *ngIf="isUsercalling">
+    {{'Calling...'}} <mat-icon class="blinking">call</mat-icon>
+</h3>
+<!-- Show when user is calling ends here -->
+
+<mat-card class="mb-3"><strong>Sharable Link: </strong><a [href]="sharableLink">{{sharableLink}}</a>
+    <mat-icon (click)="close()" style="float: right;">close</mat-icon>
+</mat-card>
+
+<div class="row m-0">
+    <!-- <div class="col-md-3">
+        <app-rooms #rooms (roomChanged)="onRoomChanged($event)"
+            [activeRoomName]="!!activeRoom ? activeRoom.name : null"></app-rooms>
+    </div> -->
+    <div class="col-md-9 pl-0">
+        <!-- <app-camera #camera [style.display]="!!activeRoom ? 'none' : 'block'">
+        </app-camera> -->
+        <app-participants #participants (leaveRoom)="onLeaveRoom($event)"
+            (participantsChanged)="onParticipantsChanged($event)" [style.display]="!!activeRoom ? 'block' : 'none'"
+            [activeRoomName]="!!activeRoom ? activeRoom.name : null"></app-participants>
     </div>
-    <div class="col-md-8">
-        <div id="remote-media">
-            <!-- <p>{{ start | minuteSeconds }}</p> -->
-        </div>
-    </div>
-    <div class="box">
-        <!-- <button *ngIf="!ongoingCallObj && !data?.isSomeoneCalling" mat-button #callButton (click)="call()" id="callButton">Call</button>
-                                                        <button *ngIf="data?.isSomeoneCalling && !stream" mat-button color="primary" (click)="answer()" #answerButton id="answerButton">Answer</button>
-                                                        <button mat-button color="primary" (click)="screenShare()">Screen Share</button> -->
-        <button mat-button color="primary" #rejectButton (click)="hangUp()" id="rejectButton">Reject</button>
+    <div class="col-md-3 p-0">
+        <app-settings #settings (settingsChanged)="onSettingsChanged($event)"></app-settings>
     </div>
 </div>
+
+<!-- <div>
+    <p>{{data?.post?.createdBy?.name}}</p>
+    <p>{{'Dear ' + data?.loggedInUser?.name}}, Tried to reach out to you to discuss regarding “<a [href]="sharableLink"><strong>{{data?.post?.name}}</strong></a>”</p>
+</div> -->

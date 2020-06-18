@@ -84,7 +84,7 @@ export class NavBarComponent implements OnInit, AfterViewInit, OnDestroy {
         filter((e) => (e instanceof NavigationEnd)),
         tap((r: NavigationEnd) => {
           console.log(r.url.includes('post'));
-          this.hideFooter = r.url.includes('post');
+          this.hideFooter = r.url.includes('post') || r.url.includes('video-chat');
           this.showPostActions = r.url.includes('add-post?type=');
         }))
         .subscribe(),

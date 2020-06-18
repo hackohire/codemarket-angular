@@ -7,102 +7,110 @@ import { VideoChatService } from '../video-chat.service';
 import { Room, LocalTrack, LocalVideoTrack, LocalAudioTrack, RemoteParticipant } from 'twilio-video';
 
 @Component({
-  selector: 'app-video-chat-home',
-  templateUrl: './video-chat-home.component.html',
-  styleUrls: ['./video-chat-home.component.scss']
+    selector: 'app-video-chat-home',
+    templateUrl: './video-chat-home.component.html',
+    styleUrls: ['./video-chat-home.component.scss']
 })
 export class VideoChatHomeComponent implements OnInit {
 
-  @ViewChild('rooms', { static: false }) rooms: RoomsComponent;
-  @ViewChild('camera', { static: false }) camera: CameraComponent;
-  @ViewChild('settings', { static: false }) settings: SettingsComponent;
-  @ViewChild('participants', { static: false }) participants: ParticipantsComponent;
+    @ViewChild('rooms', { static: false }) rooms: RoomsComponent;
+    @ViewChild('camera', { static: false }) camera: CameraComponent;
+    @ViewChild('settings', { static: false }) settings: SettingsComponent;
+    @ViewChild('participants', { static: false }) participants: ParticipantsComponent;
 
-  activeRoom: Room;
+    activeRoom: Room;
 
-  // private notificationHub: HubConnection;
+    // private notificationHub: HubConnection;
 
-  constructor(
-      private readonly videoChatService: VideoChatService) { }
+    constructor(
+        private readonly videoChatService: VideoChatService) { }
 
-  async ngOnInit() {
-      // const builder =
-      //     new HubConnectionBuilder()
-      //         .configureLogging(LogLevel.Information)
-      //         .withUrl(`${location.origin}/notificationHub`);
+    async ngOnInit() {
+        // const builder =
+        //     new HubConnectionBuilder()
+        //         .configureLogging(LogLevel.Information)
+        //         .withUrl(`${location.origin}/notificationHub`);
 
-      // this.notificationHub = builder.build();
-      // this.notificationHub.on('RoomsUpdated', async updated => {
-      //     if (updated) {
-      //         await this.rooms.updateRooms();
-      //     }
-      // });
-      // await this.notificationHub.start();
-  }
+        // this.notificationHub = builder.build();
+        // this.notificationHub.on('RoomsUpdated', async updated => {
+        //     if (updated) {
+        //         await this.rooms.updateRooms();
+        //     }
+        // });
+        // await this.notificationHub.start();
 
-  async onSettingsChanged(deviceInfo: MediaDeviceInfo) {
-      await this.camera.initializePreview(deviceInfo);
-  }
+        this.videoChatService.$localStreamUpdated.subscribe((s) => {
+            if (s && this.activeRoom) {
+                console.log(this.activeRoom.localParticipant);
+                this.activeRoom.localParticipant.publishTrack(s);
+            }
+            console.log(s);
+        });
+    }
 
-  async onLeaveRoom(_: boolean) {
-      if (this.activeRoom) {
-          this.activeRoom.disconnect();
-          this.activeRoom = null;
-      }
+    async onSettingsChanged(deviceInfo: MediaDeviceInfo) {
+        await this.camera.initializePreview(deviceInfo);
+    }
 
-      this.camera.finalizePreview();
-      const videoDevice = this.settings.hidePreviewCamera();
-      this.camera.initializePreview(videoDevice);
+    async onLeaveRoom(_: boolean) {
+        if (this.activeRoom) {
+            this.activeRoom.disconnect();
+            this.activeRoom = null;
+        }
 
-      this.participants.clear();
-  }
+        this.camera.finalizePreview();
+        const videoDevice = this.settings.hidePreviewCamera();
+        this.camera.initializePreview(videoDevice);
 
-  async onRoomChanged(roomName: string) {
-      if (roomName) {
-          if (this.activeRoom) {
-              this.activeRoom.disconnect();
-          }
+        this.participants.clear();
+    }
 
-          this.camera.finalizePreview();
-          const tracks = await this.settings.showPreviewCamera();
+    async onRoomChanged(roomName: string) {
+        if (roomName) {
+            if (this.activeRoom) {
+                this.activeRoom.disconnect();
+            }
 
-          this.activeRoom =
-              await this.videoChatService
-                        .joinOrCreateRoom(roomName, tracks);
+            this.camera.finalizePreview();
+            const tracks = await this.settings.showPreviewCamera();
 
-          this.participants.initialize(this.activeRoom.participants);
-          this.registerRoomEvents();
+            this.activeRoom =
+                await this.videoChatService
+                    .joinOrCreateRoom(roomName, tracks);
 
-          // this.notificationHub.send('RoomsUpdated', true);
-      }
-  }
+            this.participants.initialize(this.activeRoom.participants);
+            this.registerRoomEvents();
 
-  onParticipantsChanged(_: boolean) {
-      this.videoChatService.nudge();
-  }
+            // this.notificationHub.send('RoomsUpdated', true);
+        }
+    }
 
-  private registerRoomEvents() {
-      this.activeRoom
-          .on('disconnected',
-              (room: Room) => room.localParticipant.tracks.forEach(publication => this.detachLocalTrack(publication.track)))
-          .on('participantConnected',
-              (participant: RemoteParticipant) => this.participants.add(participant))
-          .on('participantDisconnected',
-              (participant: RemoteParticipant) => this.participants.remove(participant))
-          .on('dominantSpeakerChanged',
-              (dominantSpeaker: RemoteParticipant) => this.participants.loudest(dominantSpeaker));
-  }
+    onParticipantsChanged(_: boolean) {
+        this.videoChatService.nudge();
+    }
 
-  private detachLocalTrack(track: LocalTrack) {
-      if (this.isDetachable(track)) {
-          track.detach().forEach(el => el.remove());
-      }
-  }
+    private registerRoomEvents() {
+        this.activeRoom
+            .on('disconnected',
+                (room: Room) => room.localParticipant.tracks.forEach(publication => this.detachLocalTrack(publication.track)))
+            .on('participantConnected',
+                (participant: RemoteParticipant) => this.participants.add(participant))
+            .on('participantDisconnected',
+                (participant: RemoteParticipant) => this.participants.remove(participant))
+            .on('dominantSpeakerChanged',
+                (dominantSpeaker: RemoteParticipant) => this.participants.loudest(dominantSpeaker));
+    }
 
-  private isDetachable(track: LocalTrack): track is LocalAudioTrack | LocalVideoTrack {
-      return !!track
-          && ((track as LocalAudioTrack).detach !== undefined
-          || (track as LocalVideoTrack).detach !== undefined);
-  }
+    private detachLocalTrack(track: LocalTrack) {
+        if (this.isDetachable(track)) {
+            track.detach().forEach(el => el.remove());
+        }
+    }
+
+    private isDetachable(track: LocalTrack): track is LocalAudioTrack | LocalVideoTrack {
+        return !!track
+            && ((track as LocalAudioTrack).detach !== undefined
+                || (track as LocalVideoTrack).detach !== undefined);
+    }
 
 }

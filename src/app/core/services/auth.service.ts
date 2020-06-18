@@ -20,6 +20,7 @@ import { TransferState, makeStateKey } from '@angular/platform-browser';
 import { MessageService } from '../../shared/services/message.service';
 import { NotificationService } from '../../auth/notification.service';
 import moment from 'moment';
+import { MatDialog } from '@angular/material/dialog';
 
 export interface NewUser {
   email: string;
@@ -48,6 +49,10 @@ export class AuthService {
 
   navigationPostListObservable: Observable<any[]>;
 
+  /** For Video Call events purposes */
+  videoChatActivity$ = new BehaviorSubject(null);
+  videoChatActivityObservable$: Observable<any>;
+
   constructor(
     private apollo: Apollo,
     private store: Store<AppState>,
@@ -57,9 +62,12 @@ export class AuthService {
     private toastrService: ToastrService,
     private readonly transferState: TransferState,
     private messageService: MessageService,
-    private _notification: NotificationService
+    private _notification: NotificationService,
+    private dialog: MatDialog,
     // private commentService: CommentService
   ) {
+
+    this.videoChatActivityObservable$ = this.videoChatActivity$.asObservable();
 
     this.loggedInUser$ = this.store.select(selectLoggedInUser);
     this.loggedInUser$.subscribe((u) => this.loggedInUser = u);
@@ -75,7 +83,7 @@ export class AuthService {
 
         if (payload.event === 'signIn') {
           this.checkIfUserIsLoggedIn();
-          this.router.navigate(['/', 'dashboard', 'my-profile']);
+          // this.router.navigate(['/', 'dashboard', 'my-profile']);
         } else if (payload.event === 'oAuthSignOut') {
           this.store.dispatch(SetLoggedInUser({ payload: null }));
         }
@@ -201,6 +209,17 @@ export class AuthService {
             ...Post
           }
         }
+        onCalling {
+          post {
+            ...Post
+          }
+          caller {
+            name
+            _id
+            avatar
+            slug
+          }
+        }
       }
     }
     ${appConstants.postQuery}
@@ -217,21 +236,28 @@ export class AuthService {
     }).pipe(
       map((u: any) => u.data.onUserOnline),
       tap((u) => {
-        if (u.postUpdated && u.postUpdated.post) {
-          /** Audio Notification */
-          // var audio = new Audio(appConstants.Notification);
-          // audio.play();
-          // this.messageService.addNewMessage(u.onCommentAdded);
-          // this.openToastrNotification(u.post, u.onCommentAdded, true);
-          u.postUpdated.post['isLatest'] = true;
-          const i = this.navigationPostList$.value.findIndex(p => p._id === u.postUpdated.post._id);
+        if (u) {
+          if (u.postUpdated && u.postUpdated.post) {
+            /** Audio Notification */
+            // var audio = new Audio(appConstants.Notification);
+            // audio.play();
+            // this.messageService.addNewMessage(u.onCommentAdded);
+            // this.openToastrNotification(u.post, u.onCommentAdded, true);
+            u.postUpdated.post['isLatest'] = true;
+            const i = this.navigationPostList$.value.findIndex(p => p._id === u.postUpdated.post._id);
 
-          if (i > -1) {
-            this.navigationPostList$.value.splice(i, 1);
+            if (i > -1) {
+              this.navigationPostList$.value.splice(i, 1);
+            }
+            this.navigationPostList$.next([u.postUpdated.post, ...this.navigationPostList$.value]);
+
+            this.postUpdateCount = this.navigationPostList$.value.filter(p => p['isLatest']).length;
           }
-          this.navigationPostList$.next([u.postUpdated.post, ...this.navigationPostList$.value]);
 
-          this.postUpdateCount = this.navigationPostList$.value.filter(p => p['isLatest']).length;
+          /** When user receives the call */
+          if (u.onCalling) {
+            this.videoChatActivity$.next(u.onCalling);
+          }
         }
       })
     )

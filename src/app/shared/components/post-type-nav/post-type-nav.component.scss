@@ -2,7 +2,7 @@
 
 // Side Navbar CSS Starts here
 .docs-component-viewer-nav-content {
-    background: rgba(0, 0, 0, 0.03);
+  background: #fff;
   
     &::-webkit-scrollbar-thumb {
       background: rgba(0, 0, 0, .26);
@@ -42,13 +42,16 @@
   
   .docs-component-viewer-nav {
     position: sticky;
-    top: 25px;
+    top: 48px;
+    box-shadow: none !important;
+    border: 1px solid #ccc;
   
     .docs-component-viewer-nav-content {
       // margin: 25px;
       // width: $sidenav-width;
       max-height: 75vh;
-      overflow: auto;
+      overflow-y: auto;
+      overflow-x: hidden;
   
       &::-webkit-scrollbar {
         height: 4px;
@@ -56,8 +59,8 @@
       }
   
       button {
-        padding: 10px 15px;
-        font-weight: 700;
+        padding: 10px 15px 10px 10px;
+        font-weight: 500;
         line-height: 16px;
         margin: 0;
         font-size: 13px;
@@ -68,22 +71,29 @@
         text-align: left;
         background: none;
         border: none;
+        color: #000;
   
         &:focus {
           outline: none;
         }
   
+        &:hover span, 
+        &:hover .mat-icon {
+          outline: none;
+          color: $pcolor;
+        }
+  
         .mat-icon {
           position: absolute;
-          right: 5px;
+          right: -4px;
           font-size: 18px;
         }
   
-        &.docs-component-viewer-sidenav-item-selected,
-        span:hover,
-        .mat-icon:hover {
-          color: $pcolor;
-        }
+        // &.docs-component-viewer-sidenav-item-selected,
+        // span:hover,
+        // .mat-icon:hover {
+        //   color: $pcolor;
+        // }
       }
   
       hr {

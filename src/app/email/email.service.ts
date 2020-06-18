@@ -70,6 +70,25 @@ export class EmailService {
       }),
     );
   }
+  sendEmailFromFrontend(email: Email) {
+    return this.apollo.mutate(
+      {
+        mutation: gql`
+          mutation sendEmailFromFrontend($email: EmailInput) {
+            sendEmailFromFrontend(email: $email)
+          }
+        `,
+        variables: {
+          email
+        },
+        fetchPolicy: 'no-cache'
+      }
+    ).pipe(
+      map((p: any) => {
+        return p.data.sendEmailFromFrontend;
+      }),
+    );
+  }
 
   getPostsByType(postTye: string) {
     return this.apollo.query(
@@ -96,7 +115,7 @@ export class EmailService {
       }),
     );
   }
-  
+
   getCsvFileData(data: any, createdBy: String, fileName: String, label: String, companies: Batch): Observable<any> {
     return this.apollo.mutate(
       {
@@ -164,7 +183,7 @@ export class EmailService {
       }),
     );;
   }
-  
+
   saveCsvFileData(data: any, createdBy: String, fileName: String, label: String, companyId: String): Observable<any> {
     return this.apollo.mutate(
       {
@@ -221,12 +240,12 @@ export class EmailService {
     );
   }
 
-  getMailingListContacts(pageOptions, batchId: string): Observable<any> {
+  getMailingListContacts(pageOptions, batchId: string, searchObj = { companyName: '', status: '' }): Observable<any> {
     return this.apollo.query(
       {
         query: gql`
-          query getMailingListContacts($pageOptions: PageOptionsInput, $batchId: String) {
-            getMailingListContacts(pageOptions: $pageOptions, batchId: $batchId) {
+          query getMailingListContacts($pageOptions: PageOptionsInput, $batchId: String, $searchObj: searchInput) {
+            getMailingListContacts(pageOptions: $pageOptions, batchId: $batchId, searchObj: $searchObj) {
               total
               contacts {
                 _id
@@ -261,7 +280,8 @@ export class EmailService {
         `,
         variables: {
           pageOptions,
-          batchId
+          batchId,
+          searchObj
         },
         fetchPolicy: 'no-cache'
       }

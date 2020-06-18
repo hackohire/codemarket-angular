@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Observable, of, Subscription } from 'rxjs';
 import { AppState } from 'src/app/core/store/state/app.state';
 import { Store } from '@ngrx/store';
@@ -7,7 +7,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BreadCumb } from 'src/app/shared/models/bredcumb.model';
 import { FormGroup, FormControl } from '@angular/forms';
 import moment from 'moment';
-import { keyBy } from 'lodash';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { CommentService } from 'src/app/shared/services/comment.service';
 import { environment } from 'src/environments/environment';
@@ -16,15 +15,17 @@ import { Post } from 'src/app/shared/models/post.model';
 import { MatDialog, MatPaginator } from '@angular/material';
 import { VideoChatComponent } from 'src/app/video-chat/video-chat.component';
 import { PostService } from '../../shared/services/post.service';
-import { SweetalertService } from '../../shared/services/sweetalert.service';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { appConstants } from '../../shared/constants/app_constants';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { MdePopoverTrigger } from '@material-extended/mde';
 import { ShareService } from '@ngx-share/core';
-import { set } from 'lodash';
+import { set, sumBy } from 'lodash';
 import { get } from 'lodash';
 import { PostType } from '../../shared/models/post-types.enum';
+import { FormBuilderService } from 'src/app/form-builder/form-builder.service';
+import Swal from 'sweetalert2';
+import { AppointmentService } from '../../shared/services/appointment.service';
+import { isNullOrUndefined } from 'util';
 
 @Component({
   selector: 'app-details',
@@ -78,12 +79,19 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
   displayChatBox = false;
 
-  @ViewChild(MdePopoverTrigger, { static: false }) addTagsPopover: MdePopoverTrigger;
-  @ViewChild(MdePopoverTrigger, { static: false }) addCopmaniesPopover: MdePopoverTrigger;
-  @ViewChild(MdePopoverTrigger, { static: false }) addClientsPopover: MdePopoverTrigger;
-  @ViewChild(MdePopoverTrigger, { static: false }) addCollaboratorsPopover: MdePopoverTrigger;
-
   selectedPostTypeDetails = null;
+  // Survey Form variables 
+  totalPoints = 0;
+  public form1 = { components: [] };
+  formDataJsonToSave = [];
+  currentFormIndex = 0;
+  lastFormIndex = -1;
+
+  individualPoints = [];
+  formArray = [];
+  enableSubmitButton = false;
+
+  hideAllButton = false;
 
   constructor(
     private store: Store<AppState>,
@@ -95,6 +103,8 @@ export class DetailsComponent implements OnInit, OnDestroy {
     private router: Router,
     public shareSocial: ShareService,
     private breakpointObserver: BreakpointObserver,
+    private formBuilderService: FormBuilderService,
+    public appointmentService: AppointmentService
   ) {
     /** Peer Subscription for Video Call */
     // this.userService.peer.subscribe((p) => {
@@ -124,6 +134,10 @@ export class DetailsComponent implements OnInit, OnDestroy {
       tap((p: Post) => {
         if (p) {
           this.postDetails = p;
+          if (this.postDetails.formStructureJSON) {
+            this.createIndividualForm(this.postDetails.formStructureJSON);
+          }
+
           this.collaborators = this.postDetails.collaborators.map((cDetail) => {
             return cDetail._id;
           });
@@ -141,19 +155,30 @@ export class DetailsComponent implements OnInit, OnDestroy {
             ]
           };
 
-          this.postService.getCountOfAllPost('', '',
-            {
-              referencePostId: [this.postDetails._id],
-              connectedPosts: this.postDetails.connectedPosts.map(p => p._id),
-              postType: null
-            }).subscribe((data) => {
-              if (data.length) {
-                data = keyBy(data, '_id');
-                appConstants.postTypesArray.forEach((obj) => {
-                  obj['count'] = data[obj.name] ? data[obj.name].count : 0
-                });
+          this.checkIfVideoChat();
+
+          this.subscription$.add(
+            this.authService.loggedInUser$.subscribe((u) => {
+              if (u) {
+                this.checkIfVideoChat();
               }
-            });
+            })
+          );
+
+
+          // this.postService.getCountOfAllPost('', '',
+          //   {
+          //     referencePostId: [this.postDetails._id],
+          //     connectedPosts: this.postDetails.connectedPosts.map(p => p._id),
+          //     postType: null
+          //   }).subscribe((data) => {
+          //     if (data.length) {
+          //       data = keyBy(data, '_id');
+          //       appConstants.postTypesArray.forEach((obj) => {
+          //         obj['count'] = data[obj.name] ? data[obj.name].count : 0
+          //       });
+          //     }
+          //   });
 
         }
 
@@ -174,6 +199,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
   postFormInitialization(i: Post) {
     this.postForm = new FormGroup({
       name: new FormControl(i && i.name ? i.name : ''),
+      price: new FormControl(i && !isNullOrUndefined(i.price) ? i.price : null),
       tags: new FormControl(i && i.tags ? i.tags : []),
       companies: new FormControl(i && i.companies ? i.companies : []),
       clients: new FormControl(i && i.clients ? i.clients : []),
@@ -226,14 +252,6 @@ export class DetailsComponent implements OnInit, OnDestroy {
   fromNow(date) {
     const d = moment(date).isValid() ? date : new Date(+date);
     return moment(d).fromNow();
-  }
-
-  openDialog(authorId?: string): void {
-    this.dialog.open(VideoChatComponent, {
-      width: '550px',
-      // data: { authorId, peer: this.peer },
-      disableClose: true
-    });
   }
 
   edit(details) {
@@ -304,5 +322,142 @@ export class DetailsComponent implements OnInit, OnDestroy {
         popover._emitCloseEvent();
       }
     });
+  }
+
+  checkIfVideoChat() {
+    if (this.activatedRoute.snapshot.queryParams['video_chat']) {
+      if (!this.authService.loggedInUser) {
+        this.authService.checkIfUserIsLoggedIn(true);
+        return;
+      }
+      this.openVideoRoom();
+    }
+  }
+
+  openVideoRoom(): void {
+    this.dialog.open(VideoChatComponent, {
+      minWidth: '100vw',
+      height: '100vh',
+      data: { post: this.postDetails, loggedInUser: this.authService.loggedInUser },
+      disableClose: true
+    });
+  }
+
+  onSubmitSurveyForm(event) {
+    if (!this.authService.loggedInUser) {
+      this.authService.checkIfUserIsLoggedIn(true);
+      return;
+    }
+
+    let exclude = ['selected'];
+
+
+    let result = this.formDataJsonToSave.reduce((acc, curr) => {
+      Object.entries(curr).forEach(([k, v]) => {
+        if (!exclude.includes(k)) acc[`${k}`] = v;
+      });
+      return acc;
+    }, {});
+
+
+    const formObjToSave = {
+      formname: this.postDetails.name,
+      formDataJson: result,
+      connectedFormStructureId: this.postDetails._id,
+      createdBy: this.authService.loggedInUser._id
+    };
+
+    console.log('Form Data save Obj ==> ', formObjToSave);
+
+    this.formBuilderService.addformData(formObjToSave).subscribe((d: any) => {
+      if (d) {
+        Swal.fire(`Your data for ${formObjToSave.formname} has been Added Successfully`, '', 'success').then(() => {
+          this.router.navigate(['/dashboard']);
+        });
+      }
+    });
+  }
+
+  valueChangeFun(event) {
+    if (event.data) {
+      const values: any = Object.values(event.data);
+      this.totalPoints = 0;
+      // values.forEach((i: any) => {
+      //   if (parseInt(i)) {
+      //     this.totalPoints += i;
+      //   }
+      // });
+
+      this.formArray[this.currentFormIndex].value = values[0] !== '' ? values[0] : 0;
+      this.totalPoints = sumBy(this.formArray, 'value') || 0;
+      this.formDataJsonToSave[this.currentFormIndex][this.formArray[this.currentFormIndex].form1.components[0].key] = values[0] || 0;
+      this.formDataJsonToSave[this.currentFormIndex].selected = values[0] !== '' ? true : false;
+      const allSelected = this.formDataJsonToSave.map((d) => {
+        return d.selected
+      });
+
+      if (allSelected.indexOf(false) === -1) {
+        this.enableSubmitButton = true;
+      } else {
+        this.enableSubmitButton = false;
+      }
+
+    }
+  }
+
+  createIndividualForm(formStructureJSON: any) {
+    formStructureJSON.components.forEach((c, i) => {
+      if (i < formStructureJSON.components.length - 1) {
+        this.formArray.push({
+          form1: {
+            components: [c],
+            value: this.totalPoints
+          }
+        });
+
+        this.formDataJsonToSave.push({
+          [c.key]: 0,
+          selected: false
+        });
+      }
+    });
+
+    this.form1 = this.formArray[this.currentFormIndex].form1;
+  }
+
+
+  onNextClick() {
+    this.currentFormIndex += 1;
+    this.lastFormIndex += 1;
+    if (this.currentFormIndex < this.formArray.length) {
+      this.form1 = this.formArray[this.currentFormIndex].form1;
+    }
+  }
+
+  onBackClick() {
+    this.formArray[this.currentFormIndex].value = 0;
+    this.formDataJsonToSave[this.currentFormIndex][this.formArray[this.currentFormIndex].form1.components[0].key] = 0;
+    this.currentFormIndex -= 1;
+    this.lastFormIndex -= 1;
+    this.form1 = this.formArray[this.currentFormIndex].form1;
+  }
+
+  bookSession(status, popover) {
+    const post = {
+      _id: this.postDetails._id,
+      mentor: {
+        status
+      },
+      createdBy: this.postDetails.createdBy._id,
+      name: this.postDetails.name,
+      slug: this.postDetails.slug
+    };
+    this.appointmentService.bookSession(post, this.authService.loggedInUser._id).subscribe(u => {
+      console.log(u);
+    });
+  }
+
+  setPrice(event) {
+    this.postForm.get('price').setValue((+event.target.value).toFixed(2));
   }
 }

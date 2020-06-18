@@ -14,12 +14,17 @@ export interface Mentor {
     topics?: Tag[];
     availabilityDate?: string;
     duration?: [];
+    status?: string;
+    requestBy?: string[];
 }
 
 export interface Job {
     jobProfile?: Tag[];
 }
 
+export interface FormJson {
+    components?: any[];
+}
 export interface Post {
     name?: string;
     description?: [{
@@ -66,4 +71,5 @@ export interface Post {
 
     mentor?: Mentor;
     job?: Job;
+    formStructureJSON?: FormJson
 }

@@ -283,5 +283,8 @@
       }
     }
   },
-  "defaultProject": "codemarket"
+  "defaultProject": "codemarket",
+  "cli": {
+    "analytics": false
+  }
 }

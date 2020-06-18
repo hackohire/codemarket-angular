@@ -31,8 +31,6 @@ import { SettingsComponent } from './video-chat/settings/settings.component';
 import { DonateComponent } from './donate/donate.component';
 import { PrivacyComponent } from './privacy/privacy.component';
 import { TermsComponent } from './terms/terms.component';
-import { AddTweetComponent } from './tweet/add-tweet/add-tweet.component';
-import { TweetsListComponent } from './tweet/tweets-list/tweets-list.component';
 
 // import { SignInComponent } from './core/amplify/sign-in-component';
 
@@ -57,9 +55,7 @@ import { TweetsListComponent } from './tweet/tweets-list/tweets-list.component';
     DeviceSelectComponent,
     DonateComponent,
     PrivacyComponent,
-    TermsComponent,
-    AddTweetComponent,
-    TweetsListComponent
+    TermsComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

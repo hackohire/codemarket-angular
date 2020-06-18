@@ -26,6 +26,8 @@ export class CreateFormTemplateComponent implements OnInit {
   formStructureJSON = null;
   formDetails: FormGroup;
 
+  connectedDB = new FormControl('', Validators.required);
+
   constructor(
     private formBuilderService: FormBuilderService,
     @Inject(PLATFORM_ID) private _platformId,
@@ -37,6 +39,7 @@ export class CreateFormTemplateComponent implements OnInit {
       this.formBuilderService.fetchFormStructureById(this.formId).subscribe(f => {
         if (f) {
           this.form = f.formStructureJSON;
+          this.connectedDB.setValue(f.connectedDB);
           this.formDetailsInitialization(f);
         }
       });
@@ -61,7 +64,7 @@ export class CreateFormTemplateComponent implements OnInit {
     this.formDetails = new FormGroup({
       formname: new FormControl(form && form.formname ? form.formname : '', Validators.required),
       formStructureJSON: new FormControl(form && form.formStructureJSON ? form.formStructureJSON : null, Validators.required),
-      connectedDB: new FormControl(form && form.connectedDB ? form.connectedDB : '', Validators.required)
+      // connectedDB: new FormControl(form && form.connectedDB ? form.connectedDB : '', Validators.required)
     });
     if (this.formId) {
       this.formDetails.addControl('_id', new FormControl(this.formId));
@@ -72,8 +75,8 @@ export class CreateFormTemplateComponent implements OnInit {
     if (this.formStructureJSON) {
       this.formDetails.get('formStructureJSON').setValue(this.formStructureJSON);
     }
-    console.log(this.formDetails.value);
-    this.formBuilderService.addformJson(this.formDetails.value).pipe(
+    console.log(this.formDetails.value, this.connectedDB.value);
+    this.formBuilderService.addformJson(this.formDetails.value, this.connectedDB.value._id).pipe(
       catchError((e) => {
         console.log(e);
         return of(false);
@@ -81,11 +84,12 @@ export class CreateFormTemplateComponent implements OnInit {
     ).subscribe((d: any) => {
       if (d) {
         const message = this.formId ? `${d.formname} has been Updated Successfully` : `${d.formname} has been Added Successfully`;
-        this.formBuilderService.addIntoAnotherDB(this.formDetails.value, 'form-structures').subscribe((res) => {
-          
-        });
+        
         Swal.fire(message, '', 'success').then(() => {
           this.formBuilderService.redirectToFormBuilder();
+          if (this.connectedDB.value) {
+            this.formBuilderService.addIntoAnotherDB(this.formDetails.value, this.connectedDB.value._id, 'form-structures').subscribe((res) => {});
+          }
         });
       }
     });

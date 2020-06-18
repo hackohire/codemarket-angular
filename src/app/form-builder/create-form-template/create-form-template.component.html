@@ -15,7 +15,7 @@
             <input type="text" matInput formControlName="formname" placeholder="Enter Form Name">
           </mat-form-field>
 
-          <app-autocomplete class="field-full-width" [allowToAdd]="false" [autoComplete]="formDetails?.get('connectedDB')"
+          <app-autocomplete class="field-full-width" [allowToAdd]="false" [autoComplete]="connectedDB"
           [placeholder]="'Select Associated DB'" [collection]="'dburls'" [type]="" [multiple]="false" matInput>
           </app-autocomplete>
 

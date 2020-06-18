@@ -23,11 +23,11 @@ export class FormBuilderService {
     private router: Router,
   ) { }
 
-  addformJson(formJson : any): Observable<FormJson>{
+  addformJson(formJson : any, connectedDBId: String): Observable<FormJson>{
     return this.apollo.mutate({
       mutation: gql`
-        mutation addformJson($formJson: formJsonInput) {
-          addformJson(formJson: $formJson) {
+        mutation addformJson($formJson: formJsonInput, $connectedDBId: String) {
+          addformJson(formJson: $formJson, connectedDBId: $connectedDBId) {
             _id
             formname
             formStructureJSON
@@ -39,7 +39,8 @@ export class FormBuilderService {
         }
       `,
       variables: {
-        formJson
+        formJson,
+        connectedDBId
       }
     }).pipe(
       map((q: any) => q.data.addformJson)
@@ -61,6 +62,7 @@ export class FormBuilderService {
           }
         }
       `,
+      fetchPolicy: 'no-cache',
       variables: {
       }
     }).pipe(
@@ -127,6 +129,7 @@ export class FormBuilderService {
           }
         }
       `,
+      fetchPolicy: 'no-cache',
       variables: {
         formId
       }
@@ -135,11 +138,11 @@ export class FormBuilderService {
     );
   }
 
-  addIntoAnotherDB(formJson: any, collection: String): Observable<any> {
+  addIntoAnotherDB(formJson: any, connectedDBId: String, collection: String): Observable<any> {
     return this.apollo.mutate({
       mutation: gql`
-        mutation addIntoAnotherDB($formJson: formJsonInput, $collection: String) {
-          addIntoAnotherDB(formJson: $formJson, collection: $collection) {
+        mutation addIntoAnotherDB($formJson: formJsonInput, $connectedDBId: String, $collection: String) {
+          addIntoAnotherDB(formJson: $formJson, connectedDBId: $connectedDBId, collection: $collection) {
             _id
             formname
             formStructureJSON
@@ -148,6 +151,7 @@ export class FormBuilderService {
       `,
       variables: {
         formJson,
+        connectedDBId,
         collection
       }
     }).pipe(

@@ -14,6 +14,8 @@ export interface Mentor {
     topics?: Tag[];
     availabilityDate?: string;
     duration?: [];
+    status?: string;
+    requestBy?: string[];
 }
 
 export interface Job {

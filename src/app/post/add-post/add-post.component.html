@@ -71,8 +71,38 @@
             <div class="col-md-12 col-sm-12">
                 <ul class="row infos">
 
+                    <li>
+                        <p class="data-label">Price</p>
+                        <p class="info" *ngIf="postForm?.get('price')?.value !== null">
+                            <span class="tag">{{(postForm?.get('price')?.value | currency) + ' / 15 min'}}</span>
+                        </p>
+
+                        <span style="margin: 7px 0 0 5px;" [mdePopoverTriggerFor]="pricePopover"
+                            mdePopoverTriggerOn="click"><i class="fa fa-plus-square" aria-hidden="true"></i></span>
+                        <mde-popover #pricePopover="mdePopover" [mdePopoverOverlapTrigger]="false"
+                            [mdePopoverCloseOnClick]="false" [mdePopoverArrowOffsetX]="8"
+                            mdePopoverArrowColor="#FFFFFF">
+                            <div
+                                style="background: #fff; padding: 10px;border: 1px solid #ccc;margin-top: -10px;box-shadow: 0 0 10px 0 #aaa;">
+                                <h3 style="font-size: 1.2rem;">Set Price For 15 min Session:</h3>
+                                <p class="info">
+                                    <!-- <mat-icon style="vertical-align: middle;">date_range</mat-icon> -->
+                                    <mat-form-field [appearance]="'outline'" placeholder="per 15 minutes">
+                                        <input #price matInput type="number" (change)="setPrice($event)">
+                                    </mat-form-field>
+                                </p>
+
+                                <button mat-raised-button color="primary" class="mr-1"
+                                    (click)="pricePopover._emitCloseEvent()">Conifrm</button>
+                                <button mat-raised-button color="warn" class="mr-1"
+                                    (click)="postForm?.get('price').setValue(null); pricePopover._emitCloseEvent()">Cancel</button>
+                            </div>
+                        </mde-popover>
+
+                    </li>
+
                     <!-- TAGS -->
-                    <li *ngIf="postType !== postTypeEnum.Job && postType !== postTypeEnum.Mentor">
+                    <li *ngIf="!selectedPostTypeDetails?.hideTags">
                         <p class="data-label">Tags</p>
                         <p class="info">
                             <span class="tag" *ngFor="let t of postForm?.get('tags')?.value">{{t?.name}}</span>
@@ -83,7 +113,7 @@
                     </li>
 
                     <!-- JobProfiles -->
-                    <li *ngIf="postType === postTypeEnum.Job">
+                    <li *ngIf="selectedPostTypeDetails?.showJobProfile">
                         <p class="data-label">Job Profile</p>
                         <p class="info">
                             <span class="tag"
@@ -95,7 +125,7 @@
                     </li>
 
                     <!-- Topics -->
-                    <li *ngIf="postType === postTypeEnum.Mentor">
+                    <li *ngIf="false">
                         <p class="data-label">Topics</p>
                         <p class="info">
                             <span class="tag" *ngFor="let t of postForm?.get('mentor.topics')?.value">{{t?.name}}</span>
@@ -106,7 +136,7 @@
                     </li>
 
                     <!-- COLLABORATORS -->
-                    <li *ngIf="true">
+                    <li *ngIf="!selectedPostTypeDetails?.hideCollaborators">
                         <p class="data-label">Collaborators</p>
                         <p class="info">
                             <a *ngFor="let t of postForm?.get('collaborators')?.value; let i=index" target="_blank"
@@ -122,7 +152,7 @@
                     </li>
 
                     <!-- CLIENTS -->
-                    <li *ngIf="true">
+                    <li *ngIf="!selectedPostTypeDetails?.hideClients">
                         <p class="data-label">Clients</p>
                         <p class="info">
                             <a *ngFor="let t of postForm?.get('clients')?.value" target="_blank"
@@ -138,7 +168,7 @@
                     </li>
 
                     <!-- COMPAINES -->
-                    <li *ngIf="true">
+                    <li *ngIf="!selectedPostTypeDetails?.hideCompany">
                         <p class="data-label">Company</p>
                         <p class="info" style="text-transform: capitalize; cursor: pointer;padding-left: 7px;">
                             <span *ngFor="let c of postForm?.get('companies')?.value; let ei = index;"

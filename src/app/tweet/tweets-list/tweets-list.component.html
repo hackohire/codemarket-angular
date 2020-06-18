@@ -1,0 +1,62 @@
+<p>tweets-list works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <ng-template #tweetsTemplate [ngIf]="displayTweetsList">
+                <div *ngFor="let e of tweetsList; let i = index;">
+                    
+                </div>
+                <mat-list>
+                    <mat-list-item>Item 1</mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item>Item 2</mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item>Item 3</mat-list-item>
+                  </mat-list>
+            </ng-template>
+            <ng-template #campaignsTemplate [ngIf]="displayCampaignList">
+                <mat-accordion class="example-headers-align">
+                    <div *ngFor="let c of campaignsList; let i = index;">
+                        <!-- <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                {{c?.name}}
+                            </mat-panel-title>
+                            <mat-panel-description>
+                                {{ '(' + c?.count + ')'}} <mat-icon>email</mat-icon>
+                            </mat-panel-description>
+                        </mat-expansion-panel-header> -->
+            
+                        <div style="border: solid 1px black;" [innerHTML]="c?.descriptionHTML"></div>
+            
+                        <mat-list>
+                            <mat-list-item *ngFor="let e of c?.emailData; let j=index;">
+                                <div mat-list-icon style="padding-right: 12px;">
+                                    <span
+                                        style="padding-right: 5px; vertical-align: super; font-size: 16px;">{{(j + 1 + '.')}}</span>
+                                    <mat-icon style="display: inline;">email</mat-icon>
+                                </div>
+            
+                                <div mat-line style="font-weight: 500;">{{e?.to[0]}}</div>
+                                <div mat-line>Subject: {{e?.subject}} </div>
+                                <div mat-line>Sent: {{e?.createdAt | date: 'medium'}} </div>
+                                <div mat-line *ngIf="e?.tracking?.open?.timestamp">Read:
+                                    {{e?.tracking?.open?.timestamp | date: 'medium'}} </div>
+                                    
+                                <i *ngIf="e?.isReplied" matTooltip={{e?.repliedHTML}} matTooltipPosition="left" class="fas fa-reply"></i>
+                                <i *ngIf="e?.tracking?.length > 0 && !e?.isReplied" class="fas fa-check-double"></i>
+                                <i *ngIf="!e?.tracking || e?.tracking.length === 0" class="fal fa-check"></i>
+                                <!-- {{parser?.setUA(e?.tracking?.open?.userAgent)}}{{parser.getResult() | json}} -->
+                            </mat-list-item>
+                        </mat-list>
+            
+                    </div>
+                    <app-paginator [length]="campaignsList[0]?.count"
+                        (fetchData)="paginator = $event; getTweetsByType()">
+                    </app-paginator>
+                    <!-- <div *ngFor="let c of campaignsList">
+                    </div> -->
+                </mat-accordion>
+            </ng-template>
+        </div>
+    </div>       
+</div>

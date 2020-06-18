@@ -21,6 +21,8 @@ import { CustomUploadAdapter } from './FileUploader';
 })
 export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
 
+  selectedIMGElement;
+
   isHandset: boolean;
 
   @Input() post: Post; /** post for view mode */
@@ -284,6 +286,17 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
   allowUsersEdit = () => {
     const loggedInUser = this.authService.loggedInUser;
     return loggedInUser && loggedInUser._id && this.post && this.post._id && (loggedInUser._id === this.post.createdBy._id || this.post.collaborators.find(c => c._id === loggedInUser._id));
+  }
+
+  onClickEditor(event) {
+    console.log(event);
+    // event.srcElement.classList.toggle('maximize');
+    if (event.srcElement.tagName === 'IMG') {
+      event.srcElement.parentElement.classList.toggle('maximize');
+      this.selectedIMGElement = event.srcElement;
+    } else if (this.selectedIMGElement) {
+      this.selectedIMGElement.parentElement.classList.remove('maximize');
+    }
   }
 
 }

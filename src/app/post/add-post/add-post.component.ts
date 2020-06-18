@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input, ChangeDetectorRef, AfterViewInit, NgZone, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, AfterViewInit, Inject, PLATFORM_ID } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -16,8 +16,8 @@ import { PostService } from '../../shared/services/post.service';
 import { environment } from '../../../environments/environment';
 import { AppointmentService } from 'src/app/shared/services/appointment.service';
 import { PostType } from '../../shared/models/post-types.enum';
-import { async } from '@angular/core/testing';
 import { appConstants } from '../../shared/constants/app_constants';
+import { isNullOrUndefined } from 'util';
 @Component({
   selector: 'app-add-post',
   templateUrl: './add-post.component.html',
@@ -41,7 +41,7 @@ export class AddPostComponent implements OnInit, AfterViewInit {
   public slotDateTime = [];
   public selectedDate: string;
   public displayDate = '';
-  public alreadyBookedSlots = []
+  public alreadyBookedSlots = [];
 
   /** When a user tries to tie a post with this post */
   postFromRoute: Post;
@@ -82,7 +82,7 @@ export class AddPostComponent implements OnInit, AfterViewInit {
   public form = { components: [] };
   formStructureJSON = null;
   formPostType = ['survey'];
-  
+
   constructor(
     public authService: AuthService,
     private store: Store<AppState>,
@@ -163,6 +163,7 @@ export class AddPostComponent implements OnInit, AfterViewInit {
   postFormInitialization(i: Post) {
     this.postForm = new FormGroup({
       name: new FormControl(i && i.name ? i.name : 'Untitled Document', Validators.required),
+      price: new FormControl(i && !isNullOrUndefined(i.price) ? i.price : null),
       descriptionHTML: new FormControl(i && i.descriptionHTML ? i.descriptionHTML : ''),
       tags: new FormControl(i && i.tags ? i.tags : []),
       companies: new FormControl(i && i.companies ? i.companies : []),
@@ -232,7 +233,7 @@ export class AddPostComponent implements OnInit, AfterViewInit {
     }
 
     /** Set value of fromJsonStructure */
-    if (this.postType ===  'survey') {
+    if (this.postType === 'survey') {
       this.postForm.get('formStructureJSON').setValue(this.formStructureJSON);
     }
 
@@ -241,7 +242,7 @@ export class AddPostComponent implements OnInit, AfterViewInit {
 
     /** Set Values Based On the Post Type Before Submitting the Post */
     this.setValuesBeforeSubmit(postFormValue);
-    
+
 
     if (this.postId) {
       this.store.dispatch(UpdatePost({
@@ -369,5 +370,9 @@ export class AddPostComponent implements OnInit, AfterViewInit {
 
   onChange(event) {
     this.formStructureJSON = event.form;
+  }
+
+  setPrice(event) {
+    this.postForm.get('price').setValue((+event.target.value).toFixed(2));
   }
 }

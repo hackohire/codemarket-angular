@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Observable, of, Subscription } from 'rxjs';
 import { AppState } from 'src/app/core/store/state/app.state';
 import { Store } from '@ngrx/store';
@@ -7,7 +7,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BreadCumb } from 'src/app/shared/models/bredcumb.model';
 import { FormGroup, FormControl } from '@angular/forms';
 import moment from 'moment';
-import { keyBy, sumBy } from 'lodash';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { CommentService } from 'src/app/shared/services/comment.service';
 import { environment } from 'src/environments/environment';
@@ -16,17 +15,17 @@ import { Post } from 'src/app/shared/models/post.model';
 import { MatDialog, MatPaginator } from '@angular/material';
 import { VideoChatComponent } from 'src/app/video-chat/video-chat.component';
 import { PostService } from '../../shared/services/post.service';
-import { SweetalertService } from '../../shared/services/sweetalert.service';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { appConstants } from '../../shared/constants/app_constants';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { MdePopoverTrigger } from '@material-extended/mde';
 import { ShareService } from '@ngx-share/core';
-import { set } from 'lodash';
+import { set, sumBy } from 'lodash';
 import { get } from 'lodash';
 import { PostType } from '../../shared/models/post-types.enum';
 import { FormBuilderService } from 'src/app/form-builder/form-builder.service';
 import Swal from 'sweetalert2';
+import { AppointmentService } from '../../shared/services/appointment.service';
+import { isNullOrUndefined } from 'util';
 
 @Component({
   selector: 'app-details',
@@ -104,7 +103,8 @@ export class DetailsComponent implements OnInit, OnDestroy {
     private router: Router,
     public shareSocial: ShareService,
     private breakpointObserver: BreakpointObserver,
-    private formBuilderService: FormBuilderService
+    private formBuilderService: FormBuilderService,
+    public appointmentService: AppointmentService
   ) {
     /** Peer Subscription for Video Call */
     // this.userService.peer.subscribe((p) => {
@@ -199,6 +199,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
   postFormInitialization(i: Post) {
     this.postForm = new FormGroup({
       name: new FormControl(i && i.name ? i.name : ''),
+      price: new FormControl(i && !isNullOrUndefined(i.price) ? i.price : null),
       tags: new FormControl(i && i.tags ? i.tags : []),
       companies: new FormControl(i && i.companies ? i.companies : []),
       clients: new FormControl(i && i.clients ? i.clients : []),
@@ -417,7 +418,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
         this.formDataJsonToSave.push({
           [c.key]: 0,
           selected: false
-        })
+        });
       }
     });
 
@@ -441,4 +442,22 @@ export class DetailsComponent implements OnInit, OnDestroy {
     this.form1 = this.formArray[this.currentFormIndex].form1;
   }
 
+  bookSession(status, popover) {
+    const post = {
+      _id: this.postDetails._id,
+      mentor: {
+        status
+      },
+      createdBy: this.postDetails.createdBy._id,
+      name: this.postDetails.name,
+      slug: this.postDetails.slug
+    };
+    this.appointmentService.bookSession(post, this.authService.loggedInUser._id).subscribe(u => {
+      console.log(u);
+    });
+  }
+
+  setPrice(event) {
+    this.postForm.get('price').setValue((+event.target.value).toFixed(2));
+  }
 }

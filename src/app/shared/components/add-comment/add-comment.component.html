@@ -4,7 +4,7 @@
     <div class="media comment-form">
         <div class="media-left">
             <a href="#">
-                <img class="author_avatar_comment" style="width: 45px; height: 45px;"
+                <img class="author_avatar_comment" width="45px" style="width: 45px; height: 45px;"
                     [src]="authService?.loggedInUser?.avatar ? ((s3FilesBucketURL + authService?.loggedInUser?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
                     alt="Commentator Avatar">
             </a>
@@ -16,7 +16,7 @@
                 <app-editor [id]="editorId" #addCommentEditor
                     [data]="commentForm?.get('text')?.value"
                     [html]="commentForm?.get('text')?.value"
-                    [editorStyle]="{padding: '0 15px', 'border-radius': '19px', background: '#f2f3f5', border: 'solid 0.5px rgb(236, 236, 236)'}">
+                    >
                 </app-editor>
 
                 <button style="float: right; margin-top: 10px;" type="button" class="btn btn--vsm btn--round"

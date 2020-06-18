@@ -1,7 +1,6 @@
 :host ::ng-deep {
     .ck.ck-toolbar {
-        // top: 145px !important;
-        top: 0 !important;
+        top: 145px !important;
     }
 
     .docs-component-viewer-nav.common-box-shadow {
@@ -14,13 +13,13 @@
     }
 
     .ck-content {
-        max-height: 73vh !important;
-        min-height: 73vh !important;
+        max-height: 65vh !important;
+        min-height: 65vh !important;
     }
 
     .breadcrumb-area {
-        z-index: 20;
-        // top: 48px;
+        z-index: 9;
+        top: 48px;
         position: sticky;
         background: #fff;
 
@@ -54,11 +53,11 @@
     }
 
     .sidebar {
-        // top: 145px !important;
-        // position: sticky;
+        top: 145px !important;
+        position: sticky;
         display: block;
         height: -webkit-fill-available;
-        z-index: 20;
+        z-index: 8;
     }
 
     @media (max-width: 767px) {

@@ -60,7 +60,8 @@ export class CreateFormTemplateComponent implements OnInit {
 
     this.formDetails = new FormGroup({
       formname: new FormControl(form && form.formname ? form.formname : '', Validators.required),
-      formStructureJSON: new FormControl(form && form.formStructureJSON ? form.formStructureJSON : null, Validators.required)
+      formStructureJSON: new FormControl(form && form.formStructureJSON ? form.formStructureJSON : null, Validators.required),
+      connectedDB: new FormControl(form && form.connectedDB ? form.connectedDB : '', Validators.required)
     });
     if (this.formId) {
       this.formDetails.addControl('_id', new FormControl(this.formId));
@@ -80,6 +81,9 @@ export class CreateFormTemplateComponent implements OnInit {
     ).subscribe((d: any) => {
       if (d) {
         const message = this.formId ? `${d.formname} has been Updated Successfully` : `${d.formname} has been Added Successfully`;
+        this.formBuilderService.addIntoAnotherDB(this.formDetails.value, 'form-structures').subscribe((res) => {
+          
+        });
         Swal.fire(message, '', 'success').then(() => {
           this.formBuilderService.redirectToFormBuilder();
         });

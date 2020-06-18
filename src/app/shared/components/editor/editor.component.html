@@ -1,6 +1,6 @@
 <ng-container *ngIf="isPlatformBrowser">
     <div [ngStyle]="editorStyle" *ngIf="!realTime || !ckEditorUserToken">
-        <ckeditor #ckEditorRef [config]="{
+        <ckeditor (click)="onClickEditor($event)" #ckEditorRef [config]="{
             extraPlugins: readOnly ? [] : [ myCustomUploadAdapterPlugin ],
             removePlugins: ['RealTimeCollaborativeEditing', 'RealTimeCollaborativeComments', 'RealTimeCollaborativeTrackChanges', 'PresenceList' ]
         }" [disabled]="readOnly" [editor]="ckEditor" [(ngModel)]="html" (ready)="readOnly ? null : onReady($event)">
@@ -15,7 +15,7 @@
 
         <div [id]="ckEditorUserToken ? 'container' : ''">
             <div [id]="ckEditorUserToken ? 'editor' : ''">
-                <ckeditor #ckEditorRef [config]="{
+                <ckeditor (click)="onClickEditor($event)" #ckEditorRef [config]="{
                     removePlugins: [],
                     extraPlugins: [ myCustomUploadAdapterPlugin ],
                     cloudServices: {tokenUrl: generateToken, webSocketUrl: webSocketUrl },

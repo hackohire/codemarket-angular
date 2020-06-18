@@ -2,7 +2,8 @@
     [postDetails]="{ connectedPosts: editPostDetails ? editPostDetails?.connectedPosts : postFromRoute ? [postFromRoute] : [], tags: postForm?.get('tags')?.value, clients: postForm?.get('clients')?.value, collaborators: postForm?.get('collaborators')?.value, companies: postForm?.get('companies')?.value, name: postForm?.get('name')?.value}"
     [showImportButton]="true" [fromAddPost]="true" [title]="postTitle" [postActions]="true"
     (saveOrSubmitPost)="submit($event)" (addPostData)="recieveEvent($event)" [postForm]="postForm" [inline]="true"
-    [titlePlaceholder]="selectedPostTypeDetails?.titlePlaceholder ? selectedPostTypeDetails?.titlePlaceholder : ('Enter ' + postType + ' title:' )">
+    [titlePlaceholder]="selectedPostTypeDetails?.titlePlaceholder ? selectedPostTypeDetails?.titlePlaceholder : ('Enter Title:' )">
+    <!-- [titlePlaceholder]="selectedPostTypeDetails?.titlePlaceholder ? selectedPostTypeDetails?.titlePlaceholder : ('Enter ' + postType + ' title:' )"> -->
 </app-breadcumb>
 
 
@@ -38,8 +39,11 @@
 
             <div [formGroup]="postForm" class="ckEditor" [style.order]="booked ? 1 : 2">
                 <h3 style="font-size: 1rem;">
-                    {{selectedPostTypeDetails?.descriptionPlaceholder ? selectedPostTypeDetails?.descriptionPlaceholder : ('Enter ' + postType + ' description:' )}}
+                    {{selectedPostTypeDetails?.descriptionPlaceholder ? selectedPostTypeDetails?.descriptionPlaceholder : ('Enter  Description:' )}}
                 </h3>
+                <!-- <h3 style="font-size: 1rem;">
+                    {{selectedPostTypeDetails?.descriptionPlaceholder ? selectedPostTypeDetails?.descriptionPlaceholder : ('Enter ' + postType + ' description:' )}}
+                </h3> -->
                 <app-editor *ngIf="(postId && editPostDetails) || !postId" #descriptionEditor
                     [data]="descriptionFormControl?.value" [readOnly]="false"
                     [html]="postForm?.get('descriptionHTML')?.value" [post]="editPostDetails" [role]="'writer'"

@@ -66,9 +66,6 @@
                                         [role]="'writer'" [id]="'details-editor'" [html]="details?.descriptionHTML"
                                         [post]="details" [commentType]="'post'">
                                     </app-editor>
-
-                                    <br />
-
                                     <ng-template #noDescription>
                                         <span>No Description</span>
                                     </ng-template>
@@ -87,7 +84,7 @@
                 <div class="col-md-4 col-sm-12" *ngIf="!postDetails?.formStructureJSON">
                     <ul class="row infos">
                         <li>
-                            <button mat-mini-fab color="primary">
+                            <button mat-mini-fab color="primary" style="box-shadow: none;">
                                 <mat-icon (click)="openVideoRoom()">video_call</mat-icon>
                             </button>
                         </li>
@@ -383,7 +380,7 @@
 
 
 <ng-template #addCommentTemplate let-cDetails="details">
-    <div style="background: white;">
+    <div style="background: white; margin-bottom: 30px; border: 1px solid #ccc; border-top: 0;">
         <div class="tab-pane fade show product-tab">
             <div class="thread">
                 <ul class="media-list thread-list" style="list-style: none;">

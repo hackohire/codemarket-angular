@@ -18,6 +18,7 @@ import { AppointmentService } from 'src/app/shared/services/appointment.service'
 import { PostType } from '../../shared/models/post-types.enum';
 import { appConstants } from '../../shared/constants/app_constants';
 import { isNullOrUndefined } from 'util';
+import { merge } from 'lodash';
 @Component({
   selector: 'app-add-post',
   templateUrl: './add-post.component.html',
@@ -183,7 +184,6 @@ export class AddPostComponent implements OnInit, AfterViewInit {
 
       case PostType.Appointment:
         this.useCalendar = true;
-        this.postForm.addControl('cancelReason', new FormControl(i && i.cancelReason ? i.cancelReason : ''));
         break;
 
       case PostType.Survey:
@@ -193,9 +193,6 @@ export class AddPostComponent implements OnInit, AfterViewInit {
 
       case PostType.Mentor:
         this.useCalendar = true;
-        this.postForm.addControl('mentor', new FormGroup({
-          availabilityDate: new FormControl(i && i.mentor && i.mentor.availabilityDate ? i.mentor.availabilityDate : [])
-        }));
         break;
 
       case PostType.Job:
@@ -255,16 +252,14 @@ export class AddPostComponent implements OnInit, AfterViewInit {
 
   /** Set Values Based On the Post Type Before Adding Post */
   setValuesBeforeSubmit(postFormValue) {
-    switch (this.postType) {
-      case PostType.Appointment:
-        postFormValue.appointment_date = moment(this.selectedDate).format('YYYY-MM-DD');
-        postFormValue.duration = this.slotDateTime;
-        break;
-
-      case PostType.Mentor:
-        postFormValue.mentor.availabilityDate = moment(this.selectedDate).format('YYYY-MM-DD');
-        postFormValue.mentor.duration = this.slotDateTime;
-        break;
+    if (this.useCalendar) {
+      postFormValue = merge(
+        postFormValue, {
+        booking: {
+          availabilityDate: moment(this.selectedDate).format('YYYY-MM-DD'),
+          duration: this.slotDateTime
+        }
+      });
     }
   }
 

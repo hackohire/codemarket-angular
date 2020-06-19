@@ -4,6 +4,7 @@
   opacity: 0;
 }
 
+// Image Zoomin
 :host ::ng-deep {
   .maximize {
     
@@ -28,6 +29,8 @@
     position: absolute;
   }
 }
+
+// Image Zoomin Ends Here
 
 :root {
   --ck-sample-base-spacing: 2em;

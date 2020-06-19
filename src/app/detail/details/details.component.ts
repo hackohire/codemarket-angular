@@ -26,6 +26,7 @@ import { FormBuilderService } from 'src/app/form-builder/form-builder.service';
 import Swal from 'sweetalert2';
 import { AppointmentService } from '../../shared/services/appointment.service';
 import { isNullOrUndefined } from 'util';
+import { BookingComponent } from '../../shared/components/booking/booking.component';
 
 @Component({
   selector: 'app-details',
@@ -442,22 +443,32 @@ export class DetailsComponent implements OnInit, OnDestroy {
     this.form1 = this.formArray[this.currentFormIndex].form1;
   }
 
-  bookSession(status, popover) {
-    const post = {
-      _id: this.postDetails._id,
-      mentor: {
-        status
-      },
-      createdBy: this.postDetails.createdBy._id,
-      name: this.postDetails.name,
-      slug: this.postDetails.slug
-    };
-    this.appointmentService.bookSession(post, this.authService.loggedInUser._id).subscribe(u => {
-      console.log(u);
-    });
-  }
-
   setPrice(event) {
     this.postForm.get('price').setValue((+event.target.value).toFixed(2));
+  }
+
+  bookSession(status, popover) {
+
+    // const post = {
+    //   _id: this.postDetails._id,
+    //   mentor: {
+    //     status
+    //   },
+    //   createdBy: this.postDetails.createdBy._id,
+    //   name: this.postDetails.name,
+    //   slug: this.postDetails.slug
+    // };
+    // this.appointmentService.bookSession(post, this.authService.loggedInUser._id).subscribe(u => {
+    //   console.log(u);
+    // });
+  }
+
+  openBooking() {
+    this.dialog.open(BookingComponent, {
+      // minWidth: '100vw',
+      // height: '100vh',
+      data: { post: this.postDetails, loggedInUser: this.authService.loggedInUser },
+      disableClose: true
+    });
   }
 }

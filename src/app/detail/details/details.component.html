@@ -84,12 +84,46 @@
                 <div class="col-md-4 col-sm-12" *ngIf="!postDetails?.formStructureJSON">
                     <ul class="row infos">
                         <li>
-                            <button mat-mini-fab color="primary" style="box-shadow: none;">
+                            <button mat-mini-fab color="primary" class="mr-2" style="box-shadow: none;">
                                 <mat-icon (click)="openVideoRoom()">video_call</mat-icon>
                             </button>
+
+                            <button (click)="openBooking()" mat-raised-button color="primary"
+                                *ngIf="postDetails?.price">RSVP</button>
                         </li>
 
-                        <li>
+                        <li *ngIf="postDetails?.price && false">
+                            <!-- <button mat-raised-button color="primar"></button> -->
+                            <!-- <button mat-raised-button color="primary" *ngIf="postDetails?.price"
+                                [mdePopoverTriggerFor]="bookSessionPopover" mdePopoverTriggerOn="click">RSVP</button> -->
+                            <button (click)="openBooking()" mat-raised-button color="primary"
+                                *ngIf="postDetails?.price">RSVP</button>
+
+
+                            <mde-popover #bookSessionPopover="mdePopover" [mdePopoverOverlapTrigger]="false"
+                                [mdePopoverCloseOnClick]="false" [mdePopoverArrowOffsetX]="8"
+                                mdePopoverArrowColor="#FFFFFF">
+                                <div
+                                    style="background: #fff; padding: 10px;border: 1px solid #ccc;margin-top: -10px;box-shadow: 0 0 10px 0 #aaa;">
+                                    <h3>Book Session:</h3>
+
+                                    <p class="data-label">Availability</p>
+                                    <p class="info">
+                                        <mat-icon style="vertical-align: middle;">date_range</mat-icon>
+                                        {{ postDetails?.booking?.availabilityDate | date }}
+                                        {{postDetails?.booking?.duration[0] ? ' From:' + postDetails?.booking?.duration[0] : ''}}
+                                        {{postDetails?.booking?.duration[0] ? ' To:' + postDetails?.booking?.duration[1] : ''}}
+                                    </p>
+
+                                    <button mat-raised-button color="primary" class="mr-1"
+                                        (click)="bookSession('REQUEST_SENT', bookSessionPopover)">Conifrm</button>
+                                    <button mat-raised-button color="warn"
+                                        (click)="bookSessionPopover._emitCloseEvent()">Cancel</button>
+                                </div>
+                            </mde-popover>
+                        </li>
+
+                        <li *ngIf="allowUsersEdit()">
                             <p class="data-label">Price</p>
                             <p class="info" *ngIf="postForm?.get('price')?.value !== null">
                                 <span class="tag">{{(postForm?.get('price')?.value | currency) + ' / 15 min'}}</span>
@@ -118,35 +152,6 @@
                                 </div>
                             </mde-popover>
 
-                        </li>
-
-                        <li *ngIf="postDetails?.mentor && false">
-                            <button mat-raised-button color="primary"
-                                *ngIf="postDetails?.mentor?.status === 'REQUEST_SENT'"></button>
-                            <button mat-raised-button color="primary" *ngIf="postDetails?.mentor?.status === 'CREATED'"
-                                [mdePopoverTriggerFor]="bookSessionPopover" mdePopoverTriggerOn="click">Book</button>
-
-                            <mde-popover #bookSessionPopover="mdePopover" [mdePopoverOverlapTrigger]="false"
-                                [mdePopoverCloseOnClick]="false" [mdePopoverArrowOffsetX]="8"
-                                mdePopoverArrowColor="#FFFFFF">
-                                <div
-                                    style="background: #fff; padding: 10px;border: 1px solid #ccc;margin-top: -10px;box-shadow: 0 0 10px 0 #aaa;">
-                                    <h3>Book Mentorship Session:</h3>
-
-                                    <p class="data-label">Availability</p>
-                                    <p class="info">
-                                        <mat-icon style="vertical-align: middle;">date_range</mat-icon>
-                                        {{ postDetails?.mentor?.availabilityDate | date }}
-                                        {{postDetails?.mentor?.duration[0] ? ' From:' + postDetails?.mentor?.duration[0] : ''}}
-                                        {{postDetails?.mentor?.duration[0] ? ' To:' + postDetails?.mentor?.duration[1] : ''}}
-                                    </p>
-
-                                    <button mat-raised-button color="primary" class="mr-1"
-                                        (click)="bookSession('REQUEST_SENT', bookSessionPopover)">Conifrm</button>
-                                    <button mat-raised-button color="warn"
-                                        (click)="bookSessionPopover._emitCloseEvent()">Cancel</button>
-                                </div>
-                            </mde-popover>
                         </li>
 
                         <li *ngIf="postDetails?.email && postDetails?.email?.length">
@@ -262,13 +267,13 @@
                             </p>
                         </li>
 
-                        <li *ngIf="postDetails?.mentor?.availabilityDate">
+                        <li *ngIf="postDetails?.booking?.availabilityDate">
                             <p class="data-label">Availability</p>
                             <p class="info">
                                 <mat-icon style="vertical-align: middle;">date_range</mat-icon>
-                                {{ postDetails?.mentor?.availabilityDate | date }}
-                                {{postDetails?.mentor?.duration[0] ? ' From:' + postDetails?.mentor?.duration[0] : ''}}
-                                {{postDetails?.mentor?.duration[0] ? ' To:' + postDetails?.mentor?.duration[1] : ''}}
+                                {{ postDetails?.booking?.availabilityDate | date }}
+                                {{postDetails?.booking?.duration[0] ? ' From:' + postDetails?.booking?.duration[0] : ''}}
+                                {{postDetails?.booking?.duration[0] ? ' To:' + postDetails?.booking?.duration[1] : ''}}
                             </p>
                         </li>
 

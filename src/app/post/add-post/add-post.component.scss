@@ -63,6 +63,14 @@
         float: right;
         color: #00aeef !important;
     }
+    .metabox {
+        position: sticky;
+        top: 60px;
+        display: block;
+        height: -webkit-fill-available;
+        z-index: 8;
+        margin-top: 10px;
+    }
 
     @media (max-width: 767px) {
         .metaboxbtn {

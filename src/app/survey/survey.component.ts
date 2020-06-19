@@ -46,8 +46,9 @@ export class SurveyDialogComponent implements OnInit {
 })
 export class SurveyComponent implements OnInit {
 
-  formName = 'Sleep Survey';
+  formName = '';
   connectedFormStructureId = '';
+  surveySummaryFormId = '';
   connectedFormDataId = '';
   formJsonListSubscription: Subscription;
   formDetails: FormGroup;
@@ -65,6 +66,9 @@ export class SurveyComponent implements OnInit {
   enableSubmitButton = false;
 
   hideAllButton = false;
+  surveySummaryTitle = '';
+
+  summaryForm = false;
 
   constructor(
     private formBuilderService: FormBuilderService,
@@ -74,6 +78,7 @@ export class SurveyComponent implements OnInit {
     public dialog: MatDialog
     ) { 
       this.connectedFormStructureId = '5ee1fad4be0ca353ff5caa45';
+      this.surveySummaryFormId = '5eec9b37aeb42c52592fd4de';
     }
     images = [
       '../../assets/images/sleep-icons/black-icons/01.svg',     
@@ -87,44 +92,48 @@ export class SurveyComponent implements OnInit {
     ];
 
   ngOnInit() {
-    this.formJsonListSubscription = this.formBuilderService.fetchFormStructureById(this.connectedFormStructureId).subscribe((formJson) => {
-      if (formJson) {
-
-        formJson.formStructureJSON.components.forEach((c, i) =>{
-          if (i < formJson.formStructureJSON.components.length-1) {
-            this.formArray.push({
-              form1: {
-                components: [c],
-                value: this.totalPoints,
-                image: this.images[i]
-              }
-            });
-  
-            this.formDataJsonToSave.push({
-              [c.key]: 0,
-              selected: false
-            })
-          }
-        });
-
-        this.form1 = this.formArray[this.currentFormIndex].form1;
-      }
-      this.formDetailsInitialization(null);
-    });
-
 
     this.id = this.activatedRoute.snapshot.queryParams.id || '';
     if(this.id !== '') {
       console.log("Id ==> ", this.id);
+      this.summaryForm = true;
+
       this.formBuilderService.fetchformDataById(this.id).subscribe((res) => {
-        this.hideAllButton = true;
+        // this.hideAllButton = true;
         const values = Object.values(res[0].formDataJson);
         values.forEach((v: any) => {
           if (parseInt(v)) {
             this.totalPoints += v;
           }
         });
-        this.mapValueWithLabel(res[0]);
+        this.createSurveySummaryTitle(this.totalPoints);
+        this.getSummaryFormData(this.id);
+        // this.mapValueWithLabel(res[0]);
+      });
+    } else {
+      this.formJsonListSubscription = this.formBuilderService.fetchFormStructureById(this.connectedFormStructureId).subscribe((formJson) => {
+        if (formJson) {
+          this.formName = formJson.formname;
+          formJson.formStructureJSON.components.forEach((c, i) =>{
+            if (i < formJson.formStructureJSON.components.length-1) {
+              this.formArray.push({
+                form1: {
+                  components: [c],
+                  value: this.totalPoints,
+                  image: this.images[i]
+                }
+              });
+    
+              this.formDataJsonToSave.push({
+                [c.key]: 0,
+                selected: false
+              })
+            }
+          });
+  
+          this.form1 = this.formArray[this.currentFormIndex].form1;
+        }
+        this.formDetailsInitialization(null);
       });
     }
   }
@@ -134,22 +143,25 @@ export class SurveyComponent implements OnInit {
       formname: new FormControl(i && i.formname ? i.formname : this.formName, Validators.required),
       formDataJson: new FormControl(i && i.jsonstring ? i.jsonstring : '', Validators.required),
       connectedFormStructureId: new FormControl(i && i._id ? i._id : this.connectedFormStructureId),
-      createdBy: new FormControl(this.authService.loggedInUser ? this.authService.loggedInUser._id: '')
+      createdBy: new FormControl(this.authService.loggedInUser ? this.authService.loggedInUser._id: ''),
+      formDataId: new FormControl('')
     });
   }
 
   valueChangeFun(event) {
-    if (event.data) {
+    if (event.data && Object.keys(event.data).length > 0) {
       const values : any= Object.values(event.data);
-      this.totalPoints = 0;
+      // this.totalPoints = 0;
       // values.forEach((i: any) => {
       //   if (parseInt(i)) {
       //     this.totalPoints += i;
       //   }
       // });
 
-      this.formArray[this.currentFormIndex].value = values[0] !== "" ? values[0] : 0;
-      this.totalPoints = sumBy(this.formArray, 'value') || 0;
+      if (!this.summaryForm) {
+        this.formArray[this.currentFormIndex].value = values[0] !== "" ? values[0] : 0;
+        this.totalPoints = sumBy(this.formArray, 'value') || 0;
+      }
       this.formDataJsonToSave[this.currentFormIndex][this.formArray[this.currentFormIndex].form1.components[0].key] = values[0] || 0;
       this.formDataJsonToSave[this.currentFormIndex].selected = values[0] !== "" ? true : false;
       const allSelected = this.formDataJsonToSave.map((d) => {
@@ -199,8 +211,12 @@ export class SurveyComponent implements OnInit {
             if (d) {
               Swal.fire(`${d.formname} has been Added Successfully` , '', 'success').then(() => {
                 this.router.navigate(['/survey'], { queryParams: { id: d._id } });
-                this.hideAllButton = true;
-                this.mapValueWithLabel(d);    
+                // this.hideAllButton = true;
+                // this.mapValueWithLabel(d);
+                this.summaryForm = true;
+                this.createSurveySummaryTitle(this.totalPoints);
+
+                this.getSummaryFormData(d._id);
               });
             }
           });
@@ -213,18 +229,37 @@ export class SurveyComponent implements OnInit {
     } else {
 
       this.formDetails.value.formDataJson = result;
-  
+      this.formDetails.value.formDataId = this.id || null;
+
       this.formBuilderService.addformData(this.formDetails.value).subscribe((d: any) => {
         if (d) {
           Swal.fire(`${d.formname} has been Added Successfully` , '', 'success').then(() => {
             this.router.navigate(['/survey'], { queryParams: { id: d._id } });
-            this.hideAllButton = true;
-            this.mapValueWithLabel(d);    
+            this.summaryForm = true;
+            this.createSurveySummaryTitle(this.totalPoints);
+            this.id = d._id;
+            this.getSummaryFormData(d._id);
+            // this.hideAllButton = true;
+            // this.mapValueWithLabel(d);    
           });
         }
       });
     }
 
+  }
+
+  createSurveySummaryTitle(points) {
+    if (this.totalPoints <= 30) {
+      this.surveySummaryTitle = 'Good Sleep. Improve It Better.'
+    }
+
+    if (this.totalPoints >=31 && this.totalPoints <= 50) {
+      this.surveySummaryTitle = 'Poor Sleep Quality. Need Change.'
+    }
+
+    if (this.totalPoints >=51 ) {
+      this.surveySummaryTitle = 'Bad Quality Of Sleep. Need Change Immediately.'
+    }
   }
 
   mapValueWithLabel(d: any) {
@@ -262,5 +297,61 @@ export class SurveyComponent implements OnInit {
     this.currentFormIndex -= 1;
     this.lastFormIndex -= 1;
     this.form1 = this.formArray[this.currentFormIndex].form1;
+  }
+
+  getSummaryFormData(formDataId) {
+    this.formArray = [];
+    this.formDataJsonToSave = [];
+    this.currentFormIndex = 0;
+    this.lastFormIndex = -1;
+    this.formJsonListSubscription = this.formBuilderService.fetchFormStructureById(this.surveySummaryFormId).subscribe((formJson) => {
+      this.formBuilderService.fetchformDataById(formDataId).subscribe((res) => {
+
+        const previousFormData = res[0].formDataJson;
+
+        if (formJson) {
+          const temp = [];
+          this.formName = formJson.formname;
+          formJson.formStructureJSON.components.forEach((c, i) =>{
+            if (i < formJson.formStructureJSON.components.length-1) {
+
+              if (c.properties) {
+                temp.push({
+                  [c.key]: Object.keys(c.properties)[0]
+                })
+              };
+
+              const temp1 = {
+                [c.key]: Object.keys(c.properties)[0]
+              }
+
+              if (previousFormData[temp1[c.key]] > 0) {
+                this.formArray.push({
+                  form1: {
+                    components: [c],
+                    value: this.totalPoints,
+                    image: this.images[i]
+                  }
+                });
+
+                this.formDataJsonToSave.push({
+                  [c.key]: 0,
+                  selected: false
+                })
+              }
+
+            }
+          });
+  
+          this.form1 = this.formArray[this.currentFormIndex].form1;
+        
+          console.log("INNNNNNNNNNNNNNNNNNN ", this.formArray, this.formDataJsonToSave);
+
+        }
+
+        this.formDetailsInitialization(null);
+      });
+
+    });
   }
 }

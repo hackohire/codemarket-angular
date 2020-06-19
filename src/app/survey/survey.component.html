@@ -30,6 +30,7 @@
     <div class="container-fluid">
         <div class="row" style="min-height: calc(100vh - 48px);">
             <div class="col-lg-6 order-1 order-lg-1 pt-3 pt-lg-0 px-lg-5 hero-img d-flex flex-column justify-content-center aos-init aos-animate"  data-aos="fade-left" style="background-color: #00aeef;align-items: center;">
+                <h2 style="color: white;">{{surveySummaryTitle}}</h2>
                 <div>
                     <h2 style="font-size: 40px;color: white;text-transform: uppercase;letter-spacing: 1px;">Total Points</h2>
                 </div>
@@ -42,16 +43,16 @@
                     <mat-horizontal-stepper linear #stepper>
                         <mat-step>
                             <ng-container>
-                                <div><h3>Find Your Sleep Quality:</h3></div>
+                                <div><h3>{{formName}}</h3></div>
                                 <div class="row" style="margin: 20px -15px;">
                                     <div class="col-md-2 col-4">
                                         <img src="{{form1?.image}}" style="margin-top: 15px;">
                                     </div>
                                     <div class="col-md-10 col-12 form-box">
-                                        <div *ngIf="fillForm">
+                                        <div>
                                             <formio [form]="form1" (change)="valueChangeFun($event)" (submit)="onSubmitForm($event)"></formio>
                                         </div>
-                                        <div *ngIf="!fillForm">
+                                        <!-- <div *ngIf="!fillForm">
                                             <div *ngFor="let data of individualPoints;let i = index">
                                                 <div>
                                                     <h4>{{data.label}}</h4>
@@ -61,7 +62,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <div>
                                             <button *ngIf="lastFormIndex !== -1" style="margin-right: 10px;box-shadow: none;background: #eee;" mat-raised-button type="button" (click)="onBackClick()" [disabled]="hideAllButton">Back</button>
                                             <button color="primary" *ngIf="currentFormIndex<(formArray?.length-1)" style="margin-right: 10px"

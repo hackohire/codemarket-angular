@@ -18,7 +18,7 @@
 
         </div>
 
-        <div class="col-md-8 order-1 order-md-2 order-lg-2" style="display: flex; flex-direction: column;">
+        <div class="col order-1 order-md-2 order-lg-2" style="display: flex; flex-direction: column;">
 
             <div class="alert alert-info text-center" *ngIf="useCalendar">
                 Confirm Your Apointment
@@ -38,9 +38,13 @@
             </div>
 
             <div [formGroup]="postForm" class="ckEditor" [style.order]="booked ? 1 : 2">
-                <h3 style="font-size: 1rem;">
+                <h3 style="font-size: 1rem; float: left;">
                     {{selectedPostTypeDetails?.descriptionPlaceholder ? selectedPostTypeDetails?.descriptionPlaceholder : ('Enter  Description:' )}}
                 </h3>
+
+                <a class="metaboxbtn" (click)=toggleDisplay()>{{buttonName}} Meta</a>
+                <div class="clearfix"></div>
+
                 <!-- <h3 style="font-size: 1rem;">
                     {{selectedPostTypeDetails?.descriptionPlaceholder ? selectedPostTypeDetails?.descriptionPlaceholder : ('Enter ' + postType + ' description:' )}}
                 </h3> -->
@@ -67,7 +71,7 @@
             </div>
         </div>
 
-        <div class="col-md-4 sidebar order-2 order-md-3 order-lg-3">
+        <div *ngIf="show" class="col-md-4 col-sm-12 sidebar order-2 order-md-3 order-lg-3">
             <div class="col-md-12 col-sm-12">
                 <ul class="row infos">
 
@@ -196,6 +200,7 @@
             </div>
             <!-- <app-time-slots [slots]="slotList"></app-time-slots> -->
         </div>
+        
     </div>
 </div>
 

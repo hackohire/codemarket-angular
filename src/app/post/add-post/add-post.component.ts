@@ -26,6 +26,18 @@ import { isNullOrUndefined } from 'util';
 })
 export class AddPostComponent implements OnInit, AfterViewInit {
 
+  // HIDE SHOW SIDEBAR
+  public show:boolean = true;
+  public buttonName:any = 'Hide';
+  toggleDisplay() {
+    this.show = !this.show;
+    // CHANGE THE NAME OF THE BUTTON.
+    if(this.show)  
+      this.buttonName = "Hide";
+    else
+      this.buttonName = "Show";
+  }
+
   s3Bucket = environment.s3FilesBucketURL;
 
   breadcumb: BreadCumb;

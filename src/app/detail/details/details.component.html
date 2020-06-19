@@ -30,10 +30,11 @@
                 <div class="col-lg-12 col-md-12" *ngIf="postDetails?.formStructureJSON">
                     <ng-container *ngTemplateOutlet="formTemplate;">
                     </ng-container>
-
                 </div>
 
-                <div *ngIf="!showConnectedPosts" [ngClass]="selectedBlock ? 'col-lg-7 col-md-7' : 'col-lg-8 col-md-8'">
+                <div *ngIf="!showConnectedPosts" [ngClass]="selectedBlock ? 'col-lg-7 col-md-7' : 'col'">
+
+                    <a class="metaboxbtn" (click)=toggleDisplay()>{{buttonName}} Meta</a>
 
                     <!-- <div *ngIf="postDetails?.formStructureJSON" class="col-md-12 justify-content-center" style="background-color: blue;min-height: calc(100vh - 150px);align-items: center;padding-top: 130px;">  -->
 
@@ -81,8 +82,8 @@
                     <!-- end /.item-info -->
                 </div>
 
-                <div class="col-md-4 col-sm-12" *ngIf="!postDetails?.formStructureJSON">
-                    <ul class="row infos">
+                <div class="col-md-4 col-sm-12 metabox" *ngIf="!postDetails?.formStructureJSON && show">
+                    <ul class="infos">
                         <li>
                             <button mat-mini-fab color="primary" style="box-shadow: none;">
                                 <mat-icon (click)="openVideoRoom()">video_call</mat-icon>

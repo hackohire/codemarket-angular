@@ -59,8 +59,15 @@
         height: -webkit-fill-available;
         z-index: 8;
     }
+    .metaboxbtn {
+        float: right;
+        color: #00aeef !important;
+    }
 
     @media (max-width: 767px) {
+        .metaboxbtn {
+            display: none;
+        }
         .sidebar {
             top: 0 !important;
             position: relative;

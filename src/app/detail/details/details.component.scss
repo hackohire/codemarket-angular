@@ -28,6 +28,32 @@
 
 }
 
+.metabox {
+    position: sticky;
+    top: 60px;
+    display: block;
+    height: -webkit-fill-available;
+    z-index: 8;
+    margin-top: 10px;
+}
+
+.metaboxbtn {
+    float:right;
+    color: #00aeef !important;
+    position: sticky;
+    top: 46px;
+    z-index: 22;
+    margin-bottom: -60px;
+    line-height: 60px;
+    margin-right: 15px;
+}
+
+@media (max-width: 767px) {
+    .metaboxbtn {
+        display: none;
+    }
+}
+
 .data-label {
     // width: 10%;
     font-weight: 600;

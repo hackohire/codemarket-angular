@@ -36,6 +36,18 @@ import { BookingComponent } from '../../shared/components/booking/booking.compon
 })
 export class DetailsComponent implements OnInit, OnDestroy {
 
+  // HIDE SHOW SIDEBAR
+  public show:boolean = true;
+  public buttonName:any = 'Hide';
+  toggleDisplay() {
+    this.show = !this.show;
+    // CHANGE THE NAME OF THE BUTTON.
+    if(this.show)  
+      this.buttonName = "Hide";
+    else
+      this.buttonName = "Show";
+  }
+  
   @ViewChild('successfulRSVP', { static: false }) successfulRSVP: SwalComponent;
   details$: Observable<Post>;
 

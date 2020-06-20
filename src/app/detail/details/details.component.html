@@ -7,7 +7,7 @@
     =================================-->
 
     <app-breadcumb (editPost)="postService?.editPost(details)" [title]="details?.name" [path]="breadcumb?.path"
-        [postDetails]="details" [postForm]="postForm">
+        [postDetails]="details" [postForm]="postForm" [all]="true" (OnClickAll)="showConnectedPosts = true">
     </app-breadcumb>
 
     <!--================================
@@ -27,7 +27,7 @@
                         (plusButtonClick)="redirectToAddPost(details, $event)"></app-post-type-nav>
                 </div>
 
-                <div class="col-lg-12 col-md-12" *ngIf="postDetails?.formStructureJSON">
+                <div class="col-lg-12 col-md-12" *ngIf="postDetails?.formStructureJSON && !showConnectedPosts">
                     <ng-container *ngTemplateOutlet="formTemplate;">
                     </ng-container>
                 </div>
@@ -82,7 +82,8 @@
                     <!-- end /.item-info -->
                 </div>
 
-                <div class="col-md-4 col-sm-12 metabox" *ngIf="!postDetails?.formStructureJSON && show">
+                <div class="col-md-4 col-sm-12 metabox"
+                    *ngIf="!postDetails?.formStructureJSON && show && !showConnectedPosts">
                     <ul class="infos">
                         <li>
                             <button mat-mini-fab color="primary" class="mr-2" style="box-shadow: none;">
@@ -331,7 +332,7 @@
                     <div class="row">
                         <div class="col-md-8">
                             <a mat-stroked-button color="primary" style="margin-bottom: 10px;"
-                                (click)="selectedBlock = null; showConnectedPosts = false; selectedPostType = ''">
+                                (click)="showConnectedPosts = false; selectedPostType = ''">
                                 <mat-icon>keyboard_arrow_left</mat-icon>Back
                             </a>
                             <div class="item-grid pen-grid item-grid-large">
@@ -392,8 +393,8 @@
                 <ul class="media-list thread-list" style="list-style: none;">
                     <!-- <h4 class="tab-content-wrapper">Comments:</h4> -->
                     <div *ngFor="let c of commentService?.commentsList$ | async; trackBy: trackByFn">
-                        <li [id]="c?._id" style="padding: 30px 30px 20px;"
-                            *ngIf="!c?.blockSpecificComment || true" class="single-thread">
+                        <li [id]="c?._id" style="padding: 30px 30px 20px;" *ngIf="!c?.blockSpecificComment || true"
+                            class="single-thread">
                             <app-comment [comment]="c" [referenceId]="cDetails?._id"></app-comment>
                         </li>
                     </div>

@@ -19,6 +19,7 @@ import { PostType } from '../../shared/models/post-types.enum';
 import { appConstants } from '../../shared/constants/app_constants';
 import { isNullOrUndefined } from 'util';
 import { merge } from 'lodash';
+import { MatPaginator } from '@angular/material';
 @Component({
   selector: 'app-add-post',
   templateUrl: './add-post.component.html',
@@ -27,19 +28,16 @@ import { merge } from 'lodash';
 })
 export class AddPostComponent implements OnInit, AfterViewInit {
 
-  // HIDE SHOW SIDEBAR
-  public show:boolean = true;
-  public buttonName:any = 'Hide';
-  toggleDisplay() {
-    this.show = !this.show;
-    // CHANGE THE NAME OF THE BUTTON.
-    if(this.show)  
-      this.buttonName = "Hide";
-    else
-      this.buttonName = "Show";
-  }
+  @ViewChild('descriptionEditor', { static: false }) descriptionEditor: EditorComponent;
 
-  s3Bucket = environment.s3FilesBucketURL;
+  subscription$ = new Subscription();
+
+  anonymousAvatar = '../../../../assets/images/anonymous-avatar.jpg';
+  s3FilesBucketURL = environment.s3FilesBucketURL;
+
+  // HIDE SHOW SIDEBAR
+  public show = true;
+  public buttonName: any = 'Hide';
 
   breadcumb: BreadCumb;
   postForm: FormGroup;
@@ -78,14 +76,12 @@ export class AddPostComponent implements OnInit, AfterViewInit {
     return this.postForm.get('status');
   }
 
-  @ViewChild('descriptionEditor', { static: false }) descriptionEditor: EditorComponent;
-
-  subscription$ = new Subscription();
-
-  anonymousAvatar = '../../../../assets/images/anonymous-avatar.jpg';
-  s3FilesBucketURL = environment.s3FilesBucketURL;
-
   booked = false;
+
+  showPosts = false;
+  totalPosts: number;
+  listOfPosts: { posts: Post[], total?: number } = { posts: [] };
+  paginator: MatPaginator;
 
   /** Feature Variables */
   useCalendar: boolean;
@@ -167,6 +163,16 @@ export class AddPostComponent implements OnInit, AfterViewInit {
         }
       })
     );
+  }
+
+  toggleDisplay() {
+    this.show = !this.show;
+    // CHANGE THE NAME OF THE BUTTON.
+    if (this.show) {
+      this.buttonName = 'Hide';
+    } else {
+      this.buttonName = 'Show';
+    }
   }
 
   redirectToAddPost(postType) {
@@ -331,7 +337,7 @@ export class AddPostComponent implements OnInit, AfterViewInit {
     this.displayDate = date;
     if (timeSlots.length === 2) {
       if (moment(date + ' ' + timeSlots[0]) < moment(date + ' ' + timeSlots[1])) {
-        this.displayDate = date + ' ' + moment(date + ' ' + timeSlots[0]).format('hh:mm A') + ' - ' + moment(date + ' ' + timeSlots[1]).format('hh:mm A')
+        this.displayDate = date + ' ' + moment(date + ' ' + timeSlots[0]).format('hh:mm A') + ' - ' + moment(date + ' ' + timeSlots[1]).format('hh:mm A');
       } else {
         this.slotDateTime = [];
         alert('FROM time can not greater than TO time slot. Please select again');
@@ -346,7 +352,7 @@ export class AddPostComponent implements OnInit, AfterViewInit {
       if (data.appointment.length > 0) {
         data.appointment.map((slot) => {
           this.getBookedSlot(slot.duration[0], slot.duration[1]);
-        })
+        });
         console.log(this.alreadyBookedSlots);
         this.slotList = this.slotList.filter((slot) => !this.alreadyBookedSlots.includes(slot));
         console.log(this.slotList);
@@ -381,5 +387,23 @@ export class AddPostComponent implements OnInit, AfterViewInit {
 
   setPrice(event) {
     this.postForm.get('price').setValue((+event.target.value).toFixed(2));
+  }
+
+  /** Get the list of posts based on the post type */
+  getConnectedPosts() {
+    if (this.paginator) {
+      const paginationObj = {
+        pageNumber: this.paginator.pageIndex + 1, limit: this.paginator.pageSize ? this.paginator.pageSize : 10,
+        sort: { order: '' }
+      };
+
+      this.postService.getAllPosts(
+        paginationObj, this.postType,
+        null
+      ).subscribe((u) => {
+        this.listOfPosts.posts = u.posts;
+        this.totalPosts = u.total;
+      });
+    }
   }
 }

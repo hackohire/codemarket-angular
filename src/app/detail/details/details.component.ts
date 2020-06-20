@@ -280,7 +280,6 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
   getConnectedPosts(postType) {
     this.showConnectedPosts = true;
-    this.selectedPostType = postType;
 
     if (this.paginator) {
       const paginationObj = {
@@ -289,7 +288,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
       };
 
       this.postService.getAllPosts(
-        paginationObj, this.type,
+        paginationObj, this.selectedPostTypeDetails.name,
         null
       ).subscribe((u) => {
         this.listOfConnectedPosts.posts = u.posts;

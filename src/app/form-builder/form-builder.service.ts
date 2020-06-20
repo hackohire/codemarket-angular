@@ -234,4 +234,33 @@ export class FormBuilderService {
       map((q: any) => q.data.getMySurveyData)
     );
   }
+
+  fetchSurveyAndSummaryFormDataById(id: string): Observable<any> {
+    return this.apollo.query({
+      query: gql`
+        query fetchSurveyAndSummaryFormDataById($id: String) {
+          fetchSurveyAndSummaryFormDataById(id: $id){
+            _id
+            formname
+            formDataJson
+            cFormJson
+            pFormJson
+            createdAt
+            connectedFormData {
+              _id
+              formDataJson
+              formname
+              formDataId
+            }
+          }
+        }
+      `,
+      variables: {
+        id
+      },
+      fetchPolicy: 'no-cache'
+    }).pipe(
+      map((q: any) => q.data.fetchSurveyAndSummaryFormDataById)
+    );
+  }
 }

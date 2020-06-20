@@ -1,10 +1,11 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { FormBuilderService } from 'src/app/form-builder/form-builder.service';
-import { keyBy, sumBy } from 'lodash';
+import { keyBy } from 'lodash';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -61,14 +62,16 @@ export class MySurveyComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private formBuilderService: FormBuilderService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private router: Router
   ) { }
 
   ngOnInit() {
-    // if (!this.authService.loggedInUser) {
-    //   this.authService.checkIfUserIsLoggedIn(true);
-    //   return;
-    // }
+    if (!this.authService.loggedInUser) {
+      this.authService.checkIfUserIsLoggedIn(true);
+      this.router.navigate(['/dashboard']);
+      return;
+    }
 
     const paginationObj = {
       pageNumber: 1, limit: 10,

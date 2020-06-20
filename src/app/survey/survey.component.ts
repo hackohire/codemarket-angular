@@ -234,7 +234,11 @@ export class SurveyComponent implements OnInit {
       this.formBuilderService.addformData(this.formDetails.value).subscribe((d: any) => {
         if (d) {
           Swal.fire(`${d.formname} has been Added Successfully` , '', 'success').then(() => {
-            this.router.navigate(['/survey'], { queryParams: { id: d._id } });
+            if (this.summaryForm) {
+              this.router.navigate(['/survey/my-survey']);
+            } else {
+              this.router.navigate(['/survey'], { queryParams: { id: d._id } });
+            }
             this.summaryForm = true;
             this.createSurveySummaryTitle(this.totalPoints);
             this.id = d._id;

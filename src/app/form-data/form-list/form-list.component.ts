@@ -1,8 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilderService } from 'src/app/form-builder/form-builder.service';
 import { String } from 'lodash';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { MatPaginator } from '@angular/material/paginator';
+import { keyBy } from 'lodash';
+import { FormGroup, Validators, FormControl } from '@angular/forms';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { MySurveyDialogComponent } from 'src/app/survey/my-survey/my-survey.component';
+
 
 @Component({
   selector: 'app-form-list',
@@ -19,9 +24,23 @@ export class FormListComponent implements OnInit {
   formStrucureId;
 
   savedFormData = [];
+  individualPoints = [];
+  summaryFormAnswers = [];
+
+  sleepQualityFormObj = {
+    formName: '',
+    individualPoints: []
+  };
+
+  sleepQualitySummaryFormObj = {
+    formName: '',
+    individualPoints: []
+  };
+
   constructor(
     private formBuilderService: FormBuilderService,
-    private authService: AuthService
+    private authService: AuthService,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -80,10 +99,54 @@ export class FormListComponent implements OnInit {
   }
 
   onClickCalled(id) {
-    console.log("123 ==> ", id);
 
-    const paginationObj = {
-      pageNumber: 1, limit: 10,
-      sort: {order: ''}};
-  }
+    this.formBuilderService.fetchSurveyAndSummaryFormDataById(id).subscribe((res) => {
+
+        this.mapValueWithLabel(res);
+  
+        this.dialog.open(MySurveyDialogComponent, {
+          data : {
+            sleepForm: this.sleepQualityFormObj,
+            summaryForm: this.sleepQualitySummaryFormObj,
+          }
+        });
+    });
+  };
+
+  mapValueWithLabel(foundEle) {
+    this.individualPoints = [];
+    this.summaryFormAnswers = [];
+
+    const components = keyBy(foundEle.pFormJson.formStructureJSON.components, 'key');
+
+    this.sleepQualityFormObj.formName = foundEle.formname;
+    this.sleepQualitySummaryFormObj.formName = foundEle.cFormJson.formname;
+
+    const savedData = foundEle.formDataJson;
+    let keySleepForm = Object.keys(savedData);
+
+    keySleepForm.forEach((k) => {
+      this.individualPoints.push({
+        label: components[k].label,
+        value: savedData[k]
+      });
+    });
+      
+    const summaryComponents = keyBy(foundEle.cFormJson.formStructureJSON.components, 'key')
+    const summaryFormData = foundEle.connectedFormData.formDataJson;
+    let keySummaryFormData = Object.keys(summaryFormData)
+
+
+    keySummaryFormData.forEach((k) => {
+      this.summaryFormAnswers.push({
+        label: summaryComponents[k].label,
+        value: summaryFormData[k]
+      });
+    });
+
+    this.sleepQualityFormObj.individualPoints = this.individualPoints;
+    this.sleepQualitySummaryFormObj.individualPoints = this.summaryFormAnswers;
+
+}
+
 }

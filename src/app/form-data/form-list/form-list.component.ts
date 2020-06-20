@@ -81,5 +81,9 @@ export class FormListComponent implements OnInit {
 
   onClickCalled(id) {
     console.log("123 ==> ", id);
+
+    const paginationObj = {
+      pageNumber: 1, limit: 10,
+      sort: {order: ''}};
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { MatTableDataSource, MatSort } from '@angular/material';
 import { Company } from '../../shared/models/company.model';
 import { BreadCumb } from '../../shared/models/bredcumb.model';
@@ -32,7 +32,7 @@ export class CompaniesListComponent implements OnInit {
   displayedColumns: string[];
   dataSource = new MatTableDataSource();
   expandedCompany: Company | null;
-  all: boolean;
+  @Input() all: boolean;
   authorId: string;
   breadcumb: BreadCumb;
   type: string;
@@ -53,12 +53,14 @@ export class CompaniesListComponent implements OnInit {
 
   ngOnInit() {
 
-    this.all = JSON.parse(this.activatedRoute.snapshot.queryParams.all);
+    if (!this.all) {
+      this.all = JSON.parse(this.activatedRoute.snapshot.queryParams.all);
+    }
 
     this.type = this.activatedRoute.snapshot.queryParams.type;
 
     this.breadcumb = {
-      title: 'List of ' + (this.type ? startCase(this.type): 'Companies'),
+      title: 'List of ' + (this.type ? startCase(this.type) : 'Companies'),
       path: [
         {
           name: 'Dashboard',
@@ -87,12 +89,12 @@ export class CompaniesListComponent implements OnInit {
           }
         })
       )
-      .subscribe((companies) => {
-        if (companies && companies.length) {
-          this.dataSource.data = companies;
-          this.dataSource.sort = this.sort;
-        }
-      });
+        .subscribe((companies) => {
+          if (companies && companies.length) {
+            this.dataSource.data = companies;
+            this.dataSource.sort = this.sort;
+          }
+        });
     }
   }
 

@@ -36,14 +36,13 @@ export class AddTweetComponent implements OnInit {
   tweetFormInitialization() {
     this.tweetForm = new FormGroup({
       tweetDesc: new FormControl('', Validators.required),
-      createdBy: new FormControl(this.authService.loggedInUser._id)
     })
     console.log('tweetform:'+ this.tweetForm);
   }
   async addTweet() {
     console.log('tweetform:'+ this.tweetForm);
     if (this.authService.loggedInUser._id) {
-      //this.tweetForm.addControl('createdBy', new FormControl(this.authService.loggedInUser._id));
+      this.tweetForm.addControl('createdBy', new FormControl(this.authService.loggedInUser._id));
       //this.tweetForm.patchValue({ referenceId: tweetId });
       //this.subscription$.add(
         this.tweetService.tweet(this.tweetForm.value).subscribe((c) => {

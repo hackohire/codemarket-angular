@@ -60,6 +60,10 @@
         <div class="line-height-initial"> Survey </div>
       </a>
       
+      <a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'survey', 'my-survey']" style="padding: 10px;">
+        <div class="line-height-initial"> My Survey </div>
+      </a>
+
       <!-- My Profile -->
       <button mat-button [matMenuTriggerFor]="userMenu" *ngIf="authService.loggedInUser; else logIn" style="padding: 0;">
         <a mat-button routerLinkActive="mat-primary" *ngIf="loggedInUser;"

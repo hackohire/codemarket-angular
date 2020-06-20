@@ -304,6 +304,7 @@ export class SurveyComponent implements OnInit {
     this.formDataJsonToSave = [];
     this.currentFormIndex = 0;
     this.lastFormIndex = -1;
+    this.connectedFormStructureId = this.surveySummaryFormId;
     this.formJsonListSubscription = this.formBuilderService.fetchFormStructureById(this.surveySummaryFormId).subscribe((formJson) => {
       this.formBuilderService.fetchformDataById(formDataId).subscribe((res) => {
 

@@ -1,0 +1,27 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div style="background: white;">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Form Name</th>
+                            <th>Total Points</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let e of mysurveyList" (click)="displayIndividualPoints(e?._id)">
+                            <td>{{e?.formname}}</td>
+                            <td>{{e?.totalPoints}}</td>
+                            <td>{{e?.createdAt | date: 'EEEE, MMMM d, y, h:mm a'}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <app-paginator [length]="totalCount"
+                    (fetchData)="paginator = $event; fetchSurveyFormData()">
+                </app-paginator>
+            </div>
+        </div>
+    </div>
+</div>

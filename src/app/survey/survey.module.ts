@@ -5,23 +5,28 @@ import { SharedModule } from '../shared/shared.module';
 import { MaterialFileInputModule } from 'ngx-material-file-input';
 import { SurveyComponent, SurveyDialogComponent } from './survey.component';
 import { FormioModule } from 'angular-formio';
+import { MySurveyComponent, MySurveyDialogComponent } from './my-survey/my-survey.component';
 
-const emailRoutes: Routes = [
+const surveyRoutes: Routes = [
   {
     path: '',
     component: SurveyComponent
+  },
+  {
+    path: 'my-survey',
+    component: MySurveyComponent
   }
 ]
 
 @NgModule({
-  declarations: [SurveyComponent, SurveyDialogComponent],
-  entryComponents: [SurveyDialogComponent],
+  declarations: [SurveyComponent, SurveyDialogComponent, MySurveyComponent, MySurveyDialogComponent],
+  entryComponents: [SurveyDialogComponent, MySurveyDialogComponent],
   imports: [
     CommonModule,
     SharedModule,
     FormioModule,
     MaterialFileInputModule,
-    RouterModule.forChild(emailRoutes)
+    RouterModule.forChild(surveyRoutes)
   ]
 })
 

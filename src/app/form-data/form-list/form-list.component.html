@@ -41,7 +41,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let e of savedFormData">
+                            <tr *ngFor="let e of savedFormData" (click)="onClickCalled(e?._id)">
                                 <td>{{e?.createdBy?.name}}</td>
                                 <td>{{e?.totalPoints}}</td>
                             </tr>

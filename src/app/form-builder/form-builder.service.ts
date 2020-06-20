@@ -197,4 +197,41 @@ export class FormBuilderService {
       map((q: any) => q.data.addSurveyUser)
     );
   }
+
+  getMySurveyData(pageOptions, id: string): Observable<any> {
+    return this.apollo.query({
+      query: gql`
+        query getMySurveyData($pageOptions: PageOptionsInput, $id: String) {
+          getMySurveyData(pageOptions: $pageOptions, id: $id){
+            total
+            data {
+              _id
+              formname
+              formDataJson
+              cFormJson
+              pFormJson
+              createdAt
+              createdBy {
+                _id
+                name
+              }
+              connectedFormData {
+                _id
+                formDataJson
+                formname
+                formDataId
+              }
+            }
+          }
+        }
+      `,
+      variables: {
+        pageOptions,
+        id
+      },
+      fetchPolicy: 'no-cache'
+    }).pipe(
+      map((q: any) => q.data.getMySurveyData)
+    );
+  }
 }

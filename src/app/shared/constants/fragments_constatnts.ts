@@ -224,3 +224,24 @@ fragment Comments on Comment {
 }
 ${CommentFragment}
 `;
+
+export const tweetFragment = gql`
+  fragment Tweet on Tweet {
+    id
+    createdBy {
+      name
+      _id
+    }
+  }
+`;
+
+export const tweet = gql`
+fragment Tweets on Tweet {
+  ...Tweet
+  children {
+    ...Tweet
+  }
+}
+${tweetFragment}
+`;
+

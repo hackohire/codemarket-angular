@@ -10,6 +10,8 @@ import { VideoChatHomeComponent } from './video-chat/video-chat-home/video-chat-
 import { DonateComponent } from './donate/donate.component';
 import { PrivacyComponent } from './privacy/privacy.component';
 import { TermsComponent } from './terms/terms.component';
+import { AddTweetComponent } from './tweet/add-tweet/add-tweet.component';
+import { TweetsListComponent } from './tweet/tweets-list/tweets-list.component';
 // import { PostDataResolver } from './core/resolver';
 
 const routes: Routes = [
@@ -146,6 +148,16 @@ const routes: Routes = [
   {
     path: 'terms-of-service',
     component: TermsComponent
+  },
+
+  {
+    path: 'add-tweet',
+    component: AddTweetComponent
+  },
+
+  {
+    path: 'tweets-list',
+    component: TweetsListComponent
   },
   /** Static routes ends here */
 ];

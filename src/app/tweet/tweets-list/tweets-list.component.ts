@@ -6,6 +6,8 @@ import { MatDialog, MatPaginator, MatTableDataSource } from '@angular/material';
 import { TweetService } from '../../shared/services/tweet.service';
 import { Subscription, of, Observable } from 'rxjs';
 import { Tweet } from 'src/app/shared/models/tweet.model';
+import moment from 'moment';
+import { User } from 'src/app/shared/models/user.model';
 
 @Component({
   selector: 'app-tweets-list',
@@ -16,8 +18,9 @@ export class TweetsListComponent implements OnInit {
 
   userId = String;
 
-  listOfTweets: { tweets: Tweet[], total?: number } = { tweets: [] };
+  listOfTweets: { tweets: Tweet[], total?: number, currentUser?: User } = { tweets: [] };
   totalTweets: number;
+  currentUser: User;
   paginator: MatPaginator;
 
   tweetsList: Tweet[];
@@ -48,12 +51,19 @@ export class TweetsListComponent implements OnInit {
             console.log("Inside getTweets");
             console.log(e);
             this.tweetsList = e;
-            //this.listOfTweets.tweets = e.tweets;
-            //this.totalTweets = e.total;
+            this.listOfTweets.tweets = e;
+            this.listOfTweets.total = e.length;
+            this.listOfTweets.currentUser = u;
+            console.log('List '+this.listOfTweets.total);
           });
         }
       // }
-    })
+    });
     
+  }
+  
+  fromNow(date) {
+    const d = moment(date).isValid() ? date : new Date(+date);
+    return moment(d).fromNow();
   }
 }

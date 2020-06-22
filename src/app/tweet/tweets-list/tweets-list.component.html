@@ -1,12 +1,59 @@
 <div class="container" style="margin: 30px auto 15px;">
+    <button style="float:right; top:auto;box-shadow: none;" type="button" class="btn btn--sm" [routerLink]="['/', 'add-tweet']">Add Tweet</button>
     <p>Tweet List Here!</p>
 
+    <!--<a mat-button routerLinkActive="mat-primary" [routerLink]="['/', 'add-tweet']" style="margin-left:5px; padding: 8px 16px;">
+        <div class="line-height-initial"> Add Tweet </div>
+      </a>-->
+      
+    <!--<div class="comment-form">
+		<app-brief-post style="width: 100%;" [p]="e"
+			*ngFor="let e of tweetsList" [readMore]="true">
+		</app-brief-post>
+	   
+	</div>-->
     <div class="col-md-12 comment-form-area">
-       
-        <div class="comment-form">
-                <app-brief-post style="width: 100%;" [p]="e"
-                    *ngFor="let e of tweetsList" [readMore]="true">
-                </app-brief-post>
-        </div>
-    </div>
+            <!-- Single Post UI -->
+        <div *ngFor="let e of listOfTweets.tweets" > 
+            <div class="box image common-box-shadow">
+                <div class="box-header">
+                    <!-- USER'S AVATAR & NAME -->
+                    <h3>
+                        <a [href]="'profile' + '/' + listOfTweets.currentUser?.createdBy?.slug" target="_blank">
+                            <img class="creator"
+                                [src]="p?.createdBy?.avatar ? ((s3FilesBucketURL + listOfTweets.currentUser?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                                alt="" />{{listOfTweets.currentUser?.name}}
+                        </a>
+                        <span>{{fromNow(e?.createdAt)}} {{' • '}} {{e?.createdAt | date: 'medium'}} <i
+                                class="fa fa-globe"></i></span>
+                    </h3>
+                </div>
+                <div class="box-content">
+                    <div class="content">
+                        <img alt="" />
+                    </div>
+                    <div class="bottom">
+                        <p [ngClass]="readMore ? 'readMore' : ''">
+                            {{e?.tweetDesc}}
+                        </p>
+                        <!-- <span><span class="fa fa-search-plus"></span></span> -->
+                    </div>
+                </div>
+
+                <!-- Read More Button to Fetch comments and show full description-->
+                <div class="ce-block" *ngIf="readMore" style="padding: 10px 0 0 30px;" (click)="readMore = false;">
+                    <a>Read More...</a></div>
+            </div> 
+        </div>	
+        <!--<div class="list-group">
+            <a *ngFor="let tweet of tweetsList" href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">{{tweet._id}}</h5>
+                    <small>{{tweet.id}}</small>
+                </div>
+                <p class="mb-1">{{tweet.tweetDesc}}</p>
+                <small>{{tweet.createdAt}}</small>
+            </a>
+        </div>-->
+    </div>  
 </div>

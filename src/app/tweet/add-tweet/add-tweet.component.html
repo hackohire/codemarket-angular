@@ -17,7 +17,7 @@
                     <div class="text-right">
                         <button style="margin-top: 10px; margin-bottom: 20px;box-shadow: none;"
                             type="button" class="btn btn--sm"
-                            (click)="addTweet('Created');">Tweet</button>
+                            (click)="addTweet('Created');" [disabled]="tweetForm.invalid">Tweet</button>
                     </div>
                 </div>
             </div>

@@ -61,12 +61,14 @@ export class TweetService {
                 name
               }
               tweetDesc
+              createdAt
             }
           }
         `,
         variables: {
           userId
-        }
+        },
+        fetchPolicy: 'no-cache'
       }
     ).pipe(
       map((p: any) => {

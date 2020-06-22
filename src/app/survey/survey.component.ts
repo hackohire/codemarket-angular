@@ -281,7 +281,9 @@ export class SurveyComponent implements OnInit {
   onSubmitSummaryForm(event) {
     console.log("Event is ==> ", event);
 
-    event.data.pop();
+    if (event.data['submit']) {
+      delete event.data["submit"]
+    }
     
     this.formDetails.value.formDataJson = event.data;
     this.formDetails.value.formDataId = this.id || null;

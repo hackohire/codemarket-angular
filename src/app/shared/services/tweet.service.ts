@@ -49,17 +49,18 @@ export class TweetService {
     );
   }
 
-  getTweets(userId: string) {
+  fetchTweets(userId: string): Observable<any> {
     return this.apollo.query(
       {
         query: gql`
-          query getTweets(user) {
-            getTweets(user) {
+          query fetchTweets(userId) {
+            fetchTweets(userId) {
               _id
               createdBy {
                 _id
                 name
               }
+              tweetDesc
             }
           }
         `,

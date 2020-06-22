@@ -5,7 +5,6 @@ import { environment } from '../../../environments/environment';
 import { Company } from '../../shared/models/company.model';
 import { Post } from '../../shared/models/post.model';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { EditorComponent } from '../../shared/components/editor/editor.component';
 import { TweetService } from '../../shared/services/tweet.service';
 import { Subscription, of, Observable } from 'rxjs';
 
@@ -48,6 +47,8 @@ export class AddTweetComponent implements OnInit {
         this.tweetService.tweet(this.tweetForm.value).subscribe((c) => {
           if (c) {
             console.log(c);
+            this.tweetFormInitialization();
+            this.router.navigate(['tweets-list']);
           }
         })
       //);

@@ -1,10 +1,12 @@
 <div class="container" style="margin: 30px auto 15px;">
     <p>Tweet List Here!</p>
 
-    <div [formGroup]="tweetsForm" class="col-md-12 comment-form-area">
+    <div class="col-md-12 comment-form-area">
        
         <div class="comment-form">
-            
+                <app-brief-post style="width: 100%;" [p]="e"
+                    *ngFor="let e of tweetsList" [readMore]="true">
+                </app-brief-post>
         </div>
     </div>
 </div>

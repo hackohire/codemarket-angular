@@ -53,8 +53,8 @@ export class TweetService {
     return this.apollo.query(
       {
         query: gql`
-          query fetchTweets(userId) {
-            fetchTweets(userId) {
+          query fetchTweets($userId: String) {
+            fetchTweets(userId: $userId) {
               _id
               createdBy {
                 _id
@@ -70,7 +70,7 @@ export class TweetService {
       }
     ).pipe(
       map((p: any) => {
-        return p.data.getTweets;
+        return p.data.fetchTweets;
       }),
     );
   }

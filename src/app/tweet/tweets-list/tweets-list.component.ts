@@ -40,16 +40,20 @@ export class TweetsListComponent implements OnInit {
 
   /** Fetch the list of tweets for the tweets tab based on the pagination */
   fetchTweets() {
-    if (this.authService.loggedInUser._id) {
-      //console.log(this.authService.loggedInUser._id);
-      this.tweetService.fetchTweets(this.authService.loggedInUser._id).subscribe(e => {
-        console.log("Inside getTweets");
-        console.log(e);
-        this.tweetsList = e;
-        //this.listOfTweets.tweets = e.tweets;
-        //this.totalTweets = e.total;
-      });
-    }
+    this.authService.loggedInUser$.subscribe((u) => {
+      // if (this.authService.loggedInUser._id) {
+        // console.log("111111 ==> ", this.authService.loggedInUser._id);
+        if (u) {
+          this.tweetService.fetchTweets(u._id).subscribe(e => {
+            console.log("Inside getTweets");
+            console.log(e);
+            this.tweetsList = e;
+            //this.listOfTweets.tweets = e.tweets;
+            //this.totalTweets = e.total;
+          });
+        }
+      // }
+    })
     
   }
 }

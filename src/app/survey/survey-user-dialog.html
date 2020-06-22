@@ -1,5 +1,6 @@
 <div mat-dialog-content>
-    <div [formGroup]="surveyUserFrom">
+    <app-sign-in *ngIf="authState?.state === 'signIn' || authState?.state === 'signOut' || authState?.state === 'signIn_failure'"></app-sign-in>
+    <!-- <div [formGroup]="surveyUserFrom">
         <mat-form-field appearance="outline" class="field-full-width">
             <mat-label>First Name</mat-label>
             <input matInput placeholder="First Name" type="text" formControlName="firstName" autocomplete="false" required>
@@ -14,10 +15,10 @@
             <mat-label>Email</mat-label>
             <input matInput placeholder="Email" type="text" formControlName="email" autocomplete="false" required>
         </mat-form-field>
-    </div>
+    </div> -->
 </div>
 <br>
-<div mat-dialog-actions>
+<!-- <div mat-dialog-actions>
     <button type="button" mat-raised-button color="warn" (click)="onCancelClick()" style="flex: auto;">Cancel</button>
     <button type="button" mat-raised-button color="primary" (click)="onSubmitClick()" style="flex: auto;" [disabled]="surveyUserFrom.invalid">Submit</button>
-</div>
+</div> -->

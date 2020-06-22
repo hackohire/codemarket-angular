@@ -7,6 +7,7 @@ import Swal from 'sweetalert2';
 import { AuthService } from '../core/services/auth.service';
 import { keyBy, sumBy } from 'lodash';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { AuthState } from '../auth/auth.component';
 
 
 @Component({
@@ -16,12 +17,29 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
 export class SurveyDialogComponent implements OnInit {
   surveyUserFrom: FormGroup;
 
+  authState: AuthState = {
+    state: 'signIn',
+    user: null,
+  };
+  
+  subscription = new Subscription();
+
   constructor(
     public dialogRef: MatDialogRef<SurveyDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
-    ) {}
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private authService: AuthService,
+    ) {
+      this.subscription.add(
+        this.authService._authState.subscribe((state) => {
+          if (state) {
+            this.authState = state;
+          }
+        })
+      );
+    }
 
   ngOnInit() {
+    console.log('123 ==> ', this.authState);
     this.surveyUserFrom = new FormGroup({
       firstName: new FormControl('', Validators.required),
       lastName: new FormControl('', Validators.required),
@@ -70,6 +88,7 @@ export class SurveyComponent implements OnInit {
   surveySummaryTitle = '';
 
   summaryForm = false;
+  nexButtonEnable = false;
 
   constructor(
     private formBuilderService: FormBuilderService,
@@ -80,17 +99,17 @@ export class SurveyComponent implements OnInit {
     ) { 
       this.connectedFormStructureId = '5ee1fad4be0ca353ff5caa45';
       this.surveySummaryFormId = '5eec9b37aeb42c52592fd4de';
-    }
-    images = [
-      '../../assets/images/sleep-icons/black-icons/01.svg',     
-      '../../assets/images/sleep-icons/black-icons/02.svg',
-      '../../assets/images/sleep-icons/black-icons/03.svg',
-      '../../assets/images/sleep-icons/black-icons/04.svg',
-      '../../assets/images/sleep-icons/black-icons/05.svg',
-      '../../assets/images/sleep-icons/black-icons/06.svg',
-      '../../assets/images/sleep-icons/black-icons/07.svg',
-      '../../assets/images/sleep-icons/black-icons/08.svg'
-    ];
+  }
+  images = [
+    '../../assets/images/sleep-icons/black-icons/01.svg',     
+    '../../assets/images/sleep-icons/black-icons/02.svg',
+    '../../assets/images/sleep-icons/black-icons/03.svg',
+    '../../assets/images/sleep-icons/black-icons/04.svg',
+    '../../assets/images/sleep-icons/black-icons/05.svg',
+    '../../assets/images/sleep-icons/black-icons/06.svg',
+    '../../assets/images/sleep-icons/black-icons/07.svg',
+    '../../assets/images/sleep-icons/black-icons/08.svg'
+  ];
 
   ngOnInit() {
 
@@ -169,6 +188,7 @@ export class SurveyComponent implements OnInit {
         return d.selected
       });
       
+      this.nexButtonEnable = this.formDataJsonToSave[this.currentFormIndex].selected;
       if (allSelected.indexOf(false) === -1) {
         this.enableSubmitButton = true;
       } else {
@@ -190,48 +210,53 @@ export class SurveyComponent implements OnInit {
 
 
     if (!this.authService.loggedInUser) {
-      const dialogRef = this.dialog.open(SurveyDialogComponent, {
-        data : {
-          formDataJson: result,
-          formDetails: this.formDetails,
-        }
-      });
+      this.authService.checkIfUserIsLoggedIn(true);
+      return;
+      // const dialogRef = this.dialog.open(SurveyDialogComponent, {
+      //   data : {
+      //     formDataJson: result,
+      //     formDetails: this.formDetails,
+      //   }
+      // });
 
-      dialogRef.afterClosed().subscribe(formObj => {
-        this.formBuilderService.addSurveyUser(formObj).subscribe((res) => {
-          console.log("This is addSurveyUser ==> ", res);
-          
-          if (res.alreadyExist) {
-            Swal.fire(`Email already Exist` , '', 'error');
-          } else {
-            this.formDetails.value.formDataJson = result;
-            this.formDetails.value.createdBy = res._id;
-    
-    
-          this.formBuilderService.addformData(this.formDetails.value).subscribe((d: any) => {
-            if (d) {
-              Swal.fire(`${d.formname} has been Added Successfully` , '', 'success').then(() => {
-                this.router.navigate(['/survey'], { queryParams: { id: d._id } });
-                // this.hideAllButton = true;
-                // this.mapValueWithLabel(d);
-                this.summaryForm = true;
-                this.createSurveySummaryTitle(this.totalPoints);
-
-                this.getSummaryFormData(d._id);
-              });
-            }
-          });
-          }
+      // dialogRef.afterClosed().subscribe(formObj => {
+      //   if (formObj) {
+      //     this.formBuilderService.addSurveyUser(formObj).subscribe((res) => {
+      //       console.log("This is addSurveyUser ==> ", res);
+            
+      //       if (res.alreadyExist) {
+      //         Swal.fire(`Email already Exist` , '', 'error');
+      //       } else {
+      //         this.formDetails.value.formDataJson = result;
+      //         this.formDetails.value.createdBy = res._id;
+      
+      
+      //       this.formBuilderService.addformData(this.formDetails.value).subscribe((d: any) => {
+      //         if (d) {
+      //           Swal.fire(`${d.formname} has been Added Successfully` , '', 'success').then(() => {
+      //             this.router.navigate(['/survey'], { queryParams: { id: d._id } });
+      //             // this.hideAllButton = true;
+      //             // this.mapValueWithLabel(d);
+      //             this.summaryForm = true;
+      //             this.createSurveySummaryTitle(this.totalPoints);
   
-        }, (err) => {
-          console.log("Err ==> ", err);
-        });
-      });
+      //             this.getSummaryFormData(d._id);
+      //           });
+      //         }
+      //       });
+      //       }
+    
+      //     }, (err) => {
+      //       console.log("Err ==> ", err);
+      //     });
+      //   }
+      // });
     } else {
 
       this.formDetails.value.formDataJson = result;
       this.formDetails.value.formDataId = this.id || null;
-
+      this.formDetails.value.createdBy = this.authService.loggedInUser._id;
+      
       this.formBuilderService.addformData(this.formDetails.value).subscribe((d: any) => {
         if (d) {
           Swal.fire(`${d.formname} has been Added Successfully` , '', 'success').then(() => {
@@ -251,6 +276,25 @@ export class SurveyComponent implements OnInit {
       });
     }
 
+  }
+
+  onSubmitSummaryForm(event) {
+    console.log("Event is ==> ", event);
+
+    event.data.pop();
+    
+    this.formDetails.value.formDataJson = event.data;
+    this.formDetails.value.formDataId = this.id || null;
+
+    console.log("Event is ==> ", this.formDetails.value);
+
+    this.formBuilderService.addformData(this.formDetails.value).subscribe((d: any) => {
+      if (d) {
+        Swal.fire(`${d.formname} has been Added Successfully` , '', 'success').then(() => {
+            this.router.navigate(['/survey/my-survey']);
+        });
+      }
+    });
   }
 
   createSurveySummaryTitle(points) {

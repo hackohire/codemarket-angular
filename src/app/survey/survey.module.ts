@@ -6,6 +6,7 @@ import { MaterialFileInputModule } from 'ngx-material-file-input';
 import { SurveyComponent, SurveyDialogComponent } from './survey.component';
 import { FormioModule } from 'angular-formio';
 import { MySurveyComponent, MySurveyDialogComponent } from './my-survey/my-survey.component';
+import { AuthModule } from '../auth/auth.module';
 
 const surveyRoutes: Routes = [
   {
@@ -26,6 +27,7 @@ const surveyRoutes: Routes = [
     SharedModule,
     FormioModule,
     MaterialFileInputModule,
+    AuthModule,
     RouterModule.forChild(surveyRoutes)
   ]
 })

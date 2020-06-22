@@ -45,7 +45,7 @@
                             <ng-container>
                                 <div><h3>{{formName}}</h3></div>
                                 <div class="row" style="margin: 20px -15px;">
-                                    <div class="col-md-2 col-4">
+                                    <div class="col-md-2 col-4" *ngIf="!summaryForm">
                                         <img src="{{form1?.image}}" style="margin-top: 15px;">
                                     </div>
                                     <div class="col-md-10 col-12 form-box">
@@ -53,7 +53,7 @@
                                             <formio [form]="form1" (change)="valueChangeFun($event)" (submit)="onSubmitForm($event)"></formio>
                                         </div>
                                         <div *ngIf="summaryForm">
-                                            <formio [form]="summayFormData" (change)="valueChangeFun($event)" (submit)="onSubmitForm($event)"></formio>
+                                            <formio [form]="summayFormData" (submit)="onSubmitSummaryForm($event)"></formio>
                                         </div>
                                         <!-- <div *ngIf="!fillForm">
                                             <div *ngFor="let data of individualPoints;let i = index">
@@ -69,9 +69,10 @@
                                         <div>
                                             <button *ngIf="lastFormIndex !== -1" style="margin-right: 10px;box-shadow: none;background: #eee;" mat-raised-button type="button" (click)="onBackClick()" [disabled]="hideAllButton">Back</button>
                                             <button color="primary" *ngIf="currentFormIndex<(formArray?.length-1)" style="margin-right: 10px"
-                                                mat-raised-button matStepperNext type="button" (click)="onNextClick()" [disabled]="hideAllButton">Next</button>
+                                                mat-raised-button matStepperNext type="button" (click)="onNextClick()" [disabled]="!nexButtonEnable">Next</button>
                                             <button *ngIf="currentFormIndex === (formArray?.length-1)" color="primary" [disabled]="!enableSubmitButton || hideAllButton"
                                                 mat-raised-button type="button" (click)="onSubmitForm($event)">Submit</button>
+                                            <!-- <button color="primary" mat-raised-button type="button" (click)="onSubmitForm($event)">Submit</button> -->
                                         </div>
                                     </div>
                                 </div>

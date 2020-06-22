@@ -53,6 +53,7 @@ export class SurveyComponent implements OnInit {
   formJsonListSubscription: Subscription;
   formDetails: FormGroup;
   public form1 = { components: [], image: '' };
+  public summayFormData;
   totalPoints = 0;
   id;
 
@@ -276,7 +277,9 @@ export class SurveyComponent implements OnInit {
         const savedData = d.formDataJson;
         let keys = Object.keys(d.formDataJson);
 
-        keys.pop();
+        if (!this.summaryForm) {
+          keys.pop();
+        } 
         keys.forEach((k) => {
           this.individualPoints.push({
             label: components[k].label,
@@ -315,40 +318,35 @@ export class SurveyComponent implements OnInit {
         const previousFormData = res[0].formDataJson;
 
         if (formJson) {
-          const temp = [];
+          const tempComponents = { components: [], image: []};
           this.formName = formJson.formname;
           formJson.formStructureJSON.components.forEach((c, i) =>{
             if (i < formJson.formStructureJSON.components.length-1) {
-
-              if (c.properties) {
-                temp.push({
-                  [c.key]: Object.keys(c.properties)[0]
-                })
-              };
 
               const temp1 = {
                 [c.key]: Object.keys(c.properties)[0]
               }
 
               if (previousFormData[temp1[c.key]] > 0) {
-                this.formArray.push({
-                  form1: {
-                    components: [c],
-                    value: this.totalPoints,
-                    image: this.images[i]
-                  }
-                });
+                // this.formArray.push({
+                //   form1: {
+                //     components: [c],
+                //     value: this.totalPoints,
+                //     image: this.images[i]
+                //   }
+                // });
 
-                this.formDataJsonToSave.push({
-                  [c.key]: 0,
-                  selected: false
-                })
+                // this.formDataJsonToSave.push({
+                //   [c.key]: 0,
+                //   selected: false
+                // })
+                tempComponents.components.push(c);
               }
 
             }
           });
-  
-          this.form1 = this.formArray[this.currentFormIndex].form1;
+          tempComponents.components.push(formJson.formStructureJSON.components[formJson.formStructureJSON.components.length - 1]);
+          this.summayFormData = tempComponents;
         
           console.log("INNNNNNNNNNNNNNNNNNN ", this.formArray, this.formDataJsonToSave);
 

@@ -49,8 +49,11 @@
                                         <img src="{{form1?.image}}" style="margin-top: 15px;">
                                     </div>
                                     <div class="col-md-10 col-12 form-box">
-                                        <div>
+                                        <div *ngIf="!summaryForm">
                                             <formio [form]="form1" (change)="valueChangeFun($event)" (submit)="onSubmitForm($event)"></formio>
+                                        </div>
+                                        <div *ngIf="summaryForm">
+                                            <formio [form]="summayFormData" (change)="valueChangeFun($event)" (submit)="onSubmitForm($event)"></formio>
                                         </div>
                                         <!-- <div *ngIf="!fillForm">
                                             <div *ngFor="let data of individualPoints;let i = index">

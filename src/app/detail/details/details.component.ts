@@ -462,11 +462,11 @@ export class DetailsComponent implements OnInit, OnDestroy {
     // });
   }
 
-  openBooking() {
+  openBooking(a) {
     this.dialog.open(BookingComponent, {
       // minWidth: '100vw',
       // height: '100vh',
-      data: { post: this.postDetails, loggedInUser: this.authService.loggedInUser },
+      data: { post: this.postDetails, loggedInUser: this.authService.loggedInUser, availability: a },
       disableClose: true
     });
   }

@@ -8,6 +8,8 @@ import { CommentService } from '../../services/comment.service';
 import { EditorComponent } from '../editor/editor.component';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { MatDialog } from '@angular/material';
+import { BookingComponent } from '../booking/booking.component';
 
 @Component({
   selector: 'app-brief-post',
@@ -32,7 +34,8 @@ export class BriefPostComponent implements OnInit, OnDestroy {
   constructor(
     public postService: PostService,
     public authService: AuthService,
-    public commentService: CommentService
+    public commentService: CommentService,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -92,5 +95,15 @@ export class BriefPostComponent implements OnInit, OnDestroy {
     this.commentService.unsubscribe();
     this.subscription$.unsubscribe();
   }
+
+  openBooking(a) {
+    this.dialog.open(BookingComponent, {
+      // minWidth: '100vw',
+      // height: '100vh',
+      data: { post: this.p, loggedInUser: this.authService.loggedInUser, availability: a },
+      disableClose: true
+    });
+  }
+
 
 }

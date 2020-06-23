@@ -10,9 +10,14 @@ export interface Tag {
     campaignId?: string;
 }
 
+export interface BookingSlot {
+    date: string;
+    duration?: any[];
+}
+
 export interface Booking {
-    availabilityDate?: string;
-    duration?: string[];
+    availability?: BookingSlot[];
+    // duration?: string[];
     status?: string;
     requestBy?: string[];
 }

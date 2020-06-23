@@ -41,14 +41,35 @@
         <!-- If view is not list of posts -->
         <ng-template #normalView>
             <div class="col order-1 order-md-2 order-lg-2" style="display: flex; flex-direction: column;">
+                <div *ngIf="useCalendar" class="alert alert-info text-center">
+                    <div [ngClass]="{selectedDate: i === selectedDateTimeSlotIndex && !b['__show']}"
+                        *ngFor="let b of availabilitySlots; let i = index; let last = last;">
+                        <div class="m-2">
+                            Confirm Your Availability
+                            <strong>: {{ (b?.date) | date}}
+                                {{' ' + ((b?.duration?.length > 0) ? b?.duration[0] : '') }} {{' - '}}
+                                {{((b?.duration?.length > 1) ? b?.duration[1] : '') }}</strong>
+                            <div fxFlex></div>
 
-                <div class="alert alert-info text-center" *ngIf="useCalendar">
-                    Confirm Your Apointment
-                    <strong>: {{ displayDate}}</strong>
-                    <div fxFlex></div>
-                    <button mat-raised-button color="primary" *ngIf="booked" (click)="booked = false">Change</button>
-                    <button mat-raised-button color="primary" *ngIf="!booked && slotDateTime?.length > 1"
-                        (click)="booked = true">Confirm</button>
+                            <mat-icon *ngIf="b?.duration?.length > 1 && !b['__show'];"
+                                (click)="booked = true; b['__show'] = !b['__show']">
+                                check_circle</mat-icon>
+
+                            <mat-icon *ngIf="b['__show'] && b?.duration?.length > 1"
+                                (click)="booked = false; b['__show'] = !b['__show']; selectedDateTimeSlotIndex = i;">
+                                edit
+                            </mat-icon>
+
+                            <mat-icon *ngIf="!(availabilitySlots?.length <= 1)"
+                                (click)="availabilitySlots.splice(i, 1); selectedDateTimeSlotIndex = selectedDateTimeSlotIndex - 1;">
+                                delete
+                            </mat-icon>
+
+                            <mat-icon *ngIf="(b['__show'] && b?.duration?.length == 2) && last" (click)="addNewSlot()">
+                                add
+                            </mat-icon>
+                        </div>
+                    </div>
                 </div>
 
                 <div *ngIf="useCalendar" [style.order]="booked ? 2 : 1">
@@ -212,7 +233,7 @@
                 <div class="col-xs-12 col-sm-12 time-slot-wrapper" *ngIf="useCalendar && !booked">
                     <div *ngIf="slotList.length > 0; else noSlotSelected;">
                         <div class="col-6 slot-btn"
-                            [ngClass]="{ 'slot-select-box': ((slotDateTime) && (slot === slotDateTime[0]) || (slot === slotDateTime[1])) }"
+                            [ngClass]="{ 'slot-select-box': ((availabilitySlots[selectedDateTimeSlotIndex]) && (slot === availabilitySlots[selectedDateTimeSlotIndex]?.duration[0]) || (slot === availabilitySlots[selectedDateTimeSlotIndex]?.duration[1])) }"
                             (click)="selectedSlot(slot)" *ngFor="let slot of slotList">
                             {{slot}}
                         </div>

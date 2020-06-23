@@ -10,7 +10,7 @@ import { AppState } from '../../core/store/state/app.state';
 import { BreadCumb } from '../../shared/models/bredcumb.model';
 import { PostStatus } from '../../shared/models/poststatus.enum';
 import { EditorComponent } from '../../shared/components/editor/editor.component';
-import { Post } from '../../shared/models/post.model';
+import { Post, Booking, BookingSlot } from '../../shared/models/post.model';
 import { Location, isPlatformBrowser } from '@angular/common';
 import { PostService } from '../../shared/services/post.service';
 import { environment } from '../../../environments/environment';
@@ -53,6 +53,8 @@ export class AddPostComponent implements OnInit, AfterViewInit {
   public selectedDate: string;
   public displayDate = '';
   public alreadyBookedSlots = [];
+  availabilitySlots: BookingSlot[] = [{ date: moment(new Date()).format('YYYY-MM-DD') }];
+  selectedDateTimeSlotIndex = 0;
 
   /** When a user tries to tie a post with this post */
   postFromRoute: Post;
@@ -130,6 +132,9 @@ export class AddPostComponent implements OnInit, AfterViewInit {
           this.displayDate = moment(this.selectedDate).format('YYYY-MM-DD');
           this.slotDateTime = [];
           await this.getAlreadyBookedSlots(moment(this.selectedDate).format('YYYY-MM-DD'));
+
+          this.availabilitySlots[this.selectedDateTimeSlotIndex].date = this.displayDate;
+          this.availabilitySlots[this.selectedDateTimeSlotIndex].duration = this.slotDateTime;
         });
     }
   }
@@ -274,8 +279,7 @@ export class AddPostComponent implements OnInit, AfterViewInit {
       postFormValue = merge(
         postFormValue, {
         booking: {
-          availabilityDate: moment(this.selectedDate).format('YYYY-MM-DD'),
-          duration: this.slotDateTime
+          availability: this.availabilitySlots.slice()
         }
       });
     }
@@ -337,11 +341,14 @@ export class AddPostComponent implements OnInit, AfterViewInit {
     this.displayDate = date;
     if (timeSlots.length === 2) {
       if (moment(date + ' ' + timeSlots[0]) < moment(date + ' ' + timeSlots[1])) {
-        this.displayDate = date + ' ' + moment(date + ' ' + timeSlots[0]).format('hh:mm A') + ' - ' + moment(date + ' ' + timeSlots[1]).format('hh:mm A');
+        this.availabilitySlots[this.selectedDateTimeSlotIndex].duration = [timeSlots[0], timeSlots[1]];
+        // this.displayDate = date + ' ' + moment(date + ' ' + timeSlots[0]).format('hh:mm A') + ' - ' + moment(date + ' ' + timeSlots[1]).format('hh:mm A');
       } else {
         this.slotDateTime = [];
         alert('FROM time can not greater than TO time slot. Please select again');
       }
+    } else {
+      this.availabilitySlots[this.selectedDateTimeSlotIndex].duration = [timeSlots[0]];
     }
   }
 
@@ -358,6 +365,13 @@ export class AddPostComponent implements OnInit, AfterViewInit {
         console.log(this.slotList);
       }
     });
+  }
+
+  addNewSlot() {
+    this.availabilitySlots.push({ date: this.selectedDate, duration: [] });
+    this.selectedDateTimeSlotIndex = this.availabilitySlots.length - 1;
+    this.booked = false;
+    this.slotDateTime = [];
   }
 
   getBookedSlot(from: string, to: string) {

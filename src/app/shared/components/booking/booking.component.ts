@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject, AfterViewInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Post } from '../../models/post.model';
+import { Post, BookingSlot } from '../../models/post.model';
 import { User } from '../../models/user.model';
 import { UserService } from '../../../user/user.service';
 import Swal from 'sweetalert2';
@@ -22,7 +22,7 @@ export class BookingComponent implements OnInit, AfterViewInit {
   label = 'paypal';
   layout = 'horizontal';
 
-  duration: [string, string];
+  duration: any[];
   slots: string[];
   selectedFromSlot: string;
   selectedToSlot: string;
@@ -32,19 +32,19 @@ export class BookingComponent implements OnInit, AfterViewInit {
 
   constructor(
     public matDialogRef: MatDialogRef<BookingComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { post: Post, loggedInUser: User },
+    @Inject(MAT_DIALOG_DATA) public data: { post: Post, loggedInUser: User, availability: BookingSlot },
     private userService: UserService
   ) { }
 
   ngOnInit() {
 
     /** Get the availability date & duation */
-    const availabilityDate = get(this.data, 'post.booking.availabilityDate');
-    this.duration = get(this.data, 'post.booking.duration');
+    const availability = get(this.data, 'availability');
+    this.duration = availability.duration;
 
     if (this.duration) {
-      const startTime = this.parseTime(this.data.post.booking.duration[0]);
-      const endTime = this.parseTime(this.data.post.booking.duration[1]);
+      const startTime = this.parseTime(this.duration[0]);
+      const endTime = this.parseTime(this.duration[1]);
 
       /** Convert the from & to time to the 15 minutes solts */
       this.slots = this.calculate_time_slot(startTime, endTime, this.interval);

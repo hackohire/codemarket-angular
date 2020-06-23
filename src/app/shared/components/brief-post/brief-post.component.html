@@ -23,6 +23,16 @@
         </h3>
 
         <ul class="infos">
+            <ng-container *ngIf="p?.price">
+                <li *ngFor="let a of p?.booking?.availability">
+                    <!-- <button mat-raised-button color="primar"></button> -->
+                    <!-- <button mat-raised-button color="primary" *ngIf="postDetails?.price"
+                                                                    [mdePopoverTriggerFor]="bookSessionPopover" mdePopoverTriggerOn="click">RSVP</button> -->
+                    <button class="mt-1 mb-1" (click)="openBooking(a)" mat-raised-button color="primary"
+                        *ngIf="p?.price">{{ a?.date | date }} - RSVP</button>
+                </li>
+            </ng-container>
+
             <li *ngIf="p?.type">
                 <p class="data-label">Type</p>
                 <p class="info">

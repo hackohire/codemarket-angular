@@ -67,7 +67,7 @@ export class MySurveyComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    if (!this.authService.loggedInUser) {
+    if (!this.authService.loggedInUser._id) {
       this.authService.checkIfUserIsLoggedIn(true);
       this.router.navigate(['/dashboard']);
       return;
@@ -76,15 +76,18 @@ export class MySurveyComponent implements OnInit {
     const paginationObj = {
       pageNumber: 1, limit: 10,
       sort: {order: ''}};
-
-    this.formBuilderService.getMySurveyData(paginationObj, this.authService.loggedInUser._id).subscribe((res) => {
-      this.mysurveyList = res.data;
-      this.totalCount = res.total;
-      this.mysurveyList.forEach((data) => {
-        data['totalPoints'] = this.calculateTotalPoints(data.formDataJson);
-      })
-
-    });
+      
+    this.authService.loggedInUser$.subscribe((u) => {
+      if (u) {
+        this.formBuilderService.getMySurveyData(paginationObj, this.authService.loggedInUser._id).subscribe((res) => {
+          this.mysurveyList = res.data;
+          this.totalCount = res.total;
+          this.mysurveyList.forEach((data) => {
+            data['totalPoints'] = this.calculateTotalPoints(data.formDataJson);
+          })
+        });
+      }
+    })
   }
 
   calculateTotalPoints(data) {
@@ -121,7 +124,7 @@ export class MySurveyComponent implements OnInit {
       const components = keyBy(foundEle.pFormJson.formStructureJSON.components, 'key');
 
       this.sleepQualityFormObj.formName = foundEle.formname;
-      this.sleepQualitySummaryFormObj.formName = foundEle.cFormJson.formname;
+      
 
       const savedData = foundEle.formDataJson;
       let keySleepForm = Object.keys(savedData);
@@ -133,20 +136,25 @@ export class MySurveyComponent implements OnInit {
         });
       });
         
-      const summaryComponents = keyBy(foundEle.cFormJson.formStructureJSON.components, 'key')
-      const summaryFormData = foundEle.connectedFormData.formDataJson;
-      let keySummaryFormData = Object.keys(summaryFormData)
+      if (foundEle.cFormJson) {
 
-
-      keySummaryFormData.forEach((k) => {
-        this.summaryFormAnswers.push({
-          label: summaryComponents[k].label,
-          value: summaryFormData[k]
+        const summaryComponents = keyBy(foundEle.cFormJson.formStructureJSON.components, 'key')
+        const summaryFormData = foundEle.connectedFormData.formDataJson;
+        let keySummaryFormData = Object.keys(summaryFormData)
+  
+  
+        keySummaryFormData.forEach((k) => {
+          this.summaryFormAnswers.push({
+            label: summaryComponents[k].label,
+            value: summaryFormData[k]
+          });
         });
-      });
+
+        this.sleepQualitySummaryFormObj.formName = foundEle.cFormJson.formname;
+        this.sleepQualitySummaryFormObj.individualPoints = this.summaryFormAnswers;
+      }
 
       this.sleepQualityFormObj.individualPoints = this.individualPoints;
-      this.sleepQualitySummaryFormObj.individualPoints = this.summaryFormAnswers;
 
   }
 
@@ -156,12 +164,16 @@ export class MySurveyComponent implements OnInit {
       sort: { order: '' }
     };
 
-    this.formBuilderService.getMySurveyData(paginationObj, this.authService.loggedInUser._id).subscribe((res) => {
-      this.mysurveyList = res.data;
-      this.totalCount = res.total;
-      this.mysurveyList.forEach((data) => {
-        data['totalPoints'] = this.calculateTotalPoints(data.formDataJson);
-      })
+    this.authService.loggedInUser$.subscribe((u) => {
+      if (u) {
+        this.formBuilderService.getMySurveyData(paginationObj, this.authService.loggedInUser._id).subscribe((res) => {
+          this.mysurveyList = res.data;
+          this.totalCount = res.total;
+          this.mysurveyList.forEach((data) => {
+            data['totalPoints'] = this.calculateTotalPoints(data.formDataJson);
+          })
+        });
+      }
     });
 
   }

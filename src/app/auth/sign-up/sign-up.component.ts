@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
@@ -19,6 +19,8 @@ export class SignUpComponent implements OnInit {
     name: new FormControl(environment.confirm.name, [ Validators.min(2) ]),
   });
 
+  @Output() messageEvent = new EventEmitter();
+  
   get emailInput() { return this.signupForm.get('email'); }
   get passwordInput() { return this.signupForm.get('password'); }
   get nameInput() { return this.signupForm.get('name'); }
@@ -48,10 +50,11 @@ export class SignUpComponent implements OnInit {
       /** By setting up, state to "confirmSignUp" => "ConfirCodeComponent" will be loaded*/
       this.authService._authState.next({ state: 'confirmSignUp' });
       this._loader.hide();
+      this.messageEvent.emit('singUpCompleted');
     })
     .catch((error) => {
       this._loader.hide();
-
+      this.messageEvent.emit('singUpCompleted');
       /** Will Log the error on bottom of the page */
       this._notification.show(error.message);
       switch (error.code) {

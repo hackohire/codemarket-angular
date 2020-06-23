@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import Auth, { CognitoUser } from '@aws-amplify/auth';
 // import { NotificationService } from 'src/app/services/notification.service';
@@ -23,6 +23,8 @@ export class SignInComponent {
 
   hide = true;
 
+  @Output() messageEvent = new EventEmitter();
+
   get emailInput() { return this.signinForm.get('email'); }
   get passwordInput() { return this.signinForm.get('password'); }
 
@@ -40,6 +42,7 @@ export class SignInComponent {
     this.auth.signIn(this.emailInput.value, this.passwordInput.value)
       .then((user: CognitoUser|any) => {
         this._loader.hide();
+        this.messageEvent.emit("signInCompleted");
         if (user && user.challengeName === 'NEW_PASSWORD_REQUIRED') {
           this._loader.show();
           environment.confirm.email = this.emailInput.value;
@@ -48,7 +51,8 @@ export class SignInComponent {
             email: environment.confirm.email,
           }).then(a => {
             this._loader.hide();
-            console.log(a);
+            this.messageEvent.emit("signInCompleted");
+            console.log("**********",a);
           }).catch(e => {
             console.log(e);
             this._loader.hide();

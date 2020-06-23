@@ -58,7 +58,6 @@ export class ChatFullUiComponent implements OnInit, AfterViewInit {
       // }, {}),
       // map(v => Object.values(v)),
       tap(list => {
-        console.log(list);
         this.drawer.open();
         this.authService.navigationPostList$.next(this.authService.navigationPostList$.value.concat(list));
       }),

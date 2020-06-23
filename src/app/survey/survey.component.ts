@@ -39,7 +39,6 @@ export class SurveyDialogComponent implements OnInit {
     }
 
   ngOnInit() {
-    console.log('123 ==> ', this.authState);
     this.surveyUserFrom = new FormGroup({
       firstName: new FormControl('', Validators.required),
       lastName: new FormControl('', Validators.required),
@@ -54,6 +53,11 @@ export class SurveyDialogComponent implements OnInit {
   onSubmitClick() {
     this.dialogRef.close(this.surveyUserFrom.value);
   }
+
+  receiveMessage($event) {
+    console.log("Message received from the singIn ==> ", $event);
+    this.dialogRef.close();
+  }  
 }
 
 
@@ -210,14 +214,14 @@ export class SurveyComponent implements OnInit {
 
 
     if (!this.authService.loggedInUser) {
-      this.authService.checkIfUserIsLoggedIn(true);
-      return;
-      // const dialogRef = this.dialog.open(SurveyDialogComponent, {
-      //   data : {
-      //     formDataJson: result,
-      //     formDetails: this.formDetails,
-      //   }
-      // });
+      // this.authService.checkIfUserIsLoggedIn(true);
+      // return;
+      const dialogRef = this.dialog.open(SurveyDialogComponent, {
+        data : {
+          formDataJson: result,
+          formDetails: this.formDetails,
+        }
+      });
 
       // dialogRef.afterClosed().subscribe(formObj => {
       //   if (formObj) {

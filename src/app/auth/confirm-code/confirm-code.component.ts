@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
@@ -21,6 +21,8 @@ export class ConfirmCodeComponent implements OnInit {
   
   get codeInput() { return this.confirmForm.get('code'); }
 
+  @Output() messageEvent = new EventEmitter();
+
   constructor( private _notification: NotificationService, public authService: AuthService) { }
 
   ngOnInit() {
@@ -41,6 +43,7 @@ export class ConfirmCodeComponent implements OnInit {
           Auth.signIn(this.email, environment.confirm.password)
             .then(() => {
               this.authService._authState.next({state: 'signedId'});
+              this.messageEvent.emit('signedIn');
               // this._router.navigate(['']);
             }).catch((error: any) => {
 

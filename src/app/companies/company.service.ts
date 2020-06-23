@@ -357,6 +357,25 @@ export class CompanyService {
     );
   }
 
+  sendTweets(content: String) {
+    return this.apollo.mutate(
+      {
+        mutation: gql`
+          mutation createTwitterPost($content: String) {
+            createTwitterPost(content: $content) {
+              content
+            }
+          }
+        `,
+        variables: {
+          content
+        }
+      }
+    ).pipe(
+      map((p: any) => p.data.updateCompany),
+    );
+  }
+
   redirectToCompanyDetails(companyId: string, slug: string, view = 'posts') {
     this.router.navigate(['/', `company`, slug],
       { queryParams: { view, id: companyId } }

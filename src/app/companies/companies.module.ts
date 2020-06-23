@@ -8,6 +8,7 @@ import { CompaniesListComponent } from './companies-list/companies-list.componen
 import { AuthGuard } from '../shared/guards/auth.guard';
 import { CompanyDetailsComponent, ReplyDialogComponent } from './company-details/company-details/company-details.component';
 import { MaterialFileInputModule } from 'ngx-material-file-input';
+import { SocialMediaReplyComponent } from './social-media-reply/social-media-reply.component';
 
 const companyRoutes: Routes = [
   {
@@ -39,9 +40,9 @@ const companyRoutes: Routes = [
 ];
 
 @NgModule({
-  declarations: [CompaniesComponent, CompanyDetailsComponent, AddCompanyComponent, ReplyDialogComponent],
+  declarations: [CompaniesComponent, CompanyDetailsComponent, AddCompanyComponent, ReplyDialogComponent, SocialMediaReplyComponent],
   entryComponents: [
-    ReplyDialogComponent
+    ReplyDialogComponent, SocialMediaReplyComponent
   ],
   imports: [
     CommonModule,

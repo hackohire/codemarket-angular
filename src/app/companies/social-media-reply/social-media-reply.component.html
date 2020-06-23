@@ -1,0 +1,18 @@
+<div class="socialMedia">
+    <div class="row">
+        <div class="col-md-2 icon">
+            <i class="fab fa-twitter"></i>
+        </div>
+        <div class="col-md-9 companyTitle">
+           {{data.companyName}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 mt-3 mb-3">
+            <mat-form-field class="field-full-width">
+                <textarea type="text" [(ngModel)]="socialMediaDesc" matInput placeholder="What's Happening ..."></textarea>
+            </mat-form-field>
+        </div>
+    </div>
+    <button mat-raised-button class="social-btn" (click)="sendTweet()">Tweet</button>
+</div>

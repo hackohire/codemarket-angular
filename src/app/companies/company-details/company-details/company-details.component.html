@@ -34,9 +34,9 @@
                     <div class="social" fxLayout="row wrap" fxLayoutGap="10px" fxLayoutAlign="center start">
                         <a [href]="details?.facebookLink" target="_blank" style="color: inherit;"><i
                                 class="fab fa-facebook"></i></a>
-                        <a [href]="details?.twitterLink" target="_blank" style="color: inherit;"><i
+                        <a (click)="openSocialMediaModel()" style="color: inherit;"><i
                                 class="fab fa-twitter"></i></a>
-                        <a [href]="details?.linkedinLink" target="_blank" style="color: inherit;"><i
+                        <a style="color: inherit;"><i
                                 class="fab fa-linkedin"></i></a>
                         <a [href]="details?.yelpLink" target="_blank" style="color: inherit;"><i
                                 class="fab fa-yelp"></i></a>

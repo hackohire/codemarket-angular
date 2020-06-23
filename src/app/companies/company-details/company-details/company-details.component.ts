@@ -27,6 +27,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import Swal from 'sweetalert2';
 import { EmailService } from 'src/app/email/email.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { SocialMediaReplyComponent } from '../../social-media-reply/social-media-reply.component';
 
 @Component({
   selector: 'reply-dialog',
@@ -902,6 +903,13 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
     this.emailService.getMailingListContacts(paginationObj, this.batchId, searchObj).subscribe((res) => {
       this.contactList = res.contacts;
       this.totalContactCount = res.total;
+    });
+  }
+
+  openSocialMediaModel() {
+    const videoDialog = this.dialog.open(SocialMediaReplyComponent, {
+      minWidth: '40vw',
+      data: { type: 'twitter', companyName: this.companyDetails.name }
     });
   }
 }

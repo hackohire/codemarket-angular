@@ -126,15 +126,15 @@
                     <!-- Mainling List -->
                     <div class="add-form-area common-box-shadow" *ngIf="mailingList?.length > 0">
                         <h4>Mailing List</h4>
-                            <!-- <div style="border: 1px solid; margin-top: 5px;" *ngFor="let m of mailingList; let i = index;">
+                        <!-- <div style="border: 1px solid; margin-top: 5px;" *ngFor="let m of mailingList; let i = index;">
                                 <h5>{{m?.name}}</h5>
                             </div> -->
-                            <button type="button" (click)="reDirectToMailingList(m?._id)" *ngFor="let m of mailingList; let i = index;"
-                            mat-raised-button color="primary" [ngClass]="batchId === m?._id ? 'selected-mailing-list' : ''"
-                            style="width: 100%; height: auto; margin-top: 5px; white-space: normal; white-space: normal;
+                        <button type="button" (click)="reDirectToMailingList(m?._id)"
+                            *ngFor="let m of mailingList; let i = index;" mat-raised-button color="primary"
+                            [ngClass]="batchId === m?._id ? 'selected-mailing-list' : ''" style="width: 100%; height: auto; margin-top: 5px; white-space: normal; white-space: normal;
                             word-wrap: break-word;">{{m?.name}}</button>
                     </div>
-                    
+
                     <app-post-type-nav *ngIf="false" [selectedPostType]="companyView" [customTabs]="customTabs"
                         (postTypeClick)="selectMainCategory($event);" (plusButtonClick)="redirectToAddPost($event)">
                     </app-post-type-nav>
@@ -249,11 +249,14 @@
                         </div>
                     </div>
 
-                    
+
 
                     <!--  *ngIf="!hideTabs" -->
-                    <mat-tab-group mat-align-tabs="center" [selectedIndex]="tabIndex" (selectedIndexChange)="informChange($event)">
+                    <mat-tab-group mat-align-tabs="center" [selectedIndex]="tabIndex"
+                        (selectedIndexChange)="informChange($event)">
                         <!-- [label]="!hideTabs ? 'Posts' : 'Contacts'" -->
+
+                        <!-- List Of Posts Related to companies -->
                         <mat-tab label="Posts">
                             <div class="row">
                                 <div [ngClass]="selectedBlock ? 'col-md-8 col-lg-8' : 'col-lg-12 col-md-12'">
@@ -317,7 +320,7 @@
                                         </ng-container>
                                     </div>
 
-                                   
+
 
                                     <div *ngIf="details?.createdBy?.name && companyView === 'creator'"
                                         class="author-card sidebar-card">
@@ -430,9 +433,14 @@
                                 </div>
                             </div>
                         </mat-tab>
-                    <!-- </mat-tab-group> -->
 
-                    <!-- <mat-tab-group mat-align-tabs="center"> -->
+                        <!-- List of all companies -->
+                        <mat-tab label="Companies">
+                            <app-companies-list [all]="true"></app-companies-list>
+                        </mat-tab>
+                        <!-- </mat-tab-group> -->
+
+                        <!-- <mat-tab-group mat-align-tabs="center"> -->
                         <!-- Save and Send emails tab -->
                         <mat-tab label="Mailing List" *ngIf="!hideTabs">
                             <div class="row">
@@ -518,8 +526,8 @@
                                 </div>
                             </div>
                         </mat-tab>
-                    <!-- </mat-tab-group> -->
-                    <!-- <mat-tab-group mat-align-tabs="center"> -->
+                        <!-- </mat-tab-group> -->
+                        <!-- <mat-tab-group mat-align-tabs="center"> -->
                         <!-- Track emails tab -->
                         <mat-tab label="Campaigns" *ngIf="!hideTabs">
                             <div class="row">
@@ -527,12 +535,11 @@
                                     <div class="row">
                                         <div [formGroup]="trackEmailForm" class="add-form-area common-box-shadow">
                                             <h2>Campaigns</h2>
-                                            
+
                                             <div class="row">
                                                 <div class="col-md-4" *ngFor="let c of campaignData;let i=index">
                                                     <button type="button" (click)="getCampaignData(c?.batchId)"
-                                                    mat-raised-button color="primary"
-                                                    style="width: 100%; height: auto; margin-top: 5px; white-space: normal; white-space: normal;
+                                                        mat-raised-button color="primary" style="width: 100%; height: auto; margin-top: 5px; white-space: normal; white-space: normal;
                                                     word-wrap: break-word;">{{c?.name}}</button>
                                                 </div>
 
@@ -608,7 +615,7 @@
                                 </div>
                             </div>
                         </mat-tab>
-                        
+
                         <div *ngIf="companyView === 'contact'">
                             <ng-container *ngTemplateOutlet="contactTemplate; context: details">
                             </ng-container>
@@ -841,13 +848,11 @@
                 style="width: auto; height: auto;margin: 10px;">{{ 'Add Mailing List' }}</button>
             <mat-form-field style="margin-left: 10px;">
                 <mat-label>Company Name</mat-label>
-                <input matInput [formControl]="companyName"
-                        placeholder="Company Name">
+                <input matInput [formControl]="companyName" placeholder="Company Name">
             </mat-form-field>
             <mat-form-field style="margin-left: 10px;">
                 <mat-label>Status</mat-label>
-                <input matInput [formControl]="status"
-                        placeholder="Status">
+                <input matInput [formControl]="status" placeholder="Status">
             </mat-form-field>
             <button type="button" mat-raised-button color="primary" (click)="searchClick()"
                 style="width: auto; height: auto; margin: 10px;">{{ 'Search' }}</button>
@@ -919,8 +924,7 @@
             </tbody>
         </table>
     </div>
-    <app-paginator [length]="totalContactCount"
-        (fetchData)="paginator = $event; fetchContactsRelatedtoMailingList()">
+    <app-paginator [length]="totalContactCount" (fetchData)="paginator = $event; fetchContactsRelatedtoMailingList()">
     </app-paginator>
 </ng-template>
 

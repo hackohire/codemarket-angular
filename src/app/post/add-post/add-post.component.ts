@@ -10,7 +10,7 @@ import { AppState } from '../../core/store/state/app.state';
 import { BreadCumb } from '../../shared/models/bredcumb.model';
 import { PostStatus } from '../../shared/models/poststatus.enum';
 import { EditorComponent } from '../../shared/components/editor/editor.component';
-import { Post } from '../../shared/models/post.model';
+import { Post, Booking, BookingSlot } from '../../shared/models/post.model';
 import { Location, isPlatformBrowser } from '@angular/common';
 import { PostService } from '../../shared/services/post.service';
 import { environment } from '../../../environments/environment';
@@ -18,6 +18,8 @@ import { AppointmentService } from 'src/app/shared/services/appointment.service'
 import { PostType } from '../../shared/models/post-types.enum';
 import { appConstants } from '../../shared/constants/app_constants';
 import { isNullOrUndefined } from 'util';
+import { merge } from 'lodash';
+import { MatPaginator } from '@angular/material';
 @Component({
   selector: 'app-add-post',
   templateUrl: './add-post.component.html',
@@ -26,7 +28,16 @@ import { isNullOrUndefined } from 'util';
 })
 export class AddPostComponent implements OnInit, AfterViewInit {
 
-  s3Bucket = environment.s3FilesBucketURL;
+  @ViewChild('descriptionEditor', { static: false }) descriptionEditor: EditorComponent;
+
+  subscription$ = new Subscription();
+
+  anonymousAvatar = '../../../../assets/images/anonymous-avatar.jpg';
+  s3FilesBucketURL = environment.s3FilesBucketURL;
+
+  // HIDE SHOW SIDEBAR
+  public show = true;
+  public buttonName: any = 'Hide';
 
   breadcumb: BreadCumb;
   postForm: FormGroup;
@@ -42,6 +53,8 @@ export class AddPostComponent implements OnInit, AfterViewInit {
   public selectedDate: string;
   public displayDate = '';
   public alreadyBookedSlots = [];
+  availabilitySlots: BookingSlot[] = [{ date: moment(new Date()).format('YYYY-MM-DD') }];
+  selectedDateTimeSlotIndex = 0;
 
   /** When a user tries to tie a post with this post */
   postFromRoute: Post;
@@ -65,14 +78,12 @@ export class AddPostComponent implements OnInit, AfterViewInit {
     return this.postForm.get('status');
   }
 
-  @ViewChild('descriptionEditor', { static: false }) descriptionEditor: EditorComponent;
-
-  subscription$ = new Subscription();
-
-  anonymousAvatar = '../../../../assets/images/anonymous-avatar.jpg';
-  s3FilesBucketURL = environment.s3FilesBucketURL;
-
   booked = false;
+
+  showPosts = false;
+  totalPosts: number;
+  listOfPosts: { posts: Post[], total?: number } = { posts: [] };
+  paginator: MatPaginator;
 
   /** Feature Variables */
   useCalendar: boolean;
@@ -121,6 +132,9 @@ export class AddPostComponent implements OnInit, AfterViewInit {
           this.displayDate = moment(this.selectedDate).format('YYYY-MM-DD');
           this.slotDateTime = [];
           await this.getAlreadyBookedSlots(moment(this.selectedDate).format('YYYY-MM-DD'));
+
+          this.availabilitySlots[this.selectedDateTimeSlotIndex].date = this.displayDate;
+          this.availabilitySlots[this.selectedDateTimeSlotIndex].duration = this.slotDateTime;
         });
     }
   }
@@ -156,6 +170,16 @@ export class AddPostComponent implements OnInit, AfterViewInit {
     );
   }
 
+  toggleDisplay() {
+    this.show = !this.show;
+    // CHANGE THE NAME OF THE BUTTON.
+    if (this.show) {
+      this.buttonName = 'Hide';
+    } else {
+      this.buttonName = 'Show';
+    }
+  }
+
   redirectToAddPost(postType) {
     this.router.navigate(['./post/add-post'], { queryParams: { type: postType } });
   }
@@ -183,7 +207,6 @@ export class AddPostComponent implements OnInit, AfterViewInit {
 
       case PostType.Appointment:
         this.useCalendar = true;
-        this.postForm.addControl('cancelReason', new FormControl(i && i.cancelReason ? i.cancelReason : ''));
         break;
 
       case PostType.Survey:
@@ -193,9 +216,6 @@ export class AddPostComponent implements OnInit, AfterViewInit {
 
       case PostType.Mentor:
         this.useCalendar = true;
-        this.postForm.addControl('mentor', new FormGroup({
-          availabilityDate: new FormControl(i && i.mentor && i.mentor.availabilityDate ? i.mentor.availabilityDate : [])
-        }));
         break;
 
       case PostType.Job:
@@ -255,16 +275,13 @@ export class AddPostComponent implements OnInit, AfterViewInit {
 
   /** Set Values Based On the Post Type Before Adding Post */
   setValuesBeforeSubmit(postFormValue) {
-    switch (this.postType) {
-      case PostType.Appointment:
-        postFormValue.appointment_date = moment(this.selectedDate).format('YYYY-MM-DD');
-        postFormValue.duration = this.slotDateTime;
-        break;
-
-      case PostType.Mentor:
-        postFormValue.mentor.availabilityDate = moment(this.selectedDate).format('YYYY-MM-DD');
-        postFormValue.mentor.duration = this.slotDateTime;
-        break;
+    if (this.useCalendar) {
+      postFormValue = merge(
+        postFormValue, {
+        booking: {
+          availability: this.availabilitySlots.slice()
+        }
+      });
     }
   }
 
@@ -324,11 +341,14 @@ export class AddPostComponent implements OnInit, AfterViewInit {
     this.displayDate = date;
     if (timeSlots.length === 2) {
       if (moment(date + ' ' + timeSlots[0]) < moment(date + ' ' + timeSlots[1])) {
-        this.displayDate = date + ' ' + moment(date + ' ' + timeSlots[0]).format('hh:mm A') + ' - ' + moment(date + ' ' + timeSlots[1]).format('hh:mm A')
+        this.availabilitySlots[this.selectedDateTimeSlotIndex].duration = [timeSlots[0], timeSlots[1]];
+        // this.displayDate = date + ' ' + moment(date + ' ' + timeSlots[0]).format('hh:mm A') + ' - ' + moment(date + ' ' + timeSlots[1]).format('hh:mm A');
       } else {
         this.slotDateTime = [];
         alert('FROM time can not greater than TO time slot. Please select again');
       }
+    } else {
+      this.availabilitySlots[this.selectedDateTimeSlotIndex].duration = [timeSlots[0]];
     }
   }
 
@@ -339,12 +359,19 @@ export class AddPostComponent implements OnInit, AfterViewInit {
       if (data.appointment.length > 0) {
         data.appointment.map((slot) => {
           this.getBookedSlot(slot.duration[0], slot.duration[1]);
-        })
+        });
         console.log(this.alreadyBookedSlots);
         this.slotList = this.slotList.filter((slot) => !this.alreadyBookedSlots.includes(slot));
         console.log(this.slotList);
       }
     });
+  }
+
+  addNewSlot() {
+    this.availabilitySlots.push({ date: this.selectedDate, duration: [] });
+    this.selectedDateTimeSlotIndex = this.availabilitySlots.length - 1;
+    this.booked = false;
+    this.slotDateTime = [];
   }
 
   getBookedSlot(from: string, to: string) {
@@ -374,5 +401,23 @@ export class AddPostComponent implements OnInit, AfterViewInit {
 
   setPrice(event) {
     this.postForm.get('price').setValue((+event.target.value).toFixed(2));
+  }
+
+  /** Get the list of posts based on the post type */
+  getConnectedPosts() {
+    if (this.paginator) {
+      const paginationObj = {
+        pageNumber: this.paginator.pageIndex + 1, limit: this.paginator.pageSize ? this.paginator.pageSize : 10,
+        sort: { order: '' }
+      };
+
+      this.postService.getAllPosts(
+        paginationObj, this.postType,
+        null
+      ).subscribe((u) => {
+        this.listOfPosts.posts = u.posts;
+        this.totalPosts = u.total;
+      });
+    }
   }
 }

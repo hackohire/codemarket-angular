@@ -1,6 +1,10 @@
 :host ::ng-deep {
     .ck.ck-toolbar {
-        top: 145px !important;
+        top: 145px;
+    }
+
+    .selectedDate {
+        border: 2px dashed #03b9fd;
     }
 
     .docs-component-viewer-nav.common-box-shadow {
@@ -59,8 +63,23 @@
         height: -webkit-fill-available;
         z-index: 8;
     }
+    .metaboxbtn {
+        float: right;
+        color: #00aeef !important;
+    }
+    .metabox {
+        position: sticky;
+        top: 60px;
+        display: block;
+        height: -webkit-fill-available;
+        z-index: 8;
+        margin-top: 10px;
+    }
 
     @media (max-width: 767px) {
+        .metaboxbtn {
+            display: none;
+        }
         .sidebar {
             top: 0 !important;
             position: relative;
@@ -73,8 +92,8 @@
         }
         .breadcrumb-area {
             // z-index: 18 !important;
-            top: 0 !important;
-            position: relative !important;
+            top: 90px;
+            // position: relative !important;
             width: 100% !important;
             background: #fff !important;
         }
@@ -88,8 +107,8 @@
         }
         .ck.ck-toolbar {
             // position: sticky !important;
-            // top: 0 !important;
-            z-index: 20;
+            top: 200px !important;
+            z-index: 8 !important;
         }
         .ck.ck-toolbar.ck-toolbar_grouping>.ck-toolbar__items {
             overflow-x: auto;

@@ -1,0 +1,57 @@
+<div>
+    <div fxLayout="row">
+        <!-- Heading -->
+        <div fxFlex>
+            <h4>Book Session (15 Min)</h4>
+        </div>
+
+        <!-- Close Button -->
+        <div mat-dialog-close>
+            <mat-icon class="pl-2" style="vertical-align: middle;">close</mat-icon>
+        </div>
+    </div>
+
+    <!-- Show Date & Time Availability to the author -->
+    <p class="info mb-1">
+        <mat-icon style="vertical-align: middle;">date_range</mat-icon>
+        {{ data?.availability?.date | date }}
+        {{ duration[0] ? ' From: ' + duration[0] : ''}}
+        {{ duration[0] ? ' To: ' + duration[1] : ''}}
+    </p>
+
+    <!-- Price -->
+    <p class="m-0">
+        <mat-icon style="vertical-align: middle;">attach_money</mat-icon>
+        {{ data?.post?.price }}
+    </p>
+
+    <!-- When slot is selected, show from and to time -->
+    <p class="m-0" *ngIf="selectedFromSlot">
+        <mat-icon style="vertical-align: middle;">watch_later</mat-icon>
+        {{ selectedFromSlot + ' - ' + selectedToSlot }}
+    </p>
+
+    <!-- SLOTS -->
+    <div class="col-xs-12 col-sm-12 time-slot-wrapper mt-2 mb-2">
+        <div *ngIf="slots.length > 0; else noSlotSelected;">
+            <div [ngClass]="{ 'slot-select-box': (selectedFromSlot === slot || selectedToSlot === slot) }"
+                class="col-6 slot-btn" (click)="selectSlot(slot, i, l)"
+                *ngFor="let slot of slots; let i = index; let l = last">
+                {{slot}}
+            </div>
+        </div>
+        <ng-template class="no-slot" #noSlotSelected>
+            <span>Please Select Date</span>
+        </ng-template>
+    </div>
+
+    <!-- If price is more than 0 show paypal button otherwise confirm button -->
+    <div *ngIf="showPaypal && data?.post?.price >= 1; else confirm">
+        <div id="paypal-button-container"></div>
+    </div>
+
+    <ng-template #confirm>
+        <button *ngIf="selectedFromSlot" mat-raised-button color="primary">Confirm</button>
+    </ng-template>
+
+</div>

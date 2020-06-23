@@ -10,6 +10,18 @@ export interface Tag {
     campaignId?: string;
 }
 
+export interface BookingSlot {
+    date: string;
+    duration?: any[];
+}
+
+export interface Booking {
+    availability?: BookingSlot[];
+    // duration?: string[];
+    status?: string;
+    requestBy?: string[];
+}
+
 export interface Mentor {
     topics?: Tag[];
     availabilityDate?: string;
@@ -69,7 +81,8 @@ export interface Post {
     appointment_date?: [string];
     cancelReason?: [string];
 
+    booking?: Booking;
     mentor?: Mentor;
     job?: Job;
-    formStructureJSON?: FormJson
+    formStructureJSON?: FormJson;
 }

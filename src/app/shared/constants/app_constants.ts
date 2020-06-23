@@ -284,6 +284,8 @@ export const appConstants = {
         message
       }
 
+      booking
+      
       appointment_date
       cancelReason
       duration

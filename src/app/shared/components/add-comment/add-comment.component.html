@@ -3,13 +3,13 @@
     <!-- comment reply -->
     <div class="media comment-form">
         <div class="media-left">
-            <a href="#">
-                <img class="author_avatar_comment" width="45px" style="width: 45px; height: 45px;"
+            <a href="#" style="display: block; width: 45px;">
+                <img class="author_avatar_comment" style="width: 45px; height: 45px;"
                     [src]="authService?.loggedInUser?.avatar ? ((s3FilesBucketURL + authService?.loggedInUser?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
                     alt="Commentator Avatar">
             </a>
         </div>
-        <div class="media-body" style="width: -webkit-fill-available;">
+        <div class="media-body" style="width: calc(100% - 55px);">
             <div [formGroup]="commentForm" class="comment-reply-form">
                 
                 

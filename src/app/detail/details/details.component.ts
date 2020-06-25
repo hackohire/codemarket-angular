@@ -36,10 +36,6 @@ import { BookingComponent } from '../../shared/components/booking/booking.compon
 })
 export class DetailsComponent implements OnInit, OnDestroy {
 
-  // HIDE SHOW SIDEBAR
-  public show = true;
-  public buttonName: any = 'Hide';
-
   @ViewChild('successfulRSVP', { static: false }) successfulRSVP: SwalComponent;
   details$: Observable<Post>;
 
@@ -470,6 +466,10 @@ export class DetailsComponent implements OnInit, OnDestroy {
       disableClose: true
     });
   }
+
+  // HIDE SHOW SIDEBAR
+  public show = true;
+  public buttonName: any = 'Hide';
 
   toggleDisplay() {
     this.show = !this.show;

@@ -3322,8 +3322,18 @@ a {
 	--- BREADCRUMB
 *****************************/
 .breadcrumb-area {
-  position: relative;
+  position: sticky;
+  top: 48px;
+  z-index: 22;
   padding-top: 64px;
+}
+
+@media screen and ( max-width: 767px ) {
+  .breadcrumb-area {
+    position: relative;
+    top: 0;
+    z-index: 1;
+  }
 }
 
 .breadcrumb-area:before {

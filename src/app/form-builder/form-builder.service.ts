@@ -51,19 +51,28 @@ export class FormBuilderService {
     this.router.navigate(['/', 'form-builder']);
   }
 
-  fetchformJson(): Observable<any> {
+  fetchformJson(userId: String): Observable<any> {
     return this.apollo.query({
       query: gql`
-        query fetchformJson {
-          fetchformJson{
+        query fetchformJson ($userId: String){
+          fetchformJson(userId: $userId) {
+            _id
             formname
             formStructureJSON
-            _id
+            connectedDB {
+              name
+              mongoUrl
+            }
+            createdBy {
+              _id
+              name
+            }
           }
         }
       `,
       fetchPolicy: 'no-cache',
       variables: {
+        userId
       }
     }).pipe(
       map((q: any) => q.data.fetchformJson)
@@ -93,19 +102,28 @@ export class FormBuilderService {
     this.router.navigate(['/', 'dashboard']);
   }
 
-  fetchformData(formname: string): Observable<any> {
+  fetchformData(pageOptions, formId: string): Observable<any> {
     return this.apollo.query({
       query: gql`
-        query fetchformData($formname: String) {
-          fetchformData(formname: $formname){
-            _id
-            formname
-            formDataJson
+        query fetchformData($pageOptions: PageOptionsInput, $formId: String) {
+          fetchformData(pageOptions: $pageOptions, formId: $formId){
+            total
+            data {
+              _id
+              formname
+              formDataJson
+              createdBy {
+                _id
+                name
+              }
+            }
           }
         }
       `,
+      fetchPolicy: 'no-cache',
       variables: {
-        formname
+        pageOptions,
+        formId
       }
     }).pipe(
       map((q: any) => q.data.fetchformData)
@@ -156,6 +174,25 @@ export class FormBuilderService {
       }
     }).pipe(
       map((q: any) => q.data.addIntoAnotherDB)
+    );
+  }
+
+  deleteFormJson(formId: string): Observable<boolean> {
+    return this.apollo.mutate(
+      {
+        mutation: gql`
+          mutation deleteFormJson($formId: String) {
+            deleteFormJson(formId: $formId)
+          }
+        `,
+        variables: {
+          formId
+        }
+      }
+    ).pipe(
+      map((p: any) => {
+        return p.data.deleteFormJson;
+      }),
     );
   }
 }

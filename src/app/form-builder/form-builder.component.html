@@ -34,8 +34,11 @@
           [routerLink]="['/', 'add-form-data', form.formname, form._id]">
           <mat-icon>assignment</mat-icon>
         </button>
-        <button mat-mini-fab color="primary" [routerLink]="['/', 'view-form-data-list', form.formname, form._id]">
+        <button mat-mini-fab color="primary" [routerLink]="['/', 'view-form-data-list', form._id]">
           <mat-icon>view_agenda</mat-icon>
+        </button>
+        <button *ngIf="form?.createdBy?._id === authService?.loggedInUser?._id" mat-mini-fab color="warn" (click)="deleteFormJson(form._id)">
+            <mat-icon>delete</mat-icon>
         </button>
       </td>
     </ng-container>

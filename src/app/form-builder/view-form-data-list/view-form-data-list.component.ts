@@ -20,9 +20,11 @@ export class ViewFormDataListComponent implements OnInit {
   @Input() formName = '';
   valueList = [];
   keyList = [];
+  formId;
+  totalCount;
 
   constructor(private formBuilderService: FormBuilderService, private activatedRoute: ActivatedRoute) {
-    this.formName = this.activatedRoute.snapshot.params['formname'];
+    this.formId = this.activatedRoute.snapshot.params['formId'];
    }
 
    ngOnInit() {
@@ -30,14 +32,34 @@ export class ViewFormDataListComponent implements OnInit {
       title: 'Form Data List',
     };
 
-    this.formDataListSubscription = this.formBuilderService.fetchformData(this.formName).subscribe((formDatalist) => {
-      console.log(formDatalist);
-      for (let data of formDatalist) {
-          this.valueList.push(data.formDataJson);
-      }
-      this.displayedColumns = Object.keys(this.valueList[0]);
-      this.dataSource.data = this.valueList;
+    const paginationObj = {
+      pageNumber: 1, limit: 10,
+      sort: { order: '' }
+    };
+
+    this.formDataListSubscription = this.formBuilderService.fetchformData(paginationObj, this.formId).subscribe((res) => {
+      console.log(res);
+
+      this.valueList = res.data;
+      this.totalCount = res.total;
+
+      this.valueList.forEach((data) => {
+        data['totalPoints'] = this.calculateTotalPoints(data.formDataJson);
+      })
+
     });
+  }
+
+  calculateTotalPoints(data) {
+    let totalPoint = 0;
+    const values = Object.values(data);
+      values.forEach((v: any) => {
+        if (parseInt(v)) {
+          totalPoint += v;
+        }
+      });
+    
+    return totalPoint;
   }
 
 }

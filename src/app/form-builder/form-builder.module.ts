@@ -23,7 +23,7 @@ const contactRoutes: Routes = [
         loadChildren: () => import('./add-form-data/add-form-data.module').then(module => module.AddFormDataModule),
       },
       {
-        path: 'view-form-data-list/:formname/:formId',
+        path: 'view-form-data-list/:formId',
         component: ViewFormDataListComponent
       },
       {

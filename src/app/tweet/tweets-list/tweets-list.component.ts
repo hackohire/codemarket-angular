@@ -49,12 +49,12 @@ export class TweetsListComponent implements OnInit {
         if (u) {
           this.tweetService.fetchTweets(u._id).subscribe(e => {
             console.log("Inside getTweets");
-            console.log(e);
+            //console.log(e);
             this.tweetsList = e;
             this.listOfTweets.tweets = e;
             this.listOfTweets.total = e.length;
             this.listOfTweets.currentUser = u;
-            console.log('List '+this.listOfTweets.total);
+            //console.log('List '+this.listOfTweets.total);
           });
         }
       // }

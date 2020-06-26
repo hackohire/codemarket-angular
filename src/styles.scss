@@ -152,11 +152,14 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .mat-drawer.mat-drawer-side {
   z-index: 2;
-  box-shadow: 0 0 10px 0 #666;
+  // box-shadow: 0 0 10px 0 #666;
+  box-shadow: none;
+  border-right: 1px solid #ccc;
 }
 
 mat-sidenav-content.mat-drawer-content.mat-sidenav-content {
-  margin-left: 0 !important;
+  // margin-left: 0 !important;
+  overflow-x: hidden;
 }
 
 tr.mat-header-row {

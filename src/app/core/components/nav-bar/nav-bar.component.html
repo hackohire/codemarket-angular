@@ -6,7 +6,8 @@
     [opened]="(isHandset$ | async) === false" [ngStyle.lt-sm]="{'width.px': '375'}">
     <mat-toolbar
       style="height: 48px; font-size: 14px; font-weight: 400; letter-spacing: 4px; text-transform: uppercase; color: #999; background: #eee;padding-right: 110px;place-content: inherit;">
-      <mat-icon (click)="drawer.toggle()" style="margin-right: 15px;">clear</mat-icon> navigation
+      <mat-icon (click)="drawer.toggle()" style="margin-right: 15px;">clear</mat-icon>
+       navigation
       {{'(' + authService.postUpdateCount + ')'}}
     </mat-toolbar>
 
@@ -25,7 +26,7 @@
 
   <mat-sidenav-content>
 
-    <mat-toolbar class="NavBarBox" style="place-content: flex-start; padding-left: 5px;">
+    <mat-toolbar class="NavBarBox" style="place-content: flex-start;padding-left: 5px;">
 
       <!-- Toggle Sidebar Button -->
       <button *ngIf="true" type="button" aria-label="Toggle sidenav" mat-icon-button (click)="toggleNavbar()"

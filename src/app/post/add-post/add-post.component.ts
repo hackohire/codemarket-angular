@@ -36,8 +36,18 @@ export class AddPostComponent implements OnInit, AfterViewInit {
   s3FilesBucketURL = environment.s3FilesBucketURL;
 
   // HIDE SHOW SIDEBAR
-  public show = true;
-  public buttonName: any = 'Hide';
+  public show = false;
+  //public buttonName: any = 'Hide';
+
+  toggleDisplay() {
+    this.show = !this.show;
+    // CHANGE THE NAME OF THE BUTTON.
+    // if (this.show) {
+    //   this.buttonName = 'Hide';
+    // } else {
+    //   this.buttonName = 'Show';
+    // }
+  }
 
   breadcumb: BreadCumb;
   postForm: FormGroup;
@@ -168,16 +178,6 @@ export class AddPostComponent implements OnInit, AfterViewInit {
         }
       })
     );
-  }
-
-  toggleDisplay() {
-    this.show = !this.show;
-    // CHANGE THE NAME OF THE BUTTON.
-    if (this.show) {
-      this.buttonName = 'Hide';
-    } else {
-      this.buttonName = 'Show';
-    }
   }
 
   redirectToAddPost(postType) {

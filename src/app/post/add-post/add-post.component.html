@@ -76,44 +76,6 @@
                     <svg xmlns="http://www.w3.org/2000/svg" id="Capa_1" enable-background="new 0 0 515.555 515.555" height="30px" viewBox="0 0 515.555 515.555" width="30px"><path d="m496.679 212.208c25.167 25.167 25.167 65.971 0 91.138s-65.971 25.167-91.138 0-25.167-65.971 0-91.138 65.971-25.167 91.138 0"/><path d="m303.347 212.208c25.167 25.167 25.167 65.971 0 91.138s-65.971 25.167-91.138 0-25.167-65.971 0-91.138 65.971-25.167 91.138 0"/><path d="m110.014 212.208c25.167 25.167 25.167 65.971 0 91.138s-65.971 25.167-91.138 0-25.167-65.971 0-91.138 65.971-25.167 91.138 0"/></svg>
                 </a>
 
-                <div *ngIf="useCalendar" [style.order]="booked ? 2 : 1">
-                    <ng-container *ngTemplateOutlet="calendar"></ng-container>
-                </div>
-
-                <div *ngIf="useFormIo">
-                    <ng-container *ngTemplateOutlet="survey"></ng-container>
-                </div>
-
-                <div [formGroup]="postForm" class="ckEditor" [style.order]="booked ? 1 : 2">
-                    <!-- <h3 style="font-size: 1rem; float: left;">
-                        {{selectedPostTypeDetails?.descriptionPlaceholder ? selectedPostTypeDetails?.descriptionPlaceholder : ('Enter  Description:' )}}
-                    </h3> -->
-
-                    <!-- <a class="metaboxbtn" (click)=toggleDisplay()>{{buttonName}} Meta</a> -->
-
-                    <!-- <h3 style="font-size: 1rem;">
-                            {{selectedPostTypeDetails?.descriptionPlaceholder ? selectedPostTypeDetails?.descriptionPlaceholder : ('Enter ' + postType + ' description:' )}}
-                        </h3> -->
-                    <app-editor *ngIf="(postId && editPostDetails) || !postId" #descriptionEditor
-                        [data]="descriptionFormControl?.value" [readOnly]="false"
-                        [html]="postForm?.get('descriptionHTML')?.value" [post]="editPostDetails" [role]="'writer'"
-                        [id]="'edit-post-editor'" [realTime]="postId ? true : false" [importArticleSubscription]="true"
-                        [placeholder]="postType + ' description'">
-                        [id]="'edit-post-editor'" [importArticleSubscription]="true" [placeholder]="postType + '
-                        description'">
-                    </app-editor>
-
-                    <!-- <div *ngIf="false" fxLayout="row" fxLayoutGap="10px">
-                            <button type="button" (click)="submit('Drafted')" [disabled]="postForm?.invalid" mat-raised-button
-                                style="background-color: #28a745; color: white; margin-right: 5px;">{{ 'Save' }}</button>
-                            <button type="button" (click)="submit('Published', descriptionEditor)"
-                                [disabled]="postForm?.invalid" mat-raised-button color="primary">{{ 'Publish' }}</button>
-                            <button type="button" (click)="cancelClicked()" mat-raised-button
-                                color="warn">{{ 'Cancel' }}</button>
-                        </div> -->
-
-                </div>
-
                 <div *ngIf="show" class="metabox">
                     <div class="col-md-12 col-sm-12">
                         <ul class="infos">
@@ -243,6 +205,44 @@
                         </ng-template>
                     </div>
                     <!-- <app-time-slots [slots]="slotList"></app-time-slots> -->
+                </div>
+
+                <div *ngIf="useCalendar" [style.order]="booked ? 2 : 1">
+                    <ng-container *ngTemplateOutlet="calendar"></ng-container>
+                </div>
+
+                <div *ngIf="useFormIo">
+                    <ng-container *ngTemplateOutlet="survey"></ng-container>
+                </div>
+
+                <div [formGroup]="postForm" class="ckEditor" [style.order]="booked ? 1 : 2">
+                    <!-- <h3 style="font-size: 1rem; float: left;">
+                        {{selectedPostTypeDetails?.descriptionPlaceholder ? selectedPostTypeDetails?.descriptionPlaceholder : ('Enter  Description:' )}}
+                    </h3> -->
+
+                    <!-- <a class="metaboxbtn" (click)=toggleDisplay()>{{buttonName}} Meta</a> -->
+
+                    <!-- <h3 style="font-size: 1rem;">
+                            {{selectedPostTypeDetails?.descriptionPlaceholder ? selectedPostTypeDetails?.descriptionPlaceholder : ('Enter ' + postType + ' description:' )}}
+                        </h3> -->
+                    <app-editor *ngIf="(postId && editPostDetails) || !postId" #descriptionEditor
+                        [data]="descriptionFormControl?.value" [readOnly]="false"
+                        [html]="postForm?.get('descriptionHTML')?.value" [post]="editPostDetails" [role]="'writer'"
+                        [id]="'edit-post-editor'" [realTime]="postId ? true : false" [importArticleSubscription]="true"
+                        [placeholder]="postType + ' description'">
+                        [id]="'edit-post-editor'" [importArticleSubscription]="true" [placeholder]="postType + '
+                        description'">
+                    </app-editor>
+
+                    <!-- <div *ngIf="false" fxLayout="row" fxLayoutGap="10px">
+                            <button type="button" (click)="submit('Drafted')" [disabled]="postForm?.invalid" mat-raised-button
+                                style="background-color: #28a745; color: white; margin-right: 5px;">{{ 'Save' }}</button>
+                            <button type="button" (click)="submit('Published', descriptionEditor)"
+                                [disabled]="postForm?.invalid" mat-raised-button color="primary">{{ 'Publish' }}</button>
+                            <button type="button" (click)="cancelClicked()" mat-raised-button
+                                color="warn">{{ 'Cancel' }}</button>
+                        </div> -->
+
                 </div>
             </div>
         </ng-template>

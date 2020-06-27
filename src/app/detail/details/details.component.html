@@ -30,11 +30,256 @@
                 <div class="col-lg-12 col-md-12" *ngIf="postDetails?.formStructureJSON && !showConnectedPosts">
                     <ng-container *ngTemplateOutlet="formTemplate;">
                     </ng-container>
+
                 </div>
 
-                <div *ngIf="!showConnectedPosts" [ngClass]="selectedBlock ? 'col-lg-7 col-md-7' : 'col'">
+                <div *ngIf="!showConnectedPosts" [ngClass]="selectedBlock ? 'col-lg-7 col-md-7' : 'col-12'">                    
+                    <div class="metaboxbtn">
+                        <a (click)=toggleDisplay()>
+                            <svg xmlns="http://www.w3.org/2000/svg" id="Capa_1" enable-background="new 0 0 515.555 515.555" height="30px" viewBox="0 0 515.555 515.555" width="30px"><path d="m496.679 212.208c25.167 25.167 25.167 65.971 0 91.138s-65.971 25.167-91.138 0-25.167-65.971 0-91.138 65.971-25.167 91.138 0"/><path d="m303.347 212.208c25.167 25.167 25.167 65.971 0 91.138s-65.971 25.167-91.138 0-25.167-65.971 0-91.138 65.971-25.167 91.138 0"/><path d="m110.014 212.208c25.167 25.167 25.167 65.971 0 91.138s-65.971 25.167-91.138 0-25.167-65.971 0-91.138 65.971-25.167 91.138 0"/></svg>
+                        </a>
+    
+                        <div class="metabox" *ngIf="!postDetails?.formStructureJSON && show && !showConnectedPosts">
+                            <ul class="infos">
+                                <li>
+                                    <button mat-mini-fab color="primary" class="mr-2" style="box-shadow: none;">
+                                        <mat-icon (click)="openVideoRoom()">video_call</mat-icon>
+                                    </button>
+        
+                                    <!-- <button (click)="openBooking()" mat-raised-button color="primary"
+                                        *ngIf="postDetails?.price">RSVP</button> -->
+                                </li>
+        
+                                <ng-container *ngIf="postDetails?.price">
+                                    <li *ngFor="let a of postDetails?.booking?.availability">
+                                        <!-- <button mat-raised-button color="primar"></button> -->
+                                        <!-- <button mat-raised-button color="primary" *ngIf="postDetails?.price"
+                                                                [mdePopoverTriggerFor]="bookSessionPopover" mdePopoverTriggerOn="click">RSVP</button> -->
+                                        <button class="mt-1 mb-1" (click)="openBooking(a)" mat-raised-button color="primary"
+                                            *ngIf="postDetails?.price">{{ a?.date | date }} - RSVP</button>
+        
+        
+                                        <mde-popover #bookSessionPopover="mdePopover" [mdePopoverOverlapTrigger]="false"
+                                            [mdePopoverCloseOnClick]="false" [mdePopoverArrowOffsetX]="8"
+                                            mdePopoverArrowColor="#FFFFFF">
+                                            <div
+                                                style="background: #fff; padding: 10px;border: 1px solid #ccc;margin-top: -10px;box-shadow: 0 0 10px 0 #aaa;">
+                                                <h3>Book Session:</h3>
+        
+                                                <p class="data-label">Availability</p>
+                                                <p class="info">
+                                                    <mat-icon style="vertical-align: middle;">date_range</mat-icon>
+                                                    {{ a?.date | date }}
+                                                    {{a?.duration[0] ? ' From:' + a?.duration[0] : ''}}
+                                                    {{a?.duration[0] ? ' To:' + a?.duration[1] : ''}}
+                                                </p>
+        
+                                                <button mat-raised-button color="primary" class="mr-1"
+                                                    (click)="bookSession('REQUEST_SENT', bookSessionPopover)">Conifrm</button>
+                                                <button mat-raised-button color="warn"
+                                                    (click)="bookSessionPopover._emitCloseEvent()">Cancel</button>
+                                            </div>
+                                        </mde-popover>
+                                    </li>
+                                </ng-container>
+        
+                                <li *ngIf="allowUsersEdit()">
+                                    <p class="data-label">Price</p>
+                                    <p class="info" *ngIf="postForm?.get('price')?.value !== null">
+                                        <span class="tag">{{(postForm?.get('price')?.value | currency) + ' / 15 min'}}</span>
+                                    </p>
+        
+                                    <span style="margin: 7px 0 0 5px;" [mdePopoverTriggerFor]="pricePopover"
+                                        mdePopoverTriggerOn="click"><i class="fa fa-plus-square" aria-hidden="true"></i></span>
+                                    <mde-popover #pricePopover="mdePopover" [mdePopoverOverlapTrigger]="false"
+                                        [mdePopoverCloseOnClick]="false" [mdePopoverArrowOffsetX]="8"
+                                        mdePopoverArrowColor="#FFFFFF">
+                                        <div
+                                            style="background: #fff; padding: 10px;border: 1px solid #ccc;margin-top: -10px;box-shadow: 0 0 10px 0 #aaa;">
+                                            <h3 style="font-size: 1.2rem;">Set Price For 15 min Session:</h3>
+                                            <p class="info">
+                                                <!-- <mat-icon style="vertical-align: middle;">date_range</mat-icon> -->
+                                                <mat-form-field [appearance]="'outline'" placeholder="per 15 minutes">
+                                                    <input #price matInput type="number" [value]="postForm?.get('price')?.value"
+                                                        (change)="setPrice($event)">
+                                                </mat-form-field>
+                                            </p>
+        
+                                            <button mat-raised-button color="primary" class="mr-1"
+                                                (click)="addDataOfPost('price', pricePopover)">Conifrm</button>
+                                            <button mat-raised-button color="warn" class="mr-1"
+                                                (click)="postForm?.get('price').setValue(details.price); pricePopover._emitCloseEvent()">Cancel</button>
+                                        </div>
+                                    </mde-popover>
+        
+                                </li>
+        
+                                <li *ngIf="postDetails?.email && postDetails?.email?.length">
+                                    <p class="data-label">Email</p>
+                                    <p class="info">
+                                        <span class="tag" *ngFor="let t of postDetails?.email">{{t}}</span>
+                                    </p>
+                                </li>
+        
+                                <li *ngIf="postDetails?.phone && postDetails?.phone?.length">
+                                    <p class="data-label">Phone</p>
+                                    <p class="info">
+                                        <span class="tag" *ngFor="let t of postDetails?.phone">{{t}}</span>
+                                    </p>
+                                </li>
+        
+                                <!-- <li *ngIf="postDetails?.tags && postDetails?.tags?.length || fromAddPost"> -->
+                                <li *ngIf="allowUsersEdit() && !selectedPostTypeDetails?.hideTags">
+                                    <p class="data-label">Tags</p>
+                                    <p class="info">
+                                        <span class="tag" *ngFor="let t of postDetails?.tags">{{t?.name}}</span>
+                                    </p>
+                                    <ng-container
+                                        *ngTemplateOutlet="autoComplete; context: { type: 'tag', fieldName: 'tags', collection: 'tags', placeholder: 'Tags' }">
+                                    </ng-container>
+                                </li>
+        
+                                <!-- <li *ngIf="postDetails?.collaborators && postDetails?.collaborators?.length || fromAddPost"> -->
+                                <li *ngIf="allowUsersEdit() && !selectedPostTypeDetails?.hideCollaborators">
+                                    <p class="data-label">Collaborators</p>
+                                    <p class="info">
+                                        <a *ngFor="let t of postDetails?.collaborators; let i=index" target="_blank"
+                                            [href]="'profile' + '/' + t?.slug" style="vertical-align: -webkit-baseline-middle;">
+                                            <span class="tag">
+                                                <img [src]="t?.avatar ? ((s3FilesBucketURL + t?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                                                    alt="">{{t?.name}}</span>
+                                        </a>
+                                        <ng-container
+                                            *ngTemplateOutlet="autoComplete; context: { type: '', fieldName: 'collaborators', collection: 'users', placeholder: 'Select Collaborators' }">
+                                        </ng-container>
+                                    </p>
+                                </li>
+        
+                                <!-- <li *ngIf="postDetails?.clients && postDetails?.clients?.length || fromAddPost"> -->
+                                <li *ngIf="allowUsersEdit() && !selectedPostTypeDetails?.hideClients">
+                                    <p class="data-label">Clients</p>
+                                    <p class="info">
+                                        <a *ngFor="let t of postDetails?.clients" target="_blank"
+                                            [href]="'profile' + '/' + t?.slug">
+                                            <span class="tag">
+                                                <img [src]="t?.avatar ? ((s3FilesBucketURL + t?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                                                    alt="">{{t?.name}}</span>
+                                        </a>
+                                    </p>
+                                    <ng-container
+                                        *ngTemplateOutlet="autoComplete; context: { type: '', fieldName: 'clients', collection: 'users', placeholder: 'Select Clients' }">
+                                    </ng-container>
+                                </li>
+        
+                                <li *ngIf="allowUsersEdit() && !selectedPostTypeDetails?.hideCompany">
+                                    <p class="data-label">Company</p>
+                                    <p class="info" style="text-transform: capitalize; cursor: pointer;">
+                                        <span *ngFor="let c of postDetails?.companies; let ei = index;"
+                                            [routerLink]="['/', 'company', c?._id]">{{c?.name + (ei === postDetails?.companies?.length - 1 ? '' : ', ' )}}</span>
+                                    </p>
+                                    <ng-container
+                                        *ngTemplateOutlet="autoComplete; context: { type: '', fieldName: 'companies', collection: 'companies', placeholder: 'Select Company', forCompany: true }">
+                                    </ng-container>
+                                </li>
+        
+                                <li *ngIf="allowUsersEdit() && postTypeEnum.Job === postDetails?.type">
+                                    <p class="data-label">Job Profile</p>
+                                    <p class="info">
+                                        <span class="tag" *ngFor="let t of postDetails?.job?.jobProfile">{{t?.name}}</span>
+                                    </p>
+                                    <ng-container
+                                        *ngTemplateOutlet="autoComplete; context: { type: 'role', fieldName: 'job.jobProfile', collection: 'tags', placeholder: 'Select Job Profiles' }">
+                                    </ng-container>
+                                </li>
+        
+                                <!-- Topics -->
+                                <li *ngIf="allowUsersEdit() && false">
+                                    <p class="data-label">Topics</p>
+                                    <p class="info">
+                                        <span class="tag"
+                                            *ngFor="let t of postForm?.get('mentor.topics')?.value">{{t?.name}}</span>
+                                    </p>
+                                    <ng-container
+                                        *ngTemplateOutlet="autoComplete; context: { type: 'tag', fieldName: 'mentor.topics', collection: 'tags', placeholder: 'Enter Topics' }">
+                                    </ng-container>
+                                </li>
+        
+                                <li *ngIf="postDetails?.connectedPosts && postDetails?.connectedPosts?.length">
+                                    <p class="data-label">Reference Posts</p>
+                                    <p class="info">
+                                        <span style="text-decoration: underline;"
+                                            *ngFor="let t of postDetails?.connectedPosts; let last=last;">
+                                            <a style="color: white;" [href]="'/' + 'post' + '/' + t?.slug"
+                                                target="_blank">{{t?.name}}
+                                                {{last ? '' : ','}}</a>
+                                        </span>
+                                    </p>
+                                </li>
+        
+                                <li *ngIf="postDetails?.createdBy">
+                                    <p class="data-label">Author</p>
+                                    <p class="info">
+                                        <a target="_blank" [href]="'/' + 'profile' + '/' + postDetails?.createdBy?.slug">
+                                            <span class="tag">
+                                                <img [src]="postDetails?.createdBy?.avatar ? ((s3FilesBucketURL + postDetails?.createdBy?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
+                                                    alt="">{{postDetails?.createdBy?.name}}</span>
+                                        </a>
+                                    </p>
+                                </li>
+        
+                                <li *ngIf="postDetails?.booking?.availabilityDate">
+                                    <p class="data-label">Availability</p>
+                                    <p class="info">
+                                        <mat-icon style="vertical-align: middle;">date_range</mat-icon>
+                                        {{ postDetails?.booking?.availabilityDate | date }}
+                                        {{postDetails?.booking?.duration[0] ? ' From:' + postDetails?.booking?.duration[0] : ''}}
+                                        {{postDetails?.booking?.duration[0] ? ' To:' + postDetails?.booking?.duration[1] : ''}}
+                                    </p>
+                                </li>
+        
+                                <li *ngIf="postDetails?.createdAt">
+                                    <p class="data-label">CreatedAt</p>
+                                    <p class="info">
+                                        <mat-icon style="vertical-align: middle;">date_range</mat-icon>
+                                        {{ postDetails?.createdAt | date: 'EEEE, MMMM d, y, h:mm a'}}
+                                    </p>
+                                </li>
+        
+                                <li *ngIf="postDetails?.updatedAt">
+                                    <p class="data-label">UpdatedAt</p>
+                                    <p class="info">
+                                        <mat-icon style="vertical-align: middle;">date_range</mat-icon>
+                                        {{ postDetails?.updatedAt | date: 'EEEE, MMMM d, y, h:mm a'}}
+                                    </p>
+                                </li>
+        
+                                <li>
+                                    <ul class="social-media">
+                                        <button mat-fab shareButton="facebook"
+                                            [style.backgroundColor]="shareSocial?.prop?.facebook.color">
+                                            <i class="fab fa-facebook-f"></i>
+                                        </button>
+                                        <button mat-fab shareButton="twitter"
+                                            [style.backgroundColor]="shareSocial?.prop?.twitter.color">
+                                            <i class="fab fa-twitter"></i>
+                                        </button>
+                                        <button mat-fab shareButton="linkedin"
+                                            [style.backgroundColor]="shareSocial?.prop?.linkedin.color">
+                                            <i class="fab fa-linkedin"></i>
+                                        </button>
+        
+                                        <button mat-fab shareButton="whatsapp"
+                                            [style.backgroundColor]="shareSocial?.prop?.whatsapp.color">
+                                            <i class="fab fa-whatsapp"></i>
+                                        </button>
+        
+                                    </ul>
+                                    <!-- </div> -->
+                                </li>
+                            </ul>
+                        </div>
 
-                    <a class="metaboxbtn" (click)=toggleDisplay()>{{buttonName}} Meta</a>
+                    </div>
 
                     <!-- <div *ngIf="postDetails?.formStructureJSON" class="col-md-12 justify-content-center" style="background-color: blue;min-height: calc(100vh - 150px);align-items: center;padding-top: 130px;">  -->
 
@@ -80,247 +325,6 @@
                     </div>
 
                     <!-- end /.item-info -->
-                </div>
-
-                <div class="col-md-4 col-sm-12 metabox"
-                    *ngIf="!postDetails?.formStructureJSON && show && !showConnectedPosts">
-                    <ul class="infos">
-                        <li>
-                            <button mat-mini-fab color="primary" class="mr-2" style="box-shadow: none;">
-                                <mat-icon (click)="openVideoRoom()">video_call</mat-icon>
-                            </button>
-
-                            <!-- <button (click)="openBooking()" mat-raised-button color="primary"
-                                *ngIf="postDetails?.price">RSVP</button> -->
-                        </li>
-
-                        <ng-container *ngIf="postDetails?.price">
-                            <li *ngFor="let a of postDetails?.booking?.availability">
-                                <!-- <button mat-raised-button color="primar"></button> -->
-                                <!-- <button mat-raised-button color="primary" *ngIf="postDetails?.price"
-                                                        [mdePopoverTriggerFor]="bookSessionPopover" mdePopoverTriggerOn="click">RSVP</button> -->
-                                <button class="mt-1 mb-1" (click)="openBooking(a)" mat-raised-button color="primary"
-                                    *ngIf="postDetails?.price">{{ a?.date | date }} - RSVP</button>
-
-
-                                <mde-popover #bookSessionPopover="mdePopover" [mdePopoverOverlapTrigger]="false"
-                                    [mdePopoverCloseOnClick]="false" [mdePopoverArrowOffsetX]="8"
-                                    mdePopoverArrowColor="#FFFFFF">
-                                    <div
-                                        style="background: #fff; padding: 10px;border: 1px solid #ccc;margin-top: -10px;box-shadow: 0 0 10px 0 #aaa;">
-                                        <h3>Book Session:</h3>
-
-                                        <p class="data-label">Availability</p>
-                                        <p class="info">
-                                            <mat-icon style="vertical-align: middle;">date_range</mat-icon>
-                                            {{ a?.date | date }}
-                                            {{a?.duration[0] ? ' From:' + a?.duration[0] : ''}}
-                                            {{a?.duration[0] ? ' To:' + a?.duration[1] : ''}}
-                                        </p>
-
-                                        <button mat-raised-button color="primary" class="mr-1"
-                                            (click)="bookSession('REQUEST_SENT', bookSessionPopover)">Conifrm</button>
-                                        <button mat-raised-button color="warn"
-                                            (click)="bookSessionPopover._emitCloseEvent()">Cancel</button>
-                                    </div>
-                                </mde-popover>
-                            </li>
-                        </ng-container>
-
-                        <li *ngIf="allowUsersEdit()">
-                            <p class="data-label">Price</p>
-                            <p class="info" *ngIf="postForm?.get('price')?.value !== null">
-                                <span class="tag">{{(postForm?.get('price')?.value | currency) + ' / 15 min'}}</span>
-                            </p>
-
-                            <span style="margin: 7px 0 0 5px;" [mdePopoverTriggerFor]="pricePopover"
-                                mdePopoverTriggerOn="click"><i class="fa fa-plus-square" aria-hidden="true"></i></span>
-                            <mde-popover #pricePopover="mdePopover" [mdePopoverOverlapTrigger]="false"
-                                [mdePopoverCloseOnClick]="false" [mdePopoverArrowOffsetX]="8"
-                                mdePopoverArrowColor="#FFFFFF">
-                                <div
-                                    style="background: #fff; padding: 10px;border: 1px solid #ccc;margin-top: -10px;box-shadow: 0 0 10px 0 #aaa;">
-                                    <h3 style="font-size: 1.2rem;">Set Price For 15 min Session:</h3>
-                                    <p class="info">
-                                        <!-- <mat-icon style="vertical-align: middle;">date_range</mat-icon> -->
-                                        <mat-form-field [appearance]="'outline'" placeholder="per 15 minutes">
-                                            <input #price matInput type="number" [value]="postForm?.get('price')?.value"
-                                                (change)="setPrice($event)">
-                                        </mat-form-field>
-                                    </p>
-
-                                    <button mat-raised-button color="primary" class="mr-1"
-                                        (click)="addDataOfPost('price', pricePopover)">Conifrm</button>
-                                    <button mat-raised-button color="warn" class="mr-1"
-                                        (click)="postForm?.get('price').setValue(details.price); pricePopover._emitCloseEvent()">Cancel</button>
-                                </div>
-                            </mde-popover>
-
-                        </li>
-
-                        <li *ngIf="postDetails?.email && postDetails?.email?.length">
-                            <p class="data-label">Email</p>
-                            <p class="info">
-                                <span class="tag" *ngFor="let t of postDetails?.email">{{t}}</span>
-                            </p>
-                        </li>
-
-                        <li *ngIf="postDetails?.phone && postDetails?.phone?.length">
-                            <p class="data-label">Phone</p>
-                            <p class="info">
-                                <span class="tag" *ngFor="let t of postDetails?.phone">{{t}}</span>
-                            </p>
-                        </li>
-
-                        <!-- <li *ngIf="postDetails?.tags && postDetails?.tags?.length || fromAddPost"> -->
-                        <li *ngIf="allowUsersEdit() && !selectedPostTypeDetails?.hideTags">
-                            <p class="data-label">Tags</p>
-                            <p class="info">
-                                <span class="tag" *ngFor="let t of postDetails?.tags">{{t?.name}}</span>
-                            </p>
-                            <ng-container
-                                *ngTemplateOutlet="autoComplete; context: { type: 'tag', fieldName: 'tags', collection: 'tags', placeholder: 'Tags' }">
-                            </ng-container>
-                        </li>
-
-                        <!-- <li *ngIf="postDetails?.collaborators && postDetails?.collaborators?.length || fromAddPost"> -->
-                        <li *ngIf="allowUsersEdit() && !selectedPostTypeDetails?.hideCollaborators">
-                            <p class="data-label">Collaborators</p>
-                            <p class="info">
-                                <a *ngFor="let t of postDetails?.collaborators; let i=index" target="_blank"
-                                    [href]="'profile' + '/' + t?.slug">
-                                    <span class="tag">
-                                        <img [src]="t?.avatar ? ((s3FilesBucketURL + t?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
-                                            alt="">{{t?.name}}</span>
-                                </a>
-                                <ng-container
-                                    *ngTemplateOutlet="autoComplete; context: { type: '', fieldName: 'collaborators', collection: 'users', placeholder: 'Select Collaborators' }">
-                                </ng-container>
-                            </p>
-                        </li>
-
-                        <!-- <li *ngIf="postDetails?.clients && postDetails?.clients?.length || fromAddPost"> -->
-                        <li *ngIf="allowUsersEdit() && !selectedPostTypeDetails?.hideClients">
-                            <p class="data-label">Clients</p>
-                            <p class="info">
-                                <a *ngFor="let t of postDetails?.clients" target="_blank"
-                                    [href]="'profile' + '/' + t?.slug">
-                                    <span class="tag">
-                                        <img [src]="t?.avatar ? ((s3FilesBucketURL + t?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
-                                            alt="">{{t?.name}}</span>
-                                </a>
-                            </p>
-                            <ng-container
-                                *ngTemplateOutlet="autoComplete; context: { type: '', fieldName: 'clients', collection: 'users', placeholder: 'Select Clients' }">
-                            </ng-container>
-                        </li>
-
-                        <li *ngIf="allowUsersEdit() && !selectedPostTypeDetails?.hideCompany">
-                            <p class="data-label">Company</p>
-                            <p class="info" style="text-transform: capitalize; cursor: pointer;">
-                                <span *ngFor="let c of postDetails?.companies; let ei = index;"
-                                    [routerLink]="['/', 'company', c?._id]">{{c?.name + (ei === postDetails?.companies?.length - 1 ? '' : ', ' )}}</span>
-                            </p>
-                            <ng-container
-                                *ngTemplateOutlet="autoComplete; context: { type: '', fieldName: 'companies', collection: 'companies', placeholder: 'Select Company', forCompany: true }">
-                            </ng-container>
-                        </li>
-
-                        <li *ngIf="allowUsersEdit() && postTypeEnum.Job === postDetails?.type">
-                            <p class="data-label">Job Profile</p>
-                            <p class="info">
-                                <span class="tag" *ngFor="let t of postDetails?.job?.jobProfile">{{t?.name}}</span>
-                            </p>
-                            <ng-container
-                                *ngTemplateOutlet="autoComplete; context: { type: 'role', fieldName: 'job.jobProfile', collection: 'tags', placeholder: 'Select Job Profiles' }">
-                            </ng-container>
-                        </li>
-
-                        <!-- Topics -->
-                        <li *ngIf="allowUsersEdit() && false">
-                            <p class="data-label">Topics</p>
-                            <p class="info">
-                                <span class="tag"
-                                    *ngFor="let t of postForm?.get('mentor.topics')?.value">{{t?.name}}</span>
-                            </p>
-                            <ng-container
-                                *ngTemplateOutlet="autoComplete; context: { type: 'tag', fieldName: 'mentor.topics', collection: 'tags', placeholder: 'Enter Topics' }">
-                            </ng-container>
-                        </li>
-
-                        <li *ngIf="postDetails?.connectedPosts && postDetails?.connectedPosts?.length">
-                            <p class="data-label">Reference Posts</p>
-                            <p class="info">
-                                <span style="text-decoration: underline;"
-                                    *ngFor="let t of postDetails?.connectedPosts; let last=last;">
-                                    <a style="color: white;" [href]="'/' + 'post' + '/' + t?.slug"
-                                        target="_blank">{{t?.name}}
-                                        {{last ? '' : ','}}</a>
-                                </span>
-                            </p>
-                        </li>
-
-                        <li *ngIf="postDetails?.createdBy">
-                            <p class="data-label">Author</p>
-                            <p class="info">
-                                <a target="_blank" [href]="'/' + 'profile' + '/' + postDetails?.createdBy?.slug">
-                                    <span class="tag">
-                                        <img [src]="postDetails?.createdBy?.avatar ? ((s3FilesBucketURL + postDetails?.createdBy?.avatar) | safe: 'resourceUrl') : anonymousAvatar"
-                                            alt="">{{postDetails?.createdBy?.name}}</span>
-                                </a>
-                            </p>
-                        </li>
-
-                        <li *ngIf="postDetails?.booking?.availabilityDate">
-                            <p class="data-label">Availability</p>
-                            <p class="info">
-                                <mat-icon style="vertical-align: middle;">date_range</mat-icon>
-                                {{ postDetails?.booking?.availabilityDate | date }}
-                                {{postDetails?.booking?.duration[0] ? ' From:' + postDetails?.booking?.duration[0] : ''}}
-                                {{postDetails?.booking?.duration[0] ? ' To:' + postDetails?.booking?.duration[1] : ''}}
-                            </p>
-                        </li>
-
-                        <li *ngIf="postDetails?.createdAt">
-                            <p class="data-label">CreatedAt</p>
-                            <p class="info">
-                                <mat-icon style="vertical-align: middle;">date_range</mat-icon>
-                                {{ postDetails?.createdAt | date: 'EEEE, MMMM d, y, h:mm a'}}
-                            </p>
-                        </li>
-
-                        <li *ngIf="postDetails?.updatedAt">
-                            <p class="data-label">UpdatedAt</p>
-                            <p class="info">
-                                <mat-icon style="vertical-align: middle;">date_range</mat-icon>
-                                {{ postDetails?.updatedAt | date: 'EEEE, MMMM d, y, h:mm a'}}
-                            </p>
-                        </li>
-
-                        <li>
-                            <ul class="social-media">
-                                <button mat-fab shareButton="facebook"
-                                    [style.backgroundColor]="shareSocial?.prop?.facebook.color">
-                                    <i class="fab fa-facebook-f"></i>
-                                </button>
-                                <button mat-fab shareButton="twitter"
-                                    [style.backgroundColor]="shareSocial?.prop?.twitter.color">
-                                    <i class="fab fa-twitter"></i>
-                                </button>
-                                <button mat-fab shareButton="linkedin"
-                                    [style.backgroundColor]="shareSocial?.prop?.linkedin.color">
-                                    <i class="fab fa-linkedin"></i>
-                                </button>
-
-                                <button mat-fab shareButton="whatsapp"
-                                    [style.backgroundColor]="shareSocial?.prop?.whatsapp.color">
-                                    <i class="fab fa-whatsapp"></i>
-                                </button>
-
-                            </ul>
-                            <!-- </div> -->
-                        </li>
-                    </ul>
                 </div>
                 <!-- end /.col-md-8 -->
 

@@ -15,7 +15,7 @@
       class="hidden-lg" [drawer]="drawer"></app-add-post-menu>
 
 
-    <mat-nav-list class="pt-0" [ngStyle.lt-sm]="{'margin-top': '40px'}">
+    <mat-nav-list class="pt-0">
 
       <app-chat-full-ui *ngIf="authService?.loggedInUser" [drawer]="drawer" [loggedInUser]="authService?.loggedInUser">
       </app-chat-full-ui>

@@ -79,11 +79,19 @@
         padding: 5px 0 15px;
         border: 1px solid #ccc;
         margin-top: 0;
+        box-shadow: 0 0 10px 0 #ccc;
     }
 
     @media (max-width: 767px) {
         .metaboxbtn {
-            display: none;
+            position: fixed;
+            top: 110px;
+            z-index: 22;
+        }
+        .metabox {
+            margin-top: 0;
+            position: fixed;
+            top: 99px;
         }
         .sidebar {
             top: 0 !important;

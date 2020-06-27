@@ -28,29 +28,37 @@
 
 }
 
-.metabox {
+.metaboxbtn {
     position: sticky;
-    top: 155px;
-    display: block;
-    height: -webkit-fill-available;
-    z-index: 8;
-    margin-top: 10px;
+    right: 15px;
+    z-index: 22;
+    top: 84px;
+    float: right;
+    margin-top: -60px;
 }
 
-.metaboxbtn {
-    float:right;
-    color: #00aeef !important;
-    position: sticky;
-    top: 145px;
+.metabox {
+    position: absolute;
+    right: 0;
+    display: block;
     z-index: 22;
-    margin-bottom: -60px;
-    line-height: 60px;
-    margin-right: 15px;
+    background: #fff;
+    max-width: 370px;
+    min-width: 370px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    margin-top: 31px;
+    box-shadow: 0 0 10px 0 #ccc;
 }
 
 @media (max-width: 767px) {
     .metaboxbtn {
-        display: none;
+        position: fixed;
+        top: 110px;
+        z-index: 22;
+    }
+    .metabox {
+        margin-top: 15px;
     }
 }
 
@@ -82,6 +90,10 @@
     font-weight: 400;
     border-radius: 100px;
     text-transform: capitalize;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 200px;
 
     img {
         border-radius: 50%;

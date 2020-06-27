@@ -119,6 +119,8 @@ export function hljsLanguages() {
     PostTypeNavComponent,
     CommentSideNavComponent,
     BookingComponent,
+    CompaniesListComponent,
+
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,

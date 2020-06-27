@@ -3,6 +3,10 @@
         top: 145px;
     }
 
+    .selectedDate {
+        border: 2px dashed #03b9fd;
+    }
+
     .docs-component-viewer-nav.common-box-shadow {
         margin-top: 1px;
         top: 145px;
@@ -13,8 +17,8 @@
     }
 
     .ck-content {
-        max-height: 65vh !important;
-        min-height: 65vh !important;
+        max-height: 69vh !important;
+        min-height: 69vh !important;
     }
 
     .breadcrumb-area {
@@ -60,16 +64,21 @@
         z-index: 8;
     }
     .metaboxbtn {
-        float: right;
-        color: #00aeef !important;
+        position: absolute;
+        right: 15px;
+        z-index: 22;
+        margin-top: -55px;
     }
     .metabox {
-        position: sticky;
-        top: 60px;
+        position: absolute;
+        right: 15px;
         display: block;
-        height: -webkit-fill-available;
-        z-index: 8;
-        margin-top: 10px;
+        z-index: 22;
+        background: #fff;
+        max-width: 320px;
+        padding: 5px 0 15px;
+        border: 1px solid #ccc;
+        margin-top: 0;
     }
 
     @media (max-width: 767px) {
@@ -103,7 +112,7 @@
         }
         .ck.ck-toolbar {
             // position: sticky !important;
-            top: 200px !important;
+            top: 170px !important;
             z-index: 8 !important;
         }
         .ck.ck-toolbar.ck-toolbar_grouping>.ck-toolbar__items {

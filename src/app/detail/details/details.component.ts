@@ -36,18 +36,6 @@ import { BookingComponent } from '../../shared/components/booking/booking.compon
 })
 export class DetailsComponent implements OnInit, OnDestroy {
 
-  // HIDE SHOW SIDEBAR
-  public show:boolean = true;
-  public buttonName:any = 'Hide';
-  toggleDisplay() {
-    this.show = !this.show;
-    // CHANGE THE NAME OF THE BUTTON.
-    if(this.show)  
-      this.buttonName = "Hide";
-    else
-      this.buttonName = "Show";
-  }
-  
   @ViewChild('successfulRSVP', { static: false }) successfulRSVP: SwalComponent;
   details$: Observable<Post>;
 
@@ -93,7 +81,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
   displayChatBox = false;
 
   selectedPostTypeDetails = null;
-  // Survey Form variables 
+  // Survey Form variables
   totalPoints = 0;
   public form1 = { components: [] };
   formDataJsonToSave = [];
@@ -132,8 +120,8 @@ export class DetailsComponent implements OnInit, OnDestroy {
     /** Read the type of the post  */
     this.type = this.activatedRoute.snapshot.queryParams.type;
 
-    this.commentId = this.activatedRoute.snapshot.queryParams['commentId'];
-    this.blockId = this.activatedRoute.snapshot.queryParams['blockId'];
+    this.commentId = this.activatedRoute.snapshot.queryParams.commentId;
+    this.blockId = this.activatedRoute.snapshot.queryParams.blockId;
 
     console.log(this.activatedRoute.snapshot.queryParams);
 
@@ -288,7 +276,6 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
   getConnectedPosts(postType) {
     this.showConnectedPosts = true;
-    this.selectedPostType = postType;
 
     if (this.paginator) {
       const paginationObj = {
@@ -297,12 +284,8 @@ export class DetailsComponent implements OnInit, OnDestroy {
       };
 
       this.postService.getAllPosts(
-        paginationObj, '',
-        {
-          referencePostId: [this.postDetails._id],
-          connectedPosts: this.postDetails.connectedPosts.map(p => p._id),
-          postType
-        }
+        paginationObj, this.selectedPostTypeDetails.name,
+        null
       ).subscribe((u) => {
         this.listOfConnectedPosts.posts = u.posts;
         this.totalOtherPosts = u.total;
@@ -338,7 +321,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
   }
 
   checkIfVideoChat() {
-    if (this.activatedRoute.snapshot.queryParams['video_chat']) {
+    if (this.activatedRoute.snapshot.queryParams.video_chat) {
       if (!this.authService.loggedInUser) {
         this.authService.checkIfUserIsLoggedIn(true);
         return;
@@ -362,12 +345,12 @@ export class DetailsComponent implements OnInit, OnDestroy {
       return;
     }
 
-    let exclude = ['selected'];
+    const exclude = ['selected'];
 
 
-    let result = this.formDataJsonToSave.reduce((acc, curr) => {
+    const result = this.formDataJsonToSave.reduce((acc, curr) => {
       Object.entries(curr).forEach(([k, v]) => {
-        if (!exclude.includes(k)) acc[`${k}`] = v;
+        if (!exclude.includes(k)) { acc[`${k}`] = v; }
       });
       return acc;
     }, {});
@@ -406,7 +389,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
       this.formDataJsonToSave[this.currentFormIndex][this.formArray[this.currentFormIndex].form1.components[0].key] = values[0] || 0;
       this.formDataJsonToSave[this.currentFormIndex].selected = values[0] !== '' ? true : false;
       const allSelected = this.formDataJsonToSave.map((d) => {
-        return d.selected
+        return d.selected;
       });
 
       if (allSelected.indexOf(false) === -1) {
@@ -475,12 +458,27 @@ export class DetailsComponent implements OnInit, OnDestroy {
     // });
   }
 
-  openBooking() {
+  openBooking(a) {
     this.dialog.open(BookingComponent, {
       // minWidth: '100vw',
       // height: '100vh',
-      data: { post: this.postDetails, loggedInUser: this.authService.loggedInUser },
+      data: { post: this.postDetails, loggedInUser: this.authService.loggedInUser, availability: a },
       disableClose: true
     });
+  }
+
+  // HIDE SHOW SIDEBAR
+  public show = true;
+  public buttonName: any = 'Hide';
+
+  toggleDisplay() {
+    this.show = !this.show;
+    // CHANGE THE NAME OF THE BUTTON.
+    if (this.show) {
+      this.buttonName = 'Hide';
+    } else {
+      this.buttonName = 'Show';
+    }
+
   }
 }

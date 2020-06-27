@@ -14,9 +14,9 @@
     <!-- Show Date & Time Availability to the author -->
     <p class="info mb-1">
         <mat-icon style="vertical-align: middle;">date_range</mat-icon>
-        {{ data?.post?.booking?.availabilityDate | date }}
-        {{ data?.post?.booking?.duration[0] ? ' From: ' + data?.post?.booking?.duration[0] : ''}}
-        {{ data?.post?.booking?.duration[0] ? ' To: ' + data?.post?.booking?.duration[1] : ''}}
+        {{ data?.availability?.date | date }}
+        {{ duration[0] ? ' From: ' + duration[0] : ''}}
+        {{ duration[0] ? ' To: ' + duration[1] : ''}}
     </p>
 
     <!-- Price -->

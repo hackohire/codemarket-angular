@@ -152,11 +152,14 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .mat-drawer.mat-drawer-side {
   z-index: 2;
-  box-shadow: 0 0 10px 0 #666;
+  // box-shadow: 0 0 10px 0 #666;
+  box-shadow: none;
+  border-right: 1px solid #ccc;
 }
 
 mat-sidenav-content.mat-drawer-content.mat-sidenav-content {
-  margin-left: 0 !important;
+  // margin-left: 0 !important;
+  overflow-x: hidden;
 }
 
 tr.mat-header-row {
@@ -3322,8 +3325,18 @@ a {
 	--- BREADCRUMB
 *****************************/
 .breadcrumb-area {
-  position: relative;
+  position: sticky;
+  top: 48px;
+  z-index: 22;
   padding-top: 64px;
+}
+
+@media screen and ( max-width: 767px ) {
+  .breadcrumb-area {
+    position: relative;
+    top: 0;
+    z-index: 1;
+  }
 }
 
 .breadcrumb-area:before {

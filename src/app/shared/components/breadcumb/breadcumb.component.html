@@ -12,6 +12,10 @@
                             <a [routerLink]="[p?.pathString ? p.pathString : '/']">{{p?.name}}</a>
                             <!-- <a>{{postDetails?.name}}</a> -->
                         </li>
+                        <li *ngIf="all">
+                            <button mat-raised-button color="primary" (click)="OnClickAll.emit()"
+                                style="line-height: 25px; min-width: 45px;">All</button>
+                        </li>
                     </ul>
                     <div style="margin-left: auto;">
 

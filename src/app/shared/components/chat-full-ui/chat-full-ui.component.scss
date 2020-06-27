@@ -1,5 +1,5 @@
 cdk-virtual-scroll-viewport {
-  height: 84vh;
+  height: calc(100vh - 112px);
 
   .post-card {
     height: 76px;

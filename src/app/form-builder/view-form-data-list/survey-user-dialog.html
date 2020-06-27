@@ -1,0 +1,27 @@
+<div mat-dialog-content>
+    <h3>{{data.sleepForm.formName}}</h3>
+    <div *ngFor="let data of data.sleepForm.individualPoints;let i = index">
+        <div>
+            <h4>{{data.label}}</h4>
+            <div style="display: inline-flex; margin: 10px">
+                <h6 class="point">{{data.value}}</h6>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <h3>{{data.summaryForm.formName}}</h3>
+    <div *ngFor="let data of data.summaryForm.individualPoints;let i = index">
+        <div>
+            <h4>{{data.label}}</h4>
+            <div style="display: inline-flex; margin: 10px">
+                <h6 class="point">{{data.value}}</h6>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<div mat-dialog-actions>
+    <button type="button" mat-raised-button color="primary" (click)="onOkClick()" style="flex: auto;">OK</button>
+    
+</div>

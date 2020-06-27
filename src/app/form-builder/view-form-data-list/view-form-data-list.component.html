@@ -26,14 +26,14 @@
                             <i class="fas fa-sort-down" (click)="changeOrder('email','desc','contact')"></i>
                         </span> -->
                     </th>
-                    <th>Form Name</th>
+                    <th>Date</th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let e of valueList">
+                <tr *ngFor="let e of valueList" (click)="onClickCalled(e?._id)">
                     <td>{{e?.createdBy?.name}}</td>
                     <td>{{e?.totalPoints}}</td>
-                    <td>{{e?.formname}}</td>
+                    <td>{{e?.createdAt | date: 'EEEE, MMMM d, y, h:mm a'}}</td>
                     
                 </tr>
             </tbody>

@@ -1,6 +1,8 @@
 import { plans } from '../app/shared/constants/plan_details';
 
 export const environment = {
+  braintree_client: 'sandbox_x6kwrbkb_hnwczpyytcggqqth',
+  paypal_client: 'AWyqKpeiqQS6vUI7k7u2LpwhSZr0ikUzcbYLM50aBLmwo2fAtIsVkZrSn5tWZ_bElFtV34Lj5Q3ukeqA',
   ckEditor: {
     ckEditorEnvironMentId: 'ZK5UoNVFJG2R3Kh4SrIC',
     ckEditorSecretKey: 'HP771KcTLlvStVbtvwAGz5d3LhLgDlY50uJqNQ6nkS18kVP43ZPB1zOSLseK',

@@ -1,0 +1,18 @@
+.socialMedia {
+    i {
+        font-size: 40px;
+        color: #1ea1f2;
+    }
+    .companyTitle {
+        vertical-align: middle;
+        display: flex;
+        align-items: center;
+        font-size: 20px;
+        text-transform: capitalize;
+    }
+    .social-btn {
+        background-color: #1ea1f2;
+        float: right;
+        color: #fff;
+    }
+}

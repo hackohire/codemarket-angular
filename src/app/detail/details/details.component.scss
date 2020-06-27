@@ -10,6 +10,12 @@
     .mat-dialog-container {
         padding: 12px;
     }
+    .ck.ck-toolbar {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 201px !important;
+        z-index: 15;
+    }
 }
 
  aside.sidebar {

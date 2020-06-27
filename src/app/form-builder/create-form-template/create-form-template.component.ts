@@ -7,6 +7,7 @@ import { of } from 'rxjs';
 import { isPlatformBrowser } from '@angular/common';
 import { BreadCumb } from '../../shared/models/bredcumb.model';
 import { ActivatedRoute } from '@angular/router';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-create-form-template',
@@ -31,7 +32,8 @@ export class CreateFormTemplateComponent implements OnInit {
   constructor(
     private formBuilderService: FormBuilderService,
     @Inject(PLATFORM_ID) private _platformId,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private authService: AuthService
   ) {
     this.formId = this.activatedRoute.snapshot.params['formId'];
 
@@ -64,7 +66,6 @@ export class CreateFormTemplateComponent implements OnInit {
     this.formDetails = new FormGroup({
       formname: new FormControl(form && form.formname ? form.formname : '', Validators.required),
       formStructureJSON: new FormControl(form && form.formStructureJSON ? form.formStructureJSON : null, Validators.required),
-      // connectedDB: new FormControl(form && form.connectedDB ? form.connectedDB : '', Validators.required)
     });
     if (this.formId) {
       this.formDetails.addControl('_id', new FormControl(this.formId));
@@ -72,9 +73,17 @@ export class CreateFormTemplateComponent implements OnInit {
   }
 
   submit() {
+
+    if (!this.authService.loggedInUser) {
+      this.authService.checkIfUserIsLoggedIn(true);
+      return;
+    }
+
     if (this.formStructureJSON) {
       this.formDetails.get('formStructureJSON').setValue(this.formStructureJSON);
     }
+    this.formDetails.value.createdBy = this.authService.loggedInUser._id;
+
     console.log(this.formDetails.value, this.connectedDB.value);
     this.formBuilderService.addformJson(this.formDetails.value, this.connectedDB.value._id).pipe(
       catchError((e) => {

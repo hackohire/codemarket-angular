@@ -2,7 +2,7 @@ import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { BreadCumb } from '../../shared/models/bredcumb.model';
 import {FormBuilderService} from '../form-builder.service';
 import { Subscription } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { catchError, } from 'rxjs/operators';
@@ -22,6 +22,7 @@ export class AddFormDataComponent implements OnInit {
   constructor(
     private formBuilderService: FormBuilderService,
     private activatedRoute: ActivatedRoute,
+    private router: Router,
     @Inject(PLATFORM_ID) private _platformId) {
     this.formName = this.activatedRoute.snapshot.params['formname'];
     this.connectedFormStructureId = this.activatedRoute.snapshot.params['formId'];
@@ -57,7 +58,7 @@ export class AddFormDataComponent implements OnInit {
     ).subscribe((d: any) => {
       if (d) {
         Swal.fire(`${d.formname} has been Added Successfully`, '', 'success').then(() => {
-          this.formBuilderService.redirectToBack(d._id);
+          this.router.navigate(['/', 'form-builder']);
         });
       }
     });

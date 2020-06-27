@@ -376,6 +376,36 @@ export class CompanyService {
     );
   }
 
+  getOAuthRequestToken(userId: String) {
+    return this.apollo.query({
+      query: gql`
+        query getOAuthRequestToken($userId: String) {
+          getOAuthRequestToken(userId: $userId) {
+            link
+          }
+        }
+      `,
+      variables: {
+        userId
+      },
+      fetchPolicy: 'no-cache'
+    }).pipe(
+      map((p: any) => {
+        return p.data.getOAuthRequestToken;
+      }),
+    );
+  }
+
+  saveAccessToken(oAuthToken: String, oAuthTokenSecret: String) {
+    return this.apollo.mutate({
+      mutation: gql`mutation saveAccessToken($oAuthToken: String, $oAuthVerifier: String) {
+        saveAccessToken(oAuthToken: $oAuthToken, oAuthVerifier: $oAuthVerifier) {
+          message
+        }
+      }`,
+    })
+  }
+
   redirectToCompanyDetails(companyId: string, slug: string, view = 'posts') {
     this.router.navigate(['/', `company`, slug],
       { queryParams: { view, id: companyId } }

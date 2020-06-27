@@ -85,6 +85,14 @@ export class AddCompanyComponent implements OnInit {
     // console.log('dialogdata', this.data);
     const params: any = this.activatedRoute.snapshot.params;
 
+    this.activatedRoute.queryParams.subscribe(params => {
+      const oauthVerifier = params['oauth_verifier'];
+      const oauthToken = params['oauth_token'];
+      if (oauthToken && oauthVerifier) {
+        // this.saveAccessToken(oauthToken, oauthVerifier);
+      }
+    });
+
     this.breadcumb = {
       title: 'Add Company',
       path: [
@@ -189,6 +197,13 @@ export class AddCompanyComponent implements OnInit {
         this.totalCompanies = dj.total;
       }
     });
+  }
+
+  saveAccessToken(oauthToken: string, oauthVerifier: string) {
+    this.companyService.saveAccessToken(oauthToken, oauthVerifier).subscribe(res => {
+      console.log("Response", res);
+      alert('Token saved');
+    })
   }
 }
 

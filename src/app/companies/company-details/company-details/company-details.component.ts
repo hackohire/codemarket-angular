@@ -912,4 +912,10 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
       data: { type: 'twitter', companyName: this.companyDetails.name }
     });
   }
+
+  redirectToTwitter() {
+    this.companyService.getOAuthRequestToken('111').subscribe((res: any) => {
+      location.href = res.link;
+    })
+  }
 }

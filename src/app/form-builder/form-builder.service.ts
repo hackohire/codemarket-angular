@@ -52,6 +52,7 @@ export class FormBuilderService {
         query fetchformJson {
           fetchformJson{
             formname
+            commonId
             formStructureJSON
             _id
           }
@@ -114,6 +115,7 @@ export class FormBuilderService {
             _id
             formname
             formStructureJSON
+            commonId
             createdAt
             updatedAt
           }
@@ -159,6 +161,7 @@ export class FormBuilderService {
               _id
               formname
               formDataJson
+              commonFormId
               createdBy {
                 _id
                 name
@@ -246,6 +249,7 @@ export class FormBuilderService {
             cFormJson
             pFormJson
             createdAt
+            commonFormId
             connectedFormData {
               _id
               formDataJson

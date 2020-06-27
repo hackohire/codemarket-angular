@@ -6,7 +6,7 @@
 
                 <div class="row">
                     <div class="col-md-3" *ngFor="let form of formList; let i=index">
-                        <button type="button" (click)="formButtonClick(form?._id)"
+                        <button type="button" (click)="formButtonClick(form?.commonId)"
                             mat-raised-button color="primary"
                             style="margin: 12px; height: 35px;">{{ form?.formname }}</button>
                     </div>

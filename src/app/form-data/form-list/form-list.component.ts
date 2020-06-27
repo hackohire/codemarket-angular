@@ -120,7 +120,7 @@ export class FormListComponent implements OnInit {
     const components = keyBy(foundEle.pFormJson.formStructureJSON.components, 'key');
 
     this.sleepQualityFormObj.formName = foundEle.formname;
-    this.sleepQualitySummaryFormObj.formName = foundEle.cFormJson.formname;
+   
 
     const savedData = foundEle.formDataJson;
     let keySleepForm = Object.keys(savedData);
@@ -132,20 +132,25 @@ export class FormListComponent implements OnInit {
       });
     });
       
-    const summaryComponents = keyBy(foundEle.cFormJson.formStructureJSON.components, 'key')
-    const summaryFormData = foundEle.connectedFormData.formDataJson;
-    let keySummaryFormData = Object.keys(summaryFormData)
-
-
-    keySummaryFormData.forEach((k) => {
-      this.summaryFormAnswers.push({
-        label: summaryComponents[k].label,
-        value: summaryFormData[k]
+  
+    if (foundEle.cFormJson) { 
+      const summaryComponents = keyBy(foundEle.cFormJson.formStructureJSON.components, 'key')
+      const summaryFormData = foundEle.connectedFormData.formDataJson;
+      let keySummaryFormData = Object.keys(summaryFormData)
+  
+  
+      keySummaryFormData.forEach((k) => {
+        this.summaryFormAnswers.push({
+          label: summaryComponents[k].label,
+          value: summaryFormData[k]
+        });
       });
-    });
+
+      this.sleepQualitySummaryFormObj.formName = foundEle.cFormJson.formname;
+      this.sleepQualitySummaryFormObj.individualPoints = this.summaryFormAnswers;
+    }
 
     this.sleepQualityFormObj.individualPoints = this.individualPoints;
-    this.sleepQualitySummaryFormObj.individualPoints = this.summaryFormAnswers;
 
 }
 

@@ -94,6 +94,8 @@ export class SurveyComponent implements OnInit {
   summaryForm = false;
   nexButtonEnable = false;
 
+  commonId;
+
   constructor(
     private formBuilderService: FormBuilderService,
     private authService: AuthService,
@@ -138,6 +140,8 @@ export class SurveyComponent implements OnInit {
       this.formJsonListSubscription = this.formBuilderService.fetchFormStructureById(this.connectedFormStructureId).subscribe((formJson) => {
         if (formJson) {
           this.formName = formJson.formname;
+          this.commonId = formJson.commonId;
+
           formJson.formStructureJSON.components.forEach((c, i) =>{
             if (i < formJson.formStructureJSON.components.length-1) {
               this.formArray.push({
@@ -168,7 +172,8 @@ export class SurveyComponent implements OnInit {
       formDataJson: new FormControl(i && i.jsonstring ? i.jsonstring : '', Validators.required),
       connectedFormStructureId: new FormControl(i && i._id ? i._id : this.connectedFormStructureId),
       createdBy: new FormControl(this.authService.loggedInUser ? this.authService.loggedInUser._id: ''),
-      formDataId: new FormControl('')
+      formDataId: new FormControl(''),
+      commonFormId: new FormControl('')
     });
   }
 
@@ -260,6 +265,7 @@ export class SurveyComponent implements OnInit {
       this.formDetails.value.formDataJson = result;
       this.formDetails.value.formDataId = this.id || null;
       this.formDetails.value.createdBy = this.authService.loggedInUser._id;
+      this.formDetails.value.commonFormId = this.commonId;
       
       this.formBuilderService.addformData(this.formDetails.value).subscribe((d: any) => {
         if (d) {
@@ -291,7 +297,8 @@ export class SurveyComponent implements OnInit {
     
     this.formDetails.value.formDataJson = event.data;
     this.formDetails.value.formDataId = this.id || null;
-
+    this.formDetails.value.commonFormId = this.commonId;
+    
     console.log("Event is ==> ", this.formDetails.value);
 
     this.formBuilderService.addformData(this.formDetails.value).subscribe((d: any) => {
@@ -370,6 +377,7 @@ export class SurveyComponent implements OnInit {
         if (formJson) {
           const tempComponents = { components: [], image: []};
           this.formName = formJson.formname;
+          this.commonId = formJson.commonId;
           formJson.formStructureJSON.components.forEach((c, i) =>{
             if (i < formJson.formStructureJSON.components.length-1) {
 

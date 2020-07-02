@@ -9,12 +9,27 @@
                 <div class="breadcrumb" style="align-items: center;">
                     <ul>
                         <li *ngFor="let p of path; let i = index" [ngClass]="{'active': (path?.length - 1) === i}">
-                            <a [routerLink]="[p?.pathString ? p.pathString : '/']">{{p?.name}}</a>
+                            <a [routerLink]="[p?.pathString ? p.pathString : '/']" style="color: #000; font-size: 16px;">{{p?.name}}</a>
                             <!-- <a>{{postDetails?.name}}</a> -->
+                            <p class="info mb-0" style="font-size:14px;color: #888;">
+                                {{ postDetails?.updatedAt | date: 'EEEE, MMMM d, y, h:mm a'}}
+                            </p>
                         </li>
-                        <li *ngIf="all">
+                        <!-- <li *ngIf="all">
                             <button mat-raised-button color="primary" (click)="OnClickAll.emit()"
                                 style="line-height: 25px; min-width: 45px;">All</button>
+                        </li> -->
+                        <li *ngIf="postDetails?.updatedAt">
+                            <a target="_blank" [href]="'/' + 'profile' + '/' + postDetails?.createdBy?.slug" style="margin: 0 10px 0 20px;">
+                                <span class="tag ml-0" style="line-height: 40px;background: #f5f5f5;color: black;padding: 0 15px 0 0;">
+                                    <img [src]="postDetails?.createdBy?.avatar ? ((s3FilesBucketURL + postDetails?.createdBy?.avatar) | safe: 'resourceUrl') : anonymousAvatar" style="width: 40px; height: 40px;"
+                                        alt="">{{postDetails?.createdBy?.name}}</span>
+                            </a>
+                        </li>
+                        <li *ngIf="postDetails?.updatedAt">
+                            <button mat-mini-fab color="primary" style="box-shadow: none;">
+                                <mat-icon (click)="openVideoRoom()">video_call</mat-icon>
+                            </button>
                         </li>
                     </ul>
                     <div style="margin-left: auto;">

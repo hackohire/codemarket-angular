@@ -29,7 +29,6 @@ export class BreadcumbComponent implements OnInit {
   @Input() titlePlaceholder: string;
   @Input() all: boolean;
   @Output() OnClickAll = new EventEmitter();
-
   @Input() postActions = false;
 
   @Output() editPost = new EventEmitter();

@@ -26,6 +26,10 @@ export const appConstants = {
     [PostType.Business]: 'sticky-note',
     [PostType.Blog]: 'blog',
     [PostType.Mentor]: 'briefcase',
+    [PostType.Contact]: 'id-card',
+    [PostType.Forms]: 'file-alt',
+    [PostType.Appointment]: 'file-alt',
+    [PostType.Email]: 'envelope',
   },
 
   fileS3Bucket: 'manav-files',
@@ -296,7 +300,9 @@ export const appConstants = {
     { name: PostType.CompetitiveAdvantage, label: 'Competitive Advantage' },
     { name: PostType.Contact, label: 'Contact' },
     { name: PostType.Dreamjob, label: 'Dream Job' },
-    { name: PostType.Event, label: 'Event' },
+    { name: PostType.Event, label: 'Event' }, 
+   // { name: PostType.Email, label: 'Email' },    
+    { name: PostType.Forms, label: 'Forms' },
     { name: PostType.Goal, label: 'Goal' },
     { name: PostType.Howtodoc, label: 'How-To-Doc' },
     { name: PostType.Interview, label: 'Interview' },
@@ -308,6 +314,6 @@ export const appConstants = {
     { name: PostType.Requirement, label: 'Requirement' },
     { name: PostType.Service, label: 'Service' },
     { name: PostType.Testing, label: 'Testing' },
-    { name: PostType.Forms, label: 'Forms' },
+
   ],
 };

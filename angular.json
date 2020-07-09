@@ -89,6 +89,30 @@
                 }
               ]
             },
+            "dev2": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.dev2.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "5mb",
+                  "maximumError": "15mb"
+                }
+              ]
+            },
             "manav": {
               "fileReplacements": [
                 {
@@ -152,6 +176,9 @@
             "staging": {
               "browserTarget": "codemarket:build:staging"
             },
+            "dev2": {
+              "browserTarget": "codemarket:build:dev2"
+            },
             "manav": {
               "browserTarget": "codemarket:build:manav"
             },
@@ -210,6 +237,9 @@
             "staging": {
               "devServerTarget": "codemarket:serve:staging"
             },
+            "dev2": {
+              "devServerTarget": "codemarket:serve:dev2"
+            },
             "manav": {
               "devServerTarget": "codemarket:serve:manav"
             },
@@ -244,6 +274,19 @@
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.staging.ts"
+                }
+              ],
+              "sourceMap": false,
+              "optimization": {
+                "scripts": false,
+                "styles": true
+              }
+            },
+            "dev2": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.dev2.ts"
                 }
               ],
               "sourceMap": false,

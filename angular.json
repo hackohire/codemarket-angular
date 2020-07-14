@@ -88,11 +88,11 @@
                 }
               ]
             },
-            "art": {
+            "dev7": {
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.art.ts"
+                  "with": "src/environments/environment.dev7.ts"
                 }
               ],
               "optimization": true,
@@ -127,8 +127,8 @@
             "staging": {
               "browserTarget": "codemarket:build:staging"
             },
-            "art": {
-              "browserTarget": "codemarket:build:art"
+            "dev7": {
+              "browserTarget": "codemarket:build:dev7"
             }
           }
         },
@@ -182,8 +182,8 @@
             "staging": {
               "devServerTarget": "codemarket:serve:staging"
             },
-            "art": {
-              "devServerTarget": "codemarket:serve:art"
+            "dev7": {
+              "devServerTarget": "codemarket:serve:dev7"
             }
           }
         },
@@ -221,11 +221,11 @@
                 "styles": true
               }
             },
-            "art": {
+            "dev7": {
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.art.ts"
+                  "with": "src/environments/environment.dev7.ts"
                 }
               ],
               "sourceMap": false,

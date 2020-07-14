@@ -8,15 +8,15 @@ export const environment = {
     developmentTokenUrl: 'https://71258.cke-cs.com/token/dev/qhNbD6xUjkeVtrEc7aD2PcMhDkgmirUJHunqRWESilB0mTzZ0RHcJYk68P6D'
   },
   production: true,
-  serverless_url: 'https://artapi.codemarket.io/',
-  graphql_url: 'https://artapi.codemarket.io/graphql',
-  s3FilesBucketURL: 'https://arts-file.s3.amazonaws.com/public/',
+  serverless_url: 'https://dev7api.codemarket.io/',
+  graphql_url: 'https://dev7api.codemarket.io/graphql',
+  s3FilesBucketURL: 'https://dev7-file.s3.amazonaws.com/public/',
   stripe_public_key: 'pk_live_EYCoYtpLszr802sOl89WeuW1',
   // stripe_public_key: 'pk_test_ighmL2U9UqAx0O4b8dKkSvdq',
-  webSocketURL: 'wss://6550prjmee.execute-api.us-east-1.amazonaws.com/art',
+  webSocketURL: 'wss://bsuuk302d7.execute-api.us-east-1.amazonaws.com/dev7',
   // planDetails: plans.prod,
   planDetails: plans.prod,
-  fileS3Bucket: 'arts-file',
+  fileS3Bucket: 'dev7-file',
   oauth: {
     // Domain name
     domain: 'platform.auth.us-east-1.amazoncognito.com',

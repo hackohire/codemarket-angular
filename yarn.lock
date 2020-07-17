@@ -259,22 +259,22 @@
   dependencies:
     tslib "^1.9.0"
 
-"@aws-amplify/auth@3.2.8":
-  version "3.2.8"
-  resolved "https://registry.yarnpkg.com/@aws-amplify/auth/-/auth-3.2.8.tgz#5f1a31ea22a100db3b247332f4c5be2dc41f67c7"
-  integrity sha512-uSweMARB6PiGC0lxQbBjifjUL3vzmPl76XcaDZ6cRD5TB1ZaXvYRaobOa53q3bi9yEaMxdTMOXhP6sMIwS4BhA==
+"@aws-amplify/auth@^3.2.8":
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/@aws-amplify/auth/-/auth-3.3.1.tgz#212f664c28ccc0eeea783e61a232865cdf1372d7"
+  integrity sha512-yTXeilWAiXW3znKvfVrNI74VDkFVanxItm2i4mf6HTfahjd3/3VhdLaucP5N+Pj2b1/+ezFB13RU0k6v+dzPJA==
   dependencies:
-    "@aws-amplify/cache" "^3.1.11"
-    "@aws-amplify/core" "^3.2.8"
-    amazon-cognito-identity-js "^4.3.0"
+    "@aws-amplify/cache" "^3.1.19"
+    "@aws-amplify/core" "^3.4.2"
+    amazon-cognito-identity-js "^4.3.3"
     crypto-js "^3.3.0"
 
-"@aws-amplify/cache@^3.1.11":
-  version "3.1.16"
-  resolved "https://registry.yarnpkg.com/@aws-amplify/cache/-/cache-3.1.16.tgz#aaef3772bbee66b7a115d2c04a108f620436263d"
-  integrity sha512-CAJzuHIUyPKv6Ns8zRuiqjeK87Zn6OaE60580vMqDXplmUHwIxNlsrWrQZobLalZWYAX++QghnXT0B842JYvgg==
+"@aws-amplify/cache@^3.1.19":
+  version "3.1.19"
+  resolved "https://registry.yarnpkg.com/@aws-amplify/cache/-/cache-3.1.19.tgz#69c18527b1a28d0c54d06fafe95ae0af467f6cdf"
+  integrity sha512-MlC32g7sSTjlPafBkDzY2TJzXXJvucfUpYR9a1RdKBQFHtCZN4NRkKDjJHa1cDnYiry732JpwbNFJS91ZQboNQ==
   dependencies:
-    "@aws-amplify/core" "^3.3.3"
+    "@aws-amplify/core" "^3.4.2"
 
 "@aws-amplify/core@^3.2.7":
   version "3.3.2"
@@ -291,10 +291,10 @@
     url "^0.11.0"
     zen-observable-ts "0.8.19"
 
-"@aws-amplify/core@^3.2.8", "@aws-amplify/core@^3.3.3":
-  version "3.3.3"
-  resolved "https://registry.yarnpkg.com/@aws-amplify/core/-/core-3.3.3.tgz#13a52426029b597f83813f7c3adfc7a20e07b70f"
-  integrity sha512-fIrvaP8Sq4JovriVAK863BOWQsYiZEDgnXKul+W9Z46Xp9z0FjDWtI3oGuo5auQju64EVfibd7OUOeaujS4zTQ==
+"@aws-amplify/core@^3.4.2":
+  version "3.4.2"
+  resolved "https://registry.yarnpkg.com/@aws-amplify/core/-/core-3.4.2.tgz#a853d56628622fc596c62c940ebca0a5bb8820ba"
+  integrity sha512-eVkuSMyVELNDnF4FROb1NoXSNbIoY02JUKsPMEURMEsrbSIt0I5S3PE+jxbdbOyKIHD4MjQA3jjXBx41q6vYWQ==
   dependencies:
     "@aws-crypto/sha256-js" "1.0.0-alpha.0"
     "@aws-sdk/client-cognito-identity" "1.0.0-gamma.2"
@@ -3188,10 +3188,10 @@ ajv@^6.1.0, ajv@^6.10.2, ajv@^6.12.2, ajv@^6.5.5:
     json-schema-traverse "^0.4.1"
     uri-js "^4.2.2"
 
-amazon-cognito-identity-js@^4.3.0:
-  version "4.3.1"
-  resolved "https://registry.yarnpkg.com/amazon-cognito-identity-js/-/amazon-cognito-identity-js-4.3.1.tgz#ce809f54f5b76ae9dd702e49cc9bb09066e2a707"
-  integrity sha512-Jolhigj6GGFbo5cZ6XZ9ti4IuB8QWQdQeEiwl08JvVYzxR+zYxi/ndcoRSw/Kp81WzNlLVpldvSFjIgstTaTjQ==
+amazon-cognito-identity-js@^4.3.3:
+  version "4.3.3"
+  resolved "https://registry.yarnpkg.com/amazon-cognito-identity-js/-/amazon-cognito-identity-js-4.3.3.tgz#1b940fbd0d9e7eeb78f8944b8dc2a06ea01f1b5f"
+  integrity sha512-LrOJU8zhRrfO9C+zYNYbLYg67i607eVWQW1kQXuxMieq0e9i/ThAuZoUq8OV/rprmjQRFvg9EHhY24OlmC7OAA==
   dependencies:
     buffer "4.9.1"
     crypto-js "^3.3.0"
@@ -9382,10 +9382,10 @@ lodash.union@^4.6.0:
   resolved "https://registry.yarnpkg.com/lodash.union/-/lodash.union-4.6.0.tgz#48bb5088409f16f1821666641c44dd1aaae3cd88"
   integrity sha1-SLtQiECfFvGCFmZkHETdGqrjzYg=
 
-lodash@4.17.x, lodash@^4.15.0, lodash@^4.17.11, lodash@^4.17.12, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.5, lodash@^4.3.0, lodash@^4.8.0:
-  version "4.17.15"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
-  integrity sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==
+lodash@4.17.x, lodash@^4.15.0, lodash@^4.17.11, lodash@^4.17.12, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.19, lodash@^4.17.5, lodash@^4.3.0, lodash@^4.8.0:
+  version "4.17.19"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.19.tgz#e48ddedbe30b3321783c5b4301fbd353bc1e4a4b"
+  integrity sha512-JNvd8XER9GQX0v2qJgsaN/mzFCNA5BRe/j8JN9d+tWyGLSodKQHKFicdwNYzWwI3wjRnaKPsGj1XkBjx/F96DQ==
 
 log4js@^4.0.0:
   version "4.5.1"

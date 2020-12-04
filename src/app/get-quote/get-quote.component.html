@@ -7,7 +7,7 @@
         margin-left: 25%;
         margin-top: 2%;
     ">
-            <div [formGroup]="postForm" class="add-form-area common-box-shadow">
+            <!-- <div [formGroup]="postForm" class="add-form-area common-box-shadow">
                 <mat-form-field class="field-full-width">
                     <input type="text" matInput formControlName="firstName" placeholder="name">
                 </mat-form-field>
@@ -45,12 +45,12 @@
 
                 <div fxLayout="row" fxLayoutGap="10px">
                     <button (click)="submit()" *ngIf="statusFormControl?.value !== 'Published'" type="button" [disabled]="postForm?.invalid" mat-raised-button color="primary">Get Quote</button>
-                    <!-- <button type="button" [disabled]="postForm?.invalid" mat-raised-button color="primary">{{ statusFormControl?.value === 'Published' ? 'Publish Changes' : 'Publish' }}</button> -->
-                    <!-- <button *ngIf="statusFormControl?.value === 'Published'" type="button" (click)="submit('Unpublished')" [disabled]="postForm?.invalid" mat-raised-button color="primary">{{ 'Unpublish' }}</button> -->
                 </div>
 
+            </div> -->
+            <div>
+                <iframe scrolling="yes" className="form-embed-scroll" style="width: 100%; min-height: 700px;" src="https://vivekt.unitabiz.com/embbed/forms/tishbiinsurance?company=tishbiinsurance&userid=open&username=open" frameBorder="0" allowtransparency="true"></iframe>
             </div>
-
         </div>
     </div>
 </div>

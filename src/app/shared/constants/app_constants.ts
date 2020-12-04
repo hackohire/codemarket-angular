@@ -18,7 +18,7 @@ export const appConstants = {
     [PostType.Dreamjob]: 'briefcase'
   },
 
-  fileS3Bucket: 'jtinsurance-files',
+  fileS3Bucket: 'vivek-jti',
 
   promoCodes: {
     FIRSTMONTHFREE: {
